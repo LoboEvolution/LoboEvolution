@@ -26,16 +26,14 @@ package org.lobobrowser.primary.ext;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.store.StorageManager;
 
 /**
  * History of navigation locations. Not thread safe.
  */
-public class NavigationHistory extends BaseHistory<Object>implements Serializable {
+public class NavigationHistory extends BaseHistory<Object> implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000600200100L;

@@ -31,23 +31,24 @@ import javax.swing.border.BevelBorder;
  */
 public class StatusBarPanel extends JPanel {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new status bar panel.
-     */
-    public StatusBarPanel() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.setBorder(new BevelBorder(BevelBorder.LOWERED));
-    }
+	/**
+	 * Instantiates a new status bar panel.
+	 */
+	public StatusBarPanel() {
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#getPreferredSize()
-     */
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(1, 32);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(1, 32);
+	}
 }

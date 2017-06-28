@@ -30,36 +30,34 @@ import org.lobobrowser.html.style.HtmlInsets;
  */
 public class HeadingRenderState extends AbstractMarginRenderState {
 
-    /**
-     * Instantiates a new heading render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public HeadingRenderState(RenderState prevRenderState,
-            HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new heading render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public HeadingRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.renderstate.AbstractMarginRenderState#getDefaultMarginInsets
-     * ()
-     */
-    @Override
-    protected HtmlInsets getDefaultMarginInsets() {
-        HtmlInsets insets = new HtmlInsets();
-        RenderState prevRS = this.getPreviousRenderState();
-        FontMetrics fm = prevRS == null ? this.getFontMetrics() : prevRS
-                .getFontMetrics();
-        insets.top = fm.getHeight();
-        insets.bottom = fm.getHeight();
-        insets.topType = HtmlInsets.TYPE_PIXELS;
-        insets.bottomType = HtmlInsets.TYPE_PIXELS;
-        return insets;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderstate.AbstractMarginRenderState#
+	 * getDefaultMarginInsets ()
+	 */
+	@Override
+	protected HtmlInsets getDefaultMarginInsets() {
+		HtmlInsets insets = new HtmlInsets();
+		RenderState prevRS = this.getPreviousRenderState();
+		FontMetrics fm = prevRS == null ? this.getFontMetrics() : prevRS.getFontMetrics();
+		insets.top = fm.getHeight();
+		insets.bottom = fm.getHeight();
+		insets.topType = HtmlInsets.TYPE_PIXELS;
+		insets.bottomType = HtmlInsets.TYPE_PIXELS;
+		return insets;
+	}
 
 }

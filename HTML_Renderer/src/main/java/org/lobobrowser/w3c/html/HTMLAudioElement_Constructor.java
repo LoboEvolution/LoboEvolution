@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLAudioElement_Constructor.
  */
 public interface HTMLAudioElement_Constructor {
-	
+
 	/**
 	 * Creates the instance.
 	 *
@@ -38,7 +37,8 @@ public interface HTMLAudioElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param src the src
+	 * @param src
+	 *            the src
 	 * @return the HTML audio element
 	 */
 	public HTMLAudioElement createInstance(String src);

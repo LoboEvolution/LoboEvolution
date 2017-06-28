@@ -23,16 +23,16 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.Element;
 
-
 /**
  * The Interface DOMElementMap.
  */
 public interface DOMElementMap {
-	
+
 	/**
 	 * Gets the element.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 * @return the element
 	 */
 	// DOMElementMap
@@ -41,23 +41,28 @@ public interface DOMElementMap {
 	/**
 	 * Sets the element.
 	 *
-	 * @param name the name
-	 * @param value the value
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
 	 */
 	public void setElement(String name, Element value);
 
 	/**
 	 * Creates the element.
 	 *
-	 * @param name the name
-	 * @param value the value
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
 	 */
 	public void createElement(String name, Element value);
 
 	/**
 	 * Delete element.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 */
 	public void deleteElement(String name);
 }

@@ -24,7 +24,7 @@ package org.lobobrowser.primary.gui.pdf;
  * A generic synchronized flag, because Java doesn't have one.
  */
 public class Flag {
-	
+
 	/** The is set. */
 	private boolean isSet;
 

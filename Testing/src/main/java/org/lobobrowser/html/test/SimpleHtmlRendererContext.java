@@ -41,12 +41,11 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Optional;
 
+import javax.swing.JOptionPane;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.swing.JOptionPane;
-
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlObject;
@@ -65,6 +64,7 @@ import org.lobobrowser.w3c.html.HTMLAnchorElement;
 import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * The <code>SimpleHtmlRendererContext</code> class implements the
@@ -370,7 +370,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			final FormInput[] formInputs) throws IOException, org.xml.sax.SAXException {
 		final String actualMethod = method.toUpperCase();
 		URL resolvedURL;
-		if ("GET".equals(actualMethod) && (formInputs != null)) {
+		if ("GET".equals(actualMethod) && formInputs != null) {
 			boolean firstParam = true;
 			// TODO: What about the userInfo part of the URL?
 			URL noRefAction = new URL(action.getProtocol(), action.getHost(), action.getPort(), action.getFile());
@@ -408,7 +408,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			// Remove query so it works.
 			try {
 				String ref = action.getRef();
-				String refText = (ref == null) || (ref.length() == 0) ? "" : "#" + ref;
+				String refText = ref == null || ref.length() == 0 ? "" : "#" + ref;
 				urlForLoading = new URL(resolvedURL.getProtocol(), action.getHost(), action.getPort(),
 						action.getPath() + refText);
 			} catch (MalformedURLException throwable) {
@@ -426,7 +426,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		Proxy proxy = SimpleHtmlRendererContext.this.getProxy();
 		boolean isPost = "POST".equals(actualMethod);
 		SSLCertificate.setCertificate();
-		URLConnection connection = (proxy == null) || (proxy == Proxy.NO_PROXY) ? urlForLoading.openConnection()
+		URLConnection connection = proxy == null || proxy == Proxy.NO_PROXY ? urlForLoading.openConnection()
 				: urlForLoading.openConnection(proxy);
 		this.currentConnection = connection;
 		try {
@@ -481,9 +481,9 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 				if (logger.isInfoEnabled()) {
 					logger.info("process(): HTTP response code: " + responseCode);
 				}
-				if ((responseCode == HttpURLConnection.HTTP_MOVED_PERM)
-						|| (responseCode == HttpURLConnection.HTTP_MOVED_TEMP)
-						|| (responseCode == HttpURLConnection.HTTP_SEE_OTHER)) {
+				if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
+						|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
+						|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
 					String location = hc.getHeaderField("Location");
 					if (location == null) {
 						logger.warn("No Location header in redirect from " + action + ".");
@@ -516,7 +516,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 							+ " ms. Connection elapsed: " + (time1 - time0) + " ms.");
 				}
 				String ref = urlForLoading.getRef();
-				if ((ref != null) && (ref.length() != 0)) {
+				if (ref != null && ref.length() != 0) {
 					panel.scrollToElement(ref);
 				}
 				try {
@@ -996,7 +996,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	private static Window getWindow(Component c) {
 		Component current = c;
-		while ((current != null) && !(current instanceof Window)) {
+		while (current != null && !(current instanceof Window)) {
 			current = current.getParent();
 		}
 		return (Window) current;

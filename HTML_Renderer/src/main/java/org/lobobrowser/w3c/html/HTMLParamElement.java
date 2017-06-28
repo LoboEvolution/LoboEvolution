@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLParamElement.
  */
 public interface HTMLParamElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the name.
 	 *

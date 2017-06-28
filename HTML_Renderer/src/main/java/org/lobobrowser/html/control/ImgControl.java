@@ -37,9 +37,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
@@ -47,6 +44,8 @@ import javax.swing.ImageIcon;
 import javax.swing.SwingUtilities;
 
 import org.apache.batik.transcoder.TranscoderException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.SVGRasterizer;
@@ -66,7 +65,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ImgControl.class.getName());
 
@@ -150,12 +149,12 @@ public class ImgControl extends BaseControl implements ImageListener {
 				URL baseURL = new URL(modelNode.getOwnerDocument().getBaseURI());
 				URL scriptURL = Urls.createURL(baseURL, modelNode.getSrc());
 				String scriptURI = scriptURL == null ? modelNode.getSrc() : scriptURL.toExternalForm();
-				
-				u = new URL(scriptURI.replace(" ", "%20"));	
+
+				u = new URL(scriptURI.replace(" ", "%20"));
 				URLConnection con = u.openConnection();
-                con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-                
-                if (scriptURI.endsWith(".svg")) {
+				con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+
+				if (scriptURI.endsWith(".svg")) {
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
 				} else if (scriptURI.startsWith("https")) {
@@ -176,11 +175,11 @@ public class ImgControl extends BaseControl implements ImageListener {
 					image = ImageIO.read(con.getInputStream());
 				}
 			} catch (FileNotFoundException | IIOException ex) {
-				logger.error("ImgControl(): Image not found "+modelNode.getSrc());
+				logger.error("ImgControl(): Image not found " + modelNode.getSrc());
 			} catch (TranscoderException | IOException e1) {
 				logger.error(e1.getMessage());
 			} catch (Exception e1) {
-				logger.error("ImgControl(): Image not found "+modelNode.getSrc());
+				logger.error("ImgControl(): Image not found " + modelNode.getSrc());
 			}
 		}
 
@@ -200,7 +199,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 			}
 		}
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -293,10 +292,10 @@ public class ImgControl extends BaseControl implements ImageListener {
 				int ih = img == null ? -1 : img.getHeight(this);
 				if (ih == 0) {
 					dw = iw == -1 ? 0 : iw;
-				} else if ((iw == -1) || (ih == -1)) {
+				} else if (iw == -1 || ih == -1) {
 					dw = 0;
 				} else {
-					dw = (dh * iw) / ih;
+					dw = dh * iw / ih;
 				}
 			} else {
 				dw = img == null ? -1 : img.getWidth(this);
@@ -311,10 +310,10 @@ public class ImgControl extends BaseControl implements ImageListener {
 				int ih = img == null ? -1 : img.getHeight(this);
 				if (iw == 0) {
 					dh = ih == -1 ? 0 : ih;
-				} else if ((iw == -1) || (ih == -1)) {
+				} else if (iw == -1 || ih == -1) {
 					dh = 0;
 				} else {
-					dh = (dw * ih) / iw;
+					dh = dw * ih / iw;
 				}
 			} else {
 				dh = img == null ? -1 : img.getHeight(this);
@@ -337,7 +336,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 		if (ps == null) {
 			return true;
 		}
-		if ((ps.width != newPs.width) || (ps.height != newPs.height)) {
+		if (ps.width != newPs.width || ps.height != newPs.height) {
 			this.preferredSize = newPs;
 			return true;
 		} else {
@@ -347,7 +346,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
-		if (((infoflags & ImageObserver.ALLBITS) != 0) || ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
+		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
 			if (SwingUtilities.isEventDispatchThread()) {
 				if (!checkPreferredSizeChange()) {
 					repaint();
@@ -432,7 +431,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 		this.image = image;
 		int width = image.getWidth(this);
 		int height = image.getHeight(this);
-		if ((width != -1) && (height != -1)) {
+		if (width != -1 && height != -1) {
 			this.imageUpdate(image, width, height);
 		}
 	}

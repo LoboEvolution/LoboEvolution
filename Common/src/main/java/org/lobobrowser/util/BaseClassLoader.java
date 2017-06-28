@@ -31,30 +31,30 @@ import java.security.SecureClassLoader;
  * @author J. H. S.
  */
 public abstract class BaseClassLoader extends SecureClassLoader {
-    /**
-     * Instantiates a new base class loader.
-     *
-     * @param parent
-     *            the parent
-     */
-    public BaseClassLoader(ClassLoader parent) {
-        super(parent);
-    }
-    
-    /**
-     * Instantiates a new base class loader.
-     */
-    public BaseClassLoader() {
-        super();
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.lang.ClassLoader#loadClass(String, boolean)
-     */
-    @Override
-    public synchronized Class loadClass(String name, boolean resolve)
-            throws ClassNotFoundException {
-        return super.loadClass(name, resolve);
-    }
+	/**
+	 * Instantiates a new base class loader.
+	 *
+	 * @param parent
+	 *            the parent
+	 */
+	public BaseClassLoader(ClassLoader parent) {
+		super(parent);
+	}
+
+	/**
+	 * Instantiates a new base class loader.
+	 */
+	public BaseClassLoader() {
+		super();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.ClassLoader#loadClass(String, boolean)
+	 */
+	@Override
+	public synchronized Class loadClass(String name, boolean resolve) throws ClassNotFoundException {
+		return super.loadClass(name, resolve);
+	}
 }

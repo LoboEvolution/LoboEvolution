@@ -33,10 +33,8 @@ import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.UnknownHostException;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
@@ -332,7 +330,7 @@ public class ExtensionImpl implements NavigatorExtension {
 				return "Indicates an Input/Output error has occurred. This is typically due "
 						+ "to a network connection that cannot be establised or one that has failed, "
 						+ "but it can also mean that a file could not be accessed or found.";
-			} else if ((cause instanceof NullPointerException) || (cause instanceof ClassCastException)) {
+			} else if (cause instanceof NullPointerException || cause instanceof ClassCastException) {
 				return "This is a common Java exception that generally occurs due to a programming error. "
 						+ "The stack trace will show if the error is in browser code, an extension or the document itself.";
 			} else if (cause instanceof ClientletException) {

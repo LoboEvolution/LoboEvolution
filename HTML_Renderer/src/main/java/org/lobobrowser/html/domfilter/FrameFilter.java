@@ -27,13 +27,14 @@ import org.w3c.dom.Node;
  */
 public class FrameFilter implements NodeFilter {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        return (node instanceof org.lobobrowser.w3c.html.HTMLFrameElement)
-                || (node instanceof org.lobobrowser.w3c.html.HTMLIFrameElement);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		return node instanceof org.lobobrowser.w3c.html.HTMLFrameElement
+				|| node instanceof org.lobobrowser.w3c.html.HTMLIFrameElement;
+	}
 }

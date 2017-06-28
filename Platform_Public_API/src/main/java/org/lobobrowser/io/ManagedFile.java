@@ -31,106 +31,109 @@ import java.io.OutputStream;
  */
 public interface ManagedFile {
 
-    /** Gets the path.
+	/**
+	 * Gets the path.
 	 *
 	 * @return the path
 	 */
-    String getPath();
+	String getPath();
 
-    /** Checks if is directory.
+	/**
+	 * Checks if is directory.
 	 *
 	 * @return true, if is directory
 	 */
-    boolean isDirectory();
+	boolean isDirectory();
 
-    /**
-     * Exists.
-     *
-     * @return true, if successful
-     */
-    boolean exists();
+	/**
+	 * Exists.
+	 *
+	 * @return true, if successful
+	 */
+	boolean exists();
 
-    /**
-     * Mkdir.
-     *
-     * @return true, if successful
-     */
-    boolean mkdir();
+	/**
+	 * Mkdir.
+	 *
+	 * @return true, if successful
+	 */
+	boolean mkdir();
 
-    /**
-     * Mkdirs.
-     *
-     * @return true, if successful
-     */
-    boolean mkdirs();
+	/**
+	 * Mkdirs.
+	 *
+	 * @return true, if successful
+	 */
+	boolean mkdirs();
 
-    /**
-     * List files.
-     *
-     * @return the managed file[]
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    ManagedFile[] listFiles() throws IOException;
+	/**
+	 * List files.
+	 *
+	 * @return the managed file[]
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	ManagedFile[] listFiles() throws IOException;
 
-    /**
-     * List files.
-     *
-     * @param filter
-     *            the filter
-     * @return the managed file[]
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    ManagedFile[] listFiles(ManagedFileFilter filter) throws IOException;
+	/**
+	 * List files.
+	 *
+	 * @param filter
+	 *            the filter
+	 * @return the managed file[]
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	ManagedFile[] listFiles(ManagedFileFilter filter) throws IOException;
 
-    /**
-     * Atomically creates a new file.
-     *
-     * @return True if and only if the file did not already exist and was
-     *         successfully created.
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    boolean createNewFile() throws IOException;
+	/**
+	 * Atomically creates a new file.
+	 *
+	 * @return True if and only if the file did not already exist and was
+	 *         successfully created.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	boolean createNewFile() throws IOException;
 
-    /** Gets the parent.
+	/**
+	 * Gets the parent.
 	 *
 	 * @return the parent
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    ManagedFile getParent() throws IOException;
+	ManagedFile getParent() throws IOException;
 
-    /**
-     * Creates an output stream for the managed file. If the managed file
-     * already exists, it is overwritten.
-     * <p>
-     * The number of bytes that can be written to the stream may be restricted
-     * by a quota.
-     *
-     * @return the output stream
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     * @see QuotaExceededException
-     */
-    OutputStream openOutputStream() throws IOException;
+	/**
+	 * Creates an output stream for the managed file. If the managed file
+	 * already exists, it is overwritten.
+	 * <p>
+	 * The number of bytes that can be written to the stream may be restricted
+	 * by a quota.
+	 *
+	 * @return the output stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @see QuotaExceededException
+	 */
+	OutputStream openOutputStream() throws IOException;
 
-    /**
-     * Creates an input stream for reading from the managed file.
-     *
-     * @return the input stream
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    InputStream openInputStream() throws IOException;
+	/**
+	 * Creates an input stream for reading from the managed file.
+	 *
+	 * @return the input stream
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	InputStream openInputStream() throws IOException;
 
-    /**
-     * Delete.
-     *
-     * @return true, if successful
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    boolean delete() throws IOException;
+	/**
+	 * Delete.
+	 *
+	 * @return true, if successful
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	boolean delete() throws IOException;
 }

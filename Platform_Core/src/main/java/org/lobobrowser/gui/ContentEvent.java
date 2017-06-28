@@ -30,45 +30,46 @@ import org.lobobrowser.clientlet.ComponentContent;
  */
 public class ContentEvent extends EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The content. */
-    private final ComponentContent content;
+	/** The content. */
+	private final ComponentContent content;
 
-    /** The response. */
-    private final ClientletResponse response;
+	/** The response. */
+	private final ClientletResponse response;
 
-    /**
-     * Instantiates a new content event.
-     *
-     * @param source
-     *            the source
-     * @param content
-     *            the content
-     * @param response
-     *            the response
-     */
-    public ContentEvent(Object source, ComponentContent content,
-            ClientletResponse response) {
-        super(source);
-        this.content = content;
-        this.response = response;
-    }
+	/**
+	 * Instantiates a new content event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param content
+	 *            the content
+	 * @param response
+	 *            the response
+	 */
+	public ContentEvent(Object source, ComponentContent content, ClientletResponse response) {
+		super(source);
+		this.content = content;
+		this.response = response;
+	}
 
-    /** Gets the content.
+	/**
+	 * Gets the content.
 	 *
 	 * @return the content
 	 */
-    public ComponentContent getContent() {
-        return content;
-    }
+	public ComponentContent getContent() {
+		return content;
+	}
 
-    /** Gets the response.
+	/**
+	 * Gets the response.
 	 *
 	 * @return the response
 	 */
-    public ClientletResponse getResponse() {
-        return response;
-    }
+	public ClientletResponse getResponse() {
+		return response;
+	}
 }

@@ -30,91 +30,95 @@ import org.lobobrowser.js.AbstractScriptableDelegate;
  */
 public class Screen extends AbstractScriptableDelegate {
 
-    /** The graphics environment. */
-    private final GraphicsEnvironment graphicsEnvironment;
+	/** The graphics environment. */
+	private final GraphicsEnvironment graphicsEnvironment;
 
-    /** The graphics device. */
-    private final GraphicsDevice graphicsDevice;
+	/** The graphics device. */
+	private final GraphicsDevice graphicsDevice;
 
-    /**
-     * Instantiates a new screen.
-     */
-    Screen() {
-        super();
-        if (GraphicsEnvironment.isHeadless()) {
-            this.graphicsEnvironment = null;
-            this.graphicsDevice = null;
-        } else {
-            this.graphicsEnvironment = GraphicsEnvironment
-                    .getLocalGraphicsEnvironment();
-            this.graphicsDevice = this.graphicsEnvironment
-                    .getDefaultScreenDevice();
-        }
-    }
+	/**
+	 * Instantiates a new screen.
+	 */
+	Screen() {
+		super();
+		if (GraphicsEnvironment.isHeadless()) {
+			this.graphicsEnvironment = null;
+			this.graphicsDevice = null;
+		} else {
+			this.graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			this.graphicsDevice = this.graphicsEnvironment.getDefaultScreenDevice();
+		}
+	}
 
-    /** Gets the height.
+	/**
+	 * Gets the height.
 	 *
 	 * @return the height
 	 */
-    public int getHeight() {
-        GraphicsDevice gd = this.graphicsDevice;
-        return gd == null ? 0 : gd.getDisplayMode().getHeight();
-    }
+	public int getHeight() {
+		GraphicsDevice gd = this.graphicsDevice;
+		return gd == null ? 0 : gd.getDisplayMode().getHeight();
+	}
 
-    /** Gets the pixel depth.
+	/**
+	 * Gets the pixel depth.
 	 *
 	 * @return the pixel depth
 	 */
-    public int getPixelDepth() {
-        return this.getColorDepth();
-    }
+	public int getPixelDepth() {
+		return this.getColorDepth();
+	}
 
-    /** Gets the width.
+	/**
+	 * Gets the width.
 	 *
 	 * @return the width
 	 */
-    public int getWidth() {
-        GraphicsEnvironment ge = this.graphicsEnvironment;
-        if (ge == null) {
-            return 0;
-        }
-        GraphicsDevice gd = ge.getDefaultScreenDevice();
-        return gd.getDisplayMode().getWidth();
-    }
+	public int getWidth() {
+		GraphicsEnvironment ge = this.graphicsEnvironment;
+		if (ge == null) {
+			return 0;
+		}
+		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		return gd.getDisplayMode().getWidth();
+	}
 
-    /** Gets the avail height.
+	/**
+	 * Gets the avail height.
 	 *
 	 * @return the avail height
 	 */
-    public int getAvailHeight() {
-        GraphicsEnvironment ge = this.graphicsEnvironment;
-        if (ge == null) {
-            return 0;
-        }
-        return ge.getMaximumWindowBounds().height;
-    }
+	public int getAvailHeight() {
+		GraphicsEnvironment ge = this.graphicsEnvironment;
+		if (ge == null) {
+			return 0;
+		}
+		return ge.getMaximumWindowBounds().height;
+	}
 
-    /** Gets the avail width.
+	/**
+	 * Gets the avail width.
 	 *
 	 * @return the avail width
 	 */
-    public int getAvailWidth() {
-        GraphicsEnvironment ge = this.graphicsEnvironment;
-        if (ge == null) {
-            return 0;
-        }
-        return ge.getMaximumWindowBounds().width;
-    }
+	public int getAvailWidth() {
+		GraphicsEnvironment ge = this.graphicsEnvironment;
+		if (ge == null) {
+			return 0;
+		}
+		return ge.getMaximumWindowBounds().width;
+	}
 
-    /** Gets the color depth.
+	/**
+	 * Gets the color depth.
 	 *
 	 * @return the color depth
 	 */
-    public int getColorDepth() {
-        GraphicsDevice gd = this.graphicsDevice;
-        if (gd == null) {
-            return 0;
-        }
-        return gd.getDisplayMode().getBitDepth();
-    }
+	public int getColorDepth() {
+		GraphicsDevice gd = this.graphicsDevice;
+		if (gd == null) {
+			return 0;
+		}
+		return gd.getDisplayMode().getBitDepth();
+	}
 }

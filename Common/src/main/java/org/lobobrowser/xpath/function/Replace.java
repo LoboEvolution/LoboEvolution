@@ -30,22 +30,23 @@ import javax.xml.xpath.XPathFunctionException;
  * @author richardallenbair
  */
 public class Replace extends AbstractFunction {
-    /**
-     * Creates a new instance of EndsWith.
-     */
-    public Replace() {
-        super("replace", 3);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
-     */
-    @Override
-    public Object evaluate(List args) throws XPathFunctionException {
-        String s = getStringParam(args.get(0));
-        String pattern = getStringParam(args.get(1));
-        String replace = getStringParam(args.get(2));
-        return s.replaceAll(pattern, replace);
-    }
+	/**
+	 * Creates a new instance of EndsWith.
+	 */
+	public Replace() {
+		super("replace", 3);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
+	 */
+	@Override
+	public Object evaluate(List args) throws XPathFunctionException {
+		String s = getStringParam(args.get(0));
+		String pattern = getStringParam(args.get(1));
+		String replace = getStringParam(args.get(2));
+		return s.replaceAll(pattern, replace);
+	}
 }

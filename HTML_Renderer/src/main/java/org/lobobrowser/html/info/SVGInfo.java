@@ -32,7 +32,7 @@ public class SVGInfo implements Serializable {
 
 	/** The x. */
 	private float x;
-	
+
 	/** The x1. */
 	private float x1;
 
@@ -44,7 +44,7 @@ public class SVGInfo implements Serializable {
 
 	/** The y1. */
 	private float y1;
-	
+
 	/** The y2. */
 	private float y2;
 
@@ -62,7 +62,7 @@ public class SVGInfo implements Serializable {
 
 	/** The ry. */
 	private float ry;
-	
+
 	/** The fx. */
 	private float fx;
 
@@ -71,51 +71,54 @@ public class SVGInfo implements Serializable {
 
 	/** The method. */
 	private int method;
-	
+
 	/** href. */
 	private String href;
-	
+
 	/** The style. */
 	private AbstractCSS2Properties style;
-	
+
 	/** The poilist. */
 	private SVGPointList poilist;
-	
+
 	/** The transformList. */
 	private SVGTransformList transformList;
-	
+
 	/** The dyList. */
 	private SVGLengthList dyList;
-	
+
 	/** The dxList. */
 	private SVGLengthList dxList;
-	
+
 	/** The pathSegList. */
 	private SVGPathSegList pathSegList;
-	
+
 	/** The animate. */
 	private SVGAnimateElementImpl animate;
-	
+
 	/** The font. */
 	private Font font;
-	
+
 	/** The text. */
 	private String text;
-	
+
 	/** The textAnchor. */
 	private String textAnchor;
-	
+
 	/** The clipPath. */
 	private String clipPath;
-	
+
 	/** The id. */
 	private String id;
-	
+
 	private boolean isClip;
-	
-	public SVGInfo(){}
-	
-	public SVGInfo(int method, float x, float y, float height, float width, float rx, float ry, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList, SVGAnimateElementImpl animate) {
+
+	public SVGInfo() {
+	}
+
+	public SVGInfo(int method, float x, float y, float height, float width, float rx, float ry,
+			AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList,
+			SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.x = x;
 		this.y = y;
@@ -129,8 +132,9 @@ public class SVGInfo implements Serializable {
 		this.transformList = transformList;
 		this.animate = animate;
 	}
-	
-	public SVGInfo(int method, float x, float y, float rx, float ry, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList, SVGAnimateElementImpl animate) {
+
+	public SVGInfo(int method, float x, float y, float rx, float ry, AbstractCSS2Properties style, boolean isClip,
+			String clipPath, SVGTransformList transformList, SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.x = x;
 		this.y = y;
@@ -142,10 +146,9 @@ public class SVGInfo implements Serializable {
 		this.transformList = transformList;
 		this.animate = animate;
 	}
-	
-	
-	
-	public SVGInfo(int method, float x, float y, float r, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList, SVGAnimateElementImpl animate) {
+
+	public SVGInfo(int method, float x, float y, float r, AbstractCSS2Properties style, boolean isClip, String clipPath,
+			SVGTransformList transformList, SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.x = x;
 		this.y = y;
@@ -156,8 +159,9 @@ public class SVGInfo implements Serializable {
 		this.transformList = transformList;
 		this.animate = animate;
 	}
-	
-	public SVGInfo(int method, float x1, float y1, float x2, float y2, AbstractCSS2Properties style, String clipPath, boolean isClip, SVGTransformList transformList,SVGAnimateElementImpl animate) {
+
+	public SVGInfo(int method, float x1, float y1, float x2, float y2, AbstractCSS2Properties style, String clipPath,
+			boolean isClip, SVGTransformList transformList, SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.x1 = x1;
 		this.y1 = y1;
@@ -169,8 +173,9 @@ public class SVGInfo implements Serializable {
 		this.transformList = transformList;
 		this.animate = animate;
 	}
-	
-	public SVGInfo(int method, SVGPointList poilist, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList,SVGAnimateElementImpl animate) {
+
+	public SVGInfo(int method, SVGPointList poilist, AbstractCSS2Properties style, boolean isClip, String clipPath,
+			SVGTransformList transformList, SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.style = style;
 		this.isClip = isClip;
@@ -179,8 +184,9 @@ public class SVGInfo implements Serializable {
 		this.poilist = poilist;
 		this.animate = animate;
 	}
-	
-	public SVGInfo(int method, SVGPathSegList pathSegList, AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList, SVGAnimateElementImpl animate) {
+
+	public SVGInfo(int method, SVGPathSegList pathSegList, AbstractCSS2Properties style, boolean isClip,
+			String clipPath, SVGTransformList transformList, SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.style = style;
 		this.isClip = isClip;
@@ -189,13 +195,15 @@ public class SVGInfo implements Serializable {
 		this.pathSegList = pathSegList;
 		this.animate = animate;
 	}
-	
+
 	public SVGInfo(AbstractCSS2Properties style, SVGTransformList transformList) {
 		this.style = style;
 		this.transformList = transformList;
 	}
-	
-	public SVGInfo(int method, float x, float y, Font font, String text, String textAnchor, SVGLengthList dyList, SVGLengthList dxList, AbstractCSS2Properties style, String clipPath, boolean isClip, SVGTransformList transformList, SVGAnimateElementImpl animate) {
+
+	public SVGInfo(int method, float x, float y, Font font, String text, String textAnchor, SVGLengthList dyList,
+			SVGLengthList dxList, AbstractCSS2Properties style, String clipPath, boolean isClip,
+			SVGTransformList transformList, SVGAnimateElementImpl animate) {
 		this.method = method;
 		this.x = x;
 		this.y = y;
@@ -210,8 +218,9 @@ public class SVGInfo implements Serializable {
 		this.transformList = transformList;
 		this.animate = animate;
 	}
-	
-	public SVGInfo(int method, float x, float y, String href, AbstractCSS2Properties style, String clipPath, boolean isClip, SVGTransformList transformList) {
+
+	public SVGInfo(int method, float x, float y, String href, AbstractCSS2Properties style, String clipPath,
+			boolean isClip, SVGTransformList transformList) {
 		this.method = method;
 		this.x = x;
 		this.y = y;
@@ -230,7 +239,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id
+	 *            the id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -244,7 +254,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param x the x to set
+	 * @param x
+	 *            the x to set
 	 */
 	public void setX(float x) {
 		this.x = x;
@@ -258,7 +269,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param x1 the x1 to set
+	 * @param x1
+	 *            the x1 to set
 	 */
 	public void setX1(float x1) {
 		this.x1 = x1;
@@ -272,7 +284,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param x2 the x2 to set
+	 * @param x2
+	 *            the x2 to set
 	 */
 	public void setX2(float x2) {
 		this.x2 = x2;
@@ -286,7 +299,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param y the y to set
+	 * @param y
+	 *            the y to set
 	 */
 	public void setY(float y) {
 		this.y = y;
@@ -300,7 +314,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param y1 the y1 to set
+	 * @param y1
+	 *            the y1 to set
 	 */
 	public void setY1(float y1) {
 		this.y1 = y1;
@@ -314,7 +329,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param y2 the y2 to set
+	 * @param y2
+	 *            the y2 to set
 	 */
 	public void setY2(float y2) {
 		this.y2 = y2;
@@ -328,7 +344,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param r the r to set
+	 * @param r
+	 *            the r to set
 	 */
 	public void setR(float r) {
 		this.r = r;
@@ -342,7 +359,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param width the width to set
+	 * @param width
+	 *            the width to set
 	 */
 	public void setWidth(float width) {
 		this.width = width;
@@ -356,7 +374,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param height the height to set
+	 * @param height
+	 *            the height to set
 	 */
 	public void setHeight(float height) {
 		this.height = height;
@@ -370,7 +389,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param rx the rx to set
+	 * @param rx
+	 *            the rx to set
 	 */
 	public void setRx(float rx) {
 		this.rx = rx;
@@ -391,7 +411,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param fx the fx to set
+	 * @param fx
+	 *            the fx to set
 	 */
 	public void setFx(float fx) {
 		this.fx = fx;
@@ -405,14 +426,16 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param fy the fy to set
+	 * @param fy
+	 *            the fy to set
 	 */
 	public void setFy(float fy) {
 		this.fy = fy;
 	}
 
 	/**
-	 * @param ry the ry to set
+	 * @param ry
+	 *            the ry to set
 	 */
 	public void setRy(float ry) {
 		this.ry = ry;
@@ -426,7 +449,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param method the method to set
+	 * @param method
+	 *            the method to set
 	 */
 	public void setMethod(int method) {
 		this.method = method;
@@ -440,7 +464,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param href the href to set
+	 * @param href
+	 *            the href to set
 	 */
 	public void setHref(String href) {
 		this.href = href;
@@ -454,7 +479,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param style the style to set
+	 * @param style
+	 *            the style to set
 	 */
 	public void setStyle(AbstractCSS2Properties style) {
 		this.style = style;
@@ -468,7 +494,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param poilist the poilist to set
+	 * @param poilist
+	 *            the poilist to set
 	 */
 	public void setPoilist(SVGPointList poilist) {
 		this.poilist = poilist;
@@ -482,7 +509,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param transformList the transformList to set
+	 * @param transformList
+	 *            the transformList to set
 	 */
 	public void setTransformList(SVGTransformList transformList) {
 		this.transformList = transformList;
@@ -496,7 +524,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param dyList the dyList to set
+	 * @param dyList
+	 *            the dyList to set
 	 */
 	public void setDyList(SVGLengthList dyList) {
 		this.dyList = dyList;
@@ -510,7 +539,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param dxList the dxList to set
+	 * @param dxList
+	 *            the dxList to set
 	 */
 	public void setDxList(SVGLengthList dxList) {
 		this.dxList = dxList;
@@ -524,12 +554,13 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param pathSegList the pathSegList to set
+	 * @param pathSegList
+	 *            the pathSegList to set
 	 */
 	public void setPathSegList(SVGPathSegList pathSegList) {
 		this.pathSegList = pathSegList;
 	}
-	
+
 	/**
 	 * @return the animate
 	 */
@@ -538,7 +569,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param animate the animate to set
+	 * @param animate
+	 *            the animate to set
 	 */
 	public void setAnimate(SVGAnimateElementImpl animate) {
 		this.animate = animate;
@@ -552,7 +584,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param font the font to set
+	 * @param font
+	 *            the font to set
 	 */
 	public void setFont(Font font) {
 		this.font = font;
@@ -566,7 +599,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param text the text to set
+	 * @param text
+	 *            the text to set
 	 */
 	public void setText(String text) {
 		this.text = text;
@@ -580,7 +614,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param textAnchor the textAnchor to set
+	 * @param textAnchor
+	 *            the textAnchor to set
 	 */
 	public void setTextAnchor(String textAnchor) {
 		this.textAnchor = textAnchor;
@@ -594,7 +629,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param clipPath the clipPath to set
+	 * @param clipPath
+	 *            the clipPath to set
 	 */
 	public void setClipPath(String clipPath) {
 		this.clipPath = clipPath;
@@ -608,7 +644,8 @@ public class SVGInfo implements Serializable {
 	}
 
 	/**
-	 * @param isClip the isClip to set
+	 * @param isClip
+	 *            the isClip to set
 	 */
 	public void setClip(boolean isClip) {
 		this.isClip = isClip;

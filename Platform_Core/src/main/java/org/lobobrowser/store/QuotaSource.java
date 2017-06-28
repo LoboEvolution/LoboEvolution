@@ -32,21 +32,22 @@ import java.io.IOException;
  */
 public interface QuotaSource {
 
-    /** Gets the space left.
+	/**
+	 * Gets the space left.
 	 *
 	 * @return the space left
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    long getSpaceLeft() throws IOException;
+	long getSpaceLeft() throws IOException;
 
-    /**
-     * Adds the used bytes.
-     *
-     * @param total
-     *            the total
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    void addUsedBytes(long total) throws IOException;
+	/**
+	 * Adds the used bytes.
+	 *
+	 * @param total
+	 *            the total
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	void addUsedBytes(long total) throws IOException;
 }

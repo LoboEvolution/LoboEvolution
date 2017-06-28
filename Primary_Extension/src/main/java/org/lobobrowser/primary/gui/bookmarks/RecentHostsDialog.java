@@ -69,7 +69,7 @@ public class RecentHostsDialog extends JDialog {
 
 	/** The window. */
 	private NavigatorWindow window;
-	
+
 	/** The search. */
 	private final String SEARCH = "/org/lobobrowser/images/search.png";
 
@@ -112,7 +112,8 @@ public class RecentHostsDialog extends JDialog {
 			}
 
 			@Override
-			public void changedUpdate(DocumentEvent e) {}
+			public void changedUpdate(DocumentEvent e) {
+			}
 
 		});
 	}
@@ -125,7 +126,7 @@ public class RecentHostsDialog extends JDialog {
 	 * @return the component
 	 */
 	private Component tablePane() {
-		Object columnNames[] = { "Url"};
+		Object columnNames[] = { "Url" };
 		List<String[]> values = new ArrayList<String[]>();
 
 		Collection<HostEntry> hostEntries = NavigationHistory.getInstance().getRecentHostEntries(100);
@@ -162,18 +163,22 @@ public class RecentHostsDialog extends JDialog {
 
 				}
 			}
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {}
 
 			@Override
-			public void mouseExited(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {
+			}
 
 			@Override
-			public void mouseEntered(MouseEvent arg0) {}
+			public void mouseExited(MouseEvent arg0) {
+			}
 
 			@Override
-			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
 		});
 		return new JScrollPane(jtable);
 	}

@@ -28,8 +28,8 @@ import org.w3c.dom.Node;
  */
 public class CaptionFilter implements NodeFilter {
 
-    @Override
-    public final boolean accept(Node node) {
-        return (node instanceof HTMLTableCaptionElement);
-    }
+	@Override
+	public final boolean accept(Node node) {
+		return node instanceof HTMLTableCaptionElement;
+	}
 }

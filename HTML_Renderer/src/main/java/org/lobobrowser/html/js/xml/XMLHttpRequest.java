@@ -26,10 +26,9 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.ReadyState;
@@ -407,7 +406,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	public void setOnreadystatechange(final Function value) {
 		synchronized (this) {
 			this.onreadystatechange = value;
-			if ((value != null) && !this.listenerAdded) {
+			if (value != null && !this.listenerAdded) {
 				this.request.addReadyStateChangeListener(new PropertyChangeListener() {
 
 					@Override

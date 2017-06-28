@@ -120,7 +120,7 @@ public final class HtmlLength {
 	public final int getLength(int availLength) {
 		int lt = this.lengthType;
 		if (lt == LENGTH) {
-			return (availLength * this.value) / 100;
+			return availLength * this.value / 100;
 		} else {
 			return this.value;
 		}

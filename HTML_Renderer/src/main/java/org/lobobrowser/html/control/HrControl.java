@@ -61,8 +61,8 @@ public class HrControl extends BaseControl {
 		Dimension size = this.getSize();
 		int offset = 8;
 		int x = offset;
-		int y = (size.height / 2) - 1;
-		int width = size.width - (offset * 2);
+		int y = size.height / 2 - 1;
+		int width = size.width - offset * 2;
 		g.setColor(Color.black);
 		g.drawRect(x, y, width, 0);
 	}

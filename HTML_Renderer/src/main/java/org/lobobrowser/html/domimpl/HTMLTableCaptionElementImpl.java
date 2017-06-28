@@ -29,63 +29,66 @@ import org.lobobrowser.w3c.html.HTMLTableCaptionElement;
 /**
  * The Class HTMLTableCaptionElementImpl.
  */
-public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement
-implements HTMLTableCaptionElement {
+public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implements HTMLTableCaptionElement {
 
-    /**
-     * Instantiates a new HTML table caption element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLTableCaptionElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML table caption element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLTableCaptionElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLTableCaptionElement#getAlign()
-     */
-    @Override
-    public String getAlign() {
-        return this.getAttribute(HtmlAttributeProperties.TEXTALIGN);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLTableCaptionElement#getAlign()
+	 */
+	@Override
+	public String getAlign() {
+		return this.getAttribute(HtmlAttributeProperties.TEXTALIGN);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLTableCaptionElement#setAlign(java.lang.String)
-     */
-    @Override
-    public void setAlign(String align) {
-        this.setAttribute(HtmlAttributeProperties.TEXTALIGN, align);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLTableCaptionElement#setAlign(java.lang.
+	 * String)
+	 */
+	@Override
+	public void setAlign(String align) {
+		this.setAttribute(HtmlAttributeProperties.TEXTALIGN, align);
+	}
 
-    /** Gets the caption side.
+	/**
+	 * Gets the caption side.
 	 *
 	 * @return the caption side
 	 */
-    public String getCaptionSide() {
-        return this.getAttribute(HtmlAttributeProperties.CAPTIONSIDE);
-    }
+	public String getCaptionSide() {
+		return this.getAttribute(HtmlAttributeProperties.CAPTIONSIDE);
+	}
 
-    /** Sets the caption side.
+	/**
+	 * Sets the caption side.
 	 *
 	 * @param captionSide
 	 *            the new caption side
 	 */
-    public void setCaptionSide(String captionSide) {
-        this.setAttribute(HtmlAttributeProperties.CAPTIONSIDE, captionSide);
-    }
+	public void setCaptionSide(String captionSide) {
+		this.setAttribute(HtmlAttributeProperties.CAPTIONSIDE, captionSide);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new TableCaptionRenderState(prevRenderState, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new TableCaptionRenderState(prevRenderState, this);
+	}
 }

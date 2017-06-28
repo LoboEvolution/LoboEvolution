@@ -38,47 +38,49 @@ import java.util.EventObject;
  * @author J. H. S.
  */
 public class GenericPropertyChangeListener implements GenericEventListener {
-    /** The delegate. */
-    private final PropertyChangeListener delegate;
-    
-    /**
-     * Instantiates a new generic property change listener.
-     *
-     * @param delegate
-     *            the delegate
-     */
-    public GenericPropertyChangeListener(PropertyChangeListener delegate) {
-        this.delegate = delegate;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see
-     * net.sourceforge.xamj.util.GenericEventListener#processEvent(java.util
-     * .EventObject)
-     */
-    @Override
-    public void processEvent(EventObject event) {
-        this.delegate.propertyChange((PropertyChangeEvent) event);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object other) {
-        return (other instanceof GenericPropertyChangeListener)
-                && ((GenericPropertyChangeListener) other).delegate
-                        .equals(this.delegate);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return this.delegate.hashCode();
-    }
+	/** The delegate. */
+	private final PropertyChangeListener delegate;
+
+	/**
+	 * Instantiates a new generic property change listener.
+	 *
+	 * @param delegate
+	 *            the delegate
+	 */
+	public GenericPropertyChangeListener(PropertyChangeListener delegate) {
+		this.delegate = delegate;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * net.sourceforge.xamj.util.GenericEventListener#processEvent(java.util
+	 * .EventObject)
+	 */
+	@Override
+	public void processEvent(EventObject event) {
+		this.delegate.propertyChange((PropertyChangeEvent) event);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object other) {
+		return other instanceof GenericPropertyChangeListener
+				&& ((GenericPropertyChangeListener) other).delegate.equals(this.delegate);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return this.delegate.hashCode();
+	}
 }

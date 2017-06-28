@@ -27,35 +27,37 @@ import org.lobobrowser.w3c.html.HTMLHeadElement;
 /**
  * The Class HTMLHeadElementImpl.
  */
-public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements
-HTMLHeadElement {
+public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHeadElement {
 
-    /**
-     * Instantiates a new HTML head element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLHeadElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML head element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLHeadElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLHeadElement#getProfile()
-     */
-    @Override
-    public String getProfile() {
-        return this.getAttribute(HtmlAttributeProperties.PROFILE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLHeadElement#getProfile()
+	 */
+	@Override
+	public String getProfile() {
+		return this.getAttribute(HtmlAttributeProperties.PROFILE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLHeadElement#setProfile(java.lang.String)
-     */
-    @Override
-    public void setProfile(String profile) {
-        this.setAttribute(HtmlAttributeProperties.PROFILE, profile);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLHeadElement#setProfile(java.lang.String)
+	 */
+	@Override
+	public void setProfile(String profile) {
+		this.setAttribute(HtmlAttributeProperties.PROFILE, profile);
 
-    }
+	}
 }

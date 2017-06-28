@@ -30,20 +30,20 @@ import javax.swing.Box.Filler;
  */
 public class RigidComponent extends Filler {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new rigid component.
-     *
-     * @param wrappedComponent
-     *            the wrapped component
-     * @param d
-     *            the d
-     */
-    public RigidComponent(Component wrappedComponent, Dimension d) {
-        super(d, d, d);
-        this.setLayout(org.lobobrowser.util.gui.WrapperLayout.getInstance());
-        this.add(wrappedComponent);
-    }
+	/**
+	 * Instantiates a new rigid component.
+	 *
+	 * @param wrappedComponent
+	 *            the wrapped component
+	 * @param d
+	 *            the d
+	 */
+	public RigidComponent(Component wrappedComponent, Dimension d) {
+		super(d, d, d);
+		this.setLayout(org.lobobrowser.util.gui.WrapperLayout.getInstance());
+		this.add(wrappedComponent);
+	}
 }

@@ -31,14 +31,13 @@ import org.lobobrowser.http.UserAgentContext;
  */
 public class RSVGControl extends RUIControl {
 
-    public RSVGControl(ModelNode me, UIControl widget,
-            RenderableContainer container, FrameContext frameContext,
-            UserAgentContext ucontext) {
-        super(me, widget, container, frameContext, ucontext);
-    }
+	public RSVGControl(ModelNode me, UIControl widget, RenderableContainer container, FrameContext frameContext,
+			UserAgentContext ucontext) {
+		super(me, widget, container, frameContext, ucontext);
+	}
 
-    @Override
-    protected void applyStyle(int availWidth, int availHeight) {
-        super.applyStyle(availWidth, availHeight);
-    }
+	@Override
+	protected void applyStyle(int availWidth, int availHeight) {
+		super.applyStyle(availWidth, availHeight);
+	}
 }

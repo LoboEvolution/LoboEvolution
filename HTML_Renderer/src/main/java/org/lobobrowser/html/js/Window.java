@@ -32,12 +32,12 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.swing.Timer;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
@@ -95,11 +95,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	/** The Constant DOMPARSER_WRAPPER. */
 	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance()
 			.getClassWrapper(DOMParser.class);
-	
+
 	/** The Constant XMLSERIALIZER_WRAPPER. */
 	private static final JavaClassWrapper XMLSERIALIZER_WRAPPER = JavaClassWrapperFactory.getInstance()
 			.getClassWrapper(XMLSerializer.class);
-	
+
 	/** The timer id counter. */
 	private static int timerIdCounter = 0;
 
@@ -484,7 +484,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				oldTimer = taskMap.remove(timeoutID);
 			}
 		}
-		if ((oldTimer != null) && cancel) {
+		if (oldTimer != null && cancel) {
 			oldTimer.timer.stop();
 		}
 	}
@@ -523,7 +523,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 *      with {@link Window#setTimeout(Function, double)}.
 	 */
 	public int setInterval(final Function aFunction, final double aTimeInMs) {
-		if ((aTimeInMs > Integer.MAX_VALUE) || (aTimeInMs < 0)) {
+		if (aTimeInMs > Integer.MAX_VALUE || aTimeInMs < 0) {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
@@ -553,7 +553,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 *      with {@link Window#setTimeout(String, double)}.
 	 */
 	public int setInterval(final String aExpression, double aTimeInMs) {
-		if ((aTimeInMs > Integer.MAX_VALUE) || (aTimeInMs < 0)) {
+		if (aTimeInMs > Integer.MAX_VALUE || aTimeInMs < 0) {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
@@ -717,32 +717,31 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
 			}
 		};
-		
+
 		JavaInstantiator jiDomParser = new JavaInstantiator() {
 			@Override
 			public Object newInstance() {
 				return new DOMParser();
 			}
 		};
-		
+
 		JavaInstantiator jiXMLSerializer = new JavaInstantiator() {
 			@Override
 			public Object newInstance() {
 				return new XMLSerializer();
 			}
 		};
-		
-		
-		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws, jiXhttp);
+
+		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws,
+				jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
 
 		Function domParser = JavaObjectWrapper.getConstructor("DOMParser", DOMPARSER_WRAPPER, ws, jiDomParser);
 		ScriptableObject.defineProperty(ws, "DOMParser", domParser, ScriptableObject.READONLY);
-		
-		Function xmlserial = JavaObjectWrapper.getConstructor("XMLSerializer", XMLSERIALIZER_WRAPPER, ws, jiXMLSerializer);
+
+		Function xmlserial = JavaObjectWrapper.getConstructor("XMLSerializer", XMLSERIALIZER_WRAPPER, ws,
+				jiXMLSerializer);
 		ScriptableObject.defineProperty(ws, "XMLSerializer", xmlserial, ScriptableObject.READONLY);
-		
-		
 
 		// HTML element classes
 		this.defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
@@ -1022,7 +1021,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * @return the int
 	 */
 	public int setTimeout(final String expr, double millis) {
-		if ((millis > Integer.MAX_VALUE) || (millis < 0)) {
+		if (millis > Integer.MAX_VALUE || millis < 0) {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
@@ -1048,7 +1047,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * @return the int
 	 */
 	public int setTimeout(final Function function, double millis) {
-		if ((millis > Integer.MAX_VALUE) || (millis < 0)) {
+		if (millis > Integer.MAX_VALUE || millis < 0) {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();

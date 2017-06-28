@@ -34,73 +34,74 @@ import org.w3c.dom.NodeList;
 /**
  * The Class FilteredNodeListImpl.
  */
-public class FilteredNodeListImpl extends AbstractScriptableDelegate implements
-NodeList {
+public class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeList {
 
-    /** The source node list. */
-    private final Collection sourceNodeList;
+	/** The source node list. */
+	private final Collection sourceNodeList;
 
-    /** The filter. */
-    private final NodeFilter filter;
+	/** The filter. */
+	private final NodeFilter filter;
 
-    /** The lock. */
-    private final Object lock;
+	/** The lock. */
+	private final Object lock;
 
-    /**
-     * Instantiates a new filtered node list impl.
-     *
-     * @param filter
-     *            the filter
-     * @param list
-     *            the list
-     * @param lock
-     *            the lock
-     */
-    public FilteredNodeListImpl(NodeFilter filter, Collection list, Object lock) {
-        super();
-        this.filter = filter;
-        sourceNodeList = list;
-        this.lock = lock;
-    }
+	/**
+	 * Instantiates a new filtered node list impl.
+	 *
+	 * @param filter
+	 *            the filter
+	 * @param list
+	 *            the list
+	 * @param lock
+	 *            the lock
+	 */
+	public FilteredNodeListImpl(NodeFilter filter, Collection list, Object lock) {
+		super();
+		this.filter = filter;
+		sourceNodeList = list;
+		this.lock = lock;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.NodeList#item(int)
-     */
-    @Override
-    public Node item(int index) {
-        synchronized (this.lock) {
-            int count = 0;
-            Iterator i = this.sourceNodeList.iterator();
-            while (i.hasNext()) {
-                Node node = (Node) i.next();
-                if (this.filter.accept(node)) {
-                    if (count == index) {
-                        return node;
-                    }
-                    count++;
-                }
-            }
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.NodeList#item(int)
+	 */
+	@Override
+	public Node item(int index) {
+		synchronized (this.lock) {
+			int count = 0;
+			Iterator i = this.sourceNodeList.iterator();
+			while (i.hasNext()) {
+				Node node = (Node) i.next();
+				if (this.filter.accept(node)) {
+					if (count == index) {
+						return node;
+					}
+					count++;
+				}
+			}
+			return null;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.NodeList#getLength()
-     */
-    @Override
-    public int getLength() {
-        synchronized (this.lock) {
-            int count = 0;
-            Iterator i = this.sourceNodeList.iterator();
-            while (i.hasNext()) {
-                Node node = (Node) i.next();
-                if (this.filter.accept(node)) {
-                    count++;
-                }
-            }
-            return count;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.NodeList#getLength()
+	 */
+	@Override
+	public int getLength() {
+		synchronized (this.lock) {
+			int count = 0;
+			Iterator i = this.sourceNodeList.iterator();
+			while (i.hasNext()) {
+				Node node = (Node) i.next();
+				if (this.filter.accept(node)) {
+					count++;
+				}
+			}
+			return count;
+		}
+	}
 }

@@ -23,7 +23,6 @@ package org.lobobrowser.w3c.html;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-
 /**
  * The public interface HTMLDocumentFragment.
  */

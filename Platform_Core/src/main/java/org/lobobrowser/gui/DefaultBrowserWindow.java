@@ -41,154 +41,156 @@ import org.lobobrowser.ua.NavigatorFrame;
  */
 public class DefaultBrowserWindow extends AbstractBrowserWindow {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The frame panel. */
-    private final FramePanel framePanel;
+	/** The frame panel. */
+	private final FramePanel framePanel;
 
-    /** The window context. */
-    private final NavigatorWindowImpl windowContext;
+	/** The window context. */
+	private final NavigatorWindowImpl windowContext;
 
-    /**
-     * Instantiates a new default browser window.
-     *
-     * @param hasMenuBar
-     *            the has menu bar
-     * @param hasAddressBar
-     *            the has address bar
-     * @param hasToolBar
-     *            the has tool bar
-     * @param hasStatusBar
-     *            the has status bar
-     * @param windowContext
-     *            the window context
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public DefaultBrowserWindow(boolean hasMenuBar, boolean hasAddressBar,
-            boolean hasToolBar, boolean hasStatusBar,
-            NavigatorWindowImpl windowContext) throws HeadlessException {
-        // TODO: SECURITY: Security needed in this class to prevent removal of
-        // all window components??
-        this.windowContext = windowContext;
-        this.framePanel = windowContext.getFramePanel();
-        ExtensionManager.getInstance().initExtensionsWindow(windowContext);
-        Object componentLock = windowContext.getComponentLock();
-        if (hasMenuBar) {
-            JMenuBar menuBar = new JMenuBar();
-            this.setJMenuBar(menuBar);
-            synchronized (componentLock) {
-                for (JMenu menu : windowContext.getMenus()) {
-                    menuBar.add(menu);
-                }
-                // Collection<JMenuItem> sharedMenuItems =
-                // windowContext.getSharedMenuItems();
-                // if(sharedMenuItems.size() > 0) {
-                // JMenu extensionsMenu = new JMenu("Extensions");
-                // menuBar.add(extensionsMenu);
-                // for(JMenuItem menuItem : sharedMenuItems) {
-                // extensionsMenu.add(menuItem);
-                //}
-                //}
-            }
-        }
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
+	/**
+	 * Instantiates a new default browser window.
+	 *
+	 * @param hasMenuBar
+	 *            the has menu bar
+	 * @param hasAddressBar
+	 *            the has address bar
+	 * @param hasToolBar
+	 *            the has tool bar
+	 * @param hasStatusBar
+	 *            the has status bar
+	 * @param windowContext
+	 *            the window context
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public DefaultBrowserWindow(boolean hasMenuBar, boolean hasAddressBar, boolean hasToolBar, boolean hasStatusBar,
+			NavigatorWindowImpl windowContext) throws HeadlessException {
+		// TODO: SECURITY: Security needed in this class to prevent removal of
+		// all window components??
+		this.windowContext = windowContext;
+		this.framePanel = windowContext.getFramePanel();
+		ExtensionManager.getInstance().initExtensionsWindow(windowContext);
+		Object componentLock = windowContext.getComponentLock();
+		if (hasMenuBar) {
+			JMenuBar menuBar = new JMenuBar();
+			this.setJMenuBar(menuBar);
+			synchronized (componentLock) {
+				for (JMenu menu : windowContext.getMenus()) {
+					menuBar.add(menu);
+				}
+				// Collection<JMenuItem> sharedMenuItems =
+				// windowContext.getSharedMenuItems();
+				// if(sharedMenuItems.size() > 0) {
+				// JMenu extensionsMenu = new JMenu("Extensions");
+				// menuBar.add(extensionsMenu);
+				// for(JMenuItem menuItem : sharedMenuItems) {
+				// extensionsMenu.add(menuItem);
+				// }
+				// }
+			}
+		}
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 
-        if (hasAddressBar) {
-            AddressBarPanel abp = new AddressBarPanel();
-            contentPane.add(abp);
-            synchronized (componentLock) {
-                for (Component c : windowContext.getAddressBarComponents()) {
-                    abp.add(c);
-                }
-            }
-        }
-        if (hasToolBar) {
-            synchronized (componentLock) {
-                for (Component c : windowContext.getToolBars()) {
-                    contentPane.add(c);
-                }
-            }
-            SharedToolBarPanel stbp = new SharedToolBarPanel();
-            contentPane.add(stbp);
-            synchronized (componentLock) {
-                for (Component c : windowContext.getSharedToolbarComponents()) {
-                    stbp.add(c);
-                }
-            }
-        }
-        contentPane.add(new FillerComponent(this.framePanel, false));
-        if (hasStatusBar) {
-            StatusBarPanel statusBar = new StatusBarPanel();
-            contentPane.add(statusBar);
-            synchronized (componentLock) {
-                for (Component c : windowContext.getStatusBarComponents()) {
-                    statusBar.add(c);
-                }
-            }
-        }
-    }
+		if (hasAddressBar) {
+			AddressBarPanel abp = new AddressBarPanel();
+			contentPane.add(abp);
+			synchronized (componentLock) {
+				for (Component c : windowContext.getAddressBarComponents()) {
+					abp.add(c);
+				}
+			}
+		}
+		if (hasToolBar) {
+			synchronized (componentLock) {
+				for (Component c : windowContext.getToolBars()) {
+					contentPane.add(c);
+				}
+			}
+			SharedToolBarPanel stbp = new SharedToolBarPanel();
+			contentPane.add(stbp);
+			synchronized (componentLock) {
+				for (Component c : windowContext.getSharedToolbarComponents()) {
+					stbp.add(c);
+				}
+			}
+		}
+		contentPane.add(new FillerComponent(this.framePanel, false));
+		if (hasStatusBar) {
+			StatusBarPanel statusBar = new StatusBarPanel();
+			contentPane.add(statusBar);
+			synchronized (componentLock) {
+				for (Component c : windowContext.getStatusBarComponents()) {
+					statusBar.add(c);
+				}
+			}
+		}
+	}
 
-    /** Gets the top frame.
+	/**
+	 * Gets the top frame.
 	 *
 	 * @return the top frame
 	 */
-    public NavigatorFrame getTopFrame() {
-        return this.framePanel;
-    }
+	public NavigatorFrame getTopFrame() {
+		return this.framePanel;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.gui.AbstractBrowserWindow#getTopFramePanel()
-     */
-    @Override
-    public FramePanel getTopFramePanel() {
-        return this.framePanel;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.gui.AbstractBrowserWindow#getTopFramePanel()
+	 */
+	@Override
+	public FramePanel getTopFramePanel() {
+		return this.framePanel;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.gui.AbstractBrowserWindow#getWindowCallback()
-     */
-    @Override
-    public WindowCallback getWindowCallback() {
-        return this.windowContext;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.gui.AbstractBrowserWindow#getWindowCallback()
+	 */
+	@Override
+	public WindowCallback getWindowCallback() {
+		return this.windowContext;
+	}
 
-    // private Image lastDbImage;
-    // private Dimension lastDbSize;
-    //
-    // private Image getDoubleBufferingImage(Dimension size) {
-    // Dimension lastDbSize = this.lastDbSize;
-    // Image newImage = this.lastDbImage;
-    // if(lastDbSize == null || lastDbSize.width != size.width ||
-    // lastDbSize.height != size.height) {
-    // newImage = this.createImage(size.width, size.height);
-    // this.lastDbImage = newImage;
-    // this.lastDbSize = size;
-    //}
-    // return newImage;
-    //}
+	// private Image lastDbImage;
+	// private Dimension lastDbSize;
+	//
+	// private Image getDoubleBufferingImage(Dimension size) {
+	// Dimension lastDbSize = this.lastDbSize;
+	// Image newImage = this.lastDbImage;
+	// if(lastDbSize == null || lastDbSize.width != size.width ||
+	// lastDbSize.height != size.height) {
+	// newImage = this.createImage(size.width, size.height);
+	// this.lastDbImage = newImage;
+	// this.lastDbSize = size;
+	// }
+	// return newImage;
+	// }
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JFrame#update(java.awt.Graphics)
-     */
-    @Override
-    public void update(Graphics g) {
-        if (g instanceof Graphics2D) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-        }
-        super.update(g);
-        // Rectangle clipBounds = g.getClipBounds();
-        // Dimension size = this.getSize();
-        // Image dbi = this.getDoubleBufferingImage(size);
-        // this.paint(dbi.getGraphics());
-        // g.drawImage(dbi, 0, 0, size.width, size.height, clipBounds.x,
-        // clipBounds.y, clipBounds.width, clipBounds.height, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JFrame#update(java.awt.Graphics)
+	 */
+	@Override
+	public void update(Graphics g) {
+		if (g instanceof Graphics2D) {
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		}
+		super.update(g);
+		// Rectangle clipBounds = g.getClipBounds();
+		// Dimension size = this.getSize();
+		// Image dbi = this.getDoubleBufferingImage(size);
+		// this.paint(dbi.getGraphics());
+		// g.drawImage(dbi, 0, 0, size.width, size.height, clipBounds.x,
+		// clipBounds.y, clipBounds.width, clipBounds.height, this);
+	}
 }

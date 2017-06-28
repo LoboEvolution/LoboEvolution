@@ -29,120 +29,115 @@ package org.lobobrowser.util;
  * @author J. H. S.
  */
 public class Objects {
-    /**
-     * Instantiates a new objects.
-     */
-    private Objects() {
-    }
-    
-    /**
-     * Equals.
-     *
-     * @param obj1
-     *            the obj1
-     * @param obj2
-     *            the obj2
-     * @return true, if successful
-     */
-    public static boolean equals(Object obj1, Object obj2) {
-        return obj1 == null ? (obj2 == null) : (obj1.equals(obj2));
-    }
-    
-    /**
-     * Checks if is box class.
-     *
-     * @param clazz
-     *            the clazz
-     * @return true, if is box class
-     */
-    public static boolean isBoxClass(Class clazz) {
-        return (clazz == Integer.class) || (clazz == Boolean.class)
-                || (clazz == Double.class) || (clazz == Float.class)
-                || (clazz == Long.class) || (clazz == Byte.class)
-                || (clazz == Short.class) || (clazz == Character.class);
-    }
-    
-    /**
-     * Are assignable to.
-     *
-     * @param objects
-     *            the objects
-     * @param types
-     *            the types
-     * @return true, if successful
-     */
-    public static boolean areAssignableTo(Object[] objects, Class[] types) {
-        int length = objects.length;
-        if (length != types.length) {
-            return false;
-        }
-        for (int i = 0; i < length; i++) {
-            if (!isAssignableOrBox(objects[i], types[i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-    
-    /**
-     * Checks if is assignable or box.
-     *
-     * @param value
-     *            the value
-     * @param clazz
-     *            the clazz
-     * @return true, if is assignable or box
-     */
-    public static boolean isAssignableOrBox(Object value, Class clazz) {
-        if (clazz.isInstance(value)) {
-            return true;
-        }
-        if (clazz.isPrimitive()) {
-            if (((clazz == double.class) && (value instanceof Double))
-                    || ((clazz == int.class) && (value instanceof Integer))
-                    || ((clazz == long.class) && (value instanceof Long))
-                    || ((clazz == boolean.class) && (value instanceof Boolean))
-                    || ((clazz == byte.class) && (value instanceof Byte))
-                    || ((clazz == char.class) && (value instanceof Character))
-                    || ((clazz == short.class) && (value instanceof Short))
-                    || ((clazz == float.class) && (value instanceof Float))) {
-                return true;
-            }
-        }
-        if (isNumeric(clazz) && isNumeric(value)) {
-            return true;
-        }
-        if (clazz.isAssignableFrom(String.class)) {
-            return (value == null) || !value.getClass().isPrimitive();
-        }
-        return false;
-    }
-    
-    /**
-     * Checks if is numeric.
-     *
-     * @param clazz
-     *            the clazz
-     * @return true, if is numeric
-     */
-    private static boolean isNumeric(Class clazz) {
-        return Number.class.isAssignableFrom(clazz) || (clazz.isPrimitive()
-                && ((clazz == int.class) || (clazz == double.class)
-                        || (clazz == byte.class) || (clazz == short.class)
-                        || (clazz == float.class) || (clazz == long.class)));
-    }
-    
-    /**
-     * Checks if is numeric.
-     *
-     * @param value
-     *            the value
-     * @return true, if is numeric
-     */
-    private static boolean isNumeric(Object value) {
-        if (value == null) {
-            return false;
-        }
-        return isNumeric(value.getClass());
-    }
+	/**
+	 * Instantiates a new objects.
+	 */
+	private Objects() {
+	}
+
+	/**
+	 * Equals.
+	 *
+	 * @param obj1
+	 *            the obj1
+	 * @param obj2
+	 *            the obj2
+	 * @return true, if successful
+	 */
+	public static boolean equals(Object obj1, Object obj2) {
+		return obj1 == null ? obj2 == null : obj1.equals(obj2);
+	}
+
+	/**
+	 * Checks if is box class.
+	 *
+	 * @param clazz
+	 *            the clazz
+	 * @return true, if is box class
+	 */
+	public static boolean isBoxClass(Class clazz) {
+		return clazz == Integer.class || clazz == Boolean.class || clazz == Double.class || clazz == Float.class
+				|| clazz == Long.class || clazz == Byte.class || clazz == Short.class || clazz == Character.class;
+	}
+
+	/**
+	 * Are assignable to.
+	 *
+	 * @param objects
+	 *            the objects
+	 * @param types
+	 *            the types
+	 * @return true, if successful
+	 */
+	public static boolean areAssignableTo(Object[] objects, Class[] types) {
+		int length = objects.length;
+		if (length != types.length) {
+			return false;
+		}
+		for (int i = 0; i < length; i++) {
+			if (!isAssignableOrBox(objects[i], types[i])) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Checks if is assignable or box.
+	 *
+	 * @param value
+	 *            the value
+	 * @param clazz
+	 *            the clazz
+	 * @return true, if is assignable or box
+	 */
+	public static boolean isAssignableOrBox(Object value, Class clazz) {
+		if (clazz.isInstance(value)) {
+			return true;
+		}
+		if (clazz.isPrimitive()) {
+			if (clazz == double.class && value instanceof Double || clazz == int.class && value instanceof Integer
+					|| clazz == long.class && value instanceof Long
+					|| clazz == boolean.class && value instanceof Boolean
+					|| clazz == byte.class && value instanceof Byte || clazz == char.class && value instanceof Character
+					|| clazz == short.class && value instanceof Short
+					|| clazz == float.class && value instanceof Float) {
+				return true;
+			}
+		}
+		if (isNumeric(clazz) && isNumeric(value)) {
+			return true;
+		}
+		if (clazz.isAssignableFrom(String.class)) {
+			return value == null || !value.getClass().isPrimitive();
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if is numeric.
+	 *
+	 * @param clazz
+	 *            the clazz
+	 * @return true, if is numeric
+	 */
+	private static boolean isNumeric(Class clazz) {
+		return Number.class.isAssignableFrom(clazz)
+				|| clazz.isPrimitive() && (clazz == int.class || clazz == double.class || clazz == byte.class
+						|| clazz == short.class || clazz == float.class || clazz == long.class);
+	}
+
+	/**
+	 * Checks if is numeric.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if is numeric
+	 */
+	private static boolean isNumeric(Object value) {
+		if (value == null) {
+			return false;
+		}
+		return isNumeric(value.getClass());
+	}
 }

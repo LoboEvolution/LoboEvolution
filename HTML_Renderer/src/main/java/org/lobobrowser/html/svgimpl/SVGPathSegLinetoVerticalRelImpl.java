@@ -22,11 +22,10 @@
 import org.lobobrowser.w3c.svg.SVGPathSeg;
 import org.lobobrowser.w3c.svg.SVGPathSegLinetoVerticalRel;
 
-public class SVGPathSegLinetoVerticalRelImpl extends SVGPathSegImpl implements
-		SVGPathSegLinetoVerticalRel {
+public class SVGPathSegLinetoVerticalRelImpl extends SVGPathSegImpl implements SVGPathSegLinetoVerticalRel {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	/**
 	 * @param y
 	 */
@@ -41,7 +40,7 @@ public class SVGPathSegLinetoVerticalRelImpl extends SVGPathSegImpl implements
 
 	@Override
 	public String getPathSegTypeAsLetter() {
-		
+
 		return "v";
 	}
 }

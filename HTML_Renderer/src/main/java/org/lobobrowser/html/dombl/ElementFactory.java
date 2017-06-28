@@ -39,50 +39,50 @@ import org.w3c.dom.DOMException;
  */
 public class ElementFactory {
 
-    /** The builders. */
-    private Map<String, Object> builders = new HashMap<String, Object>();
+	/** The builders. */
+	private Map<String, Object> builders = new HashMap<String, Object>();
 
-    /**
-     * Instantiates a new element factory.
-     */
-    private ElementFactory() {
-        this.builders = HtmlMapping.mappingHtml();
-    }
+	/**
+	 * Instantiates a new element factory.
+	 */
+	private ElementFactory() {
+		this.builders = HtmlMapping.mappingHtml();
+	}
 
-    /** The instance. */
-    private static ElementFactory instance = new ElementFactory();
+	/** The instance. */
+	private static ElementFactory instance = new ElementFactory();
 
-    /** Gets the instance.
+	/**
+	 * Gets the instance.
 	 *
 	 * @return the instance
 	 */
-    public static ElementFactory getInstance() {
-        return instance;
-    }
+	public static ElementFactory getInstance() {
+		return instance;
+	}
 
-    /**
-     * Creates a new Element object.
-     *
-     * @param document
-     *            the document
-     * @param name
-     *            the name
-     * @return the HTML element
-     * @throws DOMException
-     *             the DOM exception
-     */
-    public final HTMLElement createElement(HTMLDocumentImpl document,
-            String name) throws DOMException {
-        String normalName = name.toUpperCase(Locale.ENGLISH);
-        // No need to synchronize; read-only map at this point.
-        HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(normalName);
-        if (builder == null) {
-            // TODO: IE would assume name is html text here?
-            HTMLElementImpl element = new HTMLElementImpl(name);
-            element.setOwnerDocument(document);
-            return element;
-        } else {
-            return builder.create(document, name);
-        }
-    }
+	/**
+	 * Creates a new Element object.
+	 *
+	 * @param document
+	 *            the document
+	 * @param name
+	 *            the name
+	 * @return the HTML element
+	 * @throws DOMException
+	 *             the DOM exception
+	 */
+	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
+		String normalName = name.toUpperCase(Locale.ENGLISH);
+		// No need to synchronize; read-only map at this point.
+		HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(normalName);
+		if (builder == null) {
+			// TODO: IE would assume name is html text here?
+			HTMLElementImpl element = new HTMLElementImpl(name);
+			element.setOwnerDocument(document);
+			return element;
+		} else {
+			return builder.create(document, name);
+		}
+	}
 }

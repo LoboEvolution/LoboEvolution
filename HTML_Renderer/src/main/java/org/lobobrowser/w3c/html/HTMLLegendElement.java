@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLLegendElement.
  */
 public interface HTMLLegendElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the form.
 	 *

@@ -38,75 +38,78 @@ import org.lobobrowser.util.WeakValueHashMap;
  */
 public class VolatileContentImpl implements ContentBuffer {
 
-    /** The Constant volatileMap. */
-    private static final Map<Object, Object> volatileMap = new WeakValueHashMap();
+	/** The Constant volatileMap. */
+	private static final Map<Object, Object> volatileMap = new WeakValueHashMap();
 
-    /** The id. */
-    private final long id;
+	/** The id. */
+	private final long id;
 
-    /** The content type. */
-    private final String contentType;
+	/** The content type. */
+	private final String contentType;
 
-    /** The bytes. */
-    private final byte[] bytes;
+	/** The bytes. */
+	private final byte[] bytes;
 
-    /**
-     * Instantiates a new volatile content impl.
-     *
-     * @param contentType
-     *            the content type
-     * @param bytes
-     *            the bytes
-     */
-    public VolatileContentImpl(String contentType, byte[] bytes) {
-        super();
-        this.id = ID.generateLong();
-        this.contentType = contentType;
-        this.bytes = bytes;
-        synchronized (volatileMap) {
-            volatileMap.put(new Long(this.id), this);
-        }
-    }
+	/**
+	 * Instantiates a new volatile content impl.
+	 *
+	 * @param contentType
+	 *            the content type
+	 * @param bytes
+	 *            the bytes
+	 */
+	public VolatileContentImpl(String contentType, byte[] bytes) {
+		super();
+		this.id = ID.generateLong();
+		this.contentType = contentType;
+		this.bytes = bytes;
+		synchronized (volatileMap) {
+			volatileMap.put(new Long(this.id), this);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.clientlet.VolatileContent#getURL()
-     */
-    @Override
-    public URL getURL() {
-        try {
-            return new URL("vc:" + this.id);
-        } catch (MalformedURLException mfu) {
-            throw new IllegalStateException(mfu);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.VolatileContent#getURL()
+	 */
+	@Override
+	public URL getURL() {
+		try {
+			return new URL("vc:" + this.id);
+		} catch (MalformedURLException mfu) {
+			throw new IllegalStateException(mfu);
+		}
+	}
 
-    /**
-     * Gets the volatile content.
-     *
-     * @param id
-     *            the id
-     * @return the volatile content
-     */
-    public static VolatileContentImpl getVolatileContent(long id) {
-        synchronized (volatileMap) {
-            return (VolatileContentImpl) volatileMap.get(new Long(id));
-        }
-    }
+	/**
+	 * Gets the volatile content.
+	 *
+	 * @param id
+	 *            the id
+	 * @return the volatile content
+	 */
+	public static VolatileContentImpl getVolatileContent(long id) {
+		synchronized (volatileMap) {
+			return (VolatileContentImpl) volatileMap.get(new Long(id));
+		}
+	}
 
-    /** Gets the bytes.
+	/**
+	 * Gets the bytes.
 	 *
 	 * @return the bytes
 	 */
-    public byte[] getBytes() {
-        return bytes;
-    }
+	public byte[] getBytes() {
+		return bytes;
+	}
 
-    /** Gets the content type.
+	/**
+	 * Gets the content type.
 	 *
 	 * @return the content type
 	 */
-    public String getContentType() {
-        return contentType;
-    }
+	public String getContentType() {
+		return contentType;
+	}
 }

@@ -202,11 +202,11 @@ public class RListItem extends BaseRListElement {
 						}
 						break;
 					case ListStyle.TYPE_LOWER_ALPHA:
-						numberText = ((char) ('a' + (bulletNumber - 1))) + ".";
+						numberText = (char) ('a' + (bulletNumber - 1)) + ".";
 
 						break;
 					case ListStyle.TYPE_UPPER_ALPHA:
-						numberText = ((char) ('A' + (bulletNumber - 1))) + ".";
+						numberText = (char) ('A' + (bulletNumber - 1)) + ".";
 						break;
 					case ListStyle.TYPE_LOWER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";

@@ -32,28 +32,28 @@ public class DelayedPair {
 
 	/** The containing block. */
 	public final RenderableContainer containingBlock;
-	
+
 	/** The immediate containing block. */
 	private final RenderableContainer immediateContainingBlock;
-	
+
 	/** The child. */
 	public final BoundableRenderable child;
-	
+
 	/** The left. */
 	private final String left;
-	
+
 	/** The top. */
 	private final String top;
-	
+
 	/** The bottom. */
 	private final String bottom;
-	
+
 	/** The right. */
 	private final String right;
-	
+
 	/** The rs. */
 	private final RenderState rs;
-	
+
 	/** The curr y. */
 	private final int currY;
 
@@ -149,7 +149,7 @@ public class DelayedPair {
 		} else {
 			if (this.immediateContainingBlock != parent) {
 				final Insets immediateInsets = this.immediateContainingBlock.getInsets(false, false);
-				child.setY(this.currY + (this.immediateContainingBlock.getY() + immediateInsets.top) - parent.getY());
+				child.setY(this.currY + this.immediateContainingBlock.getY() + immediateInsets.top - parent.getY());
 			} else {
 				child.setY(this.currY);
 			}

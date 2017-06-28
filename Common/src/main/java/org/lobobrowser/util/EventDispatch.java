@@ -33,72 +33,71 @@ import java.util.LinkedList;
  * @author J. H. S.
  */
 public class EventDispatch {
-    /** The listeners. */
-    private Collection listeners;
-    
-    /**
-     * Instantiates a new event dispatch.
-     */
-    public EventDispatch() {
-    }
-    
-    /**
-     * Creates the listener collection.
-     *
-     * @return the collection
-     */
-    public Collection createListenerCollection() {
-        return new LinkedList();
-    }
-    
-    /**
-     * Adds the listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    public final void addListener(GenericEventListener listener) {
-        synchronized (this) {
-            if (this.listeners == null) {
-                this.listeners = this.createListenerCollection();
-            }
-            this.listeners.add(listener);
-        }
-    }
-    
-    /**
-     * Removes the listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    public final void removeListener(GenericEventListener listener) {
-        synchronized (this) {
-            if (this.listeners != null) {
-                this.listeners.remove(listener);
-            }
-        }
-    }
-    
-    /**
-     * Fire event.
-     *
-     * @param event
-     *            the event
-     */
-    public final void fireEvent(EventObject event) {
-        GenericEventListener[] larray = null;
-        synchronized (this) {
-            if (this.listeners != null) {
-                larray = (GenericEventListener[]) this.listeners
-                        .toArray(GenericEventListener.EMPTY_ARRAY);
-            }
-        }
-        if (larray != null) {
-            for (int i = 0; i < larray.length; i++) {
-                // Call holding no locks
-                larray[i].processEvent(event);
-            }
-        }
-    }
+	/** The listeners. */
+	private Collection listeners;
+
+	/**
+	 * Instantiates a new event dispatch.
+	 */
+	public EventDispatch() {
+	}
+
+	/**
+	 * Creates the listener collection.
+	 *
+	 * @return the collection
+	 */
+	public Collection createListenerCollection() {
+		return new LinkedList();
+	}
+
+	/**
+	 * Adds the listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public final void addListener(GenericEventListener listener) {
+		synchronized (this) {
+			if (this.listeners == null) {
+				this.listeners = this.createListenerCollection();
+			}
+			this.listeners.add(listener);
+		}
+	}
+
+	/**
+	 * Removes the listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	public final void removeListener(GenericEventListener listener) {
+		synchronized (this) {
+			if (this.listeners != null) {
+				this.listeners.remove(listener);
+			}
+		}
+	}
+
+	/**
+	 * Fire event.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	public final void fireEvent(EventObject event) {
+		GenericEventListener[] larray = null;
+		synchronized (this) {
+			if (this.listeners != null) {
+				larray = (GenericEventListener[]) this.listeners.toArray(GenericEventListener.EMPTY_ARRAY);
+			}
+		}
+		if (larray != null) {
+			for (int i = 0; i < larray.length; i++) {
+				// Call holding no locks
+				larray[i].processEvent(event);
+			}
+		}
+	}
 }

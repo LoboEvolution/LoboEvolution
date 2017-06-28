@@ -24,21 +24,21 @@ package org.lobobrowser.http;
  * Indicates the state of this HttpRequestImpl.
  */
 public enum ReadyState {
-    
-    /** The uninitialized. */
-    UNINITIALIZED, 
- /** The open. */
- OPEN, 
- /** The sent. */
- SENT, 
- /** The receiving. */
- RECEIVING, 
- /** The loaded. */
- LOADED, 
- /** The loading. */
- LOADING, 
- /** The interactive. */
- INTERACTIVE, 
- /** The complete. */
- COMPLETE
+
+	/** The uninitialized. */
+	UNINITIALIZED,
+	/** The open. */
+	OPEN,
+	/** The sent. */
+	SENT,
+	/** The receiving. */
+	RECEIVING,
+	/** The loaded. */
+	LOADED,
+	/** The loading. */
+	LOADING,
+	/** The interactive. */
+	INTERACTIVE,
+	/** The complete. */
+	COMPLETE
 }

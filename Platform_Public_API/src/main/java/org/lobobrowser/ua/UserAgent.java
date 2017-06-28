@@ -27,56 +27,62 @@ package org.lobobrowser.ua;
  */
 public interface UserAgent {
 
-    /** Gets the name.
+	/**
+	 * Gets the name.
 	 *
 	 * @return the name
 	 */
-    String getName();
+	String getName();
 
-    /** Gets the version.
+	/**
+	 * Gets the version.
 	 *
 	 * @return the version
 	 */
-    String getVersion();
+	String getVersion();
 
-    // /**
-    // * Gets the earliest XAMJ version this user agent
-    // * implements as a subset. (Supersets and other
-    // * non-subsets of XAMJ versions are not allowed.)
-    // */
-    // String getXamjVersion();
+	// /**
+	// * Gets the earliest XAMJ version this user agent
+	// * implements as a subset. (Supersets and other
+	// * non-subsets of XAMJ versions are not allowed.)
+	// */
+	// String getXamjVersion();
 
-    /** Gets the java version.
+	/**
+	 * Gets the java version.
 	 *
 	 * @return the java version
 	 */
-    String getJavaVersion();
+	String getJavaVersion();
 
-    /** Gets the name and version.
+	/**
+	 * Gets the name and version.
 	 *
 	 * @return the name and version
 	 */
-    String getNameAndVersion();
+	String getNameAndVersion();
 
-    /** Gets the info url.
+	/**
+	 * Gets the info url.
 	 *
 	 * @return the info url
 	 */
-    String getInfoUrl();
+	String getInfoUrl();
 
-    /** Gets the user agent string.
+	/**
+	 * Gets the user agent string.
 	 *
 	 * @return the user agent string
 	 */
-    String getUserAgentString();
+	String getUserAgentString();
 
-    // (unavalilable for now)
-    // /**
-    // * Gets an ID that is nearly guaranteed to be globally unique
-    // * for a browser session and a protocol-host pair. The session ID
-    // * should be practically impossible to guess, even if the algorithm
-    // * to produce it is well known. The session ID does not persist
-    // * if the browser exits.
-    // */
-    // String getSessionID(URL url);
+	// (unavalilable for now)
+	// /**
+	// * Gets an ID that is nearly guaranteed to be globally unique
+	// * for a browser session and a protocol-host pair. The session ID
+	// * should be practically impossible to guess, even if the algorithm
+	// * to produce it is well known. The session ID does not persist
+	// * if the browser exits.
+	// */
+	// String getSessionID(URL url);
 }

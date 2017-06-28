@@ -37,65 +37,64 @@ import org.lobobrowser.util.gui.GUITasks;
  */
 public class AuthenticatorImpl extends Authenticator {
 
-    /** The connection settings. */
-    private final ConnectionSettings connectionSettings;
+	/** The connection settings. */
+	private final ConnectionSettings connectionSettings;
 
-    /** The associated settings. */
-    private final AssociatedSettings associatedSettings;
+	/** The associated settings. */
+	private final AssociatedSettings associatedSettings;
 
-    /**
-     * Instantiates a new authenticator impl.
-     */
-    public AuthenticatorImpl() {
-        super();
-        // This is one way to avoid potential security exceptions.
-        this.connectionSettings = ConnectionSettings.getInstance();
-        this.associatedSettings = AssociatedSettings.getInstance();
-    }
+	/**
+	 * Instantiates a new authenticator impl.
+	 */
+	public AuthenticatorImpl() {
+		super();
+		// This is one way to avoid potential security exceptions.
+		this.connectionSettings = ConnectionSettings.getInstance();
+		this.associatedSettings = AssociatedSettings.getInstance();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.Authenticator#getPasswordAuthentication()
-     */
-    @Override
-    protected PasswordAuthentication getPasswordAuthentication() {
-        RequestorType requestorType = this.getRequestorType();
-        if (requestorType == RequestorType.PROXY) {
-            try {
-                PasswordAuthentication pa = this.connectionSettings
-                        .getPasswordAuthentication();
-                if (pa != null) {
-                    // This could get it into an infinite loop if the
-                    // credentials are wrong?
-                    // Apparently there's a limit of 20 for retries. See bug
-                    // #4848752 in
-                    // the bug parade.
-                    return pa;
-                }
-            } catch (Exception err) {
-                throw new IllegalStateException(err);
-            }
-        }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.Authenticator#getPasswordAuthentication()
+	 */
+	@Override
+	protected PasswordAuthentication getPasswordAuthentication() {
+		RequestorType requestorType = this.getRequestorType();
+		if (requestorType == RequestorType.PROXY) {
+			try {
+				PasswordAuthentication pa = this.connectionSettings.getPasswordAuthentication();
+				if (pa != null) {
+					// This could get it into an infinite loop if the
+					// credentials are wrong?
+					// Apparently there's a limit of 20 for retries. See bug
+					// #4848752 in
+					// the bug parade.
+					return pa;
+				}
+			} catch (Exception err) {
+				throw new IllegalStateException(err);
+			}
+		}
 
-        AssociatedSettings settings = this.associatedSettings;
-        String userName = settings.getUserNameForHost(this.getRequestingHost());
+		AssociatedSettings settings = this.associatedSettings;
+		String userName = settings.getUserNameForHost(this.getRequestingHost());
 
-        Frame frame = GUITasks.getTopFrame();
-        AuthenticationDialog dialog = new AuthenticationDialog(frame);
-        if (userName != null) {
-            dialog.setUserName(userName);
-        }
-        dialog.setModal(true);
-        dialog.setTitle("Authentication Required");
-        dialog.pack();
-        dialog.setLocationByPlatform(true);
-        dialog.setVisible(true);
-        PasswordAuthentication pa = dialog.getAuthentication();
-        if (pa != null) {
-            settings.setUserNameForHost(this.getRequestingHost(),
-                    pa.getUserName());
-            settings.save();
-        }
-        return pa;
-    }
+		Frame frame = GUITasks.getTopFrame();
+		AuthenticationDialog dialog = new AuthenticationDialog(frame);
+		if (userName != null) {
+			dialog.setUserName(userName);
+		}
+		dialog.setModal(true);
+		dialog.setTitle("Authentication Required");
+		dialog.pack();
+		dialog.setLocationByPlatform(true);
+		dialog.setVisible(true);
+		PasswordAuthentication pa = dialog.getAuthentication();
+		if (pa != null) {
+			settings.setUserNameForHost(this.getRequestingHost(), pa.getUserName());
+			settings.save();
+		}
+		return pa;
+	}
 }

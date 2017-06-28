@@ -156,8 +156,8 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		HTMLElementImpl element = this.controlElement;
 		String width = element.getAttribute(HtmlAttributeProperties.WIDTH);
 		String height = element.getAttribute(HtmlAttributeProperties.HEIGHT);
-		int dw = HtmlValues.getPixelSize(width, null,-1,availWidth);
-		int dh = HtmlValues.getPixelSize(height, null,-1,availHeight);
+		int dw = HtmlValues.getPixelSize(width, null, -1, availWidth);
+		int dh = HtmlValues.getPixelSize(height, null, -1, availHeight);
 		this.declaredWidth = dw;
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);
@@ -234,7 +234,7 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		if (ps == null) {
 			return true;
 		}
-		if ((ps.width != newPs.width) || (ps.height != newPs.height)) {
+		if (ps.width != newPs.width || ps.height != newPs.height) {
 			this.preferredSize = newPs;
 			return true;
 		} else {
@@ -250,7 +250,7 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 	 */
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
-		if (((infoflags & ImageObserver.ALLBITS) != 0) || ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
+		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
 			if (SwingUtilities.isEventDispatchThread()) {
 				if (!checkPreferredSizeChange()) {
 					repaint();
@@ -348,7 +348,7 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		this.image = image;
 		int width = image.getWidth(this);
 		int height = image.getHeight(this);
-		if ((width != -1) && (height != -1)) {
+		if (width != -1 && height != -1) {
 			this.imageUpdate(image, width, height);
 		}
 	}

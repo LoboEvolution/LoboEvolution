@@ -40,16 +40,16 @@ public class InputUrlControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The Constant URL_PATTERN. */
 	private static final String URL_PATTERN = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
-	
+
 	/** The url. */
 	private JTextFieldImpl url;
-	
+
 	/** The regex. */
 	String regex = "";
-	
+
 	/** The str pattern. */
 	private String strPattern;
 
@@ -79,6 +79,7 @@ public class InputUrlControl extends BaseInputTextControl {
 
 	private KeyListener addKeyListener() {
 		KeyListener keyListener = new KeyListener() {
+			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
 				JTextFieldImpl url = (JTextFieldImpl) keyEvent.getSource();
@@ -89,9 +90,11 @@ public class InputUrlControl extends BaseInputTextControl {
 				}
 			}
 
+			@Override
 			public void keyReleased(KeyEvent keyEvent) {
 			}
 
+			@Override
 			public void keyTyped(KeyEvent keyEvent) {
 			}
 
@@ -101,7 +104,7 @@ public class InputUrlControl extends BaseInputTextControl {
 
 	private boolean isUrl(String keyCode) {
 		if (keyCode != null && keyCode.length() > 0) {
-			Pattern pattern = Pattern.compile((strPattern!= null && strPattern.length()>0) ? strPattern : URL_PATTERN);
+			Pattern pattern = Pattern.compile(strPattern != null && strPattern.length() > 0 ? strPattern : URL_PATTERN);
 			Matcher matcher = pattern.matcher(keyCode);
 			return matcher.matches();
 		} else {

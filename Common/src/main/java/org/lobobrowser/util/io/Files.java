@@ -26,35 +26,32 @@ import java.io.File;
  * The Class Files.
  */
 public class Files {
-    /**
-     * Instantiates a new files.
-     */
-    private Files() {
-    }
-    
-    /**
-     * Guesses the right content-type for a local file, and includes a charset
-     * if appropriate.
-     *
-     * @param file
-     *            the file
-     * @return the content type
-     */
-    public static String getContentType(File file) {
-        // Not very complete at the moment :)
-        String name = file.getName();
-        int dotIdx = name.lastIndexOf('.');
-        String extension = dotIdx == -1 ? null : name.substring(dotIdx + 1);
-        if ("txt".equalsIgnoreCase(extension)) {
-            return "text/plain; charset=\""
-                    + System.getProperty("file.encoding") + "\"";
-        }
-        if ("html".equalsIgnoreCase(extension)
-                || "htm".equalsIgnoreCase(extension)) {
-            return "text/html; charset=\"" + System.getProperty("file.encoding")
-                    + "\"";
-        } else {
-            return "application/octet-stream";
-        }
-    }
+	/**
+	 * Instantiates a new files.
+	 */
+	private Files() {
+	}
+
+	/**
+	 * Guesses the right content-type for a local file, and includes a charset
+	 * if appropriate.
+	 *
+	 * @param file
+	 *            the file
+	 * @return the content type
+	 */
+	public static String getContentType(File file) {
+		// Not very complete at the moment :)
+		String name = file.getName();
+		int dotIdx = name.lastIndexOf('.');
+		String extension = dotIdx == -1 ? null : name.substring(dotIdx + 1);
+		if ("txt".equalsIgnoreCase(extension)) {
+			return "text/plain; charset=\"" + System.getProperty("file.encoding") + "\"";
+		}
+		if ("html".equalsIgnoreCase(extension) || "htm".equalsIgnoreCase(extension)) {
+			return "text/html; charset=\"" + System.getProperty("file.encoding") + "\"";
+		} else {
+			return "application/octet-stream";
+		}
+	}
 }

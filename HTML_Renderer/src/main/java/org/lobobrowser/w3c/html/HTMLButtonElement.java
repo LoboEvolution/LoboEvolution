@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLButtonElement.
  */
 public interface HTMLButtonElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the autofocus.
 	 *
@@ -45,7 +44,9 @@ public interface HTMLButtonElement extends HTMLElement {
 	 */
 	public void setAutofocus(boolean autofocus);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	@Override

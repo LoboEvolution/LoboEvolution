@@ -27,56 +27,55 @@ import org.lobobrowser.clientlet.ClientletResponse;
  */
 public class NavigatorWindowEvent extends NavigatorResponseEvent {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    /** The message. */
-    private final String message;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	/** The message. */
+	private final String message;
 
-    /**
-     * Instantiates a new navigator window event.
-     *
-     * @param source
-     *            the source
-     * @param eventType
-     *            the event type
-     * @param clientletFrame
-     *            the clientlet frame
-     * @param response
-     *            the response
-     */
-    public NavigatorWindowEvent(Object source, NavigatorEventType eventType,
-            NavigatorFrame clientletFrame, ClientletResponse response) {
-        super(source, eventType, clientletFrame, response, response
-                .getRequestType());
-        this.message = null;
-    }
+	/**
+	 * Instantiates a new navigator window event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param eventType
+	 *            the event type
+	 * @param clientletFrame
+	 *            the clientlet frame
+	 * @param response
+	 *            the response
+	 */
+	public NavigatorWindowEvent(Object source, NavigatorEventType eventType, NavigatorFrame clientletFrame,
+			ClientletResponse response) {
+		super(source, eventType, clientletFrame, response, response.getRequestType());
+		this.message = null;
+	}
 
-    /**
-     * Instantiates a new navigator window event.
-     *
-     * @param source
-     *            the source
-     * @param eventType
-     *            the event type
-     * @param clientletFrame
-     *            the clientlet frame
-     * @param message
-     *            the message
-     * @param requestType
-     *            the request type
-     */
-    public NavigatorWindowEvent(Object source, NavigatorEventType eventType,
-            NavigatorFrame clientletFrame, String message,
-            RequestType requestType) {
-        super(source, eventType, clientletFrame, null, requestType);
-        this.message = message;
-    }
+	/**
+	 * Instantiates a new navigator window event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param eventType
+	 *            the event type
+	 * @param clientletFrame
+	 *            the clientlet frame
+	 * @param message
+	 *            the message
+	 * @param requestType
+	 *            the request type
+	 */
+	public NavigatorWindowEvent(Object source, NavigatorEventType eventType, NavigatorFrame clientletFrame,
+			String message, RequestType requestType) {
+		super(source, eventType, clientletFrame, null, requestType);
+		this.message = message;
+	}
 
-    /** Gets the message.
+	/**
+	 * Gets the message.
 	 *
 	 * @return the message
 	 */
-    public String getMessage() {
-        return message;
-    }
+	public String getMessage() {
+		return message;
+	}
 }

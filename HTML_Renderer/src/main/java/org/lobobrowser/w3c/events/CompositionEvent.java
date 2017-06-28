@@ -22,7 +22,6 @@ package org.lobobrowser.w3c.events;
 
 import org.w3c.dom.views.AbstractView;
 
-
 /**
  * The public interface CompositionEvent.
  */

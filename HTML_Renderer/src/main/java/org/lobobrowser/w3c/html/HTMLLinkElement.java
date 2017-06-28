@@ -21,13 +21,14 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLLinkElement.
  */
 public interface HTMLLinkElement extends HTMLElement {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	// HTMLLinkElement

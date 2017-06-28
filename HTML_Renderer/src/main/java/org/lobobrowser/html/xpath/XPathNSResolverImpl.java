@@ -36,13 +36,16 @@ import org.w3c.dom.Node;
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
- * Object Model (DOM) Level 3 XPath Specification</a>.</p>
+ * Object Model (DOM) Level 3 XPath Specification</a>.
+ * </p>
  *
- * <p>The <code>XPathNSResolver</code> interface permit <code>prefix</code>
- * strings in the expression to be properly bound to <code>namespaceURI</code>
- * strings. <code>XPathEvaluator</code> can construct an implementation of
+ * <p>
+ * The <code>XPathNSResolver</code> interface permit <code>prefix</code> strings
+ * in the expression to be properly bound to <code>namespaceURI</code> strings.
+ * <code>XPathEvaluator</code> can construct an implementation of
  * <code>XPathNSResolver</code> from a node, or the interface may be implemented
- * by any application.</p>
+ * by any application.
+ * </p>
  *
  * @see org.w3c.dom.xpath.XPathNSResolver
  * @xsl.usage internal

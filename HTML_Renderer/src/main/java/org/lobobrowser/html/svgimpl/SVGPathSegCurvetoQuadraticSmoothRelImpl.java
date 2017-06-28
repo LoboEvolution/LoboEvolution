@@ -22,10 +22,11 @@
 import org.lobobrowser.w3c.svg.SVGPathSeg;
 import org.lobobrowser.w3c.svg.SVGPathSegCurvetoQuadraticSmoothRel;
 
-public class SVGPathSegCurvetoQuadraticSmoothRelImpl extends SVGPathSegImpl implements SVGPathSegCurvetoQuadraticSmoothRel {
+public class SVGPathSegCurvetoQuadraticSmoothRelImpl extends SVGPathSegImpl
+		implements SVGPathSegCurvetoQuadraticSmoothRel {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	/**
 	 * @param x
 	 * @param y

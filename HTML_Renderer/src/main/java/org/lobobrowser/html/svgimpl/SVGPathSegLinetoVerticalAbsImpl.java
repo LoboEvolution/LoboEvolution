@@ -22,11 +22,10 @@
 import org.lobobrowser.w3c.svg.SVGPathSeg;
 import org.lobobrowser.w3c.svg.SVGPathSegLinetoVerticalAbs;
 
-public class SVGPathSegLinetoVerticalAbsImpl extends SVGPathSegImpl implements
-		SVGPathSegLinetoVerticalAbs {
+public class SVGPathSegLinetoVerticalAbsImpl extends SVGPathSegImpl implements SVGPathSegLinetoVerticalAbs {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	/**
 	 * @param y
 	 */
@@ -35,12 +34,12 @@ public class SVGPathSegLinetoVerticalAbsImpl extends SVGPathSegImpl implements
 	}
 
 	@Override
-	public short getPathSegType() {	
+	public short getPathSegType() {
 		return SVGPathSeg.PATHSEG_LINETO_VERTICAL_ABS;
 	}
 
 	@Override
-	public String getPathSegTypeAsLetter() {	
+	public String getPathSegTypeAsLetter() {
 		return "V";
 	}
 }

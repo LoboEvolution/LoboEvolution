@@ -24,7 +24,6 @@ import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.js.Console;
 
 /**
@@ -37,7 +36,7 @@ public class ConsoleImpl implements Console {
 
 	/** The time. */
 	private Date time;
-	
+
 	/** The str time. */
 	private String strTime;
 

@@ -21,13 +21,14 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLStyleElement.
  */
 public interface HTMLStyleElement extends HTMLElement {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	// HTMLStyleElement

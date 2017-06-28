@@ -23,7 +23,6 @@ package org.lobobrowser.w3c.html;
 
 import org.lobobrowser.w3c.file.FileCallback;
 
-
 /**
  * The Interface HTMLCanvasElement.
  */
@@ -103,8 +102,10 @@ public interface HTMLCanvasElement extends HTMLElement {
 	/**
 	 * To data url.
 	 *
-	 * @param type the type
-	 * @param args the args
+	 * @param type
+	 *            the type
+	 * @param args
+	 *            the args
 	 * @return the string
 	 */
 	public String toDataURL(String type, Object... args);
@@ -112,23 +113,28 @@ public interface HTMLCanvasElement extends HTMLElement {
 	/**
 	 * To blob.
 	 *
-	 * @param callback the callback
+	 * @param callback
+	 *            the callback
 	 */
 	public void toBlob(FileCallback callback);
 
 	/**
 	 * To blob.
 	 *
-	 * @param callback the callback
-	 * @param type the type
-	 * @param args the args
+	 * @param callback
+	 *            the callback
+	 * @param type
+	 *            the type
+	 * @param args
+	 *            the args
 	 */
 	public void toBlob(FileCallback callback, String type, Object... args);
 
 	/**
 	 * Gets the context.
 	 *
-	 * @param contextId the context id
+	 * @param contextId
+	 *            the context id
 	 * @return the context
 	 */
 	public Object getContext(String contextId);

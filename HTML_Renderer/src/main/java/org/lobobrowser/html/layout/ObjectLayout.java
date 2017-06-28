@@ -65,7 +65,7 @@ public class ObjectLayout extends CommonWidgetLayout {
 	@Override
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 		HtmlObject ho = bodyLayout.getRendererContext().getHtmlObject(markupElement);
-		if ((ho == null) && this.tryToRenderContent) {
+		if (ho == null && this.tryToRenderContent) {
 			// Don't know what to do with it - render contents.
 			bodyLayout.layoutMarkup(markupElement);
 		} else if (ho != null) {

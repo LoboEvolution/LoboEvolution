@@ -21,8 +21,8 @@
 package org.lobobrowser.html.domimpl;
 
 import java.io.File;
-import org.apache.logging.log4j.Level;
 
+import org.apache.logging.log4j.Level;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
@@ -232,7 +232,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	public boolean isSubmittableWithEnterKey() {
 		String type = this.getType();
-		return ((type == null) || "".equals(type) || TEXT.equals(type) || PASSWORD.equals(type));
+		return type == null || "".equals(type) || TEXT.equals(type) || PASSWORD.equals(type);
 	}
 
 	/**
@@ -311,7 +311,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 			} else if (RADIO.equals(type) || CHECKBOX.equals(type)) {
 				if (this.getChecked()) {
 					String value = this.getValue();
-					if ((value == null) || (value.length() == 0)) {
+					if (value == null || value.length() == 0) {
 						value = "on";
 					}
 					return new FormInput[] { new FormInput(name, value) };

@@ -378,7 +378,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 */
 	public int getTabIndex() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.TABINDEX);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/**
@@ -899,7 +899,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 							}
 							sb.append(txt);
 						}
-					} else if (includeComment && (node instanceof Comment)) {
+					} else if (includeComment && node instanceof Comment) {
 						Comment cn = (Comment) node;
 						String txt = cn.getNodeValue();
 						if (!"".equals(txt)) {
@@ -934,7 +934,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 			sb.append(attr.getNodeName());
 			sb.append('=');
 			sb.append(attr.getNodeValue());
-			if ((i + 1) < length) {
+			if (i + 1 < length) {
 				sb.append(',');
 			}
 		}

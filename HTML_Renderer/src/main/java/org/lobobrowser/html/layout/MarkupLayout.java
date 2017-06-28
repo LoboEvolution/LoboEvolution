@@ -31,14 +31,13 @@ import org.lobobrowser.html.renderer.RBlockViewport;
  */
 public interface MarkupLayout {
 
-    /**
-     * Layout markup.
-     *
-     * @param bodyLayout
-     *            the body layout
-     * @param markupElement
-     *            the markup element
-     */
-    void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement);
+	/**
+	 * Layout markup.
+	 *
+	 * @param bodyLayout
+	 *            the body layout
+	 * @param markupElement
+	 *            the markup element
+	 */
+	void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
 }

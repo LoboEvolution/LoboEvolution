@@ -33,73 +33,72 @@ import org.lobobrowser.security.GenericLocalPermission;
  * A factory for creating Clientlet objects.
  */
 public class ClientletFactory {
-    // private static final Logger logger =
-    // LogManager.getLogger(ClientletFactory.class);
-    /** The instance. */
-    private static ClientletFactory instance;
+	// private static final Logger logger =
+	// LogManager.getLogger(ClientletFactory.class);
+	/** The instance. */
+	private static ClientletFactory instance;
 
-    /**
-     * Instantiates a new clientlet factory.
-     */
-    private ClientletFactory() {
-        this.addClientletSelector(new CoreClientletSelector());
-    }
+	/**
+	 * Instantiates a new clientlet factory.
+	 */
+	private ClientletFactory() {
+		this.addClientletSelector(new CoreClientletSelector());
+	}
 
-     /** Gets the instance.
+	/**
+	 * Gets the instance.
 	 *
 	 * @return the instance
 	 */
-    public static ClientletFactory getInstance() {
-        if (instance == null) {
-            synchronized (ClientletFactory.class) {
-                if (instance == null) {
-                    instance = new ClientletFactory();
-                }
-            }
-        }
-        return instance;
-    }
+	public static ClientletFactory getInstance() {
+		if (instance == null) {
+			synchronized (ClientletFactory.class) {
+				if (instance == null) {
+					instance = new ClientletFactory();
+				}
+			}
+		}
+		return instance;
+	}
 
-    /** The selectors. */
-    private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
+	/** The selectors. */
+	private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
 
-    /**
-     * Adds the clientlet selector.
-     *
-     * @param selector
-     *            the selector
-     */
-    public void addClientletSelector(ClientletSelector selector) {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
-            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-        }
-        synchronized (this) {
-            this.selectors.add(0, selector);
-        }
-    }
+	/**
+	 * Adds the clientlet selector.
+	 *
+	 * @param selector
+	 *            the selector
+	 */
+	public void addClientletSelector(ClientletSelector selector) {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+		}
+		synchronized (this) {
+			this.selectors.add(0, selector);
+		}
+	}
 
-    /**
-     * Gets the clientlet.
-     *
-     * @param request
-     *            the request
-     * @param response
-     *            the response
-     * @return the clientlet
-     */
-    public Clientlet getClientlet(ClientletRequest request,
-            ClientletResponse response) {
-        synchronized (this) {
-            for (ClientletSelector selector : this.selectors) {
-                Clientlet clientlet = selector.select(request, response);
-                if (clientlet == null) {
-                    continue;
-                }
-                return clientlet;
-            }
-        }
-        throw new IllegalStateException("No clientlets found for response: "
-                + response + ".");
-    }
+	/**
+	 * Gets the clientlet.
+	 *
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @return the clientlet
+	 */
+	public Clientlet getClientlet(ClientletRequest request, ClientletResponse response) {
+		synchronized (this) {
+			for (ClientletSelector selector : this.selectors) {
+				Clientlet clientlet = selector.select(request, response);
+				if (clientlet == null) {
+					continue;
+				}
+				return clientlet;
+			}
+		}
+		throw new IllegalStateException("No clientlets found for response: " + response + ".");
+	}
 }

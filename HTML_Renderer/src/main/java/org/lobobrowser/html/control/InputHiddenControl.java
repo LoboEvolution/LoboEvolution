@@ -30,7 +30,7 @@ import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 /**
  * The Class InputHiddenControl.
  */
-public class InputHiddenControl extends BaseInputTextControl{
+public class InputHiddenControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -45,7 +45,7 @@ public class InputHiddenControl extends BaseInputTextControl{
 		hidden.setVisible(false);
 		return hidden;
 	}
-	
+
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(0, 0);

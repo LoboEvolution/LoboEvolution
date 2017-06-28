@@ -25,11 +25,11 @@ import org.lobobrowser.w3c.svg.SVGNumber;
 import org.w3c.dom.DOMException;
 
 public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
-	
+
 	private SVGNumber num;
 
 	public SVGAnimatedNumberImpl(SVGNumberImpl svgNumberImpl) {
-		this.num = svgNumberImpl; 
+		this.num = svgNumberImpl;
 	}
 
 	@Override

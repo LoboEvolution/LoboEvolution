@@ -19,7 +19,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setAttributeName(String attributeName) {
 		this.setAttribute(HtmlAttributeProperties.ATTRIBUTE_NAME, attributeName);
-		
+
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setAttributeType(short attributeType) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setBegin(TimeList begin) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setEnd(TimeList end) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -78,7 +78,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setRestart(short restart) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setFill(String fill) throws DOMException {
 		this.setAttribute(HtmlAttributeProperties.FILL, fill);
-		
+
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setRepeatCount(float repeatCount) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setRepeatDur(float repeatDur) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -131,19 +131,19 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void pauseElement() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void resumeElement() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void seekElement(float seekTo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setAdditive(short additive) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setAccumulate(short accumulate) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -191,7 +191,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setCalcMode(short calcMode) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -203,7 +203,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setKeySplines(String keySplines) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -215,7 +215,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setKeyTimes(TimeList keyTimes) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -227,7 +227,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setValues(String values) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -238,7 +238,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setFrom(String from) throws DOMException {
 		this.setAttribute(HtmlAttributeProperties.FROM, from);
-		
+
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setTo(String to) throws DOMException {
 		this.setAttribute(HtmlAttributeProperties.TO, to);
-		
+
 	}
 
 	@Override
@@ -261,7 +261,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public void setBy(String by) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

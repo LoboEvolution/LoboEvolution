@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.mozilla.javascript.Function;
 
-
 /**
  * The Interface HTMLBodyElement.
  */
 public interface HTMLBodyElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the onafterprint.
 	 *
@@ -75,38 +74,56 @@ public interface HTMLBodyElement extends HTMLElement {
 	 */
 	public void setOnbeforeunload(Function onbeforeunload);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getOnblur()
 	 */
 	@Override
 	public Function getOnblur();
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.w3c.html.HTMLElement#setOnblur(org.mozilla.javascript.Function)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLElement#setOnblur(org.mozilla.javascript.
+	 * Function)
 	 */
 	@Override
 	public void setOnblur(Function onblur);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getOnerror()
 	 */
 	@Override
 	public Function getOnerror();
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.w3c.html.HTMLElement#setOnerror(org.mozilla.javascript.Function)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLElement#setOnerror(org.mozilla.javascript.
+	 * Function)
 	 */
 	@Override
 	public void setOnerror(Function onerror);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getOnfocus()
 	 */
 	@Override
 	public Function getOnfocus();
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.w3c.html.HTMLElement#setOnfocus(org.mozilla.javascript.Function)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLElement#setOnfocus(org.mozilla.javascript.
+	 * Function)
 	 */
 	@Override
 	public void setOnfocus(Function onfocus);
@@ -126,14 +143,20 @@ public interface HTMLBodyElement extends HTMLElement {
 	 */
 	public void setOnhashchange(Function onhashchange);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getOnload()
 	 */
 	@Override
 	public Function getOnload();
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.w3c.html.HTMLElement#setOnload(org.mozilla.javascript.Function)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLElement#setOnload(org.mozilla.javascript.
+	 * Function)
 	 */
 	@Override
 	public void setOnload(Function onload);
@@ -258,14 +281,20 @@ public interface HTMLBodyElement extends HTMLElement {
 	 */
 	public void setOnresize(Function onresize);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getOnscroll()
 	 */
 	@Override
 	public Function getOnscroll();
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.w3c.html.HTMLElement#setOnscroll(org.mozilla.javascript.Function)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLElement#setOnscroll(org.mozilla.javascript.
+	 * Function)
 	 */
 	@Override
 	public void setOnscroll(Function onscroll);

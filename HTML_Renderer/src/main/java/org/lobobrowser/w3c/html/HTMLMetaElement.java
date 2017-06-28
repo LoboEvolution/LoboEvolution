@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLMetaElement.
  */
 public interface HTMLMetaElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the name.
 	 *

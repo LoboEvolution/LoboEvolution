@@ -25,7 +25,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 
 public class SVGUseBuilder extends HTMLElementBuilder {
-	
+
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new SVGUseElementImpl(name);

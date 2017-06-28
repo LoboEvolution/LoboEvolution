@@ -51,8 +51,8 @@ import org.lobobrowser.w3c.html.TextMetrics;
 /**
  * The Class HTMLCanvasElementImpl.
  */
-public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
-		HTMLCanvasElement, CanvasRenderingContext2D, CanvasPattern {
+public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
+		implements HTMLCanvasElement, CanvasRenderingContext2D, CanvasPattern {
 
 	/** The Constant FONT_FACTORY. */
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
@@ -65,7 +65,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	/** The stroke style. */
 	private Object strokeStyle;
-	
+
 	/** The fill paint. */
 	private Paint fillPaint;
 
@@ -110,16 +110,16 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 
 	/** The Affine Transform. */
 	private AffineTransform affineTransform;
-	
+
 	/** The global Composite Operation. */
 	private String globalCompositeOperation;
-	
+
 	/** The text align */
 	private String textAlign;
-	
+
 	/** The baseline. */
 	private String baseline;
-	
+
 	/**
 	 * Instantiates a new HTML canvas element impl.
 	 *
@@ -143,12 +143,13 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		strokeStyle = Color.BLACK;
 		fillPaint = Color.BLACK;
 		strokePaint = Color.BLACK;
-		affineTransform = new AffineTransform(1,0,0,1,0,0);
-		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null, LAFSettings.getInstance().getFontSize(), null, null,0,false,0);
+		affineTransform = new AffineTransform(1, 0, 0, 1, 0, 0);
+		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null, LAFSettings.getInstance().getFontSize(), null,
+				null, 0, false, 0);
 		globalCompositeOperation = "source-over";
 		textAlign = "left";
 		baseline = "alphabetic";
-		path = new GeneralPath(); 
+		path = new GeneralPath();
 	}
 
 	@Override
@@ -189,7 +190,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public CanvasRenderingContext getContext(String contextId) {
 		return this;
 	}
-	
+
 	@Override
 	public HTMLCanvasElement getCanvas() {
 		return this;
@@ -205,12 +206,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		this.fillStyle = style;
 		if (style instanceof CanvasGradient) {
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
-			fillPaint = gradient(cgi.getFractions(), cgi.getColors(), 
-								 cgi.getLinearX(), cgi.getLinearX1(),
-								 cgi.getLinearY(), cgi.getLinearY1(), 
-								 cgi.getR1(),cgi.getR2());
+			fillPaint = gradient(cgi.getFractions(), cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
+					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR1(), cgi.getR2());
 		} else if (style instanceof CanvasPattern) {
-			//fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
+			// fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
 		} else if (style instanceof String) {
 			fillPaint = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -373,12 +372,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		this.strokeStyle = style;
 		if (style instanceof CanvasGradient) {
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
-			strokePaint = gradient(cgi.getFractions(), cgi.getColors(), 
-								   cgi.getLinearX(), cgi.getLinearX1(),
-								   cgi.getLinearY(), cgi.getLinearY1(), 
-								   cgi.getR1(),cgi.getR2());
+			strokePaint = gradient(cgi.getFractions(), cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
+					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR1(), cgi.getR2());
 		} else if (style instanceof CanvasPattern) {
-			//strokePaint = ((DOMCanvasPatternImpl) style).getPaint();
+			// strokePaint = ((DOMCanvasPatternImpl) style).getPaint();
 		} else if (style instanceof String) {
 			strokePaint = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -404,7 +401,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		baseline = bs;
 
 	}
-	
+
 	@Override
 	public void arc(int x, int y, int radius, int startAngle, int endAngle) {
 		path.append(buildArc(x, y, radius, startAngle, endAngle, false), true);
@@ -476,9 +473,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public CanvasPattern createPattern(HTMLImageElement image, String repetitionType) {
 		// TODO Auto-generated method stub
-				return null;
+		return null;
 	}
-	
+
 	@Override
 	public CanvasGradient createRadialGradient(Object x0, Object y0, Object r0, Object x1, Object y1, Object r1) {
 		return new DOMCanvasGradientImpl(x0, y0, x1, y1, r0, r1);
@@ -513,7 +510,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void drawImage(Object image, Integer sx, Integer sy, Integer sw, Integer sh, Integer dx, Integer dy, Integer dw, Integer dh) {
+	public void drawImage(Object image, Integer sx, Integer sy, Integer sw, Integer sh, Integer dx, Integer dy,
+			Integer dw, Integer dh) {
 		CanvasInfo cimage = new CanvasInfo();
 		if (image instanceof HTMLImageElementImpl) {
 			cimage.setImage((HTMLImageElementImpl) image);
@@ -609,13 +607,12 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		path.moveTo(x, y);
 	}
 
-	
 	@Override
 	public CanvasImageData getImageData(int sx, int sy, int sw, int sh) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void putImageData(CanvasImageData imagedata, int dx, int dy) {
 		// TODO Auto-generated method stub
@@ -623,7 +620,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	}
 
 	@Override
-	public void putImageData(CanvasImageData imagedata, int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight) {
+	public void putImageData(CanvasImageData imagedata, int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth,
+			int dirtyHeight) {
 		// TODO Auto-generated method stub
 
 	}
@@ -668,7 +666,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	public void setTransform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
 		transform(m11, m12, m21, m22, dx, dy);
 	}
-	
+
 	@Override
 	public void transform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
 		affineTransform = new AffineTransform(m11, m12, m21, m22, dx, dy);
@@ -768,21 +766,17 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 				fontSize = HtmlValues.getFontSize(prop, null);
 			}
 
-			if (prop.contains(CSSValuesProperties.NORMAL)
-					|| prop.contains(CSSValuesProperties.ITALIC)
+			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.ITALIC)
 					|| prop.contains(CSSValuesProperties.OBLIQUE)) {
 				fontStyle = prop;
 			}
 
-			if (prop.contains(CSSValuesProperties.NORMAL)
-					|| prop.contains(CSSValuesProperties.SMALL_CAPS)) {
+			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.SMALL_CAPS)) {
 				fontVariant = prop;
 			}
 
-			if (prop.contains(CSSValuesProperties.NORMAL)
-					|| prop.contains(CSSValuesProperties.BOLD)
-					|| prop.contains(CSSValuesProperties.BOLDER)
-					|| prop.contains(CSSValuesProperties.LIGHTER)) {
+			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.BOLD)
+					|| prop.contains(CSSValuesProperties.BOLDER) || prop.contains(CSSValuesProperties.LIGHTER)) {
 				fontWeight = prop;
 			}
 
@@ -790,7 +784,8 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 				fontFamily = prop;
 			}
 		}
-		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,0,false,0);
+		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,
+				0, false, 0);
 
 	}
 
@@ -799,15 +794,14 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	 *
 	 * @return gradient paint
 	 */
-	private Paint gradient(ArrayList<Float> fractions,
-			ArrayList<Color> colors, Double linearX, Double linearX1,
+	private Paint gradient(ArrayList<Float> fractions, ArrayList<Color> colors, Double linearX, Double linearX1,
 			Double linearY, Double linearY1, Double r1, Double r2) {
 
 		float[] floatArray = new float[fractions.size()];
 		int i = 0;
 
 		for (Float f : fractions) {
-			floatArray[i++] = (f != null ? f : Float.NaN);
+			floatArray[i++] = f != null ? f : Float.NaN;
 		}
 
 		Color[] colorArray = new Color[colors.size()];
@@ -818,7 +812,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		}
 
 		Arrays.sort(floatArray);
-		
+
 		if (r2 != null) {
 			return new RadialGradientPaint(linearX.floatValue(), linearY.floatValue(), r2.floatValue(),
 					linearX1.floatValue(), linearY1.floatValue(), floatArray, colorArray,
@@ -829,7 +823,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 					linearY1.floatValue(), floatArray, colorArray);
 		}
 	}
-	
+
 	/**
 	 * Gets the list canvas info.
 	 *
@@ -852,15 +846,15 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 	@Override
 	public void toBlob(FileCallback callback) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void toBlob(FileCallback callback, String type, Object... args) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	private AlphaComposite comosite(String op) {
 		int c;
 		if ("source-atop".equals(op)) {
@@ -886,7 +880,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		}
 		return AlphaComposite.getInstance(c, globalAlpha);
 	}
-	
+
 	private Arc2D.Double buildArc(int x, int y, int radius, int startAngle, int endAngle, boolean anticlockwise) {
 		boolean clockwise = !anticlockwise;
 		double twopi = 2 * Math.PI;
@@ -922,8 +916,9 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements
 		}
 
 		startAngle = -startAngle;
-		
-		return new Arc2D.Double(x - radius, y - radius, 2 * radius, 2 * radius, Math.toDegrees(startAngle),  Math.toDegrees(ang), Arc2D.OPEN);
+
+		return new Arc2D.Double(x - radius, y - radius, 2 * radius, 2 * radius, Math.toDegrees(startAngle),
+				Math.toDegrees(ang), Arc2D.OPEN);
 
 	}
 }

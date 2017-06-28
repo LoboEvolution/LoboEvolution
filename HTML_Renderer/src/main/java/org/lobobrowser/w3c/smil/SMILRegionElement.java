@@ -24,33 +24,35 @@ package org.lobobrowser.w3c.smil;
 import org.w3c.dom.DOMException;
 
 /**
- *  Controls the position, size and scaling of media object elements. See the  
- * region element definition . 
+ * Controls the position, size and scaling of media object elements. See the
+ * region element definition .
  */
 public interface SMILRegionElement extends SMILElement, ElementLayout {
-    /**
-     * @exception DOMException
-     *    NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is readonly. 
-     */
-    public String getFit();
-    public void setFit(String fit)
-                                      throws DOMException;
+	/**
+	 * @exception DOMException
+	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
+	 *                readonly.
+	 */
+	public String getFit();
 
-    /**
-     * @exception DOMException
-     *    NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is readonly. 
-     */
-    public String getTop();
-    public void setTop(String top)
-                                      throws DOMException;
+	public void setFit(String fit) throws DOMException;
 
-    /**
-     * @exception DOMException
-     *    NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is readonly. 
-     */
-    public int getZIndex();
-    public void setZIndex(int zIndex)
-                                      throws DOMException;
+	/**
+	 * @exception DOMException
+	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
+	 *                readonly.
+	 */
+	public String getTop();
+
+	public void setTop(String top) throws DOMException;
+
+	/**
+	 * @exception DOMException
+	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
+	 *                readonly.
+	 */
+	public int getZIndex();
+
+	public void setZIndex(int zIndex) throws DOMException;
 
 }
-

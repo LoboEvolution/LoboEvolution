@@ -16,9 +16,7 @@
  */
 package org.lobobrowser.w3c.html;
 
-import java.awt.Color;
 import java.awt.Font;
-
 
 /**
  * The public interface CanvasRenderingContext2D.
@@ -249,7 +247,7 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 *            the new text baseline
 	 */
 	void setTextBaseline(String arg);
-	
+
 	/**
 	 * Arc.
 	 *

@@ -35,135 +35,143 @@ import org.lobobrowser.ua.UserAgent;
  */
 public class UserAgentImpl implements UserAgent {
 
-    /** The Constant instance. */
-    private static final UserAgentImpl instance = new UserAgentImpl();
-    
-    /** The text value. */
-    private volatile String textValue = null;
+	/** The Constant instance. */
+	private static final UserAgentImpl instance = new UserAgentImpl();
 
-    /**
-     * Instantiates a new user agent impl.
-     */
-    private UserAgentImpl() {
-    }
+	/** The text value. */
+	private volatile String textValue = null;
 
-    /** Gets the Constant instance.
+	/**
+	 * Instantiates a new user agent impl.
+	 */
+	private UserAgentImpl() {
+	}
+
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static UserAgentImpl getInstance() {
-        return instance;
-    }
+	public static UserAgentImpl getInstance() {
+		return instance;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.ua.UserAgent#getName()
-     */
-    @Override
-    public String getName() {
-        return "Lobo";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.ua.UserAgent#getName()
+	 */
+	@Override
+	public String getName() {
+		return "Lobo";
+	}
 
-    /** Gets the major version.
+	/**
+	 * Gets the major version.
 	 *
 	 * @return the major version
 	 */
-    public String getMajorVersion() {
-        return "0";
-    }
+	public String getMajorVersion() {
+		return "0";
+	}
 
-    /** Gets the minor version.
+	/**
+	 * Gets the minor version.
 	 *
 	 * @return the minor version
 	 */
-    public String getMinorVersion() {
-        return "99.1";
-    }
+	public String getMinorVersion() {
+		return "99.1";
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.ua.UserAgent#getVersion()
-     */
-    @Override
-    public String getVersion() {
-        return this.getMajorVersion() + "." + this.getMinorVersion();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.ua.UserAgent#getVersion()
+	 */
+	@Override
+	public String getVersion() {
+		return this.getMajorVersion() + "." + this.getMinorVersion();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.ua.UserAgent#getJavaVersion()
-     */
-    @Override
-    public String getJavaVersion() {
-        return System.getProperty("java.version");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.ua.UserAgent#getJavaVersion()
+	 */
+	@Override
+	public String getJavaVersion() {
+		return System.getProperty("java.version");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.ua.UserAgent#getUserAgentString()
-     */
-    @Override
-    public String getUserAgentString() {
-        String tv = this.textValue;
-        if (tv == null) {
-            GeneralSettings settings = AccessController
-                    .doPrivileged(new java.security.PrivilegedAction<GeneralSettings>() {
-                        @Override
-                        public GeneralSettings run() {
-                            return GeneralSettings.getInstance();
-                        }
-                    });
-            boolean spoofIE = settings.isSpoofIE();
-            String ieVersion = settings.getIeVersion();
-            tv = "Mozilla/" + settings.getMozVersion() + " (compatible"
-                    + (spoofIE ? "; MSIE " + ieVersion : "") + "; "
-                    + this.getOs() + ") " + this.getName() + "/"
-                    + this.getVersion();
-            this.textValue = tv;
-        }
-        return tv;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.ua.UserAgent#getUserAgentString()
+	 */
+	@Override
+	public String getUserAgentString() {
+		String tv = this.textValue;
+		if (tv == null) {
+			GeneralSettings settings = AccessController
+					.doPrivileged(new java.security.PrivilegedAction<GeneralSettings>() {
+						@Override
+						public GeneralSettings run() {
+							return GeneralSettings.getInstance();
+						}
+					});
+			boolean spoofIE = settings.isSpoofIE();
+			String ieVersion = settings.getIeVersion();
+			tv = "Mozilla/" + settings.getMozVersion() + " (compatible" + (spoofIE ? "; MSIE " + ieVersion : "") + "; "
+					+ this.getOs() + ") " + this.getName() + "/" + this.getVersion();
+			this.textValue = tv;
+		}
+		return tv;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return this.getUserAgentString();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return this.getUserAgentString();
+	}
 
-    /**
-     * Removes cached user agent string.
-     */
-    public void invalidateUserAgent() {
-        this.textValue = null;
-    }
+	/**
+	 * Removes cached user agent string.
+	 */
+	public void invalidateUserAgent() {
+		this.textValue = null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.clientlet.UserAgent#getNameAndVersion()
-     */
-    @Override
-    public String getNameAndVersion() {
-        return this.getName() + " " + this.getVersion();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.UserAgent#getNameAndVersion()
+	 */
+	@Override
+	public String getNameAndVersion() {
+		return this.getName() + " " + this.getVersion();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.ua.UserAgent#getInfoUrl()
-     */
-    @Override
-    public String getInfoUrl() {
-        return "http://sourceforge.net/projects/loboevolution/";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.ua.UserAgent#getInfoUrl()
+	 */
+	@Override
+	public String getInfoUrl() {
+		return "http://sourceforge.net/projects/loboevolution/";
+	}
 
-    /** Gets the os.
+	/**
+	 * Gets the os.
 	 *
 	 * @return the os
 	 */
-    private String getOs() {
-        return System.getProperty("os.name") + " "
-                + System.getProperty("os.version");
-    }
+	private String getOs() {
+		return System.getProperty("os.name") + " " + System.getProperty("os.version");
+	}
 }

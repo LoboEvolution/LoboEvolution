@@ -34,183 +34,202 @@ import org.lobobrowser.ua.RequestType;
  */
 public interface ClientletResponse {
 
-    /** Gets the response url.
+	/**
+	 * Gets the response url.
 	 *
 	 * @return the response url
 	 */
-    URL getResponseURL();
+	URL getResponseURL();
 
-    /** Gets the last request method.
+	/**
+	 * Gets the last request method.
 	 *
 	 * @return the last request method
 	 */
-    String getLastRequestMethod();
+	String getLastRequestMethod();
 
-    /**
-     * Gets a response header.
-     *
-     * @param name
-     *            The header name.
-     * @return the header
-     */
-    String getHeader(String name);
+	/**
+	 * Gets a response header.
+	 *
+	 * @param name
+	 *            The header name.
+	 * @return the header
+	 */
+	String getHeader(String name);
 
-    /**
-     * Gets all values for a particular header.
-     *
-     * @param name
-     *            The header name.
-     * @return the headers
-     */
-    String[] getHeaders(String name);
+	/**
+	 * Gets all values for a particular header.
+	 *
+	 * @param name
+	 *            The header name.
+	 * @return the headers
+	 */
+	String[] getHeaders(String name);
 
-    /** Gets the header names.
+	/**
+	 * Gets the header names.
 	 *
 	 * @return the header names
 	 */
-    Iterator getHeaderNames();
+	Iterator getHeaderNames();
 
-    /** Gets the input stream.
+	/**
+	 * Gets the input stream.
 	 *
 	 * @return the input stream
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    InputStream getInputStream() throws IOException;
+	InputStream getInputStream() throws IOException;
 
-    /** Gets the content type.
+	/**
+	 * Gets the content type.
 	 *
 	 * @return the content type
 	 */
-    String getContentType();
+	String getContentType();
 
-    /** Gets the mime type.
+	/**
+	 * Gets the mime type.
 	 *
 	 * @return the mime type
 	 */
-    String getMimeType();
+	String getMimeType();
 
-    /**
-     * A convenience method used to match parameters provided against the
-     * response mime-type or the "file extension" of the response URL's file
-     * path. The file extension is matched only when the mime type of the
-     * response is either <code>application/octet-stream</code>,
-     * <code>content/unknown</code>, or not provided.
-     *
-     * @param mimeType
-     *            A mime type, e.g. <em>application/x-acme</em>.
-     * @param fileExtension
-     *            A collection of file extensions, each starting with a dot,
-     *            e.g. <em>new String[] {".acme", ".acm"}</em>.
-     * @return True if the navigator considers there is a match.
-     */
-    boolean matches(String mimeType, String[] fileExtension);
+	/**
+	 * A convenience method used to match parameters provided against the
+	 * response mime-type or the "file extension" of the response URL's file
+	 * path. The file extension is matched only when the mime type of the
+	 * response is either <code>application/octet-stream</code>,
+	 * <code>content/unknown</code>, or not provided.
+	 *
+	 * @param mimeType
+	 *            A mime type, e.g. <em>application/x-acme</em>.
+	 * @param fileExtension
+	 *            A collection of file extensions, each starting with a dot,
+	 *            e.g. <em>new String[] {".acme", ".acm"}</em>.
+	 * @return True if the navigator considers there is a match.
+	 */
+	boolean matches(String mimeType, String[] fileExtension);
 
-    /** Gets the content length.
+	/**
+	 * Gets the content length.
 	 *
 	 * @return the content length
 	 */
-    int getContentLength();
+	int getContentLength();
 
-    /** Checks if is from cache.
+	/**
+	 * Checks if is from cache.
 	 *
 	 * @return true, if is from cache
 	 */
-    boolean isFromCache();
+	boolean isFromCache();
 
-    /** Gets the charset.
+	/**
+	 * Gets the charset.
 	 *
 	 * @return the charset
 	 */
-    String getCharset();
+	String getCharset();
 
-    /** Checks if is charset provided.
+	/**
+	 * Checks if is charset provided.
 	 *
 	 * @return true, if is charset provided
 	 */
-    boolean isCharsetProvided();
+	boolean isCharsetProvided();
 
-    /** Gets the response code.
+	/**
+	 * Gets the response code.
 	 *
 	 * @return the response code
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    int getResponseCode() throws IOException;
+	int getResponseCode() throws IOException;
 
-    /** Gets the response message.
+	/**
+	 * Gets the response message.
 	 *
 	 * @return the response message
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    String getResponseMessage() throws IOException;
+	String getResponseMessage() throws IOException;
 
-    /** Checks if is cacheable.
+	/**
+	 * Checks if is cacheable.
 	 *
 	 * @return true, if is cacheable
 	 */
-    boolean isCacheable();
+	boolean isCacheable();
 
-    /** Checks if is new navigation action.
+	/**
+	 * Checks if is new navigation action.
 	 *
 	 * @return true, if is new navigation action
 	 */
-    boolean isNewNavigationAction();
+	boolean isNewNavigationAction();
 
-    /**
-     * If available, gets an object previously persisted along with the cached
-     * document.
-     *
-     * @param classLoader
-     *            A class loader that can load an object of the type expected.
-     * @return the persistent cached object
-     * @see #setNewPersistentCachedObject(Serializable)
-     */
-    Object getPersistentCachedObject(ClassLoader classLoader);
+	/**
+	 * If available, gets an object previously persisted along with the cached
+	 * document.
+	 *
+	 * @param classLoader
+	 *            A class loader that can load an object of the type expected.
+	 * @return the persistent cached object
+	 * @see #setNewPersistentCachedObject(Serializable)
+	 */
+	Object getPersistentCachedObject(ClassLoader classLoader);
 
-    /** Sets the new persistent cached object.
+	/**
+	 * Sets the new persistent cached object.
 	 *
 	 * @param object
 	 *            the new new persistent cached object
 	 */
-    void setNewPersistentCachedObject(Serializable object);
+	void setNewPersistentCachedObject(Serializable object);
 
-    /** Gets the transient cached object.
+	/**
+	 * Gets the transient cached object.
 	 *
 	 * @return the transient cached object
 	 */
-    Object getTransientCachedObject();
+	Object getTransientCachedObject();
 
-    /**
-     * Caches an object in main memory, provided caching is allowed and there's
-     * enough memory to do so. The object is associated with the current
-     * response URL.
-     *
-     * @param object
-     *            An object.
-     * @param approxSize
-     *            The approximate byte size the object occupies in memory. Note
-     *            that values less than the size of the response in bytes are
-     *            assumed to be in error.
-     */
-    void setNewTransientCachedObject(Object object, int approxSize);
+	/**
+	 * Caches an object in main memory, provided caching is allowed and there's
+	 * enough memory to do so. The object is associated with the current
+	 * response URL.
+	 *
+	 * @param object
+	 *            An object.
+	 * @param approxSize
+	 *            The approximate byte size the object occupies in memory. Note
+	 *            that values less than the size of the response in bytes are
+	 *            assumed to be in error.
+	 */
+	void setNewTransientCachedObject(Object object, int approxSize);
 
-    /** Gets the transient cached object size.
+	/**
+	 * Gets the transient cached object size.
 	 *
 	 * @return the transient cached object size
 	 */
-    int getTransientCachedObjectSize();
+	int getTransientCachedObjectSize();
 
-    /** Gets the date.
+	/**
+	 * Gets the date.
 	 *
 	 * @return the date
 	 */
-    Date getDate();
+	Date getDate();
 
-    /** Gets the request type.
+	/**
+	 * Gets the request type.
 	 *
 	 * @return the request type
 	 */
-    RequestType getRequestType();
+	RequestType getRequestType();
 }

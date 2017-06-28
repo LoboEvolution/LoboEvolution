@@ -28,21 +28,22 @@ import org.lobobrowser.html.renderer.RBlockViewport;
  */
 public class EmLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new em layout.
-     */
-    public EmLayout() {
-        super(DISPLAY_INLINE);
-    }
+	/**
+	 * Instantiates a new em layout.
+	 */
+	public EmLayout() {
+		super(DISPLAY_INLINE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
-     * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        super.layoutMarkup(bodyLayout, markupElement);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
+	 * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		super.layoutMarkup(bodyLayout, markupElement);
+	}
 }

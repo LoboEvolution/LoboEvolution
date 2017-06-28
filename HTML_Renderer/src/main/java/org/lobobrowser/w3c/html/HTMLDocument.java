@@ -31,12 +31,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.views.AbstractView;
 
-
 /**
  * The Interface HTMLDocument.
  */
 public interface HTMLDocument extends Document, EventTarget {
-	
+
 	/**
 	 * Gets the location.
 	 *
@@ -114,7 +113,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Gets the element.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 * @return the element
 	 */
 	public Object getElement(String name);
@@ -216,7 +216,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Gets the elements by name.
 	 *
-	 * @param elementName the element name
+	 * @param elementName
+	 *            the element name
 	 * @return the elements by name
 	 */
 	public NodeList getElementsByName(String elementName);
@@ -251,7 +252,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Open.
 	 *
-	 * @param type the type
+	 * @param type
+	 *            the type
 	 * @return the HTML document
 	 */
 	public HTMLDocument open(String type);
@@ -259,8 +261,10 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Open.
 	 *
-	 * @param type the type
-	 * @param replace the replace
+	 * @param type
+	 *            the type
+	 * @param replace
+	 *            the replace
 	 * @return the HTML document
 	 */
 	public HTMLDocument open(String type, String replace);
@@ -309,7 +313,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Exec command.
 	 *
-	 * @param commandId the command id
+	 * @param commandId
+	 *            the command id
 	 * @return true, if successful
 	 */
 	public boolean execCommand(String commandId);
@@ -317,8 +322,10 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Exec command.
 	 *
-	 * @param commandId the command id
-	 * @param showUI the show ui
+	 * @param commandId
+	 *            the command id
+	 * @param showUI
+	 *            the show ui
 	 * @return true, if successful
 	 */
 	public boolean execCommand(String commandId, boolean showUI);
@@ -326,9 +333,12 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Exec command.
 	 *
-	 * @param commandId the command id
-	 * @param showUI the show ui
-	 * @param value the value
+	 * @param commandId
+	 *            the command id
+	 * @param showUI
+	 *            the show ui
+	 * @param value
+	 *            the value
 	 * @return true, if successful
 	 */
 	public boolean execCommand(String commandId, boolean showUI, String value);
@@ -336,7 +346,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Query command enabled.
 	 *
-	 * @param commandId the command id
+	 * @param commandId
+	 *            the command id
 	 * @return true, if successful
 	 */
 	public boolean queryCommandEnabled(String commandId);
@@ -344,7 +355,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Query command indeterm.
 	 *
-	 * @param commandId the command id
+	 * @param commandId
+	 *            the command id
 	 * @return true, if successful
 	 */
 	public boolean queryCommandIndeterm(String commandId);
@@ -352,7 +364,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Query command state.
 	 *
-	 * @param commandId the command id
+	 * @param commandId
+	 *            the command id
 	 * @return true, if successful
 	 */
 	public boolean queryCommandState(String commandId);
@@ -360,7 +373,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Query command supported.
 	 *
-	 * @param commandId the command id
+	 * @param commandId
+	 *            the command id
 	 * @return true, if successful
 	 */
 	public boolean queryCommandSupported(String commandId);
@@ -368,7 +382,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Query command value.
 	 *
-	 * @param commandId the command id
+	 * @param commandId
+	 *            the command id
 	 * @return the string
 	 */
 	public String queryCommandValue(String commandId);
@@ -1288,11 +1303,16 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Evaluate.
 	 *
-	 * @param expression the expression
-	 * @param contextNode the context node
-	 * @param resolver the resolver
-	 * @param type the type
-	 * @param result the result
+	 * @param expression
+	 *            the expression
+	 * @param contextNode
+	 *            the context node
+	 * @param resolver
+	 *            the resolver
+	 * @param type
+	 *            the type
+	 * @param result
+	 *            the result
 	 * @return the x path result impl
 	 */
 	XPathResultImpl evaluate(String expression, HTMLElement contextNode, XPathNSResolverImpl resolver, Short type,
@@ -1301,41 +1321,54 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Adds the event listener.
 	 *
-	 * @param script the script
-	 * @param function the function
+	 * @param script
+	 *            the script
+	 * @param function
+	 *            the function
 	 */
 	void addEventListener(String script, Function function);
 
 	/**
 	 * Removes the event listener.
 	 *
-	 * @param script the script
-	 * @param function the function
-	 * @param bool the bool
+	 * @param script
+	 *            the script
+	 * @param function
+	 *            the function
+	 * @param bool
+	 *            the bool
 	 */
+	@Override
 	void removeEventListener(String script, Function function, boolean bool);
 
 	/**
 	 * Adds the event listener.
 	 *
-	 * @param script the script
-	 * @param function the function
-	 * @param bool the bool
+	 * @param script
+	 *            the script
+	 * @param function
+	 *            the function
+	 * @param bool
+	 *            the bool
 	 */
+	@Override
 	void addEventListener(String script, Function function, boolean bool);
 
 	/**
 	 * Removes the event listener.
 	 *
-	 * @param script the script
-	 * @param function the function
+	 * @param script
+	 *            the script
+	 * @param function
+	 *            the function
 	 */
 	void removeEventListener(String script, Function function);
 
 	/**
 	 * Query selector all.
 	 *
-	 * @param selectors the selectors
+	 * @param selectors
+	 *            the selectors
 	 * @return the node list
 	 */
 	NodeList querySelectorAll(String selectors);
@@ -1343,7 +1376,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Query selector.
 	 *
-	 * @param selectors the selectors
+	 * @param selectors
+	 *            the selectors
 	 * @return the element
 	 */
 	Element querySelector(String selectors);
@@ -1351,7 +1385,8 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Gets the elements by class name.
 	 *
-	 * @param classNames the class names
+	 * @param classNames
+	 *            the class names
 	 * @return the elements by class name
 	 */
 	NodeList getElementsByClassName(String classNames);
@@ -1380,14 +1415,16 @@ public interface HTMLDocument extends Document, EventTarget {
 	/**
 	 * Writeln.
 	 *
-	 * @param text the text
+	 * @param text
+	 *            the text
 	 */
 	void writeln(String text);
 
 	/**
 	 * Write.
 	 *
-	 * @param text the text
+	 * @param text
+	 *            the text
 	 */
 	void write(String text);
 }

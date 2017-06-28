@@ -25,39 +25,41 @@ package org.lobobrowser.clientlet;
  */
 public class ClientletAccess {
 
-    /** The Constant currentClientletContext. */
-    private static final ThreadLocal<ClientletContext> currentClientletContext = new ThreadLocal<ClientletContext>();
+	/** The Constant currentClientletContext. */
+	private static final ThreadLocal<ClientletContext> currentClientletContext = new ThreadLocal<ClientletContext>();
 
-    /**
-     * Instantiates a new clientlet access.
-     */
-    private ClientletAccess() {
-    }
+	/**
+	 * Instantiates a new clientlet access.
+	 */
+	private ClientletAccess() {
+	}
 
-    /** Gets the Constant currentClientletContext.
+	/**
+	 * Gets the Constant currentClientletContext.
 	 *
 	 * @return the Constant currentClientletContext
 	 */
-    public static ClientletContext getCurrentClientletContext() {
-        ClientletContext ctx = currentClientletContext.get();
-        if (ctx != null) {
-            return ctx;
-        } else {
-            ThreadGroup td = Thread.currentThread().getThreadGroup();
-            if (td instanceof ClientletThreadGroup) {
-                return ((ClientletThreadGroup) td).getClientletContext();
-            } else {
-                return null;
-            }
-        }
-    }
+	public static ClientletContext getCurrentClientletContext() {
+		ClientletContext ctx = currentClientletContext.get();
+		if (ctx != null) {
+			return ctx;
+		} else {
+			ThreadGroup td = Thread.currentThread().getThreadGroup();
+			if (td instanceof ClientletThreadGroup) {
+				return ((ClientletThreadGroup) td).getClientletContext();
+			} else {
+				return null;
+			}
+		}
+	}
 
-    /** Sets the Constant currentClientletContext.
+	/**
+	 * Sets the Constant currentClientletContext.
 	 *
 	 * @param context
 	 *            the new Constant currentClientletContext
 	 */
-    public static void setCurrentClientletContext(ClientletContext context) {
-        currentClientletContext.set(context);
-    }
+	public static void setCurrentClientletContext(ClientletContext context) {
+		currentClientletContext.set(context);
+	}
 }

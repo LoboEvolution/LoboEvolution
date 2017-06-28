@@ -27,32 +27,31 @@ import java.util.List;
  */
 public class CacheInfo {
 
-    /** The approximate size. */
-    private long approximateSize;
+	/** The approximate size. */
+	private long approximateSize;
 
-    /** The num entries. */
-    private int numEntries;
+	/** The num entries. */
+	private int numEntries;
 
-    /** The entry info list. */
-    private java.util.List entryInfoList;
+	/** The entry info list. */
+	private java.util.List entryInfoList;
 
-    /**
-     * Instantiates a new cache info.
-     *
-     * @param approximateSize
-     *            the approximate size
-     * @param numEntries
-     *            the num entries
-     * @param entryInfoList
-     *            the entry info list
-     */
-    public CacheInfo(final long approximateSize, final int numEntries,
-            final List entryInfoList) {
-        super();
-        this.approximateSize = approximateSize;
-        this.numEntries = numEntries;
-        this.entryInfoList = entryInfoList;
-    }
+	/**
+	 * Instantiates a new cache info.
+	 *
+	 * @param approximateSize
+	 *            the approximate size
+	 * @param numEntries
+	 *            the num entries
+	 * @param entryInfoList
+	 *            the entry info list
+	 */
+	public CacheInfo(final long approximateSize, final int numEntries, final List entryInfoList) {
+		super();
+		this.approximateSize = approximateSize;
+		this.numEntries = numEntries;
+		this.entryInfoList = entryInfoList;
+	}
 
 	/**
 	 * Gets the approximate size.

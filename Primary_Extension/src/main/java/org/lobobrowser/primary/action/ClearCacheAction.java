@@ -25,7 +25,6 @@ import java.awt.event.ActionEvent;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.primary.ext.ActionPool;
 import org.lobobrowser.primary.ext.ComponentSource;
 import org.lobobrowser.store.CacheManager;
@@ -35,7 +34,7 @@ import org.lobobrowser.ua.NavigatorWindow;
  * The Class ClearCacheAction.
  */
 public class ClearCacheAction extends ActionPool {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 

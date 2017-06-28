@@ -62,12 +62,12 @@ public class ShowBookmarksAction extends ActionPool {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof Frame)) {
 			throw new IllegalStateException("Bookmarks dialog only supported when an AWT Frame is available.");
 		}
-		
+
 		BookmarksDialog dialog = new BookmarksDialog(window);
 		dialog.setTitle("Bookmarks");
 		dialog.setLocationByPlatform(true);

@@ -26,75 +26,76 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * The Class SelectorMatcher.
  */
 public class SelectorMatcher {
-	
+
 	/** The op equal. */
 	public final static String OP_EQUAL = "=";
-	
+
 	/** The op tilde equal. */
 	public final static String OP_TILDE_EQUAL = "~=";
-	
+
 	/** The op pipe equal. */
 	public final static String OP_PIPE_EQUAL = "|=";
-	
+
 	/** The op dollar equal. */
 	public final static String OP_DOLLAR_EQUAL = "$=";
-	
+
 	/** The op circumflex equal. */
 	public final static String OP_CIRCUMFLEX_EQUAL = "^=";
-	
+
 	/** The op star equal. */
 	public final static String OP_STAR_EQUAL = "*=";
-	
+
 	/** The op all. */
 	public final static String OP_ALL = "ALL";
 
 	/** The last child. */
 	public final static String LAST_CHILD = "last-child";
-	
+
 	/** The last of type . */
 	public final static String LAST_OF_TYPE = "last-of-type";
-	
+
 	/** The first child. */
 	public final static String FIRST_CHILD = "first-child";
-	
+
 	/** The first of type. */
 	public final static String FIRST_OF_TYPE = "first-of-type";
-	
+
 	/** The only child. */
 	public final static String ONLY_CHILD = "only-child";
-	
+
 	/** The only of type. */
 	public final static String ONLY_OF_TYPE = "only-of-type";
-	
+
 	/** The nth child. */
 	public final static String NTH_CHILD = "nth-child";
-	
+
 	/** The nth last child. */
 	public final static String NTH_LAST_CHILD = "nth-last-child";
-	
+
 	/** The nth of type. */
 	public final static String NTH_OF_TYPE = "nth-of-type";
-	
+
 	/** The nth last of type. */
 	public final static String NTH_LAST_OF_TYPE = "nth-last-of-type";
-	
+
 	/** The hover. */
 	public final static String HOVER = "hover";
-	
+
 	/** The root. */
-	public final static String ROOT ="root";
-	
+	public final static String ROOT = "root";
+
 	/** The empty. */
 	public final static String EMPTY = "empty";
-	
+
 	/** The lang. */
 	public final static String LANG = "lang";
-	
+
 	/** The Constant ANCESTOR. */
 	public final static int ANCESTOR = 0;
 
@@ -103,10 +104,10 @@ public class SelectorMatcher {
 
 	/** The Constant PRECEEDING_SIBLING. */
 	public final static int PRECEEDING_SIBLING = 2;
-	
+
 	/** The Constant ODD. */
 	private String ODD = "odd";
-	
+
 	/** The Constant ODD. */
 	private String EVEN = "even";
 
@@ -119,8 +120,9 @@ public class SelectorMatcher {
 	/** The selector type. */
 	private int selectorType;
 
-	public SelectorMatcher() {}
-	
+	public SelectorMatcher() {
+	}
+
 	/**
 	 * Instantiates a new simple selector.
 	 *
@@ -148,7 +150,7 @@ public class SelectorMatcher {
 			return this.pseudoElement == null;
 		} else {
 			String pe = this.pseudoElement;
-			return (pe == null) || names.contains(pe);
+			return pe == null || names.contains(pe);
 		}
 	}
 
@@ -164,11 +166,12 @@ public class SelectorMatcher {
 			return this.pseudoElement == null;
 		} else {
 			String pe = this.pseudoElement;
-			
-			if (pe != null && pe.contains("(")) 
+
+			if (pe != null && pe.contains("(")) {
 				pe = pe.substring(0, pe.indexOf("("));
-			
-			return (pe == null) || names.contains(pe);
+			}
+
+			return pe == null || names.contains(pe);
 		}
 	}
 
@@ -184,7 +187,7 @@ public class SelectorMatcher {
 			return this.pseudoElement == null;
 		} else {
 			String pe = this.pseudoElement;
-			return (pe == null) || pseudoName.equals(pe);
+			return pe == null || pseudoName.equals(pe);
 		}
 	}
 
@@ -209,7 +212,7 @@ public class SelectorMatcher {
 	 * @return {@code true} or {@code false}
 	 */
 	public boolean matchesPseudoClassSelector(String selector, DOMNodeImpl node, int c) {
-		
+
 		String cnt = "";
 		String select = selector;
 		if (selector != null && selector.contains("(")) {
@@ -233,60 +236,60 @@ public class SelectorMatcher {
 			return matchesChild(node, 0, 1, true, false) && matchesChild(node, 0, 1, true, true);
 		case ROOT:
 			DOMNodeImpl parentDOMNodeImpl = (DOMNodeImpl) node.getParentNode();
-			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == DOMNodeImpl.DOCUMENT_TYPE_NODE;
-		case EMPTY: 
-			return isEmpty(node);	
+			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_TYPE_NODE;
+		case EMPTY:
+			return isEmpty(node);
 		case NTH_CHILD:
 			cnt = getValue(NTH_CHILD, select);
-			if(EVEN.equals(cnt) || ODD.equals(cnt)){
-				if(EVEN.equals(cnt) && isEven(c)){
+			if (EVEN.equals(cnt) || ODD.equals(cnt)) {
+				if (EVEN.equals(cnt) && isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
-				} else if(ODD.equals(cnt) && !isEven(c)){
+				} else if (ODD.equals(cnt) && !isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
-				} else{
+				} else {
 					return false;
-				}	
-			} else{
-				if(cnt.contains("n+")){
+				}
+			} else {
+				if (cnt.contains("n+")) {
 					String[] split = cnt.split("n\\+");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
 					return matchesChild(node, a, b, true, false);
-				} else if(cnt.contains("n-")){
+				} else if (cnt.contains("n-")) {
 					String[] split = cnt.split("n\\-");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
-					return matchesChild(node, a, (a-b), true, false);
-				} else if(cnt.contains("n")){
+					return matchesChild(node, a, a - b, true, false);
+				} else if (cnt.contains("n")) {
 					String[] split = cnt.split("n");
 					int a = Integer.valueOf(split[0]).intValue();
 					return matchesChild(node, a, a, true, false);
-				} else{
+				} else {
 					return matchesChild(node, 0, Integer.valueOf(cnt).intValue(), true, false);
 				}
 			}
 		case NTH_LAST_CHILD:
-			cnt= getValue(NTH_LAST_CHILD, select);
-			if(EVEN.equals(cnt) || ODD.equals(cnt)){
-				if(EVEN.equals(cnt) && isEven(c)){
+			cnt = getValue(NTH_LAST_CHILD, select);
+			if (EVEN.equals(cnt) || ODD.equals(cnt)) {
+				if (EVEN.equals(cnt) && isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
-				} else if(ODD.equals(cnt) && !isEven(c)){
+				} else if (ODD.equals(cnt) && !isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
-				} else{
+				} else {
 					return false;
-				}	
-			} else{
-				if(cnt.contains("n+")){
+				}
+			} else {
+				if (cnt.contains("n+")) {
 					String[] split = cnt.split("n\\+");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
 					return matchesChild(node, a, b, true, true);
-				} else if(cnt.contains("n-")){
+				} else if (cnt.contains("n-")) {
 					String[] split = cnt.split("n\\-");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
-					return matchesChild(node, a, (a-b), true, true);
-				} else if(cnt.contains("n")){
+					return matchesChild(node, a, a - b, true, true);
+				} else if (cnt.contains("n")) {
 					String[] split = cnt.split("n");
 					int a = Integer.valueOf(split[0]).intValue();
 					return matchesChild(node, a, a, true, true);
@@ -295,27 +298,27 @@ public class SelectorMatcher {
 				}
 			}
 		case NTH_OF_TYPE:
-			cnt= getValue(NTH_OF_TYPE, select);
-			if(EVEN.equals(cnt) || ODD.equals(cnt)){
-				if(EVEN.equals(cnt) && isEven(c)){
+			cnt = getValue(NTH_OF_TYPE, select);
+			if (EVEN.equals(cnt) || ODD.equals(cnt)) {
+				if (EVEN.equals(cnt) && isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
-				} else if(ODD.equals(cnt) && !isEven(c)){
+				} else if (ODD.equals(cnt) && !isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, false);
-				} else{
+				} else {
 					return false;
-				}	
-			} else{
-				if(cnt.contains("n+")){
+				}
+			} else {
+				if (cnt.contains("n+")) {
 					String[] split = cnt.split("n\\+");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
 					return matchesChild(node, a, b, true, false);
-				} else if(cnt.contains("n-")){
+				} else if (cnt.contains("n-")) {
 					String[] split = cnt.split("n\\-");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
-					return matchesChild(node, a, (a-b), true, false);
-				} else if(cnt.contains("n")){
+					return matchesChild(node, a, a - b, true, false);
+				} else if (cnt.contains("n")) {
 					String[] split = cnt.split("n");
 					int a = Integer.valueOf(split[0]).intValue();
 					return matchesChild(node, a, a, true, false);
@@ -324,27 +327,27 @@ public class SelectorMatcher {
 				}
 			}
 		case NTH_LAST_OF_TYPE:
-			cnt= getValue(NTH_LAST_OF_TYPE, select);
-			if(EVEN.equals(cnt) || ODD.equals(cnt)){
-				if(EVEN.equals(cnt) && isEven(c)){
+			cnt = getValue(NTH_LAST_OF_TYPE, select);
+			if (EVEN.equals(cnt) || ODD.equals(cnt)) {
+				if (EVEN.equals(cnt) && isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
-				} else if(ODD.equals(cnt) && !isEven(c)){
+				} else if (ODD.equals(cnt) && !isEven(c)) {
 					return matchesChild(node, 0, Integer.valueOf(c).intValue(), true, true);
-				} else{
+				} else {
 					return false;
-				}	
-			} else{
-				if(cnt.contains("n+")){
+				}
+			} else {
+				if (cnt.contains("n+")) {
 					String[] split = cnt.split("n\\+");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
 					return matchesChild(node, a, b, true, true);
-				} else if(cnt.contains("n-")){
+				} else if (cnt.contains("n-")) {
 					String[] split = cnt.split("n\\-");
 					int a = Integer.valueOf(split[0]).intValue();
 					int b = Integer.valueOf(split[1]).intValue();
-					return matchesChild(node, a, (a-b), true, true);
-				} else if(cnt.contains("n")){
+					return matchesChild(node, a, a - b, true, true);
+				} else if (cnt.contains("n")) {
 					String[] split = cnt.split("n");
 					int a = Integer.valueOf(split[0]).intValue();
 					return matchesChild(node, a, a, true, true);
@@ -356,11 +359,11 @@ public class SelectorMatcher {
 			String value = getValue(LANG, select);
 			NamedNodeMap attributes = node.getAttributes();
 			for (int s = 0; s < attributes.getLength(); s++) {
-                Attr attr = (Attr) attributes.item(s);
-                if(LANG.equals(attr.getName()) && value.equals(attr.getValue())){
-                	return true;
-                }
-			 }
+				Attr attr = (Attr) attributes.item(s);
+				if (LANG.equals(attr.getName()) && value.equals(attr.getValue())) {
+					return true;
+				}
+			}
 			return false;
 		default:
 			return false;
@@ -387,9 +390,9 @@ public class SelectorMatcher {
 
 			if (n == null) {
 				n = (DOMNodeImpl) node.getParentNode();
-				return n != null && n.getNodeType() != DOMNodeImpl.DOCUMENT_TYPE_NODE;
+				return n != null && n.getNodeType() != Node.DOCUMENT_TYPE_NODE;
 			} else {
-				if (n.getNodeType() == DOMNodeImpl.ELEMENT_NODE) {
+				if (n.getNodeType() == Node.ELEMENT_NODE) {
 					return false;
 				}
 
@@ -415,7 +418,7 @@ public class SelectorMatcher {
 	 */
 	private boolean matchesChild(DOMNodeImpl node, int a, int b, boolean isOfType, boolean fromEnd) {
 		DOMNodeImpl parentDOMNodeImpl = (DOMNodeImpl) node.getParentNode();
-		if (parentDOMNodeImpl == null || parentDOMNodeImpl.getNodeType() == DOMNodeImpl.DOCUMENT_TYPE_NODE) {
+		if (parentDOMNodeImpl == null || parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_TYPE_NODE) {
 			return false;
 		}
 
@@ -434,7 +437,7 @@ public class SelectorMatcher {
 			}
 
 			n = sibling;
-			if (n.getNodeType() == DOMNodeImpl.ELEMENT_NODE) {
+			if (n.getNodeType() == Node.ELEMENT_NODE) {
 				if (isOfType) {
 					if (node.getNodeName().equals(n.getNodeName())) {
 						++i;
@@ -449,23 +452,24 @@ public class SelectorMatcher {
 			return b == i;
 		}
 
-		return ((i - b) / a) >= 0 && ((i - b) % a) == 0;
+		return (i - b) / a >= 0 && (i - b) % a == 0;
 	}
-	
+
 	/**
-	 *  Matches a empty.
+	 * Matches a empty.
 	 *
 	 * @param node
 	 *            The root node.
-	 *            
+	 * 
 	 * @return {@code true} or {@code false}
 	 */
 	private static boolean isEmpty(DOMNodeImpl node) {
-		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child.getNextSibling()) {
+		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child
+				.getNextSibling()) {
 			switch (child.getNodeType()) {
-			case DOMNodeImpl.ELEMENT_NODE:
+			case Node.ELEMENT_NODE:
 				return false;
-			case DOMNodeImpl.TEXT_NODE:
+			case Node.TEXT_NODE:
 				String data = child.getNodeName();
 				if (data != null && !data.isEmpty()) {
 					return false;
@@ -474,19 +478,18 @@ public class SelectorMatcher {
 		}
 		return true;
 	}
-	
-	
-	private boolean isEven(int number){
-		 if(number%2 == 0){
-             return true;
-		 }
-      return false;
+
+	private boolean isEven(int number) {
+		if (number % 2 == 0) {
+			return true;
+		}
+		return false;
 	}
-	
-	private String getValue(String selector, String select){
-		return select.replace(selector, "").replace("(","").replace(")","").trim();
+
+	private String getValue(String selector, String select) {
+		return select.replace(selector, "").replace("(", "").replace(")", "").trim();
 	}
-	
+
 	/**
 	 * Gets the selector type.
 	 *

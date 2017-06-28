@@ -24,18 +24,18 @@ package org.lobobrowser.http;
  * The Interface Method.
  */
 public interface Method {
-    /** The get. */
-    String GET = "";
-    /** The put. */
-    String PUT = "";
-    /** The post. */
-    String POST = "";
-    /** The delete. */
-    String DELETE = "";
-    /** The head. */
-    String HEAD = "";
-    /** The options. */
-    String OPTIONS = "";
-    /** The trace. */
-    String TRACE = "";
+	/** The get. */
+	String GET = "";
+	/** The put. */
+	String PUT = "";
+	/** The post. */
+	String POST = "";
+	/** The delete. */
+	String DELETE = "";
+	/** The head. */
+	String HEAD = "";
+	/** The options. */
+	String OPTIONS = "";
+	/** The trace. */
+	String TRACE = "";
 }

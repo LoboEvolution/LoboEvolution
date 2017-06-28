@@ -24,12 +24,11 @@ package org.lobobrowser.w3c.xpath;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface XPathNamespace.
  */
 public interface XPathNamespace extends Node {
-	
+
 	/** The Constant XPATH_NAMESPACE_NODE. */
 	// XPathNamespace
 	public static final short XPATH_NAMESPACE_NODE = 13;

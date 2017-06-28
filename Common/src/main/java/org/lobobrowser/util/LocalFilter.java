@@ -26,22 +26,24 @@ import java.lang.ref.WeakReference;
  * The Class LocalFilter.
  */
 public class LocalFilter implements ObjectFilter {
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.util.ObjectFilter#decode(Object)
-     */
-    @Override
-    public Object decode(Object source) {
-        WeakReference<?> wf = (WeakReference<?>) source;
-        return wf == null ? null : wf.get();
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.util.ObjectFilter#encode(Object)
-     */
-    @Override
-    public Object encode(Object source) {
-        throw new UnsupportedOperationException("Read-only collection.");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.util.ObjectFilter#decode(Object)
+	 */
+	@Override
+	public Object decode(Object source) {
+		WeakReference<?> wf = (WeakReference<?>) source;
+		return wf == null ? null : wf.get();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.util.ObjectFilter#encode(Object)
+	 */
+	@Override
+	public Object encode(Object source) {
+		throw new UnsupportedOperationException("Read-only collection.");
+	}
 }

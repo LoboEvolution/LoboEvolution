@@ -23,7 +23,6 @@ package org.lobobrowser.html.layout;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
@@ -76,7 +75,7 @@ public abstract class CommonWidgetLayout implements MarkupLayout {
 		AbstractCSS2Properties style = markupElement.getCurrentStyle();
 		if (style != null) {
 			String display = style.getDisplay();
-			if ((display != null) && "none".equalsIgnoreCase(display)) {
+			if (display != null && "none".equalsIgnoreCase(display)) {
 				return;
 			}
 		}

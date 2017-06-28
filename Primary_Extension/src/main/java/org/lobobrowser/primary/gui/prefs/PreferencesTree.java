@@ -152,7 +152,7 @@ public class PreferencesTree extends JTree {
 			}
 		};
 	}
-	
+
 	/**
 	 * Gets the look and feels settings info.
 	 *

@@ -30,66 +30,71 @@ import org.mozilla.javascript.Function;
 /**
  * The Class HTMLFrameSetElementImpl.
  */
-public class HTMLFrameSetElementImpl extends HTMLElementImpl implements
-HTMLFrameSetElement {
+public class HTMLFrameSetElementImpl extends HTMLElementImpl implements HTMLFrameSetElement {
 
-    /**
-     * Instantiates a new HTML frame set element impl.
-     *
-     * @param name
-     *            the name
-     * @param noStyleSheet
-     *            the no style sheet
-     */
-    public HTMLFrameSetElementImpl(String name, boolean noStyleSheet) {
-        super(name, noStyleSheet);
-    }
+	/**
+	 * Instantiates a new HTML frame set element impl.
+	 *
+	 * @param name
+	 *            the name
+	 * @param noStyleSheet
+	 *            the no style sheet
+	 */
+	public HTMLFrameSetElementImpl(String name, boolean noStyleSheet) {
+		super(name, noStyleSheet);
+	}
 
-    /**
-     * Instantiates a new HTML frame set element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLFrameSetElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML frame set element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLFrameSetElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameSetElement#getCols()
-     */
-    @Override
-    public String getCols() {
-        return this.getAttribute(HtmlAttributeProperties.COLS);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameSetElement#getCols()
+	 */
+	@Override
+	public String getCols() {
+		return this.getAttribute(HtmlAttributeProperties.COLS);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameSetElement#setCols(java.lang.String)
-     */
-    @Override
-    public void setCols(String cols) {
-        this.setAttribute(HtmlAttributeProperties.COLS, cols);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLFrameSetElement#setCols(java.lang.String)
+	 */
+	@Override
+	public void setCols(String cols) {
+		this.setAttribute(HtmlAttributeProperties.COLS, cols);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameSetElement#getRows()
-     */
-    @Override
-    public String getRows() {
-        return this.getAttribute(HtmlAttributeProperties.ROWS);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLFrameSetElement#getRows()
+	 */
+	@Override
+	public String getRows() {
+		return this.getAttribute(HtmlAttributeProperties.ROWS);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLFrameSetElement#setRows(java.lang.String)
-     */
-    @Override
-    public void setRows(String rows) {
-        this.setAttribute(HtmlAttributeProperties.ROWS, rows);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLFrameSetElement#setRows(java.lang.String)
+	 */
+	@Override
+	public void setRows(String rows) {
+		this.setAttribute(HtmlAttributeProperties.ROWS, rows);
+	}
 
 	@Override
 	public Function getOnafterprint() {
@@ -100,7 +105,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnafterprint(Function onafterprint) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -112,7 +117,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnbeforeprint(Function onbeforeprint) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -124,7 +129,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnbeforeunload(Function onbeforeunload) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -136,7 +141,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnhashchange(Function onhashchange) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -148,7 +153,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnmessage(Function onmessage) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -160,7 +165,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnoffline(Function onoffline) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -172,7 +177,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnonline(Function ononline) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -184,7 +189,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnpagehide(Function onpagehide) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -196,7 +201,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnpageshow(Function onpageshow) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -208,7 +213,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnpopstate(Function onpopstate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -220,7 +225,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnredo(Function onredo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -232,7 +237,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnresize(Function onresize) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -244,7 +249,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnstorage(Function onstorage) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -256,7 +261,7 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnundo(Function onundo) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -268,6 +273,6 @@ HTMLFrameSetElement {
 	@Override
 	public void setOnunload(Function onunload) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

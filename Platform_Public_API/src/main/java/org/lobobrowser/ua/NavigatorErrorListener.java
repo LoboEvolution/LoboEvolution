@@ -28,11 +28,11 @@ package org.lobobrowser.ua;
  */
 public interface NavigatorErrorListener extends java.util.EventListener {
 
-    /**
-     * Error ocurred.
-     *
-     * @param event
-     *            the event
-     */
-    void errorOcurred(NavigatorExceptionEvent event);
+	/**
+	 * Error ocurred.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void errorOcurred(NavigatorExceptionEvent event);
 }

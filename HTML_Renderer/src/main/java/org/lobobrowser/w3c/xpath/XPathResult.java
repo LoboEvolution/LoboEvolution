@@ -24,40 +24,39 @@ package org.lobobrowser.w3c.xpath;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface XPathResult.
  */
 public interface XPathResult {
-	
+
 	/** The Constant ANY_TYPE. */
 	// XPathResult
 	public static final short ANY_TYPE = 0;
-	
+
 	/** The Constant NUMBER_TYPE. */
 	public static final short NUMBER_TYPE = 1;
-	
+
 	/** The Constant STRING_TYPE. */
 	public static final short STRING_TYPE = 2;
-	
+
 	/** The Constant BOOLEAN_TYPE. */
 	public static final short BOOLEAN_TYPE = 3;
-	
+
 	/** The Constant UNORDERED_NODE_ITERATOR_TYPE. */
 	public static final short UNORDERED_NODE_ITERATOR_TYPE = 4;
-	
+
 	/** The Constant ORDERED_NODE_ITERATOR_TYPE. */
 	public static final short ORDERED_NODE_ITERATOR_TYPE = 5;
-	
+
 	/** The Constant UNORDERED_NODE_SNAPSHOT_TYPE. */
 	public static final short UNORDERED_NODE_SNAPSHOT_TYPE = 6;
-	
+
 	/** The Constant ORDERED_NODE_SNAPSHOT_TYPE. */
 	public static final short ORDERED_NODE_SNAPSHOT_TYPE = 7;
-	
+
 	/** The Constant ANY_UNORDERED_NODE_TYPE. */
 	public static final short ANY_UNORDERED_NODE_TYPE = 8;
-	
+
 	/** The Constant FIRST_ORDERED_NODE_TYPE. */
 	public static final short FIRST_ORDERED_NODE_TYPE = 9;
 
@@ -124,17 +123,21 @@ public interface XPathResult {
 	 * Iterate next.
 	 *
 	 * @return the node
-	 * @throws XPathException the x path exception
-	 * @throws DOMException the DOM exception
+	 * @throws XPathException
+	 *             the x path exception
+	 * @throws DOMException
+	 *             the DOM exception
 	 */
 	public Node iterateNext() throws XPathException, DOMException;
 
 	/**
 	 * Snapshot item.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the node
-	 * @throws XPathException the x path exception
+	 * @throws XPathException
+	 *             the x path exception
 	 */
 	public Node snapshotItem(int index) throws XPathException;
 }

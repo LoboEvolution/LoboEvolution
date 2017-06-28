@@ -26,7 +26,7 @@ import org.lobobrowser.w3c.svg.SVGPathSegCurvetoCubicAbs;
 public class SVGPathSegCurvetoCubicAbsImpl extends SVGPathSegImpl implements SVGPathSegCurvetoCubicAbs {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	private float x1;
 	private float x2;
 	private float y1;

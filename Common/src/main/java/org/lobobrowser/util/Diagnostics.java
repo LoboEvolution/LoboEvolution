@@ -29,24 +29,24 @@ package org.lobobrowser.util;
  * @author J. H. S.
  */
 public class Diagnostics {
-    /**
-     * Instantiates a new diagnostics.
-     */
-    private Diagnostics() {
-        super();
-    }
-    
-    /**
-     * Assert.
-     *
-     * @param condition
-     *            the condition
-     * @param message
-     *            the message
-     */
-    public static void Assert(boolean condition, String message) {
-        if (!condition) {
-            throw new AssertionError(message);
-        }
-    }
+	/**
+	 * Instantiates a new diagnostics.
+	 */
+	private Diagnostics() {
+		super();
+	}
+
+	/**
+	 * Assert.
+	 *
+	 * @param condition
+	 *            the condition
+	 * @param message
+	 *            the message
+	 */
+	public static void Assert(boolean condition, String message) {
+		if (!condition) {
+			throw new AssertionError(message);
+		}
+	}
 }

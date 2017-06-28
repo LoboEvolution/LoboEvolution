@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLKeygenElement.
  */
 public interface HTMLKeygenElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the autofocus.
 	 *
@@ -60,7 +59,9 @@ public interface HTMLKeygenElement extends HTMLElement {
 	 */
 	public void setChallenge(String challenge);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	@Override

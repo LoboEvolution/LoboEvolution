@@ -103,7 +103,7 @@ public class RTableCell extends RBlock {
 	protected Dimension doCellLayout(int width, int height, boolean expandWidth, boolean expandHeight, boolean sizeOnly,
 			boolean useCache) {
 		try {
-			
+
 			this.layout(width, height, expandWidth, expandHeight, null, sizeOnly);
 			return new Dimension(this.width, this.height);
 		} finally {
@@ -255,9 +255,9 @@ public class RTableCell extends RBlock {
 		String heightText = props == null ? null : props.getHeight();
 		if (heightText == null) {
 			return this.cellElement.getHeight();
-		} else if(INHERIT.equals(heightText)){
+		} else if (INHERIT.equals(heightText)) {
 			return this.cellElement.getParentStyle().getHeight();
-		}  else {
+		} else {
 			return heightText;
 		}
 	}
@@ -270,10 +270,10 @@ public class RTableCell extends RBlock {
 	public String getWidthText() {
 		AbstractCSS2Properties props = this.cellElement.getCurrentStyle();
 		String widthText = props == null ? null : props.getWidth();
-		
+
 		if (widthText == null) {
 			return this.cellElement.getWidth();
-		} else if(INHERIT.equals(widthText)){
+		} else if (INHERIT.equals(widthText)) {
 			return this.cellElement.getParentStyle().getWidth();
 		} else {
 			return widthText;
@@ -310,8 +310,8 @@ public class RTableCell extends RBlock {
 			for (int i = 0; i < colSpan; i++) {
 				int vc = vcol + i;
 				width += colSizes[vc].getActualSize();
-				if ((i + 1) < colSpan) {
-					width += cellSpacingX + (hasBorder * 2);
+				if (i + 1 < colSpan) {
+					width += cellSpacingX + hasBorder * 2;
 				}
 			}
 		} else {
@@ -323,8 +323,8 @@ public class RTableCell extends RBlock {
 			for (int i = 0; i < rowSpan; i++) {
 				int vr = vrow + i;
 				height += rowSizes[vr].getActualSize();
-				if ((i + 1) < rowSpan) {
-					height += cellSpacingY + (hasBorder * 2);
+				if (i + 1 < rowSpan) {
+					height += cellSpacingY + hasBorder * 2;
 				}
 			}
 		} else {

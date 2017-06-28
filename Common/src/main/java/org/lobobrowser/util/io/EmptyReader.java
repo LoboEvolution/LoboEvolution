@@ -27,20 +27,22 @@ import java.io.Reader;
  * The Class EmptyReader.
  */
 public class EmptyReader extends Reader {
-    /*
-     * (non-Javadoc)
-     * @see java.io.Reader#close()
-     */
-    @Override
-    public void close() throws IOException {
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.io.Reader#read(char[], int, int)
-     */
-    @Override
-    public int read(char[] cbuf, int off, int len) throws IOException {
-        return 0;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.Reader#close()
+	 */
+	@Override
+	public void close() throws IOException {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.Reader#read(char[], int, int)
+	 */
+	@Override
+	public int read(char[] cbuf, int off, int len) throws IOException {
+		return 0;
+	}
 }

@@ -24,6 +24,6 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 
 public interface SVGTransformable extends SVGLocatable {
 	public SVGAnimatedTransformList getTransform();
-	
+
 	public AbstractCSS2Properties getSVGStyle();
 }

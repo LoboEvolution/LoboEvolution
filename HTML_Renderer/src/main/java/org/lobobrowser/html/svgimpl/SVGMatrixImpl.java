@@ -30,7 +30,7 @@ import org.w3c.dom.DOMException;
 public class SVGMatrixImpl implements SVGMatrix {
 
 	private AffineTransform transform;
-	
+
 	private float a;
 	private float b;
 	private float c;
@@ -38,7 +38,8 @@ public class SVGMatrixImpl implements SVGMatrix {
 	private float e;
 	private float f;
 
-	public SVGMatrixImpl() {}
+	public SVGMatrixImpl() {
+	}
 
 	public SVGMatrixImpl(float a, float b, float c, float d, float e, float f) {
 		this.a = a;
@@ -178,20 +179,20 @@ public class SVGMatrixImpl implements SVGMatrix {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	/**
 	 * @return the transform
 	 */
 	public AffineTransform getTransform() {
 		return transform;
 	}
-	
+
 	/**
-	 * @param transform the transform to set
+	 * @param transform
+	 *            the transform to set
 	 */
 	public void setTransform(AffineTransform transform) {
 		this.transform = transform;
 	}
-
 
 }

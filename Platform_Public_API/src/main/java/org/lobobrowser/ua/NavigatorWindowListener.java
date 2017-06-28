@@ -30,54 +30,54 @@ import java.util.EventListener;
  */
 public interface NavigatorWindowListener extends EventListener {
 
-    /**
-     * Invoked after a connection request to a URL succeeds and the document
-     * starts loading. There is no guarantee that the document will render. For
-     * example, a download may be started instead.
-     * <p>
-     *
-     * @param event
-     *            the event
-     */
-    void documentAccessed(NavigatorWindowEvent event);
+	/**
+	 * Invoked after a connection request to a URL succeeds and the document
+	 * starts loading. There is no guarantee that the document will render. For
+	 * example, a download may be started instead.
+	 * <p>
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void documentAccessed(NavigatorWindowEvent event);
 
-    /**
-     * Invoked after a clientlet has set the document content. This could be
-     * when the document has rendered or is being rendered. This method is also
-     * called when a page error occurs.
-     * <p>
-     * This method is meant to be used by the primary extension in order to
-     * update the address bar.
-     *
-     * @param event
-     *            the event
-     */
-    void documentRendering(NavigatorWindowEvent event);
+	/**
+	 * Invoked after a clientlet has set the document content. This could be
+	 * when the document has rendered or is being rendered. This method is also
+	 * called when a page error occurs.
+	 * <p>
+	 * This method is meant to be used by the primary extension in order to
+	 * update the address bar.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void documentRendering(NavigatorWindowEvent event);
 
-    /**
-     * Invoked as a document loads in order to inform the listener of progress.
-     * <p>
-     * This method is meant to be used by the primary extension in order to
-     * update its progress bar. It is invoked outside the GUI dispatch thread.
-     *
-     * @param event
-     *            the event
-     */
-    void progressUpdated(NavigatorProgressEvent event);
+	/**
+	 * Invoked as a document loads in order to inform the listener of progress.
+	 * <p>
+	 * This method is meant to be used by the primary extension in order to
+	 * update its progress bar. It is invoked outside the GUI dispatch thread.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void progressUpdated(NavigatorProgressEvent event);
 
-    /**
-     * Invoked when the status message is updated.
-     *
-     * @param event
-     *            the event
-     */
-    void statusUpdated(NavigatorWindowEvent event);
+	/**
+	 * Invoked when the status message is updated.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void statusUpdated(NavigatorWindowEvent event);
 
-    /**
-     * Invoked when the default status message is updated.
-     *
-     * @param event
-     *            the event
-     */
-    void defaultStatusUpdated(NavigatorWindowEvent event);
+	/**
+	 * Invoked when the default status message is updated.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void defaultStatusUpdated(NavigatorWindowEvent event);
 }

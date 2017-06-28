@@ -73,7 +73,7 @@ public class HTMLOutputElementImpl extends HTMLElementImpl implements HTMLOutput
 	@Override
 	public HTMLFormElement getForm() {
 		Node parent = this.getParentNode();
-		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
 			parent = parent.getParentNode();
 		}
 		return (HTMLFormElement) parent;

@@ -47,19 +47,19 @@ import com.sun.pdfview.PDFPage;
  * PageChangeListener to be informed of when the user clicks one of the pages.
  */
 public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObserver {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(ThumbPanel.class);
+
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(ThumbPanel.class);
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6761217072379594185L;
-	
+
 	/** The PDFFile being displayed. */
 	PDFFile file;
-	
+
 	/** Array of images, one per page in the file. */
 	Image images[];
-	
+
 	/** Size of the border between images. */
 	int border = 2;
 	/**
@@ -76,7 +76,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * this array indicates the start of a new line of thumbnails.
 	 */
 	int xloc[];
-	
+
 	/** Thread that renders each thumbnail in turn. */
 	Thread anim;
 	/** Which thumbnail is selected, or -1 if no thumbnail selected. */
@@ -90,7 +90,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Whether the default width has been guesstimated for this PDFFile yet.
 	 */
 	boolean defaultNotSet = true;
-	
+
 	/** The PageChangeListener that is listening for page changes. */
 	PageChangeListener listener;
 
@@ -161,7 +161,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 				int wid = (int) Math.ceil((lineheight - border) * p.getAspectRatio());
 				int pagetowrite = workingon;
 
-				Image i = p.getImage(wid, (lineheight - border), null, this, true, true);
+				Image i = p.getImage(wid, lineheight - border, null, this, true, true);
 				images[pagetowrite] = i;
 
 				if (defaultNotSet) {
@@ -256,7 +256,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 					}
 				}
 				Rectangle r = new Rectangle(xloc[pagenum], y,
-						(images[pagenum] == null ? defaultWidth : images[pagenum].getWidth(null)), lineheight);
+						images[pagenum] == null ? defaultWidth : images[pagenum].getWidth(null), lineheight);
 				scrollRectToVisible(r);
 			}
 			showing = pagenum;
@@ -368,7 +368,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 		// if ((infoflags & ALLBITS)!=0) {
 		// flag.set();
 		// }
-		return ((infoflags & (ALLBITS | ERROR | ABORT)) == 0);
+		return (infoflags & (ALLBITS | ERROR | ABORT)) == 0;
 	}
 
 	@Override
@@ -378,7 +378,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 	@Override
 	public int getScrollableBlockIncrement(Rectangle visrect, int orientation, int direction) {
-		return Math.max(lineheight, (visrect.height / lineheight) * lineheight);
+		return Math.max(lineheight, visrect.height / lineheight * lineheight);
 	}
 
 	@Override

@@ -24,14 +24,14 @@ import org.lobobrowser.w3c.svg.SVGMatrix;
 import org.lobobrowser.w3c.svg.SVGTransform;
 
 public class SVGTransformImpl implements SVGTransform {
-	
+
 	private short transformType;
 	private SVGMatrix matrix;
-	
+
 	public SVGTransformImpl() {
 		this.transformType = SVGTransform.SVG_TRANSFORM_UNKNOWN;
 	}
-	
+
 	public SVGTransformImpl(short transformType) {
 		this.transformType = transformType;
 	}
@@ -54,15 +54,15 @@ public class SVGTransformImpl implements SVGTransform {
 
 	@Override
 	public void setMatrix(SVGMatrix matrix) {
-		this.matrix = matrix; 
-		
+		this.matrix = matrix;
+
 	}
 
 	@Override
 	public void setTranslate(float tx, float ty) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_TRANSLATE;
 		this.matrix = new SVGMatrixImpl(1, 0, 0, 1, tx, ty);
-		
+
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class SVGTransformImpl implements SVGTransform {
 	@Override
 	public void setRotate(float angle, float cx, float cy) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_ROTATE;
-		this.matrix = new SVGMatrixImpl(angle, cx, cy,  0.0f, 0.0f, 0.0f);
+		this.matrix = new SVGMatrixImpl(angle, cx, cy, 0.0f, 0.0f, 0.0f);
 	}
 
 	@Override
@@ -88,6 +88,6 @@ public class SVGTransformImpl implements SVGTransform {
 	public void setSkewY(float angle) {
 		this.transformType = SVGTransform.SVG_TRANSFORM_SKEWY;
 		this.matrix = new SVGMatrixImpl(1.0f, (float) Math.tan(angle), 0.0f, 1.0f, 0.0f, 0.0f);
-		
+
 	}
 }

@@ -36,72 +36,78 @@ import java.util.Map;
  * @author J. H. S.
  */
 public class GenericURLConnection extends URLConnection {
-    /** The input stream. */
-    private final InputStream inputStream;
-    
-    /**
-     * Instantiates a new generic url connection.
-     *
-     * @param url
-     *            the url
-     * @param in
-     *            the in
-     */
-    public GenericURLConnection(URL url, InputStream in) {
-        super(url);
-        this.inputStream = in;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#connect()
-     */
-    @Override
-    public void connect() throws IOException {
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getInputStream()
-     */
-    @Override
-    public InputStream getInputStream() throws IOException {
-        return this.inputStream;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderField(int)
-     */
-    @Override
-    public String getHeaderField(int n) {
-        return null;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderField(String)
-     */
-    @Override
-    public String getHeaderField(String name) {
-        return null;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderFieldKey(int)
-     */
-    @Override
-    public String getHeaderFieldKey(int n) {
-        return null;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderFields()
-     */
-    @Override
-    public Map getHeaderFields() {
-        return Collections.EMPTY_MAP;
-    }
+	/** The input stream. */
+	private final InputStream inputStream;
+
+	/**
+	 * Instantiates a new generic url connection.
+	 *
+	 * @param url
+	 *            the url
+	 * @param in
+	 *            the in
+	 */
+	public GenericURLConnection(URL url, InputStream in) {
+		super(url);
+		this.inputStream = in;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#connect()
+	 */
+	@Override
+	public void connect() throws IOException {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getInputStream()
+	 */
+	@Override
+	public InputStream getInputStream() throws IOException {
+		return this.inputStream;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderField(int)
+	 */
+	@Override
+	public String getHeaderField(int n) {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderField(String)
+	 */
+	@Override
+	public String getHeaderField(String name) {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderFieldKey(int)
+	 */
+	@Override
+	public String getHeaderFieldKey(int n) {
+		return null;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderFields()
+	 */
+	@Override
+	public Map getHeaderFields() {
+		return Collections.EMPTY_MAP;
+	}
 }

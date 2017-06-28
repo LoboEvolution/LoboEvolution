@@ -21,10 +21,10 @@
 package org.lobobrowser.js;
 
 import java.lang.reflect.Method;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.info.PropertyInfo;
 import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Function;
@@ -326,7 +326,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 		if (loggableInfo) {
 			logger.info("getDefaultValue(): hint=" + hint + ",this=" + this.getJavaObject());
 		}
-		if ((hint == null) || String.class.equals(hint)) {
+		if (hint == null || String.class.equals(hint)) {
 			Object javaObject = this.getJavaObject();
 			if (javaObject == null) {
 				throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");

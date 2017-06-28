@@ -33,7 +33,6 @@ import java.net.URLConnection;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.store.CacheManager;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
@@ -43,244 +42,238 @@ import org.lobobrowser.util.gui.ClassLoaderObjectInputStream;
  */
 public class CacheInfo {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(CacheInfo.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(CacheInfo.class.getName());
 
-    /** The Constant HEADER_REQUEST_TIME. */
-    static final String HEADER_REQUEST_TIME = "X-Request-Time";
+	/** The Constant HEADER_REQUEST_TIME. */
+	static final String HEADER_REQUEST_TIME = "X-Request-Time";
 
-    /** The url. */
-    private final URL url;
+	/** The url. */
+	private final URL url;
 
-    /** The memory entry. */
-    private final MemoryCacheEntry memoryEntry;
+	/** The memory entry. */
+	private final MemoryCacheEntry memoryEntry;
 
-    /** The persistent content. */
-    private final byte[] persistentContent;
+	/** The persistent content. */
+	private final byte[] persistentContent;
 
-    /** The connection. */
-    private URLConnection connection;
+	/** The connection. */
+	private URLConnection connection;
 
-    /**
-     * Instantiates a new cache info.
-     *
-     * @param memEntry
-     *            the mem entry
-     * @param persContent
-     *            the pers content
-     * @param url
-     *            the url
-     */
-    public CacheInfo(MemoryCacheEntry memEntry, byte[] persContent, URL url) {
-        super();
-        this.persistentContent = persContent;
-        this.url = url;
-        this.memoryEntry = memEntry;
-    }
+	/**
+	 * Instantiates a new cache info.
+	 *
+	 * @param memEntry
+	 *            the mem entry
+	 * @param persContent
+	 *            the pers content
+	 * @param url
+	 *            the url
+	 */
+	public CacheInfo(MemoryCacheEntry memEntry, byte[] persContent, URL url) {
+		super();
+		this.persistentContent = persContent;
+		this.url = url;
+		this.memoryEntry = memEntry;
+	}
 
-    /** Gets the URL connection.
+	/**
+	 * Gets the URL connection.
 	 *
 	 * @return the URL connection
 	 */
-    public final java.net.URLConnection getURLConnection() {
-        if (this.connection == null) {
-            MemoryCacheEntry memEntry = this.memoryEntry;
-            if (memEntry != null) {
-                this.connection = new MemoryURLConnection(this.url, memEntry);
-            } else {
-                byte[] content = this.persistentContent;
-                if (content == null) {
-                    throw new IllegalStateException(
-                            "Memory entry and persistent content unavailable.");
-                }
-                this.connection = new FileWithHeadersURLConnection(this.url,
-                        content);
-            }
-        }
-        return this.connection;
-    }
+	public final java.net.URLConnection getURLConnection() {
+		if (this.connection == null) {
+			MemoryCacheEntry memEntry = this.memoryEntry;
+			if (memEntry != null) {
+				this.connection = new MemoryURLConnection(this.url, memEntry);
+			} else {
+				byte[] content = this.persistentContent;
+				if (content == null) {
+					throw new IllegalStateException("Memory entry and persistent content unavailable.");
+				}
+				this.connection = new FileWithHeadersURLConnection(this.url, content);
+			}
+		}
+		return this.connection;
+	}
 
-    /**
-     * This method should be called when the CacheInfo instance is no longer
-     * needed in order to release resources.
-     */
-    public final void dispose() {
-        URLConnection connection = this.connection;
-        if (connection instanceof FileWithHeadersURLConnection) {
-            ((FileWithHeadersURLConnection) connection).disconnect();
-        }
-    }
+	/**
+	 * This method should be called when the CacheInfo instance is no longer
+	 * needed in order to release resources.
+	 */
+	public final void dispose() {
+		URLConnection connection = this.connection;
+		if (connection instanceof FileWithHeadersURLConnection) {
+			((FileWithHeadersURLConnection) connection).disconnect();
+		}
+	}
 
-    /**
-     * Checks if is cache connection.
-     *
-     * @param connection
-     *            the connection
-     * @return true, if is cache connection
-     */
-    public final boolean isCacheConnection(URLConnection connection) {
-        return connection == this.getURLConnection();
-    }
+	/**
+	 * Checks if is cache connection.
+	 *
+	 * @param connection
+	 *            the connection
+	 * @return true, if is cache connection
+	 */
+	public final boolean isCacheConnection(URLConnection connection) {
+		return connection == this.getURLConnection();
+	}
 
-    /** Gets the date as text.
+	/**
+	 * Gets the date as text.
 	 *
 	 * @return the date as text
 	 */
-    public final String getDateAsText() {
-        return this.getURLConnection().getHeaderField("date");
-    }
+	public final String getDateAsText() {
+		return this.getURLConnection().getHeaderField("date");
+	}
 
-    /**
-     * Adds the request time of the cached document to the given offset.
-     *
-     * @param offsetSeconds
-     *            the offset seconds
-     * @return the expires given offset
-     */
-    public final Long getExpiresGivenOffset(long offsetSeconds) {
-        MemoryCacheEntry entry = this.memoryEntry;
-        if (entry != null) {
-            return entry.getRequestTime() + (offsetSeconds * 1000);
-        } else {
-            String rtText = this.getURLConnection().getHeaderField(
-                    HEADER_REQUEST_TIME);
-            if (rtText == null) {
-                return null;
-            }
-            long rt = Long.parseLong(rtText);
-            return rt + (offsetSeconds * 1000);
-        }
-    }
+	/**
+	 * Adds the request time of the cached document to the given offset.
+	 *
+	 * @param offsetSeconds
+	 *            the offset seconds
+	 * @return the expires given offset
+	 */
+	public final Long getExpiresGivenOffset(long offsetSeconds) {
+		MemoryCacheEntry entry = this.memoryEntry;
+		if (entry != null) {
+			return entry.getRequestTime() + offsetSeconds * 1000;
+		} else {
+			String rtText = this.getURLConnection().getHeaderField(HEADER_REQUEST_TIME);
+			if (rtText == null) {
+				return null;
+			}
+			long rt = Long.parseLong(rtText);
+			return rt + offsetSeconds * 1000;
+		}
+	}
 
-    /** Gets the expires.
+	/**
+	 * Gets the expires.
 	 *
 	 * @return the expires
 	 */
-    public final Long getExpires() {
-        MemoryCacheEntry entry = this.memoryEntry;
-        if (entry != null) {
-            return entry.getExpiration();
-        } else {
-            URLConnection connection = this.getURLConnection();
-            String requestTimeText = connection
-                    .getHeaderField(HEADER_REQUEST_TIME);
-            if (requestTimeText == null) {
-                if (logger.isInfoEnabled()) {
-                    logger.info("getExpires(): Cached content does not have "
-                            + HEADER_REQUEST_TIME + " header: " + this.url
-                            + ".");
-                }
-                return new Long(0);
-            }
-            long requestTime = Long.parseLong(requestTimeText);
-            return Urls.getExpiration(connection, requestTime);
-        }
-    }
+	public final Long getExpires() {
+		MemoryCacheEntry entry = this.memoryEntry;
+		if (entry != null) {
+			return entry.getExpiration();
+		} else {
+			URLConnection connection = this.getURLConnection();
+			String requestTimeText = connection.getHeaderField(HEADER_REQUEST_TIME);
+			if (requestTimeText == null) {
+				if (logger.isInfoEnabled()) {
+					logger.info("getExpires(): Cached content does not have " + HEADER_REQUEST_TIME + " header: "
+							+ this.url + ".");
+				}
+				return new Long(0);
+			}
+			long requestTime = Long.parseLong(requestTimeText);
+			return Urls.getExpiration(connection, requestTime);
+		}
+	}
 
-    /** Gets the request time.
+	/**
+	 * Gets the request time.
 	 *
 	 * @return the request time
 	 */
-    public long getRequestTime() {
-        MemoryCacheEntry entry = this.memoryEntry;
-        if (entry != null) {
-            return entry.getRequestTime();
-        } else {
-            URLConnection connection = this.getURLConnection();
-            String requestTimeText = connection
-                    .getHeaderField(HEADER_REQUEST_TIME);
-            if (requestTimeText == null) {
-                return 0;
-            }
-            return Long.parseLong(requestTimeText);
-        }
-    }
+	public long getRequestTime() {
+		MemoryCacheEntry entry = this.memoryEntry;
+		if (entry != null) {
+			return entry.getRequestTime();
+		} else {
+			URLConnection connection = this.getURLConnection();
+			String requestTimeText = connection.getHeaderField(HEADER_REQUEST_TIME);
+			if (requestTimeText == null) {
+				return 0;
+			}
+			return Long.parseLong(requestTimeText);
+		}
+	}
 
-    /**
-     * Checks for transient entry.
-     *
-     * @return true, if successful
-     */
-    public boolean hasTransientEntry() {
-        return this.memoryEntry != null;
-    }
+	/**
+	 * Checks for transient entry.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean hasTransientEntry() {
+		return this.memoryEntry != null;
+	}
 
-    /** Gets the transient object.
+	/**
+	 * Gets the transient object.
 	 *
 	 * @return the transient object
 	 */
-    public Object getTransientObject() {
-        MemoryCacheEntry memEntry = this.memoryEntry;
-        return memEntry != null ? memEntry.getAltObject() : null;
-    }
+	public Object getTransientObject() {
+		MemoryCacheEntry memEntry = this.memoryEntry;
+		return memEntry != null ? memEntry.getAltObject() : null;
+	}
 
-    /** Gets the transient object size.
+	/**
+	 * Gets the transient object size.
 	 *
 	 * @return the transient object size
 	 */
-    public int getTransientObjectSize() {
-        MemoryCacheEntry memEntry = this.memoryEntry;
-        return memEntry != null ? memEntry.getAltObjectSize() : 0;
-    }
+	public int getTransientObjectSize() {
+		MemoryCacheEntry memEntry = this.memoryEntry;
+		return memEntry != null ? memEntry.getAltObjectSize() : 0;
+	}
 
-    /**
-     * Gets the persistent object.
-     *
-     * @param classLoader
-     *            the class loader
-     * @return the persistent object
-     */
-    public Object getPersistentObject(ClassLoader classLoader) {
-        try {
-            byte[] content = CacheManager.getInstance().getPersistent(this.url,
-                    true);
-            if (content == null) {
-                return null;
-            }
-            InputStream in = new ByteArrayInputStream(content);
-            ObjectInputStream oin = new ClassLoaderObjectInputStream(in,
-                    classLoader);
-            try {
-                return oin.readObject();
-            } finally {
-                oin.close();
-                in.close();
-            }
-        } catch (IOException ioe) {
-            logger.log(
-                    Level.WARN,
-                    "getPersistentObject(): Unable to load persistent cached object.",
-                    ioe);
-            return null;
-        } catch (ClassNotFoundException ioe) {
-            logger.log(
-                    Level.WARN,
-                    "getPersistentObject(): Failed to load persistent cached object apparently due to versioning issue.",
-                    ioe);
-            return null;
-        }
-    }
+	/**
+	 * Gets the persistent object.
+	 *
+	 * @param classLoader
+	 *            the class loader
+	 * @return the persistent object
+	 */
+	public Object getPersistentObject(ClassLoader classLoader) {
+		try {
+			byte[] content = CacheManager.getInstance().getPersistent(this.url, true);
+			if (content == null) {
+				return null;
+			}
+			InputStream in = new ByteArrayInputStream(content);
+			ObjectInputStream oin = new ClassLoaderObjectInputStream(in, classLoader);
+			try {
+				return oin.readObject();
+			} finally {
+				oin.close();
+				in.close();
+			}
+		} catch (IOException ioe) {
+			logger.log(Level.WARN, "getPersistentObject(): Unable to load persistent cached object.", ioe);
+			return null;
+		} catch (ClassNotFoundException ioe) {
+			logger.log(Level.WARN,
+					"getPersistentObject(): Failed to load persistent cached object apparently due to versioning issue.",
+					ioe);
+			return null;
+		}
+	}
 
-    /**
-     * Delete.
-     */
-    public void delete() {
-        CacheManager cm = CacheManager.getInstance();
-        cm.removeTransient(this.url);
-        try {
-            cm.removePersistent(this.url, false);
-            cm.removePersistent(this.url, true);
-        } catch (IOException ioe) {
-            logger.error("delete()", ioe);
-        }
-    }
+	/**
+	 * Delete.
+	 */
+	public void delete() {
+		CacheManager cm = CacheManager.getInstance();
+		cm.removeTransient(this.url);
+		try {
+			cm.removePersistent(this.url, false);
+			cm.removePersistent(this.url, true);
+		} catch (IOException ioe) {
+			logger.error("delete()", ioe);
+		}
+	}
 
-    /** Gets the persistent content.
+	/**
+	 * Gets the persistent content.
 	 *
 	 * @return the persistent content
 	 */
-    public byte[] getPersistentContent() {
-        return persistentContent;
-    }
+	public byte[] getPersistentContent() {
+		return persistentContent;
+	}
 }

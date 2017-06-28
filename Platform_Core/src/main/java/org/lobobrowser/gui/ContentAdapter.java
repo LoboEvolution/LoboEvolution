@@ -26,13 +26,13 @@ package org.lobobrowser.gui;
  */
 public abstract class ContentAdapter implements ContentListener {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.gui.ContentListener#contentSet(org.lobobrowser.gui.ContentEvent
-     * )
-     */
-    @Override
-    public void contentSet(ContentEvent event) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.gui.ContentListener#contentSet(org.lobobrowser.gui.
+	 * ContentEvent )
+	 */
+	@Override
+	public void contentSet(ContentEvent event) {
+	}
 }

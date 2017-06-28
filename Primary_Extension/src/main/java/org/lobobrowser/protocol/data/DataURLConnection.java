@@ -28,10 +28,10 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 
+import javax.xml.bind.DatatypeConverter;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.xml.bind.DatatypeConverter;
 
 /**
  * The Class DataURLConnection.

@@ -22,7 +22,6 @@ package org.lobobrowser.w3c.html;
 
 import org.mozilla.javascript.Function;
 
-
 /**
  * The public interface ApplicationCache.
  */

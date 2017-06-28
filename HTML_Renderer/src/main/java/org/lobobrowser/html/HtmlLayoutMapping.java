@@ -55,7 +55,7 @@ import org.lobobrowser.html.layout.ULayout;
 /**
  * The Class HtmlLayoutMapping.
  */
-public class HtmlLayoutMapping implements HtmlProperties{
+public class HtmlLayoutMapping implements HtmlProperties {
 
 	/**
 	 * Layout.

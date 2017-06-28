@@ -70,9 +70,9 @@ public class BodyRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBackgroundInfo();
-		if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
+		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgcolor = this.element.getAttribute(HtmlAttributeProperties.BGCOLOR);
-				if ((bgcolor != null) && (bgcolor.length() > 0)) {
+			if (bgcolor != null && bgcolor.length() > 0) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
@@ -82,6 +82,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		this.iBackgroundInfo = binfo;
 		return binfo;
 	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,7 +100,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 			tcolor = "black";
 		}
 
-		if ((tcolor != null) && (tcolor.length() != 0)) {
+		if (tcolor != null && tcolor.length() != 0) {
 			c = ColorFactory.getInstance().getColor(tcolor);
 		}
 

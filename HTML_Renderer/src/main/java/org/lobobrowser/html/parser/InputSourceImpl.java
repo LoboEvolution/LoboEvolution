@@ -36,47 +36,47 @@ import org.xml.sax.InputSource;
  */
 public class InputSourceImpl extends InputSource {
 
-    /**
-     * Constructs an <code>InputSourceImpl</code>.
-     * <p>
-     * It is valid to use this constructor, but it is generally recommended that
-     * callers use one of the constructors that take a reader or an input stream
-     * instead.
-     *
-     * @param uri
-     *            The URI (or systemID) of the document.
-     */
-    public InputSourceImpl(String uri) {
-        super(uri);
-    }
+	/**
+	 * Constructs an <code>InputSourceImpl</code>.
+	 * <p>
+	 * It is valid to use this constructor, but it is generally recommended that
+	 * callers use one of the constructors that take a reader or an input stream
+	 * instead.
+	 *
+	 * @param uri
+	 *            The URI (or systemID) of the document.
+	 */
+	public InputSourceImpl(String uri) {
+		super(uri);
+	}
 
-    /**
-     * Constructs an <code>InputSourceImpl</code>.
-     *
-     * @param characterStream
-     *            The <code>Reader</code> where characters can be read.
-     * @param uri
-     *            The URI of the document.
-     */
-    public InputSourceImpl(Reader characterStream, String uri) {
-        super(characterStream);
-        this.setSystemId(uri);
-    }
+	/**
+	 * Constructs an <code>InputSourceImpl</code>.
+	 *
+	 * @param characterStream
+	 *            The <code>Reader</code> where characters can be read.
+	 * @param uri
+	 *            The URI of the document.
+	 */
+	public InputSourceImpl(Reader characterStream, String uri) {
+		super(characterStream);
+		this.setSystemId(uri);
+	}
 
-    /**
-     * Constructs an <code>InputSourceImpl</code>.
-     *
-     * @param byteStream
-     *            The input stream where content can be read.
-     * @param uri
-     *            The URI that identifies the content.
-     * @param charset
-     *            The character set of the input stream.
-     */
-    public InputSourceImpl(InputStream byteStream, String uri, String charset) {
-        super(byteStream);
-        this.setEncoding(charset);
-        this.setSystemId(uri);
-        this.setPublicId(uri);
-    }
+	/**
+	 * Constructs an <code>InputSourceImpl</code>.
+	 *
+	 * @param byteStream
+	 *            The input stream where content can be read.
+	 * @param uri
+	 *            The URI that identifies the content.
+	 * @param charset
+	 *            The character set of the input stream.
+	 */
+	public InputSourceImpl(InputStream byteStream, String uri, String charset) {
+		super(byteStream);
+		this.setEncoding(charset);
+		this.setSystemId(uri);
+		this.setPublicId(uri);
+	}
 }

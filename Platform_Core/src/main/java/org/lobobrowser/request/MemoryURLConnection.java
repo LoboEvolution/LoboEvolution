@@ -38,141 +38,147 @@ import org.lobobrowser.http.NameValuePair;
  */
 public class MemoryURLConnection extends URLConnection {
 
-    /** The memory entry. */
-    private final MemoryCacheEntry memoryEntry;
+	/** The memory entry. */
+	private final MemoryCacheEntry memoryEntry;
 
-    /**
-     * Instantiates a new memory url connection.
-     *
-     * @param url
-     *            the url
-     * @param memoryEntry
-     *            the memory entry
-     */
-    public MemoryURLConnection(URL url, final MemoryCacheEntry memoryEntry) {
-        super(url);
-        this.memoryEntry = memoryEntry;
-    }
+	/**
+	 * Instantiates a new memory url connection.
+	 *
+	 * @param url
+	 *            the url
+	 * @param memoryEntry
+	 *            the memory entry
+	 */
+	public MemoryURLConnection(URL url, final MemoryCacheEntry memoryEntry) {
+		super(url);
+		this.memoryEntry = memoryEntry;
+	}
 
-    /** The input stream. */
-    private InputStream inputStream;
+	/** The input stream. */
+	private InputStream inputStream;
 
-    /** The headers map. */
-    private final Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
+	/** The headers map. */
+	private final Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#connect()
-     */
-    @Override
-    public void connect() throws IOException {
-        if (!this.connected) {
-            this.readHeaders();
-            InputStream in = new ByteArrayInputStream(this.memoryEntry.getContent());
-            this.inputStream = in;
-            this.connected = true;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#connect()
+	 */
+	@Override
+	public void connect() throws IOException {
+		if (!this.connected) {
+			this.readHeaders();
+			InputStream in = new ByteArrayInputStream(this.memoryEntry.getContent());
+			this.inputStream = in;
+			this.connected = true;
+		}
+	}
 
-    /**
-     * Read headers.
-     *
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    private void readHeaders() throws IOException {
-        Map<String, List<String>> headersMap = this.headersMap;
-        List origList = this.memoryEntry.getHeaders();
-        Iterator i = origList.iterator();
-        while (i.hasNext()) {
-            NameValuePair pair = (NameValuePair) i.next();
-            String name = pair.name;
-            if (name != null) {
-                name = name.toLowerCase();
-            }
-            String value = pair.value;
-            List<String> hvalues = headersMap.get(name);
-            if (hvalues == null) {
-                hvalues = new ArrayList<String>(1);
-                headersMap.put(name, hvalues);
-            }
-            hvalues.add(value);
-        }
-    }
+	/**
+	 * Read headers.
+	 *
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	private void readHeaders() throws IOException {
+		Map<String, List<String>> headersMap = this.headersMap;
+		List origList = this.memoryEntry.getHeaders();
+		Iterator i = origList.iterator();
+		while (i.hasNext()) {
+			NameValuePair pair = (NameValuePair) i.next();
+			String name = pair.name;
+			if (name != null) {
+				name = name.toLowerCase();
+			}
+			String value = pair.value;
+			List<String> hvalues = headersMap.get(name);
+			if (hvalues == null) {
+				hvalues = new ArrayList<String>(1);
+				headersMap.put(name, hvalues);
+			}
+			hvalues.add(value);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderField(int)
-     */
-    @Override
-    public String getHeaderField(int n) {
-        try {
-            this.connect();
-            NameValuePair pair = this.memoryEntry.getHeaders().get(n);
-            return pair.value;
-        } catch (IndexOutOfBoundsException iob) {
-            return null;
-        } catch (IOException ioe) {
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderField(int)
+	 */
+	@Override
+	public String getHeaderField(int n) {
+		try {
+			this.connect();
+			NameValuePair pair = this.memoryEntry.getHeaders().get(n);
+			return pair.value;
+		} catch (IndexOutOfBoundsException iob) {
+			return null;
+		} catch (IOException ioe) {
+			return null;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderField(String)
-     */
-    @Override
-    public String getHeaderField(String name) {
-        try {
-            this.connect();
-        } catch (IOException ioe) {
-            return null;
-        }
-        List hvalues = this.headersMap.get(name.toLowerCase());
-        if ((hvalues == null) || (hvalues.size() == 0)) {
-            return null;
-        }
-        return (String) hvalues.get(0);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderField(String)
+	 */
+	@Override
+	public String getHeaderField(String name) {
+		try {
+			this.connect();
+		} catch (IOException ioe) {
+			return null;
+		}
+		List hvalues = this.headersMap.get(name.toLowerCase());
+		if (hvalues == null || hvalues.size() == 0) {
+			return null;
+		}
+		return (String) hvalues.get(0);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderFieldKey(int)
-     */
-    @Override
-    public String getHeaderFieldKey(int n) {
-        try {
-            this.connect();
-            NameValuePair pair = this.memoryEntry.getHeaders().get(n);
-            return pair.name;
-        } catch (IndexOutOfBoundsException iob) {
-            return null;
-        } catch (IOException ioe) {
-            return null;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderFieldKey(int)
+	 */
+	@Override
+	public String getHeaderFieldKey(int n) {
+		try {
+			this.connect();
+			NameValuePair pair = this.memoryEntry.getHeaders().get(n);
+			return pair.name;
+		} catch (IndexOutOfBoundsException iob) {
+			return null;
+		} catch (IOException ioe) {
+			return null;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getHeaderFields()
-     */
-    @Override
-    public Map<String, List<String>> getHeaderFields() {
-        try {
-            this.connect();
-        } catch (IOException ioe) {
-            return null;
-        }
-        return this.headersMap;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getHeaderFields()
+	 */
+	@Override
+	public Map<String, List<String>> getHeaderFields() {
+		try {
+			this.connect();
+		} catch (IOException ioe) {
+			return null;
+		}
+		return this.headersMap;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getInputStream()
-     */
-    @Override
-    public InputStream getInputStream() throws IOException {
-        this.connect();
-        return this.inputStream;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getInputStream()
+	 */
+	@Override
+	public InputStream getInputStream() throws IOException {
+		this.connect();
+		return this.inputStream;
+	}
 }

@@ -28,16 +28,18 @@ package org.lobobrowser.gui;
  * used.
  */
 public interface BrowserWindow {
-    
-    /** Gets the top frame panel.
+
+	/**
+	 * Gets the top frame panel.
 	 *
 	 * @return the top frame panel
 	 */
-    FramePanel getTopFramePanel();
+	FramePanel getTopFramePanel();
 
-    /** Gets the window callback.
+	/**
+	 * Gets the window callback.
 	 *
 	 * @return the window callback
 	 */
-    WindowCallback getWindowCallback();
+	WindowCallback getWindowCallback();
 }

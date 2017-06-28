@@ -29,15 +29,15 @@ import java.util.EventListener;
  */
 public interface ResponseListener extends EventListener {
 
-    /** The Constant EMPTY_ARRAY. */
-    ResponseListener[] EMPTY_ARRAY = new ResponseListener[0];
+	/** The Constant EMPTY_ARRAY. */
+	ResponseListener[] EMPTY_ARRAY = new ResponseListener[0];
 
-    /**
-     * This method is called as soon as a clientlet response intended for the
-     * event frame has been fully processed.
-     *
-     * @param event
-     *            A response event.
-     */
-    void responseProcessed(ResponseEvent event);
+	/**
+	 * This method is called as soon as a clientlet response intended for the
+	 * event frame has been fully processed.
+	 *
+	 * @param event
+	 *            A response event.
+	 */
+	void responseProcessed(ResponseEvent event);
 }

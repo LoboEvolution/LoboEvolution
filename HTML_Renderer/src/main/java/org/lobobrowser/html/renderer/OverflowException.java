@@ -32,28 +32,29 @@ import java.util.Collection;
  */
 public class OverflowException extends Exception {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The renderables. */
-    private final Collection renderables;
+	/** The renderables. */
+	private final Collection renderables;
 
-    /**
-     * Instantiates a new overflow exception.
-     *
-     * @param renderables
-     *            the renderables
-     */
-    public OverflowException(Collection renderables) {
-        super();
-        this.renderables = renderables;
-    }
+	/**
+	 * Instantiates a new overflow exception.
+	 *
+	 * @param renderables
+	 *            the renderables
+	 */
+	public OverflowException(Collection renderables) {
+		super();
+		this.renderables = renderables;
+	}
 
-    /** Gets the renderables.
+	/**
+	 * Gets the renderables.
 	 *
 	 * @return the renderables
 	 */
-    public Collection getRenderables() {
-        return this.renderables;
-    }
+	public Collection getRenderables() {
+		return this.renderables;
+	}
 }

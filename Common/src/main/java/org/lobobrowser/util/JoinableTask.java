@@ -25,60 +25,62 @@ package org.lobobrowser.util;
  * the task to finish by joining it.
  */
 public abstract class JoinableTask implements SimpleThreadPoolTask {
-    /** The done. */
-    private boolean done = false;
-    
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Runnable#run()
-     */
-    @Override
-    public final void run() {
-        try {
-            this.execute();
-        } finally {
-            synchronized (this) {
-                this.done = true;
-                this.notifyAll();
-            }
-        }
-    }
-    
-    /**
-     * Force done.
-     */
-    public final void forceDone() {
-        synchronized (this) {
-            this.done = true;
-            this.notifyAll();
-        }
-    }
-    
-    /**
-     * Join.
-     *
-     * @throws InterruptedException
-     *             the interrupted exception
-     */
-    public void join() throws InterruptedException {
-        synchronized (this) {
-            while (!this.done) {
-                this.wait();
-            }
-        }
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.util.SimpleThreadPoolTask#cancel()
-     */
-    @Override
-    public void cancel() {
-        this.forceDone();
-    }
-    
-    /**
-     * Execute.
-     */
-    protected abstract void execute();
+	/** The done. */
+	private boolean done = false;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public final void run() {
+		try {
+			this.execute();
+		} finally {
+			synchronized (this) {
+				this.done = true;
+				this.notifyAll();
+			}
+		}
+	}
+
+	/**
+	 * Force done.
+	 */
+	public final void forceDone() {
+		synchronized (this) {
+			this.done = true;
+			this.notifyAll();
+		}
+	}
+
+	/**
+	 * Join.
+	 *
+	 * @throws InterruptedException
+	 *             the interrupted exception
+	 */
+	public void join() throws InterruptedException {
+		synchronized (this) {
+			while (!this.done) {
+				this.wait();
+			}
+		}
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.util.SimpleThreadPoolTask#cancel()
+	 */
+	@Override
+	public void cancel() {
+		this.forceDone();
+	}
+
+	/**
+	 * Execute.
+	 */
+	protected abstract void execute();
 }

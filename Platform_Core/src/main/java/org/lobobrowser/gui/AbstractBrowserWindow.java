@@ -25,46 +25,47 @@ import javax.swing.JFrame;
 /**
  * Browser windows should extend this class.
  */
-public abstract class AbstractBrowserWindow extends JFrame implements
-BrowserWindow {
+public abstract class AbstractBrowserWindow extends JFrame implements BrowserWindow {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Gets the root {@link FramePanel} of the window.
-     *
-     * @return the top frame panel
-     */
-    @Override
-    public abstract FramePanel getTopFramePanel();
+	/**
+	 * Gets the root {@link FramePanel} of the window.
+	 *
+	 * @return the top frame panel
+	 */
+	@Override
+	public abstract FramePanel getTopFramePanel();
 
-    /**
-     * Gets a {@link WindowCallback} instance that receives navigation
-     * notifications. This method may return <code>null</code>.
-     *
-     * @return the window callback
-     */
-    @Override
-    public abstract WindowCallback getWindowCallback();
+	/**
+	 * Gets a {@link WindowCallback} instance that receives navigation
+	 * notifications. This method may return <code>null</code>.
+	 *
+	 * @return the window callback
+	 */
+	@Override
+	public abstract WindowCallback getWindowCallback();
 
-    /** The bounds assigned. */
-    private boolean boundsAssigned;
+	/** The bounds assigned. */
+	private boolean boundsAssigned;
 
-     /** Checks if is bounds assigned.
+	/**
+	 * Checks if is bounds assigned.
 	 *
 	 * @return the bounds assigned
 	 */
-    public boolean isBoundsAssigned() {
-        return boundsAssigned;
-    }
+	public boolean isBoundsAssigned() {
+		return boundsAssigned;
+	}
 
-     /** Sets the bounds assigned.
+	/**
+	 * Sets the bounds assigned.
 	 *
 	 * @param boundsAssigned
 	 *            the new bounds assigned
 	 */
-    public void setBoundsAssigned(boolean boundsAssigned) {
-        this.boundsAssigned = boundsAssigned;
-    }
+	public void setBoundsAssigned(boolean boundsAssigned) {
+		this.boundsAssigned = boundsAssigned;
+	}
 }

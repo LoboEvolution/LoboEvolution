@@ -43,21 +43,22 @@ public class FullScreenAction extends AbstractAction implements EnableableAction
 
 	/** The action. */
 	private ActionPool action;
-	
+
 	/** The device. */
 	private static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-	
+
 	/** The new display mode. */
 	private static DisplayMode newDisplayMode;
-	
+
 	/** The old display mode. */
 	private static DisplayMode oldDisplayMode = device.getDisplayMode();
-	
+
 	/** The count fs. */
-	private int countFs= 0;
+	private int countFs = 0;
 
 	/**
 	 * Instantiates a new source action.
+	 * 
 	 * @param window
 	 *            the window
 	 * @param action
@@ -86,21 +87,21 @@ public class FullScreenAction extends AbstractAction implements EnableableAction
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
-		if(countFs==0){
-			countFs = countFs+1;
-			device.setFullScreenWindow(window.getAwtWindow()); 
-			if(device != null && device.isDisplayChangeSupported()) {
+
+		if (countFs == 0) {
+			countFs = countFs + 1;
+			device.setFullScreenWindow(window.getAwtWindow());
+			if (device != null && device.isDisplayChangeSupported()) {
 				device.setDisplayMode(newDisplayMode);
-	        }
-		}else{
-			countFs= 0;
-			device.setFullScreenWindow(null); 
+			}
+		} else {
+			countFs = 0;
+			device.setFullScreenWindow(null);
 			device.setDisplayMode(oldDisplayMode);
-		}       
-        
-        window.getAwtWindow().revalidate();
-		
+		}
+
+		window.getAwtWindow().revalidate();
+
 	}
 
 }

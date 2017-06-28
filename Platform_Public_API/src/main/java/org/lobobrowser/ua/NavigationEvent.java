@@ -30,199 +30,200 @@ import java.net.URL;
  */
 public class NavigationEvent extends java.util.EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The u rl. */
-    private final URL uRL;
+	/** The u rl. */
+	private final URL uRL;
 
-    /** The method. */
-    private final String method;
+	/** The method. */
+	private final String method;
 
-    /** The param info. */
-    private final ParameterInfo paramInfo;
+	/** The param info. */
+	private final ParameterInfo paramInfo;
 
-    /** The target type. */
-    private final TargetType targetType;
+	/** The target type. */
+	private final TargetType targetType;
 
-    /** The request type. */
-    private final RequestType requestType;
+	/** The request type. */
+	private final RequestType requestType;
 
-    /** The from click. */
-    private final boolean fromClick;
+	/** The from click. */
+	private final boolean fromClick;
 
-    /** The link object. */
-    private final Object linkObject;
+	/** The link object. */
+	private final Object linkObject;
 
-    /** The originating frame. */
-    private final NavigatorFrame originatingFrame;
+	/** The originating frame. */
+	private final NavigatorFrame originatingFrame;
 
-    /**
-     * Instantiates a new navigation event.
-     *
-     * @param source
-     *            the source
-     * @param url
-     *            the url
-     * @param method
-     *            the method
-     * @param paramInfo
-     *            the param info
-     * @param targetType
-     *            the target type
-     * @param requestType
-     *            the request type
-     * @param fromClick
-     *            the from click
-     * @param linkObject
-     *            the link object
-     * @param originatingFrame
-     *            the originating frame
-     */
-    public NavigationEvent(Object source, URL url, String method,
-            ParameterInfo paramInfo, TargetType targetType,
-            RequestType requestType, boolean fromClick, Object linkObject,
-            NavigatorFrame originatingFrame) {
-        super(source);
-        this.uRL = url;
-        this.method = method;
-        this.paramInfo = paramInfo;
-        this.targetType = targetType;
-        this.requestType = requestType;
-        this.fromClick = fromClick;
-        this.linkObject = linkObject;
-        this.originatingFrame = originatingFrame;
-    }
+	/**
+	 * Instantiates a new navigation event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param url
+	 *            the url
+	 * @param method
+	 *            the method
+	 * @param paramInfo
+	 *            the param info
+	 * @param targetType
+	 *            the target type
+	 * @param requestType
+	 *            the request type
+	 * @param fromClick
+	 *            the from click
+	 * @param linkObject
+	 *            the link object
+	 * @param originatingFrame
+	 *            the originating frame
+	 */
+	public NavigationEvent(Object source, URL url, String method, ParameterInfo paramInfo, TargetType targetType,
+			RequestType requestType, boolean fromClick, Object linkObject, NavigatorFrame originatingFrame) {
+		super(source);
+		this.uRL = url;
+		this.method = method;
+		this.paramInfo = paramInfo;
+		this.targetType = targetType;
+		this.requestType = requestType;
+		this.fromClick = fromClick;
+		this.linkObject = linkObject;
+		this.originatingFrame = originatingFrame;
+	}
 
-    /**
-     * Instantiates a new navigation event.
-     *
-     * @param source
-     *            the source
-     * @param url
-     *            the url
-     * @param method
-     *            the method
-     * @param paramInfo
-     *            the param info
-     * @param targetType
-     *            the target type
-     * @param requestType
-     *            the request type
-     * @param originatingFrame
-     *            the originating frame
-     */
-    public NavigationEvent(Object source, URL url, String method,
-            ParameterInfo paramInfo, TargetType targetType,
-            RequestType requestType, NavigatorFrame originatingFrame) {
-        this(source, url, method, paramInfo, targetType, requestType, false,
-                null, originatingFrame);
-    }
+	/**
+	 * Instantiates a new navigation event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param url
+	 *            the url
+	 * @param method
+	 *            the method
+	 * @param paramInfo
+	 *            the param info
+	 * @param targetType
+	 *            the target type
+	 * @param requestType
+	 *            the request type
+	 * @param originatingFrame
+	 *            the originating frame
+	 */
+	public NavigationEvent(Object source, URL url, String method, ParameterInfo paramInfo, TargetType targetType,
+			RequestType requestType, NavigatorFrame originatingFrame) {
+		this(source, url, method, paramInfo, targetType, requestType, false, null, originatingFrame);
+	}
 
-    /**
-     * Instantiates a new navigation event.
-     *
-     * @param source
-     *            the source
-     * @param url
-     *            the url
-     * @param targetType
-     *            the target type
-     * @param requestType
-     *            the request type
-     * @param linkObject
-     *            the link object
-     * @param originatingFrame
-     *            the originating frame
-     */
-    public NavigationEvent(Object source, URL url, TargetType targetType,
-            RequestType requestType, Object linkObject,
-            NavigatorFrame originatingFrame) {
-        this(source, url, "GET", null, targetType, requestType, true,
-                linkObject, originatingFrame);
-    }
+	/**
+	 * Instantiates a new navigation event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param url
+	 *            the url
+	 * @param targetType
+	 *            the target type
+	 * @param requestType
+	 *            the request type
+	 * @param linkObject
+	 *            the link object
+	 * @param originatingFrame
+	 *            the originating frame
+	 */
+	public NavigationEvent(Object source, URL url, TargetType targetType, RequestType requestType, Object linkObject,
+			NavigatorFrame originatingFrame) {
+		this(source, url, "GET", null, targetType, requestType, true, linkObject, originatingFrame);
+	}
 
-    /**
-     * Instantiates a new navigation event.
-     *
-     * @param source
-     *            the source
-     * @param url
-     *            the url
-     * @param method
-     *            the method
-     * @param requestType
-     *            the request type
-     * @param originatingFrame
-     *            the originating frame
-     */
-    public NavigationEvent(Object source, URL url, String method,
-            RequestType requestType, NavigatorFrame originatingFrame) {
-        this(source, url, method, null, TargetType.SELF, requestType, false,
-                null, originatingFrame);
-    }
+	/**
+	 * Instantiates a new navigation event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param url
+	 *            the url
+	 * @param method
+	 *            the method
+	 * @param requestType
+	 *            the request type
+	 * @param originatingFrame
+	 *            the originating frame
+	 */
+	public NavigationEvent(Object source, URL url, String method, RequestType requestType,
+			NavigatorFrame originatingFrame) {
+		this(source, url, method, null, TargetType.SELF, requestType, false, null, originatingFrame);
+	}
 
-    /** Gets the u rl.
+	/**
+	 * Gets the u rl.
 	 *
 	 * @return the u rl
 	 */
-    public URL getURL() {
-        return uRL;
-    }
+	public URL getURL() {
+		return uRL;
+	}
 
-    /** Gets the method.
+	/**
+	 * Gets the method.
 	 *
 	 * @return the method
 	 */
-    public String getMethod() {
-        return method;
-    }
+	public String getMethod() {
+		return method;
+	}
 
-    /** Gets the param info.
+	/**
+	 * Gets the param info.
 	 *
 	 * @return the param info
 	 */
-    public ParameterInfo getParamInfo() {
-        return paramInfo;
-    }
+	public ParameterInfo getParamInfo() {
+		return paramInfo;
+	}
 
-    /** Gets the request type.
+	/**
+	 * Gets the request type.
 	 *
 	 * @return the request type
 	 */
-    public RequestType getRequestType() {
-        return requestType;
-    }
+	public RequestType getRequestType() {
+		return requestType;
+	}
 
-    /** Checks if is from click.
+	/**
+	 * Checks if is from click.
 	 *
 	 * @return the from click
 	 */
-    public boolean isFromClick() {
-        return fromClick;
-    }
+	public boolean isFromClick() {
+		return fromClick;
+	}
 
-    /** Gets the link object.
+	/**
+	 * Gets the link object.
 	 *
 	 * @return the link object
 	 */
-    public Object getLinkObject() {
-        return linkObject;
-    }
+	public Object getLinkObject() {
+		return linkObject;
+	}
 
-    /** Gets the originating frame.
+	/**
+	 * Gets the originating frame.
 	 *
 	 * @return the originating frame
 	 */
-    public NavigatorFrame getOriginatingFrame() {
-        return originatingFrame;
-    }
+	public NavigatorFrame getOriginatingFrame() {
+		return originatingFrame;
+	}
 
-    /** Gets the target type.
+	/**
+	 * Gets the target type.
 	 *
 	 * @return the target type
 	 */
-    public TargetType getTargetType() {
-        return targetType;
-    }
+	public TargetType getTargetType() {
+		return targetType;
+	}
 }

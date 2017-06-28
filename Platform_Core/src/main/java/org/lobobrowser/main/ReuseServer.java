@@ -41,129 +41,128 @@ import org.apache.logging.log4j.Logger;
  * The local-bound server that allows the browser JVM to be reused.
  */
 public class ReuseServer implements Runnable {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(ReuseServer.class);
 
-    /**
-     * Instantiates a new reuse server.
-     */
-    public ReuseServer() {
-        Thread t = new Thread(this, "ReuseServer");
-        t.setDaemon(true);
-        t.start();
-    }
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(ReuseServer.class);
 
-    /** The Constant MIN_PORT. */
-    private static final int MIN_PORT = 55000;
+	/**
+	 * Instantiates a new reuse server.
+	 */
+	public ReuseServer() {
+		Thread t = new Thread(this, "ReuseServer");
+		t.setDaemon(true);
+		t.start();
+	}
 
-    /** The Constant TOP_PORT. */
-    private static final int TOP_PORT = 65000;
+	/** The Constant MIN_PORT. */
+	private static final int MIN_PORT = 55000;
 
-    /** The Constant RAND. */
-    private static final Random RAND = new Random(System.currentTimeMillis());
+	/** The Constant TOP_PORT. */
+	private static final int TOP_PORT = 65000;
 
-    /** Gets the random port.
+	/** The Constant RAND. */
+	private static final Random RAND = new Random(System.currentTimeMillis());
+
+	/**
+	 * Gets the random port.
 	 *
 	 * @return the random port
 	 */
-    private static int getRandomPort() {
-        return (Math.abs(RAND.nextInt()) % (TOP_PORT - MIN_PORT)) + MIN_PORT;
-    }
+	private static int getRandomPort() {
+		return Math.abs(RAND.nextInt()) % (TOP_PORT - MIN_PORT) + MIN_PORT;
+	}
 
-    /** The server socket. */
-    private ServerSocket serverSocket;
+	/** The server socket. */
+	private ServerSocket serverSocket;
 
-    /**
-     * Start.
-     *
-     * @param bindAddr
-     *            the bind addr
-     * @return the int
-     */
-    public int start(InetAddress bindAddr) {
-        // Should be called with bindAddr=127.0.0.1 only.
-        synchronized (this) {
-            if (this.serverSocket != null) {
-                throw new IllegalStateException("Already started");
-            }
-            for (int tries = 0; tries < 100; tries++) {
-                int rport = getRandomPort();
-                try {
-                    ServerSocket ss = new ServerSocket(rport, 100, bindAddr);
-                    this.serverSocket = ss;
-                    this.notify();
-                    return rport;
-                } catch (IOException ioe) {
-                	logger.log(Level.ERROR,ioe);
-                }
-            }
-        }
-        throw new IllegalStateException(
-                "Unable to bind reuse server after many tries.");
-    }
+	/**
+	 * Start.
+	 *
+	 * @param bindAddr
+	 *            the bind addr
+	 * @return the int
+	 */
+	public int start(InetAddress bindAddr) {
+		// Should be called with bindAddr=127.0.0.1 only.
+		synchronized (this) {
+			if (this.serverSocket != null) {
+				throw new IllegalStateException("Already started");
+			}
+			for (int tries = 0; tries < 100; tries++) {
+				int rport = getRandomPort();
+				try {
+					ServerSocket ss = new ServerSocket(rport, 100, bindAddr);
+					this.serverSocket = ss;
+					this.notify();
+					return rport;
+				} catch (IOException ioe) {
+					logger.log(Level.ERROR, ioe);
+				}
+			}
+		}
+		throw new IllegalStateException("Unable to bind reuse server after many tries.");
+	}
 
-    /**
-     * Stop.
-     */
-    public void stop() {
-        synchronized (this) {
-            if (this.serverSocket != null) {
-                try {
-                    this.serverSocket.close();
-                } catch (IOException ioe) {
-                    // ignore
-                }
-                this.serverSocket = null;
-            }
-        }
-    }
+	/**
+	 * Stop.
+	 */
+	public void stop() {
+		synchronized (this) {
+			if (this.serverSocket != null) {
+				try {
+					this.serverSocket.close();
+				} catch (IOException ioe) {
+					// ignore
+				}
+				this.serverSocket = null;
+			}
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Runnable#run()
-     */
-    @Override
-    public void run() {
-        for (;;) {
-            try {
-                ServerSocket ss;
-                synchronized (this) {
-                    while (this.serverSocket == null) {
-                        this.wait();
-                    }
-                    ss = this.serverSocket;
-                }
-                Socket s = ss.accept();
-                s.setSoTimeout(10000);
-                s.setTcpNoDelay(true);
-                InputStream in = s.getInputStream();
-                try {
-                    Reader reader = new InputStreamReader(in);
-                    BufferedReader br = new BufferedReader(reader);
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        int blankIdx = line.indexOf(' ');
-                        String command = blankIdx == -1 ? line : line
-                                .substring(0, blankIdx).trim();
-                        if ("LAUNCH".equals(command)) {
-                            if (blankIdx == -1) {
-                                PlatformInit.getInstance().launch();
-                            } else {
-                                String path = line.substring(blankIdx + 1)
-                                        .trim();
-                                PlatformInit.getInstance().launch(path);
-                            }
-                        } else if ("LAUNCH_BLANK".equals(command)) {
-                            PlatformInit.getInstance().launch();
-                        }
-                    }
-                } finally {
-                    in.close();
-                }
-            } catch (Throwable t) {
-            	logger.log(Level.ERROR,t);
-            }
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+		for (;;) {
+			try {
+				ServerSocket ss;
+				synchronized (this) {
+					while (this.serverSocket == null) {
+						this.wait();
+					}
+					ss = this.serverSocket;
+				}
+				Socket s = ss.accept();
+				s.setSoTimeout(10000);
+				s.setTcpNoDelay(true);
+				InputStream in = s.getInputStream();
+				try {
+					Reader reader = new InputStreamReader(in);
+					BufferedReader br = new BufferedReader(reader);
+					String line;
+					while ((line = br.readLine()) != null) {
+						int blankIdx = line.indexOf(' ');
+						String command = blankIdx == -1 ? line : line.substring(0, blankIdx).trim();
+						if ("LAUNCH".equals(command)) {
+							if (blankIdx == -1) {
+								PlatformInit.getInstance().launch();
+							} else {
+								String path = line.substring(blankIdx + 1).trim();
+								PlatformInit.getInstance().launch(path);
+							}
+						} else if ("LAUNCH_BLANK".equals(command)) {
+							PlatformInit.getInstance().launch();
+						}
+					}
+				} finally {
+					in.close();
+				}
+			} catch (Throwable t) {
+				logger.log(Level.ERROR, t);
+			}
+		}
+	}
 }

@@ -25,10 +25,10 @@ import org.lobobrowser.w3c.svg.SVGAnimatedRect;
 import org.lobobrowser.w3c.svg.SVGRect;
 
 public class SVGAnimatedRectImpl implements SVGAnimatedRect {
-	
+
 	private SVGRectImpl rect;
-	
-	public SVGAnimatedRectImpl(SVGRectImpl rect){
+
+	public SVGAnimatedRectImpl(SVGRectImpl rect) {
 		this.rect = rect;
 	}
 

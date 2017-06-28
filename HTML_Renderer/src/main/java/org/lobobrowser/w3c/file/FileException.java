@@ -21,7 +21,6 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Class FileException.
  */
@@ -33,8 +32,10 @@ public class FileException extends RuntimeException {
 	/**
 	 * Instantiates a new file exception.
 	 *
-	 * @param code the code
-	 * @param message the message
+	 * @param code
+	 *            the code
+	 * @param message
+	 *            the message
 	 */
 	public FileException(short code, String message) {
 		super(message);
@@ -43,19 +44,19 @@ public class FileException extends RuntimeException {
 
 	/** The Constant NOT_FOUND_ERR. */
 	public static final short NOT_FOUND_ERR = 1;
-	
+
 	/** The Constant SECURITY_ERR. */
 	public static final short SECURITY_ERR = 2;
-	
+
 	/** The Constant ABORT_ERR. */
 	public static final short ABORT_ERR = 3;
-	
+
 	/** The Constant NOT_READABLE_ERR. */
 	public static final short NOT_READABLE_ERR = 4;
-	
+
 	/** The Constant ENCODING_ERR. */
 	public static final short ENCODING_ERR = 5;
-	
+
 	/** The code. */
 	public short code;
 }

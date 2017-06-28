@@ -143,8 +143,8 @@ public class ShiftedFloatingBounds implements FloatingBounds {
 			return false;
 		}
 		ShiftedFloatingBounds other = (ShiftedFloatingBounds) obj;
-		return (this.shiftY == other.shiftY) && (this.shiftLeft == other.shiftLeft)
-				&& (this.shiftRight == other.shiftRight) && Objects.equals(this.prevBounds, other.prevBounds);
+		return this.shiftY == other.shiftY && this.shiftLeft == other.shiftLeft && this.shiftRight == other.shiftRight
+				&& Objects.equals(this.prevBounds, other.prevBounds);
 	}
 
 	/*

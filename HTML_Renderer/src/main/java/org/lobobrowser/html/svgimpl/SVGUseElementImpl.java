@@ -36,7 +36,7 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 	@Override
 	public SVGAnimatedString getHref() {
 		String href = this.getAttribute(HtmlAttributeProperties.XLINK_HREF);
-		if(href == null){
+		if (href == null) {
 			href = this.getAttribute(HtmlAttributeProperties.HREF);
 		}
 		return new SVGAnimatedStringImpl(href);
@@ -67,40 +67,40 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 			style.setFill(this.getFill());
 			isStyle = true;
 		}
-		
+
 		if (this.getStroke() != null) {
 			style.setStroke(this.getStroke());
 		}
-		
+
 		if (this.getStrokeDashArray() != null) {
 			style.setStrokeDashArray(this.getStrokeDashArray());
 			isStyle = true;
 		}
-		
+
 		if (this.getStrokeLineCap() != null) {
 			style.setStrokeLineCap(this.getStrokeLineCap());
 			isStyle = true;
 		}
-		
+
 		if (this.getStrokeMiterLimit() != null) {
 			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
 			isStyle = true;
 		}
-		
+
 		if (this.getStrokeOpacity() != null) {
 			style.setStrokeOpacity(this.getStrokeOpacity());
 			isStyle = true;
 		}
-		
+
 		if (this.getStrokeWidth() != null) {
 			style.setStrokeWidth(this.getStrokeWidth());
 			isStyle = true;
 		}
-		
-		if(!isStyle){
+
+		if (!isStyle) {
 			style = null;
 		}
-		
+
 		return style;
 	}
 }

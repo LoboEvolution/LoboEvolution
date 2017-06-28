@@ -30,76 +30,80 @@ import org.w3c.dom.DOMException;
 /**
  * The Class HTMLOptionsCollectionImpl.
  */
-public class HTMLOptionsCollectionImpl extends DescendentHTMLCollection
-implements HTMLOptionsCollection {
+public class HTMLOptionsCollectionImpl extends DescendentHTMLCollection implements HTMLOptionsCollection {
 
-    /** The Constant OPTION_FILTER. */
-    public static final NodeFilter OPTION_FILTER = new OptionFilter();
+	/** The Constant OPTION_FILTER. */
+	public static final NodeFilter OPTION_FILTER = new OptionFilter();
 
-    /**
-     * Instantiates a new HTML options collection impl.
-     *
-     * @param selectElement
-     *            the select element
-     */
-    public HTMLOptionsCollectionImpl(HTMLElementImpl selectElement) {
-        super(selectElement, OPTION_FILTER, selectElement.getTreeLock(), false);
-    }
+	/**
+	 * Instantiates a new HTML options collection impl.
+	 *
+	 * @param selectElement
+	 *            the select element
+	 */
+	public HTMLOptionsCollectionImpl(HTMLElementImpl selectElement) {
+		super(selectElement, OPTION_FILTER, selectElement.getTreeLock(), false);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOptionsCollection#setLength(int)
-     */
-    @Override
-    public void setLength(int length) throws DOMException {
-        throw new UnsupportedOperationException();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOptionsCollection#setLength(int)
+	 */
+	@Override
+	public void setLength(int length) throws DOMException {
+		throw new UnsupportedOperationException();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.html
-     * .HTMLElement)
-     */
-    @Override
-    public void add(HTMLElement element) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.
+	 * html .HTMLElement)
+	 */
+	@Override
+	public void add(HTMLElement element) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.html
-     * .HTMLElement, org.lobobrowser.w3c.html.HTMLElement)
-     */
-    @Override
-    public void add(HTMLElement element, HTMLElement before) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.
+	 * html .HTMLElement, org.lobobrowser.w3c.html.HTMLElement)
+	 */
+	@Override
+	public void add(HTMLElement element, HTMLElement before) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.html
-     * .HTMLElement, int)
-     */
-    @Override
-    public void add(HTMLElement element, int before) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLOptionsCollection#add(org.lobobrowser.w3c.
+	 * html .HTMLElement, int)
+	 */
+	@Override
+	public void add(HTMLElement element, int before) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOptionsCollection#remove(int)
-     */
-    @Override
-    public void remove(int index) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOptionsCollection#remove(int)
+	 */
+	@Override
+	public void remove(int index) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
 	@Override
 	public int getSelectedIndex() {
@@ -110,6 +114,6 @@ implements HTMLOptionsCollection {
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

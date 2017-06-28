@@ -25,7 +25,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSymbolElementImpl;
 
 public class SVGSymbolBuilder extends HTMLElementBuilder {
-	
+
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new SVGSymbolElementImpl(name);

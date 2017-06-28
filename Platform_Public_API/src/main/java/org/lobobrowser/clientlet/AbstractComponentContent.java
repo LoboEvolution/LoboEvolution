@@ -29,104 +29,116 @@ import java.awt.Component;
  */
 public abstract class AbstractComponentContent implements ComponentContent {
 
-    /**
-     * Instantiates a new abstract component content.
-     */
-    public AbstractComponentContent() {
-    }
+	/**
+	 * Instantiates a new abstract component content.
+	 */
+	public AbstractComponentContent() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#canCopy()
-     */
-    @Override
-    public boolean canCopy() {
-        return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#canCopy()
+	 */
+	@Override
+	public boolean canCopy() {
+		return false;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#copy()
-     */
-    @Override
-    public boolean copy() {
-        return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#copy()
+	 */
+	@Override
+	public boolean copy() {
+		return false;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#getComponent()
-     */
-    @Override
-    public abstract Component getComponent();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#getComponent()
+	 */
+	@Override
+	public abstract Component getComponent();
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#getSourceCode()
-     */
-    @Override
-    public abstract String getSourceCode();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#getSourceCode()
+	 */
+	@Override
+	public abstract String getSourceCode();
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#getTitle()
-     */
-    @Override
-    public abstract String getTitle();
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#getTitle()
+	 */
+	@Override
+	public abstract String getTitle();
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#getDescription()
-     */
-    @Override
-    public String getDescription() {
-        return "";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#getDescription()
+	 */
+	@Override
+	public String getDescription() {
+		return "";
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#addNotify()
-     */
-    @Override
-    public void addNotify() {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#addNotify()
+	 */
+	@Override
+	public void addNotify() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#removeNotify()
-     */
-    @Override
-    public void removeNotify() {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#removeNotify()
+	 */
+	@Override
+	public void removeNotify() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#getContentObject()
-     */
-    @Override
-    public Object getContentObject() {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#getContentObject()
+	 */
+	@Override
+	public Object getContentObject() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#getMimeType()
-     */
-    @Override
-    public String getMimeType() {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.ComponentContent#getMimeType()
+	 */
+	@Override
+	public String getMimeType() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.ComponentContent#setProperty(java.lang.String,
-     * java.lang.Object)
-     */
-    @Override
-    public void setProperty(String name, Object value) {
-        // NOP
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.clientlet.ComponentContent#setProperty(java.lang.String,
+	 * java.lang.Object)
+	 */
+	@Override
+	public void setProperty(String name, Object value) {
+		// NOP
+	}
 
-    // Backward compatibility note: Additional methods should provide an empty
-    // body.
+	// Backward compatibility note: Additional methods should provide an empty
+	// body.
 }

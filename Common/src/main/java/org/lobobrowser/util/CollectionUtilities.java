@@ -35,137 +35,134 @@ import java.util.NoSuchElementException;
  * @author J. H. S.
  */
 public class CollectionUtilities {
-    /**
-     * Instantiates a new collection utilities.
-     */
-    private CollectionUtilities() {
-        super();
-    }
-    
-    /**
-     * Gets the iterator enumeration.
-     *
-     * @param i
-     *            the i
-     * @return the iterator enumeration
-     */
-    public static Enumeration getIteratorEnumeration(final Iterator i) {
-        return new Enumeration() {
-            @Override
-            public boolean hasMoreElements() {
-                return i.hasNext();
-            }
-            
-            @Override
-            public Object nextElement() {
-                return i.next();
-            }
-        };
-    }
-    
-    /**
-     * Iterator union.
-     *
-     * @param iterators
-     *            the iterators
-     * @return the iterator
-     */
-    public static Iterator iteratorUnion(final Iterator[] iterators) {
-        return new Iterator() {
-            private int iteratorIndex = 0;
-            private Iterator current = iterators.length > 0 ? iterators[0]
-                    : null;
-                    
-            @Override
-            public boolean hasNext() {
-                for (;;) {
-                    if (current == null) {
-                        return false;
-                    }
-                    if (current.hasNext()) {
-                        return true;
-                    }
-                    iteratorIndex++;
-                    current = iteratorIndex >= iterators.length ? null
-                            : iterators[iteratorIndex];
-                }
-            }
-            
-            @Override
-            public Object next() {
-                for (;;) {
-                    if (this.current == null) {
-                        throw new NoSuchElementException();
-                    }
-                    try {
-                        return this.current.next();
-                    } catch (NoSuchElementException nse) {
-                        this.iteratorIndex++;
-                        this.current = this.iteratorIndex >= iterators.length
-                                ? null : iterators[this.iteratorIndex];
-                    }
-                }
-            }
-            
-            @Override
-            public void remove() {
-                if (this.current == null) {
-                    throw new NoSuchElementException();
-                }
-                this.current.remove();
-            }
-        };
-    }
-    
-    /**
-     * Reverse.
-     *
-     * @param collection
-     *            the collection
-     * @return the collection
-     */
-    public static Collection reverse(Collection collection) {
-        LinkedList newCollection = new LinkedList();
-        Iterator i = collection.iterator();
-        while (i.hasNext()) {
-            newCollection.addFirst(i.next());
-        }
-        return newCollection;
-    }
-    
-    /**
-     * Singleton iterator.
-     *
-     * @param item
-     *            the item
-     * @return the iterator
-     */
-    public static Iterator singletonIterator(final Object item) {
-        return new Iterator() {
-            private boolean gotItem = false;
-            
-            @Override
-            public boolean hasNext() {
-                return !this.gotItem;
-            }
-            
-            @Override
-            public Object next() {
-                if (this.gotItem) {
-                    throw new NoSuchElementException();
-                }
-                this.gotItem = true;
-                return item;
-            }
-            
-            @Override
-            public void remove() {
-                if (!this.gotItem) {
-                    this.gotItem = true;
-                } else {
-                    throw new NoSuchElementException();
-                }
-            }
-        };
-    }
+	/**
+	 * Instantiates a new collection utilities.
+	 */
+	private CollectionUtilities() {
+		super();
+	}
+
+	/**
+	 * Gets the iterator enumeration.
+	 *
+	 * @param i
+	 *            the i
+	 * @return the iterator enumeration
+	 */
+	public static Enumeration getIteratorEnumeration(final Iterator i) {
+		return new Enumeration() {
+			@Override
+			public boolean hasMoreElements() {
+				return i.hasNext();
+			}
+
+			@Override
+			public Object nextElement() {
+				return i.next();
+			}
+		};
+	}
+
+	/**
+	 * Iterator union.
+	 *
+	 * @param iterators
+	 *            the iterators
+	 * @return the iterator
+	 */
+	public static Iterator iteratorUnion(final Iterator[] iterators) {
+		return new Iterator() {
+			private int iteratorIndex = 0;
+			private Iterator current = iterators.length > 0 ? iterators[0] : null;
+
+			@Override
+			public boolean hasNext() {
+				for (;;) {
+					if (current == null) {
+						return false;
+					}
+					if (current.hasNext()) {
+						return true;
+					}
+					iteratorIndex++;
+					current = iteratorIndex >= iterators.length ? null : iterators[iteratorIndex];
+				}
+			}
+
+			@Override
+			public Object next() {
+				for (;;) {
+					if (this.current == null) {
+						throw new NoSuchElementException();
+					}
+					try {
+						return this.current.next();
+					} catch (NoSuchElementException nse) {
+						this.iteratorIndex++;
+						this.current = this.iteratorIndex >= iterators.length ? null : iterators[this.iteratorIndex];
+					}
+				}
+			}
+
+			@Override
+			public void remove() {
+				if (this.current == null) {
+					throw new NoSuchElementException();
+				}
+				this.current.remove();
+			}
+		};
+	}
+
+	/**
+	 * Reverse.
+	 *
+	 * @param collection
+	 *            the collection
+	 * @return the collection
+	 */
+	public static Collection reverse(Collection collection) {
+		LinkedList newCollection = new LinkedList();
+		Iterator i = collection.iterator();
+		while (i.hasNext()) {
+			newCollection.addFirst(i.next());
+		}
+		return newCollection;
+	}
+
+	/**
+	 * Singleton iterator.
+	 *
+	 * @param item
+	 *            the item
+	 * @return the iterator
+	 */
+	public static Iterator singletonIterator(final Object item) {
+		return new Iterator() {
+			private boolean gotItem = false;
+
+			@Override
+			public boolean hasNext() {
+				return !this.gotItem;
+			}
+
+			@Override
+			public Object next() {
+				if (this.gotItem) {
+					throw new NoSuchElementException();
+				}
+				this.gotItem = true;
+				return item;
+			}
+
+			@Override
+			public void remove() {
+				if (!this.gotItem) {
+					this.gotItem = true;
+				} else {
+					throw new NoSuchElementException();
+				}
+			}
+		};
+	}
 }

@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface VideoTrack.
  */
 public interface VideoTrack {
-	
+
 	/**
 	 * Gets the id.
 	 *

@@ -35,76 +35,81 @@ import org.lobobrowser.html.control.RUIControl;
  */
 public abstract interface UIControl {
 
-    /** Sets the RUI control.
+	/**
+	 * Sets the RUI control.
 	 *
 	 * @param ruicontrol
 	 *            the new RUI control
 	 */
-    void setRUIControl(RUIControl ruicontrol);
+	void setRUIControl(RUIControl ruicontrol);
 
-    /**
-     * Called as the control is layed out, either the first time HTML layout
-     * occurs or when the DOM changes. This method should reset its state
-     * assuming the element has changed, and change its preferred size if
-     * appropriate.
-     *
-     * @param availWidth
-     *            the avail width
-     * @param availHeight
-     *            the avail height
-     */
-    void reset(int availWidth, int availHeight);
+	/**
+	 * Called as the control is layed out, either the first time HTML layout
+	 * occurs or when the DOM changes. This method should reset its state
+	 * assuming the element has changed, and change its preferred size if
+	 * appropriate.
+	 *
+	 * @param availWidth
+	 *            the avail width
+	 * @param availHeight
+	 *            the avail height
+	 */
+	void reset(int availWidth, int availHeight);
 
-    /** Gets the preferred size.
+	/**
+	 * Gets the preferred size.
 	 *
 	 * @return the preferred size
 	 */
-    Dimension getPreferredSize();
+	Dimension getPreferredSize();
 
-    /** Gets the v align.
+	/**
+	 * Gets the v align.
 	 *
 	 * @return the v align
 	 */
-    int getVAlign();
+	int getVAlign();
 
-    /**
-     * Sets the bounds.
-     *
-     * @param x
-     *            the x
-     * @param y
-     *            the y
-     * @param width
-     *            the width
-     * @param height
-     *            the height
-     */
-    void setBounds(int x, int y, int width, int height);
+	/**
+	 * Sets the bounds.
+	 *
+	 * @param x
+	 *            the x
+	 * @param y
+	 *            the y
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 */
+	void setBounds(int x, int y, int width, int height);
 
-    /**
-     * Invalidate.
-     */
-    void invalidate();
+	/**
+	 * Invalidate.
+	 */
+	void invalidate();
 
-    /** Gets the background color.
+	/**
+	 * Gets the background color.
 	 *
 	 * @return the background color
 	 */
-    Color getBackgroundColor();
+	Color getBackgroundColor();
 
-    // boolean paintSelection(Graphics g, boolean inSelection,
-    // RenderableSpot startPoint, RenderableSpot endPoint);
-    /**
-     * Paint.
-     *
-     * @param g
-     *            the g
-     */
-    void paint(Graphics g);
+	// boolean paintSelection(Graphics g, boolean inSelection,
+	// RenderableSpot startPoint, RenderableSpot endPoint);
+	/**
+	 * Paint.
+	 *
+	 * @param g
+	 *            the g
+	 */
+	void paint(Graphics g);
 
-    /** Gets the component.
+	/**
+	 * Gets the component.
 	 *
 	 * @return the component
 	 */
-    Component getComponent();
+	Component getComponent();
 }

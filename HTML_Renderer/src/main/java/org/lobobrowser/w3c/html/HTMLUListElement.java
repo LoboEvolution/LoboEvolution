@@ -21,7 +21,6 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLUListElement.
  */

@@ -80,7 +80,7 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 	@Override
 	public void updateEnabling() {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
-		action.setEnabled((entry != null) && !entry.getUrl().toExternalForm().startsWith(this.urlPrefix));
+		action.setEnabled(entry != null && !entry.getUrl().toExternalForm().startsWith(this.urlPrefix));
 	}
 
 	/*

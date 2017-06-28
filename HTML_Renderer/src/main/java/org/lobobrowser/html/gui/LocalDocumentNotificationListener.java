@@ -34,104 +34,104 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
  *
  * @see LocalDocumentNotificationEvent
  */
-public class LocalDocumentNotificationListener implements
-DocumentNotificationListener {
+public class LocalDocumentNotificationListener implements DocumentNotificationListener {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DocumentNotificationListener#allInvalidated()
-     */
-    @Override
-    public void allInvalidated() {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.GENERIC, null));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.DocumentNotificationListener#allInvalidated()
+	 */
+	@Override
+	public void allInvalidated() {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.GENERIC, null));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DocumentNotificationListener#invalidated(org.
-     * lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void invalidated(DOMNodeImpl node) {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.GENERIC, node));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.DocumentNotificationListener#invalidated(org.
+	 * lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void invalidated(DOMNodeImpl node) {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.GENERIC, node));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.DocumentNotificationListener#lookInvalidated(org
-     * .lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void lookInvalidated(DOMNodeImpl node) {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.LOOK, node));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.DocumentNotificationListener#lookInvalidated(
+	 * org .lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void lookInvalidated(DOMNodeImpl node) {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.LOOK, node));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.DocumentNotificationListener#positionInvalidated
-     * (org.lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void positionInvalidated(DOMNodeImpl node) {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.POSITION, node));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#
+	 * positionInvalidated (org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void positionInvalidated(DOMNodeImpl node) {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.POSITION, node));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.DocumentNotificationListener#sizeInvalidated(org
-     * .lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void sizeInvalidated(DOMNodeImpl node) {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.SIZE, node));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.DocumentNotificationListener#sizeInvalidated(
+	 * org .lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void sizeInvalidated(DOMNodeImpl node) {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.SIZE, node));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.DocumentNotificationListener#externalScriptLoading
-     * (org.lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void externalScriptLoading(DOMNodeImpl node) {
-        // Ignorable here.
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#
+	 * externalScriptLoading (org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void externalScriptLoading(DOMNodeImpl node) {
+		// Ignorable here.
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DocumentNotificationListener#nodeLoaded(org.
-     * lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void nodeLoaded(DOMNodeImpl node) {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.GENERIC, node));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.dombl.DocumentNotificationListener#nodeLoaded(org.
+	 * lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void nodeLoaded(DOMNodeImpl node) {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.GENERIC, node));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.dombl.DocumentNotificationListener#structureInvalidated
-     * (org.lobobrowser.html.domimpl.DOMNodeImpl)
-     */
-    @Override
-    public void structureInvalidated(DOMNodeImpl node) {
-        HtmlPanel html = new HtmlPanel();
-        html.addNotification(new DocumentNotification(
-                DocumentNotification.GENERIC, node));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DocumentNotificationListener#
+	 * structureInvalidated (org.lobobrowser.html.domimpl.DOMNodeImpl)
+	 */
+	@Override
+	public void structureInvalidated(DOMNodeImpl node) {
+		HtmlPanel html = new HtmlPanel();
+		html.addNotification(new DocumentNotification(DocumentNotification.GENERIC, node));
+	}
 }

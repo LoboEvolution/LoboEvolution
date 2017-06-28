@@ -37,20 +37,20 @@ import org.lobobrowser.w3c.svg.SVGLength;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
+import org.lobobrowser.w3c.svg.SVGTransform;
 import org.lobobrowser.w3c.svg.SVGTransformList;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class SVGUtility {
-	
+
 	public static String SCALE = "scale";
 	public static String TRANSLATE = "translate";
 	public static String MATRIX = "matrix";
 	public static String ROTATE = "rotate";
 	public static String SKEW_X = "skewX";
-	public static String SKEW_Y= "skewY";
-	
-	
+	public static String SKEW_Y = "skewY";
+
 	public static SVGPointList constructPointList(String pointString) {
 		SVGPointListImpl points = new SVGPointListImpl();
 		StringTokenizer st = new StringTokenizer(pointString, " ,", false);
@@ -62,14 +62,15 @@ public class SVGUtility {
 		}
 		return points;
 	}
-	
+
 	public static SVGLengthList constructLengthList(String lengthString) {
-		
+
 		SVGLengthListImpl lengthList = new SVGLengthListImpl();
-		
-		if(lengthString == null)
+
+		if (lengthString == null) {
 			return lengthList;
-			
+		}
+
 		StringTokenizer st = new StringTokenizer(lengthString, " ", false);
 		while (st.hasMoreTokens()) {
 			int length = Integer.parseInt(st.nextToken());
@@ -77,12 +78,13 @@ public class SVGUtility {
 			lengthList.appendItem(lnt);
 		}
 		return lengthList;
-	}	
-	
+	}
+
 	public static SVGTransformList createTransformList(String transformString) {
 
-		if (transformString == null)
+		if (transformString == null) {
 			return null;
+		}
 
 		transformString = transformString.trim();
 		SVGTransformListImpl transformList = new SVGTransformListImpl();
@@ -91,10 +93,10 @@ public class SVGUtility {
 		while (st.hasMoreTokens()) {
 
 			String transformType = st.nextToken().trim();
-			if (!st.hasMoreTokens()){
+			if (!st.hasMoreTokens()) {
 				break;
 			}
-			
+
 			String transformArgs = st.nextToken().trim();
 			if (transformType.equals(MATRIX)) {
 				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
@@ -106,10 +108,10 @@ public class SVGUtility {
 					float d = Float.parseFloat(st1.nextToken());
 					float e = Float.parseFloat(st1.nextToken());
 					float f = Float.parseFloat(st1.nextToken());
-					SVGTransformImpl transform = new SVGTransformImpl(SVGTransformImpl.SVG_TRANSFORM_MATRIX);
-					 SVGMatrixImpl matrix = new SVGMatrixImpl(a,b,c,d,e,f);
-					 transform.setMatrix(matrix);
-					 transformList.appendItem(transform);
+					SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_MATRIX);
+					SVGMatrixImpl matrix = new SVGMatrixImpl(a, b, c, d, e, f);
+					transform.setMatrix(matrix);
+					transformList.appendItem(transform);
 				}
 			} else if (transformType.equals(TRANSLATE)) {
 				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
@@ -127,7 +129,7 @@ public class SVGUtility {
 						ty = Float.parseFloat(st1.nextToken());
 					}
 				}
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransformImpl.SVG_TRANSFORM_TRANSLATE);
+				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_TRANSLATE);
 				transform.setTranslate(tx, ty);
 				transformList.appendItem(transform);
 			} else if (transformType.equals(SCALE)) {
@@ -147,7 +149,7 @@ public class SVGUtility {
 						sy = Float.parseFloat(st1.nextToken());
 					}
 				}
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransformImpl.SVG_TRANSFORM_SCALE);
+				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SCALE);
 				transform.setScale(sx, sy);
 				transformList.appendItem(transform);
 			} else if (transformType.equals(ROTATE)) {
@@ -171,17 +173,17 @@ public class SVGUtility {
 						cy = Float.parseFloat(st1.nextToken());
 					}
 				}
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransformImpl.SVG_TRANSFORM_ROTATE);
+				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_ROTATE);
 				transform.setRotate(angle, cx, cy);
 				transformList.appendItem(transform);
 			} else if (transformType.equals(SKEW_X)) {
 				float skewAngle = Float.parseFloat(transformArgs);
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransformImpl.SVG_TRANSFORM_SKEWX);
+				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWX);
 				transform.setSkewX(skewAngle);
 				transformList.appendItem(transform);
 			} else if (transformType.equals(SKEW_Y)) {
 				float skewAngle = Float.parseFloat(transformArgs);
-				SVGTransformImpl transform = new SVGTransformImpl(SVGTransformImpl.SVG_TRANSFORM_SKEWY);
+				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWY);
 				transform.setSkewY(skewAngle);
 				transformList.appendItem(transform);
 			}
@@ -196,7 +198,7 @@ public class SVGUtility {
 		String fontVariant = CSSValuesProperties.SMALL_CAPS;
 		String fontFamily = Font.SANS_SERIF;
 		String fontWeight = CSSValuesProperties.BOLD;
-		
+
 		if (fs != null) {
 			fontSize = HtmlValues.getFontSize(fs, null);
 		}
@@ -204,7 +206,8 @@ public class SVGUtility {
 		if (ff != null) {
 			fontFamily = ff;
 		}
-		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,0,false,0);
+		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,
+				0, false, 0);
 	}
 
 	public static String getText(Node n) {
@@ -218,7 +221,8 @@ public class SVGUtility {
 				nodeValue = nodeValue.replace('\n', ' ');
 				nodeValue = nodeValue.replace('\r', ' ');
 				nodeValue = nodeValue.replace('\t', ' ');
-				text = nodeValue;;
+				text = nodeValue;
+				;
 			}
 		}
 		return text.trim();
@@ -243,7 +247,7 @@ public class SVGUtility {
 			}
 		}
 	}
-	
+
 	public static float getClockSecs(String clockVal) {
 		try {
 			if (clockVal.indexOf(":") != -1) {
@@ -253,11 +257,11 @@ public class SVGUtility {
 					int hours = Integer.parseInt(st.nextToken());
 					int minutes = Integer.parseInt(st.nextToken());
 					float seconds = Float.parseFloat(st.nextToken());
-					return (hours * 3600 + minutes * 60 + seconds);
+					return hours * 3600 + minutes * 60 + seconds;
 				} else if (numTokens == 2) { // is a partial clock value
 					int minutes = Integer.parseInt(st.nextToken());
 					float seconds = Float.parseFloat(st.nextToken());
-					return (minutes * 60 + seconds);
+					return minutes * 60 + seconds;
 				} else {
 					return 0;
 				}

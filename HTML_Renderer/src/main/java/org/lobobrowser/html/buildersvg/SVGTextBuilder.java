@@ -25,7 +25,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.svgimpl.SVGTextElementImpl;
 
 public class SVGTextBuilder extends HTMLElementBuilder {
-	
+
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new SVGTextElementImpl(name);

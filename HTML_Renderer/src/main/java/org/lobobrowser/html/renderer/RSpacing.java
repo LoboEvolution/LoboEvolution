@@ -211,7 +211,7 @@ public final class RSpacing extends BaseBoundableRenderable {
 	 */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-		if ((this == startPoint.getRenderable()) || (this == endPoint.getRenderable())) {
+		if (this == startPoint.getRenderable() || this == endPoint.getRenderable()) {
 			if (inSelection) {
 				return false;
 			}
@@ -237,7 +237,7 @@ public final class RSpacing extends BaseBoundableRenderable {
 	@Override
 	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
-		if ((this == startPoint.getRenderable()) || (this == endPoint.getRenderable())) {
+		if (this == startPoint.getRenderable() || this == endPoint.getRenderable()) {
 			if (inSelection) {
 				return false;
 			}

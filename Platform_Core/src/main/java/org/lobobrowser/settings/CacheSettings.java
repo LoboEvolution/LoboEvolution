@@ -23,10 +23,8 @@ package org.lobobrowser.settings;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.CacheManager;
 import org.lobobrowser.store.StorageManager;
@@ -37,106 +35,106 @@ import org.lobobrowser.store.StorageManager;
  */
 public class CacheSettings implements Serializable {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(CacheSettings.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(CacheSettings.class.getName());
 
-    /** The Constant instance. */
-    private static final CacheSettings instance;
+	/** The Constant instance. */
+	private static final CacheSettings instance;
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 22574500900000604L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 22574500900000604L;
 
-    static {
-        CacheSettings ins = null;
-        try {
-            ins = (CacheSettings) StorageManager.getInstance()
-                    .retrieveSettings(CacheSettings.class.getSimpleName(),
-                            CacheSettings.class.getClassLoader());
-        } catch (Exception err) {
-            logger.error(
-                    "getInstance(): Unable to retrieve settings.", err);
-        }
-        if (ins == null) {
-            ins = new CacheSettings();
-        }
-        instance = ins;
-    }
+	static {
+		CacheSettings ins = null;
+		try {
+			ins = (CacheSettings) StorageManager.getInstance().retrieveSettings(CacheSettings.class.getSimpleName(),
+					CacheSettings.class.getClassLoader());
+		} catch (Exception err) {
+			logger.error("getInstance(): Unable to retrieve settings.", err);
+		}
+		if (ins == null) {
+			ins = new CacheSettings();
+		}
+		instance = ins;
+	}
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static CacheSettings getInstance() {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
-            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-        }
-        return instance;
-    }
+	public static CacheSettings getInstance() {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+		}
+		return instance;
+	}
 
-    /**
-     * Save.
-     */
-    public void save() {
-        try {
-            StorageManager.getInstance().saveSettings(
-                    this.getClass().getSimpleName(), this);
-        } catch (IOException ioe) {
-            logger.error("Unable to save settings: "
-                    + this.getClass().getSimpleName() + ".", ioe);
-        }
-    }
+	/**
+	 * Save.
+	 */
+	public void save() {
+		try {
+			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
+		} catch (IOException ioe) {
+			logger.error("Unable to save settings: " + this.getClass().getSimpleName() + ".", ioe);
+		}
+	}
 
-    /**
-     * Instantiates a new cache settings.
-     */
-    private CacheSettings() {
-        resetDefaults();
-    }
+	/**
+	 * Instantiates a new cache settings.
+	 */
+	private CacheSettings() {
+		resetDefaults();
+	}
 
-    /**
-     * Reset defaults.
-     */
-    public void resetDefaults() {
-        this.setMaxRAMCacheSize(5 * 1024 * 1024);
-        this.setDefaultCacheExpirationOffset(60);
-    }
+	/**
+	 * Reset defaults.
+	 */
+	public void resetDefaults() {
+		this.setMaxRAMCacheSize(5 * 1024 * 1024);
+		this.setDefaultCacheExpirationOffset(60);
+	}
 
-    /** Gets the max ram cache size.
+	/**
+	 * Gets the max ram cache size.
 	 *
 	 * @return the max ram cache size
 	 */
-    public int getMaxRAMCacheSize() {
-        return CacheManager.getInstance().getMaxTransientCacheSize();
-    }
+	public int getMaxRAMCacheSize() {
+		return CacheManager.getInstance().getMaxTransientCacheSize();
+	}
 
-    /** Sets the max ram cache size.
+	/**
+	 * Sets the max ram cache size.
 	 *
 	 * @param maxRAMCacheSize
 	 *            the new max ram cache size
 	 */
-    public void setMaxRAMCacheSize(int maxRAMCacheSize) {
-        CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
-    }
+	public void setMaxRAMCacheSize(int maxRAMCacheSize) {
+		CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
+	}
 
-    /** The default cache expiration offset. */
-    private int defaultCacheExpirationOffset;
+	/** The default cache expiration offset. */
+	private int defaultCacheExpirationOffset;
 
-    /** Gets the default cache expiration offset.
+	/**
+	 * Gets the default cache expiration offset.
 	 *
 	 * @return the default cache expiration offset
 	 */
-    public int getDefaultCacheExpirationOffset() {
-        return defaultCacheExpirationOffset;
-    }
+	public int getDefaultCacheExpirationOffset() {
+		return defaultCacheExpirationOffset;
+	}
 
-    /** Sets the default cache expiration offset.
+	/**
+	 * Sets the default cache expiration offset.
 	 *
 	 * @param defaultCacheExpirationOffset
 	 *            the new default cache expiration offset
 	 */
-    public void setDefaultCacheExpirationOffset(int defaultCacheExpirationOffset) {
-        this.defaultCacheExpirationOffset = defaultCacheExpirationOffset;
-    }
+	public void setDefaultCacheExpirationOffset(int defaultCacheExpirationOffset) {
+		this.defaultCacheExpirationOffset = defaultCacheExpirationOffset;
+	}
 }

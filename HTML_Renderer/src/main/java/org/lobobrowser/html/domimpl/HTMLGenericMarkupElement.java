@@ -25,13 +25,13 @@ package org.lobobrowser.html.domimpl;
  */
 public class HTMLGenericMarkupElement extends HTMLAbstractUIElement {
 
-    /**
-     * Instantiates a new HTML generic markup element.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLGenericMarkupElement(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML generic markup element.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLGenericMarkupElement(String name) {
+		super(name);
+	}
 }

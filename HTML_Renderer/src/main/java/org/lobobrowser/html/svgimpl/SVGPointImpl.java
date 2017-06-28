@@ -25,7 +25,7 @@ import org.lobobrowser.w3c.svg.SVGPoint;
 import org.w3c.dom.DOMException;
 
 public class SVGPointImpl implements SVGPoint {
-	
+
 	private float x;
 	private float y;
 

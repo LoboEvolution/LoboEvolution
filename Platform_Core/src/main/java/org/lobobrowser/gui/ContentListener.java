@@ -30,16 +30,16 @@ import java.util.EventListener;
  */
 public interface ContentListener extends EventListener {
 
-    /** The Constant EMPTY_ARRAY. */
-    ContentListener[] EMPTY_ARRAY = new ContentListener[0];
+	/** The Constant EMPTY_ARRAY. */
+	ContentListener[] EMPTY_ARRAY = new ContentListener[0];
 
-    /**
-     * Called as soon as the content has been set in a {@link FramePanel}. Note
-     * that content can be set before the originating document has been fully
-     * loaded, for example when incremental rendering is performed.
-     *
-     * @param event
-     *            The content event.
-     */
-    void contentSet(ContentEvent event);
+	/**
+	 * Called as soon as the content has been set in a {@link FramePanel}. Note
+	 * that content can be set before the originating document has been fully
+	 * loaded, for example when incremental rendering is performed.
+	 *
+	 * @param event
+	 *            The content event.
+	 */
+	void contentSet(ContentEvent event);
 }

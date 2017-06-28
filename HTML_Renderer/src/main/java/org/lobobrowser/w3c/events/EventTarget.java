@@ -24,7 +24,6 @@ import org.lobobrowser.html.jsimpl.EventException;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
 
-
 /**
  * The public interface EventTarget.
  */

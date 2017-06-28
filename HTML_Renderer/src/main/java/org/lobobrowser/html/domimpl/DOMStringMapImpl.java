@@ -27,46 +27,52 @@ import org.lobobrowser.w3c.html.DOMStringMap;
  */
 public class DOMStringMapImpl implements DOMStringMap {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.DOMStringMap#getElement(java.lang.String)
-     */
-    @Override
-    public String getElement(String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.DOMStringMap#getElement(java.lang.String)
+	 */
+	@Override
+	public String getElement(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.DOMStringMap#setElement(java.lang.String,
-     * java.lang.String)
-     */
-    @Override
-    public void setElement(String name, String value) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.DOMStringMap#setElement(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void setElement(String name, String value) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.DOMStringMap#createElement(java.lang.String,
-     * java.lang.String)
-     */
-    @Override
-    public void createElement(String name, String value) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.DOMStringMap#createElement(java.lang.String,
+	 * java.lang.String)
+	 */
+	@Override
+	public void createElement(String name, String value) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.DOMStringMap#deleteElement(java.lang.String)
-     */
-    @Override
-    public void deleteElement(String name) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.DOMStringMap#deleteElement(java.lang.String)
+	 */
+	@Override
+	public void deleteElement(String name) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 
 }

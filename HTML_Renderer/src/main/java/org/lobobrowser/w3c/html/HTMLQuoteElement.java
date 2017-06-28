@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLQuoteElement.
  */
 public interface HTMLQuoteElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the cite.
 	 *

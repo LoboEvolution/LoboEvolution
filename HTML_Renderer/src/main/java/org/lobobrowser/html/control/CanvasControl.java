@@ -245,7 +245,7 @@ public class CanvasControl extends BaseControl {
 	private void strokeText(Graphics2D g, CanvasInfo ci) {
 		FontRenderContext frc = new FontRenderContext(null, false, false);
 		TextLayout tl = new TextLayout(ci.getText(), ci.getFont(), frc);
-		Point2D.Float pos = calcTextPos(ci,g);
+		Point2D.Float pos = calcTextPos(ci, g);
 		AffineTransform textAt = AffineTransform.getTranslateInstance(pos.x, pos.y);
 		textAt.translate(ci.getX(), ci.getY());
 		Shape outline = tl.getOutline(textAt);
@@ -272,9 +272,10 @@ public class CanvasControl extends BaseControl {
 
 			u = new URL(ci.getImage().getSrc());
 			URLConnection con = u.openConnection();
-            con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			Image img = ImageIO.read(con.getInputStream());
-			AffineTransform at = new AffineTransform(ci.getWidth() / ci.getImage().getWidth(), 0, 0, ci.getHeight() / ci.getImage().getHeight(), ci.getX(), ci.getY());
+			AffineTransform at = new AffineTransform(ci.getWidth() / ci.getImage().getWidth(), 0, 0,
+					ci.getHeight() / ci.getImage().getHeight(), ci.getX(), ci.getY());
 			graphics.drawImage(img, at, (ImageObserver) null);
 		} catch (Exception e) {
 			logger.error(e.getLocalizedMessage());
@@ -294,9 +295,10 @@ public class CanvasControl extends BaseControl {
 		try {
 			u = new URL(ci.getImage().getSrc());
 			URLConnection con = u.openConnection();
-            con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			Image img = ImageIO.read(con.getInputStream());
-			img = createImage(new FilteredImageSource(img.getSource(), new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
+			img = createImage(new FilteredImageSource(img.getSource(),
+					new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
 			g.clip(new Rectangle2D.Float(ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh()));
 			g.drawImage(img, ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh(), this);
 		} catch (Exception e) {
@@ -315,7 +317,7 @@ public class CanvasControl extends BaseControl {
 	private void clearRect(Graphics2D g, CanvasInfo ci) {
 		g.clearRect(ci.getX(), ci.getY(), ci.getWidth(), ci.getHeight());
 	}
-	
+
 	private Point2D.Float calcTextPos(CanvasInfo ci, Graphics2D graphics) {
 
 		FontMetrics metrics = graphics.getFontMetrics();
@@ -324,7 +326,7 @@ public class CanvasControl extends BaseControl {
 		int y = ci.getY();
 		String bs = ci.getBaseline();
 		String ta = ci.getTextAlign();
-		
+
 		if ("center".equals(ta)) {
 			x = x - metrics.stringWidth(ci.getText()) / 2;
 		} else if ("right".equals(ta)) {

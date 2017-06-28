@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface MediaController_Constructor.
  */
 public interface MediaController_Constructor {
-	
+
 	/**
 	 * Creates the instance.
 	 *

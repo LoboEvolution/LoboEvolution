@@ -25,10 +25,10 @@ package org.lobobrowser.html.layout;
  */
 public class TableLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new table layout.
-     */
-    public TableLayout() {
-        super(DISPLAY_TABLE);
-    }
+	/**
+	 * Instantiates a new table layout.
+	 */
+	public TableLayout() {
+		super(DISPLAY_TABLE);
+	}
 }

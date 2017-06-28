@@ -32,49 +32,53 @@ import java.security.Permission;
  */
 public class HistoryPermission extends Permission {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new history permission.
-     */
-    public HistoryPermission() {
-        super("");
-    }
+	/**
+	 * Instantiates a new history permission.
+	 */
+	public HistoryPermission() {
+		super("");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.security.Permission#implies(java.security.Permission)
-     */
-    @Override
-    public boolean implies(Permission permission) {
-        return permission instanceof HistoryPermission;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.security.Permission#implies(java.security.Permission)
+	 */
+	@Override
+	public boolean implies(Permission permission) {
+		return permission instanceof HistoryPermission;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.security.Permission#getActions()
-     */
-    @Override
-    public String getActions() {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.security.Permission#getActions()
+	 */
+	@Override
+	public String getActions() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(Object)
-     */
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof HistoryPermission;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		return obj instanceof HistoryPermission;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-        return 1000;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return 1000;
+	}
 }

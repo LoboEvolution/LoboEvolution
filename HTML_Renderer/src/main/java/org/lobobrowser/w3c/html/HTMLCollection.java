@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface HTMLCollection.
  */
 public interface HTMLCollection {
-	
+
 	/**
 	 * Gets the length.
 	 *
@@ -40,7 +39,8 @@ public interface HTMLCollection {
 	/**
 	 * Item.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the node
 	 */
 	public Node item(int index);
@@ -48,7 +48,8 @@ public interface HTMLCollection {
 	/**
 	 * Named item.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 * @return the node
 	 */
 	public Node namedItem(String name);

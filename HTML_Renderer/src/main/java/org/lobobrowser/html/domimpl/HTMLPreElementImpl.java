@@ -32,46 +32,47 @@ import org.lobobrowser.w3c.html.HTMLPreElement;
 /**
  * The Class HTMLPreElementImpl.
  */
-public class HTMLPreElementImpl extends HTMLAbstractUIElement implements
-HTMLPreElement {
+public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPreElement {
 
-    /**
-     * Instantiates a new HTML pre element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLPreElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML pre element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLPreElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLPreElement#getWidth()
-     */
-    @Override
-    public int getWidth() {
-        String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
-        return HtmlValues.getPixelSize(widthText, null, 1);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLPreElement#getWidth()
+	 */
+	@Override
+	public int getWidth() {
+		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return HtmlValues.getPixelSize(widthText, null, 1);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLPreElement#setWidth(int)
-     */
-    @Override
-    public void setWidth(int width) {
-        this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLPreElement#setWidth(int)
+	 */
+	@Override
+	public void setWidth(int width) {
+		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new PreRenderState(prevRenderState, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new PreRenderState(prevRenderState, this);
+	}
 }

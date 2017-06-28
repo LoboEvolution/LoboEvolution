@@ -40,7 +40,7 @@ public class InputEmailControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The email. */
 	private JTextFieldImpl email;
 
@@ -97,7 +97,7 @@ public class InputEmailControl extends BaseInputTextControl {
 	private boolean isEmail(String keyCode) {
 		if (keyCode != null && keyCode.length() > 0) {
 			Pattern pattern = Pattern
-					.compile((strPattern != null && strPattern.length() > 0) ? strPattern : EMAIL_PATTERN);
+					.compile(strPattern != null && strPattern.length() > 0 ? strPattern : EMAIL_PATTERN);
 			Matcher matcher = pattern.matcher(keyCode);
 			return matcher.matches();
 		} else {

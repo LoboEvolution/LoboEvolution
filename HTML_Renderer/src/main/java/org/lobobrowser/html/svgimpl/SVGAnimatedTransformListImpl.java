@@ -24,10 +24,10 @@ import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGTransformList;
 
 public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
-	
-	private String trasform; 
-	
-	public SVGAnimatedTransformListImpl(String trasform){
+
+	private String trasform;
+
+	public SVGAnimatedTransformListImpl(String trasform) {
 		this.trasform = trasform;
 	}
 

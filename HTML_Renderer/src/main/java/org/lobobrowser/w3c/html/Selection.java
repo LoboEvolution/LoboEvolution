@@ -23,7 +23,6 @@ package org.lobobrowser.w3c.html;
 import org.w3c.dom.Node;
 import org.w3c.dom.ranges.Range;
 
-
 /**
  * The public interface Selection.
  */

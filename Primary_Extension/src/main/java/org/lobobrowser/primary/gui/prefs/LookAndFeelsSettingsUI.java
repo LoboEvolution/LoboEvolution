@@ -54,9 +54,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import org.lobobrowser.primary.gui.FontLabel;
 import org.lobobrowser.primary.gui.AbstractSettingsUI;
 import org.lobobrowser.primary.gui.ColorComboBox;
+import org.lobobrowser.primary.gui.FontLabel;
 import org.lobobrowser.primary.gui.ValidationException;
 import org.lobobrowser.util.gui.LAFSettings;
 
@@ -67,12 +67,12 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The settings. */
 	private LAFSettings settings = LAFSettings.getInstance();
-	
+
 	private String PREVIEW_TEXT = "Preview Font";
-	
+
 	/** The Acryl Box. */
 	private JCheckBox acrylCheckBox;
 
@@ -111,7 +111,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	/** The Texture Box. */
 	private JCheckBox textureCheckBox;
-	
+
 	/** The Bold Box. */
 	private JCheckBox boldCheckBox;
 
@@ -129,30 +129,30 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	/** The Superscript Box. */
 	private JCheckBox superscriptCheckBox;
-	
+
 	/** The color Combo Box. */
 	private ColorComboBox colorComboBox;
-	
+
 	/** The search engine list control. */
 	private JComboBox<String> fontList;
-	
+
 	/** The Font Size list. */
 	private JComboBox<String> fontSizeList;
-	
+
 	protected FontLabel previewLabel;
-	
+
 	public LookAndFeelsSettingsUI() {
-		
+
 		JPanel groupBox = new JPanel();
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		
+
 		boldCheckBox = new JCheckBox(LAFSettings.BOLD);
 		italicCheckBox = new JCheckBox(LAFSettings.ITALIC);
 		underlineCheckBox = new JCheckBox(LAFSettings.UNDERLINE);
 		strikethroughCheckBox = new JCheckBox(LAFSettings.STRIKETHROUGH);
 		subscriptCheckBox = new JCheckBox(LAFSettings.SUBSCRIPT);
 		superscriptCheckBox = new JCheckBox(LAFSettings.SUPERSCRIPT);
-		
+
 		acrylCheckBox = new JCheckBox(LAFSettings.ACRYL);
 		aeroCheckBox = new JCheckBox(LAFSettings.AERO);
 		aluminiumCheckBox = new JCheckBox(LAFSettings.ALUMINIUM);
@@ -170,32 +170,33 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		colorComboBox.setPreferredSize(new Dimension(400, 20));
 		fontList = new JComboBox<String>(LAFSettings.FONTS);
 		fontSizeList = new JComboBox<String>(LAFSettings.FONTS_SIZE);
-		
+
 		ActionListener actionListener = new ActionListener() {
-		      public void actionPerformed(ActionEvent e) {
-		        updatePreview();
-		      }
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				updatePreview();
+			}
 		};
-		
+
 		this.loadSettings();
-		
-	    boldCheckBox.addActionListener(actionListener);
-	    italicCheckBox.addActionListener(actionListener);
-	    underlineCheckBox.addActionListener(actionListener);
-	    strikethroughCheckBox.addActionListener(actionListener);
-	    subscriptCheckBox.addActionListener(actionListener);
-	    superscriptCheckBox.addActionListener(actionListener);
-	    colorComboBox.addActionListener(actionListener);
-	    fontList.addActionListener(actionListener);
-	    fontSizeList.addActionListener(actionListener);
-		
+
+		boldCheckBox.addActionListener(actionListener);
+		italicCheckBox.addActionListener(actionListener);
+		underlineCheckBox.addActionListener(actionListener);
+		strikethroughCheckBox.addActionListener(actionListener);
+		subscriptCheckBox.addActionListener(actionListener);
+		superscriptCheckBox.addActionListener(actionListener);
+		colorComboBox.addActionListener(actionListener);
+		fontList.addActionListener(actionListener);
+		fontSizeList.addActionListener(actionListener);
+
 		groupBox.add(lookAndFeelsPanel());
 		groupBox.add(fontPanel());
-	    groupBox.add(effectsPanel());
-	    groupBox.add(fontColorPanel());
-	    groupBox.add(previewPanel());
-	    
-	    add(groupBox);
+		groupBox.add(effectsPanel());
+		groupBox.add(fontColorPanel());
+		groupBox.add(previewPanel());
+
+		add(groupBox);
 	}
 
 	@Override
@@ -222,8 +223,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		settings.setSuperscript(this.superscriptCheckBox.isSelected());
 		settings.setFontSize(new Float(this.fontSizeList.getSelectedItem().toString()));
 		settings.setFont(this.fontList.getSelectedItem().toString());
-		settings.setColor((Color)colorComboBox.getSelectedItem());
-		
+		settings.setColor((Color) colorComboBox.getSelectedItem());
+
 		if (validate(settings)) {
 			settings.save();
 		}
@@ -272,35 +273,35 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		subscriptCheckBox.revalidate();
 		superscriptCheckBox.revalidate();
 		colorComboBox.setSelectedItem(Color.BLACK);
-		
+
 		previewLabel.setText(PREVIEW_TEXT);
 		Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
 		attributes.put(FAMILY, LAFSettings.TIMES_NEW_ROMAN);
 		attributes.put(SIZE, (float) 14.0);
 		previewLabel.setFont(new Font(attributes));
-		previewLabel.setForeground(Color.BLACK);//TODO
-		
+		previewLabel.setForeground(Color.BLACK);// TODO
+
 	}
-	
-	private Component lookAndFeelsPanel(){
+
+	private Component lookAndFeelsPanel() {
 		JPanel p = new JPanel(new GridLayout(4, 3, 10, 5));
-	    p.setBorder(new TitledBorder(new EtchedBorder(), "Look And Feels"));
-	    p.add(acrylCheckBox);    
-	    p.add(aeroCheckBox);       
-	    p.add(aluminiumCheckBox);   
-	    p.add(bernsteinCheckBox);
-	    p.add(fastCheckBox);
-	    p.add(graphiteCheckBox);
-	    p.add(hiFiCheckBox);
-	    p.add(lunaCheckBox);
-	    p.add(mcWinCheckBox);       
-	    p.add(mintCheckBox);
-	    p.add(noireCheckBox);       
-	    p.add(smartCheckBox);
-	    p.add(textureCheckBox);
-	    return p;
+		p.setBorder(new TitledBorder(new EtchedBorder(), "Look And Feels"));
+		p.add(acrylCheckBox);
+		p.add(aeroCheckBox);
+		p.add(aluminiumCheckBox);
+		p.add(bernsteinCheckBox);
+		p.add(fastCheckBox);
+		p.add(graphiteCheckBox);
+		p.add(hiFiCheckBox);
+		p.add(lunaCheckBox);
+		p.add(mcWinCheckBox);
+		p.add(mintCheckBox);
+		p.add(noireCheckBox);
+		p.add(smartCheckBox);
+		p.add(textureCheckBox);
+		return p;
 	}
-	
+
 	private Component fontPanel() {
 		JPanel p = new JPanel(new GridLayout(1, 2, 10, 5));
 		p.setBorder(new TitledBorder(new EtchedBorder(), "Font"));
@@ -327,7 +328,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		p.add(colorComboBox);
 		return p;
 	}
-	
+
 	private Component previewPanel() {
 		JPanel p = new JPanel(new BorderLayout());
 		p.setBorder(new TitledBorder(new EtchedBorder(), "Preview"));
@@ -335,14 +336,15 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		p.add(previewLabel, BorderLayout.CENTER);
 		return p;
 	}
-	
+
 	private void updatePreview() {
 		StringBuilder previewText = new StringBuilder(PREVIEW_TEXT);
-		String name = (String)fontList.getSelectedItem();
-		int size = Integer.valueOf((String)fontSizeList.getSelectedItem());
-		
-		if (size <= 0)
+		String name = (String) fontList.getSelectedItem();
+		int size = Integer.valueOf((String) fontSizeList.getSelectedItem());
+
+		if (size <= 0) {
 			return;
+		}
 
 		Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
 
@@ -366,16 +368,19 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 			previewText.insert(previewText.length() - 7, "</strike>");
 		}
 
-		if (boldCheckBox.isSelected())
+		if (boldCheckBox.isSelected()) {
 			attributes.put(WEIGHT, WEIGHT_BOLD);
-		if (italicCheckBox.isSelected())
+		}
+		if (italicCheckBox.isSelected()) {
 			attributes.put(POSTURE, POSTURE_OBLIQUE);
+		}
 
 		if (subscriptCheckBox.isSelected()) {
 			attributes.put(SUPERSCRIPT, SUPERSCRIPT_SUB);
 		}
-		if (superscriptCheckBox.isSelected())
+		if (superscriptCheckBox.isSelected()) {
 			attributes.put(SUPERSCRIPT, SUPERSCRIPT_SUPER);
+		}
 
 		superscriptCheckBox.setEnabled(!subscriptCheckBox.isSelected());
 		subscriptCheckBox.setEnabled(!superscriptCheckBox.isSelected());
@@ -389,7 +394,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		previewLabel.setForeground(c);
 		previewLabel.repaint();
 	}
-	
+
 	private void loadSettings() {
 		LAFSettings settings = this.settings;
 		acrylCheckBox.setSelected(settings.isAcryl());
@@ -411,7 +416,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		strikethroughCheckBox.setSelected(settings.isStrikethrough());
 		subscriptCheckBox.setSelected(settings.isSubscript());
 		superscriptCheckBox.setSelected(settings.isSuperscript());
-		fontSizeList.setSelectedItem(String.valueOf((int)(Math.round(settings.getFontSize()))));
+		fontSizeList.setSelectedItem(String.valueOf(Math.round(settings.getFontSize())));
 		fontList.setSelectedItem(settings.getFont());
 		colorComboBox.setSelectedItem(settings.getColor());
 		acrylCheckBox.revalidate();
@@ -439,32 +444,45 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	private boolean validate(LAFSettings settings) {
 
 		int check = 0;
-		if (settings.isAcryl())
+		if (settings.isAcryl()) {
 			check = check + 1;
-		if (settings.isAero())
+		}
+		if (settings.isAero()) {
 			check = check + 1;
-		if (settings.isAluminium())
+		}
+		if (settings.isAluminium()) {
 			check = check + 1;
-		if (settings.isBernstein())
+		}
+		if (settings.isBernstein()) {
 			check = check + 1;
-		if (settings.isFast())
+		}
+		if (settings.isFast()) {
 			check = check + 1;
-		if (settings.isGraphite())
+		}
+		if (settings.isGraphite()) {
 			check = check + 1;
-		if (settings.isHiFi())
+		}
+		if (settings.isHiFi()) {
 			check = check + 1;
-		if (settings.isLuna())
+		}
+		if (settings.isLuna()) {
 			check = check + 1;
-		if (settings.isMcWin())
+		}
+		if (settings.isMcWin()) {
 			check = check + 1;
-		if (settings.isMint())
+		}
+		if (settings.isMint()) {
 			check = check + 1;
-		if (settings.isNoire())
+		}
+		if (settings.isNoire()) {
 			check = check + 1;
-		if (settings.isSmart())
+		}
+		if (settings.isSmart()) {
 			check = check + 1;
-		if (settings.isTexture())
+		}
+		if (settings.isTexture()) {
 			check = check + 1;
+		}
 
 		if (check == 0) {
 			JOptionPane.showMessageDialog(this, "Checks a Look & Feels");

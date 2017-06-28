@@ -53,7 +53,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setSrc(String src) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setCrossOrigin(String crossOrigin) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setPreload(String preload) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -101,7 +101,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void load() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setCurrentTime(double currentTime) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setDefaultPlaybackRate(double defaultPlaybackRate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setPlaybackRate(double playbackRate) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setAutoplay(boolean autoplay) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -221,19 +221,19 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setLoop(boolean loop) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void play() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -245,7 +245,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setMediaGroup(String mediaGroup) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -257,7 +257,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setController(MediaController controller) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -269,7 +269,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setControls(boolean controls) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -281,7 +281,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setVolume(double volume) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -293,7 +293,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setMuted(boolean muted) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -305,7 +305,7 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	@Override
 	public void setDefaultMuted(boolean defaultMuted) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -342,5 +342,5 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	public MutableTextTrack addTextTrack(String kind, String label, String language) {
 		// TODO Auto-generated method stub
 		return null;
-	}   
+	}
 }

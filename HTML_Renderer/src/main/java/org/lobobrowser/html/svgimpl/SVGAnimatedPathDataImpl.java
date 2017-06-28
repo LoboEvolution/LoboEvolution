@@ -24,34 +24,38 @@ import org.lobobrowser.w3c.svg.SVGAnimatedPathData;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 
 public class SVGAnimatedPathDataImpl implements SVGAnimatedPathData {
-	
+
 	private SVGPathSegList pathSegList;
 
 	@Override
 	public SVGPathSegList getAnimatedNormalizedPathSegList() {
-		if(pathSegList == null)
+		if (pathSegList == null) {
 			pathSegList = new SVGPathSegListImpl();
+		}
 		return pathSegList;
 	}
 
 	@Override
 	public SVGPathSegList getAnimatedPathSegList() {
-		if(pathSegList == null)
+		if (pathSegList == null) {
 			pathSegList = new SVGPathSegListImpl();
+		}
 		return pathSegList;
 	}
 
 	@Override
 	public SVGPathSegList getNormalizedPathSegList() {
-		if(pathSegList == null)
+		if (pathSegList == null) {
 			pathSegList = new SVGPathSegListImpl();
+		}
 		return pathSegList;
 	}
 
 	@Override
 	public SVGPathSegList getPathSegList() {
-		if(pathSegList == null)
+		if (pathSegList == null) {
 			pathSegList = new SVGPathSegListImpl();
+		}
 		return pathSegList;
 	}
 

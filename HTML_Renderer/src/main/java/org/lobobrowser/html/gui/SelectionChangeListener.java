@@ -30,12 +30,12 @@ import java.util.EventListener;
  * @see org.lobobrowser.html.gui.HtmlPanel#addSelectionChangeListener(SelectionChangeListener)
  */
 public interface SelectionChangeListener extends EventListener {
-    /**
-     * Receives a selection change event. This method may be assumed to execute
-     * in the GUI thread.
-     *
-     * @param event
-     *            A {@link SelectionChangeEvent} instance.
-     */
-    void selectionChanged(SelectionChangeEvent event);
+	/**
+	 * Receives a selection change event. This method may be assumed to execute
+	 * in the GUI thread.
+	 *
+	 * @param event
+	 *            A {@link SelectionChangeEvent} instance.
+	 */
+	void selectionChanged(SelectionChangeEvent event);
 }

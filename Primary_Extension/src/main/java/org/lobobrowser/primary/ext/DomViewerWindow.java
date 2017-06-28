@@ -157,7 +157,7 @@ public class DomViewerWindow extends JFrame implements TreeSelectionListener {
 		if (path != null) {
 			DomTreeNode domNode = (DomTreeNode) path.getLastPathComponent();
 			Node node = domNode.getNode();
-			if ((node.getNodeType() == Node.TEXT_NODE) || (node.getNodeType() == Node.COMMENT_NODE)) {
+			if (node.getNodeType() == Node.TEXT_NODE || node.getNodeType() == Node.COMMENT_NODE) {
 				this.textArea.setText(node.getNodeValue());
 			} else {
 				this.textArea.setText("");

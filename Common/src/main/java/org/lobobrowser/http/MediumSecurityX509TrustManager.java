@@ -25,6 +25,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
@@ -36,69 +37,63 @@ import javax.net.ssl.X509TrustManager;
  * </p>
  */
 public class MediumSecurityX509TrustManager implements X509TrustManager {
-    
-    /** The standard trust manager. */
-    private X509TrustManager standardTrustManager = null;
-    /** The handler. */
-    private SecurityHandler handler;
-    
-    /** The host. */
-    private String host;
-    
-    /**
-     * Constructor for EasyX509TrustManager.
-     */
-    public MediumSecurityX509TrustManager(String host, SecurityHandler handler,
-            KeyStore keystore)
-                    throws NoSuchAlgorithmException, KeyStoreException {
-        super();
-        this.host = host;
-        this.handler = handler;
-        TrustManagerFactory factory = TrustManagerFactory
-                .getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        factory.init(keystore);
-        TrustManager[] trustmanagers = factory.getTrustManagers();
-        if (trustmanagers.length == 0) {
-            throw new NoSuchAlgorithmException("no trust manager found");
-        }
-        this.standardTrustManager = (X509TrustManager) trustmanagers[0];
-    }
-    
-    /**
-     * @see javax.net.ssl.X509TrustManager#checkClientTrusted(X509Certificate[],
-     *      String authType)
-     */
-    @Override
-    public void checkClientTrusted(X509Certificate[] certificates,
-            String authType) throws CertificateException {
-        standardTrustManager.checkClientTrusted(certificates, authType);
-    }
-    
-    /**
-     * @see javax.net.ssl.X509TrustManager#checkServerTrusted(X509Certificate[],
-     *      String authType)
-     */
-    @Override
-    public void checkServerTrusted(X509Certificate[] certificates,
-            String authType) throws CertificateException {
-        if ((certificates != null) && (certificates.length == 1)
-                && handler != null) {
-            certificates[0].checkValidity();
-            if (!handler.isServerTrusted(host, certificates[0])) {
-                throw new CertificateException("Self signed certificate from "
-                        + certificates[0].getIssuerX500Principal().toString()
-                        + " is not trusted");
-            }
-        } else {
-            standardTrustManager.checkServerTrusted(certificates, authType);
-        }
-    }
-    
-    /**
-     * @see javax.net.ssl.X509TrustManager#getAcceptedIssuers()
-     */
-    @Override
-    public X509Certificate[] getAcceptedIssuers() {
-        return this.standardTrustManager.getAcceptedIssuers();
-    }
+
+	/** The standard trust manager. */
+	private X509TrustManager standardTrustManager = null;
+	/** The handler. */
+	private SecurityHandler handler;
+
+	/** The host. */
+	private String host;
+
+	/**
+	 * Constructor for EasyX509TrustManager.
+	 */
+	public MediumSecurityX509TrustManager(String host, SecurityHandler handler, KeyStore keystore)
+			throws NoSuchAlgorithmException, KeyStoreException {
+		super();
+		this.host = host;
+		this.handler = handler;
+		TrustManagerFactory factory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+		factory.init(keystore);
+		TrustManager[] trustmanagers = factory.getTrustManagers();
+		if (trustmanagers.length == 0) {
+			throw new NoSuchAlgorithmException("no trust manager found");
+		}
+		this.standardTrustManager = (X509TrustManager) trustmanagers[0];
+	}
+
+	/**
+	 * @see javax.net.ssl.X509TrustManager#checkClientTrusted(X509Certificate[],
+	 *      String authType)
+	 */
+	@Override
+	public void checkClientTrusted(X509Certificate[] certificates, String authType) throws CertificateException {
+		standardTrustManager.checkClientTrusted(certificates, authType);
+	}
+
+	/**
+	 * @see javax.net.ssl.X509TrustManager#checkServerTrusted(X509Certificate[],
+	 *      String authType)
+	 */
+	@Override
+	public void checkServerTrusted(X509Certificate[] certificates, String authType) throws CertificateException {
+		if (certificates != null && certificates.length == 1 && handler != null) {
+			certificates[0].checkValidity();
+			if (!handler.isServerTrusted(host, certificates[0])) {
+				throw new CertificateException("Self signed certificate from "
+						+ certificates[0].getIssuerX500Principal().toString() + " is not trusted");
+			}
+		} else {
+			standardTrustManager.checkServerTrusted(certificates, authType);
+		}
+	}
+
+	/**
+	 * @see javax.net.ssl.X509TrustManager#getAcceptedIssuers()
+	 */
+	@Override
+	public X509Certificate[] getAcceptedIssuers() {
+		return this.standardTrustManager.getAcceptedIssuers();
+	}
 }

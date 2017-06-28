@@ -29,14 +29,15 @@ import java.io.Reader;
 import java.net.URL;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import org.apache.batik.transcoder.SVGAbstractTranscoder;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
 import org.apache.batik.transcoder.TranscodingHints;
+import org.apache.batik.transcoder.XMLAbstractTranscoder;
 import org.apache.batik.transcoder.image.ImageTranscoder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * This class provides a simple and method based API for converting a SVG
@@ -46,9 +47,9 @@ import org.apache.batik.transcoder.image.ImageTranscoder;
  * @version $Id$
  */
 public class SVGRasterizer {
-	
+
 	/** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(SVGRasterizer.class.getName());
+	private static final Logger logger = LogManager.getLogger(SVGRasterizer.class.getName());
 
 	/**
 	 * The transcoder input.
@@ -111,9 +112,10 @@ public class SVGRasterizer {
 	 * @param document
 	 *            the SVG document to rasterize
 	 */
-	/*public SVGRasterizer(SVGDocument document) {
-		this.input = new TranscoderInput(document);//TODO
-	}*/
+	/*
+	 * public SVGRasterizer(SVGDocument document) { this.input = new
+	 * TranscoderInput(document);//TODO }
+	 */
 
 	/**
 	 * Returns the image that represents the SVG document.
@@ -128,8 +130,7 @@ public class SVGRasterizer {
 		}
 		return img;
 	}
-	
-	
+
 	/**
 	 * Returns the image
 	 */
@@ -145,7 +146,7 @@ public class SVGRasterizer {
 	 *            the new image width
 	 */
 	public void setImageWidth(float width) {
-		hints.put(ImageTranscoder.KEY_WIDTH, new Float(width));
+		hints.put(SVGAbstractTranscoder.KEY_WIDTH, new Float(width));
 	}
 
 	/**
@@ -155,7 +156,7 @@ public class SVGRasterizer {
 	 *            the new image height
 	 */
 	public void setImageHeight(float height) {
-		hints.put(ImageTranscoder.KEY_HEIGHT, new Float(height));
+		hints.put(SVGAbstractTranscoder.KEY_HEIGHT, new Float(height));
 	}
 
 	/**
@@ -165,7 +166,7 @@ public class SVGRasterizer {
 	 *            the new languages
 	 */
 	public void setLanguages(String language) {
-		hints.put(ImageTranscoder.KEY_LANGUAGE, language);
+		hints.put(SVGAbstractTranscoder.KEY_LANGUAGE, language);
 	}
 
 	/**
@@ -175,7 +176,7 @@ public class SVGRasterizer {
 	 *            the new pixel to mm factor
 	 */
 	public void setPixelToMMFactor(float px2mm) {
-		hints.put(ImageTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(px2mm));
+		hints.put(SVGAbstractTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(px2mm));
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class SVGRasterizer {
 	 *            the new user style sheet uri
 	 */
 	public void setUserStyleSheetURI(String uri) {
-		hints.put(ImageTranscoder.KEY_USER_STYLESHEET_URI, uri);
+		hints.put(SVGAbstractTranscoder.KEY_USER_STYLESHEET_URI, uri);
 	}
 
 	/**
@@ -195,8 +196,7 @@ public class SVGRasterizer {
 	 *            the new XML parser validating
 	 */
 	public void setXMLParserValidating(boolean b) {
-		hints.put(ImageTranscoder.KEY_XML_PARSER_VALIDATING, (b ? Boolean.TRUE
-				: Boolean.FALSE));
+		hints.put(XMLAbstractTranscoder.KEY_XML_PARSER_VALIDATING, b ? Boolean.TRUE : Boolean.FALSE);
 	}
 
 	/**
@@ -206,7 +206,7 @@ public class SVGRasterizer {
 	 *            the new media
 	 */
 	public void setMedia(String media) {
-		hints.put(ImageTranscoder.KEY_MEDIA, media);
+		hints.put(SVGAbstractTranscoder.KEY_MEDIA, media);
 	}
 
 	/**
@@ -216,7 +216,7 @@ public class SVGRasterizer {
 	 *            the new alternate stylesheet
 	 */
 	public void setAlternateStylesheet(String alternateStylesheet) {
-		hints.put(ImageTranscoder.KEY_ALTERNATE_STYLESHEET, alternateStylesheet);
+		hints.put(SVGAbstractTranscoder.KEY_ALTERNATE_STYLESHEET, alternateStylesheet);
 	}
 
 	/**
@@ -234,12 +234,13 @@ public class SVGRasterizer {
 	 */
 	protected class Rasterizer extends ImageTranscoder {
 
+		@Override
 		public BufferedImage createImage(int w, int h) {
 			return new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 		}
 
-		public void writeImage(BufferedImage img, TranscoderOutput output)
-				throws TranscoderException {
+		@Override
+		public void writeImage(BufferedImage img, TranscoderOutput output) throws TranscoderException {
 			SVGRasterizer.this.img = img;
 		}
 	}

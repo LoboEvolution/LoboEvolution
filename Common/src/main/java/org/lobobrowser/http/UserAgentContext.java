@@ -33,138 +33,153 @@ import java.net.URL;
  * @see org.lobobrowser.html.parser.DocumentBuilderImpl#DocumentBuilderImpl(UserAgentContext)
  */
 public interface UserAgentContext {
-	
+
 	String DEFAULT_USER_AGENT = "Mozilla/5.0 (compatible;) Cobra/0.97+";
-	
-    /**
-     * Creates an instance of {@link org.lobobrowser.http.HttpRequest} which can
-     * be used by the renderer to load images, scripts, external style sheets,
-     * and implement the Javascript XMLHttpRequest class (AJAX).
-     *
-     * @return the http request
-     */
-    HttpRequest createHttpRequest();
-    
-    /** Gets the app code name.
+
+	/**
+	 * Creates an instance of {@link org.lobobrowser.http.HttpRequest} which can
+	 * be used by the renderer to load images, scripts, external style sheets,
+	 * and implement the Javascript XMLHttpRequest class (AJAX).
+	 *
+	 * @return the http request
+	 */
+	HttpRequest createHttpRequest();
+
+	/**
+	 * Gets the app code name.
 	 *
 	 * @return the app code name
 	 */
-    String getAppCodeName();
-    
-    /** Gets the app name.
+	String getAppCodeName();
+
+	/**
+	 * Gets the app name.
 	 *
 	 * @return the app name
 	 */
-    String getAppName();
-    
-    /** Gets the app version.
+	String getAppName();
+
+	/**
+	 * Gets the app version.
 	 *
 	 * @return the app version
 	 */
-    String getAppVersion();
-    
-    /** Gets the app minor version.
+	String getAppVersion();
+
+	/**
+	 * Gets the app minor version.
 	 *
 	 * @return the app minor version
 	 */
-    String getAppMinorVersion();
-    
-    /** Gets the browser language.
+	String getAppMinorVersion();
+
+	/**
+	 * Gets the browser language.
 	 *
 	 * @return the browser language
 	 */
-    String getBrowserLanguage();
-    
-    /** Checks if is cookie enabled.
+	String getBrowserLanguage();
+
+	/**
+	 * Checks if is cookie enabled.
 	 *
 	 * @return true, if is cookie enabled
 	 */
-    boolean isCookieEnabled();
-    
-    /** Checks if is scripting enabled.
+	boolean isCookieEnabled();
+
+	/**
+	 * Checks if is scripting enabled.
 	 *
 	 * @return true, if is scripting enabled
 	 */
-    boolean isScriptingEnabled();
-    
-    /** Checks if is external css enabled.
+	boolean isScriptingEnabled();
+
+	/**
+	 * Checks if is external css enabled.
 	 *
 	 * @return true, if is external css enabled
 	 */
-    boolean isExternalCSSEnabled();
-    
-    /** Checks if is internal css enabled.
+	boolean isExternalCSSEnabled();
+
+	/**
+	 * Checks if is internal css enabled.
 	 *
 	 * @return true, if is internal css enabled
 	 */
-    boolean isInternalCSSEnabled();
-    
-    /** Gets the platform.
+	boolean isInternalCSSEnabled();
+
+	/**
+	 * Gets the platform.
 	 *
 	 * @return the platform
 	 */
-    String getPlatform();
-    
-    /** Gets the user agent.
+	String getPlatform();
+
+	/**
+	 * Gets the user agent.
 	 *
 	 * @return the user agent
 	 */
-    String getUserAgent();
-    
-    /**
-     * Method used to implement Javascript <code>document.cookie</code>
-     * property.
-     *
-     * @param url
-     *            the url
-     * @return the cookie
-     */
-    String getCookie(URL url);
-    
-    /**
-     * Method used to implement <code>document.cookie</code> property.
-     *
-     * @param url
-     *            the url
-     * @param cookieSpec
-     *            Specification of cookies, as they would appear in the
-     *            Set-Cookie header value of HTTP.
-     */
-    void setCookie(URL url, String cookieSpec);
-    
-    /** Gets the security policy.
+	String getUserAgent();
+
+	/**
+	 * Method used to implement Javascript <code>document.cookie</code>
+	 * property.
+	 *
+	 * @param url
+	 *            the url
+	 * @return the cookie
+	 */
+	String getCookie(URL url);
+
+	/**
+	 * Method used to implement <code>document.cookie</code> property.
+	 *
+	 * @param url
+	 *            the url
+	 * @param cookieSpec
+	 *            Specification of cookies, as they would appear in the
+	 *            Set-Cookie header value of HTTP.
+	 */
+	void setCookie(URL url, String cookieSpec);
+
+	/**
+	 * Gets the security policy.
 	 *
 	 * @return the security policy
 	 */
-    java.security.Policy getSecurityPolicy();
-    
-    /** Gets the scripting optimization level.
+	java.security.Policy getSecurityPolicy();
+
+	/**
+	 * Gets the scripting optimization level.
 	 *
 	 * @return the scripting optimization level
 	 */
-    int getScriptingOptimizationLevel();
-    
-    /**
-     * Returns true if the current media matches the name provided.
-     *
-     * @param mediaName
-     *            Media name, which may be <code>screen</code>, <code>tty</code>
-     *            , etc. (See <a href=
-     *            "http://www.w3.org/TR/REC-html40/types.html#type-media-descriptors"
-     *            >HTML Specification</a>).
-     * @return true, if is media
-     */
-    boolean isMedia(String mediaName);
-    
-    /** Gets the vendor.
+	int getScriptingOptimizationLevel();
+
+	/**
+	 * Returns true if the current media matches the name provided.
+	 *
+	 * @param mediaName
+	 *            Media name, which may be <code>screen</code>, <code>tty</code>
+	 *            , etc. (See <a href=
+	 *            "http://www.w3.org/TR/REC-html40/types.html#type-media-descriptors"
+	 *            >HTML Specification</a>).
+	 * @return true, if is media
+	 */
+	boolean isMedia(String mediaName);
+
+	/**
+	 * Gets the vendor.
 	 *
 	 * @return the vendor
 	 */
-    String getVendor();
-    
-    /** Gets the product.
+	String getVendor();
+
+	/**
+	 * Gets the product.
 	 *
 	 * @return the product
 	 */
-    String getProduct();
+	String getProduct();
 }

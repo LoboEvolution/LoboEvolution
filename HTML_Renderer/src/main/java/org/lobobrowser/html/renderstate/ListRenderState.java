@@ -60,7 +60,7 @@ public class ListRenderState extends AbstractMarginRenderState {
 		insets.topType = HtmlInsets.TYPE_PIXELS;
 		insets.bottomType = HtmlInsets.TYPE_PIXELS;
 		int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-		insets.left = (int) Math.round((dpi * 30.0) / 72.0);
+		insets.left = (int) Math.round(dpi * 30.0 / 72.0);
 		insets.leftType = HtmlInsets.TYPE_PIXELS;
 		return insets;
 	}

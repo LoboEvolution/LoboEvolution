@@ -28,27 +28,27 @@ import org.lobobrowser.html.domimpl.DOMNodeImpl;
  */
 public interface FrameContext {
 
-    /**
-     * Reset selection.
-     *
-     * @param rpoint
-     *            the rpoint
-     */
-    void resetSelection(RenderableSpot rpoint);
+	/**
+	 * Reset selection.
+	 *
+	 * @param rpoint
+	 *            the rpoint
+	 */
+	void resetSelection(RenderableSpot rpoint);
 
-    /**
-     * Expand selection.
-     *
-     * @param rpoint
-     *            the rpoint
-     */
-    void expandSelection(RenderableSpot rpoint);
+	/**
+	 * Expand selection.
+	 *
+	 * @param rpoint
+	 *            the rpoint
+	 */
+	void expandSelection(RenderableSpot rpoint);
 
-    /**
-     * Delayed relayout.
-     *
-     * @param node
-     *            the node
-     */
-    void delayedRelayout(DOMNodeImpl node);
+	/**
+	 * Delayed relayout.
+	 *
+	 * @param node
+	 *            the node
+	 */
+	void delayedRelayout(DOMNodeImpl node);
 }

@@ -30,19 +30,20 @@ import javax.xml.xpath.XPathFunctionException;
  * @author richardallenbair
  */
 public class LowerCase extends AbstractFunction {
-    /**
-     * Creates a new instance of EndsWith.
-     */
-    public LowerCase() {
-        super("lower-case", 1);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
-     */
-    @Override
-    public Object evaluate(List args) throws XPathFunctionException {
-        return getStringParam(args.get(0)).toLowerCase();
-    }
+	/**
+	 * Creates a new instance of EndsWith.
+	 */
+	public LowerCase() {
+		super("lower-case", 1);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.xml.xpath.XPathFunction#evaluate(java.util.List)
+	 */
+	@Override
+	public Object evaluate(List args) throws XPathFunctionException {
+		return getStringParam(args.get(0)).toLowerCase();
+	}
 }

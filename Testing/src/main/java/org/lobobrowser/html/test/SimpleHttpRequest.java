@@ -37,11 +37,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.http.AbstractBean;
 import org.lobobrowser.http.Header;
 import org.lobobrowser.http.Method;
@@ -157,8 +156,7 @@ public class SimpleHttpRequest extends AbstractBean {
 		try {
 			return bytes == null ? null : new String(bytes, encoding);
 		} catch (UnsupportedEncodingException uee) {
-			logger.error(
-					"getResponseText(): Charset '" + encoding + "' did not work. Retrying with UTF-8.", uee);
+			logger.error("getResponseText(): Charset '" + encoding + "' did not work. Retrying with UTF-8.", uee);
 			try {
 				return new String(bytes, "UTF-8");
 			} catch (UnsupportedEncodingException uee2) {
@@ -349,7 +347,7 @@ public class SimpleHttpRequest extends AbstractBean {
 		SSLCertificate.setCertificate();
 		URLConnection c;
 		try {
-			c = (proxy == null) || (proxy == Proxy.NO_PROXY) ? url.openConnection() : url.openConnection(proxy);
+			c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection() : url.openConnection(proxy);
 
 			synchronized (this) {
 				this.connection = c;
@@ -443,7 +441,7 @@ public class SimpleHttpRequest extends AbstractBean {
 				}
 				method = method.toUpperCase();
 				hc.setRequestMethod(method);
-				if ("POST".equals(method) && (content != null)) {
+				if ("POST".equals(method) && content != null) {
 					hc.setDoOutput(true);
 					byte[] contentBytes = content.getBytes(this.getPostCharset());
 					hc.setFixedLengthStreamingMode(contentBytes.length);
@@ -557,7 +555,7 @@ public class SimpleHttpRequest extends AbstractBean {
 					"The AsyncHttpRequest must be opened prior to " + "setting a request header");
 		}
 
-		if ((header == null) || (value == null)) {
+		if (header == null || value == null) {
 			throw new IllegalArgumentException("Neither the header, nor value, may be null");
 		}
 

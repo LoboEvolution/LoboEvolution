@@ -127,7 +127,7 @@ public interface CSSProperties {
 
 	/** The Constant CURSOR. */
 	String CURSOR = "cursor";
-	
+
 	/** The Constant D. */
 	String D = "d";
 
@@ -142,13 +142,13 @@ public interface CSSProperties {
 
 	/** The Constant EMPTY_CELLS. */
 	String EMPTY_CELLS = "empty-cells";
-	
+
 	/** The Constant FILL. */
 	String FILL = "fill";
-	
+
 	/** The Constant FILL_OPACITY. */
 	String FILL_OPACITY = "fill-opacity";
-	
+
 	/** The Constant FLOAT. */
 	String FLOAT = "float";
 
@@ -232,10 +232,10 @@ public interface CSSProperties {
 
 	/** The Constant MIN_WIDTH. */
 	String MIN_WIDTH = "min-width";
-	
+
 	/** The Constant OPACITY. */
 	String OPACITY = "opacity";
-	
+
 	/** The Constant ORPHANS. */
 	String ORPHANS = "orphans";
 
@@ -331,28 +331,28 @@ public interface CSSProperties {
 
 	/** The Constant STRESS. */
 	String STRESS = "stress";
-	
+
 	/** The Constant STOP_COLOR. */
 	String STOP_COLOR = "stop-color";
-	
+
 	/** The Constant STOP_OPACITY. */
 	String STOP_OPACITY = "stop-opacity";
-	
+
 	/** The Constant STROKE. */
 	String STROKE = "stroke";
-	
+
 	/** The Constant STROKE_DASHARRAY. */
 	String STROKE_DASHARRAY = "stroke-dasharray";
-	
+
 	/** The Constant STROKE_MITERLIMIT. */
 	String STROKE_MITERLIMIT = "stroke-miterlimit";
-	
+
 	/** The Constant STROKE_LIEN_CAP. */
 	String STROKE_LINE_CAP = "stroke-linecap";
-	
+
 	/** The Constant STROKE_OPACITY. */
 	String STROKE_OPACITY = "stroke-opacity";
-	
+
 	/** The Constant STROKE_WIDTH. */
 	String STROKE_WIDTH = "stroke-width";
 

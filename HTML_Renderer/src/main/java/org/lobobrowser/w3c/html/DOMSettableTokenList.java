@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The public interface DOMSettableTokenList.
  */

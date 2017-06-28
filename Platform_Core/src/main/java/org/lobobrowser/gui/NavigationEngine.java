@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.ua.NavigationEntry;
 import org.lobobrowser.util.Urls;
 
@@ -38,225 +37,226 @@ import org.lobobrowser.util.Urls;
  */
 public class NavigationEngine {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(NavigationEngine.class);
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(NavigationEngine.class);
 
-    /** The history. */
-    private final ArrayList<NavigationEntry> history = new ArrayList<NavigationEntry>();
+	/** The history. */
+	private final ArrayList<NavigationEntry> history = new ArrayList<NavigationEntry>();
 
-    /** The current index. */
-    private int currentIndex = -1;
+	/** The current index. */
+	private int currentIndex = -1;
 
-    /** Gets the current entry.
+	/**
+	 * Gets the current entry.
 	 *
 	 * @return the current entry
 	 */
-    public NavigationEntry getCurrentEntry() {
-        try {
-            return this.history.get(this.currentIndex);
-        } catch (IndexOutOfBoundsException iob) {
-            return null;
-        }
-    }
+	public NavigationEntry getCurrentEntry() {
+		try {
+			return this.history.get(this.currentIndex);
+		} catch (IndexOutOfBoundsException iob) {
+			return null;
+		}
+	}
 
-    /**
-     * Adds the navigation entry.
-     *
-     * @param entry
-     *            the entry
-     */
-    public void addNavigationEntry(NavigationEntry entry) {
-        if (logger.isInfoEnabled()) {
-            logger.info("addNavigationEntry(): entry=" + entry);
-        }
-        int newIndex = this.currentIndex + 1;
-        if (newIndex == this.history.size()) {
-            this.history.add(entry);
-        } else {
-            if (newIndex > this.history.size()) {
-                throw new IllegalStateException("currentIndex="
-                        + this.currentIndex + ",size=" + this.history.size());
-            }
-            this.history.set(newIndex, entry);
-        }
-        this.currentIndex = newIndex;
-        int nextIndex = newIndex + 1;
-        while (nextIndex < this.history.size()) {
-            this.history.remove(nextIndex);
-        }
-    }
+	/**
+	 * Adds the navigation entry.
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	public void addNavigationEntry(NavigationEntry entry) {
+		if (logger.isInfoEnabled()) {
+			logger.info("addNavigationEntry(): entry=" + entry);
+		}
+		int newIndex = this.currentIndex + 1;
+		if (newIndex == this.history.size()) {
+			this.history.add(entry);
+		} else {
+			if (newIndex > this.history.size()) {
+				throw new IllegalStateException("currentIndex=" + this.currentIndex + ",size=" + this.history.size());
+			}
+			this.history.set(newIndex, entry);
+		}
+		this.currentIndex = newIndex;
+		int nextIndex = newIndex + 1;
+		while (nextIndex < this.history.size()) {
+			this.history.remove(nextIndex);
+		}
+	}
 
-    /**
-     * Checks for next.
-     *
-     * @return true, if successful
-     */
-    public boolean hasNext() {
-        return (this.currentIndex + 1) < this.history.size();
-    }
+	/**
+	 * Checks for next.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean hasNext() {
+		return this.currentIndex + 1 < this.history.size();
+	}
 
-    /**
-     * Checks for prev.
-     *
-     * @return true, if successful
-     */
-    public boolean hasPrev() {
-        return this.currentIndex > 0;
-    }
+	/**
+	 * Checks for prev.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean hasPrev() {
+		return this.currentIndex > 0;
+	}
 
-    /**
-     * Checks for next with get.
-     *
-     * @return true, if successful
-     */
-    public boolean hasNextWithGET() {
-        return this.hasNewEntryWithGET(+1);
-    }
+	/**
+	 * Checks for next with get.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean hasNextWithGET() {
+		return this.hasNewEntryWithGET(+1);
+	}
 
-    /**
-     * Checks for prev with get.
-     *
-     * @return true, if successful
-     */
-    public boolean hasPrevWithGET() {
-        return this.hasNewEntryWithGET(-1);
-    }
+	/**
+	 * Checks for prev with get.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean hasPrevWithGET() {
+		return this.hasNewEntryWithGET(-1);
+	}
 
-    /**
-     * Checks for new entry with get.
-     *
-     * @param offset
-     *            the offset
-     * @return true, if successful
-     */
-    public boolean hasNewEntryWithGET(int offset) {
-        int nextIndex = this.currentIndex;
-        for (;;) {
-            nextIndex += offset;
-            if ((nextIndex >= 0) && (nextIndex < this.history.size())) {
-                NavigationEntry entry = this.history.get(nextIndex);
-                if ("GET".equals(entry.getMethod())) {
-                    return true;
-                } else {
-                    continue;
-                }
-            } else {
-                return false;
-            }
-        }
-    }
+	/**
+	 * Checks for new entry with get.
+	 *
+	 * @param offset
+	 *            the offset
+	 * @return true, if successful
+	 */
+	public boolean hasNewEntryWithGET(int offset) {
+		int nextIndex = this.currentIndex;
+		for (;;) {
+			nextIndex += offset;
+			if (nextIndex >= 0 && nextIndex < this.history.size()) {
+				NavigationEntry entry = this.history.get(nextIndex);
+				if ("GET".equals(entry.getMethod())) {
+					return true;
+				} else {
+					continue;
+				}
+			} else {
+				return false;
+			}
+		}
+	}
 
-    /**
-     * Back.
-     *
-     * @return the navigation entry
-     */
-    public NavigationEntry back() {
-        return this.move(-1);
-    }
+	/**
+	 * Back.
+	 *
+	 * @return the navigation entry
+	 */
+	public NavigationEntry back() {
+		return this.move(-1);
+	}
 
-    /**
-     * Forward.
-     *
-     * @return the navigation entry
-     */
-    public NavigationEntry forward() {
-        return this.move(+1);
-    }
+	/**
+	 * Forward.
+	 *
+	 * @return the navigation entry
+	 */
+	public NavigationEntry forward() {
+		return this.move(+1);
+	}
 
-    /**
-     * Move.
-     *
-     * @param offset
-     *            the offset
-     * @return the navigation entry
-     */
-    public NavigationEntry move(int offset) {
-        int nextIndex = this.currentIndex + offset;
-        if ((nextIndex >= 0) && (nextIndex < this.history.size())) {
-            this.currentIndex = nextIndex;
-            return this.history.get(this.currentIndex);
-        } else {
-            return null;
-        }
-    }
+	/**
+	 * Move.
+	 *
+	 * @param offset
+	 *            the offset
+	 * @return the navigation entry
+	 */
+	public NavigationEntry move(int offset) {
+		int nextIndex = this.currentIndex + offset;
+		if (nextIndex >= 0 && nextIndex < this.history.size()) {
+			this.currentIndex = nextIndex;
+			return this.history.get(this.currentIndex);
+		} else {
+			return null;
+		}
+	}
 
-    /**
-     * Move to.
-     *
-     * @param entry
-     *            the entry
-     * @return true, if successful
-     */
-    public boolean moveTo(NavigationEntry entry) {
-        int newIndex = this.history.indexOf(entry);
-        if (newIndex == -1) {
-            return false;
-        }
-        this.currentIndex = newIndex;
-        return true;
-    }
+	/**
+	 * Move to.
+	 *
+	 * @param entry
+	 *            the entry
+	 * @return true, if successful
+	 */
+	public boolean moveTo(NavigationEntry entry) {
+		int newIndex = this.history.indexOf(entry);
+		if (newIndex == -1) {
+			return false;
+		}
+		this.currentIndex = newIndex;
+		return true;
+	}
 
-    /** Gets the forward navigation entries.
+	/**
+	 * Gets the forward navigation entries.
 	 *
 	 * @return the forward navigation entries
 	 */
-    public NavigationEntry[] getForwardNavigationEntries() {
-        ArrayList<NavigationEntry> entries = new ArrayList<NavigationEntry>();
-        int index = this.currentIndex + 1;
-        int size = this.history.size();
-        while (index < size) {
-            entries.add(this.history.get(index));
-            index++;
-        }
-        return entries.toArray(new NavigationEntry[0]);
-    }
+	public NavigationEntry[] getForwardNavigationEntries() {
+		ArrayList<NavigationEntry> entries = new ArrayList<NavigationEntry>();
+		int index = this.currentIndex + 1;
+		int size = this.history.size();
+		while (index < size) {
+			entries.add(this.history.get(index));
+			index++;
+		}
+		return entries.toArray(new NavigationEntry[0]);
+	}
 
-    /** Gets the back navigation entries.
+	/**
+	 * Gets the back navigation entries.
 	 *
 	 * @return the back navigation entries
 	 */
-    public NavigationEntry[] getBackNavigationEntries() {
-        ArrayList<NavigationEntry> entries = new ArrayList<NavigationEntry>();
-        int index = this.currentIndex - 1;
-        while (index >= 0) {
-            entries.add(this.history.get(index));
-            index--;
-        }
-        return entries.toArray(new NavigationEntry[0]);
-    }
+	public NavigationEntry[] getBackNavigationEntries() {
+		ArrayList<NavigationEntry> entries = new ArrayList<NavigationEntry>();
+		int index = this.currentIndex - 1;
+		while (index >= 0) {
+			entries.add(this.history.get(index));
+			index--;
+		}
+		return entries.toArray(new NavigationEntry[0]);
+	}
 
-    /**
-     * Find entry.
-     *
-     * @param absoluteURL
-     *            the absolute url
-     * @return the navigation entry
-     */
-    public NavigationEntry findEntry(String absoluteURL) {
-        try {
-            URL targetURL = Urls.guessURL(absoluteURL);
-            for (NavigationEntry entry : this.history) {
-                if (Urls.sameNoRefURL(targetURL, entry.getUrl())) {
-                    return entry;
-                }
-            }
-            return null;
-        } catch (MalformedURLException mfu) {
-            if (logger.isInfoEnabled()) {
-                logger.log(Level.INFO, "findEntry(): URL is malformed: "
-                        + absoluteURL, mfu);
-            }
-            return null;
-        }
-    }
+	/**
+	 * Find entry.
+	 *
+	 * @param absoluteURL
+	 *            the absolute url
+	 * @return the navigation entry
+	 */
+	public NavigationEntry findEntry(String absoluteURL) {
+		try {
+			URL targetURL = Urls.guessURL(absoluteURL);
+			for (NavigationEntry entry : this.history) {
+				if (Urls.sameNoRefURL(targetURL, entry.getUrl())) {
+					return entry;
+				}
+			}
+			return null;
+		} catch (MalformedURLException mfu) {
+			if (logger.isInfoEnabled()) {
+				logger.log(Level.INFO, "findEntry(): URL is malformed: " + absoluteURL, mfu);
+			}
+			return null;
+		}
+	}
 
-    /** Gets the length.
+	/**
+	 * Gets the length.
 	 *
 	 * @return the length
 	 */
-    public int getLength() {
-        return this.history.size();
-    }
+	public int getLength() {
+		return this.history.size();
+	}
 }

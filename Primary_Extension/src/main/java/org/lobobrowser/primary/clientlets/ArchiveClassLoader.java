@@ -35,12 +35,11 @@ import java.security.PrivilegedAction;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.jar.JarFile;
+import java.util.zip.ZipEntry;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import java.util.zip.ZipEntry;
-
 import org.lobobrowser.util.BaseClassLoader;
 import org.lobobrowser.util.CollectionUtilities;
 import org.lobobrowser.util.GenericURLConnection;

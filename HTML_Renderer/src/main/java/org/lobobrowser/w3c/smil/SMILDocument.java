@@ -24,14 +24,13 @@ package org.lobobrowser.w3c.smil;
 import org.w3c.dom.Document;
 
 /**
- *  A SMIL document is the root of the SMIL Hierarchy and holds the entire 
- * content. Beside providing access to the hierarchy, it also provides some 
- * convenience methods for accessing certain sets of information from the 
- * document.  Cover document timing, document locking?, linking modality and 
- * any other document level issues. Are there issues with nested SMIL files?  
- * Is it worth talking about different document scenarios, corresponding to 
- * differing profiles? E.g. Standalone SMIL, HTML integration, etc. 
+ * A SMIL document is the root of the SMIL Hierarchy and holds the entire
+ * content. Beside providing access to the hierarchy, it also provides some
+ * convenience methods for accessing certain sets of information from the
+ * document. Cover document timing, document locking?, linking modality and any
+ * other document level issues. Are there issues with nested SMIL files? Is it
+ * worth talking about different document scenarios, corresponding to differing
+ * profiles? E.g. Standalone SMIL, HTML integration, etc.
  */
 public interface SMILDocument extends Document, ElementSequentialTimeContainer {
 }
-

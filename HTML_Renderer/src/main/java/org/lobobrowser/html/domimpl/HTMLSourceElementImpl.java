@@ -26,74 +26,80 @@ import org.lobobrowser.w3c.html.HTMLSourceElement;
 /**
  * The Class HTMLSourceElementImpl.
  */
-public class HTMLSourceElementImpl extends HTMLElementImpl implements
-HTMLSourceElement {
+public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSourceElement {
 
-    /**
-     * Instantiates a new HTML source element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLSourceElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML source element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLSourceElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSourceElement#getSrc()
-     */
-    @Override
-    public String getSrc() {
-        return this.getAttribute(HtmlAttributeProperties.SRC);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLSourceElement#getSrc()
+	 */
+	@Override
+	public String getSrc() {
+		return this.getAttribute(HtmlAttributeProperties.SRC);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSourceElement#setSrc(java.lang.String)
-     */
-    @Override
-    public void setSrc(String src) {
-        this.setAttribute(HtmlAttributeProperties.SRC, src);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLSourceElement#setSrc(java.lang.String)
+	 */
+	@Override
+	public void setSrc(String src) {
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSourceElement#getType()
-     */
-    @Override
-    public String getType() {
-        return this.getAttribute(HtmlAttributeProperties.TYPE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLSourceElement#getType()
+	 */
+	@Override
+	public String getType() {
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSourceElement#setType(java.lang.String)
-     */
-    @Override
-    public void setType(String type) {
-        this.setAttribute(HtmlAttributeProperties.TYPE, type);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLSourceElement#setType(java.lang.String)
+	 */
+	@Override
+	public void setType(String type) {
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
 
-    }
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSourceElement#getMedia()
-     */
-    @Override
-    public String getMedia() {
-        return this.getAttribute(HtmlAttributeProperties.MEDIA);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLSourceElement#getMedia()
+	 */
+	@Override
+	public String getMedia() {
+		return this.getAttribute(HtmlAttributeProperties.MEDIA);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLSourceElement#setMedia(java.lang.String)
-     */
-    @Override
-    public void setMedia(String media) {
-        this.setAttribute(HtmlAttributeProperties.MEDIA, media);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLSourceElement#setMedia(java.lang.String)
+	 */
+	@Override
+	public void setMedia(String media) {
+		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
 
-    }
+	}
 
 }

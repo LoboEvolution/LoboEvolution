@@ -36,14 +36,14 @@ import java.util.EventObject;
  * @author J. H. S.
  */
 public interface GenericEventListener extends EventListener {
-    /** The Constant EMPTY_ARRAY. */
-    GenericEventListener[] EMPTY_ARRAY = new GenericEventListener[0];
-    
-    /**
-     * Process event.
-     *
-     * @param event
-     *            the event
-     */
-    void processEvent(EventObject event);
+	/** The Constant EMPTY_ARRAY. */
+	GenericEventListener[] EMPTY_ARRAY = new GenericEventListener[0];
+
+	/**
+	 * Process event.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void processEvent(EventObject event);
 }

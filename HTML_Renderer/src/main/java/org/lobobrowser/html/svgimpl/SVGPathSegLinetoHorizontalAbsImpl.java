@@ -25,11 +25,10 @@ import org.lobobrowser.w3c.svg.SVGPathSegLinetoHorizontalAbs;
 /**
  * 
  */
-public class SVGPathSegLinetoHorizontalAbsImpl extends SVGPathSegImpl implements
-		SVGPathSegLinetoHorizontalAbs {
+public class SVGPathSegLinetoHorizontalAbsImpl extends SVGPathSegImpl implements SVGPathSegLinetoHorizontalAbs {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	/**
 	 * @param x
 	 */

@@ -32,20 +32,21 @@ import org.lobobrowser.html.dombl.ModelNode;
  */
 public interface Renderable {
 
-    /** The Constant EMPTY_ARRAY. */
-    static final Renderable[] EMPTY_ARRAY = new Renderable[0];
+	/** The Constant EMPTY_ARRAY. */
+	static final Renderable[] EMPTY_ARRAY = new Renderable[0];
 
-    /**
-     * Paint.
-     *
-     * @param g
-     *            the g
-     */
-    void paint(Graphics g);
+	/**
+	 * Paint.
+	 *
+	 * @param g
+	 *            the g
+	 */
+	void paint(Graphics g);
 
-    /** Gets the model node.
+	/**
+	 * Gets the model node.
 	 *
 	 * @return the model node
 	 */
-    ModelNode getModelNode();
+	ModelNode getModelNode();
 }

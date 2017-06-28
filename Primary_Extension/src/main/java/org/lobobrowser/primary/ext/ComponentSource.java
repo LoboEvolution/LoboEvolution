@@ -31,10 +31,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -45,6 +41,8 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.primary.action.AboutAction;
 import org.lobobrowser.primary.action.AddBookmarkAction;
 import org.lobobrowser.primary.action.BackAction;
@@ -182,7 +180,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		});
 		this.forwardMoreMenu = forwardMoreMenu;
 		forwardMoreMenu.setText("Forward To");
-				
+
 		JMenu searchersMenu = new JMenu();
 		searchersMenu.addMenuListener(new MenuAdapter() {
 			@Override
@@ -262,7 +260,8 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
-		menu.add(menuItem("Full Screen", ' ',KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(window,actionPool)));
+		menu.add(menuItem("Full Screen", ' ', KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0),
+				new FullScreenAction(window, actionPool)));
 		return menu;
 	}
 
@@ -293,14 +292,15 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(this, window, actionPool)));
 		menu.add(menuItem("Forward", 'F', new ForwardAction(this, window, actionPool)));
 		menu.add(menuItem("Stop", 'S', KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new StopAction(this, window)));
-		menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), new ReloadAction(this, window, actionPool)));
+		menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),
+				new ReloadAction(this, window, actionPool)));
 		menu.addSeparator();
 		menu.add(this.backMoreMenu);
 		menu.add(this.forwardMoreMenu);
 
 		return menu;
 	}
-	
+
 	/**
 	 * Gets the chronology menu.
 	 *
@@ -503,7 +503,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 * @return true, if is history request
 	 */
 	private boolean isHistoryRequest(RequestType requestType) {
-		return ((requestType == RequestType.ADDRESS_BAR) || (requestType == RequestType.CLICK));
+		return requestType == RequestType.ADDRESS_BAR || requestType == RequestType.CLICK;
 	}
 
 	/*
@@ -740,7 +740,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			String text = binfo.getTitle();
 			URL url = binfo.getUrl();
 			String urlText = url.toExternalForm();
-			if ((text == null) || (text.length() == 0)) {
+			if (text == null || text.length() == 0) {
 				text = urlText;
 			}
 			long elapsed = System.currentTimeMillis() - hentry.getTimetstamp();
@@ -751,7 +751,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			toolTipText.append("<html>");
 			toolTipText.append(urlText);
 			String description = binfo.getDescription();
-			if ((description != null) && (description.length() != 0)) {
+			if (description != null && description.length() != 0) {
 				toolTipText.append("<br>");
 				toolTipText.append(description);
 			}
@@ -783,9 +783,9 @@ public class ComponentSource implements NavigatorWindowListener {
 							bookmarksMenu.add(tagMenu);
 						}
 					}
-					if ((tagMenu != null) && (tagMenu.getItemCount() < PREFERRED_MAX_MENU_SIZE)) {
+					if (tagMenu != null && tagMenu.getItemCount() < PREFERRED_MAX_MENU_SIZE) {
 						String text = binfo.getTitle();
-						if ((text == null) || (text.length() == 0)) {
+						if (text == null || text.length() == 0) {
 							text = urlText;
 						}
 						Action action = this.actionPool.createBookmarkNavigateAction(url);
@@ -794,7 +794,7 @@ public class ComponentSource implements NavigatorWindowListener {
 						toolTipText.append("<html>");
 						toolTipText.append(urlText);
 						String description = binfo.getDescription();
-						if ((description != null) && (description.length() != 0)) {
+						if (description != null && description.length() != 0) {
 							toolTipText.append("<br>");
 							toolTipText.append(description);
 						}
@@ -818,7 +818,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			if ("GET".equals(method)) {
 				String title = entry.getTitle();
 				URL url = entry.getUrl();
-				String text = (title == null) || (title.length() == 0) ? url.toExternalForm() : title;
+				String text = title == null || title.length() == 0 ? url.toExternalForm() : title;
 				Action action = this.actionPool.createGoToAction(entry);
 				JMenuItem menuItem = menuItem(text, action);
 				menuItem.setToolTipText(url.toExternalForm());
@@ -840,7 +840,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			if ("GET".equals(method)) {
 				String title = entry.getTitle();
 				URL url = entry.getUrl();
-				String text = (title == null) || (title.length() == 0) ? url.toExternalForm() : title;
+				String text = title == null || title.length() == 0 ? url.toExternalForm() : title;
 				Action action = this.actionPool.createGoToAction(entry);
 				JMenuItem menuItem = menuItem(text, action);
 				menuItem.setToolTipText(url.toExternalForm());
@@ -885,7 +885,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	public void navigateOrSearch() {
 		String addressText = this.addressField.getText();
-		if ((addressText.indexOf('.') == -1) && (addressText.indexOf('/') == -1) && (addressText.indexOf(':') == -1)) {
+		if (addressText.indexOf('.') == -1 && addressText.indexOf('/') == -1 && addressText.indexOf(':') == -1) {
 			this.search();
 		} else {
 			this.navigate(addressText, RequestType.ADDRESS_BAR);

@@ -24,13 +24,12 @@ import org.lobobrowser.w3c.svg.SVGAnimatedLengthList;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 
 public class SVGAnimatedLengthListImpl implements SVGAnimatedLengthList {
-	
+
 	private SVGLengthList lengths;
-		
+
 	public SVGAnimatedLengthListImpl(SVGLengthList lengths) {
 		this.lengths = lengths;
 	}
-
 
 	@Override
 	public SVGLengthList getBaseVal() {

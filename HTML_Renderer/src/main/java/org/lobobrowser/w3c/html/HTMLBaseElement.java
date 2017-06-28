@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLBaseElement.
  */
 public interface HTMLBaseElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the href.
 	 *

@@ -209,7 +209,7 @@ public class AddressField extends JComboBox<String> {
 					urlComboBox.removeAllItems();
 					Iterator<String> i = headMatches.iterator();
 					while (i.hasNext()) {
-						String matchUrl = (String) i.next();
+						String matchUrl = i.next();
 						urlComboBox.addItem(matchUrl);
 					}
 					comboHasHeadMatches = true;
@@ -250,6 +250,6 @@ public class AddressField extends JComboBox<String> {
 	 * @return true, if successful
 	 */
 	private boolean validPopupChar(char ch) {
-		return Character.isLetterOrDigit(ch) || (ch == '.') || (ch == '/');
+		return Character.isLetterOrDigit(ch) || ch == '.' || ch == '/';
 	}
 }

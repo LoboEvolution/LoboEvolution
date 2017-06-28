@@ -25,7 +25,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimateElementImpl;
 
 public class SVGAnimateBuilder extends HTMLElementBuilder {
-	
+
 	@Override
 	protected HTMLElementImpl build(String name) {
 		return new SVGAnimateElementImpl(name);

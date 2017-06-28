@@ -21,20 +21,26 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTableHeaderCellElement.
  */
 public interface HTMLTableHeaderCellElement extends HTMLTableCellElement {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLTableCellElement#getScope()
 	 */
 	// HTMLTableHeaderCellElement
+	@Override
 	public String getScope();
 
-	/* (non-Javadoc)
-	 * @see org.lobobrowser.w3c.html.HTMLTableCellElement#setScope(java.lang.String)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLTableCellElement#setScope(java.lang.String)
 	 */
+	@Override
 	public void setScope(String scope);
 }

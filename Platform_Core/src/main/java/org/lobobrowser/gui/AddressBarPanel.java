@@ -30,22 +30,23 @@ import javax.swing.JPanel;
  */
 public class AddressBarPanel extends JPanel {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new address bar panel.
-     */
-    public AddressBarPanel() {
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-    }
+	/**
+	 * Instantiates a new address bar panel.
+	 */
+	public AddressBarPanel() {
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see javax.swing.JComponent#getPreferredSize()
-     */
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(1, 32);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#getPreferredSize()
+	 */
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(1, 32);
+	}
 }

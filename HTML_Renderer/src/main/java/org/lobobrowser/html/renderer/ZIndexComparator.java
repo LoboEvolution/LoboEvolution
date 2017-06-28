@@ -30,20 +30,21 @@ import java.util.Comparator;
  * The Class ZIndexComparator.
  */
 public class ZIndexComparator implements Comparator<Object> {
-    /*
-     * (non-Javadoc)
-     * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
-     */
-    @Override
-    public int compare(Object object1, Object object2) {
-        PositionedRenderable element1 = (PositionedRenderable) object1;
-        PositionedRenderable element2 = (PositionedRenderable) object2;
-        int zIndex1 = element1.getRenderable().getZIndex();
-        int zIndex2 = element2.getRenderable().getZIndex();
-        int diff = zIndex1 - zIndex2;
-        if (diff != 0) {
-            return diff;
-        }
-        return element1.getOrdinal() - element2.getOrdinal();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public int compare(Object object1, Object object2) {
+		PositionedRenderable element1 = (PositionedRenderable) object1;
+		PositionedRenderable element2 = (PositionedRenderable) object2;
+		int zIndex1 = element1.getRenderable().getZIndex();
+		int zIndex2 = element2.getRenderable().getZIndex();
+		int diff = zIndex1 - zIndex2;
+		if (diff != 0) {
+			return diff;
+		}
+		return element1.getOrdinal() - element2.getOrdinal();
+	}
 }

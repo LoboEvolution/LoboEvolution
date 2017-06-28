@@ -67,7 +67,7 @@ public class RList extends BaseRListElement {
 	protected void applyStyle(int availWidth, int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 		ListStyle listStyle = this.listStyle;
-		if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
+		if (listStyle == null || listStyle.type == ListStyle.TYPE_UNSET) {
 			Object rootNode = this.modelNode;
 			if (!(rootNode instanceof HTMLElementImpl)) {
 				return;

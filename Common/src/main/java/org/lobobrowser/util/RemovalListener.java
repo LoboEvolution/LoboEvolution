@@ -32,11 +32,11 @@ import java.util.EventListener;
  * @see RemovalEvent
  */
 public interface RemovalListener extends EventListener {
-    /**
-     * Removed.
-     *
-     * @param event
-     *            the event
-     */
-    void removed(RemovalEvent event);
+	/**
+	 * Removed.
+	 *
+	 * @param event
+	 *            the event
+	 */
+	void removed(RemovalEvent event);
 }

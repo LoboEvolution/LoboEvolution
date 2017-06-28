@@ -29,18 +29,18 @@ import org.lobobrowser.clientlet.ClientletResponse;
  */
 public class ResponseEvent extends EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    
-    /**
-     * Instantiates a new response event.
-     *
-     * @param source
-     *            the source
-     * @param response
-     *            the response
-     */
-    public ResponseEvent(Object source, ClientletResponse response) {
-        super(source);
-    }
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Instantiates a new response event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param response
+	 *            the response
+	 */
+	public ResponseEvent(Object source, ClientletResponse response) {
+		super(source);
+	}
 }

@@ -34,10 +34,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -49,6 +45,9 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.ClientletException;
 import org.lobobrowser.clientlet.ClientletRequest;
 import org.lobobrowser.clientlet.ClientletResponse;
@@ -160,8 +159,7 @@ public class DownloadDialog extends JFrame {
 		this.knownContentLength = cl;
 		String sizeText = cl == -1 ? "Not known" : getSizeText(cl);
 		this.sizeField.setValue(sizeText);
-		String estTimeText = (transferSpeed <= 0) || (cl == -1) ? "Not known"
-				: Timing.getElapsedText(cl / transferSpeed);
+		String estTimeText = transferSpeed <= 0 || cl == -1 ? "Not known" : Timing.getElapsedText(cl / transferSpeed);
 		this.timeLeftField.setValue(estTimeText);
 
 		Container contentPane = this.getContentPane();
@@ -493,13 +491,13 @@ public class DownloadDialog extends JFrame {
 			newTransferRate = (value - lastProgressValue) / elapsed;
 			if (!Double.isNaN(lastTransferRate)) {
 				// Weighed average
-				newTransferRate = (newTransferRate + (lastTransferRate * 5.0)) / 6.0;
+				newTransferRate = (newTransferRate + lastTransferRate * 5.0) / 6.0;
 			}
 		}
 		if (!Double.isNaN(newTransferRate)) {
 			this.transferRateField.setValue(round1(newTransferRate) + " Kb/sec");
 			int cl = this.knownContentLength;
-			if ((cl > 0) && (newTransferRate > 0)) {
+			if (cl > 0 && newTransferRate > 0) {
 				this.timeLeftField.setValue(Timing.getElapsedText((long) ((cl - value) / newTransferRate)));
 			}
 		}
@@ -518,7 +516,7 @@ public class DownloadDialog extends JFrame {
 			pb.setStringPainted(false);
 			this.setTitle(sizeText + " " + this.destinationField.getValue());
 		} else {
-			int percent = (value * 100) / max;
+			int percent = value * 100 / max;
 			pb.setIndeterminate(false);
 			pb.setStringPainted(true);
 			pb.setMaximum(max);
@@ -698,8 +696,7 @@ public class DownloadDialog extends JFrame {
 		 */
 		@Override
 		public boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException {
-			logger.error(
-					"An error occurred trying to download " + response.getResponseURL() + " to " + this.file + ".",
+			logger.error("An error occurred trying to download " + response.getResponseURL() + " to " + this.file + ".",
 					exception);
 			errorInDownload_Safe();
 			return true;
@@ -717,7 +714,7 @@ public class DownloadDialog extends JFrame {
 		public void handleProgress(ProgressType progressType, URL url, String method, int value, int max) {
 			if (!this.downloadDone) {
 				long timestamp = System.currentTimeMillis();
-				if ((timestamp - this.lastProgressUpdate) > 1000) {
+				if (timestamp - this.lastProgressUpdate > 1000) {
 					updateProgress_Safe(progressType, value, max);
 					this.lastProgressUpdate = timestamp;
 				}

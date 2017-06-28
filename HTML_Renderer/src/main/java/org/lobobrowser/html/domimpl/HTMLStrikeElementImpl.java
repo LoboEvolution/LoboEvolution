@@ -28,26 +28,25 @@ import org.lobobrowser.html.renderstate.TextDecorationRenderState;
  */
 public class HTMLStrikeElementImpl extends HTMLAbstractUIElement {
 
-    /**
-     * Instantiates a new HTML strike element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLStrikeElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTML strike element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLStrikeElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = new TextDecorationRenderState(prevRenderState,
-                RenderState.MASK_TEXTDECORATION_LINE_THROUGH);
-        return super.createRenderState(prevRenderState);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_LINE_THROUGH);
+		return super.createRenderState(prevRenderState);
+	}
 }

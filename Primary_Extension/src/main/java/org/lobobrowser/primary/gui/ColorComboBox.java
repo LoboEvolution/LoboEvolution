@@ -38,12 +38,14 @@ public class ColorComboBox extends JComboBox<Object> {
 
 	public ColorComboBox() {
 		int[] values = new int[] { 0, 128, 192, 255 };
-		for (int r = 0; r < values.length; r++)
-			for (int g = 0; g < values.length; g++)
+		for (int r = 0; r < values.length; r++) {
+			for (int g = 0; g < values.length; g++) {
 				for (int b = 0; b < values.length; b++) {
 					Color c = new Color(values[r], values[g], values[b]);
 					addItem(c);
 				}
+			}
+		}
 		setRenderer(new ColorComboRenderer());
 
 	}
@@ -57,12 +59,16 @@ public class ColorComboBox extends JComboBox<Object> {
 			setBorder(new CompoundBorder(new MatteBorder(2, 10, 2, 10, Color.white), new LineBorder(Color.black)));
 		}
 
-		public Component getListCellRendererComponent(JList<?> list, Object obj, int row, boolean sel, boolean hasFocus) {
-			if (obj instanceof Color)
+		@Override
+		public Component getListCellRendererComponent(JList<?> list, Object obj, int row, boolean sel,
+				boolean hasFocus) {
+			if (obj instanceof Color) {
 				m_c = (Color) obj;
+			}
 			return this;
 		}
 
+		@Override
 		public void paint(Graphics g) {
 			setBackground(m_c);
 			super.paint(g);

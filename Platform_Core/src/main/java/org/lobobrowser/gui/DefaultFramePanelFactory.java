@@ -25,23 +25,26 @@ package org.lobobrowser.gui;
  */
 public class DefaultFramePanelFactory implements FramePanelFactory {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.gui.FramePanelFactory#createFramePanel(org.lobobrowser.gui
-     * .FramePanel)
-     */
-    @Override
-    public FramePanel createFramePanel(FramePanel parent) {
-        return new FramePanel(parent);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.gui.FramePanelFactory#createFramePanel(org.lobobrowser.
+	 * gui .FramePanel)
+	 */
+	@Override
+	public FramePanel createFramePanel(FramePanel parent) {
+		return new FramePanel(parent);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.gui.FramePanelFactory#createFramePanel(java.lang.String)
-     */
-    @Override
-    public FramePanel createFramePanel(String windowId) {
-        return new FramePanel(windowId);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.gui.FramePanelFactory#createFramePanel(java.lang.String)
+	 */
+	@Override
+	public FramePanel createFramePanel(String windowId) {
+		return new FramePanel(windowId);
+	}
 }

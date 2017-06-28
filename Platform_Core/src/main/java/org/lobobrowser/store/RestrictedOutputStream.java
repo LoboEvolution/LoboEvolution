@@ -33,63 +33,66 @@ import java.io.OutputStream;
  */
 public class RestrictedOutputStream extends OutputStream {
 
-    /** The out. */
-    private final OutputStream out;
+	/** The out. */
+	private final OutputStream out;
 
-    /** The quota source. */
-    private final QuotaSource quotaSource;
+	/** The quota source. */
+	private final QuotaSource quotaSource;
 
-    /**
-     * Instantiates a new restricted output stream.
-     *
-     * @param out
-     *            the out
-     * @param quotaSource
-     *            the quota source
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public RestrictedOutputStream(OutputStream out, QuotaSource quotaSource)
-            throws IOException {
-        this.out = out;
-        this.quotaSource = quotaSource;
-    }
+	/**
+	 * Instantiates a new restricted output stream.
+	 *
+	 * @param out
+	 *            the out
+	 * @param quotaSource
+	 *            the quota source
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public RestrictedOutputStream(OutputStream out, QuotaSource quotaSource) throws IOException {
+		this.out = out;
+		this.quotaSource = quotaSource;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.io.OutputStream#write(int)
-     */
-    @Override
-    public void write(int b) throws IOException {
-        this.quotaSource.addUsedBytes(1);
-        this.out.write(b);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.OutputStream#write(int)
+	 */
+	@Override
+	public void write(int b) throws IOException {
+		this.quotaSource.addUsedBytes(1);
+		this.out.write(b);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.io.OutputStream#close()
-     */
-    @Override
-    public void close() throws IOException {
-        this.out.close();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.OutputStream#close()
+	 */
+	@Override
+	public void close() throws IOException {
+		this.out.close();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.io.OutputStream#flush()
-     */
-    @Override
-    public void flush() throws IOException {
-        this.out.flush();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.OutputStream#flush()
+	 */
+	@Override
+	public void flush() throws IOException {
+		this.out.flush();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.io.OutputStream#write(byte[], int, int)
-     */
-    @Override
-    public void write(byte[] b, int off, int len) throws IOException {
-        this.quotaSource.addUsedBytes(len);
-        this.out.write(b, off, len);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.OutputStream#write(byte[], int, int)
+	 */
+	@Override
+	public void write(byte[] b, int off, int len) throws IOException {
+		this.quotaSource.addUsedBytes(len);
+		this.out.write(b, off, len);
+	}
 }

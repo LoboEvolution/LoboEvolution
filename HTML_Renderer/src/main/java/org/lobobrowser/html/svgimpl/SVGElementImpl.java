@@ -27,13 +27,13 @@ import org.w3c.dom.Node;
 import org.w3c.dom.svg.SVGSymbolElement;
 
 public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement {
-	
+
 	private SVGDocumentImpl ownerDoc = null;
 
 	public SVGElementImpl(String name) {
 		super(name);
 	}
-	
+
 	public SVGDocumentImpl getOwnerDoc() {
 		return ownerDoc;
 	}
@@ -51,12 +51,12 @@ public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement 
 		while (parent != null && !(parent instanceof SVGSVGElement)) {
 			parent = parent.getParentNode();
 		}
-		
-		if(parent instanceof SVGGElementImpl){
-			SVGGElementImpl a = (SVGGElementImpl)parent;
+
+		if (parent instanceof SVGGElementImpl) {
+			SVGGElementImpl a = (SVGGElementImpl) parent;
 			return a.getSvg();
 		}
-				
+
 		return (SVGSVGElement) parent;
 	}
 

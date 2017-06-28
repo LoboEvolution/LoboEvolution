@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.mozilla.javascript.Function;
 
-
 /**
  * The Interface HTMLMarqueeElement.
  */
 public interface HTMLMarqueeElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the behavior.
 	 *

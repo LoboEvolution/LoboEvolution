@@ -33,70 +33,81 @@ import org.lobobrowser.ua.UserAgent;
  * @author J. H. S.
  */
 public interface ClientletRequest {
-    
-    /** Gets the method.
+
+	/**
+	 * Gets the method.
 	 *
 	 * @return the method
 	 */
-    String getMethod();
+	String getMethod();
 
-    /** Gets the request url.
+	/**
+	 * Gets the request url.
 	 *
 	 * @return the request url
 	 */
-    URL getRequestURL();
+	URL getRequestURL();
 
-    /** Gets the user agent.
+	/**
+	 * Gets the user agent.
 	 *
 	 * @return the user agent
 	 */
-    UserAgent getUserAgent();
+	UserAgent getUserAgent();
 
-    /** Gets the referrer.
+	/**
+	 * Gets the referrer.
 	 *
 	 * @return the referrer
 	 */
-    String getReferrer();
+	String getReferrer();
 
-    /** Gets the parameter info.
+	/**
+	 * Gets the parameter info.
 	 *
 	 * @return the parameter info
 	 */
-    ParameterInfo getParameterInfo();
+	ParameterInfo getParameterInfo();
 
-    /** Gets the extra headers.
+	/**
+	 * Gets the extra headers.
 	 *
 	 * @return the extra headers
 	 */
-    Header[] getExtraHeaders();
+	Header[] getExtraHeaders();
 
-    /** Checks if is gets the request.
+	/**
+	 * Checks if is gets the request.
 	 *
 	 * @return true, if is gets the request
 	 */
-    boolean isGetRequest();
+	boolean isGetRequest();
 
-    /** Checks if is post request.
+	/**
+	 * Checks if is post request.
 	 *
 	 * @return true, if is post request
 	 */
-    boolean isPostRequest();
+	boolean isPostRequest();
 
-    /** Checks if is new window request.
+	/**
+	 * Checks if is new window request.
 	 *
 	 * @return true, if is new window request
 	 */
-    boolean isNewWindowRequest();
+	boolean isNewWindowRequest();
 
-    /** Gets the alt post data.
+	/**
+	 * Gets the alt post data.
 	 *
 	 * @return the alt post data
 	 */
-    String getAltPostData();
+	String getAltPostData();
 
-    /** Gets the request type.
+	/**
+	 * Gets the request type.
 	 *
 	 * @return the request type
 	 */
-    RequestType getRequestType();
+	RequestType getRequestType();
 }

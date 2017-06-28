@@ -25,16 +25,16 @@ package org.lobobrowser.ua;
  */
 public enum NavigatorEventType {
 
-    /** The document accessed. */
-    DOCUMENT_ACCESSED,
-    /** The document rendering. */
-    DOCUMENT_RENDERING,
-    /** The progress updated. */
-    PROGRESS_UPDATED,
-    /** The error occurred. */
-    ERROR_OCCURRED,
-    /** The status updated. */
-    STATUS_UPDATED,
-    /** The default status updated. */
-    DEFAULT_STATUS_UPDATED
+	/** The document accessed. */
+	DOCUMENT_ACCESSED,
+	/** The document rendering. */
+	DOCUMENT_RENDERING,
+	/** The progress updated. */
+	PROGRESS_UPDATED,
+	/** The error occurred. */
+	ERROR_OCCURRED,
+	/** The status updated. */
+	STATUS_UPDATED,
+	/** The default status updated. */
+	DEFAULT_STATUS_UPDATED
 }

@@ -35,48 +35,48 @@ import java.net.URLConnection;
  */
 public class ResURLConnection extends URLConnection {
 
-    /**
-     * Instantiates a new res url connection.
-     *
-     * @param url
-     *            the url
-     */
-    public ResURLConnection(URL url) {
-        super(url);
-    }
+	/**
+	 * Instantiates a new res url connection.
+	 *
+	 * @param url
+	 *            the url
+	 */
+	public ResURLConnection(URL url) {
+		super(url);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#connect()
-     */
-    @Override
-    public void connect() throws IOException {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#connect()
+	 */
+	@Override
+	public void connect() throws IOException {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getInputStream()
-     */
-    @Override
-    public InputStream getInputStream() throws IOException {
-        String host = this.url.getHost();
-        ClassLoader classLoader = Thread.currentThread()
-                .getContextClassLoader();
-        if (classLoader == null) {
-            classLoader = this.getClass().getClassLoader();
-        }
-        String file = this.url.getPath();
-        InputStream in = classLoader.getResourceAsStream(file);
-        if (in == null) {
-            if (file.startsWith("/")) {
-                file = file.substring(1);
-                in = classLoader.getResourceAsStream(file);
-                if (in == null) {
-                    throw new IOException("Resource " + file + " not found in "
-                            + host + ".");
-                }
-            }
-        }
-        return in;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getInputStream()
+	 */
+	@Override
+	public InputStream getInputStream() throws IOException {
+		String host = this.url.getHost();
+		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		if (classLoader == null) {
+			classLoader = this.getClass().getClassLoader();
+		}
+		String file = this.url.getPath();
+		InputStream in = classLoader.getResourceAsStream(file);
+		if (in == null) {
+			if (file.startsWith("/")) {
+				file = file.substring(1);
+				in = classLoader.getResourceAsStream(file);
+				if (in == null) {
+					throw new IOException("Resource " + file + " not found in " + host + ".");
+				}
+			}
+		}
+		return in;
+	}
 }

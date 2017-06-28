@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Interface FileReaderSync_Constructor.
  */
 public interface FileReaderSync_Constructor {
-	
+
 	/**
 	 * Creates the instance.
 	 *

@@ -25,50 +25,50 @@ package org.lobobrowser.html.style;
  */
 public class ComputedCSS2Properties extends AbstractCSS2Properties {
 
-    /**
-     * Instantiates a new computed cs s2 properties.
-     *
-     * @param context
-     *            the context
-     */
-    public ComputedCSS2Properties(CSS2PropertiesContext context) {
-        super(context);
-    }
+	/**
+	 * Instantiates a new computed cs s2 properties.
+	 *
+	 * @param context
+	 *            the context
+	 */
+	public ComputedCSS2Properties(CSS2PropertiesContext context) {
+		super(context);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.style.AbstractCSS2Properties#setPropertyValueLC(java
-     * .lang.String, java.lang.String)
-     */
-    @Override
-    protected void setPropertyValueLC(String lowerCaseName, String value) {
-        throw new IllegalAccessError(
-                "Style properties cannot be set in this instance.");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.style.AbstractCSS2Properties#setPropertyValueLC(java
+	 * .lang.String, java.lang.String)
+	 */
+	@Override
+	protected void setPropertyValueLC(String lowerCaseName, String value) {
+		throw new IllegalAccessError("Style properties cannot be set in this instance.");
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.style.AbstractCSS2Properties#checkSetProperty()
-     */
-    @Override
-    protected void checkSetProperty() {
-        throw new IllegalAccessError(
-                "Style properties cannot be set in this instance.");
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.style.AbstractCSS2Properties#checkSetProperty()
+	 */
+	@Override
+	protected void checkSetProperty() {
+		throw new IllegalAccessError("Style properties cannot be set in this instance.");
+	}
 
-    /**
-     * Internal set lc.
-     *
-     * @param lowerCaseName
-     *            the lower case name
-     * @param value
-     *            the value
-     */
-    public void internalSetLC(String lowerCaseName, String value) {
-        // Should only be called right after creation of the CSS object.
-        // Properties need to be "unimportant" otherwise they won't get
-        // overridden.
-        super.setPropertyValueLCAlt(lowerCaseName, value, false);
-    }
+	/**
+	 * Internal set lc.
+	 *
+	 * @param lowerCaseName
+	 *            the lower case name
+	 * @param value
+	 *            the value
+	 */
+	public void internalSetLC(String lowerCaseName, String value) {
+		// Should only be called right after creation of the CSS object.
+		// Properties need to be "unimportant" otherwise they won't get
+		// overridden.
+		super.setPropertyValueLCAlt(lowerCaseName, value, false);
+	}
 }

@@ -27,86 +27,90 @@ import java.awt.Component;
  */
 public class SimpleComponentContent extends AbstractComponentContent {
 
-    /** The component. */
-    private final Component component;
+	/** The component. */
+	private final Component component;
 
-    /** The title. */
-    private final String title;
+	/** The title. */
+	private final String title;
 
-    /** The source code. */
-    private final String sourceCode;
+	/** The source code. */
+	private final String sourceCode;
 
-    /**
-     * Instantiates a new simple component content.
-     *
-     * @param component
-     *            the component
-     * @param title
-     *            the title
-     * @param sourceCode
-     *            the source code
-     */
-    public SimpleComponentContent(Component component, String title,
-            String sourceCode) {
-        this.component = component;
-        this.title = title;
-        this.sourceCode = sourceCode;
-    }
+	/**
+	 * Instantiates a new simple component content.
+	 *
+	 * @param component
+	 *            the component
+	 * @param title
+	 *            the title
+	 * @param sourceCode
+	 *            the source code
+	 */
+	public SimpleComponentContent(Component component, String title, String sourceCode) {
+		this.component = component;
+		this.title = title;
+		this.sourceCode = sourceCode;
+	}
 
-    /**
-     * Instantiates a new simple component content.
-     *
-     * @param component
-     *            the component
-     */
-    public SimpleComponentContent(Component component) {
-        this.component = component;
-        this.title = component.toString();
-        this.sourceCode = null;
-    }
+	/**
+	 * Instantiates a new simple component content.
+	 *
+	 * @param component
+	 *            the component
+	 */
+	public SimpleComponentContent(Component component) {
+		this.component = component;
+		this.title = component.toString();
+		this.sourceCode = null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.AbstractComponentContent#canCopy()
-     */
-    @Override
-    public boolean canCopy() {
-        return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.AbstractComponentContent#canCopy()
+	 */
+	@Override
+	public boolean canCopy() {
+		return false;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.AbstractComponentContent#copy()
-     */
-    @Override
-    public boolean copy() {
-        return false;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.AbstractComponentContent#copy()
+	 */
+	@Override
+	public boolean copy() {
+		return false;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.AbstractComponentContent#getComponent()
-     */
-    @Override
-    public Component getComponent() {
-        return this.component;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.AbstractComponentContent#getComponent()
+	 */
+	@Override
+	public Component getComponent() {
+		return this.component;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.AbstractComponentContent#getSourceCode()
-     */
-    @Override
-    public String getSourceCode() {
-        return this.sourceCode;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.AbstractComponentContent#getSourceCode()
+	 */
+	@Override
+	public String getSourceCode() {
+		return this.sourceCode;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.clientlet.AbstractComponentContent#getTitle()
-     */
-    @Override
-    public String getTitle() {
-        return this.title;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.clientlet.AbstractComponentContent#getTitle()
+	 */
+	@Override
+	public String getTitle() {
+		return this.title;
+	}
 }

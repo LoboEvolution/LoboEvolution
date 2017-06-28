@@ -28,14 +28,14 @@ import org.w3c.dom.Node;
  */
 public class AnchorFilter implements NodeFilter {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        String nodeName = node.getNodeName();
-        return HtmlProperties.A.equalsIgnoreCase(nodeName)
-                || HtmlProperties.ANCHOR.equalsIgnoreCase(nodeName);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		String nodeName = node.getNodeName();
+		return HtmlProperties.A.equalsIgnoreCase(nodeName) || HtmlProperties.ANCHOR.equalsIgnoreCase(nodeName);
+	}
 }

@@ -65,7 +65,7 @@ public class ImageScrollable extends JComponent implements Scrollable {
 
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
-		if (((infoflags & ImageObserver.ALLBITS) != 0) || ((infoflags & ImageObserver.FRAMEBITS) != 0)) {
+		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
 			this.imageWidth = img.getWidth(this);
 			this.imageHeight = img.getHeight(this);
 			this.revalidate();

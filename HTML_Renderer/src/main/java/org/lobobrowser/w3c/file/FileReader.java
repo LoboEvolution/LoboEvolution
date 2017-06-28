@@ -24,16 +24,16 @@ package org.lobobrowser.w3c.file;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.EventTarget;
 
-
 /**
  * The Interface FileReader.
  */
 public interface FileReader extends EventTarget {
-	
+
 	/**
 	 * Read as array buffer.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 */
 	// FileReader
 	public void readAsArrayBuffer(Blob blob);
@@ -41,29 +41,34 @@ public interface FileReader extends EventTarget {
 	/**
 	 * Read as binary string.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 */
 	public void readAsBinaryString(Blob blob);
 
 	/**
 	 * Read as text.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 */
 	public void readAsText(Blob blob);
 
 	/**
 	 * Read as text.
 	 *
-	 * @param blob the blob
-	 * @param encoding the encoding
+	 * @param blob
+	 *            the blob
+	 * @param encoding
+	 *            the encoding
 	 */
 	public void readAsText(Blob blob, String encoding);
 
 	/**
 	 * Read as data url.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 */
 	public void readAsDataURL(Blob blob);
 
@@ -74,10 +79,10 @@ public interface FileReader extends EventTarget {
 
 	/** The Constant EMPTY. */
 	public static final short EMPTY = 0;
-	
+
 	/** The Constant LOADING. */
 	public static final short LOADING = 1;
-	
+
 	/** The Constant DONE. */
 	public static final short DONE = 2;
 

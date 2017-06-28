@@ -27,14 +27,15 @@ import java.util.EventObject;
  * The Class RemovalDispatch.
  */
 public class RemovalDispatch extends EventDispatch2 {
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.util.EventDispatch2#dispatchEvent(java.util.EventListener
-     * , java.util.EventObject)
-     */
-    @Override
-    protected void dispatchEvent(EventListener listener, EventObject event) {
-        ((RemovalListener) listener).removed((RemovalEvent) event);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.util.EventDispatch2#dispatchEvent(java.util.EventListener
+	 * , java.util.EventObject)
+	 */
+	@Override
+	protected void dispatchEvent(EventListener listener, EventObject event) {
+		((RemovalListener) listener).removed((RemovalEvent) event);
+	}
 }

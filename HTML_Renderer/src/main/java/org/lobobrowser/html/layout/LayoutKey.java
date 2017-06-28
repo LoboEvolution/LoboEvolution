@@ -155,12 +155,11 @@ public class LayoutKey {
 			return false;
 		}
 		LayoutKey other = (LayoutKey) obj;
-		return (other.availWidth == this.availWidth) && (other.availHeight == this.availHeight)
-				&& (other.defaultOverflowX == this.defaultOverflowX)
-				&& (other.defaultOverflowY == this.defaultOverflowY) && (other.whitespace == this.whitespace)
-				&& (other.expandWidth == this.expandWidth) && (other.expandHeight == this.expandHeight)
-				&& (other.useDeclaredSize == this.useDeclaredSize) && (other.overrideNoWrap == this.overrideNoWrap)
-				&& Objects.equals(other.font, this.font)
+		return other.availWidth == this.availWidth && other.availHeight == this.availHeight
+				&& other.defaultOverflowX == this.defaultOverflowX && other.defaultOverflowY == this.defaultOverflowY
+				&& other.whitespace == this.whitespace && other.expandWidth == this.expandWidth
+				&& other.expandHeight == this.expandHeight && other.useDeclaredSize == this.useDeclaredSize
+				&& other.overrideNoWrap == this.overrideNoWrap && Objects.equals(other.font, this.font)
 				&& Objects.equals(other.floatBoundsSource, this.floatBoundsSource);
 	}
 
@@ -172,8 +171,8 @@ public class LayoutKey {
 	@Override
 	public int hashCode() {
 		Font font = this.font;
-		return ((this.availWidth * 1000) + this.availHeight) ^ (font == null ? 0 : font.hashCode())
-				^ (this.expandWidth ? 2 : 0) ^ (this.expandHeight ? 1 : 0) ^ (this.whitespace << 2);
+		return this.availWidth * 1000 + this.availHeight ^ (font == null ? 0 : font.hashCode())
+				^ (this.expandWidth ? 2 : 0) ^ (this.expandHeight ? 1 : 0) ^ this.whitespace << 2;
 	}
 
 	/**

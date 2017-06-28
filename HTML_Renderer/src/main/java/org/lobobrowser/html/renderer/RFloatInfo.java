@@ -29,63 +29,66 @@ import org.lobobrowser.html.dombl.ModelNode;
  */
 public final class RFloatInfo implements Renderable {
 
-    /** The model node. */
-    private final ModelNode modelNode;
+	/** The model node. */
+	private final ModelNode modelNode;
 
-    /** The element. */
-    private final BoundableRenderable element;
+	/** The element. */
+	private final BoundableRenderable element;
 
-    /** The left float. */
-    private final boolean leftFloat;
+	/** The left float. */
+	private final boolean leftFloat;
 
-    /**
-     * Instantiates a new r float info.
-     *
-     * @param node
-     *            the node
-     * @param element
-     *            the element
-     * @param leftFloat
-     *            the left float
-     */
-    public RFloatInfo(ModelNode node, BoundableRenderable element,
-            boolean leftFloat) {
-        this.modelNode = node;
-        this.element = element;
-        this.leftFloat = leftFloat;
-    }
+	/**
+	 * Instantiates a new r float info.
+	 *
+	 * @param node
+	 *            the node
+	 * @param element
+	 *            the element
+	 * @param leftFloat
+	 *            the left float
+	 */
+	public RFloatInfo(ModelNode node, BoundableRenderable element, boolean leftFloat) {
+		this.modelNode = node;
+		this.element = element;
+		this.leftFloat = leftFloat;
+	}
 
-    /** Checks if is left float.
+	/**
+	 * Checks if is left float.
 	 *
 	 * @return the left float
 	 */
-    public boolean isLeftFloat() {
-        return this.leftFloat;
-    }
+	public boolean isLeftFloat() {
+		return this.leftFloat;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.Renderable#getModelNode()
-     */
-    @Override
-    public ModelNode getModelNode() {
-        return this.modelNode;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.Renderable#getModelNode()
+	 */
+	@Override
+	public ModelNode getModelNode() {
+		return this.modelNode;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.Renderable#paint(java.awt.Graphics)
-     */
-    @Override
-    public void paint(Graphics g) {
-        // nop
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.Renderable#paint(java.awt.Graphics)
+	 */
+	@Override
+	public void paint(Graphics g) {
+		// nop
+	}
 
-    /** Gets the renderable.
+	/**
+	 * Gets the renderable.
 	 *
 	 * @return the renderable
 	 */
-    public final BoundableRenderable getRenderable() {
-        return element;
-    }
+	public final BoundableRenderable getRenderable() {
+		return element;
+	}
 }

@@ -33,7 +33,6 @@ import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.SSLCertificate;
@@ -137,7 +136,7 @@ public class CSSUtilities {
 			url = new URL(scriptURI);
 		} catch (MalformedURLException mfu) {
 			int idx = scriptURI.indexOf(':');
-			if ((idx == -1) || (idx == 1)) {
+			if (idx == -1 || idx == 1) {
 				// try file
 				url = new URL("file:" + scriptURI);
 			} else {
@@ -179,7 +178,7 @@ public class CSSUtilities {
 	 * @return true, if successful
 	 */
 	public static boolean matchesMedia(String mediaValues, UserAgentContext rcontext) {
-		if ((mediaValues == null) || (mediaValues.length() == 0)) {
+		if (mediaValues == null || mediaValues.length() == 0) {
 			return true;
 		}
 		if (rcontext == null) {

@@ -21,15 +21,11 @@
 
 package org.lobobrowser.html.svgimpl;
 
-import java.awt.Color;
-
 import javax.swing.JComponent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lobobrowser.html.control.BaseControl;
 import org.lobobrowser.html.info.SVGInfo;
-import org.lobobrowser.util.gui.ColorFactory;
 
 public class SVGAnimateImpl extends JComponent implements Runnable {
 
@@ -44,6 +40,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		runner.start();
 	}
 
+	@Override
 	public void run() {
 		SVGAnimateElementImpl animate = info.getAnimate();
 		switch (animate.getAttributeName().toLowerCase()) {

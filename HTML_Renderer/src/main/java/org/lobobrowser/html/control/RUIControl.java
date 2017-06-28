@@ -155,8 +155,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * @return true, if successful
 	 */
 	public boolean hasBackground() {
-		return (this.backgroundColor != null) || (this.backgroundImage != null)
-				|| (this.lastBackgroundImageUri != null);
+		return this.backgroundColor != null || this.backgroundImage != null || this.lastBackgroundImageUri != null;
 	}
 
 	/*
@@ -168,7 +167,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	@Override
 	public final void paint(Graphics g) {
 		RenderState rs = this.modelNode.getRenderState();
-		if ((rs != null) && (rs.getVisibility() != RenderState.VISIBILITY_VISIBLE)) {
+		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
 			// Just don't paint it.
 			return;
 		}
@@ -433,7 +432,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		RenderState rs = this.modelNode.getRenderState();
 		int whitespace = rs == null ? RenderState.WS_NORMAL : rs.getWhiteSpace();
 		Font font = rs == null ? null : rs.getFont();
-		LayoutKey layoutKey = new LayoutKey(availWidth, availHeight, whitespace, font,false);
+		LayoutKey layoutKey = new LayoutKey(availWidth, availHeight, whitespace, font, false);
 		LayoutValue layoutValue;
 		if (sizeOnly) {
 			layoutValue = cachedLayout.get(layoutKey);
@@ -475,7 +474,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 			Insets insets = this.getInsets(false, false);
 			int finalWidth = declaredWidth == -1 ? -1 : declaredWidth - insets.left - insets.right;
 			int finalHeight = declaredHeight == -1 ? -1 : declaredHeight - insets.top - insets.bottom;
-			if ((finalWidth == -1) || (finalHeight == -1)) {
+			if (finalWidth == -1 || finalHeight == -1) {
 				Dimension size = widget.getPreferredSize();
 				if (finalWidth == -1) {
 					finalWidth = size.width + insets.left + insets.right;
@@ -484,7 +483,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 					finalHeight = size.height + insets.top + insets.bottom;
 				}
 			}
-			layoutValue = new LayoutValue(finalWidth, finalHeight,false,false);
+			layoutValue = new LayoutValue(finalWidth, finalHeight, false, false);
 			if (sizeOnly) {
 				if (cachedLayout.size() > MAX_CACHE_SIZE) {
 					// Unlikely, but we should ensure it's bounded.
@@ -510,7 +509,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	public final void preferredSizeInvalidated() {
 		int dw = RUIControl.this.declaredWidth;
 		int dh = RUIControl.this.declaredHeight;
-		if ((dw == -1) || (dh == -1)) {
+		if (dw == -1 || dh == -1) {
 			this.frameContext.delayedRelayout((DOMNodeImpl) this.modelNode);
 		} else {
 			RUIControl.this.repaint();
@@ -548,7 +547,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 		RenderState rs = this.modelNode.getRenderState();
 		return rs == null ? null : rs.getColor();
 	}
-	
+
 	/**
 	 * Gets the background color.
 	 *

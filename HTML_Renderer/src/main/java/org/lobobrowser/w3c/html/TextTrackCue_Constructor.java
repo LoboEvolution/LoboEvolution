@@ -21,19 +21,22 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface TextTrackCue_Constructor.
  */
 public interface TextTrackCue_Constructor {
-	
+
 	/**
 	 * Creates the instance.
 	 *
-	 * @param id the id
-	 * @param startTime the start time
-	 * @param endTime the end time
-	 * @param text the text
+	 * @param id
+	 *            the id
+	 * @param startTime
+	 *            the start time
+	 * @param endTime
+	 *            the end time
+	 * @param text
+	 *            the text
 	 * @return the text track cue
 	 */
 	// Constructor
@@ -42,11 +45,16 @@ public interface TextTrackCue_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param id the id
-	 * @param startTime the start time
-	 * @param endTime the end time
-	 * @param text the text
-	 * @param settings the settings
+	 * @param id
+	 *            the id
+	 * @param startTime
+	 *            the start time
+	 * @param endTime
+	 *            the end time
+	 * @param text
+	 *            the text
+	 * @param settings
+	 *            the settings
 	 * @return the text track cue
 	 */
 	public TextTrackCue createInstance(String id, double startTime, double endTime, String text, String settings);
@@ -54,12 +62,18 @@ public interface TextTrackCue_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param id the id
-	 * @param startTime the start time
-	 * @param endTime the end time
-	 * @param text the text
-	 * @param settings the settings
-	 * @param pauseOnExit the pause on exit
+	 * @param id
+	 *            the id
+	 * @param startTime
+	 *            the start time
+	 * @param endTime
+	 *            the end time
+	 * @param text
+	 *            the text
+	 * @param settings
+	 *            the settings
+	 * @param pauseOnExit
+	 *            the pause on exit
 	 * @return the text track cue
 	 */
 	public TextTrackCue createInstance(String id, double startTime, double endTime, String text, String settings,

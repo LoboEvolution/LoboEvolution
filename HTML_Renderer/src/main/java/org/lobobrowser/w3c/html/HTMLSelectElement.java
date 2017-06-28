@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLSelectElement.
  */
 public interface HTMLSelectElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the autofocus.
 	 *
@@ -45,7 +44,9 @@ public interface HTMLSelectElement extends HTMLElement {
 	 */
 	public void setAutofocus(boolean autofocus);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	@Override
@@ -158,7 +159,8 @@ public interface HTMLSelectElement extends HTMLElement {
 	/**
 	 * Item.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the object
 	 */
 	public Object item(int index);
@@ -166,7 +168,8 @@ public interface HTMLSelectElement extends HTMLElement {
 	/**
 	 * Named item.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 * @return the object
 	 */
 	public Object namedItem(String name);
@@ -174,30 +177,36 @@ public interface HTMLSelectElement extends HTMLElement {
 	/**
 	 * Adds the.
 	 *
-	 * @param element the element
+	 * @param element
+	 *            the element
 	 */
 	public void add(HTMLElement element);
 
 	/**
 	 * Adds the.
 	 *
-	 * @param element the element
-	 * @param before the before
+	 * @param element
+	 *            the element
+	 * @param before
+	 *            the before
 	 */
 	public void add(HTMLElement element, HTMLElement before);
 
 	/**
 	 * Adds the.
 	 *
-	 * @param element the element
-	 * @param before the before
+	 * @param element
+	 *            the element
+	 * @param before
+	 *            the before
 	 */
 	public void add(HTMLElement element, int before);
 
 	/**
 	 * Removes the.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 */
 	public void remove(int index);
 

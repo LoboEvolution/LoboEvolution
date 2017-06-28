@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTableCellElement.
  */
 public interface HTMLTableCellElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the col span.
 	 *

@@ -28,12 +28,12 @@ package org.lobobrowser.html.domfilter;
  */
 public interface ObjectFilter {
 
-    /**
-     * Accept.
-     *
-     * @param target
-     *            the target
-     * @return true, if successful
-     */
-    boolean accept(Object target);
+	/**
+	 * Accept.
+	 *
+	 * @param target
+	 *            the target
+	 * @return true, if successful
+	 */
+	boolean accept(Object target);
 }

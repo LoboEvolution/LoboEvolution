@@ -107,18 +107,18 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 					this.nestIntoMatchingNodes);
 			this.itemsByIndex = descendents == null ? Collections.emptyList() : descendents;
 			int size = descendents == null ? 0 : descendents.size();
-			Map<String, DOMElementImpl> itemsByName = new HashMap<String, DOMElementImpl>((size * 3) / 2);
+			Map<String, DOMElementImpl> itemsByName = new HashMap<String, DOMElementImpl>(size * 3 / 2);
 			this.itemsByName = itemsByName;
 			for (int i = 0; i < size; i++) {
 				Object descNode = descendents.get(i);
 				if (descNode instanceof DOMElementImpl) {
 					DOMElementImpl element = (DOMElementImpl) descNode;
 					String id = element.getId();
-					if ((id != null) && (id.length() != 0)) {
+					if (id != null && id.length() != 0) {
 						itemsByName.put(id, element);
 					}
 					String name = element.getAttribute(HtmlAttributeProperties.NAME);
-					if ((name != null) && (name.length() != 0) && !name.equals(id)) {
+					if (name != null && name.length() != 0 && !name.equals(id)) {
 						itemsByName.put(name, element);
 					}
 				}
@@ -143,7 +143,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 	 */
 	private boolean isValid() {
 		synchronized (this.treeLock) {
-			return (this.itemsByName != null) && (this.itemsByIndex != null);
+			return this.itemsByName != null && this.itemsByIndex != null;
 		}
 	}
 

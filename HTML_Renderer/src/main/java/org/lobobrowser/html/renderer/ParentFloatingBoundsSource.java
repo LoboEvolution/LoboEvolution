@@ -74,7 +74,7 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	 */
 	@Override
 	public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
-		int actualRightShift = this.blockShiftRight + (this.expectedBlockWidth - apparentBlockWidth);
+		int actualRightShift = this.blockShiftRight + this.expectedBlockWidth - apparentBlockWidth;
 		return new ShiftedFloatingBounds(this.floatBounds, -this.newX, -actualRightShift, -this.newY);
 	}
 
@@ -90,8 +90,8 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 			return false;
 		}
 		ParentFloatingBoundsSource other = (ParentFloatingBoundsSource) obj;
-		return (this.blockShiftRight == other.blockShiftRight) && (this.expectedBlockWidth == other.expectedBlockWidth)
-				&& (this.newX == other.newX) && (this.newY == other.newY)
+		return this.blockShiftRight == other.blockShiftRight && this.expectedBlockWidth == other.expectedBlockWidth
+				&& this.newX == other.newX && this.newY == other.newY
 				&& Objects.equals(this.floatBounds, other.floatBounds);
 
 	}

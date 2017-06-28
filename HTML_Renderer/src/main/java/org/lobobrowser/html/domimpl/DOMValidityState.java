@@ -63,12 +63,12 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getPatternMismatch() {
-		if (ic.getValue() != null && Pattern.matches(ic.getPattern(), ic.getValue())){
+		if (ic.getValue() != null && Pattern.matches(ic.getPattern(), ic.getValue())) {
 			return false;
-		}else{
+		} else {
 			return true;
 		}
-		
+
 	}
 
 	@Override

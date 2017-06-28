@@ -48,12 +48,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.net.ssl.HttpsURLConnection;
-
 import org.lobobrowser.async.AsyncResult;
 import org.lobobrowser.async.AsyncResultImpl;
 import org.lobobrowser.clientlet.CancelClientletException;
@@ -260,7 +259,7 @@ public final class RequestEngine {
 	private void postData(URLConnection connection, ParameterInfo pinfo, String altPostData) throws IOException {
 		BooleanSettings boolSettings = this.booleanSettings;
 		String encoding = pinfo.getEncoding();
-		if ((encoding == null) || NORMAL_FORM_ENCODING.equalsIgnoreCase(encoding)) {
+		if (encoding == null || NORMAL_FORM_ENCODING.equalsIgnoreCase(encoding)) {
 			ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
 			Parameter[] parameters = pinfo.getParameters();
 			boolean firstParam = true;
@@ -378,7 +377,7 @@ public final class RequestEngine {
 	private String completeGetUrl(String baseURL, ParameterInfo pinfo, String ref) throws Exception {
 		String newNoRefURL;
 		Parameter[] parameters = pinfo.getParameters();
-		if ((parameters != null) && (parameters.length > 0)) {
+		if (parameters != null && parameters.length > 0) {
 			StringBuffer sb = new StringBuffer(baseURL);
 			int qmIdx = baseURL.indexOf('?');
 			char separator = qmIdx == -1 ? '?' : '&';
@@ -399,7 +398,7 @@ public final class RequestEngine {
 		} else {
 			newNoRefURL = baseURL;
 		}
-		if ((ref != null) && (ref.length() != 0)) {
+		if (ref != null && ref.length() != 0) {
 			return newNoRefURL + "#" + ref;
 		} else {
 			return newNoRefURL;
@@ -492,7 +491,7 @@ public final class RequestEngine {
 						}
 					}
 				}
-				if ((persistentContent == null) && (entry == null)) {
+				if (persistentContent == null && entry == null) {
 					return null;
 				}
 				CacheInfo cinfo = new CacheInfo(entry, persistentContent, url);
@@ -569,8 +568,7 @@ public final class RequestEngine {
 							if (CacheInfo.HEADER_REQUEST_TIME.equalsIgnoreCase(headerKey)) {
 								continue;
 							}
-							String headerPrefix = (headerKey == null) || (headerKey.length() == 0) ? ""
-									: headerKey + ": ";
+							String headerPrefix = headerKey == null || headerKey.length() == 0 ? "" : headerKey + ": ";
 							byte[] headerBytes = (headerPrefix + headerValue + "\r\n").getBytes("UTF-8");
 							out.write(headerBytes);
 						}
@@ -605,9 +603,8 @@ public final class RequestEngine {
 							objOut.flush();
 							byte[] byteArray = fileOut.toByteArray();
 							if (byteArray.length == 0) {
-								logger.error(
-										"cache(): Serialized content has zero bytes for persistent object "
-												+ altPersistentObject + ".");
+								logger.error("cache(): Serialized content has zero bytes for persistent object "
+										+ altPersistentObject + ".");
 							}
 							cm.putPersistent(url, byteArray, true);
 						} catch (Exception err) {
@@ -866,7 +863,7 @@ public final class RequestEngine {
 		final String host = connectionUrl.getHost();
 		boolean isResURL = "res".equalsIgnoreCase(protocol);
 		SSLCertificate.setCertificate();
-		if (isResURL || (host == null) || (host.length() == 0)) {
+		if (isResURL || host == null || host.length() == 0) {
 			connection = connectionUrl.openConnection();
 		} else {
 			Proxy proxy = this.connectionSettings.getProxy(host);
@@ -917,8 +914,8 @@ public final class RequestEngine {
 	 * @return true, if is OK to retrieve from cache
 	 */
 	private static boolean isOKToRetrieveFromCache(RequestType requestType) {
-		return (requestType != RequestType.SOFT_RELOAD) && (requestType != RequestType.HARD_RELOAD)
-				&& (requestType != RequestType.DOWNLOAD);
+		return requestType != RequestType.SOFT_RELOAD && requestType != RequestType.HARD_RELOAD
+				&& requestType != RequestType.DOWNLOAD;
 	}
 
 	/**
@@ -946,7 +943,7 @@ public final class RequestEngine {
 			ParameterInfo pinfo = rhandler instanceof RedirectRequestHandler ? null : request.getParameterInfo();
 			boolean isGet = "GET".equals(method);
 			URL url;
-			if (isGet && (pinfo != null)) {
+			if (isGet && pinfo != null) {
 				String ref = baseURL.getRef();
 				String noRefForm = Urls.getNoRefForm(baseURL);
 				String newURLText = completeGetUrl(noRefForm, pinfo, ref);
@@ -957,10 +954,10 @@ public final class RequestEngine {
 			CacheInfo cacheInfo = null;
 			String protocol = url.getProtocol();
 			final URL connectionUrl;
-			if ((url.getQuery() != null) && "file".equalsIgnoreCase(protocol)) {
+			if (url.getQuery() != null && "file".equalsIgnoreCase(protocol)) {
 				// Remove query (replace file with path) if "file" protocol.
 				String ref = url.getRef();
-				String refText = (ref == null) || (ref.length() == 0) ? "" : "#" + ref;
+				String refText = ref == null || ref.length() == 0 ? "" : "#" + ref;
 				connectionUrl = new URL(protocol, url.getHost(), url.getPort(), url.getPath() + refText);
 			} else {
 				connectionUrl = url;
@@ -970,7 +967,7 @@ public final class RequestEngine {
 				cacheInfo = this.getCacheInfo(rhandler, connectionUrl);
 			}
 			try {
-				
+
 				if (!"http:".equals(connectionUrl.toString())) {
 					SSLCertificate.setCertificate();
 					URLConnection connection = this.getURLConnection(connectionUrl, request, protocol, method, rhandler,
@@ -994,10 +991,10 @@ public final class RequestEngine {
 						}
 						rhandler.handleProgress(ProgressType.CONNECTING, url, method, 0, -1);
 						// Handle response
-						boolean isContentCached = (cacheInfo != null) && cacheInfo.isCacheConnection(connection);
+						boolean isContentCached = cacheInfo != null && cacheInfo.isCacheConnection(connection);
 						boolean isCacheable = false;
 
-						if ((connection instanceof HttpsURLConnection) && !isContentCached) {
+						if (connection instanceof HttpsURLConnection && !isContentCached) {
 
 							HttpsURLConnection hconnection = (HttpsURLConnection) connection;
 							hconnection.setInstanceFollowRedirects(true);
@@ -1044,9 +1041,9 @@ public final class RequestEngine {
 								connection = cacheInfo.getURLConnection();
 								responseIn = connection.getInputStream();
 								rinfo.setConnection(connection, responseIn);
-							} else if ((responseCode == HttpURLConnection.HTTP_MOVED_PERM)
-									|| (responseCode == HttpURLConnection.HTTP_MOVED_TEMP)
-									|| (responseCode == HttpURLConnection.HTTP_SEE_OTHER)) {
+							} else if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
+									|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
+									|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
 								if (linfo) {
 									logger.info("run(): REDIRECTING: ResponseCode=" + responseCode + " for url=" + url);
 								}
@@ -1059,7 +1056,7 @@ public final class RequestEngine {
 								return;
 							}
 
-						} else if ((connection instanceof HttpURLConnection) && !isContentCached) {
+						} else if (connection instanceof HttpURLConnection && !isContentCached) {
 
 							HttpURLConnection hconnection = (HttpURLConnection) connection;
 							hconnection.setInstanceFollowRedirects(false);
@@ -1105,9 +1102,9 @@ public final class RequestEngine {
 								connection = cacheInfo.getURLConnection();
 								responseIn = connection.getInputStream();
 								rinfo.setConnection(connection, responseIn);
-							} else if ((responseCode == HttpURLConnection.HTTP_MOVED_PERM)
-									|| (responseCode == HttpURLConnection.HTTP_MOVED_TEMP)
-									|| (responseCode == HttpURLConnection.HTTP_SEE_OTHER)) {
+							} else if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
+									|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
+									|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
 								if (linfo) {
 									logger.info("run(): REDIRECTING: ResponseCode=" + responseCode + " for url=" + url);
 								}
@@ -1153,7 +1150,7 @@ public final class RequestEngine {
 							} else {
 								logger.warn("processHandler(): Cacheable response not available: " + connectionUrl);
 							}
-						} else if ((cacheInfo != null) && !cacheInfo.hasTransientEntry()) {
+						} else if (cacheInfo != null && !cacheInfo.hasTransientEntry()) {
 							// Content that came from cache cannot be cached
 							// again, but a RAM entry was missing.
 							final byte[] persContent = cacheInfo.getPersistentContent();
@@ -1341,7 +1338,7 @@ public final class RequestEngine {
 		@Override
 		public void run() {
 			SecurityManager sm = System.getSecurityManager();
-			if ((sm != null) && (this.accessContext != null)) {
+			if (sm != null && this.accessContext != null) {
 				PrivilegedAction<Object> action = new PrivilegedAction<Object>() {
 					@Override
 					public Object run() {
@@ -1385,7 +1382,7 @@ public final class RequestEngine {
 		 */
 		@Override
 		public boolean equals(Object other) {
-			return (other instanceof RequestHandlerTask) && ((RequestHandlerTask) other).handler.equals(this.handler);
+			return other instanceof RequestHandlerTask && ((RequestHandlerTask) other).handler.equals(this.handler);
 		}
 
 		/*

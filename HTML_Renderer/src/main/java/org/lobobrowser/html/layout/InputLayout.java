@@ -67,15 +67,16 @@ public class InputLayout extends CommonWidgetLayout {
 	}
 
 	/**
-     * Creates the input control.
-     *
-     * @param markupElement
-     *            the markup element
-     * @return the base input control
-     */
+	 * Creates the input control.
+	 *
+	 * @param markupElement
+	 *            the markup element
+	 * @return the base input control
+	 */
 	private final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
-		String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE)==null ? "" : markupElement.getAttribute(HtmlAttributeProperties.TYPE);
-		
+		String type = markupElement.getAttribute(HtmlAttributeProperties.TYPE) == null ? ""
+				: markupElement.getAttribute(HtmlAttributeProperties.TYPE);
+
 		switch (type) {
 		case "text":
 			return new InputTextControl(markupElement);
@@ -115,5 +116,5 @@ public class InputLayout extends CommonWidgetLayout {
 		default:
 			return new InputTextControl(markupElement);
 		}
-    }
+	}
 }

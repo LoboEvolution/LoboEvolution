@@ -125,10 +125,10 @@ public class CanvasInfo implements Serializable {
 
 	/** The Affine Transform. */
 	private AffineTransform affineTransform;
-	
+
 	/** The Text Align. */
 	private String textAlign;
-	
+
 	/** The Base Line. */
 	private String baseline;
 

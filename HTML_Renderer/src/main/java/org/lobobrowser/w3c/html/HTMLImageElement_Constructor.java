@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLImageElement_Constructor.
  */
 public interface HTMLImageElement_Constructor {
-	
+
 	/**
 	 * Creates the instance.
 	 *
@@ -38,7 +37,8 @@ public interface HTMLImageElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param width the width
+	 * @param width
+	 *            the width
 	 * @return the HTML image element
 	 */
 	public HTMLImageElement createInstance(int width);
@@ -46,8 +46,10 @@ public interface HTMLImageElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param width the width
-	 * @param height the height
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
 	 * @return the HTML image element
 	 */
 	public HTMLImageElement createInstance(int width, int height);

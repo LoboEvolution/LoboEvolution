@@ -32,14 +32,13 @@ import org.lobobrowser.ua.NavigatorWindow;
 /**
  * The Class ScreenShotAction.
  */
-public class ScreenShotAction extends AbstractAction implements EnableableAction{
+public class ScreenShotAction extends AbstractAction implements EnableableAction {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The window. */
 	private NavigatorWindow window;
-
 
 	/**
 	 * Instantiates a new cloned window action.
@@ -55,7 +54,6 @@ public class ScreenShotAction extends AbstractAction implements EnableableAction
 		this.window = window;
 	}
 
-	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
@@ -64,7 +62,8 @@ public class ScreenShotAction extends AbstractAction implements EnableableAction
 			new ScreenShootFrame(f);
 		}
 	}
-	
+
 	@Override
-	public void updateEnabling() {}
+	public void updateEnabling() {
+	}
 }

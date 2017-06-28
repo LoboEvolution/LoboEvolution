@@ -98,7 +98,7 @@ public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDiv
 				}
 			}
 		}
-		for (int i = 0; i < (1 - lineBreaks); i++) {
+		for (int i = 0; i < 1 - lineBreaks; i++) {
 			buffer.append("\r\n");
 		}
 		super.appendInnerTextImpl(buffer);

@@ -31,49 +31,48 @@ import java.security.BasicPermission;
  */
 public class StoreHostPermission extends BasicPermission {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new store host permission.
-     *
-     * @param name
-     *            the name
-     */
-    public StoreHostPermission(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new store host permission.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public StoreHostPermission(String name) {
+		super(name);
+	}
 
-    /**
-     * For url.
-     *
-     * @param url
-     *            the url
-     * @return the store host permission
-     */
-    public static StoreHostPermission forURL(URL url) {
-        if (LocalSecurityPolicy.isLocal(url)) {
-            return new StoreHostPermission("*");
-        } else {
-            String hostName = url.getHost();
-            if ((hostName != null) && (hostName.indexOf('*') != -1)) {
-                throw new SecurityException("Invalid host: " + hostName);
-            }
-            return StoreHostPermission.forHost(hostName);
-        }
-    }
+	/**
+	 * For url.
+	 *
+	 * @param url
+	 *            the url
+	 * @return the store host permission
+	 */
+	public static StoreHostPermission forURL(URL url) {
+		if (LocalSecurityPolicy.isLocal(url)) {
+			return new StoreHostPermission("*");
+		} else {
+			String hostName = url.getHost();
+			if (hostName != null && hostName.indexOf('*') != -1) {
+				throw new SecurityException("Invalid host: " + hostName);
+			}
+			return StoreHostPermission.forHost(hostName);
+		}
+	}
 
-    /**
-     * For host.
-     *
-     * @param hostName
-     *            the host name
-     * @return the store host permission
-     */
-    public static StoreHostPermission forHost(String hostName) {
-        // TODO What about a JAR URL or a VC URL?
-        String h = (hostName == null) || "".equals(hostName) ? "<<local>>"
-                : hostName;
-        return new StoreHostPermission(h);
-    }
+	/**
+	 * For host.
+	 *
+	 * @param hostName
+	 *            the host name
+	 * @return the store host permission
+	 */
+	public static StoreHostPermission forHost(String hostName) {
+		// TODO What about a JAR URL or a VC URL?
+		String h = hostName == null || "".equals(hostName) ? "<<local>>" : hostName;
+		return new StoreHostPermission(h);
+	}
 }

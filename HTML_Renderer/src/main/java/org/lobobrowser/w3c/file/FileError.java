@@ -21,25 +21,24 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Interface FileError.
  */
 public interface FileError {
-	
+
 	/** The Constant NOT_FOUND_ERR. */
 	// FileError
 	public static final short NOT_FOUND_ERR = 1;
-	
+
 	/** The Constant SECURITY_ERR. */
 	public static final short SECURITY_ERR = 2;
-	
+
 	/** The Constant ABORT_ERR. */
 	public static final short ABORT_ERR = 3;
-	
+
 	/** The Constant NOT_READABLE_ERR. */
 	public static final short NOT_READABLE_ERR = 4;
-	
+
 	/** The Constant ENCODING_ERR. */
 	public static final short ENCODING_ERR = 5;
 

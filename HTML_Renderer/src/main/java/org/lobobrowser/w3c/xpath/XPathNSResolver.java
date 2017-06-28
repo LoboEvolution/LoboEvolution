@@ -21,16 +21,16 @@
 
 package org.lobobrowser.w3c.xpath;
 
-
 /**
  * The Interface XPathNSResolver.
  */
 public interface XPathNSResolver {
-	
+
 	/**
 	 * Lookup namespace uri.
 	 *
-	 * @param prefix the prefix
+	 * @param prefix
+	 *            the prefix
 	 * @return the string
 	 */
 	// XPathNSResolver

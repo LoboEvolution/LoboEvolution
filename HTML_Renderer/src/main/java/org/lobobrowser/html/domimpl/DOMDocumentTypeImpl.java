@@ -33,141 +33,153 @@ import org.w3c.dom.Node;
  */
 public class DOMDocumentTypeImpl extends DOMNodeImpl implements DocumentType {
 
-    /** The qualified name. */
-    private final String qualifiedName;
+	/** The qualified name. */
+	private final String qualifiedName;
 
-    /** The public id. */
-    private final String publicId;
+	/** The public id. */
+	private final String publicId;
 
-    /** The system id. */
-    private final String systemId;
+	/** The system id. */
+	private final String systemId;
 
-    /**
-     * Instantiates a new DOM document type impl.
-     *
-     * @param qname
-     *            the qname
-     * @param publicId
-     *            the public id
-     * @param systemId
-     *            the system id
-     */
-    public DOMDocumentTypeImpl(String qname, String publicId, String systemId) {
-        super();
-        this.qualifiedName = qname;
-        this.publicId = publicId;
-        this.systemId = systemId;
-    }
+	/**
+	 * Instantiates a new DOM document type impl.
+	 *
+	 * @param qname
+	 *            the qname
+	 * @param publicId
+	 *            the public id
+	 * @param systemId
+	 *            the system id
+	 */
+	public DOMDocumentTypeImpl(String qname, String publicId, String systemId) {
+		super();
+		this.qualifiedName = qname;
+		this.publicId = publicId;
+		this.systemId = systemId;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
-     */
-    @Override
-    public String getLocalName() {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getLocalName()
+	 */
+	@Override
+	public String getLocalName() {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
-     */
-    @Override
-    public String getNodeName() {
-        return this.getName();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeName()
+	 */
+	@Override
+	public String getNodeName() {
+		return this.getName();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
-     */
-    @Override
-    public String getNodeValue() throws DOMException {
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeValue()
+	 */
+	@Override
+	public String getNodeValue() throws DOMException {
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
-     */
-    @Override
-    public void setNodeValue(String nodeValue) throws DOMException {
-        // nop
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setNodeValue(java.lang.String)
+	 */
+	@Override
+	public void setNodeValue(String nodeValue) throws DOMException {
+		// nop
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
-     */
-    @Override
-    public short getNodeType() {
-        return org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#getNodeType()
+	 */
+	@Override
+	public short getNodeType() {
+		return org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DocumentType#getName()
-     */
-    @Override
-    public String getName() {
-        return this.qualifiedName;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DocumentType#getName()
+	 */
+	@Override
+	public String getName() {
+		return this.qualifiedName;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DocumentType#getEntities()
-     */
-    @Override
-    public NamedNodeMap getEntities() {
-        // TODO: DOCTYPE declared entities
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DocumentType#getEntities()
+	 */
+	@Override
+	public NamedNodeMap getEntities() {
+		// TODO: DOCTYPE declared entities
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DocumentType#getNotations()
-     */
-    @Override
-    public NamedNodeMap getNotations() {
-        // TODO: DOCTYPE notations
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DocumentType#getNotations()
+	 */
+	@Override
+	public NamedNodeMap getNotations() {
+		// TODO: DOCTYPE notations
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DocumentType#getPublicId()
-     */
-    @Override
-    public String getPublicId() {
-        return this.publicId;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DocumentType#getPublicId()
+	 */
+	@Override
+	public String getPublicId() {
+		return this.publicId;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DocumentType#getSystemId()
-     */
-    @Override
-    public String getSystemId() {
-        return this.systemId;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DocumentType#getSystemId()
+	 */
+	@Override
+	public String getSystemId() {
+		return this.systemId;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.w3c.dom.DocumentType#getInternalSubset()
-     */
-    @Override
-    public String getInternalSubset() {
-        // TODO: DOCTYPE internal subset
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.DocumentType#getInternalSubset()
+	 */
+	@Override
+	public String getInternalSubset() {
+		// TODO: DOCTYPE internal subset
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
-     */
-    @Override
-    protected Node createSimilarNode() {
-        return new DOMDocumentTypeImpl(this.qualifiedName, this.publicId,
-                this.systemId);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.DOMNodeImpl#createSimilarNode()
+	 */
+	@Override
+	protected Node createSimilarNode() {
+		return new DOMDocumentTypeImpl(this.qualifiedName, this.publicId, this.systemId);
+	}
 }

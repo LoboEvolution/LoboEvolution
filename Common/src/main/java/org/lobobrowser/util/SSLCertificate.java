@@ -25,9 +25,6 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -35,61 +32,58 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * The Class SSLCertificate.
  */
 public class SSLCertificate {
-    /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(SSLCertificate.class);
-            
-    /**
-     * Sets the certificate fix for Exception in thread "main"
-     * javax.net.ssl.SSLHandshakeException:
-     * sun.security.validator.ValidatorException: PKIX path building failed:
-     * sun.security.provider.certpath.SunCertPathBuilderException: unable to
-     * find valid certification path to requested target
-     */
-    public static void setCertificate() {
-        TrustManager[] trustAllCerts = new TrustManager[] {
-                new X509TrustManager()
-                {
-                    @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return null;
-                    }
-                    
-                    @Override
-                    public void checkClientTrusted(X509Certificate[] certs,
-                            String authType) {
-                    }
-                    
-                    @Override
-                    public void checkServerTrusted(X509Certificate[] certs,
-                            String authType) {
-                    }
-                } };
-        try {
-            SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, trustAllCerts, new SecureRandom());
-            HttpsURLConnection
-                    .setDefaultSSLSocketFactory(sc.getSocketFactory());
-            // Create all-trusting host name verifier
-            HostnameVerifier allHostsValid = new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            };
-            // Install the all-trusting host verifier
-            HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
-            /*
-             * end of the fix
-             */
-        } catch (KeyManagementException e) {
-            logger.error(e.getMessage());
-        } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage());
-        }
-    }
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(SSLCertificate.class);
+
+	/**
+	 * Sets the certificate fix for Exception in thread "main"
+	 * javax.net.ssl.SSLHandshakeException:
+	 * sun.security.validator.ValidatorException: PKIX path building failed:
+	 * sun.security.provider.certpath.SunCertPathBuilderException: unable to
+	 * find valid certification path to requested target
+	 */
+	public static void setCertificate() {
+		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+			@Override
+			public X509Certificate[] getAcceptedIssuers() {
+				return null;
+			}
+
+			@Override
+			public void checkClientTrusted(X509Certificate[] certs, String authType) {
+			}
+
+			@Override
+			public void checkServerTrusted(X509Certificate[] certs, String authType) {
+			}
+		} };
+		try {
+			SSLContext sc = SSLContext.getInstance("SSL");
+			sc.init(null, trustAllCerts, new SecureRandom());
+			HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+			// Create all-trusting host name verifier
+			HostnameVerifier allHostsValid = new HostnameVerifier() {
+				@Override
+				public boolean verify(String hostname, SSLSession session) {
+					return true;
+				}
+			};
+			// Install the all-trusting host verifier
+			HttpsURLConnection.setDefaultHostnameVerifier(allHostsValid);
+			/*
+			 * end of the fix
+			 */
+		} catch (KeyManagementException e) {
+			logger.error(e.getMessage());
+		} catch (NoSuchAlgorithmException e) {
+			logger.error(e.getMessage());
+		}
+	}
 }

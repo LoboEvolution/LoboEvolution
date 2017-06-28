@@ -104,7 +104,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 				}
 			}
 		}
-		for (int i = 0; i < (2 - lineBreaks); i++) {
+		for (int i = 0; i < 2 - lineBreaks; i++) {
 			buffer.append("\r\n");
 		}
 		super.appendInnerTextImpl(buffer);

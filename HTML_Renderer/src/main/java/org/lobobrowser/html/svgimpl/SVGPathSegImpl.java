@@ -27,8 +27,8 @@ import org.lobobrowser.w3c.svg.SVGPathSeg;
 public class SVGPathSegImpl implements SVGPathSeg, Serializable {
 
 	private static final long serialVersionUID = 1124449439816136129L;
-	
-	protected float x; 
+
+	protected float x;
 	protected float y;
 
 	@Override
@@ -57,7 +57,7 @@ public class SVGPathSegImpl implements SVGPathSeg, Serializable {
 	}
 
 	@Override
-	public String getPathSegTypeAsLetter() {	
+	public String getPathSegTypeAsLetter() {
 		return "?";
 	}
 }

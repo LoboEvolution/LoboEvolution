@@ -1370,7 +1370,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 			}
 			if (uac.isScriptingEnabled()) {
 				String attributeValue = this.getAttribute(attributeName);
-				if ((attributeValue == null) || (attributeValue.length() == 0)) {
+				if (attributeValue == null || attributeValue.length() == 0) {
 					f = null;
 				} else {
 					String functionCode = "function " + normalAttributeName + "_" + System.identityHashCode(this)
@@ -1395,8 +1395,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 							f = ctx.compileFunction(thisScope, functionCode,
 									this.getTagName() + "[" + this.getId() + "]." + attributeName, 1, null);
 						} catch (EcmaError ecmaError) {
-							logger.error("Javascript error at " + ecmaError.sourceName() + ":"
-									+ ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError);
+							logger.error("Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.lineNumber()
+									+ ": " + ecmaError.getMessage(), ecmaError);
 							f = null;
 						} catch (Exception err) {
 							logger.error("Unable to evaluate Javascript code", err);

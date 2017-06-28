@@ -29,28 +29,27 @@ import org.w3c.dom.Node;
  */
 public class ElementNameFilter implements NodeFilter {
 
-    /** The name. */
-    private final String name;
+	/** The name. */
+	private final String name;
 
-    /**
-     * Instantiates a new element name filter.
-     *
-     * @param name
-     *            the name
-     */
-    public ElementNameFilter(String name) {
-        this.name = name;
-    }
+	/**
+	 * Instantiates a new element name filter.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public ElementNameFilter(String name) {
+		this.name = name;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        // TODO: Case sensitive?
-        return (node instanceof Element)
-                && this.name.equals(((Element) node)
-                        .getAttribute(HtmlAttributeProperties.NAME));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		// TODO: Case sensitive?
+		return node instanceof Element && this.name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME));
+	}
 }

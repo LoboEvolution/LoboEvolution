@@ -33,10 +33,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -47,6 +43,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.http.UserAgentContext;
@@ -145,7 +144,7 @@ public class ParserTest extends JFrame {
 				url = new URL(uri);
 			} catch (MalformedURLException mfu) {
 				int idx = uri.indexOf(':');
-				if ((idx == -1) || (idx == 1)) {
+				if (idx == -1 || idx == 1) {
 					// try file
 					url = new URL("file:" + uri);
 				} else {

@@ -28,7 +28,6 @@ import org.w3c.dom.Node;
 
 public class HTMLLabelElementImpl extends HTMLAbstractUIElement implements HTMLLabelElement {
 
-	
 	public HTMLLabelElementImpl(String name) {
 		super(name);
 	}
@@ -36,7 +35,7 @@ public class HTMLLabelElementImpl extends HTMLAbstractUIElement implements HTMLL
 	@Override
 	public HTMLFormElement getForm() {
 		Node parent = this.getParentNode();
-		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
 			parent = parent.getParentNode();
 		}
 		return (HTMLFormElement) parent;

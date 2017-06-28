@@ -36,88 +36,91 @@ import org.lobobrowser.ua.RequestType;
  */
 public interface RequestHandler {
 
-    /** Gets the request.
+	/**
+	 * Gets the request.
 	 *
 	 * @return the request
 	 */
-    ClientletRequest getRequest();
+	ClientletRequest getRequest();
 
-    /** Gets the latest request url.
+	/**
+	 * Gets the latest request url.
 	 *
 	 * @return the latest request url
 	 */
-    URL getLatestRequestURL();
+	URL getLatestRequestURL();
 
-    /** Gets the latest request method.
+	/**
+	 * Gets the latest request method.
 	 *
 	 * @return the latest request method
 	 */
-    String getLatestRequestMethod();
+	String getLatestRequestMethod();
 
-    /** Gets the hostname verifier.
+	/**
+	 * Gets the hostname verifier.
 	 *
 	 * @return the hostname verifier
 	 */
-    HostnameVerifier getHostnameVerifier();
+	HostnameVerifier getHostnameVerifier();
 
-    /**
-     * Process response.
-     *
-     * @param response
-     *            the response
-     * @throws ClientletException
-     *             the clientlet exception
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    void processResponse(ClientletResponse response)
-            throws ClientletException, IOException;
+	/**
+	 * Process response.
+	 *
+	 * @param response
+	 *            the response
+	 * @throws ClientletException
+	 *             the clientlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	void processResponse(ClientletResponse response) throws ClientletException, IOException;
 
-    /**
-     * Handle exception.
-     *
-     * @param response
-     *            the response
-     * @param exception
-     *            the exception
-     * @return true, if successful
-     * @throws ClientletException
-     *             the clientlet exception
-     */
-    boolean handleException(ClientletResponse response,
-            Throwable exception) throws ClientletException;
+	/**
+	 * Handle exception.
+	 *
+	 * @param response
+	 *            the response
+	 * @param exception
+	 *            the exception
+	 * @return true, if successful
+	 * @throws ClientletException
+	 *             the clientlet exception
+	 */
+	boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException;
 
-    /**
-     * Handle progress.
-     *
-     * @param progressType
-     *            the progress type
-     * @param url
-     *            the url
-     * @param method
-     *            the method
-     * @param value
-     *            the value
-     * @param max
-     *            the max
-     */
-    void handleProgress(ProgressType progressType, URL url,
-            String method, int value, int max);
+	/**
+	 * Handle progress.
+	 *
+	 * @param progressType
+	 *            the progress type
+	 * @param url
+	 *            the url
+	 * @param method
+	 *            the method
+	 * @param value
+	 *            the value
+	 * @param max
+	 *            the max
+	 */
+	void handleProgress(ProgressType progressType, URL url, String method, int value, int max);
 
-    /**
-     * Cancel.
-     */
-    void cancel();
+	/**
+	 * Cancel.
+	 */
+	void cancel();
 
-    /** Checks if is cancelled.
+	/**
+	 * Checks if is cancelled.
 	 *
 	 * @return true, if is cancelled
 	 */
-    boolean isCancelled();
+	boolean isCancelled();
 
-    /** Gets the request type.
+	/**
+	 * Gets the request type.
 	 *
 	 * @return the request type
 	 */
-    RequestType getRequestType();
+	RequestType getRequestType();
 }

@@ -85,7 +85,7 @@ public class SVGDocumentImpl extends DOMNodeImpl implements SVGDocument {
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -93,7 +93,5 @@ public class SVGDocumentImpl extends DOMNodeImpl implements SVGDocument {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
 
 }

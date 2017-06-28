@@ -23,16 +23,16 @@ package org.lobobrowser.w3c.file;
 
 import org.lobobrowser.w3c.typedarray.ArrayBuffer;
 
-
 /**
  * The Interface FileReaderSync.
  */
 public interface FileReaderSync {
-	
+
 	/**
 	 * Read as array buffer.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 * @return the array buffer
 	 */
 	// FileReaderSync
@@ -41,7 +41,8 @@ public interface FileReaderSync {
 	/**
 	 * Read as binary string.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 * @return the string
 	 */
 	public String readAsBinaryString(Blob blob);
@@ -49,7 +50,8 @@ public interface FileReaderSync {
 	/**
 	 * Read as text.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 * @return the string
 	 */
 	public String readAsText(Blob blob);
@@ -57,8 +59,10 @@ public interface FileReaderSync {
 	/**
 	 * Read as text.
 	 *
-	 * @param blob the blob
-	 * @param encoding the encoding
+	 * @param blob
+	 *            the blob
+	 * @param encoding
+	 *            the encoding
 	 * @return the string
 	 */
 	public String readAsText(Blob blob, String encoding);
@@ -66,7 +70,8 @@ public interface FileReaderSync {
 	/**
 	 * Read as data url.
 	 *
-	 * @param blob the blob
+	 * @param blob
+	 *            the blob
 	 * @return the string
 	 */
 	public String readAsDataURL(Blob blob);

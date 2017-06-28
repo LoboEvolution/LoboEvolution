@@ -87,7 +87,7 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParag
 				}
 			}
 		}
-		for (int i = 0; i < (2 - lineBreaks); i++) {
+		for (int i = 0; i < 2 - lineBreaks; i++) {
 			buffer.append("\r\n");
 		}
 		super.appendInnerTextImpl(buffer);

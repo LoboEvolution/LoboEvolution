@@ -30,9 +30,9 @@ import org.lobobrowser.w3c.svg.SVGTransformList;
 import org.w3c.dom.DOMException;
 
 public class SVGTransformListImpl implements SVGTransformList {
-	
+
 	private List<SVGTransform> points;
-	
+
 	public SVGTransformListImpl() {
 		this(new SVGTransform[0]);
 	}

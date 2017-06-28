@@ -30,28 +30,29 @@ import org.lobobrowser.html.style.RenderStateDelegator;
  */
 public class ColorRenderState extends RenderStateDelegator {
 
-    /** The color. */
-    private final Color color;
+	/** The color. */
+	private final Color color;
 
-    /**
-     * Instantiates a new color render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param color
-     *            the color
-     */
-    public ColorRenderState(RenderState prevRenderState, Color color) {
-        super(prevRenderState);
-        this.color = color;
-    }
+	/**
+	 * Instantiates a new color render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param color
+	 *            the color
+	 */
+	public ColorRenderState(RenderState prevRenderState, Color color) {
+		super(prevRenderState);
+		this.color = color;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.style.RenderStateDelegator#getColor()
-     */
-    @Override
-    public Color getColor() {
-        return this.color;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getColor()
+	 */
+	@Override
+	public Color getColor() {
+		return this.color;
+	}
 }

@@ -29,27 +29,27 @@ import org.w3c.dom.Node;
  */
 public class ClassNameFilter implements NodeFilter {
 
-    /** The _class. */
-    private final String _class;
+	/** The _class. */
+	private final String _class;
 
-    /**
-     * Instantiates a new class name filter.
-     *
-     * @param _class
-     *            the _class
-     */
-    public ClassNameFilter(String _class) {
-        this._class = _class;
-    }
+	/**
+	 * Instantiates a new class name filter.
+	 *
+	 * @param _class
+	 *            the _class
+	 */
+	public ClassNameFilter(String _class) {
+		this._class = _class;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        return (node instanceof Element)
-                && this._class.equals(((Element) node)
-                        .getAttribute(HtmlAttributeProperties.CLASS));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		return node instanceof Element
+				&& this._class.equals(((Element) node).getAttribute(HtmlAttributeProperties.CLASS));
+	}
 }

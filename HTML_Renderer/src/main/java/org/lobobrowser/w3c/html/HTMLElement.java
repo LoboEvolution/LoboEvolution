@@ -26,16 +26,16 @@ import org.mozilla.javascript.Function;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLElement.
  */
 public interface HTMLElement extends Element {
-	
+
 	/**
 	 * Gets the elements by class name.
 	 *
-	 * @param classNames the class names
+	 * @param classNames
+	 *            the class names
 	 * @return the elements by class name
 	 */
 	// HTMLElement
@@ -74,8 +74,10 @@ public interface HTMLElement extends Element {
 	/**
 	 * Insert adjacent html.
 	 *
-	 * @param position the position
-	 * @param text the text
+	 * @param position
+	 *            the position
+	 * @param text
+	 *            the text
 	 */
 	public void insertAdjacentHTML(String position, String text);
 
@@ -1305,7 +1307,8 @@ public interface HTMLElement extends Element {
 	/**
 	 * Query selector all.
 	 *
-	 * @param selectors the selectors
+	 * @param selectors
+	 *            the selectors
 	 * @return the node list
 	 */
 	NodeList querySelectorAll(String selectors);
@@ -1313,7 +1316,8 @@ public interface HTMLElement extends Element {
 	/**
 	 * Query selector.
 	 *
-	 * @param selectors the selectors
+	 * @param selectors
+	 *            the selectors
 	 * @return the element
 	 */
 	Element querySelector(String selectors);

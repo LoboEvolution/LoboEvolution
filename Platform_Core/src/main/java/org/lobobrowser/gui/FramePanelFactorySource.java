@@ -27,37 +27,40 @@ package org.lobobrowser.gui;
  */
 public class FramePanelFactorySource {
 
-    /** The Constant instance. */
-    private static final FramePanelFactorySource instance = new FramePanelFactorySource();
+	/** The Constant instance. */
+	private static final FramePanelFactorySource instance = new FramePanelFactorySource();
 
-    /** The active factory. */
-    private volatile FramePanelFactory activeFactory = new DefaultFramePanelFactory();
+	/** The active factory. */
+	private volatile FramePanelFactory activeFactory = new DefaultFramePanelFactory();
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static FramePanelFactorySource getInstance() {
-        return instance;
-    }
+	public static FramePanelFactorySource getInstance() {
+		return instance;
+	}
 
-    /** Gets the active factory.
+	/**
+	 * Gets the active factory.
 	 *
 	 * @return the active factory
 	 */
-    public FramePanelFactory getActiveFactory() {
-        return activeFactory;
-    }
+	public FramePanelFactory getActiveFactory() {
+		return activeFactory;
+	}
 
-    /** Sets the active factory.
+	/**
+	 * Sets the active factory.
 	 *
 	 * @param activeFactory
 	 *            the new active factory
 	 */
-    public void setActiveFactory(FramePanelFactory activeFactory) {
-        if (activeFactory == null) {
-            throw new IllegalArgumentException("activeFactory==null");
-        }
-        this.activeFactory = activeFactory;
-    }
+	public void setActiveFactory(FramePanelFactory activeFactory) {
+		if (activeFactory == null) {
+			throw new IllegalArgumentException("activeFactory==null");
+		}
+		this.activeFactory = activeFactory;
+	}
 }

@@ -21,18 +21,17 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTableElement.
  */
 public interface HTMLTableElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the caption.
 	 *
 	 * @return the caption
 	 */
-	
+
 	public HTMLTableCaptionElement getCaption();
 
 	/**
@@ -122,14 +121,14 @@ public interface HTMLTableElement extends HTMLElement {
 	 * @return the HTML element
 	 */
 	public HTMLElement createTBody();
-	
+
 	/**
 	 * delete the t body.
 	 *
 	 * @return the HTML element
 	 */
 	public HTMLElement deleteTBody();
-	
+
 	/**
 	 * Gets the rows.
 	 *
@@ -147,7 +146,8 @@ public interface HTMLTableElement extends HTMLElement {
 	/**
 	 * Insert row.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the HTML element
 	 */
 	public HTMLElement insertRow(int index);
@@ -155,7 +155,8 @@ public interface HTMLTableElement extends HTMLElement {
 	/**
 	 * Delete row.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 */
 	public void deleteRow(int index);
 

@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLMapElement.
  */
 public interface HTMLMapElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the name.
 	 *

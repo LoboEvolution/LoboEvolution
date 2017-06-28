@@ -35,83 +35,83 @@ import java.io.IOException;
  */
 public interface ManagedStore {
 
-    /**
-     * Gets a ManagedFile instance for the given managed path. Directories in
-     * the path are separated by "/".
-     *
-     * @param path
-     *            the path
-     * @return the managed file
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    ManagedFile getManagedFile(String path) throws IOException;
+	/**
+	 * Gets a ManagedFile instance for the given managed path. Directories in
+	 * the path are separated by "/".
+	 *
+	 * @param path
+	 *            the path
+	 * @return the managed file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	ManagedFile getManagedFile(String path) throws IOException;
 
-    /**
-     * Gets a ManagedFile relative to a given parent. Directories in the
-     * relative path are separated by "/".
-     *
-     * @param parent
-     *            the parent
-     * @param relativePath
-     *            the relative path
-     * @return the managed file
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    ManagedFile getManagedFile(ManagedFile parent, String relativePath)
-            throws IOException;
+	/**
+	 * Gets a ManagedFile relative to a given parent. Directories in the
+	 * relative path are separated by "/".
+	 *
+	 * @param parent
+	 *            the parent
+	 * @param relativePath
+	 *            the relative path
+	 * @return the managed file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	ManagedFile getManagedFile(ManagedFile parent, String relativePath) throws IOException;
 
-    /** Gets the root managed directory.
+	/**
+	 * Gets the root managed directory.
 	 *
 	 * @return the root managed directory
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    ManagedFile getRootManagedDirectory() throws IOException;
+	ManagedFile getRootManagedDirectory() throws IOException;
 
-    /** Gets the quota.
+	/**
+	 * Gets the quota.
 	 *
 	 * @return the quota
 	 */
-    long getQuota();
+	long getQuota();
 
-    /** Gets the size.
+	/**
+	 * Gets the size.
 	 *
 	 * @return the size
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-    long getSize() throws IOException;
+	long getSize() throws IOException;
 
-    /**
-     * Saves a serializable object at the given managed file path.
-     *
-     * @param path
-     *            the path
-     * @param object
-     *            the object
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    void saveObject(String path, java.io.Serializable object)
-            throws IOException;
+	/**
+	 * Saves a serializable object at the given managed file path.
+	 *
+	 * @param path
+	 *            the path
+	 * @param object
+	 *            the object
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	void saveObject(String path, java.io.Serializable object) throws IOException;
 
-    /**
-     * Retrieves a serializable object. If the file identified by
-     * <code>path</code> does not exist, this method returns <code>null</code>.
-     *
-     * @param path
-     *            Managed path to the object file.
-     * @param classLoader
-     *            A class loader that can load the expected object type.
-     * @return An object unserialized from managed file data.
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     * @throws ClassNotFoundException
-     *             the class not found exception
-     */
-    Object retrieveObject(String path, ClassLoader classLoader)
-            throws IOException, ClassNotFoundException;
+	/**
+	 * Retrieves a serializable object. If the file identified by
+	 * <code>path</code> does not exist, this method returns <code>null</code>.
+	 *
+	 * @param path
+	 *            Managed path to the object file.
+	 * @param classLoader
+	 *            A class loader that can load the expected object type.
+	 * @return An object unserialized from managed file data.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ClassNotFoundException
+	 *             the class not found exception
+	 */
+	Object retrieveObject(String path, ClassLoader classLoader) throws IOException, ClassNotFoundException;
 
 }

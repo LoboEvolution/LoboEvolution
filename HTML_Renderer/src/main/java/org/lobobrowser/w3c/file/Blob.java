@@ -21,7 +21,6 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Interface Blob.
  */
@@ -44,8 +43,10 @@ public interface Blob {
 	/**
 	 * Slice.
 	 *
-	 * @param start the start
-	 * @param length the length
+	 * @param start
+	 *            the start
+	 * @param length
+	 *            the length
 	 * @return the blob
 	 */
 	public Blob slice(long start, long length);
@@ -53,9 +54,12 @@ public interface Blob {
 	/**
 	 * Slice.
 	 *
-	 * @param start the start
-	 * @param length the length
-	 * @param contentType the content type
+	 * @param start
+	 *            the start
+	 * @param length
+	 *            the length
+	 * @param contentType
+	 *            the content type
 	 * @return the blob
 	 */
 	public Blob slice(long start, long length, String contentType);

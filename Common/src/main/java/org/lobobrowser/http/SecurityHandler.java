@@ -29,5 +29,5 @@ import java.security.cert.X509Certificate;
  * @author rbair
  */
 public interface SecurityHandler {
-    public boolean isServerTrusted(String host, X509Certificate cert);
+	public boolean isServerTrusted(String host, X509Certificate cert);
 }

@@ -28,54 +28,54 @@ import java.util.WeakHashMap;
  * The Class Items.
  */
 public class Items {
-    /**
-     * Instantiates a new items.
-     */
-    private Items() {
-    }
-    
-    /** The source map. */
-    private static Map<Object,Map<String,Object>> sourceMap = new WeakHashMap<Object,Map<String,Object>>();
-    
-    /**
-     * Gets the item.
-     *
-     * @param source
-     *            the source
-     * @param name
-     *            the name
-     * @return the item
-     */
-    public static Object getItem(Object source, String name) {
-        Map<Object,Map<String,Object>> sm = sourceMap;
-        synchronized (sm) {
-            Map<String,Object> itemMap = (Map<String,Object>) sm.get(source);
-            if (itemMap == null) {
-                return null;
-            }
-            return itemMap.get(name);
-        }
-    }
-    
-    /**
-     * Sets the item.
-     *
-     * @param source
-     *            the source
-     * @param name
-     *            the name
-     * @param value
-     *            the value
-     */
-    public static void setItem(Object source, String name, Object value) {
-        Map<Object,Map<String,Object>> sm = sourceMap;
-        synchronized (sm) {
-            Map<String,Object> itemMap = (Map<String,Object>) sm.get(source);
-            if (itemMap == null) {
-                itemMap = new HashMap<String,Object>(1);
-                sm.put(source, itemMap);
-            }
-            itemMap.put(name, value);
-        }
-    }
+	/**
+	 * Instantiates a new items.
+	 */
+	private Items() {
+	}
+
+	/** The source map. */
+	private static Map<Object, Map<String, Object>> sourceMap = new WeakHashMap<Object, Map<String, Object>>();
+
+	/**
+	 * Gets the item.
+	 *
+	 * @param source
+	 *            the source
+	 * @param name
+	 *            the name
+	 * @return the item
+	 */
+	public static Object getItem(Object source, String name) {
+		Map<Object, Map<String, Object>> sm = sourceMap;
+		synchronized (sm) {
+			Map<String, Object> itemMap = sm.get(source);
+			if (itemMap == null) {
+				return null;
+			}
+			return itemMap.get(name);
+		}
+	}
+
+	/**
+	 * Sets the item.
+	 *
+	 * @param source
+	 *            the source
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
+	 */
+	public static void setItem(Object source, String name, Object value) {
+		Map<Object, Map<String, Object>> sm = sourceMap;
+		synchronized (sm) {
+			Map<String, Object> itemMap = sm.get(source);
+			if (itemMap == null) {
+				itemMap = new HashMap<String, Object>(1);
+				sm.put(source, itemMap);
+			}
+			itemMap.put(name, value);
+		}
+	}
 }

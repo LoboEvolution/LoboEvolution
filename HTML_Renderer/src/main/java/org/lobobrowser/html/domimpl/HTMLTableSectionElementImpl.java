@@ -34,7 +34,7 @@ public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implement
 	@Override
 	public void deleteRow(int index) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implement
 	@Override
 	public void setAlign(String align) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implement
 	@Override
 	public void setCh(String ch) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implement
 	@Override
 	public void setChOff(String chOff) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -82,8 +82,7 @@ public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implement
 	@Override
 	public void setVAlign(String vAlign) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	
 }

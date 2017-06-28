@@ -39,19 +39,20 @@ public class SVGStopElementImpl extends SVGSVGElementImpl implements SVGStopElem
 		String value = this.getAttribute(HtmlAttributeProperties.OFFSET);
 		return new SVGAnimatedNumberImpl(new SVGNumberImpl(value));
 	}
-	
+
 	public Color getStopColor() {
 		String stopcolor = this.getAttribute(HtmlAttributeProperties.STOP_COLOR);
 		Color color = Color.BLACK;
-		if(stopcolor != null){
+		if (stopcolor != null) {
 			color = ColorFactory.getInstance().getColor(stopcolor);
 		} else {
 			AbstractCSS2Properties style = this.getStyle();
 			color = ColorFactory.getInstance().getColor(style.getStopColor());
 		}
-		return new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * Float.parseFloat(getStopOpacity())));
+		return new Color(color.getRed(), color.getGreen(), color.getBlue(),
+				Math.round(255 * Float.parseFloat(getStopOpacity())));
 	}
-	
+
 	public String getStopOpacity() {
 		String opacity = this.getAttribute(HtmlAttributeProperties.STOP_OPACITY);
 		if (opacity == null) {

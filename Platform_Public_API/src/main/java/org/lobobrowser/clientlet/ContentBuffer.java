@@ -29,9 +29,10 @@ import java.net.URL;
  */
 public interface ContentBuffer {
 
-    /** Gets the url.
+	/**
+	 * Gets the url.
 	 *
 	 * @return the url
 	 */
-    URL getURL();
+	URL getURL();
 }

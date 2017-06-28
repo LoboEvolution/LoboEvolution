@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLAppletElement.
  */
 public interface HTMLAppletElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the align.
 	 *

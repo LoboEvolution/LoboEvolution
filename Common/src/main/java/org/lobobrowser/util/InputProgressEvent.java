@@ -31,29 +31,30 @@ import java.util.EventObject;
  * @author J. H. S.
  */
 public class InputProgressEvent extends EventObject {
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = -4768022316827973086L;
-    /** The progress. */
-    private final int progress;
-    
-    /**
-     * Instantiates a new input progress event.
-     *
-     * @param arg0
-     *            the arg0
-     * @param progress
-     *            the progress
-     */
-    public InputProgressEvent(Object arg0, int progress) {
-        super(arg0);
-        this.progress = progress;
-    }
-    
-    /** Gets the progress.
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = -4768022316827973086L;
+	/** The progress. */
+	private final int progress;
+
+	/**
+	 * Instantiates a new input progress event.
+	 *
+	 * @param arg0
+	 *            the arg0
+	 * @param progress
+	 *            the progress
+	 */
+	public InputProgressEvent(Object arg0, int progress) {
+		super(arg0);
+		this.progress = progress;
+	}
+
+	/**
+	 * Gets the progress.
 	 *
 	 * @return the progress
 	 */
-    public int getProgress() {
-        return this.progress;
-    }
+	public int getProgress() {
+		return this.progress;
+	}
 }

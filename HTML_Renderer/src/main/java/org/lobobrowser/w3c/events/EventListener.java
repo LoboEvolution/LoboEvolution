@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.w3c.events;
 
-
 /**
  * The listener public interface for receiving event events. The class that is
  * interested in processing a event event implements this public interface, and

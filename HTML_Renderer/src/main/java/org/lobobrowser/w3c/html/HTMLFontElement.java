@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLFontElement.
  */
 public interface HTMLFontElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the color.
 	 *

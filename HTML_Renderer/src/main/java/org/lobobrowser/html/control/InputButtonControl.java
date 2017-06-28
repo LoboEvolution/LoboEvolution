@@ -40,131 +40,136 @@ import org.lobobrowser.util.gui.WrapperLayout;
  */
 public class InputButtonControl extends BaseInputControl {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The widget. */
-    private final JButton widget;
+	/** The widget. */
+	private final JButton widget;
 
-    /**
-     * Instantiates a new input button control.
-     *
-     * @param modelNode
-     *            the model node
-     */
-    public InputButtonControl(final HTMLBaseInputElement modelNode) {
-        super(modelNode);
-        this.setLayout(WrapperLayout.getInstance());
-        JButton widget = new JButton();
-        widget.setContentAreaFilled(false);
-        this.widget = widget;
+	/**
+	 * Instantiates a new input button control.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 */
+	public InputButtonControl(final HTMLBaseInputElement modelNode) {
+		super(modelNode);
+		this.setLayout(WrapperLayout.getInstance());
+		JButton widget = new JButton();
+		widget.setContentAreaFilled(false);
+		this.widget = widget;
 
-        if (modelNode.getTitle() != null) {
-            widget.setToolTipText(modelNode.getTitle());
-        }
-        widget.setVisible(modelNode.getHidden());
-        widget.applyComponentOrientation(direction(modelNode.getDir()));
-        widget.setEnabled(!modelNode.getDisabled());
-        this.add(widget);
-        widget.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                HtmlController.getInstance().onPressed(
-                        InputButtonControl.this.controlElement, null, 0, 0);
-            }
-        });
-    }
+		if (modelNode.getTitle() != null) {
+			widget.setToolTipText(modelNode.getTitle());
+		}
+		widget.setVisible(modelNode.getHidden());
+		widget.applyComponentOrientation(direction(modelNode.getDir()));
+		widget.setEnabled(!modelNode.getDisabled());
+		this.add(widget);
+		widget.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				HtmlController.getInstance().onPressed(InputButtonControl.this.controlElement, null, 0, 0);
+			}
+		});
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
-     */
-    @Override
-    public void reset(int availWidth, int availHeight) {
-        super.reset(availWidth, availHeight);
-        RUIControl ruiControl = this.ruicontrol;
-        JButton button = this.widget;
-        button.setContentAreaFilled(!ruiControl.hasBackground());
-        java.awt.Color foregroundColor = ruiControl.getForegroundColor();
-        if (foregroundColor != null) {
-            button.setForeground(foregroundColor);
-        }
-        HTMLInputElementImpl element = (HTMLInputElementImpl) this.controlElement;
-        String text = element.getAttribute(HtmlAttributeProperties.VALUE);
-        if ((text == null) || (text.length() == 0)) {
-            String type = element.getType();
-            if ("submit".equalsIgnoreCase(type)) {
-                text = "Submit Query";
-            } else if ("reset".equalsIgnoreCase(type)) {
-                text = "Reset";
-            } else {
-                text = "";
-            }
-        }
-        button.setText(text);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.control.BaseInputControl#reset(int, int)
+	 */
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
+		RUIControl ruiControl = this.ruicontrol;
+		JButton button = this.widget;
+		button.setContentAreaFilled(!ruiControl.hasBackground());
+		java.awt.Color foregroundColor = ruiControl.getForegroundColor();
+		if (foregroundColor != null) {
+			button.setForeground(foregroundColor);
+		}
+		HTMLInputElementImpl element = (HTMLInputElementImpl) this.controlElement;
+		String text = element.getAttribute(HtmlAttributeProperties.VALUE);
+		if (text == null || text.length() == 0) {
+			String type = element.getType();
+			if ("submit".equalsIgnoreCase(type)) {
+				text = "Submit Query";
+			} else if ("reset".equalsIgnoreCase(type)) {
+				text = "Reset";
+			} else {
+				text = "";
+			}
+		}
+		button.setText(text);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#click()
-     */
-    @Override
-    public void click() {
-        this.widget.doClick();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#click()
+	 */
+	@Override
+	public void click() {
+		this.widget.doClick();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#getValue()
-     */
-    @Override
-    public String getValue() {
-        return this.widget.getText();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#getValue()
+	 */
+	@Override
+	public String getValue() {
+		return this.widget.getText();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.control.BaseInputControl#setDisabled(boolean)
-     */
-    @Override
-    public void setDisabled(boolean disabled) {
-        super.setDisabled(disabled);
-        this.widget.setEnabled(!disabled);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.control.BaseInputControl#setDisabled(boolean)
+	 */
+	@Override
+	public void setDisabled(boolean disabled) {
+		super.setDisabled(disabled);
+		this.widget.setEnabled(!disabled);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#setValue(String)
-     */
-    @Override
-    public void setValue(String value) {
-        this.widget.setText(value);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#setValue(String)
+	 */
+	@Override
+	public void setValue(String value) {
+		this.widget.setText(value);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.InputContext#resetInput()
-     */
-    @Override
-    public void resetInput() {
-        // nop
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.InputContext#resetInput()
+	 */
+	@Override
+	public void resetInput() {
+		// nop
+	}
 
-    /**
-     * Direction.
-     *
-     * @param dir
-     *            the dir
-     * @return the component orientation
-     */
-    private ComponentOrientation direction(String dir) {
+	/**
+	 * Direction.
+	 *
+	 * @param dir
+	 *            the dir
+	 * @return the component orientation
+	 */
+	private ComponentOrientation direction(String dir) {
 
-        if ("ltr".equalsIgnoreCase(dir)) {
-            return ComponentOrientation.LEFT_TO_RIGHT;
-        } else if ("rtl".equalsIgnoreCase(dir)) {
-            return ComponentOrientation.RIGHT_TO_LEFT;
-        } else {
-            return ComponentOrientation.UNKNOWN;
-        }
-    }
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
+	}
 }

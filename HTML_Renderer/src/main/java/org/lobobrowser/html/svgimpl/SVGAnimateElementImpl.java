@@ -30,7 +30,7 @@ public class SVGAnimateElementImpl extends SVGAnimationImpl implements SVGAnimat
 	public SVGAnimateElementImpl(String name) {
 		super(name);
 	}
-	
+
 	@Override
 	public SVGElement getTargetElement() {
 		// TODO Auto-generated method stub

@@ -38,7 +38,9 @@ import javax.swing.JFrame;
  */
 public class FullScreenWindow {
 
-	/** The screen that the user last chose for displaying a FullScreenWindow. */
+	/**
+	 * The screen that the user last chose for displaying a FullScreenWindow.
+	 */
 
 	private static GraphicsDevice defaultScreen;
 
@@ -156,7 +158,7 @@ public class FullScreenWindow {
 
 		GraphicsEnvironment ge =
 
-		GraphicsEnvironment.getLocalGraphicsEnvironment();
+				GraphicsEnvironment.getLocalGraphicsEnvironment();
 
 		GraphicsDevice screens[] = ge.getScreenDevices();
 
@@ -219,7 +221,7 @@ public class FullScreenWindow {
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -658915481325845436L;
-		
+
 		/** The mygd. */
 		GraphicsDevice mygd;
 
@@ -285,7 +287,7 @@ public class FullScreenWindow {
 	 */
 
 	private Flag flag = new Flag();
-	
+
 	/** The picked device. */
 	private GraphicsDevice pickedDevice;
 

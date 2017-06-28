@@ -28,144 +28,151 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlLength;
-import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLTableElement;
 
 /**
  * The Class VirtualCell.
  */
-public class VirtualCell implements CSSValuesProperties{
-	
+public class VirtualCell implements CSSValuesProperties {
+
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(VirtualCell.class);
 
-    /** The actual cell. */
-    private final RTableCell actualCell;
+	/** The actual cell. */
+	private final RTableCell actualCell;
 
-    /** The is top left. */
-    private final boolean isTopLeft;
+	/** The is top left. */
+	private final boolean isTopLeft;
 
-    /** The column. */
-    private int column;
+	/** The column. */
+	private int column;
 
-    /** The row. */
-    private int row;
+	/** The row. */
+	private int row;
 
-    /**
-     * Instantiates a new virtual cell.
-     *
-     * @param cell
-     *            the cell
-     * @param isTopLeft
-     *            the is top left
-     */
-    public VirtualCell(RTableCell cell, boolean isTopLeft) {
-        actualCell = cell;
-        this.isTopLeft = isTopLeft;
-    }
+	/**
+	 * Instantiates a new virtual cell.
+	 *
+	 * @param cell
+	 *            the cell
+	 * @param isTopLeft
+	 *            the is top left
+	 */
+	public VirtualCell(RTableCell cell, boolean isTopLeft) {
+		actualCell = cell;
+		this.isTopLeft = isTopLeft;
+	}
 
-    /** Checks if is top left.
+	/**
+	 * Checks if is top left.
 	 *
 	 * @return true, if is top left
 	 */
-    public boolean isTopLeft() {
-        return this.isTopLeft;
-    }
+	public boolean isTopLeft() {
+		return this.isTopLeft;
+	}
 
-    /** Gets the column.
+	/**
+	 * Gets the column.
 	 *
 	 * @return the column
 	 */
-    public int getColumn() {
-        return column;
-    }
+	public int getColumn() {
+		return column;
+	}
 
-    /** Sets the column.
+	/**
+	 * Sets the column.
 	 *
 	 * @param column
 	 *            the new column
 	 */
-    public void setColumn(int column) {
-        this.column = column;
-    }
+	public void setColumn(int column) {
+		this.column = column;
+	}
 
-    /** Gets the row.
+	/**
+	 * Gets the row.
 	 *
 	 * @return the row
 	 */
-    public int getRow() {
-        return row;
-    }
+	public int getRow() {
+		return row;
+	}
 
-    /** Sets the row.
+	/**
+	 * Sets the row.
 	 *
 	 * @param row
 	 *            the new row
 	 */
-    public void setRow(int row) {
-        this.row = row;
-    }
+	public void setRow(int row) {
+		this.row = row;
+	}
 
-    /** Gets the actual cell.
+	/**
+	 * Gets the actual cell.
 	 *
 	 * @return the actual cell
 	 */
-    public RTableCell getActualCell() {
-        return actualCell;
-    }
+	public RTableCell getActualCell() {
+		return actualCell;
+	}
 
-    /** Gets the height length.
+	/**
+	 * Gets the height length.
 	 *
 	 * @return the height length
 	 */
-    public HtmlLength getHeightLength() {
-        // TODO: Does not consider cellpadding and border
-        RTableCell cell = this.actualCell;
-        String heightText = cell.getHeightText();
-        
-        HtmlLength length;
-        try {
-        	if (INHERIT.equals(heightText)) {
+	public HtmlLength getHeightLength() {
+		// TODO: Does not consider cellpadding and border
+		RTableCell cell = this.actualCell;
+		String heightText = cell.getHeightText();
+
+		HtmlLength length;
+		try {
+			if (INHERIT.equals(heightText)) {
 				Object parent = cell.getParent().getModelNode();
 				if (parent instanceof HTMLTableElement) {
 					HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
 					heightText = el.getCurrentStyle().getHeight();
 				}
 			}
-        	length = heightText == null ? null : new HtmlLength(heightText);
-        } catch (Exception err) {
-        	err.printStackTrace();
-            length = null;
-        }
-        if (length != null) {
-            length.divideBy(cell.getRowSpan());
-        }
-        return length;
-    }
+			length = heightText == null ? null : new HtmlLength(heightText);
+		} catch (Exception err) {
+			err.printStackTrace();
+			length = null;
+		}
+		if (length != null) {
+			length.divideBy(cell.getRowSpan());
+		}
+		return length;
+	}
 
-    /** Gets the width length.
+	/**
+	 * Gets the width length.
 	 *
 	 * @return the width length
 	 */
-    public HtmlLength getWidthLength() {
-        RTableCell cell = this.actualCell;
-        String widthText = cell.getWidthText();
-        HtmlLength length;
-        try {
-        	if (INHERIT.equals(widthText)) {
+	public HtmlLength getWidthLength() {
+		RTableCell cell = this.actualCell;
+		String widthText = cell.getWidthText();
+		HtmlLength length;
+		try {
+			if (INHERIT.equals(widthText)) {
 				Object parent = cell.getParent().getModelNode();
 				if (parent instanceof HTMLTableElement) {
 					HTMLTableElementImpl el = (HTMLTableElementImpl) parent;
 					widthText = el.getCurrentStyle().getWidth();
 				}
 			}
-            length = widthText == null ? null : new HtmlLength(widthText);
-        } catch (Exception err) {
-            length = null;
-        }
-        if (length != null) {
-            length.divideBy(cell.getColSpan());
-        }
-        return length;
-    }
+			length = widthText == null ? null : new HtmlLength(widthText);
+		} catch (Exception err) {
+			length = null;
+		}
+		if (length != null) {
+			length.divideBy(cell.getColSpan());
+		}
+		return length;
+	}
 }

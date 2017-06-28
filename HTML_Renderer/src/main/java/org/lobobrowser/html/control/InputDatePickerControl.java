@@ -41,13 +41,13 @@ public class InputDatePickerControl extends BaseInputControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The date pattern. */
 	private static String datePattern = "dd/MM/yyyy";
-	
+
 	/** The min. */
 	private String min = "";
-	
+
 	/** The max. */
 	private String max = "";
 

@@ -285,7 +285,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public HTMLFormElement getForm() {
 		Node parent = this.getParentNode();
-		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
 			parent = parent.getParentNode();
 		}
 		return (HTMLFormElement) parent;
@@ -299,7 +299,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public int getHspace() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.HSPACE);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -320,7 +320,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public int getTabIndex() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.TABINDEX);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -351,7 +351,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public int getVspace() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.VSPACE);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

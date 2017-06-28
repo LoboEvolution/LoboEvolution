@@ -38,12 +38,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlLayoutMapping;
 import org.lobobrowser.html.HtmlRendererContext;
@@ -302,7 +302,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.layoutPass((DOMNodeImpl) this.modelNode);
 
 		Collection delayedPairs = container.getDelayedPairs();
-		if ((delayedPairs != null) && (delayedPairs.size() > 0)) {
+		if (delayedPairs != null && delayedPairs.size() > 0) {
 			// Add positioned renderables that belong here
 			Iterator i = delayedPairs.iterator();
 			while (i.hasNext()) {
@@ -319,7 +319,7 @@ public class RBlockViewport extends BaseRCollection {
 		BoundableRenderable lastSeqBlock = this.lastSeqBlock;
 		if (lastSeqBlock != null) {
 			int effBlockHeight = this.getEffectiveBlockHeight(lastSeqBlock);
-			if ((lastSeqBlock.getY() + effBlockHeight) > maxY) {
+			if (lastSeqBlock.getY() + effBlockHeight > maxY) {
 				this.maxY = maxY = lastSeqBlock.getY() + effBlockHeight;
 				maxYWholeBlock = lastSeqBlock.getY() + lastSeqBlock.getHeight();
 			}
@@ -330,7 +330,7 @@ public class RBlockViewport extends BaseRCollection {
 		// there was a BR.
 		RLine lastLine = this.currentLine;
 		Rectangle lastBounds = lastLine.getBounds();
-		if ((lastBounds.height > 0) || (lastBounds.y > maxYWholeBlock)) {
+		if (lastBounds.height > 0 || lastBounds.y > maxYWholeBlock) {
 			int lastTopX = lastBounds.x + lastBounds.width;
 			if (lastTopX > this.maxX) {
 				this.maxX = lastTopX;
@@ -349,11 +349,11 @@ public class RBlockViewport extends BaseRCollection {
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
 				BoundableRenderable br = pr.getRenderable();
-				if ((br.getX() + br.getWidth()) > this.maxX) {
+				if (br.getX() + br.getWidth() > this.maxX) {
 					this.maxX = br.getX() + br.getWidth();
 				}
 				if (isFloatLimit || !pr.isFloat()) {
-					if ((br.getY() + br.getHeight()) > maxY) {
+					if (br.getY() + br.getHeight() > maxY) {
 						this.maxY = maxY = br.getY() + br.getHeight();
 					}
 				}
@@ -425,13 +425,13 @@ public class RBlockViewport extends BaseRCollection {
 						if (yoffset > 0) {
 							newY = y + yoffset;
 							seqRenderable.setY(newY);
-							if ((newY + seqRenderable.getHeight()) > this.maxY) {
+							if (newY + seqRenderable.getHeight() > this.maxY) {
 								this.maxY = newY + seqRenderable.getHeight();
 							}
 						} else {
 							newY = y;
 						}
-						boolean isVisibleBlock = (seqRenderable instanceof RBlock)
+						boolean isVisibleBlock = seqRenderable instanceof RBlock
 								&& ((RBlock) seqRenderable).isOverflowVisibleX();
 						int leftOffset = isVisibleBlock ? insets.left : this.fetchLeftOffset(y);
 						int rightOffset = isVisibleBlock ? insets.right : this.fetchRightOffset(y);
@@ -440,7 +440,7 @@ public class RBlockViewport extends BaseRCollection {
 						if (difference > 0) {
 							// The difference check means that only
 							// blocks with a declared width would get adjusted?
-							int shift = (difference * alignXPercent) / 100;
+							int shift = difference * alignXPercent / 100;
 							// if(floatBounds != null && isVisibleBlock) {
 							// RBlock block = (RBlock) seqRenderable;
 							// // Block needs to layed out again. Contents need
@@ -465,7 +465,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (prevMaxY != this.maxY) {
-			this.height += (this.maxY - prevMaxY);
+			this.height += this.maxY - prevMaxY;
 		}
 	}
 
@@ -486,7 +486,7 @@ public class RBlockViewport extends BaseRCollection {
 			int usedHeight = this.maxY - paddingInsets.top;
 			int difference = availContentHeight - usedHeight;
 			if (difference > 0) {
-				int shift = (difference * alignYPercent) / 100;
+				int shift = difference * alignYPercent / 100;
 				ArrayList<RLine> rlist = this.seqRenderables;
 				if (rlist != null) {
 					// Try sequential renderables first.
@@ -497,7 +497,7 @@ public class RBlockViewport extends BaseRCollection {
 							BoundableRenderable line = (BoundableRenderable) r;
 							int newY = line.getY() + shift;
 							line.setY(newY);
-							if ((newY + line.getHeight()) > this.maxY) {
+							if (newY + line.getHeight() > this.maxY) {
 								this.maxY = newY + line.getHeight();
 							}
 						}
@@ -515,7 +515,7 @@ public class RBlockViewport extends BaseRCollection {
 							BoundableRenderable br = pr.getRenderable();
 							int newY = br.getY() + shift;
 							br.setY(newY);
-							if ((newY + br.getHeight()) > this.maxY) {
+							if (newY + br.getHeight() > this.maxY) {
 								this.maxY = newY + br.getHeight();
 							}
 						}
@@ -524,7 +524,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (prevMaxY != this.maxY) {
-			this.height += (this.maxY - prevMaxY);
+			this.height += this.maxY - prevMaxY;
 		}
 	}
 
@@ -583,7 +583,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (textIndent != 0) {
 				newX += textIndent;
 				// Line width also changes!
-				newMaxWidth += (leftOffset - newX);
+				newMaxWidth += leftOffset - newX;
 			}
 		} else {
 			int prevLineHeight = prevLine.getHeight();
@@ -591,7 +591,7 @@ public class RBlockViewport extends BaseRCollection {
 				this.currentCollapsibleMargin = 0;
 			}
 			initialAllowOverflow = prevLine.isAllowOverflow();
-			if ((prevLine.x + prevLine.width) > this.maxX) {
+			if (prevLine.x + prevLine.width > this.maxX) {
 				this.maxX = prevLine.x + prevLine.width;
 			}
 		}
@@ -751,7 +751,7 @@ public class RBlockViewport extends BaseRCollection {
 			boolean centerBlock = false;
 			if (alignCenterAttribute) {
 				String align = markupElement.getAttribute(HtmlAttributeProperties.ALIGN);
-				centerBlock = (align != null) && align.equalsIgnoreCase("center");
+				centerBlock = align != null && align.equalsIgnoreCase("center");
 			}
 			this.addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
 			layoutRelative(markupElement, renderable);
@@ -849,7 +849,7 @@ public class RBlockViewport extends BaseRCollection {
 		line.setLineBreak(new LineBreak(breakType, startNode));
 		int newLineY;
 		FloatingBounds fb = this.floatBounds;
-		if ((breakType == LineBreak.NONE) || (fb == null)) {
+		if (breakType == LineBreak.NONE || fb == null) {
 			newLineY = line == null ? this.paddingInsets.top : line.y + line.height;
 		} else {
 			int prevY = line == null ? this.paddingInsets.top : line.y + line.height;
@@ -889,11 +889,11 @@ public class RBlockViewport extends BaseRCollection {
 		String align = null;
 		if (style != null) {
 			align = style.getFloat();
-			if ((align != null) && (align.length() == 0)) {
+			if (align != null && align.length() == 0) {
 				align = null;
 			}
 		}
-		if ((align == null) && usesAlignAttribute) {
+		if (align == null && usesAlignAttribute) {
 			align = element.getAttribute(HtmlAttributeProperties.ALIGN);
 		}
 		if (align != null) {
@@ -919,7 +919,7 @@ public class RBlockViewport extends BaseRCollection {
 		// Use originalParent, which for one, is not going to be null during
 		// layout.
 		RCollection parent = this.getOriginalOrCurrentParent();
-		while ((parent != null) && !(parent instanceof RBlockViewport)) {
+		while (parent != null && !(parent instanceof RBlockViewport)) {
 			parent = parent.getOriginalOrCurrentParent();
 		}
 		return (RBlockViewport) parent;
@@ -1032,7 +1032,7 @@ public class RBlockViewport extends BaseRCollection {
 					boolean centerBlock = false;
 					if (renderable instanceof RTable) {
 						String align = element.getAttribute(HtmlAttributeProperties.ALIGN);
-						centerBlock = (align != null) && align.equalsIgnoreCase("center");
+						centerBlock = align != null && align.equalsIgnoreCase("center");
 					}
 					this.addAsSeqBlock(rrel, obeysFloats, true, true, centerBlock);
 					// Need to import float boxes from relative, after
@@ -1108,10 +1108,10 @@ public class RBlockViewport extends BaseRCollection {
 		try {
 			line.add(renderable);
 			// Check if the line goes into the float.
-			if ((floatBounds != null) && (cleary > liney)) {
+			if (floatBounds != null && cleary > liney) {
 				int rightOffset = this.fetchRightOffset(liney);
 				int topLineX = this.desiredWidth - rightOffset;
-				if ((line.getX() + line.getWidth()) > topLineX) {
+				if (line.getX() + line.getWidth() > topLineX) {
 					// Shift line down to clear area
 					line.setY(cleary);
 				}
@@ -1155,7 +1155,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (!line.isAllowOverflow() && floatBounds != null && cleary > liney) {
 				int rightOffset = this.fetchRightOffset(liney);
 				int topLineX = this.desiredWidth - rightOffset;
-				if ((line.getX() + line.getWidth()) > topLineX) {
+				if (line.getX() + line.getWidth() > topLineX) {
 					// Shift line down to clear area
 					line.setY(cleary);
 				}
@@ -1199,7 +1199,7 @@ public class RBlockViewport extends BaseRCollection {
 		RElement block = (RElement) newBlock;
 		int ccm = this.currentCollapsibleMargin;
 		int topMargin = block.getMarginTop();
-		if ((topMargin == 0) && (ccm == 0)) {
+		if (topMargin == 0 && ccm == 0) {
 			return expectedY;
 		}
 		return expectedY - Math.min(topMargin, ccm);
@@ -1256,7 +1256,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (informLineDone) {
 				this.lineDone(prevLine);
 			}
-			if ((prevLine.x + prevLine.width) > this.maxX) {
+			if (prevLine.x + prevLine.width > this.maxX) {
 				this.maxX = prevLine.x + prevLine.width;
 			}
 			// Check height only with floats.
@@ -1288,7 +1288,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (centerBlock) {
 				int roomX = actualAvailWidth - blockWidth;
 				if (roomX > 0) {
-					blockX += (roomX / 2);
+					blockX += roomX / 2;
 				}
 			}
 		} else {
@@ -1298,7 +1298,7 @@ public class RBlockViewport extends BaseRCollection {
 		block.setOrigin(blockX, blockY);
 		sr.add(block);
 		block.setParent(this);
-		if ((blockX + blockWidth) > this.maxX) {
+		if (blockX + blockWidth > this.maxX) {
 			this.maxX = blockX + blockWidth;
 		}
 		this.lastSeqBlock = block;
@@ -1338,7 +1338,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (informLineDone) {
 				this.lineDone(prevLine);
 			}
-			if ((prevLine.x + prevLine.width) > this.maxX) {
+			if (prevLine.x + prevLine.width > this.maxX) {
 				this.maxX = prevLine.x + prevLine.width;
 			}
 			// Check height only with floats.
@@ -1541,7 +1541,7 @@ public class RBlockViewport extends BaseRCollection {
 	@Override
 	public Iterator getRenderables() {
 		SortedSet others = this.positionedRenderables;
-		if ((others == null) || (others.size() == 0)) {
+		if (others == null || others.size() == 0) {
 			ArrayList sr = this.seqRenderables;
 			return sr == null ? null : sr.iterator();
 		} else {
@@ -1570,7 +1570,7 @@ public class RBlockViewport extends BaseRCollection {
 			baseIterator = org.lobobrowser.util.ArrayUtilities.iterator(array, range.getOffset(), range.getLength());
 		}
 		SortedSet others = this.positionedRenderables;
-		if ((others == null) || (others.size() == 0)) {
+		if (others == null || others.size() == 0) {
 			return baseIterator;
 		} else {
 			ArrayList<PositionedRenderable> matches = new ArrayList<PositionedRenderable>();
@@ -1606,7 +1606,7 @@ public class RBlockViewport extends BaseRCollection {
 	@Override
 	public BoundableRenderable getRenderable(int x, int y) {
 		Iterator i = this.getRenderables(x, y);
-		return i == null ? null : (i.hasNext() ? (BoundableRenderable) i.next() : null);
+		return i == null ? null : i.hasNext() ? (BoundableRenderable) i.next() : null;
 	}
 
 	/**
@@ -1821,7 +1821,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *            the y
 	 */
 	public final void checkY(int y) {
-		if ((this.yLimit != -1) && (y > this.yLimit)) {
+		if (this.yLimit != -1 && y > this.yLimit) {
 			throw SEE;
 		}
 	}
@@ -2116,7 +2116,7 @@ public class RBlockViewport extends BaseRCollection {
 					Rectangle bounds = br.getBounds();
 					if (!br.onMouseReleased(event, x - bounds.x, y - bounds.y)) {
 						BoundableRenderable oldArmedRenderable = this.armedRenderable;
-						if ((oldArmedRenderable != null) && (br != oldArmedRenderable)) {
+						if (oldArmedRenderable != null && br != oldArmedRenderable) {
 							oldArmedRenderable.onMouseDisarmed(event);
 							this.armedRenderable = null;
 						}
@@ -2290,15 +2290,15 @@ public class RBlockViewport extends BaseRCollection {
 			int leftOffset = this.fetchLeftOffset(boxY);
 			int rightOffset = this.fetchRightOffset(boxY);
 			boxX = leftFloat ? leftOffset : desiredWidth - rightOffset - boxWidth;
-			if ((leftOffset == insets.left) && (rightOffset == insets.right)) {
+			if (leftOffset == insets.left && rightOffset == insets.right) {
 				// Probably typical scenario. If it's overflowing to the left,
 				// we need to correct.
-				if (!leftFloat && (boxX < leftOffset)) {
+				if (!leftFloat && boxX < leftOffset) {
 					boxX = leftOffset;
 				}
 				break;
 			}
-			if (boxWidth <= (desiredWidth - rightOffset - leftOffset)) {
+			if (boxWidth <= desiredWidth - rightOffset - leftOffset) {
 				// Size is fine.
 				break;
 			}
@@ -2310,7 +2310,7 @@ public class RBlockViewport extends BaseRCollection {
 					int availableBoxWidth = desiredWidth - rightOffset - leftOffset;
 					relement.layout(availableBoxWidth, this.availContentHeight, this.sizeOnly);
 					if (relement.getWidth() < boxWidth) {
-						if (relement.getWidth() > (desiredWidth - rightOffset - leftOffset)) {
+						if (relement.getWidth() > desiredWidth - rightOffset - leftOffset) {
 							// Didn't work out. Put it back the way it was.
 							relement.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 						} else {
@@ -2343,13 +2343,13 @@ public class RBlockViewport extends BaseRCollection {
 			this.addExportableFloat(element, leftFloat, boxX, boxY);
 		}
 		// Adjust maxX based on float.
-		if ((boxX + boxWidth) > this.maxX) {
+		if (boxX + boxWidth > this.maxX) {
 			this.maxX = boxX + boxWidth;
 		}
 		// Adjust maxY based on float, but only if this viewport is the float
 		// limit.
 		if (this.isFloatLimit()) {
-			if ((boxY + boxHeight) > this.maxY) {
+			if (boxY + boxHeight > this.maxY) {
 				this.maxY = boxY + boxHeight;
 			}
 		}
@@ -2396,7 +2396,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		HTMLElementImpl element = (HTMLElementImpl) node;
 		int position = getPosition(element);
-		if ((position == RenderState.POSITION_ABSOLUTE) || (position == RenderState.POSITION_FIXED)) {
+		if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
 			return Boolean.TRUE;
 		}
 		element.getCurrentStyle();
@@ -2407,8 +2407,8 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
 		int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
-		if ((overflowX == RenderState.OVERFLOW_AUTO) || (overflowX == RenderState.OVERFLOW_SCROLL)
-				|| (overflowY == RenderState.OVERFLOW_AUTO) || (overflowY == RenderState.OVERFLOW_SCROLL)) {
+		if (overflowX == RenderState.OVERFLOW_AUTO || overflowX == RenderState.OVERFLOW_SCROLL
+				|| overflowY == RenderState.OVERFLOW_AUTO || overflowY == RenderState.OVERFLOW_SCROLL) {
 			return Boolean.TRUE;
 		}
 		return Boolean.FALSE;
@@ -2501,65 +2501,68 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	public void layoutRInlineBlock(final HTMLElementImpl markupElement) {
 		UINode uINode = markupElement.getUINode();
-	    RInlineBlock inlineBlock = null;
-	    if (uINode instanceof RInlineBlock) {
-	      inlineBlock = (RInlineBlock) uINode;
-	    } else {
-	      final RInlineBlock newInlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext, frameContext);
-	      markupElement.setUINode(newInlineBlock);
-	      inlineBlock = newInlineBlock;
-	    }
-	    inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
-	    addRenderableToLine(inlineBlock);
-	    inlineBlock.setOriginalParent(inlineBlock.getParent());
-	    layoutRelative(markupElement, inlineBlock);
-	  }
-	
-	/* This is used to bubble up relative elements (on the z-axis) */
-	  private boolean layoutRelative(final HTMLElementImpl markupElement, final RElement renderable) {
-	    int position = getPosition(markupElement);
-	    boolean isRelative = position == RenderState.POSITION_RELATIVE;
-	    if (isRelative) {
-	      RenderableContainer con = getPositionedAncestor(container);
-	      DelayedPair dp = new DelayedPair(container, con, renderable, null, null, null, null, null, position);
-	      container.addDelayedPair(dp);
-	      if (renderable instanceof RUIControl) {
-	        this.container.addComponent(((RUIControl) renderable).getWidget().getComponent());
-	      }
-	      return true;
-	    }
+		RInlineBlock inlineBlock = null;
+		if (uINode instanceof RInlineBlock) {
+			inlineBlock = (RInlineBlock) uINode;
+		} else {
+			final RInlineBlock newInlineBlock = new RInlineBlock(container, markupElement, userAgentContext,
+					rendererContext, frameContext);
+			markupElement.setUINode(newInlineBlock);
+			inlineBlock = newInlineBlock;
+		}
+		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
+		addRenderableToLine(inlineBlock);
+		inlineBlock.setOriginalParent(inlineBlock.getParent());
+		layoutRelative(markupElement, inlineBlock);
+	}
 
-	    return false;
-	  }
-	  
-	  /** Gets an ancestor which is "positioned" (that is whose position is not static).
-	   *  Stops searching when HTML element is encountered.
-	   */
-	  private static RenderableContainer getPositionedAncestor(RenderableContainer containingBlock) {
-	    for (;;) {
-	      if (containingBlock instanceof Renderable) {
-	        final ModelNode node = ((Renderable) containingBlock).getModelNode();
-	        if (node instanceof HTMLElementImpl) {
-	          HTMLElementImpl element = (HTMLElementImpl) node;
-	          int position = getPosition(element);
-	          // if (position != RenderState.POSITION_STATIC || (element instanceof HTMLHtmlElement)) {
-	          if (position != RenderState.POSITION_STATIC) {
-	            break;
-	          }
-	          RenderableContainer newContainer = containingBlock.getParentContainer();
-	          if (newContainer == null) {
-	            break;
-	          }
-	          containingBlock = newContainer;
-	        } else {
-	          break;
-	        }
-	      } else {
-	        break;
-	      }
-	    }
-	    return containingBlock;
-	  }
+	/* This is used to bubble up relative elements (on the z-axis) */
+	private boolean layoutRelative(final HTMLElementImpl markupElement, final RElement renderable) {
+		int position = getPosition(markupElement);
+		boolean isRelative = position == RenderState.POSITION_RELATIVE;
+		if (isRelative) {
+			RenderableContainer con = getPositionedAncestor(container);
+			DelayedPair dp = new DelayedPair(container, con, renderable, null, null, null, null, null, position);
+			container.addDelayedPair(dp);
+			if (renderable instanceof RUIControl) {
+				this.container.addComponent(((RUIControl) renderable).getWidget().getComponent());
+			}
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Gets an ancestor which is "positioned" (that is whose position is not
+	 * static). Stops searching when HTML element is encountered.
+	 */
+	private static RenderableContainer getPositionedAncestor(RenderableContainer containingBlock) {
+		for (;;) {
+			if (containingBlock instanceof Renderable) {
+				final ModelNode node = ((Renderable) containingBlock).getModelNode();
+				if (node instanceof HTMLElementImpl) {
+					HTMLElementImpl element = (HTMLElementImpl) node;
+					int position = getPosition(element);
+					// if (position != RenderState.POSITION_STATIC || (element
+					// instanceof HTMLHtmlElement)) {
+					if (position != RenderState.POSITION_STATIC) {
+						break;
+					}
+					RenderableContainer newContainer = containingBlock.getParentContainer();
+					if (newContainer == null) {
+						break;
+					}
+					containingBlock = newContainer;
+				} else {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+		return containingBlock;
+	}
 
 	/**
 	 * Gets the frame context.

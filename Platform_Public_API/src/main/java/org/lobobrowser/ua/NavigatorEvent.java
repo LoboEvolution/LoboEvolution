@@ -25,54 +25,56 @@ package org.lobobrowser.ua;
  */
 public class NavigatorEvent extends java.util.EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The clientlet frame. */
-    private final NavigatorFrame clientletFrame;
+	/** The clientlet frame. */
+	private final NavigatorFrame clientletFrame;
 
-    /** The event type. */
-    private final NavigatorEventType eventType;
+	/** The event type. */
+	private final NavigatorEventType eventType;
 
-    /**
-     * Instantiates a new navigator event.
-     *
-     * @param source
-     *            the source
-     * @param eventType
-     *            the event type
-     * @param clientletFrame
-     *            the clientlet frame
-     */
-    public NavigatorEvent(Object source, final NavigatorEventType eventType,
-            final NavigatorFrame clientletFrame) {
-        super(source);
-        this.clientletFrame = clientletFrame;
-        this.eventType = eventType;
-    }
+	/**
+	 * Instantiates a new navigator event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param eventType
+	 *            the event type
+	 * @param clientletFrame
+	 *            the clientlet frame
+	 */
+	public NavigatorEvent(Object source, final NavigatorEventType eventType, final NavigatorFrame clientletFrame) {
+		super(source);
+		this.clientletFrame = clientletFrame;
+		this.eventType = eventType;
+	}
 
-    /** Gets the navigator frame.
+	/**
+	 * Gets the navigator frame.
 	 *
 	 * @return the navigator frame
 	 */
-    public NavigatorFrame getNavigatorFrame() {
-        return clientletFrame;
-    }
+	public NavigatorFrame getNavigatorFrame() {
+		return clientletFrame;
+	}
 
-    /** Gets the event type.
+	/**
+	 * Gets the event type.
 	 *
 	 * @return the event type
 	 */
-    public NavigatorEventType getEventType() {
-        return eventType;
-    }
+	public NavigatorEventType getEventType() {
+		return eventType;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.util.EventObject#toString()
-     */
-    @Override
-    public String toString() {
-        return "NavigatorWindowEvent[type=" + this.getEventType() + "]";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.EventObject#toString()
+	 */
+	@Override
+	public String toString() {
+		return "NavigatorWindowEvent[type=" + this.getEventType() + "]";
+	}
 }

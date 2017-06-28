@@ -24,12 +24,11 @@ package org.lobobrowser.w3c.html;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DocumentFragment;
 
-
 /**
  * The Interface TextTrackCue.
  */
 public interface TextTrackCue {
-	
+
 	/**
 	 * Gets the track.
 	 *

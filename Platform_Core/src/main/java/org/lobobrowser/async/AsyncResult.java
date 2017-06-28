@@ -34,24 +34,24 @@ package org.lobobrowser.async;
  */
 public interface AsyncResult<TResult> {
 
-    /**
-     * Registers a listener of asynchronous results.
-     *
-     * @param listener
-     *            the listener
-     */
-    void addResultListener(AsyncResultListener<TResult> listener);
+	/**
+	 * Registers a listener of asynchronous results.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	void addResultListener(AsyncResultListener<TResult> listener);
 
-    /**
-     * Removes a listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    void removeResultListener(AsyncResultListener<TResult> listener);
+	/**
+	 * Removes a listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	void removeResultListener(AsyncResultListener<TResult> listener);
 
-    /**
-     * Forces listeners to be notified of a result if there is one.
-     */
-    void signal();
+	/**
+	 * Forces listeners to be notified of a result if there is one.
+	 */
+	void signal();
 }

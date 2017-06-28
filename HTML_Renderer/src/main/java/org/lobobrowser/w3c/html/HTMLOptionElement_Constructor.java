@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLOptionElement_Constructor.
  */
 public interface HTMLOptionElement_Constructor {
-	
+
 	/**
 	 * Creates the instance.
 	 *
@@ -38,7 +37,8 @@ public interface HTMLOptionElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param text the text
+	 * @param text
+	 *            the text
 	 * @return the HTML option element
 	 */
 	public HTMLOptionElement createInstance(String text);
@@ -46,8 +46,10 @@ public interface HTMLOptionElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param text the text
-	 * @param value the value
+	 * @param text
+	 *            the text
+	 * @param value
+	 *            the value
 	 * @return the HTML option element
 	 */
 	public HTMLOptionElement createInstance(String text, String value);
@@ -55,9 +57,12 @@ public interface HTMLOptionElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param text the text
-	 * @param value the value
-	 * @param defaultSelected the default selected
+	 * @param text
+	 *            the text
+	 * @param value
+	 *            the value
+	 * @param defaultSelected
+	 *            the default selected
 	 * @return the HTML option element
 	 */
 	public HTMLOptionElement createInstance(String text, String value, boolean defaultSelected);
@@ -65,10 +70,14 @@ public interface HTMLOptionElement_Constructor {
 	/**
 	 * Creates the instance.
 	 *
-	 * @param text the text
-	 * @param value the value
-	 * @param defaultSelected the default selected
-	 * @param selected the selected
+	 * @param text
+	 *            the text
+	 * @param value
+	 *            the value
+	 * @param defaultSelected
+	 *            the default selected
+	 * @param selected
+	 *            the selected
 	 * @return the HTML option element
 	 */
 	public HTMLOptionElement createInstance(String text, String value, boolean defaultSelected, boolean selected);

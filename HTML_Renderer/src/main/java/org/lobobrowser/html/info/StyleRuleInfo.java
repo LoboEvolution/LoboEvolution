@@ -24,8 +24,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.selectors.SelectorMatcher;
 import org.w3c.dom.css.CSSStyleRule;
@@ -43,7 +41,7 @@ public class StyleRuleInfo implements Serializable {
 
 	/** The ancestor selectors. */
 	private final ArrayList<SelectorMatcher> ancestorSelectors;
-	
+
 	/**
 	 * Instantiates a new style rule info.
 	 *
@@ -208,7 +206,7 @@ public class StyleRuleInfo implements Serializable {
 	public void setStyleRule(CSSStyleRule styleRule) {
 		this.styleRule = styleRule;
 	}
-	
+
 	/**
 	 * get Ancestor Selectors.
 	 */

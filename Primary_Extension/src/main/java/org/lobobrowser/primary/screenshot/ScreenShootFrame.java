@@ -28,9 +28,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -43,7 +40,11 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * The Class ScreenShootFrame.
@@ -52,16 +53,16 @@ public class ScreenShootFrame extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The image. */
 	private BufferedImage image;
-	
+
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ScreenShootFrame.class);
 
 	public ScreenShootFrame(JPanel panelframe) {
 		setTitle("Screenshot");
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(700, 600));
 
 		JMenuBar mb = new JMenuBar();
@@ -96,11 +97,12 @@ public class ScreenShootFrame extends JFrame {
 		public void actionPerformed(ActionEvent evt) {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-			FileNameExtensionFilter filterjpg = new FileNameExtensionFilter("Joint Photographic Experts Group(.jpg)", ".jpg");
+			FileNameExtensionFilter filterjpg = new FileNameExtensionFilter("Joint Photographic Experts Group(.jpg)",
+					".jpg");
 			fileChooser.setFileFilter(filterjpg);
 			fileChooser.setAcceptAllFileFilterUsed(true);
 			int returnValue = fileChooser.showOpenDialog(ScreenShootFrame.this);
-			
+
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = getSelectedFileWithExtension(fileChooser);
 				if (selectedFile.exists()) {
@@ -115,7 +117,7 @@ public class ScreenShootFrame extends JFrame {
 				} catch (IOException e) {
 					logger.error(e.getMessage());
 				}
-			}			
+			}
 		}
 	};
 

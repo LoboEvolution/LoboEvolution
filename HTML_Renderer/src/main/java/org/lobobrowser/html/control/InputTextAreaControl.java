@@ -207,7 +207,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			Font f = this.widget.getFont();
 			FontMetrics fm = this.widget.getFontMetrics(f);
 			Insets insets = this.widget.getInsets();
-			pw = insets.left + insets.right + (fm.charWidth('*') * cols);
+			pw = insets.left + insets.right + fm.charWidth('*') * cols;
 		}
 		int ph;
 		int rows = this.rows;
@@ -217,7 +217,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			Font f = this.widget.getFont();
 			FontMetrics fm = this.widget.getFontMetrics(f);
 			Insets insets = this.widget.getInsets();
-			ph = insets.top + insets.bottom + (fm.getHeight() * rows);
+			ph = insets.top + insets.bottom + fm.getHeight() * rows;
 		}
 		return new java.awt.Dimension(pw, ph);
 

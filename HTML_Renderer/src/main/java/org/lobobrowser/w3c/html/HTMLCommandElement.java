@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLCommandElement.
  */
 public interface HTMLCommandElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the type.
 	 *
@@ -43,7 +42,9 @@ public interface HTMLCommandElement extends HTMLElement {
 	 */
 	public void setType(String type);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getLabel()
 	 */
 	@Override
@@ -57,7 +58,9 @@ public interface HTMLCommandElement extends HTMLElement {
 	 */
 	public void setLabel(String label);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getIcon()
 	 */
 	@Override
@@ -71,7 +74,9 @@ public interface HTMLCommandElement extends HTMLElement {
 	 */
 	public void setIcon(String icon);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	@Override
@@ -85,7 +90,9 @@ public interface HTMLCommandElement extends HTMLElement {
 	 */
 	public void setDisabled(boolean disabled);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getChecked()
 	 */
 	@Override

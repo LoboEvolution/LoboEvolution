@@ -25,12 +25,11 @@ import java.io.File;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLInputElement.
  */
 public interface HTMLInputElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the accept.
 	 *
@@ -107,9 +106,12 @@ public interface HTMLInputElement extends HTMLElement {
 	 */
 	public void setDefaultChecked(boolean defaultChecked);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getChecked()
 	 */
+	@Override
 	public boolean getChecked();
 
 	/**
@@ -135,9 +137,12 @@ public interface HTMLInputElement extends HTMLElement {
 	 */
 	public void setDirName(String dirName);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
+	@Override
 	public boolean getDisabled();
 
 	/**
@@ -559,7 +564,8 @@ public interface HTMLInputElement extends HTMLElement {
 	/**
 	 * Step up.
 	 *
-	 * @param n the n
+	 * @param n
+	 *            the n
 	 */
 	public void stepUp(int n);
 
@@ -571,7 +577,8 @@ public interface HTMLInputElement extends HTMLElement {
 	/**
 	 * Step down.
 	 *
-	 * @param n the n
+	 * @param n
+	 *            the n
 	 */
 	public void stepDown(int n);
 
@@ -671,17 +678,22 @@ public interface HTMLInputElement extends HTMLElement {
 	/**
 	 * Sets the selection range.
 	 *
-	 * @param start the start
-	 * @param end the end
+	 * @param start
+	 *            the start
+	 * @param end
+	 *            the end
 	 */
 	public void setSelectionRange(int start, int end);
 
 	/**
 	 * Sets the selection range.
 	 *
-	 * @param start the start
-	 * @param end the end
-	 * @param direction the direction
+	 * @param start
+	 *            the start
+	 * @param end
+	 *            the end
+	 * @param direction
+	 *            the direction
 	 */
 	public void setSelectionRange(int start, int end, String direction);
 

@@ -25,41 +25,41 @@ package org.lobobrowser.html.renderer;
  */
 public class PositionedRenderable {
 
-    /** The Constant EMPTY_ARRAY. */
-    public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
+	/** The Constant EMPTY_ARRAY. */
+	public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
 
-    /** The renderable. */
-    private BoundableRenderable renderable;
+	/** The renderable. */
+	private BoundableRenderable renderable;
 
-    /** The vertical alignable. */
-    private boolean verticalAlignable;
+	/** The vertical alignable. */
+	private boolean verticalAlignable;
 
-    /** The ordinal. */
-    private int ordinal;
+	/** The ordinal. */
+	private int ordinal;
 
-    /** The is float. */
-    private boolean isFloat;
+	/** The is float. */
+	private boolean isFloat;
 
-    /**
-     * Instantiates a new positioned renderable.
-     *
-     * @param renderable
-     *            the renderable
-     * @param verticalAlignable
-     *            the vertical alignable
-     * @param ordinal
-     *            the ordinal
-     * @param isFloat
-     *            the is float
-     */
-    public PositionedRenderable(final BoundableRenderable renderable,
-            final boolean verticalAlignable, int ordinal, boolean isFloat) {
-        super();
-        this.renderable = renderable;
-        this.verticalAlignable = verticalAlignable;
-        this.ordinal = ordinal;
-        this.isFloat = isFloat;
-    }
+	/**
+	 * Instantiates a new positioned renderable.
+	 *
+	 * @param renderable
+	 *            the renderable
+	 * @param verticalAlignable
+	 *            the vertical alignable
+	 * @param ordinal
+	 *            the ordinal
+	 * @param isFloat
+	 *            the is float
+	 */
+	public PositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable, int ordinal,
+			boolean isFloat) {
+		super();
+		this.renderable = renderable;
+		this.verticalAlignable = verticalAlignable;
+		this.ordinal = ordinal;
+		this.isFloat = isFloat;
+	}
 
 	/**
 	 * Gets the renderable.

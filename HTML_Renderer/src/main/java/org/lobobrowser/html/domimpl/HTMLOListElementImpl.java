@@ -32,105 +32,110 @@ import org.lobobrowser.w3c.html.HTMLOListElement;
 /**
  * The Class HTMLOListElementImpl.
  */
-public class HTMLOListElementImpl extends HTMLAbstractUIElement implements
-HTMLOListElement {
+public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLOListElement {
 
-    /**
-     * Instantiates a new HTMLO list element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLOListElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTMLO list element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLOListElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#getCompact()
-     */
-    @Override
-    public boolean getCompact() {
-        String compactText = this.getAttribute(HtmlAttributeProperties.COMPACT);
-        return HtmlAttributeProperties.COMPACT.equalsIgnoreCase(compactText);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#getCompact()
+	 */
+	@Override
+	public boolean getCompact() {
+		String compactText = this.getAttribute(HtmlAttributeProperties.COMPACT);
+		return HtmlAttributeProperties.COMPACT.equalsIgnoreCase(compactText);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#setCompact(boolean)
-     */
-    @Override
-    public void setCompact(boolean compact) {
-        this.setAttribute(HtmlAttributeProperties.COMPACT,
-                compact ? HtmlAttributeProperties.COMPACT : null);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#setCompact(boolean)
+	 */
+	@Override
+	public void setCompact(boolean compact) {
+		this.setAttribute(HtmlAttributeProperties.COMPACT, compact ? HtmlAttributeProperties.COMPACT : null);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#getStart()
-     */
-    @Override
-    public int getStart() {
-        String startText = this.getAttribute(HtmlAttributeProperties.START);
-        return HtmlValues.getPixelSize(startText, this.getRenderState(), 0);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#getStart()
+	 */
+	@Override
+	public int getStart() {
+		String startText = this.getAttribute(HtmlAttributeProperties.START);
+		return HtmlValues.getPixelSize(startText, this.getRenderState(), 0);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#setStart(int)
-     */
-    @Override
-    public void setStart(int start) {
-        this.setAttribute(HtmlAttributeProperties.START, String.valueOf(start));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#setStart(int)
+	 */
+	@Override
+	public void setStart(int start) {
+		this.setAttribute(HtmlAttributeProperties.START, String.valueOf(start));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#getType()
-     */
-    @Override
-    public String getType() {
-        return this.getAttribute(HtmlAttributeProperties.TYPE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#getType()
+	 */
+	@Override
+	public String getType() {
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#setType(java.lang.String)
-     */
-    @Override
-    public void setType(String type) {
-        this.setAttribute(HtmlAttributeProperties.TYPE, type);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#setType(java.lang.String)
+	 */
+	@Override
+	public void setType(String type) {
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new ListRenderState(prevRenderState, this);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new ListRenderState(prevRenderState, this);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#getReversed()
-     */
-    @Override
-    public boolean getReversed() {
-        String reversed = this.getAttribute(HtmlAttributeProperties.RESERVED);
-        return HtmlAttributeProperties.RESERVED.equalsIgnoreCase(reversed);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#getReversed()
+	 */
+	@Override
+	public boolean getReversed() {
+		String reversed = this.getAttribute(HtmlAttributeProperties.RESERVED);
+		return HtmlAttributeProperties.RESERVED.equalsIgnoreCase(reversed);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLOListElement#setReversed(boolean)
-     */
-    @Override
-    public void setReversed(boolean reversed) {
-        this.setAttribute(HtmlAttributeProperties.RESERVED,
-                reversed ? HtmlAttributeProperties.RESERVED : null);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLOListElement#setReversed(boolean)
+	 */
+	@Override
+	public void setReversed(boolean reversed) {
+		this.setAttribute(HtmlAttributeProperties.RESERVED, reversed ? HtmlAttributeProperties.RESERVED : null);
 
-    }
+	}
 }

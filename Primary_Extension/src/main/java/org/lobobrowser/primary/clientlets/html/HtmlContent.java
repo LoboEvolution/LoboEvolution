@@ -22,9 +22,9 @@ package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.Component;
 import java.io.UnsupportedEncodingException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.util.io.BufferExceededException;
@@ -178,7 +178,7 @@ public class HtmlContent implements ComponentContent {
 			if (node instanceof HTMLElement) {
 				HTMLElement element = (HTMLElement) node;
 				String name = element.getAttribute("name");
-				if ((name != null) && name.equalsIgnoreCase("description")) {
+				if (name != null && name.equalsIgnoreCase("description")) {
 					return element.getAttribute("description");
 				}
 			}
@@ -233,12 +233,12 @@ public class HtmlContent implements ComponentContent {
 	 */
 	@Override
 	public void setProperty(String name, Object value) {
-		if ("defaultMarginInsets".equals(name) && (value instanceof java.awt.Insets)) {
+		if ("defaultMarginInsets".equals(name) && value instanceof java.awt.Insets) {
 			this.panel.setDefaultMarginInsets((java.awt.Insets) value);
 			;
-		} else if ("defaultOverflowX".equals(name) && (value instanceof Integer)) {
+		} else if ("defaultOverflowX".equals(name) && value instanceof Integer) {
 			this.panel.setDefaultOverflowX((Integer) value);
-		} else if ("defaultOverflowY".equals(name) && (value instanceof Integer)) {
+		} else if ("defaultOverflowY".equals(name) && value instanceof Integer) {
 			this.panel.setDefaultOverflowY((Integer) value);
 		} else {
 			if (logger.isInfoEnabled()) {

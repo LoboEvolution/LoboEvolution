@@ -71,7 +71,6 @@ import com.jtattoo.plaf.noire.NoireLookAndFeel;
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 import com.jtattoo.plaf.texture.TextureLookAndFeel;
 
-
 /**
  * A singleton class that is used to initialize a browser session in the current
  * JVM. It can also be used to open a browser window.
@@ -79,74 +78,73 @@ import com.jtattoo.plaf.texture.TextureLookAndFeel;
  * @see #getInstance()
  */
 public class PlatformInit {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(PlatformInit.class);
 
-    /** The Constant NATIVE_DIR_NAME. */
-    private static final String NATIVE_DIR_NAME = "native";
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(PlatformInit.class);
 
-    /** The thread executor. */
-    private final SimpleThreadPool threadExecutor;
+	/** The Constant NATIVE_DIR_NAME. */
+	private static final String NATIVE_DIR_NAME = "native";
 
-    /** The general settings. */
-    private final GeneralSettings generalSettings;
+	/** The thread executor. */
+	private final SimpleThreadPool threadExecutor;
 
-    /**
-     * Instantiates a new platform init.
-     */
-    private PlatformInit() {
-        this.threadExecutor = new SimpleThreadPool("MainThreadPool", 2, 10, 60 * 1000);
-        // One way to avoid a security exception.
-        this.generalSettings = GeneralSettings.getInstance();
-    }
+	/** The general settings. */
+	private final GeneralSettings generalSettings;
 
-    /**
-     * Intializes security by installing a security policy and a security
-     * manager. Programs that use the browser API should invoke this method (or
-     * {@link #init(boolean, boolean) init }) to prevent web content from having
-     * full access to the user's computer.
-     *
-     * @see #addPrivilegedPermission(Permission)
-     */
-    public void initSecurity() {
-        // Set security policy and manager (essential)
-        Policy.setPolicy(LocalSecurityPolicy.getInstance());
-        System.setSecurityManager(new LocalSecurityManager());
-    }
+	/**
+	 * Instantiates a new platform init.
+	 */
+	private PlatformInit() {
+		this.threadExecutor = new SimpleThreadPool("MainThreadPool", 2, 10, 60 * 1000);
+		// One way to avoid a security exception.
+		this.generalSettings = GeneralSettings.getInstance();
+	}
 
-    /**
-     * Initializes the global URLStreamHandlerFactory.
-     * <p>
-     * This method is invoked by {@link #init(boolean, boolean)}.
-     */
-    public void initProtocols() {
-        // Configure URL protocol handlers
-        PlatformStreamHandlerFactory factory = PlatformStreamHandlerFactory
-                .getInstance();
-        URL.setURLStreamHandlerFactory(factory);
-        factory.addFactory(new LocalStreamHandlerFactory());
-    }
+	/**
+	 * Intializes security by installing a security policy and a security
+	 * manager. Programs that use the browser API should invoke this method (or
+	 * {@link #init(boolean, boolean) init }) to prevent web content from having
+	 * full access to the user's computer.
+	 *
+	 * @see #addPrivilegedPermission(Permission)
+	 */
+	public void initSecurity() {
+		// Set security policy and manager (essential)
+		Policy.setPolicy(LocalSecurityPolicy.getInstance());
+		System.setSecurityManager(new LocalSecurityManager());
+	}
 
-    /**
-     * Initializes the HTTP authenticator and the cookie handler. This is
-     * essential for the browser to work properly.
-     * <p>
-     * This method is invoked by {@link #init(boolean, boolean)}.
-     */
-    public void initHTTP() {
-        // Configure authenticator
-        Authenticator.setDefault(new AuthenticatorImpl());
-        // Configure cookie handler
-        CookieHandler.setDefault(new CookieManager());
-    }
+	/**
+	 * Initializes the global URLStreamHandlerFactory.
+	 * <p>
+	 * This method is invoked by {@link #init(boolean, boolean)}.
+	 */
+	public void initProtocols() {
+		// Configure URL protocol handlers
+		PlatformStreamHandlerFactory factory = PlatformStreamHandlerFactory.getInstance();
+		URL.setURLStreamHandlerFactory(factory);
+		factory.addFactory(new LocalStreamHandlerFactory());
+	}
 
-    /**
-     * Initializes the Swing look feel.
-     *
-     * @throws Exception
-     *             the exception
-     */
+	/**
+	 * Initializes the HTTP authenticator and the cookie handler. This is
+	 * essential for the browser to work properly.
+	 * <p>
+	 * This method is invoked by {@link #init(boolean, boolean)}.
+	 */
+	public void initHTTP() {
+		// Configure authenticator
+		Authenticator.setDefault(new AuthenticatorImpl());
+		// Configure cookie handler
+		CookieHandler.setDefault(new CookieManager());
+	}
+
+	/**
+	 * Initializes the Swing look feel.
+	 *
+	 * @throws Exception
+	 *             the exception
+	 */
 	public void initLookAndFeel() throws Exception {
 		LAFSettings settings = LAFSettings.getInstance();
 		Properties props = new Properties();
@@ -213,333 +211,326 @@ public class PlatformInit {
 		}
 	}
 
-    /** Checks if is code location directory.
+	/**
+	 * Checks if is code location directory.
 	 *
 	 * @return true, if is code location directory
 	 */
-    public boolean isCodeLocationDirectory() {
-        URL codeLocation = this.getClass().getProtectionDomain()
-                .getCodeSource().getLocation();
-        return Urls.isLocalFile(codeLocation)
-                && codeLocation.getPath().endsWith("/");
-    }
+	public boolean isCodeLocationDirectory() {
+		URL codeLocation = this.getClass().getProtectionDomain().getCodeSource().getLocation();
+		return Urls.isLocalFile(codeLocation) && codeLocation.getPath().endsWith("/");
+	}
 
-    /**
-     * Initializes platform logging. Note that this method is not implicitly
-     * called by {@link #init(boolean, boolean)}.
-     *
-     * @param debugOn
-     *            Debugging mode. This determines which one of two different
-     *            logging configurations is used.
-     * @throws Exception
-     *             the exception
-     */
-    public void initLogging() throws Exception {
-		
+	/**
+	 * Initializes platform logging. Note that this method is not implicitly
+	 * called by {@link #init(boolean, boolean)}.
+	 *
+	 * @param debugOn
+	 *            Debugging mode. This determines which one of two different
+	 *            logging configurations is used.
+	 * @throws Exception
+	 *             the exception
+	 */
+	public void initLogging() throws Exception {
+
 		// Configure log4j2
-    	
-    	Logger logger = LogManager.getLogger(PlatformInit.class);
+
+		Logger logger = LogManager.getLogger(PlatformInit.class);
 		if (logger.isInfoEnabled()) {
 			logger.warn("Entry(): Logger INFO level is enabled.");
 			Properties properties = System.getProperties();
 			Iterator i = properties.entrySet().iterator();
 			while (i.hasNext()) {
 				Map.Entry entry = (Map.Entry) i.next();
-				logger.info("main(): " + entry.getKey() + "="
-						+ entry.getValue());
+				logger.info("main(): " + entry.getKey() + "=" + entry.getValue());
 			}
 		}
 	}
 
-    /**
-     * Initializes browser extensions. Invoking this method is essential to
-     * enable the primary extension and all basic browser functionality. This
-     * method is invoked by {@link #init(boolean, boolean)}.
-     */
-    public void initExtensions() {
-        ExtensionManager.getInstance().initExtensions();
-    }
+	/**
+	 * Initializes browser extensions. Invoking this method is essential to
+	 * enable the primary extension and all basic browser functionality. This
+	 * method is invoked by {@link #init(boolean, boolean)}.
+	 */
+	public void initExtensions() {
+		ExtensionManager.getInstance().initExtensions();
+	}
 
-    /**
-     * Initializes the default window factory such that the JVM exits when all
-     * windows created by the factory are closed by the user.
-     *
-     * @param exitWhenAllWindowsAreClosed
-     *            the exit when all windows are closed
-     */
-    public void initWindowFactory(boolean exitWhenAllWindowsAreClosed) {
-        DefaultWindowFactory.getInstance().setExitWhenAllWindowsAreClosed(
-                exitWhenAllWindowsAreClosed);
-    }
+	/**
+	 * Initializes the default window factory such that the JVM exits when all
+	 * windows created by the factory are closed by the user.
+	 *
+	 * @param exitWhenAllWindowsAreClosed
+	 *            the exit when all windows are closed
+	 */
+	public void initWindowFactory(boolean exitWhenAllWindowsAreClosed) {
+		DefaultWindowFactory.getInstance().setExitWhenAllWindowsAreClosed(exitWhenAllWindowsAreClosed);
+	}
 
-    /**
-     * Initializers the <code>java.library.path</code> property.
-     * <p>
-     * This method is called by {@link #init(boolean, boolean)}.
-     *
-     * @param dirName
-     *            A directory name relative to the browser application
-     *            directory.
-     */
-    public void initNative(String dirName) {
-        File appDir = this.getApplicationDirectory();
-        File nativeDir = new File(appDir, dirName);
-        System.setProperty("java.library.path", nativeDir.getAbsolutePath());
-    }
+	/**
+	 * Initializers the <code>java.library.path</code> property.
+	 * <p>
+	 * This method is called by {@link #init(boolean, boolean)}.
+	 *
+	 * @param dirName
+	 *            A directory name relative to the browser application
+	 *            directory.
+	 */
+	public void initNative(String dirName) {
+		File appDir = this.getApplicationDirectory();
+		File nativeDir = new File(appDir, dirName);
+		System.setProperty("java.library.path", nativeDir.getAbsolutePath());
+	}
 
-    /**
-     * Initializes some Java properties required by the browser.
-     * <p>
-     * This method is called by {@link #init(boolean, boolean)}.
-     */
-    public void initOtherProperties() {
-        System.setProperty("networkaddress.cache.ttl", "3600");
-        System.setProperty("networkaddress.cache.negative.ttl", "1");
-        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+	/**
+	 * Initializes some Java properties required by the browser.
+	 * <p>
+	 * This method is called by {@link #init(boolean, boolean)}.
+	 */
+	public void initOtherProperties() {
+		System.setProperty("networkaddress.cache.ttl", "3600");
+		System.setProperty("networkaddress.cache.negative.ttl", "1");
+		System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
 
-    }
+	}
 
-    /**
-     * Initializes security, protocols, look feel, console, the default window
-     * factory, extensions and <code>java.library.path</code>. This method
-     * should be invoked before using other functionality in the browser API. If
-     * this method is not called, at the very least
-     * {@link #initOtherProperties()}, {@link #initProtocols()} and
-     * {@link #initExtensions()} should be called.
-     * <p>
-     * Applications that need to install their own security manager and policy
-     * should not call this method.
-     *
-     * @param exitWhenAllWindowsAreClosed
-     *            Whether the JVM should exit when all windows created by the
-     *            default window factory are closed.
-     * @param initConsole
-     *            If this parameter is <code>true</code>, standard output is
-     *            redirected to a browser console. See
-     *            {@link org.lobobrowser.gui.ConsoleModel}.
-     * @throws Exception
-     *             the exception
-     * @see #initSecurity()
-     * @see #initProtocols()
-     * @see #initExtensions()
-     */
-    public void init(boolean exitWhenAllWindowsAreClosed) throws Exception {
-        initOtherProperties();
-        initNative(NATIVE_DIR_NAME);
-        initSecurity();
-        initProtocols();
-        initHTTP();
-        initLookAndFeel();
-        initWindowFactory(exitWhenAllWindowsAreClosed);
-        initExtensions();
-    }
+	/**
+	 * Initializes security, protocols, look feel, console, the default window
+	 * factory, extensions and <code>java.library.path</code>. This method
+	 * should be invoked before using other functionality in the browser API. If
+	 * this method is not called, at the very least
+	 * {@link #initOtherProperties()}, {@link #initProtocols()} and
+	 * {@link #initExtensions()} should be called.
+	 * <p>
+	 * Applications that need to install their own security manager and policy
+	 * should not call this method.
+	 *
+	 * @param exitWhenAllWindowsAreClosed
+	 *            Whether the JVM should exit when all windows created by the
+	 *            default window factory are closed.
+	 * @param initConsole
+	 *            If this parameter is <code>true</code>, standard output is
+	 *            redirected to a browser console. See
+	 *            {@link org.lobobrowser.gui.ConsoleModel}.
+	 * @throws Exception
+	 *             the exception
+	 * @see #initSecurity()
+	 * @see #initProtocols()
+	 * @see #initExtensions()
+	 */
+	public void init(boolean exitWhenAllWindowsAreClosed) throws Exception {
+		initOtherProperties();
+		initNative(NATIVE_DIR_NAME);
+		initSecurity();
+		initProtocols();
+		initHTTP();
+		initLookAndFeel();
+		initWindowFactory(exitWhenAllWindowsAreClosed);
+		initExtensions();
+	}
 
-    /**
-     * Opens a window and attempts to render the URL or path given.
-     *
-     * @param urlOrPath
-     *            A URL or file path.
-     * @throws MalformedURLException
-     *             the malformed url exception
-     */
-    public void launch(String urlOrPath) throws MalformedURLException {
-        URL url = Urls.guessURL(urlOrPath);
-        FramePanel.openWindow(null, url, null, new Properties(), "GET", null);
-    }
+	/**
+	 * Opens a window and attempts to render the URL or path given.
+	 *
+	 * @param urlOrPath
+	 *            A URL or file path.
+	 * @throws MalformedURLException
+	 *             the malformed url exception
+	 */
+	public void launch(String urlOrPath) throws MalformedURLException {
+		URL url = Urls.guessURL(urlOrPath);
+		FramePanel.openWindow(null, url, null, new Properties(), "GET", null);
+	}
 
-    /**
-     * Opens as many browser windows as there are startup URLs in general
-     * settings.
-     *
-     * @throws MalformedURLException
-     *             the malformed url exception
-     * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
-     */
-    public void launch() throws MalformedURLException {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm == null) {
-            Logger logger = LogManager.getLogger(PlatformInit.class);
-            logger.warn("launch(): Security manager not set!");
-        }
-        String[] startupURLs = this.generalSettings.getStartupURLs();
-        for (String url : startupURLs) {
-            this.launch(url);
-        }
-    }
+	/**
+	 * Opens as many browser windows as there are startup URLs in general
+	 * settings.
+	 *
+	 * @throws MalformedURLException
+	 *             the malformed url exception
+	 * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
+	 */
+	public void launch() throws MalformedURLException {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm == null) {
+			Logger logger = LogManager.getLogger(PlatformInit.class);
+			logger.warn("launch(): Security manager not set!");
+		}
+		String[] startupURLs = this.generalSettings.getStartupURLs();
+		for (String url : startupURLs) {
+			this.launch(url);
+		}
+	}
 
-    /** The window has been shown. */
-    private boolean windowHasBeenShown = false;
+	/** The window has been shown. */
+	private boolean windowHasBeenShown = false;
 
-    /**
-     * Starts the browser by opening the URLs specified in the command-line
-     * arguments provided. Non-option arguments are assumed to be URLs and
-     * opened in separate windows. If no arguments are found, the method
-     * launches URLs from general settings. This method will not return until at
-     * least one window has been shown.
-     *
-     * @param args
-     *            the args
-     * @throws MalformedURLException
-     *             the malformed url exception
-     * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
-     */
-    public void start(String[] args) throws MalformedURLException {
-        DefaultWindowFactory.getInstance().evtWindowShown
-        .addListener(new GenericEventListener() {
-            @Override
-            public void processEvent(EventObject event) {
-                synchronized (PlatformInit.this) {
-                    windowHasBeenShown = true;
-                    PlatformInit.this.notifyAll();
-                }
-            }
-        });
-        boolean launched = false;
-        for (int i = 0; i < args.length; i++) {
-            String url = args[i];
-            if (!url.startsWith("-")) {
-                try {
-                    launched = true;
-                    this.launch(url);
-                } catch (Exception err) {
-                	logger.log(Level.ERROR,err);
-                }
-            }
-        }
-        if (!launched) {
-            this.launch();
-        }
-        synchronized (this) {
-            while (!this.windowHasBeenShown) {
-                try {
-                    this.wait();
-                } catch (InterruptedException ie) {
-                    // Ignore
-                }
-            }
-        }
-    }
+	/**
+	 * Starts the browser by opening the URLs specified in the command-line
+	 * arguments provided. Non-option arguments are assumed to be URLs and
+	 * opened in separate windows. If no arguments are found, the method
+	 * launches URLs from general settings. This method will not return until at
+	 * least one window has been shown.
+	 *
+	 * @param args
+	 *            the args
+	 * @throws MalformedURLException
+	 *             the malformed url exception
+	 * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
+	 */
+	public void start(String[] args) throws MalformedURLException {
+		DefaultWindowFactory.getInstance().evtWindowShown.addListener(new GenericEventListener() {
+			@Override
+			public void processEvent(EventObject event) {
+				synchronized (PlatformInit.this) {
+					windowHasBeenShown = true;
+					PlatformInit.this.notifyAll();
+				}
+			}
+		});
+		boolean launched = false;
+		for (int i = 0; i < args.length; i++) {
+			String url = args[i];
+			if (!url.startsWith("-")) {
+				try {
+					launched = true;
+					this.launch(url);
+				} catch (Exception err) {
+					logger.log(Level.ERROR, err);
+				}
+			}
+		}
+		if (!launched) {
+			this.launch();
+		}
+		synchronized (this) {
+			while (!this.windowHasBeenShown) {
+				try {
+					this.wait();
+				} catch (InterruptedException ie) {
+					// Ignore
+				}
+			}
+		}
+	}
 
-    /** The Constant instance. */
-    private static final PlatformInit instance = new PlatformInit();
+	/** The Constant instance. */
+	private static final PlatformInit instance = new PlatformInit();
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static PlatformInit getInstance() {
-        return instance;
-    }
+	public static PlatformInit getInstance() {
+		return instance;
+	}
 
-    /**
-     * Performs some cleanup and then exits the JVM.
-     */
-    public static void shutdown() {
-        try {
-            ReuseManager.getInstance().shutdown();
-        } catch (Exception err) {
-        	logger.log(Level.ERROR,err);
-        }
-        System.exit(0);
-    }
+	/**
+	 * Performs some cleanup and then exits the JVM.
+	 */
+	public static void shutdown() {
+		try {
+			ReuseManager.getInstance().shutdown();
+		} catch (Exception err) {
+			logger.log(Level.ERROR, err);
+		}
+		System.exit(0);
+	}
 
-    /**
-     * Adds one permission to the base set of permissions assigned to privileged
-     * code, i.e. code loaded from the local system rather than a remote
-     * location. This method must be called before a security manager has been
-     * set, that is, before {@link #init(boolean, boolean)} or
-     * {@link #initSecurity()} are invoked. The purpose of the method is to add
-     * permissions otherwise missing from the security policy installed by this
-     * facility.
-     *
-     * @param permission
-     *            A <code>Permission</code> instance.
-     */
-    public void addPrivilegedPermission(Permission permission) {
-        LocalSecurityPolicy.addPrivilegedPermission(permission);
-    }
+	/**
+	 * Adds one permission to the base set of permissions assigned to privileged
+	 * code, i.e. code loaded from the local system rather than a remote
+	 * location. This method must be called before a security manager has been
+	 * set, that is, before {@link #init(boolean, boolean)} or
+	 * {@link #initSecurity()} are invoked. The purpose of the method is to add
+	 * permissions otherwise missing from the security policy installed by this
+	 * facility.
+	 *
+	 * @param permission
+	 *            A <code>Permission</code> instance.
+	 */
+	public void addPrivilegedPermission(Permission permission) {
+		LocalSecurityPolicy.addPrivilegedPermission(permission);
+	}
 
-    /**
-     * Schedule task.
-     *
-     * @param task
-     *            the task
-     */
-    public void scheduleTask(SimpleThreadPoolTask task) {
-        this.threadExecutor.schedule(task);
-    }
+	/**
+	 * Schedule task.
+	 *
+	 * @param task
+	 *            the task
+	 */
+	public void scheduleTask(SimpleThreadPoolTask task) {
+		this.threadExecutor.schedule(task);
+	}
 
-    /** The application directory. */
-    private File applicationDirectory;
+	/** The application directory. */
+	private File applicationDirectory;
 
-    /** Gets the application directory.
+	/**
+	 * Gets the application directory.
 	 *
 	 * @return the application directory
 	 */
-    public File getApplicationDirectory() {
-        File appDir = this.applicationDirectory;
-        if (appDir == null) {
-            ProtectionDomain pd = this.getClass().getProtectionDomain();
-            CodeSource cs = pd.getCodeSource();
-            URL url = cs.getLocation();
-            String jarPath = url.getPath();
-            File jarFile;
-            try {
-                jarFile = new File(url.toURI());
-            } catch (URISyntaxException use) {
-                throw new IllegalStateException(use);
-            } catch (IllegalArgumentException iae) {
-                throw new IllegalStateException(
-                        "Application code source apparently not a local JAR file: "
-                                + url
-                                + ". Only local JAR files are supported at the moment.",
-                                iae);
-            }
-            File installDir = jarFile.getParentFile();
-            if (installDir == null) {
-                throw new IllegalStateException(
-                        "Installation directory is missing. Startup JAR path is "
-                                + jarPath + ".");
-            }
-            if (!installDir.exists()) {
-                throw new IllegalStateException(
-                        "Installation directory not found. Startup JAR path is "
-                                + jarPath + ". Directory path is "
-                                + installDir.getAbsolutePath() + ".");
-            }
-            appDir = installDir;
-            this.applicationDirectory = appDir;
+	public File getApplicationDirectory() {
+		File appDir = this.applicationDirectory;
+		if (appDir == null) {
+			ProtectionDomain pd = this.getClass().getProtectionDomain();
+			CodeSource cs = pd.getCodeSource();
+			URL url = cs.getLocation();
+			String jarPath = url.getPath();
+			File jarFile;
+			try {
+				jarFile = new File(url.toURI());
+			} catch (URISyntaxException use) {
+				throw new IllegalStateException(use);
+			} catch (IllegalArgumentException iae) {
+				throw new IllegalStateException("Application code source apparently not a local JAR file: " + url
+						+ ". Only local JAR files are supported at the moment.", iae);
+			}
+			File installDir = jarFile.getParentFile();
+			if (installDir == null) {
+				throw new IllegalStateException(
+						"Installation directory is missing. Startup JAR path is " + jarPath + ".");
+			}
+			if (!installDir.exists()) {
+				throw new IllegalStateException("Installation directory not found. Startup JAR path is " + jarPath
+						+ ". Directory path is " + installDir.getAbsolutePath() + ".");
+			}
+			appDir = installDir;
+			this.applicationDirectory = appDir;
 
-            // Static logger should not be created in this class.
-            Logger logger = LogManager.getLogger(this.getClass().getName());
-            if (logger.isInfoEnabled()) {
-                logger.info("getApplicationDirectory(): url=" + url
-                        + ",appDir=" + appDir);
-            }
-        }
-        return appDir;
-    }
+			// Static logger should not be created in this class.
+			Logger logger = LogManager.getLogger(this.getClass().getName());
+			if (logger.isInfoEnabled()) {
+				logger.info("getApplicationDirectory(): url=" + url + ",appDir=" + appDir);
+			}
+		}
+		return appDir;
+	}
 
-    /**
-     * A factory for creating LocalStreamHandler objects.
-     */
-    private static class LocalStreamHandlerFactory implements URLStreamHandlerFactory {
+	/**
+	 * A factory for creating LocalStreamHandler objects.
+	 */
+	private static class LocalStreamHandlerFactory implements URLStreamHandlerFactory {
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
-         */
-        @Override
-        public URLStreamHandler createURLStreamHandler(String protocol) {
-            if (protocol.equals("res")) {
-                return new org.lobobrowser.protocol.res.Handler();
-            } else if (protocol.equals("vc")) {
-                return new org.lobobrowser.protocol.vc.Handler();
-            } else {
-                return null;
-            }
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see
+		 * java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.
+		 * String)
+		 */
+		@Override
+		public URLStreamHandler createURLStreamHandler(String protocol) {
+			if (protocol.equals("res")) {
+				return new org.lobobrowser.protocol.res.Handler();
+			} else if (protocol.equals("vc")) {
+				return new org.lobobrowser.protocol.vc.Handler();
+			} else {
+				return null;
+			}
+		}
+	}
 
 }

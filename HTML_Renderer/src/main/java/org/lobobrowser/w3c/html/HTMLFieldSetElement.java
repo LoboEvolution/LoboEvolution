@@ -21,16 +21,18 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLFieldSetElement.
  */
 public interface HTMLFieldSetElement extends HTMLElement {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	// HTMLFieldSetElement
+	@Override
 	public boolean getDisabled();
 
 	/**

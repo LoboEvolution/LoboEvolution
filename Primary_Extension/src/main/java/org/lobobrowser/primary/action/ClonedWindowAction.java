@@ -67,7 +67,7 @@ public class ClonedWindowAction extends AbstractAction implements EnableableActi
 	@Override
 	public void updateEnabling() {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
-		action.setEnabled((entry != null) && entry.getMethod().equals("GET"));
+		action.setEnabled(entry != null && entry.getMethod().equals("GET"));
 	}
 
 	/*
@@ -79,7 +79,7 @@ public class ClonedWindowAction extends AbstractAction implements EnableableActi
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
-		if ((entry != null) && entry.getMethod().equals("GET")) {
+		if (entry != null && entry.getMethod().equals("GET")) {
 			window.getTopFrame().open(entry.getUrl());
 		}
 	}

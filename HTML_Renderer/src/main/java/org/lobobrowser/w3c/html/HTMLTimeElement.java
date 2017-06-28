@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTimeElement.
  */
 public interface HTMLTimeElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the date time.
 	 *

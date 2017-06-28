@@ -86,7 +86,7 @@ public abstract class CommonLayout implements MarkupLayout {
 			// Inline elements with absolute or fixed positions need
 			// to be treated as blocks.
 			int position = rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
-			if ((position == RenderState.POSITION_ABSOLUTE) || (position == RenderState.POSITION_FIXED)) {
+			if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
 				display = RenderState.DISPLAY_BLOCK;
 			} else {
 				int boxFloat = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();

@@ -433,8 +433,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	/** The onratechange. */
 	private Function onratechange;
-	
-	
+
 	/**
 	 * Instantiates a new HTML document impl.
 	 *
@@ -474,7 +473,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		this.ucontext = ucontext;
 		this.reader = reader;
 		this.documentURI = documentURI;
-		
+
 		if (documentURI != null) {
 			try {
 				URL docURL = new URL(documentURI);
@@ -947,7 +946,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			return null;
 		}
 	}
-	
 
 	/**
 	 * Named item.
@@ -1154,8 +1152,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 			try {
 				return new URL(uri);
 			} catch (MalformedURLException mfu2) {
-				logger.error(
-						"Unable to create URL for URI=[" + uri + "], with base=[" + this.getBaseURI() + "].", mfu);
+				logger.error("Unable to create URL for URI=[" + uri + "], with base=[" + this.getBaseURI() + "].", mfu);
 				return null;
 			}
 		}
@@ -1531,7 +1528,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	protected void loadImage(String relativeUri, ImageListener imageListener) {
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
-		if ((rcontext == null) || !rcontext.isImageLoadingEnabled()) {
+		if (rcontext == null || !rcontext.isImageLoadingEnabled()) {
 			// Ignore image loading when there's no renderer context.
 			// Consider Cobra users who are only using the parser.
 			imageListener.imageLoaded(BLANK_IMAGE_EVENT);
@@ -1617,7 +1614,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
-			if (HtmlParser.MODIFYING_KEY.equals(key) && (data == Boolean.FALSE)) {
+			if (HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
 				Executor.executeFunction(this, onloadHandler, null);
 			}
 		}
@@ -1738,7 +1735,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public void setDomain(String domain) {
 		String oldDomain = this.domain;
-		if ((oldDomain != null) && Domains.isValidCookieDomain(domain, oldDomain)) {
+		if (oldDomain != null && Domains.isValidCookieDomain(domain, oldDomain)) {
 			this.domain = domain;
 		} else {
 			throw new SecurityException(
@@ -2042,7 +2039,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public AbstractView getDefaultView() {
 		return this.window;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -2558,7 +2555,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 
 	@Override
 	public void addEventListener(String script, Function function) {
-		
+
 		String key = script.toLowerCase();
 
 		switch (key) {
@@ -2849,19 +2846,20 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public void setOnmouseover(Function onmouseover) {
 		this.onmouseover = onmouseover;
 	}
-	
-	
 
 	/**
 	 * @return the oncanplay
 	 */
+	@Override
 	public Function getOncanplay() {
 		return oncanplay;
 	}
 
 	/**
-	 * @param oncanplay the oncanplay to set
+	 * @param oncanplay
+	 *            the oncanplay to set
 	 */
+	@Override
 	public void setOncanplay(Function oncanplay) {
 		this.oncanplay = oncanplay;
 	}
@@ -2869,13 +2867,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onabort
 	 */
+	@Override
 	public Function getOnabort() {
 		return onabort;
 	}
 
 	/**
-	 * @param onabort the onabort to set
+	 * @param onabort
+	 *            the onabort to set
 	 */
+	@Override
 	public void setOnabort(Function onabort) {
 		this.onabort = onabort;
 	}
@@ -2883,13 +2884,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onblur
 	 */
+	@Override
 	public Function getOnblur() {
 		return onblur;
 	}
 
 	/**
-	 * @param onblur the onblur to set
+	 * @param onblur
+	 *            the onblur to set
 	 */
+	@Override
 	public void setOnblur(Function onblur) {
 		this.onblur = onblur;
 	}
@@ -2897,13 +2901,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the oncanplaythrough
 	 */
+	@Override
 	public Function getOncanplaythrough() {
 		return oncanplaythrough;
 	}
 
 	/**
-	 * @param oncanplaythrough the oncanplaythrough to set
+	 * @param oncanplaythrough
+	 *            the oncanplaythrough to set
 	 */
+	@Override
 	public void setOncanplaythrough(Function oncanplaythrough) {
 		this.oncanplaythrough = oncanplaythrough;
 	}
@@ -2911,13 +2918,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onchange
 	 */
+	@Override
 	public Function getOnchange() {
 		return onchange;
 	}
 
 	/**
-	 * @param onchange the onchange to set
+	 * @param onchange
+	 *            the onchange to set
 	 */
+	@Override
 	public void setOnchange(Function onchange) {
 		this.onchange = onchange;
 	}
@@ -2925,13 +2935,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the oncontextmenu
 	 */
+	@Override
 	public Function getOncontextmenu() {
 		return oncontextmenu;
 	}
 
 	/**
-	 * @param oncontextmenu the oncontextmenu to set
+	 * @param oncontextmenu
+	 *            the oncontextmenu to set
 	 */
+	@Override
 	public void setOncontextmenu(Function oncontextmenu) {
 		this.oncontextmenu = oncontextmenu;
 	}
@@ -2939,13 +2952,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the oncuechange
 	 */
+	@Override
 	public Function getOncuechange() {
 		return oncuechange;
 	}
 
 	/**
-	 * @param oncuechange the oncuechange to set
+	 * @param oncuechange
+	 *            the oncuechange to set
 	 */
+	@Override
 	public void setOncuechange(Function oncuechange) {
 		this.oncuechange = oncuechange;
 	}
@@ -2953,13 +2969,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondrag
 	 */
+	@Override
 	public Function getOndrag() {
 		return ondrag;
 	}
 
 	/**
-	 * @param ondrag the ondrag to set
+	 * @param ondrag
+	 *            the ondrag to set
 	 */
+	@Override
 	public void setOndrag(Function ondrag) {
 		this.ondrag = ondrag;
 	}
@@ -2967,13 +2986,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondragend
 	 */
+	@Override
 	public Function getOndragend() {
 		return ondragend;
 	}
 
 	/**
-	 * @param ondragend the ondragend to set
+	 * @param ondragend
+	 *            the ondragend to set
 	 */
+	@Override
 	public void setOndragend(Function ondragend) {
 		this.ondragend = ondragend;
 	}
@@ -2981,13 +3003,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondragenter
 	 */
+	@Override
 	public Function getOndragenter() {
 		return ondragenter;
 	}
 
 	/**
-	 * @param ondragenter the ondragenter to set
+	 * @param ondragenter
+	 *            the ondragenter to set
 	 */
+	@Override
 	public void setOndragenter(Function ondragenter) {
 		this.ondragenter = ondragenter;
 	}
@@ -2995,13 +3020,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondragleave
 	 */
+	@Override
 	public Function getOndragleave() {
 		return ondragleave;
 	}
 
 	/**
-	 * @param ondragleave the ondragleave to set
+	 * @param ondragleave
+	 *            the ondragleave to set
 	 */
+	@Override
 	public void setOndragleave(Function ondragleave) {
 		this.ondragleave = ondragleave;
 	}
@@ -3009,13 +3037,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondragover
 	 */
+	@Override
 	public Function getOndragover() {
 		return ondragover;
 	}
 
 	/**
-	 * @param ondragover the ondragover to set
+	 * @param ondragover
+	 *            the ondragover to set
 	 */
+	@Override
 	public void setOndragover(Function ondragover) {
 		this.ondragover = ondragover;
 	}
@@ -3023,13 +3054,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondragstart
 	 */
+	@Override
 	public Function getOndragstart() {
 		return ondragstart;
 	}
 
 	/**
-	 * @param ondragstart the ondragstart to set
+	 * @param ondragstart
+	 *            the ondragstart to set
 	 */
+	@Override
 	public void setOndragstart(Function ondragstart) {
 		this.ondragstart = ondragstart;
 	}
@@ -3037,13 +3071,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondrop
 	 */
+	@Override
 	public Function getOndrop() {
 		return ondrop;
 	}
 
 	/**
-	 * @param ondrop the ondrop to set
+	 * @param ondrop
+	 *            the ondrop to set
 	 */
+	@Override
 	public void setOndrop(Function ondrop) {
 		this.ondrop = ondrop;
 	}
@@ -3051,13 +3088,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ondurationchange
 	 */
+	@Override
 	public Function getOndurationchange() {
 		return ondurationchange;
 	}
 
 	/**
-	 * @param ondurationchange the ondurationchange to set
+	 * @param ondurationchange
+	 *            the ondurationchange to set
 	 */
+	@Override
 	public void setOndurationchange(Function ondurationchange) {
 		this.ondurationchange = ondurationchange;
 	}
@@ -3065,13 +3105,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onemptied
 	 */
+	@Override
 	public Function getOnemptied() {
 		return onemptied;
 	}
 
 	/**
-	 * @param onemptied the onemptied to set
+	 * @param onemptied
+	 *            the onemptied to set
 	 */
+	@Override
 	public void setOnemptied(Function onemptied) {
 		this.onemptied = onemptied;
 	}
@@ -3079,13 +3122,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onended
 	 */
+	@Override
 	public Function getOnended() {
 		return onended;
 	}
 
 	/**
-	 * @param onended the onended to set
+	 * @param onended
+	 *            the onended to set
 	 */
+	@Override
 	public void setOnended(Function onended) {
 		this.onended = onended;
 	}
@@ -3093,13 +3139,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onerror
 	 */
+	@Override
 	public Function getOnerror() {
 		return onerror;
 	}
 
 	/**
-	 * @param onerror the onerror to set
+	 * @param onerror
+	 *            the onerror to set
 	 */
+	@Override
 	public void setOnerror(Function onerror) {
 		this.onerror = onerror;
 	}
@@ -3107,13 +3156,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onfocus
 	 */
+	@Override
 	public Function getOnfocus() {
 		return onfocus;
 	}
 
 	/**
-	 * @param onfocus the onfocus to set
+	 * @param onfocus
+	 *            the onfocus to set
 	 */
+	@Override
 	public void setOnfocus(Function onfocus) {
 		this.onfocus = onfocus;
 	}
@@ -3121,13 +3173,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the oninput
 	 */
+	@Override
 	public Function getOninput() {
 		return oninput;
 	}
 
 	/**
-	 * @param oninput the oninput to set
+	 * @param oninput
+	 *            the oninput to set
 	 */
+	@Override
 	public void setOninput(Function oninput) {
 		this.oninput = oninput;
 	}
@@ -3135,13 +3190,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the oninvalid
 	 */
+	@Override
 	public Function getOninvalid() {
 		return oninvalid;
 	}
 
 	/**
-	 * @param oninvalid the oninvalid to set
+	 * @param oninvalid
+	 *            the oninvalid to set
 	 */
+	@Override
 	public void setOninvalid(Function oninvalid) {
 		this.oninvalid = oninvalid;
 	}
@@ -3149,13 +3207,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onload
 	 */
+	@Override
 	public Function getOnload() {
 		return onload;
 	}
 
 	/**
-	 * @param onload the onload to set
+	 * @param onload
+	 *            the onload to set
 	 */
+	@Override
 	public void setOnload(Function onload) {
 		this.onload = onload;
 	}
@@ -3163,13 +3224,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onloadeddata
 	 */
+	@Override
 	public Function getOnloadeddata() {
 		return onloadeddata;
 	}
 
 	/**
-	 * @param onloadeddata the onloadeddata to set
+	 * @param onloadeddata
+	 *            the onloadeddata to set
 	 */
+	@Override
 	public void setOnloadeddata(Function onloadeddata) {
 		this.onloadeddata = onloadeddata;
 	}
@@ -3177,13 +3241,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onloadedmetadata
 	 */
+	@Override
 	public Function getOnloadedmetadata() {
 		return onloadedmetadata;
 	}
 
 	/**
-	 * @param onloadedmetadata the onloadedmetadata to set
+	 * @param onloadedmetadata
+	 *            the onloadedmetadata to set
 	 */
+	@Override
 	public void setOnloadedmetadata(Function onloadedmetadata) {
 		this.onloadedmetadata = onloadedmetadata;
 	}
@@ -3191,13 +3258,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onloadstart
 	 */
+	@Override
 	public Function getOnloadstart() {
 		return onloadstart;
 	}
 
 	/**
-	 * @param onloadstart the onloadstart to set
+	 * @param onloadstart
+	 *            the onloadstart to set
 	 */
+	@Override
 	public void setOnloadstart(Function onloadstart) {
 		this.onloadstart = onloadstart;
 	}
@@ -3205,13 +3275,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onmousewheel
 	 */
+	@Override
 	public Function getOnmousewheel() {
 		return onmousewheel;
 	}
 
 	/**
-	 * @param onmousewheel the onmousewheel to set
+	 * @param onmousewheel
+	 *            the onmousewheel to set
 	 */
+	@Override
 	public void setOnmousewheel(Function onmousewheel) {
 		this.onmousewheel = onmousewheel;
 	}
@@ -3219,13 +3292,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onpause
 	 */
+	@Override
 	public Function getOnpause() {
 		return onpause;
 	}
 
 	/**
-	 * @param onpause the onpause to set
+	 * @param onpause
+	 *            the onpause to set
 	 */
+	@Override
 	public void setOnpause(Function onpause) {
 		this.onpause = onpause;
 	}
@@ -3233,13 +3309,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onplay
 	 */
+	@Override
 	public Function getOnplay() {
 		return onplay;
 	}
 
 	/**
-	 * @param onplay the onplay to set
+	 * @param onplay
+	 *            the onplay to set
 	 */
+	@Override
 	public void setOnplay(Function onplay) {
 		this.onplay = onplay;
 	}
@@ -3247,13 +3326,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onplaying
 	 */
+	@Override
 	public Function getOnplaying() {
 		return onplaying;
 	}
 
 	/**
-	 * @param onplaying the onplaying to set
+	 * @param onplaying
+	 *            the onplaying to set
 	 */
+	@Override
 	public void setOnplaying(Function onplaying) {
 		this.onplaying = onplaying;
 	}
@@ -3261,13 +3343,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onprogress
 	 */
+	@Override
 	public Function getOnprogress() {
 		return onprogress;
 	}
 
 	/**
-	 * @param onprogress the onprogress to set
+	 * @param onprogress
+	 *            the onprogress to set
 	 */
+	@Override
 	public void setOnprogress(Function onprogress) {
 		this.onprogress = onprogress;
 	}
@@ -3275,13 +3360,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onreadystatechange
 	 */
+	@Override
 	public Function getOnreadystatechange() {
 		return onreadystatechange;
 	}
 
 	/**
-	 * @param onreadystatechange the onreadystatechange to set
+	 * @param onreadystatechange
+	 *            the onreadystatechange to set
 	 */
+	@Override
 	public void setOnreadystatechange(Function onreadystatechange) {
 		this.onreadystatechange = onreadystatechange;
 	}
@@ -3289,13 +3377,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onreset
 	 */
+	@Override
 	public Function getOnreset() {
 		return onreset;
 	}
 
 	/**
-	 * @param onreset the onreset to set
+	 * @param onreset
+	 *            the onreset to set
 	 */
+	@Override
 	public void setOnreset(Function onreset) {
 		this.onreset = onreset;
 	}
@@ -3303,13 +3394,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onscroll
 	 */
+	@Override
 	public Function getOnscroll() {
 		return onscroll;
 	}
 
 	/**
-	 * @param onscroll the onscroll to set
+	 * @param onscroll
+	 *            the onscroll to set
 	 */
+	@Override
 	public void setOnscroll(Function onscroll) {
 		this.onscroll = onscroll;
 	}
@@ -3317,13 +3411,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onseeked
 	 */
+	@Override
 	public Function getOnseeked() {
 		return onseeked;
 	}
 
 	/**
-	 * @param onseeked the onseeked to set
+	 * @param onseeked
+	 *            the onseeked to set
 	 */
+	@Override
 	public void setOnseeked(Function onseeked) {
 		this.onseeked = onseeked;
 	}
@@ -3331,13 +3428,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onseeking
 	 */
+	@Override
 	public Function getOnseeking() {
 		return onseeking;
 	}
 
 	/**
-	 * @param onseeking the onseeking to set
+	 * @param onseeking
+	 *            the onseeking to set
 	 */
+	@Override
 	public void setOnseeking(Function onseeking) {
 		this.onseeking = onseeking;
 	}
@@ -3345,13 +3445,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onselect
 	 */
+	@Override
 	public Function getOnselect() {
 		return onselect;
 	}
 
 	/**
-	 * @param onselect the onselect to set
+	 * @param onselect
+	 *            the onselect to set
 	 */
+	@Override
 	public void setOnselect(Function onselect) {
 		this.onselect = onselect;
 	}
@@ -3359,13 +3462,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onshow
 	 */
+	@Override
 	public Function getOnshow() {
 		return onshow;
 	}
 
 	/**
-	 * @param onshow the onshow to set
+	 * @param onshow
+	 *            the onshow to set
 	 */
+	@Override
 	public void setOnshow(Function onshow) {
 		this.onshow = onshow;
 	}
@@ -3373,13 +3479,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onstalled
 	 */
+	@Override
 	public Function getOnstalled() {
 		return onstalled;
 	}
 
 	/**
-	 * @param onstalled the onstalled to set
+	 * @param onstalled
+	 *            the onstalled to set
 	 */
+	@Override
 	public void setOnstalled(Function onstalled) {
 		this.onstalled = onstalled;
 	}
@@ -3387,13 +3496,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onsubmit
 	 */
+	@Override
 	public Function getOnsubmit() {
 		return onsubmit;
 	}
 
 	/**
-	 * @param onsubmit the onsubmit to set
+	 * @param onsubmit
+	 *            the onsubmit to set
 	 */
+	@Override
 	public void setOnsubmit(Function onsubmit) {
 		this.onsubmit = onsubmit;
 	}
@@ -3401,13 +3513,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onsuspend
 	 */
+	@Override
 	public Function getOnsuspend() {
 		return onsuspend;
 	}
 
 	/**
-	 * @param onsuspend the onsuspend to set
+	 * @param onsuspend
+	 *            the onsuspend to set
 	 */
+	@Override
 	public void setOnsuspend(Function onsuspend) {
 		this.onsuspend = onsuspend;
 	}
@@ -3415,13 +3530,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the ontimeupdate
 	 */
+	@Override
 	public Function getOntimeupdate() {
 		return ontimeupdate;
 	}
 
 	/**
-	 * @param ontimeupdate the ontimeupdate to set
+	 * @param ontimeupdate
+	 *            the ontimeupdate to set
 	 */
+	@Override
 	public void setOntimeupdate(Function ontimeupdate) {
 		this.ontimeupdate = ontimeupdate;
 	}
@@ -3429,13 +3547,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onvolumechange
 	 */
+	@Override
 	public Function getOnvolumechange() {
 		return onvolumechange;
 	}
 
 	/**
-	 * @param onvolumechange the onvolumechange to set
+	 * @param onvolumechange
+	 *            the onvolumechange to set
 	 */
+	@Override
 	public void setOnvolumechange(Function onvolumechange) {
 		this.onvolumechange = onvolumechange;
 	}
@@ -3443,13 +3564,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onwaiting
 	 */
+	@Override
 	public Function getOnwaiting() {
 		return onwaiting;
 	}
 
 	/**
-	 * @param onwaiting the onwaiting to set
+	 * @param onwaiting
+	 *            the onwaiting to set
 	 */
+	@Override
 	public void setOnwaiting(Function onwaiting) {
 		this.onwaiting = onwaiting;
 	}
@@ -3457,13 +3581,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onmousemove
 	 */
+	@Override
 	public Function getOnmousemove() {
 		return onmousemove;
 	}
 
 	/**
-	 * @param onmousemove the onmousemove to set
+	 * @param onmousemove
+	 *            the onmousemove to set
 	 */
+	@Override
 	public void setOnmousemove(Function onmousemove) {
 		this.onmousemove = onmousemove;
 	}
@@ -3471,13 +3598,16 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	/**
 	 * @return the onratechange
 	 */
+	@Override
 	public Function getOnratechange() {
 		return onratechange;
 	}
 
 	/**
-	 * @param onratechange the onratechange to set
+	 * @param onratechange
+	 *            the onratechange to set
 	 */
+	@Override
 	public void setOnratechange(Function onratechange) {
 		this.onratechange = onratechange;
 	}
@@ -3600,7 +3730,6 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 		// TODO Auto-generated method stub
 
 	}
-
 
 	@Override
 	public boolean dispatchEvent(Event evt) throws EventException, DOMException {

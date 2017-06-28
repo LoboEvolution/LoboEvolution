@@ -101,9 +101,9 @@ public class TableRenderState extends StyleSheetRenderState {
 		// Apply style based on deprecated attributes.
 		binfo = super.getBackgroundInfo();
 		HTMLTableElementImpl element = (HTMLTableElementImpl) this.element;
-		if ((binfo == null) || (binfo.getBackgroundColor() == null)) {
+		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgColor = element.getBgColor();
-			if ((bgColor != null) && !"".equals(bgColor)) {
+			if (bgColor != null && !"".equals(bgColor)) {
 				Color bgc = ColorFactory.getInstance().getColor(bgColor);
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
@@ -128,10 +128,10 @@ public class TableRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if ((binfo == null) || ((binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE)
-				&& (binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE)
-				&& (binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE)
-				&& (binfo.getRightStyle() == HtmlValues.BORDER_STYLE_NONE))) {
+		if (binfo == null || binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE
+				&& binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE
+				&& binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE
+				&& binfo.getRightStyle() == HtmlValues.BORDER_STYLE_NONE) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -142,34 +142,34 @@ public class TableRenderState extends StyleSheetRenderState {
 					border = border.trim();
 					int value = HtmlValues.getPixelSize(border, this, 0);
 					int valueType;
-					
+
 					if (border.endsWith("%")) {
 						valueType = HtmlInsets.TYPE_PERCENT;
 					} else {
 						valueType = HtmlInsets.TYPE_PIXELS;
 					}
-					
+
 					HtmlInsets borderInsets = new HtmlInsets();
 					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
 					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
 					binfo.setInsets(borderInsets);
-					
+
 					if (binfo.getTopColor() == null) {
 						binfo.setTopColor(Color.LIGHT_GRAY);
 					}
-					
+
 					if (binfo.getLeftColor() == null) {
 						binfo.setLeftColor(Color.LIGHT_GRAY);
 					}
-					
+
 					if (binfo.getRightColor() == null) {
 						binfo.setRightColor(Color.GRAY);
 					}
-					
+
 					if (binfo.getBottomColor() == null) {
 						binfo.setBottomColor(Color.GRAY);
 					}
-					
+
 					if (value != 0) {
 						binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
 						binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);

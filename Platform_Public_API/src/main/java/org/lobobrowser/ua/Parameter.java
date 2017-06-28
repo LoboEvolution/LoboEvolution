@@ -27,33 +27,38 @@ import java.io.File;
  */
 public interface Parameter {
 
-    /** Gets the name.
+	/**
+	 * Gets the name.
 	 *
 	 * @return the name
 	 */
-    String getName();
+	String getName();
 
-    /** Checks if is text.
+	/**
+	 * Checks if is text.
 	 *
 	 * @return true, if is text
 	 */
-    boolean isText();
+	boolean isText();
 
-    /** Gets the text value.
+	/**
+	 * Gets the text value.
 	 *
 	 * @return the text value
 	 */
-    String getTextValue();
+	String getTextValue();
 
-    /** Checks if is file.
+	/**
+	 * Checks if is file.
 	 *
 	 * @return true, if is file
 	 */
-    boolean isFile();
+	boolean isFile();
 
-    /** Gets the file value.
+	/**
+	 * Gets the file value.
 	 *
 	 * @return the file value
 	 */
-    File[] getFileValue();
+	File[] getFileValue();
 }

@@ -53,7 +53,7 @@ public class SVGRadialGradientElementImpl extends SVGSVGElementImpl implements S
 	@Override
 	public SVGAnimatedString getHref() {
 		String href = this.getAttribute(HtmlAttributeProperties.XLINK_HREF);
-		if(href == null){
+		if (href == null) {
 			href = this.getAttribute(HtmlAttributeProperties.HREF);
 		}
 		return new SVGAnimatedStringImpl(href);

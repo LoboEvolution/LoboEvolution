@@ -24,9 +24,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
@@ -34,6 +31,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentFragment;
@@ -41,7 +40,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.html.HTMLDocument;
 
-public class XMLSerializer extends AbstractScriptableDelegate{
+public class XMLSerializer extends AbstractScriptableDelegate {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(XMLSerializer.class.getName());

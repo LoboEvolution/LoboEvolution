@@ -23,12 +23,11 @@ package org.lobobrowser.primary.ext;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import javax.swing.JProgressBar;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.swing.JProgressBar;
-
 import org.lobobrowser.ua.ProgressType;
 
 /**
@@ -79,7 +78,7 @@ public class ProgressBar extends JProgressBar {
 				if (max == 0) {
 					this.setString("");
 				} else {
-					this.setString(((value * 100) / max) + "%");
+					this.setString(value * 100 / max + "%");
 				}
 			}
 			break;

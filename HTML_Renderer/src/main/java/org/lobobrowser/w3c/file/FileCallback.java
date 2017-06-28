@@ -21,16 +21,16 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Interface FileCallback.
  */
 public interface FileCallback {
-	
+
 	/**
 	 * Handle event.
 	 *
-	 * @param file the file
+	 * @param file
+	 *            the file
 	 */
 	// FileCallback
 	public void handleEvent(File file);

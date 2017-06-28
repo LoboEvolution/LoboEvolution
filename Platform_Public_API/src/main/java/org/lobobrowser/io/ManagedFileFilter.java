@@ -28,12 +28,12 @@ package org.lobobrowser.io;
  */
 public interface ManagedFileFilter {
 
-    /**
-     * Accept.
-     *
-     * @param file
-     *            A managed file.
-     * @return True if the file is accepted by the filter, false otherwise.
-     */
-    boolean accept(ManagedFile file);
+	/**
+	 * Accept.
+	 *
+	 * @param file
+	 *            A managed file.
+	 * @return True if the file is accepted by the filter, false otherwise.
+	 */
+	boolean accept(ManagedFile file);
 }

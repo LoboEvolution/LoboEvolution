@@ -30,32 +30,31 @@ import java.io.ObjectStreamClass;
  */
 public class ClassLoaderObjectInputStream extends ObjectInputStream {
 
-    /** The class loader. */
-    private final ClassLoader classLoader;
+	/** The class loader. */
+	private final ClassLoader classLoader;
 
-    /**
-     * Instantiates a new class loader object input stream.
-     *
-     * @param in
-     *            the in
-     * @param classLoader
-     *            the class loader
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public ClassLoaderObjectInputStream(InputStream in, ClassLoader classLoader)
-            throws IOException {
-        super(in);
-        this.classLoader = classLoader;
-    }
+	/**
+	 * Instantiates a new class loader object input stream.
+	 *
+	 * @param in
+	 *            the in
+	 * @param classLoader
+	 *            the class loader
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public ClassLoaderObjectInputStream(InputStream in, ClassLoader classLoader) throws IOException {
+		super(in);
+		this.classLoader = classLoader;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.io.ObjectInputStream#resolveClass(java.io.ObjectStreamClass)
-     */
-    @Override
-    protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException,
-    ClassNotFoundException {
-        return Class.forName(desc.getName(), false, this.classLoader);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.ObjectInputStream#resolveClass(java.io.ObjectStreamClass)
+	 */
+	@Override
+	protected Class<?> resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+		return Class.forName(desc.getName(), false, this.classLoader);
+	}
 }

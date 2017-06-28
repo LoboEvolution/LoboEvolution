@@ -26,249 +26,249 @@ package org.lobobrowser.html;
  */
 public interface HtmlJsAttributeProperties {
 
-    /** The focus. */
-    String FOCUS = "focus";
+	/** The focus. */
+	String FOCUS = "focus";
 
-    /** The blur. */
-    String BLUR = "blur";
+	/** The blur. */
+	String BLUR = "blur";
 
-    /** The click. */
-    String CLICK = "click";
+	/** The click. */
+	String CLICK = "click";
 
-    /** The dblclick. */
-    String DBLCLICK = "dblclick";
+	/** The dblclick. */
+	String DBLCLICK = "dblclick";
 
-    /** The mousedown. */
-    String MOUSEDOWN = "mousedown";
+	/** The mousedown. */
+	String MOUSEDOWN = "mousedown";
 
-    /** The mouseup. */
-    String MOUSEUP = "mouseup";
+	/** The mouseup. */
+	String MOUSEUP = "mouseup";
 
-    /** The mouseover. */
-    String MOUSEOVER = "mouseover";
+	/** The mouseover. */
+	String MOUSEOVER = "mouseover";
 
-    /** The mousemove. */
-    String MOUSEMOVE = "mousemove";
+	/** The mousemove. */
+	String MOUSEMOVE = "mousemove";
 
-    /** The mouseout. */
-    String MOUSEOUT = "mouseout";
+	/** The mouseout. */
+	String MOUSEOUT = "mouseout";
 
-    /** The keypress. */
-    String KEYPRESS = "keypress";
+	/** The keypress. */
+	String KEYPRESS = "keypress";
 
-    /** The keydown. */
-    String KEYDOWN = "keydown";
+	/** The keydown. */
+	String KEYDOWN = "keydown";
 
-    /** The keyup. */
-    String KEYUP = "keyup";
+	/** The keyup. */
+	String KEYUP = "keyup";
 
-    /** The ctextmenu. */
-    String CTEXTMENU = "ctextmenu";
+	/** The ctextmenu. */
+	String CTEXTMENU = "ctextmenu";
 
-    /** The abort. */
-    String ABORT = "abort";
+	/** The abort. */
+	String ABORT = "abort";
 
-    /** The play. */
-    String PLAY = "play";
+	/** The play. */
+	String PLAY = "play";
 
-    /** The playing. */
-    String PLAYING = "playing";
+	/** The playing. */
+	String PLAYING = "playing";
 
-    /** The progress. */
-    String PROGRESS = "progress";
+	/** The progress. */
+	String PROGRESS = "progress";
 
-    /** The readystatechange. */
-    String READYSTATECHANGE = "readystatechange";
+	/** The readystatechange. */
+	String READYSTATECHANGE = "readystatechange";
 
-    /** The scroll. */
-    String SCROLL = "scroll";
+	/** The scroll. */
+	String SCROLL = "scroll";
 
-    /** The seeked. */
-    String SEEKED = "seeked";
+	/** The seeked. */
+	String SEEKED = "seeked";
 
-    /** The seeking. */
-    String SEEKING = "seeking";
+	/** The seeking. */
+	String SEEKING = "seeking";
 
-    /** The select. */
-    String SELECT = "select";
+	/** The select. */
+	String SELECT = "select";
 
-    /** The show. */
-    String SHOW = "show";
+	/** The show. */
+	String SHOW = "show";
 
-    /** The stalled. */
-    String STALLED = "stalled";
+	/** The stalled. */
+	String STALLED = "stalled";
 
-    /** The submit. */
-    String SUBMIT = "submit";
+	/** The submit. */
+	String SUBMIT = "submit";
 
-    /** The suspend. */
-    String SUSPEND = "suspend";
+	/** The suspend. */
+	String SUSPEND = "suspend";
 
-    /** The timeupdate. */
-    String TIMEUPDATE = "timeupdate";
+	/** The timeupdate. */
+	String TIMEUPDATE = "timeupdate";
 
-    /** The waiting. */
-    String WAITING = "waiting";
+	/** The waiting. */
+	String WAITING = "waiting";
 
-    /** The volumechange. */
-    String VOLUMECHANGE = "volumechange";
+	/** The volumechange. */
+	String VOLUMECHANGE = "volumechange";
 
-    /** The finish. */
-    String FINISH = "finish";
+	/** The finish. */
+	String FINISH = "finish";
 
-    /** The start. */
-    String START = "start";
+	/** The start. */
+	String START = "start";
 
-    /** The bounce. */
-    String BOUNCE = "bounce";
+	/** The bounce. */
+	String BOUNCE = "bounce";
 
-    /** The load. */
-    String LOAD = "load";
+	/** The load. */
+	String LOAD = "load";
 
-    /** The onfocus. */
-    String ONFOCUS = "onfocus";
+	/** The onfocus. */
+	String ONFOCUS = "onfocus";
 
-    /** The onblur. */
-    String ONBLUR = "onblur";
+	/** The onblur. */
+	String ONBLUR = "onblur";
 
-    /** The onclick. */
-    String ONCLICK = "onclick";
+	/** The onclick. */
+	String ONCLICK = "onclick";
 
-    /** The ondblclick. */
-    String ONDBLCLICK = "ondblclick";
+	/** The ondblclick. */
+	String ONDBLCLICK = "ondblclick";
 
-    /** The onmousedown. */
-    String ONMOUSEDOWN = "onmousedown";
+	/** The onmousedown. */
+	String ONMOUSEDOWN = "onmousedown";
 
-    /** The onmouseup. */
-    String ONMOUSEUP = "onmouseup";
+	/** The onmouseup. */
+	String ONMOUSEUP = "onmouseup";
 
-    /** The onmouseover. */
-    String ONMOUSEOVER = "onmouseover";
+	/** The onmouseover. */
+	String ONMOUSEOVER = "onmouseover";
 
-    /** The onmousemove. */
-    String ONMOUSEMOVE = "onmousemove";
+	/** The onmousemove. */
+	String ONMOUSEMOVE = "onmousemove";
 
-    /** The onmouseout. */
-    String ONMOUSEOUT = "onmouseout";
+	/** The onmouseout. */
+	String ONMOUSEOUT = "onmouseout";
 
-    /** The onkeypress. */
-    String ONKEYPRESS = "onkeypress";
+	/** The onkeypress. */
+	String ONKEYPRESS = "onkeypress";
 
-    /** The onkeydown. */
-    String ONKEYDOWN = "onkeydown";
+	/** The onkeydown. */
+	String ONKEYDOWN = "onkeydown";
 
-    /** The onkeyup. */
-    String ONKEYUP = "onkeyup";
+	/** The onkeyup. */
+	String ONKEYUP = "onkeyup";
 
-    /** The oncontextmenu. */
-    String ONCONTEXTMENU = "oncontextmenu";
+	/** The oncontextmenu. */
+	String ONCONTEXTMENU = "oncontextmenu";
 
-    /** The onabort. */
-    String ONABORT = "onabort";
+	/** The onabort. */
+	String ONABORT = "onabort";
 
-    /** The onplay. */
-    String ONPLAY = "onplay";
+	/** The onplay. */
+	String ONPLAY = "onplay";
 
-    /** The onplaying. */
-    String ONPLAYING = "onplaying";
+	/** The onplaying. */
+	String ONPLAYING = "onplaying";
 
-    /** The onprogress. */
-    String ONPROGRESS = "onprogress";
+	/** The onprogress. */
+	String ONPROGRESS = "onprogress";
 
-    /** The onreadystatechange. */
-    String ONREADYSTATECHANGE = "onreadystatechange";
+	/** The onreadystatechange. */
+	String ONREADYSTATECHANGE = "onreadystatechange";
 
-    /** The onscroll. */
-    String ONSCROLL = "onscroll";
+	/** The onscroll. */
+	String ONSCROLL = "onscroll";
 
-    /** The onseeked. */
-    String ONSEEKED = "onseeked";
+	/** The onseeked. */
+	String ONSEEKED = "onseeked";
 
-    /** The onseeking. */
-    String ONSEEKING = "onseeking";
+	/** The onseeking. */
+	String ONSEEKING = "onseeking";
 
-    /** The onselect. */
-    String ONSELECT = "onselect";
+	/** The onselect. */
+	String ONSELECT = "onselect";
 
-    /** The onshow. */
-    String ONSHOW = "onshow";
+	/** The onshow. */
+	String ONSHOW = "onshow";
 
-    /** The onstalled. */
-    String ONSTALLED = "onstalled";
+	/** The onstalled. */
+	String ONSTALLED = "onstalled";
 
-    /** The onsubmit. */
-    String ONSUBMIT = "onsubmit";
+	/** The onsubmit. */
+	String ONSUBMIT = "onsubmit";
 
-    /** The onsuspend. */
-    String ONSUSPEND = "onsuspend";
+	/** The onsuspend. */
+	String ONSUSPEND = "onsuspend";
 
-    /** The ontimeupdate. */
-    String ONTIMEUPDATE = "ontimeupdate";
+	/** The ontimeupdate. */
+	String ONTIMEUPDATE = "ontimeupdate";
 
-    /** The onwaiting. */
-    String ONWAITING = "onwaiting";
+	/** The onwaiting. */
+	String ONWAITING = "onwaiting";
 
-    /** The onvolumechange. */
-    String ONVOLUMECHANGE = "onvolumechange";
+	/** The onvolumechange. */
+	String ONVOLUMECHANGE = "onvolumechange";
 
-    /** The onfinish. */
-    String ONFINISH = "onfinish";
+	/** The onfinish. */
+	String ONFINISH = "onfinish";
 
-    /** The onstart. */
-    String ONSTART = "onstart";
+	/** The onstart. */
+	String ONSTART = "onstart";
 
-    /** The onbounce. */
-    String ONBOUNCE = "onbounce";
+	/** The onbounce. */
+	String ONBOUNCE = "onbounce";
 
-    /** The onload. */
-    String ONLOAD = "onload";
+	/** The onload. */
+	String ONLOAD = "onload";
 
-    /** The onafterprint. */
-    String ONAFTERPRINT = "onafterprint";
+	/** The onafterprint. */
+	String ONAFTERPRINT = "onafterprint";
 
-    /** The onbeforeprint. */
-    String ONBEFOREPRINT = "onbeforeprint";
+	/** The onbeforeprint. */
+	String ONBEFOREPRINT = "onbeforeprint";
 
-    /** The onbeforeunload. */
-    String ONBEFOREUNLOAD = "onbeforeunload";
+	/** The onbeforeunload. */
+	String ONBEFOREUNLOAD = "onbeforeunload";
 
-    /** The onerror. */
-    String ONERROR = "onerror";
+	/** The onerror. */
+	String ONERROR = "onerror";
 
-    /** The onhashchange. */
-    String ONHASHCHANGE = "onhashchange";
+	/** The onhashchange. */
+	String ONHASHCHANGE = "onhashchange";
 
-    /** The onmessage. */
-    String ONMESSAGE = "onmessage";
+	/** The onmessage. */
+	String ONMESSAGE = "onmessage";
 
-    /** The onoffline. */
-    String ONOFFLINE = "onoffline";
+	/** The onoffline. */
+	String ONOFFLINE = "onoffline";
 
-    /** The ononline. */
-    String ONONLINE = "ononline";
+	/** The ononline. */
+	String ONONLINE = "ononline";
 
-    /** The onpopstate. */
-    String ONPOPSTATE = "onpopstate";
+	/** The onpopstate. */
+	String ONPOPSTATE = "onpopstate";
 
-    /** The onpagehide. */
-    String ONPAGEHIDE = "onpagehide";
+	/** The onpagehide. */
+	String ONPAGEHIDE = "onpagehide";
 
-    /** The onpageshow. */
-    String ONPAGESHOW = "onpageshow";
+	/** The onpageshow. */
+	String ONPAGESHOW = "onpageshow";
 
-    /** The onredo. */
-    String ONREDO = "onredo";
+	/** The onredo. */
+	String ONREDO = "onredo";
 
-    /** The onresize. */
-    String ONRESIZE = "onresize";
+	/** The onresize. */
+	String ONRESIZE = "onresize";
 
-    /** The onstorage. */
-    String ONSTORAGE = "onstorage";
+	/** The onstorage. */
+	String ONSTORAGE = "onstorage";
 
-    /** The onundo. */
-    String ONUNDO = "onundo";
+	/** The onundo. */
+	String ONUNDO = "onundo";
 
-    /** The onunload. */
-    String ONUNLOAD = "onunload";
+	/** The onunload. */
+	String ONUNLOAD = "onunload";
 }

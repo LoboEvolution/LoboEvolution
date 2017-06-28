@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLAreaElement.
  */
 public interface HTMLAreaElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the alt.
 	 *

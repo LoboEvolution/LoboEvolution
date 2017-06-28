@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTitleElement.
  */
 public interface HTMLTitleElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the text.
 	 *

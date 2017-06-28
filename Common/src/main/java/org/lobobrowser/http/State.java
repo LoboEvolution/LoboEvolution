@@ -24,21 +24,21 @@ package org.lobobrowser.http;
  * Enumeration indicating the state that a Session is in.
  */
 public enum State {
-    
-    /** The ready. */
-    READY, 
- /** The connecting. */
- CONNECTING, 
- /** The sending. */
- SENDING, 
- /** The sent. */
- SENT, 
- /** The receiving. */
- RECEIVING, 
- /** The done. */
- DONE, 
- /** The failed. */
- FAILED, 
- /** The aborted. */
- ABORTED
+
+	/** The ready. */
+	READY,
+	/** The connecting. */
+	CONNECTING,
+	/** The sending. */
+	SENDING,
+	/** The sent. */
+	SENT,
+	/** The receiving. */
+	RECEIVING,
+	/** The done. */
+	DONE,
+	/** The failed. */
+	FAILED,
+	/** The aborted. */
+	ABORTED
 }

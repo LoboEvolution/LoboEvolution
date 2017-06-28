@@ -24,8 +24,8 @@ package org.lobobrowser.util;
  * The Interface SimpleThreadPoolTask.
  */
 public interface SimpleThreadPoolTask extends Runnable {
-    /**
-     * Cancel.
-     */
-    void cancel();
+	/**
+	 * Cancel.
+	 */
+	void cancel();
 }

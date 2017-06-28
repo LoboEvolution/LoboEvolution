@@ -217,8 +217,7 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 	/**
 	 * The Class EventListenerWrapper.
 	 *
-	 * @param
-	 * 			<TR>
+	 * @param <TR>
 	 *            the generic type
 	 */
 	private static class EventListenerWrapper<TR> implements GenericEventListener {

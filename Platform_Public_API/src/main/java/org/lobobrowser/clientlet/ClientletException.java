@@ -25,66 +25,67 @@ package org.lobobrowser.clientlet;
  */
 public class ClientletException extends Exception {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The source code. */
-    private final String sourceCode;
+	/** The source code. */
+	private final String sourceCode;
 
-    /**
-     * Constructs a ClientletException.
-     *
-     * @param message
-     *            The exception message.
-     */
-    public ClientletException(String message) {
-        super(message);
-        this.sourceCode = null;
-    }
+	/**
+	 * Constructs a ClientletException.
+	 *
+	 * @param message
+	 *            The exception message.
+	 */
+	public ClientletException(String message) {
+		super(message);
+		this.sourceCode = null;
+	}
 
-    /**
-     * Constructs a ClientletException.
-     *
-     * @param message
-     *            The exception message.
-     * @param sourceCode
-     *            If the source code of the document generating the error is
-     *            known, it should be passed in this parameter.
-     */
-    public ClientletException(String message, String sourceCode) {
-        super(message);
-        this.sourceCode = sourceCode;
-    }
+	/**
+	 * Constructs a ClientletException.
+	 *
+	 * @param message
+	 *            The exception message.
+	 * @param sourceCode
+	 *            If the source code of the document generating the error is
+	 *            known, it should be passed in this parameter.
+	 */
+	public ClientletException(String message, String sourceCode) {
+		super(message);
+		this.sourceCode = sourceCode;
+	}
 
-    /**
-     * Constructs a ClientletException.
-     *
-     * @param message
-     *            The exception message.
-     * @param rootCause
-     *            The root cause exception.
-     */
-    public ClientletException(String message, Throwable rootCause) {
-        super(message, rootCause);
-        this.sourceCode = null;
-    }
+	/**
+	 * Constructs a ClientletException.
+	 *
+	 * @param message
+	 *            The exception message.
+	 * @param rootCause
+	 *            The root cause exception.
+	 */
+	public ClientletException(String message, Throwable rootCause) {
+		super(message, rootCause);
+		this.sourceCode = null;
+	}
 
-    /**
-     * Constructs a ClientletException.
-     *
-     * @param rootCause
-     *            The root cause exception.
-     */
-    public ClientletException(Throwable rootCause) {
-        super(rootCause);
-        this.sourceCode = null;
-    }
+	/**
+	 * Constructs a ClientletException.
+	 *
+	 * @param rootCause
+	 *            The root cause exception.
+	 */
+	public ClientletException(Throwable rootCause) {
+		super(rootCause);
+		this.sourceCode = null;
+	}
 
-    /** Gets the source code.
+	/**
+	 * Gets the source code.
 	 *
 	 * @return the source code
 	 */
-    public String getSourceCode() {
-        return sourceCode;
-    }
+	public String getSourceCode() {
+		return sourceCode;
+	}
 }

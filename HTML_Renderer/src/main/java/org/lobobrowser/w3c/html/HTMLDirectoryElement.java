@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLDirectoryElement.
  */
 public interface HTMLDirectoryElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the compact.
 	 *

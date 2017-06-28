@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLLIElement.
  */
 public interface HTMLLIElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the value.
 	 *

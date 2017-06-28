@@ -41,154 +41,163 @@ import org.lobobrowser.ua.RequestType;
  */
 public abstract class AbstractRequestHandler implements RequestHandler {
 
-    /** The request. */
-    protected final ClientletRequest request;
+	/** The request. */
+	protected final ClientletRequest request;
 
-    /** The request type. */
-    protected final RequestType requestType;
+	/** The request type. */
+	protected final RequestType requestType;
 
-    /** The dialog component. */
-    private final Component dialogComponent;
+	/** The dialog component. */
+	private final Component dialogComponent;
 
-    /** The cancelled. */
-    private boolean cancelled = false;
+	/** The cancelled. */
+	private boolean cancelled = false;
 
-    /**
-     * Instantiates a new abstract request handler.
-     *
-     * @param request
-     *            the request
-     * @param dialogComponent
-     *            the dialog component
-     */
-    public AbstractRequestHandler(ClientletRequest request,
-            Component dialogComponent) {
-        this.request = request;
-        this.requestType = request.getRequestType();
-        this.dialogComponent = dialogComponent;
-    }
+	/**
+	 * Instantiates a new abstract request handler.
+	 *
+	 * @param request
+	 *            the request
+	 * @param dialogComponent
+	 *            the dialog component
+	 */
+	public AbstractRequestHandler(ClientletRequest request, Component dialogComponent) {
+		this.request = request;
+		this.requestType = request.getRequestType();
+		this.dialogComponent = dialogComponent;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#cancel()
-     */
-    @Override
-    public void cancel() {
-        this.cancelled = true;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#cancel()
+	 */
+	@Override
+	public void cancel() {
+		this.cancelled = true;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#getHostnameVerifier()
-     */
-    @Override
-    public HostnameVerifier getHostnameVerifier() {
-        return new LocalHostnameVerifier();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#getHostnameVerifier()
+	 */
+	@Override
+	public HostnameVerifier getHostnameVerifier() {
+		return new LocalHostnameVerifier();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#getLatestRequestMethod()
-     */
-    @Override
-    public String getLatestRequestMethod() {
-        return this.request.getMethod();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#getLatestRequestMethod()
+	 */
+	@Override
+	public String getLatestRequestMethod() {
+		return this.request.getMethod();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#getLatestRequestURL()
-     */
-    @Override
-    public URL getLatestRequestURL() {
-        return this.request.getRequestURL();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#getLatestRequestURL()
+	 */
+	@Override
+	public URL getLatestRequestURL() {
+		return this.request.getRequestURL();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#getRequest()
-     */
-    @Override
-    public ClientletRequest getRequest() {
-        return this.request;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#getRequest()
+	 */
+	@Override
+	public ClientletRequest getRequest() {
+		return this.request;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.request.RequestHandler#handleException(org.lobobrowser.clientlet
-     * .ClientletResponse, java.lang.Throwable)
-     */
-    @Override
-    public abstract boolean handleException(ClientletResponse response,
-            Throwable exception) throws ClientletException;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.request.RequestHandler#handleException(org.lobobrowser.
+	 * clientlet .ClientletResponse, java.lang.Throwable)
+	 */
+	@Override
+	public abstract boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException;
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.request.RequestHandler#handleProgress(org.lobobrowser.ua.
-     * ProgressType, java.net.URL, java.lang.String, int, int)
-     */
-    @Override
-    public abstract void handleProgress(ProgressType progressType, URL url,
-            String method, int value, int max);
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.request.RequestHandler#handleProgress(org.lobobrowser.ua.
+	 * ProgressType, java.net.URL, java.lang.String, int, int)
+	 */
+	@Override
+	public abstract void handleProgress(ProgressType progressType, URL url, String method, int value, int max);
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#isCancelled()
-     */
-    @Override
-    public boolean isCancelled() {
-        return this.cancelled;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#isCancelled()
+	 */
+	@Override
+	public boolean isCancelled() {
+		return this.cancelled;
+	}
 
-    /** Checks if is new navigation entry.
+	/**
+	 * Checks if is new navigation entry.
 	 *
 	 * @return true, if is new navigation entry
 	 */
-    public boolean isNewNavigationEntry() {
-        return false;
-    }
+	public boolean isNewNavigationEntry() {
+		return false;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.request.RequestHandler#getRequestType()
-     */
-    @Override
-    public RequestType getRequestType() {
-        return this.requestType;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.request.RequestHandler#getRequestType()
+	 */
+	@Override
+	public RequestType getRequestType() {
+		return this.requestType;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.request.RequestHandler#processResponse(org.lobobrowser.clientlet
-     * .ClientletResponse)
-     */
-    @Override
-    public abstract void processResponse(ClientletResponse response)
-            throws ClientletException, IOException;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.request.RequestHandler#processResponse(org.lobobrowser.
+	 * clientlet .ClientletResponse)
+	 */
+	@Override
+	public abstract void processResponse(ClientletResponse response) throws ClientletException, IOException;
 
-    /**
-     * The Class LocalHostnameVerifier.
-     */
-    private class LocalHostnameVerifier implements HostnameVerifier {
+	/**
+	 * The Class LocalHostnameVerifier.
+	 */
+	private class LocalHostnameVerifier implements HostnameVerifier {
 
-        /** The verified. */
-        private boolean verified;
+		/** The verified. */
+		private boolean verified;
 
-        /*
-         * (non-Javadoc)
-         * @see javax.net.ssl.HostnameVerifier#verify(String, javax.net.ssl.SSLSession)
-         */
-        @Override
-        public boolean verify(final String host, SSLSession arg1) {
-            this.verified = false;
-            final VerifiedHostsStore vhs = VerifiedHostsStore.getInstance();
-            if (vhs.contains(host)) {
-                return true;
-            }
-            
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see javax.net.ssl.HostnameVerifier#verify(String,
+		 * javax.net.ssl.SSLSession)
+		 */
+		@Override
+		public boolean verify(final String host, SSLSession arg1) {
+			this.verified = false;
+			final VerifiedHostsStore vhs = VerifiedHostsStore.getInstance();
+			if (vhs.contains(host)) {
+				return true;
+			}
+
 			if (SwingUtilities.isEventDispatchThread()) {
 				boolean verified = false;
 				Component dc = dialogComponent;
@@ -232,9 +241,9 @@ public abstract class AbstractRequestHandler implements RequestHandler {
 					throw new IllegalStateException(ite.getCause());
 				}
 			}
-            synchronized (this) {
-                return this.verified;
-            }
-        }
-    }
+			synchronized (this) {
+				return this.verified;
+			}
+		}
+	}
 }

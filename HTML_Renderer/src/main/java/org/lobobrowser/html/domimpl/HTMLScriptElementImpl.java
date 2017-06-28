@@ -32,10 +32,10 @@ import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.js.Executor;
@@ -53,169 +53,182 @@ import org.w3c.dom.UserDataHandler;
 /**
  * The Class HTMLScriptElementImpl.
  */
-public class HTMLScriptElementImpl extends HTMLElementImpl implements
-HTMLScriptElement {
+public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScriptElement {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(HTMLScriptElementImpl.class.getName());
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(HTMLScriptElementImpl.class.getName());
 
-    /** The Constant loggableInfo. */
-    private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
+	/** The Constant loggableInfo. */
+	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
-    /**
-     * Instantiates a new HTML script element impl.
-     */
-    public HTMLScriptElementImpl() {
-        super(HtmlProperties.SCRIPT, true);
-    }
+	/**
+	 * Instantiates a new HTML script element impl.
+	 */
+	public HTMLScriptElementImpl() {
+		super(HtmlProperties.SCRIPT, true);
+	}
 
-    /**
-     * Instantiates a new HTML script element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLScriptElementImpl(String name) {
-        super(name, true);
-    }
+	/**
+	 * Instantiates a new HTML script element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLScriptElementImpl(String name) {
+		super(name, true);
+	}
 
-    /** The text. */
-    private String text;
+	/** The text. */
+	private String text;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getText()
-     */
-    @Override
-    public String getText() {
-        String t = this.text;
-        if (t == null) {
-            return this.getRawInnerText(true);
-        } else {
-            return t;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#getText()
+	 */
+	@Override
+	public String getText() {
+		String t = this.text;
+		if (t == null) {
+			return this.getRawInnerText(true);
+		} else {
+			return t;
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setText(java.lang.String)
-     */
-    @Override
-    public void setText(String text) {
-        this.text = text;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#setText(java.lang.String)
+	 */
+	@Override
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getHtmlFor()
-     */
-    @Override
-    public String getHtmlFor() {
-        return this.getAttribute(HtmlAttributeProperties.HTMLFOR);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#getHtmlFor()
+	 */
+	@Override
+	public String getHtmlFor() {
+		return this.getAttribute(HtmlAttributeProperties.HTMLFOR);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setHtmlFor(java.lang.String)
-     */
-    @Override
-    public void setHtmlFor(String htmlFor) {
-        this.setAttribute(HtmlAttributeProperties.HTMLFOR, htmlFor);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLScriptElement#setHtmlFor(java.lang.String)
+	 */
+	@Override
+	public void setHtmlFor(String htmlFor) {
+		this.setAttribute(HtmlAttributeProperties.HTMLFOR, htmlFor);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getEvent()
-     */
-    @Override
-    public String getEvent() {
-        return this.getAttribute(HtmlAttributeProperties.EVENT);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#getEvent()
+	 */
+	@Override
+	public String getEvent() {
+		return this.getAttribute(HtmlAttributeProperties.EVENT);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setEvent(java.lang.String)
-     */
-    @Override
-    public void setEvent(String event) {
-        this.setAttribute(HtmlAttributeProperties.EVENT, event);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.HTMLScriptElement#setEvent(java.lang.String)
+	 */
+	@Override
+	public void setEvent(String event) {
+		this.setAttribute(HtmlAttributeProperties.EVENT, event);
+	}
 
-    /** The defer. */
-    private boolean defer;
+	/** The defer. */
+	private boolean defer;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getDefer()
-     */
-    @Override
-    public boolean getDefer() {
-        return this.defer;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#getDefer()
+	 */
+	@Override
+	public boolean getDefer() {
+		return this.defer;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setDefer(boolean)
-     */
-    @Override
-    public void setDefer(boolean defer) {
-        this.defer = defer;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#setDefer(boolean)
+	 */
+	@Override
+	public void setDefer(boolean defer) {
+		this.defer = defer;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getSrc()
-     */
-    @Override
-    public String getSrc() {
-        return this.getAttribute(HtmlAttributeProperties.SRC);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#getSrc()
+	 */
+	@Override
+	public String getSrc() {
+		return this.getAttribute(HtmlAttributeProperties.SRC);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setSrc(java.lang.String)
-     */
-    @Override
-    public void setSrc(String src) {
-        this.setAttribute(HtmlAttributeProperties.SRC, src);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#setSrc(java.lang.String)
+	 */
+	@Override
+	public void setSrc(String src) {
+		this.setAttribute(HtmlAttributeProperties.SRC, src);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#getType()
-     */
-    @Override
-    public String getType() {
-        return this.getAttribute(HtmlAttributeProperties.TYPE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#getType()
+	 */
+	@Override
+	public String getType() {
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLScriptElement#setType(java.lang.String)
-     */
-    @Override
-    public void setType(String type) {
-        this.setAttribute(HtmlAttributeProperties.TYPE, type);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLScriptElement#setType(java.lang.String)
+	 */
+	@Override
+	public void setType(String type) {
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
-     * java.lang.Object, org.w3c.dom.UserDataHandler)
-     */
-    @Override
-    public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
-                && (data != Boolean.TRUE)) {
-            this.processScript();
-        }
-        return super.setUserData(key, data, handler);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
+	 * java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
+	@Override
+	public Object setUserData(String key, Object data, UserDataHandler handler) {
+		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+			this.processScript();
+		}
+		return super.setUserData(key, data, handler);
+	}
 
-    /**
-     * Process script.
-     */
+	/**
+	 * Process script.
+	 */
 	protected final void processScript() {
 		UserAgentContext bcontext = this.getUserAgentContext();
 		if (bcontext != null && bcontext.isScriptingEnabled()) {
@@ -234,12 +247,10 @@ HTMLScriptElement {
 				} else {
 					this.informExternalScriptLoading();
 					URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
-					scriptURI = scriptURL == null ? src : scriptURL
-							.toExternalForm();
+					scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
 					long time1 = liflag ? System.currentTimeMillis() : 0;
 					try {
-						final HttpRequest request = bcontext
-								.createHttpRequest();
+						final HttpRequest request = bcontext.createHttpRequest();
 						// Perform a synchronous request
 						SecurityManager sm = System.getSecurityManager();
 						if (sm == null) {
@@ -247,31 +258,27 @@ HTMLScriptElement {
 								request.open(Method.GET, getFullURL(scriptURI), false);
 								request.send();
 							} catch (IOException thrown) {
-								logger.error("processScript()",
-										thrown);
+								logger.error("processScript()", thrown);
 							}
 						} else {
-							AccessController
-									.doPrivileged(new PrivilegedAction<Object>() {
-										@Override
-										public Object run() {
-											// Code might have restrictions on
-											// accessing
-											// items from elsewhere.
-											try {
-												request.open(Method.GET, getFullURL(scriptURI), false);
-												request.send();
-											} catch (IOException thrown) {
-												logger.error(
-														"processScript()",
-														thrown);
-											}
-											return null;
-										}
-									});
+							AccessController.doPrivileged(new PrivilegedAction<Object>() {
+								@Override
+								public Object run() {
+									// Code might have restrictions on
+									// accessing
+									// items from elsewhere.
+									try {
+										request.open(Method.GET, getFullURL(scriptURI), false);
+										request.send();
+									} catch (IOException thrown) {
+										logger.error("processScript()", thrown);
+									}
+									return null;
+								}
+							});
 						}
 						int status = request.getStatus();
-						if ((status != 200) && (status != 0)) {
+						if (status != 200 && status != 0) {
 							text = httpURLConnection(scriptURI);
 						} else {
 							text = request.getResponseText();
@@ -280,51 +287,42 @@ HTMLScriptElement {
 					} finally {
 						if (liflag) {
 							long time2 = System.currentTimeMillis();
-							logger.info("processScript(): Loaded external Javascript from URI=["
-									+ scriptURI
-									+ "] in "
-									+ (time2 - time1)
-									+ " ms.");
+							logger.info("processScript(): Loaded external Javascript from URI=[" + scriptURI + "] in "
+									+ (time2 - time1) + " ms.");
 						}
 					}
 					baseLineNumber = 1;
 				}
-				Context ctx = Executor.createContext(this.getDocumentURL(),
-						bcontext);
+				Context ctx = Executor.createContext(this.getDocumentURL(), bcontext);
 				try {
-					Scriptable scope = (Scriptable) doc
-							.getUserData(Executor.SCOPE_KEY);
+					Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
 					if (scope != null) {
 
 						long time1 = liflag ? System.currentTimeMillis() : 0;
 						if (text != null) {
-							ctx.evaluateString(scope, text, scriptURI,
-									baseLineNumber, null);
+							ctx.evaluateString(scope, text, scriptURI, baseLineNumber, null);
 							if (liflag) {
 								long time2 = System.currentTimeMillis();
 								logger.info("addNotify(): Evaluated (or attempted to evaluate) Javascript in "
 										+ (time2 - time1) + " ms.");
 							}
 						} else {
-							logger.error("No Script at uri "  + scriptURI);
+							logger.error("No Script at uri " + scriptURI);
 						}
 					} else {
 						logger.error("No Scope");
 					}
 
 				} catch (EcmaError ecmaError) {
-					logger.error(
-							"Javascript error at " + ecmaError.sourceName()
-									+ ":" + ecmaError.columnNumber() + ": "
-									+ ecmaError.getMessage());
-				} catch (EvaluatorException e){
+					logger.error("Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.columnNumber() + ": "
+							+ ecmaError.getMessage());
+				} catch (EvaluatorException e) {
 					logger.error(e.getMessage());
 				} catch (MissingResourceException err) {
 					logger.error("Missing Resource");
 				} catch (Exception err) {
 					logger.error("scriptURI: " + scriptURI);
-					logger.error(
-							"Unable to evaluate Javascript code", err);
+					logger.error("Unable to evaluate Javascript code", err);
 				} finally {
 					Context.exit();
 				}
@@ -333,11 +331,12 @@ HTMLScriptElement {
 			logger.error("No user agent context");
 		}
 	}
-    
-    /**
+
+	/**
 	 * Http url connection.
 	 *
-	 * @param url the url
+	 * @param url
+	 *            the url
 	 * @return the string
 	 */
 	private static String httpURLConnection(String srtUrl) {
@@ -347,7 +346,8 @@ HTMLScriptElement {
 		try {
 
 			URL url = new URL(srtUrl);
-			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(),
+					url.getQuery(), url.getRef());
 			URL obj = uri.toURL();
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
@@ -369,15 +369,17 @@ HTMLScriptElement {
 		return response.toString();
 	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
-     * StringBuffer)
-     */
-    @Override
-    protected void appendInnerTextImpl(StringBuffer buffer) {
-        // nop
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
+	 * StringBuffer)
+	 */
+	@Override
+	protected void appendInnerTextImpl(StringBuffer buffer) {
+		// nop
+	}
 
 	@Override
 	public boolean getAsync() {
@@ -388,6 +390,6 @@ HTMLScriptElement {
 	@Override
 	public void setAsync(boolean async) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

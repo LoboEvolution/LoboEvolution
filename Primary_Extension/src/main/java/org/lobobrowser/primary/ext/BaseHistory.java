@@ -85,7 +85,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			Collection<String> items = new LinkedList<String>();
 			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
 			int count = 0;
-			while (i.hasNext() && (count++ < maxNumItems)) {
+			while (i.hasNext() && count++ < maxNumItems) {
 				TimedEntry entry = i.next();
 				items.add(entry.value);
 			}
@@ -105,7 +105,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			Collection<T> items = new LinkedList<T>();
 			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
 			int count = 0;
-			while (i.hasNext() && (count++ < maxNumItems)) {
+			while (i.hasNext() && count++ < maxNumItems) {
 				TimedEntry entry = i.next();
 				items.add(entry.itemInfo);
 			}
@@ -128,7 +128,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			while (i.hasNext()) {
 				TimedEntry entry = i.next();
 				String host = entry.url.getHost();
-				if ((host != null) && (host.length() != 0)) {
+				if (host != null && host.length() != 0) {
 					if (!hosts.contains(host)) {
 						hosts.add(host);
 						if (hosts.size() >= maxNumItems) {

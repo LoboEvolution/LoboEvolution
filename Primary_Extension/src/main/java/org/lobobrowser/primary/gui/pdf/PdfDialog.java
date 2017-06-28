@@ -50,10 +50,6 @@ import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.Box;
@@ -80,6 +76,9 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileFilter;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.util.SSLCertificate;
 
 import com.sun.pdfview.OutlineNode;
@@ -172,7 +171,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
 		} catch (Exception e) {
-			logger.log(Level.ERROR,e);
+			logger.log(Level.ERROR, e);
 		}
 		return icon;
 	}
@@ -235,8 +234,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The fit in window action. */
-	Action fitInWindowAction = new AbstractAction("Fit in window",
-			getIcon("/org/lobobrowser/images/zoomout.png")) {
+	Action fitInWindowAction = new AbstractAction("Fit in window", getIcon("/org/lobobrowser/images/zoomout.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -479,7 +477,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		} else if (pagenum >= curFile.getNumPages()) {
 			pagenum = curFile.getNumPages() - 1;
 		}
-		
+
 		curpage = pagenum;
 		// update the page text field
 		pageField.setText(String.valueOf(curpage + 1));
@@ -545,7 +543,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		public void run() {
 			Dimension size = null;
 			Rectangle2D clip = null;
-			
+
 			if (fspp != null) {
 				fspp.waitForCurrentPage();
 				size = fspp.getCurSize();
@@ -557,7 +555,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			}
 			if (waitforPage == curpage) {
 				PDFPage pdfPage = curFile.getPage(prepPage + 1, true);
-				if ((pdfPage != null) && (waitforPage == curpage)) {
+				if (pdfPage != null && waitforPage == curpage) {
 					pdfPage.getImage(size.width, size.height, clip, null, true, true);
 				}
 			}
@@ -569,7 +567,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 */
 	public void setEnabling() {
 		boolean fileavailable = curFile != null;
-		boolean pageshown = ((fspp != null) ? fspp.getPage() != null : page.getPage() != null);
+		boolean pageshown = fspp != null ? fspp.getPage() != null : page.getPage() != null;
 		boolean printable = fileavailable && curFile.isPrintable();
 		pageField.setEnabled(fileavailable);
 		printAction.setEnabled(printable);
@@ -1076,11 +1074,11 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 */
 	public void setFullScreenMode(boolean full, boolean force) {
 		// curpage= -1;
-		if (full && (fullScreen == null)) {
+		if (full && fullScreen == null) {
 			fullScreenAction.setEnabled(false);
 			new Thread(new PerformFullScreenMode(force), getClass().getName() + ".setFullScreenMode").start();
 			fullScreenButton.setSelected(true);
-		} else if (!full && (fullScreen != null)) {
+		} else if (!full && fullScreen != null) {
 			fullScreen.close();
 			fspp = null;
 			fullScreen = null;
@@ -1145,7 +1143,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		 *            the keyval
 		 */
 		public synchronized void keyTyped(int keyval) {
-			value = (value * 10) + keyval;
+			value = value * 10 + keyval;
 			timeout = System.currentTimeMillis() + TIMEOUT;
 			if (anim == null) {
 				anim = new Thread(this);
@@ -1204,7 +1202,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	@Override
 	public void keyTyped(KeyEvent evt) {
 		char key = evt.getKeyChar();
-		if ((key >= '0') && (key <= '9')) {
+		if (key >= '0' && key <= '9') {
 			int val = key - '0';
 			pb.keyTyped(val);
 		}

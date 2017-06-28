@@ -38,62 +38,65 @@ import org.lobobrowser.context.VolatileContentImpl;
  */
 public class VcURLConnection extends URLConnection {
 
-    /** The vc. */
-    private final VolatileContentImpl vc;
+	/** The vc. */
+	private final VolatileContentImpl vc;
 
-    /**
-     * Instantiates a new vc url connection.
-     *
-     * @param url
-     *            the url
-     */
-    public VcURLConnection(URL url) {
-        super(url);
-        String file = url.getPath();
-        try {
-            long id = Long.parseLong(file.trim());
-            this.vc = VolatileContentImpl.getVolatileContent(id);
-            if (this.vc == null) {
-                throw new IllegalArgumentException(
-                        "Content either invalid or no longer available");
-            }
-        } catch (NumberFormatException nfe) {
-            throw new IllegalArgumentException("Bad path: " + file);
-        }
-    }
+	/**
+	 * Instantiates a new vc url connection.
+	 *
+	 * @param url
+	 *            the url
+	 */
+	public VcURLConnection(URL url) {
+		super(url);
+		String file = url.getPath();
+		try {
+			long id = Long.parseLong(file.trim());
+			this.vc = VolatileContentImpl.getVolatileContent(id);
+			if (this.vc == null) {
+				throw new IllegalArgumentException("Content either invalid or no longer available");
+			}
+		} catch (NumberFormatException nfe) {
+			throw new IllegalArgumentException("Bad path: " + file);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#connect()
-     */
-    @Override
-    public void connect() throws IOException {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#connect()
+	 */
+	@Override
+	public void connect() throws IOException {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getContentLength()
-     */
-    @Override
-    public int getContentLength() {
-        return this.vc.getBytes().length;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getContentLength()
+	 */
+	@Override
+	public int getContentLength() {
+		return this.vc.getBytes().length;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getContentType()
-     */
-    @Override
-    public String getContentType() {
-        return this.vc.getContentType();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getContentType()
+	 */
+	@Override
+	public String getContentType() {
+		return this.vc.getContentType();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.net.URLConnection#getInputStream()
-     */
-    @Override
-    public InputStream getInputStream() throws IOException {
-        return new ByteArrayInputStream(this.vc.getBytes());
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.net.URLConnection#getInputStream()
+	 */
+	@Override
+	public InputStream getInputStream() throws IOException {
+		return new ByteArrayInputStream(this.vc.getBytes());
+	}
 }

@@ -29,38 +29,37 @@ import org.lobobrowser.clientlet.ClientletResponse;
  */
 public class NavigatorExceptionEvent extends NavigatorResponseEvent {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    /** The exception. */
-    private final Throwable exception;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	/** The exception. */
+	private final Throwable exception;
 
-    /**
-     * Instantiates a new navigator exception event.
-     *
-     * @param source
-     *            the source
-     * @param eventType
-     *            the event type
-     * @param clientletFrame
-     *            the clientlet frame
-     * @param response
-     *            the response
-     * @param exception
-     *            the exception
-     */
-    public NavigatorExceptionEvent(Object source, NavigatorEventType eventType,
-            NavigatorFrame clientletFrame, ClientletResponse response,
-            final Throwable exception) {
-        super(source, eventType, clientletFrame, response, response
-                .getRequestType());
-        this.exception = exception;
-    }
+	/**
+	 * Instantiates a new navigator exception event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param eventType
+	 *            the event type
+	 * @param clientletFrame
+	 *            the clientlet frame
+	 * @param response
+	 *            the response
+	 * @param exception
+	 *            the exception
+	 */
+	public NavigatorExceptionEvent(Object source, NavigatorEventType eventType, NavigatorFrame clientletFrame,
+			ClientletResponse response, final Throwable exception) {
+		super(source, eventType, clientletFrame, response, response.getRequestType());
+		this.exception = exception;
+	}
 
-    /** Gets the exception.
+	/**
+	 * Gets the exception.
 	 *
 	 * @return the exception
 	 */
-    public Throwable getException() {
-        return exception;
-    }
+	public Throwable getException() {
+		return exception;
+	}
 }

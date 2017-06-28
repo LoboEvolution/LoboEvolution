@@ -30,12 +30,12 @@ import org.w3c.dom.Node;
  */
 public interface NodeFilter {
 
-    /**
-     * Accept.
-     *
-     * @param node
-     *            the node
-     * @return true, if successful
-     */
-    boolean accept(Node node);
+	/**
+	 * Accept.
+	 *
+	 * @param node
+	 *            the node
+	 * @return true, if successful
+	 */
+	boolean accept(Node node);
 }

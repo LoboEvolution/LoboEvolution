@@ -48,10 +48,10 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 
 	/** The linear y1. */
 	private Double linearY1;
-	
+
 	/** The r1. */
 	private Double r1;
-	
+
 	/** The r2. */
 	private Double r2;
 
@@ -63,7 +63,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 		setLinearY(new Double(x1.toString()));
 		setLinearY1(new Double(y1.toString()));
 	}
-	
+
 	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
@@ -74,7 +74,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 		setR1(new Double(r1.toString()));
 		setR2(new Double(r2.toString()));
 	}
-	
+
 	@Override
 	public void addColorStop(String offset, String color) {
 		fractions.add(new Float(offset));
@@ -204,12 +204,13 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
-	 * @param r1 the r1 to set
+	 * @param r1
+	 *            the r1 to set
 	 */
 	public void setR1(Double r1) {
 		this.r1 = r1;
 	}
-	
+
 	/**
 	 * @return the r2
 	 */
@@ -218,7 +219,8 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
-	 * @param r2 the r2 to set
+	 * @param r2
+	 *            the r2 to set
 	 */
 	public void setR2(Double r2) {
 		this.r2 = r2;

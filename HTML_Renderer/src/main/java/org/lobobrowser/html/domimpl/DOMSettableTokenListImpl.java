@@ -25,38 +25,40 @@ import org.lobobrowser.w3c.html.DOMSettableTokenList;
 /**
  * The Class DOMSettableTokenListImpl.
  */
-public class DOMSettableTokenListImpl extends DOMTokenListImpl implements
-DOMSettableTokenList {
+public class DOMSettableTokenListImpl extends DOMTokenListImpl implements DOMSettableTokenList {
 
-    /**
-     * Instantiates a new DOM settable token list impl.
-     *
-     * @param element
-     *            the element
-     * @param itemValue
-     *            the item value
-     */
-    public DOMSettableTokenListImpl(HTMLElementImpl element, String itemValue) {
-        super(element, itemValue);
-    }
+	/**
+	 * Instantiates a new DOM settable token list impl.
+	 *
+	 * @param element
+	 *            the element
+	 * @param itemValue
+	 *            the item value
+	 */
+	public DOMSettableTokenListImpl(HTMLElementImpl element, String itemValue) {
+		super(element, itemValue);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.DOMSettableTokenList#getValue()
-     */
-    @Override
-    public String getValue() {
-        // TODO Auto-generated method stub
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.DOMSettableTokenList#getValue()
+	 */
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.DOMSettableTokenList#setValue(java.lang.String)
-     */
-    @Override
-    public void setValue(String value) {
-        // TODO Auto-generated method stub
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.w3c.html.DOMSettableTokenList#setValue(java.lang.String)
+	 */
+	@Override
+	public void setValue(String value) {
+		// TODO Auto-generated method stub
 
-    }
+	}
 }

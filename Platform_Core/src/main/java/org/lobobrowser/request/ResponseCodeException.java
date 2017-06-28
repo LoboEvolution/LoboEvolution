@@ -32,16 +32,16 @@ import java.io.IOException;
  */
 public class ResponseCodeException extends IOException {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new response code exception.
-     *
-     * @param responseCode
-     *            the response code
-     */
-    public ResponseCodeException(int responseCode) {
-        super("Response code: " + responseCode);
-    }
+	/**
+	 * Instantiates a new response code exception.
+	 *
+	 * @param responseCode
+	 *            the response code
+	 */
+	public ResponseCodeException(int responseCode) {
+		super("Response code: " + responseCode);
+	}
 }

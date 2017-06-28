@@ -69,7 +69,7 @@ public class BookmarksDialog extends JDialog {
 
 	/** The window. */
 	private NavigatorWindow window;
-	
+
 	/** The search. */
 	private final String SEARCH = "/org/lobobrowser/images/search.png";
 
@@ -112,7 +112,8 @@ public class BookmarksDialog extends JDialog {
 			}
 
 			@Override
-			public void changedUpdate(DocumentEvent e) {}
+			public void changedUpdate(DocumentEvent e) {
+			}
 
 		});
 	}
@@ -165,18 +166,22 @@ public class BookmarksDialog extends JDialog {
 
 				}
 			}
-			
-			@Override
-			public void mouseReleased(MouseEvent arg0) {}
 
 			@Override
-			public void mouseExited(MouseEvent arg0) {}
+			public void mouseReleased(MouseEvent arg0) {
+			}
 
 			@Override
-			public void mouseEntered(MouseEvent arg0) {}
+			public void mouseExited(MouseEvent arg0) {
+			}
 
 			@Override
-			public void mouseClicked(MouseEvent arg0) {}
+			public void mouseEntered(MouseEvent arg0) {
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
 		});
 		return new JScrollPane(jtable);
 	}

@@ -55,7 +55,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 */
 	@Override
 	public boolean hasFeature(String feature, String version) {
-		return "HTML".equals(feature) && ("2.0".compareTo(version) <= 0);
+		return "HTML".equals(feature) && "2.0".compareTo(version) <= 0;
 	}
 
 	/*
@@ -76,7 +76,8 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 * java.lang.String, org.w3c.dom.DocumentType)
 	 */
 	@Override
-	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException {
+	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype)
+			throws DOMException {
 		return new HTMLDocumentImpl(this.context);
 	}
 
@@ -88,7 +89,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 	 */
 	@Override
 	public Object getFeature(String feature, String version) {
-		if ("HTML".equals(feature) && ("2.0".compareTo(version) <= 0)) {
+		if ("HTML".equals(feature) && "2.0".compareTo(version) <= 0) {
 			return this;
 		} else {
 			return null;

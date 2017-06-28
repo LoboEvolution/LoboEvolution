@@ -148,7 +148,7 @@ public class RTable extends BaseElementRenderable {
 	@Override
 	public void paint(Graphics g) {
 		RenderState rs = this.modelNode.getRenderState();
-		if ((rs != null) && (rs.getVisibility() != RenderState.VISIBILITY_VISIBLE)) {
+		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
 			// Just don't paint it.
 			return;
 		}
@@ -229,7 +229,7 @@ public class RTable extends BaseElementRenderable {
 					}
 				}
 			}
-			layoutValue = new LayoutValue(tm.getTableWidth(), tm.getTableHeight(),false,false);
+			layoutValue = new LayoutValue(tm.getTableWidth(), tm.getTableHeight(), false, false);
 			if (sizeOnly) {
 				if (cachedLayout.size() > MAX_CACHE_SIZE) {
 					// Unlikely, but we should ensure it's bounded.

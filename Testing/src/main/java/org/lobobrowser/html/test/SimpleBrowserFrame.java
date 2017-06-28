@@ -40,7 +40,7 @@ import org.w3c.dom.Document;
  * @see HtmlRendererContext#createBrowserFrame()
  */
 public class SimpleBrowserFrame extends HtmlPanel implements BrowserFrame {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 

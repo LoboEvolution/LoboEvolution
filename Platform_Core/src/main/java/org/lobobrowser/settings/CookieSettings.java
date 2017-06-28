@@ -22,10 +22,8 @@ package org.lobobrowser.settings;
 
 import java.io.Serializable;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
@@ -34,47 +32,45 @@ import org.lobobrowser.store.StorageManager;
  */
 public class CookieSettings implements Serializable {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(CookieSettings.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(CookieSettings.class.getName());
 
-    /** The Constant instance. */
-    private static final CookieSettings instance;
+	/** The Constant instance. */
+	private static final CookieSettings instance;
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 22574500005000503L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 22574500005000503L;
 
-    static {
-        CookieSettings ins = null;
-        try {
-            ins = (CookieSettings) StorageManager.getInstance()
-                    .retrieveSettings(CookieSettings.class.getSimpleName(),
-                            CookieSettings.class.getClassLoader());
-        } catch (Exception err) {
-            logger.error(
-                    "getInstance(): Unable to retrieve settings.", err);
-        }
-        if (ins == null) {
-            ins = new CookieSettings();
-        }
-        instance = ins;
-    }
+	static {
+		CookieSettings ins = null;
+		try {
+			ins = (CookieSettings) StorageManager.getInstance().retrieveSettings(CookieSettings.class.getSimpleName(),
+					CookieSettings.class.getClassLoader());
+		} catch (Exception err) {
+			logger.error("getInstance(): Unable to retrieve settings.", err);
+		}
+		if (ins == null) {
+			ins = new CookieSettings();
+		}
+		instance = ins;
+	}
 
-    /**
-     * Instantiates a new cookie settings.
-     */
-    private CookieSettings() {
-    }
+	/**
+	 * Instantiates a new cookie settings.
+	 */
+	private CookieSettings() {
+	}
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static CookieSettings getInstance() {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
-            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-        }
-        return instance;
-    }
+	public static CookieSettings getInstance() {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+		}
+		return instance;
+	}
 }

@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLOutputElement.
  */
 public interface HTMLOutputElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the html for.
 	 *

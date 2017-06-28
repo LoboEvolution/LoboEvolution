@@ -41,10 +41,10 @@ public class InputNumberControl extends BaseInputTextControl {
 
 	/** The numeric. */
 	private JTextFieldImpl numeric;
-	
+
 	/** The min. */
 	private String min = "";
-	
+
 	/** The max. */
 	private String max = "";
 
@@ -79,7 +79,7 @@ public class InputNumberControl extends BaseInputTextControl {
 				} else {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-					if ((min != null && min.length() > 0) && (max != null && max.length() > 0)) {
+					if (min != null && min.length() > 0 && max != null && max.length() > 0) {
 						try {
 							int intText = new Integer(num.getText());
 							int intMin = new Integer(min);
@@ -111,7 +111,7 @@ public class InputNumberControl extends BaseInputTextControl {
 
 	private boolean isNumeric(String keyCode) {
 		try {
-			if (keyCode == null || (keyCode != null && keyCode.length() == 0)) {
+			if (keyCode == null || keyCode != null && keyCode.length() == 0) {
 				return true;
 			}
 			Integer.parseInt(keyCode);

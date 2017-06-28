@@ -23,10 +23,8 @@ package org.lobobrowser.settings;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
@@ -36,90 +34,89 @@ import org.lobobrowser.store.StorageManager;
  */
 public class BooleanSettings implements Serializable {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(BooleanSettings.class
-            .getName());
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(BooleanSettings.class.getName());
 
-    /** The Constant instance. */
-    private static final BooleanSettings instance;
+	/** The Constant instance. */
+	private static final BooleanSettings instance;
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 22574500900000604L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 22574500900000604L;
 
-    /**
-     * Whether chunked encoding is used in POSTs. Note that some servers (e.g.
-     * Wikimedia) apparently expect a content length.
-     */
-    private boolean httpUseChunkedEncodingPOST;
+	/**
+	 * Whether chunked encoding is used in POSTs. Note that some servers (e.g.
+	 * Wikimedia) apparently expect a content length.
+	 */
+	private boolean httpUseChunkedEncodingPOST;
 
-    static {
-        BooleanSettings ins = null;
-        try {
-            ins = (BooleanSettings) StorageManager.getInstance()
-                    .retrieveSettings(BooleanSettings.class.getSimpleName(),
-                            BooleanSettings.class.getClassLoader());
-        } catch (Exception err) {
-            logger.error("Unable to retrieve settings.", err);
-        }
-        if (ins == null) {
-            ins = new BooleanSettings();
-        }
-        instance = ins;
-    }
+	static {
+		BooleanSettings ins = null;
+		try {
+			ins = (BooleanSettings) StorageManager.getInstance().retrieveSettings(BooleanSettings.class.getSimpleName(),
+					BooleanSettings.class.getClassLoader());
+		} catch (Exception err) {
+			logger.error("Unable to retrieve settings.", err);
+		}
+		if (ins == null) {
+			ins = new BooleanSettings();
+		}
+		instance = ins;
+	}
 
-    /**
-     * Instantiates a new boolean settings.
-     */
-    private BooleanSettings() {
-        this.resetDefaults();
-    }
+	/**
+	 * Instantiates a new boolean settings.
+	 */
+	private BooleanSettings() {
+		this.resetDefaults();
+	}
 
-    /**
-     * Reset defaults.
-     */
-    private void resetDefaults() {
-        this.httpUseChunkedEncodingPOST = false;
-    }
+	/**
+	 * Reset defaults.
+	 */
+	private void resetDefaults() {
+		this.httpUseChunkedEncodingPOST = false;
+	}
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static BooleanSettings getInstance() {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
-            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-        }
-        return instance;
-    }
+	public static BooleanSettings getInstance() {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+		}
+		return instance;
+	}
 
-    /**
-     * Save.
-     */
-    public void save() {
-        try {
-            StorageManager.getInstance().saveSettings(
-                    this.getClass().getSimpleName(), this);
-        } catch (IOException ioe) {
-            logger.error("Unable to save settings: "
-                    + this.getClass().getSimpleName(), ioe);
-        }
-    }
+	/**
+	 * Save.
+	 */
+	public void save() {
+		try {
+			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
+		} catch (IOException ioe) {
+			logger.error("Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+		}
+	}
 
-    /** Checks if is whether chunked encoding is used in POSTs.
+	/**
+	 * Checks if is whether chunked encoding is used in POSTs.
 	 *
 	 * @return the whether chunked encoding is used in POSTs
 	 */
-    public boolean isHttpUseChunkedEncodingPOST() {
-        return httpUseChunkedEncodingPOST;
-    }
+	public boolean isHttpUseChunkedEncodingPOST() {
+		return httpUseChunkedEncodingPOST;
+	}
 
-    /** Sets the whether chunked encoding is used in POSTs.
+	/**
+	 * Sets the whether chunked encoding is used in POSTs.
 	 *
 	 * @param httpUseChunkedEncodingPOST
 	 *            the new whether chunked encoding is used in POSTs
 	 */
-    public void setHttpUseChunkedEncodingPOST(boolean httpUseChunkedEncodingPOST) {
-        this.httpUseChunkedEncodingPOST = httpUseChunkedEncodingPOST;
-    }
+	public void setHttpUseChunkedEncodingPOST(boolean httpUseChunkedEncodingPOST) {
+		this.httpUseChunkedEncodingPOST = httpUseChunkedEncodingPOST;
+	}
 }

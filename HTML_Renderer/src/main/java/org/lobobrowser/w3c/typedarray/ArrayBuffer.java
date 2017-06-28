@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.typedarray;
 
-
 /**
  * The Interface ArrayBuffer.
  */
 public interface ArrayBuffer {
-	
+
 	/**
 	 * Gets the byte length.
 	 *

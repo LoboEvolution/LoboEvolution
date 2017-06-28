@@ -63,10 +63,10 @@ public interface HtmlAttributeProperties {
 
 	/** The autocomplete. */
 	String AUTOCOMPLETE = "autocomplete";
-	
+
 	/** The attributeName. */
 	String ATTRIBUTE_NAME = "attributeName";
-	
+
 	/** The attributeType. */
 	String ATTRIBUTE_TYPE = "attributeType";
 
@@ -78,7 +78,7 @@ public interface HtmlAttributeProperties {
 
 	/** The border. */
 	String BORDER = "border";
-	
+
 	/** The begin. */
 	String BEGIN = "begin";
 
@@ -102,10 +102,10 @@ public interface HtmlAttributeProperties {
 
 	/** The compact. */
 	String COMPACT = "compact";
-	
+
 	/** The contentScriptType **/
 	String CONTENTSCRIPTTYPE = "contentScriptType";
-	
+
 	/** The contentStyleType **/
 	String CONTENTSTYLETYPE = "contentStyleType";
 
@@ -126,10 +126,10 @@ public interface HtmlAttributeProperties {
 
 	/** The cellpadding. */
 	String CELLPADDING = "cellPadding";
-	
+
 	/** The CY. */
 	String CY = "cy";
-	
+
 	/** The CX. */
 	String CX = "cx";
 
@@ -144,7 +144,7 @@ public interface HtmlAttributeProperties {
 
 	/** The class. */
 	String CLASS = "class";
-	
+
 	/** The class. */
 	String CLIPPATH = "clip-path";
 
@@ -153,13 +153,13 @@ public interface HtmlAttributeProperties {
 
 	/** The clear. */
 	String CLEAR = "clear";
-	
+
 	/** The DY. */
 	String DY = "dy";
-	
+
 	/** The DX. */
 	String DX = "dx";
-	
+
 	/** The DUR. */
 	String DUR = "dur";
 
@@ -189,18 +189,18 @@ public interface HtmlAttributeProperties {
 
 	/** The event. */
 	String EVENT = "event";
-	
+
 	/** The FY. */
 	String FY = "fy";
-	
+
 	/** The FX. */
 	String FX = "fx";
 
 	/** The face. */
 	String FACE = "face";
-	
+
 	String FILL = "fill";
-	
+
 	/** The for. */
 	String FOR = "For";
 
@@ -227,16 +227,16 @@ public interface HtmlAttributeProperties {
 
 	/** The frameborder. */
 	String FRAMEBORDER = "frameBorder";
-	
+
 	/** The font-size. */
 	String FONTSIZE = "font-size";
-	
+
 	/** The font-family. */
 	String FONTFAMILY = "font-family";
-	
+
 	/** The from. */
 	String FROM = "from";
-	
+
 	/** The gradientTransform. */
 	String GRADIENT_TRANSFORM = "gradientTransform";
 
@@ -281,13 +281,13 @@ public interface HtmlAttributeProperties {
 
 	/** The itemprop. */
 	String ITEMPROP = "itemprop";
-	
+
 	/** The y. */
 	String Y = "y";
-	
+
 	/** The y1. */
 	String Y1 = "y1";
-	
+
 	/** The y2. */
 	String Y2 = "y2";
 
@@ -359,7 +359,7 @@ public interface HtmlAttributeProperties {
 
 	/** The object. */
 	String OBJECT = "object";
-	
+
 	/** The offset. */
 	String OFFSET = "offset";
 
@@ -374,7 +374,7 @@ public interface HtmlAttributeProperties {
 
 	/** The points. */
 	String POINTS = "points";
-	
+
 	/** The poster. */
 	String POSTER = "poster";
 
@@ -386,13 +386,13 @@ public interface HtmlAttributeProperties {
 
 	/** The profile. */
 	String PROFILE = "profile";
-	
+
 	/** The r. */
 	String R = "r";
-	
+
 	/** The ry. */
 	String RY = "ry";
-	
+
 	/** The rx. */
 	String RX = "rx";
 
@@ -434,13 +434,13 @@ public interface HtmlAttributeProperties {
 
 	/** The step. */
 	String STEP = "step";
-	
+
 	/** The stop-color. */
 	String STOP_COLOR = "stop-color";
-	
+
 	/** The stop-opacity. */
 	String STOP_OPACITY = "stop-opacity";
-	
+
 	/** The stroke. */
 	String STROKE = "stroke";
 
@@ -485,16 +485,16 @@ public interface HtmlAttributeProperties {
 
 	/** The topmargin. */
 	String TOPMARGIN = "topmargin";
-	
+
 	/** The textanchor. */
 	String TEXTANCHOR = "text-anchor";
 
 	/** The textalign. */
 	String TEXTALIGN = "text-align";
-	
+
 	/** The trasform. */
 	String TRANSFORM = "transform";
-	
+
 	/** The to. */
 	String TO = "to";
 
@@ -515,7 +515,7 @@ public interface HtmlAttributeProperties {
 
 	/** The valign. */
 	String VALIGN = "valign";
-	
+
 	/** The viewBox. */
 	String VIEW_BOX = "viewBox";
 
@@ -527,15 +527,14 @@ public interface HtmlAttributeProperties {
 
 	/** The x. */
 	String X = "x";
-	
+
 	/** The x1. */
 	String X1 = "x1";
-	
+
 	/** The x2. */
 	String X2 = "x2";
-	
+
 	/** The xlink:href. */
 	String XLINK_HREF = "xlink:href";
-	
-	
+
 }

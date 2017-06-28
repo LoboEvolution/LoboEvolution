@@ -232,7 +232,7 @@ public final class RBlank extends BaseBoundableRenderable {
 			}
 			if ((td & RenderState.MASK_TEXTDECORATION_LINE_THROUGH) != 0) {
 				FontMetrics fm = this.fontMetrics;
-				int lineOffset = fm.getLeading() + ((fm.getAscent() + fm.getDescent()) / 2);
+				int lineOffset = fm.getLeading() + (fm.getAscent() + fm.getDescent()) / 2;
 				g.drawLine(0, lineOffset, this.width, lineOffset);
 			}
 			if ((td & RenderState.MASK_TEXTDECORATION_OVERLINE) != 0) {
@@ -265,7 +265,7 @@ public final class RBlank extends BaseBoundableRenderable {
 	 */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-		if ((this == startPoint.getRenderable()) || (this == endPoint.getRenderable())) {
+		if (this == startPoint.getRenderable() || this == endPoint.getRenderable()) {
 			if (inSelection) {
 				return false;
 			}
@@ -291,7 +291,7 @@ public final class RBlank extends BaseBoundableRenderable {
 	@Override
 	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
-		if ((this == startPoint.getRenderable()) || (this == endPoint.getRenderable())) {
+		if (this == startPoint.getRenderable() || this == endPoint.getRenderable()) {
 			if (inSelection) {
 				return false;
 			}

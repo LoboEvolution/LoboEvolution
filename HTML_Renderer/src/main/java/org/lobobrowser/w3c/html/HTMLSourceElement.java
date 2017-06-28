@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLSourceElement.
  */
 public interface HTMLSourceElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the src.
 	 *

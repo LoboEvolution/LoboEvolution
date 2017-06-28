@@ -29,16 +29,16 @@ import org.lobobrowser.html.renderer.RBlockViewport;
  * The Class BrLayout.
  */
 public class BrLayout implements MarkupLayout {
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
-     * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
-     */
-    @Override
-    public void layoutMarkup(RBlockViewport bodyLayout,
-            HTMLElementImpl markupElement) {
-        String clear = markupElement
-                .getAttribute(HtmlAttributeProperties.CLEAR);
-        bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.render.MarkupLayout#layoutMarkup(java.awt.Container
+	 * , java.awt.Insets, org.lobobrowser.html.dombl.HTMLElementImpl)
+	 */
+	@Override
+	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		String clear = markupElement.getAttribute(HtmlAttributeProperties.CLEAR);
+		bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
+	}
 }

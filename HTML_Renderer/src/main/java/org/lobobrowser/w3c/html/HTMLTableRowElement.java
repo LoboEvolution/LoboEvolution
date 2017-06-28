@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLTableRowElement.
  */
 public interface HTMLTableRowElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the row index.
 	 *
@@ -59,7 +58,8 @@ public interface HTMLTableRowElement extends HTMLElement {
 	/**
 	 * Insert cell.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the HTML element
 	 */
 	public HTMLElement insertCell(int index);
@@ -67,7 +67,8 @@ public interface HTMLTableRowElement extends HTMLElement {
 	/**
 	 * Delete cell.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 */
 	public void deleteCell(int index);
 

@@ -49,7 +49,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	@Override
 	public double getValue() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -71,7 +71,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	@Override
 	public double getMin() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.MIN);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -93,7 +93,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	@Override
 	public double getMax() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.MAX);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	@Override
 	public double getLow() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.LOW);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -137,7 +137,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	@Override
 	public double getHigh() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -159,7 +159,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	@Override
 	public double getOptimum() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.OPTINUM);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

@@ -21,13 +21,14 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLOptGroupElement.
  */
 public interface HTMLOptGroupElement extends HTMLElement {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	// HTMLOptGroupElement
@@ -42,7 +43,9 @@ public interface HTMLOptGroupElement extends HTMLElement {
 	 */
 	public void setDisabled(boolean disabled);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getLabel()
 	 */
 	@Override

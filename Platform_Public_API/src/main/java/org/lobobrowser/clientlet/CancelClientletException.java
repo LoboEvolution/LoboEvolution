@@ -34,45 +34,45 @@ package org.lobobrowser.clientlet;
  */
 public class CancelClientletException extends ClientletException {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new cancel clientlet exception.
-     *
-     * @param message
-     *            the message
-     */
-    public CancelClientletException(String message) {
-        super(message);
-    }
+	/**
+	 * Instantiates a new cancel clientlet exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public CancelClientletException(String message) {
+		super(message);
+	}
 
-    /**
-     * Instantiates a new cancel clientlet exception.
-     */
-    public CancelClientletException() {
-        super("");
-    }
+	/**
+	 * Instantiates a new cancel clientlet exception.
+	 */
+	public CancelClientletException() {
+		super("");
+	}
 
-    /**
-     * Instantiates a new cancel clientlet exception.
-     *
-     * @param message
-     *            the message
-     * @param rootCause
-     *            the root cause
-     */
-    public CancelClientletException(String message, Throwable rootCause) {
-        super(message, rootCause);
-    }
+	/**
+	 * Instantiates a new cancel clientlet exception.
+	 *
+	 * @param message
+	 *            the message
+	 * @param rootCause
+	 *            the root cause
+	 */
+	public CancelClientletException(String message, Throwable rootCause) {
+		super(message, rootCause);
+	}
 
-    /**
-     * Instantiates a new cancel clientlet exception.
-     *
-     * @param rootCause
-     *            the root cause
-     */
-    public CancelClientletException(Throwable rootCause) {
-        super(rootCause);
-    }
+	/**
+	 * Instantiates a new cancel clientlet exception.
+	 *
+	 * @param rootCause
+	 *            the root cause
+	 */
+	public CancelClientletException(Throwable rootCause) {
+		super(rootCause);
+	}
 }

@@ -22,21 +22,20 @@
 package org.lobobrowser.w3c.smil;
 
 /**
- *  Declares layout type for the document. See the  LAYOUT element definition .
- *  
+ * Declares layout type for the document. See the LAYOUT element definition .
+ * 
  */
 public interface SMILLayoutElement extends SMILElement {
-    /**
-     *  The mime type of the layout langage used in this layout element.The 
-     * default value of the type attribute is "text/smil-basic-layout". 
-     */
-    public String getType();
+	/**
+	 * The mime type of the layout langage used in this layout element.The
+	 * default value of the type attribute is "text/smil-basic-layout".
+	 */
+	public String getType();
 
-    /**
-     *  <code>true</code> if the player can understand the mime type, 
-     * <code>false</code> otherwise. 
-     */
-    public boolean getResolved();
+	/**
+	 * <code>true</code> if the player can understand the mime type,
+	 * <code>false</code> otherwise.
+	 */
+	public boolean getResolved();
 
 }
-

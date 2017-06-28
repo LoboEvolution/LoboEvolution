@@ -27,72 +27,74 @@ import org.lobobrowser.html.dombl.ModelNode;
  */
 public class LineBreak {
 
-    /** The Constant NONE. */
-    public static final int NONE = 0;
+	/** The Constant NONE. */
+	public static final int NONE = 0;
 
-    /** The Constant LEFT. */
-    public static final int LEFT = 1;
+	/** The Constant LEFT. */
+	public static final int LEFT = 1;
 
-    /** The Constant RIGHT. */
-    public static final int RIGHT = 2;
+	/** The Constant RIGHT. */
+	public static final int RIGHT = 2;
 
-    /** The Constant ALL. */
-    public static final int ALL = 3;
+	/** The Constant ALL. */
+	public static final int ALL = 3;
 
-    /** The break type. */
-    private final int breakType;
+	/** The break type. */
+	private final int breakType;
 
-    /** The new line node. */
-    private final ModelNode newLineNode;
+	/** The new line node. */
+	private final ModelNode newLineNode;
 
-    /**
-     * Instantiates a new line break.
-     *
-     * @param breakType
-     *            the break type
-     * @param newLineNode
-     *            the new line node
-     */
-    public LineBreak(final int breakType, ModelNode newLineNode) {
-        super();
-        this.breakType = breakType;
-        this.newLineNode = newLineNode;
-    }
+	/**
+	 * Instantiates a new line break.
+	 *
+	 * @param breakType
+	 *            the break type
+	 * @param newLineNode
+	 *            the new line node
+	 */
+	public LineBreak(final int breakType, ModelNode newLineNode) {
+		super();
+		this.breakType = breakType;
+		this.newLineNode = newLineNode;
+	}
 
-    /** Gets the break type.
+	/**
+	 * Gets the break type.
 	 *
 	 * @return the break type
 	 */
-    public int getBreakType() {
-        return this.breakType;
-    }
+	public int getBreakType() {
+		return this.breakType;
+	}
 
-    /** Gets the model node.
+	/**
+	 * Gets the model node.
 	 *
 	 * @return the model node
 	 */
-    public ModelNode getModelNode() {
-        return this.newLineNode;
-    }
+	public ModelNode getModelNode() {
+		return this.newLineNode;
+	}
 
-    /**
-     * Gets the break type.
-     *
-     * @param clearAttr
-     *            the clear attr
-     * @return the break type
-     */
-    public static int getBreakType(String clearAttr) {
-        if (clearAttr == null) {
-            return NONE;
-        } else if ("all".equalsIgnoreCase(clearAttr)) {
-            return ALL;
-        } else if ("left".equalsIgnoreCase(clearAttr)) {
-            return LEFT;
-        } else if ("right".equalsIgnoreCase(clearAttr)) {
-            return RIGHT;
-        } else {
-            return NONE;
-        }
-    }
+	/**
+	 * Gets the break type.
+	 *
+	 * @param clearAttr
+	 *            the clear attr
+	 * @return the break type
+	 */
+	public static int getBreakType(String clearAttr) {
+		if (clearAttr == null) {
+			return NONE;
+		} else if ("all".equalsIgnoreCase(clearAttr)) {
+			return ALL;
+		} else if ("left".equalsIgnoreCase(clearAttr)) {
+			return LEFT;
+		} else if ("right".equalsIgnoreCase(clearAttr)) {
+			return RIGHT;
+		} else {
+			return NONE;
+		}
+	}
 }

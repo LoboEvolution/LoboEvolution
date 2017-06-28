@@ -32,65 +32,67 @@ import org.lobobrowser.w3c.html.HTMLLIElement;
 /**
  * The Class HTMLLIElementImpl.
  */
-public class HTMLLIElementImpl extends HTMLAbstractUIElement implements
-HTMLLIElement {
+public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIElement {
 
-    /**
-     * Instantiates a new HTMLLI element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLLIElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTMLLI element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLLIElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLLIElement#getType()
-     */
-    @Override
-    public String getType() {
-        return this.getAttribute(HtmlAttributeProperties.TYPE);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLLIElement#getType()
+	 */
+	@Override
+	public String getType() {
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLLIElement#setType(java.lang.String)
-     */
-    @Override
-    public void setType(String type) {
-        this.setAttribute(HtmlAttributeProperties.TYPE, type);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLLIElement#setType(java.lang.String)
+	 */
+	@Override
+	public void setType(String type) {
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLLIElement#getValue()
-     */
-    @Override
-    public int getValue() {
-        String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLLIElement#getValue()
+	 */
+	@Override
+	public int getValue() {
+		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLLIElement#setValue(int)
-     */
-    @Override
-    public void setValue(int value) {
-        this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLLIElement#setValue(int)
+	 */
+	@Override
+	public void setValue(int value) {
+		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.lobobrowser
-     * .html.renderstate.RenderState)
-     */
-    @Override
-    protected RenderState createRenderState(RenderState prevRenderState) {
-        return new DisplayRenderState(prevRenderState, this,
-                RenderState.DISPLAY_LIST_ITEM);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domimpl.HTMLElementImpl#createRenderState(org.
+	 * lobobrowser .html.renderstate.RenderState)
+	 */
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_LIST_ITEM);
+	}
 }

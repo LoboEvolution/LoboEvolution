@@ -30,45 +30,49 @@ import java.io.InputStream;
  * The Class EmptyInputStream.
  */
 public class EmptyInputStream extends InputStream {
-    /**
-     * Instantiates a new empty input stream.
-     */
-    public EmptyInputStream() {
-        super();
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.io.InputStream#read()
-     */
-    @Override
-    public int read() throws IOException {
-        return -1;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.io.InputStream#available()
-     */
-    @Override
-    public int available() throws IOException {
-        return 0;
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.io.InputStream#close()
-     */
-    @Override
-    public void close() throws IOException {
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.io.InputStream#read(byte[], int, int)
-     */
-    @Override
-    public int read(byte[] b, int off, int len) throws IOException {
-        return -1;
-    }
+	/**
+	 * Instantiates a new empty input stream.
+	 */
+	public EmptyInputStream() {
+		super();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.InputStream#read()
+	 */
+	@Override
+	public int read() throws IOException {
+		return -1;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.InputStream#available()
+	 */
+	@Override
+	public int available() throws IOException {
+		return 0;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.InputStream#close()
+	 */
+	@Override
+	public void close() throws IOException {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.io.InputStream#read(byte[], int, int)
+	 */
+	@Override
+	public int read(byte[] b, int off, int len) throws IOException {
+		return -1;
+	}
 }

@@ -27,19 +27,19 @@ package org.lobobrowser.clientlet;
  * @see ClientletSelector#select(ClientletRequest, ClientletResponse)
  */
 public interface Clientlet {
-    /**
-     * This method is invoked by a clientlet engine to process a URL response.
-     * After the response is processed, the clientlet should either set
-     * displayable content via
-     * {@link ClientletContext#setResultingContent(ComponentContent)} or
-     * redirect navigation elsewhere.
-     *
-     * @param context
-     *            An instance of ClientletContext which represents the current
-     *            request context.
-     * @throws ClientletException
-     *             This may be thrown by a clientlet when there are document
-     *             errors.
-     */
-    void process(ClientletContext context) throws ClientletException;
+	/**
+	 * This method is invoked by a clientlet engine to process a URL response.
+	 * After the response is processed, the clientlet should either set
+	 * displayable content via
+	 * {@link ClientletContext#setResultingContent(ComponentContent)} or
+	 * redirect navigation elsewhere.
+	 *
+	 * @param context
+	 *            An instance of ClientletContext which represents the current
+	 *            request context.
+	 * @throws ClientletException
+	 *             This may be thrown by a clientlet when there are document
+	 *             errors.
+	 */
+	void process(ClientletContext context) throws ClientletException;
 }

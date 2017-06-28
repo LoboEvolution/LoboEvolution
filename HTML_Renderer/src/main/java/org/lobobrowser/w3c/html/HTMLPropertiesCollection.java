@@ -24,13 +24,14 @@ package org.lobobrowser.w3c.html;
 import org.w3c.dom.DOMStringList;
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface HTMLPropertiesCollection.
  */
 public interface HTMLPropertiesCollection extends HTMLCollection {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLCollection#namedItem(java.lang.String)
 	 */
 	// HTMLPropertiesCollection

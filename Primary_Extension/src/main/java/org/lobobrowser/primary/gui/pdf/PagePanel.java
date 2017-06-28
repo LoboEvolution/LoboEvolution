@@ -49,40 +49,40 @@ import com.sun.pdfview.PDFPage;
  */
 public class PagePanel extends JPanel implements ImageObserver, MouseListener, MouseMotionListener {
 
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(PagePanel.class);
-    		
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(PagePanel.class);
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The image of the rendered PDF page being displayed. */
 	Image currentImage;
-	
+
 	/** The current PDFPage that was rendered into currentImage. */
 	PDFPage currentPage;
-	
+
 	/** The current xform. */
 	/* the current transform from device space to page space */
 	AffineTransform currentXform;
-	
+
 	/** The horizontal offset of the image from the left edge of the panel. */
 	int offx;
-	
+
 	/** The vertical offset of the image from the top of the panel. */
 	int offy;
-	
+
 	/** the current clip, in device space. */
 	Rectangle2D clip;
-	
+
 	/** the clipping region used for the image. */
 	Rectangle2D prevClip;
-	
+
 	/** the size of the image. */
 	Dimension prevSize;
-	
+
 	/** the zooming marquee. */
 	Rectangle zoomRect;
-	
+
 	/** whether the zoom tool is enabled. */
 	boolean useZoom = false;
 
@@ -127,13 +127,13 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 		} else {
 			// start drawing -- clear the flag to indicate we're in progress.
 			flag.clear();
-			
+
 			Dimension sz = getSize();
 			if (sz.width + sz.height == 0) {
 				// no image to draw.
 				return;
 			}
-			
+
 			// calculate the clipping rectangle in page space from the
 			// desired clip in screen space.
 			Rectangle2D useClip = clip;
@@ -197,7 +197,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 			offx = (sz.width - imwid) / 2;
 			offy = (sz.height - imhgt) / 2;
 
-			if ((imwid == sz.width && imhgt <= sz.height) || (imhgt == sz.height && imwid <= sz.width)) {
+			if (imwid == sz.width && imhgt <= sz.height || imhgt == sz.height && imwid <= sz.width) {
 
 				g.drawImage(currentImage, offx, offy, this);
 
@@ -305,7 +305,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 
 	/** x location of the mouse-down event. */
 	int downx;
-	
+
 	/** y location of the mouse-down event. */
 	int downy;
 

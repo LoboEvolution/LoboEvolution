@@ -29,23 +29,23 @@ import java.io.IOException;
  */
 public class QuotaExceededException extends IOException {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new quota exceeded exception.
-     */
-    public QuotaExceededException() {
-        super();
-    }
+	/**
+	 * Instantiates a new quota exceeded exception.
+	 */
+	public QuotaExceededException() {
+		super();
+	}
 
-    /**
-     * Instantiates a new quota exceeded exception.
-     *
-     * @param message
-     *            the message
-     */
-    public QuotaExceededException(String message) {
-        super(message);
-    }
+	/**
+	 * Instantiates a new quota exceeded exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public QuotaExceededException(String message) {
+		super(message);
+	}
 }

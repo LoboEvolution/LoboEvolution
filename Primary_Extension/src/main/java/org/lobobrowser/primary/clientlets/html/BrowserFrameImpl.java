@@ -26,9 +26,9 @@ package org.lobobrowser.primary.clientlets.html;
 import java.awt.Component;
 import java.awt.Insets;
 import java.net.URL;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.ua.NavigatorFrame;

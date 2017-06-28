@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLTextAreaElement.
  */
 public interface HTMLTextAreaElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the autofocus.
 	 *
@@ -75,9 +74,12 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	 */
 	public void setDirName(String dirName);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
+	@Override
 	public boolean getDisabled();
 
 	/**
@@ -340,17 +342,22 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	/**
 	 * Sets the selection range.
 	 *
-	 * @param start the start
-	 * @param end the end
+	 * @param start
+	 *            the start
+	 * @param end
+	 *            the end
 	 */
 	public void setSelectionRange(int start, int end);
 
 	/**
 	 * Sets the selection range.
 	 *
-	 * @param start the start
-	 * @param end the end
-	 * @param direction the direction
+	 * @param start
+	 *            the start
+	 * @param end
+	 *            the end
+	 * @param direction
+	 *            the direction
 	 */
 	public void setSelectionRange(int start, int end, String direction);
 }

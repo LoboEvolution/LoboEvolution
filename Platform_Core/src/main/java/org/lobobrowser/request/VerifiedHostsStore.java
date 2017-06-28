@@ -29,49 +29,50 @@ import java.util.Set;
  */
 public class VerifiedHostsStore {
 
-    /** The Constant instance. */
-    private static final VerifiedHostsStore instance = new VerifiedHostsStore();
+	/** The Constant instance. */
+	private static final VerifiedHostsStore instance = new VerifiedHostsStore();
 
-    /** The hosts. */
-    private final Set hosts = new HashSet();
+	/** The hosts. */
+	private final Set hosts = new HashSet();
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static VerifiedHostsStore getInstance() {
-        return instance;
-    }
+	public static VerifiedHostsStore getInstance() {
+		return instance;
+	}
 
-    /**
-     * Instantiates a new verified hosts store.
-     */
-    public VerifiedHostsStore() {
-        super();
-    }
+	/**
+	 * Instantiates a new verified hosts store.
+	 */
+	public VerifiedHostsStore() {
+		super();
+	}
 
-    /**
-     * Contains.
-     *
-     * @param host
-     *            the host
-     * @return true, if successful
-     */
-    public boolean contains(String host) {
-        synchronized (this.hosts) {
-            return this.hosts.contains(host);
-        }
-    }
+	/**
+	 * Contains.
+	 *
+	 * @param host
+	 *            the host
+	 * @return true, if successful
+	 */
+	public boolean contains(String host) {
+		synchronized (this.hosts) {
+			return this.hosts.contains(host);
+		}
+	}
 
-    /**
-     * Adds the.
-     *
-     * @param host
-     *            the host
-     */
-    public void add(String host) {
-        synchronized (this.hosts) {
-            this.hosts.add(host);
-        }
-    }
+	/**
+	 * Adds the.
+	 *
+	 * @param host
+	 *            the host
+	 */
+	public void add(String host) {
+		synchronized (this.hosts) {
+			this.hosts.add(host);
+		}
+	}
 }

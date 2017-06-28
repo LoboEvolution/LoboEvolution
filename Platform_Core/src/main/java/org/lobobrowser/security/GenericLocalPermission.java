@@ -28,20 +28,20 @@ import java.security.Permission;
  */
 public class GenericLocalPermission extends BasicPermission {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    // public static final java.security.Permission FRAME_PARENT = new
-    // GenericLocalPermission("frame-parent");
-    /** The Constant EXT_GENERIC. */
-    public static final Permission EXT_GENERIC = new GenericLocalPermission("extension");
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	// public static final java.security.Permission FRAME_PARENT = new
+	// GenericLocalPermission("frame-parent");
+	/** The Constant EXT_GENERIC. */
+	public static final Permission EXT_GENERIC = new GenericLocalPermission("extension");
 
-    /**
-     * Instantiates a new generic local permission.
-     *
-     * @param name
-     *            the name
-     */
-    public GenericLocalPermission(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new generic local permission.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public GenericLocalPermission(String name) {
+		super(name);
+	}
 }

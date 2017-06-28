@@ -34,21 +34,21 @@ import java.util.EventListener;
  * @see org.lobobrowser.async.AsyncResult
  */
 public interface AsyncResultListener<TResult> extends EventListener {
-    /**
-     * Receives an asynchronous result. This method is invoked in the event
-     * dispatch thread.
-     *
-     * @param event
-     *            Event containing asynchronous result.
-     */
-    void resultReceived(AsyncResultEvent<TResult> event);
+	/**
+	 * Receives an asynchronous result. This method is invoked in the event
+	 * dispatch thread.
+	 *
+	 * @param event
+	 *            Event containing asynchronous result.
+	 */
+	void resultReceived(AsyncResultEvent<TResult> event);
 
-    /**
-     * Called when an exception has occurred trying to obtain an asynchronous
-     * result. This method is invoked in the event dispatch thread.
-     *
-     * @param event
-     *            Event containing the exception.
-     */
-    void exceptionReceived(AsyncResultEvent<Throwable> event);
+	/**
+	 * Called when an exception has occurred trying to obtain an asynchronous
+	 * result. This method is invoked in the event dispatch thread.
+	 *
+	 * @param event
+	 *            Event containing the exception.
+	 */
+	void exceptionReceived(AsyncResultEvent<Throwable> event);
 }

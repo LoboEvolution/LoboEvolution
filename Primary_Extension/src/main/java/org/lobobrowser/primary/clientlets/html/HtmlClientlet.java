@@ -35,11 +35,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
@@ -137,7 +137,7 @@ public class HtmlClientlet implements Clientlet {
 			while (hi.hasNext()) {
 				String headerName = (String) hi.next();
 				String[] headerValues = response.getHeaders(headerName);
-				if ((headerValues != null) && (headerValues.length > 0)) {
+				if (headerValues != null && headerValues.length > 0) {
 					if ("refresh".equalsIgnoreCase(headerName)) {
 						refresh = this.extractRefresh(headerValues[headerValues.length - 1]);
 					}
@@ -225,7 +225,7 @@ public class HtmlClientlet implements Clientlet {
 			listener.ensureSwitchedToRendering();
 			// Scroll to see anchor.
 			String ref = responseURL.getRef();
-			if ((ref != null) && (ref.length() != 0)) {
+			if (ref != null && ref.length() != 0) {
 				panel.scrollToElement(ref);
 			}
 			if (refresh != null) {
@@ -509,7 +509,7 @@ public class HtmlClientlet implements Clientlet {
 						// sometimes sites don't put http-equiv in HEAD, e.g.
 						// http://baidu.com.
 						Map<String, String> httpEquiv = this.getHttpEquivData();
-						if ((httpEquiv != null) && (httpEquiv.size() > 0)) {
+						if (httpEquiv != null && httpEquiv.size() > 0) {
 							throw new HttpEquivRetryException(httpEquiv);
 						}
 					}
@@ -520,7 +520,7 @@ public class HtmlClientlet implements Clientlet {
 					this.hasVisibleElements = true;
 				}
 			}
-			if (this.hasVisibleElements && ((System.currentTimeMillis() - this.startTimestamp) > MAX_WAIT)) {
+			if (this.hasVisibleElements && System.currentTimeMillis() - this.startTimestamp > MAX_WAIT) {
 				this.ensureSwitchedToRendering();
 			}
 		}

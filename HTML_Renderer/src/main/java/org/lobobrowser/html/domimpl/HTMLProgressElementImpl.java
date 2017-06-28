@@ -48,7 +48,7 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements HTMLProg
 	@Override
 	public double getValue() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*
@@ -70,7 +70,7 @@ public class HTMLProgressElementImpl extends HTMLElementImpl implements HTMLProg
 	@Override
 	public double getMax() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.MAX);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

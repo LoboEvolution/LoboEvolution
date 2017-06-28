@@ -47,7 +47,7 @@ public class InputPasswordControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The str pattern. */
 	private String strPattern;
 

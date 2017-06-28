@@ -27,21 +27,20 @@ import java.net.UnknownHostException;
  * The Class NetRoutines.
  */
 public class NetRoutines {
-    /**
-     * Checks if is local address.
-     *
-     * @param host
-     *            the host
-     * @return true, if is local address
-     */
-    public static boolean isLocalAddress(String host) {
-        try {
-            InetAddress address = InetAddress.getByName(host);
-            return address.isAnyLocalAddress() || address.isLinkLocalAddress()
-                    || address.isLoopbackAddress()
-                    || address.isSiteLocalAddress();
-        } catch (UnknownHostException uhe) {
-            return false;
-        }
-    }
+	/**
+	 * Checks if is local address.
+	 *
+	 * @param host
+	 *            the host
+	 * @return true, if is local address
+	 */
+	public static boolean isLocalAddress(String host) {
+		try {
+			InetAddress address = InetAddress.getByName(host);
+			return address.isAnyLocalAddress() || address.isLinkLocalAddress() || address.isLoopbackAddress()
+					|| address.isSiteLocalAddress();
+		} catch (UnknownHostException uhe) {
+			return false;
+		}
+	}
 }

@@ -29,9 +29,9 @@ import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.w3c.dom.DOMException;
 
 public class SVGPathSegListImpl implements SVGPathSegList {
-	
+
 	private List<SVGPathSeg> segList;
-	
+
 	public SVGPathSegListImpl() {
 		this(new SVGPathSeg[0]);
 	}

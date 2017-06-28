@@ -45,152 +45,155 @@ import javax.swing.border.EmptyBorder;
  */
 public class AuthenticationDialog extends JDialog {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The user name field. */
-    private final JTextField userNameField = new JTextField();
+	/** The user name field. */
+	private final JTextField userNameField = new JTextField();
 
-    /** The password field. */
-    private final JPasswordField passwordField = new JPasswordField();
+	/** The password field. */
+	private final JPasswordField passwordField = new JPasswordField();
 
-    /**
-     * Instantiates a new authentication dialog.
-     *
-     * @param owner
-     *            the owner
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public AuthenticationDialog(Frame owner) throws HeadlessException {
-        super(owner);
-        this.init();
-    }
+	/**
+	 * Instantiates a new authentication dialog.
+	 *
+	 * @param owner
+	 *            the owner
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public AuthenticationDialog(Frame owner) throws HeadlessException {
+		super(owner);
+		this.init();
+	}
 
-    /**
-     * Instantiates a new authentication dialog.
-     *
-     * @param owner
-     *            the owner
-     * @throws HeadlessException
-     *             the headless exception
-     */
-    public AuthenticationDialog(Dialog owner) throws HeadlessException {
-        super(owner);
-        this.init();
-    }
+	/**
+	 * Instantiates a new authentication dialog.
+	 *
+	 * @param owner
+	 *            the owner
+	 * @throws HeadlessException
+	 *             the headless exception
+	 */
+	public AuthenticationDialog(Dialog owner) throws HeadlessException {
+		super(owner);
+		this.init();
+	}
 
-    /**
-     * Inits the.
-     */
-    private void init() {
-        Container contentPane = this.getContentPane();
-        contentPane.setLayout(new FlowLayout());
+	/**
+	 * Inits the.
+	 */
+	private void init() {
+		Container contentPane = this.getContentPane();
+		contentPane.setLayout(new FlowLayout());
 
-        Box rootBox = new Box(BoxLayout.Y_AXIS);
-        rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
+		Box rootBox = new Box(BoxLayout.Y_AXIS);
+		rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
 
-        Box userNameBox = new Box(BoxLayout.X_AXIS);
-        JLabel userNameLabel = new JLabel("User name:");
-        int unph = userNameLabel.getPreferredSize().height;
-        userNameLabel.setPreferredSize(new Dimension(100, unph));
-        userNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        userNameBox.add(userNameLabel);
-        userNameBox.add(Box.createRigidArea(new Dimension(4, 1)));
-        userNameBox.add(this.userNameField);
-        userNameBox.setPreferredSize(new Dimension(300, unph + 4));
+		Box userNameBox = new Box(BoxLayout.X_AXIS);
+		JLabel userNameLabel = new JLabel("User name:");
+		int unph = userNameLabel.getPreferredSize().height;
+		userNameLabel.setPreferredSize(new Dimension(100, unph));
+		userNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		userNameBox.add(userNameLabel);
+		userNameBox.add(Box.createRigidArea(new Dimension(4, 1)));
+		userNameBox.add(this.userNameField);
+		userNameBox.setPreferredSize(new Dimension(300, unph + 4));
 
-        Box passwordBox = new Box(BoxLayout.X_AXIS);
-        JLabel passwordLabel = new JLabel("Password:");
-        int pwph = passwordLabel.getPreferredSize().height;
-        passwordLabel.setPreferredSize(new Dimension(100, pwph));
-        passwordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        passwordBox.add(passwordLabel);
-        passwordBox.add(Box.createRigidArea(new Dimension(4, 1)));
-        passwordBox.add(this.passwordField);
-        passwordBox.setPreferredSize(new Dimension(300, pwph + 4));
+		Box passwordBox = new Box(BoxLayout.X_AXIS);
+		JLabel passwordLabel = new JLabel("Password:");
+		int pwph = passwordLabel.getPreferredSize().height;
+		passwordLabel.setPreferredSize(new Dimension(100, pwph));
+		passwordLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		passwordBox.add(passwordLabel);
+		passwordBox.add(Box.createRigidArea(new Dimension(4, 1)));
+		passwordBox.add(this.passwordField);
+		passwordBox.setPreferredSize(new Dimension(300, pwph + 4));
 
-        Box buttonBox = new Box(BoxLayout.X_AXIS);
-        JButton okButton = new JButton();
-        okButton.setAction(new OkAction());
-        okButton.setText("OK");
-        JButton cancelButton = new JButton();
-        cancelButton.setAction(new CancelAction());
-        cancelButton.setText("Cancel");
-        buttonBox.add(Box.createHorizontalGlue());
-        buttonBox.add(okButton);
-        buttonBox.add(Box.createHorizontalStrut(4));
-        buttonBox.add(cancelButton);
-        buttonBox.add(Box.createHorizontalGlue());
+		Box buttonBox = new Box(BoxLayout.X_AXIS);
+		JButton okButton = new JButton();
+		okButton.setAction(new OkAction());
+		okButton.setText("OK");
+		JButton cancelButton = new JButton();
+		cancelButton.setAction(new CancelAction());
+		cancelButton.setText("Cancel");
+		buttonBox.add(Box.createHorizontalGlue());
+		buttonBox.add(okButton);
+		buttonBox.add(Box.createHorizontalStrut(4));
+		buttonBox.add(cancelButton);
+		buttonBox.add(Box.createHorizontalGlue());
 
-        rootBox.add(userNameBox);
-        rootBox.add(Box.createVerticalStrut(2));
-        rootBox.add(passwordBox);
-        rootBox.add(Box.createVerticalStrut(4));
-        rootBox.add(buttonBox);
+		rootBox.add(userNameBox);
+		rootBox.add(Box.createVerticalStrut(2));
+		rootBox.add(passwordBox);
+		rootBox.add(Box.createVerticalStrut(4));
+		rootBox.add(buttonBox);
 
-        contentPane.add(rootBox);
-    }
+		contentPane.add(rootBox);
+	}
 
-    /** Sets the user name.
+	/**
+	 * Sets the user name.
 	 *
 	 * @param userName
 	 *            the new user name
 	 */
-    public void setUserName(String userName) {
-        this.userNameField.setText(userName);
-        this.passwordField.grabFocus();
-    }
+	public void setUserName(String userName) {
+		this.userNameField.setText(userName);
+		this.passwordField.grabFocus();
+	}
 
-    /** The authentication. */
-    private PasswordAuthentication authentication;
+	/** The authentication. */
+	private PasswordAuthentication authentication;
 
-    /** Gets the authentication.
+	/**
+	 * Gets the authentication.
 	 *
 	 * @return the authentication
 	 */
-    public PasswordAuthentication getAuthentication() {
-        return this.authentication;
-    }
+	public PasswordAuthentication getAuthentication() {
+		return this.authentication;
+	}
 
-    /**
-     * The Class OkAction.
-     */
-    private class OkAction extends AbstractAction {
+	/**
+	 * The Class OkAction.
+	 */
+	private class OkAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            authentication = new PasswordAuthentication(
-                    userNameField.getText(), passwordField.getPassword());
-            AuthenticationDialog.this.dispose();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			authentication = new PasswordAuthentication(userNameField.getText(), passwordField.getPassword());
+			AuthenticationDialog.this.dispose();
+		}
+	}
 
-    /**
-     * The Class CancelAction.
-     */
-    private class CancelAction extends AbstractAction {
+	/**
+	 * The Class CancelAction.
+	 */
+	private class CancelAction extends AbstractAction {
 
-        /** The Constant serialVersionUID. */
-        private static final long serialVersionUID = 1L;
+		/** The Constant serialVersionUID. */
+		private static final long serialVersionUID = 1L;
 
-        /*
-         * (non-Javadoc)
-         * @see
-         * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            authentication = null;
-            AuthenticationDialog.this.dispose();
-        }
-    }
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+		 * ActionEvent)
+		 */
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			authentication = null;
+			AuthenticationDialog.this.dispose();
+		}
+	}
 }

@@ -25,340 +25,340 @@ package org.lobobrowser.html;
  */
 public interface HtmlProperties {
 
-    /** The a. */
-    String A = "A";
-    
-    /** The animate. */
-    String ANIMATE = "ANIMATE";
-
-    /** The applet. */
-    String APPLET = "APPLET";
-
-    /** The anchor. */
-    String ANCHOR = "ANCHOR";
-
-    /** The article. */
-    String ARTICLE = "ARTICLE";
-
-    /** The audio. */
-    String AUDIO = "AUDIO";
-
-    /** The b. */
-    String B = "B";
-
-    /** The blockquote. */
-    String BLOCKQUOTE = "BLOCKQUOTE";
-
-    /** The base. */
-    String BASE = "BASE";
-
-    /** The body. */
-    String BODY = "BODY";
-
-    /** The button. */
-    String BUTTON = "BUTTON";
-
-    /** The br. */
-    String BR = "BR";
-
-    /** The big. */
-    String BIG = "BIG";
-
-    /** The basefont. */
-    String BASEFONT = "BASEFONT";
-    
-    /** The canvas. */
-    String CANVAS = "CANVAS";
-    
-    /** The caption. */
-    String CAPTION = "CAPTION";
-    
-    /** The center. */
-    String CENTER = "CENTER";
-    
-    /** The Constant CIRCLE. */
-    String CIRCLE = "CIRCLE";
-    
-    /** The cite. */
-    String CITE = "CITE";
-    
-    /** The clippath. */
-    String CLIPPATH = "CLIPPATH";
-    
-    /** The code. */
-    String CODE = "CODE";
-
-    /** The command. */
-    String COMMAND = "COMMAND";
-    
-    /** The code. */
-    String DEFS = "DEFS";
-    
-    /** The del. */
-    String DEL = "DEL";
-
-    /** The div. */
-    String DIV = "DIV";
-
-    /** The dd. */
-    String DD = "DD";
-
-    /** The dl. */
-    String DL = "DL";
-
-    /** The dt. */
-    String DT = "DT";
-
-    /** The dfn. */
-    String DFN = "DFN";
-
-    /** The details. */
-    String DETAILS = "DETAILS";
-    
-    /** The ellipse. */
-    String ELLIPSE = "ELLIPSE";
+	/** The a. */
+	String A = "A";
 
-    /** The em. */
-    String EM = "EM";
+	/** The animate. */
+	String ANIMATE = "ANIMATE";
 
-    /** The embed. */
-    String EMBED = "EMBED";
+	/** The applet. */
+	String APPLET = "APPLET";
 
-    /** The footer. */
-    String FOOTER = "FOOTER";
+	/** The anchor. */
+	String ANCHOR = "ANCHOR";
 
-    /** The form. */
-    String FORM = "FORM";
+	/** The article. */
+	String ARTICLE = "ARTICLE";
 
-    /** The font. */
-    String FONT = "FONT";
+	/** The audio. */
+	String AUDIO = "AUDIO";
 
-    /** The frameset. */
-    String FRAMESET = "FRAMESET";
+	/** The b. */
+	String B = "B";
 
-    /** The frame. */
-    String FRAME = "FRAME";
-    
-    /** The g. */
-    String G = "G";
+	/** The blockquote. */
+	String BLOCKQUOTE = "BLOCKQUOTE";
 
-    /** The head. */
-    String HEAD = "HEAD";
+	/** The base. */
+	String BASE = "BASE";
 
-    /** The H1. */
-    String H1 = "H1";
+	/** The body. */
+	String BODY = "BODY";
 
-    /** The H2. */
-    String H2 = "H2";
+	/** The button. */
+	String BUTTON = "BUTTON";
 
-    /** The H3. */
-    String H3 = "H3";
+	/** The br. */
+	String BR = "BR";
 
-    /** The H4. */
-    String H4 = "H4";
+	/** The big. */
+	String BIG = "BIG";
 
-    /** The H5. */
-    String H5 = "H5";
+	/** The basefont. */
+	String BASEFONT = "BASEFONT";
 
-    /** The H6. */
-    String H6 = "H6";
+	/** The canvas. */
+	String CANVAS = "CANVAS";
 
-    /** The hr. */
-    String HR = "HR";
+	/** The caption. */
+	String CAPTION = "CAPTION";
 
-    /** The header. */
-    String HEADER = "HEADER";
+	/** The center. */
+	String CENTER = "CENTER";
 
-    /** The html. */
-    String HTML = "HTML";
+	/** The Constant CIRCLE. */
+	String CIRCLE = "CIRCLE";
 
-    /** The iframe. */
-    String IFRAME = "IFRAME";
+	/** The cite. */
+	String CITE = "CITE";
 
-    /** The input. */
-    String INPUT = "INPUT";
+	/** The clippath. */
+	String CLIPPATH = "CLIPPATH";
 
-    /** The i. */
-    String I = "I";
+	/** The code. */
+	String CODE = "CODE";
 
-    /** The img. */
-    String IMG = "IMG";
-    
-    /** The ins. */
-    String INS = "INS";
-    
-    /** The label. */
-    String LABEL = "LABEL";
+	/** The command. */
+	String COMMAND = "COMMAND";
 
-    /** The link. */
-    String LINK = "LINK";
+	/** The code. */
+	String DEFS = "DEFS";
 
-    /** The li. */
-    String LI = "LI";
-    
-    /** The line. */
-    String LINE = "LINE";
-    
-    /** The linearGradient. */
-    String LINEAR_GRADIENT = "LINEARGRADIENT";
+	/** The del. */
+	String DEL = "DEL";
 
-    /** The keygen. */
-    String KEYGEN = "KEYGEN";
+	/** The div. */
+	String DIV = "DIV";
 
-    /** The meter. */
-    String METER = "METER";
+	/** The dd. */
+	String DD = "DD";
 
-    /** The marquee. */
-    String MARQUEE = "MARQUEE";
+	/** The dl. */
+	String DL = "DL";
 
-    /** The meta. */
-    String META = "META";
+	/** The dt. */
+	String DT = "DT";
 
-    /** The nav. */
-    String NAV = "NAV";
+	/** The dfn. */
+	String DFN = "DFN";
 
-    /** The noscript. */
-    String NOSCRIPT = "NOSCRIPT";
+	/** The details. */
+	String DETAILS = "DETAILS";
 
-    /** The option. */
-    String OPTION = "OPTION";
+	/** The ellipse. */
+	String ELLIPSE = "ELLIPSE";
 
-    /** The object. */
-    String OBJECT = "OBJECT";
+	/** The em. */
+	String EM = "EM";
 
-    /** The output. */
-    String OUTPUT = "OUTPUT";
+	/** The embed. */
+	String EMBED = "EMBED";
 
-    /** The ol. */
-    String OL = "OL";
+	/** The footer. */
+	String FOOTER = "FOOTER";
 
-    /** The kbd. */
-    String KBD = "KBD";
+	/** The form. */
+	String FORM = "FORM";
 
-    /** The p. */
-    String P = "P";
-    
-    /** The path. */
-    String PATH = "PATH";
-    
-    /** The polygon. */
-    String POLYGON = "POLYGON";
-    
-    /** The polygon. */
-    String POLYLINE = "POLYLINE";
+	/** The font. */
+	String FONT = "FONT";
 
-    /** The pre. */
-    String PRE = "PRE";
+	/** The frameset. */
+	String FRAMESET = "FRAMESET";
 
-    /** The progress. */
-    String PROGRESS = "PROGRESS";
-    
-    /** The radialGradient. */
-    String RADIAL_GRADIENT = "RADIALGRADIENT";
-    
-    /** The Constant RECT. */
-    String RECT = "RECT";
+	/** The frame. */
+	String FRAME = "FRAME";
 
-    /** The s. */
-    String S = "S";
+	/** The g. */
+	String G = "G";
 
-    /** The style. */
-    String STYLE = "STYLE";
+	/** The head. */
+	String HEAD = "HEAD";
 
-    /** The strike. */
-    String STRIKE = "STRIKE";
-    
-    /** The stop. */
-    String STOP = "STOP";
+	/** The H1. */
+	String H1 = "H1";
 
-    /** The section. */
-    String SECTION = "SECTION";
+	/** The H2. */
+	String H2 = "H2";
 
-    /** The source. */
-    String SOURCE = "SOURCE";
+	/** The H3. */
+	String H3 = "H3";
 
-    /** The samp. */
-    String SAMP = "SAMP";
+	/** The H4. */
+	String H4 = "H4";
 
-    /** The span. */
-    String SPAN = "SPAN";
+	/** The H5. */
+	String H5 = "H5";
 
-    /** The script. */
-    String SCRIPT = "SCRIPT";
+	/** The H6. */
+	String H6 = "H6";
 
-    /** The small. */
-    String SMALL = "SMALL";
+	/** The hr. */
+	String HR = "HR";
 
-    /** The strong. */
-    String STRONG = "STRONG";
+	/** The header. */
+	String HEADER = "HEADER";
 
-    /** The select. */
-    String SELECT = "SELECT";
+	/** The html. */
+	String HTML = "HTML";
 
-    /** The sup. */
-    String SUP = "SUP";
+	/** The iframe. */
+	String IFRAME = "IFRAME";
 
-    /** The sub. */
-    String SUB = "SUB";
+	/** The input. */
+	String INPUT = "INPUT";
 
-    /** The spacer. */
-    String SPACER = "SPACER";
-    
-    /** The symbol. */
-    String SYMBOL = "SYMBOL";
-    
-    /**The svg*/
-    String SVG = "SVG";
-    
-    /**The text*/
-    String TEXT = "TEXT";
+	/** The i. */
+	String I = "I";
 
-    /** The title. */
-    String TITLE = "TITLE";
+	/** The img. */
+	String IMG = "IMG";
 
-    /** The textarea. */
-    String TEXTAREA = "TEXTAREA";
+	/** The ins. */
+	String INS = "INS";
 
-    /** The table. */
-    String TABLE = "TABLE";
+	/** The label. */
+	String LABEL = "LABEL";
 
-    /** The td. */
-    String TD = "TD";
+	/** The link. */
+	String LINK = "LINK";
 
-    /** The th. */
-    String TH = "TH";
+	/** The li. */
+	String LI = "LI";
 
-    /** The tr. */
-    String TR = "TR";
+	/** The line. */
+	String LINE = "LINE";
 
-    /** The tbody. */
-    String TBODY = "TBODY";
-    
-    /** The thead. */
-    String THEAD = "THEAD";
-    
-    /** The tfoot. */
-    String TFOOT = "TFOOT";
-    
-    /** The tt. */
-    String TT = "TT";
+	/** The linearGradient. */
+	String LINEAR_GRADIENT = "LINEARGRADIENT";
 
-    /** The time. */
-    String TIME = "TIME";
+	/** The keygen. */
+	String KEYGEN = "KEYGEN";
 
-    /** The u. */
-    String U = "U";
-    
-    /** The ul. */
-    String UL = "UL";
-    
-    /** The u. */
-    String USE = "USE";
+	/** The meter. */
+	String METER = "METER";
 
-    /** The var. */
-    String VAR = "VAR";
+	/** The marquee. */
+	String MARQUEE = "MARQUEE";
 
-    /** The video. */
-    String VIDEO = "VIDEO";
+	/** The meta. */
+	String META = "META";
+
+	/** The nav. */
+	String NAV = "NAV";
+
+	/** The noscript. */
+	String NOSCRIPT = "NOSCRIPT";
+
+	/** The option. */
+	String OPTION = "OPTION";
+
+	/** The object. */
+	String OBJECT = "OBJECT";
+
+	/** The output. */
+	String OUTPUT = "OUTPUT";
+
+	/** The ol. */
+	String OL = "OL";
+
+	/** The kbd. */
+	String KBD = "KBD";
+
+	/** The p. */
+	String P = "P";
+
+	/** The path. */
+	String PATH = "PATH";
+
+	/** The polygon. */
+	String POLYGON = "POLYGON";
+
+	/** The polygon. */
+	String POLYLINE = "POLYLINE";
+
+	/** The pre. */
+	String PRE = "PRE";
+
+	/** The progress. */
+	String PROGRESS = "PROGRESS";
+
+	/** The radialGradient. */
+	String RADIAL_GRADIENT = "RADIALGRADIENT";
+
+	/** The Constant RECT. */
+	String RECT = "RECT";
+
+	/** The s. */
+	String S = "S";
+
+	/** The style. */
+	String STYLE = "STYLE";
+
+	/** The strike. */
+	String STRIKE = "STRIKE";
+
+	/** The stop. */
+	String STOP = "STOP";
+
+	/** The section. */
+	String SECTION = "SECTION";
+
+	/** The source. */
+	String SOURCE = "SOURCE";
+
+	/** The samp. */
+	String SAMP = "SAMP";
+
+	/** The span. */
+	String SPAN = "SPAN";
+
+	/** The script. */
+	String SCRIPT = "SCRIPT";
+
+	/** The small. */
+	String SMALL = "SMALL";
+
+	/** The strong. */
+	String STRONG = "STRONG";
+
+	/** The select. */
+	String SELECT = "SELECT";
+
+	/** The sup. */
+	String SUP = "SUP";
+
+	/** The sub. */
+	String SUB = "SUB";
+
+	/** The spacer. */
+	String SPACER = "SPACER";
+
+	/** The symbol. */
+	String SYMBOL = "SYMBOL";
+
+	/** The svg */
+	String SVG = "SVG";
+
+	/** The text */
+	String TEXT = "TEXT";
+
+	/** The title. */
+	String TITLE = "TITLE";
+
+	/** The textarea. */
+	String TEXTAREA = "TEXTAREA";
+
+	/** The table. */
+	String TABLE = "TABLE";
+
+	/** The td. */
+	String TD = "TD";
+
+	/** The th. */
+	String TH = "TH";
+
+	/** The tr. */
+	String TR = "TR";
+
+	/** The tbody. */
+	String TBODY = "TBODY";
+
+	/** The thead. */
+	String THEAD = "THEAD";
+
+	/** The tfoot. */
+	String TFOOT = "TFOOT";
+
+	/** The tt. */
+	String TT = "TT";
+
+	/** The time. */
+	String TIME = "TIME";
+
+	/** The u. */
+	String U = "U";
+
+	/** The ul. */
+	String UL = "UL";
+
+	/** The u. */
+	String USE = "USE";
+
+	/** The var. */
+	String VAR = "VAR";
+
+	/** The video. */
+	String VIDEO = "VIDEO";
 
 }

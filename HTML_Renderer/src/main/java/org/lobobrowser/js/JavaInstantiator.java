@@ -25,15 +25,14 @@ package org.lobobrowser.js;
  */
 public interface JavaInstantiator {
 
-    /**
-     * New instance.
-     *
-     * @return the object
-     * @throws InstantiationException
-     *             the instantiation exception
-     * @throws IllegalAccessException
-     *             the illegal access exception
-     */
-    Object newInstance() throws InstantiationException,
-    IllegalAccessException;
+	/**
+	 * New instance.
+	 *
+	 * @return the object
+	 * @throws InstantiationException
+	 *             the instantiation exception
+	 * @throws IllegalAccessException
+	 *             the illegal access exception
+	 */
+	Object newInstance() throws InstantiationException, IllegalAccessException;
 }

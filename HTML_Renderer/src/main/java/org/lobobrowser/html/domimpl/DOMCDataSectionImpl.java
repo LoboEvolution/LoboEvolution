@@ -31,39 +31,41 @@ import org.w3c.dom.Node;
  */
 public class DOMCDataSectionImpl extends DOMTextImpl implements CDATASection {
 
-    /**
-     * Instantiates a new DOMC data section impl.
-     */
-    public DOMCDataSectionImpl() {
-        super();
-    }
+	/**
+	 * Instantiates a new DOMC data section impl.
+	 */
+	public DOMCDataSectionImpl() {
+		super();
+	}
 
-    /**
-     * Instantiates a new DOMC data section impl.
-     *
-     * @param text
-     *            the text
-     */
-    public DOMCDataSectionImpl(String text) {
-        super(text);
-    }
+	/**
+	 * Instantiates a new DOMC data section impl.
+	 *
+	 * @param text
+	 *            the text
+	 */
+	public DOMCDataSectionImpl(String text) {
+		super(text);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeName()
-     */
-    @Override
-    public String getNodeName() {
-        return "#cdata-section";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeName()
+	 */
+	@Override
+	public String getNodeName() {
+		return "#cdata-section";
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeType()
-     */
-    @Override
-    public short getNodeType() {
-        return Node.CDATA_SECTION_NODE;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.dombl.DOMNodeImpl#getnodeType()
+	 */
+	@Override
+	public short getNodeType() {
+		return Node.CDATA_SECTION_NODE;
+	}
 
 }

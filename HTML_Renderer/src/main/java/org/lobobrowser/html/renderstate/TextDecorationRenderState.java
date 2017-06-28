@@ -28,31 +28,32 @@ import org.lobobrowser.html.style.RenderStateDelegator;
  */
 public class TextDecorationRenderState extends RenderStateDelegator {
 
-    /** The text decoration mask. */
-    private int textDecorationMask;
+	/** The text decoration mask. */
+	private int textDecorationMask;
 
-    /**
-     * Instantiates a new text decoration render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param textDecorationMask
-     *            the text decoration mask
-     */
-    public TextDecorationRenderState(RenderState prevRenderState,
-            int textDecorationMask) {
-        super(prevRenderState);
-        this.textDecorationMask = textDecorationMask;
-    }
+	/**
+	 * Instantiates a new text decoration render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param textDecorationMask
+	 *            the text decoration mask
+	 */
+	public TextDecorationRenderState(RenderState prevRenderState, int textDecorationMask) {
+		super(prevRenderState);
+		this.textDecorationMask = textDecorationMask;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.style.RenderStateDelegator#getTextDecorationMask()
-     */
-    @Override
-    public int getTextDecorationMask() {
-        RenderState prs = this.delegate;
-        int parentMask = prs == null ? 0 : prs.getTextDecorationMask();
-        return parentMask | this.textDecorationMask;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.style.RenderStateDelegator#getTextDecorationMask()
+	 */
+	@Override
+	public int getTextDecorationMask() {
+		RenderState prs = this.delegate;
+		int parentMask = prs == null ? 0 : prs.getTextDecorationMask();
+		return parentMask | this.textDecorationMask;
+	}
 }

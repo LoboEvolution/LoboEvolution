@@ -24,21 +24,25 @@ package org.lobobrowser.w3c.xpath;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface XPathExpression.
  */
 public interface XPathExpression {
-	
+
 	/**
 	 * Evaluate.
 	 *
-	 * @param contextNode the context node
-	 * @param type the type
-	 * @param result the result
+	 * @param contextNode
+	 *            the context node
+	 * @param type
+	 *            the type
+	 * @param result
+	 *            the result
 	 * @return the object
-	 * @throws XPathException the x path exception
-	 * @throws DOMException the DOM exception
+	 * @throws XPathException
+	 *             the x path exception
+	 * @throws DOMException
+	 *             the DOM exception
 	 */
 	// XPathExpression
 	public Object evaluate(Node contextNode, short type, Object result) throws XPathException, DOMException;

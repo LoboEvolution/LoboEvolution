@@ -21,16 +21,16 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface MutableTextTrack.
  */
 public interface MutableTextTrack extends TextTrack {
-	
+
 	/**
 	 * Adds the cue.
 	 *
-	 * @param cue the cue
+	 * @param cue
+	 *            the cue
 	 */
 	// MutableTextTrack
 	public void addCue(TextTrackCue cue);
@@ -38,7 +38,8 @@ public interface MutableTextTrack extends TextTrack {
 	/**
 	 * Removes the cue.
 	 *
-	 * @param cue the cue
+	 * @param cue
+	 *            the cue
 	 */
 	public void removeCue(TextTrackCue cue);
 }

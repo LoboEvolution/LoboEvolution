@@ -49,6 +49,6 @@ public class ElementIdFilter implements NodeFilter {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		return (node instanceof Element) && this.id.equals(((Element) node).getAttribute(HtmlAttributeProperties.ID));
+		return node instanceof Element && this.id.equals(((Element) node).getAttribute(HtmlAttributeProperties.ID));
 	}
 }

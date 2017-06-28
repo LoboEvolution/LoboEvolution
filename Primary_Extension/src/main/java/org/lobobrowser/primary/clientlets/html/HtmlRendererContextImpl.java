@@ -30,12 +30,11 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.WeakHashMap;
 
+import javax.swing.JPopupMenu;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import javax.swing.JPopupMenu;
-
 import org.lobobrowser.gui.NavigatorWindowImpl;
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.FormInput;

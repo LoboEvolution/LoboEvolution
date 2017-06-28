@@ -222,7 +222,7 @@ public class RLine extends BaseRCollection {
 			} else {
 				ArrayList<Renderable> renderables = this.renderables;
 				int size = renderables.size();
-				if ((size > 0) && !(renderables.get(size - 1) instanceof RBlank)) {
+				if (size > 0 && !(renderables.get(size - 1) instanceof RBlank)) {
 					buffer.append(" ");
 				}
 			}
@@ -295,8 +295,7 @@ public class RLine extends BaseRCollection {
 		if (allowOverflow && firstAllowOverflowWord) {
 			this.firstAllowOverflowWord = false;
 		}
-		if ((!allowOverflow || firstAllowOverflowWord) && (offset != 0)
-				&& ((offset + wiwidth) > this.desiredMaxWidth)) {
+		if ((!allowOverflow || firstAllowOverflowWord) && offset != 0 && offset + wiwidth > this.desiredMaxWidth) {
 			ArrayList<Renderable> renderables = this.renderables;
 			ArrayList<Renderable> overflow = null;
 			boolean cancel = false;
@@ -309,11 +308,11 @@ public class RLine extends BaseRCollection {
 			int newWidth = offset;
 			for (int i = renderables.size(); --i >= 0;) {
 				Renderable renderable = renderables.get(i);
-				if ((renderable instanceof RWord) || !(renderable instanceof BoundableRenderable)) {
+				if (renderable instanceof RWord || !(renderable instanceof BoundableRenderable)) {
 					if (overflow == null) {
 						overflow = new ArrayList<Renderable>();
 					}
-					if ((renderable != rword) && (renderable instanceof RWord) && (((RWord) renderable).getX() == 0)) {
+					if (renderable != rword && renderable instanceof RWord && ((RWord) renderable).getX() == 0) {
 						// Can't overflow words starting at offset zero.
 						// Note that all or none should be overflown.
 						cancel = true;
@@ -359,11 +358,11 @@ public class RLine extends BaseRCollection {
 		int extraHeight = 0;
 		int maxDescent = this.height - this.baseLineOffset;
 		if (rword.getDescent() > maxDescent) {
-			extraHeight += (rword.getDescent() - maxDescent);
+			extraHeight += rword.getDescent() - maxDescent;
 		}
 		int maxAscentPlusLeading = this.baseLineOffset;
 		if (rword.getAscentPlusLeading() > maxAscentPlusLeading) {
-			extraHeight += (rword.getAscentPlusLeading() - maxAscentPlusLeading);
+			extraHeight += rword.getAscentPlusLeading() - maxAscentPlusLeading;
 		}
 		if (extraHeight > 0) {
 			int newHeight = this.height + extraHeight;
@@ -435,7 +434,7 @@ public class RLine extends BaseRCollection {
 			yoffset = this.baseLineOffset - elementHeight;
 			break;
 		case RElement.VALIGN_MIDDLE:
-			yoffset = this.baseLineOffset - (elementHeight / 2);
+			yoffset = this.baseLineOffset - elementHeight / 2;
 			break;
 		case RElement.VALIGN_TOP:
 			yoffset = 0;
@@ -466,8 +465,7 @@ public class RLine extends BaseRCollection {
 		if (allowOverflow && firstAllowOverflowWord) {
 			this.firstAllowOverflowWord = false;
 		}
-		if ((!allowOverflow || firstAllowOverflowWord) && (origXOffset != 0)
-				&& ((origXOffset + pw) > desiredMaxWidth)) {
+		if ((!allowOverflow || firstAllowOverflowWord) && origXOffset != 0 && origXOffset + pw > desiredMaxWidth) {
 			throw new OverflowException(Collections.singleton(relement));
 		}
 		// Note: Renderable for widget doesn't paint the widget, but
@@ -479,10 +477,10 @@ public class RLine extends BaseRCollection {
 		switch (valign) {
 		case RElement.VALIGN_BASELINE:
 		case RElement.VALIGN_BOTTOM:
-			requiredHeight = ph + (boundsh - this.baseLineOffset);
+			requiredHeight = ph + boundsh - this.baseLineOffset;
 			break;
 		case RElement.VALIGN_MIDDLE:
-			requiredHeight = Math.max(ph, (ph / 2) + (boundsh - this.baseLineOffset));
+			requiredHeight = Math.max(ph, ph / 2 + boundsh - this.baseLineOffset);
 			break;
 		default:
 			requiredHeight = ph;
@@ -546,7 +544,7 @@ public class RLine extends BaseRCollection {
 			baseline = newHeight - maxDescent;
 			break;
 		case RElement.VALIGN_ABSMIDDLE:
-			baseline = ((newHeight + textHeight) / 2) - maxDescent;
+			baseline = (newHeight + textHeight) / 2 - maxDescent;
 			break;
 		case RElement.VALIGN_BASELINE:
 		case RElement.VALIGN_BOTTOM:
@@ -696,7 +694,7 @@ public class RLine extends BaseRCollection {
 		if (r != null) {
 			Rectangle rbounds = r.getBounds();
 			BoundableRenderable oldArmedRenderable = this.mousePressTarget;
-			if ((oldArmedRenderable != null) && (r != oldArmedRenderable)) {
+			if (oldArmedRenderable != null && r != oldArmedRenderable) {
 				oldArmedRenderable.onMouseDisarmed(event);
 				this.mousePressTarget = null;
 			}

@@ -28,44 +28,46 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
  */
 public class PreRenderState extends BlockRenderState {
 
-    /**
-     * Instantiates a new pre render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public PreRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new pre render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public PreRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getWhiteSpace()
-     */
-    @Override
-    public int getWhiteSpace() {
-        Integer ws = this.iWhiteSpace;
-        if (ws != null) {
-            return ws.intValue();
-        }
-        AbstractCSS2Properties props = this.getCssProperties();
-        String whiteSpaceText = props == null ? null : props.getWhiteSpace();
-        int wsValue;
-        if (whiteSpaceText == null) {
-            wsValue = WS_PRE;
-        } else {
-            String whiteSpaceTextTL = whiteSpaceText.toLowerCase();
-            if ("nowrap".equals(whiteSpaceTextTL)) {
-                wsValue = WS_NOWRAP;
-            } else if ("normal".equals(whiteSpaceTextTL)) {
-                wsValue = WS_NORMAL;
-            } else {
-                wsValue = WS_PRE;
-            }
-        }
-        this.iWhiteSpace = new Integer(wsValue);
-        return wsValue;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getWhiteSpace()
+	 */
+	@Override
+	public int getWhiteSpace() {
+		Integer ws = this.iWhiteSpace;
+		if (ws != null) {
+			return ws.intValue();
+		}
+		AbstractCSS2Properties props = this.getCssProperties();
+		String whiteSpaceText = props == null ? null : props.getWhiteSpace();
+		int wsValue;
+		if (whiteSpaceText == null) {
+			wsValue = WS_PRE;
+		} else {
+			String whiteSpaceTextTL = whiteSpaceText.toLowerCase();
+			if ("nowrap".equals(whiteSpaceTextTL)) {
+				wsValue = WS_NOWRAP;
+			} else if ("normal".equals(whiteSpaceTextTL)) {
+				wsValue = WS_NORMAL;
+			} else {
+				wsValue = WS_PRE;
+			}
+		}
+		this.iWhiteSpace = new Integer(wsValue);
+		return wsValue;
+	}
 }

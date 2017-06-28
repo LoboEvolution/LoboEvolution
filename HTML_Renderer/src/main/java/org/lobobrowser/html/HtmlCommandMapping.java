@@ -28,20 +28,16 @@ import java.util.List;
  */
 public class HtmlCommandMapping {
 
-    /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/document.execCommand#
-     * Commands
-     */
+	/**
+	 * https://developer.mozilla.org/en-US/docs/Web/API/document.execCommand#
+	 * Commands
+	 */
 
-    public static final List<String> EXECUTE_CMDS = Arrays.asList(new String[] {
-            "backColor", "bold", "contentReadOnly", "copy", "createLink",
-            "cut", "decreaseFontSize", "delete", "fontName", "fontSize",
-            "foreColor", "formatBlock", "heading", "hiliteColor",
-            "increaseFontSize", "indent", "insertHorizontalRule", "insertHTML",
-            "insertImage", "insertOrderedList", "insertUnorderedList",
-            "insertParagraph", "italic", "justifyCenter", "justifyLeft",
-            "justifyRight", "outdent", "paste", "redo", "removeFormat",
-            "selectAll", "strikeThrough", "subscript", "superscript",
-            "underline", "undo", "unlink", "useCSS", "styleWithCSS"  });
+	public static final List<String> EXECUTE_CMDS = Arrays.asList(new String[] { "backColor", "bold", "contentReadOnly",
+			"copy", "createLink", "cut", "decreaseFontSize", "delete", "fontName", "fontSize", "foreColor",
+			"formatBlock", "heading", "hiliteColor", "increaseFontSize", "indent", "insertHorizontalRule", "insertHTML",
+			"insertImage", "insertOrderedList", "insertUnorderedList", "insertParagraph", "italic", "justifyCenter",
+			"justifyLeft", "justifyRight", "outdent", "paste", "redo", "removeFormat", "selectAll", "strikeThrough",
+			"subscript", "superscript", "underline", "undo", "unlink", "useCSS", "styleWithCSS" });
 
 }

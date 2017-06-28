@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLLabelElement.
  */
 public interface HTMLLabelElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the form.
 	 *

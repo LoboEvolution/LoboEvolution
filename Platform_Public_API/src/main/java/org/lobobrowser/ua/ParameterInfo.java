@@ -27,15 +27,17 @@ package org.lobobrowser.ua;
  */
 public interface ParameterInfo {
 
-    /** Gets the encoding.
+	/**
+	 * Gets the encoding.
 	 *
 	 * @return the encoding
 	 */
-    String getEncoding();
+	String getEncoding();
 
-    /** Gets the parameters.
+	/**
+	 * Gets the parameters.
 	 *
 	 * @return the parameters
 	 */
-    Parameter[] getParameters();
+	Parameter[] getParameters();
 }

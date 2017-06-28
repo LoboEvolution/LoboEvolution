@@ -23,10 +23,8 @@ package org.lobobrowser.primary.gui.bookmarks;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.primary.ext.BaseHistory;
 import org.lobobrowser.primary.info.BookmarkInfo;
 import org.lobobrowser.store.StorageManager;
@@ -34,7 +32,7 @@ import org.lobobrowser.store.StorageManager;
 /**
  * The Class BookmarksHistory.
  */
-public class BookmarksHistory extends BaseHistory<BookmarkInfo>implements Serializable {
+public class BookmarksHistory extends BaseHistory<BookmarkInfo> implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000200000300L;

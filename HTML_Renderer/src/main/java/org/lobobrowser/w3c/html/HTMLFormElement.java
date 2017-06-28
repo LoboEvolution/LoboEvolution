@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLFormElement.
  */
 public interface HTMLFormElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the accept charset.
 	 *
@@ -180,7 +179,8 @@ public interface HTMLFormElement extends HTMLElement {
 	/**
 	 * Gets the element.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the element
 	 */
 	public Object getElement(int index);
@@ -188,7 +188,8 @@ public interface HTMLFormElement extends HTMLElement {
 	/**
 	 * Gets the element.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 * @return the element
 	 */
 	public Object getElement(String name);
@@ -226,7 +227,8 @@ public interface HTMLFormElement extends HTMLElement {
 	/**
 	 * Named item.
 	 *
-	 * @param name the name
+	 * @param name
+	 *            the name
 	 * @return the object
 	 */
 	Object namedItem(String name);
@@ -234,7 +236,8 @@ public interface HTMLFormElement extends HTMLElement {
 	/**
 	 * Item.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the object
 	 */
 	Object item(int index);

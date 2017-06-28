@@ -62,12 +62,12 @@ public class ShowRecentHostsAction extends ActionPool {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof Frame)) {
 			throw new IllegalStateException("Recent Hosts dialog only supported when an AWT Frame is available.");
 		}
-		
+
 		RecentHostsDialog dialog = new RecentHostsDialog(window);
 		dialog.setTitle("Show All Recent Hosts");
 		dialog.setLocationByPlatform(true);

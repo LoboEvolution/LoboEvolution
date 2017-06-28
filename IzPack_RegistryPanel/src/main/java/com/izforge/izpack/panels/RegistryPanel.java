@@ -37,82 +37,84 @@ import com.izforge.izpack.util.NativeLibraryClient;
  */
 public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-   /**
-     * Instantiates a new registry panel.
-     *
-     * @param arg0
-     *            the arg0
-     * @param arg1
-     *            the arg1
-     */
-    public RegistryPanel(InstallerFrame arg0, InstallData arg1) {
-        super(arg0, arg1);
-    }
+	/**
+	 * Instantiates a new registry panel.
+	 *
+	 * @param arg0
+	 *            the arg0
+	 * @param arg1
+	 *            the arg1
+	 */
+	public RegistryPanel(InstallerFrame arg0, InstallData arg1) {
+		super(arg0, arg1);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see com.izforge.izpack.installer.IzPanel#panelActivate()
-     */
-    @Override
-    public void panelActivate() {
-        super.panelActivate();
-        this.performFileActions();
-        this.performRegistryActions();
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.izforge.izpack.installer.IzPanel#panelActivate()
+	 */
+	@Override
+	public void panelActivate() {
+		super.panelActivate();
+		this.performFileActions();
+		this.performRegistryActions();
+	}
 
-    /**
-     * Perform file actions.
-     */
-    private void performFileActions() {
-        try {
-            File userHome = new File(System.getProperty("user.home"));
-            File loboHome = new File(userHome, ".lobo");
-            File cacheHome = new File(loboHome, "cache");
-            this.deleteDecorationFiles(cacheHome);
-        } catch (Exception err) {
-        	err.printStackTrace();
-        }
-    }
+	/**
+	 * Perform file actions.
+	 */
+	private void performFileActions() {
+		try {
+			File userHome = new File(System.getProperty("user.home"));
+			File loboHome = new File(userHome, ".lobo");
+			File cacheHome = new File(loboHome, "cache");
+			this.deleteDecorationFiles(cacheHome);
+		} catch (Exception err) {
+			err.printStackTrace();
+		}
+	}
 
-    /**
-     * Delete decoration files.
-     *
-     * @param rootDir
-     *            the root dir
-     */
-    private void deleteDecorationFiles(File rootDir) {
-        // Deletes decoration files in cache directory
-        File[] files = rootDir.listFiles();
-        if (files != null) {
-            for (int i = 0; i < files.length; i++) {
-                File file = files[i];
-                if (file.isDirectory()) {
-                    this.deleteDecorationFiles(file);
-                } else {
-                    String name = file.getName().toLowerCase();
-                    if (name.endsWith(".decor")) {
-                        file.delete();
-                    }
-                }
-            }
-        }
-    }
+	/**
+	 * Delete decoration files.
+	 *
+	 * @param rootDir
+	 *            the root dir
+	 */
+	private void deleteDecorationFiles(File rootDir) {
+		// Deletes decoration files in cache directory
+		File[] files = rootDir.listFiles();
+		if (files != null) {
+			for (int i = 0; i < files.length; i++) {
+				File file = files[i];
+				if (file.isDirectory()) {
+					this.deleteDecorationFiles(file);
+				} else {
+					String name = file.getName().toLowerCase();
+					if (name.endsWith(".decor")) {
+						file.delete();
+					}
+				}
+			}
+		}
+	}
 
-    /**
-     * Perform registry actions.
-     */
-    private void performRegistryActions() {
-        parent.skipPanel();
-    }
+	/**
+	 * Perform registry actions.
+	 */
+	private void performRegistryActions() {
+		parent.skipPanel();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see com.izforge.izpack.util.NativeLibraryClient#freeLibrary(String)
-     */
-    @Override
-    public void freeLibrary(String arg0) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.izforge.izpack.util.NativeLibraryClient#freeLibrary(String)
+	 */
+	@Override
+	public void freeLibrary(String arg0) {
+	}
 }

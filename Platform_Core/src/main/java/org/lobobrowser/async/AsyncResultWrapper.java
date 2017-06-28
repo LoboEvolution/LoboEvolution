@@ -33,123 +33,129 @@ import java.util.LinkedList;
  * @param <TResult>
  *            the generic type
  */
-public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>,
-AsyncResultListener<TResult> {
+public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncResultListener<TResult> {
 
-    /** The ar. */
-    private AsyncResult<TResult> ar;
+	/** The ar. */
+	private AsyncResult<TResult> ar;
 
-    /** The listeners. */
-    private final Collection<AsyncResultListener<TResult>> listeners = new LinkedList<AsyncResultListener<TResult>>();
+	/** The listeners. */
+	private final Collection<AsyncResultListener<TResult>> listeners = new LinkedList<AsyncResultListener<TResult>>();
 
-    /**
-     * Instantiates a new async result wrapper.
-     *
-     * @param ar
-     *            the ar
-     */
-    public AsyncResultWrapper(AsyncResult<TResult> ar) {
-        super();
-        this.ar = ar;
-    }
+	/**
+	 * Instantiates a new async result wrapper.
+	 *
+	 * @param ar
+	 *            the ar
+	 */
+	public AsyncResultWrapper(AsyncResult<TResult> ar) {
+		super();
+		this.ar = ar;
+	}
 
-    /** Sets the async result.
+	/**
+	 * Sets the async result.
 	 *
 	 * @param ar
 	 *            the new async result
 	 */
-    public void setAsyncResult(AsyncResult<TResult> ar) {
-        AsyncResult<TResult> oldResult = this.ar;
-        if (oldResult != null) {
-            oldResult.removeResultListener(this);
-        }
-        if (ar != null) {
-            ar.addResultListener(this);
-        }
-        this.ar = ar;
-    }
+	public void setAsyncResult(AsyncResult<TResult> ar) {
+		AsyncResult<TResult> oldResult = this.ar;
+		if (oldResult != null) {
+			oldResult.removeResultListener(this);
+		}
+		if (ar != null) {
+			ar.addResultListener(this);
+		}
+		this.ar = ar;
+	}
 
-    /** Gets the async result.
+	/**
+	 * Gets the async result.
 	 *
 	 * @return the async result
 	 */
-    public AsyncResult<TResult> getAsyncResult() {
-        return this.ar;
-    }
+	public AsyncResult<TResult> getAsyncResult() {
+		return this.ar;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.clientlet.AsyncResult#addResultListener(org.xamjwg.clientlet
-     * .AsyncResultListener)
-     */
-    @Override
-    public void addResultListener(AsyncResultListener<TResult> listener) {
-        synchronized (this) {
-            this.listeners.add(listener);
-        }
-        AsyncResult<TResult> ar = this.ar;
-        if (ar != null) {
-            ar.signal();
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.xamjwg.clientlet.AsyncResult#addResultListener(org.xamjwg.clientlet
+	 * .AsyncResultListener)
+	 */
+	@Override
+	public void addResultListener(AsyncResultListener<TResult> listener) {
+		synchronized (this) {
+			this.listeners.add(listener);
+		}
+		AsyncResult<TResult> ar = this.ar;
+		if (ar != null) {
+			ar.signal();
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.xamjwg.clientlet.AsyncResult#removeResultListener(org.xamjwg.clientlet
-     * .AsyncResultListener)
-     */
-    @Override
-    public void removeResultListener(AsyncResultListener<TResult> listener) {
-        synchronized (this) {
-            this.listeners.remove(listener);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.AsyncResult#removeResultListener(org.xamjwg.
+	 * clientlet .AsyncResultListener)
+	 */
+	@Override
+	public void removeResultListener(AsyncResultListener<TResult> listener) {
+		synchronized (this) {
+			this.listeners.remove(listener);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.clientlet.AsyncResultListener#exceptionReceived(org.xamjwg
-     * .clientlet.AsyncResultEvent)
-     */
-    @Override
-    public void exceptionReceived(AsyncResultEvent<Throwable> event) {
-        AsyncResultListener<TResult>[] listenersArray;
-        synchronized (this) {
-            listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
-        }
-        for (int i = 0; i < listenersArray.length; i++) {
-            AsyncResultListener<TResult> arl = listenersArray[i];
-            arl.exceptionReceived(event);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.xamjwg.clientlet.AsyncResultListener#exceptionReceived(org.xamjwg
+	 * .clientlet.AsyncResultEvent)
+	 */
+	@Override
+	public void exceptionReceived(AsyncResultEvent<Throwable> event) {
+		AsyncResultListener<TResult>[] listenersArray;
+		synchronized (this) {
+			listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
+		}
+		for (int i = 0; i < listenersArray.length; i++) {
+			AsyncResultListener<TResult> arl = listenersArray[i];
+			arl.exceptionReceived(event);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.xamjwg.clientlet.AsyncResultListener#resultReceived(org.xamjwg.clientlet
-     * .AsyncResultEvent)
-     */
-    @Override
-    public void resultReceived(AsyncResultEvent<TResult> event) {
-        AsyncResultListener<TResult>[] listenersArray;
-        synchronized (this) {
-            listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
-        }
-        for (int i = 0; i < listenersArray.length; i++) {
-            AsyncResultListener<TResult> arl = listenersArray[i];
-            arl.resultReceived(event);
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.AsyncResultListener#resultReceived(org.xamjwg.
+	 * clientlet .AsyncResultEvent)
+	 */
+	@Override
+	public void resultReceived(AsyncResultEvent<TResult> event) {
+		AsyncResultListener<TResult>[] listenersArray;
+		synchronized (this) {
+			listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
+		}
+		for (int i = 0; i < listenersArray.length; i++) {
+			AsyncResultListener<TResult> arl = listenersArray[i];
+			arl.resultReceived(event);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.xamjwg.clientlet.AsyncResult#signal()
-     */
-    @Override
-    public void signal() {
-        AsyncResult<TResult> ar = this.ar;
-        if (ar != null) {
-            ar.signal();
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.xamjwg.clientlet.AsyncResult#signal()
+	 */
+	@Override
+	public void signal() {
+		AsyncResult<TResult> ar = this.ar;
+		if (ar != null) {
+			ar.signal();
+		}
+	}
 }

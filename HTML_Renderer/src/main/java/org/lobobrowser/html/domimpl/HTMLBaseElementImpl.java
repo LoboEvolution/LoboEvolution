@@ -48,7 +48,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	 */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (HtmlParser.MODIFYING_KEY.equals(key) && (data != Boolean.TRUE)) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			this.processBaseTag();
 		}
 		return super.setUserData(key, data, handler);

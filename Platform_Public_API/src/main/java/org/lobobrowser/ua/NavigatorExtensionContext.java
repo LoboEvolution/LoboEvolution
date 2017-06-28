@@ -29,89 +29,89 @@ import org.lobobrowser.clientlet.ClientletSelector;
  */
 public interface NavigatorExtensionContext {
 
-    /**
-     * Adds a clientlet selector. This is how platform extensions register
-     * additional content handlers.
-     *
-     * @param selector
-     *            the selector
-     */
-    void addClientletSelector(ClientletSelector selector);
+	/**
+	 * Adds a clientlet selector. This is how platform extensions register
+	 * additional content handlers.
+	 *
+	 * @param selector
+	 *            the selector
+	 */
+	void addClientletSelector(ClientletSelector selector);
 
-    /**
-     * Removes the clientlet selector.
-     *
-     * @param selector
-     *            the selector
-     */
-    void removeClientletSelector(ClientletSelector selector);
+	/**
+	 * Removes the clientlet selector.
+	 *
+	 * @param selector
+	 *            the selector
+	 */
+	void removeClientletSelector(ClientletSelector selector);
 
-    /**
-     * Adds an object that can view connections made by the browser and
-     * potentially modify their headers and other data.
-     *
-     * @param processor
-     *            An connection processor.
-     */
-    void addConnectionProcessor(ConnectionProcessor processor);
+	/**
+	 * Adds an object that can view connections made by the browser and
+	 * potentially modify their headers and other data.
+	 *
+	 * @param processor
+	 *            An connection processor.
+	 */
+	void addConnectionProcessor(ConnectionProcessor processor);
 
-    /**
-     * Removes the connection processor.
-     *
-     * @param processor
-     *            the processor
-     */
-    void removeConnectionProcessor(ConnectionProcessor processor);
+	/**
+	 * Removes the connection processor.
+	 *
+	 * @param processor
+	 *            the processor
+	 */
+	void removeConnectionProcessor(ConnectionProcessor processor);
 
-    /**
-     * Adds a listener of navigator events.
-     *
-     * @param listener
-     *            the listener
-     */
-    void addNavigatorErrorListener(NavigatorErrorListener listener);
+	/**
+	 * Adds a listener of navigator events.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	void addNavigatorErrorListener(NavigatorErrorListener listener);
 
-    /**
-     * Removes a listener of navigation events.
-     *
-     * @param listener
-     *            the listener
-     */
-    void removeNavigatorErrorListener(NavigatorErrorListener listener);
+	/**
+	 * Removes a listener of navigation events.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	void removeNavigatorErrorListener(NavigatorErrorListener listener);
 
-    /**
-     * Adds a global listener of navigation events.
-     *
-     * @param listener
-     *            The listener.
-     */
-    void addNavigationListener(NavigationListener listener);
+	/**
+	 * Adds a global listener of navigation events.
+	 *
+	 * @param listener
+	 *            The listener.
+	 */
+	void addNavigationListener(NavigationListener listener);
 
-    /**
-     * Removes the navigation listener.
-     *
-     * @param listener
-     *            the listener
-     */
-    void removeNavigationListener(NavigationListener listener);
+	/**
+	 * Removes the navigation listener.
+	 *
+	 * @param listener
+	 *            the listener
+	 */
+	void removeNavigationListener(NavigationListener listener);
 
-    /** Gets the user agent.
+	/**
+	 * Gets the user agent.
 	 *
 	 * @return the user agent
 	 */
-    UserAgent getUserAgent();
+	UserAgent getUserAgent();
 
-    /**
-     * Registers a URL stream handler factory which may be used to implement
-     * custom protocols. Note that Java platform protocols (HTTP, HTTPS, etc.)
-     * or protocols defined by extensions with higher priority cannot be
-     * overridden. The factory must return <code>null</code> if it does not know
-     * how to handle a particular protocol.
-     *
-     * @param factory
-     *            An implementation of
-     *            <code>java.net.URLStreamHandlerFactory</code>.
-     */
-    void addURLStreamHandlerFactory(
-            java.net.URLStreamHandlerFactory factory);
+	/**
+	 * Registers a URL stream handler factory which may be used to implement
+	 * custom protocols. Note that Java platform protocols (HTTP, HTTPS, etc.)
+	 * or protocols defined by extensions with higher priority cannot be
+	 * overridden. The factory must return <code>null</code> if it does not know
+	 * how to handle a particular protocol.
+	 *
+	 * @param factory
+	 *            An implementation of
+	 *            <code>java.net.URLStreamHandlerFactory</code>.
+	 */
+	void addURLStreamHandlerFactory(java.net.URLStreamHandlerFactory factory);
 }

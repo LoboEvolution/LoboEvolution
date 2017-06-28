@@ -31,68 +31,67 @@ import java.io.IOException;
  * @author J. H. S.
  */
 public class OS {
-    /**
-     * Instantiates a new os.
-     */
-    private OS() {
-        super();
-    }
-    
-    /** Checks if is windows.
+	/**
+	 * Instantiates a new os.
+	 */
+	private OS() {
+		super();
+	}
+
+	/**
+	 * Checks if is windows.
 	 *
 	 * @return true, if is windows
 	 */
-    public static boolean isWindows() {
-        String osName = System.getProperty("os.name");
-        return osName.indexOf("Windows") != -1;
-    }
-    
-    /**
-     * Launch browser.
-     *
-     * @param url
-     *            the url
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public static void launchBrowser(String url) throws IOException {
-        String cmdLine;
-        if (isWindows()) {
-            cmdLine = "rundll32 url.dll,FileProtocolHandler " + url;
-        } else {
-            cmdLine = "firefox " + url;
-        }
-        try {
-            Runtime.getRuntime().exec(cmdLine);
-        } catch (IOException ioe) {
-            Runtime.getRuntime().exec("netscape " + url);
-        }
-    }
-    
-    /**
-     * Opens a file a directory with an appropriate program.
-     *
-     * @param path
-     *            the path
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public static void launchPath(String path) throws IOException {
-        if (isWindows()) {
-            Runtime.getRuntime()
-                    .exec(new String[] { "cmd.exe", "/c", "start", "\"title\"",
-                    path });
-        } else {
-            throw new UnsupportedOperationException("Unsupported");
-        }
-    }
-    
-    /**
-     * Supports launch path.
-     *
-     * @return true, if successful
-     */
-    public static boolean supportsLaunchPath() {
-        return isWindows();
-    }
+	public static boolean isWindows() {
+		String osName = System.getProperty("os.name");
+		return osName.indexOf("Windows") != -1;
+	}
+
+	/**
+	 * Launch browser.
+	 *
+	 * @param url
+	 *            the url
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public static void launchBrowser(String url) throws IOException {
+		String cmdLine;
+		if (isWindows()) {
+			cmdLine = "rundll32 url.dll,FileProtocolHandler " + url;
+		} else {
+			cmdLine = "firefox " + url;
+		}
+		try {
+			Runtime.getRuntime().exec(cmdLine);
+		} catch (IOException ioe) {
+			Runtime.getRuntime().exec("netscape " + url);
+		}
+	}
+
+	/**
+	 * Opens a file a directory with an appropriate program.
+	 *
+	 * @param path
+	 *            the path
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public static void launchPath(String path) throws IOException {
+		if (isWindows()) {
+			Runtime.getRuntime().exec(new String[] { "cmd.exe", "/c", "start", "\"title\"", path });
+		} else {
+			throw new UnsupportedOperationException("Unsupported");
+		}
+	}
+
+	/**
+	 * Supports launch path.
+	 *
+	 * @return true, if successful
+	 */
+	public static boolean supportsLaunchPath() {
+		return isWindows();
+	}
 }

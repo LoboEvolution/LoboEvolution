@@ -25,7 +25,7 @@ import org.lobobrowser.w3c.svg.SVGPathSegCurvetoCubicSmoothRel;
 public class SVGPathSegCurvetoCubicSmoothRelImpl extends SVGPathSegImpl implements SVGPathSegCurvetoCubicSmoothRel {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	private float x2;
 	private float y2;
 

@@ -27,11 +27,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.JComponent;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.renderer.UIControl;

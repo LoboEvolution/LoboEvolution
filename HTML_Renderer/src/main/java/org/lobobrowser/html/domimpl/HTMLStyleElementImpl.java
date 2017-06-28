@@ -40,87 +40,85 @@ import com.steadystate.css.parser.SACParserCSS3;
 /**
  * The Class HTMLStyleElementImpl.
  */
-public class HTMLStyleElementImpl extends HTMLElementImpl implements
-HTMLStyleElement {
+public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleElement {
 
-    /** The style sheet. */
-    private CSSStyleSheet styleSheet;
-    
-    /** The disabled. */
-    private boolean disabled;
+	/** The style sheet. */
+	private CSSStyleSheet styleSheet;
 
-    /**
-     * Instantiates a new HTML style element impl.
-     */
-    public HTMLStyleElementImpl() {
-        super(HtmlProperties.STYLE, true);
-    }
+	/** The disabled. */
+	private boolean disabled;
 
-    /**
-     * Instantiates a new HTML style element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLStyleElementImpl(String name) {
-        super(name, true);
-    }
+	/**
+	 * Instantiates a new HTML style element impl.
+	 */
+	public HTMLStyleElementImpl() {
+		super(HtmlProperties.STYLE, true);
+	}
 
-    @Override
-    public boolean getDisabled() {
-        return this.disabled;
-    }
+	/**
+	 * Instantiates a new HTML style element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLStyleElementImpl(String name) {
+		super(name, true);
+	}
 
-    @Override
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-        CSSStyleSheet sheet = this.styleSheet;
-        if (sheet != null) {
-            sheet.setDisabled(disabled);
-        }
-    }
+	@Override
+	public boolean getDisabled() {
+		return this.disabled;
+	}
 
-    @Override
-    public String getMedia() {
-        return this.getAttribute(HtmlAttributeProperties.MEDIA);
-    }
+	@Override
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+		CSSStyleSheet sheet = this.styleSheet;
+		if (sheet != null) {
+			sheet.setDisabled(disabled);
+		}
+	}
 
-    @Override
-    public void setMedia(String media) {
-        this.setAttribute(HtmlAttributeProperties.MEDIA, media);
-    }
+	@Override
+	public String getMedia() {
+		return this.getAttribute(HtmlAttributeProperties.MEDIA);
+	}
 
-    @Override
-    public String getType() {
-        return this.getAttribute(HtmlAttributeProperties.TYPE);
-    }
+	@Override
+	public void setMedia(String media) {
+		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
+	}
 
-    @Override
-    public void setType(String type) {
-        this.setAttribute(HtmlAttributeProperties.TYPE, type);
-    }
+	@Override
+	public String getType() {
+		return this.getAttribute(HtmlAttributeProperties.TYPE);
+	}
 
-    @Override
-    public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (HtmlParser.MODIFYING_KEY.equals(key) && (data != Boolean.TRUE)) {
-            this.processStyle();
-        } else if ("styleSheet.disabled.changed".equals(key)) {
-            this.informDocumentInvalid();
-        }
-        return super.setUserData(key, data, handler);
-    }
+	@Override
+	public void setType(String type) {
+		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+	}
 
-    /**
-     * Process style.
-     */
-    protected void processStyle() {
-        this.styleSheet = null;
-        UserAgentContext uacontext = this.getUserAgentContext();
-        if (uacontext.isInternalCSSEnabled()) {
-            if (CSSUtilities.matchesMedia(this.getMedia(),
-                    this.getUserAgentContext())) {
-                String text = this.getRawInnerText(true);
-				if ((text != null) && !"".equals(text)) {
+	@Override
+	public Object setUserData(String key, Object data, UserDataHandler handler) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+			this.processStyle();
+		} else if ("styleSheet.disabled.changed".equals(key)) {
+			this.informDocumentInvalid();
+		}
+		return super.setUserData(key, data, handler);
+	}
+
+	/**
+	 * Process style.
+	 */
+	protected void processStyle() {
+		this.styleSheet = null;
+		UserAgentContext uacontext = this.getUserAgentContext();
+		if (uacontext.isInternalCSSEnabled()) {
+			if (CSSUtilities.matchesMedia(this.getMedia(), this.getUserAgentContext())) {
+				String text = this.getRawInnerText(true);
+				if (text != null && !"".equals(text)) {
 
 					HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getOwnerDocument();
 
@@ -146,34 +144,33 @@ HTMLStyleElement {
 						logger.error("Unable to parse style sheet", err);
 					}
 				}
-            }
-        }
-    }
+			}
+		}
+	}
 
-    @Override
-    protected void appendInnerTextImpl(StringBuffer buffer) {
-        // nop
-    }
+	@Override
+	protected void appendInnerTextImpl(StringBuffer buffer) {
+		// nop
+	}
 
-    @Override
-    public boolean getScoped() {
-        String scoped = this.getAttribute(HtmlAttributeProperties.SCOPED);
-        return HtmlAttributeProperties.SCOPED.equalsIgnoreCase(scoped);
-    }
+	@Override
+	public boolean getScoped() {
+		String scoped = this.getAttribute(HtmlAttributeProperties.SCOPED);
+		return HtmlAttributeProperties.SCOPED.equalsIgnoreCase(scoped);
+	}
 
-    @Override
-    public void setScoped(boolean scoped) {
-        this.setAttribute(HtmlAttributeProperties.SCOPED,
-                scoped ? HtmlAttributeProperties.SCOPED : null);
-    }
-    
-    
-     /** Gets the sheet.
+	@Override
+	public void setScoped(boolean scoped) {
+		this.setAttribute(HtmlAttributeProperties.SCOPED, scoped ? HtmlAttributeProperties.SCOPED : null);
+	}
+
+	/**
+	 * Gets the sheet.
 	 *
 	 * @return the sheet
 	 */
-    public CSSStyleSheet getSheet() {
-        return this.styleSheet;
-    }
+	public CSSStyleSheet getSheet() {
+		return this.styleSheet;
+	}
 
 }

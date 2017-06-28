@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface AudioTrack.
  */
 public interface AudioTrack {
-	
+
 	/**
 	 * Gets the id.
 	 *

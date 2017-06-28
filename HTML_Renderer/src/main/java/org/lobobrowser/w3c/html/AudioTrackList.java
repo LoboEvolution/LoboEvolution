@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.mozilla.javascript.Function;
 
-
 /**
  * The Interface AudioTrackList.
  */
 public interface AudioTrackList {
-	
+
 	/**
 	 * Gets the length.
 	 *
@@ -40,7 +39,8 @@ public interface AudioTrackList {
 	/**
 	 * Gets the element.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the element
 	 */
 	public AudioTrack getElement(int index);
@@ -48,7 +48,8 @@ public interface AudioTrackList {
 	/**
 	 * Gets the track by id.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the track by id
 	 */
 	public AudioTrack getTrackById(String id);

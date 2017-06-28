@@ -23,10 +23,8 @@ package org.lobobrowser.settings;
 import java.io.IOException;
 import java.io.Serializable;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.security.GenericLocalPermission;
 import org.lobobrowser.store.StorageManager;
 
@@ -35,61 +33,56 @@ import org.lobobrowser.store.StorageManager;
  */
 public class ManagedStoreSettings implements Serializable {
 
-    /** The Constant logger. */
-    private static final Logger logger = LogManager
-            .getLogger(ManagedStoreSettings.class);
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(ManagedStoreSettings.class);
 
-    /** The Constant instance. */
-    private static final ManagedStoreSettings instance;
+	/** The Constant instance. */
+	private static final ManagedStoreSettings instance;
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 22574500000020705L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 22574500000020705L;
 
-    static {
-        ManagedStoreSettings ins = null;
-        try {
-            ins = (ManagedStoreSettings) StorageManager.getInstance()
-                    .retrieveSettings(
-                            ManagedStoreSettings.class.getSimpleName(),
-                            ManagedStoreSettings.class.getClassLoader());
-        } catch (Exception err) {
-            logger.error(
-                    "getInstance(): Unable to retrieve settings.", err);
-        }
-        if (ins == null) {
-            ins = new ManagedStoreSettings();
-        }
-        instance = ins;
-    }
+	static {
+		ManagedStoreSettings ins = null;
+		try {
+			ins = (ManagedStoreSettings) StorageManager.getInstance().retrieveSettings(
+					ManagedStoreSettings.class.getSimpleName(), ManagedStoreSettings.class.getClassLoader());
+		} catch (Exception err) {
+			logger.error("getInstance(): Unable to retrieve settings.", err);
+		}
+		if (ins == null) {
+			ins = new ManagedStoreSettings();
+		}
+		instance = ins;
+	}
 
-    /**
-     * Instantiates a new managed store settings.
-     */
-    private ManagedStoreSettings() {
-    }
+	/**
+	 * Instantiates a new managed store settings.
+	 */
+	private ManagedStoreSettings() {
+	}
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static ManagedStoreSettings getInstance() {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
-            sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
-        }
-        return instance;
-    }
+	public static ManagedStoreSettings getInstance() {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+		}
+		return instance;
+	}
 
-    /**
-     * Save.
-     */
-    public void save() {
-        try {
-            StorageManager.getInstance().saveSettings(
-                    this.getClass().getSimpleName(), this);
-        } catch (IOException ioe) {
-            logger.error("Unable to save settings: "
-                    + this.getClass().getSimpleName(), ioe);
-        }
-    }
+	/**
+	 * Save.
+	 */
+	public void save() {
+		try {
+			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
+		} catch (IOException ioe) {
+			logger.error("Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+		}
+	}
 }

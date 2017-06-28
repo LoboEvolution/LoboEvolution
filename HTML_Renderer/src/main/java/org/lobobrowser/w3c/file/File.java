@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Interface File.
  */
 public interface File extends Blob {
-	
+
 	/**
 	 * Gets the name.
 	 *

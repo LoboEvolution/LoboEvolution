@@ -26,43 +26,43 @@ import org.lobobrowser.clientlet.ClientletSelector;
  * This interface must be implemented by a platform extension or plugin.
  */
 public interface NavigatorExtension {
-    /**
-     * Invoked when the platform first loads the extension. At this point the
-     * extension can register {@link ClientletSelector}s (extra content
-     * handlers) by invoking
-     * {@link NavigatorExtensionContext#addClientletSelector(ClientletSelector)}
-     * .
-     *
-     * @param pcontext
-     *            The extension context. It provides extensions with access to
-     *            browser functionality.
-     */
-    void init(NavigatorExtensionContext pcontext);
+	/**
+	 * Invoked when the platform first loads the extension. At this point the
+	 * extension can register {@link ClientletSelector}s (extra content
+	 * handlers) by invoking
+	 * {@link NavigatorExtensionContext#addClientletSelector(ClientletSelector)}
+	 * .
+	 *
+	 * @param pcontext
+	 *            The extension context. It provides extensions with access to
+	 *            browser functionality.
+	 */
+	void init(NavigatorExtensionContext pcontext);
 
-    /**
-     * Invoked right before the platform opens a new window. At this point the
-     * extension can add custom widgets to the platform window.
-     * <p>
-     * Note that this method may not be invoked if the window does not require
-     * any toolbars, status bars, address bars or menus.
-     *
-     * @param wcontext
-     *            the wcontext
-     */
-    void windowOpening(NavigatorWindow wcontext);
+	/**
+	 * Invoked right before the platform opens a new window. At this point the
+	 * extension can add custom widgets to the platform window.
+	 * <p>
+	 * Note that this method may not be invoked if the window does not require
+	 * any toolbars, status bars, address bars or menus.
+	 *
+	 * @param wcontext
+	 *            the wcontext
+	 */
+	void windowOpening(NavigatorWindow wcontext);
 
-    /**
-     * Invoked when a window is about to close. At this point the extension can
-     * perform cleanup operations that are window specific.
-     *
-     * @param wcontext
-     *            the wcontext
-     */
-    void windowClosing(NavigatorWindow wcontext);
+	/**
+	 * Invoked when a window is about to close. At this point the extension can
+	 * perform cleanup operations that are window specific.
+	 *
+	 * @param wcontext
+	 *            the wcontext
+	 */
+	void windowClosing(NavigatorWindow wcontext);
 
-    /**
-     * Invoked when the platform needs to unload the extension. This method
-     * should release any resources used by the extension.
-     */
-    void destroy();
+	/**
+	 * Invoked when the platform needs to unload the extension. This method
+	 * should release any resources used by the extension.
+	 */
+	void destroy();
 }

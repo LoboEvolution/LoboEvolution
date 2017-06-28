@@ -200,7 +200,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			// Add any declarations in style attribute (last takes precedence).
 			String style = this.getAttribute(HtmlAttributeProperties.STYLE);
 
-			if ((style != null) && (style.length() != 0)) {
+			if (style != null && style.length() != 0) {
 				CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
 				InputSource inputSource = this.getCssInputSourceForDecl(style);
 				try {
@@ -210,8 +210,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 				} catch (Exception err) {
 					String id = this.getId();
 					String withId = id == null ? "" : " with ID '" + id + "'";
-					logger.error("Unable to parse style attribute value for element " + this.getTagName() + withId + " in "
-							+ this.getDocumentURL() + ".", err);
+					logger.error("Unable to parse style attribute value for element " + this.getTagName() + withId
+							+ " in " + this.getDocumentURL() + ".", err);
 				}
 			}
 			this.localStyleDeclarationState = sds;
@@ -229,7 +229,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
 		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
-		css.internalSetLC("font-size", String.valueOf((int)LAFSettings.getInstance().getFontSize())+"px");
+		css.internalSetLC("font-size", String.valueOf((int) LAFSettings.getInstance().getFontSize()) + "px");
 		return css;
 	}
 
@@ -350,7 +350,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	protected int getAttributeAsInt(String name, int defaultValue) {
 		String valueText = this.getAttribute(name);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/**
@@ -414,7 +414,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			return style;
 		}
 		String classNames = this.getClassName();
-		if ((classNames != null) && (classNames.length() != 0)) {
+		if (classNames != null && classNames.length() != 0) {
 			String id = this.getId();
 			String elementName = this.getTagName();
 			String[] classNameArray = Strings.split(classNames);
@@ -534,7 +534,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			String elementName = this.getTagName();
 			String classNames = this.getClassName();
 			String[] classNameArray = null;
-			if ((classNames != null) && (classNames.length() != 0)) {
+			if (classNames != null && classNames.length() != 0) {
 				classNameArray = Strings.split(classNames);
 			}
 			ihs = Boolean
@@ -574,7 +574,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			String elementName = this.getTagName();
 			String classNames = this.getClassName();
 			String[] classNameArray = null;
-			if ((classNames != null) && (classNames.length() != 0)) {
+			if (classNames != null && classNames.length() != 0) {
 				classNameArray = Strings.split(classNames);
 			}
 			hhs = Boolean.valueOf(
@@ -663,7 +663,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		}
 		forgetStyle(true);
 		informInvalidRecursive();
-	
+
 	}
 
 	private void informInvalidRecursive() {
@@ -698,7 +698,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	private boolean classMatch(String classTL) {
 		String classNames = this.getClassName();
-		if ((classNames == null) || (classNames.length() == 0)) {
+		if (classNames == null || classNames.length() == 0) {
 			return classTL == null;
 		}
 		StringTokenizer tok = new StringTokenizer(classNames, " \t\r\n");
@@ -950,7 +950,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	protected Object getAncestorForJavaClass(Class javaClass) {
 		Object nodeObj = this.getParentNode();
-		if ((nodeObj == null) || javaClass.isInstance(nodeObj)) {
+		if (nodeObj == null || javaClass.isInstance(nodeObj)) {
 			return nodeObj;
 		} else if (nodeObj instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) nodeObj).getAncestorForJavaClass(javaClass);
@@ -1031,7 +1031,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			}
 		}
 		ArrayList<Node> nl = this.nodeList;
-		if ((nl == null) || (nl.size() == 0)) {
+		if (nl == null || nl.size() == 0) {
 			buffer.append("/>");
 			return;
 		}

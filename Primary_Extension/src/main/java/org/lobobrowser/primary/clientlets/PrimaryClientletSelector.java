@@ -61,7 +61,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 		// Clientlets here are not overriddable.
 
 		String mimeType = response.getMimeType();
-		
+
 		if (logger.isInfoEnabled()) {
 			logger.info("select(): mimeType=" + mimeType);
 		}
@@ -72,14 +72,15 @@ public class PrimaryClientletSelector implements ClientletSelector {
 		} else if ("image/jpeg".equals(mimeTypeTL) || "image/jpg".equals(mimeTypeTL) || "image/gif".equals(mimeTypeTL)
 				|| "image/png".equals(mimeTypeTL)) {
 			return new ImageClientlet();
-		} else if ((mimeType == null) || "application/octet-stream".equals(mimeTypeTL)
+		} else if (mimeType == null || "application/octet-stream".equals(mimeTypeTL)
 				|| "content/unknown".equals(mimeTypeTL)) {
 
 			String path = response.getResponseURL().getPath();
 			int lastDotIdx = path.lastIndexOf('.');
 			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 			String extensionTL = extension.toLowerCase();
-			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || "svg".equals(extensionTL) || (extensionTL.length() == 0)) {
+			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || "svg".equals(extensionTL)
+					|| extensionTL.length() == 0) {
 				return new HtmlClientlet();
 			} else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL) || "png".equals(extensionTL)) {
 				return new ImageClientlet();
@@ -102,7 +103,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 	public Clientlet lastResortSelect(ClientletRequest request, ClientletResponse response) {
 		String mimeType = response.getMimeType();
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-		
+
 		if ("application/xml".equals(mimeTypeTL)) {
 			// TODO: XHTML needs its own clientlet.
 			return new HtmlClientlet();

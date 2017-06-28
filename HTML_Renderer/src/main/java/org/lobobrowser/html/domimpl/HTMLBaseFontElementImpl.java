@@ -94,7 +94,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	@Override
 	public int getSize() {
 		String valueText = this.getAttribute(HtmlAttributeProperties.SIZE);
-        return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
+		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
 	/*

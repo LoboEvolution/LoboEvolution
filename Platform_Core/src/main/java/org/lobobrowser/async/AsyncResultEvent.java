@@ -36,29 +36,30 @@ import java.util.EventObject;
  */
 public class AsyncResultEvent<TResult> extends EventObject {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
-    /** The result. */
-    private final TResult result;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	/** The result. */
+	private final TResult result;
 
-    /**
-     * Instance constructor.
-     *
-     * @param source
-     *            The event source.
-     * @param result
-     *            The asynchronous result.
-     */
-    public AsyncResultEvent(Object source, TResult result) {
-        super(source);
-        this.result = result;
-    }
+	/**
+	 * Instance constructor.
+	 *
+	 * @param source
+	 *            The event source.
+	 * @param result
+	 *            The asynchronous result.
+	 */
+	public AsyncResultEvent(Object source, TResult result) {
+		super(source);
+		this.result = result;
+	}
 
-    /** Gets the result.
+	/**
+	 * Gets the result.
 	 *
 	 * @return the result
 	 */
-    public TResult getResult() {
-        return this.result;
-    }
+	public TResult getResult() {
+		return this.result;
+	}
 }

@@ -46,10 +46,13 @@ import org.w3c.dom.Node;
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
- * Object Model (DOM) Level 3 XPath Specification</a>. </p>
+ * Object Model (DOM) Level 3 XPath Specification</a>.
+ * </p>
  *
- * <p> The <code>XPathExpression</code> interface represents a parsed and
- * resolved XPath expression. </p>
+ * <p>
+ * The <code>XPathExpression</code> interface represents a parsed and resolved
+ * XPath expression.
+ * </p>
  *
  * @see org.w3c.dom.xpath.XPathExpression
  *
@@ -88,9 +91,12 @@ public class XPathExpressionImpl implements XPathExpression {
 	 * <p>
 	 * See also the <a href=
 	 * 'http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
-	 * Object Model (DOM) Level 3 XPath Specification</a>. </p>
+	 * Object Model (DOM) Level 3 XPath Specification</a>.
+	 * </p>
 	 *
-	 * <p> Evaluates this XPath expression and returns a result. </p>
+	 * <p>
+	 * Evaluates this XPath expression and returns a result.
+	 * </p>
 	 *
 	 * @param contextNode
 	 *            The <code>context</code> is context node for the evaluation of
@@ -141,17 +147,17 @@ public class XPathExpressionImpl implements XPathExpression {
 		if (m_doc != null) {
 
 			// Check that the context node is owned by the same document
-			if ((contextNode != m_doc) && (!contextNode.getOwnerDocument().equals(m_doc))) {
+			if (contextNode != m_doc && !contextNode.getOwnerDocument().equals(m_doc)) {
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
 				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, fmsg);
 			}
 
 			// Check that the context node is an acceptable node type
 			short nodeType = contextNode.getNodeType();
-			if ((nodeType != Node.DOCUMENT_NODE) && (nodeType != Node.ELEMENT_NODE) && (nodeType != Node.ATTRIBUTE_NODE)
-					&& (nodeType != Node.TEXT_NODE) && (nodeType != Node.CDATA_SECTION_NODE)
-					&& (nodeType != Node.COMMENT_NODE) && (nodeType != Node.PROCESSING_INSTRUCTION_NODE)
-					&& (nodeType != XPathNamespace.XPATH_NAMESPACE_NODE)) {
+			if (nodeType != Node.DOCUMENT_NODE && nodeType != Node.ELEMENT_NODE && nodeType != Node.ATTRIBUTE_NODE
+					&& nodeType != Node.TEXT_NODE && nodeType != Node.CDATA_SECTION_NODE
+					&& nodeType != Node.COMMENT_NODE && nodeType != Node.PROCESSING_INSTRUCTION_NODE
+					&& nodeType != XPathNamespace.XPATH_NAMESPACE_NODE) {
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);
 				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, fmsg);
 			}

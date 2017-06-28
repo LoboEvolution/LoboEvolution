@@ -26,13 +26,14 @@ package org.lobobrowser.gui;
  */
 public abstract class ResponseAdapter implements ResponseListener {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.gui.ResponseListener#responseProcessed(org.lobobrowser.gui
-     * .ResponseEvent)
-     */
-    @Override
-    public void responseProcessed(ResponseEvent event) {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.gui.ResponseListener#responseProcessed(org.lobobrowser.
+	 * gui .ResponseEvent)
+	 */
+	@Override
+	public void responseProcessed(ResponseEvent event) {
+	}
 }

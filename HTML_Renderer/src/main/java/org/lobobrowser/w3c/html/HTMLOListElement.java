@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLOListElement.
  */
 public interface HTMLOListElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the reversed.
 	 *

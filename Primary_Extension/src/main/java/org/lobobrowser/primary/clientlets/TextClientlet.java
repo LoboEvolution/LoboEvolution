@@ -35,23 +35,22 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletContext;
 import org.lobobrowser.clientlet.ClientletException;
-import org.lobobrowser.primary.ext.SourceViewerWindow;
 import org.lobobrowser.util.io.IORoutines;
 
 /**
  * The Class TextClientlet.
  */
 public class TextClientlet implements Clientlet {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(TextClientlet.class);
+
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(TextClientlet.class);
 
 	/**
 	 * Instantiates a new text clientlet.
 	 */
-	
+
 	private String extension;
-	
+
 	public TextClientlet(String extension) {
 		this.extension = extension;
 	}
@@ -70,9 +69,9 @@ public class TextClientlet implements Clientlet {
 			try {
 				String text = IORoutines.loadAsText(in, "UTF-8");
 				RSyntaxTextArea textArea = new RSyntaxTextArea(text);
-				
+
 				logger.error("extension: " + extension);
-				
+
 				switch (extension) {
 				case "css":
 					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
@@ -89,7 +88,7 @@ public class TextClientlet implements Clientlet {
 				default:
 					break;
 				}
-				
+
 				textArea.setEditable(false);
 				JScrollPane pane = new JScrollPane(textArea);
 				context.setResultingContent(pane);

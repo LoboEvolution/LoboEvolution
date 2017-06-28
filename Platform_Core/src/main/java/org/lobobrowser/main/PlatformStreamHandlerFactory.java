@@ -32,53 +32,55 @@ import java.util.Collection;
  */
 public class PlatformStreamHandlerFactory implements URLStreamHandlerFactory {
 
-    /** The Constant instance. */
-    private static final PlatformStreamHandlerFactory instance = new PlatformStreamHandlerFactory();
+	/** The Constant instance. */
+	private static final PlatformStreamHandlerFactory instance = new PlatformStreamHandlerFactory();
 
-    /** The factories. */
-    private final Collection<URLStreamHandlerFactory> factories = new ArrayList<URLStreamHandlerFactory>();
+	/** The factories. */
+	private final Collection<URLStreamHandlerFactory> factories = new ArrayList<URLStreamHandlerFactory>();
 
-    /** Gets the Constant instance.
+	/**
+	 * Gets the Constant instance.
 	 *
 	 * @return the Constant instance
 	 */
-    public static PlatformStreamHandlerFactory getInstance() {
-        return instance;
-    }
+	public static PlatformStreamHandlerFactory getInstance() {
+		return instance;
+	}
 
-    /**
-     * Adds the factory.
-     *
-     * @param factory
-     *            the factory
-     */
-    public void addFactory(URLStreamHandlerFactory factory) {
-        SecurityManager sm = System.getSecurityManager();
-        if (sm != null) {
-            sm.checkSetFactory();
-        }
-        Collection<URLStreamHandlerFactory> factories = this.factories;
-        synchronized (factories) {
-            factories.add(factory);
-        }
-    }
+	/**
+	 * Adds the factory.
+	 *
+	 * @param factory
+	 *            the factory
+	 */
+	public void addFactory(URLStreamHandlerFactory factory) {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkSetFactory();
+		}
+		Collection<URLStreamHandlerFactory> factories = this.factories;
+		synchronized (factories) {
+			factories.add(factory);
+		}
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
-     */
-    @Override
-    public URLStreamHandler createURLStreamHandler(String protocol) {
-        Collection<URLStreamHandlerFactory> factories = this.factories;
-        synchronized (factories) {
-            for (URLStreamHandlerFactory f : factories) {
-                URLStreamHandler handler = f.createURLStreamHandler(protocol);
-                if (handler != null) {
-                    return handler;
-                }
-            }
-        }
-        return null;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.net.URLStreamHandlerFactory#createURLStreamHandler(java.lang.String)
+	 */
+	@Override
+	public URLStreamHandler createURLStreamHandler(String protocol) {
+		Collection<URLStreamHandlerFactory> factories = this.factories;
+		synchronized (factories) {
+			for (URLStreamHandlerFactory f : factories) {
+				URLStreamHandler handler = f.createURLStreamHandler(protocol);
+				if (handler != null) {
+					return handler;
+				}
+			}
+		}
+		return null;
+	}
 }

@@ -24,12 +24,11 @@ package org.lobobrowser.w3c.html;
 import org.lobobrowser.html.js.Window;
 import org.w3c.dom.Document;
 
-
 /**
  * The Interface HTMLIFrameElement.
  */
 public interface HTMLIFrameElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the src.
 	 *

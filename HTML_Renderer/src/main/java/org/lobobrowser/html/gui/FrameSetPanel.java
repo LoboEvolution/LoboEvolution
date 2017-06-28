@@ -32,13 +32,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
@@ -153,7 +152,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 		Component toValidate = this;
 		for (;;) {
 			Container parent = toValidate.getParent();
-			if ((parent == null) || parent.isValid()) {
+			if (parent == null || parent.isValid()) {
 				break;
 			}
 			toValidate = parent;
@@ -220,7 +219,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 				this.frameComponents = frameComponents;
 				for (int i = 0; i < subframes.length; i++) {
 					HTMLElementImpl frameElement = subframes[i];
-					if ((frameElement != null) && "FRAMESET".equalsIgnoreCase(frameElement.getTagName())) {
+					if (frameElement != null && "FRAMESET".equalsIgnoreCase(frameElement.getTagName())) {
 						FrameSetPanel fsp = new FrameSetPanel();
 						fsp.setRootNode(frameElement);
 						frameComponents[i] = fsp;
@@ -250,7 +249,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 				HtmlLength[] rhl = rowLengths;
 				HtmlLength[] chl = colLengths;
 				Component[] fc = this.frameComponents;
-				if ((rhl != null) && (chl != null) && (fc != null)) {
+				if (rhl != null && chl != null && fc != null) {
 					Dimension size = this.getSize();
 					Insets insets = this.getInsets();
 					int width = size.width - insets.left - insets.right;
@@ -294,11 +293,11 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 			}
 		}
 		int remaining = totalSize - totalSizeNonMulti;
-		if ((remaining > 0) && (sumMulti > 0)) {
+		if (remaining > 0 && sumMulti > 0) {
 			for (int i = 0; i < htmlLengths.length; i++) {
 				HtmlLength htmlLength = htmlLengths[i];
 				if (htmlLength.getLengthType() == HtmlLength.MULTI_LENGTH) {
-					int absLength = (remaining * htmlLength.getRawValue()) / sumMulti;
+					int absLength = remaining * htmlLength.getRawValue() / sumMulti;
 					absLengths[i] = absLength;
 				}
 			}
@@ -330,7 +329,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 	private Component getSplitPane(HtmlRendererContext context, int[] colLengths, int firstCol, int numCols,
 			int[] rowLengths, int firstRow, int numRows, Component[] frameComponents) {
 		if (numCols == 1) {
-			int frameindex = (colLengths.length * firstRow) + firstCol;
+			int frameindex = colLengths.length * firstRow + firstCol;
 			Component topComponent = frameindex < frameComponents.length ? frameComponents[frameindex] : null;
 			if (numRows == 1) {
 				return topComponent;

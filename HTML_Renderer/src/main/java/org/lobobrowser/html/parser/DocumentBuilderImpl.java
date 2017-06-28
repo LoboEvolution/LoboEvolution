@@ -30,11 +30,10 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import javax.xml.parsers.DocumentBuilder;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.domimpl.DOMImplementationImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;

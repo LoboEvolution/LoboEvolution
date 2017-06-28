@@ -83,15 +83,15 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	public String getStrokeWidth() {
 		return this.getAttribute(STROKE_WIDTH);
 	}
-	
+
 	public String getD() {
-        String d = this.getAttribute(D);
-        if (d != null) {
-            d.replaceAll("\\r|\\n", "");
-        }
-        return d;
-    }
-	
+		String d = this.getAttribute(D);
+		if (d != null) {
+			d.replaceAll("\\r|\\n", "");
+		}
+		return d;
+	}
+
 	@Override
 	public SVGStringList getRequiredFeatures() {
 		// TODO Auto-generated method stub
@@ -128,7 +128,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setXMLlang(String xmllang) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setXMLspace(String xmlspace) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -198,12 +198,12 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public SVGAnimatedRect getViewBox() {
 		String viewBox = this.getAttribute(HtmlAttributeProperties.VIEW_BOX);
-		
-		if(viewBox == null){
+
+		if (viewBox == null) {
 			SVGRectImpl rect = (SVGRectImpl) getViewport();
 			return new SVGAnimatedRectImpl(rect);
 		}
-		
+
 		String[] result = viewBox.split(" ");
 		float x = Float.parseFloat(result[0]);
 		float y = Float.parseFloat(result[1]);
@@ -228,19 +228,19 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setZoomAndPan(short zoomAndPan) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addEventListener(String type, EventListener listener, boolean useCapture) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void removeEventListener(String type, EventListener listener, boolean useCapture) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -307,7 +307,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setContentScriptType(String contentScriptType) throws DOMException {
 		this.setAttribute(HtmlAttributeProperties.CONTENTSCRIPTTYPE, contentScriptType);
-		
+
 	}
 
 	@Override
@@ -317,7 +317,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public void setContentStyleType(String contentStyleType) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.CONTENTSTYLETYPE, contentStyleType);	
+		this.setAttribute(HtmlAttributeProperties.CONTENTSTYLETYPE, contentStyleType);
 	}
 
 	@Override
@@ -358,7 +358,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setUseCurrentView(boolean useCurrentView) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -376,7 +376,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setCurrentScale(float currentScale) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -394,31 +394,31 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void unsuspendRedraw(int suspend_handle_id) throws DOMException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void unsuspendRedrawAll() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void forceRedraw() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void pauseAnimations() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void unpauseAnimations() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -436,7 +436,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void setCurrentTime(float seconds) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -466,7 +466,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	@Override
 	public void deselectAll() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -517,23 +517,23 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	public String getFontSize(){
+
+	public String getFontSize() {
 		return this.getAttribute(HtmlAttributeProperties.FONTSIZE);
 	}
-	
-	public String getFontFamily(){
+
+	public String getFontFamily() {
 		return this.getAttribute(HtmlAttributeProperties.FONTFAMILY);
 	}
-	
-	public String getClipPath(){
+
+	public String getClipPath() {
 		return this.getAttribute(HtmlAttributeProperties.CLIPPATH);
 	}
-	
-	public SVGAnimateElementImpl getAnimateElement(){
+
+	public SVGAnimateElementImpl getAnimateElement() {
 		NodeList gChildNodes = this.getChildNodes();
 		for (int g = 0; g < gChildNodes.getLength(); g++) {
-			Node n = (Node) gChildNodes.item(g);
+			Node n = gChildNodes.item(g);
 			if (n instanceof SVGAnimateElementImpl) {
 				return (SVGAnimateElementImpl) n;
 			}

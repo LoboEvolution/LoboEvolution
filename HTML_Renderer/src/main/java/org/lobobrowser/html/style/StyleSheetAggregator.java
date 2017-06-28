@@ -94,10 +94,10 @@ public class StyleSheetAggregator {
 
 	/** The rules by element. */
 	private final Map<String, Collection<StyleRuleInfo>> rulesByElement = new HashMap<String, Collection<StyleRuleInfo>>();
-	
+
 	/** The pseudo element. */
 	private String pseudoElement;
-	
+
 	private int cnt = 1;
 
 	/**
@@ -197,7 +197,7 @@ public class StyleSheetAggregator {
 						}
 					}
 				}
-				
+
 				if (lastSelectorText != null) {
 					int dotIdx = lastSelectorText.indexOf('.');
 					if (dotIdx != -1) {
@@ -303,11 +303,11 @@ public class StyleSheetAggregator {
 	 */
 	private final void addClassRule(String elemtl, String classtl, CSSStyleRule styleRule,
 			ArrayList<SelectorMatcher> ancestorSelectors) {
-		
-		if(elemtl == null || "".equals(elemtl)){
+
+		if (elemtl == null || "".equals(elemtl)) {
 			elemtl = "*";
 		}
-		
+
 		Map<String, Collection<StyleRuleInfo>> classMap = this.classMapsByElement.get(elemtl);
 		if (classMap == null) {
 			classMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -335,11 +335,11 @@ public class StyleSheetAggregator {
 	 */
 	private final void addAttributeRule(String elemtl, String attrtl, CSSStyleRule styleRule,
 			ArrayList<SelectorMatcher> ancestorSelectors) {
-		
-		if(elemtl == null || "".equals(elemtl)){
+
+		if (elemtl == null || "".equals(elemtl)) {
 			elemtl = "*";
 		}
-		
+
 		Map<String, Collection<StyleRuleInfo>> attrMap = this.attrMapsByElement.get(elemtl);
 		if (attrMap == null) {
 			attrMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -367,11 +367,11 @@ public class StyleSheetAggregator {
 	 */
 	private final void addIdRule(String elemtl, String idtl, CSSStyleRule styleRule,
 			ArrayList<SelectorMatcher> ancestorSelectors) {
-		
-		if(elemtl == null || "".equals(elemtl)){
+
+		if (elemtl == null || "".equals(elemtl)) {
 			elemtl = "*";
 		}
-		
+
 		Map<String, Collection<StyleRuleInfo>> idsMap = this.idMapsByElement.get(elemtl);
 		if (idsMap == null) {
 			idsMap = new HashMap<String, Collection<StyleRuleInfo>>();
@@ -397,11 +397,11 @@ public class StyleSheetAggregator {
 	 */
 	private final void addElementRule(String elemtl, CSSStyleRule styleRule,
 			ArrayList<SelectorMatcher> ancestorSelectors) {
-		
-		if(elemtl == null || "".equals(elemtl)){
+
+		if (elemtl == null || "".equals(elemtl)) {
 			elemtl = "*";
 		}
-		
+
 		Collection<StyleRuleInfo> rules = this.rulesByElement.get(elemtl);
 		if (rules == null) {
 			rules = new LinkedList<StyleRuleInfo>();
@@ -437,17 +437,19 @@ public class StyleSheetAggregator {
 			if (psElement != null && psElement.contains("(")) {
 				psElement = psElement.substring(0, psElement.indexOf("("));
 			}
-			
+
 			int c = cnt++;
-			
+
 			Iterator<StyleRuleInfo> i = elementRules.iterator();
 			while (i.hasNext()) {
-				StyleRuleInfo styleRuleInfo = i.next();	
-				for (int a = 0; a < styleRuleInfo.getAncestorSelectors().size();a++) {
+				StyleRuleInfo styleRuleInfo = i.next();
+				for (int a = 0; a < styleRuleInfo.getAncestorSelectors().size(); a++) {
 					SelectorMatcher selectorMatcher = styleRuleInfo.getAncestorSelectors().get(a);
-					if(sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element,c) && element.getPseudoNames().contains(psElement)){
+					if (sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
+							&& element.getPseudoNames().contains(psElement)) {
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
-					}else if(!sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element,c) && !element.getPseudoNames().contains(psElement)){
+					} else if (!sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
+							&& !element.getPseudoNames().contains(psElement)) {
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
 					}
 				}
@@ -511,7 +513,7 @@ public class StyleSheetAggregator {
 		}
 		return styleDeclarations;
 	}
-	
+
 	/**
 	 * Affected by pseudo name in ancestor.
 	 *
@@ -597,7 +599,7 @@ public class StyleSheetAggregator {
 			while (i.hasNext()) {
 				StyleRuleInfo styleRuleInfo = i.next();
 				CSSStyleSheet styleSheet = styleRuleInfo.getStyleRule().getParentStyleSheet();
-				if ((styleSheet != null) && styleSheet.getDisabled()) {
+				if (styleSheet != null && styleSheet.getDisabled()) {
 					continue;
 				}
 				if (styleRuleInfo.affectedByPseudoNameInAncestor(element, ancestor, pseudoName)) {
@@ -625,7 +627,7 @@ public class StyleSheetAggregator {
 			if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
 				CSSStyleRule styleRule = styleRuleInfo.getStyleRule();
 				CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
-				if ((styleSheet != null) && styleSheet.getDisabled()) {
+				if (styleSheet != null && styleSheet.getDisabled()) {
 					continue;
 				}
 				if (styleDeclarations == null) {
@@ -644,7 +646,7 @@ public class StyleSheetAggregator {
 	 * @return
 	 */
 	private boolean isAttributeOperator(Attr attr, HTMLElementImpl element) {
-		
+
 		String name = attr.getName();
 		String value = attr.getValue();
 		String nodeName = element.getNodeName();
@@ -653,7 +655,8 @@ public class StyleSheetAggregator {
 		case SelectorMatcher.OP_EQUAL:
 			if (name.equals(attribute) && value.equals(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.equals(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
+			} else if (name.equals(attribute) && value.equals(attributeValue)
+					&& nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
@@ -661,23 +664,25 @@ public class StyleSheetAggregator {
 		case SelectorMatcher.OP_STAR_EQUAL:
 			if (name.equals(attribute) && value.contains(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.contains(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
+			} else if (name.equals(attribute) && value.contains(attributeValue)
+					&& nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_PIPE_EQUAL:
 		case SelectorMatcher.OP_CIRCUMFLEX_EQUAL:
-			if (name.equals(attribute) && value.startsWith(attributeValue)
-					&& "*".equals(htmlElement)) {
+			if (name.equals(attribute) && value.startsWith(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.startsWith(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
+			} else if (name.equals(attribute) && value.startsWith(attributeValue)
+					&& nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;
 		case SelectorMatcher.OP_DOLLAR_EQUAL:
 			if (name.equals(attribute) && value.endsWith(attributeValue) && "*".equals(htmlElement)) {
 				return true;
-			} else if (name.equals(attribute) && value.endsWith(attributeValue) && nodeName.equalsIgnoreCase(htmlElement)) {
+			} else if (name.equals(attribute) && value.endsWith(attributeValue)
+					&& nodeName.equalsIgnoreCase(htmlElement)) {
 				return true;
 			}
 			break;

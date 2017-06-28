@@ -26,7 +26,7 @@ import org.lobobrowser.w3c.svg.SVGPathSegArcAbs;
 public class SVGPathSegArcAbsImpl extends SVGPathSegImpl implements SVGPathSegArcAbs {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	private float r1;
 	private float r2;
 	private float angle;
@@ -42,7 +42,8 @@ public class SVGPathSegArcAbsImpl extends SVGPathSegImpl implements SVGPathSegAr
 	 * @param largeArcFlag2
 	 * @param sweepFlag2
 	 */
-	public SVGPathSegArcAbsImpl(float x2, float y2, float r12, float r22, float angle2, boolean largeArcFlag2, boolean sweepFlag2) {
+	public SVGPathSegArcAbsImpl(float x2, float y2, float r12, float r22, float angle2, boolean largeArcFlag2,
+			boolean sweepFlag2) {
 		this.x = x2;
 		this.y = y2;
 		this.r1 = r12;
@@ -61,7 +62,7 @@ public class SVGPathSegArcAbsImpl extends SVGPathSegImpl implements SVGPathSegAr
 	public String getPathSegTypeAsLetter() {
 		return "A";
 	}
-	
+
 	@Override
 	public float getR1() {
 		return r1;

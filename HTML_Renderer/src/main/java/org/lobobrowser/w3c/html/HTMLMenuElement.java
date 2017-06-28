@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLMenuElement.
  */
 public interface HTMLMenuElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the type.
 	 *
@@ -43,9 +42,12 @@ public interface HTMLMenuElement extends HTMLElement {
 	 */
 	public void setType(String type);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getLabel()
 	 */
+	@Override
 	public String getLabel();
 
 	/**

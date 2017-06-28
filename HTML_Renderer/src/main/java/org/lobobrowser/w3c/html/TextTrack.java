@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.mozilla.javascript.Function;
 
-
 /**
  * The Interface TextTrack.
  */
 public interface TextTrack {
-	
+
 	/**
 	 * Gets the kind.
 	 *
@@ -53,13 +52,13 @@ public interface TextTrack {
 
 	/** The Constant NONE. */
 	public static final short NONE = 0;
-	
+
 	/** The Constant LOADING. */
 	public static final short LOADING = 1;
-	
+
 	/** The Constant LOADED. */
 	public static final short LOADED = 2;
-	
+
 	/** The Constant ERROR. */
 	public static final short ERROR = 3;
 
@@ -102,10 +101,10 @@ public interface TextTrack {
 
 	/** The Constant OFF. */
 	public static final short OFF = 0;
-	
+
 	/** The Constant HIDDEN. */
 	public static final short HIDDEN = 1;
-	
+
 	/** The Constant SHOWING. */
 	public static final short SHOWING = 2;
 

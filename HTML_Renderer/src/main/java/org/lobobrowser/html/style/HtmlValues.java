@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.info.BorderInfo;
@@ -46,7 +47,7 @@ import org.w3c.dom.css.CSS2Properties;
 /**
  * The Class HtmlValues.
  */
-public class HtmlValues implements CSSValuesProperties{
+public class HtmlValues implements CSSValuesProperties {
 
 	/** The Constant SYSTEM_FONTS. */
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
@@ -112,10 +113,8 @@ public class HtmlValues implements CSSValuesProperties{
 	 */
 	public static boolean isBorderStyle(String token) {
 		String tokenTL = token.toLowerCase();
-		return tokenTL.equals(SOLID) || tokenTL.equals(DASHED)
-				|| tokenTL.equals(DOTTED) || tokenTL.equals(DOUBLE)
-				|| tokenTL.equals(NONE) || tokenTL.equals(HIDDEN)
-				|| tokenTL.equals(GROOVE) || tokenTL.equals(RIDGE)
+		return tokenTL.equals(SOLID) || tokenTL.equals(DASHED) || tokenTL.equals(DOTTED) || tokenTL.equals(DOUBLE)
+				|| tokenTL.equals(NONE) || tokenTL.equals(HIDDEN) || tokenTL.equals(GROOVE) || tokenTL.equals(RIDGE)
 				|| tokenTL.equals(INSET) || tokenTL.equals(OUTSET);
 	}
 
@@ -209,7 +208,7 @@ public class HtmlValues implements CSSValuesProperties{
 				insets = updateLeftInset(insets, pd[0], renderState);
 				break;
 			}
-		}else{
+		} else {
 			String topText = cssProperties.getPaddingTop();
 			insets = updateTopInset(insets, topText, renderState);
 			String leftText = cssProperties.getPaddingLeft();
@@ -217,7 +216,7 @@ public class HtmlValues implements CSSValuesProperties{
 			String bottomText = cssProperties.getPaddingBottom();
 			insets = updateBottomInset(insets, bottomText, renderState);
 			String rightText = cssProperties.getPaddingRight();
-			insets = updateRightInset(insets, rightText, renderState);	
+			insets = updateRightInset(insets, rightText, renderState);
 		}
 		return insets;
 	}
@@ -316,7 +315,7 @@ public class HtmlValues implements CSSValuesProperties{
 		}
 		binfo.setInsets(insets);
 	}
-	
+
 	/**
 	 * Update top inset.
 	 *
@@ -341,23 +340,22 @@ public class HtmlValues implements CSSValuesProperties{
 		}
 		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.topType = HtmlInsets.TYPE_AUTO;
-			
-		} else if(INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && 
-				renderState.getPreviousRenderState() != null && 
-				renderState.getPreviousRenderState().getMarginInsets() != null) {
+
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
 				insets.top = renderState.getPreviousRenderState().getMarginInsets().getTop();
 				insets.topType = renderState.getPreviousRenderState().getMarginInsets().getTopType();
 			}
 
-		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
 			insets.topType = HtmlInsets.TYPE_PIXELS;
 			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
-		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
 			insets.topType = HtmlInsets.TYPE_PIXELS;
 			insets.top = HtmlValues.getPixelSize("3px", renderState, 0);
-		
+
 		} else if (sizeText.endsWith("%")) {
 			insets.topType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -397,20 +395,19 @@ public class HtmlValues implements CSSValuesProperties{
 		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.leftType = HtmlInsets.TYPE_AUTO;
 		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && 
-				renderState.getPreviousRenderState() != null && 
-				renderState.getPreviousRenderState().getMarginInsets() != null) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
 				insets.left = renderState.getPreviousRenderState().getMarginInsets().getLeft();
 				insets.leftType = renderState.getPreviousRenderState().getMarginInsets().getLeftType();
 			}
-		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
 			insets.leftType = HtmlInsets.TYPE_PIXELS;
 			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
-		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
 			insets.leftType = HtmlInsets.TYPE_PIXELS;
 			insets.left = HtmlValues.getPixelSize("3px", renderState, 0);
-		
+
 		} else if (sizeText.endsWith("%")) {
 			insets.leftType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -450,20 +447,19 @@ public class HtmlValues implements CSSValuesProperties{
 		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.bottomType = HtmlInsets.TYPE_AUTO;
 		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && 
-				renderState.getPreviousRenderState() != null && 
-				renderState.getPreviousRenderState().getMarginInsets() != null) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
 				insets.bottom = renderState.getPreviousRenderState().getMarginInsets().getBottom();
 				insets.bottomType = renderState.getPreviousRenderState().getMarginInsets().getBottomType();
 			}
-		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
 			insets.bottomType = HtmlInsets.TYPE_PIXELS;
 			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
-		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
 			insets.bottomType = HtmlInsets.TYPE_PIXELS;
 			insets.bottom = HtmlValues.getPixelSize("3px", renderState, 0);
-		
+
 		} else if (sizeText.endsWith("%")) {
 			insets.bottomType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -503,20 +499,19 @@ public class HtmlValues implements CSSValuesProperties{
 		if (AUTO.equalsIgnoreCase(sizeText)) {
 			insets.rightType = HtmlInsets.TYPE_AUTO;
 		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && 
-				renderState.getPreviousRenderState() != null && 
-				renderState.getPreviousRenderState().getMarginInsets() != null) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
 				insets.right = renderState.getPreviousRenderState().getMarginInsets().getRight();
 				insets.rightType = renderState.getPreviousRenderState().getMarginInsets().getRightType();
 			}
-		} else if(INITIAL.equalsIgnoreCase(sizeText)) {
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
 			insets.rightType = HtmlInsets.TYPE_PIXELS;
 			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
 
-		} else if(MEDIUM.equalsIgnoreCase(sizeText)) {
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
 			insets.rightType = HtmlInsets.TYPE_PIXELS;
 			insets.right = HtmlValues.getPixelSize("3px", renderState, 0);
-		
+
 		} else if (sizeText.endsWith("%")) {
 			insets.rightType = HtmlInsets.TYPE_PERCENT;
 			try {
@@ -549,23 +544,23 @@ public class HtmlValues implements CSSValuesProperties{
 		if (tok.hasMoreTokens()) {
 			String token = tok.nextToken();
 			insetsArray[0] = getPixelSize(token, renderState, 0);
-			if (negativeOK || (insetsArray[0] >= 0)) {
+			if (negativeOK || insetsArray[0] >= 0) {
 				size = 1;
 				if (tok.hasMoreTokens()) {
 					token = tok.nextToken();
 					insetsArray[1] = getPixelSize(token, renderState, 0);
-					if (negativeOK || (insetsArray[1] >= 0)) {
+					if (negativeOK || insetsArray[1] >= 0) {
 						size = 2;
 						if (tok.hasMoreTokens()) {
 							token = tok.nextToken();
 							insetsArray[2] = getPixelSize(token, renderState, 0);
-							if (negativeOK || (insetsArray[2] >= 0)) {
+							if (negativeOK || insetsArray[2] >= 0) {
 								size = 3;
 								if (tok.hasMoreTokens()) {
 									token = tok.nextToken();
 									insetsArray[3] = getPixelSize(token, renderState, 0);
 									size = 4;
-									if (negativeOK || (insetsArray[3] >= 0)) {
+									if (negativeOK || insetsArray[3] >= 0) {
 										// nop
 									} else {
 										insetsArray[3] = 0;
@@ -699,7 +694,7 @@ public class HtmlValues implements CSSValuesProperties{
 	 */
 	public static final float getFontSize(String spec, RenderState parentRenderState) {
 		String specTL = spec.toLowerCase();
-		
+
 		if (specTL.endsWith("em")) {
 			if (parentRenderState == null) {
 				return LAFSettings.getInstance().getFontSize();
@@ -715,22 +710,22 @@ public class HtmlValues implements CSSValuesProperties{
 			return (int) Math.round(font.getSize() * value);
 		} else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("em") || specTL.endsWith("pc")
 				|| specTL.endsWith("em") || specTL.endsWith("mm") || specTL.endsWith("ex")) {
-			int pixelSize = getPixelSize(spec, parentRenderState, (int)LAFSettings.getInstance().getFontSize());
+			int pixelSize = getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			// Normally the factor below should be 72, but
 			// the font-size concept in HTML is handled differently.
-			return (pixelSize * 96) / dpi;
+			return pixelSize * 96 / dpi;
 		} else if (specTL.endsWith("%")) {
 			String value = specTL.substring(0, specTL.length() - 1);
 			try {
 				double valued = Double.parseDouble(value);
 				double parentFontSize = parentRenderState == null ? 14.0 : parentRenderState.getFont().getSize();
-				return (float) ((parentFontSize * valued) / 100.0);
+				return (float) (parentFontSize * valued / 100.0);
 			} catch (NumberFormatException nfe) {
 				return LAFSettings.getInstance().getFontSize();
 			}
 		} else {
-			
+
 			int parentFontSize = 0;
 
 			switch (specTL) {
@@ -750,18 +745,21 @@ public class HtmlValues implements CSSValuesProperties{
 				return 40.0f;
 			case LARGER:
 				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
-				if (parentRenderState != null)
+				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
+				}
 				return parentFontSize * 1.2f;
 			case SMALLER:
 				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
-				if (parentRenderState != null)
+				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
+				}
 				return parentFontSize / 1.2f;
 			case INHERIT:
 				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
-				if (parentRenderState != null)
+				if (parentRenderState != null) {
 					parentRenderState.getPreviousRenderState().getFont().getSize();
+				}
 				return parentFontSize;
 			case INITIAL:
 				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
@@ -789,7 +787,7 @@ public class HtmlValues implements CSSValuesProperties{
 			String perText = spec.substring(0, spec.length() - 1);
 			try {
 				double val = Double.parseDouble(perText);
-				return (int) Math.round((availSize * val) / 100.0);
+				return (int) Math.round(availSize * val / 100.0);
 			} catch (NumberFormatException nfe) {
 				return errorValue;
 			}
@@ -810,11 +808,11 @@ public class HtmlValues implements CSSValuesProperties{
 	 * @return the pixel size
 	 */
 	public static final int getPixelSize(String spec, RenderState renderState, int errorValue) {
-		
-		if(spec== null){
+
+		if (spec == null) {
 			return 0;
 		}
-		
+
 		String lcSpec = spec.toLowerCase();
 		if (lcSpec.endsWith("px")) {
 			String pxText = lcSpec.substring(0, lcSpec.length() - 2);
@@ -823,7 +821,7 @@ public class HtmlValues implements CSSValuesProperties{
 			} catch (NumberFormatException nfe) {
 				return errorValue;
 			}
-		} else if (lcSpec.endsWith("em") && (renderState != null)) {
+		} else if (lcSpec.endsWith("em") && renderState != null) {
 			Font f = renderState.getFont();
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
 			double val;
@@ -837,7 +835,7 @@ public class HtmlValues implements CSSValuesProperties{
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			// The factor below should normally be 72, but font sizes
 			// are calculated differently in HTML.
-			double pixelSize = (fontSize * dpi) / 96;
+			double pixelSize = fontSize * dpi / 96;
 			return (int) Math.round(pixelSize * val);
 		} else if (lcSpec.endsWith("pt")) {
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
@@ -883,7 +881,7 @@ public class HtmlValues implements CSSValuesProperties{
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			double inches = val / 25.4;
 			return (int) Math.round(dpi * inches);
-		} else if (lcSpec.endsWith("ex") && (renderState != null)) {
+		} else if (lcSpec.endsWith("ex") && renderState != null) {
 			// Factor below is to try to match size in other browsers.
 			double xHeight = renderState.getFontMetrics().getAscent() * 0.47;
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
@@ -1140,7 +1138,7 @@ public class HtmlValues implements CSSValuesProperties{
 	 */
 	public static int getListStyleType(String token) {
 		String tokenTL = token.toLowerCase();
-		
+
 		switch (tokenTL) {
 		case NONE:
 			return ListStyle.TYPE_NONE;
@@ -1156,7 +1154,7 @@ public class HtmlValues implements CSSValuesProperties{
 			return ListStyle.TYPE_DECIMAL_LEADING_ZERO;
 		case LOWER_ALPHA:
 			return ListStyle.TYPE_LOWER_ALPHA;
-		case LOWER_LATIN :
+		case LOWER_LATIN:
 			return ListStyle.TYPE_LOWER_ALPHA;
 		case UPPER_ALPHA:
 			return ListStyle.TYPE_UPPER_ALPHA;
@@ -1226,8 +1224,7 @@ public class HtmlValues implements CSSValuesProperties{
 	 * @return true, if is font style
 	 */
 	public static boolean isFontStyle(String token) {
-		return ITALIC.equals(token) || NORMAL.equals(token)
-				|| OBLIQUE.equals(token);
+		return ITALIC.equals(token) || NORMAL.equals(token) || OBLIQUE.equals(token);
 	}
 
 	/**
@@ -1249,13 +1246,12 @@ public class HtmlValues implements CSSValuesProperties{
 	 * @return true, if is font weight
 	 */
 	public static boolean isFontWeight(String token) {
-		if (BOLD.equals(token) || BOLDER.equals(token)
-				|| LIGHTER.equals(token)) {
+		if (BOLD.equals(token) || BOLDER.equals(token) || LIGHTER.equals(token)) {
 			return true;
 		}
 		try {
 			int value = Integer.parseInt(token);
-			return ((value % 100) == 0) && (value >= 100) && (value <= 900);
+			return value % 100 == 0 && value >= 100 && value <= 900;
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
@@ -1273,39 +1269,39 @@ public class HtmlValues implements CSSValuesProperties{
 	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
 
 		BorderInfo binfo = new BorderInfo();
-		
-		if(INHERIT.equals(properties.getBorderTopStyle())){
+
+		if (INHERIT.equals(properties.getBorderTopStyle())) {
 			binfo.setTopStyle(renderState.getPreviousRenderState().getBorderInfo().getTopStyle());
 			binfo.setTopColor(renderState.getPreviousRenderState().getBorderInfo().getTopColor());
-		}else{
+		} else {
 			binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
 			binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), properties, binfo));
 		}
-		
-		if(INHERIT.equals(properties.getBorderBottomStyle())){
+
+		if (INHERIT.equals(properties.getBorderBottomStyle())) {
 			binfo.setBottomStyle(renderState.getPreviousRenderState().getBorderInfo().getBottomStyle());
 			binfo.setBottomColor(renderState.getPreviousRenderState().getBorderInfo().getBottomColor());
-		}else{
+		} else {
 			binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
 			binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), properties, binfo));
 		}
-		
-		if(INHERIT.equals(properties.getBorderRightStyle())){
+
+		if (INHERIT.equals(properties.getBorderRightStyle())) {
 			binfo.setRightStyle(renderState.getPreviousRenderState().getBorderInfo().getRightStyle());
 			binfo.setRightColor(renderState.getPreviousRenderState().getBorderInfo().getRightColor());
-		}else{
+		} else {
 			binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
 			binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), properties, binfo));
 		}
-		
-		if(INHERIT.equals(properties.getBorderLeftStyle())){
+
+		if (INHERIT.equals(properties.getBorderLeftStyle())) {
 			binfo.setLeftStyle(renderState.getPreviousRenderState().getBorderInfo().getLeftStyle());
 			binfo.setLeftColor(renderState.getPreviousRenderState().getBorderInfo().getLeftColor());
-		}else{
+		} else {
 			binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
 			binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), properties, binfo));
 		}
-		
+
 		HtmlValues.populateBorderInsets(binfo, properties, renderState);
 		return binfo;
 	}
@@ -1318,11 +1314,11 @@ public class HtmlValues implements CSSValuesProperties{
 	 * @return the border style
 	 */
 	private static int getBorderStyle(String styleText) {
-		if ((styleText == null) || (styleText.length() == 0)) {
+		if (styleText == null || styleText.length() == 0) {
 			return HtmlValues.BORDER_STYLE_NONE;
 		}
 		String stl = styleText.toLowerCase();
-		
+
 		switch (stl) {
 		case SOLID:
 			return BORDER_STYLE_SOLID;
@@ -1400,10 +1396,7 @@ public class HtmlValues implements CSSValuesProperties{
 	 * @return true, if is background position
 	 */
 	public static boolean isBackgroundPosition(String token) {
-		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP)
-				|| token.equalsIgnoreCase(CENTER)
-				|| token.equalsIgnoreCase(BOTTOM)
-				|| token.equalsIgnoreCase(LEFT)
-				|| token.equalsIgnoreCase(RIGHT);
+		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP) || token.equalsIgnoreCase(CENTER)
+				|| token.equalsIgnoreCase(BOTTOM) || token.equalsIgnoreCase(LEFT) || token.equalsIgnoreCase(RIGHT);
 	}
 }

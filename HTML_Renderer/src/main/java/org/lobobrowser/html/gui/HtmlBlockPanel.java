@@ -54,14 +54,14 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.dombl.UINode;
@@ -599,7 +599,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public boolean isSelectionAvailable() {
 		RenderableSpot start = this.startSelection;
 		RenderableSpot end = this.endSelection;
-		return (start != null) && (end != null) && !start.equals(end);
+		return start != null && end != null && !start.equals(end);
 	}
 
 	/**
@@ -610,7 +610,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public Node getSelectionNode() {
 		RenderableSpot start = this.startSelection;
 		RenderableSpot end = this.endSelection;
-		if ((start != null) && (end != null)) {
+		if (start != null && end != null) {
 			return Nodes.getCommonAncestor((Node) start.getRenderable().getModelNode(),
 					(Node) end.getRenderable().getModelNode());
 		} else {
@@ -650,7 +650,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		Component toValidate = this;
 		for (;;) {
 			Container parent = toValidate.getParent();
-			if ((parent == null) || parent.isValid()) {
+			if (parent == null || parent.isValid()) {
 				break;
 			}
 			toValidate = parent;
@@ -691,14 +691,14 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			int button = event.getButton();
 			int clickCount = event.getClickCount();
 
-			if ((button == MouseEvent.BUTTON1) && (clickCount == 1)) {
+			if (button == MouseEvent.BUTTON1 && clickCount == 1) {
 				Point point = event.getPoint();
 				block.onMouseClick(event, point.x, point.y);
 			}
-			if ((button == MouseEvent.BUTTON1) && (clickCount == 2)) {
+			if (button == MouseEvent.BUTTON1 && clickCount == 2) {
 				Point point = event.getPoint();
 				block.onDoubleClick(event, point.x, point.y);
-			} else if ((button == MouseEvent.BUTTON3) && (clickCount == 1)) {
+			} else if (button == MouseEvent.BUTTON3 && clickCount == 1) {
 				block.onRightClick(event, event.getX(), event.getY());
 			}
 		}
@@ -796,7 +796,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 						break;
 					}
 				} else {
-					if ((blockViewport.getY() + blockViewport.getHeight()) > block.getHeight()) {
+					if (blockViewport.getY() + blockViewport.getHeight() > block.getHeight()) {
 						break;
 					}
 				}
@@ -909,7 +909,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 			RenderableSpot start = this.startSelection;
 			RenderableSpot end = this.endSelection;
-			if ((start != null) && (end != null) && !start.equals(end)) {
+			if (start != null && end != null && !start.equals(end)) {
 				block.paintSelection(g, false, start, end);
 			}
 		}
@@ -970,7 +970,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public String getSelectionText() {
 		RenderableSpot start = this.startSelection;
 		RenderableSpot end = this.endSelection;
-		if ((start != null) && (end != null)) {
+		if (start != null && end != null) {
 			StringBuffer buffer = new StringBuffer();
 			this.rblock.extractSelectionText(buffer, false, start, end);
 			return buffer.toString();
@@ -987,7 +987,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public boolean hasSelection() {
 		RenderableSpot start = this.startSelection;
 		RenderableSpot end = this.endSelection;
-		if ((start != null) && (end != null) && !start.equals(end)) {
+		if (start != null && end != null && !start.equals(end)) {
 			return true;
 		} else {
 			return false;
@@ -1305,9 +1305,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	@Override
-	  public Insets getInsets(final boolean hscroll, final boolean vscroll) {
-	    throw new UnsupportedOperationException(
-	        "Method added while implementing absolute positioned elements inside relative elements. But not implemented yet.");
-	  }
+	public Insets getInsets(final boolean hscroll, final boolean vscroll) {
+		throw new UnsupportedOperationException(
+				"Method added while implementing absolute positioned elements inside relative elements. But not implemented yet.");
+	}
 
 }

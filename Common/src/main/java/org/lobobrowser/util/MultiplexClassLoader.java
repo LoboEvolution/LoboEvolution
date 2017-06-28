@@ -31,61 +31,61 @@ import java.util.Collection;
  * @author J. H. S.
  */
 public abstract class MultiplexClassLoader extends BaseClassLoader {
-    /** The Constant EMPTY_CLASS_LOADERS. */
-    private static final BaseClassLoader[] EMPTY_CLASS_LOADERS = new BaseClassLoader[0];
-    /** The parent loaders. */
-    private final BaseClassLoader[] parentLoaders;
-    
-    /**
-     * Instantiates a new multiplex class loader.
-     *
-     * @param classLoaders
-     *            the class loaders
-     */
-    public MultiplexClassLoader(Collection<BaseClassLoader> classLoaders) {
-        super(null);
-        this.parentLoaders = (BaseClassLoader[]) classLoaders.toArray(EMPTY_CLASS_LOADERS);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see java.lang.ClassLoader#loadClass(String, boolean)
-     */
-    @Override
-    public synchronized Class loadClass(String name, boolean resolve)
-            throws ClassNotFoundException {
-        // First, check if the class has already been loaded
-        Class c = findLoadedClass(name);
-        if (c == null) {
-            try {
-                int len = this.parentLoaders.length;
-                if (len == 0) {
-                    c = findSystemClass(name);
-                } else {
-                    for (int i = 0; i < len; i++) {
-                        BaseClassLoader parent = this.parentLoaders[i];
-                        try {
-                            c = parent.loadClass(name, false);
-                            if (c != null) {
-                                return c;
-                            }
-                        } catch (ClassNotFoundException cnfe) {
-                            // ignore
-                        }
-                    }
-                }
-            } catch (ClassNotFoundException e) {
-                // If still not found, then invoke findClass in order
-                // to find the class.
-                c = findClass(name);
-            }
-            if (c == null) {
-                c = findClass(name);
-            }
-        }
-        if (resolve) {
-            resolveClass(c);
-        }
-        return c;
-    }
+	/** The Constant EMPTY_CLASS_LOADERS. */
+	private static final BaseClassLoader[] EMPTY_CLASS_LOADERS = new BaseClassLoader[0];
+	/** The parent loaders. */
+	private final BaseClassLoader[] parentLoaders;
+
+	/**
+	 * Instantiates a new multiplex class loader.
+	 *
+	 * @param classLoaders
+	 *            the class loaders
+	 */
+	public MultiplexClassLoader(Collection<BaseClassLoader> classLoaders) {
+		super(null);
+		this.parentLoaders = classLoaders.toArray(EMPTY_CLASS_LOADERS);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.ClassLoader#loadClass(String, boolean)
+	 */
+	@Override
+	public synchronized Class loadClass(String name, boolean resolve) throws ClassNotFoundException {
+		// First, check if the class has already been loaded
+		Class c = findLoadedClass(name);
+		if (c == null) {
+			try {
+				int len = this.parentLoaders.length;
+				if (len == 0) {
+					c = findSystemClass(name);
+				} else {
+					for (int i = 0; i < len; i++) {
+						BaseClassLoader parent = this.parentLoaders[i];
+						try {
+							c = parent.loadClass(name, false);
+							if (c != null) {
+								return c;
+							}
+						} catch (ClassNotFoundException cnfe) {
+							// ignore
+						}
+					}
+				}
+			} catch (ClassNotFoundException e) {
+				// If still not found, then invoke findClass in order
+				// to find the class.
+				c = findClass(name);
+			}
+			if (c == null) {
+				c = findClass(name);
+			}
+		}
+		if (resolve) {
+			resolveClass(c);
+		}
+		return c;
+	}
 }

@@ -20,9 +20,8 @@
  */
 package org.lobobrowser.w3c.smil;
 
-/** 
- * // audio, video, ... 
+/**
+ * // audio, video, ...
  */
 public interface SMILRefElement extends SMILMediaElement {
 }
-

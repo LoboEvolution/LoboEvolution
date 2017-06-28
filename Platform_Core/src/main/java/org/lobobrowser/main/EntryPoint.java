@@ -35,33 +35,32 @@ import javax.swing.JOptionPane;
  */
 public class EntryPoint extends Canvas {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Launches a browser window. If a browser instance is found to already
-     * exist, the new browser window is opened in the running application.
-     * <p>
-     * Note: To run without an "ext" directory (e.g. from the project source
-     * code in Eclipse) you need to set up the "ext.dirs" and/or "ext.files"
-     * properties.
-     *
-     * @param args
-     *            the arguments
-     */
-    public static void main(String[] args) {
-        try {
-            ReuseManager.getInstance().launch(args);
-        } catch (Throwable err) {
-            StringWriter swriter = new StringWriter();
-            PrintWriter writer = new PrintWriter(swriter);
-            err.printStackTrace(writer);
-            writer.flush();
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "An unexpected error occurred during application startup:\r\n"
-                            + swriter.toString(), "ERROR",
-                            JOptionPane.ERROR_MESSAGE);
-            System.exit(1);
-        }
-    }
+	/**
+	 * Launches a browser window. If a browser instance is found to already
+	 * exist, the new browser window is opened in the running application.
+	 * <p>
+	 * Note: To run without an "ext" directory (e.g. from the project source
+	 * code in Eclipse) you need to set up the "ext.dirs" and/or "ext.files"
+	 * properties.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
+	public static void main(String[] args) {
+		try {
+			ReuseManager.getInstance().launch(args);
+		} catch (Throwable err) {
+			StringWriter swriter = new StringWriter();
+			PrintWriter writer = new PrintWriter(swriter);
+			err.printStackTrace(writer);
+			writer.flush();
+			JOptionPane.showMessageDialog(new JFrame(),
+					"An unexpected error occurred during application startup:\r\n" + swriter.toString(), "ERROR",
+					JOptionPane.ERROR_MESSAGE);
+			System.exit(1);
+		}
+	}
 }

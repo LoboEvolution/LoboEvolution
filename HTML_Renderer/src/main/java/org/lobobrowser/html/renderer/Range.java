@@ -30,27 +30,28 @@ package org.lobobrowser.html.renderer;
  */
 public class Range {
 
-    /** The offset. */
-    private int offset;
+	/** The offset. */
+	private int offset;
 
-    /** The length. */
-    private int length;
+	/** The length. */
+	private int length;
 
-    /**
-     * Instantiates a new range.
-     *
-     * @param offset
-     *            the offset
-     * @param length
-     *            the length
-     */
-    public Range(final int offset, final int length) {
-        super();
-        this.offset = offset;
-        this.length = length;
-    }
+	/**
+	 * Instantiates a new range.
+	 *
+	 * @param offset
+	 *            the offset
+	 * @param length
+	 *            the length
+	 */
+	public Range(final int offset, final int length) {
+		super();
+		this.offset = offset;
+		this.length = length;
+	}
 
-    /** Gets the offset.
+	/**
+	 * Gets the offset.
 	 *
 	 * @return the offset
 	 */
@@ -68,11 +69,12 @@ public class Range {
 	}
 
 	/*
-     * (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "Range[offset=" + this.offset + ",length=" + this.length + "]";
-    }
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Range[offset=" + this.offset + ",length=" + this.length + "]";
+	}
 }

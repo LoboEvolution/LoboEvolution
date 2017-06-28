@@ -45,16 +45,16 @@ import org.lobobrowser.ua.NavigatorWindow;
  * The Class SourceViewerWindow.
  */
 public class SourceViewerWindow extends JFrame {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(SourceViewerWindow.class);
+
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(SourceViewerWindow.class);
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The text area. */
 	private RSyntaxTextArea textArea;
-	
+
 	/** The scroll bar. */
 	private RTextScrollPane scrollBar;
 
@@ -63,10 +63,10 @@ public class SourceViewerWindow extends JFrame {
 
 	/** The find bsutton. */
 	private JButton findButton;
-	
+
 	/** The pos. */
 	private int pos = 0;
-	
+
 	/**
 	 * Instantiates a new text viewer window.
 	 */
@@ -102,7 +102,7 @@ public class SourceViewerWindow extends JFrame {
 		panel.add(jtfFilter, BorderLayout.CENTER);
 		panel.add(findButton, BorderLayout.EAST);
 		add(panel, BorderLayout.SOUTH);
-		
+
 		findButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

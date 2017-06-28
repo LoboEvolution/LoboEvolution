@@ -28,42 +28,46 @@ import org.lobobrowser.w3c.html.HTMLBRElement;
  */
 public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement {
 
-    /**
-     * Instantiates a new HTMLBR element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLBRElementImpl(String name) {
-        super(name);
-    }
+	/**
+	 * Instantiates a new HTMLBR element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLBRElementImpl(String name) {
+		super(name);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLBRElement#getClear()
-     */
-    @Override
-    public String getClear() {
-        return this.getAttribute(HtmlAttributeProperties.CLEAR);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLBRElement#getClear()
+	 */
+	@Override
+	public String getClear() {
+		return this.getAttribute(HtmlAttributeProperties.CLEAR);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.w3c.html.HTMLBRElement#setClear(java.lang.String)
-     */
-    @Override
-    public void setClear(String clear) {
-        this.setAttribute(HtmlAttributeProperties.CLEAR, clear);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLBRElement#setClear(java.lang.String)
+	 */
+	@Override
+	public void setClear(String clear) {
+		this.setAttribute(HtmlAttributeProperties.CLEAR, clear);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
-     * StringBuffer)
-     */
-    @Override
-    protected void appendInnerTextImpl(StringBuffer buffer) {
-        buffer.append("\r\n");
-        super.appendInnerTextImpl(buffer);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
+	 * StringBuffer)
+	 */
+	@Override
+	protected void appendInnerTextImpl(StringBuffer buffer) {
+		buffer.append("\r\n");
+		super.appendInnerTextImpl(buffer);
+	}
 }

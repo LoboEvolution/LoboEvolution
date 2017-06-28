@@ -29,7 +29,7 @@ import org.lobobrowser.w3c.svg.SVGGElement;
 import org.w3c.dom.DOMException;
 
 public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
-	
+
 	private SVGSVGElementImpl svg;
 
 	public SVGGElementImpl(String name) {
@@ -49,37 +49,37 @@ public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
 
 	@Override
 	public AbstractCSS2Properties getSVGStyle() {
-		
+
 		AbstractCSS2Properties style = this.getStyle();
-		
-		if(style.getStroke() == null){
+
+		if (style.getStroke() == null) {
 			style.setStroke(this.getStroke());
 		}
-		
-		if(style.getStrokeDashArray() == null){
+
+		if (style.getStrokeDashArray() == null) {
 			style.setStrokeDashArray(this.getStrokeDashArray());
 		}
-		
-		if(style.getStrokeLineCap() == null){
+
+		if (style.getStrokeLineCap() == null) {
 			style.setStrokeLineCap(this.getStrokeLineCap());
 		}
-		
-		if(style.getStrokeMiterLimit() == null){
+
+		if (style.getStrokeMiterLimit() == null) {
 			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
 		}
-		
-		if(style.getStrokeOpacity() == null){
+
+		if (style.getStrokeOpacity() == null) {
 			style.setStrokeOpacity(this.getStrokeOpacity());
 		}
-		
-		if(style.getStrokeWidth() == null){
+
+		if (style.getStrokeWidth() == null) {
 			style.setStrokeWidth(this.getStrokeWidth());
 		}
-		
-		if(style.getFill() == null){
+
+		if (style.getFill() == null) {
 			style.setFill(this.getFill());
 		}
-		
+
 		return style;
 	}
 
@@ -91,7 +91,8 @@ public class SVGGElementImpl extends SVGSVGElementImpl implements SVGGElement {
 	}
 
 	/**
-	 * @param svg the svg to set
+	 * @param svg
+	 *            the svg to set
 	 */
 	public void setSvg(SVGSVGElementImpl svg) {
 		this.svg = svg;

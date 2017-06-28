@@ -23,10 +23,10 @@ package org.lobobrowser.html.renderer;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
@@ -570,7 +570,7 @@ public class HtmlController {
 				FormInput[] formInputs = new FormInput[list.getLength()];
 
 				for (int i = 0; i < list.getLength(); i++) {
-					Node n = (Node) list.item(i);
+					Node n = list.item(i);
 
 					if (n instanceof HTMLInputElementImpl) {
 						HTMLInputElementImpl input = (HTMLInputElementImpl) n;
@@ -593,7 +593,7 @@ public class HtmlController {
 				String prefix = name == null ? "" : name + ".";
 				int count = 0;
 				for (int i = 0; i < list.getLength(); i++) {
-					Node n = (Node) list.item(i);
+					Node n = list.item(i);
 					if (n instanceof HTMLInputElementImpl) {
 						HTMLInputElementImpl input = (HTMLInputElementImpl) n;
 						String inputName = input.getName();

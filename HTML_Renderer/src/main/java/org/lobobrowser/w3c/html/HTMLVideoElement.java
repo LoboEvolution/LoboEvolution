@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLVideoElement.
  */
 public interface HTMLVideoElement extends HTMLMediaElement {
-	
+
 	/**
 	 * Gets the width.
 	 *

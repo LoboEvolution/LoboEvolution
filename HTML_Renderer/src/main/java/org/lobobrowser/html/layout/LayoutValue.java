@@ -25,37 +25,36 @@ package org.lobobrowser.html.layout;
  */
 public class LayoutValue {
 
-    /** The width. */
-    private int width;
+	/** The width. */
+	private int width;
 
-    /** The height. */
-    private int height;
+	/** The height. */
+	private int height;
 
-    /** The has h scroll bar. */
-    private boolean hasHScrollBar;
+	/** The has h scroll bar. */
+	private boolean hasHScrollBar;
 
-    /** The has v scroll bar. */
-    private boolean hasVScrollBar;
+	/** The has v scroll bar. */
+	private boolean hasVScrollBar;
 
-    /**
-     * Instantiates a new layout value.
-     *
-     * @param width
-     *            the width
-     * @param height
-     *            the height
-     * @param hasHScrollBar
-     *            the has h scroll bar
-     * @param hasVScrollBar
-     *            the has v scroll bar
-     */
-    public LayoutValue(int width, int height, boolean hasHScrollBar,
-            boolean hasVScrollBar) {
-        this.width = width;
-        this.height = height;
-        this.hasHScrollBar = hasHScrollBar;
-        this.hasVScrollBar = hasVScrollBar;
-    }
+	/**
+	 * Instantiates a new layout value.
+	 *
+	 * @param width
+	 *            the width
+	 * @param height
+	 *            the height
+	 * @param hasHScrollBar
+	 *            the has h scroll bar
+	 * @param hasVScrollBar
+	 *            the has v scroll bar
+	 */
+	public LayoutValue(int width, int height, boolean hasHScrollBar, boolean hasVScrollBar) {
+		this.width = width;
+		this.height = height;
+		this.hasHScrollBar = hasHScrollBar;
+		this.hasVScrollBar = hasVScrollBar;
+	}
 
 	/**
 	 * Gets the width.

@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLDetailsElement.
  */
 public interface HTMLDetailsElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the open.
 	 *

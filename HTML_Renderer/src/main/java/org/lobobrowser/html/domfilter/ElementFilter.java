@@ -28,18 +28,19 @@ import org.w3c.dom.Node;
  */
 public class ElementFilter implements NodeFilter {
 
-    /**
-     * Instantiates a new element filter.
-     */
-    public ElementFilter() {
-    }
+	/**
+	 * Instantiates a new element filter.
+	 */
+	public ElementFilter() {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        return node instanceof Element;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		return node instanceof Element;
+	}
 }

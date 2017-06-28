@@ -27,29 +27,29 @@ import org.lobobrowser.html.style.RenderStateDelegator;
  */
 public class AlignXRenderState extends RenderStateDelegator {
 
-    /** The align x percent. */
-    private final int alignXPercent;
+	/** The align x percent. */
+	private final int alignXPercent;
 
-    /**
-     * Instantiates a new align x render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param alignXPercent
-     *            the align x percent
-     */
-    public AlignXRenderState(final RenderState prevRenderState,
-            int alignXPercent) {
-        super(prevRenderState);
-        this.alignXPercent = alignXPercent;
-    }
+	/**
+	 * Instantiates a new align x render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param alignXPercent
+	 *            the align x percent
+	 */
+	public AlignXRenderState(final RenderState prevRenderState, int alignXPercent) {
+		super(prevRenderState);
+		this.alignXPercent = alignXPercent;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.style.RenderStateDelegator#getAlignXPercent()
-     */
-    @Override
-    public int getAlignXPercent() {
-        return this.alignXPercent;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.style.RenderStateDelegator#getAlignXPercent()
+	 */
+	@Override
+	public int getAlignXPercent() {
+		return this.alignXPercent;
+	}
 }

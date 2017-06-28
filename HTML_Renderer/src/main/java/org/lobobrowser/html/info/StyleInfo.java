@@ -21,34 +21,39 @@
 package org.lobobrowser.html.info;
 
 public class StyleInfo {
-	
+
 	private String lowerCaseName;
 	private boolean important;
 	private String value;
-	
+
 	public StyleInfo(final String lowerCaseName, final String value, final boolean important) {
 		this.lowerCaseName = lowerCaseName;
 		this.value = value;
 		this.important = important;
 	}
-	
+
 	public String getLowerCaseName() {
 		return lowerCaseName;
 	}
+
 	public void setLowerCaseName(String lowerCaseName) {
 		this.lowerCaseName = lowerCaseName;
 	}
+
 	public boolean isImportant() {
 		return important;
 	}
+
 	public void setImportant(boolean important) {
 		this.important = important;
 	}
+
 	public String getValue() {
 		return value;
 	}
+
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
+
 }

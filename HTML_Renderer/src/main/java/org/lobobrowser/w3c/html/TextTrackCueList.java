@@ -21,12 +21,11 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface TextTrackCueList.
  */
 public interface TextTrackCueList {
-	
+
 	/**
 	 * Gets the length.
 	 *
@@ -38,7 +37,8 @@ public interface TextTrackCueList {
 	/**
 	 * Gets the element.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the element
 	 */
 	public TextTrackCue getElement(int index);
@@ -46,7 +46,8 @@ public interface TextTrackCueList {
 	/**
 	 * Gets the cue by id.
 	 *
-	 * @param id the id
+	 * @param id
+	 *            the id
 	 * @return the cue by id
 	 */
 	public TextTrackCue getCueById(String id);

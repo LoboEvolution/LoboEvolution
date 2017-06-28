@@ -36,9 +36,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Set;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.HtmlMapping;
 import org.lobobrowser.html.HtmlMappingChar;
 import org.lobobrowser.html.info.ElementInfo;
@@ -73,7 +73,7 @@ public class HtmlParser {
 
 	/** The element infos. */
 	private static Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>(35);
-	
+
 	/** The Constant TOKEN_EOD. */
 	private static final int TOKEN_EOD = 0;
 
@@ -277,7 +277,7 @@ public class HtmlParser {
 			parent.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
 		}
 	}
-	
+
 	/**
 	 * Parses text followed by one element.
 	 *
@@ -312,7 +312,7 @@ public class HtmlParser {
 			try {
 				parent.appendChild(textNode);
 			} catch (DOMException de) {
-				if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+				if (parent.getNodeType() != Node.DOCUMENT_NODE || de.code != DOMException.HIERARCHY_REQUEST_ERR) {
 					logger.error("parseToken(): Unable to append child to " + parent + ".", de);
 				}
 			}
@@ -358,7 +358,7 @@ public class HtmlParser {
 								;
 							}
 						}
-						if ((stopTags != null) && stopTags.contains(normalTag)) {
+						if (stopTags != null && stopTags.contains(normalTag)) {
 							// Throw before appending to parent.
 							// After attributes are set.
 							// After MODIFYING_KEY is set.
@@ -369,7 +369,8 @@ public class HtmlParser {
 						parent.appendChild(element);
 						if (!this.justReadEmptyElement) {
 							ElementInfo einfo = ELEMENT_INFOS.get(localName);
-							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.getEndElementType();
+							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
+									: einfo.getEndElementType();
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.isChildElementOk();
 								Set<String> newStopSet = einfo == null ? null : einfo.getStopTags();
@@ -393,9 +394,9 @@ public class HtmlParser {
 									for (;;) {
 										try {
 											int token;
-											if ((einfo != null) && einfo.isNoScriptElement()) {
+											if (einfo != null && einfo.isNoScriptElement()) {
 												UserAgentContext ucontext = this.ucontext;
-												if ((ucontext == null) || ucontext.isScriptingEnabled()) {
+												if (ucontext == null || ucontext.isScriptingEnabled()) {
 													token = this.parseForEndTag(parent, reader, tag, false,
 															einfo.isDecodeEntities());
 												} else {
@@ -413,8 +414,8 @@ public class HtmlParser {
 													return TOKEN_FULL_ELEMENT;
 												} else {
 													ElementInfo closeTagInfo = ELEMENT_INFOS.get(normalLastTag);
-													if ((closeTagInfo == null)
-															|| (closeTagInfo.getEndElementType() != ElementInfo.END_ELEMENT_FORBIDDEN)) {
+													if (closeTagInfo == null || closeTagInfo
+															.getEndElementType() != ElementInfo.END_ELEMENT_FORBIDDEN) {
 														// TODO: Rather
 														// inefficient
 														// algorithm, but it's
@@ -449,7 +450,7 @@ public class HtmlParser {
 											// tag, the exception
 											// is rethrown (e.g.
 											// <TR><TD>blah<TR><TD>blah)
-											if ((stopTags != null) && stopTags.contains(normalTag)) {
+											if (stopTags != null && stopTags.contains(normalTag)) {
 												throw se;
 											}
 											einfo = ELEMENT_INFOS.get(normalTag);
@@ -462,7 +463,7 @@ public class HtmlParser {
 													newStopSet = Collections.singleton(normalTag);
 												}
 											}
-											if ((stopTags != null) && (newStopSet != null)) {
+											if (stopTags != null && newStopSet != null) {
 												Set<String> newStopSet2 = new HashSet<String>();
 												newStopSet2.addAll(stopTags);
 												newStopSet2.addAll(newStopSet);
@@ -705,8 +706,8 @@ public class HtmlParser {
 					try {
 						parent.appendChild(textNode);
 					} catch (DOMException de) {
-						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
-								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+						if (parent.getNodeType() != Node.DOCUMENT_NODE
+								|| de.code != DOMException.HIERARCHY_REQUEST_ERR) {
 							logger.error("parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
@@ -732,8 +733,8 @@ public class HtmlParser {
 					try {
 						parent.appendChild(textNode);
 					} catch (DOMException de) {
-						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
-								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+						if (parent.getNodeType() != Node.DOCUMENT_NODE
+								|| de.code != DOMException.HIERARCHY_REQUEST_ERR) {
 							logger.error("parseToken(): Unable to append child to " + parent + ".", de);
 						}
 					}
@@ -907,7 +908,7 @@ public class HtmlParser {
 			return pidata;
 		}
 		int ch;
-		for (ch = reader.read(); (ch != -1) && (ch != '>'); ch = reader.read()) {
+		for (ch = reader.read(); ch != -1 && ch != '>'; ch = reader.read()) {
 			pidata.append((char) ch);
 		}
 		this.justReadTagBegin = false;
@@ -942,7 +943,7 @@ public class HtmlParser {
 		for (;;) {
 			int chInt = reader.read();
 			if (chInt == -1) {
-				if ((attributeName != null) && (attributeName.length() != 0)) {
+				if (attributeName != null && attributeName.length() != 0) {
 					String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 					attributeName.setLength(0);
@@ -958,7 +959,7 @@ public class HtmlParser {
 				blankFound = false;
 				break;
 			} else if (ch == '>') {
-				if ((attributeName != null) && (attributeName.length() != 0)) {
+				if (attributeName != null && attributeName.length() != 0) {
 					String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 				}
@@ -976,7 +977,7 @@ public class HtmlParser {
 				lastCharSlash = false;
 				if (blankFound) {
 					blankFound = false;
-					if ((attributeName != null) && (attributeName.length() != 0)) {
+					if (attributeName != null && attributeName.length() != 0) {
 						String attributeNameStr = attributeName.toString();
 						element.setAttribute(attributeNameStr, attributeNameStr);
 						attributeName.setLength(0);
@@ -998,7 +999,7 @@ public class HtmlParser {
 			}
 			char ch = (char) chInt;
 			if (ch == '>') {
-				if ((attributeName != null) && (attributeName.length() != 0)) {
+				if (attributeName != null && attributeName.length() != 0) {
 					String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 				}
@@ -1038,7 +1039,7 @@ public class HtmlParser {
 				break;
 			}
 			char ch = (char) chInt;
-			if ((openQuote != -1) && (ch == openQuote)) {
+			if (openQuote != -1 && ch == openQuote) {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					String attributeNameStr = attributeName.toString();
@@ -1055,7 +1056,7 @@ public class HtmlParser {
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
 				return true;
-			} else if ((openQuote == -1) && (ch == '>')) {
+			} else if (openQuote == -1 && ch == '>') {
 				if (attributeName != null) {
 					String attributeNameStr = attributeName.toString();
 					if (attributeValue == null) {
@@ -1069,7 +1070,7 @@ public class HtmlParser {
 				this.justReadTagEnd = true;
 				this.justReadEmptyElement = lastCharSlash;
 				return false;
-			} else if ((openQuote == -1) && Character.isWhitespace(ch)) {
+			} else if (openQuote == -1 && Character.isWhitespace(ch)) {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					String attributeNameStr = attributeName.toString();

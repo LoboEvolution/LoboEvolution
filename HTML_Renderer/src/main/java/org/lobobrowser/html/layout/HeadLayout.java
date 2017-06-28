@@ -25,10 +25,10 @@ package org.lobobrowser.html.layout;
  */
 public class HeadLayout extends CommonLayout {
 
-    /**
-     * Instantiates a new head layout.
-     */
-    public HeadLayout() {
-        super(DISPLAY_BLOCK);
-    }
+	/**
+	 * Instantiates a new head layout.
+	 */
+	public HeadLayout() {
+		super(DISPLAY_BLOCK);
+	}
 }

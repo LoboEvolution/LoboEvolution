@@ -60,22 +60,22 @@ import com.sun.pdfview.PDFRenderer;
  * job.
  */
 public class PDFPrintPage implements Printable {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(PDFPrintPage.class);
+
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(PDFPrintPage.class);
 
 	/** The PDFFile to be printed. */
 	private PDFFile file;
-	
+
 	/** The PrinterJob for this print job. */
 	private PrinterJob pjob;
-	
+
 	/** A dialog box indicating printing status, with cancel button. */
 	private JDialog pd;
-	
+
 	/** The text in the progress dialog indicating the current page. */
 	private JLabel pagenumlabel;
-	
+
 	/** The cancel button in the progress dialog. */
 	private JButton cancel;
 
@@ -133,7 +133,7 @@ public class PDFPrintPage implements Printable {
 				try {
 					pjob.print();
 				} catch (PrinterException exc) {
-					logger.log(Level.ERROR,exc);
+					logger.log(Level.ERROR, exc);
 				}
 			}
 		} finally {
@@ -222,7 +222,7 @@ public class PDFPrintPage implements Printable {
 		int pagenum = index + 1;
 
 		// don't bother if the page number is out of range.
-		if ((pagenum >= 1) && (pagenum <= file.getNumPages())) {
+		if (pagenum >= 1 && pagenum <= file.getNumPages()) {
 
 			// update the page number in the progress dialog
 			if (pagenumlabel != null) {

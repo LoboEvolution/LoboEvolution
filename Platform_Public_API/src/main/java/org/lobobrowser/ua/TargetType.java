@@ -27,12 +27,12 @@ package org.lobobrowser.ua;
  *      RequestType)
  */
 public enum TargetType {
-    /** Document should opened in a new window. */
-    BLANK,
-    /** Document should be opened in the current frame. */
-    SELF,
-    /** Document should be opened in the parent frame. */
-    PARENT,
-    /** Document should be opened in the top frame of the current window. */
-    TOP
+	/** Document should opened in a new window. */
+	BLANK,
+	/** Document should be opened in the current frame. */
+	SELF,
+	/** Document should be opened in the parent frame. */
+	PARENT,
+	/** Document should be opened in the top frame of the current window. */
+	TOP
 }

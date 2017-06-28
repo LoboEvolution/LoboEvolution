@@ -48,7 +48,7 @@ import org.lobobrowser.util.gui.WrapperLayout;
  * The Class BaseInputTextControl.
  */
 public abstract class BaseInputTextControl extends BaseInputControl {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -112,28 +112,21 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 				// ignore
 			}
 		}
-		
-		if(ruiControl.hasBackground()){
+
+		if (ruiControl.hasBackground()) {
 			widget.setBackground(ruiControl.getBackgroundColor());
 		}
-		
-		widget.setMargin(new Insets(ruiControl.getMarginTop(), 
-								  ruiControl.getMarginLeft(), 
-								  ruiControl.getMarginBottom(), 
-								  ruiControl.getMarginRight()));
-		
-		
-		if(ruiControl.getBorderInsets().top == 0 &&
-		   ruiControl.getBorderInsets().left == 0 &&
-		   ruiControl.getBorderInsets().bottom == 0 &&
-		   ruiControl.getBorderInsets().right == 0){
+
+		widget.setMargin(new Insets(ruiControl.getMarginTop(), ruiControl.getMarginLeft(), ruiControl.getMarginBottom(),
+				ruiControl.getMarginRight()));
+
+		if (ruiControl.getBorderInsets().top == 0 && ruiControl.getBorderInsets().left == 0
+				&& ruiControl.getBorderInsets().bottom == 0 && ruiControl.getBorderInsets().right == 0) {
 			widget.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		} else {
-			widget.setBorder(BorderFactory.createMatteBorder(ruiControl.getBorderInsets().top, 
-					   ruiControl.getBorderInsets().left, 
-					   ruiControl.getBorderInsets().bottom, 
-					   ruiControl.getBorderInsets().right, 
-					   Color.BLACK));	
+			widget.setBorder(
+					BorderFactory.createMatteBorder(ruiControl.getBorderInsets().top, ruiControl.getBorderInsets().left,
+							ruiControl.getBorderInsets().bottom, ruiControl.getBorderInsets().right, Color.BLACK));
 		}
 
 	}
@@ -189,7 +182,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		if (size == -1) {
 			pw = 200;
 		} else {
-			pw = insets.left + insets.right + (fm.charWidth('0') * size);
+			pw = insets.left + insets.right + fm.charWidth('0') * size;
 		}
 		ph = fm.getHeight() + insets.top;
 		return new Dimension(pw, ph);
@@ -223,7 +216,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 					return;
 				}
 				int strLen = str.length();
-				if ((docLength + strLen) > max) {
+				if (docLength + strLen > max) {
 					String shorterStr = str.substring(0, max - docLength);
 					super.insertString(offs, shorterStr, a);
 				} else {

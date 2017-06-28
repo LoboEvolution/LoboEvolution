@@ -48,15 +48,19 @@ import org.w3c.dom.traversal.NodeIterator;
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
- * Object Model (DOM) Level 3 XPath Specification</a>. </p>
+ * Object Model (DOM) Level 3 XPath Specification</a>.
+ * </p>
  *
- * <p> The <code>XPathResult</code> interface represents the result of the
+ * <p>
+ * The <code>XPathResult</code> interface represents the result of the
  * evaluation of an XPath expression within the context of a particular node.
  * Since evaluation of an XPath expression can result in various result types,
  * this object makes it possible to discover and manipulate the type and value
- * of the result. </p>
+ * of the result.
+ * </p>
  *
- * <p> This implementation wraps an <code>XObject</code>.
+ * <p>
+ * This implementation wraps an <code>XObject</code>.
  *
  * @see org.apache.xpath.objects.XObject
  * @see org.w3c.dom.xpath.XPathResult
@@ -188,15 +192,15 @@ public class XPathResultImpl implements XPathResult, EventListener {
 		// If the context node supports DOM Events and the type is one of the
 		// iterator
 		// types register this result as an event listener
-		if (((m_resultType == ORDERED_NODE_ITERATOR_TYPE) || (m_resultType == UNORDERED_NODE_ITERATOR_TYPE))) {
+		if (m_resultType == ORDERED_NODE_ITERATOR_TYPE || m_resultType == UNORDERED_NODE_ITERATOR_TYPE) {
 			addEventListener();
 
 		} // else can we handle iterator types if contextNode doesn't support
 			// EventTarget??
 
 		// If this is an iterator type get the iterator
-		if ((m_resultType == ORDERED_NODE_ITERATOR_TYPE) || (m_resultType == UNORDERED_NODE_ITERATOR_TYPE)
-				|| (m_resultType == ANY_UNORDERED_NODE_TYPE) || (m_resultType == FIRST_ORDERED_NODE_TYPE)) {
+		if (m_resultType == ORDERED_NODE_ITERATOR_TYPE || m_resultType == UNORDERED_NODE_ITERATOR_TYPE
+				|| m_resultType == ANY_UNORDERED_NODE_TYPE || m_resultType == FIRST_ORDERED_NODE_TYPE) {
 
 			try {
 				m_iterator = m_resultObj.nodeset();
@@ -237,7 +241,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 			// }
 
 			// If it's a snapshot type, get the nodelist
-		} else if ((m_resultType == UNORDERED_NODE_SNAPSHOT_TYPE) || (m_resultType == ORDERED_NODE_SNAPSHOT_TYPE)) {
+		} else if (m_resultType == UNORDERED_NODE_SNAPSHOT_TYPE || m_resultType == ORDERED_NODE_SNAPSHOT_TYPE) {
 			try {
 				m_list = m_resultObj.nodelist();
 			} catch (TransformerException te) {
@@ -245,7 +249,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INCOMPATIBLE_TYPES,
 						new Object[] { m_xpath.getPatternString(), getTypeString(getTypeFromXObject(m_resultObj)),
 								getTypeString(m_resultType) });
-				throw new XPathException(XPathException.TYPE_ERR, fmsg); 
+				throw new XPathException(XPathException.TYPE_ERR, fmsg);
 			}
 		}
 	}
@@ -358,7 +362,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	@Override
 	public Node getSingleNodeValue() throws XPathException {
 
-		if ((m_resultType != ANY_UNORDERED_NODE_TYPE) && (m_resultType != FIRST_ORDERED_NODE_TYPE)) {
+		if (m_resultType != ANY_UNORDERED_NODE_TYPE && m_resultType != FIRST_ORDERED_NODE_TYPE) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_CANT_CONVERT_TO_SINGLENODE,
 					new Object[] { m_xpath.getPatternString(), getTypeString(m_resultType) });
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
@@ -414,7 +418,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	@Override
 	public int getSnapshotLength() throws XPathException {
 
-		if ((m_resultType != UNORDERED_NODE_SNAPSHOT_TYPE) && (m_resultType != ORDERED_NODE_SNAPSHOT_TYPE)) {
+		if (m_resultType != UNORDERED_NODE_SNAPSHOT_TYPE && m_resultType != ORDERED_NODE_SNAPSHOT_TYPE) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_CANT_GET_SNAPSHOT_LENGTH,
 					new Object[] { m_xpath.getPatternString(), getTypeString(m_resultType) });
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
@@ -441,7 +445,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 */
 	@Override
 	public Node iterateNext() throws XPathException, DOMException {
-		if ((m_resultType != UNORDERED_NODE_ITERATOR_TYPE) && (m_resultType != ORDERED_NODE_ITERATOR_TYPE)) {
+		if (m_resultType != UNORDERED_NODE_ITERATOR_TYPE && m_resultType != ORDERED_NODE_ITERATOR_TYPE) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NON_ITERATOR_TYPE,
 					new Object[] { m_xpath.getPatternString(), getTypeString(m_resultType) });
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
@@ -497,7 +501,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	@Override
 	public Node snapshotItem(int index) throws XPathException {
 
-		if ((m_resultType != UNORDERED_NODE_SNAPSHOT_TYPE) && (m_resultType != ORDERED_NODE_SNAPSHOT_TYPE)) {
+		if (m_resultType != UNORDERED_NODE_SNAPSHOT_TYPE && m_resultType != ORDERED_NODE_SNAPSHOT_TYPE) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NON_SNAPSHOT_TYPE,
 					new Object[] { m_xpath.getPatternString(), getTypeString(m_resultType) });
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
@@ -648,7 +652,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 */
 	private boolean isNamespaceNode(Node node) {
 
-		if ((null != node) && (node.getNodeType() == Node.ATTRIBUTE_NODE)
+		if (null != node && node.getNodeType() == Node.ATTRIBUTE_NODE
 				&& (node.getNodeName().startsWith("xmlns:") || node.getNodeName().equals("xmlns"))) {
 			return true;
 		} else {

@@ -24,9 +24,9 @@ import org.lobobrowser.w3c.svg.SVGNumber;
 import org.w3c.dom.DOMException;
 
 public class SVGNumberImpl implements SVGNumber {
-	
+
 	private float number = 0;
-	
+
 	public SVGNumberImpl(String value) {
 		if (value.indexOf("%") != -1) {
 			int index = value.indexOf("%");
@@ -34,7 +34,7 @@ public class SVGNumberImpl implements SVGNumber {
 		} else {
 			number = Float.parseFloat(value);
 		}
-		
+
 		if (number < 0) {
 			number = 0;
 		} else if (number > 1) {

@@ -58,7 +58,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 	@Override
 	public boolean isElementContentWhitespace() {
 		String t = this.text;
-		return (t == null) || t.trim().equals("");
+		return t == null || t.trim().equals("");
 	}
 
 	/*
@@ -87,7 +87,7 @@ public class DOMTextImpl extends DOMCharacterDataImpl implements Text {
 			throw new DOMException(DOMException.HIERARCHY_REQUEST_ERR, "Text node has no parent");
 		}
 		String t = this.text;
-		if ((offset < 0) || (offset > t.length())) {
+		if (offset < 0 || offset > t.length()) {
 			throw new DOMException(DOMException.INDEX_SIZE_ERR, "Bad offset: " + offset);
 		}
 		String content1 = t.substring(0, offset);

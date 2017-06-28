@@ -27,9 +27,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.lobobrowser.util.Urls;
@@ -43,7 +43,8 @@ import org.w3c.dom.css.CSSStyleSheet;
 /**
  * The Class AbstractCSS2Properties.
  */
-public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate implements CSSProperties, CSS2Properties {
+public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
+		implements CSSProperties, CSS2Properties {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(AbstractCSS2Properties.class.getName());
@@ -109,7 +110,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 				String propertyName = styleDeclaration.item(i);
 				String propertyValue = styleDeclaration.getPropertyValue(propertyName);
 				String priority = styleDeclaration.getPropertyPriority(propertyName);
-				boolean important = (priority != null) && (priority.length() != 0) && "important".equals(priority);
+				boolean important = priority != null && priority.length() != 0 && "important".equals(priority);
 				this.setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, styleDeclaration, important);
 			}
 		}
@@ -223,7 +224,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 			} else {
 				if (!important) {
 					Property oldProperty = vm.get(lowerCaseName);
-					if ((oldProperty != null) && oldProperty.important) {
+					if (oldProperty != null && oldProperty.important) {
 						// Ignore setting
 						return;
 					}
@@ -277,7 +278,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.overlayColor = value;
 		this.context.informLookInvalid();
 	}
-	
+
 	/**
 	 * Gets the float.
 	 *
@@ -297,7 +298,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(FLOAT, value);
 	}
 
-	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -770,7 +770,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 
 		return this.getPropertyValueLC(EMPTY_CELLS);
 	}
-	
+
 	public String getFill() {
 		return this.getPropertyValueLC(FILL);
 	}
@@ -778,7 +778,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public void setFill(String value) {
 		this.setPropertyValueLC(FILL, value);
 	}
-	
 
 	/*
 	 * (non-Javadoc)
@@ -2130,8 +2129,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		new FontSetter().changeValue(this, font, null);
 		this.context.informInvalid();
 	}
-	
-	
+
 	public String getFillOpacity() {
 		return this.getPropertyValueLC(FILL_OPACITY);
 	}
@@ -2436,8 +2434,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public void setOrphans(String orphans) throws DOMException {
 		this.setPropertyValueLC(ORPHANS, orphans);
 	}
-	
-	
+
 	public String getOpacity() {
 		return this.getPropertyValueLC(OPACITY);
 	}
@@ -2773,15 +2770,15 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public void setStress(String stress) throws DOMException {
 		this.setPropertyValueLC(STRESS, stress);
 	}
-	
+
 	public String getStopColor() {
 		return this.getPropertyValueLC(STOP_COLOR);
 	}
-	
+
 	public String getStopOpacity() {
 		return this.getPropertyValueLC(STOP_OPACITY);
 	}
-	
+
 	public String getStroke() {
 		return this.getPropertyValueLC(STROKE);
 	}
@@ -2790,7 +2787,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(STROKE, value);
 		this.context.informInvalid();
 	}
-	
+
 	public String getStrokeDashArray() {
 		return this.getPropertyValueLC(STROKE_DASHARRAY);
 	}
@@ -2799,9 +2796,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(STROKE_DASHARRAY, value);
 		this.context.informInvalid();
 	}
-	
-	
-	
+
 	public String getStrokeLineCap() {
 		return this.getPropertyValueLC(STROKE_LINE_CAP);
 	}
@@ -2810,7 +2805,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(STROKE_LINE_CAP, value);
 		this.context.informInvalid();
 	}
-	
+
 	public String getStrokeMiterLimit() {
 		return this.getPropertyValueLC(STROKE_MITERLIMIT);
 	}
@@ -2819,7 +2814,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(STROKE_MITERLIMIT, value);
 		this.context.informInvalid();
 	}
-	
+
 	public String getStrokeOpacity() {
 		return this.getPropertyValueLC(STROKE_OPACITY);
 	}
@@ -2828,8 +2823,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.setPropertyValueLC(STROKE_OPACITY, value);
 		this.context.informInvalid();
 	}
-	
-	
+
 	public String getStrokeWidth() {
 		return this.getPropertyValueLC(STROKE_WIDTH);
 	}
@@ -3148,7 +3142,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		public void changeValue(AbstractCSS2Properties properties, String value, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(this.name, value, important);
-			if ((value != null) && (value.length() > 0)) {
+			if (value != null && value.length() > 0) {
 				String[] array = HtmlValues.splitCssValue(value);
 				String color = null;
 				String style = null;
@@ -3233,7 +3227,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(this.property, newValue, important);
-			if ((newValue != null) && (newValue.length() > 0)) {
+			if (newValue != null && newValue.length() > 0) {
 				String[] array = HtmlValues.splitCssValue(newValue);
 				int size = array.length;
 				if (size == 1) {
@@ -3316,7 +3310,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 				baseHref = properties.context.getDocumentBaseURI();
 			}
 			String start = "url(";
-			if ((newValue == null) || !newValue.toLowerCase().startsWith(start)) {
+			if (newValue == null || !newValue.toLowerCase().startsWith(start)) {
 				finalValue = newValue;
 			} else {
 				int startIdx = start.length();
@@ -3335,8 +3329,8 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 									+ HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm())
 									+ ")";
 						} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-							logger.error("Unable to create URL for URI=[" + tentativeUri + "], with base=["
-									+ baseHref + "].", mfu);
+							logger.error("Unable to create URL for URI=[" + tentativeUri + "], with base=[" + baseHref
+									+ "].", mfu);
 							finalValue = newValue;
 						}
 					}
@@ -3377,7 +3371,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(BACKGROUND, newValue, important);
-			if ((newValue != null) && (newValue.length() > 0)) {
+			if (newValue != null && newValue.length() > 0) {
 				String[] tokens = HtmlValues.splitCssValue(newValue);
 				boolean hasXPosition = false;
 				boolean hasYPosition = false;
@@ -3395,7 +3389,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 						backgroundRepeat = token;
 					} else if (HtmlValues.isBackgroundPosition(token)) {
 						if (hasXPosition && !hasYPosition) {
-							position += (" " + token);
+							position += " " + token;
 							hasYPosition = true;
 						} else {
 							hasXPosition = true;
@@ -3454,7 +3448,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(FONT, newValue, important);
-			if ((newValue != null) && (newValue.length() > 0)) {
+			if (newValue != null && newValue.length() > 0) {
 				String fontSpecTL = newValue.toLowerCase();
 				FontInfo fontInfo = HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
 				if (fontInfo != null) {

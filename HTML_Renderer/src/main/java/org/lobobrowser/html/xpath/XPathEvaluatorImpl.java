@@ -47,9 +47,11 @@ import org.w3c.dom.Node;
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2004/NOTE-DOM-Level-3-XPath-20040226'>Document
- * Object Model (DOM) Level 3 XPath Specification</a>.</p>
+ * Object Model (DOM) Level 3 XPath Specification</a>.
+ * </p>
  *
- * </p>The evaluation of XPath expressions is provided by
+ * </p>
+ * The evaluation of XPath expressions is provided by
  * <code>XPathEvaluator</code>, which will provide evaluation of XPath 1.0
  * expressions with no specialized extension functions or variables. It is
  * expected that the <code>XPathEvaluator</code> interface will be implemented
@@ -57,7 +59,8 @@ import org.w3c.dom.Node;
  * implementation which supports the XPath DOM module.
  * <code>XPathEvaluator</code> implementations may be available from other
  * sources that may provide support for special extension functions or variables
- * which are not defined in this specification.</p>
+ * which are not defined in this specification.
+ * </p>
  *
  * @see org.w3c.dom.xpath.XPathEvaluator
  *
@@ -89,7 +92,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 		@Override
 		public String getNamespaceForPrefix(String prefix, Node context) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_NULL_RESOLVER, null);
-			throw new DOMException(DOMException.NAMESPACE_ERR, fmsg); 
+			throw new DOMException(DOMException.NAMESPACE_ERR, fmsg);
 		}
 
 		/**
@@ -184,7 +187,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 
 			// If the resolver is null, create a dummy prefix resolver
 			XPath xpath = new XPath(expression, null,
-					((null == resolver) ? new DummyPrefixResolver() : ((PrefixResolver) resolver)), XPath.SELECT);
+					null == resolver ? new DummyPrefixResolver() : (PrefixResolver) resolver, XPath.SELECT);
 
 			return new XPathExpressionImpl(xpath, m_doc);
 
@@ -219,7 +222,7 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 	@Override
 	public XPathNSResolver createNSResolver(Node nodeResolver) {
 
-		return new XPathNSResolverImpl((nodeResolver.getNodeType() == Node.DOCUMENT_NODE)
+		return new XPathNSResolverImpl(nodeResolver.getNodeType() == Node.DOCUMENT_NODE
 				? ((Document) nodeResolver).getDocumentElement() : nodeResolver);
 	}
 

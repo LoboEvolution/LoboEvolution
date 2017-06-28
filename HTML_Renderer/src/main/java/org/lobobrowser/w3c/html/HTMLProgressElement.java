@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLProgressElement.
  */
 public interface HTMLProgressElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the value.
 	 *

@@ -30,7 +30,7 @@ public class SectionFilter implements NodeFilter {
 
 	@Override
 	public final boolean accept(Node node) {
-		return (node instanceof HTMLTableSectionElement);
+		return node instanceof HTMLTableSectionElement;
 	}
 
 }

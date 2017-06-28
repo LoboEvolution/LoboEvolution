@@ -23,12 +23,11 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.NodeList;
 
-
 /**
  * The Interface HTMLMeterElement.
  */
 public interface HTMLMeterElement extends HTMLElement {
-	
+
 	/**
 	 * Gets the value.
 	 *

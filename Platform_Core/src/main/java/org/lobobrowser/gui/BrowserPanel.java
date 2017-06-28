@@ -467,7 +467,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	@Override
 	public Window getAwtWindow() {
 		Container parent = this.getParent();
-		while ((parent != null) && !(parent instanceof Window)) {
+		while (parent != null && !(parent instanceof Window)) {
 			parent = parent.getParent();
 		}
 		return (Window) parent;

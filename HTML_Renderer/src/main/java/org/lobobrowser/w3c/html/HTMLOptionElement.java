@@ -21,16 +21,18 @@
 
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The Interface HTMLOptionElement.
  */
 public interface HTMLOptionElement extends HTMLElement {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getDisabled()
 	 */
 	// HTMLOptionElement
+	@Override
 	public boolean getDisabled();
 
 	/**
@@ -48,9 +50,12 @@ public interface HTMLOptionElement extends HTMLElement {
 	 */
 	public HTMLFormElement getForm();
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLElement#getLabel()
 	 */
+	@Override
 	public String getLabel();
 
 	/**

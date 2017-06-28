@@ -27,29 +27,29 @@ package org.lobobrowser.ua;
  * @see NavigatorProgressEvent#getProgressType()
  */
 public enum ProgressType {
-    /** This is the initial state. */
-    NONE,
+	/** This is the initial state. */
+	NONE,
 
-    /** The client is attempting to connect to the server. */
-    CONNECTING,
+	/** The client is attempting to connect to the server. */
+	CONNECTING,
 
-    /** The client is sending POST data. */
-    SENDING,
-    /**
-     * The client is waiting for a response from the server. POST data, if any,
-     * has been sent.
-     */
-    WAITING_FOR_RESPONSE,
-    /**
-     * Content is starting to load.
-     */
-    CONTENT_LOADING,
-    /**
-     * Additional processing of the document is being performed.
-     */
-    BUILDING,
-    /**
-     * All operations done.
-     */
-    DONE
+	/** The client is sending POST data. */
+	SENDING,
+	/**
+	 * The client is waiting for a response from the server. POST data, if any,
+	 * has been sent.
+	 */
+	WAITING_FOR_RESPONSE,
+	/**
+	 * Content is starting to load.
+	 */
+	CONTENT_LOADING,
+	/**
+	 * Additional processing of the document is being performed.
+	 */
+	BUILDING,
+	/**
+	 * All operations done.
+	 */
+	DONE
 }

@@ -103,7 +103,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	@Override
 	public HTMLFormElement getForm() {
 		Node parent = this.getParentNode();
-		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
 			parent = parent.getParentNode();
 		}
 		return (HTMLFormElement) parent;

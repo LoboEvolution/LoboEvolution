@@ -22,8 +22,7 @@
 package org.lobobrowser.w3c.smil;
 
 /**
- *  This interface represents the SMIL <code>animate</code> element. 
+ * This interface represents the SMIL <code>animate</code> element.
  */
 public interface SMILAnimateElement extends SMILAnimation {
 }
-

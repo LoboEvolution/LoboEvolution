@@ -32,104 +32,107 @@ import java.io.Serializable;
  */
 public class CookieValue implements Serializable {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 225784501000400500L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 225784501000400500L;
 
-    /** The value. */
-    private String value;
+	/** The value. */
+	private String value;
 
-    /** The path. */
-    private String path;
+	/** The path. */
+	private String path;
 
-    /** The domain. */
-    private String domain;
+	/** The domain. */
+	private String domain;
 
-    /** The expiration time. */
-    private Long expirationTime;
+	/** The expiration time. */
+	private Long expirationTime;
 
-    /**
-     * Instantiates a new cookie value.
-     *
-     * @param value
-     *            the value
-     * @param path
-     *            the path
-     * @param domain
-     *            the domain
-     * @param expirationTime
-     *            the expiration time
-     */
-    public CookieValue(String value, String path, String domain,
-            Long expirationTime) {
-        this.value = value;
-        this.path = path;
-        this.expirationTime = expirationTime;
-        this.domain = domain;
-    }
+	/**
+	 * Instantiates a new cookie value.
+	 *
+	 * @param value
+	 *            the value
+	 * @param path
+	 *            the path
+	 * @param domain
+	 *            the domain
+	 * @param expirationTime
+	 *            the expiration time
+	 */
+	public CookieValue(String value, String path, String domain, Long expirationTime) {
+		this.value = value;
+		this.path = path;
+		this.expirationTime = expirationTime;
+		this.domain = domain;
+	}
 
-    /**
-     * Instantiates a new cookie value.
-     *
-     * @param value
-     *            the value
-     * @param path
-     *            the path
-     */
-    public CookieValue(String value, String path) {
-        this.value = value;
-        this.path = path;
-        this.expirationTime = null;
-    }
+	/**
+	 * Instantiates a new cookie value.
+	 *
+	 * @param value
+	 *            the value
+	 * @param path
+	 *            the path
+	 */
+	public CookieValue(String value, String path) {
+		this.value = value;
+		this.path = path;
+		this.expirationTime = null;
+	}
 
-    /** Gets the value.
+	/**
+	 * Gets the value.
 	 *
 	 * @return the value
 	 */
-    public String getValue() {
-        return this.value;
-    }
+	public String getValue() {
+		return this.value;
+	}
 
-    /** Gets the expires.
+	/**
+	 * Gets the expires.
 	 *
 	 * @return the expires
 	 */
-    public Long getExpires() {
-        return this.expirationTime;
-    }
+	public Long getExpires() {
+		return this.expirationTime;
+	}
 
-    /** Gets the path.
+	/**
+	 * Gets the path.
 	 *
 	 * @return the path
 	 */
-    public String getPath() {
-        return path;
-    }
+	public String getPath() {
+		return path;
+	}
 
-    /** Gets the domain.
+	/**
+	 * Gets the domain.
 	 *
 	 * @return the domain
 	 */
-    public String getDomain() {
-        return domain;
-    }
+	public String getDomain() {
+		return domain;
+	}
 
-    /** Checks if is expired.
+	/**
+	 * Checks if is expired.
 	 *
 	 * @return true, if is expired
 	 */
-    public boolean isExpired() {
-        Long exp = this.expirationTime;
-        return exp == null ? false : exp.longValue() < System
-                .currentTimeMillis();
-    }
+	public boolean isExpired() {
+		Long exp = this.expirationTime;
+		return exp == null ? false : exp.longValue() < System.currentTimeMillis();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        return "CookieValue[value=" + value + ",path=" + path + ",expiration="
-                + expirationTime + "]";
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "CookieValue[value=" + value + ",path=" + path + ",expiration=" + expirationTime + "]";
+	}
 }

@@ -31,75 +31,81 @@ import java.awt.Component;
  */
 public interface ComponentContent {
 
-    /** Gets the component.
+	/**
+	 * Gets the component.
 	 *
 	 * @return the component
 	 */
-    Component getComponent();
+	Component getComponent();
 
-    /** Gets the title.
+	/**
+	 * Gets the title.
 	 *
 	 * @return the title
 	 */
-    String getTitle();
+	String getTitle();
 
-    /** Gets the description.
+	/**
+	 * Gets the description.
 	 *
 	 * @return the description
 	 */
-    String getDescription();
+	String getDescription();
 
-    /**
-     * Determines whether it's possible to copy content to the clipboard. This
-     * method can be used by the platform to determine if a menu item should be
-     * enabled.
-     *
-     * @return true, if successful
-     */
-    boolean canCopy();
+	/**
+	 * Determines whether it's possible to copy content to the clipboard. This
+	 * method can be used by the platform to determine if a menu item should be
+	 * enabled.
+	 *
+	 * @return true, if successful
+	 */
+	boolean canCopy();
 
-    /**
-     * Copies content to the clipboard.
-     *
-     * @return True if the operation succeeded.
-     */
-    boolean copy();
+	/**
+	 * Copies content to the clipboard.
+	 *
+	 * @return True if the operation succeeded.
+	 */
+	boolean copy();
 
-    /** Gets the source code.
+	/**
+	 * Gets the source code.
 	 *
 	 * @return the source code
 	 */
-    String getSourceCode();
+	String getSourceCode();
 
-    /** Called after the content has been added to a container for display. */
-    void addNotify();
+	/** Called after the content has been added to a container for display. */
+	void addNotify();
 
-    /**
-     * Called after the content has been removed from the display container.
-     * This method may be used to dispose associated resources.
-     */
-    void removeNotify();
+	/**
+	 * Called after the content has been removed from the display container.
+	 * This method may be used to dispose associated resources.
+	 */
+	void removeNotify();
 
-    /** Gets the content object.
+	/**
+	 * Gets the content object.
 	 *
 	 * @return the content object
 	 */
-    Object getContentObject();
+	Object getContentObject();
 
-    /** Gets the mime type.
+	/**
+	 * Gets the mime type.
 	 *
 	 * @return the mime type
 	 */
-    String getMimeType();
+	String getMimeType();
 
-    /**
-     * Sets a property of the content. Property names are
-     * implementation-dependent.
-     *
-     * @param name
-     *            the name
-     * @param value
-     *            the value
-     */
-    void setProperty(String name, Object value);
+	/**
+	 * Sets a property of the content. Property names are
+	 * implementation-dependent.
+	 *
+	 * @param name
+	 *            the name
+	 * @param value
+	 *            the value
+	 */
+	void setProperty(String name, Object value);
 }

@@ -25,6 +25,7 @@ import java.awt.Cursor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
+
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.renderstate.ColorRenderState;
@@ -138,7 +139,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
 			String href = this.getHref();
-			if ((href != null) && (href.length() > 0)) {
+			if (href != null && href.length() > 0) {
 				try {
 					URL url = this.getFullURL(href);
 					return url == null ? null : url.toExternalForm();
@@ -158,7 +159,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
 			String href = this.getHref();
-			if ((href != null) && (href.length() > 0)) {
+			if (href != null && href.length() > 0) {
 				String target = this.getTarget();
 				try {
 					URL url = this.getFullURL(href);
@@ -184,7 +185,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 			if (body != null) {
 				String vlink = body.getVLink();
 				String link = body.getLink();
-				if ((vlink != null) || (link != null)) {
+				if (vlink != null || link != null) {
 					HtmlRendererContext rcontext = this.getHtmlRendererContext();
 					if (rcontext != null) {
 						boolean visited = rcontext.isVisitedLink(this);

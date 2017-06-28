@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.w3c.html;
 
-
 /**
  * The public interface CanvasGradient.
  */
@@ -29,8 +28,10 @@ public interface CanvasGradient {
 	/**
 	 * Adds the color stop.
 	 *
-	 * @param offset the offset
-	 * @param color the color
+	 * @param offset
+	 *            the offset
+	 * @param color
+	 *            the color
 	 */
 	void addColorStop(String offset, String color);
 }

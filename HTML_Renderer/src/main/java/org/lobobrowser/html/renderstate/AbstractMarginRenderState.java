@@ -28,41 +28,43 @@ import org.lobobrowser.html.style.HtmlInsets;
  */
 public abstract class AbstractMarginRenderState extends BlockRenderState {
 
-    /**
-     * Instantiates a new abstract margin render state.
-     *
-     * @param prevRenderState
-     *            the prev render state
-     * @param element
-     *            the element
-     */
-    public AbstractMarginRenderState(RenderState prevRenderState,
-            HTMLElementImpl element) {
-        super(prevRenderState, element);
-    }
+	/**
+	 * Instantiates a new abstract margin render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param element
+	 *            the element
+	 */
+	public AbstractMarginRenderState(RenderState prevRenderState, HTMLElementImpl element) {
+		super(prevRenderState, element);
+	}
 
-    /** Gets the default margin insets.
+	/**
+	 * Gets the default margin insets.
 	 *
 	 * @return the default margin insets
 	 */
-    protected abstract HtmlInsets getDefaultMarginInsets();
+	protected abstract HtmlInsets getDefaultMarginInsets();
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderstate.StyleSheetRenderState#getMarginInsets()
-     */
-    @Override
-    public HtmlInsets getMarginInsets() {
-        HtmlInsets insets = this.marginInsets;
-        if (insets != INVALID_INSETS) {
-            return insets;
-        }
-        insets = super.getMarginInsets();
-        if (insets == null) {
-            insets = this.getDefaultMarginInsets();
-        }
-        this.marginInsets = insets;
-        return insets;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getMarginInsets()
+	 */
+	@Override
+	public HtmlInsets getMarginInsets() {
+		HtmlInsets insets = this.marginInsets;
+		if (insets != INVALID_INSETS) {
+			return insets;
+		}
+		insets = super.getMarginInsets();
+		if (insets == null) {
+			insets = this.getDefaultMarginInsets();
+		}
+		this.marginInsets = insets;
+		return insets;
+	}
 
 }

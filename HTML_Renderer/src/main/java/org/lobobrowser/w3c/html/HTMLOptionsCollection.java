@@ -23,13 +23,14 @@ package org.lobobrowser.w3c.html;
 
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface HTMLOptionsCollection.
  */
 public interface HTMLOptionsCollection extends HTMLCollection {
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLCollection#getLength()
 	 */
 	// HTMLOptionsCollection
@@ -44,7 +45,9 @@ public interface HTMLOptionsCollection extends HTMLCollection {
 	 */
 	public void setLength(int length);
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.lobobrowser.w3c.html.HTMLCollection#namedItem(java.lang.String)
 	 */
 	@Override
@@ -53,30 +56,36 @@ public interface HTMLOptionsCollection extends HTMLCollection {
 	/**
 	 * Adds the.
 	 *
-	 * @param element the element
+	 * @param element
+	 *            the element
 	 */
 	public void add(HTMLElement element);
 
 	/**
 	 * Adds the.
 	 *
-	 * @param element the element
-	 * @param before the before
+	 * @param element
+	 *            the element
+	 * @param before
+	 *            the before
 	 */
 	public void add(HTMLElement element, HTMLElement before);
 
 	/**
 	 * Adds the.
 	 *
-	 * @param element the element
-	 * @param before the before
+	 * @param element
+	 *            the element
+	 * @param before
+	 *            the before
 	 */
 	public void add(HTMLElement element, int before);
 
 	/**
 	 * Removes the.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 */
 	public void remove(int index);
 

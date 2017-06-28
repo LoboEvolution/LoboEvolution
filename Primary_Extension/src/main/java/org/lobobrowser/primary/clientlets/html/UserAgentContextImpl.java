@@ -30,7 +30,6 @@ import java.util.Set;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.request.RequestEngine;
@@ -231,13 +230,12 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isScriptingEnabled() {
-		GeneralSettings settings = AccessController
-                .doPrivileged(new PrivilegedAction<GeneralSettings>() {
-                    @Override
-                    public GeneralSettings run() {
-                        return GeneralSettings.getInstance();
-                    }
-                });
+		GeneralSettings settings = AccessController.doPrivileged(new PrivilegedAction<GeneralSettings>() {
+			@Override
+			public GeneralSettings run() {
+				return GeneralSettings.getInstance();
+			}
+		});
 		return settings.isSpoofJS();
 	}
 
@@ -302,13 +300,12 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isExternalCSSEnabled() {
-		GeneralSettings settings = AccessController
-                .doPrivileged(new PrivilegedAction<GeneralSettings>() {
-                    @Override
-                    public GeneralSettings run() {
-                        return GeneralSettings.getInstance();
-                    }
-                });
+		GeneralSettings settings = AccessController.doPrivileged(new PrivilegedAction<GeneralSettings>() {
+			@Override
+			public GeneralSettings run() {
+				return GeneralSettings.getInstance();
+			}
+		});
 		return settings.isSpoofCSS();
 	}
 
@@ -319,13 +316,12 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isInternalCSSEnabled() {
-		GeneralSettings settings = AccessController
-                .doPrivileged(new PrivilegedAction<GeneralSettings>() {
-                    @Override
-                    public GeneralSettings run() {
-                        return GeneralSettings.getInstance();
-                    }
-                });
+		GeneralSettings settings = AccessController.doPrivileged(new PrivilegedAction<GeneralSettings>() {
+			@Override
+			public GeneralSettings run() {
+				return GeneralSettings.getInstance();
+			}
+		});
 		return settings.isSpoofCSS();
 	}
 }

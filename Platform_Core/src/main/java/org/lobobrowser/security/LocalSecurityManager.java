@@ -28,47 +28,50 @@ package org.lobobrowser.security;
  */
 public class LocalSecurityManager extends SecurityManager {
 
-    /** The Constant threadGroupTL. */
-    private static final ThreadLocal<ThreadGroup> threadGroupTL = new ThreadLocal<ThreadGroup>();
+	/** The Constant threadGroupTL. */
+	private static final ThreadLocal<ThreadGroup> threadGroupTL = new ThreadLocal<ThreadGroup>();
 
-    /**
-     * Instantiates a new local security manager.
-     */
-    public LocalSecurityManager() {
-        super();
-    }
+	/**
+	 * Instantiates a new local security manager.
+	 */
+	public LocalSecurityManager() {
+		super();
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.SecurityManager#getThreadGroup()
-     */
-    @Override
-    public ThreadGroup getThreadGroup() {
-        ThreadGroup tg = getCurrentThreadGroup();
-        if (tg == null) {
-            return super.getThreadGroup();
-        } else {
-            return tg;
-        }
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.SecurityManager#getThreadGroup()
+	 */
+	@Override
+	public ThreadGroup getThreadGroup() {
+		ThreadGroup tg = getCurrentThreadGroup();
+		if (tg == null) {
+			return super.getThreadGroup();
+		} else {
+			return tg;
+		}
+	}
 
-    /** Sets the current thread group.
+	/**
+	 * Sets the current thread group.
 	 *
 	 * @param tg
 	 *            the new current thread group
 	 */
-    public static void setCurrentThreadGroup(ThreadGroup tg) {
-        // TODO: Thread group needs to be thought through. It's retained in
-        // memory, and we need to return the right one in the GUI thread as
-        // well.
-        threadGroupTL.set(tg);
-    }
+	public static void setCurrentThreadGroup(ThreadGroup tg) {
+		// TODO: Thread group needs to be thought through. It's retained in
+		// memory, and we need to return the right one in the GUI thread as
+		// well.
+		threadGroupTL.set(tg);
+	}
 
-    /** Gets the current thread group.
+	/**
+	 * Gets the current thread group.
 	 *
 	 * @return the current thread group
 	 */
-    public static ThreadGroup getCurrentThreadGroup() {
-        return (ThreadGroup) threadGroupTL.get();
-    }
+	public static ThreadGroup getCurrentThreadGroup() {
+		return threadGroupTL.get();
+	}
 }

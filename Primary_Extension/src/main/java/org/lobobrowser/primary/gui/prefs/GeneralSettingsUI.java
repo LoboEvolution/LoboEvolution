@@ -47,16 +47,18 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The Constant MAX_STARTUP_PAGES. */
 	private static final int MAX_STARTUP_PAGES = 4;
-	
+
 	/** The Constant EDIT_LIST_CAPTION. */
-	private static final String EDIT_LIST_CAPTION = "You may provide up to " + MAX_STARTUP_PAGES + " startup URLs, one per line.";
-	
+	private static final String EDIT_LIST_CAPTION = "You may provide up to " + MAX_STARTUP_PAGES
+			+ " startup URLs, one per line.";
+
 	/** The Constant TOOLTIP_STARTUP. */
-	private static final String TOOLTIP_STARTUP = "Up to " + MAX_STARTUP_PAGES + " pages launched when you first run the browser.";
-	
+	private static final String TOOLTIP_STARTUP = "Up to " + MAX_STARTUP_PAGES
+			+ " pages launched when you first run the browser.";
+
 	/** The Constant MSIE_USER_AGENT. */
 	private static final String MSIE_USER_AGENT = "Include \"MSIE\" in User-Agent header.";
 
@@ -71,19 +73,19 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The ie spoof panel. */
 	private final CheckBoxPanel ieSpoofPanel;
-	
+
 	/** The javscript panel. */
 	private final CheckBoxPanel javscriptPanel;
-	
+
 	/** The css panel. */
 	private final CheckBoxPanel cssPanel;
-	
+
 	/** The moz panel. */
 	private final FormPanel mozPanel;
 
 	/** The ie panel. */
 	private final FormPanel iePanel;
-	
+
 	/** The network panel. */
 	private final FormPanel networkPanel;
 
@@ -124,7 +126,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.javscriptPanel.updateEnabling();
 		this.cssPanel.updateEnabling();
 	}
-	
+
 	/**
 	 * Gets the startup group box.
 	 *
@@ -156,7 +158,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		groupBox.add(this.getMozVersionPanel());
 		return groupBox;
 	}
-	
+
 	/**
 	 * Gets the network box.
 	 *
@@ -216,7 +218,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.networkPanel.revalidate();
 		this.startupPagesStringListControl.setStrings(settings.getStartupURLs());
 	}
-	
+
 	/**
 	 * Gets the IE check box panel.
 	 *
@@ -234,8 +236,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private Component getMozVersionPanel() {
 		return this.mozPanel;
 	}
-	
-	
+
 	/**
 	 * Gets the JS check box panel.
 	 *
@@ -244,7 +245,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private Component getJSCheckBoxPanel() {
 		return this.javscriptPanel;
 	}
-	
+
 	/**
 	 * Gets the CSS check box panel.
 	 *

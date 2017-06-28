@@ -25,7 +25,7 @@ import org.lobobrowser.w3c.svg.SVGPathSegMovetoRel;
 public class SVGPathSegMovetoRelImpl extends SVGPathSegImpl implements SVGPathSegMovetoRel {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	/**
 	 * @param x
 	 * @param y
@@ -41,7 +41,7 @@ public class SVGPathSegMovetoRelImpl extends SVGPathSegImpl implements SVGPathSe
 	}
 
 	@Override
-	public String getPathSegTypeAsLetter() {	
+	public String getPathSegTypeAsLetter() {
 		return "m";
 	}
 }

@@ -34,128 +34,128 @@ public class LAFSettings implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(LAFSettings.class);
-	
+
 	/** The Constant instance. */
 	private static final LAFSettings instance;
-	
+
 	/** The Acryl . */
 	private volatile boolean acryl;
-	
+
 	/** The Aero . */
 	private volatile boolean aero;
-	
+
 	/** The Aluminium . */
 	private volatile boolean aluminium;
-	
+
 	/** The Bernstein . */
 	private volatile boolean bernstein;
-	
+
 	/** The Fast . */
 	private volatile boolean fast;
-	
+
 	/** The Graphite . */
 	private volatile boolean graphite;
-	
+
 	/** The HiFi . */
 	private volatile boolean hiFi;
-	
+
 	/** The Luna . */
 	private volatile boolean luna;
-	
+
 	/** The McWin . */
 	private volatile boolean mcWin;
-	
+
 	/** The Mint . */
 	private volatile boolean mint;
-	
+
 	/** The Noire . */
 	private volatile boolean noire;
-	
+
 	/** The Smart . */
 	private volatile boolean smart;
-	
+
 	/** The Texture . */
 	private volatile boolean texture;
-	
+
 	/** The Bold . */
 	private volatile boolean bold;
-	
+
 	/** The Italic . */
 	private volatile boolean italic;
-	
+
 	/** The Underline . */
 	private volatile boolean underline;
-	
+
 	/** The Strikethrough . */
 	private volatile boolean strikethrough;
-	
+
 	/** The Subscript . */
 	private volatile boolean subscript;
-	
+
 	/** The Superscript . */
 	private volatile boolean superscript;
 
 	/** The Font Size . */
 	private volatile float fontSize;
-	
+
 	/** The Color . */
 	private volatile Color color;
-	
+
 	/** The Font . */
 	private volatile String font;
-	
+
 	/** The Constant ACRYL. */
 	public static String ACRYL = "Acryl";
-	
+
 	/** The Constant AERO. */
 	public static String AERO = "Aero";
-	
+
 	/** The Constant ALUMINIUM. */
 	public static String ALUMINIUM = "Aluminium";
-	
+
 	/** The Constant BERNSTEIN. */
 	public static String BERNSTEIN = "Bernstein";
-	
+
 	/** The Constant FAST. */
 	public static String FAST = "Fast";
-	
+
 	/** The Constant GRAPHITE. */
 	public static String GRAPHITE = "Graphite";
-	
+
 	/** The Constant HIFI. */
 	public static String HIFI = "HiFi";
-	
+
 	/** The Constant LUNA. */
 	public static String LUNA = "Luna";
-	
+
 	/** The Constant MCWIN. */
 	public static String MCWIN = "McWin";
-	
+
 	/** The Constant MINT. */
 	public static String MINT = "Mint";
-	
+
 	/** The Constant NOIRE. */
 	public static String NOIRE = "Noire";
-	
+
 	/** The Constant SMART. */
 	public static String SMART = "Smart";
-	
+
 	/** The Constant TEXTURE. */
 	public static String TEXTURE = "Texture";
-	
+
 	public static String BOLD = "Bold";
 	public static String ITALIC = "Italic";
 	public static String UNDERLINE = "Underline";
-	public static String STRIKETHROUGH= "Strikethrough";
+	public static String STRIKETHROUGH = "Strikethrough";
 	public static String SUBSCRIPT = "Subscript";
 	public static String SUPERSCRIPT = "Superscript";
-	
+
 	/** The Constant TIMES_NEW_ROMAN. */
 	public static String TIMES_NEW_ROMAN = "TimesNewRoman";
-	
+
 	/** The FONTS . */
 	public static String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew", "AngsanaUPC", "AngsanaUPC", "Aparajita",
 			"ArabicTypesetting", "Arial", "ArialBlack", "Batang", "BatangChe", "BrowalliaNew", "BrowalliaUPC",
@@ -181,10 +181,9 @@ public class LAFSettings implements Serializable {
 			"SourceSansProExtraLight", "SourceSansProLight", "SourceSansProSemibold", "Sylfaen", "Symbol", "Tahoma",
 			"TimesNewRoman", "TraditionalArabic", "TrebuchetMS", "Tunga", "Utsaah", "Vani", "Verdana", "Vijaya",
 			"Vrinda", "Webdings", "Wingdings" };
-	
-	public static String[] FONTS_SIZE = { "8", "9", "10", "11", "12", "14", "16",
-	        "18", "20", "22", "24", "26", "28", "36", "48", "72" };
 
+	public static String[] FONTS_SIZE = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28",
+			"36", "48", "72" };
 
 	static {
 		LAFSettings ins = null;
@@ -513,7 +512,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param bold the bold to set
+	 * @param bold
+	 *            the bold to set
 	 */
 	public void setBold(boolean bold) {
 		this.bold = bold;
@@ -527,7 +527,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param italic the italic to set
+	 * @param italic
+	 *            the italic to set
 	 */
 	public void setItalic(boolean italic) {
 		this.italic = italic;
@@ -541,7 +542,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param underline the underline to set
+	 * @param underline
+	 *            the underline to set
 	 */
 	public void setUnderline(boolean underline) {
 		this.underline = underline;
@@ -555,7 +557,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param strikethrough the strikethrough to set
+	 * @param strikethrough
+	 *            the strikethrough to set
 	 */
 	public void setStrikethrough(boolean strikethrough) {
 		this.strikethrough = strikethrough;
@@ -569,7 +572,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param subscript the subscript to set
+	 * @param subscript
+	 *            the subscript to set
 	 */
 	public void setSubscript(boolean subscript) {
 		this.subscript = subscript;
@@ -583,7 +587,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param superscript the superscript to set
+	 * @param superscript
+	 *            the superscript to set
 	 */
 	public void setSuperscript(boolean superscript) {
 		this.superscript = superscript;
@@ -616,7 +621,7 @@ public class LAFSettings implements Serializable {
 	public void setFontSize(float fontSize) {
 		this.fontSize = fontSize;
 	}
-	
+
 	/**
 	 * @return the color
 	 */
@@ -625,7 +630,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
-	 * @param color the color to set
+	 * @param color
+	 *            the color to set
 	 */
 	public void setColor(Color color) {
 		this.color = color;

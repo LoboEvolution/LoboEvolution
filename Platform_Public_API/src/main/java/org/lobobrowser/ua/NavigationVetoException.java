@@ -28,45 +28,45 @@ package org.lobobrowser.ua;
  */
 public class NavigationVetoException extends Exception {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /**
-     * Instantiates a new navigation veto exception.
-     */
-    public NavigationVetoException() {
-        super();
-    }
+	/**
+	 * Instantiates a new navigation veto exception.
+	 */
+	public NavigationVetoException() {
+		super();
+	}
 
-    /**
-     * Instantiates a new navigation veto exception.
-     *
-     * @param message
-     *            the message
-     * @param cause
-     *            the cause
-     */
-    public NavigationVetoException(String message, Throwable cause) {
-        super(message, cause);
-    }
+	/**
+	 * Instantiates a new navigation veto exception.
+	 *
+	 * @param message
+	 *            the message
+	 * @param cause
+	 *            the cause
+	 */
+	public NavigationVetoException(String message, Throwable cause) {
+		super(message, cause);
+	}
 
-    /**
-     * Instantiates a new navigation veto exception.
-     *
-     * @param message
-     *            the message
-     */
-    public NavigationVetoException(String message) {
-        super(message);
-    }
+	/**
+	 * Instantiates a new navigation veto exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public NavigationVetoException(String message) {
+		super(message);
+	}
 
-    /**
-     * Instantiates a new navigation veto exception.
-     *
-     * @param cause
-     *            the cause
-     */
-    public NavigationVetoException(Throwable cause) {
-        super(cause);
-    }
+	/**
+	 * Instantiates a new navigation veto exception.
+	 *
+	 * @param cause
+	 *            the cause
+	 */
+	public NavigationVetoException(Throwable cause) {
+		super(cause);
+	}
 }

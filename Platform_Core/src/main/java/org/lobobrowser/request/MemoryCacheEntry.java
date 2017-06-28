@@ -33,95 +33,90 @@ import org.lobobrowser.util.io.IORoutines;
  */
 public class MemoryCacheEntry {
 
-    /** The content. */
-    private byte[] content;
+	/** The content. */
+	private byte[] content;
 
-    /** The headers. */
-    private List<NameValuePair> headers;
+	/** The headers. */
+	private List<NameValuePair> headers;
 
-    /** The expiration. */
-    private Long expiration;
+	/** The expiration. */
+	private Long expiration;
 
-    /** The alt object. */
-    private Object altObject;
+	/** The alt object. */
+	private Object altObject;
 
-    /** The request time. */
-    private long requestTime;
+	/** The request time. */
+	private long requestTime;
 
-    /** The alt object size. */
-    private int altObjectSize;
+	/** The alt object size. */
+	private int altObjectSize;
 
-    /**
-     * Instantiates a new memory cache entry.
-     *
-     * @param content
-     *            The content of the document without headers.
-     * @param headers
-     *            the headers
-     * @param expiration
-     *            the expiration
-     * @param altObject
-     *            the alt object
-     * @param altObjectSize
-     *            the alt object size
-     */
-    public MemoryCacheEntry(final byte[] content,
-            final List<NameValuePair> headers, final Long expiration,
-            final Object altObject, final int altObjectSize) {
-        this.content = content;
-        this.headers = headers;
-        this.expiration = expiration;
-        this.altObject = altObject;
-        this.altObjectSize = altObjectSize;
-        this.requestTime = System.currentTimeMillis();
-    }
+	/**
+	 * Instantiates a new memory cache entry.
+	 *
+	 * @param content
+	 *            The content of the document without headers.
+	 * @param headers
+	 *            the headers
+	 * @param expiration
+	 *            the expiration
+	 * @param altObject
+	 *            the alt object
+	 * @param altObjectSize
+	 *            the alt object size
+	 */
+	public MemoryCacheEntry(final byte[] content, final List<NameValuePair> headers, final Long expiration,
+			final Object altObject, final int altObjectSize) {
+		this.content = content;
+		this.headers = headers;
+		this.expiration = expiration;
+		this.altObject = altObject;
+		this.altObjectSize = altObjectSize;
+		this.requestTime = System.currentTimeMillis();
+	}
 
-    /**
-     * Instantiates a new memory cache entry.
-     *
-     * @param rawContent
-     *            The content of the document, including headers.
-     * @param expires
-     *            the expires
-     * @param requestTime
-     *            the request time
-     * @param altObject
-     *            the alt object
-     * @param altObjectSize
-     *            the alt object size
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
-     */
-    public MemoryCacheEntry(final byte[] rawContent, final Long expires,
-            final long requestTime, final Object altObject,
-            final int altObjectSize) throws IOException {
-        ByteArrayInputStream in = new ByteArrayInputStream(rawContent);
-        String line;
-        List<NameValuePair> headersList = new LinkedList<NameValuePair>();
-        while ((line = IORoutines.readLine(in)) != null) {
-            if ("".equals(line)) {
-                break;
-            }
-            int colonIdx = line.indexOf(':');
-            String name = colonIdx == -1 ? "" : line.substring(0, colonIdx)
-                    .trim().toLowerCase();
-            String value = colonIdx == -1 ? line.trim() : line.substring(
-                    colonIdx + 1).trim();
-            headersList.add(new NameValuePair(name, value));
-        }
-        // Note: This works with a ByteArrayInputStream.
-        int remainingLength = in.available();
-        int offset = rawContent.length - remainingLength;
-        byte[] remainingContent = new byte[remainingLength];
-        System.arraycopy(rawContent, offset, remainingContent, 0,
-                remainingLength);
-        this.content = remainingContent;
-        this.headers = headersList;
-        this.expiration = expires;
-        this.requestTime = requestTime;
-        this.altObject = altObject;
-        this.altObjectSize = altObjectSize;
-    }
+	/**
+	 * Instantiates a new memory cache entry.
+	 *
+	 * @param rawContent
+	 *            The content of the document, including headers.
+	 * @param expires
+	 *            the expires
+	 * @param requestTime
+	 *            the request time
+	 * @param altObject
+	 *            the alt object
+	 * @param altObjectSize
+	 *            the alt object size
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public MemoryCacheEntry(final byte[] rawContent, final Long expires, final long requestTime, final Object altObject,
+			final int altObjectSize) throws IOException {
+		ByteArrayInputStream in = new ByteArrayInputStream(rawContent);
+		String line;
+		List<NameValuePair> headersList = new LinkedList<NameValuePair>();
+		while ((line = IORoutines.readLine(in)) != null) {
+			if ("".equals(line)) {
+				break;
+			}
+			int colonIdx = line.indexOf(':');
+			String name = colonIdx == -1 ? "" : line.substring(0, colonIdx).trim().toLowerCase();
+			String value = colonIdx == -1 ? line.trim() : line.substring(colonIdx + 1).trim();
+			headersList.add(new NameValuePair(name, value));
+		}
+		// Note: This works with a ByteArrayInputStream.
+		int remainingLength = in.available();
+		int offset = rawContent.length - remainingLength;
+		byte[] remainingContent = new byte[remainingLength];
+		System.arraycopy(rawContent, offset, remainingContent, 0, remainingLength);
+		this.content = remainingContent;
+		this.headers = headersList;
+		this.expiration = expires;
+		this.requestTime = requestTime;
+		this.altObject = altObject;
+		this.altObjectSize = altObjectSize;
+	}
 
 	/**
 	 * Gets the content.

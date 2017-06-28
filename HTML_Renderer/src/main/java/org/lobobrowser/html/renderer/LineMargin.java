@@ -25,88 +25,91 @@ package org.lobobrowser.html.renderer;
  */
 public class LineMargin {
 
-    /** The clear x. */
-    private final int clearX;
+	/** The clear x. */
+	private final int clearX;
 
-    /** The clear y. */
-    private final int clearY;
+	/** The clear y. */
+	private final int clearY;
 
-    /** The next. */
-    private final LineMargin next;
+	/** The next. */
+	private final LineMargin next;
 
-    /**
-     * Instantiates a new line margin.
-     *
-     * @param next
-     *            the next
-     * @param cleary
-     *            the cleary
-     * @param totalXOffset
-     *            the total x offset
-     */
-    public LineMargin(LineMargin next, int cleary, int totalXOffset) {
-        super();
-        this.next = next;
-        this.clearY = cleary;
-        this.clearX = totalXOffset;
-    }
+	/**
+	 * Instantiates a new line margin.
+	 *
+	 * @param next
+	 *            the next
+	 * @param cleary
+	 *            the cleary
+	 * @param totalXOffset
+	 *            the total x offset
+	 */
+	public LineMargin(LineMargin next, int cleary, int totalXOffset) {
+		super();
+		this.next = next;
+		this.clearY = cleary;
+		this.clearX = totalXOffset;
+	}
 
-    /** Gets the clear y.
+	/**
+	 * Gets the clear y.
 	 *
 	 * @return the clear y
 	 */
-    public int getClearY() {
-        return clearY;
-    }
+	public int getClearY() {
+		return clearY;
+	}
 
-    /** Gets the next.
+	/**
+	 * Gets the next.
 	 *
 	 * @return the next
 	 */
-    public LineMargin getNext() {
-        return next;
-    }
+	public LineMargin getNext() {
+		return next;
+	}
 
-    /** Gets the offset.
+	/**
+	 * Gets the offset.
 	 *
 	 * @return the offset
 	 */
-    public int getOffset() {
-        return clearX;
-    }
+	public int getOffset() {
+		return clearX;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(Object other) {
-        if (!(other instanceof LineMargin)) {
-            return false;
-        }
-        LineMargin olm = (LineMargin) other;
-        return (olm.clearX == this.clearX) && (olm.clearY == this.clearY)
-                && org.lobobrowser.util.Objects.equals(olm.next, this.next);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object other) {
+		if (!(other instanceof LineMargin)) {
+			return false;
+		}
+		LineMargin olm = (LineMargin) other;
+		return olm.clearX == this.clearX && olm.clearY == this.clearY
+				&& org.lobobrowser.util.Objects.equals(olm.next, this.next);
+	}
 
-    /**
-     * Translated.
-     *
-     * @param yoffset
-     *            the yoffset
-     * @param xoffset
-     *            the xoffset
-     * @return the line margin
-     */
-    public LineMargin translated(int yoffset, int xoffset) {
-        int newClearY = this.clearY - yoffset;
-        int newOffsetX = this.clearX - xoffset;
-        if (newOffsetX < 0) {
-            newOffsetX = 0;
-        }
-        LineMargin oldNext = this.next;
-        LineMargin newNext = oldNext == null ? null : oldNext.translated(
-                yoffset, xoffset);
-        return new LineMargin(newNext, newClearY, newOffsetX);
-    }
+	/**
+	 * Translated.
+	 *
+	 * @param yoffset
+	 *            the yoffset
+	 * @param xoffset
+	 *            the xoffset
+	 * @return the line margin
+	 */
+	public LineMargin translated(int yoffset, int xoffset) {
+		int newClearY = this.clearY - yoffset;
+		int newOffsetX = this.clearX - xoffset;
+		if (newOffsetX < 0) {
+			newOffsetX = 0;
+		}
+		LineMargin oldNext = this.next;
+		LineMargin newNext = oldNext == null ? null : oldNext.translated(yoffset, xoffset);
+		return new LineMargin(newNext, newClearY, newOffsetX);
+	}
 }

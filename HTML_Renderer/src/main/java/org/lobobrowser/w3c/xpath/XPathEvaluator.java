@@ -24,20 +24,23 @@ package org.lobobrowser.w3c.xpath;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
-
 /**
  * The Interface XPathEvaluator.
  */
 public interface XPathEvaluator {
-	
+
 	/**
 	 * Creates the expression.
 	 *
-	 * @param expression the expression
-	 * @param resolver the resolver
+	 * @param expression
+	 *            the expression
+	 * @param resolver
+	 *            the resolver
 	 * @return the x path expression
-	 * @throws XPathException the x path exception
-	 * @throws DOMException the DOM exception
+	 * @throws XPathException
+	 *             the x path exception
+	 * @throws DOMException
+	 *             the DOM exception
 	 */
 	// XPathEvaluator
 	public XPathExpression createExpression(String expression, XPathNSResolver resolver)
@@ -46,7 +49,8 @@ public interface XPathEvaluator {
 	/**
 	 * Creates the ns resolver.
 	 *
-	 * @param nodeResolver the node resolver
+	 * @param nodeResolver
+	 *            the node resolver
 	 * @return the x path ns resolver
 	 */
 	public XPathNSResolver createNSResolver(Node nodeResolver);
@@ -54,14 +58,21 @@ public interface XPathEvaluator {
 	/**
 	 * Evaluate.
 	 *
-	 * @param expression the expression
-	 * @param contextNode the context node
-	 * @param resolver the resolver
-	 * @param type the type
-	 * @param result the result
+	 * @param expression
+	 *            the expression
+	 * @param contextNode
+	 *            the context node
+	 * @param resolver
+	 *            the resolver
+	 * @param type
+	 *            the type
+	 * @param result
+	 *            the result
 	 * @return the object
-	 * @throws XPathException the x path exception
-	 * @throws DOMException the DOM exception
+	 * @throws XPathException
+	 *             the x path exception
+	 * @throws DOMException
+	 *             the DOM exception
 	 */
 	public Object evaluate(String expression, Node contextNode, XPathNSResolver resolver, short type, Object result)
 			throws XPathException, DOMException;

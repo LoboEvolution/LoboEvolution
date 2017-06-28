@@ -59,201 +59,207 @@ import org.apache.logging.log4j.Logger;
  * @author rbair
  */
 public class Response {
-	
-	 /** The Constant logger. */
-    private static final Logger logger = LogManager.getLogger(Response.class);
-    		
-    /**
-     * The encoding for the body to be used when constructing a String from the
-     * bytes. This defaults to UTF-8, but can be set by specifying the encoding
-     * on a Request.
-     */
-    private String charset;
-    
-    /** The headers. */
-    private Set<Header> headers;
-    
-    /** The status code. */
-    private StatusCode statusCode;
-    
-    /** The status text. */
-    private String statusText;
-    // TODO I'm still dealing with this as a String. I originally used an
-    // InputStream,
-    // but ran into problems because HttpClient was automatically closing that
-    // stream
-    // on me. Not sure how to do this, skipping it for now. Most likely, a
-    // future
-    // implementation will cache to disk. This requires security priviledges,
-    // however,
-    /** The response body. */
-    // and thus is somewhat problematic.
-    private byte[] responseBody;
-    
-    /** The url. */
-    private String url;
 
-    /**
-     * Creates a new instance of Response. Response is an immutable object,
-     * hence this large constructor.
-     */
-    Response(StatusCode statusCode, String statusText, byte[] responseBody,
-            String charset, Set<Header> headers, String baseUrl) {
-        if (statusCode == null) {
-            throw new NullPointerException("statusCode cannot be null");
-        }
-        if (responseBody == null) {
-            responseBody = new byte[0];
-        }
-        if (baseUrl != null) {
-            // TODO assure that there are no parameters in this URL. If there
-            // are,
-            // remove them
-        }
-        this.statusCode = statusCode;
-        this.statusText = statusText;
-        this.responseBody = responseBody;
-        this.charset = charset == null ? "ISO-8859-1" : charset;
-        this.url = baseUrl;
-        this.headers = new HashSet<Header>();
-        if (headers != null) {
-            for (Header h : headers) {
-                if (h == null) {
-                    throw new IllegalArgumentException(
-                            "There was a null header in the results.");
-                }
-                this.headers.add(h);
-            }
-        }
-    }
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(Response.class);
 
-    /**
-     * Returns the Header with the given name, or null if there is no such
-     * header. Comparisons with header names are done in a case insensitive
-     * manner.
-     *
-     * @param name
-     *            the name to look for. This must not be null.
-     * @return the Header with the given name.
-     */
-    public Header getHeader(String name) {
-        if (name == null) {
-            throw new NullPointerException("name cannot be null");
-        }
-        for (Header h : headers) {
-            if (name.equalsIgnoreCase(h.getName())) {
-                return h;
-            }
-        }
-        return null;
-    }
+	/**
+	 * The encoding for the body to be used when constructing a String from the
+	 * bytes. This defaults to UTF-8, but can be set by specifying the encoding
+	 * on a Request.
+	 */
+	private String charset;
 
-    /** Gets the headers.
+	/** The headers. */
+	private Set<Header> headers;
+
+	/** The status code. */
+	private StatusCode statusCode;
+
+	/** The status text. */
+	private String statusText;
+	// TODO I'm still dealing with this as a String. I originally used an
+	// InputStream,
+	// but ran into problems because HttpClient was automatically closing that
+	// stream
+	// on me. Not sure how to do this, skipping it for now. Most likely, a
+	// future
+	// implementation will cache to disk. This requires security priviledges,
+	// however,
+	/** The response body. */
+	// and thus is somewhat problematic.
+	private byte[] responseBody;
+
+	/** The url. */
+	private String url;
+
+	/**
+	 * Creates a new instance of Response. Response is an immutable object,
+	 * hence this large constructor.
+	 */
+	Response(StatusCode statusCode, String statusText, byte[] responseBody, String charset, Set<Header> headers,
+			String baseUrl) {
+		if (statusCode == null) {
+			throw new NullPointerException("statusCode cannot be null");
+		}
+		if (responseBody == null) {
+			responseBody = new byte[0];
+		}
+		if (baseUrl != null) {
+			// TODO assure that there are no parameters in this URL. If there
+			// are,
+			// remove them
+		}
+		this.statusCode = statusCode;
+		this.statusText = statusText;
+		this.responseBody = responseBody;
+		this.charset = charset == null ? "ISO-8859-1" : charset;
+		this.url = baseUrl;
+		this.headers = new HashSet<Header>();
+		if (headers != null) {
+			for (Header h : headers) {
+				if (h == null) {
+					throw new IllegalArgumentException("There was a null header in the results.");
+				}
+				this.headers.add(h);
+			}
+		}
+	}
+
+	/**
+	 * Returns the Header with the given name, or null if there is no such
+	 * header. Comparisons with header names are done in a case insensitive
+	 * manner.
+	 *
+	 * @param name
+	 *            the name to look for. This must not be null.
+	 * @return the Header with the given name.
+	 */
+	public Header getHeader(String name) {
+		if (name == null) {
+			throw new NullPointerException("name cannot be null");
+		}
+		for (Header h : headers) {
+			if (name.equalsIgnoreCase(h.getName())) {
+				return h;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the headers.
 	 *
 	 * @return the headers
 	 */
-    public Header[] getHeaders() {
-        return headers.toArray(new Header[0]);
-    }
+	public Header[] getHeaders() {
+		return headers.toArray(new Header[0]);
+	}
 
-    /** Gets the last modified.
+	/**
+	 * Gets the last modified.
 	 *
 	 * @return the last modified
 	 */
-    public Date getLastModified() {
-        Header h = getHeader("Last-Modified");
-        if (h == null) {
-            return null;
-        }
-        try {
-            String value = h.getValue();
-            Long longValue = Long.parseLong(value);
-            return new Date(longValue);
-        } catch (Exception e) {
-            // silently fail. Maybe should log using FINER?
-            return null;
-        }
-    }
+	public Date getLastModified() {
+		Header h = getHeader("Last-Modified");
+		if (h == null) {
+			return null;
+		}
+		try {
+			String value = h.getValue();
+			Long longValue = Long.parseLong(value);
+			return new Date(longValue);
+		} catch (Exception e) {
+			// silently fail. Maybe should log using FINER?
+			return null;
+		}
+	}
 
-    /** Gets the status code.
+	/**
+	 * Gets the status code.
 	 *
 	 * @return the status code
 	 */
-    public StatusCode getStatusCode() {
-        return statusCode;
-    }
+	public StatusCode getStatusCode() {
+		return statusCode;
+	}
 
-    /** Gets the status text.
+	/**
+	 * Gets the status text.
 	 *
 	 * @return the status text
 	 */
-    public String getStatusText() {
-        return statusText;
-    }
+	public String getStatusText() {
+		return statusText;
+	}
 
-    /** Gets the body as stream.
+	/**
+	 * Gets the body as stream.
 	 *
 	 * @return the body as stream
 	 */
-    public InputStream getBodyAsStream() {
-        return new ByteArrayInputStream(getBodyAsBytes());
-    }
+	public InputStream getBodyAsStream() {
+		return new ByteArrayInputStream(getBodyAsBytes());
+	}
 
-    /** Gets the body as reader.
+	/**
+	 * Gets the body as reader.
 	 *
 	 * @return the body as reader
 	 */
-    public Reader getBodyAsReader() {
-        if (responseBody == null) {
-            return new StringReader("");
-        } else {
-            return new StringReader(getBody());
-        }
-    }
+	public Reader getBodyAsReader() {
+		if (responseBody == null) {
+			return new StringReader("");
+		} else {
+			return new StringReader(getBody());
+		}
+	}
 
-    /** Gets the body as bytes.
+	/**
+	 * Gets the body as bytes.
 	 *
 	 * @return the body as bytes
 	 */
-    public byte[] getBodyAsBytes() {
-        return responseBody == null ? new byte[0] : responseBody;
-    }
+	public byte[] getBodyAsBytes() {
+		return responseBody == null ? new byte[0] : responseBody;
+	}
 
-    /** Gets the body.
+	/**
+	 * Gets the body.
 	 *
 	 * @return the body
 	 */
-    public String getBody() {
-        try {
-            return responseBody == null ? ""
-                    : new String(responseBody, charset);
-        } catch (UnsupportedEncodingException ex) {
-        	logger.log(Level.ERROR, ex);
-            return responseBody == null ? "" : new String(responseBody);
-        }
-    }
+	public String getBody() {
+		try {
+			return responseBody == null ? "" : new String(responseBody, charset);
+		} catch (UnsupportedEncodingException ex) {
+			logger.log(Level.ERROR, ex);
+			return responseBody == null ? "" : new String(responseBody);
+		}
+	}
 
-    /** Gets the base url.
+	/**
+	 * Gets the base url.
 	 *
 	 * @return the base url
 	 */
-    public String getBaseUrl() {
-        return url;
-    }
+	public String getBaseUrl() {
+		return url;
+	}
 
-    /**
-     * @inheritDoc
-     */
-    @Override
-    public String toString() {
-        StringBuffer buffer = new StringBuffer();
-        buffer.append("  ").append(statusCode).append("\n");
-        for (Header h : getHeaders()) {
-            buffer.append("  ").append(h.getName()).append(": ")
-                    .append(h.getValue());
-            buffer.append("\n");
-        }
-        buffer.append(getBody());
-        return buffer.toString();
-    }
+	/**
+	 * @inheritDoc
+	 */
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("  ").append(statusCode).append("\n");
+		for (Header h : getHeaders()) {
+			buffer.append("  ").append(h.getName()).append(": ").append(h.getValue());
+			buffer.append("\n");
+		}
+		buffer.append(getBody());
+		return buffer.toString();
+	}
 }

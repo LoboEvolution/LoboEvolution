@@ -30,35 +30,36 @@ import org.lobobrowser.ua.NavigationVetoException;
  */
 public abstract class NavigationAdapter implements NavigationListener {
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.ua.NavigationListener#beforeLocalNavigate(org.lobobrowser
-     * .ua.NavigationEvent)
-     */
-    @Override
-    public void beforeLocalNavigate(NavigationEvent event)
-            throws NavigationVetoException {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.ua.NavigationListener#beforeLocalNavigate(org.lobobrowser
+	 * .ua.NavigationEvent)
+	 */
+	@Override
+	public void beforeLocalNavigate(NavigationEvent event) throws NavigationVetoException {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.ua.NavigationListener#beforeNavigate(org.lobobrowser.ua.
-     * NavigationEvent)
-     */
-    @Override
-    public void beforeNavigate(NavigationEvent event)
-            throws NavigationVetoException {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.ua.NavigationListener#beforeNavigate(org.lobobrowser.ua.
+	 * NavigationEvent)
+	 */
+	@Override
+	public void beforeNavigate(NavigationEvent event) throws NavigationVetoException {
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.ua.NavigationListener#beforeWindowOpen(org.lobobrowser.ua
-     * .NavigationEvent)
-     */
-    @Override
-    public void beforeWindowOpen(NavigationEvent event)
-            throws NavigationVetoException {
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.ua.NavigationListener#beforeWindowOpen(org.lobobrowser.ua
+	 * .NavigationEvent)
+	 */
+	@Override
+	public void beforeWindowOpen(NavigationEvent event) throws NavigationVetoException {
+	}
 }

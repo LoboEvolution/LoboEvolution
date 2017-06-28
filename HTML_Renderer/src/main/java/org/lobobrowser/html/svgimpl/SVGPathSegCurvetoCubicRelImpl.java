@@ -26,7 +26,7 @@ import org.lobobrowser.w3c.svg.SVGPathSegCurvetoCubicRel;
 public class SVGPathSegCurvetoCubicRelImpl extends SVGPathSegImpl implements SVGPathSegCurvetoCubicRel {
 
 	private static final long serialVersionUID = -6722776032077341870L;
-	
+
 	private float x1;
 	private float x2;
 	private float y1;
@@ -58,7 +58,7 @@ public class SVGPathSegCurvetoCubicRelImpl extends SVGPathSegImpl implements SVG
 	public String getPathSegTypeAsLetter() {
 		return "c";
 	}
-	
+
 	@Override
 	public float getX1() {
 		return x1;

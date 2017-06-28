@@ -31,80 +31,83 @@ import java.util.Iterator;
  * @author J. H. S.
  */
 public class ArrayUtilities {
-    /**
-     * Instantiates a new array utilities.
-     */
-    private ArrayUtilities() {
-        super();
-    }
-    
-    /**
-     * Iterator.
-     *
-     * @param array
-     *            the array
-     * @param offset
-     *            the offset
-     * @param length
-     *            the length
-     * @return the iterator
-     */
-    public static Iterator iterator(Object[] array, int offset, int length) {
-        return new ArrayIterator(array, offset, length);
-    }
-    
-    /**
-     * The Class ArrayIterator.
-     */
-    private static class ArrayIterator implements Iterator {
-        /** The array. */
-        private final Object[] array;
-        /** The top. */
-        private final int top;
-        /** The offset. */
-        private int offset;
-        
-        /**
-         * Instantiates a new array iterator.
-         *
-         * @param array
-         *            the array
-         * @param offset
-         *            the offset
-         * @param length
-         *            the length
-         */
-        public ArrayIterator(Object[] array, int offset, int length) {
-            this.array = array;
-            this.offset = offset;
-            this.top = offset + length;
-        }
-        
-        /*
-         * (non-Javadoc)
-         * @see java.util.Iterator#hasNext()
-         */
-        @Override
-        public boolean hasNext() {
-            return this.offset < this.top;
-        }
-        
-        /*
-         * (non-Javadoc)
-         * @see java.util.Iterator#next()
-         */
-        @Override
-        public Object next() {
-            return this.array[this.offset++];
-        }
-        
-        /*
-         * (non-Javadoc)
-         * @see java.util.Iterator#remove()
-         */
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
-        }
-    }
+	/**
+	 * Instantiates a new array utilities.
+	 */
+	private ArrayUtilities() {
+		super();
+	}
+
+	/**
+	 * Iterator.
+	 *
+	 * @param array
+	 *            the array
+	 * @param offset
+	 *            the offset
+	 * @param length
+	 *            the length
+	 * @return the iterator
+	 */
+	public static Iterator iterator(Object[] array, int offset, int length) {
+		return new ArrayIterator(array, offset, length);
+	}
+
+	/**
+	 * The Class ArrayIterator.
+	 */
+	private static class ArrayIterator implements Iterator {
+		/** The array. */
+		private final Object[] array;
+		/** The top. */
+		private final int top;
+		/** The offset. */
+		private int offset;
+
+		/**
+		 * Instantiates a new array iterator.
+		 *
+		 * @param array
+		 *            the array
+		 * @param offset
+		 *            the offset
+		 * @param length
+		 *            the length
+		 */
+		public ArrayIterator(Object[] array, int offset, int length) {
+			this.array = array;
+			this.offset = offset;
+			this.top = offset + length;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.util.Iterator#hasNext()
+		 */
+		@Override
+		public boolean hasNext() {
+			return this.offset < this.top;
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.util.Iterator#next()
+		 */
+		@Override
+		public Object next() {
+			return this.array[this.offset++];
+		}
+
+		/*
+		 * (non-Javadoc)
+		 * 
+		 * @see java.util.Iterator#remove()
+		 */
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException();
+		}
+	}
 }

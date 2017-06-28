@@ -28,33 +28,34 @@ import org.w3c.dom.UserDataHandler;
  */
 public class HTMLTitleElementImpl extends HTMLElementImpl {
 
-    /**
-     * Instantiates a new HTML title element impl.
-     *
-     * @param name
-     *            the name
-     */
-    public HTMLTitleElementImpl(String name) {
-        super(name, true);
-    }
+	/**
+	 * Instantiates a new HTML title element impl.
+	 *
+	 * @param name
+	 *            the name
+	 */
+	public HTMLTitleElementImpl(String name) {
+		super(name, true);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
-     * java.lang.Object, org.w3c.dom.UserDataHandler)
-     */
-    @Override
-    public Object setUserData(String key, Object data, UserDataHandler handler) {
-        if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key)
-                && (data == Boolean.FALSE)) {
-            Document document = this.document;
-            if (document instanceof HTMLDocumentImpl) {
-                String textContent = this.getTextContent();
-                String title = textContent == null ? null : textContent.trim();
-                ((HTMLDocumentImpl) document).setTitle(title);
-            }
-        }
-        return super.setUserData(key, data, handler);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.lobobrowser.html.domimpl.DOMNodeImpl#setUserData(java.lang.String,
+	 * java.lang.Object, org.w3c.dom.UserDataHandler)
+	 */
+	@Override
+	public Object setUserData(String key, Object data, UserDataHandler handler) {
+		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
+			Document document = this.document;
+			if (document instanceof HTMLDocumentImpl) {
+				String textContent = this.getTextContent();
+				String title = textContent == null ? null : textContent.trim();
+				((HTMLDocumentImpl) document).setTitle(title);
+			}
+		}
+		return super.setUserData(key, data, handler);
+	}
 
 }

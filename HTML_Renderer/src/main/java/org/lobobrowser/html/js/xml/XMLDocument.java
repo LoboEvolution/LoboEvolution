@@ -111,10 +111,12 @@ public class XMLDocument implements Document {
 		return getXmlEncoding();
 	}
 
+	@Override
 	public NodeList getElementsByTagName(String tagname) {
 		return doc.getElementsByTagName(tagname);
 	}
 
+	@Override
 	public Element getElementById(String id) {
 		return doc.getElementById(id);
 	}

@@ -100,8 +100,8 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 		setType(type);
 		setCanBubble(canBubble);
 		setCancelable(cancelable);
-		total = (lengthComputable) ? total : -1;
-		loaded = (loaded >= 0) ? loaded : 0;
+		total = lengthComputable ? total : -1;
+		loaded = loaded >= 0 ? loaded : 0;
 
 	}
 
@@ -112,7 +112,7 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 	 */
 	@Override
 	public boolean getLengthComputable() {
-		return (total >= 0);
+		return total >= 0;
 	}
 
 	/*
@@ -132,6 +132,6 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 	 */
 	@Override
 	public int getTotal() {
-		return (total >= 0) ? total : 0;
+		return total >= 0 ? total : 0;
 	}
 }

@@ -28,13 +28,14 @@ import org.w3c.dom.Node;
  */
 public class FormFilter implements NodeFilter {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
-     */
-    @Override
-    public boolean accept(Node node) {
-        String nodeName = node.getNodeName();
-        return HtmlProperties.FORM.equalsIgnoreCase(nodeName);
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
+	 */
+	@Override
+	public boolean accept(Node node) {
+		String nodeName = node.getNodeName();
+		return HtmlProperties.FORM.equalsIgnoreCase(nodeName);
+	}
 }

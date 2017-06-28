@@ -30,6 +30,6 @@ public class ColumnsFilter implements NodeFilter {
 
 	@Override
 	public final boolean accept(Node node) {
-		return (node instanceof HTMLTableCellElement);
+		return node instanceof HTMLTableCellElement;
 	}
 }

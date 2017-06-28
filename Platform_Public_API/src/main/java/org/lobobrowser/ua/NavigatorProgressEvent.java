@@ -29,90 +29,94 @@ import java.net.URL;
  */
 public class NavigatorProgressEvent extends NavigatorEvent {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
-    /** The progress type. */
-    private final ProgressType progressType;
+	/** The progress type. */
+	private final ProgressType progressType;
 
-    /** The url. */
-    private final URL url;
+	/** The url. */
+	private final URL url;
 
-    /** The method. */
-    private final String method;
+	/** The method. */
+	private final String method;
 
-    /** The current value. */
-    private final int currentValue;
+	/** The current value. */
+	private final int currentValue;
 
-    /** The max value. */
-    private final int maxValue;
+	/** The max value. */
+	private final int maxValue;
 
-    /**
-     * Instantiates a new navigator progress event.
-     *
-     * @param source
-     *            the source
-     * @param clientletFrame
-     *            the clientlet frame
-     * @param progressType
-     *            the progress type
-     * @param url
-     *            the url
-     * @param method
-     *            the method
-     * @param value
-     *            the value
-     * @param max
-     *            the max
-     */
-    public NavigatorProgressEvent(Object source, NavigatorFrame clientletFrame,
-            ProgressType progressType, URL url, String method, int value,
-            int max) {
-        super(source, NavigatorEventType.PROGRESS_UPDATED, clientletFrame);
-        this.progressType = progressType;
-        this.url = url;
-        this.method = method;
-        this.currentValue = value;
-        this.maxValue = max;
-    }
+	/**
+	 * Instantiates a new navigator progress event.
+	 *
+	 * @param source
+	 *            the source
+	 * @param clientletFrame
+	 *            the clientlet frame
+	 * @param progressType
+	 *            the progress type
+	 * @param url
+	 *            the url
+	 * @param method
+	 *            the method
+	 * @param value
+	 *            the value
+	 * @param max
+	 *            the max
+	 */
+	public NavigatorProgressEvent(Object source, NavigatorFrame clientletFrame, ProgressType progressType, URL url,
+			String method, int value, int max) {
+		super(source, NavigatorEventType.PROGRESS_UPDATED, clientletFrame);
+		this.progressType = progressType;
+		this.url = url;
+		this.method = method;
+		this.currentValue = value;
+		this.maxValue = max;
+	}
 
-    /** Gets the method.
+	/**
+	 * Gets the method.
 	 *
 	 * @return the method
 	 */
-    public String getMethod() {
-        return method;
-    }
+	public String getMethod() {
+		return method;
+	}
 
-    /** Gets the progress type.
+	/**
+	 * Gets the progress type.
 	 *
 	 * @return the progress type
 	 */
-    public ProgressType getProgressType() {
-        return progressType;
-    }
+	public ProgressType getProgressType() {
+		return progressType;
+	}
 
-    /** Gets the url.
+	/**
+	 * Gets the url.
 	 *
 	 * @return the url
 	 */
-    public URL getUrl() {
-        return url;
-    }
+	public URL getUrl() {
+		return url;
+	}
 
-    /** Gets the current value.
+	/**
+	 * Gets the current value.
 	 *
 	 * @return the current value
 	 */
-    public int getCurrentValue() {
-        return currentValue;
-    }
+	public int getCurrentValue() {
+		return currentValue;
+	}
 
-    /** Gets the max value.
+	/**
+	 * Gets the max value.
 	 *
 	 * @return the max value
 	 */
-    public int getMaxValue() {
-        return maxValue;
-    }
+	public int getMaxValue() {
+		return maxValue;
+	}
 }

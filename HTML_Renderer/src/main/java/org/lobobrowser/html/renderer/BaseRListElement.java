@@ -34,102 +34,103 @@ import org.lobobrowser.http.UserAgentContext;
  */
 public class BaseRListElement extends RBlock {
 
-    /** The Constant DEFAULT_COUNTER_NAME. */
-    protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";
+	/** The Constant DEFAULT_COUNTER_NAME. */
+	protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";
 
-    /** The list style. */
-    protected ListStyle listStyle = null;
+	/** The list style. */
+	protected ListStyle listStyle = null;
 
-    /**
-     * Instantiates a new base r list element.
-     *
-     * @param modelNode
-     *            the model node
-     * @param listNesting
-     *            the list nesting
-     * @param pcontext
-     *            the pcontext
-     * @param rcontext
-     *            the rcontext
-     * @param frameContext
-     *            the frame context
-     * @param parentContainer
-     *            the parent container
-     */
-    public BaseRListElement(DOMNodeImpl modelNode, int listNesting,
-            UserAgentContext pcontext, HtmlRendererContext rcontext,
-            FrameContext frameContext, RenderableContainer parentContainer) {
-        super(modelNode, listNesting, pcontext, rcontext, frameContext,
-                parentContainer);
-    }
+	/**
+	 * Instantiates a new base r list element.
+	 *
+	 * @param modelNode
+	 *            the model node
+	 * @param listNesting
+	 *            the list nesting
+	 * @param pcontext
+	 *            the pcontext
+	 * @param rcontext
+	 *            the rcontext
+	 * @param frameContext
+	 *            the frame context
+	 * @param parentContainer
+	 *            the parent container
+	 */
+	public BaseRListElement(DOMNodeImpl modelNode, int listNesting, UserAgentContext pcontext,
+			HtmlRendererContext rcontext, FrameContext frameContext, RenderableContainer parentContainer) {
+		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.BaseElementRenderable#applyStyle(int, int)
-     */
-    @Override
-    protected void applyStyle(int availWidth, int availHeight) {
-        this.listStyle = null;
-        super.applyStyle(availWidth, availHeight);
-        Object rootNode = this.modelNode;
-        if (!(rootNode instanceof HTMLElementImpl)) {
-            return;
-        }
-        HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-        AbstractCSS2Properties props = rootElement.getCurrentStyle();
-        if (props == null) {
-            return;
-        }
-        ListStyle listStyle = null;
-        String listStyleText = props.getListStyle();
-        if (listStyleText != null) {
-        	if(INHERIT.equals(listStyleText)){
-        		listStyleText = rootElement.getParentStyle().getListStyle();
-        	}
-            listStyle = HtmlValues.getListStyle(listStyleText);
-        }
-        String listStyleTypeText = props.getListStyleType();
-        if (listStyleTypeText != null) {
-        	
-        	if(INHERIT.equals(listStyleTypeText)){
-        		listStyleTypeText = rootElement.getParentStyle().getListStyleType();
-        	}
-        	
-            int listType = HtmlValues.getListStyleType(listStyleTypeText);
-            if (listType != ListStyle.TYPE_UNSET) {
-                if (listStyle == null) {
-                    listStyle = new ListStyle();
-                }
-                listStyle.type = listType;
-            }
-        }
-        if ((listStyle == null) || (listStyle.type == ListStyle.TYPE_UNSET)) {
-            String typeAttributeText = rootElement.getAttribute(HtmlAttributeProperties.TYPE);
-            if (typeAttributeText != null) {
-            	
-            	if(INHERIT.equals(typeAttributeText)){
-            		typeAttributeText = rootElement.getParentStyle().getListStyle();
-            	}
-            	
-            	int newStyleType = HtmlValues.getListStyleType(typeAttributeText);
-                if (newStyleType != ListStyle.TYPE_UNSET) {
-                    if (listStyle == null) {
-                        listStyle = new ListStyle();
-                        this.listStyle = listStyle;
-                    }
-                    listStyle.type = newStyleType;
-                }
-            }
-        }
-        this.listStyle = listStyle;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.BaseElementRenderable#applyStyle(int,
+	 * int)
+	 */
+	@Override
+	protected void applyStyle(int availWidth, int availHeight) {
+		this.listStyle = null;
+		super.applyStyle(availWidth, availHeight);
+		Object rootNode = this.modelNode;
+		if (!(rootNode instanceof HTMLElementImpl)) {
+			return;
+		}
+		HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
+		AbstractCSS2Properties props = rootElement.getCurrentStyle();
+		if (props == null) {
+			return;
+		}
+		ListStyle listStyle = null;
+		String listStyleText = props.getListStyle();
+		if (listStyleText != null) {
+			if (INHERIT.equals(listStyleText)) {
+				listStyleText = rootElement.getParentStyle().getListStyle();
+			}
+			listStyle = HtmlValues.getListStyle(listStyleText);
+		}
+		String listStyleTypeText = props.getListStyleType();
+		if (listStyleTypeText != null) {
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.html.renderer.RBlock#toString()
-     */
-    @Override
-    public String toString() {
-        return "BaseRListElement[node=" + this.modelNode + "]";
-    }
+			if (INHERIT.equals(listStyleTypeText)) {
+				listStyleTypeText = rootElement.getParentStyle().getListStyleType();
+			}
+
+			int listType = HtmlValues.getListStyleType(listStyleTypeText);
+			if (listType != ListStyle.TYPE_UNSET) {
+				if (listStyle == null) {
+					listStyle = new ListStyle();
+				}
+				listStyle.type = listType;
+			}
+		}
+		if (listStyle == null || listStyle.type == ListStyle.TYPE_UNSET) {
+			String typeAttributeText = rootElement.getAttribute(HtmlAttributeProperties.TYPE);
+			if (typeAttributeText != null) {
+
+				if (INHERIT.equals(typeAttributeText)) {
+					typeAttributeText = rootElement.getParentStyle().getListStyle();
+				}
+
+				int newStyleType = HtmlValues.getListStyleType(typeAttributeText);
+				if (newStyleType != ListStyle.TYPE_UNSET) {
+					if (listStyle == null) {
+						listStyle = new ListStyle();
+						this.listStyle = listStyle;
+					}
+					listStyle.type = newStyleType;
+				}
+			}
+		}
+		this.listStyle = listStyle;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderer.RBlock#toString()
+	 */
+	@Override
+	public String toString() {
+		return "BaseRListElement[node=" + this.modelNode + "]";
+	}
 }

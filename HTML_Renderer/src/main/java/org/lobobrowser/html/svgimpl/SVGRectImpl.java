@@ -37,7 +37,7 @@ public class SVGRectImpl implements SVGRect {
 		this.width = width;
 		this.height = height;
 	}
-	
+
 	@Override
 	public float getX() {
 		return x;

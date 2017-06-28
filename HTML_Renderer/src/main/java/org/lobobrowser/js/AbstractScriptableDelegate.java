@@ -27,26 +27,27 @@ import org.mozilla.javascript.Scriptable;
  */
 public abstract class AbstractScriptableDelegate implements ScriptableDelegate {
 
-    /** The scriptable. */
-    private Scriptable scriptable;
+	/** The scriptable. */
+	private Scriptable scriptable;
 
-    /*
-     * (non-Javadoc)
-     * @see org.lobobrowser.js.ScriptableDelegate#getScriptable()
-     */
-    @Override
-    public Scriptable getScriptable() {
-        return this.scriptable;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.js.ScriptableDelegate#getScriptable()
+	 */
+	@Override
+	public Scriptable getScriptable() {
+		return this.scriptable;
+	}
 
-    /*
-     * (non-Javadoc)
-     * @see
-     * org.lobobrowser.js.ScriptableDelegate#setScriptable(org.mozilla.javascript
-     * .Scriptable)
-     */
-    @Override
-    public void setScriptable(Scriptable scriptable) {
-        this.scriptable = scriptable;
-    }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.js.ScriptableDelegate#setScriptable(org.mozilla.
+	 * javascript .Scriptable)
+	 */
+	@Override
+	public void setScriptable(Scriptable scriptable) {
+		this.scriptable = scriptable;
+	}
 }

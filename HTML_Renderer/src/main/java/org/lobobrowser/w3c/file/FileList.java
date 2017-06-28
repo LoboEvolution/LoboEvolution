@@ -21,16 +21,16 @@
 
 package org.lobobrowser.w3c.file;
 
-
 /**
  * The Interface FileList.
  */
 public interface FileList {
-	
+
 	/**
 	 * Item.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the file
 	 */
 	// FileList

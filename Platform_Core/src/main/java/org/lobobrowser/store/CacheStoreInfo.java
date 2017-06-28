@@ -34,44 +34,46 @@ import java.util.Collection;
  */
 public class CacheStoreInfo {
 
-    /** The length. */
-    private long length;
+	/** The length. */
+	private long length;
 
-    /** The file infos. */
-    private final Collection<CacheFileInfo> fileInfos = new ArrayList<CacheFileInfo>();
+	/** The file infos. */
+	private final Collection<CacheFileInfo> fileInfos = new ArrayList<CacheFileInfo>();
 
-    /**
-     * Instantiates a new cache store info.
-     */
-    public CacheStoreInfo() {
-        super();
-    }
+	/**
+	 * Instantiates a new cache store info.
+	 */
+	public CacheStoreInfo() {
+		super();
+	}
 
-    /** Gets the file infos.
+	/**
+	 * Gets the file infos.
 	 *
 	 * @return the file infos
 	 */
-    public CacheFileInfo[] getFileInfos() {
-        return this.fileInfos.toArray(new CacheFileInfo[0]);
-    }
+	public CacheFileInfo[] getFileInfos() {
+		return this.fileInfos.toArray(new CacheFileInfo[0]);
+	}
 
-    /** Gets the length.
+	/**
+	 * Gets the length.
 	 *
 	 * @return the length
 	 */
-    public long getLength() {
-        return this.length;
-    }
+	public long getLength() {
+		return this.length;
+	}
 
-    /**
-     * Adds the cache file.
-     *
-     * @param file
-     *            the file
-     */
-    public void addCacheFile(File file) {
-        CacheFileInfo cfi = new CacheFileInfo(file);
-        this.length += cfi.getInitialLength();
-        this.fileInfos.add(cfi);
-    }
+	/**
+	 * Adds the cache file.
+	 *
+	 * @param file
+	 *            the file
+	 */
+	public void addCacheFile(File file) {
+		CacheFileInfo cfi = new CacheFileInfo(file);
+		this.length += cfi.getInitialLength();
+		this.fileInfos.add(cfi);
+	}
 }
