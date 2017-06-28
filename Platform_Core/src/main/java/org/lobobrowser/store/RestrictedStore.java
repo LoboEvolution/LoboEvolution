@@ -251,9 +251,9 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 		long total = DIRECTORY_SIZE;
 		File[] files = directory.listFiles();
-		for (int i = 0; i < files.length; i++) {
+		for (File file2 : files) {
 			Thread.yield();
-			File file = files[i];
+			File file = file2;
 			if (file.isDirectory() && !file.equals(directory)) {
 				String fileCanonical = file.getCanonicalPath();
 				if (fileCanonical.startsWith(this.baseCanonicalPath)) {
@@ -470,8 +470,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		// Security: This method is expected to be private.
 		Collection paths = new LinkedList();
 		File[] localFiles = directory.listFiles();
-		for (int i = 0; i < localFiles.length; i++) {
-			File file = localFiles[i];
+		for (File file : localFiles) {
 			if (file.isDirectory()) {
 				Collection subPaths = this.getPaths(pattern, file);
 				paths.addAll(subPaths);
@@ -842,8 +841,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 					try {
 						File[] files = nativeFile.listFiles();
 						List<ManagedFile> mfs = new ArrayList<ManagedFile>();
-						for (int i = 0; i < files.length; i++) {
-							File file = files[i];
+						for (File file : files) {
 							ManagedFile mf = nativeToManaged(file);
 							if (filter == null || filter.accept(mf)) {
 								mfs.add(mf);

@@ -38,10 +38,10 @@ public class ColorComboBox extends JComboBox<Object> {
 
 	public ColorComboBox() {
 		int[] values = new int[] { 0, 128, 192, 255 };
-		for (int r = 0; r < values.length; r++) {
-			for (int g = 0; g < values.length; g++) {
-				for (int b = 0; b < values.length; b++) {
-					Color c = new Color(values[r], values[g], values[b]);
+		for (int value : values) {
+			for (int value2 : values) {
+				for (int value3 : values) {
+					Color c = new Color(value, value2, value3);
 					addItem(c);
 				}
 			}

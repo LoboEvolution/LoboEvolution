@@ -380,8 +380,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			} else {
 				newUrlBuffer.append("&");
 			}
-			for (int i = 0; i < formInputs.length; i++) {
-				FormInput parameter = formInputs[i];
+			for (FormInput parameter : formInputs) {
 				String name = parameter.getName();
 				String encName = URLEncoder.encode(name, "UTF-8");
 				if (parameter.isText()) {
@@ -442,8 +441,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 				ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
 				boolean firstParam = true;
 				if (formInputs != null) {
-					for (int i = 0; i < formInputs.length; i++) {
-						FormInput parameter = formInputs[i];
+					for (FormInput parameter : formInputs) {
 						String name = parameter.getName();
 						String encName = URLEncoder.encode(name, "UTF-8");
 						if (parameter.isText()) {

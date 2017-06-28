@@ -78,8 +78,7 @@ public class FontFactory {
 		String[] ffns = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
 		Set<String> fontFamilies = this.fontFamilies;
 		synchronized (this) {
-			for (int i = 0; i < ffns.length; i++) {
-				String ffn = ffns[i];
+			for (String ffn : ffns) {
 				if (liflag) {
 					logger.debug("FontFactory(): family=" + ffn);
 				}

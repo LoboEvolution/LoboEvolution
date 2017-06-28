@@ -384,8 +384,8 @@ public class PlatformInit {
 			}
 		});
 		boolean launched = false;
-		for (int i = 0; i < args.length; i++) {
-			String url = args[i];
+		for (String arg : args) {
+			String url = arg;
 			if (!url.startsWith("-")) {
 				try {
 					launched = true;

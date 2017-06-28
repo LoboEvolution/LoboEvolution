@@ -446,10 +446,9 @@ public final class CacheManager implements Runnable {
 			// Sort in ascending order of modification
 			Arrays.sort(finfos);
 			long okToDeleteBeforeThis = System.currentTimeMillis() - DELETE_TOLERANCE;
-			for (int i = 0; i < finfos.length; i++) {
+			for (CacheFileInfo finfo : finfos) {
 				try {
 					Thread.yield();
-					CacheFileInfo finfo = finfos[i];
 					synchronized (getLock(finfo.getFile())) {
 						long lastModified = finfo.getLastModified();
 						if (lastModified < okToDeleteBeforeThis) {
@@ -504,9 +503,8 @@ public final class CacheManager implements Runnable {
 		if (files.length == 0) {
 			directory.delete();
 		}
-		for (int i = 0; i < files.length; i++) {
+		for (File file : files) {
 			Thread.yield();
-			File file = files[i];
 			if (file.isDirectory()) {
 				this.populateCacheStoreInfo(csinfo, file);
 			} else {

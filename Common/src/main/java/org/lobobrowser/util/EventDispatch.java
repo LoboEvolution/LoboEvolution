@@ -94,9 +94,9 @@ public class EventDispatch {
 			}
 		}
 		if (larray != null) {
-			for (int i = 0; i < larray.length; i++) {
+			for (GenericEventListener element : larray) {
 				// Call holding no locks
-				larray[i].processEvent(event);
+				element.processEvent(event);
 			}
 		}
 	}

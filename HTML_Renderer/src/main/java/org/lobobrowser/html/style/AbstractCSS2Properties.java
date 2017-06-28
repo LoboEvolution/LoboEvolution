@@ -3147,8 +3147,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 				String color = null;
 				String style = null;
 				String width = null;
-				for (int i = 0; i < array.length; i++) {
-					String token = array[i];
+				for (String token : array) {
 					if (HtmlValues.isBorderStyle(token)) {
 						style = token;
 					} else if (org.lobobrowser.util.gui.ColorFactory.getInstance().isColor(token)) {
@@ -3379,8 +3378,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 				String image = null;
 				String backgroundRepeat = null;
 				String position = null;
-				for (int i = 0; i < tokens.length; i++) {
-					String token = tokens[i];
+				for (String token : tokens) {
 					if (ColorFactory.getInstance().isColor(token)) {
 						color = token;
 					} else if (HtmlValues.isUrl(token)) {

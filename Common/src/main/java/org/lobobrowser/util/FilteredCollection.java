@@ -279,8 +279,8 @@ public class FilteredCollection implements Collection<Object> {
 	@Override
 	public void clear() {
 		Object[] values = this.toArray();
-		for (int i = 0; i < values.length; i++) {
-			this.sourceCollection.remove(this.filter.encode(values[i]));
+		for (Object value : values) {
+			this.sourceCollection.remove(this.filter.encode(value));
 		}
 	}
 }

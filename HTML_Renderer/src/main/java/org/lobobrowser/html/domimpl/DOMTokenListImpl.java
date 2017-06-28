@@ -116,8 +116,8 @@ public class DOMTokenListImpl implements DOMTokenList {
 
 		String[] listString = itemValue.split(" ");
 		String result = "";
-		for (int i = 0; i < listString.length; i++) {
-			String test = listString[i];
+		for (String element2 : listString) {
+			String test = element2;
 			if (!test.equals(token)) {
 				result += test;
 			}

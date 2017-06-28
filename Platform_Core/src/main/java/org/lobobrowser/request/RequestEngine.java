@@ -263,8 +263,7 @@ public final class RequestEngine {
 			ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
 			Parameter[] parameters = pinfo.getParameters();
 			boolean firstParam = true;
-			for (int i = 0; i < parameters.length; i++) {
-				Parameter parameter = parameters[i];
+			for (Parameter parameter : parameters) {
 				String name = parameter.getName();
 				String encName = URLEncoder.encode(name, "UTF-8");
 				if (parameter.isText()) {
@@ -316,20 +315,19 @@ public final class RequestEngine {
 			try {
 				if (pinfo != null) {
 					Parameter[] parameters = pinfo.getParameters();
-					for (int i = 0; i < parameters.length; i++) {
-						Parameter parameter = parameters[i];
+					for (Parameter parameter : parameters) {
 						String name = parameter.getName();
 						if (parameter.isText()) {
 							writer.writeText(name, parameter.getTextValue(), "UTF-8");
 						} else if (parameter.isFile()) {
 							File[] file = parameter.getFileValue();
 
-							for (int f = 0; f < file.length; f++) {
+							for (File element : file) {
 
-								FileInputStream in = new FileInputStream(file[f]);
+								FileInputStream in = new FileInputStream(element);
 								try {
 									BufferedInputStream bin = new BufferedInputStream(in, 8192);
-									writer.writeFileData(name, file[f].getName(), Files.getContentType(file[f]), bin);
+									writer.writeFileData(name, element.getName(), Files.getContentType(element), bin);
 								} finally {
 									in.close();
 								}
@@ -381,16 +379,16 @@ public final class RequestEngine {
 			StringBuffer sb = new StringBuffer(baseURL);
 			int qmIdx = baseURL.indexOf('?');
 			char separator = qmIdx == -1 ? '?' : '&';
-			for (int i = 0; i < parameters.length; i++) {
-				if (parameters[i].isText()) {
+			for (Parameter parameter : parameters) {
+				if (parameter.isText()) {
 					sb.append(separator);
-					sb.append(parameters[i].getName());
+					sb.append(parameter.getName());
 					sb.append('=');
-					String paramText = parameters[i].getTextValue();
+					String paramText = parameter.getTextValue();
 					sb.append(URLEncoder.encode(paramText, "UTF-8"));
 					separator = '&';
 				} else {
-					logger.warn("completeGetUrl(): Skipping non-textual parameter " + parameters[i].getName()
+					logger.warn("completeGetUrl(): Skipping non-textual parameter " + parameter.getName()
 							+ " in GET request.");
 				}
 			}
@@ -449,10 +447,10 @@ public final class RequestEngine {
 		}
 		Header[] headers = request.getExtraHeaders();
 		if (headers != null) {
-			for (int i = 0; i < headers.length; i++) {
-				String headerName = headers[i].getName();
+			for (Header header : headers) {
+				String headerName = header.getName();
 				if (headerName.startsWith("X-")) {
-					connection.addRequestProperty(headerName, headers[i].getValue());
+					connection.addRequestProperty(headerName, header.getValue());
 				} else {
 					logger.warn("run(): Ignoring request header: " + headerName);
 				}

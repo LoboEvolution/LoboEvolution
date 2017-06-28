@@ -123,8 +123,7 @@ public class InputFileControl extends BaseInputControl {
 			this.textField.setText("");
 		} else {
 			String paths = "";
-			for (int i = 0; i < files.length; i++) {
-				File f = files[i];
+			for (File f : files) {
 				paths += paths + ";" + f.getAbsolutePath();
 			}
 

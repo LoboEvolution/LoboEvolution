@@ -122,8 +122,7 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 		synchronized (this) {
 			listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
 		}
-		for (int i = 0; i < listenersArray.length; i++) {
-			AsyncResultListener<TResult> arl = listenersArray[i];
+		for (AsyncResultListener<TResult> arl : listenersArray) {
 			arl.exceptionReceived(event);
 		}
 	}
@@ -140,8 +139,7 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 		synchronized (this) {
 			listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
 		}
-		for (int i = 0; i < listenersArray.length; i++) {
-			AsyncResultListener<TResult> arl = listenersArray[i];
+		for (AsyncResultListener<TResult> arl : listenersArray) {
 			arl.resultReceived(event);
 		}
 	}

@@ -260,9 +260,9 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 				synchronized (this) {
 					stores = this.restrictedStoreCache.values().toArray(new RestrictedStore[0]);
 				}
-				for (int i = 0; i < stores.length; i++) {
+				for (RestrictedStore store : stores) {
 					Thread.yield();
-					stores[i].updateSizeFile();
+					store.updateSizeFile();
 				}
 			} catch (Throwable err) {
 				logger.log(Level.ERROR, "run()", err);

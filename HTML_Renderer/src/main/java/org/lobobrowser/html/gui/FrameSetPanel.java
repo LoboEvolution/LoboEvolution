@@ -107,8 +107,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 	private HTMLElementImpl[] getSubFrames(HTMLElementImpl parent) {
 		DOMNodeImpl[] children = parent.getChildrenArray();
 		ArrayList<DOMNodeImpl> subFrames = new ArrayList<DOMNodeImpl>();
-		for (int i = 0; i < children.length; i++) {
-			DOMNodeImpl child = children[i];
+		for (DOMNodeImpl child : children) {
 			if (child instanceof HTMLElementImpl) {
 				String nodeName = child.getNodeName();
 				if ("FRAME".equalsIgnoreCase(nodeName) || "FRAMESET".equalsIgnoreCase(nodeName)) {

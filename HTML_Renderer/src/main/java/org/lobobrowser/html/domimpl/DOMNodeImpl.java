@@ -355,8 +355,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 
 			synchronized (this) {
 				if (userDataHandlers != null && userData != null) {
-					for (Iterator handlers = userDataHandlers.entrySet().iterator(); handlers.hasNext();) {
-						Map.Entry entry = (Map.Entry) handlers.next();
+					for (Object element : userDataHandlers.entrySet()) {
+						Map.Entry entry = (Map.Entry) element;
 						UserDataHandler handler = (UserDataHandler) entry.getValue();
 						handler.handle(UserDataHandler.NODE_CLONED, (String) entry.getKey(),
 								userData.get(entry.getKey()), this, newNode);

@@ -195,8 +195,8 @@ public class QuerySelectorImpl {
 			NodeList node = doc.getNodeList(new ElementFilter());
 			for (int i = 0; i < node.getLength(); i++) {
 
-				for (int j = 0; j < str.length; j++) {
-					if (node.item(i).getNodeName().equals(str[j].trim())) {
+				for (String element : str) {
+					if (node.item(i).getNodeName().equals(element.trim())) {
 						listNode.add(node.item(i));
 					}
 				}

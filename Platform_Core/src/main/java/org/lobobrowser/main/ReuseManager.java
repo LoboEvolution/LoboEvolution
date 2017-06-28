@@ -128,11 +128,11 @@ public class ReuseManager {
 						try {
 							OutputStreamWriter writer = new OutputStreamWriter(out);
 							boolean hadPath = false;
-							for (int i = 0; i < args.length; i++) {
-								String url = args[i];
+							for (String arg : args) {
+								String url = arg;
 								if (!url.startsWith("-")) {
 									hadPath = true;
-									writer.write("LAUNCH " + args[i]);
+									writer.write("LAUNCH " + arg);
 									writer.write("\r\n");
 								}
 							}

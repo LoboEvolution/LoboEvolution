@@ -376,8 +376,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			Scriptable s = this.getWindowScope();
 			if (s != null) {
 				Object[] ids = s.getIds();
-				for (int i = 0; i < ids.length; i++) {
-					Object id = ids[i];
+				for (Object id : ids) {
 					if (id instanceof String) {
 						s.delete((String) id);
 					} else if (id instanceof Integer) {
@@ -502,8 +501,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			}
 		}
 		if (oldTaskWrappers != null) {
-			for (int i = 0; i < oldTaskWrappers.length; i++) {
-				TaskWrapper taskWrapper = oldTaskWrappers[i];
+			for (TaskWrapper taskWrapper : oldTaskWrappers) {
 				taskWrapper.timer.stop();
 			}
 		}

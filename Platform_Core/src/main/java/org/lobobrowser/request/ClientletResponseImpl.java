@@ -175,8 +175,8 @@ public class ClientletResponseImpl implements ClientletResponse {
 				return false;
 			}
 			String pathTL = path.toLowerCase();
-			for (int i = 0; i < fileExtensions.length; i++) {
-				String fileExtensionTL = fileExtensions[i].toLowerCase();
+			for (String fileExtension : fileExtensions) {
+				String fileExtensionTL = fileExtension.toLowerCase();
 				if (!fileExtensionTL.startsWith(".")) {
 					fileExtensionTL = "." + fileExtensionTL;
 				}

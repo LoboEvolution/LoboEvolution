@@ -1035,8 +1035,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 */
 	public static String getColorFromBackground(String background) {
 		String[] backgroundParts = HtmlValues.splitCssValue(background);
-		for (int i = 0; i < backgroundParts.length; i++) {
-			String token = backgroundParts[i];
+		for (String token : backgroundParts) {
 			if (ColorFactory.getInstance().isColor(token)) {
 				return token;
 			}
@@ -1199,8 +1198,7 @@ public class HtmlValues implements CSSValuesProperties {
 	public static ListStyle getListStyle(String listStyleText) {
 		ListStyle listStyle = new ListStyle();
 		String[] tokens = HtmlValues.splitCssValue(listStyleText);
-		for (int i = 0; i < tokens.length; i++) {
-			String token = tokens[i];
+		for (String token : tokens) {
 			int listStyleType = HtmlValues.getListStyleType(token);
 			if (listStyleType != ListStyle.TYPE_UNSET) {
 				listStyle.type = listStyleType;

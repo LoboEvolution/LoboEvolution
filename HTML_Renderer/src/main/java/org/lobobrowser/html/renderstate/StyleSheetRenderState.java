@@ -966,9 +966,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 
 					String[] backList = backgroundText.split(" ");
 
-					for (int i = 0; i < backList.length; i++) {
-						String back = backList[i];
-
+					for (String back : backList) {
 						if (back.contains("url")) {
 
 							String start = "url(";

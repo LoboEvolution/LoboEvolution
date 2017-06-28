@@ -321,16 +321,15 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		if (context != null) {
 			final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();
 			if (extraFormInputs != null) {
-				for (int i = 0; i < extraFormInputs.length; i++) {
-					formInputs.add(extraFormInputs[i]);
+				for (FormInput extraFormInput : extraFormInputs) {
+					formInputs.add(extraFormInput);
 				}
 			}
 			this.visit(node -> {
 				if (node instanceof HTMLElementImpl) {
 					FormInput[] fis = ((HTMLElementImpl) node).getFormInputs();
 					if (fis != null) {
-						for (int i = 0; i < fis.length; i++) {
-							FormInput fi = fis[i];
+						for (FormInput fi : fis) {
 							if (fi.getName() == null) {
 								throw new IllegalStateException("Form input does not have a name: " + node);
 							}

@@ -303,8 +303,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 						synchronized (this) {
 							listeners = navigationListeners.toArray(NavigationListener.EMPTY_ARRAY);
 						}
-						for (int i = 0; i < listeners.length; i++) {
-							listeners[i].beforeNavigate(event);
+						for (NavigationListener listener : listeners) {
+							listener.beforeNavigate(event);
 						}
 						return null;
 					} catch (NavigationVetoException nve) {
@@ -339,8 +339,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 						synchronized (this) {
 							listeners = navigationListeners.toArray(NavigationListener.EMPTY_ARRAY);
 						}
-						for (int i = 0; i < listeners.length; i++) {
-							listeners[i].beforeLocalNavigate(event);
+						for (NavigationListener listener : listeners) {
+							listener.beforeLocalNavigate(event);
 						}
 						return null;
 					} catch (NavigationVetoException nve) {
@@ -375,8 +375,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 						synchronized (this) {
 							listeners = navigationListeners.toArray(NavigationListener.EMPTY_ARRAY);
 						}
-						for (int i = 0; i < listeners.length; i++) {
-							listeners[i].beforeWindowOpen(event);
+						for (NavigationListener listener : listeners) {
+							listener.beforeWindowOpen(event);
 						}
 						return null;
 					} catch (NavigationVetoException nve) {
@@ -400,8 +400,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		synchronized (this) {
 			listeners = this.contentListeners.toArray(ContentListener.EMPTY_ARRAY);
 		}
-		for (int i = 0; i < listeners.length; i++) {
-			listeners[i].contentSet(event);
+		for (ContentListener listener : listeners) {
+			listener.contentSet(event);
 		}
 	}
 
@@ -416,8 +416,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		synchronized (this) {
 			listeners = this.responseListeners.toArray(ResponseListener.EMPTY_ARRAY);
 		}
-		for (int i = 0; i < listeners.length; i++) {
-			listeners[i].responseProcessed(event);
+		for (ResponseListener listener : listeners) {
+			listener.responseProcessed(event);
 		}
 	}
 

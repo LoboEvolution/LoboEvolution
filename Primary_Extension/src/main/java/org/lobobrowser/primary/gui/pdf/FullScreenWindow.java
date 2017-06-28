@@ -162,9 +162,9 @@ public class FullScreenWindow {
 
 		if (defaultScreen != null) {
 
-			for (int i = 0; i < screens.length; i++) {
+			for (GraphicsDevice screen2 : screens) {
 
-				if (screens[i] == defaultScreen) {
+				if (screen2 == defaultScreen) {
 
 					screen = defaultScreen;
 
@@ -321,11 +321,11 @@ public class FullScreenWindow {
 
 		flag.waitForFlag();
 
-		for (int i = 0; i < pickers.length; i++) {
+		for (PickMe picker : pickers) {
 
-			if (pickers[i] != null) {
+			if (picker != null) {
 
-				pickers[i].dispose();
+				picker.dispose();
 
 			}
 

@@ -251,8 +251,8 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 			return null;
 		}
 		ArrayList<FormInput> formInputs = new ArrayList<FormInput>();
-		for (int i = 0; i < values.length; i++) {
-			formInputs.add(new FormInput(name, values[i]));
+		for (String value : values) {
+			formInputs.add(new FormInput(name, value));
 		}
 		return formInputs.toArray(FormInput.EMPTY_ARRAY);
 	}

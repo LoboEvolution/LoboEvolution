@@ -29,6 +29,7 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,13 +71,13 @@ public class Bean {
 			throws IntrospectionException {
 		BeanInfo beanInfo = Introspector.getBeanInfo(clazz);
 		PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
-		for (int i = 0; i < pds.length; i++) {
-			map.put(pds[i].getName(), pds[i]);
+		for (PropertyDescriptor pd : pds) {
+			map.put(pd.getName(), pd);
 		}
 		if (clazz.isInterface()) {
 			java.lang.reflect.Type[] interfaces = clazz.getGenericInterfaces();
-			for (int i = 0; i < interfaces.length; i++) {
-				this.populateDescriptors(map, (Class<?>) interfaces[i]);
+			for (Type interface1 : interfaces) {
+				this.populateDescriptors(map, (Class<?>) interface1);
 			}
 		}
 	}

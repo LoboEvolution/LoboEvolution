@@ -35,9 +35,9 @@ public class GUITasks {
 	 */
 	public static Frame getTopFrame() {
 		Frame[] frames = Frame.getFrames();
-		for (int i = 0; i < frames.length; i++) {
-			if (frames[i].getFocusOwner() != null) {
-				return frames[i];
+		for (Frame frame : frames) {
+			if (frame.getFocusOwner() != null) {
+				return frame;
 			}
 		}
 		if (frames.length > 0) {

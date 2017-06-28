@@ -88,8 +88,7 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 		// Deletes decoration files in cache directory
 		File[] files = rootDir.listFiles();
 		if (files != null) {
-			for (int i = 0; i < files.length; i++) {
-				File file = files[i];
+			for (File file : files) {
 				if (file.isDirectory()) {
 					this.deleteDecorationFiles(file);
 				} else {

@@ -194,8 +194,8 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 		synchronized (this) {
 			Object[] array = this.historySortedSet.toArray();
 			Collection<String> items = new ArrayList<String>();
-			for (int i = 0; i < array.length; i++) {
-				String potentialItem = (String) array[i];
+			for (Object element : array) {
+				String potentialItem = (String) element;
 				if (potentialItem.contains(itemPrefix)) {
 					items.add(potentialItem);
 				}

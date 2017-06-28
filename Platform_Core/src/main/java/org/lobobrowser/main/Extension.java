@@ -670,8 +670,8 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 				}
 				listeners = nv.toArray(NavigationListener.EMPTY_ARRAY);
 			}
-			for (int i = 0; i < listeners.length; i++) {
-				listeners[i].beforeNavigate(event);
+			for (NavigationListener listener : listeners) {
+				listener.beforeNavigate(event);
 			}
 		} finally {
 			currentThread.setContextClassLoader(prevClassLoader);
@@ -703,8 +703,8 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 				}
 				listeners = nv.toArray(NavigationListener.EMPTY_ARRAY);
 			}
-			for (int i = 0; i < listeners.length; i++) {
-				listeners[i].beforeLocalNavigate(event);
+			for (NavigationListener listener : listeners) {
+				listener.beforeLocalNavigate(event);
 			}
 		} finally {
 			currentThread.setContextClassLoader(prevClassLoader);
@@ -736,8 +736,8 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 				}
 				listeners = nv.toArray(NavigationListener.EMPTY_ARRAY);
 			}
-			for (int i = 0; i < listeners.length; i++) {
-				listeners[i].beforeWindowOpen(event);
+			for (NavigationListener listener : listeners) {
+				listener.beforeWindowOpen(event);
 			}
 		} finally {
 			currentThread.setContextClassLoader(prevClassLoader);
@@ -768,8 +768,8 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 				}
 				processors = cp.toArray(ConnectionProcessor.EMPTY_ARRAY);
 			}
-			for (int i = 0; i < processors.length; i++) {
-				connection = processors[i].processPreConnection(connection);
+			for (ConnectionProcessor processor : processors) {
+				connection = processor.processPreConnection(connection);
 			}
 			return connection;
 		} finally {
@@ -797,8 +797,8 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 			synchronized (this) {
 				processors = this.connectionProcessors.toArray(ConnectionProcessor.EMPTY_ARRAY);
 			}
-			for (int i = 0; i < processors.length; i++) {
-				connection = processors[i].processPostConnection(connection);
+			for (ConnectionProcessor processor : processors) {
+				connection = processor.processPostConnection(connection);
 			}
 			return connection;
 		} finally {

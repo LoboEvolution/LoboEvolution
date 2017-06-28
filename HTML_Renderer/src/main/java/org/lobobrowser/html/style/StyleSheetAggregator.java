@@ -543,8 +543,7 @@ public class StyleSheetAggregator {
 			return isAffectedByPseudoNameInAncestor(elementRules, ancestor, element, pseudoName);
 		}
 		if (classArray != null) {
-			for (int cidx = 0; cidx < classArray.length; cidx++) {
-				String className = classArray[cidx];
+			for (String className : classArray) {
 				String classNameTL = className.toLowerCase();
 				Map<String, Collection<StyleRuleInfo>> classMaps = this.classMapsByElement.get(elementTL);
 				if (classMaps != null) {
