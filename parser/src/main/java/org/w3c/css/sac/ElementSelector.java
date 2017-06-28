@@ -13,7 +13,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Interface ElementSelector.
  *
@@ -24,9 +23,9 @@ package org.w3c.css.sac;
 public interface ElementSelector extends SimpleSelector {
 
 	/**
-	 * Returns the <a
-	 * href="http://www.w3.org/TR/REC-xml-names/#dt-NSName">namespace URI</a> of
-	 * this element selector.
+	 * Returns the
+	 * <a href="http://www.w3.org/TR/REC-xml-names/#dt-NSName">namespace URI</a>
+	 * of this element selector.
 	 * <p>
 	 * <code>NULL</code> if this element selector can match any namespace.
 	 * </p>
@@ -36,9 +35,10 @@ public interface ElementSelector extends SimpleSelector {
 	public String getNamespaceURI();
 
 	/**
-	 * Returns the <a
-	 * href="http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local part</a> of
-	 * the <a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames">qualified
+	 * Returns the
+	 * <a href="http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local part</a>
+	 * of the
+	 * <a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames">qualified
 	 * name</a> of this element.
 	 * <p>
 	 * <code>NULL</code> if this element selector can match any element.

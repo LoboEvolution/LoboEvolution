@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Interface LangCondition.
  *
@@ -17,7 +16,7 @@ package org.w3c.css.sac;
  * @see Condition#SAC_LANG_CONDITION
  */
 public interface LangCondition extends Condition {
-	
+
 	/**
 	 * Returns the language.
 	 *

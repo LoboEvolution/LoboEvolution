@@ -28,54 +28,58 @@ import com.steadystate.css.format.CSSFormatable;
 /**
  * Implementation of {@link SelectorList}.
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class SelectorListImpl extends LocatableImpl implements SelectorList, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 7313376916207026333L;
+	private static final long serialVersionUID = 7313376916207026333L;
 
-    private List<Selector> selectors_ = new ArrayList<Selector>(10);
+	private List<Selector> selectors_ = new ArrayList<Selector>(10);
 
-    public List<Selector> getSelectors() {
-        return selectors_;
-    }
+	public List<Selector> getSelectors() {
+		return selectors_;
+	}
 
-    public void setSelectors(final List<Selector> selectors) {
-        selectors_ = selectors;
-    }
+	public void setSelectors(final List<Selector> selectors) {
+		selectors_ = selectors;
+	}
 
-    public int getLength() {
-        return selectors_.size();
-    }
+	@Override
+	public int getLength() {
+		return selectors_.size();
+	}
 
-    public Selector item(final int index) {
-        return selectors_.get(index);
-    }
+	@Override
+	public Selector item(final int index) {
+		return selectors_.get(index);
+	}
 
-    public void add(final Selector sel) {
-        selectors_.add(sel);
-    }
+	public void add(final Selector sel) {
+		selectors_.add(sel);
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final int len = getLength();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final int len = getLength();
 
-        final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < len; i++) {
-            final CSSFormatable sel = (CSSFormatable) item(i);
-            sb.append(sel.getCssText(format));
-            if (i < len - 1) {
-                sb.append(", ");
-            }
-        }
-        return sb.toString();
-    }
+		final StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < len; i++) {
+			final CSSFormatable sel = (CSSFormatable) item(i);
+			sb.append(sel.getCssText(format));
+			if (i < len - 1) {
+				sb.append(", ");
+			}
+		}
+		return sb.toString();
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Interface SACMediaList.
  *
@@ -28,7 +27,8 @@ public interface SACMediaList {
 	 * Returns the medium at the specified index, or <code>null</code> if this
 	 * is not a valid index.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the string
 	 */
 	public String item(int index);

@@ -13,7 +13,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Interface AttributeCondition.
  *
@@ -29,9 +28,9 @@ package org.w3c.css.sac;
 public interface AttributeCondition extends Condition {
 
 	/**
-	 * Returns the <a
-	 * href="http://www.w3.org/TR/REC-xml-names/#dt-NSName">namespace URI</a> of
-	 * this attribute condition.
+	 * Returns the
+	 * <a href="http://www.w3.org/TR/REC-xml-names/#dt-NSName">namespace URI</a>
+	 * of this attribute condition.
 	 * <p>
 	 * <code>NULL</code> if :
 	 * <ul>
@@ -44,9 +43,10 @@ public interface AttributeCondition extends Condition {
 	public String getNamespaceURI();
 
 	/**
-	 * Returns the <a
-	 * href="http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local part</a> of
-	 * the <a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames">qualified
+	 * Returns the
+	 * <a href="http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local part</a>
+	 * of the
+	 * <a href="http://www.w3.org/TR/REC-xml-names/#ns-qualnames">qualified
 	 * name</a> of this attribute.
 	 * <p>
 	 * <code>NULL</code> if :

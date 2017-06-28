@@ -27,68 +27,72 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class AndConditionImpl extends LocatableImpl implements CombinatorCondition, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = -3180583860092672742L;
+	private static final long serialVersionUID = -3180583860092672742L;
 
-    private Condition firstCondition_;
-    private Condition secondCondition_;
+	private Condition firstCondition_;
+	private Condition secondCondition_;
 
-    public void setFirstCondition(final Condition c1) {
-        firstCondition_ = c1;
-        if (c1 instanceof Locatable) {
-            setLocator(((Locatable) c1).getLocator());
-        }
-        else if (c1 == null) {
-            setLocator(null);
-        }
-    }
+	public void setFirstCondition(final Condition c1) {
+		firstCondition_ = c1;
+		if (c1 instanceof Locatable) {
+			setLocator(((Locatable) c1).getLocator());
+		} else if (c1 == null) {
+			setLocator(null);
+		}
+	}
 
-    public void setSecondCondition(final Condition c2) {
-        secondCondition_ = c2;
-    }
+	public void setSecondCondition(final Condition c2) {
+		secondCondition_ = c2;
+	}
 
-    public AndConditionImpl(final Condition c1, final Condition c2) {
-        setFirstCondition(c1);
-        setSecondCondition(c2);
-    }
+	public AndConditionImpl(final Condition c1, final Condition c2) {
+		setFirstCondition(c1);
+		setSecondCondition(c2);
+	}
 
-    public short getConditionType() {
-        return Condition.SAC_AND_CONDITION;
-    }
+	@Override
+	public short getConditionType() {
+		return Condition.SAC_AND_CONDITION;
+	}
 
-    public Condition getFirstCondition() {
-        return firstCondition_;
-    }
+	@Override
+	public Condition getFirstCondition() {
+		return firstCondition_;
+	}
 
-    public Condition getSecondCondition() {
-        return secondCondition_;
-    }
+	@Override
+	public Condition getSecondCondition() {
+		return secondCondition_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final StringBuilder sb = new StringBuilder();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final StringBuilder sb = new StringBuilder();
 
-        Condition cond = getFirstCondition();
-        if (null != cond) {
-            sb.append(((CSSFormatable) cond).getCssText(format));
-        }
+		Condition cond = getFirstCondition();
+		if (null != cond) {
+			sb.append(((CSSFormatable) cond).getCssText(format));
+		}
 
-        cond = getSecondCondition();
-        if (null != cond) {
-            sb.append(((CSSFormatable) cond).getCssText(format));
-        }
+		cond = getSecondCondition();
+		if (null != cond) {
+			sb.append(((CSSFormatable) cond).getCssText(format));
+		}
 
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

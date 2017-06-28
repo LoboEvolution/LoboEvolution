@@ -11,7 +11,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * Interface for associating a CSS event with a document location.
  * 

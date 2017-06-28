@@ -30,91 +30,95 @@ import org.w3c.css.sac.SimpleSelector;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  */
 public class SelectorFactoryImpl implements SelectorFactory {
 
-    public ConditionalSelector createConditionalSelector(
-        final SimpleSelector selector,
-        final Condition condition) throws CSSException {
-        return new ConditionalSelectorImpl(selector, condition);
-    }
+	@Override
+	public ConditionalSelector createConditionalSelector(final SimpleSelector selector, final Condition condition)
+			throws CSSException {
+		return new ConditionalSelectorImpl(selector, condition);
+	}
 
-    public SimpleSelector createAnyNodeSelector() throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public SimpleSelector createAnyNodeSelector() throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public SimpleSelector createRootNodeSelector() throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public SimpleSelector createRootNodeSelector() throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public NegativeSelector createNegativeSelector(final SimpleSelector selector) throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public NegativeSelector createNegativeSelector(final SimpleSelector selector) throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public ElementSelector createElementSelector(final String namespaceURI, final String localName)
-        throws CSSException {
-        if (namespaceURI != null) {
-            throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-        }
-        return new ElementSelectorImpl(localName);
-    }
+	@Override
+	public ElementSelector createElementSelector(final String namespaceURI, final String localName)
+			throws CSSException {
+		if (namespaceURI != null) {
+			throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+		}
+		return new ElementSelectorImpl(localName);
+	}
 
-    public ElementSelector createSyntheticElementSelector() throws CSSException {
-        return new SyntheticElementSelectorImpl();
-    }
+	public ElementSelector createSyntheticElementSelector() throws CSSException {
+		return new SyntheticElementSelectorImpl();
+	}
 
-    public CharacterDataSelector createTextNodeSelector(final String data) throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public CharacterDataSelector createTextNodeSelector(final String data) throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public CharacterDataSelector createCDataSectionSelector(final String data)
-        throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public CharacterDataSelector createCDataSectionSelector(final String data) throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public ProcessingInstructionSelector createProcessingInstructionSelector(
-        final String target,
-        final String data) throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public ProcessingInstructionSelector createProcessingInstructionSelector(final String target, final String data)
+			throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public CharacterDataSelector createCommentSelector(final String data) throws CSSException {
-        throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-    }
+	@Override
+	public CharacterDataSelector createCommentSelector(final String data) throws CSSException {
+		throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+	}
 
-    public ElementSelector createPseudoElementSelector(
-        final String namespaceURI,
-        final String pseudoName) throws CSSException {
-        if (namespaceURI != null) {
-            throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
-        }
-        return new PseudoElementSelectorImpl(pseudoName);
-    }
+	@Override
+	public ElementSelector createPseudoElementSelector(final String namespaceURI, final String pseudoName)
+			throws CSSException {
+		if (namespaceURI != null) {
+			throw new CSSException(CSSException.SAC_NOT_SUPPORTED_ERR);
+		}
+		return new PseudoElementSelectorImpl(pseudoName);
+	}
 
-    public DescendantSelector createDescendantSelector(
-        final Selector parent,
-        final SimpleSelector descendant) throws CSSException {
-        return new DescendantSelectorImpl(parent, descendant);
-    }
+	@Override
+	public DescendantSelector createDescendantSelector(final Selector parent, final SimpleSelector descendant)
+			throws CSSException {
+		return new DescendantSelectorImpl(parent, descendant);
+	}
 
-    public DescendantSelector createChildSelector(
-        final Selector parent,
-        final SimpleSelector child) throws CSSException {
-        return new ChildSelectorImpl(parent, child);
-    }
+	@Override
+	public DescendantSelector createChildSelector(final Selector parent, final SimpleSelector child)
+			throws CSSException {
+		return new ChildSelectorImpl(parent, child);
+	}
 
-    public SiblingSelector createDirectAdjacentSelector(
-        final short nodeType,
-        final Selector child,
-        final SimpleSelector directAdjacent) throws CSSException {
-        return new DirectAdjacentSelectorImpl(nodeType, child, directAdjacent);
-    }
+	@Override
+	public SiblingSelector createDirectAdjacentSelector(final short nodeType, final Selector child,
+			final SimpleSelector directAdjacent) throws CSSException {
+		return new DirectAdjacentSelectorImpl(nodeType, child, directAdjacent);
+	}
 
-    public SiblingSelector createGeneralAdjacentSelector(
-            final short nodeType,
-            final Selector child,
-            final SimpleSelector directAdjacent) throws CSSException {
-        return new GeneralAdjacentSelectorImpl(nodeType, child, directAdjacent);
-    }
+	public SiblingSelector createGeneralAdjacentSelector(final short nodeType, final Selector child,
+			final SimpleSelector directAdjacent) throws CSSException {
+		return new GeneralAdjacentSelectorImpl(nodeType, child, directAdjacent);
+	}
 }

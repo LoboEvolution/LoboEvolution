@@ -29,73 +29,72 @@ import com.steadystate.css.parser.LocatableImpl;
  */
 public class MediaQuery extends LocatableImpl implements CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 456776383828897471L;
+	private static final long serialVersionUID = 456776383828897471L;
 
-    private String media_;
-    private List<Property> properties_;
-    private boolean isOnly_;
-    private boolean isNot_;
+	private String media_;
+	private List<Property> properties_;
+	private boolean isOnly_;
+	private boolean isNot_;
 
-    public MediaQuery(final String media) {
-        this(media, false, false);
-    }
+	public MediaQuery(final String media) {
+		this(media, false, false);
+	}
 
-    public MediaQuery(final String media, final boolean isOnly, final boolean isNot) {
-        setMedia(media);
-        properties_ = new ArrayList<Property>(10);
-        isOnly_ = isOnly;
-        isNot_ = isNot;
-    }
+	public MediaQuery(final String media, final boolean isOnly, final boolean isNot) {
+		setMedia(media);
+		properties_ = new ArrayList<Property>(10);
+		isOnly_ = isOnly;
+		isNot_ = isNot;
+	}
 
-    public String getMedia() {
-        return media_;
-    }
+	public String getMedia() {
+		return media_;
+	}
 
-    public void setMedia(final String media) {
-        media_ = media;
-    }
+	public void setMedia(final String media) {
+		media_ = media;
+	}
 
-    public List<Property> getProperties() {
-        return properties_;
-    }
+	public List<Property> getProperties() {
+		return properties_;
+	}
 
-    public void addMediaProperty(final Property mp) {
-        properties_.add(mp);
-    }
+	public void addMediaProperty(final Property mp) {
+		properties_.add(mp);
+	}
 
-    public boolean isOnly() {
-        return isOnly_;
-    }
+	public boolean isOnly() {
+		return isOnly_;
+	}
 
-    public boolean isNot() {
-        return isNot_;
-    }
+	public boolean isNot() {
+		return isNot_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final StringBuilder sb = new StringBuilder();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final StringBuilder sb = new StringBuilder();
 
-        if (isOnly_) {
-            sb.append("only ");
-        }
-        if (isNot_) {
-            sb.append("not ");
-        }
+		if (isOnly_) {
+			sb.append("only ");
+		}
+		if (isNot_) {
+			sb.append("not ");
+		}
 
-        sb.append(getMedia());
+		sb.append(getMedia());
 
-        for (Property prop : properties_) {
-            sb.append(" and (")
-                .append(prop.getCssText(format))
-                .append(')');
-        }
-        return sb.toString();
-    }
+		for (Property prop : properties_) {
+			sb.append(" and (").append(prop.getCssText(format)).append(')');
+		}
+		return sb.toString();
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

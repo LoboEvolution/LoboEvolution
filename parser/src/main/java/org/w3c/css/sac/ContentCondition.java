@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Interface ContentCondition.
  *
@@ -17,7 +16,7 @@ package org.w3c.css.sac;
  * @see Condition#SAC_CONTENT_CONDITION
  */
 public interface ContentCondition extends Condition {
-	
+
 	/**
 	 * Returns the content.
 	 *

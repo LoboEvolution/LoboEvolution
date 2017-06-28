@@ -13,7 +13,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * This interface defines a selector.
  * <p>

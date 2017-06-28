@@ -20,7 +20,7 @@ package com.steadystate.css.dom;
  */
 public interface CSSOMObject {
 
-    Object getUserData(String key);
+	Object getUserData(String key);
 
-    Object setUserData(String key, Object data);
+	Object setUserData(String key, Object data);
 }

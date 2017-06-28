@@ -27,70 +27,74 @@ import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class DescendantSelectorImpl extends LocatableImpl implements DescendantSelector, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = -3620467847449531232L;
+	private static final long serialVersionUID = -3620467847449531232L;
 
-    private Selector ancestorSelector_;
-    private SimpleSelector simpleSelector_;
+	private Selector ancestorSelector_;
+	private SimpleSelector simpleSelector_;
 
-    public void setAncestorSelector(final Selector ancestorSelector) {
-        ancestorSelector_ = ancestorSelector;
-        if (ancestorSelector instanceof Locatable) {
-            setLocator(((Locatable) ancestorSelector).getLocator());
-        }
-        else if (ancestorSelector == null) {
-            setLocator(null);
-        }
-    }
+	public void setAncestorSelector(final Selector ancestorSelector) {
+		ancestorSelector_ = ancestorSelector;
+		if (ancestorSelector instanceof Locatable) {
+			setLocator(((Locatable) ancestorSelector).getLocator());
+		} else if (ancestorSelector == null) {
+			setLocator(null);
+		}
+	}
 
-    public void setSimpleSelector(final SimpleSelector simpleSelector) {
-        simpleSelector_ = simpleSelector;
-    }
+	public void setSimpleSelector(final SimpleSelector simpleSelector) {
+		simpleSelector_ = simpleSelector;
+	}
 
-    public DescendantSelectorImpl(final Selector parent, final SimpleSelector simpleSelector) {
-        setAncestorSelector(parent);
-        setSimpleSelector(simpleSelector);
-    }
+	public DescendantSelectorImpl(final Selector parent, final SimpleSelector simpleSelector) {
+		setAncestorSelector(parent);
+		setSimpleSelector(simpleSelector);
+	}
 
-    public short getSelectorType() {
-        return Selector.SAC_DESCENDANT_SELECTOR;
-    }
+	@Override
+	public short getSelectorType() {
+		return Selector.SAC_DESCENDANT_SELECTOR;
+	}
 
-    public Selector getAncestorSelector() {
-        return ancestorSelector_;
-    }
+	@Override
+	public Selector getAncestorSelector() {
+		return ancestorSelector_;
+	}
 
-    public SimpleSelector getSimpleSelector() {
-        return simpleSelector_;
-    }
+	@Override
+	public SimpleSelector getSimpleSelector() {
+		return simpleSelector_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final StringBuilder sb = new StringBuilder();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final StringBuilder sb = new StringBuilder();
 
-        if (null != ancestorSelector_) {
-            sb.append(((CSSFormatable) ancestorSelector_).getCssText(format));
-        }
+		if (null != ancestorSelector_) {
+			sb.append(((CSSFormatable) ancestorSelector_).getCssText(format));
+		}
 
-        if (Selector.SAC_PSEUDO_ELEMENT_SELECTOR != getSimpleSelector().getSelectorType()) {
-            sb.append(' ');
-        }
+		if (Selector.SAC_PSEUDO_ELEMENT_SELECTOR != getSimpleSelector().getSelectorType()) {
+			sb.append(' ');
+		}
 
-        if (null != simpleSelector_) {
-            sb.append(((CSSFormatable) simpleSelector_).getCssText(format));
-        }
+		if (null != simpleSelector_) {
+			sb.append(((CSSFormatable) simpleSelector_).getCssText(format));
+		}
 
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

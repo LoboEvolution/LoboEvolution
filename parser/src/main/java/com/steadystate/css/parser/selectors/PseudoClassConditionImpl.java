@@ -26,61 +26,68 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class PseudoClassConditionImpl extends LocatableImpl implements AttributeCondition, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 1798016773089155610L;
+	private static final long serialVersionUID = 1798016773089155610L;
 
-    private String value_;
-    private boolean doubleColon_;
+	private String value_;
+	private boolean doubleColon_;
 
-    public void setValue(final String value) {
-        value_ = value;
-    }
+	public void setValue(final String value) {
+		value_ = value;
+	}
 
-    public PseudoClassConditionImpl(final String value) {
-        setValue(value);
-    }
+	public PseudoClassConditionImpl(final String value) {
+		setValue(value);
+	}
 
-    public short getConditionType() {
-        return Condition.SAC_PSEUDO_CLASS_CONDITION;
-    }
+	@Override
+	public short getConditionType() {
+		return Condition.SAC_PSEUDO_CLASS_CONDITION;
+	}
 
-    public String getNamespaceURI() {
-        return null;
-    }
+	@Override
+	public String getNamespaceURI() {
+		return null;
+	}
 
-    public String getLocalName() {
-        return null;
-    }
+	@Override
+	public String getLocalName() {
+		return null;
+	}
 
-    public boolean getSpecified() {
-        return true;
-    }
+	@Override
+	public boolean getSpecified() {
+		return true;
+	}
 
-    public String getValue() {
-        return value_;
-    }
+	@Override
+	public String getValue() {
+		return value_;
+	}
 
-    public void prefixedWithDoubleColon() {
-        doubleColon_ = true;
-    }
+	public void prefixedWithDoubleColon() {
+		doubleColon_ = true;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final String value = getValue();
-        if (value == null) {
-            return value;
-        }
-        return (doubleColon_ ? "::" : ":") + value;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final String value = getValue();
+		if (value == null) {
+			return value;
+		}
+		return (doubleColon_ ? "::" : ":") + value;
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

@@ -11,7 +11,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * Encapsulate a CSS parse error or warning.
  * 
@@ -41,10 +40,10 @@ public class CSSParseException extends CSSException {
 
 	/** The uri. */
 	private String uri;
-	
+
 	/** The line number. */
 	private int lineNumber;
-	
+
 	/** The column number. */
 	private int columnNumber;
 
@@ -121,8 +120,7 @@ public class CSSParseException extends CSSException {
 	 *            or warning.
 	 * @see Parser#setLocale
 	 */
-	public CSSParseException(String message, String uri, int lineNumber,
-			int columnNumber) {
+	public CSSParseException(String message, String uri, int lineNumber, int columnNumber) {
 		super(message);
 		this.code = SAC_SYNTAX_ERR;
 		this.uri = uri;
@@ -157,8 +155,7 @@ public class CSSParseException extends CSSException {
 	 *            Another exception to embed in this one.
 	 * @see Parser#setLocale
 	 */
-	public CSSParseException(String message, String uri, int lineNumber,
-			int columnNumber, Exception e) {
+	public CSSParseException(String message, String uri, int lineNumber, int columnNumber, Exception e) {
 		super(SAC_SYNTAX_ERR, message, e);
 		this.uri = uri;
 		this.lineNumber = lineNumber;

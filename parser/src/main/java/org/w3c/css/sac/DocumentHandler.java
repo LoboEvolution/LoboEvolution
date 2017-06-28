@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * This is the main interface that most CSS applications implement: if the
  * application needs to be informed of basic parsing events, it implements this
@@ -83,8 +82,7 @@ public interface DocumentHandler {
 	 * @exception CSSException
 	 *                Any CSS exception, possibly wrapping another exception.
 	 */
-	public void namespaceDeclaration(String prefix, String uri)
-			throws CSSException;
+	public void namespaceDeclaration(String prefix, String uri) throws CSSException;
 
 	/**
 	 * Receive notification of a import statement in the style sheet.
@@ -98,8 +96,7 @@ public interface DocumentHandler {
 	 * @exception CSSException
 	 *                Any CSS exception, possibly wrapping another exception.
 	 */
-	public void importStyle(String uri, SACMediaList media,
-			String defaultNamespaceURI) throws CSSException;
+	public void importStyle(String uri, SACMediaList media, String defaultNamespaceURI) throws CSSException;
 
 	/**
 	 * Receive notification of the beginning of a media statement.
@@ -205,6 +202,5 @@ public interface DocumentHandler {
 	 * @exception CSSException
 	 *                Any CSS exception, possibly wrapping another exception.
 	 */
-	public void property(String name, LexicalUnit value, boolean important)
-			throws CSSException;
+	public void property(String name, LexicalUnit value, boolean important) throws CSSException;
 }

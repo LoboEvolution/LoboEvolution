@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The SelectorList interface provides the abstraction of an ordered collection
  * of selectors, without defining or constraining how this collection is
@@ -30,7 +29,8 @@ public interface SelectorList {
 	 * Returns the selector at the specified index, or <code>null</code> if this
 	 * is not a valid index.
 	 *
-	 * @param index the index
+	 * @param index
+	 *            the index
 	 * @return the selector
 	 */
 	public Selector item(int index);

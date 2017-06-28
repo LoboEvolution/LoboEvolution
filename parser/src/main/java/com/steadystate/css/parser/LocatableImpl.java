@@ -24,13 +24,15 @@ import org.w3c.css.sac.Locator;
  */
 public class LocatableImpl implements Locatable {
 
-    private Locator locator_;
+	private Locator locator_;
 
-    public Locator getLocator() {
-        return locator_;
-    }
+	@Override
+	public Locator getLocator() {
+		return locator_;
+	}
 
-    public void setLocator(final Locator locator) {
-        locator_ = locator;
-    }
+	@Override
+	public void setLocator(final Locator locator) {
+		locator_ = locator;
+	}
 }

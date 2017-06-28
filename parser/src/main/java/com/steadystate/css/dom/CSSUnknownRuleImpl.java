@@ -31,110 +31,98 @@ import com.steadystate.css.util.LangUtils;
 /**
  * Implementation of {@link CSSUnknownRule}.
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknownRule {
 
-    private static final long serialVersionUID = -268104019127675990L;
+	private static final long serialVersionUID = -268104019127675990L;
 
-    private String text_;
+	private String text_;
 
-    public String getText() {
-        return text_;
-    }
+	public String getText() {
+		return text_;
+	}
 
-    public void setText(final String text) {
-        text_ = text;
-    }
+	public void setText(final String text) {
+		text_ = text;
+	}
 
-    public CSSUnknownRuleImpl(
-            final CSSStyleSheetImpl parentStyleSheet,
-            final CSSRule parentRule,
-            final String text) {
-        super(parentStyleSheet, parentRule);
-        text_ = text;
-    }
+	public CSSUnknownRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule, final String text) {
+		super(parentStyleSheet, parentRule);
+		text_ = text;
+	}
 
-    public CSSUnknownRuleImpl() {
-        super();
-    }
+	public CSSUnknownRuleImpl() {
+		super();
+	}
 
-    public short getType() {
-        return UNKNOWN_RULE;
-    }
+	@Override
+	public short getType() {
+		return UNKNOWN_RULE;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCssText(final CSSFormat format) {
-        if (null == text_) {
-            return "";
-        }
-        return text_;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		if (null == text_) {
+			return "";
+		}
+		return text_;
+	}
 
-    public void setCssText(final String cssText) throws DOMException {
-        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-            throw new DOMExceptionImpl(
-                DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-        }
+	@Override
+	public void setCssText(final String cssText) throws DOMException {
+		final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
+		if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
+			throw new DOMExceptionImpl(DOMException.NO_MODIFICATION_ALLOWED_ERR,
+					DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
+		}
 
-        try {
-            final InputSource is = new InputSource(new StringReader(cssText));
-            final CSSOMParser parser = new CSSOMParser();
-            final CSSRule r = parser.parseRule(is);
+		try {
+			final InputSource is = new InputSource(new StringReader(cssText));
+			final CSSOMParser parser = new CSSOMParser();
+			final CSSRule r = parser.parseRule(is);
 
-            // The rule must be an unknown rule
-            if (r.getType() == CSSRule.UNKNOWN_RULE) {
-                text_ = ((CSSUnknownRuleImpl) r).text_;
-            }
-            else {
-                throw new DOMExceptionImpl(
-                    DOMException.INVALID_MODIFICATION_ERR,
-                    DOMExceptionImpl.EXPECTING_FONT_FACE_RULE);
-            }
-        }
-        catch (final CSSException e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
-                e.getMessage());
-        }
-        catch (final IOException e) {
-            throw new DOMExceptionImpl(
-                DOMException.SYNTAX_ERR,
-                DOMExceptionImpl.SYNTAX_ERROR,
-                e.getMessage());
-        }
-    }
+			// The rule must be an unknown rule
+			if (r.getType() == CSSRule.UNKNOWN_RULE) {
+				text_ = ((CSSUnknownRuleImpl) r).text_;
+			} else {
+				throw new DOMExceptionImpl(DOMException.INVALID_MODIFICATION_ERR,
+						DOMExceptionImpl.EXPECTING_FONT_FACE_RULE);
+			}
+		} catch (final CSSException e) {
+			throw new DOMExceptionImpl(DOMException.SYNTAX_ERR, DOMExceptionImpl.SYNTAX_ERROR, e.getMessage());
+		} catch (final IOException e) {
+			throw new DOMExceptionImpl(DOMException.SYNTAX_ERR, DOMExceptionImpl.SYNTAX_ERROR, e.getMessage());
+		}
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof CSSUnknownRule)) {
-            return false;
-        }
-        final CSSUnknownRule cur = (CSSUnknownRule) obj;
-        return super.equals(obj)
-            && LangUtils.equals(getCssText(), cur.getCssText());
-    }
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof CSSUnknownRule)) {
+			return false;
+		}
+		final CSSUnknownRule cur = (CSSUnknownRule) obj;
+		return super.equals(obj) && LangUtils.equals(getCssText(), cur.getCssText());
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = super.hashCode();
-        hash = LangUtils.hashCode(hash, text_);
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		int hash = super.hashCode();
+		hash = LangUtils.hashCode(hash, text_);
+		return hash;
+	}
 
 }

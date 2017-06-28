@@ -26,52 +26,57 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class PseudoElementSelectorImpl extends LocatableImpl implements ElementSelector, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 2913936296006875268L;
+	private static final long serialVersionUID = 2913936296006875268L;
 
-    private String localName_;
-    private boolean doubleColon_;
+	private String localName_;
+	private boolean doubleColon_;
 
-    public void setLocaleName(final String localName) {
-        localName_ = localName;
-    }
+	public void setLocaleName(final String localName) {
+		localName_ = localName;
+	}
 
-    public PseudoElementSelectorImpl(final String localName) {
-        setLocaleName(localName);
-    }
+	public PseudoElementSelectorImpl(final String localName) {
+		setLocaleName(localName);
+	}
 
-    public short getSelectorType() {
-        return Selector.SAC_PSEUDO_ELEMENT_SELECTOR;
-    }
+	@Override
+	public short getSelectorType() {
+		return Selector.SAC_PSEUDO_ELEMENT_SELECTOR;
+	}
 
-    public String getNamespaceURI() {
-        return null;
-    }
+	@Override
+	public String getNamespaceURI() {
+		return null;
+	}
 
-    public String getLocalName() {
-        return localName_;
-    }
+	@Override
+	public String getLocalName() {
+		return localName_;
+	}
 
-    public void prefixedWithDoubleColon() {
-        doubleColon_ = true;
-    }
+	public void prefixedWithDoubleColon() {
+		doubleColon_ = true;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        if (localName_ == null) {
-            return localName_;
-        }
-        return (doubleColon_ ? "::" : ":") + localName_;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		if (localName_ == null) {
+			return localName_;
+		}
+		return (doubleColon_ ? "::" : ":") + localName_;
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

@@ -14,7 +14,6 @@ package org.w3c.css.sac;
 import java.io.InputStream;
 import java.io.Reader;
 
-
 /**
  * A single input source for a CSS source.
  * 
@@ -44,19 +43,19 @@ public class InputSource {
 
 	/** The uri. */
 	private String uri;
-	
+
 	/** The byte stream. */
 	private InputStream byteStream;
-	
+
 	/** The encoding. */
 	private String encoding;
-	
+
 	/** The character stream. */
 	private Reader characterStream;
-	
+
 	/** The title. */
 	private String title;
-	
+
 	/** The media. */
 	private String media;
 
@@ -101,7 +100,8 @@ public class InputSource {
 	 * The character stream shall not include a byte order mark.
 	 * </p>
 	 *
-	 * @param characterStream the character stream
+	 * @param characterStream
+	 *            the character stream
 	 * @see #setURI
 	 * @see #setByteStream
 	 * @see #setCharacterStream

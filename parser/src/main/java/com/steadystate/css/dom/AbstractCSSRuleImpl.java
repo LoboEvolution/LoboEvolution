@@ -27,73 +27,74 @@ import com.steadystate.css.format.CSSFormatable;
  */
 public abstract class AbstractCSSRuleImpl extends CSSOMObjectImpl implements CSSFormatable {
 
-    private static final long serialVersionUID = 7829784704712797815L;
+	private static final long serialVersionUID = 7829784704712797815L;
 
-    private CSSStyleSheetImpl parentStyleSheet_;
-    private CSSRule parentRule_;
+	private CSSStyleSheetImpl parentStyleSheet_;
+	private CSSRule parentRule_;
 
-    protected CSSStyleSheetImpl getParentStyleSheetImpl() {
-        return parentStyleSheet_;
-    }
+	protected CSSStyleSheetImpl getParentStyleSheetImpl() {
+		return parentStyleSheet_;
+	}
 
-    public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
-        parentStyleSheet_ = parentStyleSheet;
-    }
+	public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
+		parentStyleSheet_ = parentStyleSheet;
+	}
 
-    public void setParentRule(final CSSRule parentRule) {
-        parentRule_ = parentRule;
-    }
+	public void setParentRule(final CSSRule parentRule) {
+		parentRule_ = parentRule;
+	}
 
-    public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
-        super();
-        parentStyleSheet_ = parentStyleSheet;
-        parentRule_ = parentRule;
-    }
+	public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
+		super();
+		parentStyleSheet_ = parentStyleSheet;
+		parentRule_ = parentRule;
+	}
 
-    public AbstractCSSRuleImpl() {
-        super();
-    }
+	public AbstractCSSRuleImpl() {
+		super();
+	}
 
-    public CSSStyleSheet getParentStyleSheet() {
-        return parentStyleSheet_;
-    }
+	public CSSStyleSheet getParentStyleSheet() {
+		return parentStyleSheet_;
+	}
 
-    public CSSRule getParentRule() {
-        return parentRule_;
-    }
+	public CSSRule getParentRule() {
+		return parentRule_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public abstract String getCssText(CSSFormat format);
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public abstract String getCssText(CSSFormat format);
 
-    /**
-     * Same as {@link #getCssText(CSSFormat)} but using the default format.
-     *
-     * @return the formated string
-     */
-    public String getCssText() {
-        return getCssText(null);
-    }
+	/**
+	 * Same as {@link #getCssText(CSSFormat)} but using the default format.
+	 *
+	 * @return the formated string
+	 */
+	public String getCssText() {
+		return getCssText(null);
+	}
 
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof CSSRule)) {
-            return false;
-        }
-        return super.equals(obj);
-        // don't use parentRule and parentStyleSheet in equals()
-        // recursive loop -> stack overflow!
-    }
+	@Override
+	public boolean equals(final Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!(obj instanceof CSSRule)) {
+			return false;
+		}
+		return super.equals(obj);
+		// don't use parentRule and parentStyleSheet in equals()
+		// recursive loop -> stack overflow!
+	}
 
-    @Override
-    public int hashCode() {
-        final int hash = super.hashCode();
-        // don't use parentRule and parentStyleSheet in hashCode()
-        // recursive loop -> stack overflow!
-        return hash;
-    }
+	@Override
+	public int hashCode() {
+		final int hash = super.hashCode();
+		// don't use parentRule and parentStyleSheet in hashCode()
+		// recursive loop -> stack overflow!
+		return hash;
+	}
 }

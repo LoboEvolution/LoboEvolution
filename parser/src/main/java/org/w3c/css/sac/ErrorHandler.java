@@ -11,7 +11,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * Basic interface for CSS error handlers.
  * 
@@ -58,9 +57,11 @@ public interface ErrorHandler {
 	 * process the document through to the end.
 	 * </p>
 	 *
-	 * @param exception            The warning information encapsulated in a CSS parse exception.
+	 * @param exception
+	 *            The warning information encapsulated in a CSS parse exception.
 	 * @see CSSParseException
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
 	 */
 	public void warning(CSSParseException exception) throws CSSException;
 
@@ -82,9 +83,11 @@ public interface ErrorHandler {
 	 * recommendation does not require it to do so.
 	 * </p>
 	 *
-	 * @param exception            The error information encapsulated in a CSS parse exception.
+	 * @param exception
+	 *            The error information encapsulated in a CSS parse exception.
 	 * @see CSSParseException
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
 	 */
 	public void error(CSSParseException exception) throws CSSException;
 
@@ -105,9 +108,11 @@ public interface ErrorHandler {
 	 * invoked.
 	 * </p>
 	 *
-	 * @param exception            The error information encapsulated in a CSS parse exception.
+	 * @param exception
+	 *            The error information encapsulated in a CSS parse exception.
 	 * @see CSSParseException
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
 	 */
 	public void fatalError(CSSParseException exception) throws CSSException;
 

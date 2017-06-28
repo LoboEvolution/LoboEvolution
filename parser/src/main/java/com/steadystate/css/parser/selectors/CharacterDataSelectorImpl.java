@@ -26,45 +26,49 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class CharacterDataSelectorImpl extends LocatableImpl
-                implements CharacterDataSelector, CSSFormatable, Serializable {
+		implements CharacterDataSelector, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 4635511567927852889L;
+	private static final long serialVersionUID = 4635511567927852889L;
 
-    private String data_;
+	private String data_;
 
-    public void setData(final String data) {
-        data_ = data;
-    }
+	public void setData(final String data) {
+		data_ = data;
+	}
 
-    public CharacterDataSelectorImpl(final String data) {
-        setData(data);
-    }
+	public CharacterDataSelectorImpl(final String data) {
+		setData(data);
+	}
 
-    public short getSelectorType() {
-        return Selector.SAC_CDATA_SECTION_NODE_SELECTOR;
-    }
+	@Override
+	public short getSelectorType() {
+		return Selector.SAC_CDATA_SECTION_NODE_SELECTOR;
+	}
 
-    public String getData() {
-        return data_;
-    }
+	@Override
+	public String getData() {
+		return data_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final String data = getData();
-        if (data == null) {
-            return "";
-        }
-        return data;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final String data = getData();
+		if (data == null) {
+			return "";
+		}
+		return data;
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

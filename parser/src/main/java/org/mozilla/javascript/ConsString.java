@@ -10,87 +10,98 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * <p>This class represents a string composed of two components, each of which
- * may be a <code>java.lang.String</code> or another ConsString.</p>
+ * <p>
+ * This class represents a string composed of two components, each of which may
+ * be a <code>java.lang.String</code> or another ConsString.
+ * </p>
  *
- * <p>This string representation is optimized for concatenation using the "+"
+ * <p>
+ * This string representation is optimized for concatenation using the "+"
  * operator. Instead of immediately copying both components to a new character
  * array, ConsString keeps references to the original components and only
  * converts them to a String if either toString() is called or a certain depth
- * level is reached.</p>
+ * level is reached.
+ * </p>
  *
- * <p>Note that instances of this class are only immutable if both parts are
- * immutable, i.e. either Strings or ConsStrings that are ultimately composed
- * of Strings.</p>
+ * <p>
+ * Note that instances of this class are only immutable if both parts are
+ * immutable, i.e. either Strings or ConsStrings that are ultimately composed of
+ * Strings.
+ * </p>
  *
- * <p>Both the name and the concept are borrowed from V8.</p>
+ * <p>
+ * Both the name and the concept are borrowed from V8.
+ * </p>
  */
 public class ConsString implements CharSequence, Serializable {
 
-    private static final long serialVersionUID = -8432806714471372570L;
+	private static final long serialVersionUID = -8432806714471372570L;
 
-    private CharSequence s1, s2;
-    private final int length;
-    private int depth;
+	private CharSequence s1, s2;
+	private final int length;
+	private int depth;
 
-    public ConsString(CharSequence str1, CharSequence str2) {
-        s1 = str1;
-        s2 = str2;
-        length = str1.length() + str2.length();
-        depth = 1;
-        if (str1 instanceof ConsString) {
-            depth += ((ConsString)str1).depth;
-        }
-        if (str2 instanceof ConsString) {
-            depth += ((ConsString)str2).depth;
-        }
-    }
+	public ConsString(CharSequence str1, CharSequence str2) {
+		s1 = str1;
+		s2 = str2;
+		length = str1.length() + str2.length();
+		depth = 1;
+		if (str1 instanceof ConsString) {
+			depth += ((ConsString) str1).depth;
+		}
+		if (str2 instanceof ConsString) {
+			depth += ((ConsString) str2).depth;
+		}
+	}
 
-    // Replace with string representation when serializing
-    private Object writeReplace() {
-        return this.toString();
-    }
-    
-    @Override
-    public String toString() {
-        return depth == 0 ? (String)s1 : flatten();
-    }
+	// Replace with string representation when serializing
+	private Object writeReplace() {
+		return this.toString();
+	}
 
-    private synchronized String flatten() {
-        if (depth > 0) {
-            StringBuilder b = new StringBuilder(length);
-            ArrayList<CharSequence> buffer = new ArrayList<CharSequence>();
-            buffer.add(s2);
-            buffer.add(s1);
-            while(!buffer.isEmpty()) {
-                CharSequence next = buffer.remove(buffer.size() - 1);
-                if (next instanceof ConsString) {
-                    ConsString casted = (ConsString) next;
-                    buffer.add(casted.s2);
-                    buffer.add(casted.s1);
-                } else {
-                    b.append(next);
-                }
-            }
-            s1 = b.toString();
-            s2 = "";
-            depth = 0;
-        }
-        return (String)s1;
-    }
+	@Override
+	public String toString() {
+		return depth == 0 ? (String) s1 : flatten();
+	}
 
-    public int length() {
-        return length;
-    }
+	private synchronized String flatten() {
+		if (depth > 0) {
+			StringBuilder b = new StringBuilder(length);
+			ArrayList<CharSequence> buffer = new ArrayList<CharSequence>();
+			buffer.add(s2);
+			buffer.add(s1);
+			while (!buffer.isEmpty()) {
+				CharSequence next = buffer.remove(buffer.size() - 1);
+				if (next instanceof ConsString) {
+					ConsString casted = (ConsString) next;
+					buffer.add(casted.s2);
+					buffer.add(casted.s1);
+				} else {
+					b.append(next);
+				}
+			}
+			s1 = b.toString();
+			s2 = "";
+			depth = 0;
+		}
+		return (String) s1;
+	}
 
-    public char charAt(int index) {
-        String str = depth == 0 ? (String)s1 : flatten();
-        return str.charAt(index);
-    }
+	@Override
+	public int length() {
+		return length;
+	}
 
-    public CharSequence subSequence(int start, int end) {
-        String str = depth == 0 ? (String)s1 : flatten();
-        return str.substring(start, end);
-    }
+	@Override
+	public char charAt(int index) {
+		String str = depth == 0 ? (String) s1 : flatten();
+		return str.charAt(index);
+	}
+
+	@Override
+	public CharSequence subSequence(int start, int end) {
+		String str = depth == 0 ? (String) s1 : flatten();
+		return str.substring(start, end);
+	}
 
 }

@@ -18,31 +18,30 @@ package com.steadystate.css.parser.selectors;
 import com.steadystate.css.format.CSSFormat;
 
 /**
- * Special ElementSelectorImpl used by the parser at all the places where
- * the parser inserts a '*' selector. The selector will be ignored when
- * generating output.
- * This is done to be backward compatible.
+ * Special ElementSelectorImpl used by the parser at all the places where the
+ * parser inserts a '*' selector. The selector will be ignored when generating
+ * output. This is done to be backward compatible.
  *
  * @author rbri
  */
 public class SyntheticElementSelectorImpl extends ElementSelectorImpl {
 
-    private static final long serialVersionUID = 3426191759125755798L;
+	private static final long serialVersionUID = 3426191759125755798L;
 
-    public SyntheticElementSelectorImpl() {
-        super(null);
-    }
+	public SyntheticElementSelectorImpl() {
+		super(null);
+	}
 
-    @Override
-    public void setLocalName(final String localName) {
-        throw new RuntimeException("Method setLocalName is not supported for SyntheticElementSelectorImpl.");
-    }
+	@Override
+	public void setLocalName(final String localName) {
+		throw new RuntimeException("Method setLocalName is not supported for SyntheticElementSelectorImpl.");
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getCssText(final CSSFormat format) {
-        return "";
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		return "";
+	}
 }

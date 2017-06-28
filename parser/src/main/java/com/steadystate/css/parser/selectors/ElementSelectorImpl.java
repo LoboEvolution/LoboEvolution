@@ -25,48 +25,53 @@ import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class ElementSelectorImpl extends LocatableImpl implements ElementSelector, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 7507121069969409061L;
+	private static final long serialVersionUID = 7507121069969409061L;
 
-    private String localName_;
+	private String localName_;
 
-    public void setLocalName(final String localName) {
-        localName_ = localName;
-    }
+	public void setLocalName(final String localName) {
+		localName_ = localName;
+	}
 
-    public ElementSelectorImpl(final String localName) {
-        localName_ = localName;
-    }
+	public ElementSelectorImpl(final String localName) {
+		localName_ = localName;
+	}
 
-    public short getSelectorType() {
-        return Selector.SAC_ELEMENT_NODE_SELECTOR;
-    }
+	@Override
+	public short getSelectorType() {
+		return Selector.SAC_ELEMENT_NODE_SELECTOR;
+	}
 
-    public String getNamespaceURI() {
-        return null;
-    }
+	@Override
+	public String getNamespaceURI() {
+		return null;
+	}
 
-    public String getLocalName() {
-        return localName_;
-    }
+	@Override
+	public String getLocalName() {
+		return localName_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final String localeName = getLocalName();
-        if (localeName == null) {
-            return "*";
-        }
-        return localeName;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final String localeName = getLocalName();
+		if (localeName == null) {
+			return "*";
+		}
+		return localeName;
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

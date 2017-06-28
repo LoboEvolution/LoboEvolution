@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Interface ConditionalSelector.
  *

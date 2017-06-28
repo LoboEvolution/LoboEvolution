@@ -27,79 +27,83 @@ import com.steadystate.css.parser.Locatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class DirectAdjacentSelectorImpl extends LocatableImpl implements SiblingSelector, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = -7328602345833826516L;
+	private static final long serialVersionUID = -7328602345833826516L;
 
-    private short nodeType_;
-    private Selector selector_;  // child
-    private SimpleSelector siblingSelector_; // direct adjacent
+	private short nodeType_;
+	private Selector selector_; // child
+	private SimpleSelector siblingSelector_; // direct adjacent
 
-    public void setNodeType(final short nodeType) {
-        nodeType_ = nodeType;
-    }
+	public void setNodeType(final short nodeType) {
+		nodeType_ = nodeType;
+	}
 
-    public void setSelector(final Selector child) {
-        selector_ = child;
-        if (child instanceof Locatable) {
-            setLocator(((Locatable) child).getLocator());
-        }
-        else if (child == null) {
-            setLocator(null);
-        }
-    }
+	public void setSelector(final Selector child) {
+		selector_ = child;
+		if (child instanceof Locatable) {
+			setLocator(((Locatable) child).getLocator());
+		} else if (child == null) {
+			setLocator(null);
+		}
+	}
 
-    public void setSiblingSelector(final SimpleSelector directAdjacent) {
-        siblingSelector_ = directAdjacent;
-    }
+	public void setSiblingSelector(final SimpleSelector directAdjacent) {
+		siblingSelector_ = directAdjacent;
+	}
 
-    public DirectAdjacentSelectorImpl(final short nodeType,
-            final Selector child, final SimpleSelector directAdjacent) {
-        setNodeType(nodeType);
-        setSelector(child);
-        setSiblingSelector(directAdjacent);
-    }
+	public DirectAdjacentSelectorImpl(final short nodeType, final Selector child, final SimpleSelector directAdjacent) {
+		setNodeType(nodeType);
+		setSelector(child);
+		setSiblingSelector(directAdjacent);
+	}
 
-    public short getNodeType() {
-        return nodeType_;
-    }
+	@Override
+	public short getNodeType() {
+		return nodeType_;
+	}
 
-    public short getSelectorType() {
-        return Selector.SAC_DIRECT_ADJACENT_SELECTOR;
-    }
+	@Override
+	public short getSelectorType() {
+		return Selector.SAC_DIRECT_ADJACENT_SELECTOR;
+	}
 
-    public Selector getSelector() {
-        return selector_;
-    }
+	@Override
+	public Selector getSelector() {
+		return selector_;
+	}
 
-    public SimpleSelector getSiblingSelector() {
-        return siblingSelector_;
-    }
+	@Override
+	public SimpleSelector getSiblingSelector() {
+		return siblingSelector_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final StringBuilder sb = new StringBuilder();
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final StringBuilder sb = new StringBuilder();
 
-        if (null != selector_) {
-            sb.append(((CSSFormatable) selector_).getCssText(format));
-        }
+		if (null != selector_) {
+			sb.append(((CSSFormatable) selector_).getCssText(format));
+		}
 
-        sb.append(" + ");
+		sb.append(" + ");
 
-        if (null != siblingSelector_) {
-            sb.append(((CSSFormatable) siblingSelector_).getCssText(format));
-        }
+		if (null != siblingSelector_) {
+			sb.append(((CSSFormatable) siblingSelector_).getCssText(format));
+		}
 
-        return sb.toString();
-    }
+		return sb.toString();
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

@@ -25,68 +25,75 @@ import com.steadystate.css.format.CSSFormatable;
 import com.steadystate.css.parser.LocatableImpl;
 
 /**
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class AttributeConditionImpl extends LocatableImpl implements AttributeCondition, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 9035418830958954213L;
+	private static final long serialVersionUID = 9035418830958954213L;
 
-    private String localName_;
-    private String value_;
-    private boolean specified_;
+	private String localName_;
+	private String value_;
+	private boolean specified_;
 
-    public void setLocaleName(final String localName) {
-        localName_ = localName;
-    }
+	public void setLocaleName(final String localName) {
+		localName_ = localName;
+	}
 
-    public void setValue(final String value) {
-        value_ = value;
-    }
+	public void setValue(final String value) {
+		value_ = value;
+	}
 
-    public void setSpecified(final boolean specified) {
-        specified_ = specified;
-    }
+	public void setSpecified(final boolean specified) {
+		specified_ = specified;
+	}
 
-    public AttributeConditionImpl(final String localName, final String value, final boolean specified) {
-        setLocaleName(localName);
-        setValue(value);
-        setSpecified(specified);
-    }
+	public AttributeConditionImpl(final String localName, final String value, final boolean specified) {
+		setLocaleName(localName);
+		setValue(value);
+		setSpecified(specified);
+	}
 
-    public short getConditionType() {
-        return Condition.SAC_ATTRIBUTE_CONDITION;
-    }
+	@Override
+	public short getConditionType() {
+		return Condition.SAC_ATTRIBUTE_CONDITION;
+	}
 
-    public String getNamespaceURI() {
-        return null;
-    }
+	@Override
+	public String getNamespaceURI() {
+		return null;
+	}
 
-    public String getLocalName() {
-        return localName_;
-    }
+	@Override
+	public String getLocalName() {
+		return localName_;
+	}
 
-    public boolean getSpecified() {
-        return specified_;
-    }
+	@Override
+	public boolean getSpecified() {
+		return specified_;
+	}
 
-    public String getValue() {
-        return value_;
-    }
+	@Override
+	public String getValue() {
+		return value_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final String value = getValue();
-        if (value != null) {
-            return "[" + getLocalName() + "=\"" + value + "\"]";
-        }
-        return "[" + getLocalName() + "]";
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final String value = getValue();
+		if (value != null) {
+			return "[" + getLocalName() + "=\"" + value + "\"]";
+		}
+		return "[" + getLocalName() + "]";
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

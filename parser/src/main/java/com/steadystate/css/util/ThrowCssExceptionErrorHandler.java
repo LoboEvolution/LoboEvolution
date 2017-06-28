@@ -21,37 +21,41 @@ import org.w3c.css.sac.CSSParseException;
 import org.w3c.css.sac.ErrorHandler;
 
 /**
- * Helper implementation of {@link ErrorHandler}, which throws CssException in case of problems.
+ * Helper implementation of {@link ErrorHandler}, which throws CssException in
+ * case of problems.
  *
  * @author rbri
  * @see ErrorHandler
  */
 public class ThrowCssExceptionErrorHandler implements ErrorHandler, Serializable {
-    private static final long serialVersionUID = -3933638774901855095L;
+	private static final long serialVersionUID = -3933638774901855095L;
 
-    /**
-     * Singleton.
-     */
-    public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();
+	/**
+	 * Singleton.
+	 */
+	public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();
 
-    /**
-     * {@inheritDoc}
-     */
-    public void error(final CSSParseException exception) {
-        throw exception;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void error(final CSSParseException exception) {
+		throw exception;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public void fatalError(final CSSParseException exception) {
-        throw exception;
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void fatalError(final CSSParseException exception) {
+		throw exception;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public void warning(final CSSParseException exception) {
-        // ignore warnings
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void warning(final CSSParseException exception) {
+		// ignore warnings
+	}
 }

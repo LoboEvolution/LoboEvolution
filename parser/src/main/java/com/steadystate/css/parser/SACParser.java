@@ -24,7 +24,7 @@ import org.w3c.css.sac.Parser;
  */
 public interface SACParser extends Parser {
 
-    void setIeStarHackAccepted(boolean accepted);
+	void setIeStarHackAccepted(boolean accepted);
 
-    boolean isIeStarHackAccepted();
+	boolean isIeStarHackAccepted();
 }

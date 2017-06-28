@@ -26,49 +26,53 @@ import com.steadystate.css.parser.LocatableImpl;
 
 /**
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class LangConditionImpl extends LocatableImpl implements LangCondition, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = 1701599531953055387L;
+	private static final long serialVersionUID = 1701599531953055387L;
 
-    private String lang_;
+	private String lang_;
 
-    public void setLang(final String lang) {
-        lang_ = lang;
-    }
+	public void setLang(final String lang) {
+		lang_ = lang;
+	}
 
-    public LangConditionImpl(final String lang) {
-        setLang(lang);
-    }
+	public LangConditionImpl(final String lang) {
+		setLang(lang);
+	}
 
-    public short getConditionType() {
-        return Condition.SAC_LANG_CONDITION;
-    }
+	@Override
+	public short getConditionType() {
+		return Condition.SAC_LANG_CONDITION;
+	}
 
-    public String getLang() {
-        return lang_;
-    }
+	@Override
+	public String getLang() {
+		return lang_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final StringBuilder result = new StringBuilder();
-        result.append(":lang(");
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final StringBuilder result = new StringBuilder();
+		result.append(":lang(");
 
-        final String lang = getLang();
-        if (null != lang) {
-            result.append(lang);
-        }
+		final String lang = getLang();
+		if (null != lang) {
+			result.append(lang);
+		}
 
-        result.append(")");
-        return result.toString();
-    }
+		result.append(")");
+		return result.toString();
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

@@ -14,7 +14,6 @@ package org.w3c.css.sac;
 import java.io.IOException;
 import java.util.Locale;
 
-
 /**
  * Basic interface for CSS (Simple API for CSS) parsers.
  * 
@@ -54,10 +53,12 @@ public interface Parser {
 	 * the middle of a parse.
 	 * </p>
 	 *
-	 * @param locale            A Java Locale object.
+	 * @param locale
+	 *            A Java Locale object.
 	 * @see CSSException
 	 * @see CSSParseException
-	 * @exception CSSException                Throws an exception (using the previous or default locale)
+	 * @exception CSSException
+	 *                Throws an exception (using the previous or default locale)
 	 *                if the requested locale is not supported.
 	 */
 	public void setLocale(Locale locale) throws CSSException;
@@ -85,14 +86,16 @@ public interface Parser {
 	/**
 	 * Sets the selector factory.
 	 *
-	 * @param selectorFactory the new selector factory
+	 * @param selectorFactory
+	 *            the new selector factory
 	 */
 	public void setSelectorFactory(SelectorFactory selectorFactory);
 
 	/**
 	 * Sets the condition factory.
 	 *
-	 * @param conditionFactory the new condition factory
+	 * @param conditionFactory
+	 *            the new condition factory
 	 */
 	public void setConditionFactory(ConditionFactory conditionFactory);
 
@@ -134,16 +137,18 @@ public interface Parser {
 	 * Parser object, possibly with a different input source.
 	 * </p>
 	 *
-	 * @param source            The input source for the top-level of the CSS document.
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param source
+	 *            The input source for the top-level of the CSS document.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see InputSource
 	 * @see #parseStyleSheet(java.lang.String)
 	 * @see #setDocumentHandler
 	 * @see #setErrorHandler
 	 */
-	public void parseStyleSheet(InputSource source) throws CSSException,
-			IOException;
+	public void parseStyleSheet(InputSource source) throws CSSException, IOException;
 
 	/**
 	 * Parse a CSS document from a URI.
@@ -162,9 +167,12 @@ public interface Parser {
 	 * the parser.
 	 * </p>
 	 *
-	 * @param uri            The URI.
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param uri
+	 *            The URI.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see #parseStyleSheet(InputSource)
 	 */
 	public void parseStyleSheet(String uri) throws CSSException, IOException;
@@ -172,19 +180,24 @@ public interface Parser {
 	/**
 	 * Parse a CSS style declaration (without '{' and '}').
 	 *
-	 * @param source            The declaration.
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param source
+	 *            The declaration.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public void parseStyleDeclaration(InputSource source) throws CSSException,
-			IOException;
+	public void parseStyleDeclaration(InputSource source) throws CSSException, IOException;
 
 	/**
 	 * Parse a CSS rule.
 	 *
-	 * @param source the source
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param source
+	 *            the source
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	public void parseRule(InputSource source) throws CSSException, IOException;
 
@@ -202,33 +215,39 @@ public interface Parser {
 	/**
 	 * Parse a comma separated list of selectors.
 	 *
-	 * @param source the source
+	 * @param source
+	 *            the source
 	 * @return the selector list
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public SelectorList parseSelectors(InputSource source) throws CSSException,
-			IOException;
+	public SelectorList parseSelectors(InputSource source) throws CSSException, IOException;
 
 	/**
 	 * Parse a CSS property value.
 	 *
-	 * @param source the source
+	 * @param source
+	 *            the source
 	 * @return the lexical unit
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public LexicalUnit parsePropertyValue(InputSource source)
-			throws CSSException, IOException;
+	public LexicalUnit parsePropertyValue(InputSource source) throws CSSException, IOException;
 
 	/**
 	 * Parse a CSS priority value (e.g. "!important").
 	 *
-	 * @param source the source
+	 * @param source
+	 *            the source
 	 * @return true, if successful
-	 * @exception CSSException                Any CSS exception, possibly wrapping another exception.
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @exception CSSException
+	 *                Any CSS exception, possibly wrapping another exception.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
-	public boolean parsePriority(InputSource source) throws CSSException,
-			IOException;
+	public boolean parsePriority(InputSource source) throws CSSException, IOException;
 }

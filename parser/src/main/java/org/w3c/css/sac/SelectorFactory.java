@@ -13,7 +13,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * A factory for creating Selector objects.
  *
@@ -34,8 +33,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	ConditionalSelector createConditionalSelector(SimpleSelector selector,
-			Condition condition) throws CSSException;
+	ConditionalSelector createConditionalSelector(SimpleSelector selector, Condition condition) throws CSSException;
 
 	/**
 	 * Creates an any node selector.
@@ -64,8 +62,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	NegativeSelector createNegativeSelector(SimpleSelector selector)
-			throws CSSException;
+	NegativeSelector createNegativeSelector(SimpleSelector selector) throws CSSException;
 
 	/**
 	 * Creates an element selector.
@@ -74,16 +71,15 @@ public interface SelectorFactory {
 	 *            the <a href="http://www.w3.org/TR/REC-xml-names/#dt-NSName">
 	 *            namespace URI</a> of the element selector.
 	 * @param tagName
-	 *            the <a
-	 *            href="http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local
+	 *            the <a href=
+	 *            "http://www.w3.org/TR/REC-xml-names/#NT-LocalPart">local
 	 *            part</a> of the element name. <code>NULL</code> if this
 	 *            element selector can match any element.
 	 * @return the element selector
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	ElementSelector createElementSelector(String namespaceURI, String tagName)
-			throws CSSException;
+	ElementSelector createElementSelector(String namespaceURI, String tagName) throws CSSException;
 
 	/**
 	 * Creates a text node selector.
@@ -94,8 +90,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	CharacterDataSelector createTextNodeSelector(String data)
-			throws CSSException;
+	CharacterDataSelector createTextNodeSelector(String data) throws CSSException;
 
 	/**
 	 * Creates a cdata section node selector.
@@ -106,8 +101,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	CharacterDataSelector createCDataSectionSelector(String data)
-			throws CSSException;
+	CharacterDataSelector createCDataSectionSelector(String data) throws CSSException;
 
 	/**
 	 * Creates a processing instruction node selector.
@@ -120,8 +114,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	ProcessingInstructionSelector createProcessingInstructionSelector(
-			String target, String data) throws CSSException;
+	ProcessingInstructionSelector createProcessingInstructionSelector(String target, String data) throws CSSException;
 
 	/**
 	 * Creates a comment node selector.
@@ -132,20 +125,21 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	CharacterDataSelector createCommentSelector(String data)
-			throws CSSException;
+	CharacterDataSelector createCommentSelector(String data) throws CSSException;
 
 	/**
 	 * Creates a pseudo element selector.
 	 *
-	 * @param namespaceURI the namespace uri
-	 * @param pseudoName            the pseudo element name. <code>NULL</code> if this element
+	 * @param namespaceURI
+	 *            the namespace uri
+	 * @param pseudoName
+	 *            the pseudo element name. <code>NULL</code> if this element
 	 *            selector can match any pseudo element.
 	 * @return the element selector
-	 * @exception CSSException                If this selector is not supported.
+	 * @exception CSSException
+	 *                If this selector is not supported.
 	 */
-	ElementSelector createPseudoElementSelector(String namespaceURI,
-			String pseudoName) throws CSSException;
+	ElementSelector createPseudoElementSelector(String namespaceURI, String pseudoName) throws CSSException;
 
 	/**
 	 * Creates a descendant selector.
@@ -158,8 +152,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	DescendantSelector createDescendantSelector(Selector parent,
-			SimpleSelector descendant) throws CSSException;
+	DescendantSelector createDescendantSelector(Selector parent, SimpleSelector descendant) throws CSSException;
 
 	/**
 	 * Creates a child selector.
@@ -172,8 +165,7 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	DescendantSelector createChildSelector(Selector parent, SimpleSelector child)
-			throws CSSException;
+	DescendantSelector createChildSelector(Selector parent, SimpleSelector child) throws CSSException;
 
 	/**
 	 * Creates a sibling selector.
@@ -189,6 +181,6 @@ public interface SelectorFactory {
 	 * @exception CSSException
 	 *                If this selector is not supported.
 	 */
-	SiblingSelector createDirectAdjacentSelector(short nodeType,
-			Selector child, SimpleSelector directAdjacent) throws CSSException;
+	SiblingSelector createDirectAdjacentSelector(short nodeType, Selector child, SimpleSelector directAdjacent)
+			throws CSSException;
 }

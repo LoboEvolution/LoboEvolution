@@ -8,7 +8,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * This is a lexical unit for CSS values.
  * <p>
@@ -24,37 +23,37 @@ public interface LexicalUnit {
 
 	/** ,. */
 	public static final short SAC_OPERATOR_COMMA = 0;
-	
+
 	/** +. */
 	public static final short SAC_OPERATOR_PLUS = 1;
-	
+
 	/** -. */
 	public static final short SAC_OPERATOR_MINUS = 2;
-	
+
 	/** *. */
 	public static final short SAC_OPERATOR_MULTIPLY = 3;
-	
+
 	/** /. */
 	public static final short SAC_OPERATOR_SLASH = 4;
-	
+
 	/** %. */
 	public static final short SAC_OPERATOR_MOD = 5;
-	
+
 	/** ^. */
 	public static final short SAC_OPERATOR_EXP = 6;
-	
+
 	/** &lt;. */
 	public static final short SAC_OPERATOR_LT = 7;
-	
+
 	/** &gt;. */
 	public static final short SAC_OPERATOR_GT = 8;
-	
+
 	/** &lt;=. */
 	public static final short SAC_OPERATOR_LE = 9;
-	
+
 	/** &gt;=. */
 	public static final short SAC_OPERATOR_GE = 10;
-	
+
 	/** ~. */
 	public static final short SAC_OPERATOR_TILDE = 11;
 

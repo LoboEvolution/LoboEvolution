@@ -8,10 +8,9 @@
  */
 package org.w3c.css.sac;
 
-
 /**
- * This simple matches a <a
- * href="http://www.w3.org/TR/REC-xml#sec-pi">processing instruction</a>.
+ * This simple matches a
+ * <a href="http://www.w3.org/TR/REC-xml#sec-pi">processing instruction</a>.
  *
  * @author Philippe Le Hegaret
  * @version $Revision: 477010 $

@@ -28,65 +28,71 @@ import com.steadystate.css.parser.LocatableImpl;
  * @author Ahmed Ashour
  */
 public class SuffixAttributeConditionImpl extends LocatableImpl
-                implements AttributeCondition, CSSFormatable, Serializable {
+		implements AttributeCondition, CSSFormatable, Serializable {
 
-    private static final long serialVersionUID = -957389472252773926L;
+	private static final long serialVersionUID = -957389472252773926L;
 
-    private String localName_;
-    private String value_;
-    private boolean specified_;
+	private String localName_;
+	private String value_;
+	private boolean specified_;
 
-    public void setLocalName(final String localName) {
-        localName_ = localName;
-    }
+	public void setLocalName(final String localName) {
+		localName_ = localName;
+	}
 
-    public void setValue(final String value) {
-        value_ = value;
-    }
+	public void setValue(final String value) {
+		value_ = value;
+	}
 
-    public void setSpecified(final boolean specified) {
-        specified_ = specified;
-    }
+	public void setSpecified(final boolean specified) {
+		specified_ = specified;
+	}
 
-    public SuffixAttributeConditionImpl(final String localName, final String value, final boolean specified) {
-        setLocalName(localName);
-        setValue(value);
-        setSpecified(specified);
-    }
+	public SuffixAttributeConditionImpl(final String localName, final String value, final boolean specified) {
+		setLocalName(localName);
+		setValue(value);
+		setSpecified(specified);
+	}
 
-    public short getConditionType() {
-        return Condition.SAC_ATTRIBUTE_CONDITION; //for now
-    }
+	@Override
+	public short getConditionType() {
+		return Condition.SAC_ATTRIBUTE_CONDITION; // for now
+	}
 
-    public String getNamespaceURI() {
-        return null;
-    }
+	@Override
+	public String getNamespaceURI() {
+		return null;
+	}
 
-    public String getLocalName() {
-        return localName_;
-    }
+	@Override
+	public String getLocalName() {
+		return localName_;
+	}
 
-    public boolean getSpecified() {
-        return specified_;
-    }
+	@Override
+	public boolean getSpecified() {
+		return specified_;
+	}
 
-    public String getValue() {
-        return value_;
-    }
+	@Override
+	public String getValue() {
+		return value_;
+	}
 
-    /**
-     * {@inheritDoc}
-     */
-    public String getCssText(final CSSFormat format) {
-        final String value = getValue();
-        if (value != null) {
-            return "[" + getLocalName() + "$=\"" + value + "\"]";
-        }
-        return "[" + getLocalName() + "]";
-    }
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public String getCssText(final CSSFormat format) {
+		final String value = getValue();
+		if (value != null) {
+			return "[" + getLocalName() + "$=\"" + value + "\"]";
+		}
+		return "[" + getLocalName() + "]";
+	}
 
-    @Override
-    public String toString() {
-        return getCssText(null);
-    }
+	@Override
+	public String toString() {
+		return getCssText(null);
+	}
 }

@@ -25,121 +25,131 @@ import java.io.Writer;
  * @author rbri
  */
 public final class Output {
-    private static final String NEW_LINE = System.getProperty("line.separator");
+	private static final String NEW_LINE = System.getProperty("line.separator");
 
-    private Writer writer_;
-    private StringBuffer currentIndent_;
-    private boolean afterNewLine_;
-    private final String indent_;
+	private Writer writer_;
+	private StringBuffer currentIndent_;
+	private boolean afterNewLine_;
+	private final String indent_;
 
-    /**
-     * Constructor.
-     *
-     * @param aWriter the writer to write to
-     * @param anIndent String to be used for indenting (e.g. "", " ", " ", "\t")
-     */
-    public Output(final Writer aWriter, final String anIndent) {
-        writer_ = new BufferedWriter(aWriter);
-        indent_ = anIndent;
-        currentIndent_ = new StringBuffer();
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param aWriter
+	 *            the writer to write to
+	 * @param anIndent
+	 *            String to be used for indenting (e.g. "", " ", " ", "\t")
+	 */
+	public Output(final Writer aWriter, final String anIndent) {
+		writer_ = new BufferedWriter(aWriter);
+		indent_ = anIndent;
+		currentIndent_ = new StringBuffer();
+	}
 
-    /**
-     * Write the char.
-     *
-     * @param aChar the char to be written
-     * @return this (for convenience)
-     * @throws IOException in case of problems
-     */
-    public Output print(final char aChar) throws IOException {
-        writeIndentIfNeeded();
-        writer_.write(aChar);
-        return this;
-    }
+	/**
+	 * Write the char.
+	 *
+	 * @param aChar
+	 *            the char to be written
+	 * @return this (for convenience)
+	 * @throws IOException
+	 *             in case of problems
+	 */
+	public Output print(final char aChar) throws IOException {
+		writeIndentIfNeeded();
+		writer_.write(aChar);
+		return this;
+	}
 
-    /**
-     * Write the String.
-     *
-     * @param aString the string to be written
-     * @return this (for convenience)
-     * @throws IOException in case of problems
-     */
-    public Output print(final String aString) throws IOException {
-        if (null != aString) {
-            writeIndentIfNeeded();
-            writer_.write(aString);
-        }
-        return this;
-    }
+	/**
+	 * Write the String.
+	 *
+	 * @param aString
+	 *            the string to be written
+	 * @return this (for convenience)
+	 * @throws IOException
+	 *             in case of problems
+	 */
+	public Output print(final String aString) throws IOException {
+		if (null != aString) {
+			writeIndentIfNeeded();
+			writer_.write(aString);
+		}
+		return this;
+	}
 
-    /**
-     * Write the string on a new line.
-     *
-     * @param aString the string to be written
-     * @return this (for convenience)
-     * @throws IOException in case of problems
-     */
-    public Output println(final String aString) throws IOException {
-        writeIndentIfNeeded();
-        writer_.write(aString);
-        writer_.write(NEW_LINE);
-        afterNewLine_ = true;
-        return this;
-    }
+	/**
+	 * Write the string on a new line.
+	 *
+	 * @param aString
+	 *            the string to be written
+	 * @return this (for convenience)
+	 * @throws IOException
+	 *             in case of problems
+	 */
+	public Output println(final String aString) throws IOException {
+		writeIndentIfNeeded();
+		writer_.write(aString);
+		writer_.write(NEW_LINE);
+		afterNewLine_ = true;
+		return this;
+	}
 
-    /**
-     * Start a newline.
-     *
-     * @return this (for convenience)
-     * @throws IOException in case of problems
-     */
-    public Output println() throws IOException {
-        writer_.write(NEW_LINE);
-        afterNewLine_ = true;
-        return this;
-    }
+	/**
+	 * Start a newline.
+	 *
+	 * @return this (for convenience)
+	 * @throws IOException
+	 *             in case of problems
+	 */
+	public Output println() throws IOException {
+		writer_.write(NEW_LINE);
+		afterNewLine_ = true;
+		return this;
+	}
 
-    /**
-     * Flushes the output.
-     *
-     * @return this (for convenience)
-     * @throws IOException in case of error
-     */
-    public Output flush() throws IOException {
-        writer_.flush();
-        return this;
-    }
+	/**
+	 * Flushes the output.
+	 *
+	 * @return this (for convenience)
+	 * @throws IOException
+	 *             in case of error
+	 */
+	public Output flush() throws IOException {
+		writer_.flush();
+		return this;
+	}
 
-    /**
-     * Indent the following.
-     *
-     * @return this (for convenience)
-     */
-    public Output indent() {
-        currentIndent_.append(indent_);
-        return this;
-    }
+	/**
+	 * Indent the following.
+	 *
+	 * @return this (for convenience)
+	 */
+	public Output indent() {
+		currentIndent_.append(indent_);
+		return this;
+	}
 
-    /**
-     * Clear the indent.
-     *
-     * @return this (for convenience)
-     */
-    public Output unindent() {
-        currentIndent_.setLength(Math.max(0, currentIndent_.length() - indent_.length()));
-        return this;
-    }
+	/**
+	 * Clear the indent.
+	 *
+	 * @return this (for convenience)
+	 */
+	public Output unindent() {
+		currentIndent_.setLength(Math.max(0, currentIndent_.length() - indent_.length()));
+		return this;
+	}
 
-    /**
-     * Helper to write a newline.
-     *
-     * @throws IOException
-     *             in case of problems
-     */
-    private void writeIndentIfNeeded() throws IOException {
-        if (afterNewLine_) {
-            writer_.write(currentIndent_.toString());
-            afterNewLine_ = false;
-        }
-    }
+	/**
+	 * Helper to write a newline.
+	 *
+	 * @throws IOException
+	 *             in case of problems
+	 */
+	private void writeIndentIfNeeded() throws IOException {
+		if (afterNewLine_) {
+			writer_.write(currentIndent_.toString());
+			afterNewLine_ = false;
+		}
+	}
 }

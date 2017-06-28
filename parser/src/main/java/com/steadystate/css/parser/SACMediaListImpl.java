@@ -25,47 +25,50 @@ import com.steadystate.css.parser.media.MediaQuery;
 /**
  * Implementation of {@link SACMediaList}.
  *
- * @author <a href="mailto:davidsch@users.sourceforge.net">David Schweinsberg</a>
+ * @author <a href="mailto:davidsch@users.sourceforge.net">David
+ *         Schweinsberg</a>
  * @author rbri
  */
 public class SACMediaListImpl extends LocatableImpl implements SACMediaList {
 
-    private final List<MediaQuery> mediaQueries_;
+	private final List<MediaQuery> mediaQueries_;
 
-    public SACMediaListImpl() {
-        mediaQueries_ = new ArrayList<MediaQuery>();
-    }
+	public SACMediaListImpl() {
+		mediaQueries_ = new ArrayList<MediaQuery>();
+	}
 
-    public int getLength() {
-        return mediaQueries_.size();
-    }
+	@Override
+	public int getLength() {
+		return mediaQueries_.size();
+	}
 
-    public String item(final int index) {
-        return mediaQuery(index).getMedia();
-    }
+	@Override
+	public String item(final int index) {
+		return mediaQuery(index).getMedia();
+	}
 
-    public MediaQuery mediaQuery(final int index) {
-        return mediaQueries_.get(index);
-    }
+	public MediaQuery mediaQuery(final int index) {
+		return mediaQueries_.get(index);
+	}
 
-    public void add(final String s) {
-        add(new MediaQuery(s));
-    }
+	public void add(final String s) {
+		add(new MediaQuery(s));
+	}
 
-    public void add(final MediaQuery mediaQuery) {
-        mediaQueries_.add(mediaQuery);
-    }
+	public void add(final MediaQuery mediaQuery) {
+		mediaQueries_.add(mediaQuery);
+	}
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        final int len = getLength();
-        for (int i = 0; i < len; i++) {
-            sb.append(item(i));
-            if (i < len - 1) {
-                sb.append(", ");
-            }
-        }
-        return sb.toString();
-    }
+	@Override
+	public String toString() {
+		final StringBuilder sb = new StringBuilder();
+		final int len = getLength();
+		for (int i = 0; i < len; i++) {
+			sb.append(item(i));
+			if (i < len - 1) {
+				sb.append(", ");
+			}
+		}
+		return sb.toString();
+	}
 }

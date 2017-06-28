@@ -11,7 +11,6 @@
  */
 package org.w3c.css.sac;
 
-
 /**
  * The Class CSSException.
  *
@@ -72,7 +71,8 @@ public class CSSException extends RuntimeException {
 	/**
 	 * Creates a new CSSException.
 	 *
-	 * @param s the s
+	 * @param s
+	 *            the s
 	 */
 	public CSSException(String s) {
 		this.code = SAC_UNSPECIFIED_ERR;
@@ -104,9 +104,12 @@ public class CSSException extends RuntimeException {
 	 * Creates a new CSSException with an embeded exception and a specified
 	 * message.
 	 *
-	 * @param code            the specified code.
-	 * @param s the s
-	 * @param e            the embeded exception.
+	 * @param code
+	 *            the specified code.
+	 * @param s
+	 *            the s
+	 * @param e
+	 *            the embeded exception.
 	 */
 	public CSSException(short code, String s, Exception e) {
 		this.code = code;
@@ -120,6 +123,7 @@ public class CSSException extends RuntimeException {
 	 * @return the detail message of this Throwable, or null if this Throwable
 	 *         does not have a detail message.
 	 */
+	@Override
 	public String getMessage() {
 		if (s != null) {
 			return s;

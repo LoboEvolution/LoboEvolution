@@ -24,7 +24,7 @@ import org.w3c.css.sac.Locator;
  */
 public interface Locatable {
 
-    Locator getLocator();
+	Locator getLocator();
 
-    void setLocator(Locator locator);
+	void setLocator(Locator locator);
 }
