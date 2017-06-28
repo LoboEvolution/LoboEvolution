@@ -21,8 +21,6 @@
 package org.lobobrowser.html.control;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,18 +62,15 @@ public class InputDatePickerControl extends BaseInputControl {
 			datePattern = modelNode.getPattern();
 		}
 
-		picker.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Calendar selectedValue = (Calendar) picker.getModel().getValue();
-				Date selectedDate = selectedValue.getTime();
-				SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
-				modelNode.setValue(dateFormatter.format(selectedDate));
-				if (isMin(selectedDate) || isMax(selectedDate)) {
-					picker.setBorder(BorderFactory.createLineBorder(Color.RED));
-				} else {
-					picker.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-				}
+		picker.addActionListener(e -> {
+			Calendar selectedValue = (Calendar) picker.getModel().getValue();
+			Date selectedDate = selectedValue.getTime();
+			SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
+			modelNode.setValue(dateFormatter.format(selectedDate));
+			if (isMin(selectedDate) || isMax(selectedDate)) {
+				picker.setBorder(BorderFactory.createLineBorder(Color.RED));
+			} else {
+				picker.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 			}
 		});
 

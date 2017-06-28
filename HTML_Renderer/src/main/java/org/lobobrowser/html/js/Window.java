@@ -700,37 +700,24 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	private void initWindowScope(final Document doc) {
 		final Scriptable ws = this.getWindowScope();
-		JavaInstantiator jiXhttp = new JavaInstantiator() {
-			@Override
-			public Object newInstance() {
-				Document d = doc;
-				if (d == null) {
-					throw new IllegalStateException("Cannot perform operation when document is unset.");
-				}
-				HTMLDocumentImpl hd;
-				try {
-					hd = (HTMLDocumentImpl) d;
-				} catch (ClassCastException err) {
-					throw new IllegalStateException(
-							"Cannot perform operation with documents of type " + d.getClass().getName() + ".");
-				}
-				return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
+		JavaInstantiator jiXhttp = () -> {
+			Document d = doc;
+			if (d == null) {
+				throw new IllegalStateException("Cannot perform operation when document is unset.");
 			}
+			HTMLDocumentImpl hd;
+			try {
+				hd = (HTMLDocumentImpl) d;
+			} catch (ClassCastException err) {
+				throw new IllegalStateException(
+						"Cannot perform operation with documents of type " + d.getClass().getName() + ".");
+			}
+			return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
 		};
 
-		JavaInstantiator jiDomParser = new JavaInstantiator() {
-			@Override
-			public Object newInstance() {
-				return new DOMParser();
-			}
-		};
+		JavaInstantiator jiDomParser = () -> new DOMParser();
 
-		JavaInstantiator jiXMLSerializer = new JavaInstantiator() {
-			@Override
-			public Object newInstance() {
-				return new XMLSerializer();
-			}
-		};
+		JavaInstantiator jiXMLSerializer = () -> new XMLSerializer();
 
 		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws,
 				jiXhttp);
@@ -795,15 +782,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	private final void defineElementClass(Scriptable scope, final Document document, final String jsClassName,
 			final String elementName, Class<?> javaClass) {
-		JavaInstantiator ji = new JavaInstantiator() {
-			@Override
-			public Object newInstance() {
-				Document d = document;
-				if (d == null) {
-					throw new IllegalStateException("Document not set in current context.");
-				}
-				return d.createElement(elementName);
+		JavaInstantiator ji = () -> {
+			Document d = document;
+			if (d == null) {
+				throw new IllegalStateException("Document not set in current context.");
 			}
+			return d.createElement(elementName);
 		};
 		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
 		Function constructorFunction = JavaObjectWrapper.getConstructor(jsClassName, classWrapper, scope, ji);

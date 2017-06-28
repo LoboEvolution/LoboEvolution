@@ -23,8 +23,6 @@ package org.lobobrowser.primary.gui.bookmarks;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
@@ -148,14 +146,11 @@ public class RecentHostsDialog extends JDialog {
 					JPopupMenu popupMenu = new JPopupMenu();
 					JMenuItem item = new JMenuItem("Open link in new window");
 					item.setIcon(IconFactory.getInstance().getIcon(SEARCH));
-					item.addActionListener(new ActionListener() {
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							try {
-								window.getTopFrame().open(new URL("http://" + vals[0]), "GET", null, "window", null);
-							} catch (MalformedURLException mfu) {
-								throw new IllegalStateException("not expected", mfu);
-							}
+					item.addActionListener(e1 -> {
+						try {
+							window.getTopFrame().open(new URL("http://" + vals[0]), "GET", null, "window", null);
+						} catch (MalformedURLException mfu) {
+							throw new IllegalStateException("not expected", mfu);
 						}
 					});
 					popupMenu.add(item);

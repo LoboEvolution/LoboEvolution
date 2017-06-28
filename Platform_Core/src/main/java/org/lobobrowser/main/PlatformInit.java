@@ -35,7 +35,6 @@ import java.security.CodeSource;
 import java.security.Permission;
 import java.security.Policy;
 import java.security.ProtectionDomain;
-import java.util.EventObject;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -52,7 +51,6 @@ import org.lobobrowser.request.CookieManager;
 import org.lobobrowser.security.LocalSecurityManager;
 import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.settings.GeneralSettings;
-import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.SimpleThreadPool;
 import org.lobobrowser.util.SimpleThreadPoolTask;
 import org.lobobrowser.util.Urls;
@@ -379,13 +377,10 @@ public class PlatformInit {
 	 * @see org.lobobrowser.settings.GeneralSettings#getStartupURLs()
 	 */
 	public void start(String[] args) throws MalformedURLException {
-		DefaultWindowFactory.getInstance().evtWindowShown.addListener(new GenericEventListener() {
-			@Override
-			public void processEvent(EventObject event) {
-				synchronized (PlatformInit.this) {
-					windowHasBeenShown = true;
-					PlatformInit.this.notifyAll();
-				}
+		DefaultWindowFactory.getInstance().evtWindowShown.addListener(event -> {
+			synchronized (PlatformInit.this) {
+				windowHasBeenShown = true;
+				PlatformInit.this.notifyAll();
 			}
 		});
 		boolean launched = false;

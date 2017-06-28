@@ -329,12 +329,7 @@ public class DownloadDialog extends JFrame {
 			doneWithDownload(totalSize);
 		} else {
 
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					doneWithDownload(totalSize);
-				}
-			});
+			SwingUtilities.invokeLater(() -> doneWithDownload(totalSize));
 		}
 	}
 
@@ -386,12 +381,7 @@ public class DownloadDialog extends JFrame {
 		if (SwingUtilities.isEventDispatchThread()) {
 			errorInDownload();
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					errorInDownload();
-				}
-			});
+			SwingUtilities.invokeLater(() -> errorInDownload());
 		}
 	}
 
@@ -458,12 +448,7 @@ public class DownloadDialog extends JFrame {
 		if (SwingUtilities.isEventDispatchThread()) {
 			updateProgress(progressType, value, max);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					updateProgress(progressType, value, max);
-				}
-			});
+			SwingUtilities.invokeLater(() -> updateProgress(progressType, value, max));
 		}
 	}
 

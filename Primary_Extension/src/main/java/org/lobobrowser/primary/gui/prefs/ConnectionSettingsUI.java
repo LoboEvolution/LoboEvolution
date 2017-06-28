@@ -31,8 +31,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.lobobrowser.primary.gui.AbstractSettingsUI;
 import org.lobobrowser.primary.gui.FieldType;
@@ -93,18 +91,8 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 * Instantiates a new connection settings ui.
 	 */
 	public ConnectionSettingsUI() {
-		this.noProxyRadioButton.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateEnabling();
-			}
-		});
-		this.authenticatedCheckBox.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				updateEnabling();
-			}
-		});
+		this.noProxyRadioButton.addChangeListener(e -> updateEnabling());
+		this.authenticatedCheckBox.addChangeListener(e -> updateEnabling());
 		this.noProxyRadioButton.setText("Direct connection (no proxy)");
 		this.httpProxyRadioButton.setText("HTTP proxy");
 		this.socksProxyRadioButton.setText("SOCKS proxy");

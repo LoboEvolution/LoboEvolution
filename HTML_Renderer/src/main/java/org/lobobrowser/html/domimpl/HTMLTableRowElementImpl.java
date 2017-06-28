@@ -108,12 +108,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public HTMLCollection getCells() {
-		NodeFilter filter = new NodeFilter() {
-			@Override
-			public boolean accept(Node node) {
-				return node instanceof HTMLTableCellElementImpl;
-			}
-		};
+		NodeFilter filter = node -> node instanceof HTMLTableCellElementImpl;
 		return new DescendentHTMLCollection(this, filter, this.getTreeLock(), false);
 	}
 

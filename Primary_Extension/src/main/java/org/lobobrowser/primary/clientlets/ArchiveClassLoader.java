@@ -129,25 +129,22 @@ public class ArchiveClassLoader extends BaseClassLoader {
 			final ArchiveInfo ainfo = ainfos[i];
 			try {
 				final JarFile jarFile = ainfo.getJarFile();
-				classBytes = (byte[]) AccessController.doPrivileged(new PrivilegedAction<Object>() {
-					@Override
-					public Object run() {
-						try {
-							ZipEntry entry = jarFile.getEntry(subPath);
-							if (entry == null) {
-								return null;
-							}
-							InputStream in = jarFile.getInputStream(entry);
-							try {
-								byte[] bytes = IORoutines.loadExact(in, (int) entry.getSize());
-								foundAinfo[0] = ainfo;
-								return bytes;
-							} finally {
-								in.close();
-							}
-						} catch (IOException ioe) {
+				classBytes = (byte[]) AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+					try {
+						ZipEntry entry = jarFile.getEntry(subPath);
+						if (entry == null) {
 							return null;
 						}
+						InputStream in = jarFile.getInputStream(entry);
+						try {
+							byte[] bytes = IORoutines.loadExact(in, (int) entry.getSize());
+							foundAinfo[0] = ainfo;
+							return bytes;
+						} finally {
+							in.close();
+						}
+					} catch (IOException ioe) {
+						return null;
 					}
 				});
 			} catch (IOException ioe2) {
@@ -173,14 +170,11 @@ public class ArchiveClassLoader extends BaseClassLoader {
 	@Override
 	protected URL findResource(final String name) {
 		try {
-			return AccessController.doPrivileged(new PrivilegedAction<java.net.URL>() {
-				@Override
-				public URL run() {
-					try {
-						return new URL(null, "volatile:" + name, new LocalURLStreamHandler(name));
-					} catch (MalformedURLException mfu) {
-						throw new IllegalStateException(mfu.getMessage());
-					}
+			return AccessController.doPrivileged((PrivilegedAction<URL>) () -> {
+				try {
+					return new URL(null, "volatile:" + name, new LocalURLStreamHandler(name));
+				} catch (MalformedURLException mfu) {
+					throw new IllegalStateException(mfu.getMessage());
 				}
 			});
 		} catch (RuntimeException err) {
@@ -219,18 +213,15 @@ public class ArchiveClassLoader extends BaseClassLoader {
 			final ArchiveInfo ainfo = ainfos[i];
 			try {
 				final JarFile jarFile = ainfo.getJarFile();
-				in = (InputStream) AccessController.doPrivileged(new PrivilegedAction<Object>() {
-					@Override
-					public Object run() {
-						try {
-							ZipEntry entry = jarFile.getEntry(resourceName);
-							if (entry == null) {
-								return null;
-							}
-							return jarFile.getInputStream(entry);
-						} catch (IOException ioe) {
+				in = (InputStream) AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+					try {
+						ZipEntry entry = jarFile.getEntry(resourceName);
+						if (entry == null) {
 							return null;
 						}
+						return jarFile.getInputStream(entry);
+					} catch (IOException ioe) {
+						return null;
 					}
 				});
 			} catch (IOException ioe2) {

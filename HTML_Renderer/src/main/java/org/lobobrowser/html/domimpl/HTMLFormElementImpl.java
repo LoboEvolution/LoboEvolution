@@ -73,13 +73,10 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	public Object namedItem(final String name) {
 		try {
 			// TODO: This could use document.namedItem.
-			this.visit(new NodeVisitor() {
-				@Override
-				public void visit(Node node) {
-					if (HTMLFormElementImpl.isInput(node)) {
-						if (name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME))) {
-							throw new StopVisitorException(node);
-						}
+			this.visit(node -> {
+				if (HTMLFormElementImpl.isInput(node)) {
+					if (name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME))) {
+						throw new StopVisitorException(node);
 					}
 				}
 			});
@@ -328,19 +325,16 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 					formInputs.add(extraFormInputs[i]);
 				}
 			}
-			this.visit(new NodeVisitor() {
-				@Override
-				public void visit(Node node) {
-					if (node instanceof HTMLElementImpl) {
-						FormInput[] fis = ((HTMLElementImpl) node).getFormInputs();
-						if (fis != null) {
-							for (int i = 0; i < fis.length; i++) {
-								FormInput fi = fis[i];
-								if (fi.getName() == null) {
-									throw new IllegalStateException("Form input does not have a name: " + node);
-								}
-								formInputs.add(fi);
+			this.visit(node -> {
+				if (node instanceof HTMLElementImpl) {
+					FormInput[] fis = ((HTMLElementImpl) node).getFormInputs();
+					if (fis != null) {
+						for (int i = 0; i < fis.length; i++) {
+							FormInput fi = fis[i];
+							if (fi.getName() == null) {
+								throw new IllegalStateException("Form input does not have a name: " + node);
 							}
+							formInputs.add(fi);
 						}
 					}
 				}
@@ -366,12 +360,9 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void reset() {
-		this.visit(new NodeVisitor() {
-			@Override
-			public void visit(Node node) {
-				if (node instanceof HTMLBaseInputElement) {
-					((HTMLBaseInputElement) node).resetInput();
-				}
+		this.visit(node -> {
+			if (node instanceof HTMLBaseInputElement) {
+				((HTMLBaseInputElement) node).resetInput();
 			}
 		});
 	}

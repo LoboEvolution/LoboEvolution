@@ -230,12 +230,8 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isScriptingEnabled() {
-		GeneralSettings settings = AccessController.doPrivileged(new PrivilegedAction<GeneralSettings>() {
-			@Override
-			public GeneralSettings run() {
-				return GeneralSettings.getInstance();
-			}
-		});
+		GeneralSettings settings = AccessController
+				.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
 		return settings.isSpoofJS();
 	}
 
@@ -300,12 +296,8 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isExternalCSSEnabled() {
-		GeneralSettings settings = AccessController.doPrivileged(new PrivilegedAction<GeneralSettings>() {
-			@Override
-			public GeneralSettings run() {
-				return GeneralSettings.getInstance();
-			}
-		});
+		GeneralSettings settings = AccessController
+				.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
 		return settings.isSpoofCSS();
 	}
 
@@ -316,12 +308,8 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isInternalCSSEnabled() {
-		GeneralSettings settings = AccessController.doPrivileged(new PrivilegedAction<GeneralSettings>() {
-			@Override
-			public GeneralSettings run() {
-				return GeneralSettings.getInstance();
-			}
-		});
+		GeneralSettings settings = AccessController
+				.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
 		return settings.isSpoofCSS();
 	}
 }

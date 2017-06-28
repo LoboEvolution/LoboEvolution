@@ -261,20 +261,17 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 								logger.error("processScript()", thrown);
 							}
 						} else {
-							AccessController.doPrivileged(new PrivilegedAction<Object>() {
-								@Override
-								public Object run() {
-									// Code might have restrictions on
-									// accessing
-									// items from elsewhere.
-									try {
-										request.open(Method.GET, getFullURL(scriptURI), false);
-										request.send();
-									} catch (IOException thrown) {
-										logger.error("processScript()", thrown);
-									}
-									return null;
+							AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+								// Code might have restrictions on
+								// accessing
+								// items from elsewhere.
+								try {
+									request.open(Method.GET, getFullURL(scriptURI), false);
+									request.send();
+								} catch (IOException thrown) {
+									logger.error("processScript()", thrown);
 								}
+								return null;
 							});
 						}
 						int status = request.getStatus();

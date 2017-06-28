@@ -24,6 +24,7 @@
 package org.lobobrowser.request;
 
 import java.security.AccessController;
+import java.security.PrivilegedAction;
 
 import org.lobobrowser.settings.GeneralSettings;
 import org.lobobrowser.ua.UserAgent;
@@ -114,12 +115,7 @@ public class UserAgentImpl implements UserAgent {
 		String tv = this.textValue;
 		if (tv == null) {
 			GeneralSettings settings = AccessController
-					.doPrivileged(new java.security.PrivilegedAction<GeneralSettings>() {
-						@Override
-						public GeneralSettings run() {
-							return GeneralSettings.getInstance();
-						}
-					});
+					.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
 			boolean spoofIE = settings.isSpoofIE();
 			String ieVersion = settings.getIeVersion();
 			tv = "Mozilla/" + settings.getMozVersion() + " (compatible" + (spoofIE ? "; MSIE " + ieVersion : "") + "; "

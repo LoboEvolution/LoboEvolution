@@ -23,7 +23,6 @@
  */
 package org.lobobrowser.primary.clientlets.html;
 
-import java.awt.event.ActionEvent;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Collection;
@@ -238,18 +237,15 @@ public class HtmlClientlet implements Clientlet {
 					destURL = Urls.createURL(currentURL, destUri);
 				}
 				final URL finalURL = destURL;
-				java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						NavigatorFrame frame = cc.getNavigatorFrame();
-						if (frame.getComponentContent() == content) {
-							// Navigate only if the original document is there.
-							// TODO: Address bar shouldn't change if it's being
-							// edited.
-							// TODO: A nagivation action should cancel this
-							// altogether.
-							frame.navigate(finalURL, RequestType.PROGRAMMATIC);
-						}
+				java.awt.event.ActionListener action = e -> {
+					NavigatorFrame frame = cc.getNavigatorFrame();
+					if (frame.getComponentContent() == content) {
+						// Navigate only if the original document is there.
+						// TODO: Address bar shouldn't change if it's being
+						// edited.
+						// TODO: A nagivation action should cancel this
+						// altogether.
+						frame.navigate(finalURL, RequestType.PROGRAMMATIC);
 					}
 				};
 				int waitMillis = refresh.getWaitSeconds() * 1000;
@@ -592,14 +588,11 @@ public class HtmlClientlet implements Clientlet {
 				htmlPanel.setDocument(document, rcontext);
 				ccontext.setResultingContent(content);
 			} else {
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						// Should have nicer effect (less flicker) in GUI
-						// thread.
-						htmlPanel.setDocument(document, rcontext);
-						ccontext.setResultingContent(content);
-					}
+				SwingUtilities.invokeLater(() -> {
+					// Should have nicer effect (less flicker) in GUI
+					// thread.
+					htmlPanel.setDocument(document, rcontext);
+					ccontext.setResultingContent(content);
 				});
 			}
 		}

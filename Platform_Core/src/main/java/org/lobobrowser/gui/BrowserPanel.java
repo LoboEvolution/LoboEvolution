@@ -664,12 +664,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 		if (SwingUtilities.isEventDispatchThread()) {
 			EVENT.fireEvent(event);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EVENT.fireEvent(event);
-				}
-			});
+			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
 
@@ -687,12 +682,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.handleDocumentRenderingImpl(frame, response, content);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					BrowserPanel.this.handleDocumentRenderingImpl(frame, response, content);
-				}
-			});
+			SwingUtilities.invokeLater(() -> BrowserPanel.this.handleDocumentRenderingImpl(frame, response, content));
 		}
 	}
 
@@ -765,12 +755,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	 * @return the safe extension manager
 	 */
 	private ExtensionManager getSafeExtensionManager() {
-		return AccessController.doPrivileged(new PrivilegedAction<ExtensionManager>() {
-			@Override
-			public ExtensionManager run() {
-				return ExtensionManager.getInstance();
-			}
-		});
+		return AccessController.doPrivileged((PrivilegedAction<ExtensionManager>) () -> ExtensionManager.getInstance());
 	}
 
 	/*
@@ -805,12 +790,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 				if (SwingUtilities.isEventDispatchThread()) {
 					EVENT.fireEvent(event);
 				} else {
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							EVENT.fireEvent(event);
-						}
-					});
+					SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 				}
 			}
 		}
@@ -834,12 +814,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 				if (SwingUtilities.isEventDispatchThread()) {
 					EVENT.fireEvent(event);
 				} else {
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							EVENT.fireEvent(event);
-						}
-					});
+					SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 				}
 			}
 		}
@@ -857,12 +832,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 		if (SwingUtilities.isEventDispatchThread()) {
 			EVENT.fireEvent(event);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EVENT.fireEvent(event);
-				}
-			});
+			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
 

@@ -359,12 +359,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.relayoutImpl(true, false);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					relayoutImpl(true, false);
-				}
-			});
+			SwingUtilities.invokeLater(() -> relayoutImpl(true, false));
 		}
 	}
 
@@ -375,12 +370,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.relayoutImpl(true, true);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					relayoutImpl(true, true);
-				}
-			});
+			SwingUtilities.invokeLater(() -> relayoutImpl(true, true));
 		}
 	}
 

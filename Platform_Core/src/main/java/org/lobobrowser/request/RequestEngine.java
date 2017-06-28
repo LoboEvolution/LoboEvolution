@@ -472,31 +472,25 @@ public final class RequestEngine {
 	 *             the exception
 	 */
 	private CacheInfo getCacheInfo(final RequestHandler rhandler, final URL url) throws Exception {
-		return AccessController.doPrivileged(new PrivilegedAction<CacheInfo>() {
-			// Reason: Caller in context may not have privilege to access
-			// the local file system, yet it's necessary to be able to load
-			// a cache file.
-			@Override
-			public CacheInfo run() {
-				MemoryCacheEntry entry;
-				byte[] persistentContent = null;
-				CacheManager cm = CacheManager.getInstance();
-				entry = (MemoryCacheEntry) cm.getTransient(url);
-				if (entry == null) {
-					if (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
-						try {
-							persistentContent = cm.getPersistent(url, false);
-						} catch (IOException ioe) {
-							logger.error("getCacheInfo(): Unable to load cache file.", ioe);
-						}
+		return AccessController.doPrivileged((PrivilegedAction<CacheInfo>) () -> {
+			MemoryCacheEntry entry;
+			byte[] persistentContent = null;
+			CacheManager cm = CacheManager.getInstance();
+			entry = (MemoryCacheEntry) cm.getTransient(url);
+			if (entry == null) {
+				if (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
+					try {
+						persistentContent = cm.getPersistent(url, false);
+					} catch (IOException ioe) {
+						logger.error("getCacheInfo(): Unable to load cache file.", ioe);
 					}
 				}
-				if (persistentContent == null && entry == null) {
-					return null;
-				}
-				CacheInfo cinfo = new CacheInfo(entry, persistentContent, url);
-				return cinfo;
 			}
+			if (persistentContent == null && entry == null) {
+				return null;
+			}
+			CacheInfo cinfo = new CacheInfo(entry, persistentContent, url);
+			return cinfo;
 		});
 	}
 
@@ -521,101 +515,96 @@ public final class RequestEngine {
 	private void cache(final RequestHandler rhandler, final URL url, final URLConnection connection,
 			final byte[] content, final java.io.Serializable altPersistentObject, final Object altObject,
 			final int approxAltObjectSize) {
-		AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			// Reason: Caller might not have permission to access the
-			// file system. Yet, caching should be allowed.
-			@Override
-			public Object run() {
-				try {
-					long currentTime = System.currentTimeMillis();
-					if (loggerInfo) {
-						logger.info("cache(): url=" + url + ",content.length=" + content.length + ",currentTime="
-								+ currentTime);
-					}
-					int actualApproxObjectSize = 0;
-					if (altObject != null) {
-						if (approxAltObjectSize < content.length) {
-							actualApproxObjectSize = content.length;
-						} else {
-							actualApproxObjectSize = approxAltObjectSize;
-						}
-					}
-					Long expiration = Urls.getExpiration(connection, currentTime);
-					List<NameValuePair> headers = Urls.getHeaders(connection);
-					MemoryCacheEntry memEntry = new MemoryCacheEntry(content, headers, expiration, altObject,
-							actualApproxObjectSize);
-					int approxMemEntrySize = content.length + (altObject == null ? 0 : approxAltObjectSize);
-					CacheManager cm = CacheManager.getInstance();
-					cm.putTransient(url, memEntry, approxMemEntrySize);
-					ByteArrayOutputStream out = new ByteArrayOutputStream();
-					try {
-						boolean hadDate = false;
-						boolean hadContentLength = false;
-						for (int counter = 0; true; counter++) {
-							String headerKey = connection.getHeaderFieldKey(counter);
-							if (headerKey != null) {
-								if (!hadDate && "date".equalsIgnoreCase(headerKey)) {
-									hadDate = true;
-								}
-								if (!hadContentLength && "content-length".equalsIgnoreCase(headerKey)) {
-									hadContentLength = true;
-								}
-							}
-							String headerValue = connection.getHeaderField(counter);
-							if (headerValue == null) {
-								break;
-							}
-							if (CacheInfo.HEADER_REQUEST_TIME.equalsIgnoreCase(headerKey)) {
-								continue;
-							}
-							String headerPrefix = headerKey == null || headerKey.length() == 0 ? "" : headerKey + ": ";
-							byte[] headerBytes = (headerPrefix + headerValue + "\r\n").getBytes("UTF-8");
-							out.write(headerBytes);
-						}
-						if (!hadDate) {
-							String currentDate = Urls.PATTERN_RFC1123.format(new java.util.Date());
-							byte[] headerBytes = ("Date: " + currentDate + "\r\n").getBytes("UTF-8");
-							out.write(headerBytes);
-						}
-						if (!hadContentLength) {
-							byte[] headerBytes = ("Content-Length: " + content.length + "\r\n").getBytes("UTF-8");
-							out.write(headerBytes);
-						}
-						byte[] rtHeaderBytes = (CacheInfo.HEADER_REQUEST_TIME + ": " + currentTime + "\r\n")
-								.getBytes("UTF-8");
-						out.write(rtHeaderBytes);
-						out.write(IORoutines.LINE_BREAK_BYTES);
-						out.write(content);
-					} finally {
-						out.close();
-					}
-					try {
-						cm.putPersistent(url, out.toByteArray(), false);
-					} catch (Exception err) {
-						logger.error("cache(): Unable to cache response content.", err);
-					}
-					if (altPersistentObject != null) {
-						try {
-							ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
-							// No need to buffer - Java API already does.
-							ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-							objOut.writeObject(altPersistentObject);
-							objOut.flush();
-							byte[] byteArray = fileOut.toByteArray();
-							if (byteArray.length == 0) {
-								logger.error("cache(): Serialized content has zero bytes for persistent object "
-										+ altPersistentObject + ".");
-							}
-							cm.putPersistent(url, byteArray, true);
-						} catch (Exception err) {
-							logger.error("cache(): Unable to write persistent cached object.", err);
-						}
-					}
-				} catch (Exception err) {
-					logger.error("cache()", err);
+		AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+			try {
+				long currentTime = System.currentTimeMillis();
+				if (loggerInfo) {
+					logger.info("cache(): url=" + url + ",content.length=" + content.length + ",currentTime="
+							+ currentTime);
 				}
-				return null;
+				int actualApproxObjectSize = 0;
+				if (altObject != null) {
+					if (approxAltObjectSize < content.length) {
+						actualApproxObjectSize = content.length;
+					} else {
+						actualApproxObjectSize = approxAltObjectSize;
+					}
+				}
+				Long expiration = Urls.getExpiration(connection, currentTime);
+				List<NameValuePair> headers = Urls.getHeaders(connection);
+				MemoryCacheEntry memEntry = new MemoryCacheEntry(content, headers, expiration, altObject,
+						actualApproxObjectSize);
+				int approxMemEntrySize = content.length + (altObject == null ? 0 : approxAltObjectSize);
+				CacheManager cm = CacheManager.getInstance();
+				cm.putTransient(url, memEntry, approxMemEntrySize);
+				ByteArrayOutputStream out = new ByteArrayOutputStream();
+				try {
+					boolean hadDate = false;
+					boolean hadContentLength = false;
+					for (int counter = 0; true; counter++) {
+						String headerKey = connection.getHeaderFieldKey(counter);
+						if (headerKey != null) {
+							if (!hadDate && "date".equalsIgnoreCase(headerKey)) {
+								hadDate = true;
+							}
+							if (!hadContentLength && "content-length".equalsIgnoreCase(headerKey)) {
+								hadContentLength = true;
+							}
+						}
+						String headerValue = connection.getHeaderField(counter);
+						if (headerValue == null) {
+							break;
+						}
+						if (CacheInfo.HEADER_REQUEST_TIME.equalsIgnoreCase(headerKey)) {
+							continue;
+						}
+						String headerPrefix = headerKey == null || headerKey.length() == 0 ? "" : headerKey + ": ";
+						byte[] headerBytes1 = (headerPrefix + headerValue + "\r\n").getBytes("UTF-8");
+						out.write(headerBytes1);
+					}
+					if (!hadDate) {
+						String currentDate = Urls.PATTERN_RFC1123.format(new java.util.Date());
+						byte[] headerBytes2 = ("Date: " + currentDate + "\r\n").getBytes("UTF-8");
+						out.write(headerBytes2);
+					}
+					if (!hadContentLength) {
+						byte[] headerBytes3 = ("Content-Length: " + content.length + "\r\n").getBytes("UTF-8");
+						out.write(headerBytes3);
+					}
+					byte[] rtHeaderBytes = (CacheInfo.HEADER_REQUEST_TIME + ": " + currentTime + "\r\n")
+							.getBytes("UTF-8");
+					out.write(rtHeaderBytes);
+					out.write(IORoutines.LINE_BREAK_BYTES);
+					out.write(content);
+				} finally {
+					out.close();
+				}
+				try {
+					cm.putPersistent(url, out.toByteArray(), false);
+				} catch (Exception err1) {
+					logger.error("cache(): Unable to cache response content.", err1);
+				}
+				if (altPersistentObject != null) {
+					try {
+						ByteArrayOutputStream fileOut = new ByteArrayOutputStream();
+						// No need to buffer - Java API already does.
+						ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+						objOut.writeObject(altPersistentObject);
+						objOut.flush();
+						byte[] byteArray = fileOut.toByteArray();
+						if (byteArray.length == 0) {
+							logger.error("cache(): Serialized content has zero bytes for persistent object "
+									+ altPersistentObject + ".");
+						}
+						cm.putPersistent(url, byteArray, true);
+					} catch (Exception err2) {
+						logger.error("cache(): Unable to write persistent cached object.", err2);
+					}
+				}
+			} catch (Exception err3) {
+				logger.error("cache()", err3);
 			}
+			return null;
 		});
 	}
 
@@ -781,12 +770,7 @@ public final class RequestEngine {
 	 * @return the safe extension manager
 	 */
 	private ExtensionManager getSafeExtensionManager() {
-		return AccessController.doPrivileged(new PrivilegedAction<ExtensionManager>() {
-			@Override
-			public ExtensionManager run() {
-				return ExtensionManager.getInstance();
-			}
-		});
+		return AccessController.doPrivileged((PrivilegedAction<ExtensionManager>) () -> ExtensionManager.getInstance());
 	}
 
 	/**
@@ -1168,15 +1152,10 @@ public final class RequestEngine {
 							} else {
 								actualApproxObjectSize = 0;
 							}
-							AccessController.doPrivileged(new PrivilegedAction<Object>() {
-								// Reason: Privileges needed to access
-								// CacheManager.
-								@Override
-								public Object run() {
-									CacheManager.getInstance().putTransient(connectionUrl, newMemEntry,
-											actualApproxObjectSize + persContent.length);
-									return null;
-								}
+							AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+								CacheManager.getInstance().putTransient(connectionUrl, newMemEntry,
+										actualApproxObjectSize + persContent.length);
+								return null;
 							});
 						}
 					} finally {
@@ -1339,12 +1318,9 @@ public final class RequestEngine {
 		public void run() {
 			SecurityManager sm = System.getSecurityManager();
 			if (sm != null && this.accessContext != null) {
-				PrivilegedAction<Object> action = new PrivilegedAction<Object>() {
-					@Override
-					public Object run() {
-						processHandler(handler, 0, true);
-						return null;
-					}
+				PrivilegedAction<Object> action = () -> {
+					processHandler(handler, 0, true);
+					return null;
 				};
 				// This way we ensure scheduled requests have the same
 				// protection as inline requests, particularly in relation

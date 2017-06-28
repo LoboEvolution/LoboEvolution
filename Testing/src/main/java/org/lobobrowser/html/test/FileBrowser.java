@@ -8,8 +8,6 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -39,9 +37,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.AbstractTableModel;
@@ -135,12 +131,9 @@ class FileBrowser {
 			table.setAutoCreateRowSorter(true);
 			table.setShowVerticalLines(false);
 
-			listSelectionListener = new ListSelectionListener() {
-				@Override
-				public void valueChanged(ListSelectionEvent lse) {
-					int row = table.getSelectionModel().getLeadSelectionIndex();
-					setFileDetails(((FileTableModel) table.getModel()).getFile(row));
-				}
+			listSelectionListener = lse -> {
+				int row = table.getSelectionModel().getLeadSelectionIndex();
+				setFileDetails(((FileTableModel) table.getModel()).getFile(row));
 			};
 			table.getSelectionModel().addListSelectionListener(listSelectionListener);
 			JScrollPane tableScroll = new JScrollPane(table);
@@ -152,13 +145,10 @@ class FileBrowser {
 			DefaultMutableTreeNode root = new DefaultMutableTreeNode();
 			treeModel = new DefaultTreeModel(root);
 
-			TreeSelectionListener treeSelectionListener = new TreeSelectionListener() {
-				@Override
-				public void valueChanged(TreeSelectionEvent tse) {
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode) tse.getPath().getLastPathComponent();
-					showChildren(node);
-					setFileDetails((File) node.getUserObject());
-				}
+			TreeSelectionListener treeSelectionListener = tse -> {
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) tse.getPath().getLastPathComponent();
+				showChildren(node);
+				setFileDetails((File) node.getUserObject());
 			};
 
 			// show the file system roots.
@@ -231,61 +221,49 @@ class FileBrowser {
 			JButton locateFile = new JButton("Locate");
 			locateFile.setMnemonic('l');
 
-			locateFile.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ae) {
-					try {
-						System.out.println("Locate: " + currentFile.getParentFile());
-						desktop.open(currentFile.getParentFile());
-					} catch (Throwable t) {
-						showThrowable(t);
-					}
-					gui.repaint();
+			locateFile.addActionListener(ae -> {
+				try {
+					System.out.println("Locate: " + currentFile.getParentFile());
+					desktop.open(currentFile.getParentFile());
+				} catch (Throwable t) {
+					showThrowable(t);
 				}
+				gui.repaint();
 			});
 			toolBar.add(locateFile);
 
 			openFile = new JButton("Open");
 			openFile.setMnemonic('o');
 
-			openFile.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ae) {
-					try {
-						System.out.println("Open: " + currentFile);
-						desktop.open(currentFile);
-					} catch (Throwable t) {
-						showThrowable(t);
-					}
-					gui.repaint();
+			openFile.addActionListener(ae -> {
+				try {
+					System.out.println("Open: " + currentFile);
+					desktop.open(currentFile);
+				} catch (Throwable t) {
+					showThrowable(t);
 				}
+				gui.repaint();
 			});
 			toolBar.add(openFile);
 
 			editFile = new JButton("Edit");
 			editFile.setMnemonic('e');
-			editFile.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ae) {
-					try {
-						desktop.edit(currentFile);
-					} catch (Throwable t) {
-						showThrowable(t);
-					}
+			editFile.addActionListener(ae -> {
+				try {
+					desktop.edit(currentFile);
+				} catch (Throwable t) {
+					showThrowable(t);
 				}
 			});
 			toolBar.add(editFile);
 
 			printFile = new JButton("Print");
 			printFile.setMnemonic('p');
-			printFile.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent ae) {
-					try {
-						desktop.print(currentFile);
-					} catch (Throwable t) {
-						showThrowable(t);
-					}
+			printFile.addActionListener(ae -> {
+				try {
+					desktop.print(currentFile);
+				} catch (Throwable t) {
+					showThrowable(t);
 				}
 			});
 			toolBar.add(printFile);
@@ -352,34 +330,31 @@ class FileBrowser {
 
 	/** Update the table on the EDT */
 	private void setTableData(final File[] files) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				if (fileTableModel == null) {
-					fileTableModel = new FileTableModel();
-					table.setModel(fileTableModel);
-				}
-				table.getSelectionModel().removeListSelectionListener(listSelectionListener);
-				fileTableModel.setFiles(files);
-				table.getSelectionModel().addListSelectionListener(listSelectionListener);
-				if (!cellSizesSet) {
-					Icon icon = fileSystemView.getSystemIcon(files[0]);
+		SwingUtilities.invokeLater(() -> {
+			if (fileTableModel == null) {
+				fileTableModel = new FileTableModel();
+				table.setModel(fileTableModel);
+			}
+			table.getSelectionModel().removeListSelectionListener(listSelectionListener);
+			fileTableModel.setFiles(files);
+			table.getSelectionModel().addListSelectionListener(listSelectionListener);
+			if (!cellSizesSet) {
+				Icon icon = fileSystemView.getSystemIcon(files[0]);
 
-					// size adjustment to better account for icons
-					table.setRowHeight(icon.getIconHeight() + rowIconPadding);
+				// size adjustment to better account for icons
+				table.setRowHeight(icon.getIconHeight() + rowIconPadding);
 
-					setColumnWidth(0, -1);
-					setColumnWidth(3, 60);
-					table.getColumnModel().getColumn(3).setMaxWidth(120);
-					setColumnWidth(4, -1);
-					setColumnWidth(5, -1);
-					setColumnWidth(6, -1);
-					setColumnWidth(7, -1);
-					setColumnWidth(8, -1);
-					setColumnWidth(9, -1);
+				setColumnWidth(0, -1);
+				setColumnWidth(3, 60);
+				table.getColumnModel().getColumn(3).setMaxWidth(120);
+				setColumnWidth(4, -1);
+				setColumnWidth(5, -1);
+				setColumnWidth(6, -1);
+				setColumnWidth(7, -1);
+				setColumnWidth(8, -1);
+				setColumnWidth(9, -1);
 
-					cellSizesSet = true;
-				}
+				cellSizesSet = true;
 			}
 		});
 	}
@@ -467,38 +442,35 @@ class FileBrowser {
 	}
 
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					// Significantly improves the look of the output in
-					// terms of the file names returned by FileSystemView!
-					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-				} catch (Exception weTried) {
-				}
-				JFrame f = new JFrame(APP_TITLE);
-				f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-				FileBrowser FileBrowser = new FileBrowser();
-				f.setContentPane(FileBrowser.getGui());
-
-				try {
-					URL urlBig = FileBrowser.getClass().getResource("fb-icon-32x32.png");
-					URL urlSmall = FileBrowser.getClass().getResource("fb-icon-16x16.png");
-					ArrayList<Image> images = new ArrayList<Image>();
-					images.add(ImageIO.read(urlBig));
-					images.add(ImageIO.read(urlSmall));
-					f.setIconImages(images);
-				} catch (Exception weTried) {
-				}
-
-				f.pack();
-				f.setLocationByPlatform(true);
-				f.setMinimumSize(f.getSize());
-				f.setVisible(true);
-
-				FileBrowser.showRootFile();
+		SwingUtilities.invokeLater(() -> {
+			try {
+				// Significantly improves the look of the output in
+				// terms of the file names returned by FileSystemView!
+				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+			} catch (Exception weTried1) {
 			}
+			JFrame f = new JFrame(APP_TITLE);
+			f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+			FileBrowser FileBrowser = new FileBrowser();
+			f.setContentPane(FileBrowser.getGui());
+
+			try {
+				URL urlBig = FileBrowser.getClass().getResource("fb-icon-32x32.png");
+				URL urlSmall = FileBrowser.getClass().getResource("fb-icon-16x16.png");
+				ArrayList<Image> images = new ArrayList<Image>();
+				images.add(ImageIO.read(urlBig));
+				images.add(ImageIO.read(urlSmall));
+				f.setIconImages(images);
+			} catch (Exception weTried2) {
+			}
+
+			f.pack();
+			f.setLocationByPlatform(true);
+			f.setMinimumSize(f.getSize());
+			f.setVisible(true);
+
+			FileBrowser.showRootFile();
 		});
 	}
 }

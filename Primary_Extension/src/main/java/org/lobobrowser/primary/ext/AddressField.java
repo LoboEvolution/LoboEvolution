@@ -20,8 +20,6 @@
  */
 package org.lobobrowser.primary.ext;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.net.URL;
@@ -79,14 +77,11 @@ public class AddressField extends JComboBox<String> {
 			public void popupMenuCanceled(PopupMenuEvent e) {
 			}
 		});
-		this.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				String cmd = event.getActionCommand();
-				if ("comboBoxEdited".equals(cmd)) {
-					onEdited(event.getModifiers());
-				} else if ("comboBoxChanged".equals(cmd)) {
-				}
+		this.addActionListener(event -> {
+			String cmd = event.getActionCommand();
+			if ("comboBoxEdited".equals(cmd)) {
+				onEdited(event.getModifiers());
+			} else if ("comboBoxChanged".equals(cmd)) {
 			}
 		});
 		// This needed the first time to set a reasonable

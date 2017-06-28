@@ -25,8 +25,6 @@ package org.lobobrowser.html.control;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
@@ -75,12 +73,7 @@ public class InputPasswordControl extends BaseInputTextControl {
 		} else {
 			pwd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
-		pwd.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				HtmlController.getInstance().onEnterPressed(modelNode, null);
-			}
-		});
+		pwd.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
 		pwd.addKeyListener(addKeyListener());
 	}
 

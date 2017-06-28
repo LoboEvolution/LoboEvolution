@@ -356,15 +356,12 @@ public class ImgControl extends BaseControl implements ImageListener {
 					}
 				}
 			} else {
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						if (!checkPreferredSizeChange()) {
-							repaint();
-						} else {
-							if (ruicontrol != null) {
-								ruicontrol.preferredSizeInvalidated();
-							}
+				SwingUtilities.invokeLater(() -> {
+					if (!checkPreferredSizeChange()) {
+						repaint();
+					} else {
+						if (ruicontrol != null) {
+							ruicontrol.preferredSizeInvalidated();
 						}
 					}
 				});
@@ -393,15 +390,12 @@ public class ImgControl extends BaseControl implements ImageListener {
 				}
 			}
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					if (!checkPreferredSizeChange()) {
-						repaint();
-					} else {
-						if (ruicontrol != null) {
-							ruicontrol.preferredSizeInvalidated();
-						}
+			SwingUtilities.invokeLater(() -> {
+				if (!checkPreferredSizeChange()) {
+					repaint();
+				} else {
+					if (ruicontrol != null) {
+						ruicontrol.preferredSizeInvalidated();
 					}
 				}
 			});

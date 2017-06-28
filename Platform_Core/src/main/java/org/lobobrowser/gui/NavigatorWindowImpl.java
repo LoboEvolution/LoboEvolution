@@ -405,12 +405,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		if (SwingUtilities.isEventDispatchThread()) {
 			EVENT.fireEvent(event);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EVENT.fireEvent(event);
-				}
-			});
+			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
 
@@ -516,12 +511,8 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.handleDocumentRenderingImpl(frame, response, content);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					NavigatorWindowImpl.this.handleDocumentRenderingImpl(frame, response, content);
-				}
-			});
+			SwingUtilities
+					.invokeLater(() -> NavigatorWindowImpl.this.handleDocumentRenderingImpl(frame, response, content));
 		}
 	}
 
@@ -581,12 +572,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		if (SwingUtilities.isEventDispatchThread()) {
 			EVENT.fireEvent(event);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EVENT.fireEvent(event);
-				}
-			});
+			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
 
@@ -719,12 +705,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		if (SwingUtilities.isEventDispatchThread()) {
 			EVENT.fireEvent(event);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EVENT.fireEvent(event);
-				}
-			});
+			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
 
@@ -742,12 +723,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		if (SwingUtilities.isEventDispatchThread()) {
 			EVENT.fireEvent(event);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					EVENT.fireEvent(event);
-				}
-			});
+			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
 
@@ -775,12 +751,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 				if (SwingUtilities.isEventDispatchThread()) {
 					EVENT.fireEvent(event);
 				} else {
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							EVENT.fireEvent(event);
-						}
-					});
+					SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 				}
 			}
 		}
@@ -804,12 +775,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 				if (SwingUtilities.isEventDispatchThread()) {
 					EVENT.fireEvent(event);
 				} else {
-					SwingUtilities.invokeLater(new Runnable() {
-						@Override
-						public void run() {
-							EVENT.fireEvent(event);
-						}
-					});
+					SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 				}
 			}
 		}

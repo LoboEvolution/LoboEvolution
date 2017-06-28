@@ -23,8 +23,6 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.Reader;
@@ -57,7 +55,6 @@ import org.lobobrowser.html.dombl.ElementFactory;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.LocalErrorHandler;
-import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.QuerySelectorImpl;
 import org.lobobrowser.html.domfilter.AnchorFilter;
 import org.lobobrowser.html.domfilter.AppletFilter;
@@ -515,12 +512,8 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public String getCookie() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			return (String) AccessController.doPrivileged(new PrivilegedAction<Object>() {
-				@Override
-				public Object run() {
-					return ucontext.getCookie(documentURL);
-				}
-			});
+			return (String) AccessController
+					.doPrivileged((PrivilegedAction<Object>) () -> ucontext.getCookie(documentURL));
 		} else {
 			return this.ucontext.getCookie(this.documentURL);
 		}
@@ -535,12 +528,9 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public void setCookie(final String cookie) throws DOMException {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			AccessController.doPrivileged(new PrivilegedAction<Object>() {
-				@Override
-				public Object run() {
-					ucontext.setCookie(documentURL, cookie);
-					return null;
-				}
+			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+				ucontext.setCookie(documentURL, cookie);
+				return null;
 			});
 		} else {
 			this.ucontext.setCookie(this.documentURL, cookie);
@@ -1028,12 +1018,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	public void normalizeDocument() {
 		// TODO: Normalization options from domConfig
 		synchronized (this.getTreeLock()) {
-			this.visitImpl(new NodeVisitor() {
-				@Override
-				public void visit(Node node) {
-					node.normalize();
-				}
-			});
+			this.visitImpl(node -> node.normalize());
 		}
 	}
 
@@ -1556,43 +1541,35 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 				final ImageInfo newInfo = new ImageInfo();
 				map.put(urlText, newInfo);
 				newInfo.addListener(imageListener);
-				httpRequest.addReadyStateChangeListener(new PropertyChangeListener() {
-
-					@Override
-					public void propertyChange(PropertyChangeEvent evt) {
-						if (httpRequest.getReadyState() == ReadyState.COMPLETE) {
-							java.awt.Image newImage = httpRequest.getResponseImage();
-							ImageEvent newEvent = newImage == null ? null
-									: new ImageEvent(HTMLDocumentImpl.this, newImage);
-							ImageListener[] listeners;
-							synchronized (map) {
-								newInfo.imageEvent = newEvent;
-								newInfo.loaded = true;
-								listeners = newEvent == null ? null : newInfo.getListeners();
-								map.remove(urlText);
-							}
-							if (listeners != null) {
-								int llength = listeners.length;
-								for (int i = 0; i < llength; i++) {
-									listeners[i].imageLoaded(newEvent);
-								}
+				httpRequest.addReadyStateChangeListener(evt -> {
+					if (httpRequest.getReadyState() == ReadyState.COMPLETE) {
+						java.awt.Image newImage = httpRequest.getResponseImage();
+						ImageEvent newEvent = newImage == null ? null : new ImageEvent(HTMLDocumentImpl.this, newImage);
+						ImageListener[] listeners;
+						synchronized (map) {
+							newInfo.imageEvent = newEvent;
+							newInfo.loaded = true;
+							listeners = newEvent == null ? null : newInfo.getListeners();
+							map.remove(urlText);
+						}
+						if (listeners != null) {
+							int llength = listeners.length;
+							for (int i = 0; i < llength; i++) {
+								listeners[i].imageLoaded(newEvent);
 							}
 						}
-
 					}
+
 				});
 				SecurityManager sm = System.getSecurityManager();
 				if (sm == null) {
 					httpRequest.open(Method.GET, url, true);
 					httpRequest.send();
 				} else {
-					AccessController.doPrivileged(new PrivilegedAction<Object>() {
-						@Override
-						public Object run() {
-							httpRequest.open(Method.GET, url, true);
-							httpRequest.send();
-							return null;
-						}
+					AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+						httpRequest.open(Method.GET, url, true);
+						httpRequest.send();
+						return null;
 					});
 				}
 			}

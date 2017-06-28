@@ -28,8 +28,6 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -42,16 +40,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.gui.HtmlPanel;
-import org.lobobrowser.html.gui.SelectionChangeEvent;
-import org.lobobrowser.html.gui.SelectionChangeListener;
 import org.lobobrowser.http.UserAgentContext;
 
 /**
@@ -115,12 +109,9 @@ public class TestFrame extends JFrame {
 		bottomPanel.add(tabbedPane, BorderLayout.CENTER);
 
 		final HtmlPanel panel = new HtmlPanel();
-		panel.addSelectionChangeListener(new SelectionChangeListener() {
-			@Override
-			public void selectionChanged(SelectionChangeEvent event) {
-				if (logger.isInfoEnabled()) {
-					logger.info("selectionChanged(): selection node: " + panel.getSelectionNode());
-				}
+		panel.addSelectionChangeListener(event -> {
+			if (logger.isInfoEnabled()) {
+				logger.info("selectionChanged(): selection node: " + panel.getSelectionNode());
 			}
 		});
 		UserAgentContext ucontext = new SimpleUserAgentContext();
@@ -133,24 +124,16 @@ public class TestFrame extends JFrame {
 		tabbedPane.addTab("HTML", panel);
 		tabbedPane.addTab("Tree", scrollPane);
 		tabbedPane.addTab("Source", textAreaSp);
-		tabbedPane.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				Component component = tabbedPane.getSelectedComponent();
-				if (component == scrollPane) {
-					tree.setModel(new NodeTreeModel(panel.getRootNode()));
-				} else if (component == textAreaSp) {
-					textArea.setText(rcontext.getSourceCode());
-				}
+		tabbedPane.addChangeListener(e -> {
+			Component component = tabbedPane.getSelectedComponent();
+			if (component == scrollPane) {
+				tree.setModel(new NodeTreeModel(panel.getRootNode()));
+			} else if (component == textAreaSp) {
+				textArea.setText(rcontext.getSourceCode());
 			}
 		});
 
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				process(textField.getText());
-			}
-		});
+		button.addActionListener(event -> process(textField.getText()));
 	}
 
 	/**

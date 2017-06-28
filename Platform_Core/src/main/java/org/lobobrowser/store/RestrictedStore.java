@@ -359,19 +359,13 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 */
 	public InputStream getInputStream(final File fullFile, final String ref) throws IOException {
 		try {
-			return AccessController.doPrivileged(new PrivilegedAction<InputStream>() {
-				// Reason: Caller was able to get an instance of this
-				// RestrictedStore. Additionally, we check that the File
-				// path is within what's allowed.
-				@Override
-				public InputStream run() {
-					try {
-						String canonical = fullFile.getCanonicalPath();
-						checkPath(canonical, ref);
-						return new FileInputStream(fullFile);
-					} catch (IOException ioe) {
-						throw new WrapperException(ioe);
-					}
+			return AccessController.doPrivileged((PrivilegedAction<InputStream>) () -> {
+				try {
+					String canonical = fullFile.getCanonicalPath();
+					checkPath(canonical, ref);
+					return new FileInputStream(fullFile);
+				} catch (IOException ioe) {
+					throw new WrapperException(ioe);
 				}
 			});
 		} catch (WrapperException we) {
@@ -392,32 +386,26 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 */
 	public OutputStream getOutputStream(final File fullFile, final String ref) throws IOException {
 		try {
-			return AccessController.doPrivileged(new PrivilegedAction<OutputStream>() {
-				// Reason: Caller was able to get an instance of this
-				// RestrictedStore. Additionally, we check that the File
-				// path is within what's allowed.
-				@Override
-				public OutputStream run() {
-					try {
-						long toSubtract = EMPTY_FILE_SIZE + (fullFile.exists() ? fullFile.length() : 0);
-						String canonical = fullFile.getCanonicalPath();
-						checkPath(canonical, ref);
-						// TODO: Disallow size file here
-						File parent = fullFile.getParentFile();
-						if (!parent.exists()) {
-							parent.mkdirs();
-						} else if (!parent.isDirectory()) {
-							throw new IllegalArgumentException("Parent of '" + ref + "' is not a directory");
-						}
-						FileOutputStream fout = new FileOutputStream(fullFile);
-						OutputStream out = new RestrictedOutputStream(fout, RestrictedStore.this);
-						if (toSubtract != 0) {
-							subtractUsedBytes(toSubtract);
-						}
-						return out;
-					} catch (IOException ioe) {
-						throw new WrapperException(ioe);
+			return AccessController.doPrivileged((PrivilegedAction<OutputStream>) () -> {
+				try {
+					long toSubtract = EMPTY_FILE_SIZE + (fullFile.exists() ? fullFile.length() : 0);
+					String canonical = fullFile.getCanonicalPath();
+					checkPath(canonical, ref);
+					// TODO: Disallow size file here
+					File parent = fullFile.getParentFile();
+					if (!parent.exists()) {
+						parent.mkdirs();
+					} else if (!parent.isDirectory()) {
+						throw new IllegalArgumentException("Parent of '" + ref + "' is not a directory");
 					}
+					FileOutputStream fout = new FileOutputStream(fullFile);
+					OutputStream out = new RestrictedOutputStream(fout, RestrictedStore.this);
+					if (toSubtract != 0) {
+						subtractUsedBytes(toSubtract);
+					}
+					return out;
+				} catch (IOException ioe) {
+					throw new WrapperException(ioe);
 				}
 			});
 		} catch (WrapperException we) {
@@ -455,23 +443,11 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	public Collection getPaths(String regexp) throws IOException {
 		final Pattern pattern = Pattern.compile(regexp);
 		try {
-			return AccessController.doPrivileged(new PrivilegedAction<Collection>() {
-				// Reason: Calling getPaths() requires certain file
-				// permissions
-				// that the caller might not naturally have. Paths are
-				// relative to
-				// the baseDirectory of the RestrictedStore. The user
-				// must have
-				// proper hosts privileges to be able to get the
-				// RestrictedStore
-				// instance.
-				@Override
-				public Collection run() {
-					try {
-						return getPaths(pattern, baseDirectory);
-					} catch (IOException ioe) {
-						throw new WrapperException(ioe);
-					}
+			return AccessController.doPrivileged((PrivilegedAction<Collection>) () -> {
+				try {
+					return getPaths(pattern, baseDirectory);
+				} catch (IOException ioe) {
+					throw new WrapperException(ioe);
 				}
 			});
 		} catch (WrapperException we) {
@@ -638,34 +614,31 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 */
 	private File managedToNative(final String path) throws IOException {
 		try {
-			return AccessController.doPrivileged(new PrivilegedAction<File>() {
-				@Override
-				public File run() {
-					try {
-						if (path.contains("\\")) {
-							throw new IllegalArgumentException(
-									"Characer backslash (\\) not allowed in managed paths. Use a forward slash. Path="
-											+ path);
-						}
-						String relPath = path;
-						while (relPath.startsWith("/")) {
-							relPath = relPath.substring(1);
-						}
-						relPath = relPath.replace("/", File.separator);
-						File fullFile;
-						if (relPath.length() == 0) {
-							fullFile = baseDirectory;
-						} else {
-							fullFile = new File(baseDirectory, relPath);
-						}
-						String canonical = fullFile.getCanonicalPath();
-						// Must check so that all ManagedFile instances
-						// are known to be safe.
-						checkPath(canonical, path);
-						return fullFile;
-					} catch (IOException ioe) {
-						throw new WrapperException(ioe);
+			return AccessController.doPrivileged((PrivilegedAction<File>) () -> {
+				try {
+					if (path.contains("\\")) {
+						throw new IllegalArgumentException(
+								"Characer backslash (\\) not allowed in managed paths. Use a forward slash. Path="
+										+ path);
 					}
+					String relPath = path;
+					while (relPath.startsWith("/")) {
+						relPath = relPath.substring(1);
+					}
+					relPath = relPath.replace("/", File.separator);
+					File fullFile;
+					if (relPath.length() == 0) {
+						fullFile = baseDirectory;
+					} else {
+						fullFile = new File(baseDirectory, relPath);
+					}
+					String canonical = fullFile.getCanonicalPath();
+					// Must check so that all ManagedFile instances
+					// are known to be safe.
+					checkPath(canonical, path);
+					return fullFile;
+				} catch (IOException ioe) {
+					throw new WrapperException(ioe);
 				}
 			});
 		} catch (WrapperException we) {
@@ -757,21 +730,15 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		@Override
 		public boolean createNewFile() throws IOException {
 			try {
-				return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-					// Reason: Should be allowed. Obtaining an instance
-					// of ManagedFileImpl
-					// requires privileges.
-					@Override
-					public Boolean run() {
-						try {
-							boolean success = nativeFile.createNewFile();
-							if (success) {
-								RestrictedStore.this.addUsedBytes(EMPTY_FILE_SIZE);
-							}
-							return success;
-						} catch (IOException ioe) {
-							throw new WrapperException(ioe);
+				return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> {
+					try {
+						boolean success = nativeFile.createNewFile();
+						if (success) {
+							RestrictedStore.this.addUsedBytes(EMPTY_FILE_SIZE);
 						}
+						return success;
+					} catch (IOException ioe) {
+						throw new WrapperException(ioe);
 					}
 				});
 			} catch (WrapperException we) {
@@ -786,15 +753,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		 */
 		@Override
 		public boolean exists() {
-			return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-				// Reason: Should be allowed. Obtaining an instance of
-				// ManagedFileImpl
-				// requires privileges.
-				@Override
-				public Boolean run() {
-					return nativeFile.exists();
-				}
-			});
+			return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> nativeFile.exists());
 		}
 
 		/*
@@ -825,20 +784,14 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		@Override
 		public ManagedFile getParent() throws IOException {
 			try {
-				return AccessController.doPrivileged(new PrivilegedAction<ManagedFile>() {
-					// Reason: Should be allowed. Obtaining an instance
-					// of ManagedFileImpl
-					// requires privileges.
-					@Override
-					public ManagedFile run() {
-						try {
-							File parentFile = nativeFile.getParentFile();
-							// Note: nativeToManaged checks canonical
-							// path for permissions.
-							return nativeToManaged(parentFile);
-						} catch (IOException ioe) {
-							throw new WrapperException(ioe);
-						}
+				return AccessController.doPrivileged((PrivilegedAction<ManagedFile>) () -> {
+					try {
+						File parentFile = nativeFile.getParentFile();
+						// Note: nativeToManaged checks canonical
+						// path for permissions.
+						return nativeToManaged(parentFile);
+					} catch (IOException ioe) {
+						throw new WrapperException(ioe);
 					}
 				});
 			} catch (WrapperException we) {
@@ -863,15 +816,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		 */
 		@Override
 		public boolean isDirectory() {
-			return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-				// Reason: Should be allowed. Obtaining an instance of
-				// ManagedFileImpl
-				// requires privileges.
-				@Override
-				public Boolean run() {
-					return nativeFile.isDirectory();
-				}
-			});
+			return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> nativeFile.isDirectory());
 		}
 
 		/*
@@ -893,26 +838,20 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		@Override
 		public ManagedFile[] listFiles(final ManagedFileFilter filter) throws IOException {
 			try {
-				return AccessController.doPrivileged(new PrivilegedAction<ManagedFile[]>() {
-					// Reason: Should be allowed. Obtaining an instance
-					// of ManagedFileImpl
-					// requires privileges.
-					@Override
-					public ManagedFile[] run() {
-						try {
-							File[] files = nativeFile.listFiles();
-							List<ManagedFile> mfs = new ArrayList<ManagedFile>();
-							for (int i = 0; i < files.length; i++) {
-								File file = files[i];
-								ManagedFile mf = nativeToManaged(file);
-								if (filter == null || filter.accept(mf)) {
-									mfs.add(mf);
-								}
+				return AccessController.doPrivileged((PrivilegedAction<ManagedFile[]>) () -> {
+					try {
+						File[] files = nativeFile.listFiles();
+						List<ManagedFile> mfs = new ArrayList<ManagedFile>();
+						for (int i = 0; i < files.length; i++) {
+							File file = files[i];
+							ManagedFile mf = nativeToManaged(file);
+							if (filter == null || filter.accept(mf)) {
+								mfs.add(mf);
 							}
-							return mfs.toArray(new ManagedFile[0]);
-						} catch (IOException ioe) {
-							throw new WrapperException(ioe);
 						}
+						return mfs.toArray(new ManagedFile[0]);
+					} catch (IOException ioe) {
+						throw new WrapperException(ioe);
 					}
 				});
 			} catch (WrapperException we) {
@@ -927,22 +866,16 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		 */
 		@Override
 		public boolean mkdir() {
-			return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-				// Reason: Should be allowed. Obtaining an instance of
-				// ManagedFileImpl
-				// requires privileges.
-				@Override
-				public Boolean run() {
-					boolean success = nativeFile.mkdir();
-					if (success) {
-						try {
-							RestrictedStore.this.addUsedBytes(DIRECTORY_SIZE);
-						} catch (IOException ioe) {
-							// Ignore
-						}
+			return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> {
+				boolean success = nativeFile.mkdir();
+				if (success) {
+					try {
+						RestrictedStore.this.addUsedBytes(DIRECTORY_SIZE);
+					} catch (IOException ioe) {
+						// Ignore
 					}
-					return success;
 				}
+				return success;
 			});
 		}
 
@@ -953,22 +886,16 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		 */
 		@Override
 		public boolean mkdirs() {
-			return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-				// Reason: Should be allowed. Obtaining an instance of
-				// ManagedFileImpl
-				// requires privileges.
-				@Override
-				public Boolean run() {
-					boolean success = nativeFile.mkdirs();
-					if (success) {
-						try {
-							RestrictedStore.this.addUsedBytes(DIRECTORY_SIZE);
-						} catch (IOException ioe) {
-							// Ignore
-						}
+			return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> {
+				boolean success = nativeFile.mkdirs();
+				if (success) {
+					try {
+						RestrictedStore.this.addUsedBytes(DIRECTORY_SIZE);
+					} catch (IOException ioe) {
+						// Ignore
 					}
-					return success;
 				}
+				return success;
 			});
 		}
 
@@ -980,23 +907,17 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		@Override
 		public boolean delete() throws IOException {
 			try {
-				return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-					// Reason: Should be allowed. Obtaining an instance
-					// of ManagedFileImpl
-					// requires privileges.
-					@Override
-					public Boolean run() {
-						try {
-							long prevLength = nativeFile.length() + EMPTY_FILE_SIZE;
-							if (nativeFile.delete()) {
-								subtractUsedBytes(prevLength);
-								return true;
-							} else {
-								return false;
-							}
-						} catch (IOException ioe) {
-							throw new WrapperException(ioe);
+				return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> {
+					try {
+						long prevLength = nativeFile.length() + EMPTY_FILE_SIZE;
+						if (nativeFile.delete()) {
+							subtractUsedBytes(prevLength);
+							return true;
+						} else {
+							return false;
 						}
+					} catch (IOException ioe) {
+						throw new WrapperException(ioe);
 					}
 				});
 			} catch (WrapperException we) {

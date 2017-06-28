@@ -121,12 +121,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.notificationTimer = new Timer(NOTIF_TIMER_DELAY, new NotificationTimerAction());
 		this.notificationTimer.setRepeats(false);
 		this.notificationListener = new LocalDocumentNotificationListener();
-		this.notificationImmediateAction = new Runnable() {
-			@Override
-			public void run() {
-				processNotifications();
-			}
-		};
+		this.notificationImmediateAction = () -> processNotifications();
 	}
 
 	/**
@@ -286,12 +281,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.scrollImpl(x, y);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					scrollImpl(x, y);
-				}
-			});
+			SwingUtilities.invokeLater(() -> scrollImpl(x, y));
 		}
 	}
 
@@ -307,12 +297,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.scrollByImpl(x, y);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					scrollByImpl(x, y);
-				}
-			});
+			SwingUtilities.invokeLater(() -> scrollByImpl(x, y));
 		}
 	}
 
@@ -351,12 +336,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.clearDocumentImpl();
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					HtmlPanel.this.clearDocumentImpl();
-				}
-			});
+			SwingUtilities.invokeLater(() -> HtmlPanel.this.clearDocumentImpl());
 		}
 	}
 
@@ -403,12 +383,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.setDocumentImpl(node, rcontext);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					HtmlPanel.this.setDocumentImpl(node, rcontext);
-				}
-			});
+			SwingUtilities.invokeLater(() -> HtmlPanel.this.setDocumentImpl(node, rcontext));
 		}
 	}
 
@@ -426,12 +401,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (SwingUtilities.isEventDispatchThread()) {
 			this.scrollToElementImpl(nameOrId);
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					scrollToElementImpl(nameOrId);
-				}
-			});
+			SwingUtilities.invokeLater(() -> scrollToElementImpl(nameOrId));
 		}
 	}
 

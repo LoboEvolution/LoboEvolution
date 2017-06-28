@@ -22,7 +22,6 @@ package org.lobobrowser.html.control;
 
 import java.awt.ComponentOrientation;
 import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -34,7 +33,6 @@ import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
@@ -88,35 +86,32 @@ public class InputSelectControl extends BaseInputControl {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
 		final JComboBox<OptionItem> comboBox = new JComboBox<OptionItem>();
-		comboBox.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				OptionItem item = (OptionItem) e.getItem();
-				if (item != null) {
-					switch (e.getStateChange()) {
-					case ItemEvent.SELECTED:
-						if (!suspendSelections) {
-							// In this case it's better to change the
-							// selected index. We don't want multiple
-							// selections.
-							inSelectionEvent = true;
-							try {
-								int selectedIndex = comboBox.getSelectedIndex();
-								HTMLSelectElementImpl selectElement = (HTMLSelectElementImpl) modelNode;
-								selectElement.setSelectedIndex(selectedIndex);
-							} finally {
-								inSelectionEvent = false;
-							}
-							HtmlController.getInstance().onChange(modelNode);
+		comboBox.addItemListener(e -> {
+			OptionItem item = (OptionItem) e.getItem();
+			if (item != null) {
+				switch (e.getStateChange()) {
+				case ItemEvent.SELECTED:
+					if (!suspendSelections) {
+						// In this case it's better to change the
+						// selected index. We don't want multiple
+						// selections.
+						inSelectionEvent = true;
+						try {
+							int selectedIndex = comboBox.getSelectedIndex();
+							HTMLSelectElementImpl selectElement = (HTMLSelectElementImpl) modelNode;
+							selectElement.setSelectedIndex(selectedIndex);
+						} finally {
+							inSelectionEvent = false;
 						}
-						break;
-					case ItemEvent.DESELECTED:
-						// Ignore deselection here. It must necessarily
-						// be followed by combo-box selection. If we deselect,
-						// that
-						// changes the state of the control.
-						break;
+						HtmlController.getInstance().onChange(modelNode);
 					}
+					break;
+				case ItemEvent.DESELECTED:
+					// Ignore deselection here. It must necessarily
+					// be followed by combo-box selection. If we deselect,
+					// that
+					// changes the state of the control.
+					break;
 				}
 			}
 		});
@@ -124,31 +119,28 @@ public class InputSelectControl extends BaseInputControl {
 		final JList<OptionItem> list = new JList<OptionItem>(listModel);
 		this.listModel = listModel;
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		list.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting() && !suspendSelections) {
-					boolean changed = false;
-					inSelectionEvent = true;
-					try {
-						int modelSize = listModel.getSize();
-						for (int i = 0; i < modelSize; i++) {
-							OptionItem item = listModel.get(i);
-							if (item != null) {
-								boolean oldIsSelected = item.isSelected();
-								boolean newIsSelected = list.isSelectedIndex(i);
-								if (oldIsSelected != newIsSelected) {
-									changed = true;
-									item.setSelected(newIsSelected);
-								}
+		list.addListSelectionListener(e -> {
+			if (!e.getValueIsAdjusting() && !suspendSelections) {
+				boolean changed = false;
+				inSelectionEvent = true;
+				try {
+					int modelSize = listModel.getSize();
+					for (int i = 0; i < modelSize; i++) {
+						OptionItem item = listModel.get(i);
+						if (item != null) {
+							boolean oldIsSelected = item.isSelected();
+							boolean newIsSelected = list.isSelectedIndex(i);
+							if (oldIsSelected != newIsSelected) {
+								changed = true;
+								item.setSelected(newIsSelected);
 							}
 						}
-					} finally {
-						inSelectionEvent = false;
 					}
-					if (changed) {
-						HtmlController.getInstance().onChange(modelNode);
-					}
+				} finally {
+					inSelectionEvent = false;
+				}
+				if (changed) {
+					HtmlController.getInstance().onChange(modelNode);
 				}
 			}
 		});

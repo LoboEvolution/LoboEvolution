@@ -24,8 +24,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -128,12 +126,7 @@ public class CssParserTest extends JFrame {
 		tabbedPane.addTab("Parsed CSS", htmlPanel);
 		tabbedPane.addTab("Source Code", textAreaSp);
 
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				process(textField.getText());
-			}
-		});
+		button.addActionListener(event -> process(textField.getText()));
 	}
 
 	/**

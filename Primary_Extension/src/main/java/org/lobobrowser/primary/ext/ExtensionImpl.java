@@ -47,8 +47,6 @@ import org.lobobrowser.primary.clientlets.html.HtmlContent;
 import org.lobobrowser.primary.clientlets.html.HtmlRendererContextImpl;
 import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.ua.NavigationEntry;
-import org.lobobrowser.ua.NavigatorErrorListener;
-import org.lobobrowser.ua.NavigatorExceptionEvent;
 import org.lobobrowser.ua.NavigatorExtension;
 import org.lobobrowser.ua.NavigatorExtensionContext;
 import org.lobobrowser.ua.NavigatorFrame;
@@ -84,12 +82,8 @@ public class ExtensionImpl implements NavigatorExtension {
 	public void init(NavigatorExtensionContext pcontext) {
 		pcontext.addURLStreamHandlerFactory(new PrimaryStreamHandlerFactory());
 		pcontext.addClientletSelector(new PrimaryClientletSelector());
-		pcontext.addNavigatorErrorListener(new NavigatorErrorListener() {
-			@Override
-			public void errorOcurred(NavigatorExceptionEvent event) {
-				showError(event.getNavigatorFrame(), event.getResponse(), event.getException());
-			}
-		});
+		pcontext.addNavigatorErrorListener(
+				event -> showError(event.getNavigatorFrame(), event.getResponse(), event.getException()));
 	}
 
 	/*

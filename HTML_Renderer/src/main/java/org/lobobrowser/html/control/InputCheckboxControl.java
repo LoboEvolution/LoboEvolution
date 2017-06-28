@@ -24,8 +24,6 @@
 package org.lobobrowser.html.control;
 
 import java.awt.ComponentOrientation;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 
@@ -66,12 +64,8 @@ public class InputCheckboxControl extends BaseInputControl {
 		checkBox.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
 		checkBox.setEnabled(!modelNode.getDisabled());
 		checkBox.setSelected(modelNode.getChecked());
-		widget.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				HtmlController.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0);
-			}
-		});
+		widget.addActionListener(
+				event -> HtmlController.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0));
 
 		this.add(checkBox);
 	}

@@ -215,24 +215,21 @@ public abstract class AbstractRequestHandler implements RequestHandler {
 				}
 			} else {
 				try {
-					SwingUtilities.invokeAndWait(new Runnable() {
-						@Override
-						public void run() {
-							boolean verified = false;
-							Component dc = dialogComponent;
-							if (dc != null) {
-								int result = JOptionPane.showConfirmDialog(dc,
-										"Host " + host
-												+ " does not match SSL certificate or CA not recognized. Proceed anyway?",
-										"Security Warning", JOptionPane.YES_NO_OPTION);
-								verified = result == JOptionPane.YES_OPTION;
-								if (verified) {
-									vhs.add(host);
-								}
+					SwingUtilities.invokeAndWait(() -> {
+						boolean verified = false;
+						Component dc = dialogComponent;
+						if (dc != null) {
+							int result = JOptionPane.showConfirmDialog(dc,
+									"Host " + host
+											+ " does not match SSL certificate or CA not recognized. Proceed anyway?",
+									"Security Warning", JOptionPane.YES_NO_OPTION);
+							verified = result == JOptionPane.YES_OPTION;
+							if (verified) {
+								vhs.add(host);
 							}
-							synchronized (LocalHostnameVerifier.this) {
-								LocalHostnameVerifier.this.verified = verified;
-							}
+						}
+						synchronized (LocalHostnameVerifier.this) {
+							LocalHostnameVerifier.this.verified = verified;
 						}
 					});
 				} catch (InterruptedException ie) {

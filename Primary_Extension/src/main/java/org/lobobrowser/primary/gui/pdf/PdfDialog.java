@@ -25,7 +25,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -382,12 +381,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		pageField = new JTextField("-", 3);
 		// pageField.setEnabled(false);
 		pageField.setMaximumSize(new Dimension(45, 32));
-		pageField.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				doPageTyped();
-			}
-		});
+		pageField.addActionListener(evt -> doPageTyped());
 		toolbar.add(pageField);
 		jb = new JButton(nextAction);
 		jb.setText("");
@@ -434,12 +428,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			setVisible(true);
 		} else {
 			try {
-				SwingUtilities.invokeAndWait(new Runnable() {
-					@Override
-					public void run() {
-						setVisible(true);
-					}
-				});
+				SwingUtilities.invokeAndWait(() -> setVisible(true));
 			} catch (InvocationTargetException ie) {
 				// ignore
 			} catch (InterruptedException ie) {

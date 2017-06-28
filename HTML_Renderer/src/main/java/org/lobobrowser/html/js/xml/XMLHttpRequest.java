@@ -20,8 +20,6 @@
  */
 package org.lobobrowser.html.js.xml;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -407,14 +405,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 		synchronized (this) {
 			this.onreadystatechange = value;
 			if (value != null && !this.listenerAdded) {
-				this.request.addReadyStateChangeListener(new PropertyChangeListener() {
-
-					@Override
-					public void propertyChange(PropertyChangeEvent arg0) {
-						executeReadyStateChange();
-
-					}
-				});
+				this.request.addReadyStateChangeListener(arg0 -> executeReadyStateChange());
 				this.listenerAdded = true;
 			}
 		}

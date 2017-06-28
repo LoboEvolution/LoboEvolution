@@ -419,22 +419,19 @@ public class ExtensionManager {
 						exception);
 			}
 		} else {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					Collection<Extension> ext = extensions;
-					// Call all plugins once to see if they can select the
-					// response.
-					boolean dispatched = false;
-					for (Extension ei : ext) {
-						if (ei.handleError(event)) {
-							dispatched = true;
-						}
+			SwingUtilities.invokeLater(() -> {
+				Collection<Extension> ext = extensions;
+				// Call all plugins once to see if they can select the
+				// response.
+				boolean dispatched = false;
+				for (Extension ei : ext) {
+					if (ei.handleError(event)) {
+						dispatched = true;
 					}
-					if (!dispatched && logger.isInfoEnabled()) {
-						logger.error("No error handlers found for error that occurred while processing response=["
-								+ response + "].", exception);
-					}
+				}
+				if (!dispatched && logger.isInfoEnabled()) {
+					logger.error("No error handlers found for error that occurred while processing response=["
+							+ response + "].", exception);
 				}
 			});
 		}

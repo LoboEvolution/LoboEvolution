@@ -200,17 +200,14 @@ public class LocalSecurityPolicy extends Policy {
 			// Files under the settings directory (e.g. cached JARs)
 			// are considered remote.
 			final String filePath = url.getPath();
-			Boolean result = AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-				@Override
-				public Boolean run() {
-					File file = new File(filePath);
-					try {
-						String canonical = file.getCanonicalPath();
-						return !canonical.startsWith(STORE_DIRECTORY_CANONICAL);
-					} catch (IOException ioe) {
-						logger.log(Level.ERROR, ioe);
-						return false;
-					}
+			Boolean result = AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> {
+				File file = new File(filePath);
+				try {
+					String canonical = file.getCanonicalPath();
+					return !canonical.startsWith(STORE_DIRECTORY_CANONICAL);
+				} catch (IOException ioe) {
+					logger.log(Level.ERROR, ioe);
+					return false;
 				}
 			});
 			return result.booleanValue();

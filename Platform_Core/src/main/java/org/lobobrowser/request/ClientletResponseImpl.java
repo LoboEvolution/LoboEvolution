@@ -31,7 +31,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.Date;
-import java.util.EventObject;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +41,6 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.ua.ProgressType;
 import org.lobobrowser.ua.RequestType;
-import org.lobobrowser.util.GenericEventListener;
 import org.lobobrowser.util.InputProgressEvent;
 import org.lobobrowser.util.MonitoredInputStream;
 import org.lobobrowser.util.SSLCertificate;
@@ -311,13 +309,10 @@ public class ClientletResponseImpl implements ClientletResponse {
 			InputStream bis;
 			if (this.requestHandler != null) {
 				MonitoredInputStream mis = new MonitoredInputStream(in);
-				mis.evtProgress.addListener(new GenericEventListener() {
-					@Override
-					public void processEvent(EventObject event) {
-						InputProgressEvent pe = (InputProgressEvent) event;
-						requestHandler.handleProgress(org.lobobrowser.ua.ProgressType.CONTENT_LOADING, responseURL,
-								getLastRequestMethod(), pe.getProgress(), contentLength);
-					}
+				mis.evtProgress.addListener(event -> {
+					InputProgressEvent pe = (InputProgressEvent) event;
+					requestHandler.handleProgress(org.lobobrowser.ua.ProgressType.CONTENT_LOADING, responseURL,
+							getLastRequestMethod(), pe.getProgress(), contentLength);
 				});
 				// TODO Buffer size too big if contentLength small
 				bis = new BufferedInputStream(mis, bufferSize);

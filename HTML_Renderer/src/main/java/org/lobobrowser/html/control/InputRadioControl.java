@@ -24,8 +24,6 @@
 package org.lobobrowser.html.control;
 
 import java.awt.ComponentOrientation;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -92,12 +90,8 @@ public class InputRadioControl extends BaseInputControl {
 		radio.setSelected(controlElement.getAttributeAsBoolean("checked"));
 		this.add(radio);
 
-		widget.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				HtmlController.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0);
-			}
-		});
+		widget.addActionListener(
+				event -> HtmlController.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
 	}
 
 	/** The button group. */

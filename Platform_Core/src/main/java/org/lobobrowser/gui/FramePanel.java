@@ -597,18 +597,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 			// Security note: Need to pass security context of caller
 			// into invokeLater task.
 			final AccessControlContext context = AccessController.getContext();
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					PrivilegedAction<Object> action = new PrivilegedAction<Object>() {
-						@Override
-						public Object run() {
-							FramePanel.this.replaceContentImpl(response, content);
-							return null;
-						}
-					};
-					AccessController.doPrivileged(action, context);
-				}
+			SwingUtilities.invokeLater(() -> {
+				PrivilegedAction<Object> action = () -> {
+					FramePanel.this.replaceContentImpl(response, content);
+					return null;
+				};
+				AccessController.doPrivileged(action, context);
 			});
 		}
 	}
@@ -788,14 +782,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 */
 	@Override
 	public boolean confirm(final String message) {
-		return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-			// Reason: We don't want an "Applet Window" message and
-			// it's no big deal to allow it here.
-			@Override
-			public Boolean run() {
-				return JOptionPane.showConfirmDialog(FramePanel.this, message) == JOptionPane.YES_OPTION;
-			}
-		});
+		return AccessController.doPrivileged((PrivilegedAction<Boolean>) () -> JOptionPane
+				.showConfirmDialog(FramePanel.this, message) == JOptionPane.YES_OPTION);
 	}
 
 	/**
@@ -980,15 +968,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		if (sm == null) {
 			RequestEngine.getInstance().scheduleRequest(handler);
 		} else {
-			AccessController.doPrivileged(new PrivilegedAction<Object>() {
-				@Override
-				public Object run() {
-					// Justification: While requests by untrusted code
-					// are generally only allowed on certain hosts,
-					// navigation is an exception.
-					RequestEngine.getInstance().scheduleRequest(handler);
-					return null;
-				}
+			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+				// Justification: While requests by untrusted code
+				// are generally only allowed on certain hosts,
+				// navigation is an exception.
+				RequestEngine.getInstance().scheduleRequest(handler);
+				return null;
 			});
 		}
 	}
@@ -1122,16 +1107,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	public static NavigatorFrame openWindow(final FramePanel opener, URL url, final String windowId,
 			final Properties windowProperties, String method, ParameterInfo pinfo) {
 		ClientletRequest request = new ClientletRequestImpl(true, url, method, pinfo, RequestType.OPEN_WINDOW);
-		final NavigatorWindowImpl wcontext = AccessController.doPrivileged(new PrivilegedAction<NavigatorWindowImpl>() {
-			// Reason: Window creation can require special permissions
-			// at various
-			// levels, e.g. ExtensionManager access and os.version check
-			// in Swing.
-			@Override
-			public NavigatorWindowImpl run() {
-				return new NavigatorWindowImpl(opener, windowId, windowProperties);
-			}
-		});
+		final NavigatorWindowImpl wcontext = AccessController
+				.doPrivileged((PrivilegedAction<NavigatorWindowImpl>) () -> new NavigatorWindowImpl(opener, windowId,
+						windowProperties));
 		final FramePanel newFrame = wcontext.getFramePanel();
 		final ClientletRequestHandler handler = new ClientletRequestHandler(request, wcontext, newFrame);
 		handler.evtProgress.addListener(new org.lobobrowser.util.GenericEventListener() {
@@ -1143,12 +1121,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 					if (SwingUtilities.isEventDispatchThread()) {
 						wcontext.resetAsNavigator(handler.getContextWindowProperties());
 					} else {
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								wcontext.resetAsNavigator(handler.getContextWindowProperties());
-							}
-						});
+						SwingUtilities
+								.invokeLater(() -> wcontext.resetAsNavigator(handler.getContextWindowProperties()));
 					}
 					// We don't want to reset as navigator twice.
 					handler.evtProgress.removeListener(this);
@@ -1161,15 +1135,12 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		if (sm == null) {
 			RequestEngine.getInstance().scheduleRequest(handler);
 		} else {
-			AccessController.doPrivileged(new PrivilegedAction<Object>() {
-				@Override
-				public Object run() {
-					// Justification: While requests by untrusted code
-					// are generally only allowed on certain hosts,
-					// navigation is an exception.
-					RequestEngine.getInstance().scheduleRequest(handler);
-					return null;
-				}
+			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+				// Justification: While requests by untrusted code
+				// are generally only allowed on certain hosts,
+				// navigation is an exception.
+				RequestEngine.getInstance().scheduleRequest(handler);
+				return null;
 			});
 		}
 		return newFrame;
@@ -1186,14 +1157,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 */
 	@Override
 	public String prompt(final String message, final String inputDefault) {
-		return AccessController.doPrivileged(new PrivilegedAction<String>() {
-			// Reason: We don't want an "Applet Window" message and
-			// it's no big deal to allow it here.
-			@Override
-			public String run() {
-				return JOptionPane.showInputDialog(FramePanel.this, message, inputDefault);
-			}
-		});
+		return AccessController.doPrivileged(
+				(PrivilegedAction<String>) () -> JOptionPane.showInputDialog(FramePanel.this, message, inputDefault));
 	}
 
 	/**
@@ -1227,14 +1192,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 */
 	@Override
 	public void alert(final String message) {
-		AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			// Reason: We don't want an "Applet Window" message and
-			// it's no big deal to allow it here.
-			@Override
-			public Object run() {
-				JOptionPane.showMessageDialog(FramePanel.this, message);
-				return null;
-			}
+		AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
+			JOptionPane.showMessageDialog(FramePanel.this, message);
+			return null;
 		});
 	}
 

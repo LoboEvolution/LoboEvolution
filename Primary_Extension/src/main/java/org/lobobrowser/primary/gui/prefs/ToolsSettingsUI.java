@@ -27,7 +27,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import org.lobobrowser.primary.gui.AbstractItemEditor;
 import org.lobobrowser.primary.gui.AbstractSettingsUI;
 import org.lobobrowser.primary.gui.ItemEditorFactory;
 import org.lobobrowser.primary.gui.ItemListControl;
@@ -53,12 +52,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 * Instantiates a new tools settings ui.
 	 */
 	public ToolsSettingsUI() {
-		ItemEditorFactory<SearchEngine> factory = new ItemEditorFactory<SearchEngine>() {
-			@Override
-			public AbstractItemEditor<SearchEngine> createItemEditor() {
-				return new SearchEngineEditor();
-			}
-		};
+		ItemEditorFactory<SearchEngine> factory = () -> new SearchEngineEditor();
 		this.searchEngineListControl = new ItemListControl<SearchEngine>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

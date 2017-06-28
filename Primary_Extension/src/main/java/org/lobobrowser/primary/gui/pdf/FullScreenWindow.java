@@ -26,8 +26,6 @@ import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -246,16 +244,7 @@ public class FullScreenWindow {
 
 			jb.setBackground(Color.yellow);
 
-			jb.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent evt) {
-
-					pickDevice(mygd);
-
-				}
-
-			});
+			jb.addActionListener(evt -> pickDevice(mygd));
 
 			Dimension sz = jb.getPreferredSize();
 

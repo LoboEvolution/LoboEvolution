@@ -40,7 +40,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
 import java.util.HashMap;
@@ -171,12 +170,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		fontList = new JComboBox<String>(LAFSettings.FONTS);
 		fontSizeList = new JComboBox<String>(LAFSettings.FONTS_SIZE);
 
-		ActionListener actionListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				updatePreview();
-			}
-		};
+		ActionListener actionListener = e -> updatePreview();
 
 		this.loadSettings();
 

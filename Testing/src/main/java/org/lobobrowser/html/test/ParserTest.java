@@ -24,8 +24,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -123,12 +121,7 @@ public class ParserTest extends JFrame {
 		tabbedPane.addTab("HTML DOM", scrollPane);
 		tabbedPane.addTab("Source Code", textAreaSp);
 
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				process(textField.getText());
-			}
-		});
+		button.addActionListener(event -> process(textField.getText()));
 	}
 
 	/**

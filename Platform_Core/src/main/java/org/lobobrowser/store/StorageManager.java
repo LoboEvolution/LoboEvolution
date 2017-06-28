@@ -188,22 +188,16 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 		synchronized (this) {
 			store = this.restrictedStoreCache.get(normHost);
 			if (store == null) {
-				store = AccessController.doPrivileged(new PrivilegedAction<RestrictedStore>() {
-					// Reason: Since we are checking StoreHostPermission
-					// previously,
-					// this is fine.
-					@Override
-					public RestrictedStore run() {
-						File hostStoreDir = new File(storeDirectory, HOST_STORE_DIR);
-						File domainDir = new File(hostStoreDir, normalizedFileName(normHost));
-						if (!createIfNotExists && !domainDir.exists()) {
-							return null;
-						}
-						try {
-							return new RestrictedStore(domainDir, HOST_STORE_QUOTA);
-						} catch (IOException ioe) {
-							throw new IllegalStateException(ioe);
-						}
+				store = AccessController.doPrivileged((PrivilegedAction<RestrictedStore>) () -> {
+					File hostStoreDir = new File(storeDirectory, HOST_STORE_DIR);
+					File domainDir = new File(hostStoreDir, normalizedFileName(normHost));
+					if (!createIfNotExists && !domainDir.exists()) {
+						return null;
+					}
+					try {
+						return new RestrictedStore(domainDir, HOST_STORE_QUOTA);
+					} catch (IOException ioe) {
+						throw new IllegalStateException(ioe);
 					}
 				});
 				if (store != null) {

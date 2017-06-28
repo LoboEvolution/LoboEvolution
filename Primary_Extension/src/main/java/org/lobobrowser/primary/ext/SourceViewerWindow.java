@@ -22,8 +22,6 @@ package org.lobobrowser.primary.ext;
 
 import java.awt.BorderLayout;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -103,40 +101,37 @@ public class SourceViewerWindow extends JFrame {
 		panel.add(findButton, BorderLayout.EAST);
 		add(panel, BorderLayout.SOUTH);
 
-		findButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String find = jtfFilter.getText().toLowerCase();
-				textArea.requestFocusInWindow();
-				if (find != null && find.length() > 0) {
-					Document document = textArea.getDocument();
-					int findLength = find.length();
-					try {
-						boolean found = false;
-						if (pos + findLength > document.getLength()) {
-							pos = 0;
+		findButton.addActionListener(e -> {
+			String find = jtfFilter.getText().toLowerCase();
+			textArea.requestFocusInWindow();
+			if (find != null && find.length() > 0) {
+				Document document = textArea.getDocument();
+				int findLength = find.length();
+				try {
+					boolean found = false;
+					if (pos + findLength > document.getLength()) {
+						pos = 0;
+					}
+					while (pos + findLength <= document.getLength()) {
+						String match = document.getText(pos, findLength).toLowerCase();
+						if (match.equals(find)) {
+							found = true;
+							break;
 						}
-						while (pos + findLength <= document.getLength()) {
-							String match = document.getText(pos, findLength).toLowerCase();
-							if (match.equals(find)) {
-								found = true;
-								break;
-							}
-							pos++;
-						}
-						if (found) {
-							Rectangle viewRect = textArea.modelToView(pos);
-							textArea.scrollRectToVisible(viewRect);
-							textArea.setCaretPosition(pos + findLength);
-							textArea.moveCaretPosition(pos);
-							pos += findLength;
-						}
-
-					} catch (Exception exp) {
-						logger.log(Level.ERROR, exp);
+						pos++;
+					}
+					if (found) {
+						Rectangle viewRect = textArea.modelToView(pos);
+						textArea.scrollRectToVisible(viewRect);
+						textArea.setCaretPosition(pos + findLength);
+						textArea.moveCaretPosition(pos);
+						pos += findLength;
 					}
 
+				} catch (Exception exp) {
+					logger.log(Level.ERROR, exp);
 				}
+
 			}
 		});
 	}

@@ -736,12 +736,7 @@ public class HttpRequest extends AbstractBean {
 			if (SwingUtilities.isEventDispatchThread()) {
 				HttpRequest.this.setReadyState(state);
 			} else {
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						HttpRequest.this.setReadyState(state);
-					}
-				});
+				SwingUtilities.invokeLater(() -> HttpRequest.this.setReadyState(state));
 			}
 		}
 

@@ -40,7 +40,6 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -48,7 +47,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -180,13 +178,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		this.rcontext = rcontext;
 		this.setOpaque(opaque);
 		this.setBackground(background);
-		ActionListener actionListener = new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String command = e.getActionCommand();
-				if ("copy".equals(command)) {
-					copy();
-				}
+		ActionListener actionListener = e -> {
+			String command = e.getActionCommand();
+			if ("copy".equals(command)) {
+				copy();
 			}
 		};
 		if (!GraphicsEnvironment.isHeadless()) {
@@ -233,12 +228,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				onMouseMoved(arg0);
 			}
 		});
-		this.addMouseWheelListener(new MouseWheelListener() {
-			@Override
-			public void mouseWheelMoved(MouseWheelEvent e) {
-				onMouseWheelMoved(e);
-			}
-		});
+		this.addMouseWheelListener(e -> onMouseWheelMoved(e));
 
 		this.addKeyListener(new KeyListener() {
 
@@ -521,13 +511,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 					block.layout(pw, 0, false, false, RenderState.OVERFLOW_VISIBLE, RenderState.OVERFLOW_VISIBLE, true);
 				} else {
 					try {
-						SwingUtilities.invokeAndWait(new Runnable() {
-							@Override
-							public void run() {
-								block.layout(pw, 0, false, false, RenderState.OVERFLOW_VISIBLE,
-										RenderState.OVERFLOW_VISIBLE, true);
-							}
-						});
+						SwingUtilities.invokeAndWait(() -> block.layout(pw, 0, false, false,
+								RenderState.OVERFLOW_VISIBLE, RenderState.OVERFLOW_VISIBLE, true));
 					} catch (Exception err) {
 						logger.log(Level.ERROR, "Unable to do preferred size layout.", err);
 					}

@@ -70,14 +70,11 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 						listener.exceptionReceived(are);
 					} else {
 
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								// Invoke holding no locks
-								AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
-										exception);
-								listener.exceptionReceived(are);
-							}
+						SwingUtilities.invokeLater(() -> {
+							// Invoke holding no locks
+							AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
+									exception);
+							listener.exceptionReceived(are);
 						});
 					}
 
@@ -89,14 +86,10 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 						listener.resultReceived(are);
 					} else {
 
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								// Invoke holding no locks
-								AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this,
-										result);
-								listener.resultReceived(are);
-							}
+						SwingUtilities.invokeLater(() -> {
+							// Invoke holding no locks
+							AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+							listener.resultReceived(are);
 						});
 					}
 				}
@@ -134,14 +127,11 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 						evtResult.fireEvent(are);
 					} else {
 
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								// Invoke holding no locks
-								AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
-										exception);
-								evtResult.fireEvent(are);
-							}
+						SwingUtilities.invokeLater(() -> {
+							// Invoke holding no locks
+							AsyncResultEvent<Throwable> are = new AsyncResultEvent<Throwable>(AsyncResultImpl.this,
+									exception);
+							evtResult.fireEvent(are);
 						});
 					}
 
@@ -154,14 +144,10 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 
 					} else {
 
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								// Invoke holding no locks
-								AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this,
-										result);
-								evtResult.fireEvent(are);
-							}
+						SwingUtilities.invokeLater(() -> {
+							// Invoke holding no locks
+							AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+							evtResult.fireEvent(are);
 						});
 					}
 				}
@@ -179,13 +165,8 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 		synchronized (this) {
 			this.result = result;
 			this.hasResult = true;
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					// Invoke holding no locks
-					evtResult.fireEvent(new AsyncResultEvent<TResult>(AsyncResultImpl.this, result));
-				}
-			});
+			SwingUtilities.invokeLater(
+					() -> evtResult.fireEvent(new AsyncResultEvent<TResult>(AsyncResultImpl.this, result)));
 		}
 	}
 
@@ -203,13 +184,8 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 				evtResult.fireEvent(new AsyncResultEvent<Throwable>(AsyncResultImpl.this, exception));
 			} else {
 
-				SwingUtilities.invokeLater(new Runnable() {
-					@Override
-					public void run() {
-						// Invoke holding no locks
-						evtResult.fireEvent(new AsyncResultEvent<Throwable>(AsyncResultImpl.this, exception));
-					}
-				});
+				SwingUtilities.invokeLater(
+						() -> evtResult.fireEvent(new AsyncResultEvent<Throwable>(AsyncResultImpl.this, exception)));
 			}
 		}
 	}
