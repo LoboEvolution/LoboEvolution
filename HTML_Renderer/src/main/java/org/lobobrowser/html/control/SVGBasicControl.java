@@ -144,9 +144,9 @@ public class SVGBasicControl extends BaseControl {
 	public void circle(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
-
+		
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(),
 				svgi.getR());
 		Shape circle = new Ellipse2D.Double(viewbox.getX() - viewbox.getR(), viewbox.getY() - viewbox.getR(),
@@ -158,7 +158,7 @@ public class SVGBasicControl extends BaseControl {
 	public void rectangle(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		Shape rect;
@@ -184,7 +184,7 @@ public class SVGBasicControl extends BaseControl {
 	public void ellipse(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(),
@@ -200,7 +200,7 @@ public class SVGBasicControl extends BaseControl {
 	public void line(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		Point2D.Float p = new Point2D.Float(svgi.getX1(), svgi.getY1());
@@ -215,7 +215,7 @@ public class SVGBasicControl extends BaseControl {
 	public void polygon(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		GeneralPath path = new GeneralPath();
@@ -242,7 +242,7 @@ public class SVGBasicControl extends BaseControl {
 	public void polyline(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		GeneralPath path = new GeneralPath();
@@ -268,7 +268,7 @@ public class SVGBasicControl extends BaseControl {
 	public void path(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		GeneralPath path = new GeneralPath();
@@ -690,7 +690,7 @@ public class SVGBasicControl extends BaseControl {
 	public void text(Graphics2D g2d, SVGInfo svgi) {
 
 		if (svgi.getAnimate() != null) {
-			new SVGAnimateImpl(svgi);
+			new SVGAnimateImpl(svgi, ruicontrol);
 		}
 
 		GeneralPath path = new GeneralPath();

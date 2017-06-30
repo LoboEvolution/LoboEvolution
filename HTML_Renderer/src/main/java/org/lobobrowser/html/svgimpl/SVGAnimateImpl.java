@@ -25,6 +25,7 @@ import javax.swing.JComponent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.info.SVGInfo;
 
 public class SVGAnimateImpl extends JComponent implements Runnable {
@@ -33,11 +34,13 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 	protected static final Logger logger = LogManager.getLogger(SVGAnimateImpl.class.getName());
 	private Thread runner;
 	private SVGInfo info;
+	private RUIControl ruicontrol;
 
-	public SVGAnimateImpl(SVGInfo info) {
+	public SVGAnimateImpl(SVGInfo info, RUIControl ruicontrol) {
 		this.info = info;
 		runner = new Thread(this);
 		runner.start();
+		this.ruicontrol = ruicontrol;
 	}
 
 	@Override
@@ -80,7 +83,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setWidth(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setWidth(info.getWidth() + i);
 			try {
 				Thread.sleep(5);
@@ -100,7 +103,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setHeight(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setHeight(info.getHeight() + i);
 			try {
 				Thread.sleep(5);
@@ -119,7 +122,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setX(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setX(info.getX() + i);
 			try {
 				Thread.sleep(5);
@@ -138,7 +141,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setY(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setY(info.getY() + i);
 			try {
 				Thread.sleep(5);
@@ -157,7 +160,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setR(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setR(info.getR() + i);
 			try {
 				Thread.sleep(5);
@@ -176,7 +179,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setR(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setX1(info.getX1() + i);
 			try {
 				Thread.sleep(5);
@@ -195,7 +198,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setR(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setX2(info.getX2() + i);
 			try {
 				Thread.sleep(5);
@@ -214,7 +217,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setY1(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setY1(info.getY1() + i);
 			try {
 				Thread.sleep(5);
@@ -233,7 +236,7 @@ public class SVGAnimateImpl extends JComponent implements Runnable {
 		float to = Float.parseFloat(animate.getTo());
 		info.setY2(from);
 		for (float i = .001f; i < 1f; i += .001f) {
-			repaint();
+			ruicontrol.relayout();
 			info.setY2(info.getY2() + i);
 			try {
 				Thread.sleep(5);
