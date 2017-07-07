@@ -880,16 +880,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 		RBlock block = this.rblock;
 		if (block != null) {
-			boolean liflag = loggableInfo;
-			long time1 = liflag ? System.currentTimeMillis() : 0;
 			block.paint(g);
-			if (liflag) {
-				long time2 = System.currentTimeMillis();
-				Node rootNode = this.getRootNode();
-				String uri = rootNode instanceof Document ? ((Document) rootNode).getDocumentURI() : "";
-				logger.info("paintComponent(): URI=[" + uri + "]. Block paint elapsed: " + (time2 - time1) + " ms.");
-			}
-
 			// Paint FrameContext selection
 
 			RenderableSpot start = this.startSelection;
@@ -904,28 +895,15 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public void doLayout() {
 		try {
 			Dimension size = this.getSize();
-			boolean liflag = loggableInfo;
-			long time1 = 0;
-			if (liflag) {
-				time1 = System.currentTimeMillis();
-			}
+			
 			this.clearComponents();
 			RBlock block = this.rblock;
 			if (block != null) {
-
-				ModelNode rootNode = block.getModelNode();
-
 				block.layout(size.width, size.height, true, true, null, false);
 				// Only set origin
 				block.setOrigin(0, 0);
 				block.updateWidgetBounds(0, 0);
 				this.updateGUIComponents();
-				if (liflag) {
-					long time2 = System.currentTimeMillis();
-					String uri = rootNode instanceof Document ? ((Document) rootNode).getDocumentURI() : "";
-					logger.info("doLayout(): URI=[" + uri + "]. Block layout elapsed: " + (time2 - time1)
-							+ " ms. Component count: " + this.getComponentCount() + ".");
-				}
 			} else {
 				if (this.getComponentCount() > 0) {
 					this.removeAll();
