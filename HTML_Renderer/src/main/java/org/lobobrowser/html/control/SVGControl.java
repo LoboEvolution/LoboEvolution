@@ -105,30 +105,30 @@ public class SVGControl extends SVGBasicControl {
 				SVGInfo svgi = svgList.get(i);
 				switch (svgi.getMethod()) {
 				case CIRCLE:
-					circle(g2d, svgi);
+					circle(g2d, svgi, i);
 					break;
 				case RECT:
-					rectangle(g2d, svgi);
+					rectangle(g2d, svgi, i);
 					break;
 				case ELLIPSE:
-					ellipse(g2d, svgi);
+					ellipse(g2d, svgi, i);
 					break;
 				case LINE:
-					line(g2d, svgi);
+					line(g2d, svgi, i);
 					break;
 				case POLYGON:
-					polygon(g2d, svgi);
+					polygon(g2d, svgi, i);
 					break;
 				case POLYLINE:
-					polyline(g2d, svgi);
+					polyline(g2d, svgi, i);
 					break;
 				case PATH:
-					path(g2d, svgi);
+					path(g2d, svgi, i);
 					break;
 				case USE:
 					use(g2d, svgi, modelNode);
 				case TEXT:
-					text(g2d, svgi);
+					text(g2d, svgi, i);
 				default:
 					break;
 				}

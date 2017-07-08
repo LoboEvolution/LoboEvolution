@@ -21,232 +21,176 @@
 
 package org.lobobrowser.html.svgimpl;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JComponent;
+import javax.swing.Timer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.info.SVGInfo;
+import org.lobobrowser.w3c.smil.ElementTargetAttributes;
 
-public class SVGAnimateImpl extends JComponent implements Runnable {
+public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	protected static final Logger logger = LogManager.getLogger(SVGAnimateImpl.class.getName());
-	private Thread runner;
+	private Timer timer;
 	private SVGInfo info;
 	private RUIControl ruicontrol;
+	private float from_xml;
+	private float to_xml;
 
 	public SVGAnimateImpl(SVGInfo info, RUIControl ruicontrol) {
 		this.info = info;
-		runner = new Thread(this);
-		runner.start();
 		this.ruicontrol = ruicontrol;
+		timer = new Timer(1, this);
+		timer.setInitialDelay(0);
+		timer.setCoalesce(true);
+		startAnimation();
 	}
 
 	@Override
-	public void run() {
+	public void actionPerformed(ActionEvent e) {
 		SVGAnimateElementImpl animate = info.getAnimate();
 		switch (animate.getAttributeName().toLowerCase()) {
 		case "width":
-			animeteWidth(info, animate);
+			animateWidth();
 			break;
 		case "heigth":
-			animeHeigth(info, animate);
+			animateHeight();
 			break;
 		case "y":
 		case "cy":
-			animeY(info, animate);
+			animateY();
 			break;
 		case "x":
 		case "cx":
-			animeX(info, animate);
+			animateX();
 			break;
 		case "x1":
-			animeX1(info, animate);
+			animateX1();
 		case "x2":
-			animeX2(info, animate);
+			animateX2();
 		case "y1":
-			animeY1(info, animate);
+			animateY1();
 		case "y2":
-			animeY2(info, animate);
+			animateY2();
 		case "r":
-			animeR(info, animate);
+			animateR();
 			break;
 		default:
 			break;
 		}
 	}
 
-	private void animeteWidth(SVGInfo info, SVGAnimateElementImpl animate) {
-
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setWidth(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateWidth() {
+		if (info.getWidth() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setWidth(from_xml);
 			ruicontrol.relayout();
-			info.setWidth(info.getWidth() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getWidth() > to) {
-				Thread.currentThread().interrupt();
-				info.setWidth(to);
-
-			}
 		}
 	}
 
-	private void animeHeigth(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setHeight(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateHeight() {
+		if (info.getHeight() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setHeight(from_xml);
 			ruicontrol.relayout();
-			info.setHeight(info.getHeight() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getHeight() > to) {
-				Thread.currentThread().interrupt();
-				info.setHeight(to);
-			}
 		}
 	}
 
-	private void animeX(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setX(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateX() {
+		if (info.getX() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setX(from_xml);
 			ruicontrol.relayout();
-			info.setX(info.getX() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getX() > to) {
-				Thread.currentThread().interrupt();
-				info.setX(to);
-			}
 		}
 	}
 
-	private void animeY(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setY(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateY() {
+		if (info.getY() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setY(from_xml);
 			ruicontrol.relayout();
-			info.setY(info.getY() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getY() > to) {
-				Thread.currentThread().interrupt();
-				info.setY(to);
-			}
 		}
 	}
 
-	private void animeR(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setR(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateR() {
+		if (info.getR() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setR(from_xml);
 			ruicontrol.relayout();
-			info.setR(info.getR() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getR() > to) {
-				Thread.currentThread().interrupt();
-				info.setR(to);
-			}
 		}
 	}
 
-	private void animeX1(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setR(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateX1() {
+		if (info.getX1() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setX1(from_xml);
 			ruicontrol.relayout();
-			info.setX1(info.getX1() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getX1() > to) {
-				Thread.currentThread().interrupt();
-				info.setX1(to);
-			}
 		}
 	}
 
-	private void animeX2(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setR(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateX2() {
+		if (info.getX2() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setX2(from_xml);
 			ruicontrol.relayout();
-			info.setX2(info.getX2() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getX2() > to) {
-				Thread.currentThread().interrupt();
-				info.setX2(to);
-			}
 		}
 	}
 
-	private void animeY1(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setY1(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateY1() {
+		if (info.getY1() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setY1(from_xml);
 			ruicontrol.relayout();
-			info.setY1(info.getY1() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
-
-			if (info.getY1() > to) {
-				Thread.currentThread().interrupt();
-				info.setR(to);
-			}
 		}
 	}
 
-	private void animeY2(SVGInfo info, SVGAnimateElementImpl animate) {
-		float from = Float.parseFloat(animate.getFrom());
-		float to = Float.parseFloat(animate.getTo());
-		info.setY2(from);
-		for (float i = .001f; i < 1f; i += .001f) {
+	private void animateY2() {
+		if (info.getY2() >= to_xml) {
+			stopAnimation();
+		} else {
+			from_xml++;
+			info.setY2(from_xml);
 			ruicontrol.relayout();
-			info.setY2(info.getY2() + i);
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException ex) {
-			}
+		}
+	}
 
-			if (info.getY2() > to) {
-				Thread.currentThread().interrupt();
-				info.setY2(to);
+	private void startAnimation() {
+		if (!timer.isRunning()) {
+			SVGAnimateElementImpl animate = info.getAnimate();
+
+			if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
+				from_xml = Float.parseFloat(animate.getFrom());
+				to_xml = Float.parseFloat(animate.getTo());
 			}
+			timer.start();
+		}
+	}
+
+	private void stopAnimation() {
+		if (timer.isRunning()) {
+			timer.stop();
 		}
 	}
 }
