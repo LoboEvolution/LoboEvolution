@@ -87,6 +87,9 @@ import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.lobobrowser.html.svgimpl.SVGViewBoxImpl;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.w3c.svg.SVGAnimateElement;
+import org.lobobrowser.w3c.svg.SVGAnimateTransformElement;
+import org.lobobrowser.w3c.svg.SVGElement;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
 import org.lobobrowser.w3c.svg.SVGPoint;
@@ -101,8 +104,15 @@ import org.w3c.dom.svg.SVGPathSeg;
 public class SVGBasicControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	/** The svgiGroup. */
 	private SVGInfo svgiGroup = new SVGInfo();
+    
+	/** The animate. */
+	private SVGAnimateElement animate;
+
+	/** The animateTransform. */
+	private SVGAnimateTransformElement animateTransform;
 
 	/** The circle. */
 	public final int CIRCLE = 1;
@@ -146,7 +156,14 @@ public class SVGBasicControl extends BaseControl {
 
 	public void circle(Graphics2D g2d, SVGInfo svgi, int numObject) {
 
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
@@ -160,17 +177,23 @@ public class SVGBasicControl extends BaseControl {
 	}
 
 	public void rectangle(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (svgi.getAnimate() != null) {
+		
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
 		}
-
+		
 		Shape rect;
-		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(),
-				0);
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), 0);
 		if (svgi.getRx() > 0 || svgi.getRy() > 0) {
 			if (svgi.getRx() > 0 && svgi.getRy() == 0) {
 				svgi.setRy(svgi.getRx());
@@ -190,15 +213,21 @@ public class SVGBasicControl extends BaseControl {
 
 	public void ellipse(Graphics2D g2d, SVGInfo svgi, int numObject) {
 
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
 		}
 
-		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(),
-				svgi.getR());
+		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
 		Point2D.Float center = new Point2D.Float(viewbox.getX(), viewbox.getY());
 		Point2D.Float corner = new Point2D.Float(viewbox.getX() - svgi.getRx(), viewbox.getY() - svgi.getRy());
 		Ellipse2D.Float ellipse2d = new Ellipse2D.Float();
@@ -209,7 +238,14 @@ public class SVGBasicControl extends BaseControl {
 
 	public void line(Graphics2D g2d, SVGInfo svgi, int numObject) {
 
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
@@ -227,7 +263,14 @@ public class SVGBasicControl extends BaseControl {
 
 	public void polygon(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
@@ -257,7 +300,14 @@ public class SVGBasicControl extends BaseControl {
 
 	public void polyline(Graphics2D g2d, SVGInfo svgi, int numObject) {
 
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
@@ -286,7 +336,14 @@ public class SVGBasicControl extends BaseControl {
 
 	public void path(Graphics2D g2d, SVGInfo svgi, int numObject) {
 
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
@@ -711,7 +768,14 @@ public class SVGBasicControl extends BaseControl {
 
 	public void text(Graphics2D g2d, SVGInfo svgi, int numObject) {
 
-		if (svgi.getAnimate() != null) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null) {
 			if (count < numObject){
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
@@ -1006,6 +1070,7 @@ public class SVGBasicControl extends BaseControl {
 
 			if (n instanceof SVGCircleElementImpl) {
 				SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
+				String id = svgcircle.getId();
 				float x = svgcircle.getCx().getBaseVal().getValue();
 				float y = svgcircle.getCy().getBaseVal().getValue();
 				float r = svgcircle.getR().getBaseVal().getValue();
@@ -1013,11 +1078,12 @@ public class SVGBasicControl extends BaseControl {
 				SVGTransformList tl = svgcircle.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgcircle.getSVGStyle();
 				SVGAnimationImpl animateElement = svgcircle.getAnimateElement();
-				useList.add(new SVGInfo(CIRCLE, x, y, r, style, false, clippath, tl, animateElement));
+				useList.add(new SVGInfo(id, CIRCLE, x, y, r, style, false, clippath, tl, animateElement));
 			}
 
 			if (n instanceof SVGRectElementImpl) {
 				SVGRectElementImpl svgrect = (SVGRectElementImpl) n;
+				String id = svgrect.getId();
 				float x = svgrect.getX().getBaseVal().getValue();
 				float y = svgrect.getY().getBaseVal().getValue();
 				float height = svgrect.getHeight().getBaseVal().getValue();
@@ -1028,11 +1094,12 @@ public class SVGBasicControl extends BaseControl {
 				SVGTransformList tl = svgrect.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgrect.getSVGStyle();
 				SVGAnimationImpl animateElement = svgrect.getAnimateElement();
-				useList.add(new SVGInfo(RECT, x, y, height, width, rx, ry, style, false, clippath, tl, animateElement));
+				useList.add(new SVGInfo(id, RECT, x, y, height, width, rx, ry, style, false, clippath, tl, animateElement));
 			}
 
 			if (n instanceof SVGEllipseElementImpl) {
 				SVGEllipseElementImpl svgellipse = (SVGEllipseElementImpl) n;
+				String id = svgellipse.getId();
 				float x = svgellipse.getCx().getBaseVal().getValue();
 				float y = svgellipse.getCy().getBaseVal().getValue();
 				float rx = svgellipse.getRx().getBaseVal().getValue();
@@ -1041,11 +1108,12 @@ public class SVGBasicControl extends BaseControl {
 				SVGTransformList tl = svgellipse.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgellipse.getSVGStyle();
 				SVGAnimationImpl animateElement = svgellipse.getAnimateElement();
-				useList.add(new SVGInfo(ELLIPSE, x, y, rx, ry, style, false, clippath, tl, animateElement));
+				useList.add(new SVGInfo(id, ELLIPSE, x, y, rx, ry, style, false, clippath, tl, animateElement));
 			}
 
 			if (n instanceof SVGLineElementImpl) {
 				SVGLineElementImpl svgline = (SVGLineElementImpl) n;
+				String id = svgline.getId();
 				float x1 = svgline.getX1().getBaseVal().getValue();
 				float x2 = svgline.getX2().getBaseVal().getValue();
 				float y1 = svgline.getY1().getBaseVal().getValue();
@@ -1054,37 +1122,40 @@ public class SVGBasicControl extends BaseControl {
 				SVGTransformList tl = svgline.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgline.getSVGStyle();
 				SVGAnimationImpl animateElement = svgline.getAnimateElement();
-				useList.add(new SVGInfo(LINE, x1, y1, x2, y2, style, clippath, false, tl, animateElement));
+				useList.add(new SVGInfo(id, LINE, x1, y1, x2, y2, style, clippath, false, tl, animateElement));
 			}
 
 			if (n instanceof SVGPolylineElementImpl) {
 				SVGPolylineElementImpl svgpolyline = (SVGPolylineElementImpl) n;
+				String id = svgpolyline.getId();
 				SVGPointList points = svgpolyline.getPoints();
 				String clippath = svgpolyline.getClipPath();
 				SVGTransformList tl = svgpolyline.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgpolyline.getSVGStyle();
 				SVGAnimationImpl animateElement = svgpolyline.getAnimateElement();
-				useList.add(new SVGInfo(POLYLINE, points, style, false, clippath, tl, animateElement));
+				useList.add(new SVGInfo(id, POLYLINE, points, style, false, clippath, tl, animateElement));
 			}
 
 			if (n instanceof SVGPolygonElementImpl) {
 				SVGPolygonElementImpl svgpolygon = (SVGPolygonElementImpl) n;
+				String id = svgpolygon.getId();
 				SVGPointList points = svgpolygon.getPoints();
 				String clippath = svgpolygon.getClipPath();
 				SVGTransformList tl = svgpolygon.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgpolygon.getSVGStyle();
 				SVGAnimationImpl animateElement = svgpolygon.getAnimateElement();
-				useList.add(new SVGInfo(POLYGON, points, style, false, clippath, tl, animateElement));
+				useList.add(new SVGInfo(id, POLYGON, points, style, false, clippath, tl, animateElement));
 			}
 
 			if (n instanceof SVGPathElementImpl) {
 				SVGPathElementImpl svgpath = (SVGPathElementImpl) n;
+				String id = svgpath.getId();
 				SVGPathSegList points = svgpath.getPathSegList();
 				String clippath = svgpath.getClipPath();
 				SVGTransformList tl = svgpath.getTransform().getBaseVal();
 				AbstractCSS2Properties style = svgpath.getSVGStyle();
 				SVGAnimationImpl animateElement = svgpath.getAnimateElement();
-				useList.add(new SVGInfo(PATH, points, style, false, clippath, tl, animateElement));
+				useList.add(new SVGInfo(id, PATH, points, style, false, clippath, tl, animateElement));
 			}
 
 			if (n instanceof SVGGElementImpl) {
@@ -1214,6 +1285,7 @@ public class SVGBasicControl extends BaseControl {
 				Node n1 = gChildNodes.item(g);
 				if (n1 instanceof SVGRectElementImpl) {
 					SVGRectElementImpl svgrect = (SVGRectElementImpl) n1;
+					String id = svgrect.getId();
 					float x = svgrect.getX().getBaseVal().getValue();
 					float y = svgrect.getY().getBaseVal().getValue();
 					float height = svgrect.getHeight().getBaseVal().getValue();
@@ -1222,74 +1294,81 @@ public class SVGBasicControl extends BaseControl {
 					float ry = svgrect.getRy().getBaseVal().getValue();
 					AbstractCSS2Properties style = svginfo.getStyle();
 					SVGAnimationImpl animateElement = svgrect.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(RECT, x, y, height, width, rx, ry, style, true, null, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, RECT, x, y, height, width, rx, ry, style, true, null, null, animateElement);
 					rectangle(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGCircleElementImpl) {
 					SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n1;
+					String id = svgcircle.getId();
 					float x = svgcircle.getCx().getBaseVal().getValue();
 					float y = svgcircle.getCy().getBaseVal().getValue();
 					float r = svgcircle.getR().getBaseVal().getValue();
 					AbstractCSS2Properties style = svgcircle.getSVGStyle();
 					SVGAnimationImpl animateElement = svgcircle.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(CIRCLE, x, y, r, style, true, null, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, CIRCLE, x, y, r, style, true, null, null, animateElement);
 					circle(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGEllipseElementImpl) {
 					SVGEllipseElementImpl svgellipse = (SVGEllipseElementImpl) n1;
+					String id = svgellipse.getId();
 					float x = svgellipse.getCx().getBaseVal().getValue();
 					float y = svgellipse.getCy().getBaseVal().getValue();
 					float rx = svgellipse.getRx().getBaseVal().getValue();
 					float ry = svgellipse.getRy().getBaseVal().getValue();
 					AbstractCSS2Properties style = svgellipse.getSVGStyle();
 					SVGAnimationImpl animateElement = svgellipse.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(ELLIPSE, x, y, rx, ry, style, true, null, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, ELLIPSE, x, y, rx, ry, style, true, null, null, animateElement);
 					ellipse(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGLineElementImpl) {
 					SVGLineElementImpl svgline = (SVGLineElementImpl) n1;
+					String id = svgline.getId();
 					float x1 = svgline.getX1().getBaseVal().getValue();
 					float x2 = svgline.getX2().getBaseVal().getValue();
 					float y1 = svgline.getY1().getBaseVal().getValue();
 					float y2 = svgline.getY2().getBaseVal().getValue();
 					AbstractCSS2Properties style = svgline.getSVGStyle();
 					SVGAnimationImpl animateElement = svgline.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(LINE, x1, y1, x2, y2, style, null, true, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, LINE, x1, y1, x2, y2, style, null, true, null, animateElement);
 					line(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGPolylineElementImpl) {
 					SVGPolylineElementImpl svgpolyline = (SVGPolylineElementImpl) n1;
+					String id = svgpolyline.getId();
 					SVGPointList points = svgpolyline.getPoints();
 					AbstractCSS2Properties style = svgpolyline.getSVGStyle();
 					SVGAnimationImpl animateElement = svgpolyline.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(POLYLINE, points, style, true, null, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, POLYLINE, points, style, true, null, null, animateElement);
 					polygon(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGPolygonElementImpl) {
 					SVGPolygonElementImpl svgpolygon = (SVGPolygonElementImpl) n1;
+					String id = svgpolygon.getId();
 					SVGPointList points = svgpolygon.getPoints();
 					AbstractCSS2Properties style = svgpolygon.getSVGStyle();
 					SVGAnimationImpl animateElement = svgpolygon.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(POLYGON, points, style, true, null, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, POLYGON, points, style, true, null, null, animateElement);
 					polygon(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGPathElementImpl) {
 					SVGPathElementImpl svgpath = (SVGPathElementImpl) n1;
+					String id = svgpath.getId();
 					SVGPathSegList points = svgpath.getPathSegList();
 					AbstractCSS2Properties style = svgpath.getSVGStyle();
 					SVGAnimationImpl animateElement = svgpath.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(PATH, points, style, true, null, null, animateElement);
+					SVGInfo svgi = new SVGInfo(id, PATH, points, style, true, null, null, animateElement);
 					path(g2d, svgi, g);
 				}
 
 				if (n1 instanceof SVGTextElementImpl) {
 					SVGTextElementImpl text = (SVGTextElementImpl) n1;
+					String id = text.getId();
 					float x = text.getX().getBaseVal().getValue();
 					float y = text.getY().getBaseVal().getValue();
 					Font font = SVGUtility.getFontValue(text.getFontFamily(), text.getFontSize());
@@ -1301,13 +1380,13 @@ public class SVGBasicControl extends BaseControl {
 					SVGTransformList tl = text.getTransform().getBaseVal();
 					AbstractCSS2Properties style = text.getSVGStyle();
 					SVGAnimationImpl animateElement = text.getAnimateElement();
-					SVGInfo svgi = new SVGInfo(TEXT, x, y, font, txt, txtAnchor, dyList, dxList, style, clippath, false, tl, animateElement);
+					SVGInfo svgi = new SVGInfo(id, TEXT, x, y, font, txt, txtAnchor, dyList, dxList, style, clippath, false, tl, animateElement);
 					text(g2d, svgi, g);
 				}
 			}
 		}
 	}
-
+	
 	/**
 	 * @return the svgiGroup
 	 */
@@ -1321,6 +1400,34 @@ public class SVGBasicControl extends BaseControl {
 	 */
 	public void setSvgiGroup(SVGInfo svgiGroup) {
 		this.svgiGroup = svgiGroup;
+	}
+
+	/**
+	 * @return the animate
+	 */
+	public SVGAnimateElement getAnimate() {
+		return animate;
+	}
+
+	/**
+	 * @param animate the animate to set
+	 */
+	public void setAnimate(SVGAnimateElement animate) {
+		this.animate = animate;
+	}
+	
+	/**
+	 * @return the animateTransform
+	 */
+	public SVGAnimateTransformElement getAnimateTransform() {
+		return animateTransform;
+	}
+
+	/**
+	 * @param animateTransform the animateTransform to set
+	 */
+	public void setAnimateTransform(SVGAnimateTransformElement animateTransform) {
+		this.animateTransform = animateTransform;
 	}
 
 }

@@ -20,35 +20,11 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.w3c.svg.SVGAnimateElement;
-import org.lobobrowser.w3c.svg.SVGElement;
-import org.w3c.dom.DOMException;
 
 public class SVGAnimateElementImpl extends SVGAnimationImpl implements SVGAnimateElement {
 
 	public SVGAnimateElementImpl(String name) {
 		super(name);
-	}
-
-	@Override
-	public SVGElement getTargetElement() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public float getStartTime() {
-		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
-		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
-			return SVGUtility.getClockSecs(beginTime);
-		} else {
-			return 0;
-		}
-	}
-
-	@Override
-	public float getSimpleDuration() throws DOMException {
-		return getDur();
 	}
 }
