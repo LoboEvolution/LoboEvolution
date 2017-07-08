@@ -21,6 +21,7 @@
 
 package org.lobobrowser.html.svgimpl;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.StringTokenizer;
@@ -32,6 +33,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.info.SVGInfo;
+import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.smil.ElementTargetAttributes;
 import org.lobobrowser.w3c.svg.SVGTransform;
 import org.lobobrowser.w3c.svg.SVGTransformList;
@@ -47,6 +49,8 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private float to_xml;
 	private String from_trans;
 	private String to_trans;
+	private Color from_color;
+	private Color to_color;
 
 	public SVGAnimateImpl(SVGInfo info, RUIControl ruicontrol) {
 		this.info = info;
@@ -77,22 +81,32 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			break;
 		case "x1":
 			animateX1();
+			break;
 		case "x2":
 			animateX2();
+			break;
 		case "y1":
 			animateY1();
+			break;
 		case "y2":
 			animateY2();
+			break;
 		case "r":
 			animateR();
 			break;
+		case "fill":
+			animateFill();
+			break;
+		case "stroke":
+			animateStroke();
 		case "transform":
 			animateTransform();
+			break;
 		default:
 			break;
 		}
 	}
-
+	
 	private void animateWidth() {
 		if (info.getWidth() >= to_xml) {
 			stopAnimation();
@@ -183,6 +197,84 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 	}
 
+	private void animateFill() {
+
+		if (from_color.getRGB() == to_color.getRGB()) {
+			stopAnimation();
+		} else {
+
+			int f_red = from_color.getRed();
+			int f_green = from_color.getGreen();
+			int f_blue = from_color.getBlue();
+
+			int t_red = to_color.getRed();
+			int t_green = to_color.getGreen();
+			int t_blue = to_color.getBlue();
+
+			if (f_red > t_red)
+				f_red--;
+
+			if (f_red < t_red)
+				f_red++;
+
+			if (f_green > t_green)
+				f_green--;
+
+			if (f_green < t_green)
+				f_green++;
+
+			if (f_blue > t_blue)
+				f_blue--;
+
+			if (f_blue < t_blue)
+				f_blue++;
+
+			String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
+			from_color = ColorFactory.getInstance().getColor(rgb);
+			info.getStyle().setFill(rgb);
+			ruicontrol.relayout();
+		}
+	}
+
+	private void animateStroke() {
+
+		if (from_color.getRGB() == to_color.getRGB()) {
+			stopAnimation();
+		} else {
+
+			int f_red = from_color.getRed();
+			int f_green = from_color.getGreen();
+			int f_blue = from_color.getBlue();
+
+			int t_red = to_color.getRed();
+			int t_green = to_color.getGreen();
+			int t_blue = to_color.getBlue();
+
+			if (f_red > t_red)
+				f_red--;
+
+			if (f_red < t_red)
+				f_red++;
+
+			if (f_green > t_green)
+				f_green--;
+
+			if (f_green < t_green)
+				f_green++;
+
+			if (f_blue > t_blue)
+				f_blue--;
+
+			if (f_blue < t_blue)
+				f_blue++;
+
+			String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
+			from_color = ColorFactory.getInstance().getColor(rgb);
+			info.getStyle().setStroke(rgb);
+			ruicontrol.relayout();
+		}
+	}
+	
 	private void animateTransform() {
 		
 		if (from_trans.equals(to_trans)) {
@@ -356,17 +448,20 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			ruicontrol.relayout();
 		}
 	}
-
+	
 	private void startAnimation() {
 		if (!timer.isRunning()) {
 			SVGAnimationImpl animate = info.getAnimate();
-
+			
 			if ("transform".equalsIgnoreCase(animate.getAttributeName())) {
 				from_trans = animate.getFrom();
 				to_trans = animate.getTo();
 			} else if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
 				from_xml = Float.parseFloat(animate.getFrom());
 				to_xml = Float.parseFloat(animate.getTo());
+			} else {
+				from_color = ColorFactory.getInstance().getColor(animate.getFrom());
+				to_color = ColorFactory.getInstance().getColor(animate.getTo());
 			}
 			timer.start();
 		}

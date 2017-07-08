@@ -90,6 +90,7 @@ import org.lobobrowser.html.builder.UlBuilder;
 import org.lobobrowser.html.builder.UnderlineBuilder;
 import org.lobobrowser.html.builder.VideoBuilder;
 import org.lobobrowser.html.buildersvg.SVGAnimateBuilder;
+import org.lobobrowser.html.buildersvg.SVGAnimateColorBuilder;
 import org.lobobrowser.html.buildersvg.SVGAnimateTrasformBuilder;
 import org.lobobrowser.html.buildersvg.SVGBuilder;
 import org.lobobrowser.html.buildersvg.SVGCircleBuilder;
@@ -332,6 +333,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(CLIPPATH, new SVGClipPathBuilder());
 		builders.put(ANIMATE, new SVGAnimateBuilder());
 		builders.put(ANIMATE_TRASFORM, new SVGAnimateTrasformBuilder());
+		builders.put(ANIMATE_COLOR, new SVGAnimateColorBuilder());
 		return builders;
 	}
 }

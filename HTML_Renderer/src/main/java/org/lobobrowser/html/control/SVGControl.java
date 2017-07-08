@@ -31,6 +31,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.svgimpl.SVGAnimateColorElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimateElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimateTransformElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimationImpl;
@@ -90,8 +91,10 @@ public class SVGControl extends SVGBasicControl {
 				setSvgiGroup(new SVGInfo(null, tl));
 			} else if (n instanceof SVGAnimateElementImpl) {
 				setAnimate((SVGAnimateElementImpl) n);
+			} else if (n instanceof SVGAnimateColorElementImpl) {
+				setAnimate((SVGAnimateColorElementImpl) n);
 			} else if (n instanceof SVGAnimateTransformElementImpl) {
-				setAnimateTransform((SVGAnimateTransformElementImpl) n);
+				setAnimate((SVGAnimateTransformElementImpl) n);
 			} else {
 				svgChildren(n);
 			}

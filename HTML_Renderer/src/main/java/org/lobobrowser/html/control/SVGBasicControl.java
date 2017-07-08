@@ -46,7 +46,6 @@ import java.util.Arrays;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.svgimpl.SVGAnimateElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimateImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimationImpl;
 import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
@@ -87,8 +86,6 @@ import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.lobobrowser.html.svgimpl.SVGViewBoxImpl;
 import org.lobobrowser.util.gui.ColorFactory;
-import org.lobobrowser.w3c.svg.SVGAnimateElement;
-import org.lobobrowser.w3c.svg.SVGAnimateTransformElement;
 import org.lobobrowser.w3c.svg.SVGElement;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
@@ -109,11 +106,8 @@ public class SVGBasicControl extends BaseControl {
 	private SVGInfo svgiGroup = new SVGInfo();
     
 	/** The animate. */
-	private SVGAnimateElement animate;
-
-	/** The animateTransform. */
-	private SVGAnimateTransformElement animateTransform;
-
+	private SVGAnimationImpl animate;
+	
 	/** The circle. */
 	public final int CIRCLE = 1;
 
@@ -159,7 +153,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -181,7 +175,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -216,7 +210,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -241,7 +235,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -266,7 +260,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -303,7 +297,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -339,7 +333,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -771,7 +765,7 @@ public class SVGBasicControl extends BaseControl {
 		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
 			SVGElement elem = getAnimate().getTargetElement();
 			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate((SVGAnimateElementImpl)getAnimate());
+				svgi.setAnimate(getAnimate());
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
@@ -1405,29 +1399,14 @@ public class SVGBasicControl extends BaseControl {
 	/**
 	 * @return the animate
 	 */
-	public SVGAnimateElement getAnimate() {
+	public SVGAnimationImpl getAnimate() {
 		return animate;
 	}
 
 	/**
 	 * @param animate the animate to set
 	 */
-	public void setAnimate(SVGAnimateElement animate) {
+	public void setAnimate(SVGAnimationImpl animate) {
 		this.animate = animate;
 	}
-	
-	/**
-	 * @return the animateTransform
-	 */
-	public SVGAnimateTransformElement getAnimateTransform() {
-		return animateTransform;
-	}
-
-	/**
-	 * @param animateTransform the animateTransform to set
-	 */
-	public void setAnimateTransform(SVGAnimateTransformElement animateTransform) {
-		this.animateTransform = animateTransform;
-	}
-
 }

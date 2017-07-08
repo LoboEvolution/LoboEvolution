@@ -537,7 +537,10 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 			if (n instanceof SVGAnimateElementImpl) {
 				return (SVGAnimateElementImpl) n;
 			}
-
+			
+			if (n instanceof SVGAnimateColorElementImpl) {
+				return (SVGAnimateColorElementImpl) n;
+			}
 			if (n instanceof SVGAnimateTransformElementImpl) {
 				return (SVGAnimateTransformElementImpl) n;
 			} 
