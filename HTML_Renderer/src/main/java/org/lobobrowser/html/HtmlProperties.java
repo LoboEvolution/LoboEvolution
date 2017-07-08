@@ -30,7 +30,9 @@ public interface HtmlProperties {
 
 	/** The animate. */
 	String ANIMATE = "ANIMATE";
-
+    
+	/** The animateTrasform. */
+	String ANIMATE_TRASFORM = "ANIMATETRANSFORM"; 
 	/** The applet. */
 	String APPLET = "APPLET";
 

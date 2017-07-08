@@ -32,6 +32,8 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.svgimpl.SVGAnimateElementImpl;
+import org.lobobrowser.html.svgimpl.SVGAnimateTransformElementImpl;
+import org.lobobrowser.html.svgimpl.SVGAnimationImpl;
 import org.lobobrowser.html.svgimpl.SVGCircleElementImpl;
 import org.lobobrowser.html.svgimpl.SVGDefsElementImpl;
 import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
@@ -149,7 +151,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgcircle.getClipPath();
 			SVGTransformList tl = svgcircle.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgcircle.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgcircle.getAnimateElement();
+			SVGAnimationImpl animateElement = svgcircle.getAnimateElement();
 			svgList.add(new SVGInfo(CIRCLE, x, y, r, style, false, clippath, tl, animateElement));
 		}
 
@@ -164,7 +166,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgrect.getClipPath();
 			SVGTransformList tl = svgrect.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgrect.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgrect.getAnimateElement();
+			SVGAnimationImpl animateElement = svgrect.getAnimateElement();
 			svgList.add(new SVGInfo(RECT, x, y, height, width, rx, ry, style, false, clippath, tl, animateElement));
 		}
 
@@ -177,7 +179,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgellipse.getClipPath();
 			SVGTransformList tl = svgellipse.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgellipse.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgellipse.getAnimateElement();
+			SVGAnimationImpl animateElement = svgellipse.getAnimateElement();
 			svgList.add(new SVGInfo(ELLIPSE, x, y, rx, ry, style, false, clippath, tl, animateElement));
 		}
 
@@ -190,7 +192,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgline.getClipPath();
 			SVGTransformList tl = svgline.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgline.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgline.getAnimateElement();
+			SVGAnimationImpl animateElement = svgline.getAnimateElement();
 			svgList.add(new SVGInfo(LINE, x1, y1, x2, y2, style, clippath, false, tl, animateElement));
 		}
 
@@ -200,7 +202,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgpolyline.getClipPath();
 			SVGTransformList tl = svgpolyline.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgpolyline.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgpolyline.getAnimateElement();
+			SVGAnimationImpl animateElement = svgpolyline.getAnimateElement();
 			svgList.add(new SVGInfo(POLYLINE, points, style, false, clippath, tl, animateElement));
 		}
 
@@ -210,7 +212,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgpolygon.getClipPath();
 			SVGTransformList tl = svgpolygon.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgpolygon.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgpolygon.getAnimateElement();
+			SVGAnimationImpl animateElement = svgpolygon.getAnimateElement();
 			svgList.add(new SVGInfo(POLYGON, points, style, false, clippath, tl, animateElement));
 		}
 
@@ -220,7 +222,7 @@ public class SVGControl extends SVGBasicControl {
 			String clippath = svgpath.getClipPath();
 			SVGTransformList tl = svgpath.getTransform().getBaseVal();
 			AbstractCSS2Properties style = svgpath.getSVGStyle();
-			SVGAnimateElementImpl animateElement = svgpath.getAnimateElement();
+			SVGAnimationImpl animateElement = svgpath.getAnimateElement();
 			svgList.add(new SVGInfo(PATH, points, style, false, clippath, tl, animateElement));
 		}
 
@@ -260,7 +262,7 @@ public class SVGControl extends SVGBasicControl {
 			SVGLengthList dxList = text.getDx().getBaseVal();
 			SVGTransformList tl = text.getTransform().getBaseVal();
 			AbstractCSS2Properties style = text.getSVGStyle();
-			SVGAnimateElementImpl animateElement = text.getAnimateElement();
+			SVGAnimationImpl animateElement = text.getAnimateElement();
 			svgList.add(new SVGInfo(TEXT, x, y, font, txt, txtAnchor, dyList, dxList, style, clippath, false, tl,
 					animateElement));
 		}

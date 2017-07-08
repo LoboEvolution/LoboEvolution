@@ -18,26 +18,16 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-package org.lobobrowser.html.svgimpl;
+package org.lobobrowser.html.buildersvg;
 
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
-import org.lobobrowser.w3c.svg.SVGTransformList;
+import org.lobobrowser.html.builder.HTMLElementBuilder;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.svgimpl.SVGAnimateTransformElementImpl;
 
-public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
-
-	private String trasform;
-
-	public SVGAnimatedTransformListImpl(String trasform) {
-		this.trasform = trasform;
-	}
+public class SVGAnimateTrasformBuilder extends HTMLElementBuilder {
 
 	@Override
-	public SVGTransformList getBaseVal() {
-		return SVGTransformListImpl.createTransformList(trasform);
-	}
-
-	@Override
-	public SVGTransformList getAnimVal() {
-		return SVGTransformListImpl.createTransformList(trasform);
+	protected HTMLElementImpl build(String name) {
+		return new SVGAnimateTransformElementImpl(name);
 	}
 }

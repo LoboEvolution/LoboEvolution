@@ -314,7 +314,22 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 			return 0;
 		}
 	}
+	
+	
+	public float getStartTime() {
+		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
+		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
+			return SVGUtility.getClockSecs(beginTime);
+		} else {
+			return 0;
+		}
+	}
 
+	
+	public float getSimpleDuration() throws DOMException {
+		return getDur();
+	}
+	
 	public SVGElement getTargetElement() {
 		String href = this.getAttribute(HtmlAttributeProperties.XLINK_HREF);
 		if (href == null) {

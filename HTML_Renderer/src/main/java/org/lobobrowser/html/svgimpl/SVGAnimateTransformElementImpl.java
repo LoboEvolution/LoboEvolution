@@ -20,24 +20,11 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
-import org.lobobrowser.w3c.svg.SVGTransformList;
+import org.lobobrowser.w3c.svg.SVGAnimateTransformElement;
 
-public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
+public class SVGAnimateTransformElementImpl extends SVGAnimationImpl implements SVGAnimateTransformElement {
 
-	private String trasform;
-
-	public SVGAnimatedTransformListImpl(String trasform) {
-		this.trasform = trasform;
-	}
-
-	@Override
-	public SVGTransformList getBaseVal() {
-		return SVGTransformListImpl.createTransformList(trasform);
-	}
-
-	@Override
-	public SVGTransformList getAnimVal() {
-		return SVGTransformListImpl.createTransformList(trasform);
+	public SVGAnimateTransformElementImpl(String name) {
+		super(name);
 	}
 }

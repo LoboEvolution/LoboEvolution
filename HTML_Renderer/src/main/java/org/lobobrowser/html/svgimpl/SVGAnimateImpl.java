@@ -23,6 +23,7 @@ package org.lobobrowser.html.svgimpl;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.StringTokenizer;
 
 import javax.swing.JComponent;
 import javax.swing.Timer;
@@ -32,6 +33,8 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.w3c.smil.ElementTargetAttributes;
+import org.lobobrowser.w3c.svg.SVGTransform;
+import org.lobobrowser.w3c.svg.SVGTransformList;
 
 public class SVGAnimateImpl extends JComponent implements ActionListener {
 
@@ -42,6 +45,8 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private RUIControl ruicontrol;
 	private float from_xml;
 	private float to_xml;
+	private String from_trans;
+	private String to_trans;
 
 	public SVGAnimateImpl(SVGInfo info, RUIControl ruicontrol) {
 		this.info = info;
@@ -54,7 +59,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		SVGAnimateElementImpl animate = info.getAnimate();
+		SVGAnimationImpl animate = info.getAnimate();
 		switch (animate.getAttributeName().toLowerCase()) {
 		case "width":
 			animateWidth();
@@ -81,6 +86,8 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		case "r":
 			animateR();
 			break;
+		case "transform":
+			animateTransform();
 		default:
 			break;
 		}
@@ -176,11 +183,188 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 	}
 
+	private void animateTransform() {
+		
+		if (from_trans.equals(to_trans)) {
+			stopAnimation();
+		} else {
+			String transformString = "";
+			SVGAnimationImpl animate = info.getAnimate();
+			StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+			
+			if (animate.getType() == SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+
+				float txFrom = 0;
+				float tyFrom = 0;
+				if (stFrom.countTokens() == 1) {
+					txFrom = Float.parseFloat(stFrom.nextToken());
+				} else if (stFrom.countTokens() == 2) {
+					txFrom = Float.parseFloat(stFrom.nextToken());
+					tyFrom = Float.parseFloat(stFrom.nextToken());
+				}
+
+				StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+				float txTo = 0;
+				float tyTo = 0;
+				if (stTo.countTokens() == 1) {
+					txTo = Float.parseFloat(stTo.nextToken());
+				} else if (stTo.countTokens() == 2) {
+					txTo = Float.parseFloat(stTo.nextToken());
+					tyTo = Float.parseFloat(stTo.nextToken());
+				}
+
+				if (txFrom > txTo)
+					txFrom--;
+
+				if (txFrom < txTo)
+					txFrom++;
+
+				if (tyFrom > tyTo)
+					tyFrom--;
+
+				if (tyFrom < tyTo)
+					tyFrom++;
+
+				from_trans = txFrom + ", " + tyFrom;
+				to_trans = tyFrom + ", " + tyTo;
+				transformString = "translate(" + from_trans + ")";
+
+			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SCALE) {
+
+				float sxFrom = 0;
+				float syFrom = 0;
+				if (stFrom.countTokens() == 1) {
+					sxFrom = Float.parseFloat(stFrom.nextToken());
+				} else if (stFrom.countTokens() == 2) {
+					sxFrom = Float.parseFloat(stFrom.nextToken());
+					syFrom = Float.parseFloat(stFrom.nextToken());
+				}
+
+				StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+				float sxTo = 0;
+				float syTo = 0;
+				if (stTo.countTokens() == 1) {
+					sxTo = Float.parseFloat(stTo.nextToken());
+				} else if (stTo.countTokens() == 2) {
+					sxTo = Float.parseFloat(stTo.nextToken());
+					syTo = Float.parseFloat(stTo.nextToken());
+				}
+
+				if (sxFrom > sxTo)
+					sxFrom--;
+
+				if (sxFrom < sxTo)
+					sxFrom++;
+
+				if (syFrom > syTo)
+					syFrom--;
+
+				if (syFrom < syTo)
+					syFrom++;
+				
+				if(syFrom == 0){
+					from_trans = String.valueOf(sxFrom);
+					to_trans = String.valueOf(Float.parseFloat(to_trans));
+				} else{
+					from_trans = sxFrom + ", " + syFrom;
+					to_trans = syFrom + ", " + syTo;
+				}
+
+				transformString = "scale(" + from_trans + ")";
+				
+			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_ROTATE) {
+
+				float angleFrom = 0;
+				float cxFrom = 0;
+				float cyFrom = 0;
+				
+				if (stFrom.countTokens() == 1) {
+					angleFrom = Float.parseFloat(stFrom.nextToken());
+				} else if (stFrom.countTokens() == 3) {
+					angleFrom = Float.parseFloat(stFrom.nextToken());
+					cxFrom = Float.parseFloat(stFrom.nextToken());
+					cyFrom = Float.parseFloat(stFrom.nextToken());
+				}
+
+				StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+				float angleTo = 0;
+				float cxTo = 0;
+				float cyTo = 0;
+				if (stTo.countTokens() == 1) {
+					angleTo = Float.parseFloat(stTo.nextToken());
+				} else if (stTo.countTokens() == 3) {
+					angleTo = Float.parseFloat(stTo.nextToken());
+					cxTo = Float.parseFloat(stTo.nextToken());
+					cyTo = Float.parseFloat(stTo.nextToken());
+				}
+
+				if (angleFrom > angleTo)
+					angleFrom--;
+
+				if (angleFrom < angleTo)
+					angleFrom++;
+
+				if (cxFrom > cxTo)
+					cxFrom--;
+
+				if (cxFrom < cxTo)
+					cxFrom++;
+
+				if (cyFrom > cyTo)
+					cyFrom--;
+
+				if (cyFrom < cyTo)
+					cyFrom++;
+
+				from_trans = angleFrom + ", " + cxFrom + ", " + cyFrom;
+				to_trans = angleTo + ", " + cxTo + ", " + cyTo;
+				transformString = "rotate(" + from_trans + ")";
+
+			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SKEWX) {
+
+				float sxFrom = Float.parseFloat(from_trans);
+				float sxTo = Float.parseFloat(to_trans);
+
+				if (sxFrom > sxTo)
+					sxFrom--;
+
+				if (sxFrom < sxTo)
+					sxFrom++;
+				
+				from_trans = String.valueOf(sxFrom);
+				to_trans = String.valueOf(sxTo);
+				transformString = "skewX(" + sxFrom + ")";
+
+			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SKEWY) {
+
+				float sxFrom = Float.parseFloat(from_trans);
+				float sxTo = Float.parseFloat(to_trans);
+
+				if (sxFrom > sxTo)
+					sxFrom--;
+
+				if (sxFrom < sxTo)
+					sxFrom++;
+				
+				from_trans = String.valueOf(sxFrom);
+				to_trans = String.valueOf(sxTo);
+				transformString = "skewY(" + sxFrom + ")";
+			}
+			
+			SVGTransformList transformList = SVGTransformListImpl.createTransformList(transformString);
+			info.setTransformList(transformList);
+			ruicontrol.relayout();
+		}
+	}
+
 	private void startAnimation() {
 		if (!timer.isRunning()) {
-			SVGAnimateElementImpl animate = info.getAnimate();
+			SVGAnimationImpl animate = info.getAnimate();
 
-			if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
+			if ("transform".equalsIgnoreCase(animate.getAttributeName())) {
+				from_trans = animate.getFrom();
+				to_trans = animate.getTo();
+			} else if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
 				from_xml = Float.parseFloat(animate.getFrom());
 				to_xml = Float.parseFloat(animate.getTo());
 			}

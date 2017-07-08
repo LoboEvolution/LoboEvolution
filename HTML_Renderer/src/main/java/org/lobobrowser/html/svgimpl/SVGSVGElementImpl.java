@@ -530,13 +530,17 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 		return this.getAttribute(HtmlAttributeProperties.CLIPPATH);
 	}
 
-	public SVGAnimateElementImpl getAnimateElement() {
+	public SVGAnimationImpl getAnimateElement() {
 		NodeList gChildNodes = this.getChildNodes();
 		for (int g = 0; g < gChildNodes.getLength(); g++) {
 			Node n = gChildNodes.item(g);
 			if (n instanceof SVGAnimateElementImpl) {
 				return (SVGAnimateElementImpl) n;
 			}
+
+			if (n instanceof SVGAnimateTransformElementImpl) {
+				return (SVGAnimateTransformElementImpl) n;
+			} 
 		}
 		return null;
 	}
