@@ -48,6 +48,8 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public short getAttributeType() {
 		String type = this.getAttribute(HtmlAttributeProperties.ATTRIBUTE_TYPE);
+		if(type == null) return ElementTargetAttributes.ATTRIBUTE_TYPE_XML;
+		
 		switch (type) {
 		case "xml":
 		case "XML":
@@ -93,7 +95,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public float getDur() {
 		String duration = this.getAttribute(HtmlAttributeProperties.DUR);
-		return SVGUtility.getClockSecs(duration);
+		return SVGUtility.getClockMilliSecs(duration);
 	}
 
 	@Override
@@ -126,13 +128,15 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public float getRepeatCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		String rc = this.getAttribute(HtmlAttributeProperties.REPEAT_COUNT);
+		if(rc == null) return 0;
+		if("indefinite".equals(rc)) return Float.MAX_VALUE;
+		return Float.parseFloat(rc);
 	}
 
 	@Override
 	public void setRepeatCount(float repeatCount) throws DOMException {
-		// TODO Auto-generated method stub
+		this.setAttribute(HtmlAttributeProperties.REPEAT_COUNT, String.valueOf(repeatCount));
 
 	}
 
@@ -319,7 +323,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	public float getStartTime() {
 		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
 		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
-			return SVGUtility.getClockSecs(beginTime);
+			return SVGUtility.getClockMilliSecs(beginTime);
 		} else {
 			return 0;
 		}

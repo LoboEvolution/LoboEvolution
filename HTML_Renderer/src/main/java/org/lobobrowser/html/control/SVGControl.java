@@ -136,8 +136,10 @@ public class SVGControl extends SVGBasicControl {
 					break;
 				case USE:
 					use(g2d, svgi, modelNode);
+					break;
 				case TEXT:
 					text(g2d, svgi, i);
+					break;
 				default:
 					break;
 				}

@@ -45,16 +45,20 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private Timer timer;
 	private SVGInfo info;
 	private RUIControl ruicontrol;
+	private SVGAnimationImpl animate;
 	private float from_xml;
 	private float to_xml;
 	private String from_trans;
 	private String to_trans;
 	private Color from_color;
 	private Color to_color;
+	private int count;
 
 	public SVGAnimateImpl(SVGInfo info, RUIControl ruicontrol) {
 		this.info = info;
 		this.ruicontrol = ruicontrol;
+		this.animate = info.getAnimate();
+		count = 0;
 		timer = new Timer(1, this);
 		timer.setInitialDelay(0);
 		timer.setCoalesce(true);
@@ -63,12 +67,11 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		SVGAnimationImpl animate = info.getAnimate();
-		switch (animate.getAttributeName().toLowerCase()) {
+		switch (this.animate.getAttributeName().toLowerCase()) {
 		case "width":
 			animateWidth();
 			break;
-		case "heigth":
+		case "height":
 			animateHeight();
 			break;
 		case "y":
@@ -99,6 +102,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			break;
 		case "stroke":
 			animateStroke();
+			break;
 		case "transform":
 			animateTransform();
 			break;
@@ -109,7 +113,14 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	
 	private void animateWidth() {
 		if (info.getWidth() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setWidth(from_xml);
+			}
+		
 		} else {
 			from_xml++;
 			info.setWidth(from_xml);
@@ -119,7 +130,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateHeight() {
 		if (info.getHeight() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setHeight(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setHeight(from_xml);
@@ -129,7 +146,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateX() {
 		if (info.getX() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setX(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setX(from_xml);
@@ -139,7 +162,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateY() {
 		if (info.getY() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setY(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setY(from_xml);
@@ -149,7 +178,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateR() {
 		if (info.getR() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setR(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setR(from_xml);
@@ -159,7 +194,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateX1() {
 		if (info.getX1() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setX1(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setX1(from_xml);
@@ -169,7 +210,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateX2() {
 		if (info.getX2() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setX2(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setX2(from_xml);
@@ -179,7 +226,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateY1() {
 		if (info.getY1() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setY1(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setY1(from_xml);
@@ -189,7 +242,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private void animateY2() {
 		if (info.getY2() >= to_xml) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_xml = Float.parseFloat(this.animate.getFrom());
+				info.setY2(from_xml);
+			}
 		} else {
 			from_xml++;
 			info.setY2(from_xml);
@@ -200,7 +259,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private void animateFill() {
 
 		if (from_color.getRGB() == to_color.getRGB()) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_color = ColorFactory.getInstance().getColor(this.animate.getFrom());
+				info.getStyle().setFill("rgb(" + from_color.getRed() + "," + from_color.getGreen() + "," + from_color.getBlue() + ")");
+			}
 		} else {
 
 			int f_red = from_color.getRed();
@@ -239,7 +304,13 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private void animateStroke() {
 
 		if (from_color.getRGB() == to_color.getRGB()) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_color = ColorFactory.getInstance().getColor(this.animate.getFrom());
+				info.getStyle().setFill("rgb(" + from_color.getRed() + "," + from_color.getGreen() + "," + from_color.getBlue() + ")");
+			}
 		} else {
 
 			int f_red = from_color.getRed();
@@ -278,7 +349,12 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private void animateTransform() {
 		
 		if (from_trans.equals(to_trans)) {
-			stopAnimation();
+			if (this.animate.getRepeatCount() == count) {
+				stopAnimation();
+			} else {
+				count++;
+				from_trans = animate.getFrom();
+			}
 		} else {
 			String transformString = "";
 			SVGAnimationImpl animate = info.getAnimate();

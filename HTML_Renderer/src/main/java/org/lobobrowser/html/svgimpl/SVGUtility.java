@@ -128,7 +128,7 @@ public class SVGUtility {
 		}
 	}
 
-	public static float getClockSecs(String clockVal) {
+	public static float getClockMilliSecs(String clockVal) {
 		try {
 			if (clockVal.indexOf(":") != -1) {
 				StringTokenizer st = new StringTokenizer(clockVal, ":");
@@ -137,30 +137,29 @@ public class SVGUtility {
 					int hours = Integer.parseInt(st.nextToken());
 					int minutes = Integer.parseInt(st.nextToken());
 					float seconds = Float.parseFloat(st.nextToken());
-					return hours * 3600 + minutes * 60 + seconds;
+					return (hours * 3600 + minutes * 60 + seconds) * 1000;
 				} else if (numTokens == 2) { // is a partial clock value
 					int minutes = Integer.parseInt(st.nextToken());
 					float seconds = Float.parseFloat(st.nextToken());
-					return minutes * 60 + seconds;
+					return (minutes * 60 + seconds) * 1000;
 				} else {
 					return 0;
 				}
 			} else {
 				if (clockVal.indexOf("h") != -1) {
 					float hour = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("h")));
-					return hour * 3600;
+					return (hour * 3600) * 1000;
 				} else if (clockVal.indexOf("min") != -1) {
 					float min = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("min")));
-					return min * 60;
+					return (min * 60) * 1000;
 				} else if (clockVal.indexOf("ms") != -1) {
-					float ms = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("ms")));
-					return (float) (ms / 1000.0);
+					return Float.parseFloat(clockVal.substring(0, clockVal.indexOf("ms")));
 				} else if (clockVal.indexOf("s") != -1) {
 					float secs = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("s")));
-					return secs;
+					return secs * 1000;
 				} else {
 					float secs = Float.parseFloat(clockVal);
-					return secs;
+					return secs * 1000;
 				}
 			}
 		} catch (NumberFormatException e) {

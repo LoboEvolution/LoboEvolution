@@ -419,7 +419,9 @@ public interface HtmlAttributeProperties {
 
 	/** The required. */
 	String REQUIRED = "required";
-
+	
+	/** The repeatCount. */
+	String REPEAT_COUNT = "repeatCount";
 	/** The size. */
 	String SIZE = "size";
 
