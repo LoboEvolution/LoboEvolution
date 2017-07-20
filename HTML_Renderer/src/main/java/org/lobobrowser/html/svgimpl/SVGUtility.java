@@ -162,7 +162,7 @@ public class SVGUtility {
 					return secs * 1000;
 				}
 			}
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			return 0;
 		}
 	}

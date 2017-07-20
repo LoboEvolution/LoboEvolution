@@ -422,6 +422,10 @@ public interface HtmlAttributeProperties {
 	
 	/** The repeatCount. */
 	String REPEAT_COUNT = "repeatCount";
+	
+	/** The repeatDur. */
+	String REPEAT_DUR = "repeatDur";
+	
 	/** The size. */
 	String SIZE = "size";
 
