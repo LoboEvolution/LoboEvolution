@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HTML_Renderer"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/PDFrenderer.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/rsyntaxtextarea.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-api-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-core-2.8.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
