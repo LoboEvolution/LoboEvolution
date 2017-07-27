@@ -36,6 +36,8 @@ import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.smil.ElementTargetAttributes;
+import org.lobobrowser.w3c.smil.Time;
+import org.lobobrowser.w3c.smil.TimeList;
 import org.lobobrowser.w3c.svg.SVGLength;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPoint;
@@ -293,5 +295,11 @@ public class SVGUtility {
 			return Math.round(dur / range);
 		}
 		return 0;
+	}
+	
+	public static int begin(SVGAnimationImpl animate){
+		TimeList begin = animate.getBegin();
+		Time time = begin.item(0);
+		return new Double(time.getResolvedOffset()).intValue();
 	}
 }

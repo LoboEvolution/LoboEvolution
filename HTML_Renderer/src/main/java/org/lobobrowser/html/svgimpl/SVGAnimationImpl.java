@@ -20,9 +20,14 @@
  */
 package org.lobobrowser.html.svgimpl;
 
+import java.util.ArrayList;
+
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.smilimpl.TimeImpl;
+import org.lobobrowser.html.smilimpl.TimeListImpl;
 import org.lobobrowser.w3c.smil.ElementTargetAttributes;
 import org.lobobrowser.w3c.smil.SMILAnimation;
+import org.lobobrowser.w3c.smil.Time;
 import org.lobobrowser.w3c.smil.TimeList;
 import org.lobobrowser.w3c.svg.SVGElement;
 import org.lobobrowser.w3c.svg.SVGTransform;
@@ -70,8 +75,34 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public TimeList getBegin() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Time> beginTimeList = new ArrayList<Time>();
+		String begin = this.getAttribute(HtmlAttributeProperties.BEGIN);
+		
+		if (begin != null) {
+			String[] beginTimeStringList = begin.split(";");
+
+			for (int i = 0; i < beginTimeStringList.length; i++) {
+				try {
+					beginTimeList.add(new TimeImpl(beginTimeStringList[i]));
+				} catch (IllegalArgumentException e) {
+				}
+			}
+		}
+		
+		if (beginTimeList.size() == 0) {
+			beginTimeList.add(new TimeImpl("0"));
+		}
+		return new TimeListImpl(beginTimeList);
+	}
+	
+	
+	public float getStartTime() {
+		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
+		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
+			return SVGUtility.getClockMilliSecs(beginTime);
+		} else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -320,17 +351,6 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 			return 0;
 		}
 	}
-	
-	
-	public float getStartTime() {
-		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
-		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
-			return SVGUtility.getClockMilliSecs(beginTime);
-		} else {
-			return 0;
-		}
-	}
-
 	
 	public float getSimpleDuration() throws DOMException {
 		return getDur();

@@ -62,7 +62,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		count = 0;
 		int time = SVGUtility.timerDelay(animate);
 		timer = new Timer(time, this);
-		timer.setInitialDelay(0);
+		timer.setInitialDelay(SVGUtility.begin(animate));
 		startAnimation();
 	}
 

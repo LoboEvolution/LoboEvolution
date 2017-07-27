@@ -62,6 +62,8 @@ public interface Time {
 	public static final short SMIL_TIME_EVENT_BASED = 3;
 	public static final short SMIL_TIME_WALLCLOCK = 4;
 	public static final short SMIL_TIME_MEDIA_MARKER = 5;
+	public static final short SMIL_TIME_REPEAT = 6;
+	public static final short SMIL_TIME_ACCESSKEY = 7;
 
 	/**
 	 * A code representing the type of the underlying object, as defined above.
