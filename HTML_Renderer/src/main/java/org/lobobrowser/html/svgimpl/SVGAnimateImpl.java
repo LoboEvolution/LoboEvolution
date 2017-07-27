@@ -118,7 +118,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getWidth() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -140,7 +140,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getHeight() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -161,7 +161,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getX() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -182,7 +182,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getY() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -203,7 +203,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getR() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -224,7 +224,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getX1() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -245,7 +245,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getX2() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -266,7 +266,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getY1() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -287,7 +287,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			stopAnimation();
 		}
 		
-		if (info.getY2() >= to_xml) {
+		if (from_xml >= to_xml) {
 			if (this.animate.getRepeatCount() == count) {
 				stopAnimation();
 			} else {
@@ -586,7 +586,6 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private void startAnimation() {
 		if (!timer.isRunning()) {
 			SVGAnimationImpl animate = info.getAnimate();
-			
 			if ("transform".equalsIgnoreCase(animate.getAttributeName())) {
 				from_trans = animate.getFrom();
 				to_trans = animate.getTo();
