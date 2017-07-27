@@ -143,7 +143,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	@Override
 	public float getRepeatDur() {
 		String rd = this.getAttribute(HtmlAttributeProperties.REPEAT_DUR);
-		if(rd == null) return 0;
+		if(rd == null) return 5000;
 		if("indefinite".equals(rd)) return Float.MAX_VALUE;
 		return SVGUtility.getClockMilliSecs(rd);
 	}
