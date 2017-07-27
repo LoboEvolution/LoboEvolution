@@ -60,9 +60,9 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		this.ruicontrol = ruicontrol;
 		this.animate = info.getAnimate();
 		count = 0;
-		timer = new Timer(5, this);
+		int time = SVGUtility.timerDelay(animate);
+		timer = new Timer(time, this);
 		timer.setInitialDelay(0);
-		timer.setCoalesce(true);
 		startAnimation();
 	}
 

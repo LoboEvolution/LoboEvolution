@@ -150,7 +150,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public void setRepeatDur(float repeatDur) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.REPEAT_COUNT, String.valueOf(repeatDur));
+		this.setAttribute(HtmlAttributeProperties.REPEAT_DUR, String.valueOf(repeatDur));
 
 	}
 

@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.svgimpl;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
@@ -31,12 +32,15 @@ import java.util.StringTokenizer;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
 import org.lobobrowser.util.gui.LAFSettings;
+import org.lobobrowser.w3c.smil.ElementTargetAttributes;
 import org.lobobrowser.w3c.svg.SVGLength;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGPointList;
+import org.lobobrowser.w3c.svg.SVGTransform;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -70,7 +74,7 @@ public class SVGUtility {
 		}
 		return lengthList;
 	}
-	
+
 	public static Font getFontValue(String ff, String fs) {
 
 		float fontSize = LAFSettings.getInstance().getFontSize();
@@ -165,5 +169,129 @@ public class SVGUtility {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	public static int timerDelay(SVGAnimationImpl animate) {
+		if (animate.getDur() == 0)
+			return 5;
+
+		if ("transform".equalsIgnoreCase(animate.getAttributeName())) {
+			return timeDelayTransform(animate);
+		} else if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
+			return timerDelayFloat(animate);
+		} else {
+			return timerDelayColor(animate);
+		}
+	}
+
+	private static int timerDelayFloat(SVGAnimationImpl animate) {
+		float dur = animate.getDur();
+		float from = Float.parseFloat(animate.getFrom());
+		float to = Float.parseFloat(animate.getTo());
+		float range = to - from;
+		return Math.round(dur / range);
+	}
+
+	private static int timerDelayColor(SVGAnimationImpl animate) {
+		float dur = animate.getDur();
+		Color from = ColorFactory.getInstance().getColor(animate.getFrom());
+		Color to = ColorFactory.getInstance().getColor(animate.getTo());
+		float range = (to.getRed() - from.getRed()) + (to.getBlue() - from.getBlue()) + (to.getGreen() - from.getGreen());
+		if(range == 0) return 255;
+		return Math.round(dur / range);
+	}
+
+	private static int timeDelayTransform(SVGAnimationImpl animate) {
+		float dur = animate.getDur();
+		float range = 0;
+		String from_trans = animate.getFrom();
+		String to_trans = animate.getTo();
+		StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+
+		if (animate.getType() == SVGTransform.SVG_TRANSFORM_TRANSLATE) {
+
+			float txFrom = 0;
+			float tyFrom = 0;
+			if (stFrom.countTokens() == 1) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+				tyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+			float txTo = 0;
+			float tyTo = 0;
+			if (stTo.countTokens() == 1) {
+				txTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				txTo = Float.parseFloat(stTo.nextToken());
+				tyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			range = (txTo - txFrom) + (tyTo - tyFrom);
+			return Math.round(dur / range);
+
+		} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SCALE) {
+
+			float sxFrom = 0;
+			float syFrom = 0;
+			if (stFrom.countTokens() == 1) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+				syFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+			float sxTo = 0;
+			float syTo = 0;
+			if (stTo.countTokens() == 1) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+				syTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			range = (sxTo - sxFrom) + (syTo - syFrom);
+			return Math.round(dur / range);
+
+		} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_ROTATE) {
+
+			float cxFrom = 0;
+			float cyFrom = 0;
+
+			if (stFrom.countTokens() == 3) {
+				cxFrom = Float.parseFloat(stFrom.nextToken());
+				cyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+			float cxTo = 0;
+			float cyTo = 0;
+
+			if (stTo.countTokens() == 3) {
+				cxTo = Float.parseFloat(stTo.nextToken());
+				cyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			range = (cxTo - cxFrom) + (cyTo - cyFrom);
+			return Math.round(dur / range);
+
+		} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SKEWX) {
+
+			float sxFrom = Float.parseFloat(from_trans);
+			float sxTo = Float.parseFloat(to_trans);
+			range = sxTo - sxFrom;
+			return Math.round(dur / range);
+
+		} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SKEWY) {
+
+			float sxFrom = Float.parseFloat(from_trans);
+			float sxTo = Float.parseFloat(to_trans);
+			range = sxTo - sxFrom;
+			return Math.round(dur / range);
+		}
+		return 0;
 	}
 }
