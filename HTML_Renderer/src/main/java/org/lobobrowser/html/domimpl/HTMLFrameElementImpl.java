@@ -37,6 +37,9 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 
 	/** The browser frame. */
 	private volatile BrowserFrame browserFrame;
+	
+	/** The no resize. */
+	private boolean noResize;
 
 	/**
 	 * Instantiates a new HTML frame element impl.
@@ -185,9 +188,6 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	public void setName(String name) {
 		this.setAttribute(HtmlAttributeProperties.NAME, name);
 	}
-
-	/** The no resize. */
-	private boolean noResize;
 
 	/*
 	 * (non-Javadoc)

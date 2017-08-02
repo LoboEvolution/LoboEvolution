@@ -85,8 +85,10 @@ import org.w3c.dom.UserDataHandler;
 public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** The m_attribute node. */
-	// Node that XPathNamespaceImpl wraps
 	final private Node m_attributeNode;
+	
+	/** The text content. */
+	private String textContent;
 
 	/**
 	 * Constructor for XPathNamespaceImpl.
@@ -315,9 +317,6 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	public short compareDocumentPosition(Node other) throws DOMException {
 		return 0;
 	}
-
-	/** The text content. */
-	private String textContent;
 
 	@Override
 	public String getTextContent() throws DOMException {

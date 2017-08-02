@@ -311,7 +311,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 				MonitoredInputStream mis = new MonitoredInputStream(in);
 				mis.evtProgress.addListener(event -> {
 					InputProgressEvent pe = (InputProgressEvent) event;
-					requestHandler.handleProgress(org.lobobrowser.ua.ProgressType.CONTENT_LOADING, responseURL,
+					requestHandler.handleProgress(ProgressType.CONTENT_LOADING, responseURL,
 							getLastRequestMethod(), pe.getProgress(), contentLength);
 				});
 				// TODO Buffer size too big if contentLength small

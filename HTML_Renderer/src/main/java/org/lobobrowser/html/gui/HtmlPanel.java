@@ -611,10 +611,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 					if (textContent != null && !"".equals(textContent.trim())) {
 						return false;
 					}
-				} else if (child instanceof DOMElementImpl) {
-					if (this.hasSomeHtml((DOMElementImpl) child)) {
-						return false;
-					}
+				} else if (child instanceof DOMElementImpl&& this.hasSomeHtml((DOMElementImpl) child)) {
+					return false;
 				}
 			}
 		}
@@ -844,11 +842,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		int length = notifsArray.length;
 		for (int i = 0; i < length; i++) {
 			DocumentNotification dn = notifsArray[i];
-			if (dn.node instanceof HTMLFrameSetElement && this.htmlBlockPanel != null) {
-				if (this.resetIfFrameSet()) {
-					// Revalidation already taken care of.
-					return;
-				}
+			if (this.resetIfFrameSet() && dn.node instanceof HTMLFrameSetElement && this.htmlBlockPanel != null) {
+				return;
 			}
 		}
 		HtmlBlockPanel blockPanel = this.htmlBlockPanel;

@@ -95,6 +95,12 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 
 	/** The status bar panel. */
 	private final StatusBarPanel statusBarPanel;
+	
+	/** The default status. */
+	private String defaultStatus;
+
+	/** The status. */
+	private String status;
 
 	/**
 	 * Constructs a <code>BrowserPanel</code> with toolbars, an address bar, a
@@ -619,12 +625,6 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	public Component getComponent() {
 		return this;
 	}
-
-	/** The default status. */
-	private String defaultStatus;
-
-	/** The status. */
-	private String status;
 
 	/*
 	 * (non-Javadoc)

@@ -75,7 +75,7 @@ public class Bean {
 			map.put(pd.getName(), pd);
 		}
 		if (clazz.isInterface()) {
-			java.lang.reflect.Type[] interfaces = clazz.getGenericInterfaces();
+			Type[] interfaces = clazz.getGenericInterfaces();
 			for (Type interface1 : interfaces) {
 				this.populateDescriptors(map, (Class<?>) interface1);
 			}

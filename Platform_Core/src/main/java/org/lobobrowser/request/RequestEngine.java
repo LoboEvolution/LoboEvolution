@@ -475,13 +475,11 @@ public final class RequestEngine {
 			byte[] persistentContent = null;
 			CacheManager cm = CacheManager.getInstance();
 			entry = (MemoryCacheEntry) cm.getTransient(url);
-			if (entry == null) {
-				if (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost())) {
-					try {
-						persistentContent = cm.getPersistent(url, false);
-					} catch (IOException ioe) {
-						logger.error("getCacheInfo(): Unable to load cache file.", ioe);
-					}
+			if (entry == null && (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost()))) {
+				try {
+					persistentContent = cm.getPersistent(url, false);
+				} catch (IOException ioe) {
+					logger.error("getCacheInfo(): Unable to load cache file.", ioe);
 				}
 			}
 			if (persistentContent == null && entry == null) {
@@ -561,7 +559,7 @@ public final class RequestEngine {
 						out.write(headerBytes1);
 					}
 					if (!hadDate) {
-						String currentDate = Urls.PATTERN_RFC1123.format(new java.util.Date());
+						String currentDate = Urls.PATTERN_RFC1123.format(new Date());
 						byte[] headerBytes2 = ("Date: " + currentDate + "\r\n").getBytes("UTF-8");
 						out.write(headerBytes2);
 					}
@@ -691,7 +689,7 @@ public final class RequestEngine {
 
 			@Override
 			public void processResponse(ClientletResponse response) throws ClientletException, IOException {
-				byte[] bytes = org.lobobrowser.util.io.IORoutines.load(response.getInputStream(), 4096);
+				byte[] bytes = IORoutines.load(response.getInputStream(), 4096);
 				boxed.setObject(bytes);
 			}
 		});
@@ -729,7 +727,7 @@ public final class RequestEngine {
 
 			@Override
 			public void processResponse(ClientletResponse response) throws ClientletException, IOException {
-				byte[] bytes = org.lobobrowser.util.io.IORoutines.load(response.getInputStream(), 4096);
+				byte[] bytes = IORoutines.load(response.getInputStream(), 4096);
 				asyncResult.setResult(bytes);
 			}
 		});

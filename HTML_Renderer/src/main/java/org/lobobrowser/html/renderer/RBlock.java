@@ -89,8 +89,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	protected final RBlockViewport bodyLayout;
 
 	/** The cached layout. */
-	protected final Map<LayoutKey, LayoutValue> cachedLayout = Collections
-			.synchronizedMap(new HashMap<LayoutKey, LayoutValue>(5));
+	protected final Map<LayoutKey, LayoutValue> cachedLayout = Collections.synchronizedMap(new HashMap<LayoutKey, LayoutValue>(5));
 
 	/** The start selection. */
 	protected RenderableSpot startSelection;
@@ -110,9 +109,6 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	/** The has v scroll bar. */
 	protected boolean hasVScrollBar = false;
 
-	// Validation-dependent variables...
-	// private Dimension layoutSize = null;
-
 	/** The default overflow x. */
 	protected int defaultOverflowX = RenderState.OVERFLOW_NONE;
 
@@ -124,6 +120,9 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 
 	/** The last layout key. */
 	private LayoutKey lastLayoutKey = null;
+	
+	/** The resetting scroll bars. */
+	private boolean resettingScrollBars = false;
 
 	/**
 	 * Instantiates a new r block.
@@ -930,9 +929,6 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 		}
 	}
 
-	/** The resetting scroll bars. */
-	private boolean resettingScrollBars = false;
-
 	/**
 	 * Changes scroll bar state to match viewport origin.
 	 *
@@ -1534,20 +1530,10 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 			if (RBlock.this.resettingScrollBars) {
 				return;
 			}
-			switch (e.getAdjustmentType()) {
-			case AdjustmentEvent.UNIT_INCREMENT:
-				// fall through
-			case AdjustmentEvent.UNIT_DECREMENT:
-				// fall through
-			case AdjustmentEvent.BLOCK_INCREMENT:
-				// fall through
-			case AdjustmentEvent.BLOCK_DECREMENT:
-				// fall through
-			case AdjustmentEvent.TRACK: {
+			
+			if(e.getAdjustmentType() == AdjustmentEvent.TRACK){
 				int value = e.getValue();
 				RBlock.this.scrollToSBValue(this.orientation, value);
-				break;
-			}
 			}
 		}
 	}

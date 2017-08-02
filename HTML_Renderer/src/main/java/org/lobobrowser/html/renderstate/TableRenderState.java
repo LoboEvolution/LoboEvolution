@@ -124,7 +124,7 @@ public class TableRenderState extends StyleSheetRenderState {
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
-		if (binfo != INVALID_BORDER_INFO) {
+		if (!INVALID_BORDER_INFO.equals(binfo)) {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();

@@ -35,6 +35,12 @@ public class ObjectLayout extends CommonWidgetLayout {
 
 	/** The try to render content. */
 	private boolean tryToRenderContent;
+	
+	/**
+	 * Must use this ThreadLocal because an ObjectLayout instance is shared
+	 * across renderers.
+	 */
+	private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<HtmlObject>();
 
 	/**
 	 * Instantiates a new object layout.
@@ -48,12 +54,6 @@ public class ObjectLayout extends CommonWidgetLayout {
 		super(ADD_INLINE, usesAlignAttribute);
 		this.tryToRenderContent = tryToRenderContent;
 	}
-
-	/**
-	 * Must use this ThreadLocal because an ObjectLayout instance is shared
-	 * across renderers.
-	 */
-	private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<HtmlObject>();
 
 	/*
 	 * (non-Javadoc)

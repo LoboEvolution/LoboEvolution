@@ -71,6 +71,11 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	 * Starts as true because ancestors could be invalidated.
 	 */
 	protected boolean layoutUpTreeCanBeInvalidated = true;
+	
+	/**
+	 * Parent for graphics coordinates.
+	 */
+	protected RCollection parent;
 
 	/**
 	 * Mark layout valid.
@@ -99,7 +104,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	 * int)
 	 */
 	@Override
-	public java.awt.Point getGUIPoint(int clientX, int clientY) {
+	public Point getGUIPoint(int clientX, int clientY) {
 		Renderable parent = this.getParent();
 		if (parent instanceof BoundableRenderable) {
 			return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x, clientY + this.y);
@@ -374,11 +379,6 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		}
 	}
 
-	/**
-	 * Parent for graphics coordinates.
-	 */
-	protected RCollection parent;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -535,11 +535,9 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 
 	@Override
 	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
-		if (triggerEvent) {
-			if (this.isContainedByNode()) {
+		if (triggerEvent && this.isContainedByNode()) {
 				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
 				setMouseOnMouseOver(this, this.modelNode, limit);
-			}
 		}
 	}
 
@@ -620,16 +618,13 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 						rcontext.setCursor(cursorOpt);
 						break;
 					} else {
-						if (node.getParentModelNode() == limit) {
-							if (renderable instanceof RWord || renderable instanceof RBlank) {
-								rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
-							}
+						if (node.getParentModelNode() == limit && (renderable instanceof RWord || renderable instanceof RBlank)) {
+							rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
 						}
 					}
 				}
 				node = node.getParentModelNode();
 			}
-
 		}
 	}
 }

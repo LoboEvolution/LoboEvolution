@@ -193,7 +193,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 	 * org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
 	 */
 	@Override
-	public java.lang.Object getDefaultValue(Class hint) {
+	public Object getDefaultValue(Class hint) {
 		if (loggableInfo) {
 			logger.info("getDefaultValue(): hint=" + hint + ",this=" + this);
 		}

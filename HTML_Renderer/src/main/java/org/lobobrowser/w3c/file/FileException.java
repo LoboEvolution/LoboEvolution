@@ -28,20 +28,7 @@ public class FileException extends RuntimeException {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Instantiates a new file exception.
-	 *
-	 * @param code
-	 *            the code
-	 * @param message
-	 *            the message
-	 */
-	public FileException(short code, String message) {
-		super(message);
-		this.code = code;
-	}
-
+	
 	/** The Constant NOT_FOUND_ERR. */
 	public static final short NOT_FOUND_ERR = 1;
 
@@ -59,4 +46,17 @@ public class FileException extends RuntimeException {
 
 	/** The code. */
 	public short code;
+
+	/**
+	 * Instantiates a new file exception.
+	 *
+	 * @param code
+	 *            the code
+	 * @param message
+	 *            the message
+	 */
+	public FileException(short code, String message) {
+		super(message);
+		this.code = code;
+	}
 }

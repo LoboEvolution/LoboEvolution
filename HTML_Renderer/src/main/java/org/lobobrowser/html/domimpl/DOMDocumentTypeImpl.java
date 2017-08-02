@@ -107,7 +107,7 @@ public class DOMDocumentTypeImpl extends DOMNodeImpl implements DocumentType {
 	 */
 	@Override
 	public short getNodeType() {
-		return org.w3c.dom.Node.DOCUMENT_TYPE_NODE;
+		return Node.DOCUMENT_TYPE_NODE;
 	}
 
 	/*

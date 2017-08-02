@@ -24,6 +24,7 @@
 package org.lobobrowser.store;
 
 import java.io.File;
+import java.util.Date;
 
 /**
  * The Class CacheFileInfo.
@@ -126,7 +127,7 @@ public class CacheFileInfo implements Comparable<Object> {
 	 */
 	@Override
 	public String toString() {
-		return "CacheFileInfo[path=" + this.path + ",lastModified=" + new java.util.Date(this.initialLastModified)
+		return "CacheFileInfo[path=" + this.path + ",lastModified=" + new Date(this.initialLastModified)
 				+ "]";
 	}
 }

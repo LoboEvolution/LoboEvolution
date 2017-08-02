@@ -282,7 +282,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 * @return the exception meaning
 	 */
 	private static String getExceptionMeaning(URL url, Throwable exception) {
-		if (exception instanceof org.lobobrowser.clientlet.JavaVersionException) {
+		if (exception instanceof JavaVersionException) {
 			JavaVersionException jve = (JavaVersionException) exception;
 			return "This exception is thrown when the content expects the user's Java Virtual Machine "
 					+ "to be more up to date than it currently is. In this case the content is " + "expecting version "

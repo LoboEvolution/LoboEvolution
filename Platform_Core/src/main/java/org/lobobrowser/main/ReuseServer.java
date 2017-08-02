@@ -44,6 +44,18 @@ public class ReuseServer implements Runnable {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ReuseServer.class);
+	
+	/** The Constant MIN_PORT. */
+	private static final int MIN_PORT = 55000;
+
+	/** The Constant TOP_PORT. */
+	private static final int TOP_PORT = 65000;
+
+	/** The Constant RAND. */
+	private static final Random RAND = new Random(System.currentTimeMillis());
+	
+	/** The server socket. */
+	private ServerSocket serverSocket;
 
 	/**
 	 * Instantiates a new reuse server.
@@ -54,15 +66,6 @@ public class ReuseServer implements Runnable {
 		t.start();
 	}
 
-	/** The Constant MIN_PORT. */
-	private static final int MIN_PORT = 55000;
-
-	/** The Constant TOP_PORT. */
-	private static final int TOP_PORT = 65000;
-
-	/** The Constant RAND. */
-	private static final Random RAND = new Random(System.currentTimeMillis());
-
 	/**
 	 * Gets the random port.
 	 *
@@ -71,9 +74,6 @@ public class ReuseServer implements Runnable {
 	private static int getRandomPort() {
 		return Math.abs(RAND.nextInt()) % (TOP_PORT - MIN_PORT) + MIN_PORT;
 	}
-
-	/** The server socket. */
-	private ServerSocket serverSocket;
 
 	/**
 	 * Start.

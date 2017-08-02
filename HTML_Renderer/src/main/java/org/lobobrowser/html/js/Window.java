@@ -1417,7 +1417,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		if (doc == null) {
 			return null;
 		}
-		org.w3c.dom.Node node = doc.getElementById(name);
+		Node node = doc.getElementById(name);
 		if (node != null) {
 			return node;
 		}

@@ -25,6 +25,7 @@ package org.lobobrowser.html.control;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
@@ -198,7 +199,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	 * @see javax.swing.JComponent#getPreferredSize()
 	 */
 	@Override
-	public java.awt.Dimension getPreferredSize() {
+	public Dimension getPreferredSize() {
 		int pw;
 		int cols = this.cols;
 		if (cols == -1) {
@@ -219,7 +220,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			Insets insets = this.widget.getInsets();
 			ph = insets.top + insets.bottom + fm.getHeight() * rows;
 		}
-		return new java.awt.Dimension(pw, ph);
+		return new Dimension(pw, ph);
 
 	}
 

@@ -652,7 +652,6 @@ public class Session extends AbstractBean {
 		} catch (InterruptedException ex) {
 			setState(State.ABORTED);
 			throw ex;
-		} finally {
 		}
 	}
 

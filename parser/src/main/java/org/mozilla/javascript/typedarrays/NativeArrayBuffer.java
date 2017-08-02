@@ -125,8 +125,9 @@ public class NativeArrayBuffer extends IdScriptableObject {
 			int start = isArg(args, 0) ? ScriptRuntime.toInt32(args[0]) : 0;
 			int end = isArg(args, 1) ? ScriptRuntime.toInt32(args[1]) : self.buffer.length;
 			return self.slice(start, end);
+		default:
+			throw new IllegalArgumentException(String.valueOf(id));
 		}
-		throw new IllegalArgumentException(String.valueOf(id));
 	}
 
 	private static NativeArrayBuffer realThis(Scriptable thisObj, IdFunctionObject f) {

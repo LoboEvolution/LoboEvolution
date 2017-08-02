@@ -120,7 +120,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 	 * org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
 	 */
 	@Override
-	public java.lang.Object getDefaultValue(Class hint) {
+	public Object getDefaultValue(Class hint) {
 		if (String.class.equals(hint)) {
 			return "function " + this.name;
 		} else {

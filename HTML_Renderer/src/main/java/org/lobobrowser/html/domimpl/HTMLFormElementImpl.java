@@ -74,11 +74,10 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		try {
 			// TODO: This could use document.namedItem.
 			this.visit(node -> {
-				if (HTMLFormElementImpl.isInput(node)) {
-					if (name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME))) {
-						throw new StopVisitorException(node);
-					}
-				}
+				if (HTMLFormElementImpl.isInput(node)
+						&& name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME))) {
+					throw new StopVisitorException(node);
+				}				
 			});
 		} catch (StopVisitorException sve) {
 			return sve.getTag();
@@ -311,12 +310,10 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	public final void submit(final FormInput[] extraFormInputs) {
 		Function onsubmit = this.getOnsubmit();
-		if (onsubmit != null) {
-			// TODO: onsubmit event object?
-			if (!Executor.executeFunction(this, onsubmit, null)) {
-				return;
-			}
+		if (onsubmit != null && !Executor.executeFunction(this, onsubmit, null)) {
+			return;
 		}
+		
 		HtmlRendererContext context = this.getHtmlRendererContext();
 		if (context != null) {
 			final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();

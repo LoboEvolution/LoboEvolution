@@ -96,7 +96,7 @@ public class CacheInfo {
 	 *
 	 * @return the entry info list
 	 */
-	public java.util.List getEntryInfoList() {
+	public List getEntryInfoList() {
 		return entryInfoList;
 	}
 

@@ -271,7 +271,7 @@ public final class CacheManager implements Runnable {
 				if (Urls.isLocalFile(url)) {
 					return new JarFile(url.getFile());
 				}
-				throw new java.io.FileNotFoundException(
+				throw new FileNotFoundException(
 						"JAR file cannot be obtained for a URL that is not cached locally: " + url + ".");
 			}
 			cacheFile.setLastModified(System.currentTimeMillis());

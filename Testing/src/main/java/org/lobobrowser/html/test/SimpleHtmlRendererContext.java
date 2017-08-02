@@ -543,8 +543,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * @throws SAXException
 	 *             the SAX exception
 	 */
-	protected HTMLDocumentImpl createDocument(org.xml.sax.InputSource inputSource)
-			throws IOException, org.xml.sax.SAXException {
+	protected HTMLDocumentImpl createDocument(org.xml.sax.InputSource inputSource) throws IOException, SAXException {
 		DocumentBuilderImpl builder = new DocumentBuilderImpl(this.getUserAgentContext(),
 				SimpleHtmlRendererContext.this);
 		return (HTMLDocumentImpl) builder.createDocument(inputSource);

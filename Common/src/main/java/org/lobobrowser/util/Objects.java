@@ -95,15 +95,12 @@ public class Objects {
 		if (clazz.isInstance(value)) {
 			return true;
 		}
-		if (clazz.isPrimitive()) {
-			if (clazz == double.class && value instanceof Double || clazz == int.class && value instanceof Integer
-					|| clazz == long.class && value instanceof Long
-					|| clazz == boolean.class && value instanceof Boolean
-					|| clazz == byte.class && value instanceof Byte || clazz == char.class && value instanceof Character
-					|| clazz == short.class && value instanceof Short
-					|| clazz == float.class && value instanceof Float) {
-				return true;
-			}
+		if (clazz.isPrimitive() && clazz == double.class && value instanceof Double
+				|| clazz == int.class && value instanceof Integer || clazz == long.class && value instanceof Long
+				|| clazz == boolean.class && value instanceof Boolean || clazz == byte.class && value instanceof Byte
+				|| clazz == char.class && value instanceof Character || clazz == short.class && value instanceof Short
+				|| clazz == float.class && value instanceof Float) {
+			return true;
 		}
 		if (isNumeric(clazz) && isNumeric(value)) {
 			return true;

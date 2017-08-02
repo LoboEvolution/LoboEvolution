@@ -55,7 +55,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
-		if (mi != INVALID_INSETS) {
+		if (!INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
@@ -96,7 +96,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
-		if (binfo != INVALID_BORDER_INFO) {
+		if (!INVALID_BORDER_INFO.equals(binfo)) {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();

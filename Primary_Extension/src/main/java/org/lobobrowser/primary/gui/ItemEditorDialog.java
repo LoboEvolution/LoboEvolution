@@ -59,6 +59,9 @@ public class ItemEditorDialog<T> extends JDialog {
 
 	/** The editor. */
 	private final AbstractItemEditor<T> editor;
+	
+	/** The resulting item. */
+	private T resultingItem;
 
 	/**
 	 * Instantiates a new item editor dialog.
@@ -154,8 +157,6 @@ public class ItemEditorDialog<T> extends JDialog {
 		return panel;
 	}
 
-	/** The resulting item. */
-	private T resultingItem;
 
 	/**
 	 * Gets the resulting item.

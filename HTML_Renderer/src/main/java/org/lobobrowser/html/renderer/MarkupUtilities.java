@@ -267,10 +267,9 @@ public class MarkupUtilities {
 				} else {
 					int newLen = middleIndex - index;
 					int resultIdx = newLen == 0 ? -1 : findFirstIndex(renderables, clipArea, index, newLen, vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
+					if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
+						return middleIndex;
+
 					}
 					return resultIdx;
 				}
@@ -280,10 +279,9 @@ public class MarkupUtilities {
 							vertical);
 				} else {
 					int resultIdx = findFirstIndex(renderables, clipArea, index, middleIndex - index, vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
+					if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
+						return middleIndex;
+
 					}
 					return resultIdx;
 				}

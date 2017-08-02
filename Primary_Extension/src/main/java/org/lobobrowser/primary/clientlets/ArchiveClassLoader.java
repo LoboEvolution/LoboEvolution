@@ -32,6 +32,7 @@ import java.net.URLConnection;
 import java.security.AccessController;
 import java.security.CodeSource;
 import java.security.PrivilegedAction;
+import java.security.cert.Certificate;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.jar.JarFile;
@@ -158,7 +159,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 			throw new ClassNotFoundException("I/O error or entry not found: " + subPath);
 		}
 		// TODO Signers Certificates
-		CodeSource cs = new CodeSource(foundAinfo[0].url, new java.security.cert.Certificate[0]);
+		CodeSource cs = new CodeSource(foundAinfo[0].url, new Certificate[0]);
 		return this.defineClass(arg0, classBytes, 0, classBytes.length, cs);
 	}
 

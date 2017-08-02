@@ -81,7 +81,6 @@ import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.Nodes;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.gui.ColorFactory;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**

@@ -235,11 +235,11 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		case DIRECT:
 			this.noProxyRadioButton.setSelected(true);
 			break;
-		case HTTP:
-			this.httpProxyRadioButton.setSelected(true);
-			break;
 		case SOCKS:
 			this.socksProxyRadioButton.setSelected(true);
+			break;
+		default:
+			this.httpProxyRadioButton.setSelected(true);
 			break;
 		}
 		this.authenticatedCheckBox.setSelected(settings.isAuthenticated());

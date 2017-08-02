@@ -122,6 +122,9 @@ public class ComponentSource implements NavigatorWindowListener {
 
 	/** The action pool. */
 	private final ActionPool actionPool;
+	
+	/** The status message. */
+	private String statusMessage;
 
 	/**
 	 * Instantiates a new component source.
@@ -584,9 +587,6 @@ public class ComponentSource implements NavigatorWindowListener {
 				.setText(ClientletRequestHandler.getProgressMessage(event.getProgressType(), event.getUrl()));
 	}
 
-	/** The status message. */
-	private String statusMessage;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -776,12 +776,10 @@ public class ComponentSource implements NavigatorWindowListener {
 			if (tags != null) {
 				for (String tag : tags) {
 					JMenu tagMenu = tagMenus.get(tag);
-					if (tagMenu == null) {
-						if (tagMenus.size() < PREFERRED_MAX_MENU_SIZE) {
-							tagMenu = new JMenu(tag);
-							tagMenus.put(tag, tagMenu);
-							bookmarksMenu.add(tagMenu);
-						}
+					if (tagMenu == null && tagMenus.size() < PREFERRED_MAX_MENU_SIZE) {
+						tagMenu = new JMenu(tag);
+						tagMenus.put(tag, tagMenu);
+						bookmarksMenu.add(tagMenu);
 					}
 					if (tagMenu != null && tagMenu.getItemCount() < PREFERRED_MAX_MENU_SIZE) {
 						String text = binfo.getTitle();

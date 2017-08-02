@@ -25,6 +25,7 @@ package org.lobobrowser.request;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 
 import org.lobobrowser.clientlet.Clientlet;
 import org.lobobrowser.clientlet.ClientletAccess;
@@ -101,7 +102,7 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 	 *
 	 * @return the context window properties
 	 */
-	public java.util.Properties getContextWindowProperties() {
+	public Properties getContextWindowProperties() {
 		return this.windowProperties;
 	}
 

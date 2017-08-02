@@ -414,7 +414,7 @@ public final class JavaAdapter implements IdFunctionCall {
 					// if a method was overridden, generate a "super$method"
 					// which lets the delegate call the superclass' version.
 					if (!isAbstractMethod) {
-						generateSuper(cfw, adapterName, superName, methodName, methodSignature, argTypes,
+						generateSuper(cfw, superName, methodName, methodSignature, argTypes,
 								method.getReturnType());
 					}
 				}
@@ -958,7 +958,7 @@ public final class JavaAdapter implements IdFunctionCall {
 	 * JavaScript that is equivalent to calling "super.methodName()" from Java.
 	 * Eventually, this may be supported directly in JavaScript.
 	 */
-	private static void generateSuper(ClassFileWriter cfw, String genName, String superName, String methodName,
+	private static void generateSuper(ClassFileWriter cfw, String superName, String methodName,
 			String methodSignature, Class<?>[] parms, Class<?> returnType) {
 		cfw.startMethod("super$" + methodName, methodSignature, ClassFileWriter.ACC_PUBLIC);
 

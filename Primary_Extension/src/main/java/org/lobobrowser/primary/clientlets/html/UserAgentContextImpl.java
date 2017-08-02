@@ -36,7 +36,6 @@ import org.lobobrowser.request.RequestEngine;
 import org.lobobrowser.request.UserAgentImpl;
 import org.lobobrowser.security.LocalSecurityPolicy;
 import org.lobobrowser.settings.GeneralSettings;
-import org.lobobrowser.ua.NavigatorFrame;
 
 /**
  * The Class UserAgentContextImpl.
@@ -57,16 +56,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 		mn.add("tty");
 		mn.add("all");
 	}
-
-	/**
-	 * Instantiates a new user agent context impl.
-	 *
-	 * @param frame
-	 *            the frame
-	 */
-	public UserAgentContextImpl(final NavigatorFrame frame) {
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

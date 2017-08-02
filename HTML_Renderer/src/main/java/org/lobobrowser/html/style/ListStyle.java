@@ -81,7 +81,7 @@ public class ListStyle {
 	public int type;
 
 	/** The image. */
-	public java.awt.Image image;
+	public Image image;
 
 	/** The position. */
 	public int position;

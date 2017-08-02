@@ -82,7 +82,7 @@ public class CacheInfo {
 	 *
 	 * @return the URL connection
 	 */
-	public final java.net.URLConnection getURLConnection() {
+	public final URLConnection getURLConnection() {
 		if (this.connection == null) {
 			MemoryCacheEntry memEntry = this.memoryEntry;
 			if (memEntry != null) {

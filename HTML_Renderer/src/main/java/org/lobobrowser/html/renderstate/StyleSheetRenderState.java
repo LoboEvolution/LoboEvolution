@@ -385,19 +385,16 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 		String letterSpacing = style == null ? null : style.getLetterSpacing();
 		boolean isSuper = verticalAlign != null && verticalAlign.equalsIgnoreCase("super");
 		boolean isSub = verticalAlign != null && verticalAlign.equalsIgnoreCase("sub");
-
 		if (newFontSize == null && newFontWeight == null && newFontStyle == null && newFontFamily == null
-				&& newFontVariant == null) {
-			if (!isSuper && !isSub) {
-				if (prs != null) {
-					f = prs.getFont();
-					this.iFont = f;
-					return f;
-				}
-				f = DEFAULT_FONT;
+				&& newFontVariant == null && !isSuper && !isSub) {
+			if (prs != null) {
+				f = prs.getFont();
 				this.iFont = f;
 				return f;
 			}
+			f = DEFAULT_FONT;
+			this.iFont = f;
+			return f;
 		}
 		if (newFontSize != null) {
 			try {
@@ -433,8 +430,6 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 
 		if (newFontVariant != null) {
 			fontVariant = newFontVariant;
-		} else if (prs != null) {
-			// TODO: smallcaps?
 		}
 
 		if (newFontWeight != null) {
@@ -520,7 +515,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 	@Override
 	public Color getBackgroundColor() {
 		Color c = this.iBackgroundColor;
-		if (c != INVALID_COLOR) {
+		if (!INVALID_COLOR.equals(c)) {
 			return c;
 		}
 		Color localColor;
@@ -549,7 +544,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 	@Override
 	public Color getTextBackgroundColor() {
 		Color c = this.iTextBackgroundColor;
-		if (c != INVALID_COLOR) {
+		if (!INVALID_COLOR.equals(c)) {
 			return c;
 		}
 		Color localColor;
@@ -582,7 +577,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 	@Override
 	public Color getOverlayColor() {
 		Color c = this.iOverlayColor;
-		if (c != INVALID_COLOR) {
+		if (!INVALID_COLOR.equals(c)) {
 			return c;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
@@ -1137,7 +1132,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
-		if (mi != INVALID_INSETS) {
+		if (!INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
@@ -1158,7 +1153,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 	@Override
 	public HtmlInsets getPaddingInsets() {
 		HtmlInsets mi = this.paddingInsets;
-		if (mi != INVALID_INSETS) {
+		if (!INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
@@ -1194,30 +1189,38 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 			case CENTER:
 				binfo.setBackgroundXPositionAbsolute(false);
 				binfo.setBackgroundXPosition(50);
+				break;
 			case RIGHT:
 				binfo.setBackgroundXPositionAbsolute(false);
 				binfo.setBackgroundXPosition(100);
+				break;
 			case LEFT:
 				binfo.setBackgroundXPositionAbsolute(false);
 				binfo.setBackgroundXPosition(0);
+				break;
 			case BOTTOM:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(100);
+				break;
 			case TOP:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(0);
+				break;
 			case INHERIT:
 				BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
 					binfo.setBackgroundXPosition(bi.getBackgroundXPosition());
 				}
+				break;
 			case INITIAL:
 				binfo.setBackgroundXPositionAbsolute(true);
 				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
+				break;
 			default:
 				binfo.setBackgroundXPositionAbsolute(true);
 				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
+				break;
 			}
 		}
 	}
@@ -1245,30 +1248,38 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 			case CENTER:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(50);
+				break;
 			case RIGHT:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(100);
+				break;
 			case LEFT:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(0);
+				break;
 			case BOTTOM:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(100);
+				break;
 			case TOP:
 				binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(0);
+				break;
 			case INHERIT:
 				BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
 					binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
 				}
+				break;
 			case INITIAL:
 				binfo.setBackgroundYPositionAbsolute(true);
 				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
+				break;
 			default:
 				binfo.setBackgroundYPositionAbsolute(true);
 				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
+				break;
 			}
 		}
 	}
@@ -1455,6 +1466,9 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 				case INITIAL:
 					floatValue = FLOAT_NONE;
 					break;
+				default:
+					floatValue = FLOAT_NONE;
+					break;
 				}
 			}
 		}
@@ -1517,6 +1531,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 				break;
 			default:
 				overflow = OVERFLOW_NONE;
+				break;
 			}
 		}
 		this.overflowX = overflow;
@@ -1582,7 +1597,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
-		if (binfo != INVALID_BORDER_INFO) {
+		if (!INVALID_BORDER_INFO.equals(binfo)) {
 			return binfo;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();

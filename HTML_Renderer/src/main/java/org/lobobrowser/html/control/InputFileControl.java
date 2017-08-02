@@ -21,6 +21,7 @@
 package org.lobobrowser.html.control;
 
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -63,7 +64,7 @@ public class InputFileControl extends BaseInputControl {
 		browseButton.setAction(new BrowseAction());
 		browseButton.setText("Browse");
 		java.awt.Dimension ps = this.textField.getPreferredSize();
-		this.textField.setPreferredSize(new java.awt.Dimension(128, ps.height));
+		this.textField.setPreferredSize(new Dimension(128, ps.height));
 		this.textField.setEditable(false);
 		if (modelNode.getTitle() != null) {
 			this.textField.setToolTipText(modelNode.getTitle());

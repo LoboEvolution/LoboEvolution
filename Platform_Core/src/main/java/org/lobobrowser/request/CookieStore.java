@@ -168,7 +168,7 @@ public class CookieStore {
 		Date expiresDate = null;
 		if (maxAge != null) {
 			try {
-				expiresDate = new java.util.Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
+				expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
 			} catch (NumberFormatException nfe) {
 				logger.error("saveCookie(): Max-age is not formatted correctly: " + maxAge + ".");
 			}

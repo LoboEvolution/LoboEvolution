@@ -437,7 +437,7 @@ public class SimpleHttpRequest extends AbstractBean {
 				HttpURLConnection hc = (HttpURLConnection) c;
 				String method = req.getMethod();
 				if (method == null) {
-					throw new java.io.IOException("Null method.");
+					throw new IOException("Null method.");
 				}
 				method = method.toUpperCase();
 				hc.setRequestMethod(method);

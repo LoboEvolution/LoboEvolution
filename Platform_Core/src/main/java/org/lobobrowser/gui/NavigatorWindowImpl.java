@@ -100,8 +100,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 
 	/** The menus. */
 	private final Collection<JMenu> menus = new LinkedList<JMenu>();
-	// private final Collection<JMenuItem> sharedMenuItems = new
-	// LinkedList<JMenuItem>();
+	
 	/** The address bar components. */
 	private final Collection<Component> addressBarComponents = new LinkedList<Component>();
 
@@ -119,6 +118,15 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 
 	/** The window factory. */
 	private static volatile WindowFactory windowFactory = DefaultWindowFactory.getInstance();
+	
+	/** The latest accessed frame. */
+	private volatile NavigatorFrame latestAccessedFrame = null;
+	
+	/** The status. */
+	private String status;
+
+	/** The default status. */
+	private String defaultStatus;
 
 	/**
 	 * Sets the window factory.
@@ -387,9 +395,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		// Also inform as if document rendering.
 		this.handleDocumentRendering(frame, response, null);
 	}
-
-	/** The latest accessed frame. */
-	private volatile NavigatorFrame latestAccessedFrame = null;
 
 	/*
 	 * (non-Javadoc)
@@ -726,12 +731,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			SwingUtilities.invokeLater(() -> EVENT.fireEvent(event));
 		}
 	}
-
-	/** The status. */
-	private String status;
-
-	/** The default status. */
-	private String defaultStatus;
 
 	/*
 	 * (non-Javadoc)

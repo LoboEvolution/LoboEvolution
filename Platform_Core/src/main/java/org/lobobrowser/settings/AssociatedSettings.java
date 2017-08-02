@@ -35,14 +35,17 @@ import org.lobobrowser.store.StorageManager;
  */
 public class AssociatedSettings implements Serializable {
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 22574500005000804L;
+	
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(AssociatedSettings.class);
 
 	/** The Constant instance. */
 	private static final AssociatedSettings instance;
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 22574500005000804L;
+	
+	/** The user name by host. */
+	private final LRUCache userNameByHost = new LRUCache(500);
 
 	static {
 		AssociatedSettings ins = null;
@@ -87,9 +90,6 @@ public class AssociatedSettings implements Serializable {
 			logger.error("Unable to save settings: " + this.getClass().getSimpleName(), ioe);
 		}
 	}
-
-	/** The user name by host. */
-	private final LRUCache userNameByHost = new LRUCache(500);
 
 	/**
 	 * Gets the user name for host.

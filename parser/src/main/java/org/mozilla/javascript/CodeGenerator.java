@@ -860,7 +860,7 @@ class CodeGenerator extends Icode {
 			break;
 
 		case Token.ARRAYCOMP:
-			visitArrayComprehension(node, child, child.getNext());
+			visitArrayComprehension(child, child.getNext());
 			break;
 
 		case Token.REF_SPECIAL:
@@ -1076,7 +1076,7 @@ class CodeGenerator extends Icode {
 		stackChange(-1);
 	}
 
-	private void visitArrayComprehension(Node node, Node initStmt, Node expr) {
+	private void visitArrayComprehension(Node initStmt, Node expr) {
 		// A bit of a hack: array comprehensions are implemented using
 		// statement nodes for the iteration, yet they appear in an
 		// expression context. So we pass the current stack depth to

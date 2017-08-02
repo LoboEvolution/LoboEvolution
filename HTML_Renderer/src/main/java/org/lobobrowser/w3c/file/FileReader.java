@@ -29,13 +29,22 @@ import org.w3c.dom.events.EventTarget;
  */
 public interface FileReader extends EventTarget {
 
+	
+	/** The Constant EMPTY. */
+	public static final short EMPTY = 0;
+
+	/** The Constant LOADING. */
+	public static final short LOADING = 1;
+
+	/** The Constant DONE. */
+	public static final short DONE = 2;
+	
 	/**
 	 * Read as array buffer.
 	 *
 	 * @param blob
 	 *            the blob
 	 */
-	// FileReader
 	public void readAsArrayBuffer(Blob blob);
 
 	/**
@@ -76,15 +85,6 @@ public interface FileReader extends EventTarget {
 	 * Abort.
 	 */
 	public void abort();
-
-	/** The Constant EMPTY. */
-	public static final short EMPTY = 0;
-
-	/** The Constant LOADING. */
-	public static final short LOADING = 1;
-
-	/** The Constant DONE. */
-	public static final short DONE = 2;
 
 	/**
 	 * Gets the ready state.

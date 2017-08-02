@@ -143,7 +143,7 @@ public class LocalSecurityPolicy extends Policy {
 	public static void addPrivilegedPermission(Permission permission) {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			throw new java.lang.SecurityException("Call this method before the sercurity manager is set.");
+			throw new SecurityException("Call this method before the sercurity manager is set.");
 		}
 		BASE_PRIVILEGE.add(permission);
 	}

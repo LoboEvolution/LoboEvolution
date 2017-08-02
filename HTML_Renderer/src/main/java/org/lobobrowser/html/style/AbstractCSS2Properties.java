@@ -3150,7 +3150,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 				for (String token : array) {
 					if (HtmlValues.isBorderStyle(token)) {
 						style = token;
-					} else if (org.lobobrowser.util.gui.ColorFactory.getInstance().isColor(token)) {
+					} else if (ColorFactory.getInstance().isColor(token)) {
 						color = token;
 					} else {
 						width = token;

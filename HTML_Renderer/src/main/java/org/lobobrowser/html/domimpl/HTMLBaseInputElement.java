@@ -878,7 +878,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *
 	 * @return the image
 	 */
-	public final java.awt.Image getImage() {
+	public final Image getImage() {
 		synchronized (this.imageListeners) {
 			return this.image;
 		}
@@ -896,7 +896,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 */
 	public void addImageListener(ImageListener listener) {
 		ArrayList<ImageListener> l = this.imageListeners;
-		java.awt.Image currentImage;
+		Image currentImage;
 		synchronized (l) {
 			currentImage = this.image;
 			l.add(listener);

@@ -56,7 +56,7 @@ public class CookieManager extends CookieHandler {
 	 */
 	@Override
 	public Map<String, List<String>> get(URI uri, Map<String, List<String>> requestHeaders) throws IOException {
-		Map<String, List<String>> resultHeaders = new java.util.HashMap<String, List<String>>(2);
+		Map<String, List<String>> resultHeaders = new HashMap<String, List<String>>(2);
 		Collection<Cookie> cookies = this.cookieStore.getCookies(uri.getHost(), uri.getPath());
 		if (cookies != null) {
 			StringBuffer cookieHeaderValue = null;

@@ -157,11 +157,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 		
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
@@ -179,11 +177,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 		
 		Shape rect;
@@ -214,11 +210,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
@@ -239,11 +233,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 
 		Point2D.Float p = new Point2D.Float(svgi.getX1(), svgi.getY1());
@@ -264,11 +256,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 
 		GeneralPath path = new GeneralPath();
@@ -301,11 +291,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 
 		GeneralPath path = new GeneralPath();
@@ -337,13 +325,11 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
-
+		
 		GeneralPath path = new GeneralPath();
 		Point2D lastControlPoint = null;
 		SVGPoint subPathStartPoint = null;
@@ -707,6 +693,7 @@ public class SVGBasicControl extends BaseControl {
 				break;
 			case TEXT:
 				text(g2d, svgi, i);
+				break;
 			default:
 				break;
 			}
@@ -755,6 +742,8 @@ public class SVGBasicControl extends BaseControl {
 				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(),
 						mtrx.getF()));
 				break;
+			default:
+				break;
 			}
 			g2d.transform(affine);
 		}
@@ -769,11 +758,9 @@ public class SVGBasicControl extends BaseControl {
 				new SVGAnimateImpl(svgi, ruicontrol);
 				count++;
 			}
-		} else if (svgi.getAnimate() != null) {
-			if (count < numObject){
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
 		}
 
 		GeneralPath path = new GeneralPath();

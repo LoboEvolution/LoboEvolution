@@ -26,8 +26,7 @@ package org.lobobrowser.w3c.file;
  */
 public interface FileError {
 
-	/** The Constant NOT_FOUND_ERR. */
-	// FileError
+	/** The Constant NOT_FOUND_ERR. */	
 	public static final short NOT_FOUND_ERR = 1;
 
 	/** The Constant SECURITY_ERR. */

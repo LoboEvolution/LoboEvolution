@@ -9,6 +9,7 @@ package org.mozilla.javascript;
 import static org.mozilla.javascript.NativeSymbol.ITERATOR_PROPERTY;
 import static org.mozilla.javascript.ScriptRuntimeES6.requireObjectCoercible;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
@@ -559,7 +560,7 @@ public class NativeArray extends IdScriptableObject implements List {
 
 	public Integer[] getIndexIds() {
 		Object[] ids = getIds();
-		java.util.List<Integer> indices = new java.util.ArrayList<Integer>(ids.length);
+		java.util.List<Integer> indices = new ArrayList<Integer>(ids.length);
 		for (Object id : ids) {
 			int int32Id = ScriptRuntime.toInt32(id);
 			if (int32Id >= 0 && ScriptRuntime.toString(int32Id).equals(ScriptRuntime.toString(id))) {

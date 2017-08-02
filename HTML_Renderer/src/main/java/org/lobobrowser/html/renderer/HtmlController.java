@@ -162,10 +162,8 @@ public class HtmlController {
 				}
 			}
 			HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null) {
-				if (!rcontext.onMouseClick(uiElement, event)) {
-					return false;
-				}
+			if (rcontext != null && !rcontext.onMouseClick(uiElement, event)) {
+				return false;
 			}
 		}
 
@@ -203,13 +201,10 @@ public class HtmlController {
 				}
 			}
 			HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null) {
-				// Needs to be done after Javascript, so the script
-				// is able to prevent it.
-				if (!rcontext.onContextMenu(uiElement, event)) {
-					return false;
-				}
+			if (rcontext != null && !rcontext.onContextMenu(uiElement, event)) {
+				return false;
 			}
+
 		}
 		ModelNode parent = node.getParentModelNode();
 		if (parent == null) {
@@ -343,11 +338,10 @@ public class HtmlController {
 				}
 			}
 			HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-			if (rcontext != null) {
-				if (!rcontext.onDoubleClick(uiElement, event)) {
-					return false;
-				}
+			if (rcontext != null && !rcontext.onDoubleClick(uiElement, event)) {
+				return false;
 			}
+
 		}
 		ModelNode parent = node.getParentModelNode();
 		if (parent == null) {

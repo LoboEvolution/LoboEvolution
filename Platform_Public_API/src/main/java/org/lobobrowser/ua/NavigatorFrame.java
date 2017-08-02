@@ -25,6 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Properties;
 
+import org.lobobrowser.clientlet.ClientletResponse;
 import org.lobobrowser.clientlet.ComponentContent;
 import org.lobobrowser.http.HttpRequest;
 
@@ -387,8 +388,7 @@ public interface NavigatorFrame {
 	 *            the component
 	 * @see org.lobobrowser.clientlet.ClientletContext#setResultingContent(Component)
 	 */
-	void replaceContent(org.lobobrowser.clientlet.ClientletResponse response,
-			org.lobobrowser.clientlet.ComponentContent component);
+	void replaceContent(ClientletResponse response, ComponentContent component);
 
 	/**
 	 * A simple alternative to

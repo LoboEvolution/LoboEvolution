@@ -68,8 +68,6 @@ public class RListItem extends BaseRListElement {
 	public RListItem(DOMNodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer, RCollection parent) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
-		// this.defaultMarginInsets = new java.awt.Insets(0, BULLET_SPACE_WIDTH,
-		// 0, 0);
 	}
 
 	/*
@@ -203,14 +201,12 @@ public class RListItem extends BaseRListElement {
 						break;
 					case ListStyle.TYPE_LOWER_ALPHA:
 						numberText = (char) ('a' + (bulletNumber - 1)) + ".";
-
 						break;
 					case ListStyle.TYPE_UPPER_ALPHA:
 						numberText = (char) ('A' + (bulletNumber - 1)) + ".";
 						break;
 					case ListStyle.TYPE_LOWER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";
-						;
 						break;
 					case ListStyle.TYPE_UPPER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toUpperCase() + ".";

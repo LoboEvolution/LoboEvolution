@@ -123,6 +123,24 @@ public class DownloadDialog extends JFrame {
 
 	/** The known content length. */
 	private final int knownContentLength;
+	
+	/** The request handler. */
+	private RequestHandler requestHandler;
+
+	/** The destination file. */
+	private File destinationFile;
+
+	/** The download base timestamp. */
+	private long downloadBaseTimestamp;
+
+	/** The last timestamp. */
+	private long lastTimestamp;
+
+	/** The last progress value. */
+	private long lastProgressValue;
+
+	/** The last transfer rate. */
+	private double lastTransferRate = Double.NaN;
 
 	/**
 	 * Instantiates a new download dialog.
@@ -259,35 +277,16 @@ public class DownloadDialog extends JFrame {
 		}
 		if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
-			if (file.exists()) {
-				if (JOptionPane.showConfirmDialog(this, "The file exists. Are you sure you want to overwrite it?",
-						"Confirm", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-					return;
-				}
+			if (file.exists()
+					&& JOptionPane.showConfirmDialog(this, "The file exists. Are you sure you want to overwrite it?",
+							"Confirm", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
+				return;
 			}
 			settings.setDownloadDirectory(file.getParentFile());
 			settings.save();
 			this.startDownload(chooser.getSelectedFile());
 		}
 	}
-
-	/** The request handler. */
-	private RequestHandler requestHandler;
-
-	/** The destination file. */
-	private File destinationFile;
-
-	/** The download base timestamp. */
-	private long downloadBaseTimestamp;
-
-	/** The last timestamp. */
-	private long lastTimestamp;
-
-	/** The last progress value. */
-	private long lastProgressValue;
-
-	/** The last transfer rate. */
-	private double lastTransferRate = Double.NaN;
 
 	/**
 	 * Start download.
@@ -444,7 +443,7 @@ public class DownloadDialog extends JFrame {
 	 * @param max
 	 *            the max
 	 */
-	private void updateProgress_Safe(final ProgressType progressType, final int value, final int max) {
+	private void updateProgressSafe(final ProgressType progressType, final int value, final int max) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			updateProgress(progressType, value, max);
 		} else {
@@ -700,7 +699,7 @@ public class DownloadDialog extends JFrame {
 			if (!this.downloadDone) {
 				long timestamp = System.currentTimeMillis();
 				if (timestamp - this.lastProgressUpdate > 1000) {
-					updateProgress_Safe(progressType, value, max);
+					updateProgressSafe(progressType, value, max);
 					this.lastProgressUpdate = timestamp;
 				}
 			}
