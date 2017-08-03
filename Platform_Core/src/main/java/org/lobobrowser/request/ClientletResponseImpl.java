@@ -79,12 +79,21 @@ public class ClientletResponseImpl implements ClientletResponse {
 
 	/** The request type. */
 	private final RequestType requestType;
-	// Security note: This URL must be final.
+	
 	/** The response url. */
 	private final URL responseURL;
 
 	/** The input stream. */
 	private InputStream inputStream;
+	
+	/** The new peristent cached object. */
+	private Serializable newPeristentCachedObject;
+
+	/** The new transient cached object. */
+	private Object newTransientCachedObject;
+
+	/** The new transient object size. */
+	private int newTransientObjectSize;
 
 	/**
 	 * Instantiates a new clientlet response impl.
@@ -551,15 +560,6 @@ public class ClientletResponseImpl implements ClientletResponse {
 		CacheInfo cacheInfo = this.cacheInfo;
 		return cacheInfo == null ? null : cacheInfo.getTransientObjectSize();
 	}
-
-	/** The new peristent cached object. */
-	private Serializable newPeristentCachedObject;
-
-	/** The new transient cached object. */
-	private Object newTransientCachedObject;
-
-	/** The new transient object size. */
-	private int newTransientObjectSize;
 
 	/*
 	 * (non-Javadoc)

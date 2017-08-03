@@ -156,7 +156,7 @@ public class Session extends AbstractBean {
 	 * @param h
 	 *            the new medium security handler
 	 */
-	void setMediumSecurityHandler(SecurityHandler h) {
+	private void setMediumSecurityHandler(SecurityHandler h) {
 		SecurityHandler old = getMediumSecurityHandler();
 		this.handler = h;
 		firePropertyChange("mediumSecurityHandler", old, getMediumSecurityHandler());
@@ -167,7 +167,7 @@ public class Session extends AbstractBean {
 	 *
 	 * @return the medium security handler
 	 */
-	SecurityHandler getMediumSecurityHandler() {
+	private SecurityHandler getMediumSecurityHandler() {
 		return handler;
 	}
 

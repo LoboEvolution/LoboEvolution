@@ -60,6 +60,13 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
+	
+	/** The text. */
+	private String text;
+
+	/** The defer. */
+	private boolean defer;
+
 
 	/**
 	 * Instantiates a new HTML script element impl.
@@ -77,9 +84,6 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	public HTMLScriptElementImpl(String name) {
 		super(name, true);
 	}
-
-	/** The text. */
-	private String text;
 
 	/*
 	 * (non-Javadoc)
@@ -147,10 +151,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	public void setEvent(String event) {
 		this.setAttribute(HtmlAttributeProperties.EVENT, event);
 	}
-
-	/** The defer. */
-	private boolean defer;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

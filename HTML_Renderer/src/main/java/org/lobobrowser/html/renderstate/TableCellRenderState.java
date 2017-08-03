@@ -40,6 +40,15 @@ import org.w3c.dom.css.CSS2Properties;
  * The Class TableCellRenderState.
  */
 public class TableCellRenderState extends DisplayRenderState {
+	
+	/** The align x percent. */
+	private int alignXPercent = -1;
+
+	/** The align y percent. */
+	private int alignYPercent = -1;
+
+	/** The background info. */
+	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
 	/**
 	 * Instantiates a new table cell render state.
@@ -52,15 +61,6 @@ public class TableCellRenderState extends DisplayRenderState {
 	public TableCellRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CELL);
 	}
-
-	/** The align x percent. */
-	private int alignXPercent = -1;
-
-	/** The align y percent. */
-	private int alignYPercent = -1;
-
-	/** The background info. */
-	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
 	/*
 	 * (non-Javadoc)

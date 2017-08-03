@@ -48,7 +48,7 @@ public class InputUrlControl extends BaseInputTextControl {
 	private JTextFieldImpl url;
 
 	/** The regex. */
-	String regex = "";
+	private String regex = "";
 
 	/** The str pattern. */
 	private String strPattern;

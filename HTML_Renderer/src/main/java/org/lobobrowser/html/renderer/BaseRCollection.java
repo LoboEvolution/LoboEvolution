@@ -32,6 +32,9 @@ import org.lobobrowser.html.dombl.ModelNode;
  * The Class BaseRCollection.
  */
 public abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
+	
+	/** The renderable with mouse. */
+	private BoundableRenderable renderableWithMouse = null;
 
 	/**
 	 * Instantiates a new base r collection.
@@ -314,9 +317,6 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 			}
 		}
 	}
-
-	/** The renderable with mouse. */
-	private BoundableRenderable renderableWithMouse = null;
 
 	/*
 	 * (non-Javadoc)

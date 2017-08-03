@@ -599,7 +599,7 @@ public class Request extends AbstractBean {
 	 *
 	 * @return the password
 	 */
-	final String getPassword() {
+	public final String getPassword() {
 		return password == null ? "" : new String(password);
 	}
 

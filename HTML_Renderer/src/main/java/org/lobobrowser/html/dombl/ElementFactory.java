@@ -41,6 +41,9 @@ public class ElementFactory {
 
 	/** The builders. */
 	private Map<String, Object> builders = new HashMap<String, Object>();
+	
+	/** The instance. */
+	private static ElementFactory instance = new ElementFactory();
 
 	/**
 	 * Instantiates a new element factory.
@@ -48,9 +51,6 @@ public class ElementFactory {
 	private ElementFactory() {
 		this.builders = HtmlMapping.mappingHtml();
 	}
-
-	/** The instance. */
-	private static ElementFactory instance = new ElementFactory();
 
 	/**
 	 * Gets the instance.

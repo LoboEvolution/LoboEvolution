@@ -65,6 +65,15 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 
 	/** The store directory. */
 	private final File storeDirectory;
+	
+	/** The Constant NO_HOST. */
+	private static final String NO_HOST = "$NO_HOST$";
+	
+	/** The restricted store cache. */
+	private final Map<String, RestrictedStore> restrictedStoreCache = new HashMap<String, RestrictedStore>();
+	
+	/** The Constant MANAGED_STORE_UPDATE_DELAY. */
+	private static final int MANAGED_STORE_UPDATE_DELAY = 1000 * 60 * 5;
 
 	/**
 	 * Gets the Constant instance.
@@ -114,9 +123,6 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 		return this.storeDirectory;
 	}
 
-	/** The Constant NO_HOST. */
-	private static final String NO_HOST = "$NO_HOST$";
-
 	/**
 	 * Gets the cache host directory.
 	 *
@@ -160,9 +166,6 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	public File getCacheRoot() {
 		return new File(this.storeDirectory, CACHE_DIR);
 	}
-
-	/** The restricted store cache. */
-	private final Map<String, RestrictedStore> restrictedStoreCache = new HashMap<String, RestrictedStore>();
 
 	/**
 	 * Gets the restricted store.
@@ -228,7 +231,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	 *            the host name
 	 * @return the string
 	 */
-	static String normalizedFileName(String hostName) {
+	public static String normalizedFileName(String hostName) {
 		return hostName;
 	}
 
@@ -239,12 +242,9 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	 *            the file name
 	 * @return the host name
 	 */
-	static String getHostName(String fileName) {
+	public static String getHostName(String fileName) {
 		return fileName;
 	}
-
-	/** The Constant MANAGED_STORE_UPDATE_DELAY. */
-	private static final int MANAGED_STORE_UPDATE_DELAY = 1000 * 60 * 5;
 
 	/*
 	 * (non-Javadoc)

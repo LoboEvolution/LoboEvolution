@@ -173,6 +173,12 @@ public class RBlockViewport extends BaseRCollection {
 
 	/** The Constant miscLayout. */
 	private static final MarkupLayout miscLayout = new MiscLayout();
+	
+	/** The pending floats. */
+	private Collection<RFloatInfo> pendingFloats = null;
+
+	/** The is float limit. */
+	private Boolean isFloatLimit = null;
 
 	/**
 	 * Constructs an HtmlBlockLayout.
@@ -915,7 +921,7 @@ public class RBlockViewport extends BaseRCollection {
 	 *
 	 * @return the parent viewport
 	 */
-	final RBlockViewport getParentViewport() {
+	public final RBlockViewport getParentViewport() {
 		// Use originalParent, which for one, is not going to be null during
 		// layout.
 		RCollection parent = this.getOriginalOrCurrentParent();
@@ -1898,7 +1904,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param pair
 	 *            the pair
 	 */
-	void importDelayedPair(DelayedPair pair) {
+	private void importDelayedPair(DelayedPair pair) {
 		pair.positionPairChild();
 		BoundableRenderable r = pair.child;
 		this.addPositionedRenderable(r, false, false);
@@ -2226,9 +2232,6 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	/** The pending floats. */
-	private Collection<RFloatInfo> pendingFloats = null;
-
 	/**
 	 * Line done.
 	 *
@@ -2354,10 +2357,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 	}
-
-	/** The is float limit. */
-	private Boolean isFloatLimit = null;
-
+	
 	/**
 	 * Checks if is float limit.
 	 *

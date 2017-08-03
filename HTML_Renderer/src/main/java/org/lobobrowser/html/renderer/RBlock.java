@@ -1056,12 +1056,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		RBlockViewport bodyLayout = this.bodyLayout;
-
-		if (!HtmlController.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y)) {
-			return false;
-		}
-
-		if (this.backgroundColor != null) {
+		if (!HtmlController.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1078,11 +1073,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 
-		if (!HtmlController.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y)) {
-			return false;
-		}
-
-		if (this.backgroundColor != null) {
+		if (!HtmlController.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1140,11 +1131,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-
-		if (!HtmlController.getInstance().onMouseDown(this.modelNode, event, this, x, y)) {
-			return false;
-		}
-		if (this.backgroundColor != null) {
+		if (!HtmlController.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1159,12 +1146,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-
-		if (!HtmlController.getInstance().onMouseUp(this.modelNode, event, this, x, y)) {
-			return false;
-		}
-
-		if (this.backgroundColor != null) {
+		if (!HtmlController.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1172,33 +1154,17 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 
 	@Override
 	public boolean onKeyPressed(KeyEvent event) {
-
-		if (!HtmlController.getInstance().onKeyPress(this.modelNode, event)) {
-			return false;
-		}
-
-		return true;
-
+		return !HtmlController.getInstance().onKeyPress(this.modelNode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(KeyEvent event) {
-		if (!HtmlController.getInstance().onKeyUp(this.modelNode, event)) {
-			return false;
-		}
-
-		return true;
-
+		return !HtmlController.getInstance().onKeyUp(this.modelNode, event);
 	}
 
 	@Override
 	public boolean onKeyDown(KeyEvent event) {
-		if (!HtmlController.getInstance().onKeyDown(this.modelNode, event)) {
-			return false;
-		}
-
-		return true;
-
+		return !HtmlController.getInstance().onKeyDown(this.modelNode, event);
 	}
 
 	/*

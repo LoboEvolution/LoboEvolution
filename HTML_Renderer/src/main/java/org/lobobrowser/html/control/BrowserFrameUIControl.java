@@ -41,7 +41,7 @@ import org.lobobrowser.w3c.html.HTMLElement;
  * The Class BrowserFrameUIControl.
  */
 public class BrowserFrameUIControl implements UIControl {
-	// private final BrowserFrame browserFrame;
+	
 	/** The component. */
 	private final Component component;
 
@@ -53,6 +53,12 @@ public class BrowserFrameUIControl implements UIControl {
 
 	/** The rui control. */
 	private RUIControl ruiControl;
+	
+	/** The avail width. */
+	private int availWidth;
+
+	/** The avail height. */
+	private int availHeight;
 
 	/**
 	 * Instantiates a new browser frame ui control.
@@ -106,12 +112,6 @@ public class BrowserFrameUIControl implements UIControl {
 	public Component getComponent() {
 		return this.component;
 	}
-
-	/** The avail width. */
-	private int availWidth;
-
-	/** The avail height. */
-	private int availHeight;
 
 	/*
 	 * (non-Javadoc)

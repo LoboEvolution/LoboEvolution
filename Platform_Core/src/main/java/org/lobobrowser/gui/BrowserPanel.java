@@ -101,6 +101,27 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 
 	/** The status. */
 	private String status;
+	
+	/** The menues by id. */
+	private final Map<String, JMenu> menuesById = new HashMap<String, JMenu>(1);
+
+	/** The event. */
+	private final EventDispatch2 EVENT = new LocalEventDispatch();
+
+	/** The latest accessed frame. */
+	private volatile NavigatorFrame latestAccessedFrame = null;
+
+	/** The Constant HGAP. */
+	private static final int HGAP = 4;
+
+	/** The Constant VGAP. */
+	private static final int VGAP = 2;
+
+	/** The close window on dispose. */
+	private boolean closeWindowOnDispose = true;
+	
+	/** The document title. */
+	private String documentTitle;
 
 	/**
 	 * Constructs a <code>BrowserPanel</code> with toolbars, an address bar, a
@@ -216,8 +237,6 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 		}
 	}
 
-	/** The menues by id. */
-	private final Map<String, JMenu> menuesById = new HashMap<String, JMenu>(1);
 
 	/*
 	 * (non-Javadoc)
@@ -235,10 +254,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 			menuBar.add(menu);
 		}
 	}
-
-	/** The event. */
-	private final EventDispatch2 EVENT = new LocalEventDispatch();
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -290,10 +306,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 			this.add(toolBar);
 		}
 	}
-
-	/** The latest accessed frame. */
-	private volatile NavigatorFrame latestAccessedFrame = null;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -380,13 +393,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	public boolean copy() {
 		return this.framePanel.copy();
 	}
-
-	/** The Constant HGAP. */
-	private static final int HGAP = 4;
-
-	/** The Constant VGAP. */
-	private static final int VGAP = 2;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -407,10 +414,7 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	public Component createGlueComponent(Component wrappedComponent, boolean usingMaxSize) {
 		return new FillerComponent(wrappedComponent, usingMaxSize);
 	}
-
-	/** The close window on dispose. */
-	private boolean closeWindowOnDispose = true;
-
+	
 	/**
 	 * Checks if is close window on dispose.
 	 *
@@ -702,9 +706,6 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 		}
 		return title;
 	}
-
-	/** The document title. */
-	private String documentTitle;
 
 	/**
 	 * Gets the document title.

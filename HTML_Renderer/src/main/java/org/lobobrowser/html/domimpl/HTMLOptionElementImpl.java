@@ -183,7 +183,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 * @param selected
 	 *            the new selected impl
 	 */
-	void setSelectedImpl(boolean selected) {
+	public void setSelectedImpl(boolean selected) {
 		this.selected = selected;
 	}
 

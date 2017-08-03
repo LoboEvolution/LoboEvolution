@@ -46,6 +46,12 @@ import org.w3c.dom.Node;
  * The Class HTMLFormElementImpl.
  */
 public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFormElement {
+	
+	/** The elements. */
+	private HTMLCollection elements;
+
+	/** The onsubmit. */
+	private Function onsubmit;
 
 	/**
 	 * Instantiates a new HTML form element impl.
@@ -111,9 +117,6 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		}
 		return null;
 	}
-
-	/** The elements. */
-	private HTMLCollection elements;
 
 	/*
 	 * (non-Javadoc)
@@ -275,10 +278,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	public void submit() {
 		this.submit(null);
 	}
-
-	/** The onsubmit. */
-	private Function onsubmit;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

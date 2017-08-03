@@ -46,6 +46,15 @@ public class RListItem extends BaseRListElement {
 
 	/** The Constant BULLET_RMARGIN. */
 	private static final int BULLET_RMARGIN = 5;
+	
+	/** The Constant UNSET. */
+	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
+
+	/** The value. */
+	private Integer value = null;
+
+	/** The count. */
+	private int count;
 
 	/**
 	 * Instantiates a new r list item.
@@ -91,12 +100,6 @@ public class RListItem extends BaseRListElement {
 		this.value = null;
 	}
 
-	/** The Constant UNSET. */
-	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
-
-	/** The value. */
-	private Integer value = null;
-
 	/**
 	 * Gets the value.
 	 *
@@ -120,9 +123,6 @@ public class RListItem extends BaseRListElement {
 		}
 		return value;
 	}
-
-	/** The count. */
-	private int count;
 
 	/*
 	 * (non-Javadoc)

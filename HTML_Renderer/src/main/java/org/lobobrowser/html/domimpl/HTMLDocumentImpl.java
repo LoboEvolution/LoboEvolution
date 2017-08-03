@@ -1179,7 +1179,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 * @param ss
 	 *            the ss
 	 */
-	final void addStyleSheet(CSSStyleSheet ss) {
+	public final void addStyleSheet(CSSStyleSheet ss) {
 		synchronized (this.getTreeLock()) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
@@ -1238,7 +1238,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 *
 	 * @return the style sheet aggregator
 	 */
-	final StyleSheetAggregator getStyleSheetAggregator() {
+	public final StyleSheetAggregator getStyleSheetAggregator() {
 		synchronized (this.getTreeLock()) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
 			if (ssa == null) {
@@ -1962,7 +1962,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 *
 	 * @return the document host
 	 */
-	String getDocumentHost() {
+	private String getDocumentHost() {
 		URL docUrl = this.documentURL;
 		return docUrl == null ? null : docUrl.getHost();
 	}

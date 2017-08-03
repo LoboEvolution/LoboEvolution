@@ -42,6 +42,9 @@ public class FontStyleRenderState extends RenderStateDelegator {
 
 	/** The superscript. */
 	private final Integer superscript;
+	
+	/** The i word info map. */
+	private Map<String, WordInfo> iWordInfoMap = null;
 
 	/**
 	 * Instantiates a new font style render state.
@@ -146,9 +149,6 @@ public class FontStyleRenderState extends RenderStateDelegator {
 			map.clear();
 		}
 	}
-
-	/** The i word info map. */
-	Map<String, WordInfo> iWordInfoMap = null;
 
 	/*
 	 * (non-Javadoc)

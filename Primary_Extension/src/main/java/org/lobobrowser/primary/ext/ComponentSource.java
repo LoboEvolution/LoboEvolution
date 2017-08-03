@@ -664,7 +664,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *            the action
 	 * @return the j menu item
 	 */
-	static JMenuItem menuItem(String title, Action action) {
+	public static JMenuItem menuItem(String title, Action action) {
 		return menuItem(title, (char) 0, (KeyStroke) null, action);
 	}
 
@@ -679,7 +679,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *            the action
 	 * @return the j menu item
 	 */
-	static JMenuItem menuItem(String title, char mnemonic, Action action) {
+	public static JMenuItem menuItem(String title, char mnemonic, Action action) {
 		return menuItem(title, mnemonic, (KeyStroke) null, action);
 	}
 
@@ -696,7 +696,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *            the action
 	 * @return the j menu item
 	 */
-	static JMenuItem menuItem(String title, char mnemonic, KeyStroke accelerator, Action action) {
+	public static JMenuItem menuItem(String title, char mnemonic, KeyStroke accelerator, Action action) {
 		JMenuItem item = new JMenuItem();
 		item.setAction(action);
 		item.setText(title);
@@ -722,7 +722,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *            the action
 	 * @return the j menu item
 	 */
-	static JMenuItem menuItem(String title, char mnemonic, String accelerator, Action action) {
+	public static JMenuItem menuItem(String title, char mnemonic, String accelerator, Action action) {
 		KeyStroke keyStroke = accelerator == null ? null : KeyStroke.getKeyStroke(accelerator);
 		return menuItem(title, mnemonic, keyStroke, action);
 	}

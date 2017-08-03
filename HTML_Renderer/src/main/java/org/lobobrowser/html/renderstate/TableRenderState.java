@@ -35,6 +35,9 @@ import org.lobobrowser.util.gui.ColorFactory;
  * The Class TableRenderState.
  */
 public class TableRenderState extends StyleSheetRenderState {
+	
+	/** The background info. */
+	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
 	/**
 	 * Instantiates a new table render state.
@@ -70,9 +73,6 @@ public class TableRenderState extends StyleSheetRenderState {
 	protected int getDefaultDisplay() {
 		return DISPLAY_TABLE;
 	}
-
-	/** The background info. */
-	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
 	/*
 	 * (non-Javadoc)

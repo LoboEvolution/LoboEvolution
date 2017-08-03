@@ -199,7 +199,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 *            the exception
 	 * @return the error html
 	 */
-	static String getErrorHtml(ClientletResponse response, Throwable exception) {
+	private static String getErrorHtml(ClientletResponse response, Throwable exception) {
 		URL url = response == null ? null : response.getResponseURL();
 		String method = response == null ? null : response.getLastRequestMethod();
 		Writer swriter = new StringWriter();

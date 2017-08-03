@@ -139,6 +139,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	/** The default overflow y. */
 	protected int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
+	
+	/** The components. */
+	private Set<Component> components;
 
 	/**
 	 * Instantiates a new html block panel.
@@ -949,11 +952,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public boolean hasSelection() {
 		RenderableSpot start = this.startSelection;
 		RenderableSpot end = this.endSelection;
-		if (start != null && end != null && !start.equals(end)) {
-			return true;
-		} else {
-			return false;
-		}
+		return start != null && end != null && !start.equals(end);
 	}
 
 	@Override
@@ -1010,7 +1009,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param notifications
 	 *            the notifications
 	 */
-	void processDocumentNotifications(DocumentNotification[] notifications) {
+	public void processDocumentNotifications(DocumentNotification[] notifications) {
 		// Called in the GUI thread.
 		if (this.processingDocumentNotification) {
 			// This should not be possible. Even if
@@ -1123,9 +1122,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	@Override
 	public void clearDelayedPairs() {
 	}
-
-	/** The components. */
-	private Set<Component> components;
 
 	/**
 	 * Clear components.

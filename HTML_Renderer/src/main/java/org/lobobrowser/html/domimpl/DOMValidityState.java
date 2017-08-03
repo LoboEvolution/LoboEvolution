@@ -47,12 +47,7 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getValueMissing() {
-		if (ic.getValue() == null) {
-			return true;
-		} else if (ic.getValue() != null && ic.getValue().length() == 0) {
-			return true;
-		}
-		return false;
+		return (ic.getValue() == null || (ic.getValue() != null && ic.getValue().length() == 0));
 	}
 
 	@Override
@@ -63,44 +58,25 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getPatternMismatch() {
-		if (ic.getValue() != null && Pattern.matches(ic.getPattern(), ic.getValue())) {
-			return false;
-		} else {
-			return true;
-		}
+		return ic.getValue() != null && Pattern.matches(ic.getPattern(), ic.getValue());
 
 	}
 
 	@Override
 	public boolean getTooLong() {
-		if (ic.getValue() != null && ic.getValue().length() > ic.getMaxLength()) {
-			return true;
-		} else {
-			return false;
-		}
-
+		return ic.getValue() != null && ic.getValue().length() > ic.getMaxLength();
 	}
 
 	@Override
 	public boolean getRangeUnderflow() {
 		int numeric = Integer.parseInt(ic.getValue());
-
-		if (numeric < ic.getMin()) {
-			return true;
-		} else {
-			return false;
-		}
+		return numeric < ic.getMin();
 	}
 
 	@Override
 	public boolean getRangeOverflow() {
 		int numeric = Integer.parseInt(ic.getValue());
-
-		if (numeric > ic.getMax()) {
-			return true;
-		} else {
-			return false;
-		}
+		return numeric > ic.getMax();
 	}
 
 	@Override
@@ -111,22 +87,12 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getCustomError() {
-		if (customerError != null && customerError.length() > 0) {
-			return true;
-		} else {
-			return false;
-		}
+		return customerError != null && customerError.length() > 0;
 	}
 
 	@Override
 	public boolean getValid() {
-
-		if (!getValueMissing() && !getCustomError() && !getPatternMismatch() && !getRangeOverflow()
-				&& !getRangeUnderflow() && !getStepMismatch() && !getTooLong() && !getTypeMismatch()) {
-			return true;
-		} else {
-			return false;
-		}
-
+		return !getValueMissing() && !getCustomError() && !getPatternMismatch() && !getRangeOverflow()
+				&& !getRangeUnderflow() && !getStepMismatch() && !getTooLong() && !getTypeMismatch();
 	}
 }

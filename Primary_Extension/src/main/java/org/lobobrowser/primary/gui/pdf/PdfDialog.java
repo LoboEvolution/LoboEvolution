@@ -103,58 +103,52 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	public final static String TITLE = "SwingLabs PDF Viewer";
 
 	/** The current PDFFile. */
-	PDFFile curFile;
+	private PDFFile curFile;
 
 	/** the name of the current document. */
-	String docName;
+	private String docName;
 
 	/** The split between thumbs and page. */
-	JSplitPane split;
+	private JSplitPane split;
 
 	/** The thumbnail scroll pane. */
-	JScrollPane thumbscroll;
+	private JScrollPane thumbscroll;
 
 	/** The thumbnail display. */
-	ThumbPanel thumbs;
+	private ThumbPanel thumbs;
 
 	/** The page display. */
-	PagePanel page;
+	private PagePanel page;
 
 	/** The full screen page display, or null if not in full screen mode. */
-	PagePanel fspp;
-	// Thread anim;
+	private PagePanel fspp;
+	
 	/** The current page number (starts at 0), or -1 if no page. */
-	int curpage = -1;
+	private int curpage = -1;
 
 	/** the full screen button. */
-	JToggleButton fullScreenButton;
+	private JToggleButton fullScreenButton;
 
 	/** the current page number text field. */
-	JTextField pageField;
+	private JTextField pageField;
 
 	/** the full screen window, or null if not in full screen mode. */
-	FullScreenWindow fullScreen;
+	private FullScreenWindow fullScreen;
 
 	/** the root of the outline, or null if there is no outline. */
-	OutlineNode outline = null;
+	private OutlineNode outline = null;
 
 	/** The page format for printing. */
-	PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
+	private PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
 
 	/** true if the thumb panel should exist at all. */
-	boolean doThumb = true;
-
-	/** flag to indicate when a newly added document has been announced. */
-	Flag docWaiter;
+	private boolean doThumb = true;
 
 	/** a thread that pre-loads the next page for faster response. */
-	PagePreparer pagePrep;
+	private PagePreparer pagePrep;
 
 	/** the window containing the pdf outline, or null if one doesn't exist. */
-	JDialog olf;
-
-	/** the document menu. */
-	JMenu docMenu;
+	private JDialog olf;
 
 	/**
 	 * utility method to get an icon from the resources of this class.
@@ -178,7 +172,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	// / FILE MENU
 
 	/** The page setup action. */
-	Action pageSetupAction = new AbstractAction("Page setup...") {
+	private Action pageSetupAction = new AbstractAction("Page setup...") {
 
 		private static final long serialVersionUID = 1L;
 
@@ -200,7 +194,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The close action. */
-	Action closeAction = new AbstractAction("Close") {
+	private Action closeAction = new AbstractAction("Close") {
 
 		private static final long serialVersionUID = 1L;
 
@@ -211,7 +205,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The quit action. */
-	Action quitAction = new AbstractAction("Quit") {
+	private Action quitAction = new AbstractAction("Quit") {
 
 		private static final long serialVersionUID = 1L;
 
@@ -222,7 +216,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The zoom tool action. */
-	Action zoomToolAction = new AbstractAction("", getIcon("/org/lobobrowser/images/zoomin.png")) {
+	private Action zoomToolAction = new AbstractAction("", getIcon("/org/lobobrowser/images/zoomin.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -233,7 +227,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The fit in window action. */
-	Action fitInWindowAction = new AbstractAction("Fit in window", getIcon("/org/lobobrowser/images/zoomout.png")) {
+	private Action fitInWindowAction = new AbstractAction("Fit in window", getIcon("/org/lobobrowser/images/zoomout.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -246,13 +240,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * The Class ThumbAction.
 	 */
-	class ThumbAction extends AbstractAction implements PropertyChangeListener {
+	public class ThumbAction extends AbstractAction implements PropertyChangeListener {
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = 1L;
 
 		/** The is open. */
-		boolean isOpen = true;
+		private boolean isOpen = true;
 
 		/**
 		 * Instantiates a new thumb action.
@@ -294,10 +288,10 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	}
 
 	/** The thumb action. */
-	ThumbAction thumbAction = new ThumbAction();
+	private ThumbAction thumbAction = new ThumbAction();
 
 	/** The full screen action. */
-	Action fullScreenAction = new AbstractAction("Full screen", getIcon("/org/lobobrowser/images/go.png")) {
+	private Action fullScreenAction = new AbstractAction("Full screen", getIcon("/org/lobobrowser/images/go.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -308,7 +302,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The next action. */
-	Action nextAction = new AbstractAction("Next", getIcon("/org/lobobrowser/images/forward.png")) {
+	private Action nextAction = new AbstractAction("Next", getIcon("/org/lobobrowser/images/forward.png")) {
 		/**
 		 *
 		 */
@@ -321,7 +315,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The prev action. */
-	Action prevAction = new AbstractAction("Prev", getIcon("/org/lobobrowser/images/back.png")) {
+	private Action prevAction = new AbstractAction("Prev", getIcon("/org/lobobrowser/images/back.png")) {
 		/**
 		 *
 		 */
@@ -355,7 +349,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * Initialize this PdfDialog by creating the GUI.
 	 */
-	@SuppressWarnings("deprecation")
 	protected void init() {
 		page = new PagePanel();
 		page.addKeyListener(this);
@@ -495,13 +488,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * A class to pre-cache the next page for better UI response.
 	 */
-	class PagePreparer extends Thread {
+	public class PagePreparer extends Thread {
 
 		/** The waitfor page. */
-		int waitforPage;
+		private int waitforPage;
 
 		/** The prep page. */
-		int prepPage;
+		private int prepPage;
 
 		/**
 		 * Creates a new PagePreparer to prepare the page after the current one.
@@ -754,7 +747,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * A file filter for PDF files.
 	 */
-	FileFilter pdfFilter = new FileFilter() {
+	public FileFilter pdfFilter = new FileFilter() {
 		@Override
 		public boolean accept(File f) {
 			return f.isDirectory() || f.getName().endsWith(".pdf");
@@ -1114,13 +1107,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	class PageBuilder implements Runnable {
 
 		/** The value. */
-		int value = 0;
+		private int value = 0;
 
 		/** The timeout. */
-		long timeout;
+		private long timeout;
 
 		/** The anim. */
-		Thread anim;
+		private Thread anim;
 
 		/** The Constant TIMEOUT. */
 		static final long TIMEOUT = 500;

@@ -50,6 +50,9 @@ public class RedirectRequestHandler implements RequestHandler {
 
 	/** The latest request url. */
 	private final URL latestRequestURL;
+	
+	/** The cancelled. */
+	private volatile boolean cancelled;
 
 	/**
 	 * Instantiates a new redirect request handler.
@@ -158,9 +161,6 @@ public class RedirectRequestHandler implements RequestHandler {
 	public void processResponse(ClientletResponse response) throws ClientletException, IOException {
 		this.origHandler.processResponse(response);
 	}
-
-	/** The cancelled. */
-	private volatile boolean cancelled;
 
 	/*
 	 * (non-Javadoc)

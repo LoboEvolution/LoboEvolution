@@ -29,10 +29,15 @@ import java.util.ArrayList;
  * The Class Strings.
  */
 public class Strings {
+	
 	/** The Constant MESSAGE_DIGEST. */
 	private static final MessageDigest MESSAGE_DIGEST;
+	
 	/** The Constant EMPTY_ARRAY. */
 	public static final String[] EMPTY_ARRAY = new String[0];
+	
+	/** The Constant HEX_CHARS. */
+	private static final String HEX_CHARS = "0123456789ABCDEF";
 
 	static {
 		MessageDigest md;
@@ -272,9 +277,6 @@ public class Strings {
 		}
 		return buf.toString();
 	}
-
-	/** The Constant HEX_CHARS. */
-	private static final String HEX_CHARS = "0123456789ABCDEF";
 
 	/**
 	 * Gets the m d5.

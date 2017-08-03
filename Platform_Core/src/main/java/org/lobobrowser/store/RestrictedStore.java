@@ -124,7 +124,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	long updateSizeFile() throws IOException {
+	public long updateSizeFile() throws IOException {
 		long totalSize = this.computeSize();
 		long prevSize;
 		synchronized (this) {

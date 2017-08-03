@@ -88,6 +88,12 @@ public class PlatformInit {
 
 	/** The general settings. */
 	private final GeneralSettings generalSettings;
+	
+	/** The application directory. */
+	private File applicationDirectory;
+
+	/** The window has been shown. */
+	private boolean windowHasBeenShown = false;
 
 	/**
 	 * Instantiates a new platform init.
@@ -359,10 +365,7 @@ public class PlatformInit {
 			this.launch(url);
 		}
 	}
-
-	/** The window has been shown. */
-	private boolean windowHasBeenShown = false;
-
+	
 	/**
 	 * Starts the browser by opening the URLs specified in the command-line
 	 * arguments provided. Non-option arguments are assumed to be URLs and
@@ -458,9 +461,6 @@ public class PlatformInit {
 	public void scheduleTask(SimpleThreadPoolTask task) {
 		this.threadExecutor.schedule(task);
 	}
-
-	/** The application directory. */
-	private File applicationDirectory;
 
 	/**
 	 * Gets the application directory.

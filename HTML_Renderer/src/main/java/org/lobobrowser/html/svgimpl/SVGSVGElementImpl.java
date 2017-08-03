@@ -112,11 +112,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public boolean hasExtension(String extension) {
-		if (extension.equalsIgnoreCase("svg")) {
-			return true;
-		} else {
-			return false;
-		}
+		return "svg".equalsIgnoreCase(extension);
 	}
 
 	@Override

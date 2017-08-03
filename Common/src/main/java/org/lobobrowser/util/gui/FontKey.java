@@ -58,6 +58,9 @@ public class FontKey {
 
 	/** The underline. */
 	private Integer underline;
+	
+	/** The cached hash. */
+	private int cachedHash = -1;
 
 	/**
 	 * Instantiates a new font key.
@@ -116,9 +119,6 @@ public class FontKey {
 				&& this.fontWeight == ors.fontWeight && this.fontVariant == ors.fontVariant
 				&& this.superscript == ors.superscript && Objects.equals(this.locales, ors.locales);
 	}
-
-	/** The cached hash. */
-	private int cachedHash = -1;
 
 	/*
 	 * (non-Javadoc)

@@ -33,10 +33,10 @@ import org.w3c.dom.ProcessingInstruction;
 public class HTMLProcessingInstruction extends DOMNodeImpl implements ProcessingInstruction, Cloneable {
 
 	/** The target. */
-	String target;
+	private String target;
 
 	/** The data. */
-	String data;
+	private String data;
 
 	/**
 	 * Instantiates a new HTML processing instruction.

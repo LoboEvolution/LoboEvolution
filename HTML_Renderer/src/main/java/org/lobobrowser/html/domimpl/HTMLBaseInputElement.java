@@ -926,7 +926,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	/**
 	 * Reset input.
 	 */
-	void resetInput() {
+	public void resetInput() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
 			ic.resetInput();

@@ -92,6 +92,25 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * assigned in setOwnerDocument.
 	 */
 	private volatile Object treeLock = this;
+		
+	/** The user data. */
+	private Map<String, Object> userData;
+	
+	/** The user data handlers. */
+	private Map<String, UserDataHandler> userDataHandlers;
+
+	/** The notifications suspended. */
+	protected volatile boolean notificationsSuspended = false;
+
+	/** The render state. */
+	private RenderState renderState = INVALID_RENDER_STATE;
+	
+	/** The children collection. */
+	private ChildHTMLCollection childrenCollection;
+
+	/** The prefix. */
+	private volatile String prefix;
+
 
 	/**
 	 * Instantiates a new DOM node impl.
@@ -226,9 +245,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			return nl == null ? 0 : nl.size();
 		}
 	}
-
-	/** The children collection. */
-	private ChildHTMLCollection childrenCollection;
 
 	/**
 	 * Gets the children.
@@ -829,15 +845,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		return null;
 	}
 
-	/** The user data. */
-	private Map<String, Object> userData;
-	// TODO: Inform handlers on cloning, etc.
-	/** The user data handlers. */
-	private Map<String, UserDataHandler> userDataHandlers;
-
-	/** The notifications suspended. */
-	protected volatile boolean notificationsSuspended = false;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -934,10 +941,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public abstract String getNodeValue() throws DOMException;
-
-	/** The prefix. */
-	private volatile String prefix;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1590,10 +1594,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			doc.allInvalidated(true);
 		}
 	}
-
-	/** The render state. */
-	private RenderState renderState = INVALID_RENDER_STATE;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

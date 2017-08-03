@@ -70,6 +70,9 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 
 	/** The rcontext. */
 	private final HtmlRendererContext rcontext;
+	
+	/** The dom implementation. */
+	private DOMImplementation domImplementation;
 
 	/**
 	 * Constructs a <code>DocumentBuilderImpl</code>. This constructor should be
@@ -241,9 +244,6 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	public Document newDocument() {
 		return new HTMLDocumentImpl(this.bcontext);
 	}
-
-	/** The dom implementation. */
-	private DOMImplementation domImplementation;
 
 	/*
 	 * (non-Javadoc)

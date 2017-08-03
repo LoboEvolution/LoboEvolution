@@ -20,18 +20,25 @@
  */
 package org.lobobrowser.http;
 
+import java.io.Serializable;
+
 /**
  * The Class OrderedValue.
  */
-public class OrderedValue implements Comparable<Object>, java.io.Serializable {
+public class OrderedValue implements Comparable<Object>, Serializable {
+	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 340227625744215821L;
+	
 	/** The timestamp. */
 	private long timestamp;
+	
 	/** The approximate size. */
 	private int approximateSize;
+	
 	/** The key. */
 	private Object key;
+	
 	/** The value. */
 	private Object value;
 
@@ -53,7 +60,7 @@ public class OrderedValue implements Comparable<Object>, java.io.Serializable {
 	/**
 	 * Touch.
 	 */
-	final void touch() {
+	public final void touch() {
 		this.timestamp = System.currentTimeMillis();
 	}
 

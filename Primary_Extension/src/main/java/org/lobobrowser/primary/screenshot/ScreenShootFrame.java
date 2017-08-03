@@ -89,7 +89,7 @@ public class ScreenShootFrame extends JFrame {
 	}
 
 	/** The save action. */
-	Action saveAction = new AbstractAction("Save") {
+	private Action saveAction = new AbstractAction("Save") {
 
 		private static final long serialVersionUID = 1L;
 

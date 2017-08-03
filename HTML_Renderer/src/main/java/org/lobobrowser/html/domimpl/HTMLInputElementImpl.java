@@ -281,7 +281,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 * @see org.lobobrowser.html.domimpl.HTMLBaseInputElement#resetInput()
 	 */
 	@Override
-	void resetInput() {
+	public void resetInput() {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
 			ic.resetInput();

@@ -28,6 +28,16 @@ import org.w3c.dom.DOMException;
  * timed elements.
  */
 public interface ElementTime {
+
+	// restartTypes
+	public static final short RESTART_ALWAYS = 0;
+	public static final short RESTART_NEVER = 1;
+	public static final short RESTART_WHEN_NOT_ACTIVE = 2;
+
+	// fillTypes
+	public static final short FILL_REMOVE = 0;
+	public static final short FILL_FREEZE = 1;
+
 	/**
 	 * The desired value (as a list of times) of the begin instant of this node.
 	 * 
@@ -62,11 +72,6 @@ public interface ElementTime {
 
 	public void setDur(float dur) throws DOMException;
 
-	// restartTypes
-	public static final short RESTART_ALWAYS = 0;
-	public static final short RESTART_NEVER = 1;
-	public static final short RESTART_WHEN_NOT_ACTIVE = 2;
-
 	/**
 	 * A code representing the value of the restart attribute, as defined above.
 	 * Default value is <code>RESTART_ALWAYS</code> .
@@ -78,10 +83,6 @@ public interface ElementTime {
 	public short getRestart();
 
 	public void setRestart(short restart) throws DOMException;
-
-	// fillTypes
-	public static final short FILL_REMOVE = 0;
-	public static final short FILL_FREEZE = 1;
 
 	/**
 	 * A code representing the value of the fill attribute, as defined above.

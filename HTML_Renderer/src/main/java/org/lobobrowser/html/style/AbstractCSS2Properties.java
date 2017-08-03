@@ -63,6 +63,9 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 
 	/** The value map. */
 	private Map<String, Property> valueMap = null;
+	
+	/** The overlay color. */
+	private String overlayColor;
 
 	static {
 		Map<String, Object> subSetters = SUB_SETTERS;
@@ -255,9 +258,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 			this.setPropertyValueLCAlt(lowerCaseName, value, important);
 		}
 	}
-
-	/** The overlay color. */
-	private String overlayColor;
 
 	/**
 	 * Gets the overlay color.

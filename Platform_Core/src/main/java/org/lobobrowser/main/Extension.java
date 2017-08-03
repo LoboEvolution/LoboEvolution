@@ -653,7 +653,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	 * @throws NavigationVetoException
 	 *             the navigation veto exception
 	 */
-	void dispatchBeforeNavigate(NavigationEvent event) throws NavigationVetoException {
+	public void dispatchBeforeNavigate(NavigationEvent event) throws NavigationVetoException {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();
@@ -686,8 +686,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	 * @throws NavigationVetoException
 	 *             the navigation veto exception
 	 */
-	void dispatchBeforeLocalNavigate(NavigationEvent event) throws NavigationVetoException {
-		// Should not be public
+	public void dispatchBeforeLocalNavigate(NavigationEvent event) throws NavigationVetoException {
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();
 		ClassLoader loader = this.classLoader;
@@ -719,7 +718,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	 * @throws NavigationVetoException
 	 *             the navigation veto exception
 	 */
-	void dispatchBeforeWindowOpen(NavigationEvent event) throws NavigationVetoException {
+	public void dispatchBeforeWindowOpen(NavigationEvent event) throws NavigationVetoException {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();
@@ -751,7 +750,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	 *            the connection
 	 * @return the URL connection
 	 */
-	URLConnection dispatchPreConnection(URLConnection connection) {
+	public URLConnection dispatchPreConnection(URLConnection connection) {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();

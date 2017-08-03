@@ -1215,7 +1215,7 @@ public final class RequestEngine {
 		 * @param rhandler
 		 *            the rhandler
 		 */
-		RequestInfo(URLConnection connection, RequestHandler rhandler) {
+		public RequestInfo(URLConnection connection, RequestHandler rhandler) {
 			this.connection = connection;
 			this.requestHandler = rhandler;
 		}
@@ -1225,14 +1225,14 @@ public final class RequestEngine {
 		 *
 		 * @return true, if is aborted
 		 */
-		boolean isAborted() {
+		public boolean isAborted() {
 			return this.isAborted;
 		}
 
 		/**
 		 * Abort.
 		 */
-		void abort() {
+		public void abort() {
 			try {
 				this.isAborted = true;
 				if (this.connection instanceof HttpURLConnection) {
@@ -1252,7 +1252,7 @@ public final class RequestEngine {
 		 *
 		 * @return the request handler
 		 */
-		RequestHandler getRequestHandler() {
+		public RequestHandler getRequestHandler() {
 			return this.requestHandler;
 		}
 
@@ -1264,7 +1264,7 @@ public final class RequestEngine {
 		 * @param in
 		 *            the in
 		 */
-		void setConnection(URLConnection connection, InputStream in) {
+		public void setConnection(URLConnection connection, InputStream in) {
 			this.connection = connection;
 			this.inputStream = in;
 		}

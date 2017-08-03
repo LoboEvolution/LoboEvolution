@@ -56,42 +56,45 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 	private static final long serialVersionUID = 1L;
 
 	/** The image of the rendered PDF page being displayed. */
-	Image currentImage;
+	private Image currentImage;
 
 	/** The current PDFPage that was rendered into currentImage. */
-	PDFPage currentPage;
+	private PDFPage currentPage;
 
 	/** The current xform. */
-	/* the current transform from device space to page space */
-	AffineTransform currentXform;
+	private AffineTransform currentXform;
 
 	/** The horizontal offset of the image from the left edge of the panel. */
-	int offx;
+	private int offx;
 
 	/** The vertical offset of the image from the top of the panel. */
-	int offy;
+	private int offy;
 
 	/** the current clip, in device space. */
-	Rectangle2D clip;
+	private Rectangle2D clip;
 
 	/** the clipping region used for the image. */
-	Rectangle2D prevClip;
+	private Rectangle2D prevClip;
 
 	/** the size of the image. */
-	Dimension prevSize;
+	private Dimension prevSize;
 
 	/** the zooming marquee. */
-	Rectangle zoomRect;
+	private Rectangle zoomRect;
 
 	/** whether the zoom tool is enabled. */
-	boolean useZoom = false;
-
-	// /** a listener for page changes */
-	// PageChangeListener listener;
+	private boolean useZoom = false;
+	
 	/** a flag indicating whether the current page is done or not. */
-	Flag flag = new Flag();
+	private Flag flag = new Flag();
 
-	// Color boxcolor= new Color(255,200,200);
+	/** x location of the mouse-down event. */
+	int downx;
+
+	/** y location of the mouse-down event. */
+	private int downy;
+
+	
 	/**
 	 * Create a new PagePanel, with a default size of 800 by 600 pixels.
 	 */
@@ -302,12 +305,6 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 		this.clip = clip;
 		showPage(currentPage);
 	}
-
-	/** x location of the mouse-down event. */
-	int downx;
-
-	/** y location of the mouse-down event. */
-	int downy;
 
 	/** Handles a mousePressed event */
 	@Override

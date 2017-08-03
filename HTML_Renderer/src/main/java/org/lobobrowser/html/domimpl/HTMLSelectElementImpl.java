@@ -36,6 +36,18 @@ import org.w3c.dom.DOMException;
  * The Class HTMLSelectElementImpl.
  */
 public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLSelectElement {
+	
+	/** The options. */
+	private HTMLOptionsCollection options;
+	
+	/** The multiple state. */
+	private Boolean multipleState = null;
+
+	/** The deferred selected index. */
+	private int deferredSelectedIndex = -1;
+
+	/** The onchange. */
+	private Function onchange;
 
 	/**
 	 * Instantiates a new HTML select element impl.
@@ -69,9 +81,6 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 		return this.getOptions().getLength();
 	}
 
-	/** The multiple state. */
-	private Boolean multipleState = null;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -85,9 +94,6 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 		}
 		return this.getAttributeAsBoolean("multiple");
 	}
-
-	/** The options. */
-	private HTMLOptionsCollection options;
 
 	/*
 	 * (non-Javadoc)
@@ -181,10 +187,7 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 			this.informLayoutInvalid();
 		}
 	}
-
-	/** The deferred selected index. */
-	private int deferredSelectedIndex = -1;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -207,7 +210,7 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 	 * @param selectedIndex
 	 *            the new selected index impl
 	 */
-	void setSelectedIndexImpl(int selectedIndex) {
+	public void setSelectedIndexImpl(int selectedIndex) {
 		InputContext ic = this.inputContext;
 		if (ic != null) {
 			ic.setSelectedIndex(selectedIndex);
@@ -284,10 +287,7 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 			ic.setSelectedIndex(this.deferredSelectedIndex);
 		}
 	}
-
-	/** The onchange. */
-	private Function onchange;
-
+	
 	/**
 	 * Gets the onchange.
 	 *

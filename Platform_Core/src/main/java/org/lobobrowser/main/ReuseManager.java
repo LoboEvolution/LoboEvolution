@@ -50,6 +50,12 @@ public class ReuseManager {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ReuseManager.class);
 
+	/** The Constant instance. */
+	private static final ReuseManager instance = new ReuseManager();
+	
+	/** The Constant PORT_FILE. */
+	private static final String PORT_FILE = "port.dat";
+	
 	/**
 	 * Instantiates a new reuse manager.
 	 */
@@ -57,8 +63,7 @@ public class ReuseManager {
 		super();
 	}
 
-	/** The Constant instance. */
-	private static final ReuseManager instance = new ReuseManager();
+	
 
 	/**
 	 * Gets the Constant instance.
@@ -68,9 +73,6 @@ public class ReuseManager {
 	public static ReuseManager getInstance() throws Exception {
 		return instance;
 	}
-
-	/** The Constant PORT_FILE. */
-	private static final String PORT_FILE = "port.dat";
 
 	/**
 	 * Shutdown.

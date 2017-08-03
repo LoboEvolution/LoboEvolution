@@ -127,6 +127,9 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 
 	/** The default status. */
 	private String defaultStatus;
+	
+	/** The event. */
+	private final EventDispatch2 EVENT = new LocalEventDispatch();
 
 	/**
 	 * Sets the window factory.
@@ -227,7 +230,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 	 * @param overridingProperties
 	 *            the overriding properties
 	 */
-	void resetAsNavigator(Properties overridingProperties) {
+	public void resetAsNavigator(Properties overridingProperties) {
 		// Invoke in GUI thread
 		if (this.launched) {
 			return;
@@ -885,15 +888,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			this.toolBars.add(toolBar);
 		}
 	}
-
-	// public void addItemToSharedMenu(JMenuItem menuItem) {
-	// synchronized(this) {
-	// this.sharedMenuItems.add(menuItem);
-	// }
-	// }
-
-	/** The event. */
-	private final EventDispatch2 EVENT = new LocalEventDispatch();
 
 	/*
 	 * (non-Javadoc)

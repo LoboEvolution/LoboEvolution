@@ -530,7 +530,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 * @return true If the specified type is supported; otherwise, returns
 	 *         false.
 	 */
-	static boolean isValidType(short type) {
+	public static boolean isValidType(short type) {
 		switch (type) {
 		case ANY_TYPE:
 		case NUMBER_TYPE:
