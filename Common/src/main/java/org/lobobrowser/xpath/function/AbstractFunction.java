@@ -47,7 +47,7 @@ public abstract class AbstractFunction implements XPathFunction {
 	 */
 	protected AbstractFunction(String name, int arity) {
 		if (name == null) {
-			throw new NullPointerException();
+			throw new IllegalArgumentException ();
 		}
 		if (arity < 0) {
 			throw new IllegalArgumentException("Arity must be positive");

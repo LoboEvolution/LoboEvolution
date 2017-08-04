@@ -46,7 +46,7 @@ public class CacheInfo {
 	private static final Logger logger = LogManager.getLogger(CacheInfo.class.getName());
 
 	/** The Constant HEADER_REQUEST_TIME. */
-	private static final String HEADER_REQUEST_TIME = "X-Request-Time";
+	public static final String HEADER_REQUEST_TIME = "X-Request-Time";
 
 	/** The url. */
 	private final URL url;

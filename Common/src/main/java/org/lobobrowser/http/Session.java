@@ -669,7 +669,7 @@ public class Session extends AbstractBean {
 	 * @throws java.io.IOException
 	 */
 	protected URL createURL(String surl) throws MalformedURLException {
-		return new URL(surl.toString());
+		return new URL(surl);
 	}
 
 	private byte[] readFully(InputStream in) throws IOException {

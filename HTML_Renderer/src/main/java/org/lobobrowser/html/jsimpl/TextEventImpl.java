@@ -95,7 +95,7 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
 	public void initTextEvent(String type, boolean canBubble, boolean cancelable, AbstractView view, String data) {
 
 		if (data == null) {
-			throw new NullPointerException();
+			throw new IllegalArgumentException ();
 		}
 		setType(type);
 		setCanBubble(canBubble);

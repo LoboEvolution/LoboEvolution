@@ -160,7 +160,7 @@ public class CookieManager extends CookieHandler {
 
 		private Wrapper(Cookie c) {
 			if (c == null) {
-				throw new NullPointerException();
+				throw new IllegalArgumentException ();
 			}
 			this.cookie = c;
 		}

@@ -149,6 +149,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 
 	/** the window containing the pdf outline, or null if one doesn't exist. */
 	private JDialog olf;
+	
+	/** The thumb action. */
+	private ThumbAction thumbAction = new ThumbAction();
 
 	/**
 	 * utility method to get an icon from the resources of this class.
@@ -286,9 +289,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			doThumbs(!isOpen);
 		}
 	}
-
-	/** The thumb action. */
-	private ThumbAction thumbAction = new ThumbAction();
 
 	/** The full screen action. */
 	private Action fullScreenAction = new AbstractAction("Full screen", getIcon("/org/lobobrowser/images/go.png")) {

@@ -704,7 +704,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		StringTokenizer tok = new StringTokenizer(classNames, " \t\r\n");
 		while (tok.hasMoreTokens()) {
 			String token = tok.nextToken();
-			if (token.toLowerCase().equals(classTL)) {
+			if (token.equalsIgnoreCase(classTL)) {
 				return true;
 			}
 		}

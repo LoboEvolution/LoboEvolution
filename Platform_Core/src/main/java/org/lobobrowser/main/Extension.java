@@ -149,7 +149,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 			propsInputStream = propsFile.exists() ? new FileInputStream(propsFile) : null;
 		} else {
 			JarFile jarFile = new JarFile(extRoot);
-			this.isPrimary = extRoot.getName().toLowerCase().equals(PRIMARY_EXTENSION_FILE_NAME);
+			this.isPrimary = extRoot.getName().equalsIgnoreCase(PRIMARY_EXTENSION_FILE_NAME);
 			this.jarFile = jarFile;
 			String name = extRoot.getName();
 			int dotIdx = name.lastIndexOf('.');
