@@ -61,7 +61,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		if (overflow == OVERFLOW_NONE) {
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String scrolling = element.getAttribute(HtmlAttributeProperties.SCROLLING);
+				String scrolling = element.getAttribute(SCROLLING);
 				if (scrolling != null) {
 					scrolling = scrolling.trim().toLowerCase();
 					if ("no".equals(scrolling)) {
@@ -94,7 +94,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		if (overflow == OVERFLOW_NONE) {
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String scrolling = element.getAttribute(HtmlAttributeProperties.SCROLLING);
+				String scrolling = element.getAttribute(SCROLLING);
 				if (scrolling != null) {
 					scrolling = scrolling.trim().toLowerCase();
 					if ("no".equals(scrolling)) {
@@ -133,7 +133,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 			}
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+				String border = element.getAttribute(FRAMEBORDER);
 				int value = 0;
 				if (border != null) {
 					border = border.trim();

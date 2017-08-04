@@ -36,7 +36,7 @@ public class SVGStopElementImpl extends SVGSVGElementImpl implements SVGStopElem
 
 	@Override
 	public SVGAnimatedNumber getOffset() {
-		String value = this.getAttribute(HtmlAttributeProperties.OFFSET);
+		String value = this.getAttribute(OFFSET);
 		return new SVGAnimatedNumberImpl(new SVGNumberImpl(value));
 	}
 

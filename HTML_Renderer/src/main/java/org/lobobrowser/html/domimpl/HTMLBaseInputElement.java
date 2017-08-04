@@ -111,7 +111,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the default value
 	 */
 	public String getDefaultValue() {
-		return this.getAttribute(HtmlAttributeProperties.DEFAULTVALUE);
+		return this.getAttribute(DEFAULTVALUE);
 	}
 
 	/**
@@ -121,7 +121,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new default value
 	 */
 	public void setDefaultValue(String defaultValue) {
-		this.setAttribute(HtmlAttributeProperties.DEFAULTVALUE, defaultValue);
+		this.setAttribute(DEFAULTVALUE, defaultValue);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the accept
 	 */
 	public String getAccept() {
-		return this.getAttribute(HtmlAttributeProperties.ACCEPT);
+		return this.getAttribute(ACCEPT);
 	}
 
 	/**
@@ -176,7 +176,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new accept
 	 */
 	public void setAccept(String accept) {
-		this.setAttribute(HtmlAttributeProperties.ACCEPT, accept);
+		this.setAttribute(ACCEPT, accept);
 	}
 
 	/*
@@ -187,7 +187,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	@Override
 	public String getAccessKey() {
-		return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
+		return this.getAttribute(ACCESSKEY);
 	}
 
 	/*
@@ -199,7 +199,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	@Override
 	public void setAccessKey(String accessKey) {
-		this.setAttribute(HtmlAttributeProperties.ACCESSKEY, accessKey);
+		this.setAttribute(ACCESSKEY, accessKey);
 	}
 
 	/**
@@ -208,7 +208,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the align
 	 */
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/**
@@ -218,7 +218,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new align
 	 */
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/**
@@ -227,7 +227,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the alt
 	 */
 	public String getAlt() {
-		return this.getAttribute(HtmlAttributeProperties.ALT);
+		return this.getAttribute(ALT);
 	}
 
 	/**
@@ -237,7 +237,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new alt
 	 */
 	public void setAlt(String alt) {
-		this.setAttribute(HtmlAttributeProperties.ALT, alt);
+		this.setAttribute(ALT, alt);
 	}
 
 	/**
@@ -247,7 +247,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 */
 	public String getName() {
 		// TODO: Should this return value of "id"?
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/**
@@ -257,7 +257,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new name
 	 */
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 
 	/**
@@ -266,7 +266,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the placeholder
 	 */
 	public String getPlaceholder() {
-		return this.getAttribute(HtmlAttributeProperties.PLACEHOLDER);
+		return this.getAttribute(PLACEHOLDER);
 	}
 
 	/**
@@ -276,7 +276,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new placeholder
 	 */
 	public void setPlaceholder(String placeholder) {
-		this.setAttribute(HtmlAttributeProperties.PLACEHOLDER, placeholder);
+		this.setAttribute(PLACEHOLDER, placeholder);
 
 	}
 
@@ -286,7 +286,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the src
 	 */
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/**
@@ -296,7 +296,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 *            the new src
 	 */
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 	}
 
 	/*
@@ -434,7 +434,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 			if (dv != null) {
 				return dv;
 			} else {
-				String val = this.getAttribute(HtmlAttributeProperties.VALUE);
+				String val = this.getAttribute(VALUE);
 				return val == null ? "" : val;
 			}
 		}
@@ -806,7 +806,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	@Override
 	public void assignAttributeField(String normalName, String value) {
-		if (HtmlAttributeProperties.VALUE.equals(normalName)) {
+		if (VALUE.equals(normalName)) {
 			this.setValue(value);
 		} else if ("checked".equals(normalName)) {
 			this.setChecked(value != null);
@@ -814,7 +814,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 			this.setDisabled(value != null);
 		} else if ("readonly".equals(normalName)) {
 			this.setReadOnly(value != null);
-		} else if (HtmlAttributeProperties.SRC.equals(normalName)) {
+		} else if (SRC.equals(normalName)) {
 			this.loadImage(value);
 		} else {
 			super.assignAttributeField(normalName, value);

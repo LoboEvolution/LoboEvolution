@@ -45,7 +45,7 @@ public class HTMLTimeElementImpl extends HTMLElementImpl implements HTMLTimeElem
 	 */
 	@Override
 	public String getDateTime() {
-		return this.getAttribute(HtmlAttributeProperties.DATETIME);
+		return this.getAttribute(DATETIME);
 	}
 
 	/*
@@ -56,7 +56,7 @@ public class HTMLTimeElementImpl extends HTMLElementImpl implements HTMLTimeElem
 	 */
 	@Override
 	public void setDateTime(String dateTime) {
-		this.setAttribute(HtmlAttributeProperties.DATETIME, dateTime);
+		this.setAttribute(DATETIME, dateTime);
 	}
 
 	/*

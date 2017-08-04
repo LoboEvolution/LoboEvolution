@@ -55,8 +55,8 @@ public class InputDatePickerControl extends BaseInputControl {
 		JDatePicker picker = new JDatePicker();
 		picker.setTextEditable(true);
 		picker.setShowYearButtons(true);
-		min = modelNode.getAttribute(HtmlAttributeProperties.MIN);
-		max = modelNode.getAttribute(HtmlAttributeProperties.MAX);
+		min = modelNode.getAttribute(MIN);
+		max = modelNode.getAttribute(MAX);
 
 		if (modelNode.getPattern() != null && modelNode.getPattern().length() > 0) {
 			datePattern = modelNode.getPattern();

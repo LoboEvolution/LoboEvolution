@@ -62,7 +62,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getAbbr() {
-		return this.getAttribute(HtmlAttributeProperties.ABBR);
+		return this.getAttribute(ABBR);
 	}
 
 	/*
@@ -73,7 +73,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setAbbr(String abbr) {
-		this.setAttribute(HtmlAttributeProperties.ABBR, abbr);
+		this.setAttribute(ABBR, abbr);
 	}
 
 	/*
@@ -83,7 +83,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -94,7 +94,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*
@@ -104,7 +104,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getAxis() {
-		return this.getAttribute(HtmlAttributeProperties.AXIS);
+		return this.getAttribute(AXIS);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setAxis(String axis) {
-		this.setAttribute(HtmlAttributeProperties.AXIS, axis);
+		this.setAttribute(AXIS, axis);
 	}
 
 	/*
@@ -125,7 +125,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getBgColor() {
-		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
+		return this.getAttribute(BGCOLOR);
 	}
 
 	/*
@@ -136,7 +136,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setBgColor(String bgColor) {
-		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
+		this.setAttribute(BGCOLOR, bgColor);
 	}
 
 	/*
@@ -146,7 +146,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getCh() {
-		return this.getAttribute(HtmlAttributeProperties.CH);
+		return this.getAttribute(CH);
 	}
 
 	/*
@@ -157,7 +157,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setCh(String ch) {
-		this.setAttribute(HtmlAttributeProperties.CH, ch);
+		this.setAttribute(CH, ch);
 	}
 
 	/*
@@ -167,7 +167,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getChOff() {
-		return this.getAttribute(HtmlAttributeProperties.CHOFF);
+		return this.getAttribute(CHOFF);
 	}
 
 	/*
@@ -178,7 +178,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setChOff(String chOff) {
-		this.setAttribute(HtmlAttributeProperties.CHOFF, chOff);
+		this.setAttribute(CHOFF, chOff);
 	}
 
 	/*
@@ -188,7 +188,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public int getColSpan() {
-		String colSpanText = this.getAttribute(HtmlAttributeProperties.COLSPAN);
+		String colSpanText = this.getAttribute(COLSPAN);
 		return HtmlValues.getPixelSize(colSpanText, this.getRenderState(), 0);
 	}
 
@@ -199,7 +199,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setColSpan(int colSpan) {
-		this.setAttribute(HtmlAttributeProperties.COLSPAN, String.valueOf(colSpan));
+		this.setAttribute(COLSPAN, String.valueOf(colSpan));
 	}
 
 	/*
@@ -209,7 +209,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getHeaders() {
-		return this.getAttribute(HtmlAttributeProperties.HEADERS);
+		return this.getAttribute(HEADERS);
 	}
 
 	/*
@@ -220,7 +220,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setHeaders(String headers) {
-		this.setAttribute(HtmlAttributeProperties.HEADERS, headers);
+		this.setAttribute(HEADERS, headers);
 	}
 
 	/*
@@ -230,7 +230,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getHeight() {
-		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		return this.getAttribute(HEIGHT);
 	}
 
 	/*
@@ -241,7 +241,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setHeight(String height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
+		this.setAttribute(HEIGHT, height);
 	}
 
 	/*
@@ -251,7 +251,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public boolean getNoWrap() {
-		return HtmlAttributeProperties.NOWRAP.equalsIgnoreCase(this.getAttribute(HtmlAttributeProperties.NOWRAP));
+		return NOWRAP.equalsIgnoreCase(this.getAttribute(NOWRAP));
 	}
 
 	/*
@@ -261,7 +261,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setNoWrap(boolean noWrap) {
-		this.setAttribute(HtmlAttributeProperties.NOWRAP, noWrap ? HtmlAttributeProperties.NOWRAP : null);
+		this.setAttribute(NOWRAP, noWrap ? NOWRAP : null);
 	}
 
 	/*
@@ -271,7 +271,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public int getRowSpan() {
-		String rowSpanText = this.getAttribute(HtmlAttributeProperties.ROWSPAN);
+		String rowSpanText = this.getAttribute(ROWSPAN);
 		return HtmlValues.getPixelSize(rowSpanText, this.getRenderState(), 0);
 	}
 
@@ -282,7 +282,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setRowSpan(int rowSpan) {
-		this.setAttribute(HtmlAttributeProperties.ROWSPAN, String.valueOf(rowSpan));
+		this.setAttribute(ROWSPAN, String.valueOf(rowSpan));
 	}
 
 	/*
@@ -292,7 +292,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getScope() {
-		return this.getAttribute(HtmlAttributeProperties.SCOPE);
+		return this.getAttribute(SCOPE);
 	}
 
 	/*
@@ -303,7 +303,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setScope(String scope) {
-		this.setAttribute(HtmlAttributeProperties.SCOPE, scope);
+		this.setAttribute(SCOPE, scope);
 	}
 
 	/*
@@ -313,7 +313,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getVAlign() {
-		return this.getAttribute(HtmlAttributeProperties.VALIGN);
+		return this.getAttribute(VALIGN);
 	}
 
 	/*
@@ -324,7 +324,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setVAlign(String vAlign) {
-		this.setAttribute(HtmlAttributeProperties.VALIGN, vAlign);
+		this.setAttribute(VALIGN, vAlign);
 	}
 
 	/*
@@ -334,7 +334,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public String getWidth() {
-		return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return this.getAttribute(WIDTH);
 	}
 
 	/*
@@ -345,7 +345,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+		this.setAttribute(WIDTH, width);
 	}
 
 	/*

@@ -21,8 +21,6 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGPolylineElement;
 
@@ -33,53 +31,12 @@ public class SVGPolylineElementImpl extends SVGSVGElementImpl implements SVGPoly
 	}
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
-	}
-
-	@Override
 	public SVGPointList getPoints() {
-		return SVGUtility.constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
+		return SVGUtility.constructPointList(this.getAttribute(POINTS));
 	}
 
 	@Override
 	public SVGPointList getAnimatedPoints() {
-		return SVGUtility.constructPointList(this.getAttribute(HtmlAttributeProperties.POINTS));
-	}
-
-	@Override
-	public AbstractCSS2Properties getSVGStyle() {
-
-		AbstractCSS2Properties style = this.getStyle();
-
-		if (style.getStroke() == null) {
-			style.setStroke(this.getStroke());
-		}
-
-		if (style.getStrokeDashArray() == null) {
-			style.setStrokeDashArray(this.getStrokeDashArray());
-		}
-
-		if (style.getStrokeLineCap() == null) {
-			style.setStrokeLineCap(this.getStrokeLineCap());
-		}
-
-		if (style.getStrokeMiterLimit() == null) {
-			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-		}
-
-		if (style.getStrokeOpacity() == null) {
-			style.setStrokeOpacity(this.getStrokeOpacity());
-		}
-
-		if (style.getStrokeWidth() == null) {
-			style.setStrokeWidth(this.getStrokeWidth());
-		}
-
-		if (style.getFill() == null) {
-			style.setFill(this.getFill());
-		}
-
-		return style;
+		return SVGUtility.constructPointList(this.getAttribute(POINTS));
 	}
 }

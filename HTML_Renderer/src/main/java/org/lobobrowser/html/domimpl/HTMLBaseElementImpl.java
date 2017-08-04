@@ -60,8 +60,8 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	private final void processBaseTag() {
 		HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
-			doc.setBaseURI(this.getAttribute(HtmlAttributeProperties.HREF));
-			doc.setDefaultTarget(this.getAttribute(HtmlAttributeProperties.TARGET));
+			doc.setBaseURI(this.getAttribute(HREF));
+			doc.setDefaultTarget(this.getAttribute(TARGET));
 		}
 	}
 }

@@ -36,7 +36,7 @@ import org.lobobrowser.w3c.html.HTMLElement;
 /**
  * The Class RListItem.
  */
-public class RListItem extends BaseRListElement {
+public class RListItem extends BaseRListElement implements HtmlAttributeProperties {
 
 	/** The Constant BULLET_WIDTH. */
 	private static final int BULLET_WIDTH = 5;
@@ -109,7 +109,7 @@ public class RListItem extends BaseRListElement {
 		Integer value = this.value;
 		if (value == null) {
 			HTMLElement node = (HTMLElement) this.modelNode;
-			String valueText = node == null ? null : node.getAttribute(HtmlAttributeProperties.VALUE);
+			String valueText = node == null ? null : node.getAttribute(VALUE);
 			if (valueText == null) {
 				value = UNSET;
 			} else {

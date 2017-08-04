@@ -41,7 +41,7 @@ public class SVGRadialGradientElementImpl extends SVGSVGElementImpl implements S
 
 	@Override
 	public SVGAnimatedTransformList getGradientTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
+		return new SVGAnimatedTransformListImpl(this.getAttribute(TRANSFORM));
 	}
 
 	@Override
@@ -52,35 +52,35 @@ public class SVGRadialGradientElementImpl extends SVGSVGElementImpl implements S
 
 	@Override
 	public SVGAnimatedString getHref() {
-		String href = this.getAttribute(HtmlAttributeProperties.XLINK_HREF);
+		String href = this.getAttribute(XLINK_HREF);
 		if (href == null) {
-			href = this.getAttribute(HtmlAttributeProperties.HREF);
+			href = this.getAttribute(HREF);
 		}
 		return new SVGAnimatedStringImpl(href);
 	}
 
 	@Override
 	public SVGAnimatedLength getCx() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.CX)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(CX)));
 	}
 
 	@Override
 	public SVGAnimatedLength getCy() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.CY)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(CY)));
 	}
 
 	@Override
 	public SVGAnimatedLength getR() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.R)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(R)));
 	}
 
 	@Override
 	public SVGAnimatedLength getFx() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.FX)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(FX)));
 	}
 
 	@Override
 	public SVGAnimatedLength getFy() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.FY)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(FY)));
 	}
 }

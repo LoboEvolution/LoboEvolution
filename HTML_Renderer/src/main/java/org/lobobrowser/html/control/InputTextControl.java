@@ -66,9 +66,9 @@ public class InputTextControl extends BaseInputTextControl {
 		text.setEnabled(!modelNode.getDisabled());
 		text.setPlaceholder(modelNode.getPlaceholder());
 		text.setSelectionColor(Color.BLUE);
-		strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
+		strPattern = modelNode.getAttribute(PATTERN);
 
-		if (!match(modelNode.getAttribute(HtmlAttributeProperties.VALUE), strPattern)) {
+		if (!match(modelNode.getAttribute(VALUE), strPattern)) {
 			text.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
 			text.setBorder(BorderFactory.createLineBorder(Color.BLACK));

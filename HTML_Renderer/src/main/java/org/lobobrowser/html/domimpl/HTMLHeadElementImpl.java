@@ -46,7 +46,7 @@ public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHe
 	 */
 	@Override
 	public String getProfile() {
-		return this.getAttribute(HtmlAttributeProperties.PROFILE);
+		return this.getAttribute(PROFILE);
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHe
 	 */
 	@Override
 	public void setProfile(String profile) {
-		this.setAttribute(HtmlAttributeProperties.PROFILE, profile);
+		this.setAttribute(PROFILE, profile);
 
 	}
 }

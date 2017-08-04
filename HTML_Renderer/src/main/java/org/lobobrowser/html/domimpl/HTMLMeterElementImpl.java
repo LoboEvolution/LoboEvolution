@@ -48,7 +48,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getValue() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
+		String valueText = this.getAttribute(VALUE);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -59,7 +59,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public void setValue(double value) {
-		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
+		this.setAttribute(VALUE, String.valueOf(value));
 
 	}
 
@@ -70,7 +70,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getMin() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.MIN);
+		String valueText = this.getAttribute(MIN);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -81,7 +81,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public void setMin(double min) {
-		this.setAttribute(HtmlAttributeProperties.MIN, String.valueOf(min));
+		this.setAttribute(MIN, String.valueOf(min));
 
 	}
 
@@ -92,7 +92,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getMax() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.MAX);
+		String valueText = this.getAttribute(MAX);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -103,7 +103,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public void setMax(double max) {
-		this.setAttribute(HtmlAttributeProperties.MAX, String.valueOf(max));
+		this.setAttribute(MAX, String.valueOf(max));
 
 	}
 
@@ -114,7 +114,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getLow() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.LOW);
+		String valueText = this.getAttribute(LOW);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -125,7 +125,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public void setLow(double low) {
-		this.setAttribute(HtmlAttributeProperties.LOW, String.valueOf(low));
+		this.setAttribute(LOW, String.valueOf(low));
 
 	}
 
@@ -136,7 +136,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getHigh() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		String valueText = this.getAttribute(HEIGHT);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -147,7 +147,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public void setHigh(double high) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(high));
+		this.setAttribute(HEIGHT, String.valueOf(high));
 
 	}
 
@@ -158,7 +158,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public double getOptimum() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.OPTINUM);
+		String valueText = this.getAttribute(OPTINUM);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -169,7 +169,7 @@ public class HTMLMeterElementImpl extends HTMLElementImpl implements HTMLMeterEl
 	 */
 	@Override
 	public void setOptimum(double optimum) {
-		this.setAttribute(HtmlAttributeProperties.OPTINUM, String.valueOf(optimum));
+		this.setAttribute(OPTINUM, String.valueOf(optimum));
 
 	}
 

@@ -74,58 +74,58 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	@Override
 	public String getHref() {
-		String href = this.getAttribute(HtmlAttributeProperties.HREF);
+		String href = this.getAttribute(HREF);
 		return href == null ? "" : Urls.removeControlCharacters(href);
 	}
 
 	@Override
 	public void setHref(String href) {
-		this.setAttribute(HtmlAttributeProperties.HREF, href);
+		this.setAttribute(HREF, href);
 	}
 
 	@Override
 	public String getHreflang() {
-		return this.getAttribute(HtmlAttributeProperties.HREFLANG);
+		return this.getAttribute(HREFLANG);
 	}
 
 	@Override
 	public void setHreflang(String hreflang) {
-		this.setAttribute(HtmlAttributeProperties.HREFLANG, hreflang);
+		this.setAttribute(HREFLANG, hreflang);
 	}
 
 	@Override
 	public String getMedia() {
-		return this.getAttribute(HtmlAttributeProperties.MEDIA);
+		return this.getAttribute(MEDIA);
 	}
 
 	@Override
 	public void setMedia(String media) {
-		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
+		this.setAttribute(MEDIA, media);
 	}
 
 	@Override
 	public String getRel() {
-		return this.getAttribute(HtmlAttributeProperties.REL);
+		return this.getAttribute(REL);
 	}
 
 	@Override
 	public void setRel(String rel) {
-		this.setAttribute(HtmlAttributeProperties.REL, rel);
+		this.setAttribute(REL, rel);
 	}
 
 	@Override
 	public String getRev() {
-		return this.getAttribute(HtmlAttributeProperties.REV);
+		return this.getAttribute(REV);
 	}
 
 	@Override
 	public void setRev(String rev) {
-		this.setAttribute(HtmlAttributeProperties.REV, rev);
+		this.setAttribute(REV, rev);
 	}
 
 	@Override
 	public String getTarget() {
-		String target = this.getAttribute(HtmlAttributeProperties.TARGET);
+		String target = this.getAttribute(TARGET);
 		if (target != null) {
 			return target;
 		}
@@ -135,17 +135,17 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	@Override
 	public void setTarget(String target) {
-		this.setAttribute(HtmlAttributeProperties.TARGET, target);
+		this.setAttribute(TARGET, target);
 	}
 
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	@Override
@@ -164,7 +164,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	 */
 	protected void processLink() {
 		this.styleSheet = null;
-		String rel = this.getAttribute(HtmlAttributeProperties.REL);
+		String rel = this.getAttribute(REL);
 		if (rel != null) {
 			String cleanRel = rel.trim().toLowerCase();
 			boolean isStyleSheet = cleanRel.equals("stylesheet");
@@ -260,7 +260,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	@Override
 	public void setSizes(String sizes) {
-		this.setAttribute(HtmlAttributeProperties.SIZES, sizes);
+		this.setAttribute(SIZES, sizes);
 
 	}
 

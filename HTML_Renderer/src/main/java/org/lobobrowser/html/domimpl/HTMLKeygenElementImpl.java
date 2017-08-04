@@ -49,8 +49,8 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public boolean getAutofocus() {
-		String auto = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
-		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(auto);
+		String auto = this.getAttribute(AUTOFOCUS);
+		return AUTOFOCUS.equalsIgnoreCase(auto);
 	}
 
 	/*
@@ -60,7 +60,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
+		this.setAttribute(AUTOFOCUS, autofocus ? AUTOFOCUS : null);
 	}
 
 	/*
@@ -70,7 +70,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public String getChallenge() {
-		return this.getAttribute(HtmlAttributeProperties.CHALLENGE);
+		return this.getAttribute(CHALLENGE);
 	}
 
 	/*
@@ -81,7 +81,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public void setChallenge(String challenge) {
-		this.setAttribute(HtmlAttributeProperties.CHALLENGE, challenge);
+		this.setAttribute(CHALLENGE, challenge);
 
 	}
 
@@ -92,7 +92,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public void setDisabled(boolean disabled) {
-		this.setAttribute(HtmlAttributeProperties.DISABLE, disabled ? HtmlAttributeProperties.DISABLE : null);
+		this.setAttribute(DISABLE, disabled ? DISABLE : null);
 	}
 
 	/*
@@ -116,7 +116,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public String getKeytype() {
-		return this.getAttribute(HtmlAttributeProperties.KEYTYPE);
+		return this.getAttribute(KEYTYPE);
 	}
 
 	/*
@@ -127,7 +127,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public void setKeytype(String keytype) {
-		this.setAttribute(HtmlAttributeProperties.KEYTYPE, keytype);
+		this.setAttribute(KEYTYPE, keytype);
 
 	}
 
@@ -138,7 +138,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/*
@@ -148,7 +148,7 @@ public class HTMLKeygenElementImpl extends HTMLElementImpl implements HTMLKeygen
 	 */
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 
 	}
 

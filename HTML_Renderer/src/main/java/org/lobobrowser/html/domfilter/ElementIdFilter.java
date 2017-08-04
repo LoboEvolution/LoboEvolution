@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
 /**
  * The Class ElementIdFilter.
  */
-public class ElementIdFilter implements NodeFilter {
+public class ElementIdFilter implements NodeFilter, HtmlAttributeProperties {
 
 	/** The id. */
 	private final String id;
@@ -49,6 +49,6 @@ public class ElementIdFilter implements NodeFilter {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		return node instanceof Element && this.id.equals(((Element) node).getAttribute(HtmlAttributeProperties.ID));
+		return node instanceof Element && this.id.equals(((Element) node).getAttribute(ID));
 	}
 }

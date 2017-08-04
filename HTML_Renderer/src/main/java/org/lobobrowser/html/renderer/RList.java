@@ -32,7 +32,7 @@ import org.lobobrowser.http.UserAgentContext;
 /**
  * The Class RList.
  */
-public class RList extends BaseRListElement {
+public class RList extends BaseRListElement implements HtmlAttributeProperties {
 
 	/**
 	 * Instantiates a new r list.
@@ -108,7 +108,7 @@ public class RList extends BaseRListElement {
 			return;
 		}
 		HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-		String startText = rootElement.getAttribute(HtmlAttributeProperties.START);
+		String startText = rootElement.getAttribute(START);
 		if (startText != null) {
 			counterStart = HtmlValues.getPixelSize(startText, null, 0);
 		}

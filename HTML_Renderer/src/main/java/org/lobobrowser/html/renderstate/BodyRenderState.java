@@ -71,7 +71,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		}
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.getBackgroundColor() == null) {
-			String bgcolor = this.element.getAttribute(HtmlAttributeProperties.BGCOLOR);
+			String bgcolor = this.element.getAttribute(BGCOLOR);
 			if (bgcolor != null && bgcolor.length() > 0) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
@@ -122,12 +122,12 @@ public class BodyRenderState extends StyleSheetRenderState {
 		insets = super.getMarginInsets();
 		if (insets == null) {
 			HTMLElementImpl element = this.element;
-			String leftMargin = element.getAttribute(HtmlAttributeProperties.LEFTMARGIN);
-			String rightMargin = element.getAttribute(HtmlAttributeProperties.RIGHTMARGIN);
-			String bottomMargin = element.getAttribute(HtmlAttributeProperties.TOPMARGIN);
-			String topMargin = element.getAttribute(HtmlAttributeProperties.TOPMARGIN);
-			String marginWidth = element.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
-			String marginHeight = element.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
+			String leftMargin = element.getAttribute(LEFTMARGIN);
+			String rightMargin = element.getAttribute(RIGHTMARGIN);
+			String bottomMargin = element.getAttribute(TOPMARGIN);
+			String topMargin = element.getAttribute(TOPMARGIN);
+			String marginWidth = element.getAttribute(MARGINWIDTH);
+			String marginHeight = element.getAttribute(MARGINHEIGHT);
 			if (leftMargin == null) {
 				leftMargin = marginWidth;
 			}

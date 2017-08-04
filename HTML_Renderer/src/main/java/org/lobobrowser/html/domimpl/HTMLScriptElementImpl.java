@@ -117,7 +117,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public String getHtmlFor() {
-		return this.getAttribute(HtmlAttributeProperties.HTMLFOR);
+		return this.getAttribute(HTMLFOR);
 	}
 
 	/*
@@ -128,7 +128,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public void setHtmlFor(String htmlFor) {
-		this.setAttribute(HtmlAttributeProperties.HTMLFOR, htmlFor);
+		this.setAttribute(HTMLFOR, htmlFor);
 	}
 
 	/*
@@ -138,7 +138,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public String getEvent() {
-		return this.getAttribute(HtmlAttributeProperties.EVENT);
+		return this.getAttribute(EVENT);
 	}
 
 	/*
@@ -149,7 +149,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public void setEvent(String event) {
-		this.setAttribute(HtmlAttributeProperties.EVENT, event);
+		this.setAttribute(EVENT, event);
 	}
 	
 	/*
@@ -179,7 +179,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/*
@@ -189,7 +189,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 	}
 
 	/*
@@ -199,7 +199,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -209,7 +209,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	/*

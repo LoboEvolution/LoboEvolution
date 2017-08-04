@@ -23,6 +23,7 @@ package org.lobobrowser.html.domimpl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlJsAttributeProperties;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
@@ -37,7 +38,7 @@ import org.w3c.dom.Document;
 /**
  * The Class HTMLAbstractUIElement.
  */
-public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttributeProperties {
+public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttributeProperties, HtmlAttributeProperties {
 
 	/** The onfocus. */
 	private Function onfocus;
@@ -1198,7 +1199,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 	 */
 	@Override
 	public Function getOnload() {
-		return this.getEventFunction(onload, ONLOAD);
+		return this.getEventFunction(onload, HtmlAttributeProperties.ONLOAD);
 	}
 
 	/**

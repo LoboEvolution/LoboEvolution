@@ -61,7 +61,7 @@ public class HTMLFrameSetElementImpl extends HTMLElementImpl implements HTMLFram
 	 */
 	@Override
 	public String getCols() {
-		return this.getAttribute(HtmlAttributeProperties.COLS);
+		return this.getAttribute(COLS);
 	}
 
 	/*
@@ -72,7 +72,7 @@ public class HTMLFrameSetElementImpl extends HTMLElementImpl implements HTMLFram
 	 */
 	@Override
 	public void setCols(String cols) {
-		this.setAttribute(HtmlAttributeProperties.COLS, cols);
+		this.setAttribute(COLS, cols);
 	}
 
 	/*
@@ -82,7 +82,7 @@ public class HTMLFrameSetElementImpl extends HTMLElementImpl implements HTMLFram
 	 */
 	@Override
 	public String getRows() {
-		return this.getAttribute(HtmlAttributeProperties.ROWS);
+		return this.getAttribute(ROWS);
 	}
 
 	/*
@@ -93,7 +93,7 @@ public class HTMLFrameSetElementImpl extends HTMLElementImpl implements HTMLFram
 	 */
 	@Override
 	public void setRows(String rows) {
-		this.setAttribute(HtmlAttributeProperties.ROWS, rows);
+		this.setAttribute(ROWS, rows);
 	}
 
 	@Override

@@ -55,7 +55,7 @@ import org.lobobrowser.w3c.html.HTMLTableRowElement;
 /**
  * The Class TableMatrix.
  */
-public class TableMatrix implements CSSValuesProperties {
+public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties {
 
 	/** The rows. */
 	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
@@ -236,9 +236,9 @@ public class TableMatrix implements CSSValuesProperties {
 		ROWS.clear();
 		ALL_CELLS.clear();
 		ROW_ELEMENTS.clear();
-		String borderText = this.tableElement.getAttribute(HtmlAttributeProperties.BORDER);
+		String borderText = this.tableElement.getAttribute(BORDER);
 		int border = HtmlValues.getPixelSize(borderText, this.tableElement.getRenderState(), 0);
-		String cellSpacingText = this.tableElement.getAttribute(HtmlAttributeProperties.CELLSPACING);
+		String cellSpacingText = this.tableElement.getAttribute(CELLSPACING);
 		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, this.tableElement.getRenderState(), 0);
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
@@ -318,7 +318,7 @@ public class TableMatrix implements CSSValuesProperties {
 			AbstractCSS2Properties props = element.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
-				String widthAttr = element.getAttribute(HtmlAttributeProperties.WIDTH);
+				String widthAttr = element.getAttribute(WIDTH);
 				if (widthAttr == null) {
 					return null;
 				}
@@ -374,7 +374,7 @@ public class TableMatrix implements CSSValuesProperties {
 			AbstractCSS2Properties props = element.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
-				String ha = element.getAttribute(HtmlAttributeProperties.HEIGHT);
+				String ha = element.getAttribute(HEIGHT);
 				if (ha == null) {
 					return null;
 				} else {
@@ -587,7 +587,7 @@ public class TableMatrix implements CSSValuesProperties {
 				rowElement = null;
 			}
 			// TODO: TR.height an IE quirk?
-			String rowHeightText = rowElement == null ? null : rowElement.getAttribute(HtmlAttributeProperties.HEIGHT);
+			String rowHeightText = rowElement == null ? null : rowElement.getAttribute(HEIGHT);
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
 				try {

@@ -21,7 +21,6 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedEnumeration;
 import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGClipPathElement;
@@ -34,7 +33,7 @@ public class SVGClipPathElementImpl extends SVGSVGElementImpl implements SVGClip
 
 	@Override
 	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
+		return new SVGAnimatedTransformListImpl(this.getAttribute(TRANSFORM));
 	}
 
 	@Override
@@ -42,41 +41,4 @@ public class SVGClipPathElementImpl extends SVGSVGElementImpl implements SVGClip
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public AbstractCSS2Properties getSVGStyle() {
-
-		AbstractCSS2Properties style = this.getStyle();
-
-		if (style.getStroke() == null) {
-			style.setStroke(this.getStroke());
-		}
-
-		if (style.getStrokeDashArray() == null) {
-			style.setStrokeDashArray(this.getStrokeDashArray());
-		}
-
-		if (style.getStrokeLineCap() == null) {
-			style.setStrokeLineCap(this.getStrokeLineCap());
-		}
-
-		if (style.getStrokeMiterLimit() == null) {
-			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-		}
-
-		if (style.getStrokeOpacity() == null) {
-			style.setStrokeOpacity(this.getStrokeOpacity());
-		}
-
-		if (style.getStrokeWidth() == null) {
-			style.setStrokeWidth(this.getStrokeWidth());
-		}
-
-		if (style.getFill() == null) {
-			style.setFill(this.getFill());
-		}
-
-		return style;
-	}
-
 }

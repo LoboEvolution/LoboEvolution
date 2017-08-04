@@ -66,9 +66,9 @@ public class ImageRenderState extends StyleSheetRenderState {
 		}
 		if (mi == null) {
 			boolean createNew = false;
-			String hspaceText = this.element.getAttribute(HtmlAttributeProperties.HSPACE);
+			String hspaceText = this.element.getAttribute(HSPACE);
 			int hspace = HtmlValues.getPixelSize(hspaceText, this, 0);
-			String vspaceText = this.element.getAttribute(HtmlAttributeProperties.VSPACE);
+			String vspaceText = this.element.getAttribute(VSPACE);
 			int vspace = HtmlValues.getPixelSize(vspaceText, this, 0);
 
 			if (createNew) {
@@ -109,7 +109,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 			}
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute(HtmlAttributeProperties.BORDER);
+				String border = element.getAttribute(BORDER);
 
 				if (border != null) {
 					int valueType;

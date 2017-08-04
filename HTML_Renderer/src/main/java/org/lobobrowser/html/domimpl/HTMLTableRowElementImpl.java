@@ -119,7 +119,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -130,7 +130,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public String getBgColor() {
-		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
+		return this.getAttribute(BGCOLOR);
 	}
 
 	/*
@@ -151,7 +151,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public void setBgColor(String bgColor) {
-		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
+		this.setAttribute(BGCOLOR, bgColor);
 	}
 
 	/*
@@ -161,7 +161,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public String getCh() {
-		return this.getAttribute(HtmlAttributeProperties.CH);
+		return this.getAttribute(CH);
 	}
 
 	/*
@@ -171,7 +171,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public void setCh(String ch) {
-		this.setAttribute(HtmlAttributeProperties.CH, ch);
+		this.setAttribute(CH, ch);
 	}
 
 	/*
@@ -181,7 +181,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public String getChOff() {
-		return this.getAttribute(HtmlAttributeProperties.CHOFF);
+		return this.getAttribute(CHOFF);
 	}
 
 	/*
@@ -192,7 +192,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public void setChOff(String chOff) {
-		this.setAttribute(HtmlAttributeProperties.CHOFF, chOff);
+		this.setAttribute(CHOFF, chOff);
 	}
 
 	/*
@@ -202,7 +202,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public String getVAlign() {
-		return this.getAttribute(HtmlAttributeProperties.VALIGN);
+		return this.getAttribute(VALIGN);
 	}
 
 	/*
@@ -213,7 +213,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public void setVAlign(String vAlign) {
-		this.setAttribute(HtmlAttributeProperties.VALIGN, vAlign);
+		this.setAttribute(VALIGN, vAlign);
 	}
 
 	/**

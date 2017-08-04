@@ -137,7 +137,7 @@ public class TableRenderState extends StyleSheetRenderState {
 			}
 			HTMLElementImpl element = this.element;
 			if (element != null) {
-				String border = element.getAttribute(HtmlAttributeProperties.BORDER);
+				String border = element.getAttribute(BORDER);
 				if (border != null) {
 					border = border.trim();
 					int value = HtmlValues.getPixelSize(border, this, 0);

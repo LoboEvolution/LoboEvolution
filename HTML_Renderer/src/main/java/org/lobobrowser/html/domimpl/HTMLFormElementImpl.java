@@ -81,7 +81,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 			// TODO: This could use document.namedItem.
 			this.visit(node -> {
 				if (HTMLFormElementImpl.isInput(node)
-						&& name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME))) {
+						&& name.equals(((Element) node).getAttribute(NAME))) {
 					throw new StopVisitorException(node);
 				}				
 			});
@@ -150,7 +150,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/*
@@ -160,7 +160,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 
 	/*
@@ -170,7 +170,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getAcceptCharset() {
-		return this.getAttribute(HtmlAttributeProperties.ACCEPTCHARSET);
+		return this.getAttribute(ACCEPTCHARSET);
 	}
 
 	/*
@@ -181,7 +181,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setAcceptCharset(String acceptCharset) {
-		this.setAttribute(HtmlAttributeProperties.ACCEPTCHARSET, acceptCharset);
+		this.setAttribute(ACCEPTCHARSET, acceptCharset);
 	}
 
 	/*
@@ -191,7 +191,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getAction() {
-		return this.getAttribute(HtmlAttributeProperties.ACTION);
+		return this.getAttribute(ACTION);
 	}
 
 	/*
@@ -201,7 +201,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setAction(String action) {
-		this.setAttribute(HtmlAttributeProperties.ACTION, action);
+		this.setAttribute(ACTION, action);
 	}
 
 	/*
@@ -211,7 +211,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getEnctype() {
-		return this.getAttribute(HtmlAttributeProperties.ENCTYPE);
+		return this.getAttribute(ENCTYPE);
 	}
 
 	/*
@@ -222,7 +222,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setEnctype(String enctype) {
-		this.setAttribute(HtmlAttributeProperties.ENCTYPE, enctype);
+		this.setAttribute(ENCTYPE, enctype);
 	}
 
 	/*
@@ -232,7 +232,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getMethod() {
-		String method = this.getAttribute(HtmlAttributeProperties.METHOD);
+		String method = this.getAttribute(METHOD);
 		if (method == null) {
 			method = "GET";
 		}
@@ -246,7 +246,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setMethod(String method) {
-		this.setAttribute(HtmlAttributeProperties.METHOD, method);
+		this.setAttribute(METHOD, method);
 	}
 
 	/*
@@ -256,7 +256,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getTarget() {
-		return this.getAttribute(HtmlAttributeProperties.TARGET);
+		return this.getAttribute(TARGET);
 	}
 
 	/*
@@ -266,7 +266,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setTarget(String target) {
-		this.setAttribute(HtmlAttributeProperties.TARGET, target);
+		this.setAttribute(TARGET, target);
 	}
 
 	/*
@@ -382,8 +382,8 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public boolean getAutocomplete() {
-		String autocomplete = this.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
-		return HtmlAttributeProperties.AUTOCOMPLETE.equalsIgnoreCase(autocomplete);
+		String autocomplete = this.getAttribute(AUTOCOMPLETE);
+		return AUTOCOMPLETE.equalsIgnoreCase(autocomplete);
 	}
 
 	/*
@@ -393,8 +393,8 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
-		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE,
-				autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
+		this.setAttribute(AUTOCOMPLETE,
+				autocomplete ? AUTOCOMPLETE : null);
 
 	}
 
@@ -405,8 +405,8 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public boolean getNoValidate() {
-		String noValidate = this.getAttribute(HtmlAttributeProperties.NOVALIDATE);
-		return HtmlAttributeProperties.NOVALIDATE.equalsIgnoreCase(noValidate);
+		String noValidate = this.getAttribute(NOVALIDATE);
+		return NOVALIDATE.equalsIgnoreCase(noValidate);
 	}
 
 	/*
@@ -416,7 +416,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setNoValidate(boolean noValidate) {
-		this.setAttribute(HtmlAttributeProperties.NOVALIDATE, noValidate ? HtmlAttributeProperties.NOVALIDATE : null);
+		this.setAttribute(NOVALIDATE, noValidate ? NOVALIDATE : null);
 
 	}
 

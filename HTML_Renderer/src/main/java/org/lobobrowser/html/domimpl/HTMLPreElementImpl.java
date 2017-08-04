@@ -51,7 +51,7 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPre
 	 */
 	@Override
 	public int getWidth() {
-		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
+		String widthText = this.getAttribute(WIDTH);
 		return HtmlValues.getPixelSize(widthText, null, 1);
 	}
 
@@ -62,7 +62,7 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPre
 	 */
 	@Override
 	public void setWidth(int width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
+		this.setAttribute(WIDTH, String.valueOf(width));
 	}
 
 	/*

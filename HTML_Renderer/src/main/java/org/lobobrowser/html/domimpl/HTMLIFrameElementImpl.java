@@ -61,7 +61,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	public void setBrowserFrame(BrowserFrame frame) {
 		this.browserFrame = frame;
 		if (frame != null) {
-			String src = this.getAttribute(HtmlAttributeProperties.SRC);
+			String src = this.getAttribute(SRC);
 			if (src != null) {
 				try {
 					frame.loadURL(this.getFullURL(src));
@@ -89,7 +89,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -130,7 +130,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getFrameBorder() {
-		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+		return this.getAttribute(FRAMEBORDER);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getHeight() {
-		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		return this.getAttribute(HEIGHT);
 	}
 
 	/*
@@ -150,7 +150,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getLongDesc() {
-		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
+		return this.getAttribute(LONGDESC);
 	}
 
 	/*
@@ -160,7 +160,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getMarginHeight() {
-		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+		return this.getAttribute(FRAMEBORDER);
 	}
 
 	/*
@@ -170,7 +170,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getMarginWidth() {
-		return this.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
+		return this.getAttribute(MARGINWIDTH);
 	}
 
 	/*
@@ -180,7 +180,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/*
@@ -190,7 +190,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getScrolling() {
-		return this.getAttribute(HtmlAttributeProperties.SCROLLING);
+		return this.getAttribute(SCROLLING);
 	}
 
 	/*
@@ -200,7 +200,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/*
@@ -210,7 +210,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getWidth() {
-		return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return this.getAttribute(WIDTH);
 	}
 
 	/*
@@ -221,7 +221,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*
@@ -232,7 +232,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setFrameBorder(String frameBorder) {
-		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, frameBorder);
+		this.setAttribute(FRAMEBORDER, frameBorder);
 	}
 
 	/*
@@ -243,7 +243,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setHeight(String height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
+		this.setAttribute(HEIGHT, height);
 	}
 
 	/*
@@ -254,7 +254,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setLongDesc(String longDesc) {
-		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
+		this.setAttribute(LONGDESC, longDesc);
 	}
 
 	/*
@@ -266,7 +266,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setMarginHeight(String marginHeight) {
-		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, marginHeight);
+		this.setAttribute(FRAMEBORDER, marginHeight);
 	}
 
 	/*
@@ -277,7 +277,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setMarginWidth(String marginWidth) {
-		this.setAttribute(HtmlAttributeProperties.MARGINWIDTH, marginWidth);
+		this.setAttribute(MARGINWIDTH, marginWidth);
 	}
 
 	/*
@@ -287,7 +287,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 
 	/*
@@ -298,7 +298,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setScrolling(String scrolling) {
-		this.setAttribute(HtmlAttributeProperties.SCROLLING, scrolling);
+		this.setAttribute(SCROLLING, scrolling);
 	}
 
 	/*
@@ -308,7 +308,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 	}
 
 	/*
@@ -319,7 +319,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+		this.setAttribute(WIDTH, width);
 	}
 
 	/*
@@ -331,7 +331,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	protected void assignAttributeField(String normalName, String value) {
-		if (HtmlAttributeProperties.SRC.equals(normalName)) {
+		if (SRC.equals(normalName)) {
 			BrowserFrame frame = this.browserFrame;
 			if (frame != null) {
 				try {

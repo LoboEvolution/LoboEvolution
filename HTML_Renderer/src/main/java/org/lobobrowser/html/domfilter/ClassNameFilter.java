@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
 /**
  * The Class ClassNameFilter.
  */
-public class ClassNameFilter implements NodeFilter {
+public class ClassNameFilter implements NodeFilter, HtmlAttributeProperties {
 
 	/** The _class. */
 	private final String _class;
@@ -50,6 +50,6 @@ public class ClassNameFilter implements NodeFilter {
 	@Override
 	public boolean accept(Node node) {
 		return node instanceof Element
-				&& this._class.equals(((Element) node).getAttribute(HtmlAttributeProperties.CLASS));
+				&& this._class.equals(((Element) node).getAttribute(CLASS));
 	}
 }

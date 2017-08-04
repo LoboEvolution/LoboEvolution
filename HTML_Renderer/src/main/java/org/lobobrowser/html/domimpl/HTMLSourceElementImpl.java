@@ -45,7 +45,7 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSource
 	 */
 	@Override
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/*
@@ -55,7 +55,7 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSource
 	 */
 	@Override
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 
 	}
 
@@ -66,7 +66,7 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSource
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -76,7 +76,7 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSource
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 
 	}
 
@@ -87,7 +87,7 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSource
 	 */
 	@Override
 	public String getMedia() {
-		return this.getAttribute(HtmlAttributeProperties.MEDIA);
+		return this.getAttribute(MEDIA);
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class HTMLSourceElementImpl extends HTMLElementImpl implements HTMLSource
 	 */
 	@Override
 	public void setMedia(String media) {
-		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
+		this.setAttribute(MEDIA, media);
 
 	}
 

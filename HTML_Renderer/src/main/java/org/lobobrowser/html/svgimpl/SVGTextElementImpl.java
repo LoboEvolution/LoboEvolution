@@ -1,12 +1,10 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedEnumeration;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
 import org.lobobrowser.w3c.svg.SVGAnimatedLengthList;
 import org.lobobrowser.w3c.svg.SVGAnimatedNumberList;
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGPoint;
 import org.lobobrowser.w3c.svg.SVGRect;
 import org.lobobrowser.w3c.svg.SVGTextElement;
@@ -21,13 +19,13 @@ public class SVGTextElementImpl extends SVGSVGElementImpl implements SVGTextElem
 	@Override
 	public SVGAnimatedLengthList getDx() {
 		return new SVGAnimatedLengthListImpl(
-				SVGUtility.constructLengthList(this.getAttribute(HtmlAttributeProperties.DX)));
+				SVGUtility.constructLengthList(this.getAttribute(DX)));
 	}
 
 	@Override
 	public SVGAnimatedLengthList getDy() {
 		return new SVGAnimatedLengthListImpl(
-				SVGUtility.constructLengthList(this.getAttribute(HtmlAttributeProperties.DY)));
+				SVGUtility.constructLengthList(this.getAttribute(DY)));
 	}
 
 	@Override
@@ -102,48 +100,7 @@ public class SVGTextElementImpl extends SVGSVGElementImpl implements SVGTextElem
 
 	}
 
-	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
-	}
-
 	public String getTextAnchor() {
-		return this.getAttribute(HtmlAttributeProperties.TEXTANCHOR);
-	}
-
-	@Override
-	public AbstractCSS2Properties getSVGStyle() {
-
-		AbstractCSS2Properties style = this.getStyle();
-
-		if (style.getStroke() == null) {
-			style.setStroke(this.getStroke());
-		}
-
-		if (style.getStrokeDashArray() == null) {
-			style.setStrokeDashArray(this.getStrokeDashArray());
-		}
-
-		if (style.getStrokeLineCap() == null) {
-			style.setStrokeLineCap(this.getStrokeLineCap());
-		}
-
-		if (style.getStrokeMiterLimit() == null) {
-			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-		}
-
-		if (style.getStrokeOpacity() == null) {
-			style.setStrokeOpacity(this.getStrokeOpacity());
-		}
-
-		if (style.getStrokeWidth() == null) {
-			style.setStrokeWidth(this.getStrokeWidth());
-		}
-
-		if (style.getFill() == null) {
-			style.setFill(this.getFill());
-		}
-
-		return style;
+		return this.getAttribute(TEXTANCHOR);
 	}
 }

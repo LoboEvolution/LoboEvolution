@@ -67,8 +67,8 @@ public class InputPasswordControl extends BaseInputTextControl {
 		pwd.applyComponentOrientation(direction(modelNode.getDir()));
 		pwd.setEditable(new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		pwd.setEnabled(!modelNode.getDisabled());
-		strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
-		if (!match(modelNode.getAttribute(HtmlAttributeProperties.VALUE), strPattern)) {
+		strPattern = modelNode.getAttribute(PATTERN);
+		if (!match(modelNode.getAttribute(VALUE), strPattern)) {
 			pwd.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
 			pwd.setBorder(BorderFactory.createLineBorder(Color.BLACK));

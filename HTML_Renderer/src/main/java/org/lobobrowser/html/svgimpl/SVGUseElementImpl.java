@@ -35,16 +35,16 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 
 	@Override
 	public SVGAnimatedString getHref() {
-		String href = this.getAttribute(HtmlAttributeProperties.XLINK_HREF);
+		String href = this.getAttribute(XLINK_HREF);
 		if (href == null) {
-			href = this.getAttribute(HtmlAttributeProperties.HREF);
+			href = this.getAttribute(HREF);
 		}
 		return new SVGAnimatedStringImpl(href);
 	}
 
 	@Override
 	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
+		return new SVGAnimatedTransformListImpl(this.getAttribute(TRANSFORM));
 	}
 
 	@Override

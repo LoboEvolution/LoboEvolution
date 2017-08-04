@@ -56,7 +56,7 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	 */
 	@Override
 	public String getVersion() {
-		return this.getAttribute(HtmlAttributeProperties.VERSION);
+		return this.getAttribute(VERSION);
 	}
 
 	/*
@@ -67,6 +67,6 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	 */
 	@Override
 	public void setVersion(String version) {
-		this.setAttribute(HtmlAttributeProperties.VERSION, version);
+		this.setAttribute(VERSION, version);
 	}
 }

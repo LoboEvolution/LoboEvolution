@@ -56,7 +56,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	public BaseInputControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setOpaque(false);
-		String sizeText = this.controlElement.getAttribute(HtmlAttributeProperties.SIZE);
+		String sizeText = this.controlElement.getAttribute(SIZE);
 		if (sizeText != null) {
 			setControlSize(new HtmlLength(sizeText).getLength(0));
 		}
@@ -65,7 +65,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
-		String sizeText = this.controlElement.getAttribute(HtmlAttributeProperties.SIZE);
+		String sizeText = this.controlElement.getAttribute(SIZE);
 		if (sizeText != null) {
 			try {
 				this.size = Integer.parseInt(sizeText);

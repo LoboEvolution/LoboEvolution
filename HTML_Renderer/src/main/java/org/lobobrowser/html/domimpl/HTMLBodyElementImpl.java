@@ -80,7 +80,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public String getALink() {
-		return this.getAttribute(HtmlAttributeProperties.ALINK);
+		return this.getAttribute(ALINK);
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public void setALink(String aLink) {
-		this.setAttribute(HtmlAttributeProperties.ALINK, aLink);
+		this.setAttribute(ALINK, aLink);
 	}
 
 	/*
@@ -100,7 +100,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public String getBackground() {
-		return this.getAttribute(HtmlAttributeProperties.BACKGROUND);
+		return this.getAttribute(BACKGROUND);
 	}
 
 	/*
@@ -111,7 +111,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public void setBackground(String background) {
-		this.setAttribute(HtmlAttributeProperties.BACKGROUND, background);
+		this.setAttribute(BACKGROUND, background);
 	}
 
 	/*
@@ -121,7 +121,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public String getBgColor() {
-		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
+		return this.getAttribute(BGCOLOR);
 	}
 
 	/*
@@ -132,7 +132,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public void setBgColor(String bgColor) {
-		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
+		this.setAttribute(BGCOLOR, bgColor);
 	}
 
 	/*
@@ -142,7 +142,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public String getLink() {
-		return this.getAttribute(HtmlAttributeProperties.LINK);
+		return this.getAttribute(LINK);
 	}
 
 	/*
@@ -152,7 +152,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public void setLink(String link) {
-		this.setAttribute(HtmlAttributeProperties.LINK, link);
+		this.setAttribute(LINK, link);
 	}
 
 	/*
@@ -162,7 +162,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public String getText() {
-		return this.getAttribute(HtmlAttributeProperties.TEXT);
+		return this.getAttribute(TEXT);
 	}
 
 	/*
@@ -172,7 +172,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public void setText(String text) {
-		this.setAttribute(HtmlAttributeProperties.TEXT, text);
+		this.setAttribute(TEXT, text);
 	}
 
 	/*
@@ -182,7 +182,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public String getVLink() {
-		return this.getAttribute(HtmlAttributeProperties.VLINK);
+		return this.getAttribute(VLINK);
 	}
 
 	/*
@@ -192,7 +192,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	public void setVLink(String vLink) {
-		this.setAttribute(HtmlAttributeProperties.VLINK, vLink);
+		this.setAttribute(VLINK, vLink);
 	}
 
 	/*

@@ -48,7 +48,7 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.TEXTALIGN);
+		return this.getAttribute(TEXTALIGN);
 	}
 
 	/*
@@ -59,7 +59,7 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.TEXTALIGN, align);
+		this.setAttribute(TEXTALIGN, align);
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 	 * @return the caption side
 	 */
 	public String getCaptionSide() {
-		return this.getAttribute(HtmlAttributeProperties.CAPTIONSIDE);
+		return this.getAttribute(CAPTIONSIDE);
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 	 *            the new caption side
 	 */
 	public void setCaptionSide(String captionSide) {
-		this.setAttribute(HtmlAttributeProperties.CAPTIONSIDE, captionSide);
+		this.setAttribute(CAPTIONSIDE, captionSide);
 	}
 
 	/*

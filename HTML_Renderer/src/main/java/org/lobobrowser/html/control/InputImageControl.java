@@ -162,7 +162,7 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 		this.declaredHeight = dh;
 		this.preferredSize = this.createPreferredSize(dw, dh);
 		int valign;
-		String alignText = element.getAttribute(HtmlAttributeProperties.ALIGN);
+		String alignText = element.getAttribute(ALIGN);
 		if (alignText == null) {
 			valign = RElement.VALIGN_BASELINE;
 		} else {

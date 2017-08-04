@@ -28,7 +28,7 @@ import org.lobobrowser.html.renderer.RBlockViewport;
 /**
  * The Class BrLayout.
  */
-public class BrLayout implements MarkupLayout {
+public class BrLayout implements MarkupLayout , HtmlAttributeProperties{
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -38,7 +38,7 @@ public class BrLayout implements MarkupLayout {
 	 */
 	@Override
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-		String clear = markupElement.getAttribute(HtmlAttributeProperties.CLEAR);
+		String clear = markupElement.getAttribute(CLEAR);
 		bodyLayout.addLineBreak(markupElement, LineBreak.getBreakType(clear));
 	}
 }

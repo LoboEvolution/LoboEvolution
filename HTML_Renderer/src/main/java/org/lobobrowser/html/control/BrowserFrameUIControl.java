@@ -40,7 +40,7 @@ import org.lobobrowser.w3c.html.HTMLElement;
 /**
  * The Class BrowserFrameUIControl.
  */
-public class BrowserFrameUIControl implements UIControl {
+public class BrowserFrameUIControl implements UIControl, HtmlAttributeProperties {
 	
 	/** The component. */
 	private final Component component;
@@ -128,8 +128,8 @@ public class BrowserFrameUIControl implements UIControl {
 			HTMLElement element = (HTMLElement) node;
 			RenderState renderState = node.getRenderState();
 			HtmlInsets insets = null;
-			String marginwidth = element.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
-			String marginheight = element.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
+			String marginwidth = element.getAttribute(MARGINWIDTH);
+			String marginheight = element.getAttribute(MARGINHEIGHT);
 			if (marginwidth != null && marginwidth.length() != 0) {
 				if (insets == null) {
 					insets = new HtmlInsets();
@@ -211,8 +211,8 @@ public class BrowserFrameUIControl implements UIControl {
 	@Override
 	public Dimension getPreferredSize() {
 
-		String w = element.getAttribute(HtmlAttributeProperties.WIDTH);
-		String h = element.getAttribute(HtmlAttributeProperties.HEIGHT);
+		String w = element.getAttribute(WIDTH);
+		String h = element.getAttribute(HEIGHT);
 		int width = HtmlValues.getPixelSize(w, null, 100, this.availWidth);
 		int height = HtmlValues.getPixelSize(h, null, 100, this.availHeight);
 		return new Dimension(width, height);

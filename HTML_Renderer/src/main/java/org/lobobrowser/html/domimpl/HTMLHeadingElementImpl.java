@@ -53,7 +53,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -64,7 +64,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*

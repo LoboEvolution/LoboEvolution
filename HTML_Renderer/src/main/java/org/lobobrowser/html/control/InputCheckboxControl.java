@@ -138,7 +138,7 @@ public class InputCheckboxControl extends BaseInputControl {
 	 */
 	@Override
 	public String getValue() {
-		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
+		return this.controlElement.getAttribute(VALUE);
 	}
 
 	/**

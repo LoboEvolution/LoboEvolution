@@ -70,7 +70,7 @@ public class InputRadioControl extends BaseInputControl {
 		// be lost (including revalidation due to hover.)
 
 		HTMLElementImpl controlElement = this.controlElement;
-		String name = controlElement.getAttribute(HtmlAttributeProperties.NAME);
+		String name = controlElement.getAttribute(NAME);
 		ButtonGroup prevGroup = this.buttonGroup;
 		if (prevGroup != null) {
 			prevGroup.remove(radio);
@@ -165,7 +165,7 @@ public class InputRadioControl extends BaseInputControl {
 	 */
 	@Override
 	public String getValue() {
-		return this.controlElement.getAttribute(HtmlAttributeProperties.VALUE);
+		return this.controlElement.getAttribute(VALUE);
 	}
 
 	/**

@@ -84,7 +84,7 @@ public class InputButtonControl extends BaseInputControl {
 			button.setForeground(foregroundColor);
 		}
 		HTMLInputElementImpl element = (HTMLInputElementImpl) this.controlElement;
-		String text = element.getAttribute(HtmlAttributeProperties.VALUE);
+		String text = element.getAttribute(VALUE);
 		if (text == null || text.length() == 0) {
 			String type = element.getType();
 			if ("submit".equalsIgnoreCase(type)) {

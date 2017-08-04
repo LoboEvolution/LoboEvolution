@@ -43,7 +43,7 @@ import org.w3c.dom.Node;
 /**
  * The Class DescendentHTMLCollection.
  */
-public class DescendentHTMLCollection extends AbstractScriptableDelegate implements HTMLCollection {
+public class DescendentHTMLCollection extends AbstractScriptableDelegate implements HTMLCollection, HtmlAttributeProperties {
 
 	/** The root node. */
 	private final DOMNodeImpl rootNode;
@@ -117,7 +117,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 					if (id != null && id.length() != 0) {
 						itemsByName.put(id, element);
 					}
-					String name = element.getAttribute(HtmlAttributeProperties.NAME);
+					String name = element.getAttribute(NAME);
 					if (name != null && name.length() != 0 && !name.equals(id)) {
 						itemsByName.put(name, element);
 					}

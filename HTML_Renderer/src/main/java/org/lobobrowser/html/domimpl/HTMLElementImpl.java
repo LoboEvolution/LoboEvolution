@@ -198,7 +198,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			}
 			sds = new LocalCSS2Properties(this);
 			// Add any declarations in style attribute (last takes precedence).
-			String style = this.getAttribute(HtmlAttributeProperties.STYLE);
+			String style = this.getAttribute(STYLE);
 
 			if (style != null && style.length() != 0) {
 				CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
@@ -296,7 +296,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *            the new style
 	 */
 	public void setStyle(String value) {
-		this.setAttribute(HtmlAttributeProperties.STYLE, value);
+		this.setAttribute(STYLE, value);
 	}
 
 	/*
@@ -306,7 +306,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	@Override
 	public String getClassName() {
-		String className = this.getAttribute(HtmlAttributeProperties.CLASS);
+		String className = this.getAttribute(CLASS);
 		return className == null ? "" : className;
 	}
 
@@ -317,7 +317,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	@Override
 	public void setClassName(String className) {
-		this.setAttribute(HtmlAttributeProperties.CLASS, className);
+		this.setAttribute(CLASS, className);
 	}
 
 	/**
@@ -326,7 +326,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * @return the charset
 	 */
 	public String getCharset() {
-		return this.getAttribute(HtmlAttributeProperties.CHARSET);
+		return this.getAttribute(CHARSET);
 	}
 
 	/**
@@ -336,7 +336,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *            the new charset
 	 */
 	public void setCharset(String charset) {
-		this.setAttribute(HtmlAttributeProperties.CHARSET, charset);
+		this.setAttribute(CHARSET, charset);
 	}
 
 	/**

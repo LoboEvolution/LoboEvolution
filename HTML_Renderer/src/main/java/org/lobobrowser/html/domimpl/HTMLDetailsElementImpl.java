@@ -46,8 +46,8 @@ public class HTMLDetailsElementImpl extends HTMLElementImpl implements HTMLDetai
 	 */
 	@Override
 	public boolean getOpen() {
-		String open = this.getAttribute(HtmlAttributeProperties.OPEN);
-		return HtmlAttributeProperties.OPEN.equalsIgnoreCase(open);
+		String open = this.getAttribute(OPEN);
+		return OPEN.equalsIgnoreCase(open);
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class HTMLDetailsElementImpl extends HTMLElementImpl implements HTMLDetai
 	 */
 	@Override
 	public void setOpen(boolean open) {
-		this.setAttribute(HtmlAttributeProperties.OPEN, open ? HtmlAttributeProperties.OPEN : null);
+		this.setAttribute(OPEN, open ? OPEN : null);
 
 	}
 

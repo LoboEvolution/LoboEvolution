@@ -2125,7 +2125,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public String getCharacterSet() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.META);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.CHARSET);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, CHARSET);
 		return attr.getAttribute();
 	}
 
@@ -2420,7 +2420,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public String getFgColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.TEXT);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, TEXT);
 		return attr.getAttribute();
 	}
 
@@ -2431,7 +2431,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public void setFgColor(String fgColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.TEXT);
+		ElementAttributeFilter attr = new ElementAttributeFilter(TEXT);
 		attr.setAttribute(this, fgColor);
 	}
 
@@ -2443,7 +2443,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public String getBgColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.BGCOLOR);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, BGCOLOR);
 		return attr.getAttribute();
 	}
 
@@ -2454,7 +2454,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public void setBgColor(String bgColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.BGCOLOR);
+		ElementAttributeFilter attr = new ElementAttributeFilter(BGCOLOR);
 		attr.setAttribute(this, bgColor);
 	}
 
@@ -2466,7 +2466,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public String getLinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.LINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, LINK);
 		return attr.getAttribute();
 	}
 
@@ -2477,7 +2477,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public void setLinkColor(String linkColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.LINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(LINK);
 		attr.setAttribute(this, linkColor);
 	}
 
@@ -2489,7 +2489,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public String getVlinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.VLINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, VLINK);
 		return attr.getAttribute();
 	}
 
@@ -2501,7 +2501,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public void setVlinkColor(String vlinkColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.VLINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(VLINK);
 		attr.setAttribute(this, vlinkColor);
 
 	}
@@ -2514,7 +2514,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	@Override
 	public String getAlinkColor() {
 		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, HtmlAttributeProperties.ALINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, ALINK);
 		return attr.getAttribute();
 	}
 
@@ -2526,7 +2526,7 @@ public class HTMLDocumentImpl extends DOMNodeImpl implements HTMLDocument, Docum
 	 */
 	@Override
 	public void setAlinkColor(String alinkColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(HtmlAttributeProperties.ALINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(ALINK);
 		attr.setAttribute(this, alinkColor);
 	}
 

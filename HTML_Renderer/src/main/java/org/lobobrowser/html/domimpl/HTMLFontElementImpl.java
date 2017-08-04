@@ -50,7 +50,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getColor() {
-		return this.getAttribute(HtmlAttributeProperties.COLOR);
+		return this.getAttribute(COLOR);
 	}
 
 	/*
@@ -60,7 +60,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getFace() {
-		return this.getAttribute(HtmlAttributeProperties.FACE);
+		return this.getAttribute(FACE);
 	}
 
 	/*
@@ -70,7 +70,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public String getSize() {
-		return this.getAttribute(HtmlAttributeProperties.SIZE);
+		return this.getAttribute(SIZE);
 	}
 
 	/*
@@ -80,7 +80,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setColor(String color) {
-		this.setAttribute(HtmlAttributeProperties.COLOR, color);
+		this.setAttribute(COLOR, color);
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setFace(String face) {
-		this.setAttribute(HtmlAttributeProperties.FACE, face);
+		this.setAttribute(FACE, face);
 	}
 
 	/*
@@ -100,7 +100,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setSize(String size) {
-		this.setAttribute(HtmlAttributeProperties.SIZE, size);
+		this.setAttribute(SIZE, size);
 	}
 
 	/*
@@ -122,9 +122,9 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
-		String color = this.getAttribute(HtmlAttributeProperties.COLOR);
-		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
+		String fontFamily = this.getAttribute(FACE);
+		String color = this.getAttribute(COLOR);
+		String size = this.getAttribute(SIZE);
 		String fontSize = null;
 		if (size != null) {
 			ModelNode parentModelNode = this.getParentModelNode();
@@ -142,7 +142,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 			css.internalSetLC("font-family", fontFamily);
 		}
 		if (color != null) {
-			css.internalSetLC(HtmlAttributeProperties.COLOR, color);
+			css.internalSetLC(COLOR, color);
 		}
 		return css;
 	}

@@ -21,11 +21,13 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAngle;
 import org.lobobrowser.w3c.svg.SVGAnimatedBoolean;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
 import org.lobobrowser.w3c.svg.SVGAnimatedPreserveAspectRatio;
 import org.lobobrowser.w3c.svg.SVGAnimatedRect;
+import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGElement;
 import org.lobobrowser.w3c.svg.SVGException;
 import org.lobobrowser.w3c.svg.SVGLength;
@@ -51,18 +53,18 @@ import org.w3c.dom.views.DocumentView;
 
 import com.steadystate.css.util.CSSProperties;
 
-public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, CSSProperties {
+public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, HtmlAttributeProperties, CSSProperties {
 
 	public SVGSVGElementImpl(String name) {
 		super(name);
 	}
 
 	public String getFill() {
-		return this.getAttribute(FILL);
+		return this.getAttribute(HtmlAttributeProperties.FILL);
 	}
 
 	public String getStroke() {
-		return this.getAttribute(STROKE);
+		return this.getAttribute(HtmlAttributeProperties.STROKE);
 	}
 
 	public String getStrokeDashArray() {
@@ -194,7 +196,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public SVGAnimatedRect getViewBox() {
-		String viewBox = this.getAttribute(HtmlAttributeProperties.VIEW_BOX);
+		String viewBox = this.getAttribute(VIEW_BOX);
 
 		if (viewBox == null) {
 			SVGRectImpl rect = (SVGRectImpl) getViewport();
@@ -278,12 +280,12 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public SVGAnimatedLength getX() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.X)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(X)));
 	}
 
 	@Override
 	public SVGAnimatedLength getY() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.Y)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(Y)));
 	}
 
 	@Override
@@ -298,23 +300,23 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	@Override
 	public String getContentScriptType() {
-		return this.getAttribute(HtmlAttributeProperties.CONTENTSCRIPTTYPE);
+		return this.getAttribute(CONTENTSCRIPTTYPE);
 	}
 
 	@Override
 	public void setContentScriptType(String contentScriptType) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.CONTENTSCRIPTTYPE, contentScriptType);
+		this.setAttribute(CONTENTSCRIPTTYPE, contentScriptType);
 
 	}
 
 	@Override
 	public String getContentStyleType() {
-		return this.getAttribute(HtmlAttributeProperties.CONTENTSTYLETYPE);
+		return this.getAttribute(CONTENTSTYLETYPE);
 	}
 
 	@Override
 	public void setContentStyleType(String contentStyleType) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.CONTENTSTYLETYPE, contentStyleType);
+		this.setAttribute(CONTENTSTYLETYPE, contentStyleType);
 	}
 
 	@Override
@@ -516,15 +518,19 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	}
 
 	public String getFontSize() {
-		return this.getAttribute(HtmlAttributeProperties.FONTSIZE);
+		return this.getAttribute(FONTSIZE);
 	}
 
 	public String getFontFamily() {
-		return this.getAttribute(HtmlAttributeProperties.FONTFAMILY);
+		return this.getAttribute(FONTFAMILY);
 	}
 
 	public String getClipPath() {
-		return this.getAttribute(HtmlAttributeProperties.CLIPPATH);
+		return this.getAttribute(CLIPPATH);
+	}
+	
+	public SVGAnimatedTransformList getTransform() {
+		return new SVGAnimatedTransformListImpl(this.getAttribute(TRANSFORM));
 	}
 
 	public SVGAnimationImpl getAnimateElement() {
@@ -543,5 +549,40 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 			} 
 		}
 		return null;
+	}
+	
+	public AbstractCSS2Properties getSVGStyle() {
+
+		AbstractCSS2Properties style = this.getStyle();
+
+		if (style.getStroke() == null) {
+			style.setStroke(this.getStroke());
+		}
+
+		if (style.getStrokeDashArray() == null) {
+			style.setStrokeDashArray(this.getStrokeDashArray());
+		}
+
+		if (style.getStrokeLineCap() == null) {
+			style.setStrokeLineCap(this.getStrokeLineCap());
+		}
+
+		if (style.getStrokeMiterLimit() == null) {
+			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
+		}
+
+		if (style.getStrokeOpacity() == null) {
+			style.setStrokeOpacity(this.getStrokeOpacity());
+		}
+
+		if (style.getStrokeWidth() == null) {
+			style.setStrokeWidth(this.getStrokeWidth());
+		}
+
+		if (style.getFill() == null) {
+			style.setFill(this.getFill());
+		}
+
+		return style;
 	}
 }

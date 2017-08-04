@@ -144,7 +144,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new id
 	 */
 	public void setId(String id) {
-		this.setAttribute(HtmlAttributeProperties.ID, id);
+		this.setAttribute(ID, id);
 	}
 
 	/**
@@ -153,7 +153,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the title
 	 */
 	public String getTitle() {
-		return this.getAttribute(HtmlAttributeProperties.TITLE);
+		return this.getAttribute(TITLE);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new title
 	 */
 	public void setTitle(String title) {
-		this.setAttribute(HtmlAttributeProperties.TITLE, title);
+		this.setAttribute(TITLE, title);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the lang
 	 */
 	public String getLang() {
-		return this.getAttribute(HtmlAttributeProperties.LANG);
+		return this.getAttribute(LANG);
 	}
 
 	/**
@@ -182,7 +182,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new lang
 	 */
 	public void setLang(String lang) {
-		this.setAttribute(HtmlAttributeProperties.LANG, lang);
+		this.setAttribute(LANG, lang);
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the dir
 	 */
 	public String getDir() {
-		return this.getAttribute(HtmlAttributeProperties.DIR);
+		return this.getAttribute(DIR);
 	}
 
 	/**
@@ -201,7 +201,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new dir
 	 */
 	public void setDir(String dir) {
-		this.setAttribute(HtmlAttributeProperties.DIR, dir);
+		this.setAttribute(DIR, dir);
 	}
 
 	/**
@@ -210,7 +210,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the hidden
 	 */
 	public boolean getHidden() {
-		return this.getAttribute(HtmlAttributeProperties.HIDDEN) == null ? true : false;
+		return this.getAttribute(HIDDEN) == null ? true : false;
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the content editable
 	 */
 	public String getContentEditable() {
-		return this.getAttribute(HtmlAttributeProperties.CONTENTEDITABLE);
+		return this.getAttribute(CONTENTEDITABLE);
 	}
 
 	/**
@@ -229,7 +229,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new content editable
 	 */
 	public void setContentEditable(String contenteditable) {
-		this.setAttribute(HtmlAttributeProperties.CONTENTEDITABLE, contenteditable);
+		this.setAttribute(CONTENTEDITABLE, contenteditable);
 	}
 
 	/**
@@ -238,7 +238,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the spellcheck
 	 */
 	public String getSpellcheck() {
-		return this.getAttribute(HtmlAttributeProperties.SPELLCHECK);
+		return this.getAttribute(SPELLCHECK);
 	}
 
 	/**
@@ -248,7 +248,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new spellcheck
 	 */
 	public void setSpellcheck(String spellcheck) {
-		this.setAttribute(HtmlAttributeProperties.SPELLCHECK, spellcheck);
+		this.setAttribute(SPELLCHECK, spellcheck);
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the draggable
 	 */
 	public boolean getDraggable() {
-		String draggable = this.getAttribute(HtmlAttributeProperties.DRAGGABLE);
+		String draggable = this.getAttribute(DRAGGABLE);
 		if (draggable == null) {
 			return false;
 		} else {
@@ -272,7 +272,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new draggable
 	 */
 	public void setDraggable(boolean draggable) {
-		this.setAttribute(HtmlAttributeProperties.DRAGGABLE, String.valueOf(draggable));
+		this.setAttribute(DRAGGABLE, String.valueOf(draggable));
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the checks if is content editable
 	 */
 	public boolean getIsContentEditable() {
-		String content = getAttribute(HtmlAttributeProperties.CONTENTEDITABLE);
+		String content = getAttribute(CONTENTEDITABLE);
 		if (content == null) {
 			return false;
 		} else {
@@ -295,7 +295,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the disabled
 	 */
 	public boolean getDisabled() {
-		return this.getAttribute(HtmlAttributeProperties.DISABLE) == null ? true : false;
+		return this.getAttribute(DISABLE) == null ? true : false;
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the checked
 	 */
 	public boolean getChecked() {
-		return this.getAttribute(HtmlAttributeProperties.CHECKED) == null ? true : false;
+		return this.getAttribute(CHECKED) == null ? true : false;
 	}
 
 	/**
@@ -313,7 +313,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the item scope
 	 */
 	public boolean getItemScope() {
-		String itemscope = this.getAttribute(HtmlAttributeProperties.ITEMSCOPE);
+		String itemscope = this.getAttribute(ITEMSCOPE);
 		if (itemscope == null) {
 			return false;
 		} else {
@@ -328,7 +328,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new item scope
 	 */
 	public void setItemScope(boolean itemscope) {
-		this.setAttribute(HtmlAttributeProperties.ITEMSCOPE, String.valueOf(itemscope));
+		this.setAttribute(ITEMSCOPE, String.valueOf(itemscope));
 
 	}
 
@@ -338,7 +338,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the item type
 	 */
 	public String getItemType() {
-		return this.getAttribute(HtmlAttributeProperties.ITEMTYPE);
+		return this.getAttribute(ITEMTYPE);
 	}
 
 	/**
@@ -348,7 +348,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new item type
 	 */
 	public void setItemType(String itemType) {
-		this.setAttribute(HtmlAttributeProperties.ITEMTYPE, itemType);
+		this.setAttribute(ITEMTYPE, itemType);
 
 	}
 
@@ -358,7 +358,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the item id
 	 */
 	public String getItemId() {
-		return this.getAttribute(HtmlAttributeProperties.ITEMID);
+		return this.getAttribute(ITEMID);
 	}
 
 	/**
@@ -368,7 +368,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new item id
 	 */
 	public void setItemId(String itemId) {
-		this.setAttribute(HtmlAttributeProperties.ITEMID, itemId);
+		this.setAttribute(ITEMID, itemId);
 	}
 
 	/**
@@ -377,7 +377,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the tab index
 	 */
 	public int getTabIndex() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.TABINDEX);
+		String valueText = this.getAttribute(TABINDEX);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -388,7 +388,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new tab index
 	 */
 	public void setTabIndex(int tabIndex) {
-		this.setAttribute(HtmlAttributeProperties.TABINDEX, String.valueOf(tabIndex));
+		this.setAttribute(TABINDEX, String.valueOf(tabIndex));
 	}
 
 	/**
@@ -397,7 +397,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the access key
 	 */
 	public String getAccessKey() {
-		return this.getAttribute(HtmlAttributeProperties.ACCESSKEY);
+		return this.getAttribute(ACCESSKEY);
 	}
 
 	/**
@@ -407,7 +407,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new access key
 	 */
 	public void setAccessKey(String accessKey) {
-		this.setAttribute(HtmlAttributeProperties.ACCESSKEY, accessKey);
+		this.setAttribute(ACCESSKEY, accessKey);
 
 	}
 
@@ -457,7 +457,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 */
 	private Attr getAttr(String normalName, String value) {
 		// TODO: "specified" attributes
-		return new DOMAttrImpl(normalName, value, true, this, HtmlAttributeProperties.ID.equals(normalName));
+		return new DOMAttrImpl(normalName, value, true, this, ID.equals(normalName));
 	}
 
 	/*
@@ -658,8 +658,8 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		// checking attribute names, i.e. they may not call the super
 		// implementation if an attribute is already taken care of.
 		boolean isName = false;
-		if (HtmlAttributeProperties.ID.equals(normalName)
-				|| (isName = HtmlAttributeProperties.NAME.equals(normalName))) {
+		if (ID.equals(normalName)
+				|| (isName = NAME.equals(normalName))) {
 			// Note that the value of name is used
 			// as an ID, but the value of ID is not
 			// used as a name.
@@ -675,7 +675,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 				// }
 				document.setElementById(value, this);
 				if (isName) {
-					String oldName = this.getAttribute(HtmlAttributeProperties.NAME);
+					String oldName = this.getAttribute(NAME);
 					if (oldName != null) {
 						document.removeNamedItem(oldName);
 					}
@@ -786,7 +786,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	@Override
 	public void setIdAttribute(String name, boolean isId) throws DOMException {
 		String normalName = this.normalizeAttributeName(name);
-		if (!HtmlAttributeProperties.ID.equals(normalName)) {
+		if (!ID.equals(normalName)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
 	}
@@ -799,7 +799,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) throws DOMException {
 		String normalName = this.normalizeAttributeName(idAttr.getName());
-		if (!HtmlAttributeProperties.ID.equals(normalName)) {
+		if (!ID.equals(normalName)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "IdAttribute can't be anything other than ID");
 		}
 	}

@@ -168,7 +168,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -178,7 +178,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*
@@ -188,7 +188,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getBgColor() {
-		return this.getAttribute(HtmlAttributeProperties.BGCOLOR);
+		return this.getAttribute(BGCOLOR);
 	}
 
 	/*
@@ -199,7 +199,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setBgColor(String bgColor) {
-		this.setAttribute(HtmlAttributeProperties.BGCOLOR, bgColor);
+		this.setAttribute(BGCOLOR, bgColor);
 	}
 
 	/*
@@ -209,7 +209,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getBorder() {
-		return this.getAttribute(HtmlAttributeProperties.BORDER);
+		return this.getAttribute(BORDER);
 	}
 
 	/*
@@ -220,7 +220,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setBorder(String border) {
-		this.setAttribute(HtmlAttributeProperties.BORDER, border);
+		this.setAttribute(BORDER, border);
 	}
 
 	/*
@@ -230,7 +230,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getCellPadding() {
-		return this.getAttribute(HtmlAttributeProperties.CELLPADDING);
+		return this.getAttribute(CELLPADDING);
 	}
 
 	/*
@@ -241,7 +241,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setCellPadding(String cellPadding) {
-		this.setAttribute(HtmlAttributeProperties.CELLPADDING, cellPadding);
+		this.setAttribute(CELLPADDING, cellPadding);
 	}
 
 	/*
@@ -251,7 +251,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getCellSpacing() {
-		return this.getAttribute(HtmlAttributeProperties.CELLSPACING);
+		return this.getAttribute(CELLSPACING);
 	}
 
 	/*
@@ -262,7 +262,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setCellSpacing(String cellSpacing) {
-		this.setAttribute(HtmlAttributeProperties.CELLSPACING, cellSpacing);
+		this.setAttribute(CELLSPACING, cellSpacing);
 	}
 
 	/*
@@ -272,7 +272,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getFrame() {
-		return this.getAttribute(HtmlAttributeProperties.FRAME);
+		return this.getAttribute(FRAME);
 	}
 
 	/*
@@ -282,7 +282,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setFrame(String frame) {
-		this.setAttribute(HtmlAttributeProperties.FRAME, frame);
+		this.setAttribute(FRAME, frame);
 	}
 
 	/*
@@ -292,7 +292,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getRules() {
-		return this.getAttribute(HtmlAttributeProperties.RULES);
+		return this.getAttribute(RULES);
 	}
 
 	/*
@@ -302,7 +302,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setRules(String rules) {
-		this.setAttribute(HtmlAttributeProperties.RULES, rules);
+		this.setAttribute(RULES, rules);
 	}
 
 	/*
@@ -312,7 +312,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getSummary() {
-		return this.getAttribute(HtmlAttributeProperties.SUMMARY);
+		return this.getAttribute(SUMMARY);
 	}
 
 	/*
@@ -323,7 +323,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setSummary(String summary) {
-		this.setAttribute(HtmlAttributeProperties.SUMMARY, summary);
+		this.setAttribute(SUMMARY, summary);
 	}
 
 	/*
@@ -333,7 +333,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getWidth() {
-		return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return this.getAttribute(WIDTH);
 	}
 
 	/*
@@ -343,7 +343,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+		this.setAttribute(WIDTH, width);
 	}
 
 	/*
@@ -363,7 +363,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 			AbstractCSS2Properties props = this.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
-				return new HtmlLength(this.getAttribute(HtmlAttributeProperties.HEIGHT));
+				return new HtmlLength(this.getAttribute(HEIGHT));
 			} else {
 				return new HtmlLength(HtmlValues.getPixelSize(heightText, this.getRenderState(), 0, availHeight));
 			}
@@ -389,7 +389,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 			AbstractCSS2Properties props = this.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
-				return new HtmlLength(this.getAttribute(HtmlAttributeProperties.WIDTH));
+				return new HtmlLength(this.getAttribute(WIDTH));
 			} else {
 				return new HtmlLength(HtmlValues.getPixelSize(widthText, this.getRenderState(), 0, availWidth));
 			}

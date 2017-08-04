@@ -36,6 +36,7 @@ import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ChildHTMLCollection;
 import org.lobobrowser.html.dombl.ModelNode;
@@ -67,7 +68,7 @@ import org.w3c.dom.UserDataHandler;
 /**
  * The Class DOMNodeImpl.
  */
-public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
+public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements Node, ModelNode, HtmlAttributeProperties {
 
 	/** The Constant EMPTY_ARRAY. */
 	private static final DOMNodeImpl[] EMPTY_ARRAY = new DOMNodeImpl[0];

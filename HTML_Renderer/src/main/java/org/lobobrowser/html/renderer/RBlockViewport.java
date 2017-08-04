@@ -91,7 +91,7 @@ import org.w3c.dom.Node;
  *
  * @author J. H. S.
  */
-public class RBlockViewport extends BaseRCollection {
+public class RBlockViewport extends BaseRCollection implements HtmlAttributeProperties {
 
 	/** The Constant ZERO_INSETS. */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
@@ -756,7 +756,7 @@ public class RBlockViewport extends BaseRCollection {
 			renderable.layout(availContentWidth, availContentHeight, this.sizeOnly);
 			boolean centerBlock = false;
 			if (alignCenterAttribute) {
-				String align = markupElement.getAttribute(HtmlAttributeProperties.ALIGN);
+				String align = markupElement.getAttribute(ALIGN);
 				centerBlock = align != null && align.equalsIgnoreCase("center");
 			}
 			this.addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
@@ -900,7 +900,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 		if (align == null && usesAlignAttribute) {
-			align = element.getAttribute(HtmlAttributeProperties.ALIGN);
+			align = element.getAttribute(ALIGN);
 		}
 		if (align != null) {
 			if ("left".equalsIgnoreCase(align)) {
@@ -1037,7 +1037,7 @@ public class RBlockViewport extends BaseRCollection {
 				if (!this.addElsewhereIfFloat(rrel, element, usesAlignAttribute, style, true)) {
 					boolean centerBlock = false;
 					if (renderable instanceof RTable) {
-						String align = element.getAttribute(HtmlAttributeProperties.ALIGN);
+						String align = element.getAttribute(ALIGN);
 						centerBlock = align != null && align.equalsIgnoreCase("center");
 					}
 					this.addAsSeqBlock(rrel, obeysFloats, true, true, centerBlock);
@@ -1745,7 +1745,7 @@ public class RBlockViewport extends BaseRCollection {
 		// TODO: Get rid of this method?
 		// At this point block already has bounds.
 		boolean regularAdd = false;
-		String align = markupElement.getAttribute(HtmlAttributeProperties.ALIGN);
+		String align = markupElement.getAttribute(ALIGN);
 		if (align != null) {
 			if ("left".equalsIgnoreCase(align)) {
 				this.layoutFloat(renderable, false, true);

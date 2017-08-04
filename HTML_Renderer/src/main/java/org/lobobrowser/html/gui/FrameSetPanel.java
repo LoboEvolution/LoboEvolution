@@ -55,7 +55,7 @@ import org.lobobrowser.util.gui.WrapperLayout;
  * @see HtmlPanel
  * @see HtmlBlockPanel
  */
-public class FrameSetPanel extends JComponent implements NodeRenderer {
+public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttributeProperties {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -209,8 +209,8 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 			HtmlRendererContext context = this.htmlContext;
 			if (context != null) {
 				HTMLElementImpl element = this.rootNode;
-				String rows = element.getAttribute(HtmlAttributeProperties.ROWS);
-				String cols = element.getAttribute(HtmlAttributeProperties.COLS);
+				String rows = element.getAttribute(ROWS);
+				String cols = element.getAttribute(COLS);
 				HtmlLength[] rowLengths = this.getLengths(rows);
 				HtmlLength[] colLengths = this.getLengths(cols);
 				HTMLElementImpl[] subframes = this.getSubFrames(element);
@@ -226,7 +226,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 						if (frameElement instanceof FrameNode) {
 							BrowserFrame frame = context.createBrowserFrame();
 							((FrameNode) frameElement).setBrowserFrame(frame);
-							String src = frameElement.getAttribute(HtmlAttributeProperties.SRC);
+							String src = frameElement.getAttribute(SRC);
 							if (src != null) {
 								URL url;
 								try {

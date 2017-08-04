@@ -55,22 +55,22 @@ public class SVGLinearGradientElementImpl extends SVGSVGElementImpl implements S
 
 	@Override
 	public SVGAnimatedLength getX1() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.X1)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(X1)));
 	}
 
 	@Override
 	public SVGAnimatedLength getY1() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.Y1)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(Y1)));
 	}
 
 	@Override
 	public SVGAnimatedLength getX2() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.X2)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(X2)));
 	}
 
 	@Override
 	public SVGAnimatedLength getY2() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.Y2)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(Y2)));
 	}
 
 }

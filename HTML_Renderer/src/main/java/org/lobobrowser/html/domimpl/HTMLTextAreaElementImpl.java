@@ -131,8 +131,8 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public boolean getAutofocus() {
-		String autofocus = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
-		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(autofocus);
+		String autofocus = this.getAttribute(AUTOFOCUS);
+		return AUTOFOCUS.equalsIgnoreCase(autofocus);
 	}
 
 	/*
@@ -142,7 +142,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
+		this.setAttribute(AUTOFOCUS, autofocus ? AUTOFOCUS : null);
 
 	}
 
@@ -153,7 +153,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public int getMaxLength() {
-		String maxLength = this.getAttribute(HtmlAttributeProperties.MAXLENGTH);
+		String maxLength = this.getAttribute(MAXLENGTH);
 		return HtmlValues.getPixelSize(maxLength, this.getRenderState(), 0);
 	}
 
@@ -164,7 +164,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public void setMaxLength(int maxLength) {
-		this.setAttribute(HtmlAttributeProperties.MAXLENGTH, String.valueOf(maxLength));
+		this.setAttribute(MAXLENGTH, String.valueOf(maxLength));
 
 	}
 
@@ -175,8 +175,8 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public boolean getRequired() {
-		String required = this.getAttribute(HtmlAttributeProperties.REQUIRED);
-		return HtmlAttributeProperties.REQUIRED.equalsIgnoreCase(required);
+		String required = this.getAttribute(REQUIRED);
+		return REQUIRED.equalsIgnoreCase(required);
 	}
 
 	/*
@@ -186,7 +186,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public void setRequired(boolean required) {
-		this.setAttribute(HtmlAttributeProperties.REQUIRED, required ? HtmlAttributeProperties.REQUIRED : null);
+		this.setAttribute(REQUIRED, required ? REQUIRED : null);
 
 	}
 
@@ -197,7 +197,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public String getWrap() {
-		return this.getAttribute(HtmlAttributeProperties.WRAP);
+		return this.getAttribute(WRAP);
 	}
 
 	/*
@@ -208,7 +208,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 */
 	@Override
 	public void setWrap(String wrap) {
-		this.setAttribute(HtmlAttributeProperties.WRAP, wrap);
+		this.setAttribute(WRAP, wrap);
 
 	}
 

@@ -81,22 +81,22 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	@Override
 	public String getMedia() {
-		return this.getAttribute(HtmlAttributeProperties.MEDIA);
+		return this.getAttribute(MEDIA);
 	}
 
 	@Override
 	public void setMedia(String media) {
-		this.setAttribute(HtmlAttributeProperties.MEDIA, media);
+		this.setAttribute(MEDIA, media);
 	}
 
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	@Override
@@ -147,13 +147,13 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	@Override
 	public boolean getScoped() {
-		String scoped = this.getAttribute(HtmlAttributeProperties.SCOPED);
-		return HtmlAttributeProperties.SCOPED.equalsIgnoreCase(scoped);
+		String scoped = this.getAttribute(SCOPED);
+		return SCOPED.equalsIgnoreCase(scoped);
 	}
 
 	@Override
 	public void setScoped(boolean scoped) {
-		this.setAttribute(HtmlAttributeProperties.SCOPED, scoped ? HtmlAttributeProperties.SCOPED : null);
+		this.setAttribute(SCOPED, scoped ? SCOPED : null);
 	}
 
 	/**

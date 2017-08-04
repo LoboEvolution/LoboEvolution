@@ -21,9 +21,7 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGLineElement;
 
 public class SVGLineElementImpl extends SVGSVGElementImpl implements SVGLineElement {
@@ -33,64 +31,22 @@ public class SVGLineElementImpl extends SVGSVGElementImpl implements SVGLineElem
 	}
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
-	}
-
-	@Override
 	public SVGAnimatedLength getX1() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.X1)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(X1)));
 	}
 
 	@Override
 	public SVGAnimatedLength getY1() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.Y1)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(Y1)));
 	}
 
 	@Override
 	public SVGAnimatedLength getX2() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.X2)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(X2)));
 	}
 
 	@Override
 	public SVGAnimatedLength getY2() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.Y2)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(Y2)));
 	}
-
-	@Override
-	public AbstractCSS2Properties getSVGStyle() {
-
-		AbstractCSS2Properties style = this.getStyle();
-
-		if (style.getStroke() == null) {
-			style.setStroke(this.getStroke());
-		}
-
-		if (style.getStrokeDashArray() == null) {
-			style.setStrokeDashArray(this.getStrokeDashArray());
-		}
-
-		if (style.getStrokeLineCap() == null) {
-			style.setStrokeLineCap(this.getStrokeLineCap());
-		}
-
-		if (style.getStrokeMiterLimit() == null) {
-			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-		}
-
-		if (style.getStrokeOpacity() == null) {
-			style.setStrokeOpacity(this.getStrokeOpacity());
-		}
-
-		if (style.getStrokeWidth() == null) {
-			style.setStrokeWidth(this.getStrokeWidth());
-		}
-
-		if (style.getFill() == null) {
-			style.setFill(this.getFill());
-		}
-
-		return style;
-	}
-
 }

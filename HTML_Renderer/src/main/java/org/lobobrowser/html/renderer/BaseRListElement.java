@@ -32,7 +32,7 @@ import org.lobobrowser.http.UserAgentContext;
 /**
  * The Class BaseRListElement.
  */
-public class BaseRListElement extends RBlock {
+public class BaseRListElement extends RBlock implements HtmlAttributeProperties {
 
 	/** The Constant DEFAULT_COUNTER_NAME. */
 	protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";
@@ -104,7 +104,7 @@ public class BaseRListElement extends RBlock {
 			}
 		}
 		if (listStyle == null || listStyle.type == ListStyle.TYPE_UNSET) {
-			String typeAttributeText = rootElement.getAttribute(HtmlAttributeProperties.TYPE);
+			String typeAttributeText = rootElement.getAttribute(TYPE);
 			if (typeAttributeText != null) {
 
 				if (INHERIT.equals(typeAttributeText)) {

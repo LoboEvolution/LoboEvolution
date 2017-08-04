@@ -92,7 +92,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getFrameBorder() {
-		return this.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+		return this.getAttribute(FRAMEBORDER);
 	}
 
 	/*
@@ -103,7 +103,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setFrameBorder(String frameBorder) {
-		this.setAttribute(HtmlAttributeProperties.FRAMEBORDER, frameBorder);
+		this.setAttribute(FRAMEBORDER, frameBorder);
 	}
 
 	/*
@@ -113,7 +113,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getLongDesc() {
-		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
+		return this.getAttribute(LONGDESC);
 	}
 
 	/*
@@ -124,7 +124,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setLongDesc(String longDesc) {
-		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
+		this.setAttribute(LONGDESC, longDesc);
 	}
 
 	/*
@@ -134,7 +134,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getMarginHeight() {
-		return this.getAttribute(HtmlAttributeProperties.MARGINHEIGHT);
+		return this.getAttribute(MARGINHEIGHT);
 	}
 
 	/*
@@ -145,7 +145,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setMarginHeight(String marginHeight) {
-		this.setAttribute(HtmlAttributeProperties.MARGINHEIGHT, marginHeight);
+		this.setAttribute(MARGINHEIGHT, marginHeight);
 	}
 
 	/*
@@ -155,7 +155,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getMarginWidth() {
-		return this.getAttribute(HtmlAttributeProperties.MARGINWIDTH);
+		return this.getAttribute(MARGINWIDTH);
 	}
 
 	/*
@@ -166,7 +166,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setMarginWidth(String marginWidth) {
-		this.setAttribute(HtmlAttributeProperties.MARGINWIDTH, marginWidth);
+		this.setAttribute(MARGINWIDTH, marginWidth);
 	}
 
 	/*
@@ -176,7 +176,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/*
@@ -186,7 +186,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 
 	/*
@@ -216,7 +216,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getScrolling() {
-		return this.getAttribute(HtmlAttributeProperties.SCROLLING);
+		return this.getAttribute(SCROLLING);
 	}
 
 	/*
@@ -227,7 +227,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setScrolling(String scrolling) {
-		this.setAttribute(HtmlAttributeProperties.SCROLLING, scrolling);
+		this.setAttribute(SCROLLING, scrolling);
 	}
 
 	/*
@@ -237,7 +237,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/*
@@ -247,7 +247,7 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 */
 	@Override
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 	}
 
 	/*

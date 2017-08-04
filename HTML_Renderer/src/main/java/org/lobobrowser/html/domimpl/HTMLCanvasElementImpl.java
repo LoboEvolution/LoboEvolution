@@ -31,7 +31,6 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.info.CanvasInfo;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlValues;
@@ -154,24 +153,24 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 
 	@Override
 	public int getWidth() {
-		String widthText = this.getAttribute(HtmlAttributeProperties.WIDTH);
+		String widthText = this.getAttribute(WIDTH);
 		return HtmlValues.getPixelSize(widthText, null, 1);
 	}
 
 	@Override
 	public void setWidth(int width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
+		this.setAttribute(WIDTH, String.valueOf(width));
 	}
 
 	@Override
 	public int getHeight() {
-		String heightText = this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		String heightText = this.getAttribute(HEIGHT);
 		return HtmlValues.getPixelSize(heightText, null, 1);
 	}
 
 	@Override
 	public void setHeight(int height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
+		this.setAttribute(HEIGHT, String.valueOf(height));
 	}
 
 	@Override
@@ -531,7 +530,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	@Override
 	public void fill() {
 		CanvasInfo fill = new CanvasInfo();
-		fill.setMethod(FILL);
+		fill.setMethod(HTMLCanvasElement.FILL);
 		fill.setPath(path);
 		fill.setFillPaint(fillPaint);
 		fill.setLineCap(getLineCap());
@@ -675,7 +674,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	@Override
 	public void stroke() {
 		CanvasInfo stroke = new CanvasInfo();
-		stroke.setMethod(STROKE);
+		stroke.setMethod(HTMLCanvasElement.STROKE);
 		stroke.setPath(path);
 		stroke.setStrokePaint(strokePaint);
 		stroke.setLineCap(getLineCap());

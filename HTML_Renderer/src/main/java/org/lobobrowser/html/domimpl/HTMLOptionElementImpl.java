@@ -48,7 +48,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public boolean getDefaultSelected() {
-		return this.getAttributeAsBoolean(HtmlAttributeProperties.SELECTED);
+		return this.getAttributeAsBoolean(SELECTED);
 	}
 
 	/*
@@ -98,7 +98,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public String getLabel() {
-		return this.getAttribute(HtmlAttributeProperties.LABEL);
+		return this.getAttribute(LABEL);
 	}
 
 	/*
@@ -139,7 +139,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public String getValue() {
-		return this.getAttribute(HtmlAttributeProperties.VALUE);
+		return this.getAttribute(VALUE);
 	}
 
 	/*
@@ -150,7 +150,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public void setDefaultSelected(boolean defaultSelected) {
-		this.setAttribute(HtmlAttributeProperties.SELECTED, defaultSelected ? HtmlAttributeProperties.SELECTED : null);
+		this.setAttribute(SELECTED, defaultSelected ? SELECTED : null);
 	}
 
 	/*
@@ -171,7 +171,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public void setLabel(String label) {
-		this.setAttribute(HtmlAttributeProperties.LABEL, label);
+		this.setAttribute(LABEL, label);
 	}
 
 	/** The selected. */
@@ -221,7 +221,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public void setValue(String value) {
-		this.setAttribute(HtmlAttributeProperties.VALUE, value);
+		this.setAttribute(VALUE, value);
 	}
 
 	/*

@@ -51,8 +51,8 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	public boolean getCompact() {
-		String compactText = this.getAttribute(HtmlAttributeProperties.COMPACT);
-		return HtmlAttributeProperties.COMPACT.equalsIgnoreCase(compactText);
+		String compactText = this.getAttribute(COMPACT);
+		return COMPACT.equalsIgnoreCase(compactText);
 	}
 
 	/*
@@ -62,7 +62,7 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	public void setCompact(boolean compact) {
-		this.setAttribute(HtmlAttributeProperties.COMPACT, compact ? HtmlAttributeProperties.COMPACT : null);
+		this.setAttribute(COMPACT, compact ? COMPACT : null);
 	}
 
 	/*
@@ -93,7 +93,7 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -103,7 +103,7 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	/*
@@ -124,8 +124,8 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	public boolean getReversed() {
-		String reversed = this.getAttribute(HtmlAttributeProperties.RESERVED);
-		return HtmlAttributeProperties.RESERVED.equalsIgnoreCase(reversed);
+		String reversed = this.getAttribute(RESERVED);
+		return RESERVED.equalsIgnoreCase(reversed);
 	}
 
 	/*
@@ -135,7 +135,7 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	public void setReversed(boolean reversed) {
-		this.setAttribute(HtmlAttributeProperties.RESERVED, reversed ? HtmlAttributeProperties.RESERVED : null);
+		this.setAttribute(RESERVED, reversed ? RESERVED : null);
 
 	}
 }

@@ -71,47 +71,47 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	@Override
 	public String getAlt() {
-		return this.getAttribute(HtmlAttributeProperties.ALT);
+		return this.getAttribute(ALT);
 	}
 
 	@Override
 	public void setAlt(String alt) {
-		this.setAttribute(HtmlAttributeProperties.ALT, alt);
+		this.setAttribute(ALT, alt);
 	}
 
 	@Override
 	public String getBorder() {
-		return this.getAttribute(HtmlAttributeProperties.BORDER);
+		return this.getAttribute(BORDER);
 	}
 
 	@Override
 	public void setBorder(String border) {
-		this.setAttribute(HtmlAttributeProperties.BORDER, border);
+		this.setAttribute(BORDER, border);
 	}
 
 	@Override
 	public int getHeight() {
-		String height = this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		String height = this.getAttribute(HEIGHT);
 		UINode r = this.uiNode;
 
 		if (height != null && height.length() > 0) {
@@ -123,42 +123,42 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	public void setHeight(int height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, String.valueOf(height));
+		this.setAttribute(HEIGHT, String.valueOf(height));
 	}
 
 	@Override
 	public int getHspace() {
-		return this.getAttributeAsInt(HtmlAttributeProperties.HSPACE, 0);
+		return this.getAttributeAsInt(HSPACE, 0);
 	}
 
 	@Override
 	public void setHspace(int hspace) {
-		this.setAttribute(HtmlAttributeProperties.HSPACE, String.valueOf(hspace));
+		this.setAttribute(HSPACE, String.valueOf(hspace));
 	}
 
 	@Override
 	public boolean getIsMap() {
-		return this.getAttributeAsBoolean(HtmlAttributeProperties.ISMAP);
+		return this.getAttributeAsBoolean(ISMAP);
 	}
 
 	@Override
 	public void setIsMap(boolean isMap) {
-		this.setAttribute(HtmlAttributeProperties.ISMAP, isMap ? HtmlAttributeProperties.ISMAP : null);
+		this.setAttribute(ISMAP, isMap ? ISMAP : null);
 	}
 
 	@Override
 	public String getLongDesc() {
-		return this.getAttribute(HtmlAttributeProperties.LONGDESC);
+		return this.getAttribute(LONGDESC);
 	}
 
 	@Override
 	public void setLongDesc(String longDesc) {
-		this.setAttribute(HtmlAttributeProperties.LONGDESC, longDesc);
+		this.setAttribute(LONGDESC, longDesc);
 	}
 
 	@Override
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/**
@@ -171,33 +171,33 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	 */
 	@Override
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 	}
 
 	@Override
 	public String getUseMap() {
-		return this.getAttribute(HtmlAttributeProperties.USEMAP);
+		return this.getAttribute(USEMAP);
 	}
 
 	@Override
 	public void setUseMap(String useMap) {
-		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
+		this.setAttribute(USEMAP, useMap);
 	}
 
 	@Override
 	public int getVspace() {
-		return this.getAttributeAsInt(HtmlAttributeProperties.VSPACE, 0);
+		return this.getAttributeAsInt(VSPACE, 0);
 	}
 
 	@Override
 	public void setVspace(int vspace) {
-		this.setAttribute(HtmlAttributeProperties.VSPACE, String.valueOf(vspace));
+		this.setAttribute(VSPACE, String.valueOf(vspace));
 	}
 
 	@Override
 	public int getWidth() {
 
-		String width = this.getAttribute(HtmlAttributeProperties.WIDTH);
+		String width = this.getAttribute(WIDTH);
 		UINode r = this.uiNode;
 
 		if (width != null && width.length() > 0) {
@@ -209,13 +209,13 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	public void setWidth(int width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, String.valueOf(width));
+		this.setAttribute(WIDTH, String.valueOf(width));
 	}
 
 	@Override
 	protected void assignAttributeField(String normalName, String value) {
 		super.assignAttributeField(normalName, value);
-		if (HtmlAttributeProperties.SRC.equals(normalName)) {
+		if (SRC.equals(normalName)) {
 			this.loadImage(value);
 		}
 	}

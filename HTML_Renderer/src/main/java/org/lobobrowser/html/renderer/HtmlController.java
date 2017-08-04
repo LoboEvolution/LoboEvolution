@@ -48,7 +48,7 @@ import org.w3c.dom.NodeList;
 /**
  * The Class HtmlController.
  */
-public class HtmlController {
+public class HtmlController implements HtmlAttributeProperties{
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(HtmlController.class.getName());
@@ -129,7 +129,7 @@ public class HtmlController {
 			return false;
 		} else if (node instanceof HTMLButtonElementImpl) {
 			HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
-			String rawType = button.getAttribute(HtmlAttributeProperties.TYPE);
+			String rawType = button.getAttribute(TYPE);
 			String type;
 			if (rawType == null) {
 				type = "submit";

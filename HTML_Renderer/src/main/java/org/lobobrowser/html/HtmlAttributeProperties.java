@@ -21,7 +21,7 @@
 package org.lobobrowser.html;
 
 /**
- * The Interface HtmlAttributeProperties.
+ * The Interface 
  */
 public interface HtmlAttributeProperties {
 

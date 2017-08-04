@@ -43,12 +43,12 @@ public class HTMLLabelElementImpl extends HTMLAbstractUIElement implements HTMLL
 
 	@Override
 	public String getHtmlFor() {
-		return this.getAttribute(HtmlAttributeProperties.FOR);
+		return this.getAttribute(FOR);
 	}
 
 	@Override
 	public void setHtmlFor(String htmlFor) {
-		this.setAttribute(HtmlAttributeProperties.FOR, htmlFor);
+		this.setAttribute(FOR, htmlFor);
 
 	}
 

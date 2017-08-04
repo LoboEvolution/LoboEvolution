@@ -76,7 +76,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		widget.setDocument(new LimitedDocument());
 		widget.setSelectionColor(Color.BLUE);
 		DOMElementImpl element = this.controlElement;
-		widget.setText(element.getAttribute(HtmlAttributeProperties.VALUE));
+		widget.setText(element.getAttribute(VALUE));
 		widget.addKeyListener(new KeyListener() {
 
 			@Override
@@ -104,7 +104,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		RUIControl ruiControl = this.ruicontrol;
-		String maxLengthText = this.controlElement.getAttribute(HtmlAttributeProperties.MAXLENGTH);
+		String maxLengthText = this.controlElement.getAttribute(MAXLENGTH);
 		if (maxLengthText != null) {
 			try {
 				this.maxLength = Integer.parseInt(maxLengthText);

@@ -45,7 +45,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public String getSrc() {
-		return this.getAttribute(HtmlAttributeProperties.SRC);
+		return this.getAttribute(SRC);
 	}
 
 	/*
@@ -55,7 +55,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public void setSrc(String src) {
-		this.setAttribute(HtmlAttributeProperties.SRC, src);
+		this.setAttribute(SRC, src);
 
 	}
 
@@ -66,7 +66,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -76,7 +76,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 
 	}
 
@@ -87,7 +87,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public String getWidth() {
-		return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return this.getAttribute(WIDTH);
 	}
 
 	/*
@@ -97,7 +97,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+		this.setAttribute(WIDTH, width);
 
 	}
 
@@ -108,7 +108,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public String getHeight() {
-		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		return this.getAttribute(HEIGHT);
 	}
 
 	/*
@@ -119,7 +119,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public void setHeight(String height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
+		this.setAttribute(HEIGHT, height);
 
 	}
 
@@ -130,7 +130,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 
 	}
 
@@ -151,7 +151,7 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/*
@@ -161,6 +161,6 @@ public class HTMLEmbedElementImpl extends HTMLElementImpl implements HTMLEmbedEl
 	 */
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 }

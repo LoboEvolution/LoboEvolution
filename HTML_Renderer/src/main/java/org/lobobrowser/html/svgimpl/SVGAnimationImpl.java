@@ -41,18 +41,18 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public String getAttributeName() {
-		return this.getAttribute(HtmlAttributeProperties.ATTRIBUTE_NAME);
+		return this.getAttribute(ATTRIBUTE_NAME);
 	}
 
 	@Override
 	public void setAttributeName(String attributeName) {
-		this.setAttribute(HtmlAttributeProperties.ATTRIBUTE_NAME, attributeName);
+		this.setAttribute(ATTRIBUTE_NAME, attributeName);
 
 	}
 
 	@Override
 	public short getAttributeType() {
-		String type = this.getAttribute(HtmlAttributeProperties.ATTRIBUTE_TYPE);
+		String type = this.getAttribute(ATTRIBUTE_TYPE);
 		if(type == null) return ElementTargetAttributes.ATTRIBUTE_TYPE_XML;
 		
 		switch (type) {
@@ -69,14 +69,14 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public void setAttributeType(short attributeType) {
-		this.setAttribute(HtmlAttributeProperties.ATTRIBUTE_TYPE, String.valueOf(attributeType));
+		this.setAttribute(ATTRIBUTE_TYPE, String.valueOf(attributeType));
 
 	}
 
 	@Override
 	public TimeList getBegin() {
 		ArrayList<Time> beginTimeList = new ArrayList<Time>();
-		String begin = this.getAttribute(HtmlAttributeProperties.BEGIN);
+		String begin = this.getAttribute(BEGIN);
 		
 		if (begin != null) {
 			String[] beginTimeStringList = begin.split(";");
@@ -97,7 +97,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	
 	
 	public float getStartTime() {
-		String beginTime = this.getAttribute(HtmlAttributeProperties.BEGIN);
+		String beginTime = this.getAttribute(BEGIN);
 		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
 			return SVGUtility.getClockMilliSecs(beginTime);
 		} else {
@@ -125,13 +125,13 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public float getDur() {
-		String duration = this.getAttribute(HtmlAttributeProperties.DUR);
+		String duration = this.getAttribute(DUR);
 		return SVGUtility.getClockMilliSecs(duration);
 	}
 
 	@Override
 	public void setDur(float dur) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.DUR, String.valueOf(dur));
+		this.setAttribute(DUR, String.valueOf(dur));
 	}
 
 	@Override
@@ -159,7 +159,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public float getRepeatCount() {
-		String rc = this.getAttribute(HtmlAttributeProperties.REPEAT_COUNT);
+		String rc = this.getAttribute(REPEAT_COUNT);
 		if(rc == null) return 0;
 		if("indefinite".equals(rc)) return Float.MAX_VALUE;
 		return Float.parseFloat(rc);
@@ -167,13 +167,13 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public void setRepeatCount(float repeatCount) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.REPEAT_COUNT, String.valueOf(repeatCount));
+		this.setAttribute(REPEAT_COUNT, String.valueOf(repeatCount));
 
 	}
 
 	@Override
 	public float getRepeatDur() {
-		String rd = this.getAttribute(HtmlAttributeProperties.REPEAT_DUR);
+		String rd = this.getAttribute(REPEAT_DUR);
 		if(rd == null) return 5000;
 		if("indefinite".equals(rd)) return Float.MAX_VALUE;
 		return SVGUtility.getClockMilliSecs(rd);
@@ -181,7 +181,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public void setRepeatDur(float repeatDur) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.REPEAT_DUR, String.valueOf(repeatDur));
+		this.setAttribute(REPEAT_DUR, String.valueOf(repeatDur));
 
 	}
 
@@ -301,23 +301,23 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 
 	@Override
 	public String getFrom() {
-		return this.getAttribute(HtmlAttributeProperties.FROM);
+		return this.getAttribute(FROM);
 	}
 
 	@Override
 	public void setFrom(String from) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.FROM, from);
+		this.setAttribute(FROM, from);
 
 	}
 
 	@Override
 	public String getTo() {
-		return this.getAttribute(HtmlAttributeProperties.TO);
+		return this.getAttribute(TO);
 	}
 
 	@Override
 	public void setTo(String to) throws DOMException {
-		this.setAttribute(HtmlAttributeProperties.TO, to);
+		this.setAttribute(TO, to);
 
 	}
 
@@ -334,7 +334,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	}
 
 	public short getType() {
-		String type = this.getAttribute(HtmlAttributeProperties.TYPE);
+		String type = this.getAttribute(TYPE);
 			
 		switch (type) {
 		case "translate":
@@ -357,9 +357,9 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	}
 	
 	public SVGElement getTargetElement() {
-		String href = this.getAttribute(HtmlAttributeProperties.XLINK_HREF);
+		String href = this.getAttribute(XLINK_HREF);
 		if (href == null) {
-			href = this.getAttribute(HtmlAttributeProperties.HREF);
+			href = this.getAttribute(HREF);
 		}
 		
 		if (href != null) {

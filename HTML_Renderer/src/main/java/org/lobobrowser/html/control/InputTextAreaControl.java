@@ -114,7 +114,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		DOMElementImpl element = this.controlElement;
-		String colsStr = element.getAttribute(HtmlAttributeProperties.COLS);
+		String colsStr = element.getAttribute(COLS);
 		if (colsStr != null) {
 			try {
 				this.setCols(Integer.parseInt(colsStr));
@@ -122,7 +122,7 @@ public class InputTextAreaControl extends BaseInputControl {
 				// ignore
 			}
 		}
-		String rowsStr = element.getAttribute(HtmlAttributeProperties.ROWS);
+		String rowsStr = element.getAttribute(ROWS);
 		if (rowsStr != null) {
 			try {
 				this.setRows(Integer.parseInt(rowsStr));

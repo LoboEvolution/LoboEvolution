@@ -54,8 +54,8 @@ public class InputEmailControl extends BaseInputTextControl {
 	public InputEmailControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		email = (JTextFieldImpl) this.widget;
-		String value = modelNode.getAttribute(HtmlAttributeProperties.VALUE);
-		strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
+		String value = modelNode.getAttribute(VALUE);
+		strPattern = modelNode.getAttribute(PATTERN);
 		if (!isEmail(value)) {
 			email.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {

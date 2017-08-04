@@ -59,8 +59,8 @@ public class InputUrlControl extends BaseInputTextControl {
 	public InputUrlControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		url = (JTextFieldImpl) this.widget;
-		String value = modelNode.getAttribute(HtmlAttributeProperties.VALUE);
-		strPattern = modelNode.getAttribute(HtmlAttributeProperties.PATTERN);
+		String value = modelNode.getAttribute(VALUE);
+		strPattern = modelNode.getAttribute(PATTERN);
 		if (!isUrl(value)) {
 			url.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {

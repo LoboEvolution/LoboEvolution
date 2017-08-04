@@ -102,7 +102,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	public boolean getChecked() {
 		InputContext ic = this.inputContext;
 		if (ic == null) {
-			return this.getAttributeAsBoolean(HtmlAttributeProperties.CHECKED);
+			return this.getAttributeAsBoolean(CHECKED);
 		} else {
 			return ic.getChecked();
 		}
@@ -177,7 +177,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getType() {
-		String type = this.getAttribute(HtmlAttributeProperties.TYPE);
+		String type = this.getAttribute(TYPE);
 		return type == null ? null : type.toLowerCase();
 	}
 
@@ -188,7 +188,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	/*
@@ -198,7 +198,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getUseMap() {
-		return this.getAttribute(HtmlAttributeProperties.USEMAP);
+		return this.getAttribute(USEMAP);
 	}
 
 	/*
@@ -209,7 +209,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setUseMap(String useMap) {
-		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
+		this.setAttribute(USEMAP, useMap);
 	}
 
 	/*
@@ -344,8 +344,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public boolean getAutocomplete() {
-		String autocomplete = this.getAttribute(HtmlAttributeProperties.AUTOCOMPLETE);
-		return HtmlAttributeProperties.MUTED.equalsIgnoreCase(autocomplete);
+		String autocomplete = this.getAttribute(AUTOCOMPLETE);
+		return MUTED.equalsIgnoreCase(autocomplete);
 	}
 
 	/*
@@ -355,8 +355,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
-		this.setAttribute(HtmlAttributeProperties.AUTOCOMPLETE,
-				autocomplete ? HtmlAttributeProperties.AUTOCOMPLETE : null);
+		this.setAttribute(AUTOCOMPLETE,
+				autocomplete ? AUTOCOMPLETE : null);
 
 	}
 
@@ -367,8 +367,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public boolean getAutofocus() {
-		String focus = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
-		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(focus);
+		String focus = this.getAttribute(AUTOFOCUS);
+		return AUTOFOCUS.equalsIgnoreCase(focus);
 	}
 
 	/*
@@ -378,7 +378,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
+		this.setAttribute(AUTOFOCUS, autofocus ? AUTOFOCUS : null);
 
 	}
 
@@ -400,7 +400,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getFormAction() {
-		return this.getAttribute(HtmlAttributeProperties.FORMACTION);
+		return this.getAttribute(FORMACTION);
 	}
 
 	/*
@@ -411,7 +411,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setFormAction(String formAction) {
-		this.setAttribute(HtmlAttributeProperties.FORMACTION, formAction);
+		this.setAttribute(FORMACTION, formAction);
 
 	}
 
@@ -422,7 +422,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getFormEnctype() {
-		return this.getAttribute(HtmlAttributeProperties.FORMENCTYPE);
+		return this.getAttribute(FORMENCTYPE);
 	}
 
 	/*
@@ -433,7 +433,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setFormEnctype(String formEnctype) {
-		this.setAttribute(HtmlAttributeProperties.FORMENCTYPE, formEnctype);
+		this.setAttribute(FORMENCTYPE, formEnctype);
 
 	}
 
@@ -444,7 +444,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getFormMethod() {
-		return this.getAttribute(HtmlAttributeProperties.FORMMETHOD);
+		return this.getAttribute(FORMMETHOD);
 	}
 
 	/*
@@ -455,7 +455,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setFormMethod(String formMethod) {
-		this.setAttribute(HtmlAttributeProperties.FORMMETHOD, formMethod);
+		this.setAttribute(FORMMETHOD, formMethod);
 	}
 
 	/*
@@ -465,8 +465,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public boolean getFormNoValidate() {
-		String formNoValidate = this.getAttribute(HtmlAttributeProperties.FORMNOVALIDATE);
-		return HtmlAttributeProperties.FORMNOVALIDATE.equalsIgnoreCase(formNoValidate);
+		String formNoValidate = this.getAttribute(FORMNOVALIDATE);
+		return FORMNOVALIDATE.equalsIgnoreCase(formNoValidate);
 	}
 
 	/*
@@ -476,8 +476,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setFormNoValidate(boolean formNoValidate) {
-		this.setAttribute(HtmlAttributeProperties.FORMNOVALIDATE,
-				formNoValidate ? HtmlAttributeProperties.FORMNOVALIDATE : null);
+		this.setAttribute(FORMNOVALIDATE,
+				formNoValidate ? FORMNOVALIDATE : null);
 	}
 
 	/*
@@ -487,7 +487,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getFormTarget() {
-		return this.getAttribute(HtmlAttributeProperties.FORMTARGET);
+		return this.getAttribute(FORMTARGET);
 	}
 
 	/*
@@ -498,7 +498,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setFormTarget(String formTarget) {
-		this.setAttribute(HtmlAttributeProperties.FORMTARGET, formTarget);
+		this.setAttribute(FORMTARGET, formTarget);
 
 	}
 
@@ -509,7 +509,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getHeight() {
-		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		return this.getAttribute(HEIGHT);
 	}
 
 	/*
@@ -520,7 +520,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setHeight(String height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
+		this.setAttribute(HEIGHT, height);
 
 	}
 
@@ -531,7 +531,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getMax() {
-		return this.getAttribute(HtmlAttributeProperties.MAX);
+		return this.getAttribute(MAX);
 	}
 
 	/*
@@ -541,7 +541,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setMax(String max) {
-		this.setAttribute(HtmlAttributeProperties.MAX, max);
+		this.setAttribute(MAX, max);
 	}
 
 	/*
@@ -551,7 +551,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getMin() {
-		return this.getAttribute(HtmlAttributeProperties.MIN);
+		return this.getAttribute(MIN);
 	}
 
 	/*
@@ -561,7 +561,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setMin(String min) {
-		this.setAttribute(HtmlAttributeProperties.MIN, min);
+		this.setAttribute(MIN, min);
 
 	}
 
@@ -572,8 +572,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public boolean getMultiple() {
-		String multiple = this.getAttribute(HtmlAttributeProperties.MULTIPLE);
-		return HtmlAttributeProperties.MULTIPLE.equalsIgnoreCase(multiple);
+		String multiple = this.getAttribute(MULTIPLE);
+		return MULTIPLE.equalsIgnoreCase(multiple);
 	}
 
 	/*
@@ -583,7 +583,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setMultiple(boolean multiple) {
-		this.setAttribute(HtmlAttributeProperties.MULTIPLE, multiple ? HtmlAttributeProperties.MULTIPLE : null);
+		this.setAttribute(MULTIPLE, multiple ? MULTIPLE : null);
 
 	}
 
@@ -594,7 +594,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getPattern() {
-		return this.getAttribute(HtmlAttributeProperties.PATTERN);
+		return this.getAttribute(PATTERN);
 	}
 
 	/*
@@ -605,7 +605,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setPattern(String pattern) {
-		this.setAttribute(HtmlAttributeProperties.PATTERN, pattern);
+		this.setAttribute(PATTERN, pattern);
 
 	}
 
@@ -616,8 +616,8 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public boolean getRequired() {
-		String required = this.getAttribute(HtmlAttributeProperties.REQUIRED);
-		return HtmlAttributeProperties.REQUIRED.equalsIgnoreCase(required);
+		String required = this.getAttribute(REQUIRED);
+		return REQUIRED.equalsIgnoreCase(required);
 	}
 
 	/*
@@ -627,7 +627,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setRequired(boolean required) {
-		this.setAttribute(HtmlAttributeProperties.REQUIRED, required ? HtmlAttributeProperties.REQUIRED : null);
+		this.setAttribute(REQUIRED, required ? REQUIRED : null);
 
 	}
 
@@ -638,7 +638,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public String getStep() {
-		return this.getAttribute(HtmlAttributeProperties.STEP);
+		return this.getAttribute(STEP);
 	}
 
 	/*
@@ -648,7 +648,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	 */
 	@Override
 	public void setStep(String step) {
-		this.setAttribute(HtmlAttributeProperties.STEP, step);
+		this.setAttribute(STEP, step);
 	}
 
 	/*
@@ -659,7 +659,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public String getWidth() {
 		if (getType().equalsIgnoreCase(IMAGE)) {
-			return this.getAttribute(HtmlAttributeProperties.WIDTH);
+			return this.getAttribute(WIDTH);
 		} else {
 			return null;
 		}
@@ -673,7 +673,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	@Override
 	public void setWidth(String width) {
 		if (getType().equalsIgnoreCase(IMAGE)) {
-			this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+			this.setAttribute(WIDTH, width);
 		}
 	}
 

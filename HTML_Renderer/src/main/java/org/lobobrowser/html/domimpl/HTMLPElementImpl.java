@@ -47,7 +47,7 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParag
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -58,7 +58,7 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParag
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*

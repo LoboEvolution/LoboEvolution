@@ -51,9 +51,9 @@ public class InputNumberControl extends BaseInputTextControl {
 	public InputNumberControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		numeric = (JTextFieldImpl) this.widget;
-		String value = modelNode.getAttribute(HtmlAttributeProperties.VALUE);
-		min = modelNode.getAttribute(HtmlAttributeProperties.MIN);
-		max = modelNode.getAttribute(HtmlAttributeProperties.MAX);
+		String value = modelNode.getAttribute(VALUE);
+		min = modelNode.getAttribute(MIN);
+		max = modelNode.getAttribute(MAX);
 		if (!isNumeric(value)) {
 			numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {

@@ -51,7 +51,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public String getColor() {
-		return this.getAttribute(HtmlAttributeProperties.COLOR);
+		return this.getAttribute(COLOR);
 	}
 
 	/*
@@ -61,7 +61,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public String getFace() {
-		return this.getAttribute(HtmlAttributeProperties.FACE);
+		return this.getAttribute(FACE);
 	}
 
 	/*
@@ -72,7 +72,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public void setColor(String color) {
-		this.setAttribute(HtmlAttributeProperties.COLOR, color);
+		this.setAttribute(COLOR, color);
 	}
 
 	/*
@@ -83,7 +83,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public void setFace(String face) {
-		this.setAttribute(HtmlAttributeProperties.FACE, face);
+		this.setAttribute(FACE, face);
 	}
 
 	/*
@@ -93,7 +93,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public int getSize() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.SIZE);
+		String valueText = this.getAttribute(SIZE);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -104,7 +104,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	public void setSize(int size) {
-		this.setAttribute(HtmlAttributeProperties.SIZE, String.valueOf(size));
+		this.setAttribute(SIZE, String.valueOf(size));
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
+		String size = this.getAttribute(SIZE);
 		if (size != null) {
 			int fontNumber = HtmlValues.getFontNumberOldStyle(size, prevRenderState);
 			prevRenderState = new BaseFontRenderState(prevRenderState, fontNumber);
@@ -131,9 +131,9 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	 */
 	@Override
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		String fontFamily = this.getAttribute(HtmlAttributeProperties.FACE);
-		String color = this.getAttribute(HtmlAttributeProperties.COLOR);
-		String size = this.getAttribute(HtmlAttributeProperties.SIZE);
+		String fontFamily = this.getAttribute(FACE);
+		String color = this.getAttribute(COLOR);
+		String size = this.getAttribute(SIZE);
 		ModelNode parentModelNode = this.getParentModelNode();
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
 		String fontSize = null;
@@ -149,7 +149,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 			css.internalSetLC("font-family", fontFamily);
 		}
 		if (color != null) {
-			css.internalSetLC(HtmlAttributeProperties.COLOR, color);
+			css.internalSetLC(COLOR, color);
 		}
 		return css;
 	}

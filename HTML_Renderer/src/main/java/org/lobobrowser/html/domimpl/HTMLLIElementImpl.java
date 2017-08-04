@@ -51,7 +51,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -61,7 +61,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	/*
@@ -71,7 +71,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	 */
 	@Override
 	public int getValue() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.VALUE);
+		String valueText = this.getAttribute(VALUE);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -82,7 +82,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	 */
 	@Override
 	public void setValue(int value) {
-		this.setAttribute(HtmlAttributeProperties.VALUE, String.valueOf(value));
+		this.setAttribute(VALUE, String.valueOf(value));
 	}
 
 	/*

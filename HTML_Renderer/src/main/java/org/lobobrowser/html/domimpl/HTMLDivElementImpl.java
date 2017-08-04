@@ -48,7 +48,7 @@ public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDiv
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -58,7 +58,7 @@ public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDiv
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*

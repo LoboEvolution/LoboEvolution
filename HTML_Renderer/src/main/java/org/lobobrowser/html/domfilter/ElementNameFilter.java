@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
 /**
  * The Class ElementNameFilter.
  */
-public class ElementNameFilter implements NodeFilter {
+public class ElementNameFilter implements NodeFilter, HtmlAttributeProperties {
 
 	/** The name. */
 	private final String name;
@@ -50,6 +50,6 @@ public class ElementNameFilter implements NodeFilter {
 	@Override
 	public boolean accept(Node node) {
 		// TODO: Case sensitive?
-		return node instanceof Element && this.name.equals(((Element) node).getAttribute(HtmlAttributeProperties.NAME));
+		return node instanceof Element && this.name.equals(((Element) node).getAttribute(NAME));
 	}
 }

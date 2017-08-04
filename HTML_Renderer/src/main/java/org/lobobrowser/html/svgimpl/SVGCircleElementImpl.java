@@ -21,9 +21,7 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
-import org.lobobrowser.w3c.svg.SVGAnimatedTransformList;
 import org.lobobrowser.w3c.svg.SVGCircleElement;
 
 public class SVGCircleElementImpl extends SVGSVGElementImpl implements SVGCircleElement {
@@ -33,58 +31,17 @@ public class SVGCircleElementImpl extends SVGSVGElementImpl implements SVGCircle
 	}
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute(HtmlAttributeProperties.TRANSFORM));
-	}
-
-	@Override
 	public SVGAnimatedLength getCx() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.CX)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(CX)));
 	}
 
 	@Override
 	public SVGAnimatedLength getCy() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.CY)));
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(CY)));
 	}
 
 	@Override
 	public SVGAnimatedLength getR() {
-		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(HtmlAttributeProperties.R)));
-	}
-
-	@Override
-	public AbstractCSS2Properties getSVGStyle() {
-
-		AbstractCSS2Properties style = this.getStyle();
-
-		if (style.getStroke() == null) {
-			style.setStroke(this.getStroke());
-		}
-
-		if (style.getStrokeDashArray() == null) {
-			style.setStrokeDashArray(this.getStrokeDashArray());
-		}
-
-		if (style.getStrokeLineCap() == null) {
-			style.setStrokeLineCap(this.getStrokeLineCap());
-		}
-
-		if (style.getStrokeMiterLimit() == null) {
-			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-		}
-
-		if (style.getStrokeOpacity() == null) {
-			style.setStrokeOpacity(this.getStrokeOpacity());
-		}
-
-		if (style.getStrokeWidth() == null) {
-			style.setStrokeWidth(this.getStrokeWidth());
-		}
-
-		if (style.getFill() == null) {
-			style.setFill(this.getFill());
-		}
-
-		return style;
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute(R)));
 	}
 }

@@ -316,8 +316,8 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 	 */
 	@Override
 	public boolean getAutofocus() {
-		String auto = this.getAttribute(HtmlAttributeProperties.AUTOFOCUS);
-		return HtmlAttributeProperties.AUTOFOCUS.equalsIgnoreCase(auto);
+		String auto = this.getAttribute(AUTOFOCUS);
+		return AUTOFOCUS.equalsIgnoreCase(auto);
 	}
 
 	/*
@@ -327,7 +327,7 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 	 */
 	@Override
 	public void setAutofocus(boolean autofocus) {
-		this.setAttribute(HtmlAttributeProperties.AUTOFOCUS, autofocus ? HtmlAttributeProperties.AUTOFOCUS : null);
+		this.setAttribute(AUTOFOCUS, autofocus ? AUTOFOCUS : null);
 
 	}
 

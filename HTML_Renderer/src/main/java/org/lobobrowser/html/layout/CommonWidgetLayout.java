@@ -23,6 +23,7 @@ package org.lobobrowser.html.layout;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.RBlockViewport;
@@ -32,7 +33,7 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 /**
  * The Class CommonWidgetLayout.
  */
-public abstract class CommonWidgetLayout implements MarkupLayout {
+public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeProperties {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(CommonWidgetLayout.class.getName());

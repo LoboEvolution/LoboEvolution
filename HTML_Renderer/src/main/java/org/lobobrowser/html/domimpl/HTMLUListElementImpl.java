@@ -50,8 +50,8 @@ public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLU
 	 */
 	@Override
 	public boolean getCompact() {
-		String compactText = this.getAttribute(HtmlAttributeProperties.COMPACT);
-		return HtmlAttributeProperties.COMPACT.equalsIgnoreCase(compactText);
+		String compactText = this.getAttribute(COMPACT);
+		return COMPACT.equalsIgnoreCase(compactText);
 	}
 
 	/*
@@ -61,7 +61,7 @@ public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLU
 	 */
 	@Override
 	public void setCompact(boolean compact) {
-		this.setAttribute(HtmlAttributeProperties.COMPACT, compact ? HtmlAttributeProperties.COMPACT : null);
+		this.setAttribute(COMPACT, compact ? COMPACT : null);
 	}
 
 	/*
@@ -71,7 +71,7 @@ public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLU
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -81,7 +81,7 @@ public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLU
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	/*

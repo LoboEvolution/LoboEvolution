@@ -45,7 +45,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/*
@@ -55,7 +55,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public boolean getNoShade() {
-		return HtmlAttributeProperties.NOSHADE.equalsIgnoreCase(this.getAttribute(HtmlAttributeProperties.NOSHADE));
+		return NOSHADE.equalsIgnoreCase(this.getAttribute(NOSHADE));
 	}
 
 	/*
@@ -65,7 +65,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public String getSize() {
-		return this.getAttribute(HtmlAttributeProperties.SIZE);
+		return this.getAttribute(SIZE);
 	}
 
 	/*
@@ -75,7 +75,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public String getWidth() {
-		return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return this.getAttribute(WIDTH);
 	}
 
 	/*
@@ -85,7 +85,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/*
@@ -95,7 +95,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public void setNoShade(boolean noShade) {
-		this.setAttribute(HtmlAttributeProperties.NOSHADE, noShade ? HtmlAttributeProperties.NOSHADE : null);
+		this.setAttribute(NOSHADE, noShade ? NOSHADE : null);
 	}
 
 	/*
@@ -105,7 +105,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public void setSize(String size) {
-		this.setAttribute(HtmlAttributeProperties.SIZE, size);
+		this.setAttribute(SIZE, size);
 	}
 
 	/*
@@ -115,7 +115,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+		this.setAttribute(WIDTH, width);
 	}
 
 	/*
@@ -125,7 +125,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public String getColor() {
-		return this.getAttribute(HtmlAttributeProperties.COLOR);
+		return this.getAttribute(COLOR);
 	}
 
 	/*
@@ -135,7 +135,7 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	 */
 	@Override
 	public void setColor(String color) {
-		this.setAttribute(HtmlAttributeProperties.COLOR, color);
+		this.setAttribute(COLOR, color);
 
 	}
 }

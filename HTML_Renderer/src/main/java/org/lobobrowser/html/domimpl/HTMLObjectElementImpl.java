@@ -51,7 +51,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getAlign() {
-		return this.getAttribute(HtmlAttributeProperties.ALIGN);
+		return this.getAttribute(ALIGN);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 * @return the alt
 	 */
 	public String getAlt() {
-		return this.getAttribute(HtmlAttributeProperties.ALT);
+		return this.getAttribute(ALT);
 	}
 
 	/*
@@ -70,7 +70,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getArchive() {
-		return this.getAttribute(HtmlAttributeProperties.ARCHIVE);
+		return this.getAttribute(ARCHIVE);
 	}
 
 	/*
@@ -80,7 +80,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getCode() {
-		return this.getAttribute(HtmlAttributeProperties.CODE);
+		return this.getAttribute(CODE);
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getCodeBase() {
-		return this.getAttribute(HtmlAttributeProperties.CODEBASE);
+		return this.getAttribute(CODEBASE);
 	}
 
 	/*
@@ -100,7 +100,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getHeight() {
-		return this.getAttribute(HtmlAttributeProperties.HEIGHT);
+		return this.getAttribute(HEIGHT);
 	}
 
 	/*
@@ -110,7 +110,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getName() {
-		return this.getAttribute(HtmlAttributeProperties.NAME);
+		return this.getAttribute(NAME);
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 * @return the object
 	 */
 	public String getObject() {
-		return this.getAttribute(HtmlAttributeProperties.OBJECT);
+		return this.getAttribute(OBJECT);
 	}
 
 	/*
@@ -129,7 +129,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getWidth() {
-		return this.getAttribute(HtmlAttributeProperties.WIDTH);
+		return this.getAttribute(WIDTH);
 	}
 
 	/*
@@ -140,7 +140,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setAlign(String align) {
-		this.setAttribute(HtmlAttributeProperties.ALIGN, align);
+		this.setAttribute(ALIGN, align);
 	}
 
 	/**
@@ -150,7 +150,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 *            the new alt
 	 */
 	public void setAlt(String alt) {
-		this.setAttribute(HtmlAttributeProperties.ALT, alt);
+		this.setAttribute(ALT, alt);
 	}
 
 	/*
@@ -161,7 +161,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setArchive(String archive) {
-		this.setAttribute(HtmlAttributeProperties.ARCHIVE, archive);
+		this.setAttribute(ARCHIVE, archive);
 	}
 
 	/*
@@ -171,7 +171,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setCode(String code) {
-		this.setAttribute(HtmlAttributeProperties.CODE, code);
+		this.setAttribute(CODE, code);
 	}
 
 	/*
@@ -182,7 +182,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setCodeBase(String codeBase) {
-		this.setAttribute(HtmlAttributeProperties.CODEBASE, codeBase);
+		this.setAttribute(CODEBASE, codeBase);
 	}
 
 	/*
@@ -193,7 +193,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setHeight(String height) {
-		this.setAttribute(HtmlAttributeProperties.HEIGHT, height);
+		this.setAttribute(HEIGHT, height);
 	}
 
 	/*
@@ -203,7 +203,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setName(String name) {
-		this.setAttribute(HtmlAttributeProperties.NAME, name);
+		this.setAttribute(NAME, name);
 	}
 
 	/**
@@ -213,7 +213,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 *            the new object
 	 */
 	public void setObject(String object) {
-		this.setAttribute(HtmlAttributeProperties.OBJECT, object);
+		this.setAttribute(OBJECT, object);
 	}
 
 	/*
@@ -224,7 +224,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setWidth(String width) {
-		this.setAttribute(HtmlAttributeProperties.WIDTH, width);
+		this.setAttribute(WIDTH, width);
 	}
 
 	/*
@@ -234,7 +234,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getBorder() {
-		return this.getAttribute(HtmlAttributeProperties.BORDER);
+		return this.getAttribute(BORDER);
 	}
 
 	/*
@@ -244,7 +244,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getCodeType() {
-		return this.getAttribute(HtmlAttributeProperties.CODETYPE);
+		return this.getAttribute(CODETYPE);
 	}
 
 	/*
@@ -264,7 +264,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getData() {
-		return this.getAttribute(HtmlAttributeProperties.DATA);
+		return this.getAttribute(DATA);
 	}
 
 	/*
@@ -274,7 +274,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public boolean getDeclare() {
-		return "declare".equalsIgnoreCase(this.getAttribute(HtmlAttributeProperties.DECLARE));
+		return "declare".equalsIgnoreCase(this.getAttribute(DECLARE));
 	}
 
 	/*
@@ -298,7 +298,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public int getHspace() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.HSPACE);
+		String valueText = this.getAttribute(HSPACE);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -309,7 +309,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getStandby() {
-		return this.getAttribute(HtmlAttributeProperties.STANDBY);
+		return this.getAttribute(STANDBY);
 	}
 
 	/*
@@ -319,7 +319,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public int getTabIndex() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.TABINDEX);
+		String valueText = this.getAttribute(TABINDEX);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -330,7 +330,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getType() {
-		return this.getAttribute(HtmlAttributeProperties.TYPE);
+		return this.getAttribute(TYPE);
 	}
 
 	/*
@@ -340,7 +340,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getUseMap() {
-		return this.getAttribute(HtmlAttributeProperties.USEMAP);
+		return this.getAttribute(USEMAP);
 	}
 
 	/*
@@ -350,7 +350,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public int getVspace() {
-		String valueText = this.getAttribute(HtmlAttributeProperties.VSPACE);
+		String valueText = this.getAttribute(VSPACE);
 		return HtmlValues.getPixelSize(valueText, this.getRenderState(), 0);
 	}
 
@@ -362,7 +362,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setBorder(String border) {
-		this.setAttribute(HtmlAttributeProperties.BORDER, border);
+		this.setAttribute(BORDER, border);
 	}
 
 	/*
@@ -373,7 +373,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setCodeType(String codeType) {
-		this.setAttribute(HtmlAttributeProperties.CODETYPE, codeType);
+		this.setAttribute(CODETYPE, codeType);
 	}
 
 	/*
@@ -383,7 +383,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setData(String data) {
-		this.setAttribute(HtmlAttributeProperties.DATA, data);
+		this.setAttribute(DATA, data);
 	}
 
 	/*
@@ -393,7 +393,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setDeclare(boolean declare) {
-		this.setAttribute(HtmlAttributeProperties.DECLARE, declare ? "declare" : null);
+		this.setAttribute(DECLARE, declare ? "declare" : null);
 	}
 
 	/*
@@ -403,7 +403,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setHspace(int hspace) {
-		this.setAttribute(HtmlAttributeProperties.HSPACE, String.valueOf(hspace));
+		this.setAttribute(HSPACE, String.valueOf(hspace));
 	}
 
 	/*
@@ -414,7 +414,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setStandby(String standby) {
-		this.setAttribute(HtmlAttributeProperties.STANDBY, standby);
+		this.setAttribute(STANDBY, standby);
 	}
 
 	/*
@@ -424,7 +424,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setTabIndex(int tabIndex) {
-		this.setAttribute(HtmlAttributeProperties.TABINDEX, String.valueOf(tabIndex));
+		this.setAttribute(TABINDEX, String.valueOf(tabIndex));
 	}
 
 	/*
@@ -434,7 +434,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setType(String type) {
-		this.setAttribute(HtmlAttributeProperties.TYPE, type);
+		this.setAttribute(TYPE, type);
 	}
 
 	/*
@@ -445,7 +445,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setUseMap(String useMap) {
-		this.setAttribute(HtmlAttributeProperties.USEMAP, useMap);
+		this.setAttribute(USEMAP, useMap);
 	}
 
 	/*
@@ -455,7 +455,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setVspace(int vspace) {
-		this.setAttribute(HtmlAttributeProperties.VSPACE, String.valueOf(vspace));
+		this.setAttribute(VSPACE, String.valueOf(vspace));
 	}
 
 	/*

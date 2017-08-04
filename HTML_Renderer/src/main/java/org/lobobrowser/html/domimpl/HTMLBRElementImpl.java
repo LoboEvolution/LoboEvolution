@@ -45,7 +45,7 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 	 */
 	@Override
 	public String getClear() {
-		return this.getAttribute(HtmlAttributeProperties.CLEAR);
+		return this.getAttribute(CLEAR);
 	}
 
 	/*
@@ -55,7 +55,7 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 	 */
 	@Override
 	public void setClear(String clear) {
-		this.setAttribute(HtmlAttributeProperties.CLEAR, clear);
+		this.setAttribute(CLEAR, clear);
 	}
 
 	/*

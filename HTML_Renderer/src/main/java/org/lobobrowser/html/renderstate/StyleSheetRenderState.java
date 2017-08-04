@@ -61,7 +61,7 @@ import org.w3c.dom.css.CSS2Properties;
  *
  * @author J. H. S.
  */
-public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
+public class StyleSheetRenderState implements RenderState, HtmlAttributeProperties, CSSValuesProperties {
 
 	/** The Constant logger. */
 	protected static final Logger logger = LogManager.getLogger(StyleSheetRenderState.class.getName());
@@ -806,7 +806,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 			// Fall back to align attribute.
 			HTMLElement element = this.element;
 			if (element != null) {
-				textAlign = element.getAttribute(HtmlAttributeProperties.ALIGN);
+				textAlign = element.getAttribute(ALIGN);
 				if (textAlign == null || textAlign.length() == 0) {
 					RenderState prs = this.prevRenderState;
 					if (prs != null) {
@@ -985,7 +985,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 				}
 			} else {
 
-				String background = this.element.getAttribute(HtmlAttributeProperties.BACKGROUND);
+				String background = this.element.getAttribute(BACKGROUND);
 				if (background != null && !"".equals(background)) {
 					if (binfo == null) {
 						binfo = new BackgroundInfo();
@@ -1108,7 +1108,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 			}
 		} else {
 			String whiteSpaceTextTL = whiteSpaceText.toLowerCase();
-			if (NOWRAP.equals(whiteSpaceTextTL)) {
+			if (HtmlAttributeProperties.NOWRAP.equals(whiteSpaceTextTL)) {
 				wsValue = WS_NOWRAP;
 			} else if (PRE.equals(whiteSpaceTextTL)) {
 				wsValue = WS_PRE;
@@ -1352,7 +1352,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 				String visibTextTL = visibText.toLowerCase();
 
 				switch (visibTextTL) {
-				case HIDDEN:
+				case HtmlAttributeProperties.HIDDEN:
 					visibility = VISIBILITY_HIDDEN;
 					break;
 				case VISIBLE:
@@ -1517,7 +1517,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 			case AUTO:
 				overflow = OVERFLOW_AUTO;
 				break;
-			case HIDDEN:
+			case HtmlAttributeProperties.HIDDEN:
 				overflow = OVERFLOW_HIDDEN;
 				break;
 			case VISIBLE:
@@ -1569,7 +1569,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 			case AUTO:
 				overflow = OVERFLOW_AUTO;
 				break;
-			case HIDDEN:
+			case HtmlAttributeProperties.HIDDEN:
 				overflow = OVERFLOW_HIDDEN;
 				break;
 			case VISIBLE:
@@ -1648,7 +1648,7 @@ public class StyleSheetRenderState implements RenderState, CSSValuesProperties {
 				case MOVE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 					break;
-				case TEXT:
+				case HtmlAttributeProperties.TEXT:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 					break;
 				case WAIT:
