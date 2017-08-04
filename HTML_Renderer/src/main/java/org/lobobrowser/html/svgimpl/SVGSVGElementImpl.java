@@ -21,7 +21,6 @@
 package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.style.CSSProperties;
 import org.lobobrowser.w3c.svg.SVGAngle;
 import org.lobobrowser.w3c.svg.SVGAnimatedBoolean;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
@@ -49,6 +48,8 @@ import org.w3c.dom.events.EventException;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.DocumentView;
+
+import com.steadystate.css.util.CSSProperties;
 
 public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, CSSProperties {
 

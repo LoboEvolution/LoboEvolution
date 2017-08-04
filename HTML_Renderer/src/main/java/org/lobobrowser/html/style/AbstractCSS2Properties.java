@@ -40,6 +40,8 @@ import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleSheet;
 
+import com.steadystate.css.util.CSSProperties;
+
 /**
  * The Class AbstractCSS2Properties.
  */
