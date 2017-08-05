@@ -27,13 +27,40 @@ import org.lobobrowser.w3c.ObjectArray;
  * The Interface HTMLMediaElement.
  */
 public interface HTMLMediaElement extends HTMLElement {
+	
+	/** The Constant NETWORK_EMPTY. */
+	public static final short NETWORK_EMPTY = 0;
+
+	/** The Constant NETWORK_IDLE. */
+	public static final short NETWORK_IDLE = 1;
+
+	/** The Constant NETWORK_LOADING. */
+	public static final short NETWORK_LOADING = 2;
+
+	/** The Constant NETWORK_NO_SOURCE. */
+	public static final short NETWORK_NO_SOURCE = 3;
+
+	/** The Constant HAVE_NOTHING. */
+	public static final short HAVE_NOTHING = 0;
+
+	/** The Constant HAVE_METADATA. */
+	public static final short HAVE_METADATA = 1;
+
+	/** The Constant HAVE_CURRENT_DATA. */
+	public static final short HAVE_CURRENT_DATA = 2;
+
+	/** The Constant HAVE_FUTURE_DATA. */
+	public static final short HAVE_FUTURE_DATA = 3;
+
+	/** The Constant HAVE_ENOUGH_DATA. */
+	public static final short HAVE_ENOUGH_DATA = 4;
 
 	/**
 	 * Gets the error.
 	 *
 	 * @return the error
 	 */
-	// HTMLMediaElement
+
 	public MediaError getError();
 
 	/**
@@ -72,18 +99,6 @@ public interface HTMLMediaElement extends HTMLElement {
 	 *            the new cross origin
 	 */
 	public void setCrossOrigin(String crossOrigin);
-
-	/** The Constant NETWORK_EMPTY. */
-	public static final short NETWORK_EMPTY = 0;
-
-	/** The Constant NETWORK_IDLE. */
-	public static final short NETWORK_IDLE = 1;
-
-	/** The Constant NETWORK_LOADING. */
-	public static final short NETWORK_LOADING = 2;
-
-	/** The Constant NETWORK_NO_SOURCE. */
-	public static final short NETWORK_NO_SOURCE = 3;
 
 	/**
 	 * Gets the network state.
@@ -127,21 +142,6 @@ public interface HTMLMediaElement extends HTMLElement {
 	 * @return the string
 	 */
 	public String canPlayType(String type);
-
-	/** The Constant HAVE_NOTHING. */
-	public static final short HAVE_NOTHING = 0;
-
-	/** The Constant HAVE_METADATA. */
-	public static final short HAVE_METADATA = 1;
-
-	/** The Constant HAVE_CURRENT_DATA. */
-	public static final short HAVE_CURRENT_DATA = 2;
-
-	/** The Constant HAVE_FUTURE_DATA. */
-	public static final short HAVE_FUTURE_DATA = 3;
-
-	/** The Constant HAVE_ENOUGH_DATA. */
-	public static final short HAVE_ENOUGH_DATA = 4;
 
 	/**
 	 * Gets the ready state.

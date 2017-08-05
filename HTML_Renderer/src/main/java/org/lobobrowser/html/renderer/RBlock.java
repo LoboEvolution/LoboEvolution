@@ -123,6 +123,9 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	
 	/** The resetting scroll bars. */
 	private boolean resettingScrollBars = false;
+	
+	/** The armed renderable. */
+	private BoundableRenderable armedRenderable;
 
 	/**
 	 * Instantiates a new r block.
@@ -1099,9 +1102,6 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 			return true;
 		}
 	}
-
-	/** The armed renderable. */
-	private BoundableRenderable armedRenderable;
 
 	/**
 	 * Gets the armed renderable.

@@ -29,7 +29,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.HashMap;
@@ -416,41 +415,6 @@ public class RTable extends BaseElementRenderable {
 			}
 		}
 		return this.tableMatrix.onMouseReleased(event, x, y);
-	}
-
-	@Override
-	public boolean onKeyPressed(KeyEvent event) {
-		ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onKeyPress(this.modelNode, event);
-		} else {
-			return true;
-		}
-
-	}
-
-	@Override
-	public boolean onKeyUp(KeyEvent event) {
-		ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onKeyUp(this.modelNode, event);
-
-		} else {
-			return true;
-		}
-
-	}
-
-	@Override
-	public boolean onKeyDown(KeyEvent event) {
-		ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onKeyDown(this.modelNode, event);
-
-		} else {
-			return true;
-		}
-
 	}
 
 	/*

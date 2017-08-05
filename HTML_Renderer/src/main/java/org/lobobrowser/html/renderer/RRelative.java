@@ -21,7 +21,6 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
@@ -226,54 +225,6 @@ public class RRelative extends BaseRCollection {
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		return this.child.onMouseReleased(event, x - this.xoffset, y - this.yoffset);
-	}
-
-	@Override
-	public boolean onKeyPressed(KeyEvent event) {
-
-		// TODO
-
-		ModelNode me = this.modelNode;
-		if (me != null) {
-
-			return HtmlController.getInstance().onKeyPress(this.modelNode, event);
-
-		} else {
-			return true;
-		}
-
-	}
-
-	@Override
-	public boolean onKeyUp(KeyEvent event) {
-
-		// TODO
-
-		ModelNode me = this.modelNode;
-		if (me != null) {
-
-			return HtmlController.getInstance().onKeyUp(this.modelNode, event);
-
-		} else {
-			return true;
-		}
-
-	}
-
-	@Override
-	public boolean onKeyDown(KeyEvent event) {
-
-		// TODO
-
-		ModelNode me = this.modelNode;
-		if (me != null) {
-
-			return HtmlController.getInstance().onKeyDown(this.modelNode, event);
-
-		} else {
-			return true;
-		}
-
 	}
 
 	/*

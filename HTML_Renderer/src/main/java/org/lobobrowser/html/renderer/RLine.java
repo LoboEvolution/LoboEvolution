@@ -28,7 +28,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -641,24 +640,6 @@ public class RLine extends BaseRCollection {
 		} else {
 			return true;
 		}
-	}
-
-	@Override
-	public boolean onKeyPressed(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onKeyUp(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onKeyDown(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	/*

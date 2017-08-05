@@ -29,6 +29,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.Optional;
 
@@ -538,6 +539,86 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		if (triggerEvent && this.isContainedByNode()) {
 				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
 				setMouseOnMouseOver(this, this.modelNode, limit);
+		}
+	}
+	
+	@Override
+	public boolean onMouseClick(MouseEvent event, int x, int y) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseClick(me, event, null, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onDoubleClick(me, event, null, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMousePressed(MouseEvent event, int x, int y) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseDown(me, event, null, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseUp(me, event, null, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMouseDisarmed(MouseEvent event) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseDisarmed(me, event);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onKeyPressed(KeyEvent event) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onKeyPress(this.modelNode, event);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onKeyUp(KeyEvent event) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onKeyUp(this.modelNode, event);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onKeyDown(KeyEvent event) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onKeyDown(this.modelNode, event);
+		} else {
+			return true;
 		}
 	}
 

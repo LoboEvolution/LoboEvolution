@@ -28,6 +28,25 @@ import org.lobobrowser.html.dombl.UINode;
  * etc.
  */
 public interface RElement extends RCollection, UINode, BoundableRenderable {
+	
+	/** The Constant VALIGN_TOP. */
+	public static final int VALIGN_TOP = 0;
+
+	/** The Constant VALIGN_MIDDLE. */
+	public static final int VALIGN_MIDDLE = 1;
+
+	/** The Constant VALIGN_BOTTOM. */
+	public static final int VALIGN_BOTTOM = 2;
+
+	/** The Constant VALIGN_ABSMIDDLE. */
+	public static final int VALIGN_ABSMIDDLE = 3;
+
+	/** The Constant VALIGN_ABSBOTTOM. */
+	public static final int VALIGN_ABSBOTTOM = 4;
+
+	/** The Constant VALIGN_BASELINE. */
+	public static final int VALIGN_BASELINE = 5;
+	
 	/**
 	 * Lays out the subtree below the RElement. The RElement is expected to set
 	 * its own dimensions, but not its origin.
@@ -89,22 +108,4 @@ public interface RElement extends RCollection, UINode, BoundableRenderable {
 	 * @return the collapsible margin bottom
 	 */
 	int getCollapsibleMarginBottom();
-
-	/** The Constant VALIGN_TOP. */
-	static final int VALIGN_TOP = 0;
-
-	/** The Constant VALIGN_MIDDLE. */
-	static final int VALIGN_MIDDLE = 1;
-
-	/** The Constant VALIGN_BOTTOM. */
-	static final int VALIGN_BOTTOM = 2;
-
-	/** The Constant VALIGN_ABSMIDDLE. */
-	static final int VALIGN_ABSMIDDLE = 3;
-
-	/** The Constant VALIGN_ABSBOTTOM. */
-	static final int VALIGN_ABSBOTTOM = 4;
-
-	/** The Constant VALIGN_BASELINE. */
-	static final int VALIGN_BASELINE = 5;
 }

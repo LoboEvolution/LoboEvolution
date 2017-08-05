@@ -29,10 +29,26 @@ import org.w3c.dom.smil.ElementTimeControl;
  * attributes will go in a XLink interface.
  */
 public interface SMILAnimation extends SMILElement, ElementTargetAttributes, ElementTime, ElementTimeControl {
+	
 	// additiveTypes
 	public static final short ADDITIVE_REPLACE = 0;
+
 	public static final short ADDITIVE_SUM = 1;
 
+	// calcModeTypes
+	public static final short CALCMODE_DISCRETE = 0;
+	
+	public static final short CALCMODE_LINEAR = 1;
+	
+	public static final short CALCMODE_PACED = 2;
+	
+	public static final short CALCMODE_SPLINE = 3;
+
+	// accumulateTypes
+	public static final short ACCUMULATE_NONE = 0;
+	
+	public static final short ACCUMULATE_SUM = 1;
+	
 	/**
 	 * A code representing the value of the additive attribute, as defined
 	 * above. Default value is <code>ADDITIVE_REPLACE</code> .
@@ -45,9 +61,7 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 
 	public void setAdditive(short additive) throws DOMException;
 
-	// accumulateTypes
-	public static final short ACCUMULATE_NONE = 0;
-	public static final short ACCUMULATE_SUM = 1;
+	
 
 	/**
 	 * A code representing the value of the accumulate attribute, as defined
@@ -60,12 +74,6 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	public short getAccumulate();
 
 	public void setAccumulate(short accumulate) throws DOMException;
-
-	// calcModeTypes
-	public static final short CALCMODE_DISCRETE = 0;
-	public static final short CALCMODE_LINEAR = 1;
-	public static final short CALCMODE_PACED = 2;
-	public static final short CALCMODE_SPLINE = 3;
 
 	/**
 	 * A code representing the value of the calcMode attribute, as defined

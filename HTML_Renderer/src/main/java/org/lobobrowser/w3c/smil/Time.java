@@ -31,6 +31,24 @@ import org.w3c.dom.Element;
  * Still need to address the wallclock values.
  */
 public interface Time {
+
+	// TimeTypes
+	public static final short SMIL_TIME_INDEFINITE = 0;
+
+	public static final short SMIL_TIME_OFFSET = 1;
+
+	public static final short SMIL_TIME_SYNC_BASED = 2;
+
+	public static final short SMIL_TIME_EVENT_BASED = 3;
+
+	public static final short SMIL_TIME_WALLCLOCK = 4;
+
+	public static final short SMIL_TIME_MEDIA_MARKER = 5;
+
+	public static final short SMIL_TIME_REPEAT = 6;
+
+	public static final short SMIL_TIME_ACCESSKEY = 7;
+		
 	/**
 	 * A boolean indicating whether the current <code>Time</code> has been fully
 	 * resolved to the document schedule. Note that for this to be true, the
@@ -54,16 +72,6 @@ public interface Time {
 	 * container. This is only valid if resolved is true.
 	 */
 	public double getResolvedOffset();
-
-	// TimeTypes
-	public static final short SMIL_TIME_INDEFINITE = 0;
-	public static final short SMIL_TIME_OFFSET = 1;
-	public static final short SMIL_TIME_SYNC_BASED = 2;
-	public static final short SMIL_TIME_EVENT_BASED = 3;
-	public static final short SMIL_TIME_WALLCLOCK = 4;
-	public static final short SMIL_TIME_MEDIA_MARKER = 5;
-	public static final short SMIL_TIME_REPEAT = 6;
-	public static final short SMIL_TIME_ACCESSKEY = 7;
 
 	/**
 	 * A code representing the type of the underlying object, as defined above.

@@ -122,6 +122,9 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 
 	/** The table width length. */
 	private HtmlLength tableWidthLength;
+	
+	/** The armed renderable. */
+	private BoundableRenderable armedRenderable;
 
 	/**
 	 * Instantiates a new table matrix.
@@ -1794,9 +1797,6 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		}
 		return true;
 	}
-
-	/** The armed renderable. */
-	private BoundableRenderable armedRenderable;
 
 	/*
 	 * (non-Javadoc)

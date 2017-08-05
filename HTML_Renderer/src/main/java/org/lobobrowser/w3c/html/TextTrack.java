@@ -27,13 +27,24 @@ import org.mozilla.javascript.Function;
  * The Interface TextTrack.
  */
 public interface TextTrack {
+	
+	/** The Constant NONE. */
+	public static final short NONE = 0;
+
+	/** The Constant LOADING. */
+	public static final short LOADING = 1;
+
+	/** The Constant LOADED. */
+	public static final short LOADED = 2;
+
+	/** The Constant ERROR. */
+	public static final short ERROR = 3;
 
 	/**
 	 * Gets the kind.
 	 *
 	 * @return the kind
 	 */
-	// TextTrack
 	public String getKind();
 
 	/**
@@ -49,18 +60,6 @@ public interface TextTrack {
 	 * @return the language
 	 */
 	public String getLanguage();
-
-	/** The Constant NONE. */
-	public static final short NONE = 0;
-
-	/** The Constant LOADING. */
-	public static final short LOADING = 1;
-
-	/** The Constant LOADED. */
-	public static final short LOADED = 2;
-
-	/** The Constant ERROR. */
-	public static final short ERROR = 3;
 
 	/**
 	 * Gets the ready state.

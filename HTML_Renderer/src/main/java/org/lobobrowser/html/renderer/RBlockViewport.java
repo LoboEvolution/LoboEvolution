@@ -2139,24 +2139,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		return true;
 	}
 
-	@Override
-	public boolean onKeyPressed(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onKeyUp(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean onKeyDown(KeyEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
