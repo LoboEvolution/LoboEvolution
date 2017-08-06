@@ -18,9 +18,6 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Sep 3, 2005
- */
 package org.lobobrowser.html.domimpl;
 
 import java.net.MalformedURLException;

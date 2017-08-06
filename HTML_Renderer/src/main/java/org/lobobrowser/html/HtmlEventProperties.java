@@ -56,7 +56,7 @@ public interface HtmlEventProperties {
 	String CUSTOMEVENT = "CustomEvent";
 
 	/** The event. */
-	String EVENT = "Event";
+	String HTML_EVENT = "Event";
 
 	/** The svgevents. */
 	String SVGEVENTS = "SVGEvents";
