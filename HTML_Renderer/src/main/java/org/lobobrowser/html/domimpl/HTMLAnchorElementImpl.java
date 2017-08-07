@@ -178,7 +178,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	 *
 	 * @return the link color
 	 */
-	private Color getLinkColor() {
+	private Color linkColor() {
 		HTMLDocument doc = (HTMLDocument) this.document;
 		if (doc != null) {
 			HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
@@ -204,7 +204,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		if (this.hasAttribute(HREF)) {
 			prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
-			prevRenderState = new ColorRenderState(prevRenderState, this.getLinkColor());
+			prevRenderState = new ColorRenderState(prevRenderState, this.linkColor());
 			prevRenderState = new CursorRenderState(prevRenderState,
 					Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
 		}
