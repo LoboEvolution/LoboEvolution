@@ -117,9 +117,9 @@ public class HTMLVideoElementImpl extends HTMLElementImpl implements HTMLVideoEl
 	}
 
 	@Override
-	public short getReadyState() {
+	public String getReadyState() {
 		// TODO Auto-generated method stub
-		return 0;
+		return "";
 	}
 
 	@Override

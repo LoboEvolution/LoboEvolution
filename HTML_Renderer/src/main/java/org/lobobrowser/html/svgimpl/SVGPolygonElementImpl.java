@@ -20,7 +20,6 @@
  */
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.w3c.svg.SVGPointList;
 import org.lobobrowser.w3c.svg.SVGPolygonElement;
 

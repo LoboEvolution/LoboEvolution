@@ -21,7 +21,7 @@
  */
 package org.lobobrowser.w3c.svg;
 
-import org.w3c.dom.events.EventTarget;
+import org.lobobrowser.w3c.events.EventTarget;
 
 public interface SVGLineElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
 		SVGTransformable, EventTarget {

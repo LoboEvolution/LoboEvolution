@@ -148,7 +148,7 @@ public interface HTMLMediaElement extends HTMLElement {
 	 *
 	 * @return the ready state
 	 */
-	public short getReadyState();
+	public String getReadyState();
 
 	/**
 	 * Gets the seeking.

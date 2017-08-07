@@ -22,6 +22,7 @@ package org.lobobrowser.html.svgimpl;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.w3c.events.Event;
 import org.lobobrowser.w3c.svg.SVGAngle;
 import org.lobobrowser.w3c.svg.SVGAnimatedBoolean;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
@@ -45,9 +46,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSValue;
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventException;
-import org.w3c.dom.events.EventListener;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.DocumentView;
 
@@ -228,24 +226,6 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	public void setZoomAndPan(short zoomAndPan) throws DOMException {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void addEventListener(String type, EventListener listener, boolean useCapture) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void removeEventListener(String type, EventListener listener, boolean useCapture) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean dispatchEvent(Event evt) throws EventException {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

@@ -69,22 +69,16 @@ public class ElementAttributeFilter {
 	 * @return the attribute
 	 */
 	public String getAttribute() {
-
 		String result = "";
-
 		Node node = nodeList.item(0);
 		NamedNodeMap attribs = node.getAttributes();
-
 		for (int s = 0; s < attribs.getLength(); s++) {
 			Attr attr = (Attr) attribs.item(s);
-
 			if (attribute.equalsIgnoreCase(attr.getNodeName())) {
 				result = attr.getNodeValue();
 			}
 		}
-
 		return result;
-
 	}
 
 	/**

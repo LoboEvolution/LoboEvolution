@@ -1,6 +1,5 @@
 package org.lobobrowser.html.svgimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.w3c.svg.SVGAnimatedEnumeration;
 import org.lobobrowser.w3c.svg.SVGAnimatedLength;
 import org.lobobrowser.w3c.svg.SVGAnimatedLengthList;
