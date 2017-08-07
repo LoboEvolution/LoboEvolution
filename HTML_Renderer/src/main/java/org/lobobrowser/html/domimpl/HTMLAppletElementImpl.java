@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.w3c.dom.html.HTMLAppletElement;
 
 /**
@@ -75,7 +75,7 @@ public class HTMLAppletElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getCode() {
-		return this.getAttribute(CODE);
+		return this.getAttribute(CODE_ATTR);
 	}
 
 	/*
@@ -125,7 +125,7 @@ public class HTMLAppletElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getObject() {
-		return this.getAttribute(OBJECT);
+		return this.getAttribute(OBJECT_HTML);
 	}
 
 	/*
@@ -185,7 +185,7 @@ public class HTMLAppletElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setCode(String code) {
-		this.setAttribute(CODE, code);
+		this.setAttribute(CODE_ATTR, code);
 	}
 
 	/*
@@ -235,7 +235,7 @@ public class HTMLAppletElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setObject(String object) {
-		this.setAttribute(OBJECT, object);
+		this.setAttribute(OBJECT_HTML, object);
 	}
 
 	/*

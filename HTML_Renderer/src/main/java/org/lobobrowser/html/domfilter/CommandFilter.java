@@ -20,7 +20,8 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.HtmlProperties;
+
+
 import org.w3c.dom.Node;
 
 /**
@@ -35,7 +36,7 @@ public class CommandFilter implements NodeFilter {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		return HtmlProperties.COMMAND.equalsIgnoreCase(node.getNodeName());
+		return COMMAND.equalsIgnoreCase(node.getNodeName());
 	}
 
 }

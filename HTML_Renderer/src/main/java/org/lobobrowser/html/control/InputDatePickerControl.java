@@ -28,7 +28,6 @@ import java.util.Date;
 import javax.swing.BorderFactory;
 
 import org.jdatepicker.JDatePicker;
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.util.gui.WrapperLayout;
 

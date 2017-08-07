@@ -20,7 +20,8 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.HtmlProperties;
+
+
 import org.w3c.dom.Node;
 
 /**
@@ -35,6 +36,6 @@ public class ImageFilter implements NodeFilter {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		return HtmlProperties.IMG.equalsIgnoreCase(node.getNodeName());
+		return IMG.equalsIgnoreCase(node.getNodeName());
 	}
 }

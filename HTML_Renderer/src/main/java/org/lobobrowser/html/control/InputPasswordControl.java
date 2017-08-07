@@ -34,7 +34,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 

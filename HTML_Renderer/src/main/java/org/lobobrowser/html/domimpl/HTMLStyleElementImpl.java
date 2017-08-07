@@ -23,8 +23,9 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.HtmlProperties;
+
+
+
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.http.UserAgentContext;
@@ -52,7 +53,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	 * Instantiates a new HTML style element impl.
 	 */
 	public HTMLStyleElementImpl() {
-		super(HtmlProperties.STYLE, true);
+		super(STYLE_HTML, true);
 	}
 
 	/**

@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLFormElement;
@@ -80,7 +80,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public String getCode() {
-		return this.getAttribute(CODE);
+		return this.getAttribute(CODE_ATTR);
 	}
 
 	/*
@@ -119,7 +119,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 * @return the object
 	 */
 	public String getObject() {
-		return this.getAttribute(OBJECT);
+		return this.getAttribute(OBJECT_HTML);
 	}
 
 	/*
@@ -171,7 +171,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 */
 	@Override
 	public void setCode(String code) {
-		this.setAttribute(CODE, code);
+		this.setAttribute(CODE_ATTR, code);
 	}
 
 	/*
@@ -213,7 +213,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	 *            the new object
 	 */
 	public void setObject(String object) {
-		this.setAttribute(OBJECT, object);
+		this.setAttribute(OBJECT_HTML, object);
 	}
 
 	/*

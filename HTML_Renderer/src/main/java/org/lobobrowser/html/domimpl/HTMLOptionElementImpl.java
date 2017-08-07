@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.w3c.html.HTMLFormElement;
 import org.lobobrowser.w3c.html.HTMLOptionElement;
 import org.lobobrowser.w3c.html.HTMLSelectElement;
@@ -30,6 +30,9 @@ import org.w3c.dom.Node;
  * The Class HTMLOptionElementImpl.
  */
 public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOptionElement {
+	
+	/** The selected. */
+	private boolean selected;
 
 	/**
 	 * Instantiates a new HTML option element impl.
@@ -98,7 +101,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public String getLabel() {
-		return this.getAttribute(LABEL);
+		return this.getAttribute(LABEL_ATTR);
 	}
 
 	/*
@@ -171,11 +174,8 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 */
 	@Override
 	public void setLabel(String label) {
-		this.setAttribute(LABEL, label);
+		this.setAttribute(LABEL_ATTR, label);
 	}
-
-	/** The selected. */
-	private boolean selected;
 
 	/**
 	 * Sets the selected impl.

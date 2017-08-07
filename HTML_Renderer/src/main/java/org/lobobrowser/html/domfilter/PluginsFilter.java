@@ -20,7 +20,8 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.HtmlProperties;
+
+
 import org.w3c.dom.Node;
 
 /**
@@ -35,7 +36,7 @@ public class PluginsFilter implements NodeFilter {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		return HtmlProperties.EMBED.equalsIgnoreCase(node.getNodeName());
+		return EMBED.equalsIgnoreCase(node.getNodeName());
 	}
 
 }

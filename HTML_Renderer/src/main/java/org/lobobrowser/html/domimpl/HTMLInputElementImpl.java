@@ -24,7 +24,6 @@ import java.io.File;
 
 import org.apache.logging.log4j.Level;
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.w3c.html.HTMLInputElement;
 

@@ -20,8 +20,8 @@
  */
 package org.lobobrowser.w3c.svg;
 
-import org.w3c.dom.DOMException;
 import org.lobobrowser.w3c.events.EventTarget;
+import org.w3c.dom.DOMException;
 
 public interface SVGTextContentElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, EventTarget {

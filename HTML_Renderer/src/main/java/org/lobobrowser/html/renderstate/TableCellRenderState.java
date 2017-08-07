@@ -22,7 +22,6 @@ package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;

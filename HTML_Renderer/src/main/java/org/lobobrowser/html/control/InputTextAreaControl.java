@@ -35,7 +35,6 @@ import java.awt.event.KeyListener;
 import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.JTextAreaImpl;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;

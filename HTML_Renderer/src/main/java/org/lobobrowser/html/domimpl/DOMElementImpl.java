@@ -153,7 +153,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 	 * @return the title
 	 */
 	public String getTitle() {
-		return this.getAttribute(TITLE);
+		return this.getAttribute(TITLE_ATTR);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 	 *            the new title
 	 */
 	public void setTitle(String title) {
-		this.setAttribute(TITLE, title);
+		this.setAttribute(TITLE_ATTR, title);
 	}
 
 	/**

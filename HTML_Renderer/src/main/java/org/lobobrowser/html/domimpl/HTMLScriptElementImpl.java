@@ -36,8 +36,6 @@ import java.util.MissingResourceException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.Method;
@@ -72,7 +70,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 * Instantiates a new HTML script element impl.
 	 */
 	public HTMLScriptElementImpl() {
-		super(HtmlProperties.SCRIPT, true);
+		super(SCRIPT, true);
 	}
 
 	/**

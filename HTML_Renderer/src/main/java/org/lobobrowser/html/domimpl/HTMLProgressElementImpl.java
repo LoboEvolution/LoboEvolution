@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLProgressElement;
 import org.w3c.dom.NodeList;

@@ -74,7 +74,7 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 
-public abstract class DOMFunctionImpl extends FunctionImpl implements HtmlJsAttributeProperties, HtmlEventProperties {
+public abstract class DOMFunctionImpl extends FunctionImpl implements HtmlJsAttributeProperties, HtmlEventProperties, HtmlProperties {
 	
 	private List<String> EXECUTE_CMDS = Arrays.asList(new String[] { "backColor", "bold", "contentReadOnly",
 			"copy", "createLink", "cut", "decreaseFontSize", "delete", "fontName", "fontSize", "foreColor",
@@ -96,18 +96,18 @@ public abstract class DOMFunctionImpl extends FunctionImpl implements HtmlJsAttr
 	}
 
 	public String getFgColor() {
-		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, TEXT);
+		NodeList nodeList = getElementsByTagName(BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, TEXT_HTML);
 		return attr.getAttribute();
 	}
 
 	public void setFgColor(String fgColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(TEXT);
+		ElementAttributeFilter attr = new ElementAttributeFilter(TEXT_HTML);
 		attr.setAttribute((HTMLDocumentImpl) this.document, fgColor);
 	}
 
 	public String getBgColor() {
-		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		NodeList nodeList = getElementsByTagName(BODY);
 		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, BGCOLOR);
 		return attr.getAttribute();
 	}
@@ -118,18 +118,18 @@ public abstract class DOMFunctionImpl extends FunctionImpl implements HtmlJsAttr
 	}
 
 	public String getLinkColor() {
-		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
-		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, LINK);
+		NodeList nodeList = getElementsByTagName(BODY);
+		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, LINK_HTML);
 		return attr.getAttribute();
 	}
 
 	public void setLinkColor(String linkColor) {
-		ElementAttributeFilter attr = new ElementAttributeFilter(LINK);
+		ElementAttributeFilter attr = new ElementAttributeFilter(LINK_HTML);
 		attr.setAttribute((HTMLDocumentImpl) this.document, linkColor);
 	}
 
 	public String getVlinkColor() {
-		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		NodeList nodeList = getElementsByTagName(BODY);
 		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, VLINK);
 		return attr.getAttribute();
 	}
@@ -141,7 +141,7 @@ public abstract class DOMFunctionImpl extends FunctionImpl implements HtmlJsAttr
 	}
 
 	public String getAlinkColor() {
-		NodeList nodeList = getElementsByTagName(HtmlProperties.BODY);
+		NodeList nodeList = getElementsByTagName(BODY);
 		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, ALINK);
 		return attr.getAttribute();
 	}
@@ -297,7 +297,7 @@ public abstract class DOMFunctionImpl extends FunctionImpl implements HtmlJsAttr
 	}
 	
 	public String getCharacterSet() {
-		NodeList nodeList = getElementsByTagName(HtmlProperties.META);
+		NodeList nodeList = getElementsByTagName(META);
 		ElementAttributeFilter attr = new ElementAttributeFilter(nodeList, CHARSET);
 		return attr.getAttribute();
 	}

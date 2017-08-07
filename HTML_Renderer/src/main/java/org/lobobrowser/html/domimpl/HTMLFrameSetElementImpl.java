@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.w3c.html.HTMLFrameSetElement;
 import org.mozilla.javascript.Function;
 

@@ -168,13 +168,13 @@ public class HtmlMapping implements HtmlProperties {
 
 		elementInfos.put(NOSCRIPT, new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true));
 		elementInfos.put(SCRIPT, onlyText);
-		elementInfos.put(STYLE, onlyText);
+		elementInfos.put(STYLE_HTML, onlyText);
 		elementInfos.put(TEXTAREA, onlyTextDE);
 		elementInfos.put(IMG, forbiddenEndElement);
 		elementInfos.put(META, forbiddenEndElement);
-		elementInfos.put(LINK, forbiddenEndElement);
+		elementInfos.put(LINK_HTML, forbiddenEndElement);
 		elementInfos.put(BASE, forbiddenEndElement);
-		elementInfos.put(INPUT, forbiddenEndElement);
+		elementInfos.put(INPUT_HTML, forbiddenEndElement);
 		elementInfos.put(BUTTON, forbiddenEndElement);
 		elementInfos.put(FRAME, forbiddenEndElement);
 		elementInfos.put(BR, forbiddenEndElement);
@@ -265,8 +265,8 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(SPAN, new SpanBuilder());
 		builders.put(SCRIPT, new ScriptBuilder());
 		builders.put(IMG, new ImgBuilder());
-		builders.put(STYLE, new StyleBuilder());
-		builders.put(LINK, new LinkBuilder());
+		builders.put(STYLE_HTML, new StyleBuilder());
+		builders.put(LINK_HTML, new LinkBuilder());
 		builders.put(TABLE, new TableBuilder());
 		builders.put(TD, new TdBuilder());
 		builders.put(TH, new ThBuilder());
@@ -275,7 +275,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(TBODY, new SectionBuilder());
 		builders.put(TFOOT, new SectionBuilder());
 		builders.put(FORM, new FormBuilder());
-		builders.put(INPUT, new InputBuilder());
+		builders.put(INPUT_HTML, new InputBuilder());
 		builders.put(BUTTON, new ButtonBuilder());
 		builders.put(TEXTAREA, new TextareaBuilder());
 		builders.put(SELECT, new SelectBuilder());
@@ -326,7 +326,7 @@ public class HtmlMapping implements HtmlProperties {
 		builders.put(DEFS, new SVGDefsBuilder());
 		builders.put(USE, new SVGUseBuilder());
 		builders.put(SYMBOL, new SVGSymbolBuilder());
-		builders.put(TEXT, new SVGTextBuilder());
+		builders.put(TEXT_HTML, new SVGTextBuilder());
 		builders.put(RADIAL_GRADIENT, new SVGRadialGradientBuilder());
 		builders.put(LINEAR_GRADIENT, new SVGLinearGradientBuilder());
 		builders.put(STOP, new SVGStopBuilder());

@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.domfilter;
 
+
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

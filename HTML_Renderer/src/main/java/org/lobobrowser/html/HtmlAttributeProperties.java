@@ -89,7 +89,7 @@ public interface HtmlAttributeProperties {
 	String COLOR = "color";
 
 	/** The code. */
-	String CODE = "code";
+	String CODE_ATTR = "code";
 
 	/** The codebase. */
 	String CODEBASE = "codebase";
@@ -146,7 +146,7 @@ public interface HtmlAttributeProperties {
 	String CLASS = "class";
 
 	/** The class. */
-	String CLIPPATH = "clip-path";
+	String CLIPPATH_ATTR = "clip-path";
 
 	/** The charset. */
 	String CHARSET = "charset";
@@ -205,7 +205,7 @@ public interface HtmlAttributeProperties {
 	String FOR = "For";
 
 	/** The form. */
-	String FORM = "form";
+	String FORM_ATTR = "form";
 
 	/** The formaction. */
 	String FORMACTION = "formaction";
@@ -223,7 +223,7 @@ public interface HtmlAttributeProperties {
 	String FORMTARGET = "formtarget";
 
 	/** The frame. */
-	String FRAME = "frame";
+	String FRAME_ATTR = "frame";
 
 	/** The frameborder. */
 	String FRAMEBORDER = "frameBorder";
@@ -295,7 +295,7 @@ public interface HtmlAttributeProperties {
 	String LINK = "link";
 
 	/** The label. */
-	String LABEL = "label";
+	String LABEL_ATTR = "label";
 
 	/** The longdesc. */
 	String LONGDESC = "longdesc";
@@ -358,7 +358,7 @@ public interface HtmlAttributeProperties {
 	String ONLOAD = "onload";
 
 	/** The object. */
-	String OBJECT = "object";
+	String OBJECT_HTML = "object";
 
 	/** The offset. */
 	String OFFSET = "offset";
@@ -487,7 +487,7 @@ public interface HtmlAttributeProperties {
 	String TYPE = "type";
 
 	/** The title. */
-	String TITLE = "title";
+	String TITLE_ATTR = "title";
 
 	/** The topmargin. */
 	String TOPMARGIN = "topmargin";

@@ -207,7 +207,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			}
 			sds = new LocalCSS2Properties(this);
 			// Add any declarations in style attribute (last takes precedence).
-			String style = this.getAttribute(STYLE);
+			String style = this.getAttribute(STYLE_HTML);
 
 			if (style != null && style.length() != 0) {
 				CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
@@ -302,7 +302,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *            the new style
 	 */
 	public void setStyle(String value) {
-		this.setAttribute(STYLE, value);
+		this.setAttribute(STYLE_HTML, value);
 	}
 
 	/*

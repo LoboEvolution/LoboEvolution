@@ -20,6 +20,7 @@
  */
 package org.lobobrowser.html.svgimpl;
 
+
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.w3c.events.Event;
@@ -506,7 +507,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	}
 
 	public String getClipPath() {
-		return this.getAttribute(CLIPPATH);
+		return this.getAttribute(CLIPPATH_ATTR);
 	}
 	
 	public SVGAnimatedTransformList getTransform() {

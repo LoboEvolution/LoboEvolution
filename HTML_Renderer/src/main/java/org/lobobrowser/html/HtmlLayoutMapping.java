@@ -92,8 +92,8 @@ public class HtmlLayoutMapping implements HtmlProperties {
 		el.put(SCRIPT, nop);
 		el.put(TITLE, nop);
 		el.put(META, nop);
-		el.put(STYLE, nop);
-		el.put(LINK, nop);
+		el.put(STYLE_HTML, nop);
+		el.put(LINK_HTML, nop);
 		el.put(HEAD, new HeadLayout());
 		el.put(IMG, new ImgLayout());
 		el.put(TABLE, new TableLayout());
@@ -104,7 +104,7 @@ public class HtmlLayoutMapping implements HtmlProperties {
 		AnchorLayout anchor = new AnchorLayout();
 		el.put(A, anchor);
 		el.put(ANCHOR, anchor);
-		el.put(INPUT, new InputLayout());
+		el.put(INPUT_HTML, new InputLayout());
 		el.put(BUTTON, new ButtonLayout());
 		el.put(TEXTAREA, new TextAreaLayout());
 		el.put(SELECT, new SelectLayout());

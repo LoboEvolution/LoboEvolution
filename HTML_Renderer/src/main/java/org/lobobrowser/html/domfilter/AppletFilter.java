@@ -20,7 +20,8 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.HtmlProperties;
+
+
 import org.w3c.dom.Node;
 
 /**
@@ -35,6 +36,6 @@ public class AppletFilter implements NodeFilter {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		return HtmlProperties.APPLET.equalsIgnoreCase(node.getNodeName());
+		return APPLET.equalsIgnoreCase(node.getNodeName());
 	}
 }

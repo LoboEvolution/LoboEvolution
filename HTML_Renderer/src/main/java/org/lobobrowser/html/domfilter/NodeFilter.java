@@ -23,12 +23,14 @@
  */
 package org.lobobrowser.html.domfilter;
 
+
+import org.lobobrowser.html.HtmlProperties;
 import org.w3c.dom.Node;
 
 /**
  * The Interface NodeFilter.
  */
-public interface NodeFilter {
+public interface NodeFilter extends HtmlProperties {
 
 	/**
 	 * Accept.

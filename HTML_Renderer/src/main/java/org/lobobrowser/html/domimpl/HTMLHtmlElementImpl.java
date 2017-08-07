@@ -23,8 +23,9 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.HtmlProperties;
+
+
+
 import org.lobobrowser.w3c.html.HTMLHtmlElement;
 
 /**
@@ -36,7 +37,7 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	 * Instantiates a new HTML html element impl.
 	 */
 	public HTMLHtmlElementImpl() {
-		super(HtmlProperties.HTML, true);
+		super(HTML, true);
 	}
 
 	/**

@@ -26,7 +26,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.renderstate.ColorRenderState;
 import org.lobobrowser.html.renderstate.CursorRenderState;

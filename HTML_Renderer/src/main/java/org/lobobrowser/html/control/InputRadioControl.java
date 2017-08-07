@@ -28,7 +28,6 @@ import java.awt.ComponentOrientation;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;

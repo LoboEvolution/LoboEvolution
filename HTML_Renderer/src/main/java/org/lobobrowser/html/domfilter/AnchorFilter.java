@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
 /**
  * The Class AnchorFilter.
  */
-public class AnchorFilter implements NodeFilter {
+public class AnchorFilter implements NodeFilter, HtmlProperties {
 
 	/*
 	 * (non-Javadoc)
@@ -36,6 +36,6 @@ public class AnchorFilter implements NodeFilter {
 	@Override
 	public boolean accept(Node node) {
 		String nodeName = node.getNodeName();
-		return HtmlProperties.A.equalsIgnoreCase(nodeName) || HtmlProperties.ANCHOR.equalsIgnoreCase(nodeName);
+		return A.equalsIgnoreCase(nodeName) || ANCHOR.equalsIgnoreCase(nodeName);
 	}
 }
