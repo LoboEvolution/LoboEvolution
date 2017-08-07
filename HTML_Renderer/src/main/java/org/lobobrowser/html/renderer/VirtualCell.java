@@ -23,8 +23,6 @@
  */
 package org.lobobrowser.html.renderer;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlLength;
@@ -34,9 +32,6 @@ import org.lobobrowser.w3c.html.HTMLTableElement;
  * The Class VirtualCell.
  */
 public class VirtualCell implements CSSValuesProperties {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(VirtualCell.class);
 
 	/** The actual cell. */
 	private final RTableCell actualCell;
