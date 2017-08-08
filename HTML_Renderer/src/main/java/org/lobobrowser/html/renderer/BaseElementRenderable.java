@@ -134,6 +134,24 @@ public abstract class BaseElementRenderable extends BaseRCollection
 
 	/** The user agent context. */
 	protected final UserAgentContext userAgentContext;
+	
+	/** The layout deep can be invalidated. */
+	protected boolean layoutDeepCanBeInvalidated = false;
+
+	/** The declared width. */
+	private Integer declaredWidth = INVALID_SIZE;
+
+	/** The declared height. */
+	private Integer declaredHeight = INVALID_SIZE;
+
+	/** The Constant SCROLL_BAR_THICKNESS. */
+	protected static final int SCROLL_BAR_THICKNESS = 16;
+	
+	/** The last avail width for declared. */
+	private int lastAvailWidthForDeclared = -1;
+
+	/** The last avail height for declared. */
+	private int lastAvailHeightForDeclared = -1;
 
 	/**
 	 * Instantiates a new base element renderable.
@@ -188,9 +206,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return 0.0f;
 	}
 
-	/** The layout deep can be invalidated. */
-	protected boolean layoutDeepCanBeInvalidated = false;
-
 	/**
 	 * Invalidates this Renderable and all descendents. This is only used in
 	 * special cases, such as when a new style sheet is added.
@@ -231,19 +246,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		this.lastAvailHeightForDeclared = -1;
 		this.lastAvailWidthForDeclared = -1;
 	}
-
-	/** The declared width. */
-	private Integer declaredWidth = INVALID_SIZE;
-
-	/** The declared height. */
-	private Integer declaredHeight = INVALID_SIZE;
-
-	/** The last avail width for declared. */
-	private int lastAvailWidthForDeclared = -1;
-
-	/** The last avail height for declared. */
-	private int lastAvailHeightForDeclared = -1;
-
+	
+	
 	/**
 	 * Gets the declared width.
 	 *
@@ -255,7 +259,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	protected Integer getDeclaredWidth(RenderState renderState, int actualAvailWidth) {
 		Integer dw = this.declaredWidth;
-		if (dw == INVALID_SIZE || actualAvailWidth != this.lastAvailWidthForDeclared) {
+		if (INVALID_SIZE.equals(dw) || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			int dwInt = this.getDeclaredWidthImpl(renderState, actualAvailWidth);
 			dw = dwInt == -1 ? null : new Integer(dwInt);
@@ -271,7 +275,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	public final boolean hasDeclaredWidth() {
 		Integer dw = this.declaredWidth;
-		if (dw == INVALID_SIZE) {
+		if (INVALID_SIZE.equals(dw)) {
 			Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				HTMLElementImpl element = (HTMLElementImpl) rootNode;
@@ -534,7 +538,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	@Override
 	public Rectangle getBoundsRelativeToBlock() {
 		RCollection parent = this;
-		int x = 0, y = 0;
+		int x = 0;
+		int y = 0;
 		while (parent != null) {
 			x += parent.getX();
 			y += parent.getY();
@@ -645,7 +650,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			HtmlInsets minsets = rs.getMarginInsets();
 			HtmlInsets pinsets = rs.getPaddingInsets();
 			Insets defaultMarginInsets = this.defaultMarginInsets;
-			int dmleft = 0, dmright = 0, dmtop = 0, dmbottom = 0;
+			int dmleft = 0;
+			int dmright = 0;
+			int dmtop = 0;
+			int dmbottom = 0;
 			if (defaultMarginInsets != null) {
 				dmleft = defaultMarginInsets.left;
 				dmright = defaultMarginInsets.right;
@@ -653,7 +661,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				dmbottom = defaultMarginInsets.bottom;
 			}
 			Insets defaultPaddingInsets = this.defaultPaddingInsets;
-			int dpleft = 0, dpright = 0, dptop = 0, dpbottom = 0;
+			int dpleft = 0;
+			int dpright = 0;
+			int dptop = 0;
+			int dpbottom = 0;
 			if (defaultPaddingInsets != null) {
 				dpleft = defaultPaddingInsets.left;
 				dpright = defaultPaddingInsets.right;
@@ -681,7 +692,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					- borderInsets.bottom - tentativeMarginInsets.top - tentativeMarginInsets.bottom;
 			Integer declaredWidth = this.getDeclaredWidth(rs, actualAvailWidth);
 			Integer declaredHeight = this.getDeclaredHeight(rs, actualAvailHeight);
-			int autoMarginX = 0, autoMarginY = 0;
+			int autoMarginX = 0;
+			int autoMarginY = 0;
 			if (declaredWidth != null) {
 				autoMarginX = (availWidth - declaredWidth.intValue()
 						- (borderInsets == null ? 0 : borderInsets.left - borderInsets.right)
@@ -886,7 +898,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @param g
 	 *            the g
 	 */
-	protected void prePaint(java.awt.Graphics g) {
+	protected void prePaint(Graphics g) {
 		int startWidth = getWidthElement();
 		int startHeight = getHeightElement();
 		int totalWidth = startWidth;
@@ -1096,9 +1108,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 		return true;
 	}
-
-	/** The Constant SCROLL_BAR_THICKNESS. */
-	protected static final int SCROLL_BAR_THICKNESS = 16;
 
 	/**
 	 * Gets insets of content area. It includes margin, borders and scrollbars,

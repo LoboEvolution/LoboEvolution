@@ -62,6 +62,18 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(FrameSetPanel.class.getName());
+	
+	/** The root node. */
+	private HTMLElementImpl rootNode;
+	
+	/** The html context. */
+	private HtmlRendererContext htmlContext;
+
+	/** The frame components. */
+	private Component[] frameComponents;
+
+	/** The dom invalid. */
+	private boolean domInvalid = true;
 
 	/**
 	 * Instantiates a new frame set panel.
@@ -117,9 +129,6 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 		}
 		return subFrames.toArray(new HTMLElementImpl[0]);
 	}
-
-	/** The root node. */
-	private HTMLElementImpl rootNode;
 
 	/**
 	 * Sets the FRAMESET node and invalidates the component so it can be
@@ -177,15 +186,6 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 			}
 		}
 	}
-
-	/** The html context. */
-	private HtmlRendererContext htmlContext;
-
-	/** The frame components. */
-	private Component[] frameComponents;
-
-	/** The dom invalid. */
-	private boolean domInvalid = true;
 
 	/*
 	 * (non-Javadoc)

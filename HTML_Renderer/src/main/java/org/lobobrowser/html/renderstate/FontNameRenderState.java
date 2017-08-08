@@ -40,6 +40,9 @@ public class FontNameRenderState extends RenderStateDelegator {
 	
 	/** The i word info map. */
 	private Map<String, WordInfo> iWordInfoMap = null;
+	
+	/** The i font. */
+	private Font iFont;
 	 
 
 	/**
@@ -54,9 +57,6 @@ public class FontNameRenderState extends RenderStateDelegator {
 		super(prevRenderState);
 		this.fontName = fontName;
 	}
-
-	/** The i font. */
-	private Font iFont;
 
 	/*
 	 * (non-Javadoc)

@@ -57,6 +57,15 @@ public class ClientletContextImpl implements ClientletContext {
 
 	/** The response. */
 	private final ClientletResponse response;
+	
+	/** The items. */
+	private Map<String, Object> items = null;
+
+	/** The resulting content. */
+	private volatile ComponentContent resultingContent;
+
+	/** The window properties. */
+	private volatile Properties windowProperties;
 
 	/**
 	 * Instantiates a new clientlet context impl.
@@ -109,9 +118,6 @@ public class ClientletContextImpl implements ClientletContext {
 	public NavigatorFrame getNavigatorFrame() {
 		return this.frame;
 	}
-
-	/** The items. */
-	private Map<String, Object> items = null;
 
 	/*
 	 * (non-Javadoc)
@@ -203,9 +209,8 @@ public class ClientletContextImpl implements ClientletContext {
 			items.put(name, value);
 		}
 	}
-
-	/** The resulting content. */
-	private volatile ComponentContent resultingContent;
+	
+	
 
 	/*
 	 * (non-Javadoc)
@@ -253,9 +258,7 @@ public class ClientletContextImpl implements ClientletContext {
 	public void setResultingContent(ComponentContent content) {
 		this.resultingContent = content;
 	}
-
-	/** The window properties. */
-	private volatile Properties windowProperties;
+	
 
 	/*
 	 * (non-Javadoc)

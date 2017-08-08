@@ -42,14 +42,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845020000200400L;
-
-	/**
-	 * Instantiates a new base history.
-	 */
-	protected BaseHistory() {
-		super();
-	}
-
+	
 	/** The history sorted set. */
 	private final SortedSet<String> historySortedSet = new TreeSet<String>();
 
@@ -61,6 +54,13 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 
 	/** The common entries capacity. */
 	private final int commonEntriesCapacity = 1000;
+
+	/**
+	 * Instantiates a new base history.
+	 */
+	protected BaseHistory() {
+		super();
+	}
 
 	/**
 	 * Checks for recent entries.

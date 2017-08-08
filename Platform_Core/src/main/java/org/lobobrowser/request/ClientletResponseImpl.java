@@ -18,9 +18,6 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Mar 13, 2005
- */
 package org.lobobrowser.request;
 
 import java.io.BufferedInputStream;

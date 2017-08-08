@@ -65,6 +65,9 @@ public class AddBookmarkDialog extends JDialog {
 	/** The url. */
 	private final URL url;
 
+	/** The bookmark info. */
+	private BookmarkInfo bookmarkInfo;
+
 	/**
 	 * Instantiates a new adds the bookmark dialog.
 	 *
@@ -117,8 +120,6 @@ public class AddBookmarkDialog extends JDialog {
 		contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
 	}
 
-	/** The bookmark info. */
-	private BookmarkInfo bookmarkInfo;
 
 	/**
 	 * Gets the bookmark info.

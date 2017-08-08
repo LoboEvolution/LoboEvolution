@@ -33,10 +33,12 @@ import org.lobobrowser.security.GenericLocalPermission;
  * A factory for creating Clientlet objects.
  */
 public class ClientletFactory {
-	// private static final Logger logger =
-	// LogManager.getLogger(ClientletFactory.class);
+	
 	/** The instance. */
 	private static ClientletFactory instance;
+	
+	/** The selectors. */
+	private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
 
 	/**
 	 * Instantiates a new clientlet factory.
@@ -60,9 +62,6 @@ public class ClientletFactory {
 		}
 		return instance;
 	}
-
-	/** The selectors. */
-	private final List<ClientletSelector> selectors = new LinkedList<ClientletSelector>();
 
 	/**
 	 * Adds the clientlet selector.

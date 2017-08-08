@@ -35,6 +35,10 @@ import java.awt.LayoutManager;
  * @author J. H. S.
  */
 public class CenterLayout implements LayoutManager {
+	
+	/** The instance. */
+	private static CenterLayout instance = new CenterLayout();
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -125,9 +129,6 @@ public class CenterLayout implements LayoutManager {
 			child.setBounds(x, y, width, height);
 		}
 	}
-
-	/** The instance. */
-	private static CenterLayout instance = new CenterLayout();
 
 	/**
 	 * Gets the instance.

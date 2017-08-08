@@ -48,6 +48,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	
 	/** The caption. */
 	private HTMLTableCaptionElement caption;
+	
+	/** The thead. */
+	private HTMLTableSectionElement thead;
+
+	/** The tfoot. */
+	private HTMLTableSectionElement tfoot;
 
 	/**
 	 * Instantiates a new HTML table element impl.
@@ -88,9 +94,6 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		this.caption = caption;
 	}
 
-	/** The thead. */
-	private HTMLTableSectionElement thead;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -112,10 +115,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	public void setTHead(HTMLTableSectionElement tHead) throws DOMException {
 		this.thead = tHead;
 	}
-
-	/** The tfoot. */
-	private HTMLTableSectionElement tfoot;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

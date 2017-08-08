@@ -39,6 +39,15 @@ public interface TextTrack {
 
 	/** The Constant ERROR. */
 	public static final short ERROR = 3;
+	
+	/** The Constant OFF. */
+	public static final short OFF = 0;
+
+	/** The Constant HIDDEN. */
+	public static final short HIDDEN = 1;
+
+	/** The Constant SHOWING. */
+	public static final short SHOWING = 2;
 
 	/**
 	 * Gets the kind.
@@ -98,14 +107,6 @@ public interface TextTrack {
 	 */
 	public void setOnerror(Function onerror);
 
-	/** The Constant OFF. */
-	public static final short OFF = 0;
-
-	/** The Constant HIDDEN. */
-	public static final short HIDDEN = 1;
-
-	/** The Constant SHOWING. */
-	public static final short SHOWING = 2;
 
 	/**
 	 * Gets the mode.

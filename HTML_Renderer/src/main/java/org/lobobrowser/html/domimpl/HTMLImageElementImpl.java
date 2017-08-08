@@ -49,6 +49,9 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** The onload. */
 	private Function onload;
+	
+	/** The listeners. */
+	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Instantiates a new HTML image element impl.
@@ -257,9 +260,6 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 			return this.image;
 		}
 	}
-
-	/** The listeners. */
-	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right

@@ -65,6 +65,9 @@ public final class CacheManager implements Runnable {
 
 	/** The transient cache. */
 	private final LRUCache transientCache = new LRUCache(1000000);
+	
+	/** The instance. */
+	private static CacheManager instance;
 
 	/**
 	 * Instantiates a new cache manager.
@@ -76,9 +79,6 @@ public final class CacheManager implements Runnable {
 		t.setPriority(Thread.MIN_PRIORITY);
 		t.start();
 	}
-
-	/** The instance. */
-	private static CacheManager instance;
 
 	/**
 	 * Gets the instance.

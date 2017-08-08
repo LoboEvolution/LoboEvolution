@@ -28,6 +28,15 @@ public class XPathException extends RuntimeException {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant INVALID_EXPRESSION_ERR. */
+	public static final short INVALID_EXPRESSION_ERR = 51;
+
+	/** The Constant TYPE_ERR. */
+	public static final short TYPE_ERR = 52;
+
+	/** The code. */
+	public short code;
 
 	/**
 	 * Instantiates a new x path exception.
@@ -41,13 +50,4 @@ public class XPathException extends RuntimeException {
 		super(message);
 		this.code = code;
 	}
-
-	/** The Constant INVALID_EXPRESSION_ERR. */
-	public static final short INVALID_EXPRESSION_ERR = 51;
-
-	/** The Constant TYPE_ERR. */
-	public static final short TYPE_ERR = 52;
-
-	/** The code. */
-	public short code;
 }

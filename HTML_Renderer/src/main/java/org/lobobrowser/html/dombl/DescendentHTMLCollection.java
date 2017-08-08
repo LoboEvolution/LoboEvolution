@@ -56,6 +56,12 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 
 	/** The nest into matching nodes. */
 	private final boolean nestIntoMatchingNodes;
+	
+	/** The items by name. */
+	private Map<String, DOMElementImpl> itemsByName = null;
+
+	/** The items by index. */
+	private List<DOMNodeImpl> itemsByIndex = null;
 
 	/**
 	 * Instantiates a new descendent html collection.
@@ -91,12 +97,6 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 		HTMLDocumentImpl document = (HTMLDocumentImpl) node.getOwnerDocument();
 		document.addDocumentNotificationListener(new LocalNotificationListener(document, this));
 	}
-
-	/** The items by name. */
-	private Map<String, DOMElementImpl> itemsByName = null;
-
-	/** The items by index. */
-	private List<DOMNodeImpl> itemsByIndex = null;
 
 	/**
 	 * Ensure populated impl.

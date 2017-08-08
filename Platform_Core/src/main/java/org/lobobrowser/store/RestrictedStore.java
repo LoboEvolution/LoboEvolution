@@ -87,6 +87,12 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 
 	/** The size. */
 	private long size = -1;
+	
+	/** The last updated size. */
+	private long lastUpdatedSize = Long.MIN_VALUE;
+
+	/** The size update threshold. */
+	private static long SIZE_UPDATE_THRESHOLD = 4096;
 
 	/**
 	 * Instantiates a new restricted store.
@@ -265,12 +271,6 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		}
 		return total;
 	}
-
-	/** The last updated size. */
-	private long lastUpdatedSize = Long.MIN_VALUE;
-
-	/** The size update threshold. */
-	private static long SIZE_UPDATE_THRESHOLD = 4096;
 
 	/*
 	 * (non-Javadoc)

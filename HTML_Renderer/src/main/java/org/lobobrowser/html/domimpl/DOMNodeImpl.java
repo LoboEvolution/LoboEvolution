@@ -108,6 +108,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 
 	/** The prefix. */
 	private volatile String prefix;
+	
+	/** The parent node. */
+	protected volatile Node parentNode;
 
 
 	/**
@@ -1198,9 +1201,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			}
 		}
 	}
-
-	/** The parent node. */
-	protected volatile Node parentNode;
 
 	/*
 	 * (non-Javadoc)

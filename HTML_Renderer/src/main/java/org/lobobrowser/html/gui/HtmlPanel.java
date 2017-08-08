@@ -110,6 +110,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	/** The frame set panel. */
 	protected volatile FrameSetPanel frameSetPanel;
+	
+	/** The notifications. */
+	private ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>(1);
 
 	/**
 	 * Constructs an <code>HtmlPanel</code>.
@@ -778,10 +781,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			block.setDefaultOverflowY(overflow);
 		}
 	}
-
-	/** The notifications. */
-	private ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>(1);
-
+	
 	/**
 	 * Adds the notification.
 	 *

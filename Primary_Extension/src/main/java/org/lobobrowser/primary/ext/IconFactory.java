@@ -41,6 +41,9 @@ public class IconFactory {
 
 	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();
+	
+	/** The icon map. */
+	private Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
 
 	/**
 	 * Instantiates a new icon factory.
@@ -56,9 +59,6 @@ public class IconFactory {
 	public static IconFactory getInstance() {
 		return instance;
 	}
-
-	/** The icon map. */
-	private Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
 
 	/**
 	 * Gets the icon.

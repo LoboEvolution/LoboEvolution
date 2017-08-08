@@ -59,6 +59,18 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	/** The deferred disabled. */
 	protected Boolean deferredDisabled;
+	
+	/** The onload. */
+	private Function onload;
+	
+	/** The image. */
+	private Image image = null;
+
+	/** The image src. */
+	private String imageSrc;
+	
+	/** The image listeners. */
+	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Instantiates a new HTML base input element.
@@ -820,9 +832,6 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
-	/** The onload. */
-	private Function onload;
-
 	/*
 	 * (non-Javadoc)
 	 *
@@ -847,11 +856,6 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		this.onload = onload;
 	}
 
-	/** The image. */
-	private Image image = null;
-
-	/** The image src. */
-	private String imageSrc;
 
 	/**
 	 * Load image.
@@ -882,9 +886,6 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 			return this.image;
 		}
 	}
-
-	/** The image listeners. */
-	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right

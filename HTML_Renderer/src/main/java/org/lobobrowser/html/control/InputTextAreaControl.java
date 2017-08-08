@@ -51,6 +51,12 @@ public class InputTextAreaControl extends BaseInputControl {
 
 	/** The widget. */
 	private final JTextAreaImpl widget;
+	
+	/** The cols. */
+	private int cols = -1;
+
+	/** The rows. */
+	private int rows = -1;
 
 	/**
 	 * Instantiates a new input text area control.
@@ -159,12 +165,6 @@ public class InputTextAreaControl extends BaseInputControl {
 	public int getRows() {
 		return this.rows;
 	}
-
-	/** The cols. */
-	private int cols = -1;
-
-	/** The rows. */
-	private int rows = -1;
 
 	/*
 	 * (non-Javadoc)

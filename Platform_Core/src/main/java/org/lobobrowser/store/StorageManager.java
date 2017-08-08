@@ -47,7 +47,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 
 	/** The Constant HOST_STORE_QUOTA. */
 	private static final long HOST_STORE_QUOTA = 200 * 1024;
-	// Note that the installer makes assumptions about these names.
+
 	/** The Constant HOST_STORE_DIR. */
 	private static final String HOST_STORE_DIR = "HostStore";
 
@@ -74,6 +74,9 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	
 	/** The Constant MANAGED_STORE_UPDATE_DELAY. */
 	private static final int MANAGED_STORE_UPDATE_DELAY = 1000 * 60 * 5;
+	
+	/** The thread started. */
+	private boolean threadStarted = false;
 
 	/**
 	 * Gets the Constant instance.
@@ -93,9 +96,6 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 			this.storeDirectory.mkdirs();
 		}
 	}
-
-	/** The thread started. */
-	private boolean threadStarted = false;
 
 	/**
 	 * Ensure thread started.

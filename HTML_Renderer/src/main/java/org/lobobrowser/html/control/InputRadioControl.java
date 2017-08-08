@@ -43,6 +43,9 @@ public class InputRadioControl extends BaseInputControl {
 
 	/** The widget. */
 	private final JRadioButton widget;
+	
+	/** The button group. */
+	private ButtonGroup buttonGroup;
 
 	/**
 	 * Instantiates a new input radio control.
@@ -92,9 +95,6 @@ public class InputRadioControl extends BaseInputControl {
 		widget.addActionListener(
 				event -> HtmlController.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
 	}
-
-	/** The button group. */
-	private ButtonGroup buttonGroup;
 
 	/*
 	 * (non-Javadoc)

@@ -152,6 +152,12 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	
 	/** The thumb action. */
 	private ThumbAction thumbAction = new ThumbAction();
+	
+	/** The prev dir choice. */
+	private File prevDirChoice;
+	
+	/** The pb. */
+	private PageBuilder pb = new PageBuilder();
 
 	/**
 	 * utility method to get an icon from the resources of this class.
@@ -759,9 +765,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		}
 	};
 
-	/** The prev dir choice. */
-	private File prevDirChoice;
-
 	/**
 	 * Ask the user for a PDF file to open from the local file system.
 	 */
@@ -1162,9 +1165,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			}
 		}
 	}
-
-	/** The pb. */
-	PageBuilder pb = new PageBuilder();
 
 	/*
 	 * (non-Javadoc)

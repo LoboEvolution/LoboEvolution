@@ -58,6 +58,9 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	/** The file. */
 	private final String FILE = "file";
+	
+	/** The default checked. */
+	private boolean defaultChecked;
 
 	/**
 	 * Instantiates a new HTML input element impl.
@@ -68,9 +71,6 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	public HTMLInputElementImpl(String name) {
 		super(name);
 	}
-
-	/** The default checked. */
-	private boolean defaultChecked;
 
 	/*
 	 * (non-Javadoc)

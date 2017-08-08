@@ -59,6 +59,15 @@ public class FullScreenWindow {
 	 */
 
 	private boolean dead = false;
+	
+	/**
+	 * Flag indicating whether the user has selected a screen or not.
+	 */
+
+	private Flag flag = new Flag();
+
+	/** The picked device. */
+	private GraphicsDevice pickedDevice;
 
 	/**
 	 *
@@ -80,11 +89,7 @@ public class FullScreenWindow {
 	 */
 
 	public FullScreenWindow(JComponent part, boolean forcechoice) {
-
-		// super();
-
 		init(part, forcechoice);
-
 	}
 
 	/**
@@ -270,15 +275,6 @@ public class FullScreenWindow {
 
 		}
 	}
-
-	/**
-	 * Flag indicating whether the user has selected a screen or not.
-	 */
-
-	private Flag flag = new Flag();
-
-	/** The picked device. */
-	private GraphicsDevice pickedDevice;
 
 	/**
 	 *

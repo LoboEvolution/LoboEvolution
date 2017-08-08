@@ -48,6 +48,9 @@ public class TableCellRenderState extends DisplayRenderState {
 
 	/** The background info. */
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
+	
+	/** The padding insets. */
+	private HtmlInsets paddingInsets = INVALID_INSETS;
 
 	/**
 	 * Instantiates a new table cell render state.
@@ -239,10 +242,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		return (HTMLTableElement) ancestor;
 	}
-
-	/** The padding insets. */
-	private HtmlInsets paddingInsets = INVALID_INSETS;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

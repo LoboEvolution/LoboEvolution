@@ -55,6 +55,9 @@ public class ArchiveClassLoader extends BaseClassLoader {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ArchiveClassLoader.class);
+	
+	/** The archive infos. */
+	private final ArchiveInfo[] archiveInfos;
 
 	/**
 	 * The Class LocalURLStreamHandler.
@@ -97,9 +100,6 @@ public class ArchiveClassLoader extends BaseClassLoader {
 			return this.openConnection(u);
 		}
 	}
-
-	/** The archive infos. */
-	private final ArchiveInfo[] archiveInfos;
 
 	/**
 	 * Instantiates a new archive class loader.

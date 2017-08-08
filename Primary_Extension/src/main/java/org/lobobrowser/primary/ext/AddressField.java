@@ -40,6 +40,15 @@ public class AddressField extends JComboBox<String> {
 
 	/** The component source. */
 	private final ComponentSource componentSource;
+	
+	/** The combo invalid. */
+	private boolean comboInvalid = true;
+
+	/** The combo has head matches. */
+	private boolean comboHasHeadMatches = false;
+
+	/** The populating matches. */
+	private boolean populatingMatches = false;
 
 	/**
 	 * Instantiates a new address field.
@@ -134,15 +143,6 @@ public class AddressField extends JComboBox<String> {
 			populateCombo(this.getText());
 		}
 	}
-
-	/** The combo invalid. */
-	private boolean comboInvalid = true;
-
-	/** The combo has head matches. */
-	private boolean comboHasHeadMatches = false;
-
-	/** The populating matches. */
-	private boolean populatingMatches = false;
 
 	/**
 	 * Populate combo.

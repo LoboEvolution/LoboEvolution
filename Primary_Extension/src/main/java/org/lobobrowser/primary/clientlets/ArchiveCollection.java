@@ -37,6 +37,9 @@ public class ArchiveCollection {
 
 	/** The archive infos. */
 	private final Collection<Object[]> archiveInfos;
+	
+	/** The class loader. */
+	private ArchiveClassLoader classLoader;
 
 	/**
 	 * Instantiates a new archive collection.
@@ -54,15 +57,6 @@ public class ArchiveCollection {
 	public ArchiveCollection(Collection<Object[]> archiveInfos) {
 		this.archiveInfos = archiveInfos;
 	}
-
-	// public void addArchiveInfo(ArchiveInfo ainfo) {
-	// synchronized(this) {
-	// this.archiveInfos.add(ainfo);
-	// }
-	// }
-
-	/** The class loader. */
-	private ArchiveClassLoader classLoader;
 
 	/**
 	 * Gets the class loader.
