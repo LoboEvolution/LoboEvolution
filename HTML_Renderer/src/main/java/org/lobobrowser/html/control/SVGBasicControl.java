@@ -20,18 +20,11 @@
  */
 package org.lobobrowser.html.control;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.LinearGradientPaint;
-import java.awt.MultipleGradientPaint;
-import java.awt.Paint;
-import java.awt.RadialGradientPaint;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
@@ -40,11 +33,8 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.svgimpl.SVGAnimateColorElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimateElementImpl;
 import org.lobobrowser.html.svgimpl.SVGAnimateImpl;
@@ -55,7 +45,6 @@ import org.lobobrowser.html.svgimpl.SVGDefsElementImpl;
 import org.lobobrowser.html.svgimpl.SVGEllipseElementImpl;
 import org.lobobrowser.html.svgimpl.SVGGElementImpl;
 import org.lobobrowser.html.svgimpl.SVGLineElementImpl;
-import org.lobobrowser.html.svgimpl.SVGLinearGradientElementImpl;
 import org.lobobrowser.html.svgimpl.SVGMatrixImpl;
 import org.lobobrowser.html.svgimpl.SVGPathElementImpl;
 import org.lobobrowser.html.svgimpl.SVGPathSegArcAbsImpl;
@@ -83,10 +72,10 @@ import org.lobobrowser.html.svgimpl.SVGPolylineElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRadialGradientElementImpl;
 import org.lobobrowser.html.svgimpl.SVGRectElementImpl;
 import org.lobobrowser.html.svgimpl.SVGSVGElementImpl;
-import org.lobobrowser.html.svgimpl.SVGStopElementImpl;
+import org.lobobrowser.html.svgimpl.SVGStyle;
 import org.lobobrowser.html.svgimpl.SVGUseElementImpl;
+import org.lobobrowser.html.svgimpl.SVGUtility;
 import org.lobobrowser.html.svgimpl.SVGViewBoxImpl;
-import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.svg.SVGElement;
 import org.lobobrowser.w3c.svg.SVGLengthList;
 import org.lobobrowser.w3c.svg.SVGPathSegList;
@@ -99,13 +88,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.svg.SVGPathSeg;
 
-public class SVGBasicControl extends BaseControl {
+public class SVGBasicControl extends SVGStyle {
 
 	private static final long serialVersionUID = 1L;
 	
-	/** The svgiGroup. */
-	private SVGInfo svgiGroup = new SVGInfo();
-    
 	/** The animate. */
 	private SVGAnimationImpl animate;
 	
@@ -150,39 +136,16 @@ public class SVGBasicControl extends BaseControl {
 	}
 
 	public void circle(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-		
+		animate(svgi, numObject);
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
 		Shape circle = new Ellipse2D.Double(viewbox.getX() - viewbox.getR(), viewbox.getY() - viewbox.getR(), 2 * viewbox.getR(), 2 * viewbox.getR());
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, circle, svgi);
+		clip(svgi, g2d);
 	}
 
 	public void rectangle(Graphics2D g2d, SVGInfo svgi, int numObject) {
-		
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-		
+		animate(svgi, numObject);
 		Shape rect;
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), 0);
 		if (svgi.getRx() > 0 || svgi.getRy() > 0) {
@@ -199,23 +162,12 @@ public class SVGBasicControl extends BaseControl {
 
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, rect, svgi);
+		clip(svgi, g2d);
 
 	}
 
 	public void ellipse(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-
+		animate(svgi, numObject);
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
 		Point2D.Float center = new Point2D.Float(viewbox.getX(), viewbox.getY());
 		Point2D.Float corner = new Point2D.Float(viewbox.getX() - svgi.getRx(), viewbox.getY() - svgi.getRy());
@@ -223,22 +175,11 @@ public class SVGBasicControl extends BaseControl {
 		ellipse2d.setFrameFromCenter(center, corner);
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, ellipse2d, svgi);
+		clip(svgi, g2d);
 	}
 
 	public void line(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-
+		animate(svgi, numObject);
 		Point2D.Float p = new Point2D.Float(svgi.getX1(), svgi.getY1());
 		Point2D.Float p1 = p;
 		p = new Point2D.Float(svgi.getX2(), svgi.getY2());
@@ -246,22 +187,11 @@ public class SVGBasicControl extends BaseControl {
 		Line2D line2d = new Line2D.Float(p1, p2);
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, line2d, svgi);
+		clip(svgi, g2d);
 	}
 
 	public void polygon(Graphics2D g2d, SVGInfo svgi, int numObject) {
-		
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-
+		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		SVGPointList points = svgi.getPoilist();
 		int numPoints = points.getNumberOfItems();
@@ -280,23 +210,12 @@ public class SVGBasicControl extends BaseControl {
 		path.closePath();
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
+		clip(svgi, g2d);
 
 	}
 
 	public void polyline(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-
+		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		SVGPointList points = svgi.getPoilist();
 		int numPoints = points.getNumberOfItems();
@@ -314,23 +233,12 @@ public class SVGBasicControl extends BaseControl {
 		path.closePath();
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
+		clip(svgi, g2d);
 
 	}
 
 	public void path(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-		
+		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		Point2D lastControlPoint = null;
 		SVGPoint subPathStartPoint = null;
@@ -597,7 +505,7 @@ public class SVGBasicControl extends BaseControl {
 
 					} else {
 
-						Shape arc = createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
+						Shape arc = SVGUtility.createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
 						path.append(arc, true);
 						lastX = x2;
 						lastY = y2;
@@ -625,7 +533,7 @@ public class SVGBasicControl extends BaseControl {
 						lastY = y2;
 						lastControlPoint = null;
 					} else {
-						Shape arc = createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
+						Shape arc = SVGUtility.createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
 						path.append(arc, true);
 						lastX = x2;
 						lastY = y2;
@@ -638,6 +546,7 @@ public class SVGBasicControl extends BaseControl {
 
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
+		clip(svgi, g2d);
 
 	}
 
@@ -724,19 +633,7 @@ public class SVGBasicControl extends BaseControl {
 	}
 
 	public void text(Graphics2D g2d, SVGInfo svgi, int numObject) {
-
-		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
-			SVGElement elem = getAnimate().getTargetElement();
-			if (count < numObject && elem.getId().equals(svgi.getId())){
-				svgi.setAnimate(getAnimate());
-				new SVGAnimateImpl(svgi, ruicontrol);
-				count++;
-			}
-		} else if (svgi.getAnimate() != null && count < numObject) {
-			new SVGAnimateImpl(svgi, ruicontrol);
-			count++;
-		}
-
+		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		path.setWindingRule(Path2D.WIND_NON_ZERO);
 		FontRenderContext frc = new FontRenderContext(null, false, false);
@@ -787,234 +684,6 @@ public class SVGBasicControl extends BaseControl {
 		drawFillAndStroke(g2d, path, svgi);
 	}
 
-	private Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {
-
-		double cosAngle = Math.cos(angle);
-		double sinAngle = Math.sin(angle);
-		double x1prime = cosAngle * (x1 - x2) / 2 + sinAngle * (y1 - y2) / 2;
-		double y1prime = -sinAngle * (x1 - x2) / 2 + cosAngle * (y1 - y2) / 2;
-		double rx2 = rx * rx;
-		double ry2 = ry * ry;
-		double x1prime2 = x1prime * x1prime;
-		double y1prime2 = y1prime * y1prime;
-
-		double radiiCheck = x1prime2 / rx2 + y1prime2 / ry2;
-		if (radiiCheck > 1) {
-			rx = (float) Math.sqrt(radiiCheck) * rx;
-			ry = (float) Math.sqrt(radiiCheck) * ry;
-			rx2 = rx * rx;
-			ry2 = ry * ry;
-		}
-
-		double squaredThing = (rx2 * ry2 - rx2 * y1prime2 - ry2 * x1prime2) / (rx2 * y1prime2 + ry2 * x1prime2);
-		if (squaredThing < 0) { // this may happen due to lack of precision
-
-			squaredThing = 0;
-		}
-		squaredThing = Math.sqrt(squaredThing);
-		if (fA == fS) {
-			squaredThing = -squaredThing;
-		}
-
-		double cXprime = squaredThing * rx * y1prime / ry;
-		double cYprime = squaredThing * -(ry * x1prime / rx);
-		double cx = cosAngle * cXprime - sinAngle * cYprime + (x1 + x2) / 2;
-		double cy = sinAngle * cXprime + cosAngle * cYprime + (y1 + y2) / 2;
-		double ux = 1;
-		double uy = 0;
-		double vx = (x1prime - cXprime) / rx;
-		double vy = (y1prime - cYprime) / ry;
-		double startAngle = Math
-				.acos((ux * vx + uy * vy) / (Math.sqrt(ux * ux + uy * uy) * Math.sqrt(vx * vx + vy * vy)));
-
-		if (ux * vy - uy * vx < 0) {
-			startAngle = -startAngle;
-		}
-
-		ux = (x1prime - cXprime) / rx;
-		uy = (y1prime - cYprime) / ry;
-		vx = (-x1prime - cXprime) / rx;
-		vy = (-y1prime - cYprime) / ry;
-
-		double angleExtent = Math
-				.acos((ux * vx + uy * vy) / (Math.sqrt(ux * ux + uy * uy) * Math.sqrt(vx * vx + vy * vy)));
-
-		if (ux * vy - uy * vx < 0) {
-			angleExtent = -angleExtent;
-		}
-		double angleExtentDegrees = Math.toDegrees(angleExtent);
-		double numCircles = Math.abs(angleExtentDegrees / 360.0);
-		if (numCircles > 1) {
-			if (angleExtentDegrees > 0) {
-				angleExtentDegrees -= 360 * Math.floor(numCircles);
-			} else {
-				angleExtentDegrees += 360 * Math.floor(numCircles);
-			}
-			angleExtent = Math.toRadians(angleExtentDegrees);
-		}
-		if (fS && angleExtent < 0) {
-			angleExtent += Math.toRadians(360.0);
-		} else if (!fS && angleExtent > 0) {
-			angleExtent -= Math.toRadians(360.0);
-		}
-		Shape arc = new Arc2D.Double(cx - rx, cy - ry, rx * 2, ry * 2, -Math.toDegrees(startAngle),
-				-Math.toDegrees(angleExtent), Arc2D.OPEN);
-		arc = AffineTransform.getRotateInstance(angle, cx, cy).createTransformedShape(arc);
-		return arc;
-	}
-
-	private void drawFillAndStroke(Graphics2D g2d, Shape shape2d, SVGInfo svgi) {
-
-		BasicStroke basicStroke = null;
-		Paint strokeColor = null;
-		Paint fillColor = Color.BLACK;
-		float fillOpacity = 1.0F;
-		float strokeOpacity = 1.0F;
-
-		SVGInfo group = getSvgiGroup();
-
-		if (group.getStyle() != null && group.getStyle().getFillOpacity() != null) {
-			fillOpacity = Float.parseFloat(group.getStyle().getFillOpacity());
-		} else if (svgi.getStyle().getFillOpacity() != null) {
-			fillOpacity = Float.parseFloat(svgi.getStyle().getFillOpacity());
-		}
-
-		if (group.getStyle() != null && group.getStyle().getStrokeOpacity() != null) {
-			strokeOpacity = Float.parseFloat(group.getStyle().getStrokeOpacity());
-		} else if (svgi.getStyle().getStrokeOpacity() != null) {
-			strokeOpacity = Float.parseFloat(svgi.getStyle().getStrokeOpacity());
-		}
-
-		if (group.getStyle() != null && group.getStyle().getOpacity() != null) {
-			fillOpacity = Float.parseFloat(group.getStyle().getOpacity());
-			strokeOpacity = Float.parseFloat(group.getStyle().getOpacity());
-		} else if (svgi.getStyle().getOpacity() != null) {
-			fillOpacity = Float.parseFloat(svgi.getStyle().getOpacity());
-			strokeOpacity = Float.parseFloat(svgi.getStyle().getOpacity());
-		}
-
-		if (group.getStyle() != null && group.getStyle().getStroke() != null
-				&& !"none".equalsIgnoreCase(group.getStyle().getStroke())) {
-			Color color = ColorFactory.getInstance().getColor(group.getStyle().getStroke());
-			strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * strokeOpacity));
-			basicStroke = getStroking(g2d, group);
-		} else if (svgi.getStyle().getStroke() != null && !"none".equalsIgnoreCase(svgi.getStyle().getStroke())) {
-			String stroke = svgi.getStyle().getStroke();
-			if (stroke.contains("url")) {
-				String idElement = stroke.split("#")[1].replace(")", "").trim();
-				Element elementById = modelN.getOwnerDocument().getElementById(idElement);
-				if (elementById instanceof SVGRadialGradientElementImpl
-						|| elementById instanceof SVGLinearGradientElementImpl) {
-					strokeColor = gradient(elementById, shape2d);
-				}
-			} else {
-				Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getStroke());
-				strokeColor = new Color(color.getRed(), color.getGreen(), color.getBlue(),
-						Math.round(255 * strokeOpacity));
-			}
-			basicStroke = getStroking(g2d, svgi);
-		}
-
-		if (group.getStyle() != null && group.getStyle().getFill() != null
-				&& !"none".equalsIgnoreCase(group.getStyle().getFill())) {
-			Color color = ColorFactory.getInstance().getColor(group.getStyle().getFill());
-			fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
-		} else if (svgi.getStyle().getFill() != null && !"none".equalsIgnoreCase(svgi.getStyle().getFill())) {
-			String fill = svgi.getStyle().getFill();
-			if (fill.contains("url")) {
-				String idElement = fill.split("#")[1].replace(")", "").trim();
-				Element elementById = modelN.getOwnerDocument().getElementById(idElement);
-				if (elementById instanceof SVGRadialGradientElementImpl
-						|| elementById instanceof SVGLinearGradientElementImpl) {
-					fillColor = gradient(elementById, shape2d);
-				}
-			} else {
-				Color color = ColorFactory.getInstance().getColor(svgi.getStyle().getFill());
-				fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), Math.round(255 * fillOpacity));
-			}
-		}
-
-		if (svgi.isClip()) {
-			g2d.clip(shape2d);
-
-			if (fillColor != null) {
-				g2d.setPaint(fillColor);
-				g2d.fill(shape2d);
-			}
-
-			if (strokeColor != null) {
-				g2d.setPaint(strokeColor);
-				g2d.draw(basicStroke.createStrokedShape(shape2d));
-			}
-		} else if (svgi.getClipPath() != null && svgi.getClipPath().length() > 0) {
-			g2d.setClip(shape2d);
-			g2d.setPaint(Color.WHITE);
-			g2d.draw(shape2d);
-			g2d.fill(shape2d);
-			clip(svgi, g2d);
-		} else {
-			if (fillColor != null) {
-				g2d.setPaint(fillColor);
-				g2d.fill(shape2d);
-			}
-
-			if (strokeColor != null) {
-				g2d.setPaint(strokeColor);
-				g2d.draw(basicStroke.createStrokedShape(shape2d));
-			}
-		}
-	}
-
-	private BasicStroke getStroking(Graphics2D g2d, SVGInfo svgi) {
-
-		BasicStroke basicStroke;
-		int strokeWidth = 1;
-		int intLineCap = BasicStroke.CAP_BUTT;
-		int intlineJoin = BasicStroke.JOIN_BEVEL;
-		int miterlimit = 4;
-
-		if ("round".equals(svgi.getStyle().getStrokeLineCap())) {
-			intLineCap = BasicStroke.CAP_ROUND;
-
-		} else if ("square".equals(svgi.getStyle().getStrokeLineCap())) {
-			intLineCap = BasicStroke.CAP_SQUARE;
-		}
-		if ("round".equals(svgi.getStyle().getStrokeLineCap())) {
-			intlineJoin = BasicStroke.JOIN_ROUND;
-
-		} else if ("miter".equals(svgi.getStyle().getStrokeLineCap())) {
-			intlineJoin = BasicStroke.JOIN_MITER;
-		}
-
-		if (svgi.getStyle().getStrokeWidth() != null) {
-			strokeWidth = HtmlValues.getPixelSize(svgi.getStyle().getStrokeWidth(), null, 1);
-		}
-
-		if (svgi.getStyle().getStrokeMiterLimit() != null) {
-			miterlimit = HtmlValues.getPixelSize(svgi.getStyle().getStrokeMiterLimit(), null, 4);
-		}
-
-		if (svgi.getStyle().getStrokeDashArray() == null) {
-			basicStroke = new BasicStroke(strokeWidth, intLineCap, intlineJoin, miterlimit);
-		} else {
-			String parts[] = svgi.getStyle().getStrokeDashArray().split("\\s*,\\s*|\\s+");
-
-			float[] dashArray = new float[parts.length];
-			int i = 0;
-			for (String str : parts) {
-				dashArray[i] = Float.parseFloat(str);
-				i++;
-			}
-
-			basicStroke = new BasicStroke(strokeWidth, intLineCap, intlineJoin, miterlimit, dashArray, 0.0F);
-		}
-
-		if (basicStroke != null) {
-			g2d.setStroke(basicStroke);
-		}
-		return basicStroke;
-	}
-
 	public ArrayList<SVGInfo> childNodes(Node element) {
 
 		ArrayList<SVGInfo> useList = new ArrayList<SVGInfo>();
@@ -1050,7 +719,6 @@ public class SVGBasicControl extends BaseControl {
 			}
 		return useList;
 	}
-	
 	
 	public ArrayList<SVGInfo> child(Node n){
 		ArrayList<SVGInfo> useList = new ArrayList<SVGInfo>();
@@ -1191,84 +859,8 @@ public class SVGBasicControl extends BaseControl {
 		}
 		return useList;
 	}
-
-	private Paint gradient(Element gradient, Shape shape2d) {
-		if (gradient instanceof SVGRadialGradientElementImpl) {
-			SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl) gradient;
-			return radial(shape2d, radial, fractions(radial), colors(radial));
-		}
-
-		if (gradient instanceof SVGLinearGradientElementImpl) {
-			SVGLinearGradientElementImpl linear = (SVGLinearGradientElementImpl) gradient;
-			return new LinearGradientPaint(linear.getX1().getBaseVal().getValue(),
-					linear.getY1().getBaseVal().getValue(), linear.getX2().getBaseVal().getValue(),
-					linear.getY2().getBaseVal().getValue(), fractions(linear), colors(linear));
-		}
-		return null;
-	}
-
-	private Paint radial(Shape shape, SVGRadialGradientElementImpl radial, float[] fractions, Color[] colors) {
-
-		float x = radial.getCx().getBaseVal().getValue();
-		float y = radial.getCy().getBaseVal().getValue();
-		float radius = radial.getR().getBaseVal().getValue();
-		double w = shape.getBounds2D().getWidth();
-		double h = shape.getBounds2D().getHeight();
-		Point2D.Float center = new Point2D.Float(x / 100, y / 100);
-		double cx = w * center.getX() + shape.getBounds2D().getX();
-		double cy = h * center.getY() + shape.getBounds2D().getY();
-		final Point2D newCenter = new Point2D.Double(cx, cy);
-		double delta = newCenter
-				.distance(new Point2D.Double(shape.getBounds2D().getCenterX(), shape.getBounds2D().getCenterY()));
-		final double r = Math.sqrt(w * w + h * h) / 2;
-		final float newRadius = (float) (delta + r * (radius / 100));
-
-		return new RadialGradientPaint(newCenter, newRadius, newCenter, fractions, colors,
-				MultipleGradientPaint.CycleMethod.REFLECT, MultipleGradientPaint.ColorSpaceType.SRGB,
-				new AffineTransform());
-
-	}
-
-	private float[] fractions(Element elem) {
-		ArrayList<Float> fractions = new ArrayList<Float>();
-		NodeList childNodes = elem.getChildNodes();
-		for (int i = 0; i < childNodes.getLength(); i++) {
-			Node n = childNodes.item(i);
-			if (n instanceof SVGStopElementImpl) {
-				SVGStopElementImpl stop = (SVGStopElementImpl) n;
-				fractions.add(stop.getOffset().getBaseVal());
-			}
-		}
-		float[] floatArray = new float[fractions.size()];
-		int i = 0;
-
-		for (Float f : fractions) {
-			floatArray[i++] = f != null ? f : Float.NaN;
-		}
-		Arrays.sort(floatArray);
-		return floatArray;
-	}
-
-	private Color[] colors(Element elem) {
-		ArrayList<Color> colors = new ArrayList<Color>();
-		NodeList childNodes = elem.getChildNodes();
-		for (int i = 0; i < childNodes.getLength(); i++) {
-			Node n = childNodes.item(i);
-			if (n instanceof SVGStopElementImpl) {
-				SVGStopElementImpl stop = (SVGStopElementImpl) n;
-				colors.add(stop.getStopColor());
-			}
-		}
-		Color[] colorArray = new Color[colors.size()];
-		int i = 0;
-		for (Color c : colors) {
-			colorArray[i++] = c;
-		}
-		return colorArray;
-	}
-
-	private void clip(SVGInfo svginfo, Graphics2D g2d) {
-
+	
+	public void clip(SVGInfo svginfo, Graphics2D g2d) {
 		if (svginfo.getClipPath() != null && svginfo.getClipPath().contains("url")) {
 			String clipElemId = svginfo.getClipPath().split("#")[1].replace(")", "").trim();
 			Element elementById = modelN.getOwnerDocument().getElementById(clipElemId);
@@ -1315,19 +907,18 @@ public class SVGBasicControl extends BaseControl {
 		}
 	}
 	
-	/**
-	 * @return the svgiGroup
-	 */
-	public SVGInfo getSvgiGroup() {
-		return svgiGroup;
-	}
-
-	/**
-	 * @param svgiGroup
-	 *            the svgiGroup to set
-	 */
-	public void setSvgiGroup(SVGInfo svgiGroup) {
-		this.svgiGroup = svgiGroup;
+	private void animate(SVGInfo svgi, int numObject) {
+		if (getAnimate() != null && getAnimate().getTargetElement() != null) {
+			SVGElement elem = getAnimate().getTargetElement();
+			if (count < numObject && elem.getId().equals(svgi.getId())){
+				svgi.setAnimate(getAnimate());
+				new SVGAnimateImpl(svgi, ruicontrol);
+				count++;
+			}
+		} else if (svgi.getAnimate() != null && count < numObject) {
+			new SVGAnimateImpl(svgi, ruicontrol);
+			count++;
+		}
 	}
 
 	/**

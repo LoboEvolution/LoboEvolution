@@ -24,7 +24,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Arc2D;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.StringTokenizer;
@@ -301,5 +303,83 @@ public class SVGUtility {
 		TimeList begin = animate.getBegin();
 		Time time = begin.item(0);
 		return new Double(time.getResolvedOffset()).intValue();
+	}
+	
+	public static Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {
+
+		double cosAngle = Math.cos(angle);
+		double sinAngle = Math.sin(angle);
+		double x1prime = cosAngle * (x1 - x2) / 2 + sinAngle * (y1 - y2) / 2;
+		double y1prime = -sinAngle * (x1 - x2) / 2 + cosAngle * (y1 - y2) / 2;
+		double rx2 = rx * rx;
+		double ry2 = ry * ry;
+		double x1prime2 = x1prime * x1prime;
+		double y1prime2 = y1prime * y1prime;
+		double radiiCheck = x1prime2 / rx2 + y1prime2 / ry2;
+
+		if (radiiCheck > 1) {
+			rx = (float) Math.sqrt(radiiCheck) * rx;
+			ry = (float) Math.sqrt(radiiCheck) * ry;
+			rx2 = rx * rx;
+			ry2 = ry * ry;
+		}
+
+		double squaredThing = (rx2 * ry2 - rx2 * y1prime2 - ry2 * x1prime2) / (rx2 * y1prime2 + ry2 * x1prime2);
+		if (squaredThing < 0) { // this may happen due to lack of precision
+			squaredThing = 0;
+		}
+		squaredThing = Math.sqrt(squaredThing);
+
+		if (fA == fS) {
+			squaredThing = -squaredThing;
+		}
+
+		double cXprime = squaredThing * rx * y1prime / ry;
+		double cYprime = squaredThing * -(ry * x1prime / rx);
+		double cx = cosAngle * cXprime - sinAngle * cYprime + (x1 + x2) / 2;
+		double cy = sinAngle * cXprime + cosAngle * cYprime + (y1 + y2) / 2;
+		double ux = 1;
+		double uy = 0;
+		double vx = (x1prime - cXprime) / rx;
+		double vy = (y1prime - cYprime) / ry;
+		double startAngle = Math.acos((ux * vx + uy * vy) / (Math.sqrt(ux * ux + uy * uy) * Math.sqrt(vx * vx + vy * vy)));
+
+		if (ux * vy - uy * vx < 0) {
+			startAngle = -startAngle;
+		}
+
+		ux = (x1prime - cXprime) / rx;
+		uy = (y1prime - cYprime) / ry;
+		vx = (-x1prime - cXprime) / rx;
+		vy = (-y1prime - cYprime) / ry;
+
+		double angleExtent = Math.acos((ux * vx + uy * vy) / (Math.sqrt(ux * ux + uy * uy) * Math.sqrt(vx * vx + vy * vy)));
+
+		if (ux * vy - uy * vx < 0) {
+			angleExtent = -angleExtent;
+		}
+
+		double angleExtentDegrees = Math.toDegrees(angleExtent);
+		double numCircles = Math.abs(angleExtentDegrees / 360.0);
+
+		if (numCircles > 1) {
+			if (angleExtentDegrees > 0) {
+				angleExtentDegrees -= 360 * Math.floor(numCircles);
+			} else {
+				angleExtentDegrees += 360 * Math.floor(numCircles);
+			}
+			angleExtent = Math.toRadians(angleExtentDegrees);
+		}
+
+		if (fS && angleExtent < 0) {
+			angleExtent += Math.toRadians(360.0);
+		} else if (!fS && angleExtent > 0) {
+			angleExtent -= Math.toRadians(360.0);
+		}
+
+		Shape arc = new Arc2D.Double(cx - rx, cy - ry, rx * 2, ry * 2, -Math.toDegrees(startAngle), -Math.toDegrees(angleExtent), Arc2D.OPEN);
+		arc = AffineTransform.getRotateInstance(angle, cx, cy).createTransformedShape(arc);
+		return arc;
+
 	}
 }
