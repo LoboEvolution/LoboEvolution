@@ -47,6 +47,7 @@ import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSSValuesProperties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
@@ -354,120 +355,37 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public Font getFont() {
-		Font f = this.iFont;
-		if (f != null) {
-			return f;
-		}
+		
 		AbstractCSS2Properties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
+		
+		if (this.iFont != null) {
+			return this.iFont;
+		}
+		
 		if (style == null) {
 			if (prs != null) {
-				f = prs.getFont();
-				this.iFont = f;
-				return f;
+				this.iFont = prs.getFont();
+				return this.iFont;
 			}
-			f = DEFAULT_FONT;
-			this.iFont = f;
-			return f;
+			this.iFont = DEFAULT_FONT;
+			return DEFAULT_FONT;
 		}
-		Float fontSize = null;
-		String fontStyle = null;
-		String fontVariant = null;
-		String fontWeight = null;
-		String fontFamily = null;
-
-		String newFontSize = style == null ? null : style.getFontSize();
-		String newFontFamily = style == null ? null : style.getFontFamily();
-		String newFontStyle = style == null ? null : style.getFontStyle();
-		String newFontVariant = style == null ? null : style.getFontVariant();
-		String newFontWeight = style == null ? null : style.getFontWeight();
-		String verticalAlign = style == null ? null : style.getVerticalAlign();
-		String letterSpacing = style == null ? null : style.getLetterSpacing();
-		boolean isSuper = verticalAlign != null && verticalAlign.equalsIgnoreCase("super");
-		boolean isSub = verticalAlign != null && verticalAlign.equalsIgnoreCase("sub");
-		if (newFontSize == null && newFontWeight == null && newFontStyle == null && newFontFamily == null
-				&& newFontVariant == null && !isSuper && !isSub) {
-			if (prs != null) {
-				f = prs.getFont();
-				this.iFont = f;
-				return f;
-			}
-			f = DEFAULT_FONT;
-			this.iFont = f;
-			return f;
-		}
-		if (newFontSize != null) {
-			try {
-				fontSize = new Float(HtmlValues.getFontSize(newFontSize, prs));
-			} catch (Exception err) {
-				fontSize = LAFSettings.getInstance().getFontSize();
-			}
-		} else if (fontSize == null) {
-			if (prs != null) {
-				fontSize = new Float(prs.getFont().getSize());
-			} else {
-				fontSize = LAFSettings.getInstance().getFontSize();
-			}
-		}
-
-		if (newFontFamily != null) {
-			fontFamily = newFontFamily;
-		} else if (fontFamily == null && prs != null) {
-			fontFamily = prs.getFont().getFamily();
-		}
-
-		if (fontFamily == null) {
-			fontFamily = Font.SANS_SERIF;
-		}
-
-		if (newFontStyle != null) {
-			fontStyle = newFontStyle;
-		} else {
-			if (LAFSettings.getInstance().isItalic()) {
-				fontStyle = "italic";
-			}
-		}
-
-		if (newFontVariant != null) {
-			fontVariant = newFontVariant;
-		}
-
-		if (newFontWeight != null) {
-			fontWeight = newFontWeight;
-		} else {
-			if (LAFSettings.getInstance().isBold()) {
-				fontWeight = "bold";
-			}
-		}
-
+		
+		String fontVariant = style.getFontVariant();
+		String fontFamily = FontValues.getFontFamily(style.getFontFamily(), prs);
+		String fontStyle = FontValues.getFontStyle(style.getFontStyle(), prs);
+		String fontWeight = FontValues.getFontWeight(style.getFontWeight(), prs);
+		Float fontSize = new Float(FontValues.getFontSize(style.getFontSize(), prs));
+		Integer superscript = FontValues.getFontSuperScript(style.getVerticalAlign(), prs);;
+		Integer intLetterSpacing = HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0);
+		Integer underline = FontValues.getFontUnderline(style.getTextDecoration(), prs);
+		boolean strikethrough = FontValues.getFontStrikeThrough(style.getTextDecoration(), prs);
+		
 		HTMLDocumentImpl document = this.document;
 		Set locales = document == null ? null : document.getLocales();
-
-		Integer intLetterSpacing = HtmlValues.getPixelSize(letterSpacing, prs, 0);
-		Integer superscript = null;
-		Integer underline = null;
-		boolean strikethrough = false;
-
-		if (isSuper || LAFSettings.getInstance().isSuperscript()) {
-			superscript = TextAttribute.SUPERSCRIPT_SUPER;
-		} else if (isSub || LAFSettings.getInstance().isSubscript()) {
-			superscript = TextAttribute.SUPERSCRIPT_SUB;
-		}
-
-		if (superscript == null && prs != null) {
-			superscript = (Integer) prs.getFont().getAttributes().get(TextAttribute.SUPERSCRIPT);
-		}
-
-		if (LAFSettings.getInstance().isUnderline()) {
-			underline = TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
-		}
-
-		if (LAFSettings.getInstance().isStrikethrough()) {
-			strikethrough = TextAttribute.STRIKETHROUGH_ON;
-		}
-
-		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales,
-				superscript, intLetterSpacing, strikethrough, underline);
+		
+		Font f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales, superscript, intLetterSpacing, strikethrough, underline);
 		this.iFont = f;
 		return f;
 	}
@@ -672,36 +590,33 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			RenderState prs = this.prevRenderState;
 			if (prs != null) {
 				tt = prs.getTextTransform();
-				this.iTextTransform = tt;
-				return tt;
 			}
+			this.iTextTransform = tt;
+			return tt;
 		}
 		tt = 0;
-		if (tdText != null) {
-
-			switch (tdText) {
-			case NONE:
-				tt |= TEXTTRANSFORM_NONE;
-				break;
-			case CAPITALIZE:
-				tt |= TEXTTRANSFORM_CAPITALIZE;
-				break;
-			case UPPERCASE:
-				tt |= TEXTTRANSFORM_UPPERCASE;
-				break;
-			case LOWERCASE:
-				tt |= TEXTTRANSFORM_LOWERCASE;
-				break;
-			case INHERIT:
-				tt |= this.getPreviousRenderState().getTextTransform();
-				break;
-			case INITIAL:
-				tt |= TEXTTRANSFORM_NONE;
-				break;
-			default:
-				tt |= TEXTTRANSFORM_NONE;
-				break;
-			}
+		switch (tdText) {
+		case NONE:
+			tt |= TEXTTRANSFORM_NONE;
+			break;
+		case CAPITALIZE:
+			tt |= TEXTTRANSFORM_CAPITALIZE;
+			break;
+		case UPPERCASE:
+			tt |= TEXTTRANSFORM_UPPERCASE;
+			break;
+		case LOWERCASE:
+			tt |= TEXTTRANSFORM_LOWERCASE;
+			break;
+		case INHERIT:
+			tt |= this.getPreviousRenderState().getTextTransform();
+			break;
+		case INITIAL:
+			tt |= TEXTTRANSFORM_NONE;
+			break;
+		default:
+			tt |= TEXTTRANSFORM_NONE;
+			break;
 		}
 		this.iTextTransform = tt;
 		return tt;

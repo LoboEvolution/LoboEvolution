@@ -363,10 +363,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 				if (br.getX() + br.getWidth() > this.maxX) {
 					this.maxX = br.getX() + br.getWidth();
 				}
-				if (isFloatLimit || !pr.isFloat()) {
-					if (br.getY() + br.getHeight() > maxY) {
+				if ((isFloatLimit || !pr.isFloat()) && br.getY() + br.getHeight() > maxY) {
 						this.maxY = maxY = br.getY() + br.getHeight();
-					}
 				}
 			}
 		}

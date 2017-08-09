@@ -682,6 +682,7 @@ public class SVGBasicControl extends SVGStyle {
 		path.closePath();
 		transform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
+		clip(svgi, g2d);
 	}
 
 	public ArrayList<SVGInfo> childNodes(Node element) {

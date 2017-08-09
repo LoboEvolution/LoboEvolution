@@ -33,6 +33,7 @@ import java.util.StringTokenizer;
 
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.CSSValuesProperties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
@@ -88,7 +89,7 @@ public class SVGUtility {
 		String fontWeight = CSSValuesProperties.BOLD;
 
 		if (fs != null) {
-			fontSize = HtmlValues.getFontSize(fs, null);
+			fontSize = FontValues.getFontSize(fs, null);
 		}
 
 		if (ff != null) {
@@ -110,7 +111,6 @@ public class SVGUtility {
 				nodeValue = nodeValue.replace('\r', ' ');
 				nodeValue = nodeValue.replace('\t', ' ');
 				text = nodeValue;
-				;
 			}
 		}
 		return text.trim();

@@ -33,6 +33,7 @@ import java.util.Arrays;
 
 import org.lobobrowser.html.info.CanvasInfo;
 import org.lobobrowser.html.style.CSSValuesProperties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
@@ -762,7 +763,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 		for (int i = 0; i < arrFont.length; i++) {
 			String prop = arrFont[i];
 			if (prop.contains("px") || prop.contains("pt")) {
-				fontSize = HtmlValues.getFontSize(prop, null);
+				fontSize = FontValues.getFontSize(prop, null);
 			}
 
 			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.ITALIC)

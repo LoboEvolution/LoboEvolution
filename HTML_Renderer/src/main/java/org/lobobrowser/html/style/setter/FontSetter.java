@@ -2,6 +2,7 @@ package org.lobobrowser.html.style.setter;
 
 import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
@@ -40,7 +41,7 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 		properties.setPropertyValueLCAlt(FONT, newValue, important);
 		if (newValue != null && newValue.length() > 0) {
 			String fontSpecTL = newValue.toLowerCase();
-			FontInfo fontInfo = HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
+			FontInfo fontInfo = FontValues.SYSTEM_FONTS.get(fontSpecTL);
 			if (fontInfo != null) {
 				if (fontInfo.getFontFamily() != null) {
 					properties.setPropertyValueLCAlt(FONT_FAMILY, fontInfo.getFontFamily(), important);
@@ -65,15 +66,15 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 			int i;
 			for (i = 0; i < length; i++) {
 				token = tokens[i];
-				if (HtmlValues.isFontStyle(token)) {
+				if (FontValues.isFontStyle(token)) {
 					properties.setPropertyValueLCAlt(FONT_STYLE, token, important);
 					continue;
 				}
-				if (HtmlValues.isFontVariant(token)) {
+				if (FontValues.isFontVariant(token)) {
 					properties.setPropertyValueLCAlt(FONT_VARIANT, token, important);
 					continue;
 				}
-				if (HtmlValues.isFontWeight(token)) {
+				if (FontValues.isFontWeight(token)) {
 					properties.setPropertyValueLCAlt(FONT_WEIGHT, token, important);
 					continue;
 				}

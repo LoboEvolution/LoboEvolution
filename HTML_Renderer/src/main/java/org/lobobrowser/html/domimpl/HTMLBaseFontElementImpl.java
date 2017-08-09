@@ -26,6 +26,7 @@ import org.lobobrowser.html.renderstate.BaseFontRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLBaseFontElement;
 
@@ -117,7 +118,7 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		String size = this.getAttribute(SIZE);
 		if (size != null) {
-			int fontNumber = HtmlValues.getFontNumberOldStyle(size, prevRenderState);
+			int fontNumber = FontValues.getFontNumberOldStyle(size, prevRenderState);
 			prevRenderState = new BaseFontRenderState(prevRenderState, fontNumber);
 		}
 		return super.createRenderState(prevRenderState);
@@ -138,8 +139,8 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
 		String fontSize = null;
 		if (parentRS != null) {
-			int fontNumber = HtmlValues.getFontNumberOldStyle(size, parentRS);
-			fontSize = HtmlValues.getFontSizeSpec(fontNumber);
+			int fontNumber = FontValues.getFontNumberOldStyle(size, parentRS);
+			fontSize = FontValues.getFontSizeSpec(fontNumber);
 		}
 		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
 		if (fontSize != null) {

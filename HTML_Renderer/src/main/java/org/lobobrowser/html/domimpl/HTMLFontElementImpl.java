@@ -25,6 +25,7 @@ import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLFontElement;
 
@@ -130,8 +131,8 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 			ModelNode parentModelNode = this.getParentModelNode();
 			RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
 			if (parentRS != null) {
-				int fontNumber = HtmlValues.getFontNumberOldStyle(size, parentRS);
-				fontSize = HtmlValues.getFontSizeSpec(fontNumber);
+				int fontNumber = FontValues.getFontNumberOldStyle(size, parentRS);
+				fontSize = FontValues.getFontSizeSpec(fontNumber);
 			}
 		}
 		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
