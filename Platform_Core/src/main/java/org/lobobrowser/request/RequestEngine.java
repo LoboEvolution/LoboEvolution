@@ -510,7 +510,7 @@ public final class RequestEngine {
 	 *            the approx alt object size
 	 */
 	private void cache(final RequestHandler rhandler, final URL url, final URLConnection connection,
-			final byte[] content, final java.io.Serializable altPersistentObject, final Object altObject,
+			final byte[] content, final Serializable altPersistentObject, final Object altObject,
 			final int approxAltObjectSize) {
 		AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 			try {

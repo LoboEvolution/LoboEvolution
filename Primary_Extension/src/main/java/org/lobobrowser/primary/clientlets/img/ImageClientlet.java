@@ -44,13 +44,6 @@ public class ImageClientlet implements Clientlet {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ImageClientlet.class);
 
-	/**
-	 * Instantiates a new image clientlet.
-	 */
-	public ImageClientlet() {
-		super();
-	}
-
 	@Override
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();

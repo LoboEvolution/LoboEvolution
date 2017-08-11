@@ -34,7 +34,7 @@ public class CacheInfo {
 	private int numEntries;
 
 	/** The entry info list. */
-	private java.util.List entryInfoList;
+	private List entryInfoList;
 
 	/**
 	 * Instantiates a new cache info.
@@ -106,7 +106,7 @@ public class CacheInfo {
 	 * @param entryInfoList
 	 *            the new entry info list
 	 */
-	public void setEntryInfoList(java.util.List entryInfoList) {
+	public void setEntryInfoList(List entryInfoList) {
 		this.entryInfoList = entryInfoList;
 	}
 }

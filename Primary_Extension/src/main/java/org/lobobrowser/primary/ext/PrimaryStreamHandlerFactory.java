@@ -28,12 +28,6 @@ import java.net.URLStreamHandlerFactory;
  */
 public class PrimaryStreamHandlerFactory implements URLStreamHandlerFactory {
 
-	/**
-	 * Instantiates a new primary stream handler factory.
-	 */
-	public PrimaryStreamHandlerFactory() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -58,7 +58,7 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 	private final FramePanel frame;
 	
 	/** The window properties. */
-	private volatile java.util.Properties windowProperties = null;
+	private volatile Properties windowProperties = null;
 
 	/**
 	 * For progress events, but a null event is also fired when the content is

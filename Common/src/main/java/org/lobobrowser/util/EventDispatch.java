@@ -33,15 +33,10 @@ import java.util.LinkedList;
  * @author J. H. S.
  */
 public class EventDispatch {
+	
 	/** The listeners. */
 	private Collection listeners;
-
-	/**
-	 * Instantiates a new event dispatch.
-	 */
-	public EventDispatch() {
-	}
-
+	
 	/**
 	 * Creates the listener collection.
 	 *

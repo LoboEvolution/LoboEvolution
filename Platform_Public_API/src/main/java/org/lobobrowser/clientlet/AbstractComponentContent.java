@@ -29,12 +29,6 @@ import java.awt.Component;
  */
 public abstract class AbstractComponentContent implements ComponentContent {
 
-	/**
-	 * Instantiates a new abstract component content.
-	 */
-	public AbstractComponentContent() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

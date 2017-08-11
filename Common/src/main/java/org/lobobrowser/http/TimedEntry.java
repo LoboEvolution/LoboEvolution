@@ -20,16 +20,21 @@
  */
 package org.lobobrowser.http;
 
+import java.io.Serializable;
+
 /**
  * t The Class TimedEntry.
  */
-public class TimedEntry implements Comparable<Object>, java.io.Serializable {
+public class TimedEntry implements Comparable<Object>, Serializable {
+	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000000000200L;
+	
 	/** The timestamp. */
 	private long timestamp = System.currentTimeMillis();
+	
 	/** The value. */
-	final String value;
+	public final String value;
 
 	/**
 	 * Instantiates a new timed entry.

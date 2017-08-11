@@ -33,13 +33,6 @@ import org.lobobrowser.primary.gui.pdf.PdfDialog;
  */
 public class PdfClientlet implements Clientlet {
 
-	/**
-	 * Instantiates a new pdf clientlet.
-	 */
-	public PdfClientlet() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

@@ -220,13 +220,13 @@ public class FullScreenWindow {
 	 * that device should be used for multiple-monitor choices.
 	 */
 
-	class PickMe extends JFrame {
+	private class PickMe extends JFrame {
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -658915481325845436L;
 
 		/** The mygd. */
-		GraphicsDevice mygd;
+		private GraphicsDevice mygd;
 
 		/**
 		 * Creates the PickMe button on a particular display.

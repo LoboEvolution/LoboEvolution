@@ -45,13 +45,6 @@ public class VerifiedHostsStore {
 	}
 
 	/**
-	 * Instantiates a new verified hosts store.
-	 */
-	public VerifiedHostsStore() {
-		super();
-	}
-
-	/**
 	 * Contains.
 	 *
 	 * @param host

@@ -136,7 +136,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			this.isHoverStyle = null;
 			this.hasHoverStyleByElement = null;
 			if (deep) {
-				java.util.ArrayList<Node> nl = this.nodeList;
+				ArrayList<Node> nl = this.nodeList;
 				if (nl != null) {
 					Iterator<Node> i = nl.iterator();
 					while (i.hasNext()) {

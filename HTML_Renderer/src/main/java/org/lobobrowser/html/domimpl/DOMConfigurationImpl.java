@@ -38,13 +38,6 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 	/** The parameters. */
 	private final Map<String, Object> parameters = new HashMap<String, Object>();
 
-	/**
-	 * Instantiates a new DOM configuration impl.
-	 */
-	public DOMConfigurationImpl() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

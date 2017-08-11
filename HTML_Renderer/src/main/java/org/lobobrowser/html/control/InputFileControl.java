@@ -63,7 +63,7 @@ public class InputFileControl extends BaseInputControl {
 		JButton browseButton = this.browseButton;
 		browseButton.setAction(new BrowseAction());
 		browseButton.setText("Browse");
-		java.awt.Dimension ps = this.textField.getPreferredSize();
+		Dimension ps = this.textField.getPreferredSize();
 		this.textField.setPreferredSize(new Dimension(128, ps.height));
 		this.textField.setEditable(false);
 		if (modelNode.getTitle() != null) {

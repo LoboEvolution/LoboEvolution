@@ -91,17 +91,7 @@ public class HttpRequest extends AbstractBean {
 
 	/** The req. */
 	private Request req = new Request(); // the request. Reset in reset(). Never
-	// null.
-	/* private EventListenerList listenerList = new EventListenerList(); */
-
-	// -------------------------------------------------------- Constructors
-	/**
-	 * Creates a new instance of HttpRequestImpl.
-	 */
-	public HttpRequest() {
-	}
-
-	// -------------------------------------------------------- Bean methods
+	
 	/**
 	 * Sets the session.
 	 *

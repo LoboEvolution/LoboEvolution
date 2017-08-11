@@ -1118,7 +1118,7 @@ public class HtmlParser {
 	 * @throws SAXException
 	 *             the SAX exception
 	 */
-	private final StringBuffer entityDecode(StringBuffer rawText) throws org.xml.sax.SAXException {
+	private final StringBuffer entityDecode(StringBuffer rawText) throws SAXException {
 		int startIdx = 0;
 		StringBuffer sb = null;
 		for (;;) {

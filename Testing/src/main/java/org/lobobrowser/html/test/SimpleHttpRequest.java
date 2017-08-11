@@ -148,7 +148,7 @@ public class SimpleHttpRequest extends AbstractBean {
 	 */
 	public synchronized String getResponseText() {
 		byte[] bytes = this.responseBytes;
-		java.net.URLConnection connection = this.connection;
+		URLConnection connection = this.connection;
 		String encoding = connection == null ? "UTF-8" : Urls.getCharset(connection);
 		if (encoding == null) {
 			encoding = "UTF-8";

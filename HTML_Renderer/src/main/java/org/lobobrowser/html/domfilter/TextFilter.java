@@ -30,13 +30,6 @@ import org.w3c.dom.Node;
  */
 public class TextFilter implements NodeFilter {
 
-	/**
-	 * Instantiates a new text filter.
-	 */
-	public TextFilter() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

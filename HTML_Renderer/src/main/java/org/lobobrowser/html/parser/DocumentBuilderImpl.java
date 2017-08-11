@@ -137,7 +137,7 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	 * @see #createDocument(InputSource)
 	 */
 	@Override
-	public Document parse(InputSource is) throws org.xml.sax.SAXException, IOException {
+	public Document parse(InputSource is) throws SAXException, IOException {
 		HTMLDocumentImpl document = (HTMLDocumentImpl) this.createDocument(is);
 		document.load();
 		return document;

@@ -373,7 +373,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * @see #submitForm(String, URL, String, String, FormInput[])
 	 */
 	protected void submitFormSync(final String method, final URL action, final String target, String enctype,
-			final FormInput[] formInputs) throws IOException, org.xml.sax.SAXException {
+			final FormInput[] formInputs) throws IOException, SAXException {
 		final String actualMethod = method.toUpperCase();
 		URL resolvedURL;
 		if ("GET".equals(actualMethod) && formInputs != null) {

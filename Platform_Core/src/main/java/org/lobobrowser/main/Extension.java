@@ -783,7 +783,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	 *            the connection
 	 * @return the URL connection
 	 */
-	URLConnection dispatchPostConnection(URLConnection connection) {
+	public URLConnection dispatchPostConnection(URLConnection connection) {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();

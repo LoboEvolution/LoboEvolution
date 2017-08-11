@@ -91,13 +91,6 @@ public class HtmlClientlet implements Clientlet {
 		nve.add("link");
 	}
 
-	/**
-	 * Instantiates a new html clientlet.
-	 */
-	public HtmlClientlet() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

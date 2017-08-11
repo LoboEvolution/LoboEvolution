@@ -36,17 +36,12 @@ import java.util.Set;
  * The Class WeakValueHashMap.
  */
 public class WeakValueHashMap implements Map<Object, Object> {
+	
 	/** The map. */
 	private final Map<Object, Object> map = new HashMap<Object, Object>();
+	
 	/** The queue. */
 	private final ReferenceQueue<?> queue = new ReferenceQueue<Object>();
-
-	/**
-	 * Instantiates a new weak value hash map.
-	 */
-	public WeakValueHashMap() {
-		super();
-	}
 
 	/*
 	 * (non-Javadoc)

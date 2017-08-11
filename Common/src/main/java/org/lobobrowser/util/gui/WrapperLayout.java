@@ -35,6 +35,10 @@ import java.awt.LayoutManager;
  * @author J. H. S.
  */
 public class WrapperLayout implements LayoutManager {
+	
+	/** The instance. */
+	private static WrapperLayout instance = new WrapperLayout();
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -103,9 +107,6 @@ public class WrapperLayout implements LayoutManager {
 					arg0.getHeight() - insets.top - insets.bottom);
 		}
 	}
-
-	/** The instance. */
-	private static WrapperLayout instance = new WrapperLayout();
 
 	/**
 	 * Gets the instance.

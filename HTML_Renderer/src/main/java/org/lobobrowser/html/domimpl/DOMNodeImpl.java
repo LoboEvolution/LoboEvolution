@@ -112,14 +112,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/** The parent node. */
 	protected volatile Node parentNode;
 
-
-	/**
-	 * Instantiates a new DOM node impl.
-	 */
-	public DOMNodeImpl() {
-		super();
-	}
-
 	/**
 	 * Sets the UI node.
 	 *
@@ -1442,7 +1434,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public Object getDocumentItem(String name) {
-		org.w3c.dom.Document document = this.document;
+		Document document = this.document;
 		return document == null ? null : document.getUserData(name);
 	}
 
@@ -1454,7 +1446,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public void setDocumentItem(String name, Object value) {
-		org.w3c.dom.Document document = this.document;
+		Document document = this.document;
 		if (document == null) {
 			return;
 		}
@@ -1605,7 +1597,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		RenderState rs;
 		synchronized (this.getTreeLock()) {
 			rs = this.renderState;
-			if (rs != INVALID_RENDER_STATE) {
+			if (!INVALID_RENDER_STATE.equals(rs)) {
 				return rs;
 			}
 			Object parent = this.parentNode;

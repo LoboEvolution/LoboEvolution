@@ -27,9 +27,6 @@ import org.mozilla.javascript.Undefined;
 
 public class DOMParser extends AbstractScriptableDelegate {
 
-	public DOMParser() {
-	}
-
 	public XMLDocument parseFromString(String str, String type) {
 		if (type == null || Undefined.instance == type) {
 			throw Context.reportRuntimeError("Missing 'type' parameter");

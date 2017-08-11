@@ -38,12 +38,6 @@ public class LocalErrorHandler implements ErrorHandler {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(LocalErrorHandler.class.getName());
 
-	/**
-	 * Instantiates a new local error handler.
-	 */
-	public LocalErrorHandler() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

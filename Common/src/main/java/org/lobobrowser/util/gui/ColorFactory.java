@@ -106,6 +106,11 @@ public class ColorFactory {
 	 * @return the color
 	 */
 	public Color getColor(String colorSpec) {
+		
+		if(colorSpec == null){
+			return null;
+		}
+		
 		String normalSpec = colorSpec.toLowerCase();
 		synchronized (this) {
 			Color color = colorMap.get(normalSpec);
