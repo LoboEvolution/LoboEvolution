@@ -21,7 +21,6 @@
 
 package org.lobobrowser.html.style;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
@@ -34,11 +33,9 @@ import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
-import org.lobobrowser.util.gui.LAFSettings;
 import org.w3c.dom.css.CSS2Properties;
 
 /**
@@ -48,58 +45,6 @@ public class HtmlValues implements CSSValuesProperties {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(HtmlValues.class.getName());
-
-	/** The Constant DEFAULT_BORDER_WIDTH. */
-	public static final int DEFAULT_BORDER_WIDTH = 2;
-
-	/** The Constant BORDER_STYLE_NONE. */
-	public static final int BORDER_STYLE_NONE = 0;
-
-	/** The Constant BORDER_STYLE_HIDDEN. */
-	public static final int BORDER_STYLE_HIDDEN = 1;
-
-	/** The Constant BORDER_STYLE_DOTTED. */
-	public static final int BORDER_STYLE_DOTTED = 2;
-
-	/** The Constant BORDER_STYLE_DASHED. */
-	public static final int BORDER_STYLE_DASHED = 3;
-
-	/** The Constant BORDER_STYLE_SOLID. */
-	public static final int BORDER_STYLE_SOLID = 4;
-
-	/** The Constant BORDER_STYLE_DOUBLE. */
-	public static final int BORDER_STYLE_DOUBLE = 5;
-
-	/** The Constant BORDER_STYLE_GROOVE. */
-	public static final int BORDER_STYLE_GROOVE = 6;
-
-	/** The Constant BORDER_STYLE_RIDGE. */
-	public static final int BORDER_STYLE_RIDGE = 7;
-
-	/** The Constant BORDER_STYLE_INSET. */
-	public static final int BORDER_STYLE_INSET = 8;
-
-	/** The Constant BORDER_STYLE_OUTSET. */
-	public static final int BORDER_STYLE_OUTSET = 9;
-
-	/**
-	 * Instantiates a new html values.
-	 */
-	public HtmlValues() {}
-
-	/**
-	 * Checks if is border style.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is border style
-	 */
-	public static boolean isBorderStyle(String token) {
-		String tokenTL = token.toLowerCase();
-		return tokenTL.equals(SOLID) || tokenTL.equals(DASHED) || tokenTL.equals(DOTTED) || tokenTL.equals(DOUBLE)
-				|| tokenTL.equals(NONE) || tokenTL.equals(HIDDEN) || tokenTL.equals(GROOVE) || tokenTL.equals(RIDGE)
-				|| tokenTL.equals(INSET) || tokenTL.equals(OUTSET);
-	}
 
 	/**
 	 * Gets the margin insets.
@@ -118,7 +63,7 @@ public class HtmlValues implements CSSValuesProperties {
 			int sizeMargin = mg.length;
 			switch (sizeMargin) {
 			case 4:
-				insets = updateTopInset(insets, mg[0], renderState);
+				insets = updateTopInset(insets, mg[0], renderState); 
 				insets = updateRightInset(insets, mg[1], renderState);
 				insets = updateBottomInset(insets, mg[2], renderState);
 				insets = updateLeftInset(insets, mg[3], renderState);
@@ -205,101 +150,6 @@ public class HtmlValues implements CSSValuesProperties {
 	}
 
 	/**
-	 * Gets the border insets.
-	 *
-	 * @param borderStyles
-	 *            the border styles
-	 * @param cssProperties
-	 *            the css properties
-	 * @param renderState
-	 *            the render state
-	 * @return the border insets
-	 */
-	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS2Properties cssProperties,
-			RenderState renderState) {
-		HtmlInsets insets = null;
-		String borderText = cssProperties.getBorder();
-		if (borderText != null) {
-			String[] br = borderText.split(" ");
-			int sizeBorder = br.length;
-			switch (sizeBorder) {
-			case 4:
-				insets = updateTopInset(insets, br[0], renderState);
-				insets = updateRightInset(insets, br[1], renderState);
-				insets = updateBottomInset(insets, br[2], renderState);
-				insets = updateLeftInset(insets, br[3], renderState);
-				break;
-			case 3:
-				insets = updateTopInset(insets, br[0], renderState);
-				insets = updateRightInset(insets, br[1], renderState);
-				insets = updateBottomInset(insets, br[2], renderState);
-				break;
-			case 2:
-				insets = updateTopInset(insets, br[0], renderState);
-				insets = updateRightInset(insets, br[1], renderState);
-				break;
-			case 1:
-				insets = updateTopInset(insets, br[0], renderState);
-				insets = updateRightInset(insets, br[0], renderState);
-				insets = updateBottomInset(insets, br[0], renderState);
-				insets = updateLeftInset(insets, br[0], renderState);
-				break;
-			}
-		} else {
-
-			if (borderStyles.top != HtmlValues.BORDER_STYLE_NONE) {
-				String topText = cssProperties.getBorderTopWidth();
-				insets = updateTopInset(insets, topText, renderState);
-			}
-			if (borderStyles.left != HtmlValues.BORDER_STYLE_NONE) {
-				String leftText = cssProperties.getBorderLeftWidth();
-				insets = updateLeftInset(insets, leftText, renderState);
-			}
-			if (borderStyles.bottom != HtmlValues.BORDER_STYLE_NONE) {
-				String bottomText = cssProperties.getBorderBottomWidth();
-				insets = updateBottomInset(insets, bottomText, renderState);
-			}
-			if (borderStyles.right != HtmlValues.BORDER_STYLE_NONE) {
-				String rightText = cssProperties.getBorderRightWidth();
-				insets = updateRightInset(insets, rightText, renderState);
-			}
-		}
-		return insets;
-	}
-
-	/**
-	 * Populates BorderInfo.insets.
-	 *
-	 * @param binfo
-	 *            A BorderInfo with its styles already populated.
-	 * @param cssProperties
-	 *            The CSS properties object.
-	 * @param renderState
-	 *            The current render state.
-	 */
-	public static void populateBorderInsets(BorderInfo binfo, CSS2Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-
-		if (binfo.getTopStyle() != HtmlValues.BORDER_STYLE_NONE) {
-			String topText = cssProperties.getBorderTopWidth();
-			insets = updateTopInset(insets, topText, renderState);
-		}
-		if (binfo.getLeftStyle() != HtmlValues.BORDER_STYLE_NONE) {
-			String leftText = cssProperties.getBorderLeftWidth();
-			insets = updateLeftInset(insets, leftText, renderState);
-		}
-		if (binfo.getBottomStyle() != HtmlValues.BORDER_STYLE_NONE) {
-			String bottomText = cssProperties.getBorderBottomWidth();
-			insets = updateBottomInset(insets, bottomText, renderState);
-		}
-		if (binfo.getRightStyle() != HtmlValues.BORDER_STYLE_NONE) {
-			String rightText = cssProperties.getBorderRightWidth();
-			insets = updateRightInset(insets, rightText, renderState);
-		}
-		binfo.setInsets(insets);
-	}
-
-	/**
 	 * Update top inset.
 	 *
 	 * @param insets
@@ -310,7 +160,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 *            the render state
 	 * @return the html insets
 	 */
-	private static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+	public static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			sizeText = "2px";
 		}
@@ -364,7 +214,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 *            the render state
 	 * @return the html insets
 	 */
-	private static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+	public static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			sizeText = "2px";
 		}
@@ -416,7 +266,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 *            the render state
 	 * @return the html insets
 	 */
-	private static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+	public static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			sizeText = "2px";
 		}
@@ -468,7 +318,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 *            the render state
 	 * @return the html insets
 	 */
-	private static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+	public static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			sizeText = "2px";
 		}
@@ -853,26 +703,6 @@ public class HtmlValues implements CSSValuesProperties {
 	}
 
 	/**
-	 * Checks if is length.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is length
-	 */
-	public static boolean isLength(String token) {
-		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
-				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
-			return true;
-		}
-		try {
-			Double.parseDouble(token);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
-
-	/**
 	 * Split css value.
 	 *
 	 * @param cssValue
@@ -1021,148 +851,5 @@ public class HtmlValues implements CSSValuesProperties {
 			}
 		}
 		return listStyle;
-	}
-
-	/**
-	 * Gets the border info.
-	 *
-	 * @param properties
-	 *            the properties
-	 * @param renderState
-	 *            the render state
-	 * @return the border info
-	 */
-	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
-
-		BorderInfo binfo = new BorderInfo();
-
-		if (INHERIT.equals(properties.getBorderTopStyle())) {
-			binfo.setTopStyle(renderState.getPreviousRenderState().getBorderInfo().getTopStyle());
-			binfo.setTopColor(renderState.getPreviousRenderState().getBorderInfo().getTopColor());
-		} else {
-			binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
-			binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), properties, binfo));
-		}
-
-		if (INHERIT.equals(properties.getBorderBottomStyle())) {
-			binfo.setBottomStyle(renderState.getPreviousRenderState().getBorderInfo().getBottomStyle());
-			binfo.setBottomColor(renderState.getPreviousRenderState().getBorderInfo().getBottomColor());
-		} else {
-			binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
-			binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), properties, binfo));
-		}
-
-		if (INHERIT.equals(properties.getBorderRightStyle())) {
-			binfo.setRightStyle(renderState.getPreviousRenderState().getBorderInfo().getRightStyle());
-			binfo.setRightColor(renderState.getPreviousRenderState().getBorderInfo().getRightColor());
-		} else {
-			binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
-			binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), properties, binfo));
-		}
-
-		if (INHERIT.equals(properties.getBorderLeftStyle())) {
-			binfo.setLeftStyle(renderState.getPreviousRenderState().getBorderInfo().getLeftStyle());
-			binfo.setLeftColor(renderState.getPreviousRenderState().getBorderInfo().getLeftColor());
-		} else {
-			binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
-			binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), properties, binfo));
-		}
-
-		HtmlValues.populateBorderInsets(binfo, properties, renderState);
-		return binfo;
-	}
-
-	/**
-	 * Gets the border style.
-	 *
-	 * @param styleText
-	 *            the style text
-	 * @return the border style
-	 */
-	private static int getBorderStyle(String styleText) {
-		if (styleText == null || styleText.length() == 0) {
-			return HtmlValues.BORDER_STYLE_NONE;
-		}
-		String stl = styleText.toLowerCase();
-
-		switch (stl) {
-		case SOLID:
-			return BORDER_STYLE_SOLID;
-		case DASHED:
-			return BORDER_STYLE_DASHED;
-		case DOTTED:
-			return BORDER_STYLE_DOTTED;
-		case NONE:
-			return BORDER_STYLE_NONE;
-		case HIDDEN:
-			return BORDER_STYLE_HIDDEN;
-		case DOUBLE:
-			return BORDER_STYLE_DOUBLE;
-		case GROOVE:
-			return BORDER_STYLE_GROOVE;
-		case RIDGE:
-			return BORDER_STYLE_RIDGE;
-		case INSET:
-			return BORDER_STYLE_INSET;
-		case OUTSET:
-			return BORDER_STYLE_OUTSET;
-		default:
-			return BORDER_STYLE_NONE;
-		}
-	}
-
-	/**
-	 * Gets the border color.
-	 *
-	 * @param color
-	 *            the color
-	 * @param properties
-	 *            the properties
-	 * @param binfo
-	 *            the binfo
-	 * @return the border color
-	 */
-	private static Color getBorderColor(String color, CSS2Properties properties, BorderInfo binfo) {
-
-		ColorFactory cf = ColorFactory.getInstance();
-
-		if (color != null && properties.getBorderColor() == null && properties.getColor() == null) {
-			return cf.getColor(color);
-		}
-
-		if (color != null && properties.getColor() != null) {
-			return cf.getColor(properties.getColor());
-		}
-
-		if (color != null && properties.getBorderColor() != null) {
-			return cf.getColor(properties.getBorderColor());
-		}
-
-		return LAFSettings.getInstance().getColor();
-
-	}
-
-	/**
-	 * Checks if is background repeat.
-	 *
-	 * @param repeat
-	 *            the repeat
-	 * @return true, if is background repeat
-	 */
-	public static boolean isBackgroundRepeat(String repeat) {
-		String repeatTL = repeat.toLowerCase();
-		return repeatTL.indexOf(REPEAT) != -1;
-	}
-
-	/**
-	 * Checks if is background position.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is background position
-	 */
-	public static boolean isBackgroundPosition(String token) {
-		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP) || token.equalsIgnoreCase(CENTER)
-				|| token.equalsIgnoreCase(BOTTOM) || token.equalsIgnoreCase(LEFT) || token.equalsIgnoreCase(RIGHT);
 	}
 }

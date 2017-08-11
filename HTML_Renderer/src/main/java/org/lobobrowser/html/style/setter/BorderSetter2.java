@@ -1,5 +1,6 @@
 package org.lobobrowser.html.style.setter;
 
+import org.lobobrowser.html.renderstate.BorderRenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
@@ -30,7 +31,7 @@ public class BorderSetter2 implements SubPropertySetter {
 			String style = null;
 			String width = null;
 			for (String token : array) {
-				if (HtmlValues.isBorderStyle(token)) {
+				if (BorderRenderState.isBorderStyle(token)) {
 					style = token;
 				} else if (ColorFactory.getInstance().isColor(token)) {
 					color = token;

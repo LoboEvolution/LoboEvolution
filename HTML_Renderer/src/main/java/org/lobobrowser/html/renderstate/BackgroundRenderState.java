@@ -21,22 +21,36 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.StringTokenizer;
 
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
+import org.apache.batik.transcoder.TranscoderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.info.BackgroundInfo;
+import org.lobobrowser.html.renderer.BaseElementRenderable;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.http.UserAgentContext;
+import org.lobobrowser.util.SSLCertificate;
 import org.lobobrowser.util.gui.ColorFactory;
 
-public class BackgroundRenderState implements CSSValuesProperties{
+public class BackgroundRenderState implements CSSValuesProperties {
 	
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(StyleSheetRenderState.class.getName());
+	protected static final Logger logger = LogManager.getLogger(BackgroundRenderState.class.getName());
 	
 	/**
 	 * Apply background vertical position.
@@ -98,67 +112,7 @@ public class BackgroundRenderState implements CSSValuesProperties{
 		}
 		return bg;
 	}
-	
-	/**
-	 * Apply background horizontal positon.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param xposition
-	 *            the xposition
-	 */
-	private BackgroundInfo applyBackgroundHorizontalPositon(BackgroundInfo binfo, String xposition, RenderState prevRenderState) {
-		BackgroundInfo bg = binfo;
-		if (xposition.endsWith("%")) {
-			bg.setBackgroundXPositionAbsolute(false);
-			try {
-				bg.setBackgroundXPosition((int) Double.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
-				bg.setBackgroundXPosition(0);
-			}
-		} else {
-
-			switch (xposition) {
-			case CENTER:
-				bg.setBackgroundXPositionAbsolute(false);
-				bg.setBackgroundXPosition(50);
-				break;
-			case RIGHT:
-				bg.setBackgroundXPositionAbsolute(false);
-				bg.setBackgroundXPosition(100);
-				break;
-			case LEFT:
-				bg.setBackgroundXPositionAbsolute(false);
-				bg.setBackgroundXPosition(0);
-				break;
-			case BOTTOM:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(100);
-				break;
-			case TOP:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(0);
-				break;
-			case INHERIT:
-				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					bg.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
-					bg.setBackgroundXPosition(bi.getBackgroundXPosition());
-				}
-				break;
-			case INITIAL:
-				bg.setBackgroundXPositionAbsolute(true);
-				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
-				break;
-			default:
-				bg.setBackgroundXPositionAbsolute(true);
-				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
-				break;
-			}
-		}
-		return bg;
-	}
-	
+		
 	/**
 	 * Apply background position.
 	 *
@@ -258,6 +212,168 @@ public class BackgroundRenderState implements CSSValuesProperties{
 			}
 		}
 		return bg;
+	}
+	
+	/**
+	 * Load background image.
+	 *
+	 * @param imageURL
+	 *            the image url
+	 */
+	public Image loadBackgroundImage(final URL imageURL, BaseElementRenderable ber) {
+		Image image = null;
+		String url = imageURL.toString();
+		try {
+			SSLCertificate.setCertificate();
+
+			URLConnection con = imageURL.openConnection();
+			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+
+			if (url.endsWith(".svg")) {
+				SVGRasterizer r = new SVGRasterizer(imageURL);
+				image = r.bufferedImageToImage();
+			} else if (url.startsWith("https")) {
+				BufferedImage bi = ImageIO.read(con.getInputStream());
+				if (bi != null) {
+					image = Toolkit.getDefaultToolkit().createImage(bi.getSource());
+				}
+			} else if (url.endsWith(".gif")) {
+				try {
+					image = new ImageIcon(imageURL).getImage();
+				} catch (Exception e) {
+					image = ImageIO.read(con.getInputStream());
+				}
+			} else if (url.endsWith(".bmp")) {
+				image = ImageIO.read(con.getInputStream());
+			} else {
+				image = ImageIO.read(con.getInputStream());
+			}
+
+			
+
+			int w = -1;
+			int h = -1;
+			if (image != null) {
+				w = image.getWidth(ber);
+				h = image.getHeight(ber);
+			}
+
+			if (w != -1 && h != -1) {
+				ber.repaint();
+			}
+		} catch (FileNotFoundException | IIOException ex) {
+			logger.error("loadBackgroundImage(): Image not found " + url);
+		} catch (IOException | TranscoderException thrown) {
+			logger.error("loadBackgroundImage()", thrown);
+		} catch (Exception e) {
+			logger.error("loadBackgroundImage()", e);
+		}
+		return image;
+	}
+	
+	
+	/**
+	 * Apply background horizontal positon.
+	 *
+	 * @param binfo
+	 *            the binfo
+	 * @param xposition
+	 *            the xposition
+	 */
+	private BackgroundInfo applyBackgroundHorizontalPositon(BackgroundInfo binfo, String xposition, RenderState prevRenderState) {
+		BackgroundInfo bg = binfo;
+		if (xposition.endsWith("%")) {
+			bg.setBackgroundXPositionAbsolute(false);
+			try {
+				bg.setBackgroundXPosition((int) Double.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
+			} catch (NumberFormatException nfe) {
+				bg.setBackgroundXPosition(0);
+			}
+		} else {
+
+			switch (xposition) {
+			case CENTER:
+				bg.setBackgroundXPositionAbsolute(false);
+				bg.setBackgroundXPosition(50);
+				break;
+			case RIGHT:
+				bg.setBackgroundXPositionAbsolute(false);
+				bg.setBackgroundXPosition(100);
+				break;
+			case LEFT:
+				bg.setBackgroundXPositionAbsolute(false);
+				bg.setBackgroundXPosition(0);
+				break;
+			case BOTTOM:
+				bg.setBackgroundYPositionAbsolute(false);
+				bg.setBackgroundYPosition(100);
+				break;
+			case TOP:
+				bg.setBackgroundYPositionAbsolute(false);
+				bg.setBackgroundYPosition(0);
+				break;
+			case INHERIT:
+				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
+				if (bi != null) {
+					bg.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
+					bg.setBackgroundXPosition(bi.getBackgroundXPosition());
+				}
+				break;
+			case INITIAL:
+				bg.setBackgroundXPositionAbsolute(true);
+				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
+				break;
+			default:
+				bg.setBackgroundXPositionAbsolute(true);
+				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
+				break;
+			}
+		}
+		return bg;
+	}
+	
+	/**
+	 * Checks if is background repeat.
+	 *
+	 * @param repeat
+	 *            the repeat
+	 * @return true, if is background repeat
+	 */
+	public static boolean isBackgroundRepeat(String repeat) {
+		String repeatTL = repeat.toLowerCase();
+		return repeatTL.indexOf(REPEAT) != -1;
+	}
+
+	/**
+	 * Checks if is background position.
+	 *
+	 * @param token
+	 *            the token
+	 * @return true, if is background position
+	 */
+	public static boolean isBackgroundPosition(String token) {
+		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP) || token.equalsIgnoreCase(CENTER)
+				|| token.equalsIgnoreCase(BOTTOM) || token.equalsIgnoreCase(LEFT) || token.equalsIgnoreCase(RIGHT);
+	}
+	
+	/**
+	 * Checks if is length.
+	 *
+	 * @param token
+	 *            the token
+	 * @return true, if is length
+	 */
+	private static boolean isLength(String token) {
+		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
+				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
+			return true;
+		}
+		try {
+			Double.parseDouble(token);
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
 	}
 	
 	private boolean validateURL(URL url){

@@ -20,10 +20,7 @@
  */
 package org.lobobrowser.html.renderstate;
 
-import java.awt.Color;
-
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
@@ -84,68 +81,5 @@ public class ImageRenderState extends StyleSheetRenderState {
 		}
 		this.marginInsets = mi;
 		return mi;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
-	 */
-	@Override
-	public BorderInfo getBorderInfo() {
-		BorderInfo binfo = this.borderInfo;
-		if (!INVALID_BORDER_INFO.equals(binfo)) {
-			return binfo;
-		}
-		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.getRightStyle() == HtmlValues.BORDER_STYLE_NONE) {
-			if (binfo == null) {
-				binfo = new BorderInfo();
-			}
-			HTMLElementImpl element = this.element;
-			if (element != null) {
-				String border = element.getAttribute(BORDER);
-
-				if (border != null) {
-					int valueType;
-					int value = HtmlValues.getPixelSize(border, this, 0);
-
-					if (border.endsWith("%")) {
-						valueType = HtmlInsets.TYPE_PERCENT;
-					} else {
-						valueType = HtmlInsets.TYPE_PIXELS;
-					}
-
-					HtmlInsets borderInsets = new HtmlInsets();
-					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
-					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-					binfo.setInsets(borderInsets);
-					if (binfo.getTopColor() == null) {
-						binfo.setTopColor(Color.BLACK);
-					}
-					if (binfo.getLeftColor() == null) {
-						binfo.setLeftColor(Color.BLACK);
-					}
-					if (binfo.getRightColor() == null) {
-						binfo.setRightColor(Color.BLACK);
-					}
-					if (binfo.getBottomColor() == null) {
-						binfo.setBottomColor(Color.BLACK);
-					}
-					if (value != 0) {
-						binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
-						binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);
-						binfo.setRightStyle(HtmlValues.BORDER_STYLE_SOLID);
-						binfo.setBottomStyle(HtmlValues.BORDER_STYLE_SOLID);
-					}
-				}
-			}
-		}
-		this.borderInfo = binfo;
-		return binfo;
 	}
 }

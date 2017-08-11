@@ -121,7 +121,7 @@ public class RTableCell extends RBlock {
 	/**
 	 * Clear layout cache.
 	 */
-	void clearLayoutCache() {
+	public void clearLayoutCache() {
 		// test method
 		this.cachedLayout.clear();
 	}

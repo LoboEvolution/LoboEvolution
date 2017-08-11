@@ -78,9 +78,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
 
-	/** The Constant INVALID_BORDER_INFO. */
-	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
-
 	/** The Constant INVALID_COLOR. */
 	protected static final Color INVALID_COLOR = new Color(100, 0, 100);
 
@@ -97,7 +94,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	protected BackgroundInfo iBackgroundInfo = INVALID_BACKGROUND_INFO;
 
 	/** The border info. */
-	protected BorderInfo borderInfo = INVALID_BORDER_INFO;
+	protected BorderInfo borderInfo = BorderRenderState.INVALID_BORDER_INFO;
 
 	/** The margin insets. */
 	protected HtmlInsets marginInsets = INVALID_INSETS;
@@ -342,7 +339,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		this.paddingInsets = INVALID_INSETS;
 		this.overflowX = -1;
 		this.overflowY = -1;
-		this.borderInfo = INVALID_BORDER_INFO;
+		this.borderInfo = BorderRenderState.INVALID_BORDER_INFO;
 		// Should NOT invalidate parent render state.
 	}
 
@@ -587,33 +584,36 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			RenderState prs = this.prevRenderState;
 			if (prs != null) {
 				tt = prs.getTextTransform();
+				this.iTextTransform = tt;
+				return tt;
 			}
-			this.iTextTransform = tt;
-			return tt;
 		}
 		tt = 0;
-		switch (tdText) {
-		case NONE:
-			tt |= TEXTTRANSFORM_NONE;
-			break;
-		case CAPITALIZE:
-			tt |= TEXTTRANSFORM_CAPITALIZE;
-			break;
-		case UPPERCASE:
-			tt |= TEXTTRANSFORM_UPPERCASE;
-			break;
-		case LOWERCASE:
-			tt |= TEXTTRANSFORM_LOWERCASE;
-			break;
-		case INHERIT:
-			tt |= this.getPreviousRenderState().getTextTransform();
-			break;
-		case INITIAL:
-			tt |= TEXTTRANSFORM_NONE;
-			break;
-		default:
-			tt |= TEXTTRANSFORM_NONE;
-			break;
+		if (tdText != null) {
+
+			switch (tdText) {
+			case NONE:
+				tt |= TEXTTRANSFORM_NONE;
+				break;
+			case CAPITALIZE:
+				tt |= TEXTTRANSFORM_CAPITALIZE;
+				break;
+			case UPPERCASE:
+				tt |= TEXTTRANSFORM_UPPERCASE;
+				break;
+			case LOWERCASE:
+				tt |= TEXTTRANSFORM_LOWERCASE;
+				break;
+			case INHERIT:
+				tt |= this.getPreviousRenderState().getTextTransform();
+				break;
+			case INITIAL:
+				tt |= TEXTTRANSFORM_NONE;
+				break;
+			default:
+				tt |= TEXTTRANSFORM_NONE;
+				break;
+			}
 		}
 		this.iTextTransform = tt;
 		return tt;
@@ -1290,18 +1290,20 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public BorderInfo getBorderInfo() {
+		BorderRenderState brs = new BorderRenderState();
 		BorderInfo binfo = this.borderInfo;
-		if (!INVALID_BORDER_INFO.equals(binfo)) {
+		if (!BorderRenderState.INVALID_BORDER_INFO.equals(binfo)) {
 			return binfo;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
-			binfo = HtmlValues.getBorderInfo(props, this);
+			binfo = BorderRenderState.getBorderInfo(props, this);
 		} else {
 			binfo = null;
 		}
-		this.borderInfo = binfo;
-		return binfo;
+		
+		this.borderInfo = brs.borderInfo(binfo, this);
+		return this.borderInfo;
 	}
 
 	@Override
