@@ -21,369 +21,413 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.StringTokenizer;
+import java.awt.Graphics;
+import java.awt.Insets;
 
-import javax.imageio.IIOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
-import org.apache.batik.transcoder.TranscoderException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.lobobrowser.html.dombl.SVGRasterizer;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.info.BackgroundInfo;
-import org.lobobrowser.html.renderer.BaseElementRenderable;
+import org.lobobrowser.html.HtmlAttributeProperties;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.info.BorderInfo;
+import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.style.CSSValuesProperties;
+import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.SSLCertificate;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.util.gui.GUITasks;
+import org.lobobrowser.util.gui.LAFSettings;
+import org.w3c.dom.css.CSS2Properties;
 
-public class BackgroundRenderState implements CSSValuesProperties {
+public class BorderRenderState implements CSSValuesProperties {
+
+	/** The Constant DEFAULT_BORDER_WIDTH. */
+	public static final int DEFAULT_BORDER_WIDTH = 2;
+
+	/** The Constant BORDER_STYLE_NONE. */
+	public static final int BORDER_STYLE_NONE = 0;
+
+	/** The Constant BORDER_STYLE_HIDDEN. */
+	public static final int BORDER_STYLE_HIDDEN = 1;
+
+	/** The Constant BORDER_STYLE_DOTTED. */
+	public static final int BORDER_STYLE_DOTTED = 2;
+
+	/** The Constant BORDER_STYLE_DASHED. */
+	public static final int BORDER_STYLE_DASHED = 3;
+
+	/** The Constant BORDER_STYLE_SOLID. */
+	public static final int BORDER_STYLE_SOLID = 4;
+
+	/** The Constant BORDER_STYLE_DOUBLE. */
+	public static final int BORDER_STYLE_DOUBLE = 5;
+
+	/** The Constant BORDER_STYLE_GROOVE. */
+	public static final int BORDER_STYLE_GROOVE = 6;
+
+	/** The Constant BORDER_STYLE_RIDGE. */
+	public static final int BORDER_STYLE_RIDGE = 7;
+
+	/** The Constant BORDER_STYLE_INSET. */
+	public static final int BORDER_STYLE_INSET = 8;
+
+	/** The Constant BORDER_STYLE_OUTSET. */
+	public static final int BORDER_STYLE_OUTSET = 9;
 	
-	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(BackgroundRenderState.class.getName());
+	/** The Constant INVALID_BORDER_INFO. */
+	public static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
 	
+	public Insets borderInsets(RenderState rs, int availWidth, int availHeight) {
+		Insets borderInsets = RBlockViewport.ZERO_INSETS;
+		BorderInfo borderInfo = rs.getBorderInfo();
+		
+		if (borderInfo != null) {
+			HtmlInsets binsets = borderInfo.getInsets();
+			if(binsets!= null) borderInsets = binsets.getAWTInsets(0, 0, 0, 0, availWidth, availHeight, 0, 0);
+		}
+		return borderInsets;
+	}
+
 	/**
-	 * Apply background vertical position.
+	 * Gets the border info.
 	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param yposition
-	 *            the yposition
+	 * @param properties
+	 *            the properties
+	 * @param renderState
+	 *            the render state
+	 * @return the border info
 	 */
-	public BackgroundInfo applyBackgroundVerticalPosition(BackgroundInfo binfo, String yposition, RenderState prevRenderState) {
-		BackgroundInfo bg = binfo;
-		if (yposition.endsWith("%")) {
-			bg.setBackgroundYPositionAbsolute(false);
-			try {
-				bg.setBackgroundYPosition(
-						(int) Double.parseDouble(yposition.substring(0, yposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
-				bg.setBackgroundYPosition(0);
+	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
+
+		BorderInfo binfo = new BorderInfo();
+
+		if (INHERIT.equals(properties.getBorderTopStyle())) {
+			binfo.setTopStyle(renderState.getPreviousRenderState().getBorderInfo().getTopStyle());
+			binfo.setTopColor(renderState.getPreviousRenderState().getBorderInfo().getTopColor());
+		} else {
+			binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
+			binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), properties, binfo));
+		}
+
+		if (INHERIT.equals(properties.getBorderBottomStyle())) {
+			binfo.setBottomStyle(renderState.getPreviousRenderState().getBorderInfo().getBottomStyle());
+			binfo.setBottomColor(renderState.getPreviousRenderState().getBorderInfo().getBottomColor());
+		} else {
+			binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
+			binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), properties, binfo));
+		}
+
+		if (INHERIT.equals(properties.getBorderRightStyle())) {
+			binfo.setRightStyle(renderState.getPreviousRenderState().getBorderInfo().getRightStyle());
+			binfo.setRightColor(renderState.getPreviousRenderState().getBorderInfo().getRightColor());
+		} else {
+			binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
+			binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), properties, binfo));
+		}
+
+		if (INHERIT.equals(properties.getBorderLeftStyle())) {
+			binfo.setLeftStyle(renderState.getPreviousRenderState().getBorderInfo().getLeftStyle());
+			binfo.setLeftColor(renderState.getPreviousRenderState().getBorderInfo().getLeftColor());
+		} else {
+			binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
+			binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), properties, binfo));
+		}
+
+		populateBorderInsets(binfo, properties, renderState);
+		return binfo;
+	}
+
+	/**
+	 * Gets the border insets.
+	 *
+	 * @param borderStyles
+	 *            the border styles
+	 * @param cssProperties
+	 *            the css properties
+	 * @param renderState
+	 *            the render state
+	 * @return the border insets
+	 */
+	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS2Properties cssProperties,
+			RenderState renderState) {
+		HtmlInsets insets = null;
+		String borderText = cssProperties.getBorder();
+		if (borderText != null) {
+			String[] br = borderText.split(" ");
+			int sizeBorder = br.length;
+			switch (sizeBorder) {
+			case 4:
+				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
+				insets = HtmlValues.updateRightInset(insets, br[1], renderState);
+				insets = HtmlValues.updateBottomInset(insets, br[2], renderState);
+				insets = HtmlValues.updateLeftInset(insets, br[3], renderState);
+				break;
+			case 3:
+				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
+				insets = HtmlValues.updateRightInset(insets, br[1], renderState);
+				insets = HtmlValues.updateBottomInset(insets, br[2], renderState);
+				break;
+			case 2:
+				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
+				insets = HtmlValues.updateRightInset(insets, br[1], renderState);
+				break;
+			case 1:
+				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
+				insets = HtmlValues.updateRightInset(insets, br[0], renderState);
+				insets = HtmlValues.updateBottomInset(insets, br[0], renderState);
+				insets = HtmlValues.updateLeftInset(insets, br[0], renderState);
+				break;
 			}
 		} else {
 
-			switch (yposition) {
-			case CENTER:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(50);
-				break;
-			case RIGHT:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(100);
-				break;
-			case LEFT:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(0);
-				break;
-			case BOTTOM:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(100);
-				break;
-			case TOP:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(0);
-				break;
-			case INHERIT:
-				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					bg.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
-					bg.setBackgroundYPosition(bi.getBackgroundYPosition());
-				}
-				break;
-			case INITIAL:
-				bg.setBackgroundYPositionAbsolute(true);
-				bg.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, 0));
-				break;
-			default:
-				bg.setBackgroundYPositionAbsolute(true);
-				bg.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, 0));
-				break;
+			if (borderStyles.top != BORDER_STYLE_NONE) {
+				String topText = cssProperties.getBorderTopWidth();
+				insets = HtmlValues.updateTopInset(insets, topText, renderState);
+			}
+			if (borderStyles.left != BORDER_STYLE_NONE) {
+				String leftText = cssProperties.getBorderLeftWidth();
+				insets = HtmlValues.updateLeftInset(insets, leftText, renderState);
+			}
+			if (borderStyles.bottom != BORDER_STYLE_NONE) {
+				String bottomText = cssProperties.getBorderBottomWidth();
+				insets = HtmlValues.updateBottomInset(insets, bottomText, renderState);
+			}
+			if (borderStyles.right != BORDER_STYLE_NONE) {
+				String rightText = cssProperties.getBorderRightWidth();
+				insets = HtmlValues.updateRightInset(insets, rightText, renderState);
 			}
 		}
-		return bg;
+		return insets;
 	}
+
+	/**
+	 * Populates BorderInfo.insets.
+	 *
+	 * @param binfo
+	 *            A BorderInfo with its styles already populated.
+	 * @param cssProperties
+	 *            The CSS properties object.
+	 * @param renderState
+	 *            The current render state.
+	 */
+	public static void populateBorderInsets(BorderInfo binfo, CSS2Properties cssProperties, RenderState renderState) {
+		HtmlInsets insets = null;
+
+		if (binfo.getTopStyle() != BORDER_STYLE_NONE) {
+			String topText = cssProperties.getBorderTopWidth();
+			insets = HtmlValues.updateTopInset(insets, topText, renderState);
+		}
+		if (binfo.getLeftStyle() != BORDER_STYLE_NONE) {
+			String leftText = cssProperties.getBorderLeftWidth();
+			insets = HtmlValues.updateLeftInset(insets, leftText, renderState);
+		}
+		if (binfo.getBottomStyle() != BORDER_STYLE_NONE) {
+			String bottomText = cssProperties.getBorderBottomWidth();
+			insets = HtmlValues.updateBottomInset(insets, bottomText, renderState);
+		}
+		if (binfo.getRightStyle() != BORDER_STYLE_NONE) {
+			String rightText = cssProperties.getBorderRightWidth();
+			insets = HtmlValues.updateRightInset(insets, rightText, renderState);
+		}
+		binfo.setInsets(insets);
+	}
+
+	/**
+	 * Checks if is border style.
+	 *
+	 * @param token
+	 *            the token
+	 * @return true, if is border style
+	 */
+	public static boolean isBorderStyle(String token) {
+		String tokenTL = token.toLowerCase();
+		return tokenTL.equals(SOLID) || tokenTL.equals(DASHED) || tokenTL.equals(DOTTED) || tokenTL.equals(DOUBLE)
+				|| tokenTL.equals(NONE) || tokenTL.equals(HIDDEN) || tokenTL.equals(GROOVE) || tokenTL.equals(RIDGE)
+				|| tokenTL.equals(INSET) || tokenTL.equals(OUTSET);
+	}
+	
+	
+	public BorderInfo borderInfo(BorderInfo info, StyleSheetRenderState style){
+		BorderInfo bi = info;
+				
+		if (!INVALID_BORDER_INFO.equals(bi)) {
+			return bi;
+		}
 		
-	/**
-	 * Apply background position.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param position
-	 *            the position
-	 */
-	public BackgroundInfo applyBackgroundPosition(BackgroundInfo binfo, String position, RenderState prevRenderState) {
-		BackgroundInfo bg = binfo;
-		if (position != null) {
-			bg.setBackgroundXPositionAbsolute(false);
-			bg.setBackgroundYPositionAbsolute(false);
-			bg.setBackgroundXPosition(50);
-			bg.setBackgroundYPosition(50);
-			StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
-			if (tok.hasMoreTokens()) {
-				String xposition = tok.nextToken();
-				bg = applyBackgroundHorizontalPositon(bg, xposition, prevRenderState);
-				if (tok.hasMoreTokens()) {
-					String yposition = tok.nextToken();
-					bg = applyBackgroundVerticalPosition(bg, yposition, prevRenderState);
-				}
-			}
-		}
-		return bg;
-	}
-	
-	/**
-	 * Apply background repeat.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param backgroundRepeatText
-	 *            the background repeat text
-	 */
-	public BackgroundInfo applyBackgroundRepeat(BackgroundInfo binfo, String back) {
-		BackgroundInfo bg = binfo;
-		if (back!= null && bg.getBackgroundRepeat() == BackgroundInfo.BR_REPEAT) {
-			switch (back.toLowerCase()) {
-			case REPEAT:
-				bg.backgroundRepeat = BackgroundInfo.BR_REPEAT;
-				break;
-			case REPEAT_X:
-				bg.backgroundRepeat = BackgroundInfo.BR_REPEAT_X;
-				break;
-			case REPEAT_Y:
-				bg.backgroundRepeat = BackgroundInfo.BR_REPEAT_Y;
-				break;
-			case REPEAT_NO:
-				bg.backgroundRepeat = BackgroundInfo.BR_NO_REPEAT;
-				break;
-			default:
-				break;
-			}
-		}
-		return bg;
-	}
-	
-	public BackgroundInfo applyBackgroundImage(BackgroundInfo binfo, String back, HTMLDocumentImpl document) {
-		BackgroundInfo bg = binfo;
-		if (back!= null && back.contains("url") && bg.getBackgroundImage() == null) {
-			String start = "url(";
-			int startIdx = start.length();
-			int closingIdx = back.lastIndexOf(')');
-			String quotedUri = back.substring(startIdx, closingIdx);
-			URL url = document.getFullURL(quotedUri);
-			if (validateURL(url)) {
-				bg.setBackgroundImage(url);
-			} else {
-				try {
-					bg.setBackgroundImage(new URL(quotedUri.replace("'", "")));
-				} catch (Exception e) {
-					logger.error(e);
-				}
-			}
-		}
-		return bg;
-	}
-	
-	public BackgroundInfo applyBackground(BackgroundInfo binfo, String back, RenderState prevRenderState) {
-		BackgroundInfo bg = binfo;	
-		if (back != null) {
-			switch (back.toLowerCase()) {
-			case INHERIT:
-				bg.setBackgroundColor(prevRenderState.getPreviousRenderState().getBackgroundColor());
-				break;
-			case INITIAL:
-				bg.setBackgroundColor(Color.WHITE);
-				break;
-			default:
-				Color c = ColorFactory.getInstance().getColor(back);
-				if (c != null) {
-					bg.setBackgroundColor(ColorFactory.getInstance().getColor(back));
-				}
-				break;
-			}
-		}
-		return bg;
-	}
-	
-	/**
-	 * Load background image.
-	 *
-	 * @param imageURL
-	 *            the image url
-	 */
-	public Image loadBackgroundImage(final URL imageURL, BaseElementRenderable ber) {
-		Image image = null;
-		String url = imageURL.toString();
-		try {
-			SSLCertificate.setCertificate();
-
-			URLConnection con = imageURL.openConnection();
-			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-
-			if (url.endsWith(".svg")) {
-				SVGRasterizer r = new SVGRasterizer(imageURL);
-				image = r.bufferedImageToImage();
-			} else if (url.startsWith("https")) {
-				BufferedImage bi = ImageIO.read(con.getInputStream());
-				if (bi != null) {
-					image = Toolkit.getDefaultToolkit().createImage(bi.getSource());
-				}
-			} else if (url.endsWith(".gif")) {
-				try {
-					image = new ImageIcon(imageURL).getImage();
-				} catch (Exception e) {
-					image = ImageIO.read(con.getInputStream());
-				}
-			} else if (url.endsWith(".bmp")) {
-				image = ImageIO.read(con.getInputStream());
-			} else {
-				image = ImageIO.read(con.getInputStream());
-			}
-
+		if (bi == null || bi.getTopStyle() == BORDER_STYLE_NONE
+				&& bi.getBottomStyle() == BORDER_STYLE_NONE
+				&& bi.getLeftStyle() == BORDER_STYLE_NONE
+				&& bi.getRightStyle() == BORDER_STYLE_NONE) {
 			
-
-			int w = -1;
-			int h = -1;
-			if (image != null) {
-				w = image.getWidth(ber);
-				h = image.getHeight(ber);
+			if (bi == null) {
+				bi = new BorderInfo();
 			}
-
-			if (w != -1 && h != -1) {
-				ber.repaint();
-			}
-		} catch (FileNotFoundException | IIOException ex) {
-			logger.error("loadBackgroundImage(): Image not found " + url);
-		} catch (IOException | TranscoderException thrown) {
-			logger.error("loadBackgroundImage()", thrown);
-		} catch (Exception e) {
-			logger.error("loadBackgroundImage()", e);
-		}
-		return image;
-	}
-	
-	
-	/**
-	 * Apply background horizontal positon.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param xposition
-	 *            the xposition
-	 */
-	private BackgroundInfo applyBackgroundHorizontalPositon(BackgroundInfo binfo, String xposition, RenderState prevRenderState) {
-		BackgroundInfo bg = binfo;
-		if (xposition.endsWith("%")) {
-			bg.setBackgroundXPositionAbsolute(false);
-			try {
-				bg.setBackgroundXPosition((int) Double.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
-				bg.setBackgroundXPosition(0);
-			}
-		} else {
-
-			switch (xposition) {
-			case CENTER:
-				bg.setBackgroundXPositionAbsolute(false);
-				bg.setBackgroundXPosition(50);
-				break;
-			case RIGHT:
-				bg.setBackgroundXPositionAbsolute(false);
-				bg.setBackgroundXPosition(100);
-				break;
-			case LEFT:
-				bg.setBackgroundXPositionAbsolute(false);
-				bg.setBackgroundXPosition(0);
-				break;
-			case BOTTOM:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(100);
-				break;
-			case TOP:
-				bg.setBackgroundYPositionAbsolute(false);
-				bg.setBackgroundYPosition(0);
-				break;
-			case INHERIT:
-				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					bg.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
-					bg.setBackgroundXPosition(bi.getBackgroundXPosition());
+			
+			HTMLElementImpl element = style.element;
+			if (element != null) {
+				String border = element.getAttribute(HtmlAttributeProperties.FRAMEBORDER);
+				int value = 0;
+				if (border != null) {
+					border = border.trim();
+					value = HtmlValues.getPixelSize(border, style, 0);
 				}
-				break;
-			case INITIAL:
-				bg.setBackgroundXPositionAbsolute(true);
-				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
-				break;
-			default:
-				bg.setBackgroundXPositionAbsolute(true);
-				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
-				break;
-			}
-		}
-		return bg;
-	}
-	
-	/**
-	 * Checks if is background repeat.
-	 *
-	 * @param repeat
-	 *            the repeat
-	 * @return true, if is background repeat
-	 */
-	public static boolean isBackgroundRepeat(String repeat) {
-		String repeatTL = repeat.toLowerCase();
-		return repeatTL.indexOf(REPEAT) != -1;
-	}
 
-	/**
-	 * Checks if is background position.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is background position
-	 */
-	public static boolean isBackgroundPosition(String token) {
-		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP) || token.equalsIgnoreCase(CENTER)
-				|| token.equalsIgnoreCase(BOTTOM) || token.equalsIgnoreCase(LEFT) || token.equalsIgnoreCase(RIGHT);
-	}
-	
-	/**
-	 * Checks if is length.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is length
-	 */
-	private static boolean isLength(String token) {
-		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
-				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
-			return true;
-		}
-		try {
-			Double.parseDouble(token);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
-	}
-	
-	private boolean validateURL(URL url){
-		try {
-		    URLConnection conn = url.openConnection();
-		    conn.connect();
-		    return true;
-		} catch (Exception e) {
-			return false;
+				HtmlInsets borderInsets = new HtmlInsets();
+				borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value != 0 ? 1 : 0;
+				borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = HtmlInsets.TYPE_PIXELS;
+				bi.setInsets(borderInsets);
+				
+				if (value != 0) {
+					bi.setTopStyle(BORDER_STYLE_SOLID);
+					bi.setLeftStyle(BORDER_STYLE_SOLID);
+					bi.setRightStyle(BORDER_STYLE_SOLID);
+					bi.setBottomStyle(BORDER_STYLE_SOLID);
+				}
+			}
 		}
 		
+		return bi;
+	}
+	
+	public void borderStyleTop(Graphics g, BorderInfo borderInfo, int btop, int bleft, int bright, int startX, int startY, int totalWidth) {
+		if (btop > 0) {
+			g.setColor(borderInfo.getTopColor());
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getTopStyle();
+			for (int i = 0; i < btop; i++) {
+				int leftOffset = i * bleft / btop;
+				int rightOffset = i * bright / btop;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1,
+							startY + i, 10 + btop, 6);
+				} else {
+					g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
+				}
+			}
+		}
+	}
+	
+	public void borderStyleRight(Graphics g, BorderInfo borderInfo, int bright, int btop, int bbottom, int startX, int startY, int totalWidth, int totalHeight) {
+		if (bright > 0) {
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getRightStyle();
+			g.setColor(borderInfo.getRightColor());
+			int lastX = startX + totalWidth - 1;
+			for (int i = 0; i < bright; i++) {
+				int topOffset = i * btop / bright;
+				int bottomOffset = i * bbottom / bright;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i,
+							startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
+				} else {
+					g.drawLine(lastX - i, startY + topOffset, lastX - i,
+							startY + totalHeight - bottomOffset - 1);
+				}
+			}
+		}
+		
+	}
+
+	public void borderStyleBottom(Graphics g, BorderInfo borderInfo, int bright, int bleft, int bbottom, int startX, int startY, int totalWidth, int totalHeight) {
+		if (bbottom > 0) {
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getBottomStyle();
+			g.setColor(borderInfo.getBottomColor());
+			int lastY = startY + totalHeight - 1;
+			for (int i = 0; i < bbottom; i++) {
+				int leftOffset = i * bleft / bbottom;
+				int rightOffset = i * bright / bbottom;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, startX + leftOffset, lastY - i,
+							startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
+				} else {
+					g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1,
+							lastY - i);
+				}
+			}
+		}	
+	}
+
+	public void borderStyleLeft(Graphics g, BorderInfo borderInfo, int bleft, int btop, int bbottom, int startX, int startY, int totalHeight) {
+		if (bleft > 0) {
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getLeftStyle();
+			g.setColor(borderInfo.getLeftColor());
+			for (int i = 0; i < bleft; i++) {
+				int topOffset = i * btop / bleft;
+				int bottomOffset = i * bbottom / bleft;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i,
+							startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
+				} else {
+					g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
+				}
+			}
+		}
+	}
+
+	/**
+	 * Gets the border color.
+	 *
+	 * @param color
+	 *            the color
+	 * @param properties
+	 *            the properties
+	 * @param binfo
+	 *            the binfo
+	 * @return the border color
+	 */
+	private static Color getBorderColor(String color, CSS2Properties properties, BorderInfo binfo) {
+
+		ColorFactory cf = ColorFactory.getInstance();
+
+		if (color != null && properties.getBorderColor() == null && properties.getColor() == null) {
+			return cf.getColor(color);
+		}
+
+		if (color != null && properties.getColor() != null) {
+			return cf.getColor(properties.getColor());
+		}
+
+		if (color != null && properties.getBorderColor() != null) {
+			return cf.getColor(properties.getBorderColor());
+		}
+
+		return LAFSettings.getInstance().getColor();
+
+	}
+
+	/**
+	 * Gets the border style.
+	 *
+	 * @param styleText
+	 *            the style text
+	 * @return the border style
+	 */
+	private static int getBorderStyle(String styleText) {
+
+		if (styleText == null || styleText.length() == 0) {
+			return BORDER_STYLE_NONE;
+		}
+
+		String stl = styleText.toLowerCase();
+
+		switch (stl) {
+		case SOLID:
+			return BORDER_STYLE_SOLID;
+		case DASHED:
+			return BORDER_STYLE_DASHED;
+		case DOTTED:
+			return BORDER_STYLE_DOTTED;
+		case NONE:
+			return BORDER_STYLE_NONE;
+		case HIDDEN:
+			return BORDER_STYLE_HIDDEN;
+		case DOUBLE:
+			return BORDER_STYLE_DOUBLE;
+		case GROOVE:
+			return BORDER_STYLE_GROOVE;
+		case RIDGE:
+			return BORDER_STYLE_RIDGE;
+		case INSET:
+			return BORDER_STYLE_INSET;
+		case OUTSET:
+			return BORDER_STYLE_OUTSET;
+		default:
+			return BORDER_STYLE_NONE;
+		}
 	}
 }
