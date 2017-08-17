@@ -303,7 +303,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			availw = 0;
 		}
 		int availh = desiredHeight - paddingInsets.top - paddingInsets.bottom;
-		if (availh == 0) {
+		if (availh < 0) {
 			availh = 0;
 		}
 		this.availContentHeight = availh;
