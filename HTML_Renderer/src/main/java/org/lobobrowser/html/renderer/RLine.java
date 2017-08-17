@@ -45,17 +45,20 @@ public class RLine extends BaseRCollection {
 
 	/** The renderables. */
 	private final ArrayList<Renderable> renderables = new ArrayList<Renderable>(8);
-	// private final RenderState startRenderState;
+	
 	/** The base line offset. */
 	private int baseLineOffset;
 
 	/** The desired max width. */
 	private int desiredMaxWidth;
+	
+	/** The mouse press target. */
+	private BoundableRenderable mousePressTarget;
 
-	/**
-	 * Offset where next renderable should be placed. This can be different to
-	 * width.
-	 */
+	/** The line break. */
+	private LineBreak lineBreak;
+
+	/** The line xoffset. */
 	private int xoffset;
 
 	/** The allow overflow. */
@@ -619,9 +622,6 @@ public class RLine extends BaseRCollection {
 		}
 	}
 
-	/** The mouse press target. */
-	private BoundableRenderable mousePressTarget;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -739,10 +739,7 @@ public class RLine extends BaseRCollection {
 	public boolean isContainedByNode() {
 		return false;
 	}
-
-	/** The line break. */
-	private LineBreak lineBreak;
-
+	
 	/**
 	 * Gets the line break.
 	 *

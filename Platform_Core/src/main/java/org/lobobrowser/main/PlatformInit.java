@@ -94,6 +94,9 @@ public class PlatformInit {
 
 	/** The window has been shown. */
 	private boolean windowHasBeenShown = false;
+	
+	/** The Constant instance. */
+	private static final PlatformInit instance = new PlatformInit();
 
 	/**
 	 * Instantiates a new platform init.
@@ -411,9 +414,6 @@ public class PlatformInit {
 			}
 		}
 	}
-
-	/** The Constant instance. */
-	private static final PlatformInit instance = new PlatformInit();
 
 	/**
 	 * Gets the Constant instance.

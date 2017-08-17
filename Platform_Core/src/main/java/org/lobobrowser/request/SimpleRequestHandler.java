@@ -51,6 +51,9 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 
 	/** The request type. */
 	private final RequestType requestType;
+	
+	/** The cancelled. */
+	private volatile boolean cancelled;
 
 	/**
 	 * Instantiates a new simple request handler.
@@ -179,9 +182,6 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 		logger.error("handleException(): Error processing response=[" + response + "]", exception);
 		return true;
 	}
-
-	/** The cancelled. */
-	private volatile boolean cancelled;
 
 	/*
 	 * (non-Javadoc)

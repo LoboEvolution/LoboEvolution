@@ -24,8 +24,6 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.w3c.html.HTMLTextAreaElement;
@@ -49,7 +47,7 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 	 * Instantiates a new HTML text area element impl.
 	 */
 	public HTMLTextAreaElementImpl() {
-		super(HtmlProperties.TEXTAREA);
+		super(TEXTAREA);
 	}
 
 	/*

@@ -86,6 +86,15 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/** The parent rcontext. */
 	private final HtmlRendererContext parentRcontext;
+	
+	/** The source code. */
+	private volatile String sourceCode;
+
+	/** The bcontext. */
+	private UserAgentContext bcontext = null;
+
+	/** The opener. */
+	private volatile HtmlRendererContext opener;
 
 	/**
 	 * Constructs a SimpleHtmlRendererContext.
@@ -127,9 +136,6 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	public HtmlPanel getHtmlPanel() {
 		return this.htmlPanel;
 	}
-
-	/** The source code. */
-	private volatile String sourceCode;
 
 	/**
 	 * Gets the source code.
@@ -367,7 +373,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 * @see #submitForm(String, URL, String, String, FormInput[])
 	 */
 	protected void submitFormSync(final String method, final URL action, final String target, String enctype,
-			final FormInput[] formInputs) throws IOException, org.xml.sax.SAXException {
+			final FormInput[] formInputs) throws IOException, SAXException {
 		final String actualMethod = method.toUpperCase();
 		URL resolvedURL;
 		if ("GET".equals(actualMethod) && formInputs != null) {
@@ -726,10 +732,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	public HtmlRendererContext getParent() {
 		return this.parentRcontext;
 	}
-
-	/** The opener. */
-	private volatile HtmlRendererContext opener;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -872,9 +875,8 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	public void setDefaultStatus(String message) {
 		this.warn("setDefaultStatus(): Not overridden.");
 	}
-
-	/** The bcontext. */
-	private UserAgentContext bcontext = null;
+	
+	
 
 	/**
 	 * If a {@link org.lobobrowser.http.UserAgentContext} instance was provided

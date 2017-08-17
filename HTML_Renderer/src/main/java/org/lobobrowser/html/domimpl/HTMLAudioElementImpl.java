@@ -111,9 +111,9 @@ public class HTMLAudioElementImpl extends HTMLAbstractUIElement implements HTMLA
 	}
 
 	@Override
-	public short getReadyState() {
+	public String getReadyState() {
 		// TODO Auto-generated method stub
-		return 0;
+		return "0";
 	}
 
 	@Override

@@ -24,7 +24,6 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.BrowserFrame;
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.FrameNode;
 import org.lobobrowser.html.js.Window;
 import org.lobobrowser.w3c.html.HTMLFrameElement;

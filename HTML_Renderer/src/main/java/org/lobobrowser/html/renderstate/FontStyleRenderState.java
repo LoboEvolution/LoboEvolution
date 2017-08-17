@@ -45,6 +45,12 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	
 	/** The i word info map. */
 	private Map<String, WordInfo> iWordInfoMap = null;
+	
+	/** The i font. */
+	private Font iFont;
+	
+	/** The i font metrics. */
+	private FontMetrics iFontMetrics;
 
 	/**
 	 * Instantiates a new font style render state.
@@ -88,9 +94,6 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		return new FontStyleRenderState(prevRenderState, prevRenderState.getFont().getStyle(), superscript);
 	}
 
-	/** The i font. */
-	private Font iFont;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -114,9 +117,6 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		this.iFont = f;
 		return f;
 	}
-
-	/** The i font metrics. */
-	private FontMetrics iFontMetrics;
 
 	/*
 	 * (non-Javadoc)

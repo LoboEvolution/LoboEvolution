@@ -43,6 +43,13 @@ public class Executor {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(Executor.class.getName());
+	
+
+	/**
+	 * A document <code>UserData</code> key used to map Javascript scope in the
+	 * HTML document.
+	 */
+	public static final String SCOPE_KEY = "cobra.js.scope";
 
 	/**
 	 * This method should be invoked instead of <code>Context.enter</code>.
@@ -160,10 +167,4 @@ public class Executor {
 			Context.exit();
 		}
 	}
-
-	/**
-	 * A document <code>UserData</code> key used to map Javascript scope in the
-	 * HTML document.
-	 */
-	public static final String SCOPE_KEY = "cobra.js.scope";
 }

@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.w3c.svg;
 
-import org.w3c.dom.events.EventTarget;
+import org.lobobrowser.w3c.events.EventTarget;
 
 public interface SVGUseElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace,
 		SVGExternalResourcesRequired, SVGStylable, SVGTransformable, EventTarget {

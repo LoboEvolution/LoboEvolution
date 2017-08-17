@@ -41,13 +41,6 @@ public class CacheStoreInfo {
 	private final Collection<CacheFileInfo> fileInfos = new ArrayList<CacheFileInfo>();
 
 	/**
-	 * Instantiates a new cache store info.
-	 */
-	public CacheStoreInfo() {
-		super();
-	}
-
-	/**
 	 * Gets the file infos.
 	 *
 	 * @return the file infos

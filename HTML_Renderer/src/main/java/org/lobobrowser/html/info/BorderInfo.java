@@ -142,7 +142,8 @@ public class BorderInfo implements Serializable {
 	 * @return the top color
 	 */
 	public Color getTopColor() {
-		return topColor;
+		Color c = this.topColor;
+		return c == null ? Color.LIGHT_GRAY : c;
 	}
 
 	/**
@@ -161,7 +162,8 @@ public class BorderInfo implements Serializable {
 	 * @return the left color
 	 */
 	public Color getLeftColor() {
-		return leftColor;
+		Color c = this.leftColor;
+		return c == null ? Color.LIGHT_GRAY : c;
 	}
 
 	/**
@@ -180,7 +182,8 @@ public class BorderInfo implements Serializable {
 	 * @return the bottom color
 	 */
 	public Color getBottomColor() {
-		return bottomColor;
+		Color c = this.bottomColor;
+		return c == null ? Color.LIGHT_GRAY : c;
 	}
 
 	/**
@@ -199,7 +202,8 @@ public class BorderInfo implements Serializable {
 	 * @return the right color
 	 */
 	public Color getRightColor() {
-		return rightColor;
+		Color c = this.rightColor;
+		return c == null ? Color.LIGHT_GRAY : c;
 	}
 
 	/**

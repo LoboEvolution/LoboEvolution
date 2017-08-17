@@ -92,6 +92,9 @@ public final class RequestEngine {
 
 	/** The Constant loggerInfo. */
 	private static final boolean loggerInfo = logger.isInfoEnabled();
+	
+	/** The Constant NORMAL_FORM_ENCODING. */
+	private static final String NORMAL_FORM_ENCODING = "application/x-www-form-urlencoded";
 
 	/** The thread pool. */
 	private final SimpleThreadPool threadPool;
@@ -110,6 +113,9 @@ public final class RequestEngine {
 
 	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
+	
+	/** The Constant instance. */
+	private static final RequestEngine instance = new RequestEngine();
 
 	/**
 	 * Instantiates a new request engine.
@@ -126,8 +132,6 @@ public final class RequestEngine {
 		this.booleanSettings = BooleanSettings.getInstance();
 	}
 
-	/** The Constant instance. */
-	private static final RequestEngine instance = new RequestEngine();
 
 	/**
 	 * Gets the Constant instance.
@@ -240,9 +244,6 @@ public final class RequestEngine {
 		AccessControlContext context = sm == null ? null : AccessController.getContext();
 		this.threadPool.schedule(new RequestHandlerTask(handler, context));
 	}
-
-	/** The Constant NORMAL_FORM_ENCODING. */
-	private static final String NORMAL_FORM_ENCODING = "application/x-www-form-urlencoded";
 
 	/**
 	 * Post data.
@@ -509,7 +510,7 @@ public final class RequestEngine {
 	 *            the approx alt object size
 	 */
 	private void cache(final RequestHandler rhandler, final URL url, final URLConnection connection,
-			final byte[] content, final java.io.Serializable altPersistentObject, final Object altObject,
+			final byte[] content, final Serializable altPersistentObject, final Object altObject,
 			final int approxAltObjectSize) {
 		AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 			try {

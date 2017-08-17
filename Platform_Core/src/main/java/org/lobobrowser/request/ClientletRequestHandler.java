@@ -56,6 +56,9 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 
 	/** The frame. */
 	private final FramePanel frame;
+	
+	/** The window properties. */
+	private volatile Properties windowProperties = null;
 
 	/**
 	 * For progress events, but a null event is also fired when the content is
@@ -93,9 +96,6 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 			return false;
 		}
 	}
-
-	/** The window properties. */
-	private volatile java.util.Properties windowProperties = null;
 
 	/**
 	 * Gets the context window properties.

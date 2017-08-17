@@ -29,6 +29,9 @@ public abstract class AbstractBrowserWindow extends JFrame implements BrowserWin
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The bounds assigned. */
+	private boolean boundsAssigned;
 
 	/**
 	 * Gets the root {@link FramePanel} of the window.
@@ -47,8 +50,6 @@ public abstract class AbstractBrowserWindow extends JFrame implements BrowserWin
 	@Override
 	public abstract WindowCallback getWindowCallback();
 
-	/** The bounds assigned. */
-	private boolean boundsAssigned;
 
 	/**
 	 * Checks if is bounds assigned.

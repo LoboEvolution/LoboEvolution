@@ -75,6 +75,9 @@ public class InputSelectControl extends BaseInputControl {
 
 	/** The in selection event. */
 	private boolean inSelectionEvent;
+	
+	/** The selected index. */
+	private int selectedIndex = -1;
 
 	/**
 	 * Instantiates a new input select control.
@@ -313,8 +316,7 @@ public class InputSelectControl extends BaseInputControl {
 		}
 	}
 
-	/** The selected index. */
-	private int selectedIndex = -1;
+	
 
 	/*
 	 * (non-Javadoc)

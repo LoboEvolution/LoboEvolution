@@ -29,6 +29,9 @@ import org.w3c.dom.css.CSS2Properties;
  */
 public class TableCaptionRenderState extends DisplayRenderState {
 
+	/** The align x percent. */
+	private int alignXPercent = -1;
+	
 	/**
 	 * Instantiates a new table caption render state.
 	 *
@@ -41,8 +44,6 @@ public class TableCaptionRenderState extends DisplayRenderState {
 		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CAPTION);
 	}
 
-	/** The align x percent. */
-	private int alignXPercent = -1;
 
 	/*
 	 * (non-Javadoc)

@@ -25,7 +25,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.domfilter.ElementTableAttributeFilter;
@@ -45,13 +44,22 @@ import org.w3c.dom.Node;
 /**
  * The Class HTMLTableElementImpl.
  */
-public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement {
+public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement, HtmlProperties {
+	
+	/** The caption. */
+	private HTMLTableCaptionElement caption;
+	
+	/** The thead. */
+	private HTMLTableSectionElement thead;
+
+	/** The tfoot. */
+	private HTMLTableSectionElement tfoot;
 
 	/**
 	 * Instantiates a new HTML table element impl.
 	 */
 	public HTMLTableElementImpl() {
-		super(HtmlProperties.TABLE);
+		super(TABLE);
 	}
 
 	/**
@@ -63,9 +71,6 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	public HTMLTableElementImpl(String name) {
 		super(name);
 	}
-
-	/** The caption. */
-	private HTMLTableCaptionElement caption;
 
 	/*
 	 * (non-Javadoc)
@@ -89,9 +94,6 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		this.caption = caption;
 	}
 
-	/** The thead. */
-	private HTMLTableSectionElement thead;
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -113,10 +115,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	public void setTHead(HTMLTableSectionElement tHead) throws DOMException {
 		this.thead = tHead;
 	}
-
-	/** The tfoot. */
-	private HTMLTableSectionElement tfoot;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -146,7 +145,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLCollection getRows() {
-		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(HtmlProperties.TR),
+		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(TR),
 				this.getTreeLock(), false);
 	}
 
@@ -157,7 +156,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLCollection getTBodies() {
-		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(HtmlProperties.TBODY),
+		return new DescendentHTMLCollection(this, new ElementTableAttributeFilter(TBODY),
 				this.getTreeLock(), false);
 	}
 
@@ -272,7 +271,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public String getFrame() {
-		return this.getAttribute(FRAME);
+		return this.getAttribute(FRAME_ATTR);
 	}
 
 	/*
@@ -282,7 +281,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void setFrame(String frame) {
-		this.setAttribute(FRAME, frame);
+		this.setAttribute(FRAME_ATTR, frame);
 	}
 
 	/*

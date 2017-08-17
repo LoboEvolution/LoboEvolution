@@ -45,6 +45,9 @@ public class StringListControl extends JComponent {
 
 	/** The edit list caption. */
 	private String editListCaption;
+	
+	/** The strings. */
+	private String[] strings;
 
 	/**
 	 * Instantiates a new string list control.
@@ -59,9 +62,6 @@ public class StringListControl extends JComponent {
 		this.add(this.comboBox);
 		this.add(editButton);
 	}
-
-	/** The strings. */
-	private String[] strings;
 
 	/**
 	 * Sets the strings.

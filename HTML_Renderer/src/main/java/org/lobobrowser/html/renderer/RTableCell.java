@@ -42,6 +42,12 @@ public class RTableCell extends RBlock {
 
 	/** The top left virtual cell. */
 	private VirtualCell topLeftVirtualCell;
+	
+	/** The col span. */
+	private int colSpan = -1;
+
+	/** The row span. */
+	private int rowSpan = -1;
 
 	/**
 	 * Instantiates a new r table cell.
@@ -115,7 +121,7 @@ public class RTableCell extends RBlock {
 	/**
 	 * Clear layout cache.
 	 */
-	void clearLayoutCache() {
+	public void clearLayoutCache() {
 		// test method
 		this.cachedLayout.clear();
 	}
@@ -174,12 +180,6 @@ public class RTableCell extends RBlock {
 	public VirtualCell getTopLeftVirtualCell() {
 		return this.topLeftVirtualCell;
 	}
-
-	/** The col span. */
-	private int colSpan = -1;
-
-	/** The row span. */
-	private int rowSpan = -1;
 
 	/**
 	 * Gets the virtual column.

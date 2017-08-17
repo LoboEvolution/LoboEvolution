@@ -47,16 +47,6 @@ public class ComputedCSS2Properties extends AbstractCSS2Properties {
 		throw new IllegalAccessError("Style properties cannot be set in this instance.");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.style.AbstractCSS2Properties#checkSetProperty()
-	 */
-	@Override
-	protected void checkSetProperty() {
-		throw new IllegalAccessError("Style properties cannot be set in this instance.");
-	}
-
 	/**
 	 * Internal set lc.
 	 *

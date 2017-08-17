@@ -77,6 +77,11 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	 * Parent for graphics coordinates.
 	 */
 	protected RCollection parent;
+	
+	/**
+	 * Parent for invalidation.
+	 */
+	protected RCollection originalParent;
 
 	/**
 	 * Mark layout valid.
@@ -400,11 +405,6 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public RCollection getParent() {
 		return this.parent;
 	}
-
-	/**
-	 * Parent for invalidation.
-	 */
-	protected RCollection originalParent;
 
 	/*
 	 * (non-Javadoc)

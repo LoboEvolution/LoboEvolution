@@ -25,6 +25,7 @@ package org.lobobrowser.http;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -40,21 +41,29 @@ import java.util.TreeSet;
  *
  * @author J. H. S.
  */
-public class History implements java.io.Serializable {
+public class History implements Serializable {
+	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000800300100L;
+	
 	/** The history sequence. */
 	private transient ArrayList<String> historySequence;
+	
 	/** The history sorted set. */
 	private final SortedSet<String> historySortedSet = new TreeSet<String>();
+	
 	/** The history map. */
 	private final Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
+	
 	/** The history timed set. */
 	private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
+	
 	/** The sequence capacity. */
 	private int sequenceCapacity;
+	
 	/** The common entries capacity. */
 	private int commonEntriesCapacity;
+	
 	/** The sequence index. */
 	private transient int sequenceIndex;
 

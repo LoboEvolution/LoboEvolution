@@ -111,6 +111,12 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 
 	/** The is library. */
 	private final boolean isLibrary;
+	
+	/** The class loader. */
+	private ClassLoader classLoader;
+
+	/** The platform extension. */
+	private NavigatorExtension platformExtension;
 
 	// TODO: Move these collections to ExtensionManager.
 	// More efficient. Consider removal of extensions.
@@ -226,12 +232,6 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	public boolean isLibraryOnly() {
 		return this.isLibrary;
 	}
-
-	/** The class loader. */
-	private ClassLoader classLoader;
-
-	/** The platform extension. */
-	private NavigatorExtension platformExtension;
 
 	/**
 	 * Inits the class loader.
@@ -783,7 +783,7 @@ public class Extension implements Comparable<Object>, NavigatorExtensionContext 
 	 *            the connection
 	 * @return the URL connection
 	 */
-	URLConnection dispatchPostConnection(URLConnection connection) {
+	public URLConnection dispatchPostConnection(URLConnection connection) {
 		// Should not be public
 		Thread currentThread = Thread.currentThread();
 		ClassLoader prevClassLoader = currentThread.getContextClassLoader();

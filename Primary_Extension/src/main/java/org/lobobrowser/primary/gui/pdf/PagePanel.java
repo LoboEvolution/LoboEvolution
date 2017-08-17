@@ -89,7 +89,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 	private Flag flag = new Flag();
 
 	/** x location of the mouse-down event. */
-	int downx;
+	private int downx;
 
 	/** y location of the mouse-down event. */
 	private int downy;

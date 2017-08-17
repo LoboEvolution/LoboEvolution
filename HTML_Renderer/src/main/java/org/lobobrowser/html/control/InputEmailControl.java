@@ -29,7 +29,6 @@ import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 

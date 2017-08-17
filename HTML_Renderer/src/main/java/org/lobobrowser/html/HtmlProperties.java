@@ -21,7 +21,7 @@
 package org.lobobrowser.html;
 
 /**
- * The Interface HtmlProperties.
+ * The Interface 
  */
 public interface HtmlProperties {
 
@@ -181,7 +181,7 @@ public interface HtmlProperties {
 	String IFRAME = "IFRAME";
 
 	/** The input. */
-	String INPUT = "INPUT";
+	String INPUT_HTML = "INPUT";
 
 	/** The i. */
 	String I = "I";
@@ -196,7 +196,7 @@ public interface HtmlProperties {
 	String LABEL = "LABEL";
 
 	/** The link. */
-	String LINK = "LINK";
+	String LINK_HTML = "LINK";
 
 	/** The li. */
 	String LI = "LI";
@@ -268,7 +268,7 @@ public interface HtmlProperties {
 	String S = "S";
 
 	/** The style. */
-	String STYLE = "STYLE";
+	String STYLE_HTML = "STYLE";
 
 	/** The strike. */
 	String STRIKE = "STRIKE";
@@ -316,7 +316,7 @@ public interface HtmlProperties {
 	String SVG = "SVG";
 
 	/** The text */
-	String TEXT = "TEXT";
+	String TEXT_HTML = "TEXT";
 
 	/** The title. */
 	String TITLE = "TITLE";

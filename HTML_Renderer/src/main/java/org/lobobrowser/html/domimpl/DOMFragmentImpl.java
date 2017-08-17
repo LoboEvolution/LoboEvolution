@@ -36,13 +36,6 @@ import org.w3c.dom.NodeList;
  */
 public class DOMFragmentImpl extends DOMNodeImpl implements DocumentFragment, HTMLDocumentFragment {
 
-	/**
-	 * Instantiates a new DOM fragment impl.
-	 */
-	public DOMFragmentImpl() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

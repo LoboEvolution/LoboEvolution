@@ -74,6 +74,12 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 
 	/** The html panel. */
 	private final HtmlPanel htmlPanel;
+	
+	/** The assigned opener. */
+	private volatile HtmlRendererContext assignedOpener;
+
+	/** The ua context. */
+	private UserAgentContext uaContext;
 
 	/**
 	 * Instantiates a new html renderer context impl.
@@ -407,9 +413,6 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		return openerFrame == null ? null : HtmlRendererContextImpl.getHtmlRendererContext(openerFrame);
 	}
 
-	/** The assigned opener. */
-	private volatile HtmlRendererContext assignedOpener;
-
 	@Override
 	public void setOpener(HtmlRendererContext opener) {
 		this.assignedOpener = opener;
@@ -441,10 +444,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 		// TODO
 		return null;
 	}
-
-	/** The ua context. */
-	private UserAgentContext uaContext;
-
+	
 	@Override
 	public UserAgentContext getUserAgentContext() {
 		if (this.uaContext == null) {

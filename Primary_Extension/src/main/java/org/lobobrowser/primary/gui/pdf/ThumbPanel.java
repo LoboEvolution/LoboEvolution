@@ -276,10 +276,10 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	/**
 	 * Simple runnable to tell listeners that the page has changed.
 	 */
-	class GotoLater implements Runnable {
+	private class GotoLater implements Runnable {
 
 		/** The page. */
-		int page;
+		private int page;
 
 		public GotoLater(int pagenum) {
 			page = pagenum;

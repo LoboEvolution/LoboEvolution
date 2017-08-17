@@ -61,7 +61,7 @@ public interface HtmlRendererContext {
 	 *            Same as the target attribute in the HTML anchor tag, i.e.
 	 *            _top, _blank, etc.
 	 */
-	void linkClicked(org.lobobrowser.w3c.html.HTMLElement linkNode, URL url, String target);
+	void linkClicked(HTMLElement linkNode, URL url, String target);
 
 	/**
 	 * Gets the frames.

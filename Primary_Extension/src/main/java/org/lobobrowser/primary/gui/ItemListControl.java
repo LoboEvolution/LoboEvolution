@@ -50,6 +50,9 @@ public class ItemListControl<T> extends JComponent {
 
 	/** The item editor factory. */
 	private final ItemEditorFactory<T> itemEditorFactory;
+	
+	/** The edit list caption. */
+	private String editListCaption;
 
 	/**
 	 * Instantiates a new item list control.
@@ -151,9 +154,6 @@ public class ItemListControl<T> extends JComponent {
 		}
 		return items;
 	}
-
-	/** The edit list caption. */
-	private String editListCaption;
 
 	/**
 	 * Sets the editor caption.

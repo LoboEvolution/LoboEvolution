@@ -53,6 +53,9 @@ public class AuthenticationDialog extends JDialog {
 
 	/** The password field. */
 	private final JPasswordField passwordField = new JPasswordField();
+	
+	/** The authentication. */
+	private PasswordAuthentication authentication;
 
 	/**
 	 * Instantiates a new authentication dialog.
@@ -142,9 +145,6 @@ public class AuthenticationDialog extends JDialog {
 		this.userNameField.setText(userName);
 		this.passwordField.grabFocus();
 	}
-
-	/** The authentication. */
-	private PasswordAuthentication authentication;
 
 	/**
 	 * Gets the authentication.

@@ -25,7 +25,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeVisitor;
@@ -40,7 +39,7 @@ import org.w3c.dom.Node;
 /**
  * The Class HTMLTableRowElementImpl.
  */
-public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement {
+public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement, HtmlProperties {
 
 	/**
 	 * Instantiates a new HTML table row element impl.
@@ -56,7 +55,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 * Instantiates a new HTML table row element impl.
 	 */
 	public HTMLTableRowElementImpl() {
-		super(HtmlProperties.TR, true);
+		super(TR, true);
 	}
 
 	/*
@@ -228,7 +227,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 *             When the index is out of range.
 	 */
 	public HTMLElement insertHeader(int index) throws DOMException {
-		return this.insertCell(index, HtmlProperties.TH);
+		return this.insertCell(index, TH);
 	}
 
 	/*
@@ -238,7 +237,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public HTMLElement insertCell(int index) throws DOMException {
-		return this.insertCell(index, HtmlProperties.TD);
+		return this.insertCell(index, TD);
 	}
 
 	/**

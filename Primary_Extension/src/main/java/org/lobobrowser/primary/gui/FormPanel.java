@@ -45,6 +45,9 @@ public class FormPanel extends JComponent {
 
 	/** The fields invalid. */
 	private boolean fieldsInvalid = false;
+	
+	/** The min label width. */
+	private int minLabelWidth = 0;
 
 	/**
 	 * Instantiates a new form panel.
@@ -75,9 +78,6 @@ public class FormPanel extends JComponent {
 		this.fieldsInvalid = true;
 		super.revalidate();
 	}
-
-	/** The min label width. */
-	private int minLabelWidth = 0;
 
 	/**
 	 * Gets the min label width.

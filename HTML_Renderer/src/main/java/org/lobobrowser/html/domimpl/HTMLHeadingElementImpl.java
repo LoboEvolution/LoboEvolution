@@ -20,7 +20,9 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
+
+
 import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.renderstate.HeadingRenderState;
 import org.lobobrowser.html.renderstate.RenderState;

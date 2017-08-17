@@ -59,6 +59,15 @@ public class FullScreenWindow {
 	 */
 
 	private boolean dead = false;
+	
+	/**
+	 * Flag indicating whether the user has selected a screen or not.
+	 */
+
+	private Flag flag = new Flag();
+
+	/** The picked device. */
+	private GraphicsDevice pickedDevice;
 
 	/**
 	 *
@@ -80,11 +89,7 @@ public class FullScreenWindow {
 	 */
 
 	public FullScreenWindow(JComponent part, boolean forcechoice) {
-
-		// super();
-
 		init(part, forcechoice);
-
 	}
 
 	/**
@@ -215,13 +220,13 @@ public class FullScreenWindow {
 	 * that device should be used for multiple-monitor choices.
 	 */
 
-	class PickMe extends JFrame {
+	private class PickMe extends JFrame {
 
 		/** The Constant serialVersionUID. */
 		private static final long serialVersionUID = -658915481325845436L;
 
 		/** The mygd. */
-		GraphicsDevice mygd;
+		private GraphicsDevice mygd;
 
 		/**
 		 * Creates the PickMe button on a particular display.
@@ -270,15 +275,6 @@ public class FullScreenWindow {
 
 		}
 	}
-
-	/**
-	 * Flag indicating whether the user has selected a screen or not.
-	 */
-
-	private Flag flag = new Flag();
-
-	/** The picked device. */
-	private GraphicsDevice pickedDevice;
 
 	/**
 	 *

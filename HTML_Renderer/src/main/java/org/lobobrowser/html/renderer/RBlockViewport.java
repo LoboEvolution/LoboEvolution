@@ -28,7 +28,6 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -179,6 +178,12 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 
 	/** The is float limit. */
 	private Boolean isFloatLimit = null;
+	
+	/** The Constant SEE. */
+	private static final SizeExceededException SEE = new SizeExceededException();
+
+	/** The armed renderable. */
+	private BoundableRenderable armedRenderable;
 
 	/**
 	 * Constructs an HtmlBlockLayout.
@@ -298,7 +303,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			availw = 0;
 		}
 		int availh = desiredHeight - paddingInsets.top - paddingInsets.bottom;
-		if (availh == 0) {
+		if (availh < 0) {
 			availh = 0;
 		}
 		this.availContentHeight = availh;
@@ -414,58 +419,34 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	public void alignX(int alignXPercent, int canvasWidth, Insets paddingInsets) {
 		int prevMaxY = this.maxY;
-		// Horizontal alignment
-		if (alignXPercent > 0) {
-			ArrayList<RLine> renderables = this.seqRenderables;
-			if (renderables != null) {
-				Insets insets = this.paddingInsets;
-				int numRenderables = renderables.size();
-				int yoffset = 0; // This may get adjusted due to blocks and
-				// floats.
-				for (int i = 0; i < numRenderables; i++) {
-					Object r = renderables.get(i);
-					if (r instanceof BoundableRenderable) {
-						BoundableRenderable seqRenderable = (BoundableRenderable) r;
-						int y = seqRenderable.getY();
-						int newY;
-						if (yoffset > 0) {
-							newY = y + yoffset;
-							seqRenderable.setY(newY);
-							if (newY + seqRenderable.getHeight() > this.maxY) {
-								this.maxY = newY + seqRenderable.getHeight();
-							}
-						} else {
-							newY = y;
+		ArrayList<RLine> renderables = this.seqRenderables;
+		if (renderables != null && alignXPercent > 0) {
+			Insets insets = this.paddingInsets;
+			int numRenderables = renderables.size();
+			int yoffset = 0;
+			for (int i = 0; i < numRenderables; i++) {
+				Object r = renderables.get(i);
+				if (r instanceof BoundableRenderable) {
+					BoundableRenderable seqRenderable = (BoundableRenderable) r;
+					int y = seqRenderable.getY();
+					int newY = y;
+					if (yoffset > 0) {
+						newY = y + yoffset;
+						seqRenderable.setY(newY);
+						if (newY + seqRenderable.getHeight() > this.maxY) {
+							this.maxY = newY + seqRenderable.getHeight();
 						}
-						boolean isVisibleBlock = seqRenderable instanceof RBlock
-								&& ((RBlock) seqRenderable).isOverflowVisibleX();
-						int leftOffset = isVisibleBlock ? insets.left : this.fetchLeftOffset(y);
-						int rightOffset = isVisibleBlock ? insets.right : this.fetchRightOffset(y);
-						int actualAvailWidth = canvasWidth - leftOffset - rightOffset;
-						int difference = actualAvailWidth - seqRenderable.getWidth();
-						if (difference > 0) {
-							// The difference check means that only
-							// blocks with a declared width would get adjusted?
-							int shift = difference * alignXPercent / 100;
-							// if(floatBounds != null && isVisibleBlock) {
-							// RBlock block = (RBlock) seqRenderable;
-							// // Block needs to layed out again. Contents need
-							// // to shift because of float.
-							// final int expectedWidth = availContentWidth;
-							// final int blockShiftRight = insets.right;
-							// final int newX = leftOffset;
-							// FloatingBoundsSource floatBoundsSource = new
-							// ParentFloatingBoundsSource(blockShiftRight,
-							// expectedWidth, newX, newY, floatBounds);
-							// block.layout(actualAvailWidth,
-							// this.availContentHeight, true, false,
-							// floatBoundsSource);
-							// }
-							if (!isVisibleBlock) {
-								int newX = leftOffset + shift;
-								seqRenderable.setX(newX);
-							}
-						}
+					}
+					boolean isVisibleBlock = seqRenderable instanceof RBlock && ((RBlock) seqRenderable).isOverflowVisibleX();
+					int leftOffset = isVisibleBlock ? insets.left : this.fetchLeftOffset(y);
+					int rightOffset = isVisibleBlock ? insets.right : this.fetchRightOffset(y);
+					int actualAvailWidth = canvasWidth - leftOffset - rightOffset;
+					int difference = actualAvailWidth - seqRenderable.getWidth();
+					if (!isVisibleBlock && difference > 0) {
+						int shift = difference * alignXPercent / 100;
+						int newX = leftOffset + shift;
+						seqRenderable.setX(newX);
+
 					}
 				}
 			}
@@ -534,31 +515,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 	}
 
-	// /**
-	// *
-	// * @param block A block needing readjustment due to horizontal alignment.
-	// * @return
-	// */
-	// private int readjustBlock(RBlock block, final int newX, final int newY,
-	// final FloatingBounds floatBounds) {
-	// final int rightInsets = this.paddingInsets.right;
-	// final int expectedWidth = this.desiredWidth - rightInsets - newX;
-	// final int blockShiftRight = rightInsets;
-	// final int prevHeight = block.height;
-	// FloatingBoundsSource floatBoundsSource = new FloatingBoundsSource() {
-	// public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth)
-	// {
-	// int actualRightShift = blockShiftRight + (expectedWidth -
-	// apparentBlockWidth);
-	// return new ShiftedFloatingBounds(floatBounds, -newX, -actualRightShift,
-	// -newY);
-	// }
-	// };
-	// block.adjust(expectedWidth, this.availContentHeight, true, false,
-	// floatBoundsSource, true);
-	// return block.height - prevHeight;
-	// }
-	//
 	/**
 	 * Adds the line.
 	 *
@@ -909,8 +865,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			} else if ("right".equalsIgnoreCase(align)) {
 				this.layoutFloat(renderable, layout, false);
 				return true;
-			} else {
-				// fall through
 			}
 		}
 		return false;
@@ -1622,7 +1576,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the point
 	 * @return the renderable
 	 */
-	public BoundableRenderable getRenderable(java.awt.Point point) {
+	public BoundableRenderable getRenderable(Point point) {
 		return this.getRenderable(point.x, point.y);
 	}
 
@@ -1633,7 +1587,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the point
 	 * @return the renderables
 	 */
-	public Iterator getRenderables(java.awt.Point point) {
+	public Iterator getRenderables(Point point) {
 		return this.getRenderables(point.x, point.y);
 	}
 
@@ -1816,9 +1770,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 		return right;
 	}
-
-	/** The Constant SEE. */
-	private static final SizeExceededException SEE = new SizeExceededException();
 
 	/**
 	 * Check y.
@@ -2076,10 +2027,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			return true;
 		}
 	}
-
-	/** The armed renderable. */
-	private BoundableRenderable armedRenderable;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -2122,7 +2070,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					Rectangle bounds = br.getBounds();
 					if (!br.onMouseReleased(event, x - bounds.x, y - bounds.y)) {
 						BoundableRenderable oldArmedRenderable = this.armedRenderable;
-						if (oldArmedRenderable != null && br != oldArmedRenderable) {
+						if (oldArmedRenderable != null && !oldArmedRenderable.equals(br)) {
 							oldArmedRenderable.onMouseDisarmed(event);
 							this.armedRenderable = null;
 						}

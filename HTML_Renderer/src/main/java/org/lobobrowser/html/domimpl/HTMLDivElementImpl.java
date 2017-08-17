@@ -21,7 +21,7 @@
 
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.html.renderstate.BlockRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.w3c.html.HTMLDivElement;

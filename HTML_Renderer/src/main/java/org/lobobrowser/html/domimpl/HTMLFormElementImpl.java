@@ -28,8 +28,6 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeVisitor;
@@ -67,7 +65,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 * Instantiates a new HTML form element impl.
 	 */
 	public HTMLFormElementImpl() {
-		super(HtmlProperties.FORM);
+		super(FORM);
 	}
 
 	/*

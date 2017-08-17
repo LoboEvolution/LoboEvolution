@@ -57,11 +57,6 @@ public class JTextAreaImpl extends JTextArea {
 	/** The text written in. */
 	private boolean textWrittenIn;
 
-	/**
-	 * Instantiates a new j text area impl.
-	 */
-	public JTextAreaImpl() {
-	}
 
 	/*
 	 * (non-Javadoc)

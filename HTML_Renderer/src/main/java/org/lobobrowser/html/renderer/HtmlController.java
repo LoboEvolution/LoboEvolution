@@ -48,7 +48,7 @@ import org.w3c.dom.NodeList;
 /**
  * The Class HtmlController.
  */
-public class HtmlController implements HtmlAttributeProperties{
+public class HtmlController implements HtmlAttributeProperties, HtmlProperties{
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(HtmlController.class.getName());
@@ -558,7 +558,7 @@ public class HtmlController implements HtmlAttributeProperties{
 		if (node instanceof HTMLInputElementImpl) {
 			HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
 			HTMLDocumentImpl doc = (HTMLDocumentImpl) hie.getOwnerDocument();
-			NodeList list = doc.getElementsByTagName(HtmlProperties.INPUT);
+			NodeList list = doc.getElementsByTagName(INPUT_HTML);
 
 			if (hie.isSubmitInput()) {
 				FormInput[] formInputs = new FormInput[list.getLength()];

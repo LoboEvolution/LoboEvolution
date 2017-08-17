@@ -27,7 +27,6 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JCheckBox;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.WrapperLayout;

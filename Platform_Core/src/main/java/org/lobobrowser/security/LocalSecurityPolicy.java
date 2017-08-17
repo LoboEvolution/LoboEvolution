@@ -170,7 +170,7 @@ public class LocalSecurityPolicy extends Policy {
 	 *            the url
 	 * @return true, if successful
 	 */
-	public static boolean hasHost(java.net.URL url) {
+	public static boolean hasHost(URL url) {
 		String host = url.getHost();
 		return host != null && !"".equals(host);
 	}
@@ -182,7 +182,7 @@ public class LocalSecurityPolicy extends Policy {
 	 *            the url
 	 * @return true, if is local
 	 */
-	public static boolean isLocal(java.net.URL url) {
+	public static boolean isLocal(URL url) {
 		// Should return true only if we are sure
 		// the file has either been downloaded by
 		// the user, was distributed with the OS,

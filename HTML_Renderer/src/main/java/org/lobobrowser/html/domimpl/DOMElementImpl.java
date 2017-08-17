@@ -31,7 +31,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.Objects;
 import org.lobobrowser.util.Strings;
@@ -39,6 +38,7 @@ import org.lobobrowser.w3c.html.HTMLMenuElement;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -49,7 +49,7 @@ import org.w3c.dom.TypeInfo;
 /**
  * The Class DOMElementImpl.
  */
-public class DOMElementImpl extends DOMNodeImpl implements Element {
+public class DOMElementImpl extends DOMFunctionImpl implements Element {
 
 	/** The name. */
 	private final String name;
@@ -57,6 +57,9 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	/** The id. */
 	private String id;
 
+	/** The attributes. */
+	protected Map<String, String> attributes;
+	
 	/**
 	 * Instantiates a new DOM element impl.
 	 *
@@ -67,9 +70,6 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 		super();
 		this.name = name;
 	}
-
-	/** The attributes. */
-	protected Map<String, String> attributes;
 
 	/*
 	 * (non-Javadoc)
@@ -153,7 +153,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 * @return the title
 	 */
 	public String getTitle() {
-		return this.getAttribute(TITLE);
+		return this.getAttribute(TITLE_ATTR);
 	}
 
 	/**
@@ -163,7 +163,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new title
 	 */
 	public void setTitle(String title) {
-		this.setAttribute(TITLE, title);
+		this.setAttribute(TITLE_ATTR, title);
 	}
 
 	/**
@@ -949,7 +949,7 @@ public class DOMElementImpl extends DOMNodeImpl implements Element {
 	 *            the new inner text
 	 */
 	public void setInnerText(String newText) {
-		org.w3c.dom.Document document = this.document;
+		Document document = this.document;
 		if (document == null) {
 			logger.error("setInnerText(): Element " + this + " does not belong to a document.");
 			return;

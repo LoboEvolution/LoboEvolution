@@ -125,6 +125,9 @@ public class ComponentSource implements NavigatorWindowListener {
 	
 	/** The status message. */
 	private String statusMessage;
+	
+	/** The default status message. */
+	private String defaultStatusMessage;
 
 	/**
 	 * Instantiates a new component source.
@@ -479,9 +482,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	private Component getProgressBar() {
 		return this.progressBar;
 	}
-
-	/** The default status message. */
-	private String defaultStatusMessage;
 
 	/*
 	 * (non-Javadoc)

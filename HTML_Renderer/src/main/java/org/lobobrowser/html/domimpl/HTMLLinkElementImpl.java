@@ -23,7 +23,6 @@ package org.lobobrowser.html.domimpl;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.CSSUtilities;

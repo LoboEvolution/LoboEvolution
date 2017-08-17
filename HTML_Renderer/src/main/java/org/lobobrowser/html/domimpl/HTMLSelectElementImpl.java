@@ -23,7 +23,6 @@ package org.lobobrowser.html.domimpl;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;

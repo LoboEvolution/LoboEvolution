@@ -34,16 +34,12 @@ import java.util.EventObject;
  * @author J. H. S.
  */
 public abstract class EventDispatch2 {
+	
 	/** The listeners. */
 	private Collection<EventListener> listeners;
+	
 	/** The Constant EMPTY_ARRAY. */
 	private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
-
-	/**
-	 * Instantiates a new event dispatch2.
-	 */
-	public EventDispatch2() {
-	}
 
 	/**
 	 * Creates the listener collection.

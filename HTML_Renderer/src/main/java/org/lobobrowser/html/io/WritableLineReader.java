@@ -31,6 +31,9 @@ import java.io.Reader;
  * The Class WritableLineReader.
  */
 public class WritableLineReader extends LineNumberReader {
+	
+	/** The write buffer. */
+	private StringBuffer writeBuffer = null;
 
 	/**
 	 * Instantiates a new writable line reader.
@@ -121,8 +124,6 @@ public class WritableLineReader extends LineNumberReader {
 		super.close();
 	}
 
-	/** The write buffer. */
-	private StringBuffer writeBuffer = null;
 
 	/**
 	 * Note: Not implicitly thread safe.

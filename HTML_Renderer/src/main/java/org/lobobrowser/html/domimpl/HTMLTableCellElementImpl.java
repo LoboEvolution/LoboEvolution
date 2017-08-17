@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TableCellRenderState;
 import org.lobobrowser.html.style.HtmlValues;

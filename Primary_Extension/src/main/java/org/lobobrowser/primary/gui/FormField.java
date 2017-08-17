@@ -33,6 +33,12 @@ public class FormField {
 
 	/** The type. */
 	public final FieldType type;
+	
+	/** The field editor. */
+	private JComponent fieldEditor;
+
+	/** The label. */
+	private JLabel label;
 
 	/**
 	 * Instantiates a new form field.
@@ -185,9 +191,7 @@ public class FormField {
 	public void setCaption(String caption) {
 		this.getLabel().setText(caption);
 	}
-
-	/** The label. */
-	private JLabel label;
+	
 
 	/**
 	 * Gets the label.
@@ -203,9 +207,6 @@ public class FormField {
 		this.label = label;
 		return label;
 	}
-
-	/** The field editor. */
-	private JComponent fieldEditor;
 
 	/**
 	 * Gets the field editor.

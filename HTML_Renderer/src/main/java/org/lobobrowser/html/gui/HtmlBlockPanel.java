@@ -617,7 +617,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		if (node != null) {
 			RBlock block = new RBlock(node, 0, this.ucontext, this.rcontext, this.frameContext, this);
 			block.setDefaultMarginInsets(this.defaultMarginInsets);
-			// block.setDefaultPaddingInsets(this.defaultPaddingInsets);
 			block.setDefaultOverflowX(this.defaultOverflowX);
 			block.setDefaultOverflowY(this.defaultOverflowY);
 			node.setUINode(block);

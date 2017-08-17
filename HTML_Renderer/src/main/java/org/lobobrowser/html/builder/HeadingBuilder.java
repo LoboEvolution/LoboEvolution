@@ -28,12 +28,6 @@ import org.lobobrowser.html.domimpl.HTMLHeadingElementImpl;
  */
 public class HeadingBuilder extends HTMLElementBuilder {
 
-	/**
-	 * Instantiates a new heading builder.
-	 */
-	public HeadingBuilder() {
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

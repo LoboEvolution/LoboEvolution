@@ -32,14 +32,21 @@ import java.io.InputStream;
  * @author J. H. S.
  */
 public class MonitoredInputStream extends InputStream {
+	
 	/** The delegate. */
 	private final InputStream delegate;
+	
 	/** The progress. */
 	private int progress = 0;
+	
 	/** The min progress event gap. */
 	private final long minProgressEventGap;
+	
 	/** The evt progress. */
 	public final EventDispatch evtProgress = new EventDispatch();
+	
+	/** The last even posted. */
+	private long lastEvenPosted = 0;
 
 	/**
 	 * Instantiates a new monitored input stream.
@@ -107,9 +114,6 @@ public class MonitoredInputStream extends InputStream {
 		}
 		return b;
 	}
-
-	/** The last even posted. */
-	private long lastEvenPosted = 0;
 
 	/*
 	 * (non-Javadoc)

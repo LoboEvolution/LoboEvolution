@@ -47,12 +47,6 @@ public class HtmlInsets {
 	public int topType, bottomType, leftType, rightType;
 
 	/**
-	 * Instantiates a new html insets.
-	 */
-	public HtmlInsets() {
-	}
-
-	/**
 	 * Gets the right.
 	 *
 	 * @return the right

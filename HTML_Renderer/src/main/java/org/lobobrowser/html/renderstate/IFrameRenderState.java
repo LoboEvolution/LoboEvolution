@@ -20,13 +20,7 @@
  */
 package org.lobobrowser.html.renderstate;
 
-import java.awt.Color;
-
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.info.BorderInfo;
-import org.lobobrowser.html.style.HtmlInsets;
-import org.lobobrowser.html.style.HtmlValues;
 
 /**
  * The Class IFrameRenderState.
@@ -109,62 +103,5 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		}
 		this.overflowY = overflow;
 		return overflow;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.lobobrowser.html.renderstate.StyleSheetRenderState#getBorderInfo()
-	 */
-	@Override
-	public BorderInfo getBorderInfo() {
-		BorderInfo binfo = this.borderInfo;
-		if (!INVALID_BORDER_INFO.equals(binfo)) {
-			return binfo;
-		}
-		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.getTopStyle() == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.getBottomStyle() == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.getLeftStyle() == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.getRightStyle() == HtmlValues.BORDER_STYLE_NONE) {
-			if (binfo == null) {
-				binfo = new BorderInfo();
-			}
-			HTMLElementImpl element = this.element;
-			if (element != null) {
-				String border = element.getAttribute(FRAMEBORDER);
-				int value = 0;
-				if (border != null) {
-					border = border.trim();
-					value = HtmlValues.getPixelSize(border, this, 0);
-				}
-
-				HtmlInsets borderInsets = new HtmlInsets();
-				borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value != 0 ? 1 : 0;
-				borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = HtmlInsets.TYPE_PIXELS;
-				binfo.setInsets(borderInsets);
-				if (binfo.getTopColor() == null) {
-					binfo.setTopColor(Color.DARK_GRAY);
-				}
-				if (binfo.getLeftColor() == null) {
-					binfo.setLeftColor(Color.DARK_GRAY);
-				}
-				if (binfo.getRightColor() == null) {
-					binfo.setRightColor(Color.LIGHT_GRAY);
-				}
-				if (binfo.getBottomColor() == null) {
-					binfo.setBottomColor(Color.LIGHT_GRAY);
-				}
-				if (value != 0) {
-					binfo.setTopStyle(HtmlValues.BORDER_STYLE_SOLID);
-					binfo.setLeftStyle(HtmlValues.BORDER_STYLE_SOLID);
-					binfo.setRightStyle(HtmlValues.BORDER_STYLE_SOLID);
-					binfo.setBottomStyle(HtmlValues.BORDER_STYLE_SOLID);
-				}
-			}
-		}
-		this.borderInfo = binfo;
-		return binfo;
 	}
 }

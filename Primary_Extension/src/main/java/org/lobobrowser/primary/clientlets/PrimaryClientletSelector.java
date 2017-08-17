@@ -42,13 +42,6 @@ public class PrimaryClientletSelector implements ClientletSelector {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(PrimaryClientletSelector.class);
 
-	/**
-	 * Instantiates a new primary clientlet selector.
-	 */
-	public PrimaryClientletSelector() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

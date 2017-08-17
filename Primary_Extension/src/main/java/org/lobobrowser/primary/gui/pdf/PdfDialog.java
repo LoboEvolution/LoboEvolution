@@ -152,6 +152,12 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	
 	/** The thumb action. */
 	private ThumbAction thumbAction = new ThumbAction();
+	
+	/** The prev dir choice. */
+	private File prevDirChoice;
+	
+	/** The pb. */
+	private PageBuilder pb = new PageBuilder();
 
 	/**
 	 * utility method to get an icon from the resources of this class.
@@ -186,7 +192,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The print action. */
-	Action printAction = new AbstractAction("Print...", getIcon("/org/lobobrowser/images/print.png")) {
+	private Action printAction = new AbstractAction("Print...", getIcon("/org/lobobrowser/images/print.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -759,9 +765,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		}
 	};
 
-	/** The prev dir choice. */
-	private File prevDirChoice;
-
 	/**
 	 * Ask the user for a PDF file to open from the local file system.
 	 */
@@ -818,13 +821,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * A thread for printing in.
 	 */
-	class PrintThread extends Thread {
+	private class PrintThread extends Thread {
 
 		/** The pt pages. */
-		PDFPrintPage ptPages;
+		private PDFPrintPage ptPages;
 
 		/** The pt pjob. */
-		PrinterJob ptPjob;
+		private PrinterJob ptPjob;
 
 		/**
 		 * Instantiates a new prints the thread.
@@ -1116,7 +1119,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		private Thread anim;
 
 		/** The Constant TIMEOUT. */
-		static final long TIMEOUT = 500;
+		private static final long TIMEOUT = 500;
 
 		/**
 		 * add the digit to the page number and start the timeout thread.
@@ -1162,9 +1165,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			}
 		}
 	}
-
-	/** The pb. */
-	PageBuilder pb = new PageBuilder();
 
 	/*
 	 * (non-Javadoc)

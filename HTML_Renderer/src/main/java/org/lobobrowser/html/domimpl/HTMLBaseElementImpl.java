@@ -20,7 +20,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
+
 import org.lobobrowser.html.parser.HtmlParser;
 import org.w3c.dom.UserDataHandler;
 

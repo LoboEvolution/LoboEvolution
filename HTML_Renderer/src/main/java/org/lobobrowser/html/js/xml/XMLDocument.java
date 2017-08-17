@@ -51,11 +51,7 @@ import org.xml.sax.SAXException;
 public class XMLDocument implements Document {
 
 	private static Document doc;
-
-	public XMLDocument() {
-
-	}
-
+	
 	/**
 	 * Load XML file
 	 * 

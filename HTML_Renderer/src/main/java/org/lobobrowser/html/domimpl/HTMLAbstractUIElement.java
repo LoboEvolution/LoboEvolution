@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.HtmlJsAttributeProperties;
+import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.UINode;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.UserAgentContext;
@@ -38,7 +39,7 @@ import org.w3c.dom.Document;
 /**
  * The Class HTMLAbstractUIElement.
  */
-public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttributeProperties, HtmlAttributeProperties {
+public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttributeProperties, HtmlAttributeProperties, HtmlProperties {
 
 	/** The onfocus. */
 	private Function onfocus;

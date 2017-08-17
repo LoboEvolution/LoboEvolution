@@ -39,10 +39,12 @@ import java.util.Map;
  * @author J. H. S.
  */
 public class Bean {
-	// private static final org.apache.logging.log4j.Logger logger =
-	// LogManager.getLogger(Bean.class);
+	
 	/** The clazz. */
 	private final Class<?> clazz;
+
+	/** The property descriptors. */
+	private Map<String, PropertyDescriptor> propertyDescriptors = null;
 
 	/**
 	 * Instantiates a new bean.
@@ -54,8 +56,7 @@ public class Bean {
 		this.clazz = clazz;
 	}
 
-	/** The property descriptors. */
-	private Map<String, PropertyDescriptor> propertyDescriptors = null;
+	
 
 	/**
 	 * Populate descriptors.

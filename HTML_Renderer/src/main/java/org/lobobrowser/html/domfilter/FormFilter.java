@@ -20,7 +20,8 @@
  */
 package org.lobobrowser.html.domfilter;
 
-import org.lobobrowser.html.HtmlProperties;
+
+
 import org.w3c.dom.Node;
 
 /**
@@ -36,6 +37,6 @@ public class FormFilter implements NodeFilter {
 	@Override
 	public boolean accept(Node node) {
 		String nodeName = node.getNodeName();
-		return HtmlProperties.FORM.equalsIgnoreCase(nodeName);
+		return FORM.equalsIgnoreCase(nodeName);
 	}
 }

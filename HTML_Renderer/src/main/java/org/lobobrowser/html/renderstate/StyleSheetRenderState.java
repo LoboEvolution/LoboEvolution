@@ -28,8 +28,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Toolkit;
-import java.awt.font.TextAttribute;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +45,7 @@ import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.WordInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSSValuesProperties;
+import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
@@ -79,9 +78,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
 
-	/** The Constant INVALID_BORDER_INFO. */
-	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
-
 	/** The Constant INVALID_COLOR. */
 	protected static final Color INVALID_COLOR = new Color(100, 0, 100);
 
@@ -98,7 +94,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	protected BackgroundInfo iBackgroundInfo = INVALID_BACKGROUND_INFO;
 
 	/** The border info. */
-	protected BorderInfo borderInfo = INVALID_BORDER_INFO;
+	protected BorderInfo borderInfo = BorderRenderState.INVALID_BORDER_INFO;
 
 	/** The margin insets. */
 	protected HtmlInsets marginInsets = INVALID_INSETS;
@@ -343,7 +339,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		this.paddingInsets = INVALID_INSETS;
 		this.overflowX = -1;
 		this.overflowY = -1;
-		this.borderInfo = INVALID_BORDER_INFO;
+		this.borderInfo = BorderRenderState.INVALID_BORDER_INFO;
 		// Should NOT invalidate parent render state.
 	}
 
@@ -354,120 +350,37 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public Font getFont() {
-		Font f = this.iFont;
-		if (f != null) {
-			return f;
-		}
+		
 		AbstractCSS2Properties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
+		
+		if (this.iFont != null) {
+			return this.iFont;
+		}
+		
 		if (style == null) {
 			if (prs != null) {
-				f = prs.getFont();
-				this.iFont = f;
-				return f;
+				this.iFont = prs.getFont();
+				return this.iFont;
 			}
-			f = DEFAULT_FONT;
-			this.iFont = f;
-			return f;
+			this.iFont = DEFAULT_FONT;
+			return DEFAULT_FONT;
 		}
-		Float fontSize = null;
-		String fontStyle = null;
-		String fontVariant = null;
-		String fontWeight = null;
-		String fontFamily = null;
-
-		String newFontSize = style == null ? null : style.getFontSize();
-		String newFontFamily = style == null ? null : style.getFontFamily();
-		String newFontStyle = style == null ? null : style.getFontStyle();
-		String newFontVariant = style == null ? null : style.getFontVariant();
-		String newFontWeight = style == null ? null : style.getFontWeight();
-		String verticalAlign = style == null ? null : style.getVerticalAlign();
-		String letterSpacing = style == null ? null : style.getLetterSpacing();
-		boolean isSuper = verticalAlign != null && verticalAlign.equalsIgnoreCase("super");
-		boolean isSub = verticalAlign != null && verticalAlign.equalsIgnoreCase("sub");
-		if (newFontSize == null && newFontWeight == null && newFontStyle == null && newFontFamily == null
-				&& newFontVariant == null && !isSuper && !isSub) {
-			if (prs != null) {
-				f = prs.getFont();
-				this.iFont = f;
-				return f;
-			}
-			f = DEFAULT_FONT;
-			this.iFont = f;
-			return f;
-		}
-		if (newFontSize != null) {
-			try {
-				fontSize = new Float(HtmlValues.getFontSize(newFontSize, prs));
-			} catch (Exception err) {
-				fontSize = LAFSettings.getInstance().getFontSize();
-			}
-		} else if (fontSize == null) {
-			if (prs != null) {
-				fontSize = new Float(prs.getFont().getSize());
-			} else {
-				fontSize = LAFSettings.getInstance().getFontSize();
-			}
-		}
-
-		if (newFontFamily != null) {
-			fontFamily = newFontFamily;
-		} else if (fontFamily == null && prs != null) {
-			fontFamily = prs.getFont().getFamily();
-		}
-
-		if (fontFamily == null) {
-			fontFamily = Font.SANS_SERIF;
-		}
-
-		if (newFontStyle != null) {
-			fontStyle = newFontStyle;
-		} else {
-			if (LAFSettings.getInstance().isItalic()) {
-				fontStyle = "italic";
-			}
-		}
-
-		if (newFontVariant != null) {
-			fontVariant = newFontVariant;
-		}
-
-		if (newFontWeight != null) {
-			fontWeight = newFontWeight;
-		} else {
-			if (LAFSettings.getInstance().isBold()) {
-				fontWeight = "bold";
-			}
-		}
-
+		
+		String fontVariant = style.getFontVariant();
+		String fontFamily = FontValues.getFontFamily(style.getFontFamily(), prs);
+		String fontStyle = FontValues.getFontStyle(style.getFontStyle(), prs);
+		String fontWeight = FontValues.getFontWeight(style.getFontWeight(), prs);
+		Float fontSize = new Float(FontValues.getFontSize(style.getFontSize(), prs));
+		Integer superscript = FontValues.getFontSuperScript(style.getVerticalAlign(), prs);;
+		Integer intLetterSpacing = HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0);
+		Integer underline = FontValues.getFontUnderline(style.getTextDecoration(), prs);
+		boolean strikethrough = FontValues.getFontStrikeThrough(style.getTextDecoration(), prs);
+		
 		HTMLDocumentImpl document = this.document;
 		Set locales = document == null ? null : document.getLocales();
-
-		Integer intLetterSpacing = HtmlValues.getPixelSize(letterSpacing, prs, 0);
-		Integer superscript = null;
-		Integer underline = null;
-		boolean strikethrough = false;
-
-		if (isSuper || LAFSettings.getInstance().isSuperscript()) {
-			superscript = TextAttribute.SUPERSCRIPT_SUPER;
-		} else if (isSub || LAFSettings.getInstance().isSubscript()) {
-			superscript = TextAttribute.SUPERSCRIPT_SUB;
-		}
-
-		if (superscript == null && prs != null) {
-			superscript = (Integer) prs.getFont().getAttributes().get(TextAttribute.SUPERSCRIPT);
-		}
-
-		if (LAFSettings.getInstance().isUnderline()) {
-			underline = TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
-		}
-
-		if (LAFSettings.getInstance().isStrikethrough()) {
-			strikethrough = TextAttribute.STRIKETHROUGH_ON;
-		}
-
-		f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales,
-				superscript, intLetterSpacing, strikethrough, underline);
+		
+		Font f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales, superscript, intLetterSpacing, strikethrough, underline);
 		this.iFont = f;
 		return f;
 	}
@@ -576,25 +489,24 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public Color getOverlayColor() {
-		Color c = this.iOverlayColor;
-		if (!INVALID_COLOR.equals(c)) {
-			return c;
+
+		AbstractCSS2Properties style = this.getCssProperties();
+		RenderState prs = this.prevRenderState;
+		if (!INVALID_COLOR.equals(this.iOverlayColor)) {
+			return this.iOverlayColor;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
-		String colorValue = props == null ? null : props.getOverlayColor();
-		if (colorValue == null || colorValue.length() == 0) {
-			RenderState prs = this.prevRenderState;
+		
+		if (style == null) {
 			if (prs != null) {
-				c = prs.getOverlayColor();
-				this.iOverlayColor = c;
-				return c;
-			} else {
-				colorValue = null;
+				this.iOverlayColor = prs.getOverlayColor();
+				return this.iOverlayColor;
 			}
+			this.iOverlayColor = null;
+			return null;
 		}
-		c = colorValue == null ? null : ColorFactory.getInstance().getColor(colorValue);
-		this.iOverlayColor = c;
-		return c;
+		
+		this.iOverlayColor = ColorFactory.getInstance().getColor(style.getOverlayColor());
+		return this.iOverlayColor;
 	}
 
 	/*
@@ -806,7 +718,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			// Fall back to align attribute.
 			HTMLElement element = this.element;
 			if (element != null) {
-				textAlign = element.getAttribute(ALIGN);
+				textAlign = element.getAttribute(HtmlAttributeProperties.ALIGN);
 				if (textAlign == null || textAlign.length() == 0) {
 					RenderState prs = this.prevRenderState;
 					if (prs != null) {
@@ -936,8 +848,12 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
+
 		BackgroundInfo binfo = this.iBackgroundInfo;
-		if (binfo != INVALID_BACKGROUND_INFO) {
+		AbstractCSS2Properties props = this.getCssProperties();
+		BackgroundRenderState bg = new BackgroundRenderState();
+
+		if (!INVALID_BACKGROUND_INFO.equals(binfo)) {
 			return binfo;
 		}
 
@@ -945,94 +861,35 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			binfo = null;
 		}
 
-		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
+
+			if (binfo == null) {
+				binfo = new BackgroundInfo();
+			}
+
 			String backgroundText = props.getBackground();
 
-			if (backgroundText != null) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
+			if (backgroundText == null) {
+				backgroundText = props.getBackgroundColor() + " " + props.getBackgroundImage() + " "
+						+ props.getBackgroundRepeat() + " " + props.getBackgroundPosition();
+			}
 
-				if ((backgroundText.startsWith(ColorFactory.RGB_START)
-						|| backgroundText.startsWith(ColorFactory.RGB_START)) && backgroundText.endsWith(")")) {
-					binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundText));
-				} else {
+			String[] backList = backgroundText.split(" ");
 
-					String[] backList = backgroundText.split(" ");
-
-					for (String back : backList) {
-						if (back.contains("url")) {
-
-							String start = "url(";
-							int startIdx = start.length();
-							int closingIdx = back.lastIndexOf(')');
-							String quotedUri = back.substring(startIdx, closingIdx);
-
-							binfo.setBackgroundImage(this.document.getFullURL(quotedUri));
-						}
-						if (ColorFactory.getInstance().getColor(back) != null) {
-							binfo.setBackgroundColor(ColorFactory.getInstance().getColor(back));
-						} else if (INHERIT.equalsIgnoreCase(back)) {
-							binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-						} else if (INITIAL.equalsIgnoreCase(back)) {
-							binfo.setBackgroundColor(Color.WHITE);
-						}
-
-						this.applyBackgroundPosition(binfo, back);
-						this.applyBackgroundRepeat(binfo, back);
-					}
-				}
-			} else {
-
-				String background = this.element.getAttribute(BACKGROUND);
-				if (background != null && !"".equals(background)) {
-					if (binfo == null) {
-						binfo = new BackgroundInfo();
-					}
-					binfo.setBackgroundImage(this.document.getFullURL(background));
-				}
-
-				String backgroundColorText = props.getBackgroundColor();
-				if (backgroundColorText != null) {
-					if (binfo == null) {
-						binfo = new BackgroundInfo();
-					}
-
-					if (INHERIT.equalsIgnoreCase(backgroundColorText)) {
-						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-					} else if (INITIAL.equalsIgnoreCase(backgroundColorText)) {
-						binfo.setBackgroundColor(Color.WHITE);
-					} else {
-						binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
-					}
-				}
-
-				String backgroundImageText = props.getBackgroundImage();
-				if (backgroundImageText != null && backgroundImageText.length() > 0) {
-					URL backgroundImage = HtmlValues.getURIFromStyleValue(backgroundImageText);
-					if (backgroundImage != null) {
-						if (binfo == null) {
-							binfo = new BackgroundInfo();
-						}
-						binfo.setBackgroundImage(backgroundImage);
-					}
-				}
-
-				String backgroundRepeatText = props.getBackgroundRepeat();
-				if (backgroundRepeatText != null) {
-					if (binfo == null) {
-						binfo = new BackgroundInfo();
-					}
-					this.applyBackgroundRepeat(binfo, backgroundRepeatText);
-				}
-
-				String backgroundPositionText = props.getBackgroundPosition();
-				if (backgroundPositionText != null) {
-					if (binfo == null) {
-						binfo = new BackgroundInfo();
-					}
-					this.applyBackgroundPosition(binfo, backgroundPositionText);
+			for (String back : backList) {
+				switch (back.toLowerCase()) {
+				case INHERIT:
+					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+					break;
+				case INITIAL:
+					binfo.setBackgroundColor(Color.WHITE);
+					break;
+				default:
+					binfo = bg.applyBackgroundImage(binfo, back, this.document);
+					binfo = bg.applyBackgroundPosition(binfo, back, this);
+					binfo = bg.applyBackgroundRepeat(binfo, back);
+					binfo = bg.applyBackground(binfo, back, this);
+					break;
 				}
 			}
 		}
@@ -1164,169 +1021,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			this.paddingInsets = mi;
 		}
 		return mi;
-	}
-
-	/**
-	 * Apply background horizontal positon.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param xposition
-	 *            the xposition
-	 */
-	private void applyBackgroundHorizontalPositon(BackgroundInfo binfo, String xposition) {
-		if (xposition.endsWith("%")) {
-			binfo.setBackgroundXPositionAbsolute(false);
-			try {
-				binfo.setBackgroundXPosition(
-						(int) Double.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
-				binfo.setBackgroundXPosition(0);
-			}
-		} else {
-
-			switch (xposition) {
-			case CENTER:
-				binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(50);
-				break;
-			case RIGHT:
-				binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(100);
-				break;
-			case LEFT:
-				binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(0);
-				break;
-			case BOTTOM:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(100);
-				break;
-			case TOP:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(0);
-				break;
-			case INHERIT:
-				BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					binfo.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());
-					binfo.setBackgroundXPosition(bi.getBackgroundXPosition());
-				}
-				break;
-			case INITIAL:
-				binfo.setBackgroundXPositionAbsolute(true);
-				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
-				break;
-			default:
-				binfo.setBackgroundXPositionAbsolute(true);
-				binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
-				break;
-			}
-		}
-	}
-
-	/**
-	 * Apply background vertical position.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param yposition
-	 *            the yposition
-	 */
-	private void applyBackgroundVerticalPosition(BackgroundInfo binfo, String yposition) {
-		if (yposition.endsWith("%")) {
-			binfo.setBackgroundYPositionAbsolute(false);
-			try {
-				binfo.setBackgroundYPosition(
-						(int) Double.parseDouble(yposition.substring(0, yposition.length() - 1).trim()));
-			} catch (NumberFormatException nfe) {
-				binfo.setBackgroundYPosition(0);
-			}
-		} else {
-
-			switch (yposition) {
-			case CENTER:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(50);
-				break;
-			case RIGHT:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(100);
-				break;
-			case LEFT:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(0);
-				break;
-			case BOTTOM:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(100);
-				break;
-			case TOP:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(0);
-				break;
-			case INHERIT:
-				BackgroundInfo bi = this.getPreviousRenderState().getBackgroundInfo();
-				if (bi != null) {
-					binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());
-					binfo.setBackgroundYPosition(bi.getBackgroundYPosition());
-				}
-				break;
-			case INITIAL:
-				binfo.setBackgroundYPositionAbsolute(true);
-				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
-				break;
-			default:
-				binfo.setBackgroundYPositionAbsolute(true);
-				binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
-				break;
-			}
-		}
-	}
-
-	/**
-	 * Apply background position.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param position
-	 *            the position
-	 */
-	private void applyBackgroundPosition(BackgroundInfo binfo, String position) {
-		binfo.setBackgroundXPositionAbsolute(false);
-		binfo.setBackgroundYPositionAbsolute(false);
-		binfo.setBackgroundXPosition(50);
-		binfo.setBackgroundYPosition(50);
-		StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
-		if (tok.hasMoreTokens()) {
-			String xposition = tok.nextToken();
-			this.applyBackgroundHorizontalPositon(binfo, xposition);
-			if (tok.hasMoreTokens()) {
-				String yposition = tok.nextToken();
-				this.applyBackgroundVerticalPosition(binfo, yposition);
-			}
-		}
-	}
-
-	/**
-	 * Apply background repeat.
-	 *
-	 * @param binfo
-	 *            the binfo
-	 * @param backgroundRepeatText
-	 *            the background repeat text
-	 */
-	private void applyBackgroundRepeat(BackgroundInfo binfo, String backgroundRepeatText) {
-		String brtl = backgroundRepeatText.toLowerCase();
-		if (REPEAT.equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT;
-		} else if (REPEAT_X.equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT_X;
-		} else if (REPEAT_Y.equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT_Y;
-		} else if (REPEAT_NO.equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_NO_REPEAT;
-		}
 	}
 
 	/*
@@ -1596,18 +1290,20 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public BorderInfo getBorderInfo() {
+		BorderRenderState brs = new BorderRenderState();
 		BorderInfo binfo = this.borderInfo;
-		if (!INVALID_BORDER_INFO.equals(binfo)) {
+		if (!BorderRenderState.INVALID_BORDER_INFO.equals(binfo)) {
 			return binfo;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props != null) {
-			binfo = HtmlValues.getBorderInfo(props, this);
+			binfo = BorderRenderState.getBorderInfo(props, this);
 		} else {
 			binfo = null;
 		}
-		this.borderInfo = binfo;
-		return binfo;
+		
+		this.borderInfo = brs.borderInfo(binfo, this);
+		return this.borderInfo;
 	}
 
 	@Override

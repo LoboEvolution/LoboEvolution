@@ -35,14 +35,17 @@ import org.lobobrowser.store.StorageManager;
  */
 public class CacheSettings implements Serializable {
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 22574500900000604L;
+	
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(CacheSettings.class.getName());
 
 	/** The Constant instance. */
 	private static final CacheSettings instance;
 
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 22574500900000604L;
+	/** The default cache expiration offset. */
+	private int defaultCacheExpirationOffset;
 
 	static {
 		CacheSettings ins = null;
@@ -115,9 +118,6 @@ public class CacheSettings implements Serializable {
 	public void setMaxRAMCacheSize(int maxRAMCacheSize) {
 		CacheManager.getInstance().setMaxTransientCacheSize(maxRAMCacheSize);
 	}
-
-	/** The default cache expiration offset. */
-	private int defaultCacheExpirationOffset;
 
 	/**
 	 * Gets the default cache expiration offset.

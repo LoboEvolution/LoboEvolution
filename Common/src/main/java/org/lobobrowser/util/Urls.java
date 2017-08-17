@@ -47,8 +47,10 @@ import org.lobobrowser.http.NameValuePair;
  * The Class Urls.
  */
 public class Urls {
+	
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(Urls.class);
+	
 	/** The Constant PATTERN_RFC1123. */
 	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 

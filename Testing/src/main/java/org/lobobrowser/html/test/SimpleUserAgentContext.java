@@ -48,6 +48,33 @@ public class SimpleUserAgentContext implements UserAgentContext {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(SimpleUserAgentContext.class);
+	
+	/** The proxy. */
+	private Proxy proxy = Proxy.NO_PROXY;
+
+	/** The app code name. */
+	private String appCodeName = "Cobra";
+
+	/** The app name. */
+	private String appName = "Cobra";
+
+	/** The app version. */
+	private String appVersion = "1";
+
+	/** The user agent. */
+	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0;) Cobra/Simple";
+
+	/** The scripting enabled. */
+	private boolean scriptingEnabled = true;
+	
+	/** The product. */
+	private String product = "Cobra";
+
+	/** The external css enabled. */
+	private boolean externalCSSEnabled = true;
+
+	/** The internal css enabled. */
+	private boolean internalCSSEnabled = true;
 
 	/** The Constant mediaNames. */
 	private static final Set<String> mediaNames = new HashSet<String>();
@@ -85,19 +112,15 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	 */
 	@Override
 	public HttpRequest createHttpRequest() {
-		return new HttpRequest();// TODO new SimpleHttpRequest(this,
-									// this.getProxy());
+		return new HttpRequest();
 	}
-
-	/** The proxy. */
-	private java.net.Proxy proxy = java.net.Proxy.NO_PROXY;
 
 	/**
 	 * Gets the proxy.
 	 *
 	 * @return the proxy
 	 */
-	protected java.net.Proxy getProxy() {
+	protected Proxy getProxy() {
 		return this.proxy;
 	}
 
@@ -110,10 +133,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setProxy(Proxy proxy) {
 		this.proxy = proxy;
 	}
-
-	/** The app code name. */
-	private String appCodeName = "Cobra";
-
+	
 	/**
 	 * Returns the application "code name." This implementation returns the
 	 * value of a local field.
@@ -160,10 +180,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setAppMinorVersion(String appMinorVersion) {
 		this.appMinorVersion = appMinorVersion;
 	}
-
-	/** The app name. */
-	private String appName = "Cobra";
-
+	
 	/**
 	 * Gets the application name. This implementation returns the value of a
 	 * local field.
@@ -185,10 +202,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setAppName(String appName) {
 		this.appName = appName;
 	}
-
-	/** The app version. */
-	private String appVersion = "1";
-
+	
 	/**
 	 * Gets the major application version. This implementation returns the value
 	 * of a local field.
@@ -232,10 +246,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public String getPlatform() {
 		return System.getProperty("os.name");
 	}
-
-	/** The user agent. */
-	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0;) Cobra/Simple";
-
+	
 	/**
 	 * Gets the User-Agent string. This implementation returns the value of a
 	 * local field.
@@ -318,10 +329,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		}
 		return buffer.toString();
 	}
-
-	/** The scripting enabled. */
-	private boolean scriptingEnabled = true;
-
+	
 	/**
 	 * Determines whether scripting should be enabled. This implementation
 	 * returns the value of a local field defaulting to <code>true</code>.
@@ -427,9 +435,6 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		this.vendor = vendor;
 	}
 
-	/** The product. */
-	private String product = "Cobra";
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -449,10 +454,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-
-	/** The external css enabled. */
-	private boolean externalCSSEnabled = true;
-
+	
 	/**
 	 * Determines whether loading of CSS files should be enabled. This
 	 * implementation returns the value of a local field defaulting to
@@ -475,10 +477,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setExternalCSSEnabled(boolean enabled) {
 		this.externalCSSEnabled = enabled;
 	}
-
-	/** The internal css enabled. */
-	private boolean internalCSSEnabled = true;
-
+	
 	/**
 	 * Determines whether STYLE tags should be processed. This implementation
 	 * returns the value of a local field defaulting to <code>true</code>.

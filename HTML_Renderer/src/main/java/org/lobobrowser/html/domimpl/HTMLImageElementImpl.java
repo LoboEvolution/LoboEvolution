@@ -26,8 +26,6 @@ package org.lobobrowser.html.domimpl;
 import java.awt.Image;
 import java.util.ArrayList;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
-import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.ImageEvent;
 import org.lobobrowser.html.dombl.ImageListener;
 import org.lobobrowser.html.dombl.UINode;
@@ -51,12 +49,15 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	/** The onload. */
 	private Function onload;
+	
+	/** The listeners. */
+	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Instantiates a new HTML image element impl.
 	 */
 	public HTMLImageElementImpl() {
-		super(HtmlProperties.IMG);
+		super(IMG);
 	}
 
 	/**
@@ -259,9 +260,6 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 			return this.image;
 		}
 	}
-
-	/** The listeners. */
-	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Adds a listener of image loading events. The listener gets called right

@@ -22,7 +22,6 @@ package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
@@ -49,6 +48,9 @@ public class TableCellRenderState extends DisplayRenderState {
 
 	/** The background info. */
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
+	
+	/** The padding insets. */
+	private HtmlInsets paddingInsets = INVALID_INSETS;
 
 	/**
 	 * Instantiates a new table cell render state.
@@ -240,10 +242,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		return (HTMLTableElement) ancestor;
 	}
-
-	/** The padding insets. */
-	private HtmlInsets paddingInsets = INVALID_INSETS;
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

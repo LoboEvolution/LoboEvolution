@@ -39,6 +39,9 @@ public class HrControl extends BaseControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The avail width. */
+	private int availWidth;
 
 	/**
 	 * Instantiates a new hr control.
@@ -83,9 +86,6 @@ public class HrControl extends BaseControl {
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		return inSelection;
 	}
-
-	/** The avail width. */
-	private int availWidth;
 
 	/*
 	 * (non-Javadoc)

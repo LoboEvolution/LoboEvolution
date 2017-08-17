@@ -20,13 +20,13 @@
  */
 package org.lobobrowser.w3c.svg;
 
+import org.lobobrowser.w3c.events.DocumentEvent;
+import org.lobobrowser.w3c.events.EventTarget;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.DocumentCSS;
 import org.w3c.dom.css.ViewCSS;
-import org.w3c.dom.events.DocumentEvent;
-import org.w3c.dom.events.EventTarget;
 
 public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
 		SVGLocatable, SVGFitToViewBox, SVGZoomAndPan, EventTarget, DocumentEvent, ViewCSS, DocumentCSS {

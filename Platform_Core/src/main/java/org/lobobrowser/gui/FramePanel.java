@@ -121,6 +121,15 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/** The top frame window. */
 	private Window topFrameWindow;
+	
+	/** The content. */
+	private ComponentContent content;
+
+	/** The progress event. */
+	private NavigatorProgressEvent progressEvent;
+	
+	/** The content properties. */
+	private Map<String, Object> contentProperties = null;
 
 	/**
 	 * Constructs a FramePanel specifying a "window" ID.
@@ -1487,9 +1496,6 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		return new Dimension(Short.MAX_VALUE, Short.MAX_VALUE);
 	}
 
-	/** The content. */
-	private ComponentContent content;
-
 	/**
 	 * Gets the component content currently set in the frame.
 	 *
@@ -1554,9 +1560,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	public NavigatorProgressEvent getProgressEvent() {
 		return this.progressEvent;
 	}
-
-	/** The progress event. */
-	private NavigatorProgressEvent progressEvent;
+	
 
 	/*
 	 * (non-Javadoc)
@@ -1743,9 +1747,6 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 			this.navigateToHistoryEntry(entry.getUrl());
 		}
 	}
-
-	/** The content properties. */
-	private Map<String, Object> contentProperties = null;
 
 	/*
 	 * (non-Javadoc)

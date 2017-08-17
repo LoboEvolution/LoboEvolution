@@ -30,13 +30,7 @@ import java.io.InputStream;
  * The Class EmptyInputStream.
  */
 public class EmptyInputStream extends InputStream {
-	/**
-	 * Instantiates a new empty input stream.
-	 */
-	public EmptyInputStream() {
-		super();
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 

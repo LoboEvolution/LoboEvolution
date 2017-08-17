@@ -40,6 +40,12 @@ public class MemoryURLConnection extends URLConnection {
 
 	/** The memory entry. */
 	private final MemoryCacheEntry memoryEntry;
+	
+	/** The input stream. */
+	private InputStream inputStream;
+
+	/** The headers map. */
+	private final Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
 
 	/**
 	 * Instantiates a new memory url connection.
@@ -54,11 +60,6 @@ public class MemoryURLConnection extends URLConnection {
 		this.memoryEntry = memoryEntry;
 	}
 
-	/** The input stream. */
-	private InputStream inputStream;
-
-	/** The headers map. */
-	private final Map<String, List<String>> headersMap = new HashMap<String, List<String>>();
 
 	/*
 	 * (non-Javadoc)

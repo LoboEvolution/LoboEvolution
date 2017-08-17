@@ -35,7 +35,6 @@ import java.awt.event.KeyListener;
 import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.JTextAreaImpl;
 import org.lobobrowser.html.domimpl.DOMElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -52,6 +51,12 @@ public class InputTextAreaControl extends BaseInputControl {
 
 	/** The widget. */
 	private final JTextAreaImpl widget;
+	
+	/** The cols. */
+	private int cols = -1;
+
+	/** The rows. */
+	private int rows = -1;
 
 	/**
 	 * Instantiates a new input text area control.
@@ -160,12 +165,6 @@ public class InputTextAreaControl extends BaseInputControl {
 	public int getRows() {
 		return this.rows;
 	}
-
-	/** The cols. */
-	private int cols = -1;
-
-	/** The rows. */
-	private int rows = -1;
 
 	/*
 	 * (non-Javadoc)

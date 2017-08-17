@@ -26,7 +26,6 @@ package org.lobobrowser.html.control;
 import java.awt.Graphics;
 import java.io.File;
 
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.renderer.RElement;

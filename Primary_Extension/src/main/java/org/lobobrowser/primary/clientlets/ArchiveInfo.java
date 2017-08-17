@@ -43,7 +43,7 @@ public class ArchiveInfo {
 	public final URL url;
 	
 	/** The jar file. */
-	private java.util.jar.JarFile jarFile;
+	private JarFile jarFile;
 
 	/**
 	 * Instantiates a new archive info.

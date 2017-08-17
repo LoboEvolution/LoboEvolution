@@ -24,7 +24,6 @@ import java.io.File;
 
 import org.apache.logging.log4j.Level;
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.dombl.InputContext;
 import org.lobobrowser.w3c.html.HTMLInputElement;
 
@@ -59,6 +58,9 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	/** The file. */
 	private final String FILE = "file";
+	
+	/** The default checked. */
+	private boolean defaultChecked;
 
 	/**
 	 * Instantiates a new HTML input element impl.
@@ -69,9 +71,6 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	public HTMLInputElementImpl(String name) {
 		super(name);
 	}
-
-	/** The default checked. */
-	private boolean defaultChecked;
 
 	/*
 	 * (non-Javadoc)
