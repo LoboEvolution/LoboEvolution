@@ -49,7 +49,6 @@ import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.Strings;
-import org.lobobrowser.util.gui.GUITasks;
 import org.w3c.dom.css.CSS2Properties;
 
 /**
@@ -131,18 +130,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	/** The last avail height for declared. */
 	private int lastAvailHeightForDeclared = -1;
 	
-	/** The border top color. */
-	private Color borderTopColor;
-
-	/** The border left color. */
-	private Color borderLeftColor;
-
-	/** The border bottom color. */
-	private Color borderBottomColor;
-
-	/** The border right color. */
-	private Color borderRightColor;
-
 	/**
 	 * Instantiates a new base element renderable.
 	 *
@@ -156,10 +143,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	public BaseElementRenderable(RenderableContainer container, ModelNode modelNode, UserAgentContext ucontext) {
 		super(container, modelNode);
 		this.userAgentContext = ucontext;
-		this.borderTopColor = null;
-		this.borderLeftColor = null;
-		this.borderBottomColor = null;
-		this.borderRightColor = null;
 	}
 
 	/**
@@ -516,10 +499,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	protected void clearStyle(boolean isRootBlock) {
 		this.borderInfo = null;
 		this.borderInsets = null;
-		this.borderTopColor = null;
-		this.borderLeftColor = null;
-		this.borderBottomColor = null;
-		this.borderRightColor = null;
 		this.zIndex = 0;
 		this.backgroundColor = null;
 		this.backgroundImage = null;
@@ -636,10 +615,9 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				dpbottom = defaultPaddingInsets.bottom;
 			}
 			
-			BorderRenderState bs = new BorderRenderState(this, rs);
-			borderInsets = bs.borderInsets(availWidth, availHeight);
+			BorderRenderState bs = new BorderRenderState();
+			borderInsets = bs.borderInsets(rs, availWidth, availHeight);
 			
-						
 			if(pinsets != null){
 				paddingInsets = pinsets.getAWTInsets(dptop, dpleft, dpbottom, dpright, availWidth, availHeight, 0, 0);
 			} else{
@@ -732,69 +710,12 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			// by the content area.
 			Rectangle clipBounds = g.getClipBounds();
 			if (!clientRegion.contains(clipBounds)) {
+				BorderRenderState br = new BorderRenderState();
 				BorderInfo borderInfo = this.borderInfo;
-				if (btop > 0) {
-					g.setColor(this.getBorderTopColor());
-					int borderStyle = borderInfo == null ? BorderRenderState.BORDER_STYLE_SOLID : borderInfo.getTopStyle();
-					for (int i = 0; i < btop; i++) {
-						int leftOffset = i * bleft / btop;
-						int rightOffset = i * bright / btop;
-						if (borderStyle == BorderRenderState.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, startX + leftOffset, startY + i,
-									startX + totalWidth - rightOffset - 1, startY + i, 10 + btop, 6);
-						} else {
-							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1,
-									startY + i);
-						}
-					}
-				}
-				if (bright > 0) {
-					int borderStyle = borderInfo == null ? BorderRenderState.BORDER_STYLE_SOLID : borderInfo.getRightStyle();
-					g.setColor(this.getBorderRightColor());
-					int lastX = startX + totalWidth - 1;
-					for (int i = 0; i < bright; i++) {
-						int topOffset = i * btop / bright;
-						int bottomOffset = i * bbottom / bright;
-						if (borderStyle == BorderRenderState.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i,
-									startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
-						} else {
-							g.drawLine(lastX - i, startY + topOffset, lastX - i,
-									startY + totalHeight - bottomOffset - 1);
-						}
-					}
-				}
-				if (bbottom > 0) {
-					int borderStyle = borderInfo == null ? BorderRenderState.BORDER_STYLE_SOLID : borderInfo.getBottomStyle();
-					g.setColor(this.getBorderBottomColor());
-					int lastY = startY + totalHeight - 1;
-					for (int i = 0; i < bbottom; i++) {
-						int leftOffset = i * bleft / bbottom;
-						int rightOffset = i * bright / bbottom;
-						if (borderStyle == BorderRenderState.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, startX + leftOffset, lastY - i,
-									startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
-						} else {
-							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1,
-									lastY - i);
-						}
-					}
-				}
-				if (bleft > 0) {
-					int borderStyle = borderInfo == null ? BorderRenderState.BORDER_STYLE_SOLID : borderInfo.getLeftStyle();
-					g.setColor(this.getBorderLeftColor());
-					for (int i = 0; i < bleft; i++) {
-						int topOffset = i * btop / bleft;
-						int bottomOffset = i * bbottom / bleft;
-						if (borderStyle == BorderRenderState.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i,
-									startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
-						} else {
-							g.drawLine(startX + i, startY + topOffset, startX + i,
-									startY + totalHeight - bottomOffset - 1);
-						}
-					}
-				}
+				br.borderStyleTop(g, borderInfo, btop, bleft, bright, newStartX, newStartY, newTotalWidth);
+				br.borderStyleBottom(g, borderInfo, bright, bleft, bbottom, newStartX, newStartY, newTotalWidth, newTotalHeight);
+				br.borderStyleRight(g, borderInfo, bright, btop, bbottom, newStartX, newStartY, newTotalWidth, newTotalHeight);
+				br.borderStyleLeft(g, borderInfo, bleft, btop, bbottom, newStartX, newStartY, newTotalHeight);
 			}
 
 			// Adjust client area border
@@ -824,67 +745,24 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					int w = image.getWidth(this);
 					int h = image.getHeight(this);
 					if (w != -1 && h != -1) {
+						BackgroundRenderState br = new BackgroundRenderState();
 						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
-						case BackgroundInfo.BR_NO_REPEAT: {
-							int imageX;
-							if (binfo.isBackgroundXPositionAbsolute()) {
-								imageX = binfo.getBackgroundXPosition();
-							} else {
-								imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
+							case BackgroundInfo.BR_NO_REPEAT: {
+								br.backgroundNoRepeat(clientG, image, binfo, w, h, totalWidth, totalHeight, this);
+								break;
 							}
-							int imageY;
-							if (binfo.isBackgroundYPositionAbsolute()) {
-								imageY = binfo.getBackgroundYPosition();
-							} else {
-								imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
+							case BackgroundInfo.BR_REPEAT_X: {
+								br.backgroundRepeatX(clientG, image, binfo, w, h, totalWidth, totalHeight, bkgBounds, this);
+								break;
 							}
-							clientG.drawImage(image, imageX, imageY, w, h, this);
-							break;
-						}
-						case BackgroundInfo.BR_REPEAT_X: {
-							int imageY;
-							if (binfo.isBackgroundYPositionAbsolute()) {
-								imageY = binfo.getBackgroundYPosition();
-							} else {
-								imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
+							case BackgroundInfo.BR_REPEAT_Y: {
+								br.backgroundRepeatY(clientG, image, binfo, w, h, totalWidth, totalHeight, bkgBounds, this);
+								break;
 							}
-							// Modulate starting x.
-							int x = bkgBounds.x / w * w;
-							int topX = bkgBounds.x + bkgBounds.width;
-							for (; x < topX; x += w) {
-								clientG.drawImage(image, x, imageY, w, h, this);
+							default: {
+								br.backgroundRepeat(clientG, image, w, h, bkgBounds, this);
+								break;
 							}
-							break;
-						}
-						case BackgroundInfo.BR_REPEAT_Y: {
-							int imageX;
-							if (binfo.isBackgroundXPositionAbsolute()) {
-								imageX = binfo.getBackgroundXPosition();
-							} else {
-								imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
-							}
-							// Modulate starting y.
-							int y = bkgBounds.y / h * h;
-							int topY = bkgBounds.y + bkgBounds.height;
-							for (; y < topY; y += h) {
-								clientG.drawImage(image, imageX, y, w, h, this);
-							}
-							break;
-						}
-						default: {
-							// Modulate starting x and y.
-							int baseX = bkgBounds.x / w * w;
-							int baseY = bkgBounds.y / h * h;
-							int topX = bkgBounds.x + bkgBounds.width;
-							int topY = bkgBounds.y + bkgBounds.height;
-							// Replacing this:
-							for (int x = baseX; x < topX; x += w) {
-								for (int y = baseY; y < topY; y += h) {
-									clientG.drawImage(image, x, y, w, h, this);
-								}
-							}
-							break;
-						}
 						}
 					}
 				}
@@ -1172,68 +1050,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.top;
 	}
-	
-	/**
-	 * @return the borderTopColor
-	 */
-	public Color getBorderTopColor() {
-		Color c = this.borderTopColor;
-		return c == null ? Color.black : c;
-	}
-
-	/**
-	 * @param borderTopColor the borderTopColor to set
-	 */
-	public void setBorderTopColor(Color borderTopColor) {
-		this.borderTopColor = borderTopColor;
-	}
-
-	/**
-	 * @return the borderLeftColor
-	 */
-	public Color getBorderLeftColor() {
-		Color c = this.borderLeftColor;
-		return c == null ? Color.black : c;
-	}
-
-	/**
-	 * @param borderLeftColor the borderLeftColor to set
-	 */
-	public void setBorderLeftColor(Color borderLeftColor) {
-		this.borderLeftColor = borderLeftColor;
 		
-	}
-
-	/**
-	 * @return the borderBottomColor
-	 */
-	public Color getBorderBottomColor() {
-		Color c = this.borderBottomColor;
-		return c == null ? Color.black : c;
-	}
-
-	/**
-	 * @param borderBottomColor the borderBottomColor to set
-	 */
-	public void setBorderBottomColor(Color borderBottomColor) {
-		this.borderBottomColor = borderBottomColor;
-	}
-
-	/**
-	 * @return the borderRightColor
-	 */
-	public Color getBorderRightColor() {
-		Color c = this.borderRightColor;
-		return c == null ? Color.black : c;
-	}
-
-	/**
-	 * @param borderRightColor the borderRightColor to set
-	 */
-	public void setBorderRightColor(Color borderRightColor) {
-		this.borderRightColor = borderRightColor;
-	}
-	
 	/*
 	 * (non-Javadoc)
 	 * 
