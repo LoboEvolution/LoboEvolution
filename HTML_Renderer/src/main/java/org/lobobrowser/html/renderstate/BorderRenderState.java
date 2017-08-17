@@ -21,19 +21,18 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Insets;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BorderInfo;
-import org.lobobrowser.html.renderer.BaseElementRenderable;
 import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
+import org.lobobrowser.util.gui.GUITasks;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.w3c.dom.css.CSS2Properties;
 
@@ -74,22 +73,8 @@ public class BorderRenderState implements CSSValuesProperties {
 	
 	/** The Constant INVALID_BORDER_INFO. */
 	public static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
-
-	private BaseElementRenderable baseElemRen;
-
-	private RenderState rs;
-
-	public BorderRenderState(BaseElementRenderable baseElemRen, RenderState rs) {
-		this.baseElemRen = baseElemRen;
-		this.rs = rs;
-	}
 	
-	public BorderRenderState() {}
-	
-	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(BorderRenderState.class.getName());
-
-	public Insets borderInsets(int availWidth, int availHeight) {
+	public Insets borderInsets(RenderState rs, int availWidth, int availHeight) {
 		Insets borderInsets = RBlockViewport.ZERO_INSETS;
 		BorderInfo borderInfo = rs.getBorderInfo();
 		
@@ -97,16 +82,7 @@ public class BorderRenderState implements CSSValuesProperties {
 			HtmlInsets binsets = borderInfo.getInsets();
 			if(binsets!= null) borderInsets = binsets.getAWTInsets(0, 0, 0, 0, availWidth, availHeight, 0, 0);
 		}
-
-		if (borderInfo != null) {
-			baseElemRen.setBorderTopColor(borderInfo.getTopColor());
-			baseElemRen.setBorderLeftColor(borderInfo.getLeftColor());
-			baseElemRen.setBorderBottomColor(borderInfo.getBottomColor());
-			baseElemRen.setBorderRightColor(borderInfo.getRightColor());
-		}
-
 		return borderInsets;
-
 	}
 
 	/**
@@ -275,10 +251,10 @@ public class BorderRenderState implements CSSValuesProperties {
 			return bi;
 		}
 		
-		if (bi == null || bi.getTopStyle() == BorderRenderState.BORDER_STYLE_NONE
-				&& bi.getBottomStyle() == BorderRenderState.BORDER_STYLE_NONE
-				&& bi.getLeftStyle() == BorderRenderState.BORDER_STYLE_NONE
-				&& bi.getRightStyle() == BorderRenderState.BORDER_STYLE_NONE) {
+		if (bi == null || bi.getTopStyle() == BORDER_STYLE_NONE
+				&& bi.getBottomStyle() == BORDER_STYLE_NONE
+				&& bi.getLeftStyle() == BORDER_STYLE_NONE
+				&& bi.getRightStyle() == BORDER_STYLE_NONE) {
 			
 			if (bi == null) {
 				bi = new BorderInfo();
@@ -299,15 +275,88 @@ public class BorderRenderState implements CSSValuesProperties {
 				bi.setInsets(borderInsets);
 				
 				if (value != 0) {
-					bi.setTopStyle(BorderRenderState.BORDER_STYLE_SOLID);
-					bi.setLeftStyle(BorderRenderState.BORDER_STYLE_SOLID);
-					bi.setRightStyle(BorderRenderState.BORDER_STYLE_SOLID);
-					bi.setBottomStyle(BorderRenderState.BORDER_STYLE_SOLID);
+					bi.setTopStyle(BORDER_STYLE_SOLID);
+					bi.setLeftStyle(BORDER_STYLE_SOLID);
+					bi.setRightStyle(BORDER_STYLE_SOLID);
+					bi.setBottomStyle(BORDER_STYLE_SOLID);
 				}
 			}
 		}
 		
 		return bi;
+	}
+	
+	public void borderStyleTop(Graphics g, BorderInfo borderInfo, int btop, int bleft, int bright, int startX, int startY, int totalWidth) {
+		if (btop > 0) {
+			g.setColor(borderInfo.getTopColor());
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getTopStyle();
+			for (int i = 0; i < btop; i++) {
+				int leftOffset = i * bleft / btop;
+				int rightOffset = i * bright / btop;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1,
+							startY + i, 10 + btop, 6);
+				} else {
+					g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
+				}
+			}
+		}
+	}
+	
+	public void borderStyleRight(Graphics g, BorderInfo borderInfo, int bright, int btop, int bbottom, int startX, int startY, int totalWidth, int totalHeight) {
+		if (bright > 0) {
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getRightStyle();
+			g.setColor(borderInfo.getRightColor());
+			int lastX = startX + totalWidth - 1;
+			for (int i = 0; i < bright; i++) {
+				int topOffset = i * btop / bright;
+				int bottomOffset = i * bbottom / bright;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i,
+							startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
+				} else {
+					g.drawLine(lastX - i, startY + topOffset, lastX - i,
+							startY + totalHeight - bottomOffset - 1);
+				}
+			}
+		}
+		
+	}
+
+	public void borderStyleBottom(Graphics g, BorderInfo borderInfo, int bright, int bleft, int bbottom, int startX, int startY, int totalWidth, int totalHeight) {
+		if (bbottom > 0) {
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getBottomStyle();
+			g.setColor(borderInfo.getBottomColor());
+			int lastY = startY + totalHeight - 1;
+			for (int i = 0; i < bbottom; i++) {
+				int leftOffset = i * bleft / bbottom;
+				int rightOffset = i * bright / bbottom;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, startX + leftOffset, lastY - i,
+							startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
+				} else {
+					g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1,
+							lastY - i);
+				}
+			}
+		}	
+	}
+
+	public void borderStyleLeft(Graphics g, BorderInfo borderInfo, int bleft, int btop, int bbottom, int startX, int startY, int totalHeight) {
+		if (bleft > 0) {
+			int borderStyle = borderInfo == null ? BORDER_STYLE_SOLID : borderInfo.getLeftStyle();
+			g.setColor(borderInfo.getLeftColor());
+			for (int i = 0; i < bleft; i++) {
+				int topOffset = i * btop / bleft;
+				int bottomOffset = i * bbottom / bleft;
+				if (borderStyle == BORDER_STYLE_DASHED) {
+					GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i,
+							startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
+				} else {
+					g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
+				}
+			}
+		}
 	}
 
 	/**
