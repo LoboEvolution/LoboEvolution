@@ -26,8 +26,6 @@ package org.lobobrowser.html.renderer;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-
 import org.lobobrowser.html.dombl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 
@@ -35,6 +33,7 @@ import org.lobobrowser.html.renderstate.RenderState;
  * The Class RBlank.
  */
 public final class RBlank extends BaseBoundableRenderable {
+	
 	/** The ascent plus leading. */
 	private int ascentPlusLeading;
 
@@ -194,23 +193,6 @@ public final class RBlank extends BaseBoundableRenderable {
 	@Override
 	public boolean isContainedByNode() {
 		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.lobobrowser.html.renderer.BoundableRenderable#onRightClick(java.awt.
-	 * event .MouseEvent, int, int)
-	 */
-	@Override
-	public boolean onRightClick(MouseEvent event, int x, int y) {
-		ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onContextMenu(me, event, x, y);
-		} else {
-			return true;
-		}
 	}
 
 	/**

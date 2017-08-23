@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 
 /**
  * The Class BaseRCollection.
@@ -417,7 +418,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	public boolean onRightClick(MouseEvent event, int x, int y) {
 		BoundableRenderable br = this.getRenderable(x, y);
 		if (br == null) {
-			return HtmlController.getInstance().onContextMenu(this.modelNode, event, x, y);
+			return DOMEventImpl.getInstance().onContextMenu(this.modelNode, event, x, y);
 		} else {
 			return br.onRightClick(event, x - br.getX(), y - br.getY());
 		}

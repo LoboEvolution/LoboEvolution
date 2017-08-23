@@ -24,8 +24,6 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-
 import org.lobobrowser.html.dombl.ModelNode;
 
 /**
@@ -140,22 +138,4 @@ public final class RSpacing extends BaseBoundableRenderable {
 	public boolean isContainedByNode() {
 		return true;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.lobobrowser.html.renderer.BoundableRenderable#onRightClick(java.awt.
-	 * event .MouseEvent, int, int)
-	 */
-	@Override
-	public boolean onRightClick(MouseEvent event, int x, int y) {
-		ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onContextMenu(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
 }

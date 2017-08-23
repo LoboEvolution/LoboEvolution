@@ -48,6 +48,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.info.FloatingInfo;
 import org.lobobrowser.html.layout.LayoutKey;
@@ -86,7 +87,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	protected final HtmlRendererContext rendererContext;
 
 	/** The body layout. */
-	protected final RBlockViewport bodyLayout;
+	public final RBlockViewport bodyLayout;
 
 	/** The cached layout. */
 	protected final Map<LayoutKey, LayoutValue> cachedLayout = Collections.synchronizedMap(new HashMap<LayoutKey, LayoutValue>(5));
@@ -1059,7 +1060,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		RBlockViewport bodyLayout = this.bodyLayout;
-		if (!HtmlController.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
+		if (!DOMEventImpl.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1076,7 +1077,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		RBlockViewport bodyLayout = this.bodyLayout;
 
-		if (!HtmlController.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
+		if (!DOMEventImpl.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1131,7 +1132,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		if (!HtmlController.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
+		if (!DOMEventImpl.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1146,7 +1147,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		if (!HtmlController.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
+		if (!DOMEventImpl.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
 			return false;
 		}
 		return true;
@@ -1154,17 +1155,17 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 
 	@Override
 	public boolean onKeyPressed(KeyEvent event) {
-		return !HtmlController.getInstance().onKeyPress(this.modelNode, event);
+		return !DOMEventImpl.getInstance().onKeyPress(this.modelNode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(KeyEvent event) {
-		return !HtmlController.getInstance().onKeyUp(this.modelNode, event);
+		return !DOMEventImpl.getInstance().onKeyUp(this.modelNode, event);
 	}
 
 	@Override
 	public boolean onKeyDown(KeyEvent event) {
-		return !HtmlController.getInstance().onKeyDown(this.modelNode, event);
+		return !DOMEventImpl.getInstance().onKeyDown(this.modelNode, event);
 	}
 
 	/*
