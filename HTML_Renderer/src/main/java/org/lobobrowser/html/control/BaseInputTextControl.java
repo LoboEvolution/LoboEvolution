@@ -38,8 +38,8 @@ import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
 import org.lobobrowser.html.domimpl.DOMElementImpl;
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.renderer.HtmlController;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.util.gui.WrapperLayout;
 
@@ -80,13 +80,13 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 
 			@Override
 			public void keyPressed(KeyEvent event) {
-				HtmlController.getInstance().onKeyDown(modelNode, event);
-				HtmlController.getInstance().onKeyPress(modelNode, event);
+				DOMEventImpl.getInstance().onKeyDown(modelNode, event);
+				DOMEventImpl.getInstance().onKeyPress(modelNode, event);
 			}
 
 			@Override
 			public void keyReleased(KeyEvent event) {
-				HtmlController.getInstance().onKeyUp(modelNode, event);
+				DOMEventImpl.getInstance().onKeyUp(modelNode, event);
 
 			}
 

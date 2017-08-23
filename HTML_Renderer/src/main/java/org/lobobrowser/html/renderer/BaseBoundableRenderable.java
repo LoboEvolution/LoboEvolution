@@ -40,6 +40,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlRendererContext;
 import org.lobobrowser.html.dombl.ModelNode;
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.renderstate.RenderState;
 
@@ -529,7 +530,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	@Override
 	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
 		if (this.isContainedByNode()) {
-			HtmlController.getInstance().onMouseOut(this.modelNode, event, x, y, limit);
+			DOMEventImpl.getInstance().onMouseOut(this.modelNode, event, x, y, limit);
 			resetCursorOnMouseOut(this.modelNode, limit);
 		}
 	}
@@ -537,7 +538,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	@Override
 	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		if (triggerEvent && this.isContainedByNode()) {
-				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
+				DOMEventImpl.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
 				setMouseOnMouseOver(this, this.modelNode, limit);
 		}
 	}
@@ -546,7 +547,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onMouseClick(me, event, null, x, y);
+			return DOMEventImpl.getInstance().onMouseClick(me, event, null, x, y);
 		} else {
 			return true;
 		}
@@ -556,7 +557,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onDoubleClick(me, event, null, x, y);
+			return DOMEventImpl.getInstance().onDoubleClick(me, event, null, x, y);
 		} else {
 			return true;
 		}
@@ -566,7 +567,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onMouseDown(me, event, null, x, y);
+			return DOMEventImpl.getInstance().onMouseDown(me, event, null, x, y);
 		} else {
 			return true;
 		}
@@ -576,7 +577,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onMouseUp(me, event, null, x, y);
+			return DOMEventImpl.getInstance().onMouseUp(me, event, null, x, y);
 		} else {
 			return true;
 		}
@@ -586,7 +587,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onMouseDisarmed(MouseEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onMouseDisarmed(me, event);
+			return DOMEventImpl.getInstance().onMouseDisarmed(me, event);
 		} else {
 			return true;
 		}
@@ -596,7 +597,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onKeyPressed(KeyEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onKeyPress(this.modelNode, event);
+			return DOMEventImpl.getInstance().onKeyPress(this.modelNode, event);
 		} else {
 			return true;
 		}
@@ -606,7 +607,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onKeyUp(KeyEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onKeyUp(this.modelNode, event);
+			return DOMEventImpl.getInstance().onKeyUp(this.modelNode, event);
 		} else {
 			return true;
 		}
@@ -616,7 +617,17 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public boolean onKeyDown(KeyEvent event) {
 		ModelNode me = this.modelNode;
 		if (me != null) {
-			return HtmlController.getInstance().onKeyDown(this.modelNode, event);
+			return DOMEventImpl.getInstance().onKeyDown(this.modelNode, event);
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean onRightClick(MouseEvent event, int x, int y) {
+		ModelNode me = this.modelNode;
+		if (me != null) {
+			return DOMEventImpl.getInstance().onContextMenu(me, event, x, y);
 		} else {
 			return true;
 		}

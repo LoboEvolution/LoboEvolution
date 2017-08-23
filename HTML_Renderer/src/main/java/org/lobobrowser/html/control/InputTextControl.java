@@ -31,8 +31,9 @@ import javax.swing.BorderFactory;
 import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.dombl.JTextFieldImpl;
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.renderer.HtmlController;
+
 
 /**
  * The Class InputTextControl.
@@ -73,7 +74,7 @@ public class InputTextControl extends BaseInputTextControl {
 			text.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
 
-		text.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
+		text.addActionListener(event -> DOMEventImpl.getInstance().onEnterPressed(modelNode, null));
 		text.addKeyListener(addKeyListener());
 	}
 

@@ -34,9 +34,10 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
-import org.lobobrowser.html.renderer.HtmlController;
+
 import org.lobobrowser.util.gui.WrapperLayout;
 import org.lobobrowser.w3c.html.HTMLOptionElement;
 import org.lobobrowser.w3c.html.HTMLOptionsCollection;
@@ -106,7 +107,7 @@ public class InputSelectControl extends BaseInputControl {
 						} finally {
 							inSelectionEvent = false;
 						}
-						HtmlController.getInstance().onChange(modelNode);
+						DOMEventImpl.getInstance().onChange(modelNode);
 					}
 					break;
 				case ItemEvent.DESELECTED:
@@ -143,7 +144,7 @@ public class InputSelectControl extends BaseInputControl {
 					inSelectionEvent = false;
 				}
 				if (changed) {
-					HtmlController.getInstance().onChange(modelNode);
+					DOMEventImpl.getInstance().onChange(modelNode);
 				}
 			}
 		});

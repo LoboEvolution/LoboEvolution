@@ -28,9 +28,10 @@ import java.awt.ComponentOrientation;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
+import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.renderer.HtmlController;
+
 import org.lobobrowser.util.gui.WrapperLayout;
 
 /**
@@ -93,7 +94,7 @@ public class InputRadioControl extends BaseInputControl {
 		this.add(radio);
 
 		widget.addActionListener(
-				event -> HtmlController.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
+				event -> DOMEventImpl.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
 	}
 
 	/*
