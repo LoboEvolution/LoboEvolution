@@ -30,6 +30,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 import javax.imageio.IIOException;
@@ -125,19 +127,17 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	 */
 	public BackgroundInfo applyBackgroundPosition(BackgroundInfo binfo, String position, RenderState prevRenderState) {
 		BackgroundInfo bg = binfo;
-		if (position != null) {
-			bg.setBackgroundXPositionAbsolute(false);
-			bg.setBackgroundYPositionAbsolute(false);
-			bg.setBackgroundXPosition(50);
-			bg.setBackgroundYPosition(50);
-			StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
+		bg.setBackgroundXPositionAbsolute(false);
+		bg.setBackgroundYPositionAbsolute(false);
+		bg.setBackgroundXPosition(50);
+		bg.setBackgroundYPosition(50);
+		StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
+		if (tok.hasMoreTokens()) {
+			String xposition = tok.nextToken();
+			bg = applyBackgroundHorizontalPositon(bg, xposition, prevRenderState);
 			if (tok.hasMoreTokens()) {
-				String xposition = tok.nextToken();
-				bg = applyBackgroundHorizontalPositon(bg, xposition, prevRenderState);
-				if (tok.hasMoreTokens()) {
-					String yposition = tok.nextToken();
-					bg = applyBackgroundVerticalPosition(bg, yposition, prevRenderState);
-				}
+				String yposition = tok.nextToken();
+				bg = applyBackgroundVerticalPosition(bg, yposition, prevRenderState);
 			}
 		}
 		return bg;
@@ -153,7 +153,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	 */
 	public BackgroundInfo applyBackgroundRepeat(BackgroundInfo binfo, String back) {
 		BackgroundInfo bg = binfo;
-		if (back!= null && bg.getBackgroundRepeat() == BackgroundInfo.BR_REPEAT) {
+		if (bg.getBackgroundRepeat() == BackgroundInfo.BR_REPEAT) {
 			switch (back.toLowerCase()) {
 			case REPEAT:
 				bg.backgroundRepeat = BackgroundInfo.BR_REPEAT;
@@ -176,9 +176,9 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	
 	public BackgroundInfo applyBackgroundImage(BackgroundInfo binfo, String back, HTMLDocumentImpl document) {
 		BackgroundInfo bg = binfo;
-		if (back!= null && back.contains("url") && bg.getBackgroundImage() == null) {
+		if (back.contains("url") && bg.getBackgroundImage() == null) {
 			String start = "url(";
-			int startIdx = start.length();
+			int startIdx = start.length() +1;
 			int closingIdx = back.lastIndexOf(')');
 			String quotedUri = back.substring(startIdx, closingIdx);
 			URL url = document.getFullURL(quotedUri);
@@ -197,21 +197,9 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	
 	public BackgroundInfo applyBackground(BackgroundInfo binfo, String back, RenderState prevRenderState) {
 		BackgroundInfo bg = binfo;	
-		if (back != null) {
-			switch (back.toLowerCase()) {
-			case INHERIT:
-				bg.setBackgroundColor(prevRenderState.getPreviousRenderState().getBackgroundColor());
-				break;
-			case INITIAL:
-				bg.setBackgroundColor(Color.WHITE);
-				break;
-			default:
-				Color c = ColorFactory.getInstance().getColor(back);
-				if (c != null) {
-					bg.setBackgroundColor(ColorFactory.getInstance().getColor(back));
-				}
-				break;
-			}
+		Color c = ColorFactory.getInstance().getColor(back);
+		if (c != null) {
+			bg.setBackgroundColor(c);
 		}
 		return bg;
 	}
@@ -416,6 +404,24 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			}
 		}
 		return bg;
+	}
+	
+	public ArrayList<String> spliBackground(String backgroundText) {
+		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("\\)")));
+
+		for (String back : backList) {
+			if (back.contains("(")) {
+				back = back + ")";
+				list.add(back);
+			} else {
+				ArrayList<String> a = new ArrayList<String>(Arrays.asList(back.split(" ")));
+				for (String a1 : a) {
+					list.add(a1);
+				}
+			}
+		}
+		return list;
 	}
 	
 	/**

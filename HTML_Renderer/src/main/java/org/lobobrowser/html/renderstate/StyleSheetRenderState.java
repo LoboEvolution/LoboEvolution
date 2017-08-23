@@ -868,28 +868,34 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			}
 
 			String backgroundText = props.getBackground();
+			ArrayList<String> backList = new ArrayList<String>();
 
 			if (backgroundText == null) {
-				backgroundText = props.getBackgroundColor() + " " + props.getBackgroundImage() + " "
-						+ props.getBackgroundRepeat() + " " + props.getBackgroundPosition();
+				backList.add(props.getBackgroundColor());
+				backList.add(props.getBackgroundImage());
+				backList.add(props.getBackgroundRepeat());
+				backList.add(props.getBackgroundPosition());
+			} else{
+				BackgroundRenderState brs = new BackgroundRenderState();
+				backList = brs.spliBackground(backgroundText);
 			}
-
-			String[] backList = backgroundText.split(" ");
-
+			
 			for (String back : backList) {
-				switch (back.toLowerCase()) {
-				case INHERIT:
-					binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
-					break;
-				case INITIAL:
-					binfo.setBackgroundColor(Color.WHITE);
-					break;
-				default:
-					binfo = bg.applyBackgroundImage(binfo, back, this.document);
-					binfo = bg.applyBackgroundPosition(binfo, back, this);
-					binfo = bg.applyBackgroundRepeat(binfo, back);
-					binfo = bg.applyBackground(binfo, back, this);
-					break;
+				if (back != null && !back.equals(" ")) {
+					switch (back.toLowerCase()) {
+					case INHERIT:
+						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());
+						break;
+					case INITIAL:
+						binfo.setBackgroundColor(Color.WHITE);
+						break;
+					default:
+						binfo = bg.applyBackgroundImage(binfo, back, this.document);
+						binfo = bg.applyBackgroundPosition(binfo, back, this);
+						binfo = bg.applyBackgroundRepeat(binfo, back);
+						binfo = bg.applyBackground(binfo, back, this);
+						break;
+					}
 				}
 			}
 		}
