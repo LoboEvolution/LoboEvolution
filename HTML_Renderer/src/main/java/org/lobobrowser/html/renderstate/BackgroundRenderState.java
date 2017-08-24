@@ -179,18 +179,10 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		if (back.contains("url") && bg.getBackgroundImage() == null) {
 			String start = "url(";
 			int startIdx = start.length() +1;
-			int closingIdx = back.lastIndexOf(')');
+			int closingIdx = back.lastIndexOf(')')-1;
 			String quotedUri = back.substring(startIdx, closingIdx);
 			URL url = document.getFullURL(quotedUri);
-			if (validateURL(url)) {
-				bg.setBackgroundImage(url);
-			} else {
-				try {
-					bg.setBackgroundImage(new URL(quotedUri.replace("'", "")));
-				} catch (Exception e) {
-					logger.error(e);
-				}
-			}
+			bg.setBackgroundImage(url);
 		}
 		return bg;
 	}
@@ -213,9 +205,10 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	public Image loadBackgroundImage(final URL imageURL, BaseElementRenderable ber) {
 		Image image = null;
 		String url = imageURL.toString();
+		
 		try {
+			
 			SSLCertificate.setCertificate();
-
 			URLConnection con = imageURL.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 
@@ -238,8 +231,6 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			} else {
 				image = ImageIO.read(con.getInputStream());
 			}
-
-			
 
 			int w = -1;
 			int h = -1;
@@ -442,16 +433,5 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		} catch (NumberFormatException nfe) {
 			return false;
 		}
-	}
-	
-	private boolean validateURL(URL url){
-		try {
-		    URLConnection conn = url.openConnection();
-		    conn.connect();
-		    return true;
-		} catch (Exception e) {
-			return false;
-		}
-		
 	}
 }
