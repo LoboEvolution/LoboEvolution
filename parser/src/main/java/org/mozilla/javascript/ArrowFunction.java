@@ -7,66 +7,69 @@
 package org.mozilla.javascript;
 
 /**
- * The class for Arrow Function Definitions EcmaScript 6 Rev 14, March 8, 2013
- * Draft spec , 13.2
+ * The class for  Arrow Function Definitions
+ * EcmaScript 6 Rev 14, March 8, 2013 Draft spec , 13.2
  */
 public class ArrowFunction extends BaseFunction {
+    
+    static final long serialVersionUID = -7377989503697220633L;
+    
+    private final Callable targetFunction;
+    private final Scriptable boundThis;
 
-	static final long serialVersionUID = -7377989503697220633L;
+    public ArrowFunction(Context cx, Scriptable scope, Callable targetFunction, Scriptable boundThis)
+    {
+        this.targetFunction = targetFunction;
+        this.boundThis = boundThis;
 
-	private final Callable targetFunction;
-	private final Scriptable boundThis;
+        ScriptRuntime.setFunctionProtoAndParent(this, scope);
 
-	public ArrowFunction(Context cx, Scriptable scope, Callable targetFunction, Scriptable boundThis) {
-		this.targetFunction = targetFunction;
-		this.boundThis = boundThis;
+        Function thrower = ScriptRuntime.typeErrorThrower();
+        NativeObject throwing = new NativeObject();
+        throwing.put("get", throwing, thrower);
+        throwing.put("set", throwing, thrower);
+        throwing.put("enumerable", throwing, false);
+        throwing.put("configurable", throwing, false);
+        throwing.preventExtensions();
 
-		ScriptRuntime.setFunctionProtoAndParent(this, scope);
+        this.defineOwnProperty(cx, "caller", throwing, false);
+        this.defineOwnProperty(cx, "arguments", throwing, false);
+    }
 
-		Function thrower = ScriptRuntime.typeErrorThrower();
-		NativeObject throwing = new NativeObject();
-		throwing.put("get", throwing, thrower);
-		throwing.put("set", throwing, thrower);
-		throwing.put("enumerable", throwing, false);
-		throwing.put("configurable", throwing, false);
-		throwing.preventExtensions();
+    @Override
+    public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args)
+    {
+        Scriptable callThis = boundThis != null ? boundThis : ScriptRuntime.getTopCallScope(cx);
+        return targetFunction.call(cx, scope, callThis, args);
+    }
 
-		this.defineOwnProperty(cx, "caller", throwing, false);
-		this.defineOwnProperty(cx, "arguments", throwing, false);
-	}
+    @Override
+    public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
+        throw ScriptRuntime.typeError1("msg.not.ctor", decompile(0, 0));
+    }
 
-	@Override
-	public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
-		Scriptable callThis = boundThis != null ? boundThis : ScriptRuntime.getTopCallScope(cx);
-		return targetFunction.call(cx, scope, callThis, args);
-	}
+    @Override
+    public boolean hasInstance(Scriptable instance) {
+        if (targetFunction instanceof Function) {
+            return ((Function) targetFunction).hasInstance(instance);
+        }
+        throw ScriptRuntime.typeError0("msg.not.ctor");
+    }
 
-	@Override
-	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
-		throw ScriptRuntime.typeError1("msg.not.ctor", decompile(0, 0));
-	}
+    @Override
+    public int getLength() {
+        if (targetFunction instanceof BaseFunction) {
+            return ((BaseFunction) targetFunction).getLength();
+        }
+        return 0;
+    }
 
-	@Override
-	public boolean hasInstance(Scriptable instance) {
-		if (targetFunction instanceof Function) {
-			return ((Function) targetFunction).hasInstance(instance);
-		}
-		throw ScriptRuntime.typeError0("msg.not.ctor");
-	}
-
-	@Override
-	public int getLength() {
-		if (targetFunction instanceof BaseFunction) {
-			return ((BaseFunction) targetFunction).getLength();
-		}
-		return 0;
-	}
-
-	@Override
-	String decompile(int indent, int flags) {
-		if (targetFunction instanceof BaseFunction) {
-			return ((BaseFunction) targetFunction).decompile(indent, flags);
-		}
-		return super.decompile(indent, flags);
-	}
+    @Override
+    String decompile(int indent, int flags)
+    {
+        if (targetFunction instanceof BaseFunction) {
+            return ((BaseFunction)targetFunction).decompile(indent, flags);
+        }
+        return super.decompile(indent, flags);
+    }
 }
