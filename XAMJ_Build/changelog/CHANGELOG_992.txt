@@ -1,0 +1,8 @@
+Version 0.99.2:
+------------
+
+
+ LIBRARIES:
+- PDFrenderer commit 145
+- CSSParser 0.9.20
+- Mozilla Rhino 1.7.7.1
