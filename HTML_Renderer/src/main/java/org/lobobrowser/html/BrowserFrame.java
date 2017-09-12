@@ -32,7 +32,7 @@ import org.w3c.dom.Document;
 /**
  * The <code>BrowserFrame</code> interface represents a browser frame. A simple
  * implementation of this interface is provided in
- * {@link org.lobobrowser.html.test.SimpleBrowserFrame}.
+ * {@link org.lobobrowser.html.test.SimpleBrowserFrame}
  */
 public interface BrowserFrame {
 
