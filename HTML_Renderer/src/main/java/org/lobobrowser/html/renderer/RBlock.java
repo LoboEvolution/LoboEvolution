@@ -384,8 +384,6 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 				if (linfo) {
 					time3 = System.currentTimeMillis();
 				}
-			} else {
-				// nop
 			}
 
 			// Paint FrameContext selection.
