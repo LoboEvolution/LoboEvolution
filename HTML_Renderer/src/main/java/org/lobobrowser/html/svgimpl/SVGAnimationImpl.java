@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.smilimpl.TimeImpl;
 import org.lobobrowser.html.smilimpl.TimeListImpl;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.w3c.smil.ElementTargetAttributes;
 import org.lobobrowser.w3c.smil.SMILAnimation;
 import org.lobobrowser.w3c.smil.Time;
@@ -98,7 +99,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	
 	public float getStartTime() {
 		String beginTime = this.getAttribute(BEGIN);
-		if (beginTime != null && !beginTime.equalsIgnoreCase("indefinite") && beginTime.length() > 0) {
+		if (!Strings.isBlank(beginTime) && !beginTime.equalsIgnoreCase("indefinite")) {
 			return SVGUtility.getClockMilliSecs(beginTime);
 		} else {
 			return 0;

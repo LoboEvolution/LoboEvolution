@@ -47,6 +47,7 @@ import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLAnchorElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.primary.ext.IconFactory;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.w3c.html.HTMLElement;
 
 /**
@@ -255,7 +256,7 @@ public class HtmlContextMenu {
 			context.back();
 		});
 
-		if (context.getPreviousURL() != null && context.getPreviousURL().length() > 0) {
+		if (!Strings.isBlank(context.getPreviousURL())) {
 			menuBack.setEnabled(true);
 		} else {
 			menuBack.setEnabled(false);
@@ -276,7 +277,7 @@ public class HtmlContextMenu {
 			context.forward();
 		});
 
-		if (context.getNextURL() != null && context.getNextURL().length() > 0) {
+		if (!Strings.isBlank(context.getNextURL())) {
 			menuForward.setEnabled(true);
 		} else {
 			menuForward.setEnabled(false);

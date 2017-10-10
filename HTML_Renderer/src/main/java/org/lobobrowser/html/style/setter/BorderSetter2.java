@@ -3,6 +3,7 @@ package org.lobobrowser.html.style.setter;
 import org.lobobrowser.html.renderstate.BorderRenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
@@ -25,7 +26,7 @@ public class BorderSetter2 implements SubPropertySetter {
 	public void changeValue(AbstractCSS2Properties properties, String value, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(this.name, value, important);
-		if (value != null && value.length() > 0) {
+		if (!Strings.isBlank(value)) {
 			String[] array = HtmlValues.splitCssValue(value);
 			String color = null;
 			String style = null;

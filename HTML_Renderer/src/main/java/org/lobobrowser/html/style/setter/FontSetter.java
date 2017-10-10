@@ -4,6 +4,7 @@ import org.lobobrowser.html.info.FontInfo;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.util.CSSProperties;
@@ -39,7 +40,7 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(FONT, newValue, important);
-		if (newValue != null && newValue.length() > 0) {
+		if (!Strings.isBlank(newValue)) {
 			String fontSpecTL = newValue.toLowerCase();
 			FontInfo fontInfo = FontValues.SYSTEM_FONTS.get(fontSpecTL);
 			if (fontInfo != null) {

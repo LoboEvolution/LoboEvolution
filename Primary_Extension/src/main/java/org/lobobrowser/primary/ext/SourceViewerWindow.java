@@ -38,6 +38,7 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.lobobrowser.ua.NavigatorWindow;
+import org.lobobrowser.util.Strings;
 
 /**
  * The Class SourceViewerWindow.
@@ -104,7 +105,7 @@ public class SourceViewerWindow extends JFrame {
 		findButton.addActionListener(e -> {
 			String find = jtfFilter.getText().toLowerCase();
 			textArea.requestFocusInWindow();
-			if (find != null && find.length() > 0) {
+			if (!Strings.isBlank(find)) {
 				Document document = textArea.getDocument();
 				int findLength = find.length();
 				try {

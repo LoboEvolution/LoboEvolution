@@ -73,6 +73,7 @@ import org.lobobrowser.http.ReadyState;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.util.Domains;
 import org.lobobrowser.util.SSLCertificate;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.WeakValueHashMap;
 import org.lobobrowser.util.io.EmptyReader;
@@ -547,7 +548,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 */
 	@Override
 	public Element getElementById(String elementId) {
-		if (elementId != null && elementId.length() > 0) {
+		if (!Strings.isBlank(elementId)) {
 			synchronized (this) {
 				return (Element) this.elementsById.get(elementId);
 			}

@@ -31,6 +31,7 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.util.Strings;
 
 /**
  * The Class InputUrlControl.
@@ -99,8 +100,8 @@ public class InputUrlControl extends BaseInputTextControl {
 	}
 
 	private boolean isUrl(String keyCode) {
-		if (keyCode != null && keyCode.length() > 0) {
-			Pattern pattern = Pattern.compile(strPattern != null && strPattern.length() > 0 ? strPattern : URL_PATTERN);
+		if (!Strings.isBlank(keyCode)) {
+			Pattern pattern = Pattern.compile(!Strings.isBlank(strPattern) ? strPattern : URL_PATTERN);
 			Matcher matcher = pattern.matcher(keyCode);
 			return matcher.matches();
 		} else {

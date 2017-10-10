@@ -2,6 +2,7 @@ package org.lobobrowser.html.style.setter;
 
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 public class FourCornersSetter implements SubPropertySetter {
@@ -35,7 +36,7 @@ public class FourCornersSetter implements SubPropertySetter {
 	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(this.property, newValue, important);
-		if (newValue != null && newValue.length() > 0) {
+		if (!Strings.isBlank(newValue)) {
 			String[] array = HtmlValues.splitCssValue(newValue);
 			int size = array.length;
 			if (size == 1) {

@@ -36,6 +36,7 @@ import java.util.Arrays;
 import org.lobobrowser.html.control.BaseControl;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -139,7 +140,7 @@ public class SVGStyle extends BaseControl{
 				g2d.setPaint(strokeColor);
 				g2d.draw(basicStroke.createStrokedShape(shape2d));
 			}
-		} else if (svgi.getClipPath() != null && svgi.getClipPath().length() > 0) {
+		} else if (!Strings.isBlank(svgi.getClipPath())) {
 			g2d.setClip(shape2d);
 			g2d.setPaint(Color.WHITE);
 			g2d.draw(shape2d);

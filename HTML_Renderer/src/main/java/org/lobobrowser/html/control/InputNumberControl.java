@@ -29,6 +29,7 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.util.Strings;
 
 /**
  * The Class InputNumberControl.
@@ -78,7 +79,7 @@ public class InputNumberControl extends BaseInputTextControl {
 				} else {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
-					if (min != null && min.length() > 0 && max != null && max.length() > 0) {
+					if (!Strings.isBlank(min) && !Strings.isBlank(max)) {
 						try {
 							int intText = new Integer(num.getText());
 							int intMin = new Integer(min);

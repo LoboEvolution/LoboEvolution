@@ -33,6 +33,7 @@ import javax.swing.text.JTextComponent;
 import org.lobobrowser.html.dombl.JTextFieldImpl;
 import org.lobobrowser.html.domimpl.DOMEventImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.util.Strings;
 
 
 /**
@@ -139,7 +140,7 @@ public class InputTextControl extends BaseInputTextControl {
 	}
 
 	private boolean match(String value, String strPattern) {
-		if (value != null && value.length() > 0 && strPattern != null && strPattern.length() > 0) {
+		if (!Strings.isBlank(value) && !Strings.isBlank(strPattern)) {
 			Pattern pattern = Pattern.compile(strPattern);
 			Matcher matcher = pattern.matcher(value);
 			return matcher.matches();

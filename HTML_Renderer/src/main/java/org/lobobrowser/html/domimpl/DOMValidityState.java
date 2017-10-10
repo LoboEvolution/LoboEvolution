@@ -23,6 +23,7 @@ package org.lobobrowser.html.domimpl;
 import java.util.regex.Pattern;
 
 import org.lobobrowser.html.dombl.InputContext;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.w3c.html.ValidityState;
 
 /**
@@ -87,7 +88,7 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getCustomError() {
-		return customerError != null && customerError.length() > 0;
+		return !Strings.isBlank(customerError);
 	}
 
 	@Override

@@ -27,6 +27,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 
 /**
@@ -72,7 +73,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgcolor = this.element.getAttribute(BGCOLOR);
-			if (bgcolor != null && bgcolor.length() > 0) {
+			if (!Strings.isBlank(bgcolor)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}

@@ -23,6 +23,7 @@ package org.lobobrowser.html.style.setter;
 import org.lobobrowser.html.renderstate.BackgroundRenderState;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
@@ -34,7 +35,7 @@ public class BackgroundSetter implements SubPropertySetter, CSSProperties {
 	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(BACKGROUND, newValue, important);
-		if (newValue != null && newValue.length() > 0) {
+		if (!Strings.isBlank(newValue)) {
 			String[] tokens = HtmlValues.splitCssValue(newValue);
 			boolean hasXPosition = false;
 			boolean hasYPosition = false;

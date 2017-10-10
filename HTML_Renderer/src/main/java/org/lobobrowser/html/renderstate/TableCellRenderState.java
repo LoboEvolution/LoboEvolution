@@ -30,6 +30,7 @@ import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.w3c.html.HTMLTableElement;
@@ -331,7 +332,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			String width = props == null ? null : props.getWidth();
 			if (width == null) {
 				width = element.getAttribute(WIDTH);
-				if (width != null && width.length() > 0 && !width.endsWith("%")) {
+				if (!Strings.isBlank(width) && !width.endsWith("%")) {
 					wsValue = WS_NORMAL;
 				}
 			} else {

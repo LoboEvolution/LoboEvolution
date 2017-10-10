@@ -31,6 +31,7 @@ import org.lobobrowser.html.renderstate.ColorRenderState;
 import org.lobobrowser.html.renderstate.CursorRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.TextDecorationRenderState;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.w3c.html.DOMTokenList;
@@ -138,7 +139,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
 			String href = this.getHref();
-			if (href != null && href.length() > 0) {
+			if (!Strings.isBlank(href)) {
 				try {
 					URL url = this.getFullURL(href);
 					return url == null ? null : url.toExternalForm();
@@ -158,7 +159,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
 			String href = this.getHref();
-			if (href != null && href.length() > 0) {
+			if (!Strings.isBlank(href)) {
 				String target = this.getTarget();
 				try {
 					URL url = this.getFullURL(href);

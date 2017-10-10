@@ -29,6 +29,7 @@ import javax.swing.BorderFactory;
 
 import org.jdatepicker.JDatePicker;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.WrapperLayout;
 
 /**
@@ -57,7 +58,7 @@ public class InputDatePickerControl extends BaseInputControl {
 		min = modelNode.getAttribute(MIN);
 		max = modelNode.getAttribute(MAX);
 
-		if (modelNode.getPattern() != null && modelNode.getPattern().length() > 0) {
+		if (!Strings.isBlank(modelNode.getPattern())) {
 			datePattern = modelNode.getPattern();
 		}
 
