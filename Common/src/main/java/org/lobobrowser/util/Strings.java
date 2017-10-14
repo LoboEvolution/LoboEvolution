@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * The Class Strings.
@@ -357,40 +358,6 @@ public class Strings {
 		return count;
 	}
 
-	// public static boolean isTrimmable(char ch) {
-	// switch(ch) {
-	// case ' ':
-	// case '\t':
-	// case '\r':
-	// case '\n':
-	// return true;
-	// }
-	// return false;
-	// }
-	//
-	// /**
-	// * Trims blanks, line breaks and tabs.
-	// * @param text
-	// * @return
-	// */
-	// public static String trim(String text) {
-	// int len = text.length();
-	// int startIdx;
-	// for(startIdx = 0; startIdx < len; startIdx++) {
-	// char ch = text.charAt(startIdx);
-	// if(!isTrimmable(ch)) {
-	// break;
-	// }
-	// }
-	// int endIdx;
-	// for(endIdx = len;--endIdx > startIdx; ) {
-	// char ch = text.charAt(endIdx);
-	// if(!isTrimmable(ch)) {
-	// break;
-	// }
-	// }
-	// return text.substring(startIdx, endIdx + 1);
-	// }
 	/**
 	 * Unquote.
 	 *
@@ -441,6 +408,16 @@ public class Strings {
 		}
 		return wordList.toArray(EMPTY_ARRAY);
 	}
+	
+	public static String[] splitUsingTokenizer(String subject, String delimiters) {
+		   StringTokenizer strTkn = new StringTokenizer(subject, delimiters);
+		   ArrayList<String> arrLis = new ArrayList<String>(subject.length());
+
+		   while(strTkn.hasMoreTokens())
+		      arrLis.add(strTkn.nextToken());
+
+		   return arrLis.toArray(new String[0]);
+		}
 
 	/**
 	 * Truncate.
