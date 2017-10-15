@@ -24,6 +24,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BorderInfo;
@@ -31,12 +33,15 @@ import org.lobobrowser.html.renderer.RBlockViewport;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.GUITasks;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.w3c.dom.css.CSS2Properties;
 
 public class BorderRenderState implements CSSValuesProperties {
+	
+	private static final Logger logger = LogManager.getLogger(BorderRenderState.class.getName());
 
 	/** The Constant DEFAULT_BORDER_WIDTH. */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
@@ -97,13 +102,78 @@ public class BorderRenderState implements CSSValuesProperties {
 	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
 
 		BorderInfo binfo = new BorderInfo();
+		ColorFactory cf = ColorFactory.getInstance();
+
+		if (!Strings.isBlank(properties.getBorderColor())) {
+
+			String[] borderColors = Strings.splitUsingTokenizer(properties.getBorderColor(), ")");
+
+			switch (borderColors.length) {
+			case 1:
+				binfo.setTopColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setRightColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setBottomColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setLeftColor(cf.getColor(borderColors[0] + ")"));
+				break;
+			case 2:
+				binfo.setTopColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setBottomColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setRightColor(cf.getColor(borderColors[1] + ")"));
+				binfo.setLeftColor(cf.getColor(borderColors[1] + ")"));
+				break;
+			case 3:
+				binfo.setTopColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setRightColor(cf.getColor(borderColors[1] + ")"));
+				binfo.setLeftColor(cf.getColor(borderColors[1] + ")"));
+				binfo.setBottomColor(cf.getColor(borderColors[2] + ")"));
+				break;
+			case 4:
+				binfo.setTopColor(cf.getColor(borderColors[0] + ")"));
+				binfo.setRightColor(cf.getColor(borderColors[1] + ")"));
+				binfo.setBottomColor(cf.getColor(borderColors[2] + ")"));
+				binfo.setLeftColor(cf.getColor(borderColors[3] + ")"));
+				break;
+			}
+		}
+
+		if (!Strings.isBlank(properties.getBorderStyle())) {
+
+			String[] borderStyles = Strings.splitUsingTokenizer(properties.getBorderStyle(), " ");
+
+			switch (borderStyles.length) {
+			case 1:
+				binfo.setTopStyle(getBorderStyle(borderStyles[0]));
+				binfo.setRightStyle(getBorderStyle(borderStyles[0]));
+				binfo.setBottomStyle(getBorderStyle(borderStyles[0]));
+				binfo.setLeftStyle(getBorderStyle(borderStyles[0]));
+				break;
+			case 2:
+				binfo.setTopStyle(getBorderStyle(borderStyles[0]));
+				binfo.setBottomStyle(getBorderStyle(borderStyles[0]));
+				binfo.setRightStyle(getBorderStyle(borderStyles[1]));
+				binfo.setLeftStyle(getBorderStyle(borderStyles[1]));
+				break;
+			case 3:
+				binfo.setTopStyle(getBorderStyle(borderStyles[0]));
+				binfo.setRightStyle(getBorderStyle(borderStyles[1]));
+				binfo.setLeftStyle(getBorderStyle(borderStyles[1]));
+				binfo.setBottomStyle(getBorderStyle(borderStyles[2]));
+				break;
+			case 4:
+				binfo.setTopStyle(getBorderStyle(borderStyles[0]));
+				binfo.setRightStyle(getBorderStyle(borderStyles[1]));
+				binfo.setBottomStyle(getBorderStyle(borderStyles[2]));
+				binfo.setLeftStyle(getBorderStyle(borderStyles[3]));
+				break;
+			}
+		}
 
 		if (INHERIT.equals(properties.getBorderTopStyle())) {
 			binfo.setTopStyle(renderState.getPreviousRenderState().getBorderInfo().getTopStyle());
 			binfo.setTopColor(renderState.getPreviousRenderState().getBorderInfo().getTopColor());
 		} else {
 			binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
-			binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), properties, binfo));
+			binfo.setTopColor(cf.getColor(properties.getBorderTopColor()));
 		}
 
 		if (INHERIT.equals(properties.getBorderBottomStyle())) {
@@ -111,15 +181,15 @@ public class BorderRenderState implements CSSValuesProperties {
 			binfo.setBottomColor(renderState.getPreviousRenderState().getBorderInfo().getBottomColor());
 		} else {
 			binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
-			binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), properties, binfo));
+			binfo.setBottomColor(cf.getColor(properties.getBorderBottomColor()));
 		}
-
+		
 		if (INHERIT.equals(properties.getBorderRightStyle())) {
 			binfo.setRightStyle(renderState.getPreviousRenderState().getBorderInfo().getRightStyle());
 			binfo.setRightColor(renderState.getPreviousRenderState().getBorderInfo().getRightColor());
 		} else {
 			binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
-			binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), properties, binfo));
+			binfo.setRightColor(cf.getColor(properties.getBorderRightColor()));
 		}
 
 		if (INHERIT.equals(properties.getBorderLeftStyle())) {
@@ -127,7 +197,7 @@ public class BorderRenderState implements CSSValuesProperties {
 			binfo.setLeftColor(renderState.getPreviousRenderState().getBorderInfo().getLeftColor());
 		} else {
 			binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
-			binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), properties, binfo));
+			binfo.setLeftColor(cf.getColor(properties.getBorderLeftColor()));
 		}
 
 		populateBorderInsets(binfo, properties, renderState);
@@ -357,37 +427,6 @@ public class BorderRenderState implements CSSValuesProperties {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Gets the border color.
-	 *
-	 * @param color
-	 *            the color
-	 * @param properties
-	 *            the properties
-	 * @param binfo
-	 *            the binfo
-	 * @return the border color
-	 */
-	private static Color getBorderColor(String color, CSS2Properties properties, BorderInfo binfo) {
-
-		ColorFactory cf = ColorFactory.getInstance();
-
-		if (color != null && properties.getBorderColor() == null && properties.getColor() == null) {
-			return cf.getColor(color);
-		}
-
-		if (color != null && properties.getColor() != null) {
-			return cf.getColor(properties.getColor());
-		}
-
-		if (color != null && properties.getBorderColor() != null) {
-			return cf.getColor(properties.getBorderColor());
-		}
-
-		return LAFSettings.getInstance().getColor();
-
 	}
 
 	/**

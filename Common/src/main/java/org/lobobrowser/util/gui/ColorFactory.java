@@ -27,8 +27,6 @@ import java.awt.Color;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.util.ColorCommon;
 import org.lobobrowser.util.Strings;
 
@@ -38,10 +36,7 @@ import org.lobobrowser.util.Strings;
  * @author J. H. S.
  */
 public class ColorFactory {
-	
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ColorFactory.class);
-	
+		
 	/** The instance. */
 	private static ColorFactory instance;
 	
@@ -127,7 +122,7 @@ public class ColorFactory {
 			return null;
 		}
 
-		String normalSpec = colorSpec.toLowerCase();
+		String normalSpec = colorSpec.toLowerCase().trim();
 		synchronized (this) {
 			Color color = colorMap.get(normalSpec);
 			if (color == null) {
@@ -186,7 +181,6 @@ public class ColorFactory {
 	 */
 	private Color getRGB(Color c, String normalSpec) {
 		Color color = null;
-		logger.error("normalSpec: " + normalSpec);
 		if (c == null && normalSpec.startsWith(RGB_START)) {
 			int endIdx = normalSpec.lastIndexOf(')');
 			String commaValues = "";
@@ -196,8 +190,6 @@ public class ColorFactory {
 			} else {
 				commaValues = normalSpec.substring(RGB_START.length(), endIdx);
 			}
-			
-			logger.error("commaValues: " + commaValues);
 			
 			String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
 			int red = Integer.parseInt(strs[0].trim());
@@ -238,7 +230,6 @@ public class ColorFactory {
 
 	private Color getHSLA(Color c, String normalSpec) {
 		Color color = null;
-		logger.error("normalSpec: " + normalSpec);
 		if (c == null && normalSpec.startsWith(HSLA_START)) {
 			int endIdx = normalSpec.lastIndexOf(')');
 			String commaValues = "";
@@ -249,8 +240,6 @@ public class ColorFactory {
 				commaValues = normalSpec.substring(HSLA_START.length(), endIdx);
 			}
 			
-			logger.error("commaValues: " + commaValues);
-
 			String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
 
 			float h = parseValue(strs[0].trim(), 360);
