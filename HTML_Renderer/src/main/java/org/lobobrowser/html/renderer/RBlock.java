@@ -1057,11 +1057,12 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
-		RBlockViewport bodyLayout = this.bodyLayout;
-		if (!DOMEventImpl.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
-			return false;
+		BoundableRenderable br = this.getRenderable(x, y);
+		if (br == null) {
+			return DOMEventImpl.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y);
+		} else {
+			return br.onMouseClick(event, x - br.getX(), y - br.getY());
 		}
-		return true;
 	}
 
 	/*
@@ -1073,12 +1074,12 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
-		RBlockViewport bodyLayout = this.bodyLayout;
-
-		if (!DOMEventImpl.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y) || this.backgroundColor != null) {
-			return false;
+		BoundableRenderable br = this.getRenderable(x, y);
+		if (br == null) {
+			return DOMEventImpl.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y);
+		} else {
+			return br.onDoubleClick(event, x - br.getX(), y - br.getY());
 		}
-		return true;
 	}
 
 	/*
@@ -1100,25 +1101,6 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 		} else {
 			return true;
 		}
-	}
-
-	/**
-	 * Gets the armed renderable.
-	 *
-	 * @return the armed renderable
-	 */
-	public BoundableRenderable getArmedRenderable() {
-		return armedRenderable;
-	}
-
-	/**
-	 * Sets the armed renderable.
-	 *
-	 * @param armedRenderable
-	 *            the new armed renderable
-	 */
-	public void setArmedRenderable(BoundableRenderable armedRenderable) {
-		this.armedRenderable = armedRenderable;
 	}
 
 	/*
@@ -1152,7 +1134,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	}
 
 	@Override
-	public boolean onKeyPressed(KeyEvent event) {
+	public boolean onKeyPressed(KeyEvent event) { //TODO
 		return !DOMEventImpl.getInstance().onKeyPress(this.modelNode, event);
 	}
 
@@ -1539,6 +1521,25 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	public void setDefaultOverflowY(int defaultOverflowY) {
 		this.defaultOverflowY = defaultOverflowY;
+	}
+	
+	/**
+	 * Gets the armed renderable.
+	 *
+	 * @return the armed renderable
+	 */
+	public BoundableRenderable getArmedRenderable() {
+		return armedRenderable;
+	}
+
+	/**
+	 * Sets the armed renderable.
+	 *
+	 * @param armedRenderable
+	 *            the new armed renderable
+	 */
+	public void setArmedRenderable(BoundableRenderable armedRenderable) {
+		this.armedRenderable = armedRenderable;
 	}
 
 }

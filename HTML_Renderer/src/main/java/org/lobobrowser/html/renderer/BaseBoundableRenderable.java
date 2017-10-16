@@ -709,10 +709,6 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 					if (cursorOpt.isPresent()) {
 						rcontext.setCursor(cursorOpt);
 						break;
-					} else {
-						if (node.getParentModelNode() == limit && (renderable instanceof RWord || renderable instanceof RBlank)) {
-							rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
-						}
 					}
 				}
 				node = node.getParentModelNode();
