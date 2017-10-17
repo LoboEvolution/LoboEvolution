@@ -82,8 +82,15 @@ public interface CSSValuesProperties {
 
 	/** The Constant DOUBLE. */
 	String DOUBLE = "double";
-
+	
+	/** The Constant E_RESIZE. */
+	String E_RESIZE = "e-resize";
+	
+	/** The Constant FIXED. */
 	String FIXED = "fixed";
+	
+	/** The Constant GRAB. */
+	String GRAB = "grab";
 
 	/** The Constant GROOVE. */
 	String GROOVE = "groove";
@@ -165,6 +172,15 @@ public interface CSSValuesProperties {
 
 	/** The Constant NOWRAP. */
 	String NOWRAP = "nowrap";
+	
+	/** The Constant N_RESIZE. */
+	String N_RESIZE = "n-resize";
+	
+	/** The Constant NE_RESIZE. */
+	String NE_RESIZE = "ne-resize";
+	
+	/** The Constant NW_RESIZE. */
+	String NW_RESIZE = "nw-resize";	
 
 	/** The Constant OBLIQUE. */
 	String OBLIQUE = "oblique";
@@ -215,12 +231,21 @@ public interface CSSValuesProperties {
 
 	/** The Constant RIDGE. */
 	String RIDGE = "ridge";
-
-	/** The Constant SCROLL. */
-	String SCROLL = "scroll";
-
+	
 	/** The Constant RIGHT. */
 	String RIGHT = "right";
+	
+	/** The Constant S_RESIZE. */
+	String S_RESIZE = "s-resize";
+	
+	/** The Constant SE_RESIZE. */
+	String SE_RESIZE = "se-resize";
+	
+	/** The Constant SW_RESIZE. */
+	String SW_RESIZE = "sw-resize";
+
+	/** The Constant SCROLL. */
+	String SCROLL = "scroll";	
 
 	/** The Constant SMALL. */
 	String SMALL = "small";
@@ -256,7 +281,7 @@ public interface CSSValuesProperties {
 	String TABLE_CELL = "table-cell";
 
 	/** The Constant TEXT. */
-	String TEXT = "text";
+	String TEXT_CSS = "text";
 
 	/** The Constant TOP. */
 	String TOP = "top";
@@ -273,7 +298,12 @@ public interface CSSValuesProperties {
 	/** The Constant XX_LARGE. */
 	String XX_LARGE = "xx-large";
 
+	/** The Constant WAIT. */
 	String WAIT = "wait";
+	
+	/** The Constant W_RESIZE. */
+	String W_RESIZE = "w-resize";
+		
 	/** The Constant VISIBLE. */
 	String VISIBLE = "visible";
 }

@@ -1338,20 +1338,50 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				String cursorTL = cursor.toLowerCase();
 
 				switch (cursorTL) {
-				case DEFAULT:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					break;
-				case POINTER:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				case AUTO:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 					break;
 				case CROSSHAIR:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 					break;
+				case DEFAULT:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+					break;
+				case E_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+					break;
+				case GRAB:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					break;
 				case MOVE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
 					break;
-				case HtmlAttributeProperties.TEXT:
+				case N_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+					break;
+				case NE_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NE_RESIZE_CURSOR));
+					break;
+				case NW_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
+					break;	
+				case POINTER:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+					break;
+				case S_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.S_RESIZE_CURSOR));
+					break;
+				case SE_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SE_RESIZE_CURSOR));
+					break;
+				case SW_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
+					break;
+				case TEXT_CSS:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+					break;
+				case W_RESIZE:
+					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
 					break;
 				case WAIT:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
