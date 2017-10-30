@@ -199,6 +199,11 @@ public abstract class RenderStateDelegator implements RenderState {
 	public int getFloat() {
 		return this.delegate.getFloat();
 	}
+	
+	@Override
+	public int getClear() {
+		return this.delegate.getClear();
+	}
 
 	@Override
 	public int getOverflowX() {

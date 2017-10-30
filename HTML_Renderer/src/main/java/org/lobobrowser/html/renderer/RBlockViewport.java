@@ -650,6 +650,13 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the renderable
 	 */
 	public final void positionRBlock(HTMLElementImpl markupElement, RBlock renderable) {
+		
+		RenderState rs = renderable.modelNode.getRenderState();
+		int clear = rs.getClear();
+		if (clear != LineBreak.NONE) {
+			addLineBreak(renderable.modelNode, clear);
+		}
+		
 		if (!this.addElsewhereIfPositioned(renderable, markupElement, false, true, false)) {
 			int availContentHeight = this.availContentHeight;
 			RLine line = this.currentLine;

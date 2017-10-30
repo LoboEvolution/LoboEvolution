@@ -43,6 +43,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BackgroundInfo;
 import org.lobobrowser.html.info.BorderInfo;
 import org.lobobrowser.html.info.WordInfo;
+import org.lobobrowser.html.renderer.LineBreak;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.FontValues;
@@ -54,6 +55,8 @@ import org.lobobrowser.util.gui.FontFactory;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.css.CSS2Properties;
+
+import com.steadystate.css.util.CSSProperties;
 
 /**
  * The Class StyleSheetRenderState.
@@ -210,6 +213,37 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	protected Color getDefaultColor() {
 		return LAFSettings.getInstance().getColor();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.html.renderstate.RenderState#getClear()
+	 */
+	@Override
+	public int getClear() {
+		AbstractCSS2Properties props = this.getCssProperties();
+		int clear = 0;
+		if (props == null || (props!=null && props.getClear() == null)) {
+			clear = LineBreak.NONE;
+		} else {
+			String clearStr = props.getClear();
+			switch (clearStr) {
+			case "both":
+				clear = LineBreak.ALL;
+				break;
+			case "left":
+				clear = LineBreak.LEFT;
+				break;
+			case "right":
+				clear = LineBreak.RIGHT;
+				break;
+			default:
+				clear = LineBreak.NONE;
+				break;
+			}
+		}
+		return  clear;
 	}
 
 	/*

@@ -160,6 +160,14 @@ public interface RenderState {
 	 * @return the float
 	 */
 	int getFloat();
+	
+	
+	/**
+	 * Gets the clear.
+	 *
+	 * @return the clear
+	 */
+	int getClear();
 
 	/**
 	 * Gets the visibility.
