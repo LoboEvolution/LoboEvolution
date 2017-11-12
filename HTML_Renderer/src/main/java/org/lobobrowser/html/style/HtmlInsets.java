@@ -21,11 +21,14 @@
 package org.lobobrowser.html.style;
 
 import java.awt.Insets;
+import java.util.StringTokenizer;
+
+import org.lobobrowser.html.renderstate.RenderState;
 
 /**
  * The Class HtmlInsets.
  */
-public class HtmlInsets {
+public class HtmlInsets implements CSSValuesProperties {
 
 	/** The Constant TYPE_UNDEFINED. */
 	public static final int TYPE_UNDEFINED = 0;
@@ -45,6 +48,285 @@ public class HtmlInsets {
 	/* Types assumed to be initialized as UNDEFINED */
 	/** The right type. */
 	public int topType, bottomType, leftType, rightType;
+	
+	/**
+	 * Update top inset.
+	 *
+	 * @param insets
+	 *            the insets
+	 * @param sizeText
+	 *            the size text
+	 * @param renderState
+	 *            the render state
+	 * @return the html insets
+	 */
+	public static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			sizeText = "2px";
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if (AUTO.equalsIgnoreCase(sizeText)) {
+			insets.topType = HtmlInsets.TYPE_AUTO;
+
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.top = renderState.getPreviousRenderState().getMarginInsets().getTop();
+				insets.topType = renderState.getPreviousRenderState().getMarginInsets().getTopType();
+			}
+
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.topType = HtmlInsets.TYPE_PIXELS;
+			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.topType = HtmlInsets.TYPE_PIXELS;
+			insets.top = HtmlValues.getPixelSize("3px", renderState, 0);
+
+		} else if (sizeText.endsWith("%")) {
+			insets.topType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.top = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (NumberFormatException nfe) {
+				insets.top = 0;
+			}
+		} else {
+			insets.topType = HtmlInsets.TYPE_PIXELS;
+			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	/**
+	 * Update left inset.
+	 *
+	 * @param insets
+	 *            the insets
+	 * @param sizeText
+	 *            the size text
+	 * @param renderState
+	 *            the render state
+	 * @return the html insets
+	 */
+	public static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			sizeText = "2px";
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if (AUTO.equalsIgnoreCase(sizeText)) {
+			insets.leftType = HtmlInsets.TYPE_AUTO;
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.left = renderState.getPreviousRenderState().getMarginInsets().getLeft();
+				insets.leftType = renderState.getPreviousRenderState().getMarginInsets().getLeftType();
+			}
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.leftType = HtmlInsets.TYPE_PIXELS;
+			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.leftType = HtmlInsets.TYPE_PIXELS;
+			insets.left = HtmlValues.getPixelSize("3px", renderState, 0);
+
+		} else if (sizeText.endsWith("%")) {
+			insets.leftType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.left = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (NumberFormatException nfe) {
+				insets.left = 0;
+			}
+		} else {
+			insets.leftType = HtmlInsets.TYPE_PIXELS;
+			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	/**
+	 * Update bottom inset.
+	 *
+	 * @param insets
+	 *            the insets
+	 * @param sizeText
+	 *            the size text
+	 * @param renderState
+	 *            the render state
+	 * @return the html insets
+	 */
+	public static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			sizeText = "2px";
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if (AUTO.equalsIgnoreCase(sizeText)) {
+			insets.bottomType = HtmlInsets.TYPE_AUTO;
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.bottom = renderState.getPreviousRenderState().getMarginInsets().getBottom();
+				insets.bottomType = renderState.getPreviousRenderState().getMarginInsets().getBottomType();
+			}
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.bottomType = HtmlInsets.TYPE_PIXELS;
+			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.bottomType = HtmlInsets.TYPE_PIXELS;
+			insets.bottom = HtmlValues.getPixelSize("3px", renderState, 0);
+
+		} else if (sizeText.endsWith("%")) {
+			insets.bottomType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.bottom = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (NumberFormatException nfe) {
+				insets.bottom = 0;
+			}
+		} else {
+			insets.bottomType = HtmlInsets.TYPE_PIXELS;
+			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	/**
+	 * Update right inset.
+	 *
+	 * @param insets
+	 *            the insets
+	 * @param sizeText
+	 *            the size text
+	 * @param renderState
+	 *            the render state
+	 * @return the html insets
+	 */
+	public static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			sizeText = "2px";
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if (AUTO.equalsIgnoreCase(sizeText)) {
+			insets.rightType = HtmlInsets.TYPE_AUTO;
+		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
+			if (renderState != null && renderState.getPreviousRenderState() != null
+					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
+				insets.right = renderState.getPreviousRenderState().getMarginInsets().getRight();
+				insets.rightType = renderState.getPreviousRenderState().getMarginInsets().getRightType();
+			}
+		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
+			insets.rightType = HtmlInsets.TYPE_PIXELS;
+			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
+
+		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
+			insets.rightType = HtmlInsets.TYPE_PIXELS;
+			insets.right = HtmlValues.getPixelSize("3px", renderState, 0);
+
+		} else if (sizeText.endsWith("%")) {
+			insets.rightType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.right = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (NumberFormatException nfe) {
+				insets.right = 0;
+			}
+		} else {
+			insets.rightType = HtmlInsets.TYPE_PIXELS;
+			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	/**
+	 * Gets the insets.
+	 *
+	 * @param insetsSpec
+	 *            the insets spec
+	 * @param renderState
+	 *            the render state
+	 * @param negativeOK
+	 *            the negative ok
+	 * @return the insets
+	 */
+	public static Insets getInsets(String insetsSpec, RenderState renderState, boolean negativeOK) {
+		int[] insetsArray = new int[4];
+		int size = 0;
+		StringTokenizer tok = new StringTokenizer(insetsSpec);
+		if (tok.hasMoreTokens()) {
+			String token = tok.nextToken();
+			insetsArray[0] = HtmlValues.getPixelSize(token, renderState, 0);
+			if (negativeOK || insetsArray[0] >= 0) {
+				size = 1;
+				if (tok.hasMoreTokens()) {
+					token = tok.nextToken();
+					insetsArray[1] = HtmlValues.getPixelSize(token, renderState, 0);
+					if (negativeOK || insetsArray[1] >= 0) {
+						size = 2;
+						if (tok.hasMoreTokens()) {
+							token = tok.nextToken();
+							insetsArray[2] = HtmlValues.getPixelSize(token, renderState, 0);
+							if (negativeOK || insetsArray[2] >= 0) {
+								size = 3;
+								if (tok.hasMoreTokens()) {
+									token = tok.nextToken();
+									insetsArray[3] = HtmlValues.getPixelSize(token, renderState, 0);
+									size = 4;
+									if (negativeOK || insetsArray[3] >= 0) {
+										// nop
+									} else {
+										insetsArray[3] = 0;
+									}
+								}
+							} else {
+								size = 4;
+								insetsArray[2] = 0;
+							}
+						}
+					} else {
+						size = 4;
+						insetsArray[1] = 0;
+					}
+				}
+			} else {
+				size = 1;
+				insetsArray[0] = 0;
+			}
+		}
+		if (size == 4) {
+			return new Insets(insetsArray[0], insetsArray[3], insetsArray[2], insetsArray[1]);
+		} else if (size == 1) {
+			int val = insetsArray[0];
+			return new Insets(val, val, val, val);
+		} else if (size == 2) {
+			return new Insets(insetsArray[0], insetsArray[1], insetsArray[0], insetsArray[1]);
+		} else if (size == 3) {
+			return new Insets(insetsArray[0], insetsArray[1], insetsArray[2], insetsArray[1]);
+		} else {
+			return null;
+		}
+	}
 
 	/**
 	 * Gets the right.

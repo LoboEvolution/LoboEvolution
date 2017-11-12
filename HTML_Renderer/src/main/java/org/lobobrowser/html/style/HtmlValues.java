@@ -23,20 +23,18 @@ package org.lobobrowser.html.style;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.util.Urls;
 import org.lobobrowser.util.gui.ColorFactory;
-import org.w3c.dom.css.CSS2Properties;
+import org.lobobrowser.util.gui.LAFSettings;
 
 /**
  * The Class HtmlValues.
@@ -45,388 +43,6 @@ public class HtmlValues implements CSSValuesProperties {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(HtmlValues.class.getName());
-
-	/**
-	 * Gets the margin insets.
-	 *
-	 * @param cssProperties
-	 *            the css properties
-	 * @param renderState
-	 *            the render state
-	 * @return the margin insets
-	 */
-	public static HtmlInsets getMarginInsets(CSS2Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		String marginText = cssProperties.getMargin();
-		if (marginText != null) {
-			String[] mg = marginText.split(" ");
-			int sizeMargin = mg.length;
-			switch (sizeMargin) {
-			case 4:
-				insets = updateTopInset(insets, mg[0], renderState); 
-				insets = updateRightInset(insets, mg[1], renderState);
-				insets = updateBottomInset(insets, mg[2], renderState);
-				insets = updateLeftInset(insets, mg[3], renderState);
-				break;
-			case 3:
-				insets = updateTopInset(insets, mg[0], renderState);
-				insets = updateRightInset(insets, mg[1], renderState);
-				insets = updateBottomInset(insets, mg[2], renderState);
-				break;
-			case 2:
-				insets = updateTopInset(insets, mg[0], renderState);
-				insets = updateRightInset(insets, mg[1], renderState);
-				break;
-			case 1:
-				insets = updateTopInset(insets, mg[0], renderState);
-				insets = updateRightInset(insets, mg[0], renderState);
-				insets = updateBottomInset(insets, mg[0], renderState);
-				insets = updateLeftInset(insets, mg[0], renderState);
-				break;
-			}
-		} else {
-
-			String topText = cssProperties.getMarginTop();
-			insets = updateTopInset(insets, topText, renderState);
-			String leftText = cssProperties.getMarginLeft();
-			insets = updateLeftInset(insets, leftText, renderState);
-			String bottomText = cssProperties.getMarginBottom();
-			insets = updateBottomInset(insets, bottomText, renderState);
-			String rightText = cssProperties.getMarginRight();
-			insets = updateRightInset(insets, rightText, renderState);
-		}
-		return insets;
-	}
-
-	/**
-	 * Gets the padding insets.
-	 *
-	 * @param cssProperties
-	 *            the css properties
-	 * @param renderState
-	 *            the render state
-	 * @return the padding insets
-	 */
-	public static HtmlInsets getPaddingInsets(CSS2Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		String paddingText = cssProperties.getPadding();
-		if (paddingText != null) {
-			String[] pd = paddingText.split(" ");
-			int sizePadding = pd.length;
-			switch (sizePadding) {
-			case 4:
-				insets = updateTopInset(insets, pd[0], renderState);
-				insets = updateRightInset(insets, pd[1], renderState);
-				insets = updateBottomInset(insets, pd[2], renderState);
-				insets = updateLeftInset(insets, pd[3], renderState);
-				break;
-			case 3:
-				insets = updateTopInset(insets, pd[0], renderState);
-				insets = updateRightInset(insets, pd[1], renderState);
-				insets = updateBottomInset(insets, pd[2], renderState);
-				break;
-			case 2:
-				insets = updateTopInset(insets, pd[0], renderState);
-				insets = updateRightInset(insets, pd[1], renderState);
-				break;
-			case 1:
-				insets = updateTopInset(insets, pd[0], renderState);
-				insets = updateRightInset(insets, pd[0], renderState);
-				insets = updateBottomInset(insets, pd[0], renderState);
-				insets = updateLeftInset(insets, pd[0], renderState);
-				break;
-			}
-		} else {
-			String topText = cssProperties.getPaddingTop();
-			insets = updateTopInset(insets, topText, renderState);
-			String leftText = cssProperties.getPaddingLeft();
-			insets = updateLeftInset(insets, leftText, renderState);
-			String bottomText = cssProperties.getPaddingBottom();
-			insets = updateBottomInset(insets, bottomText, renderState);
-			String rightText = cssProperties.getPaddingRight();
-			insets = updateRightInset(insets, rightText, renderState);
-		}
-		return insets;
-	}
-
-	/**
-	 * Update top inset.
-	 *
-	 * @param insets
-	 *            the insets
-	 * @param sizeText
-	 *            the size text
-	 * @param renderState
-	 *            the render state
-	 * @return the html insets
-	 */
-	public static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			sizeText = "2px";
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if (AUTO.equalsIgnoreCase(sizeText)) {
-			insets.topType = HtmlInsets.TYPE_AUTO;
-
-		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && renderState.getPreviousRenderState() != null
-					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
-				insets.top = renderState.getPreviousRenderState().getMarginInsets().getTop();
-				insets.topType = renderState.getPreviousRenderState().getMarginInsets().getTopType();
-			}
-
-		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
-			insets.topType = HtmlInsets.TYPE_PIXELS;
-			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
-
-		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
-			insets.topType = HtmlInsets.TYPE_PIXELS;
-			insets.top = HtmlValues.getPixelSize("3px", renderState, 0);
-
-		} else if (sizeText.endsWith("%")) {
-			insets.topType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.top = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (NumberFormatException nfe) {
-				insets.top = 0;
-			}
-		} else {
-			insets.topType = HtmlInsets.TYPE_PIXELS;
-			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	/**
-	 * Update left inset.
-	 *
-	 * @param insets
-	 *            the insets
-	 * @param sizeText
-	 *            the size text
-	 * @param renderState
-	 *            the render state
-	 * @return the html insets
-	 */
-	public static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			sizeText = "2px";
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if (AUTO.equalsIgnoreCase(sizeText)) {
-			insets.leftType = HtmlInsets.TYPE_AUTO;
-		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && renderState.getPreviousRenderState() != null
-					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
-				insets.left = renderState.getPreviousRenderState().getMarginInsets().getLeft();
-				insets.leftType = renderState.getPreviousRenderState().getMarginInsets().getLeftType();
-			}
-		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
-			insets.leftType = HtmlInsets.TYPE_PIXELS;
-			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
-
-		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
-			insets.leftType = HtmlInsets.TYPE_PIXELS;
-			insets.left = HtmlValues.getPixelSize("3px", renderState, 0);
-
-		} else if (sizeText.endsWith("%")) {
-			insets.leftType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.left = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (NumberFormatException nfe) {
-				insets.left = 0;
-			}
-		} else {
-			insets.leftType = HtmlInsets.TYPE_PIXELS;
-			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	/**
-	 * Update bottom inset.
-	 *
-	 * @param insets
-	 *            the insets
-	 * @param sizeText
-	 *            the size text
-	 * @param renderState
-	 *            the render state
-	 * @return the html insets
-	 */
-	public static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			sizeText = "2px";
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if (AUTO.equalsIgnoreCase(sizeText)) {
-			insets.bottomType = HtmlInsets.TYPE_AUTO;
-		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && renderState.getPreviousRenderState() != null
-					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
-				insets.bottom = renderState.getPreviousRenderState().getMarginInsets().getBottom();
-				insets.bottomType = renderState.getPreviousRenderState().getMarginInsets().getBottomType();
-			}
-		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
-			insets.bottomType = HtmlInsets.TYPE_PIXELS;
-			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
-
-		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
-			insets.bottomType = HtmlInsets.TYPE_PIXELS;
-			insets.bottom = HtmlValues.getPixelSize("3px", renderState, 0);
-
-		} else if (sizeText.endsWith("%")) {
-			insets.bottomType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.bottom = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (NumberFormatException nfe) {
-				insets.bottom = 0;
-			}
-		} else {
-			insets.bottomType = HtmlInsets.TYPE_PIXELS;
-			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	/**
-	 * Update right inset.
-	 *
-	 * @param insets
-	 *            the insets
-	 * @param sizeText
-	 *            the size text
-	 * @param renderState
-	 *            the render state
-	 * @return the html insets
-	 */
-	public static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			sizeText = "2px";
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if (AUTO.equalsIgnoreCase(sizeText)) {
-			insets.rightType = HtmlInsets.TYPE_AUTO;
-		} else if (INHERIT.equalsIgnoreCase(sizeText)) {
-			if (renderState != null && renderState.getPreviousRenderState() != null
-					&& renderState.getPreviousRenderState().getMarginInsets() != null) {
-				insets.right = renderState.getPreviousRenderState().getMarginInsets().getRight();
-				insets.rightType = renderState.getPreviousRenderState().getMarginInsets().getRightType();
-			}
-		} else if (INITIAL.equalsIgnoreCase(sizeText)) {
-			insets.rightType = HtmlInsets.TYPE_PIXELS;
-			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
-
-		} else if (MEDIUM.equalsIgnoreCase(sizeText)) {
-			insets.rightType = HtmlInsets.TYPE_PIXELS;
-			insets.right = HtmlValues.getPixelSize("3px", renderState, 0);
-
-		} else if (sizeText.endsWith("%")) {
-			insets.rightType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.right = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (NumberFormatException nfe) {
-				insets.right = 0;
-			}
-		} else {
-			insets.rightType = HtmlInsets.TYPE_PIXELS;
-			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	/**
-	 * Gets the insets.
-	 *
-	 * @param insetsSpec
-	 *            the insets spec
-	 * @param renderState
-	 *            the render state
-	 * @param negativeOK
-	 *            the negative ok
-	 * @return the insets
-	 */
-	public static Insets getInsets(String insetsSpec, RenderState renderState, boolean negativeOK) {
-		int[] insetsArray = new int[4];
-		int size = 0;
-		StringTokenizer tok = new StringTokenizer(insetsSpec);
-		if (tok.hasMoreTokens()) {
-			String token = tok.nextToken();
-			insetsArray[0] = getPixelSize(token, renderState, 0);
-			if (negativeOK || insetsArray[0] >= 0) {
-				size = 1;
-				if (tok.hasMoreTokens()) {
-					token = tok.nextToken();
-					insetsArray[1] = getPixelSize(token, renderState, 0);
-					if (negativeOK || insetsArray[1] >= 0) {
-						size = 2;
-						if (tok.hasMoreTokens()) {
-							token = tok.nextToken();
-							insetsArray[2] = getPixelSize(token, renderState, 0);
-							if (negativeOK || insetsArray[2] >= 0) {
-								size = 3;
-								if (tok.hasMoreTokens()) {
-									token = tok.nextToken();
-									insetsArray[3] = getPixelSize(token, renderState, 0);
-									size = 4;
-									if (negativeOK || insetsArray[3] >= 0) {
-										// nop
-									} else {
-										insetsArray[3] = 0;
-									}
-								}
-							} else {
-								size = 4;
-								insetsArray[2] = 0;
-							}
-						}
-					} else {
-						size = 4;
-						insetsArray[1] = 0;
-					}
-				}
-			} else {
-				size = 1;
-				insetsArray[0] = 0;
-			}
-		}
-		if (size == 4) {
-			return new Insets(insetsArray[0], insetsArray[3], insetsArray[2], insetsArray[1]);
-		} else if (size == 1) {
-			int val = insetsArray[0];
-			return new Insets(val, val, val, val);
-		} else if (size == 2) {
-			return new Insets(insetsArray[0], insetsArray[1], insetsArray[0], insetsArray[1]);
-		} else if (size == 3) {
-			return new Insets(insetsArray[0], insetsArray[1], insetsArray[2], insetsArray[1]);
-		} else {
-			return null;
-		}
-	}
 
 	/**
 	 * Gets the pixel size.
@@ -480,8 +96,14 @@ public class HtmlValues implements CSSValuesProperties {
 			} catch (NumberFormatException nfe) {
 				return errorValue;
 			}
-		} else if (lcSpec.endsWith("em") && renderState != null) {
-			Font f = renderState.getFont();
+		} else if (lcSpec.endsWith("em")) {
+			float fontSize = LAFSettings.getInstance().getFontSize();
+			
+			if(renderState != null) {
+				Font f = renderState.getFont();
+				fontSize = f.getSize();
+			}
+						
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
 			double val;
 			try {
@@ -489,11 +111,8 @@ public class HtmlValues implements CSSValuesProperties {
 			} catch (NumberFormatException nfe) {
 				return errorValue;
 			}
-			// Get fontSize in 1/72 of an inch.
-			int fontSize = f.getSize();
+			
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
-			// The factor below should normally be 72, but font sizes
-			// are calculated differently in HTML.
 			double pixelSize = fontSize * dpi / 96;
 			return (int) Math.round(pixelSize * val);
 		} else if (lcSpec.endsWith("pt")) {
@@ -518,7 +137,7 @@ public class HtmlValues implements CSSValuesProperties {
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			double inches = val / 6;
 			return (int) Math.round(dpi * inches);
-		} else if (lcSpec.endsWith("em")) {
+		} else if (lcSpec.endsWith("cm")) {
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
 			double val;
 			try {
@@ -526,7 +145,7 @@ public class HtmlValues implements CSSValuesProperties {
 			} catch (NumberFormatException nfe) {
 				return errorValue;
 			}
-			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
+			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();		
 			double inches = val / 2.54;
 			return (int) Math.round(dpi * inches);
 		} else if (lcSpec.endsWith("mm")) {
@@ -541,7 +160,6 @@ public class HtmlValues implements CSSValuesProperties {
 			double inches = val / 25.4;
 			return (int) Math.round(dpi * inches);
 		} else if (lcSpec.endsWith("ex") && renderState != null) {
-			// Factor below is to try to match size in other browsers.
 			double xHeight = renderState.getFontMetrics().getAscent() * 0.47;
 			String valText = lcSpec.substring(0, lcSpec.length() - 2);
 			double val;
@@ -551,6 +169,16 @@ public class HtmlValues implements CSSValuesProperties {
 				return errorValue;
 			}
 			return (int) Math.round(xHeight * val);
+		} else if (lcSpec.endsWith("in")) {
+			String valText = lcSpec.substring(0, lcSpec.length() - 2);
+			double val;
+			try {
+				val = Double.parseDouble(valText);
+			} catch (NumberFormatException nfe) {
+				return errorValue;
+			}
+			
+			return (int) Math.round(val * 96);
 		} else {
 			String pxText = lcSpec;
 			try {

@@ -51,14 +51,14 @@ public class ImageRenderState extends StyleSheetRenderState {
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
-		if (!INVALID_INSETS.equals(mi)) {
+		if (!MarginRenderState.INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = HtmlValues.getMarginInsets(props, this);
+			mi = MarginRenderState.getMarginInsets(props, this);
 		}
 		if (mi == null) {
 			boolean createNew = false;

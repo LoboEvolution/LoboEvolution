@@ -56,8 +56,6 @@ import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.w3c.dom.css.CSS2Properties;
 
-import com.steadystate.css.util.CSSProperties;
-
 /**
  * The Class StyleSheetRenderState.
  *
@@ -74,9 +72,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	/** The Constant DEFAULT_FONT. */
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(LAFSettings.getInstance().getFont(), null, null, null,
 			LAFSettings.getInstance().getFontSize(), null, null, 0, false, 0);
-
-	/** The Constant INVALID_INSETS. */
-	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
 
 	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
@@ -98,13 +93,13 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 
 	/** The border info. */
 	protected BorderInfo borderInfo = BorderRenderState.INVALID_BORDER_INFO;
-
+	
 	/** The margin insets. */
-	protected HtmlInsets marginInsets = INVALID_INSETS;
-
+	protected HtmlInsets marginInsets = MarginRenderState.INVALID_INSETS;
+	
 	/** The padding insets. */
-	protected HtmlInsets paddingInsets = INVALID_INSETS;
-
+	protected HtmlInsets paddingInsets = PaddingRenderState.INVALID_INSETS;
+	
 	/** The i white space. */
 	protected Integer iWhiteSpace;
 
@@ -369,8 +364,8 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		this.iDisplay = null;
 		this.iTextIndentText = null;
 		this.iWhiteSpace = null;
-		this.marginInsets = INVALID_INSETS;
-		this.paddingInsets = INVALID_INSETS;
+		this.marginInsets = MarginRenderState.INVALID_INSETS;
+		this.paddingInsets = PaddingRenderState.INVALID_INSETS;
 		this.overflowX = -1;
 		this.overflowY = -1;
 		this.borderInfo = BorderRenderState.INVALID_BORDER_INFO;
@@ -1029,39 +1024,41 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
-		if (!INVALID_INSETS.equals(mi)) {
+		if (!MarginRenderState.INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
 		AbstractCSS2Properties props = this.getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = HtmlValues.getMarginInsets(props, this);
+			mi = MarginRenderState.getMarginInsets(props, this);
 		}
 		this.marginInsets = mi;
 		return mi;
 	}
+	
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.lobobrowser.html.renderstate.RenderState#getPaddingInsets()
+     */
+    @Override
+    public HtmlInsets getPaddingInsets() {
+        HtmlInsets mi = this.paddingInsets;
+        if (!PaddingRenderState.INVALID_INSETS.equals(mi)) {
+            return mi;
+        }
+        AbstractCSS2Properties props = this.getCssProperties();
+        if (props == null) {
+            mi = null;
+        } else {
+            mi = PaddingRenderState.getPaddingInsets(props, this);
+            this.paddingInsets = mi;
+        }
+        return mi;
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.html.renderstate.RenderState#getPaddingInsets()
-	 */
-	@Override
-	public HtmlInsets getPaddingInsets() {
-		HtmlInsets mi = this.paddingInsets;
-		if (!INVALID_INSETS.equals(mi)) {
-			return mi;
-		}
-		AbstractCSS2Properties props = this.getCssProperties();
-		if (props == null) {
-			mi = null;
-		} else {
-			mi = HtmlValues.getPaddingInsets(props, this);
-			this.paddingInsets = mi;
-		}
-		return mi;
-	}
+
 
 	/*
 	 * (non-Javadoc)

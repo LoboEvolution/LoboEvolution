@@ -56,7 +56,7 @@ public abstract class AbstractMarginRenderState extends BlockRenderState {
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets insets = this.marginInsets;
-		if (insets != INVALID_INSETS) {
+		if (insets != MarginRenderState.INVALID_INSETS) {
 			return insets;
 		}
 		insets = super.getMarginInsets();

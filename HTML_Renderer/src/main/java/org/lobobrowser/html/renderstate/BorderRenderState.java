@@ -20,12 +20,9 @@
  */
 package org.lobobrowser.html.renderstate;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Insets;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.HtmlAttributeProperties;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.BorderInfo;
@@ -36,13 +33,10 @@ import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.GUITasks;
-import org.lobobrowser.util.gui.LAFSettings;
 import org.w3c.dom.css.CSS2Properties;
 
 public class BorderRenderState implements CSSValuesProperties {
 	
-	private static final Logger logger = LogManager.getLogger(BorderRenderState.class.getName());
-
 	/** The Constant DEFAULT_BORDER_WIDTH. */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
 
@@ -224,44 +218,44 @@ public class BorderRenderState implements CSSValuesProperties {
 			int sizeBorder = br.length;
 			switch (sizeBorder) {
 			case 4:
-				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
-				insets = HtmlValues.updateRightInset(insets, br[1], renderState);
-				insets = HtmlValues.updateBottomInset(insets, br[2], renderState);
-				insets = HtmlValues.updateLeftInset(insets, br[3], renderState);
+				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateRightInset(insets, br[1], renderState);
+				insets = HtmlInsets.updateBottomInset(insets, br[2], renderState);
+				insets = HtmlInsets.updateLeftInset(insets, br[3], renderState);
 				break;
 			case 3:
-				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
-				insets = HtmlValues.updateRightInset(insets, br[1], renderState);
-				insets = HtmlValues.updateBottomInset(insets, br[2], renderState);
+				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateRightInset(insets, br[1], renderState);
+				insets = HtmlInsets.updateBottomInset(insets, br[2], renderState);
 				break;
 			case 2:
-				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
-				insets = HtmlValues.updateRightInset(insets, br[1], renderState);
+				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateRightInset(insets, br[1], renderState);
 				break;
 			case 1:
-				insets = HtmlValues.updateTopInset(insets, br[0], renderState);
-				insets = HtmlValues.updateRightInset(insets, br[0], renderState);
-				insets = HtmlValues.updateBottomInset(insets, br[0], renderState);
-				insets = HtmlValues.updateLeftInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateRightInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateBottomInset(insets, br[0], renderState);
+				insets = HtmlInsets.updateLeftInset(insets, br[0], renderState);
 				break;
 			}
 		} else {
 
 			if (borderStyles.top != BORDER_STYLE_NONE) {
 				String topText = cssProperties.getBorderTopWidth();
-				insets = HtmlValues.updateTopInset(insets, topText, renderState);
+				insets = HtmlInsets.updateTopInset(insets, topText, renderState);
 			}
 			if (borderStyles.left != BORDER_STYLE_NONE) {
 				String leftText = cssProperties.getBorderLeftWidth();
-				insets = HtmlValues.updateLeftInset(insets, leftText, renderState);
+				insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
 			}
 			if (borderStyles.bottom != BORDER_STYLE_NONE) {
 				String bottomText = cssProperties.getBorderBottomWidth();
-				insets = HtmlValues.updateBottomInset(insets, bottomText, renderState);
+				insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
 			}
 			if (borderStyles.right != BORDER_STYLE_NONE) {
 				String rightText = cssProperties.getBorderRightWidth();
-				insets = HtmlValues.updateRightInset(insets, rightText, renderState);
+				insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
 			}
 		}
 		return insets;
@@ -282,19 +276,19 @@ public class BorderRenderState implements CSSValuesProperties {
 
 		if (binfo.getTopStyle() != BORDER_STYLE_NONE) {
 			String topText = cssProperties.getBorderTopWidth();
-			insets = HtmlValues.updateTopInset(insets, topText, renderState);
+			insets = HtmlInsets.updateTopInset(insets, topText, renderState);
 		}
 		if (binfo.getLeftStyle() != BORDER_STYLE_NONE) {
 			String leftText = cssProperties.getBorderLeftWidth();
-			insets = HtmlValues.updateLeftInset(insets, leftText, renderState);
+			insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
 		}
 		if (binfo.getBottomStyle() != BORDER_STYLE_NONE) {
 			String bottomText = cssProperties.getBorderBottomWidth();
-			insets = HtmlValues.updateBottomInset(insets, bottomText, renderState);
+			insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
 		}
 		if (binfo.getRightStyle() != BORDER_STYLE_NONE) {
 			String rightText = cssProperties.getBorderRightWidth();
-			insets = HtmlValues.updateRightInset(insets, rightText, renderState);
+			insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
 		}
 		binfo.setInsets(insets);
 	}

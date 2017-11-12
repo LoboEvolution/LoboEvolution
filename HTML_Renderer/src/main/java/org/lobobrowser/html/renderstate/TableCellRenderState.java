@@ -51,7 +51,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 	
 	/** The padding insets. */
-	private HtmlInsets paddingInsets = INVALID_INSETS;
+	private HtmlInsets paddingInsets = PaddingRenderState.INVALID_INSETS;
 
 	/**
 	 * Instantiates a new table cell render state.
@@ -76,7 +76,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		this.alignXPercent = -1;
 		this.alignYPercent = -1;
 		this.backgroundInfo = INVALID_BACKGROUND_INFO;
-		this.paddingInsets = INVALID_INSETS;
+		this.paddingInsets = PaddingRenderState.INVALID_INSETS;
 	}
 
 	/*
@@ -254,7 +254,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	public HtmlInsets getPaddingInsets() {
 
 		HtmlInsets insets = this.paddingInsets;
-		if (insets != INVALID_INSETS) {
+		if (insets != PaddingRenderState.INVALID_INSETS) {
 			return insets;
 		} else {
 
@@ -277,7 +277,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				insets.top = insets.left = insets.right = insets.bottom = cellPadding;
 				insets.topType = insets.leftType = insets.rightType = insets.bottomType = cellPaddingType;
 			} else {
-				insets = super.getPaddingInsets();
+				insets = PaddingRenderState.getPaddingInsets(this.getCssProperties(), this);
 			}
 		}
 		this.paddingInsets = insets;
