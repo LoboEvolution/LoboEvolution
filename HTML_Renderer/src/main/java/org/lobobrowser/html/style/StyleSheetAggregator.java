@@ -165,9 +165,9 @@ public class StyleSheetAggregator {
 			CSSStyleRule sr = (CSSStyleRule) rule;
 			String selectorList = sr.getSelectorText();
 			StringTokenizer commaTok = new StringTokenizer(selectorList, ",");
+			ArrayList<SelectorMatcher> selectorMatchers = null;
 			while (commaTok.hasMoreTokens()) {
 				String selectorPart = commaTok.nextToken().toLowerCase();
-				ArrayList<SelectorMatcher> selectorMatchers = null;
 				String lastSelectorText = null;
 				StringTokenizer tok = new StringTokenizer(selectorPart, " \t\r\n");
 				if (tok.hasMoreTokens()) {
@@ -257,7 +257,7 @@ public class StyleSheetAggregator {
 					attributeValue = "-";
 					attributeOperator = SelectorMatcher.OP_ALL;
 				}
-				this.addAttributeRule(htmlElement, attributeValue, sr, new ArrayList<SelectorMatcher>());
+				this.addAttributeRule(htmlElement, attributeValue, sr, selectorMatchers);
 			}
 		} else if (rule instanceof CSSImportRule) {
 			UserAgentContext uacontext = document.getUserAgentContext();

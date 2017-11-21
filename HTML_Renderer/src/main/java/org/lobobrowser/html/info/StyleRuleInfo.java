@@ -32,7 +32,7 @@ import org.w3c.dom.css.CSSStyleRule;
  * The Class StyleRuleInfo.
  */
 public class StyleRuleInfo implements Serializable {
-
+	
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 9165715430607111555L;
 
@@ -120,13 +120,14 @@ public class StyleRuleInfo implements Serializable {
 	 *            A set of pseudo-names in lowercase.
 	 * @return true, if is selector match
 	 */
-	public final boolean isSelectorMatch(HTMLElementImpl element, Set pseudoNames) {
+	public final boolean isSelectorMatch(HTMLElementImpl element, Set<?> pseudoNames) {
 		ArrayList<SelectorMatcher> as = this.ancestorSelectors;
 		HTMLElementImpl currentElement = element;
 		int size = as.size();
 		boolean first = true;
 		for (int i = size; --i >= 0;) {
 			SelectorMatcher selectorMatcher = as.get(i);
+			
 			if (first) {
 				if (!selectorMatcher.matches(pseudoNames)) {
 					return false;
@@ -134,47 +135,84 @@ public class StyleRuleInfo implements Serializable {
 				first = false;
 				continue;
 			}
+			
 			String selectorText = selectorMatcher.getSimpleSelectorText();
 			int dotIdx = selectorText.indexOf('.');
 			int selectorType = selectorMatcher.getSelectorType();
 			HTMLElementImpl priorElement;
+			
 			if (dotIdx != -1) {
 				String elemtl = selectorText.substring(0, dotIdx);
 				String classtl = selectorText.substring(dotIdx + 1);
-				if (selectorType == SelectorMatcher.ANCESTOR) {
+				
+				if (elemtl == null || "".equals(elemtl)) {
+					elemtl = "*";
+				}
+				
+				switch (selectorType) {
+				case SelectorMatcher.ANCESTOR:
 					priorElement = currentElement.getAncestorWithClass(elemtl, classtl);
-				} else if (selectorType == SelectorMatcher.PARENT) {
+					break;
+				case SelectorMatcher.PARENT:
 					priorElement = currentElement.getParentWithClass(elemtl, classtl);
-				} else if (selectorType == SelectorMatcher.PRECEEDING_SIBLING) {
+					break;
+				case SelectorMatcher.PRECEEDING_SIBLING:
 					priorElement = currentElement.getPreceedingSiblingWithClass(elemtl, classtl);
-				} else {
+					break;
+				default:
 					throw new IllegalStateException("selectorType=" + selectorType);
 				}
+				
 			} else {
 				int poundIdx = selectorText.indexOf('#');
 				if (poundIdx != -1) {
 					String elemtl = selectorText.substring(0, poundIdx);
 					String idtl = selectorText.substring(poundIdx + 1);
-					if (selectorType == SelectorMatcher.ANCESTOR) {
+					
+					if (elemtl == null || "".equals(elemtl)) {
+						elemtl = "*";
+					}
+					
+					switch (selectorType) {
+					case SelectorMatcher.ANCESTOR:
 						priorElement = currentElement.getAncestorWithId(elemtl, idtl);
-					} else if (selectorType == SelectorMatcher.PARENT) {
+						break;
+					case SelectorMatcher.PARENT:
 						priorElement = currentElement.getParentWithId(elemtl, idtl);
-					} else if (selectorType == SelectorMatcher.PRECEEDING_SIBLING) {
+						break;
+					case SelectorMatcher.PRECEEDING_SIBLING:
 						priorElement = currentElement.getPreceedingSiblingWithId(elemtl, idtl);
-					} else {
+						break;
+					default:
 						throw new IllegalStateException("selectorType=" + selectorType);
 					}
+
 				} else {
 					String elemtl = selectorText;
-					if (selectorType == SelectorMatcher.ANCESTOR) {
+					
+					if (elemtl == null || "".equals(elemtl)) {
+						elemtl = "*";
+					}
+					
+					if (elemtl.contains("[") && elemtl.endsWith("]")) {
+						String selector = elemtl.replace("\"", "");
+						elemtl = selector.substring(0, selector.indexOf("["));
+					}
+										
+					switch (selectorType) {
+					case SelectorMatcher.ANCESTOR:
 						priorElement = currentElement.getAncestor(elemtl);
-					} else if (selectorType == SelectorMatcher.PARENT) {
+						break;
+					case SelectorMatcher.PARENT:
 						priorElement = currentElement.getParent(elemtl);
-					} else if (selectorType == SelectorMatcher.PRECEEDING_SIBLING) {
+						break;
+					case SelectorMatcher.PRECEEDING_SIBLING:
 						priorElement = currentElement.getPreceedingSibling(elemtl);
-					} else {
+						break;
+					default:
 						throw new IllegalStateException("selectorType=" + selectorType);
 					}
+					
 				}
 			}
 			if (priorElement == null) {
