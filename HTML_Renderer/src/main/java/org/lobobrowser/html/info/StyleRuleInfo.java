@@ -23,6 +23,8 @@ package org.lobobrowser.html.info;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.style.selectors.SelectorMatcher;
@@ -142,12 +144,8 @@ public class StyleRuleInfo implements Serializable {
 			HTMLElementImpl priorElement;
 			
 			if (dotIdx != -1) {
-				String elemtl = selectorText.substring(0, dotIdx);
+				String elemtl = getElement(selectorText.substring(0, dotIdx)); 
 				String classtl = selectorText.substring(dotIdx + 1);
-				
-				if (elemtl == null || "".equals(elemtl)) {
-					elemtl = "*";
-				}
 				
 				switch (selectorType) {
 				case SelectorMatcher.ANCESTOR:
@@ -166,12 +164,8 @@ public class StyleRuleInfo implements Serializable {
 			} else {
 				int poundIdx = selectorText.indexOf('#');
 				if (poundIdx != -1) {
-					String elemtl = selectorText.substring(0, poundIdx);
+					String elemtl = getElement(selectorText.substring(0, poundIdx));
 					String idtl = selectorText.substring(poundIdx + 1);
-					
-					if (elemtl == null || "".equals(elemtl)) {
-						elemtl = "*";
-					}
 					
 					switch (selectorType) {
 					case SelectorMatcher.ANCESTOR:
@@ -188,16 +182,7 @@ public class StyleRuleInfo implements Serializable {
 					}
 
 				} else {
-					String elemtl = selectorText;
-					
-					if (elemtl == null || "".equals(elemtl)) {
-						elemtl = "*";
-					}
-					
-					if (elemtl.contains("[") && elemtl.endsWith("]")) {
-						String selector = elemtl.replace("\"", "");
-						elemtl = selector.substring(0, selector.indexOf("["));
-					}
+					String elemtl = getElement(selectorText);
 										
 					switch (selectorType) {
 					case SelectorMatcher.ANCESTOR:
@@ -224,6 +209,23 @@ public class StyleRuleInfo implements Serializable {
 			currentElement = priorElement;
 		}
 		return true;
+	}
+	
+	private static String getElement(String elemtl) {
+
+		if (elemtl == null || "".equals(elemtl)) {
+			return "*";
+		}
+
+		try {
+			Pattern p = Pattern.compile(".*\\[ *(.*) *\\].*");
+			Matcher m = p.matcher(elemtl.replace("\"", ""));
+			m.find();
+			return m.group(1);
+		} catch (Exception e) {
+			return elemtl;
+		}
+
 	}
 
 	/**
