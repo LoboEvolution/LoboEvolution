@@ -213,12 +213,11 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgColor = element.getBgColor();
-			if (bgColor == null || "".equals(bgColor)) {
-				if (rowElement != null) {
-					bgColor = rowElement.getBgColor();
-				}
+			if (!Strings.isBlank(bgColor) && rowElement != null) {
+				bgColor = rowElement.getBgColor();
 			}
-			if (bgColor != null && !"".equals(bgColor)) {
+			
+			if (!Strings.isBlank(bgColor)) {
 				Color bgc = ColorFactory.getInstance().getColor(bgColor);
 				if (binfo == null) {
 					binfo = new BackgroundInfo();

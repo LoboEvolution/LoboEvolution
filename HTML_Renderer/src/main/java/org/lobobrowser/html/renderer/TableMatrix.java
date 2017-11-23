@@ -1190,7 +1190,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			// TODO: A tentative height could be used here: Height of
 			// table divided by number of rows.
 
-			java.awt.Dimension size;
+			Dimension size;
 			RenderThreadState state = RenderThreadState.getState();
 			boolean prevOverrideNoWrap = state.overrideNoWrap;
 			try {

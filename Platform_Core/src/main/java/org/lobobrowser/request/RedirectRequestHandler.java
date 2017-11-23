@@ -77,15 +77,17 @@ public class RedirectRequestHandler implements RequestHandler {
 		URL finalURL = Urls.createURL(origURL, location);
 		String origHost = origURL.getHost();
 		String finalHost = finalURL.getHost();
-		if (origHost.equals(finalHost) && origURL.getProtocol().equalsIgnoreCase(finalURL.getProtocol())) {
-			if (origURL.getPort() == finalURL.getPort()) {
-				String origPath = origURL.getFile();
-				String finalPath = finalURL.getFile();
-				if (origPath.equals(finalPath)) {
-					throw new IllegalArgumentException(
-							"Redirecting URL '" + origURL + "' and target URL '" + finalURL + "' are equal!");
-				}
+		if (origHost.equals(finalHost) && 
+			origURL.getProtocol().equalsIgnoreCase(finalURL.getProtocol()) && 
+			(origURL.getPort() == finalURL.getPort())) {
+
+			String origPath = origURL.getFile();
+			String finalPath = finalURL.getFile();
+			if (origPath.equals(finalPath)) {
+				throw new IllegalArgumentException(
+						"Redirecting URL '" + origURL + "' and target URL '" + finalURL + "' are equal!");
 			}
+
 		}
 		this.latestRequestURL = finalURL;
 	}

@@ -467,8 +467,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	 */
 	@Override
 	public void preventDefault() {
-		if (this.cancelable) {
-		}
+		
 	}
 
 	/*

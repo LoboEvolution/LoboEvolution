@@ -1127,10 +1127,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		if (!DOMEventImpl.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
-			return false;
-		}
-		return true;
+		return (!DOMEventImpl.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null);
 	}
 
 	@Override

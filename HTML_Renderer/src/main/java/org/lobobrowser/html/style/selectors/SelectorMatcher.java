@@ -480,10 +480,7 @@ public class SelectorMatcher {
 	}
 
 	private boolean isEven(int number) {
-		if (number % 2 == 0) {
-			return true;
-		}
-		return false;
+		return (number % 2 == 0);
 	}
 
 	private String getValue(String selector, String select) {

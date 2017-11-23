@@ -71,8 +71,7 @@ public class InputFileControl extends BaseInputControl {
 		}
 		textField.setVisible(modelNode.getHidden());
 		textField.applyComponentOrientation(direction(modelNode.getDir()));
-		textField.setEditable(
-				new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		textField.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		textField.setEnabled(!modelNode.getDisabled());
 		this.add(this.textField);
 		this.add(Box.createHorizontalStrut(4));

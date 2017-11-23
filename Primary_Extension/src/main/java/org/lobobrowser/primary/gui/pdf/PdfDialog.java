@@ -1019,7 +1019,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	class PerformFullScreenMode implements Runnable {
 
 		/** The force. */
-		boolean force;
+		private boolean force;
 
 		/**
 		 * Instantiates a new perform full screen mode.

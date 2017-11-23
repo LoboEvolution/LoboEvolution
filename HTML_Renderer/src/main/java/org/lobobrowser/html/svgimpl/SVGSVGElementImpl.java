@@ -89,7 +89,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 	public String getD() {
 		String d = this.getAttribute(D);
 		if (d != null) {
-			d.replaceAll("\\r|\\n", "");
+			d = d.replaceAll("\\r|\\n", "");
 		}
 		return d;
 	}

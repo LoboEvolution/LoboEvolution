@@ -159,9 +159,6 @@ public final class RWord extends BaseBoundableRenderable {
 				int lineOffset = fm.getLeading();
 				g.drawLine(0, lineOffset, width, lineOffset);
 			}
-			if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
-				// TODO
-			}
 		}
 		Color over = rs.getOverlayColor();
 		if (over != null) {

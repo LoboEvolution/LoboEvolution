@@ -51,14 +51,14 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/** The max length. */
+	private int maxLength = -1;
+
 	/** The widget. */
 	protected final JTextComponent widget;
 
 	/** Creates the text field. */
 	protected abstract JTextComponent createTextField();
-
-	/** The max length. */
-	private int maxLength = -1;
 
 	/**
 	 * Instantiates a new base input text control.

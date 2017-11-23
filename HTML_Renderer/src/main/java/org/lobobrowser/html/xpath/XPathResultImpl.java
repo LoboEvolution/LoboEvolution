@@ -684,7 +684,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the any type
 	 */
-	public static short getANY_TYPE() {
+	public static short getAnyType() {
 		return ANY_TYPE;
 	}
 
@@ -693,7 +693,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the number type
 	 */
-	public static short getNUMBER_TYPE() {
+	public static short getNumberType() {
 		return NUMBER_TYPE;
 	}
 
@@ -702,7 +702,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the string type
 	 */
-	public static short getSTRING_TYPE() {
+	public static short getStringType() {
 		return STRING_TYPE;
 	}
 
@@ -711,7 +711,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the boolean type
 	 */
-	public static short getBOOLEAN_TYPE() {
+	public static short getBooleanType() {
 		return BOOLEAN_TYPE;
 	}
 
@@ -720,7 +720,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the unordered node iterator type
 	 */
-	public static short getUNORDERED_NODE_ITERATOR_TYPE() {
+	public static short getUnorderedNodeIteratorType() {
 		return UNORDERED_NODE_ITERATOR_TYPE;
 	}
 
@@ -729,7 +729,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the ordered node iterator type
 	 */
-	public static short getORDERED_NODE_ITERATOR_TYPE() {
+	public static short getOrderedNodeIteratorType() {
 		return ORDERED_NODE_ITERATOR_TYPE;
 	}
 
@@ -738,7 +738,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the unordered node snapshot type
 	 */
-	public static short getUNORDERED_NODE_SNAPSHOT_TYPE() {
+	public static short getUnorderedNodeSnapshotType() {
 		return UNORDERED_NODE_SNAPSHOT_TYPE;
 	}
 
@@ -747,7 +747,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the ordered node snapshot type
 	 */
-	public static short getORDERED_NODE_SNAPSHOT_TYPE() {
+	public static short getOrderedNodeSnapshotType() {
 		return ORDERED_NODE_SNAPSHOT_TYPE;
 	}
 
@@ -756,7 +756,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the any unordered node type
 	 */
-	public static short getANY_UNORDERED_NODE_TYPE() {
+	public static short getAnyUnorderedNodeType() {
 		return ANY_UNORDERED_NODE_TYPE;
 	}
 
@@ -765,7 +765,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @return the first ordered node type
 	 */
-	public static short getFIRST_ORDERED_NODE_TYPE() {
+	public static short getFirstOrderedNodeType() {
 		return FIRST_ORDERED_NODE_TYPE;
 	}
 

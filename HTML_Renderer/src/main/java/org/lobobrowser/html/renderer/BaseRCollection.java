@@ -70,8 +70,6 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 		RCollection parent = this.parent;
 		if (parent != null) {
 			parent.focus();
-		} else {
-			// TODO: Remove local focus
 		}
 	}
 
@@ -110,11 +108,8 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	private boolean checkStartSelection(Rectangle bounds, Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
-		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
-				&& bounds.x > selectionPoint.x) {
-			return true;
 		} else {
-			return false;
+			return (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height && bounds.x > selectionPoint.x);
 		}
 	}
 
@@ -130,11 +125,8 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
-		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
-				&& selectionPoint.x < bounds.x) {
-			return true;
 		} else {
-			return false;
+			return (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height && selectionPoint.x < bounds.x);
 		}
 	}
 

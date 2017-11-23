@@ -309,8 +309,6 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			} else if ("_blank".equals(actualTarget)) {
 				this.open(action, "cobra.blank", "", false);
 				return;
-			} else if ("_this".equals(actualTarget)) {
-				// fall through
 			} else {
 				logger.warn("submitForm(): Link target unrecognized: " + actualTarget);
 			}

@@ -226,11 +226,7 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 		@Override
 		public boolean verify(final String host, SSLSession arg1) {
 			final VerifiedHostsStore vhs = VerifiedHostsStore.getInstance();
-			if (vhs.contains(host)) {
-				return true;
-			}
-			// Does not ask user.
-			return false;
+			return vhs.contains(host);
 		}
 	}
 

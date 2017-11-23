@@ -571,9 +571,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		DOMNodeImpl frameSet = null;
 		for (int i = 0; i < length; i++) {
 			DOMNodeImpl child = children[i];
-			if (child instanceof Text) {
-				// Ignore
-			} else if (child instanceof DOMElementImpl) {
+			if (child instanceof DOMElementImpl) {
 				String tagName = child.getNodeName();
 				if ("HEAD".equalsIgnoreCase(tagName) || "NOFRAMES".equalsIgnoreCase(tagName)
 						|| "TITLE".equalsIgnoreCase(tagName) || "META".equalsIgnoreCase(tagName)

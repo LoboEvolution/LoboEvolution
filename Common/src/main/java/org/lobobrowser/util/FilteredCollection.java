@@ -263,9 +263,7 @@ public class FilteredCollection implements Collection<Object> {
 		Object[] values = this.toArray();
 		for (int i = 0; i < values.length; i++) {
 			if (!c.contains(values[i])) {
-				if (this.remove(values[i])) {
-					result = true;
-				}
+				result = this.remove(values[i]);
 			}
 		}
 		return result;

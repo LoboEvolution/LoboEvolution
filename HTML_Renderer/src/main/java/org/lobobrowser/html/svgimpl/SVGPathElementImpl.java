@@ -467,11 +467,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 	private boolean convertToBoolean(String value) {
 		try {
 			float flt = Float.parseFloat(value);
-			if (flt == 1) {
-				return true;
-			} else {
-				return false;
-			}
+			return (flt == 1);
 		} catch (Exception e) {
 			return false;
 		}

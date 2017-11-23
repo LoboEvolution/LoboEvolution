@@ -197,7 +197,7 @@ public class FontFactory {
 	 * @return the font
 	 */
 	private final Font createFont(FontKey key) {
-		Font font = createFont_Impl(key);
+		Font font = createFontImpl(key);
 		return scriptFont(font, key);
 	}
 
@@ -242,7 +242,7 @@ public class FontFactory {
 	 *            the key
 	 * @return the font
 	 */
-	private final Font createFont_Impl(FontKey key) {
+	private final Font createFontImpl(FontKey key) {
 		String fontNames = key.getFontFamily();
 		int letterSpacing = key.getLetterSpacing();
 		String matchingFace = null;

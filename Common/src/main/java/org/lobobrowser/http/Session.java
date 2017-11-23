@@ -124,9 +124,6 @@ public class Session extends AbstractBean {
 		setSslSecurityLevel(SecurityLevel.Medium);
 		// register a default security handler
 		setMediumSecurityHandler(new DefaultSecurityHandler());
-		if (installCookieManager) {
-			// TODO CookieManager.install();
-		}
 	}
 
 	/**

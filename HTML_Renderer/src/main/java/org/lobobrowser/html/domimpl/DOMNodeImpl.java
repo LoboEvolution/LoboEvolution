@@ -1744,9 +1744,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			if (child instanceof DOMElementImpl) {
 				((DOMElementImpl) child).appendInnerTextImpl(buffer);
 			}
-			if (child instanceof Comment) {
-				// skip
-			} else if (child instanceof Text) {
+			if (child instanceof Text) {
 				buffer.append(((Text) child).getTextContent());
 			}
 		}

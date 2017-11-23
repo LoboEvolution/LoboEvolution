@@ -208,8 +208,6 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
 			fillPaint = gradient(cgi.getFractions(), cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
 					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR1(), cgi.getR2());
-		} else if (style instanceof CanvasPattern) {
-			// fillPaint = ((DOMCanvasPatternImpl) style).getPaint();
 		} else if (style instanceof String) {
 			fillPaint = ColorFactory.getInstance().getColor(style.toString());
 		}

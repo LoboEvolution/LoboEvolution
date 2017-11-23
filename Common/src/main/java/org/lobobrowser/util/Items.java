@@ -28,14 +28,14 @@ import java.util.WeakHashMap;
  * The Class Items.
  */
 public class Items {
+	
+	/** The source map. */
+	private static Map<Object, Map<String, Object>> sourceMap = new WeakHashMap<Object, Map<String, Object>>();
+	
 	/**
 	 * Instantiates a new items.
 	 */
-	private Items() {
-	}
-
-	/** The source map. */
-	private static Map<Object, Map<String, Object>> sourceMap = new WeakHashMap<Object, Map<String, Object>>();
+	private Items() {}
 
 	/**
 	 * Gets the item.

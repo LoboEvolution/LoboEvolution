@@ -320,7 +320,6 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 			} else {
 				parent.invalidateLayoutUpTree();
 			}
-		} else {
 		}
 	}
 

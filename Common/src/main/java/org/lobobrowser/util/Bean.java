@@ -183,9 +183,7 @@ public class Bean {
 	 */
 	private static Object convertValue(Object value, Class<?> targetType) {
 		boolean targetString = targetType.isAssignableFrom(String.class);
-		if (value instanceof String && targetString) {
-			// ignore
-		} else if (targetString) {
+		if (targetString) {
 			value = String.valueOf(value);
 		} else if (!(value instanceof Byte) && (targetType == Byte.class || targetType == byte.class)) {
 			value = Byte.valueOf(String.valueOf(value));

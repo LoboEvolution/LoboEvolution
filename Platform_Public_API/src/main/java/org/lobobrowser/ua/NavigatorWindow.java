@@ -84,7 +84,7 @@ public interface NavigatorWindow {
 	 *            the status bar component
 	 * @see #createGlueComponent(Component, boolean)
 	 */
-	void addStatusBarComponent(java.awt.Component statusBarComponent);
+	void addStatusBarComponent(Component statusBarComponent);
 
 	/**
 	 * Adds a component to the address bar. The preferred width of the component
@@ -95,7 +95,7 @@ public interface NavigatorWindow {
 	 *            the address bar component
 	 * @see #createGlueComponent(Component, boolean)
 	 */
-	void addAddressBarComponent(java.awt.Component addressBarComponent);
+	void addAddressBarComponent(Component addressBarComponent);
 
 	/**
 	 * Adds a listener of window events.

@@ -32,6 +32,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.apache.logging.log4j.util.Strings;
+
 /**
  * The Class BaseHistory.
  *
@@ -128,14 +130,14 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 			while (i.hasNext()) {
 				TimedEntry entry = i.next();
 				String host = entry.url.getHost();
-				if (host != null && host.length() != 0) {
-					if (!hosts.contains(host)) {
-						hosts.add(host);
-						if (hosts.size() >= maxNumItems) {
-							break;
-						}
-						items.add(new HostEntry(host, entry.timestamp));
+				if (Strings.isBlank(host) && !hosts.contains(host)) {
+
+					hosts.add(host);
+					if (hosts.size() >= maxNumItems) {
+						break;
 					}
+				
+					items.add(new HostEntry(host, entry.timestamp));
 				}
 			}
 			return items;

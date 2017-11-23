@@ -110,11 +110,7 @@ public class InputSelectControl extends BaseInputControl {
 						DOMEventImpl.getInstance().onChange(modelNode);
 					}
 					break;
-				case ItemEvent.DESELECTED:
-					// Ignore deselection here. It must necessarily
-					// be followed by combo-box selection. If we deselect,
-					// that
-					// changes the state of the control.
+				default:
 					break;
 				}
 			}
@@ -160,8 +156,7 @@ public class InputSelectControl extends BaseInputControl {
 		}
 		comboBox.setVisible(modelNode.getHidden());
 		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
-		comboBox.setEditable(
-				new Boolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		comboBox.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		comboBox.setEnabled(!modelNode.getDisabled());
 		this.list = list;
 		this.resetItemList();

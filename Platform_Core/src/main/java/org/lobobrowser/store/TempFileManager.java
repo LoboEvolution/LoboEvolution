@@ -100,14 +100,8 @@ public class TempFileManager {
 			// Cleanup files theoretically left by previously running instance.
 			for (File file : files) {
 				String name = file.getName();
-				if (name.startsWith(GENERAL_PREFIX) && !name.startsWith(FILE_PREFIX)) {
-					// We can't really assume only one instance of the
-					// application
-					// is running. Need to be a little lenient about deleting
-					// these.
-					if (file.lastModified() < System.currentTimeMillis() - ONE_MONTH) {
+				if (name.startsWith(GENERAL_PREFIX) && !name.startsWith(FILE_PREFIX) && file.lastModified() < System.currentTimeMillis() - ONE_MONTH) {
 						file.delete();
-					}
 				}
 			}
 		}

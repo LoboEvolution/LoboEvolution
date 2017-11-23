@@ -341,11 +341,10 @@ public class MarkupUtilities {
 					int newLen = length - (middleIndex - index + 1);
 					int resultIdx = newLen == 0 ? -1
 							: findLastIndex(renderables, clipArea, middleIndex + 1, newLen, vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
+					if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
+						return middleIndex;
 					}
+					
 					return resultIdx;
 				}
 			} else {
@@ -354,11 +353,11 @@ public class MarkupUtilities {
 				} else {
 					int resultIdx = findLastIndex(renderables, clipArea, middleIndex + 1,
 							length - (middleIndex - index + 1), vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
+
+					if (resultIdx == -1 && intersects(clipArea, rbounds, vertical)) {
+						return middleIndex;
 					}
+					
 					return resultIdx;
 				}
 			}

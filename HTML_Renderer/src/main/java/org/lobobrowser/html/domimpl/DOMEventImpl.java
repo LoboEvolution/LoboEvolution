@@ -105,8 +105,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 				button.submitForm(formInputs);
 			} else if ("reset".equals(type)) {
 				button.resetForm();
-			} else {
-				// NOP for "button"!
 			}
 			return false;
 		} else if (node instanceof HTMLAbstractUIElement) {
@@ -185,7 +183,7 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 */
 	public void onMouseOver(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
 		while (node != null) {
-			if (node == limit) {
+			if (node.equals(limit)) {
 				break;
 			}
 

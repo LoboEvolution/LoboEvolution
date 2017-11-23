@@ -43,6 +43,9 @@ public class FontNameRenderState extends RenderStateDelegator {
 	
 	/** The i font. */
 	private Font iFont;
+	
+	/** The i font metrics. */
+	private FontMetrics iFontMetrics;
 	 
 
 	/**
@@ -74,9 +77,6 @@ public class FontNameRenderState extends RenderStateDelegator {
 		this.iFont = f;
 		return f;
 	}
-
-	/** The i font metrics. */
-	private FontMetrics iFontMetrics;
 
 	/*
 	 * (non-Javadoc)

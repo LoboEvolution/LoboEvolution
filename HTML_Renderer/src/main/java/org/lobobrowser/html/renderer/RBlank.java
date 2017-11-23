@@ -110,9 +110,6 @@ public final class RBlank extends BaseBoundableRenderable {
 				int lineOffset = this.fontMetrics.getLeading();
 				g.drawLine(0, lineOffset, this.width, lineOffset);
 			}
-			if ((td & RenderState.MASK_TEXTDECORATION_BLINK) != 0) {
-				// TODO
-			}
 		}
 		Color over = rs.getOverlayColor();
 		if (over != null) {

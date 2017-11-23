@@ -323,7 +323,7 @@ public class DownloadDialog extends JFrame {
 	 * @param totalSize
 	 *            the total size
 	 */
-	private void doneWithDownload_Safe(final long totalSize) {
+	private void doneWithDownloadSafe(final long totalSize) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			doneWithDownload(totalSize);
 		} else {
@@ -376,7 +376,7 @@ public class DownloadDialog extends JFrame {
 	/**
 	 * Error in download_ safe.
 	 */
-	private void errorInDownload_Safe() {
+	private void errorInDownloadSafe() {
 		if (SwingUtilities.isEventDispatchThread()) {
 			errorInDownload();
 		} else {
@@ -682,7 +682,7 @@ public class DownloadDialog extends JFrame {
 		public boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException {
 			logger.error("An error occurred trying to download " + response.getResponseURL() + " to " + this.file + ".",
 					exception);
-			errorInDownload_Safe();
+			errorInDownloadSafe();
 			return true;
 		}
 
@@ -729,7 +729,7 @@ public class DownloadDialog extends JFrame {
 						out.write(buffer, 0, numRead);
 					}
 					this.downloadDone = true;
-					doneWithDownload_Safe(totalRead);
+					doneWithDownloadSafe(totalRead);
 				} finally {
 					in.close();
 				}

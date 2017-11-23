@@ -40,6 +40,10 @@ public class Location extends AbstractScriptableDelegate {
 
 	/** The window. */
 	private final Window window;
+	
+
+	/** The target. */
+	private String target;
 
 	/**
 	 * Instantiates a new location.
@@ -151,9 +155,6 @@ public class Location extends AbstractScriptableDelegate {
 		// Javascript requires "?" in its search string.
 		return query == null ? "" : "?" + query;
 	}
-
-	/** The target. */
-	private String target;
 
 	/**
 	 * Gets the target.
