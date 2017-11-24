@@ -1143,7 +1143,8 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		 */
 		@Override
 		public void run() {
-			long now, then;
+			long now;
+			long then;
 			synchronized (this) {
 				now = System.currentTimeMillis();
 				then = timeout;

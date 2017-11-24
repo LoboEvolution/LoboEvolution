@@ -401,7 +401,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		String fontStyle = FontValues.getFontStyle(style.getFontStyle(), prs);
 		String fontWeight = FontValues.getFontWeight(style.getFontWeight(), prs);
 		Float fontSize = new Float(FontValues.getFontSize(style.getFontSize(), prs));
-		Integer superscript = FontValues.getFontSuperScript(style.getVerticalAlign(), prs);;
+		Integer superscript = FontValues.getFontSuperScript(style.getVerticalAlign(), prs);
 		Integer intLetterSpacing = HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0);
 		Integer underline = FontValues.getFontUnderline(style.getTextDecoration(), prs);
 		boolean strikethrough = FontValues.getFontStrikeThrough(style.getTextDecoration(), prs);
@@ -1314,6 +1314,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				break;
 			default:
 				overflow = OVERFLOW_NONE;
+				break;
 			}
 		}
 		this.overflowY = overflow;

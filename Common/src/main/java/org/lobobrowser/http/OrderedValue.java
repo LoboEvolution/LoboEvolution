@@ -52,7 +52,7 @@ public class OrderedValue implements Comparable<Object>, Serializable {
 	 * @param approxSize
 	 *            the approx size
 	 */
-	public OrderedValue(Object key, Object value, int approxSize) {
+	public OrderedValue(Object key, Object value) {
 		this.value = value;
 		this.touch();
 	}

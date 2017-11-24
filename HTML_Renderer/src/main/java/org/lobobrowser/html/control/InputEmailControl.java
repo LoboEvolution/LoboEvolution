@@ -41,9 +41,6 @@ public class InputEmailControl extends BaseInputTextControl {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The email. */
-	private JTextFieldImpl email;
-
 	/** The Constant EMAIL_PATTERN. */
 	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -53,7 +50,7 @@ public class InputEmailControl extends BaseInputTextControl {
 
 	public InputEmailControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		email = (JTextFieldImpl) this.widget;
+		JTextFieldImpl email = (JTextFieldImpl) this.widget;
 		String value = modelNode.getAttribute(VALUE);
 		strPattern = modelNode.getAttribute(PATTERN);
 		if (!isEmail(value)) {

@@ -44,9 +44,6 @@ public class InputUrlControl extends BaseInputTextControl {
 	/** The Constant URL_PATTERN. */
 	private static final String URL_PATTERN = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
 
-	/** The url. */
-	private JTextFieldImpl url;
-
 	/** The str pattern. */
 	private String strPattern;
 
@@ -58,7 +55,7 @@ public class InputUrlControl extends BaseInputTextControl {
 	 */
 	public InputUrlControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		url = (JTextFieldImpl) this.widget;
+		JTextFieldImpl url = (JTextFieldImpl) this.widget;
 		String value = modelNode.getAttribute(VALUE);
 		strPattern = modelNode.getAttribute(PATTERN);
 		if (!isUrl(value)) {

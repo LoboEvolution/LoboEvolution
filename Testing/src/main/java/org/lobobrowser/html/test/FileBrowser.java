@@ -497,31 +497,44 @@ class FileTableModel extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int row, int column) {
 		File file = files[row];
+		Object obj = new Object();
 		switch (column) {
 		case 0:
-			return fileSystemView.getSystemIcon(file);
+			obj = fileSystemView.getSystemIcon(file);
+			break;
 		case 1:
-			return fileSystemView.getSystemDisplayName(file);
+			obj = fileSystemView.getSystemDisplayName(file);
+			break;
 		case 2:
-			return file.getPath();
+			obj = file.getPath();
+			break;
 		case 3:
-			return file.length();
+			obj = file.length();
+			break;
 		case 4:
-			return file.lastModified();
+			obj = file.lastModified();
+			break;
 		case 5:
-			return file.canRead();
+			obj = file.canRead();
+			break;
 		case 6:
-			return file.canWrite();
+			obj = file.canWrite();
+			break;
 		case 7:
-			return file.canExecute();
+			obj = file.canExecute();
+			break;
 		case 8:
-			return file.isDirectory();
+			obj = file.isDirectory();
+			break;
 		case 9:
-			return file.isFile();
+			obj = file.isFile();
+			break;
 		default:
-			System.err.println("Logic Error");
+			obj = null;
+			break;
 		}
-		return "";
+		return obj;
+
 	}
 
 	@Override
@@ -544,8 +557,10 @@ class FileTableModel extends AbstractTableModel {
 		case 8:
 		case 9:
 			return Boolean.class;
+		default:
+			return String.class;
 		}
-		return String.class;
+		
 	}
 
 	@Override

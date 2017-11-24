@@ -31,10 +31,10 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.StringTokenizer;
 
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.html.info.SVGInfo;
 import org.lobobrowser.html.style.CSSValuesProperties;
 import org.lobobrowser.html.style.FontValues;
-import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
 import org.lobobrowser.util.gui.LAFSettings;
@@ -125,14 +125,17 @@ public class SVGUtility {
 	}
 
 	public static void getTextAnchor(String textAnchor, GeneralPath path) {
-		if (textAnchor != null) {
-			if (textAnchor.equals("middle")) {
-				double swidth = path.getBounds2D().getWidth();
-				path.transform(AffineTransform.getTranslateInstance(-swidth / 2.0, 0));
-			} else if (textAnchor.equals("end")) {
-				double swidth = path.getBounds2D().getWidth();
-				path.transform(AffineTransform.getTranslateInstance(-swidth, 0));
-			}
+		switch (Strings.isBlank(textAnchor) ? "" : textAnchor) {
+		case "middle":
+			double swidth = path.getBounds2D().getWidth();
+			path.transform(AffineTransform.getTranslateInstance(-swidth / 2.0, 0));
+			break;
+		case "end":
+			swidth = path.getBounds2D().getWidth();
+			path.transform(AffineTransform.getTranslateInstance(-swidth, 0));
+			break;
+		default:
+			break;
 		}
 	}
 

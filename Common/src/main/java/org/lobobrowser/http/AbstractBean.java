@@ -157,10 +157,10 @@ public abstract class AbstractBean {
 	 */
 	protected AbstractBean(final PropertyChangeSupport pcs, final VetoableChangeSupport vcs) {
 		if (pcs == null) {
-			throw new NullPointerException("PropertyChangeSupport must not be null");
+			throw new IllegalArgumentException ("PropertyChangeSupport must not be null");
 		}
 		if (vcs == null) {
-			throw new NullPointerException("VetoableChangeSupport must not be null");
+			throw new IllegalArgumentException ("VetoableChangeSupport must not be null");
 		}
 		this.pcs = pcs;
 		this.vcs = vcs;

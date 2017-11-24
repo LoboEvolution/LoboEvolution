@@ -57,6 +57,8 @@ public class PaddingRenderState {
 					insets = HtmlInsets.updateBottomInset(insets, pd[0], renderState);
 					insets = HtmlInsets.updateLeftInset(insets, pd[0], renderState);
 					break;
+				default:
+					break;
 				}
 			} else {
 				String topText = props.getPaddingTop();

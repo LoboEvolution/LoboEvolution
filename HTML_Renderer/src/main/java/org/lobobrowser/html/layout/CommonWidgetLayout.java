@@ -102,6 +102,8 @@ public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeP
 		case ADD_AS_BLOCK:
 			bodyLayout.positionRElement(markupElement, renderable, this.useAlignAttribute, true, false);
 			break;
+		default:
+			break;
 		}
 	}
 

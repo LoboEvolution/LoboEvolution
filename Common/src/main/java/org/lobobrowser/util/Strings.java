@@ -401,6 +401,7 @@ public class Strings {
 					word = new StringBuffer();
 				}
 				word.append(ch);
+				break;
 			}
 		}
 		if (word != null) {

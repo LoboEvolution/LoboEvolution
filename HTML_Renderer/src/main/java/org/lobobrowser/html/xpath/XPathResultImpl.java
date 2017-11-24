@@ -651,13 +651,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *         returns false.
 	 */
 	private boolean isNamespaceNode(Node node) {
-
-		if (null != node && node.getNodeType() == Node.ATTRIBUTE_NODE
-				&& (node.getNodeName().startsWith("xmlns:") || node.getNodeName().equals("xmlns"))) {
-			return true;
-		} else {
-			return false;
-		}
+		return (null != node && node.getNodeType() == Node.ATTRIBUTE_NODE
+				&& (node.getNodeName().startsWith("xmlns:") || node.getNodeName().equals("xmlns")));
 	}
 
 	/**

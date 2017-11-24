@@ -220,6 +220,8 @@ public class RListItem extends BaseRListElement implements HtmlAttributeProperti
 					case ListStyle.TYPE_SQUARE:
 						g.fillRect(bulletLeft, bulletTop, BULLET_WIDTH, BULLET_HEIGHT);
 						break;
+					default:
+						break;
 					}
 
 					if (numberText != null) {

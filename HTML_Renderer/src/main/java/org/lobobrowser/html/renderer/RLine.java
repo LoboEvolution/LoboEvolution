@@ -443,6 +443,7 @@ public class RLine extends BaseRCollection {
 			break;
 		default:
 			yoffset = this.baseLineOffset - elementHeight;
+			break;
 		}
 		// RLine only sets origins, not sizes.
 		// relement.setBounds(x, yoffset, width, height);

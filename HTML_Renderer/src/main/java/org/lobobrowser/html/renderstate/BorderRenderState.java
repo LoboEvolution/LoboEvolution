@@ -127,6 +127,8 @@ public class BorderRenderState implements CSSValuesProperties {
 				binfo.setBottomColor(cf.getColor(borderColors[2] + ")"));
 				binfo.setLeftColor(cf.getColor(borderColors[3] + ")"));
 				break;
+			default:
+				break;
 			}
 		}
 
@@ -158,6 +160,8 @@ public class BorderRenderState implements CSSValuesProperties {
 				binfo.setRightStyle(getBorderStyle(borderStyles[1]));
 				binfo.setBottomStyle(getBorderStyle(borderStyles[2]));
 				binfo.setLeftStyle(getBorderStyle(borderStyles[3]));
+				break;
+			default:
 				break;
 			}
 		}
@@ -237,6 +241,8 @@ public class BorderRenderState implements CSSValuesProperties {
 				insets = HtmlInsets.updateRightInset(insets, br[0], renderState);
 				insets = HtmlInsets.updateBottomInset(insets, br[0], renderState);
 				insets = HtmlInsets.updateLeftInset(insets, br[0], renderState);
+				break;
+			default:
 				break;
 			}
 		} else {

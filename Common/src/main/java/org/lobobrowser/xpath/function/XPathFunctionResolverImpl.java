@@ -85,7 +85,7 @@ public class XPathFunctionResolverImpl implements XPathFunctionResolver, Namespa
 	@Override
 	public String getNamespaceURI(String prefix) {
 		if (prefix == null) {
-			throw new NullPointerException("Null prefix");
+			throw new IllegalArgumentException ("Null prefix");
 		} else if ("fn".equals(prefix)) {
 			return NAMESPACE;
 		} else if ("xml".equals(prefix)) {

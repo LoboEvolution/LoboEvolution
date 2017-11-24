@@ -177,7 +177,8 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		JTextComponent widget = this.widget;
 		FontMetrics fm = widget.getFontMetrics(widget.getFont());
 		Insets insets = widget.getInsets();
-		int pw, ph;
+		int pw;
+		int ph;
 		if (size == -1) {
 			pw = 200;
 		} else {

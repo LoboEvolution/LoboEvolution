@@ -899,6 +899,8 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		case BLANK:
 			this.open(url, method, paramInfo);
 			break;
+		default:
+			break;
 		}
 	}
 

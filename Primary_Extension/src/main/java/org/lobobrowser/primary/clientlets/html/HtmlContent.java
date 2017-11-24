@@ -21,6 +21,7 @@
 package org.lobobrowser.primary.clientlets.html;
 
 import java.awt.Component;
+import java.awt.Insets;
 import java.io.UnsupportedEncodingException;
 
 import org.apache.logging.log4j.LogManager;
@@ -233,9 +234,8 @@ public class HtmlContent implements ComponentContent {
 	 */
 	@Override
 	public void setProperty(String name, Object value) {
-		if ("defaultMarginInsets".equals(name) && value instanceof java.awt.Insets) {
-			this.panel.setDefaultMarginInsets((java.awt.Insets) value);
-			;
+		if ("defaultMarginInsets".equals(name) && value instanceof Insets) {
+			this.panel.setDefaultMarginInsets((Insets) value);
 		} else if ("defaultOverflowX".equals(name) && value instanceof Integer) {
 			this.panel.setDefaultOverflowX((Integer) value);
 		} else if ("defaultOverflowY".equals(name) && value instanceof Integer) {

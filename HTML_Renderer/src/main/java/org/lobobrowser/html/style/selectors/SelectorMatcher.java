@@ -474,6 +474,8 @@ public class SelectorMatcher {
 				if (data != null && !data.isEmpty()) {
 					return false;
 				}
+			default:
+				break;
 			}
 		}
 		return true;

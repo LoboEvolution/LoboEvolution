@@ -281,265 +281,267 @@ public class SVGBasicControl extends SVGStyle {
 
 				switch (seg.getPathSegType()) {
 
-				case SVGPathSeg.PATHSEG_CLOSEPATH: {
-					path.closePath();
-					lastControlPoint = null;
-					startOfSubPath = true;
-					if (subPathStartPoint != null) {
-						lastX = subPathStartPoint.getX();
-						lastY = subPathStartPoint.getY();
-						subPathStartPoint = null;
-					}
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_MOVETO_ABS: {
-					float x = ((SVGPathSegMovetoAbsImpl) seg).getX();
-					float y = ((SVGPathSegMovetoAbsImpl) seg).getY();
-					path.moveTo(x, y);
-					lastX = x;
-					lastY = y;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_MOVETO_REL: {
-					float x = ((SVGPathSegMovetoRelImpl) seg).getX();
-					float y = ((SVGPathSegMovetoRelImpl) seg).getY();
-					path.moveTo(x + lastX, y + lastY);
-					lastX += x;
-					lastY += y;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_LINETO_ABS: {
-					float x = ((SVGPathSegLinetoAbsImpl) seg).getX();
-					float y = ((SVGPathSegLinetoAbsImpl) seg).getY();
-					path.lineTo(x, y);
-					lastX = x;
-					lastY = y;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_LINETO_REL: {
-					float x = ((SVGPathSegLinetoRelImpl) seg).getX();
-					float y = ((SVGPathSegLinetoRelImpl) seg).getY();
-					path.lineTo(x + lastX, y + lastY);
-					lastX += x;
-					lastY += y;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_ABS: {
-					float x = ((SVGPathSegLinetoHorizontalAbsImpl) seg).getX();
-					path.lineTo(x, lastY);
-					lastX = x;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_REL: {
-					float x = ((SVGPathSegLinetoHorizontalRelImpl) seg).getX();
-					path.lineTo(x + lastX, lastY);
-					lastX += x;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_LINETO_VERTICAL_ABS: {
-					float y = ((SVGPathSegLinetoVerticalAbsImpl) seg).getY();
-					path.lineTo(lastX, y);
-					lastY = y;
-					lastControlPoint = null;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_LINETO_VERTICAL_REL: {
-					float y = ((SVGPathSegLinetoVerticalRelImpl) seg).getY();
-					path.lineTo(lastX, y + lastY);
-					lastY += y;
-					lastControlPoint = null;
-
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_CUBIC_ABS: {
-					float x = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY();
-					float x1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX1();
-					float y1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY1();
-					float x2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX2();
-					float y2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY2();
-					path.curveTo(x1, y1, x2, y2, x, y);
-					lastControlPoint = new Point2D.Float(x2, y2);
-					lastX = x;
-					lastY = y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_CUBIC_REL: {
-					float x = ((SVGPathSegCurvetoCubicRelImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoCubicRelImpl) seg).getY();
-					float x1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX1();
-					float y1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY1();
-					float x2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX2();
-					float y2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY2();
-					path.curveTo(lastX + x1, lastY + y1, lastX + x2, lastY + y2, lastX + x, lastY + y);
-					lastControlPoint = new Point2D.Float(lastX + x2, lastY + y2);
-					lastX += x;
-					lastY += y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS: {
-					float x = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY();
-					float x2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX2();
-					float y2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY2();
-					if (lastControlPoint == null) {
-						lastControlPoint = new Point2D.Float(lastX, lastY);
-					}
-					path.curveTo(2 * lastX - (float) lastControlPoint.getX(),
-							2 * lastY - (float) lastControlPoint.getY(), x2, y2, x, y);
-					lastControlPoint = new Point2D.Float(x2, y2);
-					lastX = x;
-					lastY = y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_REL: {
-					float x = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY();
-					float x2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX2();
-					float y2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY2();
-					if (lastControlPoint == null) {
-						lastControlPoint = new Point2D.Float(lastX, lastY);
-					}
-					path.curveTo(2 * lastX - (float) lastControlPoint.getX(),
-							2 * lastY - (float) lastControlPoint.getY(), lastX + x2, lastY + y2, lastX + x, lastY + y);
-					lastControlPoint = new Point2D.Float(lastX + x2, lastY + y2);
-					lastX += x;
-					lastY += y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_ABS: {
-					float x = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY();
-					float x1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX1();
-					float y1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY1();
-					path.quadTo(x1, y1, x, y);
-					lastControlPoint = new Point2D.Float(x1, y1);
-					lastX = x;
-					lastY = y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_REL: {
-					float x = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY();
-					float x1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX1();
-					float y1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY1();
-					path.quadTo(lastX + x1, lastY + y1, lastX + x, lastY + y);
-					lastControlPoint = new Point2D.Float(lastX + x1, lastY + y1);
-					lastX += x;
-					lastY += y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS: {
-					float x = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getY();
-
-					if (lastControlPoint == null) {
-						lastControlPoint = new Point2D.Float(lastX, lastY);
-					}
-
-					Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(),
-							2 * lastY - (float) lastControlPoint.getY());
-					path.quadTo((float) nextControlPoint.getX(), (float) nextControlPoint.getY(), x, y);
-					lastControlPoint = nextControlPoint;
-					lastX = x;
-					lastY = y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL: {
-					float x = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getX();
-					float y = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getY();
-
-					if (lastControlPoint == null) {
-						lastControlPoint = new Point2D.Float(lastX, lastY);
-					}
-
-					Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(),
-							2 * lastY - (float) lastControlPoint.getY());
-					path.quadTo((float) nextControlPoint.getX(), (float) nextControlPoint.getY(), lastX + x, lastY + y);
-					lastControlPoint = nextControlPoint;
-					lastX += x;
-					lastY += y;
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_ARC_ABS: {
-
-					float x1 = lastX;
-					float y1 = lastY;
-					float x2 = ((SVGPathSegArcAbsImpl) seg).getX();
-					float y2 = ((SVGPathSegArcAbsImpl) seg).getY();
-					float rx = Math.abs(((SVGPathSegArcAbsImpl) seg).getR1());
-					float ry = Math.abs(((SVGPathSegArcAbsImpl) seg).getR2());
-					float angle = (float) Math.toRadians(((SVGPathSegArcAbsImpl) seg).getAngle());
-					boolean fA = ((SVGPathSegArcAbsImpl) seg).getLargeArcFlag();
-					boolean fS = ((SVGPathSegArcAbsImpl) seg).getSweepFlag();
-
-					if (rx == 0 || ry == 0) {
-						// radii 0, just do a lineTo
-						path.lineTo(x2, y2);
-						lastX = x2;
-						lastY = y2;
+					case SVGPathSeg.PATHSEG_CLOSEPATH: {
+						path.closePath();
 						lastControlPoint = null;
-
-					} else {
-
-						Shape arc = SVGUtility.createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
-						path.append(arc, true);
-						lastX = x2;
-						lastY = y2;
-						lastControlPoint = null;
+						startOfSubPath = true;
+						if (subPathStartPoint != null) {
+							lastX = subPathStartPoint.getX();
+							lastY = subPathStartPoint.getY();
+							subPathStartPoint = null;
+						}
+						break;
 					}
-					break;
-				}
-
-				case SVGPathSeg.PATHSEG_ARC_REL: {
-
-					float x1 = lastX;
-					float y1 = lastY;
-					float x2 = lastX + ((SVGPathSegArcRelImpl) seg).getX();
-					float y2 = lastY + ((SVGPathSegArcRelImpl) seg).getY();
-					float rx = Math.abs(((SVGPathSegArcRelImpl) seg).getR1());
-					float ry = Math.abs(((SVGPathSegArcRelImpl) seg).getR2());
-					float angle = (float) Math.toRadians(((SVGPathSegArcRelImpl) seg).getAngle());
-					boolean fA = ((SVGPathSegArcRelImpl) seg).getLargeArcFlag();
-					boolean fS = ((SVGPathSegArcRelImpl) seg).getSweepFlag();
-
-					if (rx == 0 || ry == 0) {
-						// radii 0, just do a lineTo
-						path.lineTo(x2, y2);
-						lastX = x2;
-						lastY = y2;
+	
+					case SVGPathSeg.PATHSEG_MOVETO_ABS: {
+						float x = ((SVGPathSegMovetoAbsImpl) seg).getX();
+						float y = ((SVGPathSegMovetoAbsImpl) seg).getY();
+						path.moveTo(x, y);
+						lastX = x;
+						lastY = y;
 						lastControlPoint = null;
-					} else {
-						Shape arc = SVGUtility.createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
-						path.append(arc, true);
-						lastX = x2;
-						lastY = y2;
+						break;
 					}
-					break;
-				}
+	
+					case SVGPathSeg.PATHSEG_MOVETO_REL: {
+						float x = ((SVGPathSegMovetoRelImpl) seg).getX();
+						float y = ((SVGPathSegMovetoRelImpl) seg).getY();
+						path.moveTo(x + lastX, y + lastY);
+						lastX += x;
+						lastY += y;
+						lastControlPoint = null;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_LINETO_ABS: {
+						float x = ((SVGPathSegLinetoAbsImpl) seg).getX();
+						float y = ((SVGPathSegLinetoAbsImpl) seg).getY();
+						path.lineTo(x, y);
+						lastX = x;
+						lastY = y;
+						lastControlPoint = null;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_LINETO_REL: {
+						float x = ((SVGPathSegLinetoRelImpl) seg).getX();
+						float y = ((SVGPathSegLinetoRelImpl) seg).getY();
+						path.lineTo(x + lastX, y + lastY);
+						lastX += x;
+						lastY += y;
+						lastControlPoint = null;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_ABS: {
+						float x = ((SVGPathSegLinetoHorizontalAbsImpl) seg).getX();
+						path.lineTo(x, lastY);
+						lastX = x;
+						lastControlPoint = null;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_LINETO_HORIZONTAL_REL: {
+						float x = ((SVGPathSegLinetoHorizontalRelImpl) seg).getX();
+						path.lineTo(x + lastX, lastY);
+						lastX += x;
+						lastControlPoint = null;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_LINETO_VERTICAL_ABS: {
+						float y = ((SVGPathSegLinetoVerticalAbsImpl) seg).getY();
+						path.lineTo(lastX, y);
+						lastY = y;
+						lastControlPoint = null;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_LINETO_VERTICAL_REL: {
+						float y = ((SVGPathSegLinetoVerticalRelImpl) seg).getY();
+						path.lineTo(lastX, y + lastY);
+						lastY += y;
+						lastControlPoint = null;
+	
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_ABS: {
+						float x = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY();
+						float x1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX1();
+						float y1 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY1();
+						float x2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getX2();
+						float y2 = ((SVGPathSegCurvetoCubicAbsImpl) seg).getY2();
+						path.curveTo(x1, y1, x2, y2, x, y);
+						lastControlPoint = new Point2D.Float(x2, y2);
+						lastX = x;
+						lastY = y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_REL: {
+						float x = ((SVGPathSegCurvetoCubicRelImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoCubicRelImpl) seg).getY();
+						float x1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX1();
+						float y1 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY1();
+						float x2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getX2();
+						float y2 = ((SVGPathSegCurvetoCubicRelImpl) seg).getY2();
+						path.curveTo(lastX + x1, lastY + y1, lastX + x2, lastY + y2, lastX + x, lastY + y);
+						lastControlPoint = new Point2D.Float(lastX + x2, lastY + y2);
+						lastX += x;
+						lastY += y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS: {
+						float x = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY();
+						float x2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getX2();
+						float y2 = ((SVGPathSegCurvetoCubicSmoothAbsImpl) seg).getY2();
+						if (lastControlPoint == null) {
+							lastControlPoint = new Point2D.Float(lastX, lastY);
+						}
+						path.curveTo(2 * lastX - (float) lastControlPoint.getX(),
+								2 * lastY - (float) lastControlPoint.getY(), x2, y2, x, y);
+						lastControlPoint = new Point2D.Float(x2, y2);
+						lastX = x;
+						lastY = y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_CUBIC_SMOOTH_REL: {
+						float x = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY();
+						float x2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getX2();
+						float y2 = ((SVGPathSegCurvetoCubicSmoothRelImpl) seg).getY2();
+						if (lastControlPoint == null) {
+							lastControlPoint = new Point2D.Float(lastX, lastY);
+						}
+						path.curveTo(2 * lastX - (float) lastControlPoint.getX(),
+								2 * lastY - (float) lastControlPoint.getY(), lastX + x2, lastY + y2, lastX + x, lastY + y);
+						lastControlPoint = new Point2D.Float(lastX + x2, lastY + y2);
+						lastX += x;
+						lastY += y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_ABS: {
+						float x = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY();
+						float x1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getX1();
+						float y1 = ((SVGPathSegCurvetoQuadraticAbsImpl) seg).getY1();
+						path.quadTo(x1, y1, x, y);
+						lastControlPoint = new Point2D.Float(x1, y1);
+						lastX = x;
+						lastY = y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_REL: {
+						float x = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY();
+						float x1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getX1();
+						float y1 = ((SVGPathSegCurvetoQuadraticRelImpl) seg).getY1();
+						path.quadTo(lastX + x1, lastY + y1, lastX + x, lastY + y);
+						lastControlPoint = new Point2D.Float(lastX + x1, lastY + y1);
+						lastX += x;
+						lastY += y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS: {
+						float x = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoQuadraticSmoothAbsImpl) seg).getY();
+	
+						if (lastControlPoint == null) {
+							lastControlPoint = new Point2D.Float(lastX, lastY);
+						}
+	
+						Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(),
+								2 * lastY - (float) lastControlPoint.getY());
+						path.quadTo((float) nextControlPoint.getX(), (float) nextControlPoint.getY(), x, y);
+						lastControlPoint = nextControlPoint;
+						lastX = x;
+						lastY = y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL: {
+						float x = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getX();
+						float y = ((SVGPathSegCurvetoQuadraticSmoothRelImpl) seg).getY();
+	
+						if (lastControlPoint == null) {
+							lastControlPoint = new Point2D.Float(lastX, lastY);
+						}
+	
+						Point2D nextControlPoint = new Point2D.Float(2 * lastX - (float) lastControlPoint.getX(),
+								2 * lastY - (float) lastControlPoint.getY());
+						path.quadTo((float) nextControlPoint.getX(), (float) nextControlPoint.getY(), lastX + x, lastY + y);
+						lastControlPoint = nextControlPoint;
+						lastX += x;
+						lastY += y;
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_ARC_ABS: {
+	
+						float x1 = lastX;
+						float y1 = lastY;
+						float x2 = ((SVGPathSegArcAbsImpl) seg).getX();
+						float y2 = ((SVGPathSegArcAbsImpl) seg).getY();
+						float rx = Math.abs(((SVGPathSegArcAbsImpl) seg).getR1());
+						float ry = Math.abs(((SVGPathSegArcAbsImpl) seg).getR2());
+						float angle = (float) Math.toRadians(((SVGPathSegArcAbsImpl) seg).getAngle());
+						boolean fA = ((SVGPathSegArcAbsImpl) seg).getLargeArcFlag();
+						boolean fS = ((SVGPathSegArcAbsImpl) seg).getSweepFlag();
+	
+						if (rx == 0 || ry == 0) {
+							// radii 0, just do a lineTo
+							path.lineTo(x2, y2);
+							lastX = x2;
+							lastY = y2;
+							lastControlPoint = null;
+	
+						} else {
+	
+							Shape arc = SVGUtility.createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
+							path.append(arc, true);
+							lastX = x2;
+							lastY = y2;
+							lastControlPoint = null;
+						}
+						break;
+					}
+	
+					case SVGPathSeg.PATHSEG_ARC_REL: {
+	
+						float x1 = lastX;
+						float y1 = lastY;
+						float x2 = lastX + ((SVGPathSegArcRelImpl) seg).getX();
+						float y2 = lastY + ((SVGPathSegArcRelImpl) seg).getY();
+						float rx = Math.abs(((SVGPathSegArcRelImpl) seg).getR1());
+						float ry = Math.abs(((SVGPathSegArcRelImpl) seg).getR2());
+						float angle = (float) Math.toRadians(((SVGPathSegArcRelImpl) seg).getAngle());
+						boolean fA = ((SVGPathSegArcRelImpl) seg).getLargeArcFlag();
+						boolean fS = ((SVGPathSegArcRelImpl) seg).getSweepFlag();
+	
+						if (rx == 0 || ry == 0) {
+							// radii 0, just do a lineTo
+							path.lineTo(x2, y2);
+							lastX = x2;
+							lastY = y2;
+							lastControlPoint = null;
+						} else {
+							Shape arc = SVGUtility.createArc(x1, y1, x2, y2, rx, ry, angle, fA, fS);
+							path.append(arc, true);
+							lastX = x2;
+							lastY = y2;
+						}
+						break;
+					}
+					default:
+						break;
 				}
 			}
 		}

@@ -1112,10 +1112,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		if (!DOMEventImpl.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null) {
-			return false;
-		}
-		return true;
+		return (!DOMEventImpl.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null);
 	}
 
 	/*
@@ -1314,6 +1311,8 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 			case Adjustable.VERTICAL:
 				this.scrollVerticalTo(bodyLayout.y - offset);
 				break;
+			default:
+				break;
 			}
 		}
 	}
@@ -1377,6 +1376,8 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 		case Adjustable.VERTICAL:
 			int yOrigin = insets.top - value;
 			this.scrollVerticalTo(yOrigin);
+			break;
+		default:
 			break;
 		}
 	}

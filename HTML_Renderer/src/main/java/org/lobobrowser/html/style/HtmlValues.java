@@ -242,6 +242,7 @@ public class HtmlValues implements CSSValuesProperties {
 				break;
 			default:
 				result.append(ch);
+				break;
 			}
 			index++;
 		}

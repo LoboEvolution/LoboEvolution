@@ -127,7 +127,7 @@ public class LRUCache implements java.io.Serializable {
 			ordVal.touch();
 			this.timedSet.add(ordVal);
 		} else {
-			ordVal = new OrderedValue(key, value, approxSize);
+			ordVal = new OrderedValue(key, value);
 			this.cacheMap.put(key, ordVal);
 			this.timedSet.add(ordVal);
 			this.currentSize += approxSize;

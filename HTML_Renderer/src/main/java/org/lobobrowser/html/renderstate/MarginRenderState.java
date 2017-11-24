@@ -45,6 +45,8 @@ public class MarginRenderState {
 				insets = HtmlInsets.updateBottomInset(insets, mg[0], renderState);
 				insets = HtmlInsets.updateLeftInset(insets, mg[0], renderState);
 				break;
+			default:
+				break;
 			}
 		} else {
 

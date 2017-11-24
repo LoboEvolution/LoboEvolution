@@ -109,20 +109,7 @@ public class Session extends AbstractBean {
 	 * Creates a new Session. Automatically installs the {@link CookieManager}.
 	 */
 	public Session() {
-		this(true);
-	}
-
-	/**
-	 * Creates a new Session. If <code>installCookieManager</code> is true, then
-	 * the CookieManager is installed automatically. Otherwise, the
-	 * <code>CookieManager</code> will not be installed, allowing you to use
-	 * some other cookie manager.
-	 *
-	 * @param installCookieManager
-	 */
-	public Session(boolean installCookieManager) {
 		setSslSecurityLevel(SecurityLevel.Medium);
-		// register a default security handler
 		setMediumSecurityHandler(new DefaultSecurityHandler());
 	}
 
@@ -436,10 +423,10 @@ public class Session extends AbstractBean {
 	 */
 	public final Response execute(String method, String url, Parameter... params) throws Exception {
 		if (method == null) {
-			throw new NullPointerException("method cannot be null");
+			throw new IllegalArgumentException ("method cannot be null");
 		}
 		if (url == null) {
-			throw new NullPointerException("url cannot be null");
+			throw new IllegalArgumentException ("url cannot be null");
 		}
 		// create and handle the request
 		Request req = new Request();

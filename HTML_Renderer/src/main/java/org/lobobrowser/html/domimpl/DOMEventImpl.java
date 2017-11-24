@@ -224,7 +224,7 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 */
 	public void onMouseOut(ModelNode node, MouseEvent event, int x, int y, ModelNode limit) {
 		while (node != null) {
-			if (node == limit) {
+			if (node.equals(limit)) {
 				break;
 			}
 			if (node instanceof HTMLAbstractUIElement) {

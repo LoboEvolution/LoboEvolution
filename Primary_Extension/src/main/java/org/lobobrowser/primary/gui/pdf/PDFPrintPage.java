@@ -248,6 +248,8 @@ public class PDFPrintPage implements Printable {
 				case PageFormat.PORTRAIT:
 					format.setOrientation(PageFormat.LANDSCAPE);
 					break;
+				default:
+					break;
 				}
 				pwidth = format.getImageableWidth();
 				pheight = format.getImageableHeight();

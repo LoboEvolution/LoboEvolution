@@ -795,6 +795,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				int units = mwe.getWheelRotation() * mwe.getScrollAmount();
 				block.scrollByUnits(Adjustable.VERTICAL, units);
 				break;
+			default:
+				break;
 			}
 		}
 	}

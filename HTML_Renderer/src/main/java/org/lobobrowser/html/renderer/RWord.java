@@ -104,6 +104,7 @@ public final class RWord extends BaseBoundableRenderable {
 			break;
 		default:
 			string = word;
+			break;
 		}
 		return string;
 	}

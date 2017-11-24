@@ -100,7 +100,7 @@ public class Response {
 	Response(StatusCode statusCode, String statusText, byte[] responseBody, String charset, Set<Header> headers,
 			String baseUrl) {
 		if (statusCode == null) {
-			throw new NullPointerException("statusCode cannot be null");
+			throw new IllegalArgumentException ("statusCode cannot be null");
 		}
 		if (responseBody == null) {
 			responseBody = new byte[0];
@@ -133,7 +133,7 @@ public class Response {
 	 */
 	public Header getHeader(String name) {
 		if (name == null) {
-			throw new NullPointerException("name cannot be null");
+			throw new IllegalArgumentException ("name cannot be null");
 		}
 		for (Header h : headers) {
 			if (name.equalsIgnoreCase(h.getName())) {

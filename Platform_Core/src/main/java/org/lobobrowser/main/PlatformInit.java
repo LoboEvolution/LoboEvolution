@@ -518,14 +518,14 @@ public class PlatformInit {
 		 */
 		@Override
 		public URLStreamHandler createURLStreamHandler(String protocol) {
-			if (protocol.equals("res")) {
-				return new org.lobobrowser.protocol.res.Handler();
-			} else if (protocol.equals("vc")) {
+			switch (protocol) {
+			case "res": 
+				return new org.lobobrowser.protocol.res.Handler(); 
+			case "vc": 
 				return new org.lobobrowser.protocol.vc.Handler();
-			} else {
+			default:
 				return null;
 			}
 		}
 	}
-
 }
