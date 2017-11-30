@@ -110,7 +110,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 				String propertyName = styleDeclaration.item(i);
 				String propertyValue = styleDeclaration.getPropertyValue(propertyName);
 				String priority = styleDeclaration.getPropertyPriority(propertyName);
-				boolean important = priority != null && priority.length() != 0 && "important".equals(priority);
+				boolean important = "important".equals(priority);
 				this.setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, styleDeclaration, important);
 			}
 		}
