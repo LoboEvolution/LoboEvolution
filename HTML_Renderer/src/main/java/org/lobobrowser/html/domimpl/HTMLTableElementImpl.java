@@ -25,7 +25,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
-import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.domfilter.ElementTableAttributeFilter;
 import org.lobobrowser.html.renderstate.RenderState;
@@ -39,12 +38,13 @@ import org.lobobrowser.w3c.html.HTMLTableCaptionElement;
 import org.lobobrowser.w3c.html.HTMLTableElement;
 import org.lobobrowser.w3c.html.HTMLTableSectionElement;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
  * The Class HTMLTableElementImpl.
  */
-public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement, HtmlProperties {
+public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement {
 	
 	/** The caption. */
 	private HTMLTableCaptionElement caption;
@@ -405,7 +405,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	@Override
 	public HTMLElement createTHead() {
 		org.w3c.dom.Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("thead");
+		return doc == null ? null : (HTMLElement) doc.createElement(THEAD);
 	}
 
 	/*
@@ -415,7 +415,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void deleteTHead() {
-		this.removeChildren(new ElementTableAttributeFilter("THEAD"));
+		this.removeChildren(new ElementTableAttributeFilter(THEAD));
 	}
 
 	/*
@@ -425,8 +425,8 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLElement createTFoot() {
-		org.w3c.dom.Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("tfoot");
+		Document doc = this.document;
+		return doc == null ? null : (HTMLElement) doc.createElement(TFOOT);
 	}
 
 	/*
@@ -436,7 +436,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void deleteTFoot() {
-		this.removeChildren(new ElementTableAttributeFilter("TFOOT"));
+		this.removeChildren(new ElementTableAttributeFilter(TFOOT));
 	}
 
 	/*
@@ -446,8 +446,8 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLElement createCaption() {
-		org.w3c.dom.Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement("caption");
+		Document doc = this.document;
+		return doc == null ? null : (HTMLElement) doc.createElement(CAPTION);
 	}
 
 	/*
@@ -457,7 +457,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public void deleteCaption() {
-		this.removeChildren(new ElementTableAttributeFilter("CAPTION"));
+		this.removeChildren(new ElementTableAttributeFilter(CAPTION));
 	}
 
 	/**
@@ -476,7 +476,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
-		HTMLElement rowElement = (HTMLElement) doc.createElement("TR");
+		HTMLElement rowElement = (HTMLElement) doc.createElement(TR);
 		synchronized (this.getTreeLock()) {
 			if (index == -1) {
 				this.appendChild(rowElement);
@@ -488,7 +488,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 				int trcount = 0;
 				for (int i = 0; i < size; i++) {
 					Node node = nl.get(i);
-					if ("TR".equalsIgnoreCase(node.getNodeName())) {
+					if (TR.equalsIgnoreCase(node.getNodeName())) {
 						if (trcount == index) {
 							this.insertAt(rowElement, i);
 							return rowElement;
@@ -518,7 +518,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 				int trcount = 0;
 				for (int i = 0; i < size; i++) {
 					Node node = nl.get(i);
-					if ("TR".equalsIgnoreCase(node.getNodeName())) {
+					if (TR.equalsIgnoreCase(node.getNodeName())) {
 						if (trcount == index) {
 							this.removeChildAt(i);
 							return;
@@ -530,6 +530,28 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		}
 		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.lobobrowser.w3c.html.HTMLTableElement#insertRow()
+	 */
+	@Override
+	public HTMLElement insertRow() {
+		return insertRow(-1);
+	}
+
+	@Override
+	public HTMLElement createTBody() {
+		Document doc = this.document;
+		return doc == null ? null : (HTMLElement) doc.createElement(TBODY);
+	}
+
+	@Override
+	public HTMLElement deleteTBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -540,28 +562,5 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new TableRenderState(prevRenderState, this);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.lobobrowser.w3c.html.HTMLTableElement#insertRow()
-	 */
-	@Override
-	public HTMLElement insertRow() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HTMLElement createTBody() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public HTMLElement deleteTBody() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

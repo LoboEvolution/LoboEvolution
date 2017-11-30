@@ -20,6 +20,8 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Font;
+
 import org.lobobrowser.html.renderstate.FontStyleRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
 
@@ -47,7 +49,7 @@ public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);
+		prevRenderState = new FontStyleRenderState(prevRenderState, Font.BOLD);
 		return super.createRenderState(prevRenderState);
 	}
 }

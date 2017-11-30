@@ -25,7 +25,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
-import org.lobobrowser.html.HtmlProperties;
 import org.lobobrowser.html.dombl.DescendentHTMLCollection;
 import org.lobobrowser.html.dombl.NodeVisitor;
 import org.lobobrowser.html.dombl.StopVisitorException;
@@ -34,28 +33,17 @@ import org.lobobrowser.w3c.html.HTMLCollection;
 import org.lobobrowser.w3c.html.HTMLElement;
 import org.lobobrowser.w3c.html.HTMLTableRowElement;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
  * The Class HTMLTableRowElementImpl.
  */
-public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement, HtmlProperties {
+public class HTMLTableRowElementImpl extends HTMLAbstractUIElement implements HTMLTableRowElement {
 
-	/**
-	 * Instantiates a new HTML table row element impl.
-	 *
-	 * @param name
-	 *            the name
-	 */
+	
 	public HTMLTableRowElementImpl(String name) {
-		super(name, true);
-	}
-
-	/**
-	 * Instantiates a new HTML table row element impl.
-	 */
-	public HTMLTableRowElementImpl() {
-		super(TR, true);
+		super(name);
 	}
 
 	/*
@@ -252,7 +240,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 *             the DOM exception
 	 */
 	private HTMLElement insertCell(int index, String tagName) throws DOMException {
-		org.w3c.dom.Document doc = this.document;
+		Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
@@ -317,7 +305,6 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 */
 	@Override
 	public HTMLElement insertCell() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.insertCell(-1, TD);
 	}
 }
