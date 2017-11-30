@@ -27,7 +27,7 @@ package org.lobobrowser.html.style;
  * The Class HtmlLength.
  */
 public final class HtmlLength {
-	// Note: Preferred type has higher value
+		
 	/** The Constant PIXELS. */
 	public static final int PIXELS = 1;
 
@@ -71,12 +71,9 @@ public final class HtmlLength {
 			} else {
 				parseable = spec.substring(0, length - 1).trim();
 			}
-		} else if (spec.endsWith("px")) {
-			this.lengthType = PIXELS;
-			parseable = spec.substring(0, length - 2).trim();
 		} else {
 			this.lengthType = PIXELS;
-			parseable = spec;
+			parseable = String.valueOf(HtmlValues.getPixelSize(spec, null, -1));
 		}
 		this.value = Integer.parseInt(parseable);
 	}
