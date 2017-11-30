@@ -892,13 +892,9 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 
 		if (props != null) {
 
-			if (binfo == null) {
-				binfo = new BackgroundInfo();
-			}
-
 			String backgroundText = props.getBackground();
 			ArrayList<String> backList = new ArrayList<String>();
-
+			
 			if (backgroundText == null) {
 				backList.add(props.getBackgroundColor());
 				backList.add(props.getBackgroundImage());
@@ -911,6 +907,11 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			
 			for (String back : backList) {
 				if (back != null && !back.equals(" ")) {
+					
+					if (binfo == null) {
+						binfo = new BackgroundInfo();
+					}
+					
 					switch (back.toLowerCase()) {
 					case INHERIT:
 						binfo.setBackgroundColor(this.getPreviousRenderState().getBackgroundColor());

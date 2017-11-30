@@ -203,17 +203,21 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (binfo != INVALID_BACKGROUND_INFO) {
 			return binfo;
 		}
+		
 		// Apply style based on deprecated attributes.
 		binfo = super.getBackgroundInfo();
 		HTMLTableCellElementImpl element = (HTMLTableCellElementImpl) this.element;
 		HTMLTableRowElementImpl rowElement = null;
 		Object parentNode = element.getParentNode();
+		
 		if (parentNode instanceof HTMLTableRowElementImpl) {
 			rowElement = (HTMLTableRowElementImpl) parentNode;
 		}
+		
 		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgColor = element.getBgColor();
-			if (!Strings.isBlank(bgColor) && rowElement != null) {
+			
+			if (Strings.isBlank(bgColor) && rowElement != null) {
 				bgColor = rowElement.getBgColor();
 			}
 			
