@@ -37,6 +37,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.info.SelectorInfo;
 import org.lobobrowser.html.info.StyleRuleInfo;
 import org.lobobrowser.html.style.selectors.SelectorMatcher;
 import org.lobobrowser.http.UserAgentContext;
@@ -219,44 +220,14 @@ public class StyleSheetAggregator {
 			}
 
 			if (selectorList.contains("[") && selectorList.endsWith("]")) {
-				String selector = selectorList.replace("\"", "");
-				int quadIdx = selector.indexOf("[") + 1;
-				htmlElement = selector.substring(0, selector.indexOf("["));
-				if (selectorList.contains(SelectorMatcher.OP_PIPE_EQUAL)) {
-					int eqIdx = selector.indexOf(SelectorMatcher.OP_PIPE_EQUAL);
-					attribute = selector.substring(quadIdx, eqIdx);
-					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = SelectorMatcher.OP_PIPE_EQUAL;
-				} else if (selectorList.contains(SelectorMatcher.OP_CIRCUMFLEX_EQUAL)) {
-					int eqIdx = selector.indexOf(SelectorMatcher.OP_CIRCUMFLEX_EQUAL);
-					attribute = selector.substring(quadIdx, eqIdx);
-					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = SelectorMatcher.OP_CIRCUMFLEX_EQUAL;
-				} else if (selectorList.contains(SelectorMatcher.OP_TILDE_EQUAL)) {
-					int eqIdx = selector.indexOf(SelectorMatcher.OP_TILDE_EQUAL);
-					attribute = selector.substring(quadIdx, eqIdx);
-					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = SelectorMatcher.OP_TILDE_EQUAL;
-				} else if (selectorList.contains(SelectorMatcher.OP_DOLLAR_EQUAL)) {
-					int eqIdx = selector.indexOf(SelectorMatcher.OP_DOLLAR_EQUAL);
-					attribute = selector.substring(quadIdx, eqIdx);
-					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = SelectorMatcher.OP_DOLLAR_EQUAL;
-				} else if (selectorList.contains(SelectorMatcher.OP_STAR_EQUAL)) {
-					int eqIdx = selector.indexOf(SelectorMatcher.OP_STAR_EQUAL);
-					attribute = selector.substring(quadIdx, eqIdx);
-					attributeValue = selector.substring(eqIdx + 2, selector.length() - 1);
-					attributeOperator = SelectorMatcher.OP_STAR_EQUAL;
-				} else if (selectorList.contains(SelectorMatcher.OP_EQUAL)) {
-					int eqIdx = selector.indexOf(SelectorMatcher.OP_EQUAL);
-					attribute = selector.substring(quadIdx, eqIdx);
-					attributeValue = selector.substring(eqIdx + 1, selector.length() - 1);
-					attributeOperator = SelectorMatcher.OP_EQUAL;
-				} else {
-					attribute = selector.substring(quadIdx, selector.length() - 1);
-					attributeValue = "-";
-					attributeOperator = SelectorMatcher.OP_ALL;
-				}
+				SelectorMatcher sm = new SelectorMatcher();
+				String selector = sm.getAttributeSelector(selectorList.replace("\"", ""));
+				attributeOperator = sm.getOperator(selector);
+				SelectorInfo si = sm.getSelector(selector, attributeOperator);
+				attribute = si.getAttribute();
+				attributeValue = si.getAttributeValue();
+				int parenthesis = selectorList.indexOf("[");
+				htmlElement = selectorList.substring(0, parenthesis);
 				this.addAttributeRule(htmlElement, attributeValue, sr, selectorMatchers);
 			}
 		} else if (rule instanceof CSSImportRule) {

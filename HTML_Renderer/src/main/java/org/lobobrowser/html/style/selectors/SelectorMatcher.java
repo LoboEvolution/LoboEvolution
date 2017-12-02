@@ -21,9 +21,12 @@
 package org.lobobrowser.html.style.selectors;
 
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.lobobrowser.html.domimpl.DOMNodeImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.info.SelectorInfo;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -32,7 +35,7 @@ import org.w3c.dom.Node;
  * The Class SelectorMatcher.
  */
 public class SelectorMatcher {
-
+	
 	/** The op equal. */
 	public final static String OP_EQUAL = "=";
 
@@ -170,7 +173,6 @@ public class SelectorMatcher {
 			if (pe != null && pe.contains("(")) {
 				pe = pe.substring(0, pe.indexOf("("));
 			}
-
 			return pe == null || names.contains(pe);
 		}
 	}
@@ -400,8 +402,40 @@ public class SelectorMatcher {
 			}
 		}
 	}
-
-	/**
+	
+	public String getOperator(String selectorList) {
+		String[] keys = {OP_TILDE_EQUAL, OP_PIPE_EQUAL, OP_DOLLAR_EQUAL, OP_CIRCUMFLEX_EQUAL, OP_STAR_EQUAL, OP_EQUAL};
+        for (int i = 0; i < keys.length; i++) {
+            if (selectorList.contains(keys[i])) {
+                return keys[i];
+            }
+        }
+        return OP_ALL;
+    }
+    
+    public String getAttributeSelector(String x) {
+         Matcher m = Pattern.compile("\\[(.*?)\\]").matcher(x);
+        while(m.find()) {
+            return m.group(1);
+        }
+        return "";
+    }
+    
+    public SelectorInfo getSelector(String str, String selector) {
+        SelectorInfo si = new SelectorInfo();
+        if(!selector.equals(OP_ALL)) {
+            Pattern SPACE = Pattern.compile("\\"+selector);
+            String[] arr = SPACE.split(str);
+            si.setAttribute(arr[0]);
+            si.setAttributeValue(arr[1]);
+        } else {
+            si.setAttribute(str);
+            si.setAttributeValue("-");
+        }
+        return si;
+    }
+    
+    /**
 	 * Matches the <i>nth</i> child.
 	 *
 	 * @param node
