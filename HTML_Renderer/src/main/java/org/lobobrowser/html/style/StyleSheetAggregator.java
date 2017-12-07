@@ -166,27 +166,28 @@ public class StyleSheetAggregator {
 		if (rule instanceof CSSStyleRule) {
 			CSSStyleRule sr = (CSSStyleRule) rule;
 			String selectorList = sr.getSelectorText();
-			StringTokenizer commaTok = new StringTokenizer(selectorList, ",");
+			String[] selectors = selectorList.split(",");
 			ArrayList<SelectorMatcher> selectorMatchers = null;
-			while (commaTok.hasMoreTokens()) {
-				String selectorPart = commaTok.nextToken().toLowerCase();
+			for (String commaTok : selectors) {
+				selectorMatchers = new ArrayList<SelectorMatcher>();				
+				String selectorPart = commaTok.toLowerCase();
 				String lastSelectorText = null;
 				StringTokenizer tok = new StringTokenizer(selectorPart, " \t\r\n");
 				if (tok.hasMoreTokens()) {
 					selectorMatchers = new ArrayList<SelectorMatcher>();
 					SelectorMatcher prevSelector = null;
-					SELECTOR_FOR: for (;;) {
+					while(true) {
 						String token = tok.nextToken();
 						if (">".equals(token)) {
 							if (prevSelector != null) {
 								prevSelector.setSelectorType(SelectorMatcher.PARENT);
 							}
-							continue SELECTOR_FOR;
+							continue;
 						} else if ("+".equals(token)) {
 							if (prevSelector != null) {
 								prevSelector.setSelectorType(SelectorMatcher.PRECEEDING_SIBLING);
 							}
-							continue SELECTOR_FOR;
+							continue;
 						}
 						int colonIdx = token.indexOf(':');
 						String selectorText = colonIdx == -1 ? token : token.substring(0, colonIdx);
