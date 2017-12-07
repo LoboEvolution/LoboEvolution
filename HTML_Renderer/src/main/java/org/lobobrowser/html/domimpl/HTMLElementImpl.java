@@ -48,7 +48,7 @@ import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.LocalCSS2Properties;
 import org.lobobrowser.html.style.StyleSheetAggregator;
-import org.lobobrowser.html.style.selectors.SelectorMatcher;
+import org.lobobrowser.html.style.selectors.AttributeSelector;
 import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.LAFSettings;
 import org.lobobrowser.w3c.html.DOMSettableTokenList;
@@ -595,20 +595,20 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 */
 	public Set<String> getPseudoNames() {
 		Set<String> pnset = new HashSet<String>();
-		pnset.add(SelectorMatcher.LAST_CHILD);
-		pnset.add(SelectorMatcher.LAST_OF_TYPE);
-		pnset.add(SelectorMatcher.FIRST_CHILD);
-		pnset.add(SelectorMatcher.FIRST_OF_TYPE);
-		pnset.add(SelectorMatcher.ONLY_CHILD);
-		pnset.add(SelectorMatcher.ONLY_OF_TYPE);
-		pnset.add(SelectorMatcher.NTH_CHILD);
-		pnset.add(SelectorMatcher.NTH_LAST_CHILD);
-		pnset.add(SelectorMatcher.NTH_OF_TYPE);
-		pnset.add(SelectorMatcher.NTH_LAST_OF_TYPE);
-		pnset.add(SelectorMatcher.HOVER);
-		pnset.add(SelectorMatcher.ROOT);
-		pnset.add(SelectorMatcher.EMPTY);
-		pnset.add(SelectorMatcher.LANG);
+		pnset.add(AttributeSelector.LAST_CHILD);
+		pnset.add(AttributeSelector.LAST_OF_TYPE);
+		pnset.add(AttributeSelector.FIRST_CHILD);
+		pnset.add(AttributeSelector.FIRST_OF_TYPE);
+		pnset.add(AttributeSelector.ONLY_CHILD);
+		pnset.add(AttributeSelector.ONLY_OF_TYPE);
+		pnset.add(AttributeSelector.NTH_CHILD);
+		pnset.add(AttributeSelector.NTH_LAST_CHILD);
+		pnset.add(AttributeSelector.NTH_OF_TYPE);
+		pnset.add(AttributeSelector.NTH_LAST_OF_TYPE);
+		pnset.add(AttributeSelector.HOVER);
+		pnset.add(AttributeSelector.ROOT);
+		pnset.add(AttributeSelector.EMPTY);
+		pnset.add(AttributeSelector.LANG);
 		return pnset;
 	}
 

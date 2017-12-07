@@ -39,6 +39,7 @@ import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.info.SelectorInfo;
 import org.lobobrowser.html.info.StyleRuleInfo;
+import org.lobobrowser.html.style.selectors.AttributeSelector;
 import org.lobobrowser.html.style.selectors.SelectorMatcher;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Attr;
@@ -221,9 +222,10 @@ public class StyleSheetAggregator {
 
 			if (selectorList.contains("[") && selectorList.endsWith("]")) {
 				SelectorMatcher sm = new SelectorMatcher();
-				String selector = sm.getAttributeSelector(selectorList.replace("\"", ""));
+				AttributeSelector am = new AttributeSelector();
+				String selector = am.getAttributeSelector(selectorList.replace("\"", ""));
 				attributeOperator = sm.getOperator(selector);
-				SelectorInfo si = sm.getSelector(selector, attributeOperator);
+				SelectorInfo si = am.getSelector(selector, attributeOperator);
 				attribute = si.getAttribute();
 				attributeValue = si.getAttributeValue();
 				int parenthesis = selectorList.indexOf("[");
@@ -403,7 +405,7 @@ public class StyleSheetAggregator {
 		String elementTL = elementName.toLowerCase();
 		Collection<StyleRuleInfo> elementRules = this.rulesByElement.get(elementTL);
 		if (elementRules != null) {
-			SelectorMatcher sm = new SelectorMatcher();
+			AttributeSelector am = new AttributeSelector();
 			String psElement = pseudoElement;
 			if (psElement != null && psElement.contains("(")) {
 				psElement = psElement.substring(0, psElement.indexOf("("));
@@ -416,10 +418,10 @@ public class StyleSheetAggregator {
 				StyleRuleInfo styleRuleInfo = i.next();
 				for (int a = 0; a < styleRuleInfo.getAncestorSelectors().size(); a++) {
 					SelectorMatcher selectorMatcher = styleRuleInfo.getAncestorSelectors().get(a);
-					if (sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
+					if (am.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
 							&& element.getPseudoNames().contains(psElement)) {
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
-					} else if (!sm.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
+					} else if (!am.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
 							&& !element.getPseudoNames().contains(psElement)) {
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
 					}
