@@ -178,8 +178,8 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		BackgroundInfo bg = binfo;
 		if (back.contains("url") && bg.getBackgroundImage() == null) {
 			String start = "url(";
-			int startIdx = start.length() +1;
-			int closingIdx = back.lastIndexOf(')')-1;
+			int startIdx = start.length();
+			int closingIdx = back.lastIndexOf(')');
 			String quotedUri = back.substring(startIdx, closingIdx);
 			URL url = document.getFullURL(quotedUri);
 			bg.setBackgroundImage(url);
@@ -398,21 +398,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	}
 	
 	public ArrayList<String> spliBackground(String backgroundText) {
-		ArrayList<String> list = new ArrayList<String>();
-		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("\\)")));
-
-		for (String back : backList) {
-			if (back.contains("(")) {
-				back = back + ")";
-				list.add(back);
-			} else {
-				ArrayList<String> a = new ArrayList<String>(Arrays.asList(back.split(" ")));
-				for (String a1 : a) {
-					list.add(a1);
-				}
-			}
-		}
-		return list;
+		return new ArrayList<String>(Arrays.asList(backgroundText.split("\\s+")));
 	}
 	
 	/**

@@ -50,6 +50,7 @@ import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderThreadState;
+import org.lobobrowser.util.Strings;
 import org.lobobrowser.util.gui.ColorFactory;
 import org.lobobrowser.util.gui.FontFactory;
 import org.lobobrowser.util.gui.LAFSettings;
@@ -906,7 +907,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			}
 			
 			for (String back : backList) {
-				if (back != null && !back.equals(" ")) {
+				if (!Strings.isBlank(back)) {
 					
 					if (binfo == null) {
 						binfo = new BackgroundInfo();

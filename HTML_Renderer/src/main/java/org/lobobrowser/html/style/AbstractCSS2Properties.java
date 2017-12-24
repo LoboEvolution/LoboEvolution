@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.lobobrowser.html.style.setter.BackgroundImageSetter;
 import org.lobobrowser.html.style.setter.BackgroundSetter;
 import org.lobobrowser.html.style.setter.BorderSetter1;
 import org.lobobrowser.html.style.setter.BorderSetter2;
@@ -76,8 +75,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 		subSetters.put(BORDER_COLOR, new FourCornersSetter(BORDER_COLOR, "border-", "-color"));
 		subSetters.put(BORDER_STYLE, new FourCornersSetter(BORDER_STYLE, "border-", "-style"));
 		subSetters.put(BORDER_WIDTH, new FourCornersSetter(BORDER_WIDTH, "border-", "-width"));
-		subSetters.put(BACKGROUND, new BackgroundSetter());
-		subSetters.put(BACKGROUND_IMAGE, new BackgroundImageSetter());
 		subSetters.put(FONT, new FontSetter());
 	}
 
@@ -1647,7 +1644,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public void setBackgroundImage(String backgroundImage) throws DOMException {
-		new BackgroundImageSetter().changeValue(this, backgroundImage, null);
+		this.setPropertyValueLC(BACKGROUND_POSITION, backgroundImage);
 		this.context.informLookInvalid();
 	}
 
