@@ -252,20 +252,28 @@ public class ImgControl extends BaseControl implements ImageListener {
 			valign = RElement.VALIGN_BASELINE;
 		} else {
 			align = align.toLowerCase().trim();
-			if ("middle".equals(align)) {
+			switch (align) {
+			case "middle":
 				valign = RElement.VALIGN_MIDDLE;
-			} else if ("absmiddle".equals(align)) {
+				break;
+			case "absmiddle":
 				valign = RElement.VALIGN_ABSMIDDLE;
-			} else if ("top".equals(align)) {
+				break;
+			case "top":
 				valign = RElement.VALIGN_TOP;
-			} else if ("bottom".equals(align)) {
+				break;
+			case "bottom":
 				valign = RElement.VALIGN_BOTTOM;
-			} else if ("baseline".equals(align)) {
+				break;
+			case "baseline":
 				valign = RElement.VALIGN_BASELINE;
-			} else if ("absbottom".equals(align)) {
+				break;
+			case "absbottom":
 				valign = RElement.VALIGN_ABSBOTTOM;
-			} else {
+				break;
+			default:
 				valign = RElement.VALIGN_BASELINE;
+				break;
 			}
 		}
 		this.valign = valign;
