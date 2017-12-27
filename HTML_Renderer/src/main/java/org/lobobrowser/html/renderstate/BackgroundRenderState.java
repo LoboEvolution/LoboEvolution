@@ -41,6 +41,7 @@ import javax.swing.ImageIcon;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Strings;
 import org.lobobrowser.html.dombl.SVGRasterizer;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.info.BackgroundInfo;
@@ -398,9 +399,20 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	}
 	
 	public ArrayList<String> spliBackground(String backgroundText) {
-		return new ArrayList<String>(Arrays.asList(backgroundText.split("\\s+")));
+		ArrayList<String> list = new ArrayList<String>();
+		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("[\\)s+)]")));
+
+		for (String back : backList) {
+			if (back.contains("(")) {
+				back = back + ")";
+				list.add(back);
+			} else if (!Strings.isBlank(back)) {
+				list.add(back);
+			}
+		}
+		return list;
 	}
-	
+
 	/**
 	 * Checks if is length.
 	 *
