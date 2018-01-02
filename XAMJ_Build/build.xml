@@ -82,7 +82,7 @@
 	<target name="lobo_jar" depends="lobo_classfiles,common_classfiles">
 		<jar destfile="${build.dir}/lobo.jar" basedir="Platform_Core/bin/" includes="**/*.class">
 			<manifest>
-				<attribute name="Main-Class" value="org.lobobrowser.main.EntryPoint" />
+				<attribute name="Main-Class" value="org.loboevolution.main.EntryPoint" />
 				<attribute name="Class-Path" value="lobo-pub.jar ./ext/log4j-core-2.8.1.jar ./ext/log4j-api-2.8.1.jar ./ext/JTattoo-1.6.11.jar" />
 			</manifest>
 		</jar>

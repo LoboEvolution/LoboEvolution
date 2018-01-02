@@ -1,0 +1,86 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2014 - 2018 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+
+    Contact info: ivan.difrancesco@yahoo.it
+ */
+/*
+ * Created on Jun 23, 2005
+ */
+package org.loboevolution.primary.clientlets;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+/**
+ * The Class ArchiveCollection.
+ *
+ * @author J. H. S.
+ */
+public class ArchiveCollection {
+
+	/** The archive infos. */
+	private final Collection<Object[]> archiveInfos;
+	
+	/** The class loader. */
+	private ArchiveClassLoader classLoader;
+
+	/**
+	 * Instantiates a new archive collection.
+	 */
+	public ArchiveCollection() {
+		this.archiveInfos = new LinkedList<Object[]>();
+	}
+
+	/**
+	 * Instantiates a new archive collection.
+	 *
+	 * @param archiveInfos
+	 *            the archive infos
+	 */
+	public ArchiveCollection(Collection<Object[]> archiveInfos) {
+		this.archiveInfos = archiveInfos;
+	}
+
+	/**
+	 * Gets the class loader.
+	 *
+	 * @return the class loader
+	 */
+	public ClassLoader getClassLoader() throws IOException {
+		synchronized (this) {
+			if (this.archiveInfos.size() == 0) {
+				return this.getClass().getClassLoader();
+			}
+			if (this.classLoader == null) {
+				this.classLoader = new ArchiveClassLoader(this.archiveInfos);
+			}
+			return this.classLoader;
+		}
+	}
+
+	/**
+	 * Iterator.
+	 *
+	 * @return the iterator
+	 */
+	public Iterator<Object[]> iterator() {
+		return this.archiveInfos.iterator();
+	}
+}

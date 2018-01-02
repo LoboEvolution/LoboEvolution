@@ -69,7 +69,7 @@ Cobra changes:
 
 - Note: For consistency with other project
   changes, all Cobra package names have been 
-  renamed to have a prefix of "org.lobobrowser." 
+  renamed to have a prefix of "org.loboevolution." 
   instead of "org.xamjwg." 
 
 - Note: Simplified FormInput so that values

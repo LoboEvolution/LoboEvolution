@@ -7,9 +7,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/HTML_Renderer"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Core"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/PDFrenderer.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/rsyntaxtextarea.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-api-2.8.1.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/PDFrenderer.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/rsyntaxtextarea.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-api-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-core-2.8.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

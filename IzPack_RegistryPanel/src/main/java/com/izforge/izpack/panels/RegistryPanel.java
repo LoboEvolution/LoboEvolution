@@ -1,6 +1,6 @@
 /*
     GNU GENERAL LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2018 Lobo Evolution
+    Copyright (C) 2014 - 2018 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
 
-    Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
+    Contact info: ivan.difrancesco@yahoo.it
  */
 /*
  * Created on Jun 5, 2005

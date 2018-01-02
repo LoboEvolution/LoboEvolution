@@ -1,0 +1,60 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2014 - 2018 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+
+    Contact info: ivan.difrancesco@yahoo.it
+ */
+package org.loboevolution.primary.ext;
+
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
+
+/**
+ * The Class MenuAdapter.
+ */
+public abstract class MenuAdapter implements MenuListener {
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.event.MenuListener#menuCanceled(javax.swing.event.MenuEvent)
+	 */
+	@Override
+	public void menuCanceled(MenuEvent e) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.event.MenuListener#menuDeselected(javax.swing.event.
+	 * MenuEvent)
+	 */
+	@Override
+	public void menuDeselected(MenuEvent e) {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * javax.swing.event.MenuListener#menuSelected(javax.swing.event.MenuEvent)
+	 */
+	@Override
+	public void menuSelected(MenuEvent e) {
+	}
+}

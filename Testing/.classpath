@@ -11,8 +11,9 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/Platform_Public_API"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Primary_Extension"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/batik-all-1.8.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-api-2.8.1.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/batik-all-1.8.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-api-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-core-2.8.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LoboEvolution_Build"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

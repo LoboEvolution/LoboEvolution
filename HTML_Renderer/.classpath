@@ -4,11 +4,11 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/parser"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Common"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/xalan.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/jdatepicker.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-api-2.8.1.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/log4j-core-2.8.1.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/batik-all-1.8.jar"/>
-	<classpathentry kind="lib" path="/XAMJ_Build/ext/w3c.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/xalan.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/jdatepicker.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-api-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/batik-all-1.8.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/w3c.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
