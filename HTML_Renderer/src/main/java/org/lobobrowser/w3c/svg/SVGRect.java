@@ -1,7 +1,7 @@
 
 /*
     GNU GENERAL LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2017 Lobo Evolution
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 - 2018 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
     modify it under the terms of the GNU General Public
