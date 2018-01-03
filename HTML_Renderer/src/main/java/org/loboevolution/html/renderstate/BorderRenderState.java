@@ -201,72 +201,7 @@ public class BorderRenderState implements CSSValuesProperties {
 		populateBorderInsets(binfo, properties, renderState);
 		return binfo;
 	}
-
-	/**
-	 * Gets the border insets.
-	 *
-	 * @param borderStyles
-	 *            the border styles
-	 * @param cssProperties
-	 *            the css properties
-	 * @param renderState
-	 *            the render state
-	 * @return the border insets
-	 */
-	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS3Properties cssProperties,
-			RenderState renderState) {
-		HtmlInsets insets = null;
-		String borderText = cssProperties.getBorder();
-		if (borderText != null) {
-			String[] br = borderText.split(" ");
-			int sizeBorder = br.length;
-			switch (sizeBorder) {
-			case 4:
-				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
-				insets = HtmlInsets.updateRightInset(insets, br[1], renderState);
-				insets = HtmlInsets.updateBottomInset(insets, br[2], renderState);
-				insets = HtmlInsets.updateLeftInset(insets, br[3], renderState);
-				break;
-			case 3:
-				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
-				insets = HtmlInsets.updateRightInset(insets, br[1], renderState);
-				insets = HtmlInsets.updateBottomInset(insets, br[2], renderState);
-				break;
-			case 2:
-				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
-				insets = HtmlInsets.updateRightInset(insets, br[1], renderState);
-				break;
-			case 1:
-				insets = HtmlInsets.updateTopInset(insets, br[0], renderState);
-				insets = HtmlInsets.updateRightInset(insets, br[0], renderState);
-				insets = HtmlInsets.updateBottomInset(insets, br[0], renderState);
-				insets = HtmlInsets.updateLeftInset(insets, br[0], renderState);
-				break;
-			default:
-				break;
-			}
-		} else {
-
-			if (borderStyles.top != BORDER_STYLE_NONE) {
-				String topText = cssProperties.getBorderTopWidth();
-				insets = HtmlInsets.updateTopInset(insets, topText, renderState);
-			}
-			if (borderStyles.left != BORDER_STYLE_NONE) {
-				String leftText = cssProperties.getBorderLeftWidth();
-				insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
-			}
-			if (borderStyles.bottom != BORDER_STYLE_NONE) {
-				String bottomText = cssProperties.getBorderBottomWidth();
-				insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
-			}
-			if (borderStyles.right != BORDER_STYLE_NONE) {
-				String rightText = cssProperties.getBorderRightWidth();
-				insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
-			}
-		}
-		return insets;
-	}
-
+	
 	/**
 	 * Populates BorderInfo.insets.
 	 *
