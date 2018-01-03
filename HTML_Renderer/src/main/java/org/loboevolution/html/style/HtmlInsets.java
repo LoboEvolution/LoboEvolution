@@ -62,7 +62,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "2px";
+			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
 		if (sizeText.length() == 0) {
@@ -116,7 +116,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "2px";
+			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
 		if (sizeText.length() == 0) {
@@ -168,7 +168,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "2px";
+			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
 		if (sizeText.length() == 0) {
@@ -220,7 +220,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "2px";
+			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
 		if (sizeText.length() == 0) {
@@ -553,6 +553,26 @@ public class HtmlInsets implements CSSValuesProperties {
 			return availSize * value / 100;
 		} else {
 			throw new IllegalStateException();
+		}
+	}
+	
+	/**
+	 * Checks if is length.
+	 *
+	 * @param token
+	 *            the token
+	 * @return true, if is length
+	 */
+	public static boolean isLength(String token) {
+		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
+				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
+			return true;
+		}
+		try {
+			Double.parseDouble(token);
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
 		}
 	}
 

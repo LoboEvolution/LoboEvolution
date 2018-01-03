@@ -41,15 +41,16 @@ import javax.swing.ImageIcon;
 import org.apache.batik.transcoder.TranscoderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.util.Strings;
 import org.loboevolution.html.dombl.SVGRasterizer;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.info.BackgroundInfo;
 import org.loboevolution.html.renderer.BaseElementRenderable;
 import org.loboevolution.html.style.CSSValuesProperties;
+import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.SSLCertificate;
+import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
 
 public class BackgroundRenderState implements CSSValuesProperties {
@@ -274,7 +275,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 	 * @return true, if is background position
 	 */
 	public static boolean isBackgroundPosition(String token) {
-		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP) || token.equalsIgnoreCase(CENTER)
+		return HtmlInsets.isLength(token) || token.endsWith("%") || token.equalsIgnoreCase(TOP) || token.equalsIgnoreCase(CENTER)
 				|| token.equalsIgnoreCase(BOTTOM) || token.equalsIgnoreCase(LEFT) || token.equalsIgnoreCase(RIGHT);
 	}
 	
@@ -411,25 +412,5 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			}
 		}
 		return list;
-	}
-
-	/**
-	 * Checks if is length.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is length
-	 */
-	private static boolean isLength(String token) {
-		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
-				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
-			return true;
-		}
-		try {
-			Double.parseDouble(token);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
 	}
 }
