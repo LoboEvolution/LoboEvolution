@@ -763,8 +763,9 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 		// expansion has been requested, do a preliminary layout
 		// assuming that the scrollable region has width=0 and
 		// there's no wrapping.
-		tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth + paddingTotalWidth;
-		tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
+        tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth;
+        tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight;
+        
 		if (declaredWidth == -1 && !expandWidth && availWidth > insetsTotalWidth + paddingTotalWidth) {
 			RenderThreadState state = RenderThreadState.getState();
 			boolean prevOverrideNoWrap = state.overrideNoWrap;
