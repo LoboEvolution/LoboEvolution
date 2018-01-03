@@ -26,8 +26,8 @@ package org.loboevolution.html.domimpl;
 import org.loboevolution.html.HtmlProperties;
 import org.loboevolution.html.renderstate.HeadingRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
-import org.loboevolution.html.style.ComputedCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.ComputedCSSProperties;
 import org.loboevolution.w3c.html.HTMLHeadingElement;
 
 /**
@@ -120,8 +120,8 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	 * org.loboevolution.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
 	 */
 	@Override
-	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+	protected AbstractCSSProperties createDefaultStyleSheet() {
+		ComputedCSSProperties css = new ComputedCSSProperties(this);
 
 		switch (name) {
 		case H1:

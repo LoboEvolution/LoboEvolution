@@ -57,7 +57,7 @@ import org.loboevolution.html.info.FloatingInfo;
 import org.loboevolution.html.layout.MarkupLayout;
 import org.loboevolution.html.layout.MiscLayout;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
@@ -853,7 +853,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return true, if successful
 	 */
 	private boolean addElsewhereIfFloat(BoundableRenderable renderable, HTMLElementImpl element,
-			boolean usesAlignAttribute, AbstractCSS2Properties style, boolean layout) {
+			boolean usesAlignAttribute, AbstractCSSProperties style, boolean layout) {
 		// "static" handled here
 		String align = null;
 		if (style != null) {
@@ -922,7 +922,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	private boolean addElsewhereIfPositioned(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute,
 			boolean layoutIfPositioned, boolean obeysFloats) {
 		// At this point block already has bounds.
-		AbstractCSS2Properties style = element.getCurrentStyle();
+		AbstractCSSProperties style = element.getCurrentStyle();
 		int position = getPosition(element);
 		boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		boolean relative = position == RenderState.POSITION_RELATIVE;

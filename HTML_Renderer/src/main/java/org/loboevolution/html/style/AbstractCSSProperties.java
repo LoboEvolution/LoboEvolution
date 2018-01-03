@@ -34,25 +34,24 @@ import org.loboevolution.html.style.setter.Property;
 import org.loboevolution.html.style.setter.SubPropertySetter;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSS2Properties;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.util.CSSProperties;
 
 /**
- * The Class AbstractCSS2Properties.
+ * The Class AbstractCSSProperties.
  */
-public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
-		implements CSSProperties, CSS2Properties {
+public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
+		implements CSSProperties, CSS3Properties {
 
 	/** The Constant SUB_SETTERS. */
 	private static final Map<String, Object> SUB_SETTERS = new HashMap<String, Object>(20);
 
 	/** The context. */
-	public final CSS2PropertiesContext context;
+	public final CSSPropertiesContext context;
 
 	/** The local style properties. */
-	private AbstractCSS2Properties localStyleProperties;
+	private AbstractCSSProperties localStyleProperties;
 
 	/** The style declarations. */
 	private Collection<CSSStyleDeclaration> styleDeclarations;
@@ -84,7 +83,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 * @param context
 	 *            the context
 	 */
-	public AbstractCSS2Properties(CSS2PropertiesContext context) {
+	public AbstractCSSProperties(CSSPropertiesContext context) {
 		this.context = context;
 	}
 
@@ -119,7 +118,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 * @param properties
 	 *            the new local style properties
 	 */
-	public void setLocalStyleProperties(AbstractCSS2Properties properties) {
+	public void setLocalStyleProperties(AbstractCSSProperties properties) {
 		if (properties == this) {
 			throw new IllegalStateException("setting same");
 		}
@@ -133,7 +132,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 *
 	 * @return the local style properties
 	 */
-	public AbstractCSS2Properties getLocalStyleProperties() {
+	public AbstractCSSProperties getLocalStyleProperties() {
 		synchronized (this) {
 			return this.localStyleProperties;
 		}
@@ -161,7 +160,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 		Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
 			// Local properties have precedence
-			AbstractCSS2Properties localProps = this.localStyleProperties;
+			AbstractCSSProperties localProps = this.localStyleProperties;
 			if (localProps != null) {
 				String value = localProps.getPropertyValueLC(lowerCaseName);
 				if (value != null) {
@@ -385,6 +384,11 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	@Override
 	public String getBorderBottomColor() {
 		return this.getPropertyValueLC(BORDER_BOTTOM_COLOR);
+	}
+	
+	@Override
+	public String getBorderSizing() {
+		return this.getPropertyValueLC(BORDER_SIZING);
 	}
 
 	/*
@@ -1161,7 +1165,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPaddingRight() {
-
 		return this.getPropertyValueLC(PADDING_RIGHT);
 	}
 
@@ -1172,7 +1175,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPaddingTop() {
-
 		return this.getPropertyValueLC(PADDING_TOP);
 	}
 
@@ -1183,7 +1185,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPage() {
-
 		return this.getPropertyValueLC(PAGE);
 	}
 
@@ -1194,7 +1195,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPageBreakAfter() {
-
 		return this.getPropertyValueLC(PAGE_BREAK_AFTER);
 	}
 
@@ -1205,7 +1205,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPageBreakBefore() {
-
 		return this.getPropertyValueLC(PAGE_BREAK_BEFORE);
 	}
 
@@ -1216,7 +1215,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPageBreakInside() {
-
 		return this.getPropertyValueLC(PAGE_BREAK_INSIDE);
 	}
 
@@ -1227,7 +1225,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPause() {
-
 		return this.getPropertyValueLC(PAUSE);
 	}
 
@@ -1238,7 +1235,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPauseAfter() {
-
 		return this.getPropertyValueLC(PAUSE_AFTER);
 	}
 
@@ -1249,7 +1245,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPauseBefore() {
-
 		return this.getPropertyValueLC(PAUSE_BEFORE);
 	}
 
@@ -1260,7 +1255,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPitch() {
-
 		return this.getPropertyValueLC(PITCH);
 	}
 
@@ -1271,7 +1265,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPitchRange() {
-
 		return this.getPropertyValueLC(PITCH_RANGE);
 	}
 
@@ -1282,7 +1275,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPlayDuring() {
-
 		return this.getPropertyValueLC(PLAY_DURING);
 	}
 
@@ -1293,7 +1285,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getPosition() {
-
 		return this.getPropertyValueLC(POSITION);
 	}
 
@@ -1304,7 +1295,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getQuotes() {
-
 		return this.getPropertyValueLC(QUOTES);
 	}
 
@@ -1315,7 +1305,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getRichness() {
-
 		return this.getPropertyValueLC(RICHNESS);
 	}
 
@@ -1326,7 +1315,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getRight() {
-
 		return this.getPropertyValueLC(RIGHT);
 	}
 
@@ -1337,7 +1325,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getSize() {
-
 		return this.getPropertyValueLC(SIZE);
 	}
 
@@ -1348,7 +1335,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getSpeak() {
-
 		return this.getPropertyValueLC(SPEAK);
 	}
 
@@ -1359,7 +1345,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getSpeakHeader() {
-
 		return this.getPropertyValueLC(SPEAK_HEADER);
 	}
 
@@ -1370,7 +1355,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getSpeakNumeral() {
-
 		return this.getPropertyValueLC(SPEAK_NUMERAL);
 	}
 
@@ -1381,7 +1365,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getSpeakPunctuation() {
-
 		return this.getPropertyValueLC(SPEAK_PUNCTUATION);
 	}
 
@@ -1392,7 +1375,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getSpeechRate() {
-
 		return this.getPropertyValueLC(SPEECH_RATE);
 	}
 
@@ -1403,7 +1385,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getStress() {
-
 		return this.getPropertyValueLC(STRESS);
 	}
 
@@ -1414,7 +1395,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getTableLayout() {
-
 		return this.getPropertyValueLC(TABLE_LAYOUT);
 	}
 
@@ -1435,7 +1415,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getTextDecoration() {
-
 		return this.getPropertyValueLC(TEXT_DECORATION);
 	}
 
@@ -1446,7 +1425,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getTextIndent() {
-
 		return this.getPropertyValueLC(TEXT_INDENT);
 	}
 
@@ -1457,7 +1435,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getTextShadow() {
-
 		return this.getPropertyValueLC(TEXT_SHADOW);
 	}
 
@@ -1468,7 +1445,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getTextTransform() {
-
 		return this.getPropertyValueLC(TEXT_TRANSFORM);
 	}
 
@@ -1479,7 +1455,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getTop() {
-
 		return this.getPropertyValueLC(TOP);
 	}
 
@@ -1490,7 +1465,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getUnicodeBidi() {
-
 		return this.getPropertyValueLC(UNICODE_BIDI);
 	}
 
@@ -1501,7 +1475,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getVerticalAlign() {
-
 		return this.getPropertyValueLC(VERTICAL_ALIGN);
 	}
 
@@ -1512,7 +1485,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getVisibility() {
-
 		return this.getPropertyValueLC(VISIBILITY);
 	}
 
@@ -1523,7 +1495,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getVoiceFamily() {
-
 		return this.getPropertyValueLC(VOICE_FAMILY);
 	}
 
@@ -1534,7 +1505,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getVolume() {
-
 		return this.getPropertyValueLC(VOLUME);
 	}
 
@@ -1545,7 +1515,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getWhiteSpace() {
-
 		return this.getPropertyValueLC(WHITE_SPACE);
 	}
 
@@ -1556,7 +1525,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getWidows() {
-
 		return this.getPropertyValueLC(WIDOWS);
 	}
 
@@ -1567,7 +1535,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getWidth() {
-
 		return this.getPropertyValueLC(WIDTH);
 	}
 
@@ -1578,7 +1545,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getWordSpacing() {
-
 		return this.getPropertyValueLC(WORD_SPACING);
 	}
 
@@ -1589,7 +1555,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getZIndex() {
-
 		return this.getPropertyValueLC(Z_INDEX);
 	}
 

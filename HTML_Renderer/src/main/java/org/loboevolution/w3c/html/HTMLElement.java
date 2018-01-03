@@ -21,7 +21,7 @@
 
 package org.loboevolution.w3c.html;
 
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -456,7 +456,7 @@ public interface HTMLElement extends Element {
 	 *
 	 * @return the style
 	 */
-	public AbstractCSS2Properties getStyle();
+	public AbstractCSSProperties getStyle();
 
 	/**
 	 * Gets the onabort.

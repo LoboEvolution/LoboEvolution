@@ -21,7 +21,7 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 
@@ -54,7 +54,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 		if (!MarginRenderState.INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {

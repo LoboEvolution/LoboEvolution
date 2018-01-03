@@ -22,7 +22,7 @@ package org.loboevolution.html.svgimpl;
 
 
 import org.loboevolution.html.HtmlAttributeProperties;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.w3c.events.Event;
 import org.loboevolution.w3c.svg.SVGAngle;
 import org.loboevolution.w3c.svg.SVGAnimatedBoolean;
@@ -532,9 +532,9 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 		return null;
 	}
 	
-	public AbstractCSS2Properties getSVGStyle() {
+	public AbstractCSSProperties getSVGStyle() {
 
-		AbstractCSS2Properties style = this.getStyle();
+		AbstractCSSProperties style = this.getStyle();
 
 		if (style.getStroke() == null) {
 			style.setStroke(this.getStroke());

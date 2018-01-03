@@ -21,46 +21,17 @@
 package org.loboevolution.html.style;
 
 /**
- * The Interface CSS2PropertiesContext.
+ * The Class LocalCSSProperties.
  */
-public interface CSS2PropertiesContext {
+public class LocalCSSProperties extends AbstractCSSProperties {
 
 	/**
-	 * Inform look invalid.
-	 */
-	void informLookInvalid();
-
-	/**
-	 * Inform size invalid.
-	 */
-	void informSizeInvalid();
-
-	/**
-	 * Inform position invalid.
-	 */
-	void informPositionInvalid();
-
-	/**
-	 * Inform layout invalid.
-	 */
-	void informLayoutInvalid();
-
-	/**
-	 * Inform invalid.
-	 */
-	void informInvalid();
-
-	/**
-	 * Gets the parent style.
+	 * Instantiates a new local cs s2 properties.
 	 *
-	 * @return the parent style
+	 * @param context
+	 *            the context
 	 */
-	AbstractCSS2Properties getParentStyle();
-
-	/**
-	 * Gets the document base uri.
-	 *
-	 * @return the document base uri
-	 */
-	String getDocumentBaseURI();
+	public LocalCSSProperties(CSSPropertiesContext context) {
+		super(context);
+	}
 }

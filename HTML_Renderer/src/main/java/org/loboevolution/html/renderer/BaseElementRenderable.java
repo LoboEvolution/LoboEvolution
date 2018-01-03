@@ -43,13 +43,13 @@ import org.loboevolution.html.info.BorderInfo;
 import org.loboevolution.html.renderstate.BackgroundRenderState;
 import org.loboevolution.html.renderstate.BorderRenderState;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Strings;
-import org.w3c.dom.css.CSS2Properties;
 
 /**
  * The Class BaseElementRenderable.
@@ -218,7 +218,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				HTMLElementImpl element = (HTMLElementImpl) rootNode;
-				CSS2Properties props = element.getCurrentStyle();
+				CSS3Properties props = element.getCurrentStyle();
 				if (props == null) {
 					return false;
 				}
@@ -242,7 +242,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			CSS2Properties props = element.getCurrentStyle();
+			CSS3Properties props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -315,7 +315,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			CSS2Properties props = element.getCurrentStyle();
+			CSS3Properties props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -578,7 +578,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			this.backgroundImage = ber.loadBackgroundImage(backgroundImageUri, this);
 		}
 		
-		AbstractCSS2Properties props = rootElement.getCurrentStyle();
+		AbstractCSSProperties props = rootElement.getCurrentStyle();
 		
 		if (props == null) {
 			this.clearStyle(isRootBlock);

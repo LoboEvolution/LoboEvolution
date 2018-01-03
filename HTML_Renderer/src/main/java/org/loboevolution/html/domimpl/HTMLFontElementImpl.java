@@ -23,10 +23,9 @@ package org.loboevolution.html.domimpl;
 
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
-import org.loboevolution.html.style.ComputedCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.ComputedCSSProperties;
 import org.loboevolution.html.style.FontValues;
-import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.w3c.html.HTMLFontElement;
 
 /**
@@ -122,7 +121,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 * org.loboevolution.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
 	 */
 	@Override
-	protected AbstractCSS2Properties createDefaultStyleSheet() {
+	protected AbstractCSSProperties createDefaultStyleSheet() {
 		String fontFamily = this.getAttribute(FACE);
 		String color = this.getAttribute(COLOR);
 		String size = this.getAttribute(SIZE);
@@ -135,7 +134,7 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 				fontSize = FontValues.getFontSizeSpec(fontNumber);
 			}
 		}
-		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+		ComputedCSSProperties css = new ComputedCSSProperties(this);
 		if (fontSize != null) {
 			css.internalSetLC("font-size", fontSize);
 		}

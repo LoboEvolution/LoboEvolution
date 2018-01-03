@@ -1,7 +1,7 @@
 package org.loboevolution.html.style.setter;
 
 import org.loboevolution.html.info.FontInfo;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
@@ -24,7 +24,7 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 	 * @param declaration
 	 *            the declaration
 	 */
-	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 		this.changeValue(properties, newValue, declaration, true);
 	}
 
@@ -32,12 +32,12 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.loboevolution.html.style.AbstractCSS2Properties.SubPropertySetter#
-	 * changeValue (org.loboevolution.html.style.AbstractCSS2Properties,
+	 * org.loboevolution.html.style.AbstractCSSProperties.SubPropertySetter#
+	 * changeValue (org.loboevolution.html.style.AbstractCSSProperties,
 	 * java.lang.String, org.w3c.dom.css.CSSStyleDeclaration, boolean)
 	 */
 	@Override
-	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(FONT, newValue, important);
 		if (!Strings.isBlank(newValue)) {

@@ -28,7 +28,7 @@ import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 
 /**
  * The Class CommonWidgetLayout.
@@ -73,7 +73,7 @@ public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeP
 	 */
 	@Override
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-		AbstractCSS2Properties style = markupElement.getCurrentStyle();
+		AbstractCSSProperties style = markupElement.getCurrentStyle();
 		if (style != null) {
 			String display = style.getDisplay();
 			if (display != null && "none".equalsIgnoreCase(display)) {

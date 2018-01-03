@@ -44,7 +44,7 @@ import org.loboevolution.html.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.info.CaptionSizeInfo;
 import org.loboevolution.html.info.SizeInfo;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
@@ -318,7 +318,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 */
 	private static HtmlLength getWidthLength(HTMLElementImpl element, int availWidth) {
 		try {
-			AbstractCSS2Properties props = element.getCurrentStyle();
+			AbstractCSSProperties props = element.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
 				String widthAttr = element.getAttribute(WIDTH);
@@ -374,7 +374,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 */
 	private static HtmlLength getHeightLength(HTMLElementImpl element, int availHeight) {
 		try {
-			AbstractCSS2Properties props = element.getCurrentStyle();
+			AbstractCSSProperties props = element.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
 				String ha = element.getAttribute(HEIGHT);
@@ -1645,7 +1645,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 */
 	private boolean isCaptionBotton() {
 		if (this.captionElement != null) {
-			AbstractCSS2Properties props = captionElement.getCurrentStyle();
+			AbstractCSSProperties props = captionElement.getCurrentStyle();
 			String captionSide = props == null ? null : props.getCaptionSide();
 			if (props == null) {
 				captionSide = this.captionElement.getCaptionSide();

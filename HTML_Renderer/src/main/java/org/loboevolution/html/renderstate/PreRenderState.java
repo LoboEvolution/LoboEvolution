@@ -21,7 +21,7 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 
 /**
  * The Class PreRenderState.
@@ -52,7 +52,7 @@ public class PreRenderState extends BlockRenderState {
 		if (ws != null) {
 			return ws.intValue();
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		if (whiteSpaceText == null) {

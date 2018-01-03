@@ -27,13 +27,13 @@ import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.info.BorderInfo;
 import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.util.gui.GUITasks;
-import org.w3c.dom.css.CSS2Properties;
 
 public class BorderRenderState implements CSSValuesProperties {
 	
@@ -93,7 +93,7 @@ public class BorderRenderState implements CSSValuesProperties {
 	 *            the render state
 	 * @return the border info
 	 */
-	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
+	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
 
 		BorderInfo binfo = new BorderInfo();
 		ColorFactory cf = ColorFactory.getInstance();
@@ -213,7 +213,7 @@ public class BorderRenderState implements CSSValuesProperties {
 	 *            the render state
 	 * @return the border insets
 	 */
-	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS2Properties cssProperties,
+	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS3Properties cssProperties,
 			RenderState renderState) {
 		HtmlInsets insets = null;
 		String borderText = cssProperties.getBorder();
@@ -277,7 +277,7 @@ public class BorderRenderState implements CSSValuesProperties {
 	 * @param renderState
 	 *            The current render state.
 	 */
-	public static void populateBorderInsets(BorderInfo binfo, CSS2Properties cssProperties, RenderState renderState) {
+	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 
 		if (binfo.getTopStyle() != BORDER_STYLE_NONE) {

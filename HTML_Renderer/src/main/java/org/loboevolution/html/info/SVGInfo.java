@@ -19,7 +19,7 @@ package org.loboevolution.html.info;
 import java.awt.Font;
 import java.io.Serializable;
 
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.svgimpl.SVGAnimationImpl;
 import org.loboevolution.w3c.svg.SVGLengthList;
 import org.loboevolution.w3c.svg.SVGPathSegList;
@@ -76,7 +76,7 @@ public class SVGInfo implements Serializable {
 	private String href;
 
 	/** The style. */
-	private AbstractCSS2Properties style;
+	private AbstractCSSProperties style;
 
 	/** The poilist. */
 	private SVGPointList poilist;
@@ -117,7 +117,7 @@ public class SVGInfo implements Serializable {
 	}
 
 	public SVGInfo(String id, int method, float x, float y, float height, float width, float rx, float ry,
-			AbstractCSS2Properties style, boolean isClip, String clipPath, SVGTransformList transformList,
+			AbstractCSSProperties style, boolean isClip, String clipPath, SVGTransformList transformList,
 			SVGAnimationImpl animate) {
 		this.method = method;
 		this.x = x;
@@ -134,7 +134,7 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(String id, int method, float x, float y, float rx, float ry, AbstractCSS2Properties style,
+	public SVGInfo(String id, int method, float x, float y, float rx, float ry, AbstractCSSProperties style,
 			boolean isClip, String clipPath, SVGTransformList transformList, SVGAnimationImpl animate) {
 		this.method = method;
 		this.x = x;
@@ -149,7 +149,7 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(String id, int method, float x, float y, float r, AbstractCSS2Properties style, boolean isClip,
+	public SVGInfo(String id, int method, float x, float y, float r, AbstractCSSProperties style, boolean isClip,
 			String clipPath, SVGTransformList transformList, SVGAnimationImpl animate) {
 		this.method = method;
 		this.x = x;
@@ -163,7 +163,7 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(String id, int method, float x1, float y1, float x2, float y2, AbstractCSS2Properties style,
+	public SVGInfo(String id, int method, float x1, float y1, float x2, float y2, AbstractCSSProperties style,
 			String clipPath, boolean isClip, SVGTransformList transformList, SVGAnimationImpl animate) {
 		this.method = method;
 		this.x1 = x1;
@@ -178,7 +178,7 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(String id, int method, SVGPointList poilist, AbstractCSS2Properties style, boolean isClip,
+	public SVGInfo(String id, int method, SVGPointList poilist, AbstractCSSProperties style, boolean isClip,
 			String clipPath, SVGTransformList transformList, SVGAnimationImpl animate) {
 		this.method = method;
 		this.style = style;
@@ -190,7 +190,7 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(String id, int method, SVGPathSegList pathSegList, AbstractCSS2Properties style, boolean isClip,
+	public SVGInfo(String id, int method, SVGPathSegList pathSegList, AbstractCSSProperties style, boolean isClip,
 			String clipPath, SVGTransformList transformList, SVGAnimationImpl animate) {
 		this.method = method;
 		this.style = style;
@@ -202,13 +202,13 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(AbstractCSS2Properties style, SVGTransformList transformList) {
+	public SVGInfo(AbstractCSSProperties style, SVGTransformList transformList) {
 		this.style = style;
 		this.transformList = transformList;
 	}
 
 	public SVGInfo(String id, int method, float x, float y, Font font, String text, String textAnchor,
-			SVGLengthList dyList, SVGLengthList dxList, AbstractCSS2Properties style, String clipPath, boolean isClip,
+			SVGLengthList dyList, SVGLengthList dxList, AbstractCSSProperties style, String clipPath, boolean isClip,
 			SVGTransformList transformList, SVGAnimationImpl animate) {
 		this.method = method;
 		this.x = x;
@@ -226,7 +226,7 @@ public class SVGInfo implements Serializable {
 		this.id = id;
 	}
 
-	public SVGInfo(int method, float x, float y, String href, AbstractCSS2Properties style, String clipPath,
+	public SVGInfo(int method, float x, float y, String href, AbstractCSSProperties style, String clipPath,
 			boolean isClip, SVGTransformList transformList) {
 		this.method = method;
 		this.x = x;
@@ -481,7 +481,7 @@ public class SVGInfo implements Serializable {
 	/**
 	 * @return the style
 	 */
-	public AbstractCSS2Properties getStyle() {
+	public AbstractCSSProperties getStyle() {
 		return style;
 	}
 
@@ -489,7 +489,7 @@ public class SVGInfo implements Serializable {
 	 * @param style
 	 *            the style to set
 	 */
-	public void setStyle(AbstractCSS2Properties style) {
+	public void setStyle(AbstractCSSProperties style) {
 		this.style = style;
 	}
 

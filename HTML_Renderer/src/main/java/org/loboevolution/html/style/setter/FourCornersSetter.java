@@ -1,6 +1,6 @@
 package org.loboevolution.html.style.setter;
 
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
 import org.w3c.dom.css.CSSStyleDeclaration;
@@ -33,7 +33,7 @@ public class FourCornersSetter implements SubPropertySetter {
 	}
 
 	@Override
-	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(this.property, newValue, important);
 		if (!Strings.isBlank(newValue)) {
@@ -82,7 +82,7 @@ public class FourCornersSetter implements SubPropertySetter {
 	 * @param declaration
 	 *            the declaration
 	 */
-	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 		this.changeValue(properties, newValue, declaration, true);
 	}
 }

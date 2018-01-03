@@ -20,7 +20,7 @@
  */
 package org.loboevolution.html.svgimpl;
 
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.w3c.svg.SVGAnimatedString;
 import org.loboevolution.w3c.svg.SVGAnimatedTransformList;
 import org.loboevolution.w3c.svg.SVGElementInstance;
@@ -59,8 +59,8 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 	}
 
 	@Override
-	public AbstractCSS2Properties getSVGStyle() {
-		AbstractCSS2Properties style = this.getStyle();
+	public AbstractCSSProperties getSVGStyle() {
+		AbstractCSSProperties style = this.getStyle();
 		boolean isStyle = false;
 		if (this.getFill() != null) {
 			style.setFill(this.getFill());

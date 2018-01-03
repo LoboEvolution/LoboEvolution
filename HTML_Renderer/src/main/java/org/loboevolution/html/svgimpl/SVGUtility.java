@@ -31,10 +31,10 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.StringTokenizer;
 
-import org.loboevolution.util.Strings;
 import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
+import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.util.gui.FontFactory;
 import org.loboevolution.util.gui.LAFSettings;

@@ -1,7 +1,7 @@
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.HtmlInsets;
-import org.w3c.dom.css.CSS2Properties;
 
 public class MarginRenderState {
 	
@@ -17,7 +17,7 @@ public class MarginRenderState {
 	 *            the render state
 	 * @return the margin insets
 	 */
-	public static HtmlInsets getMarginInsets(CSS2Properties cssProperties, RenderState renderState) {
+	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 		String marginText = cssProperties.getMargin();
 		if (marginText != null) {

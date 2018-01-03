@@ -26,7 +26,8 @@ import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.info.BackgroundInfo;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.RenderThreadState;
@@ -34,7 +35,6 @@ import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLTableElement;
-import org.w3c.dom.css.CSS2Properties;
 
 /**
  * The Class TableCellRenderState.
@@ -91,7 +91,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (axp != -1) {
 			return axp;
 		}
-		CSS2Properties props = this.getCssProperties();
+		CSS3Properties props = this.getCssProperties();
 		if (props != null) {
 			String textAlign = props.getTextAlign();
 			if (textAlign != null && textAlign.length() != 0) {
@@ -150,7 +150,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (ayp != -1) {
 			return ayp;
 		}
-		CSS2Properties props = this.getCssProperties();
+		CSS3Properties props = this.getCssProperties();
 		if (props != null) {
 			String textAlign = props.getVerticalAlign();
 			if (textAlign != null && textAlign.length() != 0) {
@@ -303,7 +303,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (ws != null) {
 			return ws.intValue();
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		if (whiteSpaceText == null) {

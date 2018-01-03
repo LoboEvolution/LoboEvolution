@@ -1,7 +1,7 @@
 package org.loboevolution.html.renderstate;
 
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.HtmlInsets;
-import org.w3c.dom.css.CSS2Properties;
 
 public class PaddingRenderState {
 
@@ -20,7 +20,7 @@ public class PaddingRenderState {
 	 *            the render state
 	 * @return the padding insets
 	 */
-	public static HtmlInsets getPaddingInsets(CSS2Properties props, RenderState renderState) {
+	public static HtmlInsets getPaddingInsets(CSS3Properties props, RenderState renderState) {
 
 		HtmlInsets insets = paddingInsets;
 		if (!INVALID_INSETS.equals(insets)) {

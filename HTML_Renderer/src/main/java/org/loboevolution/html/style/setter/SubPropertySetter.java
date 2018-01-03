@@ -1,6 +1,6 @@
 package org.loboevolution.html.style.setter;
 
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 /**
@@ -20,6 +20,6 @@ public interface SubPropertySetter {
 	 * @param important
 	 *            the important
 	 */
-	public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important);
 }

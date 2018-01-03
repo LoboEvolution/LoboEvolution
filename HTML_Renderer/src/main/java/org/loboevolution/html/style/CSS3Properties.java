@@ -18,16 +18,12 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.w3c.svg;
+package org.loboevolution.html.style;
 
-import org.loboevolution.html.style.AbstractCSSProperties;
-import org.w3c.dom.css.CSSValue;
+import org.w3c.dom.css.CSS2Properties;
 
-public interface SVGStylable {
+public interface CSS3Properties extends CSS2Properties {
+	
+	String getBorderSizing();
 
-	public String getClassName();
-
-	public AbstractCSSProperties getStyle();
-
-	public CSSValue getPresentationAttribute(String name);
 }

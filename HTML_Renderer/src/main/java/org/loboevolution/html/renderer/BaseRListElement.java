@@ -25,7 +25,7 @@ import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.ListStyle;
 import org.loboevolution.http.UserAgentContext;
@@ -77,7 +77,7 @@ public class BaseRListElement extends RBlock implements HtmlAttributeProperties 
 			return;
 		}
 		HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-		AbstractCSS2Properties props = rootElement.getCurrentStyle();
+		AbstractCSSProperties props = rootElement.getCurrentStyle();
 		if (props == null) {
 			return;
 		}

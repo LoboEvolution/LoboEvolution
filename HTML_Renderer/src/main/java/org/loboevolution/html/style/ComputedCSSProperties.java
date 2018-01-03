@@ -21,9 +21,9 @@
 package org.loboevolution.html.style;
 
 /**
- * The Class ComputedCSS2Properties.
+ * The Class ComputedCSSProperties.
  */
-public class ComputedCSS2Properties extends AbstractCSS2Properties {
+public class ComputedCSSProperties extends AbstractCSSProperties {
 
 	/**
 	 * Instantiates a new computed cs s2 properties.
@@ -31,7 +31,7 @@ public class ComputedCSS2Properties extends AbstractCSS2Properties {
 	 * @param context
 	 *            the context
 	 */
-	public ComputedCSS2Properties(CSS2PropertiesContext context) {
+	public ComputedCSSProperties(CSSPropertiesContext context) {
 		super(context);
 	}
 
@@ -39,7 +39,7 @@ public class ComputedCSS2Properties extends AbstractCSS2Properties {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.loboevolution.html.style.AbstractCSS2Properties#setPropertyValueLC(java
+	 * org.loboevolution.html.style.AbstractCSSProperties#setPropertyValueLC(java
 	 * .lang.String, java.lang.String)
 	 */
 	@Override

@@ -70,6 +70,9 @@ public interface CSSProperties {
 
 	/** The Constant BORDER_RIGHT_WIDTH. */
 	String BORDER_RIGHT_WIDTH = "border-right-width";
+	
+	/** The Constant BORDER_SIZING. */
+	String BORDER_SIZING = "border-sizing";
 
 	/** The Constant BORDER_SPACING. */
 	String BORDER_SPACING = "border-spacing";

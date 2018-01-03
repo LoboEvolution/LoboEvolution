@@ -42,11 +42,11 @@ import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.ColorRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
-import org.loboevolution.html.style.CSS2PropertiesContext;
-import org.loboevolution.html.style.ComputedCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.CSSPropertiesContext;
+import org.loboevolution.html.style.ComputedCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.html.style.LocalCSS2Properties;
+import org.loboevolution.html.style.LocalCSSProperties;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.html.style.selectors.AttributeSelector;
 import org.loboevolution.util.Strings;
@@ -68,16 +68,16 @@ import com.steadystate.css.parser.SACParserCSS3;
 /**
  * The Class HTMLElementImpl.
  */
-public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2PropertiesContext {
+public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSPropertiesContext {
 
 	/** The current style declaration state. */
-	private volatile AbstractCSS2Properties currentStyleDeclarationState;
+	private volatile AbstractCSSProperties currentStyleDeclarationState;
 
 	/** The local style declaration state. */
-	private volatile AbstractCSS2Properties localStyleDeclarationState;
+	private volatile AbstractCSSProperties localStyleDeclarationState;
 	
 	/** The computed styles. */
-	private Map<String, AbstractCSS2Properties> computedStyles;
+	private Map<String, AbstractCSSProperties> computedStyles;
 
 	/** The is mouse over. */
 	private boolean isMouseOver = false;
@@ -155,8 +155,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *
 	 * @return the current style
 	 */
-	public AbstractCSS2Properties getCurrentStyle() {
-		AbstractCSS2Properties sds;
+	public AbstractCSSProperties getCurrentStyle() {
+		AbstractCSSProperties sds;
 		synchronized (this) {
 			sds = this.currentStyleDeclarationState;
 			if (sds != null) {
@@ -169,9 +169,9 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		sds = this.createDefaultStyleSheet();
 		sds = this.addStyleSheetDeclarations(sds, this.getPseudoNames());
 		// Now add local style if any.
-		AbstractCSS2Properties localStyle = this.getStyle();
+		AbstractCSSProperties localStyle = this.getStyle();
 		if (sds == null) {
-			sds = new ComputedCSS2Properties(this);
+			sds = new ComputedCSSProperties(this);
 			sds.setLocalStyleProperties(localStyle);
 		} else {
 			sds.setLocalStyleProperties(localStyle);
@@ -179,7 +179,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		synchronized (this) {
 			// Check if style properties were set while outside
 			// the synchronized block (can happen).
-			AbstractCSS2Properties setProps = this.currentStyleDeclarationState;
+			AbstractCSSProperties setProps = this.currentStyleDeclarationState;
 			if (setProps != null) {
 				return setProps;
 			}
@@ -197,15 +197,15 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * @return the style
 	 */
 	@Override
-	public AbstractCSS2Properties getStyle() {
+	public AbstractCSSProperties getStyle() {
 
-		AbstractCSS2Properties sds;
+		AbstractCSSProperties sds;
 		synchronized (this) {
 			sds = this.localStyleDeclarationState;
 			if (sds != null) {
 				return sds;
 			}
-			sds = new LocalCSS2Properties(this);
+			sds = new LocalCSSProperties(this);
 			// Add any declarations in style attribute (last takes precedence).
 			String style = this.getAttribute(STYLE_HTML);
 
@@ -236,8 +236,8 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *
 	 * @return the abstract cs s2 properties
 	 */
-	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+	protected AbstractCSSProperties createDefaultStyleSheet() {
+		ComputedCSSProperties css = new ComputedCSSProperties(this);
 		css.internalSetLC("font-size", String.valueOf((int) LAFSettings.getInstance().getFontSize()) + "px");
 		return css;
 	}
@@ -249,14 +249,14 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *            the pseudo element
 	 * @return the computed style
 	 */
-	public AbstractCSS2Properties getComputedStyle(String pseudoElement) {
+	public AbstractCSSProperties getComputedStyle(String pseudoElement) {
 		if (pseudoElement == null) {
 			pseudoElement = "";
 		}
 		synchronized (this) {
-			Map<String, AbstractCSS2Properties> cs = this.computedStyles;
+			Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs != null) {
-				AbstractCSS2Properties sds = cs.get(pseudoElement);
+				AbstractCSSProperties sds = cs.get(pseudoElement);
 				if (sds != null) {
 					return sds;
 				}
@@ -266,12 +266,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 		// with document).
 		// First, add declarations from stylesheet
 		Set<String> pes = pseudoElement.length() == 0 ? null : Collections.singleton(pseudoElement);
-		AbstractCSS2Properties sds = this.createDefaultStyleSheet();
+		AbstractCSSProperties sds = this.createDefaultStyleSheet();
 		sds = this.addStyleSheetDeclarations(sds, pes);
 		// Now add local style if any.
-		AbstractCSS2Properties localStyle = this.getStyle();
+		AbstractCSSProperties localStyle = this.getStyle();
 		if (sds == null) {
-			sds = new ComputedCSS2Properties(this);
+			sds = new ComputedCSSProperties(this);
 			sds.setLocalStyleProperties(localStyle);
 		} else {
 			sds.setLocalStyleProperties(localStyle);
@@ -280,12 +280,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 			// Check if style properties were set while outside
 			// the synchronized block (can happen). We need to
 			// return instance already set for consistency.
-			Map<String, AbstractCSS2Properties> cs = this.computedStyles;
+			Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs == null) {
-				cs = new HashMap<String, AbstractCSS2Properties>(2);
+				cs = new HashMap<String, AbstractCSSProperties>(2);
 				this.computedStyles = cs;
 			} else {
-				AbstractCSS2Properties sds2 = cs.get(pseudoElement);
+				AbstractCSSProperties sds2 = cs.get(pseudoElement);
 				if (sds2 != null) {
 					return sds2;
 				}
@@ -412,7 +412,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 *            the pseudo names
 	 * @return the abstract cs s2 properties
 	 */
-	protected final AbstractCSS2Properties addStyleSheetDeclarations(AbstractCSS2Properties style,
+	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style,
 			Set<String> pseudoNames) {
 		Node pn = this.parentNode;
 		if (pn == null) {
@@ -433,7 +433,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 					while (sdsi.hasNext()) {
 						CSSStyleDeclaration sd = sdsi.next();
 						if (style == null) {
-							style = new ComputedCSS2Properties(this);
+							style = new ComputedCSSProperties(this);
 						}
 						style.addStyleDeclaration(sd);
 					}
@@ -448,7 +448,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 				while (sdsi.hasNext()) {
 					CSSStyleDeclaration sd = sdsi.next();
 					if (style == null) {
-						style = new ComputedCSS2Properties(this);
+						style = new ComputedCSSProperties(this);
 					}
 					style.addStyleDeclaration(sd);
 				}
@@ -1103,10 +1103,10 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.html.style.CSS2PropertiesContext#getParentStyle()
+	 * @see org.loboevolution.html.style.CSSPropertiesContext#getParentStyle()
 	 */
 	@Override
-	public AbstractCSS2Properties getParentStyle() {
+	public AbstractCSSProperties getParentStyle() {
 		Object parent = this.parentNode;
 		if (parent instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) parent).getCurrentStyle();
@@ -1118,7 +1118,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSS2
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.loboevolution.html.style.CSS2PropertiesContext#getDocumentBaseURI()
+	 * org.loboevolution.html.style.CSSPropertiesContext#getDocumentBaseURI()
 	 */
 	@Override
 	public String getDocumentBaseURI() {

@@ -21,8 +21,8 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.style.CSS3Properties;
 import org.w3c.dom.Node;
-import org.w3c.dom.css.CSS2Properties;
 
 /**
  * The Class TableCaptionRenderState.
@@ -72,7 +72,7 @@ public class TableCaptionRenderState extends DisplayRenderState {
 	public int getAlignXPercent(HTMLElementImpl htmlElement) {
 		int axp = 50; // caption text is default in middle of caption
 		String textAlign = null;
-		CSS2Properties props = htmlElement.getCurrentStyle();
+		CSS3Properties props = htmlElement.getCurrentStyle();
 		if (props != null) {
 			textAlign = props.getTextAlign();
 		}

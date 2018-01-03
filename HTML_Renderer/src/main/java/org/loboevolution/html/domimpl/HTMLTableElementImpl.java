@@ -29,7 +29,7 @@ import org.loboevolution.html.dombl.DescendentHTMLCollection;
 import org.loboevolution.html.domfilter.ElementTableAttributeFilter;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TableRenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.w3c.html.HTMLCollection;
@@ -359,7 +359,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	public HtmlLength getHeightLength(int availHeight) {
 		try {
-			AbstractCSS2Properties props = this.getCurrentStyle();
+			AbstractCSSProperties props = this.getCurrentStyle();
 			String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
 				return new HtmlLength(this.getAttribute(HEIGHT));
@@ -385,7 +385,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	public HtmlLength getWidthLength(int availWidth) {
 		try {
-			AbstractCSS2Properties props = this.getCurrentStyle();
+			AbstractCSSProperties props = this.getCurrentStyle();
 			String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
 				return new HtmlLength(this.getAttribute(WIDTH));

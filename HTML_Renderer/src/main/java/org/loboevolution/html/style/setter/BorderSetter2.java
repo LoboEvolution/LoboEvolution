@@ -1,7 +1,7 @@
 package org.loboevolution.html.style.setter;
 
 import org.loboevolution.html.renderstate.BorderRenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
@@ -23,7 +23,7 @@ public class BorderSetter2 implements SubPropertySetter {
 	}
 	
 	@Override
-	public void changeValue(AbstractCSS2Properties properties, String value, CSSStyleDeclaration declaration,
+	public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(this.name, value, important);
 		if (!Strings.isBlank(value)) {
@@ -63,7 +63,7 @@ public class BorderSetter2 implements SubPropertySetter {
 	 * @param declaration
 	 *            the declaration
 	 */
-	public void changeValue(AbstractCSS2Properties properties, String value, CSSStyleDeclaration declaration) {
+	public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration) {
 		this.changeValue(properties, value, declaration, true);
 	}
 }

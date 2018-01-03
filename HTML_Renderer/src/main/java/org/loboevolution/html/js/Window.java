@@ -37,6 +37,7 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.ID;
 import org.loboevolution.w3c.html.ApplicationCache;
@@ -53,7 +54,6 @@ import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.css.CSS2Properties;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
@@ -897,7 +897,7 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the pseudo element
 	 * @return the computed style
 	 */
-	public CSS2Properties getComputedStyle(HTMLElement element, String pseudoElement) {
+	public CSS3Properties getComputedStyle(HTMLElement element, String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
 		} else {
@@ -912,7 +912,7 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the elt
 	 * @return the computed style
 	 */
-	public CSS2Properties getComputedStyle(HTMLElement elt) {
+	public CSS3Properties getComputedStyle(HTMLElement elt) {
 		return getComputedStyle(elt, null);
 	}
 

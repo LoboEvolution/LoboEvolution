@@ -44,7 +44,8 @@ import org.loboevolution.html.info.BackgroundInfo;
 import org.loboevolution.html.info.BorderInfo;
 import org.loboevolution.html.info.WordInfo;
 import org.loboevolution.html.renderer.LineBreak;
-import org.loboevolution.html.style.AbstractCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlInsets;
@@ -55,7 +56,6 @@ import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.util.gui.FontFactory;
 import org.loboevolution.util.gui.LAFSettings;
 import org.loboevolution.w3c.html.HTMLElement;
-import org.w3c.dom.css.CSS2Properties;
 
 /**
  * The Class StyleSheetRenderState.
@@ -218,7 +218,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 */
 	@Override
 	public int getClear() {
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		int clear = 0;
 		if (props == null || (props!=null && props.getClear() == null)) {
 			clear = LineBreak.NONE;
@@ -253,7 +253,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (d != null) {
 			return d.intValue();
 		}
-		CSS2Properties props = this.getCssProperties();
+		CSS3Properties props = this.getCssProperties();
 		String displayText = props == null ? null : props.getDisplay();
 		int displayInt = 0;
 		if (displayText != null) {
@@ -336,7 +336,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 *
 	 * @return the css properties
 	 */
-	protected final AbstractCSS2Properties getCssProperties() {
+	protected final AbstractCSSProperties getCssProperties() {
 		HTMLElementImpl element = this.element;
 		return element == null ? null : element.getCurrentStyle();
 	}
@@ -381,7 +381,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	@Override
 	public Font getFont() {
 		
-		AbstractCSS2Properties style = this.getCssProperties();
+		AbstractCSSProperties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
 		
 		if (this.iFont != null) {
@@ -426,7 +426,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (c != null) {
 			return c;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		String colorValue = props == null ? null : props.getColor();
 
 		if (INHERIT.equals(colorValue) && this.getPreviousRenderState() != null) {
@@ -520,7 +520,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	@Override
 	public Color getOverlayColor() {
 
-		AbstractCSS2Properties style = this.getCssProperties();
+		AbstractCSSProperties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
 		if (!INVALID_COLOR.equals(this.iOverlayColor)) {
 			return this.iOverlayColor;
@@ -550,7 +550,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (td != -1) {
 			return td;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		String tdText = props == null ? null : props.getTextDecoration();
 		if (tdText == null) {
 			RenderState prs = this.prevRenderState;
@@ -608,7 +608,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (tt != -1) {
 			return tt;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		String tdText = props == null ? null : props.getTextTransform();
 		if (tdText == null) {
 			RenderState prs = this.prevRenderState;
@@ -742,7 +742,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (axp != -1) {
 			return axp;
 		}
-		CSS2Properties props = this.getCssProperties();
+		CSS3Properties props = this.getCssProperties();
 		String textAlign = props == null ? null : props.getTextAlign();
 		if (textAlign == null || textAlign.length() == 0) {
 			// Fall back to align attribute.
@@ -880,7 +880,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	public BackgroundInfo getBackgroundInfo() {
 
 		BackgroundInfo binfo = this.iBackgroundInfo;
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		BackgroundRenderState bg = new BackgroundRenderState();
 
 		if (!INVALID_BACKGROUND_INFO.equals(binfo)) {
@@ -945,7 +945,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (tiText != null) {
 			return tiText;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		tiText = props == null ? null : props.getTextIndent();
 		if (tiText == null) {
 			RenderState prs = this.prevRenderState;
@@ -990,7 +990,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (ws != null) {
 			return ws.intValue();
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		if (whiteSpaceText == null) {
@@ -1029,7 +1029,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (!MarginRenderState.INVALID_INSETS.equals(mi)) {
 			return mi;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
@@ -1050,7 +1050,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
         if (!PaddingRenderState.INVALID_INSETS.equals(mi)) {
             return mi;
         }
-        AbstractCSS2Properties props = this.getCssProperties();
+        AbstractCSSProperties props = this.getCssProperties();
         if (props == null) {
             mi = null;
         } else {
@@ -1073,7 +1073,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (v != null) {
 			return v.intValue();
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		int visibility;
 		if (props == null) {
 			visibility = VISIBILITY_VISIBLE;
@@ -1121,7 +1121,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (p != null) {
 			return p.intValue();
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		int position = 0;
 		if (props == null) {
 			position = POSITION_STATIC;
@@ -1172,7 +1172,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (p != null) {
 			return p.intValue();
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		int floatValue = 0;
 		if (props == null) {
 			floatValue = FLOAT_NONE;
@@ -1230,7 +1230,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (overflow != -1) {
 			return overflow;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -1282,7 +1282,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (overflow != -1) {
 			return overflow;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -1335,7 +1335,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (!BorderRenderState.INVALID_BORDER_INFO.equals(binfo)) {
 			return binfo;
 		}
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 		if (props != null) {
 			binfo = BorderRenderState.getBorderInfo(props, this);
 		} else {
@@ -1356,7 +1356,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	public Optional<Cursor> getCursor() {
 
 		Optional<Cursor> prevCursorOpt = Optional.empty();
-		AbstractCSS2Properties props = this.getCssProperties();
+		AbstractCSSProperties props = this.getCssProperties();
 
 		if (this.cursor != null) {
 			prevCursorOpt = this.cursor;

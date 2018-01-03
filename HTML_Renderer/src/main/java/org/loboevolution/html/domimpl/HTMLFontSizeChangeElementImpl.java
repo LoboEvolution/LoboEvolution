@@ -22,8 +22,8 @@ package org.loboevolution.html.domimpl;
 
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.style.AbstractCSS2Properties;
-import org.loboevolution.html.style.ComputedCSS2Properties;
+import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.ComputedCSSProperties;
 import org.loboevolution.util.gui.LAFSettings;
 
 /**
@@ -65,7 +65,7 @@ public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 	 * org.loboevolution.html.domimpl.HTMLElementImpl#createDefaultStyleSheet()
 	 */
 	@Override
-	protected AbstractCSS2Properties createDefaultStyleSheet() {
+	protected AbstractCSSProperties createDefaultStyleSheet() {
 		ModelNode parentModelNode = this.getParentModelNode();
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
 		String fontSize = null;
@@ -73,7 +73,7 @@ public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 				: (int) LAFSettings.getInstance().getFontSize();
 		int newFontSize = prevFontSize + this.fontChange * 2;
 		fontSize = newFontSize + "px";
-		ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+		ComputedCSSProperties css = new ComputedCSSProperties(this);
 		css.internalSetLC("font-size", fontSize);
 		return css;
 	}
