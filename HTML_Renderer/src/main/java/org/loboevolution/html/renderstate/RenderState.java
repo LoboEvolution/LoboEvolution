@@ -146,6 +146,8 @@ public interface RenderState {
 
 	/** The overflow visible. */
 	int OVERFLOW_VISIBLE = 4;
+	
+	String getBoxSizing();
 
 	/**
 	 * Gets the position.

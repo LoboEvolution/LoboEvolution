@@ -229,4 +229,10 @@ public abstract class RenderStateDelegator implements RenderState {
 	public void setCursor(Optional<Cursor> cursor) {
 		this.delegate.setCursor(cursor);
 	}
+	
+	@Override
+	public String getBoxSizing() {
+		return this.delegate.getBoxSizing();
+	}
+	
 }

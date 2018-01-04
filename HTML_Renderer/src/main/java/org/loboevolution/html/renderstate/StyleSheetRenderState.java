@@ -1435,4 +1435,23 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			return prevCursorOpt;
 		}
 	}
+
+	@Override
+	public String getBoxSizing() {
+		AbstractCSSProperties props = this.getCssProperties();
+		if (props != null) {
+			String boxSizing = props.getBoxSizing();
+			switch (boxSizing) {
+			case BORDER_BOX:
+				return boxSizing;
+			case INHERIT:
+				return this.getPreviousRenderState().getBoxSizing();
+			case INITIAL:
+				return CONTENT_BOX;
+			default:
+				return CONTENT_BOX;
+			}
+		}
+		return null;
+	}
 }

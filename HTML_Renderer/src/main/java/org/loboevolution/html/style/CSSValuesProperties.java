@@ -41,6 +41,9 @@ public interface CSSValuesProperties {
 
 	/** The Constant BOLDER. */
 	String BOLDER = "bolder";
+	
+	/** The Constant BORDER BOX. */
+	String BORDER_BOX = "border-box"; 
 
 	/** The Constant BOTTOM. */
 	String BOTTOM = "bottom";
@@ -56,6 +59,9 @@ public interface CSSValuesProperties {
 
 	/** The Constant CIRCLE. */
 	String CIRCLE = "circle";
+	
+	/** The Constant CONTENT BOX. */
+	String CONTENT_BOX = "content-box"; 
 
 	/** The Constant COLLAPSE. */
 	String COLLAPSE = "collapse";

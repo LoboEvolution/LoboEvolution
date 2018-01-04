@@ -387,8 +387,8 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	}
 	
 	@Override
-	public String getBorderSizing() {
-		return this.getPropertyValueLC(BORDER_SIZING);
+	public String getBoxSizing() {
+		return this.getPropertyValueLC(BOX_SIZING);
 	}
 
 	/*

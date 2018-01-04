@@ -24,6 +24,6 @@ import org.w3c.dom.css.CSS2Properties;
 
 public interface CSS3Properties extends CSS2Properties {
 	
-	String getBorderSizing();
+	String getBoxSizing();
 
 }
