@@ -26,13 +26,13 @@ package org.loboevolution.async;
 /**
  * Used by methods that need to return results asynchronously. Results are
  * received in the event dispatch thread. This is a generic class that takes a
- * type parameter <code>TResult</code>, the type of the expected result object.
+ * type parameter <code>Tresult</code>, the type of the expected result object.
  *
  * @author J. H. S.
- * @param <TResult>
+ * @param <Tresult>
  *            the generic type
  */
-public interface AsyncResult<TResult> {
+public interface AsyncResult<Tresult> {
 
 	/**
 	 * Registers a listener of asynchronous results.
@@ -40,7 +40,7 @@ public interface AsyncResult<TResult> {
 	 * @param listener
 	 *            the listener
 	 */
-	void addResultListener(AsyncResultListener<TResult> listener);
+	void addResultListener(AsyncResultListener<Tresult> listener);
 
 	/**
 	 * Removes a listener.
@@ -48,7 +48,7 @@ public interface AsyncResult<TResult> {
 	 * @param listener
 	 *            the listener
 	 */
-	void removeResultListener(AsyncResultListener<TResult> listener);
+	void removeResultListener(AsyncResultListener<Tresult> listener);
 
 	/**
 	 * Forces listeners to be notified of a result if there is one.

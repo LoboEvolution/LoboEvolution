@@ -573,17 +573,15 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			DOMNodeImpl child = children[i];
 			if (child instanceof DOMElementImpl) {
 				String tagName = child.getNodeName();
-				if ("HEAD".equalsIgnoreCase(tagName) || "NOFRAMES".equalsIgnoreCase(tagName)
-						|| "TITLE".equalsIgnoreCase(tagName) || "META".equalsIgnoreCase(tagName)
-						|| "SCRIPT".equalsIgnoreCase(tagName) || "NOSCRIPT".equalsIgnoreCase(tagName)) {
-					// ignore it
-				} else if ("FRAMESET".equalsIgnoreCase(tagName)) {
+				if ("FRAMESET".equalsIgnoreCase(tagName)) {
 					frameSet = child;
 					break;
-				} else {
-					if (this.hasSomeHtml((DOMElementImpl) child)) {
+				} else if (!"HEAD".equalsIgnoreCase(tagName) 
+						&& !"NOFRAMES".equalsIgnoreCase(tagName)
+						&& !"TITLE".equalsIgnoreCase(tagName) && !"META".equalsIgnoreCase(tagName)
+						&& !"SCRIPT".equalsIgnoreCase(tagName) && !"NOSCRIPT".equalsIgnoreCase(tagName)
+						&& this.hasSomeHtml((DOMElementImpl) child)) {
 						return null;
-					}
 				}
 			}
 		}

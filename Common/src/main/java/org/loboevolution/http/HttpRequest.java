@@ -230,26 +230,29 @@ public class HttpRequest extends AbstractBean {
 		// Session...
 		// except that Session has no way to set these at the moment, except via
 		// a Request.
-		if (header.equalsIgnoreCase("Accept-Charset") || header.equalsIgnoreCase("Accept-Encoding")
-				|| header.equalsIgnoreCase("Content-Length") || header.equalsIgnoreCase("Expect")
-				|| header.equalsIgnoreCase("Date") || header.equalsIgnoreCase("Host")
-				|| header.equalsIgnoreCase("Keep-Alive") || header.equalsIgnoreCase("Referer")
-				|| header.equalsIgnoreCase("TE") || header.equalsIgnoreCase("Trailer")
-				|| header.equalsIgnoreCase("Transfer-Encoding") || header.equalsIgnoreCase("Upgrade")) {
-			// ignore the header
-		}
-		if (header.equalsIgnoreCase("Authorization") || header.equalsIgnoreCase("Content-Base")
-				|| header.equalsIgnoreCase("Content-Location") || header.equalsIgnoreCase("Content-MD5")
-				|| header.equalsIgnoreCase("Content-Range") || header.equalsIgnoreCase("Content-Type")
-				|| header.equalsIgnoreCase("Content-Version") || header.equalsIgnoreCase("Delta-Base")
-				|| header.equalsIgnoreCase("Depth") || header.equalsIgnoreCase("Destination")
-				|| header.equalsIgnoreCase("ETag") || header.equalsIgnoreCase("Expect")
-				|| header.equalsIgnoreCase("From") || header.equalsIgnoreCase("If-Modified-Since")
-				|| header.equalsIgnoreCase("If-Range") || header.equalsIgnoreCase("If-Unmodified-Since")
-				|| header.equalsIgnoreCase("Max-Forwards") || header.equalsIgnoreCase("MIME-Version")
-				|| header.equalsIgnoreCase("Overwrite") || header.equalsIgnoreCase("Proxy-Authorization")
-				|| header.equalsIgnoreCase("SOAPAction") || header.equalsIgnoreCase("Timeout")) {
-			// replace the current header, if any
+		if ("Authorization".equalsIgnoreCase(header) 
+			|| "Content-Base".equalsIgnoreCase(header)
+			|| "Content-Location".equalsIgnoreCase(header)
+			|| "Content-MD5".equalsIgnoreCase(header)
+			|| "Content-Range".equalsIgnoreCase(header) 
+			|| "Content-Type".equalsIgnoreCase(header)
+			|| "Content-Version".equalsIgnoreCase(header) 
+			|| "Delta-Base".equalsIgnoreCase(header)
+			|| "Depth".equalsIgnoreCase(header) 
+			|| "Destination".equalsIgnoreCase(header)
+			|| "ETag".equalsIgnoreCase(header) 
+			|| "Expect".equalsIgnoreCase(header)
+			|| "From".equalsIgnoreCase(header) 
+			|| "If-Modified-Since".equalsIgnoreCase(header)
+			|| "If-Range".equalsIgnoreCase(header) 
+			|| "If-Unmodified-Since".equalsIgnoreCase(header)
+			|| "Max-Forwards".equalsIgnoreCase(header) 
+			|| "MIME-Version".equalsIgnoreCase(header)
+			|| "Overwrite".equalsIgnoreCase(header) 
+			|| "Proxy-Authorization".equalsIgnoreCase(header)
+			|| "SOAPAction".equalsIgnoreCase(header) 
+			|| "Timeout".equalsIgnoreCase(header)) {
+			
 			for (Header h : req.getHeaders()) {
 				if (h.getName().equalsIgnoreCase(header)) {
 					req.removeHeader(h);
@@ -257,10 +260,19 @@ public class HttpRequest extends AbstractBean {
 					break;
 				}
 			}
-		} else {
-			// append the value to the header, if one is already specified.
-			// Else,
-			// just add it as a new header
+		} else if(!"Accept-Charset".equalsIgnoreCase(header) 
+				 && !"Accept-Encoding".equalsIgnoreCase(header)
+				 && !"Content-Length".equalsIgnoreCase(header)
+				 && !"Expect".equalsIgnoreCase(header)
+				 && !"Date".equalsIgnoreCase(header)
+				 && !"Host".equalsIgnoreCase(header)
+				 && !"Keep-Alive".equalsIgnoreCase(header)
+				 && !"Referer".equalsIgnoreCase(header)
+				 && !"TE".equalsIgnoreCase(header)
+				 && !"Trailer".equalsIgnoreCase(header)
+				 && !"Transfer-Encoding".equalsIgnoreCase(header)
+				 && !"Upgrade".equalsIgnoreCase(header)){
+			
 			boolean appended = false;
 			for (Header h : req.getHeaders()) {
 				if (h.getName().equalsIgnoreCase(header)) {

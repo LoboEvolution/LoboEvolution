@@ -60,7 +60,7 @@ public class EntryPoint extends Canvas {
 			JOptionPane.showMessageDialog(new JFrame(),
 					"An unexpected error occurred during application startup:\r\n" + swriter.toString(), "ERROR",
 					JOptionPane.ERROR_MESSAGE);
-			System.exit(1);
+			Runtime.getRuntime().exit(1);
 		}
 	}
 }

@@ -29,11 +29,11 @@ import java.util.EventListener;
  * Listener of asynchronous results.
  *
  * @author J. H. S.
- * @param <TResult>
+ * @param <Tresult>
  *            the generic type
  * @see org.loboevolution.async.AsyncResult
  */
-public interface AsyncResultListener<TResult> extends EventListener {
+public interface AsyncResultListener<Tresult> extends EventListener {
 	/**
 	 * Receives an asynchronous result. This method is invoked in the event
 	 * dispatch thread.
@@ -41,7 +41,7 @@ public interface AsyncResultListener<TResult> extends EventListener {
 	 * @param event
 	 *            Event containing asynchronous result.
 	 */
-	void resultReceived(AsyncResultEvent<TResult> event);
+	void resultReceived(AsyncResultEvent<Tresult> event);
 
 	/**
 	 * Called when an exception has occurred trying to obtain an asynchronous

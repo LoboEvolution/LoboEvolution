@@ -232,7 +232,7 @@ public class MarkupUtilities {
 	 */
 	private static int findFirstIndex(Renderable[] renderables, Rectangle clipArea, int index, int length,
 			boolean vertical) {
-		Diagnostics.Assert(length > 0, "length=" + length);
+		Diagnostics.assertDiagnostics(length > 0, "length=" + length);
 		if (length == 1) {
 			Renderable r = renderables[index];
 			Rectangle rbounds;
@@ -306,7 +306,7 @@ public class MarkupUtilities {
 	 */
 	private static int findLastIndex(Renderable[] renderables, Rectangle clipArea, int index, int length,
 			boolean vertical) {
-		Diagnostics.Assert(length > 0, "length<=0");
+		Diagnostics.assertDiagnostics(length > 0, "length<=0");
 		if (length == 1) {
 			Renderable r = renderables[index];
 			Rectangle rbounds;

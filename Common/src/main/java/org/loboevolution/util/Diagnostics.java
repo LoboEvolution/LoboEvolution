@@ -44,7 +44,7 @@ public class Diagnostics {
 	 * @param message
 	 *            the message
 	 */
-	public static void Assert(boolean condition, String message) {
+	public static void assertDiagnostics(boolean condition, String message) {
 		if (!condition) {
 			throw new AssertionError(message);
 		}

@@ -27,19 +27,19 @@ import java.util.EventObject;
 
 /**
  * An asynchronous result event. This is a generic class with a
- * <code>TResult</code> type parameter, the type of the result.
+ * <code>Tresult</code> type parameter, the type of the result.
  *
  * @author J. H. S.
- * @param <TResult>
+ * @param <Tresult>
  *            the generic type
  * @see org.loboevolution.async.AsyncResultListener
  */
-public class AsyncResultEvent<TResult> extends EventObject {
+public class AsyncResultEvent<Tresult> extends EventObject {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	/** The result. */
-	private final TResult result;
+	private final Tresult result;
 
 	/**
 	 * Instance constructor.
@@ -49,7 +49,7 @@ public class AsyncResultEvent<TResult> extends EventObject {
 	 * @param result
 	 *            The asynchronous result.
 	 */
-	public AsyncResultEvent(Object source, TResult result) {
+	public AsyncResultEvent(Object source, Tresult result) {
 		super(source);
 		this.result = result;
 	}
@@ -59,7 +59,7 @@ public class AsyncResultEvent<TResult> extends EventObject {
 	 *
 	 * @return the result
 	 */
-	public TResult getResult() {
+	public Tresult getResult() {
 		return this.result;
 	}
 }

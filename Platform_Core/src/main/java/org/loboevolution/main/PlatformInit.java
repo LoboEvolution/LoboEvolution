@@ -433,7 +433,7 @@ public class PlatformInit {
 		} catch (Exception err) {
 			logger.log(Level.ERROR, err);
 		}
-		System.exit(0);
+		Runtime.getRuntime().exit(0);
 	}
 
 	/**

@@ -35,16 +35,16 @@ import org.loboevolution.util.Objects;
  * The Class AsyncResultImpl.
  *
  * @author J. H. S.
- * @param <TResult>
+ * @param <Tresult>
  *            the generic type
  */
-public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
+public class AsyncResultImpl<Tresult> implements AsyncResult<Tresult> {
 
 	/** The evt result. */
 	private final EventDispatch evtResult = new EventDispatch();
 
 	/** The result. */
-	private TResult result;
+	private Tresult result;
 
 	/** The exception. */
 	private Throwable exception;
@@ -59,7 +59,7 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 	 * AsyncResultListener)
 	 */
 	@Override
-	public void addResultListener(final AsyncResultListener<TResult> listener) {
+	public void addResultListener(final AsyncResultListener<Tresult> listener) {
 		synchronized (this) {
 			if (this.hasResult) {
 				if (this.exception != null) {
@@ -79,22 +79,22 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 					}
 
 				} else {
-					final TResult result = this.result;
+					final Tresult result = this.result;
 					if (SwingUtilities.isEventDispatchThread()) {
 						// Invoke holding no locks
-						AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+						AsyncResultEvent<Tresult> are = new AsyncResultEvent<Tresult>(AsyncResultImpl.this, result);
 						listener.resultReceived(are);
 					} else {
 
 						SwingUtilities.invokeLater(() -> {
 							// Invoke holding no locks
-							AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+							AsyncResultEvent<Tresult> are = new AsyncResultEvent<Tresult>(AsyncResultImpl.this, result);
 							listener.resultReceived(are);
 						});
 					}
 				}
 			}
-			evtResult.addListener(new EventListenerWrapper<TResult>(listener));
+			evtResult.addListener(new EventListenerWrapper<Tresult>(listener));
 		}
 	}
 
@@ -105,8 +105,8 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 	 * clientlet .AsyncResultListener)
 	 */
 	@Override
-	public void removeResultListener(AsyncResultListener<TResult> listener) {
-		this.evtResult.removeListener(new EventListenerWrapper<TResult>(listener));
+	public void removeResultListener(AsyncResultListener<Tresult> listener) {
+		this.evtResult.removeListener(new EventListenerWrapper<Tresult>(listener));
 	}
 
 	/*
@@ -136,17 +136,17 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 					}
 
 				} else {
-					final TResult result = this.result;
+					final Tresult result = this.result;
 					if (SwingUtilities.isEventDispatchThread()) {
 						// Invoke holding no locks
-						AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+						AsyncResultEvent<Tresult> are = new AsyncResultEvent<Tresult>(AsyncResultImpl.this, result);
 						evtResult.fireEvent(are);
 
 					} else {
 
 						SwingUtilities.invokeLater(() -> {
 							// Invoke holding no locks
-							AsyncResultEvent<TResult> are = new AsyncResultEvent<TResult>(AsyncResultImpl.this, result);
+							AsyncResultEvent<Tresult> are = new AsyncResultEvent<Tresult>(AsyncResultImpl.this, result);
 							evtResult.fireEvent(are);
 						});
 					}
@@ -161,12 +161,12 @@ public class AsyncResultImpl<TResult> implements AsyncResult<TResult> {
 	 * @param result
 	 *            the new result
 	 */
-	public void setResult(final TResult result) {
+	public void setResult(final Tresult result) {
 		synchronized (this) {
 			this.result = result;
 			this.hasResult = true;
 			SwingUtilities.invokeLater(
-					() -> evtResult.fireEvent(new AsyncResultEvent<TResult>(AsyncResultImpl.this, result)));
+					() -> evtResult.fireEvent(new AsyncResultEvent<Tresult>(AsyncResultImpl.this, result)));
 		}
 	}
 

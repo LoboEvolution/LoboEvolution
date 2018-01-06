@@ -293,11 +293,9 @@ public class HtmlInsets implements CSSValuesProperties {
 									token = tok.nextToken();
 									insetsArray[3] = HtmlValues.getPixelSize(token, renderState, 0);
 									size = 4;
-									if (negativeOK || insetsArray[3] >= 0) {
-										// nop
-									} else {
+									if (!negativeOK || insetsArray[3] < 0) {
 										insetsArray[3] = 0;
-									}
+									} 
 								}
 							} else {
 								size = 4;

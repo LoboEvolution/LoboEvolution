@@ -30,16 +30,16 @@ import java.util.LinkedList;
  * Internal class.
  *
  * @author J. H. S.
- * @param <TResult>
+ * @param <Tresult>
  *            the generic type
  */
-public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncResultListener<TResult> {
+public class AsyncResultWrapper<Tresult> implements AsyncResult<Tresult>, AsyncResultListener<Tresult> {
 
 	/** The ar. */
-	private AsyncResult<TResult> ar;
+	private AsyncResult<Tresult> ar;
 
 	/** The listeners. */
-	private final Collection<AsyncResultListener<TResult>> listeners = new LinkedList<AsyncResultListener<TResult>>();
+	private final Collection<AsyncResultListener<Tresult>> listeners = new LinkedList<AsyncResultListener<Tresult>>();
 
 	/**
 	 * Instantiates a new async result wrapper.
@@ -47,7 +47,7 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 * @param ar
 	 *            the ar
 	 */
-	public AsyncResultWrapper(AsyncResult<TResult> ar) {
+	public AsyncResultWrapper(AsyncResult<Tresult> ar) {
 		super();
 		this.ar = ar;
 	}
@@ -58,8 +58,8 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 * @param ar
 	 *            the new async result
 	 */
-	public void setAsyncResult(AsyncResult<TResult> ar) {
-		AsyncResult<TResult> oldResult = this.ar;
+	public void setAsyncResult(AsyncResult<Tresult> ar) {
+		AsyncResult<Tresult> oldResult = this.ar;
 		if (oldResult != null) {
 			oldResult.removeResultListener(this);
 		}
@@ -74,7 +74,7 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 *
 	 * @return the async result
 	 */
-	public AsyncResult<TResult> getAsyncResult() {
+	public AsyncResult<Tresult> getAsyncResult() {
 		return this.ar;
 	}
 
@@ -86,11 +86,11 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 * .AsyncResultListener)
 	 */
 	@Override
-	public void addResultListener(AsyncResultListener<TResult> listener) {
+	public void addResultListener(AsyncResultListener<Tresult> listener) {
 		synchronized (this) {
 			this.listeners.add(listener);
 		}
-		AsyncResult<TResult> ar = this.ar;
+		AsyncResult<Tresult> ar = this.ar;
 		if (ar != null) {
 			ar.signal();
 		}
@@ -103,7 +103,7 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 * clientlet .AsyncResultListener)
 	 */
 	@Override
-	public void removeResultListener(AsyncResultListener<TResult> listener) {
+	public void removeResultListener(AsyncResultListener<Tresult> listener) {
 		synchronized (this) {
 			this.listeners.remove(listener);
 		}
@@ -118,11 +118,11 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 */
 	@Override
 	public void exceptionReceived(AsyncResultEvent<Throwable> event) {
-		AsyncResultListener<TResult>[] listenersArray;
+		AsyncResultListener<Tresult>[] listenersArray;
 		synchronized (this) {
 			listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
 		}
-		for (AsyncResultListener<TResult> arl : listenersArray) {
+		for (AsyncResultListener<Tresult> arl : listenersArray) {
 			arl.exceptionReceived(event);
 		}
 	}
@@ -134,12 +134,12 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 * clientlet .AsyncResultEvent)
 	 */
 	@Override
-	public void resultReceived(AsyncResultEvent<TResult> event) {
-		AsyncResultListener<TResult>[] listenersArray;
+	public void resultReceived(AsyncResultEvent<Tresult> event) {
+		AsyncResultListener<Tresult>[] listenersArray;
 		synchronized (this) {
 			listenersArray = this.listeners.toArray(new AsyncResultListener[0]);
 		}
-		for (AsyncResultListener<TResult> arl : listenersArray) {
+		for (AsyncResultListener<Tresult> arl : listenersArray) {
 			arl.resultReceived(event);
 		}
 	}
@@ -151,7 +151,7 @@ public class AsyncResultWrapper<TResult> implements AsyncResult<TResult>, AsyncR
 	 */
 	@Override
 	public void signal() {
-		AsyncResult<TResult> ar = this.ar;
+		AsyncResult<Tresult> ar = this.ar;
 		if (ar != null) {
 			ar.signal();
 		}
