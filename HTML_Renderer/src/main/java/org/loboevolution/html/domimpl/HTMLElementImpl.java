@@ -956,7 +956,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			logger.error("setInnerHTML(): Element " + this + " does not belong to a document.");
 			return;
 		}
-		HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null);
+		HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document);
 		synchronized (this) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {

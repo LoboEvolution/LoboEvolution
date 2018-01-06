@@ -37,7 +37,6 @@ import org.apache.logging.log4j.Logger;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
-import org.loboevolution.ua.NavigatorWindow;
 import org.loboevolution.util.Strings;
 
 /**

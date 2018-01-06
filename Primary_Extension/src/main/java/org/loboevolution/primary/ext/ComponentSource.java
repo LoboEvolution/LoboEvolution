@@ -236,7 +236,7 @@ public class ComponentSource implements NavigatorWindowListener {
 				KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK | InputEvent.SHIFT_MASK),
 				new BlankWindowAction(this, window)));
 		menu.addSeparator();
-		menu.add(menuItem("Cloned Window", 'C', new ClonedWindowAction(this, window, actionPool)));
+		menu.add(menuItem("Cloned Window", 'C', new ClonedWindowAction(window, actionPool)));
 		menu.addSeparator();
 		menu.add(menuItem("File...", 'F', "ctrl O", new OpenFileAction(this, window)));
 		menu.addSeparator();
@@ -253,7 +253,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	public JMenu getEditMenu() {
 		JMenu menu = new JMenu("Edit");
 		menu.setMnemonic('E');
-		menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(this, window, actionPool)));
+		menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(window, actionPool)));
 		return menu;
 	}
 

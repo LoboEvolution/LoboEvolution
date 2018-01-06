@@ -48,7 +48,6 @@ import org.loboevolution.html.dombl.DocumentNotificationListener;
 import org.loboevolution.html.dombl.ElementFactory;
 import org.loboevolution.html.dombl.ImageEvent;
 import org.loboevolution.html.dombl.ImageListener;
-import org.loboevolution.html.dombl.LocalErrorHandler;
 import org.loboevolution.html.domfilter.AnchorFilter;
 import org.loboevolution.html.domfilter.AppletFilter;
 import org.loboevolution.html.domfilter.CommandFilter;
@@ -94,7 +93,6 @@ import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 import com.steadystate.css.dom.CSSStyleSheetListImpl;
@@ -397,7 +395,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 		if (reader != null) {
 			try {
-				HtmlParser parser = new HtmlParser(this.ucontext, this, this.documentURI);
+				HtmlParser parser = new HtmlParser(this.ucontext, this);
 				parser.parse(reader);
 			} finally {
 				if (closeReader) {
@@ -480,7 +478,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	private void openBufferChanged(String text) {
 		// Assumed to execute in a lock
 		// Assumed that text is not broken up HTML.
-		HtmlParser parser = new HtmlParser(this.ucontext, this, this.documentURI);
+		HtmlParser parser = new HtmlParser(this.ucontext, this);
 		StringReader strReader = new StringReader(text);
 		try {
 			// This sets up another Javascript scope Window. Does it matter?

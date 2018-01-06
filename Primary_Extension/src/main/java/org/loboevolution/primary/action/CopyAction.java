@@ -53,7 +53,7 @@ public class CopyAction extends AbstractAction implements EnableableAction {
 	 * @param action
 	 *            the action
 	 */
-	public CopyAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+	public CopyAction(NavigatorWindow window, ActionPool action) {
 		this.action = action;
 		this.window = window;
 	}

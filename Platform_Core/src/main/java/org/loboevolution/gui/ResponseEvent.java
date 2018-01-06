@@ -22,8 +22,6 @@ package org.loboevolution.gui;
 
 import java.util.EventObject;
 
-import org.loboevolution.clientlet.ClientletResponse;
-
 /**
  * The Class ResponseEvent.
  */

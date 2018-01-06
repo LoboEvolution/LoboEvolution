@@ -40,7 +40,6 @@ import org.loboevolution.ua.ProgressType;
 import org.loboevolution.ua.RequestType;
 import org.loboevolution.util.InputProgressEvent;
 import org.loboevolution.util.MonitoredInputStream;
-import org.loboevolution.util.SSLCertificate;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.Urls;
 import org.loboevolution.util.io.BufferExceededException;

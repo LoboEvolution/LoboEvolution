@@ -48,7 +48,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 /**
@@ -120,25 +119,6 @@ public class HtmlParser {
 	static {
 		ENTITIES = HtmlMappingChar.mappingChar();
 		ELEMENT_INFOS = HtmlMapping.mappingTag();
-	}
-
-	/**
-	 * Constructs a <code>HtmlParser</code>.
-	 *
-	 * @param ucontext
-	 *            The user agent context.
-	 * @param document
-	 *            An W3C Document instance.
-	 * @param errorHandler
-	 *            The error handler.
-	 * @param publicId
-	 *            The public ID of the document.
-	 * @param systemId
-	 *            The system ID of the document.
-	 */
-	public HtmlParser(UserAgentContext ucontext, Document document, String publicId) {
-		this.ucontext = ucontext;
-		this.document = document;
 	}
 
 	/**

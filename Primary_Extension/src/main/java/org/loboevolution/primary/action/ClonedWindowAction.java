@@ -53,7 +53,7 @@ public class ClonedWindowAction extends AbstractAction implements EnableableActi
 	 * @param action
 	 *            the action
 	 */
-	public ClonedWindowAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+	public ClonedWindowAction(NavigatorWindow window, ActionPool action) {
 		this.action = action;
 		this.window = window;
 	}
