@@ -47,7 +47,7 @@ public class FormField {
 	 *            the type
 	 */
 	public FormField(final FieldType type) {
-		this(FieldType.TEXT, "");
+		this(type, "");
 	}
 
 	/**

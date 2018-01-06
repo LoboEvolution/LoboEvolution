@@ -323,7 +323,7 @@ public class JSFunction extends AbstractScriptableDelegate{
 	 * @param retained
 	 *            the retained
 	 */
-	public void putAndStartTask(Integer timeoutID, Timer timer, Object retained) {
+	public void putAndStartTask(Integer timeoutID, Timer timer) {
 		TaskWrapper oldTaskWrapper = null;
 		synchronized (this) {
 			Map<Integer, TaskWrapper> taskMap = this.taskMap;
@@ -333,7 +333,7 @@ public class JSFunction extends AbstractScriptableDelegate{
 			} else {
 				oldTaskWrapper = taskMap.get(timeoutID);
 			}
-			taskMap.put(timeoutID, new TaskWrapper(timer, retained));
+			taskMap.put(timeoutID, new TaskWrapper(timer));
 		}
 		// Do this outside synchronized block, just in case.
 		if (oldTaskWrapper != null) {

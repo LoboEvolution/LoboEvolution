@@ -18,7 +18,7 @@ public class TaskWrapper {
 	 * @param retained
 	 *            the retained
 	 */
-	public TaskWrapper(Timer timer, Object retained) {
+	public TaskWrapper(Timer timer) {
 		super();
 		this.timer = timer;
 	}

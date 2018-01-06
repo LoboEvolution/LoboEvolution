@@ -45,18 +45,6 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	 *
 	 * @param name
 	 *            the name
-	 * @param noStyleSheet
-	 *            the no style sheet
-	 */
-	public HTMLFrameElementImpl(String name, boolean noStyleSheet) {
-		super(name, noStyleSheet);
-	}
-
-	/**
-	 * Instantiates a new HTML frame element impl.
-	 *
-	 * @param name
-	 *            the name
 	 */
 	public HTMLFrameElementImpl(String name) {
 		super(name);

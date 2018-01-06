@@ -30,11 +30,8 @@ public class HLayout extends CommonLayout {
 
 	/**
 	 * Instantiates a new h layout.
-	 *
-	 * @param fontSize
-	 *            the font size
 	 */
-	public HLayout(int fontSize) {
+	public HLayout() {
 		super(DISPLAY_BLOCK);
 	}
 

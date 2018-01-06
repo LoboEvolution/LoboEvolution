@@ -194,7 +194,7 @@ public class Window extends JSFunction implements AbstractView {
 		}
 		Timer timer = new Timer(t, task);
 		timer.setRepeats(true); // The only difference with setTimeout
-		this.putAndStartTask(timeIDInt, timer, aFunction);
+		this.putAndStartTask(timeIDInt, timer);
 		return timeID;
 	}
 
@@ -224,7 +224,7 @@ public class Window extends JSFunction implements AbstractView {
 		}
 		Timer timer = new Timer(t, task);
 		timer.setRepeats(false); // The only difference with setTimeout
-		this.putAndStartTask(timeIDInt, timer, null);
+		this.putAndStartTask(timeIDInt, timer);
 		return timeID;
 	}
 
@@ -574,7 +574,7 @@ public class Window extends JSFunction implements AbstractView {
 		}
 		Timer timer = new Timer(t, task);
 		timer.setRepeats(false);
-		this.putAndStartTask(timeIDInt, timer, null);
+		this.putAndStartTask(timeIDInt, timer);
 		return timeID;
 	}
 
@@ -600,7 +600,7 @@ public class Window extends JSFunction implements AbstractView {
 		}
 		Timer timer = new Timer(t, task);
 		timer.setRepeats(false);
-		this.putAndStartTask(timeIDInt, timer, function);
+		this.putAndStartTask(timeIDInt, timer);
 		return timeID;
 	}
 

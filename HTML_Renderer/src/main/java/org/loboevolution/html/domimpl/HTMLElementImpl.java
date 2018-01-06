@@ -93,18 +93,6 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 *
 	 * @param name
 	 *            the name
-	 * @param noStyleSheet
-	 *            the no style sheet
-	 */
-	public HTMLElementImpl(String name, boolean noStyleSheet) {
-		super(name);
-	}
-
-	/**
-	 * Instantiates a new HTML element impl.
-	 *
-	 * @param name
-	 *            the name
 	 */
 	public HTMLElementImpl(String name) {
 		super(name);
@@ -968,7 +956,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			logger.error("setInnerHTML(): Element " + this + " does not belong to a document.");
 			return;
 		}
-		HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, null, null);
+		HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null);
 		synchronized (this) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {

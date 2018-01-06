@@ -215,7 +215,7 @@ public class ExtensionImpl implements NavigatorExtension {
 		writer.println("  <dt><strong>Exception</strong>:</dt>");
 		writer.println("  <dd>" + exception.getClass().getName() + "</dd>");
 		writer.println("  <dt><strong>Meaning</strong>:</dt>");
-		writer.println("  <dd>" + getExceptionMeaning(url, exception) + "</dd>");
+		writer.println("  <dd>" + getExceptionMeaning(exception) + "</dd>");
 		writer.println("  <dt><strong>Message</strong>:</dt>");
 		writer.println("  <dd>" + Html.textToHTML(exception.getMessage()) + "</dd>");
 		writer.println("</dl>");
@@ -281,7 +281,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 *            the exception
 	 * @return the exception meaning
 	 */
-	private static String getExceptionMeaning(URL url, Throwable exception) {
+	private static String getExceptionMeaning(Throwable exception) {
 		if (exception instanceof JavaVersionException) {
 			JavaVersionException jve = (JavaVersionException) exception;
 			return "This exception is thrown when the content expects the user's Java Virtual Machine "

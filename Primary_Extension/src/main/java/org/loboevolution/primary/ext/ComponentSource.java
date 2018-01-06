@@ -166,7 +166,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		});
 		JMenu backMoreMenu = new JMenu();
 		// BackMoreAction only used for enabling
-		backMoreMenu.setAction(new BackMoreAction(this, window, actionPool));
+		backMoreMenu.setAction(new BackMoreAction(window, actionPool));
 		backMoreMenu.addMenuListener(new MenuAdapter() {
 			@Override
 			public void menuSelected(MenuEvent e) {
@@ -177,7 +177,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		backMoreMenu.setText("Back To");
 		JMenu forwardMoreMenu = new JMenu();
 		// ForwardMoreAction only used for enabling
-		forwardMoreMenu.setAction(new ForwardMoreAction(this, window, actionPool));
+		forwardMoreMenu.setAction(new ForwardMoreAction(window, actionPool));
 		forwardMoreMenu.addMenuListener(new MenuAdapter() {
 			@Override
 			public void menuSelected(MenuEvent e) {
@@ -295,11 +295,10 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("Navigation");
 		menu.setMnemonic('N');
 
-		menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(this, window, actionPool)));
-		menu.add(menuItem("Forward", 'F', new ForwardAction(this, window, actionPool)));
+		menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(window, actionPool)));
+		menu.add(menuItem("Forward", 'F', new ForwardAction(window, actionPool)));
 		menu.add(menuItem("Stop", 'S', KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), new StopAction(this, window)));
-		menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),
-				new ReloadAction(this, window, actionPool)));
+		menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), new ReloadAction(window, actionPool)));
 		menu.addSeparator();
 		menu.add(this.backMoreMenu);
 		menu.add(this.forwardMoreMenu);
@@ -384,7 +383,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private Component getBackButton() {
 		JButton button = new JButton();
-		button.setAction(new BackAction(this, window, actionPool));
+		button.setAction(new BackAction(window, actionPool));
 		button.setIcon(IconFactory.getInstance().getIcon("/org/loboevolution/images/back.png"));
 		button.setToolTipText("Back");
 		return button;
@@ -397,7 +396,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private Component getForwardButton() {
 		JButton button = new JButton();
-		button.setAction(new ForwardAction(this, window, actionPool));
+		button.setAction(new ForwardAction(window, actionPool));
 		button.setIcon(IconFactory.getInstance().getIcon("/org/loboevolution/images/forward.png"));
 		button.setToolTipText("Forward");
 		return button;
@@ -423,7 +422,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private Component getRefreshButton() {
 		JButton button = new JButton();
-		button.setAction(new ReloadAction(this, window, actionPool));
+		button.setAction(new ReloadAction(window, actionPool));
 		button.setIcon(IconFactory.getInstance().getIcon("/org/loboevolution/images/reload.png"));
 		button.setToolTipText("Refresh");
 		return button;
@@ -864,7 +863,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		if (sourceCode == null) {
 			sourceCode = "";
 		}
-		SourceViewerWindow textViewer = new SourceViewerWindow(window);
+		SourceViewerWindow textViewer = new SourceViewerWindow();
 		textViewer.setText(sourceCode);
 		textViewer.setSize(new Dimension(600, 400));
 		textViewer.setLocationByPlatform(true);

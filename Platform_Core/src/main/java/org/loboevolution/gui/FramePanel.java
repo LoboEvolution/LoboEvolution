@@ -182,12 +182,9 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 
 	/**
 	 * Causes an event to be fired. This method is for internal use.
-	 *
-	 * @param response
-	 *            A clientlet response.
 	 */
-	public void informResponseProcessed(ClientletResponse response) {
-		this.dispatchResponseProcessed(new ResponseEvent(this, response));
+	public void informResponseProcessed() {
+		this.dispatchResponseProcessed(new ResponseEvent(this));
 	}
 
 	/**

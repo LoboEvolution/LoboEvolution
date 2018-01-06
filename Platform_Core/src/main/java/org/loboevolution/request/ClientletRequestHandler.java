@@ -162,7 +162,7 @@ public class ClientletRequestHandler extends AbstractRequestHandler {
 			LocalSecurityManager.setCurrentThreadGroup(prevThreadGroup);
 			ClientletAccess.setCurrentClientletContext(prevCtx);
 		}
-		this.frame.informResponseProcessed(response);
+		this.frame.informResponseProcessed();
 	}
 
 	/*

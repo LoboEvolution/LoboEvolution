@@ -1265,7 +1265,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		int tableHeight;
 		if (tableHeightLength != null) {
 			tableHeight = tableHeightLength.getLength(availHeight);
-			this.determineRowSizesFixedTH(hasBorder, cellSpacing, availHeight, tableHeight, sizeOnly);
+			this.determineRowSizesFixedTH(hasBorder, cellSpacing, tableHeight, sizeOnly);
 		} else {
 			// zbytocne
 			// tableHeight = heightsOfExtras;
@@ -1290,8 +1290,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 * @param sizeOnly
 	 *            the size only
 	 */
-	private void determineRowSizesFixedTH(int hasBorder, int cellSpacing, int availHeight, int tableHeight,
-			boolean sizeOnly) {
+	private void determineRowSizesFixedTH(int hasBorder, int cellSpacing, int tableHeight, boolean sizeOnly) {
 		SizeInfo[] rowSizes = this.rowSizes;
 		int numRows = rowSizes.length;
 		int heightsOfExtras = this.heightsOfExtras;

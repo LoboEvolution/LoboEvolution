@@ -37,10 +37,8 @@ public class ResponseEvent extends EventObject {
 	 *
 	 * @param source
 	 *            the source
-	 * @param response
-	 *            the response
 	 */
-	public ResponseEvent(Object source, ClientletResponse response) {
+	public ResponseEvent(Object source) {
 		super(source);
 	}
 }

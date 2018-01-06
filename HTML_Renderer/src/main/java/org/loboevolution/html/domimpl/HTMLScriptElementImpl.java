@@ -68,19 +68,12 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	/**
 	 * Instantiates a new HTML script element impl.
-	 */
-	public HTMLScriptElementImpl() {
-		super(SCRIPT, true);
-	}
-
-	/**
-	 * Instantiates a new HTML script element impl.
 	 *
 	 * @param name
 	 *            the name
 	 */
 	public HTMLScriptElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/*

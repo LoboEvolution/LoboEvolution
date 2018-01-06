@@ -121,38 +121,6 @@ public class ClientletResponseImpl implements ClientletResponse {
 		this.requestType = requestType;
 	}
 
-	/**
-	 * Instantiates a new clientlet response impl.
-	 *
-	 * @param rhandler
-	 *            the rhandler
-	 * @param url
-	 *            the url
-	 * @param fromCache
-	 *            the from cache
-	 * @param cacheInfo
-	 *            the cache info
-	 * @param isCacheable
-	 *            the is cacheable
-	 * @param requestMethod
-	 *            the request method
-	 * @param requestType
-	 *            the request type
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public ClientletResponseImpl(RequestHandler rhandler, URL url, boolean fromCache, CacheInfo cacheInfo,
-			boolean isCacheable, String requestMethod, RequestType requestType) throws IOException {
-		SSLCertificate.setCertificate();
-		this.connection = url.openConnection();
-		this.responseURL = url;
-		this.requestHandler = rhandler;
-		this.isCacheable = isCacheable;
-		this.cacheInfo = cacheInfo;
-		this.fromCache = fromCache;
-		this.requestType = requestType;
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

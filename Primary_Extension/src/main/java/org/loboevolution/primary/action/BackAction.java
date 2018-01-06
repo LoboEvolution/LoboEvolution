@@ -45,14 +45,12 @@ public class BackAction extends AbstractAction implements EnableableAction {
 	/**
 	 * Instantiates a new back action.
 	 *
-	 * @param componentSource
-	 *            the component source
 	 * @param window
 	 *            the window
 	 * @param action
 	 *            the action
 	 */
-	public BackAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+	public BackAction(NavigatorWindow window, ActionPool action) {
 		this.window = window;
 		this.action = action;
 	}

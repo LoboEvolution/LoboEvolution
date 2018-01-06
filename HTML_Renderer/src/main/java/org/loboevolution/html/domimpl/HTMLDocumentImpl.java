@@ -397,10 +397,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 		if (reader != null) {
 			try {
-				ErrorHandler errorHandler = new LocalErrorHandler();
-				String systemId = this.documentURI;
-				String publicId = systemId;
-				HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler, publicId, systemId);
+				HtmlParser parser = new HtmlParser(this.ucontext, this, this.documentURI);
 				parser.parse(reader);
 			} finally {
 				if (closeReader) {
@@ -483,10 +480,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	private void openBufferChanged(String text) {
 		// Assumed to execute in a lock
 		// Assumed that text is not broken up HTML.
-		ErrorHandler errorHandler = new LocalErrorHandler();
-		String systemId = this.documentURI;
-		String publicId = systemId;
-		HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler, publicId, systemId);
+		HtmlParser parser = new HtmlParser(this.ucontext, this, this.documentURI);
 		StringReader strReader = new StringReader(text);
 		try {
 			// This sets up another Javascript scope Window. Does it matter?

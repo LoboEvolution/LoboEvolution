@@ -257,7 +257,7 @@ public final class RequestEngine {
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	private void postData(URLConnection connection, ParameterInfo pinfo, String altPostData) throws IOException {
+	private void postData(URLConnection connection, ParameterInfo pinfo) throws IOException {
 		BooleanSettings boolSettings = this.booleanSettings;
 		String encoding = pinfo.getEncoding();
 		if (encoding == null || NORMAL_FORM_ENCODING.equalsIgnoreCase(encoding)) {
@@ -415,13 +415,10 @@ public final class RequestEngine {
 	 *            the cache info
 	 * @param requestMethod
 	 *            the request method
-	 * @param lastRequestURL
-	 *            the last request url
 	 * @throws ProtocolException
 	 *             the protocol exception
 	 */
-	private void addRequestProperties(URLConnection connection, ClientletRequest request, CacheInfo cacheInfo,
-			String requestMethod, URL lastRequestURL) throws ProtocolException {
+	private void addRequestProperties(URLConnection connection, ClientletRequest request, CacheInfo cacheInfo, String requestMethod) throws ProtocolException {
 		UserAgent userAgent = request.getUserAgent();
 		connection.addRequestProperty("User-Agent", userAgent.toString());
 		connection.addRequestProperty("X-Java-Version", userAgent.getJavaVersion());
@@ -470,7 +467,7 @@ public final class RequestEngine {
 	 * @throws Exception
 	 *             the exception
 	 */
-	private CacheInfo getCacheInfo(final RequestHandler rhandler, final URL url) throws Exception {
+	private CacheInfo getCacheInfo(final URL url) throws Exception {
 		return AccessController.doPrivileged((PrivilegedAction<CacheInfo>) () -> {
 			MemoryCacheEntry entry;
 			byte[] persistentContent = null;
@@ -494,8 +491,6 @@ public final class RequestEngine {
 	/**
 	 * Cache.
 	 *
-	 * @param rhandler
-	 *            the rhandler
 	 * @param url
 	 *            the url
 	 * @param connection
@@ -509,7 +504,7 @@ public final class RequestEngine {
 	 * @param approxAltObjectSize
 	 *            the approx alt object size
 	 */
-	private void cache(final RequestHandler rhandler, final URL url, final URLConnection connection,
+	private void cache(final URL url, final URLConnection connection,
 			final byte[] content, final Serializable altPersistentObject, final Object altObject,
 			final int approxAltObjectSize) {
 		AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
@@ -739,13 +734,11 @@ public final class RequestEngine {
 	 * Whether possibly cached request should always be revalidated, i.e. any
 	 * expiration information is ignored.
 	 *
-	 * @param connectionUrl
-	 *            the connection url
 	 * @param requestType
 	 *            the request type
 	 * @return true, if successful
 	 */
-	private static boolean shouldRevalidateAlways(URL connectionUrl, RequestType requestType) {
+	private static boolean shouldRevalidateAlways(RequestType requestType) {
 		return requestType == RequestType.ADDRESS_BAR;
 	}
 
@@ -803,7 +796,7 @@ public final class RequestEngine {
 					}
 				}
 				return cacheInfo.getURLConnection();
-			} else if (!shouldRevalidateAlways(connectionUrl, requestType)) {
+			} else if (!shouldRevalidateAlways(requestType)) {
 				Long expires = cacheInfo.getExpires();
 				if (expires == null) {
 					Integer defaultOffset = this.cacheSettings.getDefaultCacheExpirationOffset();
@@ -867,7 +860,7 @@ public final class RequestEngine {
 			hconnection.setConnectTimeout(60000);
 			hconnection.setReadTimeout(90000);
 		}
-		this.addRequestProperties(connection, request, cacheInfo, method, connectionUrl);
+		this.addRequestProperties(connection, request, cacheInfo, method);
 		// Allow extensions to modify the connection object.
 		// Doing it after addRequestProperties() to allow such
 		// functionality as altering the Accept header.
@@ -882,7 +875,7 @@ public final class RequestEngine {
 			if (pinfo == null) {
 				throw new IllegalStateException("POST has no parameter information");
 			}
-			this.postData(connection, pinfo, request.getAltPostData());
+			this.postData(connection, pinfo);
 		}
 		return connection;
 	}
@@ -945,7 +938,7 @@ public final class RequestEngine {
 			}
 			RequestType requestType = rhandler.getRequestType();
 			if (isGet && isOKToRetrieveFromCache(requestType)) {
-				cacheInfo = this.getCacheInfo(rhandler, connectionUrl);
+				cacheInfo = this.getCacheInfo(connectionUrl);
 			}
 			try {
 
@@ -1126,8 +1119,7 @@ public final class RequestEngine {
 								Serializable persObject = response.getNewPersistentCachedObject();
 								Object altObject = response.getNewTransientCachedObject();
 								int altObjectSize = response.getNewTransientObjectSize();
-								this.cache(rhandler, connectionUrl, connection, content, persObject, altObject,
-										altObjectSize);
+								this.cache(connectionUrl, connection, content, persObject, altObject, altObjectSize);
 							} else {
 								logger.warn("processHandler(): Cacheable response not available: " + connectionUrl);
 							}

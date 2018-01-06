@@ -81,11 +81,11 @@ public class ActionPool extends AbstractAction {
 		this.window = window;
 		Collection<EnableableAction> actions = new LinkedList<EnableableAction>();
 		this.enableableActions = actions;
-		actions.add(new BackAction(componentSource, window, this));
-		actions.add(new ForwardAction(componentSource, window, this));
-		actions.add(new ReloadAction(componentSource, window, this));
-		actions.add(new BackMoreAction(componentSource, window, this));
-		actions.add(new ForwardMoreAction(componentSource, window, this));
+		actions.add(new BackAction(window, this));
+		actions.add(new ForwardAction(window, this));
+		actions.add(new ReloadAction(window, this));
+		actions.add(new BackMoreAction(window, this));
+		actions.add(new ForwardMoreAction(window, this));
 		actions.add(new SourceAction(componentSource, window, this));
 		actions.add(new FullScreenAction(window, this));
 	}

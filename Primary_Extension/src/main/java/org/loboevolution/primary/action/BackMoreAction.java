@@ -52,7 +52,7 @@ public class BackMoreAction extends AbstractAction implements EnableableAction {
 	 * @param action
 	 *            the action
 	 */
-	public BackMoreAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+	public BackMoreAction(NavigatorWindow window, ActionPool action) {
 		this.action = action;
 		this.window = window;
 	}

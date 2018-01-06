@@ -36,7 +36,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 	 *            the name
 	 */
 	public HTMLBaseElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/*

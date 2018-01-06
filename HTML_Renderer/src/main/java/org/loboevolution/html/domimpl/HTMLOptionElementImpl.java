@@ -41,7 +41,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	 *            the name
 	 */
 	public HTMLOptionElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/*

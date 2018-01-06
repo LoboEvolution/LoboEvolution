@@ -166,9 +166,9 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		String rel = this.getAttribute(REL);
 		if (rel != null) {
 			String cleanRel = rel.trim().toLowerCase();
-			boolean isStyleSheet = cleanRel.equals("stylesheet");
-			boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
-			boolean isAppendixStyleSheet = cleanRel.equals("appendix stylesheet");
+			boolean isStyleSheet = "stylesheet".equals(cleanRel);
+			boolean isAltStyleSheet = "alternate stylesheet".equals(cleanRel);
+			boolean isAppendixStyleSheet = "appendix stylesheet".equals(cleanRel);
 			if (isStyleSheet || isAltStyleSheet || isAppendixStyleSheet) {
 				UserAgentContext uacontext = this.getUserAgentContext();
 				if (uacontext.isExternalCSSEnabled()) {

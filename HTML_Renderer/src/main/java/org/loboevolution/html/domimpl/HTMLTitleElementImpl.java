@@ -35,7 +35,7 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 	 *            the name
 	 */
 	public HTMLTitleElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/*

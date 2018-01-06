@@ -207,7 +207,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 		if (style instanceof CanvasGradient) {
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
 			fillPaint = gradient(cgi.getFractions(), cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
-					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR1(), cgi.getR2());
+					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR2());
 		} else if (style instanceof String) {
 			fillPaint = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -371,7 +371,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 		if (style instanceof CanvasGradient) {
 			DOMCanvasGradientImpl cgi = (DOMCanvasGradientImpl) style;
 			strokePaint = gradient(cgi.getFractions(), cgi.getColors(), cgi.getLinearX(), cgi.getLinearX1(),
-					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR1(), cgi.getR2());
+					cgi.getLinearY(), cgi.getLinearY1(), cgi.getR2());
 		} else if (style instanceof String) {
 			strokePaint = ColorFactory.getInstance().getColor(style.toString());
 		}
@@ -791,7 +791,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	 * @return gradient paint
 	 */
 	private Paint gradient(ArrayList<Float> fractions, ArrayList<Color> colors, Double linearX, Double linearX1,
-			Double linearY, Double linearY1, Double r1, Double r2) {
+			Double linearY, Double linearY1, Double r2) {
 
 		float[] floatArray = new float[fractions.size()];
 		int i = 0;

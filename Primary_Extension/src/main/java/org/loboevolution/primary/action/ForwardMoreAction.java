@@ -53,7 +53,7 @@ public class ForwardMoreAction extends AbstractAction implements EnableableActio
 	 * @param action
 	 *            the action
 	 */
-	public ForwardMoreAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+	public ForwardMoreAction(NavigatorWindow window, ActionPool action) {
 		this.action = action;
 		this.window = window;
 	}

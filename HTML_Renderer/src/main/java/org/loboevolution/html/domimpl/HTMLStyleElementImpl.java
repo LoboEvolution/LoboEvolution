@@ -51,19 +51,12 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	/**
 	 * Instantiates a new HTML style element impl.
-	 */
-	public HTMLStyleElementImpl() {
-		super(STYLE_HTML, true);
-	}
-
-	/**
-	 * Instantiates a new HTML style element impl.
 	 *
 	 * @param name
 	 *            the name
 	 */
 	public HTMLStyleElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	@Override

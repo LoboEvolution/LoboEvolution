@@ -70,12 +70,12 @@ public class HtmlLayoutMapping implements HtmlProperties {
 		el.put(I, em);
 		el.put(EM, em);
 		el.put(CITE, em);
-		el.put(H1, new HLayout(24));
-		el.put(H2, new HLayout(18));
-		el.put(H3, new HLayout(15));
-		el.put(H4, new HLayout(12));
-		el.put(H5, new HLayout(10));
-		el.put(H6, new HLayout(8));
+		el.put(H1, new HLayout());
+		el.put(H2, new HLayout());
+		el.put(H3, new HLayout());
+		el.put(H4, new HLayout());
+		el.put(H5, new HLayout());
+		el.put(H6, new HLayout());
 
 		StrongLayout strong = new StrongLayout();
 		el.put(B, strong);

@@ -143,7 +143,7 @@ public class HtmlClientlet implements Clientlet {
 					String content = entry.getValue();
 					if (content != null) {
 						if ("content-type".equalsIgnoreCase(httpEquiv)) {
-							httpEquivCharset = this.extractCharset(response.getResponseURL(), content);
+							httpEquivCharset = this.extractCharset(content);
 						} else if ("refresh".equalsIgnoreCase(httpEquiv)) {
 							refresh = this.extractRefresh(content);
 						} else if ("content-language".equalsIgnoreCase(httpEquiv)) {
@@ -262,7 +262,7 @@ public class HtmlClientlet implements Clientlet {
 	 *            the content type
 	 * @return the string
 	 */
-	private String extractCharset(URL responseURL, String contentType) {
+	private String extractCharset(String contentType) {
 		StringTokenizer tok = new StringTokenizer(contentType, ";");
 		if (tok.hasMoreTokens()) {
 			tok.nextToken();

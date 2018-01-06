@@ -35,19 +35,12 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 
 	/**
 	 * Instantiates a new HTML html element impl.
-	 */
-	public HTMLHtmlElementImpl() {
-		super(HTML, true);
-	}
-
-	/**
-	 * Instantiates a new HTML html element impl.
 	 *
 	 * @param name
 	 *            the name
 	 */
 	public HTMLHtmlElementImpl(String name) {
-		super(name, true);
+		super(name);
 	}
 
 	/*

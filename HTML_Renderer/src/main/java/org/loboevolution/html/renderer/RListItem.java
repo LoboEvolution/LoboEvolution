@@ -71,11 +71,9 @@ public class RListItem extends BaseRListElement implements HtmlAttributeProperti
 	 *            the frame context
 	 * @param parentContainer
 	 *            the parent container
-	 * @param parent
-	 *            the parent
 	 */
 	public RListItem(DOMNodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer parentContainer, RCollection parent) {
+			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
 	}
 

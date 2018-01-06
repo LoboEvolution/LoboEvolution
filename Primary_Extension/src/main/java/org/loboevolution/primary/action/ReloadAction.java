@@ -52,7 +52,7 @@ public class ReloadAction extends AbstractAction implements EnableableAction {
 	 * @param action
 	 *            the action
 	 */
-	public ReloadAction(ComponentSource componentSource, NavigatorWindow window, ActionPool action) {
+	public ReloadAction(NavigatorWindow window, ActionPool action) {
 		this.action = action;
 		this.window = window;
 	}

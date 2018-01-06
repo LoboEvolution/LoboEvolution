@@ -538,7 +538,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		if (triggerEvent && this.isContainedByNode()) {
 				DOMEventImpl.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
-				setMouseOnMouseOver(this, this.modelNode, limit);
+				setMouseOnMouseOver(this.modelNode, limit);
 		}
 	}
 	
@@ -692,26 +692,23 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		}
 	}
 
-	private static void setMouseOnMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart,
-			final ModelNode limit) {
-		{
-			ModelNode node = nodeStart;
-			while (node != null) {
-				if (node == limit) {
+	private static void setMouseOnMouseOver(final ModelNode nodeStart, final ModelNode limit) {
+		ModelNode node = nodeStart;
+		while (node != null) {
+			if (node == limit) {
+				break;
+			}
+			if (node instanceof DOMNodeImpl) {
+				DOMNodeImpl uiElement = (DOMNodeImpl) node;
+				HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+				RenderState rs = uiElement.getRenderState();
+				Optional<Cursor> cursorOpt = rs.getCursor();
+				if (cursorOpt.isPresent()) {
+					rcontext.setCursor(cursorOpt);
 					break;
 				}
-				if (node instanceof DOMNodeImpl) {
-					DOMNodeImpl uiElement = (DOMNodeImpl) node;
-					HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
-					RenderState rs = uiElement.getRenderState();
-					Optional<Cursor> cursorOpt = rs.getCursor();
-					if (cursorOpt.isPresent()) {
-						rcontext.setCursor(cursorOpt);
-						break;
-					}
-				}
-				node = node.getParentModelNode();
 			}
+			node = node.getParentModelNode();
 		}
 	}
 }

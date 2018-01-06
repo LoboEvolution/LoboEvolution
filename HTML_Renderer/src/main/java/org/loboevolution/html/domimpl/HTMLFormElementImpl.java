@@ -370,7 +370,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	public static boolean isInput(Node node) {
 		String name = node.getNodeName().toLowerCase();
-		return name.equals("input") || name.equals("textarea") || name.equals("select");
+		return "input".equals(name) || "textarea".equals(name) || "select".equals(name);
 	}
 
 	/*

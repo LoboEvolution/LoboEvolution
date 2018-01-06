@@ -136,8 +136,7 @@ public class HtmlParser {
 	 * @param systemId
 	 *            The system ID of the document.
 	 */
-	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler, String publicId,
-			String systemId) {
+	public HtmlParser(UserAgentContext ucontext, Document document, String publicId) {
 		this.ucontext = ucontext;
 		this.document = document;
 	}

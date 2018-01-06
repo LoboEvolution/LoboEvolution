@@ -69,7 +69,7 @@ public class SourceViewerWindow extends JFrame {
 	/**
 	 * Instantiates a new text viewer window.
 	 */
-	public SourceViewerWindow(NavigatorWindow window) {
+	public SourceViewerWindow() {
 		super("Lobo Source Viewer");
 		setResizable(true);
 		setLocationRelativeTo(null);

@@ -72,7 +72,7 @@ public class SVGLengthImpl implements SVGLength {
 	@Override
 	public String getValueAsString() {
 		String suffix = getUnitTypeAsString(this.unitType);
-		if (suffix.equals("unkown")) {
+		if ("unkown".equals(suffix)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknow unit type");
 		}
 		if (this.valueInSpecifiedUnits == (long) this.valueInSpecifiedUnits) {
@@ -249,6 +249,7 @@ public class SVGLengthImpl implements SVGLength {
 			break;
 		case SVGLength.SVG_LENGTHTYPE_UNKNOWN:
 			suffix = "unknown";
+			break;
 		default:
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
 		}
