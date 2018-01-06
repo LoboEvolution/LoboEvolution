@@ -313,7 +313,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		this.layoutPass((DOMNodeImpl) this.modelNode);
 
 		Collection delayedPairs = container.getDelayedPairs();
-		if (delayedPairs != null && delayedPairs.size() > 0) {
+		if (delayedPairs != null && !delayedPairs.isEmpty()) {
 			// Add positioned renderables that belong here
 			Iterator i = delayedPairs.iterator();
 			while (i.hasNext()) {
@@ -1554,7 +1554,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					}
 				}
 			}
-			if (matches.size() == 0) {
+			if (matches.isEmpty()) {
 				return baseIterator;
 			} else {
 				ArrayList destination = new ArrayList();
@@ -2417,7 +2417,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 
 	public void positionDelayed() {
 		final Collection<DelayedPair> delayedPairs = container.getDelayedPairs();
-		if (delayedPairs != null && delayedPairs.size() > 0) {
+		if (delayedPairs != null && !delayedPairs.isEmpty()) {
 			// Add positioned renderables that belong here
 			final Iterator<DelayedPair> i = delayedPairs.iterator();
 			while (i.hasNext()) {

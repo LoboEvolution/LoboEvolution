@@ -60,6 +60,9 @@ public class SimpleUserAgentContext implements UserAgentContext {
 
 	/** The app version. */
 	private String appVersion = "1";
+	
+	/** The app minor version. */
+	private String appMinorVersion = "0";
 
 	/** The user agent. */
 	private String userAgent = "Mozilla/4.0 (compatible; MSIE 6.0;) Cobra/Simple";
@@ -67,8 +70,15 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	/** The scripting enabled. */
 	private boolean scriptingEnabled = true;
 	
+	/** The scripting optimization level. */
+	private int scriptingOptimizationLevel = -1;
+	
 	/** The product. */
 	private String product = "Cobra";
+	
+
+	/** The vendor. */
+	private String vendor = "The Lobo Project";
 
 	/** The external css enabled. */
 	private boolean externalCSSEnabled = true;
@@ -155,9 +165,6 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setAppCodeName(String appCodeName) {
 		this.appCodeName = appCodeName;
 	}
-
-	/** The app minor version. */
-	private String appMinorVersion = "0";
 
 	/**
 	 * Gets the "minor version" of the application. This implementation returns
@@ -387,9 +394,6 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		return null;
 	}
 
-	/** The scripting optimization level. */
-	private int scriptingOptimizationLevel = -1;
-
 	/**
 	 * Gets the Rhino optimization level. This implementation returns the value
 	 * of a local field defaulting to <code>-1</code>.
@@ -411,9 +415,6 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setScriptingOptimizationLevel(int level) {
 		this.scriptingOptimizationLevel = level;
 	}
-
-	/** The vendor. */
-	private String vendor = "The Lobo Project";
 
 	/*
 	 * (non-Javadoc)

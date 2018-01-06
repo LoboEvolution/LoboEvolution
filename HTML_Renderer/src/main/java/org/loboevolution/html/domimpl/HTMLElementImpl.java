@@ -1028,7 +1028,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			}
 		}
 		ArrayList<Node> nl = this.nodeList;
-		if (nl == null || nl.size() == 0) {
+		if (nl == null || nl.isEmpty()) {
 			buffer.append("/>");
 			return;
 		}

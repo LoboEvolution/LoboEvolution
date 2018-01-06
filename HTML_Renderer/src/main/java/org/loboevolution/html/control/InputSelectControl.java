@@ -264,13 +264,13 @@ public class InputSelectControl extends BaseInputControl {
 						defaultSelectedIndexes.add(new Integer(index));
 					}
 				}
-				if (selectedIndexes != null && selectedIndexes.size() != 0) {
+				if (selectedIndexes != null && !selectedIndexes.isEmpty()) {
 					Iterator<Integer> sii = selectedIndexes.iterator();
 					while (sii.hasNext()) {
 						Integer si = sii.next();
 						list.addSelectionInterval(si.intValue(), si.intValue());
 					}
-				} else if (defaultSelectedIndexes != null && defaultSelectedIndexes.size() != 0) {
+				} else if (defaultSelectedIndexes != null && !defaultSelectedIndexes.isEmpty()) {
 					Iterator<Integer> sii = defaultSelectedIndexes.iterator();
 					while (sii.hasNext()) {
 						Integer si = sii.next();

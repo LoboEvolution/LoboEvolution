@@ -327,7 +327,103 @@ public class HtmlInsets implements CSSValuesProperties {
 			return null;
 		}
 	}
+	
+	/**
+	 * Gets the AWT insets.
+	 *
+	 * @param defaultTop
+	 *            the default top
+	 * @param defaultLeft
+	 *            the default left
+	 * @param defaultBottom
+	 *            the default bottom
+	 * @param defaultRight
+	 *            the default right
+	 * @param availWidth
+	 *            the avail width
+	 * @param availHeight
+	 *            the avail height
+	 * @param autoX
+	 *            the auto x
+	 * @param autoY
+	 *            the auto y
+	 * @return the AWT insets
+	 */
+	public Insets getAWTInsets(int defaultTop, int defaultLeft, int defaultBottom, int defaultRight, int availWidth,
+			int availHeight, int autoX, int autoY) {
+		int top = getInsetPixels(this.top, this.topType, defaultTop, availHeight, autoY);
+		int left = getInsetPixels(this.left, this.leftType, defaultLeft, availWidth, autoX);
+		int bottom = getInsetPixels(this.bottom, this.bottomType, defaultBottom, availHeight, autoY);
+		int right = getInsetPixels(this.right, this.rightType, defaultRight, availWidth, autoX);
+		return new Insets(top, left, bottom, right);
+	}
 
+	/**
+	 * Gets the simple awt insets.
+	 *
+	 * @param availWidth
+	 *            the avail width
+	 * @param availHeight
+	 *            the avail height
+	 * @return the simple awt insets
+	 */
+	public Insets getSimpleAWTInsets(int availWidth, int availHeight) {
+		int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
+		int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
+		int bottom = getInsetPixels(this.bottom, this.bottomType, 0, availHeight, 0);
+		int right = getInsetPixels(this.right, this.rightType, 0, availWidth, 0);
+		return new Insets(top, left, bottom, right);
+	}
+	
+	/**
+	 * Checks if is length.
+	 *
+	 * @param token
+	 *            the token
+	 * @return true, if is length
+	 */
+	public static boolean isLength(String token) {
+		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
+				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
+			return true;
+		}
+		try {
+			Double.parseDouble(token);
+			return true;
+		} catch (NumberFormatException nfe) {
+			return false;
+		}
+	}
+
+	/**
+	 * Gets the inset pixels.
+	 *
+	 * @param value
+	 *            the value
+	 * @param type
+	 *            the type
+	 * @param defaultValue
+	 *            the default value
+	 * @param availSize
+	 *            the avail size
+	 * @param autoValue
+	 *            the auto value
+	 * @return the inset pixels
+	 */
+	private static int getInsetPixels(int value, int type, int defaultValue, int availSize, int autoValue) {
+		if (type == TYPE_PIXELS) {
+			return value;
+		} else if (type == TYPE_UNDEFINED) {
+			return defaultValue;
+		} else if (type == TYPE_AUTO) {
+			return autoValue;
+		} else if (type == TYPE_PERCENT) {
+			return availSize * value / 100;
+		} else {
+			throw new IllegalStateException();
+		}
+	}
+	
 	/**
 	 * Gets the right.
 	 *
@@ -478,102 +574,6 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public void setRightType(int rightType) {
 		this.rightType = rightType;
-	}
-
-	/**
-	 * Gets the AWT insets.
-	 *
-	 * @param defaultTop
-	 *            the default top
-	 * @param defaultLeft
-	 *            the default left
-	 * @param defaultBottom
-	 *            the default bottom
-	 * @param defaultRight
-	 *            the default right
-	 * @param availWidth
-	 *            the avail width
-	 * @param availHeight
-	 *            the avail height
-	 * @param autoX
-	 *            the auto x
-	 * @param autoY
-	 *            the auto y
-	 * @return the AWT insets
-	 */
-	public Insets getAWTInsets(int defaultTop, int defaultLeft, int defaultBottom, int defaultRight, int availWidth,
-			int availHeight, int autoX, int autoY) {
-		int top = getInsetPixels(this.top, this.topType, defaultTop, availHeight, autoY);
-		int left = getInsetPixels(this.left, this.leftType, defaultLeft, availWidth, autoX);
-		int bottom = getInsetPixels(this.bottom, this.bottomType, defaultBottom, availHeight, autoY);
-		int right = getInsetPixels(this.right, this.rightType, defaultRight, availWidth, autoX);
-		return new Insets(top, left, bottom, right);
-	}
-
-	/**
-	 * Gets the simple awt insets.
-	 *
-	 * @param availWidth
-	 *            the avail width
-	 * @param availHeight
-	 *            the avail height
-	 * @return the simple awt insets
-	 */
-	public Insets getSimpleAWTInsets(int availWidth, int availHeight) {
-		int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
-		int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
-		int bottom = getInsetPixels(this.bottom, this.bottomType, 0, availHeight, 0);
-		int right = getInsetPixels(this.right, this.rightType, 0, availWidth, 0);
-		return new Insets(top, left, bottom, right);
-	}
-
-	/**
-	 * Gets the inset pixels.
-	 *
-	 * @param value
-	 *            the value
-	 * @param type
-	 *            the type
-	 * @param defaultValue
-	 *            the default value
-	 * @param availSize
-	 *            the avail size
-	 * @param autoValue
-	 *            the auto value
-	 * @return the inset pixels
-	 */
-	private static int getInsetPixels(int value, int type, int defaultValue, int availSize, int autoValue) {
-		if (type == TYPE_PIXELS) {
-			return value;
-		} else if (type == TYPE_UNDEFINED) {
-			return defaultValue;
-		} else if (type == TYPE_AUTO) {
-			return autoValue;
-		} else if (type == TYPE_PERCENT) {
-			return availSize * value / 100;
-		} else {
-			throw new IllegalStateException();
-		}
-	}
-	
-	/**
-	 * Checks if is length.
-	 *
-	 * @param token
-	 *            the token
-	 * @return true, if is length
-	 */
-	public static boolean isLength(String token) {
-		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
-				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
-			return true;
-		}
-		try {
-			Double.parseDouble(token);
-			return true;
-		} catch (NumberFormatException nfe) {
-			return false;
-		}
 	}
 
 	/*

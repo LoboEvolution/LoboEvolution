@@ -178,20 +178,28 @@ public class SVGLengthImpl implements SVGLength {
 		switch (unitType) {
 		case SVGLength.SVG_LENGTHTYPE_IN:
 			this.valueInSpecifiedUnits = inchValue;
+			break;	
 		case SVGLength.SVG_LENGTHTYPE_MM:
 			this.valueInSpecifiedUnits = inchValue * 25.40013f;
+			break;	
 		case SVGLength.SVG_LENGTHTYPE_CM:
 			this.valueInSpecifiedUnits = inchValue * 25.4f;
+			break;	
 		case SVGLength.SVG_LENGTHTYPE_PT:
 			this.valueInSpecifiedUnits = inchValue * 72.26999f;
+			break;	
 		case SVGLength.SVG_LENGTHTYPE_PX:
 			this.valueInSpecifiedUnits = inchValue * 96.0f;
+			break;	
 		case SVGLength.SVG_LENGTHTYPE_EMS:
 			this.valueInSpecifiedUnits = inchValue * 7.22699f;
+			break;	
 		case SVGLength.SVG_LENGTHTYPE_PC:
 			this.valueInSpecifiedUnits = inchValue * 6.0225f;
+			break;	
 		default:
 			this.valueInSpecifiedUnits = inchValue;
+			break;
 		}
 		this.unitType = unitType;
 	}

@@ -95,6 +95,11 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 
 	/** The opener. */
 	private volatile HtmlRendererContext opener;
+	
+	/**
+	 * The connection currently opened by openSync() if any.
+	 */
+	protected URLConnection currentConnection;
 
 	/**
 	 * Constructs a SimpleHtmlRendererContext.
@@ -343,11 +348,6 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	protected boolean isNavigationAsynchronous() {
 		return true;
 	}
-
-	/**
-	 * The connection currently opened by openSync() if any.
-	 */
-	protected URLConnection currentConnection;
 
 	/**
 	 * Submits a form and/or navigates by making a <i>synchronous</i> request.

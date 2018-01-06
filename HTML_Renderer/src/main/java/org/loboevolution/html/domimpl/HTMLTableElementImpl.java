@@ -404,7 +404,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLElement createTHead() {
-		org.w3c.dom.Document doc = this.document;
+		Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement(THEAD);
 	}
 
@@ -472,7 +472,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLElement insertRow(int index) throws DOMException {
-		org.w3c.dom.Document doc = this.document;
+		Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}

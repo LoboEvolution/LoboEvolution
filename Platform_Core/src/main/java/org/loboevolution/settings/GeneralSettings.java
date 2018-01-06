@@ -149,7 +149,7 @@ public class GeneralSettings implements Serializable {
 	public String[] getStartupURLs() {
 		// Cannot return empty or null
 		Collection<String> urls = this.startupURLs;
-		if (urls == null || urls.size() == 0) {
+		if (urls == null || urls.isEmpty()) {
 			return new String[] { DEFAULT_STARTUP };
 		}
 		return urls.toArray(new String[0]);

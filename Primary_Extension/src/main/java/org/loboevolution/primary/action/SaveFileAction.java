@@ -41,6 +41,9 @@ import org.loboevolution.ua.NavigatorWindow;
  * The Class SaveFileAction.
  */
 public class SaveFileAction extends ActionPool {
+	
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(SaveFileAction.class);
@@ -60,9 +63,6 @@ public class SaveFileAction extends ActionPool {
 		super(componentSource, window);
 		this.window = window;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)

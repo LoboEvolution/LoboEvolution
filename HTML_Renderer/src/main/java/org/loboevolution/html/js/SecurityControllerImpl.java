@@ -48,7 +48,7 @@ public class SecurityControllerImpl extends SecurityController {
 	private final URL url;
 
 	/** The policy. */
-	private final Policy policy;
+	private Policy policy;
 
 	/** The codesource. */
 	private final CodeSource codesource;

@@ -472,6 +472,7 @@ public class Strings {
 				break;
 			default:
 				output.append(ch);
+				break;
 			}
 		}
 		return output.toString();

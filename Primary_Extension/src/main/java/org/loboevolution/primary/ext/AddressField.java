@@ -193,7 +193,7 @@ public class AddressField extends JComboBox<String> {
 		if (validPopupChar(releasedChar)) {
 			String urlText = urlComboBox.getText();
 			Collection<String> headMatches = this.componentSource.getPotentialMatches(urlText);
-			if (headMatches.size() == 0) {
+			if (headMatches.isEmpty()) {
 				if (urlComboBox.isPopupVisible()) {
 					urlComboBox.hidePopup();
 				}

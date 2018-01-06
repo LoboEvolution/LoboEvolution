@@ -485,7 +485,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 		ArrayList<String> list = new ArrayList<String>();
 
 		char charCmd = 'Z';
-		while (tokens.size() != 0) {
+		while (!tokens.isEmpty()) {
 			String curToken = tokens.removeFirst();
 			char initChar = curToken.charAt(0);
 			if (initChar >= 'A' && initChar <= 'Z' || initChar >= 'a' && initChar <= 'z') {

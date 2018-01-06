@@ -479,7 +479,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		}
 
 		ArrayList<DOMNodeImpl> captionList = te.getDescendents(new CaptionFilter(), false);
-		if (captionList.size() > 0) {
+		if (captionList.isEmpty()) {
 			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.get(0);
 			this.captionElement = capt;
 			this.caption = new RTableCaption(capt, this.parserContext, this.rendererContext, this.frameContext,

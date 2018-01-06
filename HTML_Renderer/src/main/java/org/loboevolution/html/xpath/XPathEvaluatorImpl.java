@@ -67,6 +67,12 @@ import org.w3c.dom.Node;
  * @xsl.usage internal
  */
 public final class XPathEvaluatorImpl implements XPathEvaluator {
+	
+	/**
+	 * The document to be searched to parallel the case where the XPathEvaluator
+	 * is obtained by casting a Document.
+	 */
+	private final Document m_doc;
 
 	/**
 	 * This prefix resolver is created whenever null is passed to the evaluate
@@ -123,12 +129,6 @@ public final class XPathEvaluatorImpl implements XPathEvaluator {
 		}
 
 	}
-
-	/**
-	 * The document to be searched to parallel the case where the XPathEvaluator
-	 * is obtained by casting a Document.
-	 */
-	private final Document m_doc;
 
 	/**
 	 * Constructor for XPathEvaluatorImpl.

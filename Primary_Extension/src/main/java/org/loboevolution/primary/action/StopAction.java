@@ -31,6 +31,9 @@ import org.loboevolution.ua.NavigatorWindow;
  */
 public class StopAction extends ActionPool {
 
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+
 	/** The window. */
 	private NavigatorWindow window;
 
@@ -46,9 +49,6 @@ public class StopAction extends ActionPool {
 		super(componentSource, window);
 		this.window = window;
 	}
-
-	/** The Constant serialVersionUID. */
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * (non-Javadoc)

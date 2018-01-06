@@ -90,7 +90,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 			}
 		}
 		
-		if (beginTimeList.size() == 0) {
+		if (beginTimeList.isEmpty()) {
 			beginTimeList.add(new TimeImpl("0"));
 		}
 		return new TimeListImpl(beginTimeList);

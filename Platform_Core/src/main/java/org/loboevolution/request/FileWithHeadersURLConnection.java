@@ -180,7 +180,7 @@ public class FileWithHeadersURLConnection extends HttpURLConnection {
 			return null;
 		}
 		List hvalues = this.headersMap.get(name.toLowerCase());
-		if (hvalues == null || hvalues.size() == 0) {
+		if (hvalues == null || hvalues.isEmpty()) {
 			return null;
 		}
 		return (String) hvalues.get(0);

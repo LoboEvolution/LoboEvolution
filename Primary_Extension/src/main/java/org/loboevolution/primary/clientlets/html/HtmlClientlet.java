@@ -490,7 +490,7 @@ public class HtmlClientlet implements Clientlet {
 				if ("head".equalsIgnoreCase(tagName) || "script".equalsIgnoreCase(tagName)
 						|| "html".equalsIgnoreCase(tagName)) {
 					Map<String, String> httpEquiv = this.getHttpEquivData();
-					if (httpEquiv != null && httpEquiv.size() > 0) {
+					if (httpEquiv != null && !httpEquiv.isEmpty()) {
 						throw new HttpEquivRetryException(httpEquiv);
 					}
 				}
