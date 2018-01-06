@@ -311,8 +311,8 @@ public class Request extends AbstractBean {
 			try {
 				String encoded = header.getValue().substring(6);
 				String tmp = base64Decode(encoded);
-				String u = tmp.substring(0, tmp.indexOf(":"));
-				String p = tmp.substring(tmp.indexOf(":") + 1);
+				String u = tmp.substring(0, tmp.indexOf(':'));
+				String p = tmp.substring(tmp.indexOf(':') + 1);
 				String oldUsername = this.username;
 				firePropertyChange("username", oldUsername, this.username = u);
 				this.password = p.toCharArray();
@@ -508,7 +508,7 @@ public class Request extends AbstractBean {
 			// if there is a ? in the url, then there are query params
 			// If there are query params, then substring the url, decode the
 			// params, etc.
-			int index = url.indexOf("?");
+			int index = url.indexOf('?');
 			if (index >= 0) {
 				this.url = url.substring(0, index);
 				String[] parts = url.substring(index + 1).split("&");
@@ -516,7 +516,7 @@ public class Request extends AbstractBean {
 					for (String part : parts) {
 						String key = null;
 						String value = null;
-						index = part.indexOf("=");
+						index = part.indexOf('=');
 						if (index < 0) {
 							// no value, just a key
 							key = part;

@@ -115,7 +115,7 @@ public class SelectorMatcher {
 			String pe = this.pseudoElement;
 
 			if (pe != null && pe.contains("(")) {
-				pe = pe.substring(0, pe.indexOf("("));
+				pe = pe.substring(0, pe.indexOf('('));
 			}
 			return pe == null || names.contains(pe);
 		}

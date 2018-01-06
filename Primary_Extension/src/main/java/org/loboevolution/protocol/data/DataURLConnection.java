@@ -131,9 +131,9 @@ public class DataURLConnection extends HttpURLConnection {
 		String UTF8 = "UTF-8";
 		this.headerMap.clear();
 		String path = getURL().getPath();
-		int index2 = path.toLowerCase().indexOf(",");
+		int index2 = path.toLowerCase().indexOf(',');
 		if (index2 == -1) {
-			index2 = path.toLowerCase().lastIndexOf(";");
+			index2 = path.toLowerCase().lastIndexOf(':');
 		}
 		String mediatype = path.substring(0, index2).trim();
 		boolean base64 = false;
@@ -148,7 +148,7 @@ public class DataURLConnection extends HttpURLConnection {
 		try {
 			for (int i = 1; i < split.length; i++) {
 				if (split[i].contains("=")) {
-					int index = split[i].indexOf("=");
+					int index = split[i].indexOf('=');
 					String attr = split[i].substring(0, index);
 					String v = split[i].substring(index + 1);
 					this.headerMap.put(attr, URLDecoder.decode(v, UTF8));

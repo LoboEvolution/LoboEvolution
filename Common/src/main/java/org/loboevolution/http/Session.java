@@ -616,7 +616,7 @@ public class Session extends AbstractBean {
 			if (contentType != null) {
 				String tmp = contentType.getValue();
 				// find the ; following the content type (if there is one)
-				int index = tmp.indexOf(";");
+				int index = tmp.indexOf(';');
 				if (index >= 0) {
 					index = tmp.indexOf("=", index + 1);
 					if (index > 0) {

@@ -94,7 +94,7 @@ public class AttributeSelector {
 		String cnt = "";
 		String select = selector;
 		if (selector != null && selector.contains("(")) {
-			selector = selector.substring(0, selector.indexOf("("));
+			selector = selector.substring(0, selector.indexOf('('));
 		} else if (selector == null) {
 			return false;
 		}

@@ -141,7 +141,7 @@ public class SVGUtility {
 
 	public static float getClockMilliSecs(String clockVal) {
 		try {
-			if (clockVal.indexOf(":") != -1) {
+			if (clockVal.indexOf(':') != -1) {
 				StringTokenizer st = new StringTokenizer(clockVal, ":");
 				int numTokens = st.countTokens();
 				if (numTokens == 3) { // is a full clock value
@@ -157,16 +157,16 @@ public class SVGUtility {
 					return 0;
 				}
 			} else {
-				if (clockVal.indexOf("h") != -1) {
-					float hour = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("h")));
+				if (clockVal.indexOf('h') != -1) {
+					float hour = Float.parseFloat(clockVal.substring(0, clockVal.indexOf('h')));
 					return (hour * 3600) * 1000;
 				} else if (clockVal.indexOf("min") != -1) {
 					float min = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("min")));
 					return (min * 60) * 1000;
 				} else if (clockVal.indexOf("ms") != -1) {
 					return Float.parseFloat(clockVal.substring(0, clockVal.indexOf("ms")));
-				} else if (clockVal.indexOf("s") != -1) {
-					float secs = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("s")));
+				} else if (clockVal.indexOf('s') != -1) {
+					float secs = Float.parseFloat(clockVal.substring(0, clockVal.indexOf('s')));
 					return secs * 1000;
 				} else {
 					float secs = Float.parseFloat(clockVal);

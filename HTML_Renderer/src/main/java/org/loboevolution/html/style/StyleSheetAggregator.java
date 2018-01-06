@@ -229,7 +229,7 @@ public class StyleSheetAggregator {
 				SelectorInfo si = am.getSelector(selector, attributeOperator);
 				attribute = si.getAttribute();
 				attributeValue = si.getAttributeValue();
-				int parenthesis = selectorList.indexOf("[");
+				int parenthesis = selectorList.indexOf('[');
 				htmlElement = selectorList.substring(0, parenthesis);
 				this.addAttributeRule(htmlElement, attributeValue, sr, selectorMatchers);
 			}
@@ -409,7 +409,7 @@ public class StyleSheetAggregator {
 			AttributeSelector am = new AttributeSelector();
 			String psElement = pseudoElement;
 			if (psElement != null && psElement.contains("(")) {
-				psElement = psElement.substring(0, psElement.indexOf("("));
+				psElement = psElement.substring(0, psElement.indexOf('('));
 			}
 
 			int c = cnt++;

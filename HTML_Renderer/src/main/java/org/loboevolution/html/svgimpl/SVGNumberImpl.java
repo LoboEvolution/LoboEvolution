@@ -28,8 +28,8 @@ public class SVGNumberImpl implements SVGNumber {
 	private float number = 0;
 
 	public SVGNumberImpl(String value) {
-		if (value.indexOf("%") != -1) {
-			int index = value.indexOf("%");
+		int index = value.indexOf('%');
+		if (index != -1) {
 			number = Float.parseFloat(value.substring(0, index)) / 100;
 		} else {
 			number = Float.parseFloat(value);
