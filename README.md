@@ -5,6 +5,6 @@ Lobo Evolution - Java Web Browser
 
 Lobo Evolution is a fork of Lobo Browser. The project continuing the work of Lobo Browser(lobochief). Lobo Evolution is an extensible all-Java web browser and RIA platform. It supports HTML 4, HTML 5, Javascript and CSS 3 and Java (Swing/AWT) rendering. Cobra is the web browser's renderer API; also a Javascript-aware HTML parser.
 
-
-Javadoc site: https://oswetto.github.io/LoboEvolution/                                                                                
-Project site on sourceforge: http://sourceforge.net/projects/loboevolution/
+<a href='https://oswetto.github.io/LoboEvolution/'>Javadoc site</a><br/>
+<a href='http://sourceforge.net/projects/loboevolution/'>Project site on sourceforge</a><br/>
+<a href='https://github.com/oswetto/LoboEvolution/wiki/How-To'>How-To</a><br/>
