@@ -1,6 +1,6 @@
 <project name="trevis_build" default="build">
   <target name="build">
-      <ant antfile="XAMJ_Build/build.xml">
+      <ant antfile="LoboEvolution_Build/build.xml">
       </ant>
   </target>
 </project>
