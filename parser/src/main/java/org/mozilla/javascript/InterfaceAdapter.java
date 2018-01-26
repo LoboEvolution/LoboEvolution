@@ -78,7 +78,8 @@ public class InterfaceAdapter
                          final Object[] args)
     {
         ContextAction action = new ContextAction() {
-                public Object run(Context cx)
+                @Override
+				public Object run(Context cx)
                 {
                     return invokeImpl(cx, target, topScope, thisObject, method, args);
                 }
@@ -100,7 +101,7 @@ public class InterfaceAdapter
             Scriptable s = (Scriptable)target;
             String methodName = method.getName();
             Object value = ScriptableObject.getProperty(s, methodName);
-            if (value == ScriptableObject.NOT_FOUND) {
+            if (value == Scriptable.NOT_FOUND) {
                 // We really should throw an error here, but for the sake of
                 // compatibility with JavaAdapter we silently ignore undefined
                 // methods.

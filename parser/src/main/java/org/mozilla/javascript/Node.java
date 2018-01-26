@@ -355,11 +355,13 @@ public class Node implements Iterable<Node>
             cursor = Node.this.first;
         }
 
-        public boolean hasNext() {
+        @Override
+		public boolean hasNext() {
             return cursor != null;
         }
 
-        public Node next() {
+        @Override
+		public Node next() {
             if (cursor == null) {
                 throw new NoSuchElementException();
             }
@@ -370,7 +372,8 @@ public class Node implements Iterable<Node>
             return prev;
         }
 
-        public void remove() {
+        @Override
+		public void remove() {
             if (prev == NOT_SET) {
                 throw new IllegalStateException("next() has not been called");
             }
@@ -392,7 +395,8 @@ public class Node implements Iterable<Node>
     /**
      * Returns an {@link java.util.Iterator} over the node's children.
      */
-    public Iterator<Node> iterator() {
+    @Override
+	public Iterator<Node> iterator() {
         return new NodeIterator();
     }
 

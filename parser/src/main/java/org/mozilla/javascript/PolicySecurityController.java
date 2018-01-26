@@ -58,12 +58,14 @@ public class PolicySecurityController extends SecurityController
             this.codeSource = codeSource;
         }
 
-        public Class<?> defineClass(String name, byte[] data)
+        @Override
+		public Class<?> defineClass(String name, byte[] data)
         {
             return defineClass(name, data, 0, data.length, codeSource);
         }
 
-        public void linkClass(Class<?> cl)
+        @Override
+		public void linkClass(Class<?> cl)
         {
             resolveClass(cl);
         }
@@ -76,7 +78,8 @@ public class PolicySecurityController extends SecurityController
         return (Loader)AccessController.doPrivileged(
             new PrivilegedAction<Object>()
             {
-                public Object run()
+                @Override
+				public Object run()
                 {
                     return new Loader(parent, (CodeSource)securityDomain);
                 }
@@ -100,7 +103,8 @@ public class PolicySecurityController extends SecurityController
         // runtime permission
         final ClassLoader classLoader = (ClassLoader)AccessController.doPrivileged(
             new PrivilegedAction<Object>() {
-                public Object run() {
+                @Override
+				public Object run() {
                     return cx.getApplicationClassLoader();
                 }
             });
@@ -130,7 +134,8 @@ public class PolicySecurityController extends SecurityController
                     caller = (SecureCaller)AccessController.doPrivileged(
                             new PrivilegedExceptionAction<Object>()
                     {
-                        public Object run() throws Exception
+                        @Override
+						public Object run() throws Exception
                         {
                             Loader loader = new Loader(classLoader,
                                     codeSource);

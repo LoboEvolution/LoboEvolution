@@ -447,25 +447,29 @@ public abstract class NativeTypedArrayView<T>
 
     // Abstract List implementation
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public int size()
     {
         return length;
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean isEmpty()
     {
         return (length == 0);
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean contains(Object o)
     {
         return (indexOf(o) >= 0);
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean containsAll(Collection<?> objects)
     {
         for (Object o : objects) {
@@ -476,7 +480,8 @@ public abstract class NativeTypedArrayView<T>
         return true;
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public int indexOf(Object o)
     {
         for (int i = 0; i < length; i++) {
@@ -487,7 +492,8 @@ public abstract class NativeTypedArrayView<T>
         return -1;
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public int lastIndexOf(Object o)
     {
         for (int i = length - 1; i >= 0; i--) {
@@ -498,7 +504,8 @@ public abstract class NativeTypedArrayView<T>
         return -1;
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public Object[] toArray()
     {
         Object[] a = new Object[length];
@@ -508,7 +515,8 @@ public abstract class NativeTypedArrayView<T>
         return a;
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public <U> U[] toArray(U[] ts)
     {
         U[] a;
@@ -558,19 +566,22 @@ public abstract class NativeTypedArrayView<T>
         return hc;
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public Iterator<T> iterator()
     {
         return new NativeTypedArrayIterator<T>(this, 0);
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public ListIterator<T> listIterator()
     {
         return new NativeTypedArrayIterator<T>(this, 0);
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public ListIterator<T> listIterator(int start)
     {
         if (checkIndex(start)) {
@@ -579,61 +590,71 @@ public abstract class NativeTypedArrayView<T>
         return new NativeTypedArrayIterator<T>(this, start);
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public List<T> subList(int i, int i2)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean add(T aByte)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public void add(int i, T aByte)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean addAll(Collection<? extends T> bytes)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean addAll(int i, Collection<? extends T> bytes)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public void clear()
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public T remove(int i)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean remove(Object o)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean removeAll(Collection<?> objects)
     {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings("unused")
+    @Override
+	@SuppressWarnings("unused")
     public boolean retainAll(Collection<?> objects)
     {
         throw new UnsupportedOperationException();

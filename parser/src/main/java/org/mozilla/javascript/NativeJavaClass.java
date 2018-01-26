@@ -126,7 +126,8 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return this;
     }
 
-    public Object call(Context cx, Scriptable scope, Scriptable thisObj,
+    @Override
+	public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
     {
         // If it looks like a "cast" of an object to this class type,
@@ -147,7 +148,8 @@ public class NativeJavaClass extends NativeJavaObject implements Function
         return construct(cx, scope, args);
     }
 
-    public Scriptable construct(Context cx, Scriptable scope, Object[] args)
+    @Override
+	public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
         Class<?> classObject = getClassObject();
         int modifiers = classObject.getModifiers();

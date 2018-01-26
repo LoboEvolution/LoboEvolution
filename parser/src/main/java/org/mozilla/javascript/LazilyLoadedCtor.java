@@ -85,7 +85,8 @@ public final class LazilyLoadedCtor implements java.io.Serializable {
         {
             return AccessController.doPrivileged(new PrivilegedAction<Object>()
             {
-                public Object run()
+                @Override
+				public Object run()
                 {
                     return buildValue0();
                 }

@@ -71,7 +71,7 @@ public final class DoubleConversion {
 
     public static int doubleToInt32(double x) {
         int i = (int) x;
-        if ((double) i == x) {
+        if (i == x) {
             return i;
         }
         long d64 = Double.doubleToLongBits(x);

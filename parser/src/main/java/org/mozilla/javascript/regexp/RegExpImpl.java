@@ -13,22 +13,26 @@ import org.mozilla.javascript.*;
  */
 public class RegExpImpl implements RegExpProxy {
 
-    public boolean isRegExp(Scriptable obj) {
+    @Override
+	public boolean isRegExp(Scriptable obj) {
         return obj instanceof NativeRegExp;
     }
 
-    public Object compileRegExp(Context cx, String source, String flags)
+    @Override
+	public Object compileRegExp(Context cx, String source, String flags)
     {
         return NativeRegExp.compileRE(cx, source, flags, false);
     }
 
-    public Scriptable wrapRegExp(Context cx, Scriptable scope,
+    @Override
+	public Scriptable wrapRegExp(Context cx, Scriptable scope,
                                  Object compiled)
     {
         return new NativeRegExp(scope, (RECompiled) compiled);
     }
 
-    public Object action(Context cx, Scriptable scope,
+    @Override
+	public Object action(Context cx, Scriptable scope,
                          Scriptable thisObj, Object[] args,
                          int actionType)
     {
@@ -199,7 +203,8 @@ public class RegExpImpl implements RegExpProxy {
 
 
 
-    public int find_split(Context cx, Scriptable scope, String target,
+    @Override
+	public int find_split(Context cx, Scriptable scope, String target,
                           String separator, Scriptable reObj,
                           int[] ip, int[] matchlen,
                           boolean[] matched, String[][] parensp)
@@ -512,7 +517,8 @@ public class RegExpImpl implements RegExpProxy {
      * a limit argument and accepts a regular expression as the split
      * argument.
      */
-    public Object js_split(Context cx, Scriptable scope,
+    @Override
+	public Object js_split(Context cx, Scriptable scope,
                                    String target, Object[] args)
     {
         // create an empty Array to return;

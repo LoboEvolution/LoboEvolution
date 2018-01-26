@@ -32,27 +32,33 @@ import static org.mozilla.classfile.ClassFileWriter.ACC_VOLATILE;
 
 public class Codegen implements Evaluator
 {
-    public void captureStackInfo(RhinoException ex) {
+    @Override
+	public void captureStackInfo(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
-    public String getSourcePositionFromStack(Context cx, int[] linep) {
+    @Override
+	public String getSourcePositionFromStack(Context cx, int[] linep) {
         throw new UnsupportedOperationException();
     }
 
-    public String getPatchedStack(RhinoException ex, String nativeStackTrace) {
+    @Override
+	public String getPatchedStack(RhinoException ex, String nativeStackTrace) {
         throw new UnsupportedOperationException();
     }
 
-    public List<String> getScriptStack(RhinoException ex) {
+    @Override
+	public List<String> getScriptStack(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
-    public void setEvalScriptFlag(Script script) {
+    @Override
+	public void setEvalScriptFlag(Script script) {
         throw new UnsupportedOperationException();
     }
 
-    public Object compile(CompilerEnvirons compilerEnv,
+    @Override
+	public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
                           String encodedSource,
                           boolean returnFunction)
@@ -79,7 +85,8 @@ public class Codegen implements Evaluator
         return new Object[] { mainClassName, mainClassBytes };
     }
 
-    public Script createScriptObject(Object bytecode,
+    @Override
+	public Script createScriptObject(Object bytecode,
                                      Object staticSecurityDomain)
     {
         Class<?> cl = defineClass(bytecode, staticSecurityDomain);
@@ -94,7 +101,8 @@ public class Codegen implements Evaluator
         return script;
     }
 
-    public Function createFunctionObject(Context cx, Scriptable scope,
+    @Override
+	public Function createFunctionObject(Context cx, Scriptable scope,
                                          Object bytecode,
                                          Object staticSecurityDomain)
     {

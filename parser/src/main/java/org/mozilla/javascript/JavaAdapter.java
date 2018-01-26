@@ -78,7 +78,8 @@ public final class JavaAdapter implements IdFunctionCall
         ctor.exportAsScopeProperty();
     }
 
-    public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
+    @Override
+	public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
     {
         if (f.hasTag(FTAG)) {
@@ -582,7 +583,8 @@ public final class JavaAdapter implements IdFunctionCall
             return doCall(cx, scope, thisObj, f, args, argsToWrap);
         } else {
             return factory.call(new ContextAction() {
-                public Object run(Context cx)
+                @Override
+				public Object run(Context cx)
                 {
                     return doCall(cx, scope, thisObj, f, args, argsToWrap);
                 }
@@ -611,7 +613,8 @@ public final class JavaAdapter implements IdFunctionCall
     {
         return (Scriptable)ContextFactory.getGlobal().call(
             new ContextAction() {
-                public Object run(Context cx)
+                @Override
+				public Object run(Context cx)
                 {
                     ScriptableObject global = ScriptRuntime.getGlobal(cx);
                     script.exec(cx, global);

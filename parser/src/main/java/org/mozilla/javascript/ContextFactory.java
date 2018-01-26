@@ -191,10 +191,12 @@ public class ContextFactory
         }
         hasCustomGlobal = true;
         class GlobalSetterImpl implements GlobalSetter {
-            public void setContextFactoryGlobal(ContextFactory factory) {
+            @Override
+			public void setContextFactoryGlobal(ContextFactory factory) {
                 global = factory == null ? new ContextFactory() : factory;
             }
-            public ContextFactory getContextFactoryGlobal() {
+            @Override
+			public ContextFactory getContextFactoryGlobal() {
                 return global;
             }
         }
@@ -350,7 +352,8 @@ public class ContextFactory
     protected GeneratedClassLoader createClassLoader(final ClassLoader parent)
     {
         return AccessController.doPrivileged(new PrivilegedAction<DefiningClassLoader>() {
-            public DefiningClassLoader run(){
+            @Override
+			public DefiningClassLoader run(){
                 return new DefiningClassLoader(parent);
             }
         });

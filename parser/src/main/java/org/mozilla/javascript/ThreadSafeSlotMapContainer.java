@@ -153,7 +153,8 @@ class ThreadSafeSlotMapContainer
    * Before inserting a new item in the map, check and see if we need to expand from the embedded
    * map to a HashMap that is more robust against large numbers of hash collisions.
    */
-  protected void checkMapSize()
+  @Override
+protected void checkMapSize()
   {
     assert(lock.isWriteLocked());
     super.checkMapSize();

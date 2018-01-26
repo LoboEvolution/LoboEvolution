@@ -28,7 +28,8 @@ class DefaultErrorReporter implements ErrorReporter
         return r;
     }
 
-    public void warning(String message, String sourceURI, int line,
+    @Override
+	public void warning(String message, String sourceURI, int line,
                         String lineText, int lineOffset)
     {
         if (chainedReporter != null) {
@@ -39,7 +40,8 @@ class DefaultErrorReporter implements ErrorReporter
         }
     }
 
-    public void error(String message, String sourceURI, int line,
+    @Override
+	public void error(String message, String sourceURI, int line,
                       String lineText, int lineOffset)
     {
         if (forEval) {
@@ -66,7 +68,8 @@ class DefaultErrorReporter implements ErrorReporter
         }
     }
 
-    public EvaluatorException runtimeError(String message, String sourceURI,
+    @Override
+	public EvaluatorException runtimeError(String message, String sourceURI,
                                            int line, String lineText,
                                            int lineOffset)
     {

@@ -87,7 +87,8 @@ public class ScriptRuntime {
          * @param args the array of arguments
          * @return the result of the call
          */
-        public Object call(Context cx, Scriptable scope, Scriptable thisObj,
+        @Override
+		public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                            Object[] args)
         {
             Object[] nestedArgs = new Object[2];
@@ -2316,7 +2317,7 @@ public class ScriptRuntime {
         Object r = f.call(cx, scope, enumObj.iterator, emptyArgs);
         Scriptable iteratorResult = toObject(cx, scope, r);
         Object done = ScriptableObject.getProperty(iteratorResult, ES6Iterator.DONE_PROPERTY);
-        if (done != ScriptableObject.NOT_FOUND && toBoolean(done)) {
+        if (done != Scriptable.NOT_FOUND && toBoolean(done)) {
             return Boolean.FALSE;
         }
         enumObj.currentId = ScriptableObject.getProperty(iteratorResult, ES6Iterator.VALUE_PROPERTY);
@@ -3441,7 +3442,8 @@ public class ScriptRuntime {
     /**
      * @deprecated Use {@link #doTopCall(Callable, Context, Scriptable, Scriptable, Object[], boolean)} instead
      */
-    public static Object doTopCall(Callable callable,
+    @Deprecated
+	public static Object doTopCall(Callable callable,
                                    Context cx, Scriptable scope,
                                    Scriptable thisObj, Object[] args)
     {
@@ -4099,7 +4101,8 @@ public class ScriptRuntime {
      * file to avoid (synchronized) text parsing.
      */
     private static class DefaultMessageProvider implements MessageProvider {
-        public String getMessage(String messageId, Object[] arguments) {
+        @Override
+		public String getMessage(String messageId, Object[] arguments) {
             final String defaultResource
                 = "org.mozilla.javascript.resources.Messages";
 

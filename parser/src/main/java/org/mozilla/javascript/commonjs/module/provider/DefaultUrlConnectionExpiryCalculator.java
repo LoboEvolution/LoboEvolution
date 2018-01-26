@@ -41,7 +41,8 @@ implements UrlConnectionExpiryCalculator, Serializable
         this.relativeExpiry = relativeExpiry;
     }
 
-    public long calculateExpiry(URLConnection urlConnection) {
+    @Override
+	public long calculateExpiry(URLConnection urlConnection) {
         return System.currentTimeMillis() + relativeExpiry;
     }
 }

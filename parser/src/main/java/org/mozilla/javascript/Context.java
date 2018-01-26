@@ -521,7 +521,8 @@ public class Context
             factory = ContextFactory.getGlobal();
         }
         return call(factory, new ContextAction() {
-            public Object run(Context cx) {
+            @Override
+			public Object run(Context cx) {
                 return callable.call(cx, scope, thisObj, args);
             }
         });
@@ -2138,10 +2139,12 @@ public class Context
             return null;
         hasClassShutter = true;
         return new ClassShutterSetter() {
-            public void setClassShutter(ClassShutter shutter) {
+            @Override
+			public void setClassShutter(ClassShutter shutter) {
                 classShutter = shutter;
             }
-            public ClassShutter getClassShutter() {
+            @Override
+			public ClassShutter getClassShutter() {
                 return classShutter;
             }
         };

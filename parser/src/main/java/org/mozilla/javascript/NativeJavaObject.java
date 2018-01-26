@@ -57,15 +57,18 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             = members.getFieldAndMethodsObjects(this, javaObject, false);
     }
 
-    public boolean has(String name, Scriptable start) {
+    @Override
+	public boolean has(String name, Scriptable start) {
         return members.has(name, false);
     }
 
-    public boolean has(int index, Scriptable start) {
+    @Override
+	public boolean has(int index, Scriptable start) {
         return false;
     }
 
-    public Object get(String name, Scriptable start) {
+    @Override
+	public Object get(String name, Scriptable start) {
         if (fieldAndMethods != null) {
             Object result = fieldAndMethods.get(name);
             if (result != null) {
@@ -77,11 +80,13 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
         return members.get(this, name, javaObject, false);
     }
 
-    public Object get(int index, Scriptable start) {
+    @Override
+	public Object get(int index, Scriptable start) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
 
-    public void put(String name, Scriptable start, Object value) {
+    @Override
+	public void put(String name, Scriptable start, Object value) {
         // We could be asked to modify the value of a property in the
         // prototype. Since we can't add a property to a Java object,
         // we modify it in the prototype rather than copy it down.
@@ -91,22 +96,27 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             prototype.put(name, prototype, value);
     }
 
-    public void put(int index, Scriptable start, Object value) {
+    @Override
+	public void put(int index, Scriptable start, Object value) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
 
-    public boolean hasInstance(Scriptable value) {
+    @Override
+	public boolean hasInstance(Scriptable value) {
         // This is an instance of a Java class, so always return false
         return false;
     }
 
-    public void delete(String name) {
+    @Override
+	public void delete(String name) {
     }
 
-    public void delete(int index) {
+    @Override
+	public void delete(int index) {
     }
 
-    public Scriptable getPrototype() {
+    @Override
+	public Scriptable getPrototype() {
         if (prototype == null && javaObject instanceof String) {
             return TopLevel.getBuiltinPrototype(
                     ScriptableObject.getTopLevelScope(parent),
@@ -118,25 +128,29 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
     /**
      * Sets the prototype of the object.
      */
-    public void setPrototype(Scriptable m) {
+    @Override
+	public void setPrototype(Scriptable m) {
         prototype = m;
     }
 
     /**
      * Returns the parent (enclosing) scope of the object.
      */
-    public Scriptable getParentScope() {
+    @Override
+	public Scriptable getParentScope() {
         return parent;
     }
 
     /**
      * Sets the parent (enclosing) scope of the object.
      */
-    public void setParentScope(Scriptable m) {
+    @Override
+	public void setParentScope(Scriptable m) {
         parent = m;
     }
 
-    public Object[] getIds() {
+    @Override
+	public Object[] getIds() {
         return members.getIds(false);
     }
 
@@ -151,15 +165,18 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
         return cx.getWrapFactory().wrap(cx, scope, obj, staticType);
     }
 
-    public Object unwrap() {
+    @Override
+	public Object unwrap() {
         return javaObject;
     }
 
-    public String getClassName() {
+    @Override
+	public String getClassName() {
         return "JavaObject";
     }
 
-    public Object getDefaultValue(Class<?> hint)
+    @Override
+	public Object getDefaultValue(Class<?> hint)
     {
         Object value;
         if (hint == null) {

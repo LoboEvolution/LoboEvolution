@@ -89,32 +89,38 @@ final class InterpreterData implements Serializable, DebuggableScript
 
     boolean evalScriptFlag; // true if script corresponds to eval() code
 
-    public boolean isTopLevel()
+    @Override
+	public boolean isTopLevel()
     {
         return topLevel;
     }
 
-    public boolean isFunction()
+    @Override
+	public boolean isFunction()
     {
         return itsFunctionType != 0;
     }
 
-    public String getFunctionName()
+    @Override
+	public String getFunctionName()
     {
         return itsName;
     }
 
-    public int getParamCount()
+    @Override
+	public int getParamCount()
     {
         return argCount;
     }
 
-    public int getParamAndVarCount()
+    @Override
+	public int getParamAndVarCount()
     {
         return argNames.length;
     }
 
-    public String getParamOrVarName(int index)
+    @Override
+	public String getParamOrVarName(int index)
     {
         return argNames[index];
     }
@@ -124,32 +130,38 @@ final class InterpreterData implements Serializable, DebuggableScript
         return argIsConst[index];
     }
 
-    public String getSourceName()
+    @Override
+	public String getSourceName()
     {
         return itsSourceFile;
     }
 
-    public boolean isGeneratedScript()
+    @Override
+	public boolean isGeneratedScript()
     {
         return ScriptRuntime.isGeneratedScript(itsSourceFile);
     }
 
-    public int[] getLineNumbers()
+    @Override
+	public int[] getLineNumbers()
     {
         return Interpreter.getLineNumbers(this);
     }
 
-    public int getFunctionCount()
+    @Override
+	public int getFunctionCount()
     {
         return (itsNestedFunctions == null) ? 0 : itsNestedFunctions.length;
     }
 
-    public DebuggableScript getFunction(int index)
+    @Override
+	public DebuggableScript getFunction(int index)
     {
         return itsNestedFunctions[index];
     }
 
-    public DebuggableScript getParent()
+    @Override
+	public DebuggableScript getParent()
     {
          return parentData;
     }

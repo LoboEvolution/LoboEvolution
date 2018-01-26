@@ -49,7 +49,8 @@ public abstract class SecureCaller
         // runtime permission
         final ClassLoader classLoader = (ClassLoader)AccessController.doPrivileged(
             new PrivilegedAction<Object>() {
-                public Object run() {
+                @Override
+				public Object run() {
                     return thread.getContextClassLoader();
                 }
             });
@@ -80,7 +81,8 @@ public abstract class SecureCaller
                     caller = (SecureCaller)AccessController.doPrivileged(
                             new PrivilegedExceptionAction<Object>()
                     {
-                        public Object run() throws Exception
+                        @Override
+						public Object run() throws Exception
                         {
                             ClassLoader effectiveClassLoader;
                             Class<?> thisClass = getClass();
@@ -127,7 +129,8 @@ public abstract class SecureCaller
     {
         return (byte[])AccessController.doPrivileged(new PrivilegedAction<Object>()
         {
-            public Object run()
+            @Override
+			public Object run()
             {
                 return loadBytecodePrivileged();
             }

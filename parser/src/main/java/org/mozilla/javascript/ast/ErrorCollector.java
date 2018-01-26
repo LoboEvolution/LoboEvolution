@@ -28,7 +28,8 @@ public class ErrorCollector implements IdeErrorReporter {
      * {@link #warning(String,String,int,int)} is used instead.
      * @throws UnsupportedOperationException
      */
-    public void warning(String message, String sourceName, int line,
+    @Override
+	public void warning(String message, String sourceName, int line,
                         String lineSource, int lineOffset) {
         throw new UnsupportedOperationException();
     }
@@ -36,7 +37,8 @@ public class ErrorCollector implements IdeErrorReporter {
     /**
      * @inheritDoc
      */
-    public void warning(String message, String sourceName, int offset, int length)
+    @Override
+	public void warning(String message, String sourceName, int offset, int length)
     {
         errors.add(new ParseProblem(ParseProblem.Type.Warning,
                                     message, sourceName,
@@ -48,7 +50,8 @@ public class ErrorCollector implements IdeErrorReporter {
      * {@link #warning(String,String,int,int)} is used instead.
      * @throws UnsupportedOperationException
      */
-    public void error(String message, String sourceName, int line,
+    @Override
+	public void error(String message, String sourceName, int line,
                       String lineSource, int lineOffset)
     {
         throw new UnsupportedOperationException();
@@ -57,7 +60,8 @@ public class ErrorCollector implements IdeErrorReporter {
     /**
      * @inheritDoc
      */
-    public void error(String message, String sourceName,
+    @Override
+	public void error(String message, String sourceName,
                       int fileOffset, int length)
     {
         errors.add(new ParseProblem(ParseProblem.Type.Error,
@@ -68,7 +72,8 @@ public class ErrorCollector implements IdeErrorReporter {
     /**
      * @inheritDoc
      */
-    public EvaluatorException runtimeError(String message, String sourceName,
+    @Override
+	public EvaluatorException runtimeError(String message, String sourceName,
                                            int line, String lineSource,
                                            int lineOffset)
     {

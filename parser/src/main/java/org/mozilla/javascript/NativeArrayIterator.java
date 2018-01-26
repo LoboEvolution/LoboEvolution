@@ -40,7 +40,7 @@ public final class NativeArrayIterator extends ES6Iterator {
     @Override
     protected Object nextValue(Context cx, Scriptable scope) {
         Object value = arrayLike.get(index++, arrayLike);
-        if (value == ScriptableObject.NOT_FOUND) {
+        if (value == Scriptable.NOT_FOUND) {
             value = Undefined.instance;
         }
         return value;

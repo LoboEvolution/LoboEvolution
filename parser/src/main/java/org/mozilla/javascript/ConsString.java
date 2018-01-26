@@ -79,16 +79,19 @@ public class ConsString implements CharSequence, Serializable {
         return (String)s1;
     }
 
-    public int length() {
+    @Override
+	public int length() {
         return length;
     }
 
-    public char charAt(int index) {
+    @Override
+	public char charAt(int index) {
         String str = depth == 0 ? (String)s1 : flatten();
         return str.charAt(index);
     }
 
-    public CharSequence subSequence(int start, int end) {
+    @Override
+	public CharSequence subSequence(int start, int end) {
         String str = depth == 0 ? (String)s1 : flatten();
         return str.substring(start, end);
     }
