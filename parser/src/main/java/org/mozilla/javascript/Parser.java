@@ -713,8 +713,8 @@ public class Parser
         pn.setLineno(ts.lineno);
         try {
             if (isExpressionClosure) {
-                ReturnStatement n = new ReturnStatement(ts.lineno);
-                n.setReturnValue(assignExpr());
+                AstNode returnValue = assignExpr();
+                ReturnStatement n = new ReturnStatement(returnValue.getPosition(), returnValue.getLength(), returnValue);
                 // expression closure flag is required on both nodes
                 n.putProp(Node.EXPRESSION_CLOSURE_PROP, Boolean.TRUE);
                 pn.putProp(Node.EXPRESSION_CLOSURE_PROP, Boolean.TRUE);
@@ -808,7 +808,12 @@ public class Parser
                 destructuring.put(pname, expr);
             } else {
                 if (mustMatchToken(Token.NAME, "msg.no.parm")) {
-                    fnNode.addParam(createNameNode());
+                    Name paramNameNode = createNameNode();
+                    Comment jsdocNodeForName = getAndResetJsDoc();
+                    if (jsdocNodeForName != null) {
+                      paramNameNode.setJsDocNode(jsdocNodeForName);
+                    }
+                    fnNode.addParam(paramNameNode);
                     String paramName = ts.getString();
                     defineSymbol(Token.LP, paramName);
                     if (this.inUseStrictDirective) {
@@ -1584,7 +1589,12 @@ public class Parser
                     lp = ts.tokenBeg;
 
                 mustMatchToken(Token.NAME, "msg.bad.catchcond");
+
                 Name varName = createNameNode();
+                Comment jsdocNodeForName = getAndResetJsDoc();
+                if (jsdocNodeForName != null) {
+                  varName.setJsDocNode(jsdocNodeForName);
+                }
                 String varNameString = varName.getIdentifier();
                 if (inUseStrictDirective) {
                     if ("eval".equals(varNameString) ||
@@ -2524,6 +2534,7 @@ public class Parser
                   return memberExprTail(true, xmlInitializer());
               }
               // Fall thru to the default handling of RELOP
+              // fallthru
 
           default:
               AstNode pn = memberExpr(true);
@@ -3064,9 +3075,6 @@ public class Parser
               pos = ts.tokenBeg; end = ts.tokenEnd;
               return new KeywordLiteral(pos, end - pos, tt);
 
-          case Token.RP:
-              return new EmptyExpression();
-
           case Token.RESERVED:
               consumeToken();
               reportError("msg.reserved.id");
@@ -3099,7 +3107,7 @@ public class Parser
             Comment jsdocNode = getAndResetJsDoc();
             int lineno = ts.lineno;
             int begin = ts.tokenBeg;
-            AstNode e = expr();
+            AstNode e = (peekToken() == Token.RP ? new EmptyExpression(begin) : expr());
             if (peekToken() == Token.FOR) {
                 return generatorExpression(e, begin);
             }
@@ -3298,6 +3306,7 @@ public class Parser
                     isForOf = true;
                     break;
                 }
+                // fallthru
             default:
                 reportError("msg.in.after.for.name");
             }
