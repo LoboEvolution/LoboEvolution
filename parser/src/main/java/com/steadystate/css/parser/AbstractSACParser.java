@@ -51,7 +51,7 @@ import com.steadystate.css.sac.DocumentHandlerExt;
  * @author koch
  * @author RBRi
  */
-abstract class AbstractSACParser implements Parser {
+abstract class AbstractSACParser implements SACParser {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(AbstractSACParser.class);

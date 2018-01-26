@@ -75,7 +75,7 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
 			// Batik SAC parser throws IllegalStateException in some cases
 		}
 
-		if (!forcePrimitive && value.getNextLexicalUnit() != null) {
+		if (!forcePrimitive && (value.getNextLexicalUnit() != null)) {
 			value_ = getValues(value);
 		} else if (parameters != null) {
 			if (value.getLexicalUnitType() == LexicalUnit.SAC_RECT_FUNCTION) {
@@ -191,7 +191,8 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
 		if (value_ instanceof List) {
 			return CSS_VALUE_LIST;
 		}
-		if (value_ instanceof LexicalUnit && ((LexicalUnit) value_).getLexicalUnitType() == LexicalUnit.SAC_INHERIT) {
+		if ((value_ instanceof LexicalUnit)
+				&& (((LexicalUnit) value_).getLexicalUnitType() == LexicalUnit.SAC_INHERIT)) {
 			return CSS_INHERIT;
 		}
 		return CSS_PRIMITIVE_VALUE;
@@ -318,11 +319,11 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
 	public String getStringValue() throws DOMException {
 		if (value_ instanceof LexicalUnit) {
 			final LexicalUnit lu = (LexicalUnit) value_;
-			if (lu.getLexicalUnitType() == LexicalUnit.SAC_IDENT
-					|| lu.getLexicalUnitType() == LexicalUnit.SAC_STRING_VALUE
-					|| lu.getLexicalUnitType() == LexicalUnit.SAC_URI
-					|| lu.getLexicalUnitType() == LexicalUnit.SAC_INHERIT
-					|| lu.getLexicalUnitType() == LexicalUnit.SAC_ATTR) {
+			if ((lu.getLexicalUnitType() == LexicalUnit.SAC_IDENT)
+					|| (lu.getLexicalUnitType() == LexicalUnit.SAC_STRING_VALUE)
+					|| (lu.getLexicalUnitType() == LexicalUnit.SAC_URI)
+					|| (lu.getLexicalUnitType() == LexicalUnit.SAC_INHERIT)
+					|| (lu.getLexicalUnitType() == LexicalUnit.SAC_ATTR)) {
 				return lu.getStringValue();
 			}
 
@@ -398,7 +399,7 @@ public class CSSValueImpl extends CSSOMObjectImpl implements CSSPrimitiveValue, 
 		}
 		final CSSValue cv = (CSSValue) obj;
 		// TODO to be improved!
-		return super.equals(obj) && getCssValueType() == cv.getCssValueType()
+		return super.equals(obj) && (getCssValueType() == cv.getCssValueType())
 				&& LangUtils.equals(getCssText(), cv.getCssText());
 	}
 

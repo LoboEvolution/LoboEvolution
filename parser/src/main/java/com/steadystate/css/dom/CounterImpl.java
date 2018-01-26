@@ -64,7 +64,7 @@ public class CounterImpl implements Counter, CSSFormatable, Serializable {
 				throw new DOMException(DOMException.SYNTAX_ERR, "Counter parameters must be separated by ','.");
 			}
 			next = next.getNextLexicalUnit();
-			if (separatorSpecified && next != null) {
+			if (separatorSpecified && (next != null)) {
 				separator_ = next.getStringValue();
 				next = next.getNextLexicalUnit(); // ','
 				if (next != null) {

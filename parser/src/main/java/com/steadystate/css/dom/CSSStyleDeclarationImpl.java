@@ -42,7 +42,7 @@ import com.steadystate.css.util.LangUtils;
  * @author Ahmed Ashour
  */
 public class CSSStyleDeclarationImpl
-		implements CSSStyleDeclaration, CSSFormatable, CSS2Properties, CSSProperties, Serializable {
+		implements CSSStyleDeclaration, CSSFormatable, CSSProperties, CSS2Properties, Serializable {
 	private static final long serialVersionUID = -2373755821317100189L;
 
 	private static final String PRIORITY_IMPORTANT = "important";
@@ -131,7 +131,7 @@ public class CSSStyleDeclarationImpl
 	@Override
 	public CSSValue getPropertyCSSValue(final String propertyName) {
 		final Property p = getPropertyDeclaration(propertyName);
-		return p == null ? null : p.getValue();
+		return (p == null) ? null : p.getValue();
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public class CSSStyleDeclarationImpl
 	@Override
 	public String item(final int index) {
 		final Property p = properties_.get(index);
-		return p == null ? "" : p.getName();
+		return (p == null) ? "" : p.getName();
 	}
 
 	@Override
@@ -241,14 +241,13 @@ public class CSSStyleDeclarationImpl
 	}
 
 	private boolean equalsProperties(final CSSStyleDeclaration csd) {
-		if (csd == null || getLength() != csd.getLength()) {
+		if ((csd == null) || (getLength() != csd.getLength())) {
 			return false;
 		}
 		for (int i = 0; i < getLength(); i++) {
 			final String propertyName = item(i);
 			// CSSValue propertyCSSValue1 = getPropertyCSSValue(propertyName);
-			// CSSValue propertyCSSValue2 =
-			// csd.getPropertyCSSValue(propertyName);
+			// CSSValue propertyCSSValue2 = csd.getPropertyCSSValue(propertyName);
 			final String propertyValue1 = getPropertyValue(propertyName);
 			final String propertyValue2 = csd.getPropertyValue(propertyName);
 			if (!LangUtils.equals(propertyValue1, propertyValue2)) {
@@ -272,1318 +271,1226 @@ public class CSSStyleDeclarationImpl
 		return hash;
 	}
 
+	// ---- start CSS2Properties interface ----
 	@Override
 	public String getAzimuth() {
-		return this.getPropertyValue(AZIMUTH);
+		return getPropertyValue(AZIMUTH);
+	}
+
+	@Override
+	public void setAzimuth(final String azimuth) throws DOMException {
+		setProperty(AZIMUTH, azimuth, null);
 	}
 
 	@Override
 	public String getBackground() {
-		return this.getPropertyValue(BACKGROUND);
+		return getPropertyValue(BACKGROUND);
+	}
+
+	@Override
+	public void setBackground(final String background) throws DOMException {
+		setProperty(BACKGROUND, background, null);
 	}
 
 	@Override
 	public String getBackgroundAttachment() {
-		return this.getPropertyValue(BACKGROUND_ATTACHMENT);
+		return getPropertyValue(BACKGROUND_ATTACHMENT);
+	}
+
+	@Override
+	public void setBackgroundAttachment(final String backgroundAttachment) throws DOMException {
+		setProperty(BACKGROUND_ATTACHMENT, backgroundAttachment, null);
 	}
 
 	@Override
 	public String getBackgroundColor() {
-		return this.getPropertyValue(BACKGROUND_COLOR);
+		return getPropertyValue(BACKGROUND_COLOR);
+	}
+
+	@Override
+	public void setBackgroundColor(final String backgroundColor) throws DOMException {
+		setProperty(BACKGROUND_COLOR, backgroundColor, null);
 	}
 
 	@Override
 	public String getBackgroundImage() {
-		return this.getPropertyValue(BACKGROUND_IMAGE);
+		return getPropertyValue(BACKGROUND_IMAGE);
+	}
+
+	@Override
+	public void setBackgroundImage(final String backgroundImage) throws DOMException {
+		setProperty(BACKGROUND_IMAGE, backgroundImage, null);
 	}
 
 	@Override
 	public String getBackgroundPosition() {
-		return this.getPropertyValue(BACKGROUND_POSITION);
+		return getPropertyValue(BACKGROUND_POSITION);
+	}
+
+	@Override
+	public void setBackgroundPosition(final String backgroundPosition) throws DOMException {
+		setProperty(BACKGROUND_POSITION, backgroundPosition, null);
 	}
 
 	@Override
 	public String getBackgroundRepeat() {
-		return this.getPropertyValue(BACKGROUND_REPEAT);
+		return getPropertyValue(BACKGROUND_REPEAT);
+	}
+
+	@Override
+	public void setBackgroundRepeat(final String backgroundRepeat) throws DOMException {
+		setProperty(BACKGROUND_REPEAT, backgroundRepeat, null);
 	}
 
 	@Override
 	public String getBorder() {
-		return this.getPropertyValue(BORDER);
+		return getPropertyValue(BORDER);
 	}
 
 	@Override
-	public String getBorderBottom() {
-		return this.getPropertyValue(BORDER_BOTTOM);
-	}
-
-	@Override
-	public String getBorderBottomColor() {
-		return this.getPropertyValue(BORDER_BOTTOM_COLOR);
-	}
-
-	@Override
-	public String getBorderBottomStyle() {
-		return this.getPropertyValue(BORDER_BOTTOM_STYLE);
-	}
-
-	@Override
-	public String getBorderBottomWidth() {
-		return this.getPropertyValue(BORDER_BOTTOM_WIDTH);
+	public void setBorder(final String border) throws DOMException {
+		setProperty(BORDER, border, null);
 	}
 
 	@Override
 	public String getBorderCollapse() {
-		return this.getPropertyValue(BORDER_COLLAPSE);
+		return getPropertyValue(BORDER_COLLAPSE);
+	}
+
+	@Override
+	public void setBorderCollapse(final String borderCollapse) throws DOMException {
+		setProperty(BORDER_COLLAPSE, borderCollapse, null);
 	}
 
 	@Override
 	public String getBorderColor() {
-		return this.getPropertyValue(BORDER_COLOR);
+		return getPropertyValue(BORDER_COLOR);
 	}
 
 	@Override
-	public String getBorderLeft() {
-		return this.getPropertyValue(BORDER_LEFT);
-	}
-
-	@Override
-	public String getBorderLeftColor() {
-		return this.getPropertyValue(BORDER_LEFT_COLOR);
-	}
-
-	@Override
-	public String getBorderLeftStyle() {
-		return this.getPropertyValue(BORDER_LEFT_STYLE);
-	}
-
-	@Override
-	public String getBorderLeftWidth() {
-		return this.getPropertyValue(BORDER_LEFT_WIDTH);
-	}
-
-	@Override
-	public String getBorderRight() {
-		return this.getPropertyValue(BORDER_RIGHT);
-	}
-
-	@Override
-	public String getBorderRightColor() {
-		return this.getPropertyValue(BORDER_RIGHT_COLOR);
-	}
-
-	@Override
-	public String getBorderRightStyle() {
-		return this.getPropertyValue(BORDER_RIGHT_STYLE);
-	}
-
-	@Override
-	public String getBorderRightWidth() {
-		return this.getPropertyValue(BORDER_RIGHT_WIDTH);
+	public void setBorderColor(final String borderColor) throws DOMException {
+		setProperty(BORDER_COLOR, borderColor, null);
 	}
 
 	@Override
 	public String getBorderSpacing() {
-		return this.getPropertyValue(BORDER_SPACING);
+		return getPropertyValue(BORDER_SPACING);
+	}
+
+	@Override
+	public void setBorderSpacing(final String borderSpacing) throws DOMException {
+		setProperty(BORDER_SPACING, borderSpacing, null);
 	}
 
 	@Override
 	public String getBorderStyle() {
-		return this.getPropertyValue(BORDER_STYLE);
+		return getPropertyValue(BORDER_STYLE);
+	}
+
+	@Override
+	public void setBorderStyle(final String borderStyle) throws DOMException {
+		setProperty(BORDER_STYLE, borderStyle, null);
 	}
 
 	@Override
 	public String getBorderTop() {
-		return this.getPropertyValue(BORDER_TOP);
+		return getPropertyValue(BORDER_TOP);
+	}
+
+	@Override
+	public void setBorderTop(final String borderTop) throws DOMException {
+		setProperty(BORDER_TOP, borderTop, null);
+	}
+
+	@Override
+	public String getBorderRight() {
+		return getPropertyValue(BORDER_RIGHT);
+	}
+
+	@Override
+	public void setBorderRight(final String borderRight) throws DOMException {
+		setProperty(BORDER_RIGHT, borderRight, null);
+	}
+
+	@Override
+	public String getBorderBottom() {
+		return getPropertyValue(BORDER_BOTTOM);
+	}
+
+	@Override
+	public void setBorderBottom(final String borderBottom) throws DOMException {
+		setProperty(BORDER_BOTTOM, borderBottom, null);
+	}
+
+	@Override
+	public String getBorderLeft() {
+		return getPropertyValue(BORDER_LEFT);
+	}
+
+	@Override
+	public void setBorderLeft(final String borderLeft) throws DOMException {
+		setProperty(BORDER_LEFT, borderLeft, null);
 	}
 
 	@Override
 	public String getBorderTopColor() {
-		return this.getPropertyValue(BORDER_TOP_COLOR);
+		return getPropertyValue(BORDER_TOP_COLOR);
+	}
+
+	@Override
+	public void setBorderTopColor(final String borderTopColor) throws DOMException {
+		setProperty(BORDER_TOP_COLOR, borderTopColor, null);
+	}
+
+	@Override
+	public String getBorderRightColor() {
+		return getPropertyValue(BORDER_RIGHT_COLOR);
+	}
+
+	@Override
+	public void setBorderRightColor(final String borderRightColor) throws DOMException {
+		setProperty(BORDER_RIGHT_COLOR, borderRightColor, null);
+	}
+
+	@Override
+	public String getBorderBottomColor() {
+		return getPropertyValue(BORDER_BOTTOM_COLOR);
+	}
+
+	@Override
+	public void setBorderBottomColor(final String borderBottomColor) throws DOMException {
+		setProperty(BORDER_BOTTOM_COLOR, borderBottomColor, null);
+	}
+
+	@Override
+	public String getBorderLeftColor() {
+		return getPropertyValue(BORDER_LEFT_COLOR);
+	}
+
+	@Override
+	public void setBorderLeftColor(final String borderLeftColor) throws DOMException {
+		setProperty(BORDER_LEFT_COLOR, borderLeftColor, null);
 	}
 
 	@Override
 	public String getBorderTopStyle() {
-		return this.getPropertyValue(BORDER_TOP_STYLE);
+		return getPropertyValue(BORDER_TOP_STYLE);
+	}
+
+	@Override
+	public void setBorderTopStyle(final String borderTopStyle) throws DOMException {
+		setProperty(BORDER_TOP_STYLE, borderTopStyle, null);
+	}
+
+	@Override
+	public String getBorderRightStyle() {
+		return getPropertyValue(BORDER_RIGHT_STYLE);
+	}
+
+	@Override
+	public void setBorderRightStyle(final String borderRightStyle) throws DOMException {
+		setProperty(BORDER_RIGHT_STYLE, borderRightStyle, null);
+	}
+
+	@Override
+	public String getBorderBottomStyle() {
+		return getPropertyValue(BORDER_BOTTOM_STYLE);
+	}
+
+	@Override
+	public void setBorderBottomStyle(final String borderBottomStyle) throws DOMException {
+		setProperty(BORDER_BOTTOM_STYLE, borderBottomStyle, null);
+	}
+
+	@Override
+	public String getBorderLeftStyle() {
+		return getPropertyValue(BORDER_LEFT_STYLE);
+	}
+
+	@Override
+	public void setBorderLeftStyle(final String borderLeftStyle) throws DOMException {
+		setProperty(BORDER_LEFT_STYLE, borderLeftStyle, null);
 	}
 
 	@Override
 	public String getBorderTopWidth() {
-		return this.getPropertyValue(BORDER_TOP_WIDTH);
+		return getPropertyValue(BORDER_TOP_WIDTH);
+	}
+
+	@Override
+	public void setBorderTopWidth(final String borderTopWidth) throws DOMException {
+		setProperty(BORDER_TOP_WIDTH, borderTopWidth, null);
+	}
+
+	@Override
+	public String getBorderRightWidth() {
+		return getPropertyValue(BORDER_RIGHT_WIDTH);
+	}
+
+	@Override
+	public void setBorderRightWidth(final String borderRightWidth) throws DOMException {
+		setProperty(BORDER_RIGHT_WIDTH, borderRightWidth, null);
+	}
+
+	@Override
+	public String getBorderBottomWidth() {
+		return getPropertyValue(BORDER_BOTTOM_WIDTH);
+	}
+
+	@Override
+	public void setBorderBottomWidth(final String borderBottomWidth) throws DOMException {
+		setProperty(BORDER_BOTTOM_WIDTH, borderBottomWidth, null);
+	}
+
+	@Override
+	public String getBorderLeftWidth() {
+		return getPropertyValue(BORDER_LEFT_WIDTH);
+	}
+
+	@Override
+	public void setBorderLeftWidth(final String borderLeftWidth) throws DOMException {
+		setProperty(BORDER_LEFT_WIDTH, borderLeftWidth, null);
 	}
 
 	@Override
 	public String getBorderWidth() {
-		return this.getPropertyValue(BORDER_WIDTH);
+		return getPropertyValue(BORDER_WIDTH);
+	}
+
+	@Override
+	public void setBorderWidth(final String borderWidth) throws DOMException {
+		setProperty(BORDER_WIDTH, borderWidth, null);
 	}
 
 	@Override
 	public String getBottom() {
-		return this.getPropertyValue(BOTTOM);
+		return getPropertyValue(BOTTOM);
+	}
+
+	@Override
+	public void setBottom(final String bottom) throws DOMException {
+		setProperty(BOTTOM, bottom, null);
 	}
 
 	@Override
 	public String getCaptionSide() {
-		return this.getPropertyValue(CAPTION_SIDE);
+		return getPropertyValue(CAPTION_SIDE);
+	}
+
+	@Override
+	public void setCaptionSide(final String captionSide) throws DOMException {
+		setProperty(CAPTION_SIDE, captionSide, null);
 	}
 
 	@Override
 	public String getClear() {
-		return this.getPropertyValue(CLEAR);
+		return getPropertyValue(CLEAR);
+	}
+
+	@Override
+	public void setClear(final String clear) throws DOMException {
+		setProperty(CLEAR, clear, null);
 	}
 
 	@Override
 	public String getClip() {
-		return this.getPropertyValue(CLIP);
+		return getPropertyValue(CLIP);
+	}
+
+	@Override
+	public void setClip(final String clip) throws DOMException {
+		setProperty(CLIP, clip, null);
 	}
 
 	@Override
 	public String getColor() {
-		return this.getPropertyValue(COLOR);
+		return getPropertyValue(COLOR);
+	}
+
+	@Override
+	public void setColor(final String color) throws DOMException {
+		setProperty(COLOR, color, null);
 	}
 
 	@Override
 	public String getContent() {
-		return this.getPropertyValue(CONTENT);
+		return getPropertyValue(CONTENT);
+	}
+
+	@Override
+	public void setContent(final String content) throws DOMException {
+		setProperty(CONTENT, content, null);
 	}
 
 	@Override
 	public String getCounterIncrement() {
-		return this.getPropertyValue(COUNTER_INCREMENT);
+		return getPropertyValue(COUNTER_INCREMENT);
+	}
+
+	@Override
+	public void setCounterIncrement(final String counterIncrement) throws DOMException {
+		setProperty(COUNTER_INCREMENT, counterIncrement, null);
 	}
 
 	@Override
 	public String getCounterReset() {
-		return this.getPropertyValue(COUNTER_RESET);
+		return getPropertyValue(COUNTER_RESET);
 	}
 
 	@Override
-	public String getCssFloat() {
-		return this.getPropertyValue(CSS_FLOAT);
+	public void setCounterReset(final String counterReset) throws DOMException {
+		setProperty(COUNTER_RESET, counterReset, null);
 	}
 
 	@Override
 	public String getCue() {
-		return this.getPropertyValue(CUE);
+		return getPropertyValue(CUE);
+	}
+
+	@Override
+	public void setCue(final String cue) throws DOMException {
+		setProperty(CUE, cue, null);
 	}
 
 	@Override
 	public String getCueAfter() {
-		return this.getPropertyValue(CUE_AFTER);
+		return getPropertyValue(CUE_AFTER);
+	}
+
+	@Override
+	public void setCueAfter(final String cueAfter) throws DOMException {
+		setProperty(CUE_AFTER, cueAfter, null);
 	}
 
 	@Override
 	public String getCueBefore() {
-		return this.getPropertyValue(CUE_BEFORE);
+		return getPropertyValue(CUE_BEFORE);
+	}
+
+	@Override
+	public void setCueBefore(final String cueBefore) throws DOMException {
+		setProperty(CUE_BEFORE, cueBefore, null);
 	}
 
 	@Override
 	public String getCursor() {
-		return this.getPropertyValue(CURSOR);
+		return getPropertyValue(CURSOR);
+	}
+
+	@Override
+	public void setCursor(final String cursor) throws DOMException {
+		setProperty(CURSOR, cursor, null);
 	}
 
 	@Override
 	public String getDirection() {
-		return this.getPropertyValue(DIRECTION);
+		return getPropertyValue(DIRECTION);
+	}
+
+	@Override
+	public void setDirection(final String direction) throws DOMException {
+		setProperty(DIRECTION, direction, null);
 	}
 
 	@Override
 	public String getDisplay() {
-		return this.getPropertyValue(DISPLAY);
+		return getPropertyValue(DISPLAY);
+	}
+
+	@Override
+	public void setDisplay(final String display) throws DOMException {
+		setProperty(DISPLAY, display, null);
 	}
 
 	@Override
 	public String getElevation() {
-		return this.getPropertyValue(ELEVATION);
+		return getPropertyValue(ELEVATION);
+	}
+
+	@Override
+	public void setElevation(final String elevation) throws DOMException {
+		setProperty(ELEVATION, elevation, null);
 	}
 
 	@Override
 	public String getEmptyCells() {
-		return this.getPropertyValue(EMPTY_CELLS);
+		return getPropertyValue(EMPTY_CELLS);
+	}
+
+	@Override
+	public void setEmptyCells(final String emptyCells) throws DOMException {
+		setProperty(EMPTY_CELLS, emptyCells, null);
+	}
+
+	@Override
+	public String getCssFloat() {
+		return getPropertyValue(CSS_FLOAT);
+	}
+
+	@Override
+	public void setCssFloat(final String cssFloat) throws DOMException {
+		setProperty(CSS_FLOAT, cssFloat, null);
 	}
 
 	@Override
 	public String getFont() {
-		return this.getPropertyValue(FONT);
+		return getPropertyValue(FONT);
+	}
+
+	@Override
+	public void setFont(final String font) throws DOMException {
+		setProperty(FONT, font, null);
 	}
 
 	@Override
 	public String getFontFamily() {
-		return this.getPropertyValue(FONT_FAMILY);
+		return getPropertyValue(FONT_FAMILY);
+	}
+
+	@Override
+	public void setFontFamily(final String fontFamily) throws DOMException {
+		setProperty(FONT_FAMILY, fontFamily, null);
 	}
 
 	@Override
 	public String getFontSize() {
-		return this.getPropertyValue(FONT_SIZE);
+		return getPropertyValue(FONT_SIZE);
+	}
+
+	@Override
+	public void setFontSize(final String fontSize) throws DOMException {
+		setProperty(FONT_SIZE, fontSize, null);
 	}
 
 	@Override
 	public String getFontSizeAdjust() {
-		return this.getPropertyValue(FONT_SIZE_ADJUST);
+		return getPropertyValue(FONT_SIZE_ADJUST);
+	}
+
+	@Override
+	public void setFontSizeAdjust(final String fontSizeAdjust) throws DOMException {
+		setProperty(FONT_SIZE_ADJUST, fontSizeAdjust, null);
 	}
 
 	@Override
 	public String getFontStretch() {
-		return this.getPropertyValue(FONT_STRETCH);
+		return getPropertyValue(FONT_STRETCH);
+	}
+
+	@Override
+	public void setFontStretch(final String fontStretch) throws DOMException {
+		setProperty(FONT_STRETCH, fontStretch, null);
 	}
 
 	@Override
 	public String getFontStyle() {
-		return this.getPropertyValue(FONT_STYLE);
+		return getPropertyValue(FONT_STYLE);
+	}
+
+	@Override
+	public void setFontStyle(final String fontStyle) throws DOMException {
+		setProperty(FONT_STYLE, fontStyle, null);
 	}
 
 	@Override
 	public String getFontVariant() {
-		return this.getPropertyValue(FONT_VARIANT);
+		return getPropertyValue(FONT_VARIANT);
+	}
+
+	@Override
+	public void setFontVariant(final String fontVariant) throws DOMException {
+		setProperty(FONT_VARIANT, fontVariant, null);
 	}
 
 	@Override
 	public String getFontWeight() {
-		return this.getPropertyValue(FONT_WEIGHT);
+		return getPropertyValue(FONT_WEIGHT);
+	}
+
+	@Override
+	public void setFontWeight(final String fontWeight) throws DOMException {
+		setProperty(FONT_WEIGHT, fontWeight, null);
 	}
 
 	@Override
 	public String getHeight() {
-		return this.getPropertyValue(HEIGHT);
+		return getPropertyValue(HEIGHT);
+	}
+
+	@Override
+	public void setHeight(final String height) throws DOMException {
+		setProperty(HEIGHT, height, null);
 	}
 
 	@Override
 	public String getLeft() {
-		return this.getPropertyValue(LEFT);
+		return getPropertyValue(LEFT);
+	}
+
+	@Override
+	public void setLeft(final String left) throws DOMException {
+		setProperty(LEFT, left, null);
 	}
 
 	@Override
 	public String getLetterSpacing() {
-		return this.getPropertyValue(LETTER_SPACING);
+		return getPropertyValue(LETTER_SPACING);
+	}
+
+	@Override
+	public void setLetterSpacing(final String letterSpacing) throws DOMException {
+		setProperty(LETTER_SPACING, letterSpacing, null);
 	}
 
 	@Override
 	public String getLineHeight() {
-		return this.getPropertyValue(LINE_HEIGHT);
+		return getPropertyValue(LINE_HEIGHT);
+	}
+
+	@Override
+	public void setLineHeight(final String lineHeight) throws DOMException {
+		setProperty(LINE_HEIGHT, lineHeight, null);
 	}
 
 	@Override
 	public String getListStyle() {
-		return this.getPropertyValue(LIST_STYLE);
+		return getPropertyValue(LIST_STYLE);
+	}
+
+	@Override
+	public void setListStyle(final String listStyle) throws DOMException {
+		setProperty(LIST_STYLE, listStyle, null);
 	}
 
 	@Override
 	public String getListStyleImage() {
-		return this.getPropertyValue(LIST_STYLE_IMAGE);
+		return getPropertyValue(LIST_STYLE_IMAGE);
+	}
+
+	@Override
+	public void setListStyleImage(final String listStyleImage) throws DOMException {
+		setProperty(LIST_STYLE_IMAGE, listStyleImage, null);
 	}
 
 	@Override
 	public String getListStylePosition() {
-		return this.getPropertyValue(LIST_STYLE_POSITION);
+		return getPropertyValue(LIST_STYLE_POSITION);
+	}
+
+	@Override
+	public void setListStylePosition(final String listStylePosition) throws DOMException {
+		setProperty(LIST_STYLE_POSITION, listStylePosition, null);
 	}
 
 	@Override
 	public String getListStyleType() {
-		return this.getPropertyValue(LIST_STYLE_TYPE);
+		return getPropertyValue(LIST_STYLE_TYPE);
+	}
+
+	@Override
+	public void setListStyleType(final String listStyleType) throws DOMException {
+		setProperty(LIST_STYLE_TYPE, listStyleType, null);
 	}
 
 	@Override
 	public String getMargin() {
-		return this.getPropertyValue(MARGIN);
+		return getPropertyValue(MARGIN);
 	}
 
 	@Override
-	public String getMarginBottom() {
-		return this.getPropertyValue(MARGIN_BOTTOM);
-	}
-
-	@Override
-	public String getMarginLeft() {
-		return this.getPropertyValue(MARGIN_LEFT);
-	}
-
-	@Override
-	public String getMarginRight() {
-		return this.getPropertyValue(MARGIN_RIGHT);
+	public void setMargin(final String margin) throws DOMException {
+		setProperty(MARGIN, margin, null);
 	}
 
 	@Override
 	public String getMarginTop() {
-		return this.getPropertyValue(MARGIN_TOP);
+		return getPropertyValue(MARGIN_TOP);
+	}
+
+	@Override
+	public void setMarginTop(final String marginTop) throws DOMException {
+		setProperty(MARGIN_TOP, marginTop, null);
+	}
+
+	@Override
+	public String getMarginRight() {
+		return getPropertyValue(MARGIN_RIGHT);
+	}
+
+	@Override
+	public void setMarginRight(final String marginRight) throws DOMException {
+		setProperty(MARGIN_RIGHT, marginRight, null);
+	}
+
+	@Override
+	public String getMarginBottom() {
+		return getPropertyValue(MARGIN_BOTTOM);
+	}
+
+	@Override
+	public void setMarginBottom(final String marginBottom) throws DOMException {
+		setProperty(MARGIN_BOTTOM, marginBottom, null);
+	}
+
+	@Override
+	public String getMarginLeft() {
+		return getPropertyValue(MARGIN_LEFT);
+	}
+
+	@Override
+	public void setMarginLeft(final String marginLeft) throws DOMException {
+		setProperty(MARGIN_LEFT, marginLeft, null);
 	}
 
 	@Override
 	public String getMarkerOffset() {
-		return this.getPropertyValue(MARKER_OFFSET);
+		return getPropertyValue(MARKER_OFFSET);
+	}
+
+	@Override
+	public void setMarkerOffset(final String markerOffset) throws DOMException {
+		setProperty(MARKER_OFFSET, markerOffset, null);
 	}
 
 	@Override
 	public String getMarks() {
-		return this.getPropertyValue(MARKS);
+		return getPropertyValue(MARKS);
+	}
+
+	@Override
+	public void setMarks(final String marks) throws DOMException {
+		setProperty(MARKS, marks, null);
 	}
 
 	@Override
 	public String getMaxHeight() {
-		return this.getPropertyValue(MAX_HEIGHT);
+		return getPropertyValue(MAX_HEIGHT);
+	}
+
+	@Override
+	public void setMaxHeight(final String maxHeight) throws DOMException {
+		setProperty(MAX_HEIGHT, maxHeight, null);
 	}
 
 	@Override
 	public String getMaxWidth() {
-		return this.getPropertyValue(MAX_WIDTH);
+		return getPropertyValue(MAX_WIDTH);
+	}
+
+	@Override
+	public void setMaxWidth(final String maxWidth) throws DOMException {
+		setProperty(MAX_WIDTH, maxWidth, null);
 	}
 
 	@Override
 	public String getMinHeight() {
-		return this.getPropertyValue(MIN_HEIGHT);
+		return getPropertyValue(MIN_HEIGHT);
+	}
+
+	@Override
+	public void setMinHeight(final String minHeight) throws DOMException {
+		setProperty(MIN_HEIGHT, minHeight, null);
 	}
 
 	@Override
 	public String getMinWidth() {
-		return this.getPropertyValue(MIN_WIDTH);
+		return getPropertyValue(MIN_WIDTH);
+	}
+
+	@Override
+	public void setMinWidth(final String minWidth) throws DOMException {
+		setProperty(MIN_WIDTH, minWidth, null);
 	}
 
 	@Override
 	public String getOrphans() {
-		return this.getPropertyValue(ORPHANS);
+		return getPropertyValue(ORPHANS);
+	}
+
+	@Override
+	public void setOrphans(final String orphans) throws DOMException {
+		setProperty(ORPHANS, orphans, null);
 	}
 
 	@Override
 	public String getOutline() {
-		return this.getPropertyValue(OUTLINE);
+		return getPropertyValue(OUTLINE);
+	}
+
+	@Override
+	public void setOutline(final String outline) throws DOMException {
+		setProperty(OUTLINE, outline, null);
 	}
 
 	@Override
 	public String getOutlineColor() {
-		return this.getPropertyValue(OUTLINE_COLOR);
+		return getPropertyValue(OUTLINE_COLOR);
+	}
+
+	@Override
+	public void setOutlineColor(final String outlineColor) throws DOMException {
+		setProperty(OUTLINE_COLOR, outlineColor, null);
 	}
 
 	@Override
 	public String getOutlineStyle() {
-		return this.getPropertyValue(OUTLINE_STYLE);
+		return getPropertyValue(OUTLINE_STYLE);
+	}
+
+	@Override
+	public void setOutlineStyle(final String outlineStyle) throws DOMException {
+		setProperty(OUTLINE_STYLE, outlineStyle, null);
 	}
 
 	@Override
 	public String getOutlineWidth() {
-		return this.getPropertyValue(OUTLINE_WIDTH);
+		return getPropertyValue(OUTLINE_WIDTH);
+	}
+
+	@Override
+	public void setOutlineWidth(final String outlineWidth) throws DOMException {
+		setProperty(OUTLINE_WIDTH, outlineWidth, null);
 	}
 
 	@Override
 	public String getOverflow() {
-		return this.getPropertyValue(OVERFLOW);
+		return getPropertyValue(OVERFLOW);
+	}
+
+	@Override
+	public void setOverflow(final String overflow) throws DOMException {
+		setProperty(OVERFLOW, overflow, null);
 	}
 
 	@Override
 	public String getPadding() {
-		return this.getPropertyValue(PADDING);
+		return getPropertyValue(PADDING);
 	}
 
 	@Override
-	public String getPaddingBottom() {
-		return this.getPropertyValue(PADDING_BOTTOM);
-	}
-
-	@Override
-	public String getPaddingLeft() {
-		return this.getPropertyValue(PADDING_LEFT);
-	}
-
-	@Override
-	public String getPaddingRight() {
-		return this.getPropertyValue(PADDING_RIGHT);
+	public void setPadding(final String padding) throws DOMException {
+		setProperty(PADDING, padding, null);
 	}
 
 	@Override
 	public String getPaddingTop() {
-		return this.getPropertyValue(PADDING_TOP);
+		return getPropertyValue(PADDING_TOP);
+	}
+
+	@Override
+	public void setPaddingTop(final String paddingTop) throws DOMException {
+		setProperty(PADDING_TOP, paddingTop, null);
+	}
+
+	@Override
+	public String getPaddingRight() {
+		return getPropertyValue(PADDING_RIGHT);
+	}
+
+	@Override
+	public void setPaddingRight(final String paddingRight) throws DOMException {
+		setProperty(PADDING_RIGHT, paddingRight, null);
+	}
+
+	@Override
+	public String getPaddingBottom() {
+		return getPropertyValue(PADDING_BOTTOM);
+	}
+
+	@Override
+	public void setPaddingBottom(final String paddingBottom) throws DOMException {
+		setProperty(PADDING_BOTTOM, paddingBottom, null);
+	}
+
+	@Override
+	public String getPaddingLeft() {
+		return getPropertyValue(PADDING_LEFT);
+	}
+
+	@Override
+	public void setPaddingLeft(final String paddingLeft) throws DOMException {
+		setProperty(PADDING_LEFT, paddingLeft, null);
 	}
 
 	@Override
 	public String getPage() {
-		return this.getPropertyValue(PAGE);
+		return getPropertyValue(PAGE);
+	}
+
+	@Override
+	public void setPage(final String page) throws DOMException {
+		setProperty(PAGE, page, null);
 	}
 
 	@Override
 	public String getPageBreakAfter() {
-		return this.getPropertyValue(PAGE_BREAK_AFTER);
+		return getPropertyValue(PAGE_BREAK_AFTER);
+	}
+
+	@Override
+	public void setPageBreakAfter(final String pageBreakAfter) throws DOMException {
+		setProperty(PAGE_BREAK_AFTER, pageBreakAfter, null);
 	}
 
 	@Override
 	public String getPageBreakBefore() {
-		return this.getPropertyValue(PAGE_BREAK_BEFORE);
+		return getPropertyValue(PAGE_BREAK_BEFORE);
+	}
+
+	@Override
+	public void setPageBreakBefore(final String pageBreakBefore) throws DOMException {
+		setProperty(PAGE_BREAK_BEFORE, PAGE_BREAK_BEFORE, null);
 	}
 
 	@Override
 	public String getPageBreakInside() {
-		return this.getPropertyValue(PAGE_BREAK_INSIDE);
+		return getPropertyValue(PAGE_BREAK_INSIDE);
+	}
+
+	@Override
+	public void setPageBreakInside(final String pageBreakInside) throws DOMException {
+		setProperty(PAGE_BREAK_INSIDE, pageBreakInside, null);
 	}
 
 	@Override
 	public String getPause() {
-		return this.getPropertyValue(PAUSE);
+		return getPropertyValue(PAUSE);
+	}
+
+	@Override
+	public void setPause(final String pause) throws DOMException {
+		setProperty(PAUSE, pause, null);
 	}
 
 	@Override
 	public String getPauseAfter() {
-		return this.getPropertyValue(PAUSE_AFTER);
+		return getPropertyValue(PAUSE_AFTER);
+	}
+
+	@Override
+	public void setPauseAfter(final String pauseAfter) throws DOMException {
+		setProperty(PAUSE_AFTER, pauseAfter, null);
 	}
 
 	@Override
 	public String getPauseBefore() {
-		return this.getPropertyValue(PAUSE_BEFORE);
+		return getPropertyValue(PAUSE_BEFORE);
+	}
+
+	@Override
+	public void setPauseBefore(final String pauseBefore) throws DOMException {
+		setProperty(PAUSE_BEFORE, PAUSE_BEFORE, null);
 	}
 
 	@Override
 	public String getPitch() {
-		return this.getPropertyValue(PITCH);
+		return getPropertyValue(PITCH);
+	}
+
+	@Override
+	public void setPitch(final String pitch) throws DOMException {
+		setProperty(PITCH, pitch, null);
 	}
 
 	@Override
 	public String getPitchRange() {
-		return this.getPropertyValue(PITCH_RANGE);
+		return getPropertyValue(PITCH_RANGE);
+	}
+
+	@Override
+	public void setPitchRange(final String pitchRange) throws DOMException {
+		setProperty(PITCH_RANGE, pitchRange, null);
 	}
 
 	@Override
 	public String getPlayDuring() {
-		return this.getPropertyValue(PLAY_DURING);
+		return getPropertyValue(PLAY_DURING);
+	}
+
+	@Override
+	public void setPlayDuring(final String playDuring) throws DOMException {
+		setProperty(PLAY_DURING, playDuring, null);
 	}
 
 	@Override
 	public String getPosition() {
-		return this.getPropertyValue(POSITION);
+		return getPropertyValue(POSITION);
+	}
+
+	@Override
+	public void setPosition(final String position) throws DOMException {
+		setProperty(POSITION, position, null);
 	}
 
 	@Override
 	public String getQuotes() {
-		return this.getPropertyValue(QUOTES);
+		return getPropertyValue(QUOTES);
+	}
+
+	@Override
+	public void setQuotes(final String quotes) throws DOMException {
+		setProperty(QUOTES, quotes, null);
 	}
 
 	@Override
 	public String getRichness() {
-		return this.getPropertyValue(RICHNESS);
+		return getPropertyValue(RICHNESS);
+	}
+
+	@Override
+	public void setRichness(final String richness) throws DOMException {
+		setProperty(RICHNESS, richness, null);
 	}
 
 	@Override
 	public String getRight() {
-		return this.getPropertyValue(RIGHT);
+		return getPropertyValue(RIGHT);
+	}
+
+	@Override
+	public void setRight(final String right) throws DOMException {
+		setProperty(RIGHT, right, null);
 	}
 
 	@Override
 	public String getSize() {
-		return this.getPropertyValue(SIZE);
+		return getPropertyValue(SIZE);
+	}
+
+	@Override
+	public void setSize(final String size) throws DOMException {
+		setProperty(SIZE, size, null);
 	}
 
 	@Override
 	public String getSpeak() {
-		return this.getPropertyValue(SPEAK);
+		return getPropertyValue(SPEAK);
+	}
+
+	@Override
+	public void setSpeak(final String speak) throws DOMException {
+		setProperty(SPEAK, speak, null);
 	}
 
 	@Override
 	public String getSpeakHeader() {
-		return this.getPropertyValue(SPEAK_HEADER);
+		return getPropertyValue(SPEAK_HEADER);
+	}
+
+	@Override
+	public void setSpeakHeader(final String speakHeader) throws DOMException {
+		setProperty(SPEAK_HEADER, speakHeader, null);
 	}
 
 	@Override
 	public String getSpeakNumeral() {
-		return this.getPropertyValue(SPEAK_NUMERAL);
+		return getPropertyValue(SPEAK_NUMERAL);
+	}
+
+	@Override
+	public void setSpeakNumeral(final String speakNumeral) throws DOMException {
+		setProperty(SPEAK_NUMERAL, speakNumeral, null);
 	}
 
 	@Override
 	public String getSpeakPunctuation() {
-		return this.getPropertyValue(SPEAK_PUNCTUATION);
+		return getPropertyValue(SPEAK_PUNCTUATION);
+	}
+
+	@Override
+	public void setSpeakPunctuation(final String speakPunctuation) throws DOMException {
+		setProperty(SPEAK_PUNCTUATION, speakPunctuation, null);
 	}
 
 	@Override
 	public String getSpeechRate() {
-		return this.getPropertyValue(SPEECH_RATE);
+		return getPropertyValue(SPEECH_RATE);
+	}
+
+	@Override
+	public void setSpeechRate(final String speechRate) throws DOMException {
+		setProperty(SPEECH_RATE, speechRate, null);
 	}
 
 	@Override
 	public String getStress() {
-		return this.getPropertyValue(STRESS);
+		return getPropertyValue(STRESS);
+	}
+
+	@Override
+	public void setStress(final String stress) throws DOMException {
+		setProperty(STRESS, stress, null);
 	}
 
 	@Override
 	public String getTableLayout() {
-		return this.getPropertyValue(TABLE_LAYOUT);
+		return getPropertyValue(TABLE_LAYOUT);
+	}
+
+	@Override
+	public void setTableLayout(final String tableLayout) throws DOMException {
+		setProperty(TABLE_LAYOUT, tableLayout, null);
 	}
 
 	@Override
 	public String getTextAlign() {
-		return this.getPropertyValue(TEXT_ALIGN);
+		return getPropertyValue(TEXT_ALIGN);
+	}
+
+	@Override
+	public void setTextAlign(final String textAlign) throws DOMException {
+		setProperty(TEXT_ALIGN, textAlign, null);
 	}
 
 	@Override
 	public String getTextDecoration() {
-		return this.getPropertyValue(TEXT_DECORATION);
+		return getPropertyValue(TEXT_DECORATION);
+	}
+
+	@Override
+	public void setTextDecoration(final String textDecoration) throws DOMException {
+		setProperty(TEXT_DECORATION, textDecoration, null);
 	}
 
 	@Override
 	public String getTextIndent() {
-		return this.getPropertyValue(TEXT_INDENT);
+		return getPropertyValue(TEXT_INDENT);
+	}
+
+	@Override
+	public void setTextIndent(final String textIndent) throws DOMException {
+		setProperty(TEXT_INDENT, textIndent, null);
 	}
 
 	@Override
 	public String getTextShadow() {
-		return this.getPropertyValue(TEXT_SHADOW);
+		return getPropertyValue(TEXT_SHADOW);
+	}
+
+	@Override
+	public void setTextShadow(final String textShadow) throws DOMException {
+		setProperty(TEXT_SHADOW, textShadow, null);
 	}
 
 	@Override
 	public String getTextTransform() {
-		return this.getPropertyValue(TEXT_TRANSFORM);
+		return getPropertyValue(TEXT_TRANSFORM);
+	}
+
+	@Override
+	public void setTextTransform(final String textTransform) throws DOMException {
+		setProperty(TEXT_TRANSFORM, textTransform, null);
 	}
 
 	@Override
 	public String getTop() {
-		return this.getPropertyValue(TOP);
+		return getPropertyValue(TOP);
+	}
+
+	@Override
+	public void setTop(final String top) throws DOMException {
+		setProperty(TOP, top, null);
 	}
 
 	@Override
 	public String getUnicodeBidi() {
-		return this.getPropertyValue(UNICODE_BIDI);
+		return getPropertyValue(UNICODE_BIDI);
+	}
+
+	@Override
+	public void setUnicodeBidi(final String unicodeBidi) throws DOMException {
+		setProperty(UNICODE_BIDI, unicodeBidi, null);
 	}
 
 	@Override
 	public String getVerticalAlign() {
-		return this.getPropertyValue(VERTICAL_ALIGN);
+		return getPropertyValue(VERTICAL_ALIGN);
+	}
+
+	@Override
+	public void setVerticalAlign(final String verticalAlign) throws DOMException {
+		setProperty(VERTICAL_ALIGN, verticalAlign, null);
 	}
 
 	@Override
 	public String getVisibility() {
-		return this.getPropertyValue(VISIBILITY);
+		return getPropertyValue(VISIBILITY);
+	}
+
+	@Override
+	public void setVisibility(final String visibility) throws DOMException {
+		setProperty(VISIBILITY, visibility, null);
 	}
 
 	@Override
 	public String getVoiceFamily() {
-		return this.getPropertyValue(VOICE_FAMILY);
+		return getPropertyValue(VOICE_FAMILY);
+	}
+
+	@Override
+	public void setVoiceFamily(final String voiceFamily) throws DOMException {
+		setProperty(VOICE_FAMILY, voiceFamily, null);
 	}
 
 	@Override
 	public String getVolume() {
-		return this.getPropertyValue(VOLUME);
+		return getPropertyValue(VOLUME);
+	}
+
+	@Override
+	public void setVolume(final String volume) throws DOMException {
+		setProperty(VOLUME, volume, null);
 	}
 
 	@Override
 	public String getWhiteSpace() {
-		return this.getPropertyValue(WHITE_SPACE);
+		return getPropertyValue(WHITE_SPACE);
+	}
+
+	@Override
+	public void setWhiteSpace(final String whiteSpace) throws DOMException {
+		setProperty(WHITE_SPACE, whiteSpace, null);
 	}
 
 	@Override
 	public String getWidows() {
-		return this.getPropertyValue(WIDOWS);
+		return getPropertyValue(WIDOWS);
+	}
+
+	@Override
+	public void setWidows(final String widows) throws DOMException {
+		setProperty(WIDOWS, widows, null);
 	}
 
 	@Override
 	public String getWidth() {
-		return this.getPropertyValue(WIDTH);
+		return getPropertyValue(WIDTH);
+	}
+
+	@Override
+	public void setWidth(final String width) throws DOMException {
+		setProperty(WIDTH, width, null);
 	}
 
 	@Override
 	public String getWordSpacing() {
+		return getPropertyValue(WORD_SPACING);
+	}
 
-		return this.getPropertyValue(WORD_SPACING);
+	@Override
+	public void setWordSpacing(final String wordSpacing) throws DOMException {
+		setProperty(WORD_SPACING, wordSpacing, null);
 	}
 
 	@Override
 	public String getZIndex() {
-		return this.getPropertyValue(Z_INDEX);
+		return getPropertyValue(Z_INDEX);
 	}
 
 	@Override
-	public void setAzimuth(String azimuth) {
-		this.setProperty(AZIMUTH, azimuth, "");
+	public void setZIndex(final String zIndex) throws DOMException {
+		setProperty(Z_INDEX, zIndex, null);
 	}
 
-	@Override
-	public void setBackground(String background) {
-
-		this.setProperty(BACKGROUND, background, "");
-
-	}
-
-	@Override
-	public void setBackgroundAttachment(String backgroundAttachment) {
-		this.setProperty(BACKGROUND_ATTACHMENT, backgroundAttachment, "");
-
-	}
-
-	@Override
-	public void setBackgroundColor(String backgroundColor) {
-		this.setProperty(BACKGROUND_COLOR, backgroundColor, "");
-
-	}
-
-	@Override
-	public void setBackgroundPosition(String backgroundPosition) {
-		this.setProperty(BACKGROUND_POSITION, backgroundPosition, "");
-
-	}
-
-	@Override
-	public void setBackgroundRepeat(String backgroundRepeat) {
-		this.setProperty(BACKGROUND_REPEAT, backgroundRepeat, "");
-
-	}
-
-	@Override
-	public void setBorderBottom(String borderBottom) {
-
-		this.setProperty(BORDER_BOTTOM, borderBottom, "");
-
-	}
-
-	@Override
-	public void setBorderBottomColor(String borderBottomColor) {
-		this.setProperty(BORDER_BOTTOM_COLOR, borderBottomColor, "");
-
-	}
-
-	@Override
-	public void setBorderBottomStyle(String borderBottomStyle) {
-		this.setProperty(BORDER_BOTTOM_STYLE, borderBottomStyle, "");
-
-	}
-
-	@Override
-	public void setBorderBottomWidth(String borderBottomWidth) {
-		this.setProperty(BORDER_BOTTOM_WIDTH, borderBottomWidth, "");
-
-	}
-
-	@Override
-	public void setBorderCollapse(String borderCollapse) {
-		this.setProperty(BORDER_COLLAPSE, borderCollapse, "");
-
-	}
-
-	@Override
-	public void setBorderColor(String borderColor) {
-
-		this.setProperty(BORDER_COLOR, borderColor, "");
-
-	}
-
-	@Override
-	public void setBorderLeft(String borderLeft) {
-
-		this.setProperty(BORDER_LEFT, borderLeft, "");
-
-	}
-
-	@Override
-	public void setBorderLeftColor(String borderLeftColor) {
-		this.setProperty(BORDER_LEFT_COLOR, borderLeftColor, "");
-
-	}
-
-	@Override
-	public void setBorderLeftStyle(String borderLeftStyle) {
-		this.setProperty(BORDER_LEFT_STYLE, borderLeftStyle, "");
-
-	}
-
-	@Override
-	public void setBorderLeftWidth(String borderLeftWidth) {
-		this.setProperty(BORDER_LEFT_WIDTH, borderLeftWidth, "");
-
-	}
-
-	@Override
-	public void setBorderRight(String borderRight) {
-		this.setProperty(BORDER_RIGHT, borderRight, "");
-	}
-
-	@Override
-	public void setBorderRightColor(String borderRightColor) {
-		this.setProperty(BORDER_RIGHT_COLOR, borderRightColor, "");
-
-	}
-
-	@Override
-	public void setBorderRightStyle(String borderRightStyle) {
-		this.setProperty(BORDER_RIGHT_STYLE, borderRightStyle, "");
-
-	}
-
-	@Override
-	public void setBorderRightWidth(String borderRightWidth) {
-		this.setProperty(BORDER_RIGHT_WIDTH, borderRightWidth, "");
-
-	}
-
-	@Override
-	public void setBorderSpacing(String borderSpacing) {
-		this.setProperty(BORDER_SPACING, borderSpacing, "");
-
-	}
-
-	@Override
-	public void setBorderStyle(String borderStyle) {
-		this.setProperty(BORDER_STYLE, borderStyle, "");
-	}
-
-	@Override
-	public void setBorderTop(String borderTop) {
-		this.setProperty(BORDER_TOP, borderTop, "");
-	}
-
-	@Override
-	public void setBorderTopColor(String borderTopColor) {
-		this.setProperty(BORDER_TOP_COLOR, borderTopColor, "");
-
-	}
-
-	@Override
-	public void setBorderTopStyle(String borderTopStyle) {
-		this.setProperty(BORDER_TOP_STYLE, borderTopStyle, "");
-
-	}
-
-	@Override
-	public void setBorderTopWidth(String borderTopWidth) {
-		this.setProperty(BORDER_TOP_WIDTH, borderTopWidth, "");
-
-	}
-
-	@Override
-	public void setBorderWidth(String borderWidth) {
-
-		this.setProperty(BORDER, borderWidth, "");
-
-	}
-
-	@Override
-	public void setBottom(String bottom) {
-		this.setProperty(BOTTOM, bottom, "");
-
-	}
-
-	@Override
-	public void setCaptionSide(String captionSide) {
-		this.setProperty(CAPTION_SIDE, captionSide, "");
-	}
-
-	@Override
-	public void setClear(String clear) {
-		this.setProperty(CLEAR, clear, "");
-
-	}
-
-	@Override
-	public void setClip(String clip) {
-		this.setProperty(CLIP, clip, "");
-	}
-
-	@Override
-	public void setColor(String color) {
-		this.setProperty(COLOR, color, "");
-
-	}
-
-	@Override
-	public void setContent(String content) {
-		this.setProperty(CONTENT, content, "");
-
-	}
-
-	@Override
-	public void setCounterIncrement(String counterIncrement) {
-		this.setProperty(COUNTER_INCREMENT, counterIncrement, "");
-
-	}
-
-	@Override
-	public void setCounterReset(String counterReset) {
-		this.setProperty(COUNTER_RESET, counterReset, "");
-
-	}
-
-	@Override
-	public void setCssFloat(String cssFloat) {
-		this.setProperty(CSS_FLOAT, cssFloat, "");
-
-	}
-
-	@Override
-	public void setCue(String cue) {
-		this.setProperty(CUE, cue, "");
-	}
-
-	@Override
-	public void setCueAfter(String cueAfter) {
-		this.setProperty(CUE_AFTER, cueAfter, "");
-	}
-
-	@Override
-	public void setCueBefore(String cueBefore) {
-		this.setProperty(CUE_BEFORE, cueBefore, "");
-	}
-
-	@Override
-	public void setCursor(String cursor) {
-		this.setProperty(CURSOR, cursor, "");
-
-	}
-
-	@Override
-	public void setDirection(String direction) {
-		this.setProperty(DIRECTION, direction, "");
-
-	}
-
-	@Override
-	public void setDisplay(String display) {
-		this.setProperty(DISPLAY, display, "");
-
-	}
-
-	@Override
-	public void setElevation(String elevation) {
-		this.setProperty(ELEVATION, elevation, "");
-
-	}
-
-	@Override
-	public void setEmptyCells(String emptyCells) {
-		this.setProperty(EMPTY_CELLS, emptyCells, "");
-	}
-
-	@Override
-	public void setFont(String font) {
-		this.setProperty(FONT, font, "");
-	}
-
-	@Override
-	public void setFontFamily(String fontFamily) {
-		this.setProperty(FONT_FAMILY, fontFamily, "");
-
-	}
-
-	@Override
-	public void setFontSize(String fontSize) {
-		this.setProperty(FONT_SIZE, fontSize, "");
-
-	}
-
-	@Override
-	public void setFontSizeAdjust(String fontSizeAdjust) {
-		this.setProperty(FONT_SIZE_ADJUST, fontSizeAdjust, "");
-
-	}
-
-	@Override
-	public void setFontStretch(String fontStretch) {
-		this.setProperty(FONT_STRETCH, fontStretch, "");
-
-	}
-
-	@Override
-	public void setFontStyle(String fontStyle) {
-		this.setProperty(FONT_STYLE, fontStyle, "");
-
-	}
-
-	@Override
-	public void setFontVariant(String fontVariant) {
-		this.setProperty(FONT_VARIANT, fontVariant, "");
-
-	}
-
-	@Override
-	public void setFontWeight(String fontWeight) {
-		this.setProperty(FONT_WEIGHT, fontWeight, "");
-
-	}
-
-	@Override
-	public void setHeight(String height) {
-		this.setProperty(HEIGHT, height, "");
-
-	}
-
-	@Override
-	public void setLeft(String left) {
-		this.setProperty(LEFT, left, "");
-
-	}
-
-	@Override
-	public void setLetterSpacing(String letterSpacing) {
-		this.setProperty(LETTER_SPACING, letterSpacing, "");
-
-	}
-
-	@Override
-	public void setLineHeight(String lineHeight) {
-		this.setProperty(LINE_HEIGHT, lineHeight, "");
-
-	}
-
-	@Override
-	public void setListStyle(String listStyle) {
-		this.setProperty(LIST_STYLE, listStyle, "");
-
-	}
-
-	@Override
-	public void setListStyleImage(String listStyleImage) {
-		this.setProperty(LIST_STYLE_IMAGE, listStyleImage, "");
-
-	}
-
-	@Override
-	public void setListStylePosition(String listStylePosition) {
-		this.setProperty(LIST_STYLE_POSITION, listStylePosition, "");
-
-	}
-
-	@Override
-	public void setListStyleType(String listStyleType) {
-		this.setProperty(LIST_STYLE_TYPE, listStyleType, "");
-
-	}
-
-	@Override
-	public void setMargin(String margin) {
-
-		this.setProperty(MARGIN, margin, "");
-
-	}
-
-	@Override
-	public void setMarginBottom(String marginBottom) {
-		this.setProperty(MARGIN_BOTTOM, marginBottom, "");
-
-	}
-
-	@Override
-	public void setMarginLeft(String marginLeft) {
-		this.setProperty(MARGIN_LEFT, marginLeft, "");
-
-	}
-
-	@Override
-	public void setMarginRight(String marginRight) {
-		this.setProperty(MARGIN_RIGHT, marginRight, "");
-
-	}
-
-	@Override
-	public void setMarginTop(String marginTop) {
-		this.setProperty(MARGIN_TOP, marginTop, "");
-
-	}
-
-	@Override
-	public void setMarkerOffset(String markerOffset) {
-		this.setProperty(MARKER_OFFSET, markerOffset, "");
-	}
-
-	@Override
-	public void setMarks(String marks) {
-		this.setProperty(MARKS, marks, "");
-	}
-
-	@Override
-	public void setMaxHeight(String maxHeight) {
-		this.setProperty(MAX_HEIGHT, maxHeight, "");
-
-	}
-
-	@Override
-	public void setMaxWidth(String maxWidth) {
-		this.setProperty(MAX_WIDTH, maxWidth, "");
-
-	}
-
-	@Override
-	public void setMinHeight(String minHeight) {
-		this.setProperty(MIN_HEIGHT, minHeight, "");
-
-	}
-
-	@Override
-	public void setMinWidth(String minWidth) {
-		this.setProperty(MIN_WIDTH, minWidth, "");
-
-	}
-
-	@Override
-	public void setOrphans(String orphans) {
-		this.setProperty(ORPHANS, orphans, "");
-	}
-
-	@Override
-	public void setOutline(String outline) {
-		this.setProperty(OUTLINE, outline, "");
-
-	}
-
-	@Override
-	public void setOutlineColor(String outlineColor) {
-		this.setProperty(OUTLINE_COLOR, outlineColor, "");
-
-	}
-
-	@Override
-	public void setOutlineStyle(String outlineStyle) {
-		this.setProperty(OUTLINE_STYLE, outlineStyle, "");
-	}
-
-	@Override
-	public void setOutlineWidth(String outlineWidth) {
-		this.setProperty(OUTLINE_WIDTH, outlineWidth, "");
-
-	}
-
-	@Override
-	public void setOverflow(String overflow) {
-		this.setProperty(OVERFLOW, overflow, "");
-
-	}
-
-	@Override
-	public void setPadding(String padding) {
-		this.setProperty(PADDING, padding, "");
-
-	}
-
-	@Override
-	public void setPaddingBottom(String paddingBottom) {
-		this.setProperty(PADDING_BOTTOM, paddingBottom, "");
-
-	}
-
-	@Override
-	public void setPaddingLeft(String paddingLeft) {
-		this.setProperty(PADDING_LEFT, paddingLeft, "");
-
-	}
-
-	@Override
-	public void setPaddingRight(String paddingRight) {
-		this.setProperty(PADDING_RIGHT, paddingRight, "");
-
-	}
-
-	@Override
-	public void setPaddingTop(String paddingTop) {
-		this.setProperty(PADDING_TOP, paddingTop, "");
-
-	}
-
-	@Override
-	public void setPage(String page) {
-		this.setProperty(PAGE, page, "");
-	}
-
-	@Override
-	public void setPageBreakAfter(String pageBreakAfter) {
-		this.setProperty(PAGE_BREAK_AFTER, pageBreakAfter, "");
-
-	}
-
-	@Override
-	public void setPageBreakBefore(String pageBreakBefore) {
-		this.setProperty(PAGE_BREAK_BEFORE, pageBreakBefore, "");
-
-	}
-
-	@Override
-	public void setPageBreakInside(String pageBreakInside) {
-		this.setProperty(PAGE_BREAK_INSIDE, pageBreakInside, "");
-
-	}
-
-	@Override
-	public void setPause(String pause) {
-		this.setProperty(PAUSE, pause, "");
-	}
-
-	@Override
-	public void setPauseAfter(String pauseAfter) {
-		this.setProperty(PAUSE_AFTER, pauseAfter, "");
-	}
-
-	@Override
-	public void setPauseBefore(String pauseBefore) {
-		this.setProperty(PAUSE_BEFORE, pauseBefore, "");
-	}
-
-	@Override
-	public void setPitch(String pitch) {
-		this.setProperty(PITCH, pitch, "");
-	}
-
-	@Override
-	public void setPitchRange(String pitchRange) {
-		this.setProperty(PITCH_RANGE, pitchRange, "");
-	}
-
-	@Override
-	public void setPlayDuring(String playDuring) {
-		this.setProperty(PLAY_DURING, playDuring, "");
-	}
-
-	@Override
-	public void setPosition(String position) {
-		this.setProperty(POSITION, position, "");
-
-	}
-
-	@Override
-	public void setQuotes(String quotes) {
-		this.setProperty(QUOTES, quotes, "");
-	}
-
-	@Override
-	public void setRichness(String richness) {
-		this.setProperty(RICHNESS, richness, "");
-	}
-
-	@Override
-	public void setRight(String right) {
-		this.setProperty(RIGHT, right, "");
-
-	}
-
-	@Override
-	public void setSize(String size) {
-		this.setProperty(SIZE, size, "");
-
-	}
-
-	@Override
-	public void setSpeak(String speak) {
-		this.setProperty(SPEAK, speak, "");
-	}
-
-	@Override
-	public void setSpeakHeader(String speakHeader) {
-		this.setProperty(SPEAK_HEADER, speakHeader, "");
-	}
-
-	@Override
-	public void setSpeakNumeral(String speakNumeral) {
-		this.setProperty(SPEAK_NUMERAL, speakNumeral, "");
-	}
-
-	@Override
-	public void setSpeakPunctuation(String speakPunctuation) {
-		this.setProperty(SPEAK_PUNCTUATION, speakPunctuation, "");
-	}
-
-	@Override
-	public void setSpeechRate(String speechRate) {
-		this.setProperty(SPEECH_RATE, speechRate, "");
-	}
-
-	@Override
-	public void setStress(String stress) {
-		this.setProperty(STRESS, stress, "");
-	}
-
-	@Override
-	public void setTableLayout(String tableLayout) {
-		this.setProperty(TABLE_LAYOUT, tableLayout, "");
-
-	}
-
-	@Override
-	public void setTextAlign(String textAlign) {
-		this.setProperty(TEXT_ALIGN, textAlign, "");
-
-	}
-
-	@Override
-	public void setTextDecoration(String textDecoration) {
-		this.setProperty(TEXT_DECORATION, textDecoration, "");
-
-	}
-
-	@Override
-	public void setTextIndent(String textIndent) {
-		this.setProperty(TEXT_INDENT, textIndent, "");
-
-	}
-
-	@Override
-	public void setTextShadow(String textShadow) {
-		this.setProperty(TEXT_SHADOW, textShadow, "");
-
-	}
-
-	@Override
-	public void setTextTransform(String textTransform) {
-		this.setProperty(TEXT_TRANSFORM, textTransform, "");
-
-	}
-
-	@Override
-	public void setTop(String top) {
-		this.setProperty(TOP, top, "");
-
-	}
-
-	@Override
-	public void setUnicodeBidi(String unicodeBidi) {
-		this.setProperty(UNICODE_BIDI, unicodeBidi, "");
-
-	}
-
-	@Override
-	public void setVerticalAlign(String verticalAlign) {
-		this.setProperty(VERTICAL_ALIGN, verticalAlign, "");
-
-	}
-
-	@Override
-	public void setVisibility(String visibility) {
-		this.setProperty(VISIBILITY, visibility, "");
-
-	}
-
-	@Override
-	public void setVoiceFamily(String voiceFamily) {
-		this.setProperty(VOICE_FAMILY, voiceFamily, "");
-	}
-
-	@Override
-	public void setVolume(String volume) {
-		this.setProperty(VOLUME, volume, "");
-	}
-
-	@Override
-	public void setWhiteSpace(String whiteSpace) {
-		this.setProperty(WHITE_SPACE, whiteSpace, "");
-
-	}
-
-	@Override
-	public void setWidows(String widows) {
-		this.setProperty(WIDOWS, widows, "");
-	}
-
-	@Override
-	public void setWidth(String width) {
-		this.setProperty(WIDTH, width, "");
-
-	}
-
-	@Override
-	public void setWordSpacing(String wordSpacing) {
-		this.setProperty(WORD_SPACING, wordSpacing, "");
-
-	}
-
-	@Override
-	public void setZIndex(String zIndex) {
-		this.setProperty(Z_INDEX, zIndex, "");
-
-	}
-
-	@Override
-	public void setBackgroundImage(String backgroundImage) throws DOMException {
-		this.setProperty(BACKGROUND_IMAGE, backgroundImage, "");
-
-	}
-
-	@Override
-	public void setBorder(String border) throws DOMException {
-		this.setProperty(BORDER, border, "");
-	}
+	// ---- end CSS2Properties interface ----
 }

@@ -37,12 +37,12 @@ public class ParseException extends Exception {
 	}
 
 	/**
-	 * The following constructors are for use by you for whatever purpose you
-	 * can think of. Constructing the exception in this manner makes the
-	 * exception behave in the normal way - i.e., as documented in the class
-	 * "Throwable". The fields "errorToken", "expectedTokenSequences", and
-	 * "tokenImage" do not contain relevant information. The JavaCC generated
-	 * code does not use these constructors.
+	 * The following constructors are for use by you for whatever purpose you can
+	 * think of. Constructing the exception in this manner makes the exception
+	 * behave in the normal way - i.e., as documented in the class "Throwable". The
+	 * fields "errorToken", "expectedTokenSequences", and "tokenImage" do not
+	 * contain relevant information. The JavaCC generated code does not use these
+	 * constructors.
 	 */
 
 	public ParseException() {
@@ -55,44 +55,44 @@ public class ParseException extends Exception {
 	}
 
 	/**
-	 * This is the last token that has been consumed successfully. If this
-	 * object has been created due to a parse error, the token followng this
-	 * token will (therefore) be the first error token.
+	 * This is the last token that has been consumed successfully. If this object
+	 * has been created due to a parse error, the token followng this token will
+	 * (therefore) be the first error token.
 	 */
 	public Token currentToken;
 
 	/**
 	 * Each entry in this array is an array of integers. Each array of integers
-	 * represents a sequence of tokens (by their ordinal values) that is
-	 * expected at this point of the parse.
+	 * represents a sequence of tokens (by their ordinal values) that is expected at
+	 * this point of the parse.
 	 */
 	public int[][] expectedTokenSequences;
 
 	/**
-	 * This is a reference to the "tokenImage" array of the generated parser
-	 * within which the parse error occurred. This array is defined in the
-	 * generated ...Constants interface.
+	 * This is a reference to the "tokenImage" array of the generated parser within
+	 * which the parse error occurred. This array is defined in the generated
+	 * ...Constants interface.
 	 */
 	public String[] tokenImage;
 
 	/**
-	 * It uses "currentToken" and "expectedTokenSequences" to generate a parse
-	 * error message and returns it. If this object has been created due to a
-	 * parse error, and you do not catch it (it gets thrown from the parser) the
-	 * correct error message gets displayed.
+	 * It uses "currentToken" and "expectedTokenSequences" to generate a parse error
+	 * message and returns it. If this object has been created due to a parse error,
+	 * and you do not catch it (it gets thrown from the parser) the correct error
+	 * message gets displayed.
 	 */
 	private static String initialise(Token currentToken, int[][] expectedTokenSequences, String[] tokenImage) {
 
 		StringBuffer expected = new StringBuffer();
 		int maxSize = 0;
-		for (int[] expectedTokenSequence : expectedTokenSequences) {
-			if (maxSize < expectedTokenSequence.length) {
-				maxSize = expectedTokenSequence.length;
+		for (int i = 0; i < expectedTokenSequences.length; i++) {
+			if (maxSize < expectedTokenSequences[i].length) {
+				maxSize = expectedTokenSequences[i].length;
 			}
-			for (int element : expectedTokenSequence) {
-				expected.append(tokenImage[element]).append(' ');
+			for (int j = 0; j < expectedTokenSequences[i].length; j++) {
+				expected.append(tokenImage[expectedTokenSequences[i][j]]).append(' ');
 			}
-			if (expectedTokenSequence[expectedTokenSequence.length - 1] != 0) {
+			if (expectedTokenSequences[i][expectedTokenSequences[i].length - 1] != 0) {
 				expected.append("...");
 			}
 			expected.append(EOL).append("    ");
@@ -100,9 +100,8 @@ public class ParseException extends Exception {
 		String retval = "Encountered \"";
 		Token tok = currentToken.next;
 		for (int i = 0; i < maxSize; i++) {
-			if (i != 0) {
+			if (i != 0)
 				retval += " ";
-			}
 			if (tok.kind == 0) {
 				retval += tokenImage[0];
 				break;

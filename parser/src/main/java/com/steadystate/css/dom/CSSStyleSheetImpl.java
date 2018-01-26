@@ -90,8 +90,8 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, CSSFormatable, Serializ
 	}
 
 	/**
-	 * We will need to respond more fully if a stylesheet is disabled, probably
-	 * by generating an event for the main application.
+	 * We will need to respond more fully if a stylesheet is disabled, probably by
+	 * generating an event for the main application.
 	 */
 	@Override
 	public void setDisabled(final boolean disabled) {
@@ -151,8 +151,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, CSSFormatable, Serializ
 			final CSSRule r = parser.parseRule(is);
 
 			if (r == null) {
-				// this should neven happen because of the
-				// ThrowCssExceptionErrorHandler
+				// this should neven happen because of the ThrowCssExceptionErrorHandler
 				throw new DOMExceptionImpl(DOMException.SYNTAX_ERR, DOMExceptionImpl.SYNTAX_ERROR,
 						"Parsing rule '" + rule + "' failed.");
 			}
@@ -175,7 +174,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, CSSFormatable, Serializ
 					if (index <= getCssRules().getLength()) {
 						for (int i = 0; i < index; i++) {
 							final int rt = getCssRules().item(i).getType();
-							if (rt != CSSRule.CHARSET_RULE && rt != CSSRule.IMPORT_RULE) {
+							if ((rt != CSSRule.CHARSET_RULE) && (rt != CSSRule.IMPORT_RULE)) {
 								msg = DOMExceptionImpl.IMPORT_NOT_FIRST;
 								break;
 							}
@@ -185,7 +184,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, CSSFormatable, Serializ
 					if (index <= getCssRules().getLength()) {
 						for (int i = index; i < getCssRules().getLength(); i++) {
 							final int rt = getCssRules().item(i).getType();
-							if (rt == CSSRule.CHARSET_RULE || rt == CSSRule.IMPORT_RULE) {
+							if ((rt == CSSRule.CHARSET_RULE) || (rt == CSSRule.IMPORT_RULE)) {
 								msg = DOMExceptionImpl.INSERT_BEFORE_IMPORT;
 								break;
 							}
@@ -305,7 +304,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, CSSFormatable, Serializ
 		}
 		final CSSStyleSheet css = (CSSStyleSheet) obj;
 		boolean eq = LangUtils.equals(getCssRules(), css.getCssRules());
-		eq = eq && getDisabled() == css.getDisabled();
+		eq = eq && (getDisabled() == css.getDisabled());
 		eq = eq && LangUtils.equals(getHref(), css.getHref());
 		eq = eq && LangUtils.equals(getMedia(), css.getMedia());
 		// TODO implement some reasonful equals method for ownerNode

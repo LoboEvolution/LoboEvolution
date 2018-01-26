@@ -57,7 +57,7 @@ public final class CssCharStream implements CharStream {
 				System.arraycopy(bufcolumn, 0, newbufcolumn, bufsize - tokenBegin, bufpos);
 				bufcolumn = newbufcolumn;
 
-				maxNextCharInd = bufpos += bufsize - tokenBegin;
+				maxNextCharInd = (bufpos += (bufsize - tokenBegin));
 			} else {
 				System.arraycopy(buffer, tokenBegin, newbuffer, 0, bufsize - tokenBegin);
 				buffer = newbuffer;
@@ -68,7 +68,7 @@ public final class CssCharStream implements CharStream {
 				System.arraycopy(bufcolumn, tokenBegin, newbufcolumn, 0, bufsize - tokenBegin);
 				bufcolumn = newbufcolumn;
 
-				maxNextCharInd = bufpos -= tokenBegin;
+				maxNextCharInd = (bufpos -= tokenBegin);
 			}
 		} catch (Throwable t) {
 			throw new Error(t.getMessage());
@@ -85,18 +85,16 @@ public final class CssCharStream implements CharStream {
 				if (tokenBegin > BUFFER_SIZE) {
 					bufpos = maxNextCharInd = 0;
 					available = tokenBegin;
-				} else if (tokenBegin < 0) {
+				} else if (tokenBegin < 0)
 					bufpos = maxNextCharInd = 0;
-				} else {
+				else
 					ExpandBuff(false);
-				}
-			} else if (available > tokenBegin) {
+			} else if (available > tokenBegin)
 				available = bufsize;
-			} else if (tokenBegin - available < BUFFER_SIZE) {
+			else if ((tokenBegin - available) < BUFFER_SIZE)
 				ExpandBuff(true);
-			} else {
+			else
 				available = tokenBegin;
-			}
 		}
 
 		int i;
@@ -111,9 +109,8 @@ public final class CssCharStream implements CharStream {
 		} catch (java.io.IOException e) {
 			--bufpos;
 			backup(0);
-			if (tokenBegin == -1) {
+			if (tokenBegin == -1)
 				tokenBegin = bufpos;
-			}
 			throw e;
 		}
 	}
@@ -133,14 +130,13 @@ public final class CssCharStream implements CharStream {
 
 		if (prevCharIsLF) {
 			prevCharIsLF = false;
-			line += column = 1;
+			line += (column = 1);
 		} else if (prevCharIsCR) {
 			prevCharIsCR = false;
 			if (c == '\n') {
 				prevCharIsLF = true;
-			} else {
-				line += column = 1;
-			}
+			} else
+				line += (column = 1);
 		}
 
 		switch (c) {
@@ -168,16 +164,14 @@ public final class CssCharStream implements CharStream {
 		if (inBuf > 0) {
 			--inBuf;
 
-			if (++bufpos == bufsize) {
+			if (++bufpos == bufsize)
 				bufpos = 0;
-			}
 
 			return buffer[bufpos];
 		}
 
-		if (++bufpos >= maxNextCharInd) {
+		if (++bufpos >= maxNextCharInd)
 			FillBuff();
-		}
 
 		char c = buffer[bufpos];
 
@@ -233,9 +227,8 @@ public final class CssCharStream implements CharStream {
 	@Override
 	public final void backup(int amount) {
 		inBuf += amount;
-		if ((bufpos -= amount) < 0) {
+		if ((bufpos -= amount) < 0)
 			bufpos += bufsize;
-		}
 	}
 
 	/** Constructor. */
@@ -258,9 +251,8 @@ public final class CssCharStream implements CharStream {
 	/** Get token literal value. */
 	@Override
 	public final String GetImage() {
-		if (bufpos >= tokenBegin) {
+		if (bufpos >= tokenBegin)
 			return new String(buffer, tokenBegin, bufpos - tokenBegin + 1);
-		}
 		return new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
 	}
 
@@ -269,9 +261,9 @@ public final class CssCharStream implements CharStream {
 	public final char[] GetSuffix(int len) {
 		char[] ret = new char[len];
 
-		if (bufpos + 1 >= len) {
+		if ((bufpos + 1) >= len)
 			System.arraycopy(buffer, bufpos - len + 1, ret, 0, len);
-		} else {
+		else {
 			System.arraycopy(buffer, bufsize - (len - bufpos - 1), ret, 0, len - bufpos - 1);
 			System.arraycopy(buffer, 0, ret, len - bufpos - 1, bufpos + 1);
 		}
@@ -316,11 +308,10 @@ public final class CssCharStream implements CharStream {
 			bufcolumn[j] = newCol + columnDiff;
 
 			while (i++ < len) {
-				if (bufline[j = start % bufsize] != bufline[++start % bufsize]) {
+				if (bufline[j = start % bufsize] != bufline[++start % bufsize])
 					bufline[j] = newLine++;
-				} else {
+				else
 					bufline[j] = newLine;
-				}
 			}
 		}
 

@@ -132,7 +132,7 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
 	}
 
 	public MediaQuery mediaQuery(final int index) {
-		if (index < 0 || index >= mediaQueries_.size()) {
+		if (index < 0 || (index >= mediaQueries_.size())) {
 			return null;
 		}
 		return mediaQueries_.get(index);
@@ -182,7 +182,7 @@ public class MediaListImpl extends CSSOMObjectImpl implements MediaList {
 	}
 
 	private boolean equalsMedia(final MediaList ml) {
-		if (ml == null || getLength() != ml.getLength()) {
+		if ((ml == null) || (getLength() != ml.getLength())) {
 			return false;
 		}
 		for (int i = 0; i < getLength(); i++) {

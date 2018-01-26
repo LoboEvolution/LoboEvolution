@@ -54,7 +54,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	final public void styleSheetRuleList() throws ParseException {
 		boolean ruleFound = false;
 		label_1: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S:
 			case CDO:
 			case CDC: {
@@ -65,7 +65,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				jj_la1[0] = jj_gen;
 				break label_1;
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				jj_consume_token(S);
 				break;
@@ -84,11 +84,11 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				throw new ParseException();
 			}
 		}
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case CHARSET_SYM: {
 			charsetRule();
 			label_2: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S:
 				case CDO:
 				case CDC: {
@@ -99,7 +99,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					jj_la1[2] = jj_gen;
 					break label_2;
 				}
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					jj_consume_token(S);
 					break;
@@ -125,7 +125,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			;
 		}
 		label_3: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case DOT:
 			case COLON:
 			case ASTERISK:
@@ -144,7 +144,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				jj_la1[5] = jj_gen;
 				break label_3;
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IMPORT_SYM: {
 				importRule(ruleFound);
 				break;
@@ -159,7 +159,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			case FONT_FACE_SYM:
 			case ATKEYWORD:
 			case IDENT: {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case DOT:
 				case COLON:
 				case ASTERISK:
@@ -199,7 +199,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				throw new ParseException();
 			}
 			label_4: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S:
 				case CDO:
 				case CDC: {
@@ -210,7 +210,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					jj_la1[8] = jj_gen;
 					break label_4;
 				}
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					jj_consume_token(S);
 					break;
@@ -238,7 +238,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	@Override
 	final public void styleSheetRuleSingle() throws ParseException {
 		label_5: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -249,7 +249,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			jj_consume_token(S);
 		}
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case CHARSET_SYM: {
 			charsetRule();
 			break;
@@ -297,7 +297,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(CHARSET_SYM);
 			locator = createLocator(token);
 			label_6: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -310,7 +310,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			t = jj_consume_token(STRING);
 			label_7: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -355,7 +355,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(IMPORT_SYM);
 			locator = createLocator(token);
 			label_8: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -366,7 +366,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case STRING: {
 				t = jj_consume_token(STRING);
 				break;
@@ -381,7 +381,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				throw new ParseException();
 			}
 			label_9: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -392,7 +392,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IDENT: {
 				mediaList(ml);
 				break;
@@ -429,7 +429,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(MEDIA_SYM);
 			locator = createLocator(token);
 			label_10: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -445,7 +445,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			handleStartMedia(ml, locator);
 			jj_consume_token(LBRACE);
 			label_11: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -456,7 +456,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case DOT:
 			case COLON:
 			case ASTERISK:
@@ -495,7 +495,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			s = medium();
 			ml.setLocator(createLocator(token));
 			label_12: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case COMMA: {
 					;
 					break;
@@ -506,7 +506,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(COMMA);
 				label_13: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -528,7 +528,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 
 	final public void mediaRuleList() throws ParseException {
 		label_14: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case DOT:
 			case COLON:
 			case ASTERISK:
@@ -552,7 +552,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				throw new ParseException();
 			}
 			label_15: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -563,7 +563,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case DOT:
 			case COLON:
 			case ASTERISK:
@@ -591,7 +591,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		Token t;
 		t = jj_consume_token(IDENT);
 		label_16: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -621,7 +621,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(PAGE_SYM);
 			locator = createLocator(token);
 			label_17: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -632,14 +632,14 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case COLON:
 			case IDENT: {
 				if (jj_2_1(2)) {
 					t = jj_consume_token(IDENT);
 					s = pseudoPage();
 					label_18: while (true) {
-						switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+						switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 						case S: {
 							;
 							break;
@@ -651,11 +651,11 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 						jj_consume_token(S);
 					}
 				} else {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case IDENT: {
 						t = jj_consume_token(IDENT);
 						label_19: while (true) {
-							switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+							switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 							case S: {
 								;
 								break;
@@ -671,7 +671,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					case COLON: {
 						s = pseudoPage();
 						label_20: while (true) {
-							switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+							switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 							case S: {
 								;
 								break;
@@ -698,7 +698,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			jj_consume_token(LBRACE);
 			label_21: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -710,8 +710,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				jj_consume_token(S);
 			}
 			start = true;
-			handleStartPage(t != null ? unescape(t.image, false) : null, s, locator);
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			handleStartPage((t != null) ? unescape(t.image, false) : null, s, locator);
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IDENT: {
 				declaration();
 				break;
@@ -721,7 +721,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				;
 			}
 			label_22: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case SEMICOLON: {
 					;
 					break;
@@ -732,7 +732,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(SEMICOLON);
 				label_23: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -743,7 +743,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					}
 					jj_consume_token(S);
 				}
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case IDENT: {
 					declaration();
 					break;
@@ -758,7 +758,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			throw toCSSParseException("invalidPageRule", e);
 		} finally {
 			if (start) {
-				handleEndPage(t != null ? unescape(t.image, false) : null, s);
+				handleEndPage((t != null) ? unescape(t.image, false) : null, s);
 			}
 		}
 	}
@@ -788,7 +788,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(FONT_FACE_SYM);
 			locator = createLocator(token);
 			label_24: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -801,7 +801,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			jj_consume_token(LBRACE);
 			label_25: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -814,7 +814,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			start = true;
 			handleStartFontFace(locator);
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IDENT: {
 				declaration();
 				break;
@@ -824,7 +824,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				;
 			}
 			label_26: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case SEMICOLON: {
 					;
 					break;
@@ -835,7 +835,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(SEMICOLON);
 				label_27: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -846,7 +846,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					}
 					jj_consume_token(S);
 				}
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case IDENT: {
 					declaration();
 					break;
@@ -872,11 +872,11 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	// ;
 	//
 	final public LexicalUnit operator(LexicalUnit prev) throws ParseException {
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case SLASH: {
 			jj_consume_token(SLASH);
 			label_28: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -892,7 +892,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		case COMMA: {
 			jj_consume_token(COMMA);
 			label_29: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -919,12 +919,12 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	//
 	final public char combinator() throws ParseException {
 		char c = ' ';
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case PLUS: {
 			jj_consume_token(PLUS);
 			c = '+';
 			label_30: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -941,7 +941,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(GT);
 			c = '>';
 			label_31: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -956,10 +956,10 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		}
 		case S: {
 			jj_consume_token(S);
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case PLUS:
 			case GT: {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case PLUS: {
 					jj_consume_token(PLUS);
 					c = '+';
@@ -976,7 +976,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					throw new ParseException();
 				}
 				label_32: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1009,7 +1009,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	// ;
 	//
 	final public char unaryOperator() throws ParseException {
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case MINUS: {
 			jj_consume_token(MINUS);
 			return '-';
@@ -1034,7 +1034,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		Token t;
 		t = jj_consume_token(IDENT);
 		label_33: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -1063,7 +1063,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			selList = selectorList();
 			jj_consume_token(LBRACE);
 			label_34: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1098,7 +1098,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	final public SelectorList parseSelectorsInternal() throws ParseException {
 		SelectorList selectors;
 		label_35: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -1123,7 +1123,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			selList.setLocator(((Locatable) sel).getLocator());
 		}
 		label_36: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case COMMA: {
 				;
 				break;
@@ -1134,7 +1134,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			jj_consume_token(COMMA);
 			label_37: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1172,7 +1172,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				sel = simpleSelector(sel, comb);
 			}
 			label_39: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1201,12 +1201,12 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		SimpleSelector pseudoElementSel = null;
 		Object o = null;
 		try {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case ASTERISK:
 			case IDENT: {
 				simpleSel = elementName();
 				label_40: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case DOT:
 					case COLON:
 					case LSQUARE:
@@ -1218,7 +1218,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 						jj_la1[60] = jj_gen;
 						break label_40;
 					}
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case HASH: {
 						c = hash(c, null != pseudoElementSel);
 						break;
@@ -1255,7 +1255,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				simpleSel = ((com.steadystate.css.parser.selectors.SelectorFactoryImpl) getSelectorFactory())
 						.createSyntheticElementSelector();
 				label_41: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case HASH: {
 						c = hash(c, null != pseudoElementSel);
 						break;
@@ -1282,7 +1282,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 						jj_consume_token(-1);
 						throw new ParseException();
 					}
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case DOT:
 					case COLON:
 					case LSQUARE:
@@ -1354,7 +1354,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			if (c instanceof Locatable) {
 				((Locatable) c).setLocator(locator);
 			}
-			return pred == null ? c : getConditionFactory().createAndCondition(pred, c);
+			return (pred == null) ? c : getConditionFactory().createAndCondition(pred, c);
 		} catch (ParseException e) {
 			throw toCSSParseException("invalidClassSelector", e);
 		}
@@ -1369,7 +1369,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		Token t;
 		SimpleSelector sel;
 		try {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IDENT: {
 				t = jj_consume_token(IDENT);
 				sel = getSelectorFactory().createElementSelector(null, unescape(t.image, false));
@@ -1412,7 +1412,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_consume_token(LSQUARE);
 			locator = createLocator(token);
 			label_42: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1429,7 +1429,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			t = jj_consume_token(IDENT);
 			name = unescape(t.image, false);
 			label_43: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1440,11 +1440,11 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case EQUALS:
 			case INCLUDES:
 			case DASHMATCH: {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case EQUALS: {
 					jj_consume_token(EQUALS);
 					type = 1;
@@ -1466,7 +1466,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					throw new ParseException();
 				}
 				label_44: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1477,7 +1477,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					}
 					jj_consume_token(S);
 				}
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case IDENT: {
 					t = jj_consume_token(IDENT);
 					value = t.image;
@@ -1494,7 +1494,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					throw new ParseException();
 				}
 				label_45: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1530,7 +1530,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			if (c instanceof Locatable) {
 				((Locatable) c).setLocator(locator);
 			}
-			return pred == null ? c : getConditionFactory().createAndCondition(pred, c);
+			return (pred == null) ? c : getConditionFactory().createAndCondition(pred, c);
 		} catch (ParseException e) {
 			throw toCSSParseException("invalidAttrib", e);
 		}
@@ -1554,7 +1554,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		try {
 			jj_consume_token(COLON);
 			locator = createLocator(token);
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IDENT: {
 				t = jj_consume_token(IDENT);
 				String s = unescape(t.image, false);
@@ -1573,9 +1573,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					((Locatable) c).setLocator(locator);
 				}
 				{
-					if ("" != null) {
-						return pred == null ? c : getConditionFactory().createAndCondition(pred, c);
-					}
+					if ("" != null)
+						return (pred == null) ? c : getConditionFactory().createAndCondition(pred, c);
 				}
 				break;
 			}
@@ -1583,7 +1582,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				t = jj_consume_token(FUNCTION_LANG);
 				function = unescape(t.image, false);
 				label_46: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1597,7 +1596,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				t = jj_consume_token(IDENT);
 				String lang = unescape(t.image, false);
 				label_47: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1617,9 +1616,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					((Locatable) c).setLocator(locator);
 				}
 				{
-					if ("" != null) {
-						return pred == null ? c : getConditionFactory().createAndCondition(pred, c);
-					}
+					if ("" != null)
+						return (pred == null) ? c : getConditionFactory().createAndCondition(pred, c);
 				}
 				break;
 			}
@@ -1627,7 +1625,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				t = jj_consume_token(FUNCTION);
 				function = unescape(t.image, false);
 				label_48: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1641,7 +1639,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				t = jj_consume_token(IDENT);
 				arg = unescape(t.image, false);
 				label_49: while (true) {
-					switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+					switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 					case S: {
 						;
 						break;
@@ -1661,9 +1659,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					((Locatable) c).setLocator(locator);
 				}
 				{
-					if ("" != null) {
-						return pred == null ? c : getConditionFactory().createAndCondition(pred, c);
-					}
+					if ("" != null)
+						return (pred == null) ? c : getConditionFactory().createAndCondition(pred, c);
 				}
 				break;
 			}
@@ -1693,7 +1690,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			if (c instanceof Locatable) {
 				((Locatable) c).setLocator(createLocator(token));
 			}
-			return pred == null ? c : getConditionFactory().createAndCondition(pred, c);
+			return (pred == null) ? c : getConditionFactory().createAndCondition(pred, c);
 		} catch (ParseException e) {
 			throw toCSSParseException("invalidHash", e);
 		}
@@ -1701,7 +1698,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 
 	@Override
 	final public void styleDeclaration() throws ParseException {
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case IDENT: {
 			declaration();
 			break;
@@ -1711,7 +1708,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			;
 		}
 		label_50: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case SEMICOLON: {
 				;
 				break;
@@ -1722,7 +1719,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			}
 			jj_consume_token(SEMICOLON);
 			label_51: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1733,7 +1730,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				}
 				jj_consume_token(S);
 			}
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IDENT: {
 				declaration();
 				break;
@@ -1761,7 +1758,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			locator = createLocator(token);
 			jj_consume_token(COLON);
 			label_52: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case S: {
 					;
 					break;
@@ -1773,7 +1770,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				jj_consume_token(S);
 			}
 			e = expr();
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case IMPORTANT_SYM: {
 				priority = prio();
 				break;
@@ -1803,7 +1800,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	final public boolean prio() throws ParseException {
 		jj_consume_token(IMPORTANT_SYM);
 		label_53: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -1829,7 +1826,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			head = term(null);
 			body = head;
 			label_54: while (true) {
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case COMMA:
 				case SLASH:
 				case PLUS:
@@ -1867,7 +1864,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 					jj_la1[85] = jj_gen;
 					break label_54;
 				}
-				switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+				switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 				case COMMA:
 				case SLASH: {
 					body = operator(body);
@@ -1888,8 +1885,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	//
 	// term
 	// : unary_operator?
-	// [ NUMBER | PERCENTAGE | LENGTH | EMS | EXS | ANGLE | TIME | FREQ |
-	// function ]
+	// [ NUMBER | PERCENTAGE | LENGTH | EMS | EXS | ANGLE | TIME | FREQ | function ]
 	// | STRING | IDENT | URI | RGB | UNICODERANGE | hexcolor | DIMEN
 	// S*
 	// ;
@@ -1899,7 +1895,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		char op = ' ';
 		LexicalUnit value = null;
 		Locator locator = null;
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case PLUS:
 		case MINUS: {
 			op = unaryOperator();
@@ -1912,7 +1908,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		if (op != ' ') {
 			locator = createLocator(token);
 		}
-		switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+		switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 		case EMS:
 		case EXS:
 		case LENGTH_PX:
@@ -1931,7 +1927,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		case PERCENTAGE:
 		case NUMBER:
 		case FUNCTION: {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case NUMBER: {
 				t = jj_consume_token(NUMBER);
 				try {
@@ -2081,7 +2077,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			locator = createLocator(token);
 		}
 		label_55: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -2108,7 +2104,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		LexicalUnit params;
 		t = jj_consume_token(FUNCTION);
 		label_56: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -2133,7 +2129,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		LexicalUnit params;
 		jj_consume_token(RGB);
 		label_57: while (true) {
-			switch (jj_ntk == -1 ? jj_ntk_f() : jj_ntk) {
+			switch ((jj_ntk == -1) ? jj_ntk_f() : jj_ntk) {
 			case S: {
 				;
 				break;
@@ -2181,7 +2177,7 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			} else if (t.kind == RBRACE) {
 				nesting--;
 			}
-		} while (t.kind != RBRACE && t.kind != SEMICOLON || nesting > 0);
+		} while ((t.kind != RBRACE && t.kind != SEMICOLON) || nesting > 0);
 
 		return sb.toString();
 	}
@@ -2319,23 +2315,20 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	}
 
 	private boolean jj_3R_79() {
-		if (jj_scan_token(LSQUARE)) {
+		if (jj_scan_token(LSQUARE))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_64() {
-		if (jj_3R_67()) {
+		if (jj_3R_67())
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_69() {
-		if (jj_scan_token(PLUS)) {
+		if (jj_scan_token(PLUS))
 			return true;
-		}
 		return false;
 	}
 
@@ -2344,9 +2337,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		xsp = jj_scanpos;
 		if (jj_3R_69()) {
 			jj_scanpos = xsp;
-			if (jj_3R_70()) {
+			if (jj_3R_70())
 				return true;
-			}
 		}
 		return false;
 	}
@@ -2356,36 +2348,31 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		xsp = jj_scanpos;
 		if (jj_3R_64()) {
 			jj_scanpos = xsp;
-			if (jj_3R_65()) {
+			if (jj_3R_65())
 				return true;
-			}
 		}
 		return false;
 	}
 
 	private boolean jj_3R_80() {
-		if (jj_scan_token(COLON)) {
+		if (jj_scan_token(COLON))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_63() {
-		if (jj_scan_token(S)) {
+		if (jj_scan_token(S))
 			return true;
-		}
 		Token xsp;
 		xsp = jj_scanpos;
-		if (jj_3R_66()) {
+		if (jj_3R_66())
 			jj_scanpos = xsp;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_62() {
-		if (jj_scan_token(GT)) {
+		if (jj_scan_token(GT))
 			return true;
-		}
 		Token xsp;
 		while (true) {
 			xsp = jj_scanpos;
@@ -2398,19 +2385,16 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	}
 
 	private boolean jj_3_1() {
-		if (jj_scan_token(IDENT)) {
+		if (jj_scan_token(IDENT))
 			return true;
-		}
-		if (jj_3R_58()) {
+		if (jj_3R_58())
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_61() {
-		if (jj_scan_token(PLUS)) {
+		if (jj_scan_token(PLUS))
 			return true;
-		}
 		Token xsp;
 		while (true) {
 			xsp = jj_scanpos;
@@ -2423,16 +2407,14 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	}
 
 	private boolean jj_3R_72() {
-		if (jj_scan_token(ASTERISK)) {
+		if (jj_scan_token(ASTERISK))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_76() {
-		if (jj_3R_80()) {
+		if (jj_3R_80())
 			return true;
-		}
 		return false;
 	}
 
@@ -2443,39 +2425,34 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 			jj_scanpos = xsp;
 			if (jj_3R_62()) {
 				jj_scanpos = xsp;
-				if (jj_3R_63()) {
+				if (jj_3R_63())
 					return true;
-				}
 			}
 		}
 		return false;
 	}
 
 	private boolean jj_3R_75() {
-		if (jj_3R_79()) {
+		if (jj_3R_79())
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_78() {
-		if (jj_scan_token(DOT)) {
+		if (jj_scan_token(DOT))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_74() {
-		if (jj_3R_78()) {
+		if (jj_3R_78())
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_73() {
-		if (jj_3R_77()) {
+		if (jj_3R_77())
 			return true;
-		}
 		return false;
 	}
 
@@ -2488,9 +2465,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				jj_scanpos = xsp;
 				if (jj_3R_75()) {
 					jj_scanpos = xsp;
-					if (jj_3R_76()) {
+					if (jj_3R_76())
 						return true;
-					}
 				}
 			}
 		}
@@ -2498,34 +2474,29 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	}
 
 	private boolean jj_3_2() {
-		if (jj_3R_59()) {
+		if (jj_3R_59())
 			return true;
-		}
-		if (jj_3R_60()) {
+		if (jj_3R_60())
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_71() {
-		if (jj_scan_token(IDENT)) {
+		if (jj_scan_token(IDENT))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_77() {
-		if (jj_scan_token(HASH)) {
+		if (jj_scan_token(HASH))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_65() {
 		Token xsp;
-		if (jj_3R_68()) {
+		if (jj_3R_68())
 			return true;
-		}
 		while (true) {
 			xsp = jj_scanpos;
 			if (jj_3R_68()) {
@@ -2537,16 +2508,14 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	}
 
 	private boolean jj_3R_70() {
-		if (jj_scan_token(GT)) {
+		if (jj_scan_token(GT))
 			return true;
-		}
 		return false;
 	}
 
 	private boolean jj_3R_58() {
-		if (jj_scan_token(COLON)) {
+		if (jj_scan_token(COLON))
 			return true;
-		}
 		return false;
 	}
 
@@ -2555,9 +2524,8 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		xsp = jj_scanpos;
 		if (jj_3R_71()) {
 			jj_scanpos = xsp;
-			if (jj_3R_72()) {
+			if (jj_3R_72())
 				return true;
-			}
 		}
 		return false;
 	}
@@ -2620,12 +2588,10 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		token = new Token();
 		jj_ntk = -1;
 		jj_gen = 0;
-		for (int i = 0; i < 93; i++) {
+		for (int i = 0; i < 93; i++)
 			jj_la1[i] = -1;
-		}
-		for (int i = 0; i < jj_2_rtns.length; i++) {
+		for (int i = 0; i < jj_2_rtns.length; i++)
 			jj_2_rtns[i] = new JJCalls();
-		}
 	}
 
 	/** Reinitialise. */
@@ -2635,12 +2601,10 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		token = new Token();
 		jj_ntk = -1;
 		jj_gen = 0;
-		for (int i = 0; i < 93; i++) {
+		for (int i = 0; i < 93; i++)
 			jj_la1[i] = -1;
-		}
-		for (int i = 0; i < jj_2_rtns.length; i++) {
+		for (int i = 0; i < jj_2_rtns.length; i++)
 			jj_2_rtns[i] = new JJCalls();
-		}
 	}
 
 	/** Constructor with generated Token Manager. */
@@ -2649,12 +2613,10 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		token = new Token();
 		jj_ntk = -1;
 		jj_gen = 0;
-		for (int i = 0; i < 93; i++) {
+		for (int i = 0; i < 93; i++)
 			jj_la1[i] = -1;
-		}
-		for (int i = 0; i < jj_2_rtns.length; i++) {
+		for (int i = 0; i < jj_2_rtns.length; i++)
 			jj_2_rtns[i] = new JJCalls();
-		}
 	}
 
 	/** Reinitialise. */
@@ -2663,32 +2625,28 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		token = new Token();
 		jj_ntk = -1;
 		jj_gen = 0;
-		for (int i = 0; i < 93; i++) {
+		for (int i = 0; i < 93; i++)
 			jj_la1[i] = -1;
-		}
-		for (int i = 0; i < jj_2_rtns.length; i++) {
+		for (int i = 0; i < jj_2_rtns.length; i++)
 			jj_2_rtns[i] = new JJCalls();
-		}
 	}
 
 	private Token jj_consume_token(int kind) throws ParseException {
 		Token oldToken;
-		if ((oldToken = token).next != null) {
+		if ((oldToken = token).next != null)
 			token = token.next;
-		} else {
+		else
 			token = token.next = token_source.getNextToken();
-		}
 		jj_ntk = -1;
 		if (token.kind == kind) {
 			jj_gen++;
 			if (++jj_gc > 100) {
 				jj_gc = 0;
-				for (JJCalls jj_2_rtn : jj_2_rtns) {
-					JJCalls c = jj_2_rtn;
+				for (int i = 0; i < jj_2_rtns.length; i++) {
+					JJCalls c = jj_2_rtns[i];
 					while (c != null) {
-						if (c.gen < jj_gen) {
+						if (c.gen < jj_gen)
 							c.first = null;
-						}
 						c = c.next;
 					}
 				}
@@ -2702,11 +2660,6 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 
 	@SuppressWarnings("serial")
 	static private final class LookaheadSuccess extends java.lang.Error {
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
 	}
 
 	final private LookaheadSuccess jj_ls = new LookaheadSuccess();
@@ -2729,26 +2682,22 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 				i++;
 				tok = tok.next;
 			}
-			if (tok != null) {
+			if (tok != null)
 				jj_add_error_token(kind, i);
-			}
 		}
-		if (jj_scanpos.kind != kind) {
+		if (jj_scanpos.kind != kind)
 			return true;
-		}
-		if (jj_la == 0 && jj_scanpos == jj_lastpos) {
+		if (jj_la == 0 && jj_scanpos == jj_lastpos)
 			throw jj_ls;
-		}
 		return false;
 	}
 
 	/** Get the next Token. */
 	final public Token getNextToken() {
-		if (token.next != null) {
+		if (token.next != null)
 			token = token.next;
-		} else {
+		else
 			token = token.next = token_source.getNextToken();
-		}
 		jj_ntk = -1;
 		jj_gen++;
 		return token;
@@ -2758,21 +2707,19 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 	final public Token getToken(int index) {
 		Token t = token;
 		for (int i = 0; i < index; i++) {
-			if (t.next != null) {
+			if (t.next != null)
 				t = t.next;
-			} else {
+			else
 				t = t.next = token_source.getNextToken();
-			}
 		}
 		return t;
 	}
 
 	private int jj_ntk_f() {
-		if ((jj_nt = token.next) == null) {
-			return jj_ntk = (token.next = token_source.getNextToken()).kind;
-		} else {
-			return jj_ntk = jj_nt.kind;
-		}
+		if ((jj_nt = token.next) == null)
+			return (jj_ntk = (token.next = token_source.getNextToken()).kind);
+		else
+			return (jj_ntk = jj_nt.kind);
 	}
 
 	private java.util.List<int[]> jj_expentries = new java.util.ArrayList<int[]>();
@@ -2830,13 +2777,13 @@ public class SACParserCSS2 extends AbstractSACParser implements SACParserCSS2Con
 		for (int i = 0; i < 93; i++) {
 			if (jj_la1[i] == jj_gen) {
 				for (int j = 0; j < 32; j++) {
-					if ((jj_la1_0[i] & 1 << j) != 0) {
+					if ((jj_la1_0[i] & (1 << j)) != 0) {
 						la1tokens[j] = true;
 					}
-					if ((jj_la1_1[i] & 1 << j) != 0) {
+					if ((jj_la1_1[i] & (1 << j)) != 0) {
 						la1tokens[32 + j] = true;
 					}
-					if ((jj_la1_2[i] & 1 << j) != 0) {
+					if ((jj_la1_2[i] & (1 << j)) != 0) {
 						la1tokens[64 + j] = true;
 					}
 				}

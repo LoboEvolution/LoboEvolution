@@ -70,7 +70,7 @@ public interface CSSProperties {
 
 	/** The Constant BORDER_RIGHT_WIDTH. */
 	String BORDER_RIGHT_WIDTH = "border-right-width";
-	
+
 	/** The Constant BORDER_SPACING. */
 	String BORDER_SPACING = "border-spacing";
 
@@ -94,7 +94,7 @@ public interface CSSProperties {
 
 	/** The Constant BOTTOM. */
 	String BOTTOM = "bottom";
-	
+
 	/** The Constant BOX_SIZING. */
 	String BOX_SIZING = "box-sizing";
 

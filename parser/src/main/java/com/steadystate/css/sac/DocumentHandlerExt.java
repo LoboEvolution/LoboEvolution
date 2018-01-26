@@ -57,8 +57,7 @@ public interface DocumentHandlerExt extends DocumentHandler {
 	void importStyle(String uri, SACMediaList media, String defaultNamespaceURI, Locator locator) throws CSSException;
 
 	/**
-	 * Receive notification of an unknown rule t-rule not supported by this
-	 * parser.
+	 * Receive notification of an unknown rule t-rule not supported by this parser.
 	 *
 	 * @param atRule
 	 *            The complete ignored at-rule.
@@ -86,9 +85,9 @@ public interface DocumentHandlerExt extends DocumentHandler {
 	/**
 	 * Receive notification of the beginning of a page statement.
 	 *
-	 * The Parser will invoke this method at the beginning of every page
-	 * statement in the style sheet. there will be a corresponding endPage()
-	 * event for every startPage() event.
+	 * The Parser will invoke this method at the beginning of every page statement
+	 * in the style sheet. there will be a corresponding endPage() event for every
+	 * startPage() event.
 	 *
 	 * @param name
 	 *            the name of the page (if any, null otherwise)
@@ -104,9 +103,9 @@ public interface DocumentHandlerExt extends DocumentHandler {
 	/**
 	 * Receive notification of the beginning of a media statement.
 	 *
-	 * The Parser will invoke this method at the beginning of every media
-	 * statement in the style sheet. there will be a corresponding endMedia()
-	 * event for every startElement() event.
+	 * The Parser will invoke this method at the beginning of every media statement
+	 * in the style sheet. there will be a corresponding endMedia() event for every
+	 * startElement() event.
 	 *
 	 * @param media
 	 *            The intended destination media for style information.

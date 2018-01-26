@@ -48,8 +48,8 @@ public class CSSFormat {
 
 	/**
 	 * If this value is larger than -1 the individual properties from a rule are
-	 * rendered in separate lines; the parameter defines the indentation level.
-	 * Set this to -1 to disable the feature (default)
+	 * rendered in separate lines; the parameter defines the indentation level. Set
+	 * this to -1 to disable the feature (default)
 	 *
 	 * @param anIndent
 	 *            the number of blanks used for indentation

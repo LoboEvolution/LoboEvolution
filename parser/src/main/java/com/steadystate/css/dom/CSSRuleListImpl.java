@@ -123,7 +123,7 @@ public class CSSRuleListImpl implements CSSRuleList, CSSFormatable, Serializable
 	}
 
 	private boolean equalsRules(final CSSRuleList crl) {
-		if (crl == null || getLength() != crl.getLength()) {
+		if ((crl == null) || (getLength() != crl.getLength())) {
 			return false;
 		}
 		for (int i = 0; i < getLength(); i++) {

@@ -26,8 +26,8 @@ public final class ParserUtils {
 	}
 
 	/**
-	 * Remove the given number of chars from start and end. There is no
-	 * parameter checking, the caller has to take care of this.
+	 * Remove the given number of chars from start and end. There is no parameter
+	 * checking, the caller has to take care of this.
 	 *
 	 * @param s
 	 *            the StringBuilder
@@ -57,7 +57,7 @@ public final class ParserUtils {
 
 		final int end = s1.length() - 1;
 		final char c0 = s1.charAt(0);
-		if (c0 == '"' && s1.charAt(end) == '"' || c0 == '\'' && s1.charAt(end) == '\'') {
+		if ((c0 == '"' && s1.charAt(end) == '"') || (c0 == '\'' && s1.charAt(end) == '\'')) {
 			return s1.substring(1, end);
 		}
 

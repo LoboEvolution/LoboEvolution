@@ -20,6 +20,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Stack;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.css.sac.CSSException;
 import org.w3c.css.sac.ErrorHandler;
 import org.w3c.css.sac.InputSource;
@@ -28,6 +31,7 @@ import org.w3c.css.sac.Locator;
 import org.w3c.css.sac.Parser;
 import org.w3c.css.sac.SACMediaList;
 import org.w3c.css.sac.SelectorList;
+import org.w3c.css.sac.helpers.ParserFactory;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.css.CSSRule;
@@ -57,7 +61,9 @@ import com.steadystate.css.userdata.UserDataConstants;
  *         Schweinsberg</a>
  */
 public class CSSOMParser {
-
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(CSSOMParser.class);
 	private static final Object LOCK = new Object();
 	private static final String DEFAULT_PARSER = "com.steadystate.css.parser.SACParserCSS21";
 
@@ -80,32 +86,32 @@ public class CSSOMParser {
 	public CSSOMParser(final Parser parser) {
 		synchronized (LOCK) {
 			if (null != parser) {
-				// System.setProperty("org.w3c.css.sac.parser",
-				// parser.getClass().getCanonicalName());
+				System.setProperty("org.w3c.css.sac.parser", parser.getClass().getCanonicalName());
 				parser_ = parser;
-				return;
-			} else {
-				parser_ = new SACParserCSS21();
 				return;
 			}
 
 			// no parser provided, determine the correct one
-			/*
-			 * String currentParser =
-			 * System.getProperty("org.w3c.css.sac.parser"); try { // use the
-			 * direct method if we already failed once before if (null !=
-			 * LastFailed_ && LastFailed_.equals(currentParser)) { parser_ = new
-			 * SACParserCSS21(); } else { if (null == currentParser) {
-			 * //System.setProperty("org.w3c.css.sac.parser", DEFAULT_PARSER);
-			 * currentParser = DEFAULT_PARSER; } final ParserFactory factory =
-			 * new ParserFactory(); parser_ = factory.makeParser(); } } catch
-			 * (final Exception e) { final Logger log =
-			 * LogManager.getLogger("com.steadystate.css");
-			 * log.warn(e.toString());
-			 * log.warn("using the default 'SACParserCSS21' instead");
-			 * log.error("CSSOMParser", "consturctor", e); //LastFailed_ =
-			 * currentParser; parser_ = new SACParserCSS21(); }
-			 */
+			String currentParser = System.getProperty("org.w3c.css.sac.parser");
+			try {
+				// use the direct method if we already failed once before
+				if (null != LastFailed_ && LastFailed_.equals(currentParser)) {
+					parser_ = new SACParserCSS21();
+				} else {
+					if (null == currentParser) {
+						System.setProperty("org.w3c.css.sac.parser", DEFAULT_PARSER);
+						currentParser = DEFAULT_PARSER;
+					}
+					final ParserFactory factory = new ParserFactory();
+					parser_ = factory.makeParser();
+				}
+			} catch (final Exception e) {
+				logger.warn(e.toString());
+				logger.warn("using the default 'SACParserCSS21' instead");
+				logger.warn("CSSOMParser", "consturctor", e);
+				LastFailed_ = currentParser;
+				parser_ = new SACParserCSS21();
+			}
 		}
 	}
 
@@ -119,8 +125,8 @@ public class CSSOMParser {
 	 * @param source
 	 *            the SAC input source
 	 * @param ownerNode
-	 *            the owner node (see the definition of <code>ownerNode</code>
-	 *            in org.w3c.dom.css.StyleSheet)
+	 *            the owner node (see the definition of <code>ownerNode</code> in
+	 *            org.w3c.dom.css.StyleSheet)
 	 * @param href
 	 *            the href (see the definition of <code>href</code> in
 	 *            org.w3c.dom.css.StyleSheet)

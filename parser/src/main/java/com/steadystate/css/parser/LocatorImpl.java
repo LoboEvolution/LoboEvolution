@@ -55,8 +55,7 @@ public class LocatorImpl implements Locator, Serializable {
 	 * Return the URI for the current document event.
 	 *
 	 * <p>
-	 * The parser must resolve the URI fully before passing it to the
-	 * application.
+	 * The parser must resolve the URI fully before passing it to the application.
 	 * </p>
 	 *
 	 * @return A string containing the URI, or null if none is available.
@@ -86,9 +85,8 @@ public class LocatorImpl implements Locator, Serializable {
 
 	/**
 	 * Return the column number where the current document event ends. Note that
-	 * this is the column number of the first character after the text
-	 * associated with the document event. The first column in a line is
-	 * position 1.
+	 * this is the column number of the first character after the text associated
+	 * with the document event. The first column in a line is position 1.
 	 * 
 	 * @return The column number, or -1 if none is available.
 	 * @see #getLineNumber
@@ -109,9 +107,9 @@ public class LocatorImpl implements Locator, Serializable {
 	}
 
 	/**
-	 * Return the line number where the current document event ends. Note that
-	 * this is the line position of the first character after the text
-	 * associated with the document event.
+	 * Return the line number where the current document event ends. Note that this
+	 * is the line position of the first character after the text associated with
+	 * the document event.
 	 * 
 	 * @return The line number, or -1 if none is available.
 	 * @see #getColumnNumber
@@ -140,7 +138,7 @@ public class LocatorImpl implements Locator, Serializable {
 			return false;
 		}
 		final Locator l = (Locator) obj;
-		return getColumnNumber() == l.getColumnNumber() && getLineNumber() == l.getLineNumber()
+		return (getColumnNumber() == l.getColumnNumber()) && (getLineNumber() == l.getLineNumber())
 				&& LangUtils.equals(getURI(), l.getURI());
 	}
 

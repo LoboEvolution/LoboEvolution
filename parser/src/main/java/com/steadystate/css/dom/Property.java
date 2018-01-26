@@ -159,7 +159,7 @@ public class Property extends CSSOMObjectImpl implements CSSFormatable {
 			return false;
 		}
 		final Property p = (Property) obj;
-		return super.equals(obj) && important_ == p.important_ && LangUtils.equals(name_, p.name_)
+		return super.equals(obj) && (important_ == p.important_) && LangUtils.equals(name_, p.name_)
 				&& LangUtils.equals(value_, p.value_);
 	}
 

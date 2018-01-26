@@ -69,7 +69,8 @@ public class GeneralAdjacentSelectorImpl extends LocatableImpl implements Siblin
 
 	@Override
 	public short getSelectorType() {
-		return Selector.SAC_ANY_NODE_SELECTOR; // for now
+		// not correct but the best choice from the old sac
+		return Selector.SAC_DIRECT_ADJACENT_SELECTOR;
 	}
 
 	@Override

@@ -22,8 +22,7 @@ public class TokenMgrError extends Error {
 	public static final int LEXICAL_ERROR = 0;
 
 	/**
-	 * An attempt was made to create a second instance of a static token
-	 * manager.
+	 * An attempt was made to create a second instance of a static token manager.
 	 */
 	public static final int STATIC_LEXER_ERROR = 1;
 
@@ -91,26 +90,26 @@ public class TokenMgrError extends Error {
 
 	/**
 	 * Returns a detailed message for the Error when it is thrown by the token
-	 * manager to indicate a lexical error. Parameters : EOFSeen : indicates if
-	 * EOF caused the lexical error curLexState : lexical state in which this
-	 * error occurred errorLine : line number when the error occurred
-	 * errorColumn : column number when the error occurred errorAfter : prefix
-	 * that was seen before this error occurred curchar : the offending
-	 * character Note: You can customize the lexical error message by modifying
-	 * this method.
+	 * manager to indicate a lexical error. Parameters : EOFSeen : indicates if EOF
+	 * caused the lexical error curLexState : lexical state in which this error
+	 * occurred errorLine : line number when the error occurred errorColumn : column
+	 * number when the error occurred errorAfter : prefix that was seen before this
+	 * error occurred curchar : the offending character Note: You can customize the
+	 * lexical error message by modifying this method.
 	 */
 	protected static String LexicalErr(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter,
 			int curChar) {
 		char curChar1 = (char) curChar;
-		return "Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: "
-				+ (EOFSeen ? "<EOF> " : "\"" + addEscapes(String.valueOf(curChar1)) + "\"" + " (" + curChar + "), ")
-				+ "after : \"" + addEscapes(errorAfter) + "\"";
+		return ("Lexical error at line " + errorLine + ", column " + errorColumn + ".  Encountered: "
+				+ (EOFSeen ? "<EOF> "
+						: ("\"" + addEscapes(String.valueOf(curChar1)) + "\"") + " (" + curChar + "), ")
+				+ "after : \"" + addEscapes(errorAfter) + "\"");
 	}
 
 	/**
-	 * You can also modify the body of this method to customize your error
-	 * messages. For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE
-	 * are not of end-users concern, so you can return something like :
+	 * You can also modify the body of this method to customize your error messages.
+	 * For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not of
+	 * end-users concern, so you can return something like :
 	 *
 	 * "Internal Error : Please file a bug report .... "
 	 *
