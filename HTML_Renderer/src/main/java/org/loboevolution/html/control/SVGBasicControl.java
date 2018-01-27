@@ -191,30 +191,6 @@ public class SVGBasicControl extends SVGStyle {
 		clip(svgi, g2d);
 	}
 
-	public void polygon(Graphics2D g2d, SVGInfo svgi, int numObject) {
-		animate(svgi, numObject);
-		GeneralPath path = new GeneralPath();
-		SVGPointList points = svgi.getPoilist();
-		int numPoints = points.getNumberOfItems();
-		for (int i = 0; i < numPoints; i++) {
-			SVGPoint point = points.getItem(i);
-			SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, point.getX(), point.getY(), 0, 0, 0);
-			float x = viewbox.getX();
-			float y = viewbox.getY();
-			if (i == 0) {
-				path.moveTo(x, y);
-			} else {
-				path.lineTo(x, y);
-			}
-		}
-
-		path.closePath();
-		transform(g2d, svgi, new SVGInfo());
-		drawFillAndStroke(g2d, path, svgi);
-		clip(svgi, g2d);
-
-	}
-
 	public void polyline(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
@@ -891,10 +867,8 @@ public class SVGBasicControl extends SVGStyle {
 		case LINE:
 			line(g2d, svgi, index);
 			break;
-		case POLYGON:
-			polygon(g2d, svgi, index);
-			break;
 		case POLYLINE:
+		case POLYGON:
 			polyline(g2d, svgi, index);
 			break;
 		case PATH:

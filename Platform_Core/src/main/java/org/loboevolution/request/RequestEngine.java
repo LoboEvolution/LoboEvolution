@@ -944,8 +944,7 @@ public final class RequestEngine {
 
 				if (!"http:".equals(connectionUrl.toString())) {
 					SSLCertificate.setCertificate();
-					URLConnection connection = this.getURLConnection(connectionUrl, request, protocol, method, rhandler,
-							cacheInfo);
+					URLConnection connection = this.getURLConnection(connectionUrl, request, protocol, method, rhandler, cacheInfo);
 
 					String redirect = connection.getHeaderField("Location");
 					if (redirect != null) {
@@ -968,120 +967,51 @@ public final class RequestEngine {
 						boolean isContentCached = cacheInfo != null && cacheInfo.isCacheConnection(connection);
 						boolean isCacheable = false;
 
+						Integer responseCode = null;
+						HttpURLConnection hconnection = null;
 						if (connection instanceof HttpsURLConnection && !isContentCached) {
-
-							HttpsURLConnection hconnection = (HttpsURLConnection) connection;
+							hconnection = (HttpsURLConnection) connection;
 							hconnection.setInstanceFollowRedirects(true);
-							int responseCode = hconnection.getResponseCode();
-
-							if (linfo) {
-								logger.info("run(): ResponseCode=" + responseCode + " for url=" + connectionUrl);
-							}
-							if (responseCode == HttpURLConnection.HTTP_OK) {
-								if (linfo) {
-									logger.info("run(): FROM-HTTP: " + connectionUrl);
-								}
-								if (this.mayBeCached(hconnection)) {
-									isCacheable = true;
-								} else {
-									if (linfo) {
-										logger.info("run(): NOT CACHEABLE: " + connectionUrl);
-									}
-									if (cacheInfo != null) {
-										cacheInfo.delete();
-									}
-								}
-								responseIn = connection.getInputStream();
-								rinfo.setConnection(connection, responseIn);
-							} else if (responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
-								if (cacheInfo == null) {
-									throw new IllegalStateException(
-											"Cache info missing but it is necessary to process response code "
-													+ responseCode + ".");
-								}
-								if (linfo) {
-									logger.info("run(): FROM-VALIDATION: " + connectionUrl);
-								}
-								// Disconnect the HTTP connection.
-								hconnection.disconnect();
-								isContentCached = true;
-								// Even though the response is actually from the
-								// cache,
-								// we need to cache it again, if only to update
-								// the
-								// request time (used to calculate default
-								// expiration).
-								isCacheable = true;
-								connection = cacheInfo.getURLConnection();
-								responseIn = connection.getInputStream();
-								rinfo.setConnection(connection, responseIn);
-							} else if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
-									|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
-									|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
-								if (linfo) {
-									logger.info("run(): REDIRECTING: ResponseCode=" + responseCode + " for url=" + url);
-								}
-								RequestHandler newHandler = new RedirectRequestHandler(rhandler, hconnection);
-								Thread.yield();
-								if (recursionLevel > 5) {
-									throw new ClientletException("Exceeded redirect recursion limit.");
-								}
-								this.processHandler(newHandler, recursionLevel + 1, trackRequestInfo);
-								return;
-							}
-
+							responseCode = hconnection.getResponseCode();
 						} else if (connection instanceof HttpURLConnection && !isContentCached) {
-
-							HttpURLConnection hconnection = (HttpURLConnection) connection;
+							hconnection = (HttpURLConnection) connection;
 							hconnection.setInstanceFollowRedirects(false);
-							int responseCode = hconnection.getResponseCode();
+							responseCode = hconnection.getResponseCode();
+						}
+						
+						if(responseCode != null) {
 							if (linfo) {
 								logger.info("run(): ResponseCode=" + responseCode + " for url=" + connectionUrl);
 							}
-							if (responseCode == HttpURLConnection.HTTP_OK) {
-								if (linfo) {
-									logger.info("run(): FROM-HTTP: " + connectionUrl);
-								}
+							
+							switch (responseCode) {
+							case HttpURLConnection.HTTP_OK:
 								if (this.mayBeCached(hconnection)) {
 									isCacheable = true;
 								} else {
-									if (linfo) {
-										logger.info("run(): NOT CACHEABLE: " + connectionUrl);
-									}
 									if (cacheInfo != null) {
 										cacheInfo.delete();
 									}
 								}
 								responseIn = connection.getInputStream();
 								rinfo.setConnection(connection, responseIn);
-							} else if (responseCode == HttpURLConnection.HTTP_NOT_MODIFIED) {
+								break;
+							case HttpURLConnection.HTTP_NOT_MODIFIED:
 								if (cacheInfo == null) {
-									throw new IllegalStateException(
-											"Cache info missing but it is necessary to process response code "
-													+ responseCode + ".");
+									String error = "Cache info missing but it is necessary to process response code " + responseCode + ".";
+									throw new IllegalStateException(error);
 								}
-								if (linfo) {
-									logger.info("run(): FROM-VALIDATION: " + connectionUrl);
-								}
-								// Disconnect the HTTP connection.
+								
 								hconnection.disconnect();
 								isContentCached = true;
-								// Even though the response is actually from the
-								// cache,
-								// we need to cache it again, if only to update
-								// the
-								// request time (used to calculate default
-								// expiration).
 								isCacheable = true;
 								connection = cacheInfo.getURLConnection();
 								responseIn = connection.getInputStream();
 								rinfo.setConnection(connection, responseIn);
-							} else if (responseCode == HttpURLConnection.HTTP_MOVED_PERM
-									|| responseCode == HttpURLConnection.HTTP_MOVED_TEMP
-									|| responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
-								if (linfo) {
-									logger.info("run(): REDIRECTING: ResponseCode=" + responseCode + " for url=" + url);
-								}
+								break;
+							case HttpURLConnection.HTTP_MOVED_PERM:
+							case HttpURLConnection.HTTP_MOVED_TEMP:
+							case HttpURLConnection.HTTP_SEE_OTHER:
 								RequestHandler newHandler = new RedirectRequestHandler(rhandler, hconnection);
 								Thread.yield();
 								if (recursionLevel > 5) {
@@ -1089,13 +1019,14 @@ public final class RequestEngine {
 								}
 								this.processHandler(newHandler, recursionLevel + 1, trackRequestInfo);
 								return;
+							default:
+								break;
 							}
 						} else {
-							// Force it to throw exception if file does not
-							// exist
 							responseIn = connection.getInputStream();
 							rinfo.setConnection(connection, responseIn);
 						}
+						
 						if (rinfo.isAborted()) {
 							throw new CancelClientletException("Stopped");
 						}

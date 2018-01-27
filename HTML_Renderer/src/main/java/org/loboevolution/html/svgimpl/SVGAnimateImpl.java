@@ -99,10 +99,8 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			animateR();
 			break;
 		case "fill":
-			animateFill();
-			break;
 		case "stroke":
-			animateStroke();
+			animate();
 			break;
 		case "transform":
 			animateTransform();
@@ -301,57 +299,8 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			ruicontrol.relayout();
 		}
 	}
-
-	private void animateFill() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_color.getRGB() == to_color.getRGB()) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_color = ColorFactory.getInstance().getColor(this.animate.getFrom());
-				info.getStyle().setFill("rgb(" + from_color.getRed() + "," + from_color.getGreen() + "," + from_color.getBlue() + ")");
-			}
-		} else {
-
-			int f_red = from_color.getRed();
-			int f_green = from_color.getGreen();
-			int f_blue = from_color.getBlue();
-
-			int t_red = to_color.getRed();
-			int t_green = to_color.getGreen();
-			int t_blue = to_color.getBlue();
-
-			if (f_red > t_red)
-				f_red--;
-
-			if (f_red < t_red)
-				f_red++;
-
-			if (f_green > t_green)
-				f_green--;
-
-			if (f_green < t_green)
-				f_green++;
-
-			if (f_blue > t_blue)
-				f_blue--;
-
-			if (f_blue < t_blue)
-				f_blue++;
-
-			String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
-			from_color = ColorFactory.getInstance().getColor(rgb);
-			info.getStyle().setFill(rgb);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateStroke() {
+	
+	private void animate() {
 
 		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
 			stopAnimation();
