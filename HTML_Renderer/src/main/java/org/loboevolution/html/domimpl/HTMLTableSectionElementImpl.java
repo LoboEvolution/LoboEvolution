@@ -1,15 +1,11 @@
 package org.loboevolution.html.domimpl;
 
-import java.util.ArrayList;
-
 import org.loboevolution.html.dombl.DescendentHTMLCollection;
 import org.loboevolution.html.domfilter.ElementTableAttributeFilter;
 import org.loboevolution.w3c.html.HTMLCollection;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLTableSectionElement;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * The Class HTMLTableSectionElementImpl.
@@ -33,58 +29,14 @@ public class HTMLTableSectionElementImpl extends HTMLAbstractUIElement implement
 
 	@Override
 	public HTMLElement insertRow(int index) throws DOMException {
-		Document doc = this.document;
-		if (doc == null) {
-			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
-		}
-		HTMLElement rowElement = (HTMLElement) doc.createElement(TR);
-		synchronized (this.getTreeLock()) {
-			if (index == -1) {
-				this.appendChild(rowElement);
-				return rowElement;
-			}
-			ArrayList<Node> nl = this.nodeList;
-			if (nl != null) {
-				int size = nl.size();
-				int trcount = 0;
-				for (int i = 0; i < size; i++) {
-					Node node = nl.get(i);
-					if (TR.equalsIgnoreCase(node.getNodeName())) {
-						if (trcount == index) {
-							this.insertAt(rowElement, i);
-							return rowElement;
-						}
-						trcount++;
-					}
-				}
-			} else {
-				this.appendChild(rowElement);
-				return rowElement;
-			}
-		}
-		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
+		HTMLTableElementImpl table = new HTMLTableElementImpl();
+		return table.insertRow(index, this.document);
 	}
 
 	@Override
 	public void deleteRow(int index) throws DOMException {
-		synchronized (this.getTreeLock()) {
-			ArrayList<Node> nl = this.nodeList;
-			if (nl != null) {
-				int size = nl.size();
-				int trcount = 0;
-				for (int i = 0; i < size; i++) {
-					Node node = nl.get(i);
-					if (TR.equalsIgnoreCase(node.getNodeName())) {
-						if (trcount == index) {
-							this.removeChildAt(i);
-							return;
-						}
-						trcount++;
-					}
-				}
-			}
-		}
-		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
+		HTMLTableElementImpl table = new HTMLTableElementImpl();
+		table.deleteRow(index, this.nodeList);
 	}
 
 	@Override

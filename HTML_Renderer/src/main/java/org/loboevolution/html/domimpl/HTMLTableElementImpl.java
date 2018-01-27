@@ -472,7 +472,43 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLElement insertRow(int index) throws DOMException {
+		return insertRow(index, this.document);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.w3c.html.HTMLTableElement#deleteRow(int)
+	 */
+	@Override
+	public void deleteRow(int index) throws DOMException {
+		deleteRow(index, this.nodeList);
+		
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.w3c.html.HTMLTableElement#insertRow()
+	 */
+	@Override
+	public HTMLElement insertRow() {
+		return insertRow(-1, this.document);
+	}
+
+	@Override
+	public HTMLElement createTBody() {
 		Document doc = this.document;
+		return doc == null ? null : (HTMLElement) doc.createElement(TBODY);
+	}
+
+	@Override
+	public HTMLElement deleteTBody() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public HTMLElement insertRow(int index, Document doc) {
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
@@ -502,17 +538,10 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 			}
 		}
 		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.w3c.html.HTMLTableElement#deleteRow(int)
-	 */
-	@Override
-	public void deleteRow(int index) throws DOMException {
+	}	
+	
+	public void deleteRow(int index, ArrayList<Node> nl) {
 		synchronized (this.getTreeLock()) {
-			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				int size = nl.size();
 				int trcount = 0;
@@ -529,28 +558,6 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 			}
 		}
 		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
-	}
-	
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.w3c.html.HTMLTableElement#insertRow()
-	 */
-	@Override
-	public HTMLElement insertRow() {
-		return insertRow(-1);
-	}
-
-	@Override
-	public HTMLElement createTBody() {
-		Document doc = this.document;
-		return doc == null ? null : (HTMLElement) doc.createElement(TBODY);
-	}
-
-	@Override
-	public HTMLElement deleteTBody() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/*
