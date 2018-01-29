@@ -195,7 +195,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 		if (url != null) {
 			return CollectionUtilities.getIteratorEnumeration(Collections.singletonList(url).iterator());
 		} else {
-			return CollectionUtilities.getIteratorEnumeration(Collections.EMPTY_LIST.iterator());
+			return CollectionUtilities.getIteratorEnumeration(Collections.emptyList().iterator());
 		}
 	}
 

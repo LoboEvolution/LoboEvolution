@@ -51,7 +51,7 @@ public class Strings {
 	}
 
 	/**
-	 * Instantiates a String.valueOfs.
+	 * Instantiates a strings.
 	 */
 	private Strings() {
 	}

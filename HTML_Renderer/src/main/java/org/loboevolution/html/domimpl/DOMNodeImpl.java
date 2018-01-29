@@ -723,7 +723,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	public NodeList getChildNodes() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
-			return new DOMNodeListImpl(nl == null ? Collections.EMPTY_LIST : nl);
+			return new DOMNodeListImpl(nl == null ? Collections.emptyList() : nl);
 		}
 	}
 

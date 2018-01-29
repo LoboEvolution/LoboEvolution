@@ -618,7 +618,7 @@ public class Session extends AbstractBean {
 				// find the ; following the content type (if there is one)
 				int index = tmp.indexOf(';');
 				if (index >= 0) {
-					index = tmp.indexOf("=", index + 1);
+					index = tmp.indexOf('=', index + 1);
 					if (index > 0) {
 						charset = contentType.getValue().substring(index + 1);
 					}

@@ -165,7 +165,7 @@ public class Urls {
 			while (tok.hasMoreTokens()) {
 				String token = tok.nextToken().trim().toLowerCase();
 				if ("must-revalidate".equals(token)) {
-					return new Long(0);
+					return Long.valueOf(0);
 				} else if (token.startsWith("max-age")) {
 					int eqIdx = token.indexOf('=');
 					if (eqIdx != -1) {
@@ -173,7 +173,7 @@ public class Urls {
 						int seconds;
 						try {
 							seconds = Integer.parseInt(value);
-							return new Long(baseTime + seconds * 1000);
+							return Long.valueOf(baseTime + seconds * 1000);
 						} catch (NumberFormatException nfe) {
 							logger.warn("getExpiration(): Bad Cache-Control max-age value: " + value);
 							// ignore
@@ -187,13 +187,13 @@ public class Urls {
 			try {
 				synchronized (PATTERN_RFC1123) {
 					Date expDate = PATTERN_RFC1123.parse(expires);
-					return new Long(expDate.getTime());
+					return Long.valueOf(expDate.getTime());
 				}
 			} catch (java.text.ParseException pe) {
 				int seconds;
 				try {
 					seconds = Integer.parseInt(expires);
-					return new Long(baseTime + seconds * 1000);
+					return Long.valueOf(baseTime + seconds * 1000);
 				} catch (NumberFormatException nfe) {
 					logger.warn("getExpiration(): Bad Expires header value: " + expires);
 				}

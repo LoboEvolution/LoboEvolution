@@ -108,6 +108,6 @@ public class GenericURLConnection extends URLConnection {
 	 */
 	@Override
 	public Map getHeaderFields() {
-		return Collections.EMPTY_MAP;
+		return Collections.emptyMap();
 	}
 }

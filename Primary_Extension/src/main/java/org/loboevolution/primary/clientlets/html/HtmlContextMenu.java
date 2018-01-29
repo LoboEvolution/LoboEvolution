@@ -147,7 +147,7 @@ public class HtmlContextMenu {
 					BufferedImage image = null;
 
 					try {
-						int dot = srcUrl.toExternalForm().lastIndexOf(".");
+						int dot = srcUrl.toExternalForm().lastIndexOf('.');
 						String ext = srcUrl.toExternalForm().substring(dot + 1);
 						image = ImageIO.read(srcUrl);
 						ImageIO.write(image, ext, selectedFile);
