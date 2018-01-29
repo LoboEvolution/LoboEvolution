@@ -283,7 +283,7 @@ public class LayoutKey {
 	 * Sets the float bounds source.
 	 *
 	 * @param floatBoundsSource
-	 *            the new float bounds source
+	 *            the Float.valueOf bounds source
 	 */
 	public void setFloatBoundsSource(FloatingBoundsSource floatBoundsSource) {
 		this.floatBoundsSource = floatBoundsSource;

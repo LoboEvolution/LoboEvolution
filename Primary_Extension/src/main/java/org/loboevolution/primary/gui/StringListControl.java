@@ -50,7 +50,7 @@ public class StringListControl extends JComponent {
 	private String[] strings;
 
 	/**
-	 * Instantiates a new string list control.
+	 * Instantiates a String.valueOf list control.
 	 */
 	public StringListControl() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -67,7 +67,7 @@ public class StringListControl extends JComponent {
 	 * Sets the strings.
 	 *
 	 * @param strings
-	 *            the new strings
+	 *            the String.valueOfs
 	 */
 	public void setStrings(String[] strings) {
 		this.strings = strings;
@@ -98,7 +98,7 @@ public class StringListControl extends JComponent {
 		if (strings == null) {
 			return null;
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (String string : strings) {
 			buffer.append(string);
 			buffer.append(lineSeparator);
@@ -110,7 +110,7 @@ public class StringListControl extends JComponent {
 	 * Sets the strings from text.
 	 *
 	 * @param text
-	 *            the new strings from text
+	 *            the String.valueOfs from text
 	 */
 	public void setStringsFromText(String text) {
 		try {

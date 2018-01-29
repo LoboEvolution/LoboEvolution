@@ -146,7 +146,7 @@ public class SVGRasterizer {
 	 *            the new image width
 	 */
 	public void setImageWidth(float width) {
-		hints.put(SVGAbstractTranscoder.KEY_WIDTH, new Float(width));
+		hints.put(SVGAbstractTranscoder.KEY_WIDTH, Float.valueOf(width));
 	}
 
 	/**
@@ -156,7 +156,7 @@ public class SVGRasterizer {
 	 *            the new image height
 	 */
 	public void setImageHeight(float height) {
-		hints.put(SVGAbstractTranscoder.KEY_HEIGHT, new Float(height));
+		hints.put(SVGAbstractTranscoder.KEY_HEIGHT, Float.valueOf(height));
 	}
 
 	/**
@@ -176,7 +176,7 @@ public class SVGRasterizer {
 	 *            the new pixel to mm factor
 	 */
 	public void setPixelToMMFactor(float px2mm) {
-		hints.put(SVGAbstractTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, new Float(px2mm));
+		hints.put(SVGAbstractTranscoder.KEY_PIXEL_UNIT_TO_MILLIMETER, Float.valueOf(px2mm));
 	}
 
 	/**

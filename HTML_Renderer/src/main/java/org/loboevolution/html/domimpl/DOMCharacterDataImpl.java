@@ -117,8 +117,8 @@ public abstract class DOMCharacterDataImpl extends DOMNodeImpl implements Charac
 	 */
 	@Override
 	public void deleteData(int offset, int count) throws DOMException {
-		StringBuffer buffer = new StringBuffer(this.text);
-		StringBuffer result = buffer.delete(offset, offset + count);
+		StringBuilder buffer = new StringBuilder(this.text);
+		StringBuilder result = buffer.delete(offset, offset + count);
 		this.text = result.toString();
 		if (!this.notificationsSuspended) {
 			this.informInvalid();
@@ -152,8 +152,8 @@ public abstract class DOMCharacterDataImpl extends DOMNodeImpl implements Charac
 	 */
 	@Override
 	public void insertData(int offset, String arg) throws DOMException {
-		StringBuffer buffer = new StringBuffer(this.text);
-		StringBuffer result = buffer.insert(offset, arg);
+		StringBuilder buffer = new StringBuilder(this.text);
+		StringBuilder result = buffer.insert(offset, arg);
 		this.text = result.toString();
 		if (!this.notificationsSuspended) {
 			this.informInvalid();
@@ -167,8 +167,8 @@ public abstract class DOMCharacterDataImpl extends DOMNodeImpl implements Charac
 	 */
 	@Override
 	public void replaceData(int offset, int count, String arg) throws DOMException {
-		StringBuffer buffer = new StringBuffer(this.text);
-		StringBuffer result = buffer.replace(offset, offset + count, arg);
+		StringBuilder buffer = new StringBuilder(this.text);
+		StringBuilder result = buffer.replace(offset, offset + count, arg);
 		this.text = result.toString();
 		if (!this.notificationsSuspended) {
 			this.informInvalid();

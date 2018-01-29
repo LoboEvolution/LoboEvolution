@@ -314,7 +314,7 @@ public class SimpleUserAgentContext implements UserAgentContext {
 		if (results == null) {
 			return "";
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		Iterator<?> i = results.entrySet().iterator();
 		boolean firstTime = true;
 		while (i.hasNext()) {

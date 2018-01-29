@@ -215,7 +215,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		settings.setStrikethrough(this.strikethroughCheckBox.isSelected());
 		settings.setSubscript(this.subscriptCheckBox.isSelected());
 		settings.setSuperscript(this.superscriptCheckBox.isSelected());
-		settings.setFontSize(new Float(this.fontSizeList.getSelectedItem().toString()));
+		settings.setFontSize(Float.valueOf(this.fontSizeList.getSelectedItem().toString()));
 		settings.setFont(this.fontList.getSelectedItem().toString());
 		settings.setColor((Color) colorComboBox.getSelectedItem());
 

@@ -983,7 +983,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 */
 	@Override
 	public String getOuterHTML() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
 			this.appendOuterHTMLImpl(buffer);
 		}
@@ -996,7 +996,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 * @param buffer
 	 *            the buffer
 	 */
-	public void appendOuterHTMLImpl(StringBuffer buffer) {
+	public void appendOuterHTMLImpl(StringBuilder buffer) {
 		String tagName = this.getTagName();
 		buffer.append('<');
 		buffer.append(tagName);

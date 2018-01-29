@@ -878,7 +878,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
 				Iterator<Node> i = nl.iterator();
-				StringBuffer sb = null;
+				StringBuilder sb = null;
 				while (i.hasNext()) {
 					Object node = i.next();
 					if (node instanceof Text) {
@@ -886,7 +886,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 						String txt = tn.getNodeValue();
 						if (!"".equals(txt)) {
 							if (sb == null) {
-								sb = new StringBuffer();
+								sb = new StringBuilder();
 							}
 							sb.append(txt);
 						}
@@ -895,7 +895,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 						String txt = en.getRawInnerText(includeComment);
 						if (!"".equals(txt)) {
 							if (sb == null) {
-								sb = new StringBuffer();
+								sb = new StringBuilder();
 							}
 							sb.append(txt);
 						}
@@ -904,7 +904,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 						String txt = cn.getNodeValue();
 						if (!"".equals(txt)) {
 							if (sb == null) {
-								sb = new StringBuffer();
+								sb = new StringBuilder();
 							}
 							sb.append(txt);
 						}
@@ -924,7 +924,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(this.getNodeName());
 		sb.append(" [");
 		NamedNodeMap attribs = this.getAttributes();

@@ -231,7 +231,7 @@ public class Response {
 			return responseBody == null ? "" : new String(responseBody, charset);
 		} catch (UnsupportedEncodingException ex) {
 			logger.log(Level.ERROR, ex);
-			return responseBody == null ? "" : new String(responseBody);
+			return responseBody == null ? "" : String.valueOf(responseBody);
 		}
 	}
 
@@ -249,7 +249,7 @@ public class Response {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append("  ").append(statusCode).append("\n");
 		for (Header h : getHeaders()) {
 			buffer.append("  ").append(h.getName()).append(": ").append(h.getValue());

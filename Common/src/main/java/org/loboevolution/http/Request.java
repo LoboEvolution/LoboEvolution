@@ -600,7 +600,7 @@ public class Request extends AbstractBean {
 	 * @return the password
 	 */
 	public final String getPassword() {
-		return password == null ? "" : new String(password);
+		return password == null ? "" : String.valueOf(password);
 	}
 
 	/**
@@ -666,7 +666,7 @@ public class Request extends AbstractBean {
 	 */
 	@Override
 	public String toString() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		buffer.append(getMethod());
 		buffer.append(" " + getUrl() + "\n");
 		for (Header h : getHeaders()) {
@@ -691,7 +691,7 @@ public class Request extends AbstractBean {
 	 *             the exception
 	 */
 	private static String base64Encode(String s) throws Exception {
-		return new String(Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
+		return String.valueOf(Base64.getEncoder().encode(s.getBytes(StandardCharsets.UTF_8)));
 	}
 
 	/**
@@ -705,6 +705,6 @@ public class Request extends AbstractBean {
 	 */
 	private static String base64Decode(String s) throws Exception {
 		byte[] asBytes = Base64.getDecoder().decode(s);
-		return new String(new String(asBytes, "utf-8"));
+		return String.valueOf(new String(asBytes, "utf-8"));
 	}
 }

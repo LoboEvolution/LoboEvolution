@@ -746,7 +746,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			text = text + " (" + Timing.getElapsedText(elapsed) + " ago)";
 			Action action = this.actionPool.createBookmarkNavigateAction(url);
 			JMenuItem menuItem = ComponentSource.menuItem(text, action);
-			StringBuffer toolTipText = new StringBuffer();
+			StringBuilder toolTipText = new StringBuilder();
 			toolTipText.append("<html>");
 			toolTipText.append(urlText);
 			String description = binfo.getDescription();
@@ -787,7 +787,7 @@ public class ComponentSource implements NavigatorWindowListener {
 						}
 						Action action = this.actionPool.createBookmarkNavigateAction(url);
 						JMenuItem menuItem = ComponentSource.menuItem(text, action);
-						StringBuffer toolTipText = new StringBuffer();
+						StringBuilder toolTipText = new StringBuilder();
 						toolTipText.append("<html>");
 						toolTipText.append(urlText);
 						String description = binfo.getDescription();

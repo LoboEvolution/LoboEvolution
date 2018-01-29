@@ -363,7 +363,7 @@ public class HttpRequest extends AbstractBean {
 	 */
 	public String getAllResponseHeaders() {
 		if (readyState == ReadyState.RECEIVING || readyState == ReadyState.LOADED) {
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			for (Header header : worker.response.getHeaders()) {
 				buffer.append(header.toString());
 				buffer.append("\r\n");

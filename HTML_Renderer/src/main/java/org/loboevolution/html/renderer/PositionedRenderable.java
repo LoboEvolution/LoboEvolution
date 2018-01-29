@@ -131,7 +131,7 @@ public class PositionedRenderable {
 	 * Sets the float.
 	 *
 	 * @param isFloat
-	 *            the new float
+	 *            the Float.valueOf
 	 */
 	public void setFloat(boolean isFloat) {
 		this.isFloat = isFloat;

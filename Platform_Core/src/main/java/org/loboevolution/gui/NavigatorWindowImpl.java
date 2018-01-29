@@ -340,7 +340,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 	 */
 	public static Properties getPropertiesFromWindowFeatures(String windowFeatures) {
 		String lineBreak = System.getProperty("line.separator");
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		StringTokenizer tok = new StringTokenizer(windowFeatures, ",");
 		while (tok.hasMoreTokens()) {
 			String token = tok.nextToken();

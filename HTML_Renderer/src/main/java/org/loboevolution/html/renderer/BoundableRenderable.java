@@ -380,7 +380,7 @@ public interface BoundableRenderable extends Renderable {
 	 *            the end point
 	 * @return true, if successful
 	 */
-	boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint);
 
 	/**

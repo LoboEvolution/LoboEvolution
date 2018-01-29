@@ -793,7 +793,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	private Paint gradient(ArrayList<Float> fractions, ArrayList<Color> colors, Double linearX, Double linearX1,
 			Double linearY, Double linearY1, Double r2) {
 
-		float[] floatArray = new float[fractions.size()];
+        float[] floatArray = new float[fractions.size()];
 		int i = 0;
 
 		for (Float f : fractions) {

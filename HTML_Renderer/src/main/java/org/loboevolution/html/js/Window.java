@@ -186,7 +186,7 @@ public class Window extends JSFunction implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		ActionListener task = new FunctionTimerTask(this, timeIDInt, aFunction, false);
 		int t = (int) aTimeInMs;
 		if (t < 1) {
@@ -216,7 +216,7 @@ public class Window extends JSFunction implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		ActionListener task = new ExpressionTimerTask(this, timeIDInt, aExpression, false);
 		int t = (int) aTimeInMs;
 		if (t < 1) {
@@ -238,7 +238,7 @@ public class Window extends JSFunction implements AbstractView {
 	 *      Window.clearInterval interface Definition</a>
 	 */
 	public void clearInterval(int aTimerID) {
-		Integer key = new Integer(aTimerID);
+		Integer key = Integer.valueOf(aTimerID);
 		this.forgetTask(key, true);
 	}
 
@@ -281,7 +281,7 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the timeout id
 	 */
 	public void clearTimeout(int timeoutID) {
-		Integer key = new Integer(timeoutID);
+		Integer key = Integer.valueOf(timeoutID);
 		this.forgetTask(key, true);
 	}
 
@@ -566,7 +566,7 @@ public class Window extends JSFunction implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		ActionListener task = new ExpressionTimerTask(this, timeIDInt, expr, true);
 		int t = (int) millis;
 		if (t < 1) {
@@ -592,7 +592,7 @@ public class Window extends JSFunction implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		ActionListener task = new FunctionTimerTask(this, timeIDInt, function, true);
 		int t = (int) millis;
 		if (t < 1) {

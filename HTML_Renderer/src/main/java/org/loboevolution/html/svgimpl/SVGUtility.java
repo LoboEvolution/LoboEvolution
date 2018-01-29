@@ -305,7 +305,7 @@ public class SVGUtility {
 	public static int begin(SVGAnimationImpl animate){
 		TimeList begin = animate.getBegin();
 		Time time = begin.item(0);
-		return new Double(time.getResolvedOffset()).intValue();
+		return Double.valueOf(time.getResolvedOffset()).intValue();
 	}
 	
 	public static Shape createArc(float x1, float y1, float x2, float y2, float rx, float ry, float angle, boolean fA, boolean fS) {

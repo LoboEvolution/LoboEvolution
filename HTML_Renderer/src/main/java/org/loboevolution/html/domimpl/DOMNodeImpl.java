@@ -980,7 +980,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public String getTextContent() throws DOMException {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			if (nl != null) {
@@ -1161,7 +1161,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 				if (idx == -1) {
 					throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
 				}
-				StringBuffer textBuffer = new StringBuffer();
+				StringBuilder textBuffer = new StringBuilder();
 				int firstIdx = idx;
 				List<Object> toDelete = new LinkedList<Object>();
 				for (int adjIdx = idx; --adjIdx >= 0;) {
@@ -1666,7 +1666,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * @return the inner html
 	 */
 	public String getInnerHTML() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
 			this.appendInnerHTMLImpl(buffer);
 		}
@@ -1679,7 +1679,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * @param buffer
 	 *            the buffer
 	 */
-	protected void appendInnerHTMLImpl(StringBuffer buffer) {
+	protected void appendInnerHTMLImpl(StringBuilder buffer) {
 		ArrayList<Node> nl = this.nodeList;
 		int size;
 		if (nl != null && (size = nl.size()) > 0) {
@@ -1717,7 +1717,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * @return the inner text
 	 */
 	public String getInnerText() {
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		synchronized (this.getTreeLock()) {
 			this.appendInnerTextImpl(buffer);
 		}
@@ -1730,7 +1730,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * @param buffer
 	 *            the buffer
 	 */
-	protected void appendInnerTextImpl(StringBuffer buffer) {
+	protected void appendInnerTextImpl(StringBuilder buffer) {
 		ArrayList<Node> nl = this.nodeList;
 		if (nl == null) {
 			return;

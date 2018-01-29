@@ -81,7 +81,7 @@ public class BookmarkInfo implements Serializable {
 		if (tags == null) {
 			return "";
 		}
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		boolean firstTime = true;
 		for (String tag : tags) {
 			if (firstTime) {

@@ -378,7 +378,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			boolean firstParam = true;
 			// TODO: What about the userInfo part of the URL?
 			URL noRefAction = new URL(action.getProtocol(), action.getHost(), action.getPort(), action.getFile());
-			StringBuffer newUrlBuffer = new StringBuffer(noRefAction.toExternalForm());
+			StringBuilder newUrlBuffer = new StringBuilder(noRefAction.toExternalForm());
 			if (action.getQuery() == null) {
 				newUrlBuffer.append("?");
 			} else {

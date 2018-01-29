@@ -80,7 +80,7 @@ public class XMLSerializer extends AbstractScriptableDelegate {
 	private String documentToString(Document doc) {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		elementToStream(doc.getDocumentElement(), baos);
-		return new String(baos.toByteArray());
+		return String.valueOf(baos.toByteArray());
 	}
 
 	private void elementToStream(Element element, OutputStream out) {

@@ -58,26 +58,26 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
-		setLinearX(new Double(x0.toString()));
-		setLinearX1(new Double(y0.toString()));
-		setLinearY(new Double(x1.toString()));
-		setLinearY1(new Double(y1.toString()));
+		setLinearX(Double.valueOf(x0.toString()));
+		setLinearX1(Double.valueOf(y0.toString()));
+		setLinearY(Double.valueOf(x1.toString()));
+		setLinearY1(Double.valueOf(y1.toString()));
 	}
 
 	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
-		setLinearX(new Double(x0.toString()));
-		setLinearX1(new Double(y0.toString()));
-		setLinearY(new Double(x1.toString()));
-		setLinearY1(new Double(y1.toString()));
-		setR1(new Double(r1.toString()));
-		setR2(new Double(r2.toString()));
+		setLinearX(Double.valueOf(x0.toString()));
+		setLinearX1(Double.valueOf(y0.toString()));
+		setLinearY(Double.valueOf(x1.toString()));
+		setLinearY1(Double.valueOf(y1.toString()));
+		setR1(Double.valueOf(r1.toString()));
+		setR2(Double.valueOf(r2.toString()));
 	}
 
 	@Override
 	public void addColorStop(String offset, String color) {
-		fractions.add(new Float(offset));
+		fractions.add(Float.valueOf(offset));
 		colors.add(ColorFactory.getInstance().getColor(color));
 
 	}

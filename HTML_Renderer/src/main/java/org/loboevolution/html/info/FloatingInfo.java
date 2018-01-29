@@ -42,7 +42,7 @@ public class FloatingInfo implements Serializable {
 	private ExportableFloat[] floats;
 
 	/**
-	 * Instantiates a new floating info.
+	 * Instantiates a Float.valueOfing info.
 	 *
 	 * @param shiftX
 	 *            the shift x
@@ -109,7 +109,7 @@ public class FloatingInfo implements Serializable {
 	 * Sets the floats.
 	 *
 	 * @param floats
-	 *            the new floats
+	 *            the Float.valueOfs
 	 */
 	public void setFloats(ExportableFloat[] floats) {
 		this.floats = floats;

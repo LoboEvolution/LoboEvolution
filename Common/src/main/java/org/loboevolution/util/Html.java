@@ -37,7 +37,7 @@ public class Html {
 		}
 		int length = text.length();
 		boolean prevSlashR = false;
-		StringBuffer out = new StringBuffer();
+		StringBuilder out = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			char ch = text.charAt(i);
 			switch (ch) {

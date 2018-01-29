@@ -135,7 +135,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	}
 
 	@Override
-	protected void appendInnerTextImpl(StringBuffer buffer) {
+	protected void appendInnerTextImpl(StringBuilder buffer) {
 		// nop
 	}
 

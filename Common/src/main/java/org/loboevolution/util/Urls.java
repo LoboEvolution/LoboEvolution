@@ -133,7 +133,7 @@ public class Urls {
 			throws MalformedURLException, UnsupportedEncodingException {
 
 		if (relativeUrl.contains(";base64,")) {
-			relativeUrl = new String(Base64.getEncoder().encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
+			relativeUrl = String.valueOf(Base64.getEncoder().encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
 		}
 
 		if (relativeUrl.contains("javascript:void")) {

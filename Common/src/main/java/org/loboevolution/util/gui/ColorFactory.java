@@ -161,7 +161,7 @@ public class ColorFactory {
 			int red = Integer.parseInt(strs[0].trim());
 			int green = Integer.parseInt(strs[1].trim());
 			int blue = Integer.parseInt(strs[2].trim());
-			int alpha = new Float(255 * Float.parseFloat(strs[3].trim())).intValue();
+			int alpha = Float.valueOf(255 * Float.parseFloat(strs[3].trim())).intValue();
 			color = new Color(normalize(red), normalize(green), normalize(blue), alpha);
 			colorMap.put(normalSpec, color);
 		} else {

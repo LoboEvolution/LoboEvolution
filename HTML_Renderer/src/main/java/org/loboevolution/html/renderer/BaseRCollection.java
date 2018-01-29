@@ -217,12 +217,12 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	 * 
 	 * @see
 	 * org.loboevolution.html.renderer.BoundableRenderable#extractSelectionText(
-	 * java .lang.StringBuffer, boolean,
+	 * java .lang.StringBuilder , boolean,
 	 * org.loboevolution.html.renderer.RenderableSpot,
 	 * org.loboevolution.html.renderer.RenderableSpot)
 	 */
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		Point checkPoint1 = null;
 		Point checkPoint2 = null;

@@ -86,7 +86,7 @@ public class CanvasControl extends BaseControl {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawRect(0, 0, new Integer(width), new Integer(height));
+		g2d.drawRect(0, 0, Integer.valueOf(width), Integer.valueOf(height));
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		for (int i = 0; i < listCanvasInfo.size(); i++) {

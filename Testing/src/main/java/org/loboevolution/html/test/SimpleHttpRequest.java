@@ -525,7 +525,7 @@ public class SimpleHttpRequest extends AbstractBean {
 	private String getAllResponseHeaders(URLConnection c) {
 		int idx = 0;
 		String value;
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		while ((value = c.getHeaderField(idx)) != null) {
 			String key = c.getHeaderFieldKey(idx);
 			buf.append(key);

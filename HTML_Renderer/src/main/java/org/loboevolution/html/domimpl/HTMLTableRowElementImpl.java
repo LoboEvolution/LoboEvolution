@@ -65,7 +65,7 @@ public class HTMLTableRowElementImpl extends HTMLAbstractUIElement implements HT
 				public void visit(Node node) {
 					if (node instanceof HTMLTableRowElementImpl) {
 						if (HTMLTableRowElementImpl.this == node) {
-							throw new StopVisitorException(new Integer(this.count));
+							throw new StopVisitorException(Integer.valueOf(this.count));
 						}
 						this.count++;
 					}

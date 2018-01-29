@@ -51,7 +51,7 @@ public class Strings {
 	}
 
 	/**
-	 * Instantiates a new strings.
+	 * Instantiates a String.valueOfs.
 	 */
 	private Strings() {
 	}
@@ -124,14 +124,14 @@ public class Strings {
 	 */
 	public static String leadingDigits(String text) {
 		int length = text.length();
-		StringBuffer buffer = null;
+		StringBuilder buffer = null;
 		for (int i = 0; i < length; i++) {
 			char ch = text.charAt(i);
 			if (!Character.isDigit(ch)) {
 				break;
 			}
 			if (buffer == null) {
-				buffer = new StringBuffer(3);
+				buffer = new StringBuilder(3);
 			}
 			buffer.append(ch);
 		}
@@ -147,14 +147,14 @@ public class Strings {
 	 */
 	public static String leadingNonDigits(String text) {
 		int length = text.length();
-		StringBuffer buffer = null;
+		StringBuilder buffer = null;
 		for (int i = 0; i < length; i++) {
 			char ch = text.charAt(i);
 			if (Character.isDigit(ch)) {
 				break;
 			}
 			if (buffer == null) {
-				buffer = new StringBuffer(3);
+				buffer = new StringBuilder(3);
 			}
 			buffer.append(ch);
 		}
@@ -227,7 +227,7 @@ public class Strings {
 	 * @return the java string literal
 	 */
 	public static String getJavaStringLiteral(String text) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		buf.append('"');
 		int len = text.length();
 		for (int i = 0; i < len; i++) {
@@ -266,7 +266,7 @@ public class Strings {
 	 */
 	public static String getJavaIdentifier(String candidateID) {
 		int len = candidateID.length();
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < len; i++) {
 			char ch = candidateID.charAt(i);
 			boolean good = i == 0 ? Character.isJavaIdentifierStart(ch) : Character.isJavaIdentifierPart(ch);
@@ -307,7 +307,7 @@ public class Strings {
 			resChars[i * 2] = HEX_CHARS.charAt(hi4);
 			resChars[i * 2 + 1] = HEX_CHARS.charAt(lo4);
 		}
-		return new String(resChars);
+		return String.valueOf(resChars);
 	}
 
 	/**
@@ -383,7 +383,7 @@ public class Strings {
 	public static String[] split(String phrase) {
 		int length = phrase.length();
 		ArrayList<String> wordList = new ArrayList<String>();
-		StringBuffer word = null;
+		StringBuilder word = null;
 		for (int i = 0; i < length; i++) {
 			char ch = phrase.charAt(i);
 			switch (ch) {
@@ -398,7 +398,7 @@ public class Strings {
 				break;
 			default:
 				if (word == null) {
-					word = new StringBuffer();
+					word = new StringBuilder();
 				}
 				word.append(ch);
 				break;
@@ -449,7 +449,7 @@ public class Strings {
 	 * @return the string
 	 */
 	public static String strictHtmlEncode(String rawText, boolean quotes) {
-		StringBuffer output = new StringBuffer();
+		StringBuilder output = new StringBuilder();
 		int length = rawText.length();
 		for (int i = 0; i < length; i++) {
 			char ch = rawText.charAt(i);
@@ -509,7 +509,7 @@ public class Strings {
 			return null;
 		}
 		int length = original.length();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		boolean lastSlashR = false;
 		for (int i = 0; i < length; i++) {
 			char ch = original.charAt(i);

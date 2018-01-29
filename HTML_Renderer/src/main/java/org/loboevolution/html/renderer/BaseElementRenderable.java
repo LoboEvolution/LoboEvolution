@@ -58,7 +58,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver, CSSValuesProperties {
 
 	/** The Constant INVALID_SIZE. */
-	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
+	protected static final Integer INVALID_SIZE = Integer.valueOf(Integer.MIN_VALUE);
 
 	/**
 	 * A collection of all GUI components added by descendents.
@@ -201,7 +201,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (INVALID_SIZE.equals(dw) || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			int dwInt = this.getDeclaredWidthImpl(renderState, actualAvailWidth);
-			dw = dwInt == -1 ? null : new Integer(dwInt);
+			dw = dwInt == -1 ? null : Integer.valueOf(dwInt);
 			this.declaredWidth = dw;
 		}
 		return dw;
@@ -296,7 +296,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (dh == INVALID_SIZE || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			int dhInt = this.getDeclaredHeightImpl(renderState, actualAvailHeight);
-			dh = dhInt == -1 ? null : new Integer(dhInt);
+			dh = dhInt == -1 ? null : Integer.valueOf(dhInt);
 			this.declaredHeight = dh;
 		}
 		return dh;

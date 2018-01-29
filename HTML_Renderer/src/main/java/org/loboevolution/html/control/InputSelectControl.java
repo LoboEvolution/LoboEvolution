@@ -255,13 +255,13 @@ public class InputSelectControl extends BaseInputControl {
 						if (selectedIndexes == null) {
 							selectedIndexes = new LinkedList<Integer>();
 						}
-						selectedIndexes.add(new Integer(index));
+						selectedIndexes.add(Integer.valueOf(index));
 					}
 					if (option.getDefaultSelected()) {
 						if (defaultSelectedIndexes == null) {
 							defaultSelectedIndexes = new LinkedList<Integer>();
 						}
-						defaultSelectedIndexes.add(new Integer(index));
+						defaultSelectedIndexes.add(Integer.valueOf(index));
 					}
 				}
 				if (selectedIndexes != null && !selectedIndexes.isEmpty()) {

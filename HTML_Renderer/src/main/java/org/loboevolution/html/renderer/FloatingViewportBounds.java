@@ -41,7 +41,7 @@ public class FloatingViewportBounds implements FloatingBounds {
 	private final int height;
 
 	/**
-	 * Instantiates a new floating viewport bounds.
+	 * Instantiates a Float.valueOfing viewport bounds.
 	 *
 	 * @param prevBounds
 	 *            the prev bounds

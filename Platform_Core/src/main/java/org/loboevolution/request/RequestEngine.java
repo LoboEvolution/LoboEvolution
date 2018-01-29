@@ -151,7 +151,7 @@ public final class RequestEngine {
 	 */
 	public String getCookie(URL url) {
 		Collection<?> cookies = this.cookieStore.getCookies(url.getHost(), url.getPath());
-		StringBuffer cookieText = new StringBuffer();
+		StringBuilder cookieText = new StringBuilder();
 		Iterator<?> i = cookies.iterator();
 		while (i.hasNext()) {
 			Cookie cookie = (Cookie) i.next();
@@ -287,7 +287,7 @@ public final class RequestEngine {
 			// can be picky about that (namely, java.net).
 			byte[] postContent = bufOut.toByteArray();
 			if (loggerInfo) {
-				logger.info("postData(): Will post: " + new String(postContent));
+				logger.info("postData(): Will post: " + String.valueOf(postContent));
 			}
 			if (connection instanceof HttpURLConnection) {
 				if (boolSettings.isHttpUseChunkedEncodingPOST()) {
@@ -377,7 +377,7 @@ public final class RequestEngine {
 		String newNoRefURL;
 		Parameter[] parameters = pinfo.getParameters();
 		if (parameters != null && parameters.length > 0) {
-			StringBuffer sb = new StringBuffer(baseURL);
+			StringBuilder sb = new StringBuilder(baseURL);
 			int qmIdx = baseURL.indexOf('?');
 			char separator = qmIdx == -1 ? '?' : '&';
 			for (Parameter parameter : parameters) {
@@ -629,7 +629,7 @@ public final class RequestEngine {
 	 */
 	private void printRequestHeaders(URLConnection connection) {
 		Map<String, List<String>> headers = connection.getRequestProperties();
-		StringBuffer buffer = new StringBuffer();
+		StringBuilder buffer = new StringBuilder();
 		for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
 			buffer.append(entry.getKey() + ": " + entry.getValue());
 			buffer.append(System.getProperty("line.separator"));

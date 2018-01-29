@@ -131,7 +131,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				if (javaObject == null) {
 					throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 				}
-				Object raw = getter.invoke(javaObject, new Object[] { new Integer(index) });
+				Object raw = getter.invoke(javaObject, new Object[] { Integer.valueOf(index) });
 				if (raw != null) {
 					return JavaScript.getInstance().getJavascriptObject(raw, this.getParentScope());
 				}
@@ -226,7 +226,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				}
 				Object actualValue;
 				actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
-				setter.invoke(this.getJavaObject(), new Object[] { new Integer(index), actualValue });
+				setter.invoke(this.getJavaObject(), new Object[] { Integer.valueOf(index), actualValue });
 			} catch (Exception err) {
 				err.getCause();
 			}

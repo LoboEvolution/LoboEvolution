@@ -455,7 +455,7 @@ public class Session extends AbstractBean {
 			setBytesSoFar(0);
 			setState(State.CONNECTING);
 			// 0. Create the URL
-			StringBuffer surl = new StringBuffer(req.getUrl());
+			StringBuilder surl = new StringBuilder(req.getUrl());
 			if (surl.length() == 0) {
 				setState(State.FAILED);
 				throw new IllegalStateException("Cannot excecute a request that has no URL specified");

@@ -64,7 +64,7 @@ public class BooleanSettings implements Serializable {
 	}
 
 	/**
-	 * Instantiates a new boolean settings.
+	 * Instantiates a Boolean.valueOf settings.
 	 */
 	private BooleanSettings() {
 		this.resetDefaults();

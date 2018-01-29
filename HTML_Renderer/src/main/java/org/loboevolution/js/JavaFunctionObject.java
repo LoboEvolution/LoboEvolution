@@ -174,7 +174,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		} catch (InvocationTargetException ite) {
 			logger.error("Unable to call " + this.className + " on " + jcw.getJavaObject() + ".");
 		} catch (IllegalArgumentException iae) {
-			StringBuffer argTypes = new StringBuffer();
+			StringBuilder argTypes = new StringBuilder();
 			for (int i = 0; i < actualArgs.length; i++) {
 				if (i > 0) {
 					argTypes.append(", ");

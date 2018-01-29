@@ -59,13 +59,13 @@ public class CookieManager extends CookieHandler {
 		Map<String, List<String>> resultHeaders = new HashMap<String, List<String>>(2);
 		Collection<Cookie> cookies = this.cookieStore.getCookies(uri.getHost(), uri.getPath());
 		if (cookies != null) {
-			StringBuffer cookieHeaderValue = null;
+			StringBuilder cookieHeaderValue = null;
 			for (Cookie cookie : cookies) {
 				String cookieName = cookie.getName();
 				String cookieValue = cookie.getValue();
 				String assignment = cookieName + "=" + cookieValue;
 				if (cookieHeaderValue == null) {
-					cookieHeaderValue = new StringBuffer();
+					cookieHeaderValue = new StringBuilder();
 				} else {
 					cookieHeaderValue.append("; ");
 				}

@@ -85,10 +85,10 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	 * 
 	 * @see
 	 * org.loboevolution.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
-	 * StringBuffer)
+	 * StringBuilder )
 	 */
 	@Override
-	protected void appendInnerTextImpl(StringBuffer buffer) {
+	protected void appendInnerTextImpl(StringBuilder buffer) {
 		int length = buffer.length();
 		int lineBreaks;
 		if (length == 0) {

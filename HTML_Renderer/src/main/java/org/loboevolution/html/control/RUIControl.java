@@ -266,12 +266,12 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * 
 	 * @see
 	 * org.loboevolution.html.renderer.BaseRCollection#extractSelectionText(java.
-	 * lang .StringBuffer, boolean,
+	 * lang .StringBuilder , boolean,
 	 * org.loboevolution.html.renderer.RenderableSpot,
 	 * org.loboevolution.html.renderer.RenderableSpot)
 	 */
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		// No text here
 		return inSelection;

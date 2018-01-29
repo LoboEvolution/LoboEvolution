@@ -260,7 +260,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 * @return the error url text
 	 */
 	private static String getErrorUrlText(URL url, String method) {
-		StringBuffer buf = new StringBuffer();
+		StringBuilder buf = new StringBuilder();
 		boolean isGet = "GET".equals(method);
 		if (isGet) {
 			buf.append("<a href=\"" + url.toExternalForm() + "\">");

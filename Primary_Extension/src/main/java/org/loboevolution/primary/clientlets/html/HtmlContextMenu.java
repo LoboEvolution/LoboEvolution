@@ -320,7 +320,7 @@ public class HtmlContextMenu {
 	private String urlContent(String webPage) {
 
 		String result = "";
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		InputStream is = null;
 		InputStreamReader isr = null;
 

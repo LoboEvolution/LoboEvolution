@@ -297,7 +297,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		} else {
 			displayInt = this.getDefaultDisplay();
 		}
-		d = new Integer(displayInt);
+		d = Integer.valueOf(displayInt);
 		this.iDisplay = d;
 		return displayInt;
 	}
@@ -401,7 +401,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		String fontFamily = FontValues.getFontFamily(style.getFontFamily(), prs);
 		String fontStyle = FontValues.getFontStyle(style.getFontStyle(), prs);
 		String fontWeight = FontValues.getFontWeight(style.getFontWeight(), prs);
-		Float fontSize = new Float(FontValues.getFontSize(style.getFontSize(), prs));
+		Float fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), prs));
 		Integer superscript = FontValues.getFontSuperScript(style.getVerticalAlign(), prs);
 		Integer intLetterSpacing = HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0);
 		Integer underline = FontValues.getFontUnderline(style.getTextDecoration(), prs);
@@ -837,7 +837,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}
-			counterArray.set(nesting, new Integer(value));
+			counterArray.set(nesting, Integer.valueOf(value));
 		}
 	}
 
@@ -867,7 +867,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		}
 		Integer integer = (Integer) counterArray.get(nesting);
 		int prevValue = integer == null ? 0 : integer.intValue();
-		counterArray.set(nesting, new Integer(prevValue + 1));
+		counterArray.set(nesting, Integer.valueOf(prevValue + 1));
 		return prevValue;
 	}
 
@@ -1014,7 +1014,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				wsValue = WS_NORMAL;
 			}
 		}
-		this.iWhiteSpace = new Integer(wsValue);
+		this.iWhiteSpace = Integer.valueOf(wsValue);
 		return wsValue;
 	}
 
@@ -1106,7 +1106,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				}
 			}
 		}
-		this.cachedVisibility = new Integer(visibility);
+		this.cachedVisibility = Integer.valueOf(visibility);
 		return visibility;
 	}
 
@@ -1157,7 +1157,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				}
 			}
 		}
-		this.cachedPosition = new Integer(position);
+		this.cachedPosition = Integer.valueOf(position);
 		return position;
 	}
 
@@ -1205,7 +1205,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				}
 			}
 		}
-		this.cachedFloat = new Integer(floatValue);
+		this.cachedFloat = Integer.valueOf(floatValue);
 		return floatValue;
 	}
 

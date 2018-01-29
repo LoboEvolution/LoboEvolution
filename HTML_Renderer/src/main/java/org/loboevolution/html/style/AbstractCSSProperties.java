@@ -280,7 +280,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 * Sets the float.
 	 *
 	 * @param value
-	 *            the new float
+	 *            the Float.valueOf
 	 */
 	public void setFloat(String value) {
 		this.setPropertyValueLC(FLOAT, value);

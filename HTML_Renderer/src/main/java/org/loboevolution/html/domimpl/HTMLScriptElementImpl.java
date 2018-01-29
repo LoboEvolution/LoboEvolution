@@ -330,7 +330,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	private static String httpURLConnection(String srtUrl) {
 
-		StringBuffer response = new StringBuffer();
+		StringBuilder response = new StringBuilder();
 		int responseCode = -1;
 		try {
 
@@ -363,10 +363,10 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 * 
 	 * @see
 	 * org.loboevolution.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
-	 * StringBuffer)
+	 * StringBuilder )
 	 */
 	@Override
-	protected void appendInnerTextImpl(StringBuffer buffer) {
+	protected void appendInnerTextImpl(StringBuilder buffer) {
 		// nop
 	}
 

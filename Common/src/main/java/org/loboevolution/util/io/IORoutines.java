@@ -92,7 +92,7 @@ public class IORoutines {
 			}
 			offset += numRead;
 		}
-		return new String(buffer, 0, offset);
+		return String.valueOf(buffer, 0, offset);
 	}
 
 	/**
@@ -253,10 +253,10 @@ public class IORoutines {
 	 */
 	public static String readLine(InputStream in) throws IOException {
 		int b;
-		StringBuffer sb = null;
+		StringBuilder sb = null;
 		OUTER: while ((b = in.read()) != -1) {
 			if (sb == null) {
-				sb = new StringBuffer();
+				sb = new StringBuilder();
 			}
 			switch (b) {
 			case (byte) '\n':

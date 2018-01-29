@@ -224,7 +224,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 * @return the string
 	 */
 	public static String unquoteAndUnescape(String text) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		int index = 0;
 		int length = text.length();
 		boolean escape = false;
@@ -292,7 +292,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 * @return the string
 	 */
 	public static String quoteAndEscape(String text) {
-		StringBuffer result = new StringBuffer();
+		StringBuilder result = new StringBuilder();
 		result.append("'");
 		int index = 0;
 		int length = text.length();
@@ -343,21 +343,21 @@ public class HtmlValues implements CSSValuesProperties {
 		ArrayList<String> tokens = new ArrayList<String>(4);
 		int len = cssValue.length();
 		int parenCount = 0;
-		StringBuffer currentWord = null;
+		StringBuilder currentWord = null;
 		for (int i = 0; i < len; i++) {
 			char ch = cssValue.charAt(i);
 			switch (ch) {
 			case '(':
 				parenCount++;
 				if (currentWord == null) {
-					currentWord = new StringBuffer();
+					currentWord = new StringBuilder();
 				}
 				currentWord.append(ch);
 				break;
 			case ')':
 				parenCount--;
 				if (currentWord == null) {
-					currentWord = new StringBuffer();
+					currentWord = new StringBuilder();
 				}
 				currentWord.append(ch);
 				break;
@@ -372,7 +372,7 @@ public class HtmlValues implements CSSValuesProperties {
 				} 
 			default:
 				if (currentWord == null) {
-					currentWord = new StringBuffer();
+					currentWord = new StringBuilder();
 				}
 				currentWord.append(ch);
 				break;

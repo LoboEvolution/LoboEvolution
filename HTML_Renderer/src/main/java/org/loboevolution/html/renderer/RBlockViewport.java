@@ -309,7 +309,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		this.availContentHeight = availh;
 		this.availContentWidth = availw;
 
-		// New floating algorithm.
+		// Float.valueOfing algorithm.
 		this.layoutPass((DOMNodeImpl) this.modelNode);
 
 		Collection delayedPairs = container.getDelayedPairs();
@@ -677,7 +677,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					: new ParentFloatingBoundsSource(blockShiftRight, expectedWidth, newX, newY, floatBounds);
 			renderable.layout(availContentWidth, availContentHeight, true, false, floatBoundsSource, this.sizeOnly);
 			this.addAsSeqBlock(renderable, false, false, false, false);
-			// Calculate new floating bounds after block has been put in place.
+			// Calculate Float.valueOfing bounds after block has been put in place.
 			FloatingInfo floatingInfo = renderable.getExportableFloatingInfo();
 			if (floatingInfo != null) {
 				this.importFloatingInfo(floatingInfo, renderable);
@@ -1349,7 +1349,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			this.currentLine.setAllowOverflow(allowOverflow);
 			try {
 				int length = text.length();
-				StringBuffer word = new StringBuffer(12);
+				StringBuilder word = new StringBuilder(12);
 				for (int i = 0; i < length; i++) {
 					char ch = text.charAt(i);
 					if (Character.isWhitespace(ch)) {
@@ -1388,7 +1388,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		} else {
 			int length = text.length();
 			boolean lastCharSlashR = false;
-			StringBuffer line = new StringBuffer();
+			StringBuilder line = new StringBuilder();
 			for (int i = 0; i < length; i++) {
 				char ch = text.charAt(i);
 				switch (ch) {

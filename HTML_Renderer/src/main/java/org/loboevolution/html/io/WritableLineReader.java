@@ -33,7 +33,7 @@ import java.io.Reader;
 public class WritableLineReader extends LineNumberReader {
 	
 	/** The write buffer. */
-	private StringBuffer writeBuffer = null;
+	private StringBuilder writeBuffer = null;
 
 	/**
 	 * Instantiates a new writable line reader.
@@ -67,7 +67,7 @@ public class WritableLineReader extends LineNumberReader {
 	 */
 	@Override
 	public int read() throws IOException {
-		StringBuffer sb = this.writeBuffer;
+		StringBuilder sb = this.writeBuffer;
 		if (sb != null && sb.length() > 0) {
 			char ch = sb.charAt(0);
 			sb.deleteCharAt(0);
@@ -86,7 +86,7 @@ public class WritableLineReader extends LineNumberReader {
 	 */
 	@Override
 	public int read(char[] b, int off, int len) throws IOException {
-		StringBuffer sb = this.writeBuffer;
+		StringBuilder sb = this.writeBuffer;
 		if (sb != null && sb.length() > 0) {
 			int srcEnd = Math.min(sb.length(), len);
 			sb.getChars(0, srcEnd, b, off);
@@ -106,7 +106,7 @@ public class WritableLineReader extends LineNumberReader {
 	 */
 	@Override
 	public boolean ready() throws IOException {
-		StringBuffer sb = this.writeBuffer;
+		StringBuilder sb = this.writeBuffer;
 		if (sb != null && sb.length() > 0) {
 			return true;
 		}
@@ -135,9 +135,9 @@ public class WritableLineReader extends LineNumberReader {
 	 */
 	public void write(String text) throws IOException {
 		// Document overrides this to know that new data is coming.
-		StringBuffer sb = this.writeBuffer;
+		StringBuilder sb = this.writeBuffer;
 		if (sb == null) {
-			sb = new StringBuffer();
+			sb = new StringBuilder();
 			this.writeBuffer = sb;
 		}
 		sb.append(text);

@@ -48,7 +48,7 @@ public class RListItem extends BaseRListElement implements HtmlAttributeProperti
 	private static final int BULLET_RMARGIN = 5;
 	
 	/** The Constant UNSET. */
-	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
+	private static final Integer UNSET = Integer.valueOf(Integer.MIN_VALUE);
 
 	/** The value. */
 	private Integer value = null;

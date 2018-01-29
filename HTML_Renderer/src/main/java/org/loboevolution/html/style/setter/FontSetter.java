@@ -91,7 +91,7 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 					properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
 				}
 				if (++i < length) {
-					StringBuffer fontFamilyBuff = new StringBuffer();
+					StringBuilder fontFamilyBuff = new StringBuilder();
 					do {
 						token = tokens[i];
 						fontFamilyBuff.append(token);

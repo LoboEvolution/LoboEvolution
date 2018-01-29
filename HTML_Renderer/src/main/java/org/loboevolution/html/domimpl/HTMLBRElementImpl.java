@@ -63,10 +63,10 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 	 * 
 	 * @see
 	 * org.loboevolution.html.domimpl.DOMNodeImpl#appendInnerTextImpl(java.lang.
-	 * StringBuffer)
+	 * StringBuilder )
 	 */
 	@Override
-	protected void appendInnerTextImpl(StringBuffer buffer) {
+	protected void appendInnerTextImpl(StringBuilder buffer) {
 		buffer.append("\r\n");
 		super.appendInnerTextImpl(buffer);
 	}
