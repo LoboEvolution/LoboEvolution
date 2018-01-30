@@ -115,5 +115,6 @@ public class RegistryPanel extends IzPanel implements NativeLibraryClient {
 	 */
 	@Override
 	public void freeLibrary(String arg0) {
+		return;
 	}
 }

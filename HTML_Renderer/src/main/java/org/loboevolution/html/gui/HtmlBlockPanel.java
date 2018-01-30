@@ -41,10 +41,10 @@ import java.awt.datatransfer.ClipboardOwner;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
@@ -193,14 +193,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 					KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
 					JComponent.WHEN_FOCUSED);
 		}
-		this.addMouseListener(new MouseListener() {
+		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				onMouseClick(e);
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
 			}
 
 			@Override
@@ -232,17 +228,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		});
 		this.addMouseWheelListener(e -> onMouseWheelMoved(e));
 
-		this.addKeyListener(new KeyListener() {
-
-			@Override
-			public void keyTyped(KeyEvent evt) {
-
-			}
-
+		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent evt) {
 				onKeyUp(evt);
-
 			}
 
 			@Override
@@ -970,6 +959,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void lostOwnership(Clipboard arg0, Transferable arg1) {
+		return;
 	}
 
 	@Override
@@ -986,6 +976,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		// We shouldn't do anything here. Changes in renderer
 		// tree do not have any bearing on validity of GUI
 		// component.
+		return;
 	}
 
 	@Override
@@ -1107,7 +1098,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void addDelayedPair(DelayedPair pair) {
-		// NOP
+		return;
 	}
 
 	@Override
@@ -1122,6 +1113,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void clearDelayedPairs() {
+		return;
 	}
 
 	/**

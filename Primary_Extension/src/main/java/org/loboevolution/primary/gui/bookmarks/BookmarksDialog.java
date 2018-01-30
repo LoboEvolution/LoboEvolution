@@ -23,8 +23,8 @@ package org.loboevolution.primary.gui.bookmarks;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Point;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -138,7 +138,7 @@ public class BookmarksDialog extends JDialog {
 		JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
 		rowSorter = new TableRowSorter<>(jtable.getModel());
 		jtable.setRowSorter(rowSorter);
-		jtable.addMouseListener(new MouseListener() {
+		jtable.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -160,22 +160,6 @@ public class BookmarksDialog extends JDialog {
 					jtable.setComponentPopupMenu(popupMenu);
 
 				}
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseExited(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent arg0) {
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
 			}
 		});
 		return new JScrollPane(jtable);

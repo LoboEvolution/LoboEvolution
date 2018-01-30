@@ -175,6 +175,9 @@ public interface HtmlJsAttributeProperties {
 
 	/** The onprogress. */
 	String ONPROGRESS = "onprogress";
+	
+	/** The onratechangea*/
+	String ONRATECHANGE = "onratechangea";
 
 	/** The onreadystatechange. */
 	String ONREADYSTATECHANGE = "onreadystatechange";

@@ -27,9 +27,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.InputEvent;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Rectangle2D;
@@ -47,7 +47,7 @@ import com.sun.pdfview.PDFPage;
  * A Swing-based panel that displays a PDF page image. If the zoom tool is in
  * use, allows the user to select a particular region of the image to be zoomed.
  */
-public class PagePanel extends JPanel implements ImageObserver, MouseListener, MouseMotionListener {
+public class PagePanel extends JPanel implements ImageObserver {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(PagePanel.class);
@@ -102,8 +102,89 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 		super();
 		setPreferredSize(new Dimension(800, 600));
 		setFocusable(true);
-		addMouseListener(this);
-		addMouseMotionListener(this);
+		addMouseListener(new MouseAdapter() {
+			
+			/** Handles a mousePressed event */
+			@Override
+			public void mousePressed(MouseEvent evt) {
+				downx = evt.getX();
+				downy = evt.getY();
+			}
+
+			/**
+			 * Handles a mouseReleased event. If zooming is turned on and there's a
+			 * valid zoom rectangle, set the image clip to the zoom rect.
+			 */
+			@Override
+			public void mouseReleased(MouseEvent evt) {
+				// calculate new clip
+				if (!useZoom || zoomRect == null || zoomRect.width == 0 || zoomRect.height == 0) {
+					zoomRect = null;
+					return;
+				}
+
+				setClip(new Rectangle2D.Double(zoomRect.x - offx, zoomRect.y - offy, zoomRect.width, zoomRect.height));
+
+				zoomRect = null;
+			}			
+		});
+		
+		addMouseMotionListener(new MouseMotionAdapter() {
+			
+			/**
+			 * Handles a mouseDragged event. Constrains the zoom rect to the aspect
+			 * ratio of the panel unless the shift key is down.
+			 */
+			@Override
+			public void mouseDragged(MouseEvent evt) {
+				if (useZoom) {
+					int x = evt.getX();
+					int y = evt.getY();
+					int dx = Math.abs(x - downx);
+					int dy = Math.abs(y - downy);
+					// constrain to the aspect ratio of the panel
+					if ((evt.getModifiers() & InputEvent.SHIFT_MASK) == 0) {
+						float aspect = (float) dx / (float) dy;
+						float waspect = (float) getWidth() / (float) getHeight();
+						if (aspect > waspect) {
+							dy = (int) (dx / waspect);
+						} else {
+							dx = (int) (dy * waspect);
+						}
+					}
+					if (x < downx) {
+						x = downx - dx;
+					}
+					if (y < downy) {
+						y = downy - dy;
+					}
+					Rectangle old = zoomRect;
+					// ignore small rectangles
+					if (dx < 5 || dy < 5) {
+						zoomRect = null;
+					} else {
+						zoomRect = new Rectangle(Math.min(downx, x), Math.min(downy, y), dx, dy);
+					}
+					// calculate the repaint region. Should be the union of the
+					// old zoom rect and the new one, with an extra pixel on the
+					// bottom and right because of the way rectangles are drawn.
+					if (zoomRect != null) {
+						if (old != null) {
+							old.add(zoomRect);
+						} else {
+							old = new Rectangle(zoomRect);
+						}
+					}
+					if (old != null) {
+						old.width++;
+						old.height++;
+					}
+					if (old != null) {
+						repaint(old);
+					}
+				}
+			}
+		});
 	}
 
 	/**
@@ -279,14 +360,7 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 			return true;
 		}
 	}
-
-	// public void addPageChangeListener(PageChangeListener pl) {
-	// listener= pl;
-	// }
-
-	// public void removePageChangeListener(PageChangeListener pl) {
-	// listener= null;
-	// }
+	
 	/**
 	 * Turns the zoom tool on or off. If on, mouse drags will draw the zooming
 	 * marquee. If off, mouse drags are ignored.
@@ -304,99 +378,5 @@ public class PagePanel extends JPanel implements ImageObserver, MouseListener, M
 	public void setClip(Rectangle2D clip) {
 		this.clip = clip;
 		showPage(currentPage);
-	}
-
-	/** Handles a mousePressed event */
-	@Override
-	public void mousePressed(MouseEvent evt) {
-		downx = evt.getX();
-		downy = evt.getY();
-	}
-
-	/**
-	 * Handles a mouseReleased event. If zooming is turned on and there's a
-	 * valid zoom rectangle, set the image clip to the zoom rect.
-	 */
-	@Override
-	public void mouseReleased(MouseEvent evt) {
-		// calculate new clip
-		if (!useZoom || zoomRect == null || zoomRect.width == 0 || zoomRect.height == 0) {
-			zoomRect = null;
-			return;
-		}
-
-		setClip(new Rectangle2D.Double(zoomRect.x - offx, zoomRect.y - offy, zoomRect.width, zoomRect.height));
-
-		zoomRect = null;
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent evt) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent evt) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent evt) {
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent evt) {
-	}
-
-	/**
-	 * Handles a mouseDragged event. Constrains the zoom rect to the aspect
-	 * ratio of the panel unless the shift key is down.
-	 */
-	@Override
-	public void mouseDragged(MouseEvent evt) {
-		if (useZoom) {
-			int x = evt.getX();
-			int y = evt.getY();
-			int dx = Math.abs(x - downx);
-			int dy = Math.abs(y - downy);
-			// constrain to the aspect ratio of the panel
-			if ((evt.getModifiers() & InputEvent.SHIFT_MASK) == 0) {
-				float aspect = (float) dx / (float) dy;
-				float waspect = (float) getWidth() / (float) getHeight();
-				if (aspect > waspect) {
-					dy = (int) (dx / waspect);
-				} else {
-					dx = (int) (dy * waspect);
-				}
-			}
-			if (x < downx) {
-				x = downx - dx;
-			}
-			if (y < downy) {
-				y = downy - dy;
-			}
-			Rectangle old = zoomRect;
-			// ignore small rectangles
-			if (dx < 5 || dy < 5) {
-				zoomRect = null;
-			} else {
-				zoomRect = new Rectangle(Math.min(downx, x), Math.min(downy, y), dx, dy);
-			}
-			// calculate the repaint region. Should be the union of the
-			// old zoom rect and the new one, with an extra pixel on the
-			// bottom and right because of the way rectangles are drawn.
-			if (zoomRect != null) {
-				if (old != null) {
-					old.add(zoomRect);
-				} else {
-					old = new Rectangle(zoomRect);
-				}
-			}
-			if (old != null) {
-				old.width++;
-				old.height++;
-			}
-			if (old != null) {
-				repaint(old);
-			}
-		}
 	}
 }

@@ -59,6 +59,7 @@ public class GenericURLConnection extends URLConnection {
 	 */
 	@Override
 	public void connect() throws IOException {
+		return;
 	}
 
 	/*

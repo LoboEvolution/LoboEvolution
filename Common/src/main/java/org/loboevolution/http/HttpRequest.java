@@ -607,6 +607,7 @@ public class HttpRequest extends AbstractBean {
 	 * no need to call super.handleResponse(txt).
 	 */
 	protected void handleResponse(String responseText) throws Exception {
+		return;
 	}
 
 	// ---------------------------------------------- Private helper methods

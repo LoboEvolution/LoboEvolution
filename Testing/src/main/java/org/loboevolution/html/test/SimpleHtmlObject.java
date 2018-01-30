@@ -58,7 +58,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void reset(int availWidth, int availHeight) {
-		// nop
+		return;
 	}
 
 	/*
@@ -68,6 +68,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void destroy() {
+		return;
 	}
 
 	/*
@@ -87,6 +88,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void resume() {
+		return;
 	}
 
 	/*
@@ -96,5 +98,6 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void suspend() {
+		return;
 	}
 }

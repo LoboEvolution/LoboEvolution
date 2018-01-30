@@ -51,6 +51,7 @@ import org.loboevolution.html.FormInput;
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.dombl.FrameNode;
+import org.loboevolution.html.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
@@ -935,8 +936,11 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	@Override
 	public void onMouseOut(HTMLElement element, MouseEvent event) {
+		if (element instanceof HTMLAnchorElementImpl) {
+			setStatus(null);
+		}
 	}
-
+	
 	/**
 	 * This method can be overridden to receive notifications when the mouse
 	 * first enters an element.
@@ -948,6 +952,10 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	@Override
 	public void onMouseOver(HTMLElement element, MouseEvent event) {
+		if (element instanceof HTMLAnchorElementImpl) {
+			HTMLAnchorElementImpl linkElement = (HTMLAnchorElementImpl) element;
+			setStatus(linkElement.getAbsoluteHref());
+		}
 	}
 
 	/*

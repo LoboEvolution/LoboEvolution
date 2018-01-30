@@ -81,10 +81,12 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void blur() {
+		return;
 	}
 
 	@Override
 	public void click() {
+		return;
 	}
 
 	@Override
@@ -129,10 +131,12 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void select() {
+		return;
 	}
 
 	@Override
 	public void setChecked(boolean checked) {
+		return;
 	}
 
 	@Override
@@ -142,10 +146,12 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setMaxLength(int maxLength) {
+		return;
 	}
 
 	@Override
 	public void setReadOnly(boolean readOnly) {
+		return;
 	}
 
 	@Override
@@ -156,6 +162,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setTabIndex(int tabIndex) {
+		return;
 	}
 
 	@Override
@@ -180,15 +187,17 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setCols(int cols) {
+		return;
 	}
 
 	@Override
 	public void setRows(int rows) {
+		return;
 	}
 
 	@Override
 	public void setMin(int value) {
-		// For numeric
+		return;
 	}
 
 	@Override
@@ -198,7 +207,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setMax(int value) {
-		// For numeric
+		return;
 	}
 
 	@Override
@@ -208,7 +217,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setPattern(String value) {
-
+		return;
 	}
 
 	@Override
@@ -263,16 +272,19 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	 */
 	public void setMultiple(boolean value) {
 		// For selects
+		return;
 	}
 
 	@Override
 	public void setSelectedIndex(int value) {
 		// For selects
+		return;
 	}
 
 	@Override
 	public void setVisibleSize(int value) {
 		// For selects
+		return;
 	}
 
 	@Override

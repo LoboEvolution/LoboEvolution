@@ -91,6 +91,8 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 
 	/** The onprogress. */
 	private Function onprogress;
+	
+	private Function onratechange;
 
 	/** The onreadystatechange. */
 	private Function onreadystatechange;
@@ -928,7 +930,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 	 */
 	@Override
 	public Function getOnratechange() {
-		return this.getEventFunction(onprogress, ONPROGRESS);
+		return this.getEventFunction(onratechange, ONRATECHANGE);
 	}
 
 	/**
@@ -939,6 +941,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 	 */
 	@Override
 	public void setOnratechange(Function onratechange) {
+		this.onratechange = onratechange;
 	}
 
 	/**

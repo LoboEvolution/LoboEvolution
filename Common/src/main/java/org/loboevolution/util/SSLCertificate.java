@@ -57,10 +57,12 @@ public class SSLCertificate {
 
 			@Override
 			public void checkClientTrusted(X509Certificate[] certs, String authType) {
+				return;
 			}
 
 			@Override
 			public void checkServerTrusted(X509Certificate[] certs, String authType) {
+				return;
 			}
 		} };
 		try {

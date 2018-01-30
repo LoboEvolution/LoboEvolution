@@ -36,6 +36,7 @@ public abstract class MenuAdapter implements MenuListener {
 	 */
 	@Override
 	public void menuCanceled(MenuEvent e) {
+		return;
 	}
 
 	/*
@@ -46,6 +47,7 @@ public abstract class MenuAdapter implements MenuListener {
 	 */
 	@Override
 	public void menuDeselected(MenuEvent e) {
+		return;
 	}
 
 	/*
@@ -56,5 +58,6 @@ public abstract class MenuAdapter implements MenuListener {
 	 */
 	@Override
 	public void menuSelected(MenuEvent e) {
+		return;
 	}
 }

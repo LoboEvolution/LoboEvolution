@@ -28,6 +28,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -76,7 +77,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		widget.setSelectionColor(Color.BLUE);
 		DOMElementImpl element = this.controlElement;
 		widget.setText(element.getAttribute(VALUE));
-		widget.addKeyListener(new KeyListener() {
+		widget.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyPressed(KeyEvent event) {
@@ -88,10 +89,6 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 			public void keyReleased(KeyEvent event) {
 				DOMEventImpl.getInstance().onKeyUp(modelNode, event);
 
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
 			}
 		});
 

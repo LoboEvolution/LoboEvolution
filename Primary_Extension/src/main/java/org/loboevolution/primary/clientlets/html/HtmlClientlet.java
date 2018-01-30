@@ -44,7 +44,7 @@ import org.loboevolution.clientlet.ClientletContext;
 import org.loboevolution.clientlet.ClientletException;
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.html.HtmlRendererContext;
-import org.loboevolution.html.dombl.DocumentNotificationListener;
+import org.loboevolution.html.dombl.DocumentNotificationAdapter;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
@@ -346,7 +346,7 @@ public class HtmlClientlet implements Clientlet {
 	 *
 	 * @see LocalDocumentNotificationEvent
 	 */
-	private static class LocalDocumentNotificationListener implements DocumentNotificationListener {
+	private static class LocalDocumentNotificationListener extends DocumentNotificationAdapter {
 
 		/** The Constant MAX_WAIT. */
 		private static final int MAX_WAIT = 7000;
@@ -412,16 +412,6 @@ public class HtmlClientlet implements Clientlet {
 		 * (non-Javadoc)
 		 * 
 		 * @see org.loboevolution.html.dombl.DocumentNotificationListener#
-		 * allInvalidated()
-		 */
-		@Override
-		public void allInvalidated() {
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.loboevolution.html.dombl.DocumentNotificationListener#
 		 * externalScriptLoading (org.loboevolution.html.domimpl.DOMNodeImpl)
 		 */
 		@Override
@@ -430,27 +420,6 @@ public class HtmlClientlet implements Clientlet {
 			if (this.hasVisibleElements) {
 				this.ensureSwitchedToRendering();
 			}
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.loboevolution.html.dombl.DocumentNotificationListener#invalidated(
-		 * org. loboevolution.html.domimpl.DOMNodeImpl)
-		 */
-		@Override
-		public void invalidated(DOMNodeImpl node) {
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.loboevolution.html.dombl.DocumentNotificationListener#
-		 * lookInvalidated(org .loboevolution.html.domimpl.DOMNodeImpl)
-		 */
-		@Override
-		public void lookInvalidated(DOMNodeImpl node) {
 		}
 
 		/**
@@ -503,36 +472,6 @@ public class HtmlClientlet implements Clientlet {
 			if (this.hasVisibleElements && System.currentTimeMillis() - this.startTimestamp > MAX_WAIT) {
 				this.ensureSwitchedToRendering();
 			}
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.loboevolution.html.dombl.DocumentNotificationListener#
-		 * positionInvalidated (org.loboevolution.html.domimpl.DOMNodeImpl)
-		 */
-		@Override
-		public void positionInvalidated(DOMNodeImpl node) {
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.loboevolution.html.dombl.DocumentNotificationListener#
-		 * sizeInvalidated(org .loboevolution.html.domimpl.DOMNodeImpl)
-		 */
-		@Override
-		public void sizeInvalidated(DOMNodeImpl node) {
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.loboevolution.html.dombl.DocumentNotificationListener#
-		 * structureInvalidated (org.loboevolution.html.domimpl.DOMNodeImpl)
-		 */
-		@Override
-		public void structureInvalidated(DOMNodeImpl node) {
 		}
 
 		/**

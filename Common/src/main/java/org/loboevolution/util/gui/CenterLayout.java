@@ -47,6 +47,7 @@ public class CenterLayout implements LayoutManager {
 	 */
 	@Override
 	public void addLayoutComponent(String arg0, Component arg1) {
+		return;
 	}
 
 	/*
@@ -56,6 +57,7 @@ public class CenterLayout implements LayoutManager {
 	 */
 	@Override
 	public void removeLayoutComponent(Component arg0) {
+		return;
 	}
 
 	/*

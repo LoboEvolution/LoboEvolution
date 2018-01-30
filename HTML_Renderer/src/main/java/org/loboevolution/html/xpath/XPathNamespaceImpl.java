@@ -126,6 +126,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	 */
 	@Override
 	public void setNodeValue(String arg0) throws DOMException {
+		return;
 	}
 
 	/**
@@ -288,6 +289,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	 */
 	@Override
 	public void setPrefix(String arg0) throws DOMException {
+		return;
 	}
 
 	/**
@@ -295,7 +297,6 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	 */
 	@Override
 	public String getLocalName() {
-
 		// For namespace node, the local name is the same as the prefix
 		return m_attributeNode.getPrefix();
 	}

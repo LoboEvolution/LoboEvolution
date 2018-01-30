@@ -174,6 +174,7 @@ public class DataURLConnection extends HttpURLConnection {
 
 	@Override
 	public void disconnect() {
+		return;
 	}
 
 	@Override

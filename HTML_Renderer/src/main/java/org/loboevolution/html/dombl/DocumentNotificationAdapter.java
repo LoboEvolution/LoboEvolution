@@ -36,6 +36,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void allInvalidated() {
+		return;
 	}
 
 	/*
@@ -46,6 +47,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void externalScriptLoading(DOMNodeImpl node) {
+		return;
 	}
 
 	/*
@@ -57,6 +59,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void invalidated(DOMNodeImpl node) {
+		return;
 	}
 
 	/*
@@ -68,6 +71,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void lookInvalidated(DOMNodeImpl node) {
+		return;
 	}
 
 	/*
@@ -79,6 +83,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void nodeLoaded(DOMNodeImpl node) {
+		return;
 	}
 
 	/*
@@ -89,6 +94,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void positionInvalidated(DOMNodeImpl node) {
+		return;
 	}
 
 	/*
@@ -100,6 +106,7 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void sizeInvalidated(DOMNodeImpl node) {
+		return;
 	}
 
 	/*
@@ -110,5 +117,6 @@ public abstract class DocumentNotificationAdapter implements DocumentNotificatio
 	 */
 	@Override
 	public void structureInvalidated(DOMNodeImpl node) {
+		return;
 	}
 }

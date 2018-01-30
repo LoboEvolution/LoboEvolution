@@ -38,5 +38,6 @@ public class NopLayout implements MarkupLayout {
 	 */
 	@Override
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+		return;
 	}
 }

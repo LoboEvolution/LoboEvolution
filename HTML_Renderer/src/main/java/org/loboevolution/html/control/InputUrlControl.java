@@ -21,6 +21,7 @@
 package org.loboevolution.html.control;
 
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.regex.Matcher;
@@ -72,7 +73,7 @@ public class InputUrlControl extends BaseInputTextControl {
 	}
 
 	private KeyListener addKeyListener() {
-		KeyListener keyListener = new KeyListener() {
+		KeyAdapter keyAdapter = new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
@@ -83,17 +84,8 @@ public class InputUrlControl extends BaseInputTextControl {
 					url.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				}
 			}
-
-			@Override
-			public void keyReleased(KeyEvent keyEvent) {
-			}
-
-			@Override
-			public void keyTyped(KeyEvent keyEvent) {
-			}
-
 		};
-		return keyListener;
+		return keyAdapter;
 	}
 
 	private boolean isUrl(String keyCode) {

@@ -80,10 +80,12 @@ public class AddressField extends JComboBox<String> {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+				return;
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
+				return;
 			}
 		});
 		this.addActionListener(event -> {
