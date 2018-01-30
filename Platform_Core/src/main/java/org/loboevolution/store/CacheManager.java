@@ -379,19 +379,6 @@ public final class CacheManager implements Runnable {
 		}
 	}
 
-	/**
-	 * The main method.
-	 *
-	 * @param args
-	 *            the arguments
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static void main(String[] args) throws Exception {
-		CacheManager c = new CacheManager();
-		c.clearCache();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

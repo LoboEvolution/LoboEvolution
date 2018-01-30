@@ -662,22 +662,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			}
 		}
 	}
-	
-	public static void main(String[] args) {
-		String uri ="smiley.gif";
-		try {
-			String baseURI = "prova";
-			URL documentURL = baseURI == null ? null : new URL(baseURI);
-			Urls.createURL(documentURL, uri);
-		} catch (MalformedURLException | UnsupportedEncodingException mfu) {
-			// Try agan, without the baseURI.
-			try {
-				System.out.println(new URL(uri));
-			} catch (MalformedURLException mfu2) {
-				System.out.println(mfu2);
-			}
-		}
-	}
 
 	/**
 	 * Gets the location.

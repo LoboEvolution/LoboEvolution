@@ -76,18 +76,6 @@ public class TimeImpl implements Time {
             mTimeType = SMIL_TIME_OFFSET;
 		}
 	}
-	
-	public static void main(String[] args) {
-		DateUtil du = new DateUtil();
-		
-		Date d = du.determineDateFormat("201807261740", Locale.ITALY);
-		long now = Calendar.getInstance().getTime().getTime();
-		System.out.println(d);
-		System.out.println(d.getTime());
-		System.out.println(now);
-		System.out.println(d.getTime() - now);
-	}
-	
 
 	@Override
 	public boolean getResolved() {
