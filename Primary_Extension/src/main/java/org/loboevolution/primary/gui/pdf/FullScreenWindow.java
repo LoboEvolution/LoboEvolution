@@ -40,7 +40,7 @@ public class FullScreenWindow {
 	 * The screen that the user last chose for displaying a FullScreenWindow.
 	 */
 
-	private static GraphicsDevice defaultScreen;
+	private GraphicsDevice defaultScreen;
 
 	/** The current screen for the FullScreenWindow. */
 
@@ -59,7 +59,7 @@ public class FullScreenWindow {
 	 */
 
 	private boolean dead = false;
-	
+
 	/**
 	 * Flag indicating whether the user has selected a screen or not.
 	 */
@@ -81,8 +81,7 @@ public class FullScreenWindow {
 	 * @param forcechoice
 	 *            true if you want force the display of the screen
 	 *
-	 *            choice buttons. If false, buttons will only display if the
-	 *            user
+	 *            choice buttons. If false, buttons will only display if the user
 	 *
 	 *            hasn't previously picked a screen.
 	 *
@@ -106,11 +105,7 @@ public class FullScreenWindow {
 	 */
 
 	public FullScreenWindow(JComponent part) {
-
-		// super();
-
 		init(part, false);
-
 	}
 
 	/**
@@ -122,79 +117,55 @@ public class FullScreenWindow {
 	 */
 
 	public void close() {
-
 		dead = true;
-
 		flag.set();
-
 		screen.setFullScreenWindow(null);
 
 		if (jf != null) {
-
 			jf.dispose();
-
 		}
-
 	}
 
 	/**
 	 * Create the window, asking for which screen to use if there are multiple
-	 * monitors and either forcechoice is true, or the user hasn't already
-	 * picked a screen.
+	 * monitors and either forcechoice is true, or the user hasn't already picked a
+	 * screen.
 	 *
 	 * @param part
 	 *            the JComponent to display
 	 * @param forcechoice
-	 *            false if user shouldn't be asked twice which of several
-	 *            monitors to use.
+	 *            false if user shouldn't be asked twice which of several monitors
+	 *            to use.
 	 */
 
 	private void init(JComponent part, boolean forcechoice) {
-
+		screen = null;
+		
 		if (forcechoice) {
-
 			defaultScreen = null;
-
 		}
 
-		screen = null;
-
-		GraphicsEnvironment ge =
-
-				GraphicsEnvironment.getLocalGraphicsEnvironment();
-
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice screens[] = ge.getScreenDevices();
 
 		if (defaultScreen != null) {
-
 			for (GraphicsDevice screen2 : screens) {
-
 				if (screen2 == defaultScreen) {
-
 					screen = defaultScreen;
-
 				}
-
 			}
-
 		}
 
 		if (screens.length == 1) {
-
 			screen = screens[0];
-
 		}
 
 		if (screen == null) {
-
 			screen = pickScreen(screens);
-
 		}
 
 		if (dead) {
-
 			return;
-
 		}
 
 		defaultScreen = screen;
@@ -202,22 +173,16 @@ public class FullScreenWindow {
 		GraphicsConfiguration gc = screen.getDefaultConfiguration();
 
 		jf = new JFrame(gc);
-
 		jf.setUndecorated(true);
-
 		jf.setBounds(gc.getBounds());
-
 		jf.getContentPane().add(part);
-
 		jf.setVisible(true);
-
 		screen.setFullScreenWindow(jf);
-
 	}
 
 	/**
-	 * A button that appears on a particular graphics device, asking whether
-	 * that device should be used for multiple-monitor choices.
+	 * A button that appears on a particular graphics device, asking whether that
+	 * device should be used for multiple-monitor choices.
 	 */
 
 	private class PickMe extends JFrame {
@@ -238,41 +203,23 @@ public class FullScreenWindow {
 		public PickMe(GraphicsDevice gd) {
 
 			super(gd.getDefaultConfiguration());
-
-			// super((java.awt.Frame)null, false);
-
 			setUndecorated(true);
-
 			mygd = gd;
 
 			JButton jb = new JButton("Click here to use this screen");
-
 			jb.setBackground(Color.yellow);
-
 			jb.addActionListener(evt -> pickDevice(mygd));
-
 			Dimension sz = jb.getPreferredSize();
-
 			sz.width += 30;
-
 			sz.height = 0;
-
 			jb.setPreferredSize(sz);
-
 			getContentPane().add(jb);
-
 			pack();
-
 			Rectangle bounds = gd.getDefaultConfiguration().getBounds();
-
 			int x = bounds.width / 2 - sz.width / 2 + bounds.x;
-
 			int y = bounds.height / 2 - sz.height / 2 + bounds.y;
-
 			setLocation(x, y);
-
 			setVisible(true);
-
 		}
 	}
 
@@ -285,11 +232,8 @@ public class FullScreenWindow {
 	 */
 
 	private void pickDevice(GraphicsDevice gd) {
-
 		pickedDevice = gd;
-
 		flag.set();
-
 	}
 
 	/**
@@ -318,17 +262,10 @@ public class FullScreenWindow {
 		flag.waitForFlag();
 
 		for (PickMe picker : pickers) {
-
 			if (picker != null) {
-
 				picker.dispose();
-
 			}
-
 		}
-
 		return pickedDevice;
-
 	}
-
 }
