@@ -149,21 +149,11 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		Class[] actualArgTypes = method.getParameterTypes();
 		int numParams = actualArgTypes.length;
 		Object[] actualArgs = args == null ? new Object[0] : new Object[numParams];
-		boolean linfo = loggableInfo;
-		if (linfo) {
-			Object javaObject = jcw.getJavaObject();
-			logger.info("call(): Calling method " + method.getName() + " on object " + javaObject + " of type "
-					+ this.getTypeName(javaObject));
-		}
+		
 		JavaScript manager = JavaScript.getInstance();
 		for (int i = 0; i < numParams; i++) {
 			Object arg = args[i];
 			Object actualArg = manager.getJavaObject(arg, actualArgTypes[i]);
-			if (linfo) {
-				logger.info("call(): For method=" + method.getName() + ": Converted arg=" + arg + " (type="
-						+ this.getTypeName(arg) + ") into actualArg=" + actualArg + ". Type expected by method is "
-						+ actualArgTypes[i].getName() + ".");
-			}
 			actualArgs[i] = actualArg;
 		}
 		try {

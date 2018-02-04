@@ -26,19 +26,18 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.StringTokenizer;
 
-import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
-import org.apache.batik.transcoder.TranscoderException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.dombl.SVGRasterizer;
@@ -51,13 +50,18 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.SSLCertificate;
 import org.loboevolution.util.Strings;
+import org.loboevolution.util.Urls;
 import org.loboevolution.util.gui.ColorFactory;
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class BackgroundRenderState implements CSSValuesProperties {
 	
 	/** The Constant logger. */
 	protected static final Logger logger = LogManager.getLogger(BackgroundRenderState.class.getName());
-	
+		
 	/**
 	 * Apply background vertical position.
 	 *
@@ -183,11 +187,90 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			int startIdx = start.length();
 			int closingIdx = back.lastIndexOf(')');
 			String quotedUri = back.substring(startIdx, closingIdx);
-			URL url = document.getFullURL(quotedUri);
-			bg.setBackgroundImage(url);
+			URL url = null;
+			bg = applyBackgroundImageFromExternalLink(document, bg, quotedUri);
+			
+			if (bg.getBackgroundImage() == null && bg.getBackgroundImageBase64() == null) {
+				try {
+					url = document.getFullURL(quotedUri);
+					logger.error(url);
+					bg.setBackgroundImage(url);
+				} catch (Exception ex) {
+					logger.error(ex.getMessage());
+				}
+			}
 		}
 		return bg;
 	}
+	
+	public BackgroundInfo applyBackgroundImageFromExternalLink(HTMLDocumentImpl document, BackgroundInfo binfo, String quotedUri) {
+		URL url = null;
+		BackgroundInfo bg = binfo;
+		NodeList nodeList = document.getElementsByTagName("LINK");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = (Node) nodeList.item(i);
+			NamedNodeMap attribs = node.getAttributes();
+			String href = "";
+			String rel = "";
+
+			for (int s = 0; s < attribs.getLength(); s++) {
+				Attr attr = (Attr) attribs.item(s);
+
+				if ("rel".equalsIgnoreCase(attr.getNodeName())) {
+					rel = attr.getNodeValue();
+				}
+
+				if ("href".equalsIgnoreCase(attr.getNodeName())) {
+					href = attr.getNodeValue();
+				}
+
+				if ("stylesheet".equalsIgnoreCase(rel) && !Strings.isBlank(href)) {
+					
+					if (quotedUri.contains(";base64,")) {
+						String base64 = quotedUri.split(";base64,")[1];
+						String type = quotedUri.split(";base64,")[0];
+						if(type.contains("svg")) {
+							byte[] decodedBytes = Base64.getDecoder().decode(base64);
+							bg.setBackgroundImageBase64(new String(decodedBytes));
+						} else {
+							try {
+								bg.setBackgroundImage(new URL(base64));
+							} catch (Exception ex) {
+								logger.error("Unable to create URL ", ex);
+							}
+						}
+					} else {
+						
+						try {
+							
+							if(!Urls.isAbsolute(href)) {
+								href = document.getFullURL(href).toString();
+							}
+							
+							if (href.startsWith("//")) {
+								href = "http:" + href;
+							}							
+							
+							url = Urls.createURL(new URL(href), quotedUri);
+							bg.setBackgroundImage(url);
+							
+						} catch (Exception e) {
+							try {
+								url = document.getFullURL(quotedUri);
+								bg.setBackgroundImage(url);
+							} catch (Exception ex) {
+								logger.error(ex.getMessage());
+							}
+
+						}
+					}
+				}
+			}
+		}
+		return bg;
+	}
+	
+	
 	
 	public BackgroundInfo applyBackground(BackgroundInfo binfo, String back, RenderState prevRenderState) {
 		BackgroundInfo bg = binfo;	
@@ -244,16 +327,34 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			if (w != -1 && h != -1) {
 				ber.repaint();
 			}
-		} catch (FileNotFoundException | IIOException ex) {
-			logger.error("loadBackgroundImage(): Image not found " + url);
-		} catch (IOException | TranscoderException thrown) {
-			logger.error("loadBackgroundImage()", thrown);
 		} catch (Exception e) {
 			logger.error("loadBackgroundImage()", e);
 		}
 		return image;
 	}
 	
+	public Image loadBackgroundImageBase64(final String img, BaseElementRenderable ber) {
+		Image image = null;
+		try {
+			InputStream stream = new ByteArrayInputStream(img.getBytes());
+			SVGRasterizer r = new SVGRasterizer(stream);
+			image = r.bufferedImageToImage();
+
+			int w = -1;
+			int h = -1;
+			if (image != null) {
+				w = image.getWidth(ber);
+				h = image.getHeight(ber);
+			}
+
+			if (w != -1 && h != -1) {
+				ber.repaint();
+			}
+		} catch (Exception e) {
+			logger.error("loadBackgroundImage()", e);
+		}
+		return image;
+	}
 		
 	/**
 	 * Checks if is background repeat.
@@ -399,16 +500,28 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		return bg;
 	}
 	
-	public ArrayList<String> spliBackground(String backgroundText) {
+	public static ArrayList<String> spliBackground(String backgroundText) {
 		ArrayList<String> list = new ArrayList<String>();
-		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("[\\)s+)]")));
-
+		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("[\\)]")));
 		for (String back : backList) {
 			if (back.contains("(")) {
 				back = back + ")";
-				list.add(back);
+				if (back.contains("url") && !back.startsWith("url")) {
+					ArrayList<String> backList2 = new ArrayList<String>(Arrays.asList(back.split("\\s+")));
+					for (String back2 : backList2) {
+						list.add(back2.trim());
+					}
+
+				} else {
+					list.add(back.trim());
+				}
 			} else if (!Strings.isBlank(back)) {
-				list.add(back);
+				ArrayList<String> backList2 = new ArrayList<String>(Arrays.asList(back.split("[\\s+]")));
+				for (String back2 : backList2) {
+					if (!Strings.isBlank(back2)) {
+						list.add(back2.trim());
+					}
+				}
 			}
 		}
 		return list;

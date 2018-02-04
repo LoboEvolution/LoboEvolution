@@ -26,13 +26,13 @@ package org.loboevolution.util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -131,19 +131,9 @@ public class Urls {
 	 */
 	public static URL createURL(URL baseUrl, String relativeUrl)
 			throws MalformedURLException, UnsupportedEncodingException {
-
-		if (relativeUrl.contains(";base64,")) {
-			relativeUrl = String.valueOf(Base64.getEncoder().encode(relativeUrl.getBytes(StandardCharsets.UTF_8)));
-		}
-
 		if (relativeUrl.contains("javascript:void")) {
 			return null;
-		}
-
-		if (relativeUrl.contains("..")) {
-			relativeUrl = relativeUrl.replace("..", "");
-			return new URL(baseUrl.toExternalForm() + relativeUrl);
-		}
+		}	
 		return new URL(baseUrl, relativeUrl);
 	}
 
@@ -412,5 +402,26 @@ public class Urls {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public static boolean isAbsolute(String url){
+	    if (url.startsWith("//")) {
+	        return true;
+	    }
+
+	    if (url.startsWith("/")){
+	        return false;
+	    }
+
+	    boolean result = false;
+
+	    try {
+	        URI uri = new URI(url);
+	        result = uri.isAbsolute();
+	    } catch (URISyntaxException e) {
+	        e.printStackTrace();
+	    }
+
+	    return result;
 	}
 }

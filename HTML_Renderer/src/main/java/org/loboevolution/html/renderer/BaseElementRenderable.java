@@ -570,13 +570,22 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		BackgroundInfo binfo = rs.getBackgroundInfo();
 		this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
 		URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();
-		if (backgroundImageUri == null) {
-			this.backgroundImage = null;
-			this.lastBackgroundImageUri = null;
-		} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
+		String backgroundBase64 = binfo == null ? null : binfo.getBackgroundImageBase64();
+		
+		
+		if (backgroundBase64 != null) {
 			BackgroundRenderState ber = new BackgroundRenderState();
-			this.lastBackgroundImageUri = backgroundImageUri;
-			this.backgroundImage = ber.loadBackgroundImage(backgroundImageUri, this);
+			this.lastBackgroundImageUri = null;
+			this.backgroundImage = ber.loadBackgroundImageBase64(backgroundBase64, this);
+		} else {
+			if (backgroundImageUri == null) {
+				this.backgroundImage = null;
+				this.lastBackgroundImageUri = null;
+			} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
+				BackgroundRenderState ber = new BackgroundRenderState();
+				this.lastBackgroundImageUri = backgroundImageUri;
+				this.backgroundImage = ber.loadBackgroundImage(backgroundImageUri, this);
+			}
 		}
 		
 		AbstractCSSProperties props = rootElement.getCurrentStyle();

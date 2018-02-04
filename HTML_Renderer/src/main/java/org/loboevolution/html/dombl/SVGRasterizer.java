@@ -107,17 +107,6 @@ public class SVGRasterizer {
 	}
 
 	/**
-	 * Constructs a new SVGRasterizer converter.
-	 *
-	 * @param document
-	 *            the SVG document to rasterize
-	 */
-	/*
-	 * public SVGRasterizer(SVGDocument document) { this.input = new
-	 * TranscoderInput(document);//TODO }
-	 */
-
-	/**
 	 * Returns the image that represents the SVG document.
 	 */
 	public BufferedImage createBufferedImage() {
@@ -136,6 +125,7 @@ public class SVGRasterizer {
 	 */
 	public Image bufferedImageToImage() throws TranscoderException {
 		BufferedImage img = createBufferedImage();
+		if(img == null) return null;
 		return Toolkit.getDefaultToolkit().createImage(img.getSource());
 	}
 

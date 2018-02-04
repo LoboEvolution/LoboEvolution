@@ -38,6 +38,9 @@ public class BackgroundInfo implements Serializable {
 	/** The background image. */
 	private URL backgroundImage;
 
+	/** The background image. */
+	private String backgroundImageBase64;
+
 	/** The background x position absolute. */
 	private boolean backgroundXPositionAbsolute;
 
@@ -198,4 +201,11 @@ public class BackgroundInfo implements Serializable {
 		this.backgroundRepeat = backgroundRepeat;
 	}
 
+	public String getBackgroundImageBase64() {
+		return backgroundImageBase64;
+	}
+
+	public void setBackgroundImageBase64(String backgroundImageBase64) {
+		this.backgroundImageBase64 = backgroundImageBase64;
+	}
 }
