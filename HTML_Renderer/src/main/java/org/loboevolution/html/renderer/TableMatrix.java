@@ -296,7 +296,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 */
 	private final HTMLTableRowElementImpl getParentRow(HTMLTableCellElementImpl cellNode) {
 		org.w3c.dom.Node parentNode = cellNode.getParentNode();
-		for (;;) {
+		while(true) {
 			if (parentNode instanceof HTMLTableRowElementImpl) {
 				return (HTMLTableRowElementImpl) parentNode;
 			}

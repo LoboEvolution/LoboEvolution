@@ -253,7 +253,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	 */
 	@Override
 	public void run() {
-		for (;;) {
+		while(true) {
 			try {
 				Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
 				RestrictedStore[] stores;

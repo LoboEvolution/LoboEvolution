@@ -1829,7 +1829,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		// It gets reimported in the local
 		// viewport if it turns out it can't be exported up.
 		RenderableContainer container = this.container;
-		for (;;) {
+		while(true) {
 			if (container instanceof Renderable) {
 				Object node = ((Renderable) container).getModelNode();
 				if (node instanceof HTMLElementImpl) {
@@ -2225,7 +2225,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		int boxHeight = element.getHeight();
 		int desiredWidth = this.desiredWidth;
 		int boxX;
-		for (;;) {
+		while(true) {
 			int leftOffset = this.fetchLeftOffset(boxY);
 			int rightOffset = this.fetchRightOffset(boxY);
 			boxX = leftFloat ? leftOffset : desiredWidth - rightOffset - boxWidth;
@@ -2473,7 +2473,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * static). Stops searching when HTML element is encountered.
 	 */
 	private static RenderableContainer getPositionedAncestor(RenderableContainer containingBlock) {
-		for (;;) {
+		while(true) {
 			if (containingBlock instanceof Renderable) {
 				final ModelNode node = ((Renderable) containingBlock).getModelNode();
 				if (node instanceof HTMLElementImpl) {

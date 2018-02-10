@@ -476,7 +476,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	@Override
 	public NavigatorFrame getTopFrame() {
 		NavigatorFrame current = this;
-		for (;;) {
+		while(true) {
 			NavigatorFrame ancestor = current.getParentFrame();
 			if (ancestor == null) {
 				return current;
@@ -1258,7 +1258,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		}
 		synchronized (this) {
 			NavigationEntry newEntry;
-			for (;;) {
+			while(true) {
 				newEntry = this.navigationEngine.move(offset);
 				if (newEntry == null) {
 					return false;

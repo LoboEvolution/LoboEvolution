@@ -147,7 +147,7 @@ public class TempFileManager {
 	 */
 	public JarFile createJarFile(byte[] bytes) throws IOException {
 		// Dequeue and clean up first
-		for (;;) {
+		while(true) {
 			Reference<? extends JarFile> ref = REFERENCE_QUEUE.poll();
 			if (ref == null) {
 				break;

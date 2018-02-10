@@ -78,7 +78,7 @@ public class IORoutines {
 		InputStreamReader reader = new InputStreamReader(in, encoding);
 		char[] buffer = new char[bufferSize];
 		int offset = 0;
-		for (;;) {
+		while(true) {
 			int remain = buffer.length - offset;
 			if (remain <= 0) {
 				char[] newBuffer = new char[buffer.length * 2];
@@ -147,7 +147,7 @@ public class IORoutines {
 		}
 		byte[] buffer = new byte[initialBufferSize];
 		int offset = 0;
-		for (;;) {
+		while(true) {
 			int remain = buffer.length - offset;
 			if (remain <= 0) {
 				int newSize = buffer.length * 2;
@@ -184,7 +184,7 @@ public class IORoutines {
 	public static byte[] loadExact(InputStream in, int length) throws IOException {
 		byte[] buffer = new byte[length];
 		int offset = 0;
-		for (;;) {
+		while(true) {
 			int remain = length - offset;
 			if (remain <= 0) {
 				break;

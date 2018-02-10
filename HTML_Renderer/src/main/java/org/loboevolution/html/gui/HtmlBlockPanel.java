@@ -623,7 +623,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 */
 	protected void validateAll() {
 		Component toValidate = this;
-		for (;;) {
+		while(true) {
 			Container parent = toValidate.getParent();
 			if (parent == null || parent.isValid()) {
 				break;

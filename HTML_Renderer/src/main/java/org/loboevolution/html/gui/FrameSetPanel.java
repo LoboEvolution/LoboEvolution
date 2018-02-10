@@ -158,7 +158,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 	 */
 	protected void validateAll() {
 		Component toValidate = this;
-		for (;;) {
+		while(true) {
 			Container parent = toValidate.getParent();
 			if (parent == null || parent.isValid()) {
 				break;

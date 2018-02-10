@@ -130,7 +130,7 @@ public class NavigationEngine {
 	 */
 	public boolean hasNewEntryWithGET(int offset) {
 		int nextIndex = this.currentIndex;
-		for (;;) {
+		while(true) {
 			nextIndex += offset;
 			if (nextIndex >= 0 && nextIndex < this.history.size()) {
 				NavigationEntry entry = this.history.get(nextIndex);

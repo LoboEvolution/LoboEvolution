@@ -368,7 +368,7 @@ public class HtmlParser {
 								}
 								ancestors.addFirst(normalTag);
 								try {
-									for (;;) {
+									while(true) {
 										try {
 											int token;
 											if (einfo != null && einfo.isNoScriptElement()) {
@@ -637,7 +637,7 @@ public class HtmlParser {
 		if (chInt != -1) {
 			boolean cont = true;
 			char ch;
-			LOOP: for (;;) {
+			LOOP: while(true) {
 				ch = (char) chInt;
 				if (Character.isLetter(ch)) {
 					// Speed up normal case
@@ -724,7 +724,7 @@ public class HtmlParser {
 			}
 			if (cont) {
 				boolean lastCharSlash = false;
-				for (;;) {
+				while(true) {
 					if (Character.isWhitespace(ch)) {
 						break;
 					} else if (ch == '>') {
@@ -773,7 +773,7 @@ public class HtmlParser {
 			return new StringBuilder(0);
 		}
 		StringBuilder sb = new StringBuilder();
-		OUTER: for (;;) {
+		OUTER: while(true) {
 			int chInt = reader.read();
 			if (chInt == -1) {
 				break OUTER;
@@ -788,7 +788,7 @@ public class HtmlParser {
 				ch = (char) chInt;
 				if (ch == '-') {
 					StringBuilder extra = null;
-					INNER: for (;;) {
+					INNER: while(true) {
 						chInt = reader.read();
 						if (chInt == -1) {
 							if (extra != null) {
@@ -850,7 +850,7 @@ public class HtmlParser {
 			return;
 		}
 		boolean readSomething = false;
-		for (;;) {
+		while(true) {
 			int chInt = reader.read();
 			if (chInt == -1) {
 				break;
@@ -916,7 +916,7 @@ public class HtmlParser {
 		StringBuilder attributeName = null;
 		boolean blankFound = false;
 		boolean lastCharSlash = false;
-		for (;;) {
+		while(true) {
 			int chInt = reader.read();
 			if (chInt == -1) {
 				if (attributeName != null && attributeName.length() != 0) {
@@ -968,7 +968,7 @@ public class HtmlParser {
 		// Read blanks up to open quote or first non-blank.
 		StringBuilder attributeValue = null;
 		int openQuote = -1;
-		for (;;) {
+		while(true) {
 			int chInt = reader.read();
 			if (chInt == -1) {
 				break;
@@ -1009,7 +1009,7 @@ public class HtmlParser {
 
 		// Read attribute value
 
-		for (;;) {
+		while(true) {
 			int chInt = reader.read();
 			if (chInt == -1) {
 				break;
@@ -1097,7 +1097,7 @@ public class HtmlParser {
 	private final StringBuilder entityDecode(StringBuilder rawText) throws SAXException {
 		int startIdx = 0;
 		StringBuilder sb = null;
-		for (;;) {
+		while(true) {
 			int ampIdx = rawText.indexOf("&", startIdx);
 			if (ampIdx == -1) {
 				if (sb == null) {

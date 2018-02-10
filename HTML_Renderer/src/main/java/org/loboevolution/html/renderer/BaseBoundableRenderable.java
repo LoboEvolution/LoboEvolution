@@ -654,7 +654,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		int x = this.x;
 		int y = this.y;
 		RCollection parent = this.parent;
-		for (;;) {
+		while(true) {
 			if (parent == null) {
 				throw new IllegalArgumentException("Not an ancestor: " + ancestor);
 			}

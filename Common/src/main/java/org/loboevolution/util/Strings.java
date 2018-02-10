@@ -182,7 +182,7 @@ public class Strings {
 	public static int countLines(String text) {
 		int startIdx = 0;
 		int lineCount = 1;
-		for (;;) {
+		while(true) {
 			int lbIdx = text.indexOf('\n', startIdx);
 			if (lbIdx == -1) {
 				break;

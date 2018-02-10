@@ -158,7 +158,7 @@ public class SimpleThreadPool {
 			Set<SimpleThreadPoolTask> rs = runningSet;
 			int iam = idleAliveMillis;
 			SimpleThreadPoolTask task = null;
-			for (;;) {
+			while(true) {
 				try {
 					synchronized (monitor) {
 						if (task != null) {

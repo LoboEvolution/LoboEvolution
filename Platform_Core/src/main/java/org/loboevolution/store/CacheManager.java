@@ -391,7 +391,7 @@ public final class CacheManager implements Runnable {
 		} catch (InterruptedException ie) {
 			// ignore
 		}
-		for (;;) {
+		while(true) {
 			try {
 				this.sweepCache();
 				Thread.sleep(AFTER_SWEEP_SLEEP);

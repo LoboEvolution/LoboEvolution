@@ -126,7 +126,7 @@ public class ReuseServer implements Runnable {
 	 */
 	@Override
 	public void run() {
-		for (;;) {
+		while(true) {
 			try {
 				ServerSocket ss;
 				synchronized (this) {

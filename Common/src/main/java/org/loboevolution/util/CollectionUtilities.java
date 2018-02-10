@@ -77,7 +77,7 @@ public class CollectionUtilities {
 
 			@Override
 			public boolean hasNext() {
-				for (;;) {
+				while(true) {
 					if (current == null) {
 						return false;
 					}
@@ -91,7 +91,7 @@ public class CollectionUtilities {
 
 			@Override
 			public Object next() {
-				for (;;) {
+				while(true) {
 					if (this.current == null) {
 						throw new NoSuchElementException();
 					}
