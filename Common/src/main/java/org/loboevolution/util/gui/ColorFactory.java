@@ -72,13 +72,9 @@ public class ColorFactory {
 	 *
 	 * @return the instance
 	 */
-	public static final ColorFactory getInstance() {
+	public synchronized static final ColorFactory getInstance() {
 		if (instance == null) {
-			synchronized (ColorFactory.class) {
-				if (instance == null) {
-					instance = new ColorFactory();
-				}
-			}
+			instance = new ColorFactory();
 		}
 		return instance;
 	}

@@ -64,13 +64,9 @@ public class ArchiveInfo {
 	 *
 	 * @return the jar file
 	 */
-	public JarFile getJarFile() throws IOException {
+	public synchronized JarFile getJarFile() throws IOException {
 		if (this.jarFile == null) {
-			synchronized (this) {
-				if (this.jarFile == null) {
-					this.jarFile = new JarFile(this.file);
-				}
-			}
+			this.jarFile = new JarFile(this.file);
 		}
 		return this.jarFile;
 	}

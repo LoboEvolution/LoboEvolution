@@ -52,13 +52,9 @@ public class ClientletFactory {
 	 *
 	 * @return the instance
 	 */
-	public static ClientletFactory getInstance() {
+	public synchronized static ClientletFactory getInstance() {
 		if (instance == null) {
-			synchronized (ClientletFactory.class) {
-				if (instance == null) {
-					instance = new ClientletFactory();
-				}
-			}
+			instance = new ClientletFactory();
 		}
 		return instance;
 	}

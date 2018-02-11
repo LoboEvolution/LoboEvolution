@@ -446,13 +446,9 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	}
 	
 	@Override
-	public UserAgentContext getUserAgentContext() {
+	public synchronized UserAgentContext getUserAgentContext() {
 		if (this.uaContext == null) {
-			synchronized (this) {
-				if (this.uaContext == null) {
-					this.uaContext = new UserAgentContextImpl();
-				}
-			}
+			this.uaContext = new UserAgentContextImpl();
 		}
 		return this.uaContext;
 	}
