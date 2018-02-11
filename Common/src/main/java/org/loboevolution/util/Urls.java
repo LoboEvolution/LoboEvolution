@@ -267,7 +267,6 @@ public class Urls {
 					try {
 						throw mfu;
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						logger.error(e.getMessage());
 					}
 				}

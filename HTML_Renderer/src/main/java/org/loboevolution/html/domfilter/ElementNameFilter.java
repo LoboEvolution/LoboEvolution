@@ -50,7 +50,6 @@ public class ElementNameFilter implements NodeFilter, HtmlAttributeProperties {
 	 */
 	@Override
 	public boolean accept(Node node) {
-		// TODO: Case sensitive?
 		return node instanceof Element && this.name.equals(((Element) node).getAttribute(NAME));
 	}
 }

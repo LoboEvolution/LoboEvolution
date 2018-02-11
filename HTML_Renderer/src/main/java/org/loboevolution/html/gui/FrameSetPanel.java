@@ -81,7 +81,6 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 	public FrameSetPanel() {
 		super();
 		this.setLayout(WrapperLayout.getInstance());
-		// TODO: This should be a temporary preferred size
 		this.setPreferredSize(new Dimension(600, 400));
 	}
 

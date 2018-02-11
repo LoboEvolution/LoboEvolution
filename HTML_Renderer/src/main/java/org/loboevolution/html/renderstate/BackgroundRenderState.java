@@ -500,7 +500,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		return bg;
 	}
 	
-	public static ArrayList<String> spliBackground(String backgroundText) {
+	public ArrayList<String> spliBackground(String backgroundText) {
 		ArrayList<String> list = new ArrayList<String>();
 		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("[\\)]")));
 		for (String back : backList) {

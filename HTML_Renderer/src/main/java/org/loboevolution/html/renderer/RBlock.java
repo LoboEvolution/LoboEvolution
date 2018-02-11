@@ -1129,7 +1129,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	}
 
 	@Override
-	public boolean onKeyPressed(KeyEvent event) { //TODO
+	public boolean onKeyPressed(KeyEvent event) {
 		return !DOMEventImpl.getInstance().onKeyPress(this.modelNode, event);
 	}
 
