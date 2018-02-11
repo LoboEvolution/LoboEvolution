@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.FormInput;
 import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.parser.HtmlParser;
@@ -50,7 +51,6 @@ import org.loboevolution.html.style.LocalCSSProperties;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.html.style.selectors.AttributeSelector;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.gui.LAFSettings;
 import org.loboevolution.w3c.html.DOMSettableTokenList;
 import org.loboevolution.w3c.html.DOMStringMap;
 import org.loboevolution.w3c.html.DOMTokenList;

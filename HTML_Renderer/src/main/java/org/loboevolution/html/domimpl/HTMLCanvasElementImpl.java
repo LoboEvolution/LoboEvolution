@@ -31,13 +31,14 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.loboevolution.font.FontFactory;
+import org.loboevolution.font.FontKey;
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.info.CanvasInfo;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.gui.ColorFactory;
-import org.loboevolution.util.gui.FontFactory;
-import org.loboevolution.util.gui.LAFSettings;
 import org.loboevolution.w3c.file.FileCallback;
 import org.loboevolution.w3c.html.CanvasGradient;
 import org.loboevolution.w3c.html.CanvasImageData;
@@ -144,8 +145,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 		fillPaint = Color.BLACK;
 		strokePaint = Color.BLACK;
 		affineTransform = new AffineTransform(1, 0, 0, 1, 0, 0);
-		font = FONT_FACTORY.getFont(Font.SANS_SERIF, null, null, null, LAFSettings.getInstance().getFontSize(), null,
-				null, 0, false, 0);
+		font = FONT_FACTORY.getFont(new FontKey());
 		globalCompositeOperation = "source-over";
 		textAlign = "left";
 		baseline = "alphabetic";
@@ -748,41 +748,45 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	 */
 	private Font getFontValue(String font) {
 
+		FontKey key = new FontKey();
+		key.setFontFamily(Font.SANS_SERIF);
+		key.setFontStyle(CSSValuesProperties.ITALIC);
+		key.setFontVariant(CSSValuesProperties.SMALL_CAPS);
+		key.setFontWeight(CSSValuesProperties.BOLD);
+		key.setFontSize(LAFSettings.getInstance().getFontSize());
+		key.setLocales(null);
+		key.setSuperscript(null);
+		key.setLetterSpacing(0);
+		key.setStrikethrough(false);
+		key.setUnderline(0);
+		
 		String[] arrFont = font.split(" ");
-
-		float fontSize = LAFSettings.getInstance().getFontSize();
-		String fontStyle = CSSValuesProperties.ITALIC;
-		String fontVariant = CSSValuesProperties.SMALL_CAPS;
-		String fontFamily = Font.SANS_SERIF;
-		String fontWeight = CSSValuesProperties.BOLD;
 
 		for (int i = 0; i < arrFont.length; i++) {
 			String prop = arrFont[i];
 			if (prop.contains("px") || prop.contains("pt")) {
-				fontSize = FontValues.getFontSize(prop, null);
+				key.setFontSize(FontValues.getFontSize(prop, null));
 			}
 
 			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.ITALIC)
 					|| prop.contains(CSSValuesProperties.OBLIQUE)) {
-				fontStyle = prop;
+				key.setFontStyle(prop);
 			}
 
 			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.SMALL_CAPS)) {
-				fontVariant = prop;
+				key.setFontVariant(prop);
 			}
 
 			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.BOLD)
 					|| prop.contains(CSSValuesProperties.BOLDER) || prop.contains(CSSValuesProperties.LIGHTER)) {
-				fontWeight = prop;
+				key.setFontSize(Integer.parseInt(prop));
 			}
 
 			if (i == arrFont.length - 1) {
-				fontFamily = prop;
+				key.setFontFamily(prop);
 			}
 		}
-		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,
-				0, false, 0);
-
+		return FontFactory.getInstance().getFont(key);
 	}
 
 	/**

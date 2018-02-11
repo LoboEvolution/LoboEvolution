@@ -20,11 +20,11 @@
  */
 package org.loboevolution.html.domimpl;
 
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.ComputedCSSProperties;
-import org.loboevolution.util.gui.LAFSettings;
 
 /**
  * This element is used for SMALL and BIG.

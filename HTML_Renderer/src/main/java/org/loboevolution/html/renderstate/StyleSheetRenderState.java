@@ -32,11 +32,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.font.FontFactory;
+import org.loboevolution.font.FontKey;
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
@@ -53,8 +55,6 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.RenderThreadState;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
-import org.loboevolution.util.gui.FontFactory;
-import org.loboevolution.util.gui.LAFSettings;
 import org.loboevolution.w3c.html.HTMLElement;
 
 /**
@@ -71,8 +71,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
 
 	/** The Constant DEFAULT_FONT. */
-	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(LAFSettings.getInstance().getFont(), null, null, null,
-			LAFSettings.getInstance().getFontSize(), null, null, 0, false, 0);
+	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
 
 	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
@@ -397,20 +396,19 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			return DEFAULT_FONT;
 		}
 		
-		String fontVariant = style.getFontVariant();
-		String fontFamily = FontValues.getFontFamily(style.getFontFamily(), prs);
-		String fontStyle = FontValues.getFontStyle(style.getFontStyle(), prs);
-		String fontWeight = FontValues.getFontWeight(style.getFontWeight(), prs);
-		Float fontSize = Float.valueOf(FontValues.getFontSize(style.getFontSize(), prs));
-		Integer superscript = FontValues.getFontSuperScript(style.getVerticalAlign(), prs);
-		Integer intLetterSpacing = HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0);
-		Integer underline = FontValues.getFontUnderline(style.getTextDecoration(), prs);
-		boolean strikethrough = FontValues.getFontStrikeThrough(style.getTextDecoration(), prs);
-		
 		HTMLDocumentImpl document = this.document;
-		Set locales = document == null ? null : document.getLocales();
-		
-		Font f = FONT_FACTORY.getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize.floatValue(), locales, superscript, intLetterSpacing, strikethrough, underline);
+		FontKey key = new FontKey();
+		key.setFontFamily(FontValues.getFontFamily(style.getFontFamily(), prs));
+		key.setFontStyle(FontValues.getFontStyle(style.getFontStyle(), prs));
+		key.setFontVariant(style.getFontVariant());
+		key.setFontWeight(FontValues.getFontWeight(style.getFontWeight(), prs));
+		key.setFontSize(Float.valueOf(FontValues.getFontSize(style.getFontSize(), prs)));
+		key.setLocales(document == null ? null : document.getLocales());
+		key.setSuperscript(FontValues.getFontSuperScript(style.getVerticalAlign(), prs));
+		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0));
+		key.setStrikethrough(FontValues.getFontStrikeThrough(style.getTextDecoration(), prs));
+		key.setUnderline(FontValues.getFontUnderline(style.getTextDecoration(), prs));
+		Font f = FONT_FACTORY.getFont(key);
 		this.iFont = f;
 		return f;
 	}

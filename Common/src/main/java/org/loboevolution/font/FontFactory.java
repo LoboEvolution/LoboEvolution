@@ -21,7 +21,7 @@
 /*
  * Created on Apr 17, 2005
  */
-package org.loboevolution.util.gui;
+package org.loboevolution.font;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -137,26 +137,9 @@ public class FontFactory {
 	/**
 	 * Gets the font.
 	 *
-	 * @param fontFamily
-	 *            the font family
-	 * @param fontStyle
-	 *            the font style
-	 * @param fontVariant
-	 *            the font variant
-	 * @param fontWeight
-	 *            the font weight
-	 * @param fontSize
-	 *            the font size
-	 * @param locales
-	 *            the locales
-	 * @param superscript
-	 *            the superscript
-	 * @return the font
+	 * @param key the key
 	 */
-	public Font getFont(String fontFamily, String fontStyle, String fontVariant, String fontWeight, float fontSize,
-			Set locales, Integer superscript, Integer letterSpacing, boolean strikethrough, Integer underline) {
-		FontKey key = new FontKey(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, locales, superscript,
-				letterSpacing, strikethrough, underline);
+	public Font getFont(FontKey key) {
 		synchronized (this) {
 			Font font = this.fontMap.get(key);
 			if (font == null) {

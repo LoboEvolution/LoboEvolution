@@ -7,9 +7,9 @@ import java.awt.font.TextAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.info.FontInfo;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.util.gui.LAFSettings;
 
 public class FontValues extends HtmlValues {
 	

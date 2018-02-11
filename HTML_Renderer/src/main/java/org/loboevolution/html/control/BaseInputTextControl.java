@@ -38,10 +38,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.domimpl.DOMElementImpl;
 import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
-import org.loboevolution.util.gui.LAFSettings;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**

@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.util.gui;
+package org.loboevolution.font;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -26,6 +26,7 @@ import java.io.Serializable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.util.gui.StorageManagerCommon;
 
 /**
  * The Class LAFSettings.

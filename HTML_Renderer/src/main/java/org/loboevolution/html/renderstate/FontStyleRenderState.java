@@ -27,10 +27,10 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.loboevolution.font.FontFactory;
+import org.loboevolution.font.FontKey;
 import org.loboevolution.html.info.WordInfo;
 import org.loboevolution.html.style.RenderStateDelegator;
-import org.loboevolution.util.gui.FontFactory;
-import org.loboevolution.util.gui.FontKey;
 
 /**
  * The Class FontStyleRenderState.
@@ -111,9 +111,18 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		} else {
 			f = parentFont;
 		}
-
-		f = FontFactory.scriptFont(f, new FontKey("", "", "", "", 0, null, superscript, 0, false, 0));
-
+		FontKey key = new FontKey();
+		key.setFontFamily("");
+		key.setFontStyle("");
+		key.setFontVariant("");
+		key.setFontWeight("");
+		key.setFontSize(0);
+		key.setLocales(null);
+		key.setSuperscript(superscript);
+		key.setLetterSpacing(0);
+		key.setStrikethrough(false);
+		key.setUnderline(0);
+		f = FontFactory.scriptFont(f, key);
 		this.iFont = f;
 		return f;
 	}

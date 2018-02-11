@@ -31,13 +31,14 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.StringTokenizer;
 
+import org.loboevolution.font.FontFactory;
+import org.loboevolution.font.FontKey;
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.ColorFactory;
-import org.loboevolution.util.gui.FontFactory;
-import org.loboevolution.util.gui.LAFSettings;
 import org.loboevolution.w3c.smil.ElementTargetAttributes;
 import org.loboevolution.w3c.smil.Time;
 import org.loboevolution.w3c.smil.TimeList;
@@ -81,22 +82,18 @@ public class SVGUtility {
 	}
 
 	public static Font getFontValue(String ff, String fs) {
-
-		float fontSize = LAFSettings.getInstance().getFontSize();
-		String fontStyle = CSSValuesProperties.ITALIC;
-		String fontVariant = CSSValuesProperties.SMALL_CAPS;
-		String fontFamily = Font.SANS_SERIF;
-		String fontWeight = CSSValuesProperties.BOLD;
-
-		if (fs != null) {
-			fontSize = FontValues.getFontSize(fs, null);
-		}
-
-		if (ff != null) {
-			fontFamily = ff;
-		}
-		return FontFactory.getInstance().getFont(fontFamily, fontStyle, fontVariant, fontWeight, fontSize, null, null,
-				0, false, 0);
+		FontKey key = new FontKey();
+		key.setFontFamily(ff != null ? ff : Font.SANS_SERIF);
+		key.setFontStyle(CSSValuesProperties.ITALIC);
+		key.setFontVariant(CSSValuesProperties.SMALL_CAPS);
+		key.setFontWeight(CSSValuesProperties.BOLD);
+		key.setFontSize(fs != null ? FontValues.getFontSize(fs, null) : LAFSettings.getInstance().getFontSize());
+		key.setLocales(null);
+		key.setSuperscript(null);
+		key.setLetterSpacing(0);
+		key.setStrikethrough(false);
+		key.setUnderline(0);
+		return FontFactory.getInstance().getFont(key);
 	}
 
 	public static String getText(Node n) {

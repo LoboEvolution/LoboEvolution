@@ -31,10 +31,10 @@ import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.util.Urls;
 import org.loboevolution.util.gui.ColorFactory;
-import org.loboevolution.util.gui.LAFSettings;
 
 /**
  * The Class HtmlValues.

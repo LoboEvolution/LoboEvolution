@@ -53,11 +53,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.primary.gui.AbstractSettingsUI;
 import org.loboevolution.primary.gui.ColorComboBox;
 import org.loboevolution.primary.gui.FontLabel;
 import org.loboevolution.primary.gui.ValidationException;
-import org.loboevolution.util.gui.LAFSettings;
 
 /**
  * The Class LookAndFeelsSettingsUI.
