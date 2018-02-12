@@ -263,7 +263,7 @@ public class ExtensionManager {
 			try {
 				task.join();
 			} catch (InterruptedException ie) {
-				// ignore
+				Thread.currentThread().interrupt();
 			}
 		}
 	}
@@ -311,7 +311,7 @@ public class ExtensionManager {
 			try {
 				task.join();
 			} catch (InterruptedException ie) {
-				// ignore
+				Thread.currentThread().interrupt();
 			}
 		}
 	}

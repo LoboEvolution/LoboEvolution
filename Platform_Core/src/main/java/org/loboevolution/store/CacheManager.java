@@ -386,7 +386,7 @@ public final class CacheManager implements Runnable {
 		try {
 			Thread.sleep(INITIAL_SLEEP);
 		} catch (InterruptedException ie) {
-			// ignore
+			Thread.currentThread().interrupt();
 		}
 		while(true) {
 			try {
@@ -397,7 +397,7 @@ public final class CacheManager implements Runnable {
 				try {
 					Thread.sleep(AFTER_SWEEP_SLEEP);
 				} catch (InterruptedException ie) {
-					// ignore
+					Thread.currentThread().interrupt();
 				}
 			}
 		}

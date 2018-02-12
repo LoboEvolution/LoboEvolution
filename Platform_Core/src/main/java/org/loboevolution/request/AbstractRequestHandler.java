@@ -233,6 +233,7 @@ public abstract class AbstractRequestHandler implements RequestHandler {
 						}
 					});
 				} catch (InterruptedException ie) {
+					Thread.currentThread().interrupt();
 					throw new IllegalStateException(ie);
 				} catch (InvocationTargetException ite) {
 					throw new IllegalStateException(ite.getCause());

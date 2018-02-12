@@ -409,7 +409,7 @@ public class PlatformInit {
 				try {
 					this.wait();
 				} catch (InterruptedException ie) {
-					// Ignore
+					Thread.currentThread().interrupt();
 				}
 			}
 		}
