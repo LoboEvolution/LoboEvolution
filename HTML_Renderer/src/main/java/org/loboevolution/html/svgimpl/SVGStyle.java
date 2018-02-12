@@ -33,11 +33,11 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.control.BaseControl;
 import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.gui.ColorFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

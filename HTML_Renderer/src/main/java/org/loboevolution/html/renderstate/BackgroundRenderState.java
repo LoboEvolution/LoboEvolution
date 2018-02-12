@@ -40,6 +40,7 @@ import javax.swing.ImageIcon;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.dombl.SVGRasterizer;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.info.BackgroundInfo;
@@ -51,7 +52,6 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.SSLCertificate;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.Urls;
-import org.loboevolution.util.gui.ColorFactory;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;

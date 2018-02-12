@@ -60,6 +60,7 @@ import javax.swing.SwingUtilities;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.dombl.UINode;
@@ -80,7 +81,6 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Objects;
-import org.loboevolution.util.gui.ColorFactory;
 import org.w3c.dom.Node;
 
 /**

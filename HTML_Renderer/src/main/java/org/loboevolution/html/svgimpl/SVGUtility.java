@@ -31,6 +31,7 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.util.StringTokenizer;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.font.FontFactory;
 import org.loboevolution.font.FontKey;
 import org.loboevolution.font.LAFSettings;
@@ -38,7 +39,6 @@ import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.smil.ElementTargetAttributes;
 import org.loboevolution.w3c.smil.Time;
 import org.loboevolution.w3c.smil.TimeList;

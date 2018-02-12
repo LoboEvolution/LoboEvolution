@@ -31,9 +31,9 @@ import javax.swing.Timer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.info.SVGInfo;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.smil.ElementTargetAttributes;
 import org.loboevolution.w3c.svg.SVGTransform;
 import org.loboevolution.w3c.svg.SVGTransformList;

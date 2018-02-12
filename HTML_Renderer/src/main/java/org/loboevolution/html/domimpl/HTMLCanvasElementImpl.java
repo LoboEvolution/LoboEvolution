@@ -31,6 +31,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.font.FontFactory;
 import org.loboevolution.font.FontKey;
 import org.loboevolution.font.LAFSettings;
@@ -38,7 +39,6 @@ import org.loboevolution.html.info.CanvasInfo;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.file.FileCallback;
 import org.loboevolution.w3c.html.CanvasGradient;
 import org.loboevolution.w3c.html.CanvasImageData;

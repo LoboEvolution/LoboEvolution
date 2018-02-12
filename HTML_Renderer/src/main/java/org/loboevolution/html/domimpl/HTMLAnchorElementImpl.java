@@ -26,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.renderstate.ColorRenderState;
 import org.loboevolution.html.renderstate.CursorRenderState;
@@ -33,7 +34,6 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.TextDecorationRenderState;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.Urls;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.html.DOMTokenList;
 import org.loboevolution.w3c.html.HTMLAnchorElement;
 import org.loboevolution.w3c.html.HTMLBodyElement;

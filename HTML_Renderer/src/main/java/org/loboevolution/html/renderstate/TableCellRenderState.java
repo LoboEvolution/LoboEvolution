@@ -22,6 +22,7 @@ package org.loboevolution.html.renderstate;
 
 import java.awt.Color;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableRowElementImpl;
@@ -32,7 +33,6 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.RenderThreadState;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLTableElement;
 

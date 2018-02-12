@@ -22,9 +22,9 @@ package org.loboevolution.html.svgimpl;
 
 import java.awt.Color;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.style.AbstractCSSProperties;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.w3c.svg.SVGAnimatedNumber;
 import org.loboevolution.w3c.svg.SVGStopElement;
 

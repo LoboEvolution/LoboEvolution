@@ -23,6 +23,7 @@ package org.loboevolution.html.renderstate;
 import java.awt.Graphics;
 import java.awt.Insets;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.info.BorderInfo;
@@ -32,7 +33,6 @@ import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.gui.ColorFactory;
 import org.loboevolution.util.gui.GUITasks;
 
 public class BorderRenderState implements CSSValuesProperties {

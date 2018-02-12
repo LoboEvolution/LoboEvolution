@@ -22,10 +22,10 @@ package org.loboevolution.html.renderstate;
 
 import java.awt.Color;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.info.BackgroundInfo;
-import org.loboevolution.util.gui.ColorFactory;
 
 /**
  * The Class TableRenderState.

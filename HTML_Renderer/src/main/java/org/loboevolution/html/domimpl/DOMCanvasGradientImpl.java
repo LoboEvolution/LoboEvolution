@@ -23,7 +23,7 @@ package org.loboevolution.html.domimpl;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import org.loboevolution.util.gui.ColorFactory;
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.w3c.html.CanvasGradient;
 
 /**

@@ -20,11 +20,11 @@
  */
 package org.loboevolution.html.style.setter;
 
+import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.renderstate.BackgroundRenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.gui.ColorFactory;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.steadystate.css.util.CSSProperties;
