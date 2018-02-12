@@ -269,7 +269,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 				try {
 					Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
 				} catch (InterruptedException ie) {
-					// Ignore this time.
+					Thread.currentThread().interrupt();
 				}
 			}
 		}

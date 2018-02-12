@@ -276,6 +276,7 @@ public class PDFPrintPage implements Printable {
 				page.waitForFinish();
 				pgs.run();
 			} catch (InterruptedException ie) {
+				Thread.currentThread().interrupt();
 			}
 			return PAGE_EXISTS;
 		} else {

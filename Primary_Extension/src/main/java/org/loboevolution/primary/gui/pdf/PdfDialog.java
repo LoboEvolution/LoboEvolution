@@ -431,7 +431,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			} catch (InvocationTargetException ie) {
 				// ignore
 			} catch (InterruptedException ie) {
-				// ignore
+				Thread.currentThread().interrupt();
 			}
 		}
 	}
@@ -1153,6 +1153,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 				try {
 					Thread.sleep(timeout - now);
 				} catch (InterruptedException ie) {
+					Thread.currentThread().interrupt();
 				}
 				synchronized (this) {
 					now = System.currentTimeMillis();
