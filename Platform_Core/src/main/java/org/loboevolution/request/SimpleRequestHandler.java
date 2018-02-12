@@ -167,7 +167,7 @@ public abstract class SimpleRequestHandler implements RequestHandler {
 	 */
 	@Override
 	public void handleProgress(ProgressType progressType, URL url, String method, int value, int max) {
-		// nop
+		// Method not implemented
 	}
 
 	/*

@@ -34,7 +34,7 @@ public class EmptyReader extends Reader {
 	 */
 	@Override
 	public void close() throws IOException {
-		return;
+		// Method not implemented
 	}
 
 	/*

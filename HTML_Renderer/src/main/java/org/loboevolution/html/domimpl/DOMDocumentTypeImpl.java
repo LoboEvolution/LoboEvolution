@@ -97,7 +97,7 @@ public class DOMDocumentTypeImpl extends DOMNodeImpl implements DocumentType {
 	 */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
-		// nop
+		// Method not implemented
 	}
 
 	/*

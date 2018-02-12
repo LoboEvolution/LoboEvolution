@@ -367,7 +367,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 	 */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
-		// nop
+		// Method not implemented
 	}
 
 	@Override

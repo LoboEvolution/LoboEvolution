@@ -64,6 +64,7 @@ public class ImageContent implements ComponentContent {
 
 	@Override
 	public void addNotify() {
+		// Method not implemented
 	}
 
 	@Override
@@ -114,6 +115,6 @@ public class ImageContent implements ComponentContent {
 
 	@Override
 	public void setProperty(String name, Object value) {
-		// NOP
+		// Method not implemented
 	}
 }

@@ -106,7 +106,7 @@ public class InputColorPickerControl extends BaseInputControl {
 
 	@Override
 	public void resetInput() {
-		// nop
+		// Method not implemented
 	}
 
 	/**

@@ -107,7 +107,7 @@ public class ArrayUtilities {
 		 */
 		@Override
 		public void remove() {
-			throw new UnsupportedOperationException();
+			// Method not implemented
 		}
 	}
 }

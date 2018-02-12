@@ -1184,7 +1184,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 
 			@Override
 			public void remove() {
-				throw new UnsupportedOperationException();
+				// Method not implemented
 			}
 		};
 	}

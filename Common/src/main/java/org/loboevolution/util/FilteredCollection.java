@@ -149,7 +149,7 @@ public class FilteredCollection implements Collection<Object> {
 			 */
 			@Override
 			public void remove() {
-				throw new UnsupportedOperationException();
+				// Method not implemented
 			}
 		};
 	}

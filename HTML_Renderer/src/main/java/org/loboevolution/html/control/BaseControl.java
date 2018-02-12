@@ -103,5 +103,6 @@ public abstract class BaseControl extends JComponent implements UIControl, HtmlA
 
 	@Override
 	public void reset(int availWidth, int availHeight) {
+		// Method not implemented
 	}
 }

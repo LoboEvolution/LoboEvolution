@@ -36,6 +36,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
 	/** The element. */
 	protected final HTMLElement element;
 
@@ -68,7 +69,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void destroy() {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -88,7 +89,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void resume() {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -98,6 +99,6 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void suspend() {
-		return;
+		// Method not implemented
 	}
 }

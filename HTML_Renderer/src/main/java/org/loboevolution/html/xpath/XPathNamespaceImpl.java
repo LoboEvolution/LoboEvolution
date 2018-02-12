@@ -126,7 +126,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	 */
 	@Override
 	public void setNodeValue(String arg0) throws DOMException {
-		return;
+		// Method not implemented
 	}
 
 	/**
@@ -289,7 +289,7 @@ public class XPathNamespaceImpl implements XPathNamespace {
 	 */
 	@Override
 	public void setPrefix(String arg0) throws DOMException {
-		return;
+		// Method not implemented
 	}
 
 	/**

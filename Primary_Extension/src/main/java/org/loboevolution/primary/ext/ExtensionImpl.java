@@ -70,6 +70,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 */
 	@Override
 	public void destroy() {
+		// Method not implemented
 	}
 
 	/*

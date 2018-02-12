@@ -141,7 +141,7 @@ public class RRelative extends BaseRCollection {
 	 */
 	@Override
 	protected void invalidateLayoutLocal() {
-		// nop
+		// Method not implemented
 	}
 
 	/*

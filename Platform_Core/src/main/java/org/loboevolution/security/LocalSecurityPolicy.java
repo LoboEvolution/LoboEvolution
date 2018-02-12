@@ -280,5 +280,6 @@ public class LocalSecurityPolicy extends Policy {
 	 */
 	@Override
 	public void refresh() {
+		// Method not implemented
 	}
 }

@@ -58,6 +58,7 @@ public class EmptyInputStream extends InputStream {
 	 */
 	@Override
 	public void close() throws IOException {
+		// Method not implemented
 	}
 
 	/*

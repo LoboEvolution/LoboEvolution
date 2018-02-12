@@ -148,7 +148,7 @@ public class History extends AbstractScriptableDelegate {
 	 *            the url
 	 */
 	public void pushState(Object data, String title, String url) {
-		return;
+		// Method not implemented
 	}
 
 	/**
@@ -162,6 +162,6 @@ public class History extends AbstractScriptableDelegate {
 	 *            the url
 	 */
 	public void replaceState(Object data, String title, String url) {
-		return;
+		// Method not implemented
 	}
 }

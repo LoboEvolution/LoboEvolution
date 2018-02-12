@@ -959,7 +959,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void lostOwnership(Clipboard arg0, Transferable arg1) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -1098,7 +1098,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void addDelayedPair(DelayedPair pair) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -1113,7 +1113,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void clearDelayedPairs() {
-		return;
+		// Method not implemented
 	}
 
 	/**

@@ -30,7 +30,6 @@ import javax.swing.JButton;
 import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLInputElementImpl;
-
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
@@ -146,7 +145,7 @@ public class InputButtonControl extends BaseInputControl {
 	 */
 	@Override
 	public void resetInput() {
-		// nop
+		// Method not implemented
 	}
 
 	/**

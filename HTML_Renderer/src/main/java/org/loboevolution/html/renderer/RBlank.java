@@ -26,6 +26,7 @@ package org.loboevolution.html.renderer;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -74,6 +75,7 @@ public final class RBlank extends BaseBoundableRenderable {
 	 */
 	@Override
 	protected void invalidateLayoutLocal() {
+		// Method not implemented
 	}
 
 	/*

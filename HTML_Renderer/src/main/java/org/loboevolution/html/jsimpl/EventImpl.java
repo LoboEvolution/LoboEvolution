@@ -28,7 +28,6 @@ import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.w3c.events.Event;
 import org.loboevolution.w3c.events.EventTarget;
 import org.loboevolution.w3c.html.HTMLElement;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.views.AbstractView;
 
 /**
@@ -468,7 +467,7 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	 */
 	@Override
 	public void preventDefault() {
-		return;
+		// Method not implemented
 	}
 
 	/*

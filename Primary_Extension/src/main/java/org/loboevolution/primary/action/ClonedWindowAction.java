@@ -25,7 +25,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import org.loboevolution.primary.ext.ActionPool;
-import org.loboevolution.primary.ext.ComponentSource;
 import org.loboevolution.ua.NavigationEntry;
 import org.loboevolution.ua.NavigatorWindow;
 

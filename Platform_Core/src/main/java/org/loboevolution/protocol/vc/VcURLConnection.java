@@ -68,6 +68,7 @@ public class VcURLConnection extends URLConnection {
 	 */
 	@Override
 	public void connect() throws IOException {
+		// Method not implemented
 	}
 
 	/*

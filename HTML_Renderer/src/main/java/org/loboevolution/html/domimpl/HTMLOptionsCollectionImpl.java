@@ -52,7 +52,7 @@ public class HTMLOptionsCollectionImpl extends DescendentHTMLCollection implemen
 	 */
 	@Override
 	public void setLength(int length) throws DOMException {
-		throw new UnsupportedOperationException();
+		// Method not implemented
 	}
 
 	/*

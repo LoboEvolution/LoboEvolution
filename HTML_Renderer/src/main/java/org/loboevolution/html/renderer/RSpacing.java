@@ -24,6 +24,7 @@
 package org.loboevolution.html.renderer;
 
 import java.awt.Graphics;
+
 import org.loboevolution.html.dombl.ModelNode;
 
 /**
@@ -58,6 +59,7 @@ public final class RSpacing extends BaseBoundableRenderable {
 	 */
 	@Override
 	protected void invalidateLayoutLocal() {
+		// Method not implemented
 	}
 
 	/*
@@ -68,7 +70,7 @@ public final class RSpacing extends BaseBoundableRenderable {
 	 */
 	@Override
 	public final void paint(Graphics g) {
-		// Nothing to paint in spacing.
+		// Method not implemented
 	}
 
 	/*

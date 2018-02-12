@@ -188,7 +188,7 @@ public class RUIControl extends BaseElementRenderable implements RElement {
 	 * Invalidate render style.
 	 */
 	public void invalidateRenderStyle() {
-		// NOP - No RenderStyle below this node.
+		// Method not implemented
 	}
 
 	/*

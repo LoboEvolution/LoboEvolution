@@ -365,7 +365,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	@Override
 	public void paint(Graphics g) {
-		return;
+		// Method not implemented
 	}
 
 	/**

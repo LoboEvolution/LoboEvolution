@@ -452,7 +452,7 @@ public class RTable extends BaseElementRenderable {
 	 */
 	@Override
 	public void repaint(ModelNode modelNode) {
-		// NOP
+		// Method not implemented
 	}
 
 	/*

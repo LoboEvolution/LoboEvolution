@@ -80,7 +80,7 @@ public final class RFloatInfo implements Renderable {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		// nop
+		// Method not implemented
 	}
 
 	/**

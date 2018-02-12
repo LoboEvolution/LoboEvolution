@@ -30,7 +30,6 @@ import java.awt.FontMetrics;
 import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.text.AttributeSet;

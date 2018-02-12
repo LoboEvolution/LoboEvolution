@@ -137,7 +137,7 @@ public class NodeTreeModel implements TreeModel {
 	 */
 	@Override
 	public void addTreeModelListener(TreeModelListener l) {
-		// nop
+		// Method not implemented
 	}
 
 	/*
@@ -149,6 +149,6 @@ public class NodeTreeModel implements TreeModel {
 	 */
 	@Override
 	public void removeTreeModelListener(TreeModelListener l) {
-		// nop
+		// Method not implemented
 	}
 }

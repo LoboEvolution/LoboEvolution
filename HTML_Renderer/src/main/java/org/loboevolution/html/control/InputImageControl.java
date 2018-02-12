@@ -41,7 +41,6 @@ import org.loboevolution.html.dombl.SVGRasterizer;
 import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.style.HtmlValues;
@@ -355,7 +354,7 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 	 */
 	@Override
 	public void resetInput() {
-		// NOP
+		// Method not implemented
 	}
 
 	/*

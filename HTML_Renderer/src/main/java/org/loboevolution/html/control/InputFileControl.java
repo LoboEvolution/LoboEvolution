@@ -108,7 +108,7 @@ public class InputFileControl extends BaseInputControl {
 	 */
 	@Override
 	public void setValue(String value) {
-		// nop - security
+		// Method not implemented
 	}
 
 	/**

@@ -194,6 +194,7 @@ public class HtmlContent implements ComponentContent {
 	 */
 	@Override
 	public void addNotify() {
+		// Method not implemented
 	}
 
 	/*
@@ -203,6 +204,7 @@ public class HtmlContent implements ComponentContent {
 	 */
 	@Override
 	public void removeNotify() {
+		// Method not implemented
 	}
 
 	/*
