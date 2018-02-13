@@ -131,15 +131,25 @@ public class SVGLengthImpl implements SVGLength {
 
 	@Override
 	public void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits) {
-		if (unitType != SVGLength.SVG_LENGTHTYPE_CM && unitType != SVGLength.SVG_LENGTHTYPE_EMS
-				&& unitType != SVGLength.SVG_LENGTHTYPE_EXS && unitType != SVGLength.SVG_LENGTHTYPE_IN
-				&& unitType != SVGLength.SVG_LENGTHTYPE_MM && unitType != SVGLength.SVG_LENGTHTYPE_NUMBER
-				&& unitType != SVGLength.SVG_LENGTHTYPE_PC && unitType != SVGLength.SVG_LENGTHTYPE_PERCENTAGE
-				&& unitType != SVGLength.SVG_LENGTHTYPE_PT && unitType != SVGLength.SVG_LENGTHTYPE_PX) {
+		
+		
+		switch (unitType) {
+		case SVGLength.SVG_LENGTHTYPE_CM:
+		case SVGLength.SVG_LENGTHTYPE_EMS:
+		case SVGLength.SVG_LENGTHTYPE_EXS:
+		case SVGLength.SVG_LENGTHTYPE_IN:
+		case SVGLength.SVG_LENGTHTYPE_MM:
+		case SVGLength.SVG_LENGTHTYPE_NUMBER:
+		case SVGLength.SVG_LENGTHTYPE_PC:
+		case SVGLength.SVG_LENGTHTYPE_PERCENTAGE:
+		case SVGLength.SVG_LENGTHTYPE_PT:
+		case SVGLength.SVG_LENGTHTYPE_PX:
+			this.unitType = unitType;
+			this.valueInSpecifiedUnits = valueInSpecifiedUnits;
+			break;
+		default:
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid unit type");
 		}
-		this.unitType = unitType;
-		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 	}
 
 	@Override

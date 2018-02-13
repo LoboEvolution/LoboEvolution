@@ -28,6 +28,7 @@ import java.util.Iterator;
 
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.domimpl.DOMEventImpl;
+import org.loboevolution.util.Objects;
 
 /**
  * The Class BaseRCollection.
@@ -331,7 +332,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 		} else {
 			newLimit = limit;
 		}
-		boolean changed = oldRenderable != newRenderable;
+		boolean changed = !Objects.equals(oldRenderable, newRenderable);
 		if (changed) {
 			if (oldRenderable != null) {
 				oldRenderable.onMouseOut(event, x - oldRenderable.getX(), y - oldRenderable.getY(), newLimit);

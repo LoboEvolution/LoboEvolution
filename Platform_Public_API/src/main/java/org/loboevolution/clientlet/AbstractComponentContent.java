@@ -90,7 +90,7 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	 */
 	@Override
 	public void addNotify() {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -100,7 +100,7 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	 */
 	@Override
 	public void removeNotify() {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -132,7 +132,7 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	 */
 	@Override
 	public void setProperty(String name, Object value) {
-		return;
+		// Method not implemented
 	}
 
 	// Backward compatibility note: Additional methods should provide an empty

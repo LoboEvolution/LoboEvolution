@@ -31,6 +31,7 @@ import org.apache.xpath.XPathContext;
 import org.apache.xpath.objects.XObject;
 import org.apache.xpath.res.XPATHErrorResources;
 import org.apache.xpath.res.XPATHMessages;
+import org.loboevolution.util.Objects;
 import org.loboevolution.w3c.xpath.XPathException;
 import org.loboevolution.w3c.xpath.XPathExpression;
 import org.loboevolution.w3c.xpath.XPathNamespace;
@@ -147,17 +148,25 @@ public class XPathExpressionImpl implements XPathExpression {
 		if (m_doc != null) {
 
 			// Check that the context node is owned by the same document
-			if (contextNode != m_doc && !contextNode.getOwnerDocument().equals(m_doc)) {
+			if (!Objects.equals(contextNode, m_doc) && !contextNode.getOwnerDocument().equals(m_doc)) {
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_DOCUMENT, null);
 				throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, fmsg);
 			}
 
 			// Check that the context node is an acceptable node type
 			short nodeType = contextNode.getNodeType();
-			if (nodeType != Node.DOCUMENT_NODE && nodeType != Node.ELEMENT_NODE && nodeType != Node.ATTRIBUTE_NODE
-					&& nodeType != Node.TEXT_NODE && nodeType != Node.CDATA_SECTION_NODE
-					&& nodeType != Node.COMMENT_NODE && nodeType != Node.PROCESSING_INSTRUCTION_NODE
-					&& nodeType != XPathNamespace.XPATH_NAMESPACE_NODE) {
+			
+			switch (nodeType) {
+			case Node.DOCUMENT_NODE:
+			case Node.ELEMENT_NODE:
+			case Node.ATTRIBUTE_NODE:
+			case Node.TEXT_NODE:
+			case Node.CDATA_SECTION_NODE:
+			case Node.COMMENT_NODE:
+			case Node.PROCESSING_INSTRUCTION_NODE:
+			case XPathNamespace.XPATH_NAMESPACE_NODE:
+				break;
+			default:
 				String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_WRONG_NODETYPE, null);
 				throw new DOMException(DOMException.NOT_SUPPORTED_ERR, fmsg);
 			}

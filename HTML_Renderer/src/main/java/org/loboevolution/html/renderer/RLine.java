@@ -35,6 +35,7 @@ import java.util.Iterator;
 
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.util.Objects;
 
 /**
  * The Class RLine.
@@ -314,7 +315,7 @@ public class RLine extends BaseRCollection {
 					if (overflow == null) {
 						overflow = new ArrayList<Renderable>();
 					}
-					if (renderable != rword && renderable instanceof RWord && ((RWord) renderable).getX() == 0) {
+					if (!Objects.equals(renderable, rword) && renderable instanceof RWord && ((RWord) renderable).getX() == 0) {
 						// Can't overflow words starting at offset zero.
 						// Note that all or none should be overflown.
 						cancel = true;
@@ -674,7 +675,7 @@ public class RLine extends BaseRCollection {
 		if (r != null) {
 			Rectangle rbounds = r.getBounds();
 			BoundableRenderable oldArmedRenderable = this.mousePressTarget;
-			if (oldArmedRenderable != null && r != oldArmedRenderable) {
+			if (!Objects.equals(r, oldArmedRenderable)) {
 				oldArmedRenderable.onMouseDisarmed(event);
 				this.mousePressTarget = null;
 			}

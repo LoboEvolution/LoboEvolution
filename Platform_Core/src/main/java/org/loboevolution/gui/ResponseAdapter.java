@@ -35,5 +35,6 @@ public abstract class ResponseAdapter implements ResponseListener {
 	 */
 	@Override
 	public void responseProcessed(ResponseEvent event) {
+		// Method not implemented
 	}
 }

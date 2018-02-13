@@ -74,6 +74,7 @@ import org.loboevolution.ua.RequestType;
 import org.loboevolution.ua.UserAgent;
 import org.loboevolution.util.BoxedObject;
 import org.loboevolution.util.ID;
+import org.loboevolution.util.Objects;
 import org.loboevolution.util.SSLCertificate;
 import org.loboevolution.util.SimpleThreadPool;
 import org.loboevolution.util.SimpleThreadPoolTask;
@@ -1033,7 +1034,7 @@ public final class RequestEngine {
 						// Give a change to extensions to post-process the
 						// connection.
 						URLConnection newConnection = this.getSafeExtensionManager().dispatchPostConnection(connection);
-						if (newConnection != connection) {
+						if (!Objects.equals(newConnection, connection)) {
 							responseIn = newConnection.getInputStream();
 							connection = newConnection;
 						}

@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.selectors.SelectorMatcher;
+import org.loboevolution.util.Objects;
 import org.w3c.dom.css.CSSStyleRule;
 
 /**
@@ -78,7 +79,7 @@ public class StyleRuleInfo implements Serializable {
 		for (int i = size; --i >= 0;) {
 			SelectorMatcher selectorMatcher = as.get(i);
 			if (first) {
-				if (ancestor == element) {
+				if (Objects.equals(ancestor, element)) {
 					return selectorMatcher.hasPseudoName(pseudoName);
 				}
 				first = false;
@@ -106,7 +107,7 @@ public class StyleRuleInfo implements Serializable {
 				return false;
 			}
 			currentElement = newElement;
-			if (currentElement == ancestor) {
+			if (Objects.equals(currentElement, ancestor)) {
 				return selectorMatcher.hasPseudoName(pseudoName);
 			}
 		}

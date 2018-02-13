@@ -81,12 +81,12 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void blur() {
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void click() {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -131,12 +131,12 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void select() {
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void setChecked(boolean checked) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -146,12 +146,12 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setMaxLength(int maxLength) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void setReadOnly(boolean readOnly) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -162,7 +162,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setTabIndex(int tabIndex) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -187,17 +187,17 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setCols(int cols) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void setRows(int rows) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void setMin(int value) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -207,7 +207,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setMax(int value) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -217,7 +217,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public void setPattern(String value) {
-		return;
+		// Method not implemented
 	}
 
 	@Override
@@ -248,19 +248,16 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	 * @return the multiple
 	 */
 	public boolean getMultiple() {
-		// For selects
 		return false;
 	}
 
 	@Override
 	public int getSelectedIndex() {
-		// For selects
 		return -1;
 	}
 
 	@Override
 	public int getVisibleSize() {
-		// For selects
 		return 0;
 	}
 
@@ -271,20 +268,17 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 	 *            the new multiple
 	 */
 	public void setMultiple(boolean value) {
-		// For selects
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void setSelectedIndex(int value) {
-		// For selects
-		return;
+		// Method not implemented
 	}
 
 	@Override
 	public void setVisibleSize(int value) {
-		// For selects
-		return;
+		// Method not implemented
 	}
 
 	@Override

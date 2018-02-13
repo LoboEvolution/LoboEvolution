@@ -29,12 +29,7 @@ package org.loboevolution.util;
  * @author J. H. S.
  */
 public class Objects {
-	/**
-	 * Instantiates a new objects.
-	 */
-	private Objects() {
-	}
-
+	
 	/**
 	 * Equals.
 	 *
@@ -56,8 +51,19 @@ public class Objects {
 	 * @return true, if is box class
 	 */
 	public static boolean isBoxClass(Class clazz) {
-		return clazz == Integer.class || clazz == Boolean.class || clazz == Double.class || clazz == Float.class
-				|| clazz == Long.class || clazz == Byte.class || clazz == Short.class || clazz == Character.class;
+		switch (clazz.getSimpleName()) {
+		case "Integer":
+		case "Boolean":
+		case "Double":
+		case "Float":
+		case "Long":
+		case "Byte":
+		case "Short":
+		case "Character":
+			return true;
+		default:
+			return false;
+		}
 	}
 
 	/**
@@ -102,9 +108,11 @@ public class Objects {
 				|| clazz == float.class && value instanceof Float) {
 			return true;
 		}
+		
 		if (isNumeric(clazz) && isNumeric(value)) {
 			return true;
 		}
+		
 		if (clazz.isAssignableFrom(String.class)) {
 			return value == null || !value.getClass().isPrimitive();
 		}

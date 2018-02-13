@@ -61,7 +61,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	private final AbstractItemEditor<T> editor;
 	
 	/** The resulting item. */
-	private T resultingItem;
+	private transient T resultingItem;
 
 	/**
 	 * Instantiates a new item editor dialog.

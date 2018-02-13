@@ -60,6 +60,9 @@ public class FontKey {
 	/** The underline. */
 	private Integer underline;
 	
+	/** The cached hash. */
+	private int cachedHash = -1;
+	
 	
 	public FontKey() {
 		setFontFamily(Font.SANS_SERIF);
@@ -227,9 +230,6 @@ public class FontKey {
 	public void setCachedHash(int cachedHash) {
 		this.cachedHash = cachedHash;
 	}
-
-	/** The cached hash. */
-	private int cachedHash = -1;
 
 	/*
 	 * (non-Javadoc)

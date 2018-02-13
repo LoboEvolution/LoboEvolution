@@ -56,7 +56,7 @@ public class PagePanel extends JPanel implements ImageObserver {
 	private static final long serialVersionUID = 1L;
 
 	/** The image of the rendered PDF page being displayed. */
-	private Image currentImage;
+	private transient Image currentImage;
 
 	/** The current PDFPage that was rendered into currentImage. */
 	private PDFPage currentPage;
@@ -71,10 +71,10 @@ public class PagePanel extends JPanel implements ImageObserver {
 	private int offy;
 
 	/** the current clip, in device space. */
-	private Rectangle2D clip;
+	private transient Rectangle2D clip;
 
 	/** the clipping region used for the image. */
-	private Rectangle2D prevClip;
+	private transient Rectangle2D prevClip;
 
 	/** the size of the image. */
 	private Dimension prevSize;

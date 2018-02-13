@@ -550,38 +550,56 @@ public class SimpleHttpRequest extends AbstractBean {
 	 * @param value
 	 */
 	public void setRequestHeader(String header, String value) {
-		if (getReadyState() != ReadyState.LOADING) {
-			throw new IllegalStateException(
-					"The AsyncHttpRequest must be opened prior to " + "setting a request header");
+		if (getReadyState() != ReadyState.OPEN) {
+			throw new IllegalStateException("The HttpRequestImpl must be opened prior to setting a request header");
 		}
-
+		// TODO
+		// if the header argument doesn't match the "field-name production",
+		// throw an illegal argument exception
+		// if the value argument doesn't match the "field-value production",
+		// throw an illegal argument exception
 		if (header == null || value == null) {
 			throw new IllegalArgumentException("Neither the header, nor value, may be null");
 		}
-
-		if (header.equalsIgnoreCase("Accept-Charset") || header.equalsIgnoreCase("Accept-Encoding")
-				|| header.equalsIgnoreCase("Content-Length") || header.equalsIgnoreCase("Expect")
-				|| header.equalsIgnoreCase("Date") || header.equalsIgnoreCase("Host")
-				|| header.equalsIgnoreCase("Keep-Alive") || header.equalsIgnoreCase("Referer")
-				|| header.equalsIgnoreCase("TE") || header.equalsIgnoreCase("Trailer")
-				|| header.equalsIgnoreCase("Transfer-Encoding") || header.equalsIgnoreCase("Upgrade")) {
-
-			return;
-		}
-
-		if (header.equalsIgnoreCase("Authorization") || header.equalsIgnoreCase("Content-Base")
-				|| header.equalsIgnoreCase("Content-Location") || header.equalsIgnoreCase("Content-MD5")
-				|| header.equalsIgnoreCase("Content-Range") || header.equalsIgnoreCase("Content-Type")
-				|| header.equalsIgnoreCase("Content-Version") || header.equalsIgnoreCase("Delta-Base")
-				|| header.equalsIgnoreCase("Depth") || header.equalsIgnoreCase("Destination")
-				|| header.equalsIgnoreCase("ETag") || header.equalsIgnoreCase("Expect")
-				|| header.equalsIgnoreCase("From") || header.equalsIgnoreCase("If-Modified-Since")
-				|| header.equalsIgnoreCase("If-Range") || header.equalsIgnoreCase("If-Unmodified-Since")
-				|| header.equalsIgnoreCase("Max-Forwards") || header.equalsIgnoreCase("MIME-Version")
-				|| header.equalsIgnoreCase("Overwrite") || header.equalsIgnoreCase("Proxy-Authorization")
-				|| header.equalsIgnoreCase("SOAPAction") || header.equalsIgnoreCase("Timeout")) {
-
-			// replace the current header, if any
+		// NOTE: The spec says, nothing should be done if the header argument
+		// matches:
+		// Accept-Charset, Accept-Encoding, Content-Length, Expect, Date, Host,
+		// Keep-Alive,
+		// Referer, TE, Trailer, Transfer-Encoding, Upgrade
+		// The spec says this for security reasons, but I don't understand why?
+		// I'll follow
+		// the spec's suggestion until I know more (can always allow more
+		// headers, but
+		// restricting them is more painful). Note that Session doesn't impose
+		// any such
+		// restrictions, so you can always set "Accept-Encoding" etc on the
+		// Session...
+		// except that Session has no way to set these at the moment, except via
+		// a Request.
+		
+		switch (header.toUpperCase()) {
+		case "AUTHORIZATION":
+		case "CONTENT-BASE":
+		case "CONTENT-LOCATION":
+		case "CONTENT-MD5":
+		case "CONTENT-RANGE":
+		case "CONTENT-TYPE":
+		case "CONTENT-VERSION":
+		case "DELTA-BASE":
+		case "DEPTH":
+		case "DESTINATION":
+		case "ETAG":
+		case "EXPECT":
+		case "FROM":
+		case "IF-MODIFIED-SINCE":
+		case "IF-RANGE":
+		case "IF-UNMODIFIED-SINCE":
+		case "MAX-FORWARDS":
+		case "MIME-VERSION":
+		case "OVERWRITE":
+		case "PROXY-AUTHORIZATION":
+		case "SOAPACTION":
+		case "TIMEOUT":
 			for (Header h : req.getHeaders()) {
 				if (h.getName().equalsIgnoreCase(header)) {
 					req.removeHeader(h);
@@ -589,10 +607,21 @@ public class SimpleHttpRequest extends AbstractBean {
 					break;
 				}
 			}
-		} else {
-			// append the value to the header, if one is already specified.
-			// Else,
-			// just add it as a new header
+			break;
+		case "ACCEPT-CHARSET": 
+		case "ACCEPT-ENCODING":
+		case "CONTENT-LENGTH":
+		case "DATE":
+		case "HOST":
+		case "KEEP-ALIVE":
+		case "REFERER":
+		case "TE":
+		case "TRAILER":
+		case "TRANSFER-ENCODING":
+		case "UPGRADE":	
+			break;
+			
+		default:
 			boolean appended = false;
 			for (Header h : req.getHeaders()) {
 				if (h.getName().equalsIgnoreCase(header)) {
@@ -605,6 +634,7 @@ public class SimpleHttpRequest extends AbstractBean {
 			if (!appended) {
 				req.setHeader(new Header(header, value));
 			}
+			break;
 		}
 	}
 }

@@ -63,7 +63,7 @@ public class BookmarksDialog extends JDialog {
 	private JTextField jtfFilter;
 
 	/** The row sorter. */
-	private TableRowSorter<TableModel> rowSorter;
+	private transient TableRowSorter<TableModel> rowSorter;
 
 	/** The window. */
 	private NavigatorWindow window;
@@ -111,6 +111,7 @@ public class BookmarksDialog extends JDialog {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
+				// Method not implemented
 			}
 
 		});

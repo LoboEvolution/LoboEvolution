@@ -336,7 +336,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			return null;
 		}
 		RCollection relativeTo = relativeToScrollable ? (RCollection) block.getRBlockViewport() : (RCollection) block;
-		if (node == currentNode) {
+		if (Objects.equals(node, currentNode)) {
 			BoundableRenderable br = (BoundableRenderable) uiNode;
 			Point guiPoint = br.getOriginRelativeTo(relativeTo);
 			Dimension size = br.getSize();
@@ -383,7 +383,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		Rectangle bounds;
 
 		RCollection relativeTo = relativeToScrollable ? (RCollection) block.getRBlockViewport() : (RCollection) block;
-		if (node == currentNode) {
+		if (Objects.equals(node, currentNode)) {
 			BoundableRenderable br = (BoundableRenderable) uiNode;
 			Point guiPoint = br.getOriginRelativeTo(relativeTo);
 			Dimension size = br.getSize();
@@ -723,7 +723,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			BoundableRenderable oldTarget = this.mousePressTarget;
 			if (oldTarget != null) {
 				this.mousePressTarget = null;
-				if (oldTarget != block) {
+				if (!Objects.equals(oldTarget,block)) {
 					oldTarget.onMouseDisarmed(event);
 				}
 			}
@@ -972,11 +972,11 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public void invalidateLayoutUpTree() {
+		// Method not implemented
 		// Called when renderable branch is invalidated.
 		// We shouldn't do anything here. Changes in renderer
 		// tree do not have any bearing on validity of GUI
 		// component.
-		return;
 	}
 
 	@Override

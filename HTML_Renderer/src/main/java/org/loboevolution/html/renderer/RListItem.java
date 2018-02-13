@@ -31,6 +31,7 @@ import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.ListStyle;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Objects;
 import org.loboevolution.w3c.html.HTMLElement;
 
 /**
@@ -137,7 +138,7 @@ public class RListItem extends BaseRListElement implements HtmlAttributeProperti
 		// Note: Count must be calculated even if layout is valid.
 		RenderState renderState = this.modelNode.getRenderState();
 		Integer value = this.getValue();
-		if (value == UNSET) {
+		if (Objects.equals(value, UNSET)) {
 			this.count = renderState.incrementCount(DEFAULT_COUNTER_NAME, this.listNesting);
 		} else {
 			int newCount = value.intValue();

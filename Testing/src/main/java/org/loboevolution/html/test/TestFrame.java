@@ -47,6 +47,7 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Objects;
 
 /**
  * A Swing frame that can be used to test the Cobra HTML rendering engine.
@@ -126,9 +127,9 @@ public class TestFrame extends JFrame {
 		tabbedPane.addTab("Source", textAreaSp);
 		tabbedPane.addChangeListener(e -> {
 			Component component = tabbedPane.getSelectedComponent();
-			if (component == scrollPane) {
+			if (Objects.equals(component, scrollPane)) {
 				tree.setModel(new NodeTreeModel(panel.getRootNode()));
-			} else if (component == textAreaSp) {
+			} else if (Objects.equals(component, textAreaSp)) {
 				textArea.setText(rcontext.getSourceCode());
 			}
 		});

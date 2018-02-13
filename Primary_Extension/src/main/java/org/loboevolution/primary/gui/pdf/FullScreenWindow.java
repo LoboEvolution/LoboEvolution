@@ -31,6 +31,8 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import org.loboevolution.util.Objects;
+
 /**
  * The Class FullScreenWindow.
  */
@@ -150,7 +152,7 @@ public class FullScreenWindow {
 
 		if (defaultScreen != null) {
 			for (GraphicsDevice screen2 : screens) {
-				if (screen2 == defaultScreen) {
+				if (Objects.equals(screen2, defaultScreen)) {
 					screen = defaultScreen;
 				}
 			}
@@ -191,7 +193,7 @@ public class FullScreenWindow {
 		private static final long serialVersionUID = -658915481325845436L;
 
 		/** The mygd. */
-		private GraphicsDevice mygd;
+		private transient GraphicsDevice mygd;
 
 		/**
 		 * Creates the PickMe button on a particular display.

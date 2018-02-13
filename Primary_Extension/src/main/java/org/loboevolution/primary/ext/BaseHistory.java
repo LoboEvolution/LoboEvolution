@@ -287,7 +287,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 		private final String value;
 
 		/** The item info. */
-		private T itemInfo;
+		private transient T itemInfo;
 
 		/**
 		 * Instantiates a new timed entry.

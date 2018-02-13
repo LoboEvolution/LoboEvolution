@@ -204,8 +204,7 @@ public class HttpRequest extends AbstractBean {
 	 */
 	public void setRequestHeader(String header, String value) {
 		if (getReadyState() != ReadyState.OPEN) {
-			throw new IllegalStateException(
-					"The HttpRequestImpl must be opened prior to " + "setting a request header");
+			throw new IllegalStateException("The HttpRequestImpl must be opened prior to setting a request header");
 		}
 		// TODO
 		// if the header argument doesn't match the "field-name production",
@@ -230,29 +229,30 @@ public class HttpRequest extends AbstractBean {
 		// Session...
 		// except that Session has no way to set these at the moment, except via
 		// a Request.
-		if ("Authorization".equalsIgnoreCase(header) 
-			|| "Content-Base".equalsIgnoreCase(header)
-			|| "Content-Location".equalsIgnoreCase(header)
-			|| "Content-MD5".equalsIgnoreCase(header)
-			|| "Content-Range".equalsIgnoreCase(header) 
-			|| "Content-Type".equalsIgnoreCase(header)
-			|| "Content-Version".equalsIgnoreCase(header) 
-			|| "Delta-Base".equalsIgnoreCase(header)
-			|| "Depth".equalsIgnoreCase(header) 
-			|| "Destination".equalsIgnoreCase(header)
-			|| "ETag".equalsIgnoreCase(header) 
-			|| "Expect".equalsIgnoreCase(header)
-			|| "From".equalsIgnoreCase(header) 
-			|| "If-Modified-Since".equalsIgnoreCase(header)
-			|| "If-Range".equalsIgnoreCase(header) 
-			|| "If-Unmodified-Since".equalsIgnoreCase(header)
-			|| "Max-Forwards".equalsIgnoreCase(header) 
-			|| "MIME-Version".equalsIgnoreCase(header)
-			|| "Overwrite".equalsIgnoreCase(header) 
-			|| "Proxy-Authorization".equalsIgnoreCase(header)
-			|| "SOAPAction".equalsIgnoreCase(header) 
-			|| "Timeout".equalsIgnoreCase(header)) {
-			
+		
+		switch (header.toUpperCase()) {
+		case "AUTHORIZATION":
+		case "CONTENT-BASE":
+		case "CONTENT-LOCATION":
+		case "CONTENT-MD5":
+		case "CONTENT-RANGE":
+		case "CONTENT-TYPE":
+		case "CONTENT-VERSION":
+		case "DELTA-BASE":
+		case "DEPTH":
+		case "DESTINATION":
+		case "ETAG":
+		case "EXPECT":
+		case "FROM":
+		case "IF-MODIFIED-SINCE":
+		case "IF-RANGE":
+		case "IF-UNMODIFIED-SINCE":
+		case "MAX-FORWARDS":
+		case "MIME-VERSION":
+		case "OVERWRITE":
+		case "PROXY-AUTHORIZATION":
+		case "SOAPACTION":
+		case "TIMEOUT":
 			for (Header h : req.getHeaders()) {
 				if (h.getName().equalsIgnoreCase(header)) {
 					req.removeHeader(h);
@@ -260,19 +260,21 @@ public class HttpRequest extends AbstractBean {
 					break;
 				}
 			}
-		} else if(!"Accept-Charset".equalsIgnoreCase(header) 
-				 && !"Accept-Encoding".equalsIgnoreCase(header)
-				 && !"Content-Length".equalsIgnoreCase(header)
-				 && !"Expect".equalsIgnoreCase(header)
-				 && !"Date".equalsIgnoreCase(header)
-				 && !"Host".equalsIgnoreCase(header)
-				 && !"Keep-Alive".equalsIgnoreCase(header)
-				 && !"Referer".equalsIgnoreCase(header)
-				 && !"TE".equalsIgnoreCase(header)
-				 && !"Trailer".equalsIgnoreCase(header)
-				 && !"Transfer-Encoding".equalsIgnoreCase(header)
-				 && !"Upgrade".equalsIgnoreCase(header)){
+			break;
+		case "ACCEPT-CHARSET": 
+		case "ACCEPT-ENCODING":
+		case "CONTENT-LENGTH":
+		case "DATE":
+		case "HOST":
+		case "KEEP-ALIVE":
+		case "REFERER":
+		case "TE":
+		case "TRAILER":
+		case "TRANSFER-ENCODING":
+		case "UPGRADE":	
+			break;
 			
+		default:
 			boolean appended = false;
 			for (Header h : req.getHeaders()) {
 				if (h.getName().equalsIgnoreCase(header)) {
@@ -285,6 +287,7 @@ public class HttpRequest extends AbstractBean {
 			if (!appended) {
 				req.setHeader(new Header(header, value));
 			}
+			break;
 		}
 	}
 
@@ -607,7 +610,7 @@ public class HttpRequest extends AbstractBean {
 	 * no need to call super.handleResponse(txt).
 	 */
 	protected void handleResponse(String responseText) throws Exception {
-		return;
+		// Method not implemented
 	}
 
 	// ---------------------------------------------- Private helper methods

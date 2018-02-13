@@ -86,17 +86,6 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 	}
 
 	/**
-	 * Gets the type name.
-	 *
-	 * @param object
-	 *            the object
-	 * @return the type name
-	 */
-	private String getTypeName(Object object) {
-		return object == null ? "[null]" : object.getClass().getName();
-	}
-
-	/**
 	 * Gets the best method.
 	 *
 	 * @param args

@@ -38,7 +38,7 @@ import org.loboevolution.clientlet.ComponentContent;
 public class ImageContent implements ComponentContent {
 
 	/** The image. */
-	private final Image image;
+	private transient Image image;
 
 	/** The mime type. */
 	private final String mimeType;

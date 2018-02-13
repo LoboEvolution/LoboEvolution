@@ -77,6 +77,7 @@ import org.loboevolution.ua.NavigatorWindow;
 import org.loboevolution.ua.NavigatorWindowEvent;
 import org.loboevolution.ua.NavigatorWindowListener;
 import org.loboevolution.ua.RequestType;
+import org.loboevolution.util.Objects;
 import org.loboevolution.util.Timing;
 
 /**
@@ -928,7 +929,7 @@ public class ComponentSource implements NavigatorWindowListener {
 						ComponentSource.this.updateSearchButtonTooltip();
 					}
 				});
-				item.setSelected(se == selectedEngine);
+				item.setSelected(Objects.equals(se, selectedEngine));
 				item.setText(se.getName());
 				item.setToolTipText(se.getDescription());
 				searchersMenu.add(item);

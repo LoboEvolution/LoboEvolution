@@ -65,6 +65,6 @@ public class ScreenShotAction extends AbstractAction implements EnableableAction
 
 	@Override
 	public void updateEnabling() {
-		return;
+		// Method not implemented
 	}
 }

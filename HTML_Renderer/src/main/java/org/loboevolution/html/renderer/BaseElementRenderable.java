@@ -49,6 +49,7 @@ import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Objects;
 import org.loboevolution.util.Strings;
 
 /**
@@ -293,7 +294,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	protected Integer getDeclaredHeight(RenderState renderState, int actualAvailHeight) {
 		Integer dh = this.declaredHeight;
-		if (dh == INVALID_SIZE || actualAvailHeight != this.lastAvailHeightForDeclared) {
+		if (Objects.equals(dh, INVALID_SIZE) || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			int dhInt = this.getDeclaredHeightImpl(renderState, actualAvailHeight);
 			dh = dhInt == -1 ? null : Integer.valueOf(dhInt);
@@ -852,6 +853,26 @@ public abstract class BaseElementRenderable extends BaseRCollection
 
 	public Insets getBorderInsets() {
 		return this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
+	}
+	
+	/**
+	 * Gets the padding insets.
+	 *
+	 * @return the padding insets
+	 */
+
+	public Insets getPaddingInsets() {
+		return this.paddingInsets == null ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
+	}
+	
+	/**
+	 * Gets the marginInsets insets.
+	 *
+	 * @return the marginInsets insets
+	 */
+
+	public Insets getMarginInsets() {
+		return this.marginInsets == null ? RBlockViewport.ZERO_INSETS : this.marginInsets;
 	}
 
 	/**

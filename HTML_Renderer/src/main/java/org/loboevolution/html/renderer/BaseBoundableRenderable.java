@@ -43,6 +43,7 @@ import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.util.Objects;
 
 /**
  * The Class BaseBoundableRenderable.
@@ -658,7 +659,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 			if (parent == null) {
 				throw new IllegalArgumentException("Not an ancestor: " + ancestor);
 			}
-			if (parent == ancestor) {
+			if (Objects.equals(parent, ancestor)){
 				return new Point(x, y);
 			}
 			x += parent.getX();
@@ -695,7 +696,7 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 	private static void setMouseOnMouseOver(final ModelNode nodeStart, final ModelNode limit) {
 		ModelNode node = nodeStart;
 		while (node != null) {
-			if (node == limit) {
+			if (Objects.equals(node, limit)) {
 				break;
 			}
 			if (node instanceof DOMNodeImpl) {

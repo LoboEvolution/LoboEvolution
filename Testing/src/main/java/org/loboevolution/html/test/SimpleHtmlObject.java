@@ -59,7 +59,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	@Override
 	public void reset(int availWidth, int availHeight) {
-		return;
+		// Method not implemented
 	}
 
 	/*

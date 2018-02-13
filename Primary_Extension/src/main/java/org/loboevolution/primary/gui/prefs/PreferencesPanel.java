@@ -39,7 +39,7 @@ public class PreferencesPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/** The ui. */
-	private AbstractSettingsUI ui;
+	private AbstractSettingsUI setting;
 
 	/**
 	 * Instantiates a new preferences panel.
@@ -55,7 +55,7 @@ public class PreferencesPanel extends JPanel {
 	 * @return true, if successful
 	 */
 	public boolean save() {
-		AbstractSettingsUI ui = this.ui;
+		AbstractSettingsUI ui = this.setting;
 		if (ui != null) {
 			try {
 				ui.save();
@@ -71,7 +71,7 @@ public class PreferencesPanel extends JPanel {
 	 * Restore defaults.
 	 */
 	public void restoreDefaults() {
-		AbstractSettingsUI ui = this.ui;
+		AbstractSettingsUI ui = this.setting;
 		if (ui != null) {
 			ui.restoreDefaults();
 		}
@@ -84,7 +84,7 @@ public class PreferencesPanel extends JPanel {
 	 *            the new settings ui
 	 */
 	public void setSettingsUI(AbstractSettingsUI ui) {
-		this.ui = ui;
+		this.setting = ui;
 		this.removeAll();
 		if (ui != null) {
 			this.add(ui);

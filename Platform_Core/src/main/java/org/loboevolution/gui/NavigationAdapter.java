@@ -39,7 +39,7 @@ public abstract class NavigationAdapter implements NavigationListener {
 	 */
 	@Override
 	public void beforeLocalNavigate(NavigationEvent event) throws NavigationVetoException {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -51,7 +51,7 @@ public abstract class NavigationAdapter implements NavigationListener {
 	 */
 	@Override
 	public void beforeNavigate(NavigationEvent event) throws NavigationVetoException {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -63,6 +63,6 @@ public abstract class NavigationAdapter implements NavigationListener {
 	 */
 	@Override
 	public void beforeWindowOpen(NavigationEvent event) throws NavigationVetoException {
-		return;
+		// Method not implemented
 	}
 }

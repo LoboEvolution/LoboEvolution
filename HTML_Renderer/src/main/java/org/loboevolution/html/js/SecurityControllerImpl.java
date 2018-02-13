@@ -44,9 +44,6 @@ import org.mozilla.javascript.SecurityController;
  */
 public class SecurityControllerImpl extends SecurityController {
 
-	/** The url. */
-	private final URL url;
-
 	/** The policy. */
 	private Policy policy;
 
@@ -65,10 +62,9 @@ public class SecurityControllerImpl extends SecurityController {
 	 *            the policy
 	 */
 	public SecurityControllerImpl(URL url, Policy policy) {
-		this.url = url;
 		this.policy = policy;
 		Certificate[] certs = new Certificate[] {};
-		this.codesource = new CodeSource(this.url, certs);
+		this.codesource = new CodeSource(url, certs);
 	}
 
 	/*

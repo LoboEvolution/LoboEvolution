@@ -58,19 +58,22 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	private PDFFile file;
 
 	/** Array of images, one per page in the file. */
-	private Image images[];
+	private transient Image images[];
 
 	/** Size of the border between images. */
 	private int border = 2;
+	
 	/**
 	 * Height of each line. Thumbnails will be scaled to this height (minus the
 	 * border).
 	 */
 	private int lineheight = 96 + border;
+	
 	/**
 	 * Guesstimate of the width of a thumbnail that hasn't been processed yet.
 	 */
 	private int defaultWidth = (lineheight - border) * 4 / 3;
+	
 	/**
 	 * Array of the x locations of each of the thumbnails. Every 0 stored in
 	 * this array indicates the start of a new line of thumbnails.
@@ -78,14 +81,17 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	private int xloc[];
 
 	/** Thread that renders each thumbnail in turn. */
-	private Thread anim;
+	private transient Thread anim;
+	
 	/** Which thumbnail is selected, or -1 if no thumbnail selected. */
 	private int showing = -1;
+	
 	/**
 	 * Which thumbnail needs to be drawn next, or -1 if the previous needy
 	 * thumbnail is being processed.
 	 */
 	private int needdrawn = -1;
+	
 	/**
 	 * Whether the default width has been guesstimated for this PDFFile yet.
 	 */

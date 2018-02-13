@@ -104,7 +104,7 @@ public class NodeTreeModel implements TreeModel {
 	 */
 	@Override
 	public void valueForPathChanged(TreePath path, Object newValue) {
-		return;
+		// Method not implemented
 	}
 
 	/*

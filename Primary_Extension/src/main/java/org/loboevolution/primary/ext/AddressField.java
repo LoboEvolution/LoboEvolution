@@ -80,12 +80,12 @@ public class AddressField extends JComboBox<String> {
 
 			@Override
 			public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-				return;
+				// Method not implemented
 			}
 
 			@Override
 			public void popupMenuCanceled(PopupMenuEvent e) {
-				return;
+				// Method not implemented
 			}
 		});
 		this.addActionListener(event -> {
@@ -170,17 +170,9 @@ public class AddressField extends JComboBox<String> {
 			this.populatingMatches = false;
 		}
 	}
-
-	/**
-	 * On edited.
-	 *
-	 * @param modifiers
-	 *            the modifiers
-	 */
+	
 	private void onEdited(int modifiers) {
-		// if(this.getText().length() != 0) {
-		// this.componentSource.navigateOrSearch();
-		// }
+		// Method not implemented
 	}
 
 	/**

@@ -81,7 +81,7 @@ public final class RStyleChanger extends BaseRenderable implements Renderable {
 	 * Invalidate layout up tree.
 	 */
 	public void invalidateLayoutUpTree() {
-		return;
+		// Method not implemented
 	}
 
 	/**

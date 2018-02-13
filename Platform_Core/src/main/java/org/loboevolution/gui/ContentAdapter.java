@@ -34,5 +34,6 @@ public abstract class ContentAdapter implements ContentListener {
 	 */
 	@Override
 	public void contentSet(ContentEvent event) {
+		// Method not implemented
 	}
 }

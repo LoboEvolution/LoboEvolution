@@ -47,7 +47,7 @@ public class WrapperLayout implements LayoutManager {
 	 */
 	@Override
 	public void addLayoutComponent(String arg0, Component arg1) {
-		return;
+		// Method not implemented
 	}
 
 	/*
@@ -57,7 +57,7 @@ public class WrapperLayout implements LayoutManager {
 	 */
 	@Override
 	public void removeLayoutComponent(Component arg0) {
-		return;
+		// Method not implemented
 	}
 
 	/*

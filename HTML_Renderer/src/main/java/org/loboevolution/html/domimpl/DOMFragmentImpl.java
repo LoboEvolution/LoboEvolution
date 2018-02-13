@@ -74,6 +74,7 @@ public class DOMFragmentImpl extends DOMNodeImpl implements DocumentFragment, HT
 	 */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
+		// Method not implemented
 	}
 
 	/*

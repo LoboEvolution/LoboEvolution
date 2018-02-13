@@ -43,6 +43,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -139,7 +140,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	private OutlineNode outline = null;
 
 	/** The page format for printing. */
-	private PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
+	private transient PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
 
 	/** true if the thumb panel should exist at all. */
 	private boolean doThumb = true;
@@ -181,7 +182,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	// / FILE MENU
 
 	/** The page setup action. */
-	private Action pageSetupAction = new AbstractAction("Page setup...") {
+	private transient Action pageSetupAction = new AbstractAction("Page setup...") {
 
 		private static final long serialVersionUID = 1L;
 
@@ -192,7 +193,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The print action. */
-	private Action printAction = new AbstractAction("Print...", getIcon("/org/loboevolution/images/print.png")) {
+	private transient Action printAction = new AbstractAction("Print...", getIcon("/org/loboevolution/images/print.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -203,7 +204,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The close action. */
-	private Action closeAction = new AbstractAction("Close") {
+	private transient Action closeAction = new AbstractAction("Close") {
 
 		private static final long serialVersionUID = 1L;
 
@@ -214,7 +215,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The quit action. */
-	private Action quitAction = new AbstractAction("Quit") {
+	private transient Action quitAction = new AbstractAction("Quit") {
 
 		private static final long serialVersionUID = 1L;
 
@@ -225,7 +226,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The zoom tool action. */
-	private Action zoomToolAction = new AbstractAction("", getIcon("/org/loboevolution/images/zoomin.png")) {
+	private transient Action zoomToolAction = new AbstractAction("", getIcon("/org/loboevolution/images/zoomin.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -236,7 +237,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The fit in window action. */
-	private Action fitInWindowAction = new AbstractAction("Fit in window", getIcon("/org/loboevolution/images/zoomout.png")) {
+	private transient Action fitInWindowAction = new AbstractAction("Fit in window", getIcon("/org/loboevolution/images/zoomout.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -297,7 +298,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	}
 
 	/** The full screen action. */
-	private Action fullScreenAction = new AbstractAction("Full screen", getIcon("/org/loboevolution/images/go.png")) {
+	private transient Action fullScreenAction = new AbstractAction("Full screen", getIcon("/org/loboevolution/images/go.png")) {
 
 		private static final long serialVersionUID = 1L;
 
@@ -308,7 +309,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The next action. */
-	private Action nextAction = new AbstractAction("Next", getIcon("/org/loboevolution/images/forward.png")) {
+	private transient Action nextAction = new AbstractAction("Next", getIcon("/org/loboevolution/images/forward.png")) {
 		/**
 		 *
 		 */
@@ -321,7 +322,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	};
 
 	/** The prev action. */
-	private Action prevAction = new AbstractAction("Prev", getIcon("/org/loboevolution/images/back.png")) {
+	private transient Action prevAction = new AbstractAction("Prev", getIcon("/org/loboevolution/images/back.png")) {
 		/**
 		 *
 		 */
@@ -753,7 +754,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * A file filter for PDF files.
 	 */
-	public FileFilter pdfFilter = new FileFilter() {
+	public transient FileFilter pdfFilter = new FileFilter() {
 		@Override
 		public boolean accept(File f) {
 			return f.isDirectory() || f.getName().endsWith(".pdf");
@@ -960,10 +961,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 *            the factor
 	 */
 	public void doZoom(double factor) {
+		// Method not implemented
 	}
 
-	// public void doOpenMeetingDoc(DocumentInfo doc) {
-	// }
 	/**
 	 * Goes to the next page.
 	 */
@@ -1107,7 +1107,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/**
 	 * Combines numeric key presses to build a multi-digit page number.
 	 */
-	class PageBuilder implements Runnable {
+	class PageBuilder implements Serializable, Runnable {
+
+		private static final long serialVersionUID = 1L;
 
 		/** The value. */
 		private int value = 0;
@@ -1118,9 +1120,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		/** The anim. */
 		private Thread anim;
 
-		/** The Constant TIMEOUT. */
-		private static final long TIMEOUT = 500;
-
 		/**
 		 * add the digit to the page number and start the timeout thread.
 		 *
@@ -1129,7 +1128,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		 */
 		public synchronized void keyTyped(int keyval) {
 			value = value * 10 + keyval;
-			timeout = System.currentTimeMillis() + TIMEOUT;
+			timeout = System.currentTimeMillis() + 500;
 			if (anim == null) {
 				anim = new Thread(this);
 				anim.setName(getClass().getName());
@@ -1175,6 +1174,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 */
 	@Override
 	public void keyReleased(KeyEvent evt) {
+		// Method not implemented
 	}
 
 	/**

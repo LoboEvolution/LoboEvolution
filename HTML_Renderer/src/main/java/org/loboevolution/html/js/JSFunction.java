@@ -43,6 +43,7 @@ import org.loboevolution.js.JavaClassWrapperFactory;
 import org.loboevolution.js.JavaInstantiator;
 import org.loboevolution.js.JavaObjectWrapper;
 import org.loboevolution.js.JavaScript;
+import org.loboevolution.util.Objects;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -264,7 +265,7 @@ public class JSFunction extends AbstractScriptableDelegate{
 	 */
 	public void setDocument(HTMLDocumentImpl document) {
 		Document prevDocument = this.document;
-		if (prevDocument != document) {
+		if (!Objects.equals(prevDocument, document)) {
 			// Should clearing of the state be done
 			// when window "unloads"?
 			if (prevDocument != null) {

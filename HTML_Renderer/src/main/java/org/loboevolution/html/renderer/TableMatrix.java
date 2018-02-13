@@ -50,6 +50,7 @@ import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.RenderThreadState;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Objects;
 import org.loboevolution.w3c.html.HTMLTableRowElement;
 
 /**
@@ -339,8 +340,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 				}
 
 				if (props.getMaxWidth() != null) {
-					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0,
-							availWidth);
+					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0, availWidth);
 
 					if (width == 0 || width > maxWidth) {
 						width = maxWidth;
@@ -348,8 +348,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 				}
 
 				if (props.getMinWidth() != null) {
-					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0,
-							availWidth);
+					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0, availWidth);
 
 					if (width == 0 || width < minWidth) {
 						width = minWidth;
@@ -395,9 +394,8 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 					height = HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight);
 				}
 
-				if (props.getMaxWidth() != null) {
-					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0,
-							availHeight);
+				if (props.getMaxHeight() != null) {
+					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0, availHeight);
 
 					if (height == 0 || height > maxHeight) {
 						height = maxHeight;
@@ -405,8 +403,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 				}
 
 				if (props.getMinHeight() != null) {
-					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0,
-							availHeight);
+					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0, availHeight);
 
 					if (height == 0 || height < minHeight) {
 						height = minHeight;
@@ -537,7 +534,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 								}
 								newRow.add(nc, new VirtualCell(ac, false));
 							}
-							if (row == newRow) {
+							if (Objects.equals(row, newRow)) {
 								numCols = row.size();
 							}
 						}
@@ -1883,7 +1880,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			if (bounds.contains(x, y)) {
 				found = true;
 				BoundableRenderable oldArmedRenderable = this.armedRenderable;
-				if (oldArmedRenderable != null && cell != oldArmedRenderable) {
+				if (!Objects.equals(cell, oldArmedRenderable)) {
 					oldArmedRenderable.onMouseDisarmed(event);
 					this.armedRenderable = null;
 				}
