@@ -30,34 +30,34 @@ import org.loboevolution.html.domimpl.HTMLElementImpl;
 public class SelectorMatcher {
 	
 	/** The op equal. */
-	public final static String OP_EQUAL = "=";
+	public static final String OP_EQUAL = "=";
 
 	/** The op tilde equal. */
-	public final static String OP_TILDE_EQUAL = "~=";
+	public static final String OP_TILDE_EQUAL = "~=";
 
 	/** The op pipe equal. */
-	public final static String OP_PIPE_EQUAL = "|=";
+	public static final String OP_PIPE_EQUAL = "|=";
 
 	/** The op dollar equal. */
-	public final static String OP_DOLLAR_EQUAL = "$=";
+	public static final String OP_DOLLAR_EQUAL = "$=";
 
 	/** The op circumflex equal. */
-	public final static String OP_CIRCUMFLEX_EQUAL = "^=";
+	public static final String OP_CIRCUMFLEX_EQUAL = "^=";
 
 	/** The op star equal. */
-	public final static String OP_STAR_EQUAL = "*=";
+	public static final String OP_STAR_EQUAL = "*=";
 
 	/** The op all. */
-	public final static String OP_ALL = "ALL";
+	public static final String OP_ALL = "ALL";
 
 	/** The Constant ANCESTOR. */
-	public final static int ANCESTOR = 0;
+	public static final int ANCESTOR = 0;
 
 	/** The Constant PARENT. */
-	public final static int PARENT = 1;
+	public static final int PARENT = 1;
 
 	/** The Constant PRECEEDING_SIBLING. */
-	public final static int PRECEEDING_SIBLING = 2;
+	public static final int PRECEEDING_SIBLING = 2;
 
 	/** The simple selector text. */
 	private String simpleSelectorText;

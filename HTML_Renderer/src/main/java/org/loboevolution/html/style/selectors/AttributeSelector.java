@@ -32,46 +32,46 @@ import org.w3c.dom.Node;
 public class AttributeSelector {
 	
 	/** The last child. */
-	public final static String LAST_CHILD = "last-child";
+	public static final String LAST_CHILD = "last-child";
 
 	/** The last of type . */
-	public final static String LAST_OF_TYPE = "last-of-type";
+	public static final String LAST_OF_TYPE = "last-of-type";
 
 	/** The first child. */
-	public final static String FIRST_CHILD = "first-child";
+	public static final String FIRST_CHILD = "first-child";
 
 	/** The first of type. */
-	public final static String FIRST_OF_TYPE = "first-of-type";
+	public static final String FIRST_OF_TYPE = "first-of-type";
 
 	/** The only child. */
-	public final static String ONLY_CHILD = "only-child";
+	public static final String ONLY_CHILD = "only-child";
 
 	/** The only of type. */
-	public final static String ONLY_OF_TYPE = "only-of-type";
+	public static final String ONLY_OF_TYPE = "only-of-type";
 
 	/** The nth child. */
-	public final static String NTH_CHILD = "nth-child";
+	public static final String NTH_CHILD = "nth-child";
 
 	/** The nth last child. */
-	public final static String NTH_LAST_CHILD = "nth-last-child";
+	public static final String NTH_LAST_CHILD = "nth-last-child";
 
 	/** The nth of type. */
-	public final static String NTH_OF_TYPE = "nth-of-type";
+	public static final String NTH_OF_TYPE = "nth-of-type";
 
 	/** The nth last of type. */
-	public final static String NTH_LAST_OF_TYPE = "nth-last-of-type";
+	public static final String NTH_LAST_OF_TYPE = "nth-last-of-type";
 
 	/** The hover. */
-	public final static String HOVER = "hover";
+	public static final String HOVER = "hover";
 
 	/** The root. */
-	public final static String ROOT = "root";
+	public static final String ROOT = "root";
 
 	/** The empty. */
-	public final static String EMPTY = "empty";
+	public static final String EMPTY = "empty";
 
 	/** The lang. */
-	public final static String LANG = "lang";
+	public static final String LANG = "lang";
 	
 	/** The Constant ODD. */
 	private String ODD = "odd";

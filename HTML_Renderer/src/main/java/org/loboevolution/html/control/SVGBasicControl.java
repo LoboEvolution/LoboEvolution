@@ -97,34 +97,34 @@ public class SVGBasicControl extends SVGStyle {
 	private SVGAnimationImpl animate;
 	
 	/** The circle. */
-	public final int CIRCLE = 1;
+	public static final int CIRCLE = 1;
 
 	/** The rect. */
-	public final int RECT = 2;
+	public static final int RECT = 2;
 
 	/** The ellipse. */
-	public final int ELLIPSE = 3;
+	public static final int ELLIPSE = 3;
 
 	/** The line. */
-	public final int LINE = 4;
+	public static final int LINE = 4;
 
 	/** The line. */
-	public final int POLYGON = 5;
+	public static final int POLYGON = 5;
 
 	/** The line. */
-	public final int POLYLINE = 6;
+	public static final int POLYLINE = 6;
 
 	/** The path. */
-	public final int PATH = 7;
+	public static final int PATH = 7;
 
 	/** The use. */
-	public final int USE = 8;
+	public static final int USE = 8;
 
 	/** The text. */
-	public final int TEXT = 9;
+	public static final int TEXT = 9;
 
 	/** The radial. */
-	public final int RADIAL = 10;
+	public static final int RADIAL = 10;
 
 	/** The modelN. */
 	private SVGSVGElementImpl modelN;

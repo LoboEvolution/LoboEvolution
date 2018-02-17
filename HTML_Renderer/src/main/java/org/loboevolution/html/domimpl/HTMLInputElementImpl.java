@@ -33,34 +33,34 @@ import org.loboevolution.w3c.html.HTMLInputElement;
 public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
 
 	/** The image. */
-	private final String IMAGE = "image";
+	private static final String IMAGE = "image";
 
 	/** The submit. */
-	private final String SUBMIT = "submit";
+	private static final String SUBMIT = "submit";
 
 	/** The text. */
-	private final String TEXT = "tetx";
+	private static final String TEXT = "tetx";
 
 	/** The password. */
-	private final String PASSWORD = "password";
+	private static final String PASSWORD = "password";
 
 	/** The hidden. */
-	private final String HIDDEN = "hidden";
+	private static final String HIDDEN = "hidden";
 
 	/** The radio. */
-	private final String RADIO = "radio";
+	private static final String RADIO = "radio";
 
 	/** The checkbox. */
-	private final String CHECKBOX = "checkbox";
+	private static final String CHECKBOX = "checkbox";
 
 	/** The reset. */
-	private final String RESET = "reset";
+	private static final String RESET = "reset";
 
 	/** The file. */
-	private final String FILE = "file";
+	private static final String FILE = "file";
 	
 	/** The default checked. */
-	private boolean defaultChecked;
+	private static boolean defaultChecked;
 
 	/**
 	 * Instantiates a new HTML input element impl.
