@@ -39,7 +39,7 @@ public class CacheSettings implements Serializable {
 	private static final long serialVersionUID = 22574500900000604L;
 	
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CacheSettings.class.getName());
+	private static final Logger logger = LogManager.getLogger(CacheSettings.class);
 
 	/** The Constant instance. */
 	private static final CacheSettings instance;

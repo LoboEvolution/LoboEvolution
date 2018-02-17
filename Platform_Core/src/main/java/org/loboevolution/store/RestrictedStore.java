@@ -60,7 +60,7 @@ import org.loboevolution.util.gui.ClassLoaderObjectInputStream;
 public final class RestrictedStore implements QuotaSource, ManagedStore {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(RestrictedStore.class.getName());
+	private static final Logger logger = LogManager.getLogger(RestrictedStore.class);
 
 	/**
 	 * Canonical base directory.
@@ -483,7 +483,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 						this.checkPath(canonical, "not-shown");
 						paths.add(relativePath);
 					} catch (SecurityException se) {
-						// ignore file
+						logger.error(se);
 					}
 				}
 			}

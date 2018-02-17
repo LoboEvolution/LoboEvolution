@@ -43,7 +43,7 @@ import org.w3c.dom.html.HTMLDocument;
 public class XMLSerializer extends AbstractScriptableDelegate {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(XMLSerializer.class.getName());
+	private static final Logger logger = LogManager.getLogger(XMLSerializer.class);
 
 	/**
 	 * The subtree rooted by the specified element is serialized to a string.

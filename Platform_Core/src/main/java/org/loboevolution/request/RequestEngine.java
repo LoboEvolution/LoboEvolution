@@ -1089,7 +1089,7 @@ public final class RequestEngine {
 							try {
 								responseIn.close();
 							} catch (IOException ioe) {
-								// ignore
+								logger.error(ioe);
 							}
 						}
 						if (connection instanceof HttpURLConnection) {

@@ -45,7 +45,7 @@ public abstract class BaseControl extends JComponent implements UIControl, HtmlA
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(BaseControl.class.getName());
+	protected static final Logger logger = LogManager.getLogger(BaseControl.class);
 
 	/** The Constant ZERO_DIMENSION. */
 	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);

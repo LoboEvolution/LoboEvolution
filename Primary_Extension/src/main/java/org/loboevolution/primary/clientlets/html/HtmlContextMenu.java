@@ -343,8 +343,8 @@ public class HtmlContextMenu {
 			logger.error(e);
 		} finally {
 			try {
-				isr.close();
-				is.close();
+ 				if(isr!= null) isr.close();
+ 				if(is!= null) is.close();
 			} catch (IOException e) {
 				logger.error(e);
 			}

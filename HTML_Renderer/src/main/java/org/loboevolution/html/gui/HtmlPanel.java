@@ -70,16 +70,16 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private static final long serialVersionUID = 1L;
 
 	/** The selection dispatch. */
-	private final EventDispatch2 selectionDispatch = new SelectionDispatch();
+	private transient final EventDispatch2 selectionDispatch = new SelectionDispatch();
 
 	/** The notification timer. */
-	private final Timer notificationTimer;
+	private transient final Timer notificationTimer;
 
 	/** The notification listener. */
-	private final DocumentNotificationListener notificationListener;
+	private transient final DocumentNotificationListener notificationListener;
 
 	/** The notification immediate action. */
-	private final Runnable notificationImmediateAction;
+	private transient final Runnable notificationImmediateAction;
 
 	/** The Constant NOTIF_TIMER_DELAY. */
 	private static final int NOTIF_TIMER_DELAY = 300;
@@ -88,10 +88,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private volatile boolean isFrameSet = false;
 
 	/** The node renderer. */
-	private volatile NodeRenderer nodeRenderer = null;
+	private transient volatile NodeRenderer nodeRenderer = null;
 
 	/** The root node. */
-	private volatile DOMNodeImpl rootNode;
+	private transient volatile DOMNodeImpl rootNode;
 
 	/** The preferred width. */
 	private volatile int preferredWidth = -1;
@@ -106,10 +106,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private volatile int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
 
 	/** The html block panel. */
-	protected volatile HtmlBlockPanel htmlBlockPanel;
+	protected transient volatile HtmlBlockPanel htmlBlockPanel;
 
 	/** The frame set panel. */
-	protected volatile FrameSetPanel frameSetPanel;
+	protected transient volatile FrameSetPanel frameSetPanel;
 	
 	/** The notifications. */
 	private ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>(1);

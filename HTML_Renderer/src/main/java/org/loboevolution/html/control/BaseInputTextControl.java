@@ -104,7 +104,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 			try {
 				this.maxLength = Integer.parseInt(maxLengthText);
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 

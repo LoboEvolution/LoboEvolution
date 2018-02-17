@@ -48,7 +48,7 @@ import org.w3c.dom.events.EventException;
 public class XMLHttpRequest extends AbstractScriptableDelegate {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(XMLHttpRequest.class.getName());
+	private static final Logger logger = LogManager.getLogger(XMLHttpRequest.class);
 
 	/** The request. */
 	private final HttpRequest request;

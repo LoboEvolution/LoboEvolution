@@ -57,7 +57,7 @@ import org.xml.sax.SAXException;
 public class DocumentBuilderImpl extends DocumentBuilder {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(DocumentBuilderImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(DocumentBuilderImpl.class);
 
 	/** The resolver. */
 	private EntityResolver resolver;

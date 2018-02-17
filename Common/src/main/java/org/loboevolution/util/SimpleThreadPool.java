@@ -100,7 +100,7 @@ public class SimpleThreadPool {
 				this.addThreadImpl();
 			}
 			this.taskList.add(task);
-			monitor.notify();
+			monitor.notifyAll();
 		}
 	}
 

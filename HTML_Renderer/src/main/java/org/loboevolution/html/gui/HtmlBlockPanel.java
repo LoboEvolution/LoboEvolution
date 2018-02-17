@@ -99,28 +99,28 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(HtmlBlockPanel.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlBlockPanel.class);
 
 	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
 	/** The frame context. */
-	protected final FrameContext frameContext;
+	protected transient final FrameContext frameContext;
 
 	/** The ucontext. */
-	protected final UserAgentContext ucontext;
+	protected transient final UserAgentContext ucontext;
 
 	/** The rcontext. */
-	protected final HtmlRendererContext rcontext;
+	protected transient final HtmlRendererContext rcontext;
 
 	/** The start selection. */
-	protected RenderableSpot startSelection;
+	protected transient RenderableSpot startSelection;
 
 	/** The end selection. */
-	protected RenderableSpot endSelection;
+	protected transient RenderableSpot endSelection;
 
 	/** The rblock. */
-	protected RBlock rblock;
+	protected transient RBlock rblock;
 
 	/** The preferred width. */
 	protected int preferredWidth = -1;
@@ -129,7 +129,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	protected Insets defaultMarginInsets = null;
 
 	/** The mouse press target. */
-	private BoundableRenderable mousePressTarget;
+	private transient BoundableRenderable mousePressTarget;
 
 	/** The processing document notification. */
 	private boolean processingDocumentNotification = false;

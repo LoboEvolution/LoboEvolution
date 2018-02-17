@@ -54,7 +54,7 @@ import org.w3c.dom.UserDataHandler;
 public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScriptElement {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(HTMLScriptElementImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(HTMLScriptElementImpl.class);
 
 	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);

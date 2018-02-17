@@ -61,7 +61,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(FrameSetPanel.class.getName());
+	private static final Logger logger = LogManager.getLogger(FrameSetPanel.class);
 	
 	/** The root node. */
 	private HTMLElementImpl rootNode;

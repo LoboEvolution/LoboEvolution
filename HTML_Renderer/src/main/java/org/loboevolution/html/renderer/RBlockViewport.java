@@ -96,7 +96,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(RBlockViewport.class.getName());
+	private static final Logger logger = LogManager.getLogger(RBlockViewport.class);
 
 	/** The container. */
 	private RenderableContainer container;
@@ -720,7 +720,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			boolean centerBlock = false;
 			if (alignCenterAttribute) {
 				String align = markupElement.getAttribute(ALIGN);
-				centerBlock = align != null && align.equalsIgnoreCase("center");
+				centerBlock = "center".equalsIgnoreCase(align);
 			}
 			this.addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
 			layoutRelative(markupElement, renderable);
@@ -998,7 +998,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					boolean centerBlock = false;
 					if (renderable instanceof RTable) {
 						String align = element.getAttribute(ALIGN);
-						centerBlock = align != null && align.equalsIgnoreCase("center");
+						centerBlock = "center".equalsIgnoreCase(align);
 					}
 					this.addAsSeqBlock(rrel, obeysFloats, true, true, centerBlock);
 					// Need to import float boxes from relative, after
@@ -1507,7 +1507,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	@Override
 	public Iterator getRenderables() {
 		SortedSet others = this.positionedRenderables;
-		if (others == null || others.size() == 0) {
+		if (others == null || others.isEmpty()) {
 			ArrayList sr = this.seqRenderables;
 			return sr == null ? null : sr.iterator();
 		} else {
@@ -1536,7 +1536,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			baseIterator = org.loboevolution.util.ArrayUtilities.iterator(array, range.getOffset(), range.getLength());
 		}
 		SortedSet others = this.positionedRenderables;
-		if (others == null || others.size() == 0) {
+		if (others == null || others.isEmpty()) {
 			return baseIterator;
 		} else {
 			ArrayList<PositionedRenderable> matches = new ArrayList<PositionedRenderable>();

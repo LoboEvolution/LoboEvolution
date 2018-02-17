@@ -63,7 +63,7 @@ public class CookieStore {
 	private static final CookieStore instance = new CookieStore();
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CookieStore.class.getName());
+	private static final Logger logger = LogManager.getLogger(CookieStore.class);
 
 	/** The transient map by host. */
 	private final Map<String, Map<String, CookieValue>> transientMapByHost = new HashMap<String, Map<String, CookieValue>>();

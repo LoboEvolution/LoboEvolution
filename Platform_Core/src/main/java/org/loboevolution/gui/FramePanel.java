@@ -93,40 +93,40 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(FramePanel.class.getName());
+	private static final Logger logger = LogManager.getLogger(FramePanel.class);
 
 	/** The window id. */
 	private final String windowId;
 
 	/** The navigation engine. */
-	private final NavigationEngine navigationEngine = new NavigationEngine();
+	private transient final NavigationEngine navigationEngine = new NavigationEngine();
 
 	/** The known parent frame. */
 	private final FramePanel knownParentFrame;
 
 	/** The navigation listeners. */
-	private final Collection<NavigationListener> navigationListeners = new ArrayList<NavigationListener>();
+	private transient final Collection<NavigationListener> navigationListeners = new ArrayList<NavigationListener>();
 
 	/** The response listeners. */
-	private final Collection<ResponseListener> responseListeners = new ArrayList<ResponseListener>();
+	private transient final Collection<ResponseListener> responseListeners = new ArrayList<ResponseListener>();
 
 	/** The content listeners. */
-	private final Collection<ContentListener> contentListeners = new ArrayList<ContentListener>();
+	private transient final Collection<ContentListener> contentListeners = new ArrayList<ContentListener>();
 
 	/** The properties monitor. */
-	private final Object propertiesMonitor = new Object();
+	private transient final Object propertiesMonitor = new Object();
 
 	/** The opener frame. */
-	private NavigatorFrame openerFrame;
+	private transient NavigatorFrame openerFrame;
 
 	/** The top frame window. */
 	private Window topFrameWindow;
 	
 	/** The content. */
-	private ComponentContent content;
+	private transient ComponentContent content;
 
 	/** The progress event. */
-	private NavigatorProgressEvent progressEvent;
+	private transient NavigatorProgressEvent progressEvent;
 	
 	/** The content properties. */
 	private Map<String, Object> contentProperties = null;

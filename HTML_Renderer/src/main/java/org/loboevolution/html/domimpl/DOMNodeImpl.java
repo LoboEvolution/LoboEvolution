@@ -74,7 +74,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
 
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(DOMNodeImpl.class.getName());
+	protected static final Logger logger = LogManager.getLogger(DOMNodeImpl.class);
 
 	/** The ui node. */
 	protected UINode uiNode;
@@ -499,7 +499,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	public void setOwnerDocument(Document value) {
 		this.document = value;
-		this.setTreeLock(value == null ? this : (Object) value);
+		this.setTreeLock(value == null ? this : value);
 	}
 
 	/**
@@ -512,7 +512,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	public void setOwnerDocument(Document value, boolean deep) {
 		this.document = value;
-		this.setTreeLock(value == null ? this : (Object) value);
+		this.setTreeLock(value == null ? this : value);
 		if (deep) {
 			synchronized (this.getTreeLock()) {
 				ArrayList<Node> nl = this.nodeList;
@@ -754,7 +754,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
-				return nl == null ? null : (Node) nl.get(nl.size() - 1);
+				return nl == null ? null : nl.get(nl.size() - 1);
 			} catch (IndexOutOfBoundsException iob) {
 				return null;
 			}

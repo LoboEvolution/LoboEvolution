@@ -7,11 +7,16 @@ import java.awt.font.TextAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.info.FontInfo;
 import org.loboevolution.html.renderstate.RenderState;
 
 public class FontValues extends HtmlValues {
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(FontValues.class);
 	
 	/** The Constant SYSTEM_FONTS. */
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
@@ -52,7 +57,7 @@ public class FontValues extends HtmlValues {
 				tentative = 7;
 			}
 		} catch (NumberFormatException nfe) {
-			// ignore
+			logger.error(nfe);
 			tentative = 3;
 		}
 		return tentative;

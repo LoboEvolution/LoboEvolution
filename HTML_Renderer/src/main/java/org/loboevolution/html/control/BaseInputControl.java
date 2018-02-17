@@ -69,7 +69,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 			try {
 				this.size = Integer.parseInt(sizeText);
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 	}

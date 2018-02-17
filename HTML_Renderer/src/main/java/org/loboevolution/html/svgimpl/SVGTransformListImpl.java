@@ -31,13 +31,6 @@ import org.loboevolution.w3c.svg.SVGTransformList;
 import org.w3c.dom.DOMException;
 
 public class SVGTransformListImpl implements SVGTransformList {
-
-	public static String SCALE = "scale";
-	public static String TRANSLATE = "translate";
-	public static String MATRIX = "matrix";
-	public static String ROTATE = "rotate";
-	public static String SKEW_X = "skewX";
-	public static String SKEW_Y = "skewY";
 	
 	private List<SVGTransform> points;
 
@@ -113,6 +106,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 	}
 	
 	public static SVGTransformList createTransformList(String transformString) {
+		
+		String SCALE = "scale";
+		String TRANSLATE = "translate";
+		String MATRIX = "matrix";
+		String ROTATE = "rotate";
+		String SKEW_X = "skewX";
+		String SKEW_Y = "skewY";
 
 		if (transformString == null) {
 			return null;

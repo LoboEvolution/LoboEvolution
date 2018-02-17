@@ -165,7 +165,7 @@ public final class Urls {
 							return Long.valueOf(baseTime + seconds * 1000);
 						} catch (NumberFormatException nfe) {
 							logger.warn("getExpiration(): Bad Cache-Control max-age value: " + value);
-							// ignore
+							logger.error(nfe);
 						}
 					}
 				}

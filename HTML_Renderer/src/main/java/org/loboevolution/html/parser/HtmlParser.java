@@ -59,7 +59,7 @@ import org.xml.sax.SAXException;
 public class HtmlParser {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(HtmlParser.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlParser.class);
 
 	/** The document. */
 	private final Document document;

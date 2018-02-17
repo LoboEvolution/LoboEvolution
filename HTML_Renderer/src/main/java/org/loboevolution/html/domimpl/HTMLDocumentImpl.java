@@ -103,7 +103,7 @@ import com.steadystate.css.dom.CSSStyleSheetListImpl;
 public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, DocumentView, DocumentEvent, XPathEvaluator {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(HTMLDocumentImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(HTMLDocumentImpl.class);
 
 	/** The factory. */
 	private final ElementFactory factory;
@@ -341,7 +341,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 					try {
 						this.reader.close();
 					} catch (IOException ioe) {
-						// ignore
+						logger.error(ioe);
 					}
 					this.reader = null;
 				} else {
@@ -424,7 +424,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				try {
 					this.reader.close();
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 				this.reader = null;
 			}
@@ -444,7 +444,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 					// This can end up in openBufferChanged
 					this.reader.write(text);
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 			}
 		}
@@ -463,7 +463,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 					// This can end up in openBufferChanged
 					this.reader.write(text + "\r\n");
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 			}
 		}
@@ -822,11 +822,11 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.sizeInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
-
+   
 	/**
 	 * Called if something such as a color or decoration has changed. This would
 	 * be something which does not affect the rendered size, and can be
@@ -850,7 +850,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.lookInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 
@@ -877,7 +877,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.positionInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -904,7 +904,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.invalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -930,7 +930,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.structureInvalidated(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -956,7 +956,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.nodeLoaded(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -982,7 +982,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.externalScriptLoading(node);
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1005,7 +1005,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				DocumentNotificationListener dnl = listenersList.get(i);
 				dnl.allInvalidated();
 			} catch (IndexOutOfBoundsException iob) {
-				// ignore
+				logger.error(iob);
 			}
 		}
 	}
@@ -1023,7 +1023,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	protected void loadImage(String relativeUri, ImageListener imageListener) {
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext == null || !rcontext.isImageLoadingEnabled()) {
-			// Ignore image loading when there's no renderer context.
+			// ignore image loading when there's no renderer context.
 			// Consider Cobra users who are only using the parser.
 			imageListener.imageLoaded(BLANK_IMAGE_EVENT);
 			return;

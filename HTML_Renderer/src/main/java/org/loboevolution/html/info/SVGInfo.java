@@ -76,28 +76,28 @@ public class SVGInfo implements Serializable {
 	private String href;
 
 	/** The style. */
-	private AbstractCSSProperties style;
+	private transient AbstractCSSProperties style;
 
 	/** The poilist. */
-	private SVGPointList poilist;
+	private transient SVGPointList poilist;
 
 	/** The transformList. */
-	private SVGTransformList transformList;
+	private transient SVGTransformList transformList;
 
 	/** The dyList. */
-	private SVGLengthList dyList;
+	private transient SVGLengthList dyList;
 
 	/** The dxList. */
-	private SVGLengthList dxList;
+	private transient SVGLengthList dxList;
 
 	/** The pathSegList. */
-	private SVGPathSegList pathSegList;
+	private transient SVGPathSegList pathSegList;
 
 	/** The animate. */
-	private SVGAnimationImpl animate;
+	private transient SVGAnimationImpl animate;
 
 	/** The font. */
-	private Font font;
+	private transient Font font;
 
 	/** The text. */
 	private String text;

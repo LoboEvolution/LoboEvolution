@@ -36,7 +36,7 @@ import org.w3c.dom.Element;
 public class TimeImpl implements Time {
 	
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(TimeImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(TimeImpl.class);
 
 	private short mTimeType;
 	

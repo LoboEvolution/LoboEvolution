@@ -36,7 +36,7 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeProperties {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CommonWidgetLayout.class.getName());
+	private static final Logger logger = LogManager.getLogger(CommonWidgetLayout.class);
 
 	/** The Constant ADD_INLINE. */
 	protected static final int ADD_INLINE = 0;

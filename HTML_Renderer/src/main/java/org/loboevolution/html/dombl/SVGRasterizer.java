@@ -49,7 +49,7 @@ import org.apache.logging.log4j.Logger;
 public class SVGRasterizer {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(SVGRasterizer.class.getName());
+	private static final Logger logger = LogManager.getLogger(SVGRasterizer.class);
 
 	/**
 	 * The transcoder input.

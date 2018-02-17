@@ -60,7 +60,7 @@ import org.w3c.dom.NodeList;
 public class BackgroundRenderState implements CSSValuesProperties {
 	
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(BackgroundRenderState.class.getName());
+	protected static final Logger logger = LogManager.getLogger(BackgroundRenderState.class);
 		
 	/**
 	 * Apply background vertical position.

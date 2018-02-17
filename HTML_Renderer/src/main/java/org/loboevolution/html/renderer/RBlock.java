@@ -69,7 +69,7 @@ import org.loboevolution.util.Objects;
 public class RBlock extends BaseElementRenderable implements RenderableContainer, ImageObserver {
 
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(RBlock.class.getName());
+	protected static final Logger logger = LogManager.getLogger(RBlock.class);
 
 	/** The Constant loggableInfo. */
 	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
@@ -168,16 +168,6 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	public int getVScrollBarWidth() {
 		return SCROLL_BAR_THICKNESS;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#finalize()
-	 */
-	@Override
-	public void finalize() throws Throwable {
-		super.finalize();
 	}
 
 	/*

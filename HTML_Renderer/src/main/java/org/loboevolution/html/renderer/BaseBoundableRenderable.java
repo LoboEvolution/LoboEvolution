@@ -53,7 +53,7 @@ import org.loboevolution.util.Objects;
 public abstract class BaseBoundableRenderable extends BaseRenderable implements BoundableRenderable {
 
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(BaseBoundableRenderable.class.getName());
+	protected static final Logger logger = LogManager.getLogger(BaseBoundableRenderable.class);
 
 	/** The Constant SELECTION_COLOR. */
 	protected static final Color SELECTION_COLOR = Color.BLUE;

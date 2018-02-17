@@ -36,7 +36,7 @@ import org.w3c.dom.Document;
 public class Location extends AbstractScriptableDelegate {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(Location.class.getName());
+	private static final Logger logger = LogManager.getLogger(Location.class);
 
 	/** The window. */
 	private final Window window;

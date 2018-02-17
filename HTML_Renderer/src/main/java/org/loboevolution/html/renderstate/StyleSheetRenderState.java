@@ -65,7 +65,7 @@ import org.loboevolution.w3c.html.HTMLElement;
 public class StyleSheetRenderState implements RenderState, HtmlAttributeProperties, CSSValuesProperties {
 
 	/** The Constant logger. */
-	protected static final Logger logger = LogManager.getLogger(StyleSheetRenderState.class.getName());
+	protected static final Logger logger = LogManager.getLogger(StyleSheetRenderState.class);
 
 	/** The Constant FONT_FACTORY. */
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();

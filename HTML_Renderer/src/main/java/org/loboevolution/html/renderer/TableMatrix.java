@@ -31,6 +31,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domfilter.CaptionFilter;
@@ -58,6 +60,9 @@ import org.loboevolution.w3c.html.HTMLTableRowElement;
  */
 public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties {
 
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(TableMatrix.class);
+	
 	/** The rows. */
 	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
 
@@ -152,17 +157,6 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		this.relement = relement;
 		this.container = tableAsContainer;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#finalize()
-	 */
-	@Override
-	public void finalize() throws Throwable {
-		super.finalize();
-	}
-
 	/**
 	 * Gets the num rows.
 	 *
@@ -592,7 +586,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 				try {
 					rowHeightLength = new HtmlLength(rowHeightText);
 				} catch (Exception err) {
-					// ignore
+					logger.error(err);
 				}
 			}
 			if (rowHeightLength != null) {

@@ -36,7 +36,7 @@ public class OpenProgressBar extends JProgressBar {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(OpenProgressBar.class.getName());
+	private static final Logger logger = LogManager.getLogger(OpenProgressBar.class);
 
 	/*
 	 * (non-Javadoc)

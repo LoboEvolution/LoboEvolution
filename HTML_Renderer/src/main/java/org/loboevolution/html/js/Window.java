@@ -63,7 +63,7 @@ import org.w3c.dom.views.DocumentView;
 public class Window extends JSFunction implements AbstractView {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(Window.class.getName());
+	private static final Logger logger = LogManager.getLogger(Window.class);
 
 	/** The Constant CONTEXT_WINDOWS. */
 	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();

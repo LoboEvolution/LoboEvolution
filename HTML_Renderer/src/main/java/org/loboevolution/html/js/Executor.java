@@ -42,7 +42,7 @@ import org.w3c.dom.Document;
 public class Executor {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(Executor.class.getName());
+	private static final Logger logger = LogManager.getLogger(Executor.class);
 	
 
 	/**
@@ -160,7 +160,7 @@ public class Executor {
 				}
 				return ((Boolean) result).booleanValue();
 			} catch (Throwable err) {
-				err.getCause();
+				logger.error(err);
 				return true;
 			}
 		} finally {

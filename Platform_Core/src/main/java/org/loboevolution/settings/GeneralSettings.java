@@ -41,7 +41,7 @@ import org.loboevolution.store.StorageManager;
 public class GeneralSettings implements Serializable {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(GeneralSettings.class.getName());
+	private static final Logger logger = LogManager.getLogger(GeneralSettings.class);
 
 	/** The Constant DEFAULT_STARTUP. */
 	private static final String DEFAULT_STARTUP = "";

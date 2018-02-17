@@ -52,7 +52,7 @@ import com.steadystate.css.parser.SACParserCSS3;
 public class CSSUtilities {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CSSUtilities.class.getName());
+	private static final Logger logger = LogManager.getLogger(CSSUtilities.class);
 
 	/**
 	 * Instantiates a new CSS utilities.
@@ -68,8 +68,7 @@ public class CSSUtilities {
 	 * @return the string
 	 */
 	public static String preProcessCss(String text) {
-		try {
-			BufferedReader reader = new BufferedReader(new StringReader(text));
+		try (BufferedReader reader = new BufferedReader(new StringReader(text))) {
 			String line;
 			StringBuilder sb = new StringBuilder();
 			String pendingLine = null;
@@ -92,7 +91,6 @@ public class CSSUtilities {
 			}
 			return sb.toString();
 		} catch (IOException ioe) {
-			// not possible
 			throw new IllegalStateException(ioe);
 		}
 	}

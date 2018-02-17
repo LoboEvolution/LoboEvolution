@@ -68,7 +68,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ImgControl.class.getName());
+	private static final Logger logger = LogManager.getLogger(ImgControl.class);
 
 	/** The image. */
 	private volatile Image image;

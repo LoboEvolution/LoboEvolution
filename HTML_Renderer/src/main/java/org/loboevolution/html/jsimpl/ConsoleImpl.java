@@ -32,7 +32,7 @@ import org.loboevolution.html.js.Console;
 public class ConsoleImpl implements Console {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ConsoleImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(ConsoleImpl.class);
 
 	/** The time. */
 	private Date time;

@@ -117,7 +117,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			try {
 				this.setCols(Integer.parseInt(colsStr));
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 		String rowsStr = element.getAttribute(ROWS);
@@ -125,7 +125,7 @@ public class InputTextAreaControl extends BaseInputControl {
 			try {
 				this.setRows(Integer.parseInt(rowsStr));
 			} catch (NumberFormatException nfe) {
-				// ignore
+				logger.error(nfe);
 			}
 		}
 	}

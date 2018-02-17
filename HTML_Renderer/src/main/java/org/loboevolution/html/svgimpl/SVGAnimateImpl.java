@@ -41,7 +41,7 @@ import org.loboevolution.w3c.svg.SVGTransformList;
 public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	protected static final Logger logger = LogManager.getLogger(SVGAnimateImpl.class.getName());
+	protected static final Logger logger = LogManager.getLogger(SVGAnimateImpl.class);
 	private Timer timer;
 	private SVGInfo info;
 	private RUIControl ruicontrol;

@@ -51,7 +51,7 @@ public class SecurityControllerImpl extends SecurityController {
 	private final CodeSource codesource;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(SecurityControllerImpl.class.getName());
+	private static final Logger logger = LogManager.getLogger(SecurityControllerImpl.class);
 
 	/**
 	 * Instantiates a new security controller impl.

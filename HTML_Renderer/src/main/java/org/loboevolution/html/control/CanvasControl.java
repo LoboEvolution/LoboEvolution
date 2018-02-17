@@ -53,7 +53,7 @@ public class CanvasControl extends BaseControl {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CanvasControl.class.getName());
+	private static final Logger logger = LogManager.getLogger(CanvasControl.class);
 
 	/** The width. */
 	private int width;

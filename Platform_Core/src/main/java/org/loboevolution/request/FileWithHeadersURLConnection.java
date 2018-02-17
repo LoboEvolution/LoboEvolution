@@ -33,6 +33,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.NameValuePair;
 import org.loboevolution.util.io.IORoutines;
 
@@ -42,6 +44,9 @@ import org.loboevolution.util.io.IORoutines;
  * @author J. H. S.
  */
 public class FileWithHeadersURLConnection extends HttpURLConnection {
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(FileWithHeadersURLConnection.class);
 
 	/** The content. */
 	private final byte[] content;
@@ -84,7 +89,7 @@ public class FileWithHeadersURLConnection extends HttpURLConnection {
 				try {
 					in.close();
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 			}
 		}

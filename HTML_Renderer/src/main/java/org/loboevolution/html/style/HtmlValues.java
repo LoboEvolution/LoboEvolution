@@ -42,7 +42,7 @@ import org.loboevolution.util.Urls;
 public class HtmlValues implements CSSValuesProperties {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(HtmlValues.class.getName());
+	private static final Logger logger = LogManager.getLogger(HtmlValues.class);
 
 	/**
 	 * Gets the pixel size.

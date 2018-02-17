@@ -52,8 +52,8 @@ public class ReuseServer implements Runnable {
 	private static final int TOP_PORT = 65000;
 
 	/** The Constant RAND. */
-	private static final Random RAND = new Random(System.currentTimeMillis());
-	
+    private static final Random RAND = new Random(System.currentTimeMillis());
+
 	/** The server socket. */
 	private ServerSocket serverSocket;
 
@@ -93,7 +93,7 @@ public class ReuseServer implements Runnable {
 				try {
 					ServerSocket ss = new ServerSocket(rport, 100, bindAddr);
 					this.serverSocket = ss;
-					this.notify();
+					this.notifyAll();
 					return rport;
 				} catch (IOException ioe) {
 					logger.log(Level.ERROR, ioe);
@@ -112,7 +112,7 @@ public class ReuseServer implements Runnable {
 				try {
 					this.serverSocket.close();
 				} catch (IOException ioe) {
-					// ignore
+					logger.error(ioe);
 				}
 				this.serverSocket = null;
 			}

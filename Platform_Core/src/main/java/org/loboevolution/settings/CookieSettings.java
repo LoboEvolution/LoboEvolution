@@ -33,7 +33,7 @@ import org.loboevolution.store.StorageManager;
 public class CookieSettings implements Serializable {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CookieSettings.class.getName());
+	private static final Logger logger = LogManager.getLogger(CookieSettings.class);
 
 	/** The Constant instance. */
 	private static final CookieSettings instance;

@@ -68,7 +68,7 @@ import org.w3c.dom.stylesheets.MediaList;
 public class StyleSheetAggregator {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(StyleSheetAggregator.class.getName());
+	private static final Logger logger = LogManager.getLogger(StyleSheetAggregator.class);
 
 	/** The attribute. */
 	private String attribute;

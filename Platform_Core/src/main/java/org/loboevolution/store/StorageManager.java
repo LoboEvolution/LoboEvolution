@@ -43,7 +43,7 @@ import org.loboevolution.util.gui.StorageManagerCommon;
 public class StorageManager extends StorageManagerCommon implements Runnable {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(StorageManager.class.getName());
+	private static final Logger logger = LogManager.getLogger(StorageManager.class);
 
 	/** The Constant HOST_STORE_QUOTA. */
 	private static final long HOST_STORE_QUOTA = 200 * 1024;

@@ -31,7 +31,7 @@ import org.loboevolution.util.gui.StorageManagerCommon;
 /**
  * The Class LAFSettings.
  */
-public class LAFSettings implements Serializable {
+public class LAFSettings implements FontCommon, Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -107,55 +107,6 @@ public class LAFSettings implements Serializable {
 
 	/** The Font . */
 	private volatile String font;
-
-	/** The Constant ACRYL. */
-	public static String ACRYL = "Acryl";
-
-	/** The Constant AERO. */
-	public static String AERO = "Aero";
-
-	/** The Constant ALUMINIUM. */
-	public static String ALUMINIUM = "Aluminium";
-
-	/** The Constant BERNSTEIN. */
-	public static String BERNSTEIN = "Bernstein";
-
-	/** The Constant FAST. */
-	public static String FAST = "Fast";
-
-	/** The Constant GRAPHITE. */
-	public static String GRAPHITE = "Graphite";
-
-	/** The Constant HIFI. */
-	public static String HIFI = "HiFi";
-
-	/** The Constant LUNA. */
-	public static String LUNA = "Luna";
-
-	/** The Constant MCWIN. */
-	public static String MCWIN = "McWin";
-
-	/** The Constant MINT. */
-	public static String MINT = "Mint";
-
-	/** The Constant NOIRE. */
-	public static String NOIRE = "Noire";
-
-	/** The Constant SMART. */
-	public static String SMART = "Smart";
-
-	/** The Constant TEXTURE. */
-	public static String TEXTURE = "Texture";
-
-	public static String BOLD = "Bold";
-	public static String ITALIC = "Italic";
-	public static String UNDERLINE = "Underline";
-	public static String STRIKETHROUGH = "Strikethrough";
-	public static String SUBSCRIPT = "Subscript";
-	public static String SUPERSCRIPT = "Superscript";
-
-	/** The Constant TIMES_NEW_ROMAN. */
-	public static String TIMES_NEW_ROMAN = "TimesNewRoman";
 
 	/** The FONTS . */
 	public static String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew", "AngsanaUPC", "AngsanaUPC", "Aparajita",

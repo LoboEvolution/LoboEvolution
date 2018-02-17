@@ -43,7 +43,7 @@ import org.loboevolution.util.gui.ClassLoaderObjectInputStream;
 public class CacheInfo {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CacheInfo.class.getName());
+	private static final Logger logger = LogManager.getLogger(CacheInfo.class);
 
 	/** The Constant HEADER_REQUEST_TIME. */
 	public static final String HEADER_REQUEST_TIME = "X-Request-Time";

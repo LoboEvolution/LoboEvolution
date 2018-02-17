@@ -430,7 +430,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			try {
 				SwingUtilities.invokeAndWait(() -> setVisible(true));
 			} catch (InvocationTargetException ie) {
-				// ignore
+				logger.error(ie);
 			} catch (InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
@@ -673,7 +673,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 				try {
 					istr.close();
 				} catch (Exception e) {
-					// ignore error on close
+					logger.error(e);
 				}
 			}
 		}

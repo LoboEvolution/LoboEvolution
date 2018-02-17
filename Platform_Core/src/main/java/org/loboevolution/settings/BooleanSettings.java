@@ -35,7 +35,7 @@ import org.loboevolution.store.StorageManager;
 public class BooleanSettings implements Serializable {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(BooleanSettings.class.getName());
+	private static final Logger logger = LogManager.getLogger(BooleanSettings.class);
 
 	/** The Constant instance. */
 	private static final BooleanSettings instance;

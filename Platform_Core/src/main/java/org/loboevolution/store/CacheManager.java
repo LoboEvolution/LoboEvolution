@@ -49,7 +49,7 @@ import org.loboevolution.util.io.IORoutines;
 public final class CacheManager implements Runnable {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CacheManager.class.getName());
+	private static final Logger logger = LogManager.getLogger(CacheManager.class);
 
 	/** The Constant AFTER_SWEEP_SLEEP. */
 	private static final int AFTER_SWEEP_SLEEP = 5 * 60 * 1000;

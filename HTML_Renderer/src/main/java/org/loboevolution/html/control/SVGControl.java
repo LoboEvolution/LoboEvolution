@@ -37,7 +37,7 @@ public class SVGControl extends SVGBasicControl {
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(SVGControl.class.getName());
+	private static final Logger logger = LogManager.getLogger(SVGControl.class);
 
 	private SVGSVGElementImpl modelNode;
 

@@ -50,4 +50,9 @@ public class XPathException extends RuntimeException {
 		super(message);
 		this.code = code;
 	}
+
+	public XPathException(short typeErr, Exception e) {
+		super(e);
+		this.code = typeErr;
+	}
 }
