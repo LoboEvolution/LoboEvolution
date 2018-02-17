@@ -101,7 +101,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	private static final long serialVersionUID = 1L;
 
 	/** The Constant TITLE. */
-	public final static String TITLE = "SwingLabs PDF Viewer";
+	public static final String TITLE = "LoboEvolution PDF Viewer";
 
 	/** The current PDFFile. */
 	private PDFFile curFile;
