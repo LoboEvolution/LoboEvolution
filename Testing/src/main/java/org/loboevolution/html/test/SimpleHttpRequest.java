@@ -365,7 +365,7 @@ public class SimpleHttpRequest extends AbstractBean {
 			}
 			this.changeState(ReadyState.LOADING, 0, null, null);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 
@@ -399,7 +399,7 @@ public class SimpleHttpRequest extends AbstractBean {
 				sendSync(content);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 

@@ -248,7 +248,7 @@ public class XPathUtils {
 			writer.close();
 			return s;
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 			return null;
 		}
 	}

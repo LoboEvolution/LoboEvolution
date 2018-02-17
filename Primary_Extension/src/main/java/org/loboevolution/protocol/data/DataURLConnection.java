@@ -168,7 +168,7 @@ public class DataURLConnection extends HttpURLConnection {
 				this.content = value.getBytes();
 			}
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 

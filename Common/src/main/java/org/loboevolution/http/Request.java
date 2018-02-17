@@ -530,7 +530,7 @@ public class Request extends AbstractBean {
 						setParameter(key, value);
 					}
 				} catch (Exception e) {
-					logger.error(e.getMessage());
+					logger.error(e);
 				}
 			}
 		}
@@ -570,7 +570,7 @@ public class Request extends AbstractBean {
 						new Header("Authentication", "Basic " + base64Encode(username + ":" + getPassword())));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 

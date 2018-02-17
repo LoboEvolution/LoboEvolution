@@ -27,7 +27,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DateFormat;
@@ -46,7 +45,7 @@ import org.loboevolution.http.NameValuePair;
 /**
  * The Class Urls.
  */
-public class Urls {
+public final class Urls {
 	
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(Urls.class);
@@ -267,7 +266,7 @@ public class Urls {
 					try {
 						throw mfu;
 					} catch (IOException e) {
-						logger.error(e.getMessage());
+						logger.error(e);
 					}
 				}
 			}
@@ -404,7 +403,9 @@ public class Urls {
 	}
 	
 	public static boolean isAbsolute(String url){
-	    if (url.startsWith("//")) {
+		boolean result = false;
+		
+		if (url.startsWith("//")) {
 	        return true;
 	    }
 
@@ -412,15 +413,12 @@ public class Urls {
 	        return false;
 	    }
 
-	    boolean result = false;
-
 	    try {
 	        URI uri = new URI(url);
 	        result = uri.isAbsolute();
-	    } catch (URISyntaxException e) {
-	        e.printStackTrace();
+	    } catch (Exception e) {
+	    	logger.error(e);
 	    }
-
 	    return result;
 	}
 }

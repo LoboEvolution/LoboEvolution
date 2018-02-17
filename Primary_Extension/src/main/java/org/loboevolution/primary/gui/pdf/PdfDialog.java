@@ -665,9 +665,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			buf.put(byteBuf);
 			openPDFByteBuffer(buf, file.getPath(), file.getName());
 		} catch (FileNotFoundException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		} finally {
 			if (istr != null) {
 				try {
@@ -781,7 +781,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 					prevDirChoice = fc.getSelectedFile();
 					openFile(fc.getSelectedFile());
 				} catch (IOException e) {
-					logger.error(e.getMessage());
+					logger.error(e);
 				}
 			}
 		} catch (Exception e) {
@@ -789,7 +789,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 					"Opening files from your local " + "disk is not available\nfrom the "
 							+ "Java Web Start version of this " + "program.\n",
 					"Error opening directory", JOptionPane.ERROR_MESSAGE);
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 

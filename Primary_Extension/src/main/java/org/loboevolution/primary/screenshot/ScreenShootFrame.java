@@ -115,7 +115,7 @@ public class ScreenShootFrame extends JFrame {
 				try {
 					ImageIO.write(image, "jpg", new File(selectedFile.getAbsolutePath()));
 				} catch (IOException e) {
-					logger.error(e.getMessage());
+					logger.error(e);
 				}
 			}
 		}

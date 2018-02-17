@@ -77,9 +77,9 @@ public class SSLCertificate {
 			 * end of the fix
 			 */
 		} catch (KeyManagementException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		} catch (NoSuchAlgorithmException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 }

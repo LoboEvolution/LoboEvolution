@@ -29,8 +29,9 @@ package org.loboevolution.w3c.events;
  *
  * @see EventEvent
  */
+
+@FunctionalInterface
 public interface EventListener {
-	// EventListener
 	/**
 	 * Handle event.
 	 *

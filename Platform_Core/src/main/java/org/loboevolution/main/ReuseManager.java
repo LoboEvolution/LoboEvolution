@@ -185,7 +185,7 @@ public class ReuseManager {
 				break OUTER;
 			}
 		} catch (Throwable e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		if (!launched) {
 			PlatformInit entry = PlatformInit.getInstance();

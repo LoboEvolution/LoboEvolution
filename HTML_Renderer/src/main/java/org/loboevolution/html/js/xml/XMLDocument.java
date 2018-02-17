@@ -29,6 +29,9 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.loboevolution.html.renderstate.BackgroundRenderState;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -49,6 +52,9 @@ import org.w3c.dom.UserDataHandler;
 import org.xml.sax.SAXException;
 
 public class XMLDocument implements Document {
+	
+	/** The Constant logger. */
+	protected static final Logger logger = LogManager.getLogger(XMLDocument.class);
 
 	private static Document doc;
 	
@@ -96,7 +102,7 @@ public class XMLDocument implements Document {
 			}
 			doc.getDocumentElement().normalize();
 		} catch (SAXException | IOException | ParserConfigurationException e) {
-			e.printStackTrace();
+			logger.error(e);
 		}
 	}
 

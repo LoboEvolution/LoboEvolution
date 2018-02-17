@@ -306,11 +306,10 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					logger.error("Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.columnNumber() + ": "
 							+ ecmaError.getMessage());
 				} catch (EvaluatorException e) {
-					logger.error(e.getMessage());
+					logger.error(e);
 				} catch (MissingResourceException err) {
 					logger.error("Missing Resource");
 				} catch (Exception err) {
-					logger.error("scriptURI: " + scriptURI);
 					logger.error("Unable to evaluate Javascript code", err);
 				} finally {
 					Context.exit();

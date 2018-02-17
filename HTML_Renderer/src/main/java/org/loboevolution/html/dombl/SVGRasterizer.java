@@ -115,7 +115,7 @@ public class SVGRasterizer {
 		try {
 			r.transcode(input, null);
 		} catch (TranscoderException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return img;
 	}

@@ -159,7 +159,7 @@ public class HtmlContextMenu {
 			popupMenu.add(saveImage);
 
 		} catch (MalformedURLException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return popupMenu;
 
@@ -338,15 +338,15 @@ public class HtmlContextMenu {
 			}
 			result = sb.toString();
 		} catch (MalformedURLException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		} catch (IOException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		} finally {
 			try {
 				isr.close();
 				is.close();
 			} catch (IOException e) {
-				logger.error(e.getMessage());
+				logger.error(e);
 			}
 		}
 		return result;

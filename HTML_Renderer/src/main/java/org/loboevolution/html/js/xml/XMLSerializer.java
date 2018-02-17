@@ -72,7 +72,7 @@ public class XMLSerializer extends AbstractScriptableDelegate {
 			transformer.transform(new DOMSource(root), new StreamResult(writer));
 			return writer.getBuffer().toString().replaceAll("\n|\r", "");
 		} catch (TransformerException e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return "";
 	}
