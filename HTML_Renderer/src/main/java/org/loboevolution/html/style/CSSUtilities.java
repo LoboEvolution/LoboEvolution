@@ -93,7 +93,7 @@ public class CSSUtilities {
 			return sb.toString();
 		} catch (IOException ioe) {
 			// not possible
-			throw new IllegalStateException(ioe.getMessage());
+			throw new IllegalStateException(ioe);
 		}
 	}
 

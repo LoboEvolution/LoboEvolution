@@ -375,7 +375,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 
 			return newNode;
 		} catch (Exception err) {
-			throw new IllegalStateException(err.getMessage());
+			throw new IllegalStateException(err);
 		}
 	}
 

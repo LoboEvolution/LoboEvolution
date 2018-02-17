@@ -109,7 +109,7 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 			newObject.setParentScope(scope);
 			return newObject;
 		} catch (Exception err) {
-			throw new IllegalStateException(err.getMessage());
+			throw new IllegalStateException(err);
 		}
 	}
 

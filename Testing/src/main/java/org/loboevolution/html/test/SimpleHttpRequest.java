@@ -272,7 +272,7 @@ public class SimpleHttpRequest extends AbstractBean {
 			try {
 				c.getInputStream().close();
 			} catch (IOException ioe) {
-				logger.error(ioe.getMessage());
+				logger.error(ioe);
 			}
 		}
 	}

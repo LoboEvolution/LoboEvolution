@@ -132,7 +132,7 @@ public class DefaultWindowFactory implements WindowFactory {
 			}
 
 		} catch (Throwable ex) {
-			logger.error(ex.getMessage());
+			logger.error(ex);
 		}
 		return image;
 	}

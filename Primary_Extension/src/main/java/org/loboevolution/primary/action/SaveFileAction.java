@@ -101,12 +101,12 @@ public class SaveFileAction extends ActionPool {
 				baos.writeTo(ops);
 				baos.flush();
 			} catch (IOException e1) {
-				logger.error(e1.getMessage());
+				logger.error(e1);
 			} finally {
 				try {
 					baos.close();
 				} catch (IOException e1) {
-					logger.error(e1.getMessage());
+					logger.error(e1);
 				}
 			}
 

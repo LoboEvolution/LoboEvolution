@@ -1225,7 +1225,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 					}
 				}
 			} catch (IOException ioe) {
-				logger.error(ioe.getMessage());
+				logger.error(ioe);
 			}
 		}
 	}

@@ -170,7 +170,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 					try {
 						image = ImageIO.read(con.getInputStream());
 					} catch (IOException e) {
-						logger.error("read error: " + e.getMessage());
+						logger.error("read error: " + e);
 					}
 				} else {
 					image = ImageIO.read(con.getInputStream());
@@ -178,7 +178,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 			} catch (FileNotFoundException | IIOException ex) {
 				logger.error("ImgControl(): Image not found " + modelNode.getSrc());
 			} catch (TranscoderException | IOException e1) {
-				logger.error(e1.getMessage());
+				logger.error(e1);
 			} catch (Exception e1) {
 				logger.error("ImgControl(): Image not found " + modelNode.getSrc());
 			}

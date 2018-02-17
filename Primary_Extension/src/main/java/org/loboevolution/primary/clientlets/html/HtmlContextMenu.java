@@ -152,7 +152,7 @@ public class HtmlContextMenu {
 						image = ImageIO.read(srcUrl);
 						ImageIO.write(image, ext, selectedFile);
 					} catch (Exception e1) {
-						logger.error(e1.getMessage());
+						logger.error(e1);
 					}
 				}
 			});
@@ -224,12 +224,12 @@ public class HtmlContextMenu {
 						baos.writeTo(ops);
 						baos.flush();
 					} catch (IOException e2) {
-						logger.error(e1.getMessage());
+						logger.error(e1);
 					} finally {
 						try {
 							baos.close();
 						} catch (IOException e2) {
-							logger.error(e1.getMessage());
+							logger.error(e1);
 						}
 					}
 				}

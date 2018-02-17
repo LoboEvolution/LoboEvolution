@@ -864,7 +864,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 			this.dispatchBeforeNavigate(event);
 		} catch (NavigationVetoException nve) {
 			if (logger.isInfoEnabled()) {
-				logger.info("navigateLocal(): Navigation was vetoed: " + nve.getMessage());
+				logger.info("navigateLocal(): Navigation was vetoed: " + nve);
 			}
 			return;
 		}
@@ -952,7 +952,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 			this.dispatchBeforeLocalNavigate(event);
 		} catch (NavigationVetoException nve) {
 			if (logger.isInfoEnabled()) {
-				logger.info("navigateLocal(): Navigation was vetoed: " + nve.getMessage());
+				logger.info("navigateLocal(): Navigation was vetoed: " + nve);
 			}
 			return;
 		}
@@ -1072,7 +1072,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 			this.dispatchBeforeWindowOpen(event);
 		} catch (NavigationVetoException nve) {
 			if (logger.isInfoEnabled()) {
-				logger.info("navigateLocal(): Navigation was vetoed: " + nve.getMessage());
+				logger.info("navigateLocal(): Navigation was vetoed: " + nve);
 			}
 			return null;
 		}

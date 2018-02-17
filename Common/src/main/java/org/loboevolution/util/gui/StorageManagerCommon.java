@@ -117,7 +117,7 @@ public class StorageManagerCommon {
 			try {
 				return (Serializable) ois.readObject();
 			} catch (InvalidClassException ice) {
-				logger.error(ice.getMessage());
+				logger.error(ice);
 				return null;
 			}
 		} finally {

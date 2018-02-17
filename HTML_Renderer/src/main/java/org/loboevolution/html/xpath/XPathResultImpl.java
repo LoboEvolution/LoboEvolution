@@ -289,7 +289,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 			} catch (Exception e) {
 				// Type check above should prevent this exception from
 				// occurring.
-				throw new XPathException(XPathException.TYPE_ERR, e.getMessage());
+				throw new XPathException(XPathException.TYPE_ERR, e);
 			}
 		}
 	}
@@ -317,7 +317,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 			} catch (Exception e) {
 				// Type check above should prevent this exception from
 				// occurring.
-				throw new XPathException(XPathException.TYPE_ERR, e.getMessage());
+				throw new XPathException(XPathException.TYPE_ERR, e);
 			}
 		}
 	}
@@ -344,7 +344,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 			} catch (TransformerException e) {
 				// Type check above should prevent this exception from
 				// occurring.
-				throw new XPathException(XPathException.TYPE_ERR, e.getMessage());
+				throw new XPathException(XPathException.TYPE_ERR, e);
 			}
 		}
 	}
@@ -376,7 +376,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 		try {
 			result = m_resultObj.nodeset();
 		} catch (TransformerException te) {
-			throw new XPathException(XPathException.TYPE_ERR, te.getMessage());
+			throw new XPathException(XPathException.TYPE_ERR, te);
 		}
 
 		if (null == result) {

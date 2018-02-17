@@ -60,7 +60,7 @@ public class PreferencesPanel extends JPanel {
 			try {
 				ui.save();
 			} catch (ValidationException ve) {
-				JOptionPane.showMessageDialog(this, ve.getMessage());
+				JOptionPane.showMessageDialog(this, ve);
 				return false;
 			}
 		}

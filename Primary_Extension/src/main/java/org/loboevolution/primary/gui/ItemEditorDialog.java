@@ -186,7 +186,7 @@ public class ItemEditorDialog<T> extends JDialog {
 			try {
 				editor.validateItem();
 			} catch (ValidationException ve) {
-				JOptionPane.showMessageDialog(ItemEditorDialog.this, ve.getMessage());
+				JOptionPane.showMessageDialog(ItemEditorDialog.this, ve);
 				return;
 			}
 			resultingItem = editor.getItem();

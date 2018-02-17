@@ -196,7 +196,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 					logger.error(url);
 					bg.setBackgroundImage(url);
 				} catch (Exception ex) {
-					logger.error(ex.getMessage());
+					logger.error(ex);
 				}
 			}
 		}
@@ -259,7 +259,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 								url = document.getFullURL(quotedUri);
 								bg.setBackgroundImage(url);
 							} catch (Exception ex) {
-								logger.error(ex.getMessage());
+								logger.error(ex);
 							}
 
 						}

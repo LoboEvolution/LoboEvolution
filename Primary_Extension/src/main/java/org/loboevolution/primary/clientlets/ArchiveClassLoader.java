@@ -175,7 +175,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 				try {
 					return new URL(null, "volatile:" + name, new LocalURLStreamHandler(name));
 				} catch (MalformedURLException mfu) {
-					throw new IllegalStateException(mfu.getMessage());
+					throw new IllegalStateException(mfu);
 				}
 			});
 		} catch (RuntimeException err) {
