@@ -21,13 +21,17 @@
 /*
  * Created on Dec 3, 2005
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderertable;
 
 import java.awt.Dimension;
 
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.info.SizeInfo;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.RBlock;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.VirtualCell;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.http.UserAgentContext;

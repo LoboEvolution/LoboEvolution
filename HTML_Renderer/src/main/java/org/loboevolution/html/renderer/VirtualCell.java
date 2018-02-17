@@ -24,6 +24,7 @@
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.domimpl.HTMLTableElementImpl;
+import org.loboevolution.html.renderertable.RTableCell;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.w3c.html.HTMLTableElement;

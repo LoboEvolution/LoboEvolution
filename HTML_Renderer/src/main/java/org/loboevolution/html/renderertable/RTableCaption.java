@@ -18,10 +18,13 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderertable;
 
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domimpl.HTMLTableCaptionElementImpl;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.RBlock;
+import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.http.UserAgentContext;
 
 /**

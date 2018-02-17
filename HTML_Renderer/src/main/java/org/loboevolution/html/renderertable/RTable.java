@@ -21,7 +21,7 @@
 /*
  * Created on Nov 19, 2005
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderertable;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,6 +44,14 @@ import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.layout.LayoutKey;
 import org.loboevolution.html.layout.LayoutValue;
+import org.loboevolution.html.renderer.BaseElementRenderable;
+import org.loboevolution.html.renderer.BoundableRenderable;
+import org.loboevolution.html.renderer.DelayedPair;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.PositionedRenderable;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.RenderableSpot;
+import org.loboevolution.html.renderer.ZIndexComparator;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.RenderThreadState;
 import org.loboevolution.http.UserAgentContext;

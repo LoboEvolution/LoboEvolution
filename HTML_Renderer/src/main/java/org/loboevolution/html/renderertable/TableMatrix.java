@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.renderertable;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,6 +45,12 @@ import org.loboevolution.html.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.info.CaptionSizeInfo;
 import org.loboevolution.html.info.SizeInfo;
+import org.loboevolution.html.renderer.BoundableRenderable;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.RElement;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.RenderableSpot;
+import org.loboevolution.html.renderer.VirtualCell;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.CSSValuesProperties;
@@ -240,7 +246,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, this.tableElement.getRenderState(), 0);
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
-		this.tableWidthLength = TableMatrix.getWidthLength(this.tableElement, availWidth);
+		this.tableWidthLength = TableRender.getWidthLength(this.tableElement, availWidth);
 
 		this.populateRows();
 		this.adjustForCellSpans();
@@ -301,116 +307,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			parentNode = parentNode.getParentNode();
 		}
 	}
-
-	/**
-	 * Gets the width length.
-	 *
-	 * @param element
-	 *            the element
-	 * @param availWidth
-	 *            the avail width
-	 * @return the width length
-	 */
-	private static HtmlLength getWidthLength(HTMLElementImpl element, int availWidth) {
-		try {
-			AbstractCSSProperties props = element.getCurrentStyle();
-			String widthText = props == null ? null : props.getWidth();
-			if (widthText == null) {
-				String widthAttr = element.getAttribute(WIDTH);
-				if (widthAttr == null) {
-					return null;
-				}
-				return new HtmlLength(widthAttr);
-			} else {
-
-				if (INHERIT.equals(widthText)) {
-					widthText = element.getParentStyle().getWidth();
-				}
-
-				int width = -1;
-
-				if (widthText != null) {
-					width = HtmlValues.getPixelSize(widthText, element.getRenderState(), 0, availWidth);
-				}
-
-				if (props.getMaxWidth() != null) {
-					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0, availWidth);
-
-					if (width == 0 || width > maxWidth) {
-						width = maxWidth;
-					}
-				}
-
-				if (props.getMinWidth() != null) {
-					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0, availWidth);
-
-					if (width == 0 || width < minWidth) {
-						width = minWidth;
-					}
-				}
-
-				return new HtmlLength(width);
-			}
-		} catch (Exception err) {
-			return null;
-		}
-	}
-
-	/**
-	 * Gets the height length.
-	 *
-	 * @param element
-	 *            the element
-	 * @param availHeight
-	 *            the avail height
-	 * @return the height length
-	 */
-	private static HtmlLength getHeightLength(HTMLElementImpl element, int availHeight) {
-		try {
-			AbstractCSSProperties props = element.getCurrentStyle();
-			String heightText = props == null ? null : props.getHeight();
-			if (heightText == null) {
-				String ha = element.getAttribute(HEIGHT);
-				if (ha == null) {
-					return null;
-				} else {
-					return new HtmlLength(ha);
-				}
-			} else {
-
-				if (INHERIT.equals(heightText)) {
-					heightText = element.getParentStyle().getHeight();
-				}
-
-				int height = -1;
-
-				if (heightText != null) {
-					height = HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight);
-				}
-
-				if (props.getMaxHeight() != null) {
-					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0, availHeight);
-
-					if (height == 0 || height > maxHeight) {
-						height = maxHeight;
-					}
-				}
-
-				if (props.getMinHeight() != null) {
-					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0, availHeight);
-
-					if (height == 0 || height < minHeight) {
-						height = minHeight;
-					}
-				}
-
-				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight));
-			}
-		} catch (Exception err) {
-			return null;
-		}
-	}
-
+	
 	/**
 	 * Populates the ROWS and ALL_CELLS collections.
 	 */
@@ -609,47 +506,12 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		SizeInfo[] columnSizes = new SizeInfo[numCols];
 		this.columnSizes = columnSizes;
 		for (int i = 0; i < numCols; i++) {
-			HtmlLength bestWidthLength = null;
-
 			// Cells with colspan==1 first.
-			for (int y = 0; y < numRows; y++) {
-				ArrayList<VirtualCell> row = rows.get(y);
-				VirtualCell vc;
-				try {
-					vc = row.get(i);
-				} catch (IndexOutOfBoundsException iob) {
-					vc = null;
-				}
-				if (vc != null) {
-					RTableCell ac = vc.getActualCell();
-					if (ac.getColSpan() == 1) {
-						HtmlLength vcWidthLength = vc.getWidthLength();
-						if (vcWidthLength != null && vcWidthLength.isPreferredOver(bestWidthLength)) {
-							bestWidthLength = vcWidthLength;
-						}
-					}
-				}
-			}
+			HtmlLength bestWidthLength = TableRender.getBestWidthLength(rows, numRows, i, "eq");
+			
 			// Now cells with colspan>1.
 			if (bestWidthLength == null) {
-				for (int y = 0; y < numRows; y++) {
-					ArrayList<VirtualCell> row = rows.get(y);
-					VirtualCell vc;
-					try {
-						vc = row.get(i);
-					} catch (IndexOutOfBoundsException iob) {
-						vc = null;
-					}
-					if (vc != null) {
-						RTableCell ac = vc.getActualCell();
-						if (ac.getColSpan() > 1) {
-							HtmlLength vcWidthLength = vc.getWidthLength();
-							if (vcWidthLength != null && vcWidthLength.isPreferredOver(bestWidthLength)) {
-								bestWidthLength = vcWidthLength;
-							}
-						}
-					}
-				}
+				bestWidthLength = TableRender.getBestWidthLength(rows, numRows, i, ">");
 			}
 			SizeInfo colSizeInfo = new SizeInfo();
 			colSizeInfo.setHtmlLength(bestWidthLength);
@@ -774,40 +636,12 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			// See if absolutes need to be contracted
 			if (difference > 0) {
 				if (widthUsedByAbsolute > 0) {
-					int expectedAbsoluteWidthTotal = widthUsedByAbsolute - difference;
-					if (expectedAbsoluteWidthTotal < 0) {
-						expectedAbsoluteWidthTotal = 0;
-					}
-					double ratio = (double) expectedAbsoluteWidthTotal / widthUsedByAbsolute;
-					for (int i = 0; i < numCols; i++) {
-						SizeInfo sizeInfo = columnSizes[i];
-						HtmlLength widthLength = columnSizes[i].getHtmlLength();
-						if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
-							int oldActualSize = sizeInfo.getActualSize();
-							int newActualSize = (int) Math.round(oldActualSize * ratio);
-							sizeInfo.setActualSize(newActualSize);
-							totalWidthUsed += newActualSize - oldActualSize;
-						}
-					}
+					totalWidthUsed = TableRender.adjustTotalWidths(columnSizes, numCols, widthUsedByAbsolute, difference, totalWidthUsed);
 					difference = totalWidthUsed - cellAvailWidth;
 				}
 
 				if (difference > 0 && widthUsedByPercent > 0) {
-					int expectedPercentWidthTotal = widthUsedByPercent - difference;
-					if (expectedPercentWidthTotal < 0) {
-						expectedPercentWidthTotal = 0;
-					}
-					double ratio = (double) expectedPercentWidthTotal / widthUsedByPercent;
-					for (int i = 0; i < numCols; i++) {
-						SizeInfo sizeInfo = columnSizes[i];
-						HtmlLength widthLength = columnSizes[i].getHtmlLength();
-						if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
-							int oldActualSize = sizeInfo.getActualSize();
-							int newActualSize = (int) Math.round(oldActualSize * ratio);
-							sizeInfo.setActualSize(newActualSize);
-							totalWidthUsed += newActualSize - oldActualSize;
-						}
-					}
+					totalWidthUsed = TableRender.adjustTotalWidths(columnSizes, numCols, widthUsedByPercent, difference, totalWidthUsed);
 				}				
 			}
 		}
@@ -826,92 +660,6 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			if (si.getActualSize() < si.getLayoutSize()) {
 				si.setActualSize(si.getLayoutSize());
 			}
-		}
-	}
-
-	/**
-	 * Layout column.
-	 *
-	 * @param columnSizes
-	 *            the column sizes
-	 * @param colSize
-	 *            the col size
-	 * @param col
-	 *            the col
-	 * @param cellSpacingX
-	 *            the cell spacing x
-	 * @param hasBorder
-	 *            the has border
-	 */
-	private void layoutColumn(SizeInfo[] columnSizes, SizeInfo colSize, int col, int cellSpacingX, int hasBorder) {
-		SizeInfo[] rowSizes = this.rowSizes;
-		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
-		int numRows = rows.size();
-		int actualSize = colSize.getActualSize();
-		colSize.setLayoutSize(0);
-		for (int row = 0; row < numRows;) {
-			// SizeInfo rowSize = rowSizes[row];
-			ArrayList<VirtualCell> columns = rows.get(row);
-			VirtualCell vc = null;
-			try {
-				vc = columns.get(col);
-			} catch (IndexOutOfBoundsException iob) {
-				vc = null;
-			}
-			RTableCell ac = vc == null ? null : vc.getActualCell();
-
-			if (ac != null && ac.getVirtualRow() == row) {
-				// Only process actual cells with a row
-				// beginning at the current row being processed.
-				int colSpan = ac.getColSpan();
-				if (colSpan > 1) {
-					int firstCol = ac.getVirtualColumn();
-					int cellExtras = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
-					int vcActualWidth = cellExtras;
-					for (int x = 0; x < colSpan; x++) {
-						vcActualWidth += columnSizes[firstCol + x].getActualSize();
-					}
-					// TODO: better height possible
-
-					Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
-					int vcRenderWidth = size.width;
-
-					int denominator = vcActualWidth - cellExtras;
-					int newTentativeCellWidth;
-					if (denominator > 0) {
-						newTentativeCellWidth = actualSize * (vcRenderWidth - cellExtras) / denominator;
-					} else {
-						newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
-					}
-					if (newTentativeCellWidth > colSize.getLayoutSize()) {
-						colSize.setLayoutSize(newTentativeCellWidth);
-					}
-					int rowSpan = ac.getRowSpan();
-					int vch = (size.height - (rowSpan - 1) * (this.cellSpacingY + 2 * hasBorder)) / rowSpan;
-					for (int y = 0; y < rowSpan; y++) {
-						if (rowSizes[row + y].getMinSize() < vch) {
-							rowSizes[row + y].setMinSize(vch);
-						}
-					}
-				} else {
-					// TODO: better height possible
-					Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
-					if (size.width > colSize.getLayoutSize()) {
-						colSize.setLayoutSize(size.width);
-					}
-					int rowSpan = ac.getRowSpan();
-					int vch = (size.height - (rowSpan - 1) * (this.cellSpacingY + 2 * hasBorder)) / rowSpan;
-					for (int y = 0; y < rowSpan; y++) {
-						if (rowSizes[row + y].getMinSize() < vch) {
-							rowSizes[row + y].setMinSize(vch);
-						}
-					}
-
-				}
-			}
-			// row = (ac == null ? row + 1 : ac.getVirtualRow() +
-			// ac.getRowSpan());
-			row++;
 		}
 	}
 
@@ -997,41 +745,8 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			}
 		}
 		if (noWidthTotal > 0) {
-			// TODO: This is not shrinking correctly.
-			int expectedNoWidthTotal = noWidthTotal - difference;
-			if (expectedNoWidthTotal < 0) {
-				expectedNoWidthTotal = 0;
-			}
-			double ratio = (double) expectedNoWidthTotal / noWidthTotal;
-			int noWidthCount = 0;
-			for (int i = 0; i < numCols; i++) {
-				SizeInfo sizeInfo = columnSizes[i];
-				if (sizeInfo.getHtmlLength() == null) {
-					int oldActualSize = sizeInfo.getActualSize();
-					int newActualSize;
-					if (++noWidthCount == numNoWidth) {
-						// Last column without a width.
-						int currentDiff = currentTotal - cellAvailWidth;
-						newActualSize = oldActualSize - currentDiff;
-						if (newActualSize < 0) {
-							newActualSize = 0;
-						}
-					} else {
-						newActualSize = (int) Math.round(oldActualSize * ratio);
-					}
-					sizeInfo.setActualSize(newActualSize);
-					if (newActualSize < sizeInfo.getLayoutSize()) {
-						// See if it actually fits.
-						this.layoutColumn(columnSizes, sizeInfo, i, cellSpacingX, hasBorder);
-						if (newActualSize < sizeInfo.getLayoutSize()) {
-							// Didn't fit.
-							newActualSize = sizeInfo.getLayoutSize();
-							sizeInfo.setActualSize(newActualSize);
-						}
-					}
-					currentTotal += newActualSize - oldActualSize;
-				}
-			}
+			currentTotal = TableRender.adjustCurrentTotal2(columnSizes, this.rowSizes, this.ROWS, cellSpacingX, numCols,
+														   noWidthTotal, difference, cellSpacingX, hasBorder, numNoWidth, cellAvailWidth, currentTotal);
 			difference = currentTotal - cellAvailWidth;
 		}
 
@@ -1045,30 +760,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 				}
 			}
 			if (absoluteWidthTotal > 0) {
-				int expectedAbsoluteWidthTotal = absoluteWidthTotal - difference;
-				if (expectedAbsoluteWidthTotal < 0) {
-					expectedAbsoluteWidthTotal = 0;
-				}
-				double ratio = (double) expectedAbsoluteWidthTotal / absoluteWidthTotal;
-				for (int i = 0; i < numCols; i++) {
-					SizeInfo sizeInfo = columnSizes[i];
-					HtmlLength widthLength = columnSizes[i].getHtmlLength();
-					if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
-						int oldActualSize = sizeInfo.getActualSize();
-						int newActualSize = (int) Math.round(oldActualSize * ratio);
-						sizeInfo.setActualSize(newActualSize);
-						if (newActualSize < sizeInfo.getLayoutSize()) {
-							// See if it actually fits.
-							this.layoutColumn(columnSizes, sizeInfo, i, cellSpacingX, hasBorder);
-							if (newActualSize < sizeInfo.getLayoutSize()) {
-								// Didn't fit.
-								newActualSize = sizeInfo.getLayoutSize();
-								sizeInfo.setActualSize(newActualSize);
-							}
-						}
-						currentTotal += newActualSize - oldActualSize;
-					}
-				}
+				currentTotal = TableRender.adjustCurrentTotal(columnSizes, this.rowSizes, this.ROWS, cellSpacingY, numCols, absoluteWidthTotal, difference, cellSpacingX, hasBorder, currentTotal);
 				difference = currentTotal - cellAvailWidth;
 			}
 
@@ -1082,30 +774,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 					}
 				}
 				if (percentWidthTotal > 0) {
-					int expectedPercentWidthTotal = percentWidthTotal - difference;
-					if (expectedPercentWidthTotal < 0) {
-						expectedPercentWidthTotal = 0;
-					}
-					double ratio = (double) expectedPercentWidthTotal / percentWidthTotal;
-					for (int i = 0; i < numCols; i++) {
-						SizeInfo sizeInfo = columnSizes[i];
-						HtmlLength widthLength = columnSizes[i].getHtmlLength();
-						if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
-							int oldActualSize = sizeInfo.getActualSize();
-							int newActualSize = (int) Math.round(oldActualSize * ratio);
-							sizeInfo.setActualSize(newActualSize);
-							if (newActualSize < sizeInfo.getLayoutSize()) {
-								// See if it actually fits.
-								this.layoutColumn(columnSizes, sizeInfo, i, cellSpacingX, hasBorder);
-								if (newActualSize < sizeInfo.getLayoutSize()) {
-									// Didn't fit.
-									newActualSize = sizeInfo.getLayoutSize();
-									sizeInfo.setActualSize(newActualSize);
-								}
-							}
-							currentTotal += newActualSize - oldActualSize;
-						}
-					}
+					currentTotal = TableRender.adjustCurrentTotal(columnSizes, this.rowSizes, this.ROWS, cellSpacingY, numCols, percentWidthTotal, difference, cellSpacingX, hasBorder, currentTotal);
 				}
 			}
 		}
@@ -1251,17 +920,12 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 *            the size only
 	 */
 	private void determineRowSizes(int hasBorder, int cellSpacing, int availHeight, boolean sizeOnly) {
-		HtmlLength tableHeightLength = TableMatrix.getHeightLength(this.tableElement, availHeight);
+		HtmlLength tableHeightLength = TableRender.getHeightLength(this.tableElement, availHeight);
 		int tableHeight;
 		if (tableHeightLength != null) {
 			tableHeight = tableHeightLength.getLength(availHeight);
 			this.determineRowSizesFixedTH(hasBorder, cellSpacing, tableHeight, sizeOnly);
 		} else {
-			// zbytocne
-			// tableHeight = heightsOfExtras;
-			// for(int row = 0; row < numRows; row++) {
-			// tableHeight += rowSizes[row].minSize;
-			// }
 			this.determineRowSizesFlexibleTH(hasBorder, cellSpacing, sizeOnly);
 		}
 	}

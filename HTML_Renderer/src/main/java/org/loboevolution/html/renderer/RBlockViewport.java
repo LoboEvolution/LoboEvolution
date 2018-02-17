@@ -56,6 +56,7 @@ import org.loboevolution.html.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.info.FloatingInfo;
 import org.loboevolution.html.layout.MarkupLayout;
 import org.loboevolution.html.layout.MiscLayout;
+import org.loboevolution.html.renderertable.RTable;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
