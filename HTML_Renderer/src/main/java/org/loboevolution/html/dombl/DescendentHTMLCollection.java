@@ -24,7 +24,6 @@
 package org.loboevolution.html.dombl;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -103,8 +102,7 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 	 */
 	private void ensurePopulatedImpl() {
 		if (this.itemsByName == null) {
-			ArrayList<DOMNodeImpl> descendents = this.rootNode.getDescendents(this.nodeFilter,
-					this.nestIntoMatchingNodes);
+			List<DOMNodeImpl> descendents = this.rootNode.getDescendents(this.nodeFilter, this.nestIntoMatchingNodes);
 			this.itemsByIndex = descendents == null ? Collections.emptyList() : descendents;
 			int size = descendents == null ? 0 : descendents.size();
 			Map<String, DOMElementImpl> itemsByName = new HashMap<String, DOMElementImpl>(size * 3 / 2);

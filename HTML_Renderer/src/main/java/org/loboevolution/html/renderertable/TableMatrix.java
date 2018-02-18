@@ -29,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -316,9 +317,8 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		ArrayList<HTMLTableRowElementImpl> rowElements = this.ROW_ELEMENTS;
 		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(
-				2);
-		ArrayList<DOMNodeImpl> cellList = te.getDescendents(new ColumnsFilter(), false);
+		Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(2);
+		List<DOMNodeImpl> cellList = te.getDescendents(new ColumnsFilter(), false);
 		ArrayList<VirtualCell> currentNullRow = null;
 		Iterator<DOMNodeImpl> ci = cellList.iterator();
 		while (ci.hasNext()) {
@@ -366,7 +366,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			allCells.add(ac);
 		}
 
-		ArrayList<DOMNodeImpl> captionList = te.getDescendents(new CaptionFilter(), false);
+		List<DOMNodeImpl> captionList = te.getDescendents(new CaptionFilter(), false);
 		if (!captionList.isEmpty()) {
 			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.get(0);
 			this.captionElement = capt;

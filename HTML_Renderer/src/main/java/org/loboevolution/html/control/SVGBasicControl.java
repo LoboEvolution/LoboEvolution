@@ -33,6 +33,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -537,7 +538,7 @@ public class SVGBasicControl extends SVGStyle {
 		AbstractCSSProperties style = svgi.getStyle();
 		SVGTransformList transformList = svgi.getTransformList();
 		Element elementById = svg.getOwnerDocument().getElementById(href.split("#")[1]);
-		ArrayList<SVGInfo> useList = child(elementById);
+		List<SVGInfo> useList = child(elementById);
 		
 		for (int i = 0; i < useList.size(); i++) {
 			SVGInfo info = useList.get(i);
@@ -664,9 +665,9 @@ public class SVGBasicControl extends SVGStyle {
 		svgClip(svgi, g2d);
 	}
 
-	public ArrayList<SVGInfo> childNodes(Node element) {
+	public List<SVGInfo> childNodes(Node element) {
 
-		ArrayList<SVGInfo> useList = new ArrayList<SVGInfo>();
+		List<SVGInfo> useList = new ArrayList<SVGInfo>();
 
 			NodeList childNodes = element.getChildNodes();
 			for (int i = 0; i < childNodes.getLength(); i++) {
@@ -700,8 +701,8 @@ public class SVGBasicControl extends SVGStyle {
 		return useList;
 	}
 	
-	public ArrayList<SVGInfo> child(Node n){
-		ArrayList<SVGInfo> useList = new ArrayList<SVGInfo>();
+	public List<SVGInfo> child(Node n){
+		List<SVGInfo> useList = new ArrayList<SVGInfo>();
 		if (n instanceof SVGCircleElementImpl) {
 			SVGCircleElementImpl svgcircle = (SVGCircleElementImpl) n;
 			String id = svgcircle.getId();
@@ -844,7 +845,7 @@ public class SVGBasicControl extends SVGStyle {
 		if (svginfo.getClipPath() != null && svginfo.getClipPath().contains("url")) {
 			String clipElemId = svginfo.getClipPath().split("#")[1].replace(")", "").trim();
 			Element elementById = modelN.getOwnerDocument().getElementById(clipElemId);
-			ArrayList<SVGInfo> useList = childNodes(elementById);
+			List<SVGInfo> useList = childNodes(elementById);
 
 			for (int i = 0; i < useList.size(); i++) {
 				SVGInfo svgi = useList.get(i);

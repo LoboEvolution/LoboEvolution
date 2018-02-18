@@ -33,6 +33,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.StringTokenizer;
 
 import javax.imageio.ImageIO;
@@ -500,9 +501,9 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		return bg;
 	}
 	
-	public ArrayList<String> spliBackground(String backgroundText) {
-		ArrayList<String> list = new ArrayList<String>();
-		ArrayList<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("[\\)]")));
+	public List<String> spliBackground(String backgroundText) {
+		List<String> list = new ArrayList<String>();
+		List<String> backList = new ArrayList<String>(Arrays.asList(backgroundText.split("[\\)]")));
 		for (String back : backList) {
 			if (back.contains("(")) {
 				back = back + ")";
@@ -516,7 +517,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 					list.add(back.trim());
 				}
 			} else if (!Strings.isBlank(back)) {
-				ArrayList<String> backList2 = new ArrayList<String>(Arrays.asList(back.split("[\\s+]")));
+				List<String> backList2 = new ArrayList<String>(Arrays.asList(back.split("[\\s+]")));
 				for (String back2 : backList2) {
 					if (!Strings.isBlank(back2)) {
 						list.add(back2.trim());

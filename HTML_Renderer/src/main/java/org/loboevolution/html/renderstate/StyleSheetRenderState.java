@@ -30,6 +30,7 @@ import java.awt.FontMetrics;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
@@ -892,7 +893,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (props != null) {
 
 			String backgroundText = props.getBackground();
-			ArrayList<String> backList = new ArrayList<String>();
+			List<String> backList = new ArrayList<String>();
 			
 			if (backgroundText == null) {
 				backList.add(props.getBackgroundColor());
