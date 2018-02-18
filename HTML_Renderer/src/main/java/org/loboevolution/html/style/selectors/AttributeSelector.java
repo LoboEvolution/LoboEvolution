@@ -308,8 +308,7 @@ public class AttributeSelector {
 	 * @return {@code true} or {@code false}
 	 */
 	private static boolean isEmpty(DOMNodeImpl node) {
-		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child
-				.getNextSibling()) {
+		for (DOMNodeImpl child = (DOMNodeImpl) node.getFirstChild(); child != null; child = (DOMNodeImpl) child.getNextSibling()) {
 			switch (child.getNodeType()) {
 			case Node.ELEMENT_NODE:
 				return false;
@@ -318,6 +317,7 @@ public class AttributeSelector {
 				if (data != null && !data.isEmpty()) {
 					return false;
 				}
+				break;
 			default:
 				break;
 			}

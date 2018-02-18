@@ -369,7 +369,8 @@ public class HtmlValues implements CSSValuesProperties {
 					tokens.add(currentWord.toString());
 					currentWord = null;
 					break;
-				} 
+				}
+				break;
 			default:
 				if (currentWord == null) {
 					currentWord = new StringBuilder();
