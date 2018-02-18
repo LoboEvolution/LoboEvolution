@@ -506,8 +506,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 				InputStream bin = new BufferedInputStream(rin, 8192);
 				String actualURI = urlForLoading.toExternalForm();
 				// Only create document, don't parse.
-				HTMLDocumentImpl document = this
-						.createDocument(new InputSourceImpl(bin, actualURI, getDocumentCharset(connection)));
+				HTMLDocumentImpl document = this.createDocument(new InputSourceImpl(bin, actualURI, getDocumentCharset(connection)));
 				// Set document in HtmlPanel. Safe to call outside GUI thread.
 				HtmlPanel panel = htmlPanel;
 				panel.setDocument(document, SimpleHtmlRendererContext.this);
@@ -549,8 +548,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 *             the SAX exception
 	 */
 	protected HTMLDocumentImpl createDocument(org.xml.sax.InputSource inputSource) throws IOException, SAXException {
-		DocumentBuilderImpl builder = new DocumentBuilderImpl(this.getUserAgentContext(),
-				SimpleHtmlRendererContext.this);
+		DocumentBuilderImpl builder = new DocumentBuilderImpl(this.getUserAgentContext(), SimpleHtmlRendererContext.this);
 		return (HTMLDocumentImpl) builder.createDocument(inputSource);
 	}
 

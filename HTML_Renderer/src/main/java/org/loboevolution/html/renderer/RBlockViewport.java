@@ -283,7 +283,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
 			logger.warn("layout(): Invoked outside GUI dispatch thread.");
 		}
-		RenderableContainer container = this.container;
+		RenderableContainer box = this.container;
 		this.paddingInsets = paddingInsets;
 		this.yLimit = yLimit;
 		this.desiredHeight = desiredHeight;
@@ -313,13 +313,13 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		// Float.valueOfing algorithm.
 		this.layoutPass((DOMNodeImpl) this.modelNode);
 
-		Collection delayedPairs = container.getDelayedPairs();
+		Collection delayedPairs = box.getDelayedPairs();
 		if (delayedPairs != null && !delayedPairs.isEmpty()) {
 			// Add positioned renderables that belong here
 			Iterator i = delayedPairs.iterator();
 			while (i.hasNext()) {
 				DelayedPair pair = (DelayedPair) i.next();
-				if (pair.containingBlock == container) {
+				if (pair.containingBlock == box) {
 					this.importDelayedPair(pair);
 				}
 			}
@@ -356,7 +356,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		// Check positioned renderables for maxX and maxY
 		SortedSet<PositionedRenderable> posRenderables = this.positionedRenderables;
 		if (posRenderables != null) {
-			boolean isFloatLimit = this.isFloatLimit();
+			boolean isFloatLimit = this.isFloatLimitImpl();
 			Iterator<PositionedRenderable> i = posRenderables.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = i.next();
@@ -2276,7 +2276,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		int offsetFromBorder = leftFloat ? boxX + boxWidth : desiredWidth - boxX;
 		this.floatBounds = new FloatingViewportBounds(this.floatBounds, leftFloat, boxY, offsetFromBorder, boxHeight);
 		// Add element to collection
-		boolean isFloatLimit = this.isFloatLimit();
+		boolean isFloatLimit = this.isFloatLimitImpl();
 		if (isFloatLimit) {
 			this.addPositionedRenderable(element, true, true);
 		} else {
@@ -2288,66 +2288,60 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 		// Adjust maxY based on float, but only if this viewport is the float
 		// limit.
-		if (this.isFloatLimit() && boxY + boxHeight > this.maxY) {
+		if (this.isFloatLimitImpl() && boxY + boxHeight > this.maxY) {
 			this.maxY = boxY + boxHeight;
 		}
 
 	}
 	
 	/**
-	 * Checks if is float limit.
-	 *
-	 * @return true, if is float limit
-	 */
-	private boolean isFloatLimit() {
-		Boolean fl = this.isFloatLimit;
-		if (fl == null) {
-			fl = this.isFloatLimitImpl();
-			this.isFloatLimit = fl;
-		}
-		return fl.booleanValue();
-	}
-
-	/**
 	 * Checks if is float limit impl.
 	 *
 	 * @return the boolean
 	 */
 	private Boolean isFloatLimitImpl() {
-		Object parent = this.getOriginalOrCurrentParent();
-		if (!(parent instanceof RBlock)) {
-			return Boolean.TRUE;
+		Boolean fl = this.isFloatLimit;
+		if (fl == null) {
+			Object parent = this.getOriginalOrCurrentParent();
+			if (!(parent instanceof RBlock)) {
+				fl = Boolean.TRUE;
+				this.isFloatLimit = Boolean.TRUE;
+			}
+			RBlock blockParent = (RBlock) parent;
+			Object grandParent = blockParent.getOriginalOrCurrentParent();
+			if (!(grandParent instanceof RBlockViewport)) {
+				fl = Boolean.TRUE;
+				this.isFloatLimit = Boolean.TRUE;
+			}
+			ModelNode node = this.modelNode;
+			if (!(node instanceof HTMLElementImpl)) {
+				fl = Boolean.TRUE;
+				this.isFloatLimit = Boolean.TRUE;
+			}
+			HTMLElementImpl element = (HTMLElementImpl) node;
+			int position = getPosition(element);
+			if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
+				fl = Boolean.TRUE;
+				this.isFloatLimit = Boolean.TRUE;
+			}
+			element.getCurrentStyle();
+			RenderState rs = element.getRenderState();
+			int floatValue = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
+			if (floatValue != RenderState.FLOAT_NONE) {
+				fl = Boolean.TRUE;
+				this.isFloatLimit = Boolean.TRUE;
+			}
+			int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
+			int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
+			if (overflowX == RenderState.OVERFLOW_AUTO || overflowX == RenderState.OVERFLOW_SCROLL
+					|| overflowY == RenderState.OVERFLOW_AUTO || overflowY == RenderState.OVERFLOW_SCROLL) {
+				fl = Boolean.TRUE;
+				this.isFloatLimit = Boolean.TRUE;
+			}
+			fl = Boolean.TRUE;
+			this.isFloatLimit = Boolean.TRUE;
 		}
-		RBlock blockParent = (RBlock) parent;
-		Object grandParent = blockParent.getOriginalOrCurrentParent();
-		if (!(grandParent instanceof RBlockViewport)) {
-			// Could be contained in a table, or it could
-			// be a list item, for example.
-			return Boolean.TRUE;
-		}
-		ModelNode node = this.modelNode;
-		if (!(node instanceof HTMLElementImpl)) {
-			// Can only be a document here.
-			return Boolean.TRUE;
-		}
-		HTMLElementImpl element = (HTMLElementImpl) node;
-		int position = getPosition(element);
-		if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
-			return Boolean.TRUE;
-		}
-		element.getCurrentStyle();
-		RenderState rs = element.getRenderState();
-		int floatValue = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
-		if (floatValue != RenderState.FLOAT_NONE) {
-			return Boolean.TRUE;
-		}
-		int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
-		int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
-		if (overflowX == RenderState.OVERFLOW_AUTO || overflowX == RenderState.OVERFLOW_SCROLL
-				|| overflowY == RenderState.OVERFLOW_AUTO || overflowY == RenderState.OVERFLOW_SCROLL) {
-			return Boolean.TRUE;
-		}
-		return Boolean.FALSE;
+		return fl.booleanValue();
 	}
 
 	/**
@@ -2408,7 +2402,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 		this.floatBounds = new FloatingViewportBounds(prevBounds, leftFloat, newY, offsetFromBorder,
 				renderable.getHeight());
-		if (this.isFloatLimit()) {
+		if (this.isFloatLimitImpl()) {
 			this.addPositionedRenderable(renderable, true, true);
 		} else {
 			this.addExportableFloat(renderable, leftFloat, newX, newY);

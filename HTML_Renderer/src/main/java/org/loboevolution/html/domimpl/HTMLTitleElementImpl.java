@@ -48,11 +48,11 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (org.loboevolution.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
-			Document document = this.document;
-			if (document instanceof HTMLDocumentImpl) {
+			Document doc = this.document;
+			if (doc instanceof HTMLDocumentImpl) {
 				String textContent = this.getTextContent();
 				String title = textContent == null ? null : textContent.trim();
-				((HTMLDocumentImpl) document).setTitle(title);
+				((HTMLDocumentImpl) doc).setTitle(title);
 			}
 		}
 		return super.setUserData(key, data, handler);

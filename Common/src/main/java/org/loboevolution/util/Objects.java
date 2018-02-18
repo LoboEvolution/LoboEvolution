@@ -40,7 +40,7 @@ public class Objects {
 	 * @return true, if successful
 	 */
 	public static boolean equals(Object obj1, Object obj2) {
-		return obj1 == null ? obj2 == null : obj1.equals(obj2);
+		return (obj1 == obj2);
 	}
 
 	/**

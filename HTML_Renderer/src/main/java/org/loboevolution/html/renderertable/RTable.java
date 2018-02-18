@@ -231,7 +231,7 @@ public class RTable extends BaseElementRenderable {
 				Iterator<?> i = pairs.iterator();
 				while (i.hasNext()) {
 					DelayedPair pair = (DelayedPair) i.next();
-					if (pair.containingBlock == this) {
+					if (Objects.equals(pair.containingBlock, this)) {
 						this.importDelayedPair(pair);
 					}
 				}

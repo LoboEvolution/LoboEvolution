@@ -238,7 +238,7 @@ public class FontKey {
 	 */
 	@Override
 	public boolean equals(Object other) {
-		if (other == this) {
+		if (Objects.equals(other, this)) {
 			// Quick check.
 			return true;
 		}

@@ -33,6 +33,7 @@ import org.loboevolution.html.style.setter.FourCornersSetter;
 import org.loboevolution.html.style.setter.Property;
 import org.loboevolution.html.style.setter.SubPropertySetter;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.util.Objects;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
@@ -119,7 +120,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 *            the new local style properties
 	 */
 	public void setLocalStyleProperties(AbstractCSSProperties properties) {
-		if (properties == this) {
+		if (Objects.equals(properties, this)) {
 			throw new IllegalStateException("setting same");
 		}
 		synchronized (this) {

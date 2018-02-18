@@ -50,6 +50,7 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.LocalCSSProperties;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.html.style.selectors.AttributeSelector;
+import org.loboevolution.util.Objects;
 import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.DOMSettableTokenList;
 import org.loboevolution.w3c.html.DOMStringMap;
@@ -759,7 +760,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 		HTMLElementImpl priorElement = null;
 		for (int i = 0; i < length; i++) {
 			Node child = childNodes.item(i);
-			if (child == this) {
+			if (Objects.equals(child, this)) {
 				return priorElement;
 			}
 			if (child instanceof HTMLElementImpl) {

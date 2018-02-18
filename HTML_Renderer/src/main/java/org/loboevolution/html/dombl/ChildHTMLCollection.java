@@ -25,7 +25,9 @@ package org.loboevolution.html.dombl;
 
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.util.Objects;
 import org.loboevolution.w3c.html.HTMLCollection;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 /**
@@ -74,13 +76,13 @@ public class ChildHTMLCollection extends AbstractScriptableDelegate implements H
 	 */
 	@Override
 	public Node namedItem(String name) {
-		org.w3c.dom.Document doc = this.rootNode.getOwnerDocument();
+		Document doc = this.rootNode.getOwnerDocument();
 		if (doc == null) {
 			return null;
 		}
 		// TODO: This might get elements that are not descendents.
 		Node node = doc.getElementById(name);
-		if (node != null && node.getParentNode() == this.rootNode) {
+		if (Objects.equals(node.getParentNode(), this.rootNode)) {
 			return node;
 		}
 		return null;

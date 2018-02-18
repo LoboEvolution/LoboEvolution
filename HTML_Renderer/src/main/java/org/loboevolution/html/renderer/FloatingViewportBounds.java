@@ -20,6 +20,8 @@
  */
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.util.Objects;
+
 /**
  * The Class FloatingViewportBounds.
  */
@@ -218,7 +220,7 @@ public class FloatingViewportBounds implements FloatingBounds {
 	@Override
 	public boolean equals(Object other) {
 		// Important for layout caching.
-		if (other == this) {
+		if (Objects.equals(other, this)) {
 			return true;
 		}
 		if (!(other instanceof FloatingViewportBounds)) {

@@ -156,9 +156,9 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 				checkPoint1 = endPoint.getPoint();
 			}
 		} else {
-			if (startPoint.getRenderable() == this) {
+			if (Objects.equals(startPoint.getRenderable(), this)) {
 				checkPoint1 = startPoint.getPoint();
-			} else if (endPoint.getRenderable() == this) {
+			} else if (Objects.equals(endPoint.getRenderable(), this)) {
 				checkPoint1 = endPoint.getPoint();
 			}
 		}
@@ -239,9 +239,9 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 				checkPoint1 = endPoint.getPoint();
 			}
 		} else {
-			if (startPoint.getRenderable() == this) {
+			if (Objects.equals(startPoint.getRenderable(), this)) {
 				checkPoint1 = startPoint.getPoint();
-			} else if (endPoint.getRenderable() == this) {
+			} else if (Objects.equals(endPoint.getRenderable(), this)) {
 				checkPoint1 = endPoint.getPoint();
 			}
 		}

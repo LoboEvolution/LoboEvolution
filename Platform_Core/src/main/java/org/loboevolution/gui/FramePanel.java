@@ -67,6 +67,7 @@ import org.loboevolution.ua.ProgressType;
 import org.loboevolution.ua.RequestType;
 import org.loboevolution.ua.TargetType;
 import org.loboevolution.util.Items;
+import org.loboevolution.util.Objects;
 import org.loboevolution.util.Urls;
 import org.loboevolution.util.WrapperException;
 import org.loboevolution.util.gui.WrapperLayout;
@@ -884,7 +885,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 			break;
 		case TOP:
 			NavigatorFrame top = this.getTopFrame();
-			if (top == this) {
+			if (Objects.equals(top, this)) {
 				this.navigateLocal(event);
 			} else {
 				top.navigate(url, method, paramInfo, TargetType.SELF, requestType, this);

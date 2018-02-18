@@ -949,8 +949,8 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 	 *            the new inner text
 	 */
 	public void setInnerText(String newText) {
-		Document document = this.document;
-		if (document == null) {
+		Document doc = this.document;
+		if (doc == null) {
 			logger.error("setInnerText(): Element " + this + " does not belong to a document.");
 			return;
 		}
@@ -961,7 +961,7 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 			}
 		}
 		// Create node and call appendChild outside of synchronized block.
-		Node textNode = document.createTextNode(newText);
+		Node textNode = doc.createTextNode(newText);
 		this.appendChild(textNode);
 	}
 

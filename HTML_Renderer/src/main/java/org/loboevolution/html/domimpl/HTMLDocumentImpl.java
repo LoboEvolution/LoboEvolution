@@ -281,17 +281,17 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 		this.document = this;
 		// Get Window object
-		Window window;
+		Window windowObject;
 		if (rcontext != null) {
-			window = Window.getWindow(rcontext);
-			window.setDocument(this);
+			windowObject = Window.getWindow(rcontext);
+			windowObject.setDocument(this);
 			// Set up Javascript scope
-			this.setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
+			this.setUserData(Executor.SCOPE_KEY, windowObject.getWindowScope(), null);
 		} else {
 			// Plain parsers may use Javascript too.
-			window = null;// new Window(null, ucontext);
+			windowObject = null;// new Window(null, ucontext);
 		}
-		this.window = window;
+		this.window = windowObject;
 	}
 
 	/*
@@ -383,7 +383,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 *             the unsupported encoding exception
 	 */
 	public void load(boolean closeReader) throws IOException, SAXException, UnsupportedEncodingException {
-		WritableLineReader reader;
+		WritableLineReader read;
 		synchronized (this.getTreeLock()) {
 			this.removeAllChildrenImpl();
 			this.setTitle(null);
@@ -391,16 +391,16 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			this.setDefaultTarget(null);
 			this.styleSheets.getCSSStyleSheets().clear();
 			this.styleSheetAggregator = null;
-			reader = this.reader;
+			read = this.reader;
 		}
-		if (reader != null) {
+		if (read != null) {
 			try {
 				HtmlParser parser = new HtmlParser(this.ucontext, this);
-				parser.parse(reader);
+				parser.parse(read);
 			} finally {
 				if (closeReader) {
 					try {
-						reader.close();
+						read.close();
 					} catch (Exception err) {
 						logger.error("load(): Unable to close stream", err);
 					}
@@ -649,9 +649,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	@Override
 	public final URL getFullURL(String uri) {
 		try {
-			String baseURI = this.getBaseURI();
-			URL documentURL = baseURI == null ? null : new URL(baseURI);
-			return Urls.createURL(documentURL, uri);
+			String bsURI = this.getBaseURI();
+			URL docURL = bsURI == null ? null : new URL(bsURI);
+			return Urls.createURL(docURL, uri);
 		} catch (MalformedURLException | UnsupportedEncodingException mfu) {
 			// Try agan, without the baseURI.
 			try {
@@ -1021,8 +1021,8 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 *            the image listener
 	 */
 	protected void loadImage(String relativeUri, ImageListener imageListener) {
-		HtmlRendererContext rcontext = this.getHtmlRendererContext();
-		if (rcontext == null || !rcontext.isImageLoadingEnabled()) {
+		HtmlRendererContext rctext = this.getHtmlRendererContext();
+		if (rctext == null || !rctext.isImageLoadingEnabled()) {
 			// ignore image loading when there's no renderer context.
 			// Consider Cobra users who are only using the parser.
 			imageListener.imageLoaded(BLANK_IMAGE_EVENT);
@@ -1045,7 +1045,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 					info.addListener(imageListener);
 				}
 			} else {
-				UserAgentContext uac = rcontext.getUserAgentContext();
+				UserAgentContext uac = rctext.getUserAgentContext();
 				final HttpRequest httpRequest = uac.createHttpRequest();
 				final ImageInfo newInfo = new ImageInfo();
 				map.put(urlText, newInfo);
@@ -1560,10 +1560,8 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			URL docURL = new URL(documentURI);
 			URLConnection connection = docURL.openConnection();
 			result = connection.getHeaderField("Last-Modified");
-		} catch (NullPointerException npe) {
-			logger.error("Header not found");
 		} catch (Exception e) {
-			logger.error("Connection error: " + e);
+			logger.error(e);
 		}
 
 		return result;

@@ -142,12 +142,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	public UINode findUINode() {
 		// Called in GUI thread always.
-		UINode uiNode = this.uiNode;
-		if (uiNode != null) {
-			return uiNode;
+		UINode node = this.uiNode;
+		if (node != null) {
+			return node;
 		}
-		DOMNodeImpl parentNode = (DOMNodeImpl) this.getParentNode();
-		return parentNode == null ? null : parentNode.findUINode();
+		DOMNodeImpl pNode = (DOMNodeImpl) this.getParentNode();
+		return pNode == null ? null : pNode.findUINode();
 	}
 
 	/*
@@ -266,7 +266,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 *            the nest into matching nodes
 	 * @return the descendents
 	 */
-	public ArrayList<DOMNodeImpl> getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
+	public List<DOMNodeImpl> getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
 		ArrayList<DOMNodeImpl> al = new ArrayList<DOMNodeImpl>();
 		synchronized (this.getTreeLock()) {
 			this.extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
@@ -414,9 +414,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
-				return nl == null ? null : (Node) nl.get(index);
+				return nl == null ? null : nl.get(index);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error("getChildAtIndex(): Bad index=" + index + " for node=" + this + ".");
+				logger.error(iob);
 				return null;
 			}
 		}
@@ -431,7 +431,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	private boolean isAncestorOf(Node other) {
 		DOMNodeImpl parent = (DOMNodeImpl) other.getParentNode();
-		if (parent == this) {
+		if (Objects.equals(parent,this)) {
 			return true;
 		} else if (parent == null) {
 			return false;
@@ -451,7 +451,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		if (!(other instanceof DOMNodeImpl)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 		}
-		if (parent != null && parent == other.getParentNode()) {
+		if (Objects.equals(parent,other.getParentNode())) {
 			int thisIndex = this.getNodeIndex();
 			int otherIndex = ((DOMNodeImpl) other).getNodeIndex();
 			if (thisIndex == -1 || otherIndex == -1) {
@@ -710,8 +710,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public String getBaseURI() {
-		Document document = this.document;
-		return document == null ? null : document.getBaseURI();
+		Document doc = this.document;
+		return doc == null ? null : doc.getBaseURI();
 	}
 
 	/*
@@ -737,8 +737,9 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
 			try {
-				return nl == null ? null : (Node) nl.get(0);
+				return nl == null ? null : nl.get(0);
 			} catch (IndexOutOfBoundsException iob) {
+				logger.error(iob);
 				return null;
 			}
 		}
@@ -756,6 +757,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl == null ? null : nl.get(nl.size() - 1);
 			} catch (IndexOutOfBoundsException iob) {
+				logger.error(iob);
 				return null;
 			}
 		}
@@ -778,6 +780,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl.get(idx - 1);
 			} catch (IndexOutOfBoundsException iob) {
+				logger.error(iob);
 				return null;
 			}
 		}
@@ -800,6 +803,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl.get(idx + 1);
 			} catch (IndexOutOfBoundsException iob) {
+				logger.error(iob);
 				return null;
 			}
 		}
@@ -847,7 +851,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (org.loboevolution.html.parser.HtmlParser.MODIFYING_KEY.equals(key)) {
-			boolean ns = Boolean.TRUE == data;
+			boolean ns = Objects.equals(data, Boolean.TRUE);
 			this.notificationsSuspended = ns;
 			if (!ns) {
 				this.informNodeLoaded();
@@ -863,15 +867,15 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 				}
 			}
 
-			Map<String, Object> userData = this.userData;
+			Map<String, Object> uData = this.userData;
 			if (data != null) {
-				if (userData == null) {
-					userData = new HashMap<String, Object>();
-					this.userData = userData;
+				if (uData == null) {
+					uData = new HashMap<String, Object>();
+					this.userData = uData;
 				}
-				return userData.put(key, data);
-			} else if (userData != null) {
-				return userData.remove(key);
+				return uData.put(key, data);
+			} else if (uData != null) {
+				return uData.remove(key);
 			} else {
 				return null;
 			}
@@ -1212,7 +1216,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public boolean isSameNode(Node other) {
-		return this == other;
+		return Objects.equals(this, other);
 	}
 
 	/*
@@ -1434,8 +1438,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public Object getDocumentItem(String name) {
-		Document document = this.document;
-		return document == null ? null : document.getUserData(name);
+		Document doc = this.document;
+		return doc == null ? null : doc.getUserData(name);
 	}
 
 	/*
@@ -1446,11 +1450,11 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public void setDocumentItem(String name, Object value) {
-		Document document = this.document;
-		if (document == null) {
+		Document doc = this.document;
+		if (doc == null) {
 			return;
 		}
-		document.setUserData(name, value, null);
+		doc.setUserData(name, value, null);
 	}
 
 	/*
@@ -1462,7 +1466,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public final boolean isEqualOrDescendentOf(ModelNode otherContext) {
-		if (otherContext == this) {
+		if (Objects.equals(otherContext, this)) {
 			return true;
 		}
 		Object parent = this.getParentNode();
