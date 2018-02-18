@@ -20,7 +20,6 @@
  */
 package org.loboevolution.html.js;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -258,9 +257,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * Back.
 	 */
 	public void back() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.back();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.back();
 		}
 	}
 
@@ -268,9 +267,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * Blur.
 	 */
 	public void blur() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.blur();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.blur();
 		}
 	}
 
@@ -289,9 +288,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * Close.
 	 */
 	public void close() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.close();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.close();
 		}
 	}
 
@@ -303,9 +302,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return true, if successful
 	 */
 	public boolean confirm(String message) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.confirm(message);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return rctext.confirm(message);
 		} else {
 			return false;
 		}
@@ -345,9 +344,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * Focus.
 	 */
 	public void focus() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.focus();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.focus();
 		}
 	}
 	
@@ -390,8 +389,8 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the window
 	 */
 	public void open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
 			URL url;
 			Object document = this.getWindowDocument();
 			if (document instanceof HTMLDocumentImpl) {
@@ -403,7 +402,7 @@ public class Window extends JSFunction implements AbstractView {
 					throw new IllegalArgumentException("Malformed URI: " + relativeUrl);
 				}
 			}
-			rcontext.open(url, windowName, windowFeatures, replace);
+			rctext.open(url, windowName, windowFeatures, replace);
 		}
 	}
 
@@ -484,9 +483,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the string
 	 */
 	public String prompt(String message, String inputDefault) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.prompt(message, inputDefault);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return rctext.prompt(message, inputDefault);
 		} else {
 			return null;
 		}
@@ -501,9 +500,9 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the y
 	 */
 	public void scrollTo(int x, int y) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.scroll(x, y);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.scroll(x, y);
 		}
 	}
 
@@ -516,9 +515,9 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the y
 	 */
 	public void scrollBy(int x, int y) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.scrollBy(x, y);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.scrollBy(x, y);
 		}
 	}
 
@@ -531,9 +530,9 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the height
 	 */
 	public void resizeTo(int width, int height) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.resizeTo(width, height);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.resizeTo(width, height);
 		}
 	}
 
@@ -546,9 +545,9 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the by height
 	 */
 	public void resizeBy(int byWidth, int byHeight) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.resizeBy(byWidth, byHeight);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.resizeBy(byWidth, byHeight);
 		}
 	}
 
@@ -621,9 +620,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return true, if is closed
 	 */
 	public boolean isClosed() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.isClosed();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return rctext.isClosed();
 		} else {
 			return false;
 		}
@@ -635,9 +634,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the default status
 	 */
 	public String getDefaultStatus() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.getDefaultStatus();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return rctext.getDefaultStatus();
 		} else {
 			return null;
 		}
@@ -690,9 +689,9 @@ public class Window extends JSFunction implements AbstractView {
 		if (this.nameSet) {
 			return this.name;
 		} else {
-			HtmlRendererContext rcontext = this.rcontext;
-			if (rcontext != null) {
-				return rcontext.getName();
+			HtmlRendererContext rctext = this.rcontext;
+			if (rctext != null) {
+				return rctext.getName();
 			} else {
 				return null;
 			}
@@ -716,9 +715,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the parent
 	 */
 	public Window getParent() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return Window.getWindow(rcontext.getParent());
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return Window.getWindow(rctext.getParent());
 		} else {
 			return null;
 		}
@@ -730,9 +729,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the opener
 	 */
 	public Window getOpener() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return Window.getWindow(rcontext.getOpener());
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return Window.getWindow(rctext.getOpener());
 		} else {
 			return null;
 		}
@@ -745,12 +744,12 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the new opener
 	 */
 	public void setOpener(Window opener) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
 			if (opener == null) {
-				rcontext.setOpener(null);
+				rctext.setOpener(null);
 			} else {
-				rcontext.setOpener(opener.rcontext);
+				rctext.setOpener(opener.rcontext);
 			}
 		}
 	}
@@ -770,9 +769,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the status
 	 */
 	public String getStatus() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return rcontext.getStatus();
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return rctext.getStatus();
 		} else {
 			return null;
 		}
@@ -785,9 +784,9 @@ public class Window extends JSFunction implements AbstractView {
 	 *            the new status
 	 */
 	public void setStatus(String message) {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			rcontext.setStatus(message);
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			rctext.setStatus(message);
 		}
 	}
 
@@ -797,9 +796,9 @@ public class Window extends JSFunction implements AbstractView {
 	 * @return the top
 	 */
 	public Window getTop() {
-		HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
-			return Window.getWindow(rcontext.getTop());
+		HtmlRendererContext rctext = this.rcontext;
+		if (rctext != null) {
+			return Window.getWindow(rctext.getTop());
 		} else {
 			return null;
 		}
@@ -969,172 +968,6 @@ public class Window extends JSFunction implements AbstractView {
 	 */
 	public void forceGC() {
 		System.gc();
-	}
-
-	/**
-	 * The Class WeakWindowTask.
-	 */
-	private static abstract class WeakWindowTask implements ActionListener {
-
-		/** The window ref. */
-		private final WeakReference<Window> windowRef;
-
-		/**
-		 * Instantiates a new weak window task.
-		 *
-		 * @param window
-		 *            the window
-		 */
-		public WeakWindowTask(Window window) {
-			this.windowRef = new WeakReference<Window>(window);
-		}
-
-		/**
-		 * Gets the window.
-		 *
-		 * @return the window
-		 */
-		protected Window getWindow() {
-			WeakReference<Window> ref = this.windowRef;
-			return ref == null ? null : (Window) ref.get();
-		}
-	}
-
-	/**
-	 * The Class FunctionTimerTask.
-	 */
-	private static class FunctionTimerTask extends WeakWindowTask {
-		// Implemented as a static WeakWindowTask to allow the Window
-		// to get garbage collected, especially in infinite loop
-		// scenarios.
-		/** The time id int. */
-		private final Integer timeIDInt;
-
-		/** The function ref. */
-		private final WeakReference<Function> functionRef;
-
-		/** The remove task. */
-		private final boolean removeTask;
-
-		/**
-		 * Instantiates a new function timer task.
-		 *
-		 * @param window
-		 *            the window
-		 * @param timeIDInt
-		 *            the time id int
-		 * @param function
-		 *            the function
-		 * @param removeTask
-		 *            the remove task
-		 */
-		public FunctionTimerTask(Window window, Integer timeIDInt, Function function, boolean removeTask) {
-			super(window);
-			this.timeIDInt = timeIDInt;
-			this.functionRef = new WeakReference<Function>(function);
-			this.removeTask = removeTask;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// This executes in the GUI thread and that's good.
-			try {
-				Window window = this.getWindow();
-				if (window == null) {
-					if (logger.isEnabled(Level.INFO)) {
-						logger.info("actionPerformed(): Window is no longer available.");
-					}
-					return;
-				}
-				if (this.removeTask) {
-					window.forgetTask(this.timeIDInt, false);
-				}
-				HTMLDocumentImpl doc = (HTMLDocumentImpl) window.getDocument();
-				if (doc == null) {
-					throw new IllegalStateException("Cannot perform operation when document is unset.");
-				}
-				Function function = this.functionRef.get();
-				if (function == null) {
-					throw new IllegalStateException("Cannot perform operation. Function is no longer available.");
-				}
-				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(),
-						window.getUserAgentContext());
-			} catch (Throwable err) {
-				logger.error("actionPerformed()", err.getCause());
-			}
-		}
-	}
-
-	/**
-	 * The Class ExpressionTimerTask.
-	 */
-	private static class ExpressionTimerTask extends WeakWindowTask {
-		// Implemented as a static WeakWindowTask to allow the Window
-		// to get garbage collected, especially in infinite loop
-		// scenarios.
-		/** The time id int. */
-		private final Integer timeIDInt;
-
-		/** The expression. */
-		private final String expression;
-
-		/** The remove task. */
-		private final boolean removeTask;
-
-		/**
-		 * Instantiates a new expression timer task.
-		 *
-		 * @param window
-		 *            the window
-		 * @param timeIDInt
-		 *            the time id int
-		 * @param expression
-		 *            the expression
-		 * @param removeTask
-		 *            the remove task
-		 */
-		public ExpressionTimerTask(Window window, Integer timeIDInt, String expression, boolean removeTask) {
-			super(window);
-			this.timeIDInt = timeIDInt;
-			this.expression = expression;
-			this.removeTask = removeTask;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// This executes in the GUI thread and that's good.
-			try {
-				Window window = this.getWindow();
-				if (window == null) {
-					if (logger.isEnabled(Level.INFO)) {
-						logger.info("actionPerformed(): Window is no longer available.");
-					}
-					return;
-				}
-				if (this.removeTask) {
-					window.forgetTask(this.timeIDInt, false);
-				}
-				HTMLDocumentImpl doc = (HTMLDocumentImpl) window.getDocument();
-				if (doc == null) {
-					throw new IllegalStateException("Cannot perform operation when document is unset.");
-				}
-				window.eval(this.expression);
-			} catch (Throwable err) {
-				logger.error("actionPerformed()", err.getCause());
-			}
-		}
 	}
 
 	/**
