@@ -136,16 +136,16 @@ public class SVGBasicControl extends SVGStyle {
 		this.modelN = modelNode;
 	}
 
-	public void circle(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgCircle(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
 		Shape circle = new Ellipse2D.Double(viewbox.getX() - viewbox.getR(), viewbox.getY() - viewbox.getR(), 2 * viewbox.getR(), 2 * viewbox.getR());
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, circle, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 	}
 
-	public void rectangle(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgRectangle(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		Shape rect;
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), 0);
@@ -161,37 +161,37 @@ public class SVGBasicControl extends SVGStyle {
 			rect = new Rectangle2D.Float(viewbox.getX(), viewbox.getY(), viewbox.getWidth(), viewbox.getHeight());
 		}
 
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, rect, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 
 	}
 
-	public void ellipse(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgEllipse(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		SVGViewBoxImpl viewbox = new SVGViewBoxImpl(modelN, svgi.getX(), svgi.getY(), svgi.getWidth(), svgi.getHeight(), svgi.getR());
 		Point2D.Float center = new Point2D.Float(viewbox.getX(), viewbox.getY());
 		Point2D.Float corner = new Point2D.Float(viewbox.getX() - svgi.getRx(), viewbox.getY() - svgi.getRy());
 		Ellipse2D.Float ellipse2d = new Ellipse2D.Float();
 		ellipse2d.setFrameFromCenter(center, corner);
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, ellipse2d, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 	}
 
-	public void line(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgLine(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		Point2D.Float p = new Point2D.Float(svgi.getX1(), svgi.getY1());
 		Point2D.Float p1 = p;
 		p = new Point2D.Float(svgi.getX2(), svgi.getY2());
 		Point2D.Float p2 = p;
 		Line2D line2d = new Line2D.Float(p1, p2);
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, line2d, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 	}
 
-	public void polyline(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgPolyline(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		SVGPointList points = svgi.getPoilist();
@@ -208,13 +208,13 @@ public class SVGBasicControl extends SVGStyle {
 			}
 		}
 		path.closePath();
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 
 	}
 
-	public void path(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgPath(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		Point2D lastControlPoint = null;
@@ -523,13 +523,13 @@ public class SVGBasicControl extends SVGStyle {
 			}
 		}
 
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 
 	}
 
-	public void use(Graphics2D g2d, SVGInfo svgi, SVGSVGElementImpl svg) {
+	public void svgUse(Graphics2D g2d, SVGInfo svgi, SVGSVGElementImpl svg) {
 
 		String href = svgi.getHref();
 		float x = svgi.getX();
@@ -562,7 +562,7 @@ public class SVGBasicControl extends SVGStyle {
 		}
 	}
 
-	public void transform(Graphics2D g2d, SVGInfo svgi, SVGInfo group) {
+	public void svgTransform(Graphics2D g2d, SVGInfo svgi, SVGInfo group) {
 
 		SVGTransformList transformList = null;
 
@@ -611,7 +611,7 @@ public class SVGBasicControl extends SVGStyle {
 		}
 	}
 
-	public void text(Graphics2D g2d, SVGInfo svgi, int numObject) {
+	public void svgText(Graphics2D g2d, SVGInfo svgi, int numObject) {
 		animate(svgi, numObject);
 		GeneralPath path = new GeneralPath();
 		path.setWindingRule(Path2D.WIND_NON_ZERO);
@@ -659,9 +659,9 @@ public class SVGBasicControl extends SVGStyle {
 			path.append(textShape, false);
 		}
 		path.closePath();
-		transform(g2d, svgi, new SVGInfo());
+		svgTransform(g2d, svgi, new SVGInfo());
 		drawFillAndStroke(g2d, path, svgi);
-		clip(svgi, g2d);
+		svgClip(svgi, g2d);
 	}
 
 	public ArrayList<SVGInfo> childNodes(Node element) {
@@ -840,7 +840,7 @@ public class SVGBasicControl extends SVGStyle {
 		return useList;
 	}
 	
-	public void clip(SVGInfo svginfo, Graphics2D g2d) {
+	public void svgClip(SVGInfo svginfo, Graphics2D g2d) {
 		if (svginfo.getClipPath() != null && svginfo.getClipPath().contains("url")) {
 			String clipElemId = svginfo.getClipPath().split("#")[1].replace(")", "").trim();
 			Element elementById = modelN.getOwnerDocument().getElementById(clipElemId);
@@ -856,29 +856,29 @@ public class SVGBasicControl extends SVGStyle {
 	public void draw(Graphics2D g2d, SVGInfo svgi, SVGSVGElementImpl modelNode, int index){
 		switch (svgi.getMethod()) {
 		case CIRCLE:
-			circle(g2d, svgi, index);
+			svgCircle(g2d, svgi, index);
 			break;
 		case RECT:
-			rectangle(g2d, svgi, index);
+			svgRectangle(g2d, svgi, index);
 			break;
 		case ELLIPSE:
-			ellipse(g2d, svgi, index);
+			svgEllipse(g2d, svgi, index);
 			break;
 		case LINE:
-			line(g2d, svgi, index);
+			svgLine(g2d, svgi, index);
 			break;
 		case POLYLINE:
 		case POLYGON:
-			polyline(g2d, svgi, index);
+			svgPolyline(g2d, svgi, index);
 			break;
 		case PATH:
-			path(g2d, svgi, index);
+			svgPath(g2d, svgi, index);
 			break;
 		case USE:
-			use(g2d, svgi, modelNode);
+			svgUse(g2d, svgi, modelNode);
 			break;
 		case TEXT:
-			text(g2d, svgi, index);
+			svgText(g2d, svgi, index);
 			break;
 		default:
 			break;

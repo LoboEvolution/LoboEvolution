@@ -56,7 +56,7 @@ public class SVGControl extends SVGBasicControl {
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			SVGInfo group = getSvgiGroup();
-			transform(g2d, new SVGInfo(), group);
+			svgTransform(g2d, new SVGInfo(), group);
 
 			for (int i = 0; i < svgList.size(); i++) {
 				SVGInfo svgi = svgList.get(i);
