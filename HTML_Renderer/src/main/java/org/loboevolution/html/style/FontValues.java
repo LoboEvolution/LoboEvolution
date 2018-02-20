@@ -203,7 +203,6 @@ public class FontValues extends HtmlValues {
 				}
 				return parentFontSize;
 			case INITIAL:
-				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
 			default:
 				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
 			}

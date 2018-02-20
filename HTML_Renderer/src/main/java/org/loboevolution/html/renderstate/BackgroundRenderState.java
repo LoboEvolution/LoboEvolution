@@ -112,9 +112,6 @@ public class BackgroundRenderState implements CSSValuesProperties {
 				}
 				break;
 			case INITIAL:
-				bg.setBackgroundYPositionAbsolute(true);
-				bg.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, 0));
-				break;
 			default:
 				bg.setBackgroundYPositionAbsolute(true);
 				bg.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, prevRenderState, 0));
@@ -489,9 +486,6 @@ public class BackgroundRenderState implements CSSValuesProperties {
 				}
 				break;
 			case INITIAL:
-				bg.setBackgroundXPositionAbsolute(true);
-				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));
-				break;
 			default:
 				bg.setBackgroundXPositionAbsolute(true);
 				bg.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, prevRenderState, 0));

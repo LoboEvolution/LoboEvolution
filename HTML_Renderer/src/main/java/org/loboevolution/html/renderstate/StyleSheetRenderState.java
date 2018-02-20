@@ -288,8 +288,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				displayInt = this.getPreviousRenderState().getDisplay();
 				break;
 			case INITIAL:
-				displayInt = this.getDefaultDisplay();
-				break;
 			default:
 				displayInt = this.getDefaultDisplay();
 				break;
@@ -584,8 +582,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					td |= this.getPreviousRenderState().getTextDecorationMask();
 					break;
 				case INITIAL:
-					td |= MASK_TEXTDECORATION_NONE;
-					break;
 				default:
 					td |= MASK_TEXTDECORATION_NONE;
 					break;
@@ -637,8 +633,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				tt |= this.getPreviousRenderState().getTextTransform();
 				break;
 			case INITIAL:
-				tt |= TEXTTRANSFORM_NONE;
-				break;
 			default:
 				tt |= TEXTTRANSFORM_NONE;
 				break;
@@ -1097,8 +1091,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					visibility = this.getPreviousRenderState().getVisibility();
 					break;
 				case INITIAL:
-					visibility = VISIBILITY_VISIBLE;
-					break;
 				default:
 					visibility = VISIBILITY_VISIBLE;
 					break;
@@ -1148,8 +1140,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					position = this.getPreviousRenderState().getPosition();
 					break;
 				case INITIAL:
-					position = POSITION_STATIC;
-					break;
 				default:
 					position = POSITION_STATIC;
 					break;
@@ -1196,8 +1186,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					floatValue = this.getPreviousRenderState().getFloat();
 					break;
 				case INITIAL:
-					floatValue = FLOAT_NONE;
-					break;
 				default:
 					floatValue = FLOAT_NONE;
 					break;
@@ -1259,8 +1247,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				overflow = this.getPreviousRenderState().getOverflowX();
 				break;
 			case INITIAL:
-				overflow = OVERFLOW_NONE;
-				break;
 			default:
 				overflow = OVERFLOW_NONE;
 				break;
@@ -1311,8 +1297,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				overflow = this.getPreviousRenderState().getOverflowY();
 				break;
 			case INITIAL:
-				overflow = OVERFLOW_NONE;
-				break;
 			default:
 				overflow = OVERFLOW_NONE;
 				break;
@@ -1423,8 +1407,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					prevCursorOpt = this.getPreviousRenderState().getCursor();
 					break;
 				case INITIAL:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					break;
 				default:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 					break;
@@ -1446,7 +1428,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			case INHERIT:
 				return this.getPreviousRenderState().getBoxSizing();
 			case INITIAL:
-				return CONTENT_BOX;
 			default:
 				return CONTENT_BOX;
 			}
