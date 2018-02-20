@@ -48,7 +48,9 @@ import org.loboevolution.html.layout.SelectLayout;
 import org.loboevolution.html.layout.SpanLayout;
 import org.loboevolution.html.layout.StrikeLayout;
 import org.loboevolution.html.layout.StrongLayout;
+import org.loboevolution.html.layout.TableCellLayout;
 import org.loboevolution.html.layout.TableLayout;
+import org.loboevolution.html.layout.TableRowLayout;
 import org.loboevolution.html.layout.TextAreaLayout;
 import org.loboevolution.html.layout.ULayout;
 
@@ -97,6 +99,8 @@ public class HtmlLayoutMapping implements HtmlProperties {
 		el.put(HEAD, new HeadLayout());
 		el.put(IMG, new ImgLayout());
 		el.put(TABLE, new TableLayout());
+		el.put(TR, new TableRowLayout());
+		el.put(TD, new TableCellLayout());
 
 		ChildrenLayout children = new ChildrenLayout();
 		el.put(HTML, children);

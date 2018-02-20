@@ -43,9 +43,15 @@ public abstract class CommonLayout implements MarkupLayout {
 	/** The Constant DISPLAY_LIST_ITEM. */
 	protected static final int DISPLAY_LIST_ITEM = 3;
 
+	/** The Constant DISPLAY_TABLE_ROW. */
+	protected static final int DISPLAY_TABLE_ROW = 4;
+	
+	/** The Constant DISPLAY_TABLE_CELL. */
+	protected static final int DISPLAY_TABLE_CELL = 5;
+
 	/** The Constant DISPLAY_TABLE. */
 	protected static final int DISPLAY_TABLE = 6;
-
+	
 	/** The Constant DISPLAY_INLINE_BLOCK. */
 	protected static final int DISPLAY_INLINE_BLOCK = 8;
 
@@ -107,6 +113,8 @@ public abstract class CommonLayout implements MarkupLayout {
 			}
 			break;
 		case DISPLAY_BLOCK:
+		case DISPLAY_TABLE:
+		case DISPLAY_TABLE_ROW:
 			bodyLayout.layoutRBlock(markupElement);
 			break;
 		case DISPLAY_LIST_ITEM:
@@ -117,12 +125,10 @@ public abstract class CommonLayout implements MarkupLayout {
 				bodyLayout.layoutListItem(markupElement);
 			}
 			break;
-		case DISPLAY_TABLE:
-			bodyLayout.layoutRTable(markupElement);
-			break;
 		case DISPLAY_INLINE_BLOCK:
 			bodyLayout.layoutRInlineBlock(markupElement);
 			break;
+		case DISPLAY_TABLE_CELL:
 		default:
 			// Assume INLINE
 			bodyLayout.layoutMarkup(markupElement);

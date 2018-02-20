@@ -35,6 +35,7 @@ import org.loboevolution.html.style.RenderThreadState;
 import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLTableElement;
+import org.w3c.dom.Node;
 
 /**
  * The Class TableCellRenderState.
@@ -62,7 +63,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	 *            the element
 	 */
 	public TableCellRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CELL);
+		super(prevRenderState, element, DISPLAY_TABLE_CELL);
 	}
 
 	/*
@@ -240,7 +241,7 @@ public class TableCellRenderState extends DisplayRenderState {
 	 * @return the table element
 	 */
 	private HTMLTableElement getTableElement() {
-		org.w3c.dom.Node ancestor = this.element.getParentNode();
+		Node ancestor = this.element.getParentNode();
 		while (ancestor != null && !(ancestor instanceof HTMLTableElement)) {
 			ancestor = ancestor.getParentNode();
 		}

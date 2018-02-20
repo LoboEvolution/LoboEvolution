@@ -41,7 +41,7 @@ public class TableCaptionRenderState extends DisplayRenderState {
 	 *            the element
 	 */
 	public TableCaptionRenderState(RenderState prevRenderState, HTMLElementImpl element) {
-		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CAPTION);
+		super(prevRenderState, element, DISPLAY_TABLE_CAPTION);
 	}
 
 

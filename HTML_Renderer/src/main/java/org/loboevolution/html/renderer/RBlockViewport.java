@@ -52,7 +52,6 @@ import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.info.FloatingInfo;
 import org.loboevolution.html.layout.MarkupLayout;
 import org.loboevolution.html.layout.MiscLayout;
@@ -743,23 +742,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 		renderable.setOriginalParent(this);
 		this.positionRBlock(markupElement, renderable);
-	}
-
-	/**
-	 * Layout r table.
-	 *
-	 * @param markupElement
-	 *            the markup element
-	 */
-	public final void layoutRTable(HTMLElementImpl markupElement) {
-		RElement renderable = (RElement) markupElement.getUINode();
-		if (renderable == null) {
-			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext,
-					container);
-			markupElement.setUINode(renderable);
-		}
-		renderable.setOriginalParent(this);
-		this.positionRElement(markupElement, renderable, markupElement instanceof HTMLTableElementImpl, true, true);
 	}
 
 	/**

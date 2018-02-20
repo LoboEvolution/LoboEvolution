@@ -355,8 +355,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			if (ac == null) {
 				// Saved UI nodes must be reused, because they
 				// can contain a collection of GUI components.
-				ac = new RTableCell(columnNode, this.parserContext, this.rendererContext, this.frameContext,
-						this.container);
+				ac = new RTableCell(columnNode, this.parserContext, this.rendererContext, this.frameContext, this.container);
 				ac.setParent(this.relement);
 				columnNode.setUINode(ac);
 			}

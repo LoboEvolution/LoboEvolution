@@ -18,9 +18,6 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Dec 4, 2005
- */
 package org.loboevolution.html.domimpl;
 
 import java.util.ArrayList;
@@ -29,6 +26,8 @@ import org.loboevolution.html.dombl.DescendentHTMLCollection;
 import org.loboevolution.html.dombl.NodeVisitor;
 import org.loboevolution.html.dombl.StopVisitorException;
 import org.loboevolution.html.domfilter.NodeFilter;
+import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.renderstate.TableRowRenderState;
 import org.loboevolution.w3c.html.HTMLCollection;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLTableRowElement;
@@ -306,5 +305,10 @@ public class HTMLTableRowElementImpl extends HTMLAbstractUIElement implements HT
 	@Override
 	public HTMLElement insertCell() {
 		return this.insertCell(-1, TD);
+	}
+	
+	@Override
+	protected RenderState createRenderState(RenderState prevRenderState) {
+		return new TableRowRenderState(prevRenderState, this);
 	}
 }
