@@ -76,6 +76,8 @@ import org.loboevolution.w3c.svg.SVGPoint;
 public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElement {
 
 	private SVGAnimatedPathData pathData = new SVGAnimatedPathDataImpl();
+	
+	private static final String PATTERN_PARTS = "([MmLlHhVvAaQqTtCcSsZz])|([-+]?((\\\\d*\\\\.\\\\d+)|(\\\\d+))([eE][-+]?\\\\d+)?)";
 
 	public SVGPathElementImpl(String name) {
 		super(name);
@@ -458,6 +460,99 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 		return i;
 	}
 
+	private ArrayList<String> parts() {
+
+		final Matcher matchPathCmd = Pattern.compile(PATTERN_PARTS).matcher(getD());
+		LinkedList<String> tokens = new LinkedList<String>();
+		while (matchPathCmd.find()) {
+			tokens.addLast(matchPathCmd.group());
+		}
+
+		ArrayList<String> list = new ArrayList<String>();
+
+		char charCmd = 'Z';
+		while (!tokens.isEmpty()) {
+			String curToken = tokens.removeFirst();
+			char initChar = curToken.charAt(0);
+			if ((initChar >= 'A' && initChar <= 'Z') || (initChar >= 'a' && initChar <= 'z')) {
+				charCmd = initChar;
+			} else {
+				tokens.addFirst(curToken);
+			}
+
+			String curCmd = String.valueOf(charCmd);
+
+			switch (curCmd) {
+			case "Z":
+			case "z":
+				list.add(curCmd);
+				break;
+			case "H":
+			case "h":
+			case "V":
+			case "v":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				break;
+			case "L":
+			case "l":
+			case "T":
+			case "t":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				break;
+			case "M":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				curCmd = "L";
+				break;
+			case "m":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				curCmd = "l";
+				break;
+			case "Q":
+			case "q":
+			case "S":
+			case "s":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				break;
+			case "C":
+			case "c":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				break;
+
+			case "A":
+			case "a":
+				list.add(curCmd);
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				list.add(nextString(tokens));
+				break;
+			default:
+				throw new RuntimeException("Invalid path element");
+			}
+		}
+		return list;
+	}
+	
 	private float convertToFloat(String value) {
 		try {
 			float f = Float.parseFloat(value);
@@ -476,148 +571,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 		}
 	}
 
-	private ArrayList<String> parts() {
-
-		final Matcher matchPathCmd = Pattern
-				.compile("([MmLlHhVvAaQqTtCcSsZz])|([-+]?((\\d*\\.\\d+)|(\\d+))([eE][-+]?\\d+)?)").matcher(getD());
-		LinkedList<String> tokens = new LinkedList<String>();
-		while (matchPathCmd.find()) {
-			tokens.addLast(matchPathCmd.group());
-		}
-
-		ArrayList<String> list = new ArrayList<String>();
-
-		char charCmd = 'Z';
-		while (!tokens.isEmpty()) {
-			String curToken = tokens.removeFirst();
-			char initChar = curToken.charAt(0);
-			if (initChar >= 'A' && initChar <= 'Z' || initChar >= 'a' && initChar <= 'z') {
-				charCmd = initChar;
-			} else {
-				tokens.addFirst(curToken);
-			}
-
-			String curCmd = String.valueOf(charCmd);
-
-			switch (curCmd) {
-			case "M":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				curCmd = "L";
-				break;
-			case "m":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				curCmd = "l";
-				break;
-			case "L":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "l":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "H":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				break;
-			case "h":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				break;
-			case "V":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				break;
-			case "v":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				break;
-			case "A":
-			case "a":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "Q":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "q":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "T":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "t":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "C":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "c":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "S":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "s":
-				list.add(curCmd);
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				list.add(nextString(tokens));
-				break;
-			case "Z":
-			case "z":
-				list.add(curCmd);
-
-				break;
-			default:
-				throw new RuntimeException("Invalid path element");
-			}
-		}
-		return list;
-	}
-
-	static protected String nextString(LinkedList<String> l) {
+	private String nextString(LinkedList<String> l) {
 		return l.removeFirst();
 	}
 }

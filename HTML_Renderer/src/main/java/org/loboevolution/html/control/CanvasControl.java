@@ -332,18 +332,25 @@ public class CanvasControl extends BaseControl {
 		} else if ("right".equals(ta)) {
 			x = x - metrics.stringWidth(ci.getText());
 		}
-
-		if ("baseline".equals(bs)) {
+		
+		switch (bs) {
+		case "baseline":
 			y = y - metrics.getLeading() + metrics.getAscent();
-		} else if ("top".equals(bs)) {
+			break;
+		case "top":
 			y = y - metrics.getLeading();
-		} else if ("middle".equals(bs)) {
+			break;
+		case "middle":
 			y = y - metrics.getLeading() - metrics.getAscent() / 2;
-		} else if ("bottom".equals(bs) || "text-bottom".equals(bs)) {
+			break;
+		case "bottom":
+		case "text-bottom":
 			y = y - metrics.getHeight();
-		} else {
+			break;
+		default:
 			y = y + metrics.getLeading() + metrics.getAscent();
-		}
+			break;
+		}		
 
 		return new Point2D.Float(x, y);
 	}
