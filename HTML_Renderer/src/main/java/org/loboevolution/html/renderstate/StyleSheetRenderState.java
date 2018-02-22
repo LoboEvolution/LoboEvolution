@@ -284,6 +284,9 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			case INLINE_BLOCK:
 				displayInt = DISPLAY_INLINE_BLOCK;
 				break;
+			case INLINE_TABLE:
+				displayInt = DISPLAY_INLINE_TABLE;
+				break;
 			case INHERIT:
 				displayInt = this.getPreviousRenderState().getDisplay();
 				break;

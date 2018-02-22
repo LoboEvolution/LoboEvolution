@@ -54,6 +54,10 @@ public abstract class CommonLayout implements MarkupLayout {
 	
 	/** The Constant DISPLAY_INLINE_BLOCK. */
 	protected static final int DISPLAY_INLINE_BLOCK = 8;
+	
+	/** The Constant DISPLAY_INLINE_TABLE. */
+	protected static final int DISPLAY_INLINE_TABLE = 9;
+	
 
 	/** The display. */
 	private final int display;
@@ -126,6 +130,7 @@ public abstract class CommonLayout implements MarkupLayout {
 			}
 			break;
 		case DISPLAY_INLINE_BLOCK:
+		case DISPLAY_INLINE_TABLE:
 			bodyLayout.layoutRInlineBlock(markupElement);
 			break;
 		case DISPLAY_TABLE_CELL:

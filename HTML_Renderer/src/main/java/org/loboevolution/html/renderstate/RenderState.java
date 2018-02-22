@@ -92,6 +92,9 @@ public interface RenderState {
 
 	/** The display inline block. */
 	int DISPLAY_INLINE_BLOCK = 8;
+	
+	/** The display inline table. */
+	int DISPLAY_INLINE_TABLE = 9;
 
 	/** The ws normal. */
 	int WS_NORMAL = 0;

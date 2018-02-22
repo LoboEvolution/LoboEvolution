@@ -118,6 +118,9 @@ public interface CSSValuesProperties {
 
 	/** The Constant INLINE_BLOCK. */
 	String INLINE_BLOCK = "inline-block";
+	
+	/** The Constant INLINE_TABLE. */
+	String INLINE_TABLE = "inline-table";
 
 	/** The Constant INSIDE. */
 	String INSIDE = "inside";
