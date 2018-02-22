@@ -420,17 +420,14 @@ public class HtmlValues implements CSSValuesProperties {
 		case DECIMAL_LEADING_ZERO:
 			return ListStyle.TYPE_DECIMAL_LEADING_ZERO;
 		case LOWER_ALPHA:
-			return ListStyle.TYPE_LOWER_ALPHA;
 		case LOWER_LATIN:
 			return ListStyle.TYPE_LOWER_ALPHA;
 		case UPPER_ALPHA:
-			return ListStyle.TYPE_UPPER_ALPHA;
 		case UPPER_LATIN:
 			return ListStyle.TYPE_UPPER_ALPHA;
 		case LOWER_ROMAN:
 			return ListStyle.TYPE_LOWER_ROMAN;
 		case UPPER_ROMAN:
-			return ListStyle.TYPE_UPPER_ROMAN;
 		case INITIAL:
 			return ListStyle.TYPE_UPPER_ROMAN;
 		default:

@@ -566,9 +566,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			while (tok.hasMoreTokens()) {
 				String token = tok.nextToken();
 				switch (token) {
-				case NONE:
-					td |= MASK_TEXTDECORATION_NONE;
-					break;
 				case UNDERLINE:
 					td |= MASK_TEXTDECORATION_UNDERLINE;
 					break;
@@ -584,6 +581,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				case INHERIT:
 					td |= this.getPreviousRenderState().getTextDecorationMask();
 					break;
+				case NONE:
 				case INITIAL:
 				default:
 					td |= MASK_TEXTDECORATION_NONE;
@@ -620,9 +618,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		if (tdText != null) {
 
 			switch (tdText) {
-			case NONE:
-				tt |= TEXTTRANSFORM_NONE;
-				break;
 			case CAPITALIZE:
 				tt |= TEXTTRANSFORM_CAPITALIZE;
 				break;
@@ -635,6 +630,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			case INHERIT:
 				tt |= this.getPreviousRenderState().getTextTransform();
 				break;
+			case NONE:
 			case INITIAL:
 			default:
 				tt |= TEXTTRANSFORM_NONE;
@@ -1130,9 +1126,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				case ABSOLUTE:
 					position = POSITION_ABSOLUTE;
 					break;
-				case STATIC:
-					position = POSITION_STATIC;
-					break;
 				case RELATIVE:
 					position = POSITION_RELATIVE;
 					break;
@@ -1142,6 +1135,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				case INHERIT:
 					position = this.getPreviousRenderState().getPosition();
 					break;
+				case STATIC:
 				case INITIAL:
 				default:
 					position = POSITION_STATIC;
@@ -1359,19 +1353,14 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 
 				switch (cursorTL) {
 				case AUTO:
+				case TEXT_CSS:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 					break;
 				case CROSSHAIR:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
 					break;
-				case DEFAULT:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-					break;
 				case E_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
-					break;
-				case GRAB:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					break;
 				case MOVE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
@@ -1384,7 +1373,8 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					break;
 				case NW_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.NW_RESIZE_CURSOR));
-					break;	
+					break;
+				case GRAB:
 				case POINTER:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 					break;
@@ -1397,9 +1387,6 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				case SW_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.SW_RESIZE_CURSOR));
 					break;
-				case TEXT_CSS:
-					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-					break;
 				case W_RESIZE:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.W_RESIZE_CURSOR));
 					break;
@@ -1409,6 +1396,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 				case INHERIT:
 					prevCursorOpt = this.getPreviousRenderState().getCursor();
 					break;
+				case DEFAULT:
 				case INITIAL:
 				default:
 					prevCursorOpt = Optional.of(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
