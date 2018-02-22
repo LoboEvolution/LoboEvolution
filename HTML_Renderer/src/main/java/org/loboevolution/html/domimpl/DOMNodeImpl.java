@@ -86,14 +86,14 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	protected volatile Document document;
 
 	/**
-	 * A tree lock is less deadlock-prone than a node-level lock. This is
-	 * assigned in setOwnerDocument.
+	 * A tree lock is less deadlock-prone than a node-level lock. This is assigned
+	 * in setOwnerDocument.
 	 */
 	private volatile Object treeLock = this;
-		
+
 	/** The user data. */
 	private Map<String, Object> userData;
-	
+
 	/** The user data handlers. */
 	private Map<String, UserDataHandler> userDataHandlers;
 
@@ -102,13 +102,13 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 
 	/** The render state. */
 	private RenderState renderState = INVALID_RENDER_STATE;
-	
+
 	/** The children collection. */
 	private ChildHTMLCollection childrenCollection;
 
 	/** The prefix. */
 	private volatile String prefix;
-	
+
 	/** The parent node. */
 	protected volatile Node parentNode;
 
@@ -257,8 +257,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	}
 
 	/**
-	 * Creates an <code>ArrayList</code> of descendent nodes that the given
-	 * filter condition.
+	 * Creates an <code>ArrayList</code> of descendent nodes that the given filter
+	 * condition.
 	 *
 	 * @param filter
 	 *            the filter
@@ -275,8 +275,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	}
 
 	/**
-	 * Extracts all descendents that match the filter, except those descendents
-	 * of nodes that match the filter.
+	 * Extracts all descendents that match the filter, except those descendents of
+	 * nodes that match the filter.
 	 *
 	 * @param filter
 	 *            the filter
@@ -327,8 +327,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	}
 
 	/**
-	 * Should create a node with some cloned properties, like the node name, but
-	 * not attributes or children.
+	 * Should create a node with some cloned properties, like the node name, but not
+	 * attributes or children.
 	 *
 	 * @return the node
 	 */
@@ -416,7 +416,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl == null ? null : nl.get(index);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
 				return null;
 			}
 		}
@@ -431,7 +430,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	private boolean isAncestorOf(Node other) {
 		DOMNodeImpl parent = (DOMNodeImpl) other.getParentNode();
-		if (Objects.equals(parent,this)) {
+		if (Objects.equals(parent, this)) {
 			return true;
 		} else if (parent == null) {
 			return false;
@@ -451,7 +450,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		if (!(other instanceof DOMNodeImpl)) {
 			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Unknwon node implementation");
 		}
-		if (Objects.equals(parent,other.getParentNode())) {
+		if (Objects.equals(parent, other.getParentNode())) {
 			int thisIndex = this.getNodeIndex();
 			int otherIndex = ((DOMNodeImpl) other).getNodeIndex();
 			if (thisIndex == -1 || otherIndex == -1) {
@@ -739,7 +738,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl == null ? null : nl.get(0);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
 				return null;
 			}
 		}
@@ -757,7 +755,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl == null ? null : nl.get(nl.size() - 1);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
 				return null;
 			}
 		}
@@ -780,7 +777,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl.get(idx - 1);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
 				return null;
 			}
 		}
@@ -803,7 +799,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			try {
 				return nl.get(idx + 1);
 			} catch (IndexOutOfBoundsException iob) {
-				logger.error(iob);
 				return null;
 			}
 		}
@@ -838,7 +833,6 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public Object getFeature(String feature, String version) {
-		// TODO What should this do?
 		return null;
 	}
 
@@ -938,7 +932,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 */
 	@Override
 	public abstract String getNodeValue() throws DOMException;
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1433,8 +1427,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.html.render.RenderableContext#getDocumentItem(
-	 * String)
+	 * @see org.loboevolution.html.render.RenderableContext#getDocumentItem( String)
 	 */
 	@Override
 	public Object getDocumentItem(String name) {
@@ -1445,8 +1438,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.html.render.RenderableContext#setDocumentItem(
-	 * String, java.lang.Object)
+	 * @see org.loboevolution.html.render.RenderableContext#setDocumentItem( String,
+	 * java.lang.Object)
 	 */
 	@Override
 	public void setDocumentItem(String name, Object value) {
@@ -1588,7 +1581,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			doc.allInvalidated(true);
 		}
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -1767,8 +1760,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * Sets the a tree lock is less deadlock-prone than a node-level lock.
 	 *
 	 * @param treeLock
-	 *            the new a tree lock is less deadlock-prone than a node-level
-	 *            lock
+	 *            the new a tree lock is less deadlock-prone than a node-level lock
 	 */
 	public void setTreeLock(Object treeLock) {
 		this.treeLock = treeLock;

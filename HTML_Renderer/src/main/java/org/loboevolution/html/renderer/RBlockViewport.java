@@ -61,6 +61,7 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.ArrayUtilities;
 import org.w3c.dom.Node;
 
 /**
@@ -1516,7 +1517,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		if (sr != null) {
 			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			Range range = MarkupUtilities.findRenderables(array, clipBounds, true);
-			baseIterator = org.loboevolution.util.ArrayUtilities.iterator(array, range.getOffset(), range.getLength());
+			baseIterator = ArrayUtilities.iterator(array, range.getOffset(), range.getLength());
 		}
 		SortedSet others = this.positionedRenderables;
 		if (others == null || others.isEmpty()) {
@@ -2299,29 +2300,30 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			if (!(node instanceof HTMLElementImpl)) {
 				fl = Boolean.TRUE;
 				this.isFloatLimit = Boolean.TRUE;
-			}
-			HTMLElementImpl element = (HTMLElementImpl) node;
-			int position = getPosition(element);
-			if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
+			} else {
+				HTMLElementImpl element = (HTMLElementImpl) node;
+				int position = getPosition(element);
+				if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
+					fl = Boolean.TRUE;
+					this.isFloatLimit = Boolean.TRUE;
+				}
+				element.getCurrentStyle();
+				RenderState rs = element.getRenderState();
+				int floatValue = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
+				if (floatValue != RenderState.FLOAT_NONE) {
+					fl = Boolean.TRUE;
+					this.isFloatLimit = Boolean.TRUE;
+				}
+				int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
+				int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
+				if (overflowX == RenderState.OVERFLOW_AUTO || overflowX == RenderState.OVERFLOW_SCROLL
+						|| overflowY == RenderState.OVERFLOW_AUTO || overflowY == RenderState.OVERFLOW_SCROLL) {
+					fl = Boolean.TRUE;
+					this.isFloatLimit = Boolean.TRUE;
+				}
 				fl = Boolean.TRUE;
 				this.isFloatLimit = Boolean.TRUE;
 			}
-			element.getCurrentStyle();
-			RenderState rs = element.getRenderState();
-			int floatValue = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
-			if (floatValue != RenderState.FLOAT_NONE) {
-				fl = Boolean.TRUE;
-				this.isFloatLimit = Boolean.TRUE;
-			}
-			int overflowX = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowX();
-			int overflowY = rs == null ? RenderState.OVERFLOW_NONE : rs.getOverflowY();
-			if (overflowX == RenderState.OVERFLOW_AUTO || overflowX == RenderState.OVERFLOW_SCROLL
-					|| overflowY == RenderState.OVERFLOW_AUTO || overflowY == RenderState.OVERFLOW_SCROLL) {
-				fl = Boolean.TRUE;
-				this.isFloatLimit = Boolean.TRUE;
-			}
-			fl = Boolean.TRUE;
-			this.isFloatLimit = Boolean.TRUE;
 		}
 		return fl.booleanValue();
 	}
