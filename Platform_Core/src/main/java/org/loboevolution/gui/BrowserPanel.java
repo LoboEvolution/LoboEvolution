@@ -85,16 +85,16 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	private final JMenuBar menuBar;
 
 	/** The frame panel. */
-	private transient final FramePanel framePanel;
+	private final transient FramePanel framePanel;
 
 	/** The address bar panel. */
-	private transient final AddressBarPanel addressBarPanel;
+	private final transient AddressBarPanel addressBarPanel;
 
 	/** The shared tool bar panel. */
-	private transient final SharedToolBarPanel sharedToolBarPanel;
+	private final transient SharedToolBarPanel sharedToolBarPanel;
 
 	/** The status bar panel. */
-	private transient final StatusBarPanel statusBarPanel;
+	private final transient StatusBarPanel statusBarPanel;
 	
 	/** The default status. */
 	private String defaultStatus;
@@ -103,10 +103,10 @@ public class BrowserPanel extends JPanel implements NavigatorWindow, BrowserWind
 	private String status;
 	
 	/** The menues by id. */
-	private transient final Map<String, JMenu> menuesById = new HashMap<String, JMenu>(1);
+	private final transient Map<String, JMenu> menuesById = new HashMap<String, JMenu>(1);
 
 	/** The event. */
-	private transient final EventDispatch2 EVENT = new LocalEventDispatch();
+	private final transient EventDispatch2 EVENT = new LocalEventDispatch();
 
 	/** The latest accessed frame. */
 	private transient volatile NavigatorFrame latestAccessedFrame = null;

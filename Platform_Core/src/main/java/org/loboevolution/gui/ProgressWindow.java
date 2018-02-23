@@ -53,7 +53,7 @@ public class ProgressWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The status progress bar. */
-	private transient final OpenProgressBar statusProgressBar;
+	private final transient OpenProgressBar statusProgressBar;
 
 	/** The status label. */
 	private final JLabel statusLabel;

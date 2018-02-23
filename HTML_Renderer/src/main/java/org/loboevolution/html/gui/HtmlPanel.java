@@ -70,16 +70,16 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private static final long serialVersionUID = 1L;
 
 	/** The selection dispatch. */
-	private transient final EventDispatch2 selectionDispatch = new SelectionDispatch();
+	private final transient EventDispatch2 selectionDispatch = new SelectionDispatch();
 
 	/** The notification timer. */
-	private transient final Timer notificationTimer;
+	private final transient Timer notificationTimer;
 
 	/** The notification listener. */
-	private transient final DocumentNotificationListener notificationListener;
+	private final transient DocumentNotificationListener notificationListener;
 
 	/** The notification immediate action. */
-	private transient final Runnable notificationImmediateAction;
+	private final transient Runnable notificationImmediateAction;
 
 	/** The Constant NOTIF_TIMER_DELAY. */
 	private static final int NOTIF_TIMER_DELAY = 300;

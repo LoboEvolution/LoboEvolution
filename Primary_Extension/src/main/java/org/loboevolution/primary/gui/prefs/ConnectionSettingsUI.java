@@ -73,19 +73,19 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	private final FormPanel authenticationPanel = new FormPanel();
 
 	/** The user name field. */
-	private transient final FormField userNameField = new FormField(FieldType.TEXT);
+	private final transient FormField userNameField = new FormField(FieldType.TEXT);
 
 	/** The password field. */
-	private transient final FormField passwordField = new FormField(FieldType.PASSWORD);
+	private final transient FormField passwordField = new FormField(FieldType.PASSWORD);
 
 	/** The host port panel. */
 	private final FormPanel hostPortPanel = new FormPanel();
 
 	/** The host field. */
-	private transient final FormField hostField = new FormField(FieldType.TEXT);
+	private final transient FormField hostField = new FormField(FieldType.TEXT);
 
 	/** The port field. */
-	private transient final FormField portField = new FormField(FieldType.TEXT);
+	private final transient FormField portField = new FormField(FieldType.TEXT);
 
 	/**
 	 * Instantiates a new connection settings ui.

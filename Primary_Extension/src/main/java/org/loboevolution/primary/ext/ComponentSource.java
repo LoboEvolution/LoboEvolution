@@ -92,7 +92,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	private static final int PREFERRED_MAX_MENU_SIZE = 20;
 
 	/** The window. */
-	private transient final NavigatorWindow window;
+	private final transient NavigatorWindow window;
 
 	/** The address field. */
 	private final AddressField addressField;

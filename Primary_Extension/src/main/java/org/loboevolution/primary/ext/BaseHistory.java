@@ -49,7 +49,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	private final SortedSet<String> historySortedSet = new TreeSet<String>();
 
 	/** The history map. */
-	private transient final Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
+	private final transient Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
 
 	/** The history timed set. */
 	private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();

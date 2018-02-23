@@ -71,7 +71,7 @@ public class CssParserTest extends JFrame {
 	private static final Logger logger = LogManager.getLogger(CssParserTest.class);
 
 	/** The css output. */
-	private transient final HtmlPanel cssOutput;
+	private final transient HtmlPanel cssOutput;
 
 	/** The text area. */
 	private final JTextArea textArea;

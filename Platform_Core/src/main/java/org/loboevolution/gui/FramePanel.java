@@ -100,22 +100,22 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	private final String windowId;
 
 	/** The navigation engine. */
-	private transient final NavigationEngine navigationEngine = new NavigationEngine();
+	private final transient NavigationEngine navigationEngine = new NavigationEngine();
 
 	/** The known parent frame. */
 	private final FramePanel knownParentFrame;
 
 	/** The navigation listeners. */
-	private transient final Collection<NavigationListener> navigationListeners = new ArrayList<NavigationListener>();
+	private final transient Collection<NavigationListener> navigationListeners = new ArrayList<NavigationListener>();
 
 	/** The response listeners. */
-	private transient final Collection<ResponseListener> responseListeners = new ArrayList<ResponseListener>();
+	private final transient Collection<ResponseListener> responseListeners = new ArrayList<ResponseListener>();
 
 	/** The content listeners. */
-	private transient final Collection<ContentListener> contentListeners = new ArrayList<ContentListener>();
+	private final transient Collection<ContentListener> contentListeners = new ArrayList<ContentListener>();
 
 	/** The properties monitor. */
-	private transient final Object propertiesMonitor = new Object();
+	private final transient Object propertiesMonitor = new Object();
 
 	/** The opener frame. */
 	private transient NavigatorFrame openerFrame;

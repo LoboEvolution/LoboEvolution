@@ -61,7 +61,7 @@ public class TestFrame extends JFrame {
 	private static final Logger logger = LogManager.getLogger(TestFrame.class);
 
 	/** The rcontext. */
-	private transient final SimpleHtmlRendererContext rcontext;
+	private final transient SimpleHtmlRendererContext rcontext;
 
 	/** The address field. */
 	private final JTextField addressField;

@@ -105,13 +105,13 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
 	/** The frame context. */
-	protected transient final FrameContext frameContext;
+	protected final transient FrameContext frameContext;
 
 	/** The ucontext. */
-	protected transient final UserAgentContext ucontext;
+	protected final transient UserAgentContext ucontext;
 
 	/** The rcontext. */
-	protected transient final HtmlRendererContext rcontext;
+	protected final transient HtmlRendererContext rcontext;
 
 	/** The start selection. */
 	protected transient RenderableSpot startSelection;

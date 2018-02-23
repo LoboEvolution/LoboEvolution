@@ -54,13 +54,13 @@ public class AddBookmarkDialog extends JDialog {
 	private transient FormField urlField = new FormField(FieldType.TEXT, "URL:");
 
 	/** The title field. */
-	private transient final FormField titleField = new FormField(FieldType.TEXT, "Title:");
+	private final transient FormField titleField = new FormField(FieldType.TEXT, "Title:");
 
 	/** The description field. */
-	private transient final FormField descriptionField = new FormField(FieldType.TEXT, "Description:");
+	private final transient FormField descriptionField = new FormField(FieldType.TEXT, "Description:");
 
 	/** The tags field. */
-	private transient final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
+	private final transient FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
 
 	/** The url. */
 	private final URL url;

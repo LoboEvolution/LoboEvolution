@@ -81,7 +81,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 	private static final int VGAP = 2;
 
 	/** The frame panel. */
-	private transient final FramePanel framePanel;
+	private final transient FramePanel framePanel;
 
 	/** The requested properties. */
 	private final Properties requestedProperties;

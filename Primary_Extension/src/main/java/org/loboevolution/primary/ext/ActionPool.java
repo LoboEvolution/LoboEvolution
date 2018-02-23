@@ -59,13 +59,13 @@ public class ActionPool extends AbstractAction {
 	private static final Logger logger = LogManager.getLogger(ActionPool.class);
 
 	/** The component source. */
-	private transient final ComponentSource componentSource;
+	private final transient ComponentSource componentSource;
 
 	/** The window. */
-	private transient final NavigatorWindow window;
+	private final transient NavigatorWindow window;
 
 	/** The enableable actions. */
-	private transient final Collection<EnableableAction> enableableActions;
+	private final transient Collection<EnableableAction> enableableActions;
 
 	/**
 	 * Instantiates a new action pool.
