@@ -117,7 +117,7 @@ public class ReuseManager {
 						in.close();
 					}
 				} catch (EOFException eofe) {
-					logger.log(Level.ERROR, eofe);
+					logger.error( eofe);
 					portFile.delete();
 				} catch (FileNotFoundException fnfe) {
 					// Likely not running

@@ -65,7 +65,7 @@ public class ClearCacheAction extends ActionPool {
 		try {
 			clearCache.clearCache();
 		} catch (Throwable err) {
-			logger.log(Level.ERROR, "ClearCacheAction", err);
+			logger.error( "ClearCacheAction", err);
 		}
 	}
 }

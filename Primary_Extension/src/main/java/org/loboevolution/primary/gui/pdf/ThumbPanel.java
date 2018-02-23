@@ -175,7 +175,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 				}
 				repaint();
 			} catch (Exception e) {
-				logger.log(Level.ERROR, e);
+				logger.error( e);
 
 				int size = lineheight - border;
 				images[workingon] = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_BINARY);

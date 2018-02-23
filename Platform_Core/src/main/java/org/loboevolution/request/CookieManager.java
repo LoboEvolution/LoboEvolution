@@ -21,8 +21,6 @@
 package org.loboevolution.request;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.CookieHandler;
 import java.net.URI;
 import java.util.Collection;
@@ -33,16 +31,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.Cookie;
 
 /**
  * The Class CookieManager.
  */
 public class CookieManager extends CookieHandler {
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CookieManager.class);
+	
 	/** The cookie store. */
 	private final CookieStore cookieStore = CookieStore.getInstance();
 
@@ -75,10 +70,6 @@ public class CookieManager extends CookieHandler {
 				resultHeaders.put("Cookie", Collections.singletonList(cookieHeaderValue.toString()));
 			}
 		}
-		if (logger.isInfoEnabled()) {
-			logger.info("get():----Cookie headers for uri=[" + uri + "].");
-			this.printHeaders(resultHeaders);
-		}
 		return resultHeaders;
 	}
 
@@ -89,10 +80,6 @@ public class CookieManager extends CookieHandler {
 	 */
 	@Override
 	public void put(URI uri, Map<String, List<String>> responseHeaders) throws IOException {
-		if (logger.isInfoEnabled()) {
-			logger.info("put():----Response headers for uri=[" + uri + "].");
-			this.printHeaders(responseHeaders);
-		}
 		CookieStore store = this.cookieStore;
 		for (Map.Entry<String, List<String>> entry : responseHeaders.entrySet()) {
 			String key = entry.getKey();
@@ -172,25 +159,5 @@ public class CookieManager extends CookieHandler {
 			}
 			return false;
 		}
-	}
-
-	/**
-	 * Prints the headers.
-	 *
-	 * @param headers
-	 *            the headers
-	 */
-	private void printHeaders(Map<String, List<String>> headers) {
-		StringWriter swriter = new StringWriter();
-		PrintWriter writer = new PrintWriter(swriter);
-		writer.println();
-		for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
-			for (String value : entry.getValue()) {
-				writer.println("Header: " + entry.getKey() + "=" + value);
-			}
-		}
-		writer.println();
-		writer.flush();
-		logger.info(swriter.toString());
 	}
 }

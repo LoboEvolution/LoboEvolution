@@ -158,7 +158,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the throwable
 	 */
 	public void error(String message, Throwable throwable) {
-		logger.log(Level.ERROR, message, throwable);
+		logger.error( message, throwable);
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the message
 	 */
 	public void error(String message) {
-		logger.log(Level.ERROR, message);
+		logger.error( message);
 	}
 
 	@Override
@@ -204,9 +204,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 *            the link object
 	 */
 	private void navigateImpl(URL href, String target, RequestType requestType, Object linkObject) {
-		if (logger.isInfoEnabled()) {
-			logger.info("navigateImpl(): href=" + href + ",target=" + target);
-		}
+
 		// First check if target is a frame identifier.
 		TargetType targetType;
 		if (target != null) {

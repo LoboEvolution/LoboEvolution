@@ -85,9 +85,6 @@ public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeP
 		if (node == null) {
 			renderable = this.createRenderable(bodyLayout, markupElement);
 			if (renderable == null) {
-				if (logger.isEnabled(Level.INFO)) {
-					logger.info("layoutMarkup(): Don't know how to render " + markupElement + ".");
-				}
 				return;
 			}
 			markupElement.setUINode(renderable);

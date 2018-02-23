@@ -175,9 +175,7 @@ public class HtmlClientlet implements Clientlet {
 			if (charset == null) {
 				charset = "UTF-8";
 			}
-			if (logger.isInfoEnabled()) {
-				logger.info("process(): charset=" + charset + " for URI=[" + uri + "]");
-			}
+
 			InputSourceImpl is = new InputSourceImpl(rin, uri, charset);
 			HTMLDocumentImpl document = (HTMLDocumentImpl) builder.createDocument(is);
 			document.setLocales(locales);
@@ -196,21 +194,10 @@ public class HtmlClientlet implements Clientlet {
 			try {
 				document.load(false);
 			} catch (HttpEquivRetryException retry) {
-				if (logger.isInfoEnabled()) {
-					logger.info("processImpl(): Resetting due to META http-equiv: " + uri);
-				}
-				// This is a recursive call, but it doesn't go further
-				// than one level deep.
 				this.processImpl(cc, retry.getHttpEquivData(), rin);
 				return;
 			}
-			long time2 = System.currentTimeMillis();
-			if (logger.isInfoEnabled()) {
-				logger.info("process(): Parse elapsed=" + (time2 - time1) + " ms.");
-				if (logger.isInfoEnabled()) {
-					logger.debug("process(): HTML follows:\r\n" + content.getSourceCode());
-				}
-			}
+
 			// We're done parsing, but let's make sure
 			// the listener actually renderered the document.
 			listener.ensureSwitchedToRendering();
@@ -485,9 +472,6 @@ public class HtmlClientlet implements Clientlet {
 			if (node instanceof HTMLElement) {
 				HTMLElement element = (HTMLElement) node;
 				boolean visible = !NON_VISIBLE_ELEMENTS.contains(element.getTagName().toLowerCase());
-				if (visible && logger.isInfoEnabled()) {
-					logger.info("mayBeVisibleElement(): Found possibly visible element: " + element.getTagName());
-				}
 				return visible;
 			} else {
 				return false;

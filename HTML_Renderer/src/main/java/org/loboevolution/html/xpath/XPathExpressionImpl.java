@@ -62,13 +62,13 @@ import org.w3c.dom.Node;
 public class XPathExpressionImpl implements XPathExpression {
 
 	/** The xpath object that this expression wraps. */
-	private finalXPath m_xpath;
+	private final XPath m_xpath;
 
 	/**
 	 * The document to be searched to parallel the case where the XPathEvaluator
 	 * is obtained by casting a Document.
 	 */
-	private finalDocument m_doc;
+	private final Document m_doc;
 
 	/**
 	 * Constructor for XPathExpressionImpl.

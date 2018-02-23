@@ -230,7 +230,7 @@ public class Response {
 		try {
 			return responseBody == null ? "" : new String(responseBody, charset);
 		} catch (UnsupportedEncodingException ex) {
-			logger.log(Level.ERROR, ex);
+			logger.error( ex);
 			return responseBody == null ? "" : String.valueOf(responseBody);
 		}
 	}

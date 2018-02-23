@@ -179,7 +179,7 @@ public class ParserTest extends JFrame {
 					+ (time1 - time0) + " ms.");
 			this.tree.setModel(new NodeTreeModel(document));
 		} catch (Exception err) {
-			logger.log(Level.ERROR, "Error trying to load URI=[" + uri + "].", err);
+			logger.error( "Error trying to load URI=[" + uri + "].", err);
 		}
 	}
 

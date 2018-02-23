@@ -242,10 +242,6 @@ public class HtmlContent implements ComponentContent {
 			this.panel.setDefaultOverflowX((Integer) value);
 		} else if ("defaultOverflowY".equals(name) && value instanceof Integer) {
 			this.panel.setDefaultOverflowY((Integer) value);
-		} else {
-			if (logger.isInfoEnabled()) {
-				logger.info("setProperty(): Unknown property: " + name);
-			}
 		}
 	}
 }

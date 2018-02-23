@@ -88,7 +88,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the throwable
 	 */
 	public void error(String message, Throwable throwable) {
-		logger.log(Level.ERROR, message, throwable);
+		logger.error( message, throwable);
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 *            the message
 	 */
 	public void error(String message) {
-		logger.log(Level.ERROR, message);
+		logger.error( message);
 	}
 
 	/*

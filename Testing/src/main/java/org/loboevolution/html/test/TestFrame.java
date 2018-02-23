@@ -181,7 +181,7 @@ public class TestFrame extends JFrame {
 			// which implements incremental rendering.
 			this.rcontext.navigate(url, null);
 		} catch (Exception err) {
-			logger.log(Level.ERROR, "Error trying to load URI=[" + uri + "].", err);
+			logger.error( "Error trying to load URI=[" + uri + "].", err);
 		}
 	}
 

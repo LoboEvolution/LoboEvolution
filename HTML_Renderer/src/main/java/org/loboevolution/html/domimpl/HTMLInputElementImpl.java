@@ -323,9 +323,6 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 			} else if (FILE.equals(type)) {
 				File[] files = this.getFileValue();
 				if (files == null) {
-					if (logger.isEnabled(Level.INFO)) {
-						logger.info("getFormInputs(): File input named " + name + " has null file.");
-					}
 					return null;
 				} else {
 					return new FormInput[] { new FormInput(name, files) };

@@ -393,7 +393,7 @@ public final class CacheManager implements Runnable {
 				this.sweepCache();
 				Thread.sleep(AFTER_SWEEP_SLEEP);
 			} catch (Throwable err) {
-				logger.log(Level.ERROR, "run()", err);
+				logger.error( "run()", err);
 				try {
 					Thread.sleep(AFTER_SWEEP_SLEEP);
 				} catch (InterruptedException ie) {
@@ -420,10 +420,6 @@ public final class CacheManager implements Runnable {
 	 */
 	private void sweepCache() throws Exception {
 		CacheStoreInfo sinfo = this.getCacheStoreInfo();
-		if (logger.isInfoEnabled()) {
-			logger.info("sweepCache(): Cache size is " + sinfo.getLength() + " with a max of " + this.getMaxCacheSize()
-					+ ". The number of cache files is " + sinfo.getFileInfos().length + ".");
-		}
 		long oversize = sinfo.getLength() - this.getMaxCacheSize();
 		if (oversize > 0) {
 			CacheFileInfo[] finfos = sinfo.getFileInfos();
@@ -437,12 +433,7 @@ public final class CacheManager implements Runnable {
 						long lastModified = finfo.getLastModified();
 						if (lastModified < okToDeleteBeforeThis) {
 							Thread.sleep(1);
-							long time1 = System.currentTimeMillis();
 							finfo.delete();
-							long time2 = System.currentTimeMillis();
-							if (logger.isInfoEnabled()) {
-								logger.info("sweepCache(): Removed " + finfo + " in " + (time2 - time1) + " ms.");
-							}
 							oversize -= finfo.getInitialLength();
 							if (oversize <= 0) {
 								break;

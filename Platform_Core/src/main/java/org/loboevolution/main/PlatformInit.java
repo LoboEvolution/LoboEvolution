@@ -239,9 +239,6 @@ public class PlatformInit {
 	 *             the exception
 	 */
 	public void initLogging() throws Exception {
-
-		// Configure log4j2
-
 		Logger logger = LogManager.getLogger(PlatformInit.class);
 		if (logger.isInfoEnabled()) {
 			logger.warn("Entry(): Logger INFO level is enabled.");
@@ -397,7 +394,7 @@ public class PlatformInit {
 					launched = true;
 					this.launch(url);
 				} catch (Exception err) {
-					logger.log(Level.ERROR, err);
+					logger.error( err);
 				}
 			}
 		}
@@ -431,7 +428,7 @@ public class PlatformInit {
 		try {
 			ReuseManager.getInstance().shutdown();
 		} catch (Exception err) {
-			logger.log(Level.ERROR, err);
+			logger.error( err);
 		}
 		Runtime.getRuntime().exit(0);
 	}
@@ -494,12 +491,6 @@ public class PlatformInit {
 			}
 			appDir = installDir;
 			this.applicationDirectory = appDir;
-
-			// Static logger should not be created in this class.
-			Logger logger = LogManager.getLogger(this.getClass().getName());
-			if (logger.isInfoEnabled()) {
-				logger.info("getApplicationDirectory(): url=" + url + ",appDir=" + appDir);
-			}
 		}
 		return appDir;
 	}

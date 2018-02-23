@@ -22,7 +22,6 @@ package org.loboevolution.js;
 
 import java.lang.reflect.Method;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.info.PropertyInfo;
@@ -41,9 +40,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(JavaObjectWrapper.class);
-
-	/** The Constant loggableInfo. */
-	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
 	/** The delegate. */
 	private final Object delegate;
@@ -323,9 +319,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 */
 	@Override
 	public Object getDefaultValue(Class hint) {
-		if (loggableInfo) {
-			logger.info("getDefaultValue(): hint=" + hint + ",this=" + this.getJavaObject());
-		}
 		if (hint == null || String.class.equals(hint)) {
 			Object javaObject = this.getJavaObject();
 			if (javaObject == null) {

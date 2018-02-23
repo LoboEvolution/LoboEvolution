@@ -33,7 +33,6 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.js.Executor;
@@ -55,9 +54,6 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(HTMLScriptElementImpl.class);
-
-	/** The Constant loggableInfo. */
-	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 	
 	/** The text. */
 	private String text;
@@ -230,8 +226,6 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			String src = this.getSrc();
 			Document doc = this.document;
 			if (doc instanceof HTMLDocumentImpl) {
-
-				boolean liflag = loggableInfo;
 				if (src == null) {
 					text = this.getText();
 					scriptURI = doc.getBaseURI();
@@ -240,45 +234,32 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					this.informExternalScriptLoading();
 					URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 					scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-					long time1 = liflag ? System.currentTimeMillis() : 0;
-					try {
-						final HttpRequest request = bcontext.createHttpRequest();
-						// Perform a synchronous request
-						SecurityManager sm = System.getSecurityManager();
-						if (sm == null) {
+					final HttpRequest request = bcontext.createHttpRequest();
+					// Perform a synchronous request
+					SecurityManager sm = System.getSecurityManager();
+					if (sm == null) {
+						try {
+							request.open(Method.GET, getFullURL(scriptURI), false);
+							request.send();
+						} catch (IOException thrown) {
+							logger.error("processScript()", thrown);
+						}
+					} else {
+						AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 							try {
 								request.open(Method.GET, getFullURL(scriptURI), false);
 								request.send();
 							} catch (IOException thrown) {
 								logger.error("processScript()", thrown);
 							}
-						} else {
-							AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-								// Code might have restrictions on
-								// accessing
-								// items from elsewhere.
-								try {
-									request.open(Method.GET, getFullURL(scriptURI), false);
-									request.send();
-								} catch (IOException thrown) {
-									logger.error("processScript()", thrown);
-								}
-								return null;
-							});
-						}
-						int status = request.getStatus();
-						if (status != 200 && status != 0) {
-							text = httpURLConnection(scriptURI);
-						} else {
-							text = request.getResponseText();
-						}
-
-					} finally {
-						if (liflag) {
-							long time2 = System.currentTimeMillis();
-							logger.info("processScript(): Loaded external Javascript from URI=[" + scriptURI + "] in "
-									+ (time2 - time1) + " ms.");
-						}
+							return null;
+						});
+					}
+					int status = request.getStatus();
+					if (status != 200 && status != 0) {
+						text = httpURLConnection(scriptURI);
+					} else {
+						text = request.getResponseText();
 					}
 					baseLineNumber = 1;
 				}
@@ -286,15 +267,8 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 				try {
 					Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
 					if (scope != null) {
-
-						long time1 = liflag ? System.currentTimeMillis() : 0;
 						if (text != null) {
 							ctx.evaluateString(scope, text, scriptURI, baseLineNumber, null);
-							if (liflag) {
-								long time2 = System.currentTimeMillis();
-								logger.info("addNotify(): Evaluated (or attempted to evaluate) Javascript in "
-										+ (time2 - time1) + " ms.");
-							}
 						} else {
 							logger.error("No Script at uri " + scriptURI);
 						}

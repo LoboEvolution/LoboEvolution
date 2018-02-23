@@ -207,17 +207,11 @@ public class DefaultWindowFactory implements WindowFactory {
 				this.framesById.put(windowId, window);
 			}
 			window.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			if (logger.isInfoEnabled()) {
-				logger.info("createBaseWindow(): Adding window listener: window=" + window + ",windowId=" + windowId);
-			}
 			window.addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowClosing(WindowEvent e) {
 					super.windowClosing(e);
 					if (!window.isBoundsAssigned()) {
-						if (logger.isInfoEnabled()) {
-							logger.info("windowClosing(): Saving general settings: bounds=" + window.getBounds());
-						}
 						GeneralSettings settings = generalSettings;
 						settings.setInitialWindowBounds(window.getBounds());
 						settings.save();
@@ -230,10 +224,6 @@ public class DefaultWindowFactory implements WindowFactory {
 					super.windowClosed(e);
 					Set frames = DefaultWindowFactory.this.frames;
 					synchronized (DefaultWindowFactory.this) {
-						if (logger.isInfoEnabled()) {
-							logger.info("windowClosed(): frames.size()=" + frames.size() + ",exitWhenAllWindowsClosed="
-									+ exitWhenAllWindowsClosed);
-						}
 						frames.remove(window);
 						if (frames.size() == 0 && exitWhenAllWindowsClosed) {
 							logger.warn("Exiting JVM because all windows are now closed!");

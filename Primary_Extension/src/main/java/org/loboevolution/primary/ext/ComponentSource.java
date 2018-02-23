@@ -414,9 +414,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	@Override
 	public void documentRendering(NavigatorWindowEvent event) {
-		if (logger.isInfoEnabled()) {
-			logger.info("documentRendering(): event=" + event);
-		}
 		if (this.window.getTopFrame() == event.getNavigatorFrame()) {
 			URL url = event.getUrl();
 			this.addressField.setUrl(url);

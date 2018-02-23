@@ -90,9 +90,6 @@ public final class RequestEngine {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(RequestEngine.class);
-
-	/** The Constant loggerInfo. */
-	private static final boolean loggerInfo = logger.isInfoEnabled();
 	
 	/** The Constant NORMAL_FORM_ENCODING. */
 	private static final String NORMAL_FORM_ENCODING = "application/x-www-form-urlencoded";
@@ -287,9 +284,6 @@ public final class RequestEngine {
 			// Do not add a line break to post content. Some servers
 			// can be picky about that (namely, java.net).
 			byte[] postContent = bufOut.toByteArray();
-			if (loggerInfo) {
-				logger.info("postData(): Will post: " + String.valueOf(postContent));
-			}
 			if (connection instanceof HttpURLConnection) {
 				if (boolSettings.isHttpUseChunkedEncodingPOST()) {
 					((HttpURLConnection) connection).setChunkedStreamingMode(8192);
@@ -511,10 +505,6 @@ public final class RequestEngine {
 		AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 			try {
 				long currentTime = System.currentTimeMillis();
-				if (loggerInfo) {
-					logger.info("cache(): url=" + url + ",content.length=" + content.length + ",currentTime="
-							+ currentTime);
-				}
 				int actualApproxObjectSize = 0;
 				if (altObject != null) {
 					if (approxAltObjectSize < content.length) {
@@ -635,8 +625,6 @@ public final class RequestEngine {
 			buffer.append(entry.getKey() + ": " + entry.getValue());
 			buffer.append(System.getProperty("line.separator"));
 		}
-		logger.info(
-				"printRequestHeaders(): Request headers for URI=[" + connection.getURL() + "]\r\n" + buffer.toString());
 	}
 
 	/**
@@ -789,13 +777,6 @@ public final class RequestEngine {
 		if (cacheInfo != null) {
 			RequestType requestType = rhandler.getRequestType();
 			if (doesNotExpire(requestType)) {
-				if (loggerInfo) {
-					if (cacheInfo.hasTransientEntry()) {
-						logger.info("getURLConnection(): FROM-RAM: " + connectionUrl + ".");
-					} else {
-						logger.info("getURLConnection(): FROM-FILE: " + connectionUrl + ".");
-					}
-				}
 				return cacheInfo.getURLConnection();
 			} else if (!shouldRevalidateAlways(requestType)) {
 				Long expires = cacheInfo.getExpires();
@@ -803,31 +784,11 @@ public final class RequestEngine {
 					Integer defaultOffset = this.cacheSettings.getDefaultCacheExpirationOffset();
 					if (defaultOffset != null) {
 						expires = cacheInfo.getExpiresGivenOffset(defaultOffset.longValue());
-						if (loggerInfo) {
-							Date expiresDate = expires == null ? null : new Date(expires);
-							logger.info("getURLConnection(): Used default offset for " + connectionUrl + ": expires="
-									+ expiresDate);
-						}
 					}
 				}
 				if (expires != null) {
 					if (expires.longValue() > System.currentTimeMillis()) {
-						if (loggerInfo) {
-							long secondsToExpiration = (expires.longValue() - System.currentTimeMillis()) / 1000;
-							if (cacheInfo.hasTransientEntry()) {
-								logger.info("getURLConnection(): FROM-RAM: " + connectionUrl + ". Expires in "
-										+ secondsToExpiration + " seconds.");
-							} else {
-								logger.info("getURLConnection(): FROM-FILE: " + connectionUrl + ". Expires in "
-										+ secondsToExpiration + " seconds.");
-							}
-						}
 						return cacheInfo.getURLConnection();
-					} else {
-						if (loggerInfo) {
-							logger.info("getURLConnection(): EXPIRED: " + connectionUrl + ". Expired on "
-									+ new Date(expires) + ".");
-						}
 					}
 				}
 				// If the document has expired, the cache may still
@@ -905,8 +866,6 @@ public final class RequestEngine {
 	 */
 	private void processHandler(final RequestHandler rhandler, final int recursionLevel,
 			final boolean trackRequestInfo) {
-		// Method must be private.
-		boolean linfo = loggerInfo;
 		URL baseURL = rhandler.getLatestRequestURL();
 		RequestInfo rinfo = null;
 		ClientletResponseImpl response = null;
@@ -981,9 +940,6 @@ public final class RequestEngine {
 						}
 						
 						if(responseCode != null) {
-							if (linfo) {
-								logger.info("run(): ResponseCode=" + responseCode + " for url=" + connectionUrl);
-							}
 							
 							switch (responseCode) {
 							case HttpURLConnection.HTTP_OK:
@@ -1104,12 +1060,8 @@ public final class RequestEngine {
 					cacheInfo.dispose();
 				}
 			}
-		} catch (CancelClientletException cce) {
-			if (linfo) {
-				logger.log(Level.INFO, "run(): Clientlet cancelled: " + baseURL, cce);
-			}
 		} catch (Throwable exception) {
-			logger.log(Level.ERROR, exception);
+			logger.error( exception);
 		} finally {
 			rhandler.handleProgress(ProgressType.DONE, baseURL, method, 0, 0);
 		}
@@ -1168,7 +1120,7 @@ public final class RequestEngine {
 					in.close();
 				}
 			} catch (Exception err) {
-				logger.log(Level.ERROR, "abort()", err);
+				logger.error( "abort()", err);
 			}
 		}
 

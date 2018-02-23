@@ -96,7 +96,7 @@ public class ReuseServer implements Runnable {
 					this.notifyAll();
 					return rport;
 				} catch (IOException ioe) {
-					logger.log(Level.ERROR, ioe);
+					logger.error( ioe);
 				}
 			}
 		}
@@ -161,7 +161,7 @@ public class ReuseServer implements Runnable {
 					in.close();
 				}
 			} catch (Throwable t) {
-				logger.log(Level.ERROR, t);
+				logger.error( t);
 			}
 		}
 	}

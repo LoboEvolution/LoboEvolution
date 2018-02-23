@@ -101,9 +101,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(HtmlBlockPanel.class);
 
-	/** The Constant loggableInfo. */
-	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
-
 	/** The frame context. */
 	protected final transient FrameContext frameContext;
 
@@ -505,7 +502,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 						SwingUtilities.invokeAndWait(() -> block.layout(pw, 0, false, false,
 								RenderState.OVERFLOW_VISIBLE, RenderState.OVERFLOW_VISIBLE, true));
 					} catch (Exception err) {
-						logger.log(Level.ERROR, "Unable to do preferred size layout.", err);
+						logger.error( "Unable to do preferred size layout.", err);
 					}
 				}
 				// Adjust for permanent vertical scrollbar.
@@ -902,7 +899,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 		} catch (Throwable thrown) {
-			logger.log(Level.ERROR, "Unexpected error in layout engine. Document is " + this.getRootNode(), thrown);
+			logger.error( "Unexpected error in layout engine. Document is " + this.getRootNode(), thrown);
 		}
 	}
 
@@ -1026,24 +1023,12 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				case DocumentNotification.SIZE: {
 					DOMNodeImpl node = dn.node;
 					if (node == null) {
-						// This is all-invalidate (new style sheet)
-						if (loggableInfo) {
-							logger.info("processDocumentNotifications(): Calling invalidateLayoutDeep().");
-						}
 						this.rblock.invalidateLayoutDeep();
-						// this.rblock.invalidateRenderStyle();
 					} else {
 						UINode uiNode = node.findUINode();
 						if (uiNode != null) {
 							RElement relement = (RElement) uiNode;
 							relement.invalidateLayoutUpTree();
-							// if(type == DocumentNotification.GENERIC) {
-							// relement.invalidateRenderStyle();
-							// }
-						} else {
-							if (loggableInfo) {
-								logger.info("processDocumentNotifications(): Unable to find UINode for " + node);
-							}
 						}
 					}
 					topLayout = true;

@@ -195,10 +195,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					if (!launched) {
-						if (logger.isInfoEnabled()) {
-							logger.info(
-									"NavigatorWindowImpl(): Disposing browserWindow due to progress window getting closed.");
-						}
 						browserWindow.dispose();
 					}
 				}
@@ -238,10 +234,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 		this.launched = true;
 		if (this.progressWindow != null) {
 			if (!progressWindow.isDisplayable()) {
-				if (logger.isInfoEnabled()) {
-					logger.info(
-							"resetAsNavigator(): Progress window is not displayable, so it must have been closed; cancelling operation.");
-				}
 				this.browserWindow.dispose();
 				return;
 			}
@@ -354,7 +346,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			props.load(in);
 		} catch (IOException ioe) {
 			// impossible
-			logger.log(Level.ERROR, "unexpected", ioe);
+			logger.error( "unexpected", ioe);
 		}
 		return props;
 	}

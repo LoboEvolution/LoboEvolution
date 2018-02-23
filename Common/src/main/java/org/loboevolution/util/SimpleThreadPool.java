@@ -198,13 +198,13 @@ public class SimpleThreadPool {
 						try {
 							task.run();
 						} catch (Throwable thrown) {
-							logger.log(Level.ERROR, "run(): Error in task: " + task + ".", thrown);
+							logger.error( "run(): Error in task: " + task + ".", thrown);
 						}
 					} finally {
 						currentThread.setName(baseName);
 					}
 				} catch (Throwable thrown) {
-					logger.log(Level.ERROR, "run(): Error in thread pool: " + SimpleThreadPool.this.name + ".", thrown);
+					logger.error( "run(): Error in thread pool: " + SimpleThreadPool.this.name + ".", thrown);
 				}
 			}
 		}

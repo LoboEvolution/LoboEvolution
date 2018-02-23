@@ -174,7 +174,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
 		} catch (Exception e) {
-			logger.log(Level.ERROR, e);
+			logger.error( e);
 		}
 		return icon;
 	}

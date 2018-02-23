@@ -331,9 +331,6 @@ public class Window extends JSFunction implements AbstractView {
 								+ Executor.SCOPE_KEY);
 			}
 			String scriptURI = "window.eval";
-			if (logger.isEnabled(Level.INFO)) {
-				logger.info("eval(): javascript follows...\r\n" + javascript);
-			}
 			return ctx.evaluateString(scope, javascript, scriptURI, 1, null);
 		} finally {
 			Context.exit();

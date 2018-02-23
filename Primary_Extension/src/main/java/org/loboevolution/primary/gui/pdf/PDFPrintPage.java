@@ -133,7 +133,7 @@ public class PDFPrintPage implements Printable {
 				try {
 					pjob.print();
 				} catch (PrinterException exc) {
-					logger.log(Level.ERROR, exc);
+					logger.error( exc);
 				}
 			}
 		} finally {

@@ -637,7 +637,7 @@ public class DownloadDialog extends JFrame {
 			try {
 				RequestEngine.getInstance().inlineRequest(this.handler);
 			} catch (Exception err) {
-				logger.log(Level.ERROR, "Unexpected error on download of [" + url.toExternalForm() + "].", err);
+				logger.error( "Unexpected error on download of [" + url.toExternalForm() + "].", err);
 			}
 		}
 	}

@@ -164,7 +164,7 @@ public class ProgressBar extends JProgressBar {
 		try {
 			super.paintComponent(g);
 		} catch (Exception err) {
-			logger.log(Level.ERROR, "paintComponent(): Swing bug?", err);
+			logger.error( "paintComponent(): Swing bug?", err);
 		}
 	}
 }

@@ -148,7 +148,7 @@ public class SourceViewerWindow extends JFrame {
 					}
 
 				} catch (Exception exp) {
-					logger.log(Level.ERROR, exp);
+					logger.error( exp);
 				}
 
 			}

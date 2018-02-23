@@ -276,9 +276,6 @@ public class ClientletResponseImpl implements ClientletResponse {
 			final int contentLength = connection.getContentLength();
 			final int bufferSize = contentLength <= 0 ? 4096 : Math.min(contentLength, 8192);
 			final URL responseURL = this.getResponseURL();
-			// if(logger.isInfoEnabled())logger.info("getInputStream():
-			// Connection stream is "
-			// + in);
 			InputStream bis;
 			if (this.requestHandler != null) {
 				MonitoredInputStream mis = new MonitoredInputStream(in);

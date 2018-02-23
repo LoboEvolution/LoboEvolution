@@ -179,7 +179,7 @@ public class CssParserTest extends JFrame {
 					+ (time1 - time0) + " ms.");
 			this.showStyleSheet(styleSheet);
 		} catch (Exception err) {
-			logger.log(Level.ERROR, "Error trying to load URI=[" + uri + "].", err);
+			logger.error( "Error trying to load URI=[" + uri + "].", err);
 			this.clearCssOutput();
 		}
 	}

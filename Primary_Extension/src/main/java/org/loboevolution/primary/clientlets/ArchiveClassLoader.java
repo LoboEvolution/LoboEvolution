@@ -179,7 +179,7 @@ public class ArchiveClassLoader extends BaseClassLoader {
 				}
 			});
 		} catch (RuntimeException err) {
-			logger.log(Level.ERROR, "findResource()", err);
+			logger.error( "findResource()", err);
 			throw err;
 		}
 	}

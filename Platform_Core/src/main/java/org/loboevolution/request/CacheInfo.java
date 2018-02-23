@@ -163,10 +163,6 @@ public class CacheInfo {
 			URLConnection connection = this.getURLConnection();
 			String requestTimeText = connection.getHeaderField(HEADER_REQUEST_TIME);
 			if (requestTimeText == null) {
-				if (logger.isInfoEnabled()) {
-					logger.info("getExpires(): Cached content does not have " + HEADER_REQUEST_TIME + " header: "
-							+ this.url + ".");
-				}
 				return Long.valueOf(0);
 			}
 			long requestTime = Long.parseLong(requestTimeText);

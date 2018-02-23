@@ -149,7 +149,7 @@ abstract class AbstractSACParser implements SACParser {
 				sacParserMessages_ = ResourceBundle.getBundle("com.steadystate.css.parser.SACParserMessages",
 						getLocale());
 			} catch (final MissingResourceException e) {
-				logger.log(Level.ERROR, e);
+				logger.error( e);
 			}
 		}
 		return sacParserMessages_;

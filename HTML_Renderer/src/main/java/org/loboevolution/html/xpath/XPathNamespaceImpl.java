@@ -85,7 +85,7 @@ import org.w3c.dom.UserDataHandler;
 public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** The m_attribute node. */
-	private finalNode m_attributeNode;
+	private final Node m_attributeNode;
 	
 	/** The text content. */
 	private String textContent;

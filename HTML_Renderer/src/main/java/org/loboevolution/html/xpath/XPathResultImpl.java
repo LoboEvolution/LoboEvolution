@@ -100,18 +100,18 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	public static final short FIRST_ORDERED_NODE_TYPE = 9;
 
 	/** The wrapped XObject. */
-	private finalXObject m_resultObj;
+	private final XObject m_resultObj;
 
 	/**
 	 * The xpath object that wraps the expression used for this result.
 	 */
-	private finalXPath m_xpath;
+	private final XPath m_xpath;
 
 	/**
 	 * This the type specified by the user during construction. Typically the
 	 * constructor will be called by org.apache.xpath.XPath.evaluate().
 	 */
-	private finalshort m_resultType;
+	private final short m_resultType;
 
 	/** The m_is invalid iterator state. */
 	private boolean m_isInvalidIteratorState = false;
@@ -120,7 +120,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 * Only used to attach a mutation event handler when specified type is an
 	 * iterator type.
 	 */
-	private finalNode m_contextNode;
+	private final Node m_contextNode;
 
 	/**
 	 * The iterator, if this is an iterator type.
@@ -430,8 +430,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Iterates and returns the next node from the node set or <code>null</code>
-	 * if there are no more nodes.
+	 * Iterates and returns the next node from the node set or <code>null</code> if
+	 * there are no more nodes.
 	 *
 	 * @return Returns the next node.
 	 * @see org.w3c.dom.xpath.XPathResult#iterateNext()
@@ -483,15 +483,15 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	/**
 	 * Returns the <code>index</code>th item in the snapshot collection. If
 	 * <code>index</code> is greater than or equal to the number of nodes in the
-	 * list, this method returns <code>null</code>. Unlike the iterator result,
-	 * the snapshot does not become invalid, but may not correspond to the
-	 * current document if it is mutated.
+	 * list, this method returns <code>null</code>. Unlike the iterator result, the
+	 * snapshot does not become invalid, but may not correspond to the current
+	 * document if it is mutated.
 	 *
 	 * @param index
 	 *            Index into the snapshot collection.
 	 * @return The node at the <code>index</code>th position in the
-	 *         <code>NodeList</code>, or <code>null</code> if that is not a
-	 *         valid index.
+	 *         <code>NodeList</code>, or <code>null</code> if that is not a valid
+	 *         index.
 	 * @see org.w3c.dom.xpath.XPathResult#snapshotItem(int)
 	 * @exception XPathException
 	 *                TYPE_ERR: raised if <code>resultType</code> is not
@@ -527,8 +527,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 * @param type
 	 *            The specified type
 	 *
-	 * @return true If the specified type is supported; otherwise, returns
-	 *         false.
+	 * @return true If the specified type is supported; otherwise, returns false.
 	 */
 	public static boolean isValidType(short type) {
 		switch (type) {
@@ -568,8 +567,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Given a request type, return the equivalent string. For diagnostic
-	 * purposes.
+	 * Given a request type, return the equivalent string. For diagnostic purposes.
 	 *
 	 * @param type
 	 *            the type
@@ -647,8 +645,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @param node
 	 *            the node
-	 * @return boolean Returns true if this is a namespace node; otherwise,
-	 *         returns false.
+	 * @return boolean Returns true if this is a namespace node; otherwise, returns
+	 *         false.
 	 */
 	private boolean isNamespaceNode(Node node) {
 		return (null != node && node.getNodeType() == Node.ATTRIBUTE_NODE

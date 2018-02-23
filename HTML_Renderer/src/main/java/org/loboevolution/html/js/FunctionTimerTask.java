@@ -80,9 +80,6 @@ public class FunctionTimerTask extends WeakWindowTask {
 		try {
 			Window window = this.getWindow();
 			if (window == null) {
-				if (logger.isEnabled(Level.INFO)) {
-					logger.info("actionPerformed(): Window is no longer available.");
-				}
 				return;
 			}
 			if (this.removeTask) {

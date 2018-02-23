@@ -24,9 +24,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.ua.NavigationEntry;
 import org.loboevolution.util.Urls;
 
@@ -36,9 +33,6 @@ import org.loboevolution.util.Urls;
  * Note: This class is not thread safe on its own.
  */
 public class NavigationEngine {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(NavigationEngine.class);
 
 	/** The history. */
 	private final ArrayList<NavigationEntry> history = new ArrayList<NavigationEntry>();
@@ -66,9 +60,6 @@ public class NavigationEngine {
 	 *            the entry
 	 */
 	public void addNavigationEntry(NavigationEntry entry) {
-		if (logger.isInfoEnabled()) {
-			logger.info("addNavigationEntry(): entry=" + entry);
-		}
 		int newIndex = this.currentIndex + 1;
 		if (newIndex == this.history.size()) {
 			this.history.add(entry);
@@ -244,9 +235,6 @@ public class NavigationEngine {
 			}
 			return null;
 		} catch (MalformedURLException mfu) {
-			if (logger.isInfoEnabled()) {
-				logger.log(Level.INFO, "findEntry(): URL is malformed: " + absoluteURL, mfu);
-			}
 			return null;
 		}
 	}

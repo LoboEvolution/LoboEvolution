@@ -23,8 +23,6 @@
  */
 package org.loboevolution.primary.clientlets;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.Clientlet;
 import org.loboevolution.clientlet.ClientletRequest;
 import org.loboevolution.clientlet.ClientletResponse;
@@ -38,10 +36,7 @@ import org.loboevolution.primary.clientlets.pdf.PdfClientlet;
  * The Class PrimaryClientletSelector.
  */
 public class PrimaryClientletSelector implements ClientletSelector {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(PrimaryClientletSelector.class);
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -54,10 +49,6 @@ public class PrimaryClientletSelector implements ClientletSelector {
 		// Clientlets here are not overriddable.
 
 		String mimeType = response.getMimeType();
-
-		if (logger.isInfoEnabled()) {
-			logger.info("select(): mimeType=" + mimeType);
-		}
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
 		if ("text/html".equals(mimeTypeTL) || "image/svg+xml".equals(mimeTypeTL)) {
 			// TODO: XHTML needs its own clientlet.

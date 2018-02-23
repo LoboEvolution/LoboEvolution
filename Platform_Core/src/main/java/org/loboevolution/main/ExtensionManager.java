@@ -144,21 +144,11 @@ public class ExtensionManager {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private void addExtension(File file) throws IOException {
-		if (!file.exists()) {
-			logger.warn("addExtension(): File " + file + " does not exist.");
-			return;
-		}
 		Extension ei = new Extension(file);
 		this.extensionById.put(ei.getId(), ei);
 		if (ei.isLibraryOnly()) {
-			if (logger.isInfoEnabled()) {
-				logger.info("createExtensions(): Loaded library (no lobo-extension.properties): " + ei);
-			}
 			libraries.add(ei);
 		} else {
-			if (logger.isInfoEnabled()) {
-				logger.info("createExtensions(): Loaded extension: " + ei);
-			}
 			extensions.add(ei);
 		}
 	}
@@ -223,11 +213,8 @@ public class ExtensionManager {
 			try {
 				libraryURLCollection.add(ei.getCodeSource());
 			} catch (MalformedURLException thrown) {
-				logger.log(Level.ERROR, "createExtensions()", thrown);
+				logger.error( "createExtensions()", thrown);
 			}
-		}
-		if (logger.isInfoEnabled()) {
-			logger.info("createExtensions(): Creating library class loader with URLs=[" + libraryURLCollection + "].");
 		}
 
 		// Initialize class loader in each extension, using librariesCL as
@@ -328,7 +315,7 @@ public class ExtensionManager {
 			try {
 				ei.initExtensionWindow(context);
 			} catch (Exception err) {
-				logger.log(Level.ERROR, "initExtensionsWindow(): Extension could not properly initialize a new window.",
+				logger.error( "initExtensionsWindow(): Extension could not properly initialize a new window.",
 						err);
 			}
 		}
@@ -346,7 +333,7 @@ public class ExtensionManager {
 			try {
 				ei.shutdownExtensionWindow(context);
 			} catch (Exception err) {
-				logger.log(Level.ERROR, "initExtensionsWindow(): Extension could not properly process window shutdown.",
+				logger.error( "initExtensionsWindow(): Extension could not properly process window shutdown.",
 						err);
 			}
 		}
@@ -371,7 +358,7 @@ public class ExtensionManager {
 					return clientlet;
 				}
 			} catch (Exception thrown) {
-				logger.log(Level.ERROR, "getClientlet(): Extension " + ei + " threw exception.", thrown);
+				logger.error( "getClientlet(): Extension " + ei + " threw exception.", thrown);
 			}
 		}
 
@@ -383,7 +370,7 @@ public class ExtensionManager {
 					return clientlet;
 				}
 			} catch (Exception thrown) {
-				logger.log(Level.ERROR, "getClientlet(): Extension " + ei + " threw exception.", thrown);
+				logger.error( "getClientlet(): Extension " + ei + " threw exception.", thrown);
 			}
 		}
 		return null;
@@ -451,7 +438,7 @@ public class ExtensionManager {
 			} catch (NavigationVetoException nve) {
 				throw nve;
 			} catch (Exception other) {
-				logger.log(Level.ERROR, "dispatchBeforeNavigate(): Extension threw an unexpected exception.", other);
+				logger.error( "dispatchBeforeNavigate(): Extension threw an unexpected exception.", other);
 			}
 		}
 	}
@@ -471,7 +458,7 @@ public class ExtensionManager {
 			} catch (NavigationVetoException nve) {
 				throw nve;
 			} catch (Exception other) {
-				logger.log(Level.ERROR, "dispatchBeforeLocalNavigate(): Extension threw an unexpected exception.",
+				logger.error( "dispatchBeforeLocalNavigate(): Extension threw an unexpected exception.",
 						other);
 			}
 		}
@@ -492,7 +479,7 @@ public class ExtensionManager {
 			} catch (NavigationVetoException nve) {
 				throw nve;
 			} catch (Exception other) {
-				logger.log(Level.ERROR, "dispatchBeforeWindowOpen(): Extension threw an unexpected exception.", other);
+				logger.error( "dispatchBeforeWindowOpen(): Extension threw an unexpected exception.", other);
 			}
 		}
 	}
@@ -509,7 +496,7 @@ public class ExtensionManager {
 			try {
 				connection = ei.dispatchPreConnection(connection);
 			} catch (Exception other) {
-				logger.log(Level.ERROR, "dispatchPreConnection(): Extension threw an unexpected exception.", other);
+				logger.error( "dispatchPreConnection(): Extension threw an unexpected exception.", other);
 			}
 		}
 		return connection;
@@ -527,7 +514,7 @@ public class ExtensionManager {
 			try {
 				connection = ei.dispatchPostConnection(connection);
 			} catch (Exception other) {
-				logger.log(Level.ERROR, "dispatchPostConnection(): Extension threw an unexpected exception.", other);
+				logger.error( "dispatchPostConnection(): Extension threw an unexpected exception.", other);
 			}
 		}
 		return connection;

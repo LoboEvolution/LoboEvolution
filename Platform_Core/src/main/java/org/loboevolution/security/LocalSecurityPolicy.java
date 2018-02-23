@@ -87,7 +87,7 @@ public class LocalSecurityPolicy extends Policy {
 		try {
 			settingsCanonical = settingsDir.getCanonicalPath();
 		} catch (IOException ioe) {
-			logger.log(Level.ERROR, ioe);
+			logger.error( ioe);
 		}
 		STORE_DIRECTORY_CANONICAL = settingsCanonical;
 
@@ -206,7 +206,7 @@ public class LocalSecurityPolicy extends Policy {
 					String canonical = file.getCanonicalPath();
 					return !canonical.startsWith(STORE_DIRECTORY_CANONICAL);
 				} catch (IOException ioe) {
-					logger.log(Level.ERROR, ioe);
+					logger.error( ioe);
 					return false;
 				}
 			});

@@ -58,9 +58,6 @@ public class BrowserFrameImpl implements BrowserFrame {
 	 *            the parentrcontext
 	 */
 	public BrowserFrameImpl(NavigatorFrame frame, HtmlRendererContext parentrcontext) {
-		if (logger.isInfoEnabled()) {
-			logger.info("BrowserFrameImpl(): frame=" + frame + ",parentrcontext=" + parentrcontext);
-		}
 		this.frame = frame;
 		this.rcontext = HtmlRendererContextImpl.getHtmlRendererContext(frame);
 	}
@@ -102,9 +99,6 @@ public class BrowserFrameImpl implements BrowserFrame {
 	 */
 	@Override
 	public void loadURL(URL url) {
-		if (logger.isInfoEnabled()) {
-			logger.info("loadURL(): frame=" + frame + ",url=" + url);
-		}
 		this.frame.navigate(url, "GET", null, TargetType.SELF, RequestType.FRAME);
 	}
 

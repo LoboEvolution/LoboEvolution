@@ -24,7 +24,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.util.Objects;
@@ -44,9 +43,6 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(JavaFunctionObject.class);
-
-	/** The Constant loggableInfo. */
-	private static final boolean loggableInfo = logger.isEnabled(Level.INFO);
 
 	/** The class name. */
 	private final String className;
@@ -173,9 +169,6 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 	 */
 	@Override
 	public Object getDefaultValue(Class hint) {
-		if (loggableInfo) {
-			logger.info("getDefaultValue(): hint=" + hint + ",this=" + this);
-		}
 		if (hint == null || String.class.equals(hint)) {
 			return "function " + this.className;
 		} else {

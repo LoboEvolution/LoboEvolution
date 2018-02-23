@@ -21,8 +21,6 @@
 package org.loboevolution.html.js;
 
 import java.awt.event.ActionEvent;
-
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
@@ -78,9 +76,6 @@ public class ExpressionTimerTask extends WeakWindowTask {
 		try {
 			Window window = this.getWindow();
 			if (window == null) {
-				if (logger.isEnabled(Level.INFO)) {
-					logger.info("actionPerformed(): Window is no longer available.");
-				}
 				return;
 			}
 			if (this.removeTask) {

@@ -141,7 +141,6 @@ public class CSSUtilities {
 				throw mfu;
 			}
 		}
-		logger.info("process(): Loading URI=[" + scriptURI + "].");
 		SSLCertificate.setCertificate();
 		URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);

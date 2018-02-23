@@ -235,7 +235,7 @@ public class PagePanel extends JPanel implements ImageObserver {
 			try {
 				currentXform = currentXform.createInverse();
 			} catch (NoninvertibleTransformException nte) {
-				logger.log(Level.ERROR, nte);
+				logger.error( nte);
 			}
 
 			prevClip = useClip;

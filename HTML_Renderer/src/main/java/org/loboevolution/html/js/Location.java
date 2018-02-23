@@ -220,8 +220,6 @@ public class Location extends AbstractScriptableDelegate {
 			HtmlRendererContext rcontext = docImpl.getHtmlRendererContext();
 			if (rcontext != null) {
 				rcontext.reload();
-			} else {
-				logger.info("reload(): No renderer context in Location's document.");
 			}
 		}
 	}

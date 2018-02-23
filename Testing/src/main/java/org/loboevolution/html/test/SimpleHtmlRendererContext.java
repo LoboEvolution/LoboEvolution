@@ -821,7 +821,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	public void error(String message, Throwable throwable) {
 		if (logger.isErrorEnabled()) {
-			logger.log(Level.ERROR, message, throwable);
+			logger.error( message, throwable);
 		}
 	}
 
@@ -845,7 +845,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 	 */
 	public void error(String message) {
 		if (logger.isErrorEnabled()) {
-			logger.log(Level.ERROR, message);
+			logger.error( message);
 		}
 	}
 

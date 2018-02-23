@@ -159,7 +159,7 @@ public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
 		final StringBuilder sb = new StringBuilder();
 		sb.append(exception.getURI()).append(" [").append(exception.getLineNumber()).append(":")
 				.append(exception.getColumnNumber()).append("] ").append(exception.getMessage());
-		logger.log(Level.ERROR, sb.toString());
+		logger.error( sb.toString());
 	}
 
 	@Override
@@ -167,7 +167,7 @@ public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
 		final StringBuilder sb = new StringBuilder();
 		sb.append(exception.getURI()).append(" [").append(exception.getLineNumber()).append(":")
 				.append(exception.getColumnNumber()).append("] ").append(exception.getMessage());
-		logger.log(Level.ERROR, sb.toString());
+		logger.error( sb.toString());
 	}
 
 	@Override
@@ -175,6 +175,6 @@ public class HandlerBase implements DocumentHandlerExt, ErrorHandler {
 		final StringBuilder sb = new StringBuilder();
 		sb.append(exception.getURI()).append(" [").append(exception.getLineNumber()).append(":")
 				.append(exception.getColumnNumber()).append("] ").append(exception.getMessage());
-		logger.log(Level.ERROR, sb.toString());
+		logger.error( sb.toString());
 	}
 }

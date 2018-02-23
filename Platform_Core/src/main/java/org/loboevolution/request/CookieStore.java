@@ -105,9 +105,7 @@ public class CookieStore {
 	 */
 	public void saveCookie(String urlHostName, String cookieSpec) {
 		// TODO: SECURITY
-		if (logger.isInfoEnabled()) {
-			logger.info("saveCookie(): host=" + urlHostName + ",cookieSpec=[" + cookieSpec + "]");
-		}
+
 		StringTokenizer tok = new StringTokenizer(cookieSpec, ";");
 		String cookieName = null;
 		String cookieValue = null;
@@ -139,7 +137,7 @@ public class CookieStore {
 			}
 		}
 		if (cookieName == null) {
-			logger.log(Level.ERROR, "saveCookie(): Invalid cookie spec from '" + urlHostName + "'");
+			logger.error( "saveCookie(): Invalid cookie spec from '" + urlHostName + "'");
 			return;
 		}
 		if (path == null || path.length() == 0) {
@@ -192,10 +190,7 @@ public class CookieStore {
 	 */
 	public void saveCookie(String domain, String path, String name, Date expires, String value) {
 		// TODO: SECURITY
-		if (logger.isInfoEnabled()) {
-			logger.info("saveCookie(): domain=" + domain + ",name=" + name + ",expires=" + expires + ",value=[" + value
-					+ "].");
-		}
+
 		Long expiresLong = expires == null ? null : expires.getTime();
 		CookieValue cookieValue = new CookieValue(value, path, domain, expiresLong);
 		synchronized (this) {
@@ -268,12 +263,7 @@ public class CookieStore {
 				while (i.hasNext()) {
 					Map.Entry<String, CookieValue> entry = i.next();
 					CookieValue cookieValue = entry.getValue();
-					if (cookieValue.isExpired()) {
-						if (liflag) {
-							logger.info("getCookiesStrict(): Cookie " + entry.getKey() + " from " + hostName
-									+ " expired: " + cookieValue.getExpires());
-						}
-					} else {
+					if (!cookieValue.isExpired()) {
 						if (path.startsWith(cookieValue.getPath())) {
 							String cookieName = entry.getKey();
 							transientCookieNames.add(cookieName);
@@ -283,11 +273,6 @@ public class CookieStore {
 							cookie.setPath(cookieValue.getPath());
 							cookie.setDomain(cookieValue.getDomain());
 							cookies.add(cookie);
-						} else {
-							if (liflag) {
-								logger.info("getCookiesStrict(): Skipping cookie " + cookieValue
-										+ " since it does not match path " + path);
-							}
 						}
 					}
 				}
@@ -306,10 +291,6 @@ public class CookieStore {
 						CookieValue cookieValue = (CookieValue) store.retrieveObject(filePath);
 						if (cookieValue != null) {
 							if (cookieValue.isExpired()) {
-								if (logger.isInfoEnabled()) {
-									logger.info("getCookiesStrict(): Cookie " + cookieName + " from " + hostName
-											+ " expired: " + cookieValue.getExpires());
-								}
 								store.removeObject(filePath);
 							} else {
 								if (path.startsWith(cookieValue.getPath())) {
@@ -330,24 +311,16 @@ public class CookieStore {
 									cookie.setPath(cookieValue.getPath());
 									cookie.setDomain(cookieValue.getDomain());
 									cookies.add(cookie);
-								} else {
-									if (logger.isInfoEnabled()) {
-										logger.info("getCookiesStrict(): Skipping cookie " + cookieValue
-												+ " since it does not match path " + path);
-									}
 								}
 							}
-						} else {
-							logger.warn("getCookiesStrict(): Expected to find cookie named " + cookieName
-									+ " but file is missing.");
 						}
 					}
 				}
 			}
 		} catch (IOException ioe) {
-			logger.log(Level.ERROR, "getCookiesStrict()", ioe);
+			logger.error( "getCookiesStrict()", ioe);
 		} catch (ClassNotFoundException cnf) {
-			logger.log(Level.ERROR, "getCookiesStrict(): Possible engine versioning error.", cnf);
+			logger.error( "getCookiesStrict(): Possible engine versioning error.", cnf);
 		}
 		return cookies;
 	}
@@ -367,9 +340,6 @@ public class CookieStore {
 		Collection<Cookie> cookies = new LinkedList<Cookie>();
 		for (String domain : possibleDomains) {
 			cookies.addAll(this.getCookiesStrict(domain, path));
-		}
-		if (logger.isInfoEnabled()) {
-			logger.info("getCookies(): For host=" + hostName + ", found " + cookies.size() + " cookies: " + cookies);
 		}
 		return cookies;
 	}

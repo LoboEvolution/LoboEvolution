@@ -197,13 +197,6 @@ public class MarkupUtilities {
 		int offset1 = findFirstIndex(renderables, clipArea, firstIndex, length, vertical);
 		int offset2 = findLastIndex(renderables, clipArea, firstIndex, length, vertical);
 		if (offset1 == -1 && offset2 == -1) {
-			// if(logger.isEnabled(Level.INFO))logger.info("findRenderables():
-			// Range not found for clipArea="
-			// + clipArea + ",length=" + length);
-			// for(int i = firstIndex; i < length; i++) {
-			// logger.info("findRenderables(): renderable.bounds=" +
-			// renderables[i].getBounds());
-			// }
 			return new Range(0, 0);
 		}
 		if (offset1 == -1) {

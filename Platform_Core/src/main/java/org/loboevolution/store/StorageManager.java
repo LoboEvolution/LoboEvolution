@@ -265,7 +265,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 					store.updateSizeFile();
 				}
 			} catch (Throwable err) {
-				logger.log(Level.ERROR, "run()", err);
+				logger.error( "run()", err);
 				try {
 					Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
 				} catch (InterruptedException ie) {
