@@ -65,22 +65,22 @@ public class HtmlContextMenu {
 	private HtmlRendererContextImpl context;
 
 	/** The search. */
-	private final String SEARCH = "/org/loboevolution/images/search.png";
+	private static final String SEARCH = "/org/loboevolution/images/search.png";
 
 	/** The copy. */
-	private final String COPY = "/org/loboevolution/images/copy.png";
+	private static final String COPY = "/org/loboevolution/images/copy.png";
 
 	/** The save. */
-	private final String SAVE = "/org/loboevolution/images/save.png";
+	private static final String SAVE = "/org/loboevolution/images/save.png";
 
 	/** The back. */
-	private final String BACK = "/org/loboevolution/images/back.png";
+	private static final String BACK = "/org/loboevolution/images/back.png";
 
 	/** The relod. */
-	private final String RELOD = "/org/loboevolution/images/reload.png";
+	private static final String RELOD = "/org/loboevolution/images/reload.png";
 
 	/** The forward. */
-	private final String FORWARD = "/org/loboevolution/images/forward.png";
+	private static final String FORWARD = "/org/loboevolution/images/forward.png";
 
 	/**
 	 * Instantiates a new html context menu.

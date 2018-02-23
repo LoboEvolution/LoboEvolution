@@ -84,7 +84,7 @@ public class XPathUtils {
 	 *             the x path expression exception
 	 */
 	/*
-	 * public synchronized static NodeList getElements(String expression, Node
+	 * public static synchronized NodeList getElements(String expression, Node
 	 * node) throws XPathExpressionException {NodeList nodes = new
 	 * DOMNodeListImpl((Collection)xpath.evaluate(expression, node,
 	 * XPathConstants.NODESET)); return nodes;}
@@ -101,7 +101,7 @@ public class XPathUtils {
 	 * @throws XPathExpressionException
 	 *             if the expression does not parse
 	 */
-	public synchronized static Node getElement(String expression, Node node) throws XPathExpressionException {
+	public static synchronized Node getElement(String expression, Node node) throws XPathExpressionException {
 		Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
 		return n;
 	}
@@ -118,7 +118,7 @@ public class XPathUtils {
 	 * @throws XPathExpressionException
 	 *             the x path expression exception
 	 */
-	public synchronized static String getString(String expression, Node node) throws XPathExpressionException {
+	public static synchronized String getString(String expression, Node node) throws XPathExpressionException {
 		Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
 		return n == null ? null : n.getTextContent();
 	}
@@ -138,7 +138,7 @@ public class XPathUtils {
 	 * @throws XPathExpressionException
 	 *             the x path expression exception
 	 */
-	public synchronized static String getString(String expression, Node node, String namespace, String namespacePrefix)
+	public static synchronized String getString(String expression, Node node, String namespace, String namespacePrefix)
 			throws XPathExpressionException {
 		functionResolver.addNamespaceMapping(namespacePrefix, namespace);
 		Node n = (Node) xpath.evaluate(expression, node, XPathConstants.NODE);
@@ -161,7 +161,7 @@ public class XPathUtils {
 	 *             the x path expression exception
 	 */
 	/*
-	 * public synchronized static NodeList getElements(XPathExpression
+	 * public static synchronized NodeList getElements(XPathExpression
 	 * expression, Node node) throws XPathExpressionException {NodeList nodes =
 	 * new DOMNodeListImpl((Collection)expression.evaluate(node,
 	 * XPathConstants.NODESET)); return nodes;}
@@ -178,7 +178,7 @@ public class XPathUtils {
 	 * @throws XPathExpressionException
 	 *             if the expression does not parse
 	 */
-	public synchronized static Node getElement(XPathExpression expression, Node node) throws XPathExpressionException {
+	public static synchronized Node getElement(XPathExpression expression, Node node) throws XPathExpressionException {
 		Node n = (Node) expression.evaluate(node, XPathConstants.NODE);
 		return n;
 	}
@@ -195,7 +195,7 @@ public class XPathUtils {
 	 * @throws XPathExpressionException
 	 *             the x path expression exception
 	 */
-	public synchronized static String getString(XPathExpression expression, Node node) throws XPathExpressionException {
+	public static synchronized String getString(XPathExpression expression, Node node) throws XPathExpressionException {
 		Node n = (Node) expression.evaluate(node, XPathConstants.NODE);
 		return n == null ? null : n.getTextContent();
 	}
@@ -210,7 +210,7 @@ public class XPathUtils {
 	 * @throws XPathExpressionException
 	 *             for a malformed XPath expression
 	 */
-	public synchronized static XPathExpression compile(String expression) throws XPathExpressionException {
+	public static synchronized XPathExpression compile(String expression) throws XPathExpressionException {
 		return xpath.compile(expression);
 	}
 

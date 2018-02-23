@@ -77,13 +77,13 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	private final long quota;
 
 	/** The size file name. */
-	private final String SIZE_FILE_NAME = ".W$Dir$Size";
+	private static final String SIZE_FILE_NAME = ".W$Dir$Size";
 
 	/** Made up *. */
-	private final int EMPTY_FILE_SIZE = 64;
+	private static final int EMPTY_FILE_SIZE = 64;
 
 	/** Made up *. */
-	private final int DIRECTORY_SIZE = 64;
+	private static final int DIRECTORY_SIZE = 64;
 
 	/** The size. */
 	private long size = -1;

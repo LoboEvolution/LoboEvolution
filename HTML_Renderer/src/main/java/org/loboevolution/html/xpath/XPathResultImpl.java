@@ -100,18 +100,18 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	public static final short FIRST_ORDERED_NODE_TYPE = 9;
 
 	/** The wrapped XObject. */
-	final private XObject m_resultObj;
+	private finalXObject m_resultObj;
 
 	/**
 	 * The xpath object that wraps the expression used for this result.
 	 */
-	final private XPath m_xpath;
+	private finalXPath m_xpath;
 
 	/**
 	 * This the type specified by the user during construction. Typically the
 	 * constructor will be called by org.apache.xpath.XPath.evaluate().
 	 */
-	final private short m_resultType;
+	private finalshort m_resultType;
 
 	/** The m_is invalid iterator state. */
 	private boolean m_isInvalidIteratorState = false;
@@ -120,7 +120,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 * Only used to attach a mutation event handler when specified type is an
 	 * iterator type.
 	 */
-	final private Node m_contextNode;
+	private finalNode m_contextNode;
 
 	/**
 	 * The iterator, if this is an iterator type.

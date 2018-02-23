@@ -78,7 +78,7 @@ public class TempFileManager {
 	 *
 	 * @return the instance
 	 */
-	public synchronized static TempFileManager getInstance() {
+	public static synchronized TempFileManager getInstance() {
 		if (instance == null) {
 			instance = new TempFileManager();
 		}

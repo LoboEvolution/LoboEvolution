@@ -71,7 +71,7 @@ public class ColorFactory implements ColorCommon{
 	 *
 	 * @return the instance
 	 */
-	public synchronized static final ColorFactory getInstance() {
+	public static synchronized final ColorFactory getInstance() {
 		if (instance == null) {
 			instance = new ColorFactory();
 		}

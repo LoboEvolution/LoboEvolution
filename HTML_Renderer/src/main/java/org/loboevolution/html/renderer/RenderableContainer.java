@@ -151,7 +151,7 @@ public interface RenderableContainer {
 	 *
 	 * @return the inner width
 	 */
-	default public int getInnerWidth() {
+	public default int getInnerWidth() {
 		final Insets insets = getInsets(false, false);
 		return getWidth() - (insets.left + insets.right);
 	}
@@ -161,7 +161,7 @@ public interface RenderableContainer {
 	 *
 	 * @return the inner height
 	 */
-	default public int getInnerHeight() {
+	public default int getInnerHeight() {
 		final Insets insets = getInsets(false, false);
 		return getHeight() - (insets.top + insets.bottom);
 	}

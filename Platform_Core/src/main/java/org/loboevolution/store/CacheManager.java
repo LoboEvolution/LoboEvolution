@@ -85,7 +85,7 @@ public final class CacheManager implements Runnable {
 	 *
 	 * @return the instance
 	 */
-	public synchronized static CacheManager getInstance() {
+	public static synchronized CacheManager getInstance() {
 		SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
 			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);

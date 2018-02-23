@@ -69,7 +69,7 @@ public class BookmarksDialog extends JDialog {
 	private transient NavigatorWindow window;
 
 	/** The search. */
-	private final String SEARCH = "/org/loboevolution/images/search.png";
+	private static final String SEARCH = "/org/loboevolution/images/search.png";
 
 	/**
 	 * Instantiates a new bookmarks dialog.
