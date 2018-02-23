@@ -97,7 +97,7 @@ public class CanvasInfo implements Serializable {
 	private Double rotate;
 
 	/** The global alpha. */
-	private AlphaComposite globalAlpha;
+	private transient AlphaComposite globalAlpha;
 
 	/** The text. */
 	private String text;
@@ -109,16 +109,16 @@ public class CanvasInfo implements Serializable {
 	private String lineJoin;
 
 	/** The stroke paint. */
-	private Paint strokePaint;
+	private transient Paint strokePaint;
 
 	/** The fill paint. */
-	private Paint fillPaint;
+	private transient Paint fillPaint;
 
 	/** The font. */
 	private Font font;
 
 	/** The html image element. */
-	private HTMLImageElement image;
+	private transient HTMLImageElement image;
 
 	/** The Genearl path. */
 	private GeneralPath path;

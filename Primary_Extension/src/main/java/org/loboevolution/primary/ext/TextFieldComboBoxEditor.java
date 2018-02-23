@@ -64,7 +64,7 @@ public class TextFieldComboBoxEditor implements ComboBoxEditor {
 		return this.textField;
 	}
 
-	// private Object item;
+	// private transient Object item;
 
 	/*
 	 * (non-Javadoc)

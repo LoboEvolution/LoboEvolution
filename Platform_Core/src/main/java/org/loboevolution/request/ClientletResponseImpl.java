@@ -86,7 +86,7 @@ public class ClientletResponseImpl implements ClientletResponse {
 	private Serializable newPeristentCachedObject;
 
 	/** The new transient cached object. */
-	private Object newTransientCachedObject;
+	private transient Object newTransientCachedObject;
 
 	/** The new transient object size. */
 	private int newTransientObjectSize;

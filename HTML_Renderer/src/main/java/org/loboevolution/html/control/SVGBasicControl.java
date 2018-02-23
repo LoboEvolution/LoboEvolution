@@ -95,7 +95,7 @@ public class SVGBasicControl extends SVGStyle {
 	private static final long serialVersionUID = 1L;
 	
 	/** The animate. */
-	private SVGAnimationImpl animate;
+	private transient SVGAnimationImpl animate;
 	
 	/** The circle. */
 	public static final int CIRCLE = 1;

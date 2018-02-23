@@ -49,7 +49,7 @@ public class SaveFileAction extends ActionPool {
 	private static final Logger logger = LogManager.getLogger(SaveFileAction.class);
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/**
 	 * Instantiates a new save file action.

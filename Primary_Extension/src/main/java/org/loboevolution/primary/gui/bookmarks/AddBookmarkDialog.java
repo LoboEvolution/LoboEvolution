@@ -51,22 +51,22 @@ public class AddBookmarkDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	/** The url field. */
-	private final FormField urlField = new FormField(FieldType.TEXT, "URL:");
+	private transient FormField urlField = new FormField(FieldType.TEXT, "URL:");
 
 	/** The title field. */
-	private final FormField titleField = new FormField(FieldType.TEXT, "Title:");
+	private transient final FormField titleField = new FormField(FieldType.TEXT, "Title:");
 
 	/** The description field. */
-	private final FormField descriptionField = new FormField(FieldType.TEXT, "Description:");
+	private transient final FormField descriptionField = new FormField(FieldType.TEXT, "Description:");
 
 	/** The tags field. */
-	private final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
+	private transient final FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
 
 	/** The url. */
 	private final URL url;
 
 	/** The bookmark info. */
-	private BookmarkInfo bookmarkInfo;
+	private transient BookmarkInfo bookmarkInfo;
 
 	/**
 	 * Instantiates a new adds the bookmark dialog.

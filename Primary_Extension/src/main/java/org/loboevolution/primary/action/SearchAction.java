@@ -35,7 +35,7 @@ public class SearchAction extends ActionPool {
 	private static final long serialVersionUID = 1L;
 
 	/** The component source. */
-	private ComponentSource componentSource;
+	private transient ComponentSource componentSource;
 
 	/**
 	 * Instantiates a new search action.

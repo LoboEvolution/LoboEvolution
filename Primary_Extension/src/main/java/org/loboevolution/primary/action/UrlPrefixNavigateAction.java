@@ -47,13 +47,13 @@ public class UrlPrefixNavigateAction extends AbstractAction implements Enableabl
 	private boolean urlEncode;
 
 	/** The component source. */
-	private ComponentSource componentSource;
+	private transient ComponentSource componentSource;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/** The action. */
-	private ActionPool action;
+	private transient ActionPool action;
 
 	/**
 	 * Instantiates a new url prefix navigate action.

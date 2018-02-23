@@ -104,7 +104,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	public static final String TITLE = "LoboEvolution PDF Viewer";
 
 	/** The current PDFFile. */
-	private PDFFile curFile;
+	private transient PDFFile curFile;
 
 	/** the name of the current document. */
 	private String docName;
@@ -116,13 +116,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	private JScrollPane thumbscroll;
 
 	/** The thumbnail display. */
-	private ThumbPanel thumbs;
+	private transient ThumbPanel thumbs;
 
 	/** The page display. */
-	private PagePanel page;
+	private transient PagePanel page;
 
 	/** The full screen page display, or null if not in full screen mode. */
-	private PagePanel fspp;
+	private transient PagePanel fspp;
 	
 	/** The current page number (starts at 0), or -1 if no page. */
 	private int curpage = -1;
@@ -134,10 +134,10 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	private JTextField pageField;
 
 	/** the full screen window, or null if not in full screen mode. */
-	private FullScreenWindow fullScreen;
+	private transient FullScreenWindow fullScreen;
 
 	/** the root of the outline, or null if there is no outline. */
-	private OutlineNode outline = null;
+	private transient OutlineNode outline = null;
 
 	/** The page format for printing. */
 	private transient PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
@@ -146,7 +146,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	private boolean doThumb = true;
 
 	/** a thread that pre-loads the next page for faster response. */
-	private PagePreparer pagePrep;
+	private transient PagePreparer pagePrep;
 
 	/** the window containing the pdf outline, or null if one doesn't exist. */
 	private JDialog olf;
@@ -1081,26 +1081,30 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	@Override
 	public void keyPressed(KeyEvent evt) {
 		int code = evt.getKeyCode();
-		if (code == KeyEvent.VK_LEFT) {
+		
+		switch (code) {
+		case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_UP:
+		case KeyEvent.VK_PAGE_UP:
 			doPrev();
-		} else if (code == KeyEvent.VK_RIGHT) {
+			break;
+		case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_DOWN:
+		case KeyEvent.VK_PAGE_DOWN:
+		case KeyEvent.VK_SPACE:
 			doNext();
-		} else if (code == KeyEvent.VK_UP) {
-			doPrev();
-		} else if (code == KeyEvent.VK_DOWN) {
-			doNext();
-		} else if (code == KeyEvent.VK_HOME) {
+			break;
+		case KeyEvent.VK_HOME:
 			doFirst();
-		} else if (code == KeyEvent.VK_END) {
+			break;
+		case KeyEvent.VK_END:
 			doLast();
-		} else if (code == KeyEvent.VK_PAGE_UP) {
-			doPrev();
-		} else if (code == KeyEvent.VK_PAGE_DOWN) {
-			doNext();
-		} else if (code == KeyEvent.VK_SPACE) {
-			doNext();
-		} else if (code == KeyEvent.VK_ESCAPE) {
+			break;
+		case KeyEvent.VK_ESCAPE:
 			setFullScreenMode(false, false);
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -1118,7 +1122,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		private long timeout;
 
 		/** The anim. */
-		private Thread anim;
+		private transient Thread anim;
 
 		/**
 		 * add the digit to the page number and start the timeout thread.

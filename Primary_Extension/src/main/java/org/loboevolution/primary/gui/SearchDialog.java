@@ -45,7 +45,7 @@ public class SearchDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	/** The tags field. */
-	private final FormField tagsField = new FormField(FieldType.TEXT, "Keywords:");
+	private transient final FormField tagsField = new FormField(FieldType.TEXT, "Keywords:");
 
 	/** The search keywords. */
 	private String searchKeywords = null;

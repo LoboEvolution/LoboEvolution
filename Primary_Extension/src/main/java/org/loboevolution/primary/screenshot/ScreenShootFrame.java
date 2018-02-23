@@ -55,7 +55,7 @@ public class ScreenShootFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The image. */
-	private BufferedImage image;
+	private transient BufferedImage image;
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ScreenShootFrame.class);

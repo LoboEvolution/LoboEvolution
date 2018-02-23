@@ -64,10 +64,10 @@ public class FrameSetPanel extends JComponent implements NodeRenderer, HtmlAttri
 	private static final Logger logger = LogManager.getLogger(FrameSetPanel.class);
 	
 	/** The root node. */
-	private HTMLElementImpl rootNode;
+	private transient HTMLElementImpl rootNode;
 	
 	/** The html context. */
-	private HtmlRendererContext htmlContext;
+	private transient HtmlRendererContext htmlContext;
 
 	/** The frame components. */
 	private Component[] frameComponents;

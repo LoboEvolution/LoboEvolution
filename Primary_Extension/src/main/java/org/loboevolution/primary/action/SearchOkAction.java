@@ -36,7 +36,7 @@ public class SearchOkAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The tags field. */
-	private final FormField tagsField;
+	private transient final FormField tagsField;
 
 	/** The search. */
 	private SearchDialog search;

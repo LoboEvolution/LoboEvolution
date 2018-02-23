@@ -39,7 +39,7 @@ public class GoToAction extends ActionPool {
 	private NavigationEntry entry;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/**
 	 * Instantiates a new go to action.

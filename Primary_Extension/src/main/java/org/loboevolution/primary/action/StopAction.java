@@ -35,7 +35,7 @@ public class StopAction extends ActionPool {
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/**
 	 * Instantiates a new stop action.

@@ -39,7 +39,7 @@ public class AddressField extends JComboBox<String> {
 	private static final long serialVersionUID = 1L;
 
 	/** The component source. */
-	private final ComponentSource componentSource;
+	private transient final ComponentSource componentSource;
 	
 	/** The combo invalid. */
 	private boolean comboInvalid = true;

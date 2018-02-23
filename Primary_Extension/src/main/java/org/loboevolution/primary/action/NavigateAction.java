@@ -36,7 +36,7 @@ public class NavigateAction extends ActionPool {
 	private static final long serialVersionUID = 1L;
 
 	/** The component source. */
-	private ComponentSource componentSource;
+	private transient ComponentSource componentSource;
 
 	/** The url. */
 	private URL url;

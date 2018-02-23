@@ -37,10 +37,10 @@ public class OrderedValue implements Comparable<Object>, Serializable {
 	private int approximateSize;
 	
 	/** The key. */
-	private Object key;
+	private transient Object key;
 	
 	/** The value. */
-	private Object value;
+	private transient Object value;
 
 	/**
 	 * Instantiates a new ordered value.

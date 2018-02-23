@@ -46,10 +46,10 @@ public class ToolsSettings implements Serializable {
 	private static final long serialVersionUID = 22574500006000800L;
 
 	/** The search engines. */
-	private Collection<SearchEngine> searchEngines;
+	private transient Collection<SearchEngine> searchEngines;
 
 	/** The selected search engine. */
-	private SearchEngine selectedSearchEngine;
+	private transient SearchEngine selectedSearchEngine;
 
 	/** The download directory. */
 	private File downloadDirectory;

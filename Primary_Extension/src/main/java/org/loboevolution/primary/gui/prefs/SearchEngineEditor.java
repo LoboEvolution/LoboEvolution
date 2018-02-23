@@ -41,16 +41,16 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 	private final FormPanel formPanel = new FormPanel();
 
 	/** The name field. */
-	private final FormField nameField = new FormField(FieldType.TEXT);
+	private transient final FormField nameField = new FormField(FieldType.TEXT);
 
 	/** The description field. */
-	private final FormField descriptionField = new FormField(FieldType.TEXT);
+	private transient final FormField descriptionField = new FormField(FieldType.TEXT);
 
 	/** The base url field. */
-	private final FormField baseUrlField = new FormField(FieldType.TEXT);
+	private transient final FormField baseUrlField = new FormField(FieldType.TEXT);
 
 	/** The query parameter field. */
-	private final FormField queryParameterField = new FormField(FieldType.TEXT);
+	private transient final FormField queryParameterField = new FormField(FieldType.TEXT);
 
 	/**
 	 * Instantiates a new search engine editor.

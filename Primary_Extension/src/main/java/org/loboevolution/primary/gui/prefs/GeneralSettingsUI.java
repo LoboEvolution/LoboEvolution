@@ -66,10 +66,10 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private final GeneralSettings settings = GeneralSettings.getInstance();
 
 	/** The ie version field. */
-	private final FormField ieVersionField;
+	private transient final FormField ieVersionField;
 
 	/** The mozilla version field. */
-	private final FormField mozillaVersionField;
+	private transient final FormField mozillaVersionField;
 
 	/** The ie spoof panel. */
 	private final CheckBoxPanel ieSpoofPanel;

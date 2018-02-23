@@ -66,7 +66,7 @@ public class BookmarksDialog extends JDialog {
 	private transient TableRowSorter<TableModel> rowSorter;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/** The search. */
 	private final String SEARCH = "/org/loboevolution/images/search.png";

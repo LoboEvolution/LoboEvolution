@@ -45,7 +45,7 @@ public class DefaultBrowserWindow extends AbstractBrowserWindow {
 	private static final long serialVersionUID = 1L;
 
 	/** The frame panel. */
-	private final FramePanel framePanel;
+	private transient final FramePanel framePanel;
 
 	/** The window context. */
 	private final NavigatorWindowImpl windowContext;

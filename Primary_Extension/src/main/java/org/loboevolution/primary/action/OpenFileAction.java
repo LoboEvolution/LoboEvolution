@@ -39,10 +39,10 @@ public class OpenFileAction extends ActionPool {
 	private static final long serialVersionUID = 1L;
 
 	/** The component source. */
-	private ComponentSource componentSource;
+	private transient ComponentSource componentSource;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/**
 	 * Instantiates a new open file action.

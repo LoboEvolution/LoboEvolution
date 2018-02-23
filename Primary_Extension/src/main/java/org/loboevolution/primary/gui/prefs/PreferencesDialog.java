@@ -53,10 +53,10 @@ public class PreferencesDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	/** The preferences panel. */
-	private final PreferencesPanel preferencesPanel;
+	private transient final PreferencesPanel preferencesPanel;
 
 	/** The preferences tree. */
-	private final PreferencesTree preferencesTree;
+	private transient final PreferencesTree preferencesTree;
 
 	/**
 	 * Instantiates a new preferences dialog.

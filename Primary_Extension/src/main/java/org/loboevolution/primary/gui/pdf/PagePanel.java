@@ -59,7 +59,7 @@ public class PagePanel extends JPanel implements ImageObserver {
 	private transient Image currentImage;
 
 	/** The current PDFPage that was rendered into currentImage. */
-	private PDFPage currentPage;
+	private transient PDFPage currentPage;
 
 	/** The current xform. */
 	private AffineTransform currentXform;
@@ -86,7 +86,7 @@ public class PagePanel extends JPanel implements ImageObserver {
 	private boolean useZoom = false;
 	
 	/** a flag indicating whether the current page is done or not. */
-	private Flag flag = new Flag();
+	private transient Flag flag = new Flag();
 
 	/** x location of the mouse-down event. */
 	private int downx;

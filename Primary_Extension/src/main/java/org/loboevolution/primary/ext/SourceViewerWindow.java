@@ -21,6 +21,7 @@
 package org.loboevolution.primary.ext;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
@@ -51,10 +52,10 @@ public class SourceViewerWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The text area. */
-	private RSyntaxTextArea textArea;
+	private transient RSyntaxTextArea textArea;
 
 	/** The scroll bar. */
-	private RTextScrollPane scrollBar;
+	private transient RTextScrollPane scrollBar;
 
 	/** The jtf filter. */
 	private JTextField jtfFilter;
@@ -72,10 +73,28 @@ public class SourceViewerWindow extends JFrame {
 		super("Lobo Source Viewer");
 		setResizable(true);
 		setLocationRelativeTo(null);
-		setIconImage(new ImageIcon(getClass().getResource("/org/loboevolution/images/icon.png")).getImage());
-		setVisible(true);
 		addTextArea();
-
+	}
+	
+	@Override
+	public Image getIconImage() {
+		return new ImageIcon(getClass().getResource("/org/loboevolution/images/icon.png")).getImage();
+	}
+	
+	
+	@Override
+	public boolean isVisible() {
+		return true;
+	}
+	
+	/**
+	 * Sets the text.
+	 *
+	 * @param text
+	 *            the new text
+	 */
+	public void setText(String text) {
+		this.textArea.setText(text);
 	}
 
 	private void addTextArea() {
@@ -134,15 +153,5 @@ public class SourceViewerWindow extends JFrame {
 
 			}
 		});
-	}
-
-	/**
-	 * Sets the text.
-	 *
-	 * @param text
-	 *            the new text
-	 */
-	public void setText(String text) {
-		this.textArea.setText(text);
 	}
 }

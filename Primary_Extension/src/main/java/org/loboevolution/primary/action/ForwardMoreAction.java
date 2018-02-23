@@ -36,10 +36,10 @@ public class ForwardMoreAction extends AbstractAction implements EnableableActio
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/** The action. */
-	private ActionPool action;
+	private transient ActionPool action;
 
 	/**
 	 * Instantiates a new forward more action.

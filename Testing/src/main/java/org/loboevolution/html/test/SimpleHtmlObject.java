@@ -38,7 +38,7 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	private static final long serialVersionUID = 1L;
 	
 	/** The element. */
-	protected final HTMLElement element;
+	protected transient final HTMLElement element;
 
 	/**
 	 * Instantiates a new simple html object.

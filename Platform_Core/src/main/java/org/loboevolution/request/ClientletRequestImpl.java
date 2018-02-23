@@ -40,7 +40,7 @@ public class ClientletRequestImpl implements ClientletRequest {
 	private final URL url;
 
 	/** The param info. */
-	private final ParameterInfo paramInfo;
+	private transient final ParameterInfo paramInfo;
 
 	/** The extra headers. */
 	private final Header[] extraHeaders;

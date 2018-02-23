@@ -40,22 +40,22 @@ public class NavigationEvent extends java.util.EventObject {
 	private final String method;
 
 	/** The param info. */
-	private final ParameterInfo paramInfo;
+	private transient final ParameterInfo paramInfo;
 
 	/** The target type. */
-	private final TargetType targetType;
+	private transient final TargetType targetType;
 
 	/** The request type. */
-	private final RequestType requestType;
+	private transient final RequestType requestType;
 
 	/** The from click. */
 	private final boolean fromClick;
 
 	/** The link object. */
-	private final Object linkObject;
+	private transient final Object linkObject;
 
 	/** The originating frame. */
-	private final NavigatorFrame originatingFrame;
+	private transient final NavigatorFrame originatingFrame;
 
 	/**
 	 * Instantiates a new navigation event.

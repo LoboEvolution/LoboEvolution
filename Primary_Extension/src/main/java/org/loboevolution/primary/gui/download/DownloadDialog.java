@@ -80,31 +80,31 @@ public class DownloadDialog extends JFrame {
 	private final JProgressBar progressBar = new JProgressBar();
 
 	/** The bottom form panel. */
-	private final FormPanel bottomFormPanel = new FormPanel();
+	private transient final FormPanel bottomFormPanel = new FormPanel();
 
 	/** The top form panel. */
-	private final FormPanel topFormPanel = new FormPanel();
+	private transient final FormPanel topFormPanel = new FormPanel();
 
 	/** The document field. */
-	private final FormField documentField = new FormField(FieldType.TEXT, false);
+	private transient final FormField documentField = new FormField(FieldType.TEXT, false);
 
 	/** The size field. */
-	private final FormField sizeField = new FormField(FieldType.TEXT, false);
+	private transient final FormField sizeField = new FormField(FieldType.TEXT, false);
 
 	/** The destination field. */
-	private final FormField destinationField = new FormField(FieldType.TEXT, false);
+	private transient final FormField destinationField = new FormField(FieldType.TEXT, false);
 
 	/** The time left field. */
-	private final FormField timeLeftField = new FormField(FieldType.TEXT, false);
+	private transient final FormField timeLeftField = new FormField(FieldType.TEXT, false);
 
 	/** The mime type field. */
-	private final FormField mimeTypeField = new FormField(FieldType.TEXT, false);
+	private transient final FormField mimeTypeField = new FormField(FieldType.TEXT, false);
 
 	/** The transfer rate field. */
-	private final FormField transferRateField = new FormField(FieldType.TEXT, false);
+	private transient final FormField transferRateField = new FormField(FieldType.TEXT, false);
 
 	/** The transfer size field. */
-	private final FormField transferSizeField = new FormField(FieldType.TEXT, false);
+	private transient final FormField transferSizeField = new FormField(FieldType.TEXT, false);
 
 	/** The save button. */
 	private final JButton saveButton = new JButton();
@@ -125,7 +125,7 @@ public class DownloadDialog extends JFrame {
 	private final int knownContentLength;
 	
 	/** The request handler. */
-	private RequestHandler requestHandler;
+	private transient RequestHandler requestHandler;
 
 	/** The destination file. */
 	private File destinationFile;

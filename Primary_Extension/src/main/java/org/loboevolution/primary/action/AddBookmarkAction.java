@@ -40,7 +40,7 @@ public class AddBookmarkAction extends ActionPool {
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/**
 	 * Instantiates a new adds the bookmark action.

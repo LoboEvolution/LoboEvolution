@@ -40,7 +40,7 @@ public class BookmarkNavigateAction extends ActionPool {
 	private URL url;
 
 	/** The component source. */
-	private ComponentSource componentSource;
+	private transient ComponentSource componentSource;
 
 	/**
 	 * Instantiates a new bookmark navigate action.

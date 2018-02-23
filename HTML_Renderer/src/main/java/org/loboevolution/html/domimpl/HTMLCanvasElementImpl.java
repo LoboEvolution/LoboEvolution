@@ -62,10 +62,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	private ArrayList<CanvasInfo> listCanvasInfo;
 
 	/** The fill style. */
-	private Object fillStyle;
+	private transient Object fillStyle;
 
 	/** The stroke style. */
-	private Object strokeStyle;
+	private transient Object strokeStyle;
 
 	/** The fill paint. */
 	private Paint fillPaint;

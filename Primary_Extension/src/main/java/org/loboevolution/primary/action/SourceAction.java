@@ -37,13 +37,13 @@ public class SourceAction extends AbstractAction implements EnableableAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The window. */
-	private NavigatorWindow window;
+	private transient NavigatorWindow window;
 
 	/** The component source. */
-	private ComponentSource componentSource;
+	private transient ComponentSource componentSource;
 
 	/** The action. */
-	private ActionPool action;
+	private transient ActionPool action;
 
 	/**
 	 * Instantiates a new source action.

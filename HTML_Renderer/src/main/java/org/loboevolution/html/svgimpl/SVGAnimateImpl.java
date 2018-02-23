@@ -45,7 +45,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private Timer timer;
 	private SVGInfo info;
 	private RUIControl ruicontrol;
-	private SVGAnimationImpl animate;
+	private transient SVGAnimationImpl animate;
 	private float from_xml;
 	private float to_xml;
 	private String from_trans;
