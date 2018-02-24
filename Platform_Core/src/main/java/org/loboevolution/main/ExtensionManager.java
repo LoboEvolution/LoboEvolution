@@ -38,7 +38,7 @@ import java.util.TreeSet;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.Clientlet;

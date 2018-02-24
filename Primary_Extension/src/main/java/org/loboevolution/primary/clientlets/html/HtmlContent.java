@@ -24,8 +24,6 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.ComponentContent;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.util.io.BufferExceededException;
@@ -39,9 +37,6 @@ import org.w3c.dom.NodeList;
  * The Class HtmlContent.
  */
 public class HtmlContent implements ComponentContent {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(HtmlContent.class);
 
 	/** The document. */
 	private final HTMLDocument document;

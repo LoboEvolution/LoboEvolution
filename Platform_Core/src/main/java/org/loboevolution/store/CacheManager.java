@@ -32,7 +32,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.jar.JarFile;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.LRUCache;

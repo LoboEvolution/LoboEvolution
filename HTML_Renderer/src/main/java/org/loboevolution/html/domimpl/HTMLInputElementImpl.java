@@ -22,7 +22,7 @@ package org.loboevolution.html.domimpl;
 
 import java.io.File;
 
-import org.apache.logging.log4j.Level;
+
 import org.loboevolution.html.FormInput;
 import org.loboevolution.html.dombl.InputContext;
 import org.loboevolution.w3c.html.HTMLInputElement;

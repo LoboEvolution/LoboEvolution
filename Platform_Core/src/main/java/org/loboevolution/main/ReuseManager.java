@@ -37,7 +37,7 @@ import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.store.StorageManager;
@@ -97,7 +97,6 @@ public class ReuseManager {
 	 */
 	public void launch(String[] args) throws Exception {
 		boolean launched = false;
-		// long time1 = System.currentTimeMillis();
 		try {
 			// Bind host for reuse server is 127.0.0.1, and it can
 			// only be accessed locally.
@@ -155,9 +154,6 @@ public class ReuseManager {
 						// VM must have died. We don't have logging at this
 						// point.
 						PlatformInit.getInstance().initLogging();
-						LogManager.getLogger(ReuseManager.class).log(Level.WARN,
-								"Another instance of the application must have been running but was not shut down properly.",
-								ioe);
 						portFile.delete();
 					} finally {
 						s.close();

@@ -189,7 +189,6 @@ public class HtmlClientlet implements Clientlet {
 			document.addDocumentNotificationListener(listener);
 			// Set resulting content before parsing
 			// to enable incremental rendering.
-			long time1 = System.currentTimeMillis();
 			// The load() call starts parsing.
 			try {
 				document.load(false);

@@ -35,7 +35,6 @@ import java.util.Optional;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlRendererContext;
@@ -354,10 +353,6 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		} else if (parent == null) {
 			// Has to be top RBlock.
 			this.container.relayout();
-		} else {
-			if (logger.isEnabled(Level.INFO)) {
-				logger.warn("relayout(): Don't know how to relayout " + this + ", parent being " + parent);
-			}
 		}
 	}
 
@@ -458,10 +453,6 @@ public abstract class BaseBoundableRenderable extends BaseRenderable implements 
 		} else if (parent == null) {
 			// Has to be top RBlock.
 			this.container.repaint(x, y, width, height);
-		} else {
-			if (logger.isEnabled(Level.INFO)) {
-				logger.warn("repaint(): Don't know how to repaint " + this + ", parent being " + parent);
-			}
 		}
 	}
 

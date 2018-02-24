@@ -20,9 +20,7 @@
  */
 package org.loboevolution.html.layout;
 
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
@@ -34,9 +32,6 @@ import org.loboevolution.html.style.AbstractCSSProperties;
  * The Class CommonWidgetLayout.
  */
 public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeProperties {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CommonWidgetLayout.class);
 
 	/** The Constant ADD_INLINE. */
 	protected static final int ADD_INLINE = 0;

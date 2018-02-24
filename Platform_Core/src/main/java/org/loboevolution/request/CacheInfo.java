@@ -30,7 +30,7 @@ import java.io.ObjectInputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.store.CacheManager;
@@ -239,13 +239,7 @@ public class CacheInfo {
 				oin.close();
 				in.close();
 			}
-		} catch (IOException ioe) {
-			logger.log(Level.WARN, "getPersistentObject(): Unable to load persistent cached object.", ioe);
-			return null;
-		} catch (ClassNotFoundException ioe) {
-			logger.log(Level.WARN,
-					"getPersistentObject(): Failed to load persistent cached object apparently due to versioning issue.",
-					ioe);
+		} catch (IOException | ClassNotFoundException ioe) {
 			return null;
 		}
 	}

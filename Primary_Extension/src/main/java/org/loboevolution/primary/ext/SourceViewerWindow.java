@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;

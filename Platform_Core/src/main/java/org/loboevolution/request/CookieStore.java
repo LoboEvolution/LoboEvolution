@@ -36,7 +36,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.Cookie;
@@ -144,13 +144,7 @@ public class CookieStore {
 			path = "/";
 		}
 		if (domain != null) {
-			if (expires == null && maxAge == null && logger.isInfoEnabled()) {
-				logger.log(Level.INFO,
-						"saveCookie(): Not rejecting transient cookie that specifies domain '" + domain + "'.");
-			}
 			if (!Domains.isValidCookieDomain(domain, urlHostName)) {
-				logger.error("saveCookie(): Rejecting cookie with invalid domain '" + domain + "' for host '"
-						+ urlHostName + "'.");
 				return;
 			}
 		}
@@ -253,7 +247,6 @@ public class CookieStore {
 		if (path == null || path.length() == 0) {
 			path = "/";
 		}
-		boolean liflag = logger.isInfoEnabled();
 		Collection<Cookie> cookies = new LinkedList<Cookie>();
 		Set<String> transientCookieNames = new HashSet<String>();
 		synchronized (this) {

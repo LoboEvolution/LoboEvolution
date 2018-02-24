@@ -23,7 +23,7 @@ package org.loboevolution.html.js;
 import java.net.URL;
 import java.util.MissingResourceException;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
@@ -129,7 +129,6 @@ public class Executor {
 				}
 				return ((Boolean) result).booleanValue();
 			} catch (Exception ex) {
-				logger.log(Level.WARN, "executeFunction(): There was an error in Javascript code.", ex);
 				return true;
 			}
 		} finally {

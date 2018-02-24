@@ -40,7 +40,7 @@ import java.util.TreeSet;
 
 import javax.swing.SwingUtilities;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlAttributeProperties;
@@ -278,11 +278,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	public void layout(int desiredWidth, int desiredHeight, Insets paddingInsets, int yLimit,
 			FloatingBounds floatBounds, boolean sizeOnly) {
-		// Expected in GUI thread. It's possible it may be invoked during pack()
-		// outside of the GUI thread.
-		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
-			logger.warn("layout(): Invoked outside GUI dispatch thread.");
-		}
 		RenderableContainer box = this.container;
 		this.paddingInsets = paddingInsets;
 		this.yLimit = yLimit;
@@ -1509,9 +1504,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the renderables
 	 */
 	public Iterator getRenderables(Rectangle clipBounds) {
-		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
-			logger.warn("getRenderables(): Invoked outside GUI dispatch thread.");
-		}
 		ArrayList sr = this.seqRenderables;
 		Iterator baseIterator = null;
 		if (sr != null) {
@@ -1591,14 +1583,10 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the renderables
 	 */
 	public Iterator getRenderables(int pointx, int pointy) {
-		if (!SwingUtilities.isEventDispatchThread() && logger.isEnabled(Level.INFO)) {
-			logger.warn("getRenderable(): Invoked outside GUI dispatch thread.");
-		}
 		Collection result = null;
 		SortedSet others = this.positionedRenderables;
 		int size = others == null ? 0 : others.size();
-		PositionedRenderable[] otherArray = size == 0 ? null
-				: (PositionedRenderable[]) others.toArray(PositionedRenderable.EMPTY_ARRAY);
+		PositionedRenderable[] otherArray = size == 0 ? null : (PositionedRenderable[]) others.toArray(PositionedRenderable.EMPTY_ARRAY);
 		// Try to find in other renderables with z-index >= 0 first.
 		int index = 0;
 		if (size != 0) {

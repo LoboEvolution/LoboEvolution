@@ -33,7 +33,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Random;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

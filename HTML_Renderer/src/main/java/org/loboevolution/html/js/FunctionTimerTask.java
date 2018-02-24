@@ -23,7 +23,7 @@ package org.loboevolution.html.js;
 import java.awt.event.ActionEvent;
 import java.lang.ref.WeakReference;
 
-import org.apache.logging.log4j.Level;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;

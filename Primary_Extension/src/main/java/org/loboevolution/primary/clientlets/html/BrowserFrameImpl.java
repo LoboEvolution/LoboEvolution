@@ -27,8 +27,6 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.net.URL;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.BrowserFrame;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.ua.NavigatorFrame;
@@ -39,9 +37,6 @@ import org.loboevolution.ua.TargetType;
  * The Class BrowserFrameImpl.
  */
 public class BrowserFrameImpl implements BrowserFrame {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(BrowserFrameImpl.class);
 
 	/** The frame. */
 	private final NavigatorFrame frame;
