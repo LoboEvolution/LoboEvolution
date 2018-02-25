@@ -39,8 +39,8 @@ import javax.swing.text.PlainDocument;
 
 import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.domimpl.DOMElementImpl;
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
@@ -80,13 +80,13 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 
 			@Override
 			public void keyPressed(KeyEvent event) {
-				DOMEventImpl.getInstance().onKeyDown(modelNode, event);
-				DOMEventImpl.getInstance().onKeyPress(modelNode, event);
+				GuiMouseImpl.getInstance().onKeyDown(modelNode, event);
+				GuiMouseImpl.getInstance().onKeyPress(modelNode, event);
 			}
 
 			@Override
 			public void keyReleased(KeyEvent event) {
-				DOMEventImpl.getInstance().onKeyUp(modelNode, event);
+				GuiMouseImpl.getInstance().onKeyUp(modelNode, event);
 
 			}
 		});

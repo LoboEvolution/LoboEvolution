@@ -27,9 +27,8 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JCheckBox;
 
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
-
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
@@ -65,7 +64,7 @@ public class InputCheckboxControl extends BaseInputControl {
 		checkBox.setEnabled(!modelNode.getDisabled());
 		checkBox.setSelected(modelNode.getChecked());
 		widget.addActionListener(
-				event -> DOMEventImpl.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0));
+				event -> GuiMouseImpl.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0));
 
 		this.add(checkBox);
 	}

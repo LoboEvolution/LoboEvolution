@@ -24,10 +24,9 @@ import java.awt.ComponentOrientation;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
@@ -90,7 +89,7 @@ public class InputRadioControl extends BaseInputControl {
 		this.add(radio);
 
 		widget.addActionListener(
-				event -> DOMEventImpl.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
+				event -> GuiMouseImpl.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
 	}
 
 	/*

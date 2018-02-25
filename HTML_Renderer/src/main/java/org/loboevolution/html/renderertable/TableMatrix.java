@@ -25,7 +25,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -135,9 +134,6 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 
 	/** The table width length. */
 	private HtmlLength tableWidthLength;
-	
-	/** The armed renderable. */
-	private BoundableRenderable armedRenderable;
 
 	/**
 	 * Instantiates a new table matrix.
@@ -1389,174 +1385,6 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.render.BoundableRenderable#onMouseClick(java.awt.
-	 * event .MouseEvent, int, int)
-	 */
-	/**
-	 * On mouse click.
-	 *
-	 * @param event
-	 *            the event
-	 * @param x
-	 *            the x
-	 * @param y
-	 *            the y
-	 * @return true, if successful
-	 */
-	public boolean onMouseClick(MouseEvent event, int x, int y) {
-		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			RTableCell cell = (RTableCell) allCells.get(i);
-			Rectangle bounds = cell.getBounds();
-			if (bounds.contains(x, y)) {
-				if (!cell.onMouseClick(event, x - bounds.x, y - bounds.y)) {
-					return false;
-				}
-				break;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * On double click.
-	 *
-	 * @param event
-	 *            the event
-	 * @param x
-	 *            the x
-	 * @param y
-	 *            the y
-	 * @return true, if successful
-	 */
-	public boolean onDoubleClick(MouseEvent event, int x, int y) {
-		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			RTableCell cell = (RTableCell) allCells.get(i);
-			Rectangle bounds = cell.getBounds();
-			if (bounds.contains(x, y)) {
-				if (!cell.onDoubleClick(event, x - bounds.x, y - bounds.y)) {
-					return false;
-				}
-				break;
-			}
-		}
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.render.BoundableRenderable#onMouseDisarmed(java.awt
-	 * .event.MouseEvent)
-	 */
-	/**
-	 * On mouse disarmed.
-	 *
-	 * @param event
-	 *            the event
-	 * @return true, if successful
-	 */
-	public boolean onMouseDisarmed(MouseEvent event) {
-		BoundableRenderable ar = this.armedRenderable;
-		if (ar != null) {
-			this.armedRenderable = null;
-			return ar.onMouseDisarmed(event);
-		} else {
-			return true;
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.render.BoundableRenderable#onMousePressed(java.awt.
-	 * event.MouseEvent, int, int)
-	 */
-	/**
-	 * On mouse pressed.
-	 *
-	 * @param event
-	 *            the event
-	 * @param x
-	 *            the x
-	 * @param y
-	 *            the y
-	 * @return true, if successful
-	 */
-	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			RTableCell cell = (RTableCell) allCells.get(i);
-			Rectangle bounds = cell.getBounds();
-			if (bounds.contains(x, y)) {
-				if (!cell.onMousePressed(event, x - bounds.x, y - bounds.y)) {
-					this.armedRenderable = cell;
-					return false;
-				}
-				break;
-			}
-		}
-		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.render.BoundableRenderable#onMouseReleased(java.awt
-	 * .event.MouseEvent, int, int)
-	 */
-	/**
-	 * On mouse released.
-	 *
-	 * @param event
-	 *            the event
-	 * @param x
-	 *            the x
-	 * @param y
-	 *            the y
-	 * @return true, if successful
-	 */
-	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		int numCells = allCells.size();
-		boolean found = false;
-		for (int i = 0; i < numCells; i++) {
-			RTableCell cell = (RTableCell) allCells.get(i);
-			Rectangle bounds = cell.getBounds();
-			if (bounds.contains(x, y)) {
-				found = true;
-				BoundableRenderable oldArmedRenderable = this.armedRenderable;
-				if (!Objects.equals(cell, oldArmedRenderable)) {
-					oldArmedRenderable.onMouseDisarmed(event);
-					this.armedRenderable = null;
-				}
-				if (!cell.onMouseReleased(event, x - bounds.x, y - bounds.y)) {
-					return false;
-				}
-				break;
-			}
-		}
-		if (!found) {
-			BoundableRenderable oldArmedRenderable = this.armedRenderable;
-			if (oldArmedRenderable != null) {
-				oldArmedRenderable.onMouseDisarmed(event);
-				this.armedRenderable = null;
-			}
-		}
-		return true;
-	}
-
 	/**
 	 * Gets the renderables.
 	 *
@@ -1564,5 +1392,14 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 */
 	public Iterator<BoundableRenderable> getRenderables() {
 		return this.ALL_CELLS.iterator();
+	}
+	
+	/**
+	 * The table cells.
+	 *
+	 * @return the renderables
+	 */
+	public ArrayList<BoundableRenderable> getTableCells() {
+		return this.ALL_CELLS;
 	}
 }

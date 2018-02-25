@@ -27,7 +27,7 @@ import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 import org.loboevolution.html.dombl.ModelNode;
-import org.loboevolution.html.domimpl.DOMEventImpl;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.Objects;
 
 /**
@@ -411,7 +411,7 @@ public abstract class BaseRCollection extends BaseBoundableRenderable implements
 	public boolean onRightClick(MouseEvent event, int x, int y) {
 		BoundableRenderable br = this.getRenderable(x, y);
 		if (br == null) {
-			return DOMEventImpl.getInstance().onContextMenu(this.modelNode, event, x, y);
+			return GuiMouseImpl.getInstance().onContextMenu(this.modelNode, event, x, y);
 		} else {
 			return br.onRightClick(event, x - br.getX(), y - br.getY());
 		}

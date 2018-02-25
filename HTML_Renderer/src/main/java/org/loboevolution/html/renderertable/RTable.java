@@ -18,9 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Nov 19, 2005
- */
+
 package org.loboevolution.html.renderertable;
 
 import java.awt.Color;
@@ -28,7 +26,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.Collection;
 import java.util.HashMap;
@@ -42,6 +39,7 @@ import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.gui.mouse.TableMouse;
 import org.loboevolution.html.layout.LayoutKey;
 import org.loboevolution.html.layout.LayoutValue;
 import org.loboevolution.html.renderer.BaseElementRenderable;
@@ -310,23 +308,8 @@ public class RTable extends BaseElementRenderable {
 	 */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
-		Collection<PositionedRenderable> prs = this.positionedRenderables;
-		if (prs != null) {
-			Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.getRenderable();
-				Rectangle bounds = r.getBounds();
-				if (bounds.contains(x, y)) {
-					int childX = x - r.getX();
-					int childY = y - r.getY();
-					if (!r.onMouseClick(event, childX, childY)) {
-						return false;
-					}
-				}
-			}
-		}
-		return this.tableMatrix.onMouseClick(event, x, y);
+		TableMouse tm = new TableMouse(this.tableMatrix.getTableCells(), this.positionedRenderables);
+		return tm.onMouseClick(event, x, y);
 	}
 
 	/*
@@ -338,23 +321,8 @@ public class RTable extends BaseElementRenderable {
 	 */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
-		Collection<PositionedRenderable> prs = this.positionedRenderables;
-		if (prs != null) {
-			Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.getRenderable();
-				Rectangle bounds = r.getBounds();
-				if (bounds.contains(x, y)) {
-					int childX = x - r.getX();
-					int childY = y - r.getY();
-					if (!r.onDoubleClick(event, childX, childY)) {
-						return false;
-					}
-				}
-			}
-		}
-		return this.tableMatrix.onDoubleClick(event, x, y);
+		TableMouse tm = new TableMouse(this.tableMatrix.getTableCells(), this.positionedRenderables);
+		return tm.onDoubleClick(event, x, y);
 	}
 
 	/*
@@ -366,7 +334,8 @@ public class RTable extends BaseElementRenderable {
 	 */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
-		return this.tableMatrix.onMouseDisarmed(event);
+		TableMouse tm = new TableMouse(this.tableMatrix.getTableCells(), null);
+		return tm.onMouseDisarmed(event);
 	}
 
 	/*
@@ -378,23 +347,8 @@ public class RTable extends BaseElementRenderable {
 	 */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		Collection<PositionedRenderable> prs = this.positionedRenderables;
-		if (prs != null) {
-			Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.getRenderable();
-				Rectangle bounds = r.getBounds();
-				if (bounds.contains(x, y)) {
-					int childX = x - r.getX();
-					int childY = y - r.getY();
-					if (!r.onMousePressed(event, childX, childY)) {
-						return false;
-					}
-				}
-			}
-		}
-		return this.tableMatrix.onMousePressed(event, x, y);
+		TableMouse tm = new TableMouse(this.tableMatrix.getTableCells(), this.positionedRenderables);
+		return tm.onMousePressed(event, x, y);
 	}
 
 	/*
@@ -406,23 +360,8 @@ public class RTable extends BaseElementRenderable {
 	 */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		Collection<PositionedRenderable> prs = this.positionedRenderables;
-		if (prs != null) {
-			Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				PositionedRenderable pr = i.next();
-				BoundableRenderable r = pr.getRenderable();
-				Rectangle bounds = r.getBounds();
-				if (bounds.contains(x, y)) {
-					int childX = x - r.getX();
-					int childY = y - r.getY();
-					if (!r.onMouseReleased(event, childX, childY)) {
-						return false;
-					}
-				}
-			}
-		}
-		return this.tableMatrix.onMouseReleased(event, x, y);
+		TableMouse tm = new TableMouse(this.tableMatrix.getTableCells(), this.positionedRenderables);
+		return tm.onMouseReleased(event, x, y);
 	}
 
 	/*

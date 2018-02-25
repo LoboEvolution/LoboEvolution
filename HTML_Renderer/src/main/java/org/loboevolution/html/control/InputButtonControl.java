@@ -27,9 +27,9 @@ import java.awt.ComponentOrientation;
 
 import javax.swing.JButton;
 
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
@@ -64,7 +64,7 @@ public class InputButtonControl extends BaseInputControl {
 		widget.setEnabled(!modelNode.getDisabled());
 		this.add(widget);
 		widget.addActionListener(
-				event -> DOMEventImpl.getInstance().onPressed(InputButtonControl.this.controlElement, null, 0, 0));
+				event -> GuiMouseImpl.getInstance().onPressed(InputButtonControl.this.controlElement, null, 0, 0));
 	}
 
 	/*

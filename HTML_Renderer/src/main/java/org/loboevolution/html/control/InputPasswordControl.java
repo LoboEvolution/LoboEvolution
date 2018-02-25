@@ -35,8 +35,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPasswordField;
 import javax.swing.text.JTextComponent;
 
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.Strings;
 
 
@@ -75,7 +75,7 @@ public class InputPasswordControl extends BaseInputTextControl {
 		} else {
 			pwd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
-		pwd.addActionListener(event -> DOMEventImpl.getInstance().onEnterPressed(modelNode, null));
+		pwd.addActionListener(event -> GuiMouseImpl.getInstance().onEnterPressed(modelNode, null));
 		pwd.addKeyListener(addKeyListener());
 	}
 

@@ -38,9 +38,9 @@ import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.dombl.ImageEvent;
 import org.loboevolution.html.dombl.ImageListener;
 import org.loboevolution.html.dombl.SVGRasterizer;
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.style.HtmlValues;
@@ -97,7 +97,7 @@ public class InputImageControl extends BaseInputControl implements ImageListener
 			public void mouseReleased(MouseEvent e) {
 				mouseBeingPressed = false;
 				repaint();
-				DOMEventImpl.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
+				GuiMouseImpl.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
 			}
 		});
 

@@ -1,4 +1,4 @@
-package org.loboevolution.html.domimpl;
+package org.loboevolution.html.gui.mouse;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -9,6 +9,12 @@ import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlProperties;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.dombl.ModelNode;
+import org.loboevolution.html.domimpl.HTMLAbstractUIElement;
+import org.loboevolution.html.domimpl.HTMLAnchorElementImpl;
+import org.loboevolution.html.domimpl.HTMLButtonElementImpl;
+import org.loboevolution.html.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.jsimpl.KeyboardEventImpl;
 import org.loboevolution.html.jsimpl.MouseEventImpl;
@@ -18,12 +24,12 @@ import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
+public class GuiMouseImpl implements HtmlAttributeProperties, HtmlProperties {
 	
 	/** The Constant instance. */
-	private static final DOMEventImpl instance = new DOMEventImpl();
+	private static final GuiMouseImpl instance = new GuiMouseImpl();
 	
-	public static DOMEventImpl getInstance() {
+	public static GuiMouseImpl getInstance() {
 		return instance;
 	}
 	
@@ -44,7 +50,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 				return false;
 			}
 		}
-		// No propagation
 		return false;
 	}
 
@@ -144,7 +149,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 * @return true, if successful
 	 */
 	public boolean onContextMenu(ModelNode node, MouseEvent event, int x, int y) {
-		
 		if (node instanceof HTMLAbstractUIElement) {
 			HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			Function f = uiElement.getOncontextmenu();
@@ -186,7 +190,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 			if (node.equals(limit)) {
 				break;
 			}
-
 			if (node instanceof HTMLDocumentImpl) {
 				HTMLDocumentImpl uiDoc = (HTMLDocumentImpl) node;
 				Function f = uiDoc.getOnmouseover();
@@ -336,7 +339,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 */
 	public boolean onMouseDown(ModelNode node, MouseEvent event, RBlock block, int x, int y) {
 		boolean pass = true;
-
 		if (node instanceof HTMLDocumentImpl) {
 			if (block != null) {
 				RBlockViewport bodyLayout = block.bodyLayout;
@@ -367,13 +369,13 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 					boolean result = Executor.executeFunction(uiDoc, f, null);
 					newX = x - bodyLayout.x;
 					newY = y - bodyLayout.y;
-
 					if (bodyLayout.contains(newX, newY)) {
 						block.setArmedRenderable(bodyLayout);
 						result = bodyLayout.onMousePressed(event, newX, newY);
 					} else {
 						block.setArmedRenderable(null);
 					}
+
 					if (!result) {
 						return result;
 					}
@@ -416,7 +418,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 */
 	public boolean onMouseUp(ModelNode node, MouseEvent event, RBlock block, int x, int y) {
 		boolean pass = true;
-
 		if (node instanceof HTMLDocumentImpl) {
 			if (block != null) {
 				RBlockViewport bodyLayout = block.bodyLayout;
@@ -430,10 +431,8 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 						return false;
 					}
 				} else if (f == null && bodyLayout != null) {
-
 					newX = x - bodyLayout.x;
 					newY = y - bodyLayout.y;
-
 					if (bodyLayout.contains(newX, newY)) {
 						block.setArmedRenderable(bodyLayout);
 						if (!bodyLayout.onMouseReleased(event, newX, newY)) {
@@ -447,7 +446,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 					boolean result = Executor.executeFunction(uiDoc, f, null);
 					newX = x - bodyLayout.x;
 					newY = y - bodyLayout.y;
-
 					if (bodyLayout.contains(newX, newY)) {
 						block.setArmedRenderable(bodyLayout);
 						result = bodyLayout.onMouseReleased(event, newX, newY);
@@ -581,7 +579,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 				}
 			}
 		}
-		// No propagate
 		return false;
 	}
 
@@ -595,15 +592,12 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 * @return true, if successful
 	 */
 	public boolean onKeyDown(ModelNode node, KeyEvent event) {
-
 		if (node instanceof HTMLDocumentImpl) {
-
 			HTMLDocumentImpl uiDoc = (HTMLDocumentImpl) node;
 			Function f = uiDoc.getOnkeydown();
 			if (!Executor.executeFunction(uiDoc, f, null)) {
 				return false;
 			}
-
 		} else if (node instanceof HTMLInputElementImpl) {
 			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
 			Function f = uiElement.getOnkeydown();
@@ -614,7 +608,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 				}
 			}
 		}
-		// No propagate
 		return false;
 	}
 
@@ -628,15 +621,12 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 * @return true, if successful
 	 */
 	public boolean onKeyPress(ModelNode node, KeyEvent event) {
-
 		if (node instanceof HTMLDocumentImpl) {
-
 			HTMLDocumentImpl uiDoc = (HTMLDocumentImpl) node;
 			Function f = uiDoc.getOnkeypress();
 			if (!Executor.executeFunction(uiDoc, f, null)) {
 				return false;
 			}
-
 		} else if (node instanceof HTMLInputElementImpl) {
 			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
 			Function f = uiElement.getOnkeypress();
@@ -660,15 +650,12 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 	 * @return true, if successful
 	 */
 	public boolean onKeyUp(ModelNode node, KeyEvent event) {
-
 		if (node instanceof HTMLDocumentImpl) {
-
 			HTMLDocumentImpl uiDoc = (HTMLDocumentImpl) node;
 			Function f = uiDoc.getOnkeyup();
 			if (!Executor.executeFunction(uiDoc, f, null)) {
 				return false;
 			}
-
 		} else if (node instanceof HTMLInputElementImpl) {
 			HTMLInputElementImpl uiElement = (HTMLInputElementImpl) node;
 			Function f = uiElement.getOnkeyup();
@@ -679,7 +666,6 @@ public class DOMEventImpl implements HtmlAttributeProperties, HtmlProperties {
 				}
 			}
 		}
-		// No propagate
 		return false;
 	}
 

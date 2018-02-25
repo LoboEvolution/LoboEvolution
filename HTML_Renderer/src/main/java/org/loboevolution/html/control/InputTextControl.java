@@ -32,8 +32,8 @@ import javax.swing.BorderFactory;
 import javax.swing.text.JTextComponent;
 
 import org.loboevolution.html.dombl.JTextFieldImpl;
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.Strings;
 
 
@@ -76,7 +76,7 @@ public class InputTextControl extends BaseInputTextControl {
 			text.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
 
-		text.addActionListener(event -> DOMEventImpl.getInstance().onEnterPressed(modelNode, null));
+		text.addActionListener(event -> GuiMouseImpl.getInstance().onEnterPressed(modelNode, null));
 		text.addKeyListener(addKeyListener());
 	}
 

@@ -34,10 +34,9 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLSelectElementImpl;
-
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
 import org.loboevolution.w3c.html.HTMLOptionElement;
 import org.loboevolution.w3c.html.HTMLOptionsCollection;
@@ -107,7 +106,7 @@ public class InputSelectControl extends BaseInputControl {
 						} finally {
 							inSelectionEvent = false;
 						}
-						DOMEventImpl.getInstance().onChange(modelNode);
+						GuiMouseImpl.getInstance().onChange(modelNode);
 					}
 					break;
 				default:
@@ -140,7 +139,7 @@ public class InputSelectControl extends BaseInputControl {
 					inSelectionEvent = false;
 				}
 				if (changed) {
-					DOMEventImpl.getInstance().onChange(modelNode);
+					GuiMouseImpl.getInstance().onChange(modelNode);
 				}
 			}
 		});

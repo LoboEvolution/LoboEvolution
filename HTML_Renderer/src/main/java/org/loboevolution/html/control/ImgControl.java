@@ -49,9 +49,8 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.dombl.ImageEvent;
 import org.loboevolution.html.dombl.ImageListener;
 import org.loboevolution.html.dombl.SVGRasterizer;
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.HTMLImageElementImpl;
-
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.style.HtmlValues;
@@ -131,14 +130,14 @@ public class ImgControl extends BaseControl implements ImageListener {
 			public void mouseReleased(MouseEvent e) {
 				mouseBeingPressed = false;
 				repaint();
-				DOMEventImpl.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
+				GuiMouseImpl.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
 			}
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
 				if (e.getButton() == MouseEvent.BUTTON3) {
-					DOMEventImpl.getInstance().onContextMenu(modelNode, e, e.getX(), e.getY());
+					GuiMouseImpl.getInstance().onContextMenu(modelNode, e, e.getX(), e.getY());
 				}
 			}
 		});

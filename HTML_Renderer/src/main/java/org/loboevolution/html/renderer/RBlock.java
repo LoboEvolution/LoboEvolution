@@ -47,8 +47,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.dombl.ModelNode;
-import org.loboevolution.html.domimpl.DOMEventImpl;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
+import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.html.info.FloatingInfo;
 import org.loboevolution.html.layout.LayoutKey;
 import org.loboevolution.html.layout.LayoutValue;
@@ -1031,7 +1031,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		BoundableRenderable br = this.getRenderable(x, y);
 		if (br == null) {
-			return DOMEventImpl.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y);
+			return GuiMouseImpl.getInstance().onMouseClick(this.modelNode, event, bodyLayout, x, y);
 		} else {
 			return br.onMouseClick(event, x - br.getX(), y - br.getY());
 		}
@@ -1048,7 +1048,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		BoundableRenderable br = this.getRenderable(x, y);
 		if (br == null) {
-			return DOMEventImpl.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y);
+			return GuiMouseImpl.getInstance().onDoubleClick(this.modelNode, event, bodyLayout, x, y);
 		} else {
 			return br.onDoubleClick(event, x - br.getX(), y - br.getY());
 		}
@@ -1084,7 +1084,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		return (!DOMEventImpl.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null);
+		return (!GuiMouseImpl.getInstance().onMouseDown(this.modelNode, event, this, x, y) || this.backgroundColor != null);
 	}
 
 	/*
@@ -1096,22 +1096,22 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 	 */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		return (!DOMEventImpl.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null);
+		return (!GuiMouseImpl.getInstance().onMouseUp(this.modelNode, event, this, x, y) || this.backgroundColor != null);
 	}
 
 	@Override
 	public boolean onKeyPressed(KeyEvent event) {
-		return !DOMEventImpl.getInstance().onKeyPress(this.modelNode, event);
+		return !GuiMouseImpl.getInstance().onKeyPress(this.modelNode, event);
 	}
 
 	@Override
 	public boolean onKeyUp(KeyEvent event) {
-		return !DOMEventImpl.getInstance().onKeyUp(this.modelNode, event);
+		return !GuiMouseImpl.getInstance().onKeyUp(this.modelNode, event);
 	}
 
 	@Override
 	public boolean onKeyDown(KeyEvent event) {
-		return !DOMEventImpl.getInstance().onKeyDown(this.modelNode, event);
+		return !GuiMouseImpl.getInstance().onKeyDown(this.modelNode, event);
 	}
 
 	/*

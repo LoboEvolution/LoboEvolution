@@ -46,7 +46,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -66,12 +65,12 @@ import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.gui.mouse.HtmlMousePanel;
 import org.loboevolution.html.renderer.BoundableRenderable;
 import org.loboevolution.html.renderer.DelayedPair;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.NodeRenderer;
 import org.loboevolution.html.renderer.RBlock;
-import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RCollection;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.Renderable;
@@ -125,9 +124,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	/** The default margin insets. */
 	protected Insets defaultMarginInsets = null;
 
-	/** The mouse press target. */
-	private transient BoundableRenderable mousePressTarget;
-
 	/** The processing document notification. */
 	private boolean processingDocumentNotification = false;
 
@@ -168,8 +164,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param frameContext
 	 *            the frame context
 	 */
-	public HtmlBlockPanel(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext) {
+	public HtmlBlockPanel(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext) {
 		this.setLayout(null);
 		this.setAutoscrolls(true);
 		this.frameContext = frameContext;
@@ -184,59 +179,61 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			}
 		};
 		if (!GraphicsEnvironment.isHeadless()) {
-			this.registerKeyboardAction(actionListener, "copy", KeyStroke.getKeyStroke(KeyEvent.VK_COPY, 0),
-					JComponent.WHEN_FOCUSED);
-			this.registerKeyboardAction(actionListener, "copy",
-					KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()),
-					JComponent.WHEN_FOCUSED);
+			this.registerKeyboardAction(actionListener, "copy", KeyStroke.getKeyStroke(KeyEvent.VK_COPY, 0), JComponent.WHEN_FOCUSED);
+			this.registerKeyboardAction(actionListener, "copy", KeyStroke.getKeyStroke(KeyEvent.VK_C, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), JComponent.WHEN_FOCUSED);
 		}
+		
+		HtmlMousePanel mouse = new HtmlMousePanel(this);
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				onMouseClick(e);
+				mouse.onMouseClick(e, getRblock());
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				onMouseExited(e);
+				mouse.onMouseExited(e, getRblock());
 			}
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				onMousePressed(e);
+				mouse.onMousePressed(e, getRblock(), getFrameContext());
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				onMouseReleased(e);
+				mouse.onMouseReleased(e, getRblock());
 			}
 		});
+		
 		this.addMouseMotionListener(new MouseMotionListener() {
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				onMouseDragged(e);
+				mouse.onMouseDragged(e, getRblock(), getFrameContext());
 			}
 
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
-				onMouseMoved(arg0);
+				mouse.onMouseMoved(arg0, getRblock());
 			}
 		});
-		this.addMouseWheelListener(e -> onMouseWheelMoved(e));
+		
+		this.addMouseWheelListener(e -> mouse.onMouseWheelMoved(e, getRblock()));
 
 		this.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent evt) {
-				onKeyUp(evt);
+				mouse.onKeyUp(evt, getRblock());
 			}
 
 			@Override
 			public void keyPressed(KeyEvent evt) {
-				onKeyPressed(evt);
+				mouse.onKeyPressed(evt, getRblock());
 			}
 		});
 	}
+
 
 	/**
 	 * Scrolls the body area to the given location.
@@ -316,19 +313,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		if (block == null) {
 			return null;
 		}
-		// Find UINode first
+
 		Node currentNode = node;
-		UINode uiNode = null;
-		while (currentNode != null) {
-			if (currentNode instanceof HTMLElementImpl) {
-				HTMLElementImpl element = (HTMLElementImpl) currentNode;
-				uiNode = element.getUINode();
-				if (uiNode != null) {
-					break;
-				}
-			}
-			currentNode = currentNode.getParentNode();
-		}
+		UINode uiNode = getUINode(currentNode);
 		if (uiNode == null) {
 			return null;
 		}
@@ -355,24 +342,13 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @return the node bounds no margins
 	 */
 	public Rectangle getNodeBoundsNoMargins(Node node, boolean relativeToScrollable) {
-		/* Do the same as getNodeBounds first */
 		RBlock block = this.rblock;
 		if (block == null) {
 			return null;
 		}
-		// Find UINode first
+		
 		Node currentNode = node;
-		UINode uiNode = null;
-		while (currentNode != null) {
-			if (currentNode instanceof HTMLElementImpl) {
-				HTMLElementImpl element = (HTMLElementImpl) currentNode;
-				uiNode = element.getUINode();
-				if (uiNode != null) {
-					break;
-				}
-			}
-			currentNode = currentNode.getParentNode();
-		}
+		UINode uiNode = getUINode(currentNode);
 		if (uiNode == null) {
 			return null;
 		}
@@ -648,203 +624,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public DOMNodeImpl getRootNode() {
 		RBlock block = this.rblock;
 		return block == null ? null : (DOMNodeImpl) block.getModelNode();
-	}
-
-	/**
-	 * On mouse click.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onMouseClick(MouseEvent event) {
-		// Rely on AWT mouse-click only for double-clicks
-		RBlock block = this.rblock;
-		if (block != null) {
-			int button = event.getButton();
-			int clickCount = event.getClickCount();
-
-			if (button == MouseEvent.BUTTON1 && clickCount == 1) {
-				Point point = event.getPoint();
-				block.onMouseClick(event, point.x, point.y);
-			}
-			if (button == MouseEvent.BUTTON1 && clickCount == 2) {
-				Point point = event.getPoint();
-				block.onDoubleClick(event, point.x, point.y);
-			} else if (button == MouseEvent.BUTTON3 && clickCount == 1) {
-				block.onRightClick(event, event.getX(), event.getY());
-			}
-		}
-	}
-
-	/**
-	 * On mouse pressed.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onMousePressed(MouseEvent event) {
-		this.requestFocus();
-		RBlock block = this.rblock;
-		if (block != null) {
-			Point point = event.getPoint();
-			this.mousePressTarget = block;
-			int rx = point.x;
-			int ry = point.y;
-			block.onMousePressed(event, point.x, point.y);
-			RenderableSpot rp = block.getLowestRenderableSpot(rx, ry);
-			if (rp != null) {
-				this.frameContext.resetSelection(rp);
-			} else {
-				this.frameContext.resetSelection(null);
-			}
-		}
-	}
-
-	/**
-	 * On mouse released.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onMouseReleased(MouseEvent event) {
-		RBlock block = this.rblock;
-		if (block != null) {
-			Point point = event.getPoint();
-			int rx = point.x;
-			int ry = point.y;
-			if (event.getButton() == MouseEvent.BUTTON1) {
-				// TODO: This will be raised twice on a double-click.
-				block.onMouseClick(event, rx, ry);
-			}
-			block.onMouseReleased(event, rx, ry);
-			BoundableRenderable oldTarget = this.mousePressTarget;
-			if (oldTarget != null) {
-				this.mousePressTarget = null;
-				if (!Objects.equals(oldTarget,block)) {
-					oldTarget.onMouseDisarmed(event);
-				}
-			}
-		} else {
-			this.mousePressTarget = null;
-		}
-	}
-
-	/**
-	 * On mouse exited.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onMouseExited(MouseEvent event) {
-		BoundableRenderable oldTarget = this.mousePressTarget;
-		if (oldTarget != null) {
-			this.mousePressTarget = null;
-			oldTarget.onMouseDisarmed(event);
-		}
-	}
-
-	/**
-	 * On mouse wheel moved.
-	 *
-	 * @param mwe
-	 *            the mwe
-	 */
-	private void onMouseWheelMoved(MouseWheelEvent mwe) {
-
-		RBlockViewport viewport = this.rblock.getRBlockViewport();
-
-		RenderableSpot spot = viewport.getLowestRenderableSpot(mwe.getX(), mwe.getY());
-
-		RBlock block = this.rblock;
-
-		for (BoundableRenderable r = spot.getRenderable(); r != null; r = r.getParent()) {
-			if (r instanceof RBlock) {
-				block = (RBlock) r;
-
-				RBlockViewport blockViewport = block.getRBlockViewport();
-
-				if (mwe.getWheelRotation() < 0) {
-					if (blockViewport.getY() < 0) {
-						break;
-					}
-				} else {
-					if (blockViewport.getY() + blockViewport.getHeight() > block.getHeight()) {
-						break;
-					}
-				}
-			}
-		}
-
-		if (block != null) {
-			switch (mwe.getScrollType()) {
-			case MouseWheelEvent.WHEEL_UNIT_SCROLL:
-				int units = mwe.getWheelRotation() * mwe.getScrollAmount();
-				block.scrollByUnits(Adjustable.VERTICAL, units);
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	/**
-	 * On mouse dragged.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onMouseDragged(MouseEvent event) {
-		RBlock block = this.rblock;
-		if (block != null) {
-			Point point = event.getPoint();
-			RenderableSpot rp = block.getLowestRenderableSpot(point.x, point.y);
-			if (rp != null) {
-				this.frameContext.expandSelection(rp);
-			}
-			block.ensureVisible(point);
-		}
-	}
-
-	/**
-	 * On mouse moved.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onMouseMoved(MouseEvent event) {
-		RBlock block = this.rblock;
-		if (block != null) {
-			Point point = event.getPoint();
-			block.onMouseMoved(event, point.x, point.y, false, null);
-		}
-	}
-
-	/**
-	 * On key press.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onKeyPressed(KeyEvent evt) {
-		this.requestFocus();
-		RBlock block = this.rblock;
-		if (block != null) {
-			block.onKeyPressed(evt);
-		}
-	}
-
-	/**
-	 * On key up.
-	 *
-	 * @param event
-	 *            the event
-	 */
-	private void onKeyUp(KeyEvent evt) {
-		this.requestFocus();
-		RBlock block = this.rblock;
-		if (block != null) {
-			block.onKeyUp(evt);
-		}
 	}
 
 	@Override
@@ -1244,6 +1023,42 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public Insets getInsets(final boolean hscroll, final boolean vscroll) {
 		throw new UnsupportedOperationException(
 				"Method added while implementing absolute positioned elements inside relative elements. But not implemented yet.");
+	}
+	
+	private UINode getUINode(Node currentNode) {
+		UINode uiNode = null;
+		while (currentNode != null) {
+			if (currentNode instanceof HTMLElementImpl) {
+				HTMLElementImpl element = (HTMLElementImpl) currentNode;
+				uiNode = element.getUINode();
+				if (uiNode != null) {
+					break;
+				}
+			}
+			currentNode = currentNode.getParentNode();
+		}
+		return uiNode;
+	}
+
+	/**
+	 * @return the rblock
+	 */
+	public RBlock getRblock() {
+		return rblock;
+	}
+
+	/**
+	 * @param rblock the rblock to set
+	 */
+	public void setRblock(RBlock rblock) {
+		this.rblock = rblock;
+	}
+
+	/**
+	 * @return the frameContext
+	 */
+	public FrameContext getFrameContext() {
+		return frameContext;
 	}
 
 }
