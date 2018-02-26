@@ -629,7 +629,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getColor() {
-
 		return this.getPropertyValueLC(COLOR);
 	}
 
@@ -640,7 +639,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getContent() {
-
 		return this.getPropertyValueLC(CONTENT);
 	}
 
@@ -651,7 +649,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCounterIncrement() {
-
 		return this.getPropertyValueLC(COUNTER_INCREMENT);
 	}
 
@@ -662,7 +659,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCounterReset() {
-
 		return this.getPropertyValueLC(COUNTER_RESET);
 	}
 
@@ -673,7 +669,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCssFloat() {
-
 		return this.getPropertyValueLC(CSS_FLOAT);
 	}
 
@@ -684,7 +679,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCue() {
-
 		return this.getPropertyValueLC(CUE);
 	}
 
@@ -695,7 +689,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCueAfter() {
-
 		return this.getPropertyValueLC(CUE_AFTER);
 	}
 
@@ -706,7 +699,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCueBefore() {
-
 		return this.getPropertyValueLC(CUE_BEFORE);
 	}
 
@@ -717,7 +709,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getCursor() {
-
 		return this.getPropertyValueLC(CURSOR);
 	}
 
@@ -728,7 +719,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getDirection() {
-
 		return this.getPropertyValueLC(DIRECTION);
 	}
 
@@ -750,7 +740,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getElevation() {
-
 		return this.getPropertyValueLC(ELEVATION);
 	}
 
@@ -761,7 +750,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getEmptyCells() {
-
 		return this.getPropertyValueLC(EMPTY_CELLS);
 	}
 
@@ -780,7 +768,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getFont() {
-
 		return this.getPropertyValueLC(FONT);
 	}
 
@@ -811,7 +798,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getFontSizeAdjust() {
-
 		return this.getPropertyValueLC(FONT_SIZE_ADJUST);
 	}
 
@@ -822,7 +808,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getFontStretch() {
-
 		return this.getPropertyValueLC(FONT_STRETCH);
 	}
 
@@ -833,7 +818,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getFontStyle() {
-
 		return this.getPropertyValueLC(FONT_STYLE);
 	}
 
@@ -844,7 +828,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getFontVariant() {
-
 		return this.getPropertyValueLC(FONT_VARIANT);
 	}
 
@@ -855,7 +838,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getFontWeight() {
-
 		return this.getPropertyValueLC(FONT_WEIGHT);
 	}
 
@@ -866,7 +848,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getHeight() {
-
 		return this.getPropertyValueLC(HEIGHT);
 	}
 
@@ -877,7 +858,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getLeft() {
-
 		return this.getPropertyValueLC(LEFT);
 	}
 
@@ -888,7 +868,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getLetterSpacing() {
-
 		return this.getPropertyValueLC(LETTER_SPACING);
 	}
 
@@ -899,7 +878,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getLineHeight() {
-
 		return this.getPropertyValueLC(LINE_HEIGHT);
 	}
 
@@ -950,7 +928,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMargin() {
-
 		return this.getPropertyValueLC(MARGIN);
 	}
 
@@ -961,7 +938,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMarginBottom() {
-
 		return this.getPropertyValueLC(MARGIN_BOTTOM);
 	}
 
@@ -972,7 +948,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMarginLeft() {
-
 		return this.getPropertyValueLC(MARGIN_LEFT);
 	}
 
@@ -983,7 +958,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMarginRight() {
-
 		return this.getPropertyValueLC(MARGIN_RIGHT);
 	}
 
@@ -994,7 +968,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMarginTop() {
-
 		return this.getPropertyValueLC(MARGIN_TOP);
 	}
 
@@ -1005,7 +978,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMarkerOffset() {
-
 		return this.getPropertyValueLC(MARKER_OFFSET);
 	}
 
@@ -1016,7 +988,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMarks() {
-
 		return this.getPropertyValueLC(MARKS);
 	}
 
@@ -1027,7 +998,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMaxHeight() {
-
 		return this.getPropertyValueLC(MAX_HEIGHT);
 	}
 
@@ -1038,7 +1008,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMaxWidth() {
-
 		return this.getPropertyValueLC(MAX_WIDTH);
 	}
 
@@ -1049,7 +1018,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMinHeight() {
-
 		return this.getPropertyValueLC(MIN_HEIGHT);
 	}
 
@@ -1060,7 +1028,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getMinWidth() {
-
 		return this.getPropertyValueLC(MIN_WIDTH);
 	}
 
@@ -1071,7 +1038,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getOrphans() {
-
 		return this.getPropertyValueLC(ORPHANS);
 	}
 
@@ -1082,7 +1048,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getOutline() {
-
 		return this.getPropertyValueLC(OUTLINE);
 	}
 
@@ -1093,7 +1058,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getOutlineColor() {
-
 		return this.getPropertyValueLC(OUTLINE_COLOR);
 	}
 
@@ -1104,7 +1068,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getOutlineStyle() {
-
 		return this.getPropertyValueLC(OUTLINE_STYLE);
 	}
 
@@ -1115,7 +1078,6 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	@Override
 	public String getOutlineWidth() {
-
 		return this.getPropertyValueLC(OUTLINE_WIDTH);
 	}
 

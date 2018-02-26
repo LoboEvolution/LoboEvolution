@@ -236,8 +236,10 @@ public class AttributeSelector {
         if(!selector.equals(SelectorMatcher.OP_ALL)) {
             Pattern SPACE = Pattern.compile("\\"+selector);
             String[] arr = SPACE.split(str);
-            si.setAttribute(arr[0]);
-            si.setAttributeValue(arr[1]);
+            for (int i = 0; i < arr.length; i++) {
+            	if(i == 0) si.setAttribute(arr[0]);
+            	if(i == 1) si.setAttributeValue(arr[1]);
+			}            
         } else {
             si.setAttribute(str);
             si.setAttributeValue("-");
