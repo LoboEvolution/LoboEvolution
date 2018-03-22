@@ -21,6 +21,8 @@
 package org.loboevolution.clientlet;
 
 import java.awt.Component;
+import java.util.List;
+import org.loboevolution.info.MetaInfo;
 
 /**
  * Content set by a {@link Clientlet}. To ensure backward compatibility, it is
@@ -51,6 +53,13 @@ public interface ComponentContent {
 	 * @return the description
 	 */
 	String getDescription();
+	
+	/**
+	 * Gets the meta list.
+	 *
+	 * @return the meta list
+	 */
+	List<MetaInfo> getMetaList();
 
 	/**
 	 * Determines whether it's possible to copy content to the clipboard. This

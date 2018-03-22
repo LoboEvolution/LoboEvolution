@@ -33,8 +33,10 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -47,6 +49,7 @@ import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
 import org.loboevolution.clientlet.SimpleComponentContent;
 import org.loboevolution.http.HttpRequest;
+import org.loboevolution.info.MetaInfo;
 import org.loboevolution.main.ExtensionManager;
 import org.loboevolution.main.PlatformInit;
 import org.loboevolution.request.ClientletRequestHandler;
@@ -64,6 +67,7 @@ import org.loboevolution.ua.ParameterInfo;
 import org.loboevolution.ua.ProgressType;
 import org.loboevolution.ua.RequestType;
 import org.loboevolution.ua.TargetType;
+import org.loboevolution.util.GenericEventListener;
 import org.loboevolution.util.Items;
 import org.loboevolution.util.Objects;
 import org.loboevolution.util.Urls;
@@ -1093,27 +1097,22 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	 *            the pinfo
 	 * @return The top frame in the window that was opened.
 	 */
-	public static NavigatorFrame openWindow(final FramePanel opener, URL url, final String windowId,
-			final Properties windowProperties, String method, ParameterInfo pinfo) {
+	public static NavigatorFrame openWindow(final FramePanel opener, URL url, final String windowId, final Properties windowProperties, String method, ParameterInfo pinfo) {
 		ClientletRequest request = new ClientletRequestImpl(true, url, method, pinfo, RequestType.OPEN_WINDOW);
-		final NavigatorWindowImpl wcontext = AccessController
-				.doPrivileged((PrivilegedAction<NavigatorWindowImpl>) () -> new NavigatorWindowImpl(opener, windowId,
-						windowProperties));
+		final NavigatorWindowImpl wcontext = AccessController.doPrivileged((PrivilegedAction<NavigatorWindowImpl>) () -> new NavigatorWindowImpl(opener, windowId, windowProperties));
 		final FramePanel newFrame = wcontext.getFramePanel();
 		final ClientletRequestHandler handler = new ClientletRequestHandler(request, wcontext, newFrame);
-		handler.evtProgress.addListener(new org.loboevolution.util.GenericEventListener() {
+		handler.evtProgress.addListener(new GenericEventListener() {
 			@Override
-			public void processEvent(java.util.EventObject event) {
+			public void processEvent(EventObject event) {
 				// Assumed to execute in GUI thread.
 				NavigatorProgressEvent pe = (NavigatorProgressEvent) event;
 				if (pe == null || pe.getProgressType() == ProgressType.DONE) {
 					if (SwingUtilities.isEventDispatchThread()) {
 						wcontext.resetAsNavigator(handler.getContextWindowProperties());
 					} else {
-						SwingUtilities
-								.invokeLater(() -> wcontext.resetAsNavigator(handler.getContextWindowProperties()));
+						SwingUtilities.invokeLater(() -> wcontext.resetAsNavigator(handler.getContextWindowProperties()));
 					}
-					// We don't want to reset as navigator twice.
 					handler.evtProgress.removeListener(this);
 				} else {
 					wcontext.updatePreNavigationProgress(pe);
@@ -1124,13 +1123,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		if (sm == null) {
 			RequestEngine.getInstance().scheduleRequest(handler);
 		} else {
-			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-				// Justification: While requests by untrusted code
-				// are generally only allowed on certain hosts,
-				// navigation is an exception.
-				RequestEngine.getInstance().scheduleRequest(handler);
-				return null;
-			});
+			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {RequestEngine.getInstance().scheduleRequest(handler); return null;});
 		}
 		return newFrame;
 	}
@@ -1496,6 +1489,17 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	public String getSourceCode() {
 		ComponentContent content = this.content;
 		return content == null ? null : content.getSourceCode();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.ua.NavigatorFrame#getMetaList()
+	 */
+	@Override
+	public List<MetaInfo> getMetaList() {
+		ComponentContent content = this.content;
+		return content == null ? null : content.getMetaList();
 	}
 
 	/*

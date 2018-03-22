@@ -21,6 +21,10 @@
 package org.loboevolution.clientlet;
 
 import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.loboevolution.info.MetaInfo;
 
 /**
  * Abstract implementation of {@link ComponentContent}. It is recommended that
@@ -63,7 +67,9 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	 * @see org.loboevolution.clientlet.ComponentContent#getSourceCode()
 	 */
 	@Override
-	public abstract String getSourceCode();
+	public String getSourceCode() {
+		return null;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -71,7 +77,9 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	 * @see org.loboevolution.clientlet.ComponentContent#getTitle()
 	 */
 	@Override
-	public abstract String getTitle();
+	public String getTitle() {
+		return null;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -133,6 +141,18 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	@Override
 	public void setProperty(String name, Object value) {
 		// Method not implemented
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.loboevolution.clientlet.ComponentContent#setProperty(java.lang.String,
+	 * java.lang.Object)
+	 */
+	@Override
+	public List<MetaInfo> getMetaList() {
+		return new ArrayList<MetaInfo>();
 	}
 
 	// Backward compatibility note: Additional methods should provide an empty

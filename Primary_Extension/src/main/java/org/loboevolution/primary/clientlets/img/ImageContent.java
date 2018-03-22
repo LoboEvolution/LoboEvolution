@@ -25,17 +25,12 @@ import java.awt.Image;
 
 import javax.swing.JScrollPane;
 
-import org.loboevolution.clientlet.ComponentContent;
+import org.loboevolution.clientlet.AbstractComponentContent;
 
 /**
  * The Class ImageContent.
- *
- * @author Administrator
  */
-/**
- * The Class ImageContent.
- */
-public class ImageContent implements ComponentContent {
+public class ImageContent extends AbstractComponentContent {
 
 	/** The image. */
 	private transient Image image;
@@ -63,22 +58,6 @@ public class ImageContent implements ComponentContent {
 	}
 
 	@Override
-	public void addNotify() {
-		// Method not implemented
-	}
-
-	@Override
-	public boolean canCopy() {
-		// TODO: Support image copy?
-		return false;
-	}
-
-	@Override
-	public boolean copy() {
-		return false;
-	}
-
-	@Override
 	public Component getComponent() {
 		return this.scrollPane;
 	}
@@ -99,22 +78,7 @@ public class ImageContent implements ComponentContent {
 	}
 
 	@Override
-	public String getSourceCode() {
-		return null;
-	}
-
-	@Override
-	public String getTitle() {
-		return null;
-	}
-
-	@Override
 	public void removeNotify() {
 		this.image.flush();
-	}
-
-	@Override
-	public void setProperty(String name, Object value) {
-		// Method not implemented
 	}
 }

@@ -23,9 +23,12 @@ package org.loboevolution.primary.clientlets.html;
 import java.awt.Component;
 import java.awt.Insets;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.loboevolution.clientlet.ComponentContent;
+import org.loboevolution.clientlet.AbstractComponentContent;
 import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.info.MetaInfo;
 import org.loboevolution.util.io.BufferExceededException;
 import org.loboevolution.util.io.RecordedInputStream;
 import org.loboevolution.w3c.html.HTMLDocument;
@@ -36,8 +39,8 @@ import org.w3c.dom.NodeList;
 /**
  * The Class HtmlContent.
  */
-public class HtmlContent implements ComponentContent {
-
+public class HtmlContent extends AbstractComponentContent {
+	
 	/** The document. */
 	private final HTMLDocument document;
 
@@ -164,42 +167,42 @@ public class HtmlContent implements ComponentContent {
 	 */
 	@Override
 	public String getDescription() {
-		NodeList nodeList = this.document.getElementsByTagName("meta");
-		if (nodeList == null) {
-			return null;
-		}
-		int length = nodeList.getLength();
-		for (int i = 0; i < length; i++) {
-			Node node = nodeList.item(i);
-			if (node instanceof HTMLElement) {
-				HTMLElement element = (HTMLElement) node;
-				String name = element.getAttribute("name");
-				if (name != null && name.equalsIgnoreCase("description")) {
-					return element.getAttribute("description");
-				}
+		List<MetaInfo> infoList = getMetaList();
+		for (int i = 0; i < infoList.size(); i++) {
+			MetaInfo info = infoList.get(i);
+			String name = info.getName();
+			if ("description".equalsIgnoreCase(name)) {
+				return info.getDescription();
 			}
 		}
 		return null;
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.clientlet.ComponentContent#addNotify()
-	 */
+	
 	@Override
-	public void addNotify() {
-		// Method not implemented
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.clientlet.ComponentContent#removeNotify()
-	 */
-	@Override
-	public void removeNotify() {
-		// Method not implemented
+	public List<MetaInfo> getMetaList() {
+		List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		NodeList nodeList = this.document.getElementsByTagName("meta");
+		
+		if (nodeList == null) {
+			return null;
+		}
+		
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if (node instanceof HTMLElement) {
+				MetaInfo info = new MetaInfo();
+				HTMLElement element = (HTMLElement) node;
+				info.setName(element.getAttribute("name"));
+				info.setItemprop(element.getAttribute("itemprop"));
+				info.setProperty(element.getAttribute("property"));
+				info.setHttpEqui(element.getAttribute("http-equi"));
+				info.setContent(element.getAttribute("content"));
+				info.setDescription(element.getAttribute("description"));
+				info.setCharset(element.getAttribute("charset"));
+				infoList.add(info);
+			}
+		}
+		return infoList;
 	}
 
 	/*

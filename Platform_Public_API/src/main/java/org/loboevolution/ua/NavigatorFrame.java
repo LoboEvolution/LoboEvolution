@@ -23,11 +23,13 @@ package org.loboevolution.ua;
 import java.awt.Component;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Properties;
 
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
 import org.loboevolution.http.HttpRequest;
+import org.loboevolution.info.MetaInfo;
 
 /**
  * Represents a navigator frame. In many ways this interface parallels the
@@ -406,6 +408,13 @@ public interface NavigatorFrame {
 	 * @return the source code
 	 */
 	String getSourceCode();
+	
+	/**
+	 * Gets the source code.
+	 *
+	 * @return the source code
+	 */
+	List<MetaInfo> getMetaList();
 
 	/**
 	 * Creates a {@link HttpRequest} object that can be used to load data over

@@ -83,8 +83,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	public void init(NavigatorExtensionContext pcontext) {
 		pcontext.addURLStreamHandlerFactory(new PrimaryStreamHandlerFactory());
 		pcontext.addClientletSelector(new PrimaryClientletSelector());
-		pcontext.addNavigatorErrorListener(
-				event -> showError(event.getNavigatorFrame(), event.getResponse(), event.getException()));
+		pcontext.addNavigatorErrorListener(event -> showError(event.getNavigatorFrame(), event.getResponse(), event.getException()));
 	}
 
 	/*

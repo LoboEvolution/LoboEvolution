@@ -56,6 +56,7 @@ import org.loboevolution.primary.action.ForwardAction;
 import org.loboevolution.primary.action.ForwardMoreAction;
 import org.loboevolution.primary.action.FullScreenAction;
 import org.loboevolution.primary.action.GoAction;
+import org.loboevolution.primary.action.InfoPageAction;
 import org.loboevolution.primary.action.OpenFileAction;
 import org.loboevolution.primary.action.PreferencesAction;
 import org.loboevolution.primary.action.ReloadAction;
@@ -267,8 +268,8 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
-		menu.add(menuItem("Full Screen", ' ', KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0),
-				new FullScreenAction(window, actionPool)));
+		menu.add(menuItem("Info Page", ' ', new InfoPageAction(this, window, actionPool)));
+		menu.add(menuItem("Full Screen", ' ', KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(window, actionPool)));
 		return menu;
 	}
 
@@ -620,6 +621,17 @@ public class ComponentSource implements NavigatorWindowListener {
 		textViewer.setSize(new Dimension(600, 400));
 		textViewer.setLocationByPlatform(true);
 		textViewer.setVisible(true);
+	}
+	
+	/**
+	 * Show info page.
+	 */
+	public void showInfoPage() {
+		InfoPageWindow info = new InfoPageWindow(window.getTopFrame().getMetaList());
+		info.setSize(new Dimension(600, 400));
+		info.setLocationByPlatform(true);
+		info.setVisible(true);
+		
 	}
 
 	/**
