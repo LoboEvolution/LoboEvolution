@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/rsyntaxtextarea.jar"/>
 	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-api-2.8.1.jar"/>
 	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/log4j-core-2.8.1.jar"/>
+	<classpathentry kind="lib" path="/LoboEvolution_Build/ext/batik-all-1.8.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

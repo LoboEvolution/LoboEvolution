@@ -60,6 +60,27 @@ public interface ComponentContent {
 	 * @return the meta list
 	 */
 	List<MetaInfo> getMetaList();
+	
+	/**
+	 * Gets the meida list.
+	 *
+	 * @return the media list
+	 */
+	List<MetaInfo> getMediaList();
+	
+	/**
+	 * Gets the style list.
+	 *
+	 * @return the style list
+	 */
+	List<MetaInfo> getStyleList();
+	
+	/**
+	 * Gets the js list.
+	 *
+	 * @return the js list
+	 */
+	List<MetaInfo> getJSList();
 
 	/**
 	 * Determines whether it's possible to copy content to the clipboard. This

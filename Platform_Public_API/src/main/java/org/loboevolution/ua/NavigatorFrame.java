@@ -415,6 +415,27 @@ public interface NavigatorFrame {
 	 * @return the source code
 	 */
 	List<MetaInfo> getMetaList();
+	
+	/**
+	 * Gets the meida list.
+	 *
+	 * @return the media list
+	 */
+	List<MetaInfo> getMediaList();
+
+	/**
+	 * Gets the style list.
+	 *
+	 * @return the style list
+	 */
+	List<MetaInfo> getStyleList();
+	
+	/**
+	 * Gets the js list.
+	 *
+	 * @return the js list
+	 */
+	List<MetaInfo> getJSList();
 
 	/**
 	 * Creates a {@link HttpRequest} object that can be used to load data over

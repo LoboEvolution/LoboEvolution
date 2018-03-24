@@ -142,16 +142,44 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	public void setProperty(String name, Object value) {
 		// Method not implemented
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.loboevolution.clientlet.ComponentContent#setProperty(java.lang.String,
-	 * java.lang.Object)
+	 * @see org.loboevolution.clientlet.ComponentContent#getMetaList()
 	 */
 	@Override
 	public List<MetaInfo> getMetaList() {
+		return new ArrayList<MetaInfo>();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.clientlet.ComponentContent#getStyleList()
+	 */
+	@Override
+	public List<MetaInfo> getStyleList() {
+		return new ArrayList<MetaInfo>();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.clientlet.ComponentContent#getMediaList()
+	 */
+	@Override
+	public List<MetaInfo> getMediaList() {
+		return new ArrayList<MetaInfo>();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.clientlet.ComponentContent#getJSList()
+	 */
+	@Override
+	public List<MetaInfo> getJSList() {
 		return new ArrayList<MetaInfo>();
 	}
 

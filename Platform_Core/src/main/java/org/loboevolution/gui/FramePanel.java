@@ -1501,6 +1501,40 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 		ComponentContent content = this.content;
 		return content == null ? null : content.getMetaList();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.ua.NavigatorFrame#getMediaList()
+	 */
+	@Override
+	public List<MetaInfo> getMediaList() {
+		ComponentContent content = this.content;
+		return content == null ? null : content.getMediaList();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.ua.NavigatorFrame#getStyleList()
+	 */
+	@Override
+	public List<MetaInfo> getStyleList() {
+		ComponentContent content = this.content;
+		return content == null ? null : content.getStyleList();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.ua.NavigatorFrame#getJSList()
+	 */
+	@Override
+	public List<MetaInfo> getJSList() {
+		ComponentContent content = this.content;
+		return content == null ? null : content.getJSList();
+	}
+
 
 	/*
 	 * (non-Javadoc)

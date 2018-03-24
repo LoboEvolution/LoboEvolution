@@ -29,6 +29,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
@@ -43,6 +44,7 @@ import javax.swing.event.MenuEvent;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.info.MetaInfo;
 import org.loboevolution.primary.action.AboutAction;
 import org.loboevolution.primary.action.AddBookmarkAction;
 import org.loboevolution.primary.action.BackAction;
@@ -268,7 +270,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("View");
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
-		menu.add(menuItem("Info Page", ' ', new InfoPageAction(this, window, actionPool)));
+		menu.add(menuItem("Info Page", ' ', new InfoPageAction(this, actionPool)));
 		menu.add(menuItem("Full Screen", ' ', KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(window, actionPool)));
 		return menu;
 	}
@@ -627,13 +629,16 @@ public class ComponentSource implements NavigatorWindowListener {
 	 * Show info page.
 	 */
 	public void showInfoPage() {
-		InfoPageWindow info = new InfoPageWindow(window.getTopFrame().getMetaList());
+		List<MetaInfo> infoList = window.getTopFrame().getMetaList();
+		List<MetaInfo> mediaList = window.getTopFrame().getMediaList();
+		List<MetaInfo> cssList = window.getTopFrame().getStyleList();
+		List<MetaInfo> jsList = window.getTopFrame().getJSList();
+		InfoPageWindow info = new InfoPageWindow(infoList, mediaList, cssList, jsList);
 		info.setSize(new Dimension(600, 400));
 		info.setLocationByPlatform(true);
 		info.setVisible(true);
-		
 	}
-
+	
 	/**
 	 * Go.
 	 */

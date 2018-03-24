@@ -27,8 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.loboevolution.clientlet.AbstractComponentContent;
+import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.info.MetaInfo;
+import org.loboevolution.util.Strings;
+import org.loboevolution.util.Urls;
 import org.loboevolution.util.io.BufferExceededException;
 import org.loboevolution.util.io.RecordedInputStream;
 import org.loboevolution.w3c.html.HTMLDocument;
@@ -200,6 +203,126 @@ public class HtmlContent extends AbstractComponentContent {
 				info.setDescription(element.getAttribute("description"));
 				info.setCharset(element.getAttribute("charset"));
 				infoList.add(info);
+			}
+		}
+		return infoList;
+	}
+	
+	@Override
+	public List<MetaInfo> getMediaList(){
+		List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		NodeList nodeList = this.document.getElementsByTagName("img");
+		
+		if (nodeList == null) {
+			return null;
+		}
+		
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if (node instanceof HTMLElement) {
+				MetaInfo info = new MetaInfo();
+				HTMLElement element = (HTMLElement) node;
+				String src = element.getAttribute("src");
+				if (!Strings.isBlank(src)) {
+					if(!Urls.isAbsolute(src)) {
+						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
+						src = doc.getFullURL(src).toString();
+					}
+					if (src.startsWith("//")) {
+						src = "http:" + src;
+					}							
+					
+					info.setName(src);
+					infoList.add(info);
+				}
+			}
+		}
+
+		nodeList = this.document.getElementsByTagName("link");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if (node instanceof HTMLElement) {
+				MetaInfo info = new MetaInfo();
+				HTMLElement element = (HTMLElement) node;
+				String rel = element.getAttribute("rel");
+				String href = element.getAttribute("href");
+				if ("icon".equalsIgnoreCase(rel) && !Strings.isBlank(href)) {
+					if(!Urls.isAbsolute(href)) {
+						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
+						href = doc.getFullURL(href).toString();
+					}
+					if (href.startsWith("//")) {
+						href = "http:" + href;
+					}							
+					
+					info.setName(href);
+					infoList.add(info);
+				}
+			}
+		}
+		return infoList;
+	}
+		
+	@Override
+	public List<MetaInfo> getStyleList() {
+		List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		NodeList nodeList = this.document.getElementsByTagName("link");
+		
+		if (nodeList == null) {
+			return null;
+		}
+		
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if (node instanceof HTMLElement) {
+				MetaInfo info = new MetaInfo();
+				HTMLElement element = (HTMLElement) node;
+				String rel = element.getAttribute("rel");
+				String href = element.getAttribute("href");
+				if ("stylesheet".equalsIgnoreCase(rel) && !Strings.isBlank(href)) {
+					if(!Urls.isAbsolute(href)) {
+						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
+						href = doc.getFullURL(href).toString();
+					}
+					if (href.startsWith("//")) {
+						href = "http:" + href;
+					}							
+					
+					info.setName(href);
+					infoList.add(info);
+				}
+			}
+		}
+		return infoList;
+	}
+
+	@Override
+	public List<MetaInfo> getJSList() {
+		List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		NodeList nodeList = this.document.getElementsByTagName("script");
+		
+		if (nodeList == null) {
+			return null;
+		}
+		
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node node = nodeList.item(i);
+			if (node instanceof HTMLElement) {
+				MetaInfo info = new MetaInfo();
+				HTMLElement element = (HTMLElement) node;
+				String src = element.getAttribute("src");
+				if (!Strings.isBlank(src)) {
+					if(!Urls.isAbsolute(src)) {
+						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
+						src = doc.getFullURL(src).toString();
+					}
+					if (src.startsWith("//")) {
+						src = "http:" + src;
+					}							
+					
+					info.setName(src);
+					infoList.add(info);
+				}
 			}
 		}
 		return infoList;

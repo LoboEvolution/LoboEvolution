@@ -132,8 +132,7 @@ public class BookmarksDialog extends JDialog {
 		Collection<HistoryEntry<BookmarkInfo>> allEntries = history.getAllEntries();
 		for (HistoryEntry<BookmarkInfo> entry : allEntries) {
 			BookmarkInfo binfo = entry.getItemInfo();
-			values.add(new String[] { binfo.getTitle(), binfo.getDescription(), binfo.getUrl().toString(),
-					binfo.getTagsText() });
+			values.add(new String[] { binfo.getTitle(), binfo.getDescription(), binfo.getUrl().toString(), binfo.getTagsText() });
 		}
 
 		JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
