@@ -572,6 +572,10 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 	}
 
 	private String nextString(LinkedList<String> l) {
-		return l.removeFirst();
+		if (l != null && l.size() > 0) {
+			return l.removeFirst();
+		} else {
+			return "";
+		}
 	}
 }
