@@ -23,3 +23,5 @@ The following open source externals are used by this project:
 * [http://www.jtattoo.net/index.html] JTattoo consists of several different Look and Feels for Swing applications.
 
 * [https://github.com/bobbylight/RSyntaxTextArea] RSyntaxTextArea, syntax highlighting, code folding text editor for Java Swing applications.
+
+* [https://github.com/kazocsaba/imageviewer] This project provides a Swing image viewer component.

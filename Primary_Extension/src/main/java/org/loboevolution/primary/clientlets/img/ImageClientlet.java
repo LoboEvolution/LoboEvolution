@@ -21,54 +21,43 @@
 
 package org.loboevolution.primary.clientlets.img;
 
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
+import javax.imageio.ImageIO;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.Clientlet;
 import org.loboevolution.clientlet.ClientletContext;
 import org.loboevolution.clientlet.ClientletException;
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.html.dombl.SVGRasterizer;
-import org.loboevolution.util.io.IORoutines;
 
 /**
  * The Class ImageClientlet.
  */
 public class ImageClientlet implements Clientlet {
 
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(ImageClientlet.class);
+
 	@Override
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
-		String mimeType = response.getMimeType();
-		int contentLength = response.getContentLength();
 		URL url = response.getResponseURL();
-		Image image = null;
+		BufferedImage image = null;
 
 		if (url != null && url.toString().endsWith(".svg")) {
-
 			SVGRasterizer r = new SVGRasterizer(url);
-			image = Toolkit.getDefaultToolkit().createImage(r.createBufferedImage().getSource());
-
+			image = r.createBufferedImage();
 		} else {
-
-			byte[] imageBytes;
 			try {
-				InputStream in = response.getInputStream();
-				if (contentLength == -1) {
-					imageBytes = IORoutines.load(in);
-				} else {
-					imageBytes = IORoutines.loadExact(in, contentLength);
-				}
-			} catch (IOException ioe) {
-				throw new ClientletException(ioe);
+				image = ImageIO.read(url);
+			} catch (IOException e) {
+				logger.error(e);
 			}
-			image = Toolkit.getDefaultToolkit().createImage(imageBytes);
-
 		}
-
-		context.setResultingContent(new ImageContent(image, mimeType));
+		context.setResultingContent(new ImageViewer(image));
 	}
 }
