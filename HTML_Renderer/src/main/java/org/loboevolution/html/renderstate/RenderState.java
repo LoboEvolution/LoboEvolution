@@ -173,6 +173,13 @@ public interface RenderState {
 	 * @return the clear
 	 */
 	int getClear();
+	
+	/**
+	 * Gets the clear.
+	 *
+	 * @return the line height
+	 */
+	String getlineHeight();
 
 	/**
 	 * Gets the visibility.

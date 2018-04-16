@@ -55,7 +55,7 @@ public class InputNumberControl extends BaseInputTextControl {
 		String value = modelNode.getAttribute(VALUE);
 		min = modelNode.getAttribute(MIN);
 		max = modelNode.getAttribute(MAX);
-		if (!isNumeric(value)) {
+		if (!Strings.isNumeric(value)) {
 			numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
 			numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -75,7 +75,7 @@ public class InputNumberControl extends BaseInputTextControl {
 
 				JTextFieldImpl num = (JTextFieldImpl) keyEvent.getSource();
 
-				if (!isNumeric(num.getText())) {
+				if (!Strings.isNumeric(num.getText())) {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
 					numeric.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -99,17 +99,5 @@ public class InputNumberControl extends BaseInputTextControl {
 			}
 		};
 		return keyAdapter;
-	}
-
-	private boolean isNumeric(String keyCode) {
-		try {
-			if (keyCode == null || keyCode != null && keyCode.length() == 0) {
-				return true;
-			}
-			Integer.parseInt(keyCode);
-			return true;
-		} catch (Exception ex) {
-			return false;
-		}
 	}
 }

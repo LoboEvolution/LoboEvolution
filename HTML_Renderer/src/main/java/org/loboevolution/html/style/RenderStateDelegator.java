@@ -204,6 +204,11 @@ public abstract class RenderStateDelegator implements RenderState {
 	public int getClear() {
 		return this.delegate.getClear();
 	}
+	
+	@Override
+	public String getlineHeight() {
+		return this.delegate.getlineHeight();
+	}
 
 	@Override
 	public int getOverflowX() {

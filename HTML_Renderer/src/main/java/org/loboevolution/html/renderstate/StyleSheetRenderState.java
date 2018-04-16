@@ -1425,4 +1425,26 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		}
 		return null;
 	}
+	
+	@Override
+	public String getlineHeight() {
+		AbstractCSSProperties props = this.getCssProperties();
+		String lh = props == null ? null : props.getLineHeight();
+		RenderState prs = this.prevRenderState;
+		if (lh == null && prs != null)  lh = prs.getlineHeight();
+		
+		if(lh == null)
+			return null;
+		
+		switch (lh) {
+		case INHERIT:
+			return this.getPreviousRenderState().getlineHeight();
+		case NORMAL:
+			return String.valueOf(1.2f * LAFSettings.getInstance().getFontSize()); 
+		case INITIAL:
+			return String.valueOf(prs.getFontMetrics().getHeight());
+		default:
+			return lh;
+		}
+	}
 }

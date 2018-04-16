@@ -38,11 +38,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.swing.SwingUtilities;
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlLayoutMapping;
 import org.loboevolution.html.HtmlRendererContext;
@@ -62,6 +60,7 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.ArrayUtilities;
+import org.loboevolution.util.Strings;
 import org.w3c.dom.Node;
 
 /**
@@ -555,6 +554,17 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 		rline = new RLine(startNode, this.container, newX, newLineY, newMaxWidth, 0, initialAllowOverflow);
 		rline.setParent(this);
+		
+		RenderState rs = startNode.getRenderState();
+		if(!Strings.isBlank(rs.getlineHeight())) {
+			if (Strings.isNumeric(rs.getlineHeight())) {
+				float flh = Float.parseFloat(rs.getlineHeight()) * LAFSettings.getInstance().getFontSize();
+				rline.setHeight(HtmlValues.getPixelSize(String.valueOf(flh), null, 0));
+			} else {
+				rline.setHeight(HtmlValues.getPixelSize(rs.getlineHeight(), null, 0));
+			}	
+		}
+		
 		ArrayList<RLine> sr = this.seqRenderables;
 		if (sr == null) {
 			sr = new ArrayList(1);
@@ -783,16 +793,27 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	public void addLineBreak(ModelNode startNode, int breakType) {
 		RLine line = this.currentLine;
+		RenderState rs = startNode.getRenderState();
 		if (line == null) {
 			Insets insets = this.paddingInsets;
 			this.addLine(startNode, null, insets.top);
 			line = this.currentLine;
 		}
+		
+		if(!Strings.isBlank(rs.getlineHeight())) {
+			if (Strings.isNumeric(rs.getlineHeight())) {
+				float flh = Float.parseFloat(rs.getlineHeight()) * LAFSettings.getInstance().getFontSize();
+				line.setHeight(HtmlValues.getPixelSize(String.valueOf(flh), null, 0));
+			} else {
+				line.setHeight(HtmlValues.getPixelSize(rs.getlineHeight(), null, 0));
+			}	
+		}
+		
 		if (line.getHeight() == 0) {
-			RenderState rs = startNode.getRenderState();
 			int fontHeight = rs.getFontMetrics().getHeight();
 			line.setHeight(fontHeight);
 		}
+		
 		line.setLineBreak(new LineBreak(breakType, startNode));
 		int newLineY;
 		FloatingBounds fb = this.floatBounds;

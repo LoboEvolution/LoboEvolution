@@ -532,4 +532,16 @@ public class Strings {
 		}
 		return buffer.toString();
 	}
+	
+	public static boolean isNumeric(String keyCode) {
+		try {
+			if (Strings.isBlank(keyCode)) {
+				return true;
+			}
+			Float.parseFloat(keyCode);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+	}
 }
