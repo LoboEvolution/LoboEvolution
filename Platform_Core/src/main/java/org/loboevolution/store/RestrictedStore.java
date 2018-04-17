@@ -51,6 +51,7 @@ import org.loboevolution.io.ManagedFile;
 import org.loboevolution.io.ManagedFileFilter;
 import org.loboevolution.io.ManagedStore;
 import org.loboevolution.io.QuotaExceededException;
+import org.loboevolution.util.Strings;
 import org.loboevolution.util.WrapperException;
 import org.loboevolution.util.gui.ClassLoaderObjectInputStream;
 
@@ -626,7 +627,7 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 					}
 					relPath = relPath.replace("/", File.separator);
 					File fullFile;
-					if (relPath.length() == 0) {
+					if (Strings.isBlank(relPath)) {
 						fullFile = baseDirectory;
 					} else {
 						fullFile = new File(baseDirectory, relPath);

@@ -742,12 +742,12 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		}
 		CSS3Properties props = this.getCssProperties();
 		String textAlign = props == null ? null : props.getTextAlign();
-		if (textAlign == null || textAlign.length() == 0) {
+		if (Strings.isBlank(textAlign)) {
 			// Fall back to align attribute.
 			HTMLElement element = this.element;
 			if (element != null) {
 				textAlign = element.getAttribute(HtmlAttributeProperties.ALIGN);
-				if (textAlign == null || textAlign.length() == 0) {
+				if (Strings.isBlank(textAlign)) {
 					RenderState prs = this.prevRenderState;
 					if (prs != null) {
 						return prs.getAlignXPercent();
@@ -967,7 +967,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	public int getTextIndent(int availSize) {
 		// No caching for this one.
 		String tiText = this.getTextIndentText();
-		if (tiText.length() == 0) {
+		if (Strings.isBlank(tiText)) {
 			return 0;
 		} else {
 			return HtmlValues.getPixelSize(tiText, this, 0, availSize);
@@ -1077,7 +1077,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			visibility = VISIBILITY_VISIBLE;
 		} else {
 			String visibText = props.getVisibility();
-			if (visibText == null || visibText.length() == 0) {
+			if (Strings.isBlank(visibText)) {
 				visibility = VISIBILITY_VISIBLE;
 			} else {
 				String visibTextTL = visibText.toLowerCase();
@@ -1123,7 +1123,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			position = POSITION_STATIC;
 		} else {
 			String positionText = props.getPosition();
-			if (positionText == null || positionText.length() == 0) {
+			if (Strings.isBlank(positionText)) {
 				position = POSITION_STATIC;
 			} else {
 				String positionTextTL = positionText.toLowerCase();
@@ -1170,7 +1170,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			floatValue = FLOAT_NONE;
 		} else {
 			String floatText = props.getFloat();
-			if (floatText == null || floatText.length() == 0) {
+			if (Strings.isBlank(floatText)) {
 				floatValue = FLOAT_NONE;
 			} else {
 				String floatTextTL = floatText.toLowerCase();

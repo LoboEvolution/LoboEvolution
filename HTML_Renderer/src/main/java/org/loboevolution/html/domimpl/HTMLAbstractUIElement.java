@@ -30,6 +30,7 @@ import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.JavaScript;
+import org.loboevolution.util.Strings;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Function;
@@ -1375,7 +1376,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl implements HtmlJsAttr
 			}
 			if (uac.isScriptingEnabled()) {
 				String attributeValue = this.getAttribute(attributeName);
-				if (attributeValue == null || attributeValue.length() == 0) {
+				if (Strings.isBlank(attributeValue)) {
 					f = null;
 				} else {
 					String functionCode = "function " + normalAttributeName + "_" + System.identityHashCode(this)

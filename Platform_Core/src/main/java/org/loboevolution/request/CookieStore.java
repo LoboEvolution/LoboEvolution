@@ -140,7 +140,7 @@ public class CookieStore {
 			logger.error( "saveCookie(): Invalid cookie spec from '" + urlHostName + "'");
 			return;
 		}
-		if (path == null || path.length() == 0) {
+		if (Strings.isBlank(path)) {
 			path = "/";
 		}
 		if (domain != null) {
@@ -244,7 +244,7 @@ public class CookieStore {
 	 */
 	private Collection<Cookie> getCookiesStrict(String hostName, String path) {
 
-		if (path == null || path.length() == 0) {
+		if (Strings.isBlank(path)) {
 			path = "/";
 		}
 		Collection<Cookie> cookies = new LinkedList<Cookie>();

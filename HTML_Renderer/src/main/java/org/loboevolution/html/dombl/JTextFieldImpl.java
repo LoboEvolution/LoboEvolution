@@ -31,6 +31,8 @@ import javax.swing.border.Border;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.loboevolution.util.Strings;
+
 /**
  * The Class JTextFieldImpl.
  */
@@ -188,7 +190,7 @@ public class JTextFieldImpl extends JTextField {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (getText().trim().length() == 0) {
+				if (Strings.isBlank(getText().trim())) {
 					customizeText(text);
 				}
 			}

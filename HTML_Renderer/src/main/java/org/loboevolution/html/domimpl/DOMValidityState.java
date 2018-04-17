@@ -48,7 +48,7 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getValueMissing() {
-		return (ic.getValue() == null || (ic.getValue() != null && ic.getValue().length() == 0));
+		return Strings.isBlank(ic.getValue());
 	}
 
 	@Override

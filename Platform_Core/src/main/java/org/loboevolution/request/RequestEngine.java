@@ -541,7 +541,7 @@ public final class RequestEngine {
 						if (CacheInfo.HEADER_REQUEST_TIME.equalsIgnoreCase(headerKey)) {
 							continue;
 						}
-						String headerPrefix = headerKey == null || headerKey.length() == 0 ? "" : headerKey + ": ";
+						String headerPrefix = Strings.isBlank(headerKey) ? "" : headerKey + ": ";
 						byte[] headerBytes1 = (headerPrefix + headerValue + "\r\n").getBytes("UTF-8");
 						out.write(headerBytes1);
 					}
@@ -799,7 +799,7 @@ public final class RequestEngine {
 		final String host = connectionUrl.getHost();
 		boolean isResURL = "res".equalsIgnoreCase(protocol);
 		SSLCertificate.setCertificate();
-		if (isResURL || host == null || host.length() == 0) {
+		if (isResURL || Strings.isBlank(host)) {
 			connection = connectionUrl.openConnection();
 		} else {
 			Proxy proxy = this.connectionSettings.getProxy(host);
@@ -891,7 +891,7 @@ public final class RequestEngine {
 			if (url.getQuery() != null && "file".equalsIgnoreCase(protocol)) {
 				// Remove query (replace file with path) if "file" protocol.
 				String ref = url.getRef();
-				String refText = ref == null || ref.length() == 0 ? "" : "#" + ref;
+				String refText = Strings.isBlank(ref) ? "" : "#" + ref;
 				connectionUrl = new URL(protocol, url.getHost(), url.getPort(), url.getPath() + refText);
 			} else {
 				connectionUrl = url;

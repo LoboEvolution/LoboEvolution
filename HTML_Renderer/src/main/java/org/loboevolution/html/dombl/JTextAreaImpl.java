@@ -29,6 +29,8 @@ import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.loboevolution.util.Strings;
+
 /**
  * The Class JTextAreaImpl.
  */
@@ -169,7 +171,7 @@ public class JTextAreaImpl extends JTextArea {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (getText().trim().length() == 0) {
+				if (Strings.isBlank(getText().trim())) {
 					customizeText(text);
 				}
 			}

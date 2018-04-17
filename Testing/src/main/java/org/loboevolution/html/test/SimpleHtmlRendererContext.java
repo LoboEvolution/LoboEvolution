@@ -58,6 +58,7 @@ import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.SSLCertificate;
+import org.loboevolution.util.Strings;
 import org.loboevolution.util.Urls;
 import org.loboevolution.util.io.BufferExceededException;
 import org.loboevolution.util.io.RecordedInputStream;
@@ -412,7 +413,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 			// Remove query so it works.
 			try {
 				String ref = action.getRef();
-				String refText = ref == null || ref.length() == 0 ? "" : "#" + ref;
+				String refText = Strings.isBlank(ref) ? "" : "#" + ref;
 				urlForLoading = new URL(resolvedURL.getProtocol(), action.getHost(), action.getPort(),
 						action.getPath() + refText);
 			} catch (MalformedURLException throwable) {

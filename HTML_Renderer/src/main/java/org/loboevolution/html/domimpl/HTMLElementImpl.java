@@ -254,7 +254,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 		// Can't do the following in synchronized block (reverse locking order
 		// with document).
 		// First, add declarations from stylesheet
-		Set<String> pes = pseudoElement.length() == 0 ? null : Collections.singleton(pseudoElement);
+		Set<String> pes = Strings.isBlank(pseudoElement) ? null : Collections.singleton(pseudoElement);
 		AbstractCSSProperties sds = this.createDefaultStyleSheet();
 		sds = this.addStyleSheetDeclarations(sds, pes);
 		// Now add local style if any.
@@ -684,7 +684,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 */
 	private boolean classMatch(String classTL) {
 		String classNames = this.getClassName();
-		if (classNames == null || classNames.length() == 0) {
+		if (Strings.isBlank(classNames)) {
 			return classTL == null;
 		}
 		StringTokenizer tok = new StringTokenizer(classNames, " \t\r\n");

@@ -175,7 +175,7 @@ public class CSSUtilities {
 	 * @return true, if successful
 	 */
 	public static boolean matchesMedia(String mediaValues, UserAgentContext rcontext) {
-		if (mediaValues == null || mediaValues.length() == 0) {
+		if (Strings.isBlank(mediaValues)) {
 			return true;
 		}
 		if (rcontext == null) {

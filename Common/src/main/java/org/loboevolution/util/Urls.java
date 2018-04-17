@@ -349,8 +349,8 @@ public final class Urls {
 		int port = url.getPort();
 		String portText = port == -1 ? "" : ":" + port;
 		String userInfo = url.getUserInfo();
-		String userInfoText = userInfo == null || userInfo.length() == 0 ? "" : userInfo + "@";
-		String hostPort = host == null || host.length() == 0 ? "" : "//" + userInfoText + host + portText;
+		String userInfoText = Strings.isBlank(userInfo) ? "" : userInfo + "@";
+		String hostPort = Strings.isBlank(host) ? "" : "//" + userInfoText + host + portText;
 		return url.getProtocol() + ":" + hostPort + url.getFile();
 	}
 

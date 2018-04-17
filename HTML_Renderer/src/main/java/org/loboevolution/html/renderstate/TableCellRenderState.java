@@ -109,10 +109,10 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (parent instanceof HTMLElement) {
 			rowElement = (HTMLElement) parent;
 		}
-		if (align == null || align.length() == 0) {
+		if (Strings.isBlank(align)) {
 			if (rowElement != null) {
 				align = rowElement.getAttribute(ALIGN);
-				if (align != null && align.length() == 0) {
+				if (Strings.isBlank(align)) {
 					align = null;
 				}
 			} else {
@@ -165,10 +165,10 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (parent instanceof HTMLElement) {
 			rowElement = (HTMLElement) parent;
 		}
-		if (valign == null || valign.length() == 0) {
+		iif (Strings.isBlank(valign)) {
 			if (rowElement != null) {
 				valign = rowElement.getAttribute(VALIGN);
-				if (valign != null && valign.length() == 0) {
+				if (Strings.isBlank(valign)) {
 					valign = null;
 				}
 			} else {

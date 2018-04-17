@@ -30,6 +30,7 @@ import javax.swing.JButton;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
+import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
@@ -84,7 +85,7 @@ public class InputButtonControl extends BaseInputControl {
 		}
 		HTMLInputElementImpl element = (HTMLInputElementImpl) this.controlElement;
 		String text = element.getAttribute(VALUE);
-		if (text == null || text.length() == 0) {
+		if (Strings.isBlank(text)) {
 			String type = element.getType();
 			if ("submit".equalsIgnoreCase(type)) {
 				text = "Submit Query";

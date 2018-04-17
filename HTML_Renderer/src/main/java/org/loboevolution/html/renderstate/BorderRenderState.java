@@ -373,7 +373,7 @@ public class BorderRenderState implements CSSValuesProperties {
 	 */
 	private static int getBorderStyle(String styleText) {
 
-		if (styleText == null || styleText.length() == 0) {
+		if (Strings.isBlank(styleText)) {
 			return BORDER_STYLE_NONE;
 		}
 

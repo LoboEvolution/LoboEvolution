@@ -848,7 +848,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		String align = null;
 		if (style != null) {
 			align = style.getFloat();
-			if (align != null && align.length() == 0) {
+			if (Strings.isBlank(align)) {
 				align = null;
 			}
 		}

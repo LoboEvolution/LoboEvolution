@@ -25,6 +25,7 @@ import java.io.File;
 
 import org.loboevolution.html.FormInput;
 import org.loboevolution.html.dombl.InputContext;
+import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.HTMLInputElement;
 
 /**
@@ -310,7 +311,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 			} else if (RADIO.equals(type) || CHECKBOX.equals(type)) {
 				if (this.getChecked()) {
 					String value = this.getValue();
-					if (value == null || value.length() == 0) {
+					if (Strings.isBlank(value)) {
 						value = "on";
 					}
 					return new FormInput[] { new FormInput(name, value) };

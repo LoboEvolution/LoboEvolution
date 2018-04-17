@@ -81,6 +81,7 @@ import org.loboevolution.ua.NavigatorWindowEvent;
 import org.loboevolution.ua.NavigatorWindowListener;
 import org.loboevolution.ua.RequestType;
 import org.loboevolution.util.Objects;
+import org.loboevolution.util.Strings;
 import org.loboevolution.util.Timing;
 
 /**
@@ -853,7 +854,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			String text = binfo.getTitle();
 			URL url = binfo.getUrl();
 			String urlText = url.toExternalForm();
-			if (text == null || text.length() == 0) {
+			if (Strings.isBlank(text)) {
 				text = urlText;
 			}
 			long elapsed = System.currentTimeMillis() - hentry.getTimetstamp();
@@ -896,7 +897,7 @@ public class ComponentSource implements NavigatorWindowListener {
 					}
 					if (tagMenu != null && tagMenu.getItemCount() < PREFERRED_MAX_MENU_SIZE) {
 						String text = binfo.getTitle();
-						if (text == null || text.length() == 0) {
+						if (Strings.isBlank(text)) {
 							text = urlText;
 						}
 						Action action = this.actionPool.createBookmarkNavigateAction(url);
@@ -929,7 +930,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			if ("GET".equals(method)) {
 				String title = entry.getTitle();
 				URL url = entry.getUrl();
-				String text = title == null || title.length() == 0 ? url.toExternalForm() : title;
+				String text = Strings.isBlank(title) ? url.toExternalForm() : title;
 				Action action = this.actionPool.createGoToAction(entry);
 				JMenuItem menuItem = menuItem(text, action);
 				menuItem.setToolTipText(url.toExternalForm());
@@ -951,7 +952,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			if ("GET".equals(method)) {
 				String title = entry.getTitle();
 				URL url = entry.getUrl();
-				String text = title == null || title.length() == 0 ? url.toExternalForm() : title;
+				String text = Strings.isBlank(title) ? url.toExternalForm() : title;
 				Action action = this.actionPool.createGoToAction(entry);
 				JMenuItem menuItem = menuItem(text, action);
 				menuItem.setToolTipText(url.toExternalForm());

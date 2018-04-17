@@ -24,6 +24,7 @@ import java.awt.Insets;
 import java.util.StringTokenizer;
 
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.util.Strings;
 
 /**
  * The Class HtmlInsets.
@@ -65,7 +66,7 @@ public class HtmlInsets implements CSSValuesProperties {
 			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
+		if (Strings.isBlank(sizeText)) {
 			return insets;
 		}
 		if (insets == null) {
@@ -119,7 +120,7 @@ public class HtmlInsets implements CSSValuesProperties {
 			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
+		if (Strings.isBlank(sizeText)) {
 			return insets;
 		}
 		if (insets == null) {
@@ -171,7 +172,7 @@ public class HtmlInsets implements CSSValuesProperties {
 			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
+		if (Strings.isBlank(sizeText)) {
 			return insets;
 		}
 		if (insets == null) {
@@ -223,7 +224,7 @@ public class HtmlInsets implements CSSValuesProperties {
 			sizeText = "0px";
 		}
 		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
+		if (Strings.isBlank(sizeText)) {
 			return insets;
 		}
 		if (insets == null) {

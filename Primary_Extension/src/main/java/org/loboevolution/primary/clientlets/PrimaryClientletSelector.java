@@ -31,6 +31,7 @@ import org.loboevolution.primary.clientlets.download.DownloadClientlet;
 import org.loboevolution.primary.clientlets.html.HtmlClientlet;
 import org.loboevolution.primary.clientlets.img.ImageClientlet;
 import org.loboevolution.primary.clientlets.pdf.PdfClientlet;
+import org.loboevolution.util.Strings;
 
 /**
  * The Class PrimaryClientletSelector.
@@ -63,8 +64,7 @@ public class PrimaryClientletSelector implements ClientletSelector {
 			int lastDotIdx = path.lastIndexOf('.');
 			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 			String extensionTL = extension.toLowerCase();
-			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || "svg".equals(extensionTL)
-					|| extensionTL.length() == 0) {
+			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || "svg".equals(extensionTL) || Strings.isBlank(extensionTL)) {
 				return new HtmlClientlet();
 			} else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL) || "png".equals(extensionTL)) {
 				return new ImageClientlet();
