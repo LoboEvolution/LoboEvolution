@@ -73,13 +73,16 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 
 	/** The Constant DEFAULT_FONT. */
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
+	
+	/** The Constant DEFAULT_LINE_HEIGHT. */
+	protected static final String DEFAULT_LINE_HEIGHT = String.valueOf(1.6f * LAFSettings.getInstance().getFontSize());
 
 	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
 
 	/** The Constant INVALID_COLOR. */
 	protected static final Color INVALID_COLOR = new Color(100, 0, 100);
-
+	
 	/** The element. */
 	protected final HTMLElementImpl element;
 
@@ -127,6 +130,8 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 
 	/** The i overlay color. */
 	private Color iOverlayColor = INVALID_COLOR;
+	
+	private String iLineHeight;
 
 	/** The cursor. */
 	private Optional<Cursor> cursor;
@@ -366,6 +371,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		this.iDisplay = null;
 		this.iTextIndentText = null;
 		this.iWhiteSpace = null;
+		this.iLineHeight = String.valueOf(1.6f * LAFSettings.getInstance().getFontSize());
 		this.marginInsets = MarginRenderState.INVALID_INSETS;
 		this.paddingInsets = PaddingRenderState.INVALID_INSETS;
 		this.overflowX = -1;
@@ -1429,12 +1435,22 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	@Override
 	public String getlineHeight() {
 		AbstractCSSProperties props = this.getCssProperties();
-		String lh = props == null ? null : props.getLineHeight();
 		RenderState prs = this.prevRenderState;
-		if (lh == null && prs != null)  lh = prs.getlineHeight();
+		String lh = props == null ? null : props.getLineHeight();
 		
-		if(lh == null)
-			return null;
+		
+		if (this.iLineHeight != null) {
+			return this.iLineHeight;
+		}
+		
+		if (lh == null) {
+			if (prs != null) {
+				this.iLineHeight = prs.getlineHeight();
+				return this.iLineHeight;
+			}
+			this.iLineHeight = DEFAULT_LINE_HEIGHT;
+			return DEFAULT_LINE_HEIGHT;
+		}
 		
 		switch (lh) {
 		case INHERIT:
@@ -1444,7 +1460,8 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		case INITIAL:
 			return String.valueOf(prs.getFontMetrics().getHeight());
 		default:
-			return lh;
+			int ilh = HtmlValues.getPixelSize(lh, this, 1);
+			return String.valueOf(ilh * LAFSettings.getInstance().getFontSize());
 		}
 	}
 }

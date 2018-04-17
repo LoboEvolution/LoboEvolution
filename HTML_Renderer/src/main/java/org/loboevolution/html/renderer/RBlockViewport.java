@@ -40,7 +40,6 @@ import java.util.TreeSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlLayoutMapping;
 import org.loboevolution.html.HtmlRendererContext;
@@ -557,12 +556,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		
 		RenderState rs = startNode.getRenderState();
 		if(!Strings.isBlank(rs.getlineHeight())) {
-			if (Strings.isNumeric(rs.getlineHeight())) {
-				float flh = Float.parseFloat(rs.getlineHeight()) * LAFSettings.getInstance().getFontSize();
-				rline.setHeight(HtmlValues.getPixelSize(String.valueOf(flh), null, 0));
-			} else {
-				rline.setHeight(HtmlValues.getPixelSize(rs.getlineHeight(), null, 0));
-			}	
+			Float f = Float.parseFloat(rs.getlineHeight());
+			rline.setHeight(f.intValue());
 		}
 		
 		ArrayList<RLine> sr = this.seqRenderables;
@@ -801,12 +796,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 		
 		if(!Strings.isBlank(rs.getlineHeight())) {
-			if (Strings.isNumeric(rs.getlineHeight())) {
-				float flh = Float.parseFloat(rs.getlineHeight()) * LAFSettings.getInstance().getFontSize();
-				line.setHeight(HtmlValues.getPixelSize(String.valueOf(flh), null, 0));
-			} else {
-				line.setHeight(HtmlValues.getPixelSize(rs.getlineHeight(), null, 0));
-			}	
+			Float f = Float.parseFloat(rs.getlineHeight());
+			line.setHeight(f.intValue());
 		}
 		
 		if (line.getHeight() == 0) {

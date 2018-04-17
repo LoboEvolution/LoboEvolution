@@ -1,6 +1,5 @@
 package org.loboevolution.html.style.setter;
 
-import org.loboevolution.html.info.FontInfo;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.FontValues;
 import org.loboevolution.html.style.HtmlValues;
@@ -42,25 +41,6 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 		properties.setPropertyValueLCAlt(FONT, newValue, important);
 		if (!Strings.isBlank(newValue)) {
 			String fontSpecTL = newValue.toLowerCase();
-			FontInfo fontInfo = FontValues.SYSTEM_FONTS.get(fontSpecTL);
-			if (fontInfo != null) {
-				if (fontInfo.getFontFamily() != null) {
-					properties.setPropertyValueLCAlt(FONT_FAMILY, fontInfo.getFontFamily(), important);
-				}
-				if (fontInfo.getFontSize() != null) {
-					properties.setPropertyValueLCAlt(FONT_SIZE, fontInfo.getFontSize(), important);
-				}
-				if (fontInfo.getFontStyle() != null) {
-					properties.setPropertyValueLCAlt(FONT_STYLE, fontInfo.getFontStyle(), important);
-				}
-				if (fontInfo.getFontVariant() != null) {
-					properties.setPropertyValueLCAlt(FONT_VARIANT, fontInfo.getFontVariant(), important);
-				}
-				if (fontInfo.getFontWeight() != null) {
-					properties.setPropertyValueLCAlt(FONT_WEIGHT, fontInfo.getFontWeight(), important);
-				}
-				return;
-			}
 			String[] tokens = HtmlValues.splitCssValue(fontSpecTL);
 			String token = null;
 			int length = tokens.length;

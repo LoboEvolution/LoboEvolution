@@ -4,32 +4,15 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import java.awt.font.TextAttribute;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.font.LAFSettings;
-import org.loboevolution.html.info.FontInfo;
 import org.loboevolution.html.renderstate.RenderState;
 
 public class FontValues extends HtmlValues {
 	
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(FontValues.class);
-	
-	/** The Constant SYSTEM_FONTS. */
-	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
-	
-	static {
-		FontInfo systemFont = new FontInfo();
-		SYSTEM_FONTS.put(CAPTION, systemFont);
-		SYSTEM_FONTS.put(ICON, systemFont);
-		SYSTEM_FONTS.put(MENU, systemFont);
-		SYSTEM_FONTS.put(MESSAGE_BOX, systemFont);
-		SYSTEM_FONTS.put(SMALL_CAPTION, systemFont);
-		SYSTEM_FONTS.put(STATUS_BAR, systemFont);
-	}
 	
 	/**
 	 * Gets a number for 1 to 7.
