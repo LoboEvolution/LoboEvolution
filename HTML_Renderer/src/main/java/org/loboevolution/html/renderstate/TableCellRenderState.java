@@ -165,7 +165,8 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (parent instanceof HTMLElement) {
 			rowElement = (HTMLElement) parent;
 		}
-		iif (Strings.isBlank(valign)) {
+		
+		if (Strings.isBlank(valign)) {
 			if (rowElement != null) {
 				valign = rowElement.getAttribute(VALIGN);
 				if (Strings.isBlank(valign)) {
