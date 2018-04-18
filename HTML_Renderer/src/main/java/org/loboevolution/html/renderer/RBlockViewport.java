@@ -916,7 +916,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		int position = getPosition(element);
 		boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		boolean relative = position == RenderState.POSITION_RELATIVE;
-		if (absolute || relative) {
+		boolean fixed = position == RenderState.POSITION_FIXED;
+		if (absolute || relative || fixed) {
 			if (layoutIfPositioned) {
 				// Presumes the method will return true.
 				if (renderable instanceof RBlock) {
@@ -1834,8 +1835,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 				break;
 			}
 		}
-		DelayedPair pair = new DelayedPair(this.container, container, renderable, leftText, rightText, topText,
-				bottomText, rs, currY);
+		DelayedPair pair = new DelayedPair(this.container, container, renderable, leftText, rightText, topText, bottomText, rs, currY);
 		this.container.addDelayedPair(pair);
 	}
 
