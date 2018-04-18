@@ -198,7 +198,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			// Add any declarations in style attribute (last takes precedence).
 			String style = this.getAttribute(STYLE_HTML);
 
-			if (style != null && style.length() != 0) {
+			if (!Strings.isBlank(style)) {
 				CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
 				InputSource inputSource = this.getCssInputSourceForDecl(style);
 				try {
@@ -409,7 +409,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			return style;
 		}
 		String classNames = this.getClassName();
-		if (classNames != null && classNames.length() != 0) {
+		if (!Strings.isBlank(classNames)) {
 			String id = this.getId();
 			String elementName = this.getTagName();
 			String[] classNameArray = Strings.split(classNames);
@@ -520,7 +520,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			String elementName = this.getTagName();
 			String classNames = this.getClassName();
 			String[] classNameArray = null;
-			if (classNames != null && classNames.length() != 0) {
+			if (!Strings.isBlank(classNames)) {
 				classNameArray = Strings.split(classNames);
 			}
 			ihs = Boolean
@@ -560,7 +560,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			String elementName = this.getTagName();
 			String classNames = this.getClassName();
 			String[] classNameArray = null;
-			if (classNames != null && classNames.length() != 0) {
+			if (!Strings.isBlank(classNames)) {
 				classNameArray = Strings.split(classNames);
 			}
 			hhs = Boolean.valueOf(

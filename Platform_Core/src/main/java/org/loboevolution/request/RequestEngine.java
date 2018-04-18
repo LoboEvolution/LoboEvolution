@@ -392,7 +392,7 @@ public final class RequestEngine {
 		} else {
 			newNoRefURL = baseURL;
 		}
-		if (ref != null && ref.length() != 0) {
+		if (!Strings.isBlank(ref)) {
 			return newNoRefURL + "#" + ref;
 		} else {
 			return newNoRefURL;

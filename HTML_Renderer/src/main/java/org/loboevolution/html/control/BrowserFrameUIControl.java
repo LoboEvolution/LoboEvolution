@@ -35,6 +35,7 @@ import org.loboevolution.html.renderer.UIControl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.HTMLElement;
 
 /**
@@ -130,7 +131,7 @@ public class BrowserFrameUIControl implements UIControl, HtmlAttributeProperties
 			HtmlInsets insets = null;
 			String marginwidth = element.getAttribute(MARGINWIDTH);
 			String marginheight = element.getAttribute(MARGINHEIGHT);
-			if (marginwidth != null && marginwidth.length() != 0) {
+			if (!Strings.isBlank(marginwidth) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
@@ -159,7 +160,7 @@ public class BrowserFrameUIControl implements UIControl, HtmlAttributeProperties
 					insets.rightType = HtmlInsets.TYPE_PIXELS;
 				}
 			}
-			if (marginheight != null && marginheight.length() != 0) {
+			if (!Strings.isBlank(marginheight)) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}

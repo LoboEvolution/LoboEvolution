@@ -865,7 +865,7 @@ public class ComponentSource implements NavigatorWindowListener {
 			toolTipText.append("<html>");
 			toolTipText.append(urlText);
 			String description = binfo.getDescription();
-			if (description != null && description.length() != 0) {
+			if (!Strings.isBlank(description)) {
 				toolTipText.append("<br>");
 				toolTipText.append(description);
 			}
@@ -906,7 +906,7 @@ public class ComponentSource implements NavigatorWindowListener {
 						toolTipText.append("<html>");
 						toolTipText.append(urlText);
 						String description = binfo.getDescription();
-						if (description != null && description.length() != 0) {
+						if (!Strings.isBlank(description)) {
 							toolTipText.append("<br>");
 							toolTipText.append(description);
 						}

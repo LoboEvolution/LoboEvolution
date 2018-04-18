@@ -95,7 +95,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		CSS3Properties props = this.getCssProperties();
 		if (props != null) {
 			String textAlign = props.getTextAlign();
-			if (textAlign != null && textAlign.length() != 0) {
+			if (!Strings.isBlank(textAlign)) {
 				return super.getAlignXPercent();
 			}
 		}
@@ -154,7 +154,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		CSS3Properties props = this.getCssProperties();
 		if (props != null) {
 			String textAlign = props.getVerticalAlign();
-			if (textAlign != null && textAlign.length() != 0) {
+			if (!Strings.isBlank(textAlign)) {
 				return super.getAlignYPercent();
 			}
 		}
@@ -269,7 +269,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			}
 
 			String cellPaddingText = tableElement.getAttribute(CELLPADDING);
-			if (cellPaddingText != null && cellPaddingText.length() != 0) {
+			if (!Strings.isBlank(cellPaddingText)) {
 				cellPaddingText = cellPaddingText.trim();
 				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, 0);
 				int cellPaddingType = HtmlInsets.TYPE_PIXELS;

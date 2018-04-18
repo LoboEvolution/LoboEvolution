@@ -36,6 +36,7 @@ import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.loboevolution.util.Nodes;
+import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.HTMLCollection;
 import org.w3c.dom.Node;
 
@@ -112,11 +113,11 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 				if (descNode instanceof DOMElementImpl) {
 					DOMElementImpl element = (DOMElementImpl) descNode;
 					String id = element.getId();
-					if (id != null && id.length() != 0) {
+					if (!Strings.isBlank(id)) {
 						itemsByName.put(id, element);
 					}
 					String name = element.getAttribute(NAME);
-					if (name != null && name.length() != 0 && !name.equals(id)) {
+					if (!Strings.isBlank(name) && !name.equals(id)) {
 						itemsByName.put(name, element);
 					}
 				}

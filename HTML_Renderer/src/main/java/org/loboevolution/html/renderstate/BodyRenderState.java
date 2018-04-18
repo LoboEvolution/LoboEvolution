@@ -96,13 +96,11 @@ public class BodyRenderState extends StyleSheetRenderState {
 			return c;
 		}
 		String tcolor = this.element.getAttribute(HtmlAttributeProperties.TEXT);
-
-		if (tcolor == null) {
-			tcolor = "black";
-		}
-
-		if (tcolor != null && tcolor.length() != 0) {
+		
+		if (!Strings.isBlank(tcolor)) {
 			c = ColorFactory.getInstance().getColor(tcolor);
+		} else {
+			tcolor = "black";
 		}
 
 		return c;
