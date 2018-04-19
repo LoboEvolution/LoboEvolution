@@ -131,7 +131,7 @@ public class BrowserFrameUIControl implements UIControl, HtmlAttributeProperties
 			HtmlInsets insets = null;
 			String marginwidth = element.getAttribute(MARGINWIDTH);
 			String marginheight = element.getAttribute(MARGINHEIGHT);
-			if (!Strings.isBlank(marginwidth) {
+			if (!Strings.isBlank(marginwidth)) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
