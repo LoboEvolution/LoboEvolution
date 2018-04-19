@@ -47,6 +47,7 @@ import org.loboevolution.html.control.HrControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.dombl.UINode;
+import org.loboevolution.html.domimpl.DOMFragmentImpl;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.info.FloatingInfo;
@@ -116,7 +117,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	private SortedSet<PositionedRenderable> positionedRenderables;
 
 	/** The seq renderables. */
-	private ArrayList<RLine> seqRenderables = null;
+	private ArrayList<BoundableRenderable> seqRenderables = null;
 
 	/** The exportable floats. */
 	private ArrayList<ExportableFloat> exportableFloats = null;
@@ -214,7 +215,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		this.frameContext = frameContext;
 		this.container = container;
 		this.listNesting = listNesting;
-		// Layout here can always be "invalidated"
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
@@ -226,8 +226,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	@Override
 	public void invalidateLayoutLocal() {
-		// Workaround for fact that RBlockViewport does not
-		// get validated or invalidated.
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
@@ -238,20 +236,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	public int getAvailContentWidth() {
 		return this.availContentWidth;
-	}
-
-	/**
-	 * Inits the collapsible margin.
-	 *
-	 * @return the int
-	 */
-	private int initCollapsibleMargin() {
-		Object parent = this.parent;
-		if (!(parent instanceof RBlock)) {
-			return 0;
-		}
-		RBlock parentBlock = (RBlock) parent;
-		return parentBlock.getCollapsibleMarginTop();
 	}
 
 	/**
@@ -274,100 +258,89 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @param sizeOnly
 	 *            the size only
 	 */
-	public void layout(int desiredWidth, int desiredHeight, Insets paddingInsets, int yLimit,
-			FloatingBounds floatBounds, boolean sizeOnly) {
-		RenderableContainer box = this.container;
-		this.paddingInsets = paddingInsets;
-		this.yLimit = yLimit;
-		this.desiredHeight = desiredHeight;
-		this.desiredWidth = desiredWidth;
-		this.floatBounds = floatBounds;
-		this.isFloatLimit = null;
-		this.pendingFloats = null;
-		this.sizeOnly = sizeOnly;
-		this.lastSeqBlock = null;
-		this.currentCollapsibleMargin = this.initCollapsibleMargin();
+	public void layout(final int desiredWidth, final int desiredHeight, final Insets paddingInsets, final int yLimit,
+		      final FloatingBounds floatBounds, final boolean sizeOnly) {
 
-		// maxX and maxY should not be reset by layoutPass.
-		this.maxX = paddingInsets.left;
-		this.maxY = paddingInsets.top;
+		    // final RenderableContainer container = this.container;
+		    this.paddingInsets = paddingInsets;
+		    this.yLimit = yLimit;
+		    this.desiredHeight = desiredHeight;
+		    this.desiredWidth = desiredWidth;
+		    this.floatBounds = floatBounds;
+		    this.isFloatLimit = null;
+		    this.pendingFloats = null;
+		    this.sizeOnly = sizeOnly;
+		    this.lastSeqBlock = null;
+		    this.currentCollapsibleMargin = 0;
 
-		int availw = desiredWidth - paddingInsets.left - paddingInsets.right;
-		if (availw < 0) {
-			availw = 0;
+		    // maxX and maxY should not be reset by layoutPass.
+		    this.maxX = paddingInsets.left;
+		    this.maxY = paddingInsets.top;
+
+		    int availw = desiredWidth - paddingInsets.left - paddingInsets.right;
+		    if (availw < 0) {
+		      availw = 0;
+		    }
+		    int availh = desiredHeight - paddingInsets.top - paddingInsets.bottom;
+		    if (availh == 0) {
+		      availh = 0;
+		    }
+		    this.availContentHeight = availh;
+		    this.availContentWidth = availw;
+
+		    // New floating algorithm.
+		    this.layoutPass((DOMNodeImpl) this.modelNode);
+
+		    // Compute maxY according to last block.
+		    int maxY = this.maxY;
+		    int maxYWholeBlock = maxY;
+		    final BoundableRenderable lastSeqBlock = this.lastSeqBlock;
+		    if (lastSeqBlock != null) {
+		      final int effBlockHeight = this.getEffectiveBlockHeight(lastSeqBlock);
+		      if ((lastSeqBlock.getY() + effBlockHeight) > maxY) {
+		        this.maxY = maxY = lastSeqBlock.getY() + effBlockHeight;
+		        maxYWholeBlock = lastSeqBlock.getY() + lastSeqBlock.getHeight();
+		      }
+		    }
+
+		    // See if line should increase maxY. Empty
+		    // lines shouldn't, except in cases where
+		    // there was a BR.
+		    final RLine lastLine = this.currentLine;
+		    final Rectangle lastBounds = lastLine.getBounds();
+		    if ((lastBounds.height > 0) || (lastBounds.y > maxYWholeBlock)) {
+		      final int lastTopX = lastBounds.x + lastBounds.width;
+		      if (lastTopX > this.maxX) {
+		        this.maxX = lastTopX;
+		      }
+		      final int lastTopY = lastBounds.y + lastBounds.height;
+		      if (lastTopY > maxY) {
+		        this.maxY = maxY = lastTopY;
+		      }
+		    }
+
+		    // Check positioned renderables for maxX and maxY
+		    final SortedSet<PositionedRenderable> posRenderables = this.positionedRenderables;
+		    if (posRenderables != null) {
+		      final boolean isFloatLimit = this.isFloatLimitImpl();
+		      final Iterator<PositionedRenderable> i = posRenderables.iterator();
+		      while (i.hasNext()) {
+		        final PositionedRenderable pr = i.next();
+		        final BoundableRenderable br = pr.getRenderable();
+		        if ((br.getX() + br.getWidth()) > this.maxX) {
+		          this.maxX = br.getX() + br.getWidth();
+		        }
+		        if (isFloatLimit || !pr.isFloat()) {
+		          if ((br.getY() + br.getHeight()) > maxY) {
+		            this.maxY = maxY = br.getY() + br.getHeight();
+		          }
+		        }
+		      }
+		    }
+
+		    this.width = paddingInsets.right + this.maxX;
+		    this.height = paddingInsets.bottom + maxY;
 		}
-		int availh = desiredHeight - paddingInsets.top - paddingInsets.bottom;
-		if (availh < 0) {
-			availh = 0;
-		}
-		this.availContentHeight = availh;
-		this.availContentWidth = availw;
-
-		// Float.valueOfing algorithm.
-		this.layoutPass((DOMNodeImpl) this.modelNode);
-
-		Collection delayedPairs = box.getDelayedPairs();
-		if (delayedPairs != null && !delayedPairs.isEmpty()) {
-			// Add positioned renderables that belong here
-			Iterator i = delayedPairs.iterator();
-			while (i.hasNext()) {
-				DelayedPair pair = (DelayedPair) i.next();
-				if (pair.containingBlock == box) {
-					this.importDelayedPair(pair);
-				}
-			}
-		}
-
-		// Compute maxY according to last block.
-		int maxY = this.maxY;
-		int maxYWholeBlock = maxY;
-		BoundableRenderable lastSeqBlock = this.lastSeqBlock;
-		if (lastSeqBlock != null) {
-			int effBlockHeight = this.getEffectiveBlockHeight(lastSeqBlock);
-			if (lastSeqBlock.getY() + effBlockHeight > maxY) {
-				this.maxY = maxY = lastSeqBlock.getY() + effBlockHeight;
-				maxYWholeBlock = lastSeqBlock.getY() + lastSeqBlock.getHeight();
-			}
-		}
-
-		// See if line should increase maxY. Empty
-		// lines shouldn't, except in cases where
-		// there was a BR.
-		RLine lastLine = this.currentLine;
-		Rectangle lastBounds = lastLine.getBounds();
-		if (lastBounds.height > 0 || lastBounds.y > maxYWholeBlock) {
-			int lastTopX = lastBounds.x + lastBounds.width;
-			if (lastTopX > this.maxX) {
-				this.maxX = lastTopX;
-			}
-			int lastTopY = lastBounds.y + lastBounds.height;
-			if (lastTopY > maxY) {
-				this.maxY = maxY = lastTopY;
-			}
-		}
-
-		// Check positioned renderables for maxX and maxY
-		SortedSet<PositionedRenderable> posRenderables = this.positionedRenderables;
-		if (posRenderables != null) {
-			boolean isFloatLimit = this.isFloatLimitImpl();
-			Iterator<PositionedRenderable> i = posRenderables.iterator();
-			while (i.hasNext()) {
-				PositionedRenderable pr = i.next();
-				BoundableRenderable br = pr.getRenderable();
-				if (br.getX() + br.getWidth() > this.maxX) {
-					this.maxX = br.getX() + br.getWidth();
-				}
-
-				if ((isFloatLimit || !pr.isFloat()) && br.getY() + br.getHeight() > maxY) {
-					this.maxY = maxY = br.getY() + br.getHeight();
-				}
-
-			}
-		}
-
-		this.width = paddingInsets.right + this.maxX;
-		this.height = paddingInsets.bottom + maxY;
-	}
 
 	/**
 	 * Layout pass.
@@ -411,43 +384,39 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @param paddingInsets
 	 *            the padding insets
 	 */
-	public void alignX(int alignXPercent, int canvasWidth, Insets paddingInsets) {
-		int prevMaxY = this.maxY;
-		ArrayList<RLine> renderables = this.seqRenderables;
-		if (renderables != null && alignXPercent > 0) {
-			Insets insets = this.paddingInsets;
-			int numRenderables = renderables.size();
-			int yoffset = 0;
-			for (int i = 0; i < numRenderables; i++) {
-				Object r = renderables.get(i);
-				if (r instanceof BoundableRenderable) {
-					BoundableRenderable seqRenderable = (BoundableRenderable) r;
-					int y = seqRenderable.getY();
-					int newY = y;
-					if (yoffset > 0) {
-						newY = y + yoffset;
-						seqRenderable.setY(newY);
-						if (newY + seqRenderable.getHeight() > this.maxY) {
-							this.maxY = newY + seqRenderable.getHeight();
-						}
-					}
-					boolean isVisibleBlock = seqRenderable instanceof RBlock && ((RBlock) seqRenderable).isOverflowVisibleX();
-					int leftOffset = isVisibleBlock ? insets.left : this.fetchLeftOffset(y);
-					int rightOffset = isVisibleBlock ? insets.right : this.fetchRightOffset(y);
-					int actualAvailWidth = canvasWidth - leftOffset - rightOffset;
-					int difference = actualAvailWidth - seqRenderable.getWidth();
-					if (!isVisibleBlock && difference > 0) {
-						int shift = difference * alignXPercent / 100;
-						int newX = leftOffset + shift;
-						seqRenderable.setX(newX);
-
-					}
-				}
-			}
-		}
-		if (prevMaxY != this.maxY) {
-			this.height += this.maxY - prevMaxY;
-		}
+	public void alignX(final int alignXPercent, final int canvasWidth, final Insets paddingInsets) {
+	    final int prevMaxY = this.maxY;
+	    // Horizontal alignment
+	    if (alignXPercent > 0) {
+	      final ArrayList<BoundableRenderable> renderables = this.seqRenderables;
+	      if (renderables != null) {
+	        final Insets insets = this.paddingInsets;
+	        // final FloatingBounds floatBounds = this.floatBounds;
+	        final int numRenderables = renderables.size();
+	        for (int i = 0; i < numRenderables; i++) {
+	          final Object r = renderables.get(i);
+	          if (r instanceof BoundableRenderable) {
+	            final BoundableRenderable seqRenderable = (BoundableRenderable) r;
+	            final int y = seqRenderable.getY();
+	            final boolean isVisibleBlock = (seqRenderable instanceof RBlock) && ((RBlock) seqRenderable).isOverflowVisibleX();
+	            final int leftOffset = isVisibleBlock ? insets.left : this.fetchLeftOffset(y);
+	            final int rightOffset = isVisibleBlock ? insets.right : this.fetchRightOffset(y);
+	            final int actualAvailWidth = canvasWidth - leftOffset - rightOffset;
+	            final int difference = actualAvailWidth - seqRenderable.getWidth();
+	            if (difference > 0) {
+	              final int shift = (difference * alignXPercent) / 100;
+	              if (!isVisibleBlock) {
+	                final int newX = leftOffset + shift;
+	                seqRenderable.setX(newX);
+	              }
+	            }
+	          }
+	        }
+	      }
+	    }
+	    if (prevMaxY != this.maxY) {
+	      this.height += (this.maxY - prevMaxY);
+	    }
 	}
 
 	/**
@@ -460,53 +429,53 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @param paddingInsets
 	 *            the padding insets
 	 */
-	public void alignY(int alignYPercent, int canvasHeight, Insets paddingInsets) {
-		int prevMaxY = this.maxY;
-		if (alignYPercent > 0) {
-			int availContentHeight = canvasHeight - paddingInsets.top - paddingInsets.bottom;
-			int usedHeight = this.maxY - paddingInsets.top;
-			int difference = availContentHeight - usedHeight;
-			if (difference > 0) {
-				int shift = difference * alignYPercent / 100;
-				ArrayList<RLine> rlist = this.seqRenderables;
-				if (rlist != null) {
-					// Try sequential renderables first.
-					Iterator renderables = rlist.iterator();
-					while (renderables.hasNext()) {
-						Object r = renderables.next();
-						if (r instanceof BoundableRenderable) {
-							BoundableRenderable line = (BoundableRenderable) r;
-							int newY = line.getY() + shift;
-							line.setY(newY);
-							if (newY + line.getHeight() > this.maxY) {
-								this.maxY = newY + line.getHeight();
-							}
-						}
-					}
-				}
+	public void alignY(final int alignYPercent, final int canvasHeight, final Insets paddingInsets) {
+	    final int prevMaxY = this.maxY;
+	    if (alignYPercent > 0) {
+	      final int availContentHeight = canvasHeight - paddingInsets.top - paddingInsets.bottom;
+	      final int usedHeight = this.maxY - paddingInsets.top;
+	      final int difference = availContentHeight - usedHeight;
+	      if (difference > 0) {
+	        final int shift = (difference * alignYPercent) / 100;
+	        final ArrayList<BoundableRenderable> rlist = this.seqRenderables;
+	        if (rlist != null) {
+	          // Try sequential renderables first.
+	          final Iterator<BoundableRenderable> renderables = rlist.iterator();
+	          while (renderables.hasNext()) {
+	            final Object r = renderables.next();
+	            if (r instanceof BoundableRenderable) {
+	              final BoundableRenderable line = (BoundableRenderable) r;
+	              final int newY = line.getY() + shift;
+	              line.setY(newY);
+	              if ((newY + line.getHeight()) > this.maxY) {
+	                this.maxY = newY + line.getHeight();
+	              }
+	            }
+	          }
+	        }
 
-				// Now other renderables, but only those that can be
-				// vertically aligned
-				Set<PositionedRenderable> others = this.positionedRenderables;
-				if (others != null) {
-					Iterator<PositionedRenderable> i2 = others.iterator();
-					while (i2.hasNext()) {
-						PositionedRenderable pr = i2.next();
-						if (pr.isVerticalAlignable()) {
-							BoundableRenderable br = pr.getRenderable();
-							int newY = br.getY() + shift;
-							br.setY(newY);
-							if (newY + br.getHeight() > this.maxY) {
-								this.maxY = newY + br.getHeight();
-							}
-						}
-					}
-				}
-			}
-		}
-		if (prevMaxY != this.maxY) {
-			this.height += this.maxY - prevMaxY;
-		}
+	        // Now other renderables, but only those that can be
+	        // vertically aligned
+	        final Set<PositionedRenderable> others = this.positionedRenderables;
+	        if (others != null) {
+	          final Iterator<PositionedRenderable> i2 = others.iterator();
+	          while (i2.hasNext()) {
+	            final PositionedRenderable pr = i2.next();
+	            if (pr.isVerticalAlignable()) {
+	              final BoundableRenderable br = pr.getRenderable();
+	              final int newY = br.getY() + shift;
+	              br.setY(newY);
+	              if ((newY + br.getHeight()) > this.maxY) {
+	                this.maxY = newY + br.getHeight();
+	              }
+	            }
+	          }
+	        }
+	      }
+	    }
+	    if (prevMaxY != this.maxY) {
+	      this.height += (this.maxY - prevMaxY);
+	    }
 	}
 
 	/**
@@ -520,54 +489,47 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the new line y
 	 * @return the r line
 	 */
-	private RLine addLine(ModelNode startNode, RLine prevLine, int newLineY) {
-		// lineDone must be called before we try to
-		// get float bounds.
-		this.lineDone(prevLine);
-		this.checkY(newLineY);
-		int leftOffset = this.fetchLeftOffset(newLineY);
-		int newX = leftOffset;
-		int newMaxWidth = this.desiredWidth - this.fetchRightOffset(newLineY) - leftOffset;
-		RLine rline;
-		boolean initialAllowOverflow;
-		if (prevLine == null) {
-			// Note: Assumes that prevLine == null means it's the first line.
-			RenderState rs = this.modelNode.getRenderState();
-			initialAllowOverflow = rs == null ? false : rs.getWhiteSpace() == RenderState.WS_NOWRAP;
-			// Text indentation only applies to the first line in the block.
-			int textIndent = rs == null ? 0 : rs.getTextIndent(this.availContentWidth);
-			if (textIndent != 0) {
-				newX += textIndent;
-				// Line width also changes!
-				newMaxWidth += leftOffset - newX;
-			}
-		} else {
-			int prevLineHeight = prevLine.getHeight();
-			if (prevLineHeight > 0) {
-				this.currentCollapsibleMargin = 0;
-			}
-			initialAllowOverflow = prevLine.isAllowOverflow();
-			if (prevLine.x + prevLine.width > this.maxX) {
-				this.maxX = prevLine.x + prevLine.width;
-			}
-		}
-		rline = new RLine(startNode, this.container, newX, newLineY, newMaxWidth, 0, initialAllowOverflow);
-		rline.setParent(this);
-		
-		RenderState rs = startNode.getRenderState();
-		if(!Strings.isBlank(rs.getlineHeight())) {
-			Float f = Float.parseFloat(rs.getlineHeight());
-			rline.setHeight(f.intValue());
-		}
-		
-		ArrayList<RLine> sr = this.seqRenderables;
-		if (sr == null) {
-			sr = new ArrayList(1);
-			this.seqRenderables = sr;
-		}
-		sr.add(rline);
-		this.currentLine = rline;
-		return rline;
+	private RLine addLine(final ModelNode startNode, final RLine prevLine, final int newLineY) {
+	    // lineDone must be called before we try to
+	    // get float bounds.
+	    this.lineDone(prevLine);
+	    this.checkY(newLineY);
+	    final int leftOffset = this.fetchLeftOffset(newLineY);
+	    int newX = leftOffset;
+	    int newMaxWidth = this.desiredWidth - this.fetchRightOffset(newLineY) - leftOffset;
+	    RLine rline;
+	    boolean initialAllowOverflow;
+	    if (prevLine == null) {
+	      // Note: Assumes that prevLine == null means it's the first line.
+	      final RenderState rs = this.modelNode.getRenderState();
+	      initialAllowOverflow = rs == null ? false : rs.getWhiteSpace() == RenderState.WS_NOWRAP;
+	      // Text indentation only applies to the first line in the block.
+	      final int textIndent = rs == null ? 0 : rs.getTextIndent(this.availContentWidth);
+	      if (textIndent != 0) {
+	        newX += textIndent;
+	        // Line width also changes!
+	        newMaxWidth += (leftOffset - newX);
+	      }
+	    } else {
+	      final int prevLineHeight = prevLine.getHeight();
+	      if (prevLineHeight > 0) {
+	        this.currentCollapsibleMargin = 0;
+	      }
+	      initialAllowOverflow = prevLine.isAllowOverflow();
+	      if ((prevLine.x + prevLine.width) > this.maxX) {
+	        this.maxX = prevLine.x + prevLine.width;
+	      }
+	    }
+	    rline = new RLine(startNode, this.container, newX, newLineY, newMaxWidth, 0, initialAllowOverflow);
+	    rline.setParent(this);
+	    ArrayList<BoundableRenderable> sr = this.seqRenderables;
+	    if (sr == null) {
+	      sr = new ArrayList<>(1);
+	      this.seqRenderables = sr;
+	    }
+	    sr.add(rline);
+	    this.currentLine = rline;
+	    return rline;
 	}
 
 	/**
@@ -576,38 +538,32 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @param node
 	 *            the node
 	 */
-	public void layoutMarkup(DOMNodeImpl node) {
-		// This is the "inline" layout of an element.
-		// The difference with layoutChildren is that this
-		// method checks for padding and margin insets.
-		RenderState rs = node.getRenderState();
-		Insets marginInsets = null;
-		Insets paddingInsets = null;
-		if (rs != null) {
-			HtmlInsets mi = rs.getMarginInsets();
-			marginInsets = mi == null ? null : mi.getSimpleAWTInsets(this.availContentWidth, this.availContentHeight);
-			HtmlInsets pi = rs.getPaddingInsets();
-			paddingInsets = pi == null ? null : pi.getSimpleAWTInsets(this.availContentWidth, this.availContentHeight);
-		}
-		int leftSpacing = 0;
-		int rightSpacing = 0;
-		if (marginInsets != null) {
-			leftSpacing += marginInsets.left;
-			rightSpacing += marginInsets.right;
-		}
-		if (paddingInsets != null) {
-			leftSpacing += paddingInsets.left;
-			rightSpacing += paddingInsets.right;
-		}
-		if (leftSpacing > 0) {
-			RLine line = this.currentLine;
-			line.addSpacing(new RSpacing(node, this.container, leftSpacing, line.height));
-		}
-		this.layoutChildren(node);
-		if (rightSpacing > 0) {
-			RLine line = this.currentLine;
-			line.addSpacing(new RSpacing(node, this.container, rightSpacing, line.height));
-		}
+	public void layoutMarkup(final DOMNodeImpl node) {
+	    final RenderState rs = node.getRenderState();
+	    final HtmlInsets mi = rs.getMarginInsets();
+	    final Insets marginInsets = mi == null ? null : mi.getSimpleAWTInsets(this.availContentWidth, this.availContentHeight);
+	    final HtmlInsets pi = rs.getPaddingInsets();
+	    final Insets paddingInsets = pi == null ? null : pi.getSimpleAWTInsets(this.availContentWidth, this.availContentHeight);
+
+	    int leftSpacing = 0;
+	    int rightSpacing = 0;
+	    if (marginInsets != null) {
+	      leftSpacing += marginInsets.left;
+	      rightSpacing += marginInsets.right;
+	    }
+	    if (paddingInsets != null) {
+	      leftSpacing += paddingInsets.left;
+	      rightSpacing += paddingInsets.right;
+	    }
+	    if (leftSpacing > 0) {
+	      final RLine line = this.currentLine;
+	      line.addSpacing(new RSpacing(node, this.container, leftSpacing, line.height));
+	    }
+	    this.layoutChildren(node);
+	    if (rightSpacing > 0) {
+	      final RLine line = this.currentLine;
+	      line.addSpacing(new RSpacing(node, this.container, rightSpacing, line.height));
+	    }
 	}
 
 	/**
@@ -623,12 +579,12 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			for (int i = 0; i < length; i++) {
 				DOMNodeImpl child = childrenArray[i];
 				short nodeType = child.getNodeType();
-				if (nodeType == Node.TEXT_NODE) {
+
+				switch (nodeType) {
+				case Node.TEXT_NODE:
 					this.layoutText(child);
-				} else if (nodeType == Node.ELEMENT_NODE) {
-					// Note that scanning for node bounds (anchor location)
-					// depends on there being a style changer for inline
-					// elements.
+					break;
+				case Node.ELEMENT_NODE:
 					this.currentLine.addStyleChanger(new RStyleChanger(child));
 					String nodeName = child.getNodeName().toUpperCase();
 					MarkupLayout ml = (MarkupLayout) elementLayout.get(nodeName);
@@ -637,6 +593,17 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					}
 					ml.layoutMarkup(this, (HTMLElementImpl) child);
 					this.currentLine.addStyleChanger(new RStyleChanger(node));
+					break;
+				case Node.DOCUMENT_FRAGMENT_NODE:
+					final DOMFragmentImpl fragment = (DOMFragmentImpl) child;
+					for (final DOMNodeImpl fragChild : fragment.getChildrenArray()) {
+						layoutChildren(fragChild);
+					}
+					break;
+				case Node.COMMENT_NODE:
+				case Node.PROCESSING_INSTRUCTION_NODE:
+				default:
+					break;
 				}
 			}
 		}
@@ -650,7 +617,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @param renderable
 	 *            the renderable
 	 */
-	public final void positionRBlock(HTMLElementImpl markupElement, RBlock renderable) {
+	private final void positionRBlock(HTMLElementImpl markupElement, RBlock renderable) {
 		
 		RenderState rs = renderable.modelNode.getRenderState();
 		int clear = rs.getClear();
@@ -1077,8 +1044,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		} catch (OverflowException oe) {
 			int nextY = emptyLine ? cleary : liney + line.height;
 			this.addLine(renderable.getModelNode(), line, nextY);
-			Collection renderables = oe.getRenderables();
-			Iterator i = renderables.iterator();
+			Collection<?> renderables = oe.getRenderables();
+			Iterator<?> i = renderables.iterator();
 			while (i.hasNext()) {
 				Renderable r = (Renderable) i.next();
 				this.addRenderableToLine(r);
@@ -1121,8 +1088,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		} catch (OverflowException oe) {
 			int nextY = emptyLine ? cleary : liney + line.height;
 			this.addLine(renderable.getModelNode(), line, nextY);
-			Collection renderables = oe.getRenderables();
-			Iterator i = renderables.iterator();
+			Collection<?> renderables = oe.getRenderables();
+			Iterator<?> i = renderables.iterator();
 			while (i.hasNext()) {
 				Renderable r = (Renderable) i.next();
 				this.addRenderableToLine(r);
@@ -1202,9 +1169,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			boolean centerBlock) {
 		Insets insets = this.paddingInsets;
 		int insetsl = insets.left;
-		ArrayList sr = this.seqRenderables;
+		ArrayList<BoundableRenderable> sr = this.seqRenderables;
 		if (sr == null) {
-			sr = new ArrayList(1);
+			sr = new ArrayList<BoundableRenderable>(1);
 			this.seqRenderables = sr;
 		}
 		RLine prevLine = this.currentLine;
@@ -1284,9 +1251,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the inform line done
 	 */
 	private void addLineAfterBlock(RBlock block, boolean informLineDone) {
-		ArrayList sr = this.seqRenderables;
+		ArrayList<BoundableRenderable> sr = this.seqRenderables;
 		if (sr == null) {
-			sr = new ArrayList(1);
+			sr = new ArrayList<BoundableRenderable>(1);
 			this.seqRenderables = sr;
 		}
 		RLine prevLine = this.currentLine;
@@ -1415,38 +1382,13 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			}
 		}
 	}
-
-	/**
-	 * Populate z index groups.
-	 *
-	 * @param others
-	 *            An ordered collection.
-	 * @param seqRenderables
-	 *            the seq renderables
-	 * @param destination
-	 *            the destination
-	 */
-	private void populateZIndexGroups(Collection others, Collection seqRenderables, ArrayList destination) {
-		this.populateZIndexGroups(others, seqRenderables == null ? null : seqRenderables.iterator(), destination);
-	}
-
-	/**
-	 * Populate z index groups.
-	 *
-	 * @param others
-	 *            An ordered collection.
-	 * @param seqRenderablesIterator
-	 *            the seq renderables iterator
-	 * @param destination
-	 *            the destination
-	 */
-	private void populateZIndexGroups(Collection others, Iterator seqRenderablesIterator, ArrayList destination) {
-		// First, others with z-index < 0
-		Iterator i1 = others.iterator();
-		Renderable pending = null;
+	
+	private void populateZIndexGroups(ArrayList<BoundableRenderable> others,
+			Iterator<BoundableRenderable> seqRenderablesIterator, ArrayList<BoundableRenderable> destination) {
+		Iterator<BoundableRenderable> i1 = others.iterator();
+		BoundableRenderable pending = null;
 		while (i1.hasNext()) {
-			PositionedRenderable pr = (PositionedRenderable) i1.next();
-			BoundableRenderable r = pr.getRenderable();
+			BoundableRenderable r =  i1.next();
 			if (r.getZIndex() >= 0) {
 				pending = r;
 				break;
@@ -1455,7 +1397,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 
 		// Second, sequential renderables
-		Iterator i2 = seqRenderablesIterator;
+		Iterator<BoundableRenderable> i2 = seqRenderablesIterator;
 		if (i2 != null) {
 			while (i2.hasNext()) {
 				destination.add(i2.next());
@@ -1466,28 +1408,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		if (pending != null) {
 			destination.add(pending);
 			while (i1.hasNext()) {
-				PositionedRenderable pr = (PositionedRenderable) i1.next();
-				Renderable r = pr.getRenderable();
+				BoundableRenderable r =  i1.next();
 				destination.add(r);
 			}
-		}
-	}
-
-	/**
-	 * Gets the renderables array.
-	 *
-	 * @return the renderables array
-	 */
-	public Renderable[] getRenderablesArray() {
-		SortedSet<PositionedRenderable> others = this.positionedRenderables;
-		int othersSize = others == null ? 0 : others.size();
-		if (othersSize == 0) {
-			ArrayList sr = this.seqRenderables;
-			return sr == null ? Renderable.EMPTY_ARRAY : (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
-		} else {
-			ArrayList allRenderables = new ArrayList();
-			this.populateZIndexGroups(others, this.seqRenderables, allRenderables);
-			return (Renderable[]) allRenderables.toArray(Renderable.EMPTY_ARRAY);
 		}
 	}
 
@@ -1497,14 +1420,21 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @see org.loboevolution.html.renderer.RCollection#getRenderables()
 	 */
 	@Override
-	public Iterator getRenderables() {
-		SortedSet others = this.positionedRenderables;
+	public Iterator<BoundableRenderable> getRenderables() {
+		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null || others.isEmpty()) {
-			ArrayList sr = this.seqRenderables;
+			ArrayList<BoundableRenderable> sr = this.seqRenderables;
 			return sr == null ? null : sr.iterator();
 		} else {
-			ArrayList allRenderables = new ArrayList();
-			this.populateZIndexGroups(others, this.seqRenderables, allRenderables);
+			ArrayList<BoundableRenderable> sr = this.seqRenderables;
+			ArrayList<BoundableRenderable> allRenderables = new ArrayList<BoundableRenderable>();
+			ArrayList<BoundableRenderable> renderables = new ArrayList<BoundableRenderable>();
+			
+			for (PositionedRenderable s : others) {
+				renderables.add(s.getRenderable());
+			}
+			
+			this.populateZIndexGroups(renderables, sr.iterator(), allRenderables);
 			return allRenderables.iterator();
 		}
 	}
@@ -1516,21 +1446,21 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the clip bounds
 	 * @return the renderables
 	 */
-	public Iterator getRenderables(Rectangle clipBounds) {
-		ArrayList sr = this.seqRenderables;
-		Iterator baseIterator = null;
+	public Iterator<BoundableRenderable> getRenderables(Rectangle clipBounds) {
+		ArrayList<BoundableRenderable> sr = this.seqRenderables;
+		Iterator<BoundableRenderable> baseIterator = null;
 		if (sr != null) {
 			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			Range range = MarkupUtilities.findRenderables(array, clipBounds, true);
 			baseIterator = ArrayUtilities.iterator(array, range.getOffset(), range.getLength());
 		}
-		SortedSet others = this.positionedRenderables;
+		SortedSet<?> others = this.positionedRenderables;
 		if (others == null || others.isEmpty()) {
 			return baseIterator;
 		} else {
 			ArrayList<PositionedRenderable> matches = new ArrayList<PositionedRenderable>();
 			// ArrayList "matches" keeps the order from "others".
-			Iterator i = others.iterator();
+			Iterator<?> i = others.iterator();
 			while (i.hasNext()) {
 				PositionedRenderable pr = (PositionedRenderable) i.next();
 				Object r = pr.getRenderable();
@@ -1545,8 +1475,14 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			if (matches.isEmpty()) {
 				return baseIterator;
 			} else {
-				ArrayList destination = new ArrayList();
-				this.populateZIndexGroups(matches, baseIterator, destination);
+				ArrayList<BoundableRenderable> destination = new ArrayList<BoundableRenderable>();
+				
+				ArrayList<BoundableRenderable> renderables = new ArrayList<BoundableRenderable>();
+				for (PositionedRenderable s : matches) {
+					renderables.add(s.getRenderable());
+				}
+				
+				this.populateZIndexGroups(renderables, baseIterator, destination);
 				return destination.iterator();
 			}
 		}
@@ -1560,7 +1496,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	@Override
 	public BoundableRenderable getRenderable(int x, int y) {
-		Iterator i = this.getRenderables(x, y);
+		Iterator<?> i = this.getRenderables(x, y);
 		return i == null ? null : i.hasNext() ? (BoundableRenderable) i.next() : null;
 	}
 
@@ -1582,7 +1518,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the point
 	 * @return the renderables
 	 */
-	public Iterator getRenderables(Point point) {
+	public Iterator<?> getRenderables(Point point) {
 		return this.getRenderables(point.x, point.y);
 	}
 
@@ -1595,9 +1531,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the pointy
 	 * @return the renderables
 	 */
-	public Iterator getRenderables(int pointx, int pointy) {
-		Collection result = null;
-		SortedSet others = this.positionedRenderables;
+	public Iterator<?> getRenderables(int pointx, int pointy) {
+		Collection<BoundableRenderable> result = null;
+		SortedSet<?> others = this.positionedRenderables;
 		int size = others == null ? 0 : others.size();
 		PositionedRenderable[] otherArray = size == 0 ? null : (PositionedRenderable[]) others.toArray(PositionedRenderable.EMPTY_ARRAY);
 		// Try to find in other renderables with z-index >= 0 first.
@@ -1617,7 +1553,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					Rectangle rbounds = br.getBounds();
 					if (rbounds.contains(px, py)) {
 						if (result == null) {
-							result = new LinkedList();
+							result = new LinkedList<BoundableRenderable>();
 						}
 						result.add(br);
 					}
@@ -1626,13 +1562,13 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 
 		// Now do a "binary" search on sequential renderables.
-		ArrayList sr = this.seqRenderables;
+		ArrayList<BoundableRenderable> sr = this.seqRenderables;
 		if (sr != null) {
 			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			BoundableRenderable found = MarkupUtilities.findRenderable(array, pointx, pointy, true);
 			if (found != null) {
 				if (result == null) {
-					result = new LinkedList();
+					result = new LinkedList<BoundableRenderable>();
 				}
 				result.add(found);
 			}
@@ -1651,7 +1587,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					Rectangle rbounds = br.getBounds();
 					if (rbounds.contains(px, py)) {
 						if (result == null) {
-							result = new LinkedList();
+							result = new LinkedList<BoundableRenderable>();
 						}
 						result.add(br);
 					}
@@ -1864,9 +1800,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	public final void addPositionedRenderable(BoundableRenderable renderable, boolean verticalAlignable,
 			boolean isFloat) {
 		// Expected to be called only in GUI thread.
-		SortedSet others = this.positionedRenderables;
+		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null) {
-			others = new TreeSet(new ZIndexComparator());
+			others = new TreeSet<PositionedRenderable>(new ZIndexComparator());
 			this.positionedRenderables = others;
 		}
 		others.add(new PositionedRenderable(renderable, verticalAlignable, this.positionedOrdinal++, isFloat));
@@ -1882,7 +1818,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the first line height
 	 */
 	public int getFirstLineHeight() {
-		ArrayList renderables = this.seqRenderables;
+		ArrayList<?> renderables = this.seqRenderables;
 		if (renderables != null) {
 			int size = renderables.size();
 			if (size == 0) {
@@ -1906,9 +1842,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the first baseline offset
 	 */
 	public int getFirstBaselineOffset() {
-		ArrayList renderables = this.seqRenderables;
+		ArrayList<?> renderables = this.seqRenderables;
 		if (renderables != null) {
-			Iterator i = renderables.iterator();
+			Iterator<?> i = renderables.iterator();
 			while (i.hasNext()) {
 				Object r = i.next();
 				if (r instanceof RLine) {
@@ -1958,7 +1894,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
-		Iterator i = this.getRenderables(new Point(x, y));
+		Iterator<?> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
 				BoundableRenderable br = (BoundableRenderable) i.next();
@@ -1982,7 +1918,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
-		Iterator i = this.getRenderables(new Point(x, y));
+		Iterator<?> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
 				BoundableRenderable br = (BoundableRenderable) i.next();
@@ -2027,7 +1963,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		Iterator i = this.getRenderables(new Point(x, y));
+		Iterator<?> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
 				BoundableRenderable br = (BoundableRenderable) i.next();
@@ -2052,7 +1988,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		Iterator i = this.getRenderables(new Point(x, y));
+		Iterator<?> i = this.getRenderables(new Point(x, y));
 		if (i != null) {
 			while (i.hasNext()) {
 				BoundableRenderable br = (BoundableRenderable) i.next();
@@ -2085,7 +2021,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	@Override
 	public void paint(Graphics g) {
 		Rectangle clipBounds = g.getClipBounds();
-		Iterator i = this.getRenderables(clipBounds);
+		Iterator<?> i = this.getRenderables(clipBounds);
 		if (i != null) {
 			while (i.hasNext()) {
 				Object robj = i.next();
@@ -2163,7 +2099,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		Collection<RFloatInfo> pfs = this.pendingFloats;
 		if (pfs != null) {
 			this.pendingFloats = null;
-			Iterator i = pfs.iterator();
+			Iterator<RFloatInfo> i = pfs.iterator();
 			while (i.hasNext()) {
 				RFloatInfo pf = (RFloatInfo) i.next();
 				this.placeFloat(pf.getRenderable(), yAfterLine, pf.isLeftFloat());

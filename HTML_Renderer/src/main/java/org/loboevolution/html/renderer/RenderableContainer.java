@@ -109,7 +109,7 @@ public interface RenderableContainer {
 	 *
 	 * @return the delayed pairs
 	 */
-	Collection getDelayedPairs();
+	Collection<DelayedPair> getDelayedPairs();
 
 	/**
 	 * Gets the parent container.
