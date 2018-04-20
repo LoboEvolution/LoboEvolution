@@ -79,7 +79,7 @@ import javax.swing.filechooser.FileFilter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.util.SSLCertificate;
+import org.loboevolution.http.SSLCertificate;
 
 import com.sun.pdfview.OutlineNode;
 import com.sun.pdfview.PDFDestination;

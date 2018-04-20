@@ -41,9 +41,9 @@ import java.util.zip.ZipEntry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.http.GenericURLConnection;
 import org.loboevolution.util.BaseClassLoader;
 import org.loboevolution.util.CollectionUtilities;
-import org.loboevolution.util.GenericURLConnection;
 import org.loboevolution.util.io.IORoutines;
 
 /**

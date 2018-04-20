@@ -21,7 +21,7 @@
 /*
  * Created on Jun 12, 2005
  */
-package org.loboevolution.util;
+package org.loboevolution.http;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -40,7 +40,8 @@ import java.util.TimeZone;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.http.NameValuePair;
+import org.loboevolution.util.Objects;
+import org.loboevolution.util.Strings;
 
 /**
  * The Class Urls.

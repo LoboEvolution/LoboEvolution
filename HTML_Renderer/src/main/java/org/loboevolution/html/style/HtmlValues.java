@@ -34,7 +34,7 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.color.ColorFactory;
 import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.util.Urls;
+import org.loboevolution.http.Urls;
 
 /**
  * The Class HtmlValues.

@@ -44,6 +44,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
+import org.loboevolution.http.Urls;
 import org.loboevolution.main.ExtensionManager;
 import org.loboevolution.main.PlatformInit;
 import org.loboevolution.ua.NavigationEntry;
@@ -59,7 +60,6 @@ import org.loboevolution.ua.RequestType;
 import org.loboevolution.ua.UserAgent;
 import org.loboevolution.util.EventDispatch2;
 import org.loboevolution.util.Objects;
-import org.loboevolution.util.Urls;
 
 /**
  * A <code>BrowserPanel</code> contains a {@link FramePanel} along with optional

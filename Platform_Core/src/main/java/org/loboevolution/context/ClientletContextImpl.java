@@ -35,6 +35,7 @@ import org.loboevolution.clientlet.ComponentContent;
 import org.loboevolution.clientlet.ContentBuffer;
 import org.loboevolution.clientlet.SimpleComponentContent;
 import org.loboevolution.http.HttpRequest;
+import org.loboevolution.http.Urls;
 import org.loboevolution.io.ManagedStore;
 import org.loboevolution.request.UserAgentImpl;
 import org.loboevolution.store.StorageManager;
@@ -42,7 +43,6 @@ import org.loboevolution.ua.NavigatorFrame;
 import org.loboevolution.ua.NavigatorProgressEvent;
 import org.loboevolution.ua.ProgressType;
 import org.loboevolution.ua.UserAgent;
-import org.loboevolution.util.Urls;
 
 /**
  * The Class ClientletContextImpl.

@@ -49,6 +49,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
+import org.loboevolution.http.Urls;
 import org.loboevolution.main.ExtensionManager;
 import org.loboevolution.ua.NavigationEntry;
 import org.loboevolution.ua.NavigatorEvent;
@@ -64,7 +65,6 @@ import org.loboevolution.ua.TargetType;
 import org.loboevolution.ua.UserAgent;
 import org.loboevolution.util.EventDispatch2;
 import org.loboevolution.util.Objects;
-import org.loboevolution.util.Urls;
 
 /**
  * Default implementation of the {@link NavigatorWindow} interface.

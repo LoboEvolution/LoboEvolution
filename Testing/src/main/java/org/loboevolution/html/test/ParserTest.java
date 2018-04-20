@@ -46,8 +46,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
+import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.SSLCertificate;
 import org.loboevolution.util.io.IORoutines;
 import org.w3c.dom.Document;
 

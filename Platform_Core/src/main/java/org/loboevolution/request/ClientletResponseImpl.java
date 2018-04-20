@@ -36,12 +36,12 @@ import java.util.StringTokenizer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.ClientletResponse;
+import org.loboevolution.http.Urls;
 import org.loboevolution.ua.ProgressType;
 import org.loboevolution.ua.RequestType;
 import org.loboevolution.util.InputProgressEvent;
 import org.loboevolution.util.MonitoredInputStream;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.Urls;
 import org.loboevolution.util.io.BufferExceededException;
 import org.loboevolution.util.io.RecordedInputStream;
 

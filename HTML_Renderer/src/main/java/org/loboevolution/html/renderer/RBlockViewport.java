@@ -38,8 +38,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.loboevolution.arraylist.ArrayUtilities;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlLayoutMapping;
 import org.loboevolution.html.HtmlRendererContext;
@@ -59,7 +58,6 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.ArrayUtilities;
 import org.loboevolution.util.Strings;
 import org.w3c.dom.Node;
 
@@ -94,9 +92,6 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 
 	/** The Constant ZERO_INSETS. */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(RBlockViewport.class);
 
 	/** The container. */
 	private RenderableContainer container;

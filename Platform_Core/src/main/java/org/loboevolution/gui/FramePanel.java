@@ -49,6 +49,7 @@ import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
 import org.loboevolution.clientlet.SimpleComponentContent;
 import org.loboevolution.http.HttpRequest;
+import org.loboevolution.http.Urls;
 import org.loboevolution.info.MetaInfo;
 import org.loboevolution.main.ExtensionManager;
 import org.loboevolution.main.PlatformInit;
@@ -70,7 +71,6 @@ import org.loboevolution.ua.TargetType;
 import org.loboevolution.util.GenericEventListener;
 import org.loboevolution.util.Items;
 import org.loboevolution.util.Objects;
-import org.loboevolution.util.Urls;
 import org.loboevolution.util.WrapperException;
 import org.loboevolution.util.gui.WrapperLayout;
 

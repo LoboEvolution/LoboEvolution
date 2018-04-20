@@ -47,6 +47,7 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.font.LAFSettings;
 import org.loboevolution.gui.DefaultWindowFactory;
 import org.loboevolution.gui.FramePanel;
+import org.loboevolution.http.Urls;
 import org.loboevolution.request.AuthenticatorImpl;
 import org.loboevolution.request.CookieManager;
 import org.loboevolution.security.LocalSecurityManager;
@@ -54,7 +55,6 @@ import org.loboevolution.security.LocalSecurityPolicy;
 import org.loboevolution.settings.GeneralSettings;
 import org.loboevolution.util.SimpleThreadPool;
 import org.loboevolution.util.SimpleThreadPoolTask;
-import org.loboevolution.util.Urls;
 
 import com.jtattoo.plaf.acryl.AcrylLookAndFeel;
 import com.jtattoo.plaf.aero.AeroLookAndFeel;

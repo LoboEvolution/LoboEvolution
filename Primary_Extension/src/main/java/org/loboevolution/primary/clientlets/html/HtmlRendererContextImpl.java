@@ -269,7 +269,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	 */
 	public HtmlRendererContext open(String url, String windowName, String windowFeatures, boolean replace) {
 		try {
-			URL urlObj = org.loboevolution.util.Urls.guessURL(url);
+			URL urlObj = org.loboevolution.http.Urls.guessURL(url);
 			return this.open(urlObj, windowName, windowFeatures, replace);
 		} catch (Exception err) {
 			logger.error("open(): Unable to open URL [" + url + "].", err);

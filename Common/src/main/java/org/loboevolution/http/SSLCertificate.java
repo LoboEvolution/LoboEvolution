@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.util;
+package org.loboevolution.http;
 
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;

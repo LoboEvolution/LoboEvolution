@@ -21,7 +21,7 @@
 /*
  * Created on Jun 22, 2005
  */
-package org.loboevolution.util;
+package org.loboevolution.http;
 
 import java.io.IOException;
 import java.io.InputStream;

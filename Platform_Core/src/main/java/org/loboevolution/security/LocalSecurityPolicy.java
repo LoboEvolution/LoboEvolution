@@ -51,7 +51,7 @@ import javax.net.ssl.SSLPermission;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.util.Domains;
+import org.loboevolution.http.Domains;
 
 /**
  * The Class LocalSecurityPolicy.

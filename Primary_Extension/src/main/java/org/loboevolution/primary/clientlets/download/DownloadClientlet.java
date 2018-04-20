@@ -29,9 +29,9 @@ import org.loboevolution.clientlet.Clientlet;
 import org.loboevolution.clientlet.ClientletContext;
 import org.loboevolution.clientlet.ClientletException;
 import org.loboevolution.clientlet.ClientletResponse;
+import org.loboevolution.http.Urls;
 import org.loboevolution.primary.gui.download.DownloadDialog;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.Urls;
 
 /**
  * The Class DownloadClientlet.

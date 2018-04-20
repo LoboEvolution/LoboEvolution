@@ -34,9 +34,9 @@ import javax.net.ssl.HostnameVerifier;
 import org.loboevolution.clientlet.ClientletException;
 import org.loboevolution.clientlet.ClientletRequest;
 import org.loboevolution.clientlet.ClientletResponse;
+import org.loboevolution.http.Urls;
 import org.loboevolution.ua.ProgressType;
 import org.loboevolution.ua.RequestType;
-import org.loboevolution.util.Urls;
 
 /**
  * The Class RedirectRequestHandler.

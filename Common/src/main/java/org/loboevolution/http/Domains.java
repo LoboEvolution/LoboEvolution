@@ -21,12 +21,14 @@
 /*
  * Created on Jun 2, 2005
  */
-package org.loboevolution.util;
+package org.loboevolution.http;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import org.loboevolution.util.Strings;
 
 /**
  * The Class Domains.

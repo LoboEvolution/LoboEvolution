@@ -46,9 +46,9 @@ import org.loboevolution.http.Header;
 import org.loboevolution.http.Method;
 import org.loboevolution.http.ReadyState;
 import org.loboevolution.http.Request;
+import org.loboevolution.http.SSLCertificate;
+import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.SSLCertificate;
-import org.loboevolution.util.Urls;
 import org.loboevolution.util.io.IORoutines;
 import org.w3c.dom.Document;
 

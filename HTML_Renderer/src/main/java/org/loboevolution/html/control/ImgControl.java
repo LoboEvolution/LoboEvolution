@@ -54,9 +54,9 @@ import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.http.SSLCertificate;
+import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.SSLCertificate;
-import org.loboevolution.util.Urls;
 
 /**
  * The Class ImgControl.

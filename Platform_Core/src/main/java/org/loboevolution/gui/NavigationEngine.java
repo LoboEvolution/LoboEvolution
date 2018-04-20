@@ -24,8 +24,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
+import org.loboevolution.http.Urls;
 import org.loboevolution.ua.NavigationEntry;
-import org.loboevolution.util.Urls;
 
 /**
  * This class stores navigation back/forward state for a frame.

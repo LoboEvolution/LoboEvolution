@@ -40,10 +40,10 @@ import java.util.StringTokenizer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.Cookie;
+import org.loboevolution.http.Domains;
 import org.loboevolution.store.RestrictedStore;
 import org.loboevolution.store.StorageManager;
 import org.loboevolution.util.DateUtil;
-import org.loboevolution.util.Domains;
 import org.loboevolution.util.Strings;
 
 /**

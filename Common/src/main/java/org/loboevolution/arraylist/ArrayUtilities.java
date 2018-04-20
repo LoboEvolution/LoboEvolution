@@ -18,10 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Apr 17, 2005
- */
-package org.loboevolution.util;
+package org.loboevolution.arraylist;
 
 import java.util.Iterator;
 
@@ -51,63 +48,5 @@ public class ArrayUtilities {
 	 */
 	public static Iterator iterator(Object[] array, int offset, int length) {
 		return new ArrayIterator(array, offset, length);
-	}
-
-	/**
-	 * The Class ArrayIterator.
-	 */
-	private static class ArrayIterator implements Iterator {
-		/** The array. */
-		private final Object[] array;
-		/** The top. */
-		private final int top;
-		/** The offset. */
-		private int offset;
-
-		/**
-		 * Instantiates a new array iterator.
-		 *
-		 * @param array
-		 *            the array
-		 * @param offset
-		 *            the offset
-		 * @param length
-		 *            the length
-		 */
-		public ArrayIterator(Object[] array, int offset, int length) {
-			this.array = array;
-			this.offset = offset;
-			this.top = offset + length;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.util.Iterator#hasNext()
-		 */
-		@Override
-		public boolean hasNext() {
-			return this.offset < this.top;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.util.Iterator#next()
-		 */
-		@Override
-		public Object next() {
-			return this.array[this.offset++];
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.util.Iterator#remove()
-		 */
-		@Override
-		public void remove() {
-			// Method not implemented
-		}
 	}
 }

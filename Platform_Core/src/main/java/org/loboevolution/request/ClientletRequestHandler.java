@@ -38,11 +38,11 @@ import org.loboevolution.context.ClientletContextImpl;
 import org.loboevolution.context.ClientletFactory;
 import org.loboevolution.gui.FramePanel;
 import org.loboevolution.gui.WindowCallback;
+import org.loboevolution.http.Urls;
 import org.loboevolution.security.LocalSecurityManager;
 import org.loboevolution.ua.NavigatorProgressEvent;
 import org.loboevolution.ua.ProgressType;
 import org.loboevolution.util.EventDispatch;
-import org.loboevolution.util.Urls;
 
 /**
  * The Class ClientletRequestHandler.

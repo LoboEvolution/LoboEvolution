@@ -52,9 +52,9 @@ import org.apache.logging.log4j.util.Strings;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.loboevolution.html.dombl.SVGRasterizer;
+import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.info.MetaInfo;
-import org.loboevolution.util.SSLCertificate;
 import org.loboevolution.util.io.IORoutines;
 
 /**

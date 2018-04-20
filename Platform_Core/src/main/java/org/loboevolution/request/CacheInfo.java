@@ -33,8 +33,8 @@ import java.net.URLConnection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.http.Urls;
 import org.loboevolution.store.CacheManager;
-import org.loboevolution.util.Urls;
 import org.loboevolution.util.gui.ClassLoaderObjectInputStream;
 
 /**
