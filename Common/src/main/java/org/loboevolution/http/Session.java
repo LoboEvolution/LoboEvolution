@@ -38,13 +38,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
-
-import org.loboevolution.util.io.IORoutines;
 
 /**
  * <p>
@@ -570,8 +569,13 @@ public class Session extends AbstractBean {
 			InputStream responseStream = null;
 			try {
 				// connects and returns the stream
-				responseStream = IORoutines.getInputStream(http);
+				responseStream = http.getInputStream();
 				responseCode = StatusCode.valueOf(http.getResponseCode());
+				// if this is GZIP encoded, then wrap the input stream
+				String contentEncoding = http.getContentEncoding();
+				if ("gzip".equals(contentEncoding)) {
+					responseStream = new GZIPInputStream(responseStream);
+				}
 				responseBody = readFully(responseStream);
 			} catch (FileNotFoundException e) {
 				// check for an error stream

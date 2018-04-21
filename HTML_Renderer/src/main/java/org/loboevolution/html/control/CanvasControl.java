@@ -42,7 +42,6 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.info.CanvasInfo;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.io.IORoutines;
 import org.loboevolution.w3c.html.HTMLCanvasElement;
 
 /**
@@ -274,8 +273,7 @@ public class CanvasControl extends BaseControl {
 			u = new URL(ci.getImage().getSrc());
 			URLConnection con = u.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
-			Image img = ImageIO.read(IORoutines.getInputStream(con));
+			Image img = ImageIO.read(con.getInputStream());
 			AffineTransform at = new AffineTransform(ci.getWidth() / ci.getImage().getWidth(), 0, 0,
 					ci.getHeight() / ci.getImage().getHeight(), ci.getX(), ci.getY());
 			graphics.drawImage(img, at, (ImageObserver) null);
@@ -298,8 +296,7 @@ public class CanvasControl extends BaseControl {
 			u = new URL(ci.getImage().getSrc());
 			URLConnection con = u.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
-			Image img = ImageIO.read(IORoutines.getInputStream(con));
+			Image img = ImageIO.read(con.getInputStream());
 			img = createImage(new FilteredImageSource(img.getSource(),
 					new CropImageFilter(ci.getSx(), ci.getSy(), ci.getSw(), ci.getSh())));
 			g.clip(new Rectangle2D.Float(ci.getDx(), ci.getDy(), ci.getDw(), ci.getDh()));

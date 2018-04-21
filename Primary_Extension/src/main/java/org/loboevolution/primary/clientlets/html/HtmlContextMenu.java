@@ -48,7 +48,6 @@ import org.loboevolution.html.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.domimpl.HTMLImageElementImpl;
 import org.loboevolution.primary.ext.IconFactory;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.io.IORoutines;
 import org.loboevolution.w3c.html.HTMLElement;
 
 /**
@@ -328,8 +327,7 @@ public class HtmlContextMenu {
 		try {
 			URL url = new URL(webPage);
 			URLConnection urlConnection = url.openConnection();
-			urlConnection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
-			is = IORoutines.getInputStream(urlConnection);	
+			is = urlConnection.getInputStream();
 			isr = new InputStreamReader(is);
 
 			int numCharsRead;

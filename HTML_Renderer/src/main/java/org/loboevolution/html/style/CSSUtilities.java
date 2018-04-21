@@ -145,14 +145,13 @@ public class CSSUtilities {
 		URLConnection connection = url.openConnection();
 		connection.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 		connection.setRequestProperty("Cookie", "");
-		connection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 		if (connection instanceof HttpURLConnection) {
 			HttpURLConnection hc = (HttpURLConnection) connection;
 			hc.setInstanceFollowRedirects(true);
 			int responseCode = hc.getResponseCode();
 			logger.info("process(): HTTP response code: " + responseCode);
 		}
-		InputStream in = IORoutines.getInputStream(connection);
+		InputStream in = connection.getInputStream();
 		byte[] content;
 		try {
 			content = IORoutines.load(in, 8192);

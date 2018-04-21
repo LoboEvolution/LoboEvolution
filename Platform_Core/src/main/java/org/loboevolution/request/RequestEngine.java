@@ -25,6 +25,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -48,6 +49,7 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.net.ssl.HttpsURLConnection;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -415,7 +417,6 @@ public final class RequestEngine {
 		UserAgent userAgent = request.getUserAgent();
 		connection.addRequestProperty("User-Agent", userAgent.toString());
 		connection.addRequestProperty("X-Java-Version", userAgent.getJavaVersion());
-		connection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 		// TODO: Commenting out X-Session-ID. Needs to be privately generated
 		// or available with the right permissions only. Extensions should not
 		// have access to the private field. This is not doable if extensions
@@ -911,6 +912,7 @@ public final class RequestEngine {
 					}
 
 					rinfo = new RequestInfo(connection, rhandler);
+					InputStream responseIn = null;
 					if (trackRequestInfo) {
 						synchronized (this.processingRequests) {
 							this.processingRequests.add(rinfo);
@@ -948,7 +950,8 @@ public final class RequestEngine {
 										cacheInfo.delete();
 									}
 								}
-								rinfo.setConnection(connection);
+								responseIn = connection.getInputStream();
+								rinfo.setConnection(connection, responseIn);
 								break;
 							case HttpURLConnection.HTTP_NOT_MODIFIED:
 								if (cacheInfo == null) {
@@ -960,7 +963,8 @@ public final class RequestEngine {
 								isContentCached = true;
 								isCacheable = true;
 								connection = cacheInfo.getURLConnection();
-								rinfo.setConnection(connection);
+								responseIn = connection.getInputStream();
+								rinfo.setConnection(connection, responseIn);
 								break;
 							case HttpURLConnection.HTTP_MOVED_PERM:
 							case HttpURLConnection.HTTP_MOVED_TEMP:
@@ -976,7 +980,8 @@ public final class RequestEngine {
 								break;
 							}
 						} else {
-							rinfo.setConnection(connection);
+							responseIn = connection.getInputStream();
+							rinfo.setConnection(connection, responseIn);
 						}
 						
 						if (rinfo.isAborted()) {
@@ -986,6 +991,7 @@ public final class RequestEngine {
 						// connection.
 						URLConnection newConnection = this.getSafeExtensionManager().dispatchPostConnection(connection);
 						if (!Objects.equals(newConnection, connection)) {
+							responseIn = newConnection.getInputStream();
 							connection = newConnection;
 						}
 						// Create clientlet response.
@@ -1035,6 +1041,13 @@ public final class RequestEngine {
 								this.processingRequests.remove(rinfo);
 							}
 						}
+						if (responseIn != null) {
+							try {
+								responseIn.close();
+							} catch (IOException ioe) {
+								logger.error(ioe);
+							}
+						}
 						if (connection instanceof HttpURLConnection) {
 							((HttpURLConnection) connection).disconnect();
 						}
@@ -1065,6 +1078,9 @@ public final class RequestEngine {
 		/** The is aborted. */
 		private volatile boolean isAborted = false;
 
+		/** The input stream. */
+		private volatile InputStream inputStream;
+
 		/** The connection. */
 		private volatile URLConnection connection;
 
@@ -1094,9 +1110,17 @@ public final class RequestEngine {
 		 * Abort.
 		 */
 		public void abort() {
-			this.isAborted = true;
-			if (this.connection instanceof HttpURLConnection) {
-				((HttpURLConnection) this.connection).disconnect();
+			try {
+				this.isAborted = true;
+				if (this.connection instanceof HttpURLConnection) {
+					((HttpURLConnection) this.connection).disconnect();
+				}
+				InputStream in = this.inputStream;
+				if (in != null) {
+					in.close();
+				}
+			} catch (Exception err) {
+				logger.error( "abort()", err);
 			}
 		}
 
@@ -1117,8 +1141,9 @@ public final class RequestEngine {
 		 * @param in
 		 *            the in
 		 */
-		public void setConnection(URLConnection connection) {
+		public void setConnection(URLConnection connection, InputStream in) {
 			this.connection = connection;
+			this.inputStream = in;
 		}
 	}
 

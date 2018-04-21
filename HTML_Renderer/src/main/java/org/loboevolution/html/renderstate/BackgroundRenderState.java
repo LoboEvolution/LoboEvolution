@@ -53,7 +53,6 @@ import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.io.IORoutines;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -295,12 +294,12 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			SSLCertificate.setCertificate();
 			URLConnection con = imageURL.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
+
 			if (url.endsWith(".svg")) {
 				SVGRasterizer r = new SVGRasterizer(imageURL);
 				image = r.bufferedImageToImage();
 			} else if (url.startsWith("https")) {
-				BufferedImage bi = ImageIO.read(IORoutines.getInputStream(con));
+				BufferedImage bi = ImageIO.read(con.getInputStream());
 				if (bi != null) {
 					image = Toolkit.getDefaultToolkit().createImage(bi.getSource());
 				}
@@ -308,12 +307,12 @@ public class BackgroundRenderState implements CSSValuesProperties {
 				try {
 					image = new ImageIcon(imageURL).getImage();
 				} catch (Exception e) {
-					image = ImageIO.read(IORoutines.getInputStream(con));
+					image = ImageIO.read(con.getInputStream());
 				}
 			} else if (url.endsWith(".bmp")) {
-				image = ImageIO.read(IORoutines.getInputStream(con));
+				image = ImageIO.read(con.getInputStream());
 			} else {
-				image = ImageIO.read(IORoutines.getInputStream(con));
+				image = ImageIO.read(con.getInputStream());
 			}
 
 			int w = -1;

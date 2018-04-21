@@ -39,7 +39,6 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.http.HttpRequest;
 import org.loboevolution.http.Method;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.io.IORoutines;
 import org.loboevolution.w3c.html.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
@@ -309,14 +308,15 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		try {
 
 			URL url = new URL(srtUrl);
-			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
+			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(),
+					url.getQuery(), url.getRef());
 			URL obj = uri.toURL();
 			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
-			BufferedReader in = new BufferedReader(new InputStreamReader(IORoutines.getInputStream(con)));
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			String inputLine;
 
 			while ((inputLine = in.readLine()) != null) {

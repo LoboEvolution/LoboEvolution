@@ -69,7 +69,7 @@ import org.w3c.dom.Document;
  * HTTP headers are represented by the {@link Header} API. All HTTP headers that
  * will be sent as part of this request are represented with a Header in this
  * class. By default, all Request objects are created with an Accept-Encoding
- * header set to UserAgentContext.GZIP_ENCODING, and have a Content-Type header set to 'text/plain;
+ * header set to "gzip", and have a Content-Type header set to 'text/plain;
  * charset="UTF-8"'. If you send other data be sure to replace the value of the
  * content type header.
  * </p>
@@ -214,7 +214,7 @@ public class Request extends AbstractBean {
 	 */
 	public Request(String method, String url) {
 		this.method = method == null ? Method.GET : method;
-		setHeader("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
+		setHeader("Accept-Encoding", "gzip");
 		setHeader("Content-Type", "text/plain; charset=UTF-8");
 		if (url != null) {
 			setUrlImpl(url);
