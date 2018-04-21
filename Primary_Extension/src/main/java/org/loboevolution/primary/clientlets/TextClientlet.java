@@ -28,8 +28,6 @@ import java.io.InputStream;
 
 import javax.swing.JScrollPane;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.loboevolution.clientlet.Clientlet;
@@ -42,15 +40,11 @@ import org.loboevolution.util.io.IORoutines;
  */
 public class TextClientlet implements Clientlet {
 
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(TextClientlet.class);
+	private String extension;
 
 	/**
 	 * Instantiates a new text clientlet.
 	 */
-
-	private String extension;
-
 	public TextClientlet(String extension) {
 		this.extension = extension;
 	}
@@ -69,26 +63,65 @@ public class TextClientlet implements Clientlet {
 			try {
 				String text = IORoutines.loadAsText(in, "UTF-8");
 				RSyntaxTextArea textArea = new RSyntaxTextArea(text);
-
-				logger.error("extension: " + extension);
-
+				String mimeType = "";
 				switch (extension) {
-				case "css":
-					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_CSS);
+				case "java":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_JAVA;
 					break;
-				case "js":
-					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT);
+				case "php":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_RUBY;
+					break;
+				case "bash":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_UNIX_SHELL;
+					break;
+				case "ruby":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_RUBY;
+					break;
+				case "javascript":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT;
+					break;
+				case "css":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_CSS;
+					break;
+				case "html":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_HTML;
+					break;
+				case "csharp":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_CSHARP;
+					break;
+				case "sql":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_SQL;
 					break;
 				case "xml":
-					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+					mimeType = SyntaxConstants.SYNTAX_STYLE_XML;
+					break;
+				case "c":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_C;
+					break;
+				case "objc":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_CPLUSPLUS;
+					break;
+				case "python":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_PYTHON;
+					break;
+				case "perl":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_PERL;
+					break;
+				case "js":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_JAVASCRIPT;
 					break;
 				case "xaml":
-					textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
+					mimeType = SyntaxConstants.SYNTAX_STYLE_XML;
+					break;
+				case "json":
+					mimeType = SyntaxConstants.SYNTAX_STYLE_JSON;
 					break;
 				default:
+					mimeType = SyntaxConstants.SYNTAX_STYLE_HTML;
 					break;
 				}
 
+				textArea.setSyntaxEditingStyle(mimeType);
 				textArea.setEditable(false);
 				JScrollPane pane = new JScrollPane(textArea);
 				context.setResultingContent(pane);

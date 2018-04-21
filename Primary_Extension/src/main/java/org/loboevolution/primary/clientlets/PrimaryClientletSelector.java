@@ -31,7 +31,6 @@ import org.loboevolution.primary.clientlets.download.DownloadClientlet;
 import org.loboevolution.primary.clientlets.html.HtmlClientlet;
 import org.loboevolution.primary.clientlets.img.ImageClientlet;
 import org.loboevolution.primary.clientlets.pdf.PdfClientlet;
-import org.loboevolution.util.Strings;
 
 /**
  * The Class PrimaryClientletSelector.
@@ -46,33 +45,36 @@ public class PrimaryClientletSelector implements ClientletSelector {
 	 */
 	@Override
 	public Clientlet select(ClientletRequest request, ClientletResponse response) {
-		// Don't try to catch too much here.
-		// Clientlets here are not overriddable.
-
 		String mimeType = response.getMimeType();
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-		if ("text/html".equals(mimeTypeTL) || "image/svg+xml".equals(mimeTypeTL)) {
-			// TODO: XHTML needs its own clientlet.
+		switch (mimeTypeTL) {
+		case "text/html":
+		case "image/svg+xml":
 			return new HtmlClientlet();
-		} else if ("image/jpeg".equals(mimeTypeTL) || "image/jpg".equals(mimeTypeTL) || "image/gif".equals(mimeTypeTL)
-				|| "image/png".equals(mimeTypeTL)) {
+		case "image/jpeg":
+		case "image/jpg":
+		case "image/gif":
+		case "image/png":
 			return new ImageClientlet();
-		} else if (mimeType == null || "application/octet-stream".equals(mimeTypeTL)
-				|| "content/unknown".equals(mimeTypeTL)) {
-
+		case "application/octet-stream":
+		case "content/unknown":
+		default:
 			String path = response.getResponseURL().getPath();
 			int lastDotIdx = path.lastIndexOf('.');
 			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 			String extensionTL = extension.toLowerCase();
-			if ("html".equals(extensionTL) || "htm".equals(extensionTL) || "svg".equals(extensionTL) || Strings.isBlank(extensionTL)) {
+			switch (extensionTL) {
+			case "html":
+			case "htm":
+			case "svg":
 				return new HtmlClientlet();
-			} else if ("gif".equals(extensionTL) || "jpg".equals(extensionTL) || "png".equals(extensionTL)) {
+			case "gif":
+			case "jpg":
+			case "png":
 				return new ImageClientlet();
-			} else {
-				return null;
+			default:
+				return new DownloadClientlet();
 			}
-		} else {
-			return null;
 		}
 	}
 
@@ -87,25 +89,45 @@ public class PrimaryClientletSelector implements ClientletSelector {
 	public Clientlet lastResortSelect(ClientletRequest request, ClientletResponse response) {
 		String mimeType = response.getMimeType();
 		String mimeTypeTL = mimeType == null ? null : mimeType.toLowerCase();
-
-		if ("application/xml".equals(mimeTypeTL)) {
-			// TODO: XHTML needs its own clientlet.
+		
+		if (mimeType == null) {
 			return new HtmlClientlet();
-		} else {
+		}
+		
+		switch (mimeTypeTL) {
+		case "application/xml":
+			return new HtmlClientlet();
+		case "application/json":
+			return new TextClientlet("json");
+		default:
 			String path = response.getResponseURL().getPath();
 			int lastDotIdx = path.lastIndexOf('.');
 			String extension = lastDotIdx == -1 ? "" : path.substring(lastDotIdx + 1);
 			String extensionTL = extension.toLowerCase();
-			if ("xhtml".equals(extensionTL)) {
+			switch (extensionTL) {
+			case "xhtml":
 				return new HtmlClientlet();
-			} else if ("txt".equals(extensionTL) || "xml".equals(extensionTL) || "js".equals(extensionTL)
-					|| "rss".equals(extensionTL) || "xaml".equals(extensionTL) || "css".equals(extensionTL)) {
+			case "java":
+			case "php":
+			case "bash":
+			case "ruby":
+			case "javascript":
+			case "css":
+			case "html":
+			case "csharp":
+			case "sql":
+			case "xml":
+			case "c":
+			case "objc":
+			case "python":
+			case "perl":
+			case "js":
+			case "xaml":
+			case "json":
 				return new TextClientlet(extensionTL);
-			} else if ("pdf".equals(extensionTL)) {
+			case "pdf":
 				return new PdfClientlet();
-			} else if (mimeType == null) {
-				return new HtmlClientlet();
-			} else {
+			default:
 				return new DownloadClientlet();
 			}
 		}
