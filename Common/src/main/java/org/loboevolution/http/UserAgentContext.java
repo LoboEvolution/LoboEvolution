@@ -36,7 +36,7 @@ public interface UserAgentContext {
 
 	String DEFAULT_USER_AGENT = "Mozilla/5.0 (compatible;) Cobra/0.97+";
 	
-	String GZIP_ENCODING = UserAgentContext.GZIP_ENCODING;
+	String GZIP_ENCODING = "gzip";
 
 	/**
 	 * Creates an instance of {@link org.loboevolution.http.HttpRequest} which can
