@@ -40,6 +40,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import org.loboevolution.http.UserAgentContext;
+
 /**
  * The Class IORoutines.
  *

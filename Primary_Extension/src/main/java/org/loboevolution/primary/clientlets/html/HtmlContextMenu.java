@@ -46,6 +46,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.HTMLAnchorElementImpl;
 import org.loboevolution.html.domimpl.HTMLImageElementImpl;
+import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.primary.ext.IconFactory;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.io.IORoutines;

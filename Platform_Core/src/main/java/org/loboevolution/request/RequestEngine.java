@@ -62,6 +62,7 @@ import org.loboevolution.http.Header;
 import org.loboevolution.http.NameValuePair;
 import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
+import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.main.ExtensionManager;
 import org.loboevolution.settings.BooleanSettings;
 import org.loboevolution.settings.CacheSettings;
