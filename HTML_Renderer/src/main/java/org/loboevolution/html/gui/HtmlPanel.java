@@ -103,7 +103,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private volatile int defaultOverflowX = RenderState.OVERFLOW_AUTO;
 
 	/** The default overflow y. */
-	private volatile int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
+	private volatile int defaultOverflowY = RenderState.OVERFLOW_AUTO;
 
 	/** The html block panel. */
 	protected transient volatile HtmlBlockPanel htmlBlockPanel;

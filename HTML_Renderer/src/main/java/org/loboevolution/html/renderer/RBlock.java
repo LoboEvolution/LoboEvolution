@@ -770,7 +770,7 @@ public class RBlock extends BaseElementRenderable implements RenderableContainer
 		}
 		int desiredViewportWidth = tentativeWidth - insetsTotalWidth;
 		int desiredViewportHeight = tentativeHeight - insets.top - insets.bottom;
-		int maxY = vauto ? declaredHeight == -1 ? -1 : declaredHeight + paddingInsets.top : -1;
+		final int maxY = vauto ? (declaredHeight == -1 ? availHeight : declaredHeight + paddingInsets.top) : -1;
 		try {
 			bodyLayout.layout(desiredViewportWidth, desiredViewportHeight, paddingInsets, maxY, viewportFloatBounds,
 					sizeOnly);
