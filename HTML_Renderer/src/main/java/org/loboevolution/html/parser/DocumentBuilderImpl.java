@@ -41,6 +41,7 @@ import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.io.IORoutines;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.xml.sax.EntityResolver;
@@ -179,7 +180,8 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 			} else if (uri != null) {
 				SSLCertificate.setCertificate();
 				URLConnection connection = new URL(uri).openConnection();
-				in = connection.getInputStream();
+				connection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
+				in = IORoutines.getInputStream(connection);
 				if (encoding == null) {
 					charset = Urls.getCharset(connection);
 				}

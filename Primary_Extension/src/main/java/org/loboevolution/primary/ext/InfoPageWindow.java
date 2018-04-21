@@ -297,26 +297,26 @@ public class InfoPageWindow extends JFrame {
 			URL u = new URL(href);
 			URLConnection con = u.openConnection();
 			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-
+			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 			if (href.endsWith(".svg")) {
 				SVGRasterizer r = new SVGRasterizer(u);
 				return r.bufferedImageToImage();
 			} else if (href.startsWith("https")) {
-				return Toolkit.getDefaultToolkit().createImage(ImageIO.read(con.getInputStream()).getSource());
+				return Toolkit.getDefaultToolkit().createImage(ImageIO.read(IORoutines.getInputStream(con)).getSource());
 			} else if (href.endsWith(".gif")) {
 				try {
 					return new ImageIcon(u).getImage();
 				} catch (Exception e) {
-					return ImageIO.read(con.getInputStream());
+					return ImageIO.read(IORoutines.getInputStream(con));
 				}
 			} else if (href.endsWith(".bmp")) {
 				try {
-					return ImageIO.read(con.getInputStream());
+					return ImageIO.read(IORoutines.getInputStream(con));
 				} catch (IOException e) {
 					logger.error("read error: " + e);
 				}
 			} else {
-				return ImageIO.read(con.getInputStream());
+				return ImageIO.read(IORoutines.getInputStream(con));
 			}
 		} catch (Exception e) {
 			logger.error("infopage", e);
@@ -333,7 +333,8 @@ public class InfoPageWindow extends JFrame {
 			URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
 			connection.setRequestProperty("Cookie", "");
-			InputStream in = connection.getInputStream();
+			connection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
+			InputStream in = IORoutines.getInputStream(connection);
 			byte[] content;
 			try {
 				content = IORoutines.load(in, 8192);

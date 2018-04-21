@@ -58,7 +58,7 @@ public class HtmlValues implements CSSValuesProperties {
 	 * @return the pixel size
 	 */
 	public static final int getPixelSize(String spec, RenderState renderState, int errorValue, int availSize) {
-		if (spec.endsWith("%")) {
+		if (spec != null && spec.endsWith("%")) {
 			String perText = spec.substring(0, spec.length() - 1);
 			try {
 				double val = Double.parseDouble(perText);

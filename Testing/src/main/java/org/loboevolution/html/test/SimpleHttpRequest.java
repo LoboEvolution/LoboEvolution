@@ -430,6 +430,7 @@ public class SimpleHttpRequest extends AbstractBean {
 				c = this.connection;
 			}
 			c.setRequestProperty("User-Agent", this.context.getUserAgent());
+			c.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 			int istatus;
 			String istatusText;
 			InputStream err;
@@ -465,7 +466,7 @@ public class SimpleHttpRequest extends AbstractBean {
 				this.responseHeadersMap = c.getHeaderFields();
 			}
 			this.changeState(ReadyState.LOADED, istatus, istatusText, null);
-			InputStream in = err == null ? c.getInputStream() : err;
+			InputStream in = err == null ? IORoutines.getInputStream(c) : err;
 			int contentLength = c.getContentLength();
 			this.changeState(ReadyState.INTERACTIVE, istatus, istatusText, null);
 			byte[] bytes = IORoutines.load(in, contentLength == -1 ? 4096 : contentLength);

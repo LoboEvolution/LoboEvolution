@@ -57,6 +57,7 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.io.IORoutines;
 
 /**
  * The Class ImgControl.
@@ -153,26 +154,27 @@ public class ImgControl extends BaseControl implements ImageListener {
 				u = new URL(scriptURI.replace(" ", "%20"));
 				URLConnection con = u.openConnection();
 				con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
+				con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 
 				if (scriptURI.endsWith(".svg")) {
 					SVGRasterizer r = new SVGRasterizer(u);
 					image = r.bufferedImageToImage();
 				} else if (scriptURI.startsWith("https")) {
-					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(con.getInputStream()).getSource());
+					image = Toolkit.getDefaultToolkit().createImage(ImageIO.read(IORoutines.getInputStream(con)).getSource());
 				} else if (scriptURI.endsWith(".gif")) {
 					try {
 						image = new ImageIcon(u).getImage();
 					} catch (Exception e) {
-						image = ImageIO.read(con.getInputStream());
+						image = ImageIO.read(IORoutines.getInputStream(con));
 					}
 				} else if (scriptURI.endsWith(".bmp")) {
 					try {
-						image = ImageIO.read(con.getInputStream());
+						image = ImageIO.read(IORoutines.getInputStream(con));
 					} catch (IOException e) {
 						logger.error("read error: " + e);
 					}
 				} else {
-					image = ImageIO.read(con.getInputStream());
+					image = ImageIO.read(IORoutines.getInputStream(con));
 				}
 			} catch (FileNotFoundException | IIOException ex) {
 				logger.error("ImgControl(): Image not found " + modelNode.getSrc());

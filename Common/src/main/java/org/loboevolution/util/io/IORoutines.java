@@ -32,10 +32,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
 
 /**
  * The Class IORoutines.
@@ -78,7 +81,7 @@ public class IORoutines {
 		InputStreamReader reader = new InputStreamReader(in, encoding);
 		char[] buffer = new char[bufferSize];
 		int offset = 0;
-		while(true) {
+		while (true) {
 			int remain = buffer.length - offset;
 			if (remain <= 0) {
 				char[] newBuffer = new char[buffer.length * 2];
@@ -147,7 +150,7 @@ public class IORoutines {
 		}
 		byte[] buffer = new byte[initialBufferSize];
 		int offset = 0;
-		while(true) {
+		while (true) {
 			int remain = buffer.length - offset;
 			if (remain <= 0) {
 				int newSize = buffer.length * 2;
@@ -184,7 +187,7 @@ public class IORoutines {
 	public static byte[] loadExact(InputStream in, int length) throws IOException {
 		byte[] buffer = new byte[length];
 		int offset = 0;
-		while(true) {
+		while (true) {
 			int remain = length - offset;
 			if (remain <= 0) {
 				break;
@@ -328,6 +331,47 @@ public class IORoutines {
 			return list;
 		} finally {
 			in.close();
+		}
+	}
+	
+	
+	public static InputStream getInputStream(URLConnection connection) throws IOException {
+		InputStream in;
+		if (connection instanceof HttpURLConnection) {
+			in = IORoutines.getGzipStreamError(((HttpURLConnection) connection));
+			if (in == null) {
+				in = IORoutines.getGzipStream(connection);
+			}
+		} else {
+			in = connection.getInputStream();
+		}
+		return in;
+	}
+	
+
+	private static InputStream getGzipStream(URLConnection con) throws IOException {
+		InputStream cis = con.getInputStream();
+		if (cis != null) {
+			if (UserAgentContext.GZIP_ENCODING.equals(con.getContentEncoding())) {
+				return new GZIPInputStream(con.getInputStream());
+			} else {
+				return con.getInputStream();
+			}
+		} else {
+			return null;
+		}
+	}
+
+	private static InputStream getGzipStreamError(HttpURLConnection con) throws IOException {
+		InputStream cis = con.getErrorStream();
+		if (cis != null) {
+			if (UserAgentContext.GZIP_ENCODING.equals(con.getContentEncoding())) {
+				return new GZIPInputStream(con.getErrorStream());
+			} else {
+				return con.getErrorStream();
+			}
+		} else {
+			return null;
 		}
 	}
 }

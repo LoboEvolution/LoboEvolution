@@ -43,6 +43,7 @@ import org.loboevolution.util.InputProgressEvent;
 import org.loboevolution.util.MonitoredInputStream;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.io.BufferExceededException;
+import org.loboevolution.util.io.IORoutines;
 import org.loboevolution.util.io.RecordedInputStream;
 
 /**
@@ -262,17 +263,11 @@ public class ClientletResponseImpl implements ClientletResponse {
 	 */
 	@Override
 	public InputStream getInputStream() throws IOException {
+		
+		try {
 		if (this.inputStream == null) {
 			URLConnection connection = this.connection;
-			InputStream in;
-			if (connection instanceof HttpURLConnection) {
-				in = ((HttpURLConnection) connection).getErrorStream();
-				if (in == null) {
-					in = connection.getInputStream();
-				}
-			} else {
-				in = connection.getInputStream();
-			}
+			InputStream in = IORoutines.getInputStream(connection);			
 			final int contentLength = connection.getContentLength();
 			final int bufferSize = contentLength <= 0 ? 4096 : Math.min(contentLength, 8192);
 			final URL responseURL = this.getResponseURL();
@@ -295,6 +290,11 @@ public class ClientletResponseImpl implements ClientletResponse {
 				this.inputStream = bis;
 			}
 		}
+		
+		}catch (Exception e) {
+			logger.error(e);
+		}
+		
 		return this.inputStream;
 	}
 

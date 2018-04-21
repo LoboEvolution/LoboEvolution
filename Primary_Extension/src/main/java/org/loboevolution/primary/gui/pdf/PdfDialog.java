@@ -80,6 +80,7 @@ import javax.swing.filechooser.FileFilter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.SSLCertificate;
+import org.loboevolution.util.io.IORoutines;
 
 import com.sun.pdfview.OutlineNode;
 import com.sun.pdfview.PDFDestination;
@@ -580,8 +581,9 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	public void openFile(URL url) throws IOException {
 		SSLCertificate.setCertificate();
 		URLConnection urlConnection = url.openConnection();
+		urlConnection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 		int contentLength = urlConnection.getContentLength();
-		InputStream istr = urlConnection.getInputStream();
+		InputStream istr = IORoutines.getInputStream(urlConnection);
 		byte[] byteBuf = new byte[contentLength];
 		int offset = 0;
 		int read = 0;

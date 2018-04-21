@@ -61,6 +61,7 @@ import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.io.BufferExceededException;
+import org.loboevolution.util.io.IORoutines;
 import org.loboevolution.util.io.RecordedInputStream;
 import org.loboevolution.w3c.html.HTMLAnchorElement;
 import org.loboevolution.w3c.html.HTMLCollection;
@@ -437,6 +438,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 		try {
 			connection.setRequestProperty("User-Agent", getUserAgentContext().getUserAgent());
 			connection.setRequestProperty("Cookie", "");
+			connection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 			if (connection instanceof HttpURLConnection) {
 				HttpURLConnection hc = (HttpURLConnection) connection;
 				hc.setRequestMethod(actualMethod);
@@ -499,7 +501,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 					return;
 				}
 			}
-			InputStream in = connection.getInputStream();
+			InputStream in = IORoutines.getInputStream(connection);
 			try {
 				SimpleHtmlRendererContext.this.sourceCode = null;
 				long time1 = System.currentTimeMillis();
