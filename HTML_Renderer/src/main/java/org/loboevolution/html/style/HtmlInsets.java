@@ -63,7 +63,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "0px";
+			sizeText = "2px";
 		}
 		sizeText = sizeText.trim();
 		if (Strings.isBlank(sizeText)) {
@@ -117,7 +117,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "0px";
+			sizeText = "2px";
 		}
 		sizeText = sizeText.trim();
 		if (Strings.isBlank(sizeText)) {
@@ -169,7 +169,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "0px";
+			sizeText = "2px";
 		}
 		sizeText = sizeText.trim();
 		if (Strings.isBlank(sizeText)) {
@@ -221,7 +221,7 @@ public class HtmlInsets implements CSSValuesProperties {
 	 */
 	public static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
-			sizeText = "0px";
+			sizeText = "2px";
 		}
 		sizeText = sizeText.trim();
 		if (Strings.isBlank(sizeText)) {
