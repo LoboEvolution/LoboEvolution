@@ -27,6 +27,7 @@ import org.loboevolution.html.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.renderertable.RTableCell;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlLength;
+import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.w3c.html.HTMLTableElement;
 
 /**
@@ -134,7 +135,7 @@ public class VirtualCell implements CSSValuesProperties {
 					heightText = el.getCurrentStyle().getHeight();
 				}
 			}
-			length = heightText == null ? null : new HtmlLength(heightText);
+			length = heightText == null ? null : new HtmlLength(HtmlValues.getPixelSize(heightText, cell.getModelNode().getRenderState(), 0)); 
 		} catch (Exception err) {
 			err.printStackTrace();
 			length = null;
@@ -162,7 +163,7 @@ public class VirtualCell implements CSSValuesProperties {
 					widthText = el.getCurrentStyle().getWidth();
 				}
 			}
-			length = widthText == null ? null : new HtmlLength(widthText);
+			 length = widthText == null ? null : new HtmlLength(HtmlValues.getPixelSize(widthText, cell.getModelNode().getRenderState(), 0)); 
 		} catch (Exception err) {
 			length = null;
 		}

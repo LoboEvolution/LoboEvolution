@@ -26,23 +26,16 @@ import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domfilter.CaptionFilter;
-import org.loboevolution.html.domfilter.ColumnsFilter;
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.domimpl.HTMLTableCaptionElementImpl;
-import org.loboevolution.html.domimpl.HTMLTableCellElementImpl;
-import org.loboevolution.html.domimpl.HTMLTableElementImpl;
-import org.loboevolution.html.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.info.CaptionSizeInfo;
 import org.loboevolution.html.info.SizeInfo;
 import org.loboevolution.html.renderer.BoundableRenderable;
@@ -59,7 +52,6 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.RenderThreadState;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Objects;
-import org.loboevolution.w3c.html.HTMLTableRowElement;
 
 /**
  * The Class TableMatrix.
@@ -76,7 +68,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	private final ArrayList<BoundableRenderable> ALL_CELLS = new ArrayList<BoundableRenderable>();
 
 	/** The row elements. */
-	private final ArrayList<HTMLTableRowElementImpl> ROW_ELEMENTS = new ArrayList<HTMLTableRowElementImpl>();
+	private final ArrayList<HTMLElementImpl> ROW_ELEMENTS = new ArrayList<HTMLElementImpl>();
 
 	/** The caption. */
 	private RTableCaption caption;
@@ -244,10 +236,19 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
 		this.tableWidthLength = TableRender.getWidthLength(this.tableElement, availWidth);
+		
+		List<DOMNodeImpl> captionList = tableElement.getDescendents(new CaptionFilter(), false);
+		if (!captionList.isEmpty()) {
+			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.get(0);
+			this.captionElement = capt;
+			this.caption = new RTableCaption(capt, parserContext, rendererContext, frameContext, container);
+		} else {
+			this.caption = null;
+		}
 
-		this.populateRows();
 		this.adjustForCellSpans();
-		this.createSizeArrays();
+		this.createSizeArrays(RTableRow.populateRows(this.tableElement, ROWS, ALL_CELLS, ROW_ELEMENTS, parserContext,
+				rendererContext, frameContext, relement, container));
 
 		// Calculate widths of extras
 		SizeInfo[] columnSizes = this.columnSizes;
@@ -284,93 +285,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 		this.determineColumnSizes(hasBorder, this.cellSpacingX, this.cellSpacingY, availWidth);
 		this.determineRowSizes(hasBorder, this.cellSpacingY, availHeight, sizeOnly);
 	}
-
-	/**
-	 * Gets the parent row.
-	 *
-	 * @param cellNode
-	 *            the cell node
-	 * @return the parent row
-	 */
-	private final HTMLTableRowElementImpl getParentRow(HTMLTableCellElementImpl cellNode) {
-		org.w3c.dom.Node parentNode = cellNode.getParentNode();
-		while(true) {
-			if (parentNode instanceof HTMLTableRowElementImpl) {
-				return (HTMLTableRowElementImpl) parentNode;
-			}
-			if (parentNode instanceof HTMLTableElementImpl) {
-				return null;
-			}
-			parentNode = parentNode.getParentNode();
-		}
-	}
 	
-	/**
-	 * Populates the ROWS and ALL_CELLS collections.
-	 */
-	private void populateRows() {
-		HTMLElementImpl te = this.tableElement;
-		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
-		ArrayList<HTMLTableRowElementImpl> rowElements = this.ROW_ELEMENTS;
-		ArrayList<BoundableRenderable> allCells = this.ALL_CELLS;
-		Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(2);
-		List<DOMNodeImpl> cellList = te.getDescendents(new ColumnsFilter(), false);
-		ArrayList<VirtualCell> currentNullRow = null;
-		Iterator<DOMNodeImpl> ci = cellList.iterator();
-		while (ci.hasNext()) {
-			HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) ci.next();
-			HTMLTableRowElementImpl rowElement = this.getParentRow(columnNode);
-			if (rowElement != null && rowElement.getRenderState().getDisplay() == RenderState.DISPLAY_NONE) {
-				// Skip row [ 2047122 ]
-				continue;
-			}
-			ArrayList<VirtualCell> row;
-			if (rowElement != null) {
-				currentNullRow = null;
-				row = rowElementToRowArray.get(rowElement);
-				if (row == null) {
-					row = new ArrayList<VirtualCell>();
-					rowElementToRowArray.put(rowElement, row);
-					rows.add(row);
-					rowElements.add(rowElement);
-				}
-			} else {
-				// Doesn't have a TR parent. Let's add a ROW just for itself.
-				// Both IE and FireFox have this behavior.
-				if (currentNullRow != null) {
-					row = currentNullRow;
-				} else {
-					row = new ArrayList<VirtualCell>();
-					currentNullRow = row;
-					rows.add(row);
-					// Null TR element must be added to match.
-					rowElements.add(null);
-				}
-			}
-			RTableCell ac = (RTableCell) columnNode.getUINode();
-			if (ac == null) {
-				// Saved UI nodes must be reused, because they
-				// can contain a collection of GUI components.
-				ac = new RTableCell(columnNode, this.parserContext, this.rendererContext, this.frameContext, this.container);
-				ac.setParent(this.relement);
-				columnNode.setUINode(ac);
-			}
-			VirtualCell vc = new VirtualCell(ac, true);
-			ac.setTopLeftVirtualCell(vc);
-			row.add(vc);
-			allCells.add(ac);
-		}
-
-		List<DOMNodeImpl> captionList = te.getDescendents(new CaptionFilter(), false);
-		if (!captionList.isEmpty()) {
-			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.get(0);
-			this.captionElement = capt;
-			this.caption = new RTableCaption(capt, this.parserContext, this.rendererContext, this.frameContext, this.container);
-		} else {
-			this.caption = null;
-		}
-	}
-
 	/**
 	 * Based on colspans and rowspans, creates additional virtual cells from
 	 * actual table cells.
@@ -447,13 +362,12 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 * Populates the columnSizes and rowSizes arrays, setting htmlLength in each
 	 * element.
 	 */
-	private void createSizeArrays() {
+	private void createSizeArrays(ArrayList<HTMLElementImpl> rowElements) {
 		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		int numRows = rows.size();
 		SizeInfo[] rowSizes = new SizeInfo[numRows];
 		this.rowSizes = rowSizes;
 		int numCols = 0;
-		ArrayList<HTMLTableRowElementImpl> rowElements = this.ROW_ELEMENTS;
 		for (int i = 0; i < numRows; i++) {
 			ArrayList<VirtualCell> row = rows.get(i);
 			int rs = row.size();
@@ -462,7 +376,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			}
 			SizeInfo rowSizeInfo = new SizeInfo();
 			rowSizes[i] = rowSizeInfo;
-			HTMLTableRowElement rowElement;
+			HTMLElementImpl rowElement;
 			try {
 				rowElement = rowElements.get(i);
 				// Possible rowElement is null because TD does not have TR
@@ -476,7 +390,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
 				try {
-					rowHeightLength = new HtmlLength(rowHeightText);
+					rowHeightLength = new HtmlLength(HtmlValues.getPixelSize(rowHeightText, rowElement.getRenderState(), 0));
 				} catch (Exception err) {
 					logger.error(err);
 				}

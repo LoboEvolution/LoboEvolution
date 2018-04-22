@@ -625,10 +625,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				dptop = defaultPaddingInsets.top;
 				dpbottom = defaultPaddingInsets.bottom;
 			}
-			
 			BorderRenderState bs = new BorderRenderState();
 			borderInsets = bs.borderInsets(rs, availWidth, availHeight);
-			
 			if(pinsets != null){
 				paddingInsets = pinsets.getAWTInsets(dptop, dpleft, dpbottom, dpright, availWidth, availHeight, 0, 0);
 			} else{
@@ -640,7 +638,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			if (tentativeMarginInsets == null) {
 				tentativeMarginInsets = RBlockViewport.ZERO_INSETS;
 			}
-			
 			int actualAvailWidth = availWidth - paddingInsets.left - paddingInsets.right - borderInsets.left - borderInsets.right - tentativeMarginInsets.left - tentativeMarginInsets.right;
 			int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top - borderInsets.bottom - tentativeMarginInsets.top - tentativeMarginInsets.bottom;
 			Integer declaredWidth = this.getDeclaredWidth(rs, actualAvailWidth);

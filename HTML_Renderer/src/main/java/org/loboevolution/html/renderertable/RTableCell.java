@@ -26,7 +26,7 @@ package org.loboevolution.html.renderertable;
 import java.awt.Dimension;
 
 import org.loboevolution.html.HtmlRendererContext;
-import org.loboevolution.html.domimpl.HTMLTableCellElementImpl;
+import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.info.SizeInfo;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RBlock;
@@ -34,6 +34,7 @@ import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.html.renderer.VirtualCell;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
 
 /**
@@ -42,7 +43,7 @@ import org.loboevolution.http.UserAgentContext;
 public class RTableCell extends RBlock {
 
 	/** The cell element. */
-	private final HTMLTableCellElementImpl cellElement;
+	private final HTMLElementImpl  cellElement;
 
 	/** The top left virtual cell. */
 	private VirtualCell topLeftVirtualCell;
@@ -67,7 +68,7 @@ public class RTableCell extends RBlock {
 	 * @param tableAsContainer
 	 *            the table as container
 	 */
-	public RTableCell(HTMLTableCellElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
+	public RTableCell(HTMLElementImpl  element, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer tableAsContainer) {
 		super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
 		this.cellElement = element;
@@ -203,7 +204,7 @@ public class RTableCell extends RBlock {
 	public int getColSpan() {
 		int cs = this.colSpan;
 		if (cs == -1) {
-			cs = this.cellElement.getColSpan();
+			cs = getColSpan(this.cellElement);
 			if (cs < 1) {
 				cs = 1;
 			}
@@ -220,7 +221,7 @@ public class RTableCell extends RBlock {
 	public int getRowSpan() {
 		int rs = this.rowSpan;
 		if (rs == -1) {
-			rs = this.cellElement.getRowSpan();
+			rs = getRowSpan(this.cellElement);
 			if (rs < 1) {
 				rs = 1;
 			}
@@ -248,7 +249,7 @@ public class RTableCell extends RBlock {
 		AbstractCSSProperties props = this.cellElement.getCurrentStyle();
 		String heightText = props == null ? null : props.getHeight();
 		if (heightText == null) {
-			return this.cellElement.getHeight();
+			return this.cellElement.getCurrentStyle().getHeight();
 		} else if (INHERIT.equals(heightText)) {
 			return this.cellElement.getParentStyle().getHeight();
 		} else {
@@ -266,7 +267,7 @@ public class RTableCell extends RBlock {
 		String widthText = props == null ? null : props.getWidth();
 
 		if (widthText == null) {
-			return this.cellElement.getWidth();
+			return this.cellElement.getCurrentStyle().getWidth();
 		} else if (INHERIT.equals(widthText)) {
 			return this.cellElement.getParentStyle().getWidth();
 		} else {
@@ -325,6 +326,16 @@ public class RTableCell extends RBlock {
 			height = rowSizes[vrow].getActualSize();
 		}
 		this.setBounds(x, y, width, height);
+	}
+	
+	private static int getColSpan(final HTMLElementImpl elem) {
+		String colSpanText = elem.getAttribute(COLSPAN);
+		return HtmlValues.getPixelSize(colSpanText, null, 1);
+	}
+	
+	private static int getRowSpan(final HTMLElementImpl elem) {
+		String rowSpanText = elem.getAttribute(ROWSPAN);
+		return HtmlValues.getPixelSize(rowSpanText, null, 1);
 	}
 
 	/*

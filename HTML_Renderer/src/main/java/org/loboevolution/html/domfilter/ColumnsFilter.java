@@ -20,7 +20,8 @@
  */
 package org.loboevolution.html.domfilter;
 
-import org.loboevolution.w3c.html.HTMLTableCellElement;
+import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderstate.RenderState;
 import org.w3c.dom.Node;
 
 /**
@@ -30,6 +31,10 @@ public class ColumnsFilter implements NodeFilter {
 
 	@Override
 	public final boolean accept(Node node) {
-		return node instanceof HTMLTableCellElement;
+		if (node instanceof HTMLElementImpl) {
+			final HTMLElementImpl elem = (HTMLElementImpl) node;
+			return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CELL;
+		}
+		return false;
 	}
 }

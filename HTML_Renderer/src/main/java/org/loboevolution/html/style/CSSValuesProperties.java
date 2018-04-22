@@ -65,7 +65,10 @@ public interface CSSValuesProperties {
 
 	/** The Constant COLLAPSE. */
 	String COLLAPSE = "collapse";
-
+	
+	/** The Constant COLSPAN. */
+	String COLSPAN = "colspan";
+	
 	/** The Constant CROSSHAIR. */
 	String CROSSHAIR = "crosshair";
 
@@ -243,6 +246,9 @@ public interface CSSValuesProperties {
 	
 	/** The Constant RIGHT. */
 	String RIGHT = "right";
+	
+	/** The Constant ROWSPAN. */
+	String ROWSPAN = "rowspan";
 	
 	/** The Constant S_RESIZE. */
 	String S_RESIZE = "s-resize";
