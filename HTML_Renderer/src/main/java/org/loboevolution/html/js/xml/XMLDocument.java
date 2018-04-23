@@ -25,13 +25,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.html.renderstate.BackgroundRenderState;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -90,8 +90,27 @@ public class XMLDocument implements Document {
 	 *            name of in file system
 	 */
 	private void loadFile(String fileStr) {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		
+		String FEATURE = "";
 		try {
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			
+			FEATURE = "http://apache.org/xml/features/disallow-doctype-decl";
+			factory.setFeature(FEATURE, true);
+
+			FEATURE = "http://xml.org/sax/features/external-general-entities";
+			factory.setFeature(FEATURE, false);
+
+			FEATURE = "http://xml.org/sax/features/external-parameter-entities";
+			factory.setFeature(FEATURE, false);
+
+			FEATURE = "http://apache.org/xml/features/nonvalidating/load-external-dtd";
+			factory.setFeature(FEATURE, false);
+			
+			factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+			factory.setXIncludeAware(false);
+			factory.setExpandEntityReferences(false);
+			
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			File f = new File(fileStr);
 			if (f.isFile()) {
@@ -101,8 +120,12 @@ public class XMLDocument implements Document {
 				doc = builder.parse(is);
 			}
 			doc.getDocumentElement().normalize();
-		} catch (SAXException | IOException | ParserConfigurationException e) {
-			logger.error(e);
+		} catch (ParserConfigurationException e) {
+			logger.info(FEATURE +  " is not supported");
+		} catch (SAXException e) {
+			logger.warn("A DOCTYPE was passed into the XML document");
+		} catch (IOException e) {
+			logger.error("IOException occurred, XXE may still possible: " + e.getMessage());
 		}
 	}
 
