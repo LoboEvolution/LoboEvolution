@@ -109,7 +109,7 @@ public class LAFSettings implements FontCommon, Serializable {
 	private volatile String font;
 
 	/** The FONTS . */
-	public static String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew", "AngsanaUPC", "AngsanaUPC", "Aparajita",
+	public static final String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew", "AngsanaUPC", "AngsanaUPC", "Aparajita",
 			"ArabicTypesetting", "Arial", "ArialBlack", "Batang", "BatangChe", "BrowalliaNew", "BrowalliaUPC",
 			"Caladea", "Calibri", "CalibriLight", "Cambria", "CambriaMath", "Candara", "Carlito", "ComicSansMS",
 			"Consolas", "Constantia", "Corbel", "CordiaNew", "CordiaUPC", "CourierNew", "DaunPenh", "David",
@@ -134,7 +134,7 @@ public class LAFSettings implements FontCommon, Serializable {
 			"TimesNewRoman", "TraditionalArabic", "TrebuchetMS", "Tunga", "Utsaah", "Vani", "Verdana", "Vijaya",
 			"Vrinda", "Webdings", "Wingdings" };
 
-	public static String[] FONTS_SIZE = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28",
+	public static final String[] FONTS_SIZE = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28",
 			"36", "48", "72" };
 
 	static {
