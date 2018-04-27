@@ -18,42 +18,38 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.clientlets.img;
+package org.loboevolution.primary.gui.prefs;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import javax.swing.JComponent;
+import java.awt.event.ActionEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 
 /**
- * The <code>JComponent</code> implementing an overlay.
- * 
- * @author Kazó Csaba
+ * The Class DefaultsAction.
  */
-public class OverlayComponent extends JComponent {
-	
+public class DefaultsAction extends AbstractAction {
+
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	Overlay overlay;
-	ImageComponent theImage;
+	
+	private PreferencesDialog prefer;
 
-	public OverlayComponent(Overlay overlay, ImageComponent image) {
-		this.overlay = overlay;
-		this.theImage = image;
+	public DefaultsAction(PreferencesDialog prefer) {
+		this.prefer = prefer;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+	 * ActionEvent)
+	 */
 	@Override
-	protected void paintComponent(Graphics g) {
-		BufferedImage image = theImage.getImage();
-		if (image != null) {
-			Graphics2D gg = (Graphics2D) g.create();
-			overlay.paint(gg, image, theImage.getImageTransform());
-			gg.dispose();
+	public void actionPerformed(ActionEvent e) {
+		if (JOptionPane.showConfirmDialog(prefer, "Are you sure you want to restore defaults?",
+				"Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			prefer.getPreferencesPanel().restoreDefaults();
 		}
-	}
-
-	@Override
-	public Dimension getMaximumSize() {
-		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 }

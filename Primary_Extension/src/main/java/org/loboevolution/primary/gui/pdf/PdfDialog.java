@@ -32,7 +32,6 @@ import java.awt.event.WindowEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.print.Book;
 import java.awt.print.PageFormat;
-import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -75,7 +74,6 @@ import javax.swing.WindowConstants;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.filechooser.FileFilter;
-
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -822,48 +820,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		pformat = pjob.pageDialog(pformat);
 	}
 
-	/**
-	 * A thread for printing in.
-	 */
-	private class PrintThread extends Thread {
-
-		/** The pt pages. */
-		private PDFPrintPage ptPages;
-
-		/** The pt pjob. */
-		private PrinterJob ptPjob;
-
-		/**
-		 * Instantiates a new prints the thread.
-		 *
-		 * @param pages
-		 *            the pages
-		 * @param pjob
-		 *            the pjob
-		 */
-		public PrintThread(PDFPrintPage pages, PrinterJob pjob) {
-			ptPages = pages;
-			ptPjob = pjob;
-			setName(getClass().getName());
-		}
-
-		/*
-		 * (non-Javadoc)
-		 *
-		 * @see java.lang.Thread#run()
-		 */
-		@Override
-		public void run() {
-			try {
-				ptPages.show(ptPjob);
-				ptPjob.print();
-			} catch (PrinterException pe) {
-				JOptionPane.showMessageDialog(PdfDialog.this, "Printing Error: " + pe.getMessage(), "Print Aborted",
-						JOptionPane.ERROR_MESSAGE);
-			}
-			ptPages.hide();
-		}
-	}
+	
 
 	/**
 	 * Print the current document.
@@ -876,7 +833,7 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		book.append(pages, pformat, curFile.getNumPages());
 		pjob.setPageable(book);
 		if (pjob.printDialog()) {
-			new PrintThread(pages, pjob).start();
+			new PrintThread(pages, pjob, this).start();
 		}
 	}
 

@@ -46,8 +46,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import org.loboevolution.primary.ext.HistoryEntry;
 import org.loboevolution.primary.ext.IconFactory;
+import org.loboevolution.primary.ext.history.HistoryEntry;
 import org.loboevolution.primary.info.BookmarkInfo;
 import org.loboevolution.ua.NavigatorWindow;
 

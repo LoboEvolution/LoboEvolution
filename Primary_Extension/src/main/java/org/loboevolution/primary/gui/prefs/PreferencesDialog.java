@@ -25,24 +25,13 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
-
-import org.loboevolution.primary.gui.AbstractSettingsUI;
-import org.loboevolution.primary.info.SettingsInfo;
 
 /**
  * The Class PreferencesDialog.
@@ -73,7 +62,7 @@ public class PreferencesDialog extends JDialog {
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		contentPane.add(this.createLeftPane());
-		contentPane.add(this.createRightPane(this.preferencesPanel));
+		contentPane.add(this.createRightPane(this.getPreferencesPanel()));
 		this.preferencesTree.initSelection();
 	}
 
@@ -84,7 +73,7 @@ public class PreferencesDialog extends JDialog {
 	 */
 	private Component createLeftPane() {
 		PreferencesTree prefsTree = this.preferencesTree;
-		prefsTree.addTreeSelectionListener(new LocalTreeSelectionListener());
+		prefsTree.addTreeSelectionListener(new LocalTreeSelectionListener(this));
 		JScrollPane scrollPane = new JScrollPane(prefsTree);
 		Dimension size = new Dimension(150, 200);
 		scrollPane.setPreferredSize(size);
@@ -119,16 +108,16 @@ public class PreferencesDialog extends JDialog {
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.add(Box.createHorizontalGlue());
 		JButton okButton = new JButton();
-		okButton.setAction(new OkCancelAction());
+		okButton.setAction(new OkCancelAction(this));
 		okButton.setText("OK");
 		JButton cancelButton = new JButton();
-		cancelButton.setAction(new OkCancelAction());
+		cancelButton.setAction(new OkCancelAction(this));
 		cancelButton.setText("Cancel");
 		JButton applyButton = new JButton();
-		applyButton.setAction(new ApplyAction());
+		applyButton.setAction(new ApplyAction(this));
 		applyButton.setText("Apply");
 		JButton defaultsButton = new JButton();
-		defaultsButton.setAction(new DefaultsAction());
+		defaultsButton.setAction(new DefaultsAction(this));
 		defaultsButton.setText("Restore Defaults");
 		buttonsPanel.add(okButton);
 		buttonsPanel.add(cancelButton);
@@ -138,109 +127,9 @@ public class PreferencesDialog extends JDialog {
 	}
 
 	/**
-	 * Update preferences panel.
-	 *
-	 * @param settingsInfo
-	 *            the settings info
+	 * @return the preferencesPanel
 	 */
-	private void updatePreferencesPanel(SettingsInfo settingsInfo) {
-		if (settingsInfo != null) {
-			AbstractSettingsUI newUI = settingsInfo.createSettingsUI();
-			preferencesPanel.setSettingsUI(newUI);
-		} else {
-			preferencesPanel.setSettingsUI(null);
-		}
-	}
-
-	/**
-	 * The Class OkAction.
-	 */
-	private class OkCancelAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			PreferencesDialog.this.dispose();
-		}
-	}
-
-	/**
-	 * The Class ApplyAction.
-	 */
-	private class ApplyAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			preferencesPanel.save();
-		}
-	}
-
-	/**
-	 * The Class DefaultsAction.
-	 */
-	private class DefaultsAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			if (JOptionPane.showConfirmDialog(PreferencesDialog.this, "Are you sure you want to restore defaults?",
-					"Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-				preferencesPanel.restoreDefaults();
-			}
-		}
-	}
-
-	/**
-	 * The listener interface for receiving localTreeSelection events. The class
-	 * that is interested in processing a localTreeSelection event implements
-	 * this interface, and the object created with that class is registered with
-	 * a component using the component's
-	 * <code>addLocalTreeSelectionListener</code> method. When the
-	 * localTreeSelection event occurs, that object's appropriate method is
-	 * invoked.
-	 *
-	 * @see LocalTreeSelectionEvent
-	 */
-	private class LocalTreeSelectionListener implements TreeSelectionListener {
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * javax.swing.event.TreeSelectionListener#valueChanged(javax.swing.
-		 * event. TreeSelectionEvent)
-		 */
-		@Override
-		public void valueChanged(TreeSelectionEvent e) {
-			TreePath path = e.getPath();
-			DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
-			SettingsInfo si = node == null ? null : (SettingsInfo) node.getUserObject();
-			updatePreferencesPanel(si);
-		}
+	public PreferencesPanel getPreferencesPanel() {
+		return preferencesPanel;
 	}
 }

@@ -18,15 +18,11 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Oct 22, 2005
- */
 package org.loboevolution.html.test;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,7 +36,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTree;
-
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -182,43 +177,6 @@ public class TestFrame extends JFrame {
 			this.rcontext.navigate(url, null);
 		} catch (Exception err) {
 			logger.error( "Error trying to load URI=[" + uri + "].", err);
-		}
-	}
-
-	/**
-	 * The Class LocalHtmlRendererContext.
-	 */
-	private class LocalHtmlRendererContext extends SimpleHtmlRendererContext {
-
-		/**
-		 * Instantiates a new local html renderer context.
-		 *
-		 * @param contextComponent
-		 *            the context component
-		 * @param ucontext
-		 *            the ucontext
-		 */
-		public LocalHtmlRendererContext(HtmlPanel contextComponent, UserAgentContext ucontext) {
-			super(contextComponent, ucontext);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.loboevolution.html.test.SimpleHtmlRendererContext#open(java.net.
-		 * URL, java.lang.String, java.lang.String, boolean)
-		 */
-		@Override
-		public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
-			TestFrame frame = new TestFrame("Cobra Test Tool");
-			frame.setSize(600, 400);
-			frame.setExtendedState(Frame.NORMAL);
-			frame.setVisible(true);
-			HtmlRendererContext ctx = frame.getHtmlRendererContext();
-			ctx.setOpener(this);
-			frame.navigate(url.toExternalForm());
-			return ctx;
 		}
 	}
 }

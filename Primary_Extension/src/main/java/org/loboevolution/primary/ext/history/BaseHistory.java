@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.ext;
+package org.loboevolution.primary.ext.history;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import org.apache.logging.log4j.util.Strings;
+import org.loboevolution.primary.ext.HostEntry;
 
 /**
  * The Class BaseHistory.
@@ -49,10 +50,10 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	private final SortedSet<String> historySortedSet = new TreeSet<String>();
 
 	/** The history map. */
-	private final transient Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
+	private final transient Map<String, TimedEntry<T>> historyMap = new HashMap<String, TimedEntry<T>>();
 
 	/** The history timed set. */
-	private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
+	private final SortedSet<TimedEntry<T>> historyTimedSet = new TreeSet<TimedEntry<T>>();
 
 	/** The common entries capacity. */
 	private final int commonEntriesCapacity = 1000;
@@ -82,14 +83,15 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	 *            the max num items
 	 * @return the recent items
 	 */
+
 	public Collection<String> getRecentItems(int maxNumItems) {
 		synchronized (this) {
 			Collection<String> items = new LinkedList<String>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
 			int count = 0;
 			while (i.hasNext() && count++ < maxNumItems) {
-				TimedEntry entry = i.next();
-				items.add(entry.value);
+				TimedEntry<T> entry = i.next();
+				items.add(entry.getValue());
 			}
 			return items;
 		}
@@ -105,11 +107,11 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<T> getRecentItemInfo(int maxNumItems) {
 		synchronized (this) {
 			Collection<T> items = new LinkedList<T>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
 			int count = 0;
 			while (i.hasNext() && count++ < maxNumItems) {
-				TimedEntry entry = i.next();
-				items.add(entry.itemInfo);
+				TimedEntry<T> entry = i.next();
+				items.add(entry.getItemInfo());
 			}
 			return items;
 		}
@@ -125,11 +127,11 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<HostEntry> getRecentHostEntries(int maxNumItems) {
 		synchronized (this) {
 			Collection<HostEntry> items = new LinkedList<HostEntry>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
 			Set<String> hosts = new HashSet<String>();
 			while (i.hasNext()) {
-				TimedEntry entry = i.next();
-				String host = entry.url.getHost();
+				TimedEntry<T> entry = i.next();
+				String host = entry.getUrl().getHost();
 				if (Strings.isBlank(host) && !hosts.contains(host)) {
 
 					hosts.add(host);
@@ -137,7 +139,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 						break;
 					}
 				
-					items.add(new HostEntry(host, entry.timestamp));
+					items.add(new HostEntry(host, entry.getTimestamp()));
 				}
 			}
 			return items;
@@ -152,10 +154,10 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<HistoryEntry<T>> getAllEntries() {
 		synchronized (this) {
 			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
 			while (i.hasNext()) {
-				TimedEntry entry = i.next();
-				items.add(new HistoryEntry<T>(entry.url, entry.timestamp, entry.itemInfo));
+				TimedEntry<T> entry = i.next();
+				items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
 			}
 			return items;
 		}
@@ -171,13 +173,13 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<HistoryEntry<T>> getRecentEntries(int maxNumItems) {
 		synchronized (this) {
 			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			Iterator<TimedEntry> i = this.historyTimedSet.iterator();
+			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
 			while (i.hasNext()) {
-				TimedEntry entry = i.next();
+				TimedEntry<T> entry = i.next();
 				if (items.size() >= maxNumItems) {
 					break;
 				}
-				items.add(new HistoryEntry<T>(entry.url, entry.timestamp, entry.itemInfo));
+				items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
 			}
 			return items;
 		}
@@ -217,22 +219,22 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public void addAsRecent(URL url, T itemInfo) {
 		String item = url.toExternalForm();
 		synchronized (this) {
-			TimedEntry entry = this.historyMap.get(item);
+			TimedEntry<T> entry = this.historyMap.get(item);
 			if (entry != null) {
 				this.historyTimedSet.remove(entry);
 				entry.touch();
-				entry.itemInfo = itemInfo;
+				entry.setItemInfo(itemInfo);
 				this.historyTimedSet.add(entry);
 			} else {
-				entry = new TimedEntry(url, item, itemInfo);
+				entry = new TimedEntry<T>(url, item, itemInfo);
 				this.historyTimedSet.add(entry);
 				this.historyMap.put(item, entry);
 				this.historySortedSet.add(item);
 				while (this.historyTimedSet.size() > this.commonEntriesCapacity) {
 					// Most outdated goes last
-					TimedEntry entryToRemove = this.historyTimedSet.last();
-					this.historyMap.remove(entryToRemove.value);
-					this.historySortedSet.remove(entryToRemove.value);
+					TimedEntry<T> entryToRemove = this.historyTimedSet.last();
+					this.historyMap.remove(entryToRemove.getValue());
+					this.historySortedSet.remove(entryToRemove.getValue());
 					this.historyTimedSet.remove(entryToRemove);
 				}
 			}
@@ -248,7 +250,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public void touch(URL url) {
 		String item = url.toExternalForm();
 		synchronized (this) {
-			TimedEntry entry = this.historyMap.get(item);
+			TimedEntry<T> entry = this.historyMap.get(item);
 			if (entry != null) {
 				this.historyTimedSet.remove(entry);
 				entry.touch();
@@ -265,88 +267,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	 * @return the existing info
 	 */
 	public T getExistingInfo(String item) {
-		TimedEntry entry = this.historyMap.get(item);
-		return entry == null ? null : entry.itemInfo;
+		TimedEntry<T> entry = this.historyMap.get(item);
+		return entry == null ? null : entry.getItemInfo();
 	}
-
-	/**
-	 * The Class TimedEntry.
-	 */
-	private class TimedEntry implements Comparable<Object>, java.io.Serializable {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 2257845000000000200L;
-
-		/** The timestamp. */
-		private long timestamp = System.currentTimeMillis();
-
-		/** The url. */
-		private final URL url;
-
-		/** The value. */
-		private final String value;
-
-		/** The item info. */
-		private transient T itemInfo;
-
-		/**
-		 * Instantiates a new timed entry.
-		 *
-		 * @param url
-		 *            the url
-		 * @param textValue
-		 *            the text value
-		 * @param itemInfo
-		 *            the item info
-		 */
-		public TimedEntry(URL url, String textValue, T itemInfo) {
-			this.itemInfo = itemInfo;
-			this.value = textValue;
-			this.url = url;
-		}
-
-		/**
-		 * Touch.
-		 */
-		public void touch() {
-			this.timestamp = System.currentTimeMillis();
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Object#equals(java.lang.Object)
-		 */
-		@Override
-		public boolean equals(Object obj) {
-			@SuppressWarnings("unchecked")
-			TimedEntry other = (TimedEntry) obj;
-			return other.value.equals(this.value);
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Comparable#compareTo(Object)
-		 */
-		@Override
-		public int compareTo(Object arg0) {
-			if (this.equals(arg0)) {
-				return 0;
-			}
-			@SuppressWarnings("unchecked")
-			TimedEntry other = (TimedEntry) arg0;
-			long time1 = this.timestamp;
-			long time2 = other.timestamp;
-			if (time1 > time2) {
-				// More recent goes first
-				return -1;
-			} else if (time2 > time1) {
-				return +1;
-			} else {
-				return this.value.compareTo(other.value);
-			}
-		}
-	}
-
 }

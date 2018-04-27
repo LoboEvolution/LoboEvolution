@@ -28,9 +28,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
 import org.loboevolution.primary.gui.AbstractSettingsUI;
-import org.loboevolution.primary.gui.ItemEditorFactory;
-import org.loboevolution.primary.gui.ItemListControl;
 import org.loboevolution.primary.gui.SwingTasks;
+import org.loboevolution.primary.gui.item.ItemEditorFactory;
+import org.loboevolution.primary.gui.item.ItemListControl;
 import org.loboevolution.primary.settings.SearchEngine;
 import org.loboevolution.primary.settings.ToolsSettings;
 

@@ -188,7 +188,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 */
 	public void addPageChangeListener(PageChangeListener pl) {
 		// [[MW: should be an array list instead of only one]]
-		listener = pl;
+		setListener(pl);
 	}
 
 	/**
@@ -196,7 +196,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 */
 	public void removePageChangeListener(PageChangeListener pl) {
 		// [[MW: should be an array list instead of only one]]
-		listener = null;
+		setListener(null);
 	}
 
 	/**
@@ -276,29 +276,9 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 */
 	public void showPage(int pagenum) {
 		pageShown(pagenum);
-		SwingUtilities.invokeLater(new GotoLater(pagenum));
+		SwingUtilities.invokeLater(new GotoLater(pagenum, this));
 	}
-
-	/**
-	 * Simple runnable to tell listeners that the page has changed.
-	 */
-	private class GotoLater implements Runnable {
-
-		/** The page. */
-		private int page;
-
-		public GotoLater(int pagenum) {
-			page = pagenum;
-		}
-
-		@Override
-		public void run() {
-			if (listener != null) {
-				listener.gotoPage(page);
-			}
-		}
-	}
-
+	
 	/**
 	 * Updates the positions of the thumbnails, and draws them to the screen.
 	 */
@@ -399,5 +379,19 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	@Override
 	public int getScrollableUnitIncrement(Rectangle visrect, int orientation, int direction) {
 		return lineheight;
+	}
+
+	/**
+	 * @return the listener
+	 */
+	public PageChangeListener getListener() {
+		return listener;
+	}
+
+	/**
+	 * @param listener the listener to set
+	 */
+	public void setListener(PageChangeListener listener) {
+		this.listener = listener;
 	}
 }

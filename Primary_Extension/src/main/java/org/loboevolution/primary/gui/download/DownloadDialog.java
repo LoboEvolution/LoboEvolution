@@ -24,45 +24,25 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 
-import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.loboevolution.clientlet.ClientletException;
-import org.loboevolution.clientlet.ClientletRequest;
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.gui.DefaultWindowFactory;
 import org.loboevolution.primary.gui.FieldType;
 import org.loboevolution.primary.gui.FormField;
 import org.loboevolution.primary.gui.FormPanel;
-import org.loboevolution.primary.settings.ToolsSettings;
-import org.loboevolution.request.AbstractRequestHandler;
-import org.loboevolution.request.ClientletRequestImpl;
-import org.loboevolution.request.RequestEngine;
 import org.loboevolution.request.RequestHandler;
-import org.loboevolution.ua.ProgressType;
-import org.loboevolution.ua.RequestType;
-import org.loboevolution.util.OS;
 import org.loboevolution.util.Timing;
 
 /**
@@ -72,9 +52,6 @@ public class DownloadDialog extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(DownloadDialog.class);
 
 	/** The progress bar. */
 	private final JProgressBar progressBar = new JProgressBar();
@@ -132,16 +109,6 @@ public class DownloadDialog extends JFrame {
 
 	/** The download base timestamp. */
 	private long downloadBaseTimestamp;
-
-	/** The last timestamp. */
-	private long lastTimestamp;
-
-	/** The last progress value. */
-	private long lastProgressValue;
-
-	/** The last transfer rate. */
-	private double lastTransferRate = Double.NaN;
-
 	/**
 	 * Instantiates a new download dialog.
 	 *
@@ -157,69 +124,69 @@ public class DownloadDialog extends JFrame {
 		this.setIconImage(DefaultWindowFactory.getInstance().getDefaultImageIcon().getImage());
 
 		this.topFormPanel.setMinLabelWidth(100);
-		this.bottomFormPanel.setMinLabelWidth(100);
+		this.getBottomFormPanel().setMinLabelWidth(100);
 
-		this.bottomFormPanel.setEnabled(false);
+		this.getBottomFormPanel().setEnabled(false);
 
 		this.documentField.setCaption("Document:");
-		this.timeLeftField.setCaption("Estimated time:");
+		this.getTimeLeftField().setCaption("Estimated time:");
 		this.mimeTypeField.setCaption("MIME type:");
-		this.sizeField.setCaption("Size:");
-		this.destinationField.setCaption("File:");
-		this.transferSizeField.setCaption("Transfer size:");
-		this.transferRateField.setCaption("Transfer rate:");
-		this.openFolderButton.setVisible(false);
-		this.openButton.setVisible(false);
+		this.getSizeField().setCaption("Size:");
+		this.getDestinationField().setCaption("File:");
+		this.getTransferSizeField().setCaption("Transfer size:");
+		this.getTransferRateField().setCaption("Transfer rate:");
+		this.getOpenFolderButton().setVisible(false);
+		this.getOpenButton().setVisible(false);
 
 		this.documentField.setValue(url.toExternalForm());
 		this.mimeTypeField.setValue(response.getMimeType());
 		int cl = response.getContentLength();
 		this.knownContentLength = cl;
 		String sizeText = cl == -1 ? "Not known" : getSizeText(cl);
-		this.sizeField.setValue(sizeText);
+		this.getSizeField().setValue(sizeText);
 		String estTimeText = transferSpeed <= 0 || cl == -1 ? "Not known" : Timing.getElapsedText(cl / transferSpeed);
-		this.timeLeftField.setValue(estTimeText);
+		this.getTimeLeftField().setValue(estTimeText);
 
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new FlowLayout());
 		Box rootPanel = new Box(BoxLayout.Y_AXIS);
 		rootPanel.setBorder(new EmptyBorder(4, 8, 4, 8));
-		rootPanel.add(this.progressBar);
+		rootPanel.add(this.getProgressBar());
 		rootPanel.add(Box.createVerticalStrut(8));
 		rootPanel.add(this.topFormPanel);
 		rootPanel.add(Box.createVerticalStrut(8));
-		rootPanel.add(this.bottomFormPanel);
+		rootPanel.add(this.getBottomFormPanel());
 		rootPanel.add(Box.createVerticalStrut(8));
 		rootPanel.add(this.getButtonsPanel());
 		contentPane.add(rootPanel);
 
-		FormPanel bfp = this.bottomFormPanel;
-		bfp.addField(this.destinationField);
-		bfp.addField(this.transferRateField);
-		bfp.addField(this.transferSizeField);
+		FormPanel bfp = this.getBottomFormPanel();
+		bfp.addField(this.getDestinationField());
+		bfp.addField(this.getTransferRateField());
+		bfp.addField(this.getTransferSizeField());
 
 		FormPanel tfp = this.topFormPanel;
 		tfp.addField(this.documentField);
 		tfp.addField(this.mimeTypeField);
-		tfp.addField(this.sizeField);
-		tfp.addField(this.timeLeftField);
+		tfp.addField(this.getSizeField());
+		tfp.addField(this.getTimeLeftField());
 
 		Dimension topPanelPs = this.topFormPanel.getPreferredSize();
 		this.topFormPanel.setPreferredSize(new Dimension(400, topPanelPs.height));
 
-		Dimension bottomPanelPs = this.bottomFormPanel.getPreferredSize();
-		this.bottomFormPanel.setPreferredSize(new Dimension(400, bottomPanelPs.height));
+		Dimension bottomPanelPs = this.getBottomFormPanel().getPreferredSize();
+		this.getBottomFormPanel().setPreferredSize(new Dimension(400, bottomPanelPs.height));
 
-		this.progressBar.setEnabled(false);
+		this.getProgressBar().setEnabled(false);
 
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				RequestHandler rh = requestHandler;
+				RequestHandler rh = getRequestHandler();
 				if (rh != null) {
 					rh.cancel();
 					// So that there's no error dialog
-					requestHandler = null;
+					setRequestHandler(null);
 				}
 			}
 		});
@@ -231,25 +198,24 @@ public class DownloadDialog extends JFrame {
 	 * @return the buttons panel
 	 */
 	private Component getButtonsPanel() {
-		JButton saveButton = this.saveButton;
-		saveButton.setAction(new SaveAction());
+		JButton saveButton = this.getSaveButton();
+		saveButton.setAction(new SaveAction(this));
 		saveButton.setText("Save As...");
 		saveButton.setToolTipText("You must select a file before download begins.");
 
-		JButton closeButton = this.closeButton;
-		closeButton.setAction(new CloseAction());
+		JButton closeButton = this.getCloseButton();
+		closeButton.setAction(new CloseAction(this));
 		closeButton.setText("Cancel");
 
-		JButton openButton = this.openButton;
-		openButton.setAction(new OpenAction());
+		JButton openButton = this.getOpenButton();
+		openButton.setAction(new OpenAction(this));
 		openButton.setText("Open");
 
-		JButton openFolderButton = this.openFolderButton;
-		openFolderButton.setAction(new OpenFolderAction());
+		JButton openFolderButton = this.getOpenFolderButton();
+		openFolderButton.setAction(new OpenFolderAction(this));
 		openFolderButton.setText("Open Folder");
 
 		Box box = new Box(BoxLayout.X_AXIS);
-		// box.setBorder(new BevelBorder(BevelBorder.RAISED));
 		box.add(Box.createGlue());
 		box.add(openButton);
 		box.add(Box.createHorizontalStrut(4));
@@ -262,148 +228,13 @@ public class DownloadDialog extends JFrame {
 	}
 
 	/**
-	 * Select file.
-	 */
-	private void selectFile() {
-		String path = this.url.getPath();
-		int lastSlashIdx = path.lastIndexOf('/');
-		String tentativeName = lastSlashIdx == -1 ? path : path.substring(lastSlashIdx + 1);
-		JFileChooser chooser = new JFileChooser();
-		ToolsSettings settings = ToolsSettings.getInstance();
-		File directory = settings.getDownloadDirectory();
-		if (directory != null) {
-			File selectedFile = new File(directory, tentativeName);
-			chooser.setSelectedFile(selectedFile);
-		}
-		if (chooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-			File file = chooser.getSelectedFile();
-			if (file.exists()
-					&& JOptionPane.showConfirmDialog(this, "The file exists. Are you sure you want to overwrite it?",
-							"Confirm", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
-				return;
-			}
-			settings.setDownloadDirectory(file.getParentFile());
-			settings.save();
-			this.startDownload(chooser.getSelectedFile());
-		}
-	}
-
-	/**
-	 * Start download.
-	 *
-	 * @param file
-	 *            the file
-	 */
-	private void startDownload(File file) {
-		this.saveButton.setEnabled(false);
-
-		this.timeLeftField.setCaption("Time left:");
-
-		this.destinationField.setValue(file.getName());
-		this.destinationField.setToolTip(file.getAbsolutePath());
-
-		this.bottomFormPanel.setEnabled(true);
-		this.bottomFormPanel.revalidate();
-
-		ClientletRequest request = new ClientletRequestImpl(this.url, RequestType.DOWNLOAD);
-		RequestHandler handler = new DownloadRequestHandler(request, this, file);
-
-		this.destinationFile = file;
-		this.requestHandler = handler;
-		this.downloadBaseTimestamp = System.currentTimeMillis();
-
-		Thread t = new Thread(new DownloadRunnable(handler), "Download:" + this.url.toExternalForm());
-		t.setDaemon(true);
-		t.start();
-	}
-
-	/**
-	 * Done with download_ safe.
-	 *
-	 * @param totalSize
-	 *            the total size
-	 */
-	private void doneWithDownloadSafe(final long totalSize) {
-		if (SwingUtilities.isEventDispatchThread()) {
-			doneWithDownload(totalSize);
-		} else {
-
-			SwingUtilities.invokeLater(() -> doneWithDownload(totalSize));
-		}
-	}
-
-	/**
-	 * Done with download.
-	 *
-	 * @param totalSize
-	 *            the total size
-	 */
-	private void doneWithDownload(long totalSize) {
-		this.requestHandler = null;
-
-		this.setTitle(this.destinationField.getValue());
-		this.timeLeftField.setCaption("Download time:");
-		long elapsed = System.currentTimeMillis() - this.downloadBaseTimestamp;
-		this.timeLeftField.setValue(Timing.getElapsedText(elapsed));
-
-		String sizeText = getSizeText(totalSize);
-		this.transferSizeField.setValue(sizeText);
-		this.sizeField.setValue(sizeText);
-
-		if (elapsed > 0) {
-			double transferRate = (double) totalSize / elapsed;
-			this.transferRateField.setValue(round1(transferRate) + " Kb/sec");
-		} else {
-			this.transferRateField.setValue("N/A");
-		}
-
-		this.progressBar.setIndeterminate(false);
-		this.progressBar.setStringPainted(true);
-		this.progressBar.setValue(100);
-		this.progressBar.setMaximum(100);
-		this.progressBar.setString("Done.");
-
-		this.closeButton.setText("Close");
-
-		if (OS.supportsLaunchPath()) {
-			this.saveButton.setVisible(false);
-			this.openFolderButton.setVisible(true);
-			this.openButton.setVisible(true);
-			this.openButton.revalidate();
-		}
-	}
-
-	/**
-	 * Error in download_ safe.
-	 */
-	private void errorInDownloadSafe() {
-		if (SwingUtilities.isEventDispatchThread()) {
-			errorInDownload();
-		} else {
-			SwingUtilities.invokeLater(() -> errorInDownload());
-		}
-	}
-
-	/**
-	 * Error in download.
-	 */
-	private void errorInDownload() {
-		if (this.requestHandler != null) {
-			// If requestHandler is null, it means the download was explicitly
-			// cancelled or the window closed.
-			JOptionPane.showMessageDialog(this, "An error occurred while trying to download the file.");
-			this.dispose();
-		}
-	}
-
-	/**
 	 * Round1.
 	 *
 	 * @param value
 	 *            the value
 	 * @return the double
 	 */
-	private static double round1(double value) {
+	public double round1(double value) {
 		return Math.round(value * 10.0) / 10.0;
 	}
 
@@ -414,7 +245,7 @@ public class DownloadDialog extends JFrame {
 	 *            the num bytes
 	 * @return the size text
 	 */
-	private static String getSizeText(long numBytes) {
+	public String getSizeText(long numBytes) {
 		if (numBytes < 1024) {
 			return numBytes + " bytes";
 		} else {
@@ -434,308 +265,135 @@ public class DownloadDialog extends JFrame {
 	}
 
 	/**
-	 * Update progress_ safe.
-	 *
-	 * @param progressType
-	 *            the progress type
-	 * @param value
-	 *            the value
-	 * @param max
-	 *            the max
+	 * @return the url
 	 */
-	private void updateProgressSafe(final ProgressType progressType, final int value, final int max) {
-		if (SwingUtilities.isEventDispatchThread()) {
-			updateProgress(progressType, value, max);
-		} else {
-			SwingUtilities.invokeLater(() -> updateProgress(progressType, value, max));
-		}
+	public URL getUrl() {
+		return url;
 	}
 
 	/**
-	 * Update progress.
-	 *
-	 * @param progressType
-	 *            the progress type
-	 * @param value
-	 *            the value
-	 * @param max
-	 *            the max
+	 * @return the saveButton
 	 */
-	private void updateProgress(ProgressType progressType, int value, int max) {
-		String sizeText = getSizeText(value);
-		this.transferSizeField.setValue(sizeText);
-
-		long newTimestamp = System.currentTimeMillis();
-		double lastTransferRate = this.lastTransferRate;
-		long lastProgressValue = this.lastProgressValue;
-		long lastTimestamp = this.lastTimestamp;
-		long elapsed = newTimestamp - lastTimestamp;
-		double newTransferRate = Double.NaN;
-		if (elapsed > 0) {
-			newTransferRate = (value - lastProgressValue) / elapsed;
-			if (!Double.isNaN(lastTransferRate)) {
-				// Weighed average
-				newTransferRate = (newTransferRate + lastTransferRate * 5.0) / 6.0;
-			}
-		}
-		if (!Double.isNaN(newTransferRate)) {
-			this.transferRateField.setValue(round1(newTransferRate) + " Kb/sec");
-			int cl = this.knownContentLength;
-			if (cl > 0 && newTransferRate > 0) {
-				this.timeLeftField.setValue(Timing.getElapsedText((long) ((cl - value) / newTransferRate)));
-			}
-		}
-		this.lastTimestamp = newTimestamp;
-		this.lastProgressValue = value;
-		this.lastTransferRate = newTransferRate;
-
-		JProgressBar pb = this.progressBar;
-		if (progressType == ProgressType.CONNECTING) {
-			pb.setIndeterminate(true);
-			pb.setStringPainted(true);
-			pb.setString("Connecting...");
-			this.setTitle(this.destinationField.getValue() + ": Connecting...");
-		} else if (max <= 0) {
-			pb.setIndeterminate(true);
-			pb.setStringPainted(false);
-			this.setTitle(sizeText + " " + this.destinationField.getValue());
-		} else {
-			int percent = value * 100 / max;
-			pb.setIndeterminate(false);
-			pb.setStringPainted(true);
-			pb.setMaximum(max);
-			pb.setValue(value);
-			String percentText = percent + "%";
-			pb.setString(percentText);
-			this.setTitle(percentText + " " + this.destinationField.getValue());
-		}
+	public JButton getSaveButton() {
+		return saveButton;
 	}
 
 	/**
-	 * The Class SaveAction.
+	 * @return the timeLeftField
 	 */
-	private class SaveAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			selectFile();
-		}
+	public FormField getTimeLeftField() {
+		return timeLeftField;
 	}
 
 	/**
-	 * The Class OpenFolderAction.
+	 * @return the destinationField
 	 */
-	private class OpenFolderAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			File file = destinationFile;
-			if (file != null) {
-				try {
-					OS.launchPath(file.getParentFile().getAbsolutePath());
-				} catch (Exception thrown) {
-					logger.error("Unable to open folder of file: " + file + ".", thrown);
-					JOptionPane.showMessageDialog(DownloadDialog.this, "An error occurred trying to open the folder.");
-				}
-			}
-		}
+	public FormField getDestinationField() {
+		return destinationField;
 	}
 
 	/**
-	 * The Class OpenAction.
+	 * @return the bottomFormPanel
 	 */
-	private class OpenAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			File file = destinationFile;
-			if (file != null) {
-				try {
-					OS.launchPath(file.getAbsolutePath());
-					DownloadDialog.this.dispose();
-				} catch (Exception thrown) {
-					logger.error("Unable to open file: " + file + ".", thrown);
-					JOptionPane.showMessageDialog(DownloadDialog.this, "An error occurred trying to open the file.");
-				}
-			}
-		}
+	public FormPanel getBottomFormPanel() {
+		return bottomFormPanel;
 	}
 
 	/**
-	 * The Class CloseAction.
+	 * @return the destinationFile
 	 */
-	private class CloseAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// windowClosedEvent takes care of cancelling download.
-			DownloadDialog.this.dispose();
-		}
+	public File getDestinationFile() {
+		return destinationFile;
 	}
 
 	/**
-	 * The Class DownloadRunnable.
+	 * @param destinationFile the destinationFile to set
 	 */
-	private class DownloadRunnable implements Runnable {
-
-		/** The handler. */
-		private final RequestHandler handler;
-
-		/**
-		 * Instantiates a new download runnable.
-		 *
-		 * @param handler
-		 *            the handler
-		 */
-		public DownloadRunnable(RequestHandler handler) {
-			this.handler = handler;
-		}
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.lang.Runnable#run()
-		 */
-		@Override
-		public void run() {
-			try {
-				RequestEngine.getInstance().inlineRequest(this.handler);
-			} catch (Exception err) {
-				logger.error( "Unexpected error on download of [" + url.toExternalForm() + "].", err);
-			}
-		}
+	public void setDestinationFile(File destinationFile) {
+		this.destinationFile = destinationFile;
 	}
 
 	/**
-	 * The Class DownloadRequestHandler.
+	 * @return the requestHandler
 	 */
-	private class DownloadRequestHandler extends AbstractRequestHandler {
+	public RequestHandler getRequestHandler() {
+		return requestHandler;
+	}
 
-		/** The file. */
-		private final File file;
+	/**
+	 * @param requestHandler the requestHandler to set
+	 */
+	public void setRequestHandler(RequestHandler requestHandler) {
+		this.requestHandler = requestHandler;
+	}
 
-		/** The download done. */
-		private boolean downloadDone = false;
+	/**
+	 * @return the downloadBaseTimestamp
+	 */
+	public long getDownloadBaseTimestamp() {
+		return downloadBaseTimestamp;
+	}
 
-		/** The last progress update. */
-		private long lastProgressUpdate = 0;
+	/**
+	 * @param downloadBaseTimestamp the downloadBaseTimestamp to set
+	 */
+	public void setDownloadBaseTimestamp(long downloadBaseTimestamp) {
+		this.downloadBaseTimestamp = downloadBaseTimestamp;
+	}
 
-		/**
-		 * Instantiates a new download request handler.
-		 *
-		 * @param request
-		 *            the request
-		 * @param dialogComponent
-		 *            the dialog component
-		 * @param file
-		 *            the file
-		 */
-		public DownloadRequestHandler(ClientletRequest request, Component dialogComponent, File file) {
-			super(request, dialogComponent);
-			this.file = file;
-		}
+	/**
+	 * @return the knownContentLength
+	 */
+	public int getKnownContentLength() {
+		return knownContentLength;
+	}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.loboevolution.request.AbstractRequestHandler#handleException(org.
-		 * loboevolution .clientlet.ClientletResponse, java.lang.Throwable)
-		 */
-		@Override
-		public boolean handleException(ClientletResponse response, Throwable exception) throws ClientletException {
-			logger.error("An error occurred trying to download " + response.getResponseURL() + " to " + this.file + ".",
-					exception);
-			errorInDownloadSafe();
-			return true;
-		}
+	/**
+	 * @return the transferSizeField
+	 */
+	public FormField getTransferSizeField() {
+		return transferSizeField;
+	}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.loboevolution.request.AbstractRequestHandler#handleProgress(org.
-		 * loboevolution .ua.ProgressType, java.net.URL, java.lang.String, int,
-		 * int)
-		 */
-		@Override
-		public void handleProgress(ProgressType progressType, URL url, String method, int value, int max) {
-			if (!this.downloadDone) {
-				long timestamp = System.currentTimeMillis();
-				if (timestamp - this.lastProgressUpdate > 1000) {
-					updateProgressSafe(progressType, value, max);
-					this.lastProgressUpdate = timestamp;
-				}
-			}
-		}
+	/**
+	 * @return the progressBar
+	 */
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see
-		 * org.loboevolution.request.AbstractRequestHandler#processResponse(org.
-		 * loboevolution .clientlet.ClientletResponse)
-		 */
-		@Override
-		public void processResponse(ClientletResponse response) throws ClientletException, IOException {
-			OutputStream out = new FileOutputStream(this.file);
-			try {
-				InputStream in = response.getInputStream();
-				try {
-					int totalRead = 0;
-					byte[] buffer = new byte[8192];
-					int numRead;
-					while ((numRead = in.read(buffer)) != -1) {
-						if (this.isCancelled()) {
-							throw new IOException("cancelled");
-						}
-						totalRead += numRead;
-						out.write(buffer, 0, numRead);
-					}
-					this.downloadDone = true;
-					doneWithDownloadSafe(totalRead);
-				} finally {
-					in.close();
-				}
-			} finally {
-				out.close();
-			}
-		}
+	/**
+	 * @return the transferRateField
+	 */
+	public FormField getTransferRateField() {
+		return transferRateField;
+	}
+
+	/**
+	 * @return the openButton
+	 */
+	public JButton getOpenButton() {
+		return openButton;
+	}
+
+	/**
+	 * @return the openFolderButton
+	 */
+	public JButton getOpenFolderButton() {
+		return openFolderButton;
+	}
+
+	/**
+	 * @return the closeButton
+	 */
+	public JButton getCloseButton() {
+		return closeButton;
+	}
+
+	/**
+	 * @return the sizeField
+	 */
+	public FormField getSizeField() {
+		return sizeField;
 	}
 }

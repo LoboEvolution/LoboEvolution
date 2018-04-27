@@ -69,6 +69,8 @@ import org.loboevolution.primary.action.ShowBookmarksAction;
 import org.loboevolution.primary.action.ShowRecentHostsAction;
 import org.loboevolution.primary.action.SourceAction;
 import org.loboevolution.primary.action.StopAction;
+import org.loboevolution.primary.ext.history.HistoryEntry;
+import org.loboevolution.primary.ext.history.NavigationHistory;
 import org.loboevolution.primary.gui.bookmarks.BookmarksHistory;
 import org.loboevolution.primary.info.BookmarkInfo;
 import org.loboevolution.primary.settings.SearchEngine;

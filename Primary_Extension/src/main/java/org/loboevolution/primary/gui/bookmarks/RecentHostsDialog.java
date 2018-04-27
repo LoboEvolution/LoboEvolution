@@ -48,7 +48,7 @@ import javax.swing.table.TableRowSorter;
 
 import org.loboevolution.primary.ext.HostEntry;
 import org.loboevolution.primary.ext.IconFactory;
-import org.loboevolution.primary.ext.NavigationHistory;
+import org.loboevolution.primary.ext.history.NavigationHistory;
 import org.loboevolution.ua.NavigatorWindow;
 
 /**

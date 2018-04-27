@@ -24,10 +24,8 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
 import java.net.URL;
 
-import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -40,7 +38,6 @@ import org.loboevolution.primary.gui.FieldType;
 import org.loboevolution.primary.gui.FormField;
 import org.loboevolution.primary.gui.FormPanel;
 import org.loboevolution.primary.info.BookmarkInfo;
-import org.loboevolution.util.Strings;
 
 /**
  * The Class AddBookmarkDialog.
@@ -85,19 +82,19 @@ public class AddBookmarkDialog extends JDialog {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.url = existingInfo.getUrl();
 		this.urlField.setEditable(false);
-		this.tagsField.setToolTip("List of keywords separated by blanks.");
+		this.getTagsField().setToolTip("List of keywords separated by blanks.");
 		this.urlField.setValue(existingInfo.getUrl().toExternalForm());
-		this.titleField.setValue(existingInfo.getTitle());
-		this.descriptionField.setValue(existingInfo.getDescription());
-		this.tagsField.setValue(existingInfo.getTagsText());
+		this.getTitleField().setValue(existingInfo.getTitle());
+		this.getDescriptionField().setValue(existingInfo.getDescription());
+		this.getTagsField().setValue(existingInfo.getTagsText());
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		FormPanel fieldsPanel = new FormPanel();
 		fieldsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		fieldsPanel.addField(this.urlField);
-		fieldsPanel.addField(this.titleField);
-		fieldsPanel.addField(this.descriptionField);
-		fieldsPanel.addField(this.tagsField);
+		fieldsPanel.addField(this.getTitleField());
+		fieldsPanel.addField(this.getDescriptionField());
+		fieldsPanel.addField(this.getTagsField());
 
 		Dimension fpps = fieldsPanel.getPreferredSize();
 		fieldsPanel.setPreferredSize(new Dimension(400, fpps.height));
@@ -106,10 +103,10 @@ public class AddBookmarkDialog extends JDialog {
 		JComponent buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		JButton okButton = new JButton();
-		okButton.setAction(new OkAction());
+		okButton.setAction(new OkAction(this));
 		okButton.setText("Save");
 		JButton cancelButton = new JButton();
-		cancelButton.setAction(new CancelAction());
+		cancelButton.setAction(new CancelAction(this));
 		cancelButton.setText("Cancel");
 		buttonsPanel.add(Box.createHorizontalGlue());
 		buttonsPanel.add(okButton);
@@ -131,49 +128,37 @@ public class AddBookmarkDialog extends JDialog {
 	}
 
 	/**
-	 * The Class OkAction.
+	 * @return the url
 	 */
-	private class OkAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			BookmarkInfo binfo = new BookmarkInfo();
-			binfo.setUrl(url);
-			binfo.setTitle(titleField.getValue());
-			binfo.setDescription(descriptionField.getValue());
-			binfo.setTags(Strings.split(tagsField.getValue()));
-			bookmarkInfo = binfo;
-			AddBookmarkDialog.this.dispose();
-		}
+	public URL getUrl() {
+		return url;
 	}
 
 	/**
-	 * The Class CancelAction.
+	 * @return the titleField
 	 */
-	private class CancelAction extends AbstractAction {
+	public FormField getTitleField() {
+		return titleField;
+	}
 
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
+	/**
+	 * @return the descriptionField
+	 */
+	public FormField getDescriptionField() {
+		return descriptionField;
+	}
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			bookmarkInfo = null;
-			AddBookmarkDialog.this.dispose();
-		}
+	/**
+	 * @return the tagsField
+	 */
+	public FormField getTagsField() {
+		return tagsField;
+	}
+
+	/**
+	 * @param bookmarkInfo the bookmarkInfo to set
+	 */
+	public void setBookmarkInfo(BookmarkInfo bookmarkInfo) {
+		this.bookmarkInfo = bookmarkInfo;
 	}
 }

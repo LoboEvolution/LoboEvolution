@@ -49,11 +49,6 @@ public class DownloadClientlet implements Clientlet {
 	public void process(ClientletContext context) throws ClientletException {
 		ClientletResponse response = context.getResponse();
 		URL url = response.getResponseURL();
-		if (url.getProtocol().equals("file") && "".equals(url.getHost())) {
-			String shorterPath = Strings.truncate(Urls.getNoRefForm(url), 64);
-			context.getNavigatorFrame().alert("There are no extensions that can render\r\n" + shorterPath + ".");
-			throw new CancelClientletException("cancel");
-		}
 		if (!"GET".equals(response.getLastRequestMethod())) {
 			String shorterPath = Strings.truncate(Urls.getNoRefForm(url), 64);
 			context.getNavigatorFrame()

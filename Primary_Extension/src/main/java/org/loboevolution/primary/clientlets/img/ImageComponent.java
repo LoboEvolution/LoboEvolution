@@ -1,31 +1,45 @@
+/*
+    GNU GENERAL LICENSE
+    Copyright (C) 2014 - 2018 Lobo Evolution
+
+    This program is free software; you can redistribute it and/or
+    modify it under the terms of the GNU General Public
+    License as published by the Free Software Foundation; either
+    verion 3 of the License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    General License for more details.
+
+    You should have received a copy of the GNU General Public
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    
+
+    Contact info: ivan.difrancesco@yahoo.it
+ */
 package org.loboevolution.primary.clientlets.img;
 
 import java.applet.Applet;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Window;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.NoninvertibleTransformException;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.CellRendererPane;
 import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.MouseInputListener;
 
 /**
  * The component that displays the image itself.
@@ -33,6 +47,8 @@ import javax.swing.event.MouseInputListener;
  * @author Kazó Csaba
  */
 class ImageComponent extends JComponent {
+	
+	private static final long serialVersionUID = 1L;
 	private ResizeStrategy resizeStrategy = ResizeStrategy.SHRINK_TO_FIT;
 	private BufferedImage image;
 	private boolean pixelatedZoom = false;
@@ -40,8 +56,8 @@ class ImageComponent extends JComponent {
 	private double zoomFactor = 1;
 	private final List<ImageMouseMotionListener> moveListeners = new ArrayList<ImageMouseMotionListener>(4);
 	private final List<ImageMouseClickListener> clickListeners = new ArrayList<ImageMouseClickListener>(4);
-	private final MouseEventTranslator mouseEventTranslator = new MouseEventTranslator();
-	private final PaintManager paintManager = new PaintManager();
+	private final MouseEventTranslator mouseEventTranslator = new MouseEventTranslator(this);
+	private final PaintManager paintManager = new PaintManager(this);
 
 	/*
 	 * Handles repositioning the scroll pane when the image is resized so that the
@@ -52,7 +68,7 @@ class ImageComponent extends JComponent {
 
 		void prepare() {
 			if (image != null && hasSize()) {
-				Rectangle viewRect = viewer.getScrollPane().getViewport().getViewRect();
+				Rectangle viewRect = getViewer().getScrollPane().getViewport().getViewRect();
 				preparedCenter = new Point2D.Double(viewRect.getCenterX(), viewRect.getCenterY());
 				try {
 					getImageTransform().inverseTransform(preparedCenter, preparedCenter);
@@ -64,7 +80,7 @@ class ImageComponent extends JComponent {
 
 		void rescroll() {
 			if (preparedCenter != null) {
-				Dimension viewSize = viewer.getScrollPane().getViewport().getExtentSize();
+				Dimension viewSize = getViewer().getScrollPane().getViewport().getExtentSize();
 				getImageTransform().transform(preparedCenter, preparedCenter);
 				Rectangle view = new Rectangle((int) Math.round(preparedCenter.getX() - viewSize.width / 2.0),
 						(int) Math.round(preparedCenter.getY() - viewSize.height / 2.0), viewSize.width,
@@ -112,22 +128,22 @@ class ImageComponent extends JComponent {
 
 	public void addImageMouseMoveListener(ImageMouseMotionListener l) {
 		if (l != null)
-			moveListeners.add(l);
+			getMoveListeners().add(l);
 	}
 
 	public void removeImageMouseMoveListener(ImageMouseMotionListener l) {
 		if (l != null)
-			moveListeners.remove(l);
+			getMoveListeners().remove(l);
 	}
 
 	public void addImageMouseClickListener(ImageMouseClickListener l) {
 		if (l != null)
-			clickListeners.add(l);
+			getClickListeners().add(l);
 	}
 
 	public void removeImageMouseClickListener(ImageMouseClickListener l) {
 		if (l != null)
-			clickListeners.remove(l);
+			getClickListeners().remove(l);
 	}
 
 	public void setImage(BufferedImage newImage) {
@@ -138,7 +154,7 @@ class ImageComponent extends JComponent {
 				|| oldImage.getHeight() != newImage.getHeight()))
 			revalidate();
 		repaint();
-		propertyChangeSupport.firePropertyChange("image", oldImage, newImage);
+		getPropertyChangeSupport().firePropertyChange("image", oldImage, newImage);
 	}
 
 	public BufferedImage getImage() {
@@ -191,14 +207,14 @@ class ImageComponent extends JComponent {
 		rescroller.prepare();
 		ResizeStrategy oldResizeStrategy = this.resizeStrategy;
 		this.resizeStrategy = resizeStrategy;
-		boolean canRescroll = viewer.getSynchronizer().resizeStrategyChangedCanIRescroll(viewer);
+		boolean canRescroll = getViewer().getSynchronizer().resizeStrategyChangedCanIRescroll(getViewer());
 		resizeNow();
 
 		if (canRescroll) {
 			rescroller.rescroll();
-			viewer.getSynchronizer().doneRescrolling(viewer);
+			getViewer().getSynchronizer().doneRescrolling(getViewer());
 		}
-		propertyChangeSupport.firePropertyChange("resizeStrategy", oldResizeStrategy, resizeStrategy);
+		getPropertyChangeSupport().firePropertyChange("resizeStrategy", oldResizeStrategy, resizeStrategy);
 	}
 
 	public ResizeStrategy getResizeStrategy() {
@@ -214,10 +230,10 @@ class ImageComponent extends JComponent {
 			throw new IllegalArgumentException("Invalid interpolation type; use one of the RenderingHints constants");
 		Object old = this.interpolationType;
 		this.interpolationType = type;
-		viewer.getSynchronizer().interpolationTypeChanged(viewer);
+		getViewer().getSynchronizer().interpolationTypeChanged(getViewer());
 		paintManager.notifyChanged();
 		repaint();
-		propertyChangeSupport.firePropertyChange("interpolationType", old, type);
+		getPropertyChangeSupport().firePropertyChange("interpolationType", old, type);
 	}
 
 	public Object getInterpolationType() {
@@ -228,10 +244,10 @@ class ImageComponent extends JComponent {
 		if (pixelatedZoom == this.pixelatedZoom)
 			return;
 		this.pixelatedZoom = pixelatedZoom;
-		viewer.getSynchronizer().pixelatedZoomChanged(viewer);
+		getViewer().getSynchronizer().pixelatedZoomChanged(getViewer());
 		paintManager.notifyChanged();
 		repaint();
-		propertyChangeSupport.firePropertyChange("pixelatedZoom", !pixelatedZoom, pixelatedZoom);
+		getPropertyChangeSupport().firePropertyChange("pixelatedZoom", !pixelatedZoom, pixelatedZoom);
 	}
 
 	public boolean isPixelatedZoom() {
@@ -261,21 +277,21 @@ class ImageComponent extends JComponent {
 		}
 		double oldZoomFactor = zoomFactor;
 		zoomFactor = newZoomFactor;
-		boolean canRescroll = viewer.getSynchronizer().zoomFactorChangedCanIRescroll(viewer);
+		boolean canRescroll = getViewer().getSynchronizer().zoomFactorChangedCanIRescroll(getViewer());
 		if (getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
 			resizeNow();
 			// do not rescroll if we're following another viewer; the scrolling will be
 			// synchronized later
 			if (canRescroll) {
 				rescroller.rescroll();
-				viewer.getSynchronizer().doneRescrolling(viewer);
+				getViewer().getSynchronizer().doneRescrolling(getViewer());
 			}
 		} else {
 			// no rescrolling is necessary, actually
 			if (canRescroll)
-				viewer.getSynchronizer().doneRescrolling(viewer);
+				getViewer().getSynchronizer().doneRescrolling(getViewer());
 		}
-		propertyChangeSupport.firePropertyChange("zoomFactor", oldZoomFactor, newZoomFactor);
+		getPropertyChangeSupport().firePropertyChange("zoomFactor", oldZoomFactor, newZoomFactor);
 	}
 
 	@Override
@@ -385,259 +401,30 @@ class ImageComponent extends JComponent {
 	}
 
 	/**
-	 * Helper class that generates ImageMouseEvents by translating normal mouse
-	 * events onto the image.
+	 * @return the propertyChangeSupport
 	 */
-	private class MouseEventTranslator implements MouseInputListener, PropertyChangeListener {
-		/** This flag is true if the mouse cursor is inside the bounds of the image. */
-		private boolean on = false;
-		/**
-		 * The last position reported. This is used to avoid multiple successive image
-		 * mouse motion events with the same position.
-		 */
-		private Point lastPosition = null;
-
-		/** Sets up this translator. */
-		private void register(ImageComponent ic) {
-			ic.addMouseListener(this);
-			ic.addMouseMotionListener(this);
-			ic.propertyChangeSupport.addPropertyChangeListener(this);
-			ic.addComponentListener(new ComponentAdapter() {
-
-				@Override
-				public void componentResized(ComponentEvent e) {
-					correctionalFire();
-				}
-
-			});
-		}
-
-		private void handleMouseAt(Point position, MouseEvent event) {
-			if (image == null) {
-				if (on) {
-					on = false;
-					fireMouseExit();
-				}
-			} else {
-				if (position != null)
-					position = pointToPixel(position);
-				if (position == null) {
-					if (on) {
-						on = false;
-						fireMouseExit();
-					}
-				} else {
-					if (!on) {
-						on = true;
-						lastPosition = null;
-						fireMouseEnter(position.x, position.y, event);
-					}
-					if (!position.equals(lastPosition)) {
-						lastPosition = position;
-						fireMouseAtPixel(position.x, position.y, event);
-					}
-				}
-			}
-		}
-
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			if (image == null || !on)
-				return;
-			Point p = pointToPixel(e.getPoint());
-			if (p != null) {
-				fireMouseClickedAtPixel(p.x, p.y, e);
-			}
-		}
-
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			if (image != null) {
-				Point p = pointToPixel(e.getPoint());
-				if (p != null) {
-					on = true;
-					fireMouseEnter(p.x, p.y, e);
-					fireMouseAtPixel(p.x, p.y, e);
-				}
-			}
-		}
-
-		@Override
-		public void mouseExited(MouseEvent e) {
-			if (on) {
-				on = false;
-				fireMouseExit();
-			}
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-			handleMouseAt(e.getPoint(), e);
-		}
-
-		@Override
-		public void mouseDragged(MouseEvent e) {
-			if (image == null)
-				return;
-			Point p = pointToPixel(e.getPoint(), false);
-			fireMouseDrag(p.x, p.y, e);
-		}
-
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			if ("image".equals(evt.getPropertyName()) || "resizeStrategy".equals(evt.getPropertyName())
-					|| (getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM
-							&& "zoomFactor".equals(evt.getPropertyName()))) {
-				correctionalFire();
-			}
-		}
-
-		/**
-		 * Fires a motion event based on the current cursor position. Use this method if
-		 * something other than mouse motion changed where the cursor is relative to the
-		 * image.
-		 */
-		private void correctionalFire() {
-			/**
-			 * We use our parent, LayeredImageView, to locate the mouse. If the viewer has
-			 * an overlay, then ImageComponent.getMousePosition will return null because the
-			 * mouse is over the overlay and not the image component.
-			 */
-			handleMouseAt(getParent().getMousePosition(true), null);
-		}
-
-		private void fireMouseAtPixel(int x, int y, MouseEvent ev) {
-			ImageMouseEvent e = null;
-			for (ImageMouseMotionListener imageMouseMoveListener : moveListeners) {
-				if (e == null)
-					e = new ImageMouseEvent(viewer, image, x, y, ev);
-				imageMouseMoveListener.mouseMoved(e);
-			}
-		}
-
-		private void fireMouseClickedAtPixel(int x, int y, MouseEvent ev) {
-			ImageMouseEvent e = null;
-			for (ImageMouseClickListener imageMouseClickListener : clickListeners) {
-				if (e == null)
-					e = new ImageMouseEvent(viewer, image, x, y, ev);
-				imageMouseClickListener.mouseClicked(e);
-			}
-		}
-
-		private void fireMouseEnter(int x, int y, MouseEvent ev) {
-			ImageMouseEvent e = null;
-			for (ImageMouseMotionListener imageMouseMoveListener : moveListeners) {
-				if (e == null)
-					e = new ImageMouseEvent(viewer, image, x, y, ev);
-				imageMouseMoveListener.mouseEntered(e);
-			}
-		}
-
-		private void fireMouseExit() {
-			ImageMouseEvent e = null;
-			for (ImageMouseMotionListener imageMouseMoveListener : moveListeners) {
-				if (e == null)
-					e = new ImageMouseEvent(viewer, image, -1, -1, null);
-				imageMouseMoveListener.mouseExited(e);
-			}
-		}
-
-		private void fireMouseDrag(int x, int y, MouseEvent ev) {
-			ImageMouseEvent e = null;
-			for (ImageMouseMotionListener imageMouseMoveListener : moveListeners) {
-				if (e == null)
-					e = new ImageMouseEvent(viewer, image, x, y, ev);
-				imageMouseMoveListener.mouseDragged(e);
-			}
-		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-		}
+	public PropertyChangeSupport getPropertyChangeSupport() {
+		return propertyChangeSupport;
 	}
 
 	/**
-	 * Helper class that manages the actual painting.
+	 * @return the viewer
 	 */
-	private class PaintManager {
-		BufferedImage cachedImage = null;
-		boolean cachedImageChanged = false;
-		AffineTransform cachedTransform;
+	public ImageViewer getViewer() {
+		return viewer;
+	}
 
-		private void doPaint(Graphics2D gg, AffineTransform imageTransform) {
-			gg.setColor(getBackground());
-			gg.fillRect(0, 0, getWidth(), getHeight());
+	/**
+	 * @return the moveListeners
+	 */
+	public List<ImageMouseMotionListener> getMoveListeners() {
+		return moveListeners;
+	}
 
-			gg.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-			if (pixelatedZoom && imageTransform.getScaleX() >= 1)
-				gg.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
-						RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
-			else
-				gg.setRenderingHint(RenderingHints.KEY_INTERPOLATION, interpolationType);
-
-			gg.drawImage(image, imageTransform, ImageComponent.this);
-		}
-
-		private void ensureCachedValid(AffineTransform imageTransform) {
-			boolean cacheValid;
-
-			// create the image if necessary; if the existing one is sufficiently large, use
-			// it
-			if (cachedImage == null || cachedImage.getWidth() < getWidth() || cachedImage.getHeight() < getHeight()) {
-				cachedImage = getGraphicsConfiguration().createCompatibleImage(getWidth(), getHeight());
-				cacheValid = false;
-			} else {
-				cacheValid = cachedTransform.equals(imageTransform) && !cachedImageChanged;
-			}
-
-			if (!cacheValid) {
-				Graphics2D gg = cachedImage.createGraphics();
-				doPaint(gg, imageTransform);
-				gg.dispose();
-				cachedImageChanged = false;
-				cachedTransform = new AffineTransform(imageTransform);
-			}
-		}
-
-		/**
-		 * Called when a property which affects how the component is painted changes.
-		 * This invalidates the cache and causes it to be redrawn upon the next paint
-		 * request.
-		 */
-		public void notifyChanged() {
-			cachedImageChanged = true;
-		}
-
-		public void paintComponent(Graphics g) {
-			if (image == null) {
-				Graphics2D gg = (Graphics2D) g.create();
-				gg.setColor(getBackground());
-				gg.fillRect(0, 0, getWidth(), getHeight());
-				gg.dispose();
-				return;
-			}
-
-			AffineTransform imageTransform = getImageTransform();
-
-			if (imageTransform.getScaleX() < 1
-					&& interpolationType != RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR) {
-				/*
-				 * We're shrinking the image; instead of letting the Graphics object do it every
-				 * time, we do it and cache the result.
-				 */
-				ensureCachedValid(imageTransform);
-				g.drawImage(cachedImage, 0, 0, ImageComponent.this);
-			} else {
-				// draw the image directly
-				Graphics2D gg = (Graphics2D) g.create();
-				doPaint(gg, imageTransform);
-				gg.dispose();
-			}
-
-		}
+	/**
+	 * @return the clickListeners
+	 */
+	public List<ImageMouseClickListener> getClickListeners() {
+		return clickListeners;
 	}
 }

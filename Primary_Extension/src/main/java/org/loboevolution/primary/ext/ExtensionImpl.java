@@ -45,6 +45,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.primary.clientlets.PrimaryClientletSelector;
 import org.loboevolution.primary.clientlets.html.HtmlContent;
 import org.loboevolution.primary.clientlets.html.HtmlRendererContextImpl;
+import org.loboevolution.primary.ext.history.NavigationHistory;
 import org.loboevolution.request.UserAgentImpl;
 import org.loboevolution.ua.NavigationEntry;
 import org.loboevolution.ua.NavigatorExtension;

@@ -20,14 +20,9 @@
  */
 package org.loboevolution.primary.gui.pdf;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
-import java.awt.Rectangle;
-
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
@@ -120,7 +115,7 @@ public class FullScreenWindow {
 
 	public void close() {
 		dead = true;
-		flag.set();
+		getFlag().set();
 		screen.setFullScreenWindow(null);
 
 		if (jf != null) {
@@ -182,61 +177,7 @@ public class FullScreenWindow {
 		screen.setFullScreenWindow(jf);
 	}
 
-	/**
-	 * A button that appears on a particular graphics device, asking whether that
-	 * device should be used for multiple-monitor choices.
-	 */
-
-	private class PickMe extends JFrame {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = -658915481325845436L;
-
-		/** The mygd. */
-		private transient GraphicsDevice mygd;
-
-		/**
-		 * Creates the PickMe button on a particular display.
-		 *
-		 * @param gd
-		 *            the GraphicsDevice (display) to use for this button
-		 */
-
-		public PickMe(GraphicsDevice gd) {
-
-			super(gd.getDefaultConfiguration());
-			setUndecorated(true);
-			mygd = gd;
-
-			JButton jb = new JButton("Click here to use this screen");
-			jb.setBackground(Color.yellow);
-			jb.addActionListener(evt -> pickDevice(mygd));
-			Dimension sz = jb.getPreferredSize();
-			sz.width += 30;
-			sz.height = 0;
-			jb.setPreferredSize(sz);
-			getContentPane().add(jb);
-			pack();
-			Rectangle bounds = gd.getDefaultConfiguration().getBounds();
-			int x = bounds.width / 2 - sz.width / 2 + bounds.x;
-			int y = bounds.height / 2 - sz.height / 2 + bounds.y;
-			setLocation(x, y);
-			setVisible(true);
-		}
-	}
-
-	/**
-	 *
-	 * Select a particular screen for display of this window, and set
-	 *
-	 * the flag.
-	 *
-	 */
-
-	private void pickDevice(GraphicsDevice gd) {
-		pickedDevice = gd;
-		flag.set();
-	}
+	
 
 	/**
 	 *
@@ -253,21 +194,49 @@ public class FullScreenWindow {
 
 	private GraphicsDevice pickScreen(GraphicsDevice scrns[]) {
 
-		flag.clear();
+		getFlag().clear();
 
 		PickMe pickers[] = new PickMe[scrns.length];
 
 		for (int i = 0; i < scrns.length; i++) {
-			pickers[i] = new PickMe(scrns[i]);
+			pickers[i] = new PickMe(scrns[i], this);
 		}
 
-		flag.waitForFlag();
+		getFlag().waitForFlag();
 
 		for (PickMe picker : pickers) {
 			if (picker != null) {
 				picker.dispose();
 			}
 		}
+		return getPickedDevice();
+	}
+
+	/**
+	 * @return the pickedDevice
+	 */
+	public GraphicsDevice getPickedDevice() {
 		return pickedDevice;
+	}
+
+	/**
+	 * @param pickedDevice the pickedDevice to set
+	 */
+	public void setPickedDevice(GraphicsDevice pickedDevice) {
+		this.pickedDevice = pickedDevice;
+	}
+
+	/**
+	 * @return the flag
+	 */
+	public Flag getFlag() {
+		return flag;
+	}
+
+	/**
+	 * @param flag the flag to set
+	 */
+	public void setFlag(Flag flag) {
+		this.flag = flag;
 	}
 }

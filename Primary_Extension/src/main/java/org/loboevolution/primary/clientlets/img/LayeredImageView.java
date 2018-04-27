@@ -1,28 +1,22 @@
 package org.loboevolution.primary.clientlets.img;
 
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
-import java.awt.Rectangle;
 import javax.swing.JComponent;
 import javax.swing.JLayeredPane;
-import javax.swing.JViewport;
-import javax.swing.Scrollable;
 
 /**
  * A component showing an image as well as an arbitrary number of overlays.
  * 
  * @author Kazó Csaba
  */
-class LayeredImageView {
+public class LayeredImageView {
 	private final ImageComponent theImage;
 	private final JLayeredPane layeredPane;
 
 	public LayeredImageView(ImageComponent theImage) {
 		this.theImage = theImage;
-		layeredPane = new ScrollableLayeredPane();
-		layeredPane.setLayout(new OverlayLayout());
+		layeredPane = new ScrollableLayeredPane(this);
+		layeredPane.setLayout(new OverlayLayout(this));
 		layeredPane.add(theImage, Integer.valueOf(0));
 		layeredPane.setOpaque(true);
 	}
@@ -48,7 +42,7 @@ class LayeredImageView {
 	public void addOverlay(Overlay overlay, int layer) {
 		if (overlay == null)
 			throw new NullPointerException();
-		OverlayComponent c = new OverlayComponent(overlay, theImage);
+		OverlayComponent c = new OverlayComponent(overlay, getTheImage());
 		overlay.addOverlayComponent(c);
 		layeredPane.add(c, Integer.valueOf(layer));
 		layeredPane.revalidate();
@@ -79,76 +73,9 @@ class LayeredImageView {
 	}
 
 	/**
-	 * This layout manager ensures that the ImageComponent and all the overlays fill
-	 * the container exactly.
+	 * @return the theImage
 	 */
-	private class OverlayLayout implements LayoutManager {
-
-		@Override
-		public void addLayoutComponent(String name, Component comp) {
-		}
-
-		@Override
-		public void removeLayoutComponent(Component comp) {
-		}
-
-		@Override
-		public Dimension preferredLayoutSize(Container parent) {
-			return theImage.getPreferredSize();
-		}
-
-		@Override
-		public Dimension minimumLayoutSize(Container parent) {
-			return theImage.getMinimumSize();
-		}
-
-		@Override
-		public void layoutContainer(Container parent) {
-			for (int i = 0; i < parent.getComponentCount(); i++) {
-				parent.getComponent(i).setBounds(0, 0, parent.getWidth(), parent.getHeight());
-			}
-		}
-
-	}
-
-	private class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
-
-		@Override
-		public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
-			return 10;
-		}
-
-		@Override
-		public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
-			return 50;
-		}
-
-		/*
-		 * The getScrollableTracksViewportXxx functions below are used by
-		 * javax.swing.ScrollPaneLayout to determine whether the scroll bars should be
-		 * visible; so these need to be implemented.
-		 */
-		@Override
-		public boolean getScrollableTracksViewportWidth() {
-			return theImage.getResizeStrategy() == ResizeStrategy.SHRINK_TO_FIT
-					|| theImage.getResizeStrategy() == ResizeStrategy.RESIZE_TO_FIT;
-		}
-
-		@Override
-		public boolean getScrollableTracksViewportHeight() {
-			return theImage.getResizeStrategy() == ResizeStrategy.SHRINK_TO_FIT
-					|| theImage.getResizeStrategy() == ResizeStrategy.RESIZE_TO_FIT;
-		}
-
-		/*
-		 * The getPreferredScrollableViewportSize does not seem to be used.
-		 */
-		@Override
-		public Dimension getPreferredScrollableViewportSize() {
-			if (theImage.getResizeStrategy() == ResizeStrategy.NO_RESIZE)
-				return getPreferredSize();
-			else
-				return ((JViewport) javax.swing.SwingUtilities.getAncestorOfClass(JViewport.class, this)).getSize();
-		}
+	public ImageComponent getTheImage() {
+		return theImage;
 	}
 }

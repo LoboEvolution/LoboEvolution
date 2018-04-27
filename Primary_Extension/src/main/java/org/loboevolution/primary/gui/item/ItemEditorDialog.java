@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.gui;
+package org.loboevolution.primary.gui.item;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -26,16 +26,14 @@ import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
+
+import org.loboevolution.primary.gui.AbstractItemEditor;
 
 /**
  * The Class ItemEditorDialog.
@@ -102,17 +100,15 @@ public class ItemEditorDialog<T> extends JDialog {
 		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
 		this.captionLabel.setAlignmentX(0.0f);
 		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
-		this.okButton.setAction(new OkAction());
+		this.okButton.setAction(new OkAction<T>(this));
 		this.okButton.setText("OK");
-		this.cancelButton.setAction(new CancelAction());
+		this.cancelButton.setAction(new CancelAction<T>(this));
 		this.cancelButton.setText("Cancel");
-
-		// this.editor.setBorder(new BevelBorder(BevelBorder.RAISED));
 
 		Box rootBox = new Box(BoxLayout.Y_AXIS);
 		rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
 		rootBox.add(this.captionLabel);
-		rootBox.add(this.editor);
+		rootBox.add(this.getEditor());
 		rootBox.add(this.createButtonPanel());
 
 		Container contentPane = this.getContentPane();
@@ -137,7 +133,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	 *            the new item
 	 */
 	public void setItem(T item) {
-		this.editor.setItem(item);
+		this.getEditor().setItem(item);
 	}
 
 	/**
@@ -167,51 +163,21 @@ public class ItemEditorDialog<T> extends JDialog {
 		return this.resultingItem;
 	}
 
+	
+
 	/**
-	 * The Class OkAction.
+	 * @return the editor
 	 */
-	private class OkAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			try {
-				editor.validateItem();
-			} catch (ValidationException ve) {
-				JOptionPane.showMessageDialog(ItemEditorDialog.this, ve);
-				return;
-			}
-			resultingItem = editor.getItem();
-			ItemEditorDialog.this.dispose();
-		}
+	public AbstractItemEditor<T> getEditor() {
+		return editor;
 	}
 
+
+
 	/**
-	 * The Class CancelAction.
+	 * @param resultingItem the resultingItem to set
 	 */
-	private class CancelAction extends AbstractAction {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
-		 * ActionEvent)
-		 */
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			resultingItem = null;
-			ItemEditorDialog.this.dispose();
-		}
+	public void setResultingItem(T resultingItem) {
+		this.resultingItem = resultingItem;
 	}
 }

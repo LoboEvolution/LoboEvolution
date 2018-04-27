@@ -18,20 +18,32 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.gui;
+package org.loboevolution.primary.gui.bookmarks;
 
-/**
- * A factory for creating ItemEditor objects.
- *
- * @param <T>
- *            the generic type
- */
-public interface ItemEditorFactory<T> {
+import java.awt.event.ActionEvent;
 
-	/**
-	 * Creates a new ItemEditor object.
-	 *
-	 * @return the abstract item editor
+import javax.swing.AbstractAction;
+
+public class CancelAction extends AbstractAction{
+
+	/** The Constant serialVersionUID. */
+	private static final long serialVersionUID = 1L;
+	
+	private AddBookmarkDialog add;
+	
+	public CancelAction(AddBookmarkDialog add) {
+		this.add = add;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
+	 * ActionEvent)
 	 */
-	AbstractItemEditor<T> createItemEditor();
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		add.setBookmarkInfo(null);
+		add.dispose();
+	}
 }

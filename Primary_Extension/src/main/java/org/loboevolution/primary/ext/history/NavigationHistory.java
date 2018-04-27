@@ -21,7 +21,7 @@
 /*
  * Created on Jun 6, 2005
  */
-package org.loboevolution.primary.ext;
+package org.loboevolution.primary.ext.history;
 
 import java.io.IOException;
 import java.io.Serializable;

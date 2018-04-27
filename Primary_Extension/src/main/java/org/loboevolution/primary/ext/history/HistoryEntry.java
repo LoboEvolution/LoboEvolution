@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.ext;
+package org.loboevolution.primary.ext.history;
 
 import java.net.URL;
 
