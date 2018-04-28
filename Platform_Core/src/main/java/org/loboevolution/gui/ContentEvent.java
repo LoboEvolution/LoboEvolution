@@ -34,7 +34,7 @@ public class ContentEvent extends EventObject {
 	private static final long serialVersionUID = 1L;
 
 	/** The content. */
-	private final ComponentContent content;
+	private final transient ComponentContent content;
 
 	/** The response. */
 	private final ClientletResponse response;

@@ -41,7 +41,7 @@ import org.loboevolution.primary.info.SettingsInfo;
  */
 public class LocalTreeSelectionListener implements TreeSelectionListener {
 	
-	private PreferencesDialog prefer;
+	private transient PreferencesDialog prefer;
 
 	public LocalTreeSelectionListener(PreferencesDialog prefer) {
 		this.prefer = prefer;

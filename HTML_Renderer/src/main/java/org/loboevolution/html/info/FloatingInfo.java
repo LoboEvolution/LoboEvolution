@@ -39,7 +39,7 @@ public class FloatingInfo implements Serializable {
 	private int shiftY;
 
 	/** The floats. */
-	private ExportableFloat[] floats;
+	private transient ExportableFloat[] floats;
 
 	/**
 	 * Instantiates a Float.valueOfing info.

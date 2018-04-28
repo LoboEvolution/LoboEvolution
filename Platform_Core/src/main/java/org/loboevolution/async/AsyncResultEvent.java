@@ -39,7 +39,7 @@ public class AsyncResultEvent<Tresult> extends EventObject {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	/** The result. */
-	private final Tresult result;
+	private final transient Tresult result;
 
 	/**
 	 * Instance constructor.

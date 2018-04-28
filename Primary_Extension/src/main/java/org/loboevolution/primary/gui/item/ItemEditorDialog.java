@@ -56,7 +56,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	private final JButton cancelButton = new JButton();
 
 	/** The editor. */
-	private final AbstractItemEditor<T> editor;
+	private final transient AbstractItemEditor<T> editor;
 	
 	/** The resulting item. */
 	private transient T resultingItem;

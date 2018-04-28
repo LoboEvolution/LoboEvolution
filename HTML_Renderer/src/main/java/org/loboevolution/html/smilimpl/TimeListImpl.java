@@ -40,12 +40,11 @@ public class TimeListImpl implements TimeList {
 
 	@Override
 	public Time item(int index) {
-		Time time = null;
-		try {
-			time = this.times.get(index);
-		} catch (IndexOutOfBoundsException e) {
-			// Do nothing and return null
+		int size = this.times.size();
+		if (size > index && index > -1) {
+			return this.times.get(index);
+		} else {
+			return null;
 		}
-		return time;
 	}
 }

@@ -43,8 +43,8 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	protected static final Logger logger = LogManager.getLogger(SVGAnimateImpl.class);
 	private Timer timer;
-	private SVGInfo info;
-	private RUIControl ruicontrol;
+	private transient SVGInfo info;
+	private transient RUIControl ruicontrol;
 	private transient SVGAnimationImpl animate;
 	private float from_xml;
 	private float to_xml;

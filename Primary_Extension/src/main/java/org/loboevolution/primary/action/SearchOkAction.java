@@ -39,7 +39,7 @@ public class SearchOkAction extends AbstractAction {
 	private final transient FormField tagsField;
 
 	/** The search. */
-	private SearchDialog search;
+	private transient SearchDialog search;
 
 	public SearchOkAction(FormField tagsField, SearchDialog search) {
 		this.tagsField = tagsField;

@@ -39,7 +39,7 @@ public class PreferencesPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	/** The ui. */
-	private AbstractSettingsUI setting;
+	private transient AbstractSettingsUI setting;
 
 	/**
 	 * Instantiates a new preferences panel.

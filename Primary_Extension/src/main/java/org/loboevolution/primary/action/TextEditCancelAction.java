@@ -35,7 +35,7 @@ public class TextEditCancelAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The search. */
-	private SimpleTextEditDialog search;
+	private transient SimpleTextEditDialog search;
 
 	public TextEditCancelAction(SimpleTextEditDialog search) {
 		this.search = search;

@@ -38,7 +38,7 @@ public class OpenFolderAction extends AbstractAction {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(OpenFolderAction.class);
 	
-	private DownloadDialog download;
+	private transient DownloadDialog download;
 	
 	public OpenFolderAction(DownloadDialog download) {
 		this.download = download;

@@ -44,7 +44,7 @@ public class LRUCache implements java.io.Serializable {
 	/** The approx max size. */
 	private int approxMaxSize;
 	/** The cache map. */
-	private final Map<Object, OrderedValue> cacheMap = new HashMap<Object, OrderedValue>();
+	private final transient Map<Object, OrderedValue> cacheMap = new HashMap<Object, OrderedValue>();
 	/** The removal event. */
 	private volatile transient EventDispatch2 removalEvent;
 	/**

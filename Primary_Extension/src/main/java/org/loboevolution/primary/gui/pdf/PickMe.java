@@ -41,7 +41,7 @@ public class PickMe extends JFrame {
 	/** The mygd. */
 	private transient GraphicsDevice mygd;
 	
-	private FullScreenWindow full;
+	private transient FullScreenWindow full;
 
 	/**
 	 * Creates the PickMe button on a particular display.

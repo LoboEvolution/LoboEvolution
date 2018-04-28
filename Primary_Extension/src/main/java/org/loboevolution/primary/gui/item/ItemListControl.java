@@ -45,7 +45,7 @@ public class ItemListControl<T> extends JComponent {
 	private final JComboBox<T> comboBox;
 
 	/** The item editor factory. */
-	private final ItemEditorFactory<T> itemEditorFactory;
+	private final transient ItemEditorFactory<T> itemEditorFactory;
 
 	/** The edit list caption. */
 	private String editListCaption;

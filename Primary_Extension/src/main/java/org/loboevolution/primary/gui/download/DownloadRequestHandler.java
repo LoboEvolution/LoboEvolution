@@ -47,7 +47,7 @@ public class DownloadRequestHandler extends AbstractRequestHandler {
 	/** The last transfer rate. */
 	private double lastTransferRate = Double.NaN;
 
-	private DownloadDialog download;
+	private transient DownloadDialog download;
 
 	/**
 	 * Instantiates a new download request handler.

@@ -33,7 +33,7 @@ public class StopException extends Exception {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	/** The element. */
-	private final Element element;
+	private transient final Element element;
 
 	/**
 	 * Instantiates a new stop exception.

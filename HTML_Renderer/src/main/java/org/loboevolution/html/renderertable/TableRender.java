@@ -33,7 +33,11 @@ import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 
-public class TableRender implements HtmlAttributeProperties, CSSValuesProperties {
+public final class TableRender implements HtmlAttributeProperties, CSSValuesProperties {
+	
+	private TableRender() {
+		super();
+	}
 
 	/**
 	 * Gets the width length.

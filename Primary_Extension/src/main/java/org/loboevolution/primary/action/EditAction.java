@@ -40,7 +40,7 @@ public class EditAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The control. */
-	private StringListControl control;
+	private transient StringListControl control;
 
 	public EditAction(StringListControl control) {
 		this.control = control;

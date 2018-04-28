@@ -61,7 +61,7 @@ public class LayeredImageView {
 		if (overlay == null)
 			throw new NullPointerException();
 		for (Component c : layeredPane.getComponents()) {
-			if (c instanceof OverlayComponent && ((OverlayComponent) c).overlay == overlay) {
+			if (c instanceof OverlayComponent && ((OverlayComponent) c).getOverlay() == overlay) {
 				overlay.removeOverlayComponent((OverlayComponent) c);
 				layeredPane.remove(c);
 				layeredPane.revalidate();

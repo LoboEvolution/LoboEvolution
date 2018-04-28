@@ -33,7 +33,7 @@ public class SizeInfo implements Serializable {
 	private static final long serialVersionUID = 3550617662873087308L;
 
 	/** The html length. */
-	private HtmlLength htmlLength;
+	private transient HtmlLength htmlLength;
 
 	/** The actual size. */
 	private int actualSize;

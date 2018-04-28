@@ -45,7 +45,7 @@ public class AssociatedSettings implements Serializable {
 	private static final AssociatedSettings instance;
 	
 	/** The user name by host. */
-	private final LRUCache userNameByHost = new LRUCache(500);
+	private final transient LRUCache userNameByHost = new LRUCache(500);
 
 	static {
 		AssociatedSettings ins = null;

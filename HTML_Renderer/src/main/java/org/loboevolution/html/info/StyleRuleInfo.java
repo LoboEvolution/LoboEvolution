@@ -40,7 +40,7 @@ public class StyleRuleInfo implements Serializable {
 	private static final long serialVersionUID = 9165715430607111555L;
 
 	/** The style rule. */
-	private CSSStyleRule styleRule;
+	private transient CSSStyleRule styleRule;
 
 	/** The ancestor selectors. */
 	private final ArrayList<SelectorMatcher> ancestorSelectors;

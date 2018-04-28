@@ -35,7 +35,7 @@ public class DownloadRunnable implements Runnable {
 	/** The handler. */
 	private final RequestHandler handler;
 	
-	private DownloadDialog download;
+	private transient DownloadDialog download;
 
 	/**
 	 * Instantiates a new download runnable.

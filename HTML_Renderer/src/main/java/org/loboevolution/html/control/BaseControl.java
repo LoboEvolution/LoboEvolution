@@ -51,10 +51,10 @@ public abstract class BaseControl extends JComponent implements UIControl, HtmlA
 	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
 
 	/** The control element. */
-	protected final HTMLElementImpl controlElement;
+	protected final transient HTMLElementImpl controlElement;
 
 	/** The ruicontrol. */
-	protected RUIControl ruicontrol;
+	protected transient RUIControl ruicontrol;
 
 	/**
 	 * Instantiates a new base control.

@@ -35,7 +35,7 @@ public class ImageInfo implements Serializable {
 	private static final long serialVersionUID = -7078463952419036104L;
 
 	/** The image event. */
-	public ImageEvent imageEvent;
+	public transient ImageEvent imageEvent;
 
 	/** The loaded. */
 	public boolean loaded;

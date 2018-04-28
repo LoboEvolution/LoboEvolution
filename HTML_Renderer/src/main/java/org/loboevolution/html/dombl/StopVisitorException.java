@@ -32,7 +32,7 @@ public class StopVisitorException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	/** The tag. */
-	private final Object tag;
+	private final transient Object tag;
 
 	/**
 	 * Instantiates a new stop visitor exception.

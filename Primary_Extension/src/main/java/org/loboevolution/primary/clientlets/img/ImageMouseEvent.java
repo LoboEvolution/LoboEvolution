@@ -31,7 +31,7 @@ import java.util.EventObject;
  */
 public class ImageMouseEvent extends EventObject {
 	private static final long serialVersionUID = 1L;
-	private BufferedImage image;
+	private transient BufferedImage image;
 	private int x, y;
 	private MouseEvent orig;
 

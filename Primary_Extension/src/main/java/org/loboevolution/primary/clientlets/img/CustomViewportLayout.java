@@ -16,7 +16,7 @@ import javax.swing.JViewport;
  */
 class CustomViewportLayout implements LayoutManager {
 
-	private final ImageViewer viewer;
+	private final transient ImageViewer viewer;
 
 	public CustomViewportLayout(ImageViewer viewer) {
 		this.viewer = viewer;

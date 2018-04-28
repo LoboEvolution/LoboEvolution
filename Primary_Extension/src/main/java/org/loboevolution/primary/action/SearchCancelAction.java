@@ -35,7 +35,7 @@ public class SearchCancelAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The search. */
-	private SearchDialog search;
+	private transient SearchDialog search;
 
 	public SearchCancelAction(SearchDialog search) {
 		this.search = search;

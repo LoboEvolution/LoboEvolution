@@ -29,7 +29,7 @@ public class CloseAction extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	private DownloadDialog download;
+	private transient DownloadDialog download;
 	
 	public CloseAction(DownloadDialog download) {
 		this.download = download;

@@ -58,7 +58,7 @@ public class BorderInfo implements Serializable {
 	private Color rightColor;
 
 	/** The insets. */
-	private HtmlInsets insets;
+	private transient HtmlInsets insets;
 
 	/**
 	 * Gets the top style.

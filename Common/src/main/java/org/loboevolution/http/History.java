@@ -56,7 +56,7 @@ public class History implements Serializable {
 	private final transient Map<String, TimedEntry> historyMap = new HashMap<String, TimedEntry>();
 	
 	/** The history timed set. */
-	private final SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
+	private final transient SortedSet<TimedEntry> historyTimedSet = new TreeSet<TimedEntry>();
 	
 	/** The sequence capacity. */
 	private int sequenceCapacity;

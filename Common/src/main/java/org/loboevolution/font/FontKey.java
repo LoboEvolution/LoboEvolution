@@ -239,14 +239,12 @@ public class FontKey {
 	@Override
 	public boolean equals(Object other) {
 		if (Objects.equals(other, this)) {
-			// Quick check.
 			return true;
 		}
 		FontKey ors;
-		try {
+		if(other instanceof FontKey) {
 			ors = (FontKey) other;
-		} catch (ClassCastException cce) {
-			// Not expected
+		} else {
 			return false;
 		}
 		// Note that we use String.intern() for all string fields,

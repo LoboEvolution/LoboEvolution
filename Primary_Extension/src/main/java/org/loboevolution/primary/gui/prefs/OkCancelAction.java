@@ -32,7 +32,7 @@ public class OkCancelAction extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	private PreferencesDialog prefer;
+	private transient PreferencesDialog prefer;
 
 	public OkCancelAction(PreferencesDialog prefer) {
 		this.prefer = prefer;

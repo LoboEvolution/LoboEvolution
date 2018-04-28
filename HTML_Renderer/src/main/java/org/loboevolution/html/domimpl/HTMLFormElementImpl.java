@@ -391,8 +391,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	public void setAutocomplete(boolean autocomplete) {
-		this.setAttribute(AUTOCOMPLETE,
-				autocomplete ? AUTOCOMPLETE : null);
+		this.setAttribute(AUTOCOMPLETE, autocomplete ? AUTOCOMPLETE : null);
 
 	}
 

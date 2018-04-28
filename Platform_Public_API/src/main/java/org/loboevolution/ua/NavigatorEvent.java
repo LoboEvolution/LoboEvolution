@@ -29,7 +29,7 @@ public class NavigatorEvent extends java.util.EventObject {
 	private static final long serialVersionUID = 1L;
 
 	/** The clientlet frame. */
-	private final NavigatorFrame clientletFrame;
+	private final transient NavigatorFrame clientletFrame;
 
 	/** The event type. */
 	private final NavigatorEventType eventType;

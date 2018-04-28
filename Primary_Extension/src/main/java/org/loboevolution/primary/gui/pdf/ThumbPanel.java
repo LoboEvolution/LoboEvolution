@@ -55,7 +55,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	private static final long serialVersionUID = -6761217072379594185L;
 
 	/** The PDFFile being displayed. */
-	private PDFFile file;
+	private transient PDFFile file;
 
 	/** Array of images, one per page in the file. */
 	private transient Image images[];
@@ -98,7 +98,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	private boolean defaultNotSet = true;
 
 	/** The PageChangeListener that is listening for page changes. */
-	private PageChangeListener listener;
+	private transient PageChangeListener listener;
 
 	/**
 	 * Creates a new ThumbPanel based on a PDFFile. The file may be null.

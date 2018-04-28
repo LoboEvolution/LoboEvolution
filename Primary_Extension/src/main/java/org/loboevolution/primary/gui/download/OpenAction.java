@@ -37,7 +37,7 @@ public class OpenAction extends AbstractAction {
 	
 	private static final Logger logger = LogManager.getLogger(OpenAction.class);
 	
-	private DownloadDialog download;
+	private transient DownloadDialog download;
 	
 	public OpenAction(DownloadDialog download) {
 		this.download = download;

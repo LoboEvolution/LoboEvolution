@@ -129,7 +129,7 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	private transient NavigatorProgressEvent progressEvent;
 	
 	/** The content properties. */
-	private Map<String, Object> contentProperties = null;
+	private transient Map<String, Object> contentProperties = null;
 
 	/**
 	 * Constructs a FramePanel specifying a "window" ID.

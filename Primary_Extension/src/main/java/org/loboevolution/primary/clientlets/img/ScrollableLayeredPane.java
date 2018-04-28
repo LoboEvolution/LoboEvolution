@@ -30,7 +30,7 @@ import javax.swing.Scrollable;
 public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	
 	private static final long serialVersionUID = 1L;
-	private LayeredImageView layeredImageView;
+	private transient LayeredImageView layeredImageView;
 	
 
 	public ScrollableLayeredPane(LayeredImageView layeredImageView) {

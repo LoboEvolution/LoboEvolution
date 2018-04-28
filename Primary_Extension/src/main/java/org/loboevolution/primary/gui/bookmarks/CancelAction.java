@@ -29,7 +29,7 @@ public class CancelAction extends AbstractAction{
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	private AddBookmarkDialog add;
+	private transient AddBookmarkDialog add;
 	
 	public CancelAction(AddBookmarkDialog add) {
 		this.add = add;

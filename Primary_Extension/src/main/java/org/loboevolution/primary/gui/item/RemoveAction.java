@@ -34,7 +34,7 @@ public class RemoveAction<T> extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	private ItemListControl<T> item;
+	private transient ItemListControl<T> item;
 
 	public RemoveAction(ItemListControl<T> item) {
 		this.item = item;

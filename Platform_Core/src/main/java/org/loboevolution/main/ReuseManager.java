@@ -45,7 +45,7 @@ import org.loboevolution.store.StorageManager;
 /**
  * Class in charge of allowing mutiple browser launches to share a JVM.
  */
-public class ReuseManager {
+public final class ReuseManager {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ReuseManager.class);
@@ -62,8 +62,6 @@ public class ReuseManager {
 	private ReuseManager() {
 		super();
 	}
-
-	
 
 	/**
 	 * Gets the Constant instance.

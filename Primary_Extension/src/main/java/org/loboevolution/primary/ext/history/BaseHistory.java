@@ -53,7 +53,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	private final transient Map<String, TimedEntry<T>> historyMap = new HashMap<String, TimedEntry<T>>();
 
 	/** The history timed set. */
-	private final SortedSet<TimedEntry<T>> historyTimedSet = new TreeSet<TimedEntry<T>>();
+	private final transient SortedSet<TimedEntry<T>> historyTimedSet = new TreeSet<TimedEntry<T>>();
 
 	/** The common entries capacity. */
 	private final int commonEntriesCapacity = 1000;

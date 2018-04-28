@@ -41,7 +41,7 @@ public class FormPanel extends JComponent {
 	private static final long serialVersionUID = 1L;
 
 	/** The fields. */
-	private final Collection<FormField> fields = new ArrayList<FormField>();
+	private final transient Collection<FormField> fields = new ArrayList<FormField>();
 
 	/** The fields invalid. */
 	private boolean fieldsInvalid = false;

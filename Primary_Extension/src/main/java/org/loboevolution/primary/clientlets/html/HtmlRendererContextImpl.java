@@ -70,7 +70,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	private static final Map<NavigatorFrame, WeakReference<HtmlRendererContextImpl>> weakAssociation = new WeakHashMap<NavigatorFrame, WeakReference<HtmlRendererContextImpl>>();
 
 	/** The clientlet frame. */
-	private final NavigatorFrame clientletFrame;
+	private final transient NavigatorFrame clientletFrame;
 
 	/** The html panel. */
 	private final HtmlPanel htmlPanel;

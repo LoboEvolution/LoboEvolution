@@ -39,7 +39,7 @@ public class TextEditOkAction extends AbstractAction {
 	private final JTextArea textArea;
 
 	/** The search. */
-	private SimpleTextEditDialog search;
+	private transient SimpleTextEditDialog search;
 
 	public TextEditOkAction(JTextArea textArea, SimpleTextEditDialog search) {
 		this.textArea = textArea;

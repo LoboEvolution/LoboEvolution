@@ -49,15 +49,18 @@ import javax.swing.event.ChangeListener;
 class ImageComponent extends JComponent {
 	
 	private static final long serialVersionUID = 1L;
-	private ResizeStrategy resizeStrategy = ResizeStrategy.SHRINK_TO_FIT;
-	private BufferedImage image;
+	private transient ResizeStrategy resizeStrategy = ResizeStrategy.SHRINK_TO_FIT;
+	private transient BufferedImage image;
 	private boolean pixelatedZoom = false;
-	private Object interpolationType = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
+	private transient Object interpolationType = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
 	private double zoomFactor = 1;
-	private final List<ImageMouseMotionListener> moveListeners = new ArrayList<ImageMouseMotionListener>(4);
-	private final List<ImageMouseClickListener> clickListeners = new ArrayList<ImageMouseClickListener>(4);
-	private final MouseEventTranslator mouseEventTranslator = new MouseEventTranslator(this);
-	private final PaintManager paintManager = new PaintManager(this);
+	private final transient List<ImageMouseMotionListener> moveListeners = new ArrayList<ImageMouseMotionListener>(4);
+	private final transient List<ImageMouseClickListener> clickListeners = new ArrayList<ImageMouseClickListener>(4);
+	private final transient MouseEventTranslator mouseEventTranslator = new MouseEventTranslator(this);
+	private final transient PaintManager paintManager = new PaintManager(this);
+	private Rescroller rescroller = new Rescroller();
+	private final PropertyChangeSupport propertyChangeSupport;
+	private final transient ImageViewer viewer;
 
 	/*
 	 * Handles repositioning the scroll pane when the image is resized so that the
@@ -91,12 +94,7 @@ class ImageComponent extends JComponent {
 		}
 
 	}
-
-	private Rescroller rescroller = new Rescroller();
-
-	private final PropertyChangeSupport propertyChangeSupport;
-	private final ImageViewer viewer;
-
+	
 	public ImageComponent(ImageViewer viewer, PropertyChangeSupport propertyChangeSupport) {
 		this.viewer = viewer;
 		this.propertyChangeSupport = propertyChangeSupport;

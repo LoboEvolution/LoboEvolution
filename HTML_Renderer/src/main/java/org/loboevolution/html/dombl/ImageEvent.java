@@ -32,7 +32,7 @@ public class ImageEvent extends EventObject {
 	private static final long serialVersionUID = 1101831272894733276L;
 
 	/** The image. */
-	public final Image image;
+	public final transient Image image;
 
 	/**
 	 * Instantiates a new image event.

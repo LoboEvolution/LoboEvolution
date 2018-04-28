@@ -32,7 +32,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author Kazó Csaba
  */
 public class DefaultViewerPopup extends JPopupMenu {
-	private final ImageViewer viewer;
+
+	private static final long serialVersionUID = 1L;
+	private final transient ImageViewer viewer;
 	/*
 	 * These will only be accessed from the event dispatch thread so using a static
 	 * instance to share the current directory across components is fine.
@@ -101,12 +103,10 @@ public class DefaultViewerPopup extends JPopupMenu {
 		});
 
 		class CustomZoomEntry {
-			String label;
 			double value;
 			JRadioButtonMenuItem menuItem;
 
 			private CustomZoomEntry(String label, double value) {
-				this.label = label;
 				this.value = value;
 				menuItem = new JRadioButtonMenuItem(label,
 						viewer.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM && viewer.getZoomFactor() == value);

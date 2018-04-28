@@ -36,7 +36,7 @@ public class OverflowException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	/** The renderables. */
-	private final Collection renderables;
+	private final transient Collection renderables;
 
 	/**
 	 * Instantiates a new overflow exception.

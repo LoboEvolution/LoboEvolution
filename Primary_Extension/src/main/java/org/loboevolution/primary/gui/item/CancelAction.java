@@ -33,7 +33,7 @@ public class CancelAction<T> extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	private ItemEditorDialog<T> item;
+	private transient ItemEditorDialog<T> item;
 
 	public CancelAction(ItemEditorDialog<T> item) {
 		this.item = item;

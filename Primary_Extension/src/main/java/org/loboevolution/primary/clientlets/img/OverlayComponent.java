@@ -34,8 +34,8 @@ import javax.swing.JComponent;
 public class OverlayComponent extends JComponent {
 	
 	private static final long serialVersionUID = 1L;
-	Overlay overlay;
-	ImageComponent theImage;
+	private transient Overlay overlay;
+	private transient ImageComponent theImage;
 
 	public OverlayComponent(Overlay overlay, ImageComponent image) {
 		this.overlay = overlay;
@@ -55,5 +55,33 @@ public class OverlayComponent extends JComponent {
 	@Override
 	public Dimension getMaximumSize() {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
+	}
+
+	/**
+	 * @return the overlay
+	 */
+	public Overlay getOverlay() {
+		return overlay;
+	}
+
+	/**
+	 * @param overlay the overlay to set
+	 */
+	public void setOverlay(Overlay overlay) {
+		this.overlay = overlay;
+	}
+
+	/**
+	 * @return the theImage
+	 */
+	public ImageComponent getTheImage() {
+		return theImage;
+	}
+
+	/**
+	 * @param theImage the theImage to set
+	 */
+	public void setTheImage(ImageComponent theImage) {
+		this.theImage = theImage;
 	}
 }
