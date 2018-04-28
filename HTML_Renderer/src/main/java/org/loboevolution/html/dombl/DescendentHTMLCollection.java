@@ -168,9 +168,10 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 	public Node item(int index) {
 		synchronized (this.treeLock) {
 			this.ensurePopulatedImpl();
-			try {
+			int size = this.itemsByIndex.size();
+			if (size > index && index> -1) {
 				return this.itemsByIndex.get(index);
-			} catch (IndexOutOfBoundsException iob) {
+			} else {
 				return null;
 			}
 		}

@@ -377,14 +377,14 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 			SizeInfo rowSizeInfo = new SizeInfo();
 			rowSizes[i] = rowSizeInfo;
 			HTMLElementImpl rowElement;
-			try {
+			
+			int size = rowElements.size();
+			if (size > i) {
 				rowElement = rowElements.get(i);
-				// Possible rowElement is null because TD does not have TR
-				// parent
-			} catch (IndexOutOfBoundsException iob) {
-				// Possible if rowspan expands beyond that
+			} else {
 				rowElement = null;
 			}
+			
 			// TODO: TR.height an IE quirk?
 			String rowHeightText = rowElement == null ? null : rowElement.getAttribute(HEIGHT);
 			HtmlLength rowHeightLength = null;

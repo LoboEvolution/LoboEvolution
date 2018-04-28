@@ -117,9 +117,10 @@ public class DOMAttrMapImpl extends AbstractScriptableDelegate implements NamedN
 	 */
 	@Override
 	public Node item(int index) {
-		try {
+		int size = this.attributeList.size();
+		if (size > index && index > -1) {
 			return (Node) this.attributeList.get(index);
-		} catch (IndexOutOfBoundsException iob) {
+		} else {
 			return null;
 		}
 	}

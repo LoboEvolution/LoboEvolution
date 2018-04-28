@@ -46,9 +46,10 @@ public class NavigationEngine {
 	 * @return the current entry
 	 */
 	public NavigationEntry getCurrentEntry() {
-		try {
+		int size = this.history.size();
+		if (size > this.currentIndex && this.currentIndex > -1) {
 			return this.history.get(this.currentIndex);
-		} catch (IndexOutOfBoundsException iob) {
+		} else {
 			return null;
 		}
 	}

@@ -413,11 +413,15 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	public Node getChildAtIndex(int index) {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
-			try {
-				return nl == null ? null : nl.get(index);
-			} catch (IndexOutOfBoundsException iob) {
+			if (nl == null)
 				return null;
-			}
+		}
+
+		int size = this.nodeList.size();
+		if (size > index && index > -1) {
+			return (Node) this.nodeList.get(index);
+		} else {
+			return null;
 		}
 	}
 
@@ -735,9 +739,14 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	public Node getFirstChild() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
-			try {
-				return nl == null ? null : nl.get(0);
-			} catch (IndexOutOfBoundsException iob) {
+			if (nl == null)
+				return null;
+
+			int size = nl.size();
+			int index = 0;
+			if (size > index && index > -1) {
+				return nl.get(0);
+			} else {
 				return null;
 			}
 		}
@@ -752,9 +761,14 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	public Node getLastChild() {
 		synchronized (this.getTreeLock()) {
 			ArrayList<Node> nl = this.nodeList;
-			try {
-				return nl == null ? null : nl.get(nl.size() - 1);
-			} catch (IndexOutOfBoundsException iob) {
+			if(nl == null)
+				return null;
+			
+			int size = nl.size();
+			int index = size - 1;
+			if (size > index && index > -1) {
+				return nl.get(nl.size() - 1);
+			} else {
 				return null;
 			}
 		}
@@ -774,9 +788,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			if (idx == -1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "node not found");
 			}
-			try {
-				return nl.get(idx - 1);
-			} catch (IndexOutOfBoundsException iob) {
+			
+			int size = nl.size();
+			int index = idx - 1;
+			if (size > index && index > -1) {
+				return nl.get(index);
+			} else {
 				return null;
 			}
 		}
@@ -796,9 +813,12 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 			if (idx == -1) {
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "node not found");
 			}
-			try {
-				return nl.get(idx + 1);
-			} catch (IndexOutOfBoundsException iob) {
+
+			int size = nl.size();
+			int index = idx + 1;
+			if (size > index && index > -1) {
+				return nl.get(index);
+			} else {
 				return null;
 			}
 		}

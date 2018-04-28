@@ -248,12 +248,9 @@ public class TableRender implements HtmlAttributeProperties, CSSValuesProperties
 		for (int y = 0; y < numRows; y++) {
 			ArrayList<VirtualCell> row = rows.get(y);
 			VirtualCell vc;
-			try {
+			int size = row.size();
+			if (size > index && index > -1) {
 				vc = row.get(index);
-			} catch (IndexOutOfBoundsException iob) {
-				vc = null;
-			}
-			if (vc != null) {
 				RTableCell ac = vc.getActualCell();
 				if (("eq".equals(op) && ac.getColSpan() == 1) || (">".equals(op) && ac.getColSpan() > 1)) {
 					HtmlLength vcWidthLength = vc.getWidthLength();
@@ -280,60 +277,58 @@ public class TableRender implements HtmlAttributeProperties, CSSValuesProperties
 			// SizeInfo rowSize = rowSizes[row];
 			ArrayList<VirtualCell> columns = rows.get(row);
 			VirtualCell vc = null;
-			try {
+			int sizeCol = columns.size();
+			if (sizeCol > col) {
 				vc = columns.get(col);
-			} catch (IndexOutOfBoundsException iob) {
-				vc = null;
-			}
-			RTableCell ac = vc == null ? null : vc.getActualCell();
+				RTableCell ac = vc.getActualCell();
+				if (ac != null && ac.getVirtualRow() == row) {
+					// Only process actual cells with a row
+					// beginning at the current row being processed.
+					int colSpan = ac.getColSpan();
+					if (colSpan > 1) {
+						int firstCol = ac.getVirtualColumn();
+						int cellExtras = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
+						int vcActualWidth = cellExtras;
+						for (int x = 0; x < colSpan; x++) {
+							vcActualWidth += columnSizes[firstCol + x].getActualSize();
+						}
+						// TODO: better height possible
 
-			if (ac != null && ac.getVirtualRow() == row) {
-				// Only process actual cells with a row
-				// beginning at the current row being processed.
-				int colSpan = ac.getColSpan();
-				if (colSpan > 1) {
-					int firstCol = ac.getVirtualColumn();
-					int cellExtras = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
-					int vcActualWidth = cellExtras;
-					for (int x = 0; x < colSpan; x++) {
-						vcActualWidth += columnSizes[firstCol + x].getActualSize();
-					}
-					// TODO: better height possible
+						Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
+						int vcRenderWidth = size.width;
 
-					Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
-					int vcRenderWidth = size.width;
-
-					int denominator = vcActualWidth - cellExtras;
-					int newTentativeCellWidth;
-					if (denominator > 0) {
-						newTentativeCellWidth = actualSize * (vcRenderWidth - cellExtras) / denominator;
+						int denominator = vcActualWidth - cellExtras;
+						int newTentativeCellWidth;
+						if (denominator > 0) {
+							newTentativeCellWidth = actualSize * (vcRenderWidth - cellExtras) / denominator;
+						} else {
+							newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
+						}
+						if (newTentativeCellWidth > colSize.getLayoutSize()) {
+							colSize.setLayoutSize(newTentativeCellWidth);
+						}
+						int rowSpan = ac.getRowSpan();
+						int vch = (size.height - (rowSpan - 1) * (cellSpacingY + 2 * hasBorder)) / rowSpan;
+						for (int y = 0; y < rowSpan; y++) {
+							if (rowSizes[row + y].getMinSize() < vch) {
+								rowSizes[row + y].setMinSize(vch);
+							}
+						}
 					} else {
-						newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
-					}
-					if (newTentativeCellWidth > colSize.getLayoutSize()) {
-						colSize.setLayoutSize(newTentativeCellWidth);
-					}
-					int rowSpan = ac.getRowSpan();
-					int vch = (size.height - (rowSpan - 1) * (cellSpacingY + 2 * hasBorder)) / rowSpan;
-					for (int y = 0; y < rowSpan; y++) {
-						if (rowSizes[row + y].getMinSize() < vch) {
-							rowSizes[row + y].setMinSize(vch);
+						// TODO: better height possible
+						Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
+						if (size.width > colSize.getLayoutSize()) {
+							colSize.setLayoutSize(size.width);
 						}
-					}
-				} else {
-					// TODO: better height possible
-					Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
-					if (size.width > colSize.getLayoutSize()) {
-						colSize.setLayoutSize(size.width);
-					}
-					int rowSpan = ac.getRowSpan();
-					int vch = (size.height - (rowSpan - 1) * (cellSpacingY + 2 * hasBorder)) / rowSpan;
-					for (int y = 0; y < rowSpan; y++) {
-						if (rowSizes[row + y].getMinSize() < vch) {
-							rowSizes[row + y].setMinSize(vch);
+						int rowSpan = ac.getRowSpan();
+						int vch = (size.height - (rowSpan - 1) * (cellSpacingY + 2 * hasBorder)) / rowSpan;
+						for (int y = 0; y < rowSpan; y++) {
+							if (rowSizes[row + y].getMinSize() < vch) {
+								rowSizes[row + y].setMinSize(vch);
+							}
 						}
-					}
 
+					}
 				}
 			}
 			row++;

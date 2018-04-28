@@ -34,7 +34,7 @@ import org.w3c.dom.NodeList;
  * The Class DOMNodeListImpl.
  */
 public class DOMNodeListImpl extends AbstractScriptableDelegate implements NodeList {
-	// Note: class must be public for reflection to work.
+
 	/** The node list. */
 	private final ArrayList nodeList = new ArrayList();
 
@@ -66,9 +66,10 @@ public class DOMNodeListImpl extends AbstractScriptableDelegate implements NodeL
 	 */
 	@Override
 	public Node item(int index) {
-		try {
-			return (Node) this.nodeList.get(index);
-		} catch (IndexOutOfBoundsException iob) {
+		int size = this.nodeList.size();
+		if (size > index && index > -1) {
+			return (Node)this.nodeList.get(index);
+		} else {
 			return null;
 		}
 	}
