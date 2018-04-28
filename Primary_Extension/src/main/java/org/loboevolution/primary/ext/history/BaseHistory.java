@@ -45,7 +45,7 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845020000200400L;
-	
+
 	/** The history sorted set. */
 	private final SortedSet<String> historySortedSet = new TreeSet<String>();
 
@@ -87,11 +87,13 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<String> getRecentItems(int maxNumItems) {
 		synchronized (this) {
 			Collection<String> items = new LinkedList<String>();
-			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
-			int count = 0;
-			while (i.hasNext() && count++ < maxNumItems) {
-				TimedEntry<T> entry = i.next();
-				items.add(entry.getValue());
+			if (historyTimedSet != null) {
+				Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
+				int count = 0;
+				while (i.hasNext() && count++ < maxNumItems) {
+					TimedEntry<T> entry = i.next();
+					items.add(entry.getValue());
+				}
 			}
 			return items;
 		}
@@ -107,11 +109,13 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<T> getRecentItemInfo(int maxNumItems) {
 		synchronized (this) {
 			Collection<T> items = new LinkedList<T>();
-			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
-			int count = 0;
-			while (i.hasNext() && count++ < maxNumItems) {
-				TimedEntry<T> entry = i.next();
-				items.add(entry.getItemInfo());
+			if (historyTimedSet != null) {
+				Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
+				int count = 0;
+				while (i.hasNext() && count++ < maxNumItems) {
+					TimedEntry<T> entry = i.next();
+					items.add(entry.getItemInfo());
+				}
 			}
 			return items;
 		}
@@ -127,19 +131,21 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<HostEntry> getRecentHostEntries(int maxNumItems) {
 		synchronized (this) {
 			Collection<HostEntry> items = new LinkedList<HostEntry>();
-			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
-			Set<String> hosts = new HashSet<String>();
-			while (i.hasNext()) {
-				TimedEntry<T> entry = i.next();
-				String host = entry.getUrl().getHost();
-				if (Strings.isBlank(host) && !hosts.contains(host)) {
+			if (historyTimedSet != null) {
+				Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
+				Set<String> hosts = new HashSet<String>();
+				while (i.hasNext()) {
+					TimedEntry<T> entry = i.next();
+					String host = entry.getUrl().getHost();
+					if (Strings.isBlank(host) && !hosts.contains(host)) {
 
-					hosts.add(host);
-					if (hosts.size() >= maxNumItems) {
-						break;
+						hosts.add(host);
+						if (hosts.size() >= maxNumItems) {
+							break;
+						}
+
+						items.add(new HostEntry(host, entry.getTimestamp()));
 					}
-				
-					items.add(new HostEntry(host, entry.getTimestamp()));
 				}
 			}
 			return items;
@@ -154,10 +160,12 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<HistoryEntry<T>> getAllEntries() {
 		synchronized (this) {
 			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
-			while (i.hasNext()) {
-				TimedEntry<T> entry = i.next();
-				items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
+			if (historyTimedSet != null) {
+				Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
+				while (i.hasNext()) {
+					TimedEntry<T> entry = i.next();
+					items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
+				}
 			}
 			return items;
 		}
@@ -173,13 +181,15 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 	public Collection<HistoryEntry<T>> getRecentEntries(int maxNumItems) {
 		synchronized (this) {
 			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
-			while (i.hasNext()) {
-				TimedEntry<T> entry = i.next();
-				if (items.size() >= maxNumItems) {
-					break;
+			if (historyTimedSet != null) {
+				Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
+				while (i.hasNext()) {
+					TimedEntry<T> entry = i.next();
+					if (items.size() >= maxNumItems) {
+						break;
+					}
+					items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
 				}
-				items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
 			}
 			return items;
 		}
