@@ -98,10 +98,10 @@ public class CssParserTest extends JFrame {
 		super(title);
 		this.cssOutput = new HtmlPanel();
 		this.textArea =  new JTextArea();
-		createAndShowGUI(title);
+		createAndShowGUI();
 	}
 
-	private void createAndShowGUI(String title) throws HeadlessException {
+	private void createAndShowGUI() throws HeadlessException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BorderLayout());

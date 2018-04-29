@@ -34,7 +34,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class DefaultViewerPopup extends JPopupMenu {
 
 	private static final long serialVersionUID = 1L;
-	private final transient ImageViewer viewer;
+	private final ImageViewer viewer;
 	/*
 	 * These will only be accessed from the event dispatch thread so using a static
 	 * instance to share the current directory across components is fine.
@@ -51,10 +51,10 @@ public class DefaultViewerPopup extends JPopupMenu {
 	 */
 	public DefaultViewerPopup(ImageViewer imageViewer) {
 		viewer = imageViewer;
-		createAndShowGUI(imageViewer); 
+		createAndShowGUI(); 
 	}
 
-	private void createAndShowGUI(ImageViewer imageViewer) {
+	private void createAndShowGUI() {
 		
 		/** Status bar toggle **/
 
@@ -193,67 +193,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 		saveImageMenuItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (saveChooser == null) {
-					saveChooser = new JFileChooser();
-					saveChooserHelpLabel = new JLabel();
-					saveChooserHelpLabel.setText(
-							"<html>If the file name ends<br>with '.png' or '.jpg',<br>then the appropriate<br>format is used.<br>Otherwise '.png' is<br>appended to the name.");
-					saveChooserHelpLabel.setFont(saveChooserHelpLabel.getFont().deriveFont(10f));
-					saveChooserHelpButton = new JButton("?");
-					saveChooserHelpButton.setMargin(new Insets(0, 2, 0, 2));
-					saveChooserHelpButton.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							saveChooser.getAccessory().removeAll();
-							saveChooser.getAccessory().add(saveChooserHelpLabel);
-							saveChooser.revalidate();
-							saveChooser.repaint();
-						}
-					});
-					saveChooserHelpLabel.addMouseListener(new MouseAdapter() {
-
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							saveChooser.getAccessory().removeAll();
-							saveChooser.getAccessory().add(saveChooserHelpButton);
-							saveChooser.revalidate();
-							saveChooser.repaint();
-						}
-
-					});
-					saveChooser.setAccessory(new JPanel());
-					saveChooser.setDialogTitle("Save image...");
-
-					saveChooser.setFileFilter(new FileNameExtensionFilter("JPG and PNG images", "jpg", "png"));
-				}
-				// reset to show the help button with every new dialog
-				saveChooser.getAccessory().removeAll();
-				saveChooser.getAccessory().add(saveChooserHelpButton);
-				if (JFileChooser.APPROVE_OPTION == saveChooser.showSaveDialog(viewer.getComponent())) {
-					File f = saveChooser.getSelectedFile();
-					BufferedImage image = viewer.getImage();
-					if (image == null) {
-						JOptionPane.showMessageDialog(viewer.getComponent(), "No image", "Error",
-								JOptionPane.ERROR_MESSAGE);
-					} else {
-						String name = f.getName().toLowerCase();
-						try {
-							if (name.endsWith(".jpg")) {
-								ImageIO.write(image, "jpg", f);
-							} else if (name.endsWith(".png")) {
-								ImageIO.write(image, "png", f);
-							} else {
-								f = new File(f.getPath() + ".png");
-								ImageIO.write(image, "png", f);
-							}
-						} catch (IOException ex) {
-							JOptionPane.showMessageDialog(viewer.getComponent(),
-									"<html>Cannot write image to " + f.getAbsolutePath() + ":<br>" + ex.getMessage(),
-									"Error", JOptionPane.ERROR_MESSAGE);
-						}
-					}
-				}
+				saveImageAction();
 			}
 		});
 
@@ -279,6 +219,69 @@ public class DefaultViewerPopup extends JPopupMenu {
 		add(zoomMenu);
 		add(togglePixelatedZoomItem);
 		add(saveImageMenuItem);
+	}
+	
+	private synchronized void saveImageAction() {
+		if (saveChooser == null) {
+			saveChooser = new JFileChooser();
+			saveChooserHelpLabel = new JLabel();
+			saveChooserHelpLabel.setText( "<html>If the file name ends<br>with '.png' or '.jpg',<br>then the appropriate<br>format is used.<br>"
+										 + "Otherwise '.png' is<br>appended to the name.");
+			saveChooserHelpLabel.setFont(saveChooserHelpLabel.getFont().deriveFont(10f));
+			saveChooserHelpButton = new JButton("?");
+			saveChooserHelpButton.setMargin(new Insets(0, 2, 0, 2));
+			saveChooserHelpButton.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					saveChooser.getAccessory().removeAll();
+					saveChooser.getAccessory().add(saveChooserHelpLabel);
+					saveChooser.revalidate();
+					saveChooser.repaint();
+				}
+			});
+			saveChooserHelpLabel.addMouseListener(new MouseAdapter() {
+
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					saveChooser.getAccessory().removeAll();
+					saveChooser.getAccessory().add(saveChooserHelpButton);
+					saveChooser.revalidate();
+					saveChooser.repaint();
+				}
+
+			});
+			saveChooser.setAccessory(new JPanel());
+			saveChooser.setDialogTitle("Save image...");
+
+			saveChooser.setFileFilter(new FileNameExtensionFilter("JPG and PNG images", "jpg", "png"));
+		}
+		// reset to show the help button with every new dialog
+		saveChooser.getAccessory().removeAll();
+		saveChooser.getAccessory().add(saveChooserHelpButton);
+		if (JFileChooser.APPROVE_OPTION == saveChooser.showSaveDialog(viewer.getComponent())) {
+			File f = saveChooser.getSelectedFile();
+			BufferedImage image = viewer.getImage();
+			if (image == null) {
+				JOptionPane.showMessageDialog(viewer.getComponent(), "No image", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				String name = f.getName().toLowerCase();
+				try {
+					if (name.endsWith(".jpg")) {
+						ImageIO.write(image, "jpg", f);
+					} else if (name.endsWith(".png")) {
+						ImageIO.write(image, "png", f);
+					} else {
+						f = new File(f.getPath() + ".png");
+						ImageIO.write(image, "png", f);
+					}
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(viewer.getComponent(),
+							"<html>Cannot write image to " + f.getAbsolutePath() + ":<br>" + ex.getMessage(), "Error",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
 	}
 
 }

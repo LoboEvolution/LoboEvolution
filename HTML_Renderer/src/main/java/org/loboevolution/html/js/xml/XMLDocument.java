@@ -89,7 +89,7 @@ public class XMLDocument implements Document {
 	 * @param fileName
 	 *            name of in file system
 	 */
-	private void loadFile(String fileStr) {
+	private synchronized void loadFile(String fileStr) {
 		
 		String FEATURE = "";
 		try {

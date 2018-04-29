@@ -289,7 +289,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 *            the scope
 	 * @return the constructor
 	 */
-	public static Function getConstructor(String className, JavaClassWrapper classWrapper, Scriptable scope) {
+	public static Function getConstructor(String className, JavaClassWrapper classWrapper) {
 		return new JavaConstructorObject(className, classWrapper);
 	}
 
@@ -306,8 +306,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 *            the instantiator
 	 * @return the constructor
 	 */
-	public static Function getConstructor(String className, JavaClassWrapper classWrapper, Scriptable scope,
-			JavaInstantiator instantiator) {
+	public static Function getConstructor(String className, JavaClassWrapper classWrapper, JavaInstantiator instantiator) {
 		return new JavaConstructorObject(className, classWrapper, instantiator);
 	}
 

@@ -59,10 +59,10 @@ public class ItemListControl<T> extends JComponent {
 	public ItemListControl(ItemEditorFactory<T> ief) {
 		this.itemEditorFactory = ief;
 		this.comboBox = new JComboBox<T>();
-		createAndShowGUI(ief);
+		createAndShowGUI();
 	}
 	
-	private void createAndShowGUI(ItemEditorFactory<T> ief) {
+	private void createAndShowGUI() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.getComboBox().setPreferredSize(new Dimension(100, 24));
 		this.getComboBox().setEditable(false);

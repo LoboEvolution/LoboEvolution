@@ -205,7 +205,7 @@ public class FontValues extends HtmlValues {
 		return fontFamily;
 	}
 	
-	public static final String getFontStyle(String spec, RenderState parentRenderState) {
+	public static final String getFontStyle(String spec) {
 		String fontStyle = spec;
 		if (fontStyle == null && LAFSettings.getInstance().isItalic()) {
 			return ITALIC;
@@ -213,7 +213,7 @@ public class FontValues extends HtmlValues {
 		return fontStyle;
 	}
 	
-	public static String getFontWeight(String spec, RenderState parentRenderState) {
+	public static String getFontWeight(String spec) {
 		String fontWeight = spec;
 		if (fontWeight == null && LAFSettings.getInstance().isBold()) {
 			return BOLD;
@@ -221,7 +221,7 @@ public class FontValues extends HtmlValues {
 		return fontWeight;
 	}
 	
-	public static Integer getFontUnderline(String spec, RenderState parentRenderState) {
+	public static Integer getFontUnderline(String spec) {
 		String underline = spec;
 		
 		if(UNDERLINE.equals(underline)){
@@ -234,7 +234,7 @@ public class FontValues extends HtmlValues {
 		return null;
 	}
 	
-	public static boolean getFontStrikeThrough(String spec, RenderState parentRenderState) {
+	public static boolean getFontStrikeThrough(String spec) {
 		String strikethrough = spec;
 		
 		if(LINE_THROUGH.equals(strikethrough)){

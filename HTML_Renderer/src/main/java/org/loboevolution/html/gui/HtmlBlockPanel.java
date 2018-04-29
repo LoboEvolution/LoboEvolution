@@ -169,10 +169,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		this.frameContext = frameContext;
 		this.ucontext = pcontext;
 		this.rcontext = rcontext;
-		createAndShowGUI(background, opaque, pcontext, rcontext, frameContext);
+		createAndShowGUI(background, opaque);
 	}
 	
-	private void createAndShowGUI(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext) {
+	private void createAndShowGUI(Color background, boolean opaque) {
 		this.setLayout(null);
 		this.setAutoscrolls(true);
 		this.setOpaque(opaque);
@@ -197,7 +197,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				mouse.onMouseExited(e, getRblock());
+				mouse.onMouseExited(e);
 			}
 
 			@Override

@@ -25,6 +25,8 @@ import java.awt.Dimension;
 
 import javax.swing.Box.Filler;
 
+import org.loboevolution.util.gui.WrapperLayout;
+
 /**
  * A component used in conjunction with <code>BoxLayot</code>.
  *
@@ -45,11 +47,11 @@ public class FillerComponent extends Filler {
 	public FillerComponent(Component wrappedComponent, boolean forMax) {
 		super(new Dimension(0, 0), forMax ? new Dimension(0, 0) : new Dimension(Short.MAX_VALUE, Short.MAX_VALUE),
 				new Dimension(Short.MAX_VALUE, Short.MAX_VALUE));
-		createAndShowGUI(wrappedComponent, forMax);
+		createAndShowGUI(wrappedComponent);
 	}
 
-	private void createAndShowGUI(Component wrappedComponent, boolean forMax) {
-		this.setLayout(org.loboevolution.util.gui.WrapperLayout.getInstance());
+	private void createAndShowGUI(Component wrappedComponent) {
+		this.setLayout(WrapperLayout.getInstance());
 		this.add(wrappedComponent);
 	}
 

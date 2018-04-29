@@ -98,7 +98,7 @@ public class FilteredCollection implements Collection<Object> {
 		final Iterator<Object> sourceIterator = this.sourceCollection.iterator();
 		return new Iterator<Object>() {
 			private Boolean hasNext;
-			private transient Object next;
+			private Object next;
 
 			private void scanNext() {
 				while (sourceIterator.hasNext()) {

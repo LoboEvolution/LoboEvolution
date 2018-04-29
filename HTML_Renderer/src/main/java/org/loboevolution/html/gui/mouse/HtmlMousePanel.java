@@ -40,7 +40,7 @@ public class HtmlMousePanel {
 	private HtmlBlockPanel blockPanel;
 
 	/** The mouse press target. */
-	private transient BoundableRenderable mousePressTarget;
+	private BoundableRenderable mousePressTarget;
 
 	public HtmlMousePanel(HtmlBlockPanel bPanel) {
 		this.blockPanel = bPanel;
@@ -126,7 +126,7 @@ public class HtmlMousePanel {
 	 * @param event
 	 *            the event
 	 */
-	public void onMouseExited(MouseEvent event, RBlock block) {
+	public void onMouseExited(MouseEvent event) {
 		BoundableRenderable oldTarget = mousePressTarget;
 		if (oldTarget != null) {
 			mousePressTarget = null;

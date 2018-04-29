@@ -25,7 +25,7 @@ package org.loboevolution.util;
  */
 public class BoxedObject {
 	/** The object. */
-	private transient Object object;
+	private Object object;
 
 	/**
 	 * Instantiates a new boxed object.

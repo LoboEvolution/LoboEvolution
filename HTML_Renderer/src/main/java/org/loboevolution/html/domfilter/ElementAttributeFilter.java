@@ -120,7 +120,7 @@ public class ElementAttributeFilter {
 	 * @param val
 	 *            the val
 	 */
-	public void removeAttribute(HTMLDocumentImpl doc, String val) {
+	public void removeAttribute(HTMLDocumentImpl doc) {
 		HTMLElement el = doc.getBody();
 		el.removeAttribute(attribute);
 		doc.setBody(el);

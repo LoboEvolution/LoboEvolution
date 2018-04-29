@@ -250,41 +250,4 @@ public class Navigator extends AbstractScriptableDelegate {
 			return mt;
 		}
 	}
-
-	/**
-	 * The Class MimeTypesCollection.
-	 */
-	public class MimeTypesCollection {
-		// Class must be public to allow JavaScript access
-		/**
-		 * Gets the length.
-		 *
-		 * @return the length
-		 */
-		public int getLength() {
-			return 0;
-		}
-
-		/**
-		 * Item.
-		 *
-		 * @param index
-		 *            the index
-		 * @return the object
-		 */
-		public Object item(int index) {
-			return null;
-		}
-
-		/**
-		 * Named item.
-		 *
-		 * @param name
-		 *            the name
-		 * @return the object
-		 */
-		public Object namedItem(String name) {
-			return null;
-		}
-	}
 }

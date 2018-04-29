@@ -43,7 +43,7 @@ public class MemoryCacheEntry {
 	private Long expiration;
 
 	/** The alt object. */
-	private transient Object altObject;
+	private Object altObject;
 
 	/** The request time. */
 	private long requestTime;

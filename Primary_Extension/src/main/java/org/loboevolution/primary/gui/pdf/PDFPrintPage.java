@@ -65,7 +65,7 @@ public class PDFPrintPage implements Printable {
 	private static final Logger logger = LogManager.getLogger(PDFPrintPage.class);
 
 	/** The PDFFile to be printed. */
-	private transient PDFFile file;
+	private PDFFile file;
 
 	/** The PrinterJob for this print job. */
 	private PrinterJob pjob;

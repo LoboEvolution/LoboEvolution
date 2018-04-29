@@ -140,10 +140,10 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	public FramePanel(String windowId) {
 		this.knownParentFrame = null;
 		this.windowId = windowId;
-		createAndShowGUI(windowId);
+		createAndShowGUI();
 	}
 
-	private void createAndShowGUI(String windowId) {
+	private void createAndShowGUI() {
 		this.setLayout(WrapperLayout.getInstance());
 		this.setBackground(Color.WHITE);
 		this.setOpaque(true);

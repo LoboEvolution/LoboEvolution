@@ -25,6 +25,8 @@ import java.awt.Dimension;
 
 import javax.swing.Box.Filler;
 
+import org.loboevolution.util.gui.WrapperLayout;
+
 /**
  * A component used in conjunction with <code>BoxLayout</code>.
  */
@@ -43,11 +45,11 @@ public class RigidComponent extends Filler {
 	 */
 	public RigidComponent(Component wrappedComponent, Dimension d) {
 		super(d, d, d);
-		createAndShowGUI(wrappedComponent, d);
+		createAndShowGUI(wrappedComponent);
 	}
 
-	private void createAndShowGUI(Component wrappedComponent, Dimension d) {
-		this.setLayout(org.loboevolution.util.gui.WrapperLayout.getInstance());
+	private void createAndShowGUI(Component wrappedComponent) {
+		this.setLayout(WrapperLayout.getInstance());
 		this.add(wrappedComponent);
 	}
 }

@@ -83,9 +83,9 @@ public class TestFrame extends JFrame {
 		super(title);
 		this.addressField = new JTextField();
 		this.rcontext = null;
-		createAndShowGUI(title);
+		createAndShowGUI();
 	}
-	private void createAndShowGUI(String title) throws HeadlessException {
+	private void createAndShowGUI() throws HeadlessException {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = this.getContentPane();

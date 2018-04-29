@@ -90,9 +90,9 @@ public class ParserTest extends JFrame {
 		super(title);
 		this.tree = new JTree();
 		this.textArea = new JTextArea();
-		createAndShowGUI(title);
+		createAndShowGUI();
 	}
-	private void createAndShowGUI(String title) throws HeadlessException {
+	private void createAndShowGUI() throws HeadlessException {
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = this.getContentPane();

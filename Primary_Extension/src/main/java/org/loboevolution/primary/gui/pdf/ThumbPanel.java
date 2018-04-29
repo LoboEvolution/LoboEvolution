@@ -198,7 +198,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	/**
 	 * Removes a PageChangeListener from the notification list.
 	 */
-	public void removePageChangeListener(PageChangeListener pl) {
+	public void removePageChangeListener() {
 		// [[MW: should be an array list instead of only one]]
 		setListener(null);
 	}
