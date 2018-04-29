@@ -38,6 +38,10 @@ public class StatusBarPanel extends JPanel {
 	 * Instantiates a new status bar panel.
 	 */
 	public StatusBarPanel() {
+		createAndShowGUI();
+	}
+	
+	private void createAndShowGUI() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.setBorder(new BevelBorder(BevelBorder.LOWERED));
 	}

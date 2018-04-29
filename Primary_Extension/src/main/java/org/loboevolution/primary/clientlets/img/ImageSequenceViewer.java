@@ -61,14 +61,17 @@ public class ImageSequenceViewer {
 	 *             if the number is negative or the starting position is not valid
 	 */
 	public ImageSequenceViewer(int number, int startPos) {
+		imageViewer = new ImageViewer();
+		createAndShowGUI(number, startPos);
+	}
+
+	private void createAndShowGUI(int number, int startPos) {
 		if (number <= 0 || startPos < 0 || startPos >= number)
 			throw new IllegalArgumentException();
-		imageViewer = new ImageViewer();
+		
 		this.number = number;
 		this.position = startPos;
-
 		panel.add(imageViewer.getComponent(), BorderLayout.CENTER);
-
 		forwardButton = new JButton(">");
 		backwardButton = new JButton("<");
 		JPanel locationPanel = new JPanel(new FlowLayout());

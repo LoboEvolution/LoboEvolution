@@ -66,9 +66,13 @@ public class InputTextAreaControl extends BaseInputControl {
 	 */
 	public InputTextAreaControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
+		this.widget = (JTextAreaImpl) this.createTextField();
+		createAndShowGUI(modelNode);
+	}
+	
+	private void createAndShowGUI(HTMLBaseInputElement modelNode) {
+		
 		this.setLayout(WrapperLayout.getInstance());
-		JTextAreaImpl widget = (JTextAreaImpl) this.createTextField();
-		this.widget = widget;
 		this.add(new JScrollPane(widget));
 
 		// Note: Value attribute cannot be set in reset() method.

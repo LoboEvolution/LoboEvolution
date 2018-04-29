@@ -39,8 +39,12 @@ public class ScreenShootFrame extends JFrame {
 
 	/** The image. */
 	private transient BufferedImage image;
-
+	
 	public ScreenShootFrame(JPanel panelframe) {
+		createAndShowGUI(panelframe);
+	}
+
+	private void createAndShowGUI(JPanel panelframe) {
 		setTitle("Screenshot");
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		setPreferredSize(new Dimension(700, 600));

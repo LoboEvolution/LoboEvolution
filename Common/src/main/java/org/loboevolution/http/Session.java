@@ -110,6 +110,10 @@ public class Session extends AbstractBean {
 	 * Creates a new Session. Automatically installs the {@link CookieManager}.
 	 */
 	public Session() {
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		setSslSecurityLevel(SecurityLevel.Medium);
 		setMediumSecurityHandler(new DefaultSecurityHandler());
 	}

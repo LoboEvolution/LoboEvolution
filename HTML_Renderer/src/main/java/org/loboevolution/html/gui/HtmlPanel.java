@@ -119,12 +119,16 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	public HtmlPanel() {
 		super();
-		this.setLayout(WrapperLayout.getInstance());
-		this.setOpaque(false);
 		this.notificationTimer = new Timer(NOTIF_TIMER_DELAY, new NotificationTimerAction());
-		this.notificationTimer.setRepeats(false);
 		this.notificationListener = new LocalDocumentNotificationListener();
 		this.notificationImmediateAction = () -> processNotifications();
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
+		this.setLayout(WrapperLayout.getInstance());
+		this.setOpaque(false);
+		this.notificationTimer.setRepeats(false);
 	}
 
 	/**

@@ -41,6 +41,10 @@ public class HostEntry {
 	 */
 	public HostEntry(final String host, final long timestamp) {
 		super();
+		createAndShowGUI(host, timestamp);
+	}
+
+	private void createAndShowGUI(final String host, final long timestamp) {
 		this.setHost(host);
 		this.setTimestamp(timestamp);
 	}

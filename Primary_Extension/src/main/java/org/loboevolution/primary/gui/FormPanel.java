@@ -53,6 +53,10 @@ public class FormPanel extends JComponent {
 	 * Instantiates a new form panel.
 	 */
 	public FormPanel() {
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 

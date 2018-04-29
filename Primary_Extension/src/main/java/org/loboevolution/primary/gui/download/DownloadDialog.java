@@ -109,6 +109,7 @@ public class DownloadDialog extends JFrame {
 
 	/** The download base timestamp. */
 	private long downloadBaseTimestamp;
+	
 	/**
 	 * Instantiates a new download dialog.
 	 *
@@ -119,15 +120,20 @@ public class DownloadDialog extends JFrame {
 	 * @param transferSpeed
 	 *            the transfer speed
 	 */
+	
 	public DownloadDialog(ClientletResponse response, URL url, int transferSpeed) {
 		this.url = url;
+		this.knownContentLength = response.getContentLength();
+		createAndShowGUI(response, url, transferSpeed);
+	}
+	
+	
+	private void createAndShowGUI(ClientletResponse response, URL url, int transferSpeed) {
+		
 		this.setIconImage(DefaultWindowFactory.getInstance().getDefaultImageIcon().getImage());
-
 		this.topFormPanel.setMinLabelWidth(100);
 		this.getBottomFormPanel().setMinLabelWidth(100);
-
 		this.getBottomFormPanel().setEnabled(false);
-
 		this.documentField.setCaption("Document:");
 		this.getTimeLeftField().setCaption("Estimated time:");
 		this.mimeTypeField.setCaption("MIME type:");
@@ -141,7 +147,6 @@ public class DownloadDialog extends JFrame {
 		this.documentField.setValue(url.toExternalForm());
 		this.mimeTypeField.setValue(response.getMimeType());
 		int cl = response.getContentLength();
-		this.knownContentLength = cl;
 		String sizeText = cl == -1 ? "Not known" : getSizeText(cl);
 		this.getSizeField().setValue(sizeText);
 		String estTimeText = transferSpeed <= 0 || cl == -1 ? "Not known" : Timing.getElapsedText(cl / transferSpeed);

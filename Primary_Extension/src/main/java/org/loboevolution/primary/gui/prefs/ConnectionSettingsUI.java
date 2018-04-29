@@ -91,6 +91,9 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 * Instantiates a new connection settings ui.
 	 */
 	public ConnectionSettingsUI() {
+		createAndShowGUI();
+	}
+	private void createAndShowGUI() {
 		this.noProxyRadioButton.addChangeListener(e -> updateEnabling());
 		this.authenticatedCheckBox.addChangeListener(e -> updateEnabling());
 		this.noProxyRadioButton.setText("Direct connection (no proxy)");

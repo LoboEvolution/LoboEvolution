@@ -53,8 +53,12 @@ public class StringListControl extends JComponent {
 	 * Instantiates a String.valueOf list control.
 	 */
 	public StringListControl() {
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.comboBox = new JComboBox<String>();
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.comboBox.setEditable(false);
 		JButton editButton = new JButton();
 		editButton.setAction(new EditAction(this));

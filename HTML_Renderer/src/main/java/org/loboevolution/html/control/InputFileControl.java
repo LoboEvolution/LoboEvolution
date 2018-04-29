@@ -59,6 +59,10 @@ public class InputFileControl extends BaseInputControl {
 	 */
 	public InputFileControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
+		createAndShowGUI(modelNode); 
+	}
+	
+	private void createAndShowGUI(HTMLBaseInputElement modelNode) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		JButton browseButton = this.browseButton;
 		browseButton.setAction(new BrowseAction());

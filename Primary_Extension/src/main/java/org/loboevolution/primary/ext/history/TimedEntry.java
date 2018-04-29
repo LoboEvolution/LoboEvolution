@@ -55,7 +55,7 @@ public class TimedEntry<T> implements Comparable<Object>, Serializable {
 	 *            the item info
 	 */
 	public TimedEntry(URL url, String textValue, T itemInfo) {
-		this.setItemInfo(itemInfo);
+		this.itemInfo = itemInfo;
 		this.value = textValue;
 		this.url = url;
 	}

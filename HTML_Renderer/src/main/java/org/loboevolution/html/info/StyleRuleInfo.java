@@ -56,7 +56,7 @@ public class StyleRuleInfo implements Serializable {
 	public StyleRuleInfo(ArrayList<SelectorMatcher> SelectorMatchers, CSSStyleRule rule) {
 		super();
 		ancestorSelectors = SelectorMatchers;
-		setStyleRule(rule);
+		this.styleRule = rule;
 	}
 
 	/**

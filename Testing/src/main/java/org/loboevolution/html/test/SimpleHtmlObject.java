@@ -48,6 +48,10 @@ public class SimpleHtmlObject extends JComponent implements HtmlObject {
 	 */
 	public SimpleHtmlObject(HTMLElement element) {
 		this.element = element;
+		createAndShowGUI(element);
+	}
+
+	private void createAndShowGUI(HTMLElement element) {	
 		this.setLayout(new FlowLayout());
 		this.add(new JLabel("[" + element.getTagName() + "]"));
 	}

@@ -36,7 +36,12 @@ public class SharedToolBarPanel extends JPanel {
 	/**
 	 * Instantiates a new shared tool bar panel.
 	 */
+	
 	public SharedToolBarPanel() {
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	}
 

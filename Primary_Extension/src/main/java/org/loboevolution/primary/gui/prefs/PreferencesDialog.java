@@ -59,6 +59,10 @@ public class PreferencesDialog extends JDialog {
 		super(parent);
 		this.preferencesPanel = new PreferencesPanel();
 		this.preferencesTree = new PreferencesTree();
+		createAndShowGUI(parent);
+	}
+
+	private void createAndShowGUI(Frame parent) throws HeadlessException {
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		contentPane.add(this.createLeftPane());

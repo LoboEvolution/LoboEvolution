@@ -45,6 +45,9 @@ public class PreferencesPanel extends JPanel {
 	 * Instantiates a new preferences panel.
 	 */
 	public PreferencesPanel() {
+		createAndShowGUI();
+	}
+	private void createAndShowGUI() {
 		this.setLayout(WrapperLayout.getInstance());
 		this.setBorder(new CompoundBorder(new EtchedBorder(), new EmptyBorder(8, 8, 8, 8)));
 	}

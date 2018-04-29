@@ -43,6 +43,10 @@ public class RigidComponent extends Filler {
 	 */
 	public RigidComponent(Component wrappedComponent, Dimension d) {
 		super(d, d, d);
+		createAndShowGUI(wrappedComponent, d);
+	}
+
+	private void createAndShowGUI(Component wrappedComponent, Dimension d) {
 		this.setLayout(org.loboevolution.util.gui.WrapperLayout.getInstance());
 		this.add(wrappedComponent);
 	}

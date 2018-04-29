@@ -32,7 +32,7 @@ public class NavigatorEvent extends java.util.EventObject {
 	private final transient NavigatorFrame clientletFrame;
 
 	/** The event type. */
-	private final NavigatorEventType eventType;
+	private final transient NavigatorEventType eventType;
 
 	/**
 	 * Instantiates a new navigator event.

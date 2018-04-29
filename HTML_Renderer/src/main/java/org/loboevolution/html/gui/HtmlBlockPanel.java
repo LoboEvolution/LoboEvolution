@@ -164,12 +164,17 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * @param frameContext
 	 *            the frame context
 	 */
+	
 	public HtmlBlockPanel(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext) {
-		this.setLayout(null);
-		this.setAutoscrolls(true);
 		this.frameContext = frameContext;
 		this.ucontext = pcontext;
 		this.rcontext = rcontext;
+		createAndShowGUI(background, opaque, pcontext, rcontext, frameContext);
+	}
+	
+	private void createAndShowGUI(Color background, boolean opaque, UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext) {
+		this.setLayout(null);
+		this.setAutoscrolls(true);
 		this.setOpaque(opaque);
 		this.setBackground(background);
 		ActionListener actionListener = e -> {

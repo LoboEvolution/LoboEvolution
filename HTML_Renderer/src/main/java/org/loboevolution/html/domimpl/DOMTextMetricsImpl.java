@@ -31,7 +31,7 @@ public class DOMTextMetricsImpl implements TextMetrics {
 	private String txt;
 
 	public DOMTextMetricsImpl(String txt) {
-		this.setTxt(txt);
+		this.txt = txt;
 	}
 
 	@Override

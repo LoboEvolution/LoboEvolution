@@ -37,7 +37,7 @@ public class ContentEvent extends EventObject {
 	private final transient ComponentContent content;
 
 	/** The response. */
-	private final ClientletResponse response;
+	private final transient ClientletResponse response;
 
 	/**
 	 * Instantiates a new content event.

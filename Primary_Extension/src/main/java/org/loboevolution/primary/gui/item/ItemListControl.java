@@ -58,8 +58,12 @@ public class ItemListControl<T> extends JComponent {
 	 */
 	public ItemListControl(ItemEditorFactory<T> ief) {
 		this.itemEditorFactory = ief;
-		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.comboBox = new JComboBox<T>();
+		createAndShowGUI(ief);
+	}
+	
+	private void createAndShowGUI(ItemEditorFactory<T> ief) {
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.getComboBox().setPreferredSize(new Dimension(100, 24));
 		this.getComboBox().setEditable(false);
 		JButton editButton = new JButton();

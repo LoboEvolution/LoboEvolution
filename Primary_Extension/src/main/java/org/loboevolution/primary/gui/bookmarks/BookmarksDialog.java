@@ -75,6 +75,10 @@ public class BookmarksDialog extends JDialog {
 	 * Instantiates a new bookmarks dialog.
 	 */
 	public BookmarksDialog(NavigatorWindow window) {
+		createAndShowGUI(window);
+		
+	}
+	private void createAndShowGUI(NavigatorWindow window) {
 		this.window = window;
 		jtfFilter = new JTextField();
 		jtfFilter.setToolTipText("Keywords will be matched against URL, title, description and tags");

@@ -66,6 +66,12 @@ public class ProgressWindow extends JFrame {
 	 */
 	public ProgressWindow() throws HeadlessException {
 		super(UserAgentImpl.getInstance().getName());
+		this.statusProgressBar = new OpenProgressBar();
+		this.statusLabel = new JLabel();
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() throws HeadlessException {
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		ImageIcon windowIcon = DefaultWindowFactory.getInstance().getDefaultImageIcon();
 		if (windowIcon != null) {
@@ -82,10 +88,7 @@ public class ProgressWindow extends JFrame {
 		topPanel.setBorder(border);
 		topPanel.setLayout(new BorderLayout());
 
-		this.statusProgressBar = new OpenProgressBar();
 		this.statusProgressBar.setStringPainted(true);
-		this.statusLabel = new JLabel();
-
 		topPanel.add(statusLabel, BorderLayout.NORTH);
 		topPanel.add(statusProgressBar, BorderLayout.CENTER);
 	}

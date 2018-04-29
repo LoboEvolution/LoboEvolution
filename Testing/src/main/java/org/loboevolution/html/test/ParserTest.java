@@ -88,6 +88,12 @@ public class ParserTest extends JFrame {
 	 */
 	public ParserTest(String title) throws HeadlessException {
 		super(title);
+		this.tree = new JTree();
+		this.textArea = new JTextArea();
+		createAndShowGUI(title);
+	}
+	private void createAndShowGUI(String title) throws HeadlessException {
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -98,12 +104,9 @@ public class ParserTest extends JFrame {
 		final JTextField textField = new JTextField();
 		JButton button = new JButton("Parse & Render");
 		final JTabbedPane tabbedPane = new JTabbedPane();
-		final JTree tree = new JTree();
 		tree.setModel(null);
 		final JScrollPane scrollPane = new JScrollPane(tree);
-
-		this.tree = tree;
-
+		
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		contentPane.add(bottomPanel, BorderLayout.CENTER);
 
@@ -112,12 +115,9 @@ public class ParserTest extends JFrame {
 		topPanel.add(button, BorderLayout.EAST);
 
 		bottomPanel.add(tabbedPane, BorderLayout.CENTER);
-
-		final JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
-		this.textArea = textArea;
+		
+		this.textArea.setEditable(false);
 		final JScrollPane textAreaSp = new JScrollPane(textArea);
-
 		tabbedPane.addTab("HTML DOM", scrollPane);
 		tabbedPane.addTab("Source Code", textAreaSp);
 

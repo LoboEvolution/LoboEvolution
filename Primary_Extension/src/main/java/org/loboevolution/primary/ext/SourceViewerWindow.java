@@ -71,6 +71,10 @@ public class SourceViewerWindow extends JFrame {
 	 */
 	public SourceViewerWindow() {
 		super("Lobo Source Viewer");
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		setResizable(true);
 		setLocationRelativeTo(null);
 		addTextArea();

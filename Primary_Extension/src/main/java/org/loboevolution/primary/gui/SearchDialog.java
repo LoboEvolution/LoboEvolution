@@ -64,6 +64,10 @@ public class SearchDialog extends JDialog {
 	 */
 	public SearchDialog(Frame owner, boolean modal, String keywordsTooltip) throws HeadlessException {
 		super(owner, modal);
+		createAndShowGUI(owner, modal, keywordsTooltip);
+	}
+
+	private void createAndShowGUI(Frame owner, boolean modal, String keywordsTooltip) throws HeadlessException {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.tagsField.setToolTip(keywordsTooltip);
 		Container contentPane = this.getContentPane();

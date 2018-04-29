@@ -58,7 +58,7 @@ class ImageComponent extends JComponent {
 	private final transient List<ImageMouseClickListener> clickListeners = new ArrayList<ImageMouseClickListener>(4);
 	private final transient MouseEventTranslator mouseEventTranslator = new MouseEventTranslator(this);
 	private final transient PaintManager paintManager = new PaintManager(this);
-	private Rescroller rescroller = new Rescroller();
+	private transient Rescroller rescroller = new Rescroller();
 	private final PropertyChangeSupport propertyChangeSupport;
 	private final transient ImageViewer viewer;
 

@@ -58,21 +58,21 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
-		setLinearX(Double.valueOf(x0.toString()));
-		setLinearX1(Double.valueOf(y0.toString()));
-		setLinearY(Double.valueOf(x1.toString()));
-		setLinearY1(Double.valueOf(y1.toString()));
+		this.linearX = Double.valueOf(x0.toString());
+		this.linearX1 = Double.valueOf(y0.toString());
+		this.linearY = Double.valueOf(x1.toString());
+		this.linearY1 = Double.valueOf(y1.toString());
 	}
 
 	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
-		setLinearX(Double.valueOf(x0.toString()));
-		setLinearX1(Double.valueOf(y0.toString()));
-		setLinearY(Double.valueOf(x1.toString()));
-		setLinearY1(Double.valueOf(y1.toString()));
-		setR1(Double.valueOf(r1.toString()));
-		setR2(Double.valueOf(r2.toString()));
+		this.linearX = Double.valueOf(x0.toString());
+		this.linearX1 = Double.valueOf(y0.toString());
+		this.linearY = Double.valueOf(x1.toString());
+		this.linearY1 = Double.valueOf(y1.toString());
+		this.r1 = Double.valueOf(r1.toString());
+		this.r2 = Double.valueOf(r2.toString());
 	}
 
 	@Override

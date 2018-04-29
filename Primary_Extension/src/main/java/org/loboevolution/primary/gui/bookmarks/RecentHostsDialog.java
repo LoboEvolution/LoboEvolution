@@ -75,6 +75,10 @@ public class RecentHostsDialog extends JDialog {
 	 * Instantiates a new bookmarks dialog.
 	 */
 	public RecentHostsDialog(NavigatorWindow window) {
+		createAndShowGUI(window);
+	}
+
+	private void createAndShowGUI(NavigatorWindow window) {
 		this.window = window;
 		jtfFilter = new JTextField();
 		jtfFilter.setToolTipText("Keywords will be matched against URL, title, description and tags");

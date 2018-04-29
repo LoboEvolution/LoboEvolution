@@ -42,7 +42,7 @@ public class DefaultViewerPopup extends JPopupMenu {
 	private static JFileChooser saveChooser;
 	private static JButton saveChooserHelpButton;
 	private static JLabel saveChooserHelpLabel;
-
+	
 	/**
 	 * Creates a popup menu for use with the specified viewer.
 	 * 
@@ -51,7 +51,11 @@ public class DefaultViewerPopup extends JPopupMenu {
 	 */
 	public DefaultViewerPopup(ImageViewer imageViewer) {
 		viewer = imageViewer;
+		createAndShowGUI(imageViewer); 
+	}
 
+	private void createAndShowGUI(ImageViewer imageViewer) {
+		
 		/** Status bar toggle **/
 
 		final JCheckBoxMenuItem toggleStatusBarItem = new JCheckBoxMenuItem("Status bar");

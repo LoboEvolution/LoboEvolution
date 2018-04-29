@@ -40,6 +40,10 @@ public class PreferencesTree extends JTree {
 	 * Instantiates a new preferences tree.
 	 */
 	public PreferencesTree() {
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		TreeNode rootNode = this.createRootNode();
 		this.setModel(new DefaultTreeModel(rootNode));
 		this.setRootVisible(false);

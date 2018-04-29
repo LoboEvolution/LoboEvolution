@@ -534,7 +534,7 @@ public class HtmlClientlet implements Clientlet {
 		private static final long serialVersionUID = 1L;
 
 		/** The http equiv data. */
-		private final Map<String, String> httpEquivData;
+		private final transient Map<String, String> httpEquivData;
 
 		/**
 		 * Instantiates a new http equiv retry exception.

@@ -49,14 +49,16 @@ public class PickMe extends JFrame {
 	 * @param gd
 	 *            the GraphicsDevice (display) to use for this button
 	 */
-
+	
 	public PickMe(GraphicsDevice gd, FullScreenWindow full) {
-
 		super(gd.getDefaultConfiguration());
+		createAndShowGUI(gd, full);
+	}
+
+	private void createAndShowGUI(GraphicsDevice gd, FullScreenWindow full) {
 		setUndecorated(true);
 		mygd = gd;
 		this.full = full;
-
 		JButton jb = new JButton("Click here to use this screen");
 		jb.setBackground(Color.yellow);
 		jb.addActionListener(evt -> pickDevice(mygd));

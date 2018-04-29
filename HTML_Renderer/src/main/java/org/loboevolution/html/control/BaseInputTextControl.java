@@ -68,6 +68,10 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	 */
 	public BaseInputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
+		this.widget = createAndShowGUI(modelNode);
+	}
+	private JTextComponent createAndShowGUI(final HTMLBaseInputElement modelNode) {
+		
 		this.setLayout(WrapperLayout.getInstance());
 		JTextComponent widget = this.createTextField();
 		Font font = widget.getFont();
@@ -90,9 +94,8 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 
 			}
 		});
-
-		this.widget = widget;
 		this.add(widget);
+		return widget;
 	}
 
 	@Override

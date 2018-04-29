@@ -77,10 +77,14 @@ public class AddBookmarkDialog extends JDialog {
 	 * @throws HeadlessException
 	 *             the headless exception
 	 */
-	public AddBookmarkDialog(Frame owner, boolean modal, BookmarkInfo existingInfo) throws HeadlessException {
+	public AddBookmarkDialog(Frame owner, boolean modal, BookmarkInfo existingInfo) throws HeadlessException{
 		super(owner, modal);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.url = existingInfo.getUrl();
+		createAndShowGUI(owner, modal, existingInfo);
+	}
+	
+	private void createAndShowGUI(Frame owner, boolean modal, BookmarkInfo existingInfo) throws HeadlessException {	
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.urlField.setEditable(false);
 		this.getTagsField().setToolTip("List of keywords separated by blanks.");
 		this.urlField.setValue(existingInfo.getUrl().toExternalForm());

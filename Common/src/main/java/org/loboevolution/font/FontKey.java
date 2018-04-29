@@ -65,16 +65,16 @@ public class FontKey {
 	
 	
 	public FontKey() {
-		setFontFamily(Font.SANS_SERIF);
-		setFontStyle(null);
-		setFontVariant(null);
-		setFontWeight(null);
-		setFontSize(LAFSettings.getInstance().getFontSize());
-		setLocales(null);
-		setSuperscript(null);
-		setLetterSpacing(0);
-		setStrikethrough(false);
-		setUnderline(0);
+		this.fontFamily = Font.SANS_SERIF;
+		this.fontStyle = null;
+		this.fontVariant = null;
+		this.fontWeight = null;
+		this.fontSize = LAFSettings.getInstance().getFontSize();
+		this.locales = null;
+		this.superscript = null;
+		this.letterSpacing = 0;
+		this.strikethrough = false;
+		this.underline = 0;
 	}
 
 	/**

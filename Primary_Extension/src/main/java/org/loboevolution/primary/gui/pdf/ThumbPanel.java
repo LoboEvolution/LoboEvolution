@@ -106,6 +106,10 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 */
 	public ThumbPanel(PDFFile file) {
 		super();
+		createAndShowGUI(file);
+	}
+
+	private void createAndShowGUI(PDFFile file) {
 		this.file = file;
 		if (file != null) {
 			int count = file.getNumPages();

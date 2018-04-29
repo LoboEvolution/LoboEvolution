@@ -56,7 +56,7 @@ public class TestFrame extends JFrame {
 	private static final Logger logger = LogManager.getLogger(TestFrame.class);
 
 	/** The rcontext. */
-	private final transient SimpleHtmlRendererContext rcontext;
+	private transient SimpleHtmlRendererContext rcontext;
 
 	/** The address field. */
 	private final JTextField addressField;
@@ -81,6 +81,12 @@ public class TestFrame extends JFrame {
 	 */
 	public TestFrame(String title) throws HeadlessException {
 		super(title);
+		this.addressField = new JTextField();
+		this.rcontext = null;
+		createAndShowGUI(title);
+	}
+	private void createAndShowGUI(String title) throws HeadlessException {
+		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -88,8 +94,7 @@ public class TestFrame extends JFrame {
 		topPanel.setLayout(new BorderLayout());
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.setLayout(new BorderLayout());
-		final JTextField textField = new JTextField();
-		this.addressField = textField;
+		
 		JButton button = new JButton("Parse & Render");
 		final JTabbedPane tabbedPane = new JTabbedPane();
 		final JTree tree = new JTree();
@@ -99,7 +104,7 @@ public class TestFrame extends JFrame {
 		contentPane.add(bottomPanel, BorderLayout.CENTER);
 
 		topPanel.add(new JLabel("URL: "), BorderLayout.WEST);
-		topPanel.add(textField, BorderLayout.CENTER);
+		topPanel.add(addressField, BorderLayout.CENTER);
 		topPanel.add(button, BorderLayout.EAST);
 
 		bottomPanel.add(tabbedPane, BorderLayout.CENTER);
@@ -129,7 +134,7 @@ public class TestFrame extends JFrame {
 			}
 		});
 
-		button.addActionListener(event -> process(textField.getText()));
+		button.addActionListener(event -> process(addressField.getText()));
 	}
 
 	/**

@@ -58,6 +58,10 @@ public class AddressField extends JComboBox<String> {
 	 */
 	public AddressField(ComponentSource cs) {
 		this.componentSource = cs;
+		createAndShowGUI(cs);
+	}
+
+	private void createAndShowGUI(ComponentSource cs) {
 		this.setEditable(true);
 		TextFieldComboBoxEditor editor = new TextFieldComboBoxEditor();
 		this.setEditor(editor);

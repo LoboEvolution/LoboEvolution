@@ -37,6 +37,10 @@ public class AddressBarPanel extends JPanel {
 	 * Instantiates a new address bar panel.
 	 */
 	public AddressBarPanel() {
+		createAndShowGUI();;
+	}
+
+	private void createAndShowGUI() {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 	}
 

@@ -74,6 +74,10 @@ public class FormField {
 	 */
 	public FormField(final FieldType type, final String caption, final boolean editable) {
 		this.type = type;
+		createAndShowGUI(type, caption, editable);
+	}
+
+	private void createAndShowGUI(final FieldType type, final String caption, final boolean editable) {
 		this.setCaption(caption);
 		this.setEditable(editable);
 	}

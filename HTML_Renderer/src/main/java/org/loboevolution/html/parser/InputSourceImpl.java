@@ -60,6 +60,10 @@ public class InputSourceImpl extends InputSource {
 	 */
 	public InputSourceImpl(Reader characterStream, String uri) {
 		super(characterStream);
+		createAndShowGUI(characterStream, uri);
+	}
+
+	private void createAndShowGUI(Reader characterStream, String uri) {
 		this.setSystemId(uri);
 	}
 

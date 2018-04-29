@@ -73,6 +73,10 @@ public class InfoPageWindow extends JFrame {
 	 */
 	public InfoPageWindow(List<MetaInfo> infoList, List<MetaInfo> mediaList, List<MetaInfo> cssList, List<MetaInfo> jsList) {
 		super("Lobo Info");
+		createAndShowGUI(infoList, mediaList, cssList, jsList);
+	}
+
+	private void createAndShowGUI(List<MetaInfo> infoList, List<MetaInfo> mediaList, List<MetaInfo> cssList, List<MetaInfo> jsList) {
 		setResizable(true);
 		setLocationRelativeTo(null);
 

@@ -45,6 +45,10 @@ public class ProgressBar extends JProgressBar {
 	 * Instantiates a new progress bar.
 	 */
 	public ProgressBar() {
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		this.setStringPainted(true);
 	}
 

@@ -93,13 +93,15 @@ public class PagePanel extends JPanel implements ImageObserver {
 
 	/** y location of the mouse-down event. */
 	private int downy;
-
 	
 	/**
 	 * Create a new PagePanel, with a default size of 800 by 600 pixels.
 	 */
 	public PagePanel() {
-		super();
+		createAndShowGUI();
+	}
+	
+	private void createAndShowGUI() {
 		setPreferredSize(new Dimension(800, 600));
 		setFocusable(true);
 		addMouseListener(new MouseAdapter() {

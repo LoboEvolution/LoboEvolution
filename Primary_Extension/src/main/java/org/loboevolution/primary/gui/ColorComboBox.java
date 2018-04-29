@@ -35,8 +35,12 @@ import javax.swing.border.MatteBorder;
 public class ColorComboBox extends JComboBox<Object> {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	public ColorComboBox() {
+		createAndShowGUI();
+	}
+
+	private void createAndShowGUI() {
 		int[] values = new int[] { 0, 128, 192, 255 };
 		for (int value : values) {
 			for (int value2 : values) {
@@ -47,7 +51,6 @@ public class ColorComboBox extends JComboBox<Object> {
 			}
 		}
 		setRenderer(new ColorComboRenderer());
-
 	}
 
 	class ColorComboRenderer extends JPanel implements ListCellRenderer<Object> {

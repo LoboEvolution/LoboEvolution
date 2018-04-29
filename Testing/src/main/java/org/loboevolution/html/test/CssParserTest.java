@@ -96,6 +96,12 @@ public class CssParserTest extends JFrame {
 	 */
 	public CssParserTest(String title) throws HeadlessException {
 		super(title);
+		this.cssOutput = new HtmlPanel();
+		this.textArea =  new JTextArea();
+		createAndShowGUI(title);
+	}
+
+	private void createAndShowGUI(String title) throws HeadlessException {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container contentPane = this.getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -107,9 +113,6 @@ public class CssParserTest extends JFrame {
 		JButton button = new JButton("Parse & Render");
 		final JTabbedPane tabbedPane = new JTabbedPane();
 
-		HtmlPanel htmlPanel = new HtmlPanel();
-		this.cssOutput = htmlPanel;
-
 		contentPane.add(topPanel, BorderLayout.NORTH);
 		contentPane.add(bottomPanel, BorderLayout.CENTER);
 
@@ -118,14 +121,10 @@ public class CssParserTest extends JFrame {
 		topPanel.add(button, BorderLayout.EAST);
 
 		bottomPanel.add(tabbedPane, BorderLayout.CENTER);
-
-		final JTextArea textArea = new JTextArea();
-		this.textArea = textArea;
 		final JScrollPane textAreaSp = new JScrollPane(textArea);
 
-		tabbedPane.addTab("Parsed CSS", htmlPanel);
+		tabbedPane.addTab("Parsed CSS", this.cssOutput);
 		tabbedPane.addTab("Source Code", textAreaSp);
-
 		button.addActionListener(event -> process(textField.getText()));
 	}
 

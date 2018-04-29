@@ -343,6 +343,10 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 */
 	public PdfDialog(boolean useThumbs) {
 		super(TITLE);
+		createAndShowGUI(useThumbs);
+	}
+
+	private void createAndShowGUI(boolean useThumbs) {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent evt) {
