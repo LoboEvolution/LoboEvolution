@@ -47,7 +47,8 @@ public class HTMLNavElementImpl extends HTMLAbstractUIElement implements HTMLNav
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new NavRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new NavRenderState(tmpRenderState, this);
 	}
 
 }

@@ -73,6 +73,7 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPre
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new PreRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new PreRenderState(tmpRenderState, this);
 	}
 }

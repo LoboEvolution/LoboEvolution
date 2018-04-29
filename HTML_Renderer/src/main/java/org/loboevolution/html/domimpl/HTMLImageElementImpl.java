@@ -331,7 +331,8 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new ImageRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new ImageRenderState(tmpRenderState, this);
 	}
 
 	@Override

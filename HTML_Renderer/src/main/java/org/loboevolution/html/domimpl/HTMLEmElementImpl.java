@@ -46,7 +46,8 @@ public class HTMLEmElementImpl extends HTMLAbstractUIElement {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.ITALIC);
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		tmpRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.ITALIC);
+		return super.createRenderState(tmpRenderState);
 	}
 }

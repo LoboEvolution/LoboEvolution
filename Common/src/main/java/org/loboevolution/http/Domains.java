@@ -332,30 +332,31 @@ public class Domains {
 	 */
 	public static boolean isValidCookieDomain(String domain, String hostName) {
 		String plainDomain;
+		String tmpDomain = domain;
 		if (!domain.startsWith(".")) {
 			// Valid domains must start with a dot
 			// according to RFC 2109, but
 			// RFC 2965 specifies a dot is prepended
 			// in the Set-Cookie2 header.
-			plainDomain = domain;
-			domain = "." + domain;
+			plainDomain = tmpDomain;
+			tmpDomain = "." + tmpDomain;
 		} else {
-			plainDomain = domain.substring(1);
+			plainDomain = tmpDomain.substring(1);
 		}
 		String plainDomainTL = plainDomain.toLowerCase();
 		String hostNameTL = hostName.toLowerCase();
 		if (!hostNameTL.endsWith(plainDomainTL)) {
 			return false;
 		}
-		int lastDotIdx = domain.lastIndexOf('.');
+		int lastDotIdx = tmpDomain.lastIndexOf('.');
 		if (lastDotIdx == -1) {
 			return false;
 		}
-		String suffix = domain.substring(lastDotIdx).toLowerCase();
+		String suffix = tmpDomain.substring(lastDotIdx).toLowerCase();
 		if (gTLDs.contains(suffix)) {
-			return Strings.countChars(domain, '.') >= 2;
+			return Strings.countChars(tmpDomain, '.') >= 2;
 		} else {
-			return Strings.countChars(domain, '.') >= 3;
+			return Strings.countChars(tmpDomain, '.') >= 3;
 		}
 	}
 

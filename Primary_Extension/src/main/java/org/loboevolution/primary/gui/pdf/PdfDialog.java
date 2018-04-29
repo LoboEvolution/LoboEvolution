@@ -450,12 +450,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 */
 	@Override
 	public void gotoPage(int pagenum) {
-		if (pagenum < 0) {
-			pagenum = 0;
-		} else if (pagenum >= curFile.getNumPages()) {
-			pagenum = curFile.getNumPages() - 1;
+		int tmpPagenum = pagenum;
+		if (tmpPagenum < 0) {
+			tmpPagenum = 0;
+		} else if (tmpPagenum >= curFile.getNumPages()) {
+			tmpPagenum = curFile.getNumPages() - 1;
 		}
-		forceGotoPage(pagenum);
+		forceGotoPage(tmpPagenum);
 	}
 
 	/**
@@ -465,17 +466,18 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 *            the page to display
 	 */
 	public void forceGotoPage(int pagenum) {
-		if (pagenum <= 0) {
-			pagenum = 0;
-		} else if (pagenum >= curFile.getNumPages()) {
-			pagenum = curFile.getNumPages() - 1;
+		int tmpPagenum = pagenum;
+		if (tmpPagenum <= 0) {
+			tmpPagenum = 0;
+		} else if (tmpPagenum >= curFile.getNumPages()) {
+			tmpPagenum = curFile.getNumPages() - 1;
 		}
 
-		curpage = pagenum;
+		curpage = tmpPagenum;
 		// update the page text field
 		pageField.setText(String.valueOf(curpage + 1));
 		// fetch the page and show it in the appropriate place
-		PDFPage pg = curFile.getPage(pagenum + 1);
+		PDFPage pg = curFile.getPage(tmpPagenum + 1);
 		if (fspp != null) {
 			fspp.showPage(pg);
 			fspp.requestFocus();
@@ -485,13 +487,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 		}
 		// update the thumb panel
 		if (doThumb) {
-			thumbs.pageShown(pagenum);
+			thumbs.pageShown(tmpPagenum);
 		}
 		// stop any previous page prepper, and start a new one
 		if (pagePrep != null) {
 			pagePrep.quit();
 		}
-		pagePrep = new PagePreparer(pagenum);
+		pagePrep = new PagePreparer(tmpPagenum);
 		pagePrep.start();
 		setEnabling();
 	}

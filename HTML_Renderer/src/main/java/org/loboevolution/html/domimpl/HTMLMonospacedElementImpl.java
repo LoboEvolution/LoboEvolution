@@ -46,7 +46,8 @@ public class HTMLMonospacedElementImpl extends HTMLAbstractUIElement {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontNameRenderState(prevRenderState, "Monospaced");
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		tmpRenderState = new FontNameRenderState(tmpRenderState, "Monospaced");
+		return super.createRenderState(tmpRenderState);
 	}
 }

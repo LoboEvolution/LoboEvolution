@@ -53,8 +53,8 @@ public class HTMLSuperscriptElementImpl extends HTMLAbstractUIElement {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = FontStyleRenderState.createSuperscriptFontStyleRenderState(prevRenderState,
-				Integer.valueOf(this.superscript));
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		tmpRenderState = FontStyleRenderState.createSuperscriptFontStyleRenderState(tmpRenderState, Integer.valueOf(this.superscript));
+		return super.createRenderState(tmpRenderState);
 	}
 }

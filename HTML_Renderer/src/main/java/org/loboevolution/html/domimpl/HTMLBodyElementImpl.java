@@ -204,7 +204,8 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BodyRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new BodyRenderState(tmpRenderState, this);
 	}
 
 	/*

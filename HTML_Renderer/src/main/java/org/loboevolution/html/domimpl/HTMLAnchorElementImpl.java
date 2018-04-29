@@ -202,12 +202,13 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
+		RenderState tmpRenderState = prevRenderState;
 		if (this.hasAttribute(HREF)) {
-			prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
-			prevRenderState = new ColorRenderState(prevRenderState, this.linkColor());
-			prevRenderState = new CursorRenderState(prevRenderState, Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
+			tmpRenderState = new TextDecorationRenderState(tmpRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
+			tmpRenderState = new ColorRenderState(tmpRenderState, this.linkColor());
+			tmpRenderState = new CursorRenderState(tmpRenderState, Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
 		}
-		return super.createRenderState(prevRenderState);
+		return super.createRenderState(tmpRenderState);
 	}
 
 	@Override

@@ -69,7 +69,8 @@ public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDiv
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BlockRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new BlockRenderState(tmpRenderState, this);
 	}
 
 	/*

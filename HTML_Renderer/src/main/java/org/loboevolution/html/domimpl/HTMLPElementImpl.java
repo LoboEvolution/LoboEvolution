@@ -102,6 +102,7 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParag
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new ParagraphRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new ParagraphRenderState(tmpRenderState, this);
 	}
 }

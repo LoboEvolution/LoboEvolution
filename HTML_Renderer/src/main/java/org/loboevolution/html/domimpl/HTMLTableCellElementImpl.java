@@ -356,6 +356,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new TableCellRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new TableCellRenderState(tmpRenderState, this);
 	}
 }

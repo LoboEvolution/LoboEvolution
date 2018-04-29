@@ -111,7 +111,8 @@ public class HTMLFontElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		return super.createRenderState(tmpRenderState);
 	}
 
 	/*

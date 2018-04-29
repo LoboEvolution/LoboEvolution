@@ -117,11 +117,12 @@ public class HTMLBaseFontElementImpl extends HTMLAbstractUIElement implements HT
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		String size = this.getAttribute(SIZE);
+		RenderState tmpRenderState = prevRenderState;
 		if (size != null) {
-			int fontNumber = FontValues.getFontNumberOldStyle(size, prevRenderState);
-			prevRenderState = new BaseFontRenderState(prevRenderState, fontNumber);
+			int fontNumber = FontValues.getFontNumberOldStyle(size, tmpRenderState);
+			tmpRenderState = new BaseFontRenderState(tmpRenderState, fontNumber);
 		}
-		return super.createRenderState(prevRenderState);
+		return super.createRenderState(tmpRenderState);
 	}
 
 	/*

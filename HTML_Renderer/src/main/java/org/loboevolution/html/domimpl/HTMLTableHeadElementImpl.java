@@ -49,7 +49,8 @@ public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, Font.BOLD);
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		tmpRenderState = new FontStyleRenderState(tmpRenderState, Font.BOLD);
+		return super.createRenderState(tmpRenderState);
 	}
 }

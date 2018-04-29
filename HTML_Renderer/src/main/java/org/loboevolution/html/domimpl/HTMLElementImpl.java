@@ -239,13 +239,14 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 * @return the computed style
 	 */
 	public AbstractCSSProperties getComputedStyle(String pseudoElement) {
-		if (pseudoElement == null) {
-			pseudoElement = "";
+		String tmpElement = pseudoElement;
+		if (tmpElement == null) {
+			tmpElement = "";
 		}
 		synchronized (this) {
 			Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs != null) {
-				AbstractCSSProperties sds = cs.get(pseudoElement);
+				AbstractCSSProperties sds = cs.get(tmpElement);
 				if (sds != null) {
 					return sds;
 				}
@@ -254,7 +255,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 		// Can't do the following in synchronized block (reverse locking order
 		// with document).
 		// First, add declarations from stylesheet
-		Set<String> pes = Strings.isBlank(pseudoElement) ? null : Collections.singleton(pseudoElement);
+		Set<String> pes = Strings.isBlank(tmpElement) ? null : Collections.singleton(tmpElement);
 		AbstractCSSProperties sds = this.createDefaultStyleSheet();
 		sds = this.addStyleSheetDeclarations(sds, pes);
 		// Now add local style if any.
@@ -274,12 +275,12 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 				cs = new HashMap<String, AbstractCSSProperties>(2);
 				this.computedStyles = cs;
 			} else {
-				AbstractCSSProperties sds2 = cs.get(pseudoElement);
+				AbstractCSSProperties sds2 = cs.get(tmpElement);
 				if (sds2 != null) {
 					return sds2;
 				}
 			}
-			cs.put(pseudoElement, sds);
+			cs.put(tmpElement, sds);
 		}
 		return sds;
 	}
@@ -1036,13 +1037,11 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		// Overrides DOMNodeImpl method
-		// Called in synchronized block already
-		if (prevRenderState.getColor() == null) {
-			prevRenderState = new ColorRenderState(prevRenderState, Color.BLACK);
+		RenderState tmpRenderState = prevRenderState;
+		if (tmpRenderState.getColor() == null) {
+			tmpRenderState = new ColorRenderState(tmpRenderState, Color.BLACK);
 		}
-
-		return new StyleSheetRenderState(prevRenderState, this);
+		return new StyleSheetRenderState(tmpRenderState, this);
 	}
 
 	/*

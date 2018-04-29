@@ -309,6 +309,7 @@ public class HTMLTableRowElementImpl extends HTMLAbstractUIElement implements HT
 	
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new TableRowRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new TableRowRenderState(tmpRenderState, this);
 	}
 }

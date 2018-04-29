@@ -46,6 +46,7 @@ public class HTMLBlockQuoteElementImpl extends HTMLAbstractUIElement {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BlockQuoteRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new BlockQuoteRenderState(tmpRenderState, this);
 	}
 }

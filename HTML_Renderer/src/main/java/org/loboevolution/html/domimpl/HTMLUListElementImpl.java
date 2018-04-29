@@ -92,6 +92,7 @@ public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLU
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new ListRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new ListRenderState(tmpRenderState, this);
 	}
 }

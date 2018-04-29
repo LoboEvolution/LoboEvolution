@@ -1654,7 +1654,8 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 	 * @return the render state
 	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return prevRenderState;
+		RenderState tmpRenderState = prevRenderState;
+		return tmpRenderState;
 	}
 
 	/**

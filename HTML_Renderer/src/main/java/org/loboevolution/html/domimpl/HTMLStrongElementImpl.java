@@ -20,6 +20,8 @@
  */
 package org.loboevolution.html.domimpl;
 
+import java.awt.Font;
+
 import org.loboevolution.html.renderstate.FontStyleRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -46,7 +48,8 @@ public class HTMLStrongElementImpl extends HTMLAbstractUIElement {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		tmpRenderState = new FontStyleRenderState(tmpRenderState, Font.BOLD);
+		return super.createRenderState(tmpRenderState);
 	}
 }

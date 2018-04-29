@@ -55,7 +55,8 @@ public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return super.createRenderState(prevRenderState);
+		RenderState tmpRenderState = prevRenderState;
+		return super.createRenderState(tmpRenderState);
 	}
 
 	/*

@@ -568,6 +568,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new TableRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new TableRenderState(tmpRenderState, this);
 	}
 }

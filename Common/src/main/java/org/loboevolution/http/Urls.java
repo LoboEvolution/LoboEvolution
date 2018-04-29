@@ -229,15 +229,16 @@ public final class Urls {
 	 */
 	public static URL guessURL(URL baseURL, String spec) throws MalformedURLException {
 		URL finalURL = null;
+		URL tmpURL = baseURL;
 		try {
-			if (baseURL != null) {
+			if (tmpURL != null) {
 				int colonIdx = spec.indexOf(':');
 				String newProtocol = colonIdx == -1 ? null : spec.substring(0, colonIdx);
-				if (newProtocol != null && !newProtocol.equalsIgnoreCase(baseURL.getProtocol())) {
-					baseURL = null;
+				if (newProtocol != null && !newProtocol.equalsIgnoreCase(tmpURL.getProtocol())) {
+					tmpURL = null;
 				}
 			}
-			finalURL = createURL(baseURL, spec);
+			finalURL = createURL(tmpURL, spec);
 		} catch (MalformedURLException | UnsupportedEncodingException mfu) {
 			spec = spec.trim();
 			int idx = spec.indexOf(':');
@@ -249,20 +250,20 @@ public final class Urls {
 				} else {
 					if (slashIdx == -1) {
 						// No slash, no colon, must be host.
-						finalURL = new URL(baseURL, "http://" + spec);
+						finalURL = new URL(tmpURL, "http://" + spec);
 					} else {
 						String possibleHost = spec.substring(0, slashIdx).toLowerCase();
 						if (Domains.isLikelyHostName(possibleHost)) {
-							finalURL = new URL(baseURL, "http://" + spec);
+							finalURL = new URL(tmpURL, "http://" + spec);
 						} else {
-							finalURL = new URL(baseURL, "file:" + spec);
+							finalURL = new URL(tmpURL, "file:" + spec);
 						}
 					}
 				}
 			} else {
 				if (idx == 1) {
 					// Likely a drive
-					finalURL = new URL(baseURL, "file:" + spec);
+					finalURL = new URL(tmpURL, "file:" + spec);
 				} else {
 					try {
 						throw mfu;

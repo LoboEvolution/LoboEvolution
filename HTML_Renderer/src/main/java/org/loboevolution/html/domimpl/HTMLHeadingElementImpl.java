@@ -77,7 +77,8 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new HeadingRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new HeadingRenderState(tmpRenderState, this);
 	}
 
 	/*

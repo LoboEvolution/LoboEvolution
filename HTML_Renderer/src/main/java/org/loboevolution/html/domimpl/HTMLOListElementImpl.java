@@ -115,7 +115,8 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new ListRenderState(prevRenderState, this);
+		RenderState tmpRenderState = prevRenderState;
+		return new ListRenderState(tmpRenderState, this);
 	}
 
 	/*

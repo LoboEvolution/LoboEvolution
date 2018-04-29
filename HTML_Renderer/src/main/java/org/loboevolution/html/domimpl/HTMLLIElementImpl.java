@@ -93,6 +93,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	 */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_LIST_ITEM);
+		RenderState tmpRenderState = prevRenderState;
+		return new DisplayRenderState(tmpRenderState, this, RenderState.DISPLAY_LIST_ITEM);
 	}
 }
