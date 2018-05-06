@@ -1335,6 +1335,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 					RWord rword = new RWord(textNode, word.toString(), container, fm, descent, ascentPlusLeading,
 							wordHeight, textTransform);
 					this.addWordToLine(rword);
+					if (!Strings.isBlank(renderState.getlineHeight())){
+						addLineBreak(this.modelNode, 0);
+					}
 				}
 			} finally {
 				this.currentLine.setAllowOverflow(prevAllowOverflow);

@@ -1436,14 +1436,14 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	public String getlineHeight() {
 		AbstractCSSProperties props = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
-		String lh = props == null ? null : props.getLineHeight();
+		String token = props == null ? null : props.getLineHeight();
 		
 		
 		if (this.iLineHeight != null) {
 			return this.iLineHeight;
 		}
 		
-		if (lh == null) {
+		if (token == null) {
 			if (prs != null) {
 				this.iLineHeight = prs.getlineHeight();
 				return this.iLineHeight;
@@ -1452,7 +1452,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 			return DEFAULT_LINE_HEIGHT;
 		}
 		
-		switch (lh) {
+		switch (token) {
 		case INHERIT:
 			return this.getPreviousRenderState().getlineHeight();
 		case NORMAL:
@@ -1460,8 +1460,12 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		case INITIAL:
 			return String.valueOf(prs.getFontMetrics().getHeight());
 		default:
-			int ilh = HtmlValues.getPixelSize(lh, this, 1);
-			return String.valueOf(ilh * LAFSettings.getInstance().getFontSize());
+			if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("em")
+					|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
+				return String.valueOf(HtmlValues.getPixelSize(token, this, 1));
+			} else {
+				return String.valueOf(HtmlValues.getPixelSize(token, this, 1) * this.iFont.getSize());
+			}
 		}
 	}
 }
