@@ -78,6 +78,7 @@ import org.loboevolution.html.svgimpl.SVGStyle;
 import org.loboevolution.html.svgimpl.SVGUseElementImpl;
 import org.loboevolution.html.svgimpl.SVGUtility;
 import org.loboevolution.html.svgimpl.SVGViewBoxImpl;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.w3c.svg.SVGElement;
 import org.loboevolution.w3c.svg.SVGLengthList;
 import org.loboevolution.w3c.svg.SVGPathSegList;
@@ -668,11 +669,8 @@ public class SVGBasicControl extends SVGStyle {
 	public List<SVGInfo> childNodes(Node element) {
 
 		List<SVGInfo> useList = new ArrayList<SVGInfo>();
-
-			NodeList childNodes = element.getChildNodes();
-			for (int i = 0; i < childNodes.getLength(); i++) {
-				Node n = childNodes.item(i);
-				
+		NodeList childNodes = element.getChildNodes();
+			for (Node n : Nodes.iterable(childNodes)) {		
 				if (n instanceof SVGGElementImpl) {
 					SVGGElementImpl svgGroup = (SVGGElementImpl) n;
 					SVGTransformList tl = svgGroup.getTransform().getBaseVal();
@@ -680,8 +678,7 @@ public class SVGBasicControl extends SVGStyle {
 					setSvgiGroup(new SVGInfo(style, tl));
 					svgGroup.setSvg(modelN);
 					NodeList gChildNodes = n.getChildNodes();
-					for (int g = 0; g < gChildNodes.getLength(); g++) {
-						Node n1 = gChildNodes.item(g);
+					for (Node n1 : Nodes.iterable(gChildNodes)) {
 						useList.addAll(child(n1));
 					}
 				} else if (n instanceof SVGDefsElementImpl) {
@@ -802,8 +799,7 @@ public class SVGBasicControl extends SVGStyle {
 			svgGroup.setSvg(modelN);
 
 			NodeList gChildNodes = svgGroup.getChildNodes();
-			for (int g = 0; g < gChildNodes.getLength(); g++) {
-				Node n1 = gChildNodes.item(g);
+			for (Node n1 : Nodes.iterable(gChildNodes)) {
 				useList.addAll(child(n1));
 			}
 		}

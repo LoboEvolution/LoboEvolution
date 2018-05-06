@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Objects;
 import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.HTMLMenuElement;
@@ -531,9 +532,8 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 							descendents.add(child);
 						}
 						NodeList sublist = childElement.getElementsByTagName(name);
-						int length = sublist.getLength();
-						for (int idx = 0; idx < length; idx++) {
-							descendents.add(sublist.item(idx));
+						for (Node node : Nodes.iterable(sublist)) {
+							descendents.add(node);
 						}
 					}
 				}
@@ -927,16 +927,12 @@ public class DOMElementImpl extends DOMFunctionImpl implements Element {
 		StringBuilder sb = new StringBuilder();
 		sb.append(this.getNodeName());
 		sb.append(" [");
-		NamedNodeMap attribs = this.getAttributes();
-		int length = attribs.getLength();
-		for (int i = 0; i < length; i++) {
-			Attr attr = (Attr) attribs.item(i);
+		NamedNodeMap attributes = this.getAttributes();
+		for (Attr attr : Nodes.iterable(attributes)) {
 			sb.append(attr.getNodeName());
 			sb.append('=');
 			sb.append(attr.getNodeValue());
-			if (i + 1 < length) {
-				sb.append(',');
-			}
+			sb.append(',');
 		}
 		sb.append("]");
 		return sb.toString();

@@ -22,6 +22,7 @@ package org.loboevolution.html.domfilter;
 
 import org.loboevolution.html.domimpl.DOMAttrImpl;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
@@ -71,9 +72,8 @@ public class ElementAttributeFilter {
 	public String getAttribute() {
 		String result = "";
 		Node node = nodeList.item(0);
-		NamedNodeMap attribs = node.getAttributes();
-		for (int s = 0; s < attribs.getLength(); s++) {
-			Attr attr = (Attr) attribs.item(s);
+		NamedNodeMap attributes = node.getAttributes();
+		for (Attr attr : Nodes.iterable(attributes)) {
 			if (attribute.equalsIgnoreCase(attr.getNodeName())) {
 				result = attr.getNodeValue();
 			}
@@ -93,10 +93,8 @@ public class ElementAttributeFilter {
 		boolean result = false;
 		HTMLElement el = doc.getBody();
 		if (el != null) {
-			NamedNodeMap attributes = el.getAttributes();
-			for (int s = 0; s < attributes.getLength(); s++) {
-				Attr attr = (Attr) attributes.item(s);
-
+			NamedNodeMap attributes = node.getAttributes();
+			for (Attr attr : Nodes.iterable(attributes)) {
 				if (attribute.equals(attr.getNodeName())) {
 					attr.setNodeValue(val);
 					el.setAttributeNode(attr);

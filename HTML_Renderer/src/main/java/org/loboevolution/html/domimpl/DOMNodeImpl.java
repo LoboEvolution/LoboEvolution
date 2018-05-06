@@ -48,6 +48,7 @@ import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Objects;
 import org.loboevolution.util.Strings;
 import org.w3c.dom.Attr;
@@ -344,9 +345,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 		try {
 			Node newNode = this.createSimilarNode();
 			NodeList children = this.getChildNodes();
-			int length = children.getLength();
-			for (int i = 0; i < length; i++) {
-				Node child = children.item(i);
+			for (Node child : Nodes.iterable(children)) {
 				Node newChild = deep ? child.cloneNode(deep) : child;
 				newNode.appendChild(newChild);
 			}
@@ -354,9 +353,7 @@ public abstract class DOMNodeImpl extends AbstractScriptableDelegate implements 
 				Element elem = (Element) newNode;
 				NamedNodeMap nnmap = this.getAttributes();
 				if (nnmap != null) {
-					int nnlength = nnmap.getLength();
-					for (int i = 0; i < nnlength; i++) {
-						Attr attr = (Attr) nnmap.item(i);
+					for (Attr attr : Nodes.iterable(nnmap)) {
 						elem.setAttributeNode((Attr) attr.cloneNode(true));
 					}
 				}

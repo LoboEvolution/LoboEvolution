@@ -123,16 +123,17 @@ public class Strings {
 	 * @return the string
 	 */
 	public static String leadingDigits(String text) {
-		int length = text.length();
+		char[] list = text.toCharArray();
 		StringBuilder buffer = null;
-		for (int i = 0; i < length; i++) {
-			char ch = text.charAt(i);
+		for (char ch : list) {
 			if (!Character.isDigit(ch)) {
 				break;
 			}
+			
 			if (buffer == null) {
 				buffer = new StringBuilder(3);
 			}
+			
 			buffer.append(ch);
 		}
 		return buffer == null ? "" : buffer.toString();
@@ -146,10 +147,9 @@ public class Strings {
 	 * @return the string
 	 */
 	public static String leadingNonDigits(String text) {
-		int length = text.length();
 		StringBuilder buffer = null;
-		for (int i = 0; i < length; i++) {
-			char ch = text.charAt(i);
+		char[] list = text.toCharArray();
+		for (char ch : list) {
 			if (Character.isDigit(ch)) {
 				break;
 			}
@@ -381,11 +381,10 @@ public class Strings {
 	 * @return the string[]
 	 */
 	public static String[] split(String phrase) {
-		int length = phrase.length();
 		ArrayList<String> wordList = new ArrayList<String>();
 		StringBuilder word = null;
-		for (int i = 0; i < length; i++) {
-			char ch = phrase.charAt(i);
+		char[] list = phrase.toCharArray();
+		for (char ch : list) {
 			switch (ch) {
 			case ' ':
 			case '\t':
@@ -450,9 +449,8 @@ public class Strings {
 	 */
 	public static String strictHtmlEncode(String rawText, boolean quotes) {
 		StringBuilder output = new StringBuilder();
-		int length = rawText.length();
-		for (int i = 0; i < length; i++) {
-			char ch = rawText.charAt(i);
+		char[] list = rawText.toCharArray();
+		for (char ch : list) {
 			switch (ch) {
 			case '&':
 				output.append("&amp;");
@@ -486,13 +484,14 @@ public class Strings {
 	 * @return the string
 	 */
 	public static String trimForAlphaNumDash(String rawText) {
-		int length = rawText.length();
-		for (int i = 0; i < length; i++) {
-			char ch = rawText.charAt(i);
+		char[] list = rawText.toCharArray();
+		int index = 0;
+		for (char ch : list) {
+			index++;
 			if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch >= '0' && ch <= '9' || ch == '-') {
 				continue;
 			}
-			return rawText.substring(0, i);
+			return rawText.substring(0, index);
 		}
 		return rawText;
 	}
@@ -508,11 +507,10 @@ public class Strings {
 		if (original == null) {
 			return null;
 		}
-		int length = original.length();
 		StringBuilder buffer = new StringBuilder();
 		boolean lastSlashR = false;
-		for (int i = 0; i < length; i++) {
-			char ch = original.charAt(i);
+		char[] list = original.toCharArray();
+		for (char ch : list) {
 			switch (ch) {
 			case '\r':
 				lastSlashR = true;

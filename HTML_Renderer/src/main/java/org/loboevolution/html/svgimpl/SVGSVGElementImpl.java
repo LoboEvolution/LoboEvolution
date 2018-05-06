@@ -23,6 +23,7 @@ package org.loboevolution.html.svgimpl;
 
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.style.AbstractCSSProperties;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.w3c.events.Event;
 import org.loboevolution.w3c.svg.SVGAngle;
 import org.loboevolution.w3c.svg.SVGAnimatedBoolean;
@@ -516,8 +517,7 @@ public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, 
 
 	public SVGAnimationImpl getAnimateElement() {
 		NodeList gChildNodes = this.getChildNodes();
-		for (int g = 0; g < gChildNodes.getLength(); g++) {
-			Node n = gChildNodes.item(g);
+		for (Node n : Nodes.iterable(gChildNodes)) {
 			if (n instanceof SVGAnimateElementImpl) {
 				return (SVGAnimateElementImpl) n;
 			}

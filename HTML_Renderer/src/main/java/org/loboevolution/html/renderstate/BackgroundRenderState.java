@@ -52,6 +52,7 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.io.IORoutines;
 import org.w3c.dom.Attr;
@@ -192,7 +193,6 @@ public class BackgroundRenderState implements CSSValuesProperties {
 			if (bg.getBackgroundImage() == null && bg.getBackgroundImageBase64() == null) {
 				try {
 					url = document.getFullURL(quotedUri);
-					logger.error(url);
 					bg.setBackgroundImage(url);
 				} catch (Exception ex) {
 					logger.error(ex);
@@ -206,14 +206,11 @@ public class BackgroundRenderState implements CSSValuesProperties {
 		URL url = null;
 		BackgroundInfo bg = binfo;
 		NodeList nodeList = document.getElementsByTagName("LINK");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = (Node) nodeList.item(i);
-			NamedNodeMap attribs = node.getAttributes();
+		for (Node node : Nodes.iterable(nodeList)) {
+			NamedNodeMap attributes = node.getAttributes();
 			String href = "";
 			String rel = "";
-
-			for (int s = 0; s < attribs.getLength(); s++) {
-				Attr attr = (Attr) attribs.item(s);
+			for (Attr attr : Nodes.iterable(attributes)) {
 
 				if ("rel".equalsIgnoreCase(attr.getNodeName())) {
 					rel = attr.getNodeValue();

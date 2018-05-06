@@ -95,10 +95,8 @@ public abstract class EventDispatch2 {
 			}
 			larray = this.listeners.toArray(EMPTY_ARRAY);
 		}
-		int length = larray.length;
-		for (int i = 0; i < length; i++) {
-			// Call holding no locks
-			this.dispatchEvent(larray[i], event);
+		for (EventListener el : larray) {
+			this.dispatchEvent(el, event);
 		}
 		return true;
 	}

@@ -151,9 +151,9 @@ public class SelectorMatcher {
 	
 	public String getOperator(String selectorList) {
 		String[] keys = {OP_TILDE_EQUAL, OP_PIPE_EQUAL, OP_DOLLAR_EQUAL, OP_CIRCUMFLEX_EQUAL, OP_STAR_EQUAL, OP_EQUAL};
-        for (int i = 0; i < keys.length; i++) {
-            if (selectorList.contains(keys[i])) {
-                return keys[i];
+		for (String key : keys) {
+            if (selectorList.contains(key)) {
+                return key;
             }
         }
         return OP_ALL;

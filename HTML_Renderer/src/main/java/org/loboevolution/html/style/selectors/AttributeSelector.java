@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 
 import org.loboevolution.html.domimpl.DOMNodeImpl;
 import org.loboevolution.html.info.SelectorInfo;
+import org.loboevolution.util.Nodes;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -180,8 +181,7 @@ public class AttributeSelector {
 		case LANG:
 			String value = getValue(LANG, select);
 			NamedNodeMap attributes = node.getAttributes();
-			for (int s = 0; s < attributes.getLength(); s++) {
-				Attr attr = (Attr) attributes.item(s);
+			for (Attr attr : Nodes.iterable(attributes)) {
 				if (LANG.equals(attr.getName()) && value.equals(attr.getValue())) {
 					return true;
 				}

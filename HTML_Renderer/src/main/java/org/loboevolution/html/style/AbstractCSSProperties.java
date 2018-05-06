@@ -33,6 +33,7 @@ import org.loboevolution.html.style.setter.FourCornersSetter;
 import org.loboevolution.html.style.setter.Property;
 import org.loboevolution.html.style.setter.SubPropertySetter;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Objects;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSSStyleDeclaration;
@@ -96,19 +97,18 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate
 	 */
 	public void addStyleDeclaration(CSSStyleDeclaration styleDeclaration) {
 		synchronized (this) {
+			CSSStyleDeclaration style = styleDeclaration;
 			Collection<CSSStyleDeclaration> sd = this.styleDeclarations;
 			if (sd == null) {
 				sd = new LinkedList<CSSStyleDeclaration>();
 				this.styleDeclarations = sd;
 			}
-			sd.add(styleDeclaration);
-			int length = styleDeclaration.getLength();
-			for (int i = 0; i < length; i++) {
-				String propertyName = styleDeclaration.item(i);
-				String propertyValue = styleDeclaration.getPropertyValue(propertyName);
-				String priority = styleDeclaration.getPropertyPriority(propertyName);
+			sd.add(style);
+			for (String propertyName : Nodes.iterable(style)) {
+				String propertyValue = style.getPropertyValue(propertyName);
+				String priority = style.getPropertyPriority(propertyName);
 				boolean important = "important".equals(priority);
-				this.setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, styleDeclaration, important);
+				this.setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, style, important);
 			}
 		}
 	}

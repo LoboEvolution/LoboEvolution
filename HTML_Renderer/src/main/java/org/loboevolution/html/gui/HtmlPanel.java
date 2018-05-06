@@ -571,10 +571,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (children == null) {
 			return null;
 		}
-		int length = children.length;
 		DOMNodeImpl frameSet = null;
-		for (int i = 0; i < length; i++) {
-			DOMNodeImpl child = children[i];
+		for (DOMNodeImpl child : children) {
 			if (child instanceof DOMElementImpl) {
 				String tagName = child.getNodeName();
 				if ("FRAMESET".equalsIgnoreCase(tagName)) {
@@ -606,9 +604,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 		DOMNodeImpl[] children = element.getChildrenArray();
 		if (children != null) {
-			int length = children.length;
-			for (int i = 0; i < length; i++) {
-				DOMNodeImpl child = children[i];
+			for (DOMNodeImpl child : children) {
 				if (child instanceof Text) {
 					String textContent = ((Text) child).getTextContent();
 					if (textContent != null && !"".equals(textContent.trim())) {
@@ -839,9 +835,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			notifsArray = notifs.toArray(notifsArray);
 			notifs.clear();
 		}
-		int length = notifsArray.length;
-		for (int i = 0; i < length; i++) {
-			DocumentNotification dn = notifsArray[i];
+		for (DocumentNotification dn : notifsArray) {
 			if (this.resetIfFrameSet() && dn.node instanceof HTMLFrameSetElement && this.htmlBlockPanel != null) {
 				return;
 			}

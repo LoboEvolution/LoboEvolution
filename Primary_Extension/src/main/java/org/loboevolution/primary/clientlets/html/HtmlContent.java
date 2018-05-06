@@ -31,6 +31,7 @@ import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.Urls;
 import org.loboevolution.info.MetaInfo;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.io.BufferExceededException;
 import org.loboevolution.util.io.RecordedInputStream;
@@ -190,8 +191,7 @@ public class HtmlContent extends AbstractComponentContent {
 			return null;
 		}
 		
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
+		for (Node node : Nodes.iterable(nodeList)) {
 			if (node instanceof HTMLElement) {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;
@@ -217,8 +217,7 @@ public class HtmlContent extends AbstractComponentContent {
 			return null;
 		}
 		
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
+		for (Node node : Nodes.iterable(nodeList)) {
 			if (node instanceof HTMLElement) {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;
@@ -239,8 +238,7 @@ public class HtmlContent extends AbstractComponentContent {
 		}
 
 		nodeList = this.document.getElementsByTagName("link");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
+		for (Node node : Nodes.iterable(nodeList)) {
 			if (node instanceof HTMLElement) {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;
@@ -272,8 +270,7 @@ public class HtmlContent extends AbstractComponentContent {
 			return null;
 		}
 		
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
+		for (Node node : Nodes.iterable(nodeList)) {
 			if (node instanceof HTMLElement) {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;
@@ -305,8 +302,7 @@ public class HtmlContent extends AbstractComponentContent {
 			return null;
 		}
 		
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
+		for (Node node : Nodes.iterable(nodeList)) {
 			if (node instanceof HTMLElement) {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;

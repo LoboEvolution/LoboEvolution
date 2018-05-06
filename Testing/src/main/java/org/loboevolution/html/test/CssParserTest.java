@@ -49,6 +49,7 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.io.IORoutines;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSImportRule;
@@ -202,9 +203,7 @@ public class CssParserTest extends JFrame {
 		PrintWriter writer = new PrintWriter(stringWriter);
 		writer.println("<DL>");
 		CSSRuleList ruleList = styleSheet.getCssRules();
-		int length = ruleList.getLength();
-		for (int i = 0; i < length; i++) {
-			CSSRule rule = ruleList.item(i);
+		for (CSSRule rule : Nodes.iterable(ruleList)) {
 			writer.println("<DT><strong>Rule: type=" + rule.getType() + ",class=" + rule.getClass().getName()
 					+ "</strong></DT>");
 			writer.println("<DD>");

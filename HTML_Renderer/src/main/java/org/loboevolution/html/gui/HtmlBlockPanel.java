@@ -783,24 +783,14 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *            the notifications
 	 */
 	public void processDocumentNotifications(DocumentNotification[] notifications) {
-		// Called in the GUI thread.
 		if (this.processingDocumentNotification) {
-			// This should not be possible. Even if
-			// Javascript modifies the DOM during
-			// parsing, this should be executed in
-			// the GUI thread, not the parser thread.
 			throw new IllegalStateException("Recursive");
 		}
 		this.processingDocumentNotification = true;
 		try {
-			// Note: It may be assumed that usually only generic
-			// notifications come in batches. Other types
-			// of noitifications probably come one by one.
 			boolean topLayout = false;
 			ArrayList<RElement> repainters = null;
-			int length = notifications.length;
-			for (int i = 0; i < length; i++) {
-				DocumentNotification dn = notifications[i];
+			for (DocumentNotification dn : notifications) {
 				int type = dn.type;
 				switch (type) {
 				case DocumentNotification.GENERIC:

@@ -510,10 +510,8 @@ public class GuiMouseImpl implements HtmlAttributeProperties, HtmlProperties {
 
 			if (hie.isSubmitInput()) {
 				FormInput[] formInputs = new FormInput[list.getLength()];
-
 				for (int i = 0; i < list.getLength(); i++) {
 					Node n = list.item(i);
-
 					if (n instanceof HTMLInputElementImpl) {
 						HTMLInputElementImpl input = (HTMLInputElementImpl) n;
 						String name = input.getName();

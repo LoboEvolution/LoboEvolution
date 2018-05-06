@@ -82,9 +82,9 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 		if (begin != null) {
 			String[] beginTimeStringList = begin.split(";");
 
-			for (int i = 0; i < beginTimeStringList.length; i++) {
+			for (String beginTimeString : beginTimeStringList) {
 				try {
-					beginTimeList.add(new TimeImpl(beginTimeStringList[i]));
+					beginTimeList.add(new TimeImpl(beginTimeString));
 				} catch (IllegalArgumentException e) {
 				}
 			}

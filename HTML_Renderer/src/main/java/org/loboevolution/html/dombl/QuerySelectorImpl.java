@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import org.loboevolution.html.domfilter.ElementFilter;
 import org.loboevolution.html.domimpl.DOMNodeListImpl;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
+import org.loboevolution.util.Nodes;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -59,14 +60,13 @@ public class QuerySelectorImpl {
 			if ("".equals(str0) || str0 == null) {
 				element = (Element) doc.getElementsByClassName(selectors.replace(".", "")).item(0);
 			} else {
-				NodeList node = doc.getElementsByTagName(str0);
-				for (int i = 0; i < node.getLength(); i++) {
-					if (str0.equals(node.item(i).getNodeName())) {
-						NamedNodeMap attributes = node.item(i).getAttributes();
-						for (int s = 0; s < attributes.getLength(); s++) {
-							Attr attr = (Attr) attributes.item(s);
+				NodeList nodeList = doc.getElementsByTagName(str0);
+				for (Node node : Nodes.iterable(nodeList)) {
+					if (str0.equals(node.getNodeName())) {
+						NamedNodeMap attributes = node.getAttributes();
+						for (Attr attr : Nodes.iterable(attributes)) {
 							if (attr.getName().equals("class") && attr.getValue().equals(str1)) {
-								element = (Element) doc.getElementsByTagName(node.item(i).getNodeName()).item(i);
+								element = (Element) node;
 								break;
 							}
 						}
@@ -78,11 +78,10 @@ public class QuerySelectorImpl {
 			String[] str = selectors.split(">");
 			String str0 = str[0].trim();
 			String str1 = str[1].trim();
-			NodeList node = doc.getElementsByTagName(str1);
-
-			for (int i = 0; i < node.getLength(); i++) {
-				if (str0.equals(node.item(i).getParentNode().getNodeName())) {
-					element = (Element) doc.getElementsByTagName(node.item(i).getNodeName()).item(i);
+			NodeList nodeList = doc.getElementsByTagName(str1);
+			for (Node node : Nodes.iterable(nodeList)) {
+				if (str0.equals(node.getParentNode().getNodeName())) {
+					element = (Element)node;
 					break;
 				}
 			}
@@ -91,14 +90,12 @@ public class QuerySelectorImpl {
 			String[] str = selectors.split("\\[");
 			String str0 = str[0].trim();
 			String str1 = str[1].trim();
-			NodeList node = doc.getElementsByTagName(str0);
-
-			for (int i = 0; i < node.getLength(); i++) {
-				NamedNodeMap attributes = node.item(i).getAttributes();
-				for (int s = 0; s < attributes.getLength(); s++) {
-					Attr attr = (Attr) attributes.item(s);
+			NodeList nodeList = doc.getElementsByTagName(str0);
+			for (Node node : Nodes.iterable(nodeList)) {
+				NamedNodeMap attributes = node.getAttributes();
+				for (Attr attr : Nodes.iterable(attributes)) {
 					if (attr.getName().equals(str1.replace("]", "").trim())) {
-						element = (Element) doc.getElementsByTagName(node.item(i).getNodeName()).item(i);
+						element = (Element) node;
 						break;
 					}
 				}
@@ -108,10 +105,10 @@ public class QuerySelectorImpl {
 			String[] str = selectors.split("\\,");
 			String str0 = str[0].trim();
 			String str1 = str[1].trim();
-			NodeList node = doc.getNodeList(new ElementFilter());
-			for (int i = 0; i < node.getLength(); i++) {
-				if (str0.equals(node.item(i).getNodeName()) || str1.equals(node.item(i).getNodeName())) {
-					element = (Element) doc.getElementsByTagName(node.item(i).getNodeName()).item(0);
+			NodeList nodeList = doc.getNodeList(new ElementFilter());
+			for (Node node : Nodes.iterable(nodeList)) {
+				if (str0.equals(node.getNodeName()) || str1.equals(node.getNodeName())) {
+					element = (Element) doc.getElementsByTagName(node.getNodeName()).item(0);
 					break;
 				}
 			}
@@ -143,16 +140,13 @@ public class QuerySelectorImpl {
 			if ("".equals(str0) || str0 == null) {
 				list = doc.getElementsByClassName(selectors.replace(".", ""));
 			} else {
-
-				NodeList node = doc.getElementsByTagName(str0);
-
-				for (int i = 0; i < node.getLength(); i++) {
-					if (str0.equals(node.item(i).getNodeName())) {
-						NamedNodeMap attributes = node.item(i).getAttributes();
-						for (int s = 0; s < attributes.getLength(); s++) {
-							Attr attr = (Attr) attributes.item(s);
+				NodeList nodeList = doc.getElementsByTagName(str0);
+				for (Node node : Nodes.iterable(nodeList)) {
+					if (str0.equals(node.getNodeName())) {
+						NamedNodeMap attributes = node.getAttributes();
+						for (Attr attr : Nodes.iterable(attributes)) {
 							if (attr.getName().equals("class") && attr.getValue().equals(str1)) {
-								listNode.add(node.item(i));
+								listNode.add(node);
 								list = new DOMNodeListImpl(listNode);
 							}
 						}
@@ -164,14 +158,12 @@ public class QuerySelectorImpl {
 			String[] str = selectors.split("\\[");
 			String str0 = str[0].trim();
 			String str1 = str[1].trim();
-			NodeList node = doc.getElementsByTagName(str0);
-
-			for (int i = 0; i < node.getLength(); i++) {
-				NamedNodeMap attributes = node.item(i).getAttributes();
-				for (int s = 0; s < attributes.getLength(); s++) {
-					Attr attr = (Attr) attributes.item(s);
+			NodeList nodeList = doc.getElementsByTagName(str0);
+			for (Node node : Nodes.iterable(nodeList)) {
+				NamedNodeMap attributes = node.getAttributes();
+				for (Attr attr : Nodes.iterable(attributes)) {
 					if (attr.getName().equals(str1.replace("]", "").trim())) {
-						listNode.add(node.item(i));
+						listNode.add(node);
 						list = new DOMNodeListImpl(listNode);
 					}
 				}
@@ -181,23 +173,21 @@ public class QuerySelectorImpl {
 			String[] str = selectors.split(">");
 			String str0 = str[0].trim();
 			String str1 = str[1].trim();
-			NodeList node = doc.getElementsByTagName(str1);
-
-			for (int i = 0; i < node.getLength(); i++) {
-				if (str0.equals(node.item(i).getParentNode().getNodeName())) {
-					listNode.add(node.item(i));
+			NodeList nodeList = doc.getElementsByTagName(str0);
+			for (Node node : Nodes.iterable(nodeList)) {
+				if (str0.equals(node.getParentNode().getNodeName())) {
+					listNode.add(node);
 					list = new DOMNodeListImpl(listNode);
 				}
 			}
 		} else if (selectors.contains(",")) {
 
 			String[] str = selectors.split("\\,");
-			NodeList node = doc.getNodeList(new ElementFilter());
-			for (int i = 0; i < node.getLength(); i++) {
-
+			NodeList nodeList = doc.getNodeList(new ElementFilter());
+			for (Node node : Nodes.iterable(nodeList)) {
 				for (String element : str) {
-					if (node.item(i).getNodeName().equals(element.trim())) {
-						listNode.add(node.item(i));
+					if (node.getNodeName().equals(element.trim())) {
+						listNode.add(node);
 					}
 				}
 			}

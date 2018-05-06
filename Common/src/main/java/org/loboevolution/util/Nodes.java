@@ -20,7 +20,16 @@
  */
 package org.loboevolution.util;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.css.CSSRule;
+import org.w3c.dom.css.CSSRuleList;
+import org.w3c.dom.css.CSSStyleDeclaration;
 
 /**
  * The Class Nodes.
@@ -68,4 +77,81 @@ public class Nodes {
 		}
 		return isSameOrAncestorOf(node, parent);
 	}
+	
+	public static Iterable<Node> iterable(final NodeList nodeList) {
+	    return () -> new Iterator<Node>() {
+
+	        private int index = 0;
+
+	        @Override
+	        public boolean hasNext() {
+	            return index < nodeList.getLength();
+	        }
+
+	        @Override
+	        public Node next() {
+	            if (!hasNext())
+	                throw new NoSuchElementException();
+	            return nodeList.item(index++); 
+	        }
+	    };
+	}
+	
+	public static Iterable<Attr> iterable(final NamedNodeMap attrList) {
+	    return () -> new Iterator<Attr>() {
+
+	        private int index = 0;
+
+	        @Override
+	        public boolean hasNext() {
+	            return index < attrList.getLength();
+	        }
+
+	        @Override
+	        public Attr next() {
+	            if (!hasNext())
+	                throw new NoSuchElementException();
+	            return (Attr) attrList.item(index++); 
+	        }
+	    };
+	}
+	
+	public static Iterable<String> iterable(final CSSStyleDeclaration cssList) {
+	    return () -> new Iterator<String>() {
+
+	        private int index = 0;
+
+	        @Override
+	        public boolean hasNext() {
+	            return index < cssList.getLength();
+	        }
+
+	        @Override
+	        public String next() {
+	            if (!hasNext())
+	                throw new NoSuchElementException();
+	            return (String) cssList.item(index++); 
+	        }
+	    };
+	}
+	
+	public static Iterable<CSSRule> iterable(final CSSRuleList cssRuleList) {
+	    return () -> new Iterator<CSSRule>() {
+
+	        private int index = 0;
+
+	        @Override
+	        public boolean hasNext() {
+	            return index < cssRuleList.getLength();
+	        }
+
+	        @Override
+	        public CSSRule next() {
+	            if (!hasNext())
+	                throw new NoSuchElementException();
+	            return (CSSRule) cssRuleList.item(index++); 
+	        }
+	    };
+	}
+	
 }

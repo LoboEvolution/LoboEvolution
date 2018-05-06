@@ -341,11 +341,10 @@ public class HtmlValues implements CSSValuesProperties {
 	 */
 	public static String[] splitCssValue(String cssValue) {
 		ArrayList<String> tokens = new ArrayList<String>(4);
-		int len = cssValue.length();
 		int parenCount = 0;
 		StringBuilder currentWord = null;
-		for (int i = 0; i < len; i++) {
-			char ch = cssValue.charAt(i);
+		char[] list = cssValue.toCharArray();
+		for (char ch : list) {
 			switch (ch) {
 			case '(':
 				parenCount++;

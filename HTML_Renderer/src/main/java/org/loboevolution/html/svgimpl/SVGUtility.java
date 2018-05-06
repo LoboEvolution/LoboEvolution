@@ -38,6 +38,7 @@ import org.loboevolution.font.LAFSettings;
 import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.FontValues;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.smil.ElementTargetAttributes;
 import org.loboevolution.w3c.smil.Time;
@@ -99,9 +100,7 @@ public class SVGUtility {
 	public static String getText(Node n) {
 		String text = "";
 		NodeList children = n.getChildNodes();
-		int numChildren = children.getLength();
-		for (int i = 0; i < numChildren; i++) {
-			Node child = children.item(i);
+		for (Node child : Nodes.iterable(children)) {
 			if (child.getNodeType() == Node.TEXT_NODE) { // it is #PCDATA
 				String nodeValue = child.getNodeValue();
 				nodeValue = nodeValue.replace('\n', ' ');

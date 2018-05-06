@@ -35,11 +35,10 @@ public class Html {
 		if (text == null) {
 			return null;
 		}
-		int length = text.length();
 		boolean prevSlashR = false;
 		StringBuilder out = new StringBuilder();
-		for (int i = 0; i < length; i++) {
-			char ch = text.charAt(i);
+		char[] list = text.toCharArray();
+		for (char ch : list) {
 			switch (ch) {
 			case '\r':
 				if (prevSlashR) {

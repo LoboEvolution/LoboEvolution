@@ -42,6 +42,7 @@ import org.loboevolution.html.info.StyleRuleInfo;
 import org.loboevolution.html.style.selectors.AttributeSelector;
 import org.loboevolution.html.style.selectors.SelectorMatcher;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.util.Nodes;
 import org.w3c.dom.Attr;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.css.CSSImportRule;
@@ -142,9 +143,7 @@ public class StyleSheetAggregator {
 	private final void addStyleSheet(CSSStyleSheet styleSheet)
 			throws MalformedURLException, UnsupportedEncodingException {
 		CSSRuleList ruleList = styleSheet.getCssRules();
-		int length = ruleList.getLength();
-		for (int i = 0; i < length; i++) {
-			CSSRule rule = ruleList.item(i);
+		for (CSSRule rule : Nodes.iterable(ruleList)) {
 			this.addRule(styleSheet, rule);
 		}
 	}
@@ -254,9 +253,7 @@ public class StyleSheetAggregator {
 			MediaList mediaList = mrule.getMedia();
 			if (CSSUtilities.matchesMedia(mediaList, document.getUserAgentContext())) {
 				CSSRuleList ruleList = mrule.getCssRules();
-				int length = ruleList.getLength();
-				for (int i = 0; i < length; i++) {
-					CSSRule subRule = ruleList.item(i);
+				for (CSSRule subRule : Nodes.iterable(ruleList)) {
 					this.addRule(styleSheet, subRule);
 				}
 			}
@@ -471,8 +468,7 @@ public class StyleSheetAggregator {
 		}
 
 		if (attributes != null && attributes.getLength() > 0) {
-			for (int i1 = 0; i1 < attributes.getLength(); i1++) {
-				Attr attr = (Attr) attributes.item(i1);
+			for (Attr attr : Nodes.iterable(attributes)) {
 				if (isAttributeOperator(attr, element)) {
 					Map<String, Collection<StyleRuleInfo>> classMaps = this.attrMapsByElement.get(htmlElement);
 					if (classMaps != null) {

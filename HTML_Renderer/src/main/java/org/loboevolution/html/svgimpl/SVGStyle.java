@@ -37,6 +37,7 @@ import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.control.BaseControl;
 import org.loboevolution.html.info.SVGInfo;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Strings;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -198,8 +199,7 @@ public class SVGStyle extends BaseControl{
 	public float[] fractions(Element elem) {
 		ArrayList<Float> fractions = new ArrayList<Float>();
 		NodeList childNodes = elem.getChildNodes();
-		for (int i = 0; i < childNodes.getLength(); i++) {
-			Node n = childNodes.item(i);
+		for (Node n : Nodes.iterable(childNodes)) {
 			if (n instanceof SVGStopElementImpl) {
 				SVGStopElementImpl stop = (SVGStopElementImpl) n;
 				fractions.add(stop.getOffset().getBaseVal());
@@ -218,8 +218,7 @@ public class SVGStyle extends BaseControl{
 	public Color[] colors(Element elem) {
 		ArrayList<Color> colors = new ArrayList<Color>();
 		NodeList childNodes = elem.getChildNodes();
-		for (int i = 0; i < childNodes.getLength(); i++) {
-			Node n = childNodes.item(i);
+		for (Node n : Nodes.iterable(childNodes)) {
 			if (n instanceof SVGStopElementImpl) {
 				SVGStopElementImpl stop = (SVGStopElementImpl) n;
 				colors.add(stop.getStopColor());

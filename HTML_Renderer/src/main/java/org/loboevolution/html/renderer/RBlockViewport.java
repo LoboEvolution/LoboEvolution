@@ -570,11 +570,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	public void layoutChildren(DOMNodeImpl node) {
 		DOMNodeImpl[] childrenArray = node.getChildrenArray();
 		if (childrenArray != null) {
-			int length = childrenArray.length;
-			for (int i = 0; i < length; i++) {
-				DOMNodeImpl child = childrenArray[i];
+			for (DOMNodeImpl child : childrenArray) {
 				short nodeType = child.getNodeType();
-
 				switch (nodeType) {
 				case Node.TEXT_NODE:
 					this.layoutText(child);
@@ -1343,11 +1340,10 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 				this.currentLine.setAllowOverflow(prevAllowOverflow);
 			}
 		} else {
-			int length = text.length();
 			boolean lastCharSlashR = false;
 			StringBuilder line = new StringBuilder();
-			for (int i = 0; i < length; i++) {
-				char ch = text.charAt(i);
+			char[] list = text.toCharArray();
+			for (char ch : list) {
 				switch (ch) {
 				case '\r':
 					lastCharSlashR = true;
@@ -2288,9 +2284,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		int shiftX = floatingInfo.getShiftX() + block.getX();
 		int shiftY = floatingInfo.getShiftY() + block.getY();
 		ExportableFloat[] floats = floatingInfo.getFloats();
-		int length = floats.length;
-		for (int i = 0; i < length; i++) {
-			ExportableFloat ef = floats[i];
+		for (ExportableFloat ef : floats) {
 			this.importFloat(ef, shiftX, shiftY);
 		}
 	}
