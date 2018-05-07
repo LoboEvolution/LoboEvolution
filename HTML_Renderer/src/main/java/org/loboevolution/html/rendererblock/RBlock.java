@@ -21,7 +21,7 @@
 /*
  * Created on Apr 16, 2005
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.rendererblock;
 
 import java.awt.Adjustable;
 import java.awt.Color;
@@ -52,6 +52,15 @@ import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.html.info.FloatingInfo;
 import org.loboevolution.html.layout.LayoutKey;
 import org.loboevolution.html.layout.LayoutValue;
+import org.loboevolution.html.renderer.BaseElementRenderable;
+import org.loboevolution.html.renderer.BoundableRenderable;
+import org.loboevolution.html.renderer.FloatingBounds;
+import org.loboevolution.html.renderer.FloatingBoundsSource;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.RenderableSpot;
+import org.loboevolution.html.renderer.ShiftedFloatingBounds;
+import org.loboevolution.html.renderer.SizeExceededException;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.RenderThreadState;

@@ -26,6 +26,7 @@ import java.util.Iterator;
 
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.info.FloatingInfo;
+import org.loboevolution.html.rendererblock.RBlock;
 import org.loboevolution.util.CollectionUtilities;
 
 /**

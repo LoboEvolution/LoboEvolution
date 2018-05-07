@@ -24,8 +24,9 @@ package org.loboevolution.html.layout;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RElement;
+import org.loboevolution.html.rendererblock.RBlockPosition;
+import org.loboevolution.html.rendererblock.RBlockViewport;
 import org.loboevolution.html.style.AbstractCSSProperties;
 
 /**
@@ -92,7 +93,8 @@ public abstract class CommonWidgetLayout implements MarkupLayout, HtmlAttributeP
 			bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement, this.useAlignAttribute);
 			break;
 		case ADD_AS_BLOCK:
-			bodyLayout.positionRElement(markupElement, renderable, this.useAlignAttribute, true, false);
+			RBlockPosition ps = new RBlockPosition();
+			ps.positionRElement(markupElement, renderable, bodyLayout, this.useAlignAttribute, true, false);
 			break;
 		default:
 			break;

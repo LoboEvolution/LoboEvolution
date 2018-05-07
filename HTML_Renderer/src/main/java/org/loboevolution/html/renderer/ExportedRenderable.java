@@ -20,6 +20,8 @@
  */
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.html.rendererblock.RBlockViewport;
+
 /**
  * The Class ExportedRenderable.
  */

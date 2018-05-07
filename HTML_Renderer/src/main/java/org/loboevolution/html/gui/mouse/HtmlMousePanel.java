@@ -29,9 +29,9 @@ import java.awt.event.MouseWheelEvent;
 import org.loboevolution.html.gui.HtmlBlockPanel;
 import org.loboevolution.html.renderer.BoundableRenderable;
 import org.loboevolution.html.renderer.FrameContext;
-import org.loboevolution.html.renderer.RBlock;
-import org.loboevolution.html.renderer.RBlockViewport;
 import org.loboevolution.html.renderer.RenderableSpot;
+import org.loboevolution.html.rendererblock.RBlock;
+import org.loboevolution.html.rendererblock.RBlockViewport;
 import org.loboevolution.util.Objects;
 
 public class HtmlMousePanel {

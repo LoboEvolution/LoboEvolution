@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderer;
+package org.loboevolution.html.rendererblock;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -30,6 +30,11 @@ import java.util.Iterator;
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderer.BaseElementRenderable;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.Renderable;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.CollectionUtilities;
 

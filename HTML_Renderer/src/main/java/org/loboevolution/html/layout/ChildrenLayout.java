@@ -21,7 +21,8 @@
 package org.loboevolution.html.layout;
 
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.rendererblock.RBlockViewport;
+import org.loboevolution.html.rendererblock.RblockLayout;
 
 /**
  * The Class ChildrenLayout.
@@ -36,6 +37,7 @@ public class ChildrenLayout implements MarkupLayout {
 	 */
 	@Override
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-		bodyLayout.layoutChildren(markupElement);
+		RblockLayout ly = new RblockLayout();
+		ly.layoutChildren(markupElement, bodyLayout);
 	}
 }

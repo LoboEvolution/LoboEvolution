@@ -28,6 +28,7 @@ import java.util.Iterator;
 
 import org.loboevolution.html.dombl.ModelNode;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
+import org.loboevolution.html.rendererblock.RBlockViewport;
 import org.loboevolution.util.Objects;
 
 /**

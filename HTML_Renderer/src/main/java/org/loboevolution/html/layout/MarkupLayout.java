@@ -24,7 +24,7 @@
 package org.loboevolution.html.layout;
 
 import org.loboevolution.html.domimpl.HTMLElementImpl;
-import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.rendererblock.RBlockViewport;
 
 /**
  * The Interface MarkupLayout.

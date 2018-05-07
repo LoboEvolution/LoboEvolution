@@ -93,7 +93,7 @@ public class ElementAttributeFilter {
 		boolean result = false;
 		HTMLElement el = doc.getBody();
 		if (el != null) {
-			NamedNodeMap attributes = node.getAttributes();
+			NamedNodeMap attributes = el.getAttributes();
 			for (Attr attr : Nodes.iterable(attributes)) {
 				if (attribute.equals(attr.getNodeName())) {
 					attr.setNodeValue(val);

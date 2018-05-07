@@ -23,7 +23,8 @@ package org.loboevolution.html.layout;
 import org.loboevolution.html.dombl.UINode;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.BaseBoundableRenderable;
-import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.rendererblock.RBlockViewport;
+import org.loboevolution.html.rendererblock.RblockLayout;
 import org.loboevolution.html.renderstate.RenderState;
 
 /**
@@ -83,6 +84,7 @@ public abstract class CommonLayout implements MarkupLayout {
 	@Override
 	public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 		RenderState rs = markupElement.getRenderState();
+		RblockLayout layout = new RblockLayout();
 
 		int display = 0;
 
@@ -119,19 +121,19 @@ public abstract class CommonLayout implements MarkupLayout {
 		case DISPLAY_BLOCK:
 		case DISPLAY_TABLE:
 		case DISPLAY_TABLE_ROW:
-			bodyLayout.layoutRBlock(markupElement);
+			layout.layoutRBlock(markupElement, bodyLayout);
 			break;
 		case DISPLAY_LIST_ITEM:
 			String tagName = markupElement.getTagName();
 			if ("UL".equalsIgnoreCase(tagName) || "OL".equalsIgnoreCase(tagName)) {
-				bodyLayout.layoutList(markupElement);
+				layout.layoutList(markupElement,bodyLayout);
 			} else {
-				bodyLayout.layoutListItem(markupElement);
+				layout.layoutListItem(markupElement, bodyLayout);
 			}
 			break;
 		case DISPLAY_INLINE_BLOCK:
 		case DISPLAY_INLINE_TABLE:
-			bodyLayout.layoutRInlineBlock(markupElement);
+			layout.layoutRInlineBlock(markupElement, bodyLayout);
 			break;
 		case DISPLAY_TABLE_CELL:
 		default:

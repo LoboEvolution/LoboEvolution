@@ -27,7 +27,7 @@ import org.loboevolution.color.ColorFactory;
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.info.BorderInfo;
-import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.rendererblock.RBlockViewport;
 import org.loboevolution.html.style.CSS3Properties;
 import org.loboevolution.html.style.CSSValuesProperties;
 import org.loboevolution.html.style.HtmlInsets;

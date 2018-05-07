@@ -40,6 +40,7 @@ import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.info.BackgroundInfo;
 import org.loboevolution.html.info.BorderInfo;
+import org.loboevolution.html.rendererblock.RBlockViewport;
 import org.loboevolution.html.renderstate.BackgroundRenderState;
 import org.loboevolution.html.renderstate.BorderRenderState;
 import org.loboevolution.html.renderstate.RenderState;
