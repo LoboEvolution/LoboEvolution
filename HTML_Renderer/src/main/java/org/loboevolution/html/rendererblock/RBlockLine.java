@@ -25,6 +25,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dombl.ModelNode;
@@ -85,7 +86,7 @@ public class RBlockLine {
 	    }
 	    rline = new RLine(startNode, rBlockView.getContainer(), newX, newLineY, newMaxWidth, 0, initialAllowOverflow);
 	    rline.setParent(rBlockView);
-	    ArrayList<BoundableRenderable> sr = rBlockView.getSeqRenderables();
+	    List<BoundableRenderable> sr = rBlockView.getSeqRenderables();
 	    if (sr == null) {
 	      sr = new ArrayList<>(1);
 	      rBlockView.setSeqRenderables(sr);
@@ -167,7 +168,7 @@ public class RBlockLine {
 	 *            the inform line done
 	 */
 	protected void addLineAfterBlock(final RBlock block, final RBlockViewport rBlockView, final boolean informLineDone) {
-		ArrayList<BoundableRenderable> sr = rBlockView.getSeqRenderables();
+		List<BoundableRenderable> sr = rBlockView.getSeqRenderables();
 		if (sr == null) {
 			sr = new ArrayList<BoundableRenderable>(1);
 			rBlockView.setSeqRenderables(sr);

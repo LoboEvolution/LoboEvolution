@@ -362,7 +362,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 * Populates the columnSizes and rowSizes arrays, setting htmlLength in each
 	 * element.
 	 */
-	private void createSizeArrays(ArrayList<HTMLElementImpl> rowElements) {
+	private void createSizeArrays(List<HTMLElementImpl> rowElements) {
 		ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		int numRows = rows.size();
 		SizeInfo[] rowSizes = new SizeInfo[numRows];
@@ -1313,7 +1313,7 @@ public class TableMatrix implements HtmlAttributeProperties, CSSValuesProperties
 	 *
 	 * @return the renderables
 	 */
-	public ArrayList<BoundableRenderable> getTableCells() {
+	public List<BoundableRenderable> getTableCells() {
 		return this.ALL_CELLS;
 	}
 }

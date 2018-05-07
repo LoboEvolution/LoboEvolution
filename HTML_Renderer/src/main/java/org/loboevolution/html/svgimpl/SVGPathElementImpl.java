@@ -22,6 +22,7 @@ package org.loboevolution.html.svgimpl;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,7 +86,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 
 	@Override
 	public SVGPathSegList getPathSegList() {
-		ArrayList<String> parts = parts();
+		List<String> parts = parts();
 		for (int a = 0; a < parts.size(); a++) {
 			a = interpretDValue(parts, a);
 		}
@@ -94,7 +95,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 
 	@Override
 	public SVGPathSegList getNormalizedPathSegList() {
-		ArrayList<String> parts = parts();
+		List<String> parts = parts();
 		for (int a = 0; a < parts.size(); a++) {
 			a = interpretDValue(parts, a);
 		}
@@ -103,7 +104,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 
 	@Override
 	public SVGPathSegList getAnimatedPathSegList() {
-		ArrayList<String> parts = parts();
+		List<String> parts = parts();
 		for (int a = 0; a < parts.size(); a++) {
 			a = interpretDValue(parts, a);
 		}
@@ -112,7 +113,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 
 	@Override
 	public SVGPathSegList getAnimatedNormalizedPathSegList() {
-		ArrayList<String> parts = parts();
+		List<String> parts = parts();
 		for (int a = 0; a < parts.size(); a++) {
 			a = interpretDValue(parts, a);
 		}
@@ -307,7 +308,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 		return pathSeg;
 	}
 
-	private int interpretDValue(ArrayList<String> parts, int i) {
+	private int interpretDValue(List<String> parts, int i) {
 
 		String part = parts.get(i);
 		float x;
@@ -460,7 +461,7 @@ public class SVGPathElementImpl extends SVGSVGElementImpl implements SVGPathElem
 		return i;
 	}
 
-	private ArrayList<String> parts() {
+	private List<String> parts() {
 
 		final Matcher matchPathCmd = Pattern.compile(PATTERN_PARTS).matcher(getD());
 		LinkedList<String> tokens = new LinkedList<String>();

@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.SortedSet;
 
 import org.loboevolution.html.renderer.BoundableRenderable;
@@ -35,7 +36,7 @@ import org.loboevolution.util.Objects;
 public class TableMouse {
 		
 	/** The all cells. */
-	private ArrayList<BoundableRenderable> allCells;
+	private List<BoundableRenderable> allCells;
 	
 	/** The armed renderable. */
 	private BoundableRenderable armedRenderable;
@@ -43,7 +44,7 @@ public class TableMouse {
 	/** The positioned renderables. */
 	private SortedSet<PositionedRenderable> positionedRenderables;
 	
-	public TableMouse(ArrayList<BoundableRenderable> cells, SortedSet<PositionedRenderable> pRenderables) {
+	public TableMouse(List<BoundableRenderable> cells, SortedSet<PositionedRenderable> pRenderables) {
 		this.allCells = cells;
 		this.positionedRenderables = pRenderables;
 	}

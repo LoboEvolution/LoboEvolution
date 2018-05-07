@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -124,10 +125,10 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	private SortedSet<PositionedRenderable> positionedRenderables;
 
 	/** The seq renderables. */
-	private ArrayList<BoundableRenderable> seqRenderables = null;
+	private List<BoundableRenderable> seqRenderables = null;
 
 	/** The exportable floats. */
-	private ArrayList<ExportableFloat> exportableFloats = null;
+	private List<ExportableFloat> exportableFloats = null;
 
 	/** The current line. */
 	private RLine currentLine;
@@ -215,7 +216,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		this.rendererContext = rcontext;
 		this.frameContext = frameContext;
 		this.container = container;
-		this.setListNesting(listNesting);
+		this.listNesting = listNesting;
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
@@ -383,7 +384,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	    final int prevMaxY = this.maxY;
 	    // Horizontal alignment
 	    if (alignXPercent > 0) {
-	      final ArrayList<BoundableRenderable> renderables = this.getSeqRenderables();
+	      final List<BoundableRenderable> renderables = this.getSeqRenderables();
 	      if (renderables != null) {
 	        final Insets insets = this.getPaddingInsets();
 	        // final FloatingBounds floatBounds = this.floatBounds;
@@ -432,7 +433,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	      final int difference = availContentHeight - usedHeight;
 	      if (difference > 0) {
 	        final int shift = (difference * alignYPercent) / 100;
-	        final ArrayList<BoundableRenderable> rlist = this.getSeqRenderables();
+	        final List<BoundableRenderable> rlist = this.getSeqRenderables();
 	        if (rlist != null) {
 	          // Try sequential renderables first.
 	          final Iterator<BoundableRenderable> renderables = rlist.iterator();
@@ -799,7 +800,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			boolean centerBlock) {
 		Insets insets = this.getPaddingInsets();
 		int insetsl = insets.left;
-		ArrayList<BoundableRenderable> sr = this.getSeqRenderables();
+		List<BoundableRenderable> sr = this.getSeqRenderables();
 		if (sr == null) {
 			sr = new ArrayList<BoundableRenderable>(1);
 			this.setSeqRenderables(sr);
@@ -873,8 +874,8 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 	}
 	
-	private void populateZIndexGroups(ArrayList<BoundableRenderable> others,
-			Iterator<BoundableRenderable> seqRenderablesIterator, ArrayList<BoundableRenderable> destination) {
+	private void populateZIndexGroups(List<BoundableRenderable> others,
+			Iterator<BoundableRenderable> seqRenderablesIterator, List<BoundableRenderable> destination) {
 		Iterator<BoundableRenderable> i1 = others.iterator();
 		BoundableRenderable pending = null;
 		while (i1.hasNext()) {
@@ -913,12 +914,12 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	public Iterator<BoundableRenderable> getRenderables() {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null || others.isEmpty()) {
-			ArrayList<BoundableRenderable> sr = this.getSeqRenderables();
+			List<BoundableRenderable> sr = this.getSeqRenderables();
 			return sr == null ? null : sr.iterator();
 		} else {
-			ArrayList<BoundableRenderable> sr = this.getSeqRenderables();
-			ArrayList<BoundableRenderable> allRenderables = new ArrayList<BoundableRenderable>();
-			ArrayList<BoundableRenderable> renderables = new ArrayList<BoundableRenderable>();
+			List<BoundableRenderable> sr = this.getSeqRenderables();
+			List<BoundableRenderable> allRenderables = new ArrayList<BoundableRenderable>();
+			List<BoundableRenderable> renderables = new ArrayList<BoundableRenderable>();
 			
 			for (PositionedRenderable s : others) {
 				renderables.add(s.getRenderable());
@@ -937,7 +938,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the renderables
 	 */
 	public Iterator<BoundableRenderable> getRenderables(Rectangle clipBounds) {
-		ArrayList<BoundableRenderable> sr = this.getSeqRenderables();
+		List<BoundableRenderable> sr = this.getSeqRenderables();
 		Iterator<BoundableRenderable> baseIterator = null;
 		if (sr != null) {
 			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
@@ -948,7 +949,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		if (others == null || others.isEmpty()) {
 			return baseIterator;
 		} else {
-			ArrayList<PositionedRenderable> matches = new ArrayList<PositionedRenderable>();
+			List<PositionedRenderable> matches = new ArrayList<PositionedRenderable>();
 			// ArrayList "matches" keeps the order from "others".
 			Iterator<?> i = others.iterator();
 			while (i.hasNext()) {
@@ -965,9 +966,9 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 			if (matches.isEmpty()) {
 				return baseIterator;
 			} else {
-				ArrayList<BoundableRenderable> destination = new ArrayList<BoundableRenderable>();
+				List<BoundableRenderable> destination = new ArrayList<BoundableRenderable>();
 				
-				ArrayList<BoundableRenderable> renderables = new ArrayList<BoundableRenderable>();
+				List<BoundableRenderable> renderables = new ArrayList<BoundableRenderable>();
 				for (PositionedRenderable s : matches) {
 					renderables.add(s.getRenderable());
 				}
@@ -1052,7 +1053,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		}
 
 		// Now do a "binary" search on sequential renderables.
-		ArrayList<BoundableRenderable> sr = this.getSeqRenderables();
+		List<BoundableRenderable> sr = this.getSeqRenderables();
 		if (sr != null) {
 			Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			BoundableRenderable found = MarkupUtilities.findRenderable(array, pointx, pointy, true);
@@ -1248,7 +1249,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the first line height
 	 */
 	public int getFirstLineHeight() {
-		ArrayList<?> renderables = this.getSeqRenderables();
+		List<?> renderables = this.getSeqRenderables();
 		if (renderables != null) {
 			int size = renderables.size();
 			if (size == 0) {
@@ -1272,7 +1273,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the first baseline offset
 	 */
 	public int getFirstBaselineOffset() {
-		ArrayList<?> renderables = this.getSeqRenderables();
+		List<?> renderables = this.getSeqRenderables();
 		if (renderables != null) {
 			Iterator<?> i = renderables.iterator();
 			while (i.hasNext()) {
@@ -1500,7 +1501,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 *            the orig y
 	 */
 	private void addExportableFloat(BoundableRenderable element, boolean leftFloat, int origX, int origY) {
-		ArrayList<ExportableFloat> ep = this.exportableFloats;
+		List<ExportableFloat> ep = this.exportableFloats;
 		if (ep == null) {
 			ep = new ArrayList<ExportableFloat>(1);
 			this.exportableFloats = ep;
@@ -1650,7 +1651,7 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 	 * @return the exportable floating info
 	 */
 	public FloatingInfo getExportableFloatingInfo() {
-		ArrayList<ExportableFloat> ef = this.exportableFloats;
+		List<ExportableFloat> ef = this.exportableFloats;
 		if (ef == null) {
 			return null;
 		}
@@ -1852,11 +1853,11 @@ public class RBlockViewport extends BaseRCollection implements HtmlAttributeProp
 		this.maxX = maxX;
 	}
 
-	public ArrayList<BoundableRenderable> getSeqRenderables() {
+	public List<BoundableRenderable> getSeqRenderables() {
 		return seqRenderables;
 	}
 
-	public void setSeqRenderables(ArrayList<BoundableRenderable> seqRenderables) {
+	public void setSeqRenderables(List<BoundableRenderable> seqRenderables) {
 		this.seqRenderables = seqRenderables;
 	}
 

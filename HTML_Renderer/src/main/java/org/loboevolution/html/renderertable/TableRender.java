@@ -23,6 +23,7 @@ package org.loboevolution.html.renderertable;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.loboevolution.html.HtmlAttributeProperties;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
@@ -247,7 +248,7 @@ public final class TableRender implements HtmlAttributeProperties, CSSValuesProp
 		return currentTotal;
 	}
 	
-	public static HtmlLength getBestWidthLength(ArrayList<ArrayList<VirtualCell>> rows, int numRows, int index, String op) {
+	public static HtmlLength getBestWidthLength(List<ArrayList<VirtualCell>> rows, int numRows, int index, String op) {
 		HtmlLength bestWidthLength = null;
 		for (int y = 0; y < numRows; y++) {
 			ArrayList<VirtualCell> row = rows.get(y);

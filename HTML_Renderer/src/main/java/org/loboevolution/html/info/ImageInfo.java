@@ -22,6 +22,7 @@ package org.loboevolution.html.info;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.loboevolution.html.dombl.ImageEvent;
 import org.loboevolution.html.dombl.ImageListener;
@@ -41,7 +42,7 @@ public class ImageInfo implements Serializable {
 	public boolean loaded;
 
 	/** The listeners. */
-	private ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
+	private List<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	/**
 	 * Adds the listener.

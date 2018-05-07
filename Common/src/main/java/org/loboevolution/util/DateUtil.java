@@ -25,6 +25,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public final class DateUtil {
@@ -64,7 +65,7 @@ public final class DateUtil {
 	 */
 	public Date determineDateFormat(String dateString, Locale loc) {
 
-		ArrayList<String> DATE_FORMAT = formatList();
+		List<String> DATE_FORMAT = formatList();
 		for (String regexp : DATE_FORMAT) {
 			try {
 				return parse(dateString, regexp, loc);
@@ -74,7 +75,7 @@ public final class DateUtil {
 		return null; // Unknown format.
 	}
 
-	private ArrayList<String> formatList() {
+	private List<String> formatList() {
 		ArrayList<String> DATE_FORMAT = new ArrayList<String>();
 		DATE_FORMAT.add("yyyyMMdd");
 		DATE_FORMAT.add("dd-MM-yyyy");

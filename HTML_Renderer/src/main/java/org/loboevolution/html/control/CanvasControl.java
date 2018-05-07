@@ -34,6 +34,7 @@ import java.awt.image.ImageObserver;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.imageio.ImageIO;
 
@@ -63,7 +64,7 @@ public class CanvasControl extends BaseControl {
 	private int height;
 
 	/** The list canvas info. */
-	private ArrayList<CanvasInfo> listCanvasInfo;
+	private List<CanvasInfo> listCanvasInfo;
 
 	/**
 	 * Instantiates a new canvas control.

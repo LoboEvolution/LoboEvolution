@@ -21,7 +21,7 @@
 package org.loboevolution.html.info;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,7 +43,7 @@ public class StyleRuleInfo implements Serializable {
 	private transient CSSStyleRule styleRule;
 
 	/** The ancestor selectors. */
-	private final ArrayList<SelectorMatcher> ancestorSelectors;
+	private final List<SelectorMatcher> ancestorSelectors;
 
 	/**
 	 * Instantiates a new style rule info.
@@ -53,7 +53,7 @@ public class StyleRuleInfo implements Serializable {
 	 * @param rule
 	 *            A CSS rule.
 	 */
-	public StyleRuleInfo(ArrayList<SelectorMatcher> SelectorMatchers, CSSStyleRule rule) {
+	public StyleRuleInfo(List<SelectorMatcher> SelectorMatchers, CSSStyleRule rule) {
 		super();
 		ancestorSelectors = SelectorMatchers;
 		this.styleRule = rule;
@@ -72,7 +72,7 @@ public class StyleRuleInfo implements Serializable {
 	 */
 	public final boolean affectedByPseudoNameInAncestor(HTMLElementImpl element, HTMLElementImpl ancestor,
 			String pseudoName) {
-		ArrayList<SelectorMatcher> as = this.ancestorSelectors;
+		List<SelectorMatcher> as = this.ancestorSelectors;
 		HTMLElementImpl currentElement = element;
 		int size = as.size();
 		boolean first = true;
@@ -124,7 +124,7 @@ public class StyleRuleInfo implements Serializable {
 	 * @return true, if is selector match
 	 */
 	public final boolean isSelectorMatch(HTMLElementImpl element, Set<?> pseudoNames) {
-		ArrayList<SelectorMatcher> as = this.ancestorSelectors;
+		List<SelectorMatcher> as = this.ancestorSelectors;
 		HTMLElementImpl currentElement = element;
 		int size = as.size();
 		boolean first = true;
@@ -251,7 +251,7 @@ public class StyleRuleInfo implements Serializable {
 	/**
 	 * get Ancestor Selectors.
 	 */
-	public ArrayList<SelectorMatcher> getAncestorSelectors() {
+	public List<SelectorMatcher> getAncestorSelectors() {
 		return ancestorSelectors;
 	}
 }

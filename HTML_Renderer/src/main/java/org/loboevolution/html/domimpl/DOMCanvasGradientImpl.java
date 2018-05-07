@@ -22,6 +22,7 @@ package org.loboevolution.html.domimpl;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.loboevolution.color.ColorFactory;
 import org.loboevolution.w3c.html.CanvasGradient;
@@ -32,10 +33,10 @@ import org.loboevolution.w3c.html.CanvasGradient;
 public class DOMCanvasGradientImpl implements CanvasGradient {
 
 	/** The fractions. */
-	private ArrayList<Float> fractions;
+	private List<Float> fractions;
 
 	/** The colors. */
-	private ArrayList<Color> colors;
+	private List<Color> colors;
 
 	/** The linear x. */
 	private Double linearX;
@@ -87,7 +88,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	 *
 	 * @return the fractions
 	 */
-	public ArrayList<Float> getFractions() {
+	public List<Float> getFractions() {
 		return fractions;
 	}
 
@@ -97,7 +98,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	 * @param fractions
 	 *            the new fractions
 	 */
-	public void setFractions(ArrayList<Float> fractions) {
+	public void setFractions(List<Float> fractions) {
 		this.fractions = fractions;
 	}
 
@@ -106,7 +107,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	 *
 	 * @return the colors
 	 */
-	public ArrayList<Color> getColors() {
+	public List<Color> getColors() {
 		return colors;
 	}
 
@@ -116,7 +117,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	 * @param colors
 	 *            the new colors
 	 */
-	public void setColors(ArrayList<Color> colors) {
+	public void setColors(List<Color> colors) {
 		this.colors = colors;
 	}
 

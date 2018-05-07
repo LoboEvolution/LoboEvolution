@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
@@ -112,7 +113,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	protected transient volatile FrameSetPanel frameSetPanel;
 	
 	/** The notifications. */
-	private ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>(1);
+	private List<DocumentNotification> notifications = new ArrayList<DocumentNotification>(1);
 
 	/**
 	 * Constructs an <code>HtmlPanel</code>.
@@ -786,7 +787,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	public void addNotification(DocumentNotification notification) {
 		// This can be called in a random thread.
-		ArrayList<DocumentNotification> notifs = this.notifications;
+		List<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(notification);
 		}
@@ -812,7 +813,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	@Override
 	public void delayedRelayout(DOMNodeImpl node) {
-		ArrayList<DocumentNotification> notifs = this.notifications;
+		List<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(new DocumentNotification(DocumentNotification.SIZE, node));
 		}
@@ -824,7 +825,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	public void processNotifications() {
 		// This is called in the GUI thread.
-		ArrayList<DocumentNotification> notifs = this.notifications;
+		List<DocumentNotification> notifs = this.notifications;
 		DocumentNotification[] notifsArray;
 		synchronized (notifs) {
 			int size = notifs.size();

@@ -30,6 +30,7 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.loboevolution.color.ColorFactory;
 import org.loboevolution.font.FontFactory;
@@ -59,7 +60,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
 
 	/** The list canvas info. */
-	private ArrayList<CanvasInfo> listCanvasInfo;
+	private List<CanvasInfo> listCanvasInfo;
 
 	/** The fill style. */
 	private transient Object fillStyle;
@@ -794,7 +795,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	 *
 	 * @return gradient paint
 	 */
-	private Paint gradient(ArrayList<Float> fractions, ArrayList<Color> colors, Double linearX, Double linearX1,
+	private Paint gradient(List<Float> fractions, List<Color> colors, Double linearX, Double linearX1,
 			Double linearY, Double linearY1, Double r2) {
 
         float[] floatArray = new float[fractions.size()];
@@ -829,7 +830,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	 *
 	 * @return the list canvas info
 	 */
-	public ArrayList<CanvasInfo> getListCanvasInfo() {
+	public List<CanvasInfo> getListCanvasInfo() {
 		return listCanvasInfo;
 	}
 
@@ -839,7 +840,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	 * @param listCanvasInfo
 	 *            the new list canvas info
 	 */
-	public void setListCanvasInfo(ArrayList<CanvasInfo> listCanvasInfo) {
+	public void setListCanvasInfo(List<CanvasInfo> listCanvasInfo) {
 		this.listCanvasInfo = listCanvasInfo;
 	}
 
