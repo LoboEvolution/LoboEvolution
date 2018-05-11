@@ -228,7 +228,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 	 */
 	protected AbstractCSSProperties createDefaultStyleSheet() {
 		ComputedCSSProperties css = new ComputedCSSProperties(this);
-		css.internalSetLC("font-size", String.valueOf((int) LAFSettings.getInstance().getFontSize()) + "px");
+		css.internalSetLC("font-size", String.valueOf((int) new LAFSettings().getIstance().getFontSize()) + "px");
 		return css;
 	}
 

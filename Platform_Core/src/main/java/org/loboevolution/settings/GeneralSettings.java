@@ -113,7 +113,7 @@ public class GeneralSettings implements Serializable {
 	 */
 	public void save() {
 		try {
-			this.saveChecked();
+			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 		} catch (IOException ioe) {
 			logger.error("save(): Unable to save settings", ioe);
 		}
@@ -129,16 +129,6 @@ public class GeneralSettings implements Serializable {
 		this.spoofCSS = true;
 		this.ieVersion = "11.0";
 		this.mozVersion = "5.0";
-	}
-
-	/**
-	 * Save checked.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public void saveChecked() throws IOException {
-		StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
 	}
 
 	/**

@@ -754,7 +754,7 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 		key.setFontStyle(CSSValuesProperties.ITALIC);
 		key.setFontVariant(CSSValuesProperties.SMALL_CAPS);
 		key.setFontWeight(CSSValuesProperties.BOLD);
-		key.setFontSize(LAFSettings.getInstance().getFontSize());
+		key.setFontSize(new LAFSettings().getIstance().getFontSize());
 		key.setLocales(null);
 		key.setSuperscript(null);
 		key.setLetterSpacing(0);

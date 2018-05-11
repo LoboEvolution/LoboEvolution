@@ -21,12 +21,7 @@
 package org.loboevolution.font;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.io.Serializable;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.loboevolution.util.gui.StorageManagerCommon;
 
 /**
  * The Class LAFSettings.
@@ -35,78 +30,72 @@ public class LAFSettings implements FontCommon, Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(LAFSettings.class);
-
-	/** The Constant instance. */
-	private static final LAFSettings instance;
-
+	
 	/** The Acryl . */
-	private volatile boolean acryl;
+	private boolean acryl = false;
 
 	/** The Aero . */
-	private volatile boolean aero;
+	private boolean aero = true;
 
 	/** The Aluminium . */
-	private volatile boolean aluminium;
+	private boolean aluminium = false;
 
 	/** The Bernstein . */
-	private volatile boolean bernstein;
+	private boolean bernstein = false;
 
 	/** The Fast . */
-	private volatile boolean fast;
+	private boolean fast = false;
 
 	/** The Graphite . */
-	private volatile boolean graphite;
+	private boolean graphite = false;
 
 	/** The HiFi . */
-	private volatile boolean hiFi;
+	private boolean hiFi = false;
 
 	/** The Luna . */
-	private volatile boolean luna;
+	private boolean luna = false;
 
 	/** The McWin . */
-	private volatile boolean mcWin;
+	private boolean mcWin = false;
 
 	/** The Mint . */
-	private volatile boolean mint;
+	private boolean mint = false;
 
 	/** The Noire . */
-	private volatile boolean noire;
+	private boolean noire = false;
 
 	/** The Smart . */
-	private volatile boolean smart;
+	private boolean smart = false;
 
 	/** The Texture . */
-	private volatile boolean texture;
+	private boolean texture = false;
 
 	/** The Bold . */
-	private volatile boolean bold;
+	private boolean bold = false;
 
 	/** The Italic . */
-	private volatile boolean italic;
+	private boolean italic = false;
 
 	/** The Underline . */
-	private volatile boolean underline;
+	private boolean underline = false;
 
 	/** The Strikethrough . */
-	private volatile boolean strikethrough;
+	private boolean strikethrough = false;
 
 	/** The Subscript . */
-	private volatile boolean subscript;
+	private boolean subscript = false;
 
 	/** The Superscript . */
-	private volatile boolean superscript;
+	private boolean superscript = false;
 
 	/** The Font Size . */
-	private volatile float fontSize;
+	private float fontSize = 14.0f;
 
 	/** The Color . */
-	private volatile Color color;
+	private Color color = Color.BLACK;
 
 	/** The Font . */
-	private volatile String font;
+	private String font = TIMES_NEW_ROMAN;
 
 	/** The FONTS . */
 	public static final String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew", "AngsanaUPC", "AngsanaUPC", "Aparajita",
@@ -136,77 +125,20 @@ public class LAFSettings implements FontCommon, Serializable {
 
 	public static final String[] FONTS_SIZE = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28",
 			"36", "48", "72" };
-
-	static {
-		LAFSettings ins = null;
-		try {
-			ins = (LAFSettings) StorageManagerCommon.getInstance().retrieveSettings(LAFSettings.class.getSimpleName(),
-					LAFSettings.class.getClassLoader());
-		} catch (Exception err) {
-			logger.error("getInstance(): Unable to retrieve settings.", err);
-		}
-		if (ins == null) {
-			ins = new LAFSettings();
-		}
-		instance = ins;
-	}
-
+	
 	/**
 	 * Instantiates a new general settings.
 	 */
-	private LAFSettings() {
-		this.acryl = false;
-		this.aero = true;
-		this.aluminium = false;
-		this.bernstein = false;
-		this.fast = false;
-		this.graphite = false;
-		this.hiFi = false;
-		this.luna = false;
-		this.mcWin = false;
-		this.mint = false;
-		this.noire = false;
-		this.smart = false;
-		this.texture = false;
-		this.bold = false;
-		this.italic = false;
-		this.underline = false;
-		this.strikethrough = false;
-		this.subscript = false;
-		this.superscript = false;
-		this.fontSize = 14.0f;
-		this.font = TIMES_NEW_ROMAN;
-		this.color = Color.BLACK;
-	}
+	public LAFSettings() {}
 
 	/**
-	 * Gets the Constant instance.
-	 *
-	 * @return the Constant instance
+	 * @return the istance
 	 */
-	public static LAFSettings getInstance() {
-		return instance;
-	}
-
-	/**
-	 * Save.
-	 */
-	public void save() {
-		try {
-			this.saveChecked();
-		} catch (IOException ioe) {
-			logger.error("save(): Unable to save settings", ioe);
-		}
-	}
-
-	/**
-	 * Save checked.
-	 *
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	public void saveChecked() throws IOException {
-		StorageManagerCommon.getInstance().saveSettings(this.getClass().getSimpleName(), this);
+	public LAFSettings getIstance() {
+		FontSqlLiteRetrive retrive = new FontSqlLiteRetrive();
+		LAFSettings laf = retrive.retriveFontDate(); 
+		if(laf == null ) { laf = this; }
+		return laf;
 	}
 
 	/**

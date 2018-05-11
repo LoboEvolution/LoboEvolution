@@ -71,7 +71,7 @@ public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
 		RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
 		String fontSize = null;
 		int prevFontSize = parentRS != null ? parentRS.getFont().getSize()
-				: (int) LAFSettings.getInstance().getFontSize();
+				: (int) new LAFSettings().getIstance().getFontSize();
 		int newFontSize = prevFontSize + this.fontChange * 2;
 		fontSize = newFontSize + "px";
 		ComputedCSSProperties css = new ComputedCSSProperties(this);

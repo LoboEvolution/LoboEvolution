@@ -114,14 +114,14 @@ public class FontValues extends HtmlValues {
 	public static final float getFontSize(String spec, RenderState parentRenderState) {
 		
 		if(spec == null){
-			return LAFSettings.getInstance().getFontSize();
+			return new LAFSettings().getIstance().getFontSize();
 		}
 		
 		String specTL = spec.toLowerCase();
 
 		if (specTL.endsWith("em")) {
 			if (parentRenderState == null) {
-				return LAFSettings.getInstance().getFontSize();
+				return new LAFSettings().getIstance().getFontSize();
 			}
 			Font font = parentRenderState.getFont();
 			String pxText = specTL.substring(0, specTL.length() - 2);
@@ -129,12 +129,12 @@ public class FontValues extends HtmlValues {
 			try {
 				value = Double.parseDouble(pxText);
 			} catch (NumberFormatException nfe) {
-				return LAFSettings.getInstance().getFontSize();
+				return new LAFSettings().getIstance().getFontSize();
 			}
 			return (int) Math.round(font.getSize() * value);
 		} else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("em") || specTL.endsWith("pc")
 				|| specTL.endsWith("em") || specTL.endsWith("mm") || specTL.endsWith("ex")) {
-			int pixelSize = getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
+			int pixelSize = getPixelSize(spec, parentRenderState, (int) new LAFSettings().getIstance().getFontSize());
 			int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			// Normally the factor below should be 72, but
 			// the font-size concept in HTML is handled differently.
@@ -146,7 +146,7 @@ public class FontValues extends HtmlValues {
 				double parentFontSize = parentRenderState == null ? 14.0 : parentRenderState.getFont().getSize();
 				return (float) (parentFontSize * valued / 100.0);
 			} catch (NumberFormatException nfe) {
-				return LAFSettings.getInstance().getFontSize();
+				return new LAFSettings().getIstance().getFontSize();
 			}
 		} else {
 
@@ -168,26 +168,26 @@ public class FontValues extends HtmlValues {
 			case XX_LARGE:
 				return 40.0f;
 			case LARGER:
-				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
+				parentFontSize = (int) new LAFSettings().getIstance().getFontSize();
 				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
 				}
 				return parentFontSize * 1.2f;
 			case SMALLER:
-				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
+				parentFontSize = (int) new LAFSettings().getIstance().getFontSize();
 				if (parentRenderState != null) {
 					parentFontSize = parentRenderState.getFont().getSize();
 				}
 				return parentFontSize / 1.2f;
 			case INHERIT:
-				parentFontSize = (int) LAFSettings.getInstance().getFontSize();
+				parentFontSize = (int) new LAFSettings().getIstance().getFontSize();
 				if (parentRenderState != null) {
 					parentRenderState.getPreviousRenderState().getFont().getSize();
 				}
 				return parentFontSize;
 			case INITIAL:
 			default:
-				return getPixelSize(spec, parentRenderState, (int) LAFSettings.getInstance().getFontSize());
+				return getPixelSize(spec, parentRenderState, (int) new LAFSettings().getIstance().getFontSize());
 			}
 		}
 	}
@@ -207,7 +207,7 @@ public class FontValues extends HtmlValues {
 	
 	public static final String getFontStyle(String spec) {
 		String fontStyle = spec;
-		if (fontStyle == null && LAFSettings.getInstance().isItalic()) {
+		if (fontStyle == null && new LAFSettings().getIstance().isItalic()) {
 			return ITALIC;
 		}
 		return fontStyle;
@@ -215,7 +215,7 @@ public class FontValues extends HtmlValues {
 	
 	public static String getFontWeight(String spec) {
 		String fontWeight = spec;
-		if (fontWeight == null && LAFSettings.getInstance().isBold()) {
+		if (fontWeight == null && new LAFSettings().getIstance().isBold()) {
 			return BOLD;
 		}
 		return fontWeight;
@@ -228,7 +228,7 @@ public class FontValues extends HtmlValues {
 			return TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
 		}
 		
-		if (underline == null && LAFSettings.getInstance().isUnderline()) {
+		if (underline == null && new LAFSettings().getIstance().isUnderline()) {
 			return TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
 		}
 		return null;
@@ -241,7 +241,7 @@ public class FontValues extends HtmlValues {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 		
-		if (strikethrough == null && LAFSettings.getInstance().isUnderline()) {
+		if (strikethrough == null && new LAFSettings().getIstance().isUnderline()) {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 		return false;
@@ -254,9 +254,9 @@ public class FontValues extends HtmlValues {
 		boolean isSuper = verticalAlign != null && "super".equalsIgnoreCase(verticalAlign);
 		boolean isSub = verticalAlign != null && "sub".equalsIgnoreCase(verticalAlign);
 		
-		if (isSuper || LAFSettings.getInstance().isSuperscript()) {
+		if (isSuper || new LAFSettings().getIstance().isSuperscript()) {
 			superscript = TextAttribute.SUPERSCRIPT_SUPER;
-		} else if (isSub || LAFSettings.getInstance().isSubscript()) {
+		} else if (isSub || new LAFSettings().getIstance().isSubscript()) {
 			superscript = TextAttribute.SUPERSCRIPT_SUB;
 		}
 

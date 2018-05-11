@@ -68,7 +68,7 @@ public class FontFactory {
 	private final Map<String, Font> registeredFonts = new HashMap<String, Font>(0);
 
 	/** The default font name. */
-	private String defaultFontName = LAFSettings.getInstance().getFont();
+	private String defaultFontName = new LAFSettings().getIstance().getFont();
 
 	/**
 	 * Instantiates a new font factory.

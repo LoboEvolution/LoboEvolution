@@ -25,22 +25,24 @@ package org.loboevolution.store;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
-
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.security.GenericLocalPermission;
 import org.loboevolution.security.LocalSecurityPolicy;
-import org.loboevolution.util.gui.StorageManagerCommon;
 
 /**
  * * @author J. H. S.
  */
-public class StorageManager extends StorageManagerCommon implements Runnable {
+public class StorageManager implements Runnable {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(StorageManager.class);
@@ -58,23 +60,31 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	private static final String CONTENT_DIR = "content";
 
 	/** The Constant SETTINGS_DIR. */
-	private static final String SETTINGS_DIR = "settings";
+	private static final String JDBC_SQLITE = "jdbc:sqlite:";
 
-	/** The Constant instance. */
+	/** The Constant LOBO_DB. */
+	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE";
+
+	/** The Constant LAF. */
+	private static final String LAF = "CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, "
+			+ "hiFi integer,luna integer, mcWin integer, mint integer, noire integer, smart integer, texture integer, "
+			+ "bold integer, italic integer, underline integer, strikethrough integer, subscript integer, "
+			+ "superscript integer, fontSize text, font text, color text)";
+
 	private static final StorageManager instance = new StorageManager();
 
 	/** The store directory. */
 	private final File storeDirectory;
-	
+
 	/** The Constant NO_HOST. */
 	private static final String NO_HOST = "$NO_HOST$";
-	
+
 	/** The restricted store cache. */
 	private final Map<String, RestrictedStore> restrictedStoreCache = new HashMap<String, RestrictedStore>();
-	
+
 	/** The Constant MANAGED_STORE_UPDATE_DELAY. */
 	private static final int MANAGED_STORE_UPDATE_DELAY = 1000 * 60 * 5;
-	
+
 	/** The thread started. */
 	private boolean threadStarted = false;
 
@@ -94,6 +104,8 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 		this.storeDirectory = LocalSecurityPolicy.STORE_DIRECTORY;
 		if (!this.storeDirectory.exists()) {
 			this.storeDirectory.mkdirs();
+			File dbDir = new File(storeDirectory, "store");
+			dbDir.mkdirs();
 		}
 	}
 
@@ -138,7 +150,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 		if (hostName == null || "".equals(hostName)) {
 			hostName = NO_HOST;
 		}
-		return new File(cacheDir, normalizedFileName(hostName));
+		return new File(cacheDir, hostName);
 	}
 
 	/**
@@ -193,7 +205,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 			if (store == null) {
 				store = AccessController.doPrivileged((PrivilegedAction<RestrictedStore>) () -> {
 					File hostStoreDir = new File(storeDirectory, HOST_STORE_DIR);
-					File domainDir = new File(hostStoreDir, normalizedFileName(normHost));
+					File domainDir = new File(hostStoreDir, normHost);
 					if (!createIfNotExists && !domainDir.exists()) {
 						return null;
 					}
@@ -214,36 +226,59 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 		return store;
 	}
 
+	public void saveSettings(String name, ClassLoader classLoader) throws IOException {
+		// TODO
+	}
+
+	public void saveSettings(String name, Serializable classLoader) throws IOException {
+		// TODO
+	}
+
+	public Serializable retrieveSettings(String name, ClassLoader classLoader) throws IOException {
+		return null;
+		// TODO
+	}
+
+	public Serializable retrieveSettings(String name, Serializable classLoader) throws IOException {
+		return null;
+		// TODO
+	}
+
+	public void createDatabase() {
+		String urlDatabase = JDBC_SQLITE + getSettingsDirectory() + "\\" + LOBO_DB;
+		File f = new File(getSettingsDirectory() + "\\" + LOBO_DB);
+		if (!f.exists()) {
+			try (Connection conn = DriverManager.getConnection(urlDatabase); Statement stmt = conn.createStatement()) {
+				createLAFettingTable();
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
+		}
+	}
+	
+	public void createLAFettingTable() {
+		String urlDatabase = JDBC_SQLITE + getSettingsDirectory() + "\\" + LOBO_DB;
+        try (Connection conn = DriverManager.getConnection(urlDatabase); Statement stmt = conn.createStatement()) {
+        	stmt.execute(LAF);
+        } catch (Exception e) {
+        	logger.error(e.getMessage());
+        }
+    }
+	
+	public static void main(String[] args) {
+		StorageManager q = new StorageManager();
+		q.createLAFettingTable();
+	} 
+
 	/**
 	 * Gets the settings directory.
 	 *
 	 * @return the settings directory
 	 */
-	@Override
 	public File getSettingsDirectory() {
-		return new File(this.storeDirectory, SETTINGS_DIR);
-	}
-
-	/**
-	 * Normalized file name.
-	 *
-	 * @param hostName
-	 *            the host name
-	 * @return the string
-	 */
-	public static String normalizedFileName(String hostName) {
-		return hostName;
-	}
-
-	/**
-	 * Gets the host name.
-	 *
-	 * @param fileName
-	 *            the file name
-	 * @return the host name
-	 */
-	public static String getHostName(String fileName) {
-		return fileName;
+		File homeDir = new File(System.getProperty("user.home"));
+		File storeDir = new File(homeDir, ".lobo");
+		return new File(storeDir, "store");
 	}
 
 	/*
@@ -253,7 +288,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 	 */
 	@Override
 	public void run() {
-		while(true) {
+		while (true) {
 			try {
 				Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
 				RestrictedStore[] stores;
@@ -265,7 +300,7 @@ public class StorageManager extends StorageManagerCommon implements Runnable {
 					store.updateSizeFile();
 				}
 			} catch (Throwable err) {
-				logger.error( "run()", err);
+				logger.error("run()", err);
 				try {
 					Thread.sleep(MANAGED_STORE_UPDATE_DELAY);
 				} catch (InterruptedException ie) {

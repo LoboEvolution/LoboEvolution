@@ -88,7 +88,7 @@ public class SVGUtility {
 		key.setFontStyle(CSSValuesProperties.ITALIC);
 		key.setFontVariant(CSSValuesProperties.SMALL_CAPS);
 		key.setFontWeight(CSSValuesProperties.BOLD);
-		key.setFontSize(fs != null ? FontValues.getFontSize(fs, null) : LAFSettings.getInstance().getFontSize());
+		key.setFontSize(fs != null ? FontValues.getFontSize(fs, null) : new LAFSettings().getIstance().getFontSize());
 		key.setLocales(null);
 		key.setSuperscript(null);
 		key.setLetterSpacing(0);

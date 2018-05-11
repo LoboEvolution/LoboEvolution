@@ -75,7 +75,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		this.setLayout(WrapperLayout.getInstance());
 		JTextComponent widget = this.createTextField();
 		Font font = widget.getFont();
-		widget.setFont(font.deriveFont(LAFSettings.getInstance().getFontSize()));
+		widget.setFont(font.deriveFont(new LAFSettings().getIstance().getFontSize()));
 		widget.setDocument(new LimitedDocument());
 		widget.setSelectionColor(Color.BLUE);
 		DOMElementImpl element = this.controlElement;

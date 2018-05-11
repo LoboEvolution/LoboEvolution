@@ -58,6 +58,7 @@ import org.loboevolution.primary.gui.AbstractSettingsUI;
 import org.loboevolution.primary.gui.ColorComboBox;
 import org.loboevolution.primary.gui.FontLabel;
 import org.loboevolution.primary.gui.ValidationException;
+import org.loboevolution.store.SQLiteManager;
 
 /**
  * The Class LookAndFeelsSettingsUI.
@@ -68,7 +69,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	private static final long serialVersionUID = 1L;
 
 	/** The settings. */
-	private LAFSettings settings = LAFSettings.getInstance();
+	private LAFSettings laf = new LAFSettings().getIstance();
 
 	private String PREVIEW_TEXT = "Preview Font";
 
@@ -195,32 +196,34 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	@Override
 	public void save() throws ValidationException {
-		LAFSettings settings = this.settings;
-		settings.setAcryl(this.acrylCheckBox.isSelected());
-		settings.setAero(this.aeroCheckBox.isSelected());
-		settings.setAluminium(this.aluminiumCheckBox.isSelected());
-		settings.setBernstein(this.bernsteinCheckBox.isSelected());
-		settings.setFast(this.fastCheckBox.isSelected());
-		settings.setGraphite(this.graphiteCheckBox.isSelected());
-		settings.setHiFi(this.hiFiCheckBox.isSelected());
-		settings.setLuna(this.lunaCheckBox.isSelected());
-		settings.setMcWin(this.mcWinCheckBox.isSelected());
-		settings.setMint(this.mintCheckBox.isSelected());
-		settings.setNoire(this.noireCheckBox.isSelected());
-		settings.setSmart(this.smartCheckBox.isSelected());
-		settings.setTexture(this.textureCheckBox.isSelected());
-		settings.setBold(this.boldCheckBox.isSelected());
-		settings.setItalic(this.italicCheckBox.isSelected());
-		settings.setUnderline(this.underlineCheckBox.isSelected());
-		settings.setStrikethrough(this.strikethroughCheckBox.isSelected());
-		settings.setSubscript(this.subscriptCheckBox.isSelected());
-		settings.setSuperscript(this.superscriptCheckBox.isSelected());
-		settings.setFontSize(Float.valueOf(this.fontSizeList.getSelectedItem().toString()));
-		settings.setFont(this.fontList.getSelectedItem().toString());
-		settings.setColor((Color) colorComboBox.getSelectedItem());
+		LAFSettings laf = new LAFSettings();
+		laf.setAcryl(this.acrylCheckBox.isSelected());
+		laf.setAero(this.aeroCheckBox.isSelected());
+		laf.setAluminium(this.aluminiumCheckBox.isSelected());
+		laf.setBernstein(this.bernsteinCheckBox.isSelected());
+		laf.setFast(this.fastCheckBox.isSelected());
+		laf.setGraphite(this.graphiteCheckBox.isSelected());
+		laf.setHiFi(this.hiFiCheckBox.isSelected());
+		laf.setLuna(this.lunaCheckBox.isSelected());
+		laf.setMcWin(this.mcWinCheckBox.isSelected());
+		laf.setMint(this.mintCheckBox.isSelected());
+		laf.setNoire(this.noireCheckBox.isSelected());
+		laf.setSmart(this.smartCheckBox.isSelected());
+		laf.setTexture(this.textureCheckBox.isSelected());
+		laf.setSubscript(this.subscriptCheckBox.isSelected());
+		laf.setSuperscript(this.superscriptCheckBox.isSelected());
+		laf.setUnderline(this.underlineCheckBox.isSelected());
+		laf.setItalic(this.italicCheckBox.isSelected());
+		laf.setStrikethrough(this.strikethroughCheckBox.isSelected());
+		laf.setFontSize(Float.valueOf(this.fontSizeList.getSelectedItem().toString()));
+		laf.setFont(this.fontList.getSelectedItem().toString());
+		laf.setColor((Color) colorComboBox.getSelectedItem());
+		laf.setBold(this.boldCheckBox.isSelected());
 
-		if (validate(settings)) {
-			settings.save();
+		if (validate(laf)) {
+			SQLiteManager sql = new SQLiteManager();
+			sql.deleteLAF();
+			sql.insertLAF(laf);
 		}
 	}
 
@@ -390,29 +393,29 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	}
 
 	private void loadSettings() {
-		LAFSettings settings = this.settings;
-		acrylCheckBox.setSelected(settings.isAcryl());
-		aeroCheckBox.setSelected(settings.isAero());
-		aluminiumCheckBox.setSelected(settings.isAluminium());
-		bernsteinCheckBox.setSelected(settings.isBernstein());
-		fastCheckBox.setSelected(settings.isFast());
-		graphiteCheckBox.setSelected(settings.isGraphite());
-		hiFiCheckBox.setSelected(settings.isHiFi());
-		lunaCheckBox.setSelected(settings.isLuna());
-		mcWinCheckBox.setSelected(settings.isMcWin());
-		mintCheckBox.setSelected(settings.isMint());
-		noireCheckBox.setSelected(settings.isNoire());
-		smartCheckBox.setSelected(settings.isSmart());
-		textureCheckBox.setSelected(settings.isTexture());
-		boldCheckBox.setSelected(settings.isBold());
-		italicCheckBox.setSelected(settings.isItalic());
-		underlineCheckBox.setSelected(settings.isUnderline());
-		strikethroughCheckBox.setSelected(settings.isStrikethrough());
-		subscriptCheckBox.setSelected(settings.isSubscript());
-		superscriptCheckBox.setSelected(settings.isSuperscript());
-		fontSizeList.setSelectedItem(String.valueOf(Math.round(settings.getFontSize())));
-		fontList.setSelectedItem(settings.getFont());
-		colorComboBox.setSelectedItem(settings.getColor());
+		LAFSettings laf = this.laf;
+		acrylCheckBox.setSelected(laf.isAcryl());
+		aeroCheckBox.setSelected(laf.isAero());
+		aluminiumCheckBox.setSelected(laf.isAluminium());
+		bernsteinCheckBox.setSelected(laf.isBernstein());
+		fastCheckBox.setSelected(laf.isFast());
+		graphiteCheckBox.setSelected(laf.isGraphite());
+		hiFiCheckBox.setSelected(laf.isHiFi());
+		lunaCheckBox.setSelected(laf.isLuna());
+		mcWinCheckBox.setSelected(laf.isMcWin());
+		mintCheckBox.setSelected(laf.isMint());
+		noireCheckBox.setSelected(laf.isNoire());
+		smartCheckBox.setSelected(laf.isSmart());
+		textureCheckBox.setSelected(laf.isTexture());
+		boldCheckBox.setSelected(laf.isBold());
+		italicCheckBox.setSelected(laf.isItalic());
+		underlineCheckBox.setSelected(laf.isUnderline());
+		strikethroughCheckBox.setSelected(laf.isStrikethrough());
+		subscriptCheckBox.setSelected(laf.isSubscript());
+		superscriptCheckBox.setSelected(laf.isSuperscript());
+		fontSizeList.setSelectedItem(String.valueOf(Math.round(laf.getFontSize())));
+		fontList.setSelectedItem(laf.getFont());
+		colorComboBox.setSelectedItem(laf.getColor());
 		acrylCheckBox.revalidate();
 		acrylCheckBox.revalidate();
 		aeroCheckBox.revalidate();
@@ -435,46 +438,46 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		superscriptCheckBox.revalidate();
 	}
 
-	private boolean validate(LAFSettings settings) {
+	private boolean validate(LAFSettings laf) {
 
 		int check = 0;
-		if (settings.isAcryl()) {
+		if (laf.isAcryl()) {
 			check = check + 1;
 		}
-		if (settings.isAero()) {
+		if (laf.isAero()) {
 			check = check + 1;
 		}
-		if (settings.isAluminium()) {
+		if (laf.isAluminium()) {
 			check = check + 1;
 		}
-		if (settings.isBernstein()) {
+		if (laf.isBernstein()) {
 			check = check + 1;
 		}
-		if (settings.isFast()) {
+		if (laf.isFast()) {
 			check = check + 1;
 		}
-		if (settings.isGraphite()) {
+		if (laf.isGraphite()) {
 			check = check + 1;
 		}
-		if (settings.isHiFi()) {
+		if (laf.isHiFi()) {
 			check = check + 1;
 		}
-		if (settings.isLuna()) {
+		if (laf.isLuna()) {
 			check = check + 1;
 		}
-		if (settings.isMcWin()) {
+		if (laf.isMcWin()) {
 			check = check + 1;
 		}
-		if (settings.isMint()) {
+		if (laf.isMint()) {
 			check = check + 1;
 		}
-		if (settings.isNoire()) {
+		if (laf.isNoire()) {
 			check = check + 1;
 		}
-		if (settings.isSmart()) {
+		if (laf.isSmart()) {
 			check = check + 1;
 		}
-		if (settings.isTexture()) {
+		if (laf.isTexture()) {
 			check = check + 1;
 		}
 

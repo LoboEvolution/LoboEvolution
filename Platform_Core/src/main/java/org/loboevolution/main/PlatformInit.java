@@ -53,6 +53,7 @@ import org.loboevolution.request.CookieManager;
 import org.loboevolution.security.LocalSecurityManager;
 import org.loboevolution.security.LocalSecurityPolicy;
 import org.loboevolution.settings.GeneralSettings;
+import org.loboevolution.store.StorageManager;
 import org.loboevolution.util.SimpleThreadPool;
 import org.loboevolution.util.SimpleThreadPoolTask;
 
@@ -115,7 +116,7 @@ public class PlatformInit {
 	 *
 	 * @see #addPrivilegedPermission(Permission)
 	 */
-	public void initSecurity() {
+	private void initSecurity() {
 		// Set security policy and manager (essential)
 		Policy.setPolicy(LocalSecurityPolicy.getInstance());
 		System.setSecurityManager(new LocalSecurityManager());
@@ -126,7 +127,7 @@ public class PlatformInit {
 	 * <p>
 	 * This method is invoked by {@link #init(boolean, boolean)}.
 	 */
-	public void initProtocols() {
+	private void initProtocols() {
 		// Configure URL protocol handlers
 		PlatformStreamHandlerFactory factory = PlatformStreamHandlerFactory.getInstance();
 		URL.setURLStreamHandlerFactory(factory);
@@ -139,7 +140,7 @@ public class PlatformInit {
 	 * <p>
 	 * This method is invoked by {@link #init(boolean, boolean)}.
 	 */
-	public void initHTTP() {
+	private void initHTTP() {
 		// Configure authenticator
 		Authenticator.setDefault(new AuthenticatorImpl());
 		// Configure cookie handler
@@ -152,8 +153,8 @@ public class PlatformInit {
 	 * @throws Exception
 	 *             the exception
 	 */
-	public void initLookAndFeel() throws Exception {
-		LAFSettings settings = LAFSettings.getInstance();
+	private void initLookAndFeel() throws Exception {
+		LAFSettings settings = new LAFSettings().getIstance();
 		Properties props = new Properties();
 		props.put("logoString", "Lobo Evolution");
 
@@ -256,8 +257,12 @@ public class PlatformInit {
 	 * enable the primary extension and all basic browser functionality. This
 	 * method is invoked by {@link #init(boolean, boolean)}.
 	 */
-	public void initExtensions() {
+	private void initExtensions() {
 		ExtensionManager.getInstance().initExtensions();
+	}
+	
+	private void initDatabase() throws Exception {
+		StorageManager.getInstance().createDatabase();
 	}
 
 	/**
@@ -267,7 +272,7 @@ public class PlatformInit {
 	 * @param exitWhenAllWindowsAreClosed
 	 *            the exit when all windows are closed
 	 */
-	public void initWindowFactory(boolean exitWhenAllWindowsAreClosed) {
+	private void initWindowFactory(boolean exitWhenAllWindowsAreClosed) {
 		DefaultWindowFactory.getInstance().setExitWhenAllWindowsAreClosed(exitWhenAllWindowsAreClosed);
 	}
 
@@ -280,7 +285,7 @@ public class PlatformInit {
 	 *            A directory name relative to the browser application
 	 *            directory.
 	 */
-	public void initNative(String dirName) {
+	private void initNative(String dirName) {
 		File appDir = this.getApplicationDirectory();
 		File nativeDir = new File(appDir, dirName);
 		System.setProperty("java.library.path", nativeDir.getAbsolutePath());
@@ -291,7 +296,7 @@ public class PlatformInit {
 	 * <p>
 	 * This method is called by {@link #init(boolean, boolean)}.
 	 */
-	public void initOtherProperties() {
+	private void initOtherProperties() {
 		System.setProperty("networkaddress.cache.ttl", "3600");
 		System.setProperty("networkaddress.cache.negative.ttl", "1");
 		System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
@@ -323,6 +328,7 @@ public class PlatformInit {
 	 * @see #initExtensions()
 	 */
 	public void init(boolean exitWhenAllWindowsAreClosed) throws Exception {
+		initDatabase();
 		initOtherProperties();
 		initNative(NATIVE_DIR_NAME);
 		initSecurity();

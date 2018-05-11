@@ -97,7 +97,7 @@ public class HtmlValues implements CSSValuesProperties {
 				return errorValue;
 			}
 		} else if (lcSpec.endsWith("em")) {
-			float fontSize = LAFSettings.getInstance().getFontSize();
+			float fontSize = new LAFSettings().getIstance().getFontSize();
 			
 			if(renderState != null) {
 				Font f = renderState.getFont();

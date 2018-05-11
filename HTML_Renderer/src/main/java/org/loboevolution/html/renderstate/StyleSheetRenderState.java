@@ -75,7 +75,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
 	
 	/** The Constant DEFAULT_LINE_HEIGHT. */
-	protected static final String DEFAULT_LINE_HEIGHT = String.valueOf(1.6f * LAFSettings.getInstance().getFontSize());
+	protected static final String DEFAULT_LINE_HEIGHT = String.valueOf(1.6f * new LAFSettings().getIstance().getFontSize());
 
 	/** The Constant INVALID_BACKGROUND_INFO. */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
@@ -213,7 +213,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 	 * @return the default color
 	 */
 	protected Color getDefaultColor() {
-		return LAFSettings.getInstance().getColor();
+		return new LAFSettings().getIstance().getColor();
 	}
 	
 	/*
@@ -371,7 +371,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		this.iDisplay = null;
 		this.iTextIndentText = null;
 		this.iWhiteSpace = null;
-		this.iLineHeight = String.valueOf(1.6f * LAFSettings.getInstance().getFontSize());
+		this.iLineHeight = String.valueOf(1.6f * new LAFSettings().getIstance().getFontSize());
 		this.marginInsets = MarginRenderState.INVALID_INSETS;
 		this.paddingInsets = PaddingRenderState.INVALID_INSETS;
 		this.overflowX = -1;
@@ -1456,7 +1456,7 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 		case INHERIT:
 			return this.getPreviousRenderState().getlineHeight();
 		case NORMAL:
-			return String.valueOf(1.2f * LAFSettings.getInstance().getFontSize()); 
+			return String.valueOf(1.2f * new LAFSettings().getIstance().getFontSize()); 
 		case INITIAL:
 			return String.valueOf(prs.getFontMetrics().getHeight());
 		default:
