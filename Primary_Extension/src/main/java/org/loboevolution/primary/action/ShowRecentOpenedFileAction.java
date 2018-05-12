@@ -27,13 +27,13 @@ import java.awt.event.ActionEvent;
 
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
-import org.loboevolution.primary.gui.bookmarks.RecentHostsDialog;
+import org.loboevolution.primary.gui.bookmarks.FilesDialog;
 import org.loboevolution.ua.NavigatorWindow;
 
 /**
  * The Class ShowBookmarksAction.
  */
-public class ShowRecentHostsAction extends ActionPool {
+public class ShowRecentOpenedFileAction extends ActionPool {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -49,7 +49,7 @@ public class ShowRecentHostsAction extends ActionPool {
 	 * @param window
 	 *            the window
 	 */
-	public ShowRecentHostsAction(ComponentSource componentSource, NavigatorWindow window) {
+	public ShowRecentOpenedFileAction(ComponentSource componentSource, NavigatorWindow window) {
 		super(componentSource, window);
 		this.window = window;
 	}
@@ -65,11 +65,11 @@ public class ShowRecentHostsAction extends ActionPool {
 
 		Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof Frame)) {
-			throw new IllegalStateException("Hosts dialog only supported when an AWT Frame is available.");
+			throw new IllegalStateException("Opened Files dialog only supported when an AWT Frame is available.");
 		}
 
-		RecentHostsDialog dialog = new RecentHostsDialog(window);
-		dialog.setTitle("Hosts");
+		FilesDialog dialog = new FilesDialog("OPEN");
+		dialog.setTitle("Opened Files");
 		dialog.setLocationByPlatform(true);
 		dialog.setResizable(false);
 		dialog.setSize(new Dimension(600, 400));

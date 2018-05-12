@@ -20,20 +20,30 @@
  */
 package org.loboevolution.primary.ext.history;
 
+import java.io.Serializable;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 import org.loboevolution.primary.ext.HostEntry;
+
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * The Class BaseHistory.
@@ -41,10 +51,13 @@ import org.loboevolution.primary.ext.HostEntry;
  * @param <T>
  *            the generic type
  */
-public abstract class BaseHistory<T> implements java.io.Serializable {
+public abstract class BaseHistory<T> implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845020000200400L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(BaseHistory.class);
 
 	/** The history sorted set. */
 	private final SortedSet<String> historySortedSet = new TreeSet<String>();
@@ -149,6 +162,27 @@ public abstract class BaseHistory<T> implements java.io.Serializable {
 				}
 			}
 			return items;
+		}
+	}
+	
+	/**
+	 * Gets the opened files.
+	 *
+	 * @return opened files
+	 */
+	public List<String[]> getFiles(String type) {
+		synchronized (this) {
+			List<String[]> values = new ArrayList<String[]>();
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery("SELECT description FROM SEARCH_SELECTED WHERE type = " + "'" + type + "'");
+				while (rs!= null && rs.next()) {
+					values.add(new String[] { rs.getString(1) });
+				}
+			} catch (Exception e) {
+				logger.error(e.getMessage());
+			}
+			return values;
 		}
 	}
 

@@ -39,6 +39,8 @@ import org.apache.logging.log4j.Logger;
 import org.loboevolution.security.GenericLocalPermission;
 import org.loboevolution.security.LocalSecurityPolicy;
 
+import com.loboevolution.store.SQLiteCommon;
+
 /**
  * * @author J. H. S.
  */
@@ -59,17 +61,17 @@ public class StorageManager implements Runnable {
 	/** The Constant CONTENT_DIR. */
 	private static final String CONTENT_DIR = "content";
 
-	/** The Constant SETTINGS_DIR. */
-	private static final String JDBC_SQLITE = "jdbc:sqlite:";
-
-	/** The Constant LOBO_DB. */
-	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE";
-
-	/** The Constant LAF. */
-	private static final String LAF = "CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, "
+	/** The Constant LOOK_AND_FEEL. */
+	private static final String LOOK_AND_FEEL = "CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, "
 			+ "hiFi integer,luna integer, mcWin integer, mint integer, noire integer, smart integer, texture integer, "
 			+ "bold integer, italic integer, underline integer, strikethrough integer, subscript integer, "
 			+ "superscript integer, fontSize text, font text, color text)";
+	
+	/** The Constant SEARCH. */
+	private static final String SEARCH = "CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter text)";
+	
+	/** The Constant SEARCH_SELECTED. */
+	private static final String SEARCH_SELECTED = "CREATE TABLE SEARCH_SELECTED (name text, description text, baseUrl text, queryParameter text, selected integer, type text)";
 
 	private static final StorageManager instance = new StorageManager();
 
@@ -245,41 +247,26 @@ public class StorageManager implements Runnable {
 	}
 
 	public void createDatabase() {
-		String urlDatabase = JDBC_SQLITE + getSettingsDirectory() + "\\" + LOBO_DB;
-		File f = new File(getSettingsDirectory() + "\\" + LOBO_DB);
+		String urlDatabase = SQLiteCommon.getSettingsDirectory();
+		File f = new File(SQLiteCommon.getDirectory());
 		if (!f.exists()) {
 			try (Connection conn = DriverManager.getConnection(urlDatabase); Statement stmt = conn.createStatement()) {
-				createLAFettingTable();
+				createTable(urlDatabase, LOOK_AND_FEEL);
+				createTable(urlDatabase, SEARCH);
+				createTable(urlDatabase, SEARCH_SELECTED);
 			} catch (Exception e) {
 				logger.error(e.getMessage());
 			}
 		}
 	}
 	
-	public void createLAFettingTable() {
-		String urlDatabase = JDBC_SQLITE + getSettingsDirectory() + "\\" + LOBO_DB;
-        try (Connection conn = DriverManager.getConnection(urlDatabase); Statement stmt = conn.createStatement()) {
-        	stmt.execute(LAF);
+	private void createTable(String urlDatabase, String table) {
+		try (Connection conn = DriverManager.getConnection(urlDatabase); Statement stmt = conn.createStatement()) {
+        	stmt.execute(table);
         } catch (Exception e) {
         	logger.error(e.getMessage());
         }
     }
-	
-	public static void main(String[] args) {
-		StorageManager q = new StorageManager();
-		q.createLAFettingTable();
-	} 
-
-	/**
-	 * Gets the settings directory.
-	 *
-	 * @return the settings directory
-	 */
-	public File getSettingsDirectory() {
-		File homeDir = new File(System.getProperty("user.home"));
-		File storeDir = new File(homeDir, ".lobo");
-		return new File(storeDir, "store");
-	}
 
 	/*
 	 * (non-Javadoc)

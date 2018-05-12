@@ -21,8 +21,14 @@
 package org.loboevolution.primary.settings;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +36,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.store.StorageManager;
+
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * The Class ToolsSettings.
@@ -50,12 +58,6 @@ public class ToolsSettings implements Serializable {
 
 	/** The selected search engine. */
 	private transient SearchEngine selectedSearchEngine;
-
-	/** The download directory. */
-	private File downloadDirectory;
-
-	/** The open file directory. */
-	private File openFileDirectory;
 
 	static {
 		ToolsSettings ins = null;
@@ -85,12 +87,6 @@ public class ToolsSettings implements Serializable {
 		List<SearchEngine> searchEngines = this.getDefaultSearchEngines();
 		this.searchEngines = searchEngines;
 		this.selectedSearchEngine = searchEngines.get(0);
-		String userHome = System.getProperty("user.home");
-		File userHomeDirectory = new File(userHome);
-		this.downloadDirectory = new File(userHomeDirectory, "download");
-		if (!this.downloadDirectory.exists()) {
-			this.downloadDirectory.mkdirs();
-		}
 	}
 
 	/**
@@ -201,43 +197,5 @@ public class ToolsSettings implements Serializable {
 	 */
 	public void setSelectedSearchEngine(SearchEngine selectedSearchEngine) {
 		this.selectedSearchEngine = selectedSearchEngine;
-	}
-
-	/**
-	 * Gets the download directory.
-	 *
-	 * @return the download directory
-	 */
-	public File getDownloadDirectory() {
-		return downloadDirectory;
-	}
-
-	/**
-	 * Sets the download directory.
-	 *
-	 * @param downloadDirectory
-	 *            the new download directory
-	 */
-	public void setDownloadDirectory(File downloadDirectory) {
-		this.downloadDirectory = downloadDirectory;
-	}
-
-	/**
-	 * Gets the open file directory.
-	 *
-	 * @return the open file directory
-	 */
-	public File getOpenFileDirectory() {
-		return openFileDirectory;
-	}
-
-	/**
-	 * Sets the open file directory.
-	 *
-	 * @param openFileDirectory
-	 *            the new open file directory
-	 */
-	public void setOpenFileDirectory(File openFileDirectory) {
-		this.openFileDirectory = openFileDirectory;
 	}
 }

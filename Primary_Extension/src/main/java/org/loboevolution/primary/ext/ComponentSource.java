@@ -66,7 +66,9 @@ import org.loboevolution.primary.action.SaveFileAction;
 import org.loboevolution.primary.action.ScreenShotAction;
 import org.loboevolution.primary.action.SearchAction;
 import org.loboevolution.primary.action.ShowBookmarksAction;
+import org.loboevolution.primary.action.ShowRecentDownloadedFileAction;
 import org.loboevolution.primary.action.ShowRecentHostsAction;
+import org.loboevolution.primary.action.ShowRecentOpenedFileAction;
 import org.loboevolution.primary.action.SourceAction;
 import org.loboevolution.primary.action.StopAction;
 import org.loboevolution.primary.ext.history.HistoryEntry;
@@ -319,26 +321,10 @@ public class ComponentSource implements NavigatorWindowListener {
 	 * @return the chronology menu
 	 */
 	public JMenu getChronologyMenu() {
-		JMenu menu = new JMenu("Recent Hosts");
-		menu.removeAll();
-		Collection<HostEntry> hostEntries = NavigationHistory.getInstance()
-				.getRecentHostEntries(PREFERRED_MAX_MENU_SIZE);
-		for (HostEntry entry : hostEntries) {
-			String urlText = "http://" + entry.getHost();
-			try {
-				URL url = new URL(urlText);
-				long elapsed = System.currentTimeMillis() - entry.getTimestamp();
-				String menuText = entry.getHost() + " (" + Timing.getElapsedText(elapsed) + " ago)";
-				Action action = this.actionPool.createNavigateAction(url);
-				JMenuItem menuItem = menuItem(menuText, action);
-				menuItem.setToolTipText(url.toExternalForm());
-				menu.add(menuItem);
-			} catch (MalformedURLException mfu) {
-				logger.error("populateRecentHosts(): Bad URL=" + urlText, mfu);
-			}
-		}
-		menu.addSeparator();
-		menu.add(menuItem("Show All Recent Hosts", new ShowRecentHostsAction(this, window)));
+		JMenu menu = new JMenu("Recent");
+		menu.add(menuItem("Hosts", new ShowRecentHostsAction(this, window)));
+		menu.add(menuItem("Opened Files", new ShowRecentOpenedFileAction(this, window)));
+		menu.add(menuItem("Downloaded Files", new ShowRecentDownloadedFileAction(this, window)));
 		return menu;
 	}
 

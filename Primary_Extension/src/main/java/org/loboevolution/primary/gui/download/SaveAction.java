@@ -22,14 +22,16 @@ package org.loboevolution.primary.gui.download;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
+
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.loboevolution.clientlet.ClientletRequest;
-import org.loboevolution.primary.settings.ToolsSettings;
+import org.loboevolution.primary.settings.SearchEngine;
 import org.loboevolution.request.ClientletRequestImpl;
 import org.loboevolution.request.RequestHandler;
+import org.loboevolution.store.SQLiteManager;
 import org.loboevolution.ua.RequestType;
 
 public class SaveAction extends AbstractAction {
@@ -58,26 +60,23 @@ public class SaveAction extends AbstractAction {
 	 * Select file.
 	 */
 	private void selectFile() {
-		String path = download.getUrl().getPath();
-		int lastSlashIdx = path.lastIndexOf('/');
-		String tentativeName = lastSlashIdx == -1 ? path : path.substring(lastSlashIdx + 1);
 		JFileChooser chooser = new JFileChooser();
-		ToolsSettings settings = ToolsSettings.getInstance();
-		File directory = settings.getDownloadDirectory();
-		if (directory != null) {
-			File selectedFile = new File(directory, tentativeName);
-			chooser.setSelectedFile(selectedFile);
-		}
-		if (chooser.showSaveDialog(download) == JFileChooser.APPROVE_OPTION) {
+		int returnValue = chooser.showSaveDialog(download);
+		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File file = chooser.getSelectedFile();
 			if (file.exists()
 					&& JOptionPane.showConfirmDialog(download, "The file exists. Are you sure you want to overwrite it?",
 							"Confirm", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION) {
 				return;
 			}
-			settings.setDownloadDirectory(file.getParentFile());
-			settings.save();
 			startDownload(chooser.getSelectedFile());
+			SQLiteManager sql = new SQLiteManager();
+			SearchEngine search = new SearchEngine();
+			search.setName(file.getName());
+			search.setDescription(file.getAbsolutePath());
+			search.setType("SAVE");
+			search.setSelected(true);
+			sql.insertFileSelected(search);
 		}
 	}
 
@@ -89,22 +88,16 @@ public class SaveAction extends AbstractAction {
 	 */
 	private void startDownload(File file) {
 		download.getSaveButton().setEnabled(false);
-
 		download.getTimeLeftField().setCaption("Time left:");
-
 		download.getDestinationField().setValue(file.getName());
 		download.getDestinationField().setToolTip(file.getAbsolutePath());
-
 		download.getBottomFormPanel().setEnabled(true);
 		download.getBottomFormPanel().revalidate();
-
 		ClientletRequest request = new ClientletRequestImpl(download.getUrl(), RequestType.DOWNLOAD);
 		RequestHandler handler = new DownloadRequestHandler(request, download, file, download);
-
 		download.setDestinationFile(file);
 		download.setRequestHandler(handler);
 		download.setDownloadBaseTimestamp(System.currentTimeMillis());
-
 		Thread t = new Thread(new DownloadRunnable(handler, download), "Download:" + download.getUrl().toExternalForm());
 		t.setDaemon(true);
 		t.start();

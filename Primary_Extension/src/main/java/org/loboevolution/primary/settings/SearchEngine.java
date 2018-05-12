@@ -35,17 +35,30 @@ public class SearchEngine implements Serializable {
 	private static final long serialVersionUID = 225745010000001000L;
 
 	/** The name. */
-	private final String name;
+	private String name;
 
 	/** The description. */
-	private final String description;
+	private String description;
 
 	/** The base url. */
 	private final String baseUrl;
 
 	/** The query parameter. */
 	private final String queryParameter;
-
+	
+	/** The file. */
+	private String type;
+	
+	/** The query parameter. */
+	private boolean isSelected;
+	
+	public SearchEngine() {
+		this.name = "";
+		this.description = "";
+		this.baseUrl = "";
+		this.queryParameter = "";	
+	}
+	
 	/**
 	 * Instantiates a new search engine.
 	 *
@@ -106,12 +119,28 @@ public class SearchEngine implements Serializable {
 	}
 
 	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
 	 * Gets the name.
 	 *
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
+	}
+	
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
@@ -121,6 +150,31 @@ public class SearchEngine implements Serializable {
 	 */
 	public String getQueryParameter() {
 		return queryParameter;
+	}
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	/**
+	 * @param isSelected the isSelected to set
+	 */
+	public void setSelected(boolean isSelected) {
+		this.isSelected = isSelected;
 	}
 
 	/*

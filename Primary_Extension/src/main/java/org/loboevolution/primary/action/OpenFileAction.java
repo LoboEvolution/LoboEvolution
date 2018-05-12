@@ -21,12 +21,14 @@
 package org.loboevolution.primary.action;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 
 import javax.swing.JFileChooser;
 
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
-import org.loboevolution.primary.settings.ToolsSettings;
+import org.loboevolution.primary.settings.SearchEngine;
+import org.loboevolution.store.SQLiteManager;
 import org.loboevolution.ua.NavigatorWindow;
 import org.loboevolution.ua.RequestType;
 
@@ -68,18 +70,17 @@ public class OpenFileAction extends ActionPool {
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		ToolsSettings settings = ToolsSettings.getInstance();
-		java.io.File directory = settings.getOpenFileDirectory();
-		if (directory != null) {
-			fileChooser.setSelectedFile(directory);
-		}
 		int returnValue = fileChooser.showOpenDialog(window.getTopFrame().getComponent());
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
-			java.io.File selectedFile = fileChooser.getSelectedFile();
+			File selectedFile = fileChooser.getSelectedFile();
+			SQLiteManager sql = new SQLiteManager();
 			componentSource.navigate(selectedFile.toURI().toString(), RequestType.PROGRAMMATIC);
-			settings.setOpenFileDirectory(selectedFile);
-			settings.save();
+			SearchEngine search = new SearchEngine();
+			search.setName(selectedFile.getName());
+			search.setDescription(selectedFile.getAbsolutePath());
+			search.setType("OPEN");
+			search.setSelected(true);
+			sql.insertFileSelected(search);
 		}
 	}
-
 }

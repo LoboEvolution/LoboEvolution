@@ -22,6 +22,16 @@ package org.loboevolution.font;
 
 import java.awt.Color;
 import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.loboevolution.color.ColorFactory;
+
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * The Class LAFSettings.
@@ -30,6 +40,10 @@ public class LAFSettings implements FontCommon, Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(LAFSettings.class);
 	
 	/** The Acryl . */
 	private boolean acryl = false;
@@ -135,9 +149,50 @@ public class LAFSettings implements FontCommon, Serializable {
 	 * @return the istance
 	 */
 	public LAFSettings getIstance() {
-		FontSqlLiteRetrive retrive = new FontSqlLiteRetrive();
-		LAFSettings laf = retrive.retriveFontDate(); 
+		LAFSettings laf = retriveFontDate(); 
 		if(laf == null ) { laf = this; }
+		return laf;
+	}
+	
+	private LAFSettings retriveFontDate() {
+		LAFSettings laf = null;
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(" SELECT acryl, aero, aluminium, bernstein, fast, graphite," + 
+											 " 	      hiFi,luna, mcWin, mint, noire, smart, texture," + 
+											 "	 	  subscript, superscript, underline, italic, strikethrough," + 
+											 "		  fontSize, font, color, bold" +
+											 " FROM LOOK_AND_FEEL");
+
+			while (rs!= null && rs.next()) {
+				laf = new LAFSettings();
+				laf.setAcryl(rs.getInt(1) == 1 ? true : false);
+				laf.setAero(rs.getInt(2) == 1 ? true : false);
+				laf.setAluminium(rs.getInt(3) == 1 ? true : false);
+				laf.setBernstein(rs.getInt(4) == 1 ? true : false);
+				laf.setFast(rs.getInt(5) == 1 ? true : false);
+				laf.setGraphite(rs.getInt(6) == 1 ? true : false);
+				laf.setHiFi(rs.getInt(7) == 1 ? true : false);
+				laf.setLuna(rs.getInt(8) == 1 ? true : false);
+				laf.setMcWin(rs.getInt(9) == 1 ? true : false);
+				laf.setMint(rs.getInt(10) == 1 ? true : false);
+				laf.setNoire(rs.getInt(11) == 1 ? true : false);
+				laf.setSmart(rs.getInt(12) == 1 ? true : false);
+				laf.setTexture(rs.getInt(13) == 1 ? true : false);
+				laf.setSubscript(rs.getInt(14) == 1 ? true : false);
+				laf.setSuperscript(rs.getInt(15) == 1 ? true : false);
+				laf.setUnderline(rs.getInt(16) == 1 ? true : false);
+				laf.setItalic(rs.getInt(17) == 1 ? true : false);
+				laf.setStrikethrough(rs.getInt(18) == 1 ? true : false);
+				laf.setFontSize(Float.parseFloat(rs.getString(19)));
+				laf.setFont(rs.getString(20));
+				laf.setColor(ColorFactory.getInstance().getColor(rs.getString(21)));
+				laf.setBold(rs.getInt(22) == 1 ? true : false);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			return null;
+		}
 		return laf;
 	}
 

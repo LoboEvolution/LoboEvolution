@@ -21,34 +21,31 @@
 package org.loboevolution.store;
 
 import java.awt.Color;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.font.LAFSettings;
+import org.loboevolution.primary.settings.SearchEngine;
+
+import com.loboevolution.store.SQLiteCommon;
 
 public class SQLiteManager {
 	
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(SQLiteManager.class);
 	
-	/** The Constant SETTINGS_DIR. */
-	private static final String JDBC_SQLITE = "jdbc:sqlite:";
-	
-	/** The Constant LOBO_DB. */
-	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE";
-			
 	/*The url database*/
-	private String urlDatabase;
+	private final String urlDatabase;
 	
 	public SQLiteManager() {
-		urlDatabase = JDBC_SQLITE + getSettingsDirectory() + "\\" + LOBO_DB;
+		urlDatabase = SQLiteCommon.getSettingsDirectory();;
 	}	
 
 	/**
-	 * Insert a new row into the settings table
+	 * Insert a new row into the look_and_feel table
 	 *
 	 * @param laf
 	 */
@@ -84,7 +81,7 @@ public class SQLiteManager {
 			Color c = laf.getColor();
 			pstmt.setString(21, "rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() + ")");
 			pstmt.setInt(22, laf.isBold() ? 1 : 0);
-			int a = pstmt.executeUpdate();
+			pstmt.executeUpdate();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
@@ -92,6 +89,24 @@ public class SQLiteManager {
 	
 	public void deleteLAF() {
 		try (Connection conn = connect(urlDatabase); PreparedStatement pstmt = conn.prepareStatement("DELETE FROM LOOK_AND_FEEL")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Insert a new row into the search selected table
+	 *
+	 * @param search
+	 */
+	public void insertFileSelected(SearchEngine search) {
+		try (Connection conn = connect(urlDatabase);
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SEARCH_SELECTED (name, description, type, selected) VALUES(?,?,?,?)")) {
+			pstmt.setString(1, search.getName());
+			pstmt.setString(2, search.getDescription());
+			pstmt.setString(3, search.getType());
+			pstmt.setInt(4, search.isSelected() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -112,15 +127,4 @@ public class SQLiteManager {
 		}
 		return conn;
 	} 
-
-    /**
-	 * Gets the settings directory.
-	 *
-	 * @return the settings directory
-	 */
-	public File getSettingsDirectory() {
-		File homeDir = new File(System.getProperty("user.home"));
-		File storeDir = new File(homeDir, ".lobo");
-		return new File(storeDir, "store");
-	}
 }
