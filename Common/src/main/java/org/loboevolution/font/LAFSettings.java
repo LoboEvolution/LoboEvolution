@@ -26,6 +26,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -111,35 +115,6 @@ public class LAFSettings implements FontCommon, Serializable {
 	/** The Font . */
 	private String font = TIMES_NEW_ROMAN;
 
-	/** The FONTS . */
-	public static final String[] FONTS = { "Aharoni", "Andalus", "AngsanaNew", "AngsanaUPC", "AngsanaUPC", "Aparajita",
-			"ArabicTypesetting", "Arial", "ArialBlack", "Batang", "BatangChe", "BrowalliaNew", "BrowalliaUPC",
-			"Caladea", "Calibri", "CalibriLight", "Cambria", "CambriaMath", "Candara", "Carlito", "ComicSansMS",
-			"Consolas", "Constantia", "Corbel", "CordiaNew", "CordiaUPC", "CourierNew", "DaunPenh", "David",
-			"DejaVuSans", "DejaVuSansCondensed", "DejaVuSansLight", "DejaVuSansMono", "DejaVuSerif",
-			"DejaVuSerifCondensed", "DFKai-SB", "Dialog", "DialogInput", "DilleniaUPC", "DokChampa", "Dotum",
-			"DotumChe", "Ebrima", "EstrangeloEdessa", "EucrosiaUPC", "Euphemia", "FangSong", "FranklinGothicMedium",
-			"FrankRuehl", "FreesiaUPC", "Gabriola", "Gautami", "GentiumBasic", "GentiumBookBasic", "Georgia", "Gisha",
-			"Gulim", "GulimChe", "Gungsuh", "GungsuhChe", "Impact", "IrisUPC", "IskoolaPota", "JasmineUPC", "KaiTi",
-			"Kalinga", "Kartika", "KhmerUI", "KodchiangUPC", "Kokila", "LaoUI", "Latha", "Leelawadee", "LevenimMT",
-			"LiberationMono", "LiberationSans", "LiberationSansNarrow", "LiberationSerif", "LilyUPC", "LinuxBiolinumG",
-			"LinuxLibertineDisplayG", "LinuxLibertineG", "LucidaBright", "LucidaConsole", "LucidaSans",
-			"LucidaSansTypewriter", "LucidaSansUnicode", "MalgunGothic", "Mangal", "Marlett", "Meiryo", "MeiryoUI",
-			"MicrosoftHimalaya", "MicrosoftJhengHei", "MicrosoftNewTaiLue", "MicrosoftPhagsPa", "MicrosoftSansSerif",
-			"MicrosoftTaiLe", "MicrosoftUighur", "MicrosoftYaHei", "MicrosoftYiBaiti", "MingLiU", "MingLiU-ExtB",
-			"MingLiU_HKSCS", "MingLiU_HKSCS-ExtB", "Miriam", "MiriamFixed", "MongolianBaiti", "Monospaced", "MoolBoran",
-			"MSGothic", "MSMincho", "MSPGothic", "MSPMincho", "MSUIGothic", "MVBoli", "Narkisim", "NSimSun", "Nyala",
-			"OpenSans", "OpenSymbol", "PalatinoLinotype", "PlantagenetCherokee", "PMingLiU", "PMingLiU-ExtB", "PTSerif",
-			"Raavi", "Rod", "SakkalMajalla", "SansSerif", "SegoePrint", "SegoeScript", "SegoeUI", "SegoeUILight",
-			"SegoeUISemibold", "SegoeUISymbol", "Serif", "ShonarBangla", "Shruti", "SimHei", "SimplifiedArabic",
-			"SimplifiedArabicFixed", "SimSun", "SimSun-ExtB", "SourceCodePro", "SourceSansPro", "SourceSansProBlack",
-			"SourceSansProExtraLight", "SourceSansProLight", "SourceSansProSemibold", "Sylfaen", "Symbol", "Tahoma",
-			"TimesNewRoman", "TraditionalArabic", "TrebuchetMS", "Tunga", "Utsaah", "Vani", "Verdana", "Vijaya",
-			"Vrinda", "Webdings", "Wingdings" };
-
-	public static final String[] FONTS_SIZE = { "8", "9", "10", "11", "12", "14", "16", "18", "20", "22", "24", "26", "28",
-			"36", "48", "72" };
-	
 	/**
 	 * Instantiates a new general settings.
 	 */
@@ -194,6 +169,21 @@ public class LAFSettings implements FontCommon, Serializable {
 			return null;
 		}
 		return laf;
+	}
+	
+	public static String[] getFonts(String type) {
+		List<String> fonts = new ArrayList<String>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT name FROM "+type);
+
+			while (rs != null && rs.next()) {
+				fonts.add(rs.getString(1));
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return fonts.toArray(new String[fonts.size()]);
 	}
 
 	/**

@@ -147,7 +147,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 *            the frame context
 	 */
 	public HtmlBlockPanel(UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext) {
-		this(ColorFactory.TRANSPARENT, true, pcontext, rcontext, frameContext);
+		this(new Color(0,0,0,0), true, pcontext, rcontext, frameContext);
 	}
 
 	/**

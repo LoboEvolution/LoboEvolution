@@ -168,8 +168,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		textureCheckBox = new JCheckBox(LAFSettings.TEXTURE);
 		colorComboBox = new ColorComboBox();
 		colorComboBox.setPreferredSize(new Dimension(400, 20));
-		fontList = new JComboBox<String>(LAFSettings.FONTS);
-		fontSizeList = new JComboBox<String>(LAFSettings.FONTS_SIZE);
+		fontList = new JComboBox<String>(LAFSettings.getFonts("FONT"));
+		fontSizeList = new JComboBox<String>(LAFSettings.getFonts("FONT_SIZE"));
 
 		ActionListener actionListener = e -> updatePreview();
 

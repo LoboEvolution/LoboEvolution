@@ -28,7 +28,6 @@ import java.awt.event.ActionEvent;
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
 import org.loboevolution.primary.gui.bookmarks.FilesDialog;
-import org.loboevolution.primary.gui.bookmarks.RecentHostsDialog;
 import org.loboevolution.ua.NavigatorWindow;
 
 /**
