@@ -69,11 +69,8 @@ public class StorageManager implements Runnable, ColorCommon {
 			+ "bold integer, italic integer, underline integer, strikethrough integer, subscript integer, "
 			+ "superscript integer, fontSize text, font text, color text)";
 	
-	/** The Constant SEARCH. */
-	private static final String SEARCH = "CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter text)";
-	
 	/** The Constant SEARCH_SELECTED. */
-	private static final String SEARCH_SELECTED = "CREATE TABLE SEARCH_SELECTED (name text, description text, baseUrl text, queryParameter text, selected integer, type text)";
+	private static final String SEARCH = "CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter text, selected integer, type text)";
 	
 	/** The Constant COLOR. */
 	private static final String COLOR = "CREATE TABLE COLOR (name text, value text)";
@@ -265,7 +262,6 @@ public class StorageManager implements Runnable, ColorCommon {
 			try (Connection conn = DriverManager.getConnection(urlDatabase); Statement stmt = conn.createStatement()) {
 				createTable(urlDatabase, LOOK_AND_FEEL);
 				createTable(urlDatabase, SEARCH);
-				createTable(urlDatabase, SEARCH_SELECTED);
 				createTable(urlDatabase, COLOR);
 				createTable(urlDatabase, FONT);
 				createTable(urlDatabase, FONT_SIZE);

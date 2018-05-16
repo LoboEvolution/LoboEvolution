@@ -175,7 +175,7 @@ public abstract class BaseHistory<T> implements Serializable {
 			List<String[]> values = new ArrayList<String[]>();
 			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
 				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT description FROM SEARCH_SELECTED WHERE type = " + "'" + type + "'");
+				ResultSet rs = stmt.executeQuery("SELECT description FROM SEARCH WHERE type = " + "'" + type + "'");
 				while (rs!= null && rs.next()) {
 					values.add(new String[] { rs.getString(1) });
 				}

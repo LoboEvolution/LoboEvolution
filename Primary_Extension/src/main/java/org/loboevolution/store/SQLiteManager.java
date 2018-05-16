@@ -102,7 +102,7 @@ public class SQLiteManager {
 	 */
 	public void insertFileSelected(SearchEngine search) {
 		try (Connection conn = connect(urlDatabase);
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SEARCH_SELECTED (name, description, type, selected) VALUES(?,?,?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SEARCH (name, description, type, selected) VALUES(?,?,?,?)")) {
 			pstmt.setString(1, search.getName());
 			pstmt.setString(2, search.getDescription());
 			pstmt.setString(3, search.getType());

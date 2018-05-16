@@ -276,7 +276,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		attributes.put(FAMILY, LAFSettings.TIMES_NEW_ROMAN);
 		attributes.put(SIZE, (float) 14.0);
 		previewLabel.setFont(new Font(attributes));
-		previewLabel.setForeground(Color.BLACK);// TODO
+		previewLabel.setForeground(Color.BLACK);
 
 	}
 
