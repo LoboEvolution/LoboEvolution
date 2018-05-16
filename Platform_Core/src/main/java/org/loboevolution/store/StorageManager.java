@@ -268,6 +268,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				populateColorTable(urlDatabase);
 				populateFontTable(urlDatabase);
 				populateFontSizeTable(urlDatabase);
+				populateSearchEngine(urlDatabase);
 			} catch (Exception e) {
 				logger.error(e.getMessage());
 			}
@@ -983,6 +984,13 @@ public class StorageManager implements Runnable, ColorCommon {
 		insertFont(urlDatabase, "72", "FONT_SIZE");
 	}
 	
+	private void populateSearchEngine(String urlDatabase) {
+		insertSearch(urlDatabase, "Bing Search", "Bing web search engine.", "http://www.bing.com/search?q", "q", 0, "SEARCH_ENGINE");
+		insertSearch(urlDatabase, "Google Web Search", "Google's main search engine.", "http://google.com/search", "q", 1, "SEARCH_ENGINE");
+		insertSearch(urlDatabase, "Yahoo! Web Search", "Yahoo's web search engine.", "http://search.yahoo.com/search", "p", 0, "SEARCH_ENGINE");
+		insertSearch(urlDatabase, "Wikipedia", "English Wikipedia article search.", "http://en.wikipedia.org/wiki/Special:Search", "search", 0, "SEARCH_ENGINE");
+	}
+	
 	private void insertColorTable(String urlDatabase, String name, int value) {
 		try (Connection conn = DriverManager.getConnection(urlDatabase);
 				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO COLOR (name, value) VALUES(?,?)")) {
@@ -1004,8 +1012,23 @@ public class StorageManager implements Runnable, ColorCommon {
 		}
 	}
 	
-	/*
-	 * (non-Javadoc)
+	private void insertSearch(String urlDatabase, String name, String description, String baseUrl, String queryParameter, int selected, String type) {
+		try (Connection conn = DriverManager.getConnection(urlDatabase);
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES(?,?,?,?,?,?)")) {
+			pstmt.setString(1, name);
+			pstmt.setString(2, description);
+			pstmt.setString(3, type);
+			pstmt.setString(4, baseUrl);
+			pstmt.setString(5, queryParameter);
+			pstmt.setInt(6, selected);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	
+	/* (non-Javadoc)
 	 * 
 	 * @see java.lang.Runnable#run()
 	 */

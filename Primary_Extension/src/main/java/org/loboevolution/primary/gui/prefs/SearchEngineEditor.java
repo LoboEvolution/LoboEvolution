@@ -77,8 +77,12 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 	 */
 	@Override
 	public SearchEngine getItem() {
-		return new SearchEngine(this.nameField.getValue(), this.descriptionField.getValue(),
-				this.baseUrlField.getValue(), this.queryParameterField.getValue());
+		SearchEngine se = new SearchEngine();
+		se.setName(this.nameField.getValue());
+		se.setDescription(this.descriptionField.getValue());
+		se.setBaseUrl(this.baseUrlField.getValue());
+		se.setQueryParameter(this.queryParameterField.getValue());
+		return se;
 	}
 
 	/*

@@ -42,8 +42,6 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.info.MetaInfo;
 import org.loboevolution.primary.action.AboutAction;
 import org.loboevolution.primary.action.AddBookmarkAction;
@@ -84,7 +82,6 @@ import org.loboevolution.ua.NavigatorWindow;
 import org.loboevolution.ua.NavigatorWindowEvent;
 import org.loboevolution.ua.NavigatorWindowListener;
 import org.loboevolution.ua.RequestType;
-import org.loboevolution.util.Objects;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.Timing;
 
@@ -92,9 +89,6 @@ import org.loboevolution.util.Timing;
  * The Class ComponentSource.
  */
 public class ComponentSource implements NavigatorWindowListener {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ComponentSource.class);
 
 	/** The Constant PREFERRED_MAX_MENU_SIZE. */
 	private static final int PREFERRED_MAX_MENU_SIZE = 20;
@@ -651,7 +645,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 * Search.
 	 */
 	public void search() {
-		ToolsSettings settings = ToolsSettings.getInstance();
+		ToolsSettings settings = new ToolsSettings();
 		SearchEngine searchEngine = settings.getSelectedSearchEngine();
 		if (searchEngine != null) {
 			try {
@@ -744,7 +738,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 */
 	private void updateSearchButtonTooltip() {
 		JButton button = this.searchButton;
-		ToolsSettings settings = ToolsSettings.getInstance();
+		ToolsSettings settings = new ToolsSettings();
 		SearchEngine currentEngine = settings.getSelectedSearchEngine();
 		String name = currentEngine == null ? "[none]" : currentEngine.getName();
 		button.setToolTipText("<html><body>Current search engine: " + name + ".</body></html>");
@@ -794,25 +788,21 @@ public class ComponentSource implements NavigatorWindowListener {
 	private void populateSearchers() {
 		JMenu searchersMenu = this.searchersMenu;
 		searchersMenu.removeAll();
-		final ToolsSettings settings = ToolsSettings.getInstance();
+		ToolsSettings settings = new ToolsSettings();
 		Collection<SearchEngine> searchEngines = settings.getSearchEngines();
-		SearchEngine selectedEngine = settings.getSelectedSearchEngine();
 		if (searchEngines != null) {
 			for (SearchEngine se : searchEngines) {
-				final SearchEngine finalSe = se;
 				JRadioButtonMenuItem item = new JRadioButtonMenuItem();
 				item.setAction(new AbstractAction() {
-
 					private static final long serialVersionUID = 1L;
-
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						settings.setSelectedSearchEngine(finalSe);
-						settings.save();
+						settings.unselectedSearch();
+						settings.selectedSearch(se.getName());
 						ComponentSource.this.updateSearchButtonTooltip();
 					}
 				});
-				item.setSelected(Objects.equals(se, selectedEngine));
+				item.setSelected(se.isSelected());
 				item.setText(se.getName());
 				item.setToolTipText(se.getDescription());
 				searchersMenu.add(item);

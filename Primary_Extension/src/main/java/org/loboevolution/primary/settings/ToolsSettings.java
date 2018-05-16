@@ -20,23 +20,17 @@
  */
 package org.loboevolution.primary.settings;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.store.StorageManager;
-
 import com.loboevolution.store.SQLiteCommon;
 
 /**
@@ -47,137 +41,35 @@ public class ToolsSettings implements Serializable {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(ToolsSettings.class);
 
-	/** The Constant instance. */
-	private static final ToolsSettings instance;
-
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500006000800L;
-
-	/** The search engines. */
-	private transient Collection<SearchEngine> searchEngines;
-
-	/** The selected search engine. */
-	private transient SearchEngine selectedSearchEngine;
-
-	static {
-		ToolsSettings ins = null;
-		try {
-			ins = (ToolsSettings) StorageManager.getInstance().retrieveSettings(ToolsSettings.class.getSimpleName(),
-					ToolsSettings.class.getClassLoader());
-		} catch (Exception err) {
-			logger.error("getInstance(): Unable to retrieve settings.", err);
-		}
-		if (ins == null) {
-			ins = new ToolsSettings();
-		}
-		instance = ins;
-	}
 
 	/**
 	 * Instantiates a new tools settings.
 	 */
-	private ToolsSettings() {
-		this.restoreDefaults();
+	public ToolsSettings() {
 	}
 
-	/**
-	 * Restore defaults.
-	 */
-	public void restoreDefaults() {
-		List<SearchEngine> searchEngines = this.getDefaultSearchEngines();
-		this.searchEngines = searchEngines;
-		this.selectedSearchEngine = searchEngines.get(0);
-	}
-
-	/**
-	 * Gets the Constant instance.
-	 *
-	 * @return the Constant instance
-	 */
-	public static ToolsSettings getInstance() {
-		return instance;
-	}
-
-	/**
-	 * Gets the default search engines.
-	 *
-	 * @return the default search engines
-	 */
-	private List<SearchEngine> getDefaultSearchEngines() {
+	public List<SearchEngine> getSearchEngines() {
 		List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
-		searchEngines.add(this.googleWebSearch());
-		searchEngines.add(this.yahooWebSearch());
-		searchEngines.add(this.wikipediaSearch());
-		searchEngines.add(this.bingSearch());
-		return searchEngines;
-	}
-
-	/**
-	 * Google web search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine googleWebSearch() {
-		return new SearchEngine("Google Web Search", "Google's main search engine.", "http://google.com/search", "q");
-	}
-
-	/**
-	 * Yahoo web search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine yahooWebSearch() {
-		return new SearchEngine("Yahoo! Web Search", "Yahoo's web search engine.", "http://search.yahoo.com/search",
-				"p");
-	}
-
-	/**
-	 * Wikipedia search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine wikipediaSearch() {
-		return new SearchEngine("Wikipedia", "English Wikipedia article search.",
-				"http://en.wikipedia.org/wiki/Special:Search", "search");
-	}
-
-	/**
-	 * Bing search.
-	 *
-	 * @return the search engine
-	 */
-	private SearchEngine bingSearch() {
-		return new SearchEngine("Bing Search", "Bing web search engine.", "http://www.bing.com/search?q", "q");
-	}
-
-	/**
-	 * Save.
-	 */
-	public void save() {
-		try {
-			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
-		} catch (IOException ioe) {
-			logger.error("Unable to save settings: " + this.getClass().getSimpleName() + ".", ioe);
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(
+					"SELECT name, description, baseUrl, queryParameter, type, selected FROM SEARCH WHERE type = 'SEARCH_ENGINE' ORDER BY 6 DESC");
+			while (rs != null && rs.next()) {
+				SearchEngine se = new SearchEngine();
+				se.setName(rs.getString(1));
+				se.setDescription(rs.getString(2));
+				se.setBaseUrl(rs.getString(3));
+				se.setQueryParameter(rs.getString(4));
+				se.setType(rs.getString(5));
+				se.setSelected((rs.getInt(6) == 1 ? true : false));
+				searchEngines.add(se);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-	}
-
-	/**
-	 * Gets the search engines.
-	 *
-	 * @return the search engines
-	 */
-	public Collection<SearchEngine> getSearchEngines() {
-		return this.searchEngines;
-	}
-
-	/**
-	 * Sets the search engines.
-	 *
-	 * @param searchEngines
-	 *            the new search engines
-	 */
-	public void setSearchEngines(Collection<SearchEngine> searchEngines) {
-		this.searchEngines = searchEngines;
+		return searchEngines;
 	}
 
 	/**
@@ -186,16 +78,63 @@ public class ToolsSettings implements Serializable {
 	 * @return the selected search engine
 	 */
 	public SearchEngine getSelectedSearchEngine() {
-		return selectedSearchEngine;
+		List<SearchEngine> searchEngines = getSearchEngines();
+		for (SearchEngine searchEngine : searchEngines) {
+			if (searchEngine.isSelected()) {
+				return searchEngine;
+			}
+		}
+		return null;
 	}
 
-	/**
-	 * Sets the selected search engine.
-	 *
-	 * @param selectedSearchEngine
-	 *            the new selected search engine
-	 */
-	public void setSelectedSearchEngine(SearchEngine selectedSearchEngine) {
-		this.selectedSearchEngine = selectedSearchEngine;
+	public void restoreDefaults() {
+		unselectedSearch();
+		selectedSearch("Google Web Search");
+	}
+
+	public void deleteSearchEngine() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("DELETE FROM SEARCH WHERE type = 'SEARCH_ENGINE'")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	public void insertSearch(String name, String description, String baseUrl, String queryParameter, boolean selected) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(
+						"INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES(?,?,?,?,?,?)")) {
+			pstmt.setString(1, name);
+			pstmt.setString(2, description);
+			pstmt.setString(3, "SEARCH_ENGINE");
+			pstmt.setString(4, baseUrl);
+			pstmt.setString(5, queryParameter);
+			pstmt.setInt(6, selected ? 1 : 0);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	public void unselectedSearch() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(
+						"UPDATE SEARCH SET selected = 0 WHERE selected = 1 and type = 'SEARCH_ENGINE'")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	public void selectedSearch(String name) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn
+						.prepareStatement("UPDATE SEARCH SET selected = 1 WHERE name = ? and type = 'SEARCH_ENGINE'")) {
+			pstmt.setString(1, name);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
 	}
 }

@@ -42,8 +42,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The settings. */
-	private final ToolsSettings settings = ToolsSettings.getInstance();
 
 	/** The search engine list control. */
 	private final ItemListControl<SearchEngine> searchEngineListControl;
@@ -83,7 +81,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void restoreDefaults() {
-		this.settings.restoreDefaults();
+		ToolsSettings settings = new ToolsSettings();
+		settings.restoreDefaults();
 		this.loadSettings();
 	}
 
@@ -94,17 +93,22 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() {
-		ToolsSettings settings = this.settings;
+		ToolsSettings settings = new ToolsSettings();
 		Collection<SearchEngine> items = this.searchEngineListControl.getItems();
-		settings.setSearchEngines(items);
-		settings.save();
+		settings.deleteSearchEngine();
+		int i = 0;
+		for (SearchEngine searchEngine : items) {
+			settings.insertSearch(searchEngine.getName(), searchEngine.getDescription(), searchEngine.getBaseUrl(),
+					searchEngine.getQueryParameter(), i == 0 ? true : false);
+			i++;	
+		}
 	}
 
 	/**
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		ToolsSettings settings = this.settings;
+		ToolsSettings settings = new ToolsSettings();
 		this.searchEngineListControl.setItems(settings.getSearchEngines());
 	}
 }

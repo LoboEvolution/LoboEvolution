@@ -41,10 +41,10 @@ public class SearchEngine implements Serializable {
 	private String description;
 
 	/** The base url. */
-	private final String baseUrl;
+	private String baseUrl;
 
 	/** The query parameter. */
-	private final String queryParameter;
+	private String queryParameter;
 	
 	/** The file. */
 	private String type;
@@ -52,34 +52,6 @@ public class SearchEngine implements Serializable {
 	/** The query parameter. */
 	private boolean isSelected;
 	
-	public SearchEngine() {
-		this.name = "";
-		this.description = "";
-		this.baseUrl = "";
-		this.queryParameter = "";	
-	}
-	
-	/**
-	 * Instantiates a new search engine.
-	 *
-	 * @param name
-	 *            the name
-	 * @param description
-	 *            the description
-	 * @param baseUrl
-	 *            the base url
-	 * @param queryParameter
-	 *            the query parameter
-	 */
-	public SearchEngine(final String name, final String description, final String baseUrl,
-			final String queryParameter) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.baseUrl = baseUrl;
-		this.queryParameter = queryParameter;
-	}
-
 	/**
 	 * Gets the url.
 	 *
@@ -175,6 +147,20 @@ public class SearchEngine implements Serializable {
 	 */
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
+	}
+
+	/**
+	 * @param baseUrl the baseUrl to set
+	 */
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
+	/**
+	 * @param queryParameter the queryParameter to set
+	 */
+	public void setQueryParameter(String queryParameter) {
+		this.queryParameter = queryParameter;
 	}
 
 	/*
