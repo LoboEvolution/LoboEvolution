@@ -186,24 +186,6 @@ public abstract class BaseHistory<T> implements Serializable {
 		}
 	}
 
-	/**
-	 * Gets the all entries.
-	 *
-	 * @return the all entries
-	 */
-	public Collection<HistoryEntry<T>> getAllEntries() {
-		synchronized (this) {
-			Collection<HistoryEntry<T>> items = new LinkedList<HistoryEntry<T>>();
-			if (historyTimedSet != null) {
-				Iterator<TimedEntry<T>> i = this.historyTimedSet.iterator();
-				while (i.hasNext()) {
-					TimedEntry<T> entry = i.next();
-					items.add(new HistoryEntry<T>(entry.getUrl(), entry.getTimestamp(), entry.getItemInfo()));
-				}
-			}
-			return items;
-		}
-	}
 
 	/**
 	 * Gets the recent entries.
@@ -283,35 +265,5 @@ public abstract class BaseHistory<T> implements Serializable {
 				}
 			}
 		}
-	}
-
-	/**
-	 * Touch.
-	 *
-	 * @param url
-	 *            the url
-	 */
-	public void touch(URL url) {
-		String item = url.toExternalForm();
-		synchronized (this) {
-			TimedEntry<T> entry = this.historyMap.get(item);
-			if (entry != null) {
-				this.historyTimedSet.remove(entry);
-				entry.touch();
-				this.historyTimedSet.add(entry);
-			}
-		}
-	}
-
-	/**
-	 * Gets the existing info.
-	 *
-	 * @param item
-	 *            the item
-	 * @return the existing info
-	 */
-	public T getExistingInfo(String item) {
-		TimedEntry<T> entry = this.historyMap.get(item);
-		return entry == null ? null : entry.getItemInfo();
 	}
 }

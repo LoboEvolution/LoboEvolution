@@ -34,7 +34,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.primary.action.BackAction;
 import org.loboevolution.primary.action.BackMoreAction;
-import org.loboevolution.primary.action.BookmarkNavigateAction;
 import org.loboevolution.primary.action.EnableableAction;
 import org.loboevolution.primary.action.ForwardAction;
 import org.loboevolution.primary.action.ForwardMoreAction;
@@ -130,19 +129,6 @@ public class ActionPool extends AbstractAction {
 		NavigateAction nav = new NavigateAction(componentSource, window);
 		nav.setUrl(url);
 		return nav;
-	}
-
-	/**
-	 * Creates the bookmark navigate action.
-	 *
-	 * @param url
-	 *            the url
-	 * @return the action
-	 */
-	public Action createBookmarkNavigateAction(URL url) {
-		BookmarkNavigateAction bookNav = new BookmarkNavigateAction(componentSource, window);
-		bookNav.setUrl(url);
-		return bookNav;
 	}
 
 	/**

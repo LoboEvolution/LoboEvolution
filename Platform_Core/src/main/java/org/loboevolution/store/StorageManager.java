@@ -72,6 +72,9 @@ public class StorageManager implements Runnable, ColorCommon {
 	/** The Constant SEARCH_SELECTED. */
 	private static final String SEARCH = "CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter text, selected integer, type text)";
 	
+	/** The Constant SEARCH_SELECTED. */
+	private static final String BOOKMARKS = "CREATE TABLE BOOKMARKS (name text, description text, baseUrl text, tags text)";
+	
 	/** The Constant COLOR. */
 	private static final String COLOR = "CREATE TABLE COLOR (name text, value text)";
 	
@@ -237,20 +240,11 @@ public class StorageManager implements Runnable, ColorCommon {
 		return store;
 	}
 
-	public void saveSettings(String name, ClassLoader classLoader) throws IOException {
-		// TODO
-	}
-
 	public void saveSettings(String name, Serializable classLoader) throws IOException {
 		// TODO
 	}
 
 	public Serializable retrieveSettings(String name, ClassLoader classLoader) throws IOException {
-		return null;
-		// TODO
-	}
-
-	public Serializable retrieveSettings(String name, Serializable classLoader) throws IOException {
 		return null;
 		// TODO
 	}
@@ -265,6 +259,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(urlDatabase, COLOR);
 				createTable(urlDatabase, FONT);
 				createTable(urlDatabase, FONT_SIZE);
+				createTable(urlDatabase, BOOKMARKS);
 				populateColorTable(urlDatabase);
 				populateFontTable(urlDatabase);
 				populateFontSizeTable(urlDatabase);

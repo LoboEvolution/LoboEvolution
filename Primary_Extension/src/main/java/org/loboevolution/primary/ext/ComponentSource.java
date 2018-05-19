@@ -28,10 +28,7 @@ import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -69,10 +66,7 @@ import org.loboevolution.primary.action.ShowRecentHostsAction;
 import org.loboevolution.primary.action.ShowRecentOpenedFileAction;
 import org.loboevolution.primary.action.SourceAction;
 import org.loboevolution.primary.action.StopAction;
-import org.loboevolution.primary.ext.history.HistoryEntry;
 import org.loboevolution.primary.ext.history.NavigationHistory;
-import org.loboevolution.primary.gui.bookmarks.BookmarksHistory;
-import org.loboevolution.primary.info.BookmarkInfo;
 import org.loboevolution.primary.settings.SearchEngine;
 import org.loboevolution.primary.settings.ToolsSettings;
 import org.loboevolution.request.ClientletRequestHandler;
@@ -83,16 +77,12 @@ import org.loboevolution.ua.NavigatorWindowEvent;
 import org.loboevolution.ua.NavigatorWindowListener;
 import org.loboevolution.ua.RequestType;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.Timing;
 
 /**
  * The Class ComponentSource.
  */
 public class ComponentSource implements NavigatorWindowListener {
-
-	/** The Constant PREFERRED_MAX_MENU_SIZE. */
-	private static final int PREFERRED_MAX_MENU_SIZE = 20;
-
+	
 	/** The window. */
 	private final transient NavigatorWindow window;
 
@@ -104,12 +94,6 @@ public class ComponentSource implements NavigatorWindowListener {
 
 	/** The progress bar. */
 	private final ProgressBar progressBar;
-
-	/** The recent bookmarks menu. */
-	private final JMenu recentBookmarksMenu;
-
-	/** The tagged bookmarks menu. */
-	private final JMenu taggedBookmarksMenu;
 
 	/** The back more menu. */
 	private final JMenu backMoreMenu;
@@ -147,26 +131,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		this.statusMessageComponent = new JLabel();
 		this.searchButton = this.getSearchButton();
 		this.updateSearchButtonTooltip();
-		JMenu bookmarksMenu = new JMenu("Recent Bookmarks");
-		this.recentBookmarksMenu = bookmarksMenu;
-		bookmarksMenu.setMnemonic('R');
-		bookmarksMenu.addMenuListener(new MenuAdapter() {
-			@Override
-			public void menuSelected(MenuEvent e) {
-				populateRecentBookmarks();
-			}
-		});
-		JMenu taggedBookmarksMenu = new JMenu("Tagged Bookmarks");
-		this.taggedBookmarksMenu = taggedBookmarksMenu;
-		taggedBookmarksMenu.setMnemonic('T');
-		taggedBookmarksMenu.setToolTipText("Shows up to " + PREFERRED_MAX_MENU_SIZE + " tags with up to "
-				+ PREFERRED_MAX_MENU_SIZE + " recent bookmarks each.");
-		taggedBookmarksMenu.addMenuListener(new MenuAdapter() {
-			@Override
-			public void menuSelected(MenuEvent e) {
-				populateTaggedBookmarks();
-			}
-		});
+
 		JMenu backMoreMenu = new JMenu();
 		// BackMoreAction only used for enabling
 		backMoreMenu.setAction(new BackMoreAction(window, actionPool));
@@ -283,9 +248,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		JMenu menu = new JMenu("Bookmarks");
 		menu.setMnemonic('B');
 		menu.add(menuItem("Add Bookmark", 'A', "ctrl shift a", new AddBookmarkAction(this, window)));
-		menu.add(this.recentBookmarksMenu);
-		menu.add(this.taggedBookmarksMenu);
-		menu.add(menuItem("Show All Bookmarks", 'S', new ShowBookmarksAction(this, window)));
+		menu.add(menuItem("Show All Bookmarks", 'S', new ShowBookmarksAction(this, window, null)));
 		return menu;
 	}
 
@@ -319,6 +282,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.add(menuItem("Hosts", new ShowRecentHostsAction(this, window)));
 		menu.add(menuItem("Opened Files", new ShowRecentOpenedFileAction(this, window)));
 		menu.add(menuItem("Downloaded Files", new ShowRecentDownloadedFileAction(this, window)));
+		menu.add(menuItem("Bookmarks", new ShowBookmarksAction(this, window, 20)));
 		return menu;
 	}
 
@@ -819,83 +783,6 @@ public class ComponentSource implements NavigatorWindowListener {
 		return this.addressField.getText();
 	}
 	
-	/**
-	 * Populate recent bookmarks.
-	 */
-	private void populateRecentBookmarks() {
-		JMenu bookmarksMenu = this.recentBookmarksMenu;
-		bookmarksMenu.removeAll();
-		Collection<HistoryEntry<BookmarkInfo>> historyEntries = BookmarksHistory.getInstance()
-				.getRecentEntries(PREFERRED_MAX_MENU_SIZE);
-		for (HistoryEntry<BookmarkInfo> hentry : historyEntries) {
-			BookmarkInfo binfo = hentry.getItemInfo();
-			String text = binfo.getTitle();
-			URL url = binfo.getUrl();
-			String urlText = url.toExternalForm();
-			if (Strings.isBlank(text)) {
-				text = urlText;
-			}
-			long elapsed = System.currentTimeMillis() - hentry.getTimetstamp();
-			text = text + " (" + Timing.getElapsedText(elapsed) + " ago)";
-			Action action = this.actionPool.createBookmarkNavigateAction(url);
-			JMenuItem menuItem = ComponentSource.menuItem(text, action);
-			StringBuilder toolTipText = new StringBuilder();
-			toolTipText.append("<html>");
-			toolTipText.append(urlText);
-			String description = binfo.getDescription();
-			if (!Strings.isBlank(description)) {
-				toolTipText.append("<br>");
-				toolTipText.append(description);
-			}
-			menuItem.setToolTipText(toolTipText.toString());
-			bookmarksMenu.add(menuItem);
-		}
-	}
-
-	/**
-	 * Populate tagged bookmarks.
-	 */
-	private void populateTaggedBookmarks() {
-		JMenu bookmarksMenu = this.taggedBookmarksMenu;
-		bookmarksMenu.removeAll();
-		Collection<BookmarkInfo> bookmarkInfoList = BookmarksHistory.getInstance()
-				.getRecentItemInfo(PREFERRED_MAX_MENU_SIZE * PREFERRED_MAX_MENU_SIZE);
-		Map<String, JMenu> tagMenus = new HashMap<String, JMenu>();
-		for (BookmarkInfo binfo : bookmarkInfoList) {
-			URL url = binfo.getUrl();
-			String urlText = url.toExternalForm();
-			String[] tags = binfo.getTags();
-			if (tags != null) {
-				for (String tag : tags) {
-					JMenu tagMenu = tagMenus.get(tag);
-					if (tagMenu == null && tagMenus.size() < PREFERRED_MAX_MENU_SIZE) {
-						tagMenu = new JMenu(tag);
-						tagMenus.put(tag, tagMenu);
-						bookmarksMenu.add(tagMenu);
-					}
-					if (tagMenu != null && tagMenu.getItemCount() < PREFERRED_MAX_MENU_SIZE) {
-						String text = binfo.getTitle();
-						if (Strings.isBlank(text)) {
-							text = urlText;
-						}
-						Action action = this.actionPool.createBookmarkNavigateAction(url);
-						JMenuItem menuItem = ComponentSource.menuItem(text, action);
-						StringBuilder toolTipText = new StringBuilder();
-						toolTipText.append("<html>");
-						toolTipText.append(urlText);
-						String description = binfo.getDescription();
-						if (!Strings.isBlank(description)) {
-							toolTipText.append("<br>");
-							toolTipText.append(description);
-						}
-						menuItem.setToolTipText(toolTipText.toString());
-						tagMenu.add(menuItem);
-					}
-				}
-			}
-		}
-	}
-
 	/**
 	 * Populate back more.
 	 */

@@ -20,6 +20,7 @@
  */
 package org.loboevolution.primary.action;
 
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.net.URL;
 
@@ -73,31 +74,27 @@ public class AddBookmarkAction extends ActionPool {
 		NavigationEntry entry = window.getCurrentNavigationEntry();
 		if (entry != null) {
 			URL url = entry.getUrl();
-			BookmarksHistory history = BookmarksHistory.getInstance();
+			BookmarksHistory history = new BookmarksHistory();
 			BookmarkInfo existingInfo = history.getExistingInfo(url.toExternalForm());
+			boolean isInfoNull = (existingInfo == null);
 			if (existingInfo == null) {
 				existingInfo = new BookmarkInfo();
 				existingInfo.setUrl(url);
 				existingInfo.setTitle(entry.getTitle());
 				existingInfo.setDescription(entry.getDescription());
 			}
-			java.awt.Window awtWindow = window.getAwtWindow();
-			if (!(awtWindow instanceof java.awt.Frame)) {
-				throw new IllegalStateException("Bookmaks dialog only supported when an AWT Frame is available.");
-			}
-			AddBookmarkDialog dialog = new AddBookmarkDialog((java.awt.Frame) awtWindow, true, existingInfo);
-			dialog.setTitle("Add/Edit Bookmark");
+	
+			AddBookmarkDialog dialog = new AddBookmarkDialog((Frame) window.getAwtWindow(), true, existingInfo);
+			dialog.setTitle("Bookmarks");
 			dialog.setLocationByPlatform(true);
-			// dialog.setLocationRelativeTo(window.getAwtFrame());
 			dialog.setResizable(false);
 			dialog.pack();
 			dialog.setVisible(true);
 			BookmarkInfo info = dialog.getBookmarkInfo();
-			if (info != null) {
-				history.addAsRecent(info.getUrl(), info);
-				history.save();
+			if (info != null && isInfoNull) {
+				//TODO history.addAsRecent(info.getUrl(), info);
+				history.insertBookmark(info);
 			}
 		}
 	}
-
 }

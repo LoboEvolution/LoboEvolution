@@ -40,6 +40,9 @@ public class ShowBookmarksAction extends ActionPool {
 
 	/** The window. */
 	private transient NavigatorWindow window;
+	
+	/** The rownum. */
+	private transient Integer rownum;
 
 	/**
 	 * Instantiates a new show bookmarks action.
@@ -49,9 +52,10 @@ public class ShowBookmarksAction extends ActionPool {
 	 * @param window
 	 *            the window
 	 */
-	public ShowBookmarksAction(ComponentSource componentSource, NavigatorWindow window) {
+	public ShowBookmarksAction(ComponentSource componentSource, NavigatorWindow window, Integer rownum) {
 		super(componentSource, window);
 		this.window = window;
+		this.rownum = rownum;
 	}
 
 	/*
@@ -73,6 +77,7 @@ public class ShowBookmarksAction extends ActionPool {
 		dialog.setLocationByPlatform(true);
 		dialog.setResizable(false);
 		dialog.setSize(new Dimension(600, 400));
+		dialog.setRownum(rownum);
 		dialog.setVisible(true);
 	}
 

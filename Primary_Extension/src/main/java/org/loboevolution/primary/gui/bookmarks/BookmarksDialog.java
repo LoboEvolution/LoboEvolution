@@ -28,7 +28,6 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -47,7 +46,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.loboevolution.primary.ext.IconFactory;
-import org.loboevolution.primary.ext.history.HistoryEntry;
 import org.loboevolution.primary.info.BookmarkInfo;
 import org.loboevolution.ua.NavigatorWindow;
 
@@ -70,6 +68,8 @@ public class BookmarksDialog extends JDialog {
 
 	/** The search. */
 	private static final String SEARCH = "/org/loboevolution/images/search.png";
+	
+	private Integer rownum;
 
 	/**
 	 * Instantiates a new bookmarks dialog.
@@ -131,11 +131,9 @@ public class BookmarksDialog extends JDialog {
 	private Component tablePane() {
 		Object columnNames[] = { "Title", "Description", "Url", "Tag" };
 		List<String[]> values = new ArrayList<String[]>();
-
-		BookmarksHistory history = BookmarksHistory.getInstance();
-		Collection<HistoryEntry<BookmarkInfo>> allEntries = history.getAllEntries();
-		for (HistoryEntry<BookmarkInfo> entry : allEntries) {
-			BookmarkInfo binfo = entry.getItemInfo();
+		BookmarksHistory history = new BookmarksHistory();
+		List<BookmarkInfo> allEntries = history.getBookmarks(null);
+		for (BookmarkInfo binfo : allEntries) {
 			values.add(new String[] { binfo.getTitle(), binfo.getDescription(), binfo.getUrl().toString(), binfo.getTagsText() });
 		}
 
@@ -167,6 +165,12 @@ public class BookmarksDialog extends JDialog {
 			}
 		});
 		return new JScrollPane(jtable);
+	}
+	public Integer getRownum() {
+		return rownum;
+	}
+	public void setRownum(Integer rownum) {
+		this.rownum = rownum;
 	}
 
 }
