@@ -20,9 +20,12 @@
  */
 package org.loboevolution.http;
 
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.ws.Response;
 
@@ -94,6 +97,22 @@ public class Header extends NameValuePair {
 		}
 		firePropertyChange("elements", old, getElements());
 	}
+	
+	public static boolean isHttpUseChunkedEncodingPOST(URLConnection connection) {
+        Map<String, List<String>> hdrs = connection.getHeaderFields();
+        Set<String> hdrKeys = hdrs.keySet();
+        for (String key : hdrKeys) {
+        	if("Transfer-Encoding".equals(key)){
+        		List<String> list = hdrs.get(key);
+        		for (String value : list) {
+        			if("chunked".equals(value)){
+        				return true;
+        			}
+				}
+        	}
+        }
+        return false;
+    }
 
 	/*
 	 * (non-Javadoc)

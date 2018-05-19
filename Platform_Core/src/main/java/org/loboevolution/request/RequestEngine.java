@@ -64,7 +64,6 @@ import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.main.ExtensionManager;
-import org.loboevolution.settings.BooleanSettings;
 import org.loboevolution.settings.CacheSettings;
 import org.loboevolution.settings.ConnectionSettings;
 import org.loboevolution.store.CacheManager;
@@ -105,9 +104,6 @@ public final class RequestEngine {
 	/** The cache settings. */
 	private final CacheSettings cacheSettings;
 
-	/** The boolean settings. */
-	private final BooleanSettings booleanSettings;
-
 	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
 	
@@ -126,7 +122,6 @@ public final class RequestEngine {
 		// initialized.
 		this.cacheSettings = CacheSettings.getInstance();
 		this.connectionSettings = ConnectionSettings.getInstance();
-		this.booleanSettings = BooleanSettings.getInstance();
 	}
 
 
@@ -255,7 +250,6 @@ public final class RequestEngine {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	private void postData(URLConnection connection, ParameterInfo pinfo) throws IOException {
-		BooleanSettings boolSettings = this.booleanSettings;
 		String encoding = pinfo.getEncoding();
 		if (encoding == null || NORMAL_FORM_ENCODING.equalsIgnoreCase(encoding)) {
 			ByteArrayOutputStream bufOut = new ByteArrayOutputStream();
@@ -284,7 +278,7 @@ public final class RequestEngine {
 			// can be picky about that (namely, java.net).
 			byte[] postContent = bufOut.toByteArray();
 			if (connection instanceof HttpURLConnection) {
-				if (boolSettings.isHttpUseChunkedEncodingPOST()) {
+				if (Header.isHttpUseChunkedEncodingPOST(connection)) {
 					((HttpURLConnection) connection).setChunkedStreamingMode(8192);
 				} else {
 					((HttpURLConnection) connection).setFixedLengthStreamingMode(postContent.length);
@@ -299,7 +293,7 @@ public final class RequestEngine {
 		} else if ("multipart/form-data".equalsIgnoreCase(encoding)) {
 			long id = ID.generateLong();
 			String boundary = "----------------" + id;
-			boolean chunked = boolSettings.isHttpUseChunkedEncodingPOST();
+			boolean chunked = Header.isHttpUseChunkedEncodingPOST(connection);
 			OutputStream mfstream;
 			if (chunked) {
 				mfstream = connection.getOutputStream();
