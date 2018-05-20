@@ -23,31 +23,33 @@
  */
 package org.loboevolution.settings;
 
-import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.security.GenericLocalPermission;
-import org.loboevolution.store.StorageManager;
 import org.loboevolution.util.io.NetRoutines;
+
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * Connection settings. This is a singleton class with an instance obtained by
  * calling {@link #getInstance()}.
  */
-public class ConnectionSettings implements java.io.Serializable {
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ConnectionSettings.class);
-
-	/** The Constant instance. */
-	private static final ConnectionSettings instance;
+public class ConnectionSettings implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500000000301L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(ConnectionSettings.class);
 
 	/** The proxy type. */
 	private Proxy.Type proxyType = Proxy.Type.DIRECT;
@@ -70,25 +72,14 @@ public class ConnectionSettings implements java.io.Serializable {
 	/** The proxy. */
 	private transient Proxy proxy;
 
-	static {
-		ConnectionSettings ins = null;
-		try {
-			ins = (ConnectionSettings) StorageManager.getInstance().retrieveSettings(
-					ConnectionSettings.class.getSimpleName(), ConnectionSettings.class.getClassLoader());
-		} catch (Exception err) {
-			logger.error("getInstance(): Unable to retrieve settings.", err);
-		}
-		if (ins == null) {
-			ins = new ConnectionSettings();
-		}
-		instance = ins;
-	}
-
 	/**
 	 * Instantiates a new connection settings.
 	 */
-	private ConnectionSettings() {
-		restoreDefaults();
+	public ConnectionSettings() {
+		SecurityManager sm = System.getSecurityManager();
+		if (sm != null) {
+			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+		}
 	}
 
 	/**
@@ -104,19 +95,53 @@ public class ConnectionSettings implements java.io.Serializable {
 		synchronized (this) {
 			this.proxy = null;
 		}
+		deleteConnection();
+		insertConnection();
 	}
-
-	/**
-	 * Gets the Constant instance.
-	 *
-	 * @return the Constant instance
-	 */
-	public static ConnectionSettings getInstance() {
-		SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+	
+	public void deleteConnection() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM CONNECTION")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-		return instance;
+	}
+	
+	public void insertConnection() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)")) {
+			pstmt.setString(1, getProxyType().name());
+			pstmt.setString(2, getUserName());
+			pstmt.setString(3, getPassword());
+			pstmt.setInt(4, isAuthenticated() ? 1 : 0);
+			pstmt.setString(5, getInetSocketAddress().getHostName());
+			pstmt.setInt(6, getInetSocketAddress().getPort());
+			pstmt.setInt(7, isDisableProxyForLocalAddresses() ? 1 : 0);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public static ConnectionSettings getConnection() {
+		ConnectionSettings setting = new ConnectionSettings();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION")) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
+				setting.setUserName(rs.getString(2));
+				setting.setPassword(rs.getString(3));
+				setting.setAuthenticated(rs.getInt(4) == 1 ? true : false);
+				InetSocketAddress socketAddress = new InetSocketAddress(rs.getString(5), rs.getInt(6));
+				setting.setInetSocketAddress(socketAddress);
+				setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return setting;
 	}
 
 	/**
@@ -287,17 +312,6 @@ public class ConnectionSettings implements java.io.Serializable {
 		this.disableProxyForLocalAddresses = disableProxyForLocalAddresses;
 		synchronized (this) {
 			this.proxy = null;
-		}
-	}
-
-	/**
-	 * Save.
-	 */
-	public void save() {
-		try {
-			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
-		} catch (IOException ioe) {
-			logger.error("save(): Unable to save settings", ioe);
 		}
 	}
 }

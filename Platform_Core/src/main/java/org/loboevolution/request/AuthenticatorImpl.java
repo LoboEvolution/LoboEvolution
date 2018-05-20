@@ -49,7 +49,7 @@ public class AuthenticatorImpl extends Authenticator {
 	public AuthenticatorImpl() {
 		super();
 		// This is one way to avoid potential security exceptions.
-		this.connectionSettings = ConnectionSettings.getInstance();
+		this.connectionSettings = ConnectionSettings.getConnection();
 		this.associatedSettings = AssociatedSettings.getInstance();
 	}
 

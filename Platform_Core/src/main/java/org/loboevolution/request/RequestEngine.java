@@ -121,7 +121,7 @@ public final class RequestEngine {
 		// Security: Private fields that require privileged access to get
 		// initialized.
 		this.cacheSettings = CacheSettings.getInstance();
-		this.connectionSettings = ConnectionSettings.getInstance();
+		this.connectionSettings = ConnectionSettings.getConnection();
 	}
 
 

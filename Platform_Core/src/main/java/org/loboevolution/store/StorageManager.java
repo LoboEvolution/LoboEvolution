@@ -83,6 +83,9 @@ public class StorageManager implements Runnable, ColorCommon {
 	
 	/** The Constant FONT_SIZE. */
 	private static final String FONT_SIZE = "CREATE TABLE FONT_SIZE (name text)";
+		
+	/** The Constant CONNECTION. */
+	private static final String CONNECTION = "CREATE TABLE CONNECTION (proxyType text, userName text, password text, authenticated integer, host text, port integer, disableProxyForLocalAddresses integer)";
 	
 	
 	private static final StorageManager instance = new StorageManager();
@@ -260,6 +263,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(urlDatabase, FONT);
 				createTable(urlDatabase, FONT_SIZE);
 				createTable(urlDatabase, BOOKMARKS);
+				createTable(urlDatabase, CONNECTION);				
 				populateColorTable(urlDatabase);
 				populateFontTable(urlDatabase);
 				populateFontSizeTable(urlDatabase);

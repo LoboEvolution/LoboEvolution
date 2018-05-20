@@ -48,9 +48,6 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The settings. */
-	private final ConnectionSettings settings = ConnectionSettings.getInstance();
-
 	/** The no proxy radio button. */
 	private final JRadioButton noProxyRadioButton = new JRadioButton();
 
@@ -183,7 +180,8 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void restoreDefaults() {
-		this.settings.restoreDefaults();
+		ConnectionSettings settings = new ConnectionSettings();
+		settings.restoreDefaults();
 		this.loadSettings();
 	}
 
@@ -194,7 +192,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() throws ValidationException {
-		ConnectionSettings settings = this.settings;
+		ConnectionSettings settings = new ConnectionSettings();
 		Proxy.Type proxyType;
 		if (this.noProxyRadioButton.isSelected()) {
 			proxyType = Proxy.Type.DIRECT;
@@ -226,14 +224,15 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		}
 		InetSocketAddress socketAddress = new InetSocketAddress(host, port);
 		settings.setInetSocketAddress(socketAddress);
-		settings.save();
+		settings.deleteConnection();
+		settings.insertConnection();
 	}
 
 	/**
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		ConnectionSettings settings = this.settings;
+		ConnectionSettings settings = ConnectionSettings.getConnection();
 		switch (settings.getProxyType()) {
 		case DIRECT:
 			this.noProxyRadioButton.setSelected(true);
