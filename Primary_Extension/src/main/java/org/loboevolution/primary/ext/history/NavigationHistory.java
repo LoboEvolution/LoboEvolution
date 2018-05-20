@@ -23,17 +23,23 @@
  */
 package org.loboevolution.primary.ext.history;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.store.StorageManager;
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * History of navigation locations. Not thread safe.
  */
-public class NavigationHistory extends BaseHistory<Object> implements Serializable {
+public class NavigationHistory implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 2257845000600200100L;
@@ -41,48 +47,119 @@ public class NavigationHistory extends BaseHistory<Object> implements Serializab
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(NavigationHistory.class);
 
-	/** The Constant instance. */
-	private static final NavigationHistory instance;
-
-	static {
-		NavigationHistory ins = null;
-		try {
-			ins = (NavigationHistory) StorageManager.getInstance().retrieveSettings(
-					NavigationHistory.class.getSimpleName(), NavigationHistory.class.getClassLoader());
-		} catch (Exception err) {
-			logger.error("Unable to retrieve settings.", err);
-		}
-		if (ins == null) {
-			ins = new NavigationHistory();
-		}
-		instance = ins;
-	}
-
 	/**
 	 * Instantiates a new navigation history.
 	 */
-	private NavigationHistory() {
-	}
-
+	public NavigationHistory() {}
+		
 	/**
-	 * Gets the Constant instance.
+	 * Gets the opened files.
 	 *
-	 * @return the Constant instance
+	 * @return opened files
 	 */
-	public static NavigationHistory getInstance() {
-		return instance;
+	public static List<String[]> getFiles(String type) {
+		List<String[]> values = new ArrayList<String[]>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT description FROM SEARCH WHERE type = ?")) {
+			pstmt.setString(1, type);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				values.add(new String[] { rs.getString(1) });
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return values;
 	}
+	
+	/**
+	 * Gets the recent host entries.
+	 *
+	 * @param maxNumItems
+	 *            the max num items
+	 * @return the recent host entries
+	 */
+	public static List<String[]> getRecentHostEntries(int maxNumItems) {
+		List<String[]> recentHostEntries = new ArrayList<String[]>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM HOST LIMIT ?")) {
+			pstmt.setInt(1, maxNumItems);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				recentHostEntries.add(new String[] { rs.getString(1) });
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return recentHostEntries;
+	}
+	
 
 	/**
-	 * Save.
+	 * Gets the recent host entries.
+	 *
+	 * @param maxNumItems
+	 *            the max num items
+	 * @return the recent host entries
 	 */
-	public void save() {
-		synchronized (this) {
-			try {
-				StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
-			} catch (IOException ioe) {
-				logger.error("Unable to save settings: " + this.getClass().getSimpleName(), ioe);
+	public static List<String> getRecentItems(int maxNumItems) {
+		List<String> recentHostEntries = new ArrayList<String>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM HOST LIMIT ?")) {
+			pstmt.setInt(1, maxNumItems);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				recentHostEntries.add(rs.getString(1));
 			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return recentHostEntries;
+	}
+	
+	
+	
+	
+	/**
+	 * Gets the head match items.
+	 *
+	 * @param itemPrefix
+	 *            the item prefix
+	 * @param maxNumItems
+	 *            the max num items
+	 * @return the head match items
+	 */
+	public static List<String> getHeadMatchItems(String itemPrefix) {
+		List<String> recentHostEntries = new ArrayList<String>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM HOST WHERE baseUrl like ?")) {
+			pstmt.setString(1, "%" + itemPrefix + "%");
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				recentHostEntries.add(rs.getString(1));
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		return recentHostEntries;
+	}
+	
+	
+	/**
+	 * Adds the as recent.
+	 *
+	 * @param url
+	 *            the url
+	 * @param itemInfo
+	 *            the item info
+	 */
+	public static void addAsRecent(URL url) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO HOST (baseUrl) VALUES(?)")) {
+			pstmt.setString(1,  url.toExternalForm());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
 	}
 }

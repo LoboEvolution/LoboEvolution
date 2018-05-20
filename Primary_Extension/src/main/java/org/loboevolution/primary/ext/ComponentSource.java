@@ -352,7 +352,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	public void documentAccessed(NavigatorWindowEvent event) {
 		URL url = event.getUrl();
 		if ("GET".equals(event.getMethod()) && isHistoryRequest(event.getRequestType())) {
-			NavigationHistory.getInstance().addAsRecent(url, null);
+			NavigationHistory.addAsRecent(url);
 		}
 	}
 
@@ -431,8 +431,8 @@ public class ComponentSource implements NavigatorWindowListener {
 	 *            the max
 	 * @return the potential matches
 	 */
-	public Collection<String> getPotentialMatches(String urlPrefix) {
-		return NavigationHistory.getInstance().getHeadMatchItems(urlPrefix);
+	public List<String> getPotentialMatches(String urlPrefix) {
+		return NavigationHistory.getHeadMatchItems(urlPrefix);
 	}
 
 	/**
@@ -443,7 +443,7 @@ public class ComponentSource implements NavigatorWindowListener {
 	 * @return the recent locations
 	 */
 	public Collection<String> getRecentLocations(int max) {
-		return NavigationHistory.getInstance().getRecentItems(max);
+		return NavigationHistory.getRecentItems(max);
 	}
 
 	/**
@@ -546,15 +546,6 @@ public class ComponentSource implements NavigatorWindowListener {
 	public static JMenuItem menuItem(String title, char mnemonic, String accelerator, Action action) {
 		KeyStroke keyStroke = accelerator == null ? null : KeyStroke.getKeyStroke(accelerator);
 		return menuItem(title, mnemonic, keyStroke, action);
-	}
-
-	/**
-	 * Checks for recent entries.
-	 *
-	 * @return true, if successful
-	 */
-	public boolean hasRecentEntries() {
-		return NavigationHistory.getInstance().hasRecentEntries();
 	}
 
 	/**

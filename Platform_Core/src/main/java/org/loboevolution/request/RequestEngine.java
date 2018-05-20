@@ -64,7 +64,6 @@ import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.main.ExtensionManager;
-import org.loboevolution.settings.CacheSettings;
 import org.loboevolution.settings.ConnectionSettings;
 import org.loboevolution.store.CacheManager;
 import org.loboevolution.ua.Parameter;
@@ -101,9 +100,6 @@ public final class RequestEngine {
 	/** The cookie store. */
 	private final CookieStore cookieStore = CookieStore.getInstance();
 
-	/** The cache settings. */
-	private final CacheSettings cacheSettings;
-
 	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
 	
@@ -117,10 +113,6 @@ public final class RequestEngine {
 		// Use few threads to avoid excessive parallelism. Note that
 		// downloads are not handled by this thread pool.
 		this.threadPool = new SimpleThreadPool("RequestEngineThreadPool", 3, 5, 60 * 1000);
-
-		// Security: Private fields that require privileged access to get
-		// initialized.
-		this.cacheSettings = CacheSettings.getInstance();
 		this.connectionSettings = ConnectionSettings.getConnection();
 	}
 
@@ -775,10 +767,7 @@ public final class RequestEngine {
 			} else if (!shouldRevalidateAlways(requestType)) {
 				Long expires = cacheInfo.getExpires();
 				if (expires == null) {
-					Integer defaultOffset = this.cacheSettings.getDefaultCacheExpirationOffset();
-					if (defaultOffset != null) {
-						expires = cacheInfo.getExpiresGivenOffset(defaultOffset.longValue());
-					}
+					expires = cacheInfo.getExpiresGivenOffset(60L);
 				}
 				if (expires != null) {
 					if (expires.longValue() > System.currentTimeMillis()) {

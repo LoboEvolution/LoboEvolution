@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.event.PopupMenuEvent;
@@ -190,7 +191,7 @@ public class AddressField extends JComboBox<String> {
 		char releasedChar = event.getKeyChar();
 		if (validPopupChar(releasedChar)) {
 			String urlText = urlComboBox.getText();
-			Collection<String> headMatches = this.componentSource.getPotentialMatches(urlText);
+			List<String> headMatches = this.componentSource.getPotentialMatches(urlText);
 			if (headMatches.isEmpty()) {
 				if (urlComboBox.isPopupVisible()) {
 					urlComboBox.hidePopup();
@@ -199,9 +200,7 @@ public class AddressField extends JComboBox<String> {
 				populatingMatches = true;
 				try {
 					urlComboBox.removeAllItems();
-					Iterator<String> i = headMatches.iterator();
-					while (i.hasNext()) {
-						String matchUrl = i.next();
+					for (String matchUrl : headMatches) {
 						urlComboBox.addItem(matchUrl);
 					}
 					comboHasHeadMatches = true;

@@ -96,7 +96,7 @@ public class ExtensionImpl implements NavigatorExtension {
 	 */
 	@Override
 	public void windowClosing(NavigatorWindow wcontext) {
-		NavigationHistory.getInstance().save();
+		NavigationHistory.addAsRecent(wcontext.getCurrentNavigationEntry().getUrl());
 	}
 
 	/*

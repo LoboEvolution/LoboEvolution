@@ -28,7 +28,6 @@ import java.awt.event.MouseEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import javax.swing.JDialog;
@@ -46,7 +45,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import org.loboevolution.primary.ext.HostEntry;
 import org.loboevolution.primary.ext.IconFactory;
 import org.loboevolution.primary.ext.history.NavigationHistory;
 import org.loboevolution.ua.NavigatorWindow;
@@ -130,24 +128,17 @@ public class RecentHostsDialog extends JDialog {
 	 */
 	private Component tablePane() {
 		Object columnNames[] = { "Url" };
-		List<String[]> values = new ArrayList<String[]>();
-
-		Collection<HostEntry> hostEntries = NavigationHistory.getInstance().getRecentHostEntries(100);
-		for (HostEntry entry : hostEntries) {
-			values.add(new String[] { entry.getHost() });
-		}
-
-		JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
+		List<String[]> hostEntries = NavigationHistory.getRecentHostEntries(100);
+		JTable jtable = new JTable(hostEntries.toArray(new Object[][] {}), columnNames);
 		rowSorter = new TableRowSorter<>(jtable.getModel());
 		jtable.setRowSorter(rowSorter);
 		jtable.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mousePressed(MouseEvent e) {
 				if (SwingUtilities.isRightMouseButton(e)) {
 					Point p = e.getPoint();
 					int rowNumber = jtable.rowAtPoint(p);
-					String[] vals = values.get(rowNumber);
+					String[] vals = hostEntries.get(rowNumber);
 					JPopupMenu popupMenu = new JPopupMenu();
 					JMenuItem item = new JMenuItem("Open link in new window");
 					item.setIcon(IconFactory.getInstance().getIcon(SEARCH));

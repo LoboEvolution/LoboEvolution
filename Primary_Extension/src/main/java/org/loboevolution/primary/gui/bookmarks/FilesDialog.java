@@ -121,7 +121,7 @@ public class FilesDialog extends JDialog {
 	 */
 	private Component tablePane(String type) {
 		Object columnNames[] = { "File" };
-		List<String[]> values = NavigationHistory.getInstance().getFiles(type);
+		List<String[]> values = NavigationHistory.getFiles(type);
 		JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
 		rowSorter = new TableRowSorter<>(jtable.getModel());
 		jtable.setRowSorter(rowSorter);

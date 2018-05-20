@@ -26,6 +26,7 @@ import java.net.URL;
 
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
+import org.loboevolution.primary.ext.history.NavigationHistory;
 import org.loboevolution.primary.gui.bookmarks.AddBookmarkDialog;
 import org.loboevolution.primary.gui.bookmarks.BookmarksHistory;
 import org.loboevolution.primary.info.BookmarkInfo;
@@ -92,7 +93,7 @@ public class AddBookmarkAction extends ActionPool {
 			dialog.setVisible(true);
 			BookmarkInfo info = dialog.getBookmarkInfo();
 			if (info != null && isInfoNull) {
-				//TODO history.addAsRecent(info.getUrl(), info);
+				NavigationHistory.addAsRecent(info.getUrl());
 				history.insertBookmark(info);
 			}
 		}
