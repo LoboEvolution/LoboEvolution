@@ -102,7 +102,6 @@ public class CookieStore {
 				cookieValue = value;
 				hasCookieName = true;
 			} else {
-				logger.error("name.toLowerCase(): " + name.toLowerCase());
 				switch (name.toLowerCase()) {
 				case "max-age":
 					maxAge = value;

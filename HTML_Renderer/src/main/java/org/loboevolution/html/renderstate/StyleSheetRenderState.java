@@ -1464,7 +1464,8 @@ public class StyleSheetRenderState implements RenderState, HtmlAttributeProperti
 					|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
 				return String.valueOf(HtmlValues.getPixelSize(token, this, 1));
 			} else {
-				return String.valueOf(HtmlValues.getPixelSize(token, this, 1) * this.iFont.getSize());
+				Font f = getFont();
+				return String.valueOf(HtmlValues.getPixelSize(token, this, 1) * f.getSize());
 			}
 		}
 	}

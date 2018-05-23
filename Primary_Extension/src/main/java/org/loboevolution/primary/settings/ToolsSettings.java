@@ -44,12 +44,6 @@ public class ToolsSettings implements Serializable {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500006000800L;
 
-	/**
-	 * Instantiates a new tools settings.
-	 */
-	public ToolsSettings() {
-	}
-
 	public List<SearchEngine> getSearchEngines() {
 		List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
