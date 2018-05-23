@@ -28,7 +28,7 @@ public class SQLiteCommon {
 	private static final String JDBC_SQLITE = "jdbc:sqlite:";
 
 	/** The Constant LOBO_DB. */
-	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE";
+	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE.sqlite";
 	
 	private SQLiteCommon() {}
 
