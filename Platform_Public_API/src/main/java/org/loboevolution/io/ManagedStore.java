@@ -85,18 +85,7 @@ public interface ManagedStore {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	long getSize() throws IOException;
-
-	/**
-	 * Saves a serializable object at the given managed file path.
-	 *
-	 * @param path
-	 *            the path
-	 * @param object
-	 *            the object
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
-	 */
-	void saveObject(String path, java.io.Serializable object) throws IOException;
+	
 
 	/**
 	 * Retrieves a serializable object. If the file identified by

@@ -90,6 +90,9 @@ public class StorageManager implements Runnable, ColorCommon {
 	/** The Constant FONT. */
 	private static final String HOST = "CREATE TABLE HOST (baseUrl text)";
 	
+	/** The Constant COOKIE. */
+	private static final String COOKIE = "CREATE TABLE COOKIE (cookieName text, cookieValue text, domain text, path text, expires date, maxAge text, secure integer, httponly integer)";
+	
 	private static final StorageManager instance = new StorageManager();
 
 	/** The store directory. */
@@ -267,6 +270,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(urlDatabase, BOOKMARKS);
 				createTable(urlDatabase, CONNECTION);	
 				createTable(urlDatabase, HOST);
+				createTable(urlDatabase, COOKIE);
 				populateColorTable(urlDatabase);
 				populateFontTable(urlDatabase);
 				populateFontSizeTable(urlDatabase);

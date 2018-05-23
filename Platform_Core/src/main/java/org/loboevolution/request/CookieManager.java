@@ -23,26 +23,16 @@ package org.loboevolution.request;
 import java.io.IOException;
 import java.net.CookieHandler;
 import java.net.URI;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import org.loboevolution.http.Cookie;
 
 /**
  * The Class CookieManager.
  */
 public class CookieManager extends CookieHandler {
-	
-	/** The cookie store. */
-	private final CookieStore cookieStore = CookieStore.getInstance();
-
-	/** The cache. */
-	private static Map<String, Set<Wrapper>> cache = new HashMap<String, Set<Wrapper>>();
 
 	/*
 	 * (non-Javadoc)
@@ -52,24 +42,23 @@ public class CookieManager extends CookieHandler {
 	@Override
 	public Map<String, List<String>> get(URI uri, Map<String, List<String>> requestHeaders) throws IOException {
 		Map<String, List<String>> resultHeaders = new HashMap<String, List<String>>(2);
-		Collection<Cookie> cookies = this.cookieStore.getCookies(uri.getHost(), uri.getPath());
-		if (cookies != null) {
-			StringBuilder cookieHeaderValue = null;
-			for (Cookie cookie : cookies) {
-				String cookieName = cookie.getName();
-				String cookieValue = cookie.getValue();
-				String assignment = cookieName + "=" + cookieValue;
-				if (cookieHeaderValue == null) {
-					cookieHeaderValue = new StringBuilder();
-				} else {
-					cookieHeaderValue.append("; ");
-				}
-				cookieHeaderValue.append(assignment);
+		List<Cookie> cookies = CookieStore.getCookies(uri.getHost(), uri.getPath());
+		StringBuilder cookieHeaderValue = null;
+		for (Cookie cookie : cookies) {
+			String cookieName = cookie.getName();
+			String cookieValue = cookie.getValue();
+			String assignment = cookieName + "=" + cookieValue;
+			if (cookieHeaderValue == null) {
+				cookieHeaderValue = new StringBuilder();
+			} else {
+				cookieHeaderValue.append("; ");
 			}
-			if (cookieHeaderValue != null) {
-				resultHeaders.put("Cookie", Collections.singletonList(cookieHeaderValue.toString()));
-			}
+			cookieHeaderValue.append(assignment);
 		}
+		if (cookieHeaderValue != null) {
+			resultHeaders.put("Cookie", Collections.singletonList(cookieHeaderValue.toString()));
+		}
+
 		return resultHeaders;
 	}
 
@@ -80,84 +69,19 @@ public class CookieManager extends CookieHandler {
 	 */
 	@Override
 	public void put(URI uri, Map<String, List<String>> responseHeaders) throws IOException {
-		CookieStore store = this.cookieStore;
 		for (Map.Entry<String, List<String>> entry : responseHeaders.entrySet()) {
 			String key = entry.getKey();
 			for (String value : entry.getValue()) {
 				if (key != null && value != null) {
-					if ("Set-Cookie".equalsIgnoreCase(key)) {
-						store.saveCookie(uri.getHost(), value);
-					} else if ("Set-Cookie2".equalsIgnoreCase(key)) {
-						store.saveCookie(uri.getHost(), value);
+					if ("Set-Cookie".equalsIgnoreCase(key) || "Set-Cookie2".equalsIgnoreCase(key)|| "Cookie".equalsIgnoreCase(key)|| "Cookie2".equalsIgnoreCase(key)) {
+						CookieStore.saveCookie(uri.getHost(), value);
 					}
 				}
 			}
 		}
 	}
 
-	public static Cookie[] getCookies(URI uri) {
-		return getCookies(uri.getHost());
-	}
-
-	public static Cookie[] getCookies(String host) {
-		Set<Wrapper> cookies = cache.get(host);
-		if (cookies == null) {
-			return new Cookie[0];
-		} else {
-			Cookie[] c = new Cookie[cookies.size()];
-			int index = 0;
-			for (Wrapper w : cookies) {
-				c[index++] = w.cookie;
-			}
-			return c;
-		}
-	}
-
-	/**
-	 * Gets the cookies.
-	 *
-	 * @return the cookies
-	 */
-	public static Cookie[] getCookies() {
-		Set<Cookie> cookies = new HashSet<Cookie>();
-		for (Map.Entry<String, Set<Wrapper>> entry : cache.entrySet()) {
-			if (entry.getValue() != null) {
-				for (Wrapper w : entry.getValue()) {
-					cookies.add(w.cookie);
-				}
-			}
-		}
-		return cookies.toArray(new Cookie[0]);
-	}
-
 	public static void install() {
 		CookieHandler.setDefault(new CookieManager());
-	}
-
-	/**
-	 * A cookie wrapper. How cute.
-	 * 
-	 * Wraps cookies that are placed in the in-memory cache, such that cookies
-	 * are compared based on their getName() property for equality.
-	 */
-	private static final class Wrapper {
-
-		/** The cookie. */
-		private Cookie cookie;
-
-		private Wrapper(Cookie c) {
-			if (c == null) {
-				throw new IllegalArgumentException ();
-			}
-			this.cookie = c;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (o instanceof Wrapper) {
-				return cookie.getName().equalsIgnoreCase(((Wrapper) o).cookie.getName());
-			}
-			return false;
-		}
 	}
 }

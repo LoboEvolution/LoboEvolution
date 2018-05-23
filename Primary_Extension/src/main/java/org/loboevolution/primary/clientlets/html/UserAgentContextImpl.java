@@ -209,7 +209,6 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public String getCookie(URL url) {
-		// Requires privileges.
 		return RequestEngine.getInstance().getCookie(url);
 	}
 

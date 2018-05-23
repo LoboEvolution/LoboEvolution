@@ -47,8 +47,7 @@ public final class DateUtil {
 	 */
 	private Date parse(String dateString, String dateFormat, Locale loc) throws ParseException {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(dateFormat, loc);
-		simpleDateFormat.setLenient(false); // Don't automatically convert
-											// invalid date.
+		simpleDateFormat.setLenient(false);
 		return simpleDateFormat.parse(dateString);
 	}
 
@@ -114,12 +113,14 @@ public final class DateUtil {
 		DATE_FORMAT.add("EEE dd'st' MMM yyyy");
 		DATE_FORMAT.add("EEE dd'nd' MMM yyyy");
 		DATE_FORMAT.add("EEE dd'rd' MMM yyyy");
+		DATE_FORMAT.add("EEE, dd-MMM-yyyy HH:mm:ss z");
 		DATE_FORMAT.add("EEEMMM ddyyyy");
 		DATE_FORMAT.add("EEEdd MMM yyyy HHmmss Z");
 		DATE_FORMAT.add("EEE, dd MMM yyyy HH:mm:ss Z");
 		DATE_FORMAT.add("EEE MMM dd HHmmss Z yyyy");
 		DATE_FORMAT.add("yyyy-MM-dd HHmmss Z");
 		DATE_FORMAT.add("yyyy-MM-dd HHmmss.S");
+		
 		return DATE_FORMAT;
 	}
 }

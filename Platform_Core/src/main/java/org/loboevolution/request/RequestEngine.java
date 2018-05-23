@@ -97,9 +97,6 @@ public final class RequestEngine {
 	/** The processing requests. */
 	private final Collection<RequestInfo> processingRequests = new HashSet<RequestInfo>();
 
-	/** The cookie store. */
-	private final CookieStore cookieStore = CookieStore.getInstance();
-
 	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
 	
@@ -134,9 +131,9 @@ public final class RequestEngine {
 	 * @return the cookie
 	 */
 	public String getCookie(URL url) {
-		Collection<?> cookies = this.cookieStore.getCookies(url.getHost(), url.getPath());
+		List<Cookie> cookies = CookieStore.getCookies(url.getHost(), url.getPath());
 		StringBuilder cookieText = new StringBuilder();
-		Iterator<?> i = cookies.iterator();
+		Iterator<Cookie> i = cookies.iterator();
 		while (i.hasNext()) {
 			Cookie cookie = (Cookie) i.next();
 			cookieText.append(cookie.getName());
@@ -144,7 +141,6 @@ public final class RequestEngine {
 			cookieText.append(cookie.getValue());
 			cookieText.append(';');
 		}
-		// Note: Return blank if there are no cookies, not null.
 		return cookieText.toString();
 	}
 
@@ -157,7 +153,7 @@ public final class RequestEngine {
 	 *            the cookie spec
 	 */
 	public void setCookie(URL url, String cookieSpec) {
-		this.cookieStore.saveCookie(url, cookieSpec);
+		CookieStore.saveCookie(url, cookieSpec);
 	}
 
 	/**
@@ -169,7 +165,7 @@ public final class RequestEngine {
 	 *            the cookie spec
 	 */
 	public void setCookie(String urlHostName, String cookieSpec) {
-		this.cookieStore.saveCookie(urlHostName, cookieSpec);
+		CookieStore.saveCookie(urlHostName, cookieSpec);
 	}
 
 	/**

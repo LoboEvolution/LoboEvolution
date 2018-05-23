@@ -32,47 +32,38 @@ import java.net.URLEncoder;
  * @author J. H. S.
  */
 public class Cookie extends NameValuePair {
+	
 	/** The comment. */
 	private String comment;
+	
 	/** The domain. */
 	private String domain;
+	
 	/** The expires. */
-	private long expires;
+	private String expires;
+	
 	/** The max age. */
 	private int maxAge = -1;
+	
 	/** The path. */
 	private String path;
+	
 	/** The secure. */
 	private boolean secure;
+	
 	/** The version. */
 	private int version;
+	
+	/** The version. */
+	private boolean httpOnly;
+	
 
 	/**
 	 * Instantiates a new cookie.
 	 */
-	public Cookie() {
-	}
+	public Cookie() {}
 
-	/**
-	 * Instantiates a new cookie.
-	 *
-	 * @param name
-	 *            the name
-	 * @param value
-	 *            the value
-	 * @param path
-	 *            the path
-	 * @param domain
-	 *            the domain
-	 * @param expires
-	 *            the expires
-	 */
-	public Cookie(String name, String value, String path, String domain, long expires) {
-		super(name, value);
-		this.path = path;
-		this.domain = domain;
-		this.expires = expires;
-	}
+	
 
 	/**
 	 * Gets the encoded name.
@@ -122,9 +113,18 @@ public class Cookie extends NameValuePair {
 	 *
 	 * @return the expires
 	 */
-	public Long getExpires() {
+	public String getExpires() {
 		return expires;
 	}
+
+	/**
+	 * @param expires the expires to set
+	 */
+	public void setExpires(String expires) {
+		this.expires = expires;
+	}
+
+
 
 	/**
 	 * Sets the domain.
@@ -229,6 +229,16 @@ public class Cookie extends NameValuePair {
 	 */
 	public int getVersion() {
 		return version;
+	}
+
+	public boolean isHttpOnly() {
+		return httpOnly;
+	}
+
+	public void setHttpOnly(boolean httpOnly) {
+		boolean old = isHttpOnly();
+		this.httpOnly = httpOnly;
+		firePropertyChange("httpOnly", old, isHttpOnly());
 	}
 
 	/*

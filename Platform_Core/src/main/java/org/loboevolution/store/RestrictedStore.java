@@ -502,25 +502,6 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 		return this.quota - this.getSize();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.io.ManagedStore#saveObject(java.lang.String,
-	 * java.io.Serializable)
-	 */
-	@Override
-	public void saveObject(String path, Serializable object) throws IOException {
-		ManagedFile file = this.getManagedFile(path);
-		OutputStream out = file.openOutputStream();
-		try {
-			ObjectOutputStream oout = new ObjectOutputStream(new BufferedOutputStream(out));
-			oout.writeObject(object);
-			oout.flush();
-		} finally {
-			out.close();
-		}
-	}
-
 	/**
 	 * Removes the object.
 	 *
