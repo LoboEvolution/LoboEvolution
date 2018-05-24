@@ -24,6 +24,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -47,7 +48,7 @@ public class StringListControl extends JComponent {
 	private String editListCaption;
 	
 	/** The strings. */
-	private String[] strings;
+	private List<String> strings;
 
 	/**
 	 * Instantiates a String.valueOf list control.
@@ -73,7 +74,7 @@ public class StringListControl extends JComponent {
 	 * @param strings
 	 *            the String.valueOfs
 	 */
-	public void setStrings(String[] strings) {
+	public void setStrings(List<String> strings) {
 		this.strings = strings;
 		JComboBox<String> comboBox = this.comboBox;
 		comboBox.removeAllItems();
@@ -87,7 +88,7 @@ public class StringListControl extends JComponent {
 	 *
 	 * @return the strings
 	 */
-	public String[] getStrings() {
+	public List<String> getStrings() {
 		return this.strings;
 	}
 
@@ -98,7 +99,7 @@ public class StringListControl extends JComponent {
 	 */
 	public String getStringsAsText() {
 		String lineSeparator = System.getProperty("line.separator");
-		String[] strings = this.strings;
+		List<String> strings = this.strings;
 		if (strings == null) {
 			return null;
 		}
@@ -124,7 +125,7 @@ public class StringListControl extends JComponent {
 			while ((line = reader.readLine()) != null) {
 				stringsAL.add(line);
 			}
-			this.setStrings(stringsAL.toArray(new String[0]));
+			this.setStrings(stringsAL);
 		} catch (IOException ioe) {
 			throw new IllegalStateException("not expected", ioe);
 		}

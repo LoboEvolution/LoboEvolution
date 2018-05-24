@@ -283,7 +283,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(urlDatabase, CONNECTION);	
 				createTable(urlDatabase, HOST);
 				createTable(urlDatabase, COOKIE);
-				/*createTable(urlDatabase, STARTUP);
+				createTable(urlDatabase, STARTUP);
 				createTable(urlDatabase, USER_AGENT);
 				createTable(urlDatabase, NETWORK);
 				createTable(urlDatabase, SIZE);
@@ -292,7 +292,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				populateFontSizeTable(urlDatabase);
 				populateSearchEngine(urlDatabase);
 				populateUserAgent(urlDatabase);
-				populateColorNetwork(urlDatabase);*/
+				populateColorNetwork(urlDatabase);
 			} catch (Exception e) {
 				logger.error(e.getMessage());
 			}

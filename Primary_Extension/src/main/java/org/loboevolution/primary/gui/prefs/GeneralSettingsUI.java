@@ -183,6 +183,10 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Network"));
 		groupBox.add(this.getJSCheckBoxPanel());
 		groupBox.add(this.getCSSCheckBoxPanel());
+		groupBox.add(this.getCookiePanel());
+		groupBox.add(this.getCachePanel());
+		groupBox.add(this.getNavigationPanel());
+		
 		return groupBox;
 	}
 
@@ -244,8 +248,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.cachePanel.revalidate();
 		this.navigationPanel.revalidate();
 		this.networkPanel.revalidate();
-		
-		//TODO this.startupPagesStringListControl.setStrings(settings.getStartupURLs());
+		this.startupPagesStringListControl.setStrings(GeneralSettings.getStartupURLs());
 	}
 
 	/**
@@ -286,5 +289,26 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	private Component getCSSCheckBoxPanel() {
 		return this.cssPanel;
+	}
+
+	/**
+	 * @return the cachePanel
+	 */
+	public Component getCachePanel() {
+		return cachePanel;
+	}
+
+	/**
+	 * @return the cookiePanel
+	 */
+	public Component getCookiePanel() {
+		return cookiePanel;
+	}
+
+	/**
+	 * @return the navigationPanel
+	 */
+	public Component getNavigationPanel() {
+		return navigationPanel;
 	}
 }

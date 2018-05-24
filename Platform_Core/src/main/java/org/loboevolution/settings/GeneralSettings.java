@@ -119,12 +119,17 @@ public class GeneralSettings implements Serializable {
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 		}
+		
+		if(urls.isEmpty()) {
+			urls.add("");
+		}
+		
 		return urls;
 	}
 	
 	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO CONNECTION (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
 			pstmt.setInt(1, js ? 1 : 0);
 			pstmt.setInt(2, css ? 1 : 0);
 			pstmt.setInt(3, cookie ? 1 : 0);
@@ -139,7 +144,7 @@ public class GeneralSettings implements Serializable {
 	public static void insertUserAgent(String msie,String mozilla, boolean incluedeMsie) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USER_AGENT (msie, mozilla, include_msie) VALUES(?,?,?)")) {
-			pstmt.setString(2, msie);
+			pstmt.setString(1, msie);
 			pstmt.setString(2, mozilla);
 			pstmt.setInt(3, incluedeMsie ? 1 : 0);
 			pstmt.executeUpdate();
@@ -150,7 +155,7 @@ public class GeneralSettings implements Serializable {
 	
 	public static void insertBounds(Rectangle rect) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USER_AGENT (width, heighte) VALUES(?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SIZE (width, height) VALUES(?,?)")) {
 			pstmt.setInt(1, rect.width);
 			pstmt.setInt(2, rect.height);
 			pstmt.executeUpdate();
@@ -186,7 +191,7 @@ public class GeneralSettings implements Serializable {
 	}
 
 	public static Rectangle getInitialWindowBounds() {
-		Rectangle bounds = new Rectangle(100, 100);
+		Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		/*if (bounds == null) {
 			return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		}
