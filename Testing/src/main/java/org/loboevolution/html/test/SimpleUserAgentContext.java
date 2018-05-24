@@ -500,4 +500,14 @@ public class SimpleUserAgentContext implements UserAgentContext {
 	public void setInternalCSSEnabled(boolean internalCSSEnabled) {
 		this.internalCSSEnabled = internalCSSEnabled;
 	}
+
+	@Override
+	public boolean isCacheEnabled() {
+		return true;
+	}
+
+	@Override
+	public boolean isNavigationEnabled() {
+		return true;
+	}
 }

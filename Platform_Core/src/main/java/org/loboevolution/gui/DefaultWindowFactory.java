@@ -74,9 +74,6 @@ public class DefaultWindowFactory implements WindowFactory {
 	/** The frames. */
 	private final Set<Frame> frames = new HashSet<Frame>();
 
-	/** The general settings. */
-	private final GeneralSettings generalSettings;
-
 	/** The exit when all windows closed. */
 	private volatile boolean exitWhenAllWindowsClosed = false;
 
@@ -84,8 +81,6 @@ public class DefaultWindowFactory implements WindowFactory {
 	 * Instantiates a new default window factory.
 	 */
 	protected DefaultWindowFactory() {
-		// One way to avoid security exceptions
-		this.generalSettings = GeneralSettings.getInstance();
 	}
 
 	/**
@@ -201,8 +196,7 @@ public class DefaultWindowFactory implements WindowFactory {
 			boolean hasAddressBar, boolean hasToolBar, boolean hasStatusBar) {
 		final NavigatorWindowImpl pwc = (NavigatorWindowImpl) windowContext;
 		synchronized (this) {
-			final DefaultBrowserWindow window = new DefaultBrowserWindow(hasMenuBar, hasAddressBar, hasToolBar,
-					hasStatusBar, pwc);
+			final DefaultBrowserWindow window = new DefaultBrowserWindow(hasMenuBar, hasAddressBar, hasToolBar, hasStatusBar, pwc);
 			if (windowId != null) {
 				this.framesById.put(windowId, window);
 			}
@@ -212,9 +206,7 @@ public class DefaultWindowFactory implements WindowFactory {
 				public void windowClosing(WindowEvent e) {
 					super.windowClosing(e);
 					if (!window.isBoundsAssigned()) {
-						GeneralSettings settings = generalSettings;
-						settings.setInitialWindowBounds(window.getBounds());
-						settings.save();
+						GeneralSettings.insertBounds(window.getBounds());
 					}
 					ExtensionManager.getInstance().shutdownExtensionsWindow(pwc);
 				}
@@ -308,7 +300,7 @@ public class DefaultWindowFactory implements WindowFactory {
 		final AbstractBrowserWindow window = this.createBaseWindow(windowId, windowContext, hasMenuBar, hasAddressBar,
 				hasToolBar, hasStatusBar);
 		window.setTitle(title);
-		Rectangle windowBounds = this.generalSettings.getInitialWindowBounds();
+		Rectangle windowBounds = GeneralSettings.getInitialWindowBounds();
 		if (width != -1 || height != -1) {
 			if (width != -1) {
 				windowBounds.width = width;

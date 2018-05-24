@@ -109,6 +109,20 @@ public interface UserAgentContext {
 	 * @return true, if is internal css enabled
 	 */
 	boolean isInternalCSSEnabled();
+	
+	/**
+	 * Checks if is cache enabled.
+	 *
+	 * @return true, if is cache enabled
+	 */
+	boolean isCacheEnabled();
+		
+	/**
+	 * Checks if is navigation enabled.
+	 *
+	 * @return true, if is navigation enabled
+	 */
+	boolean isNavigationEnabled();
 
 	/**
 	 * Gets the platform.

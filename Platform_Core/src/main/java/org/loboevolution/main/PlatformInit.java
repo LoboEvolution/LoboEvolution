@@ -36,6 +36,7 @@ import java.security.Permission;
 import java.security.Policy;
 import java.security.ProtectionDomain;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -86,9 +87,6 @@ public class PlatformInit {
 
 	/** The thread executor. */
 	private final SimpleThreadPool threadExecutor;
-
-	/** The general settings. */
-	private final GeneralSettings generalSettings;
 	
 	/** The application directory. */
 	private File applicationDirectory;
@@ -104,8 +102,6 @@ public class PlatformInit {
 	 */
 	private PlatformInit() {
 		this.threadExecutor = new SimpleThreadPool("MainThreadPool", 2, 10, 60 * 1000);
-		// One way to avoid a security exception.
-		this.generalSettings = GeneralSettings.getInstance();
 	}
 
 	/**
@@ -366,7 +362,7 @@ public class PlatformInit {
 			Logger logger = LogManager.getLogger(PlatformInit.class);
 			logger.warn("launch(): Security manager not set!");
 		}
-		String[] startupURLs = this.generalSettings.getStartupURLs();
+		List<String> startupURLs = GeneralSettings.getStartupURLs();
 		for (String url : startupURLs) {
 			this.launch(url);
 		}

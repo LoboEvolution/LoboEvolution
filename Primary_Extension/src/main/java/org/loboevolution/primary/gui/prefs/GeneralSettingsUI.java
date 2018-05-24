@@ -62,9 +62,6 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	/** The Constant MSIE_USER_AGENT. */
 	private static final String MSIE_USER_AGENT = "Include \"MSIE\" in User-Agent header.";
 
-	/** The settings. */
-	private final GeneralSettings settings = GeneralSettings.getInstance();
-
 	/** The ie version field. */
 	private final transient FormField ieVersionField;
 
@@ -79,6 +76,15 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The css panel. */
 	private final CheckBoxPanel cssPanel;
+	
+	/** The cachePanel panel. */
+	private final CheckBoxPanel cachePanel;
+
+	/** The cookiePanel panel. */
+	private final CheckBoxPanel cookiePanel;
+	
+	/** The navigationPanel panel. */
+	private final CheckBoxPanel navigationPanel;
 
 	/** The moz panel. */
 	private final FormPanel mozPanel;
@@ -109,6 +115,9 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.ieSpoofPanel = new CheckBoxPanel(MSIE_USER_AGENT, iePanel);
 		this.javscriptPanel = new CheckBoxPanel("Enable Javascript", networkPanel);
 		this.cssPanel = new CheckBoxPanel("Enable Cascading Style Sheets", networkPanel);
+		this.cookiePanel = new CheckBoxPanel("Enable Cookie", networkPanel);
+		this.cachePanel = new CheckBoxPanel("Enable Cache", networkPanel);
+		this.navigationPanel = new CheckBoxPanel("Enable Navigation", networkPanel);	
 		this.mozPanel = new FormPanel();
 		mozPanel.addField(this.mozillaVersionField);
 		this.startupPagesStringListControl = new StringListControl();
@@ -125,6 +134,9 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.ieSpoofPanel.updateEnabling();
 		this.javscriptPanel.updateEnabling();
 		this.cssPanel.updateEnabling();
+		this.cookiePanel.updateEnabling();
+		this.cachePanel.updateEnabling();
+		this.navigationPanel.updateEnabling();
 	}
 
 	/**
@@ -182,7 +194,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void restoreDefaults() {
-		this.settings.restoreDefaults();
+		GeneralSettings.restoreDefaults();
 		this.loadSettings();
 	}
 
@@ -193,30 +205,47 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() {
-		GeneralSettings settings = this.settings;
-		settings.setSpoofIE(this.ieSpoofPanel.isSelected());
-		settings.setSpoofJS(this.javscriptPanel.isSelected());
-		settings.setSpoofCSS(this.cssPanel.isSelected());
-		settings.setIeVersion(this.ieVersionField.getValue());
-		settings.setMozVersion(this.mozillaVersionField.getValue());
-		settings.setStartupURLs(this.startupPagesStringListControl.getStrings());
-		settings.save();
+		String msie = this.ieVersionField.getValue();
+		String mozilla = this.mozillaVersionField.getValue();
+		boolean js = this.javscriptPanel.isSelected();
+		boolean css = this.cssPanel.isSelected();
+		boolean cookie = this.cookiePanel.isSelected();
+		boolean cache = this.cachePanel.isSelected();
+		boolean navigation = this.navigationPanel.isSelected();
+		boolean incluedeMsie = this.ieSpoofPanel.isSelected();
+		GeneralSettings.deleteNetwork();
+		GeneralSettings.deleteUserAgent();
+		GeneralSettings.insertNetwork(js, css, cookie, cache, navigation);
+		GeneralSettings.insertUserAgent(msie, mozilla, incluedeMsie);
+		
+		//TODO getStartupURLs
 	}
 
 	/**
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		GeneralSettings settings = this.settings;
-		this.ieSpoofPanel.setSelected(settings.isSpoofIE());
-		this.javscriptPanel.setSelected(settings.isSpoofJS());
-		this.cssPanel.setSelected(settings.isSpoofCSS());
-		this.ieVersionField.setValue(settings.getIeVersion());
-		this.mozillaVersionField.setValue(settings.getMozVersion());
-		this.mozPanel.revalidate();
-		this.iePanel.revalidate();
+		GeneralSettings network = GeneralSettings.getNetwork();
+		this.javscriptPanel.setSelected(network.isJs());
+		this.cssPanel.setSelected(network.isCss());
+		this.cookiePanel.setSelected(network.isCookie());
+		this.cachePanel.setSelected(network.isCache());
+		this.navigationPanel.setSelected(network.isNavigation());
+		
+		GeneralSettings userAgent = GeneralSettings.getUserAgent();
+		this.ieSpoofPanel.setSelected(userAgent.isIncludeIE());
+		this.ieVersionField.setValue(userAgent.getIeVersion());
+		this.mozillaVersionField.setValue(userAgent.getMozVersion());
+		
+		this.ieSpoofPanel.revalidate();
+		this.javscriptPanel.revalidate();
+		this.cssPanel.revalidate();
+		this.cookiePanel.revalidate();
+		this.cachePanel.revalidate();
+		this.navigationPanel.revalidate();
 		this.networkPanel.revalidate();
-		this.startupPagesStringListControl.setStrings(settings.getStartupURLs());
+		
+		//TODO this.startupPagesStringListControl.setStrings(settings.getStartupURLs());
 	}
 
 	/**
@@ -235,6 +264,10 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	private Component getMozVersionPanel() {
 		return this.mozPanel;
+	}
+
+	public FormPanel getIePanel() {
+		return iePanel;
 	}
 
 	/**

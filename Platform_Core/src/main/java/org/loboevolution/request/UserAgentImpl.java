@@ -23,9 +23,6 @@
  */
 package org.loboevolution.request;
 
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-
 import org.loboevolution.settings.GeneralSettings;
 import org.loboevolution.ua.UserAgent;
 
@@ -114,12 +111,14 @@ public class UserAgentImpl implements UserAgent {
 	public String getUserAgentString() {
 		String tv = this.textValue;
 		if (tv == null) {
-			GeneralSettings settings = AccessController
-					.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
-			boolean spoofIE = settings.isSpoofIE();
+			GeneralSettings settings = GeneralSettings.getNetwork();
+			boolean spoofIE = settings.isIe();
 			String ieVersion = settings.getIeVersion();
-			tv = "Mozilla/" + settings.getMozVersion() + " (compatible" + (spoofIE ? "; MSIE " + ieVersion : "") + "; "
-					+ this.getOs() + ") " + this.getName() + "/" + this.getVersion();
+			StringBuilder sb = new StringBuilder();
+			sb.append("Mozilla/" + settings.getMozVersion());
+			sb.append(" (compatible" + (spoofIE ? "; MSIE " + ieVersion : "") + "; ");
+			sb.append(this.getOs() + ") " + this.getName() + "/" + this.getVersion());
+			tv = sb.toString();
 			this.textValue = tv;
 		}
 		return tv;

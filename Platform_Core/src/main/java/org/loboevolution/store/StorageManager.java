@@ -93,6 +93,18 @@ public class StorageManager implements Runnable, ColorCommon {
 	/** The Constant COOKIE. */
 	private static final String COOKIE = "CREATE TABLE COOKIE (cookieName text, cookieValue text, domain text, path text, expires date, maxAge text, secure integer, httponly integer)";
 	
+	/** The Constant STARTUP. */
+	private static final String STARTUP = "CREATE TABLE STARTUP (baseUrl text)";
+	
+	/** The Constant STARTUP. */
+	private static final String SIZE = "CREATE TABLE SIZE (width integer, height integer)";
+	
+	/** The Constant USER_AGENT. */
+	private static final String USER_AGENT = "CREATE TABLE USER_AGENT (msie text, mozilla text, include_msie integer)";
+	
+	/** The Constant NETWORK. */
+	private static final String NETWORK = "CREATE TABLE NETWORK (js integer, css integer, cookie integer, cache integer, navigation integer)";
+	
 	private static final StorageManager instance = new StorageManager();
 
 	/** The store directory. */
@@ -271,10 +283,16 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(urlDatabase, CONNECTION);	
 				createTable(urlDatabase, HOST);
 				createTable(urlDatabase, COOKIE);
+				/*createTable(urlDatabase, STARTUP);
+				createTable(urlDatabase, USER_AGENT);
+				createTable(urlDatabase, NETWORK);
+				createTable(urlDatabase, SIZE);
 				populateColorTable(urlDatabase);
 				populateFontTable(urlDatabase);
 				populateFontSizeTable(urlDatabase);
 				populateSearchEngine(urlDatabase);
+				populateUserAgent(urlDatabase);
+				populateColorNetwork(urlDatabase);*/
 			} catch (Exception e) {
 				logger.error(e.getMessage());
 			}
@@ -1032,6 +1050,34 @@ public class StorageManager implements Runnable, ColorCommon {
 			logger.error(e.getMessage());
 		}
 	}
+	
+	private void populateColorNetwork(String urlDatabase) {
+		try (Connection conn = DriverManager.getConnection(urlDatabase);
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, 1);
+			pstmt.setInt(3, 1);
+			pstmt.setInt(4, 1);
+			pstmt.setInt(5, 1);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+	}
+
+	private void populateUserAgent(String urlDatabase) {
+		try (Connection conn = DriverManager.getConnection(urlDatabase);
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USER_AGENT(msie, mozilla, include_msie) VALUES(?,?,?)")) {
+			pstmt.setString(1, "11.0");
+			pstmt.setString(2, "5.0");
+			pstmt.setInt(3, 1);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
 	
 	
 	/* (non-Javadoc)

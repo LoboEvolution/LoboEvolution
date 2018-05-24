@@ -21,9 +21,7 @@
 package org.loboevolution.primary.clientlets.html;
 
 import java.net.URL;
-import java.security.AccessController;
 import java.security.Policy;
-import java.security.PrivilegedAction;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -198,8 +196,8 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isCookieEnabled() {
-		// TODO: Settings
-		return true;
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		return settings.isCookie();
 	}
 
 	/*
@@ -219,9 +217,8 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isScriptingEnabled() {
-		GeneralSettings settings = AccessController
-				.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
-		return settings.isSpoofJS();
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		return settings.isJs();
 	}
 
 	/*
@@ -232,7 +229,6 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public void setCookie(URL url, String cookieSpec) {
-		// Requires privileges.
 		RequestEngine.getInstance().setCookie(url, cookieSpec);
 	}
 
@@ -285,9 +281,8 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isExternalCSSEnabled() {
-		GeneralSettings settings = AccessController
-				.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
-		return settings.isSpoofCSS();
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		return settings.isCss();
 	}
 
 	/*
@@ -297,8 +292,19 @@ public class UserAgentContextImpl implements UserAgentContext {
 	 */
 	@Override
 	public boolean isInternalCSSEnabled() {
-		GeneralSettings settings = AccessController
-				.doPrivileged((PrivilegedAction<GeneralSettings>) () -> GeneralSettings.getInstance());
-		return settings.isSpoofCSS();
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		return settings.isCss();
+	}
+
+	@Override
+	public boolean isCacheEnabled() {
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		return settings.isCache();
+	}
+
+	@Override
+	public boolean isNavigationEnabled() {
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		return settings.isNavigation();
 	}
 }

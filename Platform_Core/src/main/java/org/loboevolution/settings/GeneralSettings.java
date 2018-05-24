@@ -22,17 +22,18 @@ package org.loboevolution.settings;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.request.UserAgentImpl;
-import org.loboevolution.security.GenericLocalPermission;
-import org.loboevolution.store.StorageManager;
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * General browser settings. This is a singleton class with an instance obtained
@@ -43,126 +44,150 @@ public class GeneralSettings implements Serializable {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(GeneralSettings.class);
 
-	/** The Constant DEFAULT_STARTUP. */
-	private static final String DEFAULT_STARTUP = "";
-
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500070000402L;
 
-	/** The Constant instance. */
-	private static final GeneralSettings instance;
-
-	/** The startup ur ls. */
-	private volatile Collection<String> startupURLs;
-
-	/** The spoof ie. */
-	private volatile boolean spoofIE;
-
 	/** The ie version. */
-	private volatile String ieVersion;
+	private String ieVersion;
 
 	/** The moz version. */
-	private volatile String mozVersion;
+	private String mozVersion;
+	
+	/** The ie. */
+	private boolean ie;
+	
+	/** The includeIE. */
+	private boolean includeIE;
 
-	/** The spoof jd. */
-	private volatile boolean spoofJS;
+	/** The js. */
+	private boolean js;
 
-	/** The spoof jd. */
-	private volatile boolean spoofCSS;
+	/** The css. */
+	private boolean css;
+	
+	/** The cookie. */
+	private boolean cookie;
 
-	/** The initial window bounds. */
-	private volatile Rectangle initialWindowBounds;
-
-	static {
-		GeneralSettings ins = null;
-		try {
-			ins = (GeneralSettings) StorageManager.getInstance().retrieveSettings(GeneralSettings.class.getSimpleName(),
-					GeneralSettings.class.getClassLoader());
-		} catch (Exception err) {
-			logger.error("getInstance(): Unable to retrieve settings.", err);
+	/** The cache. */
+	private boolean cache;
+	
+	/** The navigation. */
+	private boolean navigation;
+	
+	public static GeneralSettings getNetwork() {
+		GeneralSettings setting = new GeneralSettings();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT js, css, cookie, cache, navigation FROM NETWORK")) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				setting.setJs(rs.getInt(1) == 1 ? true : false);
+				setting.setCss(rs.getInt(2) == 1 ? true : false);
+				setting.setCookie(rs.getInt(3) == 1 ? true : false);
+				setting.setCache(rs.getInt(4) == 1 ? true : false);
+				setting.setNavigation(rs.getInt(5) == 1 ? true : false);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-		if (ins == null) {
-			ins = new GeneralSettings();
+		return setting;
+	}
+	
+	public static GeneralSettings getUserAgent() {
+		GeneralSettings setting = new GeneralSettings();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT msie, mozilla, include_msie FROM USER_AGENT")) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				setting.setIeVersion(rs.getString(1));
+				setting.setMozVersion(rs.getString(2));
+				setting.setIncludeIE(rs.getInt(3) == 1 ? true : false);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-		instance = ins;
+		return setting;
 	}
-
-	/**
-	 * Gets the Constant instance.
-	 *
-	 * @return the Constant instance
-	 */
-	public static GeneralSettings getInstance() {
-		SecurityManager sm = System.getSecurityManager();
-		if (sm != null) {
-			sm.checkPermission(GenericLocalPermission.EXT_GENERIC);
+	
+	public static List<String> getStartupURLs() {
+		List<String> urls = new ArrayList<String>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM STARTUP")) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				urls.add(rs.getString(1));
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-		return instance;
+		return urls;
 	}
-
-	/**
-	 * Instantiates a new general settings.
-	 */
-	private GeneralSettings() {
-		// Only called if not persisted
-		this.restoreDefaults();
-	}
-
-	/**
-	 * Save.
-	 */
-	public void save() {
-		try {
-			StorageManager.getInstance().saveSettings(this.getClass().getSimpleName(), this);
-		} catch (IOException ioe) {
-			logger.error("save(): Unable to save settings", ioe);
+	
+	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO CONNECTION (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
+			pstmt.setInt(1, js ? 1 : 0);
+			pstmt.setInt(2, css ? 1 : 0);
+			pstmt.setInt(3, cookie ? 1 : 0);
+			pstmt.setInt(4, cache ? 1 : 0);
+			pstmt.setInt(5, navigation ? 1 : 0);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
 	}
-
-	/**
-	 * Restore defaults.
-	 */
-	public void restoreDefaults() {
-		this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
-		this.spoofIE = true;
-		this.spoofJS = true;
-		this.spoofCSS = true;
-		this.ieVersion = "11.0";
-		this.mozVersion = "5.0";
-	}
-
-	/**
-	 * Gets the startup ur ls.
-	 *
-	 * @return the startup ur ls
-	 */
-	public String[] getStartupURLs() {
-		// Cannot return empty or null
-		Collection<String> urls = this.startupURLs;
-		if (urls == null || urls.isEmpty()) {
-			return new String[] { DEFAULT_STARTUP };
+	
+	public static void insertUserAgent(String msie,String mozilla, boolean incluedeMsie) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USER_AGENT (msie, mozilla, include_msie) VALUES(?,?,?)")) {
+			pstmt.setString(2, msie);
+			pstmt.setString(2, mozilla);
+			pstmt.setInt(3, incluedeMsie ? 1 : 0);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
 		}
-		return urls.toArray(new String[0]);
+	}
+	
+	public static void insertBounds(Rectangle rect) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USER_AGENT (width, heighte) VALUES(?,?)")) {
+			pstmt.setInt(1, rect.width);
+			pstmt.setInt(2, rect.height);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public static void deleteNetwork() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM NETWORK")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public static void deleteUserAgent() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM USER_AGENT")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public static void restoreDefaults() {
+		deleteNetwork();
+		deleteUserAgent();
+		insertNetwork(true, true, true, true, true);
+		insertUserAgent("11.0", "5.0", true);
+		//TODO this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
 	}
 
-	/**
-	 * Sets the startup ur ls.
-	 *
-	 * @param urls
-	 *            the new startup ur ls
-	 */
-	public void setStartupURLs(String[] urls) {
-		this.startupURLs = Arrays.asList(urls);
-	}
-
-	/**
-	 * Gets the initial window bounds.
-	 *
-	 * @return the initial window bounds
-	 */
-	public Rectangle getInitialWindowBounds() {
-		Rectangle bounds = initialWindowBounds;
-		if (bounds == null) {
+	public static Rectangle getInitialWindowBounds() {
+		Rectangle bounds = new Rectangle(100, 100);
+		/*if (bounds == null) {
 			return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		}
 		if (bounds.width < 100) {
@@ -170,18 +195,8 @@ public class GeneralSettings implements Serializable {
 		}
 		if (bounds.height < 100) {
 			bounds.height = 100;
-		}
+		}*/
 		return bounds;
-	}
-
-	/**
-	 * Sets the initial window bounds.
-	 *
-	 * @param initialWindowBounds
-	 *            the new initial window bounds
-	 */
-	public void setInitialWindowBounds(Rectangle initialWindowBounds) {
-		this.initialWindowBounds = initialWindowBounds;
 	}
 
 	/**
@@ -201,26 +216,6 @@ public class GeneralSettings implements Serializable {
 	 */
 	public void setIeVersion(String ieVersion) {
 		this.ieVersion = ieVersion;
-		UserAgentImpl.getInstance().invalidateUserAgent();
-	}
-
-	/**
-	 * Checks if is spoof ie.
-	 *
-	 * @return the spoof ie
-	 */
-	public boolean isSpoofIE() {
-		return spoofIE;
-	}
-
-	/**
-	 * Sets the spoof ie.
-	 *
-	 * @param spoofIE
-	 *            the new spoof ie
-	 */
-	public void setSpoofIE(boolean spoofIE) {
-		this.spoofIE = spoofIE;
 		UserAgentImpl.getInstance().invalidateUserAgent();
 	}
 
@@ -245,40 +240,114 @@ public class GeneralSettings implements Serializable {
 	}
 
 	/**
-	 * Checks if is spoof jd.
-	 *
-	 * @return the spoof jd
+	 * @return the ie
 	 */
-	public boolean isSpoofJS() {
-		return spoofJS;
+	public boolean isIe() {
+		return ie;
 	}
 
-	/**
-	 * Sets the spoof jd.
-	 *
-	 * @param spoofJS
-	 *            the new spoof jd
-	 */
-	public void setSpoofJS(boolean spoofJS) {
-		this.spoofJS = spoofJS;
-	}
 
 	/**
-	 * Checks if is spoof jd.
-	 *
-	 * @return the spoof jd
+	 * @param ie the ie to set
 	 */
-	public boolean isSpoofCSS() {
-		return spoofCSS;
+	public void setIe(boolean ie) {
+		this.ie = ie;
+		UserAgentImpl.getInstance().invalidateUserAgent();
 	}
 
+
 	/**
-	 * Sets the spoof jd.
-	 *
-	 * @param spoofCSS
-	 *            the new spoof jd
+	 * @return the includeIE
 	 */
-	public void setSpoofCSS(boolean spoofCSS) {
-		this.spoofCSS = spoofCSS;
+	public boolean isIncludeIE() {
+		return includeIE;
+	}
+
+
+	/**
+	 * @param includeIE the includeIE to set
+	 */
+	public void setIncludeIE(boolean includeIE) {
+		this.includeIE = includeIE;
+	}
+
+
+	/**
+	 * @return the js
+	 */
+	public boolean isJs() {
+		return js;
+	}
+
+
+	/**
+	 * @param js the js to set
+	 */
+	public void setJs(boolean js) {
+		this.js = js;
+	}
+
+
+	/**
+	 * @return the css
+	 */
+	public boolean isCss() {
+		return css;
+	}
+
+
+	/**
+	 * @param css the css to set
+	 */
+	public void setCss(boolean css) {
+		this.css = css;
+	}
+
+
+	/**
+	 * @return the cookie
+	 */
+	public boolean isCookie() {
+		return cookie;
+	}
+
+
+	/**
+	 * @param cookie the cookie to set
+	 */
+	public void setCookie(boolean cookie) {
+		this.cookie = cookie;
+	}
+
+
+	/**
+	 * @return the cache
+	 */
+	public boolean isCache() {
+		return cache;
+	}
+
+
+	/**
+	 * @param cache the cache to set
+	 */
+	public void setCache(boolean cache) {
+		this.cache = cache;
+	}
+
+
+	/**
+	 * @return the navigation
+	 */
+	public boolean isNavigation() {
+		return navigation;
+	}
+
+
+	/**
+	 * @param navigation the navigation to set
+	 */
+	public void setNavigation(boolean navigation) {
+		this.navigation = navigation;
 	}
 }
