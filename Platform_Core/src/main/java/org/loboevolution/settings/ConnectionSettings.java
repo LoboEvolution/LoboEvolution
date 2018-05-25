@@ -101,16 +101,16 @@ public class ConnectionSettings implements Serializable {
 	
 	public void deleteConnection() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM CONNECTION")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public void insertConnection() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_CONNECTIONS)) {
 			pstmt.setString(1, getProxyType().name());
 			pstmt.setString(2, getUserName());
 			pstmt.setString(3, getPassword());
@@ -120,14 +120,14 @@ public class ConnectionSettings implements Serializable {
 			pstmt.setInt(7, isDisableProxyForLocalAddresses() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static ConnectionSettings getConnection() {
 		ConnectionSettings setting = new ConnectionSettings();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CONNECTIONS)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
@@ -139,7 +139,7 @@ public class ConnectionSettings implements Serializable {
 				setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return setting;
 	}

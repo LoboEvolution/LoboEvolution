@@ -28,10 +28,10 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import org.loboevolution.clientlet.ClientletRequest;
-import org.loboevolution.primary.settings.SearchEngine;
 import org.loboevolution.request.ClientletRequestImpl;
 import org.loboevolution.request.RequestHandler;
-import org.loboevolution.store.SQLiteManager;
+import org.loboevolution.settings.LookAndFeelsSettings;
+import org.loboevolution.settings.SearchEngine;
 import org.loboevolution.ua.RequestType;
 
 public class SaveAction extends AbstractAction {
@@ -70,7 +70,7 @@ public class SaveAction extends AbstractAction {
 				return;
 			}
 			startDownload(chooser.getSelectedFile());
-			SQLiteManager sql = new SQLiteManager();
+			LookAndFeelsSettings sql = new LookAndFeelsSettings();
 			SearchEngine search = new SearchEngine();
 			search.setName(file.getName());
 			search.setDescription(file.getAbsolutePath());

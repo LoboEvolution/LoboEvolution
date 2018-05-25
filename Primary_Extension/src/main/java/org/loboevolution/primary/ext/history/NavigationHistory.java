@@ -60,14 +60,14 @@ public class NavigationHistory implements Serializable {
 	public static List<String[]> getFiles(String type) {
 		List<String[]> values = new ArrayList<String[]>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT description FROM SEARCH WHERE type = ?")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SEARCH)) {
 			pstmt.setString(1, type);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				values.add(new String[] { rs.getString(1) });
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return values;
 	}
@@ -82,14 +82,14 @@ public class NavigationHistory implements Serializable {
 	public static List<String[]> getRecentHostEntries(int maxNumItems) {
 		List<String[]> recentHostEntries = new ArrayList<String[]>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM HOST LIMIT ?")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST)) {
 			pstmt.setInt(1, maxNumItems);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				recentHostEntries.add(new String[] { rs.getString(1) });
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return recentHostEntries;
 	}
@@ -105,14 +105,14 @@ public class NavigationHistory implements Serializable {
 	public static List<String> getRecentItems(int maxNumItems) {
 		List<String> recentHostEntries = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM HOST LIMIT ?")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST)) {
 			pstmt.setInt(1, maxNumItems);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				recentHostEntries.add(rs.getString(1));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return recentHostEntries;
 	}
@@ -132,14 +132,14 @@ public class NavigationHistory implements Serializable {
 	public static List<String> getHeadMatchItems(String itemPrefix) {
 		List<String> recentHostEntries = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM HOST WHERE baseUrl like ?")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST2)) {
 			pstmt.setString(1, "%" + itemPrefix + "%");
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				recentHostEntries.add(rs.getString(1));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return recentHostEntries;
 	}
@@ -155,11 +155,11 @@ public class NavigationHistory implements Serializable {
 	 */
 	public static void addAsRecent(URL url) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO HOST (baseUrl) VALUES(?)")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_HOST)) {
 			pstmt.setString(1,  url.toExternalForm());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 }

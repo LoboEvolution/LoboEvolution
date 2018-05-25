@@ -76,7 +76,7 @@ public class BookmarksHistory implements Serializable {
 					values.add(info);
 				}
 			} catch (Exception e) {
-				logger.error(e.getMessage());
+				logger.error(e);
 			}
 			return values;
 		}
@@ -92,7 +92,7 @@ public class BookmarksHistory implements Serializable {
 	public BookmarkInfo getExistingInfo(String item) {
 		BookmarkInfo info = null;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.BOOKMARKS)) {
 			pstmt.setString(1, item);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs!= null && rs.next()) {
@@ -103,21 +103,21 @@ public class BookmarksHistory implements Serializable {
 				info.setTags(Strings.splitUsingTokenizer(rs.getString(4), " "));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		} 
 		return info;
 	}
 	
 	public void insertBookmark(BookmarkInfo info) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("INSERT INTO BOOKMARKS (name, description, baseUrl, tags) VALUES(?,?,?,?)")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_BOOKMARKS)) {
 			pstmt.setString(1, info.getTitle());
 			pstmt.setString(2, info.getDescription());
 			pstmt.setString(3, info.getUrl().toExternalForm());
 			pstmt.setString(4, info.getTagsText());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 }

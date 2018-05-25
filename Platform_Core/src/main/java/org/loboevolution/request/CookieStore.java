@@ -175,8 +175,7 @@ public class CookieStore {
 	 */
 	private static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge, boolean secure, boolean httponly) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(
-						"INSERT INTO COOKIE (cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly) VALUES(?,?,?,?,?,?,?,?)")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
 			pstmt.setString(1, name);
 			pstmt.setString(2, value);
@@ -206,8 +205,7 @@ public class CookieStore {
 		
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(" SELECT cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly "
-										   + " FROM COOKIE WHERE domain = ? AND path = ?");
+			ResultSet rs = stmt.executeQuery(SQLiteCommon.COOKIES);
 
 			while (rs!= null && rs.next()) {
 				Cookie cookie = new Cookie();
@@ -222,7 +220,7 @@ public class CookieStore {
 				cookies.add(cookie);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 			return null;
 		}
 		return cookies;

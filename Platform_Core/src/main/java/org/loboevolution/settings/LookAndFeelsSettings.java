@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.store;
+package org.loboevolution.settings;
 
 import java.awt.Color;
 import java.sql.Connection;
@@ -28,20 +28,15 @@ import java.sql.PreparedStatement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.font.LAFSettings;
-import org.loboevolution.primary.settings.SearchEngine;
 
 import com.loboevolution.store.SQLiteCommon;
 
-public class SQLiteManager {
+public class LookAndFeelsSettings {
 	
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(SQLiteManager.class);
+	private static final Logger logger = LogManager.getLogger(LookAndFeelsSettings.class);
 	
-	/*The url database*/
-	private final String urlDatabase;
-	
-	public SQLiteManager() {
-		urlDatabase = SQLiteCommon.getSettingsDirectory();;
+	public LookAndFeelsSettings() {
 	}	
 
 	/**
@@ -50,12 +45,8 @@ public class SQLiteManager {
 	 * @param laf
 	 */
 	public void insertLAF(LAFSettings laf) {
-		try (Connection conn = connect(urlDatabase);
-				PreparedStatement pstmt = conn.prepareStatement(
-						" INSERT INTO LOOK_AND_FEEL (acryl, aero, aluminium, bernstein, fast, graphite,"
-								+ "hiFi,luna, mcWin, mint, noire, smart, texture,"
-								+ "subscript, superscript, underline, italic, strikethrough, "
-								+ "fontSize, font, color, bold) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+		try (Connection conn = connect(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_LAF)) {
 
 			pstmt.setInt(1, laf.isAcryl() ? 1 : 0);
 			pstmt.setInt(2, laf.isAero() ? 1 : 0);
@@ -83,15 +74,16 @@ public class SQLiteManager {
 			pstmt.setInt(22, laf.isBold() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public void deleteLAF() {
-		try (Connection conn = connect(urlDatabase); PreparedStatement pstmt = conn.prepareStatement("DELETE FROM LOOK_AND_FEEL")) {
+		try (Connection conn = connect(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LAF)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
@@ -101,15 +93,15 @@ public class SQLiteManager {
 	 * @param search
 	 */
 	public void insertFileSelected(SearchEngine search) {
-		try (Connection conn = connect(urlDatabase);
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SEARCH (name, description, type, selected) VALUES(?,?,?,?)")) {
+		try (Connection conn = connect(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SEARCH2)) {
 			pstmt.setString(1, search.getName());
 			pstmt.setString(2, search.getDescription());
 			pstmt.setString(3, search.getType());
 			pstmt.setInt(4, search.isSelected() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 
@@ -123,7 +115,7 @@ public class SQLiteManager {
 		try {
 			conn = DriverManager.getConnection(dbPath);
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return conn;
 	} 

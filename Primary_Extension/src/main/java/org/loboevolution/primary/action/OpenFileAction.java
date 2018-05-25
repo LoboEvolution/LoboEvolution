@@ -27,8 +27,8 @@ import javax.swing.JFileChooser;
 
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
-import org.loboevolution.primary.settings.SearchEngine;
-import org.loboevolution.store.SQLiteManager;
+import org.loboevolution.settings.LookAndFeelsSettings;
+import org.loboevolution.settings.SearchEngine;
 import org.loboevolution.ua.NavigatorWindow;
 import org.loboevolution.ua.RequestType;
 
@@ -73,7 +73,7 @@ public class OpenFileAction extends ActionPool {
 		int returnValue = fileChooser.showOpenDialog(window.getTopFrame().getComponent());
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			File selectedFile = fileChooser.getSelectedFile();
-			SQLiteManager sql = new SQLiteManager();
+			LookAndFeelsSettings sql = new LookAndFeelsSettings();
 			componentSource.navigate(selectedFile.toURI().toString(), RequestType.PROGRAMMATIC);
 			SearchEngine search = new SearchEngine();
 			search.setName(selectedFile.getName());

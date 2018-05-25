@@ -25,7 +25,7 @@ import org.loboevolution.primary.gui.FieldType;
 import org.loboevolution.primary.gui.FormField;
 import org.loboevolution.primary.gui.FormPanel;
 import org.loboevolution.primary.gui.ValidationException;
-import org.loboevolution.primary.settings.SearchEngine;
+import org.loboevolution.settings.SearchEngine;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.gui.WrapperLayout;
 

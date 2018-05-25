@@ -58,7 +58,7 @@ import org.loboevolution.primary.gui.AbstractSettingsUI;
 import org.loboevolution.primary.gui.ColorComboBox;
 import org.loboevolution.primary.gui.FontLabel;
 import org.loboevolution.primary.gui.ValidationException;
-import org.loboevolution.store.SQLiteManager;
+import org.loboevolution.settings.LookAndFeelsSettings;
 
 /**
  * The Class LookAndFeelsSettingsUI.
@@ -221,7 +221,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		laf.setBold(this.boldCheckBox.isSelected());
 
 		if (validate(laf)) {
-			SQLiteManager sql = new SQLiteManager();
+			LookAndFeelsSettings sql = new LookAndFeelsSettings();
 			sql.deleteLAF();
 			sql.insertLAF(laf);
 		}

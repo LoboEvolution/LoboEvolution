@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.settings;
+package org.loboevolution.settings;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;

@@ -130,11 +130,7 @@ public class LAFSettings implements FontCommon, Serializable {
 		LAFSettings laf = null;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(" SELECT acryl, aero, aluminium, bernstein, fast, graphite," + 
-											 " 	      hiFi,luna, mcWin, mint, noire, smart, texture," + 
-											 "	 	  subscript, superscript, underline, italic, strikethrough," + 
-											 "		  fontSize, font, color, bold" +
-											 " FROM LOOK_AND_FEEL");
+			ResultSet rs = stmt.executeQuery(SQLiteCommon.FONTS);
 
 			while (rs!= null && rs.next()) {
 				laf = new LAFSettings();
@@ -162,7 +158,7 @@ public class LAFSettings implements FontCommon, Serializable {
 				laf.setBold(rs.getInt(22) == 1 ? true : false);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 			return null;
 		}
 		return laf;
@@ -170,15 +166,16 @@ public class LAFSettings implements FontCommon, Serializable {
 	
 	public static String[] getFonts(String type) {
 		List<String> fonts = new ArrayList<String>();
+		String query = "SELECT name FROM "+type;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT name FROM "+type);
+			ResultSet rs = stmt.executeQuery(query);
 
 			while (rs != null && rs.next()) {
 				fonts.add(rs.getString(1));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return fonts.toArray(new String[fonts.size()]);
 	}

@@ -77,7 +77,7 @@ public class GeneralSettings implements Serializable {
 	public static GeneralSettings getNetwork() {
 		GeneralSettings setting = new GeneralSettings();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT js, css, cookie, cache, navigation FROM NETWORK")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.NETWORK)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				setting.setJs(rs.getInt(1) == 1 ? true : false);
@@ -87,7 +87,7 @@ public class GeneralSettings implements Serializable {
 				setting.setNavigation(rs.getInt(5) == 1 ? true : false);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return setting;
 	}
@@ -95,7 +95,7 @@ public class GeneralSettings implements Serializable {
 	public static GeneralSettings getUserAgent() {
 		GeneralSettings setting = new GeneralSettings();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT msie, mozilla, include_msie FROM USER_AGENT")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.USER_AGENT)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				setting.setIeVersion(rs.getString(1));
@@ -103,7 +103,7 @@ public class GeneralSettings implements Serializable {
 				setting.setIncludeIE(rs.getInt(3) == 1 ? true : false);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return setting;
 	}
@@ -111,13 +111,13 @@ public class GeneralSettings implements Serializable {
 	public static List<String> getStartupURLs() {
 		List<String> urls = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT baseUrl FROM STARTUP")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.STARTUP)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				urls.add(rs.getString(1));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		
 		if(urls.isEmpty()) {
@@ -132,14 +132,14 @@ public class GeneralSettings implements Serializable {
 		int width = -1;
 		int height = -1;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("SELECT width, height FROM SIZE")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SIZE)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
 				width = rs.getInt(1);
 				height = rs.getInt(2);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		
 		if(width > -1 && height > -1) {
@@ -152,7 +152,7 @@ public class GeneralSettings implements Serializable {
 	
 	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_NETWORK)) {
 			pstmt.setInt(1, js ? 1 : 0);
 			pstmt.setInt(2, css ? 1 : 0);
 			pstmt.setInt(3, cookie ? 1 : 0);
@@ -160,76 +160,76 @@ public class GeneralSettings implements Serializable {
 			pstmt.setInt(5, navigation ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static void insertUserAgent(String msie,String mozilla, boolean incluedeMsie) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO USER_AGENT (msie, mozilla, include_msie) VALUES(?,?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_USER_AGENT)) {
 			pstmt.setString(1, msie);
 			pstmt.setString(2, mozilla);
 			pstmt.setInt(3, incluedeMsie ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static void insertBounds(Rectangle rect) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SIZE (width, height) VALUES(?,?)")) {;
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SIZE)) {
 			pstmt.setInt(1, rect.width);
 			pstmt.setInt(2, rect.height);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static void insertStartupUrl(String url) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO STARTUP (baseUrl) VALUES(?)")) {;
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_STARTUP)) {
 			pstmt.setString(1, url);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static void deleteNetwork() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM NETWORK")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_NETWORK)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static void deleteUserAgent() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM USER_AGENT")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_USER_AGENT)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	
 	public static void deleteStartUpUrl() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM STARTUP")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_STARTUP)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 
 	public static void deleteBounds() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM SIZE")) {
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SIZE)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 	

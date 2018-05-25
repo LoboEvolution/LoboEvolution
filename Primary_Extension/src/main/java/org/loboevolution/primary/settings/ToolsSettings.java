@@ -31,6 +31,8 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.settings.SearchEngine;
+
 import com.loboevolution.store.SQLiteCommon;
 
 /**
@@ -48,8 +50,7 @@ public class ToolsSettings implements Serializable {
 		List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(
-					"SELECT name, description, baseUrl, queryParameter, type, selected FROM SEARCH WHERE type = 'SEARCH_ENGINE' ORDER BY 6 DESC");
+			ResultSet rs = stmt.executeQuery(SQLiteCommon.SEARCH2);
 			while (rs != null && rs.next()) {
 				SearchEngine se = new SearchEngine();
 				se.setName(rs.getString(1));
@@ -61,7 +62,7 @@ public class ToolsSettings implements Serializable {
 				searchEngines.add(se);
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return searchEngines;
 	}
@@ -88,17 +89,16 @@ public class ToolsSettings implements Serializable {
 
 	public void deleteSearchEngine() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement("DELETE FROM SEARCH WHERE type = 'SEARCH_ENGINE'")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 
 	public void insertSearch(String name, String description, String baseUrl, String queryParameter, boolean selected) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(
-						"INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES(?,?,?,?,?,?)")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SEARCH)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, description);
 			pstmt.setString(3, "SEARCH_ENGINE");
@@ -107,28 +107,26 @@ public class ToolsSettings implements Serializable {
 			pstmt.setInt(6, selected ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 
 	public void unselectedSearch() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(
-						"UPDATE SEARCH SET selected = 0 WHERE selected = 1 and type = 'SEARCH_ENGINE'")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.UPDATE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 
 	public void selectedSearch(String name) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				PreparedStatement pstmt = conn
-						.prepareStatement("UPDATE SEARCH SET selected = 1 WHERE name = ? and type = 'SEARCH_ENGINE'")) {
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.UPDATE_SEARCH2)) {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 	}
 }

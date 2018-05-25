@@ -361,13 +361,13 @@ public class ColorFactory {
 		colorMap.put("transparent", new Color(0, 0, 0, 0));
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT name, value FROM COLOR");
+			ResultSet rs = stmt.executeQuery(SQLiteCommon.COLORS);
 
 			while (rs != null && rs.next()) {
 				colorMap.put(rs.getString(1), new Color(rs.getInt(2)));
 			}
 		} catch (Exception e) {
-			logger.error(e.getMessage());
+			logger.error(e);
 		}
 		return colorMap;
 	}
