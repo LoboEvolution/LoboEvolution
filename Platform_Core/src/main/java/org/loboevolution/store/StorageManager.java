@@ -292,7 +292,8 @@ public class StorageManager implements Runnable, ColorCommon {
 				populateFontSizeTable(urlDatabase);
 				populateSearchEngine(urlDatabase);
 				populateUserAgent(urlDatabase);
-				populateColorNetwork(urlDatabase);
+				populateNetwork(urlDatabase);
+				populateSize(urlDatabase);
 			} catch (Exception e) {
 				logger.error(e.getMessage());
 			}
@@ -1051,7 +1052,7 @@ public class StorageManager implements Runnable, ColorCommon {
 		}
 	}
 	
-	private void populateColorNetwork(String urlDatabase) {
+	private void populateNetwork(String urlDatabase) {
 		try (Connection conn = DriverManager.getConnection(urlDatabase);
 				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
 			pstmt.setInt(1, 1);
@@ -1072,6 +1073,17 @@ public class StorageManager implements Runnable, ColorCommon {
 			pstmt.setString(1, "11.0");
 			pstmt.setString(2, "5.0");
 			pstmt.setInt(3, 1);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	private void populateSize(String urlDatabase) {
+		try (Connection conn = DriverManager.getConnection(urlDatabase);
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SIZE(width, height) VALUES(?,?)")) {
+			pstmt.setInt(1, 1600);
+			pstmt.setInt(2, 870);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			logger.error(e.getMessage());

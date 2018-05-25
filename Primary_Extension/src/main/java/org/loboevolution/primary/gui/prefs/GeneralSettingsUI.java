@@ -22,10 +22,13 @@ package org.loboevolution.primary.gui.prefs;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -39,6 +42,7 @@ import org.loboevolution.primary.gui.FormPanel;
 import org.loboevolution.primary.gui.StringListControl;
 import org.loboevolution.primary.gui.SwingTasks;
 import org.loboevolution.settings.GeneralSettings;
+import org.loboevolution.util.Strings;
 
 /**
  * The Class GeneralSettingsUI.
@@ -47,7 +51,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
+	
 	/** The Constant MAX_STARTUP_PAGES. */
 	private static final int MAX_STARTUP_PAGES = 4;
 
@@ -67,6 +71,12 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The mozilla version field. */
 	private final transient FormField mozillaVersionField;
+	
+	/** The width field. */
+	private final transient FormField width;
+
+	/** The height field. */
+	private final transient FormField height;
 
 	/** The ie spoof panel. */
 	private final CheckBoxPanel ieSpoofPanel;
@@ -94,6 +104,9 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The network panel. */
 	private final FormPanel networkPanel;
+	
+	/** The dimension panel. */
+	private final FormPanel dimensionPanel;
 
 	/** The startup pages string list control. */
 	private final StringListControl startupPagesStringListControl;
@@ -102,34 +115,53 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * Instantiates a new general settings ui.
 	 */
 	public GeneralSettingsUI() {
+
 		this.ieVersionField = new FormField(FieldType.TEXT, "MSIE Version:");
 		this.mozillaVersionField = new FormField(FieldType.TEXT, "Mozilla Version:");
 		this.mozillaVersionField.setToolTip("Mozilla compatibility version.");
+		
 		FormPanel iePanel = new FormPanel();
 		this.iePanel = iePanel;
 		iePanel.addField(this.ieVersionField);
 		iePanel.setBorder(new EmptyBorder(1, 8, 8, 0));
+		
 		FormPanel networkPanel = new FormPanel();
 		this.networkPanel = networkPanel;
 		networkPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
+		
+		FormPanel dimensionPanel = new FormPanel();
+		this.dimensionPanel = dimensionPanel;
+		dimensionPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
+		
+		this.width = new FormField(FieldType.TEXT, "Width:");
+		this.height = new FormField(FieldType.TEXT, "Height:");
+		
+		dimensionPanel.addField(this.width);
+		dimensionPanel.addField(this.height);
+		
 		this.ieSpoofPanel = new CheckBoxPanel(MSIE_USER_AGENT, iePanel);
 		this.javscriptPanel = new CheckBoxPanel("Enable Javascript", networkPanel);
 		this.cssPanel = new CheckBoxPanel("Enable Cascading Style Sheets", networkPanel);
 		this.cookiePanel = new CheckBoxPanel("Enable Cookie", networkPanel);
 		this.cachePanel = new CheckBoxPanel("Enable Cache", networkPanel);
-		this.navigationPanel = new CheckBoxPanel("Enable Navigation", networkPanel);	
+		this.navigationPanel = new CheckBoxPanel("Enable Navigation", networkPanel);
+		
 		this.mozPanel = new FormPanel();
 		mozPanel.addField(this.mozillaVersionField);
 		this.startupPagesStringListControl = new StringListControl();
 		this.startupPagesStringListControl.setEditListCaption(EDIT_LIST_CAPTION);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		this.add(this.getStartupGroupBox());
 		this.add(Box.createRigidArea(new Dimension(8, 8)));
 		this.add(this.getUserAgentGroupBox());
 		this.add(SwingTasks.createVerticalFill());
+		this.add(this.getDimensionGroupBox());
+		this.add(SwingTasks.createVerticalFill());
 		this.add(Box.createRigidArea(new Dimension(8, 8)));
 		this.add(this.getNetworkBox());
 		this.add(SwingTasks.createVerticalFill());
+
 		this.loadSettings();
 		this.ieSpoofPanel.updateEnabling();
 		this.javscriptPanel.updateEnabling();
@@ -185,8 +217,21 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		groupBox.add(this.getCSSCheckBoxPanel());
 		groupBox.add(this.getCookiePanel());
 		groupBox.add(this.getCachePanel());
-		groupBox.add(this.getNavigationPanel());
-		
+		groupBox.add(this.getNavigationPanel());	
+		return groupBox;
+	}
+	
+	/**
+	 * Gets the dimension group box.
+	 *
+	 * @return the dimension agent group box
+	 */
+	private Component getDimensionGroupBox() {
+		JPanel groupBox = new JPanel();
+		groupBox.setPreferredSize(new Dimension(400, 100));
+		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
+		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Dimension"));
+		groupBox.add(this.getDimensionPanel());
 		return groupBox;
 	}
 
@@ -209,6 +254,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() {
+		Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
 		String msie = this.ieVersionField.getValue();
 		String mozilla = this.mozillaVersionField.getValue();
 		boolean js = this.javscriptPanel.isSelected();
@@ -217,12 +263,26 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		boolean cache = this.cachePanel.isSelected();
 		boolean navigation = this.navigationPanel.isSelected();
 		boolean incluedeMsie = this.ieSpoofPanel.isSelected();
+		int width = Double.valueOf(this.width.getValue()).intValue();
+		int height = Double.valueOf(this.height.getValue()).intValue();
+		
 		GeneralSettings.deleteNetwork();
 		GeneralSettings.deleteUserAgent();
+		GeneralSettings.deleteStartUpUrl();
 		GeneralSettings.insertNetwork(js, css, cookie, cache, navigation);
 		GeneralSettings.insertUserAgent(msie, mozilla, incluedeMsie);
+		GeneralSettings.insertBounds(new Rectangle(width, height));
 		
-		//TODO getStartupURLs
+		List<String> strings = startupPagesStringListControl.getStrings();
+		for (String url : strings) {
+			if (!Strings.isBlank(url)) {
+				GeneralSettings.insertStartupUrl(url);
+			}
+		}
+		
+		if(initialWindowBounds.getWidth() != width || initialWindowBounds.getHeight() != height) {
+			JOptionPane.showMessageDialog(this, "Please restart Lobo Evolution");
+		}
 	}
 
 	/**
@@ -241,6 +301,12 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.ieVersionField.setValue(userAgent.getIeVersion());
 		this.mozillaVersionField.setValue(userAgent.getMozVersion());
 		
+		Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
+		this.width.setValue(String.valueOf(initialWindowBounds.getWidth()));
+		this.height.setValue(String.valueOf(initialWindowBounds.getHeight()));
+		
+		this.startupPagesStringListControl.setStrings(GeneralSettings.getStartupURLs());
+
 		this.ieSpoofPanel.revalidate();
 		this.javscriptPanel.revalidate();
 		this.cssPanel.revalidate();
@@ -248,7 +314,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.cachePanel.revalidate();
 		this.navigationPanel.revalidate();
 		this.networkPanel.revalidate();
-		this.startupPagesStringListControl.setStrings(GeneralSettings.getStartupURLs());
+		this.dimensionPanel.revalidate();
 	}
 
 	/**
@@ -310,5 +376,12 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	public Component getNavigationPanel() {
 		return navigationPanel;
+	}
+
+	/**
+	 * @return the dimensionPanel
+	 */
+	public FormPanel getDimensionPanel() {
+		return dimensionPanel;
 	}
 }

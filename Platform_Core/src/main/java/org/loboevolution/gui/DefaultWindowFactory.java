@@ -206,7 +206,11 @@ public class DefaultWindowFactory implements WindowFactory {
 				public void windowClosing(WindowEvent e) {
 					super.windowClosing(e);
 					if (!window.isBoundsAssigned()) {
-						GeneralSettings.insertBounds(window.getBounds());
+						Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
+						if(initialWindowBounds.getWidth() < 0  &&  initialWindowBounds.getHeight() < 0) {
+							GeneralSettings.deleteBounds();
+							GeneralSettings.insertBounds(window.getBounds());
+						}
 					}
 					ExtensionManager.getInstance().shutdownExtensionsWindow(pwc);
 				}
@@ -214,7 +218,7 @@ public class DefaultWindowFactory implements WindowFactory {
 				@Override
 				public void windowClosed(WindowEvent e) {
 					super.windowClosed(e);
-					Set frames = DefaultWindowFactory.this.frames;
+					Set<Frame> frames = DefaultWindowFactory.this.frames;
 					synchronized (DefaultWindowFactory.this) {
 						frames.remove(window);
 						if (frames.size() == 0 && exitWhenAllWindowsClosed) {

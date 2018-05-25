@@ -127,6 +127,29 @@ public class GeneralSettings implements Serializable {
 		return urls;
 	}
 	
+	public static Rectangle getInitialWindowBounds() {
+		Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+		int width = -1;
+		int height = -1;
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement("SELECT width, height FROM SIZE")) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				width = rs.getInt(1);
+				height = rs.getInt(2);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+		
+		if(width > -1 && height > -1) {
+			bounds = new Rectangle(width, height);
+		}
+		
+		
+		return bounds;
+	}
+	
 	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)")) {
@@ -155,9 +178,19 @@ public class GeneralSettings implements Serializable {
 	
 	public static void insertBounds(Rectangle rect) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SIZE (width, height) VALUES(?,?)")) {
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO SIZE (width, height) VALUES(?,?)")) {;
 			pstmt.setInt(1, rect.width);
 			pstmt.setInt(2, rect.height);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
+	public static void insertStartupUrl(String url) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("INSERT INTO STARTUP (baseUrl) VALUES(?)")) {;
+			pstmt.setString(1, url);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			logger.error(e.getMessage());
@@ -182,27 +215,34 @@ public class GeneralSettings implements Serializable {
 		}
 	}
 	
+	public static void deleteStartUpUrl() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM STARTUP")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+
+	public static void deleteBounds() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement("DELETE FROM SIZE")) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
+	}
+	
 	public static void restoreDefaults() {
 		deleteNetwork();
 		deleteUserAgent();
+		deleteBounds();
+		deleteStartUpUrl();
 		insertNetwork(true, true, true, true, true);
 		insertUserAgent("11.0", "5.0", true);
-		//TODO this.startupURLs = Collections.singletonList(DEFAULT_STARTUP);
+		insertBounds(new Rectangle(1600, 870));
 	}
 
-	public static Rectangle getInitialWindowBounds() {
-		Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		/*if (bounds == null) {
-			return GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-		}
-		if (bounds.width < 100) {
-			bounds.width = 100;
-		}
-		if (bounds.height < 100) {
-			bounds.height = 100;
-		}*/
-		return bounds;
-	}
 
 	/**
 	 * Gets the ie version.
