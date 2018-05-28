@@ -139,6 +139,8 @@ public class BookmarksDialog extends JDialog {
 
 		JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
 		rowSorter = new TableRowSorter<>(jtable.getModel());
+		jtable.setPreferredScrollableViewportSize(jtable.getPreferredSize());
+		jtable.setShowGrid(false);
 		jtable.setRowSorter(rowSorter);
 		jtable.addMouseListener(new MouseAdapter() {
 

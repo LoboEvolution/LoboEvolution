@@ -120,10 +120,13 @@ public class FilesDialog extends JDialog {
 	 * @return the component
 	 */
 	private Component tablePane(String type) {
-		Object columnNames[] = { "File" };
+		Object columnNames[] = { "" };
 		List<String[]> values = NavigationHistory.getFiles(type);
 		JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
 		rowSorter = new TableRowSorter<>(jtable.getModel());
+		jtable.setPreferredScrollableViewportSize(jtable.getPreferredSize());
+		jtable.setTableHeader(null);
+		jtable.setShowGrid(false);
 		jtable.setRowSorter(rowSorter);
 		jtable.addMouseListener(new MouseAdapter() {
 

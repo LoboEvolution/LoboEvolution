@@ -23,14 +23,20 @@ package org.loboevolution.primary.clientlets.html;
 import java.awt.Component;
 import java.awt.Insets;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.loboevolution.clientlet.AbstractComponentContent;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.http.Cookie;
 import org.loboevolution.http.Urls;
 import org.loboevolution.info.MetaInfo;
+import org.loboevolution.request.CookieStore;
 import org.loboevolution.util.Nodes;
 import org.loboevolution.util.Strings;
 import org.loboevolution.util.io.BufferExceededException;
@@ -44,6 +50,11 @@ import org.w3c.dom.NodeList;
  * The Class HtmlContent.
  */
 public class HtmlContent extends AbstractComponentContent {
+	
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(HtmlContent.class);
+
+	/** The Constant serialVersionUID. */
 	
 	/** The document. */
 	private final HTMLDocument document;
@@ -322,6 +333,24 @@ public class HtmlContent extends AbstractComponentContent {
 			}
 		}
 		return infoList;
+	}
+	
+	@Override
+	public List<Cookie> getCookieList(String address) {
+		URL url;
+		List<Cookie> cookies = new ArrayList<Cookie>();
+		try {
+			logger.error("address: " + address);
+			url = new URL(address);
+			logger.error("url.getHost(): " + url.getHost());
+			String domain = url.getHost().replaceFirst("^www.*?\\.", "");
+			logger.error("domain: " + domain);
+			cookies = CookieStore.getCookies(domain, "/");
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		logger.error("cookies: " + cookies.size());
+		return cookies;
 	}
 
 	/*

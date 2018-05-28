@@ -27,9 +27,9 @@ import javax.swing.AbstractAction;
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
 
-public class InfoPageAction extends AbstractAction implements EnableableAction {
+public class CookiePageAction extends AbstractAction implements EnableableAction {
 
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
 	/** The action. */
 	private transient ActionPool action;
@@ -45,7 +45,7 @@ public class InfoPageAction extends AbstractAction implements EnableableAction {
 	 * @param action
 	 *            the action
 	 */
-	public InfoPageAction(ComponentSource componentSource, ActionPool action) {
+	public CookiePageAction(ComponentSource componentSource, ActionPool action) {
 		this.action = action;
 		this.componentSource = componentSource;
 	}
@@ -57,6 +57,7 @@ public class InfoPageAction extends AbstractAction implements EnableableAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		componentSource.showInfoPage();	
+		componentSource.showCookiePage();	
 	}	
+
 }

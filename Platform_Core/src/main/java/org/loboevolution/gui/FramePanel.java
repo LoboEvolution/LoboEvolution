@@ -48,6 +48,7 @@ import org.loboevolution.clientlet.ClientletRequest;
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
 import org.loboevolution.clientlet.SimpleComponentContent;
+import org.loboevolution.http.Cookie;
 import org.loboevolution.http.HttpRequest;
 import org.loboevolution.http.Urls;
 import org.loboevolution.info.MetaInfo;
@@ -1537,6 +1538,17 @@ public class FramePanel extends JPanel implements NavigatorFrame {
 	public List<MetaInfo> getJSList() {
 		ComponentContent content = this.content;
 		return content == null ? null : content.getJSList();
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.ua.NavigatorFrame#getJSList()
+	 */
+	@Override
+	public List<Cookie> getCookieList(String url) {
+		ComponentContent content = this.content;
+		return content == null ? null : content.getCookieList(url);
 	}
 
 

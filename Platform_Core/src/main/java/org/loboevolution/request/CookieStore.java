@@ -28,12 +28,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.Cookie;
@@ -203,10 +203,11 @@ public class CookieStore {
 	public static List<Cookie> getCookies(String hostName, String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
 		
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(SQLiteCommon.COOKIES);
-
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
+			pstmt.setString(1, hostName);
+			pstmt.setString(2, path);
+			ResultSet rs = pstmt.executeQuery();
 			while (rs!= null && rs.next()) {
 				Cookie cookie = new Cookie();
 				cookie.setName((rs.getString(1)));

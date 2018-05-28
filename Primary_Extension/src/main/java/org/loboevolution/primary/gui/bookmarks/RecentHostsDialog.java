@@ -127,10 +127,13 @@ public class RecentHostsDialog extends JDialog {
 	 * @return the component
 	 */
 	private Component tablePane() {
-		Object columnNames[] = { "Url" };
+		Object columnNames[] = { "" };
 		List<String[]> hostEntries = NavigationHistory.getRecentHostEntries(100);
 		JTable jtable = new JTable(hostEntries.toArray(new Object[][] {}), columnNames);
 		rowSorter = new TableRowSorter<>(jtable.getModel());
+		jtable.setPreferredScrollableViewportSize(jtable.getPreferredSize());
+		jtable.setTableHeader(null);
+		jtable.setShowGrid(false);
 		jtable.setRowSorter(rowSorter);
 		jtable.addMouseListener(new MouseAdapter() {
 			@Override

@@ -28,6 +28,7 @@ import java.util.Properties;
 
 import org.loboevolution.clientlet.ClientletResponse;
 import org.loboevolution.clientlet.ComponentContent;
+import org.loboevolution.http.Cookie;
 import org.loboevolution.http.HttpRequest;
 import org.loboevolution.info.MetaInfo;
 
@@ -436,6 +437,13 @@ public interface NavigatorFrame {
 	 * @return the js list
 	 */
 	List<MetaInfo> getJSList();
+	
+	/**
+	 * Gets the cookie list.
+	 *
+	 * @return the js list
+	 */
+	List<Cookie> getCookieList(String url);
 
 	/**
 	 * Creates a {@link HttpRequest} object that can be used to load data over

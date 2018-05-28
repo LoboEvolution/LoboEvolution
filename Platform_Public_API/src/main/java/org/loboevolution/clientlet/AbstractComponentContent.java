@@ -24,6 +24,7 @@ import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.loboevolution.http.Cookie;
 import org.loboevolution.info.MetaInfo;
 
 /**
@@ -181,6 +182,17 @@ public abstract class AbstractComponentContent implements ComponentContent {
 	@Override
 	public List<MetaInfo> getJSList() {
 		return new ArrayList<MetaInfo>();
+	}
+	
+	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.clientlet.ComponentContent#getCookieList()
+	 */
+	@Override
+	public List<Cookie> getCookieList(String url) {
+		return new ArrayList<Cookie>();
 	}
 
 	// Backward compatibility note: Additional methods should provide an empty

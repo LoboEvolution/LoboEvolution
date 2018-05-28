@@ -21,7 +21,10 @@
 package org.loboevolution.clientlet;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.loboevolution.http.Cookie;
 import org.loboevolution.info.MetaInfo;
 
 /**
@@ -53,34 +56,42 @@ public interface ComponentContent {
 	 * @return the description
 	 */
 	String getDescription();
-	
+
 	/**
 	 * Gets the meta list.
 	 *
 	 * @return the meta list
 	 */
 	List<MetaInfo> getMetaList();
-	
+
 	/**
 	 * Gets the meida list.
 	 *
 	 * @return the media list
 	 */
 	List<MetaInfo> getMediaList();
-	
+
 	/**
 	 * Gets the style list.
 	 *
 	 * @return the style list
 	 */
 	List<MetaInfo> getStyleList();
-	
+
 	/**
 	 * Gets the js list.
 	 *
 	 * @return the js list
 	 */
 	List<MetaInfo> getJSList();
+
+	/**
+	 * Gets the cookie list.
+	 *
+	 * @return the cookie list
+	 */
+
+	List<Cookie> getCookieList(String url);
 
 	/**
 	 * Determines whether it's possible to copy content to the clipboard. This
@@ -109,8 +120,8 @@ public interface ComponentContent {
 	void addNotify();
 
 	/**
-	 * Called after the content has been removed from the display container.
-	 * This method may be used to dispose associated resources.
+	 * Called after the content has been removed from the display container. This
+	 * method may be used to dispose associated resources.
 	 */
 	void removeNotify();
 
@@ -129,8 +140,7 @@ public interface ComponentContent {
 	String getMimeType();
 
 	/**
-	 * Sets a property of the content. Property names are
-	 * implementation-dependent.
+	 * Sets a property of the content. Property names are implementation-dependent.
 	 *
 	 * @param name
 	 *            the name

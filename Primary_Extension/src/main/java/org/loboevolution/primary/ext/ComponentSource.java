@@ -39,6 +39,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 
+import org.loboevolution.http.Cookie;
 import org.loboevolution.info.MetaInfo;
 import org.loboevolution.primary.action.AboutAction;
 import org.loboevolution.primary.action.AddBookmarkAction;
@@ -47,6 +48,7 @@ import org.loboevolution.primary.action.BackMoreAction;
 import org.loboevolution.primary.action.BlankWindowAction;
 import org.loboevolution.primary.action.ClearCacheAction;
 import org.loboevolution.primary.action.ClonedWindowAction;
+import org.loboevolution.primary.action.CookiePageAction;
 import org.loboevolution.primary.action.CopyAction;
 import org.loboevolution.primary.action.ExitAction;
 import org.loboevolution.primary.action.ForwardAction;
@@ -235,6 +237,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.setMnemonic('V');
 		menu.add(menuItem("Page Source", 'S', new SourceAction(this, window, actionPool)));
 		menu.add(menuItem("Info Page", ' ', new InfoPageAction(this, actionPool)));
+		menu.add(menuItem("Cookie Page", ' ', new CookiePageAction(this, actionPool)));
 		menu.add(menuItem("Full Screen", ' ', KeyStroke.getKeyStroke(KeyEvent.VK_F11, 0), new FullScreenAction(window, actionPool)));
 		return menu;
 	}
@@ -577,6 +580,18 @@ public class ComponentSource implements NavigatorWindowListener {
 		info.setVisible(true);
 	}
 	
+	/**
+	 * Show info page.
+	 */
+	public void showCookiePage() {
+		String addressText = this.addressField.getText();
+		List<Cookie> cookieList = window.getTopFrame().getCookieList(addressText);
+		CookiePageWindow info = new CookiePageWindow(cookieList, addressText);
+		info.setSize(new Dimension(600, 400));
+		info.setLocationByPlatform(true);
+		info.setVisible(true);
+	}
+
 	/**
 	 * Go.
 	 */
