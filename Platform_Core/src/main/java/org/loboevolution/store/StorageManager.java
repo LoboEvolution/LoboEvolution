@@ -25,7 +25,6 @@ package org.loboevolution.store;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.sql.Connection;
@@ -107,6 +106,9 @@ public class StorageManager implements Runnable, ColorCommon {
 	
 	/** The Constant LOGIN. */
 	private static final String LOGIN = "CREATE TABLE INPUT (name text, value text)";
+	
+	/** The Constant AUTHENTICATION. */
+	private static final String AUTHENTICATION = "CREATE TABLE AUTHENTICATION (name text, baseUrl text)";
 	
 	private static final StorageManager instance = new StorageManager();
 
@@ -263,15 +265,6 @@ public class StorageManager implements Runnable, ColorCommon {
 		return store;
 	}
 
-	public void saveSettings(String name, Serializable classLoader) throws IOException {
-		// TODO
-	}
-
-	public Serializable retrieveSettings(String name, ClassLoader classLoader) throws IOException {
-		return null;
-		// TODO
-	}
-
 	public void createDatabase() {
 	
 		File f = new File(SQLiteCommon.getDirectory());
@@ -291,6 +284,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(NETWORK);
 				createTable(SIZE);
 				createTable(LOGIN);
+				createTable(AUTHENTICATION);
 				populateColorTable();
 				populateFontTable();
 				populateFontSizeTable();

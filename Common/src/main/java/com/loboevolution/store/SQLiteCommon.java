@@ -62,6 +62,8 @@ public class SQLiteCommon {
 	
 	public static final String INPUT = "SELECT value from INPUT where (name like ?) ";
 	
+	public static final String AUTHENTICATION = "SELECT name from AUTHENTICATION where (baseUrl like ?) ";
+	
 	public static final String INSERT_COOKIES = "INSERT INTO COOKIE (cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly) VALUES(?,?,?,?,?,?,?,?)";
 
 	public static final String INSERT_CONNECTIONS = "INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)";
@@ -77,6 +79,8 @@ public class SQLiteCommon {
 	public static final String INSERT_HOST = "INSERT INTO HOST (baseUrl) VALUES(?)";
 	
 	public static final String INSERT_INPUT= "INSERT INTO INPUT (name, value) VALUES(?,?)";
+	
+	public static final String INSERT_AUTH = "INSERT INTO AUTHENTICATION (name, baseUrl) VALUES(?,?)";
 	
 	public static final String INSERT_COLOR = "INSERT INTO COLOR (name, value) VALUES(?,?)";
 	

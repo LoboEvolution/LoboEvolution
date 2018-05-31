@@ -40,17 +40,12 @@ public class AuthenticatorImpl extends Authenticator {
 	/** The connection settings. */
 	private final ConnectionSettings connectionSettings;
 
-	/** The associated settings. */
-	private final AssociatedSettings associatedSettings;
-
 	/**
 	 * Instantiates a new authenticator impl.
 	 */
 	public AuthenticatorImpl() {
 		super();
-		// This is one way to avoid potential security exceptions.
 		this.connectionSettings = ConnectionSettings.getConnection();
-		this.associatedSettings = AssociatedSettings.getInstance();
 	}
 
 	/*
@@ -77,7 +72,7 @@ public class AuthenticatorImpl extends Authenticator {
 			}
 		}
 
-		AssociatedSettings settings = this.associatedSettings;
+		AssociatedSettings settings = new AssociatedSettings();
 		String userName = settings.getUserNameForHost(this.getRequestingHost());
 
 		Frame frame = GUITasks.getTopFrame();
@@ -92,8 +87,7 @@ public class AuthenticatorImpl extends Authenticator {
 		dialog.setVisible(true);
 		PasswordAuthentication pa = dialog.getAuthentication();
 		if (pa != null) {
-			settings.setUserNameForHost(this.getRequestingHost(), pa.getUserName());
-			settings.save();
+			settings.saveAuth(this.getRequestingHost(), pa.getUserName());
 		}
 		return pa;
 	}

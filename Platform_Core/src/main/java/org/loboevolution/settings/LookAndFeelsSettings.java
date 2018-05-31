@@ -36,9 +36,6 @@ public class LookAndFeelsSettings {
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(LookAndFeelsSettings.class);
 	
-	public LookAndFeelsSettings() {
-	}	
-
 	/**
 	 * Insert a new row into the look_and_feel table
 	 *

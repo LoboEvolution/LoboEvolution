@@ -172,10 +172,6 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		}
 	}
 	
-	
-	
-	
-
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
