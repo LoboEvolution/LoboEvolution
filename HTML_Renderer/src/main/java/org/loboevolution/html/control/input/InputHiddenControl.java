@@ -18,13 +18,12 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Dimension;
 
 import javax.swing.text.JTextComponent;
 
-import org.loboevolution.html.dombl.JTextFieldImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 
 /**
@@ -40,8 +39,8 @@ public class InputHiddenControl extends BaseInputTextControl {
 	}
 
 	@Override
-	protected JTextComponent createTextField() {
-		JTextFieldImpl hidden = new JTextFieldImpl();
+	protected JAutoTextField createTextField() {
+		JAutoTextField hidden = new JAutoTextField();
 		hidden.setVisible(false);
 		return hidden;
 	}

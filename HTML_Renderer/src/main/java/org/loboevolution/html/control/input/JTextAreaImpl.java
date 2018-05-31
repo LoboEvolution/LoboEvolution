@@ -18,25 +18,23 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.dombl;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyListener;
 
-import javax.swing.JTextField;
-import javax.swing.border.Border;
+import javax.swing.JTextArea;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 import org.loboevolution.util.Strings;
 
 /**
- * The Class JTextFieldImpl.
+ * The Class JTextAreaImpl.
  */
-public class JTextFieldImpl extends JTextField {
+public class JTextAreaImpl extends JTextArea {
 
 	/*
 	 * Class from
@@ -52,32 +50,20 @@ public class JTextFieldImpl extends JTextField {
 	/** The original foreground. */
 	private Color originalForeground;
 
-	/** Grey by default*. */
+	/*
+	 * Grey by default*
+	 */
+	/** The placeholder foreground. */
 	private Color placeholderForeground = new Color(160, 160, 160);
 
 	/** The text written in. */
 	private boolean textWrittenIn;
 
-	/**
-	 * Instantiates a new j text field impl.
-	 */
-	public JTextFieldImpl() {
-	}
-
-	/**
-	 * You can insert all constructors. I inserted only this one.*
-	 *
-	 * @param columns
-	 *            the columns
-	 */
-	public JTextFieldImpl(int columns) {
-		super(columns);
-	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see javax.swing.JTextField#setFont(java.awt.Font)
+	 * @see javax.swing.JTextArea#setFont(java.awt.Font)
 	 */
 	@Override
 	public void setFont(Font f) {
@@ -100,25 +86,20 @@ public class JTextFieldImpl extends JTextField {
 		}
 	}
 
-	@Override
-	public void setBorder(Border border) {
-		super.setBorder(border);
-	}
-
 	/**
-	 * Gets the grey by default*.
+	 * Gets the placeholder foreground.
 	 *
-	 * @return the grey by default*
+	 * @return the placeholder foreground
 	 */
 	public Color getPlaceholderForeground() {
 		return placeholderForeground;
 	}
 
 	/**
-	 * Sets the grey by default*.
+	 * Sets the placeholder foreground.
 	 *
 	 * @param placeholderForeground
-	 *            the new grey by default*
+	 *            the new placeholder foreground
 	 */
 	public void setPlaceholderForeground(Color placeholderForeground) {
 		this.placeholderForeground = placeholderForeground;
@@ -197,11 +178,6 @@ public class JTextFieldImpl extends JTextField {
 
 		});
 
-	}
-
-	@Override
-	public synchronized void addKeyListener(KeyListener l) {
-		super.addKeyListener(null);
 	}
 
 	/**

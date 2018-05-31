@@ -28,9 +28,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.loboevolution.html.FormInput;
+import org.loboevolution.html.control.input.InputContext;
 import org.loboevolution.html.dombl.ImageEvent;
 import org.loboevolution.html.dombl.ImageListener;
-import org.loboevolution.html.dombl.InputContext;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLFormElement;
@@ -250,6 +250,11 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	public void setAlt(String alt) {
 		this.setAttribute(ALT, alt);
 	}
+	
+	public boolean getAutocomplete() {
+		String autocomplete = this.getAttribute(AUTOCOMPLETE);
+		return "on".equalsIgnoreCase(autocomplete);
+	}
 
 	/**
 	 * Gets the name.
@@ -257,7 +262,6 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @return the name
 	 */
 	public String getName() {
-		// TODO: Should this return value of "id"?
 		return this.getAttribute(NAME);
 	}
 
@@ -340,6 +344,20 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		} else {
 			this.deferredDisabled = Boolean.valueOf(disabled);
 		}
+	}
+	
+	/**
+	 * Gets input type in lowercase.
+	 *
+	 * @return the type
+	 */
+	public String getType() {
+		String type = this.getAttribute(TYPE);
+		return type == null ? null : type.toLowerCase();
+	}
+
+	public void setType(String type) {
+		this.setAttribute(TYPE, type);
 	}
 
 	/**

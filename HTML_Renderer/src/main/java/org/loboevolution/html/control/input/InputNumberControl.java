@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -28,7 +28,6 @@ import java.awt.event.KeyListener;
 import javax.swing.BorderFactory;
 import javax.swing.text.JTextComponent;
 
-import org.loboevolution.html.dombl.JTextFieldImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.util.Strings;
 
@@ -64,8 +63,8 @@ public class InputNumberControl extends BaseInputTextControl {
 	}
 
 	@Override
-	protected JTextComponent createTextField() {
-		return new JTextFieldImpl();
+	protected JAutoTextField createTextField() {
+		return new JAutoTextField();
 	}
 
 	private KeyListener addKeyListener() {

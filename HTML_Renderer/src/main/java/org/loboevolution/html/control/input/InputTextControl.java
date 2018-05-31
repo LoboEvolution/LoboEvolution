@@ -18,22 +18,20 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * 
- */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
-import javax.swing.JPasswordField;
-import javax.swing.text.JTextComponent;
 
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
@@ -41,53 +39,64 @@ import org.loboevolution.util.Strings;
 
 
 /**
- * The Class InputPasswordControl.
+ * The Class InputTextControl.
  */
-public class InputPasswordControl extends BaseInputTextControl {
+public class InputTextControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The str pattern. */
-	private String strPattern;
+	private String strPattern = "";
 
 	/**
-	 * Instantiates a new input password control.
+	 * Instantiates a new input text control.
 	 *
 	 * @param modelNode
 	 *            the model node
 	 */
-	public InputPasswordControl(final HTMLBaseInputElement modelNode) {
+	public InputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		JPasswordField pwd = (JPasswordField) this.widget;
+		JAutoTextField text = (JAutoTextField) this.widget;
 
 		if (modelNode.getTitle() != null) {
-			pwd.setToolTipText(modelNode.getTitle());
+			text.setToolTipText(modelNode.getTitle());
 		}
 
-		pwd.setVisible(modelNode.getHidden());
-		pwd.applyComponentOrientation(direction(modelNode.getDir()));
-		pwd.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
-		pwd.setEnabled(!modelNode.getDisabled());
+		text.setVisible(modelNode.getHidden());
+		text.applyComponentOrientation(direction(modelNode.getDir()));
+		text.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		text.setEnabled(!modelNode.getDisabled());
+		text.setPlaceholder(modelNode.getPlaceholder());
+		text.setSelectionColor(Color.BLUE);
 		strPattern = modelNode.getAttribute(PATTERN);
+
 		if (!match(modelNode.getAttribute(VALUE), strPattern)) {
-			pwd.setBorder(BorderFactory.createLineBorder(Color.RED));
+			text.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
-			pwd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			text.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
-		pwd.addActionListener(event -> GuiMouseImpl.getInstance().onEnterPressed(modelNode, null));
-		pwd.addKeyListener(addKeyListener());
+
+		text.addActionListener(event -> GuiMouseImpl.getInstance().onEnterPressed(modelNode, null));
+		text.addKeyListener(addKeyListener());
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
-	 * @see org.loboevolution.html.render.InputTextControl#createTextField(String
-	 * )
+	 * 
+	 * @see
+	 * org.loboevolution.html.render.BaseInputTextControl#createTextField(java.
+	 * lang .String)
 	 */
 	@Override
-	protected JTextComponent createTextField() {
-		return new JPasswordField();
+	protected JAutoTextField createTextField() {
+		List<String> list = new ArrayList<String>(Arrays.asList("Austria", "Croatia", "France", "Italy"));
+		return new JAutoTextField(list);
+	}
+
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
 	}
 
 	/**
@@ -113,13 +122,8 @@ public class InputPasswordControl extends BaseInputTextControl {
 			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
-				JPasswordField url = (JPasswordField) keyEvent.getSource();
-				String srtPwd = "";
-				for (int i = 0; i < url.getPassword().length; i++) {
-					srtPwd += url.getPassword()[i];
-				}
-
-				if (!match(srtPwd, strPattern)) {
+				JTextFieldImpl url = (JTextFieldImpl) keyEvent.getSource();
+				if (!match(url.getText(), strPattern)) {
 					url.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
 					url.setBorder(BorderFactory.createLineBorder(Color.BLACK));

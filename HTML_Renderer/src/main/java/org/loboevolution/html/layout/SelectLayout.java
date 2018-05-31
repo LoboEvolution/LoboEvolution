@@ -20,9 +20,9 @@
  */
 package org.loboevolution.html.layout;
 
-import org.loboevolution.html.control.BaseInputControl;
-import org.loboevolution.html.control.InputSelectControl;
 import org.loboevolution.html.control.RUIControl;
+import org.loboevolution.html.control.input.BaseInputControl;
+import org.loboevolution.html.control.input.InputSelectControl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RElement;

@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
@@ -30,46 +30,40 @@ import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.text.JTextComponent;
 
-import org.loboevolution.html.dombl.JTextFieldImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.util.Strings;
 
 /**
- * The Class InputUrlControl.
+ * The Class InputEmailControl.
  */
-public class InputUrlControl extends BaseInputTextControl {
+public class InputEmailControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The Constant URL_PATTERN. */
-	private static final String URL_PATTERN = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+	/** The Constant EMAIL_PATTERN. */
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	/** The str pattern. */
 	private String strPattern;
 
-	/**
-	 * Instantiates a new input text control.
-	 *
-	 * @param modelNode
-	 *            the model node
-	 */
-	public InputUrlControl(final HTMLBaseInputElement modelNode) {
+	public InputEmailControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		JTextFieldImpl url = (JTextFieldImpl) this.widget;
+		JTextFieldImpl email = (JTextFieldImpl) this.widget;
 		String value = modelNode.getAttribute(VALUE);
 		strPattern = modelNode.getAttribute(PATTERN);
-		if (!isUrl(value)) {
-			url.setBorder(BorderFactory.createLineBorder(Color.RED));
+		if (!isEmail(value)) {
+			email.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
-			url.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			email.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
-		url.addKeyListener(addKeyListener());
+		email.addKeyListener(addKeyListener());
 	}
 
 	@Override
-	protected JTextComponent createTextField() {
-		return new JTextFieldImpl();
+	protected JAutoTextField createTextField() {
+		return new JAutoTextField();
 	}
 
 	private KeyListener addKeyListener() {
@@ -77,20 +71,21 @@ public class InputUrlControl extends BaseInputTextControl {
 			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
-				JTextFieldImpl url = (JTextFieldImpl) keyEvent.getSource();
-				if (!isUrl(url.getText())) {
-					url.setBorder(BorderFactory.createLineBorder(Color.RED));
+				JTextFieldImpl email = (JTextFieldImpl) keyEvent.getSource();
+				if (!isEmail(email.getText())) {
+					email.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
-					url.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+					email.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 				}
 			}
 		};
 		return keyAdapter;
 	}
 
-	private boolean isUrl(String keyCode) {
+	private boolean isEmail(String keyCode) {
 		if (!Strings.isBlank(keyCode)) {
-			Pattern pattern = Pattern.compile(!Strings.isBlank(strPattern) ? strPattern : URL_PATTERN);
+			Pattern pattern = Pattern
+					.compile(!Strings.isBlank(strPattern) ? strPattern : EMAIL_PATTERN);
 			Matcher matcher = pattern.matcher(keyCode);
 			return matcher.matches();
 		} else {

@@ -18,7 +18,10 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.control;
+/*
+ * 
+ */
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -29,73 +32,60 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
+import javax.swing.JPasswordField;
 import javax.swing.text.JTextComponent;
 
-import org.loboevolution.html.dombl.JTextFieldImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.Strings;
 
 
 /**
- * The Class InputTextControl.
+ * The Class InputPasswordControl.
  */
-public class InputTextControl extends BaseInputTextControl {
+public class InputPasswordControl extends BaseInputTextControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The str pattern. */
-	private String strPattern = "";
+	private String strPattern;
 
 	/**
-	 * Instantiates a new input text control.
+	 * Instantiates a new input password control.
 	 *
 	 * @param modelNode
 	 *            the model node
 	 */
-	public InputTextControl(final HTMLBaseInputElement modelNode) {
+	public InputPasswordControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		JTextFieldImpl text = (JTextFieldImpl) this.widget;
+		JTextComponent pwd = (JTextComponent) this.widget;
 
 		if (modelNode.getTitle() != null) {
-			text.setToolTipText(modelNode.getTitle());
+			pwd.setToolTipText(modelNode.getTitle());
 		}
 
-		text.setVisible(modelNode.getHidden());
-		text.applyComponentOrientation(direction(modelNode.getDir()));
-		text.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
-		text.setEnabled(!modelNode.getDisabled());
-		text.setPlaceholder(modelNode.getPlaceholder());
-		text.setSelectionColor(Color.BLUE);
+		pwd.setVisible(modelNode.getHidden());
+		pwd.applyComponentOrientation(direction(modelNode.getDir()));
+		pwd.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		pwd.setEnabled(!modelNode.getDisabled());
 		strPattern = modelNode.getAttribute(PATTERN);
-
 		if (!match(modelNode.getAttribute(VALUE), strPattern)) {
-			text.setBorder(BorderFactory.createLineBorder(Color.RED));
+			pwd.setBorder(BorderFactory.createLineBorder(Color.RED));
 		} else {
-			text.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+			pwd.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		}
-
-		text.addActionListener(event -> GuiMouseImpl.getInstance().onEnterPressed(modelNode, null));
-		text.addKeyListener(addKeyListener());
+		//pwd.addActionListener(event -> GuiMouseImpl.getInstance().onEnterPressed(modelNode, null));
+		pwd.addKeyListener(addKeyListener());
 	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.render.BaseInputTextControl#createTextField(java.
-	 * lang .String)
-	 */
+	
 	@Override
-	protected JTextComponent createTextField() {
-		return new JTextFieldImpl();
+	protected JAutoTextField createTextField() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public void reset(int availWidth, int availHeight) {
-		super.reset(availWidth, availHeight);
-	}
+	
 
 	/**
 	 * Direction.
@@ -120,8 +110,13 @@ public class InputTextControl extends BaseInputTextControl {
 			@Override
 			public void keyPressed(KeyEvent keyEvent) {
 
-				JTextFieldImpl url = (JTextFieldImpl) keyEvent.getSource();
-				if (!match(url.getText(), strPattern)) {
+				JPasswordField url = (JPasswordField) keyEvent.getSource();
+				String srtPwd = "";
+				for (int i = 0; i < url.getPassword().length; i++) {
+					srtPwd += url.getPassword()[i];
+				}
+
+				if (!match(srtPwd, strPattern)) {
 					url.setBorder(BorderFactory.createLineBorder(Color.RED));
 				} else {
 					url.setBorder(BorderFactory.createLineBorder(Color.BLACK));

@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -27,6 +27,7 @@ import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 
+import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.util.gui.WrapperLayout;
 

@@ -24,7 +24,7 @@
 package org.loboevolution.html.domimpl;
 
 import org.loboevolution.html.FormInput;
-import org.loboevolution.html.dombl.InputContext;
+import org.loboevolution.html.control.input.InputContext;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.w3c.html.HTMLTextAreaElement;
 

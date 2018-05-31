@@ -21,22 +21,22 @@
 package org.loboevolution.html.layout;
 
 
-import org.loboevolution.html.control.BaseInputControl;
-import org.loboevolution.html.control.InputButtonControl;
-import org.loboevolution.html.control.InputCheckboxControl;
-import org.loboevolution.html.control.InputColorPickerControl;
-import org.loboevolution.html.control.InputDatePickerControl;
-import org.loboevolution.html.control.InputEmailControl;
-import org.loboevolution.html.control.InputFileControl;
-import org.loboevolution.html.control.InputHiddenControl;
-import org.loboevolution.html.control.InputImageControl;
-import org.loboevolution.html.control.InputNumberControl;
-import org.loboevolution.html.control.InputPasswordControl;
-import org.loboevolution.html.control.InputPhoneControl;
-import org.loboevolution.html.control.InputRadioControl;
-import org.loboevolution.html.control.InputTextControl;
-import org.loboevolution.html.control.InputUrlControl;
 import org.loboevolution.html.control.RUIControl;
+import org.loboevolution.html.control.input.BaseInputControl;
+import org.loboevolution.html.control.input.InputButtonControl;
+import org.loboevolution.html.control.input.InputCheckboxControl;
+import org.loboevolution.html.control.input.InputColorPickerControl;
+import org.loboevolution.html.control.input.InputDatePickerControl;
+import org.loboevolution.html.control.input.InputEmailControl;
+import org.loboevolution.html.control.input.InputFileControl;
+import org.loboevolution.html.control.input.InputHiddenControl;
+import org.loboevolution.html.control.input.InputImageControl;
+import org.loboevolution.html.control.input.InputNumberControl;
+import org.loboevolution.html.control.input.InputPasswordControl;
+import org.loboevolution.html.control.input.InputPhoneControl;
+import org.loboevolution.html.control.input.InputRadioControl;
+import org.loboevolution.html.control.input.InputTextControl;
+import org.loboevolution.html.control.input.InputUrlControl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RElement;

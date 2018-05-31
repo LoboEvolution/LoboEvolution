@@ -24,7 +24,7 @@ import java.io.File;
 
 
 import org.loboevolution.html.FormInput;
-import org.loboevolution.html.dombl.InputContext;
+import org.loboevolution.html.control.input.InputContext;
 import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.HTMLInputElement;
 
@@ -61,7 +61,7 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	private static final String FILE = "file";
 	
 	/** The default checked. */
-	private static boolean defaultChecked;
+	private boolean defaultChecked;
 
 	/**
 	 * Instantiates a new HTML input element impl.
@@ -168,27 +168,6 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 		if (ic != null) {
 			ic.setControlSize(size);
 		}
-	}
-
-	/**
-	 * Gets input type in lowercase.
-	 *
-	 * @return the type
-	 */
-	@Override
-	public String getType() {
-		String type = this.getAttribute(TYPE);
-		return type == null ? null : type.toLowerCase();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.w3c.html.HTMLInputElement#setType(java.lang.String)
-	 */
-	@Override
-	public void setType(String type) {
-		this.setAttribute(TYPE, type);
 	}
 
 	/*
@@ -332,17 +311,6 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 				return null;
 			}
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.w3c.html.HTMLInputElement#getAutocomplete()
-	 */
-	@Override
-	public boolean getAutocomplete() {
-		String autocomplete = this.getAttribute(AUTOCOMPLETE);
-		return MUTED.equalsIgnoreCase(autocomplete);
 	}
 
 	/*

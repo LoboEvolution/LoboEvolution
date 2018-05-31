@@ -21,12 +21,13 @@
 /*
  * 
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.ComponentOrientation;
 
 import javax.swing.JButton;
 
+import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;

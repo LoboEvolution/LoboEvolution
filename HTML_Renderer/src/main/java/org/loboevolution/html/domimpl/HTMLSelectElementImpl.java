@@ -23,7 +23,7 @@ package org.loboevolution.html.domimpl;
 import java.util.ArrayList;
 
 import org.loboevolution.html.FormInput;
-import org.loboevolution.html.dombl.InputContext;
+import org.loboevolution.html.control.input.InputContext;
 import org.loboevolution.w3c.html.HTMLCollection;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLOptionsCollection;

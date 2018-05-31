@@ -13,83 +13,60 @@
     General License for more details.
 
     You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.  
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
     
+
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.control;
+/*
+ * 
+ */
+package org.loboevolution.html.control.input;
 
 import java.awt.ComponentOrientation;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
 
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
-import org.loboevolution.html.domimpl.HTMLElementImpl;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
 
 /**
- * The Class InputRadioControl.
+ * The Class InputCheckboxControl.
  */
-public class InputRadioControl extends BaseInputControl {
+public class InputCheckboxControl extends BaseInputControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The widget. */
-	private final JRadioButton widget;
-	
-	/** The button group. */
-	private ButtonGroup buttonGroup;
+	private final JCheckBox widget;
 
 	/**
-	 * Instantiates a new input radio control.
+	 * Instantiates a new input checkbox control.
 	 *
 	 * @param modelNode
 	 *            the model node
 	 */
-	public InputRadioControl(HTMLBaseInputElement modelNode) {
+	public InputCheckboxControl(HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		this.setLayout(WrapperLayout.getInstance());
-		JRadioButton radio = new JRadioButton();
-		radio.setOpaque(false);
+		JCheckBox checkBox = new JCheckBox();
+		checkBox.setOpaque(false);
+		this.widget = checkBox;
+
 		if (modelNode.getTitle() != null) {
-			radio.setToolTipText(modelNode.getTitle());
+			checkBox.setToolTipText(modelNode.getTitle());
 		}
-		radio.setVisible(modelNode.getHidden());
-		radio.applyComponentOrientation(direction(modelNode.getDir()));
-		radio.setEnabled(!modelNode.getDisabled());
-		radio.setSelected(modelNode.getChecked());
-		this.widget = radio;
-
-		// Note: Value attribute cannot be set in reset() method.
-		// Otherwise, layout revalidation causes typed values to
-		// be lost (including revalidation due to hover.)
-
-		HTMLElementImpl controlElement = this.controlElement;
-		String name = controlElement.getAttribute(NAME);
-		ButtonGroup prevGroup = this.buttonGroup;
-		if (prevGroup != null) {
-			prevGroup.remove(radio);
-		}
-		if (name != null) {
-			String key = "cobra.radio.group." + name;
-			ButtonGroup group = (ButtonGroup) controlElement.getDocumentItem(key);
-			if (group == null) {
-				group = new ButtonGroup();
-				controlElement.setDocumentItem(key, group);
-			}
-			group.add(radio);
-			this.buttonGroup = group;
-		} else {
-			this.buttonGroup = null;
-		}
-		radio.setSelected(controlElement.getAttributeAsBoolean("checked"));
-		this.add(radio);
-
+		checkBox.setVisible(modelNode.getHidden());
+		checkBox.applyComponentOrientation(direction(modelNode.getDir()));
+		checkBox.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
+		checkBox.setEnabled(!modelNode.getDisabled());
+		checkBox.setSelected(modelNode.getChecked());
 		widget.addActionListener(
-				event -> GuiMouseImpl.getInstance().onPressed(InputRadioControl.this.controlElement, null, 0, 0));
+				event -> GuiMouseImpl.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0));
+
+		this.add(checkBox);
 	}
 
 	/*

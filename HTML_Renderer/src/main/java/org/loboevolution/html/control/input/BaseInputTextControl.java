@@ -18,30 +18,35 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-/*
- * 
- */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.PlainDocument;
 
+import org.apache.logging.log4j.util.Strings;
 import org.loboevolution.font.LAFSettings;
+import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.domimpl.DOMElementImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.gui.WrapperLayout;
+
+import com.loboevolution.store.SQLiteCommon;
 
 /**
  * The Class BaseInputTextControl.
@@ -55,10 +60,10 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	private int maxLength = -1;
 
 	/** The widget. */
-	protected final JTextComponent widget;
+	protected JAutoTextField widget;
 
 	/** Creates the text field. */
-	protected abstract JTextComponent createTextField();
+	protected abstract JAutoTextField createTextField();
 
 	/**
 	 * Instantiates a new base input text control.
@@ -70,16 +75,25 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 		super(modelNode);
 		this.widget = createAndShowGUI(modelNode);
 	}
-	private JTextComponent createAndShowGUI(final HTMLBaseInputElement modelNode) {
+	
+	private JAutoTextField createAndShowGUI(final HTMLBaseInputElement modelNode) {
 		
 		this.setLayout(WrapperLayout.getInstance());
-		JTextComponent widget = this.createTextField();
+		boolean autocomplete = modelNode.getAutocomplete();
+		String id = modelNode.getId();
+		String name = modelNode.getName();
+		String type = modelNode.getType();
+		
+		List<String> list = autocomplete(id, name, type);
+		widget = new JAutoTextField(list);
 		Font font = widget.getFont();
 		widget.setFont(font.deriveFont(new LAFSettings().getIstance().getFontSize()));
-		widget.setDocument(new LimitedDocument());
 		widget.setSelectionColor(Color.BLUE);
 		DOMElementImpl element = this.controlElement;
-		widget.setText(element.getAttribute(VALUE));
+		if (!Strings.isBlank(element.getAttribute(VALUE))) {
+			widget.setText(element.getAttribute(VALUE));
+		}
+		
 		widget.addKeyListener(new KeyAdapter() {
 
 			@Override
@@ -91,12 +105,76 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 			@Override
 			public void keyReleased(KeyEvent event) {
 				GuiMouseImpl.getInstance().onKeyUp(modelNode, event);
-
 			}
 		});
+		
+		widget.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent event) {
+				if (autocomplete && !"password".equalsIgnoreCase(type)) {
+					insertLogin(id, name, type, widget.getText());
+				}
+			}
+		});
+		
 		this.add(widget);
 		return widget;
 	}
+	
+	private List<String> autocomplete(String id, String name, String type) {
+        List<String> list = autocomplete(id);
+        if(list.size() > 0 ) return list;
+        list = autocomplete(name);
+        if(list.size() > 0 ) return list;
+        list = autocomplete(type);
+        if(list.size() > 0 ) return list;
+        return new ArrayList<String>();
+    }
+	
+	private List<String> autocomplete(String value) {
+        List<String> autoList = new ArrayList<String>();
+    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
+			pstmt.setString(1, "%"+value+"%");
+			ResultSet rs = pstmt.executeQuery();
+            while (rs != null && rs.next()) {
+            	autoList.add(rs.getString(1));
+            }
+        } catch (Exception e) {
+            logger.error(e);
+        }
+        return autoList;
+    }	
+	
+	
+	/**
+	 * Insert a new row into the search selected table
+	 *
+	 * @param search
+	 */
+	private void insertLogin(String id, String name, String type, String value) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
+			
+			String nameValue = type; 
+			
+			if(!Strings.isBlank(id)) {
+				nameValue = id;
+			} else if(!Strings.isBlank(name)) {
+				nameValue = name;
+			}
+			
+			pstmt.setString(1, nameValue);
+			pstmt.setString(2, value);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+	
+	
+	
+	
 
 	@Override
 	public void reset(int availWidth, int availHeight) {
@@ -173,7 +251,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	@Override
 	public Dimension getPreferredSize() {
 		int size = this.size;
-		JTextComponent widget = this.widget;
+		JAutoTextField widget = this.widget;
 		FontMetrics fm = widget.getFontMetrics(widget.getFont());
 		Insets insets = widget.getInsets();
 		int pw;
@@ -190,40 +268,5 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	@Override
 	public void resetInput() {
 		this.widget.setText("");
-	}
-
-	/**
-	 * Implements maxlength functionality.
-	 */
-	private class LimitedDocument extends PlainDocument {
-
-		/** The Constant serialVersionUID. */
-		private static final long serialVersionUID = 1L;
-
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see javax.swing.text.PlainDocument#insertString(int,
-		 * java.lang.String, javax.swing.text.AttributeSet)
-		 */
-		@Override
-		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			int max = BaseInputTextControl.this.maxLength;
-			if (max != -1) {
-				int docLength = this.getLength();
-				if (docLength >= max) {
-					return;
-				}
-				int strLen = str.length();
-				if (docLength + strLen > max) {
-					String shorterStr = str.substring(0, max - docLength);
-					super.insertString(offs, shorterStr, a);
-				} else {
-					super.insertString(offs, str, a);
-				}
-			} else {
-				super.insertString(offs, str, a);
-			}
-		}
 	}
 }

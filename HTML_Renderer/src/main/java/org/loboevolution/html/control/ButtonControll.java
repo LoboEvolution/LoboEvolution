@@ -20,6 +20,7 @@
  */
 package org.loboevolution.html.control;
 
+import org.loboevolution.html.control.input.InputButtonControl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 
 /**

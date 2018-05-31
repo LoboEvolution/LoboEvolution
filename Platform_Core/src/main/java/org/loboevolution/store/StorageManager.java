@@ -105,6 +105,9 @@ public class StorageManager implements Runnable, ColorCommon {
 	/** The Constant NETWORK. */
 	private static final String NETWORK = "CREATE TABLE NETWORK (js integer, css integer, cookie integer, cache integer, navigation integer)";
 	
+	/** The Constant LOGIN. */
+	private static final String LOGIN = "CREATE TABLE INPUT (name text, value text)";
+	
 	private static final StorageManager instance = new StorageManager();
 
 	/** The store directory. */
@@ -287,6 +290,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(USER_AGENT);
 				createTable(NETWORK);
 				createTable(SIZE);
+				createTable(LOGIN);
 				populateColorTable();
 				populateFontTable();
 				populateFontSizeTable();

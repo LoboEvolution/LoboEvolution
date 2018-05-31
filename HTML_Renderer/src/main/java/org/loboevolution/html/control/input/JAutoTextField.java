@@ -23,6 +23,8 @@ package org.loboevolution.html.control.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.util.Strings;
+
 public class JAutoTextField extends JTextFieldImpl {
 
 	private static final long serialVersionUID = 1L;
@@ -71,17 +73,21 @@ public class JAutoTextField extends JTextFieldImpl {
 	}
 
 	public String getMatch(String s) {
-		for (int i = 0; i < dataList.size(); i++) {
-			String s1 = dataList.get(i).toString();
+		String match = null;
+		for (String s1 : dataList) {
 			if (s1 != null) {
 				if (!isCaseSensitive && s1.toLowerCase().startsWith(s.toLowerCase()))
-					return s1;
-				if (isCaseSensitive && s1.startsWith(s))
-					return s1;
+					match = s1;
+				else if (isCaseSensitive && s1.startsWith(s))
+					match = s1;
 			}
 		}
+		
+		if(Strings.isEmpty(match)) {
+			match = s;
+		}
 
-		return null;
+		return match;
 	}
 
 	public void replaceSelection(String s) {

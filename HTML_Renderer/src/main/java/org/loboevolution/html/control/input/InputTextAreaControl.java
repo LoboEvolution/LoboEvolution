@@ -21,7 +21,7 @@
 /*
  * 
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Color;
 import java.awt.ComponentOrientation;
@@ -35,7 +35,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.JScrollPane;
 import javax.swing.text.JTextComponent;
 
-import org.loboevolution.html.dombl.JTextAreaImpl;
 import org.loboevolution.html.domimpl.DOMElementImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;

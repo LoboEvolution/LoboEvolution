@@ -22,7 +22,7 @@ package org.loboevolution.html.domimpl;
 
 import java.util.regex.Pattern;
 
-import org.loboevolution.html.dombl.InputContext;
+import org.loboevolution.html.control.input.InputContext;
 import org.loboevolution.util.Strings;
 import org.loboevolution.w3c.html.ValidityState;
 

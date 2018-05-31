@@ -21,12 +21,12 @@
 /*
  * 
  */
-package org.loboevolution.html.control;
+package org.loboevolution.html.control.input;
 
 import java.awt.Graphics;
 import java.io.File;
 
-import org.loboevolution.html.dombl.InputContext;
+import org.loboevolution.html.control.BaseControl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
