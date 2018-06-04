@@ -173,8 +173,8 @@ public class CookieStore {
 	 * @param value
 	 *            the value
 	 */
-	private static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge, boolean secure, boolean httponly) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge, boolean secure, boolean httponly) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COOKIES)) {
 			SimpleDateFormat dateFormatter = new SimpleDateFormat(PATTERN);
 			pstmt.setString(1, name);
@@ -203,7 +203,7 @@ public class CookieStore {
 	public static List<Cookie> getCookies(String hostName, String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
 		
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
 			pstmt.setString(1, hostName);
 			pstmt.setString(2, path);

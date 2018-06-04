@@ -48,7 +48,7 @@ public class ToolsSettings implements Serializable {
 
 	public List<SearchEngine> getSearchEngines() {
 		List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(SQLiteCommon.SEARCH2);
 			while (rs != null && rs.next()) {
@@ -88,7 +88,7 @@ public class ToolsSettings implements Serializable {
 	}
 
 	public void deleteSearchEngine() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -97,7 +97,7 @@ public class ToolsSettings implements Serializable {
 	}
 
 	public void insertSearch(String name, String description, String baseUrl, String queryParameter, boolean selected) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SEARCH)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, description);
@@ -112,7 +112,7 @@ public class ToolsSettings implements Serializable {
 	}
 
 	public void unselectedSearch() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.UPDATE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -121,7 +121,7 @@ public class ToolsSettings implements Serializable {
 	}
 
 	public void selectedSearch(String name) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.UPDATE_SEARCH2)) {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();

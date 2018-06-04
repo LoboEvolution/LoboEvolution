@@ -42,7 +42,7 @@ public class LookAndFeelsSettings {
 	 * @param laf
 	 */
 	public void insertLAF(LAFSettings laf) {
-		try (Connection conn = connect(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_LAF)) {
 
 			pstmt.setInt(1, laf.isAcryl() ? 1 : 0);
@@ -76,7 +76,7 @@ public class LookAndFeelsSettings {
 	}
 	
 	public void deleteLAF() {
-		try (Connection conn = connect(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LAF)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class LookAndFeelsSettings {
 	 * @param search
 	 */
 	public void insertFileSelected(SearchEngine search) {
-		try (Connection conn = connect(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SEARCH2)) {
 			pstmt.setString(1, search.getName());
 			pstmt.setString(2, search.getDescription());

@@ -76,7 +76,7 @@ public class GeneralSettings implements Serializable {
 	
 	public static GeneralSettings getNetwork() {
 		GeneralSettings setting = new GeneralSettings();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.NETWORK)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -94,7 +94,7 @@ public class GeneralSettings implements Serializable {
 	
 	public static GeneralSettings getUserAgent() {
 		GeneralSettings setting = new GeneralSettings();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.USER_AGENT)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -110,7 +110,7 @@ public class GeneralSettings implements Serializable {
 	
 	public static List<String> getStartupURLs() {
 		List<String> urls = new ArrayList<String>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.STARTUP)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -131,7 +131,7 @@ public class GeneralSettings implements Serializable {
 		Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		int width = -1;
 		int height = -1;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SIZE)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {
@@ -151,7 +151,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_NETWORK)) {
 			pstmt.setInt(1, js ? 1 : 0);
 			pstmt.setInt(2, css ? 1 : 0);
@@ -165,7 +165,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void insertUserAgent(String msie,String mozilla, boolean incluedeMsie) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_USER_AGENT)) {
 			pstmt.setString(1, msie);
 			pstmt.setString(2, mozilla);
@@ -177,7 +177,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void insertBounds(Rectangle rect) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SIZE)) {
 			pstmt.setInt(1, rect.width);
 			pstmt.setInt(2, rect.height);
@@ -188,7 +188,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void insertStartupUrl(String url) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_STARTUP)) {
 			pstmt.setString(1, url);
 			pstmt.executeUpdate();
@@ -198,7 +198,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void deleteNetwork() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_NETWORK)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -207,7 +207,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void deleteUserAgent() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_USER_AGENT)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -216,7 +216,7 @@ public class GeneralSettings implements Serializable {
 	}
 	
 	public static void deleteStartUpUrl() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_STARTUP)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -225,7 +225,7 @@ public class GeneralSettings implements Serializable {
 	}
 
 	public static void deleteBounds() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_SIZE)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {

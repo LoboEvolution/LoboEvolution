@@ -100,7 +100,7 @@ public class ConnectionSettings implements Serializable {
 	}
 	
 	public void deleteConnection() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -109,7 +109,7 @@ public class ConnectionSettings implements Serializable {
 	}
 	
 	public void insertConnection() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_CONNECTIONS)) {
 			pstmt.setString(1, getProxyType().name());
 			pstmt.setString(2, getUserName());
@@ -126,7 +126,7 @@ public class ConnectionSettings implements Serializable {
 	
 	public static ConnectionSettings getConnection() {
 		ConnectionSettings setting = new ConnectionSettings();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CONNECTIONS)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs != null && rs.next()) {

@@ -50,7 +50,7 @@ public class AssociatedSettings implements Serializable {
 	 */
 	public String getUserNameForHost(String hostName) {
 		String userName = "";
-    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.AUTHENTICATION)) {
 			pstmt.setString(1, "%"+hostName+"%");
 			ResultSet rs = pstmt.executeQuery();
@@ -64,7 +64,7 @@ public class AssociatedSettings implements Serializable {
     }	
 	
 	public void saveAuth(String name, String host) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_AUTH)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, host);

@@ -59,7 +59,7 @@ public class NavigationHistory implements Serializable {
 	 */
 	public static List<String[]> getFiles(String type) {
 		List<String[]> values = new ArrayList<String[]>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SEARCH)) {
 			pstmt.setString(1, type);
 			ResultSet rs = pstmt.executeQuery();
@@ -81,7 +81,7 @@ public class NavigationHistory implements Serializable {
 	 */
 	public static List<String[]> getRecentHostEntries(int maxNumItems) {
 		List<String[]> recentHostEntries = new ArrayList<String[]>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST)) {
 			pstmt.setInt(1, maxNumItems);
 			ResultSet rs = pstmt.executeQuery();
@@ -104,7 +104,7 @@ public class NavigationHistory implements Serializable {
 	 */
 	public static List<String> getRecentItems(int maxNumItems) {
 		List<String> recentHostEntries = new ArrayList<String>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST)) {
 			pstmt.setInt(1, maxNumItems);
 			ResultSet rs = pstmt.executeQuery();
@@ -131,7 +131,7 @@ public class NavigationHistory implements Serializable {
 	 */
 	public static List<String> getHeadMatchItems(String itemPrefix) {
 		List<String> recentHostEntries = new ArrayList<String>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST2)) {
 			pstmt.setString(1, "%" + itemPrefix + "%");
 			ResultSet rs = pstmt.executeQuery();
@@ -154,7 +154,7 @@ public class NavigationHistory implements Serializable {
 	 *            the item info
 	 */
 	public static void addAsRecent(URL url) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_HOST)) {
 			pstmt.setString(1,  url.toExternalForm());
 			pstmt.executeUpdate();

@@ -128,7 +128,7 @@ public class LAFSettings implements FontCommon, Serializable {
 	
 	private LAFSettings retriveFontDate() {
 		LAFSettings laf = null;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(SQLiteCommon.FONTS);
 
@@ -167,7 +167,7 @@ public class LAFSettings implements FontCommon, Serializable {
 	public static String[] getFonts(String type) {
 		List<String> fonts = new ArrayList<String>();
 		String query = "SELECT name FROM "+type;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 

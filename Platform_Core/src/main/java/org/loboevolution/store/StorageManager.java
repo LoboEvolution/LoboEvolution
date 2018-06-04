@@ -267,9 +267,9 @@ public class StorageManager implements Runnable, ColorCommon {
 
 	public void createDatabase() {
 	
-		File f = new File(SQLiteCommon.getDirectory());
+		File f = new File(SQLiteCommon.getDatabaseStore());
 		if (!f.exists()) {
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory()); Statement stmt = conn.createStatement()) {
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory()); Statement stmt = conn.createStatement()) {
 				createTable(LOOK_AND_FEEL);
 				createTable(SEARCH);
 				createTable(COLOR);
@@ -299,7 +299,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 	
 	private void createTable(String table) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory()); Statement stmt = conn.createStatement()) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory()); Statement stmt = conn.createStatement()) {
         	stmt.execute(table);
         } catch (Exception e) {
         	logger.error(e);
@@ -1015,7 +1015,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 	
 	private void insertColorTable(String name, int value) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_COLOR)) {
 			pstmt.setString(1, name);
 			pstmt.setInt(2, value);
@@ -1027,7 +1027,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	
 	private void insertFont(String name, String type) {
 		String query = "INSERT INTO "+type+" (name) VALUES(?)";
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(query)) {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();
@@ -1037,7 +1037,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 	
 	private void insertSearch(String name, String description, String baseUrl, String queryParameter, int selected, String type) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SEARCH)) {
 			pstmt.setString(1, name);
 			pstmt.setString(2, description);
@@ -1052,7 +1052,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 	
 	private void populateNetwork() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_NETWORK)) {
 			pstmt.setInt(1, 1);
 			pstmt.setInt(2, 1);
@@ -1067,7 +1067,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 
 	private void populateUserAgent() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_USER_AGENT)) {
 			pstmt.setString(1, "11.0");
 			pstmt.setString(2, "5.0");
@@ -1079,7 +1079,7 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 	
 	private void populateSize() {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_SIZE)) {
 			pstmt.setInt(1, 1600);
 			pstmt.setInt(2, 870);

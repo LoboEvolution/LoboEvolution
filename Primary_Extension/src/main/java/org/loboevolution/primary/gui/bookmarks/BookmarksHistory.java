@@ -62,7 +62,7 @@ public class BookmarksHistory implements Serializable {
 	public List<BookmarkInfo> getBookmarks(Integer num){
 		synchronized (this) {
 			List<BookmarkInfo> values = new ArrayList<BookmarkInfo>();
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory())) {
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
 				Statement stmt = conn.createStatement();
 				String query  = "SELECT name, description, baseUrl, tags FROM BOOKMARKS";
 				if(num != null) { query = query + " and rownum = " + num; }
@@ -91,7 +91,7 @@ public class BookmarksHistory implements Serializable {
 	 */
 	public BookmarkInfo getExistingInfo(String item) {
 		BookmarkInfo info = null;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.BOOKMARKS)) {
 			pstmt.setString(1, item);
 			ResultSet rs = pstmt.executeQuery();
@@ -109,7 +109,7 @@ public class BookmarksHistory implements Serializable {
 	}
 	
 	public void insertBookmark(BookmarkInfo info) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_BOOKMARKS)) {
 			pstmt.setString(1, info.getTitle());
 			pstmt.setString(2, info.getDescription());

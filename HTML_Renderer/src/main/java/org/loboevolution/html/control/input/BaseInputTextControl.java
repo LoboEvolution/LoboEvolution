@@ -133,7 +133,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	
 	private List<String> autocomplete(String value) {
         List<String> autoList = new ArrayList<String>();
-    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+    	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
 			pstmt.setString(1, "%"+value+"%");
 			ResultSet rs = pstmt.executeQuery();
@@ -153,7 +153,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	 * @param search
 	 */
 	private void insertLogin(String id, String name, String type, String value) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getSettingsDirectory());
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
 			
 			String nameValue = type; 
