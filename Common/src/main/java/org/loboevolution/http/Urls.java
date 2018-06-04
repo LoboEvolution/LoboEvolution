@@ -23,6 +23,7 @@
  */
 package org.loboevolution.http;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -422,5 +423,10 @@ public final class Urls {
 	    	logger.error(e);
 	    }
 	    return result;
+	}
+	
+	public static boolean isDirectoryExisting(String path) {
+		File f = new File(path);
+		return f.isDirectory();
 	}
 }

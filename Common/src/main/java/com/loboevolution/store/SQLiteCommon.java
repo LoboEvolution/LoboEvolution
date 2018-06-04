@@ -25,7 +25,7 @@ import java.io.File;
 public class SQLiteCommon {
 
 	/** The Constant SETTINGS_DIR. */
-	private static final String JDBC_SQLITE = "jdbc:sqlite:";
+	public static final String JDBC_SQLITE = "jdbc:sqlite:";
 
 	/** The Constant LOBO_DB. */
 	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE.sqlite";
@@ -62,7 +62,11 @@ public class SQLiteCommon {
 	
 	public static final String INPUT = "SELECT value from INPUT where (name like ?) ";
 	
-	public static final String AUTHENTICATION = "SELECT name from AUTHENTICATION where (baseUrl like ?) ";
+	public static final String AUTHENTICATION = "SELECT name from AUTHENTICATION where baseUrl like ? ";
+	
+	public static final String MOZ_COOKIES = "SELECT * from moz_cookies";
+	
+	public static final String CHROME_COOKIES = "SELECT * from cookies";
 	
 	public static final String INSERT_COOKIES = "INSERT INTO COOKIE (cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly) VALUES(?,?,?,?,?,?,?,?)";
 
@@ -120,7 +124,7 @@ public class SQLiteCommon {
 	 *
 	 * @return the settings directory
 	 */
-	public static String getSettingsDirectory() {
+	public static String getDatabaseDirectory() {
 		File homeDir = new File(System.getProperty("user.home"));
 		File storeDir = new File(homeDir, ".lobo");
 		File store = new File(storeDir, "store");
@@ -132,10 +136,103 @@ public class SQLiteCommon {
 	 *
 	 * @return the directory
 	 */
-	public static String getDirectory() {
+	public static String getDatabaseStore() {
 		File homeDir = new File(System.getProperty("user.home"));
 		File storeDir = new File(homeDir, ".lobo");
 		File store = new File(storeDir, "store");
 		return store + "\\" + LOBO_DB;
+	}
+	
+	/**
+	 * Gets the mozilla directory.
+	 *
+	 * @return the mozilla directory
+	 */
+	public static String getMozillaDirectory() {
+		
+		// pre Win7
+		String filePath = System.getProperty("user.home") + "\\Application Data\\Roaming\\Mozilla\\Firefox\\Profiles\\";
+		boolean isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		// Win 7+
+		filePath = System.getProperty("user.home") + "\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\";
+		isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		// Mac
+		filePath = System.getProperty("user.home") + "/Library/Application Support/Mozilla/Firefox/Profiles/";
+		isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+		
+		return "";
+	}
+	
+	/**
+	 * Gets the chrome directory.
+	 *
+	 * @return the chrome directory
+	 */
+	public static String getChromeDirectory() {
+		
+		// pre Win7
+		String filePath = System.getProperty("user.home") + "\\Application Data\\Google\\Chrome\\User Data\\Default\\";
+		boolean isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+		
+		// Win 7+
+		filePath = System.getProperty("user.home") + "\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\";
+		isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		// Mac
+		filePath = System.getProperty("user.home") + "/Library/Application Support/Google/Chrome/Default/";
+		isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		// Linux
+		filePath = System.getProperty("user.home") + "/.config/chromium/Default/";
+		isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		return "";
+	}
+	
+	/**
+	 * Gets the ie directory.
+	 *
+	 * @return the ie directory
+	 */
+	public static String getIEDirectory() {
+
+		// Win 7+
+		String filePath = System.getProperty("user.home") + "\\AppData\\Roaming\\Microsoft\\Windows\\Cookies\\";
+		boolean isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		// Win 8
+		filePath = System.getProperty("user.home") + "\\AppData\\Local\\Microsoft\\Windows\\INetCookies\\";
+		isDir = new File(filePath).isDirectory();
+		if (isDir) {
+			return filePath;
+		}
+
+		return "";
 	}
 }
