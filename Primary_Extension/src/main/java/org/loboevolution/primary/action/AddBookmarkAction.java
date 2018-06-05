@@ -29,7 +29,7 @@ import org.loboevolution.primary.ext.ComponentSource;
 import org.loboevolution.primary.ext.history.NavigationHistory;
 import org.loboevolution.primary.gui.bookmarks.AddBookmarkDialog;
 import org.loboevolution.primary.gui.bookmarks.BookmarksHistory;
-import org.loboevolution.primary.info.BookmarkInfo;
+import org.loboevolution.primary.gui.bookmarks.BookmarkInfo;
 import org.loboevolution.ua.NavigationEntry;
 import org.loboevolution.ua.NavigatorWindow;
 

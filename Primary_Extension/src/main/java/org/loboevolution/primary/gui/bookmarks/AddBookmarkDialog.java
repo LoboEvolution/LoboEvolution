@@ -37,7 +37,7 @@ import javax.swing.border.EmptyBorder;
 import org.loboevolution.primary.gui.FieldType;
 import org.loboevolution.primary.gui.FormField;
 import org.loboevolution.primary.gui.FormPanel;
-import org.loboevolution.primary.info.BookmarkInfo;
+import org.loboevolution.primary.gui.bookmarks.BookmarkInfo;
 
 /**
  * The Class AddBookmarkDialog.

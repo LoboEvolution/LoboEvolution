@@ -65,11 +65,23 @@ public class ImportDataAction extends AbstractAction {
 	}
 
 	private void importHistory() {
-		//TODO
+		if (mozillaPanel.isSelected()) {
+			MozilaFirefoxData.importHistory();
+		}
+
+		if (chromePanel.isSelected()) {
+			//TODO
+		}
 	}
 
 	private void importBookmarks() {
-		//TODO
+		if (mozillaPanel.isSelected()) {
+			MozilaFirefoxData.importBookmark();
+		}
+
+		if (chromePanel.isSelected()) {
+			//TODO
+		}
 	}
 
 	private void importCookie() {

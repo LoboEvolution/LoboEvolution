@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import org.loboevolution.primary.info.BookmarkInfo;
+import org.loboevolution.primary.gui.bookmarks.BookmarkInfo;
 import org.loboevolution.util.Strings;
 
 public class OkAction extends AbstractAction{

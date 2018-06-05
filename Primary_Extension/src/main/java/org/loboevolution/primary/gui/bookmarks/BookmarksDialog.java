@@ -46,7 +46,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import org.loboevolution.primary.ext.IconFactory;
-import org.loboevolution.primary.info.BookmarkInfo;
+import org.loboevolution.primary.gui.bookmarks.BookmarkInfo;
 import org.loboevolution.ua.NavigatorWindow;
 
 /**

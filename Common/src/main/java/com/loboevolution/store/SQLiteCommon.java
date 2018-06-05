@@ -57,8 +57,12 @@ public class SQLiteCommon {
 	public static final String HOST2 = "SELECT baseUrl FROM HOST WHERE baseUrl like ?";
 	
 	public static final String BOOKMARKS = "SELECT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?";
+
+	public static final String MOZ_BOOKMARKS = "SELECT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
 	
-	public static final String  NETWORK = "SELECT js, css, cookie, cache, navigation FROM NETWORK";
+	public static final String MOZ_HISTORY = "SELECT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
+	
+	public static final String NETWORK = "SELECT js, css, cookie, cache, navigation FROM NETWORK";
 	
 	public static final String INPUT = "SELECT value from INPUT where (name like ?) ";
 	

@@ -22,6 +22,7 @@ package org.loboevolution.primary.settings;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -38,6 +39,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.Cookie;
+import org.loboevolution.primary.ext.history.NavigationHistory;
+import org.loboevolution.primary.gui.bookmarks.BookmarkInfo;
+import org.loboevolution.primary.gui.bookmarks.BookmarksHistory;
 import org.loboevolution.request.CookieStore;
 
 import com.loboevolution.store.SQLiteCommon;
@@ -49,7 +53,7 @@ public class MozilaFirefoxData {
 
 	public static void importCookie() {
 		String pathToCookies = SQLiteCommon.getMozillaDirectory();
-		List<String> files = getFiles(pathToCookies, null);
+		List<String> files = getFiles(pathToCookies, null, "cookies.sqlite");
 
 		for (String path : files) {
 			List<Cookie> cookies = getCookie(path);
@@ -60,6 +64,65 @@ public class MozilaFirefoxData {
 			}
 		}
 	}
+	
+	public static void importBookmark() {
+		String pathToCookies = SQLiteCommon.getMozillaDirectory();
+		List<String> files = getFiles(pathToCookies, null, "places.sqlite");
+
+		for (String path : files) {
+			List<BookmarkInfo> bookmarks = getBookmarkInfo(path);
+			for (BookmarkInfo info : bookmarks) {
+				BookmarksHistory.insertBookmark(info);
+			}
+		}
+	}
+	
+	public static void importHistory() {
+		try {
+			String pathToCookies = SQLiteCommon.getMozillaDirectory();
+			List<String> files = getFiles(pathToCookies, null, "places.sqlite");
+			for (String path : files) {
+				List<String> hosts = getHostEntries(path);
+				for (String host : hosts) {
+					NavigationHistory.addAsRecent(new URL(host));
+				}
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+	
+	private static List<BookmarkInfo> getBookmarkInfo(String path) {
+		List<BookmarkInfo> bookmarks = new ArrayList<BookmarkInfo>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_BOOKMARKS)) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				BookmarkInfo bookmark = new BookmarkInfo();
+				bookmark.setUrl(new URL(rs.getString(1)));
+				bookmark.setTitle(rs.getString(2));
+				bookmark.setDescription(rs.getString(3));
+				bookmarks.add(bookmark);
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return bookmarks;
+	}
+	
+	private static List<String> getHostEntries(String path) {
+		List<String> hostEntries = new ArrayList<String>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_HISTORY)) {
+			ResultSet rs = pstmt.executeQuery();
+			while (rs != null && rs.next()) {
+				hostEntries.add(rs.getString(1));
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		return hostEntries;
+	}	
 
 	private static List<Cookie> getCookie(String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
@@ -83,7 +146,7 @@ public class MozilaFirefoxData {
 		return cookies;
 	}
 
-	private static List<String> getFiles(String directoryPath, List<String> cookieFilePaths) {
+	private static List<String> getFiles(String directoryPath, List<String> cookieFilePaths, String fileName) {
 		if (cookieFilePaths == null) {
 			cookieFilePaths = new ArrayList<String>();
 		}
@@ -91,10 +154,10 @@ public class MozilaFirefoxData {
 		try {
 			DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(directoryPath));
 			for (Path filePath : stream) {
-				if (filePath.getFileName().toString().equals("cookies.sqlite")) {
+				if (filePath.getFileName().toString().equals(fileName)) {
 					cookieFilePaths.add(filePath.toAbsolutePath().toString());
 				} else if ((new File(filePath.toAbsolutePath().toString())).isDirectory()) {
-					getFiles(filePath.toAbsolutePath().toString(), cookieFilePaths);
+					getFiles(filePath.toAbsolutePath().toString(), cookieFilePaths, fileName);
 				}
 			}
 		} catch (IOException | DirectoryIteratorException x) {

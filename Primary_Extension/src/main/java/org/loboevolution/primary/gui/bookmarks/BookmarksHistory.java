@@ -32,7 +32,7 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.primary.info.BookmarkInfo;
+import org.loboevolution.primary.gui.bookmarks.BookmarkInfo;
 import org.loboevolution.util.Strings;
 
 import com.loboevolution.store.SQLiteCommon;
@@ -108,7 +108,7 @@ public class BookmarksHistory implements Serializable {
 		return info;
 	}
 	
-	public void insertBookmark(BookmarkInfo info) {
+	public static void insertBookmark(BookmarkInfo info) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_BOOKMARKS)) {
 			pstmt.setString(1, info.getTitle());
