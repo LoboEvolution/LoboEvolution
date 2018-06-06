@@ -62,6 +62,8 @@ public class SQLiteCommon {
 	
 	public static final String MOZ_HISTORY = "SELECT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
 	
+	public static final String CHROME_HISTORY = "SELECT url from urls";
+	
 	public static final String NETWORK = "SELECT js, css, cookie, cache, navigation FROM NETWORK";
 	
 	public static final String INPUT = "SELECT value from INPUT where (name like ?) ";
@@ -71,6 +73,7 @@ public class SQLiteCommon {
 	public static final String MOZ_COOKIES = "SELECT * from moz_cookies";
 	
 	public static final String CHROME_COOKIES = "SELECT * from cookies";
+	
 	
 	public static final String INSERT_COOKIES = "INSERT INTO COOKIE (cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly) VALUES(?,?,?,?,?,?,?,?)";
 

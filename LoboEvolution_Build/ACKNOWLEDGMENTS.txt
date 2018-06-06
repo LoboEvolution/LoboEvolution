@@ -25,3 +25,5 @@ The following open source externals are used by this project:
 * [https://github.com/bobbylight/RSyntaxTextArea] RSyntaxTextArea, syntax highlighting, code folding text editor for Java Swing applications.
 
 * [https://github.com/kazocsaba/imageviewer] This project provides a Swing image viewer component.
+
+* [https://github.com/stleary/JSON-java] A reference implementation of a JSON package in Java.

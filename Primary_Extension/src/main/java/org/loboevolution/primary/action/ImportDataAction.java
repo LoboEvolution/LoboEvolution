@@ -70,7 +70,7 @@ public class ImportDataAction extends AbstractAction {
 		}
 
 		if (chromePanel.isSelected()) {
-			//TODO
+			GoogleChromeData.importHistory();
 		}
 	}
 
@@ -80,7 +80,7 @@ public class ImportDataAction extends AbstractAction {
 		}
 
 		if (chromePanel.isSelected()) {
-			//TODO
+			GoogleChromeData.importBookmark();
 		}
 	}
 
