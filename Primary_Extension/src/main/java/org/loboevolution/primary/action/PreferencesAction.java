@@ -22,6 +22,7 @@ package org.loboevolution.primary.action;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 
 import org.loboevolution.primary.ext.ActionPool;
@@ -68,7 +69,7 @@ public class PreferencesAction extends ActionPool {
 	 * Show preferences.
 	 */
 	private void showPreferences() {
-		java.awt.Window awtWindow = window.getAwtWindow();
+		Window awtWindow = window.getAwtWindow();
 		if (!(awtWindow instanceof Frame)) {
 			throw new IllegalStateException("Preferences dialog only supported when an AWT Frame is available.");
 		}

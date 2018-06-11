@@ -30,50 +30,49 @@ public class SQLiteCommon {
 	/** The Constant LOBO_DB. */
 	private static final String LOBO_DB = "LOBOEVOLUTION_STORAGE.sqlite";
 	
-	public static final String COLORS = "SELECT name, value FROM COLOR";
+	public static final String COLORS = "SELECT DISTINCT name, value FROM COLOR";
 	
-	public static final String FONTS = " SELECT acryl, aero, aluminium, bernstein, fast, graphite,"
+	public static final String FONTS = " SELECT DISTINCT acryl, aero, aluminium, bernstein, fast, graphite,"
 			+ " 	      hiFi,luna, mcWin, mint, noire, smart, texture,"
 			+ "	 	  subscript, superscript, underline, italic, strikethrough,"
 			+ "		  fontSize, font, color, bold" + " FROM LOOK_AND_FEEL";
 
-	public static final String COOKIES = " SELECT cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly "
+	public static final String COOKIES = " SELECT DISTINCT cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly "
 									   + " FROM COOKIE WHERE domain = ? AND path = ?";
 	
-	public static final String CONNECTIONS = "SELECT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
+	public static final String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
 		
-	public static final String USER_AGENT = "SELECT msie, mozilla, include_msie FROM USER_AGENT";
+	public static final String USER_AGENT = "SELECT DISTINCT msie, mozilla, include_msie FROM USER_AGENT";
 	
-	public static final String STARTUP = "SELECT baseUrl FROM STARTUP";
+	public static final String STARTUP = "SELECT DISTINCT baseUrl FROM STARTUP";
 	
-	public static final String SIZE = "SELECT width, height FROM SIZE";
+	public static final String SIZE = "SELECT DISTINCT width, height FROM SIZE";
 	
-	public static final String SEARCH = "SELECT description FROM SEARCH WHERE type = ?";
+	public static final String SEARCH = "SELECT DISTINCT description FROM SEARCH WHERE type = ?";
 
-	public static final String SEARCH2 = "SELECT name, description, baseUrl, queryParameter, type, selected FROM SEARCH WHERE type = 'SEARCH_ENGINE' ORDER BY 6 DESC";
+	public static final String SEARCH2 = "SELECT DISTINCT name, description, baseUrl, queryParameter, type, selected FROM SEARCH WHERE type = 'SEARCH_ENGINE' ORDER BY 6 DESC";
 
-	public static final String HOST = "SELECT baseUrl FROM HOST LIMIT ?";
+	public static final String HOST = "SELECT DISTINCT baseUrl FROM HOST LIMIT ?";
 
-	public static final String HOST2 = "SELECT baseUrl FROM HOST WHERE baseUrl like ?";
+	public static final String HOST2 = "SELECT DISTINCT baseUrl FROM HOST WHERE baseUrl like ?";
 	
-	public static final String BOOKMARKS = "SELECT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?";
+	public static final String BOOKMARKS = "SELECT DISTINCT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?";
 
-	public static final String MOZ_BOOKMARKS = "SELECT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
+	public static final String MOZ_BOOKMARKS = "SELECT DISTINCT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
 	
-	public static final String MOZ_HISTORY = "SELECT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
+	public static final String MOZ_HISTORY = "SELECT DISTINCT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
 	
-	public static final String CHROME_HISTORY = "SELECT url from urls";
+	public static final String CHROME_HISTORY = "SELECT DISTINCT url from urls";
 	
-	public static final String NETWORK = "SELECT js, css, cookie, cache, navigation FROM NETWORK";
+	public static final String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation FROM NETWORK";
 	
-	public static final String INPUT = "SELECT value from INPUT where (name like ?) ";
+	public static final String INPUT = "SELECT DISTINCT value from INPUT where (name like ?) ";
 	
-	public static final String AUTHENTICATION = "SELECT name from AUTHENTICATION where baseUrl like ? ";
+	public static final String AUTHENTICATION = "SELECT DISTINCT name from AUTHENTICATION where baseUrl like ? ";
 	
 	public static final String MOZ_COOKIES = "SELECT * from moz_cookies";
 	
 	public static final String CHROME_COOKIES = "SELECT * from cookies";
-	
 	
 	public static final String INSERT_COOKIES = "INSERT INTO COOKIE (cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly) VALUES(?,?,?,?,?,?,?,?)";
 
@@ -123,6 +122,14 @@ public class SQLiteCommon {
 	
 	public static final String DELETE_SEARCH = "DELETE FROM SEARCH WHERE type = 'SEARCH_ENGINE'";
 	
+	public static final String DELETE_HOST = "DELETE FROM HOST";
+	
+	public static final String DELETE_COOKIES = "DELETE FROM COOKIE";
+	
+	public static final String DELETE_INPUT = "DELETE FROM INPUT";
+	
+	public static final String DELETE_BOOKMARKS = "DELETE FROM BOOKMARKS";
+	
 	
 	private SQLiteCommon() {}
 
@@ -150,6 +157,18 @@ public class SQLiteCommon {
 		return store + "\\" + LOBO_DB;
 	}
 	
+	/**
+	 * Gets the cache.
+	 *
+	 * @return the cache
+	 */
+	public static String getCacheStore() {
+		File homeDir = new File(System.getProperty("user.home"));
+		File storeDir = new File(homeDir, ".lobo");
+		File store = new File(storeDir, "cache");
+		return store.getPath();
+	}
+		
 	/**
 	 * Gets the mozilla directory.
 	 *

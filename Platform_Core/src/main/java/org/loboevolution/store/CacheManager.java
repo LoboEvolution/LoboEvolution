@@ -35,6 +35,7 @@ import java.util.jar.JarFile;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.http.EntryInfo;
 import org.loboevolution.http.LRUCache;
 import org.loboevolution.http.Urls;
 import org.loboevolution.security.GenericLocalPermission;
@@ -172,7 +173,7 @@ public final class CacheManager implements Runnable {
 	public CacheInfo getTransientCacheInfo() {
 		long approxSize;
 		int numEntries;
-		List entryInfo;
+		List<EntryInfo> entryInfo;
 		synchronized (this.transientCache) {
 			approxSize = this.transientCache.getApproxSize();
 			numEntries = this.transientCache.getNumEntries();
@@ -338,41 +339,6 @@ public final class CacheManager implements Runnable {
 				return true;
 			}
 			return false;
-		}
-	}
-
-	/**
-	 * Clear cache.
-	 *
-	 * @throws Exception
-	 *             the exception
-	 */
-	public void clearCache() throws Exception {
-
-		File userHome = new File(System.getProperty("user.home"));
-		File loboHome = new File(userHome, ".lobo");
-		File cacheHome = new File(loboHome, "cache");
-		File hostHome = new File(loboHome, "HostStore");
-		deleteRecursive(cacheHome);
-		deleteRecursive(hostHome);
-	}
-
-	/**
-	 * Delete recursive.
-	 *
-	 * @param rootDir
-	 *            the root dir
-	 */
-	private void deleteRecursive(File rootDir) {
-
-		File[] c = rootDir.listFiles();
-		for (File file : c) {
-			if (file.isDirectory()) {
-				deleteRecursive(file);
-				file.delete();
-			} else {
-				file.delete();
-			}
 		}
 	}
 

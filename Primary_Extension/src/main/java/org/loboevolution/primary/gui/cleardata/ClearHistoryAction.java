@@ -18,28 +18,27 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.primary.action;
+package org.loboevolution.primary.gui.cleardata;
 
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.loboevolution.primary.ext.ActionPool;
 import org.loboevolution.primary.ext.ComponentSource;
-import org.loboevolution.store.CacheManager;
 import org.loboevolution.ua.NavigatorWindow;
 
 /**
- * The Class ClearCacheAction.
+ * The Class ClearHistoryAction.
  */
-public class ClearCacheAction extends ActionPool {
+public class ClearHistoryAction extends ActionPool {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ClearCacheAction.class);
+	/** The window. */
+	private transient NavigatorWindow window;
 
 	/**
 	 * Instantiates a new clear cache action.
@@ -49,8 +48,9 @@ public class ClearCacheAction extends ActionPool {
 	 * @param window
 	 *            the window
 	 */
-	public ClearCacheAction(ComponentSource componentSource, NavigatorWindow window) {
+	public ClearHistoryAction(ComponentSource componentSource, NavigatorWindow window) {
 		super(componentSource, window);
+		this.window = window;
 	}
 
 	/*
@@ -61,11 +61,22 @@ public class ClearCacheAction extends ActionPool {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CacheManager clearCache = CacheManager.getInstance();
-		try {
-			clearCache.clearCache();
-		} catch (Throwable err) {
-			logger.error( "ClearCacheAction", err);
+		showNavigationDataDialog();
+	}
+	
+	/**
+	 * Show preferences.
+	 */
+	private void showNavigationDataDialog() {
+		Window awtWindow = window.getAwtWindow();
+		if (!(awtWindow instanceof Frame)) {
+			throw new IllegalStateException("Preferences dialog only supported when an AWT Frame is available.");
 		}
+		ClearHistoryDialog dialog = new ClearHistoryDialog((Frame) awtWindow);
+		dialog.setTitle("Clear History");
+		dialog.setLocationByPlatform(true);
+		dialog.setResizable(false);
+		dialog.setSize(new Dimension(170, 200));
+		dialog.setVisible(true);
 	}
 }

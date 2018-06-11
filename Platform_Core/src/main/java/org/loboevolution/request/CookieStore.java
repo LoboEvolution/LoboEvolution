@@ -226,4 +226,13 @@ public class CookieStore {
 		}
 		return cookies;
 	}
+	
+	public static void deleteCookies() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_COOKIES)) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
 }

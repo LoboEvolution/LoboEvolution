@@ -120,4 +120,14 @@ public class BookmarksHistory implements Serializable {
 			logger.error(e);
 		}
 	}
+	
+	public static void deleteBookmarks() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_BOOKMARKS)) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+	
 }

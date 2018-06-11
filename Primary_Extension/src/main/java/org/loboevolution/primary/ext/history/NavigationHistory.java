@@ -162,4 +162,13 @@ public class NavigationHistory implements Serializable {
 			logger.error(e);
 		}
 	}
+	
+	public static void deleteHost() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_HOST)) {
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
 }

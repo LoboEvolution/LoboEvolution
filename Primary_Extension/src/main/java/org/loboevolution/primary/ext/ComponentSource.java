@@ -46,7 +46,6 @@ import org.loboevolution.primary.action.AddBookmarkAction;
 import org.loboevolution.primary.action.BackAction;
 import org.loboevolution.primary.action.BackMoreAction;
 import org.loboevolution.primary.action.BlankWindowAction;
-import org.loboevolution.primary.action.ClearCacheAction;
 import org.loboevolution.primary.action.ClonedWindowAction;
 import org.loboevolution.primary.action.CookiePageAction;
 import org.loboevolution.primary.action.CopyAction;
@@ -69,6 +68,7 @@ import org.loboevolution.primary.action.ShowRecentOpenedFileAction;
 import org.loboevolution.primary.action.SourceAction;
 import org.loboevolution.primary.action.StopAction;
 import org.loboevolution.primary.ext.history.NavigationHistory;
+import org.loboevolution.primary.gui.cleardata.ClearHistoryAction;
 import org.loboevolution.primary.settings.ToolsSettings;
 import org.loboevolution.request.ClientletRequestHandler;
 import org.loboevolution.settings.SearchEngine;
@@ -300,7 +300,7 @@ public class ComponentSource implements NavigatorWindowListener {
 		menu.add(this.searchersMenu);
 		menu.add(menuItem("Preferences...", 'P', new PreferencesAction(this, window)));
 		menu.add(menuItem("Screenshot", ' ', "", new ScreenShotAction(window)));
-		menu.add(menuItem("Clear Cache", 'M', "ctrl M", new ClearCacheAction(this, window)));
+		menu.add(menuItem("Clear History", 'M', "ctrl M", new ClearHistoryAction(this, window)));
 		return menu;
 	}
 

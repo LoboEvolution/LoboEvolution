@@ -155,9 +155,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	private void insertLogin(String id, String name, String type, String value) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
-			
 			String nameValue = type; 
-			
 			if(!Strings.isBlank(id)) {
 				nameValue = id;
 			} else if(!Strings.isBlank(name)) {
@@ -166,6 +164,15 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 			
 			pstmt.setString(1, nameValue);
 			pstmt.setString(2, value);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
+	
+	public static void deleteInput() {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			logger.error(e);
