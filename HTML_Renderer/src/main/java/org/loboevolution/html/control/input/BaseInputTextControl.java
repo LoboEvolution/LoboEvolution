@@ -44,6 +44,7 @@ import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.domimpl.DOMElementImpl;
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.gui.mouse.GuiMouseImpl;
+import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.gui.WrapperLayout;
 
 import com.loboevolution.store.SQLiteCommon;
@@ -64,6 +65,9 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 
 	/** Creates the text field. */
 	protected abstract JAutoTextField createTextField();
+	
+	/** model Node. */
+	private HTMLBaseInputElement  modelNode;
 
 	/**
 	 * Instantiates a new base input text control.
@@ -73,6 +77,7 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	 */
 	public BaseInputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
+		this. modelNode = modelNode;
 		this.widget = createAndShowGUI(modelNode);
 	}
 	
@@ -153,20 +158,23 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	 * @param search
 	 */
 	private void insertLogin(String id, String name, String type, String value) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
-			String nameValue = type; 
-			if(!Strings.isBlank(id)) {
-				nameValue = id;
-			} else if(!Strings.isBlank(name)) {
-				nameValue = name;
+		UserAgentContext uac = modelNode.getUserAgentContext();
+		if (uac.isNavigationEnabled()) {
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_INPUT)) {
+				String nameValue = type;
+				if (!Strings.isBlank(id)) {
+					nameValue = id;
+				} else if (!Strings.isBlank(name)) {
+					nameValue = name;
+				}
+
+				pstmt.setString(1, nameValue);
+				pstmt.setString(2, value);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				logger.error(e);
 			}
-			
-			pstmt.setString(1, nameValue);
-			pstmt.setString(2, value);
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			logger.error(e);
 		}
 	}
 	

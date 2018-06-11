@@ -41,6 +41,7 @@ import org.loboevolution.primary.gui.SwingTasks;
 import org.loboevolution.primary.gui.item.ItemEditorFactory;
 import org.loboevolution.primary.gui.item.ItemListControl;
 import org.loboevolution.primary.settings.ToolsSettings;
+import org.loboevolution.settings.GeneralSettings;
 import org.loboevolution.settings.SearchEngine;
 
 /**
@@ -233,13 +234,17 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	@Override
 	public void save() {
 		ToolsSettings settings = new ToolsSettings();
+		GeneralSettings genSettings = GeneralSettings.getNetwork();
 		Collection<SearchEngine> items = this.searchEngineListControl.getItems();
 		settings.deleteSearchEngine();
 		int i = 0;
-		for (SearchEngine searchEngine : items) {
-			settings.insertSearch(searchEngine.getName(), searchEngine.getDescription(), searchEngine.getBaseUrl(),
-					searchEngine.getQueryParameter(), i == 0 ? true : false);
-			i++;	
+
+		if (genSettings.isNavigation()) {
+			for (SearchEngine searchEngine : items) {
+				settings.insertSearch(searchEngine.getName(), searchEngine.getDescription(), searchEngine.getBaseUrl(),
+						searchEngine.getQueryParameter(), i == 0 ? true : false);
+				i++;
+			}
 		}
 	}
 	
@@ -248,7 +253,10 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 */
 	private void loadSettings() {
 		ToolsSettings settings = new ToolsSettings();
-		this.searchEngineListControl.setItems(settings.getSearchEngines());
+		GeneralSettings genSettings = GeneralSettings.getNetwork();
+		if (genSettings.isNavigation()) {
+			this.searchEngineListControl.setItems(settings.getSearchEngines());
+		}
 	}
 	
 	/**

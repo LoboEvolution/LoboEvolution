@@ -38,6 +38,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.http.Cookie;
 import org.loboevolution.http.Domains;
+import org.loboevolution.settings.GeneralSettings;
 import org.loboevolution.util.DateUtil;
 import org.loboevolution.util.Strings;
 
@@ -155,8 +156,12 @@ public class CookieStore {
 		} else if (expires != null) {
 			DateUtil du = new DateUtil();
 			expiresDate = du.determineDateFormat(expires, Locale.US);
-		}	
-		saveCookie(domain, path, cookieName, expiresDate, cookieValue,maxAge, !Strings.isBlank(secure), !Strings.isBlank(httpOnly));
+		}
+		
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		if (settings.isCookie()) {
+			saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, !Strings.isBlank(secure), !Strings.isBlank(httpOnly));
+		}
 	}
 
 	/**
@@ -202,27 +207,29 @@ public class CookieStore {
 	 */
 	public static List<Cookie> getCookies(String hostName, String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
-		
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
-			pstmt.setString(1, hostName);
-			pstmt.setString(2, path);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs!= null && rs.next()) {
-				Cookie cookie = new Cookie();
-				cookie.setName((rs.getString(1)));
-				cookie.setValue((rs.getString(2)));
-				cookie.setDomain((rs.getString(3)));
-				cookie.setPath((rs.getString(4)));
-				cookie.setExpires((rs.getString(5)));
-				cookie.setMaxAge((rs.getInt(6)));
-				cookie.setSecure(rs.getInt(7) > 0 ? true : false);
-				cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
-				cookies.add(cookie);
+		GeneralSettings settings = GeneralSettings.getNetwork();
+		if (settings.isCookie()) {
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
+				pstmt.setString(1, hostName);
+				pstmt.setString(2, path);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs != null && rs.next()) {
+					Cookie cookie = new Cookie();
+					cookie.setName((rs.getString(1)));
+					cookie.setValue((rs.getString(2)));
+					cookie.setDomain((rs.getString(3)));
+					cookie.setPath((rs.getString(4)));
+					cookie.setExpires((rs.getString(5)));
+					cookie.setMaxAge((rs.getInt(6)));
+					cookie.setSecure(rs.getInt(7) > 0 ? true : false);
+					cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
+					cookies.add(cookie);
+				}
+			} catch (Exception e) {
+				logger.error(e);
+				return null;
 			}
-		} catch (Exception e) {
-			logger.error(e);
-			return null;
 		}
 		return cookies;
 	}
