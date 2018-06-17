@@ -91,13 +91,13 @@
 		<jar destfile="${build.dir}/lobo.jar" basedir="LoboEvolution_Build/" includes="log4j2.xml" update="true" />
 	</target>
 
-	<target name="lobo_classfiles" depends="public_classfiles,common_classfiles">
+	<target name="lobo_classfiles" depends="common_classfiles,public_classfiles">
 		<javac srcdir="Platform_Core/src/" source="1.8" destdir="Platform_Core/bin/" classpath="Common/bin/:Platform_Public_API/bin/:LoboEvolution_Build/ext/log4j-api-2.8.1.jar:LoboEvolution_Build/ext/JTattoo-1.6.11.jar" debug="on" includeantruntime="false" />
 	</target>
 
-	<target name="common_classfiles" depends="">
-		<javac srcdir="Common/bin/" source="1.8" destdir="Common/bin/" classpath="" debug="on" includeantruntime="false" />
-	</target>
+    <target name="common_classfiles" depends="">
+        <javac srcdir="Common/src/" source="1.8" destdir="Common/bin/" classpath="LoboEvolution_Build/ext/log4j-api-2.8.1.jar" debug="on" includeantruntime="false" />
+    </target>
 
 	<target name="html_classfiles" depends="common_classfiles,parser_classfiles">
 		<javac srcdir="HTML_Renderer/src/" source="1.8" destdir="HTML_Renderer/bin/" classpath="Common/bin/:parser/bin:LoboEvolution_Build/ext/log4j-api-2.8.1.jar:LoboEvolution_Build/ext/xalan.jar:LoboEvolution_Build/ext/batik-all-1.8.jar:LoboEvolution_Build/ext/w3c.jar:LoboEvolution_Build/ext/jdatepicker.jar" debug="on" includeantruntime="false" />

@@ -67,7 +67,7 @@ import org.loboevolution.w3c.svg.SVGPoint;
  * <p>
  * Paths represent the geometry of the outline of an object, defined in terms of
  * moveto (set a new current point), lineto (draw a straight line), curveto
- * (draw a curve using a cubic Bézier), arc (elliptical or circular arc) and
+ * (draw a curve using a cubic  B\U00E9zier), arc (elliptical or circular arc) and
  * closepath (close the current shape by drawing a line to the last moveto)
  * elements. Compound paths (i.e., a path with multiple subpaths) are possible
  * to allow effects such as "donut holes" in objects.

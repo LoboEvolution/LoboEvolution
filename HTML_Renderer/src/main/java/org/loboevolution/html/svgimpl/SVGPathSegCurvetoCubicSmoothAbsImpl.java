@@ -25,7 +25,7 @@ import org.loboevolution.w3c.svg.SVGPathSeg;
 import org.loboevolution.w3c.svg.SVGPathSegCurvetoCubicSmoothAbs;
 
 /**
- * Draws a cubic Bézier curve from the current point to (x,y). The first control
+ * Draws a cubic  B\U00E9zier curve from the current point to (x,y). The first control
  * point is assumed to be the reflection of the second control point on the
  * previous command relative to the current point. (If there is no previous
  * command or if the previous command was not an C, c, S or s, assume the first
