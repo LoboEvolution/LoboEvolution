@@ -5,7 +5,7 @@ import javax.swing.JComponent;
 /**
  * Abstract superclass for status bars of the image viewer.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public abstract class StatusBar {
 	/**

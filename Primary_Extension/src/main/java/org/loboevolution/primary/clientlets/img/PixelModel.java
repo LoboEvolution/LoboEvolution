@@ -9,7 +9,7 @@ import javax.swing.event.EventListenerList;
  * or zero, indicating a valid pixel, or both are -1, indicating no pixel is
  * selected or should be shown.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public class PixelModel {
 

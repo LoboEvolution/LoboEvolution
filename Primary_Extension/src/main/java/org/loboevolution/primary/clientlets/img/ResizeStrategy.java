@@ -3,7 +3,7 @@ package org.loboevolution.primary.clientlets.img;
 /**
  * Strategy for resizing an image inside a component.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 /*
  * These constants are referenced in the following places: -

@@ -20,7 +20,7 @@ import javax.swing.event.ChangeListener;
  * {@link #updateLabel(java.awt.image.BufferedImage, int, int, int)} to
  * customize this information.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public class PixelInfoStatusBar extends StatusBar {
 

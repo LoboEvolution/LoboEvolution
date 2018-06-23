@@ -30,7 +30,7 @@ import java.util.List;
  * It can be added to a viewer by calling
  * <code>viewer.addOverlay(new XPainter(), 10)</code>.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public abstract class Overlay {
 	List<OverlayComponent> overlayComponents = new ArrayList<OverlayComponent>(1);

@@ -7,7 +7,7 @@ import javax.swing.JLayeredPane;
 /**
  * A component showing an image as well as an arbitrary number of overlays.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public class LayeredImageView {
 	private final ImageComponent theImage;

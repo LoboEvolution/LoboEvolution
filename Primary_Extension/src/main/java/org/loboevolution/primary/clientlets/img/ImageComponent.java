@@ -44,7 +44,7 @@ import javax.swing.event.ChangeListener;
 /**
  * The component that displays the image itself.
  * 
- * @author Kazó Csaba
+ * @author Kaz Csaba
  */
 class ImageComponent extends JComponent {
 	

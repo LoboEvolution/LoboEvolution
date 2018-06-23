@@ -29,7 +29,7 @@ import javax.swing.JComponent;
 /**
  * The <code>JComponent</code> implementing an overlay.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public class OverlayComponent extends JComponent {
 	

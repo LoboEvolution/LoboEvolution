@@ -21,7 +21,7 @@ import java.util.Set;
  * {@link #addPoint(Point)}, and {@link #clear()} functions. All of these
  * mutator functions cause the overlay to be repainted.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public final class PixelMarkerOverlay extends Overlay {
 

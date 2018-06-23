@@ -42,7 +42,7 @@ import javax.swing.event.ChangeListener;
  * synchronizer adjusts the scroll panes of the other viewers to match the
  * originator.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 class Synchronizer {
 	private final WeakHashMap<ImageViewer, Void> viewers = new WeakHashMap<ImageViewer, Void>(4);

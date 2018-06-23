@@ -39,7 +39,7 @@ import org.loboevolution.clientlet.AbstractComponentContent;
  * 
  * @see StatusBar
  * @see Overlay
- * @author Kazó Csaba
+ * @author Kaz Csaba
  */
 public final class ImageViewer extends AbstractComponentContent {
 	private final LayeredImageView view;

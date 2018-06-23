@@ -5,7 +5,7 @@ import java.util.EventListener;
 /**
  * Interface for receiving mouse motion events on an image.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public interface ImageMouseMotionListener extends EventListener {
 	/**

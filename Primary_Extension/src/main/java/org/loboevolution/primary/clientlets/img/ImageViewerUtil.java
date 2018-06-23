@@ -6,7 +6,7 @@ import java.util.Iterator;
 /**
  * Utility methods for image viewers.
  * 
- * @author Kazó Csaba
+ * @author Kazo Csaba
  */
 public final class ImageViewerUtil {
 	/** Private constructor. */

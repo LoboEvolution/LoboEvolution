@@ -12,7 +12,7 @@ import javax.swing.JViewport;
  * to set the size of the viewport component with respect to the resize
  * strategy.
  * 
- * @author Kazó Csaba
+ * @author Kaz Csaba
  */
 class CustomViewportLayout implements LayoutManager {
 
