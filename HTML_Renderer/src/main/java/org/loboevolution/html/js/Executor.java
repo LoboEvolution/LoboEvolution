@@ -63,6 +63,7 @@ public class Executor {
 	public static Context createContext(URL codeSource, UserAgentContext ucontext) {
 		Context prev = Context.getCurrentContext();
 		Context ctx = Context.enter();
+		ctx.setLanguageVersion(Context.VERSION_1_8);
 		ctx.setOptimizationLevel(ucontext.getScriptingOptimizationLevel());
 		if (prev == null) {
 			// If there was a previous context, this one must be nested.
