@@ -161,10 +161,8 @@ public final class Urls {
 					int eqIdx = token.indexOf('=');
 					if (eqIdx != -1) {
 						String value = token.substring(eqIdx + 1).trim();
-						int seconds;
 						try {
-							seconds = Integer.parseInt(value);
-							return Long.valueOf(baseTime + seconds * 1000);
+							return Long.valueOf(baseTime + Integer.parseInt(value));
 						} catch (NumberFormatException nfe) {
 							logger.warn("getExpiration(): Bad Cache-Control max-age value: " + value);
 							logger.error(nfe);
@@ -181,10 +179,8 @@ public final class Urls {
 					return Long.valueOf(expDate.getTime());
 				}
 			} catch (java.text.ParseException pe) {
-				int seconds;
 				try {
-					seconds = Integer.parseInt(expires);
-					return Long.valueOf(baseTime + seconds * 1000);
+					return Long.valueOf(baseTime + Integer.parseInt(expires));
 				} catch (NumberFormatException nfe) {
 					logger.warn("getExpiration(): Bad Expires header value: " + expires);
 				}

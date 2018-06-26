@@ -23,22 +23,17 @@ package org.loboevolution.html.style;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.StringTokenizer;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.html.dombl.ExternalResourcesCache;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
-import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Strings;
-import org.loboevolution.util.io.IORoutines;
 import org.w3c.css.sac.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
@@ -119,48 +114,11 @@ public class CSSUtilities {
 	 * @throws Exception
 	 */
 	public static CSSStyleSheet parse(String href, HTMLDocumentImpl doc) throws Exception {
-
-		URL url = null;
 		CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
-
 		URL baseURL = new URL(doc.getBaseURI());
 		URL scriptURL = Urls.createURL(baseURL, href);
 		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-
-		try {
-			if (scriptURI.startsWith("//")) {
-				scriptURI = "http:" + scriptURI;
-			}
-			url = new URL(scriptURI);
-		} catch (MalformedURLException mfu) {
-			int idx = scriptURI.indexOf(':');
-			if (idx == -1 || idx == 1) {
-				// try file
-				url = new URL("file:" + scriptURI);
-			} else {
-				throw mfu;
-			}
-		}
-		SSLCertificate.setCertificate();
-		URLConnection connection = url.openConnection();
-		connection.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-		connection.setRequestProperty("Cookie", "");
-		connection.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
-		if (connection instanceof HttpURLConnection) {
-			HttpURLConnection hc = (HttpURLConnection) connection;
-			hc.setInstanceFollowRedirects(true);
-			int responseCode = hc.getResponseCode();
-			logger.info("process(): HTTP response code: " + responseCode);
-		}
-		InputStream in = IORoutines.getInputStream(connection);
-		byte[] content;
-		try {
-			content = IORoutines.load(in, 8192);
-		} finally {
-			in.close();
-		}
-		String source = new String(content, "UTF-8");
-
+		String source = ExternalResourcesCache.getSourceCache(scriptURI, "CSS");
 		InputSource is = getCssInputSourceForStyleSheet(source, doc.getBaseURI());
 		return parser.parseStyleSheet(is, null, null);
 

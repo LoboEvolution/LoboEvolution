@@ -154,8 +154,6 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	
 	/**
 	 * Insert a new row into the search selected table
-	 *
-	 * @param search
 	 */
 	private void insertLogin(String id, String name, String type, String value) {
 		UserAgentContext uac = modelNode.getUserAgentContext();

@@ -110,6 +110,9 @@ public class StorageManager implements Runnable, ColorCommon {
 	/** The Constant AUTHENTICATION. */
 	private static final String AUTHENTICATION = "CREATE TABLE AUTHENTICATION (name text, baseUrl text)";
 	
+	/** The Constant CACHE. */
+	private static final String CACHE = "CREATE TABLE CACHE (baseUrl text, source blob, contenLenght num, etag text, lastModified date, type text)";
+	
 	private static final StorageManager instance = new StorageManager();
 
 	/** The store directory. */
@@ -285,6 +288,7 @@ public class StorageManager implements Runnable, ColorCommon {
 				createTable(SIZE);
 				createTable(LOGIN);
 				createTable(AUTHENTICATION);
+				createTable(CACHE);
 				populateColorTable();
 				populateFontTable();
 				populateFontSizeTable();

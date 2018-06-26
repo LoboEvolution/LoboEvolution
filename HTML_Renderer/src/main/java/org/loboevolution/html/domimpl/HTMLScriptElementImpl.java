@@ -23,23 +23,13 @@
  */
 package org.loboevolution.html.domimpl;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.MissingResourceException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.loboevolution.html.dombl.ExternalResourcesCache;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.http.HttpRequest;
-import org.loboevolution.http.Method;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.util.io.IORoutines;
 import org.loboevolution.w3c.html.HTMLScriptElement;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
@@ -230,38 +220,12 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 				if (src == null) {
 					text = this.getText();
 					scriptURI = doc.getBaseURI();
-					baseLineNumber = 1; // TODO: Line number of inner text??
+					baseLineNumber = 1;
 				} else {
 					this.informExternalScriptLoading();
 					URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 					scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-					final HttpRequest request = bcontext.createHttpRequest();
-					// Perform a synchronous request
-					SecurityManager sm = System.getSecurityManager();
-					if (sm == null) {
-						try {
-							request.open(Method.GET, getFullURL(scriptURI), false);
-							request.send();
-						} catch (IOException thrown) {
-							logger.error("processScript()", thrown);
-						}
-					} else {
-						AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-							try {
-								request.open(Method.GET, getFullURL(scriptURI), false);
-								request.send();
-							} catch (IOException thrown) {
-								logger.error("processScript()", thrown);
-							}
-							return null;
-						});
-					}
-					int status = request.getStatus();
-					if (status != 200 && status != 0) {
-						text = httpURLConnection(scriptURI);
-					} else {
-						text = request.getResponseText();
-					}
+					text = ExternalResourcesCache.getSourceCache(scriptURI, "JS");
 					baseLineNumber = 1;
 				}
 				Context ctx = Executor.createContext(this.getDocumentURL(), bcontext);
@@ -278,8 +242,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					}
 
 				} catch (EcmaError ecmaError) {
-					logger.error("Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.columnNumber() + ": "
-							+ ecmaError);
+					logger.error("Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.columnNumber() + ": " + ecmaError);
 				} catch (EvaluatorException e) {
 					logger.error(e);
 				} catch (MissingResourceException err) {
@@ -294,43 +257,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			logger.error("No user agent context");
 		}
 	}
-
-	/**
-	 * Http url connection.
-	 *
-	 * @param url
-	 *            the url
-	 * @return the string
-	 */
-	private static String httpURLConnection(String srtUrl) {
-
-		StringBuilder response = new StringBuilder();
-		int responseCode = -1;
-		try {
-
-			URL url = new URL(srtUrl);
-			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(), url.getPath(), url.getQuery(), url.getRef());
-			URL obj = uri.toURL();
-			HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-			con.setRequestProperty("User-Agent", UserAgentContext.DEFAULT_USER_AGENT);
-			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
-			con.setRequestMethod("GET");
-			responseCode = con.getResponseCode();
-			BufferedReader in = new BufferedReader(new InputStreamReader(IORoutines.getInputStream(con)));
-			String inputLine;
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-		} catch (Exception e) {
-			logger.warn("Unable to parse script. URI=[" + srtUrl + "]. Response status was " + responseCode + ".");
-			return "";
-		}
-		return response.toString();
-	}
-
+	
 	/*
 	 * (non-Javadoc)
 	 * 
