@@ -18,39 +18,43 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.event;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.loboevolution.w3c.events.CustomEvent;
+import org.loboevolution.w3c.events.TextEvent;
 import org.loboevolution.w3c.html.HTMLElement;
+import org.w3c.dom.views.AbstractView;
 
 /**
- * The Class CustomEventImpl.
+ * The Class TextEventImpl.
  */
-public class CustomEventImpl extends EventImpl implements CustomEvent {
+public class TextEventImpl extends UIEventImpl implements TextEvent {
+
+	/** The data. */
+	private String data;
 
 	/**
-	 * Instantiates a new custom event impl.
+	 * Instantiates a new text event impl.
 	 */
-	public CustomEventImpl() {
+	public TextEventImpl() {
 	}
 
 	/**
-	 * Instantiates a new custom event impl.
+	 * Instantiates a new text event impl.
 	 *
 	 * @param type
 	 *            the type
 	 * @param srcElement
 	 *            the src element
 	 */
-	public CustomEventImpl(String type, HTMLElement srcElement) {
+	public TextEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
 
 	/**
-	 * Instantiates a new custom event impl.
+	 * Instantiates a new text event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -63,12 +67,12 @@ public class CustomEventImpl extends EventImpl implements CustomEvent {
 	 * @param leafY
 	 *            the leaf y
 	 */
-	public CustomEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
+	public TextEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
 		super(type, srcElement, mouseEvent, leafX, leafY);
 	}
 
 	/**
-	 * Instantiates a new custom event impl.
+	 * Instantiates a new text event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -77,22 +81,36 @@ public class CustomEventImpl extends EventImpl implements CustomEvent {
 	 * @param keyEvent
 	 *            the key event
 	 */
-	public CustomEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
+	public TextEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
 		super(type, srcElement, keyEvent);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.loboevolution.w3c.events.CustomEvent#initCustomEvent(java.lang.String,
-	 * boolean, boolean, int)
+	 * @see org.loboevolution.w3c.events.TextEvent#initTextEvent(java.lang.String,
+	 * boolean, boolean, org.w3c.dom.views.AbstractView, java.lang.String)
 	 */
 	@Override
-	public void initCustomEvent(String type, boolean canBubble, boolean cancelable, int detail) {
+	public void initTextEvent(String type, boolean canBubble, boolean cancelable, AbstractView view, String data) {
+
+		if (data == null) {
+			throw new IllegalArgumentException ();
+		}
 		setType(type);
 		setCanBubble(canBubble);
 		setCancelable(cancelable);
-		setDetail(detail);
+		setView(view);
+		this.data = data;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.w3c.events.TextEvent#getData()
+	 */
+	@Override
+	public String getData() {
+		return data;
 	}
 }

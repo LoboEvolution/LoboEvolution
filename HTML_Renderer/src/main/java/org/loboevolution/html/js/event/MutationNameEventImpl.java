@@ -18,44 +18,46 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.event;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.loboevolution.w3c.events.EventTarget;
-import org.loboevolution.w3c.events.FocusEvent;
+import org.loboevolution.w3c.events.MutationNameEvent;
 import org.loboevolution.w3c.html.HTMLElement;
-import org.w3c.dom.views.AbstractView;
+import org.w3c.dom.Node;
 
 /**
- * The Class FocusEventImpl.
+ * The Class MutationNameEventImpl.
  */
-public class FocusEventImpl extends UIEventImpl implements FocusEvent {
+public class MutationNameEventImpl extends MutationEventImpl implements MutationNameEvent {
 
-	/** The related target. */
-	private EventTarget relatedTarget;
+	/** The prev namespace uri. */
+	private String prevNamespaceURI;
+
+	/** The prev node name. */
+	private String prevNodeName;
 
 	/**
-	 * Instantiates a new focus event impl.
+	 * Instantiates a new mutation name event impl.
 	 */
-	public FocusEventImpl() {
+	public MutationNameEventImpl() {
 	}
 
 	/**
-	 * Instantiates a new focus event impl.
+	 * Instantiates a new mutation name event impl.
 	 *
 	 * @param type
 	 *            the type
 	 * @param srcElement
 	 *            the src element
 	 */
-	public FocusEventImpl(String type, HTMLElement srcElement) {
+	public MutationNameEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
 
 	/**
-	 * Instantiates a new focus event impl.
+	 * Instantiates a new mutation name event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -68,12 +70,12 @@ public class FocusEventImpl extends UIEventImpl implements FocusEvent {
 	 * @param leafY
 	 *            the leaf y
 	 */
-	public FocusEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
+	public MutationNameEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
 		super(type, srcElement, mouseEvent, leafX, leafY);
 	}
 
 	/**
-	 * Instantiates a new focus event impl.
+	 * Instantiates a new mutation name event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -82,7 +84,7 @@ public class FocusEventImpl extends UIEventImpl implements FocusEvent {
 	 * @param keyEvent
 	 *            the key event
 	 */
-	public FocusEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
+	public MutationNameEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
 		super(type, srcElement, keyEvent);
 	}
 
@@ -90,30 +92,39 @@ public class FocusEventImpl extends UIEventImpl implements FocusEvent {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.loboevolution.w3c.events.FocusEvent#initFocusEvent(java.lang.String,
-	 * boolean, boolean, org.w3c.dom.views.AbstractView, int,
-	 * org.loboevolution.w3c.events.EventTarget)
+	 * org.loboevolution.w3c.events.MutationNameEvent#initMutationNameEvent(java
+	 * .lang.String, boolean, boolean, org.w3c.dom.Node, java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
-	public void initFocusEvent(String type, boolean canBubble, boolean cancelable, AbstractView view, int detail,
-			EventTarget relatedTarget) {
+	public void initMutationNameEvent(String type, boolean canBubble, boolean cancelable, Node relatedNode,
+			String prevNamespaceURI, String prevNodeName) {
+
 		setType(type);
 		setCanBubble(canBubble);
 		setCancelable(cancelable);
-		setView(view);
-		setDetail(detail);
-		this.relatedTarget = relatedTarget;
-
+		this.prevNamespaceURI = prevNamespaceURI;
+		this.prevNodeName = prevNodeName;
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.w3c.events.FocusEvent#getRelatedTarget()
+	 * @see org.loboevolution.w3c.events.MutationNameEvent#getPrevNamespaceURI()
 	 */
 	@Override
-	public EventTarget getRelatedTarget() {
-		return relatedTarget;
+	public String getPrevNamespaceURI() {
+		return prevNamespaceURI;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.w3c.events.MutationNameEvent#getPrevNodeName()
+	 */
+	@Override
+	public String getPrevNodeName() {
+		return prevNodeName;
 	}
 
 }

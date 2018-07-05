@@ -18,45 +18,44 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.event;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.loboevolution.w3c.events.ProgressEvent;
+import org.loboevolution.w3c.events.EventTarget;
+import org.loboevolution.w3c.events.FocusEvent;
 import org.loboevolution.w3c.html.HTMLElement;
+import org.w3c.dom.views.AbstractView;
 
 /**
- * The Class ProgressEventImpl.
+ * The Class FocusEventImpl.
  */
-public class ProgressEventImpl extends EventImpl implements ProgressEvent {
+public class FocusEventImpl extends UIEventImpl implements FocusEvent {
 
-	/** The loaded. */
-	private int loaded;
-
-	/** The total. */
-	private int total;
+	/** The related target. */
+	private EventTarget relatedTarget;
 
 	/**
-	 * Instantiates a new progress event impl.
+	 * Instantiates a new focus event impl.
 	 */
-	public ProgressEventImpl() {
+	public FocusEventImpl() {
 	}
 
 	/**
-	 * Instantiates a new progress event impl.
+	 * Instantiates a new focus event impl.
 	 *
 	 * @param type
 	 *            the type
 	 * @param srcElement
 	 *            the src element
 	 */
-	public ProgressEventImpl(String type, HTMLElement srcElement) {
+	public FocusEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
 
 	/**
-	 * Instantiates a new progress event impl.
+	 * Instantiates a new focus event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -69,12 +68,12 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 	 * @param leafY
 	 *            the leaf y
 	 */
-	public ProgressEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
+	public FocusEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
 		super(type, srcElement, mouseEvent, leafX, leafY);
 	}
 
 	/**
-	 * Instantiates a new progress event impl.
+	 * Instantiates a new focus event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -83,55 +82,38 @@ public class ProgressEventImpl extends EventImpl implements ProgressEvent {
 	 * @param keyEvent
 	 *            the key event
 	 */
-	public ProgressEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
+	public FocusEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
 		super(type, srcElement, keyEvent);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.w3c.events.ProgressEvent#initProgressEvent(java.lang
-	 * .String, boolean, boolean, boolean, int, int)
+	 * @see
+	 * org.loboevolution.w3c.events.FocusEvent#initFocusEvent(java.lang.String,
+	 * boolean, boolean, org.w3c.dom.views.AbstractView, int,
+	 * org.loboevolution.w3c.events.EventTarget)
 	 */
 	@Override
-	public void initProgressEvent(String type, boolean canBubble, boolean cancelable, boolean lengthComputable,
-			int loaded, int total) {
-
+	public void initFocusEvent(String type, boolean canBubble, boolean cancelable, AbstractView view, int detail,
+			EventTarget relatedTarget) {
 		setType(type);
 		setCanBubble(canBubble);
 		setCancelable(cancelable);
-		total = lengthComputable ? total : -1;
-		loaded = loaded >= 0 ? loaded : 0;
+		setView(view);
+		setDetail(detail);
+		this.relatedTarget = relatedTarget;
 
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.w3c.events.ProgressEvent#getLengthComputable()
+	 * @see org.loboevolution.w3c.events.FocusEvent#getRelatedTarget()
 	 */
 	@Override
-	public boolean getLengthComputable() {
-		return total >= 0;
+	public EventTarget getRelatedTarget() {
+		return relatedTarget;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.w3c.events.ProgressEvent#getLoaded()
-	 */
-	@Override
-	public int getLoaded() {
-		return loaded;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.w3c.events.ProgressEvent#getTotal()
-	 */
-	@Override
-	public int getTotal() {
-		return total >= 0 ? total : 0;
-	}
 }

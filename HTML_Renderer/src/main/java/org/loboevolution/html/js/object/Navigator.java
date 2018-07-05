@@ -19,8 +19,9 @@
     Contact info: ivan.difrancesco@yahoo.it
  */
 
-package org.loboevolution.html.js;
+package org.loboevolution.html.js.object;
 
+import org.loboevolution.html.js.MimeTypesCollection;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
 

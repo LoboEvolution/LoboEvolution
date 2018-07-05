@@ -18,21 +18,20 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.object;
 
 import java.util.Date;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.loboevolution.html.js.Console;
 
 /**
- * The Class ConsoleImpl.
+ * The Class Console.
  */
-public class ConsoleImpl implements Console {
+public class Console {
 
 	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(ConsoleImpl.class);
+	private static final Logger logger = LogManager.getLogger(Console.class);
 
 	/** The time. */
 	private Date time;
@@ -40,36 +39,30 @@ public class ConsoleImpl implements Console {
 	/** The str time. */
 	private String strTime;
 
-	@Override
 	public void log(Object obj) {
 		logger.error(obj.toString());
 	}
 
-	@Override
 	public void debug(Object obj) {
 		logger.error(obj.toString());
 
 	}
 
-	@Override
 	public void info(Object obj) {
 		logger.info(obj.toString());
 
 	}
 
-	@Override
 	public void warn(Object obj) {
 		logger.warn(obj.toString());
 
 	}
 
-	@Override
 	public void error(Object obj) {
 		logger.error(obj.toString());
 
 	}
 
-	@Override
 	public void time(String name) {
 		time = new Date();
 		logger.info(name + ": timer started");
@@ -77,7 +70,6 @@ public class ConsoleImpl implements Console {
 
 	}
 
-	@Override
 	public void timeEnd(String name) {
 		if (name.equals(strTime)) {
 			Date date = new Date();

@@ -21,7 +21,7 @@
 
 package org.loboevolution.w3c.html;
 
-import org.loboevolution.html.js.Location;
+import org.loboevolution.html.js.object.Location;
 import org.loboevolution.html.xpath.XPathNSResolverImpl;
 import org.loboevolution.html.xpath.XPathResultImpl;
 import org.loboevolution.w3c.events.EventTarget;

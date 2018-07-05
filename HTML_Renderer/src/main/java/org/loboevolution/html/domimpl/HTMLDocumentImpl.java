@@ -62,8 +62,8 @@ import org.loboevolution.html.domfilter.ScriptFilter;
 import org.loboevolution.html.info.ImageInfo;
 import org.loboevolution.html.io.WritableLineReader;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.html.js.Location;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.object.Location;
+import org.loboevolution.html.js.object.Window;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.Domains;
@@ -1372,7 +1372,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 */
 	@Override
 	public AbstractView getDefaultView() {
-		return this.window;
+		return (Window) this.window;
 	}
 
 	/*

@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.event;
 
 import java.awt.event.KeyEvent;
 
@@ -118,7 +118,7 @@ public class KeyboardEventImpl extends UIEventImpl implements KeyboardEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.html.jsimpl.EventImpl#getMetaKey()
+	 * @see org.loboevolution.html.js.event.EventImpl#getMetaKey()
 	 */
 	@Override
 	public boolean getMetaKey() {

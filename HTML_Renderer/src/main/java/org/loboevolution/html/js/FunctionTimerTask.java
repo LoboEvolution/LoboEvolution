@@ -27,6 +27,7 @@ import java.lang.ref.WeakReference;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.js.object.Window;
 import org.mozilla.javascript.Function;
 
 /**

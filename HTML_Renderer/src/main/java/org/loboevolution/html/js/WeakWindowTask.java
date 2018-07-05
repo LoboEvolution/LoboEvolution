@@ -24,6 +24,9 @@ package org.loboevolution.html.js;
 import java.awt.event.ActionListener;
 import java.lang.ref.WeakReference;
 
+import org.loboevolution.html.js.object.Window;
+
+
 /**
  * The Class WeakWindowTask.
  */

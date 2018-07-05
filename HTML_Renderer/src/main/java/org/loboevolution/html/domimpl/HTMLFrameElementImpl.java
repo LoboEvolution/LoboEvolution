@@ -25,7 +25,7 @@ package org.loboevolution.html.domimpl;
 
 import org.loboevolution.html.BrowserFrame;
 import org.loboevolution.html.dombl.FrameNode;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.object.Window;
 import org.loboevolution.w3c.html.HTMLFrameElement;
 import org.w3c.dom.Document;
 
@@ -246,7 +246,6 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	public Document getContentDocument() {
 		BrowserFrame frame = this.browserFrame;
 		if (frame == null) {
-			// Not loaded yet
 			return null;
 		}
 		return frame.getContentDocument();

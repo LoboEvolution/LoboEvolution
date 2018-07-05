@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.js;
+package org.loboevolution.html.js.object;
 
 import java.net.MalformedURLException;
 import java.net.URL;

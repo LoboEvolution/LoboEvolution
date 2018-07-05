@@ -21,7 +21,7 @@
 package org.loboevolution.html.domimpl;
 
 
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.object.Window;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.w3c.html.HTMLFormElement;
 import org.loboevolution.w3c.html.HTMLObjectElement;

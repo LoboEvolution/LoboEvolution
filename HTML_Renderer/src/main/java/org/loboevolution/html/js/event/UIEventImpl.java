@@ -18,43 +18,45 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.event;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.loboevolution.w3c.events.CompositionEvent;
+import org.loboevolution.html.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.domimpl.HTMLElementImpl;
+import org.loboevolution.w3c.events.UIEvent;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
- * The Class CompositionEventImpl.
+ * The Class UIEventImpl.
  */
-public class CompositionEventImpl extends UIEventImpl implements CompositionEvent {
+public class UIEventImpl extends EventImpl implements UIEvent {
 
-	/** The data. */
-	private String data;
+	/** The detail. */
+	private int detail;
 
 	/**
-	 * Instantiates a new composition event impl.
+	 * Instantiates a new UI event impl.
 	 */
-	public CompositionEventImpl() {
+	public UIEventImpl() {
 	}
 
 	/**
-	 * Instantiates a new composition event impl.
+	 * Instantiates a new UI event impl.
 	 *
 	 * @param type
 	 *            the type
 	 * @param srcElement
 	 *            the src element
 	 */
-	public CompositionEventImpl(String type, HTMLElement srcElement) {
+	public UIEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
 
 	/**
-	 * Instantiates a new composition event impl.
+	 * Instantiates a new UI event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -67,12 +69,12 @@ public class CompositionEventImpl extends UIEventImpl implements CompositionEven
 	 * @param leafY
 	 *            the leaf y
 	 */
-	public CompositionEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
+	public UIEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
 		super(type, srcElement, mouseEvent, leafX, leafY);
 	}
 
 	/**
-	 * Instantiates a new composition event impl.
+	 * Instantiates a new UI event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -81,35 +83,45 @@ public class CompositionEventImpl extends UIEventImpl implements CompositionEven
 	 * @param keyEvent
 	 *            the key event
 	 */
-	public CompositionEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
+	public UIEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
 		super(type, srcElement, keyEvent);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * org.loboevolution.w3c.events.CompositionEvent#initCompositionEvent(java
-	 * .lang.String, boolean, boolean, org.w3c.dom.views.AbstractView,
-	 * java.lang.String)
+	 * @see org.loboevolution.w3c.events.UIEvent#initUIEvent(java.lang.String,
+	 * boolean, boolean, org.w3c.dom.views.AbstractView, int)
 	 */
 	@Override
-	public void initCompositionEvent(String type, boolean cancelBubble, boolean cancelable, AbstractView view,
-			String data) {
+	public void initUIEvent(String type, boolean canBubble, boolean cancelable, AbstractView view, int detail) {
+
 		setType(type);
-		setCanBubble(cancelBubble);
+		setCanBubble(canBubble);
 		setCancelable(cancelable);
-		setView(view);
-		this.data = data;
+		this.detail = detail;
+
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.w3c.events.CompositionEvent#getData()
+	 * @see org.loboevolution.html.js.event.EventImpl#getView()
 	 */
 	@Override
-	public String getData() {
-		return data;
+	public AbstractView getView() {
+		HTMLElementImpl el = (HTMLElementImpl) this.getSrcElement();
+		HTMLDocumentImpl doc = (HTMLDocumentImpl) el.getOwnerDocument();
+		return doc.getDefaultView();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.loboevolution.html.js.event.EventImpl#getDetail()
+	 */
+	@Override
+	public int getDetail() {
+		return detail;
 	}
 }

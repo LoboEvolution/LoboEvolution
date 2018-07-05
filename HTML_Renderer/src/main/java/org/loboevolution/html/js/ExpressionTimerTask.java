@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.loboevolution.html.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.js.object.Window;
 
 /**
  * The Class ExpressionTimerTask.
@@ -40,7 +41,7 @@ public class ExpressionTimerTask extends WeakWindowTask {
 	private final Integer timeIDInt;
 
 	/** The expression. */
-	private final String expression;
+	private final Object expression;
 
 	/** The remove task. */
 	private final boolean removeTask;
@@ -57,7 +58,7 @@ public class ExpressionTimerTask extends WeakWindowTask {
 	 * @param removeTask
 	 *            the remove task
 	 */
-	public ExpressionTimerTask(Window window, Integer timeIDInt, String expression, boolean removeTask) {
+	public ExpressionTimerTask(Window window, Integer timeIDInt, Object expression, boolean removeTask) {
 		super(window);
 		this.timeIDInt = timeIDInt;
 		this.expression = expression;
@@ -85,7 +86,7 @@ public class ExpressionTimerTask extends WeakWindowTask {
 			if (doc == null) {
 				throw new IllegalStateException("Cannot perform operation when document is unset.");
 			}
-			window.eval(this.expression);
+			window.eval((String)expression);
 		} catch (Throwable err) {
 			logger.error(err);
 		}

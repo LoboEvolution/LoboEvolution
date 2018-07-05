@@ -32,9 +32,10 @@ import org.loboevolution.html.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.domimpl.HTMLOptionElementImpl;
 import org.loboevolution.html.domimpl.HTMLScriptElementImpl;
 import org.loboevolution.html.domimpl.HTMLSelectElementImpl;
+import org.loboevolution.html.js.object.Console;
+import org.loboevolution.html.js.object.DOMParser;
 import org.loboevolution.html.js.xml.XMLHttpRequest;
 import org.loboevolution.html.js.xml.XMLSerializer;
-import org.loboevolution.html.jsimpl.ConsoleImpl;
 import org.loboevolution.html.xpath.XPathResultImpl;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -302,7 +303,7 @@ public class JSFunction extends AbstractScriptableDelegate{
 				// Window scope needs to be top-most scope.
 				windowScope = (ScriptableObject) JavaScript.getInstance().getJavascriptObject(this, null);
 				ctx.initStandardObjects(windowScope);
-				Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(new ConsoleImpl(), windowScope);
+				Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(new Console(), windowScope);
 				ScriptableObject.putProperty(windowScope, "console", consoleJSObj);
 				Object xpathresult = JavaScript.getInstance().getJavascriptObject(new XPathResultImpl(), windowScope);
 				ScriptableObject.putProperty(windowScope, "XPathResult", xpathresult);
@@ -1607,6 +1608,252 @@ public class JSFunction extends AbstractScriptableDelegate{
 	 */
 	public HTMLDocumentImpl getWindowDocument() {
 		return document;
+	}
+	
+	/**
+	 * Gets the onclick.
+	 *
+	 * @return the onclick
+	 */
+	public Function getOnclick() {
+
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnclick();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onclick.
+	 *
+	 * @param onclick
+	 *            the new onclick
+	 */
+	public void setOnclick(Function onclick) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnclick(onclick);
+
+		}
+	}
+
+	/**
+	 * Gets the ondblclick.
+	 *
+	 * @return the ondblclick
+	 */
+	public Function getOndblclick() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOndblclick();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the ondblclick.
+	 *
+	 * @param ondblclick
+	 *            the new ondblclick
+	 */
+	public void setOndblclick(Function ondblclick) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOndblclick(ondblclick);
+
+		}
+	}
+
+	/**
+	 * Gets the onkeydown.
+	 *
+	 * @return the onkeydown
+	 */
+	public Function getOnkeydown() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnkeydown();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onkeydown.
+	 *
+	 * @param onkeydown
+	 *            the new onkeydown
+	 */
+	public void setOnkeydown(Function onkeydown) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnkeydown(onkeydown);
+		}
+	}
+
+	/**
+	 * Gets the onkeypress.
+	 *
+	 * @return the onkeypress
+	 */
+	public Function getOnkeypress() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnkeypress();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onkeypress.
+	 *
+	 * @param onkeypress
+	 *            the new onkeypress
+	 */
+	public void setOnkeypress(Function onkeypress) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnkeypress(onkeypress);
+		}
+	}
+
+	/**
+	 * Gets the onkeyup.
+	 *
+	 * @return the onkeyup
+	 */
+	public Function getOnkeyup() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnkeyup();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onkeyup.
+	 *
+	 * @param onkeyup
+	 *            the new onkeyup
+	 */
+	public void setOnkeyup(Function onkeyup) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnkeyup(onkeyup);
+		}
+	}
+
+	/**
+	 * Gets the onmousedown.
+	 *
+	 * @return the onmousedown
+	 */
+	public Function getOnmousedown() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnmousedown();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onmousedown.
+	 *
+	 * @param onmousedown
+	 *            the new onmousedown
+	 */
+	public void setOnmousedown(Function onmousedown) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnmousedown(onmousedown);
+		}
+	}
+
+	/**
+	 * Gets the onmouseover.
+	 *
+	 * @return the onmouseover
+	 */
+	public Function getOnmouseover() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnmouseover();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onmouseover.
+	 *
+	 * @param onmouseover
+	 *            the new onmouseover
+	 */
+	public void setOnmouseover(Function onmouseover) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnmouseover(onmouseover);
+		}
+	}
+
+	/**
+	 * Gets the onmouseup.
+	 *
+	 * @return the onmouseup
+	 */
+	public Function getOnmouseup() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnmouseup();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onmouseup.
+	 *
+	 * @param onmouseup
+	 *            the new onmouseup
+	 */
+	public void setOnmouseup(Function onmouseup) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnmouseup(onmouseup);
+		}
+	}
+	
+	/**
+	 * Gets the onload.
+	 *
+	 * @return the onload
+	 */
+	public Function getOnload() {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) doc).getOnloadHandler();
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * Sets the onload.
+	 *
+	 * @param onload
+	 *            the new onload
+	 */
+	public void setOnload(Function onload) {
+		Document doc = this.getWindowDocument();
+		if (doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).setOnloadHandler(onload);
+		}
 	}
 
 }

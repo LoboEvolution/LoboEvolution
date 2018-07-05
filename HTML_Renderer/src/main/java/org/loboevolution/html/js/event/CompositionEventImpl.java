@@ -18,43 +18,43 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.jsimpl;
+package org.loboevolution.html.js.event;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
-import org.loboevolution.w3c.events.TextEvent;
+import org.loboevolution.w3c.events.CompositionEvent;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.w3c.dom.views.AbstractView;
 
 /**
- * The Class TextEventImpl.
+ * The Class CompositionEventImpl.
  */
-public class TextEventImpl extends UIEventImpl implements TextEvent {
+public class CompositionEventImpl extends UIEventImpl implements CompositionEvent {
 
 	/** The data. */
 	private String data;
 
 	/**
-	 * Instantiates a new text event impl.
+	 * Instantiates a new composition event impl.
 	 */
-	public TextEventImpl() {
+	public CompositionEventImpl() {
 	}
 
 	/**
-	 * Instantiates a new text event impl.
+	 * Instantiates a new composition event impl.
 	 *
 	 * @param type
 	 *            the type
 	 * @param srcElement
 	 *            the src element
 	 */
-	public TextEventImpl(String type, HTMLElement srcElement) {
+	public CompositionEventImpl(String type, HTMLElement srcElement) {
 		super(type, srcElement);
 	}
 
 	/**
-	 * Instantiates a new text event impl.
+	 * Instantiates a new composition event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -67,12 +67,12 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
 	 * @param leafY
 	 *            the leaf y
 	 */
-	public TextEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
+	public CompositionEventImpl(String type, HTMLElement srcElement, InputEvent mouseEvent, int leafX, int leafY) {
 		super(type, srcElement, mouseEvent, leafX, leafY);
 	}
 
 	/**
-	 * Instantiates a new text event impl.
+	 * Instantiates a new composition event impl.
 	 *
 	 * @param type
 	 *            the type
@@ -81,24 +81,23 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
 	 * @param keyEvent
 	 *            the key event
 	 */
-	public TextEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
+	public CompositionEventImpl(String type, HTMLElement srcElement, KeyEvent keyEvent) {
 		super(type, srcElement, keyEvent);
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.w3c.events.TextEvent#initTextEvent(java.lang.String,
-	 * boolean, boolean, org.w3c.dom.views.AbstractView, java.lang.String)
+	 * @see
+	 * org.loboevolution.w3c.events.CompositionEvent#initCompositionEvent(java
+	 * .lang.String, boolean, boolean, org.w3c.dom.views.AbstractView,
+	 * java.lang.String)
 	 */
 	@Override
-	public void initTextEvent(String type, boolean canBubble, boolean cancelable, AbstractView view, String data) {
-
-		if (data == null) {
-			throw new IllegalArgumentException ();
-		}
+	public void initCompositionEvent(String type, boolean cancelBubble, boolean cancelable, AbstractView view,
+			String data) {
 		setType(type);
-		setCanBubble(canBubble);
+		setCanBubble(cancelBubble);
 		setCancelable(cancelable);
 		setView(view);
 		this.data = data;
@@ -107,7 +106,7 @@ public class TextEventImpl extends UIEventImpl implements TextEvent {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.loboevolution.w3c.events.TextEvent#getData()
+	 * @see org.loboevolution.w3c.events.CompositionEvent#getData()
 	 */
 	@Override
 	public String getData() {

@@ -20,7 +20,7 @@
  */
 package org.loboevolution.html.svgimpl;
 
-import org.loboevolution.html.jsimpl.EventException;
+import org.loboevolution.html.js.event.EventException;
 import org.loboevolution.w3c.events.Event;
 import org.loboevolution.w3c.svg.SVGGElement;
 import org.w3c.dom.DOMException;

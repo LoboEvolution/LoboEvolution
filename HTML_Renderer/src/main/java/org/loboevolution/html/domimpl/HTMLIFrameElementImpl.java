@@ -24,7 +24,7 @@ import java.net.MalformedURLException;
 
 import org.loboevolution.html.BrowserFrame;
 import org.loboevolution.html.dombl.FrameNode;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.object.Window;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.w3c.html.DOMSettableTokenList;
@@ -116,7 +116,6 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	public Window getContentWindow() {
 		BrowserFrame frame = this.browserFrame;
 		if (frame == null) {
-			// Not loaded yet
 			return null;
 		}
 		return Window.getWindow(frame.getHtmlRendererContext());

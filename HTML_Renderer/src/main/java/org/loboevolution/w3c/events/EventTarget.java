@@ -20,7 +20,7 @@
  */
 package org.loboevolution.w3c.events;
 
-import org.loboevolution.html.jsimpl.EventException;
+import org.loboevolution.html.js.event.EventException;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
 

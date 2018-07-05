@@ -21,7 +21,7 @@
 
 package org.loboevolution.w3c.html;
 
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.object.Window;
 import org.w3c.dom.Document;
 
 /**
