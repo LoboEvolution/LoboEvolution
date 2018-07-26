@@ -1,8 +1,26 @@
 Version 0.99.2:
 ------------
 
+- Added: First SVG implementation #13
+- Added: Canvas globalCompositeOperation, textAlign, baseline, isPointInPath, arc, createRadialGradient
+- Added: Css units
+- Added: Css margin, border and padding
+- Added: Css pseudo-classes nth-child, nth-last-child, nth-last-of-type, nth-of-type, lang
+- Added: Css rules Even and Odd
+- Added: Css Selector formula
+- Added: Font Chooser
+- Added: new Source viewer
+- Added: new XML viewer
+- Added: new CSS viewer
+- Added: new Javascript viewer
+- Added: Asynchronous Loggers
 
- LIBRARIES:
-- PDFrenderer commit 145
-- CSSParser 0.9.20
-- Mozilla Rhino 1.7.7.1
+- Fixed: Privilege error during installation. This directory can not be written! Please choose another directory!
+- Fixed: Wrong width dimension when the property "width" of "td" tag is not present
+- Fixed: Cellpadding support
+- minor bugfix
+
+LIBRARIES:
+PDFrenderer
+CSSParser 0.9.23
+Mozilla Rhino 1.7.7.2

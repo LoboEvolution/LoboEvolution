@@ -1,0 +1,39 @@
+Version 0.99.3:
+------------
+
+Lobo Evolution was born as a fork of LoboBrowser. 
+Lobo Evolution continues the work of lobochief (owner LoboBrowser), the first version of Lobo Evolution was 0.98.5 in continuation with the old project.
+After three years Lobo Browser has no new commits, the owner has changed but the work has not restarted. 
+For these reasons we change the package from org.lobobrowser to org.loboevolution and remove the lobobrowser license from the java classes, 
+the XAMJ_Build project is renamed to LoboEvolution_Build, the LoboBrowser license is moved to LoboEvolution_Build/license as a history
+
+- Added: hsla and hsl color values 
+- Added: multiple value support for border-color and border-style
+- Added: cursor values auo, e-resize, grab, n-resize, ne-resize, nw-resize, s-resize, se-resize, sw-resize, w-resize
+- Added: css clear
+- Added: css unit support for table width and height
+- Added  css line-height property
+- Added: css position:fixed property
+- Added: createTBody() and insertRow() table methods
+- Added: insertCell () row method
+- Added: insertRow(), deleteRow(), getRows(), getAlign(), setAlign(), getCh(), setCh(), getChOff(), setChOff(), getVAlign(), setVAlign() section (thead, tbody, tfooter) methods 
+- Added: cssList, jsList and mediaList in Info Page menu
+- Added: info page viewer
+- Added: new imageviewer 
+- Added: java, php, bash, ruby, csharp, sql, c, objc, python, perl, json viewer
+- Added: HttpUrlConnection with GZIP encoding
+- Added Cookies, Connection, Color, Font, Font Size, Recent Donwload File, Recent Open File, Look and Feel, bookmarks, search engine, navigation info,  into sqlite database
+- Added: new sub-menu Opened Files and Downloaded Files in Recent Menu.
+
+- Fixed: onclick and mouseover for href element 
+- Fixed: multiple css selectors
+- Fixed: table row background
+- Fixed: background parser
+- Fixed:  background-image with base64 value and background-image with relative path
+
+- Renamed: SwingLabs PDF Viewer in LoboEvolution PDF Viewer
+
+ LIBRARIES:
+- CSSParser 0.9.24
+- Mozilla Rhino 1.7.7.8
+- sqlite 3.2.1.0
