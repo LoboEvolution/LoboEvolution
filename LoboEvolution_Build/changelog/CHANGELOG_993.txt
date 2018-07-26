@@ -20,10 +20,17 @@ the XAMJ_Build project is renamed to LoboEvolution_Build, the LoboBrowser licens
 - Added: cssList, jsList and mediaList in Info Page menu
 - Added: info page viewer
 - Added: new imageviewer 
+- Added: Auto complete TextField
 - Added: java, php, bash, ruby, csharp, sql, c, objc, python, perl, json viewer
 - Added: HttpUrlConnection with GZIP encoding
-- Added Cookies, Connection, Color, Font, Font Size, Recent Donwload File, Recent Open File, Look and Feel, bookmarks, search engine, navigation info,  into sqlite database
+- Added Cookies, Connection, Color, Font, Font Size, Recent Donwload File, Recent Open File, javascript and css cache, 
+	    General settings, input value(no password), authentication, Look and Feel, bookmarks, search engine, navigation info, into sqlite database
 - Added: new sub-menu Opened Files and Downloaded Files in Recent Menu.
+- Added: sub menu Cookie Page in menu View. The sub menu show cookies
+- Added: sections History, Bookmarks and Cookies in Preferences/tool menu 
+- Added: import button for import external data from others browser
+- Added: import of bookmarks and history from Mozilla Firefox and Google Chrome
+- Added: new clear history gui 
 
 - Fixed: onclick and mouseover for href element 
 - Fixed: multiple css selectors
