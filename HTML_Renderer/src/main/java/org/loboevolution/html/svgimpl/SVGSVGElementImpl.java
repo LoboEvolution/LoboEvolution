@@ -51,7 +51,7 @@ import org.w3c.dom.css.CSSValue;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.DocumentView;
 
-import com.steadystate.css.util.CSSProperties;
+import com.gargoylesoftware.css.util.CSSProperties;
 
 public class SVGSVGElementImpl extends SVGElementImpl implements SVGSVGElement, HtmlAttributeProperties, CSSProperties {
 

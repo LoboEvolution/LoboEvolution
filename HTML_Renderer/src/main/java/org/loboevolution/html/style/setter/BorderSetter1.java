@@ -3,7 +3,7 @@ package org.loboevolution.html.style.setter;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
-import com.steadystate.css.util.CSSProperties;
+import com.gargoylesoftware.css.util.CSSProperties;
 
 public class BorderSetter1 implements SubPropertySetter, CSSProperties {
 

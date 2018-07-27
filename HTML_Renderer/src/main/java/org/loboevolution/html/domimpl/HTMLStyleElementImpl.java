@@ -30,13 +30,12 @@ import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.w3c.html.HTMLStyleElement;
-import org.w3c.css.sac.InputSource;
+import com.gargoylesoftware.css.parser.InputSource;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
 
-import com.steadystate.css.dom.CSSStyleSheetImpl;
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.parser.CSSOMParser;
 
 /**
  * The Class HTMLStyleElementImpl.
@@ -114,9 +113,9 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 			if (text != null && !"".equals(text)) {
 				HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getOwnerDocument();
 				try {
-					CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+					CSSOMParser parser = new CSSOMParser();
 					InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(text, doc.getBaseURI());
-					CSSStyleSheet sheet = parser.parseStyleSheet(is, null, null);
+					CSSStyleSheet sheet = parser.parseStyleSheet(is, null);
 					if (sheet != null) {
 						doc.addStyleSheet(sheet);
 						this.styleSheet = sheet;

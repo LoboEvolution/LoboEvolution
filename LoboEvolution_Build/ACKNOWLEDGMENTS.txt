@@ -4,7 +4,7 @@ The following open source externals are used by this project:
   
 * [https://github.com/mozilla/rhino] Rhino - Javascript for Java .
   
-* [http://cssparser.sourceforge.net/] Cssparser.
+* [https://github.com/HtmlUnit/htmlunit-cssparser] CSS parser used by HtmlUnit.
 
 * [http://java.sun.com] Java(TM) Look and Feel Graphics Repository 1.0.
 

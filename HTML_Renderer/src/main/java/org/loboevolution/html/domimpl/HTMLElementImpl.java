@@ -58,14 +58,13 @@ import org.loboevolution.w3c.html.DOMStringMap;
 import org.loboevolution.w3c.html.DOMTokenList;
 import org.loboevolution.w3c.html.HTMLElement;
 import org.loboevolution.w3c.html.HTMLPropertiesCollection;
-import org.w3c.css.sac.InputSource;
+import com.gargoylesoftware.css.parser.InputSource;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.CSSOMParser;
 
 /**
  * The Class HTMLElementImpl.
@@ -200,7 +199,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			String style = this.getAttribute(STYLE_HTML);
 
 			if (!Strings.isBlank(style)) {
-				CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+				CSSOMParser parser = new CSSOMParser();
 				InputSource inputSource = this.getCssInputSourceForDecl(style);
 				try {
 					CSSStyleDeclaration sd = parser.parseStyleDeclaration(inputSource);

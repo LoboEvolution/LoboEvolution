@@ -51,14 +51,14 @@ import org.loboevolution.http.SSLCertificate;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Nodes;
 import org.loboevolution.util.io.IORoutines;
-import org.w3c.css.sac.InputSource;
+import com.gargoylesoftware.css.parser.InputSource;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
 import org.w3c.dom.css.CSSStyleRule;
 import org.w3c.dom.css.CSSStyleSheet;
 
-import com.steadystate.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.CSSOMParser;
 
 /**
  * Tests only the CSS parser.
@@ -174,7 +174,7 @@ public class CssParserTest extends JFrame {
 			long time1 = System.currentTimeMillis();
 			CSSOMParser parser = new CSSOMParser();
 			InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(source, uri);
-			CSSStyleSheet styleSheet = parser.parseStyleSheet(is, null, null);
+			CSSStyleSheet styleSheet = parser.parseStyleSheet(is, null);
 			long time2 = System.currentTimeMillis();
 			logger.info("Parsed URI=[" + uri + "]: Parse elapsed: " + (time2 - time1) + " ms. Load elapsed: "
 					+ (time1 - time0) + " ms.");

@@ -34,12 +34,11 @@ import org.loboevolution.html.domimpl.HTMLDocumentImpl;
 import org.loboevolution.http.Urls;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.util.Strings;
-import org.w3c.css.sac.InputSource;
+import com.gargoylesoftware.css.parser.InputSource;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 
-import com.steadystate.css.parser.CSSOMParser;
-import com.steadystate.css.parser.SACParserCSS3;
+import com.gargoylesoftware.css.parser.CSSOMParser;
 
 /**
  * The Class CSSUtilities.
@@ -114,13 +113,13 @@ public class CSSUtilities {
 	 * @throws Exception
 	 */
 	public static CSSStyleSheet parse(String href, HTMLDocumentImpl doc) throws Exception {
-		CSSOMParser parser = new CSSOMParser(new SACParserCSS3());
+		CSSOMParser parser = new CSSOMParser();
 		URL baseURL = new URL(doc.getBaseURI());
 		URL scriptURL = Urls.createURL(baseURL, href);
 		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
 		String source = ExternalResourcesCache.getSourceCache(scriptURI, "CSS");
 		InputSource is = getCssInputSourceForStyleSheet(source, doc.getBaseURI());
-		return parser.parseStyleSheet(is, null, null);
+		return parser.parseStyleSheet(is, null);
 
 	}
 

@@ -34,7 +34,7 @@ import org.loboevolution.w3c.html.HTMLLinkElement;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
 
-import com.steadystate.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 /**
  * The Class HTMLLinkElementImpl.

@@ -27,7 +27,7 @@ import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.util.Strings;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
-import com.steadystate.css.util.CSSProperties;
+import com.gargoylesoftware.css.util.CSSProperties;
 
 public class BackgroundSetter implements SubPropertySetter, CSSProperties {
 

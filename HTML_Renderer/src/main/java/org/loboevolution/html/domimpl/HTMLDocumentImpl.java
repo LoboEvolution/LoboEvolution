@@ -95,7 +95,7 @@ import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 import org.xml.sax.SAXException;
 
-import com.steadystate.css.dom.CSSStyleSheetListImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 
 /**
  * The Class HTMLDocumentImpl.
