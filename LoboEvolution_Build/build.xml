@@ -34,7 +34,7 @@
 		</zip>
 	</target>
 
-	<target name="directory_structure" depends="lobo_jar,cobra_no_commons,primary_extension,public_jar">
+	<target name="directory_structure" depends="cobra_no_commons,primary_extension,lobo_jar,public_jar">
 		<mkdir dir="${lobo.dir}" />
 		<delete>
 			<fileset dir="${lobo.dir}">
@@ -72,11 +72,11 @@
 	</target>
 
 	<target name="public_classfiles">
-		<javac srcdir="Platform_Public_API/src/" source="1.8" destdir="Platform_Public_API/bin/" classpath="Common/bin/" debug="on" includeantruntime="false" />
+		<javac srcdir="Platform_Public_API/bin/" source="1.8" destdir="Platform_Public_API/bin/" classpath="" debug="on" includeantruntime="false" />
 	</target>
 
 	<target name="primary_extension_classfiles">
-		<javac srcdir="Primary_Extension/src/" source="1.8" destdir="Primary_Extension/bin/" classpath="Platform_Public_API/bin/:parser/bin:LoboEvolution_Build/ext/log4j-api-2.8.1.jar:Common/bin/:Platform_Core/bin/:LoboEvolution_Build/ext/rsyntaxtextarea.jar:HTML_Renderer/bin/:LoboEvolution_Build/ext/PDFrenderer.jar:LoboEvolution_Build/ext/json-20180130.jar:LoboEvolution_Build/ext/batik-all-1.8.jar" debug="on" includeantruntime="false" />
+		<javac srcdir="Primary_Extension/bin/" source="1.8" destdir="Primary_Extension/bin/" classpath="" debug="on" includeantruntime="false" />
 	</target>
 
 	<target name="lobo_jar" depends="lobo_classfiles,common_classfiles">
@@ -91,20 +91,20 @@
 		<jar destfile="${build.dir}/lobo.jar" basedir="LoboEvolution_Build/" includes="log4j2.xml" update="true" />
 	</target>
 
-	<target name="lobo_classfiles" depends="common_classfiles,public_classfiles">
-		<javac srcdir="Platform_Core/src/" source="1.8" destdir="Platform_Core/bin/" classpath="Common/bin/:Platform_Public_API/bin/:LoboEvolution_Build/ext/log4j-api-2.8.1.jar:LoboEvolution_Build/ext/JTattoo-1.6.11.jar" debug="on" includeantruntime="false" />
+	<target name="lobo_classfiles" depends="public_classfiles,common_classfiles">
+		<javac srcdir="Platform_Core/bin/" source="1.8" destdir="Platform_Core/bin/" classpath="Common/bin/:Platform_Public_API/bin/" debug="on" includeantruntime="false" />
 	</target>
 
     <target name="common_classfiles" depends="">
-        <javac srcdir="Common/src/" source="1.8" destdir="Common/bin/" classpath="LoboEvolution_Build/ext/log4j-api-2.8.1.jar" debug="on" includeantruntime="false" />
+        <javac srcdir="Common/bin/" source="1.8" destdir="Common/bin/" classpath="LoboEvolution_Build/ext/log4j-api-2.8.1.jar" debug="on" includeantruntime="false" />
     </target>
 
 	<target name="html_classfiles" depends="common_classfiles,parser_classfiles">
-		<javac srcdir="HTML_Renderer/src/" source="1.8" destdir="HTML_Renderer/bin/" classpath="Common/bin/:parser/bin:LoboEvolution_Build/ext/log4j-api-2.8.1.jar:LoboEvolution_Build/ext/xalan.jar:LoboEvolution_Build/ext/batik-all-1.8.jar:LoboEvolution_Build/ext/w3c.jar:LoboEvolution_Build/ext/jdatepicker.jar" debug="on" includeantruntime="false" />
+		<javac srcdir="HTML_Renderer/bin/" source="1.8" destdir="HTML_Renderer/bin/" classpath="Common:parser/bin/" debug="on" includeantruntime="false" />
 	</target>
 
 	<target name="parser_classfiles">
-		<javac srcdir="parser/src/" source="1.8" destdir="parser/bin/" classpath="LoboEvolution_Build/ext/log4j-api-2.8.1.jar" debug="on" includeantruntime="false" />
+		<javac srcdir="parser/bin/" source="1.8" destdir="parser/bin/" classpath="" debug="on" includeantruntime="false" />
 	</target>
 
 	<target name="izpackext_jar" depends="izpackext_classfiles">
@@ -113,6 +113,6 @@
 	</target>
 
 	<target name="izpackext_classfiles">
-		<javac srcdir="IzPack_RegistryPanel\src" source="1.8" destdir="IzPack_RegistryPanel\bin" classpath="LoboEvolution_Build/installer.jar" debug="on" includeantruntime="false" />
+		<javac srcdir="IzPack_RegistryPanel\bin" source="1.8" destdir="IzPack_RegistryPanel\bin" classpath="LoboEvolution_Build/installer.jar" debug="on" includeantruntime="false" />
 	</target>
 </project>
