@@ -198,7 +198,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			// Add any declarations in style attribute (last takes precedence).
 			String style = this.getAttribute(STYLE_HTML);
 
-			if (!Strings.isBlank(style)) {
+			if (Strings.isNotBlank(style)) {
 				CSSOMParser parser = new CSSOMParser();
 				InputSource inputSource = this.getCssInputSourceForDecl(style);
 				try {
@@ -410,7 +410,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			return style;
 		}
 		String classNames = this.getClassName();
-		if (!Strings.isBlank(classNames)) {
+		if (Strings.isNotBlank(classNames)) {
 			String id = this.getId();
 			String elementName = this.getTagName();
 			String[] classNameArray = Strings.split(classNames);
@@ -521,7 +521,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			String elementName = this.getTagName();
 			String classNames = this.getClassName();
 			String[] classNameArray = null;
-			if (!Strings.isBlank(classNames)) {
+			if (Strings.isNotBlank(classNames)) {
 				classNameArray = Strings.split(classNames);
 			}
 			ihs = Boolean
@@ -561,7 +561,7 @@ public class HTMLElementImpl extends DOMElementImpl implements HTMLElement, CSSP
 			String elementName = this.getTagName();
 			String classNames = this.getClassName();
 			String[] classNameArray = null;
-			if (!Strings.isBlank(classNames)) {
+			if (Strings.isNotBlank(classNames)) {
 				classNameArray = Strings.split(classNames);
 			}
 			hhs = Boolean.valueOf(

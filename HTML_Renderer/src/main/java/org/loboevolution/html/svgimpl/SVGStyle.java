@@ -141,7 +141,7 @@ public class SVGStyle extends BaseControl{
 				g2d.setPaint(strokeColor);
 				g2d.draw(basicStroke.createStrokedShape(shape2d));
 			}
-		} else if (!Strings.isBlank(svgi.getClipPath())) {
+		} else if (Strings.isNotBlank(svgi.getClipPath())) {
 			g2d.setClip(shape2d);
 			g2d.setPaint(Color.WHITE);
 			g2d.draw(shape2d);

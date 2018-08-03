@@ -139,7 +139,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
 			String href = this.getHref();
-			if (!Strings.isBlank(href)) {
+			if (Strings.isNotBlank(href)) {
 				try {
 					URL url = this.getFullURL(href);
 					return url == null ? null : url.toExternalForm();
@@ -159,7 +159,7 @@ public class HTMLAnchorElementImpl extends HTMLAbstractUIElement implements HTML
 		HtmlRendererContext rcontext = this.getHtmlRendererContext();
 		if (rcontext != null) {
 			String href = this.getHref();
-			if (!Strings.isBlank(href)) {
+			if (Strings.isNotBlank(href)) {
 				String target = this.getTarget();
 				try {
 					URL url = this.getFullURL(href);

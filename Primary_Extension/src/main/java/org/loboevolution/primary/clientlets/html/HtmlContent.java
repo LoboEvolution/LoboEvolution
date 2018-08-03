@@ -233,7 +233,7 @@ public class HtmlContent extends AbstractComponentContent {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;
 				String src = element.getAttribute("src");
-				if (!Strings.isBlank(src)) {
+				if (Strings.isNotBlank(src)) {
 					if(!Urls.isAbsolute(src)) {
 						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
 						src = doc.getFullURL(src).toString();
@@ -255,7 +255,7 @@ public class HtmlContent extends AbstractComponentContent {
 				HTMLElement element = (HTMLElement) node;
 				String rel = element.getAttribute("rel");
 				String href = element.getAttribute("href");
-				if ("icon".equalsIgnoreCase(rel) && !Strings.isBlank(href)) {
+				if ("icon".equalsIgnoreCase(rel) && Strings.isNotBlank(href)) {
 					if(!Urls.isAbsolute(href)) {
 						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
 						href = doc.getFullURL(href).toString();
@@ -287,7 +287,7 @@ public class HtmlContent extends AbstractComponentContent {
 				HTMLElement element = (HTMLElement) node;
 				String rel = element.getAttribute("rel");
 				String href = element.getAttribute("href");
-				if ("stylesheet".equalsIgnoreCase(rel) && !Strings.isBlank(href)) {
+				if ("stylesheet".equalsIgnoreCase(rel) && Strings.isNotBlank(href)) {
 					if(!Urls.isAbsolute(href)) {
 						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
 						href = doc.getFullURL(href).toString();
@@ -318,7 +318,7 @@ public class HtmlContent extends AbstractComponentContent {
 				MetaInfo info = new MetaInfo();
 				HTMLElement element = (HTMLElement) node;
 				String src = element.getAttribute("src");
-				if (!Strings.isBlank(src)) {
+				if (Strings.isNotBlank(src)) {
 					if(!Urls.isAbsolute(src)) {
 						HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
 						src = doc.getFullURL(src).toString();

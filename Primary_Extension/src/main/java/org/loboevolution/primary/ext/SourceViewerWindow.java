@@ -127,7 +127,7 @@ public class SourceViewerWindow extends JFrame {
 		findButton.addActionListener(e -> {
 			String find = jtfFilter.getText().toLowerCase();
 			textArea.requestFocusInWindow();
-			if (!Strings.isBlank(find)) {
+			if (Strings.isNotBlank(find)) {
 				Document document = textArea.getDocument();
 				int findLength = find.length();
 				try {

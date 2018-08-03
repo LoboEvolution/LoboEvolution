@@ -35,7 +35,7 @@ public class BackgroundSetter implements SubPropertySetter, CSSProperties {
 	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(BACKGROUND, newValue, important);
-		if (!Strings.isBlank(newValue)) {
+		if (Strings.isNotBlank(newValue)) {
 			String[] tokens = HtmlValues.splitCssValue(newValue);
 			boolean hasXPosition = false;
 			boolean hasYPosition = false;

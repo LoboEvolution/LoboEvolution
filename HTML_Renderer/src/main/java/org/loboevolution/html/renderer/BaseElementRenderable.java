@@ -224,7 +224,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				if (props == null) {
 					return false;
 				}
-				return !Strings.isBlank(props.getWidth());
+				return Strings.isNotBlank(props.getWidth());
 			}
 			return false;
 		}

@@ -36,7 +36,7 @@ public class FourCornersSetter implements SubPropertySetter {
 	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(this.property, newValue, important);
-		if (!Strings.isBlank(newValue)) {
+		if (Strings.isNotBlank(newValue)) {
 			String[] array = HtmlValues.splitCssValue(newValue);
 			int size = array.length;
 			if (size == 1) {

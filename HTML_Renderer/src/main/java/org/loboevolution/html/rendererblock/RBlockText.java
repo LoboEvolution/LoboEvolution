@@ -98,7 +98,7 @@ public class RBlockText {
 					RWord rword = new RWord(textNode, word.toString(), rBlockView.getContainer(), fm, descent, ascentPlusLeading,
 							wordHeight, textTransform);
 					addWordToLine(rword, rBlockView);
-					if (!Strings.isBlank(renderState.getlineHeight())){
+					if (Strings.isNotBlank(renderState.getlineHeight())){
 						bLine.addLineBreak(rBlockView.getModelNode(), rBlockView, 0);
 					}
 				}

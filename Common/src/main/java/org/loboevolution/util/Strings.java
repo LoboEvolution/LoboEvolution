@@ -171,6 +171,17 @@ public class Strings {
 	public static boolean isBlank(String text) {
 		return text == null || "".equals(text);
 	}
+	
+	/**
+	 * Checks if is not blank.
+	 *
+	 * @param text
+	 *            the text
+	 * @return true, if is not blank
+	 */
+	public static boolean isNotBlank(String text) {
+		return !isBlank(text);
+	}
 
 	/**
 	 * Count lines.

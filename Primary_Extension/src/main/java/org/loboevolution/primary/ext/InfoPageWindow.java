@@ -120,13 +120,13 @@ public class InfoPageWindow extends JFrame {
 			Object columnNames[] = { "", "" };
 			List<String[]> values = new ArrayList<String[]>();
 			for (MetaInfo info : infoList) {
-				if (!Strings.isBlank(info.getName())) {
+				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName(), info.getContent() });
-				} else if (!Strings.isBlank(info.getItemprop())) {
+				} else if (Strings.isNotBlank(info.getItemprop())) {
 					values.add(new String[] { info.getItemprop(), info.getContent() });
-				} else if (!Strings.isBlank(info.getProperty())) {
+				} else if (Strings.isNotBlank(info.getProperty())) {
 					values.add(new String[] { info.getProperty(), info.getContent() });
-				} else if (!Strings.isBlank(info.getHttpEqui())) {
+				} else if (Strings.isNotBlank(info.getHttpEqui())) {
 					values.add(new String[] { info.getHttpEqui(), info.getContent() });
 				}
 			}
@@ -147,7 +147,7 @@ public class InfoPageWindow extends JFrame {
 			Object columnNames[] = { "" };
 			List<String[]> values = new ArrayList<String[]>();
 			for (MetaInfo info : infoList) {
-				if (!Strings.isBlank(info.getName())) {
+				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName() });
 				}
 			}
@@ -200,7 +200,7 @@ public class InfoPageWindow extends JFrame {
 			Object columnNames[] = { "" };
 			List<String[]> values = new ArrayList<String[]>();
 			for (MetaInfo info : infoList) {
-				if (!Strings.isBlank(info.getName())) {
+				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName() });
 				}
 			}
@@ -253,7 +253,7 @@ public class InfoPageWindow extends JFrame {
 			Object columnNames[] = { "" };
 			List<String[]> values = new ArrayList<String[]>();
 			for (MetaInfo info : mediaList) {
-				if (!Strings.isBlank(info.getName())) {
+				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName() });
 				}
 			}

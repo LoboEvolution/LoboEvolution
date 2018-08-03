@@ -99,7 +99,7 @@ public class SVGAnimationImpl extends SVGSVGElementImpl implements SMILAnimation
 	
 	public float getStartTime() {
 		String beginTime = this.getAttribute(BEGIN);
-		if (!Strings.isBlank(beginTime) && !beginTime.equalsIgnoreCase("indefinite")) {
+		if (Strings.isNotBlank(beginTime) && !beginTime.equalsIgnoreCase("indefinite")) {
 			return SVGUtility.getClockMilliSecs(beginTime);
 		} else {
 			return 0;

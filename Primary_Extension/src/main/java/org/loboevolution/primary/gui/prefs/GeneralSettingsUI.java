@@ -275,7 +275,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		
 		List<String> strings = startupPagesStringListControl.getStrings();
 		for (String url : strings) {
-			if (!Strings.isBlank(url)) {
+			if (Strings.isNotBlank(url)) {
 				GeneralSettings.insertStartupUrl(url);
 			}
 		}

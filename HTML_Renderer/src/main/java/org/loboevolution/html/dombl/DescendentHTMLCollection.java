@@ -113,11 +113,11 @@ public class DescendentHTMLCollection extends AbstractScriptableDelegate impleme
 				if (descNode instanceof DOMElementImpl) {
 					DOMElementImpl element = (DOMElementImpl) descNode;
 					String id = element.getId();
-					if (!Strings.isBlank(id)) {
+					if (Strings.isNotBlank(id)) {
 						itemsByName.put(id, element);
 					}
 					String name = element.getAttribute(NAME);
-					if (!Strings.isBlank(name) && !name.equals(id)) {
+					if (Strings.isNotBlank(name) && !name.equals(id)) {
 						itemsByName.put(name, element);
 					}
 				}

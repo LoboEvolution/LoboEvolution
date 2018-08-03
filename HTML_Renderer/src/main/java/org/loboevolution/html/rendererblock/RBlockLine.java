@@ -217,7 +217,7 @@ public class RBlockLine {
 			line = rBlockView.getCurrentLine();
 		}
 		
-		if(!Strings.isBlank(rs.getlineHeight())) {
+		if(Strings.isNotBlank(rs.getlineHeight())) {
 			Float f = Float.parseFloat(rs.getlineHeight());
 			line.setHeight(f.intValue());
 		}

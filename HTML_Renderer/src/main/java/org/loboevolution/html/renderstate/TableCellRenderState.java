@@ -95,7 +95,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		CSS3Properties props = this.getCssProperties();
 		if (props != null) {
 			String textAlign = props.getTextAlign();
-			if (!Strings.isBlank(textAlign)) {
+			if (Strings.isNotBlank(textAlign)) {
 				return super.getAlignXPercent();
 			}
 		}
@@ -154,7 +154,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		CSS3Properties props = this.getCssProperties();
 		if (props != null) {
 			String textAlign = props.getVerticalAlign();
-			if (!Strings.isBlank(textAlign)) {
+			if (Strings.isNotBlank(textAlign)) {
 				return super.getAlignYPercent();
 			}
 		}
@@ -223,7 +223,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				bgColor = rowElement.getBgColor();
 			}
 			
-			if (!Strings.isBlank(bgColor)) {
+			if (Strings.isNotBlank(bgColor)) {
 				Color bgc = ColorFactory.getInstance().getColor(bgColor);
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
@@ -269,7 +269,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			}
 
 			String cellPaddingText = tableElement.getAttribute(CELLPADDING);
-			if (!Strings.isBlank(cellPaddingText)) {
+			if (Strings.isNotBlank(cellPaddingText)) {
 				cellPaddingText = cellPaddingText.trim();
 				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, 0);
 				int cellPaddingType = HtmlInsets.TYPE_PIXELS;
@@ -337,7 +337,7 @@ public class TableCellRenderState extends DisplayRenderState {
 			String width = props == null ? null : props.getWidth();
 			if (width == null) {
 				width = element.getAttribute(WIDTH);
-				if (!Strings.isBlank(width) && !width.endsWith("%")) {
+				if (Strings.isNotBlank(width) && !width.endsWith("%")) {
 					wsValue = WS_NORMAL;
 				}
 			} else {

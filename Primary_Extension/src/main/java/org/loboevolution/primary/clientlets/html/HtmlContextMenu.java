@@ -258,7 +258,7 @@ public class HtmlContextMenu {
 			context.back();
 		});
 
-		if (!Strings.isBlank(context.getPreviousURL())) {
+		if (Strings.isNotBlank(context.getPreviousURL())) {
 			menuBack.setEnabled(true);
 		} else {
 			menuBack.setEnabled(false);
@@ -279,7 +279,7 @@ public class HtmlContextMenu {
 			context.forward();
 		});
 
-		if (!Strings.isBlank(context.getNextURL())) {
+		if (Strings.isNotBlank(context.getNextURL())) {
 			menuForward.setEnabled(true);
 		} else {
 			menuForward.setEnabled(false);

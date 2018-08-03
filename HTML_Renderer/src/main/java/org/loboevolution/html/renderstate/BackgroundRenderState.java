@@ -220,7 +220,7 @@ public class BackgroundRenderState implements CSSValuesProperties {
 					href = attr.getNodeValue();
 				}
 
-				if ("stylesheet".equalsIgnoreCase(rel) && !Strings.isBlank(href)) {
+				if ("stylesheet".equalsIgnoreCase(rel) && Strings.isNotBlank(href)) {
 					
 					if (quotedUri.contains(";base64,")) {
 						String base64 = quotedUri.split(";base64,")[1];
@@ -508,10 +508,10 @@ public class BackgroundRenderState implements CSSValuesProperties {
 				} else {
 					list.add(back.trim());
 				}
-			} else if (!Strings.isBlank(back)) {
+			} else if (Strings.isNotBlank(back)) {
 				List<String> backList2 = new ArrayList<String>(Arrays.asList(back.split("[\\s+]")));
 				for (String back2 : backList2) {
-					if (!Strings.isBlank(back2)) {
+					if (Strings.isNotBlank(back2)) {
 						list.add(back2.trim());
 					}
 				}

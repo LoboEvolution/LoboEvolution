@@ -39,7 +39,7 @@ public class FontSetter implements SubPropertySetter,CSSProperties {
 	public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(FONT, newValue, important);
-		if (!Strings.isBlank(newValue)) {
+		if (Strings.isNotBlank(newValue)) {
 			String fontSpecTL = newValue.toLowerCase();
 			String[] tokens = HtmlValues.splitCssValue(fontSpecTL);
 			String token = null;

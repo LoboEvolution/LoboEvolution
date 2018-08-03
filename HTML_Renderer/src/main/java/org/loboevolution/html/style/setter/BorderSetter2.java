@@ -26,7 +26,7 @@ public class BorderSetter2 implements SubPropertySetter {
 	public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration,
 			boolean important) {
 		properties.setPropertyValueLCAlt(this.name, value, important);
-		if (!Strings.isBlank(value)) {
+		if (Strings.isNotBlank(value)) {
 			String[] array = HtmlValues.splitCssValue(value);
 			String color = null;
 			String style = null;

@@ -116,7 +116,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		String height = this.getAttribute(HEIGHT);
 		UINode r = this.uiNode;
 
-		if (!Strings.isBlank(height)) {
+		if (Strings.isNotBlank(height)) {
 			return HtmlValues.getPixelSize(height, null, 1);
 		}
 
@@ -202,7 +202,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		String width = this.getAttribute(WIDTH);
 		UINode r = this.uiNode;
 
-		if (!Strings.isBlank(width)) {
+		if (Strings.isNotBlank(width)) {
 			return HtmlValues.getPixelSize(width, null, 1);
 		}
 

@@ -521,7 +521,7 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 							+ " ms. Connection elapsed: " + (time1 - time0) + " ms.");
 				}
 				String ref = urlForLoading.getRef();
-				if (!Strings.isBlank(ref)) {
+				if (Strings.isNotBlank(ref)) {
 					panel.scrollToElement(ref);
 				}
 				try {

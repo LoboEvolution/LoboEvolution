@@ -202,7 +202,7 @@ public class HtmlClientlet implements Clientlet {
 			listener.ensureSwitchedToRendering();
 			// Scroll to see anchor.
 			String ref = responseURL.getRef();
-			if (!Strings.isBlank(ref)) {
+			if (Strings.isNotBlank(ref)) {
 				panel.scrollToElement(ref);
 			}
 			if (refresh != null) {

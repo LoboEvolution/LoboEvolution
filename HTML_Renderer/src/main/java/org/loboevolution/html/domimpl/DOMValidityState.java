@@ -88,7 +88,7 @@ public class DOMValidityState implements ValidityState {
 
 	@Override
 	public boolean getCustomError() {
-		return !Strings.isBlank(customerError);
+		return Strings.isNotBlank(customerError);
 	}
 
 	@Override

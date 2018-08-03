@@ -131,7 +131,7 @@ public class BrowserFrameUIControl implements UIControl, HtmlAttributeProperties
 			HtmlInsets insets = null;
 			String marginwidth = element.getAttribute(MARGINWIDTH);
 			String marginheight = element.getAttribute(MARGINHEIGHT);
-			if (!Strings.isBlank(marginwidth)) {
+			if (Strings.isNotBlank(marginwidth)) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}
@@ -160,7 +160,7 @@ public class BrowserFrameUIControl implements UIControl, HtmlAttributeProperties
 					insets.rightType = HtmlInsets.TYPE_PIXELS;
 				}
 			}
-			if (!Strings.isBlank(marginheight)) {
+			if (Strings.isNotBlank(marginheight)) {
 				if (insets == null) {
 					insets = new HtmlInsets();
 				}

@@ -540,7 +540,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 */
 	@Override
 	public Element getElementById(String elementId) {
-		if (!Strings.isBlank(elementId)) {
+		if (Strings.isNotBlank(elementId)) {
 			synchronized (this) {
 				return (Element) this.elementsById.get(elementId);
 			}

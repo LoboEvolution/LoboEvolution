@@ -373,7 +373,7 @@ public final class RequestEngine {
 		} else {
 			newNoRefURL = baseURL;
 		}
-		if (!Strings.isBlank(ref)) {
+		if (Strings.isNotBlank(ref)) {
 			return newNoRefURL + "#" + ref;
 		} else {
 			return newNoRefURL;
@@ -450,7 +450,7 @@ public final class RequestEngine {
 			byte[] persistentContent = null;
 			CacheManager cm = CacheManager.getInstance();
 			entry = (MemoryCacheEntry) cm.getTransient(url);
-			if (entry == null && (!"file".equalsIgnoreCase(url.getProtocol()) || !Strings.isBlank(url.getHost()))) {
+			if (entry == null && (!"file".equalsIgnoreCase(url.getProtocol()) || Strings.isNotBlank(url.getHost()))) {
 				try {
 					persistentContent = cm.getPersistent(url, false);
 				} catch (IOException ioe) {

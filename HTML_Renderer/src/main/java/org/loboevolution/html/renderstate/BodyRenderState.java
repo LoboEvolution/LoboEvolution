@@ -73,7 +73,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgcolor = this.element.getAttribute(BGCOLOR);
-			if (!Strings.isBlank(bgcolor)) {
+			if (Strings.isNotBlank(bgcolor)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
@@ -97,7 +97,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		}
 		String tcolor = this.element.getAttribute(HtmlAttributeProperties.TEXT);
 		
-		if (!Strings.isBlank(tcolor)) {
+		if (Strings.isNotBlank(tcolor)) {
 			c = ColorFactory.getInstance().getColor(tcolor);
 		} else {
 			tcolor = "black";

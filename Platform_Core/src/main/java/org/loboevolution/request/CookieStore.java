@@ -160,7 +160,7 @@ public class CookieStore {
 		
 		GeneralSettings settings = GeneralSettings.getNetwork();
 		if (settings.isCookie()) {
-			saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, !Strings.isBlank(secure), !Strings.isBlank(httpOnly));
+			saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, Strings.isNotBlank(secure), Strings.isNotBlank(httpOnly));
 		}
 	}
 
