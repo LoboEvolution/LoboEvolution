@@ -1,5 +1,5 @@
 Lobo Evolution - Java Web Browser
-=============
+=========================================================================================================================================================================
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5668f2c4c7ca4e5188cb97aff090c56d)](https://www.codacy.com/app/ivan.difrancesco/LoboEvolution?utm_source=github.com&utm_medium=referral&utm_content=oswetto/LoboEvolution&utm_campaign=badger)
 
