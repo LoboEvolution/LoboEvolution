@@ -416,11 +416,9 @@ public class StyleSheetAggregator {
 				StyleRuleInfo styleRuleInfo = i.next();
 				for (int a = 0; a < styleRuleInfo.getAncestorSelectors().size(); a++) {
 					SelectorMatcher selectorMatcher = styleRuleInfo.getAncestorSelectors().get(a);
-					if (am.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
-							&& element.getPseudoNames().contains(psElement)) {
-						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
-					} else if (!am.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c)
-							&& !element.getPseudoNames().contains(psElement)) {
+					boolean matches = am.matchesPseudoClassSelector(selectorMatcher.getPseudoElement(), element, c);
+					boolean contains = element.getPseudoNames().contains(psElement);
+					if ((matches && contains) || (!matches && !contains)) {
 						styleDeclarations = putStyleDeclarations(elementRules, styleDeclarations, element, pseudoNames);
 					}
 				}
