@@ -20,6 +20,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -372,25 +373,42 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
 
     public static class CSSStyleSheetRuleIndex {
 
+        private static final class SelectorIndex {
+
+            private final Map<String, List<SelectorEntry>> keyToSelectors = new HashMap<>();
+
+            void add(final String key, final SelectorEntry selector) {
+                List<SelectorEntry> entry = keyToSelectors.get(key);
+                if (entry == null) {
+                    entry = new ArrayList<SelectorEntry>();
+                    keyToSelectors.put(key, entry);
+                }
+                entry.add(selector);
+            }
+
+            List<SelectorEntry> get(final String key) {
+                List<SelectorEntry> entry = keyToSelectors.get(key);
+                if (entry == null) {
+                    return Collections.emptyList();
+                }
+                return entry;
+            }
+        }
+
+
         private static final MediaList DEFAULT_MEDIA_LIST = new MediaListImpl(null);
 
         private final List<CSSStyleSheetRuleIndex> children_ = new ArrayList<>();
 
         private MediaList mediaList_ = DEFAULT_MEDIA_LIST;
-        private final Map<String, List<SelectorEntry>> elementSelectors_ = new HashMap<>();
-        private final Map<String, List<SelectorEntry>> classSelectors_ = new HashMap<>();
+        private final SelectorIndex elementSelectors_ = new SelectorIndex();
+        private final SelectorIndex classSelectors_ = new SelectorIndex();
         private final List<SelectorEntry> otherSelectors_ = new ArrayList<>();
 
         public void addElementSelector(final ElementSelector elementSelector,
                                         final Selector s, final CSSStyleRuleImpl styleRule) {
             final String elementName = elementSelector.getLocalNameLowerCase();
-            List<SelectorEntry> entries = elementSelectors_.get(elementName);
-            if (entries == null) {
-                entries = new ArrayList<SelectorEntry>();
-                elementSelectors_.put(elementName, entries);
-            }
-            final SelectorEntry selectorEntry = new SelectorEntry(s, styleRule);
-            entries.add(selectorEntry);
+            elementSelectors_.add(elementName, new SelectorEntry(s, styleRule));
         }
 
         public void addClassSelector(final ElementSelector elementSelector, final String className,
@@ -403,13 +421,7 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
             else {
                 key = elementName + "." + className;
             }
-            List<SelectorEntry> entries = classSelectors_.get(key);
-            if (entries == null) {
-                entries = new ArrayList<SelectorEntry>();
-                classSelectors_.put(key, entries);
-            }
-            final SelectorEntry selectorEntry = new SelectorEntry(s, styleRule);
-            entries.add(selectorEntry);
+            classSelectors_.add(key, new SelectorEntry(s, styleRule));
         }
 
         public void addOtherSelector(final Selector s, final CSSStyleRuleImpl styleRule) {
@@ -449,29 +461,32 @@ public class CSSStyleSheetImpl implements CSSStyleSheet, Serializable {
         private LinkedList<Iterator<SelectorEntry>> iterators_;
 
         SelectorEntriesIterator(final CSSStyleSheetRuleIndex index,
-                final String elementName, final String[] classes) {
+                final String elementName,
+                final String[] classes) {
+
             iterators_ = new LinkedList<Iterator<SelectorEntry>>();
 
-            List<SelectorEntry> sel = index.elementSelectors_.get(null);
-            if (sel != null && !sel.isEmpty()) {
-                iterators_.add(sel.iterator());
+            List<SelectorEntry> selectors = index.elementSelectors_.get(null);
+            if (!selectors.isEmpty()) {
+                iterators_.add(selectors.iterator());
             }
-            sel = index.elementSelectors_.get(elementName);
-            if (sel != null && !sel.isEmpty()) {
-                iterators_.add(sel.iterator());
+
+            selectors = index.elementSelectors_.get(elementName);
+            if (!selectors.isEmpty()) {
+                iterators_.add(selectors.iterator());
             }
 
             if (classes != null) {
                 for (String clazz : classes) {
-                    sel = index.classSelectors_.get("." + clazz);
-                    if (sel != null && !sel.isEmpty()) {
-                        iterators_.add(sel.iterator());
+                    selectors = index.classSelectors_.get("." + clazz);
+                    if (selectors != null && !selectors.isEmpty()) {
+                        iterators_.add(selectors.iterator());
                     }
 
                     if (elementName != null) {
-                        sel = index.classSelectors_.get(elementName + "." + clazz);
-                        if (sel != null && !sel.isEmpty()) {
-                            iterators_.add(sel.iterator());
+                        selectors = index.classSelectors_.get(elementName + "." + clazz);
+                        if (selectors != null && !selectors.isEmpty()) {
+                            iterators_.add(selectors.iterator());
                         }
                     }
                 }
