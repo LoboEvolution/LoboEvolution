@@ -359,12 +359,12 @@ public class ColorFactory {
 	private Map<String, Color> mapColor() {
 		Map<String, Color> colorMap = new HashMap<String, Color>();
 		colorMap.put("transparent", new Color(0, 0, 0, 0));
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(SQLiteCommon.COLORS);
-
-			while (rs != null && rs.next()) {
-				colorMap.put(rs.getString(1), new Color(rs.getInt(2)));
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				Statement stmt = conn.createStatement()) {
+			try (ResultSet rs = stmt.executeQuery(SQLiteCommon.COLORS)) {
+				while (rs != null && rs.next()) {
+					colorMap.put(rs.getString(1), new Color(rs.getInt(2)));
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);

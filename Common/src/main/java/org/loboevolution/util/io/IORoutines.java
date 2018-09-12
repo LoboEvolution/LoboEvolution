@@ -323,19 +323,16 @@ public class IORoutines {
 	 */
 	public static List<String> loadStrings(File file) throws IOException {
 		List<String> list = new LinkedList<String>();
-		InputStream in = new FileInputStream(file);
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			String line;
-			while ((line = reader.readLine()) != null) {
-				list.add(line);
+		try (InputStream in = new FileInputStream(file)) {
+			try (BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+				String line;
+				while ((line = reader.readLine()) != null) {
+					list.add(line);
+				}
+				return list;
 			}
-			return list;
-		} finally {
-			in.close();
 		}
-	}
-	
+	}	
 	
 	public static InputStream getInputStream(URLConnection connection) throws IOException {
 		InputStream in;

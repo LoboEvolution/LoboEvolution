@@ -29,24 +29,18 @@ package org.loboevolution.http;
  * @author J. H. S.
  */
 public class NameValuePair extends AbstractBean implements Cloneable {
+	
 	/** The name. */
 	public String name;
+	
 	/** The value. */
 	public String value;
 
 	/**
 	 * Instantiates a new name value pair.
-	 */
-	public NameValuePair() {
-	}
-
-	/**
-	 * Instantiates a new name value pair.
 	 *
-	 * @param name
-	 *            the name
-	 * @param value
-	 *            the value
+	 * @param name  the name
+	 * @param value the value
 	 */
 	public NameValuePair(String name, String value) {
 		this.name = name;
@@ -56,8 +50,7 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name
-	 *            the new name
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		String old = getName();
@@ -77,8 +70,7 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	/**
 	 * Sets the value.
 	 *
-	 * @param value
-	 *            the new value
+	 * @param value the new value
 	 */
 	public void setValue(String value) {
 		String old = getValue();
@@ -93,16 +85,6 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	 */
 	public final String getValue() {
 		return value;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.util.AbstractBean#clone()
-	 */
-	@Override
-	public NameValuePair clone() {
-		return new NameValuePair(name, value);
 	}
 
 	/*

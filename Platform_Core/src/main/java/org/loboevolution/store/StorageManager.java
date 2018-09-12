@@ -272,7 +272,8 @@ public class StorageManager implements Runnable, ColorCommon {
 	
 		File f = new File(SQLiteCommon.getDatabaseStore());
 		if (!f.exists()) {
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory()); Statement stmt = conn.createStatement()) {
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+					Statement stmt = conn.createStatement()) {
 				createTable(LOOK_AND_FEEL);
 				createTable(SEARCH);
 				createTable(COLOR);
@@ -303,12 +304,13 @@ public class StorageManager implements Runnable, ColorCommon {
 	}
 	
 	private void createTable(String table) {
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory()); Statement stmt = conn.createStatement()) {
-        	stmt.execute(table);
-        } catch (Exception e) {
-        	logger.error(e);
-        }
-    }
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				Statement stmt = conn.createStatement()) {
+			stmt.execute(table);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+	}
 	
 	private void populateColorTable() {
 		insertColorTable("aliceblue", ALICEBLUE);

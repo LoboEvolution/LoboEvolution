@@ -128,15 +128,16 @@ public class ConnectionSettings implements Serializable {
 		ConnectionSettings setting = new ConnectionSettings();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CONNECTIONS)) {
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
-				setting.setUserName(rs.getString(2));
-				setting.setPassword(rs.getString(3));
-				setting.setAuthenticated(rs.getInt(4) == 1 ? true : false);
-				InetSocketAddress socketAddress = new InetSocketAddress(rs.getString(5), rs.getInt(6));
-				setting.setInetSocketAddress(socketAddress);
-				setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
+					setting.setUserName(rs.getString(2));
+					setting.setPassword(rs.getString(3));
+					setting.setAuthenticated(rs.getInt(4) == 1 ? true : false);
+					InetSocketAddress socketAddress = new InetSocketAddress(rs.getString(5), rs.getInt(6));
+					setting.setInetSocketAddress(socketAddress);
+					setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);

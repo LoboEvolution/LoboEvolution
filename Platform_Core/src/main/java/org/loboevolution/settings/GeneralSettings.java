@@ -78,13 +78,14 @@ public class GeneralSettings implements Serializable {
 		GeneralSettings setting = new GeneralSettings();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.NETWORK)) {
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				setting.setJs(rs.getInt(1) == 1 ? true : false);
-				setting.setCss(rs.getInt(2) == 1 ? true : false);
-				setting.setCookie(rs.getInt(3) == 1 ? true : false);
-				setting.setCache(rs.getInt(4) == 1 ? true : false);
-				setting.setNavigation(rs.getInt(5) == 1 ? true : false);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					setting.setJs(rs.getInt(1) == 1 ? true : false);
+					setting.setCss(rs.getInt(2) == 1 ? true : false);
+					setting.setCookie(rs.getInt(3) == 1 ? true : false);
+					setting.setCache(rs.getInt(4) == 1 ? true : false);
+					setting.setNavigation(rs.getInt(5) == 1 ? true : false);
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
@@ -96,11 +97,12 @@ public class GeneralSettings implements Serializable {
 		GeneralSettings setting = new GeneralSettings();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.USER_AGENT)) {
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				setting.setIeVersion(rs.getString(1));
-				setting.setMozVersion(rs.getString(2));
-				setting.setIncludeIE(rs.getInt(3) == 1 ? true : false);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					setting.setIeVersion(rs.getString(1));
+					setting.setMozVersion(rs.getString(2));
+					setting.setIncludeIE(rs.getInt(3) == 1 ? true : false);
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
@@ -112,9 +114,10 @@ public class GeneralSettings implements Serializable {
 		List<String> urls = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.STARTUP)) {
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				urls.add(rs.getString(1));
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					urls.add(rs.getString(1));
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
@@ -133,10 +136,11 @@ public class GeneralSettings implements Serializable {
 		int height = -1;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SIZE)) {
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				width = rs.getInt(1);
-				height = rs.getInt(2);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					width = rs.getInt(1);
+					height = rs.getInt(2);
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);

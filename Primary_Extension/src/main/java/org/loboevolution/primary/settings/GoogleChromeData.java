@@ -127,11 +127,12 @@ public class GoogleChromeData {
 	private static List<String> getHostEntries(String path) {
 		List<String> hostEntries = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHROME_HISTORY)) {
-			ResultSet rs = pstmt.executeQuery();
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHROME_HISTORY);
+				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				hostEntries.add(rs.getString(1));
 			}
+
 		} catch (Exception e) {
 			logger.error(e);
 		}
@@ -141,10 +142,10 @@ public class GoogleChromeData {
 	private static List<Cookie> getCookie(String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHROME_COOKIES)) {
-			ResultSet rs = pstmt.executeQuery();
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.CHROME_COOKIES);
+				ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				Cookie cookie = new Cookie();
+				Cookie cookie = new Cookie("", "");
 				cookie.setDomain(rs.getString(2));
 				cookie.setName(rs.getString(3));
 				cookie.setValue(rs.getString(4));

@@ -52,11 +52,12 @@ public class AssociatedSettings implements Serializable {
 		String userName = "";
     	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.AUTHENTICATION)) {
-			pstmt.setString(1, "%"+hostName+"%");
-			ResultSet rs = pstmt.executeQuery();
-            while (rs != null && rs.next()) {
-            	userName = rs.getString(1);
-            }
+			pstmt.setString(1, "%" + hostName + "%");
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					userName = rs.getString(1);
+				}
+			}
         } catch (Exception e) {
             logger.error(e);
         }

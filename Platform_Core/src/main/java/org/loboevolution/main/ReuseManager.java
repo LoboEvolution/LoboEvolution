@@ -104,17 +104,10 @@ public final class ReuseManager {
 			OUTER: for (int tries = 0; tries < 5; tries++) {
 				// Look for running VM
 				int port = -1;
-				try {
-					InputStream in = new FileInputStream(portFile);
-					DataInputStream din = new DataInputStream(in);
-					try {
-						port = din.readInt();
-					} finally {
-						din.close();
-						in.close();
-					}
+				try (InputStream in = new FileInputStream(portFile); DataInputStream din = new DataInputStream(in)) {
+					port = din.readInt();
 				} catch (EOFException eofe) {
-					logger.error( eofe);
+					logger.error(eofe);
 					portFile.delete();
 				} catch (FileNotFoundException fnfe) {
 					// Likely not running
@@ -167,14 +160,9 @@ public final class ReuseManager {
 					server.stop();
 					continue OUTER;
 				}
-				OutputStream out = new FileOutputStream(portFile);
-				DataOutputStream dout = new DataOutputStream(out);
-				try {
+				try (OutputStream out = new FileOutputStream(portFile); DataOutputStream dout = new DataOutputStream(out)) {
 					dout.writeInt(port);
 					dout.flush();
-				} finally {
-					dout.close();
-					out.close();
 				}
 				break OUTER;
 			}

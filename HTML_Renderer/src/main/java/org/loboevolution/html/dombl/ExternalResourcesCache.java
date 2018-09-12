@@ -58,9 +58,10 @@ public class ExternalResourcesCache {
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SOURCE_CACHE)) {
 			pstmt.setString(1, baseUrl);
 			pstmt.setString(2, type);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				source = rs.getString(1);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					source = rs.getString(1);
+				}
 			}
 			
 			if (Strings.isBlank(source)) {
@@ -132,13 +133,12 @@ public class ExternalResourcesCache {
 			con.setRequestProperty("Accept-Encoding", UserAgentContext.GZIP_ENCODING);
 			con.setRequestMethod("GET");
 			responseCode = con.getResponseCode();
-			BufferedReader in = new BufferedReader(new InputStreamReader(IORoutines.getInputStream(con)));
-			String inputLine;
-
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
+			try (BufferedReader in = new BufferedReader(new InputStreamReader(IORoutines.getInputStream(con)))) {
+				String inputLine;
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
 			}
-			in.close();
 			
 			saveCache(scriptURI, response.toString(), type, con);
 
@@ -157,9 +157,10 @@ public class ExternalResourcesCache {
 			pstmt.setInt(2, contentLenght);
 			pstmt.setString(3, eTag);
 			pstmt.setString(3, type);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				check = rs.getInt(1);
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					check = rs.getInt(1);
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);

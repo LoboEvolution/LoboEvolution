@@ -158,21 +158,20 @@ public class TempFileManager {
 				this.wrByPath.remove(canonical);
 			}
 		}
+		
 		File file = this.newTempFile();
-		OutputStream out = new FileOutputStream(file);
-		try {
+		try (OutputStream out = new FileOutputStream(file)) {
 			out.write(bytes);
-		} finally {
-			out.close();
 		}
-		JarFile jarFile = new JarFile(file);
-		String canonical = file.getCanonicalPath();
-		LocalWeakReference wr = new LocalWeakReference(jarFile, REFERENCE_QUEUE, canonical);
-		synchronized (this) {
-			// This serves simply to retain the weak reference.
-			this.wrByPath.put(canonical, wr);
+		
+		try (JarFile jarFile = new JarFile(file)) {
+			String canonical = file.getCanonicalPath();
+			LocalWeakReference wr = new LocalWeakReference(jarFile, REFERENCE_QUEUE, canonical);
+			synchronized (this) {
+				this.wrByPath.put(canonical, wr);
+			}
+			return jarFile;
 		}
-		return jarFile;
 	}
 
 	/**

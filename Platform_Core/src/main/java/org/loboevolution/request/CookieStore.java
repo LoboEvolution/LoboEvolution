@@ -207,18 +207,19 @@ public class CookieStore {
 					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
 				pstmt.setString(1, hostName);
 				pstmt.setString(2, path);
-				ResultSet rs = pstmt.executeQuery();
-				while (rs != null && rs.next()) {
-					Cookie cookie = new Cookie();
-					cookie.setName((rs.getString(1)));
-					cookie.setValue((rs.getString(2)));
-					cookie.setDomain((rs.getString(3)));
-					cookie.setPath((rs.getString(4)));
-					cookie.setExpires((rs.getString(5)));
-					cookie.setMaxAge((rs.getInt(6)));
-					cookie.setSecure(rs.getInt(7) > 0 ? true : false);
-					cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
-					cookies.add(cookie);
+				try (ResultSet rs = pstmt.executeQuery()) {
+					while (rs != null && rs.next()) {
+						Cookie cookie = new Cookie("", "");
+						cookie.setName((rs.getString(1)));
+						cookie.setValue((rs.getString(2)));
+						cookie.setDomain((rs.getString(3)));
+						cookie.setPath((rs.getString(4)));
+						cookie.setExpires((rs.getString(5)));
+						cookie.setMaxAge((rs.getInt(6)));
+						cookie.setSecure(rs.getInt(7) > 0 ? true : false);
+						cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
+						cookies.add(cookie);
+					}
 				}
 			} catch (Exception e) {
 				logger.error(e);

@@ -53,15 +53,15 @@ public class BookmarksHistory implements Serializable {
 	 *
 	 * @return bookmarks
 	 */
-	public List<BookmarkInfo> getBookmarks(Integer num){
+	public List<BookmarkInfo> getBookmarks(Integer num) {
 		synchronized (this) {
 			List<BookmarkInfo> values = new ArrayList<BookmarkInfo>();
-			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
-				Statement stmt = conn.createStatement();
-				String query  = "SELECT name, description, baseUrl, tags FROM BOOKMARKS";
-				if(num != null) { query = query + " and rownum = " + num; }
-				ResultSet rs = stmt.executeQuery(query);
-				while (rs!= null && rs.next()) {
+			String query = "SELECT name, description, baseUrl, tags FROM BOOKMARKS";
+			if (num != null) { query = query + " and rownum = " + num;}
+			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+					Statement stmt = conn.createStatement();
+					ResultSet rs = stmt.executeQuery(query)) {
+				while (rs != null && rs.next()) {
 					BookmarkInfo info = new BookmarkInfo();
 					info.setTitle(rs.getString(1));
 					info.setDescription(rs.getString(2));
@@ -88,13 +88,14 @@ public class BookmarksHistory implements Serializable {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.BOOKMARKS)) {
 			pstmt.setString(1, item);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs!= null && rs.next()) {
-				info = new BookmarkInfo();
-				info.setTitle(rs.getString(1));
-				info.setDescription(rs.getString(2));
-				info.setUrl(new URL(rs.getString(3)));
-				info.setTags(Strings.splitUsingTokenizer(rs.getString(4), " "));
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					info = new BookmarkInfo();
+					info.setTitle(rs.getString(1));
+					info.setDescription(rs.getString(2));
+					info.setUrl(new URL(rs.getString(3)));
+					info.setTags(Strings.splitUsingTokenizer(rs.getString(4), " "));
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);

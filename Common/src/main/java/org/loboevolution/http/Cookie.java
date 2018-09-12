@@ -57,6 +57,10 @@ public class Cookie extends NameValuePair {
 	/** The version. */
 	private boolean httpOnly;
 
+	public Cookie(String name, String value) {
+		super(name, value);
+	}
+	
 	/**
 	 * Gets the encoded name.
 	 *

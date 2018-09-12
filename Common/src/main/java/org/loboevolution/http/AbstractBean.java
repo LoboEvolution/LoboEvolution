@@ -458,19 +458,4 @@ public abstract class AbstractBean {
 	protected void fireVetoableChange(final PropertyChangeEvent evt) throws PropertyVetoException {
 		vcs.fireVetoableChange(evt);
 	}
-
-	/**
-	 * Clone.
-	 *
-	 * @return the object
-	 * @exception CloneNotSupportedException
-	 *                the clone not supported exception
-	 */
-	@Override
-	public Object clone() throws CloneNotSupportedException {
-		AbstractBean result = (AbstractBean) super.clone();
-		result.pcs = new PropertyChangeSupport(result);
-		result.vcs = new VetoableChangeSupport(result);
-		return result;
-	}
 }

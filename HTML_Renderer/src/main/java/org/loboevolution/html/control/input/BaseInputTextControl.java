@@ -139,12 +139,13 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	private List<String> autocomplete(String value) {
         List<String> autoList = new ArrayList<String>();
     	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
+			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
 			pstmt.setString(1, "%"+value+"%");
-			ResultSet rs = pstmt.executeQuery();
-            while (rs != null && rs.next()) {
-            	autoList.add(rs.getString(1));
-            }
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					autoList.add(rs.getString(1));
+				}
+			}
         } catch (Exception e) {
             logger.error(e);
         }

@@ -501,36 +501,36 @@ public class SimpleHtmlRendererContext implements HtmlRendererContext {
 					return;
 				}
 			}
-			InputStream in = IORoutines.getInputStream(connection);
-			try {
+
+			try (InputStream in = IORoutines.getInputStream(connection)) {
 				SimpleHtmlRendererContext.this.sourceCode = null;
 				long time1 = System.currentTimeMillis();
-				RecordedInputStream rin = new RecordedInputStream(in, 1000000);
-				InputStream bin = new BufferedInputStream(rin, 8192);
-				String actualURI = urlForLoading.toExternalForm();
-				// Only create document, don't parse.
-				HTMLDocumentImpl document = this.createDocument(new InputSourceImpl(bin, actualURI, getDocumentCharset(connection)));
-				// Set document in HtmlPanel. Safe to call outside GUI thread.
-				HtmlPanel panel = htmlPanel;
-				panel.setDocument(document, SimpleHtmlRendererContext.this);
-				// Now start loading.
-				document.load();
-				long time2 = System.currentTimeMillis();
-				if (logger.isInfoEnabled()) {
-					logger.info("Parsed URI=[" + urlForLoading + "]: Parse elapsed: " + (time2 - time1)
-							+ " ms. Connection elapsed: " + (time1 - time0) + " ms.");
+				try (RecordedInputStream rin = new RecordedInputStream(in, 1000000)) {
+					try (InputStream bin = new BufferedInputStream(rin, 8192)) {
+						String actualURI = urlForLoading.toExternalForm();
+						// Only create document, don't parse.
+						HTMLDocumentImpl document = this.createDocument(new InputSourceImpl(bin, actualURI, getDocumentCharset(connection)));
+						// Set document in HtmlPanel. Safe to call outside GUI thread.
+						HtmlPanel panel = htmlPanel;
+						panel.setDocument(document, SimpleHtmlRendererContext.this);
+						// Now start loading.
+						document.load();
+						long time2 = System.currentTimeMillis();
+						if (logger.isInfoEnabled()) {
+							logger.info("Parsed URI=[" + urlForLoading + "]: Parse elapsed: " + (time2 - time1)
+									+ " ms. Connection elapsed: " + (time1 - time0) + " ms.");
+						}
+						String ref = urlForLoading.getRef();
+						if (Strings.isNotBlank(ref)) {
+							panel.scrollToElement(ref);
+						}
+						try {
+							SimpleHtmlRendererContext.this.sourceCode = rin.getString("UTF-8");
+						} catch (BufferExceededException bee) {
+							SimpleHtmlRendererContext.this.sourceCode = "[TOO BIG]";
+						}
+					}
 				}
-				String ref = urlForLoading.getRef();
-				if (Strings.isNotBlank(ref)) {
-					panel.scrollToElement(ref);
-				}
-				try {
-					SimpleHtmlRendererContext.this.sourceCode = rin.getString("UTF-8");
-				} catch (BufferExceededException bee) {
-					SimpleHtmlRendererContext.this.sourceCode = "[TOO BIG]";
-				}
-			} finally {
-				in.close();
 			}
 		} finally {
 			this.currentConnection = null;

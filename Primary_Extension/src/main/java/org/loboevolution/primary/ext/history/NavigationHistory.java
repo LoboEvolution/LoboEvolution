@@ -57,9 +57,10 @@ public class NavigationHistory implements Serializable {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.SEARCH)) {
 			pstmt.setString(1, type);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				values.add(new String[] { rs.getString(1) });
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					values.add(new String[] { rs.getString(1) });
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
@@ -79,9 +80,10 @@ public class NavigationHistory implements Serializable {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST)) {
 			pstmt.setInt(1, maxNumItems);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				recentHostEntries.add(new String[] { rs.getString(1) });
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					recentHostEntries.add(new String[] { rs.getString(1) });
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
@@ -102,9 +104,10 @@ public class NavigationHistory implements Serializable {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST)) {
 			pstmt.setInt(1, maxNumItems);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				recentHostEntries.add(rs.getString(1));
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					recentHostEntries.add(rs.getString(1));
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);
@@ -129,9 +132,10 @@ public class NavigationHistory implements Serializable {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.HOST2)) {
 			pstmt.setString(1, "%" + itemPrefix + "%");
-			ResultSet rs = pstmt.executeQuery();
-			while (rs != null && rs.next()) {
-				recentHostEntries.add(rs.getString(1));
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					recentHostEntries.add(rs.getString(1));
+				}
 			}
 		} catch (Exception e) {
 			logger.error(e);

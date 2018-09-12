@@ -48,9 +48,9 @@ public class ToolsSettings implements Serializable {
 
 	public List<SearchEngine> getSearchEngines() {
 		List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory())) {
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(SQLiteCommon.SEARCH2);
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(SQLiteCommon.SEARCH2)) {
 			while (rs != null && rs.next()) {
 				SearchEngine se = new SearchEngine();
 				se.setName(rs.getString(1));

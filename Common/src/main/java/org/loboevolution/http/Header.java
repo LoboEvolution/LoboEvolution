@@ -35,15 +35,10 @@ import javax.xml.ws.Response;
  * @author rbair
  */
 public class Header extends NameValuePair {
+	
 	/** The elements. */
 	private List<Element> elements = new ArrayList<Element>();
-
-	/**
-	 * Creates a new Header with a null name and value, and no elements.
-	 */
-	public Header() {
-	}
-
+	
 	/**
 	 * Creates a new Header with the given name and value, and no elements.
 	 *

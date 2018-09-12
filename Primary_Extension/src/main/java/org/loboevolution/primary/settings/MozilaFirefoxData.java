@@ -95,8 +95,8 @@ public class MozilaFirefoxData {
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
 		List<BookmarkInfo> bookmarks = new ArrayList<BookmarkInfo>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_BOOKMARKS)) {
-			ResultSet rs = pstmt.executeQuery();
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_BOOKMARKS);
+			ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				BookmarkInfo bookmark = new BookmarkInfo();
 				bookmark.setUrl(new URL(rs.getString(1)));
@@ -113,8 +113,8 @@ public class MozilaFirefoxData {
 	private static List<String> getHostEntries(String path) {
 		List<String> hostEntries = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_HISTORY)) {
-			ResultSet rs = pstmt.executeQuery();
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_HISTORY);
+			ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
 				hostEntries.add(rs.getString(1));
 			}
@@ -127,10 +127,10 @@ public class MozilaFirefoxData {
 	private static List<Cookie> getCookie(String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
-				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_COOKIES)) {
-			ResultSet rs = pstmt.executeQuery();
+				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.MOZ_COOKIES);
+			ResultSet rs = pstmt.executeQuery()) {
 			while (rs != null && rs.next()) {
-				Cookie cookie = new Cookie();
+				Cookie cookie = new Cookie("", "");
 				cookie.setDomain(rs.getString(2));
 				cookie.setName(rs.getString(4));
 				cookie.setValue(rs.getString(5));

@@ -138,10 +138,8 @@ public class ReuseServer implements Runnable {
 				Socket s = ss.accept();
 				s.setSoTimeout(10000);
 				s.setTcpNoDelay(true);
-				InputStream in = s.getInputStream();
-				try {
-					Reader reader = new InputStreamReader(in);
-					BufferedReader br = new BufferedReader(reader);
+				try (InputStream in = s.getInputStream();
+					 Reader reader = new InputStreamReader(in); BufferedReader br = new BufferedReader(reader)) {
 					String line;
 					while ((line = br.readLine()) != null) {
 						int blankIdx = line.indexOf(' ');
@@ -157,8 +155,6 @@ public class ReuseServer implements Runnable {
 							PlatformInit.getInstance().launch();
 						}
 					}
-				} finally {
-					in.close();
 				}
 			} catch (Throwable t) {
 				logger.error( t);

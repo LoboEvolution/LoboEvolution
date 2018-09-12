@@ -58,7 +58,7 @@ public class HTMLProcessingInstruction extends DOMNodeImpl implements Processing
 	 */
 	@Override
 	protected Node createSimilarNode() {
-		return (Node) clone();
+		return new HTMLProcessingInstruction(target, data);
 	}
 
 	/*
@@ -140,20 +140,6 @@ public class HTMLProcessingInstruction extends DOMNodeImpl implements Processing
 	@Override
 	public void setData(String data) throws DOMException {
 		this.data = data;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#clone()
-	 */
-	@Override
-	public Object clone() {
-		try {
-			return super.clone();
-		} catch (CloneNotSupportedException e) {
-			throw new IllegalStateException(e);
-		}
 	}
 
 	/*

@@ -216,14 +216,8 @@ public final class RestrictedStore implements QuotaSource, ManagedStore {
 	 */
 	private long getSizeFromFile() throws IOException {
 		File sizeFile = new File(this.baseDirectory, SIZE_FILE_NAME);
-		try {
-			FileInputStream in = new FileInputStream(sizeFile);
-			try {
-				DataInputStream din = new DataInputStream(in);
-				return din.readLong();
-			} finally {
-				in.close();
-			}
+		try (FileInputStream in = new FileInputStream(sizeFile); DataInputStream din = new DataInputStream(in)) {
+			return din.readLong();
 		} catch (FileNotFoundException fnf) {
 			return this.updateSizeFile();
 		}

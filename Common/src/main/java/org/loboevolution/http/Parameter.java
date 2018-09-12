@@ -26,16 +26,6 @@ package org.loboevolution.http;
  * @author rbair
  */
 public class Parameter extends NameValuePair {
-	/** The Constant serialVersionUID. */
-	@SuppressWarnings("unused")
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * Creates a new instance of Parameter with a null name and value.
-	 */
-	public Parameter() {
-		super();
-	}
 
 	/**
 	 * Creates a new instance of Parameter with the given name and value.
@@ -47,15 +37,5 @@ public class Parameter extends NameValuePair {
 	 */
 	public Parameter(String name, String value) {
 		super(name, value);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.util.NameValuePair#clone()
-	 */
-	@Override
-	public Parameter clone() {
-		return new Parameter(getName(), getValue());
 	}
 }

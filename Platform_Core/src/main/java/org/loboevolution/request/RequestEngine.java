@@ -298,15 +298,10 @@ public final class RequestEngine {
 							writer.writeText(name, parameter.getTextValue(), "UTF-8");
 						} else if (parameter.isFile()) {
 							File[] file = parameter.getFileValue();
-
 							for (File element : file) {
-
-								FileInputStream in = new FileInputStream(element);
-								try {
-									BufferedInputStream bin = new BufferedInputStream(in, 8192);
+								try(FileInputStream in = new FileInputStream(element);
+									BufferedInputStream bin = new BufferedInputStream(in, 8192)){
 									writer.writeFileData(name, element.getName(), Files.getContentType(element), bin);
-								} finally {
-									in.close();
 								}
 							}
 						} else {
