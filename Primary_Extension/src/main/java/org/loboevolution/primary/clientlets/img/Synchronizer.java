@@ -7,6 +7,8 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.loboevolution.util.Objects;
+
 /**
  * Manages the synchronization of a collection of viewers.
  * <h2>Implementation notes</h2> This class is necessary mainly due to the
@@ -92,7 +94,7 @@ class Synchronizer {
 	}
 
 	private void updateScroll(ImageViewer viewer, ImageViewer reference) {
-		if (reference == viewer)
+		if (Objects.equals(reference, viewer))
 			return;
 		/*
 		 * Note that this method may be called during a resize, before the viewport has
@@ -132,7 +134,7 @@ class Synchronizer {
 		viewer.getScrollPane().getVerticalScrollBar().getModel().removeChangeListener(scrollChangeListener);
 	}
 
-	boolean resizeStrategyChangedCanIRescroll(ImageViewer source) {
+	public boolean resizeStrategyChangedCanIRescroll(ImageViewer source) {
 		if (leader != null) {
 			// leader is leading an adjustment operation; wait for it to rescroll, and then
 			// adjust everything else
@@ -144,7 +146,7 @@ class Synchronizer {
 		return true;
 	}
 
-	boolean zoomFactorChangedCanIRescroll(ImageViewer source) {
+	public boolean zoomFactorChangedCanIRescroll(ImageViewer source) {
 		if (leader != null) {
 			// leader is leading an adjustment operation; wait for it to rescroll, and then
 			// adjust everything else
@@ -156,11 +158,11 @@ class Synchronizer {
 		return true;
 	}
 
-	void doneRescrolling(ImageViewer source) {
-		if (leader != source)
+	public void doneRescrolling(ImageViewer source) {
+		if (!Objects.equals(leader, source))
 			throw new AssertionError();
 		for (ImageViewer otherViewer : viewers.keySet()) {
-			if (otherViewer != leader) {
+			if (!Objects.equals(otherViewer, leader)) {
 				((JComponent) otherViewer.getScrollPane().getViewport().getView())
 						.scrollRectToVisible(leader.getScrollPane().getViewport().getViewRect());
 				updateScroll(otherViewer, leader);
@@ -169,17 +171,17 @@ class Synchronizer {
 		leader = null;
 	}
 
-	void interpolationTypeChanged(ImageViewer source) {
+	public void interpolationTypeChanged(ImageViewer source) {
 		for (ImageViewer viewer : viewers.keySet())
 			viewer.setInterpolationType(source.getInterpolationType());
 	}
 
-	void statusBarVisibilityChanged(ImageViewer source) {
+	public void statusBarVisibilityChanged(ImageViewer source) {
 		for (ImageViewer viewer : viewers.keySet())
 			viewer.setStatusBarVisible(source.isStatusBarVisible());
 	}
 
-	void pixelatedZoomChanged(ImageViewer source) {
+	public void pixelatedZoomChanged(ImageViewer source) {
 		for (ImageViewer viewer : viewers.keySet())
 			viewer.setPixelatedZoom(source.isPixelatedZoom());
 	}

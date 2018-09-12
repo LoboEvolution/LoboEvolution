@@ -594,15 +594,15 @@ public final class ImageViewer extends AbstractComponentContent {
 	 * 
 	 * @return the scroll pane
 	 */
-	JScrollPane getScrollPane() {
+	public JScrollPane getScrollPane() {
 		return scroller;
 	}
 
-	Synchronizer getSynchronizer() {
+	public Synchronizer getSynchronizer() {
 		return synchronizer;
 	}
 
-	void setSynchronizer(Synchronizer newSync) {
+	public void setSynchronizer(Synchronizer newSync) {
 		synchronizer = newSync;
 	}
 

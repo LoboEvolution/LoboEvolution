@@ -100,7 +100,7 @@ public class GoogleChromeData {
 		File f = new File(path);
 
 		try (Scanner scan = new Scanner(f)) {
-			String str = new String();
+			String str = "";
 			while (scan.hasNext()) {
 				str += scan.nextLine();
 			}

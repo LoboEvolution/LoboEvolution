@@ -21,7 +21,6 @@
 package org.loboevolution.clientlet;
 
 import java.awt.Component;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.loboevolution.http.Cookie;

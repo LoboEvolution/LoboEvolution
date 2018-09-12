@@ -136,9 +136,6 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	/** the full screen window, or null if not in full screen mode. */
 	private transient FullScreenWindow fullScreen;
 
-	/** the root of the outline, or null if there is no outline. */
-	private transient OutlineNode outline = null;
-
 	/** The page format for printing. */
 	private transient PageFormat pformat = PrinterJob.getPrinterJob().defaultPage();
 
@@ -697,8 +694,13 @@ public class PdfDialog extends JFrame implements KeyListener, TreeSelectionListe
 	 *            the name
 	 */
 	private void openPDFByteBuffer(ByteBuffer buf, String path, String name) {
+		
+		/** the root of the outline, or null if there is no outline. */
+		OutlineNode outline = null;
+		
 		// create a PDFFile from the data
 		PDFFile newfile = null;
+		
 		try {
 			newfile = new PDFFile(buf);
 		} catch (IOException ioe) {

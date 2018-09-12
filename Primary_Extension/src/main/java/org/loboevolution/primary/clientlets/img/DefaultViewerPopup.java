@@ -107,8 +107,8 @@ public class DefaultViewerPopup extends JPopupMenu {
 		});
 
 		class CustomZoomEntry {
-			double value;
-			JRadioButtonMenuItem menuItem;
+			private double value;
+			private JRadioButtonMenuItem menuItem;
 
 			private CustomZoomEntry(String label, double value) {
 				this.value = value;

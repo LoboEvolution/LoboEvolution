@@ -26,7 +26,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.text.JTextComponent;
 
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 import org.loboevolution.util.Strings;

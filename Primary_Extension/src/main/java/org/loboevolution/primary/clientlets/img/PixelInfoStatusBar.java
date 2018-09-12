@@ -5,6 +5,8 @@ import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import org.loboevolution.util.Objects;
+
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -73,7 +75,7 @@ public class PixelInfoStatusBar extends StatusBar {
 		if (newModel == null)
 			throw new NullPointerException();
 
-		if (model != newModel) {
+		if (!Objects.equals(model, newModel)) {
 			if (model != null)
 				model.removeChangeListener(modelListener);
 			model = newModel;

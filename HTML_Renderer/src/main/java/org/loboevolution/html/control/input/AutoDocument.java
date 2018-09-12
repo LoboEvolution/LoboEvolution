@@ -26,13 +26,13 @@ import javax.swing.text.PlainDocument;
 
 public class AutoDocument extends PlainDocument {
 
+	private static final long serialVersionUID = 1L;
+	
 	private JAutoTextField autoText;
 
 	public AutoDocument(JAutoTextField autoText) {
 		this.autoText = autoText;
 	}
-
-	private static final long serialVersionUID = 1L;
 
 	public void replace(int i, int j, String s, AttributeSet attributeset) throws BadLocationException {
 		super.remove(i, j);

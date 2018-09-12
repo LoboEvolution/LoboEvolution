@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.loboevolution.util.Objects;
 
 import org.loboevolution.html.HtmlRendererContext;
 import org.loboevolution.html.domfilter.ColumnsFilter;
@@ -40,9 +41,7 @@ import org.loboevolution.http.UserAgentContext;
 import org.w3c.dom.Node;
 
 public class RTableRow {
-	
-	public RTableRow() {}
-	
+		
 	/**
 	 * Populates the ROWS and ALL_CELLS collections.
 	 * @return 
@@ -107,7 +106,7 @@ public class RTableRow {
 	private final static HTMLElementImpl getParentRow(HTMLElementImpl cellNode, HTMLElementImpl te) {
 		Node parentNode = cellNode.getParentNode();
 		while (true) {
-			if (parentNode == null || parentNode == te) {
+			if (parentNode == null || Objects.equals(parentNode, te)) {
 				return null;
 			} else if (parentNode instanceof HTMLElementImpl) {
 				final HTMLElementImpl parentElem = (HTMLElementImpl) parentNode;

@@ -113,11 +113,6 @@ public class LAFSettings implements FontCommon, Serializable {
 	private String font = TIMES_NEW_ROMAN;
 
 	/**
-	 * Instantiates a new general settings.
-	 */
-	public LAFSettings() {}
-
-	/**
 	 * @return the istance
 	 */
 	public LAFSettings getIstance() {

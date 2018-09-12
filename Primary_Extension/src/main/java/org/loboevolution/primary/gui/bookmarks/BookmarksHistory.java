@@ -47,12 +47,6 @@ public class BookmarksHistory implements Serializable {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(BookmarksHistory.class);
-
-	/**
-	 * Instantiates a new bookmarks history.
-	 */
-	public BookmarksHistory() {}
-	
 	
 	/**
 	 * Gets the bookmarks

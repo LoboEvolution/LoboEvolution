@@ -46,11 +46,6 @@ public class NavigationHistory implements Serializable {
 
 	/** The Constant logger. */
 	private static final Logger logger = LogManager.getLogger(NavigationHistory.class);
-
-	/**
-	 * Instantiates a new navigation history.
-	 */
-	public NavigationHistory() {}
 		
 	/**
 	 * Gets the opened files.

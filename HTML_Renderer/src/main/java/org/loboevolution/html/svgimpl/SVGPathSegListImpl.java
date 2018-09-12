@@ -33,10 +33,6 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	private List<SVGPathSeg> segList;
 
 	public SVGPathSegListImpl() {
-		this(new SVGPathSeg[0]);
-	}
-
-	public SVGPathSegListImpl(SVGPathSeg[] points) {
 		this.segList = new ArrayList<SVGPathSeg>();
 		for (SVGPathSeg s : segList) {
 			this.segList.add(s);

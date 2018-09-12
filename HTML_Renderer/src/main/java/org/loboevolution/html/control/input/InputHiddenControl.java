@@ -22,8 +22,6 @@ package org.loboevolution.html.control.input;
 
 import java.awt.Dimension;
 
-import javax.swing.text.JTextComponent;
-
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
 
 /**

@@ -77,16 +77,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	
 	/** The chrome history panel. */
 	private CheckBoxPanel chromeHistoryPanel;
-	
-	/** The import panel. */
-	private FormPanel importPanel;
-	
-	/** The bookmark panel. */
-	private FormPanel bookmarkPanel;
-	
-	/** The history panel. */
-	private FormPanel historyPanel;
-	
+		
 	/** The import button. */
 	private JButton importButton;
 	
@@ -109,7 +100,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		this.searchEngineListControl = new ItemListControl<SearchEngine>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
 
-		historyPanel = new FormPanel();
+		FormPanel historyPanel = new FormPanel();
 		historyPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
 		this.mozillaHistoryPanel = new CheckBoxPanel("Mozilla Firefox", historyPanel);
 		this.chromeHistoryPanel = new CheckBoxPanel("Google GoogleChrome", historyPanel);
@@ -119,7 +110,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		historyButton.setText("Import History");
 		this.historyButton = historyButton;
 
-		bookmarkPanel = new FormPanel();
+		FormPanel bookmarkPanel = new FormPanel();
 		bookmarkPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
 		this.mozillaBookmarkPanel = new CheckBoxPanel("Mozilla Firefox", bookmarkPanel);
 		this.chromeBookmarkPanel = new CheckBoxPanel("Google GoogleChrome", bookmarkPanel);
@@ -129,7 +120,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		bookmarkButton.setText("Import Bookmarks");
 		this.bookmarkButton = bookmarkButton;
 		
-		importPanel = new FormPanel();
+
+		FormPanel importPanel = new FormPanel();
 		importPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
 		this.mozillaPanel = new CheckBoxPanel("Mozilla Firefox", importPanel);
 		this.chromePanel = new CheckBoxPanel("Google GoogleChrome", importPanel);

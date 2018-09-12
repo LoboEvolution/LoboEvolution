@@ -54,14 +54,8 @@ public class SourceViewerWindow extends JFrame {
 	/** The text area. */
 	private transient RSyntaxTextArea textArea;
 
-	/** The scroll bar. */
-	private transient RTextScrollPane scrollBar;
-
 	/** The jtf filter. */
 	private JTextField jtfFilter;
-
-	/** The find bsutton. */
-	private JButton findButton;
 
 	/** The pos. */
 	private int pos = 0;
@@ -103,7 +97,8 @@ public class SourceViewerWindow extends JFrame {
 
 	private void addTextArea() {
 		jtfFilter = new JTextField();
-		findButton = new JButton("Next word");
+
+		JButton findButton = new JButton("Next word");
 		textArea = new RSyntaxTextArea();
 		textArea.setHighlightCurrentLine(true);
 		textArea.setAnimateBracketMatching(true);
@@ -111,7 +106,7 @@ public class SourceViewerWindow extends JFrame {
 		textArea.setEditable(false);
 		textArea.setSyntaxEditingStyle(SyntaxConstants.SYNTAX_STYLE_XML);
 
-		scrollBar = new RTextScrollPane(textArea);
+		RTextScrollPane scrollBar = new RTextScrollPane(textArea);
 		scrollBar.setBorder(null);
 		scrollBar.setLineNumbersEnabled(true);
 		scrollBar.setViewportView(textArea);

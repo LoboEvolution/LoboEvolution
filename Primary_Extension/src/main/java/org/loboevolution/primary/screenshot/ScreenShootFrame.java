@@ -36,9 +36,6 @@ public class ScreenShootFrame extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	/** The image. */
-	private transient BufferedImage image;
 	
 	public ScreenShootFrame(JPanel panelframe) {
 		createAndShowGUI(panelframe);
@@ -52,7 +49,8 @@ public class ScreenShootFrame extends JFrame {
 		JFrame win = (JFrame) SwingUtilities.getWindowAncestor(panelframe);
 		JPanel panel = new JPanel();
 		Dimension size = win.getSize();
-		image = (BufferedImage) win.createImage(size.width, size.height);
+
+		BufferedImage image = (BufferedImage) win.createImage(size.width, size.height);
 		Graphics g = image.getGraphics();
 		win.paint(g);
 

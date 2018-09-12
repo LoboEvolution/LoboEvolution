@@ -33,10 +33,6 @@ public class SVGLengthListImpl implements SVGLengthList {
 	private List<SVGLength> lengthList;
 
 	public SVGLengthListImpl() {
-		this(new SVGLength[0]);
-	}
-
-	public SVGLengthListImpl(SVGLength[] points) {
 		this.lengthList = new ArrayList<SVGLength>();
 		for (SVGLength s : lengthList) {
 			this.lengthList.add(s);

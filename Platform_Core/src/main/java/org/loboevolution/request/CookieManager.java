@@ -72,10 +72,10 @@ public class CookieManager extends CookieHandler {
 		for (Map.Entry<String, List<String>> entry : responseHeaders.entrySet()) {
 			String key = entry.getKey();
 			for (String value : entry.getValue()) {
-				if (key != null && value != null) {
-					if ("Set-Cookie".equalsIgnoreCase(key) || "Set-Cookie2".equalsIgnoreCase(key)|| "Cookie".equalsIgnoreCase(key)|| "Cookie2".equalsIgnoreCase(key)) {
-						CookieStore.saveCookie(uri.getHost(), value);
-					}
+				if (key != null && value != null && 
+					("Set-Cookie".equalsIgnoreCase(key) ||  "Set-Cookie2".equalsIgnoreCase(key)|| 
+					"Cookie".equalsIgnoreCase(key)|| "Cookie2".equalsIgnoreCase(key))){
+					CookieStore.saveCookie(uri.getHost(), value);				
 				}
 			}
 		}

@@ -51,18 +51,12 @@ import com.loboevolution.store.SQLiteCommon;
  */
 public class CookieStore {
 
+	/** The Constant logger. */
+	private static final Logger logger = LogManager.getLogger(CookieStore.class);
+	
 	/** The date pattern. */
 	private static final String PATTERN = "dd/MM/yyyy";
 
-
-	/** The Constant logger. */
-	private static final Logger logger = LogManager.getLogger(CookieStore.class);
-
-	/**
-	 * Instantiates a new cookie store.
-	 */
-	public CookieStore() {
-	}
 	/**
 	 * Save cookie.
 	 *

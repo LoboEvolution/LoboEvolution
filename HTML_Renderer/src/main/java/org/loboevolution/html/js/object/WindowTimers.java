@@ -26,7 +26,6 @@ import javax.swing.Timer;
 
 import org.loboevolution.html.js.ExpressionTimerTask;
 import org.loboevolution.html.js.FunctionTimerTask;
-import org.loboevolution.html.js.object.WindowTimers;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
 

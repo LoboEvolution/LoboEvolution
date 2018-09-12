@@ -49,10 +49,8 @@ public class BrowserFrameImpl implements BrowserFrame {
 	 *
 	 * @param frame
 	 *            the frame
-	 * @param parentrcontext
-	 *            the parentrcontext
 	 */
-	public BrowserFrameImpl(NavigatorFrame frame, HtmlRendererContext parentrcontext) {
+	public BrowserFrameImpl(NavigatorFrame frame) {
 		this.frame = frame;
 		this.rcontext = HtmlRendererContextImpl.getHtmlRendererContext(frame);
 	}

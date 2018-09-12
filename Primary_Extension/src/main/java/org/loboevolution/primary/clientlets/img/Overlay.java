@@ -33,13 +33,13 @@ import java.util.List;
  * @author Kazo Csaba
  */
 public abstract class Overlay {
-	List<OverlayComponent> overlayComponents = new ArrayList<OverlayComponent>(1);
+	private List<OverlayComponent> overlayComponents = new ArrayList<OverlayComponent>(1);
 
-	final void addOverlayComponent(OverlayComponent c) {
+	public final void addOverlayComponent(OverlayComponent c) {
 		overlayComponents.add(c);
 	}
 
-	final void removeOverlayComponent(OverlayComponent c) {
+	public final void removeOverlayComponent(OverlayComponent c) {
 		overlayComponents.remove(c);
 	}
 

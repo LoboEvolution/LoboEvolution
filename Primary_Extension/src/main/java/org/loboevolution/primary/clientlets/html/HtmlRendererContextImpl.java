@@ -306,7 +306,7 @@ public class HtmlRendererContextImpl implements HtmlRendererContext {
 	@Override
 	public BrowserFrame createBrowserFrame() {
 		NavigatorFrame newFrame = this.clientletFrame.createFrame();
-		return new BrowserFrameImpl(newFrame, this);
+		return new BrowserFrameImpl(newFrame);
 	}
 
 	@Override

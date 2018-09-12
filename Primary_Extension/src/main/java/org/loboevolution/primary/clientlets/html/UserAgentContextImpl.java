@@ -46,8 +46,6 @@ public class UserAgentContextImpl implements UserAgentContext {
 	/** The Constant mediaNames. */
 	private static final Set<String> mediaNames = new HashSet<String>();
 	
-	public UserAgentContextImpl() {}
-
 	static {
 		// Media names supported here
 		Set<String> mn = mediaNames;

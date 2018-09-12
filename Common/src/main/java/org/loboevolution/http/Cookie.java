@@ -56,14 +56,6 @@ public class Cookie extends NameValuePair {
 	
 	/** The version. */
 	private boolean httpOnly;
-	
-
-	/**
-	 * Instantiates a new cookie.
-	 */
-	public Cookie() {}
-
-	
 
 	/**
 	 * Gets the encoded name.

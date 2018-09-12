@@ -172,7 +172,6 @@ public class QuerySelectorImpl {
 
 			String[] str = selectors.split(">");
 			String str0 = str[0].trim();
-			String str1 = str[1].trim();
 			NodeList nodeList = doc.getElementsByTagName(str0);
 			for (Node node : Nodes.iterable(nodeList)) {
 				if (str0.equals(node.getParentNode().getNodeName())) {

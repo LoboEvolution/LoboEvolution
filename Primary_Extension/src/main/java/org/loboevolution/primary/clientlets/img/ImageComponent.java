@@ -41,6 +41,8 @@ import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.loboevolution.util.Objects;
+
 /**
  * The component that displays the image itself.
  * 
@@ -69,7 +71,7 @@ class ImageComponent extends JComponent {
 	class Rescroller {
 		private Point2D preparedCenter = null;
 
-		void prepare() {
+		public void prepare() {
 			if (image != null && hasSize()) {
 				Rectangle viewRect = getViewer().getScrollPane().getViewport().getViewRect();
 				preparedCenter = new Point2D.Double(viewRect.getCenterX(), viewRect.getCenterY());
@@ -81,7 +83,7 @@ class ImageComponent extends JComponent {
 			}
 		}
 
-		void rescroll() {
+		public void rescroll() {
 			if (preparedCenter != null) {
 				Dimension viewSize = getViewer().getScrollPane().getViewport().getExtentSize();
 				getImageTransform().transform(preparedCenter, preparedCenter);
@@ -148,9 +150,11 @@ class ImageComponent extends JComponent {
 		BufferedImage oldImage = image;
 		image = newImage;
 		paintManager.notifyChanged();
-		if (oldImage != newImage && (oldImage == null || newImage == null || oldImage.getWidth() != newImage.getWidth()
-				|| oldImage.getHeight() != newImage.getHeight()))
+		if (!Objects.equals(oldImage, newImage) && 
+			(oldImage == null || newImage == null || 
+			 oldImage.getWidth() != newImage.getWidth() || oldImage.getHeight() != newImage.getHeight())) {
 			revalidate();
+		}
 		repaint();
 		getPropertyChangeSupport().firePropertyChange("image", oldImage, newImage);
 	}
@@ -220,7 +224,7 @@ class ImageComponent extends JComponent {
 	}
 
 	public void setInterpolationType(Object type) {
-		if (interpolationType == type)
+		if (Objects.equals(interpolationType, type))
 			return;
 		if (type != RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR
 				&& type != RenderingHints.VALUE_INTERPOLATION_BILINEAR

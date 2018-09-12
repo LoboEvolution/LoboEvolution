@@ -29,7 +29,7 @@ public abstract class StatusBar {
 		return imageViewer;
 	}
 
-	final void setImageViewer(ImageViewer imageViewer) {
+	public final void setImageViewer(ImageViewer imageViewer) {
 		if (this.imageViewer != null)
 			unregister(this.imageViewer);
 		this.imageViewer = imageViewer;

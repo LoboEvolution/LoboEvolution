@@ -36,7 +36,6 @@ import javax.swing.JPasswordField;
 import javax.swing.text.JTextComponent;
 
 import org.loboevolution.html.domimpl.HTMLBaseInputElement;
-import org.loboevolution.html.gui.mouse.GuiMouseImpl;
 import org.loboevolution.util.Strings;
 
 

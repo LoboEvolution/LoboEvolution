@@ -86,9 +86,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 	/** The requested properties. */
 	private final Properties requestedProperties;
 
-	/** The window id. */
-	private final String windowId;
-
 	/** The progress window. */
 	private final Window progressWindow;
 
@@ -155,7 +152,6 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 	 */
 	public NavigatorWindowImpl(NavigatorFrame openerFrame, String windowId, Properties properties) {
 		this.requestedProperties = properties;
-		this.windowId = windowId;
 		WindowFactory wf = windowFactory;
 		if (wf == null) {
 			throw new IllegalStateException("Global WindowFactory is null.");
@@ -181,7 +177,7 @@ public class NavigatorWindowImpl implements NavigatorWindow, WindowCallback {
 			this.progressWindow = null;
 			this.launched = true;
 		} else {
-			AbstractBrowserWindow newWindow = wf.createWindow(this.windowId, properties, this);
+			AbstractBrowserWindow newWindow = wf.createWindow(windowId, properties, this);
 			this.browserWindow = newWindow;
 			JFrame progressWindow = new ProgressWindow();
 			this.progressWindow = progressWindow;

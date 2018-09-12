@@ -229,7 +229,7 @@ public class FloatingViewportBounds implements FloatingBounds {
 		FloatingViewportBounds olm = (FloatingViewportBounds) other;
 		return olm.leftFloat == this.leftFloat && olm.y == this.y && olm.height == this.height
 				&& olm.offsetFromBorder == this.offsetFromBorder
-				&& org.loboevolution.util.Objects.equals(olm.prevBounds, this.prevBounds);
+				&& Objects.equals(olm.prevBounds, this.prevBounds);
 	}
 
 	/*

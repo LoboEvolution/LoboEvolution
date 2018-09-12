@@ -60,14 +60,14 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	/** The max length. */
 	private int maxLength = -1;
 
+	/** model Node. */
+	private HTMLBaseInputElement  modelNode;
+	
 	/** The widget. */
 	protected JAutoTextField widget;
 
 	/** Creates the text field. */
-	protected abstract JAutoTextField createTextField();
-	
-	/** model Node. */
-	private HTMLBaseInputElement  modelNode;
+	protected abstract JAutoTextField createTextField();	
 
 	/**
 	 * Instantiates a new base input text control.
@@ -128,11 +128,11 @@ public abstract class BaseInputTextControl extends BaseInputControl {
 	
 	private List<String> autocomplete(String id, String name, String type) {
         List<String> list = autocomplete(id);
-        if(list.size() > 0 ) return list;
+        if(!list.isEmpty()) return list;
         list = autocomplete(name);
-        if(list.size() > 0 ) return list;
+        if(!list.isEmpty()) return list;
         list = autocomplete(type);
-        if(list.size() > 0 ) return list;
+        if(!list.isEmpty()) return list;
         return new ArrayList<String>();
     }
 	

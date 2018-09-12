@@ -69,7 +69,7 @@ public class FillerComponent extends Filler {
 	 */
 	public FillerComponent(Component wrappedComponent, Dimension minSize, Dimension prefSize, Dimension maxSize) {
 		super(minSize, prefSize, maxSize);
-		this.setLayout(org.loboevolution.util.gui.WrapperLayout.getInstance());
+		this.setLayout(WrapperLayout.getInstance());
 		this.add(wrappedComponent);
 	}
 

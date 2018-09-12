@@ -23,7 +23,6 @@ package org.loboevolution.primary.clientlets.html;
 import java.awt.Component;
 import java.awt.Insets;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

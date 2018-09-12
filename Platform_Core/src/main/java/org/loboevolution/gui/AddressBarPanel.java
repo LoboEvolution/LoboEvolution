@@ -37,7 +37,7 @@ public class AddressBarPanel extends JPanel {
 	 * Instantiates a new address bar panel.
 	 */
 	public AddressBarPanel() {
-		createAndShowGUI();;
+		createAndShowGUI();
 	}
 
 	private void createAndShowGUI() {
