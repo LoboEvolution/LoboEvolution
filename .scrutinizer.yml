@@ -9,7 +9,6 @@ build:
             tests:
                 override:
                     -
-                        command: java-sonar-run
                         use_website_config: true
             environment:
                 docker:
