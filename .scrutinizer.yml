@@ -1,18 +1,19 @@
 # language: java
 # tests: true
+build:
+    environment:
+        java: 'java-8-oracle'
+    nodes:
+        analysis:
+        tests:
+            override:
+                - java-scrutinizer-run
 checks:
     java: true
-build:
-    nodes:
-        tests: true
-        analysis:
-            tests:
-                override:
-                    -
-                        use_website_config: true
-            environment:
-                docker:
-                    remote_engine: true
+    
+    
+    build:
+
 filter:
     excluded_paths:
         - parser/src/main/**
