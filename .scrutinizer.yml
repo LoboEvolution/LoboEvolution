@@ -1,11 +1,11 @@
+# language: java
+# tests: true
 build:
-  nodes:
-    analysis:
-      tests:
-        override:
-          - java-scrutinizer-run
+    environment:
+        java: 'java-8-oracle'
 checks:
     java: true
+  
 filter:
     excluded_paths:
         - parser/src/main/**
