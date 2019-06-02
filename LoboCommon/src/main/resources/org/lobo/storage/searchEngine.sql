@@ -1,0 +1,4 @@
+INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES("Bing Search", "Bing web search engine.", "SEARCH_ENGINE", "https://www.bing.com/search?q=", "q", 0);
+INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES("Google Web Search", "Google's main search engine.", "SEARCH_ENGINE", "https://google.com/search?q=", "q", 1);
+INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES("Yahoo! Web Search", "Yahoo's web search engine.", "SEARCH_ENGINE", "https://search.yahoo.com/search?q=", "p", 0);
+INSERT INTO SEARCH (name, description, type, baseUrl, queryParameter, selected) VALUES("Wikipedia", "English Wikipedia article search.", "SEARCH_ENGINE", "https://en.wikipedia.org/w/index.php?search=", "search", 0);
