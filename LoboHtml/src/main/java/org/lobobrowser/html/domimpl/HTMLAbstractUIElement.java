@@ -10,6 +10,7 @@ import org.lobobrowser.js.JavaScript;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Function;
+import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 
@@ -90,13 +91,10 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 						final Scriptable thisScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this,
 								scope);
 						try {
-							// TODO: Get right line number for script. //TODO: Optimize this in case it's
-							// called multiple times? Is that done?
-							f = ctx.compileFunction(thisScope, functionCode,
-									getTagName() + "[" + getId() + "]." + attributeName, 1, null);
-						} catch (final EcmaError ecmaError) {
-							logger.log(Level.WARNING, "Javascript error at " + ecmaError.getSourceName() + ":"
-									+ ecmaError.getLineNumber() + ": " + ecmaError.getMessage(), ecmaError);
+                            ctx.setLanguageVersion(Context.VERSION_1_8);
+							f = ctx.compileFunction(thisScope, functionCode, getTagName() + "[" + getId() + "]." + attributeName, 1, null);
+                        } catch (final RhinoException ecmaError) {
+                            logger.log(Level.WARNING, "Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError.getMessage());
 							f = null;
 						} catch (final Throwable err) {
 							logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);

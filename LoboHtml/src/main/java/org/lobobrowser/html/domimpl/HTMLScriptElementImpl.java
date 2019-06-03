@@ -35,6 +35,7 @@ import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EcmaError;
+import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
@@ -163,11 +164,11 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					if (text == null) {
 						throw new java.lang.IllegalStateException("Script source is null: " + this + ".");
 					}
+					ctx.setLanguageVersion(Context.VERSION_1_8);
 					ctx.evaluateString(scope, text, scriptURI, baseLineNumber, null);
 					
-				} catch (final EcmaError ecmaError) {
-					logger.log(Level.WARNING, "Javascript error at " + ecmaError.getSourceName() + ":"
-							+ ecmaError.getLineNumber() + ": " + ecmaError.getMessage(), ecmaError);
+                } catch (final RhinoException ecmaError) {
+                    logger.log(Level.WARNING, "Javascript error at " + ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage(), ecmaError.getMessage());
 				} catch (final Throwable err) {
 					logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
 				}

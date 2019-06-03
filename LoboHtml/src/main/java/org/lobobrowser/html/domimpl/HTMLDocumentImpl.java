@@ -27,7 +27,6 @@ import java.io.LineNumberReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -40,6 +39,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLDocument;
@@ -84,7 +84,7 @@ import org.xml.sax.SAXException;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, DocumentView {
+public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, DocumentView {
 	private class AnchorFilter implements NodeFilter {
 		@Override
 		public boolean accept(Node node) {
@@ -113,16 +113,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 		public CSSStyleSheet item(int index) {
 			return (CSSStyleSheet) get(index);
-		}
-	}
-
-	private class ElementFilter implements NodeFilter {
-		public ElementFilter() {
-		}
-
-		@Override
-		public boolean accept(Node node) {
-			return node instanceof Element;
 		}
 	}
 
@@ -211,23 +201,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 			if ("".equals(text)) {
 				openBufferChanged(text);
 			}
-		}
-	}
-
-	private class TagNameFilter implements NodeFilter {
-		private final String name;
-
-		public TagNameFilter(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public boolean accept(Node node) {
-			if (!(node instanceof Element)) {
-				return false;
-			}
-			final String n = this.name;
-			return n.equalsIgnoreCase(((Element) node).getTagName());
 		}
 	}
 
@@ -342,8 +315,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		// Window must be retained or it will be garbage collected.
 		this.window = window;
 		window.setDocument(this);
-		// Set up Javascript scope
-		setUserData(Executor.SCOPE_KEY, window.getWindowScope(), null);
 	}
 
 	/**
@@ -461,11 +432,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	@Override
-	public Attr createAttributeNS(String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
-	}
-
-	@Override
 	public CDATASection createCDATASection(String data) throws DOMException {
 		final CDataSectionImpl node = new CDataSectionImpl(data);
 		node.setOwnerDocument(this);
@@ -500,16 +466,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	}
 
 	@Override
-	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
-	}
-
-	@Override
-	public EntityReference createEntityReference(String name) throws DOMException {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
-	}
-
-	@Override
 	public ProcessingInstruction createProcessingInstruction(String target, String data) throws DOMException {
 		final HTMLProcessingInstruction node = new HTMLProcessingInstruction(target, data);
 		node.setOwnerDocument(this);
@@ -519,11 +475,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new StyleSheetRenderState(this);
-	}
-
-	@Override
-	protected Node createSimilarNode() {
-		return new HTMLDocumentImpl(this.ucontext, this.rcontext, this.reader, this.documentURI);
 	}
 
 	@Override
@@ -667,11 +618,13 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 
 	@Override
 	public Element getElementById(String elementId) {
-		Element element;
-		synchronized (this) {
-			element = (Element) this.elementsById.get(elementId);
-		}
-		return element;
+        if (Strings.isNotBlank(elementId)) {
+            synchronized (this) {
+                return (Element) this.elementsById.get(elementId);
+            }
+        } else {
+            return null;
+        }
 	}
 
 	/**
@@ -681,26 +634,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 	@Override
 	public NodeList getElementsByName(String elementName) {
 		return getNodeList(new ElementNameFilter(elementName));
-	}
-
-	/**
-	 * Gets all elements that match the given tag name.
-	 * 
-	 * @param tagname The element tag name or an asterisk character (*) to match all
-	 *                elements.
-	 */
-	@Override
-	public NodeList getElementsByTagName(String tagname) {
-		if ("*".equals(tagname)) {
-			return getNodeList(new ElementFilter());
-		} else {
-			return getNodeList(new TagNameFilter(tagname));
-		}
-	}
-
-	@Override
-	public NodeList getElementsByTagNameNS(String namespaceURI, String localName) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "HTML document");
 	}
 
 	@Override
@@ -792,50 +725,9 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		return this.locales;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getLocalName()
-	 */
-	@Override
-	public String getLocalName() {
-		// Always null for document
-		return null;
-	}
-
+	
 	public final Location getLocation() {
 		return this.window.getLocation();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeName()
-	 */
-	@Override
-	public String getNodeName() {
-		return "#document";
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeType()
-	 */
-	@Override
-	public short getNodeType() {
-		return Node.DOCUMENT_NODE;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeValue()
-	 */
-	@Override
-	public String getNodeValue() throws DOMException {
-		// Always null for document
-		return null;
 	}
 
 	public Function getOnloadHandler() {
@@ -1303,16 +1195,6 @@ public class HTMLDocumentImpl extends NodeImpl implements HTMLDocument, Document
 		synchronized (this) {
 			this.elementsByName.put(name, element);
 		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#setNodeValue(java.lang.String)
-	 */
-	@Override
-	public void setNodeValue(String nodeValue) throws DOMException {
-		throw new DOMException(DOMException.INVALID_MODIFICATION_ERR, "Cannot set node value of document");
 	}
 
 	public void setOnloadHandler(Function onloadHandler) {

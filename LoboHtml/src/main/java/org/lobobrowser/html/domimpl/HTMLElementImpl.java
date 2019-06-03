@@ -783,8 +783,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		}
 	}
 
-	public void setStyle(Object value) {
-		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot set style property");
+	public void setStyle(String value) {
+		this.setAttribute("style", value);
 	}
 
 	@Override

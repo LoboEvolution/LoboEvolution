@@ -37,6 +37,8 @@ import javax.swing.Timer;
 
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
+import org.lobobrowser.html.domimpl.CommentImpl;
+import org.lobobrowser.html.domimpl.HTMLDivElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLIFrameElementImpl;
@@ -44,6 +46,7 @@ import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLOptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLScriptElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
+import org.lobobrowser.html.domimpl.TextImpl;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
@@ -59,6 +62,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.events.EventException;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
@@ -104,7 +108,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	private static class FunctionTimerTask extends WeakWindowTask {
-		private final WeakReference functionRef;
+		private final WeakReference<Function> functionRef;
 		private final boolean removeTask;
 		// Implemented as a static WeakWindowTask to allow the Window
 		// to get garbage collected, especially in infinite loop
@@ -114,7 +118,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		public FunctionTimerTask(Window window, Integer timeIDInt, Function function, boolean removeTask) {
 			super(window);
 			this.timeIDInt = timeIDInt;
-			this.functionRef = new WeakReference(function);
+			this.functionRef = new WeakReference<Function>(function);
 			this.removeTask = removeTask;
 		}
 
@@ -152,33 +156,28 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		public final Timer timer;
 
 		public TaskWrapper(Timer timer, Object retained) {
-			super();
 			this.timer = timer;
 		}
 	}
 
 	private static abstract class WeakWindowTask implements ActionListener {
-		private final WeakReference windowRef;
+		private final WeakReference<Window> windowRef;
 
 		public WeakWindowTask(Window window) {
-			this.windowRef = new WeakReference(window);
+			this.windowRef = new WeakReference<Window>(window);
 		}
 
 		protected Window getWindow() {
-			final WeakReference ref = this.windowRef;
+			final WeakReference<Window> ref = this.windowRef;
 			return ref == null ? null : (Window) ref.get();
 		}
 	}
 
-	private static final Map CONTEXT_WINDOWS = new WeakHashMap();
+	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
 	private static final Logger logger = Logger.getLogger(Window.class.getName());
 
 	private static int timerIdCounter = 0;
-	// private static final JavaClassWrapper IMAGE_WRAPPER =
-	// JavaClassWrapperFactory.getInstance().getClassWrapper(Image.class);
-	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance()
-			.getClassWrapper(XMLHttpRequest.class);
-
+	
 	private static int generateTimerID() {
 		synchronized (logger) {
 			return timerIdCounter++;
@@ -190,7 +189,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			return null;
 		}
 		synchronized (CONTEXT_WINDOWS) {
-			final Reference wref = (Reference) CONTEXT_WINDOWS.get(rcontext);
+			final Reference<Window> wref = (Reference<Window>) CONTEXT_WINDOWS.get(rcontext);
 			if (wref != null) {
 				final Window window = (Window) wref.get();
 				if (window != null) {
@@ -198,7 +197,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				}
 			}
 			final Window window = new Window(rcontext, rcontext.getUserAgentContext());
-			CONTEXT_WINDOWS.put(rcontext, new WeakReference(window));
+			CONTEXT_WINDOWS.put(rcontext, new WeakReference<Window>(window));
 			return window;
 		}
 	}
@@ -221,21 +220,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 
 	private Screen screen;
 
-	private Map taskMap;
+	private Map<Integer, TaskWrapper> taskMap;
 
 	private final UserAgentContext uaContext;
-
-	private ScriptableObject windowScope;
-
-	// private Timer getTask(Long timeoutID) {
-//		synchronized(this) {
-//			Map taskMap = this.taskMap;
-//			if(taskMap != null) {
-//				return (Timer) taskMap.get(timeoutID);
-//			}
-//		}				
-//		return null;
-//	}
+	
+    private Scriptable windowScope;
 
 	public Window(HtmlRendererContext rcontext, UserAgentContext uaContext) {
 		// TODO: Probably need to create a new Window instance
@@ -277,16 +266,21 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	private void clearState() {
-		final Scriptable s = getWindowScope();
-		if (s != null) {
-			final Object[] ids = s.getIds();
-			for (final Object id : ids) {
-				if (id instanceof String) {
-					s.delete((String) id);
-				} else if (id instanceof Integer) {
-					s.delete(((Integer) id).intValue());
+		Context.enter();
+		try {
+			Scriptable s = this.getWindowScope();
+			if (s != null) {
+				Object[] ids = s.getIds();
+				for (Object id : ids) {
+					if (id instanceof String) {
+						s.delete((String) id);
+					} else if (id instanceof Integer) {
+						s.delete(((Integer) id).intValue());
+					}
 				}
 			}
+		} finally {
+			Context.exit();
 		}
 	}
 
@@ -362,7 +356,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private void forgetAllTasks() {
 		TaskWrapper[] oldTaskWrappers = null;
 		synchronized (this) {
-			final Map taskMap = this.taskMap;
+			final Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap != null) {
 				oldTaskWrappers = (TaskWrapper[]) taskMap.values().toArray(new TaskWrapper[0]);
 				this.taskMap = null;
@@ -378,7 +372,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private void forgetTask(Integer timeoutID, boolean cancel) {
 		TaskWrapper oldTimer = null;
 		synchronized (this) {
-			final Map taskMap = this.taskMap;
+            final Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap != null) {
 				oldTimer = (TaskWrapper) taskMap.remove(timeoutID);
 			}
@@ -392,9 +386,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
 		} else {
-			throw new java.lang.IllegalArgumentException("Element implementation unknown: " + element);
+			throw new IllegalArgumentException("Element implementation unknown: " + element);
 		}
 	}
+	
+    public CSS2Properties getComputedStyle(HTMLElement elt) {
+        return getComputedStyle(elt, null);
+    }
 
 	public String getDefaultStatus() {
 		final HtmlRendererContext rcontext = this.rcontext;
@@ -554,16 +552,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 
 	public Scriptable getWindowScope() {
 		synchronized (this) {
-			ScriptableObject windowScope = this.windowScope;
+            Scriptable windowScope = this.windowScope;
 			if (windowScope != null) {
 				return windowScope;
 			}
-			// Context.enter() OK in this particular case.
 			final Context ctx = Context.enter();
 			try {
-				// Window scope needs to be top-most scope.
-				windowScope = (ScriptableObject) JavaScript.getInstance().getJavascriptObject(this, null);
-				ctx.initStandardObjects(windowScope);
+                windowScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, null);
+                windowScope = ctx.initSafeStandardObjects((ScriptableObject)windowScope);
 				this.windowScope = windowScope;
 				return windowScope;
 			} finally {
@@ -573,32 +569,40 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	private void initWindowScope(final Document doc) {
-		// Special Javascript class: XMLHttpRequest
 		final Scriptable ws = getWindowScope();
 		final JavaInstantiator xi = () -> {
 			final Document d = doc;
-			if (d == null) {
-				throw new IllegalStateException("Cannot perform operation when document is unset.");
-			}
-			HTMLDocumentImpl hd;
 			try {
-				hd = (HTMLDocumentImpl) d;
+                if (d == null) {
+                    throw new IllegalStateException("Cannot perform operation when document is unset.");
+                }
+                HTMLDocumentImpl hd = (HTMLDocumentImpl) d;
+                return new XMLHttpRequest(Window.this.uaContext, hd.getDocumentURL(), ws);
 			} catch (final ClassCastException err) {
 				throw new IllegalStateException(
 						"Cannot perform operation with documents of type " + d.getClass().getName() + ".");
 			}
-			return new XMLHttpRequest(Window.this.uaContext, hd.getDocumentURL(), ws);
 		};
-		final Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, ws,
-				xi);
-		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
 
-		// HTML element classes
-		defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
-		defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);
-		defineElementClass(ws, doc, "IFrame", "iframe", HTMLIFrameElementImpl.class);
-		defineElementClass(ws, doc, "Option", "option", HTMLOptionElementImpl.class);
-		defineElementClass(ws, doc, "Select", "select", HTMLSelectElementImpl.class);
+        final JavaClassWrapper xmlHttpRequestWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
+        final Function xmlHttpRequestFunction = JavaObjectWrapper.getConstructor("XMLHttpRequest", xmlHttpRequestWrapper, ws, xi);
+        ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestFunction, ScriptableObject.READONLY);
+        
+        final JavaClassWrapper textWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(TextImpl.class);
+        final Function textWrapperFunction = JavaObjectWrapper.getConstructor("Text", textWrapper, ws, xi);
+        ScriptableObject.defineProperty(ws, "Text", textWrapperFunction, ScriptableObject.READONLY);
+        
+        final JavaClassWrapper eventWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(Event.class);
+        final Function eventFunction = JavaObjectWrapper.getConstructor("Event", eventWrapper, ws, xi);
+        ScriptableObject.defineProperty(ws, "Event", eventFunction, ScriptableObject.READONLY);
+        
+        defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
+        defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
+        defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);
+        defineElementClass(ws, doc, "IFrame", "iframe", HTMLIFrameElementImpl.class);
+        defineElementClass(ws, doc, "Option", "option", HTMLOptionElementImpl.class);
+        defineElementClass(ws, doc, "Select", "select", HTMLSelectElementImpl.class);
+        defineElementClass(ws, doc, "HTMLDivElement", "div", HTMLDivElementImpl.class);
 	}
 
 	public boolean isClosed() {
@@ -676,9 +680,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private void putAndStartTask(Integer timeoutID, Timer timer, Object retained) {
 		TaskWrapper oldTaskWrapper = null;
 		synchronized (this) {
-			Map taskMap = this.taskMap;
+			Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap == null) {
-				taskMap = new HashMap(4);
+				taskMap = new HashMap<Integer, TaskWrapper>(4);
 				this.taskMap = taskMap;
 			} else {
 				oldTaskWrapper = (TaskWrapper) taskMap.get(timeoutID);
@@ -720,25 +724,22 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	public void setDocument(HTMLDocumentImpl document) {
+	public void setDocument(final HTMLDocumentImpl document) {
 		final Document prevDocument = this.document;
 		if (prevDocument != document) {
-			// Should clearing of the state be done
-			// when window "unloads"?
-			if (prevDocument != null) {
-				// Only clearing when the previous document was not null
-				// because state might have been set on the window before
-				// the very first document is added.
-				clearState();
-			}
-			initWindowScope(document);
-			forgetAllTasks();
 			final Function onunload = this.onunload;
 			if (onunload != null) {
-				final HTMLDocumentImpl oldDoc = this.document;
-				Executor.executeFunction(getWindowScope(), onunload, oldDoc.getDocumentURL(), this.uaContext);
+                final HTMLDocumentImpl oldDoc = (HTMLDocumentImpl) prevDocument;
+                Executor.executeFunction(this.getWindowScope(), onunload, oldDoc.getDocumentURL(), this.uaContext);
 				this.onunload = null;
 			}
+
+            if (prevDocument != null) {
+                this.clearState();
+            }
+            this.forgetAllTasks();
+            this.initWindowScope(document);
+            document.setUserData(Executor.SCOPE_KEY, getWindowScope(), null);
 			this.document = document;
 		}
 	}
@@ -837,6 +838,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	public int setTimeout(final Function function) {
+		return setTimeout(function, 0);
+	}
+
 	public int setTimeout(final Function function, double millis) {
 		if (millis > Integer.MAX_VALUE || millis < 0) {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
@@ -854,6 +859,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return timeID;
 	}
 
+	public int setTimeout(final String expr) {
+		return setTimeout(expr, 0);
+	}
+
 	public int setTimeout(final String expr, double millis) {
 		if (millis > Integer.MAX_VALUE || millis < 0) {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
@@ -869,6 +878,42 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		timer.setRepeats(false);
 		putAndStartTask(timeIDInt, timer, null);
 		return timeID;
+	}
+	
+	public void addEventListener(String type, Function listener) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
+		if (doc != null && doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).addEventListener(type, listener);
+		}
+	}
+
+	public void addEventListener(String type, Function listener, boolean useCapture) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
+		if (doc != null && doc instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) doc).addEventListener(type, listener, useCapture);
+		}
+	}
+
+	public boolean dispatchEvent(Event evt) throws EventException {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
+		if (doc != null && doc instanceof HTMLDocumentImpl) {
+			return doc.dispatchEvent(evt);
+		}
+		return lengthSet;
+	}
+
+	public void removeEventListener(String type, Function listener) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
+		if (doc != null && doc instanceof HTMLDocumentImpl) {
+			doc.removeEventListener(type, listener);
+		}
+	}
+
+	public void removeEventListener(String type, Function listener, boolean useCapture) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
+		if (doc != null && doc instanceof HTMLDocumentImpl) {
+			doc.removeEventListener(type, listener, useCapture);
+		}
 	}
 
 }

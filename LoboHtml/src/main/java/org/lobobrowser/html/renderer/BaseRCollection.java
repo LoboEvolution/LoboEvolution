@@ -129,6 +129,9 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				final Object r = i.next();
 				if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
+                    if (br instanceof RBlockViewport) {
+                        return br;
+                    }
 					final int bx = br.getX();
 					final int by = br.getY();
 					if (y >= by && y < by + br.getHeight() && x >= bx && x < bx + br.getWidth()) {

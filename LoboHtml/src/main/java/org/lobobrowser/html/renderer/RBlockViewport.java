@@ -579,24 +579,9 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("OBJECT", new ObjectLayout(true, true));
 		el.put("APPLET", ol);
 		el.put("EMBED", ol);
-		el.put("IFRAME", new IFrameLayout());
+		//el.put("IFRAME", new IFrameLayout());
 	}
 
-	// final RBlockViewport getParentViewportForAlign() {
-//		// Use originalParent, which for one, is not going to be null during layout.
-//		Object parent = this.getOriginalOrCurrentParent();
-//		if(parent instanceof RBlock) {
-//			RBlock block = (RBlock) parent;
-//			if(!block.couldBeScrollable()) {
-//				parent = ((BaseElementRenderable) parent).getOriginalOrCurrentParent();
-//				if(parent instanceof RBlockViewport) {
-//					return (RBlockViewport) parent;
-//				}
-//			}	
-//		}
-//		return null;
-//	}
-//
 	private static int getPosition(HTMLElementImpl element) {
 		final RenderState rs = element.getRenderState();
 		return rs == null ? RenderState.POSITION_STATIC : rs.getPosition();

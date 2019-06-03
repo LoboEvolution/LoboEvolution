@@ -50,11 +50,9 @@ public class Executor {
 	public static Context createContext(java.net.URL codeSource, UserAgentContext ucontext) {
 		final Context prev = Context.getCurrentContext();
 		final Context ctx = Context.enter();
+		ctx.setLanguageVersion(Context.VERSION_1_8);
 		ctx.setOptimizationLevel(ucontext.getScriptingOptimizationLevel());
 		if (prev == null) {
-			// If there was a previous context, this one must be nested.
-			// We still need to create a context because of exit() but
-			// we cannot set a new security controller.
 			ctx.setSecurityController(new SecurityControllerImpl(codeSource, ucontext.getSecurityPolicy()));
 		}
 		return ctx;

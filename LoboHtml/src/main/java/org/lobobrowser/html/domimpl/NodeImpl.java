@@ -558,6 +558,10 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		// Should it be synchronized? Could have side-effects.
 		return this.parentNode;
 	}
+	
+	public Node getParentElement() {
+		return this.parentNode;
+	}
 
 	protected final RenderState getParentRenderState(Object parent) {
 		if (parent instanceof NodeImpl) {

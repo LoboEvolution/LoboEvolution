@@ -23,21 +23,19 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobo.common.Strings;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public final class ElementFilter implements NodeFilter {
 	private final String elementName;
 
-	/**
-	 * @param name
-	 */
 	public ElementFilter(String name) {
-		super();
 		this.elementName = name;
 	}
 
 	@Override
 	public boolean accept(Node node) {
-		return this.elementName.equalsIgnoreCase(node.getNodeName());
+		return Strings.isNotBlank(elementName) ? (this.elementName.equalsIgnoreCase(node.getNodeName())) : (node instanceof Element);
 	}
 }
