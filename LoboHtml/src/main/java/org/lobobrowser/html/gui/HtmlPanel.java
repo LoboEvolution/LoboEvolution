@@ -134,7 +134,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private volatile Insets defaultMarginInsets = new Insets(8, 8, 8, 8);
 
 	private volatile int defaultOverflowX = RenderState.OVERFLOW_AUTO;
-	private volatile int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
+	private volatile int defaultOverflowY = RenderState.OVERFLOW_AUTO;
 	protected volatile FrameSetPanel frameSetPanel;
 	protected volatile HtmlBlockPanel htmlBlockPanel;
 	private volatile boolean isFrameSet = false;
