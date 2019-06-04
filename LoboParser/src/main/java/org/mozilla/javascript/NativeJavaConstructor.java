@@ -22,7 +22,7 @@ package org.mozilla.javascript;
 
 public class NativeJavaConstructor extends BaseFunction
 {
-    static final long serialVersionUID = -8149253217482668463L;
+    private static final long serialVersionUID = -8149253217482668463L;
 
     MemberBox ctor;
 
@@ -41,7 +41,7 @@ public class NativeJavaConstructor extends BaseFunction
     @Override
     public String getFunctionName()
     {
-        String sig = JavaMembers.liveConnectSignature(ctor.getParameterTypes());
+        String sig = JavaMembers.liveConnectSignature(ctor.argTypes);
         return "<init>".concat(sig);
     }
 

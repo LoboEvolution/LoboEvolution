@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class NativeJavaClass extends NativeJavaObject implements Function
 {
-    static final long serialVersionUID = -6460763940409461664L;
+    private static final long serialVersionUID = -6460763940409461664L;
 
     // Special property for getting the underlying Java class object.
     static final String javaClassPropertyName = "__javaObject__";
@@ -213,9 +213,9 @@ public class NativeJavaClass extends NativeJavaObject implements Function
 
     static Object constructInternal(Object[] args, MemberBox ctor)
     {
-        Class<?>[] argTypes = ctor.getParameterTypes();
+        Class<?>[] argTypes = ctor.argTypes;
 
-        if (ctor.isVarArgs()) {
+        if (ctor.vararg) {
             // marshall the explicit parameter
             Object[] newArgs = new Object[argTypes.length];
             for (int i = 0; i < argTypes.length-1; i++) {

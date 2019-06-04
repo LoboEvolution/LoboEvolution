@@ -27,9 +27,10 @@ import java.util.Map;
  * @see NativeJavaClass
  */
 
-public class NativeJavaObject implements Scriptable, Wrapper, Serializable
+public class NativeJavaObject
+    implements Scriptable, SymbolScriptable, Wrapper, Serializable
 {
-    static final long serialVersionUID = -6948590651130498591L;
+    private static final long serialVersionUID = -6948590651130498591L;
 
     public NativeJavaObject() { }
 
@@ -73,6 +74,11 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
     }
 
     @Override
+    public boolean has(Symbol key, Scriptable start) {
+        return false;
+    }
+
+    @Override
     public Object get(String name, Scriptable start) {
         if (fieldAndMethods != null) {
             Object result = fieldAndMethods.get(name);
@@ -83,6 +89,12 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
         // TODO: passing 'this' as the scope is bogus since it has
         //  no parent scope
         return members.get(this, name, javaObject, false);
+    }
+
+    @Override
+    public Object get(Symbol key, Scriptable start) {
+        // Native Java objects have no Symbol members
+        return Scriptable.NOT_FOUND;
     }
 
     @Override
@@ -102,6 +114,19 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
     }
 
     @Override
+    public void put(Symbol symbol, Scriptable start, Object value) {
+        // We could be asked to modify the value of a property in the
+        // prototype. Since we can't add a property to a Java object,
+        // we modify it in the prototype rather than copy it down.
+        String name = symbol.toString();
+        if (prototype == null || members.has(name, false)) {
+            members.put(this, name, javaObject, value, false);
+        } else if (prototype instanceof SymbolScriptable) {
+            ((SymbolScriptable)prototype).put(symbol, prototype, value);
+        }
+    }
+
+    @Override
     public void put(int index, Scriptable start, Object value) {
         throw members.reportMemberNotFound(Integer.toString(index));
     }
@@ -114,6 +139,10 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
 
     @Override
     public void delete(String name) {
+    }
+
+    @Override
+    public void delete(Symbol key) {
     }
 
     @Override
@@ -535,7 +564,8 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             }
             else if (type == ScriptRuntime.ObjectClass) {
                 Context context = Context.getCurrentContext();
-                if(context.hasFeature(Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE)) {
+                if ((context != null) &&
+                    context.hasFeature(Context.FEATURE_INTEGER_WITHOUT_DECIMAL_PLACE)) {
                     //to process numbers like 2.0 as 2 without decimal place
                     long roundedValue = Math.round(toDouble(value));
                     if(roundedValue == toDouble(value)) {
@@ -714,7 +744,7 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             type == ScriptRuntime.DoubleClass || type == Double.TYPE) {
             return valueClass == ScriptRuntime.DoubleClass
                 ? value
-                : new Double(toDouble(value));
+                : Double.valueOf(toDouble(value));
         }
 
         if (type == ScriptRuntime.FloatClass || type == Float.TYPE) {
@@ -724,20 +754,20 @@ public class NativeJavaObject implements Scriptable, Wrapper, Serializable
             double number = toDouble(value);
             if (Double.isInfinite(number) || Double.isNaN(number)
                 || number == 0.0) {
-                return new Float((float)number);
+                return Float.valueOf((float)number);
             }
 
             double absNumber = Math.abs(number);
             if (absNumber < Float.MIN_VALUE) {
-                return new Float((number > 0.0) ? +0.0 : -0.0);
+                return Float.valueOf((number > 0.0) ? +0.0f : -0.0f);
             }
             else if (absNumber > Float.MAX_VALUE) {
-                return new Float((number > 0.0) ?
+                return Float.valueOf((number > 0.0) ?
                                  Float.POSITIVE_INFINITY :
                                  Float.NEGATIVE_INFINITY);
             }
             else {
-                return new Float((float)number);
+                return Float.valueOf((float)number);
             }
         }
 

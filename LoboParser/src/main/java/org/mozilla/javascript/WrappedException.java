@@ -16,16 +16,16 @@ package org.mozilla.javascript;
  */
 public class WrappedException extends EvaluatorException
 {
-    static final long serialVersionUID = -1551979216966520648L;
+    private static final long serialVersionUID = -1551979216966520648L;
 
     /**
      * @see Context#throwAsScriptRuntimeEx(Throwable e)
      */
     public WrappedException(Throwable exception)
     {
-        super("Wrapped "+exception.toString());
+        super("Wrapped " + exception.toString());
         this.exception = exception;
-        Kit.initCause(this, exception);
+        this.initCause(exception);
 
         int[] linep = { 0 };
         String sourceName = Context.getSourcePositionFromStack(linep);

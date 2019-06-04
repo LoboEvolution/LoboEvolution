@@ -53,8 +53,8 @@ public abstract class ScriptableObject implements Scriptable,
                                                   ConstProperties
 {
 
-    static final long serialVersionUID = 2829861078851942586L;
-    
+    private static final long serialVersionUID = 2829861078851942586L;
+
     /**
      * The empty property attribute.
      *
@@ -225,7 +225,7 @@ public abstract class ScriptableObject implements Scriptable,
      */
     static final class GetterSlot extends Slot
     {
-        static final long serialVersionUID = -4900574849788797588L;
+        private static final long serialVersionUID = -4900574849788797588L;
 
         Object getter;
         Object setter;
@@ -292,7 +292,7 @@ public abstract class ScriptableObject implements Scriptable,
                 Context cx = Context.getContext();
                 if (setter instanceof MemberBox) {
                     MemberBox nativeSetter = (MemberBox)setter;
-                    Class<?> pTypes[] = nativeSetter.getParameterTypes();
+                    Class<?> pTypes[] = nativeSetter.argTypes;
                     // XXX: cache tag since it is already calculated in
                     // defineProperty ?
                     Class<?> valueType = pTypes[pTypes.length - 1];

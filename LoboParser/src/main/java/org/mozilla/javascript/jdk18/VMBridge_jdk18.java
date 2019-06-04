@@ -12,15 +12,12 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Iterator;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.ContextFactory;
 import org.mozilla.javascript.InterfaceAdapter;
-import org.mozilla.javascript.Kit;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.VMBridge;
-import org.mozilla.javascript.Wrapper;
 
 public class VMBridge_jdk18 extends VMBridge
 {
@@ -86,7 +83,7 @@ public class VMBridge_jdk18 extends VMBridge
             c = cl.getConstructor(new Class[] { InvocationHandler.class });
         } catch (NoSuchMethodException ex) {
             // Should not happen
-            throw Kit.initCause(new IllegalStateException(), ex);
+            throw new IllegalStateException(ex);
         }
         return c;
     }
@@ -136,30 +133,11 @@ public class VMBridge_jdk18 extends VMBridge
             throw Context.throwAsScriptRuntimeEx(ex);
         } catch (IllegalAccessException ex) {
             // Should not happen
-            throw Kit.initCause(new IllegalStateException(), ex);
+            throw new IllegalStateException(ex);
         } catch (InstantiationException ex) {
             // Should not happen
-            throw Kit.initCause(new IllegalStateException(), ex);
+            throw new IllegalStateException(ex);
         }
         return proxy;
-    }
-
-    /**
-     * If "obj" is a java.util.Iterator or a java.lang.Iterable, return a
-     * wrapping as a JavaScript Iterator. Otherwise, return null.
-     * This method is in VMBridge since Iterable is a JDK 1.5 addition.
-     */
-    @Override
-    protected Iterator<?> getJavaIterator(Context cx, Scriptable scope, Object obj) {
-        if (obj instanceof Wrapper) {
-            Object unwrapped = ((Wrapper) obj).unwrap();
-            Iterator<?> iterator = null;
-            if (unwrapped instanceof Iterator)
-                iterator = (Iterator<?>) unwrapped;
-            if (unwrapped instanceof Iterable)
-                iterator = ((Iterable<?>)unwrapped).iterator();
-            return iterator;
-        }
-        return null;
     }
 }

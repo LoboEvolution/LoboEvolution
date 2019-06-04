@@ -11,14 +11,13 @@ package org.mozilla.javascript;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Executable;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 public class FunctionObject extends BaseFunction
 {
-    static final long serialVersionUID = -5332312783643935019L;
+    private static final long serialVersionUID = -5332312783643935019L;
 
     /**
      * Create a JavaScript function object from a Java method.
@@ -96,7 +95,7 @@ public class FunctionObject extends BaseFunction
         }
         String methodName = member.getName();
         this.functionName = name;
-        Class<?>[] types = member.getParameterTypes();
+        Class<?>[] types = member.argTypes;
         int arity = types.length;
         if (arity == 4 && (types[1].isArray() || types[2].isArray())) {
             // Either variable args or an error.
@@ -139,7 +138,8 @@ public class FunctionObject extends BaseFunction
         }
 
         if (member.isMethod()) {
-            Class<?> returnType = member.getReturnType();
+            Method method = member.method();
+            Class<?> returnType = method.getReturnType();
             if (returnType == Void.TYPE) {
                 hasVoidReturn = true;
             } else {
@@ -202,7 +202,7 @@ public class FunctionObject extends BaseFunction
           case JAVA_DOUBLE_TYPE:
             if (arg instanceof Double)
                 return arg;
-            return new Double(ScriptRuntime.toNumber(arg));
+            return Double.valueOf(ScriptRuntime.toNumber(arg));
           case JAVA_SCRIPTABLE_TYPE:
               return ScriptRuntime.toObjectOrNull(cx, arg, scope);
           case JAVA_OBJECT_TYPE:
@@ -239,9 +239,13 @@ public class FunctionObject extends BaseFunction
     /**
      * Get Java method or constructor this function represent.
      */
-    public Executable getMethodOrConstructor()
+    public Member getMethodOrConstructor()
     {
-        return member.member();
+        if (member.isMethod()) {
+            return member.method();
+        } else {
+            return member.ctor();
+        }
     }
 
     static Method findSingleMethod(Method[] methods, String name)
@@ -506,14 +510,15 @@ public class FunctionObject extends BaseFunction
     {
         in.defaultReadObject();
         if (parmsLength > 0) {
-            Class<?>[] types = member.getParameterTypes();
+            Class<?>[] types = member.argTypes;
             typeTags = new byte[parmsLength];
             for (int i = 0; i != parmsLength; ++i) {
                 typeTags[i] = (byte)getTypeTag(types[i]);
             }
         }
         if (member.isMethod()) {
-            Class<?> returnType = member.getReturnType();
+            Method method = member.method();
+            Class<?> returnType = method.getReturnType();
             if (returnType == Void.TYPE) {
                 hasVoidReturn = true;
             } else {

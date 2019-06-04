@@ -51,7 +51,7 @@ public class ScriptRuntime {
     public static BaseFunction typeErrorThrower(Context cx) {
       if (cx.typeErrorThrower == null) {
         BaseFunction thrower = new BaseFunction() {
-          static final long serialVersionUID = -5891740962154902286L;
+            private static final long serialVersionUID = -5891740962154902286L;
 
           @Override
           public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
@@ -510,7 +510,7 @@ public class ScriptRuntime {
         if (sourceStart == end) { // stopped right at the beginning
             return NaN;
         }
-        if (sum >= 9007199254740992.0) {
+        if (sum > NativeNumber.MAX_SAFE_INTEGER) {
             if (radix == 10) {
                 /* If we're accumulating a decimal number and the number
                  * is >= 2^53, then the result from the repeated multiply-add
@@ -1232,6 +1232,14 @@ public class ScriptRuntime {
 
     public static double toInteger(Object[] args, int index) {
         return (index < args.length) ? toInteger(args[index]) : +0.0;
+    }
+
+    public static long toLength(Object[] args, int index) {
+        double len = toInteger(args, index);
+        if (len <= +0.0) {
+            return 0;
+        }
+        return (long) Math.min(len, NativeNumber.MAX_SAFE_INTEGER);
     }
 
     /**
@@ -2884,7 +2892,8 @@ public class ScriptRuntime {
             return false;
         }
         if (value instanceof ScriptableObject) {
-            return "object".equals(((ScriptableObject)value).getTypeOf());
+            String type = ((ScriptableObject)value).getTypeOf();
+            return "object".equals(type) || "function".equals(type);
         }
         if (value instanceof Scriptable) {
             return (!(value instanceof Callable));
@@ -4098,7 +4107,7 @@ public class ScriptRuntime {
     public static Object[] getArrayElements(Scriptable object)
     {
         Context cx = Context.getContext();
-        long longLen = NativeArray.getLengthProperty(cx, object);
+        long longLen = NativeArray.getLengthProperty(cx, object, false);
         if (longLen > Integer.MAX_VALUE) {
             // arrays beyond  MAX_INT is not in Java in any case
             throw new IllegalArgumentException();
