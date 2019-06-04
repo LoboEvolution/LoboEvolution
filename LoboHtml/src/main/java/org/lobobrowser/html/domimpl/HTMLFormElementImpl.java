@@ -80,7 +80,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	public HTMLCollection getElements() {
 		HTMLCollection elements = this.elements;
 		if (elements == null) {
-			elements = new DescendentHTMLCollection(this, new InputFilter(), this.treeLock, false);
+			elements = new HTMLCollectionImpl(this, new InputFilter());
 			this.elements = elements;
 		}
 		return elements;

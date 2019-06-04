@@ -491,7 +491,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public HTMLCollection getAnchors() {
 		synchronized (this) {
 			if (this.anchors == null) {
-				this.anchors = new DescendentHTMLCollection(this, new AnchorFilter(), this.treeLock);
+				this.anchors = new HTMLCollectionImpl(this, new AnchorFilter());
 			}
 			return this.anchors;
 		}
@@ -502,7 +502,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		synchronized (this) {
 			if (this.applets == null) {
 				// TODO: Should include OBJECTs that are applets?
-				this.applets = new DescendentHTMLCollection(this, new AppletFilter(), this.treeLock);
+				this.applets = new HTMLCollectionImpl(this, new AppletFilter());
 			}
 			return this.applets;
 		}
@@ -616,7 +616,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public HTMLCollection getForms() {
 		synchronized (this) {
 			if (this.forms == null) {
-				this.forms = new DescendentHTMLCollection(this, new FormFilter(), this.treeLock);
+				this.forms = new HTMLCollectionImpl(this, new FormFilter());
 			}
 			return this.forms;
 		}
@@ -625,7 +625,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public HTMLCollection getFrames() {
 		synchronized (this) {
 			if (this.frames == null) {
-				this.frames = new DescendentHTMLCollection(this, new FrameFilter(), this.treeLock);
+				this.frames = new HTMLCollectionImpl(this, new FrameFilter());
 			}
 			return this.frames;
 		}
@@ -658,7 +658,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public HTMLCollection getImages() {
 		synchronized (this) {
 			if (this.images == null) {
-				this.images = new DescendentHTMLCollection(this, new ImageFilter(), this.treeLock);
+				this.images = new HTMLCollectionImpl(this, new ImageFilter());
 			}
 			return this.images;
 		}
@@ -688,7 +688,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public HTMLCollection getLinks() {
 		synchronized (this) {
 			if (this.links == null) {
-				this.links = new DescendentHTMLCollection(this, new LinkFilter(), this.treeLock);
+				this.links = new HTMLCollectionImpl(this, new LinkFilter());
 			}
 			return this.links;
 		}

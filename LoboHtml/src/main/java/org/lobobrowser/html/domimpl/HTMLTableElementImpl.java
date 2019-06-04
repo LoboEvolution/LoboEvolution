@@ -164,7 +164,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	@Override
 	public HTMLCollection getRows() {
-		return new DescendentHTMLCollection(this, new ElementFilter("TR"), this.treeLock, false);
+        return new HTMLCollectionImpl(this, new ElementFilter("TR"));
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	@Override
 	public HTMLCollection getTBodies() {
-		return new DescendentHTMLCollection(this, new ElementFilter("TBODY"), this.treeLock, false);
+		return new HTMLCollectionImpl(this, new ElementFilter("TBODY"));
 	}
 
 	@Override

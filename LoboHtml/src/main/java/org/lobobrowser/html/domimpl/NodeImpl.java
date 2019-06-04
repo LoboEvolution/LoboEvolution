@@ -27,9 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -324,7 +322,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		synchronized (this) {
 			HTMLCollection collection = this.childrenCollection;
 			if (collection == null) {
-				collection = null;//TODO new HTMLCollectionImpl(this);
+				collection = new HTMLCollectionImpl(this);
 				this.childrenCollection = collection;
 			}
 			return collection;

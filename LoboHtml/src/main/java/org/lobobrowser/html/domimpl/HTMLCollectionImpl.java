@@ -18,47 +18,60 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Dec 3, 2005
- */
+
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLCollection;
-import org.lobobrowser.js.AbstractScriptableDelegate;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-public class ChildHTMLCollection extends AbstractScriptableDelegate implements HTMLCollection {
-	private final NodeImpl rootNode;
+public class HTMLCollectionImpl implements HTMLCollection {
 
-	/**
-	 * @param node
-	 */
-	public ChildHTMLCollection(NodeImpl node) {
-		super();
-		this.rootNode = node;
+	private NodeImpl rootNode;
+	
+	private NodeListImpl rootList = null;
+	
+	public HTMLCollectionImpl(NodeImpl rootNode) {
+		this.rootNode = rootNode;
+	}
+
+	public HTMLCollectionImpl(NodeImpl rootNode, NodeFilter nodeFilter) {
+		this.rootNode = rootNode;
+		rootList = (NodeListImpl) rootNode.getNodeList(nodeFilter);
 	}
 
 	@Override
 	public int getLength() {
-		return this.rootNode.getChildCount();
+		if(rootList == null ) {
+			return this.rootNode.getChildCount();
+		} else {
+			return this.rootList.getLength();
+		}
 	}
 
 	public int indexOf(Node node) {
-		return this.rootNode.getChildIndex(node);
+		if (rootList == null) {
+			return this.rootNode.getChildIndex(node);
+		} else {
+			return this.rootList.indexOf(node);
+		}
 	}
 
 	@Override
 	public Node item(int index) {
-		return this.rootNode.getChildAtIndex(index);
+		if (rootList == null) {
+			return this.rootNode.getChildAtIndex(index);
+		} else {
+			return this.rootList.get(index);
+		}
 	}
 
 	@Override
 	public Node namedItem(String name) {
-		final org.w3c.dom.Document doc = this.rootNode.getOwnerDocument();
+		final Document doc = this.rootNode.getOwnerDocument();
 		if (doc == null) {
 			return null;
 		}
-		// TODO: This might get elements that are not descendents.
 		final Node node = doc.getElementById(name);
 		if (node != null && node.getParentNode() == this.rootNode) {
 			return node;
