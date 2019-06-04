@@ -47,6 +47,13 @@ public abstract class HTMLElementBuilder {
 			return new HTMLBaseElementImpl(name);
 		}
 	}
+	
+	public static class Head extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLHeadElementImpl(name);
+		}
+	}
 
 	public static class BaseFont extends HTMLElementBuilder {
 		@Override

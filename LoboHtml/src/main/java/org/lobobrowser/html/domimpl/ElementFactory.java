@@ -44,6 +44,7 @@ class ElementFactory {
 		builders.put("HTML", new HTMLElementBuilder.Html());
 		builders.put("TITLE", new HTMLElementBuilder.Title());
 		builders.put("BASE", new HTMLElementBuilder.Base());
+        builders.put("HEAD", new HTMLElementBuilder.Head());
 
 		final HTMLElementBuilder div = new HTMLElementBuilder.Div();
 		builders.put("DIV", div);
