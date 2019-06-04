@@ -25,6 +25,7 @@ package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
 
+import org.lobo.common.Nodes;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLTableCaptionElement;
@@ -36,6 +37,7 @@ import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableRenderState;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement {
@@ -84,24 +86,16 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	@Override
 	public void deleteRow(int index) throws DOMException {
-		synchronized (this.treeLock) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final int size = nl.size();
-				int trcount = 0;
-				for (int i = 0; i < size; i++) {
-					final Node node = (Node) nl.get(i);
-					if ("TR".equalsIgnoreCase(node.getNodeName())) {
-						if (trcount == index) {
-							removeChildAt(i);
-							return;
-						}
-						trcount++;
-					}
+		int trcount = 0;
+		for (Node node : Nodes.iterable(nodeList)) {
+			if ("TR".equalsIgnoreCase(node.getNodeName())) {
+				if (trcount == index) {
+					removeChildAt(nodeList.indexOf(node));
+					return;
 				}
+				trcount++;
 			}
 		}
-		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
 	}
 
 	@Override
@@ -228,36 +222,27 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	@Override
 	public HTMLElement insertRow(int index) throws DOMException {
-		final org.w3c.dom.Document doc = this.document;
+		final Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
 		final HTMLElement rowElement = (HTMLElement) doc.createElement("TR");
-		synchronized (this.treeLock) {
-			if (index == -1) {
-				appendChild(rowElement);
-				return rowElement;
-			}
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final int size = nl.size();
-				int trcount = 0;
-				for (int i = 0; i < size; i++) {
-					final Node node = (Node) nl.get(i);
-					if ("TR".equalsIgnoreCase(node.getNodeName())) {
-						if (trcount == index) {
-							insertAt(rowElement, i);
-							return rowElement;
-						}
-						trcount++;
-					}
+		if (index == -1) {
+			appendChild(rowElement);
+			return rowElement;
+		}
+		int trcount = 0;
+		for (Node node : Nodes.iterable(nodeList)) {
+			if ("TR".equalsIgnoreCase(node.getNodeName())) {
+				if (trcount == index) {
+					insertAt(rowElement, nodeList.indexOf(node));
+					return rowElement;
 				}
-			} else {
-				appendChild(rowElement);
-				return rowElement;
+				trcount++;
 			}
 		}
-		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
+		appendChild(rowElement);
+		return rowElement;
 	}
 
 	@Override

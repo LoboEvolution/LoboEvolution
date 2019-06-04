@@ -33,12 +33,12 @@ import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.HTMLCollection;
@@ -69,7 +69,6 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
-import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
@@ -334,18 +333,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		synchronized (this.treeLock) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
-			// Need to invalidate all children up to
-			// this point.
 			forgetRenderState();
-			// TODO: this might be ineffcient.
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final Iterator i = nl.iterator();
-				while (i.hasNext()) {
-					final Object node = i.next();
-					if (node instanceof HTMLElementImpl) {
-						((HTMLElementImpl) node).forgetStyle(true);
-					}
+			for (Node node : Nodes.iterable(nodeList)) {
+				if (node instanceof HTMLElementImpl) {
+					((HTMLElementImpl) node).forgetStyle(true);
 				}
 			}
 		}
@@ -390,18 +381,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		if (forgetRenderStates) {
 			synchronized (this.treeLock) {
 				this.styleSheetAggregator = null;
-				// Need to invalidate all children up to
-				// this point.
 				forgetRenderState();
-				// TODO: this might be ineffcient.
-				final ArrayList nl = this.nodeList;
-				if (nl != null) {
-					final Iterator i = nl.iterator();
-					while (i.hasNext()) {
-						final Object node = i.next();
-						if (node instanceof HTMLElementImpl) {
-							((HTMLElementImpl) node).forgetStyle(true);
-						}
+				for (Node node : Nodes.iterable(nodeList)) {
+					if (node instanceof HTMLElementImpl) {
+						((HTMLElementImpl) node).forgetStyle(true);
 					}
 				}
 			}
@@ -570,19 +553,12 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	@Override
 	public Element getDocumentElement() {
-		synchronized (this.treeLock) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final Iterator i = nl.iterator();
-				while (i.hasNext()) {
-					final Object node = i.next();
-					if (node instanceof Element) {
-						return (Element) node;
-					}
-				}
+		for (Node node : Nodes.iterable(nodeList)) {
+			if (node instanceof Element) {
+				return (Element) node;
 			}
-			return null;
 		}
+		return null;
 	}
 
 	String getDocumentHost() {

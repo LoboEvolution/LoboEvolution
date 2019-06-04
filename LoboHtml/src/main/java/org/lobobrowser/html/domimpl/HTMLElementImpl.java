@@ -35,6 +35,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 
+import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dom.HTMLElement;
@@ -127,23 +128,19 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		final String tagName = getTagName();
 		buffer.append('<');
 		buffer.append(tagName);
-		final Map attributes = this.attributes;
+		final Map<String, String> attributes = this.attributes;
 		if (attributes != null) {
-			final Iterator i = attributes.entrySet().iterator();
-			while (i.hasNext()) {
-				final Map.Entry entry = (Map.Entry) i.next();
-				final String value = (String) entry.getValue();
-				if (value != null) {
+			attributes.forEach((k, v) -> {
+				if (v != null) {
 					buffer.append(' ');
-					buffer.append(entry.getKey());
+					buffer.append(k);
 					buffer.append("=\"");
-					buffer.append(Strings.strictHtmlEncode(value, true));
+					buffer.append(Strings.strictHtmlEncode(v, true));
 					buffer.append("\"");
 				}
-			}
+			});
 		}
-		final ArrayList nl = this.nodeList;
-		if (nl == null || nl.size() == 0) {
+		if (nodeList.getLength() == 0) {
 			buffer.append("/>");
 			return;
 		}
@@ -219,14 +216,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			this.isHoverStyle = null;
 			this.hasHoverStyleByElement = null;
 			if (deep) {
-				final java.util.ArrayList nl = this.nodeList;
-				if (nl != null) {
-					final Iterator i = nl.iterator();
-					while (i.hasNext()) {
-						final Object node = i.next();
-						if (node instanceof HTMLElementImpl) {
-							((HTMLElementImpl) node).forgetStyle(deep);
-						}
+				for (Node node : Nodes.iterable(nodeList)) {
+					if (node instanceof HTMLElementImpl) {
+						((HTMLElementImpl) node).forgetStyle(deep);
 					}
 				}
 			}
@@ -714,18 +706,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	private void invalidateDescendentsForHoverImpl(HTMLElementImpl ancestor) {
-		final ArrayList nodeList = this.nodeList;
-		if (nodeList != null) {
-			final int size = nodeList.size();
-			for (int i = 0; i < size; i++) {
-				final Object node = nodeList.get(i);
-				if (node instanceof HTMLElementImpl) {
-					final HTMLElementImpl descendent = (HTMLElementImpl) node;
-					if (descendent.hasHoverStyle(ancestor)) {
-						descendent.informInvalid();
-					}
-					descendent.invalidateDescendentsForHoverImpl(ancestor);
+		for (Node node : Nodes.iterable(nodeList)) {
+			if (node instanceof HTMLElementImpl) {
+				final HTMLElementImpl descendent = (HTMLElementImpl) node;
+				if (descendent.hasHoverStyle(ancestor)) {
+					descendent.informInvalid();
 				}
+				descendent.invalidateDescendentsForHoverImpl(ancestor);
 			}
 		}
 	}
@@ -750,12 +737,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			return;
 		}
 		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, null, null);
-		synchronized (this) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				nl.clear();
-			}
-		}
+		this.nodeList.clear();
 		// Should not synchronize around parser probably.
 		try {
 			final Reader reader = new StringReader(newHtml);

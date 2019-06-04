@@ -24,18 +24,21 @@
 package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class NodeListImpl extends AbstractScriptableDelegate implements NodeList {
-	// Note: class must be public for reflection to work.
-	private final ArrayList nodeList = new ArrayList();
 
-	public NodeListImpl(Collection collection) {
-		super();
+	private final List<Node> nodeList = Collections.synchronizedList(new ArrayList<Node>());
+
+	public NodeListImpl() {
+	}
+
+	public NodeListImpl(List<Node> collection) {
 		this.nodeList.addAll(collection);
 	}
 
@@ -46,10 +49,51 @@ public class NodeListImpl extends AbstractScriptableDelegate implements NodeList
 
 	@Override
 	public Node item(int index) {
-		try {
+		int size = this.nodeList.size();
+		if (size > index && index > -1) {
 			return (Node) this.nodeList.get(index);
-		} catch (final IndexOutOfBoundsException iob) {
+		} else {
 			return null;
 		}
+	}
+
+	public void add(Node newChild) {
+		this.nodeList.add(newChild);
+	}
+
+	public void add(int firstIdx, Node textNode) {
+		this.nodeList.add(firstIdx, textNode);
+	}
+
+	public int indexOf(Node child) {
+		return this.nodeList.indexOf(child);
+	}
+
+	public Node remove(int i) {
+		return this.nodeList.remove(i);
+	}
+
+	public Node get(int index) {
+		return this.nodeList.get(index);
+	}
+
+	public boolean remove(Node oldChild) {
+		return this.nodeList.remove(oldChild);
+	}
+
+	public void clear() {
+		this.nodeList.clear();
+	}
+
+	public NodeImpl[] toArray() {
+		return this.nodeList.toArray(new NodeImpl[0]);
+	}
+
+	public void set(int idx, Node newChild) {
+		this.nodeList.set(idx, newChild);
+	}
+
+	public void removeAll(List<Node> toDelete) {
+		this.nodeList.removeAll(toDelete);
 	}
 }

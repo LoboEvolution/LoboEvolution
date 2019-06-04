@@ -23,27 +23,24 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
+import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
 import org.lobobrowser.util.Objects;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
-import org.w3c.dom.TypeInfo;
 
 public class ElementImpl extends DOMFunctionImpl implements Element {
+
 	protected static boolean isTagName(Node node, String name) {
 		return node.getNodeName().equalsIgnoreCase(name);
 	}
@@ -162,33 +159,6 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		return getAttribute("dir");
 	}
 
-	@Override
-	public NodeList getElementsByTagName(String name) {
-		final boolean matchesAll = "*".equals(name);
-		final List descendents = new LinkedList();
-		synchronized (this.treeLock) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final Iterator i = nl.iterator();
-				while (i.hasNext()) {
-					final Object child = i.next();
-					if (child instanceof Element) {
-						final Element childElement = (Element) child;
-						if (matchesAll || isTagName(childElement, name)) {
-							descendents.add(child);
-						}
-						final NodeList sublist = childElement.getElementsByTagName(name);
-						final int length = sublist.getLength();
-						for (int idx = 0; idx < length; idx++) {
-							descendents.add(sublist.item(idx));
-						}
-					}
-				}
-			}
-		}
-		return new NodeListImpl(descendents);
-	}
-
 	public String getId() {
 		final String id = this.id;
 		return id == null ? "" : id;
@@ -245,47 +215,39 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * @param includeComment
 	 */
 	protected String getRawInnerText(boolean includeComment) {
-		synchronized (this.treeLock) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final Iterator i = nl.iterator();
-				StringBuffer sb = null;
-				while (i.hasNext()) {
-					final Object node = i.next();
-					if (node instanceof Text) {
-						final Text tn = (Text) node;
-						final String txt = tn.getNodeValue();
-						if (!"".equals(txt)) {
-							if (sb == null) {
-								sb = new StringBuffer();
-							}
-							sb.append(txt);
-						}
-					} else if (node instanceof ElementImpl) {
-						final ElementImpl en = (ElementImpl) node;
-						final String txt = en.getRawInnerText(includeComment);
-						if (!"".equals(txt)) {
-							if (sb == null) {
-								sb = new StringBuffer();
-							}
-							sb.append(txt);
-						}
-					} else if (includeComment && node instanceof Comment) {
-						final Comment cn = (Comment) node;
-						final String txt = cn.getNodeValue();
-						if (!"".equals(txt)) {
-							if (sb == null) {
-								sb = new StringBuffer();
-							}
-							sb.append(txt);
-						}
+		StringBuffer sb = null;
+		for (Node node : Nodes.iterable(nodeList)) {
+			if (node instanceof Text) {
+				final Text tn = (Text) node;
+				final String txt = tn.getNodeValue();
+				if (Strings.isNotBlank(txt)) {
+					if (sb == null) {
+						sb = new StringBuffer();
 					}
+					sb.append(txt);
 				}
-				return sb == null ? "" : sb.toString();
-			} else {
-				return "";
+			} else if (node instanceof ElementImpl) {
+				final ElementImpl en = (ElementImpl) node;
+				final String txt = en.getRawInnerText(includeComment);
+				if (Strings.isNotBlank(txt)) {
+					if (sb == null) {
+						sb = new StringBuffer();
+					}
+					sb.append(txt);
+				}
+			} else if (includeComment && node instanceof Comment) {
+				final Comment cn = (Comment) node;
+				final String txt = cn.getNodeValue();
+				if (Strings.isNotBlank(txt)) {
+					if (sb == null) {
+						sb = new StringBuffer();
+					}
+					sb.append(txt);
+				}
 			}
 		}
+		return sb == null ? "" : sb.toString();
+
 	}
 
 	@Override
@@ -422,18 +384,12 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	}
 
 	public void setInnerText(String newText) {
-		final org.w3c.dom.Document document = this.document;
+		final Document document = this.document;
 		if (document == null) {
 			this.warn("setInnerText(): Element " + this + " does not belong to a document.");
 			return;
 		}
-		synchronized (this.treeLock) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				nl.clear();
-			}
-		}
-		// Create node and call appendChild outside of synchronized block.
+		this.nodeList.clear();
 		final Node textNode = document.createTextNode(newText);
 		appendChild(textNode);
 	}

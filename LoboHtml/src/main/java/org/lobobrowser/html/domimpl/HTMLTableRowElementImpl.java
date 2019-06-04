@@ -23,12 +23,13 @@
  */
 package org.lobobrowser.html.domimpl;
 
-import java.util.ArrayList;
-
+import org.lobo.common.Nodes;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
+import org.lobobrowser.html.dom.HTMLTableCellElement;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement {
@@ -42,23 +43,15 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 
 	@Override
 	public void deleteCell(int index) throws DOMException {
-		synchronized (this.treeLock) {
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final int size = nl.size();
-				int trcount = 0;
-				for (int i = 0; i < size; i++) {
-					final Node node = (Node) nl.get(i);
-					if (node instanceof org.lobobrowser.html.dom.HTMLTableCellElement) {
-						if (trcount == index) {
-							removeChildAt(index);
-						}
-						trcount++;
-					}
+		int trcount = 0;
+		for (Node node : Nodes.iterable(nodeList)) {
+			if (node instanceof HTMLTableCellElement) {
+				if (trcount == index) {
+					removeChildAt(index);
 				}
+				trcount++;
 			}
 		}
-		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
 	}
 
 	@Override
@@ -130,7 +123,7 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	}
 
 	private HTMLElement insertCell(int index, String tagName) throws DOMException {
-		final org.w3c.dom.Document doc = this.document;
+		final Document doc = this.document;
 		if (doc == null) {
 			throw new DOMException(DOMException.WRONG_DOCUMENT_ERR, "Orphan element");
 		}
@@ -140,26 +133,20 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 				appendChild(cellElement);
 				return cellElement;
 			}
-			final ArrayList nl = this.nodeList;
-			if (nl != null) {
-				final int size = nl.size();
-				int trcount = 0;
-				for (int i = 0; i < size; i++) {
-					final Node node = (Node) nl.get(i);
-					if (node instanceof org.lobobrowser.html.dom.HTMLTableCellElement) {
-						if (trcount == index) {
-							insertAt(cellElement, i);
-							return cellElement;
-						}
-						trcount++;
+
+			int trcount = 0;
+			for (Node node : Nodes.iterable(nodeList)) {
+				if (node instanceof HTMLTableCellElement) {
+					if (trcount == index) {
+						insertAt(cellElement, nodeList.indexOf(node));
+						return cellElement;
 					}
+					trcount++;
 				}
-			} else {
-				appendChild(cellElement);
-				return cellElement;
 			}
+			appendChild(cellElement);
+			return cellElement;
 		}
-		throw new DOMException(DOMException.INDEX_SIZE_ERR, "Index out of range");
 	}
 
 	/**
