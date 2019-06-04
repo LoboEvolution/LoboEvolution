@@ -52,29 +52,17 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	private final String name;
 
 	public ElementImpl(String name) {
-		super();
 		this.name = name;
 	}
 
 	protected void assignAttributeField(String normalName, String value) {
-		// Note: overriders assume that processing here is only done after
-		// checking attribute names, i.e. they may not call the super
-		// implementation if an attribute is already taken care of.
 		boolean isName = false;
 		if ("id".equals(normalName) || (isName = "name".equals(normalName))) {
-			// Note that the value of name is used
-			// as an ID, but the value of ID is not
-			// used as a name.
 			if (!isName) {
 				this.id = value;
 			}
 			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 			if (document != null) {
-				//// Do not remove old ID. Consider scenario where both
-				//// name and ID are provided in an element.
-//				if (oldId != null) {
-//					document.removeElementById(oldId);
-//				}
 				document.setElementById(value, this);
 				if (isName) {
 					final String oldName = getAttribute("name");
@@ -430,6 +418,38 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 		sb.append("]");
 		return sb.toString();
+	}
+	
+	public Element getFirstElementChild() {
+		for (Node n : Nodes.iterable(nodeList)) {
+			if (n instanceof Element) {
+				return (Element) n;
+			}
+		}
+		return null;
+	}
+
+	public Element getLastElementChild() {
+		final int N = this.nodeList.getLength();
+		for (int i = N - 1; i >= 0; i--) {
+			final Node n = this.nodeList.get(i);
+			if (n instanceof Element) {
+				return (Element) n;
+			}
+		}
+
+		return null;
+	}
+
+	public int getChildElementCount() {
+		int count = 0;
+		for (Node n : Nodes.iterable(nodeList)) {
+			if (n instanceof Element) {
+				count++;
+			}
+		}
+
+		return count;
 	}
 
 }
