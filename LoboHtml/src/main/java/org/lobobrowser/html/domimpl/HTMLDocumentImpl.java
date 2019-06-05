@@ -44,6 +44,7 @@ import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLDocument;
 import org.lobobrowser.html.dom.HTMLElement;
+import org.lobobrowser.html.dom.HTMLHeadElement;
 import org.lobobrowser.html.dom.HTMLLinkElement;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
@@ -84,18 +85,8 @@ import org.xml.sax.SAXException;
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
 public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, DocumentView {
-	private class AnchorFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			final String nodeName = node.getNodeName();
-			return "A".equalsIgnoreCase(nodeName) || "ANCHOR".equalsIgnoreCase(nodeName);
-		}
-	}
-
+	
 	public class CSSStyleSheetList extends ArrayList {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
 		public int getLength() {
@@ -106,7 +97,53 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			return (CSSStyleSheet) get(index);
 		}
 	}
+	
+	private static class ImageInfo {
+		public ImageEvent imageEvent;
+		private final ArrayList listeners = new ArrayList(1);
+		public boolean loaded;
 
+		void addListener(ImageListener listener) {
+			this.listeners.add(listener);
+		}
+
+		ImageListener[] getListeners() {
+			return (ImageListener[]) this.listeners.toArray(ImageListener.EMPTY_ARRAY);
+		}
+	}
+
+	private class LocalWritableLineReader extends WritableLineReader {
+		/**
+		 * @param reader
+		 */
+		public LocalWritableLineReader(LineNumberReader reader) {
+			super(reader);
+		}
+
+		/**
+		 * @param reader
+		 */
+		public LocalWritableLineReader(Reader reader) {
+			super(reader);
+		}
+
+		@Override
+		public void write(String text) throws IOException {
+			super.write(text);
+			if ("".equals(text)) {
+				openBufferChanged(text);
+			}
+		}
+	}
+
+	private class AnchorFilter implements NodeFilter {
+		@Override
+		public boolean accept(Node node) {
+			final String nodeName = node.getNodeName();
+			return "A".equalsIgnoreCase(nodeName) || "ANCHOR".equalsIgnoreCase(nodeName);
+		}
+	}
+	
 	private class ElementNameFilter implements NodeFilter {
 		private final String name;
 
@@ -116,8 +153,15 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 		@Override
 		public boolean accept(Node node) {
-			// TODO: Case sensitive?
 			return node instanceof Element && this.name.equals(((Element) node).getAttribute("name"));
+		}
+	}
+	
+	private class EmbedFilter implements NodeFilter {
+		@Override
+		public boolean accept(Node node) {
+			final String nodeName = node.getNodeName();
+			return "EMBED".equalsIgnoreCase(nodeName);
 		}
 	}
 
@@ -143,63 +187,45 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			return "IMG".equalsIgnoreCase(node.getNodeName());
 		}
 	}
-
-	private static class ImageInfo {
-		// Access to this class is synchronized on imageInfos.
-		public ImageEvent imageEvent;
-		private final ArrayList listeners = new ArrayList(1);
-		public boolean loaded;
-
-		void addListener(ImageListener listener) {
-			this.listeners.add(listener);
-		}
-
-		ImageListener[] getListeners() {
-			return (ImageListener[]) this.listeners.toArray(ImageListener.EMPTY_ARRAY);
-		}
-	}
-
+	
 	private class LinkFilter implements NodeFilter {
 		@Override
 		public boolean accept(Node node) {
 			return node instanceof HTMLLinkElement;
 		}
 	}
-
-	/**
-	 * Tag class that also notifies document when text is written to an open buffer.
-	 * 
-	 * @author J. H. S.
-	 */
-	private class LocalWritableLineReader extends WritableLineReader {
-		/**
-		 * @param reader
-		 */
-		public LocalWritableLineReader(LineNumberReader reader) {
-			super(reader);
-		}
-
-		/**
-		 * @param reader
-		 */
-		public LocalWritableLineReader(Reader reader) {
-			super(reader);
-		}
-
+	
+	private class CommandFilter implements NodeFilter {
 		@Override
-		public void write(String text) throws IOException {
-			super.write(text);
-			if ("".equals(text)) {
-				openBufferChanged(text);
-			}
+		public boolean accept(Node node) {
+			return "COMMAND".equalsIgnoreCase(node.getNodeName());
+		}
+	}
+	
+	private class HeadFilter implements NodeFilter {
+		@Override
+		public boolean accept(Node node) {
+			return "HEAD".equalsIgnoreCase(node.getNodeName());
+		}
+	}
+	
+	private class ScriptFilter implements NodeFilter {
+		@Override
+		public boolean accept(Node node) {
+			return "SCRIPT".equalsIgnoreCase(node.getNodeName());
+		}
+	}
+	
+	private class BodyFilter implements NodeFilter {
+		@Override
+		public boolean accept(Node node) {
+			return "Body".equalsIgnoreCase(node.getNodeName());
 		}
 	}
 
 	private static final Logger logger = Logger.getLogger(HTMLDocumentImpl.class.getName());
 
 	private HTMLCollection anchors;
-
-	private HTMLCollection applets;
 
 	private volatile String baseURI;
 
@@ -455,16 +481,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 	}
 
-	@Override
-	public HTMLCollection getAnchors() {
-		synchronized (this) {
-			if (this.anchors == null) {
-				this.anchors = new HTMLCollectionImpl(this, new AnchorFilter());
-			}
-			return this.anchors;
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -474,13 +490,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public String getBaseURI() {
 		final String buri = this.baseURI;
 		return buri == null ? this.documentURI : buri;
-	}
-
-	@Override
-	public HTMLElement getBody() {
-		synchronized (this) {
-			return this.body;
-		}
 	}
 
 	@Override
@@ -570,25 +579,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	}
 
 	@Override
-	public HTMLCollection getForms() {
-		synchronized (this) {
-			if (this.forms == null) {
-				this.forms = new HTMLCollectionImpl(this, new FormFilter());
-			}
-			return this.forms;
-		}
-	}
-
-	public HTMLCollection getFrames() {
-		synchronized (this) {
-			if (this.frames == null) {
-				this.frames = new HTMLCollectionImpl(this, new FrameFilter());
-			}
-			return this.frames;
-		}
-	}
-
-	@Override
 	public final URL getFullURL(String uri) {
 		try {
 			final String baseURI = getBaseURI();
@@ -611,16 +601,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		return this.rcontext;
 	}
 
-	@Override
-	public HTMLCollection getImages() {
-		synchronized (this) {
-			if (this.images == null) {
-				this.images = new HTMLCollectionImpl(this, new ImageFilter());
-			}
-			return this.images;
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -641,13 +621,94 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		return this.inputEncoding;
 	}
 
-	@Override
-	public HTMLCollection getLinks() {
+    
+    @Override
+    public HTMLCollection getForms() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new FormFilter());
+        }
+    }
+
+    public HTMLCollection getFrames() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new FrameFilter());
+        }
+    }
+    
+    @Override
+    public HTMLCollection getImages() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new ImageFilter());
+        }
+    }
+
+    @Override
+    public HTMLCollection getLinks() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new LinkFilter());
+        }
+    }
+    
+    @Override
+    public HTMLCollection getEmbeds() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new EmbedFilter());
+        }
+    }
+
+    @Override
+    public HTMLCollection getPlugins() {
+        return getEmbeds();
+    }
+
+    @Override
+    public HTMLCollection getScripts() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new ScriptFilter());
+        }
+    }
+
+    @Override
+    public HTMLCollection getCommands() {
+        synchronized (this) {
+            return new HTMLCollectionImpl(this, new CommandFilter());
+        }
+    }
+    
+    @Override
+	public HTMLCollection getAnchors() {
 		synchronized (this) {
-			if (this.links == null) {
-				this.links = new HTMLCollectionImpl(this, new LinkFilter());
+			if (this.anchors == null) {
+				this.anchors = new HTMLCollectionImpl(this, new AnchorFilter());
 			}
-			return this.links;
+			return this.anchors;
+		}
+	}
+    
+    @Override
+	public HTMLHeadElement getHead() {
+		synchronized (this) {
+			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
+			if (collection.getLength() > 0) {
+				return (HTMLHeadElement) collection.item(0);
+			} else {
+				return null;
+			}
+		}
+	}
+    
+    @Override
+	public HTMLElement getBody() {
+		synchronized (this) {
+			if (this.body == null) {
+				HTMLCollection collection = new HTMLCollectionImpl(this, new BodyFilter());
+				if (collection.getLength() > 0) {
+					return (HTMLElement) collection.item(0);
+				} else {
+					return null;
+				}
+			}
+			return null;
 		}
 	}
 

@@ -79,6 +79,13 @@ public interface HTMLDocument extends Document {
 	 * frameset documents, this returns the outermost <code>FRAMESET</code> element.
 	 */
 	HTMLElement getBody();
+	
+    /**
+     * The element that contains the content for the document. In documents with
+     * <code>HEAD</code> contents, returns the <code>HEAD</code> element.
+     */
+    HTMLHeadElement getHead();
+
 
 	/**
 	 * This mutable string attribute denotes persistent state information that (1)
@@ -155,6 +162,31 @@ public interface HTMLDocument extends Document {
 	 * elements in a document with a value for the <code>href</code> attribute.
 	 */
 	HTMLCollection getLinks();
+	
+    /*
+     * The embeds attribute must return an HTMLCollection rooted at the Document
+     * node, whose filter matches only embed elements.
+     */
+    HTMLCollection getEmbeds();
+
+    /*
+     * The plugins attribute must return the same object as that returned by the
+     * embeds attribute.
+     */
+    HTMLCollection getPlugins();
+
+    /*
+     * The scripts attribute must return an HTMLCollection rooted at the Document
+     * node, whose filter matches only script elements.
+     */
+    HTMLCollection getScripts();
+
+    /*
+     * The commands attribute of the document's HTMLDocument interface must return
+     * an HTMLCollection rooted at the Document node, whose filter matches only
+     * elements that define commands and have IDs.
+     */
+    HTMLCollection getCommands();
 
 	/**
 	 * Returns the URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
