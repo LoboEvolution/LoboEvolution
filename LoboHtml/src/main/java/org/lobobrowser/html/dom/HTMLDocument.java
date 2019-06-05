@@ -74,12 +74,6 @@ public interface HTMLDocument extends Document {
 	HTMLCollection getAnchors();
 
 	/**
-	 * A collection of all the <code>OBJECT</code> elements that include applets and
-	 * <code>APPLET</code> (deprecated) elements in a document.
-	 */
-	HTMLCollection getApplets();
-
-	/**
 	 * The element that contains the content for the document. In documents with
 	 * <code>BODY</code> contents, returns the <code>BODY</code> element. In
 	 * frameset documents, this returns the outermost <code>FRAMESET</code> element.

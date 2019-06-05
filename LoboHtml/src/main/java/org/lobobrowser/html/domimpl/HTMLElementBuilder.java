@@ -34,13 +34,6 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
-	public static class Applet extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLAppletElementImpl(name);
-		}
-	}
-
 	public static class Base extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {

@@ -86,7 +86,6 @@ class ElementFactory {
 		builders.put("HR", new HTMLElementBuilder.Hr());
 		builders.put("BR", new HTMLElementBuilder.Br());
 		builders.put("OBJECT", new HTMLElementBuilder.HtmlObject());
-		builders.put("APPLET", new HTMLElementBuilder.Applet());
 		builders.put("EMBED", new HTMLElementBuilder.NonStandard());
 		builders.put("FONT", new HTMLElementBuilder.Font());
 

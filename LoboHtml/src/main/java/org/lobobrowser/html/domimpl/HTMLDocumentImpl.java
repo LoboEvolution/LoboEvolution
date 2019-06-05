@@ -92,14 +92,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 	}
 
-	private class AppletFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			// TODO: "OBJECT" elements that are applets too.
-			return "APPLET".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-
 	public class CSSStyleSheetList extends ArrayList {
 		/**
 		 * 
@@ -470,17 +462,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				this.anchors = new HTMLCollectionImpl(this, new AnchorFilter());
 			}
 			return this.anchors;
-		}
-	}
-
-	@Override
-	public HTMLCollection getApplets() {
-		synchronized (this) {
-			if (this.applets == null) {
-				// TODO: Should include OBJECTs that are applets?
-				this.applets = new HTMLCollectionImpl(this, new AppletFilter());
-			}
-			return this.applets;
 		}
 	}
 
