@@ -2520,8 +2520,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 				break;
 			}
-			if (boxWidth <= desiredWidth - rightOffset - leftOffset) {
-				// Size is fine.
+            if ((desiredWidth <= 0) || boxWidth <= (desiredWidth - rightOffset - leftOffset)) {
 				break;
 			}
 			// At this point the float doesn't fit at the current Y position.
