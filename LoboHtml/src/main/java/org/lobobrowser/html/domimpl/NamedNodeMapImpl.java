@@ -70,11 +70,12 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 
 	@Override
 	public Node item(int index) {
-		try {
-			return (Node) this.attributeList.get(index);
-		} catch (final IndexOutOfBoundsException iob) {
-			return null;
-		}
+		int size = this.attributeList.size();
+        if (size > index && index > -1) {
+            return (Node) this.attributeList.get(index);
+        } else {
+            return null;
+        }
 	}
 
 	/**

@@ -50,10 +50,11 @@ public class DOMStringListImpl implements DOMStringList {
 
 	@Override
 	public String item(int index) {
-		try {
-			return (String) this.sourceList.get(index);
-		} catch (final IndexOutOfBoundsException iob) {
-			return null;
-		}
+        int size = this.sourceList.size();
+        if (size > index && index > -1) {
+            return (String) this.sourceList.get(index);
+        } else {
+            return null;
+        }
 	}
 }

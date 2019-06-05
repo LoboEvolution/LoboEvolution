@@ -125,9 +125,9 @@ class TableMatrix {
 
 	private final HtmlRendererContext rendererContext;
 
-	private final ArrayList ROW_ELEMENTS = new ArrayList();
+	private final ArrayList<HTMLTableRowElement> ROW_ELEMENTS = new ArrayList<HTMLTableRowElement>();
 
-	private final ArrayList ROWS = new ArrayList();
+	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
 	private SizeInfo[] rowSizes;
 	private final HTMLElementImpl tableElement;
 
@@ -389,29 +389,21 @@ class TableMatrix {
 	 * element.
 	 */
 	private void createSizeArrays() {
-		final ArrayList rows = this.ROWS;
+		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		final int numRows = rows.size();
 		final SizeInfo[] rowSizes = new SizeInfo[numRows];
 		this.rowSizes = rowSizes;
 		int numCols = 0;
-		final ArrayList rowElements = this.ROW_ELEMENTS;
+		final ArrayList<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
 		for (int i = 0; i < numRows; i++) {
-			final ArrayList row = (ArrayList) rows.get(i);
+			final ArrayList<VirtualCell> row = rows.get(i);
 			final int rs = row.size();
 			if (rs > numCols) {
 				numCols = rs;
 			}
 			final SizeInfo rowSizeInfo = new SizeInfo();
 			rowSizes[i] = rowSizeInfo;
-			HTMLTableRowElement rowElement;
-			try {
-				rowElement = (HTMLTableRowElement) rowElements.get(i);
-				// Possible rowElement is null because TD does not have TR parent
-			} catch (final IndexOutOfBoundsException iob) {
-				// Possible if rowspan expands beyond that
-				rowElement = null;
-			}
-			// TODO: TR.height an IE quirk?
+			HTMLTableRowElement rowElement = rowElements.size() > i ? rowElements.get(i) : null;
 			final String rowHeightText = rowElement == null ? null : rowElement.getAttribute("height");
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
@@ -444,13 +436,8 @@ class TableMatrix {
 
 			// Cells with colspan==1 first.
 			for (int y = 0; y < numRows; y++) {
-				final ArrayList row = (ArrayList) rows.get(y);
-				VirtualCell vc;
-				try {
-					vc = (VirtualCell) row.get(i);
-				} catch (final IndexOutOfBoundsException iob) {
-					vc = null;
-				}
+				final ArrayList<VirtualCell> row = rows.get(y);
+				VirtualCell vc = row.size() > i ? row.get(i) : null;
 				if (vc != null) {
 					final RTableCell ac = vc.getActualCell();
 					if (ac.getColSpan() == 1) {
@@ -464,13 +451,8 @@ class TableMatrix {
 			// Now cells with colspan>1.
 			if (bestWidthLength == null) {
 				for (int y = 0; y < numRows; y++) {
-					final ArrayList row = (ArrayList) rows.get(y);
-					VirtualCell vc;
-					try {
-						vc = (VirtualCell) row.get(i);
-					} catch (final IndexOutOfBoundsException iob) {
-						vc = null;
-					}
+					final ArrayList<VirtualCell> row = rows.get(y);
+					VirtualCell vc = row.size() > i ? row.get(i) : null;
 					if (vc != null) {
 						final RTableCell ac = vc.getActualCell();
 						if (ac.getColSpan() > 1) {
@@ -1030,63 +1012,6 @@ class TableMatrix {
 		return this.ALL_CELLS.iterator();
 	}
 
-//	public final void adjust() {
-//	    // finalRender needs to adjust actualSize of columns and rows
-//	    // given that things might change as we render one last time.
-//	    int hasBorder = this.hasOldStyleBorder;
-//	    int cellSpacingX = this.cellSpacingX;
-//	    int cellSpacingY = this.cellSpacingY;
-//	    ArrayList allCells = this.ALL_CELLS;
-//	    SizeInfo[] colSizes = this.columnSizes;
-//	    SizeInfo[] rowSizes = this.rowSizes;
-//	    int numCells = allCells.size();
-//	    for(int i = 0; i < numCells; i++) {
-//	        RTableCell cell = (RTableCell) allCells.get(i);
-//	        int col = cell.getVirtualColumn();
-//	        int colSpan = cell.getColSpan();
-//	        int totalCellWidth;
-//	        if(colSpan > 1) {
-//	            totalCellWidth = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
-//	            for(int x = 0; x < colSpan; x++) {
-//	                totalCellWidth += colSizes[col + x].actualSize;
-//	            }
-//	        }
-//	        else {
-//	            totalCellWidth = colSizes[col].actualSize;
-//	        }
-//	        int row = cell.getVirtualRow();
-//	        int rowSpan = cell.getRowSpan();
-//	        int totalCellHeight;
-//	        if(rowSpan > 1) {
-//	            totalCellHeight = (rowSpan - 1) * (cellSpacingY + 2 * hasBorder);
-//	            for(int y = 0; y < rowSpan; y++) {
-//	                totalCellHeight += rowSizes[row + y].actualSize;
-//	            }
-//	        }
-//	        else {
-//	            totalCellHeight = rowSizes[row].actualSize;
-//	        }
-//	        cell.adjust();
-//	        Dimension size = cell.getSize();
-//	        if(size.width > totalCellWidth) {
-//	            if(colSpan == 1) {
-//	                colSizes[col].actualSize = size.width;
-//	            }
-//	            else {
-//	                colSizes[col].actualSize += (size.width - totalCellWidth);
-//	            }
-//	        }
-//	        if(size.height > totalCellHeight) {
-//	            if(rowSpan == 1) {
-//	                rowSizes[row].actualSize = size.height;
-//	            }
-//	            else {
-//	                rowSizes[row].actualSize += (size.height - totalCellHeight);
-//	            }
-//	        }           
-//	    }
-//	}
-
 	/**
 	 * @return Returns the tableHeight.
 	 */
@@ -1101,57 +1026,17 @@ class TableMatrix {
 		return this.tableWidth;
 	}
 
-//	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-//		ArrayList allCells = this.ALL_CELLS;
-//		int numCells = allCells.size();
-//		for(int i = 0; i < numCells; i++) {
-//			RTableCell cell = (RTableCell) allCells.get(i);
-//			Rectangle bounds = cell.getBounds();
-//			int offsetX = bounds.x;
-//			int offsetY = bounds.y;
-//			g.translate(offsetX, offsetY);
-//			try {
-//				boolean newInSelection = cell.paintSelection(g, inSelection, startPoint, endPoint);
-//				if(inSelection && !newInSelection) {
-//					return false;
-//				}
-//				inSelection = newInSelection;
-//			} finally {
-//				g.translate(-offsetX, -offsetY);
-//			}
-//		}
-//		return inSelection;
-//	}
-//
-//	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-//		ArrayList allCells = this.ALL_CELLS;
-//		int numCells = allCells.size();
-//		for(int i = 0; i < numCells; i++) {
-//			RTableCell cell = (RTableCell) allCells.get(i);
-//			boolean newInSelection = cell.extractSelectionText(buffer, inSelection, startPoint, endPoint);
-//			if(inSelection && !newInSelection) {
-//				return false;
-//			}
-//			inSelection = newInSelection;
-//		}
-//		return inSelection;
-//	}
 
 	private void layoutColumn(SizeInfo[] columnSizes, SizeInfo colSize, int col, int cellSpacingX, int hasBorder) {
 		final SizeInfo[] rowSizes = this.rowSizes;
-		final ArrayList rows = this.ROWS;
+		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		final int numRows = rows.size();
 		final int actualSize = colSize.actualSize;
 		colSize.layoutSize = 0;
 		for (int row = 0; row < numRows;) {
 			// SizeInfo rowSize = rowSizes[row];
-			final ArrayList columns = (ArrayList) rows.get(row);
-			VirtualCell vc = null;
-			try {
-				vc = (VirtualCell) columns.get(col);
-			} catch (final IndexOutOfBoundsException iob) {
-				vc = null;
-			}
+			final ArrayList<VirtualCell> columns = rows.get(row);
+			VirtualCell vc = columns.size() > row ? columns.get(row) : null;
 			final RTableCell ac = vc == null ? null : vc.getActualCell();
 			if (ac != null) {
 				if (ac.getVirtualRow() == row) {
@@ -1202,7 +1087,6 @@ class TableMatrix {
 					}
 				}
 			}
-			// row = (ac == null ? row + 1 : ac.getVirtualRow() + ac.getRowSpan());
 			row++;
 		}
 	}

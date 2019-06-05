@@ -219,7 +219,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private DocumentType doctype;
 
-	private final ArrayList documentNotificationListeners = new ArrayList(1);
+	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>();
 
 	private String documentURI;
 
@@ -323,7 +323,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * @param listener An instance of {@link DocumentNotificationListener}.
 	 */
 	public void addDocumentNotificationListener(DocumentNotificationListener listener) {
-		final ArrayList listenersList = this.documentNotificationListeners;
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		synchronized (listenersList) {
 			listenersList.add(listener);
 		}
@@ -333,6 +333,8 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		synchronized (this.treeLock) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
+			// Need to invalidate all children up to
+			// this point.
 			forgetRenderState();
 			for (Node node : Nodes.iterable(nodeList)) {
 				if (node instanceof HTMLElementImpl) {
@@ -358,22 +360,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * Informs listeners that the whole document has been invalidated.
 	 */
 	public void allInvalidated() {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.allInvalidated();
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.allInvalidated();
 		}
 	}
 
@@ -468,22 +457,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	}
 
 	public void externalScriptLoading(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.externalScriptLoading(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.externalScriptLoading(node);
 		}
 	}
 
@@ -787,22 +763,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * @param node
 	 */
 	public void invalidated(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.invalidated(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.invalidated(node);
 		}
 	}
 
@@ -952,24 +915,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * @param node
 	 */
 	public void lookInvalidated(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.lookInvalidated(node);
 		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.lookInvalidated(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
-		}
-
 	}
 
 	public Element namedItem(String name) {
@@ -981,22 +930,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	}
 
 	public void nodeLoaded(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.nodeLoaded(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.nodeLoaded(node);
 		}
 	}
 
@@ -1052,27 +988,14 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * @param node
 	 */
 	public void positionInParentInvalidated(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.positionInvalidated(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.positionInvalidated(node);
 		}
 	}
 
 	public void removeDocumentNotificationListener(DocumentNotificationListener listener) {
-		final ArrayList listenersList = this.documentNotificationListeners;
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		synchronized (listenersList) {
 			listenersList.remove(listener);
 		}
@@ -1218,29 +1141,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		this.xmlVersion = xmlVersion;
 	}
 
-//	private class BodyFilter implements NodeFilter {
-//		public boolean accept(Node node) {
-//			return node instanceof org.lobobrowser.html.dom.HTMLBodyElement;
-//		}
-//	}
-
 	public void sizeInvalidated(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.sizeInvalidated(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.sizeInvalidated(node);
 		}
 	}
 
@@ -1250,22 +1154,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * @param node
 	 */
 	public void structureInvalidated(NodeImpl node) {
-		final ArrayList listenersList = this.documentNotificationListeners;
-		int size;
-		synchronized (listenersList) {
-			size = listenersList.size();
-		}
-		// Traverse list outside synchronized block.
-		// (Shouldn't call listener methods in synchronized block.
-		// Deadlock is possible). But assume list could have
-		// been changed.
-		for (int i = 0; i < size; i++) {
-			try {
-				final DocumentNotificationListener dnl = (DocumentNotificationListener) listenersList.get(i);
-				dnl.structureInvalidated(node);
-			} catch (final IndexOutOfBoundsException iob) {
-				// ignore
-			}
+		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		for (DocumentNotificationListener dnl : listenersList) {
+			dnl.structureInvalidated(node);
 		}
 	}
 
