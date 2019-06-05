@@ -87,12 +87,10 @@ class ElementFactory {
 		builders.put("BR", new HTMLElementBuilder.Br());
 		builders.put("OBJECT", new HTMLElementBuilder.HtmlObject());
 		builders.put("EMBED", new HTMLElementBuilder.NonStandard());
-		builders.put("FONT", new HTMLElementBuilder.Font());
 
 		builders.put("TT", new HTMLElementBuilder.Tt());
 		builders.put("CODE", new HTMLElementBuilder.Code());
 		builders.put("SMALL", new HTMLElementBuilder.Small());
-		builders.put("BIG", new HTMLElementBuilder.Big());
 		builders.put("B", new HTMLElementBuilder.Strong());
 		builders.put("STRONG", new HTMLElementBuilder.Strong());
 

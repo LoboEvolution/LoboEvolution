@@ -48,13 +48,6 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
-	public static class Big extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLFontSizeChangeElementImpl(name, +1);
-		}
-	}
-
 	public static class Blockquote extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
@@ -108,13 +101,6 @@ public abstract class HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
 			return new HTMLEmElementImpl(name);
-		}
-	}
-
-	public static class Font extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLFontElementImpl(name);
 		}
 	}
 
@@ -261,7 +247,7 @@ public abstract class HTMLElementBuilder {
 	public static class Small extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
-			return new HTMLFontSizeChangeElementImpl(name, -1);
+			return new HTMLSmallElementImpl(name);
 		}
 	}
 

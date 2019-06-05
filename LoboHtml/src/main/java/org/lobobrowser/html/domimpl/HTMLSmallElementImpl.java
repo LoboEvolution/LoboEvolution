@@ -23,42 +23,20 @@ package org.lobobrowser.html.domimpl;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
 import org.lobobrowser.html.style.FontValues;
-import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 
-/**
- * This element is used for SMALL and BIG.
- */
-public class HTMLFontSizeChangeElementImpl extends HTMLAbstractUIElement {
-	private final int fontChange;
 
-	public HTMLFontSizeChangeElementImpl(String name, int fontChange) {
+public class HTMLSmallElementImpl extends HTMLAbstractUIElement {
+
+	public HTMLSmallElementImpl(String name) {
 		super(name);
-		this.fontChange = fontChange;
 	}
 
 	protected AbstractCSS2Properties createDefaultStyleSheet() {
-		final String fontFamily = getAttribute("face");
-		final String color = getAttribute("color");
-		final String size = getAttribute("size");
-		String fontSize = null;
-		if (size != null) {
-			final ModelNode parentModelNode = getParentModelNode();
-			final RenderState parentRS = parentModelNode == null ? null : parentModelNode.getRenderState();
-			if (parentRS != null) {
-				final int fontNumber = FontValues.getFontNumberOldStyle(size, parentRS);
-				fontSize = FontValues.getFontSizeSpec(fontNumber);
-			}
-		}
+        final String fontSize = String.valueOf(FontValues.getFontSize("SMALL", null));
 		final ComputedCSS2Properties css = new ComputedCSS2Properties(this);
 		if (fontSize != null) {
 			css.internalSetLC("font-size", fontSize);
-		}
-		if (fontFamily != null) {
-			css.internalSetLC("font-family", fontFamily);
-		}
-		if (color != null) {
-			css.internalSetLC("color", color);
 		}
 		return css;
 	}

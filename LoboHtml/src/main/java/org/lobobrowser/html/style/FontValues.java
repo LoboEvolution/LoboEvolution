@@ -21,62 +21,6 @@ public class FontValues extends HtmlValues {
 	}
 
 	/**
-	 * Gets a number for 1 to 7.
-	 *
-	 * @param oldHtmlSpec A number from 1 to 7 or +1, etc.
-	 * @param renderState the render state
-	 * @return the font number old style
-	 */
-	public static final int getFontNumberOldStyle(String oldHtmlSpec, RenderState renderState) {
-		oldHtmlSpec = oldHtmlSpec.trim();
-		int tentative;
-		try {
-			if (oldHtmlSpec.startsWith("+")) {
-				tentative = renderState.getFontBase() + Integer.parseInt(oldHtmlSpec.substring(1));
-			} else if (oldHtmlSpec.startsWith("-")) {
-				tentative = renderState.getFontBase() + Integer.parseInt(oldHtmlSpec);
-			} else {
-				tentative = Integer.parseInt(oldHtmlSpec);
-			}
-			if (tentative < 1) {
-				tentative = 1;
-			} else if (tentative > 7) {
-				tentative = 7;
-			}
-		} catch (final NumberFormatException nfe) {
-			tentative = 3;
-		}
-		return tentative;
-	}
-
-	/**
-	 * Gets the font size.
-	 *
-	 * @param fontNumber the font number
-	 * @return the font size
-	 */
-	public static float getFontSize(int fontNumber) {
-		switch (fontNumber) {
-		case 1:
-			return 10.0f;
-		case 2:
-			return 11.0f;
-		case 3:
-			return 13.0f;
-		case 4:
-			return 16.0f;
-		case 5:
-			return 21.0f;
-		case 6:
-			return 29.0f;
-		case 7:
-			return 42.0f;
-		default:
-			return 63.0f;
-		}
-	}
-
-	/**
 	 * Gets the font size.
 	 *
 	 * @param spec              the spec
@@ -162,33 +106,6 @@ public class FontValues extends HtmlValues {
 			default:
 				return getPixelSize(spec, parentRenderState, (int) new LAFSettings().getIstance().getFontSize());
 			}
-		}
-	}
-
-	/**
-	 * Gets the font size spec.
-	 *
-	 * @param fontNumber the font number
-	 * @return the font size spec
-	 */
-	public static final String getFontSizeSpec(int fontNumber) {
-		switch (fontNumber) {
-		case 1:
-			return "10px";
-		case 2:
-			return "11px";
-		case 3:
-			return "13px";
-		case 4:
-			return "16px";
-		case 5:
-			return "21px";
-		case 6:
-			return "29px";
-		case 7:
-			return "42px";
-		default:
-			return "63px";
 		}
 	}
 
