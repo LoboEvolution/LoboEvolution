@@ -61,7 +61,7 @@ public class Urls {
 
 	public static boolean hasHost(URL url) {
 		final String host = url.getHost();
-		return host != null && !"".equals(host);
+		return Strings.isNotBlank(host);
 	}
 
 	public static boolean isAbsolute(String url) {

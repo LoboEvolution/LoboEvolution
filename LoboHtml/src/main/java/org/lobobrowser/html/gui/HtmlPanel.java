@@ -35,6 +35,7 @@ import java.util.EventObject;
 
 import javax.swing.JComponent;
 
+import org.lobo.common.Strings;
 import org.lobobrowser.html.dom.HTMLFrameSetElement;
 import org.lobobrowser.html.domimpl.DocumentNotificationListener;
 import org.lobobrowser.html.domimpl.ElementImpl;
@@ -418,7 +419,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 				final NodeImpl child = children[i];
 				if (child instanceof Text) {
 					final String textContent = ((Text) child).getTextContent();
-					if (textContent != null && !"".equals(textContent.trim())) {
+					if (Strings.isNotBlank(textContent)) {
 						return false;
 					}
 				} else if (child instanceof ElementImpl) {

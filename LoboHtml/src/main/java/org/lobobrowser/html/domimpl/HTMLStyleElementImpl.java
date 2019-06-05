@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import org.lobo.common.Strings;
 import org.lobobrowser.html.dom.HTMLStyleElement;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.w3c.dom.UserDataHandler;
@@ -69,7 +70,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		this.styleSheet = null;
 		if (CSSUtilities.matchesMedia(getMedia(), getUserAgentContext())) {
 			final String text = getRawInnerText(true);
-			if (text != null && !"".equals(text)) {
+			if (Strings.isNotBlank(texta)) {
 				final String processedText = CSSUtilities.preProcessCss(text);
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
 				final CSSOMParser parser = new CSSOMParser();

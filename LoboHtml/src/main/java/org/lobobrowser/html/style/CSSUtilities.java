@@ -128,7 +128,7 @@ public class CSSUtilities {
 		}
 
 		final String text = request.getResponseText();
-		if (text != null && !"".equals(text)) {
+		if (Strings.isNotBlank(text)) {
 			final String processedText = considerDoubleSlashComments ? preProcessCss(text) : text;
 			final CSSOMParser parser = new CSSOMParser();
 			final InputSource is = getCssInputSourceForStyleSheet(processedText, scriptURI);
