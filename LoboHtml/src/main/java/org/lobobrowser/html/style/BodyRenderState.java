@@ -20,13 +20,13 @@
 */
 package org.lobobrowser.html.style;
 
+import java.awt.Color;
+
+import org.lobo.common.Strings;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
 public class BodyRenderState extends StyleSheetRenderState {
-	// Note: BODY behaves like an inline element, but the root
-	// block uses the element and treats its properties as those
-	// of a block element.
 
 	public BodyRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
@@ -41,7 +41,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.backgroundColor == null) {
 			final String bgcolor = this.element.getAttribute("bgcolor");
-			if (bgcolor != null && bgcolor.length() != 0) {
+			if (Strings.isNotBlank(bgcolor)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
@@ -50,6 +50,23 @@ public class BodyRenderState extends StyleSheetRenderState {
 		}
 		this.iBackgroundInfo = binfo;
 		return binfo;
+	}
+	
+	@Override
+	public Color getColor() {
+		Color c = super.getColor();
+		if (c != null) {
+			return c;
+		}
+		String tcolor = this.element.getAttribute("text");
+		
+		if (Strings.isNotBlank(tcolor)) {
+			c = ColorFactory.getInstance().getColor(tcolor);
+		} else {
+			tcolor = "black";
+		}
+
+		return c;
 	}
 
 	@Override
@@ -63,7 +80,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 			final HTMLElementImpl element = this.element;
 			String leftMargin = element.getAttribute("leftmargin");
 			String rightMargin = element.getAttribute("rightmargin");
-			String bottomMargin = element.getAttribute("rightmargin");
+            String bottomMargin = element.getAttribute("bottommargin");
 			String topMargin = element.getAttribute("topmargin");
 			final String marginWidth = element.getAttribute("marginwidth");
 			final String marginHeight = element.getAttribute("marginheight");
