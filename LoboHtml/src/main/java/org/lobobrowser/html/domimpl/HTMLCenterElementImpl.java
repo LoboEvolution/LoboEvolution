@@ -31,7 +31,6 @@ public class HTMLCenterElementImpl extends HTMLAbstractUIElement {
 
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new AlignXRenderState(prevRenderState, 50);
-		return new BlockRenderState(prevRenderState, this);
+        return new AlignXRenderState(prevRenderState, this, 50);
 	}
 }

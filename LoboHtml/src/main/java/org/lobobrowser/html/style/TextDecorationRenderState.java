@@ -21,12 +21,18 @@
 
 package org.lobobrowser.html.style;
 
-public class TextDecorationRenderState extends RenderStateDelegator {
-	private final int textDecorationMask;
+import org.lobobrowser.html.domimpl.HTMLElementImpl;
 
-	public TextDecorationRenderState(RenderState prevRenderState, int textDecorationMask) {
-		super(prevRenderState);
+public class TextDecorationRenderState extends StyleSheetRenderState {
+	
+	private final int textDecorationMask;
+	
+	private RenderState delegate;
+
+	public TextDecorationRenderState(RenderState prevRenderState, HTMLElementImpl element, final int textDecorationMask) {
+		super(prevRenderState, element);
 		this.textDecorationMask = textDecorationMask;
+		this.delegate = prevRenderState;
 	}
 
 	@Override

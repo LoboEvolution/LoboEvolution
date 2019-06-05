@@ -47,7 +47,6 @@ import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
-import org.lobobrowser.html.dom.HTMLLinkElement;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
@@ -375,7 +374,7 @@ public class HtmlRendererContext {
 	/**
 	 * Should be overridden to return true if the link has been visited.
 	 */
-	public boolean isVisitedLink(HTMLLinkElement link) {
+	public boolean isVisitedLink(HTMLElementImpl link) {
 		return false;
 	}
 

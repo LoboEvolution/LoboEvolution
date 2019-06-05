@@ -22,17 +22,11 @@ package org.lobobrowser.html.domimpl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.lobo.laf.ColorFactory;
-import org.lobobrowser.html.dom.HTMLBodyElement;
-import org.lobobrowser.html.dom.HTMLDocument;
 import org.lobobrowser.html.dom.HTMLLinkElement;
+import org.lobobrowser.html.parser.HtmlParser;
+import org.lobobrowser.html.style.AnchorRenderState;
 import org.lobobrowser.html.style.CSSUtilities;
-import org.lobobrowser.html.style.ColorRenderState;
 import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.html.style.TextDecorationRenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.UserDataHandler;
@@ -41,7 +35,6 @@ import org.w3c.dom.css.CSSStyleSheet;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLinkElement {
-	private static final Logger logger = Logger.getLogger(HTMLLinkElementImpl.class.getName());
 	private boolean disabled;
 
 	private CSSStyleSheet styleSheet;
@@ -53,8 +46,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		if (hasAttribute("href")) {
-			prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
-			prevRenderState = new ColorRenderState(prevRenderState, getLinkColor());
+            prevRenderState = new AnchorRenderState(prevRenderState, this);
 		}
 		return super.createRenderState(prevRenderState);
 	}
@@ -90,28 +82,6 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	@Override
 	public String getHreflang() {
 		return getAttribute("hreflang");
-	}
-
-	private java.awt.Color getLinkColor() {
-		final HTMLDocument doc = (HTMLDocument) this.document;
-		if (doc != null) {
-			final HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
-			if (body != null) {
-				final String vlink = body.getVLink();
-				final String link = body.getLink();
-				if (vlink != null || link != null) {
-					final HtmlRendererContext rcontext = getHtmlRendererContext();
-					if (rcontext != null) {
-						final boolean visited = rcontext.isVisitedLink(this);
-						final String colorText = visited ? vlink : link;
-						if (colorText != null) {
-							return ColorFactory.getInstance().getColor(colorText);
-						}
-					}
-				}
-			}
-		}
-		return java.awt.Color.BLUE;
 	}
 
 	@Override
@@ -258,7 +228,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processLink();
 		}
 		return super.setUserData(key, data, handler);

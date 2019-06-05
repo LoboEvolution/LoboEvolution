@@ -33,7 +33,7 @@ public class HTMLUnderlineElementImpl extends HTMLAbstractUIElement {
 
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-		prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
+        prevRenderState = new TextDecorationRenderState(prevRenderState, this, RenderState.MASK_TEXTDECORATION_UNDERLINE);
 		return super.createRenderState(prevRenderState);
 	}
 }
