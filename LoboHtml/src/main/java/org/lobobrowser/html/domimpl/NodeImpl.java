@@ -1027,7 +1027,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	public void setTextContent(String textContent) throws DOMException {
 		synchronized (this.treeLock) {
 			removeChildrenImpl(new TextFilter());
-			if (Strings.isNotBlank(textContent) {
+			if (Strings.isNotBlank(textContent)) {
 				final TextImpl t = new TextImpl(textContent);
 				t.setOwnerDocument(this.document);
 				t.setParentImpl(this);

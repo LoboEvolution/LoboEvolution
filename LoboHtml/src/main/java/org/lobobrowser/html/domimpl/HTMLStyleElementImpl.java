@@ -70,7 +70,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		this.styleSheet = null;
 		if (CSSUtilities.matchesMedia(getMedia(), getUserAgentContext())) {
 			final String text = getRawInnerText(true);
-			if (Strings.isNotBlank(texta)) {
+			if (Strings.isNotBlank(text)) {
 				final String processedText = CSSUtilities.preProcessCss(text);
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
 				final CSSOMParser parser = new CSSOMParser();
