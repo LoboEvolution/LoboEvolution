@@ -126,6 +126,10 @@ abstract class BaseElementRenderable extends BaseRCollection
 		gc.add(component);
 		return component;
 	}
+	
+    public Insets getBorderInsets() {
+        return this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
+    }
 
 	/*
 	 * (non-Javadoc)
@@ -512,34 +516,51 @@ abstract class BaseElementRenderable extends BaseRCollection
 	public final Collection getDelayedPairs() {
 		return this.delayedPairs;
 	}
+	
+    public Insets getInsets(final boolean hscroll, final boolean vscroll) {
+        return getInsets(hscroll, vscroll, true, true, true);
+    }
 
-	/**
-	 * Gets insets of content area. It includes margin, borders and scrollbars, but
-	 * not padding.
-	 */
-	public Insets getInsets(boolean hscroll, boolean vscroll) {
+    public Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll) {
+        return getInsets(hscroll, vscroll, true, true, false);
+    }
+
+    private Insets getInsets(final boolean hscroll, final boolean vscroll, final boolean includeMI,
+            final boolean includeBI, final boolean includePI) {
 		this.modelNode.getRenderState();
 		final Insets mi = this.marginInsets;
 		final Insets bi = this.borderInsets;
+        final Insets pi = this.paddingInsets;
 		int top = 0;
 		int bottom = 0;
 		int left = 0;
 		int right = 0;
-		if (mi != null) {
+		
+        if (includeMI && mi != null) {
 			top += mi.top;
 			left += mi.left;
 			bottom += mi.bottom;
 			right += mi.right;
 		}
-		if (bi != null) {
+        
+        if (includeBI && bi != null) {
 			top += bi.top;
 			left += bi.left;
 			bottom += bi.bottom;
 			right += bi.right;
 		}
+        
+        if (includePI && pi != null) {
+            top += pi.top;
+            left += pi.left;
+            bottom += pi.bottom;
+            right += pi.right;
+        }
+        
 		if (hscroll) {
 			bottom += SCROLL_BAR_THICKNESS;
 		}
+		
 		if (vscroll) {
 			right += SCROLL_BAR_THICKNESS;
 		}

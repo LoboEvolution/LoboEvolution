@@ -93,9 +93,7 @@ import org.w3c.dom.Node;
  */
 public class HtmlBlockPanel extends JComponent implements NodeRenderer, RenderableContainer, ClipboardOwner {
 	private static final Logger logger = Logger.getLogger(HtmlBlockPanel.class.getName());
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private Set components;
 	protected Insets defaultMarginInsets = null;
@@ -922,6 +920,15 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				this.add(component);
 			}
 		}
+	}
+
+	public Insets getInsets(final boolean hscroll, final boolean vscroll) {
+		throw new UnsupportedOperationException("Method added while implementing absolute positioned elements inside relative elements. But not implemented yet.");
+	}
+
+	@Override
+	public Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll) {
+		throw new UnsupportedOperationException("Method added while fixing #20. Not implemented yet.");
 	}
 
 	protected void validateAll() {

@@ -103,8 +103,8 @@ class RUIControl extends BaseElementRenderable implements RElement {
 
 	public final UIControl widget;
 
-	public RUIControl(ModelNode me, UIControl widget, RenderableContainer container, FrameContext frameContext,
-			UserAgentContext ucontext) {
+    public RUIControl(final ModelNode me, final UIControl widget, final RenderableContainer container,
+            final FrameContext frameContext, final UserAgentContext ucontext) {
 		super(container, me, ucontext);
 		this.modelNode = me;
 		this.widget = widget;
@@ -113,15 +113,15 @@ class RUIControl extends BaseElementRenderable implements RElement {
 	}
 
 	@Override
-	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
-		final Map cachedLayout = this.cachedLayout;
+	public void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
+		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
 		final RenderState rs = this.modelNode.getRenderState();
 		final int whitespace = rs == null ? RenderState.WS_NORMAL : rs.getWhiteSpace();
 		final Font font = rs == null ? null : rs.getFont();
 		final LayoutKey layoutKey = new LayoutKey(availWidth, availHeight, whitespace, font);
 		LayoutValue layoutValue;
 		if (sizeOnly) {
-			layoutValue = (LayoutValue) cachedLayout.get(layoutKey);
+			layoutValue = cachedLayout.get(layoutKey);
 		} else {
 			if (Objects.equals(this.lastLayoutKey, layoutKey)) {
 				layoutValue = this.lastLayoutValue;
@@ -130,7 +130,7 @@ class RUIControl extends BaseElementRenderable implements RElement {
 			}
 		}
 		if (layoutValue == null) {
-			applyStyle(availWidth, availHeight);
+			this.applyStyle(availWidth, availHeight);
 			final RenderState renderState = this.modelNode.getRenderState();
 			Insets paddingInsets = this.paddingInsets;
 			if (paddingInsets == null) {
@@ -144,12 +144,10 @@ class RUIControl extends BaseElementRenderable implements RElement {
 			if (marginInsets == null) {
 				marginInsets = RBlockViewport.ZERO_INSETS;
 			}
-			final int actualAvailWidth = availWidth - paddingInsets.left - paddingInsets.right - borderInsets.left
-					- borderInsets.right - marginInsets.left - marginInsets.right;
-			final int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top
-					- borderInsets.bottom - marginInsets.top - marginInsets.bottom;
-			final Integer dw = getDeclaredWidth(renderState, actualAvailWidth);
-			final Integer dh = getDeclaredHeight(renderState, actualAvailHeight);
+			final int actualAvailWidth = availWidth - paddingInsets.left - paddingInsets.right - borderInsets.left - borderInsets.right - marginInsets.left - marginInsets.right;
+			final int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top - borderInsets.bottom - marginInsets.top - marginInsets.bottom;
+			final Integer dw = this.getDeclaredWidth(renderState, actualAvailWidth);
+			final Integer dh = this.getDeclaredHeight(renderState, actualAvailHeight);
 			final int declaredWidth = dw == null ? -1 : dw.intValue();
 			final int declaredHeight = dh == null ? -1 : dh.intValue();
 			this.declaredWidth = declaredWidth;
@@ -157,10 +155,10 @@ class RUIControl extends BaseElementRenderable implements RElement {
 
 			final UIControl widget = this.widget;
 			widget.reset(availWidth, availHeight);
-			final Insets insets = getInsets(false, false);
-			int finalWidth = declaredWidth == -1 ? -1 : declaredWidth - insets.left - insets.right;
-			int finalHeight = declaredHeight == -1 ? -1 : declaredHeight - insets.top - insets.bottom;
-			if (finalWidth == -1 || finalHeight == -1) {
+			final Insets insets = this.getInsets(false, false);
+			int finalWidth = declaredWidth == -1 ? -1 : declaredWidth + insets.left + insets.right;
+			int finalHeight = declaredHeight == -1 ? -1 : declaredHeight + insets.top + insets.bottom;
+			if ((finalWidth == -1) || (finalHeight == -1)) {
 				final Dimension size = widget.getPreferredSize();
 				if (finalWidth == -1) {
 					finalWidth = size.width + insets.left + insets.right;
@@ -310,18 +308,18 @@ class RUIControl extends BaseElementRenderable implements RElement {
 	}
 
 	@Override
-	public final void paint(Graphics g) {
+	public final void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
-		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
+		if ((rs != null) && (rs.getVisibility() != RenderState.VISIBILITY_VISIBLE)) {
 			// Just don't paint it.
 			return;
 		}
 		// Prepaint borders, background images, etc.
-		prePaint(g);
+		this.prePaint(g);
 		// We need to paint the GUI component.
 		// For various reasons, we need to do that
 		// instead of letting AWT do it.
-		final Insets insets = getInsets(false, false);
+		final Insets insets = this.getBorderInsets();
 		g.translate(insets.left, insets.top);
 		try {
 			this.widget.paint(g);
@@ -390,7 +388,7 @@ class RUIControl extends BaseElementRenderable implements RElement {
 	public void updateWidgetBounds(int guiX, int guiY) {
 		// Overrides
 		super.updateWidgetBounds(guiX, guiY);
-		final Insets insets = getInsets(false, false);
+        final Insets insets = this.getBorderInsets();
 		this.widget.setBounds(guiX + insets.left, guiY + insets.top, this.width - insets.left - insets.right,
 				this.height - insets.top - insets.bottom);
 	}

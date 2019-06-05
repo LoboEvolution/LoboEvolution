@@ -23,6 +23,7 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Insets;
 
 /**
  * A RenderableContainer is either usually a parent block or the root GUI
@@ -30,7 +31,6 @@ import java.awt.Component;
  * invalidated.
  */
 public interface RenderableContainer {
-	// public Insets getInsets();
 	Component addComponent(Component component);
 
 	void addDelayedPair(DelayedPair pair);
@@ -47,7 +47,6 @@ public interface RenderableContainer {
 
 	RenderableContainer getParentContainer();
 
-	// public void remove(Component component);
 	void invalidateLayoutUpTree();
 
 	void relayout();
@@ -55,4 +54,6 @@ public interface RenderableContainer {
 	void repaint(int x, int y, int width, int height);
 
 	void updateAllWidgetBounds();
+	
+    Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll);
 }
