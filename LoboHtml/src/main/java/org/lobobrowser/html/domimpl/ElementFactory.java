@@ -36,11 +36,11 @@ class ElementFactory {
 		return instance;
 	}
 
-	private final Map builders = new HashMap(80);
+	private final Map<String, HTMLElementBuilder> builders = new HashMap<String, HTMLElementBuilder>();
 
 	private ElementFactory() {
 		// This sets up builders for each known element tag.
-		final Map builders = this.builders;
+		final Map<String, HTMLElementBuilder> builders = this.builders;
 		builders.put("HTML", new HTMLElementBuilder.Html());
 		builders.put("TITLE", new HTMLElementBuilder.Title());
 		builders.put("BASE", new HTMLElementBuilder.Base());
@@ -89,7 +89,6 @@ class ElementFactory {
 		builders.put("APPLET", new HTMLElementBuilder.Applet());
 		builders.put("EMBED", new HTMLElementBuilder.NonStandard());
 		builders.put("FONT", new HTMLElementBuilder.Font());
-		builders.put("BASEFONT", new HTMLElementBuilder.BaseFont());
 
 		builders.put("TT", new HTMLElementBuilder.Tt());
 		builders.put("CODE", new HTMLElementBuilder.Code());

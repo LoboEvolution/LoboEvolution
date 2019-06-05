@@ -55,13 +55,6 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
-	public static class BaseFont extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLBaseFontElementImpl(name);
-		}
-	}
-
 	public static class Big extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
