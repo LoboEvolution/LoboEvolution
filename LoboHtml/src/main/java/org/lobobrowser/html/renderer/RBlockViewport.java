@@ -118,19 +118,6 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private static class ChildrenLayout implements MarkupLayout {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.xamjwg.html.renderer.MarkupLayout#layoutMarkup(java.awt.Container,
-		 * java.awt.Insets, org.xamjwg.html.domimpl.HTMLElementImpl)
-		 */
-		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			bodyLayout.layoutChildren(markupElement);
-		}
-	}
-
 	private static class CommonBlockLayout extends CommonLayout {
 		public CommonBlockLayout() {
 			super(DISPLAY_BLOCK);
@@ -509,7 +496,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private static final Map elementLayout = new HashMap(70);
+	private static final Map<String, MarkupLayout> elementLayout = new HashMap<String, MarkupLayout>();
 
 	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
 
@@ -520,7 +507,7 @@ public class RBlockViewport extends BaseRCollection {
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 
 	static {
-		final Map el = elementLayout;
+		final Map<String, MarkupLayout> el = elementLayout;
 		final EmLayout em = new EmLayout();
 		el.put("I", em);
 		el.put("EM", em);
@@ -548,9 +535,7 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("STYLE", nop);
 		el.put("LINK", nop);
 		el.put("IMG", new ImgLayout());
-		el.put("TABLE", new TableLayout());
-		final ChildrenLayout children = new ChildrenLayout();
-		el.put("HTML", children);
+		el.put("TABLE", new TableLayout());		
 		final AnchorLayout anchor = new AnchorLayout();
 		el.put("A", anchor);
 		el.put("ANCHOR", anchor);
@@ -570,6 +555,7 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("BODY", div);
 		el.put("DL", div);
 		el.put("DT", div);
+		el.put("HTML", div);
 		final BlockQuoteLayout bq = new BlockQuoteLayout();
 		el.put("BLOCKQUOTE", bq);
 		el.put("DD", bq);
