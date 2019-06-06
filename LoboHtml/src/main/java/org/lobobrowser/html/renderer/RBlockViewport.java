@@ -197,51 +197,43 @@ public class RBlockViewport extends BaseRCollection {
 	 * RTable and RList.
 	 */
 	private static abstract class CommonWidgetLayout implements MarkupLayout {
-		protected static final int ADD_AS_BLOCK = 1;
 		protected static final int ADD_INLINE = 0;
-		private final int method;
-		private final boolean useAlignAttribute;
+	    protected static final int ADD_AS_BLOCK = 1;
+	    protected static final int ADD_INLINE_BLOCK = 2;
+	    private final int method;
 
-		public CommonWidgetLayout(int method, boolean usesAlignAttribute) {
-			this.method = method;
-			this.useAlignAttribute = usesAlignAttribute;
-		}
+	    public CommonWidgetLayout(int method) {
+	    	this.method = method;
+	    }
 
-		protected abstract RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
+	    protected abstract RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
 
-		@Override
-		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final AbstractCSS2Properties style = markupElement.getCurrentStyle();
-			if (style != null) {
-				final String display = style.getDisplay();
-				if (display != null && "none".equalsIgnoreCase(display)) {
-					return;
-				}
-			}
-			final UINode node = markupElement.getUINode();
-			RElement renderable = null;
-			if (node == null) {
-				renderable = createRenderable(bodyLayout, markupElement);
-				if (renderable == null) {
-					if (logger.isLoggable(Level.INFO)) {
-						logger.info("layoutMarkup(): Don't know how to render " + markupElement + ".");
-					}
-					return;
-				}
-				markupElement.setUINode(renderable);
-			} else {
-				renderable = (RElement) node;
-			}
-			renderable.setOriginalParent(bodyLayout);
-			switch (this.method) {
-			case ADD_INLINE:
-				bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement, this.useAlignAttribute);
-				break;
-			case ADD_AS_BLOCK:
-				bodyLayout.positionRElement(markupElement, renderable, this.useAlignAttribute, true, false);
-				break;
-			}
-		}
+	    @Override
+	    public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+	        final UINode node = markupElement.getUINode();
+	        RElement renderable = null;
+	        if (node == null) {
+	            renderable = createRenderable(bodyLayout, markupElement);
+	            if (renderable == null) {
+	                return;
+	            }
+	            markupElement.setUINode(renderable);
+	        } else {
+	            renderable = (RElement) node;
+	        }
+	        renderable.setOriginalParent(bodyLayout);
+	        switch (method) {
+	        case ADD_INLINE:
+	            bodyLayout.addRenderableToLineCheckStyle(renderable, markupElement, true);
+	            break;
+	        case ADD_AS_BLOCK:
+	        case ADD_INLINE_BLOCK:
+	            bodyLayout.positionRElement(markupElement, renderable, true, true, false);
+	            break;
+	        default:
+	            return;
+	        }
+	    }
 	}
 
 	private static class DivLayout extends CommonLayout {
