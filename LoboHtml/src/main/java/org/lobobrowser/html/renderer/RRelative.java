@@ -41,6 +41,10 @@ public class RRelative extends BaseRCollection {
 		this.child = child;
 		this.xoffset = xoffset;
 		this.yoffset = yoffset;
+		
+        if (child instanceof RUIControl) {
+            this.container.addComponent(((RUIControl) child).widget.getComponent());
+        }
 	}
 
 	public void assignDimension() {
@@ -49,25 +53,6 @@ public class RRelative extends BaseRCollection {
 		this.height = child.getHeight();
 	}
 
-	// public void adjust() {
-//		RElement child = this.child;
-//		if(child instanceof RBlock) {
-//			((RBlock) child).adjust();
-//		}
-//	}
-//
-//	public FloatingBounds getExportableFloatingBounds() {
-//		RElement child = this.child;
-//		if(!(child instanceof RBlock)) {
-//			return null;
-//		}
-//		FloatingBounds blockBounds = ((RBlock) child).getExportableFloatingBounds();
-//		if(blockBounds == null) {
-//			return null;
-//		}
-//		return new ShiftedFloatingBounds(blockBounds, this.xoffset, -this.xoffset, this.yoffset);
-//	}
-//	
 	public RElement getElement() {
 		return this.child;
 	}
