@@ -27,7 +27,7 @@ import org.lobobrowser.html.domimpl.UINode;
  * A renderer node for elements such as blocks, lists, tables, inputs, images,
  * etc.
  */
-public interface RElement extends RCollection, UINode, BoundableRenderable {
+public interface RElement extends RCollection, UINode {
 	int VALIGN_ABSBOTTOM = 4;
 
 	int VALIGN_ABSMIDDLE = 3;

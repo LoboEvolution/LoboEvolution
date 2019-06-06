@@ -42,7 +42,7 @@ import org.lobobrowser.util.Objects;
 /**
  * @author J. H. S.
  */
-class RUIControl extends BaseElementRenderable implements RElement {
+class RUIControl extends BaseElementRenderable {
 	private static class LayoutKey {
 		public final int availHeight;
 		public final int availWidth;

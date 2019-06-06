@@ -28,18 +28,13 @@ import java.awt.Graphics;
 import org.lobobrowser.html.domimpl.ModelNode;
 import org.lobobrowser.html.style.RenderState;
 
-//import java.util.logging.*;
-
 /**
  * @author J. H. S.
  */
-final class RStyleChanger extends BaseRenderable implements Renderable {
-	// private final static Logger logger = Logger.getLogger(RStyleChanger.class);
+final class RStyleChanger extends BaseRenderable {
+	
 	private final ModelNode modelNode;
 
-	/**
-	 * 
-	 */
 	public RStyleChanger(ModelNode modelNode) {
 		this.modelNode = modelNode;
 	}
@@ -49,11 +44,6 @@ final class RStyleChanger extends BaseRenderable implements Renderable {
 		return this.modelNode;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.renderer.Renderable#invalidate()
-	 */
 	public void invalidateLayoutUpTree() {
 	}
 
@@ -69,11 +59,6 @@ final class RStyleChanger extends BaseRenderable implements Renderable {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
-	 */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();

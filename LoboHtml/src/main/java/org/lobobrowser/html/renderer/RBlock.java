@@ -32,12 +32,10 @@ import java.awt.Rectangle;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.MouseEvent;
-import java.awt.image.ImageObserver;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JScrollBar;
@@ -58,7 +56,7 @@ import org.lobobrowser.util.Objects;
  * Immediately below an <code>RBlock</code> you will find a node of type
  * {@link RBlockViewport}.
  */
-public class RBlock extends BaseElementRenderable implements RenderableContainer, ImageObserver {
+public class RBlock extends BaseElementRenderable {
 	private static class LayoutKey {
 		public final int availHeight;
 		public final int availWidth;
