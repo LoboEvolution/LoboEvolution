@@ -51,18 +51,12 @@ import org.lobobrowser.util.gui.GUITasks;
 import org.w3c.dom.css.CSS2Properties;
 
 abstract class BaseElementRenderable extends BaseRCollection
-		implements RElement, RenderableContainer, java.awt.image.ImageObserver {
+		implements RElement, RenderableContainer, ImageObserver {
 	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
 
 	protected static final int SCROLL_BAR_THICKNESS = 16;
 
-	/**
-	 * Background color which may be different to that from RenderState in the case
-	 * of a Document node.
-	 */
 	protected Color backgroundColor;
-
-	// protected boolean renderStyleCanBeInvalidated = true;
 
 	protected volatile Image backgroundImage;
 	protected Color borderBottomColor;
@@ -75,13 +69,8 @@ abstract class BaseElementRenderable extends BaseRCollection
 	private Integer declaredWidth = INVALID_SIZE;
 	protected Insets defaultMarginInsets = null;
 	protected Insets defaultPaddingInsets = null;
-	/**
-	 * A list of absolute positioned or float parent-child pairs.
-	 */
 	protected Collection delayedPairs = null;
-	/**
-	 * A collection of all GUI components added by descendents.
-	 */
+
 	private Collection guiComponents = null;
 	private int lastAvailHeightForDeclared = -1;
 	private int lastAvailWidthForDeclared = -1;
@@ -517,10 +506,24 @@ abstract class BaseElementRenderable extends BaseRCollection
 		return this.delayedPairs;
 	}
 	
+	@Override
+	public int getInnerWidth() {
+		final Insets insets = getInsetsMarginBorder(false, false);
+		return getWidth() - (insets.left + insets.right);
+	}
+	
+	@Override
+	public int getInnerHeight() {
+		final Insets insets = getInsetsMarginBorder(false, false);
+		return getHeight() - (insets.top + insets.bottom);
+	}
+	
+	@Override
     public Insets getInsets(final boolean hscroll, final boolean vscroll) {
         return getInsets(hscroll, vscroll, true, true, true);
     }
 
+	@Override
     public Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll) {
         return getInsets(hscroll, vscroll, true, true, false);
     }
@@ -945,7 +948,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 			final Iterator i = gc.iterator();
 			while (i.hasNext()) {
 				final DelayedPair pair = (DelayedPair) i.next();
-				if (pair.targetParent != this) {
+				if (pair.containingBlock != this) {
 					rc.addDelayedPair(pair);
 				}
 			}

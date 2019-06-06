@@ -70,29 +70,7 @@ import org.w3c.dom.Node;
  * @author J. H. S.
  */
 public class RBlockViewport extends BaseRCollection {
-	// GENERAL NOTES
-	// An RBlockViewport basically consists of two collections:
-	// seqRenderables and positionedRenderables. The seqRenderables
-	// collection is a sequential list of RLine's and RBlock's
-	// that is amenable to a binary search by Y position. The
-	// positionedRenderables collection is a z-index ordered
-	// collection meant for blocks with position=absolute and such.
-	//
-	// HOW FLOATS WORK
-	// Float boxes are scheduled to be added on the next available line.
-	// Line layout is bounded by the current floatBounds.
-	// When a float is placed with placeFloat(), an absolutely positioned
-	// box is added. Whether the float height expands the RBlockViewport
-	// height is determined by isFloatLimit().
-	//
-	// FloatingBounds are inherited by sub-boxes, but the bounds are
-	// shifted.
-	//
-	// The RBlockViewport also publishes a collection of "exporatable
-	// floating bounds." These are float boxes that go beyond the bounds
-	// of the RBlockViewport, so ancestor blocks can obtain them to adjust
-	// their own bounds.
-
+	
 	private static class AnchorLayout extends CommonLayout {
 		public AnchorLayout() {
 			super(DISPLAY_INLINE);
@@ -852,7 +830,8 @@ public class RBlockViewport extends BaseRCollection {
 		final int position = getPosition(element);
 		final boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		final boolean relative = position == RenderState.POSITION_RELATIVE;
-		if (absolute || relative) {
+		boolean fixed = position == RenderState.POSITION_FIXED;
+		if (absolute || relative || fixed) {
 			if (layoutIfPositioned) {
 				// Presumes the method will return true.
 				if (renderable instanceof RBlock) {
@@ -868,49 +847,47 @@ public class RBlockViewport extends BaseRCollection {
 						final int blockShiftRight = paddingInsets.right;
 						final int newX = paddingInsets.left;
 						final FloatingBounds floatBounds = this.floatBounds;
-						inheritedFloatBoundsSource = floatBounds == null ? null
-								: new ParentFloatingBoundsSource(blockShiftRight, expectedWidth, newX, newY,
-										floatBounds);
+						inheritedFloatBoundsSource = floatBounds == null ? null : new ParentFloatingBoundsSource(blockShiftRight, expectedWidth, newX, newY, floatBounds);
 					}
-					block.layout(this.availContentWidth, this.availContentHeight, false, false,
-							inheritedFloatBoundsSource, this.sizeOnly);
+					final boolean floating = element.getRenderState().getFloat() != RenderState.FLOAT_NONE;
+					final boolean growHorizontally = relative && !floating;
+					block.layout(this.availContentWidth, this.availContentHeight, growHorizontally, false, inheritedFloatBoundsSource, this.sizeOnly);
 				} else {
 					renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 				}
 			}
 			final RenderState rs = element.getRenderState();
 			final String leftText = style.getLeft();
+			final String rightText = style.getRight();
+		    final String bottomText = style.getBottom();
+		    final String topText = style.getTop();
 			final RLine line = this.currentLine;
 			final int lineBottomY = line == null ? 0 : line.getY() + line.getHeight();
 			int newLeft;
-			if (leftText != null) {
+			if (!"auto".equals(leftText)) {
 				newLeft = HtmlValues.getPixelSize(leftText, rs, 0, this.availContentWidth);
 			} else {
-				final String rightText = style.getRight();
 				if (rightText != null) {
 					final int right = HtmlValues.getPixelSize(rightText, rs, 0, this.availContentWidth);
-                    if (relative) {
-                        newLeft = -right;
-                    } else {
-                        newLeft = this.desiredWidth - right - renderable.getWidth();
-                    }
+					if (relative) {
+						newLeft = -right;
+					} else {
+						newLeft = this.desiredWidth - right - renderable.getWidth();
+					}
 				} else {
 					newLeft = 0;
 				}
 			}
 			int newTop = relative ? 0 : lineBottomY;
-			final String topText = style.getTop();
-			if (topText != null) {
+			if (!"auto".equals(topText)) {
 				newTop = HtmlValues.getPixelSize(topText, rs, newTop, this.availContentHeight);
 			} else {
-				final String bottomText = style.getBottom();
 				if (bottomText != null) {
 					final int bottom = HtmlValues.getPixelSize(bottomText, rs, 0, this.availContentHeight);
-					newTop = this.desiredHeight - bottom - renderable.getHeight();
 					if (relative) {
-                        newTop = -bottom;
-                    } else {
-                        newTop = Math.max(0, this.desiredHeight - bottom - renderable.getHeight());
+						newTop = -bottom;
+					} else {
+						newTop = Math.max(0, this.desiredHeight - bottom - renderable.getHeight());
 					}
 				}
 			}
@@ -936,10 +913,7 @@ public class RBlockViewport extends BaseRCollection {
 					rrel.assignDimension();
 				}
 			} else {
-				// Schedule as delayed pair. Will be positioned after
-				// everything else.
-				scheduleAbsDelayedPair(renderable, newLeft, newTop);
-				// Does not affect bounds of this viewport yet.
+		        this.scheduleAbsDelayedPair(renderable, leftText, rightText, topText, bottomText, rs, currentLine.getY() + currentLine.getHeight());
 				return true;
 			}
 			final int newBottomY = renderable.getY() + renderable.getHeight();
@@ -965,26 +939,6 @@ public class RBlockViewport extends BaseRCollection {
 		ep.add(new ExportableFloat(element, leftFloat, origX, origY));
 	}
 
-	// /**
-//	 * 
-//	 * @param block A block needing readjustment due to horizontal alignment.
-//	 * @return 
-//	 */
-//	private int readjustBlock(RBlock block, final int newX, final int newY, final FloatingBounds floatBounds) {
-//		final int rightInsets = this.paddingInsets.right;
-//		final int expectedWidth = this.desiredWidth - rightInsets - newX;
-//		final int blockShiftRight = rightInsets;
-//		final int prevHeight = block.height;
-//		FloatingBoundsSource floatBoundsSource = new FloatingBoundsSource() {
-//			public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
-//				int actualRightShift = blockShiftRight + (expectedWidth - apparentBlockWidth);		
-//				return new ShiftedFloatingBounds(floatBounds, -newX, -actualRightShift, -newY);
-//			}
-//		};
-//		block.adjust(expectedWidth, this.availContentHeight, true, false, floatBoundsSource, true);
-//		return block.height - prevHeight;
-//	}
-//
 	private RLine addLine(ModelNode startNode, RLine prevLine, int newLineY) {
 		// lineDone must be called before we try to
 		// get float bounds.
@@ -1157,6 +1111,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 		addRenderableToLine(renderable);
+		bubbleUpIfRelative(element, renderable);
 	}
 
 	private void addWordToLine(RWord renderable) {
@@ -1640,11 +1595,9 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	void importDelayedPair(DelayedPair pair) {
+		pair.positionPairChild();
 		final BoundableRenderable r = pair.child;
-		r.setOrigin(pair.x, pair.y);
 		addPositionedRenderable(r, false, false);
-		// Size of block does not change - it's
-		// set in stone?
 	}
 
 	private void importFloat(ExportableFloat ef, int shiftX, int shiftY) {
@@ -1801,7 +1754,7 @@ public class RBlockViewport extends BaseRCollection {
 			final Iterator i = delayedPairs.iterator();
 			while (i.hasNext()) {
 				final DelayedPair pair = (DelayedPair) i.next();
-				if (pair.targetParent == container) {
+				if (pair.containingBlock == container) {
 					importDelayedPair(pair);
 				}
 			}
@@ -2030,6 +1983,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
 		addRenderableToLine(inlineBlock);
+		bubbleUpIfRelative(markupElement, inlineBlock);
 	}
 
 	private void layoutText(NodeImpl textNode) {
@@ -2690,6 +2644,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 			// Now add line, after float is set.
 			addLineAfterBlock(renderable, false);
+			bubbleUpIfRelative(markupElement, renderable);
 		}
 	}
 
@@ -2713,15 +2668,16 @@ public class RBlockViewport extends BaseRCollection {
 				final String align = markupElement.getAttribute("align");
 				centerBlock = align != null && align.equalsIgnoreCase("center");
 			}
-			this.addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
+			addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
+			bubbleUpIfRelative(markupElement, renderable);
 		}
 	}
 
-	private void scheduleAbsDelayedPair(BoundableRenderable renderable, int x, int y) {
-		// It gets reimported in the local
-		// viewport if it turns out it can't be exported up.
+	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final String leftText,
+			final String rightText, final String topText, final String bottomText, final RenderState rs,
+			final int currY) {
 		RenderableContainer container = this.container;
-		for (;;) {
+		while(true) {
 			if (container instanceof Renderable) {
 				final Object node = ((Renderable) container).getModelNode();
 				if (node instanceof HTMLElementImpl) {
@@ -2742,28 +2698,51 @@ public class RBlockViewport extends BaseRCollection {
 				break;
 			}
 		}
-		final DelayedPair pair = new DelayedPair(container, renderable, x, y);
+		final DelayedPair pair = new DelayedPair(this.container, container, renderable, leftText, rightText, topText, bottomText, rs, currY);
 		this.container.addDelayedPair(pair);
 	}
 
-//	/**
-//	 * Gets FloatingBounds from this viewport that should
-//	 * be considered by an ancestor block.
-//	 */
-//	public FloatingBounds getExportableFloatingBounds() {
-//		FloatingBounds floatBounds = this.floatBounds;
-//		if(floatBounds == null) {
-//			return null;
-//		}
-//		if(this.isFloatLimit()) {
-//			return null;
-//		}
-//		int maxY = floatBounds.getMaxY();
-//		if(maxY > this.height) {
-//			return floatBounds;
-//		}
-//		return null;
-//	}	
+	/* This is used to bubble up relative elements (on the z-axis) */
+	private boolean bubbleUpIfRelative(final HTMLElementImpl markupElement, final RElement renderable) {
+		final int position = getPosition(markupElement);
+		final boolean isRelative = position == RenderState.POSITION_RELATIVE;
+		if (isRelative) {
+			final RenderableContainer con = getPositionedAncestor(container);
+			final DelayedPair dp = new DelayedPair(container, con, renderable, null, null, null, null, null, 0);
+			container.addDelayedPair(dp);
+			if (renderable instanceof RUIControl) {
+				this.container.addComponent(((RUIControl) renderable).widget.getComponent());
+			}
+			return true;
+		}
+
+		return false;
+	}
+	
+	private static RenderableContainer getPositionedAncestor(RenderableContainer containingBlock) {
+		while (true) {
+			if (containingBlock instanceof Renderable) {
+				final ModelNode node = ((Renderable) containingBlock).getModelNode();
+				if (node instanceof HTMLElementImpl) {
+					final HTMLElementImpl element = (HTMLElementImpl) node;
+					final int position = getPosition(element);
+					if (position != RenderState.POSITION_STATIC) {
+						break;
+					}
+					final RenderableContainer newContainer = containingBlock.getParentContainer();
+					if (newContainer == null) {
+						break;
+					}
+					containingBlock = newContainer;
+				} else {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+		return containingBlock;
+	}
 
 	private void scheduleFloat(RFloatInfo floatInfo) {
 		final RLine line = this.currentLine;

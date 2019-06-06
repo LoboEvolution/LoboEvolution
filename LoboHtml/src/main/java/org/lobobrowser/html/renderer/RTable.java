@@ -162,7 +162,7 @@ class RTable extends BaseElementRenderable {
 				final Iterator i = pairs.iterator();
 				while (i.hasNext()) {
 					final DelayedPair pair = (DelayedPair) i.next();
-					if (pair.targetParent == this) {
+					if (pair.containingBlock == this) {
 						importDelayedPair(pair);
 					}
 				}
@@ -259,8 +259,8 @@ class RTable extends BaseElementRenderable {
 	}
 
 	private void importDelayedPair(DelayedPair pair) {
+		pair.positionPairChild();
 		final BoundableRenderable r = pair.child;
-		r.setOrigin(pair.x, pair.y);
 		addPositionedRenderable(r, false, false);
 	}
 

@@ -24,6 +24,7 @@ package org.lobobrowser.html.renderer;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
+import java.util.Collection;
 
 /**
  * A RenderableContainer is either usually a parent block or the root GUI
@@ -39,7 +40,7 @@ public interface RenderableContainer {
 
 	void focus();
 
-	java.util.Collection getDelayedPairs();
+	Collection getDelayedPairs();
 
 	java.awt.Point getGUIPoint(int x, int y);
 
@@ -56,4 +57,12 @@ public interface RenderableContainer {
 	void updateAllWidgetBounds();
 	
     Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll);
+    
+    Insets getInsets(final boolean hscroll, final boolean vscroll);
+    
+    int getY();
+    
+    default int getInnerWidth() {return 0;};
+
+    default int getInnerHeight() {return 0;};
 }

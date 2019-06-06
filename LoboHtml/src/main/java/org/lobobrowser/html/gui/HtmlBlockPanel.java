@@ -97,9 +97,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	private static final long serialVersionUID = 1L;
 	private Set components;
 	protected Insets defaultMarginInsets = null;
-	// protected Insets defaultPaddingInsets = null;
 	protected int defaultOverflowX = RenderState.OVERFLOW_AUTO;
-
 	protected int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
 	protected RenderableSpot endSelection;
 	protected final FrameContext frameContext;
@@ -259,14 +257,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		super.finalize();
 	}
 
-//	public void setDefaultPaddingInsets(Insets insets) {
-//		this.defaultPaddingInsets = insets;
-//		RBlock block = this.rblock;
-//		if(block != null) {
-//		    block.setDefaultPaddingInsets(insets);
-//		}
-//	}
-
 	@Override
 	public void focus() {
 		grabFocus();
@@ -276,10 +266,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		return this.defaultMarginInsets;
 	}
 
-	// public Insets getDefaultPaddingInsets() {
-//        return defaultPaddingInsets;
-//    }
-//
 	public int getDefaultOverflowX() {
 		return this.defaultOverflowX;
 	}
@@ -942,5 +928,4 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 		toValidate.validate();
 	}
-
 }
