@@ -291,7 +291,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private static class IFrameLayout extends CommonWidgetLayout {
 		public IFrameLayout() {
-			super(ADD_INLINE, true);
+			super(ADD_INLINE);
 		}
 
 		@Override
@@ -306,7 +306,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private static class ImgLayout extends CommonWidgetLayout {
 		public ImgLayout() {
-			super(ADD_INLINE, true);
+			super(ADD_INLINE);
 		}
 
 		@Override
@@ -319,7 +319,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private static class InputLayout2 extends CommonWidgetLayout {
 		public InputLayout2() {
-			super(ADD_INLINE, true);
+			super(ADD_INLINE);
 		}
 
 		@Override
@@ -379,8 +379,8 @@ public class RBlockViewport extends BaseRCollection {
 		 *                           HTML.
 		 * @param usesAlignAttribute
 		 */
-		public ObjectLayout(boolean tryToRenderContent, boolean usesAlignAttribute) {
-			super(ADD_INLINE, usesAlignAttribute);
+		public ObjectLayout(boolean tryToRenderContent) {
+			super(ADD_INLINE);
 			this.tryToRenderContent = tryToRenderContent;
 		}
 
@@ -425,7 +425,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private static class SelectLayout extends CommonWidgetLayout {
 		public SelectLayout() {
-			super(ADD_INLINE, true);
+			super(ADD_INLINE);
 		}
 
 		@Override
@@ -464,7 +464,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private static class TextAreaLayout2 extends CommonWidgetLayout {
 		public TextAreaLayout2() {
-			super(ADD_INLINE, true);
+			super(ADD_INLINE);
 		}
 
 		@Override
@@ -559,8 +559,8 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("DD", bq);
 		el.put("HR", new HrLayout());
 		el.put("SPAN", new SpanLayout());
-		final ObjectLayout ol = new ObjectLayout(false, true);
-		el.put("OBJECT", new ObjectLayout(true, true));
+		final ObjectLayout ol = new ObjectLayout(false);
+		el.put("OBJECT", new ObjectLayout(true));
 		el.put("APPLET", ol);
 		el.put("EMBED", ol);
 		//el.put("IFRAME", new IFrameLayout());
