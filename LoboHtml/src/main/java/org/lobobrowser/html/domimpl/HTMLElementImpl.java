@@ -729,6 +729,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	public void setCurrentStyle(Object value) {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
 	}
+	
+	public boolean getHidden() {
+		return this.getAttribute("hidden") == null ? false : true;
+	}
 
 	public void setInnerHTML(String newHtml) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;

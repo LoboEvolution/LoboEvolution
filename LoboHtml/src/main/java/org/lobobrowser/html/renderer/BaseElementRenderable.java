@@ -678,7 +678,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 	 * instead of this one.
 	 */
 	@Override
-	public final void layout(int availWidth, int availHeight, boolean sizeOnly) {
+	public void layout(int availWidth, int availHeight, boolean sizeOnly) {
 		// Must call doLayout regardless of validity state.
 		try {
 			doLayout(availWidth, availHeight, sizeOnly);

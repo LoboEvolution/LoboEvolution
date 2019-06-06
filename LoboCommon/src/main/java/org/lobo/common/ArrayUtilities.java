@@ -2,6 +2,8 @@ package org.lobo.common;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 
 public class ArrayUtilities {
 
@@ -16,7 +18,36 @@ public class ArrayUtilities {
 	public static <T> Iterator<T> iterator(final T[] array, final int offset, final int length) {
 		return new ArrayIterator<>(array, offset, length);
 	}
+	
+	public static Iterator singletonIterator(final Object item) {
+		return new Iterator() {
+			private boolean gotItem = false;
 
+			@Override
+			public boolean hasNext() {
+				return !this.gotItem;
+			}
+
+			@Override
+			public Object next() {
+				if (this.gotItem) {
+					throw new NoSuchElementException();
+				}
+				this.gotItem = true;
+				return item;
+			}
+
+			@Override
+			public void remove() {
+				if (!this.gotItem) {
+					this.gotItem = true;
+				} else {
+					throw new NoSuchElementException();
+				}
+			}
+		};
+	}
+	
 	private static class ArrayIterator<T> implements Iterator<T> {
 		private final T[] array;
 		private final int top;

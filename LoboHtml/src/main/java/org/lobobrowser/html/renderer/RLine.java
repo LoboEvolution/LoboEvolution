@@ -83,7 +83,7 @@ class RLine extends BaseRCollection {
 			addWord((RWord) renderable);
 		} else if (renderable instanceof RBlank) {
 			addBlank((RBlank) renderable);
-		} else if (renderable instanceof RUIControl) {
+		} else if (renderable instanceof RElement) {
 			addElement((RElement) renderable);
 		} else if (renderable instanceof RSpacing) {
 			addSpacing((RSpacing) renderable);

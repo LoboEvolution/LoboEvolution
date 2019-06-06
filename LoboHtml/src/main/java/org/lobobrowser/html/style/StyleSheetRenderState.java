@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.lobo.common.Strings;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
@@ -397,37 +398,68 @@ public class StyleSheetRenderState implements RenderState {
 
 	@Override
 	public int getDisplay() {
-		Integer d = this.iDisplay;
+		final Integer d = this.iDisplay;
 		if (d != null) {
 			return d.intValue();
 		}
-		final CSS2Properties props = getCssProperties();
+		final CSS2Properties props = this.getCssProperties();
 		final String displayText = props == null ? null : props.getDisplay();
 		int displayInt;
-		if (displayText != null) {
-			final String displayTextTL = displayText.toLowerCase();
-			if ("block".equals(displayTextTL)) {
-				displayInt = DISPLAY_BLOCK;
-			} else if ("inline".equals(displayTextTL)) {
-				displayInt = DISPLAY_INLINE;
-			} else if ("none".equals(displayTextTL)) {
-				displayInt = DISPLAY_NONE;
-			} else if ("list-item".equals(displayTextTL)) {
-				displayInt = DISPLAY_LIST_ITEM;
-			} else if ("table".equals(displayTextTL)) {
-				displayInt = DISPLAY_TABLE;
-			} else if ("table-cell".equals(displayTextTL)) {
-				displayInt = DISPLAY_TABLE_CELL;
-			} else if ("table-row".equals(displayTextTL)) {
-				displayInt = DISPLAY_TABLE_ROW;
-			} else {
-				displayInt = getDefaultDisplay();
-			}
-		} else {
-			displayInt = getDefaultDisplay();
+		final String displayTextTL = Strings.isNotBlank(displayText) ? displayText.toLowerCase() : "";
+		switch (displayTextTL) {
+		case "block":
+			displayInt = DISPLAY_BLOCK;
+			break;
+		case "inline":
+			displayInt = DISPLAY_INLINE;
+			break;
+		case "none":
+			displayInt = DISPLAY_NONE;
+			break;
+		case "list-item":
+			displayInt = DISPLAY_LIST_ITEM;
+			break;
+		case "table-row-group":
+			displayInt = DISPLAY_TABLE_ROW_GROUP;
+			break;
+		case "table-header-group":
+			displayInt = DISPLAY_TABLE_HEADER_GROUP;
+			break;
+		case "table-footer-group":
+			displayInt = DISPLAY_TABLE_FOOTER_GROUP;
+			break;
+		case "table":
+			displayInt = DISPLAY_TABLE;
+			break;
+		case "inline-table":
+			displayInt = DISPLAY_INLINE_TABLE;
+			break;
+		case "table-cell":
+			displayInt = DISPLAY_TABLE_CELL;
+			break;
+		case "table-row":
+			displayInt = DISPLAY_TABLE_ROW;
+			break;
+		case "inline-block":
+			displayInt = DISPLAY_INLINE_BLOCK;
+			break;
+		case "table-column":
+			displayInt = DISPLAY_TABLE_COLUMN;
+			break;
+		case "table-column-group":
+			displayInt = DISPLAY_TABLE_COLUMN_GROUP;
+			break;
+		case "table-caption":
+			displayInt = DISPLAY_TABLE_CAPTION;
+			break;
+		case "inherit":
+			displayInt = this.getPreviousRenderState().getDisplay();
+			break;
+		default:
+			displayInt = this.getDefaultDisplay();
+			break;
 		}
-		d = new Integer(displayInt);
-		this.iDisplay = d;
+		this.iDisplay = new Integer(displayInt);
 		return displayInt;
 	}
 

@@ -41,6 +41,7 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.common.ArrayUtilities;
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -125,13 +126,35 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private static abstract class CommonLayout implements MarkupLayout {
-		protected static final int DISPLAY_BLOCK = 2;
-		protected static final int DISPLAY_INLINE = 1;
-		protected static final int DISPLAY_LIST_ITEM = 3;
-		protected static final int DISPLAY_NONE = 0;
-		protected static final int DISPLAY_TABLE = 6;
 
-		private final int display;
+		/** The Constant DISPLAY_NONE. */
+		protected static final int DISPLAY_NONE = 0;
+
+		/** The Constant DISPLAY_INLINE. */
+		protected static final int DISPLAY_INLINE = 1;
+
+		/** The Constant DISPLAY_BLOCK. */
+		protected static final int DISPLAY_BLOCK = 2;
+
+		/** The Constant DISPLAY_LIST_ITEM. */
+		protected static final int DISPLAY_LIST_ITEM = 3;
+
+		/** The Constant DISPLAY_TABLE_ROW. */
+		protected static final int DISPLAY_TABLE_ROW = 4;
+		
+		/** The Constant DISPLAY_TABLE_CELL. */
+		protected static final int DISPLAY_TABLE_CELL = 5;
+
+		/** The Constant DISPLAY_TABLE. */
+		protected static final int DISPLAY_TABLE = 6;
+		
+		/** The Constant DISPLAY_INLINE_BLOCK. */
+		protected static final int DISPLAY_INLINE_BLOCK = 8;
+		
+		/** The Constant DISPLAY_INLINE_TABLE. */
+		protected static final int DISPLAY_INLINE_TABLE = 9;
+		
+	    private final int display;
 
 		public CommonLayout(int defaultDisplay) {
 			this.display = defaultDisplay;
@@ -140,49 +163,54 @@ public class RBlockViewport extends BaseRCollection {
 		@Override
 		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			final RenderState rs = markupElement.getRenderState();
-			int display = rs == null ? this.display : rs.getDisplay();
-			if (display == RenderState.DISPLAY_INLINE) {
-				// Inline elements with absolute or fixed positions need
-				// to be treated as blocks.
-				final int position = rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
-				if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
-					display = RenderState.DISPLAY_BLOCK;
-				} else {
-					final int boxFloat = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
-					if (boxFloat != RenderState.FLOAT_NONE) {
-						display = RenderState.DISPLAY_BLOCK;
-					}
-				}
-			}
-			switch (display) {
-			case DISPLAY_NONE:
-				// skip it completely.
-				final UINode node = markupElement.getUINode();
-				if (node instanceof BaseBoundableRenderable) {
-					// This is necessary so that if the element is made
-					// visible again, it can be invalidated.
-					((BaseBoundableRenderable) node).markLayoutValid();
-				}
-				break;
-			case DISPLAY_BLOCK:
-				bodyLayout.layoutRBlock(markupElement);
-				break;
-			case DISPLAY_LIST_ITEM:
-				final String tagName = markupElement.getTagName();
-				if ("UL".equalsIgnoreCase(tagName) || "OL".equalsIgnoreCase(tagName)) {
-					bodyLayout.layoutList(markupElement);
-				} else {
-					bodyLayout.layoutListItem(markupElement);
-				}
-				break;
-			case DISPLAY_TABLE:
-				bodyLayout.layoutRTable(markupElement);
-				break;
-			default:
-				// Assume INLINE
-				bodyLayout.layoutMarkup(markupElement);
-				break;
-			}
+			int display = markupElement.getHidden() ? DISPLAY_NONE : rs == null ? this.display : rs.getDisplay();
+
+	        if (display == RenderState.DISPLAY_INLINE || display == RenderState.DISPLAY_INLINE_BLOCK) {
+	            final int position = rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
+	            if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
+	                display = RenderState.DISPLAY_BLOCK;
+	            } else {
+	                final int boxFloat = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
+	                if (boxFloat != RenderState.FLOAT_NONE) {
+	                    display = RenderState.DISPLAY_BLOCK;
+	                }
+	            }
+	        }
+			
+	        switch (display) {
+	        case RenderState.DISPLAY_TABLE_COLUMN:
+	        case RenderState.DISPLAY_TABLE_COLUMN_GROUP:
+	        case RenderState.DISPLAY_NONE:
+	            final UINode node = markupElement.getUINode();
+	            if (node instanceof BaseBoundableRenderable) {
+	                ((BaseBoundableRenderable) node).markLayoutValid();
+	            }
+	            break;
+	        case RenderState.DISPLAY_BLOCK:
+	            bodyLayout.layoutRBlock(markupElement);
+	            break;
+	        case RenderState.DISPLAY_LIST_ITEM:
+	            final String tagName = markupElement.getTagName();
+	            if ("UL".equalsIgnoreCase(tagName) || "OL".equalsIgnoreCase(tagName)) {
+	                bodyLayout.layoutList(markupElement);
+	            } else {
+	                bodyLayout.layoutListItem(markupElement);
+	            }
+	            break;
+	        case RenderState.DISPLAY_TABLE:
+	            bodyLayout.layoutRTable(markupElement);
+	            break;
+	        case RenderState.DISPLAY_INLINE_TABLE:
+	            bodyLayout.layoutRInlineBlock(markupElement);
+	            break;
+	        case RenderState.DISPLAY_INLINE_BLOCK:
+	            bodyLayout.layoutRInlineBlock(markupElement);
+	            break;
+	        default:
+	            // Assume INLINE
+	            bodyLayout.layoutMarkup(markupElement);
+	            break;
+	        }
 		}
 	}
 
@@ -1568,7 +1596,7 @@ public class RBlockViewport extends BaseRCollection {
 		if (sr != null) {
 			final Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 			final Range range = MarkupUtilities.findRenderables(array, clipBounds, true);
-			baseIterator = org.lobobrowser.util.ArrayUtilities.iterator(array, range.offset, range.length);
+			baseIterator = ArrayUtilities.iterator(array, range.offset, range.length);
 		}
 		final SortedSet others = this.positionedRenderables;
 		if (others == null || others.size() == 0) {
@@ -1988,6 +2016,20 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		renderable.setOriginalParent(this);
 		positionRElement(markupElement, renderable, markupElement instanceof HTMLTableElementImpl, true, true);
+	}
+	
+	public void layoutRInlineBlock(final HTMLElementImpl markupElement) {
+		final UINode uINode = markupElement.getUINode();
+		RInlineBlock inlineBlock = null;
+		if (uINode instanceof RInlineBlock) {
+			inlineBlock = (RInlineBlock) uINode;
+		} else {
+			final RInlineBlock newInlineBlock = new RInlineBlock(container, markupElement, userAgentContext, rendererContext, frameContext);
+			markupElement.setUINode(newInlineBlock);
+			inlineBlock = newInlineBlock;
+		}
+		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
+		addRenderableToLine(inlineBlock);
 	}
 
 	private void layoutText(NodeImpl textNode) {
