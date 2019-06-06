@@ -196,4 +196,9 @@ public abstract class RenderStateDelegator implements RenderState {
 	public void setHighlight(boolean highlight) {
 		this.delegate.setHighlight(highlight);
 	}
+	
+    @Override
+    public int getClear() {
+        return this.delegate.getClear();
+    }
 }

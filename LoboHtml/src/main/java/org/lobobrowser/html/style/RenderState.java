@@ -145,4 +145,6 @@ public interface RenderState {
 	void resetCount(String counter, int nesting, int value);
 
 	void setHighlight(boolean highlight);
+	
+    int getClear();
 }

@@ -39,6 +39,7 @@ import org.lobo.laf.FontKey;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.renderer.LineBreak;
 import org.w3c.dom.css.CSS2Properties;
 
 /**
@@ -74,11 +75,6 @@ public class StyleSheetRenderState implements RenderState {
 
 	private boolean iHighlight;
 
-//	public TextRenderState(RenderState prevRenderState) {
-//		this.css2properties = new CSS2PropertiesImpl(this);
-//		this.prevRenderState = prevRenderState;
-//	}
-
 	private Color iOverlayColor = INVALID_COLOR;
 
 	private Color iTextBackgroundColor = INVALID_COLOR;
@@ -102,6 +98,8 @@ public class StyleSheetRenderState implements RenderState {
 	protected HtmlInsets paddingInsets = INVALID_INSETS;
 
 	protected final RenderState prevRenderState;
+	
+    private Integer cachedClear = null;
 
 	public StyleSheetRenderState(HTMLDocumentImpl document) {
 		this.prevRenderState = null;
@@ -1054,4 +1052,29 @@ public class StyleSheetRenderState implements RenderState {
 	public String toString() {
 		return "StyleSheetRenderState[font=" + getFont() + ",textDecoration=" + getTextDecorationMask() + "]";
 	}
+	
+	@Override
+    public int getClear() {
+        if (cachedClear == null) {
+            final AbstractCSS2Properties props = this.getCssProperties();
+            final String clearStr = props != null ? props.getClear() : "";
+            switch (clearStr) {
+            case "right":
+                cachedClear = new Integer(LineBreak.RIGHT);
+                break;
+            case "left":
+                cachedClear = new Integer(LineBreak.LEFT);
+                break;
+            case "both":
+                cachedClear = new Integer(LineBreak.ALL);
+                break;
+
+            default:
+                cachedClear = new Integer(LineBreak.NONE);
+                break;
+            }
+        }
+        return cachedClear;
+    }
+
 }
