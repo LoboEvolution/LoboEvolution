@@ -37,12 +37,14 @@ import org.lobo.common.Urls;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
+import org.w3c.dom.Node;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 public class CSSUtilities {
 	private static final Logger logger = Logger.getLogger(CSSUtilities.class.getName());
@@ -92,8 +94,7 @@ public class CSSUtilities {
 		return false;
 	}
 
-	public static CSSStyleSheet parse(org.w3c.dom.Node ownerNode, String href, HTMLDocumentImpl doc, String baseUri,
-			boolean considerDoubleSlashComments) throws Exception {
+    public static CSSStyleSheet parse(Node ownerNode, String href, String baseUri, boolean considerDoubleSlashComments) throws Exception {
 		final UserAgentContext bcontext = doc.getUserAgentContext();
 		final HttpRequest request = bcontext.createHttpRequest();
 		final URL baseURL = new URL(baseUri);
@@ -130,7 +131,7 @@ public class CSSUtilities {
 		final String text = request.getResponseText();
 		if (Strings.isNotBlank(text)) {
 			final String processedText = considerDoubleSlashComments ? preProcessCss(text) : text;
-			final CSSOMParser parser = new CSSOMParser();
+			final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 			final InputSource is = getCssInputSourceForStyleSheet(processedText, scriptURI);
 			is.setURI(scriptURI);
 			try {

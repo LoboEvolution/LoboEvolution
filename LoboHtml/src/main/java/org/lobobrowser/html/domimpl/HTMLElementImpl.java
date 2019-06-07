@@ -54,6 +54,7 @@ import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2PropertiesContext {
 	private Map<String, AbstractCSS2Properties> computedStyles;
@@ -590,7 +591,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			// Add any declarations in style attribute (last takes precedence).
 			final String style = getAttribute("style");
 			if (style != null && style.length() != 0) {
-				final CSSOMParser parser = new CSSOMParser();
+                final CSSOMParser parser = new CSSOMParser(new CSS3Parser());;
 				final InputSource inputSource = getCssInputSourceForDecl(style);
 				try {
 					final CSSStyleDeclaration sd = parser.parseStyleDeclaration(inputSource);

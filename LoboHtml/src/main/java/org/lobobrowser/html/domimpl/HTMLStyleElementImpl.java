@@ -32,6 +32,7 @@ import org.w3c.dom.css.CSSStyleSheet;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleElement {
 	private boolean disabled;
@@ -73,7 +74,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 			if (Strings.isNotBlank(text)) {
 				final String processedText = CSSUtilities.preProcessCss(text);
 				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
-				final CSSOMParser parser = new CSSOMParser();
+                final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 				final String baseURI = doc.getBaseURI();
 				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
 				try {
