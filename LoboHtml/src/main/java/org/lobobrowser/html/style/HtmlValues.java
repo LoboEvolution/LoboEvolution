@@ -309,6 +309,13 @@ public class HtmlValues implements CSSValuesProperties {
 			case "ex":
 				final double xHeight = renderState.getFontMetrics().getAscent() * 0.47;
 				return (int) Math.round(xHeight * Double.parseDouble(text));
+			case "in":
+				final String valText = lcSpec.substring(0, lcSpec.length() - 2);
+				try {
+					return (int) Math.round(dpi * Double.parseDouble(valText));
+				} catch (final NumberFormatException nfe) {
+					return errorValue;
+				}
 			default:
 				return (int) Math.round(Double.parseDouble(lcSpec));
 			}
