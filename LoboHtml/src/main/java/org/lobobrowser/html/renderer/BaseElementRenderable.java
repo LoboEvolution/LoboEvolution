@@ -752,6 +752,95 @@ abstract class BaseElementRenderable extends BaseRCollection
 			startY += marginInsets.top;
 		}
 		final Insets borderInsets = this.borderInsets;
+
+		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
+		try {
+			Rectangle bkgBounds = null;
+			if (node != null) {
+				final Color bkg = this.backgroundColor;
+				if (bkg != null && bkg.getAlpha() > 0) {
+					clientG.setColor(bkg);
+					bkgBounds = clientG.getClipBounds();
+					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
+				}
+				final BackgroundInfo binfo = rs == null ? null : rs.getBackgroundInfo();
+				final Image image = this.backgroundImage;
+				if (image != null) {
+					if (bkgBounds == null) {
+						bkgBounds = clientG.getClipBounds();
+					}
+					final int w = image.getWidth(this);
+					final int h = image.getHeight(this);
+					if (w != -1 && h != -1) {
+						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
+						case BackgroundInfo.BR_NO_REPEAT: {
+							int imageX;
+							if (binfo.backgroundXPositionAbsolute) {
+								imageX = binfo.backgroundXPosition;
+							} else {
+								imageX = binfo.backgroundXPosition * (totalWidth - w) / 100;
+							}
+							int imageY;
+							if (binfo.backgroundYPositionAbsolute) {
+								imageY = binfo.backgroundYPosition;
+							} else {
+								imageY = binfo.backgroundYPosition * (totalHeight - h) / 100;
+							}
+							clientG.drawImage(image, imageX, imageY, w, h, this);
+							break;
+						}
+						case BackgroundInfo.BR_REPEAT_X: {
+							int imageY;
+							if (binfo.backgroundYPositionAbsolute) {
+								imageY = binfo.backgroundYPosition;
+							} else {
+								imageY = binfo.backgroundYPosition * (totalHeight - h) / 100;
+							}
+							// Modulate starting x.
+							int x = bkgBounds.x / w * w;
+							final int topX = bkgBounds.x + bkgBounds.width;
+							for (; x < topX; x += w) {
+								clientG.drawImage(image, x, imageY, w, h, this);
+							}
+							break;
+						}
+						case BackgroundInfo.BR_REPEAT_Y: {
+							int imageX;
+							if (binfo.backgroundXPositionAbsolute) {
+								imageX = binfo.backgroundXPosition;
+							} else {
+								imageX = binfo.backgroundXPosition * (totalWidth - w) / 100;
+							}
+							// Modulate starting y.
+							int y = bkgBounds.y / h * h;
+							final int topY = bkgBounds.y + bkgBounds.height;
+							for (; y < topY; y += h) {
+								clientG.drawImage(image, imageX, y, w, h, this);
+							}
+							break;
+						}
+						default: {
+							// Modulate starting x and y.
+							final int baseX = bkgBounds.x / w * w;
+							final int baseY = bkgBounds.y / h * h;
+							final int topX = bkgBounds.x + bkgBounds.width;
+							final int topY = bkgBounds.y + bkgBounds.height;
+							// Replacing this:
+							for (int x = baseX; x < topX; x += w) {
+								for (int y = baseY; y < topY; y += h) {
+									clientG.drawImage(image, x, y, w, h, this);
+								}
+							}
+							break;
+						}
+						}
+					}
+				}
+			}
+		} finally {
+			clientG.dispose();
+		}
+
 		if (borderInsets != null) {
 			final int btop = borderInsets.top;
 			final int bleft = borderInsets.left;
@@ -839,94 +928,6 @@ abstract class BaseElementRenderable extends BaseRCollection
 			startX = newStartX;
 			startY = newStartY;
 
-		}
-		// Using clientG (clipped below) beyond this point.
-		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
-		try {
-			Rectangle bkgBounds = null;
-			if (node != null) {
-				final Color bkg = this.backgroundColor;
-				if (bkg != null && bkg.getAlpha() > 0) {
-					clientG.setColor(bkg);
-					bkgBounds = clientG.getClipBounds();
-					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
-				}
-				final BackgroundInfo binfo = rs == null ? null : rs.getBackgroundInfo();
-				final Image image = this.backgroundImage;
-				if (image != null) {
-					if (bkgBounds == null) {
-						bkgBounds = clientG.getClipBounds();
-					}
-					final int w = image.getWidth(this);
-					final int h = image.getHeight(this);
-					if (w != -1 && h != -1) {
-						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
-						case BackgroundInfo.BR_NO_REPEAT: {
-							int imageX;
-							if (binfo.backgroundXPositionAbsolute) {
-								imageX = binfo.backgroundXPosition;
-							} else {
-								imageX = binfo.backgroundXPosition * (totalWidth - w) / 100;
-							}
-							int imageY;
-							if (binfo.backgroundYPositionAbsolute) {
-								imageY = binfo.backgroundYPosition;
-							} else {
-								imageY = binfo.backgroundYPosition * (totalHeight - h) / 100;
-							}
-							clientG.drawImage(image, imageX, imageY, w, h, this);
-							break;
-						}
-						case BackgroundInfo.BR_REPEAT_X: {
-							int imageY;
-							if (binfo.backgroundYPositionAbsolute) {
-								imageY = binfo.backgroundYPosition;
-							} else {
-								imageY = binfo.backgroundYPosition * (totalHeight - h) / 100;
-							}
-							// Modulate starting x.
-							int x = bkgBounds.x / w * w;
-							final int topX = bkgBounds.x + bkgBounds.width;
-							for (; x < topX; x += w) {
-								clientG.drawImage(image, x, imageY, w, h, this);
-							}
-							break;
-						}
-						case BackgroundInfo.BR_REPEAT_Y: {
-							int imageX;
-							if (binfo.backgroundXPositionAbsolute) {
-								imageX = binfo.backgroundXPosition;
-							} else {
-								imageX = binfo.backgroundXPosition * (totalWidth - w) / 100;
-							}
-							// Modulate starting y.
-							int y = bkgBounds.y / h * h;
-							final int topY = bkgBounds.y + bkgBounds.height;
-							for (; y < topY; y += h) {
-								clientG.drawImage(image, imageX, y, w, h, this);
-							}
-							break;
-						}
-						default: {
-							// Modulate starting x and y.
-							final int baseX = bkgBounds.x / w * w;
-							final int baseY = bkgBounds.y / h * h;
-							final int topX = bkgBounds.x + bkgBounds.width;
-							final int topY = bkgBounds.y + bkgBounds.height;
-							// Replacing this:
-							for (int x = baseX; x < topX; x += w) {
-								for (int y = baseY; y < topY; y += h) {
-									clientG.drawImage(image, x, y, w, h, this);
-								}
-							}
-							break;
-						}
-						}
-					}
-				}
-			}
-		} finally {
-			clientG.dispose();
 		}
 	}
 
