@@ -147,4 +147,12 @@ public interface RenderState {
 	void setHighlight(boolean highlight);
 	
     int getClear();
+    
+    String getLeft();
+
+    String getTop();
+
+    String getRight();
+
+    String getBottom();
 }

@@ -59,7 +59,7 @@ public class StyleSheetRenderState implements RenderState {
 	private Integer cachedFloat;
 	private Integer cachedPosition;
 	private Integer cachedVisibility;
-	private Map counters = null;
+	private Map<String, ArrayList<?>> counters = null;
 	protected final HTMLDocumentImpl document;
 	protected final HTMLElementImpl element;
 	private Color iBackgroundColor = INVALID_COLOR;
@@ -87,7 +87,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	protected Integer iWhiteSpace;
 
-	Map iWordInfoMap = null;
+	Map<String, WordInfo> iWordInfoMap = null;
 
 	protected HtmlInsets marginInsets = INVALID_INSETS;
 
@@ -373,11 +373,11 @@ public class StyleSheetRenderState implements RenderState {
 		if (prs != null) {
 			return prs.getCount(counter, nesting);
 		}
-		final Map counters = this.counters;
+		final Map<String, ArrayList<?>> counters = this.counters;
 		if (counters == null) {
 			return 0;
 		}
-		final ArrayList counterArray = (ArrayList) counters.get(counter);
+		final ArrayList<?> counterArray = (ArrayList<?>) counters.get(counter);
 		if (nesting < 0 || nesting >= counterArray.size()) {
 			return 0;
 		}
@@ -937,9 +937,9 @@ public class StyleSheetRenderState implements RenderState {
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
 		// No synchronization necessary.
-		Map map = this.iWordInfoMap;
+		Map<String, WordInfo> map = this.iWordInfoMap;
 		if (map == null) {
-			map = new HashMap(1);
+			map = new HashMap<String, WordInfo>(1);
 			this.iWordInfoMap = map;
 		}
 		WordInfo wi = (WordInfo) map.get(word);
@@ -964,13 +964,13 @@ public class StyleSheetRenderState implements RenderState {
 		if (prs != null) {
 			return prs.incrementCount(counter, nesting);
 		}
-		Map counters = this.counters;
+		Map<String, ArrayList<?>> counters = this.counters;
 		if (counters == null) {
-			counters = new HashMap(2);
+			counters = new HashMap<String, ArrayList<?>>(2);
 			this.counters = counters;
-			counters.put(counter, new ArrayList(0));
+			counters.put(counter, new ArrayList<Object>(0));
 		}
-		final ArrayList counterArray = (ArrayList) counters.get(counter);
+		final ArrayList<Integer> counterArray = (ArrayList<Integer>) counters.get(counter);
 		while (counterArray.size() <= nesting) {
 			counterArray.add(null);
 		}
@@ -982,7 +982,7 @@ public class StyleSheetRenderState implements RenderState {
 
 	@Override
 	public void invalidate() {
-		final Map map = this.iWordInfoMap;
+		final Map<String, WordInfo> map = this.iWordInfoMap;
 		if (map != null) {
 			map.clear();
 		}
@@ -1026,13 +1026,13 @@ public class StyleSheetRenderState implements RenderState {
 		if (prs != null) {
 			prs.resetCount(counter, nesting, value);
 		} else {
-			Map counters = this.counters;
+			Map<String, ArrayList<?>> counters = this.counters;
 			if (counters == null) {
-				counters = new HashMap(2);
+				counters = new HashMap<String, ArrayList<?>>(2);
 				this.counters = counters;
-				counters.put(counter, new ArrayList(0));
+				counters.put(counter, new ArrayList<Object>(0));
 			}
-			final ArrayList counterArray = (ArrayList) counters.get(counter);
+			final ArrayList<Integer> counterArray = (ArrayList<Integer>) counters.get(counter);
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}
@@ -1075,6 +1075,30 @@ public class StyleSheetRenderState implements RenderState {
             }
         }
         return cachedClear;
+    }
+
+    @Override
+    public String getLeft() {
+        final AbstractCSS2Properties props = this.getCssProperties();
+        return props == null ? null : props.getLeft();
+    }
+
+    @Override
+    public String getTop() {
+        final AbstractCSS2Properties props = this.getCssProperties();
+        return props == null ? null : props.getTop();
+    }
+
+    @Override
+    public String getRight() {
+        final AbstractCSS2Properties props = this.getCssProperties();
+        return props == null ? null : props.getRight();
+    }
+
+    @Override
+    public String getBottom() {
+        final AbstractCSS2Properties props = this.getCssProperties();
+        return props == null ? null : props.getBottom();
     }
 
 }

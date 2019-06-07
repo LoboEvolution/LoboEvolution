@@ -201,4 +201,24 @@ public abstract class RenderStateDelegator implements RenderState {
     public int getClear() {
         return this.delegate.getClear();
     }
+    
+    @Override
+    public String getLeft() {
+        return this.delegate.getLeft();
+    }
+
+    @Override
+    public String getTop() {
+        return this.delegate.getTop();
+    }
+
+    @Override
+    public String getBottom() {
+        return this.delegate.getBottom();
+    }
+
+    @Override
+    public String getRight() {
+        return this.delegate.getRight();
+    }
 }
