@@ -69,7 +69,7 @@ public class SecurityControllerImpl extends SecurityController {
 		if (securityDomain == null) {
 			return callable.call(ctx, scope, thisObj, args);
 		} else {
-			final PrivilegedAction action = () -> callable.call(ctx, scope, thisObj, args);
+			final PrivilegedAction<Object> action = () -> callable.call(ctx, scope, thisObj, args);
 			final AccessControlContext acctx = new AccessControlContext(
 					new ProtectionDomain[] { (ProtectionDomain) securityDomain });
 			return AccessController.doPrivileged(action, acctx);

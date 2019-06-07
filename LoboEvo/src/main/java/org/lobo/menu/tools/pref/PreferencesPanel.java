@@ -5,7 +5,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.WrapperLayout;
 
 /**
  * The Class PreferencesPanel.

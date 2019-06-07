@@ -111,7 +111,7 @@ public class CSSUtilities {
 
 		} else {
 			// Code might have restrictions on loading items from elsewhere.
-			AccessController.doPrivileged((PrivilegedAction) () -> {
+			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 				try {
 					request.open("GET", scriptURI, false);
 					request.send(null);

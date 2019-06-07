@@ -91,8 +91,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
     private final Insets currentTabAreaInsets = new Insets(0, 0, 0, 0);
     private Component visibleComponent;
     // PENDING(api): See comment for ContainerHandler
-    private ArrayList htmlViews;
-    private HashMap mnemonicToIndexMap;
+    private ArrayList<View> htmlViews;
+    private HashMap<Integer, Integer> mnemonicToIndexMap;
     /**
      * InputMap used for mnemonics. Only non-null if the JTabbedPane has
      * mnemonics associated with it. Lazily created in initMnemonics.
@@ -508,7 +508,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      * Installs the state needed for mnemonics.
      */
     private void initMnemonics() {
-        mnemonicToIndexMap = new HashMap();
+        mnemonicToIndexMap = new HashMap<Integer, Integer>();
 //        mnemonicInputMap = new InputMapUIResource();
 //        mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));
 //        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, mnemonicInputMap);
@@ -1364,7 +1364,6 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
                     int x1 = x + bi.left - 1;
                     int y1 = y + tabAreaHeight + bi.top - 2;
                     int x2 = x1 + w - bi.left - bi.right + 1;
-                    int y2 = h - bi.bottom;
                     int ws = w - bi.left - bi.right + 1;
                     int hs = h - tabAreaHeight - bi.top - bi.bottom + 2;
 
@@ -2128,7 +2127,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class RightAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2138,7 +2142,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class LeftAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2148,7 +2157,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class UpAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2158,7 +2172,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class DownAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2168,7 +2187,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class NextAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2178,7 +2202,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class PreviousAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2188,7 +2217,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class PageUpAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2203,7 +2237,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class PageDownAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2218,7 +2257,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class RequestFocusAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             pane.requestFocus();
@@ -2227,7 +2271,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class RequestFocusForVisibleAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
             BaseTabbedPaneUI ui = (BaseTabbedPaneUI) pane.getUI();
@@ -2242,7 +2291,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
      */
     private static class SetSelectedIndexAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = (JTabbedPane) e.getSource();
 
@@ -2266,7 +2320,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class ScrollTabsForwardAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane;
             Object src = e.getSource();
@@ -2287,7 +2346,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class ScrollTabsBackwardAction extends AbstractAction {
 
-        @Override
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		@Override
         public void actionPerformed(ActionEvent e) {
             JTabbedPane pane;
             Object src = e.getSource();
@@ -2308,7 +2372,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class ScrollTabsPopupMenuItemAction extends AbstractAction {
 
-        private JTabbedPane tabbedPane = null;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private JTabbedPane tabbedPane = null;
         private int selectIndex = 0;
 
         public ScrollTabsPopupMenuItemAction(JTabbedPane pane, int index) {
@@ -2324,7 +2392,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private static class ScrollTabsPopupMenuAction extends AbstractAction {
 
-        private JTabbedPane tabbedPane = null;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		private JTabbedPane tabbedPane = null;
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -3468,7 +3540,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private class ScrollableTabViewport extends JViewport implements UIResource {
 
-        public ScrollableTabViewport() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ScrollableTabViewport() {
             setScrollMode(SIMPLE_SCROLL_MODE);
             setOpaque(false);
         }
@@ -3477,7 +3554,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private class ScrollableTabPanel extends JPanel implements UIResource {
 
-        public ScrollableTabPanel() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ScrollableTabPanel() {
             setLayout(null);
             setOpaque(false);
         }
@@ -3500,7 +3582,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     public class ArrowButton extends JButton implements SwingConstants {
 
-        protected int direction;
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		protected int direction;
 
         public ArrowButton(int direction) {
             super();
@@ -3601,7 +3687,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private class ScrollableTabButton extends ArrowButton implements UIResource, SwingConstants {
 
-        public ScrollableTabButton(int direction) {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ScrollableTabButton(int direction) {
             super(direction);
         }
 
@@ -3612,7 +3703,12 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private class ScrollablePopupMenuTabButton extends ArrowButton implements UIResource, SwingConstants {
 
-        public ScrollablePopupMenuTabButton() {
+        /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public ScrollablePopupMenuTabButton() {
             super(SOUTH);
         }
     }
@@ -3976,8 +4072,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
         }
     }
 
-    private ArrayList createHTMLViewList() {
-        ArrayList viewList = new ArrayList();
+    private ArrayList<View> createHTMLViewList() {
+        ArrayList<View> viewList = new ArrayList<View>();
         int count = tabPane.getTabCount();
         for (int i = 0; i < count; i++) {
             String title = tabPane.getTitleAt(i);
@@ -3992,7 +4088,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
     private class TabContainer extends JPanel implements UIResource {
 
-        private boolean notifyTabbedPane = true;
+		private static final long serialVersionUID = 1L;
+		private boolean notifyTabbedPane = true;
 
         public TabContainer() {
             super(null);

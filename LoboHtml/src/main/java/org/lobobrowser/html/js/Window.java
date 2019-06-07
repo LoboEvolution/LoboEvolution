@@ -29,6 +29,7 @@ import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,12 +56,12 @@ import org.lobobrowser.js.JavaClassWrapperFactory;
 import org.lobobrowser.js.JavaInstantiator;
 import org.lobobrowser.js.JavaObjectWrapper;
 import org.lobobrowser.js.JavaScript;
-import org.lobobrowser.util.ID;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS2Properties;
 import org.w3c.dom.events.EventException;
 import org.w3c.dom.views.AbstractView;
@@ -225,6 +226,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private final UserAgentContext uaContext;
 	
     private Scriptable windowScope;
+    
+ 	private static Random RANDOM1;
+    
+    private static Random RANDOM2;
+    
+    private static Random RANDOM3;
 
 	public Window(HtmlRendererContext rcontext, UserAgentContext uaContext) {
 		// TODO: Probably need to create a new Window instance
@@ -614,13 +621,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	public org.w3c.dom.Node namedItem(String name) {
-		// Bug 1928758: Element IDs are named objects in context.
+	public Node namedItem(String name) {
 		final HTMLDocumentImpl doc = this.document;
 		if (doc == null) {
 			return null;
 		}
-		final org.w3c.dom.Node node = doc.getElementById(name);
+		final Node node = doc.getElementById(name);
 		if (node != null) {
 			return node;
 		}
@@ -628,7 +634,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	public Window open(String url) {
-		return this.open(url, "window:" + String.valueOf(ID.generateLong()));
+		long lng = Math.abs(RANDOM1.nextLong() ^ RANDOM2.nextLong() ^ RANDOM3.nextLong());
+		return this.open(url, "window:" + String.valueOf(lng));
 	}
 
 	public Window open(String url, String windowName) {

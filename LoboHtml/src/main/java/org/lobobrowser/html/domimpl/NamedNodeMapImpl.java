@@ -36,12 +36,12 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
-	private final ArrayList attributeList = new ArrayList();
-	// Note: class must be public for reflection to work.
-	private final Map attributes = new HashMap();
+	
+	private final ArrayList<Node> attributeList = new ArrayList<Node>();
+	private final Map<String, Node> attributes = new HashMap<String, Node>();
 
-	public NamedNodeMapImpl(Element owner, Map attribs) {
-		final Iterator i = attribs.entrySet().iterator();
+	public NamedNodeMapImpl(Element owner, Map<?, ?> attribs) {
+		final Iterator<?> i = attribs.entrySet().iterator();
 		while (i.hasNext()) {
 			final Map.Entry entry = (Map.Entry) i.next();
 			final String name = (String) entry.getKey();

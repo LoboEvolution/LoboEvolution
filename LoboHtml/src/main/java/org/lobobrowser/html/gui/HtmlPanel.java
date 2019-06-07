@@ -34,6 +34,7 @@ import java.util.EventListener;
 import java.util.EventObject;
 
 import javax.swing.JComponent;
+import javax.swing.Timer;
 
 import org.lobo.common.Strings;
 import org.lobobrowser.html.dom.HTMLFrameSetElement;
@@ -50,8 +51,8 @@ import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.EventDispatch2;
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.EventDispatch2;
+import org.lobo.common.WrapperLayout;
 import org.w3c.dom.Document;
 import org.w3c.dom.Text;
 
@@ -115,12 +116,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	private class SelectionDispatch extends EventDispatch2 {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.xamjwg.util.EventDispatch2#dispatchEvent(java.util.EventListener,
-		 * java.util.EventObject)
-		 */
+
 		@Override
 		protected void dispatchEvent(EventListener listener, EventObject event) {
 			((SelectionChangeListener) listener).selectionChanged((SelectionChangeEvent) event);
@@ -128,9 +124,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	private static final int NOTIF_TIMER_DELAY = 300;
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private volatile Insets defaultMarginInsets = new Insets(8, 8, 8, 8);
 
@@ -143,9 +137,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private final Runnable notificationImmediateAction;
 
 	private final DocumentNotificationListener notificationListener;
-	private final ArrayList notifications = new ArrayList(1);
+	private final ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>();
 
-	private final javax.swing.Timer notificationTimer;
+	private final Timer notificationTimer;
 
 	private volatile int preferredWidth = -1;
 
@@ -157,10 +151,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * Constructs an <code>HtmlPanel</code>.
 	 */
 	public HtmlPanel() {
-		super();
 		setLayout(WrapperLayout.getInstance());
 		setOpaque(false);
-		this.notificationTimer = new javax.swing.Timer(NOTIF_TIMER_DELAY, new NotificationTimerAction());
+		this.notificationTimer = new Timer(NOTIF_TIMER_DELAY, new NotificationTimerAction());
 		this.notificationTimer.setRepeats(false);
 		this.notificationListener = new LocalDocumentNotificationListener();
 		this.notificationImmediateAction = () -> processNotifications();
@@ -168,7 +161,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void addNotification(DocumentNotification notification) {
 		// This can be called in a random thread.
-		final ArrayList notifs = this.notifications;
+		final ArrayList<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(notification);
 		}
@@ -259,7 +252,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	@Override
 	public void delayedRelayout(NodeImpl node) {
-		final ArrayList notifs = this.notifications;
+		final ArrayList<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(new DocumentNotification(DocumentNotification.SIZE, node));
 		}
@@ -434,7 +427,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void processNotifications() {
 		// This is called in the GUI thread.
-		final ArrayList notifs = this.notifications;
+		final ArrayList<DocumentNotification> notifs = this.notifications;
 		DocumentNotification[] notifsArray;
 		synchronized (notifs) {
 			final int size = notifs.size();

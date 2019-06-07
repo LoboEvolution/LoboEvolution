@@ -21,14 +21,12 @@
 /*
  * Created on Jun 2, 2005
  */
-package org.lobobrowser.util;
+package org.lobo.common;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-
-import org.lobo.common.Strings;
 
 /**
  * @author J. H. S.

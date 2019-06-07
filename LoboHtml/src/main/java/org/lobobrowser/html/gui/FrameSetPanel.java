@@ -43,7 +43,7 @@ import org.lobobrowser.html.domimpl.NodeImpl;
 import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.http.HtmlRendererContext;
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.WrapperLayout;
 
 /**
  * A Swing panel used to render FRAMESETs only. It is used by {@link HtmlPanel}
@@ -177,7 +177,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 			return new HtmlLength[] { new HtmlLength("1*") };
 		}
 		final StringTokenizer tok = new StringTokenizer(spec, ",");
-		final ArrayList lengths = new ArrayList();
+		final ArrayList<HtmlLength> lengths = new ArrayList<HtmlLength>();
 		while (tok.hasMoreTokens()) {
 			final String token = tok.nextToken().trim();
 			try {
@@ -216,7 +216,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 
 	private HTMLElementImpl[] getSubFrames(HTMLElementImpl parent) {
 		final NodeImpl[] children = parent.getChildrenArray();
-		final ArrayList subFrames = new ArrayList();
+		final ArrayList<NodeImpl> subFrames = new ArrayList<NodeImpl>();
 		for (final NodeImpl child : children) {
 			if (child instanceof HTMLElementImpl) {
 				final String nodeName = child.getNodeName();

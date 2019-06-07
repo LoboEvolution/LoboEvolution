@@ -43,7 +43,7 @@ public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLS
 		if (name == null) {
 			return null;
 		}
-		final ArrayList formInputs = new ArrayList();
+		final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();
 		for (final String value : values) {
 			formInputs.add(new FormInput(name, value));
 		}

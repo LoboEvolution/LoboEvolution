@@ -23,7 +23,7 @@ package org.lobobrowser.js;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
-import org.lobobrowser.util.Objects;
+import java.util.Objects;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
@@ -122,7 +122,7 @@ public class JavaScript {
 				javascriptObject.setParentScope(scope);
 				return javascriptObject;
 			}
-		} else if (Objects.isBoxClass(raw.getClass())) {
+		} else if (isBoxClass(raw.getClass())) {
 			return raw;
 		} else {
 			synchronized (this.javaObjectToWrapper) {
@@ -144,4 +144,9 @@ public class JavaScript {
 			}
 		}
 	}
+	
+	private boolean isBoxClass(Class clazz) {
+        return clazz == Integer.class || clazz == Boolean.class || clazz == Double.class || clazz == Float.class
+                || clazz == Long.class || clazz == Byte.class || clazz == Short.class || clazz == Character.class;
+    }
 }

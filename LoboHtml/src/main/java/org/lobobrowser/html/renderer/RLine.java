@@ -49,7 +49,7 @@ class RLine extends BaseRCollection {
 	private LineBreak lineBreak;
 	private BoundableRenderable mousePressTarget;
 
-	private final ArrayList renderables = new ArrayList(8);
+	private final ArrayList<Renderable> renderables = new ArrayList<Renderable>(8);
 
 	/**
 	 * Offset where next renderable should be placed. This can be different to
@@ -180,8 +180,8 @@ class RLine extends BaseRCollection {
 			this.firstAllowOverflowWord = false;
 		}
 		if ((!allowOverflow || firstAllowOverflowWord) && offset != 0 && offset + wiwidth > this.desiredMaxWidth) {
-			final ArrayList renderables = this.renderables;
-			ArrayList overflow = null;
+			final ArrayList<Renderable> renderables = this.renderables;
+			ArrayList<Renderable> overflow = null;
 			boolean cancel = false;
 			// Check if other words need to be overflown (for example,
 			// a word just before a markup tag adjacent to the word
@@ -194,7 +194,7 @@ class RLine extends BaseRCollection {
 				final Renderable renderable = (Renderable) renderables.get(i);
 				if (renderable instanceof RWord || !(renderable instanceof BoundableRenderable)) {
 					if (overflow == null) {
-						overflow = new ArrayList();
+						overflow = new ArrayList<Renderable>();
 					}
 					if (renderable != rword && renderable instanceof RWord && ((RWord) renderable).getX() == 0) {
 						// Can't overflow words starting at offset zero.
@@ -220,7 +220,7 @@ class RLine extends BaseRCollection {
 			if (cancel) {
 				// Oops. Need to undo overflow.
 				if (overflow != null) {
-					final Iterator i = overflow.iterator();
+					final Iterator<Renderable> i = overflow.iterator();
 					while (i.hasNext()) {
 						renderables.add(i.next());
 					}
@@ -271,12 +271,12 @@ class RLine extends BaseRCollection {
 		// Set new line height
 		// int oldHeight = this.height;
 		this.height = newHeight;
-		final ArrayList renderables = this.renderables;
+		final ArrayList<Renderable> renderables = this.renderables;
 		// Find max baseline
 		final FontMetrics firstFm = this.modelNode.getRenderState().getFontMetrics();
 		int maxDescent = firstFm.getDescent();
 		int maxAscentPlusLeading = firstFm.getAscent() + firstFm.getLeading();
-		for (final Iterator i = renderables.iterator(); i.hasNext();) {
+		for (final Iterator<Renderable> i = renderables.iterator(); i.hasNext();) {
 			final Object r = i.next();
 			if (r instanceof RStyleChanger) {
 				final RStyleChanger rstyleChanger = (RStyleChanger) r;
@@ -321,7 +321,7 @@ class RLine extends BaseRCollection {
 		this.baseLineOffset = baseline;
 
 		// Change bounds of renderables accordingly
-		for (final Iterator i = renderables.iterator(); i.hasNext();) {
+		for (final Iterator<Renderable> i = renderables.iterator(); i.hasNext();) {
 			final Object r = i.next();
 			if (r instanceof RWord) {
 				final RWord rword = (RWord) r;
@@ -357,7 +357,7 @@ class RLine extends BaseRCollection {
 			if (br != null) {
 				buffer.append(System.getProperty("line.separator"));
 			} else {
-				final ArrayList renderables = this.renderables;
+				final ArrayList<Renderable> renderables = this.renderables;
 				final int size = renderables.size();
 				if (size > 0 && !(renderables.get(size - 1) instanceof RBlank)) {
 					buffer.append(" ");
@@ -459,7 +459,7 @@ class RLine extends BaseRCollection {
 	 * @see org.xamjwg.html.renderer.RCollection#getRenderables()
 	 */
 	@Override
-	public Iterator getRenderables() {
+	public Iterator<Renderable> getRenderables() {
 		return this.renderables.iterator();
 	}
 
@@ -604,7 +604,7 @@ class RLine extends BaseRCollection {
 		}
 		// Note that partial paints of the line can only be done
 		// if all RStyleChanger's are applied first.
-		final Iterator i = this.renderables.iterator();
+		final Iterator<Renderable> i = this.renderables.iterator();
 		if (i != null) {
 			while (i.hasNext()) {
 				final Object r = i.next();

@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.dom.HTMLImageElement;
@@ -45,11 +46,11 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
-	private java.awt.Image image = null;
+	private Image image = null;
 
 	private String imageSrc;
 
-	private final ArrayList listeners = new ArrayList(1);
+	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 
 	private Function onload;
 
@@ -68,7 +69,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	 * @param listener
 	 */
 	public void addImageListener(ImageListener listener) {
-		final ArrayList l = this.listeners;
+		final ArrayList<ImageListener> l = this.listeners;
 		java.awt.Image currentImage;
 		synchronized (l) {
 			currentImage = this.image;
@@ -97,7 +98,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
-		final ArrayList l = this.listeners;
+		final ArrayList<ImageListener> l = this.listeners;
 		ImageListener[] listenerArray;
 		synchronized (l) {
 			if (!expectedImgSrc.equals(this.imageSrc)) {
@@ -205,7 +206,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	public void removeImageListener(ImageListener listener) {
-		final ArrayList l = this.listeners;
+		final ArrayList<ImageListener> l = this.listeners;
 		synchronized (l) {
 			l.remove(l);
 		}

@@ -24,6 +24,8 @@ package com.jtattoo.plaf;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.InsetsUIResource;
@@ -35,7 +37,9 @@ import javax.swing.plaf.metal.MetalTheme;
  */
 abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
-    protected static String currentThemeName = "abstractTheme";
+	private static final long serialVersionUID = 1L;
+
+	protected static String currentThemeName = "abstractTheme";
 
     private static AbstractTheme myTheme = null;
 
@@ -494,8 +498,8 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
         return myTheme;
     }
 
-    public static java.util.List getThemes() {
-        ArrayList themes = new ArrayList();
+    public static List<String> getThemes() {
+        ArrayList<String> themes = new ArrayList<String>();
         themes.add(getTheme().getName());
         return themes;
     }

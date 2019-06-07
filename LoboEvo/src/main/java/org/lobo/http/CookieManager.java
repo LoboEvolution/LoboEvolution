@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.lobo.common.Domains;
 import org.lobo.common.Strings;
 import org.lobo.info.CookieInfo;
 import org.lobo.menu.tools.pref.GeneralSettings;
 import org.lobo.store.SQLiteCommon;
 import org.lobo.util.DateUtil;
-import org.lobobrowser.util.Domains;
 
 public class CookieManager {
 

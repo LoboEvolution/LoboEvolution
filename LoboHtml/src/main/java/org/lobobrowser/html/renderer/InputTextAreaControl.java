@@ -34,7 +34,7 @@ import javax.swing.text.JTextComponent;
 import org.lobo.common.Strings;
 import org.lobobrowser.html.domimpl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.WrapperLayout;
 
 class InputTextAreaControl extends BaseInputControl {
 	/**

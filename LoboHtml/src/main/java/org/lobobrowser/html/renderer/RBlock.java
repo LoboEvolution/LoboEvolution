@@ -47,7 +47,7 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.Objects;
+import java.util.Objects;
 
 /**
  * Represents a HTML block in a rendered document, typically a DIV. The root

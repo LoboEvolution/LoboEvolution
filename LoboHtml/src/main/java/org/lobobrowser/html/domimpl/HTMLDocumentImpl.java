@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.common.Domains;
 import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
 import org.lobo.common.Urls;
@@ -57,9 +58,6 @@ import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.Domains;
-import org.lobobrowser.util.WeakValueHashMap;
-import org.lobobrowser.util.io.EmptyReader;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -86,7 +84,7 @@ import org.xml.sax.SAXException;
  */
 public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, DocumentView {
 	
-	public class CSSStyleSheetList extends ArrayList {
+	public class CSSStyleSheetList extends ArrayList<Object> {
 		private static final long serialVersionUID = 1L;
 
 		public int getLength() {
@@ -100,7 +98,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	
 	private static class ImageInfo {
 		public ImageEvent imageEvent;
-		private final ArrayList listeners = new ArrayList(1);
+		private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
 		public boolean loaded;
 
 		void addListener(ImageListener listener) {
@@ -249,9 +247,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private DOMImplementation domImplementation;
 
-	private final Map elementsById = new WeakValueHashMap();
+	private final Map<String, Element> elementsById = new HashMap<String, Element>();
 
-	private final Map elementsByName = new HashMap(0);
+	private final Map<String, Element> elementsByName = new HashMap<String, Element>();
 
 	private final ElementFactory factory;
 
@@ -259,7 +257,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private HTMLCollection frames;
 
-	private final Map imageInfos = new HashMap(4);
+	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>();
 
 	private HTMLCollection images;
 
@@ -267,7 +265,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private HTMLCollection links;
 
-	private Set locales;
+	private Set<?> locales;
 
 	private Function onloadHandler;
 
@@ -496,7 +494,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public String getCookie() {
 		final SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			return (String) AccessController.doPrivileged((PrivilegedAction) () -> HTMLDocumentImpl.this.ucontext
+			return (String) AccessController.doPrivileged((PrivilegedAction<Object>) () -> HTMLDocumentImpl.this.ucontext
 					.getCookie(HTMLDocumentImpl.this.documentURL));
 		} else {
 			return this.ucontext.getCookie(this.documentURL);
@@ -715,7 +713,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	/**
 	 * Gets an <i>immutable</i> set of locales previously set for this document.
 	 */
-	public Set getLocales() {
+	public Set<?> getLocales() {
 		return this.locales;
 	}
 
@@ -754,7 +752,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 	}
 
-	public Collection getStyleSheets() {
+	public Collection<CSSStyleSheet> getStyleSheets() {
 		return this.styleSheets;
 	}
 
@@ -837,9 +835,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		if (reader != null) {
 			try {
 				final ErrorHandler errorHandler = new LocalErrorHandler();
-				final String systemId = this.documentURI;
-				final String publicId = systemId;
-				final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler, publicId, systemId);
+				final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler);
 				parser.parse(reader);
 			} finally {
 				if (closeReader) {
@@ -878,7 +874,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			return;
 		}
 		final String urlText = url.toExternalForm();
-		final Map map = this.imageInfos;
+		final Map<String, ImageInfo> map = this.imageInfos;
 		ImageEvent event = null;
 		synchronized (map) {
 			final ImageInfo info = (ImageInfo) map.get(urlText);
@@ -929,7 +925,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 						logger.log(Level.WARNING, "loadImage()", thrown);
 					}
 				} else {
-					AccessController.doPrivileged((PrivilegedAction) () -> {
+					AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 						// Code might have restrictions on accessing
 						// items from elsewhere.
 						try {
@@ -1004,7 +1000,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 				}
 			}
 			removeAllChildrenImpl();
-			this.reader = new LocalWritableLineReader(new EmptyReader());
+			this.reader = new LocalWritableLineReader(new LineNumberReader(this.reader));
 		}
 	}
 
@@ -1012,9 +1008,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		// Assumed to execute in a lock
 		// Assumed that text is not broken up HTML.
 		final ErrorHandler errorHandler = new LocalErrorHandler();
-		final String systemId = this.documentURI;
-		final String publicId = systemId;
-		final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler, publicId, systemId);
+		final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler);
 		final StringReader strReader = new StringReader(text);
 		try {
 			// This sets up another Javascript scope Window. Does it matter?
@@ -1075,7 +1069,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public void setCookie(final String cookie) throws DOMException {
 		final SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			AccessController.doPrivileged((PrivilegedAction) () -> {
+			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 				HTMLDocumentImpl.this.ucontext.setCookie(HTMLDocumentImpl.this.documentURL, cookie);
 				return null;
 			});
@@ -1124,7 +1118,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	 * @param locales An <i>immutable</i> set of <code>java.util.Locale</code>
 	 *                instances.
 	 */
-	public void setLocales(Set locales) {
+	public void setLocales(Set<?> locales) {
 		this.locales = locales;
 	}
 

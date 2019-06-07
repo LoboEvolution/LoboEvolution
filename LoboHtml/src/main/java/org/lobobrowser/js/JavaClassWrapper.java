@@ -34,7 +34,6 @@ public class JavaClassWrapper {
 	private final Map<String, PropertyInfo> properties = new HashMap<String, PropertyInfo>();
 
 	public JavaClassWrapper(Class class1) {
-		super();
 		this.javaClass = class1;
 		scanMethods();
 	}

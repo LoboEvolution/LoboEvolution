@@ -35,7 +35,7 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.ImageEvent;
 import org.lobobrowser.html.domimpl.ImageListener;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.WrapperLayout;
 
 class InputImageControl extends BaseInputControl implements ImageListener {
 	/**

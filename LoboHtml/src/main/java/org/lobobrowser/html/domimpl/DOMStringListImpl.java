@@ -24,16 +24,16 @@
 package org.lobobrowser.html.domimpl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.w3c.dom.DOMStringList;
 
 public class DOMStringListImpl implements DOMStringList {
-	private final List sourceList;
+	private final List<String> sourceList;
 
-	public DOMStringListImpl(Collection sourceList) {
-		final List list = new ArrayList();
+	public DOMStringListImpl(Set<String> sourceList) {
+		final List<String> list = new ArrayList<String>();
 		list.addAll(sourceList);
 		this.sourceList = list;
 	}

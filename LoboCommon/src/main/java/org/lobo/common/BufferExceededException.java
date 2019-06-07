@@ -1,6 +1,6 @@
 /*
     GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 Lobo Evolution
+    Copyright (C) 2006 The XAMJ Project
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -18,32 +18,27 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Apr 15, 2005
- */
-package org.lobobrowser.util;
+package org.lobo.common;
 
-import java.util.EventObject;
-
-/**
- * @author J. H. S.
- */
-public class InputProgressEvent extends EventObject {
+public class BufferExceededException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final int progress;
 
-	/**
-	 * @param arg0
-	 */
-	public InputProgressEvent(Object arg0, int progress) {
-		super(arg0);
-		this.progress = progress;
+	public BufferExceededException() {
+		super();
 	}
 
-	public int getProgress() {
-		return this.progress;
+	public BufferExceededException(String message) {
+		super(message);
+	}
+
+	public BufferExceededException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public BufferExceededException(Throwable cause) {
+		super(cause);
 	}
 }

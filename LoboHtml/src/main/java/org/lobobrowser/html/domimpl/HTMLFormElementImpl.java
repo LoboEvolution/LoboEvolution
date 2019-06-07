@@ -220,7 +220,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		}
 		final HtmlRendererContext context = getHtmlRendererContext();
 		if (context != null) {
-			final ArrayList formInputs = new ArrayList();
+			final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();
 			if (extraFormInputs != null) {
 				for (final FormInput extraFormInput : extraFormInputs) {
 					formInputs.add(extraFormInput);

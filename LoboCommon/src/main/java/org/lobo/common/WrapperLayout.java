@@ -21,7 +21,7 @@
 /*
  * Created on Mar 19, 2005
  */
-package org.lobobrowser.util.gui;
+package org.lobo.common;
 
 import java.awt.Component;
 import java.awt.Container;
@@ -31,13 +31,19 @@ import java.awt.LayoutManager;
 /**
  * @author J. H. S.
  */
-public class CenterLayout implements LayoutManager {
-	private static CenterLayout instance = new CenterLayout();
+public class WrapperLayout implements LayoutManager {
+	private static WrapperLayout instance = new WrapperLayout();
 
-	public static CenterLayout getInstance() {
+	public static WrapperLayout getInstance() {
 		return instance;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String,
+	 * java.awt.Component)
+	 */
 	@Override
 	public void addLayoutComponent(String arg0, Component arg1) {
 	}
@@ -48,35 +54,13 @@ public class CenterLayout implements LayoutManager {
 	 * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
 	 */
 	@Override
-	public void layoutContainer(Container container) {
-		final int count = container.getComponentCount();
+	public void layoutContainer(Container arg0) {
+		final int count = arg0.getComponentCount();
 		if (count > 0) {
-			final Component child = container.getComponent(0);
-			final java.awt.Insets insets = container.getInsets();
-			final int availWidth = container.getWidth() - insets.left - insets.right;
-			final int availHeight = container.getHeight() - insets.top - insets.bottom;
-			final Dimension preferredSize = child.getPreferredSize();
-			final double preferredWidth = preferredSize.getWidth();
-			final double preferredHeight = preferredSize.getHeight();
-			int width;
-			int height;
-			int x;
-			int y;
-			if (preferredWidth < availWidth) {
-				x = (int) Math.round(insets.left + (availWidth - preferredWidth) / 2);
-				width = (int) Math.round(preferredWidth);
-			} else {
-				x = insets.left;
-				width = availWidth;
-			}
-			if (preferredHeight < availHeight) {
-				y = (int) Math.round(insets.top + (availHeight - preferredHeight) / 2);
-				height = (int) Math.round(preferredHeight);
-			} else {
-				y = insets.top;
-				height = availHeight;
-			}
-			child.setBounds(x, y, width, height);
+			final Component child = arg0.getComponent(0);
+			final java.awt.Insets insets = arg0.getInsets();
+			child.setBounds(insets.left, insets.top, arg0.getWidth() - insets.left - insets.right,
+					arg0.getHeight() - insets.top - insets.bottom);
 		}
 	}
 
@@ -97,6 +81,11 @@ public class CenterLayout implements LayoutManager {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
+	 */
 	@Override
 	public Dimension preferredLayoutSize(Container arg0) {
 		final java.awt.Insets insets = arg0.getInsets();
@@ -109,6 +98,11 @@ public class CenterLayout implements LayoutManager {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
+	 */
 	@Override
 	public void removeLayoutComponent(Component arg0) {
 	}

@@ -21,22 +21,24 @@
 /*
  * Created on Mar 19, 2005
  */
-package org.lobobrowser.util;
+package org.lobo.common;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EventListener;
 import java.util.EventObject;
-import java.util.LinkedList;
 
 /**
  * @author J. H. S.
  */
-public class EventDispatch {
-	private Collection listeners;
+public abstract class EventDispatch2 {
+	private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
+	private Collection<EventListener> listeners;
 
-	public EventDispatch() {
+	public EventDispatch2() {
 	}
 
-	public final void addListener(GenericEventListener listener) {
+	public final void addListener(EventListener listener) {
 		synchronized (this) {
 			if (this.listeners == null) {
 				this.listeners = createListenerCollection();
@@ -45,26 +47,30 @@ public class EventDispatch {
 		}
 	}
 
-	public Collection createListenerCollection() {
-		return new LinkedList();
+	public Collection<EventListener> createListenerCollection() {
+		return new ArrayList<EventListener>();
 	}
 
-	public final void fireEvent(EventObject event) {
-		GenericEventListener[] larray = null;
+	protected abstract void dispatchEvent(EventListener listener, EventObject event);
+
+	public final boolean fireEvent(EventObject event) {
+		EventListener[] larray;
 		synchronized (this) {
-			if (this.listeners != null) {
-				larray = (GenericEventListener[]) this.listeners.toArray(GenericEventListener.EMPTY_ARRAY);
+			final Collection<EventListener> listeners = this.listeners;
+			if (listeners == null || listeners.size() == 0) {
+				return false;
 			}
+			larray = (EventListener[]) this.listeners.toArray(EMPTY_ARRAY);
 		}
-		if (larray != null) {
-			for (final GenericEventListener element : larray) {
-				// Call holding no locks
-				element.processEvent(event);
-			}
+		final int length = larray.length;
+		for (int i = 0; i < length; i++) {
+			// Call holding no locks
+			dispatchEvent(larray[i], event);
 		}
+		return true;
 	}
 
-	public final void removeListener(GenericEventListener listener) {
+	public final void removeListener(EventListener listener) {
 		synchronized (this) {
 			if (this.listeners != null) {
 				this.listeners.remove(listener);

@@ -29,7 +29,7 @@ import java.util.Map;
 
 import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
-import org.lobobrowser.util.Objects;
+import java.util.Objects;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
@@ -45,7 +45,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		return node.getNodeName().equalsIgnoreCase(name);
 	}
 
-	protected Map attributes;
+	protected Map<String, String> attributes;
 
 	private String id;
 
@@ -85,13 +85,13 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public boolean equalAttributes(Node arg) {
 		if (arg instanceof ElementImpl) {
 			synchronized (this) {
-				Map attrs1 = this.attributes;
+				Map<String, String> attrs1 = this.attributes;
 				if (attrs1 == null) {
-					attrs1 = Collections.EMPTY_MAP;
+					attrs1 = Collections.emptyMap();
 				}
-				Map attrs2 = ((ElementImpl) arg).attributes;
+				Map<String, String> attrs2 = ((ElementImpl) arg).attributes;
 				if (attrs2 == null) {
-					attrs2 = Collections.EMPTY_MAP;
+					attrs2 = Collections.emptyMap();
 				}
 				return Objects.equals(attrs1, attrs2);
 			}
@@ -111,7 +111,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public final String getAttribute(String name) {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
-			final Map attributes = this.attributes;
+			final Map<String, String> attributes = this.attributes;
 			return attributes == null ? null : (String) attributes.get(normalName);
 		}
 	}
@@ -120,7 +120,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public Attr getAttributeNode(String name) {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
-			final Map attributes = this.attributes;
+			final Map<String, String> attributes = this.attributes;
 			final String value = attributes == null ? null : (String) attributes.get(normalName);
 			return value == null ? null : getAttr(normalName, value);
 		}
@@ -134,9 +134,9 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	@Override
 	public NamedNodeMap getAttributes() {
 		synchronized (this) {
-			Map attrs = this.attributes;
+			Map<String, String> attrs = this.attributes;
 			if (attrs == null) {
-				attrs = new HashMap();
+				attrs = new HashMap<String, String>();
 				this.attributes = attrs;
 			}
 			return new NamedNodeMapImpl(this, this.attributes);
@@ -251,7 +251,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public boolean hasAttribute(String name) {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
-			final Map attributes = this.attributes;
+			final Map<String, String> attributes = this.attributes;
 			return attributes == null ? false : attributes.containsKey(normalName);
 		}
 	}
@@ -259,7 +259,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	@Override
 	public boolean hasAttributes() {
 		synchronized (this) {
-			final Map attrs = this.attributes;
+			final Map<String, String> attrs = this.attributes;
 			return attrs == null ? false : !attrs.isEmpty();
 		}
 	}
@@ -281,7 +281,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public void removeAttribute(String name) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
-			final Map attributes = this.attributes;
+			final Map<String, String> attributes = this.attributes;
 			if (attributes == null) {
 				return;
 			}
@@ -293,7 +293,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public Attr removeAttributeNode(Attr oldAttr) throws DOMException {
 		final String normalName = normalizeAttributeName(oldAttr.getName());
 		synchronized (this) {
-			final Map attributes = this.attributes;
+			final Map<String, String> attributes = this.attributes;
 			if (attributes == null) {
 				return null;
 			}
@@ -307,9 +307,9 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public void setAttribute(String name, String value) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
-			Map attribs = this.attributes;
+			Map<String, String> attribs = this.attributes;
 			if (attribs == null) {
-				attribs = new HashMap(2);
+				attribs = new HashMap<String, String>(2);
 				this.attributes = attribs;
 			}
 			attribs.put(normalName, value);
@@ -323,9 +323,9 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 */
 	public void setAttributeImpl(String name, String value) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
-		Map attribs = this.attributes;
+		Map<String, String> attribs = this.attributes;
 		if (attribs == null) {
-			attribs = new HashMap(2);
+			attribs = new HashMap<String, String>(2);
 			this.attributes = attribs;
 		}
 		assignAttributeField(normalName, value);
@@ -338,7 +338,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		final String value = newAttr.getValue();
 		synchronized (this) {
 			if (this.attributes == null) {
-				this.attributes = new HashMap();
+				this.attributes = new HashMap<String, String>();
 			}
 			this.attributes.put(normalName, value);
 			// this.setIdAttribute(normalName, newAttr.isId());

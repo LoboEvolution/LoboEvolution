@@ -40,6 +40,8 @@ import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 
+import org.lobo.common.BufferExceededException;
+import org.lobo.common.RecordedInputStream;
 import org.lobo.common.Urls;
 import org.lobo.net.HttpNetwork;
 import org.lobobrowser.html.BrowserFrame;
@@ -52,8 +54,6 @@ import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
-import org.lobobrowser.util.io.BufferExceededException;
-import org.lobobrowser.util.io.RecordedInputStream;
 import org.xml.sax.InputSource;
 
 /**

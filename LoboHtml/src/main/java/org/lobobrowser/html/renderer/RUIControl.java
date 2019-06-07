@@ -37,7 +37,7 @@ import org.lobobrowser.html.domimpl.NodeImpl;
 import org.lobobrowser.html.domimpl.UINode;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.Objects;
+import java.util.Objects;
 
 /**
  * @author J. H. S.
@@ -87,7 +87,7 @@ class RUIControl extends BaseElementRenderable {
 	}
 
 	private static final int MAX_CACHE_SIZE = 10;
-	private final Map cachedLayout = new HashMap(5);
+	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<LayoutKey, LayoutValue>();
 
 	private int declaredHeight = -1;
 
@@ -221,7 +221,7 @@ class RUIControl extends BaseElementRenderable {
 	}
 
 	@Override
-	public Iterator getRenderables() {
+	public Iterator<?> getRenderables() {
 		// No children for GUI controls
 		return null;
 	}

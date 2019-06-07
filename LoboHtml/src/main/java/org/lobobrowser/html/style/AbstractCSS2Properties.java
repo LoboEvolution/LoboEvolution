@@ -458,7 +458,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public static final String SPEAK_PUNCTUATION = "speak-puctuation";
 	public static final String SPEECH_RATE = "speech-rate";
 	public static final String STRESS = "stress";
-	private static final Map SUB_SETTERS = new HashMap(20);
 	public static final String TABLE_LAYOUT = "table-layout";
 	public static final String TEXT_ALIGN = "text-align";
 	public static final String TEXT_DECORATION = "text-decoration";
@@ -482,9 +481,11 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public static final String WORD_SPACING = "word_spacing";
 
 	public static final String Z_INDEX = "z-index";
+	
+	private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<String, SubPropertySetter>();
 
 	static {
-		final Map subSetters = SUB_SETTERS;
+		final Map<String, SubPropertySetter> subSetters = SUB_SETTERS;
 		subSetters.put(MARGIN, new FourCornersSetter(MARGIN, "margin-", ""));
 		subSetters.put(PADDING, new FourCornersSetter(PADDING, "padding-", ""));
 		subSetters.put(BORDER, new BorderSetter1());
@@ -500,11 +501,6 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		subSetters.put(FONT, new FontSetter());
 	}
 
-//	private final String getPropertyValue(String name) {
-//		String lowerCase = name.toLowerCase();
-//		return this.getPropertyValueLC(lowerCase);
-//	}
-
 	private final CSS2PropertiesContext context;
 
 	private AbstractCSS2Properties localStyleProperties;
@@ -513,37 +509,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 
 	private Collection styleDeclarations;
 
-	private Map valueMap = null;
-
-//	/**
-//	 * Gets the style declaration where a property value might have come from.
-//	 * This method can be used to obtain the URL of the style document, in
-//	 * order to resolve relative URLs.
-//	 * @param lowerCaseName The name of the property in lowercase.
-//	 */
-//	public final CSSStyleDeclaration getStyleDeclaration(String lowerCaseName) {
-//		// Converts blanks to nulls.
-//		synchronized(this) {
-//			Collection sds = this.styleDeclarations;
-//			if(sds == null) {
-//				return null;
-//			}
-//			Iterator i = sds.iterator();
-//			while(i.hasNext()) {
-//				Object styleObject = i.next();
-//				if(styleObject instanceof CSSStyleDeclaration) {
-//					CSSStyleDeclaration styleDeclaration = (CSSStyleDeclaration) styleObject;
-//					String pv = styleDeclaration.getPropertyValue(lowerCaseName);
-//					if(pv != null && pv.length() != 0) {
-//						return styleDeclaration;
-//					}
-//				}
-//			}
-//		}
-//		return null;
-//	}
-
-	// ---------- NonStandard properties
+	private Map<String, Property> valueMap = null;
 
 	public AbstractCSS2Properties(CSS2PropertiesContext context) {
 		this.context = context;
@@ -551,7 +517,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 
 	public void addStyleDeclaration(CSSStyleDeclaration styleDeclaration) {
 		synchronized (this) {
-			Collection sd = this.styleDeclarations;
+			Collection<CSSStyleDeclaration> sd = this.styleDeclarations;
 			if (sd == null) {
 				sd = new LinkedList();
 				this.styleDeclarations = sd;
@@ -1123,7 +1089,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	}
 
 	private final String getPropertyValueLC(String lowerCaseName) {
-		final Map vm = this.valueMap;
+		final Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
 			// Local properties have precedence
 			final AbstractCSS2Properties localProps = this.localStyleProperties;
@@ -1893,10 +1859,10 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	 * @param value         The property value.
 	 */
 	protected void setPropertyValueLC(String lowerCaseName, String value) {
-		Map vm = this.valueMap;
+		Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
 			if (vm == null) {
-				vm = new HashMap(1);
+				vm = new HashMap<String, Property>(1);
 				this.valueMap = vm;
 			}
 			vm.put(lowerCaseName, new Property(value, true));
@@ -1912,10 +1878,10 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	 * @param value         The property value.
 	 */
 	protected final void setPropertyValueLCAlt(String lowerCaseName, String value, boolean important) {
-		Map vm = this.valueMap;
+		Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
 			if (vm == null) {
-				vm = new HashMap(1);
+				vm = new HashMap<String, Property>(1);
 				this.valueMap = vm;
 			} else {
 				if (!important) {
@@ -2095,7 +2061,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public String toString() {
 		int size;
 		synchronized (this) {
-			final Map map = this.valueMap;
+			final Map<String, Property> map = this.valueMap;
 			size = map == null ? 0 : map.size();
 		}
 		return this.getClass().getSimpleName() + "[size=" + size + "]";

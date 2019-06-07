@@ -42,7 +42,7 @@ import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
-import org.lobobrowser.util.Objects;
+import java.util.Objects;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;

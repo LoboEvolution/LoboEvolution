@@ -55,15 +55,10 @@ import org.xml.sax.SAXException;
  * may be used directly when a different DOM implementation is preferred.
  */
 public class HtmlParser {
-	private static final Map ELEMENT_INFOS = new HashMap(35);
-	private static final Map ENTITIES = new HashMap(256);
+	private static final Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>();
+	private static final Map<String, Character> ENTITIES = new HashMap<String, Character>();
 	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
-	/**
-	 * A node <code>UserData</code> key used to tell nodes that their content may be
-	 * about to be modified. Elements could use this to temporarily suspend
-	 * notifications. The value set will be either <code>Boolean.TRUE</code> or
-	 * <code>Boolean.FALSE</code>.
-	 */
+
 	public static final String MODIFYING_KEY = "cobra.suspend";
 	private static final int TOKEN_BAD = 6;
 
@@ -79,7 +74,7 @@ public class HtmlParser {
 	private static final int TOKEN_TEXT = 2;
 
 	static {
-		final Map entities = ENTITIES;
+		final Map<String, Character> entities = ENTITIES;
 		entities.put("amp", new Character('&'));
 		entities.put("lt", new Character('<'));
 		entities.put("gt", new Character('>'));
@@ -358,7 +353,7 @@ public class HtmlParser {
 		entities.put("circ", new Character((char) 710));
 		entities.put("tilde", new Character((char) 732));
 
-		final Map elementInfos = ELEMENT_INFOS;
+		final Map<String, ElementInfo> elementInfos = ELEMENT_INFOS;
 
 		elementInfos.put("NOSCRIPT", new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true));
 
@@ -367,26 +362,26 @@ public class HtmlParser {
 		final ElementInfo onlyTextDE = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, true);
 		final ElementInfo onlyText = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, false);
 
-		final Set tableCellStopElements = new HashSet();
+		final Set<String> tableCellStopElements = new HashSet<String>();
 		tableCellStopElements.add("TH");
 		tableCellStopElements.add("TD");
 		tableCellStopElements.add("TR");
 		final ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL,
 				tableCellStopElements);
 
-		final Set headStopElements = new HashSet();
+		final Set<String> headStopElements = new HashSet<String>();
 		headStopElements.add("BODY");
 		headStopElements.add("DIV");
 		headStopElements.add("SPAN");
 		headStopElements.add("TABLE");
 		final ElementInfo headElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
 
-		final Set optionStopElements = new HashSet();
+		final Set<String> optionStopElements = new HashSet<String>();
 		optionStopElements.add("OPTION");
 		optionStopElements.add("SELECT");
 		final ElementInfo optionElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
 
-		final Set paragraphStopElements = new HashSet();
+		final Set<String> paragraphStopElements = new HashSet<String>();
 		paragraphStopElements.add("P");
 		paragraphStopElements.add("DIV");
 		paragraphStopElements.add("TABLE");
@@ -451,9 +446,6 @@ public class HtmlParser {
 
 	private String normalLastTag = null;
 
-	private final String publicId;
-
-	private final String systemId;
 	private final UserAgentContext ucontext;
 
 	/**
@@ -466,11 +458,9 @@ public class HtmlParser {
 	 * @deprecated UserAgentContext should be passed in constructor.
 	 */
 	@Deprecated
-	public HtmlParser(Document document, ErrorHandler errorHandler, String publicId, String systemId) {
+	public HtmlParser(Document document, ErrorHandler errorHandler) {
 		this.ucontext = null;
 		this.document = document;
-		this.publicId = publicId;
-		this.systemId = systemId;
 	}
 
 	/**
@@ -482,8 +472,6 @@ public class HtmlParser {
 	public HtmlParser(UserAgentContext ucontext, Document document) {
 		this.ucontext = ucontext;
 		this.document = document;
-		this.publicId = null;
-		this.systemId = null;
 	}
 
 	/**
@@ -495,12 +483,9 @@ public class HtmlParser {
 	 * @param publicId     The public ID of the document.
 	 * @param systemId     The system ID of the document.
 	 */
-	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler, String publicId,
-			String systemId) {
+	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler) {
 		this.ucontext = ucontext;
 		this.document = document;
-		this.publicId = publicId;
-		this.systemId = systemId;
 	}
 
 	private final StringBuffer entityDecode(StringBuffer rawText) throws org.xml.sax.SAXException {
@@ -614,7 +599,7 @@ public class HtmlParser {
 		try {
 			parent.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 			try {
-				while (parseToken(parent, reader, null, new LinkedList()) != TOKEN_EOD) {
+				while (parseToken(parent, reader, null, new LinkedList<String>()) != TOKEN_EOD) {
 					;
 				}
 			} catch (final StopException se) {
@@ -739,7 +724,7 @@ public class HtmlParser {
 	 * @throws StopException
 	 * @throws SAXException
 	 */
-	private final int parseToken(Node parent, LineNumberReader reader, Set stopTags, LinkedList ancestors)
+	private final int parseToken(Node parent, LineNumberReader reader, Set<String> stopTags, LinkedList<String> ancestors)
 			throws IOException, StopException, SAXException {
 		final Document doc = this.document;
 		final StringBuffer textSb = readUpToTagBegin(reader);
@@ -810,7 +795,7 @@ public class HtmlParser {
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
-								Set newStopSet = einfo == null ? null : einfo.stopTags;
+								Set<String> newStopSet = einfo == null ? null : einfo.stopTags;
 								if (newStopSet == null) {
 									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
 										newStopSet = Collections.singleton(normalTag);
@@ -818,7 +803,7 @@ public class HtmlParser {
 								}
 								if (stopTags != null) {
 									if (newStopSet != null) {
-										final Set newStopSet2 = new HashSet();
+										final Set<String> newStopSet2 = new HashSet<String>();
 										newStopSet2.addAll(stopTags);
 										newStopSet2.addAll(newStopSet);
 										newStopSet = newStopSet2;
@@ -855,7 +840,7 @@ public class HtmlParser {
 															|| closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 														// TODO: Rather inefficient algorithm, but it's probably
 														// executed infrequently?
-														final Iterator i = ancestors.iterator();
+														final Iterator<String> i = ancestors.iterator();
 														if (i.hasNext()) {
 															i.next();
 															while (i.hasNext()) {
@@ -894,7 +879,7 @@ public class HtmlParser {
 												}
 											}
 											if (stopTags != null && newStopSet != null) {
-												final Set newStopSet2 = new HashSet();
+												final Set<String> newStopSet2 = new HashSet<String>();
 												newStopSet2.addAll(stopTags);
 												newStopSet2.addAll(newStopSet);
 												newStopSet = newStopSet2;

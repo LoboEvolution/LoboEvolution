@@ -24,7 +24,6 @@ package org.lobobrowser.html.domimpl;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -56,11 +55,11 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2PropertiesContext {
-	private Map computedStyles;
+	private Map<String, AbstractCSS2Properties> computedStyles;
 
 	private volatile AbstractCSS2Properties currentStyleDeclarationState;
 
-	private Map hasHoverStyleByElement = null;
+	private Map<HTMLElementImpl, Boolean> hasHoverStyleByElement = null;
 	private Boolean isHoverStyle = null;
 
 	private boolean isMouseOver = false;
@@ -81,7 +80,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	 * 
 	 * @param style
 	 */
-	protected final AbstractCSS2Properties addStyleSheetDeclarations(AbstractCSS2Properties style, Set pseudoNames) {
+	protected final AbstractCSS2Properties addStyleSheetDeclarations(AbstractCSS2Properties style, Set<String> pseudoNames) {
 		final Node pn = this.parentNode;
 		if (pn == null) {
 			// do later
@@ -94,9 +93,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			final String[] classNameArray = Strings.split(classNames);
 			for (int i = classNameArray.length; --i >= 0;) {
 				final String className = classNameArray[i];
-				final Collection sds = findStyleDeclarations(elementName, id, className, pseudoNames);
+				final Collection<?> sds = findStyleDeclarations(elementName, id, className, pseudoNames);
 				if (sds != null) {
-					final Iterator sdsi = sds.iterator();
+					final Iterator<?> sdsi = sds.iterator();
 					while (sdsi.hasNext()) {
 						final CSSStyleDeclaration sd = (CSSStyleDeclaration) sdsi.next();
 						if (style == null) {
@@ -109,9 +108,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		} else {
 			final String id = getId();
 			final String elementName = getTagName();
-			final Collection sds = findStyleDeclarations(elementName, id, null, pseudoNames);
+			final Collection<?> sds = findStyleDeclarations(elementName, id, null, pseudoNames);
 			if (sds != null) {
-				final Iterator sdsi = sds.iterator();
+				final Iterator<?> sdsi = sds.iterator();
 				while (sdsi.hasNext()) {
 					final CSSStyleDeclaration sd = (CSSStyleDeclaration) sdsi.next();
 					if (style == null) {
@@ -190,7 +189,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
-	protected final Collection findStyleDeclarations(String elementName, String id, String className, Set pseudoNames) {
+	protected final Collection<?> findStyleDeclarations(String elementName, String id, String className, Set<String> pseudoNames) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
 			return null;
@@ -242,7 +241,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		}
 	}
 
-	protected Object getAncestorForJavaClass(Class javaClass) {
+	protected Object getAncestorForJavaClass(Class<?> javaClass) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj == null || javaClass.isInstance(nodeObj)) {
 			return nodeObj;
@@ -320,7 +319,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			pseudoElement = "";
 		}
 		synchronized (this) {
-			final Map cs = this.computedStyles;
+			final Map<String, AbstractCSS2Properties> cs = this.computedStyles;
 			if (cs != null) {
 				final AbstractCSS2Properties sds = (AbstractCSS2Properties) cs.get(pseudoElement);
 				if (sds != null) {
@@ -331,7 +330,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		// Can't do the following in synchronized block (reverse locking order with
 		// document).
 		// First, add declarations from stylesheet
-		final Set pes = pseudoElement.length() == 0 ? null : Collections.singleton(pseudoElement);
+		final Set<String> pes = pseudoElement.length() == 0 ? null : Collections.singleton(pseudoElement);
 		AbstractCSS2Properties sds = createDefaultStyleSheet();
 		sds = addStyleSheetDeclarations(sds, pes);
 		// Now add local style if any.
@@ -346,9 +345,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			// Check if style properties were set while outside
 			// the synchronized block (can happen). We need to
 			// return instance already set for consistency.
-			Map cs = this.computedStyles;
+			Map<String, AbstractCSS2Properties> cs = this.computedStyles;
 			if (cs == null) {
-				cs = new HashMap(2);
+				cs = new HashMap<String, AbstractCSS2Properties>(2);
 				this.computedStyles = cs;
 			} else {
 				final AbstractCSS2Properties sds2 = (AbstractCSS2Properties) cs.get(pseudoElement);
@@ -568,11 +567,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	 * Gets the pseudo-element lowercase names currently applicable to this element.
 	 * Method must return <code>null</code> if there are no such pseudo-elements.
 	 */
-	public Set getPseudoNames() {
-		Set pnset = null;
+	public Set<String> getPseudoNames() {
+		Set<String> pnset = null;
 		if (this.isMouseOver) {
 			if (pnset == null) {
-				pnset = new HashSet(1);
+				pnset = new HashSet<String>(1);
 			}
 			pnset.add("hover");
 		}
@@ -643,7 +642,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	private boolean hasHoverStyle(HTMLElementImpl ancestor) {
-		Map ihs;
+		Map<HTMLElementImpl, Boolean> ihs;
 		synchronized (this) {
 			ihs = this.hasHoverStyleByElement;
 			if (ihs != null) {
@@ -672,7 +671,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		synchronized (this) {
 			ihs = this.hasHoverStyleByElement;
 			if (ihs == null) {
-				ihs = new HashMap(2);
+				ihs = new HashMap<HTMLElementImpl, Boolean>(2);
 				this.hasHoverStyleByElement = ihs;
 			}
 			ihs.put(ancestor, hhs);
@@ -740,7 +739,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
 			return;
 		}
-		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, null, null);
+		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null);
 		this.nodeList.clear();
 		// Should not synchronize around parser probably.
 		try {

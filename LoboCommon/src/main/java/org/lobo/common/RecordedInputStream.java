@@ -21,7 +21,7 @@
 /*
  * Created on Apr 15, 2005
  */
-package org.lobobrowser.util.io;
+package org.lobo.common;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

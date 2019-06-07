@@ -44,8 +44,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.lobo.common.Urls;
 import org.lobo.net.HttpNetwork;
 import org.lobobrowser.html.ReadyStateChangeListener;
-import org.lobobrowser.util.EventDispatch;
-import org.lobobrowser.util.io.IORoutines;
+import org.lobo.common.EventDispatch;
+import org.lobo.common.IORoutines;
 import org.w3c.dom.Document;
 
 public class HttpRequest {

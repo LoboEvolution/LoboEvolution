@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import org.lobobrowser.util.Objects;
+import java.util.Objects;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Function;
@@ -108,7 +108,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 					return m;
 				}
 			} else if (parameterTypes != null && args.length >= parameterTypes.length) {
-				if (Objects.areAssignableTo(args, parameterTypes)) {
+				if (areAssignableTo(args, parameterTypes)) {
 					return m;
 				}
 				if (matchingMethod == null || parameterTypes.length > matchingNumParams) {
@@ -136,4 +136,38 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 			return super.getDefaultValue(hint);
 		}
 	}
+	
+	private boolean areAssignableTo(Object[] objects, Class[] types) {
+        final int length = objects.length;
+        if (length != types.length) {
+            return false;
+        }
+        for (int i = 0; i < length; i++) {
+            if (!isAssignableOrBox(objects[i], types[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+	
+	private boolean isAssignableOrBox(Object value, Class clazz) {
+        if (clazz.isInstance(value)) {
+            return true;
+        }
+        if (clazz.isPrimitive()) {
+            if (clazz == double.class && value instanceof Double || clazz == int.class && value instanceof Integer
+                    || clazz == long.class && value instanceof Long
+                    || clazz == boolean.class && value instanceof Boolean
+                    || clazz == byte.class && value instanceof Byte || clazz == char.class && value instanceof Character
+                    || clazz == short.class && value instanceof Short
+                    || clazz == float.class && value instanceof Float) {
+                return true;
+            }
+        }
+
+        if (clazz.isAssignableFrom(String.class)) {
+            return value == null || !value.getClass().isPrimitive();
+        }
+        return false;
+    }
 }

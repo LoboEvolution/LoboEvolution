@@ -18,7 +18,7 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-package org.lobobrowser.util.gui;
+package org.lobo.common;
 
 import java.awt.Frame;
 import java.awt.Graphics;

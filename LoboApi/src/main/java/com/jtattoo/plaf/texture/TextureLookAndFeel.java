@@ -33,8 +33,8 @@ import javax.swing.plaf.InsetsUIResource;
 public class TextureLookAndFeel extends AbstractLookAndFeel {
 
     private static TextureDefaultTheme myTheme = null;
-    private static final ArrayList themesList = new ArrayList();
-    private static final HashMap themesMap = new HashMap();
+    private static final List<String> themesList = new ArrayList<String>();
+    private static final Map<String, Properties> themesMap = new HashMap<String, Properties>();
     private static final Properties defaultProps = new Properties();
     private static final Properties smallFontProps = new Properties();
     private static final Properties mediumFontProps = new Properties();
@@ -235,7 +235,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 
         String key;
         String value;
-        Iterator iter = smallFontProps.keySet().iterator();
+        Iterator<Object> iter = smallFontProps.keySet().iterator();
         while (iter.hasNext()) {
             key = (String) iter.next();
             value = smallFontProps.getProperty(key);

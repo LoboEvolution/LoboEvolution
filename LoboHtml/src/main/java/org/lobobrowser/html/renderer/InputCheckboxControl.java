@@ -26,7 +26,7 @@ package org.lobobrowser.html.renderer;
 import javax.swing.JCheckBox;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.WrapperLayout;
 
 class InputCheckboxControl extends BaseInputControl {
 	/**

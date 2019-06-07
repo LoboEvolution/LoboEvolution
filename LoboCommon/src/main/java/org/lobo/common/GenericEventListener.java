@@ -1,6 +1,6 @@
 /*
     GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The XAMJ Project
+    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 Lobo Evolution
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -18,27 +18,19 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-package org.lobobrowser.util.io;
+/*
+ * Created on Mar 19, 2005
+ */
+package org.lobo.common;
 
-public class BufferExceededException extends Exception {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import java.util.EventListener;
+import java.util.EventObject;
 
-	public BufferExceededException() {
-		super();
-	}
+/**
+ * @author J. H. S.
+ */
+public interface GenericEventListener extends EventListener {
+	GenericEventListener[] EMPTY_ARRAY = new GenericEventListener[0];
 
-	public BufferExceededException(String message) {
-		super(message);
-	}
-
-	public BufferExceededException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public BufferExceededException(Throwable cause) {
-		super(cause);
-	}
+	void processEvent(EventObject event);
 }

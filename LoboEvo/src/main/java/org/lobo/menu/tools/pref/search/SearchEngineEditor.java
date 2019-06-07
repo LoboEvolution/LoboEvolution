@@ -5,7 +5,7 @@ import org.lobo.gui.AbstractItemEditor;
 import org.lobo.gui.FieldType;
 import org.lobo.gui.FormField;
 import org.lobo.gui.FormPanel;
-import org.lobobrowser.util.gui.WrapperLayout;
+import org.lobo.common.WrapperLayout;
 
 public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 

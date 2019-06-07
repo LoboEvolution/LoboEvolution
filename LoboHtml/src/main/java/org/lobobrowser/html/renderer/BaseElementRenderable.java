@@ -28,11 +28,14 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
+import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Level;
 
 import org.lobo.common.Strings;
@@ -47,7 +50,7 @@ import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.gui.GUITasks;
+import org.lobo.common.GUITasks;
 import org.w3c.dom.css.CSS2Properties;
 
 abstract class BaseElementRenderable extends BaseRCollection
@@ -69,12 +72,12 @@ abstract class BaseElementRenderable extends BaseRCollection
 	private Integer declaredWidth = INVALID_SIZE;
 	protected Insets defaultMarginInsets = null;
 	protected Insets defaultPaddingInsets = null;
-	protected Collection delayedPairs = null;
+	protected List<DelayedPair> delayedPairs = null;
 
-	private Collection guiComponents = null;
+	private Collection<Component> guiComponents = null;
 	private int lastAvailHeightForDeclared = -1;
 	private int lastAvailWidthForDeclared = -1;
-	protected java.net.URL lastBackgroundImageUri;
+	protected URL lastBackgroundImageUri;
 
 	protected boolean layoutDeepCanBeInvalidated = false;
 
@@ -107,9 +110,9 @@ abstract class BaseElementRenderable extends BaseRCollection
 		// Does not remove from parent.
 		// Sending components to parent is done
 		// by sendGUIComponentsToParent().
-		Collection gc = this.guiComponents;
+		Collection<Component> gc = this.guiComponents;
 		if (gc == null) {
-			gc = new HashSet(1);
+			gc = new HashSet<Component>(1);
 			this.guiComponents = gc;
 		}
 		gc.add(component);
@@ -127,17 +130,9 @@ abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	@Override
 	public void addDelayedPair(DelayedPair pair) {
-		// Expected to be called in GUI thread.
-		// Adds only in local collection.
-		// Does not remove from parent.
-		// Sending components to parent is done
-		// by sendDelayedPairsToParent().
-		Collection gc = this.delayedPairs;
+		List<DelayedPair> gc = this.delayedPairs;
 		if (gc == null) {
-			// Sequence is important.
-			// TODO: But possibly added multiple
-			// times in table layout?
-			gc = new java.util.LinkedList();
+			gc = new LinkedList<DelayedPair>();
 			this.delayedPairs = gc;
 		}
 		gc.add(pair);
@@ -240,13 +235,10 @@ abstract class BaseElementRenderable extends BaseRCollection
 			this.borderInsets = borderInsets;
 			if (isRootBlock) {
 				// In the root block, the margin behaves like an extra padding.
-				Insets regularMarginInsets = autoMarginX == 0 && autoMarginY == 0 ? tentativeMarginInsets
-						: minsets == null ? defaultMarginInsets
-								: minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight,
-										autoMarginX, autoMarginY);
-				if (paddingInsets == null) {
-					paddingInsets = RBlockViewport.ZERO_INSETS;
-				}
+				Insets regularMarginInsets = autoMarginX == 0 && autoMarginY == 0 ? tentativeMarginInsets 
+						: minsets == null ? defaultMarginInsets 
+								: minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY);
+
 				if (regularMarginInsets == null) {
 					regularMarginInsets = RBlockViewport.ZERO_INSETS;
 				}
@@ -294,14 +286,14 @@ abstract class BaseElementRenderable extends BaseRCollection
 
 	@Override
 	public final void clearDelayedPairs() {
-		final Collection gc = this.delayedPairs;
+		final Collection<DelayedPair> gc = this.delayedPairs;
 		if (gc != null) {
 			gc.clear();
 		}
 	}
 
 	protected final void clearGUIComponents() {
-		final Collection gc = this.guiComponents;
+		final Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
 			gc.clear();
 		}
@@ -502,7 +494,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 	}
 
 	@Override
-	public final Collection getDelayedPairs() {
+	public final Collection<DelayedPair> getDelayedPairs() {
 		return this.delayedPairs;
 	}
 	
@@ -640,7 +632,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		if (this.layoutDeepCanBeInvalidated) {
 			this.layoutDeepCanBeInvalidated = false;
 			invalidateLayoutLocal();
-			final Iterator i = getRenderables();
+			final Iterator<?> i = getRenderables();
 			if (i != null) {
 				while (i.hasNext()) {
 					final Object r = i.next();
@@ -691,8 +683,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
-	protected void loadBackgroundImage(final java.net.URL imageURL) {
-		final ModelNode rc = this.modelNode;
+	protected void loadBackgroundImage(final URL imageURL) {
 		final UserAgentContext ctx = this.userAgentContext;
 		if (ctx != null) {
 			final HttpRequest request = ctx.createHttpRequest();
@@ -722,7 +713,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 					logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
 				}
 			} else {
-				AccessController.doPrivileged((PrivilegedAction) () -> {
+				AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
 					// Code might have restrictions on accessing
 					// items from elsewhere.
 					try {
@@ -942,10 +933,10 @@ abstract class BaseElementRenderable extends BaseRCollection
 	protected final void sendDelayedPairsToParent() {
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
-		final Collection gc = this.delayedPairs;
+		final Collection<DelayedPair> gc = this.delayedPairs;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
-			final Iterator i = gc.iterator();
+			final Iterator<DelayedPair> i = gc.iterator();
 			while (i.hasNext()) {
 				final DelayedPair pair = (DelayedPair) i.next();
 				if (pair.containingBlock != this) {
@@ -958,10 +949,10 @@ abstract class BaseElementRenderable extends BaseRCollection
 	protected final void sendGUIComponentsToParent() {
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
-		final Collection gc = this.guiComponents;
+		final Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
-			final Iterator i = gc.iterator();
+			final Iterator<Component> i = gc.iterator();
 			while (i.hasNext()) {
 				rc.addComponent((Component) i.next());
 			}

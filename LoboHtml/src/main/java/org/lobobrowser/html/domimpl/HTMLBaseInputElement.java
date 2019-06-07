@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.awt.Image;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
@@ -48,7 +49,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	protected String deferredValue;
 	private java.awt.Image image = null;
 
-	private final ArrayList imageListeners = new ArrayList(1);
+	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
 
 	private String imageSrc;
 
@@ -67,8 +68,8 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 * @param listener
 	 */
 	public void addImageListener(ImageListener listener) {
-		final ArrayList l = this.imageListeners;
-		java.awt.Image currentImage;
+		final ArrayList<ImageListener> l = this.imageListeners;
+		Image currentImage;
 		synchronized (l) {
 			currentImage = this.image;
 			l.add(listener);
@@ -111,7 +112,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
-		final ArrayList l = this.imageListeners;
+		final ArrayList<ImageListener> l = this.imageListeners;
 		ImageListener[] listenerArray;
 		synchronized (l) {
 			if (!expectedImgSrc.equals(this.imageSrc)) {
@@ -238,7 +239,7 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	public void removeImageListener(ImageListener listener) {
-		final ArrayList l = this.imageListeners;
+		final ArrayList<ImageListener> l = this.imageListeners;
 		synchronized (l) {
 			l.remove(l);
 		}

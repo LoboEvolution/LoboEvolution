@@ -50,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,8 +78,7 @@ import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
-import org.lobobrowser.util.Objects;
-import org.w3c.dom.Document;
+import java.util.Objects;
 import org.w3c.dom.Node;
 
 /**
@@ -95,7 +95,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	private static final Logger logger = Logger.getLogger(HtmlBlockPanel.class.getName());
 
 	private static final long serialVersionUID = 1L;
-	private Set components;
+	private Set<Component> components;
 	protected Insets defaultMarginInsets = null;
 	protected int defaultOverflowX = RenderState.OVERFLOW_AUTO;
 	protected int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
@@ -190,9 +190,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	@Override
 	public Component addComponent(Component component) {
-		Set c = this.components;
+		Set<Component> c = this.components;
 		if (c == null) {
-			c = new HashSet();
+			c = new HashSet<Component>();
 			this.components = c;
 		}
 		if (c.add(component)) {
@@ -208,7 +208,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	private void clearComponents() {
-		final Set c = this.components;
+		final Set<Component> c = this.components;
 		if (c != null) {
 			c.clear();
 		}
@@ -236,7 +236,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			clearComponents();
 			final RBlock block = this.rblock;
 			if (block != null) {
-				final ModelNode rootNode = block.getModelNode();
 				block.layout(size.width, size.height, true, true, null, false);
 				// Only set origin
 				block.setOrigin(0, 0);
@@ -275,7 +274,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	}
 
 	@Override
-	public Collection getDelayedPairs() {
+	public Collection<?> getDelayedPairs() {
 		return null;
 	}
 
@@ -606,7 +605,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			// notifications come in batches. Other types
 			// of noitifications probably come one by one.
 			boolean topLayout = false;
-			java.util.ArrayList repainters = null;
+			List<RElement> repainters = null;
 			final int length = notifications.length;
 			for (int i = 0; i < length; i++) {
 				final DocumentNotification dn = notifications[i];
@@ -646,7 +645,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 					final UINode uiNode = node.findUINode();
 					if (uiNode != null) {
 						if (repainters == null) {
-							repainters = new ArrayList(1);
+							repainters = new ArrayList<RElement>();
 						}
 						final RElement relement = (RElement) uiNode;
 						// relement.invalidateRenderStyle();
@@ -662,7 +661,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				revalidatePanel();
 			} else {
 				if (repainters != null) {
-					final Iterator i = repainters.iterator();
+					final Iterator<RElement> i = repainters.iterator();
 					while (i.hasNext()) {
 						final RElement element = (RElement) i.next();
 						element.repaint();
@@ -702,7 +701,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * Gets an aggregate of the bounds of renderer leaf nodes.
 	 */
 	private Rectangle scanNodeBounds(RCollection root, Node node, RCollection relativeTo) {
-		final Iterator i = root.getRenderables();
+		final Iterator<?> i = root.getRenderables();
 		Rectangle resultBounds = null;
 		BoundableRenderable prevBoundable = null;
 		if (i != null) {
@@ -879,14 +878,14 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		// adding them back, because removal of components can cause
 		// them to lose focus.
 
-		final Set c = this.components;
+		final Set<Component> c = this.components;
 		if (c == null) {
 			if (getComponentCount() != 0) {
 				removeAll();
 			}
 		} else {
 			// Remove children not in the set.
-			final Set workingSet = new HashSet();
+			final Set<Component> workingSet = new HashSet<Component>();
 			workingSet.addAll(c);
 			int count = getComponentCount();
 			for (int i = 0; i < count;) {
@@ -900,7 +899,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 			// Add components in set that were not previously children.
-			final Iterator wsi = workingSet.iterator();
+			final Iterator<Component> wsi = workingSet.iterator();
 			while (wsi.hasNext()) {
 				final Component component = (Component) wsi.next();
 				this.add(component);

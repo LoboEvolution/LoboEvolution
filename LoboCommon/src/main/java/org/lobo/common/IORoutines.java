@@ -21,41 +21,41 @@
 /*
  * Created on Mar 19, 2005
  */
-package org.lobobrowser.util;
+package org.lobo.common;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.EventObject;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author J. H. S.
  */
-public class GenericPropertyChangeListener implements GenericEventListener {
-	private final PropertyChangeListener delegate;
-
-	public GenericPropertyChangeListener(PropertyChangeListener delegate) {
-		this.delegate = delegate;
-	}
-
-	@Override
-	public boolean equals(Object other) {
-		return other instanceof GenericPropertyChangeListener
-				&& ((GenericPropertyChangeListener) other).delegate.equals(this.delegate);
-	}
-
-	@Override
-	public int hashCode() {
-		return this.delegate.hashCode();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see net.sourceforge.xamj.util.GenericEventListener#processEvent(java.util.
-	 * EventObject)
-	 */
-	@Override
-	public void processEvent(EventObject event) {
-		this.delegate.propertyChange((PropertyChangeEvent) event);
+public class IORoutines {
+	public static byte[] load(InputStream in, int initialBufferSize) throws IOException {
+		if (initialBufferSize == 0) {
+			initialBufferSize = 1;
+		}
+		byte[] buffer = new byte[initialBufferSize];
+		int offset = 0;
+		while(true) {
+			int remain = buffer.length - offset;
+			if (remain <= 0) {
+				final int newSize = buffer.length * 2;
+				final byte[] newBuffer = new byte[newSize];
+				System.arraycopy(buffer, 0, newBuffer, 0, offset);
+				buffer = newBuffer;
+				remain = buffer.length - offset;
+			}
+			final int numRead = in.read(buffer, offset, remain);
+			if (numRead == -1) {
+				break;
+			}
+			offset += numRead;
+		}
+		if (offset < buffer.length) {
+			final byte[] newBuffer = new byte[offset];
+			System.arraycopy(buffer, 0, newBuffer, 0, offset);
+			buffer = newBuffer;
+		}
+		return buffer;
 	}
 }

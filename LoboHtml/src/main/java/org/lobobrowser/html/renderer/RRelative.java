@@ -24,8 +24,8 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
+import org.lobo.common.ArrayUtilities;
 import org.lobobrowser.html.domimpl.ModelNode;
-import org.lobobrowser.util.CollectionUtilities;
 
 public class RRelative extends BaseRCollection {
 	private final RElement child;
@@ -74,7 +74,7 @@ public class RRelative extends BaseRCollection {
 
 	@Override
 	public Iterator getRenderables() {
-		return CollectionUtilities.singletonIterator(this.child);
+		return ArrayUtilities.singletonIterator(this.child);
 	}
 
 	public int getXOffset() {
