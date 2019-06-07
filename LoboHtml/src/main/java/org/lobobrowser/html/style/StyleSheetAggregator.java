@@ -21,16 +21,17 @@
 
 package org.lobobrowser.html.style;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import org.lobo.common.Nodes;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.http.UserAgentContext;
@@ -383,18 +384,13 @@ public class StyleSheetAggregator {
 	}
 
 	private final void addStyleSheet(CSSStyleSheet styleSheet) throws Exception {
-		final CSSRuleList ruleList = styleSheet.getCssRules();
-		final int length = ruleList.getLength();
-		for (int i = 0; i < length; i++) {
-			final CSSRule rule = ruleList.item(i);
+		for (CSSRule rule : Nodes.iterable(styleSheet.getCssRules())) {
 			addRule(styleSheet, rule);
 		}
 	}
 
-	public final void addStyleSheets(Collection styleSheets) throws Exception {
-		final Iterator i = styleSheets.iterator();
-		while (i.hasNext()) {
-			final CSSStyleSheet sheet = (CSSStyleSheet) i.next();
+    public final void addStyleSheets(List<CSSStyleSheet> styleSheets) throws Exception {
+        for (CSSStyleSheet sheet : styleSheets) {
 			addStyleSheet(sheet);
 		}
 	}

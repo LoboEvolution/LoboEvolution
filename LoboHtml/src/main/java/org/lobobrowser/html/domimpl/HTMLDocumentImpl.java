@@ -31,7 +31,6 @@ import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -74,28 +73,19 @@ import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
+import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
+
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
 public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, DocumentView {
-	
-	public class CSSStyleSheetList extends ArrayList<Object> {
-		private static final long serialVersionUID = 1L;
 
-		public int getLength() {
-			return size();
-		}
-
-		public CSSStyleSheet item(int index) {
-			return (CSSStyleSheet) get(index);
-		}
-	}
-	
 	private static class ImageInfo {
 		public ImageEvent imageEvent;
 		private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
@@ -253,17 +243,9 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private final ElementFactory factory;
 
-	private HTMLCollection forms;
-
-	private HTMLCollection frames;
-
 	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>();
 
-	private HTMLCollection images;
-
 	private String inputEncoding;
-
-	private HTMLCollection links;
 
 	private Set<?> locales;
 
@@ -275,7 +257,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	private String referrer;
 	private boolean strictErrorChecking = true;
 	private StyleSheetAggregator styleSheetAggregator = null;
-	private final Collection styleSheets = new CSSStyleSheetList();
+    private final CSSStyleSheetListImpl styleSheets = new CSSStyleSheetListImpl();
 	private String title;
 
 	private final UserAgentContext ucontext;
@@ -742,7 +724,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			if (ssa == null) {
 				ssa = new StyleSheetAggregator(this);
 				try {
-					ssa.addStyleSheets(this.styleSheets);
+                    ssa.addStyleSheets(this.styleSheets.getCSSStyleSheets());
 				} catch (Exception mfu) {
 					logger.log(Level.WARNING, "getStyleSheetAggregator()", mfu);
 				}
@@ -752,7 +734,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		}
 	}
 
-	public Collection<CSSStyleSheet> getStyleSheets() {
+    public StyleSheetList getStyleSheets() {
 		return this.styleSheets;
 	}
 
@@ -828,7 +810,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 			setTitle(null);
 			setBaseURI(null);
 			setDefaultTarget(null);
-			this.styleSheets.clear();
+            this.styleSheets.getCSSStyleSheets().clear();
 			this.styleSheetAggregator = null;
 			reader = this.reader;
 		}
