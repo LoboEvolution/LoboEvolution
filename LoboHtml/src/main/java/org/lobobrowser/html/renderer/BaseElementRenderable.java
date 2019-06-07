@@ -51,6 +51,7 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobo.common.GUITasks;
+import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS2Properties;
 
 abstract class BaseElementRenderable extends BaseRCollection
@@ -165,7 +166,16 @@ abstract class BaseElementRenderable extends BaseRCollection
 			throw new IllegalStateException(
 					"Element without render state: " + rootElement + "; parent=" + rootElement.getParentNode());
 		}
-		final BackgroundInfo binfo = rs.getBackgroundInfo();
+		
+		BackgroundInfo binfo = rs.getBackgroundInfo();
+        if (isRootBlock && (binfo == null || (binfo.backgroundColor == null && binfo.backgroundImage == null))) {
+            final Node bodyNode = rootElement.getElementsByTagName("body").item(0);
+            if (bodyNode != null && bodyNode instanceof HTMLElementImpl) {
+                final HTMLElementImpl bodyElement = (HTMLElementImpl) bodyNode;
+                binfo = bodyElement.getRenderState().getBackgroundInfo();
+            }
+        }
+		
 		this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
 		final java.net.URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;
 		if (backgroundImageUri == null) {
