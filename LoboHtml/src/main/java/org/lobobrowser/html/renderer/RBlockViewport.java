@@ -42,6 +42,8 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.SwingUtilities;
+
 import org.lobo.common.ArrayUtilities;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -1347,7 +1349,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	public Iterator<Renderable> getRenderables(int pointx, int pointy) {
-		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
+		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderable(): Invoked outside GUI dispatch thread.");
 		}
 		List<Renderable> result = null;
@@ -1421,7 +1423,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	public Iterator<Renderable> getRenderables(Rectangle clipBounds) {
-		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
+		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderables(): Invoked outside GUI dispatch thread.");
 		}
 		final ArrayList<Renderable> sr = this.seqRenderables;
@@ -1593,7 +1595,7 @@ public class RBlockViewport extends BaseRCollection {
 			FloatingBounds floatBounds, boolean sizeOnly) {
 		// Expected in GUI thread. It's possible it may be invoked during pack()
 		// outside of the GUI thread.
-		if (!EventQueue.isDispatchThread() && logger.isLoggable(Level.INFO)) {
+		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("layout(): Invoked outside GUI dispatch thread.");
 		}
 		final RenderableContainer container = this.container;

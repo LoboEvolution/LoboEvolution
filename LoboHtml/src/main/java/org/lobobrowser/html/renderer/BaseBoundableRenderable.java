@@ -25,13 +25,14 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.domimpl.ModelNode;
 
@@ -254,18 +255,18 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	 */
 	@Override
 	public void relayout() {
-		if (EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			relayoutImpl(true, false);
 		} else {
-			EventQueue.invokeLater(() -> relayoutImpl(true, false));
+			SwingUtilities.invokeLater(() -> relayoutImpl(true, false));
 		}
 	}
 
 	public void relayoutIfValid() {
-		if (EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			relayoutImpl(true, true);
 		} else {
-			EventQueue.invokeLater(() -> relayoutImpl(true, true));
+			SwingUtilities.invokeLater(() -> relayoutImpl(true, true));
 		}
 	}
 

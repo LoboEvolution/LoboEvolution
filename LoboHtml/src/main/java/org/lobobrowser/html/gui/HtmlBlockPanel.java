@@ -58,6 +58,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 
 import org.lobo.common.Nodes;
 import org.lobo.laf.ColorFactory;
@@ -362,7 +363,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			final RBlock block = this.rblock;
 			if (block != null) {
 				// Layout should always be done in the GUI thread.
-				if (EventQueue.isDispatchThread()) {
+				if (SwingUtilities.isEventDispatchThread()) {
 					block.layout(pw, 0, false, false, RenderState.OVERFLOW_VISIBLE, RenderState.OVERFLOW_VISIBLE, true);
 				} else {
 					try {

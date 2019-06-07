@@ -24,18 +24,18 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.ImageObserver;
+
+import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.ImageEvent;
 import org.lobobrowser.html.domimpl.ImageListener;
 import org.lobobrowser.html.style.FontValues;
-import org.lobobrowser.html.style.HtmlValues;
 
 class ImgControl extends BaseControl implements ImageListener {
 	/**
@@ -143,7 +143,7 @@ class ImgControl extends BaseControl implements ImageListener {
 	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
 	 */
 	public void imageUpdate(Image img, final int w, final int h) {
-		EventQueue.invokeLater(() -> {
+		SwingUtilities.invokeLater(() -> {
 			if (!checkPreferredSizeChange()) {
 				repaint();
 			} else {
@@ -160,7 +160,7 @@ class ImgControl extends BaseControl implements ImageListener {
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
 		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
-			EventQueue.invokeLater(() -> {
+			SwingUtilities.invokeLater(() -> {
 				if (!checkPreferredSizeChange()) {
 					repaint();
 				} else {

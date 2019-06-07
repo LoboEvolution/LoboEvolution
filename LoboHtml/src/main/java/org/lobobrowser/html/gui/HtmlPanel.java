@@ -34,6 +34,7 @@ import java.util.EventListener;
 import java.util.EventObject;
 
 import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import org.lobo.common.Strings;
@@ -165,13 +166,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		synchronized (notifs) {
 			notifs.add(notification);
 		}
-		if (EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			// In this case we want the notification to be processed
 			// immediately. However, we don't want potential recursions
 			// to occur when a Javascript property is set in the GUI thread.
 			// Additionally, many property values may be set in one
 			// event block.
-			EventQueue.invokeLater(this.notificationImmediateAction);
+			SwingUtilities.invokeLater(this.notificationImmediateAction);
 		} else {
 			this.notificationTimer.restart();
 		}
@@ -192,10 +193,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * operation will be scheduled to be performed in the GUI thread.
 	 */
 	public void clearDocument() {
-		if (java.awt.EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			clearDocumentImpl();
 		} else {
-			java.awt.EventQueue.invokeLater(() -> HtmlPanel.this.clearDocumentImpl());
+			SwingUtilities.invokeLater(() -> HtmlPanel.this.clearDocumentImpl());
 		}
 	}
 
@@ -512,18 +513,18 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @param y The y coordinate.
 	 */
 	public void scroll(final int x, final int y) {
-		if (EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			scrollImpl(x, y);
 		} else {
-			EventQueue.invokeLater(() -> scrollImpl(x, y));
+			SwingUtilities.invokeLater(() -> scrollImpl(x, y));
 		}
 	}
 
 	public void scrollBy(final int x, final int y) {
-		if (EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			scrollByImpl(x, y);
 		} else {
-			EventQueue.invokeLater(() -> scrollByImpl(x, y));
+			SwingUtilities.invokeLater(() -> scrollByImpl(x, y));
 		}
 	}
 
@@ -582,10 +583,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @param nameOrId The name or ID of the element in the document.
 	 */
 	public void scrollToElement(final String nameOrId) {
-		if (EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			scrollToElementImpl(nameOrId);
 		} else {
-			EventQueue.invokeLater(() -> scrollToElementImpl(nameOrId));
+			SwingUtilities.invokeLater(() -> scrollToElementImpl(nameOrId));
 		}
 	}
 
@@ -663,10 +664,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @see org.lobobrowser.html.test.SimpleHtmlRendererContext
 	 */
 	public void setDocument(final Document node, final HtmlRendererContext rcontext) {
-		if (java.awt.EventQueue.isDispatchThread()) {
+		if (SwingUtilities.isEventDispatchThread()) {
 			setDocumentImpl(node, rcontext);
 		} else {
-			java.awt.EventQueue.invokeLater(() -> HtmlPanel.this.setDocumentImpl(node, rcontext));
+			SwingUtilities.invokeLater(() -> HtmlPanel.this.setDocumentImpl(node, rcontext));
 		}
 	}
 

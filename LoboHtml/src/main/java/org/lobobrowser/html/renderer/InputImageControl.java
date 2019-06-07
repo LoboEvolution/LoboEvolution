@@ -30,6 +30,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.ImageObserver;
 
+import javax.swing.SwingUtilities;
+
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.ImageEvent;
@@ -144,7 +146,7 @@ class InputImageControl extends BaseInputControl implements ImageListener {
 	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
 	 */
 	public void imageUpdate(Image img, final int w, final int h) {
-		EventQueue.invokeLater(() -> {
+		SwingUtilities.invokeLater(() -> {
 			if (!checkPreferredSizeChange()) {
 				repaint();
 			} else {
@@ -161,7 +163,7 @@ class InputImageControl extends BaseInputControl implements ImageListener {
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
 		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
-			EventQueue.invokeLater(() -> {
+			SwingUtilities.invokeLater(() -> {
 				if (!checkPreferredSizeChange()) {
 					repaint();
 				} else {
