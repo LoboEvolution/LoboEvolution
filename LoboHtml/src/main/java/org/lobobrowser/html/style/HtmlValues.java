@@ -288,7 +288,9 @@ public class HtmlValues implements CSSValuesProperties {
 					
 			switch (units) {
 			case "px":
-				return (int) Math.round(Double.parseDouble(text));
+                final double val = Double.parseDouble(text);
+                final double inches = val / 96;
+                return (int) Math.round(dpi * inches);
 			case "em":
 				final FontFactory FONT_FACTORY = FontFactory.getInstance();
 				final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
