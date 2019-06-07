@@ -91,7 +91,7 @@ class BrowserFrameUIControl implements UIControl {
 				}
 				marginwidth = marginwidth.trim();
 				if (marginwidth.endsWith("%")) {
-					int value;
+					int value = HtmlValues.getPixelSize(marginwidth, renderState, 0);
 					try {
 						value = Integer.parseInt(marginwidth.substring(0, marginwidth.length() - 1));
 					} catch (final NumberFormatException nfe) {
@@ -102,12 +102,7 @@ class BrowserFrameUIControl implements UIControl {
 					insets.leftType = HtmlInsets.TYPE_PERCENT;
 					insets.rightType = HtmlInsets.TYPE_PERCENT;
 				} else {
-					int value;
-					try {
-						value = Integer.parseInt(marginwidth);
-					} catch (final NumberFormatException nfe) {
-						value = 0;
-					}
+					int value = HtmlValues.getPixelSize(marginwidth, renderState, 0);
 					insets.left = value;
 					insets.right = value;
 					insets.leftType = HtmlInsets.TYPE_PIXELS;
@@ -131,12 +126,7 @@ class BrowserFrameUIControl implements UIControl {
 					insets.topType = HtmlInsets.TYPE_PERCENT;
 					insets.bottomType = HtmlInsets.TYPE_PERCENT;
 				} else {
-					int value;
-					try {
-						value = Integer.parseInt(marginheight);
-					} catch (final NumberFormatException nfe) {
-						value = 0;
-					}
+					int value = HtmlValues.getPixelSize(marginheight, renderState, 0);
 					insets.top = value;
 					insets.bottom = value;
 					insets.topType = HtmlInsets.TYPE_PIXELS;

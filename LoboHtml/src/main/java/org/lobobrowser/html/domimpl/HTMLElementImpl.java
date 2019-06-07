@@ -42,6 +42,7 @@ import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSS2Properties;
 import org.lobobrowser.html.style.CSS2PropertiesContext;
 import org.lobobrowser.html.style.ComputedCSS2Properties;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.LocalCSS2Properties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
@@ -295,12 +296,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 
 	protected int getAttributeAsInt(String name, int defaultValue) {
 		final String value = getAttribute(name);
-		try {
-			return Integer.parseInt(value);
-		} catch (final Exception err) {
-			this.warn("Bad integer", err);
-			return defaultValue;
-		}
+		return HtmlValues.getPixelSize(value, null, defaultValue);
 	}
 
 	public String getCharset() {

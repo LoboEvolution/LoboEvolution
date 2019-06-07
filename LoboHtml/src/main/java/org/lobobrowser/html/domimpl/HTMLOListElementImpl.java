@@ -24,6 +24,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLOListElement;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.ListRenderState;
 import org.lobobrowser.html.style.RenderState;
 
@@ -46,14 +47,7 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	@Override
 	public int getStart() {
 		final String startText = getAttribute("start");
-		if (startText == null) {
-			return 1;
-		}
-		try {
-			return Integer.parseInt(startText);
-		} catch (final NumberFormatException nfe) {
-			return 1;
-		}
+		return HtmlValues.getPixelSize(startText, null, 1);
 	}
 
 	@Override

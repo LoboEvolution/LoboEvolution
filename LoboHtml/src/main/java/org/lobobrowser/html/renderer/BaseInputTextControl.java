@@ -33,6 +33,7 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.domimpl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobo.common.WrapperLayout;
 
 abstract class BaseInputTextControl extends BaseInputControl {
@@ -153,14 +154,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		final String maxLengthText = this.controlElement.getAttribute("maxlength");
-		if (maxLengthText != null) {
-			try {
-				this.maxLength = Integer.parseInt(maxLengthText);
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
-
+		this.maxLength = HtmlValues.getPixelSize(maxLengthText, null, 0);
 	}
 
 	@Override

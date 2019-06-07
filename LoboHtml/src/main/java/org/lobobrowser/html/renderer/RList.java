@@ -22,6 +22,7 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
@@ -67,20 +68,15 @@ class RList extends BaseRListElement {
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
 		final RenderState renderState = this.modelNode.getRenderState();
-		int counterStart = 1;
+		
 		final Object rootNode = this.modelNode;
 		if (!(rootNode instanceof HTMLElementImpl)) {
 			return;
 		}
 		final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
 		final String startText = rootElement.getAttribute("start");
-		if (startText != null) {
-			try {
-				counterStart = Integer.parseInt(startText);
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int counterStart = HtmlValues.getPixelSize(startText, renderState, 0);
+
 		renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, counterStart);
 		super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
 				defaultOverflowY, sizeOnly);

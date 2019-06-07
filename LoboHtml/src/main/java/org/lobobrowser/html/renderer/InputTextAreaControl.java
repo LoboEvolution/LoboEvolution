@@ -34,6 +34,7 @@ import javax.swing.text.JTextComponent;
 import org.lobo.common.Strings;
 import org.lobobrowser.html.domimpl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobo.common.WrapperLayout;
 
 class InputTextAreaControl extends BaseInputControl {
@@ -139,22 +140,14 @@ class InputTextAreaControl extends BaseInputControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		final ElementImpl element = this.controlElement;
+		
 		final String colsStr = element.getAttribute("cols");
-		if (colsStr != null) {
-			try {
-				setCols(Integer.parseInt(colsStr));
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int cols = HtmlValues.getPixelSize(colsStr, null, 0);
+		setCols(cols);
+
 		final String rowsStr = element.getAttribute("rows");
-		if (rowsStr != null) {
-			try {
-				setRows(Integer.parseInt(rowsStr));
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int rows = HtmlValues.getPixelSize(rowsStr, null, 0);
+		setRows(rows);
 	}
 
 	@Override

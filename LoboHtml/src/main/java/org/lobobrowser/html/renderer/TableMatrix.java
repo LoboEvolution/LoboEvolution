@@ -1427,32 +1427,11 @@ class TableMatrix {
 		this.ROWS.clear();
 		this.ALL_CELLS.clear();
 		this.ROW_ELEMENTS.clear();
-		// TODO: Does it need this old-style border?
+		
 		final String borderText = this.tableElement.getAttribute("border");
-		int border = 0;
-		if (borderText != null) {
-			try {
-				border = Integer.parseInt(borderText);
-				if (border < 0) {
-					border = 0;
-				}
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int border = HtmlValues.getPixelSize(borderText, null, 0);
 		final String cellSpacingText = this.tableElement.getAttribute("cellspacing");
-		int cellSpacing = 1;
-		if (cellSpacingText != null) {
-			try {
-				// TODO: cellSpacing can be a percentage as well
-				cellSpacing = Integer.parseInt(cellSpacingText);
-				if (cellSpacing < 0) {
-					cellSpacing = 0;
-				}
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		int cellSpacing = HtmlValues.getPixelSize(cellSpacingText, null, 0);
 		this.cellSpacingX = cellSpacing;
 		this.cellSpacingY = cellSpacing;
 
@@ -1461,8 +1440,7 @@ class TableMatrix {
 		populateRows();
 		adjustForCellSpans();
 		createSizeArrays();
-
-		// Calculate widths of extras
+		
 		final SizeInfo[] columnSizes = this.columnSizes;
 		final int numCols = columnSizes.length;
 		int widthsOfExtras = insets.left + insets.right + (numCols + 1) * cellSpacing;

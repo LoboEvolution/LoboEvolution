@@ -25,6 +25,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLLIElement;
 import org.lobobrowser.html.style.DisplayRenderState;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 
 public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIElement {
@@ -45,14 +46,7 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	@Override
 	public int getValue() {
 		final String valueText = getAttribute("value");
-		if (valueText == null) {
-			return 0;
-		}
-		try {
-			return Integer.parseInt(valueText);
-		} catch (final NumberFormatException nfe) {
-			return 0;
-		}
+		return HtmlValues.getPixelSize(valueText, null, 0);
 	}
 
 	@Override

@@ -24,6 +24,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLTableCellElement;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.TableCellRenderState;
 
@@ -76,15 +77,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	@Override
 	public int getColSpan() {
 		final String colSpanText = getAttribute("colspan");
-		if (colSpanText == null) {
-			return 1;
-		} else {
-			try {
-				return Integer.parseInt(colSpanText);
-			} catch (final NumberFormatException nfe) {
-				return 1;
-			}
-		}
+		return HtmlValues.getPixelSize(colSpanText, null, 1);
 	}
 
 	@Override
@@ -105,15 +98,7 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	@Override
 	public int getRowSpan() {
 		final String rowSpanText = getAttribute("rowspan");
-		if (rowSpanText == null) {
-			return 1;
-		} else {
-			try {
-				return Integer.parseInt(rowSpanText);
-			} catch (final NumberFormatException nfe) {
-				return 1;
-			}
-		}
+		return HtmlValues.getPixelSize(rowSpanText, null, 1);
 	}
 
 	@Override

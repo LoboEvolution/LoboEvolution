@@ -24,6 +24,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLPreElement;
+import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.PreRenderState;
 import org.lobobrowser.html.style.RenderState;
 
@@ -40,14 +41,7 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPre
 	@Override
 	public int getWidth() {
 		final String widthText = getAttribute("width");
-		if (widthText == null) {
-			return 0;
-		}
-		try {
-			return Integer.parseInt(widthText);
-		} catch (final NumberFormatException nfe) {
-			return 0;
-		}
+		return HtmlValues.getPixelSize(widthText, null, 0);
 	}
 
 	@Override

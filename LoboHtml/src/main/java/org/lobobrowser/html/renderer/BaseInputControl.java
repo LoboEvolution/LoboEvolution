@@ -28,6 +28,7 @@ import java.io.File;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.InputContext;
+import org.lobobrowser.html.style.HtmlValues;
 
 abstract class BaseInputControl extends BaseControl implements InputContext {
 	/**
@@ -213,13 +214,7 @@ abstract class BaseInputControl extends BaseControl implements InputContext {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		final String sizeText = this.controlElement.getAttribute("size");
-		if (sizeText != null) {
-			try {
-				this.size = Integer.parseInt(sizeText);
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
+		this.size = HtmlValues.getPixelSize(sizeText, null, 0);
 	}
 
 	/*

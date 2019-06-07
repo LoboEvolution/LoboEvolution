@@ -2,6 +2,7 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLFormElement;
 import org.lobobrowser.html.dom.HTMLObjectElement;
+import org.lobobrowser.html.style.HtmlValues;
 import org.w3c.dom.Document;
 
 public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTMLObjectElement {
@@ -70,11 +71,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public int getHspace() {
-		try {
-			return Integer.parseInt(getAttribute("hspace"));
-		} catch (final Exception err) {
-			return 0;
-		}
+		return HtmlValues.getPixelSize(getAttribute("hspace"), null, 0);
 	}
 
 	@Override
@@ -93,11 +90,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public int getTabIndex() {
-		try {
-			return Integer.parseInt(getAttribute("tabindex"));
-		} catch (final Exception err) {
-			return 0;
-		}
+		return HtmlValues.getPixelSize(getAttribute("tabindex"), null, 0);
 	}
 
 	@Override
@@ -112,11 +105,7 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public int getVspace() {
-		try {
-			return Integer.parseInt(getAttribute("vspace"));
-		} catch (final Exception err) {
-			return 0;
-		}
+		return HtmlValues.getPixelSize(getAttribute("vspace"), null, 0);
 	}
 
 	@Override
