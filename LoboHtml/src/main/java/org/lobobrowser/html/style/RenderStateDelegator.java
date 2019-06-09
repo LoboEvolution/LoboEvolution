@@ -203,6 +203,11 @@ public abstract class RenderStateDelegator implements RenderState {
     }
     
     @Override
+    public String getBoxSizing() {
+        return this.delegate.getBoxSizing();
+    }
+   
+    @Override
     public String getLeft() {
         return this.delegate.getLeft();
     }

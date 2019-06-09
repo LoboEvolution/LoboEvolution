@@ -381,6 +381,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public static final String BORDER_TOP_WIDTH = "border-top-width";
 	public static final String BORDER_WIDTH = "border-width";
 	public static final String BOTTOM = "bottom";
+	public static final String BOX_SIZING = "box-sizing";
 	public static final String CAPTION_SIDE = "caption-side";
 	public static final String CLEAR = "clear";
 	public static final String CLIP = "clip";
@@ -701,6 +702,10 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	@Override
 	public String getClear() {
 		return getPropertyValueLC(CLEAR);
+	}
+	
+	public String getBoxSizing() {
+		return getPropertyValueLC(BOX_SIZING);
 	}
 
 	@Override

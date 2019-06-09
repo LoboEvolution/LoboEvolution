@@ -1076,6 +1076,16 @@ public class StyleSheetRenderState implements RenderState {
         }
         return cachedClear;
     }
+	
+	@Override
+	public String getBoxSizing() {
+		final AbstractCSS2Properties props = this.getCssProperties();
+		String box = props != null ? props.getBoxSizing() : "content-box";
+		if ("inherit".equals(box)) {
+			box = this.getPreviousRenderState().getBoxSizing();
+		}
+		return box;
+	}
 
     @Override
     public String getLeft() {

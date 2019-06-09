@@ -148,6 +148,8 @@ public interface RenderState {
 	
     int getClear();
     
+    String getBoxSizing();
+    
     String getLeft();
 
     String getTop();
