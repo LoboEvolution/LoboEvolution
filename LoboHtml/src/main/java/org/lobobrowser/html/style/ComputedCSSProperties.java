@@ -20,14 +20,14 @@
 */
 package org.lobobrowser.html.style;
 
-public class ComputedCSS2Properties extends AbstractCSS2Properties {
-	public ComputedCSS2Properties(CSS2PropertiesContext context) {
+public class ComputedCSSProperties extends AbstractCSSProperties {
+	public ComputedCSSProperties(CSSPropertiesContext context) {
 		super(context);
 	}
 
 	@Override
 	protected void checkSetProperty() {
-		throw new java.lang.IllegalAccessError("Style properties cannot be set in this instance.");
+		throw new IllegalAccessError("Style properties cannot be set in this instance.");
 	}
 
 	public void internalSetLC(String lowerCaseName, String value) {

@@ -39,11 +39,11 @@ import org.lobo.common.Strings;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.parser.HtmlParser;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.CSS2PropertiesContext;
-import org.lobobrowser.html.style.ComputedCSS2Properties;
+import org.lobobrowser.html.style.AbstractCSSProperties;
+import org.lobobrowser.html.style.CSSPropertiesContext;
+import org.lobobrowser.html.style.ComputedCSSProperties;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.LocalCSS2Properties;
+import org.lobobrowser.html.style.LocalCSSProperties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.StyleSheetRenderState;
@@ -56,17 +56,17 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
-public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2PropertiesContext {
-	private Map<String, AbstractCSS2Properties> computedStyles;
+public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
+	private Map<String, AbstractCSSProperties> computedStyles;
 
-	private volatile AbstractCSS2Properties currentStyleDeclarationState;
+	private volatile AbstractCSSProperties currentStyleDeclarationState;
 
 	private Map<HTMLElementImpl, Boolean> hasHoverStyleByElement = null;
 	private Boolean isHoverStyle = null;
 
 	private boolean isMouseOver = false;
 
-	private volatile AbstractCSS2Properties localStyleDeclarationState;
+	private volatile AbstractCSSProperties localStyleDeclarationState;
 
 	public HTMLElementImpl(String name) {
 		super(name);
@@ -82,7 +82,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	 * 
 	 * @param style
 	 */
-	protected final AbstractCSS2Properties addStyleSheetDeclarations(AbstractCSS2Properties style, Set<String> pseudoNames) {
+	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style, Set<String> pseudoNames) {
 		final Node pn = this.parentNode;
 		if (pn == null) {
 			// do later
@@ -101,7 +101,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 					while (sdsi.hasNext()) {
 						final CSSStyleDeclaration sd = (CSSStyleDeclaration) sdsi.next();
 						if (style == null) {
-							style = new ComputedCSS2Properties(this);
+							style = new ComputedCSSProperties(this);
 						}
 						style.addStyleDeclaration(sd);
 					}
@@ -116,7 +116,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 				while (sdsi.hasNext()) {
 					final CSSStyleDeclaration sd = (CSSStyleDeclaration) sdsi.next();
 					if (style == null) {
-						style = new ComputedCSS2Properties(this);
+						style = new ComputedCSSProperties(this);
 					}
 					style.addStyleDeclaration(sd);
 				}
@@ -179,7 +179,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		return false;
 	}
 
-	protected AbstractCSS2Properties createDefaultStyleSheet() {
+	protected AbstractCSSProperties createDefaultStyleSheet() {
 		// Override to provide element defaults.
 		return null;
 	}
@@ -311,14 +311,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		return className == null ? "" : className;
 	}
 
-	public AbstractCSS2Properties getComputedStyle(String pseudoElement) {
+	public AbstractCSSProperties getComputedStyle(String pseudoElement) {
 		if (pseudoElement == null) {
 			pseudoElement = "";
 		}
 		synchronized (this) {
-			final Map<String, AbstractCSS2Properties> cs = this.computedStyles;
+			final Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs != null) {
-				final AbstractCSS2Properties sds = (AbstractCSS2Properties) cs.get(pseudoElement);
+				final AbstractCSSProperties sds = (AbstractCSSProperties) cs.get(pseudoElement);
 				if (sds != null) {
 					return sds;
 				}
@@ -328,12 +328,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		// document).
 		// First, add declarations from stylesheet
 		final Set<String> pes = pseudoElement.length() == 0 ? null : Collections.singleton(pseudoElement);
-		AbstractCSS2Properties sds = createDefaultStyleSheet();
+		AbstractCSSProperties sds = createDefaultStyleSheet();
 		sds = addStyleSheetDeclarations(sds, pes);
 		// Now add local style if any.
-		final AbstractCSS2Properties localStyle = getStyle();
+		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
-			sds = new ComputedCSS2Properties(this);
+			sds = new ComputedCSSProperties(this);
 			sds.setLocalStyleProperties(localStyle);
 		} else {
 			sds.setLocalStyleProperties(localStyle);
@@ -342,12 +342,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 			// Check if style properties were set while outside
 			// the synchronized block (can happen). We need to
 			// return instance already set for consistency.
-			Map<String, AbstractCSS2Properties> cs = this.computedStyles;
+			Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs == null) {
-				cs = new HashMap<String, AbstractCSS2Properties>(2);
+				cs = new HashMap<String, AbstractCSSProperties>(2);
 				this.computedStyles = cs;
 			} else {
-				final AbstractCSS2Properties sds2 = (AbstractCSS2Properties) cs.get(pseudoElement);
+				final AbstractCSSProperties sds2 = (AbstractCSSProperties) cs.get(pseudoElement);
 				if (sds2 != null) {
 					return sds2;
 				}
@@ -367,8 +367,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	 * Gets the style object associated with the element. It may return null only if
 	 * the type of element does not handle stylesheets.
 	 */
-	public AbstractCSS2Properties getCurrentStyle() {
-		AbstractCSS2Properties sds;
+	public AbstractCSSProperties getCurrentStyle() {
+		AbstractCSSProperties sds;
 		synchronized (this) {
 			sds = this.currentStyleDeclarationState;
 			if (sds != null) {
@@ -381,9 +381,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		sds = createDefaultStyleSheet();
 		sds = addStyleSheetDeclarations(sds, getPseudoNames());
 		// Now add local style if any.
-		final AbstractCSS2Properties localStyle = getStyle();
+		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
-			sds = new ComputedCSS2Properties(this);
+			sds = new ComputedCSSProperties(this);
 			sds.setLocalStyleProperties(localStyle);
 		} else {
 			sds.setLocalStyleProperties(localStyle);
@@ -391,7 +391,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 		synchronized (this) {
 			// Check if style properties were set while outside
 			// the synchronized block (can happen).
-			final AbstractCSS2Properties setProps = this.currentStyleDeclarationState;
+			final AbstractCSSProperties setProps = this.currentStyleDeclarationState;
 			if (setProps != null) {
 				return setProps;
 			}
@@ -465,7 +465,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	}
 
 	@Override
-	public AbstractCSS2Properties getParentStyle() {
+	public AbstractCSSProperties getParentStyle() {
 		final Object parent = this.parentNode;
 		if (parent instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) parent).getCurrentStyle();
@@ -580,14 +580,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSS2Pro
 	 * object returned only includes properties from the local style attribute. It
 	 * may return null only if the type of element does not handle stylesheets.
 	 */
-	public AbstractCSS2Properties getStyle() {
-		AbstractCSS2Properties sds;
+	public AbstractCSSProperties getStyle() {
+		AbstractCSSProperties sds;
 		synchronized (this) {
 			sds = this.localStyleDeclarationState;
 			if (sds != null) {
 				return sds;
 			}
-			sds = new LocalCSS2Properties(this);
+			sds = new LocalCSSProperties(this);
 			// Add any declarations in style attribute (last takes precedence).
 			final String style = getAttribute("style");
 			if (style != null && style.length() != 0) {

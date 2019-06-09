@@ -20,8 +20,8 @@
 */
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.style.AbstractCSS2Properties;
-import org.lobobrowser.html.style.ComputedCSS2Properties;
+import org.lobobrowser.html.style.AbstractCSSProperties;
+import org.lobobrowser.html.style.ComputedCSSProperties;
 import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.RenderState;
 
@@ -32,9 +32,9 @@ public class HTMLSmallElementImpl extends HTMLAbstractUIElement {
 		super(name);
 	}
 
-	protected AbstractCSS2Properties createDefaultStyleSheet() {
+	protected AbstractCSSProperties createDefaultStyleSheet() {
         final String fontSize = String.valueOf(FontValues.getFontSize("SMALL", null));
-		final ComputedCSS2Properties css = new ComputedCSS2Properties(this);
+		final ComputedCSSProperties css = new ComputedCSSProperties(this);
 		if (fontSize != null) {
 			css.internalSetLC("font-size", fontSize);
 		}

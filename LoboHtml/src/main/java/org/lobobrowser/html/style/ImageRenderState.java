@@ -96,7 +96,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {

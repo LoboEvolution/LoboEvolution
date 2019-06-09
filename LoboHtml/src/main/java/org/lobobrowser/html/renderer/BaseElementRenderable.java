@@ -42,7 +42,7 @@ import org.lobo.common.Strings;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.ModelNode;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.BackgroundInfo;
 import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
@@ -52,7 +52,7 @@ import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobo.common.GUITasks;
 import org.w3c.dom.Node;
-import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSS3Properties;
 
 abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver {
@@ -185,7 +185,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 			this.lastBackgroundImageUri = backgroundImageUri;
 			loadBackgroundImage(backgroundImageUri);
 		}
-		final AbstractCSS2Properties props = rootElement.getCurrentStyle();
+		final AbstractCSSProperties props = rootElement.getCurrentStyle();
 		if (props == null) {
 			clearStyle(isRootBlock);
 		} else {
@@ -460,7 +460,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			final CSS2Properties props = element.getCurrentStyle();
+			final CSS3Properties props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -489,7 +489,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		final Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-			final CSS2Properties props = element.getCurrentStyle();
+			final CSS3Properties props = element.getCurrentStyle();
 			if (props == null) {
 				return -1;
 			}
@@ -612,7 +612,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 			final Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
-				final CSS2Properties props = element.getCurrentStyle();
+				final CSS3Properties props = element.getCurrentStyle();
 				if (props == null) {
 					return false;
 				}

@@ -9,7 +9,7 @@ import org.lobobrowser.html.dom.HTMLTableElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
-import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSS3Properties;
 
 public class TableCellRenderState extends DisplayRenderState {
 	private int alignXPercent = -1;
@@ -28,7 +28,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (axp != -1) {
 			return axp;
 		}
-		final CSS2Properties props = getCssProperties();
+		final CSS3Properties props = getCssProperties();
 		if (props != null) {
 			final String textAlign = props.getTextAlign();
 			if (textAlign != null && textAlign.length() != 0) {
@@ -79,7 +79,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (ayp != -1) {
 			return ayp;
 		}
-		final CSS2Properties props = getCssProperties();
+		final CSS3Properties props = getCssProperties();
 		if (props != null) {
 			final String textAlign = props.getVerticalAlign();
 			if (textAlign != null && textAlign.length() != 0) {
@@ -221,7 +221,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (ws != null) {
 			return ws.intValue();
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		if (whiteSpaceText == null) {

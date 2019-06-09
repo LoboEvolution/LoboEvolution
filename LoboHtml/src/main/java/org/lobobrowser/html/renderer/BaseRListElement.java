@@ -22,7 +22,7 @@ package org.lobobrowser.html.renderer;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.NodeImpl;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.http.HtmlRendererContext;
@@ -46,7 +46,7 @@ class BaseRListElement extends RBlock {
 			return;
 		}
 		final HTMLElementImpl rootElement = (HTMLElementImpl) rootNode;
-		final AbstractCSS2Properties props = rootElement.getCurrentStyle();
+		final AbstractCSSProperties props = rootElement.getCurrentStyle();
 		if (props == null) {
 			return;
 		}

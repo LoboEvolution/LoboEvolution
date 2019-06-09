@@ -31,7 +31,7 @@ import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLTableCaptionElement;
 import org.lobobrowser.html.dom.HTMLTableElement;
 import org.lobobrowser.html.dom.HTMLTableSectionElement;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
@@ -150,7 +150,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	public HtmlLength getHeightLength(int availHeight) {
 		try {
-			final AbstractCSS2Properties props = getCurrentStyle();
+			final AbstractCSSProperties props = getCurrentStyle();
 			final String heightText = props == null ? null : props.getHeight();
 			if (heightText == null) {
 				return new HtmlLength(getAttribute("height"));
@@ -204,7 +204,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 */
 	public HtmlLength getWidthLength(int availWidth) {
 		try {
-			final AbstractCSS2Properties props = getCurrentStyle();
+			final AbstractCSSProperties props = getCurrentStyle();
 			final String widthText = props == null ? null : props.getWidth();
 			if (widthText == null) {
 				return new HtmlLength(getAttribute("width"));

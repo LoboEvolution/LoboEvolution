@@ -62,7 +62,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSS3Properties;
 import org.w3c.dom.events.EventException;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
@@ -389,7 +389,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	public CSS2Properties getComputedStyle(HTMLElement element, String pseudoElement) {
+	public CSS3Properties getComputedStyle(HTMLElement element, String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
 		} else {
@@ -397,7 +397,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 	
-    public CSS2Properties getComputedStyle(HTMLElement elt) {
+    public CSS3Properties getComputedStyle(HTMLElement elt) {
         return getComputedStyle(elt, null);
     }
 

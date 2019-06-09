@@ -53,7 +53,7 @@ import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.domimpl.ModelNode;
 import org.lobobrowser.html.domimpl.NodeImpl;
 import org.lobobrowser.html.domimpl.UINode;
-import org.lobobrowser.html.style.AbstractCSS2Properties;
+import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
@@ -692,7 +692,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private boolean addElsewhereIfFloat(BoundableRenderable renderable, HTMLElementImpl element,
-			boolean usesAlignAttribute, AbstractCSS2Properties style, boolean layout) {
+			boolean usesAlignAttribute, AbstractCSSProperties style, boolean layout) {
 		// "static" handled here
 		String align = null;
 		if (style != null) {
@@ -732,7 +732,7 @@ public class RBlockViewport extends BaseRCollection {
 	private boolean addElsewhereIfPositioned(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute,
 			boolean layoutIfPositioned, boolean obeysFloats) {
 		// At this point block already has bounds.
-		final AbstractCSS2Properties style = element.getCurrentStyle();
+		final AbstractCSSProperties style = element.getCurrentStyle();
 		final int position = getPosition(element);
 		final boolean absolute = position == RenderState.POSITION_ABSOLUTE;
 		final boolean relative = position == RenderState.POSITION_RELATIVE;

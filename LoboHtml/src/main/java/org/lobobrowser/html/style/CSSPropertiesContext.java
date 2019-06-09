@@ -20,10 +20,10 @@
 */
 package org.lobobrowser.html.style;
 
-public interface CSS2PropertiesContext {
+public interface CSSPropertiesContext {
 	String getDocumentBaseURI();
 
-	AbstractCSS2Properties getParentStyle();
+	AbstractCSSProperties getParentStyle();
 
 	void informInvalid();
 

@@ -35,21 +35,21 @@ import org.lobo.common.Urls;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSS3Properties;
 import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSStyleDeclaration;
 import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
-public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate implements CSS2Properties {
+public abstract class AbstractCSSProperties extends AbstractScriptableDelegate implements CSS3Properties {
 	private static class BackgroundImageSetter implements SubPropertySetter {
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			String baseHref = null;
 			String finalValue;
@@ -98,12 +98,12 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	}
 
 	private static class BackgroundSetter implements SubPropertySetter {
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(BACKGROUND, newValue, important);
 			if (newValue != null && newValue.length() > 0) {
@@ -149,12 +149,12 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	}
 
 	private static class BorderSetter1 implements SubPropertySetter {
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(BORDER, newValue, important);
 			properties.setPropertyValueProcessed(BORDER_TOP, newValue, declaration, important);
@@ -171,12 +171,12 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 			this.name = baseName;
 		}
 
-		public void changeValue(AbstractCSS2Properties properties, String value, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration) {
 			this.changeValue(properties, value, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSS2Properties properties, String value, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(this.name, value, important);
 			if (value != null && value.length() > 0) {
@@ -208,12 +208,12 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	}
 
 	private static class FontSetter implements SubPropertySetter {
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(FONT, newValue, important);
 			if (newValue != null && newValue.length() > 0) {
@@ -291,12 +291,12 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 			this.property = property;
 		}
 
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(this.property, newValue, important);
 			if (newValue != null && newValue.length() > 0) {
@@ -347,7 +347,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	}
 
 	private interface SubPropertySetter {
-		void changeValue(AbstractCSS2Properties properties, String newValue, CSSStyleDeclaration declaration,
+		void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
 				boolean important);
 	}
 
@@ -415,7 +415,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	public static final String LIST_STYLE_IMAGE = "list-style-image";
 	public static final String LIST_STYLE_POSITION = "list-style-position";
 	public static final String LIST_STYLE_TYPE = "list-style-type";
-	private static final Logger logger = Logger.getLogger(AbstractCSS2Properties.class.getName());
+	private static final Logger logger = Logger.getLogger(AbstractCSSProperties.class.getName());
 	public static final String MARGIN = "margin";
 	public static final String MARGIN_BOTTOM = "margin-bottom";
 	public static final String MARGIN_LEFT = "margin-left";
@@ -502,9 +502,9 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		subSetters.put(FONT, new FontSetter());
 	}
 
-	private final CSS2PropertiesContext context;
+	private final CSSPropertiesContext context;
 
-	private AbstractCSS2Properties localStyleProperties;
+	private AbstractCSSProperties localStyleProperties;
 
 	private String overlayColor;
 
@@ -512,7 +512,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 
 	private Map<String, Property> valueMap = null;
 
-	public AbstractCSS2Properties(CSS2PropertiesContext context) {
+	public AbstractCSSProperties(CSSPropertiesContext context) {
 		this.context = context;
 	}
 
@@ -704,6 +704,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		return getPropertyValueLC(CLEAR);
 	}
 	
+	@Override
 	public String getBoxSizing() {
 		return getPropertyValueLC(BOX_SIZING);
 	}
@@ -885,7 +886,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		return getPropertyValueLC(LIST_STYLE_TYPE);
 	}
 
-	public AbstractCSS2Properties getLocalStyleProperties() {
+	public AbstractCSSProperties getLocalStyleProperties() {
 		synchronized (this) {
 			return this.localStyleProperties;
 		}
@@ -1097,7 +1098,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		final Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
 			// Local properties have precedence
-			final AbstractCSS2Properties localProps = this.localStyleProperties;
+			final AbstractCSSProperties localProps = this.localStyleProperties;
 			if (localProps != null) {
 				final String value = localProps.getPropertyValueLC(lowerCaseName);
 				if (value != null) {
@@ -1653,7 +1654,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 		this.context.informLookInvalid();
 	}
 
-	public void setLocalStyleProperties(AbstractCSS2Properties properties) {
+	public void setLocalStyleProperties(AbstractCSSProperties properties) {
 		if (properties == this) {
 			throw new IllegalStateException("setting same");
 		}
@@ -1665,7 +1666,7 @@ public abstract class AbstractCSS2Properties extends AbstractScriptableDelegate 
 	@Override
 	public void setMargin(String margin) throws DOMException {
 		checkSetProperty();
-		new AbstractCSS2Properties.FourCornersSetter(MARGIN, "margin-", "").changeValue(this, margin, null);
+		new AbstractCSSProperties.FourCornersSetter(MARGIN, "margin-", "").changeValue(this, margin, null);
 		this.context.informInvalid();
 	}
 

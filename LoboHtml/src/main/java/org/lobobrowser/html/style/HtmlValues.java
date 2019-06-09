@@ -38,7 +38,7 @@ import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
 import org.lobobrowser.html.CSSValuesProperties;
-import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSS3Properties;
 
 public class HtmlValues implements CSSValuesProperties {
 	public static final int BORDER_STYLE_DASHED = 3;
@@ -66,7 +66,7 @@ public class HtmlValues implements CSSValuesProperties {
 		SYSTEM_FONTS.put("status-bar", systemFont);
 	}
 
-	public static BorderInfo getBorderInfo(CSS2Properties properties, RenderState renderState) {
+	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
 
 		binfo.topStyle = getBorderStyle(properties.getBorderTopStyle());
@@ -97,7 +97,7 @@ public class HtmlValues implements CSSValuesProperties {
 		return binfo;
 	}
 
-	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS2Properties cssProperties,
+	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS3Properties cssProperties,
 			RenderState renderState) {
 		HtmlInsets insets = null;
 		if (borderStyles.top != HtmlValues.BORDER_STYLE_NONE) {
@@ -249,7 +249,7 @@ public class HtmlValues implements CSSValuesProperties {
 		}
 	}
 
-	public static HtmlInsets getMarginInsets(CSS2Properties cssProperties, RenderState renderState) {
+	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 		final String topText = cssProperties.getMarginTop();
 		insets = updateTopInset(insets, topText, renderState);
@@ -262,7 +262,7 @@ public class HtmlValues implements CSSValuesProperties {
 		return insets;
 	}
 
-	public static HtmlInsets getPaddingInsets(CSS2Properties cssProperties, RenderState renderState) {
+	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 		final String topText = cssProperties.getPaddingTop();
 		insets = updateTopInset(insets, topText, renderState);
@@ -401,7 +401,7 @@ public class HtmlValues implements CSSValuesProperties {
 		return token.toLowerCase().startsWith("url(");
 	}
 
-	public static void populateBorderInsets(BorderInfo binfo, CSS2Properties cssProperties, RenderState renderState) {
+	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 		if (binfo.topStyle != HtmlValues.BORDER_STYLE_NONE) {
 			final String topText = cssProperties.getBorderTopWidth();

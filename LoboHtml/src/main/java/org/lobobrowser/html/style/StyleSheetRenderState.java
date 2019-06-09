@@ -40,7 +40,7 @@ import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.LineBreak;
-import org.w3c.dom.css.CSS2Properties;
+import org.w3c.dom.css.CSS3Properties;
 
 /**
  * @author J. H. S.
@@ -212,7 +212,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (axp != -1) {
 			return axp;
 		}
-		final CSS2Properties props = getCssProperties();
+		final CSS3Properties props = getCssProperties();
 		String textAlign = props == null ? null : props.getTextAlign();
 		if (textAlign == null || textAlign.length() == 0) {
 			// Fall back to align attribute.
@@ -279,7 +279,7 @@ public class StyleSheetRenderState implements RenderState {
 			return binfo;
 		}
 		binfo = null;
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props != null) {
 			final String backgroundColorText = props.getBackgroundColor();
 			if (backgroundColorText != null) {
@@ -333,7 +333,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (binfo != INVALID_BORDER_INFO) {
 			return binfo;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props != null) {
 			binfo = HtmlValues.getBorderInfo(props, this);
 		} else {
@@ -349,7 +349,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != null) {
 			return c;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		String colorValue = props == null ? null : props.getColor();
 		if (colorValue == null || "".equals(colorValue)) {
 			final RenderState prs = this.prevRenderState;
@@ -385,7 +385,7 @@ public class StyleSheetRenderState implements RenderState {
 		return integer == null ? 0 : integer.intValue();
 	}
 
-	protected final AbstractCSS2Properties getCssProperties() {
+	protected final AbstractCSSProperties getCssProperties() {
 		final HTMLElementImpl element = this.element;
 		return element == null ? null : element.getCurrentStyle();
 	}
@@ -400,7 +400,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (d != null) {
 			return d.intValue();
 		}
-		final CSS2Properties props = this.getCssProperties();
+		final CSS3Properties props = this.getCssProperties();
 		final String displayText = props == null ? null : props.getDisplay();
 		int displayInt;
 		final String displayTextTL = Strings.isNotBlank(displayText) ? displayText.toLowerCase() : "";
@@ -467,7 +467,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (p != null) {
 			return p.intValue();
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		int floatValue;
 		if (props == null) {
 			floatValue = FLOAT_NONE;
@@ -493,7 +493,7 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public Font getFont() {
 
-		AbstractCSS2Properties style = this.getCssProperties();
+		AbstractCSSProperties style = this.getCssProperties();
 		RenderState prs = this.prevRenderState;
 
 		if (this.iFont != null) {
@@ -549,7 +549,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
@@ -565,7 +565,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (overflow != -1) {
 			return overflow;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -600,7 +600,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (overflow != -1) {
 			return overflow;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props == null) {
 			overflow = OVERFLOW_NONE;
 		} else {
@@ -635,7 +635,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (c != INVALID_COLOR) {
 			return c;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		String colorValue = props == null ? null : props.getOverlayColor();
 		if (colorValue == null || colorValue.length() == 0) {
 			final RenderState prs = this.prevRenderState;
@@ -658,7 +658,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (mi != INVALID_INSETS) {
 			return mi;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		if (props == null) {
 			mi = null;
 		} else {
@@ -674,7 +674,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (p != null) {
 			return p.intValue();
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		int position;
 		if (props == null) {
 			position = POSITION_STATIC;
@@ -766,7 +766,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (td != -1) {
 			return td;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		final String tdText = props == null ? null : props.getTextDecoration();
 		if (tdText == null) {
 			final RenderState prs = this.prevRenderState;
@@ -815,7 +815,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (tiText != null) {
 			return tiText;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		tiText = props == null ? null : props.getTextIndent();
 		if (tiText == null) {
 			final RenderState prs = this.prevRenderState;
@@ -836,7 +836,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (tt != -1) {
 			return tt;
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		final String tdText = props == null ? null : props.getTextTransform();
 		if (tdText == null) {
 			final RenderState prs = this.prevRenderState;
@@ -875,7 +875,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (v != null) {
 			return v.intValue();
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		int visibility;
 		if (props == null) {
 			visibility = VISIBILITY_VISIBLE;
@@ -909,7 +909,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (ws != null) {
 			return ws.intValue();
 		}
-		final AbstractCSS2Properties props = getCssProperties();
+		final AbstractCSSProperties props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
 		int wsValue;
 		if (whiteSpaceText == null) {
@@ -1056,7 +1056,7 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
     public int getClear() {
         if (cachedClear == null) {
-            final AbstractCSS2Properties props = this.getCssProperties();
+            final AbstractCSSProperties props = this.getCssProperties();
             final String clearStr = props != null ? props.getClear() : "";
             switch (clearStr) {
             case "right":
@@ -1079,7 +1079,7 @@ public class StyleSheetRenderState implements RenderState {
 	
 	@Override
 	public String getBoxSizing() {
-		final AbstractCSS2Properties props = this.getCssProperties();
+		final AbstractCSSProperties props = this.getCssProperties();
 		String box = props != null ? props.getBoxSizing() : "content-box";
 		if ("inherit".equals(box)) {
 			box = this.getPreviousRenderState().getBoxSizing();
@@ -1089,25 +1089,25 @@ public class StyleSheetRenderState implements RenderState {
 
     @Override
     public String getLeft() {
-        final AbstractCSS2Properties props = this.getCssProperties();
+        final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getLeft();
     }
 
     @Override
     public String getTop() {
-        final AbstractCSS2Properties props = this.getCssProperties();
+        final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getTop();
     }
 
     @Override
     public String getRight() {
-        final AbstractCSS2Properties props = this.getCssProperties();
+        final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getRight();
     }
 
     @Override
     public String getBottom() {
-        final AbstractCSS2Properties props = this.getCssProperties();
+        final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getBottom();
     }
 

@@ -20,8 +20,8 @@
 */
 package org.lobobrowser.html.style;
 
-public class LocalCSS2Properties extends AbstractCSS2Properties {
-	public LocalCSS2Properties(CSS2PropertiesContext context) {
+public class LocalCSSProperties extends AbstractCSSProperties {
+	public LocalCSSProperties(CSSPropertiesContext context) {
 		super(context);
 	}
 }
