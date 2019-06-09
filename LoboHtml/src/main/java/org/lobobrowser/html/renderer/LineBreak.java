@@ -23,16 +23,17 @@ package org.lobobrowser.html.renderer;
 import org.lobobrowser.html.domimpl.ModelNode;
 
 public class LineBreak {
-	public static final int ALL = 3;
+	
 	public static final int LEFT = 1;
 	public static final int NONE = 0;
 	public static final int RIGHT = 2;
+	public static final int BOTH = 3;
 
 	public static int getBreakType(String clearAttr) {
 		if (clearAttr == null) {
 			return NONE;
-		} else if ("all".equalsIgnoreCase(clearAttr)) {
-			return ALL;
+		} else if ("both".equalsIgnoreCase(clearAttr)) {
+			return BOTH;
 		} else if ("left".equalsIgnoreCase(clearAttr)) {
 			return LEFT;
 		} else if ("right".equalsIgnoreCase(clearAttr)) {

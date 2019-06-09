@@ -946,6 +946,9 @@ public class RBlockViewport extends BaseRCollection {
 			case LineBreak.RIGHT:
 				newLineY = fb.getRightClearY(prevY);
 				break;
+			case LineBreak.BOTH:
+				newLineY = fb.getRightClearY(prevY);
+				break;
 			default:
 				newLineY = fb.getClearY(prevY);
 				break;
@@ -2247,6 +2250,13 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private final void positionRBlock(HTMLElementImpl markupElement, RBlock renderable) {
+		
+		RenderState rs = renderable.getModelNode().getRenderState();
+		int clear = rs.getClear();
+		if (clear != LineBreak.NONE) {
+			addLineBreak(renderable.getModelNode(), clear);
+		}
+		
 		if (!addElsewhereIfPositioned(renderable, markupElement, false, true, false)) {
 			final int availContentHeight = this.availContentHeight;
 			final RLine line = this.currentLine;
