@@ -1054,28 +1054,31 @@ public class StyleSheetRenderState implements RenderState {
 	}
 	
 	@Override
-    public int getClear() {
-        if (cachedClear == null) {
-            final AbstractCSSProperties props = this.getCssProperties();
-            final String clearStr = props != null ? props.getClear() : "";
-            switch (clearStr) {
-            case "right":
-                cachedClear = new Integer(LineBreak.RIGHT);
-                break;
-            case "left":
-                cachedClear = new Integer(LineBreak.LEFT);
-                break;
-            case "both":
-                cachedClear = new Integer(LineBreak.BOTH);
-                break;
-
-            default:
-                cachedClear = new Integer(LineBreak.NONE);
-                break;
-            }
-        }
-        return cachedClear;
-    }
+	public int getClear() {
+		if (cachedClear == null) {
+			final AbstractCSSProperties props = this.getCssProperties();
+			final String clearStr = props != null ? props.getClear() : "";
+			if (clearStr == null) {
+				return LineBreak.NONE;
+			} else {
+				switch (clearStr) {
+				case "right":
+					cachedClear = new Integer(LineBreak.RIGHT);
+					break;
+				case "left":
+					cachedClear = new Integer(LineBreak.LEFT);
+					break;
+				case "both":
+					cachedClear = new Integer(LineBreak.BOTH);
+					break;
+				default:
+					cachedClear = new Integer(LineBreak.NONE);
+					break;
+				}
+			}
+		}
+		return cachedClear;
+	}
 	
 	@Override
 	public String getBoxSizing() {

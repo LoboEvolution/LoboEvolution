@@ -32,14 +32,17 @@ public class LineBreak {
 	public static int getBreakType(String clearAttr) {
 		if (clearAttr == null) {
 			return NONE;
-		} else if ("both".equalsIgnoreCase(clearAttr)) {
-			return BOTH;
-		} else if ("left".equalsIgnoreCase(clearAttr)) {
-			return LEFT;
-		} else if ("right".equalsIgnoreCase(clearAttr)) {
-			return RIGHT;
 		} else {
-			return NONE;
+			switch (clearAttr) {
+			case "right":
+				return RIGHT;
+			case "left":
+				return LEFT;
+			case "both":
+				return BOTH;
+			default:
+				return NONE;
+			}
 		}
 	}
 
