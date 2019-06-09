@@ -1066,7 +1066,7 @@ public class StyleSheetRenderState implements RenderState {
                 cachedClear = new Integer(LineBreak.LEFT);
                 break;
             case "both":
-                cachedClear = new Integer(LineBreak.ALL);
+                cachedClear = new Integer(LineBreak.BOTH);
                 break;
 
             default:
