@@ -940,13 +940,11 @@ public class RBlockViewport extends BaseRCollection {
 		} else {
 			final int prevY = line == null ? this.paddingInsets.top : line.y + line.height;
 			switch (breakType) {
-			case LineBreak.LEFT:
+				case LineBreak.BOTH:
+				case LineBreak.LEFT:
 				newLineY = fb.getLeftClearY(prevY);
 				break;
 			case LineBreak.RIGHT:
-				newLineY = fb.getRightClearY(prevY);
-				break;
-			case LineBreak.BOTH:
 				newLineY = fb.getRightClearY(prevY);
 				break;
 			default:
