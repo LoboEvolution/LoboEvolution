@@ -39,6 +39,8 @@ import java.util.StringTokenizer;
 
 import javax.swing.text.StyleContext;
 
+import org.lobo.common.Strings;
+
 /**
  * A factory for creating Font objects.
  *
@@ -154,7 +156,7 @@ public class FontFactory {
 		if (fontNames != null) {
 			final StringTokenizer tok = new StringTokenizer(fontNames, ",");
 			while (tok.hasMoreTokens()) {
-				final String face = tok.nextToken().trim();
+				final String face = Strings.unquoteSingle(tok.nextToken().trim());
 				final String faceTL = face.toLowerCase();
 				if (registeredFonts.containsKey(faceTL)) {
 					baseFont = registeredFonts.get(faceTL);
