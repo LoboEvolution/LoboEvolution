@@ -289,7 +289,7 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.backgroundColor = ColorFactory.getInstance().getColor(backgroundColorText);
 			}
 			final String backgroundImageText = props.getBackgroundImage();
-			if (backgroundImageText != null && backgroundImageText.length() > 0) {
+			if (Strings.isNotBlank(backgroundImageText)) {
 				final java.net.URL backgroundImage = HtmlValues.getURIFromStyleValue(backgroundImageText);
 				if (backgroundImage != null) {
 					if (binfo == null) {
@@ -733,32 +733,6 @@ public class StyleSheetRenderState implements RenderState {
 		this.iTextBackgroundColor = localColor;
 		return localColor;
 	}
-
-//	private void applyBackground(BackgroundInfo binfo, String background, CSSStyleDeclaration declaration) {
-//		String[] tokens = HtmlValues.splitCssValue(background);
-//		boolean hasXPosition = false;
-//		for(int i = 0; i < tokens.length; i++) {
-//			String token = tokens[i];
-//			if(ColorFactory.getInstance().isColor(token)) {
-//				binfo.backgroundColor = ColorFactory.getInstance().getColor(token);
-//			}	
-//			else if(HtmlValues.isUrl(token)) {
-//				binfo.backgroundImage = HtmlValues.getURIFromStyleValue(token, declaration, this.document);
-//			}
-//			else if(isBackgroundRepeat(token)) {
-//				this.applyBackgroundRepeat(binfo, token);
-//			}
-//			else if(isBackgroundPosition(token)) {
-//				if(hasXPosition) {
-//					this.applyBackgroundVerticalPosition(binfo, token);
-//				}
-//				else {
-//					hasXPosition = true;
-//					this.applyBackgroundHorizontalPositon(binfo, token);
-//				}
-//			}
-//		}
-//	}
 
 	@Override
 	public int getTextDecorationMask() {
