@@ -101,7 +101,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				if (doc == null) {
 					throw new IllegalStateException("Cannot perform operation when document is unset.");
 				}
-				window.eval(this.expression);
+				window.evalInScope(this.expression);
 			} catch (final Throwable err) {
 				logger.log(Level.WARNING, "actionPerformed()", err);
 			}
@@ -325,25 +325,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		final Function constructorFunction = JavaObjectWrapper.getConstructor(jsClassName, classWrapper, scope, ji);
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
-
-	public Object eval(String javascript) {
-		final HTMLDocumentImpl document = this.document;
-		if (document == null) {
-			throw new IllegalStateException("Cannot evaluate if document is not set.");
-		}
+	
+	private Object evalInScope(final String javascript) {
 		final Context ctx = Executor.createContext(document.getDocumentURL(), this.uaContext);
 		try {
-			final Scriptable scope = getWindowScope();
-			if (scope == null) {
-				throw new IllegalStateException(
-						"Scriptable (scope) instance was expected to be keyed as UserData to document using "
-								+ Executor.SCOPE_KEY);
-			}
 			final String scriptURI = "window.eval";
-			if (logger.isLoggable(Level.INFO)) {
-				logger.info("eval(): javascript follows...\r\n" + javascript);
-			}
-			return ctx.evaluateString(scope, javascript, scriptURI, 1, null);
+			return ctx.evaluateString(getWindowScope(), javascript, scriptURI, 1, null);
 		} finally {
 			Context.exit();
 		}
