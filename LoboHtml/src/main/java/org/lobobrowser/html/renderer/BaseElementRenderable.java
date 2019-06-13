@@ -151,8 +151,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		if (rootNode instanceof HTMLDocumentImpl) {
 			isRootBlock = true;
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
-			// Need to get BODY tag, for bgcolor, etc.
-			rootElement = (HTMLElementImpl) doc.getBody();
+			rootElement = (HTMLElementImpl) doc.getHead();
 		} else {
 			isRootBlock = false;
 			rootElement = (HTMLElementImpl) rootNode;

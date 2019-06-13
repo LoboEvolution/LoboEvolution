@@ -666,11 +666,11 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	}
     
     @Override
-	public HTMLHeadElement getHead() {
+	public HTMLHeadElementImpl getHead() {
 		synchronized (this) {
 			HTMLCollection collection = new HTMLCollectionImpl(this, new HeadFilter());
 			if (collection.getLength() > 0) {
-				return (HTMLHeadElement) collection.item(0);
+				return (HTMLHeadElementImpl) collection.item(0);
 			} else {
 				return null;
 			}

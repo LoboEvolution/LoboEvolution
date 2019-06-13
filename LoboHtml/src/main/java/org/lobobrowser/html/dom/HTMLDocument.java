@@ -32,6 +32,7 @@
 
 package org.lobobrowser.html.dom;
 
+import org.lobobrowser.html.domimpl.HTMLHeadElementImpl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -84,7 +85,7 @@ public interface HTMLDocument extends Document {
      * The element that contains the content for the document. In documents with
      * <code>HEAD</code> contents, returns the <code>HEAD</code> element.
      */
-    HTMLHeadElement getHead();
+	HTMLHeadElementImpl getHead();
 
 
 	/**
