@@ -45,7 +45,6 @@ class RListItem extends BaseRListElement {
 	public RListItem(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer, RCollection parent) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
-		// this.defaultMarginInsets = new java.awt.Insets(0, BULLET_SPACE_WIDTH, 0, 0);
 	}
 
 	@Override

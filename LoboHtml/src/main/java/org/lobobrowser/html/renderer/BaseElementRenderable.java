@@ -71,8 +71,6 @@ abstract class BaseElementRenderable extends BaseRCollection
 	protected Color borderTopColor;
 	private Integer declaredHeight = INVALID_SIZE;
 	private Integer declaredWidth = INVALID_SIZE;
-	protected Insets defaultMarginInsets = null;
-	protected Insets defaultPaddingInsets = null;
 	protected List<DelayedPair> delayedPairs = null;
 
 	private Collection<Component> guiComponents = null;
@@ -193,34 +191,19 @@ abstract class BaseElementRenderable extends BaseRCollection
 			final HtmlInsets binsets = borderInfo == null ? null : borderInfo.insets;
 			final HtmlInsets minsets = rs.getMarginInsets();
 			final HtmlInsets pinsets = rs.getPaddingInsets();
-			final Insets defaultMarginInsets = this.defaultMarginInsets;
-			int dmleft = 0, dmright = 0, dmtop = 0, dmbottom = 0;
-			if (defaultMarginInsets != null) {
-				dmleft = defaultMarginInsets.left;
-				dmright = defaultMarginInsets.right;
-				dmtop = defaultMarginInsets.top;
-				dmbottom = defaultMarginInsets.bottom;
-			}
-			final Insets defaultPaddingInsets = this.defaultPaddingInsets;
 			int dpleft = 0, dpright = 0, dptop = 0, dpbottom = 0;
-			if (defaultPaddingInsets != null) {
-				dpleft = defaultPaddingInsets.left;
-				dpright = defaultPaddingInsets.right;
-				dptop = defaultPaddingInsets.top;
-				dpbottom = defaultPaddingInsets.bottom;
-			}
-			Insets borderInsets = binsets == null ? null
-					: binsets.getAWTInsets(0, 0, 0, 0, availWidth, availHeight, 0, 0);
+			int dmleft = 0, dmright = 0, dmtop = 0, dmbottom = 0;
+
+			Insets borderInsets = binsets == null ? null : binsets.getAWTInsets(0, 0, 0, 0, availWidth, availHeight, 0, 0);
 			if (borderInsets == null) {
 				borderInsets = RBlockViewport.ZERO_INSETS;
 			}
-			Insets paddingInsets = pinsets == null ? defaultPaddingInsets
-					: pinsets.getAWTInsets(dptop, dpleft, dpbottom, dpright, availWidth, availHeight, 0, 0);
+			Insets paddingInsets = pinsets == null ? null : pinsets.getAWTInsets(dptop, dpleft, dpbottom, dpright, availWidth, availHeight, 0, 0);
+			
 			if (paddingInsets == null) {
 				paddingInsets = RBlockViewport.ZERO_INSETS;
 			}
-			Insets tentativeMarginInsets = minsets == null ? defaultMarginInsets
-					: minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, 0, 0);
+	        Insets tentativeMarginInsets = minsets == null ? null : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, 0, 0);
 			if (tentativeMarginInsets == null) {
 				tentativeMarginInsets = RBlockViewport.ZERO_INSETS;
 			}
@@ -244,9 +227,8 @@ abstract class BaseElementRenderable extends BaseRCollection
 			this.borderInsets = borderInsets;
 			if (isRootBlock) {
 				// In the root block, the margin behaves like an extra padding.
-				Insets regularMarginInsets = autoMarginX == 0 && autoMarginY == 0 ? tentativeMarginInsets 
-						: minsets == null ? defaultMarginInsets 
-								: minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY);
+				Insets regularMarginInsets = autoMarginX == 0 && autoMarginY == 0 ? tentativeMarginInsets
+						: (minsets == null ? null : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY));
 
 				if (regularMarginInsets == null) {
 					regularMarginInsets = RBlockViewport.ZERO_INSETS;
@@ -258,10 +240,8 @@ abstract class BaseElementRenderable extends BaseRCollection
 						paddingInsets.right + regularMarginInsets.right);
 			} else {
 				this.paddingInsets = paddingInsets;
-				this.marginInsets = autoMarginX == 0 && autoMarginY == 0 ? tentativeMarginInsets
-						: minsets == null ? defaultMarginInsets
-								: minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight,
-										autoMarginX, autoMarginY);
+				this.marginInsets = ((autoMarginX == 0) && (autoMarginY == 0)) ? tentativeMarginInsets : (minsets == null ? null
+			              : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY));
 			}
 			if (borderInfo != null) {
 				this.borderTopColor = borderInfo.topColor;
@@ -321,28 +301,8 @@ abstract class BaseElementRenderable extends BaseRCollection
 		this.lastBackgroundImageUri = null;
 		this.overflowX = RenderState.OVERFLOW_VISIBLE;
 		this.overflowY = RenderState.OVERFLOW_VISIBLE;
-		if (isRootBlock) {
-			// The margin of the root block behaves like extra padding.
-			final Insets insets1 = this.defaultMarginInsets;
-			final Insets insets2 = this.defaultPaddingInsets;
-			Insets finalInsets = insets1 == null ? null
-					: new Insets(insets1.top, insets1.left, insets1.bottom, insets1.right);
-			if (insets2 != null) {
-				if (finalInsets == null) {
-					finalInsets = new Insets(insets2.top, insets2.left, insets2.bottom, insets2.right);
-				} else {
-					finalInsets.top += insets2.top;
-					finalInsets.bottom += insets2.bottom;
-					finalInsets.left += insets2.left;
-					finalInsets.right += insets2.right;
-				}
-			}
-			this.marginInsets = null;
-			this.paddingInsets = finalInsets;
-		} else {
-			this.marginInsets = this.defaultMarginInsets;
-			this.paddingInsets = this.defaultPaddingInsets;
-		}
+		this.marginInsets = null;
+		this.paddingInsets = null;
 	}
 
 	protected abstract void doLayout(int availWidth, int availHeight, boolean sizeOnly);
@@ -945,14 +905,6 @@ abstract class BaseElementRenderable extends BaseRCollection
 				rc.addComponent((Component) i.next());
 			}
 		}
-	}
-
-	public void setDefaultMarginInsets(Insets insets) {
-		this.defaultMarginInsets = insets;
-	}
-
-	public void setDefaultPaddingInsets(Insets insets) {
-		this.defaultPaddingInsets = insets;
 	}
 
 	@Override

@@ -97,7 +97,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 
 	private static final long serialVersionUID = 1L;
 	private Set<Component> components;
-	protected Insets defaultMarginInsets = null;
 	protected int defaultOverflowX = RenderState.OVERFLOW_AUTO;
 	protected int defaultOverflowY = RenderState.OVERFLOW_SCROLL;
 	protected RenderableSpot endSelection;
@@ -260,10 +259,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	@Override
 	public void focus() {
 		grabFocus();
-	}
-
-	public Insets getDefaultMarginInsets() {
-		return this.defaultMarginInsets;
 	}
 
 	public int getDefaultOverflowX() {
@@ -789,23 +784,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
-	/**
-	 * Sets the default margin insets. Note that in the root block, the margin
-	 * behaves like padding.
-	 * 
-	 * @param defaultMarginInsets The default margin insets.
-	 */
-	public void setDefaultMarginInsets(Insets defaultMarginInsets) {
-		if (!Objects.equals(this.defaultMarginInsets, defaultMarginInsets)) {
-			this.defaultMarginInsets = defaultMarginInsets;
-			final RBlock block = this.rblock;
-			if (block != null) {
-				block.setDefaultMarginInsets(defaultMarginInsets);
-				block.relayoutIfValid();
-			}
-		}
-	}
-
 	public void setDefaultOverflowX(int defaultOverflowX) {
 		if (defaultOverflowX != this.defaultOverflowX) {
 			this.defaultOverflowX = defaultOverflowX;
@@ -847,8 +825,6 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public void setRootNode(NodeImpl node) {
 		if (node != null) {
 			final RBlock block = new RBlock(node, 0, this.ucontext, this.rcontext, this.frameContext, this);
-			block.setDefaultMarginInsets(this.defaultMarginInsets);
-			// block.setDefaultPaddingInsets(this.defaultPaddingInsets);
 			block.setDefaultOverflowX(this.defaultOverflowX);
 			block.setDefaultOverflowY(this.defaultOverflowY);
 			node.setUINode(block);

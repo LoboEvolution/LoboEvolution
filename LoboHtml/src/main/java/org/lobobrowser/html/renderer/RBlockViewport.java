@@ -1831,10 +1831,14 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private final void layoutRBlock(HTMLElementImpl markupElement) {
-		RBlock renderable = (RBlock) markupElement.getUINode();
+		final UINode uiNode = markupElement.getUINode();
+		RBlock renderable = null;
+		if (uiNode instanceof RBlock) {
+			renderable = (RBlock) markupElement.getUINode();
+		}
+		    
 		if (renderable == null) {
-			renderable = new RBlock(markupElement, this.listNesting, this.userAgentContext, this.rendererContext,
-					this.frameContext, this.container);
+			renderable = new RBlock(markupElement, this.listNesting, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
