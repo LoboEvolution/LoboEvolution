@@ -688,7 +688,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 					return null;
 				}
 			}
-			return null;
+            return this.body;
 		}
 	}
 
