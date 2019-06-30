@@ -46,6 +46,7 @@ import javax.swing.SwingUtilities;
 
 import org.lobo.common.ArrayUtilities;
 import org.lobobrowser.html.HtmlObject;
+import org.lobobrowser.html.domimpl.DocumentFragmentImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
@@ -1695,15 +1696,13 @@ public class RBlockViewport extends BaseRCollection {
 	private void layoutChildren(NodeImpl node) {
 		final NodeImpl[] childrenArray = node.getChildrenArray();
 		if (childrenArray != null) {
-			final int length = childrenArray.length;
-			for (int i = 0; i < length; i++) {
-				final NodeImpl child = childrenArray[i];
+			for (NodeImpl child : childrenArray) {
 				final short nodeType = child.getNodeType();
-				if (nodeType == Node.TEXT_NODE) {
+				switch (nodeType) {
+				case Node.TEXT_NODE:
 					layoutText(child);
-				} else if (nodeType == Node.ELEMENT_NODE) {
-					// Note that scanning for node bounds (anchor location)
-					// depends on there being a style changer for inline elements.
+					break;
+				case Node.ELEMENT_NODE:
 					this.currentLine.addStyleChanger(new RStyleChanger(child));
 					final String nodeName = child.getNodeName().toUpperCase();
 					MarkupLayout ml = (MarkupLayout) elementLayout.get(nodeName);
@@ -1712,10 +1711,17 @@ public class RBlockViewport extends BaseRCollection {
 					}
 					ml.layoutMarkup(this, (HTMLElementImpl) child);
 					this.currentLine.addStyleChanger(new RStyleChanger(node));
-				} else if (nodeType == Node.COMMENT_NODE || nodeType == Node.PROCESSING_INSTRUCTION_NODE) {
-					// ignore
-				} else {
-					throw new IllegalStateException("Unknown node: " + child);
+					break;
+				case Node.DOCUMENT_FRAGMENT_NODE:
+					final DocumentFragmentImpl fragment = (DocumentFragmentImpl) child;
+					for (final NodeImpl fragChild : fragment.getChildrenArray()) {
+						layoutChildren(fragChild);
+					}
+					break;
+				case Node.COMMENT_NODE:
+				case Node.PROCESSING_INSTRUCTION_NODE:
+				default:
+					break;
 				}
 			}
 		}
