@@ -98,7 +98,7 @@ public class FontValues extends HtmlValues {
 				return parentFontSize / 1.2f;
 			case INHERIT:
 				parentFontSize = (int) new LAFSettings().getIstance().getFontSize();
-				if (parentRenderState != null) {
+				if (parentRenderState != null && parentRenderState.getPreviousRenderState() != null) {
 					parentRenderState.getPreviousRenderState().getFont().getSize();
 				}
 				return parentFontSize;
