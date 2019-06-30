@@ -851,29 +851,35 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final AbstractCSSProperties props = getCssProperties();
 		int visibility;
-		if (props == null) {
-			visibility = VISIBILITY_VISIBLE;
-		} else {
-			final String visibText = props.getVisibility();
-			if (visibText == null || visibText.length() == 0) {
-				visibility = VISIBILITY_VISIBLE;
-			} else {
-				final String visibTextTL = visibText.toLowerCase();
-				if (visibTextTL.equals("hidden")) {
-					visibility = VISIBILITY_HIDDEN;
-				} else if (visibTextTL.equals("visible")) {
-					visibility = VISIBILITY_VISIBLE;
-				} else if (visibTextTL.equals("collapse")) {
-					visibility = VISIBILITY_COLLAPSE;
-				} else {
-					visibility = VISIBILITY_VISIBLE;
-				}
+		
+		if (props != null && Strings.isNotBlank(props.getVisibility())) {
+			switch (props.getVisibility()) {
+			case "hidden":
+				this.cachedVisibility = new Integer(VISIBILITY_HIDDEN);
+				return VISIBILITY_HIDDEN;
+			case "collapse":
+				this.cachedVisibility = new Integer(VISIBILITY_COLLAPSE);
+				return VISIBILITY_COLLAPSE;
+			case "visible":
+			default:
+				return getPrevVisibility();
 			}
+		} else {
+			return getPrevVisibility();
 		}
-		this.cachedVisibility = new Integer(visibility);
-		return visibility;
 	}
-
+	
+	private int getPrevVisibility() {
+    	final RenderState prs = this.prevRenderState;
+        if (prs != null) {
+        	this.cachedVisibility = new Integer(prs.getVisibility());
+            return prs.getVisibility();
+        } else {
+        	this.cachedVisibility = new Integer(VISIBILITY_VISIBLE);
+			return VISIBILITY_VISIBLE;
+        }
+    }
+	
 	@Override
 	public int getWhiteSpace() {
 		if (RenderThreadState.getState().overrideNoWrap) {

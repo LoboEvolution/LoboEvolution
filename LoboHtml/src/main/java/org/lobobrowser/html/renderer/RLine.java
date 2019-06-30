@@ -594,16 +594,19 @@ class RLine extends BaseRCollection {
 
 	@Override
 	public void paint(Graphics g) {
-		// Paint according to render state of the start of line first.
 		final RenderState rs = this.modelNode.getRenderState();
+        
 		if (rs != null) {
+			if (rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
+	            return;
+	        }
+			
 			final Color textColor = rs.getColor();
 			g.setColor(textColor);
 			final Font font = rs.getFont();
 			g.setFont(font);
 		}
-		// Note that partial paints of the line can only be done
-		// if all RStyleChanger's are applied first.
+		
 		final Iterator<Renderable> i = this.renderables.iterator();
 		if (i != null) {
 			while (i.hasNext()) {

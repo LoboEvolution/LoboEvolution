@@ -203,7 +203,11 @@ final class RWord extends BaseBoundableRenderable {
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
-		final String word = this.shownWord;
+        if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
+            return;
+        }
+		
+        final String word = this.shownWord;
 		final int width = this.width;
 		final int ascentPlusLeading = this.ascentPlusLeading;
 		final int height = this.height;
