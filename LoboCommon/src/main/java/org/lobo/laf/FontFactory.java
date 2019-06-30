@@ -164,6 +164,8 @@ public class FontFactory {
 				} else if (fontFamilies.contains(faceTL)) {
 					matchingFace = faceTL;
 					break;
+				} else if ("monospace".equals(faceTL)) {
+					baseFont = Font.decode("monospaced");
 				}
 			}
 		}
