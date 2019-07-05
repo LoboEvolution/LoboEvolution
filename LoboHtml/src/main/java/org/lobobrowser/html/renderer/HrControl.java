@@ -29,12 +29,11 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.RenderState;
 
-class HrControl extends BaseControl {
-	/**
-	 * 
-	 */
+public class HrControl extends BaseControl {
+
 	private static final long serialVersionUID = 1L;
 
 	private int availWidth;

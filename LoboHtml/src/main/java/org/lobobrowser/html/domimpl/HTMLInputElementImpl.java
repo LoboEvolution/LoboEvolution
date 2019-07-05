@@ -23,12 +23,33 @@
  */
 package org.lobobrowser.html.domimpl;
 
+import java.io.File;
 import java.util.logging.Level;
 
+import org.lobo.common.Strings;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dom.HTMLInputElement;
 
 public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
+	
+	private final String IMAGE = "image";
+	
+	private final String SUBMIT = "submit";
+	
+	private final String TEXT = "tetx";
+	
+	private final String PASSWORD = "password";
+	
+	private final String HIDDEN = "hidden";
+	
+	private final String RADIO = "radio";
+	
+	private final String CHECKBOX = "checkbox";
+	
+	private final String RESET = "reset";
+	
+	private final String FILE = "file";
+	
 	private boolean defaultChecked;
 
 	public HTMLInputElementImpl(String name) {
@@ -60,45 +81,41 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	protected FormInput[] getFormInputs() {
-		final String type = getType();
+		final String type = Strings.isBlank(getType()) ? "" : getType();
 		final String name = getName();
 		if (name == null) {
 			return null;
 		}
-		if (type == null) {
+
+		switch (type) {
+		case TEXT:
+		case PASSWORD:
+		case HIDDEN:
+		case "":
 			return new FormInput[] { new FormInput(name, getValue()) };
-		} else {
-			if ("text".equals(type) || "password".equals(type) || "hidden".equals(type) || "".equals(type)) {
-				return new FormInput[] { new FormInput(name, getValue()) };
-			} else if ("submit".equals(type)) {
-				// It's done as an "extra" form input
-				return null;
-			} else if ("radio".equals(type) || "checkbox".equals(type)) {
-				if (getChecked()) {
-					String value = getValue();
-					if (value == null || value.length() == 0) {
-						value = "on";
-					}
-					return new FormInput[] { new FormInput(name, value) };
-				} else {
-					return null;
+		case RADIO:
+		case CHECKBOX:
+			if (getChecked()) {
+				String value = getValue();
+				if (value == null || value.length() == 0) {
+					value = "on";
 				}
-			} else if ("image".equals(type)) {
-				// It's done as an "extra" form input
-				return null;
-			} else if ("file".equals(type)) {
-				final java.io.File file = getFileValue();
-				if (file == null) {
-					if (logger.isLoggable(Level.INFO)) {
-						logger.info("getFormInputs(): File input named " + name + " has null file.");
-					}
-					return null;
-				} else {
-					return new FormInput[] { new FormInput(name, file) };
-				}
+				return new FormInput[] { new FormInput(name, value) };
 			} else {
 				return null;
 			}
+		case SUBMIT:
+		case IMAGE:
+			return null;
+		case FILE:
+			final File files = getFileValue();
+			if (files == null) {
+				return null;
+			} else {
+				return new FormInput[] { new FormInput(name, files) };
+			}
+		default:
+			return null;
 		}
 	}
 
@@ -135,27 +152,27 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	public boolean isImageInput() {
 		final String type = getType();
-		return "image".equals(type);
+		return IMAGE.equals(type);
 	}
 
 	public boolean isResetInput() {
 		final String type = getType();
-		return "reset".equals(type);
+		return RESET.equals(type);
 	}
 
 	public boolean isSubmitInput() {
 		final String type = getType();
-		return "submit".equals(type);
+		return SUBMIT.equals(type);
 	}
 
 	public boolean isSubmittableWithEnterKey() {
 		final String type = getType();
-		return type == null || "".equals(type) || "text".equals(type) || "password".equals(type);
+		return (Strings.isBlank(type) || TEXT.equals(type) || PASSWORD.equals(type));
 	}
 
 	public boolean isSubmittableWithPress() {
 		final String type = getType();
-		return "submit".equals(type) || "image".equals(type);
+		return SUBMIT.equals(type) || IMAGE.equals(type);
 	}
 
 	@Override

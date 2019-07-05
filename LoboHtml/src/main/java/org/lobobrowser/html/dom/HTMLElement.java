@@ -80,6 +80,10 @@ public interface HTMLElement extends Element {
 	 * 4.01.
 	 */
 	String getTitle();
+	
+    String getContentEditable();
+
+    void setContentEditable(String contenteditable);
 
 	/**
 	 * The class attribute of the element. This attribute has been renamed due to

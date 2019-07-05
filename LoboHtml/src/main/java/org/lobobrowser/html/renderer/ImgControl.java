@@ -23,57 +23,153 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.image.ImageObserver;
-
-import javax.swing.SwingUtilities;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import org.lobo.common.Strings;
+import org.lobo.common.WrapperLayout;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.ImageEvent;
 import org.lobobrowser.html.domimpl.ImageListener;
-import org.lobobrowser.html.style.FontValues;
+import org.lobobrowser.html.renderer.HtmlController;
+import org.lobobrowser.html.renderer.RElement;
+import org.lobobrowser.html.style.HtmlValues;
 
-class ImgControl extends BaseControl implements ImageListener {
-	/**
-	 * 
-	 */
+public class ImgControl extends BaseControl implements ImageListener {
+
 	private static final long serialVersionUID = 1L;
-	private int declaredHeight;
-	private int declaredWidth;
 
 	private volatile Image image;
 
-	// private final UserAgentContext browserContext;
-	private String lastSrc;
+	private String alt;
 
 	private Dimension preferredSize;
-	private int valign = RElement.VALIGN_BASELINE;
 
+	private int valign = RElement.VALIGN_BASELINE;
+	
+	private boolean mouseBeingPressed;
+	
 	public ImgControl(HTMLImageElementImpl modelNode) {
 		super(modelNode);
-		// this.browserContext = pcontext;
+		setLayout(WrapperLayout.getInstance());
+		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
 		modelNode.addImageListener(this);
+		addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				mouseBeingPressed = true;
+				repaint();
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				mouseBeingPressed = false;
+				repaint();
+				HtmlController.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
+			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					HtmlController.getInstance().onContextMenu(modelNode, e, e.getX(), e.getY());
+				}
+			}
+		});
 	}
 
-	private final boolean checkPreferredSizeChange() {
-		final Dimension newPs = createPreferredSize(this.declaredWidth, this.declaredHeight);
+	@Override
+	public Dimension getPreferredSize() {
 		final Dimension ps = this.preferredSize;
-		if (ps == null) {
-			return true;
-		}
-		if (ps.width != newPs.width || ps.height != newPs.height) {
-			this.preferredSize = newPs;
-			return true;
-		} else {
-			return false;
+		return ps == null ? new Dimension(0, 0) : ps;
+	}
+
+	@Override
+	public int getVAlign() {
+		return this.valign;
+	}
+
+	@Override
+	public void imageLoaded(ImageEvent event) {
+		final Image image = event.image;
+		this.image = image;
+		if (image != null) {
+			final int width = image.getWidth(this);
+			final int height = image.getHeight(this);
+			if (width != -1 && height != -1) {
+				repaint();
+			}
 		}
 	}
 
-	public Dimension createPreferredSize(int dw, int dh) {
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		final Dimension size = this.getSize();
+		final Insets insets = this.getInsets();
+		synchronized (this) {
+		}
+		final Image image = this.image;
+		if (image != null) {
+			g.drawImage(image, insets.left, insets.top, size.width - insets.left - insets.right,
+					size.height - insets.top - insets.bottom, this);
+		} else {
+			g.drawString(alt, 10, 10);
+		}
+		
+		if (this.mouseBeingPressed) {
+			final Color over = new Color(255, 100, 100, 64);
+			final Color oldColor = g.getColor();
+			try {
+				g.setColor(over);
+				g.fillRect(0, 0, size.width, size.height);
+			} finally {
+				g.setColor(oldColor);
+			}
+		}
+	}
+
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
+		final HTMLElementImpl element = this.controlElement;
+		final int dw = HtmlValues.getPixelSize(element.getAttribute("width"), null, -1, availWidth);
+		final int dh = HtmlValues.getPixelSize(element.getAttribute("height"), null, -1, availHeight);
+		this.preferredSize = createPreferredSize(dw, dh);
+		int valign;
+		String alignText = element.getAttribute("align");
+		alignText = Strings.isNotBlank(alignText) ? alignText.toLowerCase().trim() : "";
+
+		switch (alignText) {
+		case "middle":
+			valign = RElement.VALIGN_MIDDLE;
+			break;
+		case "absmiddle":
+			valign = RElement.VALIGN_ABSMIDDLE;
+			break;
+		case "top":
+			valign = RElement.VALIGN_TOP;
+			break;
+		case "bottom":
+			valign = RElement.VALIGN_BOTTOM;
+			break;
+		case "baseline":
+			valign = RElement.VALIGN_BASELINE;
+			break;
+		case "absbottom":
+			valign = RElement.VALIGN_ABSBOTTOM;
+			break;
+		default:
+			valign = RElement.VALIGN_BASELINE;
+			break;
+		}
+		this.valign = valign;
+	}
+
+	private Dimension createPreferredSize(int dw, int dh) {
 		final Image img = this.image;
 		if (dw == -1) {
 			if (dh != -1) {
@@ -112,121 +208,5 @@ class ImgControl extends BaseControl implements ImageListener {
 			}
 		}
 		return new Dimension(dw, dh);
-	}
-
-	@Override
-	public Dimension getPreferredSize() {
-		final Dimension ps = this.preferredSize;
-		return ps == null ? new Dimension(0, 0) : ps;
-	}
-
-	@Override
-	public int getVAlign() {
-		return this.valign;
-	}
-
-	@Override
-	public void imageLoaded(ImageEvent event) {
-		// Implementation of ImageListener. Invoked in a request thread most likely.
-		final Image image = event.image;
-		this.image = image;
-		final int width = image.getWidth(this);
-		final int height = image.getHeight(this);
-		if (width != -1 && height != -1) {
-			this.imageUpdate(image, width, height);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-	 */
-	public void imageUpdate(Image img, final int w, final int h) {
-		SwingUtilities.invokeLater(() -> {
-			if (!checkPreferredSizeChange()) {
-				repaint();
-			} else {
-				ImgControl.this.ruicontrol.preferredSizeInvalidated();
-			}
-		});
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-	 */
-	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
-		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
-			SwingUtilities.invokeLater(() -> {
-				if (!checkPreferredSizeChange()) {
-					repaint();
-				} else {
-					ImgControl.this.ruicontrol.preferredSizeInvalidated();
-				}
-			});
-		}
-		return true;
-	}
-
-	@Override
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		final Dimension size = this.getSize();
-		final Insets insets = this.getInsets();
-		synchronized (this) {
-		}
-		final Image image = this.image;
-		if (image != null) {
-			g.drawImage(image, insets.left, insets.top, size.width - insets.left - insets.right,
-					size.height - insets.top - insets.bottom, this);
-		} else {
-			// TODO: alt
-		}
-	}
-
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-		return inSelection;
-	}
-
-	@Override
-	public void reset(int availWidth, int availHeight) {
-		// Expected in the GUI thread.
-		final HTMLElementImpl element = this.controlElement;
-		final int dw = FontValues.getPixelSize(element.getAttribute("width"), null, -1, availWidth);
-		final int dh = FontValues.getPixelSize(element.getAttribute("height"), null, -1, availWidth);
-		this.declaredWidth = dw;
-		this.declaredHeight = dh;
-		this.preferredSize = createPreferredSize(dw, dh);
-		int valign;
-		String alignText = element.getAttribute("align");
-		if (alignText == null) {
-			valign = RElement.VALIGN_BASELINE;
-		} else {
-			alignText = alignText.toLowerCase().trim();
-			if ("middle".equals(alignText)) {
-				valign = RElement.VALIGN_MIDDLE;
-			} else if ("absmiddle".equals(alignText)) {
-				valign = RElement.VALIGN_ABSMIDDLE;
-			} else if ("top".equals(alignText)) {
-				valign = RElement.VALIGN_TOP;
-			} else if ("bottom".equals(alignText)) {
-				valign = RElement.VALIGN_BOTTOM;
-			} else if ("baseline".equals(alignText)) {
-				valign = RElement.VALIGN_BASELINE;
-			} else if ("absbottom".equals(alignText)) {
-				valign = RElement.VALIGN_ABSBOTTOM;
-			} else {
-				valign = RElement.VALIGN_BASELINE;
-			}
-		}
-		this.valign = valign;
-	}
-
-	@Override
-	public String toString() {
-		return "ImgControl[src=" + this.lastSrc + "]";
 	}
 }

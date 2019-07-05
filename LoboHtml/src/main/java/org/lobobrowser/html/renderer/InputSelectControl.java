@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -12,52 +13,15 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import org.lobo.common.WrapperLayout;
 import org.lobobrowser.html.dom.HTMLOptionElement;
 import org.lobobrowser.html.dom.HTMLOptionsCollection;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
-import org.lobo.common.WrapperLayout;
+import org.lobobrowser.html.renderer.HtmlController;
 
-class InputSelectControl extends BaseInputControl {
-	private static class OptionItem {
-		private final String caption;
-		private final HTMLOptionElement option;
+public class InputSelectControl extends BaseInputControl {
 
-		public OptionItem(HTMLOptionElement option) {
-			this.option = option;
-			final String label = option.getLabel();
-			if (label == null) {
-				this.caption = option.getText();
-			} else {
-				this.caption = label;
-			}
-		}
-
-		public String getValue() {
-			String value = this.option.getValue();
-			if (value == null) {
-				value = this.option.getText();
-			}
-			return value;
-		}
-
-		public boolean isSelected() {
-			return this.option.getSelected();
-		}
-
-		public void setSelected(boolean value) {
-			this.option.setSelected(value);
-		}
-
-		@Override
-		public String toString() {
-			return this.caption;
-		}
-	}
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static final int STATE_COMBO = 1;
 	private static final int STATE_LIST = 2;
@@ -135,9 +99,12 @@ class InputSelectControl extends BaseInputControl {
 			}
 		});
 
-		// Note: Value attribute cannot be set in reset() method.
-		// Otherwise, layout revalidation causes typed values to
-		// be lost (including revalidation due to hover.)
+		if (modelNode.getTitle() != null)
+			comboBox.setToolTipText(modelNode.getTitle());
+		comboBox.setVisible(!modelNode.getHidden());
+		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
+		comboBox.setEditable(new Boolean(modelNode.getContentEditable()));
+		comboBox.setEnabled(!modelNode.getDisabled());
 
 		this.comboBox = comboBox;
 		this.list = list;
@@ -163,19 +130,19 @@ class InputSelectControl extends BaseInputControl {
 	@Override
 	public String[] getValues() {
 		if (this.state == STATE_COMBO) {
-			final OptionItem item = (OptionItem) this.comboBox.getSelectedItem();
+			OptionItem item = (OptionItem) this.comboBox.getSelectedItem();
 			return item == null ? null : new String[] { item.getValue() };
 		} else {
-			final Object[] values = this.list.getSelectedValues();
+			List<OptionItem> values = this.list.getSelectedValuesList();
 			if (values == null) {
 				return null;
 			}
-			final ArrayList<String> al = new ArrayList<String>();
-			for (final Object value2 : values) {
-				final OptionItem item = (OptionItem) value2;
+			ArrayList<String> al = new ArrayList<String>();
+			for (int i = 0; i < values.size(); i++) {
+				OptionItem item = values.get(i);
 				al.add(item.getValue());
 			}
-			return (String[]) al.toArray(new String[0]);
+			return al.toArray(new String[0]);
 		}
 	}
 
@@ -356,5 +323,41 @@ class InputSelectControl extends BaseInputControl {
 	@Override
 	public void setVisibleSize(int value) {
 		this.comboBox.setMaximumRowCount(value);
+	}
+
+	private static class OptionItem {
+		private final String caption;
+		private final HTMLOptionElement option;
+
+		public OptionItem(HTMLOptionElement option) {
+			this.option = option;
+			final String label = option.getLabel();
+			if (label == null) {
+				this.caption = option.getText();
+			} else {
+				this.caption = label;
+			}
+		}
+
+		public String getValue() {
+			String value = this.option.getValue();
+			if (value == null) {
+				value = this.option.getText();
+			}
+			return value;
+		}
+
+		public boolean isSelected() {
+			return this.option.getSelected();
+		}
+
+		public void setSelected(boolean value) {
+			this.option.setSelected(value);
+		}
+
+		@Override
+		public String toString() {
+			return this.caption;
+		}
 	}
 }

@@ -22,97 +22,60 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.ImageObserver;
-
-import javax.swing.SwingUtilities;
-
+import org.lobo.common.Strings;
+import org.lobo.common.WrapperLayout;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.ImageEvent;
 import org.lobobrowser.html.domimpl.ImageListener;
+import org.lobobrowser.html.renderer.HtmlController;
+import org.lobobrowser.html.renderer.RElement;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobo.common.WrapperLayout;
 
-class InputImageControl extends BaseInputControl implements ImageListener {
-	/**
-	 * 
-	 */
+public class InputImageControl extends BaseInputControl implements ImageListener {
+
 	private static final long serialVersionUID = 1L;
-	private int declaredHeight;
 
-	private int declaredWidth;
+	private volatile Image image;
 
-	private Image image;
-	// private JButton button;
-	private boolean mouseBeingPressed;
+	private String alt;
+
 	private Dimension preferredSize;
+
 	private int valign = RElement.VALIGN_BASELINE;
+	
+	private boolean mouseBeingPressed;
 
 	public InputImageControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
-//		JButton button = new LocalButton();
-//		this.button = button;
-//		button.setMargin(RBlockViewport.ZERO_INSETS);
-//		button.setBorder(null);
-//		this.add(button);
+		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
 		modelNode.addImageListener(this);
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				InputImageControl.this.mouseBeingPressed = true;
+				mouseBeingPressed = true;
 				repaint();
 			}
-
-//			public void mouseExited(MouseEvent e) {
-//				mouseBeingPressed = false;
-//				repaint();
-//			}
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				InputImageControl.this.mouseBeingPressed = false;
+				mouseBeingPressed = false;
 				repaint();
 				HtmlController.getInstance().onPressed(modelNode, e, e.getX(), e.getY());
 			}
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON3) {
+					HtmlController.getInstance().onContextMenu(modelNode, e, e.getX(), e.getY());
+				}
+			}
 		});
-	}
-
-	private final boolean checkPreferredSizeChange() {
-		final Dimension newPs = createPreferredSize(this.declaredWidth, this.declaredHeight);
-		final Dimension ps = this.preferredSize;
-		if (ps == null) {
-			return true;
-		}
-		if (ps.width != newPs.width || ps.height != newPs.height) {
-			this.preferredSize = newPs;
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public Dimension createPreferredSize(int dw, int dh) {
-		final Image img = this.image;
-		if (dw == -1) {
-			dw = img == null ? -1 : img.getWidth(this);
-			if (dw == -1) {
-				dw = 0;
-			}
-		}
-		if (dh == -1) {
-			dh = img == null ? -1 : img.getHeight(this);
-			if (dh == -1) {
-				dh = 0;
-			}
-		}
-		return new Dimension(dw, dh);
 	}
 
 	@Override
@@ -128,50 +91,15 @@ class InputImageControl extends BaseInputControl implements ImageListener {
 
 	@Override
 	public void imageLoaded(ImageEvent event) {
-		// Implementation of ImageListener. Invoked in a request thread most likely.
 		final Image image = event.image;
-//		ImageIcon imageIcon = new ImageIcon(image);
-//		this.button.setIcon(imageIcon);
 		this.image = image;
-		final int width = image.getWidth(this);
-		final int height = image.getHeight(this);
-		if (width != -1 && height != -1) {
-			this.imageUpdate(image, width, height);
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-	 */
-	public void imageUpdate(Image img, final int w, final int h) {
-		SwingUtilities.invokeLater(() -> {
-			if (!checkPreferredSizeChange()) {
+		if (image != null) {
+			final int width = image.getWidth(this);
+			final int height = image.getHeight(this);
+			if (width != -1 && height != -1) {
 				repaint();
-			} else {
-				InputImageControl.this.ruicontrol.preferredSizeInvalidated();
 			}
-		});
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.awt.Component#imageUpdate(java.awt.Image, int, int, int, int, int)
-	 */
-	@Override
-	public boolean imageUpdate(Image img, int infoflags, int x, int y, final int w, final int h) {
-		if ((infoflags & ImageObserver.ALLBITS) != 0 || (infoflags & ImageObserver.FRAMEBITS) != 0) {
-			SwingUtilities.invokeLater(() -> {
-				if (!checkPreferredSizeChange()) {
-					repaint();
-				} else {
-					InputImageControl.this.ruicontrol.preferredSizeInvalidated();
-				}
-			});
 		}
-		return true;
 	}
 
 	@Override
@@ -186,25 +114,18 @@ class InputImageControl extends BaseInputControl implements ImageListener {
 			g.drawImage(image, insets.left, insets.top, size.width - insets.left - insets.right,
 					size.height - insets.top - insets.bottom, this);
 		} else {
-			// TODO: alt
+			g.drawString(alt, 10, 10);
 		}
 		if (this.mouseBeingPressed) {
 			final Color over = new Color(255, 100, 100, 64);
-			if (over != null) {
-				final Color oldColor = g.getColor();
-				try {
-					g.setColor(over);
-					g.fillRect(0, 0, size.width, size.height);
-				} finally {
-					g.setColor(oldColor);
-				}
+			final Color oldColor = g.getColor();
+			try {
+				g.setColor(over);
+				g.fillRect(0, 0, size.width, size.height);
+			} finally {
+				g.setColor(oldColor);
 			}
 		}
-	}
-
-	@Override
-	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-		return inSelection;
 	}
 
 	@Override
@@ -213,46 +134,75 @@ class InputImageControl extends BaseInputControl implements ImageListener {
 		final HTMLElementImpl element = this.controlElement;
 		final int dw = HtmlValues.getPixelSize(element.getAttribute("width"), null, -1, availWidth);
 		final int dh = HtmlValues.getPixelSize(element.getAttribute("height"), null, -1, availHeight);
-		this.declaredWidth = dw;
-		this.declaredHeight = dh;
 		this.preferredSize = createPreferredSize(dw, dh);
 		int valign;
 		String alignText = element.getAttribute("align");
-		if (alignText == null) {
+		alignText = Strings.isNotBlank(alignText) ? alignText.toLowerCase().trim() : "";
+
+		switch (alignText) {
+		case "middle":
+			valign = RElement.VALIGN_MIDDLE;
+			break;
+		case "absmiddle":
+			valign = RElement.VALIGN_ABSMIDDLE;
+			break;
+		case "top":
+			valign = RElement.VALIGN_TOP;
+			break;
+		case "bottom":
+			valign = RElement.VALIGN_BOTTOM;
+			break;
+		case "baseline":
 			valign = RElement.VALIGN_BASELINE;
-		} else {
-			alignText = alignText.toLowerCase().trim();
-			if ("middle".equals(alignText)) {
-				valign = RElement.VALIGN_MIDDLE;
-			} else if ("absmiddle".equals(alignText)) {
-				valign = RElement.VALIGN_ABSMIDDLE;
-			} else if ("top".equals(alignText)) {
-				valign = RElement.VALIGN_TOP;
-			} else if ("bottom".equals(alignText)) {
-				valign = RElement.VALIGN_BOTTOM;
-			} else if ("baseline".equals(alignText)) {
-				valign = RElement.VALIGN_BASELINE;
-			} else if ("absbottom".equals(alignText)) {
-				valign = RElement.VALIGN_ABSBOTTOM;
-			} else {
-				valign = RElement.VALIGN_BASELINE;
-			}
+			break;
+		case "absbottom":
+			valign = RElement.VALIGN_ABSBOTTOM;
+			break;
+		default:
+			valign = RElement.VALIGN_BASELINE;
+			break;
 		}
 		this.valign = valign;
 	}
 
-	@Override
-	public void resetInput() {
-		// NOP
+	private Dimension createPreferredSize(int dw, int dh) {
+		final Image img = this.image;
+		if (dw == -1) {
+			if (dh != -1) {
+				final int iw = img == null ? -1 : img.getWidth(this);
+				final int ih = img == null ? -1 : img.getHeight(this);
+				if (ih == 0) {
+					dw = iw == -1 ? 0 : iw;
+				} else if (iw == -1 || ih == -1) {
+					dw = 0;
+				} else {
+					dw = dh * iw / ih;
+				}
+			} else {
+				dw = img == null ? -1 : img.getWidth(this);
+				if (dw == -1) {
+					dw = 0;
+				}
+			}
+		}
+		if (dh == -1) {
+			if (dw != -1) {
+				final int iw = img == null ? -1 : img.getWidth(this);
+				final int ih = img == null ? -1 : img.getHeight(this);
+				if (iw == 0) {
+					dh = ih == -1 ? 0 : ih;
+				} else if (iw == -1 || ih == -1) {
+					dh = 0;
+				} else {
+					dh = dw * ih / iw;
+				}
+			} else {
+				dh = img == null ? -1 : img.getHeight(this);
+				if (dh == -1) {
+					dh = 0;
+				}
+			}
+		}
+		return new Dimension(dw, dh);
 	}
-
-//	private static class LocalButton extends JButton {
-//		public void revalidate() {
-//			// ignore
-//		}
-//		
-//		public void repaint() {
-//			// ignore
-//		}
-//	}
 }

@@ -28,24 +28,28 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
-class InputPasswordControl extends InputTextControl {
-	/**
-	 * 
-	 */
+public class InputPasswordControl extends BaseInputTextControl  {
+	
 	private static final long serialVersionUID = 1L;
 
 	public InputPasswordControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
+		JPasswordField pwd = (JPasswordField) this.widget;
+		if (modelNode.getTitle() != null) pwd.setToolTipText(modelNode.getTitle());
+		pwd.setVisible(!modelNode.getHidden());
+		pwd.applyComponentOrientation(direction(modelNode.getDir()));
+		pwd.setEditable(new Boolean(modelNode.getContentEditable()));
+		pwd.setEnabled(!modelNode.getDisabled());
+		pwd.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.xamjwg.html.renderer.InputTextControl#createTextField(java.lang.String)
-	 */
 	@Override
 	protected JTextComponent createTextField() {
 		return new JPasswordField();
+	}
+	
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
 	}
 }

@@ -25,14 +25,13 @@ package org.lobobrowser.html.renderer;
 
 import javax.swing.JButton;
 
+import org.lobo.common.WrapperLayout;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
-import org.lobo.common.WrapperLayout;
+import org.lobobrowser.html.renderer.HtmlController;
 
-class InputButtonControl extends BaseInputControl {
-	/**
-	 * 
-	 */
+public class InputButtonControl extends BaseInputControl {
+
 	private static final long serialVersionUID = 1L;
 	private final JButton widget;
 
@@ -42,26 +41,19 @@ class InputButtonControl extends BaseInputControl {
 		final JButton widget = new JButton();
 		widget.setContentAreaFilled(false);
 		this.widget = widget;
+		if(modelNode.getTitle() != null) widget.setToolTipText(modelNode.getTitle());
+		widget.setVisible(!modelNode.getHidden());
+		widget.applyComponentOrientation(direction(modelNode.getDir()));
+		widget.setEnabled(!modelNode.getDisabled());
 		this.add(widget);
-		widget.addActionListener(
-				event -> HtmlController.getInstance().onPressed(InputButtonControl.this.controlElement, null, 0, 0));
+		widget.addActionListener(event -> HtmlController.getInstance().onPressed(InputButtonControl.this.controlElement, null, 0, 0));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#click()
-	 */
 	@Override
 	public void click() {
 		this.widget.doClick();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getValue()
-	 */
 	@Override
 	public String getValue() {
 		return this.widget.getText();
@@ -93,21 +85,11 @@ class InputButtonControl extends BaseInputControl {
 	}
 
 	@Override
-	public void resetInput() {
-		// nop
-	}
-
-	@Override
 	public void setDisabled(boolean disabled) {
 		super.setDisabled(disabled);
 		this.widget.setEnabled(!disabled);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setValue(java.lang.String)
-	 */
 	@Override
 	public void setValue(String value) {
 		this.widget.setText(value);

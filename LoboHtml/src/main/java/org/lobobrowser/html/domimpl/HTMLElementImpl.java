@@ -768,6 +768,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	public void setStyle(String value) {
 		this.setAttribute("style", value);
 	}
+	
+    @Override
+    public String getContentEditable() {
+        String contenteditable = this.getAttribute("contenteditable");
+        return Strings.isBlank(contenteditable) ? "true" : contenteditable;
+    }
+
+    @Override
+    public void setContentEditable(String contenteditable) {
+        this.setAttribute("contenteditable", contenteditable);
+    }
 
 	@Override
 	public String toString() {

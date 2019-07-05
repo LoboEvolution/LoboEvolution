@@ -25,13 +25,12 @@ package org.lobobrowser.html.renderer;
 
 import javax.swing.JCheckBox;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobo.common.WrapperLayout;
+import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.renderer.HtmlController;
 
-class InputCheckboxControl extends BaseInputControl {
-	/**
-	 * 
-	 */
+public class InputCheckboxControl extends BaseInputControl {
+	
 	private static final long serialVersionUID = 1L;
 	private final JCheckBox widget;
 
@@ -41,30 +40,21 @@ class InputCheckboxControl extends BaseInputControl {
 		final JCheckBox checkBox = new JCheckBox();
 		checkBox.setOpaque(false);
 		this.widget = checkBox;
-
-		// Note: Value attribute cannot be set in reset() method.
-		// Otherwise, layout revalidation causes typed values to
-		// be lost (including revalidation due to hover.)
+		if(modelNode.getTitle() != null) checkBox.setToolTipText(modelNode.getTitle());
+		checkBox.setVisible(!modelNode.getHidden());
+		checkBox.applyComponentOrientation(direction(modelNode.getDir()));
 		checkBox.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
-
-		this.add(checkBox);
+		checkBox.setEnabled(!modelNode.getDisabled());
+		checkBox.setSelected(modelNode.getChecked());
+		checkBox.addActionListener(event -> HtmlController.getInstance().onPressed(InputCheckboxControl.this.controlElement, null, 0, 0));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#click()
-	 */
 	@Override
 	public void click() {
 		this.widget.doClick();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getChecked()
-	 */
+
 	@Override
 	public boolean getChecked() {
 		return this.widget.isSelected();
@@ -85,21 +75,13 @@ class InputCheckboxControl extends BaseInputControl {
 		this.widget.setSelected(this.controlElement.getAttributeAsBoolean("checked"));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setChecked(boolean)
-	 */
+
 	@Override
 	public void setChecked(boolean checked) {
 		this.widget.setSelected(checked);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setDisabled(boolean)
-	 */
+
 	@Override
 	public void setDisabled(boolean disabled) {
 		super.setDisabled(disabled);

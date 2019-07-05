@@ -20,6 +20,7 @@
 */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -33,30 +34,11 @@ import javax.swing.JTextField;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
 public class InputFileControl extends BaseInputControl {
-	private class BrowseAction extends AbstractAction {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			final JFileChooser chooser = new JFileChooser();
-			if (chooser.showOpenDialog(InputFileControl.this) == JFileChooser.APPROVE_OPTION) {
-				setFileValue(chooser.getSelectedFile());
-			} else {
-				setFileValue(null);
-			}
-		}
-	}
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final JButton browseButton = new JButton();
 
-	private File fileValue;
+	private File filesValue;
 
 	private final JTextField textField = new JTextField();
 
@@ -66,23 +48,32 @@ public class InputFileControl extends BaseInputControl {
 		final JButton browseButton = this.browseButton;
 		browseButton.setAction(new BrowseAction());
 		browseButton.setText("Browse");
-		final java.awt.Dimension ps = this.textField.getPreferredSize();
+		final Dimension ps = this.textField.getPreferredSize();
 		this.textField.setPreferredSize(new java.awt.Dimension(128, ps.height));
 		this.textField.setEditable(false);
+		if (modelNode.getTitle() != null)
+			this.textField.setToolTipText(modelNode.getTitle());
+		textField.setVisible(!modelNode.getHidden());
+		textField.applyComponentOrientation(direction(modelNode.getDir()));
+		textField.setEditable(new Boolean(modelNode.getContentEditable()));
+		textField.setEnabled(!modelNode.getDisabled());
 		this.add(this.textField);
 		this.add(Box.createHorizontalStrut(4));
 		this.add(browseButton);
 	}
 
 	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
+	}
+
+	@Override
 	public File getFileValue() {
-		return this.fileValue;
+		return this.filesValue;
 	}
 
 	@Override
 	public String getValue() {
-		// This is the way browsers behave, even
-		// though this value is not submitted.
 		return this.textField.getText();
 	}
 
@@ -97,16 +88,27 @@ public class InputFileControl extends BaseInputControl {
 	}
 
 	private void setFileValue(File file) {
-		this.fileValue = file;
+		this.filesValue = file;
 		if (file == null) {
 			this.textField.setText("");
 		} else {
-			this.textField.setText(file.getAbsolutePath());
+			String paths = file.getAbsolutePath();
+			this.textField.setText(paths);
 		}
 	}
 
-	@Override
-	public void setValue(String value) {
-		// nop - security
+	private class BrowseAction extends AbstractAction {
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			final JFileChooser chooser = new JFileChooser();
+			if (chooser.showOpenDialog(InputFileControl.this) == JFileChooser.APPROVE_OPTION) {
+				setFileValue(chooser.getSelectedFile());
+			} else {
+				setFileValue(null);
+			}
+		}
 	}
 }

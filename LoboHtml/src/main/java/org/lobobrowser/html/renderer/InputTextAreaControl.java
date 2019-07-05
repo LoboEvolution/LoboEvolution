@@ -23,6 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
@@ -32,15 +33,12 @@ import javax.swing.JTextArea;
 import javax.swing.text.JTextComponent;
 
 import org.lobo.common.Strings;
+import org.lobo.common.WrapperLayout;
 import org.lobobrowser.html.domimpl.ElementImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.style.HtmlValues;
-import org.lobo.common.WrapperLayout;
 
-class InputTextAreaControl extends BaseInputControl {
-	/**
-	 * 
-	 */
+public class InputTextAreaControl extends BaseInputControl {
+
 	private static final long serialVersionUID = 1L;
 	private int cols = -1;
 
@@ -52,13 +50,15 @@ class InputTextAreaControl extends BaseInputControl {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		final JTextComponent widget = createTextField();
+		if(modelNode.getTitle() != null) widget.setToolTipText(modelNode.getTitle());
+		widget.setVisible(!modelNode.getHidden());
+		widget.applyComponentOrientation(direction(modelNode.getDir()));
+		widget.setEditable(new Boolean(modelNode.getContentEditable()));
+		widget.setEnabled(!modelNode.getDisabled());
+		widget.setSelectionColor(Color.BLUE);
 		this.widget = widget;
 		this.add(new JScrollPane(widget));
-
-		// Note: Value attribute cannot be set in reset() method.
-		// Otherwise, layout revalidation causes typed values to
-		// be lost (including revalidation due to hover.)
-
+		
 		final ElementImpl element = this.controlElement;
 		final String value = element.getTextContent();
 		((JTextArea) widget).setLineWrap(true);
@@ -140,14 +140,22 @@ class InputTextAreaControl extends BaseInputControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		final ElementImpl element = this.controlElement;
-		
 		final String colsStr = element.getAttribute("cols");
-		int cols = HtmlValues.getPixelSize(colsStr, null, 0);
-		setCols(cols);
-
+		if (colsStr != null) {
+			try {
+				setCols(Integer.parseInt(colsStr));
+			} catch (final NumberFormatException nfe) {
+				// ignore
+			}
+		}
 		final String rowsStr = element.getAttribute("rows");
-		int rows = HtmlValues.getPixelSize(rowsStr, null, 0);
-		setRows(rows);
+		if (rowsStr != null) {
+			try {
+				setRows(Integer.parseInt(rowsStr));
+			} catch (final NumberFormatException nfe) {
+				// ignore
+			}
+		}
 	}
 
 	@Override
@@ -155,11 +163,6 @@ class InputTextAreaControl extends BaseInputControl {
 		this.widget.setText("");
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setCols(int)
-	 */
 	@Override
 	public void setCols(int cols) {
 		if (cols != this.cols) {
@@ -168,21 +171,12 @@ class InputTextAreaControl extends BaseInputControl {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setReadOnly(boolean)
-	 */
 	@Override
 	public void setReadOnly(boolean readOnly) {
 		this.widget.setEditable(readOnly);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setRows(int)
-	 */
+
 	@Override
 	public void setRows(int rows) {
 		if (rows != this.rows) {
@@ -191,11 +185,6 @@ class InputTextAreaControl extends BaseInputControl {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#setValue(java.lang.String)
-	 */
 	@Override
 	public void setValue(String value) {
 		this.widget.setText(value);

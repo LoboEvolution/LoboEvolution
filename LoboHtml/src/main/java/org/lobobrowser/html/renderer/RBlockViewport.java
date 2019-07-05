@@ -45,6 +45,7 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 import org.lobo.common.ArrayUtilities;
+import org.lobo.common.Strings;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.domimpl.DocumentFragmentImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
@@ -1159,34 +1160,46 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
+	public final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
 		String type = markupElement.getAttribute("type");
 		if (type == null) {
 			return new InputTextControl(markupElement);
 		}
-		type = type.toLowerCase();
-		if ("text".equals(type) || type.length() == 0) {
+
+		type = Strings.isBlank(type) ? "" : type.toLowerCase();
+		switch (type) {
+		case "text":
 			return new InputTextControl(markupElement);
-		} else if ("hidden".equals(type)) {
-			return null;
-		} else if ("submit".equals(type)) {
+		case "hidden":
+			return new InputHiddenControl(markupElement);
+		case "submit":
 			return new InputButtonControl(markupElement);
-		} else if ("password".equals(type)) {
+		case "password":
 			return new InputPasswordControl(markupElement);
-		} else if ("radio".equals(type)) {
-			return new InputRadioControl(markupElement);
-		} else if ("checkbox".equals(type)) {
-			return new InputCheckboxControl(markupElement);
-		} else if ("image".equals(type)) {
-			return new InputImageControl(markupElement);
-		} else if ("reset".equals(type)) {
-			return new InputButtonControl(markupElement);
-		} else if ("button".equals(type)) {
-			return new InputButtonControl(markupElement);
-		} else if ("file".equals(type)) {
+		case "file":
 			return new InputFileControl(markupElement);
-		} else {
-			return null;
+		case "number":
+			return new InputNumberControl(markupElement);
+		case "email":
+			return new InputEmailControl(markupElement);
+		case "color":
+			return new InputColorPickerControl(markupElement);
+		case "url":
+			return new InputUrlControl(markupElement);
+		case "tel":
+			return new InputPhoneControl(markupElement);
+		case "radio":
+			return new InputRadioControl(markupElement);
+		case "checkbox":
+			return new InputCheckboxControl(markupElement);
+		case "button":
+			return new InputButtonControl(markupElement);
+		case "image":
+			return new InputImageControl(markupElement);
+		case "reset":
+			return new InputButtonControl(markupElement);
+		default:
+			return new InputTextControl(markupElement);
 		}
 	}
 

@@ -23,35 +23,174 @@
  */
 package org.lobobrowser.html.renderer;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
+import javax.swing.text.PlainDocument;
 
-import org.lobobrowser.html.domimpl.ElementImpl;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.style.HtmlValues;
+import org.lobo.common.Strings;
 import org.lobo.common.WrapperLayout;
+import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
 abstract class BaseInputTextControl extends BaseInputControl {
-	/**
-	 * Implements maxlength functionality.
-	 */
-	private class LimitedDocument extends javax.swing.text.PlainDocument {
-		/**
-		 * 
-		 */
+
+	private static final float DEFAULT_FONT_SIZE = 14.0f;
+
+	private static final long serialVersionUID = 1L;
+
+	private int maxLength = -1;
+
+	protected final JTextComponent widget;
+
+	private Color placeholderForeground = new Color(160, 160, 160);
+
+	private boolean textWrittenIn;
+
+	protected abstract JTextComponent createTextField();
+	
+	public BaseInputTextControl(final HTMLBaseInputElement modelNode) {
+		super(modelNode);
+		setLayout(WrapperLayout.getInstance());
+		final JTextComponent widget = createTextField();
+		final Font font = widget.getFont();
+		widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
+		widget.setDocument(new LimitedDocument());
+		widget.setText(modelNode.getValue());
+		widget.setSelectionColor(Color.BLUE);
+		this.widget = widget;
+		if(Strings.isNotBlank(modelNode.getPlaceholder())) {
+			placeholder(modelNode.getPlaceholder());
+		}
+		this.add(widget);
+	}
+	
+	private void placeholder(String text) {
+		this.customizeText(text);
+		
+		widget.addFocusListener(new FocusListener() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				if (!isTextWrittenIn()) {
+					widget.setText("");
+				}
+			}
+
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (Strings.isBlank(widget.getText())) {
+					customizeText(text);
+				}
+			}
+		});
+	}
+	
+	private void customizeText(String text) {
+		widget.setText(text);
+		widget.setForeground(placeholderForeground);
+		setTextWrittenIn(false);
+	}
+
+	@Override
+	public int getMaxLength() {
+		return this.maxLength;
+	}
+
+	@Override
+	public Dimension getPreferredSize() {
+		final int size = this.size;
+		final JTextComponent widget = this.widget;
+		final FontMetrics fm = widget.getFontMetrics(widget.getFont());
+		final Insets insets = widget.getInsets();
+		int pw, ph;
+		if (size == -1) {
+			pw = 100;
+		} else {
+			pw = insets.left + insets.right + fm.charWidth('0') * size;
+		}
+		ph = fm.getHeight() + insets.top + insets.bottom;
+		return new Dimension(pw, ph);
+	}
+
+	@Override
+	public boolean getReadOnly() {
+		return !this.widget.isEditable();
+	}
+
+
+	@Override
+	public String getValue() {
+		return this.widget.getText();
+	}
+
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
+		final String maxLengthText = this.controlElement.getAttribute("maxlength");
+		if (maxLengthText != null) {
+			try {
+				this.maxLength = Integer.parseInt(maxLengthText);
+			} catch (final NumberFormatException nfe) {
+				// ignore
+			}
+		}
+	}
+
+	@Override
+	public void resetInput() {
+		this.widget.setText("");
+	}
+
+
+	@Override
+	public void select() {
+		this.widget.selectAll();
+	}
+
+
+	@Override
+	public void setDisabled(boolean disabled) {
+		super.setDisabled(disabled);
+		this.widget.setEnabled(!disabled);
+	}
+
+
+	@Override
+	public void setMaxLength(int maxLength) {
+		this.maxLength = maxLength;
+	}
+
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		this.widget.setEditable(!readOnly);
+	}
+
+
+	@Override
+	public void setValue(String value) {
+		this.widget.setText(value);
+	}
+	
+	public boolean isTextWrittenIn() {
+		return textWrittenIn;
+	}
+
+	public void setTextWrittenIn(boolean textWrittenIn) {
+		this.textWrittenIn = textWrittenIn;
+	}
+
+	private class LimitedDocument extends PlainDocument {
+
 		private static final long serialVersionUID = 1L;
 
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see javax.swing.text.PlainDocument#insertString(int, java.lang.String,
-		 * javax.swing.text.AttributeSet)
-		 */
 		@Override
 		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
 			final int max = BaseInputTextControl.this.maxLength;
@@ -71,145 +210,5 @@ abstract class BaseInputTextControl extends BaseInputControl {
 				super.insertString(offs, str, a);
 			}
 		}
-	}
-
-	private static final float DEFAULT_FONT_SIZE = 14.0f;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private int maxLength = -1;
-
-	protected final JTextComponent widget;
-
-	public BaseInputTextControl(final HTMLBaseInputElement modelNode) {
-		super(modelNode);
-		setLayout(WrapperLayout.getInstance());
-		final JTextComponent widget = createTextField();
-		final Font font = widget.getFont();
-		widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
-		widget.setDocument(new LimitedDocument());
-
-		// Note: Value attribute cannot be set in reset() method.
-		// Otherwise, layout revalidation causes typed values to
-		// be lost (including revalidation due to hover.)
-		final ElementImpl element = this.controlElement;
-		final String value = element.getAttribute("value");
-		widget.setText(value);
-
-		this.widget = widget;
-		this.add(widget);
-	}
-
-	protected abstract JTextComponent createTextField();
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getMaxLength()
-	 */
-	@Override
-	public int getMaxLength() {
-		return this.maxLength;
-	}
-
-	@Override
-	public java.awt.Dimension getPreferredSize() {
-		final int size = this.size;
-		final JTextComponent widget = this.widget;
-		final FontMetrics fm = widget.getFontMetrics(widget.getFont());
-		final Insets insets = widget.getInsets();
-		int pw, ph;
-		if (size == -1) {
-			pw = 100;
-		} else {
-			pw = insets.left + insets.right + fm.charWidth('0') * size;
-		}
-		ph = fm.getHeight() + insets.top + insets.bottom;
-		return new java.awt.Dimension(pw, ph);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getReadOnly()
-	 */
-	@Override
-	public boolean getReadOnly() {
-		return !this.widget.isEditable();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#getValue()
-	 */
-	@Override
-	public String getValue() {
-		return this.widget.getText();
-	}
-
-	@Override
-	public void reset(int availWidth, int availHeight) {
-		super.reset(availWidth, availHeight);
-		final String maxLengthText = this.controlElement.getAttribute("maxlength");
-		this.maxLength = HtmlValues.getPixelSize(maxLengthText, null, 0);
-	}
-
-	@Override
-	public void resetInput() {
-		this.widget.setText("");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#select()
-	 */
-	@Override
-	public void select() {
-		this.widget.selectAll();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setDisabled(boolean)
-	 */
-	@Override
-	public void setDisabled(boolean disabled) {
-		super.setDisabled(disabled);
-		this.widget.setEnabled(!disabled);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setMaxLength(int)
-	 */
-	@Override
-	public void setMaxLength(int maxLength) {
-		this.maxLength = maxLength;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setReadOnly(boolean)
-	 */
-	@Override
-	public void setReadOnly(boolean readOnly) {
-		this.widget.setEditable(!readOnly);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.InputContext#setValue(java.lang.String)
-	 */
-	@Override
-	public void setValue(String value) {
-		this.widget.setText(value);
 	}
 }

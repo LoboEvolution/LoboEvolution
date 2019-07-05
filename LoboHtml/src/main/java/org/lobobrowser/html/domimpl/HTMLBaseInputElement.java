@@ -24,6 +24,7 @@
 package org.lobobrowser.html.domimpl;
 
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 
 import org.lobobrowser.html.FormInput;
@@ -32,22 +33,10 @@ import org.lobobrowser.html.js.Executor;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 
-public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
-	private class LocalImageListener implements ImageListener {
-		private final String expectedImgSrc;
-
-		public LocalImageListener(String imgSrc) {
-			this.expectedImgSrc = imgSrc;
-		}
-
-		@Override
-		public void imageLoaded(ImageEvent event) {
-			dispatchEvent(this.expectedImgSrc, event);
-		}
-	}
+public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	protected String deferredValue;
-	private java.awt.Image image = null;
+	private Image image = null;
 
 	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
 
@@ -69,17 +58,13 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	 */
 	public void addImageListener(ImageListener listener) {
 		final ArrayList<ImageListener> l = this.imageListeners;
-		Image currentImage;
+		java.awt.Image currentImage;
 		synchronized (l) {
 			currentImage = this.image;
 			l.add(listener);
 		}
 		if (currentImage != null) {
-			// Call listener right away if there's already an
-			// image; holding no locks.
 			listener.imageLoaded(new ImageEvent(this, currentImage));
-			// Should not call onload handler here. That's taken
-			// care of otherwise.
 		}
 	}
 
@@ -129,7 +114,6 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 		final Function onload = getOnload();
 		if (onload != null) {
-			// TODO: onload event object?
 			Executor.executeFunction(HTMLBaseInputElement.this, onload, null);
 		}
 	}
@@ -162,12 +146,25 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		return getAttribute("defaultValue");
 	}
 
+	public String getPlaceholder() {
+		return this.getAttribute("placeholder");
+	}
+
+	public void setPlaceholder(String placeholder) {
+		this.setAttribute("placeholder", placeholder);
+	}
+
 	public boolean getDisabled() {
 		final InputContext ic = this.inputContext;
 		return ic == null ? false : ic.getDisabled();
 	}
 
-	protected java.io.File getFileValue() {
+	public boolean getChecked() {
+		final InputContext ic = this.inputContext;
+		return ic == null ? false : ic.getChecked();
+	}
+
+	protected File getFileValue() {
 		final InputContext ic = this.inputContext;
 		if (ic != null) {
 			return ic.getFileValue();
@@ -184,14 +181,13 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		return (HTMLFormElement) parent;
 	}
 
-	public final java.awt.Image getImage() {
+	public final Image getImage() {
 		synchronized (this.imageListeners) {
 			return this.image;
 		}
 	}
 
 	public String getName() {
-		// TODO: Should this return valid of "id"?
 		return getAttribute("name");
 	}
 
@@ -345,6 +341,19 @@ public abstract class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null) {
 			form.submit(extraFormInputs);
+		}
+	}
+
+	private class LocalImageListener implements ImageListener {
+		private final String expectedImgSrc;
+
+		public LocalImageListener(String imgSrc) {
+			this.expectedImgSrc = imgSrc;
+		}
+
+		@Override
+		public void imageLoaded(ImageEvent event) {
+			dispatchEvent(this.expectedImgSrc, event);
 		}
 	}
 

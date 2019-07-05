@@ -28,26 +28,29 @@ import javax.swing.text.JTextComponent;
 
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 
-class InputTextControl extends BaseInputTextControl {
-	/**
-	 * 
-	 */
+public class InputTextControl extends BaseInputTextControl {
+
 	private static final long serialVersionUID = 1L;
 
 	public InputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
-		final JTextField w = (JTextField) this.widget;
-		w.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
+		JTextField text = (JTextField) this.widget;
+		if (modelNode.getTitle() != null) text.setToolTipText(modelNode.getTitle());
+		text.setVisible(!modelNode.getHidden());
+		
+		text.applyComponentOrientation(direction(modelNode.getDir()));
+		text.setEditable(new Boolean(modelNode.getContentEditable()));
+		text.setEnabled(!modelNode.getDisabled());
+		text.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputTextControl#createTextField(java.lang.
-	 * String)
-	 */
 	@Override
 	protected JTextComponent createTextField() {
 		return new JTextField();
+	}
+
+	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
 	}
 }
