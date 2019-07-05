@@ -278,7 +278,6 @@ public class StyleSheetRenderState implements RenderState {
 		if (binfo != INVALID_BACKGROUND_INFO) {
 			return binfo;
 		}
-		binfo = null;
 		final AbstractCSSProperties props = getCssProperties();
 		if (props != null) {
 			final String backgroundColorText = props.getBackgroundColor();
