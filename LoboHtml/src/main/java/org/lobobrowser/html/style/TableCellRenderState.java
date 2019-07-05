@@ -166,37 +166,27 @@ public class TableCellRenderState extends DisplayRenderState {
 		HtmlInsets insets = this.paddingInsets;
 		if (insets != INVALID_INSETS) {
 			return insets;
-		}
-		insets = super.getPaddingInsets();
-		if (insets == null) {
+		} else {
+
 			final HTMLTableElement tableElement = getTableElement();
 			if (tableElement == null) {
 				// Return without caching
 				return null;
 			}
 			String cellPaddingText = tableElement.getAttribute("cellpadding");
-			if (cellPaddingText != null && cellPaddingText.length() != 0) {
+			if (Strings.isNotBlank(cellPaddingText)) {
 				cellPaddingText = cellPaddingText.trim();
-				int cellPadding;
-				int cellPaddingType;
+				int cellPadding = HtmlValues.getPixelSize(cellPaddingText, this, 0);
+				int cellPaddingType = HtmlInsets.TYPE_PIXELS;
+
 				if (cellPaddingText.endsWith("%")) {
 					cellPaddingType = HtmlInsets.TYPE_PERCENT;
-					try {
-						cellPadding = Integer.parseInt(cellPaddingText.substring(0, cellPaddingText.length() - 1));
-					} catch (final NumberFormatException nfe) {
-						cellPadding = 0;
-					}
-				} else {
-					cellPaddingType = HtmlInsets.TYPE_PIXELS;
-					try {
-						cellPadding = Integer.parseInt(cellPaddingText);
-					} catch (final NumberFormatException nfe) {
-						cellPadding = 0;
-					}
 				}
 				insets = new HtmlInsets();
 				insets.top = insets.left = insets.right = insets.bottom = cellPadding;
 				insets.topType = insets.leftType = insets.rightType = insets.bottomType = cellPaddingType;
+			} else {
+				insets = super.getPaddingInsets();
 			}
 		}
 		this.paddingInsets = insets;

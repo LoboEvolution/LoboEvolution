@@ -54,7 +54,6 @@ class VirtualCell {
 	}
 
 	public HtmlLength getHeightLength() {
-		// TODO: Does not consider cellpadding and border
 		final RTableCell cell = this.actualCell;
 		final String heightText = cell.getHeightText();
 		HtmlLength length;
