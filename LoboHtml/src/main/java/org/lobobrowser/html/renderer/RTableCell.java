@@ -26,6 +26,7 @@ package org.lobobrowser.html.renderer;
 import java.awt.Dimension;
 
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
+import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
@@ -97,7 +98,13 @@ class RTableCell extends RBlock {
 	}
 
 	public String getHeightText() {
-		return this.cellElement.getHeight();
+        AbstractCSSProperties props = this.cellElement.getCurrentStyle();
+        String heightText = props == null ? null : props.getHeight();
+        if (heightText == null) {
+            return this.cellElement.getHeight();
+        } else {
+            return heightText;
+        }
 	}
 
 	public int getRowSpan() {
@@ -133,7 +140,13 @@ class RTableCell extends RBlock {
 	}
 
 	public String getWidthText() {
-		return this.cellElement.getWidth();
+        AbstractCSSProperties props = this.cellElement.getCurrentStyle();
+        String heightText = props == null ? null : props.getHeight();
+        if (heightText == null) {
+            return this.cellElement.getHeight();
+        } else {
+            return heightText;
+        }
 	}
 
 	@Override
