@@ -37,6 +37,7 @@ import java.util.logging.Level;
 import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
 import org.lobobrowser.html.FormInput;
+import org.lobobrowser.html.dom.DOMTokenList;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSSProperties;
@@ -307,8 +308,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	@Override
 	public String getClassName() {
 		final String className = getAttribute("class");
-		// Blank required instead of null.
 		return className == null ? "" : className;
+	}
+	
+	public DOMTokenList getClassList() {
+        return new DOMTokenListImpl(this, this.getClassName());
 	}
 
 	public AbstractCSSProperties getComputedStyle(String pseudoElement) {
