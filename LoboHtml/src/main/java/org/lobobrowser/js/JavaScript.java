@@ -23,7 +23,6 @@ package org.lobobrowser.js;
 import java.lang.ref.WeakReference;
 import java.util.WeakHashMap;
 
-import java.util.Objects;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 

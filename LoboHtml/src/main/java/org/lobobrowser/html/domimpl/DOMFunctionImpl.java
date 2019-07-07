@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.lobobrowser.html.js.Event;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.UserAgentContext;
 import org.mozilla.javascript.Function;
@@ -16,6 +15,7 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
+import org.w3c.dom.events.Event;
 
 public class DOMFunctionImpl extends NodeImpl {
 	

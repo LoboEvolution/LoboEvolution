@@ -27,6 +27,8 @@ import java.io.LineNumberReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.SocketPermission;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -39,12 +41,10 @@ import java.util.logging.Logger;
 
 import org.lobo.common.Domains;
 import org.lobo.common.Nodes;
-import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLDocument;
 import org.lobobrowser.html.dom.HTMLElement;
-import org.lobobrowser.html.dom.HTMLHeadElement;
 import org.lobobrowser.html.dom.HTMLLinkElement;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
@@ -58,19 +58,11 @@ import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.Attr;
-import org.w3c.dom.CDATASection;
-import org.w3c.dom.Comment;
-import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.DocumentFragment;
-import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.StyleSheetList;
@@ -84,7 +76,7 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 /**
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
-public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, DocumentView {
+public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
 
 	private static class ImageInfo {
 		public ImageEvent imageEvent;
@@ -223,25 +215,17 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private String defaultTarget;
 
-	private DocumentType doctype;
-
 	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>();
 
-	private String documentURI;
-
-	private java.net.URL documentURL;
+	private URL documentURL;
 
 	private String domain;
 
-	private DOMConfiguration domConfig;
-
 	private DOMImplementation domImplementation;
-
-	private final Map<String, Element> elementsById = new HashMap<String, Element>();
+	
+    private final Map<String, Element> elementsById = new HashMap<String, Element>();
 
 	private final Map<String, Element> elementsByName = new HashMap<String, Element>();
-
-	private final ElementFactory factory;
 
 	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>();
 
@@ -255,7 +239,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	private WritableLineReader reader;
 	private String referrer;
-	private boolean strictErrorChecking = true;
+
 	private StyleSheetAggregator styleSheetAggregator = null;
     private final CSSStyleSheetListImpl styleSheets = new CSSStyleSheetListImpl();
 	private String title;
@@ -265,10 +249,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	private final Window window;
 
 	private String xmlEncoding;
-
-	private boolean xmlStandalone;
-
-	private String xmlVersion = null;
 
 	public HTMLDocumentImpl(HtmlRendererContext rcontext) {
 		this(rcontext.getUserAgentContext(), rcontext, null, null);
@@ -280,24 +260,19 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	public HTMLDocumentImpl(final UserAgentContext ucontext, final HtmlRendererContext rcontext,
 			WritableLineReader reader, String documentURI) {
-		this.factory = ElementFactory.getInstance();
 		this.rcontext = rcontext;
 		this.ucontext = ucontext;
 		this.reader = reader;
-		this.documentURI = documentURI;
 		try {
-			final java.net.URL docURL = new java.net.URL(documentURI);
+			final URL docURL = new URL(documentURI);
 			final SecurityManager sm = System.getSecurityManager();
 			if (sm != null) {
-				// Do not allow creation of HTMLDocumentImpl if there's
-				// no permission to connect to the host of the URL.
-				// This is so that cookies cannot be written arbitrarily
-				// with setCookie() method.
-				sm.checkPermission(new java.net.SocketPermission(docURL.getHost(), "connect"));
+				sm.checkPermission(new SocketPermission(docURL.getHost(), "connect"));
 			}
 			this.documentURL = docURL;
 			this.domain = docURL.getHost();
-		} catch (final java.net.MalformedURLException mfu) {
+			this. setDocumentURI(documentURI);
+		} catch (final MalformedURLException mfu) {
 			logger.warning("HTMLDocumentImpl(): Document URI [" + documentURI + "] is malformed.");
 		}
 		this.document = this;
@@ -343,17 +318,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		this.allInvalidated();
 	}
 
-	@Override
-	public Node adoptNode(Node source) throws DOMException {
-		if (source instanceof NodeImpl) {
-			final NodeImpl node = (NodeImpl) source;
-			node.setOwnerDocument(this, true);
-			return node;
-		} else {
-			throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Invalid Node implementation");
-		}
-	}
-
 	/**
 	 * Informs listeners that the whole document has been invalidated.
 	 */
@@ -397,62 +361,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	}
 
 	@Override
-	public Attr createAttribute(String name) throws DOMException {
-		return new AttrImpl(name);
-	}
-
-	@Override
-	public CDATASection createCDATASection(String data) throws DOMException {
-		final CDataSectionImpl node = new CDataSectionImpl(data);
-		node.setOwnerDocument(this);
-		return node;
-	}
-
-	@Override
-	public Comment createComment(String data) {
-		final CommentImpl node = new CommentImpl(data);
-		node.setOwnerDocument(this);
-		return node;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.w3c.dom.Document#createDocumentFragment()
-	 */
-	@Override
-	public DocumentFragment createDocumentFragment() {
-		// TODO: According to documentation, when a document
-		// fragment is added to a node, its children are added,
-		// not itself.
-		final DocumentFragmentImpl node = new DocumentFragmentImpl();
-		node.setOwnerDocument(this);
-		return node;
-	}
-
-	@Override
-	public Element createElement(String tagName) throws DOMException {
-		return this.factory.createElement(this, tagName);
-	}
-
-	@Override
-	public ProcessingInstruction createProcessingInstruction(String target, String data) throws DOMException {
-		final HTMLProcessingInstruction node = new HTMLProcessingInstruction(target, data);
-		node.setOwnerDocument(this);
-		return node;
-	}
-
-	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new StyleSheetRenderState(this);
 	}
 
-	@Override
-	public Text createTextNode(String data) {
-		final TextImpl node = new TextImpl(data);
-		node.setOwnerDocument(this);
-		return node;
-	}
 
 	public void externalScriptLoading(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -469,7 +381,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	@Override
 	public String getBaseURI() {
 		final String buri = this.baseURI;
-		return buri == null ? this.documentURI : buri;
+		return buri == null ? this.getDocumentURI() : buri;
 	}
 
 	@Override
@@ -492,29 +404,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		return this.window;
 	}
 
-	@Override
-	public DocumentType getDoctype() {
-		return this.doctype;
-	}
-
-	@Override
-	public Element getDocumentElement() {
-		for (Node node : Nodes.iterable(nodeList)) {
-			if (node instanceof Element) {
-				return (Element) node;
-			}
-		}
-		return null;
-	}
 
 	String getDocumentHost() {
 		final URL docUrl = this.documentURL;
 		return docUrl == null ? null : docUrl.getHost();
-	}
-
-	@Override
-	public String getDocumentURI() {
-		return this.documentURI;
 	}
 
 	@Override
@@ -528,26 +421,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		return this.domain;
 	}
 
-	@Override
-	public DOMConfiguration getDomConfig() {
-		synchronized (this) {
-			if (this.domConfig == null) {
-				this.domConfig = new DOMConfigurationImpl();
-			}
-			return this.domConfig;
-		}
-	}
 
-	@Override
-	public Element getElementById(String elementId) {
-        if (Strings.isNotBlank(elementId)) {
-            synchronized (this) {
-                return (Element) this.elementsById.get(elementId);
-            }
-        } else {
-            return null;
-        }
-	}
 
 	/**
 	 * Gets the collection of elements whose <code>name</code> attribute is
@@ -713,11 +587,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		return this.referrer;
 	}
 
-	@Override
-	public boolean getStrictErrorChecking() {
-		return this.strictErrorChecking;
-	}
-
 	final StyleSheetAggregator getStyleSheetAggregator() {
 		synchronized (this.treeLock) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
@@ -750,7 +619,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 
 	@Override
 	public String getURL() {
-		return this.documentURI;
+		return this.getDocumentURI();
 	}
 
 	@Override
@@ -761,16 +630,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	@Override
 	public String getXmlEncoding() {
 		return this.xmlEncoding;
-	}
-
-	@Override
-	public boolean getXmlStandalone() {
-		return this.xmlStandalone;
-	}
-
-	@Override
-	public String getXmlVersion() {
-		return this.xmlVersion;
 	}
 
 	@Override
@@ -1064,15 +923,6 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		this.defaultTarget = value;
 	}
 
-	public void setDoctype(DocumentType doctype) {
-		this.doctype = doctype;
-	}
-
-	@Override
-	public void setDocumentURI(String documentURI) {
-		// TODO: Security considerations? Chaging documentURL?
-		this.documentURI = documentURI;
-	}
 
 	public void setDomain(String domain) {
 		final String oldDomain = this.domain;
@@ -1121,12 +971,7 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 	public void setReferrer(String value) {
 		this.referrer = value;
 	}
-
-	@Override
-	public void setStrictErrorChecking(boolean strictErrorChecking) {
-		this.strictErrorChecking = strictErrorChecking;
-	}
-
+	
 	@Override
 	public void setTextContent(String textContent) throws DOMException {
 		// NOP, per spec
@@ -1142,21 +987,10 @@ public class HTMLDocumentImpl extends DOMFunctionImpl implements HTMLDocument, D
 		final Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
 			if (org.lobobrowser.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
-				// TODO: onload event object?
 				Executor.executeFunction(this, onloadHandler, null);
 			}
 		}
 		return super.setUserData(key, data, handler);
-	}
-
-	@Override
-	public void setXmlStandalone(boolean xmlStandalone) throws DOMException {
-		this.xmlStandalone = xmlStandalone;
-	}
-
-	@Override
-	public void setXmlVersion(String xmlVersion) throws DOMException {
-		this.xmlVersion = xmlVersion;
 	}
 
 	public void sizeInvalidated(NodeImpl node) {

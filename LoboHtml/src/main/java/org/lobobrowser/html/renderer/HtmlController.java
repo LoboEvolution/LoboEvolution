@@ -12,10 +12,11 @@ import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.domimpl.ModelNode;
-import org.lobobrowser.html.js.Event;
+import org.lobobrowser.html.js.EventImpl;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
+import org.w3c.dom.events.Event;
 
 class HtmlController {
 	private static final HtmlController instance = new HtmlController();
@@ -30,7 +31,7 @@ class HtmlController {
 			final HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
 			final Function f = uiElement.getOnchange();
 			if (f != null) {
-				final Event jsEvent = new Event("change", uiElement);
+				final Event jsEvent = new EventImpl("change", uiElement);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -48,7 +49,7 @@ class HtmlController {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOncontextmenu();
 			if (f != null) {
-				final Event jsEvent = new Event("contextmenu", uiElement, event, x, y);
+				final Event jsEvent = new EventImpl("contextmenu", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -80,7 +81,7 @@ class HtmlController {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOndblclick();
 			if (f != null) {
-				final Event jsEvent = new Event("dblclick", uiElement, event, x, y);
+				final Event jsEvent = new EventImpl("dblclick", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}
@@ -124,7 +125,7 @@ class HtmlController {
 		if (node instanceof HTMLAbstractUIElement) {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOnclick();
-            final Event jsEvent = new Event("click", uiElement, event, x, y);
+            final Event jsEvent = new EventImpl("click", uiElement, event, x, y);
             uiElement.dispatchEvent(jsEvent);
 			if (f != null) {
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
@@ -197,7 +198,7 @@ class HtmlController {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOnmousedown();
 			if (f != null) {
-				final Event jsEvent = new Event("mousedown", uiElement, event, x, y);
+				final Event jsEvent = new EventImpl("mousedown", uiElement, event, x, y);
 				pass = Executor.executeFunction(uiElement, f, jsEvent);
 			}
 		}
@@ -225,7 +226,7 @@ class HtmlController {
 				uiElement.setMouseOver(false);
 				final Function f = uiElement.getOnmouseout();
 				if (f != null) {
-					final Event jsEvent = new Event("mouseout", uiElement, event, x, y);
+					final Event jsEvent = new EventImpl("mouseout", uiElement, event, x, y);
 					Executor.executeFunction(uiElement, f, jsEvent);
 				}
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
@@ -247,7 +248,7 @@ class HtmlController {
 				uiElement.setMouseOver(true);
 				final Function f = uiElement.getOnmouseover();
 				if (f != null) {
-					final Event jsEvent = new Event("mouseover", uiElement, event, x, y);
+					final Event jsEvent = new EventImpl("mouseover", uiElement, event, x, y);
 					Executor.executeFunction(uiElement, f, jsEvent);
 				}
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
@@ -268,7 +269,7 @@ class HtmlController {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOnmouseup();
 			if (f != null) {
-				final Event jsEvent = new Event("mouseup", uiElement, event, x, y);
+				final Event jsEvent = new EventImpl("mouseup", uiElement, event, x, y);
 				pass = Executor.executeFunction(uiElement, f, jsEvent);
 			}
 		}
@@ -297,7 +298,7 @@ class HtmlController {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOnclick();
 			if (f != null) {
-				final Event jsEvent = new Event("click", uiElement, event, x, y);
+				final Event jsEvent = new EventImpl("click", uiElement, event, x, y);
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;
 				}

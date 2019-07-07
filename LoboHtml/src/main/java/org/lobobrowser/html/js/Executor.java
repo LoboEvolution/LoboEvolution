@@ -31,6 +31,7 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.events.Event;
 
 public class Executor {
 	private static final Logger logger = Logger.getLogger(Executor.class.getName());

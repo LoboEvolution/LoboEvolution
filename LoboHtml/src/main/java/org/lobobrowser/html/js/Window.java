@@ -63,6 +63,7 @@ import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS3Properties;
+import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventException;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
