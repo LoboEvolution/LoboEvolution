@@ -38,6 +38,7 @@ import javax.swing.Timer;
 
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
+import org.lobobrowser.html.dom.xpath.XPathResultImpl;
 import org.lobobrowser.html.domimpl.CommentImpl;
 import org.lobobrowser.html.domimpl.HTMLDivElementImpl;
 import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
@@ -555,6 +556,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			try {
                 windowScope = (Scriptable) JavaScript.getInstance().getJavascriptObject(this, null);
                 windowScope = ctx.initSafeStandardObjects((ScriptableObject)windowScope);
+                
+                Object xpathresult = JavaScript.getInstance().getJavascriptObject(new XPathResultImpl(), windowScope);
+				ScriptableObject.putProperty(windowScope, "XPathResult", xpathresult);
+				                
 				this.windowScope = windowScope;
 				return windowScope;
 			} finally {
@@ -590,7 +595,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
         final JavaClassWrapper eventWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(Event.class);
         final Function eventFunction = JavaObjectWrapper.getConstructor("Event", eventWrapper, ws, xi);
         ScriptableObject.defineProperty(ws, "Event", eventFunction, ScriptableObject.READONLY);
-        
+                
         defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
         defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
         defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);

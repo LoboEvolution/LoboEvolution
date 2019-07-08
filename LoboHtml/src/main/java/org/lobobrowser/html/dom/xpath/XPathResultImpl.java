@@ -638,92 +638,72 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Gets the any type.
-	 *
-	 * @return the any type
+	 * @return the aNY_TYPE
 	 */
-	public static short getAnyType() {
+	public static short getANY_TYPE() {
 		return ANY_TYPE;
 	}
 
 	/**
-	 * Gets the number type.
-	 *
-	 * @return the number type
+	 * @return the nUMBER_TYPE
 	 */
-	public static short getNumberType() {
+	public static short getNUMBER_TYPE() {
 		return NUMBER_TYPE;
 	}
 
 	/**
-	 * Gets the string type.
-	 *
-	 * @return the string type
+	 * @return the sTRING_TYPE
 	 */
-	public static short getStringType() {
+	public static short getSTRING_TYPE() {
 		return STRING_TYPE;
 	}
 
 	/**
-	 * Gets the boolean type.
-	 *
-	 * @return the boolean type
+	 * @return the bOOLEAN_TYPE
 	 */
-	public static short getBooleanType() {
+	public static short getBOOLEAN_TYPE() {
 		return BOOLEAN_TYPE;
 	}
 
 	/**
-	 * Gets the unordered node iterator type.
-	 *
-	 * @return the unordered node iterator type
+	 * @return the uNORDERED_NODE_ITERATOR_TYPE
 	 */
-	public static short getUnorderedNodeIteratorType() {
+	public static short getUNORDERED_NODE_ITERATOR_TYPE() {
 		return UNORDERED_NODE_ITERATOR_TYPE;
 	}
 
 	/**
-	 * Gets the ordered node iterator type.
-	 *
-	 * @return the ordered node iterator type
+	 * @return the oRDERED_NODE_ITERATOR_TYPE
 	 */
-	public static short getOrderedNodeIteratorType() {
+	public static short getORDERED_NODE_ITERATOR_TYPE() {
 		return ORDERED_NODE_ITERATOR_TYPE;
 	}
 
 	/**
-	 * Gets the unordered node snapshot type.
-	 *
-	 * @return the unordered node snapshot type
+	 * @return the uNORDERED_NODE_SNAPSHOT_TYPE
 	 */
-	public static short getUnorderedNodeSnapshotType() {
+	public static short getUNORDERED_NODE_SNAPSHOT_TYPE() {
 		return UNORDERED_NODE_SNAPSHOT_TYPE;
 	}
 
 	/**
-	 * Gets the ordered node snapshot type.
-	 *
-	 * @return the ordered node snapshot type
+	 * @return the oRDERED_NODE_SNAPSHOT_TYPE
 	 */
-	public static short getOrderedNodeSnapshotType() {
+	public static short getORDERED_NODE_SNAPSHOT_TYPE() {
 		return ORDERED_NODE_SNAPSHOT_TYPE;
 	}
 
 	/**
-	 * Gets the any unordered node type.
-	 *
-	 * @return the any unordered node type
+	 * @return the aNY_UNORDERED_NODE_TYPE
 	 */
-	public static short getAnyUnorderedNodeType() {
+	public static short getANY_UNORDERED_NODE_TYPE() {
 		return ANY_UNORDERED_NODE_TYPE;
 	}
 
 	/**
-	 * Gets the first ordered node type.
-	 *
-	 * @return the first ordered node type
+	 * @return the fIRST_ORDERED_NODE_TYPE
 	 */
-	public static short getFirstOrderedNodeType() {
+	public static short getFIRST_ORDERED_NODE_TYPE() {
 		return FIRST_ORDERED_NODE_TYPE;
 	}
 
