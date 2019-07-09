@@ -559,6 +559,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
                 
                 Object xpathresult = JavaScript.getInstance().getJavascriptObject(new XPathResultImpl(), windowScope);
 				ScriptableObject.putProperty(windowScope, "XPathResult", xpathresult);
+				
+				Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(new Console(), windowScope);
+				ScriptableObject.putProperty(windowScope, "console", consoleJSObj);
+				
+				
 				                
 				this.windowScope = windowScope;
 				return windowScope;
