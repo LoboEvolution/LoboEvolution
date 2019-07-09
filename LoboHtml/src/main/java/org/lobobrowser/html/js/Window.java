@@ -180,6 +180,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
 	/** The Constant XMLHTTPREQUEST_WRAPPER. */
 	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
+
+	/** The Constant XMLSERIALIZER_WRAPPER. */
+	private static final JavaClassWrapper XMLSERIALIZER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLSerializer.class);
 	
 	/** The Constant TEXT_WRAPPER. */
 	private static final JavaClassWrapper TEXT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(TextImpl.class);
@@ -596,6 +599,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			}
 			return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
 		};
+
+		JavaInstantiator jiXMLSerializer = () -> new XMLSerializer();
 		
 		JavaInstantiator text = () -> new TextImpl();
 		
@@ -603,6 +608,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 
 		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
+
+		Function xmlserial = JavaObjectWrapper.getConstructor("XMLSerializer", XMLSERIALIZER_WRAPPER, jiXMLSerializer);
+		ScriptableObject.defineProperty(ws, "XMLSerializer", xmlserial, ScriptableObject.READONLY);
 		
 		Function txt = JavaObjectWrapper.getConstructor("Text", TEXT_WRAPPER, text);
 		ScriptableObject.defineProperty(ws, "Text", txt, ScriptableObject.READONLY);
