@@ -50,6 +50,13 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	private boolean propagationStopped = false;
 	
 	private final boolean bubbles;
+	
+	public EventImpl() {
+		this.type = null;
+		this.srcElement = null;
+		this.inputEvent = null;
+		this.bubbles = false;
+	}
 
 	public EventImpl(final String type, final Node srcElement, final boolean bubbles) {
 		this.type = type;

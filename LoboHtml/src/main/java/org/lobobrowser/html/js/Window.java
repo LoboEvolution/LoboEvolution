@@ -176,9 +176,19 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
 	private static final Logger logger = Logger.getLogger(Window.class.getName());
-
+	
+	/** The Constant XMLHTTPREQUEST_WRAPPER. */
+	private static final JavaClassWrapper XMLHTTPREQUEST_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
+	
+	/** The Constant TEXT_WRAPPER. */
+	private static final JavaClassWrapper TEXT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(TextImpl.class);
+	
+	/** The Constant EVENT_WRAPPER. */
+	private static final JavaClassWrapper EVENT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(EventImpl.class);
+	
+	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
+	
 	private static int timerIdCounter = 0;
 	
 	private static int generateTimerID() {
@@ -314,17 +324,16 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	private final void defineElementClass(Scriptable scope, final Document document, final String jsClassName,
-			final String elementName, Class javaClass) {
-		final JavaInstantiator ji = () -> {
-			final Document d = document;
+	private final void defineElementClass(Scriptable scope, final Document document, final String jsClassName, final String elementName, Class<?> javaClass) {
+		JavaInstantiator ji = () -> {
+			Document d = document;
 			if (d == null) {
 				throw new IllegalStateException("Document not set in current context.");
 			}
 			return d.createElement(elementName);
 		};
-		final JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
-		final Function constructorFunction = JavaObjectWrapper.getConstructor(jsClassName, classWrapper, scope, ji);
+		JavaClassWrapper classWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
+		Function constructorFunction = JavaObjectWrapper.getConstructor(jsClassName, classWrapper, ji);
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
 	
@@ -562,9 +571,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				
 				Object consoleJSObj = JavaScript.getInstance().getJavascriptObject(new Console(), windowScope);
 				ScriptableObject.putProperty(windowScope, "console", consoleJSObj);
-				
-				
-				                
+
 				this.windowScope = windowScope;
 				return windowScope;
 			} finally {
@@ -574,34 +581,36 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	private void initWindowScope(final Document doc) {
-		final Scriptable ws = getWindowScope();
-		final JavaInstantiator xi = () -> {
-			final Document d = doc;
+		final Scriptable ws = this.getWindowScope();
+		JavaInstantiator jiXhttp = () -> {
+			Document d = doc;
+			if (d == null) {
+				throw new IllegalStateException("Cannot perform operation when document is unset.");
+			}
+			HTMLDocumentImpl hd;
 			try {
-                if (d == null) {
-                    throw new IllegalStateException("Cannot perform operation when document is unset.");
-                }
-                HTMLDocumentImpl hd = (HTMLDocumentImpl) d;
-                return new XMLHttpRequest(Window.this.uaContext, hd.getDocumentURL(), ws);
-			} catch (final ClassCastException err) {
+				hd = (HTMLDocumentImpl) d;
+			} catch (ClassCastException err) {
 				throw new IllegalStateException(
 						"Cannot perform operation with documents of type " + d.getClass().getName() + ".");
 			}
+			return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
 		};
+		
+		JavaInstantiator text = () -> new TextImpl();
+		
+		JavaInstantiator event = () -> new EventImpl();
 
-        final JavaClassWrapper xmlHttpRequestWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(XMLHttpRequest.class);
-        final Function xmlHttpRequestFunction = JavaObjectWrapper.getConstructor("XMLHttpRequest", xmlHttpRequestWrapper, ws, xi);
-        ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestFunction, ScriptableObject.READONLY);
-        
-        final JavaClassWrapper textWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(TextImpl.class);
-        final Function textWrapperFunction = JavaObjectWrapper.getConstructor("Text", textWrapper, ws, xi);
-        ScriptableObject.defineProperty(ws, "Text", textWrapperFunction, ScriptableObject.READONLY);
-        
-        final JavaClassWrapper eventWrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(Event.class);
-        final Function eventFunction = JavaObjectWrapper.getConstructor("Event", eventWrapper, ws, xi);
-        ScriptableObject.defineProperty(ws, "Event", eventFunction, ScriptableObject.READONLY);
-                
-        defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
+		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, jiXhttp);
+		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
+		
+		Function txt = JavaObjectWrapper.getConstructor("Text", TEXT_WRAPPER, text);
+		ScriptableObject.defineProperty(ws, "Text", txt, ScriptableObject.READONLY);
+		
+		Function evt = JavaObjectWrapper.getConstructor("Event", EVENT_WRAPPER, event);
+		ScriptableObject.defineProperty(ws, "Event", evt, ScriptableObject.READONLY);
+
+		defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
         defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
         defineElementClass(ws, doc, "Script", "script", HTMLScriptElementImpl.class);
         defineElementClass(ws, doc, "IFrame", "iframe", HTMLIFrameElementImpl.class);
