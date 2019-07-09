@@ -79,7 +79,6 @@ import org.lobobrowser.html.renderer.RenderableSpot;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
-import java.util.Objects;
 import org.w3c.dom.Node;
 
 /**

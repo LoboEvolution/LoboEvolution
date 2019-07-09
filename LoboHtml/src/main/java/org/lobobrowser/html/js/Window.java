@@ -190,6 +190,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	/** The Constant EVENT_WRAPPER. */
 	private static final JavaClassWrapper EVENT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(EventImpl.class);
 	
+	/** The Constant DOMPARSER_WRAPPER. */
+	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(DOMParser.class);
+	
 	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
 	
 	private static int timerIdCounter = 0;
@@ -605,6 +608,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		JavaInstantiator text = () -> new TextImpl();
 		
 		JavaInstantiator event = () -> new EventImpl();
+		
+		JavaInstantiator jiDomParser = () -> new DOMParser();
 
 		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
@@ -617,6 +622,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		
 		Function evt = JavaObjectWrapper.getConstructor("Event", EVENT_WRAPPER, event);
 		ScriptableObject.defineProperty(ws, "Event", evt, ScriptableObject.READONLY);
+		
+		Function domParser = JavaObjectWrapper.getConstructor("DOMParser", DOMPARSER_WRAPPER, jiDomParser);
+		ScriptableObject.defineProperty(ws, "DOMParser", domParser, ScriptableObject.READONLY);
 
 		defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
         defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
