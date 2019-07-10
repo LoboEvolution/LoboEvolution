@@ -1,10 +1,8 @@
 package org.lobobrowser.html.domimpl;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
+import org.lobobrowser.html.dom.filter.IdFilter;
 import org.lobobrowser.html.dom.xpath.XPathEvaluatorImpl;
 import org.lobobrowser.html.dom.xpath.XPathResultImpl;
 import org.lobobrowser.html.js.EventImpl;
@@ -20,6 +18,7 @@ import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.events.DocumentEvent;
@@ -40,8 +39,6 @@ public class DocumentImpl extends DOMFunctionImpl implements Document, DocumentE
 	private String documentURI;
 
 	private DocumentType doctype;
-
-	private final Map<String, Element> elementById = new HashMap<String, Element>(0);
 
 	@Override
 	public Node adoptNode(Node source) throws DOMException {
@@ -131,17 +128,8 @@ public class DocumentImpl extends DOMFunctionImpl implements Document, DocumentE
 
 	@Override
 	public Element getElementById(String elementId) {
-		if (Strings.isNotBlank(elementId)) {
-			synchronized (this) {
-				return (Element) this.elementById.get(elementId);
-			}
-		} else {
-			return null;
-		}
-	}
-
-	public Map<String, Element> getElementById() {
-		return elementById;
+		NodeList nodeList = getNodeList(new IdFilter(elementId));
+		return nodeList != null && nodeList.getLength() > 0 ? (Element)nodeList.item(0) : null;
 	}
 
 	@Override
