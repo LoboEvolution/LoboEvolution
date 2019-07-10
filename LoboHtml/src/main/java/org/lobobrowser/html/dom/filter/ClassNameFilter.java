@@ -18,20 +18,21 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Nov 13, 2005
- */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dom.filter;
 
+import org.lobobrowser.html.dom.NodeFilter;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class TextFilter implements NodeFilter {
-	public TextFilter() {
-		super();
+public class ClassNameFilter implements NodeFilter {
+	private final String _class;
+
+	public ClassNameFilter(String _class) {
+		this._class = _class;
 	}
 
-	@Override
 	public boolean accept(Node node) {
-		return node instanceof org.w3c.dom.Text;
+		return (node instanceof Element)
+				&& this._class.equals(((Element) node).getAttribute("class"));
 	}
 }

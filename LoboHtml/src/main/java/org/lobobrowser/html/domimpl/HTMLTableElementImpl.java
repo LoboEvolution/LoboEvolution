@@ -31,6 +31,7 @@ import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLTableCaptionElement;
 import org.lobobrowser.html.dom.HTMLTableElement;
 import org.lobobrowser.html.dom.HTMLTableSectionElement;
+import org.lobobrowser.html.dom.filter.ElementFilter;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;

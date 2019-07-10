@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.lobobrowser.html.dom.filter.ClassNameFilter;
+import org.lobobrowser.html.dom.filter.ElementFilter;
+import org.lobobrowser.html.dom.filter.TagNameFilter;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.UserAgentContext;
 import org.mozilla.javascript.Function;
@@ -158,35 +161,5 @@ public class DOMFunctionImpl extends NodeImpl {
 			}
 		}
 		return false;
-	}
-	
-	private class TagNameFilter implements NodeFilter {
-		private final String name;
-
-		public TagNameFilter(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public boolean accept(Node node) {
-			if (!(node instanceof Element)) {
-				return false;
-			}
-			final String n = this.name;
-			return n.equalsIgnoreCase(((Element) node).getTagName());
-		}
-	}
-	
-	private class ClassNameFilter  implements NodeFilter {
-		private final String _class;
-
-		public ClassNameFilter(String _class) {
-			this._class = _class;
-		}
-
-		public boolean accept(Node node) {
-			return (node instanceof Element)
-					&& this._class.equals(((Element) node).getAttribute("class"));
-		}
 	}
 }

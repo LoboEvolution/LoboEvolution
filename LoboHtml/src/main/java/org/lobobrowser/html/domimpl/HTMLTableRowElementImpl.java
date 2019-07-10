@@ -28,6 +28,7 @@ import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLTableCellElement;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
+import org.lobobrowser.html.dom.NodeFilter;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

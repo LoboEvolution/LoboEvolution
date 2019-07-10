@@ -1,9 +1,9 @@
 package org.lobobrowser.html.domimpl;
 
-import org.lobobrowser.html.dom.HTMLOptionElement;
 import org.lobobrowser.html.dom.HTMLOptionsCollection;
+import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.dom.filter.OptionFilter;
 import org.w3c.dom.DOMException;
-import org.w3c.dom.Node;
 
 public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTMLOptionsCollection {
 	
@@ -16,12 +16,5 @@ public class HTMLOptionsCollectionImpl extends HTMLCollectionImpl implements HTM
 	@Override
 	public void setLength(int length) throws DOMException {
 		throw new UnsupportedOperationException();
-	}
-	
-	private static class OptionFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return node instanceof HTMLOptionElement;
-		}
 	}
 }

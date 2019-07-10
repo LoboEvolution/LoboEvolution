@@ -18,24 +18,21 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Dec 3, 2005
- */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dom.filter;
 
-import org.lobo.common.Strings;
+import org.lobobrowser.html.dom.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public final class ElementFilter implements NodeFilter {
-	private final String elementName;
+public class IdFilter implements NodeFilter {
+	private final String _id;
 
-	public ElementFilter(String name) {
-		this.elementName = name;
+	public IdFilter(String _id) {
+		this._id = _id;
 	}
-
+	
 	@Override
 	public boolean accept(Node node) {
-		return Strings.isNotBlank(elementName) ? (this.elementName.equalsIgnoreCase(node.getNodeName())) : (node instanceof Element);
+		return (node instanceof Element) && this._id.equals(((Element) node).getAttribute("id"));
 	}
 }

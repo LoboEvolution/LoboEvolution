@@ -30,6 +30,8 @@ import java.util.ArrayList;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLFormElement;
+import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.dom.filter.InputFilter;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
@@ -37,19 +39,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFormElement {
-	private class InputFilter implements NodeFilter {
-		/*
-		 * (non-Javadoc)
-		 * 
-		 * @see org.xamjwg.html.domimpl.NodeFilter#accept(org.w3c.dom.Node)
-		 */
-		@Override
-		public boolean accept(Node node) {
-			return HTMLFormElementImpl.isInput(node);
-		}
-	}
 
-	static boolean isInput(Node node) {
+	public static boolean isInput(Node node) {
 		final String name = node.getNodeName().toLowerCase();
 		return name.equals("input") || name.equals("textarea") || name.equals("select");
 	}

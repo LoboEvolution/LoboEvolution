@@ -58,6 +58,8 @@ import org.w3c.dom.UserDataHandler;
 import org.lobo.common.Nodes;
 import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.HTMLCollection;
+import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.dom.filter.TextFilter;
 
 public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
 		

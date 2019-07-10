@@ -45,7 +45,17 @@ import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLDocument;
 import org.lobobrowser.html.dom.HTMLElement;
-import org.lobobrowser.html.dom.HTMLLinkElement;
+import org.lobobrowser.html.dom.filter.AnchorFilter;
+import org.lobobrowser.html.dom.filter.BodyFilter;
+import org.lobobrowser.html.dom.filter.CommandFilter;
+import org.lobobrowser.html.dom.filter.ElementNameFilter;
+import org.lobobrowser.html.dom.filter.EmbedFilter;
+import org.lobobrowser.html.dom.filter.FormFilter;
+import org.lobobrowser.html.dom.filter.FrameFilter;
+import org.lobobrowser.html.dom.filter.HeadFilter;
+import org.lobobrowser.html.dom.filter.ImageFilter;
+import org.lobobrowser.html.dom.filter.LinkFilter;
+import org.lobobrowser.html.dom.filter.ScriptFilter;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.Location;
@@ -113,93 +123,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			if ("".equals(text)) {
 				openBufferChanged(text);
 			}
-		}
-	}
-
-	private class AnchorFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			final String nodeName = node.getNodeName();
-			return "A".equalsIgnoreCase(nodeName) || "ANCHOR".equalsIgnoreCase(nodeName);
-		}
-	}
-	
-	private class ElementNameFilter implements NodeFilter {
-		private final String name;
-
-		public ElementNameFilter(String name) {
-			this.name = name;
-		}
-
-		@Override
-		public boolean accept(Node node) {
-			return node instanceof Element && this.name.equals(((Element) node).getAttribute("name"));
-		}
-	}
-	
-	private class EmbedFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			final String nodeName = node.getNodeName();
-			return "EMBED".equalsIgnoreCase(nodeName);
-		}
-	}
-
-	private class FormFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			final String nodeName = node.getNodeName();
-			return "FORM".equalsIgnoreCase(nodeName);
-		}
-	}
-
-	private class FrameFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return node instanceof org.lobobrowser.html.dom.HTMLFrameElement
-					|| node instanceof org.lobobrowser.html.dom.HTMLIFrameElement;
-		}
-	}
-
-	private class ImageFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return "IMG".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-	
-	private class LinkFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return node instanceof HTMLLinkElement;
-		}
-	}
-	
-	private class CommandFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return "COMMAND".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-	
-	private class HeadFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return "HEAD".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-	
-	private class ScriptFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return "SCRIPT".equalsIgnoreCase(node.getNodeName());
-		}
-	}
-	
-	private class BodyFilter implements NodeFilter {
-		@Override
-		public boolean accept(Node node) {
-			return "Body".equalsIgnoreCase(node.getNodeName());
 		}
 	}
 

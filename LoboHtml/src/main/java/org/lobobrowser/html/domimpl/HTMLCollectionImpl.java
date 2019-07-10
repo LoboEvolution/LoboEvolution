@@ -22,6 +22,7 @@
 package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLCollection;
+import org.lobobrowser.html.dom.NodeFilter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 

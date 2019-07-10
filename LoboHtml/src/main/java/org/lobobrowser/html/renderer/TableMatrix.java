@@ -31,13 +31,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.lobobrowser.html.dom.HTMLTableCellElement;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
+import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.dom.filter.ColumnsFilter;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
-import org.lobobrowser.html.domimpl.NodeFilter;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
@@ -45,15 +45,8 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
-import org.w3c.dom.Node;
 
 class TableMatrix {
-	private static class ColumnsFilter implements NodeFilter {
-		@Override
-		public final boolean accept(Node node) {
-			return node instanceof HTMLTableCellElement;
-		}
-	}
 
 	public static class SizeInfo {
 		public int actualSize;
@@ -63,7 +56,6 @@ class TableMatrix {
 		public int offset;
 	}
 
-	// private static final NodeFilter ROWS_FILTER = new RowsFilter();
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 
 	private static HtmlLength getHeightLength(HTMLElementImpl element, int availHeight) {

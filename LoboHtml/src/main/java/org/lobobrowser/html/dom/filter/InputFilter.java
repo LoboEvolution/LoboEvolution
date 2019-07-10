@@ -18,13 +18,16 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Oct 8, 2005
- */
-package org.lobobrowser.html.domimpl;
+package org.lobobrowser.html.dom.filter;
 
+import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.domimpl.HTMLFormElementImpl;
 import org.w3c.dom.Node;
 
-public interface NodeFilter {
-	boolean accept(Node node);
+public class InputFilter implements NodeFilter {
+
+	@Override
+	public boolean accept(Node node) {
+		return HTMLFormElementImpl.isInput(node);
+	}
 }
