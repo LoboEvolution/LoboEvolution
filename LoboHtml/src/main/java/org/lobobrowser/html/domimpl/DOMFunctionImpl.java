@@ -62,7 +62,14 @@ public class DOMFunctionImpl extends NodeImpl {
 	}
 	
 	public boolean dispatchEvent(Event evt) {
-		return dispatchEventToHandlers(evt, this.onEventHandlers.get(evt.getType()));
+	    final List<Function> handlers = this.onEventHandlers.get(evt.getType());
+		if (handlers != null) {
+			for (final Function h : handlers) {
+				Executor.executeFunction(this, h, evt);
+			}
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -149,17 +156,5 @@ public class DOMFunctionImpl extends NodeImpl {
 	
 	public Element createElementNS(String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Namespaces not supported");
-	}
-	
-	private boolean dispatchEventToHandlers(final Event event, final List<Function> handlers) {
-		if (handlers != null) {
-			final ArrayList<Function> handlersCopy = new ArrayList<Function>(handlers);
-			for (final Function h : handlersCopy) {
-				if (handlers.contains(h)) {
-					return Executor.executeFunction(this, h, event);
-				}
-			}
-		}
-		return false;
 	}
 }
