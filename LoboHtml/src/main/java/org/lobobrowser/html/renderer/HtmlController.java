@@ -126,7 +126,7 @@ class HtmlController {
 			final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
 			final Function f = uiElement.getOnclick();
             final Event jsEvent = new EventImpl("click", uiElement, event, x, y);
-            uiElement.dispatchEvent(jsEvent);
+            uiElement.dispatchEvent(uiElement, jsEvent);
 			if (f != null) {
 				if (!Executor.executeFunction(uiElement, f, jsEvent)) {
 					return false;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.lobobrowser.html.dom.filter.ClassNameFilter;
 import org.lobobrowser.html.dom.filter.ElementFilter;
@@ -22,8 +23,10 @@ import org.w3c.dom.events.Event;
 
 public class DOMFunctionImpl extends NodeImpl {
 	
-	private final Map<String, List<Function>> onEventHandlers = new HashMap<String, List<Function>>();
-
+	private Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<NodeImpl, Map<String, List<Function>>>();
+	
+	private List<NodeImpl> clicked = new ArrayList<NodeImpl>();
+	
 	public NodeList getElementsByTagName(String tagname) {
 		if ("*".equals(tagname)) {
 			return getNodeList(new ElementFilter(null));
@@ -41,33 +44,41 @@ public class DOMFunctionImpl extends NodeImpl {
 	}
 
 	public void addEventListener(String type, Function listener, boolean useCapture) {
-		List<Function> handlerList = null;
-		if (this.onEventHandlers.containsKey(type)) {
-			handlerList = this.onEventHandlers.get(type);
-		} else {
-			handlerList = new ArrayList<Function>();
-			this.onEventHandlers.put(type, handlerList);
-		}
+		List<Function> handlerList = new ArrayList<Function>();
 		handlerList.add(listener);
+		final Map<String, List<Function>> onEventListeners = new HashMap<String, List<Function>>();
+		onEventListeners.put(type, handlerList);
+		this.onEventHandlers.put((NodeImpl)this, onEventListeners);
 	}
-	
+		
 	public void removeEventListener(String script, Function function) {
 		removeEventListener(script, function, true);
 	}
 	
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
-		if (this.onEventHandlers.containsKey(type)) {
-			this.onEventHandlers.get(type).remove(listener);
+		Set<NodeImpl> keySet = onEventHandlers.keySet();
+		for (NodeImpl htmlElementImpl : keySet) {
+			Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
+			if (map != null) {
+				map.get(type).remove(listener);
+			}
 		}
 	}
 	
-	public boolean dispatchEvent(Event evt) {
-	    final List<Function> handlers = this.onEventHandlers.get(evt.getType());
-		if (handlers != null) {
-			for (final Function h : handlers) {
-				Executor.executeFunction(this, h, evt);
+	public boolean dispatchEvent(NodeImpl htmlElementImpl, Event evt) {
+		Map<String, List<Function>> map = this.onEventHandlers.get(htmlElementImpl);
+		if (map != null) {
+			List<Function> handlers = map.get(evt.getType());
+			if (handlers != null) {
+				for (final Function h : handlers) {
+					if(!clicked.contains(htmlElementImpl)){
+					Executor.executeFunction(this, h, evt);
+					clicked.add(htmlElementImpl);
+				}else {
+					clicked.clear();
+				}
+					}
 			}
-			return true;
 		}
 		return false;
 	}

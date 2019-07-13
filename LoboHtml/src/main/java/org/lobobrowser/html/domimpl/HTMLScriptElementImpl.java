@@ -34,7 +34,6 @@ import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;

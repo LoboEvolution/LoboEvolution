@@ -927,7 +927,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public boolean dispatchEvent(Event evt) throws EventException {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null && doc instanceof HTMLDocumentImpl) {
-			return doc.dispatchEvent(evt);
+			return doc.dispatchEvent(doc, evt);
 		}
 		return lengthSet;
 	}

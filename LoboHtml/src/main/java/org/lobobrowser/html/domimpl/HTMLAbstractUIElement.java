@@ -8,7 +8,6 @@ import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.JavaScript;
 import org.mozilla.javascript.Context;
-import org.mozilla.javascript.EcmaError;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
@@ -18,7 +17,7 @@ import org.w3c.dom.Document;
  * Implements common functionality of most elements.
  */
 public class HTMLAbstractUIElement extends HTMLElementImpl {
-	private Map functionByAttribute = null;
+	private Map<String, Function> functionByAttribute = null;
 
 	private Function onfocus, onblur, onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmousemove, onmouseout,
 			onkeypress, onkeydown, onkeyup, oncontextmenu;
@@ -32,7 +31,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 		super.assignAttributeField(normalName, value);
 		if (normalName.startsWith("on")) {
 			synchronized (this) {
-				final Map fba = this.functionByAttribute;
+				final Map<String, Function> fba = this.functionByAttribute;
 				if (fba != null) {
 					fba.remove(normalName);
 				}
@@ -60,7 +59,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 		}
 		final String normalAttributeName = normalizeAttributeName(attributeName);
 		synchronized (this) {
-			Map fba = this.functionByAttribute;
+			Map<String, Function> fba = this.functionByAttribute;
 			Function f = fba == null ? null : (Function) fba.get(normalAttributeName);
 			if (f != null) {
 				return f;
@@ -105,7 +104,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 					}
 				}
 				if (fba == null) {
-					fba = new HashMap(1);
+					fba = new HashMap<String, Function>(1);
 					this.functionByAttribute = fba;
 				}
 				fba.put(normalAttributeName, f);
