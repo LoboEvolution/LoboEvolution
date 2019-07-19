@@ -5,7 +5,7 @@ import org.lobo.common.Strings;
 import org.lobobrowser.html.dom.filter.IdFilter;
 import org.lobobrowser.html.dom.xpath.XPathEvaluatorImpl;
 import org.lobobrowser.html.dom.xpath.XPathResultImpl;
-import org.lobobrowser.html.js.EventImpl;
+import org.lobobrowser.html.js.events.EventFactory;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.Attr;
 import org.w3c.dom.CDATASection;
@@ -194,7 +194,7 @@ public class DocumentImpl extends DOMFunctionImpl implements Document, DocumentE
 
 	@Override
 	public Event createEvent(String eventType) throws DOMException {
-		return new EventImpl(eventType, this);
+		return EventFactory.createEvent(eventType);
 	}
 
 	@Override

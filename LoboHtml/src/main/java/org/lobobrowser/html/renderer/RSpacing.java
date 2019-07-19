@@ -71,66 +71,6 @@ final class RSpacing extends BaseBoundableRenderable {
 		return true;
 	}
 
-	@Override
-	public boolean onDoubleClick(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseClick(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMouseDisarmed(java.awt.event.MouseEvent event) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseDisarmed(me, event);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseDown(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseUp(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onRightClick(MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onContextMenu(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

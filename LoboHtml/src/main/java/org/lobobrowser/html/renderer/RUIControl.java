@@ -258,56 +258,6 @@ class RUIControl extends BaseElementRenderable {
 	}
 
 	@Override
-	public boolean onDoubleClick(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseClick(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMouseDisarmed(java.awt.event.MouseEvent event) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseDisarmed(me, event);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseDown(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public boolean onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
-		final ModelNode me = this.modelNode;
-		if (me != null) {
-			return HtmlController.getInstance().onMouseUp(me, event, x, y);
-		} else {
-			return true;
-		}
-	}
-
-	@Override
 	public final void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
 		if ((rs != null) && (rs.getVisibility() != RenderState.VISIBILITY_VISIBLE)) {

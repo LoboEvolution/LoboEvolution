@@ -22,7 +22,6 @@
  */
 package org.lobobrowser.html.renderer;
 
-import java.awt.EventQueue;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;

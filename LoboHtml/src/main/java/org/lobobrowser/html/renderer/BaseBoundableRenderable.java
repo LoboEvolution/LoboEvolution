@@ -40,12 +40,15 @@ import org.lobobrowser.html.domimpl.ModelNode;
  * @author J. H. S.
  */
 abstract class BaseBoundableRenderable extends BaseRenderable implements BoundableRenderable {
+	
 	protected static final Logger logger = Logger.getLogger(BaseBoundableRenderable.class.getName());
+	
 	protected static final Color SELECTION_COLOR = Color.BLUE;
+	
 	protected static final Color SELECTION_XOR = Color.LIGHT_GRAY;
 
-	// protected final Rectangle bounds = new Rectangle();
 	protected final RenderableContainer container;
+	
 	/**
 	 * Starts as true because ancestors could be invalidated.
 	 */
@@ -84,7 +87,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	}
 
 	@Override
-	public java.awt.Point getGUIPoint(int clientX, int clientY) {
+	public Point getGUIPoint(int clientX, int clientY) {
 		final Renderable parent = getParent();
 		if (parent instanceof BoundableRenderable) {
 			return ((BoundableRenderable) parent).getGUIPoint(clientX + this.x, clientY + this.y);
@@ -219,6 +222,67 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public void markLayoutValid() {
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
+	
+	@Override
+	public boolean onDoubleClick(MouseEvent event, int x, int y) {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onDoubleClick(me, event, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMouseClick(MouseEvent event, int x, int y) {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseClick(me, event, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMouseDisarmed(MouseEvent event) {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseDisarmed(me, event);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMousePressed(MouseEvent event, int x, int y) {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseDown(me, event, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onMouseReleased(MouseEvent event, int x, int y) {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onMouseUp(me, event, x, y);
+		} else {
+			return true;
+		}
+	}
+
+	@Override
+	public boolean onRightClick(MouseEvent event, int x, int y) {
+		final ModelNode me = this.modelNode;
+		if (me != null) {
+			return HtmlController.getInstance().onContextMenu(me, event, x, y);
+		} else {
+			return true;
+		}
+	}
+
 
 	@Override
 	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
@@ -310,13 +374,6 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		}
 	}
 
-	// /* (non-Javadoc)
-//	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#getBounds()
-//	 */
-//	public Rectangle getBounds() {
-//		return this.bounds;
-//	}
-//
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
 		this.x = x;
@@ -361,7 +418,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		this.y = y;
 	}
 
-	protected final java.awt.Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
+	protected final Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
 		while (descendent != this) {
 			if (descendent == null) {
 				throw new IllegalStateException("Not descendent");

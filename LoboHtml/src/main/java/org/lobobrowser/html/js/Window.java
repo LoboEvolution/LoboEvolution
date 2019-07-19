@@ -49,6 +49,9 @@ import org.lobobrowser.html.domimpl.HTMLOptionElementImpl;
 import org.lobobrowser.html.domimpl.HTMLScriptElementImpl;
 import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.domimpl.TextImpl;
+import org.lobobrowser.html.js.events.EventImpl;
+import org.lobobrowser.html.js.events.MouseEventImpl;
+import org.lobobrowser.html.js.events.UIEventImpl;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
@@ -189,6 +192,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
 	/** The Constant EVENT_WRAPPER. */
 	private static final JavaClassWrapper EVENT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(EventImpl.class);
+	
+	/** The Constant EVENT_WRAPPER. */
+	private static final JavaClassWrapper MOUSEVENT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(MouseEventImpl.class);
+	
+	/** The Constant EVENT_WRAPPER. */
+	private static final JavaClassWrapper UIEVENT_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(UIEventImpl.class);
 	
 	/** The Constant DOMPARSER_WRAPPER. */
 	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(DOMParser.class);
@@ -622,6 +631,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		
 		Function evt = JavaObjectWrapper.getConstructor("Event", EVENT_WRAPPER, event);
 		ScriptableObject.defineProperty(ws, "Event", evt, ScriptableObject.READONLY);
+		
+		Function mevt = JavaObjectWrapper.getConstructor("MouseEvent", MOUSEVENT_WRAPPER, event);
+		ScriptableObject.defineProperty(ws, "MouseEvent", mevt, ScriptableObject.READONLY);
+		
+		Function uievt = JavaObjectWrapper.getConstructor("UIEvent", UIEVENT_WRAPPER, event);
+		ScriptableObject.defineProperty(ws, "UIEvent", uievt, ScriptableObject.READONLY);
 		
 		Function domParser = JavaObjectWrapper.getConstructor("DOMParser", DOMPARSER_WRAPPER, jiDomParser);
 		ScriptableObject.defineProperty(ws, "DOMParser", domParser, ScriptableObject.READONLY);
