@@ -934,29 +934,29 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 
 	public void addEventListener(String type, Function listener, boolean useCapture) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
-		if (doc != null && doc instanceof HTMLDocumentImpl) {
-			((HTMLDocumentImpl) doc).addEventListener(type, listener, useCapture);
+		if (doc != null) {
+			doc.addEventListener(type, listener, useCapture);
 		}
 	}
 
 	public boolean dispatchEvent(Event evt) throws EventException {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
-		if (doc != null && doc instanceof HTMLDocumentImpl) {
+		if (doc != null) {
 			return doc.dispatchEvent(doc, evt);
 		}
-		return lengthSet;
+		return false;
 	}
 
 	public void removeEventListener(String type, Function listener) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
-		if (doc != null && doc instanceof HTMLDocumentImpl) {
+		if (doc != null) {
 			doc.removeEventListener(type, listener);
 		}
 	}
 
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
-		if (doc != null && doc instanceof HTMLDocumentImpl) {
+		if (doc != null) {
 			doc.removeEventListener(type, listener, useCapture);
 		}
 	}
