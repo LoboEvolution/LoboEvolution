@@ -25,6 +25,9 @@ package org.lobo.common;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
+import java.util.zip.GZIPInputStream;
 
 /**
  * @author J. H. S.
@@ -36,7 +39,7 @@ public class IORoutines {
 		}
 		byte[] buffer = new byte[initialBufferSize];
 		int offset = 0;
-		while(true) {
+		while (true) {
 			int remain = buffer.length - offset;
 			if (remain <= 0) {
 				final int newSize = buffer.length * 2;
@@ -57,5 +60,44 @@ public class IORoutines {
 			buffer = newBuffer;
 		}
 		return buffer;
+	}
+
+	public static InputStream getInputStream(URLConnection connection) throws IOException {
+		InputStream in;
+		if (connection instanceof HttpURLConnection) {
+			in = IORoutines.getGzipStreamError(((HttpURLConnection) connection));
+			if (in == null) {
+				in = IORoutines.getGzipStream(connection);
+			}
+		} else {
+			in = connection.getInputStream();
+		}
+		return in;
+	}
+	
+	private static InputStream getGzipStream(URLConnection con) throws IOException {
+		InputStream cis = con.getInputStream();
+		if (cis != null) {
+			if ("gzip".equals(con.getContentEncoding())) {
+				return new GZIPInputStream(con.getInputStream());
+			} else {
+				return con.getInputStream();
+			}
+		} else {
+			return null;
+		}
+	}
+
+	private static InputStream getGzipStreamError(HttpURLConnection con) throws IOException {
+		InputStream cis = con.getErrorStream();
+		if (cis != null) {
+			if ("gzip".equals(con.getContentEncoding())) {
+				return new GZIPInputStream(con.getErrorStream());
+			} else {
+				return con.getErrorStream();
+			}
+		} else {
+			return null;
+		}
 	}
 }

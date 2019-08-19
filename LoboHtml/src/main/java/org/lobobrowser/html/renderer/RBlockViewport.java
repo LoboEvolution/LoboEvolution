@@ -48,6 +48,7 @@ import org.lobo.common.Strings;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.domimpl.DocumentFragmentImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
 import org.lobobrowser.html.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.domimpl.HTMLImageElementImpl;
 import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
@@ -210,7 +211,20 @@ public class RBlockViewport extends BaseRCollection {
 	        }
 	    }
 	}
+	
+	private static class CanvasLayout extends CommonWidgetLayout {
+		public CanvasLayout() {
+			super(ADD_AS_BLOCK);
+		}
 
+		@Override
+		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+			UIControl control = new CanvasControl((HTMLCanvasElementImpl) markupElement);
+			return new RUIControl(markupElement,control, bodyLayout.container,
+					bodyLayout.frameContext, bodyLayout.userAgentContext);
+		}
+	}
+	
 	private static class DivLayout extends CommonLayout {
 		public DivLayout() {
 			super(RenderState.DISPLAY_BLOCK);
@@ -507,6 +521,7 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("OBJECT", new ObjectLayout(true));
 		el.put("APPLET", ol);
 		el.put("EMBED", ol);
+		el.put("CANVAS", new CanvasLayout());
 		//el.put("IFRAME", new IFrameLayout());
 	}
 
