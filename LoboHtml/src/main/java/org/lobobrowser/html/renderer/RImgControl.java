@@ -22,7 +22,7 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Insets;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.http.UserAgentContext;
 
 public class RImgControl extends RUIControl {

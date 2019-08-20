@@ -6,9 +6,9 @@ import org.lobo.common.Strings;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLTableElement;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
-import org.lobobrowser.html.domimpl.HTMLTableRowElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLTableCellElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.w3c.dom.css.CSS3Properties;
 
 public class TableCellRenderState extends DisplayRenderState {

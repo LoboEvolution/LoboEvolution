@@ -20,7 +20,7 @@
 */
 package org.lobobrowser.html.renderer;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 public class LineBreak {
 	

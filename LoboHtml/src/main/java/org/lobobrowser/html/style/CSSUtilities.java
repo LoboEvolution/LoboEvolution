@@ -34,7 +34,7 @@ import java.util.logging.Logger;
 
 import org.lobo.common.Strings;
 import org.lobo.common.Urls;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.css.CSSStyleSheet;

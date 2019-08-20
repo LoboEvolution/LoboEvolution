@@ -26,7 +26,7 @@ package org.lobobrowser.html.renderer;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 /**
  * This is used when there's padding or margins in inline elements.

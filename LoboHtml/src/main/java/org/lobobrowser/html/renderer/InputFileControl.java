@@ -31,7 +31,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputFileControl extends BaseInputControl {
 

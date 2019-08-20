@@ -26,8 +26,8 @@ package org.lobobrowser.html.renderer;
 import javax.swing.JButton;
 
 import org.lobo.common.WrapperLayout;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
 
 public class InputButtonControl extends BaseInputControl {

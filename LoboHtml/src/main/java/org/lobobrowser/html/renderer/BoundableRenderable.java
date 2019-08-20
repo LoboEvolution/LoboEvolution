@@ -26,7 +26,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 /**
  * A renderer node with well-defined bounds. Most renderer nodes implement this

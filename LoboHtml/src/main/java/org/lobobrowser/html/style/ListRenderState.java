@@ -24,7 +24,7 @@ import java.awt.FontMetrics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class ListRenderState extends AbstractMarginRenderState {
 	public ListRenderState(RenderState prevRenderState, HTMLElementImpl element) {

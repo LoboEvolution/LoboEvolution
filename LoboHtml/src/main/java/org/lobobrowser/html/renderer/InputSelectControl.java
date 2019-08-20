@@ -16,8 +16,8 @@ import javax.swing.ListSelectionModel;
 import org.lobo.common.WrapperLayout;
 import org.lobobrowser.html.dom.HTMLOptionElement;
 import org.lobobrowser.html.dom.HTMLOptionsCollection;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.renderer.HtmlController;
 
 public class InputSelectControl extends BaseInputControl {

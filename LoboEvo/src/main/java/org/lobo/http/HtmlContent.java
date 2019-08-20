@@ -8,7 +8,7 @@ import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobo.info.MetaInfo;
 import org.lobobrowser.html.dom.HTMLElement;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

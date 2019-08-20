@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputHiddenControl extends BaseInputTextControl{
 

@@ -39,9 +39,9 @@ import java.util.List;
 import java.util.logging.Level;
 
 import org.lobo.common.Strings;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.BackgroundInfo;
 import org.lobobrowser.html.style.BorderInfo;

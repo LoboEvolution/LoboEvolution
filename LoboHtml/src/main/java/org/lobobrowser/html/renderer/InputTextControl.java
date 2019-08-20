@@ -26,7 +26,7 @@ package org.lobobrowser.html.renderer;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputTextControl extends BaseInputTextControl {
 

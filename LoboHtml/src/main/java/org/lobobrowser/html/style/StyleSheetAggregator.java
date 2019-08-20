@@ -32,8 +32,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import org.lobo.common.Nodes;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSMediaRule;

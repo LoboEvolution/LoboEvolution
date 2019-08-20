@@ -23,7 +23,7 @@
  */
 package org.lobobrowser.html.renderer;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 interface MarkupLayout {
 	void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement);

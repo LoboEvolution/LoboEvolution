@@ -23,7 +23,7 @@ package org.lobobrowser.html.js;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.JavaScript;
 import org.mozilla.javascript.Context;

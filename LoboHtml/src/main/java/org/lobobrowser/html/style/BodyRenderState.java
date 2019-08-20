@@ -24,7 +24,7 @@ import java.awt.Color;
 
 import org.lobo.common.Strings;
 import org.lobo.laf.ColorFactory;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class BodyRenderState extends StyleSheetRenderState {
 

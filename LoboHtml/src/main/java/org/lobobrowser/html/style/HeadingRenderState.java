@@ -22,7 +22,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.FontMetrics;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class HeadingRenderState extends AbstractMarginRenderState {
 	public HeadingRenderState(RenderState prevRenderState, HTMLElementImpl element) {

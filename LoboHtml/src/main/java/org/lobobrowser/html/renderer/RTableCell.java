@@ -25,7 +25,7 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Dimension;
 
-import org.lobobrowser.html.domimpl.HTMLTableCellElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;

@@ -34,7 +34,7 @@ import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 /**
  * @author J. H. S.

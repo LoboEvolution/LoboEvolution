@@ -27,8 +27,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import org.lobo.common.WrapperLayout;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class InputRadioControl extends BaseInputControl {
 

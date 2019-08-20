@@ -38,7 +38,7 @@ import javax.swing.text.PlainDocument;
 
 import org.lobo.common.Strings;
 import org.lobo.common.WrapperLayout;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 abstract class BaseInputTextControl extends BaseInputControl {
 

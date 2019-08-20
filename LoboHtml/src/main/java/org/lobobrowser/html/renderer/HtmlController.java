@@ -6,12 +6,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobobrowser.html.FormInput;
-import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
-import org.lobobrowser.html.domimpl.HTMLButtonElementImpl;
-import org.lobobrowser.html.domimpl.HTMLInputElementImpl;
-import org.lobobrowser.html.domimpl.HTMLLinkElementImpl;
-import org.lobobrowser.html.domimpl.HTMLSelectElementImpl;
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.HTMLAbstractUIElement;
+import org.lobobrowser.html.dom.domimpl.HTMLButtonElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLInputElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLLinkElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLSelectElementImpl;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.events.EventImpl;
 import org.lobobrowser.html.js.events.MouseEventImpl;

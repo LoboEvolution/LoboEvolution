@@ -40,8 +40,8 @@ import java.util.logging.Logger;
 
 import javax.swing.JScrollBar;
 
-import org.lobobrowser.html.domimpl.ModelNode;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.lobobrowser.html.style.BlockRenderState;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.RenderThreadState;

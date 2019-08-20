@@ -24,8 +24,8 @@ import java.awt.Color;
 
 import org.lobo.common.Strings;
 import org.lobo.laf.ColorFactory;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.HTMLTableElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLTableElementImpl;
 
 public class TableRenderState extends StyleSheetRenderState {
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;

@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
 import org.lobo.common.Strings;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputNumberControl extends BaseInputTextControl {
 

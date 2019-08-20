@@ -37,8 +37,8 @@ import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
 import org.lobobrowser.html.dom.HTMLElement;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.LineBreak;
 import org.w3c.dom.css.CSS3Properties;
 

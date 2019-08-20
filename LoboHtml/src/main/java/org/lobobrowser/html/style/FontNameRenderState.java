@@ -27,7 +27,7 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class FontNameRenderState extends StyleSheetRenderState {
 	

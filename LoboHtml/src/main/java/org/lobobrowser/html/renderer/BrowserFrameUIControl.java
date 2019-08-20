@@ -8,7 +8,7 @@ import java.awt.Insets;
 
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.dom.HTMLElement;
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;

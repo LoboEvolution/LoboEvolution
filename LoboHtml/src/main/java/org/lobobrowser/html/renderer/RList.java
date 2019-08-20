@@ -20,8 +20,8 @@
 */
 package org.lobobrowser.html.renderer;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.ListStyle;
 import org.lobobrowser.html.style.RenderState;

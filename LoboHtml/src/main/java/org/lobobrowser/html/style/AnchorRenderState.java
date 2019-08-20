@@ -25,7 +25,7 @@ import java.awt.Color;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.html.dom.HTMLBodyElement;
 import org.lobobrowser.html.dom.HTMLDocument;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.http.HtmlRendererContext;
 
 public class AnchorRenderState extends StyleSheetRenderState {

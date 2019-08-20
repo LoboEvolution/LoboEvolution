@@ -32,9 +32,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.lobobrowser.html.domimpl.ModelNode;
-import org.lobobrowser.html.domimpl.NodeImpl;
-import org.lobobrowser.html.domimpl.UINode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.UINode;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.UserAgentContext;
 import java.util.Objects;

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputEmailControl extends BaseInputTextControl {
 

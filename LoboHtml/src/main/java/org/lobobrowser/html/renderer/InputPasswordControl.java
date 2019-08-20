@@ -26,7 +26,7 @@ package org.lobobrowser.html.renderer;
 import javax.swing.JPasswordField;
 import javax.swing.text.JTextComponent;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputPasswordControl extends BaseInputTextControl  {
 	

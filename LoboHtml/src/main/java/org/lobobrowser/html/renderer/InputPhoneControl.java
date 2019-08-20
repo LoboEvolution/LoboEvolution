@@ -1,6 +1,6 @@
 package org.lobobrowser.html.renderer;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 public class InputPhoneControl extends InputTextControl {
 

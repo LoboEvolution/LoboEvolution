@@ -32,8 +32,8 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 
 import org.lobo.common.Urls;
-import org.lobobrowser.html.domimpl.DOMImplementationImpl;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.DOMImplementationImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;

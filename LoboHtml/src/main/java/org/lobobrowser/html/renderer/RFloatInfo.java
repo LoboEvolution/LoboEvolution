@@ -22,7 +22,7 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Graphics;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 final class RFloatInfo implements Renderable {
 	private final BoundableRenderable element;

@@ -39,10 +39,10 @@ import javax.swing.Timer;
 
 import org.lobo.common.Strings;
 import org.lobobrowser.html.dom.HTMLFrameSetElement;
-import org.lobobrowser.html.domimpl.DocumentNotificationListener;
-import org.lobobrowser.html.domimpl.ElementImpl;
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.DocumentNotificationListener;
+import org.lobobrowser.html.dom.domimpl.ElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
 import org.lobobrowser.html.renderer.BoundableRenderable;

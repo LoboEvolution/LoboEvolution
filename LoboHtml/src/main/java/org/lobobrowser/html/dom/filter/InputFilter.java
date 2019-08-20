@@ -21,7 +21,7 @@
 package org.lobobrowser.html.dom.filter;
 
 import org.lobobrowser.html.dom.NodeFilter;
-import org.lobobrowser.html.domimpl.HTMLFormElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLFormElementImpl;
 import org.w3c.dom.Node;
 
 public class InputFilter implements NodeFilter {

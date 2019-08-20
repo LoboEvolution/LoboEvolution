@@ -32,7 +32,7 @@
 
 package org.lobobrowser.html.dom;
 
-import org.lobobrowser.html.domimpl.HTMLHeadElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLHeadElementImpl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;

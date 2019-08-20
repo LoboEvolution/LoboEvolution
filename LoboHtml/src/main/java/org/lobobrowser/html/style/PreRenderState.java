@@ -20,7 +20,7 @@
 */
 package org.lobobrowser.html.style;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class PreRenderState extends BlockRenderState {
 	public PreRenderState(RenderState prevRenderState, HTMLElementImpl element) {

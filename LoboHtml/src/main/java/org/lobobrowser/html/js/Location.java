@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.lobobrowser.html.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.Document;

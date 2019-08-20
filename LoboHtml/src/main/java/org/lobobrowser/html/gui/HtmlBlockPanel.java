@@ -62,10 +62,10 @@ import javax.swing.SwingUtilities;
 
 import org.lobo.common.Nodes;
 import org.lobo.laf.ColorFactory;
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.domimpl.ModelNode;
-import org.lobobrowser.html.domimpl.NodeImpl;
-import org.lobobrowser.html.domimpl.UINode;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.UINode;
 import org.lobobrowser.html.renderer.BoundableRenderable;
 import org.lobobrowser.html.renderer.DelayedPair;
 import org.lobobrowser.html.renderer.FrameContext;

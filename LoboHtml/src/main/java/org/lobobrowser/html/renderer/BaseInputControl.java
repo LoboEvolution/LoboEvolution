@@ -27,8 +27,8 @@ import java.awt.ComponentOrientation;
 import java.awt.Graphics;
 import java.io.File;
 
-import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
-import org.lobobrowser.html.domimpl.InputContext;
+import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
+import org.lobobrowser.html.dom.domimpl.InputContext;
 import org.lobobrowser.html.style.HtmlValues;
 
 abstract class BaseInputControl extends BaseControl implements InputContext {

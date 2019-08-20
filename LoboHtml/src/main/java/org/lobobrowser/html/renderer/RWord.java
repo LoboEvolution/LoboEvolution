@@ -27,7 +27,7 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.style.RenderState;
 
 final class RWord extends BaseBoundableRenderable {

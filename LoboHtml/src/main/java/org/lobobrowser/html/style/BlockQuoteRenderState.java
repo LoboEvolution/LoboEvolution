@@ -24,7 +24,7 @@ import java.awt.FontMetrics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class BlockQuoteRenderState extends AbstractMarginRenderState {
 	public BlockQuoteRenderState(RenderState prevRenderState, HTMLElementImpl element) {

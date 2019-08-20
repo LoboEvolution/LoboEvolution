@@ -23,7 +23,7 @@ package org.lobobrowser.html.dom.svgimpl;
 import org.lobobrowser.html.dom.svg.SVGElement;
 import org.lobobrowser.html.dom.svg.SVGSVGElement;
 import org.lobobrowser.html.dom.svg.SVGSymbolElement;
-import org.lobobrowser.html.domimpl.HTMLAbstractUIElement;
+import org.lobobrowser.html.dom.domimpl.HTMLAbstractUIElement;
 import org.w3c.dom.Node;
 
 public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement {

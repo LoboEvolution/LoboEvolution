@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public abstract class BaseControl extends JComponent implements UIControl {
 	private static final Logger logger = Logger.getLogger(BaseControl.class.getName());

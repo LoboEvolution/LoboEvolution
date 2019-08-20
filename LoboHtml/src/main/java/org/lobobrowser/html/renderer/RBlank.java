@@ -28,7 +28,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-import org.lobobrowser.html.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.style.RenderState;
 
 final class RBlank extends BaseBoundableRenderable {

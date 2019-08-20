@@ -22,7 +22,7 @@ package org.lobobrowser.html.style;
 
 import java.awt.Color;
 
-import org.lobobrowser.html.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class IFrameRenderState extends StyleSheetRenderState {
 	public IFrameRenderState(RenderState prevRenderState, HTMLElementImpl element) {

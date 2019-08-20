@@ -22,7 +22,7 @@ package org.lobobrowser.html.dom.svgimpl;
 
 import org.lobobrowser.html.dom.svg.SVGDocument;
 import org.lobobrowser.html.dom.svg.SVGSVGElement;
-import org.lobobrowser.html.domimpl.NodeImpl;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
