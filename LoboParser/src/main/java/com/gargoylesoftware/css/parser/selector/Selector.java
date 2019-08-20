@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,9 @@ import com.gargoylesoftware.css.parser.Locatable;
  */
 public interface Selector extends Locatable {
 
+    /**
+     * SelectorType enum.
+     */
     enum SelectorType {
         CHILD_SELECTOR,
         DESCENDANT_SELECTOR,

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,15 +43,17 @@ public class ClassCondition extends AbstractLocatable implements Condition, Seri
     }
 
     /**
-     * @return the local name
+     * {@inheritDoc}
      */
+    @Override
     public String getLocalName() {
         return null;
     }
 
     /**
-     * @return the value
+     * {@inheritDoc}
      */
+    @Override
     public String getValue() {
         return value_;
     }

@@ -37,31 +37,27 @@ import org.lobo.laf.ColorFactory;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.css.CSS3Properties;
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSStyleDeclaration;
-import org.w3c.dom.css.CSSStyleSheet;
-
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 public abstract class AbstractCSSProperties extends AbstractScriptableDelegate implements CSS3Properties {
 	private static class BackgroundImageSetter implements SubPropertySetter {
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			String baseHref = null;
 			String finalValue;
 			if (declaration != null) {
-				final CSSRule rule = declaration.getParentRule();
+				final AbstractCSSRuleImpl rule = declaration.getParentRule();
 				if (rule != null) {
-					final CSSStyleSheet sheet = rule.getParentStyleSheet();
-					if (sheet instanceof CSSStyleSheetImpl) {
-						final CSSStyleSheetImpl ssheet = (CSSStyleSheetImpl) sheet;
-						baseHref = ssheet.getHref();
-					}
+					final CSSStyleSheetImpl sheet = rule.getParentStyleSheet();
+					final CSSStyleSheetImpl ssheet = sheet;
+					baseHref = ssheet.getHref();
 				}
 			}
 			if (baseHref == null) {
@@ -99,12 +95,12 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	}
 
 	private static class BackgroundSetter implements SubPropertySetter {
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(BACKGROUND, newValue, important);
 			if (newValue != null && newValue.length() > 0) {
@@ -150,12 +146,12 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	}
 
 	private static class BorderSetter1 implements SubPropertySetter {
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(BORDER, newValue, important);
 			properties.setPropertyValueProcessed(BORDER_TOP, newValue, declaration, important);
@@ -172,12 +168,12 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 			this.name = baseName;
 		}
 
-		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, value, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(this.name, value, important);
 			if (value != null && value.length() > 0) {
@@ -209,12 +205,12 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	}
 
 	private static class FontSetter implements SubPropertySetter {
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(FONT, newValue, important);
 			if (newValue != null && newValue.length() > 0) {
@@ -292,12 +288,12 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 			this.property = property;
 		}
 
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, newValue, declaration, true);
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(this.property, newValue, important);
 			if (newValue != null && newValue.length() > 0) {
@@ -348,7 +344,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	}
 
 	private interface SubPropertySetter {
-		void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclaration declaration,
+		void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important);
 	}
 
@@ -787,7 +783,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 
 	private String overlayColor;
 
-	private Collection styleDeclarations;
+	private Collection<CSSStyleDeclarationImpl> styleDeclarations;
 
 	private Map<String, Property> valueMap = null;
 
@@ -795,22 +791,22 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 		this.context = context;
 	}
 
-	public void addStyleDeclaration(CSSStyleDeclaration styleDeclaration) {
+	public void addStyleDeclaration(CSSStyleDeclarationImpl styleDeclaration) {
 		synchronized (this) {
-			Collection<CSSStyleDeclaration> sd = this.styleDeclarations;
+			Collection<CSSStyleDeclarationImpl> sd = this.styleDeclarations;
 			if (sd == null) {
-				sd = new LinkedList();
+				sd = new LinkedList<CSSStyleDeclarationImpl>();
 				this.styleDeclarations = sd;
 			}
 			sd.add(styleDeclaration);
-			final int length = styleDeclaration.getLength();
-			for (int i = 0; i < length; i++) {
-				final String propertyName = styleDeclaration.item(i);
+			for (com.gargoylesoftware.css.dom.Property prop : styleDeclaration.getProperties()) {
+				final String propertyName = prop.getName();
 				final String propertyValue = styleDeclaration.getPropertyValue(propertyName);
 				final String priority = styleDeclaration.getPropertyPriority(propertyName);
 				final boolean important = priority != null && priority.length() != 0 && "important".equals(priority);
 				setPropertyValueProcessed(propertyName.toLowerCase(), propertyValue, styleDeclaration, important);
-			}
+	      
+	        }
 		}
 	}
 
@@ -3543,7 +3539,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 		}
 	}
 	
-	protected final void setPropertyValueProcessed(String lowerCaseName, String value, CSSStyleDeclaration declaration,
+	protected final void setPropertyValueProcessed(String lowerCaseName, String value, CSSStyleDeclarationImpl declaration,
 			boolean important) {
 		final SubPropertySetter setter = (SubPropertySetter) SUB_SETTERS.get(lowerCaseName);
 		if (setter != null) {

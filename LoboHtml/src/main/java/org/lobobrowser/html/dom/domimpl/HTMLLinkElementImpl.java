@@ -37,7 +37,7 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLinkElement {
 	private boolean disabled;
 
-	private CSSStyleSheet styleSheet;
+	private CSSStyleSheetImpl styleSheet;
 
 	public HTMLLinkElementImpl(String name) {
 		super(name);
@@ -154,7 +154,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 					if (CSSUtilities.matchesMedia(media, uacontext)) {
 						final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
 						try {
-							final CSSStyleSheet sheet = CSSUtilities.parse(this, getHref(), doc, doc.getBaseURI(), false);
+							final CSSStyleSheetImpl sheet = CSSUtilities.parse(this, getHref(), doc, doc.getBaseURI(), false);
 							if (sheet != null) {
 								this.styleSheet = sheet;
 								if (sheet instanceof CSSStyleSheetImpl) {
@@ -185,7 +185,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
-		final CSSStyleSheet sheet = this.styleSheet;
+		final CSSStyleSheetImpl sheet = this.styleSheet;
 		if (sheet != null) {
 			sheet.setDisabled(disabled);
 		}

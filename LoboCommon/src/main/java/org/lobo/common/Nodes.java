@@ -93,23 +93,4 @@ public class Nodes {
 	        }
 	    };
 	}
-	
-	public static Iterable<CSSRule> iterable(final CSSRuleList cssRuleList) {
-	    return () -> new Iterator<CSSRule>() {
-
-	        private int index = 0;
-
-	        @Override
-	        public boolean hasNext() {
-	            return index < cssRuleList.getLength();
-	        }
-
-	        @Override
-	        public CSSRule next() {
-	            if (!hasNext())
-	                throw new NoSuchElementException();
-	            return (CSSRule) cssRuleList.item(index++); 
-	        }
-	    };
-	}
 }

@@ -53,6 +53,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
@@ -96,11 +97,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			final String[] classNameArray = Strings.split(classNames);
 			for (int i = classNameArray.length; --i >= 0;) {
 				final String className = classNameArray[i];
-				final Collection<?> sds = findStyleDeclarations(elementName, id, className, pseudoNames);
+				final Collection<CSSStyleDeclarationImpl> sds = findStyleDeclarations(elementName, id, className, pseudoNames);
 				if (sds != null) {
-					final Iterator<?> sdsi = sds.iterator();
+					final Iterator<CSSStyleDeclarationImpl> sdsi = sds.iterator();
 					while (sdsi.hasNext()) {
-						final CSSStyleDeclaration sd = (CSSStyleDeclaration) sdsi.next();
+						final CSSStyleDeclarationImpl sd = sdsi.next();
 						if (style == null) {
 							style = new ComputedCSSProperties(this);
 						}
@@ -115,7 +116,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (sds != null) {
 				final Iterator<?> sdsi = sds.iterator();
 				while (sdsi.hasNext()) {
-					final CSSStyleDeclaration sd = (CSSStyleDeclaration) sdsi.next();
+					final CSSStyleDeclarationImpl sd = (CSSStyleDeclarationImpl) sdsi.next();
 					if (style == null) {
 						style = new ComputedCSSProperties(this);
 					}
@@ -192,7 +193,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
-	protected final Collection<?> findStyleDeclarations(String elementName, String id, String className, Set<String> pseudoNames) {
+	protected final Collection<CSSStyleDeclarationImpl> findStyleDeclarations(String elementName, String id, String className, Set<String> pseudoNames) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
 			return null;
@@ -359,12 +360,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			cs.put(pseudoElement, sds);
 		}
 		return sds;
-	}
-
-	protected final InputSource getCssInputSourceForDecl(String text) {
-		final java.io.Reader reader = new StringReader("{" + text + "}");
-		final InputSource is = new InputSource(reader);
-		return is;
 	}
 
 	/**
@@ -596,9 +591,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			final String style = getAttribute("style");
 			if (style != null && style.length() != 0) {
                 final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-				final InputSource inputSource = getCssInputSourceForDecl(style);
 				try {
-					final CSSStyleDeclaration sd = parser.parseStyleDeclaration(inputSource);
+					final CSSStyleDeclarationImpl sd = parser.parseStyleDeclaration(style);
 					sds.addStyleDeclaration(sd);
 				} catch (final Exception err) {
 					final String id = getId();

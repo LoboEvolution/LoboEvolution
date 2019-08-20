@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,6 @@ package com.gargoylesoftware.css.dom;
 
 import java.io.Serializable;
 
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSStyleSheet;
-
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
@@ -27,35 +24,57 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements Serializable {
 
     private CSSStyleSheetImpl parentStyleSheet_;
-    private CSSRule parentRule_;
+    private AbstractCSSRuleImpl parentRule_;
 
-    protected CSSStyleSheetImpl getParentStyleSheetImpl() {
-        return parentStyleSheet_;
+    /**
+     * Ctor.
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     */
+    public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final AbstractCSSRuleImpl parentRule) {
+        super();
+        setParentStyleSheet(parentStyleSheet);
+        setParentRule(parentRule);
     }
 
+    /**
+     * @return the current css text
+     */
+    public abstract String getCssText();
+
+    /**
+     * Sets the css text.
+     * @param text the new css text
+     */
+    public abstract void setCssText(String text);
+
+    /**
+     * Sets the parent style sheet.
+     * @param parentStyleSheet the new parent style sheet
+     */
     public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
         parentStyleSheet_ = parentStyleSheet;
     }
 
-    public void setParentRule(final CSSRule parentRule) {
+    /**
+     * Sets the parent rule.
+     * @param parentRule the new parent rule
+     */
+    public void setParentRule(final AbstractCSSRuleImpl parentRule) {
         parentRule_ = parentRule;
     }
 
-    public AbstractCSSRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
-        super();
-        parentStyleSheet_ = parentStyleSheet;
-        parentRule_ = parentRule;
-    }
-
-    public AbstractCSSRuleImpl() {
-        super();
-    }
-
-    public CSSStyleSheet getParentStyleSheet() {
+    /**
+     * @return the parent style sheet
+     */
+    public CSSStyleSheetImpl getParentStyleSheet() {
         return parentStyleSheet_;
     }
 
-    public CSSRule getParentRule() {
+    /**
+     * @return the parent rule
+     */
+    public AbstractCSSRuleImpl getParentRule() {
         return parentRule_;
     }
 
@@ -64,7 +83,7 @@ public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements S
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSRule)) {
+        if (!(obj instanceof AbstractCSSRuleImpl)) {
             return false;
         }
         return super.equals(obj);

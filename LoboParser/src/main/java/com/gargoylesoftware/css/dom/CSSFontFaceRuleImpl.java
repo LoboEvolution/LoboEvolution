@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,34 +15,29 @@
 package com.gargoylesoftware.css.dom;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSFontFaceRule;
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * Implementation of {@link CSSFontFaceRule}.
+ * Implementation of CSSFontFaceRule.
  *
  * @author Ronald Brill
  */
-public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontFaceRule {
+public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
 
     private CSSStyleDeclarationImpl style_;
 
-    public CSSFontFaceRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final CSSRule parentRule) {
+    /**
+     * Ctor.
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     */
+    public CSSFontFaceRuleImpl(final CSSStyleSheetImpl parentStyleSheet, final AbstractCSSRuleImpl parentRule) {
         super(parentStyleSheet, parentRule);
-    }
-
-    @Override
-    public short getType() {
-        return FONT_FACE_RULE;
     }
 
     /**
@@ -53,7 +48,7 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
         final StringBuilder sb = new StringBuilder();
         sb.append("@font-face {");
 
-        final CSSStyleDeclaration style = getStyle();
+        final CSSStyleDeclarationImpl style = getStyle();
         if (null != style) {
             sb.append(style.getCssText());
         }
@@ -61,22 +56,17 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
         return sb.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
-        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-            throw new DOMExceptionImpl(
-                DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-        }
-
         try {
-            final InputSource is = new InputSource(new StringReader(cssText));
             final CSSOMParser parser = new CSSOMParser();
-            final CSSRule r = parser.parseRule(is);
+            final AbstractCSSRuleImpl r = parser.parseRule(cssText);
 
             // The rule must be a font face rule
-            if (r.getType() == CSSRule.FONT_FACE_RULE) {
+            if (r instanceof CSSFontFaceRuleImpl) {
                 style_ = ((CSSFontFaceRuleImpl) r).style_;
             }
             else {
@@ -99,11 +89,17 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
         }
     }
 
-    @Override
-    public CSSStyleDeclaration getStyle() {
+    /**
+     * @return the style
+     */
+    public CSSStyleDeclarationImpl getStyle() {
         return style_;
     }
 
+    /**
+     * Sets the style to a new one.
+     * @param style the new style
+     */
     public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
@@ -113,10 +109,10 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl implements CSSFontF
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSFontFaceRule)) {
+        if (!(obj instanceof CSSFontFaceRuleImpl)) {
             return false;
         }
-        final CSSFontFaceRule cffr = (CSSFontFaceRule) obj;
+        final CSSFontFaceRuleImpl cffr = (CSSFontFaceRuleImpl) obj;
         return super.equals(obj)
             && LangUtils.equals(getStyle(), cffr.getStyle());
     }

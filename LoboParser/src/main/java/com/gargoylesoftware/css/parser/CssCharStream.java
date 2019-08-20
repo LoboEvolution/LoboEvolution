@@ -259,7 +259,13 @@ public final void backup(int amount) {
       bufpos += bufsize;
   }
 
-  /** Constructor. */
+  /**
+   * Constructor.
+   * @param dstream the stream to read from
+   * @param startline startline
+   * @param startcolumn startcolumn
+   * @param buffersize buffersize
+   */
   public CssCharStream(java.io.Reader dstream, int startline, int startcolumn, int buffersize)
   {
     inputStream = dstream;
@@ -272,9 +278,13 @@ public final void backup(int amount) {
     bufcolumn = new int[buffersize];
   }
 
-  /** Constructor. */
-  public CssCharStream(java.io.Reader dstream, int startline,
-                                                          int startcolumn)
+  /**
+   * Constructor.
+   * @param dstream the stream to read from
+   * @param startline startline
+   * @param startcolumn startcolumn
+   */
+  public CssCharStream(java.io.Reader dstream, int startline, int startcolumn)
   {
     this(dstream, startline, startcolumn, 4096);
   }
@@ -316,6 +326,8 @@ public void Done()
 
   /**
    * Method to adjust line and column numbers for the start of a token.
+   * @param newLine the new line
+   * @param newCol the new column
    */
   public void adjustBeginLineColumn(int newLine, int newCol)
   {

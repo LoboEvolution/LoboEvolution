@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,22 +17,20 @@ package com.gargoylesoftware.css.dom;
 import java.io.Serializable;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSPrimitiveValue;
-import org.w3c.dom.css.RGBColor;
 
 import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 
 /**
- * Implementation of {@link RGBColor}.
+ * Implementation of RGBColor.
  *
  * @author Ronald Brill
  */
-public class RGBColorImpl implements RGBColor, Serializable {
+public class RGBColorImpl implements Serializable {
 
-    private CSSPrimitiveValue red_;
-    private CSSPrimitiveValue green_;
-    private CSSPrimitiveValue blue_;
+    private CSSValueImpl red_;
+    private CSSValueImpl green_;
+    private CSSValueImpl blue_;
 
     /**
      * Constructor that reads the values from the given
@@ -74,10 +72,9 @@ public class RGBColorImpl implements RGBColor, Serializable {
     }
 
     /**
-     * Returns the red part.
+     * @return the red part.
      */
-    @Override
-    public CSSPrimitiveValue getRed() {
+    public CSSValueImpl getRed() {
         return red_;
     }
 
@@ -85,15 +82,14 @@ public class RGBColorImpl implements RGBColor, Serializable {
      * Sets the red part to a new value.
      * @param red the new CSSPrimitiveValue
      */
-    public void setRed(final CSSPrimitiveValue red) {
+    public void setRed(final CSSValueImpl red) {
         red_ = red;
     }
 
     /**
-     * Returns the green part.
+     * @return the green part.
      */
-    @Override
-    public CSSPrimitiveValue getGreen() {
+    public CSSValueImpl getGreen() {
         return green_;
     }
 
@@ -101,15 +97,14 @@ public class RGBColorImpl implements RGBColor, Serializable {
      * Sets the green part to a new value.
      * @param green the new CSSPrimitiveValue
      */
-    public void setGreen(final CSSPrimitiveValue green) {
+    public void setGreen(final CSSValueImpl green) {
         green_ = green;
     }
 
     /**
-     * Returns the blue part.
+     * @return the blue part.
      */
-    @Override
-    public CSSPrimitiveValue getBlue() {
+    public CSSValueImpl getBlue() {
         return blue_;
     }
 
@@ -117,7 +112,7 @@ public class RGBColorImpl implements RGBColor, Serializable {
      * Sets the blue part to a new value.
      * @param blue the new CSSPrimitiveValue
      */
-    public void setBlue(final CSSPrimitiveValue blue) {
+    public void setBlue(final CSSValueImpl blue) {
         blue_ = blue;
     }
 

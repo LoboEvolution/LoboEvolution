@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,15 +42,17 @@ public class SubstringAttributeCondition extends AbstractLocatable implements Co
     }
 
     /**
-     * @return the local name
+     * {@inheritDoc}
      */
+    @Override
     public String getLocalName() {
         return localName_;
     }
 
     /**
-     * @return the value
+     * {@inheritDoc}
      */
+    @Override
     public String getValue() {
         return value_;
     }

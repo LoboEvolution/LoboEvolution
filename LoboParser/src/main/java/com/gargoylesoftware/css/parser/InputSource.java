@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,7 @@ package com.gargoylesoftware.css.parser;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.Charset;
 
 /**
  * The input supported by the parser.
@@ -36,37 +30,11 @@ public class InputSource implements Closeable {
     private String title_;
 
     /**
-     * Create a new input source backed by byteStream.
-     * @param byteStream the byte stream
-     * @param encoding the encoding
-     * @throws UnsupportedEncodingException if the encoding is not supported
-     */
-    public InputSource(final InputStream byteStream, final String encoding) throws UnsupportedEncodingException {
-        if (encoding == null || encoding.length() < 1) {
-            reader_ = new InputStreamReader(byteStream, Charset.defaultCharset());
-        }
-        else {
-            reader_ = new InputStreamReader(byteStream, encoding);
-        }
-    }
-
-    /**
      * Create a new input source backed by a reader.
      * @param reader the reader
      */
     public InputSource(final Reader reader) {
         reader_ = reader;
-    }
-
-    /**
-     * Create a new input source backed by a reader.
-     * @param uri the uri to read from
-     * @throws IOException in case of error
-     * @throws MalformedURLException in case of error
-     */
-    public InputSource(final String uri) throws MalformedURLException, IOException {
-        setURI(uri);
-        reader_ = new InputStreamReader(new URL(uri).openStream());
     }
 
     /**

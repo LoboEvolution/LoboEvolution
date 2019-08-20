@@ -27,7 +27,6 @@ import org.lobo.common.Strings;
 import org.lobobrowser.html.dom.HTMLStyleElement;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.w3c.dom.UserDataHandler;
-import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -37,7 +36,7 @@ import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleElement {
 	private boolean disabled;
 
-	private CSSStyleSheet styleSheet;
+	private CSSStyleSheetImpl styleSheet;
 
 	public HTMLStyleElementImpl() {
 		super("STYLE", true);
@@ -94,7 +93,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
-		final CSSStyleSheet sheet = this.styleSheet;
+		final CSSStyleSheetImpl sheet = this.styleSheet;
 		if (sheet != null) {
 			sheet.setDisabled(disabled);
 		}

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,19 @@
 package com.gargoylesoftware.css.dom;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSUnknownRule;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * Implementation of {@link CSSUnknownRule}.
+ * Implementation of CSSUnknownRule.
  *
  * @author Ronald Brill
  */
-public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknownRule {
+public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
 
     private String text_;
 
@@ -43,15 +39,10 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
      */
     public CSSUnknownRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
-            final CSSRule parentRule,
+            final AbstractCSSRuleImpl parentRule,
             final String text) {
         super(parentStyleSheet, parentRule);
         text_ = text;
-    }
-
-    @Override
-    public short getType() {
-        return UNKNOWN_RULE;
     }
 
     /**
@@ -65,22 +56,17 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
         return text_;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
-        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-            throw new DOMExceptionImpl(
-                DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-        }
-
         try {
-            final InputSource is = new InputSource(new StringReader(cssText));
             final CSSOMParser parser = new CSSOMParser();
-            final CSSRule r = parser.parseRule(is);
+            final AbstractCSSRuleImpl r = parser.parseRule(cssText);
 
             // The rule must be an unknown rule
-            if (r.getType() == CSSRule.UNKNOWN_RULE) {
+            if (r instanceof CSSUnknownRuleImpl) {
                 text_ = ((CSSUnknownRuleImpl) r).text_;
             }
             else {
@@ -113,10 +99,10 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl implements CSSUnknow
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSUnknownRule)) {
+        if (!(obj instanceof CSSUnknownRuleImpl)) {
             return false;
         }
-        final CSSUnknownRule cur = (CSSUnknownRule) obj;
+        final CSSUnknownRuleImpl cur = (CSSUnknownRuleImpl) obj;
         return super.equals(obj)
             && LangUtils.equals(getCssText(), cur.getCssText());
     }

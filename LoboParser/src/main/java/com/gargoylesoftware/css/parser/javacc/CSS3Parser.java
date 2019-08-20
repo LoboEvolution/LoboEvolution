@@ -2329,98 +2329,98 @@ try
                 }
                 catch (NumberFormatException e)
                 {
-                    value = LexicalUnitImpl.createNumber(prev, floatValue(op, t.image));
+                    value = LexicalUnitImpl.createNumber(prev, doubleValue(op, t.image));
                 }
         break;
         }
       case PERCENTAGE:{
         t = jj_consume_token(PERCENTAGE);
-value = LexicalUnitImpl.createPercentage(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createPercentage(prev, doubleValue(op, t.image));
         break;
         }
       case LENGTH_PX:{
         t = jj_consume_token(LENGTH_PX);
-value = LexicalUnitImpl.createPixel(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createPixel(prev, doubleValue(op, t.image));
         break;
         }
       case LENGTH_CM:{
         t = jj_consume_token(LENGTH_CM);
-value = LexicalUnitImpl.createCentimeter(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createCentimeter(prev, doubleValue(op, t.image));
         break;
         }
       case LENGTH_MM:{
         t = jj_consume_token(LENGTH_MM);
-value = LexicalUnitImpl.createMillimeter(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createMillimeter(prev, doubleValue(op, t.image));
         break;
         }
       case LENGTH_IN:{
         t = jj_consume_token(LENGTH_IN);
-value = LexicalUnitImpl.createInch(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createInch(prev, doubleValue(op, t.image));
         break;
         }
       case LENGTH_PT:{
         t = jj_consume_token(LENGTH_PT);
-value = LexicalUnitImpl.createPoint(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createPoint(prev, doubleValue(op, t.image));
         break;
         }
       case LENGTH_PC:{
         t = jj_consume_token(LENGTH_PC);
-value = LexicalUnitImpl.createPica(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createPica(prev, doubleValue(op, t.image));
         break;
         }
       case EMS:{
         t = jj_consume_token(EMS);
-value = LexicalUnitImpl.createEm(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createEm(prev, doubleValue(op, t.image));
         break;
         }
       case EXS:{
         t = jj_consume_token(EXS);
-value = LexicalUnitImpl.createEx(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createEx(prev, doubleValue(op, t.image));
         break;
         }
       case ANGLE_DEG:{
         t = jj_consume_token(ANGLE_DEG);
-value = LexicalUnitImpl.createDegree(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createDegree(prev, doubleValue(op, t.image));
         break;
         }
       case ANGLE_RAD:{
         t = jj_consume_token(ANGLE_RAD);
-value = LexicalUnitImpl.createRadian(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createRadian(prev, doubleValue(op, t.image));
         break;
         }
       case ANGLE_GRAD:{
         t = jj_consume_token(ANGLE_GRAD);
-value = LexicalUnitImpl.createGradian(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createGradian(prev, doubleValue(op, t.image));
         break;
         }
       case TIME_MS:{
         t = jj_consume_token(TIME_MS);
-value = LexicalUnitImpl.createMillisecond(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createMillisecond(prev, doubleValue(op, t.image));
         break;
         }
       case TIME_S:{
         t = jj_consume_token(TIME_S);
-value = LexicalUnitImpl.createSecond(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createSecond(prev, doubleValue(op, t.image));
         break;
         }
       case FREQ_HZ:{
         t = jj_consume_token(FREQ_HZ);
-value = LexicalUnitImpl.createHertz(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createHertz(prev, doubleValue(op, t.image));
         break;
         }
       case FREQ_KHZ:{
         t = jj_consume_token(FREQ_KHZ);
-value = LexicalUnitImpl.createKiloHertz(prev, floatValue(op, t.image));
+value = LexicalUnitImpl.createKiloHertz(prev, doubleValue(op, t.image));
         break;
         }
       case RESOLUTION_DPI:{
         t = jj_consume_token(RESOLUTION_DPI);
-value = LexicalUnitImpl.createDimension(prev, floatValue(op, t.image), "dpi");
+value = LexicalUnitImpl.createDimension(prev, doubleValue(op, t.image), "dpi");
         break;
         }
       case RESOLUTION_DPCM:{
         t = jj_consume_token(RESOLUTION_DPCM);
-value = LexicalUnitImpl.createDimension(prev, floatValue(op, t.image), "dpcm");
+value = LexicalUnitImpl.createDimension(prev, doubleValue(op, t.image), "dpcm");
         break;
         }
       case FUNCTION:{
@@ -2476,7 +2476,7 @@ value = LexicalUnitImpl.createURI(prev, unescape(t.image, true));
 int n = getLastNumPos(t.image);
                 value = LexicalUnitImpl.createDimension(
                     prev,
-                    floatValue(op, t.image.substring(0, n+1)),
+                    doubleValue(op, t.image.substring(0, n+1)),
                     t.image.substring(n+1));
       break;
       }

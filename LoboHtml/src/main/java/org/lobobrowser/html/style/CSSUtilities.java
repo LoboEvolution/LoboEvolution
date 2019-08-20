@@ -24,7 +24,6 @@ package org.lobobrowser.html.style;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -37,7 +36,6 @@ import org.lobo.common.Urls;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
-import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
@@ -93,7 +91,7 @@ public class CSSUtilities {
 		return false;
 	}
 
-	public static CSSStyleSheet parse(org.w3c.dom.Node ownerNode, String href, HTMLDocumentImpl doc, String baseUri,
+	public static CSSStyleSheetImpl parse(org.w3c.dom.Node ownerNode, String href, HTMLDocumentImpl doc, String baseUri,
 			boolean considerDoubleSlashComments) throws Exception {
 		final UserAgentContext bcontext = doc.getUserAgentContext();
 		final HttpRequest request = bcontext.createHttpRequest();

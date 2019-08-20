@@ -81,6 +81,7 @@ import org.w3c.dom.views.DocumentView;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 
 /**
@@ -225,7 +226,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-	final void addStyleSheet(CSSStyleSheet ss) {
+	final void addStyleSheet(CSSStyleSheetImpl ss) {
 		synchronized (this.treeLock) {
 			this.styleSheets.add(ss);
 			this.styleSheetAggregator = null;
@@ -526,7 +527,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
-    public StyleSheetList getStyleSheets() {
+    public CSSStyleSheetListImpl getStyleSheets() {
 		return this.styleSheets;
 	}
 

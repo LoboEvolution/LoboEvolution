@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,16 @@ package com.gargoylesoftware.css.dom;
 import java.io.Serializable;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.Counter;
 
 import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 
 /**
- * Implementation of {@link Counter}.
+ * Implementation of Counter.
  *
  * @author Ronald Brill
  */
-public class CounterImpl implements Counter, Serializable {
+public class CounterImpl implements Serializable {
 
     private String identifier_;
     private String listStyle_;
@@ -74,17 +73,23 @@ public class CounterImpl implements Counter, Serializable {
         }
     }
 
-    @Override
+    /**
+     * @return the identifier
+     */
     public String getIdentifier() {
         return identifier_;
     }
 
-    @Override
+    /**
+     * @return the list style
+     */
     public String getListStyle() {
         return listStyle_;
     }
 
-    @Override
+    /**
+     * @return the separator
+     */
     public String getSeparator() {
         return separator_;
     }

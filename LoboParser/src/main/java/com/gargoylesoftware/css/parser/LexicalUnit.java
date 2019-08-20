@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ public interface LexicalUnit {
         INTEGER,
         REAL,
         EM,
+        REM,
         EX,
         PIXEL,
         INCH,
@@ -91,9 +92,9 @@ public interface LexicalUnit {
     int getIntegerValue();
 
     /**
-     * @return the float value.
+     * @return the double value.
      */
-    float getFloatValue();
+    double getDoubleValue();
 
     /**
      * @return the string representation of the unit.

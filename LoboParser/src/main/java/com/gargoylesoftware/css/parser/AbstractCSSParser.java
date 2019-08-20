@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ package com.gargoylesoftware.css.parser;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.channels.Selector;
 import java.text.MessageFormat;
 import java.util.HashMap;
 
@@ -89,6 +88,9 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     private static final String NUM_CHARS = "0123456789.";
 
+    /**
+     * @return the document handler
+     */
     protected DocumentHandler getDocumentHandler() {
         if (documentHandler_ == null) {
             setDocumentHandler(new HandlerBase());
@@ -101,6 +103,9 @@ public abstract class AbstractCSSParser implements CSSParser {
         documentHandler_ = handler;
     }
 
+    /**
+     * @return the error handler
+     */
     protected CSSErrorHandler getErrorHandler() {
         if (errorHandler_ == null) {
             setErrorHandler(new HandlerBase());
@@ -113,6 +118,9 @@ public abstract class AbstractCSSParser implements CSSParser {
         errorHandler_ = eh;
     }
 
+    /**
+     * @return the input source
+     */
     protected InputSource getInputSource() {
         return source_;
     }
@@ -127,6 +135,10 @@ public abstract class AbstractCSSParser implements CSSParser {
         return ieStarHackAccepted_;
     }
 
+    /**
+     * @param key the lookup key
+     * @return the parser message
+     */
     protected String getParserMessage(final String key) {
         final String msg = parserMessages_.get(key);
         if (msg == null) {
@@ -135,13 +147,23 @@ public abstract class AbstractCSSParser implements CSSParser {
         return msg;
     }
 
+    /**
+     * Returns a new locator for the given token.
+     * @param t the token to generate the locator for
+     * @return a new locator
+     */
     protected Locator createLocator(final Token t) {
         return new Locator(getInputSource().getURI(),
             t == null ? 0 : t.beginLine,
             t == null ? 0 : t.beginColumn);
     }
 
-    protected String add_escapes(final String str) {
+    /**
+     * Escapes some chars in the given string.
+     * @param str the input
+     * @return a new string with the escaped values
+     */
+    protected String addEscapes(final String str) {
         final StringBuilder sb = new StringBuilder();
         char ch;
         for (int i = 0; i < str.length(); i++) {
@@ -187,6 +209,12 @@ public abstract class AbstractCSSParser implements CSSParser {
         return sb.toString();
     }
 
+    /**
+     *
+     * @param key the message lookup key
+     * @param e the parse exception
+     * @return a new CSSParseException
+     */
     protected CSSParseException toCSSParseException(final String key, final ParseException e) {
         final String messagePattern1 = getParserMessage("invalidExpectingOne");
         final String messagePattern2 = getParserMessage("invalidExpectingMore");
@@ -213,7 +241,7 @@ public abstract class AbstractCSSParser implements CSSParser {
                 invalid.append(e.tokenImage[0]);
                 break;
             }
-            invalid.append(add_escapes(tok.image));
+            invalid.append(addEscapes(tok.image));
             tok = tok.next;
         }
         final StringBuilder message = new StringBuilder(getParserMessage(key));
@@ -230,25 +258,44 @@ public abstract class AbstractCSSParser implements CSSParser {
             e.currentToken.next.beginColumn);
     }
 
+    /**
+     * @param e the DOMException
+     * @return a new CSSParseException
+     */
     protected CSSParseException toCSSParseException(final DOMException e) {
         final String messagePattern = getParserMessage("domException");
         return new CSSParseException(
                 MessageFormat.format(messagePattern, e.getMessage()), getInputSource().getURI(), 1, 1);
     }
 
+    /**
+     * @param e the TokenMgrError
+     * @return a new CSSParseException
+     */
     protected CSSParseException toCSSParseException(final TokenMgrError e) {
         final String messagePattern = getParserMessage("tokenMgrError");
         return new CSSParseException(messagePattern, getInputSource().getURI(), 1, 1);
     }
 
+    /**
+     * @param messageKey the message key
+     * @param msgParams the params
+     * @param locator the locator
+     * @return a new CSSParseException
+     */
     protected CSSParseException toCSSParseException(final String messageKey,
             final Object[] msgParams, final Locator locator) {
         final String messagePattern = getParserMessage(messageKey);
         return new CSSParseException(MessageFormat.format(messagePattern, msgParams), locator);
     }
 
-    protected CSSParseException createSkipWarning(final String key, final CSSParseException e) {
-        return new CSSParseException(getParserMessage(key), e.getURI(), e.getLineNumber(), e.getColumnNumber());
+    /**
+     * @param messageKey the message key
+     * @param e a CSSParseException
+     * @return a new CSSParseException
+     */
+    protected CSSParseException createSkipWarning(final String messageKey, final CSSParseException e) {
+        return new CSSParseException(getParserMessage(messageKey), e.getURI(), e.getLineNumber(), e.getColumnNumber());
     }
 
     @Override
@@ -267,11 +314,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         catch (final CSSParseException e) {
             getErrorHandler().error(e);
         }
-    }
-
-    @Override
-    public void parseStyleSheet(final String uri) throws IOException {
-        parseStyleSheet(new InputSource(uri));
     }
 
     @Override
@@ -370,6 +412,12 @@ public abstract class AbstractCSSParser implements CSSParser {
         return b;
     }
 
+    /**
+     * Parse the given input source and return the media list.
+     * @param source the input source
+     * @return new media list
+     * @throws IOException in case of errors
+     */
     public MediaQueryList parseMedia(final InputSource source) throws IOException {
         source_ = source;
         ReInit(getCharStream(source));
@@ -389,7 +437,7 @@ public abstract class AbstractCSSParser implements CSSParser {
         return ml;
     }
 
-    private CharStream getCharStream(final InputSource source) throws IOException {
+    private static CharStream getCharStream(final InputSource source) throws IOException {
         if (source.getReader() != null) {
             return new CssCharStream(source.getReader(), 1, 1);
         }
@@ -402,83 +450,220 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     @Override
     public abstract String getParserVersion();
-    protected abstract String getGrammarUri();
+
+    /**
+     * Re intit the stream.
+     * @param charStream the stream
+     */
     protected abstract void ReInit(CharStream charStream);
+
+    /**
+     * Process a style sheet.
+     *
+     * @throws CSSParseException in case of error
+     * @throws ParseException in case of error
+     */
     protected abstract void styleSheet() throws CSSParseException, ParseException;
+
+    /**
+     * Process a style sheet declaration.
+     *
+     * @throws ParseException in case of error
+     */
     protected abstract void styleDeclaration() throws ParseException;
+
+    /**
+     * Process a style sheet rule.
+     *
+     * @throws ParseException in case of error
+     */
     protected abstract void styleSheetRuleSingle() throws ParseException;
+
+    /**
+     * Process a selector list.
+     *
+     * @return the selector list
+     * @throws ParseException in case of error
+     */
     protected abstract SelectorList parseSelectorsInternal() throws ParseException;
-    protected abstract SelectorList selectorList() throws ParseException;
+
+    /**
+     * Process an expression.
+     *
+     * @return the lexical unit
+     * @throws ParseException in case of error
+     */
     protected abstract LexicalUnit expr() throws ParseException;
+
+    /**
+     * Process a prio.
+     *
+     * @return true or false
+     * @throws ParseException in case of error
+     */
     protected abstract boolean prio() throws ParseException;
+
+    /**
+     * Process a media list.
+     *
+     * @param ml the media list
+     * @throws ParseException in case of error
+     */
     protected abstract void mediaList(MediaQueryList ml) throws ParseException;
 
+    /**
+     * start document handler.
+     */
     protected void handleStartDocument() {
         getDocumentHandler().startDocument(getInputSource());
     }
 
+    /**
+     * end document handler.
+     */
     protected void handleEndDocument() {
         getDocumentHandler().endDocument(getInputSource());
     }
 
+    /**
+     * ignorable at rule handler.
+     *
+     * @param s the rule
+     * @param locator the locator
+     */
     protected void handleIgnorableAtRule(final String s, final Locator locator) {
         getDocumentHandler().ignorableAtRule(s, locator);
     }
 
+    /**
+     * charset handler.
+     *
+     * @param characterEncoding the encoding
+     * @param locator the locator
+     */
     protected void handleCharset(final String characterEncoding, final Locator locator) {
         getDocumentHandler().charset(characterEncoding, locator);
     }
 
+    /**
+     * import style handler.
+     *
+     * @param uri the uri
+     * @param media the media query list
+     * @param defaultNamespaceURI the namespace uri
+     * @param locator the locator
+     */
     protected void handleImportStyle(final String uri, final MediaQueryList media,
             final String defaultNamespaceURI, final Locator locator) {
         getDocumentHandler().importStyle(uri, media, defaultNamespaceURI, locator);
     }
 
+    /**
+     * start media handler.
+     *
+     * @param media the media query list
+     * @param locator the locator
+     */
     protected void handleStartMedia(final MediaQueryList media, final Locator locator) {
         getDocumentHandler().startMedia(media, locator);
     }
 
+    /**
+     * medium handler.
+     *
+     * @param medium the medium
+     * @param locator the locator
+     */
     protected void handleMedium(final String medium, final Locator locator) {
         // empty default impl
     }
 
+    /**
+     * end media handler.
+     *
+     * @param media the media query list
+     */
     protected void handleEndMedia(final MediaQueryList media) {
         getDocumentHandler().endMedia(media);
     }
 
+    /**
+     * start page handler.
+     *
+     * @param name the name
+     * @param pseudoPage the pseudo page
+     * @param locator the locator
+     */
     protected void handleStartPage(final String name, final String pseudoPage, final Locator locator) {
         getDocumentHandler().startPage(name, pseudoPage, locator);
     }
 
+    /**
+     * end page handler.
+     *
+     * @param name the name
+     * @param pseudoPage the pseudo page
+     */
     protected void handleEndPage(final String name, final String pseudoPage) {
         getDocumentHandler().endPage(name, pseudoPage);
     }
 
+    /**
+     * start font face handler.
+     *
+     * @param locator the locator
+     */
     protected void handleStartFontFace(final Locator locator) {
         getDocumentHandler().startFontFace(locator);
     }
 
+    /**
+     * end font face handler.
+     */
     protected void handleEndFontFace() {
         getDocumentHandler().endFontFace();
     }
 
-    protected void handleSelector(final Selector selector) {
-        // empty default impl
-    }
-
+    /**
+     * selector start handler.
+     *
+     * @param selectors the selector list
+     * @param locator the locator
+     */
     protected void handleStartSelector(final SelectorList selectors, final Locator locator) {
         getDocumentHandler().startSelector(selectors, locator);
     }
 
+    /**
+     * selector end handler.
+     *
+     * @param selectors the selector list
+     */
     protected void handleEndSelector(final SelectorList selectors) {
         getDocumentHandler().endSelector(selectors);
     }
 
+    /**
+     * property handler.
+     *
+     * @param name the name
+     * @param value the value
+     * @param important important flag
+     * @param locator the locator
+     */
     protected void handleProperty(final String name, final LexicalUnit value,
             final boolean important, final Locator locator) {
         getDocumentHandler().property(name, value, important, locator);
     }
 
+    /**
+     * Process a function decl.
+     *
+     * @param prev the previous lexical unit
+     * @param funct the function
+     * @param params the params
+     * @return a lexical unit
+     */
     protected LexicalUnit functionInternal(final LexicalUnit prev, final String funct,
             final LexicalUnit params) {
 
@@ -503,6 +688,13 @@ public abstract class AbstractCSSParser implements CSSParser {
             params);
     }
 
+    /**
+     * Processes a hexadecimal color definition.
+     *
+     * @param prev the previous lexical unit
+     * @param t the token
+     * @return a new lexical unit
+     */
     protected LexicalUnit hexcolorInternal(final LexicalUnit prev, final Token t) {
         // Step past the hash at the beginning
         final int i = 1;
@@ -550,6 +742,13 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
+    /**
+     * Parses the sting into an integer.
+     *
+     * @param op the sign char
+     * @param s the string to parse
+     * @return the int value
+     */
     protected int intValue(final char op, final String s) {
         final int result = Integer.parseInt(s);
         if (op == '-') {
@@ -558,14 +757,27 @@ public abstract class AbstractCSSParser implements CSSParser {
         return result;
     }
 
-    protected float floatValue(final char op, final String s) {
-        final float result = Float.parseFloat(s);
+    /**
+     * Parses the sting into an double.
+     *
+     * @param op the sign char
+     * @param s the string to parse
+     * @return the double value
+     */
+    protected double doubleValue(final char op, final String s) {
+        final double result = Double.parseDouble(s);
         if (op == '-') {
             return -1 * result;
         }
         return result;
     }
 
+    /**
+     * Returns the pos of the last numeric char in the given string.
+     *
+     * @param s the string to parse
+     * @return the pos
+     */
     protected int getLastNumPos(final String s) {
         int i = 0;
         for ( ; i < s.length(); i++) {
@@ -583,6 +795,10 @@ public abstract class AbstractCSSParser implements CSSParser {
      * This could be done directly in the parser, but portions of the lexer would have to be moved
      * to the parser, meaning that the grammar would no longer match the standard grammar specified
      * by the W3C. This would make the parser and lexer much less maintainable.
+     *
+     * @param s the string to unescape
+     * @param unescapeDoubleQuotes if true unescape double quotes also
+     * @return the unescaped string
      */
     public String unescape(final String s, final boolean unescapeDoubleQuotes) {
         if (s == null) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,23 +17,21 @@ package com.gargoylesoftware.css.dom;
 import java.io.Serializable;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSPrimitiveValue;
-import org.w3c.dom.css.Rect;
 
 import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
 
 /**
- * Implementation of {@link Rect}.
+ * Implementation of Rect.
  *
  * @author Ronald Brill
  */
-public class RectImpl implements Rect, Serializable {
+public class RectImpl implements Serializable {
 
-    private CSSPrimitiveValue top_;
-    private CSSPrimitiveValue right_;
-    private CSSPrimitiveValue bottom_;
-    private CSSPrimitiveValue left_;
+    private CSSValueImpl top_;
+    private CSSValueImpl right_;
+    private CSSValueImpl bottom_;
+    private CSSValueImpl left_;
 
     /**
      * Constructor that reads the values from the given
@@ -118,10 +116,9 @@ public class RectImpl implements Rect, Serializable {
     }
 
     /**
-     * Returns the top part.
+     * @return the top part.
      */
-    @Override
-    public CSSPrimitiveValue getTop() {
+    public CSSValueImpl getTop() {
         return top_;
     }
 
@@ -129,15 +126,14 @@ public class RectImpl implements Rect, Serializable {
      * Sets the top part to a new value.
      * @param top the new CSSPrimitiveValue
      */
-    public void setTop(final CSSPrimitiveValue top) {
+    public void setTop(final CSSValueImpl top) {
         top_ = top;
     }
 
     /**
-     * Returns the right part.
+     * @return the right part.
      */
-    @Override
-    public CSSPrimitiveValue getRight() {
+    public CSSValueImpl getRight() {
         return right_;
     }
 
@@ -145,15 +141,14 @@ public class RectImpl implements Rect, Serializable {
      * Sets the right part to a new value.
      * @param right the new CSSPrimitiveValue
      */
-    public void setRight(final CSSPrimitiveValue right) {
+    public void setRight(final CSSValueImpl right) {
         right_ = right;
     }
 
     /**
-     * Returns the bottom part.
+     * @return the bottom part.
      */
-    @Override
-    public CSSPrimitiveValue getBottom() {
+    public CSSValueImpl getBottom() {
         return bottom_;
     }
 
@@ -161,15 +156,14 @@ public class RectImpl implements Rect, Serializable {
      * Sets the bottom part to a new value.
      * @param bottom the new CSSPrimitiveValue
      */
-    public void setBottom(final CSSPrimitiveValue bottom) {
+    public void setBottom(final CSSValueImpl bottom) {
         bottom_ = bottom;
     }
 
     /**
-     * Returns the left part.
+     * @return the left part.
      */
-    @Override
-    public CSSPrimitiveValue getLeft() {
+    public CSSValueImpl getLeft() {
         return left_;
     }
 
@@ -177,7 +171,7 @@ public class RectImpl implements Rect, Serializable {
      * Sets the left part to a new value.
      * @param left the new CSSPrimitiveValue
      */
-    public void setLeft(final CSSPrimitiveValue left) {
+    public void setLeft(final CSSValueImpl left) {
         left_ = left;
     }
 

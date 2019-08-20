@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,25 +23,45 @@ import org.w3c.dom.DOMException;
  */
 public class DOMExceptionImpl extends DOMException {
 
+    /** SYNTAX_ERROR = 0. */
     public static final int SYNTAX_ERROR = 0;
+    /** INDEX_OUT_OF_BOUNDS = 1. */
     public static final int INDEX_OUT_OF_BOUNDS = 1;
+    /** READ_ONLY_STYLE_SHEET = 2. */
     public static final int READ_ONLY_STYLE_SHEET = 2;
+    /** EXPECTING_STYLE_RULE = 3. */
     public static final int EXPECTING_STYLE_RULE = 3;
+    /** EXPECTING_CHARSET_RULE = 4. */
     public static final int EXPECTING_CHARSET_RULE = 4;
+    /** EXPECTING_IMPORT_RULE = 5. */
     public static final int EXPECTING_IMPORT_RULE = 5;
+    /** EXPECTING_MEDIA_RULE = 6. */
     public static final int EXPECTING_MEDIA_RULE = 6;
+    /** EXPECTING_FONT_FACE_RULE = 7. */
     public static final int EXPECTING_FONT_FACE_RULE = 7;
+    /** EXPECTING_PAGE_RULE = 8. */
     public static final int EXPECTING_PAGE_RULE = 8;
+    /** FLOAT_ERROR = 9. */
     public static final int FLOAT_ERROR = 9;
+    /** STRING_ERROR = 10. */
     public static final int STRING_ERROR = 10;
+    /** COUNTER_ERROR = 11. */
     public static final int COUNTER_ERROR = 11;
+    /** RECT_ERROR = 12. */
     public static final int RECT_ERROR = 12;
+    /** RGBCOLOR_ERROR = 13. */
     public static final int RGBCOLOR_ERROR = 13;
+    /** CHARSET_NOT_FIRST = 14. */
     public static final int CHARSET_NOT_FIRST = 14;
+    /** CHARSET_NOT_UNIQUE = 15. */
     public static final int CHARSET_NOT_UNIQUE = 15;
+    /** IMPORT_NOT_FIRST = 16. */
     public static final int IMPORT_NOT_FIRST = 16;
+    /** NOT_FOUND = 17. */
     public static final int NOT_FOUND = 17;
+    /** NOT_IMPLEMENTED = 18. */
     public static final int NOT_IMPLEMENTED = 18;
+    /** INSERT_BEFORE_IMPORT = 19. */
     public static final int INSERT_BEFORE_IMPORT = 19;
 
     static final String[] messages = {
@@ -67,14 +87,30 @@ public class DOMExceptionImpl extends DOMException {
         "Can't insert a rule before the last charset or import rule"
     };
 
+    /**
+     * Ctor.
+     * @param code the code
+     * @param messageKey the message key
+     */
     public DOMExceptionImpl(final short code, final int messageKey) {
         this(code, messageKey, null);
     }
 
+    /**
+     * Ctor.
+     * @param code the code
+     * @param messageKey the message key
+     */
     public DOMExceptionImpl(final int code, final int messageKey) {
         this(code, messageKey, null);
     }
 
+    /**
+     * Ctor.
+     * @param code the code
+     * @param messageKey the message key
+     * @param info additional info
+     */
     public DOMExceptionImpl(final int code, final int messageKey, final String info) {
         super((short) code, messages[messageKey] + " (" + info + ")");
     }

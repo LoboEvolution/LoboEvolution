@@ -31,17 +31,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-import org.lobo.common.Nodes;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.css.CSSImportRule;
 import org.w3c.dom.css.CSSMediaRule;
-import org.w3c.dom.css.CSSRule;
 import org.w3c.dom.css.CSSRuleList;
-import org.w3c.dom.css.CSSStyleRule;
 import org.w3c.dom.css.CSSStyleSheet;
 import org.w3c.dom.stylesheets.MediaList;
+
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSRuleListImpl;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 /**
  * Aggregates all style sheets in a document. Every time a new STYLE element is
@@ -117,13 +120,13 @@ public class StyleSheetAggregator {
 
 	private static class StyleRuleInfo {
 		private final ArrayList ancestorSelectors;
-		private final CSSStyleRule styleRule;
+		private final CSSStyleRuleImpl styleRule;
 
 		/**
 		 * @param selectors A collection of SimpleSelector's.
 		 * @param rule      A CSS rule.
 		 */
-		public StyleRuleInfo(ArrayList simpleSelectors, CSSStyleRule rule) {
+		public StyleRuleInfo(ArrayList simpleSelectors, CSSStyleRuleImpl rule) {
 			super();
 			this.ancestorSelectors = simpleSelectors;
 			this.styleRule = rule;
@@ -258,7 +261,7 @@ public class StyleSheetAggregator {
 		this.document = document;
 	}
 
-	private final void addClassRule(String elemtl, String classtl, CSSStyleRule styleRule,
+	private final void addClassRule(String elemtl, String classtl, CSSStyleRuleImpl styleRule,
 			ArrayList ancestorSelectors) {
 		Map classMap = (Map) this.classMapsByElement.get(elemtl);
 		if (classMap == null) {
@@ -273,7 +276,7 @@ public class StyleSheetAggregator {
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
 
-	private final void addElementRule(String elemtl, CSSStyleRule styleRule, ArrayList ancestorSelectors) {
+	private final void addElementRule(String elemtl, CSSStyleRuleImpl styleRule, ArrayList ancestorSelectors) {
 		Collection rules = (Collection) this.rulesByElement.get(elemtl);
 		if (rules == null) {
 			rules = new LinkedList();
@@ -282,7 +285,7 @@ public class StyleSheetAggregator {
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
 
-	private final void addIdRule(String elemtl, String idtl, CSSStyleRule styleRule, ArrayList ancestorSelectors) {
+	private final void addIdRule(String elemtl, String idtl, CSSStyleRuleImpl styleRule, ArrayList ancestorSelectors) {
 		Map idsMap = (Map) this.idMapsByElement.get(elemtl);
 		if (idsMap == null) {
 			idsMap = new HashMap();
@@ -296,10 +299,10 @@ public class StyleSheetAggregator {
 		rules.add(new StyleRuleInfo(ancestorSelectors, styleRule));
 	}
 
-	private final void addRule(CSSStyleSheet styleSheet, CSSRule rule) throws Exception {
+	private final void addRule(CSSStyleSheetImpl styleSheet, AbstractCSSRuleImpl rule) throws Exception {
 		final HTMLDocumentImpl document = this.document;
-		if (rule instanceof CSSStyleRule) {
-			final CSSStyleRule sr = (CSSStyleRule) rule;
+		if (rule instanceof CSSStyleRuleImpl) {
+			CSSStyleRuleImpl sr = (CSSStyleRuleImpl) rule;
 			final String selectorList = sr.getSelectorText();
 			final StringTokenizer commaTok = new StringTokenizer(selectorList, ",");
 			while (commaTok.hasMoreTokens()) {
@@ -362,7 +365,7 @@ public class StyleSheetAggregator {
 					final String href = importRule.getHref();
 					final String styleHref = styleSheet.getHref();
 					final String baseHref = styleHref == null ? document.getBaseURI() : styleHref;
-					final CSSStyleSheet sheet = CSSUtilities.parse(styleSheet.getOwnerNode(), href, document, baseHref,
+					final CSSStyleSheetImpl sheet = CSSUtilities.parse(styleSheet.getOwnerNode(), href, document, baseHref,
 							false);
 					if (sheet != null) {
 						addStyleSheet(sheet);
@@ -373,24 +376,23 @@ public class StyleSheetAggregator {
 			final CSSMediaRule mrule = (CSSMediaRule) rule;
 			final MediaList mediaList = mrule.getMedia();
 			if (CSSUtilities.matchesMedia(mediaList, document.getUserAgentContext())) {
-				final CSSRuleList ruleList = mrule.getCssRules();
-				final int length = ruleList.getLength();
-				for (int i = 0; i < length; i++) {
-					final CSSRule subRule = ruleList.item(i);
+				final CSSRuleListImpl ruleList = (CSSRuleListImpl) mrule.getCssRules();
+				for (AbstractCSSRuleImpl subRule : ruleList.getRules()) {
 					addRule(styleSheet, subRule);
 				}
 			}
 		}
 	}
 
-	private final void addStyleSheet(CSSStyleSheet styleSheet) throws Exception {
-		for (CSSRule rule : Nodes.iterable(styleSheet.getCssRules())) {
+	private final void addStyleSheet(CSSStyleSheetImpl styleSheet) throws Exception {
+		CSSRuleListImpl cssRules = styleSheet.getCssRules();
+		for (AbstractCSSRuleImpl rule : cssRules.getRules()) {
 			addRule(styleSheet, rule);
 		}
 	}
 
-    public final void addStyleSheets(List<CSSStyleSheet> styleSheets) throws Exception {
-        for (CSSStyleSheet sheet : styleSheets) {
+	public final void addStyleSheets(List<CSSStyleSheetImpl> styleSheets) throws Exception {
+		for (CSSStyleSheetImpl sheet : styleSheets) {
 			addStyleSheet(sheet);
 		}
 	}
@@ -403,7 +405,7 @@ public class StyleSheetAggregator {
 			final Iterator i = elementRules.iterator();
 			while (i.hasNext()) {
 				final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-				final CSSStyleSheet styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
+				final CSSStyleSheetImpl styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
 				if (styleSheet != null && styleSheet.getDisabled()) {
 					continue;
 				}
@@ -417,7 +419,7 @@ public class StyleSheetAggregator {
 			final Iterator i = elementRules.iterator();
 			while (i.hasNext()) {
 				final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-				final CSSStyleSheet styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
+				final CSSStyleSheetImpl styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
 				if (styleSheet != null && styleSheet.getDisabled()) {
 					continue;
 				}
@@ -436,7 +438,7 @@ public class StyleSheetAggregator {
 						final Iterator i = classRules.iterator();
 						while (i.hasNext()) {
 							final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-							final CSSStyleSheet styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
+							final CSSStyleSheetImpl styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
 							if (styleSheet != null && styleSheet.getDisabled()) {
 								continue;
 							}
@@ -453,7 +455,7 @@ public class StyleSheetAggregator {
 						final Iterator i = classRules.iterator();
 						while (i.hasNext()) {
 							final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-							final CSSStyleSheet styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
+							final CSSStyleSheetImpl styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
 							if (styleSheet != null && styleSheet.getDisabled()) {
 								continue;
 							}
@@ -474,7 +476,7 @@ public class StyleSheetAggregator {
 					final Iterator i = idRules.iterator();
 					while (i.hasNext()) {
 						final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-						final CSSStyleSheet styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
+						final CSSStyleSheetImpl styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
 						if (styleSheet != null && styleSheet.getDisabled()) {
 							continue;
 						}
@@ -492,7 +494,7 @@ public class StyleSheetAggregator {
 					final Iterator i = idRules.iterator();
 					while (i.hasNext()) {
 						final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
-						final CSSStyleSheet styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
+						final CSSStyleSheetImpl styleSheet = styleRuleInfo.styleRule.getParentStyleSheet();
 						if (styleSheet != null && styleSheet.getDisabled()) {
 							continue;
 						}
@@ -506,7 +508,7 @@ public class StyleSheetAggregator {
 		return false;
 	}
 
-	public final Collection getActiveStyleDeclarations(HTMLElementImpl element, String elementName, String elementId,
+	public final Collection<CSSStyleDeclarationImpl> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, String elementId,
 			String className, Set pseudoNames) {
 		Collection styleDeclarations = null;
 		final String elementTL = elementName.toLowerCase();
@@ -516,8 +518,8 @@ public class StyleSheetAggregator {
 			while (i.hasNext()) {
 				final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
 				if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-					final CSSStyleRule styleRule = styleRuleInfo.styleRule;
-					final CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
+					final CSSStyleRuleImpl styleRule = styleRuleInfo.styleRule;
+					final CSSStyleSheetImpl styleSheet = styleRule.getParentStyleSheet();
 					if (styleSheet != null && styleSheet.getDisabled()) {
 						continue;
 					}
@@ -535,8 +537,8 @@ public class StyleSheetAggregator {
 			while (i.hasNext()) {
 				final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
 				if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-					final CSSStyleRule styleRule = styleRuleInfo.styleRule;
-					final CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
+					final CSSStyleRuleImpl styleRule = styleRuleInfo.styleRule;
+					final CSSStyleSheetImpl styleSheet = styleRule.getParentStyleSheet();
 					if (styleSheet != null && styleSheet.getDisabled()) {
 						continue;
 					}
@@ -557,8 +559,8 @@ public class StyleSheetAggregator {
 					while (i.hasNext()) {
 						final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
 						if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-							final CSSStyleRule styleRule = styleRuleInfo.styleRule;
-							final CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
+							final CSSStyleRuleImpl styleRule = styleRuleInfo.styleRule;
+							final CSSStyleSheetImpl styleSheet = styleRule.getParentStyleSheet();
 							if (styleSheet != null && styleSheet.getDisabled()) {
 								continue;
 							}
@@ -578,8 +580,8 @@ public class StyleSheetAggregator {
 					while (i.hasNext()) {
 						final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
 						if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-							final CSSStyleRule styleRule = styleRuleInfo.styleRule;
-							final CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
+							final CSSStyleRuleImpl styleRule = styleRuleInfo.styleRule;
+							final CSSStyleSheetImpl styleSheet = styleRule.getParentStyleSheet();
 							if (styleSheet != null && styleSheet.getDisabled()) {
 								continue;
 							}
@@ -602,8 +604,8 @@ public class StyleSheetAggregator {
 					while (i.hasNext()) {
 						final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
 						if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-							final CSSStyleRule styleRule = styleRuleInfo.styleRule;
-							final CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
+							final CSSStyleRuleImpl styleRule = styleRuleInfo.styleRule;
+							final CSSStyleSheetImpl styleSheet = styleRule.getParentStyleSheet();
 							if (styleSheet != null && styleSheet.getDisabled()) {
 								continue;
 							}
@@ -624,8 +626,8 @@ public class StyleSheetAggregator {
 					while (i.hasNext()) {
 						final StyleRuleInfo styleRuleInfo = (StyleRuleInfo) i.next();
 						if (styleRuleInfo.isSelectorMatch(element, pseudoNames)) {
-							final CSSStyleRule styleRule = styleRuleInfo.styleRule;
-							final CSSStyleSheet styleSheet = styleRule.getParentStyleSheet();
+							final CSSStyleRuleImpl styleRule = styleRuleInfo.styleRule;
+							final CSSStyleSheetImpl styleSheet = styleRule.getParentStyleSheet();
 							if (styleSheet != null && styleSheet.getDisabled()) {
 								continue;
 							}

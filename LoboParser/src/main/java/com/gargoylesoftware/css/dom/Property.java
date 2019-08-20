@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@ package com.gargoylesoftware.css.dom;
 
 import java.io.Serializable;
 
-import org.w3c.dom.css.CSSValue;
-
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.util.LangUtils;
 
@@ -27,7 +25,7 @@ import com.gargoylesoftware.css.util.LangUtils;
 public class Property extends AbstractLocatable implements Serializable {
 
     private String name_;
-    private CSSValue value_;
+    private CSSValueImpl value_;
     private boolean important_;
 
     /**
@@ -36,7 +34,7 @@ public class Property extends AbstractLocatable implements Serializable {
      * @param value the value
      * @param important true if the important flag set
      */
-    public Property(final String name, final CSSValue value, final boolean important) {
+    public Property(final String name, final CSSValueImpl value, final boolean important) {
         name_ = name;
         value_ = value;
         important_ = important;
@@ -62,7 +60,7 @@ public class Property extends AbstractLocatable implements Serializable {
      * Returns the value.
      * @return the value
      */
-    public CSSValue getValue() {
+    public CSSValueImpl getValue() {
         return value_;
     }
 
@@ -78,7 +76,7 @@ public class Property extends AbstractLocatable implements Serializable {
      * Sets the value to a new value.
      * @param value the new CSSValue
      */
-    public void setValue(final CSSValue value) {
+    public void setValue(final CSSValueImpl value) {
         value_ = value;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,19 @@
  */
 package com.gargoylesoftware.css.parser.selector;
 
-import java.io.Serializable;
-
 /**
  * @author Ronald Brill
  */
-public class DirectAdjacentSelector extends AbstractSelector implements Serializable {
+public class DirectAdjacentSelector extends AbstractSelector {
 
     private final Selector selector_;  // child
     private final SimpleSelector simpleSelector_;
 
+    /**
+     * Ctor.
+     * @param child the child selector
+     * @param simpleSelector the simple selector
+     */
     public DirectAdjacentSelector(final Selector child, final SimpleSelector simpleSelector) {
         selector_ = child;
         if (child != null) {
@@ -37,6 +40,9 @@ public class DirectAdjacentSelector extends AbstractSelector implements Serializ
         return SelectorType.DIRECT_ADJACENT_SELECTOR;
     }
 
+    /**
+     * @return the selector
+     */
     public Selector getSelector() {
         return selector_;
     }

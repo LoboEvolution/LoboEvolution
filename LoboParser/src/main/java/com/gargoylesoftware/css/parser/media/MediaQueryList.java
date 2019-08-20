@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import java.util.List;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * Implementation of {@link MediaQueryList}.
+ * Implementation of MediaQueryList.
  *
  * @author Ronald Brill
  */
@@ -28,26 +28,31 @@ public class MediaQueryList extends AbstractLocatable {
 
     private final List<MediaQuery> mediaQueries_;
 
+    /**
+     * Ctor.
+     */
     public MediaQueryList() {
-        mediaQueries_ = new ArrayList<MediaQuery>();
+        mediaQueries_ = new ArrayList<>();
     }
 
+    /**
+     * @return the number of mediaQueries
+     */
     public int getLength() {
         return mediaQueries_.size();
     }
 
-    public String item(final int index) {
-        return mediaQuery(index).getMedia();
+    /**
+     * @return the list of media queries
+     */
+    public List<MediaQuery> getMediaQueries() {
+        return mediaQueries_;
     }
 
-    public MediaQuery mediaQuery(final int index) {
-        return mediaQueries_.get(index);
-    }
-
-    public void add(final String s) {
-        add(new MediaQuery(s));
-    }
-
+    /**
+     * Adds a new media query to the list.
+     * @param mediaQuery the media query to add
+     */
     public void add(final MediaQuery mediaQuery) {
         mediaQueries_.add(mediaQuery);
     }
@@ -55,12 +60,11 @@ public class MediaQueryList extends AbstractLocatable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        final int len = getLength();
-        for (int i = 0; i < len; i++) {
-            sb.append(item(i));
-            if (i < len - 1) {
+        for (MediaQuery mediaQuery : mediaQueries_) {
+            if (sb.length() > 0) {
                 sb.append(", ");
             }
+            sb.append(mediaQuery.getMedia());
         }
         return sb.toString();
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,23 @@
  */
 package com.gargoylesoftware.css.parser.selector;
 
-import java.io.Serializable;
-
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
  *
  * @author Ronald Brill
  */
-public class PseudoElementSelector extends AbstractSelector implements SimpleSelector, Serializable {
+public class PseudoElementSelector extends AbstractSelector implements SimpleSelector {
 
     private final String localName_;
     private final boolean doubleColon_;
 
+    /**
+     * Ctor.
+     * @param localName the local name
+     * @param locator the locator
+     * @param doubleColon double column flag
+     */
     public PseudoElementSelector(final String localName, final Locator locator, final boolean doubleColon) {
         localName_ = localName;
         setLocator(locator);
@@ -43,6 +47,9 @@ public class PseudoElementSelector extends AbstractSelector implements SimpleSel
         return this;
     }
 
+    /**
+     * @return the local name
+     */
     public String getLocalName() {
         return localName_;
     }

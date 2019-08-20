@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.css.parser.selector;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -25,12 +24,17 @@ import com.gargoylesoftware.css.parser.condition.Condition;
 /**
  * @author Ronald Brill
  */
-public class ElementSelector extends AbstractSelector implements SimpleSelector, Serializable {
+public class ElementSelector extends AbstractSelector implements SimpleSelector {
 
     private final String localName_;
     private final String localNameLC_;
     private List<Condition> conditions_;
 
+    /**
+     * Ctor.
+     * @param localName the local name
+     * @param locator the locator
+     */
     public ElementSelector(final String localName, final Locator locator) {
         localName_ = localName;
         if (localName != null) {
@@ -53,14 +57,23 @@ public class ElementSelector extends AbstractSelector implements SimpleSelector,
         return this;
     }
 
+    /**
+     * @return the local name
+     */
     public String getLocalName() {
         return localName_;
     }
 
+    /**
+     * @return the local name in lowercase
+     */
     public String getLocalNameLowerCase() {
         return localNameLC_;
     }
 
+    /**
+     * @return the element name
+     */
     public String getElementName() {
         final String localeName = getLocalName();
         if (localeName == null) {
@@ -69,27 +82,34 @@ public class ElementSelector extends AbstractSelector implements SimpleSelector,
         return localeName;
     }
 
+    /**
+     * @return the conditions
+     */
     public List<Condition> getConditions() {
         return conditions_;
     }
 
+    /**
+     * Add a condition.
+     * @param condition the condition to be added
+     */
     public void addCondition(final Condition condition) {
         if (conditions_ == null) {
-            conditions_ = new ArrayList<Condition>();
+            conditions_ = new ArrayList<>();
         }
         conditions_.add(condition);
     }
 
     @Override
     public String toString() {
-        String localeName = getElementName();
+        final StringBuffer result = new StringBuffer();
+        result.append(getElementName());
 
-        // TODO use StringBuilder
         if (conditions_ != null) {
             for (Condition condition : conditions_) {
-                localeName += condition.toString();
+                result.append(condition);
             }
         }
-        return localeName;
+        return result.toString();
     }
 }

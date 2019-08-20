@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,28 +16,25 @@ package com.gargoylesoftware.css.dom;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.media.MediaQueryList;
 import com.gargoylesoftware.css.util.LangUtils;
 import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
 
 /**
- * Implements {@link MediaList}.
+ * Implementation of MediaList.
  *
  * @author Ronald Brill
  */
-public class MediaListImpl extends AbstractLocatable implements MediaList, Serializable {
+public class MediaListImpl extends AbstractLocatable implements Serializable {
 
     private List<MediaQuery> mediaQueries_;
 
@@ -46,7 +43,7 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
      * @param mediaList the media list
      */
     public MediaListImpl(final MediaQueryList mediaList) {
-        mediaQueries_ = new ArrayList<MediaQuery>(10);
+        mediaQueries_ = new ArrayList<>(10);
 
         setMediaList(mediaList);
         if (mediaList != null) {
@@ -54,7 +51,9 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
         }
     }
 
-    @Override
+    /**
+     * @return the media text
+     */
     public String getMediaText() {
         final StringBuilder sb = new StringBuilder("");
         boolean isNotFirst = false;
@@ -70,13 +69,16 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
         return sb.toString();
     }
 
-    @Override
+    /**
+     * Parses the given media text.
+     * @param mediaText text to be parsed
+     * @throws DOMException in case of error
+     */
     public void setMediaText(final String mediaText) throws DOMException {
-        final InputSource source = new InputSource(new StringReader(mediaText));
         try {
             final CSSOMParser parser = new CSSOMParser();
             parser.setErrorHandler(ThrowCssExceptionErrorHandler.INSTANCE);
-            final MediaQueryList sml = parser.parseMedia(source);
+            final MediaQueryList sml = parser.parseMedia(mediaText);
             setMediaList(sml);
         }
         catch (final CSSParseException e) {
@@ -87,19 +89,11 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
         }
     }
 
-    @Override
+    /**
+     * @return the media query count
+     */
     public int getLength() {
         return mediaQueries_.size();
-    }
-
-    @Override
-    public String item(final int index) {
-        final MediaQuery mq = mediaQuery(index);
-        if (null == mq) {
-            return null;
-        }
-
-        return mq.getMedia();
     }
 
     /**
@@ -114,27 +108,14 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
     }
 
     @Override
-    public void deleteMedium(final String oldMedium) throws DOMException {
-        for (MediaQuery mediaQuery : mediaQueries_) {
-            final String str = mediaQuery.getMedia();
-            if (str.equalsIgnoreCase(oldMedium)) {
-                mediaQueries_.remove(mediaQuery);
-                return;
-            }
-        }
-        throw new DOMExceptionImpl(DOMException.NOT_FOUND_ERR, DOMExceptionImpl.NOT_FOUND);
-    }
-
-    @Override
-    public void appendMedium(final String newMedium) throws DOMException {
-        mediaQueries_.add(new MediaQuery(newMedium));
-    }
-
-    @Override
     public String toString() {
         return getMediaText();
     }
 
+    /**
+     * Resets the list of media queries.
+     * @param media the media queries string to be parsed
+     */
     public void setMedia(final List<String> media) {
         mediaQueries_.clear();
         for (String medium : media) {
@@ -144,22 +125,23 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
 
     private void setMediaList(final MediaQueryList mediaList) {
         if (mediaList != null) {
-            for (int i = 0; i < mediaList.getLength(); i++) {
-                mediaQueries_.add(mediaList.mediaQuery(i));
-            }
+            mediaQueries_.addAll(mediaList.getMediaQueries());
         }
     }
 
-    private boolean equalsMedia(final MediaList ml) {
+    private boolean equalsMedia(final MediaListImpl ml) {
         if ((ml == null) || (getLength() != ml.getLength())) {
             return false;
         }
-        for (int i = 0; i < getLength(); i++) {
-            final String m1 = item(i);
-            final String m2 = ml.item(i);
+
+        int i = 0;
+        for (MediaQuery mediaQuery : mediaQueries_) {
+            final String m1 = mediaQuery.getMedia();
+            final String m2 = ml.mediaQuery(i).getMedia();
             if (!LangUtils.equals(m1, m2)) {
                 return false;
             }
+            i++;
         }
         return true;
     }
@@ -169,10 +151,10 @@ public class MediaListImpl extends AbstractLocatable implements MediaList, Seria
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof MediaList)) {
+        if (!(obj instanceof MediaListImpl)) {
             return false;
         }
-        final MediaList ml = (MediaList) obj;
+        final MediaListImpl ml = (MediaListImpl) obj;
         return super.equals(obj) && equalsMedia(ml);
     }
 

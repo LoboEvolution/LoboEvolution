@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,34 +81,10 @@ public interface CSSParser {
      *            possibly from a byte stream or character stream
      *            supplied by the application.
      * @see InputSource
-     * @see #parseStyleSheet(java.lang.String)
      * @see #setDocumentHandler
      * @see #setErrorHandler
      */
     void parseStyleSheet(InputSource source) throws CSSException, IOException;
-
-    /**
-     * Parse a CSS document from a URI.
-     *
-     * <p>This method is a shortcut for the common case of reading a document
-     * from a URI.  It is the exact equivalent of the following:</p>
-     *
-     * <pre>
-     * parse(new InputSource(uri));
-     * </pre>
-     *
-     * <p>The URI must be fully resolved by the application before it is passed
-     * to the parser.</p>
-     *
-     * @param uri The URI.
-     * @exception CSSException Any CSS exception, possibly
-     *            wrapping another exception.
-     * @exception java.io.IOException An IO exception from the parser,
-     *            possibly from a byte stream or character stream
-     *            supplied by the application.
-     * @see #parseStyleSheet(InputSource)
-     */
-    void parseStyleSheet(String uri) throws CSSException, IOException;
 
     /**
      * Parse a CSS style declaration (without '{' and '}').

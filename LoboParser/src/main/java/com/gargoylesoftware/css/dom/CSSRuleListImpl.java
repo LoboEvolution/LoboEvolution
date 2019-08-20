@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,49 +18,59 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSRuleList;
-
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * Implementation of {@link CSSRuleList}.
+ * Implementation of CSSRuleList.
  *
  * @author Ronald Brill
  */
-public class CSSRuleListImpl implements CSSRuleList, Serializable {
+public class CSSRuleListImpl implements Serializable {
 
-    private List<CSSRule> rules_ = new ArrayList<CSSRule>();
+    private List<AbstractCSSRuleImpl> rules_ = new ArrayList<>();
 
-    public List<CSSRule> getRules() {
+    /**
+     * @return the rules
+     */
+    public List<AbstractCSSRuleImpl> getRules() {
         return rules_;
     }
 
+    /**
+     * Ctor.
+     */
     public CSSRuleListImpl() {
         super();
     }
 
-    @Override
+    /**
+     * @return the number of rules
+     */
     public int getLength() {
         return getRules().size();
     }
 
-    @Override
-    public CSSRule item(final int index) {
-        if (index < 0 || null == rules_ || index >= rules_.size()) {
-            return null;
-        }
-        return rules_.get(index);
-    }
-
-    public void add(final CSSRule rule) {
+    /**
+     * Add a rule.
+     * @param rule the rule to be added
+     */
+    public void add(final AbstractCSSRuleImpl rule) {
         getRules().add(rule);
     }
 
-    public void insert(final CSSRule rule, final int index) {
+    /**
+     * Insert a rule at the given pos.
+     * @param rule the rule to be inserted
+     * @param index the insert pos
+     */
+    public void insert(final AbstractCSSRuleImpl rule, final int index) {
         getRules().add(index, rule);
     }
 
+    /**
+     * Delete the rule at the given pos.
+     * @param index the delete pos
+     */
     public void delete(final int index) {
         getRules().remove(index);
     }
@@ -68,12 +78,10 @@ public class CSSRuleListImpl implements CSSRuleList, Serializable {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < getLength(); i++) {
-            if (i > 0) {
+        for (AbstractCSSRuleImpl rule : rules_) {
+            if (sb.length() > 0) {
                 sb.append("\r\n");
             }
-
-            final CSSRule rule = item(i);
             sb.append(rule.toString());
         }
         return sb.toString();
@@ -84,23 +92,24 @@ public class CSSRuleListImpl implements CSSRuleList, Serializable {
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSRuleList)) {
+        if (!(obj instanceof CSSRuleListImpl)) {
             return false;
         }
-        final CSSRuleList crl = (CSSRuleList) obj;
+        final CSSRuleListImpl crl = (CSSRuleListImpl) obj;
         return equalsRules(crl);
     }
 
-    private boolean equalsRules(final CSSRuleList crl) {
+    private boolean equalsRules(final CSSRuleListImpl crl) {
         if ((crl == null) || (getLength() != crl.getLength())) {
             return false;
         }
-        for (int i = 0; i < getLength(); i++) {
-            final CSSRule cssRule1 = item(i);
-            final CSSRule cssRule2 = crl.item(i);
-            if (!LangUtils.equals(cssRule1, cssRule2)) {
+        int i = 0;
+        for (AbstractCSSRuleImpl rule : rules_) {
+            final AbstractCSSRuleImpl cssRule2 = crl.rules_.get(i);
+            if (!LangUtils.equals(rule, cssRule2)) {
                 return false;
             }
+            i++;
         }
         return true;
     }

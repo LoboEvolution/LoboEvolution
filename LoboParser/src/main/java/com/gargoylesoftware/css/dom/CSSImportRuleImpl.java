@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,52 +15,39 @@
 package com.gargoylesoftware.css.dom;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSImportRule;
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSStyleSheet;
-import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * Implementation of {@link CSSImportRule}.
- *
- * TODO: Implement getStyleSheet()
+ * Implementation of CSSImportRule.
  *
  * @author Ronald Brill
  */
-public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportRule {
+public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
 
     private String href_;
-    private MediaList media_;
+    private MediaListImpl media_;
 
-    public void setHref(final String href) {
-        href_ = href;
-    }
-
-    public void setMedia(final MediaList media) {
-        media_ = media;
-    }
-
+    /**
+     * Ctor.
+     *
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     * @param href the href
+     * @param media the media
+     */
     public CSSImportRuleImpl(
             final CSSStyleSheetImpl parentStyleSheet,
-            final CSSRule parentRule,
+            final AbstractCSSRuleImpl parentRule,
             final String href,
-            final MediaList media) {
+            final MediaListImpl media) {
         super(parentStyleSheet, parentRule);
         href_ = href;
         media_ = media;
-    }
-
-    @Override
-    public short getType() {
-        return IMPORT_RULE;
     }
 
     /**
@@ -76,30 +63,25 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
             sb.append(" url(").append(href).append(")");
         }
 
-        final MediaList ml = getMedia();
+        final MediaListImpl ml = getMedia();
         if (null != ml && ml.getLength() > 0) {
-            sb.append(" ").append(((MediaListImpl) getMedia()).getMediaText());
+            sb.append(" ").append(getMedia().getMediaText());
         }
         sb.append(";");
         return sb.toString();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
-        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-            throw new DOMExceptionImpl(
-                DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-        }
-
         try {
-            final InputSource is = new InputSource(new StringReader(cssText));
             final CSSOMParser parser = new CSSOMParser();
-            final CSSRule r = parser.parseRule(is);
+            final AbstractCSSRuleImpl r = parser.parseRule(cssText);
 
             // The rule must be an import rule
-            if (r.getType() == CSSRule.IMPORT_RULE) {
+            if (r instanceof CSSImportRuleImpl) {
                 href_ = ((CSSImportRuleImpl) r).href_;
                 media_ = ((CSSImportRuleImpl) r).media_;
             }
@@ -123,19 +105,25 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
         }
     }
 
-    @Override
+    /**
+     * @return the href
+     */
     public String getHref() {
         return href_;
     }
 
-    @Override
-    public MediaList getMedia() {
+    /**
+     * @return the media lsit
+     */
+    public MediaListImpl getMedia() {
         return media_;
     }
 
-    @Override
-    public CSSStyleSheet getStyleSheet() {
-        return null;
+    /**
+     * @return the parent style sheet
+     */
+    public CSSStyleSheetImpl getStyleSheet() {
+        return getParentStyleSheet();
     }
 
     @Override
@@ -148,10 +136,10 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl implements CSSImportR
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSImportRule)) {
+        if (!(obj instanceof CSSImportRuleImpl)) {
             return false;
         }
-        final CSSImportRule cir = (CSSImportRule) obj;
+        final CSSImportRuleImpl cir = (CSSImportRuleImpl) obj;
         return super.equals(obj)
             && LangUtils.equals(getHref(), cir.getHref())
             && LangUtils.equals(getMedia(), cir.getMedia());

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,13 +25,13 @@ import java.util.stream.Collectors;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * Implementation of {@link SelectorList}.
+ * Implementation of SelectorList.
  *
  * @author Ronald Brill
  */
 public class SelectorListImpl extends AbstractLocatable implements SelectorList, Serializable {
 
-    private List<Selector> selectors_ = new ArrayList<Selector>();
+    private List<Selector> selectors_ = new ArrayList<>();
 
     /**
      * @return the list of selectors.

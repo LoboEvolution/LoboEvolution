@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,18 @@ public class LangCondition extends AbstractLocatable implements Condition, Seria
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getLocalName() {
+        return null;
+    }
+
+    /**
      * @return the language
      */
-    public String getLang() {
+    @Override
+    public String getValue() {
         return lang_;
     }
 
@@ -54,7 +63,7 @@ public class LangCondition extends AbstractLocatable implements Condition, Seria
         final StringBuilder result = new StringBuilder();
         result.append(":lang(");
 
-        final String lang = getLang();
+        final String lang = getValue();
         if (null != lang) {
             result.append(lang);
         }

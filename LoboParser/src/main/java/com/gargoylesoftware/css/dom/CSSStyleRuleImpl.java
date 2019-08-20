@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,46 +15,49 @@
 package com.gargoylesoftware.css.dom;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.css.CSSRule;
-import org.w3c.dom.css.CSSStyleDeclaration;
-import org.w3c.dom.css.CSSStyleRule;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * Implementation of {@link CSSStyleRule}.
+ * Implementation of CSSStyleRule.
  *
  * @author Ronald Brill
  */
-public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRule {
+public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
     private SelectorList selectors_;
-    private CSSStyleDeclaration style_;
+    private CSSStyleDeclarationImpl style_;
 
+    /**
+     * Ctor.
+     * @param parentStyleSheet the parent style sheet
+     * @param parentRule the parent rule
+     * @param selectors the selectors
+     */
+    public CSSStyleRuleImpl(final CSSStyleSheetImpl parentStyleSheet,
+        final AbstractCSSRuleImpl parentRule, final SelectorList selectors) {
+        super(parentStyleSheet, parentRule);
+        setSelectors(selectors);
+    }
+
+    /**
+     * @return all selectors
+     */
     public SelectorList getSelectors() {
         return selectors_;
     }
 
+    /**
+     * Updates the selectors.
+     * @param selectors the new selectors
+     */
     public void setSelectors(final SelectorList selectors) {
         selectors_ = selectors;
-    }
-
-    public CSSStyleRuleImpl(final CSSStyleSheetImpl parentStyleSheet,
-        final CSSRule parentRule, final SelectorList selectors) {
-        super(parentStyleSheet, parentRule);
-        selectors_ = selectors;
-    }
-
-    @Override
-    public short getType() {
-        return STYLE_RULE;
     }
 
     /**
@@ -62,7 +65,7 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
      */
     @Override
     public String getCssText() {
-        final CSSStyleDeclaration style = getStyle();
+        final CSSStyleDeclarationImpl style = getStyle();
         if (null == style) {
             return "";
         }
@@ -77,22 +80,17 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         return selectorText + " { " + styleText + " }";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
-        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-            throw new DOMExceptionImpl(
-                DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-        }
-
         try {
-            final InputSource is = new InputSource(new StringReader(cssText));
             final CSSOMParser parser = new CSSOMParser();
-            final CSSRule r = parser.parseRule(is);
+            final AbstractCSSRuleImpl r = parser.parseRule(cssText);
 
             // The rule must be a style rule
-            if (r.getType() == CSSRule.STYLE_RULE) {
+            if (r instanceof CSSStyleRuleImpl) {
                 selectors_ = ((CSSStyleRuleImpl) r).selectors_;
                 style_ = ((CSSStyleRuleImpl) r).style_;
             }
@@ -116,24 +114,22 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         }
     }
 
-    @Override
+    /**
+     * @return the selector text
+     */
     public String getSelectorText() {
         return selectors_.toString();
     }
 
-    @Override
+    /**
+     * Sets the selector text.
+     * @param selectorText the new selector text
+     * @throws DOMException in clase of error
+     */
     public void setSelectorText(final String selectorText) throws DOMException {
-        final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheetImpl();
-        if (parentStyleSheet != null && parentStyleSheet.isReadOnly()) {
-            throw new DOMExceptionImpl(
-                DOMException.NO_MODIFICATION_ALLOWED_ERR,
-                DOMExceptionImpl.READ_ONLY_STYLE_SHEET);
-        }
-
         try {
-            final InputSource is = new InputSource(new StringReader(selectorText));
             final CSSOMParser parser = new CSSOMParser();
-            selectors_ = parser.parseSelectors(is);
+            selectors_ = parser.parseSelectors(selectorText);
         }
         catch (final CSSException e) {
             throw new DOMExceptionImpl(
@@ -149,12 +145,18 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         }
     }
 
-    @Override
-    public CSSStyleDeclaration getStyle() {
+    /**
+     * @return the style
+     */
+    public CSSStyleDeclarationImpl getStyle() {
         return style_;
     }
 
-    public void setStyle(final CSSStyleDeclaration style) {
+    /**
+     * Replaces the style.
+     * @param style the new style
+     */
+    public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
 
@@ -168,10 +170,10 @@ public class CSSStyleRuleImpl extends AbstractCSSRuleImpl implements CSSStyleRul
         if (this == obj) {
             return true;
         }
-        if (!(obj instanceof CSSStyleRule)) {
+        if (!(obj instanceof CSSStyleRuleImpl)) {
             return false;
         }
-        final CSSStyleRule csr = (CSSStyleRule) obj;
+        final CSSStyleRuleImpl csr = (CSSStyleRuleImpl) obj;
         return super.equals(obj)
             && LangUtils.equals(getSelectorText(), csr.getSelectorText())
             && LangUtils.equals(getStyle(), csr.getStyle());

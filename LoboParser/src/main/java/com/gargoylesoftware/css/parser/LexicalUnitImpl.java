@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Ronald Brill.
+ * Copyright (c) 2019 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,9 @@
 package com.gargoylesoftware.css.parser;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 /**
  * Implementation of {@link LexicalUnit}.
@@ -26,7 +29,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
     private LexicalUnitType lexicalUnitType_;
     private LexicalUnit nextLexicalUnit_;
     private LexicalUnit previousLexicalUnit_;
-    private float floatValue_;
+    private double doubleValue_;
     private String dimension_;
     private String functionName_;
     private LexicalUnit parameters_;
@@ -50,10 +53,10 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
     }
 
     /**
-     * @param floatVal the float value
+     * @param doubleVal the double value
      */
-    public void setFloatValue(final float floatVal) {
-        floatValue_ = floatVal;
+    public void setDoubleValue(final double doubleVal) {
+        doubleValue_ = doubleVal;
         toString_ = null;
     }
 
@@ -118,7 +121,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
      */
     protected LexicalUnitImpl(final LexicalUnit previous, final int value) {
         this(previous, LexicalUnitType.INTEGER);
-        floatValue_ = value;
+        doubleValue_ = value;
     }
 
     /**
@@ -126,11 +129,11 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
      *
      * @param previous the previous LexicalUnit
      * @param type the LexicalUnitType
-     * @param value the float value
+     * @param value the double value
      */
-    protected LexicalUnitImpl(final LexicalUnit previous, final LexicalUnitType type, final float value) {
+    protected LexicalUnitImpl(final LexicalUnit previous, final LexicalUnitType type, final double value) {
         this(previous, type);
-        floatValue_ = value;
+        doubleValue_ = value;
     }
 
     /**
@@ -139,16 +142,16 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
      * @param previous the previous LexicalUnit
      * @param type the LexicalUnitType
      * @param dimension the dimension
-     * @param value the float value
+     * @param value the double value
      */
     protected LexicalUnitImpl(
             final LexicalUnit previous,
             final LexicalUnitType type,
             final String dimension,
-            final float value) {
+            final double value) {
         this(previous, type);
         dimension_ = dimension;
-        floatValue_ = value;
+        doubleValue_ = value;
     }
 
     /**
@@ -211,12 +214,12 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
 
     @Override
     public int getIntegerValue() {
-        return (int) floatValue_;
+        return (int) doubleValue_;
     }
 
     @Override
-    public float getFloatValue() {
-        return floatValue_;
+    public double getDoubleValue() {
+        return doubleValue_;
     }
 
     @Override
@@ -224,6 +227,8 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
         switch (lexicalUnitType_) {
             case EM:
                 return "em";
+            case REM:
+                return "rem";
             case EX:
                 return "ex";
             case PIXEL:
@@ -282,7 +287,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
     }
 
     /**
-     * {@inheritDoc}
+     * @return the current css text
      */
     public String getCssText() {
         if (null != toString_) {
@@ -334,9 +339,10 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 sb.append(String.valueOf(getIntegerValue()));
                 break;
             case REAL:
-                sb.append(getTrimedFloatValue());
+                sb.append(getTrimedDoubleValue());
                 break;
             case EM:
+            case REM:
             case EX:
             case PIXEL:
             case INCH:
@@ -353,7 +359,7 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
             case HERTZ:
             case KILOHERTZ:
             case DIMENSION:
-                sb.append(getTrimedFloatValue());
+                sb.append(getTrimedDoubleValue());
                 final String dimUnitText = getDimensionUnitText();
                 if (null != dimUnitText) {
                     sb.append(dimUnitText);
@@ -485,108 +491,114 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 break;
             case REAL:
                 sb.append("REAL(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(")");
                 break;
             case EM:
                 sb.append("EM(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
+                    .append(getDimensionUnitText())
+                    .append(")");
+                break;
+            case REM:
+                sb.append("REM(")
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case EX:
                 sb.append("EX(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case PIXEL:
                 sb.append("PIXEL(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case INCH:
                 sb.append("INCH(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case CENTIMETER:
                 sb.append("CENTIMETER(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case MILLIMETER:
                 sb.append("MILLIMETER(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case POINT:
                 sb.append("POINT(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case PICA:
                 sb.append("PICA(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case PERCENTAGE:
                 sb.append("PERCENTAGE(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case DEGREE:
                 sb.append("DEGREE(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case GRADIAN:
                 sb.append("GRADIAN(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case RADIAN:
                 sb.append("RADIAN(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case MILLISECOND:
                 sb.append("MILLISECOND(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case SECOND:
                 sb.append("SECOND(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case HERTZ:
                 sb.append("HERTZ(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case KILOHERTZ:
                 sb.append("KILOHERTZ(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
             case DIMENSION:
                 sb.append("DIMENSION(")
-                    .append(getTrimedFloatValue())
+                    .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
                 break;
@@ -672,14 +684,18 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
         }
     }
 
-    private String getTrimedFloatValue() {
-        final float f = getFloatValue();
+    private String getTrimedDoubleValue() {
+        final double f = getDoubleValue();
         final int i = (int) f;
 
         if (f - i == 0) {
             return Integer.toString((int) f);
         }
-        return Float.toString(f);
+
+        final DecimalFormat decimalFormat = new DecimalFormat("0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
+        decimalFormat.setGroupingUsed(false);
+        decimalFormat.setMaximumFractionDigits(4);
+        return decimalFormat.format(f);
     }
 
     /**
@@ -693,165 +709,174 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type real
      */
-    public static LexicalUnit createNumber(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.REAL, f);
+    public static LexicalUnit createNumber(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.REAL, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type percent
      */
-    public static LexicalUnit createPercentage(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.PERCENTAGE, f);
+    public static LexicalUnit createPercentage(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.PERCENTAGE, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type pixel
      */
-    public static LexicalUnit createPixel(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.PIXEL, f);
+    public static LexicalUnit createPixel(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.PIXEL, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type centimeter
      */
-    public static LexicalUnit createCentimeter(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.CENTIMETER, f);
+    public static LexicalUnit createCentimeter(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.CENTIMETER, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type millimeter
      */
-    public static LexicalUnit createMillimeter(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.MILLIMETER, f);
+    public static LexicalUnit createMillimeter(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.MILLIMETER, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type inch
      */
-    public static LexicalUnit createInch(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.INCH, f);
+    public static LexicalUnit createInch(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.INCH, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type point
      */
-    public static LexicalUnit createPoint(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.POINT, f);
+    public static LexicalUnit createPoint(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.POINT, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type pica
      */
-    public static LexicalUnit createPica(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.PICA, f);
+    public static LexicalUnit createPica(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.PICA, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type em
      */
-    public static LexicalUnit createEm(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.EM, f);
+    public static LexicalUnit createEm(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.EM, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
+     * @return lexical unit with type rem
+     */
+    public static LexicalUnit createRem(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.REM, d);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param d the double value
      * @return lexical unit with type ex
      */
-    public static LexicalUnit createEx(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.EX, f);
+    public static LexicalUnit createEx(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.EX, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type degree
      */
-    public static LexicalUnit createDegree(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.DEGREE, f);
+    public static LexicalUnit createDegree(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.DEGREE, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type radian
      */
-    public static LexicalUnit createRadian(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.RADIAN, f);
+    public static LexicalUnit createRadian(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.RADIAN, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type gradian
      */
-    public static LexicalUnit createGradian(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.GRADIAN, f);
+    public static LexicalUnit createGradian(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.GRADIAN, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type millisecond
      */
-    public static LexicalUnit createMillisecond(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.MILLISECOND, f);
+    public static LexicalUnit createMillisecond(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.MILLISECOND, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type second
      */
-    public static LexicalUnit createSecond(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.SECOND, f);
+    public static LexicalUnit createSecond(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.SECOND, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type hertz
      */
-    public static LexicalUnit createHertz(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.HERTZ, f);
+    public static LexicalUnit createHertz(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.HERTZ, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type dimension
      * @param dim the dimension
      */
-    public static LexicalUnit createDimension(final LexicalUnit prev, final float f, final String dim) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.DIMENSION, dim, f);
+    public static LexicalUnit createDimension(final LexicalUnit prev, final double d, final String dim) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.DIMENSION, dim, d);
     }
 
     /**
      * @param prev the previous LexicalUnit
-     * @param f the float value
+     * @param d the double value
      * @return lexical unit with type kilohertz
      */
-    public static LexicalUnit createKiloHertz(final LexicalUnit prev, final float f) {
-        return new LexicalUnitImpl(prev, LexicalUnitType.KILOHERTZ, f);
+    public static LexicalUnit createKiloHertz(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.KILOHERTZ, d);
     }
 
     /**
