@@ -113,6 +113,27 @@ class ElementFactory {
 		builders.put("H6", heading);
 
 		builders.put("CANVAS", new HTMLElementBuilder.Canvas());
+
+		builders.put("SVG", new HTMLElementBuilder.SVG());
+		builders.put("CIRCLE", new HTMLElementBuilder.SVGCircle());
+		builders.put("RECT", new HTMLElementBuilder.SVGRect());
+		builders.put("ELLIPSE", new HTMLElementBuilder.SVGEllipse());
+		builders.put("LINE", new HTMLElementBuilder.SVGLine());
+		builders.put("POLYGON", new HTMLElementBuilder.SVGPolygon());
+		builders.put("POLYLINE", new HTMLElementBuilder.SVGPolyline());
+		builders.put("PATH", new HTMLElementBuilder.SVGPath());
+		builders.put("G", new HTMLElementBuilder.SVGG());
+		builders.put("DEFS", new HTMLElementBuilder.SVGDefs());
+		builders.put("USE", new HTMLElementBuilder.SVGUse());
+		builders.put("SYMBOL", new HTMLElementBuilder.SVGSymbol());
+		builders.put("TEXT_HTML", new HTMLElementBuilder.SVGText());
+		builders.put("RADIAL_GRADIENT", new HTMLElementBuilder.SVGRadialGradient());
+		builders.put("LINEAR_GRADIENT", new HTMLElementBuilder.SVGLinearGradient());
+		builders.put("STOP", new HTMLElementBuilder.SVGStop());
+		builders.put("CLIPPATH", new HTMLElementBuilder.SVGClipPath());
+		builders.put("ANIMATE", new HTMLElementBuilder.SVGAnimate());
+		builders.put("ANIMATE_TRASFORM", new HTMLElementBuilder.SVGAnimateTrasform());
+		builders.put("ANIMATE_COLOR", new HTMLElementBuilder.SVGAnimateColor());
 	}
 
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {

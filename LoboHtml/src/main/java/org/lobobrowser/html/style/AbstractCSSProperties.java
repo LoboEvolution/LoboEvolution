@@ -31,6 +31,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.common.Objects;
 import org.lobo.common.Urls;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.js.AbstractScriptableDelegate;
@@ -351,136 +352,414 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 				boolean important);
 	}
 
-	public static final String AZIMUTH = "azimuth";
-	public static final String BACKGROUND = "background";
-	public static final String BACKGROUND_ATTACHMENT = "background-attachment";
-	public static final String BACKGROUND_COLOR = "background-color";
-	public static final String BACKGROUND_IMAGE = "background-image";
-	public static final String BACKGROUND_POSITION = "background-position";
-	public static final String BACKGROUND_REPEAT = "background-repeat";
-	public static final String BORDER = "border";
-	public static final String BORDER_BOTTOM = "border-bottom";
-	public static final String BORDER_BOTTOM_COLOR = "border-bottom-color";
-	public static final String BORDER_BOTTOM_STYLE = "border-bottom-style";
-	public static final String BORDER_BOTTOM_WIDTH = "border-bottom-width";
-	public static final String BORDER_COLLAPSE = "border-collapse";
-	public static final String BORDER_COLOR = "border-color";
-	public static final String BORDER_LEFT = "border-left";
-	public static final String BORDER_LEFT_COLOR = "border-left-color";
-	public static final String BORDER_LEFT_STYLE = "border-left-style";
-	public static final String BORDER_LEFT_WIDTH = "border-left-width";
-	public static final String BORDER_RIGHT = "border-right";
-	public static final String BORDER_RIGHT_COLOR = "border-right-color";
-	public static final String BORDER_RIGHT_STYLE = "border-right-style";
-	public static final String BORDER_RIGHT_WIDTH = "border-right-width";
-	public static final String BORDER_SPACING = "border-spacing";
-	public static final String BORDER_STYLE = "border-style";
-	public static final String BORDER_TOP = "border-top";
-	public static final String BORDER_TOP_COLOR = "border-top-color";
-	public static final String BORDER_TOP_STYLE = "border-top-style";
-	public static final String BORDER_TOP_WIDTH = "border-top-width";
-	public static final String BORDER_WIDTH = "border-width";
-	public static final String BOTTOM = "bottom";
-	public static final String BOX_SIZING = "box-sizing";
-	public static final String CAPTION_SIDE = "caption-side";
-	public static final String CLEAR = "clear";
-	public static final String CLIP = "clip";
-	public static final String COLOR = "color";
-	public static final String CONTENT = "content";
-	public static final String COUNTER_INCREMENT = "counter-increment";
-	public static final String COUNTER_RESET = "counter-reset";
-	public static final String CSS_FLOAT = "css-float";
-	public static final String CUE = "cue";
-	public static final String CUE_AFTER = "cue-after";
-	public static final String CUE_BEFORE = "cue-before";
-	public static final String CURSOR = "cursor";
-	public static final String DIRECTION = "direction";
-	public static final String DISPLAY = "display";
-	public static final String ELEVATION = "elevation";
-	public static final String EMPTY_CELLS = "empty-cells";
-	public static final String FLOAT = "float";
-	public static final String FONT = "font";
-	public static final String FONT_FAMILY = "font-family";
-	public static final String FONT_SIZE = "font-size";
-	public static final String FONT_SIZE_ADJUST = "font-size-adjust";
-	public static final String FONT_STRETCH = "font-stretch";
-	public static final String FONT_STYLE = "font-style";
-	public static final String FONT_VARIANT = "font-variant";
-	public static final String FONT_WEIGHT = "font-weight";
-	public static final String HEIGHT = "height";
-	public static final String LEFT = "left";
-	public static final String LETTER_SPACING = "letter-spacing";
-	public static final String LINE_HEIGHT = "line-height";
-	public static final String LIST_STYLE = "list-style";
-	public static final String LIST_STYLE_IMAGE = "list-style-image";
-	public static final String LIST_STYLE_POSITION = "list-style-position";
-	public static final String LIST_STYLE_TYPE = "list-style-type";
 	private static final Logger logger = Logger.getLogger(AbstractCSSProperties.class.getName());
+	
+	/** The Constant AZIMUTH. */
+	public static final String AZIMUTH = "azimuth";
+
+	/** The Constant BACKGROUND. */
+	public static final String BACKGROUND = "background";
+
+	/** The Constant BACKGROUND_ATTACHMENT. */
+	public static final String BACKGROUND_ATTACHMENT = "background-attachment";
+
+	/** The Constant BACKGROUND_COLOR. */
+	public static final String BACKGROUND_COLOR = "background-color";
+
+	/** The Constant BACKGROUND_IMAGE. */
+	public static final String BACKGROUND_IMAGE = "background-image";
+
+	/** The Constant BACKGROUND_POSITION. */
+	public static final String BACKGROUND_POSITION = "background-position";
+
+	/** The Constant BACKGROUND_REPEAT. */
+	public static final String BACKGROUND_REPEAT = "background-repeat";
+
+	/** The Constant BORDER. */
+	public static final String BORDER = "border";
+
+	/** The Constant BORDER_BOTTOM. */
+	public static final String BORDER_BOTTOM = "border-bottom";
+
+	/** The Constant BORDER_BOTTOM_COLOR. */
+	public static final String BORDER_BOTTOM_COLOR = "border-bottom-color";
+
+	/** The Constant BORDER_BOTTOM_STYLE. */
+	public static final String BORDER_BOTTOM_STYLE = "border-bottom-style";
+
+	/** The Constant BORDER_BOTTOM_WIDTH. */
+	public static final String BORDER_BOTTOM_WIDTH = "border-bottom-width";
+
+	/** The Constant BORDER_COLLAPSE. */
+	public static final String BORDER_COLLAPSE = "border-collapse";
+
+	/** The Constant BORDER_COLOR. */
+	public static final String BORDER_COLOR = "border-color";
+
+	/** The Constant BORDER_LEFT. */
+	public static final String BORDER_LEFT = "border-left";
+
+	/** The Constant BORDER_LEFT_COLOR. */
+	public static final String BORDER_LEFT_COLOR = "border-left-color";
+
+	/** The Constant BORDER_LEFT_STYLE. */
+	public static final String BORDER_LEFT_STYLE = "border-left-style";
+
+	/** The Constant BORDER_LEFT_WIDTH. */
+	public static final String BORDER_LEFT_WIDTH = "border-left-width";
+
+	/** The Constant BORDER_RIGHT. */
+	public static final String BORDER_RIGHT = "border-right";
+
+	/** The Constant BORDER_RIGHT_COLOR. */
+	public static final String BORDER_RIGHT_COLOR = "border-right-color";
+
+	/** The Constant BORDER_RIGHT_STYLE. */
+	public static final String BORDER_RIGHT_STYLE = "border-right-style";
+
+	/** The Constant BORDER_RIGHT_WIDTH. */
+	public static final String BORDER_RIGHT_WIDTH = "border-right-width";
+
+	/** The Constant BORDER_SPACING. */
+	public static final String BORDER_SPACING = "border-spacing";
+
+	/** The Constant BORDER_STYLE. */
+	public static final String BORDER_STYLE = "border-style";
+
+	/** The Constant BORDER_TOP. */
+	public static final String BORDER_TOP = "border-top";
+
+	/** The Constant BORDER_TOP_COLOR. */
+	public static final String BORDER_TOP_COLOR = "border-top-color";
+
+	/** The Constant BORDER_TOP_STYLE. */
+	public static final String BORDER_TOP_STYLE = "border-top-style";
+
+	/** The Constant BORDER_TOP_WIDTH. */
+	public static final String BORDER_TOP_WIDTH = "border-top-width";
+
+	/** The Constant BORDER_WIDTH. */
+	public static final String BORDER_WIDTH = "border-width";
+
+	/** The Constant BOTTOM. */
+	public static final String BOTTOM = "bottom";
+
+	/** The Constant BOX_SIZING. */
+	public static final String BOX_SIZING = "box-sizing";
+
+	/** The Constant CAPTION_SIDE. */
+	public static final String CAPTION_SIDE = "caption-side";
+
+	/** The Constant CLEAR. */
+	public static final String CLEAR = "clear";
+
+	/** The Constant CLIP. */
+	public static final String CLIP = "clip";
+
+	/** The Constant COLOR. */
+	public static final String COLOR = "color";
+
+	/** The Constant CONTENT. */
+	public static final String CONTENT = "content";
+
+	/** The Constant COUNTER_INCREMENT. */
+	public static final String COUNTER_INCREMENT = "counter-increment";
+
+	/** The Constant COUNTER_RESET. */
+	public static final String COUNTER_RESET = "counter-reset";
+
+	/** The Constant CSS_FLOAT. */
+	public static final String CSS_FLOAT = "css-float";
+
+	/** The Constant CUE. */
+	public static final String CUE = "cue";
+
+	/** The Constant CUE_AFTER. */
+	public static final String CUE_AFTER = "cue-after";
+
+	/** The Constant CUE_BEFORE. */
+	public static final String CUE_BEFORE = "cue-before";
+
+	/** The Constant CURSOR. */
+	public static final String CURSOR = "cursor";
+
+	/** The Constant D. */
+	public static final String D = "d";
+
+	/** The Constant DIRECTION. */
+	public static final String DIRECTION = "direction";
+
+	/** The Constant DISPLAY. */
+	public static final String DISPLAY = "display";
+
+	/** The Constant ELEVATION. */
+	public static final String ELEVATION = "elevation";
+
+	/** The Constant EMPTY_CELLS. */
+	public static final String EMPTY_CELLS = "empty-cells";
+
+	/** The Constant FILL. */
+	public static final String FILL = "fill";
+
+	/** The Constant FILL_OPACITY. */
+	public static final String FILL_OPACITY = "fill-opacity";
+
+	/** The Constant FLOAT. */
+	public static final String FLOAT = "float";
+
+	/** The Constant FONT. */
+	public static final String FONT = "font";
+
+	/** The Constant FONT_FAMILY. */
+	public static final String FONT_FAMILY = "font-family";
+
+	/** The Constant FONT_SIZE. */
+	public static final String FONT_SIZE = "font-size";
+
+	/** The Constant FONT_SIZE_ADJUST. */
+	public static final String FONT_SIZE_ADJUST = "font-size-adjust";
+
+	/** The Constant FONT_STRETCH. */
+	public static final String FONT_STRETCH = "font-stretch";
+
+	/** The Constant FONT_STYLE. */
+	public static final String FONT_STYLE = "font-style";
+
+	/** The Constant FONT_VARIANT. */
+	public static final String FONT_VARIANT = "font-variant";
+
+	/** The Constant FONT_WEIGHT. */
+	public static final String FONT_WEIGHT = "font-weight";
+
+	/** The Constant HEIGHT. */
+	public static final String HEIGHT = "height";
+
+	/** The Constant LEFT. */
+	public static final String LEFT = "left";
+
+	/** The Constant LETTER_SPACING. */
+	public static final String LETTER_SPACING = "letter-spacing";
+
+	/** The Constant LINE_HEIGHT. */
+	public static final String LINE_HEIGHT = "line-height";
+
+	/** The Constant LIST_STYLE. */
+	public static final String LIST_STYLE = "list-style";
+
+	/** The Constant LIST_STYLE_IMAGE. */
+	public static final String LIST_STYLE_IMAGE = "list-style-image";
+
+	/** The Constant LIST_STYLE_POSITION. */
+	public static final String LIST_STYLE_POSITION = "list-style-position";
+
+	/** The Constant LIST_STYLE_TYPE. */
+	public static final String LIST_STYLE_TYPE = "list-style-type";
+
+	/** The Constant MARGIN. */
 	public static final String MARGIN = "margin";
+
+	/** The Constant MARGIN_BOTTOM. */
 	public static final String MARGIN_BOTTOM = "margin-bottom";
+
+	/** The Constant MARGIN_LEFT. */
 	public static final String MARGIN_LEFT = "margin-left";
+
+	/** The Constant MARGIN_RIGHT. */
 	public static final String MARGIN_RIGHT = "margin-right";
+
+	/** The Constant MARGIN_TOP. */
 	public static final String MARGIN_TOP = "margin-top";
+
+	/** The Constant MARKER_OFFSET. */
 	public static final String MARKER_OFFSET = "marker-offset";
+
+	/** The Constant MARKS. */
 	public static final String MARKS = "marks";
+
+	/** The Constant MAX_HEIGHT. */
 	public static final String MAX_HEIGHT = "max-height";
+
+	/** The Constant MAX_WIDTH. */
 	public static final String MAX_WIDTH = "max-width";
+
+	/** The Constant MIN_HEIGHT. */
 	public static final String MIN_HEIGHT = "min-height";
+
+	/** The Constant MIN_WIDTH. */
 	public static final String MIN_WIDTH = "min-width";
+
+	/** The Constant OPACITY. */
+	public static final String OPACITY = "opacity";
+
+	/** The Constant ORPHANS. */
 	public static final String ORPHANS = "orphans";
+
+	/** The Constant OUTLINE. */
 	public static final String OUTLINE = "outline";
+
+	/** The Constant OUTLINE_COLOR. */
 	public static final String OUTLINE_COLOR = "outline-color";
+
+	/** The Constant OUTLINE_STYLE. */
 	public static final String OUTLINE_STYLE = "outline-style";
+
+	/** The Constant OUTLINE_WIDTH. */
 	public static final String OUTLINE_WIDTH = "outline-width";
+
+	/** The Constant OVERFLOW. */
 	public static final String OVERFLOW = "overflow";
+
+	/** The Constant PADDING. */
 	public static final String PADDING = "padding";
+
+	/** The Constant PADDING_BOTTOM. */
 	public static final String PADDING_BOTTOM = "padding-bottom";
+
+	/** The Constant PADDING_LEFT. */
 	public static final String PADDING_LEFT = "padding-left";
+
+	/** The Constant PADDING_RIGHT. */
 	public static final String PADDING_RIGHT = "padding-right";
+
+	/** The Constant PADDING_TOP. */
 	public static final String PADDING_TOP = "padding-top";
+
+	/** The Constant PAGE. */
 	public static final String PAGE = "page";
+
+	/** The Constant PAGE_BREAK_AFTER. */
 	public static final String PAGE_BREAK_AFTER = "page-break-after";
+
+	/** The Constant PAGE_BREAK_BEFORE. */
 	public static final String PAGE_BREAK_BEFORE = "page-break-before";
+
+	/** The Constant PAGE_BREAK_INSIDE. */
 	public static final String PAGE_BREAK_INSIDE = "page-break-inside";
+
+	/** The Constant PAUSE. */
 	public static final String PAUSE = "pause";
+
+	/** The Constant PAUSE_AFTER. */
 	public static final String PAUSE_AFTER = "pause-after";
+
+	/** The Constant PAUSE_BEFORE. */
 	public static final String PAUSE_BEFORE = "pause-before";
+
+	/** The Constant PITCH. */
 	public static final String PITCH = "pitch";
+
+	/** The Constant PITCH_RANGE. */
 	public static final String PITCH_RANGE = "pitch-range";
+
+	/** The Constant PLAY_DURING. */
 	public static final String PLAY_DURING = "play-during";
+
+	/** The Constant POSITION. */
 	public static final String POSITION = "position";
+
+	/** The Constant QUOTES. */
 	public static final String QUOTES = "quotes";
+
+	/** The Constant RICHNESS. */
 	public static final String RICHNESS = "richness";
+
+	/** The Constant RIGHT. */
 	public static final String RIGHT = "right";
+
+	/** The Constant SIZE. */
 	public static final String SIZE = "size";
+
+	/** The Constant SPEAK. */
 	public static final String SPEAK = "speak";
+
+	/** The Constant SPEAK_HEADER. */
 	public static final String SPEAK_HEADER = "speak-header";
+
+	/** The Constant SPEAK_NUMERAL. */
 	public static final String SPEAK_NUMERAL = "speak-numeral";
+
+	/** The Constant SPEAK_PUNCTUATION. */
 	public static final String SPEAK_PUNCTUATION = "speak-puctuation";
+
+	/** The Constant SPEECH_RATE. */
 	public static final String SPEECH_RATE = "speech-rate";
+
+	/** The Constant STRESS. */
 	public static final String STRESS = "stress";
+
+	/** The Constant STOP_COLOR. */
+	public static final String STOP_COLOR = "stop-color";
+
+	/** The Constant STOP_OPACITY. */
+	public static final String STOP_OPACITY = "stop-opacity";
+
+	/** The Constant STROKE. */
+	public static final String STROKE = "stroke";
+
+	/** The Constant STROKE_DASHARRAY. */
+	public static final String STROKE_DASHARRAY = "stroke-dasharray";
+
+	/** The Constant STROKE_MITERLIMIT. */
+	public static final String STROKE_MITERLIMIT = "stroke-miterlimit";
+
+	/** The Constant STROKE_LIEN_CAP. */
+	public static final String STROKE_LINE_CAP = "stroke-linecap";
+
+	/** The Constant STROKE_OPACITY. */
+	public static final String STROKE_OPACITY = "stroke-opacity";
+
+	/** The Constant STROKE_WIDTH. */
+	public static final String STROKE_WIDTH = "stroke-width";
+
+	/** The Constant TABLE_LAYOUT. */
 	public static final String TABLE_LAYOUT = "table-layout";
+
+	/** The Constant TEXT_ALIGN. */
 	public static final String TEXT_ALIGN = "text-align";
+
+	/** The Constant TEXT_DECORATION. */
 	public static final String TEXT_DECORATION = "text-decoration";
+
+	/** The Constant TEXT_INDENT. */
 	public static final String TEXT_INDENT = "text-indent";
+
+	/** The Constant TEXT_SHADOW. */
 	public static final String TEXT_SHADOW = "text-shadow";
+
+	/** The Constant TEXT_TRANSFORM. */
 	public static final String TEXT_TRANSFORM = "text-transform";
+
+	/** The Constant TOP. */
 	public static final String TOP = "top";
+
+	/** The Constant UNICODE_BIDI. */
 	public static final String UNICODE_BIDI = "unicode-bidi";
 
+	/** The Constant VERTICAL_ALIGN. */
 	public static final String VERTICAL_ALIGN = "vertical-align";
 
+	/** The Constant VISIBILITY. */
 	public static final String VISIBILITY = "visibility";
+
+	/** The Constant VOICE_FAMILY. */
 	public static final String VOICE_FAMILY = "voice-family";
+
+	/** The Constant VOLUME. */
 	public static final String VOLUME = "volume";
+
+	/** The Constant WHITE_SPACE. */
 	public static final String WHITE_SPACE = "white-space";
 
+	/** The Constant WIDOWS. */
 	public static final String WIDOWS = "widows";
 
+	/** The Constant WIDTH. */
 	public static final String WIDTH = "width";
 
+	/** The Constant WORD_SPACING. */
 	public static final String WORD_SPACING = "word_spacing";
 
+	/** The Constant Z_INDEX. */
 	public static final String Z_INDEX = "z-index";
 	
 	private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<String, SubPropertySetter>();
@@ -542,554 +821,2675 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	protected void checkSetProperty() {
 	}
 
-	@Override
-	public String getAzimuth() {
-		return getPropertyValueLC(AZIMUTH);
-	}
-
-	@Override
-	public String getBackground() {
-		return getPropertyValueLC(BACKGROUND);
-	}
-
-	// ---------- Implemented properties
-
-	@Override
-	public String getBackgroundAttachment() {
-		return getPropertyValueLC(BACKGROUND_ATTACHMENT);
-	}
-
-	@Override
-	public String getBackgroundColor() {
-		return getPropertyValueLC(BACKGROUND_COLOR);
-	}
-
-	@Override
-	public String getBackgroundImage() {
-		return getPropertyValueLC(BACKGROUND_IMAGE);
-	}
-
-	@Override
-	public String getBackgroundPosition() {
-		return getPropertyValueLC(BACKGROUND_POSITION);
-	}
-
-	@Override
-	public String getBackgroundRepeat() {
-		return getPropertyValueLC(BACKGROUND_REPEAT);
-	}
-
-	@Override
-	public String getBorder() {
-		return getPropertyValueLC(BORDER);
-	}
-
-	@Override
-	public String getBorderBottom() {
-		return getPropertyValueLC(BORDER_BOTTOM);
-	}
-
-	@Override
-	public String getBorderBottomColor() {
-		return getPropertyValueLC(BORDER_BOTTOM_COLOR);
-	}
-
-	@Override
-	public String getBorderBottomStyle() {
-		return getPropertyValueLC(BORDER_BOTTOM_STYLE);
-	}
-
-	@Override
-	public String getBorderBottomWidth() {
-		return getPropertyValueLC(BORDER_BOTTOM_WIDTH);
-	}
-
-	@Override
-	public String getBorderCollapse() {
-		return getPropertyValueLC(BORDER_COLLAPSE);
-	}
-
-	@Override
-	public String getBorderColor() {
-		return getPropertyValueLC(BORDER_COLOR);
-	}
-
-	@Override
-	public String getBorderLeft() {
-		return getPropertyValueLC(BORDER_LEFT);
-	}
-
-	@Override
-	public String getBorderLeftColor() {
-		return getPropertyValueLC(BORDER_LEFT_COLOR);
-	}
-
-	@Override
-	public String getBorderLeftStyle() {
-		return getPropertyValueLC(BORDER_LEFT_STYLE);
-	}
-
-	@Override
-	public String getBorderLeftWidth() {
-		return getPropertyValueLC(BORDER_LEFT_WIDTH);
-	}
-
-	@Override
-	public String getBorderRight() {
-		return getPropertyValueLC(BORDER_RIGHT);
-	}
-
-	@Override
-	public String getBorderRightColor() {
-		return getPropertyValueLC(BORDER_RIGHT_COLOR);
-	}
-
-	@Override
-	public String getBorderRightStyle() {
-		return getPropertyValueLC(BORDER_RIGHT_STYLE);
-	}
-
-	@Override
-	public String getBorderRightWidth() {
-		return getPropertyValueLC(BORDER_RIGHT_WIDTH);
-	}
-
-	@Override
-	public String getBorderSpacing() {
-		return getPropertyValueLC(BORDER_SPACING);
-	}
-
-	@Override
-	public String getBorderStyle() {
-		return getPropertyValueLC(BORDER_STYLE);
-	}
-
-	@Override
-	public String getBorderTop() {
-		return getPropertyValueLC(BORDER_TOP);
-	}
-
-	@Override
-	public String getBorderTopColor() {
-		return getPropertyValueLC(BORDER_TOP_COLOR);
-	}
-
-	@Override
-	public String getBorderTopStyle() {
-		return getPropertyValueLC(BORDER_TOP_STYLE);
-	}
-
-	@Override
-	public String getBorderTopWidth() {
-		return getPropertyValueLC(BORDER_TOP_WIDTH);
-	}
-
-	@Override
-	public String getBorderWidth() {
-		return getPropertyValueLC(BORDER_WIDTH);
-	}
-
-	@Override
-	public String getBottom() {
-		return getPropertyValueLC(BOTTOM);
-	}
-
-	@Override
-	public String getCaptionSide() {
-		return getPropertyValueLC(CAPTION_SIDE);
-	}
-
-	@Override
-	public String getClear() {
-		return getPropertyValueLC(CLEAR);
-	}
-	
-	@Override
-	public String getBoxSizing() {
-		return getPropertyValueLC(BOX_SIZING);
-	}
-
-	@Override
-	public String getClip() {
-		return getPropertyValueLC(CLIP);
-	}
-
-	@Override
-	public String getColor() {
-
-		return getPropertyValueLC(COLOR);
-	}
-
-	@Override
-	public String getContent() {
-
-		return getPropertyValueLC(CONTENT);
-	}
-
-	@Override
-	public String getCounterIncrement() {
-
-		return getPropertyValueLC(COUNTER_INCREMENT);
-	}
-
-	@Override
-	public String getCounterReset() {
-
-		return getPropertyValueLC(COUNTER_RESET);
-	}
-
-	@Override
-	public String getCssFloat() {
-
-		return getPropertyValueLC(CSS_FLOAT);
-	}
-
-	@Override
-	public String getCue() {
-
-		return getPropertyValueLC(CUE);
-	}
-
-	@Override
-	public String getCueAfter() {
-
-		return getPropertyValueLC(CUE_AFTER);
-	}
-
-	@Override
-	public String getCueBefore() {
-
-		return getPropertyValueLC(CUE_BEFORE);
-	}
-
-	@Override
-	public String getCursor() {
-
-		return getPropertyValueLC(CURSOR);
-	}
-
-	@Override
-	public String getDirection() {
-
-		return getPropertyValueLC(DIRECTION);
-	}
-
-	@Override
-	public String getDisplay() {
-
-		return getPropertyValueLC(DISPLAY);
-	}
-
-	@Override
-	public String getElevation() {
-
-		return getPropertyValueLC(ELEVATION);
-	}
-
-	@Override
-	public String getEmptyCells() {
-
-		return getPropertyValueLC(EMPTY_CELLS);
-	}
-
-	public String getFloat() {
-		return getPropertyValueLC(FLOAT);
-	}
-
-	@Override
-	public String getFont() {
-
-		return getPropertyValueLC(FONT);
-	}
-
-	@Override
-	public String getFontFamily() {
-		return getPropertyValueLC(FONT_FAMILY);
-	}
-
-	@Override
-	public String getFontSize() {
-		return getPropertyValueLC(FONT_SIZE);
-	}
-
-	@Override
-	public String getFontSizeAdjust() {
-
-		return getPropertyValueLC(FONT_SIZE_ADJUST);
-	}
-
-	@Override
-	public String getFontStretch() {
-
-		return getPropertyValueLC(FONT_STRETCH);
-	}
-
-	@Override
-	public String getFontStyle() {
-
-		return getPropertyValueLC(FONT_STYLE);
-	}
-
-	@Override
-	public String getFontVariant() {
-
-		return getPropertyValueLC(FONT_VARIANT);
-	}
-
-	@Override
-	public String getFontWeight() {
-
-		return getPropertyValueLC(FONT_WEIGHT);
-	}
-
-	@Override
-	public String getHeight() {
-
-		return getPropertyValueLC(HEIGHT);
-	}
-
-	@Override
-	public String getLeft() {
-
-		return getPropertyValueLC(LEFT);
-	}
-
-	@Override
-	public String getLetterSpacing() {
-
-		return getPropertyValueLC(LETTER_SPACING);
-	}
-
-	@Override
-	public String getLineHeight() {
-
-		return getPropertyValueLC(LINE_HEIGHT);
-	}
-
-	@Override
-	public String getListStyle() {
-		return getPropertyValueLC(LIST_STYLE);
-	}
-
-	@Override
-	public String getListStyleImage() {
-		return getPropertyValueLC(LIST_STYLE_IMAGE);
-	}
-
-	@Override
-	public String getListStylePosition() {
-		return getPropertyValueLC(LIST_STYLE_POSITION);
-	}
-
-	@Override
-	public String getListStyleType() {
-		return getPropertyValueLC(LIST_STYLE_TYPE);
-	}
-
-	public AbstractCSSProperties getLocalStyleProperties() {
-		synchronized (this) {
-			return this.localStyleProperties;
-		}
-	}
-
-	@Override
-	public String getMargin() {
-
-		return getPropertyValueLC(MARGIN);
-	}
-
-	@Override
-	public String getMarginBottom() {
-
-		return getPropertyValueLC(MARGIN_BOTTOM);
-	}
-
-	@Override
-	public String getMarginLeft() {
-
-		return getPropertyValueLC(MARGIN_LEFT);
-	}
-
-	@Override
-	public String getMarginRight() {
-
-		return getPropertyValueLC(MARGIN_RIGHT);
-	}
-
-	@Override
-	public String getMarginTop() {
-
-		return getPropertyValueLC(MARGIN_TOP);
-	}
-
-	@Override
-	public String getMarkerOffset() {
-
-		return getPropertyValueLC(MARKER_OFFSET);
-	}
-
-	@Override
-	public String getMarks() {
-
-		return getPropertyValueLC(MARKS);
-	}
-
-	@Override
-	public String getMaxHeight() {
-
-		return getPropertyValueLC(MAX_HEIGHT);
-	}
-
-	@Override
-	public String getMaxWidth() {
-
-		return getPropertyValueLC(MAX_WIDTH);
-	}
-
-	@Override
-	public String getMinHeight() {
-
-		return getPropertyValueLC(MIN_HEIGHT);
-	}
-
-	@Override
-	public String getMinWidth() {
-
-		return getPropertyValueLC(MIN_WIDTH);
-	}
-
-	@Override
-	public String getOrphans() {
-
-		return getPropertyValueLC(ORPHANS);
-	}
-
-	@Override
-	public String getOutline() {
-
-		return getPropertyValueLC(OUTLINE);
-	}
-
-	@Override
-	public String getOutlineColor() {
-
-		return getPropertyValueLC(OUTLINE_COLOR);
-	}
-
-	@Override
-	public String getOutlineStyle() {
-
-		return getPropertyValueLC(OUTLINE_STYLE);
-	}
-
-	@Override
-	public String getOutlineWidth() {
-
-		return getPropertyValueLC(OUTLINE_WIDTH);
-	}
-
-	@Override
-	public String getOverflow() {
-		return getPropertyValueLC(OVERFLOW);
-	}
-
+	/**
+	 * Gets the overlay color.
+	 *
+	 * @return the overlay color
+	 */
 	public String getOverlayColor() {
 		return this.overlayColor;
 	}
 
+	/**
+	 * Sets the overlay color.
+	 *
+	 * @param value
+	 *            the new overlay color
+	 */
+	public void setOverlayColor(String value) {
+		this.overlayColor = value;
+		this.context.informLookInvalid();
+	}
+
+	/**
+	 * Gets the float.
+	 *
+	 * @return the float
+	 */
+	public String getFloat() {
+		return this.getPropertyValueLC(FLOAT);
+	}
+
+	/**
+	 * Sets the float.
+	 *
+	 * @param value
+	 *            the Float.valueOf
+	 */
+	public void setFloat(String value) {
+		this.setPropertyValueLC(FLOAT, value);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getAzimuth()
+	 */
+	@Override
+	public String getAzimuth() {
+		return this.getPropertyValueLC(AZIMUTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBackground()
+	 */
+	@Override
+	public String getBackground() {
+		return this.getPropertyValueLC(BACKGROUND);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBackgroundAttachment()
+	 */
+	@Override
+	public String getBackgroundAttachment() {
+		return this.getPropertyValueLC(BACKGROUND_ATTACHMENT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBackgroundColor()
+	 */
+	@Override
+	public String getBackgroundColor() {
+		return this.getPropertyValueLC(BACKGROUND_COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBackgroundImage()
+	 */
+	@Override
+	public String getBackgroundImage() {
+		return this.getPropertyValueLC(BACKGROUND_IMAGE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBackgroundPosition()
+	 */
+	@Override
+	public String getBackgroundPosition() {
+		return this.getPropertyValueLC(BACKGROUND_POSITION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBackgroundRepeat()
+	 */
+	@Override
+	public String getBackgroundRepeat() {
+		return this.getPropertyValueLC(BACKGROUND_REPEAT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorder()
+	 */
+	@Override
+	public String getBorder() {
+		return this.getPropertyValueLC(BORDER);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderBottom()
+	 */
+	@Override
+	public String getBorderBottom() {
+		return this.getPropertyValueLC(BORDER_BOTTOM);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderBottomColor()
+	 */
+	@Override
+	public String getBorderBottomColor() {
+		return this.getPropertyValueLC(BORDER_BOTTOM_COLOR);
+	}
+	
+	@Override
+	public String getBoxSizing() {
+		return this.getPropertyValueLC(BOX_SIZING);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderBottomStyle()
+	 */
+	@Override
+	public String getBorderBottomStyle() {
+		return this.getPropertyValueLC(BORDER_BOTTOM_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderBottomWidth()
+	 */
+	@Override
+	public String getBorderBottomWidth() {
+		return this.getPropertyValueLC(BORDER_BOTTOM_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderCollapse()
+	 */
+	@Override
+	public String getBorderCollapse() {
+		return this.getPropertyValueLC(BORDER_COLLAPSE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderColor()
+	 */
+	@Override
+	public String getBorderColor() {
+		return this.getPropertyValueLC(BORDER_COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderLeft()
+	 */
+	@Override
+	public String getBorderLeft() {
+		return this.getPropertyValueLC(BORDER_LEFT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderLeftColor()
+	 */
+	@Override
+	public String getBorderLeftColor() {
+		return this.getPropertyValueLC(BORDER_LEFT_COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderLeftStyle()
+	 */
+	@Override
+	public String getBorderLeftStyle() {
+		return this.getPropertyValueLC(BORDER_LEFT_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderLeftWidth()
+	 */
+	@Override
+	public String getBorderLeftWidth() {
+		return this.getPropertyValueLC(BORDER_LEFT_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderRight()
+	 */
+	@Override
+	public String getBorderRight() {
+		return this.getPropertyValueLC(BORDER_RIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderRightColor()
+	 */
+	@Override
+	public String getBorderRightColor() {
+		return this.getPropertyValueLC(BORDER_RIGHT_COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderRightStyle()
+	 */
+	@Override
+	public String getBorderRightStyle() {
+		return this.getPropertyValueLC(BORDER_RIGHT_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderRightWidth()
+	 */
+	@Override
+	public String getBorderRightWidth() {
+		return this.getPropertyValueLC(BORDER_RIGHT_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderSpacing()
+	 */
+	@Override
+	public String getBorderSpacing() {
+		return this.getPropertyValueLC(BORDER_SPACING);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderStyle()
+	 */
+	@Override
+	public String getBorderStyle() {
+		return this.getPropertyValueLC(BORDER_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderTop()
+	 */
+	@Override
+	public String getBorderTop() {
+		return this.getPropertyValueLC(BORDER_TOP);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderTopColor()
+	 */
+	@Override
+	public String getBorderTopColor() {
+		return this.getPropertyValueLC(BORDER_TOP_COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderTopStyle()
+	 */
+	@Override
+	public String getBorderTopStyle() {
+		return this.getPropertyValueLC(BORDER_TOP_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderTopWidth()
+	 */
+	@Override
+	public String getBorderTopWidth() {
+		return this.getPropertyValueLC(BORDER_TOP_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBorderWidth()
+	 */
+	@Override
+	public String getBorderWidth() {
+		return this.getPropertyValueLC(BORDER_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getBottom()
+	 */
+	@Override
+	public String getBottom() {
+		return this.getPropertyValueLC(BOTTOM);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCaptionSide()
+	 */
+	@Override
+	public String getCaptionSide() {
+		return this.getPropertyValueLC(CAPTION_SIDE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getClear()
+	 */
+	@Override
+	public String getClear() {
+		return this.getPropertyValueLC(CLEAR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getClip()
+	 */
+	@Override
+	public String getClip() {
+		return this.getPropertyValueLC(CLIP);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getColor()
+	 */
+	@Override
+	public String getColor() {
+		return this.getPropertyValueLC(COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getContent()
+	 */
+	@Override
+	public String getContent() {
+		return this.getPropertyValueLC(CONTENT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCounterIncrement()
+	 */
+	@Override
+	public String getCounterIncrement() {
+		return this.getPropertyValueLC(COUNTER_INCREMENT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCounterReset()
+	 */
+	@Override
+	public String getCounterReset() {
+		return this.getPropertyValueLC(COUNTER_RESET);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCssFloat()
+	 */
+	@Override
+	public String getCssFloat() {
+		return this.getPropertyValueLC(CSS_FLOAT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCue()
+	 */
+	@Override
+	public String getCue() {
+		return this.getPropertyValueLC(CUE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCueAfter()
+	 */
+	@Override
+	public String getCueAfter() {
+		return this.getPropertyValueLC(CUE_AFTER);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCueBefore()
+	 */
+	@Override
+	public String getCueBefore() {
+		return this.getPropertyValueLC(CUE_BEFORE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getCursor()
+	 */
+	@Override
+	public String getCursor() {
+		return this.getPropertyValueLC(CURSOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getDirection()
+	 */
+	@Override
+	public String getDirection() {
+		return this.getPropertyValueLC(DIRECTION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getDisplay()
+	 */
+	@Override
+	public String getDisplay() {
+
+		return this.getPropertyValueLC(DISPLAY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getElevation()
+	 */
+	@Override
+	public String getElevation() {
+		return this.getPropertyValueLC(ELEVATION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getEmptyCells()
+	 */
+	@Override
+	public String getEmptyCells() {
+		return this.getPropertyValueLC(EMPTY_CELLS);
+	}
+
+	public String getFill() {
+		return this.getPropertyValueLC(FILL);
+	}
+
+	public void setFill(String value) {
+		this.setPropertyValueLC(FILL, value);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFont()
+	 */
+	@Override
+	public String getFont() {
+		return this.getPropertyValueLC(FONT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontFamily()
+	 */
+	@Override
+	public String getFontFamily() {
+		return this.getPropertyValueLC(FONT_FAMILY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontSize()
+	 */
+	@Override
+	public String getFontSize() {
+		return this.getPropertyValueLC(FONT_SIZE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontSizeAdjust()
+	 */
+	@Override
+	public String getFontSizeAdjust() {
+		return this.getPropertyValueLC(FONT_SIZE_ADJUST);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontStretch()
+	 */
+	@Override
+	public String getFontStretch() {
+		return this.getPropertyValueLC(FONT_STRETCH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontStyle()
+	 */
+	@Override
+	public String getFontStyle() {
+		return this.getPropertyValueLC(FONT_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontVariant()
+	 */
+	@Override
+	public String getFontVariant() {
+		return this.getPropertyValueLC(FONT_VARIANT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getFontWeight()
+	 */
+	@Override
+	public String getFontWeight() {
+		return this.getPropertyValueLC(FONT_WEIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getHeight()
+	 */
+	@Override
+	public String getHeight() {
+		return this.getPropertyValueLC(HEIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getLeft()
+	 */
+	@Override
+	public String getLeft() {
+		return this.getPropertyValueLC(LEFT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getLetterSpacing()
+	 */
+	@Override
+	public String getLetterSpacing() {
+		return this.getPropertyValueLC(LETTER_SPACING);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getLineHeight()
+	 */
+	@Override
+	public String getLineHeight() {
+		return this.getPropertyValueLC(LINE_HEIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getListStyle()
+	 */
+	@Override
+	public String getListStyle() {
+		return this.getPropertyValueLC(LIST_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getListStyleImage()
+	 */
+	@Override
+	public String getListStyleImage() {
+		return this.getPropertyValueLC(LIST_STYLE_IMAGE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getListStylePosition()
+	 */
+	@Override
+	public String getListStylePosition() {
+		return this.getPropertyValueLC(LIST_STYLE_POSITION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getListStyleType()
+	 */
+	@Override
+	public String getListStyleType() {
+		return this.getPropertyValueLC(LIST_STYLE_TYPE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMargin()
+	 */
+	@Override
+	public String getMargin() {
+		return this.getPropertyValueLC(MARGIN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMarginBottom()
+	 */
+	@Override
+	public String getMarginBottom() {
+		return this.getPropertyValueLC(MARGIN_BOTTOM);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMarginLeft()
+	 */
+	@Override
+	public String getMarginLeft() {
+		return this.getPropertyValueLC(MARGIN_LEFT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMarginRight()
+	 */
+	@Override
+	public String getMarginRight() {
+		return this.getPropertyValueLC(MARGIN_RIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMarginTop()
+	 */
+	@Override
+	public String getMarginTop() {
+		return this.getPropertyValueLC(MARGIN_TOP);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMarkerOffset()
+	 */
+	@Override
+	public String getMarkerOffset() {
+		return this.getPropertyValueLC(MARKER_OFFSET);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMarks()
+	 */
+	@Override
+	public String getMarks() {
+		return this.getPropertyValueLC(MARKS);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMaxHeight()
+	 */
+	@Override
+	public String getMaxHeight() {
+		return this.getPropertyValueLC(MAX_HEIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMaxWidth()
+	 */
+	@Override
+	public String getMaxWidth() {
+		return this.getPropertyValueLC(MAX_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMinHeight()
+	 */
+	@Override
+	public String getMinHeight() {
+		return this.getPropertyValueLC(MIN_HEIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getMinWidth()
+	 */
+	@Override
+	public String getMinWidth() {
+		return this.getPropertyValueLC(MIN_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getOrphans()
+	 */
+	@Override
+	public String getOrphans() {
+		return this.getPropertyValueLC(ORPHANS);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getOutline()
+	 */
+	@Override
+	public String getOutline() {
+		return this.getPropertyValueLC(OUTLINE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getOutlineColor()
+	 */
+	@Override
+	public String getOutlineColor() {
+		return this.getPropertyValueLC(OUTLINE_COLOR);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getOutlineStyle()
+	 */
+	@Override
+	public String getOutlineStyle() {
+		return this.getPropertyValueLC(OUTLINE_STYLE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getOutlineWidth()
+	 */
+	@Override
+	public String getOutlineWidth() {
+		return this.getPropertyValueLC(OUTLINE_WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getOverflow()
+	 */
+	@Override
+	public String getOverflow() {
+		return this.getPropertyValueLC(OVERFLOW);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPadding()
+	 */
 	@Override
 	public String getPadding() {
-		return getPropertyValueLC(PADDING);
+		return this.getPropertyValueLC(PADDING);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPaddingBottom()
+	 */
 	@Override
 	public String getPaddingBottom() {
-		return getPropertyValueLC(PADDING_BOTTOM);
+		return this.getPropertyValueLC(PADDING_BOTTOM);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPaddingLeft()
+	 */
 	@Override
 	public String getPaddingLeft() {
-		return getPropertyValueLC(PADDING_LEFT);
+		return this.getPropertyValueLC(PADDING_LEFT);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPaddingRight()
+	 */
 	@Override
 	public String getPaddingRight() {
-
-		return getPropertyValueLC(PADDING_RIGHT);
+		return this.getPropertyValueLC(PADDING_RIGHT);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPaddingTop()
+	 */
 	@Override
 	public String getPaddingTop() {
-
-		return getPropertyValueLC(PADDING_TOP);
+		return this.getPropertyValueLC(PADDING_TOP);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPage()
+	 */
 	@Override
 	public String getPage() {
-
-		return getPropertyValueLC(PAGE);
+		return this.getPropertyValueLC(PAGE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPageBreakAfter()
+	 */
 	@Override
 	public String getPageBreakAfter() {
-
-		return getPropertyValueLC(PAGE_BREAK_AFTER);
+		return this.getPropertyValueLC(PAGE_BREAK_AFTER);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPageBreakBefore()
+	 */
 	@Override
 	public String getPageBreakBefore() {
-
-		return getPropertyValueLC(PAGE_BREAK_BEFORE);
+		return this.getPropertyValueLC(PAGE_BREAK_BEFORE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPageBreakInside()
+	 */
 	@Override
 	public String getPageBreakInside() {
-
-		return getPropertyValueLC(PAGE_BREAK_INSIDE);
+		return this.getPropertyValueLC(PAGE_BREAK_INSIDE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPause()
+	 */
 	@Override
 	public String getPause() {
-
-		return getPropertyValueLC(PAUSE);
+		return this.getPropertyValueLC(PAUSE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPauseAfter()
+	 */
 	@Override
 	public String getPauseAfter() {
-
-		return getPropertyValueLC(PAUSE_AFTER);
+		return this.getPropertyValueLC(PAUSE_AFTER);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPauseBefore()
+	 */
 	@Override
 	public String getPauseBefore() {
-
-		return getPropertyValueLC(PAUSE_BEFORE);
+		return this.getPropertyValueLC(PAUSE_BEFORE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPitch()
+	 */
 	@Override
 	public String getPitch() {
-
-		return getPropertyValueLC(PITCH);
+		return this.getPropertyValueLC(PITCH);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPitchRange()
+	 */
 	@Override
 	public String getPitchRange() {
-
-		return getPropertyValueLC(PITCH_RANGE);
+		return this.getPropertyValueLC(PITCH_RANGE);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPlayDuring()
+	 */
 	@Override
 	public String getPlayDuring() {
-
-		return getPropertyValueLC(PLAY_DURING);
+		return this.getPropertyValueLC(PLAY_DURING);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getPosition()
+	 */
 	@Override
 	public String getPosition() {
-
-		return getPropertyValueLC(POSITION);
+		return this.getPropertyValueLC(POSITION);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getQuotes()
+	 */
+	@Override
+	public String getQuotes() {
+		return this.getPropertyValueLC(QUOTES);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getRichness()
+	 */
+	@Override
+	public String getRichness() {
+		return this.getPropertyValueLC(RICHNESS);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getRight()
+	 */
+	@Override
+	public String getRight() {
+		return this.getPropertyValueLC(RIGHT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getSize()
+	 */
+	@Override
+	public String getSize() {
+		return this.getPropertyValueLC(SIZE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getSpeak()
+	 */
+	@Override
+	public String getSpeak() {
+		return this.getPropertyValueLC(SPEAK);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getSpeakHeader()
+	 */
+	@Override
+	public String getSpeakHeader() {
+		return this.getPropertyValueLC(SPEAK_HEADER);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getSpeakNumeral()
+	 */
+	@Override
+	public String getSpeakNumeral() {
+		return this.getPropertyValueLC(SPEAK_NUMERAL);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getSpeakPunctuation()
+	 */
+	@Override
+	public String getSpeakPunctuation() {
+		return this.getPropertyValueLC(SPEAK_PUNCTUATION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getSpeechRate()
+	 */
+	@Override
+	public String getSpeechRate() {
+		return this.getPropertyValueLC(SPEECH_RATE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getStress()
+	 */
+	@Override
+	public String getStress() {
+		return this.getPropertyValueLC(STRESS);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTableLayout()
+	 */
+	@Override
+	public String getTableLayout() {
+		return this.getPropertyValueLC(TABLE_LAYOUT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTextAlign()
+	 */
+	@Override
+	public String getTextAlign() {
+		return this.getPropertyValueLC(TEXT_ALIGN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTextDecoration()
+	 */
+	@Override
+	public String getTextDecoration() {
+		return this.getPropertyValueLC(TEXT_DECORATION);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTextIndent()
+	 */
+	@Override
+	public String getTextIndent() {
+		return this.getPropertyValueLC(TEXT_INDENT);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTextShadow()
+	 */
+	@Override
+	public String getTextShadow() {
+		return this.getPropertyValueLC(TEXT_SHADOW);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTextTransform()
+	 */
+	@Override
+	public String getTextTransform() {
+		return this.getPropertyValueLC(TEXT_TRANSFORM);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getTop()
+	 */
+	@Override
+	public String getTop() {
+		return this.getPropertyValueLC(TOP);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getUnicodeBidi()
+	 */
+	@Override
+	public String getUnicodeBidi() {
+		return this.getPropertyValueLC(UNICODE_BIDI);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getVerticalAlign()
+	 */
+	@Override
+	public String getVerticalAlign() {
+		return this.getPropertyValueLC(VERTICAL_ALIGN);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getVisibility()
+	 */
+	@Override
+	public String getVisibility() {
+		return this.getPropertyValueLC(VISIBILITY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getVoiceFamily()
+	 */
+	@Override
+	public String getVoiceFamily() {
+		return this.getPropertyValueLC(VOICE_FAMILY);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getVolume()
+	 */
+	@Override
+	public String getVolume() {
+		return this.getPropertyValueLC(VOLUME);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getWhiteSpace()
+	 */
+	@Override
+	public String getWhiteSpace() {
+		return this.getPropertyValueLC(WHITE_SPACE);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getWidows()
+	 */
+	@Override
+	public String getWidows() {
+		return this.getPropertyValueLC(WIDOWS);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getWidth()
+	 */
+	@Override
+	public String getWidth() {
+		return this.getPropertyValueLC(WIDTH);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getWordSpacing()
+	 */
+	@Override
+	public String getWordSpacing() {
+		return this.getPropertyValueLC(WORD_SPACING);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#getZIndex()
+	 */
+	@Override
+	public String getZIndex() {
+		return this.getPropertyValueLC(Z_INDEX);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setAzimuth(java.lang.String)
+	 */
+	@Override
+	public void setAzimuth(String azimuth) throws DOMException {
+		this.setPropertyValueLC(AZIMUTH, azimuth);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBackground(java.lang.String)
+	 */
+	@Override
+	public void setBackground(String background) throws DOMException {
+		new BackgroundSetter().changeValue(this, background, null);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.w3c.dom.css.CSS2Properties#setBackgroundAttachment(java.lang.String)
+	 */
+	@Override
+	public void setBackgroundAttachment(String backgroundAttachment) throws DOMException {
+		this.setPropertyValueLC(BACKGROUND_ATTACHMENT, backgroundAttachment);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBackgroundColor(java.lang.String)
+	 */
+	@Override
+	public void setBackgroundColor(String backgroundColor) throws DOMException {
+		this.setPropertyValueLC(BACKGROUND_COLOR, backgroundColor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.w3c.dom.css.CSS2Properties#setBackgroundPosition(java.lang.String)
+	 */
+	@Override
+	public void setBackgroundPosition(String backgroundPosition) throws DOMException {
+		this.setPropertyValueLC(BACKGROUND_POSITION, backgroundPosition);
+		this.context.informLookInvalid();
+	}
+	
+	@Override
+	public void setBackgroundImage(String backgroundImage) throws DOMException {
+		checkSetProperty();
+		new BackgroundImageSetter().changeValue(this, backgroundImage, null);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBackgroundRepeat(java.lang.String)
+	 */
+	@Override
+	public void setBackgroundRepeat(String backgroundRepeat) throws DOMException {
+		this.setPropertyValueLC(BACKGROUND_REPEAT, backgroundRepeat);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorder(java.lang.String)
+	 */
+	@Override
+	public void setBorder(String border) throws DOMException {
+		new BorderSetter1().changeValue(this, border, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderBottom(java.lang.String)
+	 */
+	@Override
+	public void setBorderBottom(String borderBottom) throws DOMException {
+		new BorderSetter2(BORDER_BOTTOM).changeValue(this, borderBottom, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.w3c.dom.css.CSS2Properties#setBorderBottomColor(java.lang.String)
+	 */
+	@Override
+	public void setBorderBottomColor(String borderBottomColor) throws DOMException {
+		this.setPropertyValueLC(BORDER_BOTTOM_COLOR, borderBottomColor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.w3c.dom.css.CSS2Properties#setBorderBottomStyle(java.lang.String)
+	 */
+	@Override
+	public void setBorderBottomStyle(String borderBottomStyle) throws DOMException {
+		this.setPropertyValueLC(BORDER_BOTTOM_STYLE, borderBottomStyle);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.w3c.dom.css.CSS2Properties#setBorderBottomWidth(java.lang.String)
+	 */
+	@Override
+	public void setBorderBottomWidth(String borderBottomWidth) throws DOMException {
+		this.setPropertyValueLC(BORDER_BOTTOM_WIDTH, borderBottomWidth);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderCollapse(java.lang.String)
+	 */
+	@Override
+	public void setBorderCollapse(String borderCollapse) throws DOMException {
+		this.setPropertyValueLC(BORDER_COLLAPSE, borderCollapse);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderColor(java.lang.String)
+	 */
+	@Override
+	public void setBorderColor(String borderColor) throws DOMException {
+		new FourCornersSetter(BORDER_COLOR, "border-", "-color").changeValue(this, borderColor, null);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderLeft(java.lang.String)
+	 */
+	@Override
+	public void setBorderLeft(String borderLeft) throws DOMException {
+		new BorderSetter2(BORDER_LEFT).changeValue(this, borderLeft, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderLeftColor(java.lang.String)
+	 */
+	@Override
+	public void setBorderLeftColor(String borderLeftColor) throws DOMException {
+		this.setPropertyValueLC(BORDER_LEFT_COLOR, borderLeftColor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderLeftStyle(java.lang.String)
+	 */
+	@Override
+	public void setBorderLeftStyle(String borderLeftStyle) throws DOMException {
+		this.setPropertyValueLC(BORDER_LEFT_STYLE, borderLeftStyle);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderLeftWidth(java.lang.String)
+	 */
+	@Override
+	public void setBorderLeftWidth(String borderLeftWidth) throws DOMException {
+		this.setPropertyValueLC(BORDER_LEFT_WIDTH, borderLeftWidth);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderRight(java.lang.String)
+	 */
+	@Override
+	public void setBorderRight(String borderRight) throws DOMException {
+		new BorderSetter2(BORDER_RIGHT).changeValue(this, borderRight, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderRightColor(java.lang.String)
+	 */
+	@Override
+	public void setBorderRightColor(String borderRightColor) throws DOMException {
+		this.setPropertyValueLC(BORDER_RIGHT_COLOR, borderRightColor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderRightStyle(java.lang.String)
+	 */
+	@Override
+	public void setBorderRightStyle(String borderRightStyle) throws DOMException {
+		this.setPropertyValueLC(BORDER_RIGHT_STYLE, borderRightStyle);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderRightWidth(java.lang.String)
+	 */
+	@Override
+	public void setBorderRightWidth(String borderRightWidth) throws DOMException {
+		this.setPropertyValueLC(BORDER_RIGHT_WIDTH, borderRightWidth);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderSpacing(java.lang.String)
+	 */
+	@Override
+	public void setBorderSpacing(String borderSpacing) throws DOMException {
+		this.setPropertyValueLC(BORDER_SPACING, borderSpacing);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderStyle(java.lang.String)
+	 */
+	@Override
+	public void setBorderStyle(String borderStyle) throws DOMException {
+		new FourCornersSetter(BORDER_STYLE, "border-", "-style").changeValue(this, borderStyle, null);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderTop(java.lang.String)
+	 */
+	@Override
+	public void setBorderTop(String borderTop) throws DOMException {
+		new BorderSetter2(BORDER_TOP).changeValue(this, borderTop, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderTopColor(java.lang.String)
+	 */
+	@Override
+	public void setBorderTopColor(String borderTopColor) throws DOMException {
+		this.setPropertyValueLC(BORDER_TOP_COLOR, borderTopColor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderTopStyle(java.lang.String)
+	 */
+	@Override
+	public void setBorderTopStyle(String borderTopStyle) throws DOMException {
+		this.setPropertyValueLC(BORDER_TOP_STYLE, borderTopStyle);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderTopWidth(java.lang.String)
+	 */
+	@Override
+	public void setBorderTopWidth(String borderTopWidth) throws DOMException {
+		this.setPropertyValueLC(BORDER_TOP_WIDTH, borderTopWidth);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBorderWidth(java.lang.String)
+	 */
+	@Override
+	public void setBorderWidth(String borderWidth) throws DOMException {
+		new FourCornersSetter(BORDER_WIDTH, "border-", "-width").changeValue(this, borderWidth, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setBottom(java.lang.String)
+	 */
+	@Override
+	public void setBottom(String bottom) throws DOMException {
+		this.setPropertyValueLC(BOTTOM, bottom);
+		this.context.informPositionInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCaptionSide(java.lang.String)
+	 */
+	@Override
+	public void setCaptionSide(String captionSide) throws DOMException {
+		this.setPropertyValueLC(CAPTION_SIDE, captionSide);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setClear(java.lang.String)
+	 */
+	@Override
+	public void setClear(String clear) throws DOMException {
+		this.setPropertyValueLC(CLEAR, clear);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setClip(java.lang.String)
+	 */
+	@Override
+	public void setClip(String clip) throws DOMException {
+		this.setPropertyValueLC(CLIP, clip);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setColor(java.lang.String)
+	 */
+	@Override
+	public void setColor(String color) throws DOMException {
+		this.setPropertyValueLC(COLOR, color);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setContent(java.lang.String)
+	 */
+	@Override
+	public void setContent(String content) throws DOMException {
+		this.setPropertyValueLC(CONTENT, content);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCounterIncrement(java.lang.String)
+	 */
+	@Override
+	public void setCounterIncrement(String counterIncrement) throws DOMException {
+		this.setPropertyValueLC(COUNTER_INCREMENT, counterIncrement);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCounterReset(java.lang.String)
+	 */
+	@Override
+	public void setCounterReset(String counterReset) throws DOMException {
+		this.setPropertyValueLC(COUNTER_RESET, counterReset);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCssFloat(java.lang.String)
+	 */
+	@Override
+	public void setCssFloat(String cssFloat) throws DOMException {
+		this.setPropertyValueLC(CSS_FLOAT, cssFloat);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCue(java.lang.String)
+	 */
+	@Override
+	public void setCue(String cue) throws DOMException {
+		this.setPropertyValueLC(CUE, cue);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCueAfter(java.lang.String)
+	 */
+	@Override
+	public void setCueAfter(String cueAfter) throws DOMException {
+		this.setPropertyValueLC(CUE_AFTER, cueAfter);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCueBefore(java.lang.String)
+	 */
+	@Override
+	public void setCueBefore(String cueBefore) throws DOMException {
+		this.setPropertyValueLC(CUE_BEFORE, cueBefore);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setCursor(java.lang.String)
+	 */
+	@Override
+	public void setCursor(String cursor) throws DOMException {
+		this.setPropertyValueLC(CURSOR, cursor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setDirection(java.lang.String)
+	 */
+	@Override
+	public void setDirection(String direction) throws DOMException {
+		this.setPropertyValueLC(DIRECTION, direction);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setDisplay(java.lang.String)
+	 */
+	@Override
+	public void setDisplay(String display) throws DOMException {
+		this.setPropertyValueLC(DISPLAY, display);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setElevation(java.lang.String)
+	 */
+	@Override
+	public void setElevation(String elevation) throws DOMException {
+		this.setPropertyValueLC(ELEVATION, elevation);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setEmptyCells(java.lang.String)
+	 */
+	@Override
+	public void setEmptyCells(String emptyCells) throws DOMException {
+		this.setPropertyValueLC(EMPTY_CELLS, emptyCells);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFont(java.lang.String)
+	 */
+	@Override
+	public void setFont(String font) throws DOMException {
+		new FontSetter().changeValue(this, font, null);
+		this.context.informInvalid();
+	}
+
+	public String getFillOpacity() {
+		return this.getPropertyValueLC(FILL_OPACITY);
+	}
+
+	public void setFillOpacity(String value) {
+		this.setPropertyValueLC(FILL_OPACITY, value);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontFamily(java.lang.String)
+	 */
+	@Override
+	public void setFontFamily(String fontFamily) throws DOMException {
+		this.setPropertyValueLC(FONT_FAMILY, fontFamily);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontSize(java.lang.String)
+	 */
+	@Override
+	public void setFontSize(String fontSize) throws DOMException {
+		this.setPropertyValueLC(FONT_SIZE, fontSize);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontSizeAdjust(java.lang.String)
+	 */
+	@Override
+	public void setFontSizeAdjust(String fontSizeAdjust) throws DOMException {
+		this.setPropertyValueLC(FONT_SIZE_ADJUST, fontSizeAdjust);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontStretch(java.lang.String)
+	 */
+	@Override
+	public void setFontStretch(String fontStretch) throws DOMException {
+		this.setPropertyValueLC(FONT_STRETCH, fontStretch);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontStyle(java.lang.String)
+	 */
+	@Override
+	public void setFontStyle(String fontStyle) throws DOMException {
+		this.setPropertyValueLC(FONT_STYLE, fontStyle);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontVariant(java.lang.String)
+	 */
+	@Override
+	public void setFontVariant(String fontVariant) throws DOMException {
+		this.setPropertyValueLC(FONT_VARIANT, fontVariant);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setFontWeight(java.lang.String)
+	 */
+	@Override
+	public void setFontWeight(String fontWeight) throws DOMException {
+		this.setPropertyValueLC(FONT_WEIGHT, fontWeight);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setHeight(java.lang.String)
+	 */
+	@Override
+	public void setHeight(String height) throws DOMException {
+		this.setPropertyValueLC(HEIGHT, height);
+		this.context.informSizeInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setLeft(java.lang.String)
+	 */
+	@Override
+	public void setLeft(String left) throws DOMException {
+		this.setPropertyValueLC(LEFT, left);
+		this.context.informPositionInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setLetterSpacing(java.lang.String)
+	 */
+	@Override
+	public void setLetterSpacing(String letterSpacing) throws DOMException {
+		this.setPropertyValueLC(LETTER_SPACING, letterSpacing);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setLineHeight(java.lang.String)
+	 */
+	@Override
+	public void setLineHeight(String lineHeight) throws DOMException {
+		this.setPropertyValueLC(LINE_HEIGHT, lineHeight);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setListStyle(java.lang.String)
+	 */
+	@Override
+	public void setListStyle(String listStyle) throws DOMException {
+		this.setPropertyValueLC(LIST_STYLE, listStyle);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setListStyleImage(java.lang.String)
+	 */
+	@Override
+	public void setListStyleImage(String listStyleImage) throws DOMException {
+		this.setPropertyValueLC(LIST_STYLE_IMAGE, listStyleImage);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.w3c.dom.css.CSS2Properties#setListStylePosition(java.lang.String)
+	 */
+	@Override
+	public void setListStylePosition(String listStylePosition) throws DOMException {
+		this.setPropertyValueLC(LIST_STYLE_POSITION, listStylePosition);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setListStyleType(java.lang.String)
+	 */
+	@Override
+	public void setListStyleType(String listStyleType) throws DOMException {
+		this.setPropertyValueLC(LIST_STYLE_TYPE, listStyleType);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMargin(java.lang.String)
+	 */
+	@Override
+	public void setMargin(String margin) throws DOMException {
+		new FourCornersSetter(MARGIN, "margin-", "").changeValue(this, margin, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMarginBottom(java.lang.String)
+	 */
+	@Override
+	public void setMarginBottom(String marginBottom) throws DOMException {
+		this.setPropertyValueLC(MARGIN_BOTTOM, marginBottom);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMarginLeft(java.lang.String)
+	 */
+	@Override
+	public void setMarginLeft(String marginLeft) throws DOMException {
+		this.setPropertyValueLC(MARGIN_LEFT, marginLeft);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMarginRight(java.lang.String)
+	 */
+	@Override
+	public void setMarginRight(String marginRight) throws DOMException {
+		this.setPropertyValueLC(MARGIN_RIGHT, marginRight);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMarginTop(java.lang.String)
+	 */
+	@Override
+	public void setMarginTop(String marginTop) throws DOMException {
+		this.setPropertyValueLC(MARGIN_TOP, marginTop);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMarkerOffset(java.lang.String)
+	 */
+	@Override
+	public void setMarkerOffset(String markerOffset) throws DOMException {
+		this.setPropertyValueLC(MARKER_OFFSET, markerOffset);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMarks(java.lang.String)
+	 */
+	@Override
+	public void setMarks(String marks) throws DOMException {
+		this.setPropertyValueLC(MARKS, marks);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMaxHeight(java.lang.String)
+	 */
+	@Override
+	public void setMaxHeight(String maxHeight) throws DOMException {
+		this.setPropertyValueLC(MAX_HEIGHT, maxHeight);
+		this.context.informSizeInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMaxWidth(java.lang.String)
+	 */
+	@Override
+	public void setMaxWidth(String maxWidth) throws DOMException {
+		this.setPropertyValueLC(MAX_WIDTH, maxWidth);
+		this.context.informSizeInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMinHeight(java.lang.String)
+	 */
+	@Override
+	public void setMinHeight(String minHeight) throws DOMException {
+		this.setPropertyValueLC(MIN_HEIGHT, minHeight);
+		this.context.informSizeInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setMinWidth(java.lang.String)
+	 */
+	@Override
+	public void setMinWidth(String minWidth) throws DOMException {
+		this.setPropertyValueLC(MIN_WIDTH, minWidth);
+		this.context.informSizeInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setOrphans(java.lang.String)
+	 */
+	@Override
+	public void setOrphans(String orphans) throws DOMException {
+		this.setPropertyValueLC(ORPHANS, orphans);
+	}
+
+	public String getOpacity() {
+		return this.getPropertyValueLC(OPACITY);
+	}
+
+	public void setOpacity(String value) {
+		this.setPropertyValueLC(OPACITY, value);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setOutline(java.lang.String)
+	 */
+	@Override
+	public void setOutline(String outline) throws DOMException {
+		this.setPropertyValueLC(OUTLINE, outline);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setOutlineColor(java.lang.String)
+	 */
+	@Override
+	public void setOutlineColor(String outlineColor) throws DOMException {
+		this.setPropertyValueLC(OUTLINE_COLOR, outlineColor);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setOutlineStyle(java.lang.String)
+	 */
+	@Override
+	public void setOutlineStyle(String outlineStyle) throws DOMException {
+		this.setPropertyValueLC(OUTLINE_STYLE, outlineStyle);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setOutlineWidth(java.lang.String)
+	 */
+	@Override
+	public void setOutlineWidth(String outlineWidth) throws DOMException {
+		this.setPropertyValueLC(OUTLINE_WIDTH, outlineWidth);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setOverflow(java.lang.String)
+	 */
+	@Override
+	public void setOverflow(String overflow) throws DOMException {
+		this.setPropertyValueLC(OVERFLOW, overflow);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPadding(java.lang.String)
+	 */
+	@Override
+	public void setPadding(String padding) throws DOMException {
+		new FourCornersSetter(PADDING, "padding-", "").changeValue(this, padding, null);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPaddingBottom(java.lang.String)
+	 */
+	@Override
+	public void setPaddingBottom(String paddingBottom) throws DOMException {
+		this.setPropertyValueLC(PADDING_BOTTOM, paddingBottom);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPaddingLeft(java.lang.String)
+	 */
+	@Override
+	public void setPaddingLeft(String paddingLeft) throws DOMException {
+		this.setPropertyValueLC(PADDING_LEFT, paddingLeft);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPaddingRight(java.lang.String)
+	 */
+	@Override
+	public void setPaddingRight(String paddingRight) throws DOMException {
+		this.setPropertyValueLC(PADDING_RIGHT, paddingRight);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPaddingTop(java.lang.String)
+	 */
+	@Override
+	public void setPaddingTop(String paddingTop) throws DOMException {
+		this.setPropertyValueLC(PADDING_TOP, paddingTop);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPage(java.lang.String)
+	 */
+	@Override
+	public void setPage(String page) throws DOMException {
+		this.setPropertyValueLC(PAGE, page);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPageBreakAfter(java.lang.String)
+	 */
+	@Override
+	public void setPageBreakAfter(String pageBreakAfter) throws DOMException {
+		this.setPropertyValueLC(PAGE_BREAK_AFTER, pageBreakAfter);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPageBreakBefore(java.lang.String)
+	 */
+	@Override
+	public void setPageBreakBefore(String pageBreakBefore) throws DOMException {
+		this.setPropertyValueLC(PAGE_BREAK_BEFORE, pageBreakBefore);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPageBreakInside(java.lang.String)
+	 */
+	@Override
+	public void setPageBreakInside(String pageBreakInside) throws DOMException {
+		this.setPropertyValueLC(PAGE_BREAK_INSIDE, pageBreakInside);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPause(java.lang.String)
+	 */
+	@Override
+	public void setPause(String pause) throws DOMException {
+		this.setPropertyValueLC(PAUSE, pause);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPauseAfter(java.lang.String)
+	 */
+	@Override
+	public void setPauseAfter(String pauseAfter) throws DOMException {
+		this.setPropertyValueLC(PAUSE_AFTER, pauseAfter);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPauseBefore(java.lang.String)
+	 */
+	@Override
+	public void setPauseBefore(String pauseBefore) throws DOMException {
+		this.setPropertyValueLC(PAUSE_BEFORE, pauseBefore);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPitch(java.lang.String)
+	 */
+	@Override
+	public void setPitch(String pitch) throws DOMException {
+		this.setPropertyValueLC(PITCH, pitch);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPitchRange(java.lang.String)
+	 */
+	@Override
+	public void setPitchRange(String pitchRange) throws DOMException {
+		this.setPropertyValueLC(PITCH_RANGE, pitchRange);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPlayDuring(java.lang.String)
+	 */
+	@Override
+	public void setPlayDuring(String playDuring) throws DOMException {
+		this.setPropertyValueLC(PLAY_DURING, playDuring);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setPosition(java.lang.String)
+	 */
+	@Override
+	public void setPosition(String position) throws DOMException {
+		this.setPropertyValueLC(POSITION, position);
+		this.context.informPositionInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setQuotes(java.lang.String)
+	 */
+	@Override
+	public void setQuotes(String quotes) throws DOMException {
+		this.setPropertyValueLC(QUOTES, quotes);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setRichness(java.lang.String)
+	 */
+	@Override
+	public void setRichness(String richness) throws DOMException {
+		this.setPropertyValueLC(RICHNESS, richness);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setRight(java.lang.String)
+	 */
+	@Override
+	public void setRight(String right) throws DOMException {
+		this.setPropertyValueLC(RIGHT, right);
+		this.context.informPositionInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setSize(java.lang.String)
+	 */
+	@Override
+	public void setSize(String size) throws DOMException {
+		this.setPropertyValueLC(SIZE, size);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setSpeak(java.lang.String)
+	 */
+	@Override
+	public void setSpeak(String speak) throws DOMException {
+		this.setPropertyValueLC(SPEAK, speak);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setSpeakHeader(java.lang.String)
+	 */
+	@Override
+	public void setSpeakHeader(String speakHeader) throws DOMException {
+		this.setPropertyValueLC(SPEAK_HEADER, speakHeader);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setSpeakNumeral(java.lang.String)
+	 */
+	@Override
+	public void setSpeakNumeral(String speakNumeral) throws DOMException {
+		this.setPropertyValueLC(SPEAK_NUMERAL, speakNumeral);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setSpeakPunctuation(java.lang.String)
+	 */
+	@Override
+	public void setSpeakPunctuation(String speakPunctuation) throws DOMException {
+		this.setPropertyValueLC(SPEAK_PUNCTUATION, speakPunctuation);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setSpeechRate(java.lang.String)
+	 */
+	@Override
+	public void setSpeechRate(String speechRate) throws DOMException {
+		this.setPropertyValueLC(SPEECH_RATE, speechRate);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setStress(java.lang.String)
+	 */
+	@Override
+	public void setStress(String stress) throws DOMException {
+		this.setPropertyValueLC(STRESS, stress);
+	}
+
+	public String getStopColor() {
+		return this.getPropertyValueLC(STOP_COLOR);
+	}
+
+	public String getStopOpacity() {
+		return this.getPropertyValueLC(STOP_OPACITY);
+	}
+
+	public String getStroke() {
+		return this.getPropertyValueLC(STROKE);
+	}
+
+	public void setStroke(String value) {
+		this.setPropertyValueLC(STROKE, value);
+		this.context.informInvalid();
+	}
+
+	public String getStrokeDashArray() {
+		return this.getPropertyValueLC(STROKE_DASHARRAY);
+	}
+
+	public void setStrokeDashArray(String value) {
+		this.setPropertyValueLC(STROKE_DASHARRAY, value);
+		this.context.informInvalid();
+	}
+
+	public String getStrokeLineCap() {
+		return this.getPropertyValueLC(STROKE_LINE_CAP);
+	}
+
+	public void setStrokeLineCap(String value) {
+		this.setPropertyValueLC(STROKE_LINE_CAP, value);
+		this.context.informInvalid();
+	}
+
+	public String getStrokeMiterLimit() {
+		return this.getPropertyValueLC(STROKE_MITERLIMIT);
+	}
+
+	public void setStrokeMiterLimit(String value) {
+		this.setPropertyValueLC(STROKE_MITERLIMIT, value);
+		this.context.informInvalid();
+	}
+
+	public String getStrokeOpacity() {
+		return this.getPropertyValueLC(STROKE_OPACITY);
+	}
+
+	public void setStrokeOpacity(String value) {
+		this.setPropertyValueLC(STROKE_OPACITY, value);
+		this.context.informInvalid();
+	}
+
+	public String getStrokeWidth() {
+		return this.getPropertyValueLC(STROKE_WIDTH);
+	}
+
+	public void setStrokeWidth(String value) {
+		this.setPropertyValueLC(STROKE_WIDTH, value);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTableLayout(java.lang.String)
+	 */
+	@Override
+	public void setTableLayout(String tableLayout) throws DOMException {
+		this.setPropertyValueLC(TABLE_LAYOUT, tableLayout);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTextAlign(java.lang.String)
+	 */
+	@Override
+	public void setTextAlign(String textAlign) throws DOMException {
+		this.setPropertyValueLC(TEXT_ALIGN, textAlign);
+		this.context.informLayoutInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTextDecoration(java.lang.String)
+	 */
+	@Override
+	public void setTextDecoration(String textDecoration) throws DOMException {
+		this.setPropertyValueLC(TEXT_DECORATION, textDecoration);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTextIndent(java.lang.String)
+	 */
+	@Override
+	public void setTextIndent(String textIndent) throws DOMException {
+		this.setPropertyValueLC(TEXT_INDENT, textIndent);
+		this.context.informLayoutInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTextShadow(java.lang.String)
+	 */
+	@Override
+	public void setTextShadow(String textShadow) throws DOMException {
+		this.setPropertyValueLC(TEXT_SHADOW, textShadow);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTextTransform(java.lang.String)
+	 */
+	@Override
+	public void setTextTransform(String textTransform) throws DOMException {
+		this.setPropertyValueLC(TEXT_TRANSFORM, textTransform);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setTop(java.lang.String)
+	 */
+	@Override
+	public void setTop(String top) throws DOMException {
+		this.setPropertyValueLC(TOP, top);
+		this.context.informPositionInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setUnicodeBidi(java.lang.String)
+	 */
+	@Override
+	public void setUnicodeBidi(String unicodeBidi) throws DOMException {
+		this.setPropertyValueLC(UNICODE_BIDI, unicodeBidi);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setVerticalAlign(java.lang.String)
+	 */
+	@Override
+	public void setVerticalAlign(String verticalAlign) throws DOMException {
+		this.setPropertyValueLC(VERTICAL_ALIGN, verticalAlign);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setVisibility(java.lang.String)
+	 */
+	@Override
+	public void setVisibility(String visibility) throws DOMException {
+		this.setPropertyValueLC(VISIBILITY, visibility);
+		this.context.informLookInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setVoiceFamily(java.lang.String)
+	 */
+	@Override
+	public void setVoiceFamily(String voiceFamily) throws DOMException {
+		this.setPropertyValueLC(VOICE_FAMILY, voiceFamily);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setVolume(java.lang.String)
+	 */
+	@Override
+	public void setVolume(String volume) throws DOMException {
+		this.setPropertyValueLC(VOLUME, volume);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setWhiteSpace(java.lang.String)
+	 */
+	@Override
+	public void setWhiteSpace(String whiteSpace) throws DOMException {
+		this.setPropertyValueLC(WHITE_SPACE, whiteSpace);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setWidows(java.lang.String)
+	 */
+	@Override
+	public void setWidows(String widows) throws DOMException {
+		this.setPropertyValueLC(WIDOWS, widows);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setWidth(java.lang.String)
+	 */
+	@Override
+	public void setWidth(String width) throws DOMException {
+		this.setPropertyValueLC(WIDTH, width);
+		this.context.informSizeInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setWordSpacing(java.lang.String)
+	 */
+	@Override
+	public void setWordSpacing(String wordSpacing) throws DOMException {
+		this.setPropertyValueLC(WORD_SPACING, wordSpacing);
+		this.context.informInvalid();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.w3c.dom.css.CSS2Properties#setZIndex(java.lang.String)
+	 */
+	@Override
+	public void setZIndex(String zIndex) throws DOMException {
+		this.setPropertyValueLC(Z_INDEX, zIndex);
+		this.context.informPositionInvalid();
+	}
+	
 	public final String getPropertyValue(String name) {
 		return getPropertyValueLC(name.toLowerCase());
 	}
@@ -1112,758 +3512,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 		}
 		return null;
 	}
-
-	@Override
-	public String getQuotes() {
-
-		return getPropertyValueLC(QUOTES);
-	}
-
-	@Override
-	public String getRichness() {
-
-		return getPropertyValueLC(RICHNESS);
-	}
-
-	@Override
-	public String getRight() {
-
-		return getPropertyValueLC(RIGHT);
-	}
-
-	@Override
-	public String getSize() {
-
-		return getPropertyValueLC(SIZE);
-	}
-
-	@Override
-	public String getSpeak() {
-
-		return getPropertyValueLC(SPEAK);
-	}
-
-	@Override
-	public String getSpeakHeader() {
-
-		return getPropertyValueLC(SPEAK_HEADER);
-	}
-
-	@Override
-	public String getSpeakNumeral() {
-
-		return getPropertyValueLC(SPEAK_NUMERAL);
-	}
-
-	@Override
-	public String getSpeakPunctuation() {
-
-		return getPropertyValueLC(SPEAK_PUNCTUATION);
-	}
-
-	@Override
-	public String getSpeechRate() {
-
-		return getPropertyValueLC(SPEECH_RATE);
-	}
-
-	@Override
-	public String getStress() {
-
-		return getPropertyValueLC(STRESS);
-	}
-
-	@Override
-	public String getTableLayout() {
-
-		return getPropertyValueLC(TABLE_LAYOUT);
-	}
-
-	@Override
-	public String getTextAlign() {
-		return getPropertyValueLC(TEXT_ALIGN);
-	}
-
-	@Override
-	public String getTextDecoration() {
-
-		return getPropertyValueLC(TEXT_DECORATION);
-	}
-
-	@Override
-	public String getTextIndent() {
-
-		return getPropertyValueLC(TEXT_INDENT);
-	}
-
-	@Override
-	public String getTextShadow() {
-
-		return getPropertyValueLC(TEXT_SHADOW);
-	}
-
-	@Override
-	public String getTextTransform() {
-
-		return getPropertyValueLC(TEXT_TRANSFORM);
-	}
-
-	@Override
-	public String getTop() {
-
-		return getPropertyValueLC(TOP);
-	}
-
-	@Override
-	public String getUnicodeBidi() {
-
-		return getPropertyValueLC(UNICODE_BIDI);
-	}
-
-	@Override
-	public String getVerticalAlign() {
-
-		return getPropertyValueLC(VERTICAL_ALIGN);
-	}
-
-	@Override
-	public String getVisibility() {
-
-		return getPropertyValueLC(VISIBILITY);
-	}
-
-	@Override
-	public String getVoiceFamily() {
-
-		return getPropertyValueLC(VOICE_FAMILY);
-	}
-
-	@Override
-	public String getVolume() {
-
-		return getPropertyValueLC(VOLUME);
-	}
-
-	@Override
-	public String getWhiteSpace() {
-
-		return getPropertyValueLC(WHITE_SPACE);
-	}
-
-	@Override
-	public String getWidows() {
-
-		return getPropertyValueLC(WIDOWS);
-	}
-
-	@Override
-	public String getWidth() {
-
-		return getPropertyValueLC(WIDTH);
-	}
-
-	@Override
-	public String getWordSpacing() {
-
-		return getPropertyValueLC(WORD_SPACING);
-	}
-
-	@Override
-	public String getZIndex() {
-
-		return getPropertyValueLC(Z_INDEX);
-	}
-
-	@Override
-	public void setAzimuth(String azimuth) throws DOMException {
-		setPropertyValueLC(AZIMUTH, azimuth);
-	}
-
-	@Override
-	public void setBackground(String background) throws DOMException {
-		checkSetProperty();
-		new BackgroundSetter().changeValue(this, background, null);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBackgroundAttachment(String backgroundAttachment) throws DOMException {
-		setPropertyValueLC(BACKGROUND_ATTACHMENT, backgroundAttachment);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBackgroundColor(String backgroundColor) throws DOMException {
-		setPropertyValueLC(BACKGROUND_COLOR, backgroundColor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBackgroundImage(String backgroundImage) throws DOMException {
-		checkSetProperty();
-		new BackgroundImageSetter().changeValue(this, backgroundImage, null);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBackgroundPosition(String backgroundPosition) throws DOMException {
-		setPropertyValueLC(BACKGROUND_POSITION, backgroundPosition);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBackgroundRepeat(String backgroundRepeat) throws DOMException {
-		setPropertyValueLC(BACKGROUND_REPEAT, backgroundRepeat);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorder(String border) throws DOMException {
-		checkSetProperty();
-		new BorderSetter1().changeValue(this, border, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderBottom(String borderBottom) throws DOMException {
-		checkSetProperty();
-		new BorderSetter2(BORDER_BOTTOM).changeValue(this, borderBottom, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderBottomColor(String borderBottomColor) throws DOMException {
-		setPropertyValueLC(BORDER_BOTTOM_COLOR, borderBottomColor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderBottomStyle(String borderBottomStyle) throws DOMException {
-		setPropertyValueLC(BORDER_BOTTOM_STYLE, borderBottomStyle);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderBottomWidth(String borderBottomWidth) throws DOMException {
-		setPropertyValueLC(BORDER_BOTTOM_WIDTH, borderBottomWidth);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderCollapse(String borderCollapse) throws DOMException {
-		setPropertyValueLC(BORDER_COLLAPSE, borderCollapse);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderColor(String borderColor) throws DOMException {
-		checkSetProperty();
-		new FourCornersSetter(BORDER_COLOR, "border-", "-color").changeValue(this, borderColor, null);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderLeft(String borderLeft) throws DOMException {
-		checkSetProperty();
-		new BorderSetter2(BORDER_LEFT).changeValue(this, borderLeft, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderLeftColor(String borderLeftColor) throws DOMException {
-		setPropertyValueLC(BORDER_LEFT_COLOR, borderLeftColor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderLeftStyle(String borderLeftStyle) throws DOMException {
-		setPropertyValueLC(BORDER_LEFT_STYLE, borderLeftStyle);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderLeftWidth(String borderLeftWidth) throws DOMException {
-		setPropertyValueLC(BORDER_LEFT_WIDTH, borderLeftWidth);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderRight(String borderRight) throws DOMException {
-		checkSetProperty();
-		new BorderSetter2(BORDER_RIGHT).changeValue(this, borderRight, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderRightColor(String borderRightColor) throws DOMException {
-		setPropertyValueLC(BORDER_RIGHT_COLOR, borderRightColor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderRightStyle(String borderRightStyle) throws DOMException {
-		setPropertyValueLC(BORDER_RIGHT_STYLE, borderRightStyle);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderRightWidth(String borderRightWidth) throws DOMException {
-		setPropertyValueLC(BORDER_RIGHT_WIDTH, borderRightWidth);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderSpacing(String borderSpacing) throws DOMException {
-		setPropertyValueLC(BORDER_SPACING, borderSpacing);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderStyle(String borderStyle) throws DOMException {
-		checkSetProperty();
-		new FourCornersSetter(BORDER_STYLE, "border-", "-style").changeValue(this, borderStyle, null);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderTop(String borderTop) throws DOMException {
-		checkSetProperty();
-		new BorderSetter2(BORDER_TOP).changeValue(this, borderTop, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderTopColor(String borderTopColor) throws DOMException {
-		setPropertyValueLC(BORDER_TOP_COLOR, borderTopColor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderTopStyle(String borderTopStyle) throws DOMException {
-		setPropertyValueLC(BORDER_TOP_STYLE, borderTopStyle);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setBorderTopWidth(String borderTopWidth) throws DOMException {
-		setPropertyValueLC(BORDER_TOP_WIDTH, borderTopWidth);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBorderWidth(String borderWidth) throws DOMException {
-		checkSetProperty();
-		new FourCornersSetter(BORDER_WIDTH, "border-", "-width").changeValue(this, borderWidth, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setBottom(String bottom) throws DOMException {
-		setPropertyValueLC(BOTTOM, bottom);
-		this.context.informPositionInvalid();
-	}
-
-	@Override
-	public void setCaptionSide(String captionSide) throws DOMException {
-		setPropertyValueLC(CAPTION_SIDE, captionSide);
-	}
-
-	@Override
-	public void setClear(String clear) throws DOMException {
-		setPropertyValueLC(CLEAR, clear);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setClip(String clip) throws DOMException {
-		setPropertyValueLC(CLIP, clip);
-	}
-
-	@Override
-	public void setColor(String color) throws DOMException {
-		setPropertyValueLC(COLOR, color);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setContent(String content) throws DOMException {
-		setPropertyValueLC(CONTENT, content);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setCounterIncrement(String counterIncrement) throws DOMException {
-		setPropertyValueLC(COUNTER_INCREMENT, counterIncrement);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setCounterReset(String counterReset) throws DOMException {
-		setPropertyValueLC(COUNTER_RESET, counterReset);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setCssFloat(String cssFloat) throws DOMException {
-		setPropertyValueLC(CSS_FLOAT, cssFloat);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setCue(String cue) throws DOMException {
-		setPropertyValueLC(CUE, cue);
-	}
-
-	@Override
-	public void setCueAfter(String cueAfter) throws DOMException {
-		setPropertyValueLC(CUE_AFTER, cueAfter);
-	}
-
-	@Override
-	public void setCueBefore(String cueBefore) throws DOMException {
-		setPropertyValueLC(CUE_BEFORE, cueBefore);
-	}
-
-	@Override
-	public void setCursor(String cursor) throws DOMException {
-		setPropertyValueLC(CURSOR, cursor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setDirection(String direction) throws DOMException {
-		setPropertyValueLC(DIRECTION, direction);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setDisplay(String display) throws DOMException {
-		setPropertyValueLC(DISPLAY, display);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setElevation(String elevation) throws DOMException {
-		setPropertyValueLC(ELEVATION, elevation);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setEmptyCells(String emptyCells) throws DOMException {
-		setPropertyValueLC(EMPTY_CELLS, emptyCells);
-	}
-
-	public void setFloat(String value) {
-		setPropertyValueLC(FLOAT, value);
-	}
-
-	@Override
-	public void setFont(String font) throws DOMException {
-		checkSetProperty();
-		new FontSetter().changeValue(this, font, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontFamily(String fontFamily) throws DOMException {
-		setPropertyValueLC(FONT_FAMILY, fontFamily);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontSize(String fontSize) throws DOMException {
-		setPropertyValueLC(FONT_SIZE, fontSize);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontSizeAdjust(String fontSizeAdjust) throws DOMException {
-		setPropertyValueLC(FONT_SIZE_ADJUST, fontSizeAdjust);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontStretch(String fontStretch) throws DOMException {
-		setPropertyValueLC(FONT_STRETCH, fontStretch);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontStyle(String fontStyle) throws DOMException {
-		setPropertyValueLC(FONT_STYLE, fontStyle);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontVariant(String fontVariant) throws DOMException {
-		setPropertyValueLC(FONT_VARIANT, fontVariant);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setFontWeight(String fontWeight) throws DOMException {
-		setPropertyValueLC(FONT_WEIGHT, fontWeight);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setHeight(String height) throws DOMException {
-		setPropertyValueLC(HEIGHT, height);
-		this.context.informSizeInvalid();
-	}
-
-	@Override
-	public void setLeft(String left) throws DOMException {
-		setPropertyValueLC(LEFT, left);
-		this.context.informPositionInvalid();
-	}
-
-	@Override
-	public void setLetterSpacing(String letterSpacing) throws DOMException {
-		setPropertyValueLC(LETTER_SPACING, letterSpacing);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setLineHeight(String lineHeight) throws DOMException {
-		setPropertyValueLC(LINE_HEIGHT, lineHeight);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setListStyle(String listStyle) throws DOMException {
-		setPropertyValueLC(LIST_STYLE, listStyle);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setListStyleImage(String listStyleImage) throws DOMException {
-		setPropertyValueLC(LIST_STYLE_IMAGE, listStyleImage);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setListStylePosition(String listStylePosition) throws DOMException {
-		setPropertyValueLC(LIST_STYLE_POSITION, listStylePosition);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setListStyleType(String listStyleType) throws DOMException {
-		setPropertyValueLC(LIST_STYLE_TYPE, listStyleType);
-		this.context.informLookInvalid();
-	}
-
-	public void setLocalStyleProperties(AbstractCSSProperties properties) {
-		if (properties == this) {
-			throw new IllegalStateException("setting same");
-		}
-		synchronized (this) {
-			this.localStyleProperties = properties;
-		}
-	}
-
-	@Override
-	public void setMargin(String margin) throws DOMException {
-		checkSetProperty();
-		new AbstractCSSProperties.FourCornersSetter(MARGIN, "margin-", "").changeValue(this, margin, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setMarginBottom(String marginBottom) throws DOMException {
-		setPropertyValueLC(MARGIN_BOTTOM, marginBottom);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setMarginLeft(String marginLeft) throws DOMException {
-		setPropertyValueLC(MARGIN_LEFT, marginLeft);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setMarginRight(String marginRight) throws DOMException {
-		setPropertyValueLC(MARGIN_RIGHT, marginRight);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setMarginTop(String marginTop) throws DOMException {
-		setPropertyValueLC(MARGIN_TOP, marginTop);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setMarkerOffset(String markerOffset) throws DOMException {
-		setPropertyValueLC(MARKER_OFFSET, markerOffset);
-	}
-
-	@Override
-	public void setMarks(String marks) throws DOMException {
-		setPropertyValueLC(MARKS, marks);
-	}
-
-	@Override
-	public void setMaxHeight(String maxHeight) throws DOMException {
-		setPropertyValueLC(MAX_HEIGHT, maxHeight);
-		this.context.informSizeInvalid();
-	}
-
-	@Override
-	public void setMaxWidth(String maxWidth) throws DOMException {
-		setPropertyValueLC(MAX_WIDTH, maxWidth);
-		this.context.informSizeInvalid();
-	}
-
-	@Override
-	public void setMinHeight(String minHeight) throws DOMException {
-		setPropertyValueLC(MIN_HEIGHT, minHeight);
-		this.context.informSizeInvalid();
-	}
-
-	@Override
-	public void setMinWidth(String minWidth) throws DOMException {
-		setPropertyValueLC(MIN_WIDTH, minWidth);
-		this.context.informSizeInvalid();
-	}
-
-	@Override
-	public void setOrphans(String orphans) throws DOMException {
-		setPropertyValueLC(ORPHANS, orphans);
-	}
-
-	@Override
-	public void setOutline(String outline) throws DOMException {
-		setPropertyValueLC(OUTLINE, outline);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setOutlineColor(String outlineColor) throws DOMException {
-		setPropertyValueLC(OUTLINE_COLOR, outlineColor);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setOutlineStyle(String outlineStyle) throws DOMException {
-		setPropertyValueLC(OUTLINE_STYLE, outlineStyle);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setOutlineWidth(String outlineWidth) throws DOMException {
-		setPropertyValueLC(OUTLINE_WIDTH, outlineWidth);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setOverflow(String overflow) throws DOMException {
-		setPropertyValueLC(OVERFLOW, overflow);
-		this.context.informInvalid();
-	}
-
-	public void setOverlayColor(String value) {
-		this.overlayColor = value;
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setPadding(String padding) throws DOMException {
-		checkSetProperty();
-		new FourCornersSetter(PADDING, "padding-", "").changeValue(this, padding, null);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPaddingBottom(String paddingBottom) throws DOMException {
-		setPropertyValueLC(PADDING_BOTTOM, paddingBottom);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPaddingLeft(String paddingLeft) throws DOMException {
-		setPropertyValueLC(PADDING_LEFT, paddingLeft);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPaddingRight(String paddingRight) throws DOMException {
-		setPropertyValueLC(PADDING_RIGHT, paddingRight);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPaddingTop(String paddingTop) throws DOMException {
-		setPropertyValueLC(PADDING_TOP, paddingTop);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPage(String page) throws DOMException {
-		setPropertyValueLC(PAGE, page);
-	}
-
-	@Override
-	public void setPageBreakAfter(String pageBreakAfter) throws DOMException {
-		setPropertyValueLC(PAGE_BREAK_AFTER, pageBreakAfter);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPageBreakBefore(String pageBreakBefore) throws DOMException {
-		setPropertyValueLC(PAGE_BREAK_BEFORE, pageBreakBefore);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPageBreakInside(String pageBreakInside) throws DOMException {
-		setPropertyValueLC(PAGE_BREAK_INSIDE, pageBreakInside);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setPause(String pause) throws DOMException {
-		setPropertyValueLC(PAUSE, pause);
-	}
-
-	@Override
-	public void setPauseAfter(String pauseAfter) throws DOMException {
-		setPropertyValueLC(PAUSE_AFTER, pauseAfter);
-	}
-
-	@Override
-	public void setPauseBefore(String pauseBefore) throws DOMException {
-		setPropertyValueLC(PAUSE_BEFORE, pauseBefore);
-	}
-
-	@Override
-	public void setPitch(String pitch) throws DOMException {
-		setPropertyValueLC(PITCH, pitch);
-	}
-
-	@Override
-	public void setPitchRange(String pitchRange) throws DOMException {
-		setPropertyValueLC(PITCH_RANGE, pitchRange);
-	}
-
-	@Override
-	public void setPlayDuring(String playDuring) throws DOMException {
-		setPropertyValueLC(PLAY_DURING, playDuring);
-	}
-
-	@Override
-	public void setPosition(String position) throws DOMException {
-		setPropertyValueLC(POSITION, position);
-		this.context.informPositionInvalid();
-	}
-
-	/**
-	 * Method called by property setters to set property values.
-	 * 
-	 * @param lowerCaseName The name of the property in lowercase.
-	 * @param value         The property value.
-	 */
+	
 	protected void setPropertyValueLC(String lowerCaseName, String value) {
 		Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
@@ -1874,15 +3523,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 			vm.put(lowerCaseName, new Property(value, true));
 		}
 	}
-
-	/**
-	 * Alternate method called to set property values from CSS declarations.
-	 * <p>
-	 * This method checks importance of the value.
-	 * 
-	 * @param lowerCaseName The name of the property in lowercase.
-	 * @param value         The property value.
-	 */
+	
 	protected final void setPropertyValueLCAlt(String lowerCaseName, String value, boolean important) {
 		Map<String, Property> vm = this.valueMap;
 		synchronized (this) {
@@ -1901,7 +3542,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 			vm.put(lowerCaseName, new Property(value, important));
 		}
 	}
-
+	
 	protected final void setPropertyValueProcessed(String lowerCaseName, String value, CSSStyleDeclaration declaration,
 			boolean important) {
 		final SubPropertySetter setter = (SubPropertySetter) SUB_SETTERS.get(lowerCaseName);
@@ -1911,156 +3552,14 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 			setPropertyValueLCAlt(lowerCaseName, value, important);
 		}
 	}
-
-	@Override
-	public void setQuotes(String quotes) throws DOMException {
-		setPropertyValueLC(QUOTES, quotes);
-	}
-
-	@Override
-	public void setRichness(String richness) throws DOMException {
-		setPropertyValueLC(RICHNESS, richness);
-	}
-
-	@Override
-	public void setRight(String right) throws DOMException {
-		setPropertyValueLC(RIGHT, right);
-		this.context.informPositionInvalid();
-	}
-
-	@Override
-	public void setSize(String size) throws DOMException {
-		setPropertyValueLC(SIZE, size);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setSpeak(String speak) throws DOMException {
-		setPropertyValueLC(SPEAK, speak);
-	}
-
-	@Override
-	public void setSpeakHeader(String speakHeader) throws DOMException {
-		setPropertyValueLC(SPEAK_HEADER, speakHeader);
-	}
-
-	@Override
-	public void setSpeakNumeral(String speakNumeral) throws DOMException {
-		setPropertyValueLC(SPEAK_NUMERAL, speakNumeral);
-	}
-
-	@Override
-	public void setSpeakPunctuation(String speakPunctuation) throws DOMException {
-		setPropertyValueLC(SPEAK_PUNCTUATION, speakPunctuation);
-	}
-
-	@Override
-	public void setSpeechRate(String speechRate) throws DOMException {
-		setPropertyValueLC(SPEECH_RATE, speechRate);
-	}
-
-	@Override
-	public void setStress(String stress) throws DOMException {
-		setPropertyValueLC(STRESS, stress);
-	}
-
-	@Override
-	public void setTableLayout(String tableLayout) throws DOMException {
-		setPropertyValueLC(TABLE_LAYOUT, tableLayout);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setTextAlign(String textAlign) throws DOMException {
-		setPropertyValueLC(TEXT_ALIGN, textAlign);
-		this.context.informLayoutInvalid();
-	}
-
-	@Override
-	public void setTextDecoration(String textDecoration) throws DOMException {
-		setPropertyValueLC(TEXT_DECORATION, textDecoration);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setTextIndent(String textIndent) throws DOMException {
-		setPropertyValueLC(TEXT_INDENT, textIndent);
-		this.context.informLayoutInvalid();
-	}
-
-	@Override
-	public void setTextShadow(String textShadow) throws DOMException {
-		setPropertyValueLC(TEXT_SHADOW, textShadow);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setTextTransform(String textTransform) throws DOMException {
-		setPropertyValueLC(TEXT_TRANSFORM, textTransform);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setTop(String top) throws DOMException {
-		setPropertyValueLC(TOP, top);
-		this.context.informPositionInvalid();
-	}
-
-	@Override
-	public void setUnicodeBidi(String unicodeBidi) throws DOMException {
-		setPropertyValueLC(UNICODE_BIDI, unicodeBidi);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setVerticalAlign(String verticalAlign) throws DOMException {
-		setPropertyValueLC(VERTICAL_ALIGN, verticalAlign);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setVisibility(String visibility) throws DOMException {
-		setPropertyValueLC(VISIBILITY, visibility);
-		this.context.informLookInvalid();
-	}
-
-	@Override
-	public void setVoiceFamily(String voiceFamily) throws DOMException {
-		setPropertyValueLC(VOICE_FAMILY, voiceFamily);
-	}
-
-	@Override
-	public void setVolume(String volume) throws DOMException {
-		setPropertyValueLC(VOLUME, volume);
-	}
-
-	@Override
-	public void setWhiteSpace(String whiteSpace) throws DOMException {
-		setPropertyValueLC(WHITE_SPACE, whiteSpace);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setWidows(String widows) throws DOMException {
-		setPropertyValueLC(WIDOWS, widows);
-	}
-
-	@Override
-	public void setWidth(String width) throws DOMException {
-		setPropertyValueLC(WIDTH, width);
-		this.context.informSizeInvalid();
-	}
-
-	@Override
-	public void setWordSpacing(String wordSpacing) throws DOMException {
-		setPropertyValueLC(WORD_SPACING, wordSpacing);
-		this.context.informInvalid();
-	}
-
-	@Override
-	public void setZIndex(String zIndex) throws DOMException {
-		setPropertyValueLC(Z_INDEX, zIndex);
-		this.context.informPositionInvalid();
+	
+	public void setLocalStyleProperties(AbstractCSSProperties properties) {
+		if (Objects.equals(properties, this)) {
+			throw new IllegalStateException("setting same");
+		}
+		synchronized (this) {
+			this.localStyleProperties = properties;
+		}
 	}
 
 	@Override

@@ -25,8 +25,29 @@ package org.lobobrowser.html.domimpl;
 
 import org.lobobrowser.html.dom.HTMLDocument;
 import org.lobobrowser.html.dom.HTMLElement;
+import org.lobobrowser.html.dom.svgimpl.SVGAnimateColorElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGAnimateElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGAnimateTransformElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGCircleElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGClipPathElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGDefsElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGEllipseElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGGElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGLineElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGLinearGradientElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGPathElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGPolygonElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGPolylineElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGRadialGradientElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGRectElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGSVGElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGStopElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGSymbolElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGTextElementImpl;
+import org.lobobrowser.html.dom.svgimpl.SVGUseElementImpl;
 
 public abstract class HTMLElementBuilder {
+
 	public static class Anchor extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
@@ -40,7 +61,7 @@ public abstract class HTMLElementBuilder {
 			return new HTMLBaseElementImpl(name);
 		}
 	}
-	
+
 	public static class Head extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
@@ -75,7 +96,7 @@ public abstract class HTMLElementBuilder {
 			return new HTMLButtonElementImpl(name);
 		}
 	}
-	
+
 	public static final class Canvas extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
@@ -363,6 +384,147 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
+	public static final class SVG extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGSVGElementImpl(name);
+		}
+	}
+
+	public static final class SVGAnimateColor extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGAnimateColorElementImpl(name);
+		}
+	}
+
+	public static final class SVGAnimateTrasform extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGAnimateTransformElementImpl(name);
+		}
+	}
+
+	public static final class SVGAnimate extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGAnimateElementImpl(name);
+		}
+	}
+
+	public static final class SVGStop extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGStopElementImpl(name);
+		}
+	}
+
+	public static final class SVGClipPath extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGClipPathElementImpl(name);
+		}
+	}
+
+	public static final class SVGLinearGradient extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGLinearGradientElementImpl(name);
+		}
+	}
+
+	public static final class SVGRadialGradient extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGRadialGradientElementImpl(name);
+		}
+	}
+
+	public static final class SVGSymbol extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGSymbolElementImpl(name);
+		}
+	}
+
+	public static final class SVGText extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGTextElementImpl(name);
+		}
+	}
+
+	public static final class SVGUse extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGUseElementImpl(name);
+		}
+	}
+
+	public static final class SVGG extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGGElementImpl(name);
+		}
+	}
+
+	public static final class SVGDefs extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGDefsElementImpl(name);
+		}
+	}
+
+	public static final class SVGPath extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGPathElementImpl(name);
+		}
+	}
+
+	public static final class SVGPolyline extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGPolylineElementImpl(name);
+		}
+	}
+
+	public static final class SVGPolygon extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGPolygonElementImpl(name);
+		}
+	}
+
+	public static final class SVGLine extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGLineElementImpl(name);
+		}
+	}
+
+	public static final class SVGEllipse extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGEllipseElementImpl(name);
+		}
+
+	}
+
+	public static final class SVGRect extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGRectElementImpl(name);
+		}
+	}
+
+	public static final class SVGCircle extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGCircleElementImpl(name);
+		}
+	}
+
 	protected abstract HTMLElementImpl build(String name);
 
 	public final HTMLElement create(HTMLDocument document, String name) {
@@ -370,5 +532,4 @@ public abstract class HTMLElementBuilder {
 		element.setOwnerDocument(document);
 		return element;
 	}
-
 }

@@ -46,6 +46,7 @@ import javax.swing.SwingUtilities;
 import org.lobo.common.ArrayUtilities;
 import org.lobo.common.Strings;
 import org.lobobrowser.html.HtmlObject;
+import org.lobobrowser.html.dom.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.html.domimpl.DocumentFragmentImpl;
 import org.lobobrowser.html.domimpl.HTMLBaseInputElement;
 import org.lobobrowser.html.domimpl.HTMLCanvasElementImpl;
@@ -224,6 +225,21 @@ public class RBlockViewport extends BaseRCollection {
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
+	
+	
+	private static class SVGLayout extends CommonWidgetLayout {
+		public SVGLayout() {
+			super(ADD_AS_BLOCK);
+		}
+
+		@Override
+		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+			UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
+			return new RUIControl(markupElement,control, bodyLayout.container,
+					bodyLayout.frameContext, bodyLayout.userAgentContext);
+		}
+	}
+	
 	
 	private static class DivLayout extends CommonLayout {
 		public DivLayout() {
@@ -522,6 +538,7 @@ public class RBlockViewport extends BaseRCollection {
 		el.put("APPLET", ol);
 		el.put("EMBED", ol);
 		el.put("CANVAS", new CanvasLayout());
+		el.put("SVG", new SVGLayout());
 		//el.put("IFRAME", new IFrameLayout());
 	}
 
