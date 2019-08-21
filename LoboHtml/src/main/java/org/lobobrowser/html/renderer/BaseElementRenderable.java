@@ -174,7 +174,7 @@ abstract class BaseElementRenderable extends BaseRCollection
         }
 		
 		this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
-		final java.net.URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;
+		final URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
 			this.lastBackgroundImageUri = null;

@@ -27,6 +27,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Toolkit;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -206,6 +207,25 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+    private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document) {
+        if (backgroundImageText.contains("url")) {
+            String start = "url(";
+            int startIdx = start.length() +1;
+            int closingIdx = backgroundImageText.lastIndexOf(')') -1;
+            String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
+            String[] items = {"http", "https", "file"};            
+            if(Strings.containsWords(quotedUri, items)) {
+                try {
+                    binfo.backgroundImage = new URL(quotedUri);
+                } catch (Exception e) {
+                    binfo.backgroundImage = null;
+                }
+            } else {
+                binfo.backgroundImage = document.getFullURL(quotedUri);
+            }
+        }
+    }
+	
 	@Override
 	public int getAlignXPercent() {
 		int axp = this.alignXPercent;
@@ -275,41 +295,42 @@ public class StyleSheetRenderState implements RenderState {
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.iBackgroundInfo;
+		final AbstractCSSProperties props = getCssProperties();
 		if (binfo != INVALID_BACKGROUND_INFO) {
 			return binfo;
 		}
-		final AbstractCSSProperties props = getCssProperties();
+		
+		if (element != null) {
+			binfo = null;
+		}		
+		
 		if (props != null) {
 			final String backgroundColorText = props.getBackgroundColor();
-			if (backgroundColorText != null) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
+			final String backgroundImageText = props.getBackgroundImage();
+			final String backgroundRepeatText = props.getBackgroundRepeat();
+			final String backgroundPositionText = props.getBackgroundPosition();
+						
+			if (Strings.isNotBlank(backgroundColorText)  || 
+				Strings.isNotBlank(backgroundImageText)  || 
+				Strings.isNotBlank(backgroundRepeatText) || 
+				Strings.isNotBlank(backgroundPositionText)) {
+				binfo = new BackgroundInfo();
+			}
+			
+			if (Strings.isNotBlank(backgroundColorText)) {
 				binfo.backgroundColor = ColorFactory.getInstance().getColor(backgroundColorText);
 			}
-			final String backgroundImageText = props.getBackgroundImage();
-			if (Strings.isNotBlank(backgroundImageText)) {
-				final java.net.URL backgroundImage = HtmlValues.getURIFromStyleValue(backgroundImageText);
-				if (backgroundImage != null) {
-					if (binfo == null) {
-						binfo = new BackgroundInfo();
-					}
-					binfo.backgroundImage = backgroundImage;
-				}
-			}
-			final String backgroundRepeatText = props.getBackgroundRepeat();
-			if (backgroundRepeatText != null) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
+			
+			if (Strings.isNotBlank(backgroundRepeatText)) {
 				applyBackgroundRepeat(binfo, backgroundRepeatText);
 			}
-			final String backgroundPositionText = props.getBackgroundPosition();
-			if (backgroundPositionText != null) {
-				if (binfo == null) {
-					binfo = new BackgroundInfo();
-				}
+			
+			if (Strings.isNotBlank(backgroundPositionText)) {
 				applyBackgroundPosition(binfo, backgroundPositionText);
+			}
+			
+			if (Strings.isNotBlank(backgroundImageText)) {
+				applyBackgroundImage(binfo, backgroundImageText, this.document);
 			}
 		}
 		this.iBackgroundInfo = binfo;

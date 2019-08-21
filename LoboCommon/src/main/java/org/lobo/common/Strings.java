@@ -544,14 +544,25 @@ public class Strings {
 		}
 		return null;
 	}
-	
+
 	public static String unquoteSingle(final String text) {
-	    final int length = text.length();
-	    if (length >= 2) {
-	      if ((text.charAt(0) == '\'') && (text.charAt(length - 1) == '\'')) {
-	        return text.substring(1, length - 1);
-	      }
-	    }
-	    return text;
-	  }
+		final int length = text.length();
+		if (length >= 2) {
+			if ((text.charAt(0) == '\'') && (text.charAt(length - 1) == '\'')) {
+				return text.substring(1, length - 1);
+			}
+		}
+		return text;
+	}
+
+	public static boolean containsWords(String inputString, String[] items) {
+		boolean found = false;
+		for (String item : items) {
+			if (inputString.contains(item)) {
+				found = true;
+				break;
+			}
+		}
+		return found;
+	}
 }
