@@ -21,6 +21,7 @@
 package org.lobobrowser.html.style;
 
 import java.awt.Color;
+import java.net.URL;
 
 public class BackgroundInfo {
 	public static final int BR_NO_REPEAT = 1;
@@ -28,7 +29,7 @@ public class BackgroundInfo {
 	public static final int BR_REPEAT_X = 2;
 	public static final int BR_REPEAT_Y = 3;
 	public Color backgroundColor;
-	public java.net.URL backgroundImage;
+	public URL backgroundImage;
 	public int backgroundRepeat = BR_REPEAT;
 
 	public int backgroundXPosition;

@@ -111,14 +111,12 @@ public class StyleSheetAggregator {
 
 	public final List<CSSStyleDeclarationImpl> getActiveStyleDeclarations(HTMLElementImpl element, String elementName,
 			String elementId, final String[] classes) {
-
 		List<CSSStyleDeclarationImpl> declaration = new ArrayList<CSSStyleDeclarationImpl>();
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = selects(getRuleIndex(), element, elementName, false, classes);
 
 		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
 			declaration.add(entry.getRule().getStyle());
 		}
-
 		return declaration;
 	}
 
@@ -152,7 +150,7 @@ public class StyleSheetAggregator {
 		return matchingRules;
 	}
 
-	private static boolean selects(final Selector selector, final HTMLElement element, final String pseudoElement,
+	private boolean selects(final Selector selector, final HTMLElement element, final String pseudoElement,
 			final boolean fromQuerySelectorAll) {
 		switch (selector.getSelectorType()) {
 		case ELEMENT_NODE_SELECTOR:
@@ -233,7 +231,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static boolean selects(final Condition condition, final HTMLElement element, final boolean fromQuerySelectorAll) {
+	private boolean selects(final Condition condition, final HTMLElement element, final boolean fromQuerySelectorAll) {
 
 		switch (condition.getConditionType()) {
 		case ID_CONDITION:
@@ -303,7 +301,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static boolean selects(final String condition, final String attribute, final char separator) {
+	private boolean selects(final String condition, final String attribute, final char separator) {
 		final int conditionLength = condition.length();
 		if (conditionLength < 1) {
 			return false;
@@ -330,7 +328,7 @@ public class StyleSheetAggregator {
 		return attribute.equals(condition);
 	}
 
-	private static boolean selectsWhitespaceSeparated(final String condition, final String attribute) {
+	private boolean selectsWhitespaceSeparated(final String condition, final String attribute) {
 		final int conditionLength = condition.length();
 		if (conditionLength < 1 || attribute == null) {
 			return false;
@@ -357,7 +355,7 @@ public class StyleSheetAggregator {
 		return false;
 	}
 
-	private static boolean selectsPseudoClass(final Condition condition, final HTMLElement element,
+	private boolean selectsPseudoClass(final Condition condition, final HTMLElement element,
 			final boolean fromQuerySelectorAll) {
 
 		final String value = condition.getValue();
@@ -524,7 +522,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static void validateSelectors(final SelectorList selectorList, final int documentMode, final Node domNode)
+	private void validateSelectors(final SelectorList selectorList, final int documentMode, final Node domNode)
 			throws CSSException {
 		for (Selector selector : selectorList) {
 			if (!isValidSelector(selector, documentMode, domNode)) {
@@ -533,7 +531,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static boolean isValidSelector(final Selector selector, final int documentMode, final Node domNode) {
+	private boolean isValidSelector(final Selector selector, final int documentMode, final Node domNode) {
 		switch (selector.getSelectorType()) {
 		case ELEMENT_NODE_SELECTOR:
 			final List<Condition> conditions = ((ElementSelector) selector).getConditions();
@@ -566,7 +564,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static boolean isValidCondition(final Condition condition, final int documentMode, final Node domNode) {
+	private boolean isValidCondition(final Condition condition, final int documentMode, final Node domNode) {
 		switch (condition.getConditionType()) {
 		case ATTRIBUTE_CONDITION:
 		case ID_CONDITION:
@@ -605,7 +603,7 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static boolean isEmpty(final HTMLElement element) {
+	private boolean isEmpty(final HTMLElement element) {
 		for (Node n = element.getFirstChild(); n != null; n = n.getNextSibling()) {
 			if (n instanceof HTMLElement || n instanceof Text) {
 				return false;
@@ -614,7 +612,7 @@ public class StyleSheetAggregator {
 		return true;
 	}
 
-	private static boolean getNth(final String nth, final int index) {
+	private boolean getNth(final String nth, final int index) {
 		if ("odd".equalsIgnoreCase(nth)) {
 			return index % 2 != 0;
 		}

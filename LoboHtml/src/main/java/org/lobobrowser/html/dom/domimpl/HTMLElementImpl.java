@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -92,7 +93,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			final String id = getId();
 			final String elementName = getTagName();
 			final String[] classNameArray = Strings.split(classNames);
-			final Collection<CSSStyleDeclarationImpl> sds = findStyleDeclarations(elementName, id, classNameArray);
+			final List<CSSStyleDeclarationImpl> sds = findStyleDeclarations(elementName, id, classNameArray);
 			if (sds != null) {
 				final Iterator<CSSStyleDeclarationImpl> sdsi = sds.iterator();
 				while (sdsi.hasNext()) {
@@ -117,7 +118,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 					style.addStyleDeclaration(sd);
 				}
 			}
-		}
+		}		
 		return style;
 	}
 
@@ -187,7 +188,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
-	protected final Collection<CSSStyleDeclarationImpl> findStyleDeclarations(String elementName, String id, String[] classes) {
+	protected final List<CSSStyleDeclarationImpl> findStyleDeclarations(String elementName, String id, String[] classes) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
 			return null;
@@ -673,15 +674,25 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	public void informInvalidAttibute(String normalName) {
-		// This is called when an attribute changes while
-		// the element is allowing notifications.
 		if ("style".equals(normalName)) {
-			forgetLocalStyle();
-		} else if ("id".equals(normalName) || "class".equals(normalName)) {
-			forgetStyle(false);
+			this.forgetLocalStyle();
 		}
-		// Call super implementation of informValid().
+		forgetStyle(true);
+		informInvalidRecursive();
+
+	}
+	
+	private void informInvalidRecursive() {
 		super.informInvalid();
+		NodeImpl[] nodeList = this.getChildrenArray();
+		if (nodeList != null) {
+			for (NodeImpl n : nodeList) {
+				if (n instanceof HTMLElementImpl) {
+					HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
+					htmlElementImpl.informInvalidRecursive();
+				}
+			}
+		}
 	}
 
 	private void invalidateDescendentsForHover() {
