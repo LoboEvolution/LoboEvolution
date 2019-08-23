@@ -338,26 +338,6 @@ public class HtmlValues implements CSSValuesProperties {
 		}
 	}
 
-	public static URL getURIFromStyleValue(String fullURLStyleValue) {
-		final String start = "url(";
-		if (!fullURLStyleValue.toLowerCase().startsWith(start)) {
-			return null;
-		}
-		final int startIdx = start.length();
-		final int closingIdx = fullURLStyleValue.lastIndexOf(')');
-		if (closingIdx == -1) {
-			return null;
-		}
-		final String quotedUri = fullURLStyleValue.substring(startIdx, closingIdx);
-		final String tentativeUri = unquoteAndUnescape(quotedUri);
-		try {
-			return Urls.createURL(null, tentativeUri);
-		} catch (final Exception mfu) {
-			logger.log(Level.WARNING, "Unable to create URL for URI=[" + tentativeUri + "].", mfu);
-			return null;
-		}
-	}
-
 	public static boolean isBackgroundPosition(String token) {
 		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase("top")
 				|| token.equalsIgnoreCase("center") || token.equalsIgnoreCase("bottom")

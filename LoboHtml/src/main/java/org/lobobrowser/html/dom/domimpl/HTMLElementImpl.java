@@ -25,10 +25,10 @@ package org.lobobrowser.html.dom.domimpl;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -51,11 +51,9 @@ import org.lobobrowser.html.style.StyleSheetRenderState;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.css.CSSStyleDeclaration;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
@@ -84,7 +82,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * 
 	 * @param style
 	 */
-	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style, Set<String> pseudoNames) {
+	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style) {
 		final Node pn = this.parentNode;
 		if (pn == null) {
 			// do later
@@ -95,24 +93,21 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			final String id = getId();
 			final String elementName = getTagName();
 			final String[] classNameArray = Strings.split(classNames);
-			for (int i = classNameArray.length; --i >= 0;) {
-				final String className = classNameArray[i];
-				final Collection<CSSStyleDeclarationImpl> sds = findStyleDeclarations(elementName, id, className, pseudoNames);
-				if (sds != null) {
-					final Iterator<CSSStyleDeclarationImpl> sdsi = sds.iterator();
-					while (sdsi.hasNext()) {
-						final CSSStyleDeclarationImpl sd = sdsi.next();
-						if (style == null) {
-							style = new ComputedCSSProperties(this);
-						}
-						style.addStyleDeclaration(sd);
+			final List<CSSStyleDeclarationImpl> sds = findStyleDeclarations(elementName, id, classNameArray);
+			if (sds != null) {
+				final Iterator<CSSStyleDeclarationImpl> sdsi = sds.iterator();
+				while (sdsi.hasNext()) {
+					final CSSStyleDeclarationImpl sd = sdsi.next();
+					if (style == null) {
+						style = new ComputedCSSProperties(this);
 					}
+					style.addStyleDeclaration(sd);
 				}
 			}
 		} else {
 			final String id = getId();
 			final String elementName = getTagName();
-			final Collection<?> sds = findStyleDeclarations(elementName, id, null, pseudoNames);
+			final Collection<?> sds = findStyleDeclarations(elementName, id, null);
 			if (sds != null) {
 				final Iterator<?> sdsi = sds.iterator();
 				while (sdsi.hasNext()) {
@@ -123,7 +118,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 					style.addStyleDeclaration(sd);
 				}
 			}
-		}
+		}		
 		return style;
 	}
 
@@ -193,13 +188,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
-	protected final Collection<CSSStyleDeclarationImpl> findStyleDeclarations(String elementName, String id, String className, Set<String> pseudoNames) {
+	protected final List<CSSStyleDeclarationImpl> findStyleDeclarations(String elementName, String id, String[] classes) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
 			return null;
 		}
 		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-		return ssa.getActiveStyleDeclarations(this, elementName, id, className, pseudoNames);
+		return ssa.getActiveStyleDeclarations(this, elementName, id, classes);
 	}
 
 	protected final void forgetLocalStyle() {
@@ -329,12 +324,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 				}
 			}
 		}
-		// Can't do the following in synchronized block (reverse locking order with
-		// document).
-		// First, add declarations from stylesheet
-		final Set<String> pes = pseudoElement.length() == 0 ? null : Collections.singleton(pseudoElement);
+
 		AbstractCSSProperties sds = createDefaultStyleSheet();
-		sds = addStyleSheetDeclarations(sds, pes);
+		sds = addStyleSheetDeclarations(sds);
 		// Now add local style if any.
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
@@ -378,7 +370,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		// document).
 		// First, add declarations from stylesheet
 		sds = createDefaultStyleSheet();
-		sds = addStyleSheetDeclarations(sds, getPseudoNames());
+		sds = addStyleSheetDeclarations(sds);
 		// Now add local style if any.
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
@@ -682,15 +674,25 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	public void informInvalidAttibute(String normalName) {
-		// This is called when an attribute changes while
-		// the element is allowing notifications.
 		if ("style".equals(normalName)) {
-			forgetLocalStyle();
-		} else if ("id".equals(normalName) || "class".equals(normalName)) {
-			forgetStyle(false);
+			this.forgetLocalStyle();
 		}
-		// Call super implementation of informValid().
+		forgetStyle(true);
+		informInvalidRecursive();
+
+	}
+	
+	private void informInvalidRecursive() {
 		super.informInvalid();
+		NodeImpl[] nodeList = this.getChildrenArray();
+		if (nodeList != null) {
+			for (NodeImpl n : nodeList) {
+				if (n instanceof HTMLElementImpl) {
+					HTMLElementImpl htmlElementImpl = (HTMLElementImpl) n;
+					htmlElementImpl.informInvalidRecursive();
+				}
+			}
+		}
 	}
 
 	private void invalidateDescendentsForHover() {
