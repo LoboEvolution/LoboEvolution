@@ -24,10 +24,9 @@ package org.lobobrowser.html.dom.domimpl;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,9 +41,7 @@ import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.parser.HtmlParser;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.CSSPropertiesContext;
-import org.lobobrowser.html.style.ComputedCSSProperties;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.LocalCSSProperties;
 import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.html.style.StyleSheetRenderState;
@@ -53,6 +50,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
@@ -85,40 +83,19 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style) {
 		final Node pn = this.parentNode;
 		if (pn == null) {
-			// do later
 			return style;
 		}
 		final String classNames = getClassName();
-		if (classNames != null && classNames.length() != 0) {
-			final String id = getId();
-			final String elementName = getTagName();
-			final String[] classNameArray = Strings.split(classNames);
-			final List<CSSStyleDeclarationImpl> sds = findStyleDeclarations(elementName, id, classNameArray);
-			if (sds != null) {
-				final Iterator<CSSStyleDeclarationImpl> sdsi = sds.iterator();
-				while (sdsi.hasNext()) {
-					final CSSStyleDeclarationImpl sd = sdsi.next();
-					if (style == null) {
-						style = new ComputedCSSProperties(this);
-					}
-					style.addStyleDeclaration(sd);
-				}
+		final String elementName = getTagName();
+		final String[] classNameArray = Strings.isNotBlank(classNames) ? Strings.split(classNames) : null;
+		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = findStyleDeclarations(elementName, classNameArray);
+		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+			final CSSStyleDeclarationImpl cssStyleDeclarationImpl = entry.getRule().getStyle();
+			if (style == null) {
+				style = new AbstractCSSProperties(this);
 			}
-		} else {
-			final String id = getId();
-			final String elementName = getTagName();
-			final Collection<?> sds = findStyleDeclarations(elementName, id, null);
-			if (sds != null) {
-				final Iterator<?> sdsi = sds.iterator();
-				while (sdsi.hasNext()) {
-					final CSSStyleDeclarationImpl sd = (CSSStyleDeclarationImpl) sdsi.next();
-					if (style == null) {
-						style = new ComputedCSSProperties(this);
-					}
-					style.addStyleDeclaration(sd);
-				}
-			}
-		}		
+			style.addStyleDeclaration(cssStyleDeclarationImpl);
+		}
 		return style;
 	}
 
@@ -188,13 +165,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
-	protected final List<CSSStyleDeclarationImpl> findStyleDeclarations(String elementName, String id, String[] classes) {
+	protected final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
-			return null;
+			return new ArrayList<CSSStyleSheetImpl.SelectorEntry>();
 		}
 		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
-		return ssa.getActiveStyleDeclarations(this, elementName, id, classes);
+		return ssa.getActiveStyleDeclarations(this, elementName, classes);
 	}
 
 	protected final void forgetLocalStyle() {
@@ -206,8 +183,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	protected final void forgetStyle(boolean deep) {
-		// TODO: OPTIMIZATION: If we had a ComputedStyle map in
-		// window (Mozilla model) the map could be cleared in one shot.
 		synchronized (this) {
 			this.currentStyleDeclarationState = null;
 			this.computedStyles = null;
@@ -330,7 +305,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		// Now add local style if any.
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
-			sds = new ComputedCSSProperties(this);
+			sds = new AbstractCSSProperties(this);
 			sds.setLocalStyleProperties(localStyle);
 		} else {
 			sds.setLocalStyleProperties(localStyle);
@@ -374,7 +349,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		// Now add local style if any.
 		final AbstractCSSProperties localStyle = getStyle();
 		if (sds == null) {
-			sds = new ComputedCSSProperties(this);
+			sds = new AbstractCSSProperties(this);
 			sds.setLocalStyleProperties(localStyle);
 		} else {
 			sds.setLocalStyleProperties(localStyle);
@@ -578,7 +553,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (sds != null) {
 				return sds;
 			}
-			sds = new LocalCSSProperties(this);
+			sds = new AbstractCSSProperties(this);
 			// Add any declarations in style attribute (last takes precedence).
 			final String style = getAttribute("style");
 			if (style != null && style.length() != 0) {
@@ -589,8 +564,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 				} catch (final Exception err) {
 					final String id = getId();
 					final String withId = id == null ? "" : " with ID '" + id + "'";
-					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in "
-							+ getDocumentURL() + ".", err);
+					this.warn("Unable to parse style attribute value for element " + getTagName() + withId + " in " + getDocumentURL() + ".", err);
 				}
 			}
 			this.localStyleDeclarationState = sds;
@@ -619,8 +593,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (classNames != null && classNames.length() != 0) {
 				classNameArray = Strings.split(classNames);
 			}
-			ihs = Boolean
-					.valueOf(ssa.affectedByPseudoNameInAncestor(this, this, elementName, id, classNameArray, "hover"));
+			ihs = Boolean.valueOf(ssa.affectedByPseudoNameInAncestor(this, this, elementName, id, classNameArray, "hover"));
 		}
 		synchronized (this) {
 			this.isHoverStyle = ihs;
@@ -652,8 +625,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (classNames != null && classNames.length() != 0) {
 				classNameArray = Strings.split(classNames);
 			}
-			hhs = Boolean.valueOf(
-					ssa.affectedByPseudoNameInAncestor(this, ancestor, elementName, id, classNameArray, "hover"));
+			hhs = Boolean.valueOf(ssa.affectedByPseudoNameInAncestor(this, ancestor, elementName, id, classNameArray, "hover"));
 		}
 		synchronized (this) {
 			ihs = this.hasHoverStyleByElement;

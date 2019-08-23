@@ -51,7 +51,6 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobo.common.GUITasks;
-import org.w3c.dom.Node;
 import org.w3c.dom.css.CSS3Properties;
 
 abstract class BaseElementRenderable extends BaseRCollection
@@ -91,6 +90,8 @@ abstract class BaseElementRenderable extends BaseRCollection
 	protected final UserAgentContext userAgentContext;
 
 	protected int zIndex;
+	
+	private BackgroundInfo binfo;
 
 	public BaseElementRenderable(RenderableContainer container, ModelNode modelNode, UserAgentContext ucontext) {
 		super(container, modelNode);
@@ -164,16 +165,8 @@ abstract class BaseElementRenderable extends BaseRCollection
 					"Element without render state: " + rootElement + "; parent=" + rootElement.getParentNode());
 		}
 		
-		BackgroundInfo binfo = rs.getBackgroundInfo();
-        if (isRootBlock && (binfo == null || (binfo.backgroundColor == null && binfo.backgroundImage == null))) {
-            final Node bodyNode = rootElement.getElementsByTagName("body").item(0);
-            if (bodyNode != null && bodyNode instanceof HTMLElementImpl) {
-                final HTMLElementImpl bodyElement = (HTMLElementImpl) bodyNode;
-                binfo = bodyElement.getRenderState().getBackgroundInfo();
-            }
-        }
-		
-		this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
+		binfo = rs.getBackgroundInfo();	
+        this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
 		final URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
@@ -698,15 +691,11 @@ abstract class BaseElementRenderable extends BaseRCollection
 			}
 		}
 	}
-
-	/**
-	 * All overriders should call super implementation.
-	 */
+	
 	@Override
-	public void paint(Graphics g) {
-	}
+	public void paint(Graphics g) {}
 
-	protected void prePaint(java.awt.Graphics g) {
+	protected void prePaint(Graphics g) {
 		final int startWidth = this.width;
 		final int startHeight = this.height;
 		int totalWidth = startWidth;
@@ -714,6 +703,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		int startX = 0;
 		int startY = 0;
 		final ModelNode node = this.modelNode;
+		
 		final RenderState rs = node.getRenderState();
 		final Insets marginInsets = this.marginInsets;
 		if (marginInsets != null) {
@@ -734,7 +724,11 @@ abstract class BaseElementRenderable extends BaseRCollection
 					bkgBounds = clientG.getClipBounds();
 					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
 				}
-				final BackgroundInfo binfo = rs == null ? null : rs.getBackgroundInfo();
+				
+				if(binfo == null) {
+					binfo = rs == null ? null : rs.getBackgroundInfo();
+				}				
+				
 				final Image image = this.backgroundImage;
 				if (image != null) {
 					if (bkgBounds == null) {
@@ -752,11 +746,23 @@ abstract class BaseElementRenderable extends BaseRCollection
 			            
 			            final int topX = bkgBounds.x + bkgBounds.width;
 			            final int topY = bkgBounds.y + bkgBounds.height;
-						
-						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
-							case BackgroundInfo.BR_NO_REPEAT:
-								clientG.drawImage(image, imageX, imageY, w, h, this);
-								break;
+			            
+			            switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
+						case BackgroundInfo.BR_NO_REPEAT:
+							int _imageX;
+							if (binfo.backgroundXPositionAbsolute) {
+								_imageX = binfo.backgroundXPosition;
+							} else {
+								_imageX = binfo.backgroundXPosition * (totalWidth - w) / 100;
+							}
+							int _imageY;
+							if (binfo.backgroundYPositionAbsolute) {
+								_imageY = binfo.backgroundYPosition;
+							} else {
+								_imageY = binfo.backgroundYPosition * (totalHeight - h) / 100;
+							}
+							g.drawImage(image, _imageX, _imageY, w, h, this);
+							break;
 	
 							case BackgroundInfo.BR_REPEAT_X:
 	

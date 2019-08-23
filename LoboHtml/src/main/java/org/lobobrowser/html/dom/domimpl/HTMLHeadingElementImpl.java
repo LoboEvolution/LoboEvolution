@@ -22,7 +22,6 @@ package org.lobobrowser.html.dom.domimpl;
 
 import org.lobobrowser.html.dom.HTMLHeadingElement;
 import org.lobobrowser.html.style.AbstractCSSProperties;
-import org.lobobrowser.html.style.ComputedCSSProperties;
 import org.lobobrowser.html.style.HeadingRenderState;
 import org.lobobrowser.html.style.RenderState;
 
@@ -59,9 +58,9 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 
 	@Override
 	protected AbstractCSSProperties createDefaultStyleSheet() {
-		final ComputedCSSProperties css = new ComputedCSSProperties(this);
-		css.internalSetLC("font-size", getHeadingFontSizeText());
-		css.internalSetLC("font-weight", "bolder");
+		final AbstractCSSProperties css = new AbstractCSSProperties(this);
+		css.setPropertyValueLCAlt("font-size", getHeadingFontSizeText(), false);
+		css.setPropertyValueLCAlt("font-weight", "bolder", false);
 		return css;
 	}
 

@@ -24,9 +24,9 @@
 package org.lobobrowser.html.style;
 
 import java.net.URL;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +40,9 @@ import org.w3c.dom.css.CSS3Properties;
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.Property;
 
-public abstract class AbstractCSSProperties extends AbstractScriptableDelegate implements CSS3Properties {
+public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSS3Properties {
 	private static class BackgroundImageSetter implements SubPropertySetter {
 		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration) {
 			this.changeValue(properties, newValue, declaration, true);
@@ -333,11 +334,11 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 		}
 	}
 
-	private static class Property {
+	private static class PropertyCSS {
 		public final boolean important;
 		public final String value;
 
-		public Property(final String value, final boolean important) {
+		public PropertyCSS(final String value, final boolean important) {
 			this.value = value;
 			this.important = important;
 		}
@@ -783,9 +784,9 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 
 	private String overlayColor;
 
-	private Collection<CSSStyleDeclarationImpl> styleDeclarations;
+	private List<CSSStyleDeclarationImpl> styleDeclarations;
 
-	private Map<String, Property> valueMap = null;
+	private Map<String, PropertyCSS> valueMap = null;
 
 	public AbstractCSSProperties(CSSPropertiesContext context) {
 		this.context = context;
@@ -793,13 +794,13 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 
 	public void addStyleDeclaration(CSSStyleDeclarationImpl styleDeclaration) {
 		synchronized (this) {
-			Collection<CSSStyleDeclarationImpl> sd = this.styleDeclarations;
+			List<CSSStyleDeclarationImpl> sd = this.styleDeclarations;
 			if (sd == null) {
 				sd = new LinkedList<CSSStyleDeclarationImpl>();
 				this.styleDeclarations = sd;
 			}
 			sd.add(styleDeclaration);
-			for (com.gargoylesoftware.css.dom.Property prop : styleDeclaration.getProperties()) {
+			for (Property prop : styleDeclaration.getProperties()) {
 				final String propertyName = prop.getName();
 				final String propertyValue = styleDeclaration.getPropertyValue(propertyName);
 				final String priority = styleDeclaration.getPropertyPriority(propertyName);
@@ -3491,7 +3492,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	}
 
 	private final String getPropertyValueLC(String lowerCaseName) {
-		final Map<String, Property> vm = this.valueMap;
+		final Map<String, PropertyCSS> vm = this.valueMap;
 		synchronized (this) {
 			// Local properties have precedence
 			final AbstractCSSProperties localProps = this.localStyleProperties;
@@ -3502,7 +3503,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 				}
 			}
 			if (vm != null) {
-				final Property p = (Property) vm.get(lowerCaseName);
+				final PropertyCSS p = (PropertyCSS) vm.get(lowerCaseName);
 				return p == null ? null : p.value;
 			}
 		}
@@ -3510,37 +3511,36 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	}
 	
 	protected void setPropertyValueLC(String lowerCaseName, String value) {
-		Map<String, Property> vm = this.valueMap;
+		Map<String, PropertyCSS> vm = this.valueMap;
 		synchronized (this) {
 			if (vm == null) {
-				vm = new HashMap<String, Property>(1);
+				vm = new HashMap<String, PropertyCSS>(1);
 				this.valueMap = vm;
 			}
-			vm.put(lowerCaseName, new Property(value, true));
+			vm.put(lowerCaseName, new PropertyCSS(value, true));
 		}
 	}
 	
-	protected final void setPropertyValueLCAlt(String lowerCaseName, String value, boolean important) {
-		Map<String, Property> vm = this.valueMap;
+	public final void setPropertyValueLCAlt(String lowerCaseName, String value, boolean important) {
+		Map<String, PropertyCSS> vm = this.valueMap;
 		synchronized (this) {
 			if (vm == null) {
-				vm = new HashMap<String, Property>(1);
+				vm = new HashMap<String, PropertyCSS>(1);
 				this.valueMap = vm;
 			} else {
 				if (!important) {
-					final Property oldProperty = (Property) vm.get(lowerCaseName);
+					final PropertyCSS oldProperty = (PropertyCSS) vm.get(lowerCaseName);
 					if (oldProperty != null && oldProperty.important) {
 						// Ignore setting
 						return;
 					}
 				}
 			}
-			vm.put(lowerCaseName, new Property(value, important));
+			vm.put(lowerCaseName, new PropertyCSS(value, important));
 		}
 	}
 	
-	protected final void setPropertyValueProcessed(String lowerCaseName, String value, CSSStyleDeclarationImpl declaration,
-			boolean important) {
+	protected final void setPropertyValueProcessed(String lowerCaseName, String value, CSSStyleDeclarationImpl declaration,boolean important) {
 		final SubPropertySetter setter = (SubPropertySetter) SUB_SETTERS.get(lowerCaseName);
 		if (setter != null) {
 			setter.changeValue(this, value, declaration, important);
@@ -3562,7 +3562,7 @@ public abstract class AbstractCSSProperties extends AbstractScriptableDelegate i
 	public String toString() {
 		int size;
 		synchronized (this) {
-			final Map<String, Property> map = this.valueMap;
+			final Map<String, PropertyCSS> map = this.valueMap;
 			size = map == null ? 0 : map.size();
 		}
 		return this.getClass().getSimpleName() + "[size=" + size + "]";

@@ -74,8 +74,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.UserDataHandler;
-import org.w3c.dom.css.CSSStyleSheet;
-import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 import org.xml.sax.ErrorHandler;
@@ -515,7 +513,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		synchronized (this.treeLock) {
 			StyleSheetAggregator ssa = this.styleSheetAggregator;
 			if (ssa == null) {
-				ssa = new StyleSheetAggregator(this);
+				ssa = new StyleSheetAggregator();
 				try {
                     ssa.addStyleSheets(this.styleSheets.getCSSStyleSheets());
 				} catch (Exception mfu) {

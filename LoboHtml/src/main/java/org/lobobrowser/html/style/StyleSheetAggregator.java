@@ -23,7 +23,6 @@ package org.lobobrowser.html.style;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -36,16 +35,15 @@ import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLInputElement;
 import org.lobobrowser.html.dom.HTMLSelectElement;
 import org.lobobrowser.html.dom.HTMLTextAreaElement;
-import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 import org.w3c.dom.css.CSSStyleSheet;
+
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
@@ -61,8 +59,8 @@ import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
 import com.gargoylesoftware.css.parser.selector.ElementSelector;
 import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
-import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
+import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.parser.selector.SimpleSelector;
@@ -78,24 +76,12 @@ import com.gargoylesoftware.css.parser.selector.SimpleSelector;
  */
 public class StyleSheetAggregator {
 
-	private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
-	private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
 	private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
 
-	private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(
-			Arrays.asList("link", "visited", "hover", "active", "focus", "lang", "first-child"));
-
-	private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(
-			Arrays.asList("checked", "disabled", "enabled", "indeterminated", "root", "target", "not()", "nth-child()",
-					"nth-last-child()", "nth-of-type()", "nth-last-of-type()", "last-child", "first-of-type",
-					"last-of-type", "only-child", "only-of-type", "empty", "optional", "required"));
-
-	private final HTMLDocumentImpl document;
+	private final List<CSSStyleSheetImpl> styleSheets;
 	
-	CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = null;
-
-	public StyleSheetAggregator(HTMLDocumentImpl document) {
-		this.document = document;
+	public StyleSheetAggregator() {
+		styleSheets = new ArrayList<CSSStyleSheetImpl>();
 	}
 
 	public final void addStyleSheets(List<CSSStyleSheetImpl> styleSheets) throws Exception {
@@ -108,23 +94,19 @@ public class StyleSheetAggregator {
 			String elementName, String elementId, String[] classArray, String pseudoName) {
 		return false;
 	}
-
-	public final List<CSSStyleDeclarationImpl> getActiveStyleDeclarations(HTMLElementImpl element, String elementName,
-			String elementId, final String[] classes) {
-		List<CSSStyleDeclarationImpl> declaration = new ArrayList<CSSStyleDeclarationImpl>();
-		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = selects(getRuleIndex(), element, elementName, false, classes);
-
-		for (CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
-			declaration.add(entry.getRule().getStyle());
+	
+	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, final String[] classes) {
+		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<CSSStyleSheetImpl.SelectorEntry>();
+		
+		for (CSSStyleSheetImpl sheet : styleSheets) {
+			if(matchingRules.size() == 0) {
+				matchingRules = selects(sheet.getRuleIndex(), element, elementName, false, classes);
+			} else {
+				final List<CSSStyleSheetImpl.SelectorEntry> _matchingRules = selects(sheet.getRuleIndex(), element, elementName, false, classes);
+				matchingRules.addAll(_matchingRules);
+			}
 		}
-		return declaration;
-	}
-
-	private CSSStyleSheetImpl.CSSStyleSheetRuleIndex getRuleIndex() {
-		if (index == null) {
-			index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
-		}
-		return index;
+		return matchingRules;
 	}
 
 	private List<CSSStyleSheetImpl.SelectorEntry> selects(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
@@ -232,7 +214,6 @@ public class StyleSheetAggregator {
 	}
 
 	private boolean selects(final Condition condition, final HTMLElement element, final boolean fromQuerySelectorAll) {
-
 		switch (condition.getConditionType()) {
 		case ID_CONDITION:
 			return condition.getValue().equals(element.getId());
@@ -259,17 +240,17 @@ public class StyleSheetAggregator {
 		case PREFIX_ATTRIBUTE_CONDITION:
 			final String prefixValue = condition.getValue();
 			String attr = element.getAttribute(condition.getLocalName());
-			return !"".equals(prefixValue) && Strings.isNotBlank(attr) && element.getAttribute(condition.getLocalName()).startsWith(prefixValue);
+			return !"".equals(prefixValue) && Strings.isNotBlank(attr) && attr.startsWith(prefixValue);
 
 		case SUFFIX_ATTRIBUTE_CONDITION:
 			final String suffixValue = condition.getValue();
 			String attrib = element.getAttribute(condition.getLocalName());
-			return !"".equals(suffixValue) && Strings.isNotBlank(attrib) && element.getAttribute(condition.getLocalName()).endsWith(suffixValue);
+			return !"".equals(suffixValue) && Strings.isNotBlank(attrib) && attrib.endsWith(suffixValue);
 
 		case SUBSTRING_ATTRIBUTE_CONDITION:
 			final String substringValue = condition.getValue();
-			return !"".equals(substringValue)
-					&& element.getAttribute(condition.getLocalName()).contains(substringValue);
+			String attribu = element.getAttribute(condition.getLocalName());
+			return !"".equals(substringValue) && Strings.isNotBlank(attribu) && attribu.contains(substringValue);
 
 		case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
 			final String v = condition.getValue();
@@ -510,96 +491,13 @@ public class StyleSheetAggregator {
 					if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
 						throw new CSSException("Invalid selectors: " + selectors);
 					}
-
-					validateSelectors(selectorList, 9, element);
-
+					
 					return !selects(selectorList.get(0), element, null, fromQuerySelectorAll);
 				} catch (final IOException e) {
 					throw new CSSException("Error parsing CSS selectors from '" + selectors + "': " + e.getMessage());
 				}
 			}
 			return false;
-		}
-	}
-
-	private void validateSelectors(final SelectorList selectorList, final int documentMode, final Node domNode)
-			throws CSSException {
-		for (Selector selector : selectorList) {
-			if (!isValidSelector(selector, documentMode, domNode)) {
-				throw new CSSException("Invalid selector: " + selector);
-			}
-		}
-	}
-
-	private boolean isValidSelector(final Selector selector, final int documentMode, final Node domNode) {
-		switch (selector.getSelectorType()) {
-		case ELEMENT_NODE_SELECTOR:
-			final List<Condition> conditions = ((ElementSelector) selector).getConditions();
-			if (conditions != null) {
-				for (Condition condition : conditions) {
-					if (!isValidCondition(condition, documentMode, domNode)) {
-						return false;
-					}
-				}
-			}
-			return true;
-		case DESCENDANT_SELECTOR:
-			final DescendantSelector ds = (DescendantSelector) selector;
-			return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
-					&& isValidSelector(ds.getSimpleSelector(), documentMode, domNode);
-		case CHILD_SELECTOR:
-			final ChildSelector cs = (ChildSelector) selector;
-			return isValidSelector(cs.getAncestorSelector(), documentMode, domNode)
-					&& isValidSelector(cs.getSimpleSelector(), documentMode, domNode);
-		case DIRECT_ADJACENT_SELECTOR:
-			final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-			return isValidSelector(das.getSelector(), documentMode, domNode)
-					&& isValidSelector(das.getSimpleSelector(), documentMode, domNode);
-		case GENERAL_ADJACENT_SELECTOR:
-			final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-			return isValidSelector(gas.getSelector(), documentMode, domNode)
-					&& isValidSelector(gas.getSimpleSelector(), documentMode, domNode);
-		default:
-			return true; // at least in a first time to break less stuff
-		}
-	}
-
-	private boolean isValidCondition(final Condition condition, final int documentMode, final Node domNode) {
-		switch (condition.getConditionType()) {
-		case ATTRIBUTE_CONDITION:
-		case ID_CONDITION:
-		case LANG_CONDITION:
-		case ONE_OF_ATTRIBUTE_CONDITION:
-		case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-		case CLASS_CONDITION:
-		case PREFIX_ATTRIBUTE_CONDITION:
-		case SUBSTRING_ATTRIBUTE_CONDITION:
-		case SUFFIX_ATTRIBUTE_CONDITION:
-			return true;
-		case PSEUDO_CLASS_CONDITION:
-			String value = condition.getValue();
-			if (value.endsWith(")")) {
-				if (value.endsWith("()")) {
-					return false;
-				}
-				value = value.substring(0, value.indexOf('(') + 1) + ')';
-			}
-			if (documentMode < 9) {
-				return CSS2_PSEUDO_CLASSES.contains(value);
-			}
-
-			if (!CSS2_PSEUDO_CLASSES.contains(value) && !domNode.hasChildNodes()) {
-				throw new CSSException("Syntax Error");
-			}
-
-			if ("nth-child()".equals(value)) {
-				final String arg = Strings.substringBetween(condition.getValue(), "(", ")").trim();
-				return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg) || NTH_NUMERIC.matcher(arg).matches()
-						|| NTH_COMPLEX.matcher(arg).matches();
-			}
-			return CSS3_PSEUDO_CLASSES.contains(value);
-		default:
-			return true;
 		}
 	}
 
@@ -650,15 +548,16 @@ public class StyleSheetAggregator {
 
 	private final void addStyleSheet(CSSStyleSheetImpl styleSheet) throws Exception {
 		CSSRuleListImpl ruleList = styleSheet.getCssRules();
-		index = styleSheet.getRuleIndex();
+		CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
 		if (index == null) {
 			index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
 		}
 		index(index, ruleList, new HashSet<String>());
+		styleSheet.setRuleIndex(index);
+		styleSheets.add(styleSheet);
 	}
 
-	private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList,
-			final Set<String> alreadyProcessing) {
+	private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList, final Set<String> alreadyProcessing) {
 		for (AbstractCSSRuleImpl rule : ruleList.getRules()) {
 			if (rule instanceof CSSStyleRuleImpl) {
 				final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
