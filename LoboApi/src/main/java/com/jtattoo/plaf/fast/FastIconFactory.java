@@ -1,260 +1,262 @@
 /*
 * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
+*
 * JTattoo is multiple licensed. If your are an open source developer you can use
 * it under the terms and conditions of the GNU General Public License version 2.0
 * or later as published by the Free Software Foundation.
-*  
+*
 * see: gpl-2.0.txt
-* 
+*
 * If you pay for a license you will become a registered user who could use the
 * software under the terms and conditions of the GNU Lesser General Public License
 * version 2.0 or later with classpath exception as published by the Free Software
 * Foundation.
-* 
+*
 * see: lgpl-2.0.txt
 * see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
+*
+* Registered users could also use JTattoo under the terms and conditions of the
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
+*
 * see: APACHE-LICENSE-2.0.txt
  */
 package com.jtattoo.plaf.fast;
 
-import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
+
+import com.jtattoo.plaf.AbstractIconFactory;
+import com.jtattoo.plaf.BaseIcons;
 
 /**
  * @author Michael Hagen
  */
 public class FastIconFactory implements AbstractIconFactory {
 
-    private static FastIconFactory instance = null;
+	private static FastIconFactory instance = null;
 
-    private FastIconFactory() {
-    }
+	public static synchronized FastIconFactory getInstance() {
+		if (instance == null) {
+			instance = new FastIconFactory();
+		}
+		return instance;
+	}
 
-    public static synchronized FastIconFactory getInstance() {
-        if (instance == null) {
-            instance = new FastIconFactory();
-        }
-        return instance;
-    }
+	private FastIconFactory() {
+	}
 
-    @Override
-    public Icon getOptionPaneErrorIcon() {
-        return FastIcons.getOptionPaneErrorIcon();
-    }
+	@Override
+	public Icon getCheckBoxIcon() {
+		return BaseIcons.getCheckBoxIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneWarningIcon() {
-        return FastIcons.getOptionPaneWarningIcon();
-    }
+	@Override
+	public Icon getCloseIcon() {
+		return BaseIcons.getCloseIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneInformationIcon() {
-        return FastIcons.getOptionPaneInformationIcon();
-    }
+	@Override
+	public Icon getComboBoxIcon() {
+		return BaseIcons.getComboBoxIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneQuestionIcon() {
-        return FastIcons.getOptionPaneQuestionIcon();
-    }
+	@Override
+	public Icon getDownArrowIcon() {
+		return BaseIcons.getDownArrowIcon();
+	}
 
-    @Override
-    public Icon getFileChooserUpFolderIcon() {
-        return FastIcons.getFileChooserUpFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserDetailViewIcon() {
+		return BaseIcons.getFileChooserDetailViewIcon();
+	}
 
-    @Override
-    public Icon getFileChooserHomeFolderIcon() {
-        return FastIcons.getFileChooserHomeFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserHomeFolderIcon() {
+		return BaseIcons.getFileChooserHomeFolderIcon();
+	}
 
-    @Override
-    public Icon getFileChooserNewFolderIcon() {
-        return FastIcons.getFileChooserNewFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserListViewIcon() {
+		return BaseIcons.getFileChooserListViewIcon();
+	}
 
-    @Override
-    public Icon getFileChooserListViewIcon() {
-        return FastIcons.getFileChooserListViewIcon();
-    }
+	@Override
+	public Icon getFileChooserNewFolderIcon() {
+		return BaseIcons.getFileChooserNewFolderIcon();
+	}
 
-    @Override
-    public Icon getFileChooserDetailViewIcon() {
-        return FastIcons.getFileChooserDetailViewIcon();
-    }
+	@Override
+	public Icon getFileChooserUpFolderIcon() {
+		return BaseIcons.getFileChooserUpFolderIcon();
+	}
 
-    @Override
-    public Icon getFileViewComputerIcon() {
-        return FastIcons.getFileViewComputerIcon();
-    }
+	@Override
+	public Icon getFileViewComputerIcon() {
+		return BaseIcons.getFileViewComputerIcon();
+	}
 
-    @Override
-    public Icon getFileViewFloppyDriveIcon() {
-        return FastIcons.getFileViewFloppyDriveIcon();
-    }
+	@Override
+	public Icon getFileViewFloppyDriveIcon() {
+		return BaseIcons.getFileViewFloppyDriveIcon();
+	}
 
-    @Override
-    public Icon getFileViewHardDriveIcon() {
-        return FastIcons.getFileViewHardDriveIcon();
-    }
+	@Override
+	public Icon getFileViewHardDriveIcon() {
+		return BaseIcons.getFileViewHardDriveIcon();
+	}
 
-    @Override
-    public Icon getMenuIcon() {
-        return FastIcons.getMenuIcon();
-    }
+	@Override
+	public Icon getIconIcon() {
+		return BaseIcons.getIconIcon();
+	}
 
-    @Override
-    public Icon getIconIcon() {
-        return FastIcons.getIconIcon();
-    }
+	@Override
+	public Icon getLeftArrowIcon() {
+		return BaseIcons.getLeftArrowIcon();
+	}
 
-    @Override
-    public Icon getMaxIcon() {
-        return FastIcons.getMaxIcon();
-    }
+	@Override
+	public Icon getMaxIcon() {
+		return BaseIcons.getMaxIcon();
+	}
 
-    @Override
-    public Icon getMinIcon() {
-        return FastIcons.getMinIcon();
-    }
+	@Override
+	public Icon getMenuArrowIcon() {
+		return BaseIcons.getMenuArrowIcon();
+	}
 
-    @Override
-    public Icon getCloseIcon() {
-        return FastIcons.getCloseIcon();
-    }
+	@Override
+	public Icon getMenuCheckBoxIcon() {
+		return BaseIcons.getMenuCheckBoxIcon();
+	}
 
-    @Override
-    public Icon getPaletteCloseIcon() {
-        return FastIcons.getPaletteCloseIcon();
-    }
+	@Override
+	public Icon getMenuIcon() {
+		return BaseIcons.getMenuIcon();
+	}
 
-    @Override
-    public Icon getRadioButtonIcon() {
-        return FastIcons.getRadioButtonIcon();
-    }
+	@Override
+	public Icon getMenuRadioButtonIcon() {
+		return BaseIcons.getMenuRadioButtonIcon();
+	}
 
-    @Override
-    public Icon getCheckBoxIcon() {
-        return FastIcons.getCheckBoxIcon();
-    }
+	@Override
+	public Icon getMinIcon() {
+		return BaseIcons.getMinIcon();
+	}
 
-    @Override
-    public Icon getComboBoxIcon() {
-        return FastIcons.getComboBoxIcon();
-    }
+	@Override
+	public Icon getOptionPaneErrorIcon() {
+		return BaseIcons.getOptionPaneErrorIcon();
+	}
 
-    @Override
-    public Icon getTreeOpenIcon() {
-        return FastIcons.getTreeOpenedIcon();
-    }
+	@Override
+	public Icon getOptionPaneInformationIcon() {
+		return BaseIcons.getOptionPaneInformationIcon();
+	}
 
-    @Override
-    public Icon getTreeCloseIcon() {
-        return FastIcons.getTreeClosedIcon();
-    }
+	@Override
+	public Icon getOptionPaneQuestionIcon() {
+		return BaseIcons.getOptionPaneQuestionIcon();
+	}
 
-    @Override
-    public Icon getTreeLeafIcon() {
-        return FastIcons.getTreeLeafIcon();
-    }
+	@Override
+	public Icon getOptionPaneWarningIcon() {
+		return BaseIcons.getOptionPaneWarningIcon();
+	}
 
-    @Override
-    public Icon getTreeCollapsedIcon() {
-        return FastIcons.getTreeCollapsedIcon();
-    }
+	@Override
+	public Icon getPaletteCloseIcon() {
+		return BaseIcons.getPaletteCloseIcon();
+	}
 
-    @Override
-    public Icon getTreeExpandedIcon() {
-        return FastIcons.getTreeExpandedIcon();
-    }
+	@Override
+	public Icon getRadioButtonIcon() {
+		return BaseIcons.getRadioButtonIcon();
+	}
 
-    @Override
-    public Icon getMenuArrowIcon() {
-        return FastIcons.getMenuArrowIcon();
-    }
+	@Override
+	public Icon getRightArrowIcon() {
+		return BaseIcons.getRightArrowIcon();
+	}
 
-    @Override
-    public Icon getMenuCheckBoxIcon() {
-        return FastIcons.getMenuCheckBoxIcon();
-    }
+	@Override
+	public Icon getSplitterDownArrowIcon() {
+		return BaseIcons.getSplitterDownArrowIcon();
+	}
 
-    @Override
-    public Icon getMenuRadioButtonIcon() {
-        return FastIcons.getMenuRadioButtonIcon();
-    }
+	@Override
+	public Icon getSplitterHorBumpIcon() {
+		return BaseIcons.getSplitterHorBumpIcon();
+	}
 
-    @Override
-    public Icon getUpArrowIcon() {
-        return FastIcons.getUpArrowIcon();
-    }
+	@Override
+	public Icon getSplitterLeftArrowIcon() {
+		return BaseIcons.getSplitterLeftArrowIcon();
+	}
 
-    @Override
-    public Icon getDownArrowIcon() {
-        return FastIcons.getDownArrowIcon();
-    }
+	@Override
+	public Icon getSplitterRightArrowIcon() {
+		return BaseIcons.getSplitterRightArrowIcon();
+	}
 
-    @Override
-    public Icon getLeftArrowIcon() {
-        return FastIcons.getLeftArrowIcon();
-    }
+	@Override
+	public Icon getSplitterUpArrowIcon() {
+		return BaseIcons.getSplitterUpArrowIcon();
+	}
 
-    @Override
-    public Icon getRightArrowIcon() {
-        return FastIcons.getRightArrowIcon();
-    }
+	@Override
+	public Icon getSplitterVerBumpIcon() {
+		return BaseIcons.getSplitterVerBumpIcon();
+	}
 
-    @Override
-    public Icon getSplitterDownArrowIcon() {
-        return FastIcons.getSplitterDownArrowIcon();
-    }
+	@Override
+	public Icon getThumbHorIcon() {
+		return BaseIcons.getThumbHorIcon();
+	}
 
-    @Override
-    public Icon getSplitterHorBumpIcon() {
-        return FastIcons.getSplitterHorBumpIcon();
-    }
+	@Override
+	public Icon getThumbHorIconRollover() {
+		return BaseIcons.getThumbHorIconRollover();
+	}
 
-    @Override
-    public Icon getSplitterLeftArrowIcon() {
-        return FastIcons.getSplitterLeftArrowIcon();
-    }
+	@Override
+	public Icon getThumbVerIcon() {
+		return BaseIcons.getThumbVerIcon();
+	}
 
-    @Override
-    public Icon getSplitterRightArrowIcon() {
-        return FastIcons.getSplitterRightArrowIcon();
-    }
+	@Override
+	public Icon getThumbVerIconRollover() {
+		return BaseIcons.getThumbVerIconRollover();
+	}
 
-    @Override
-    public Icon getSplitterUpArrowIcon() {
-        return FastIcons.getSplitterUpArrowIcon();
-    }
+	@Override
+	public Icon getTreeCloseIcon() {
+		return BaseIcons.getTreeClosedIcon();
+	}
 
-    @Override
-    public Icon getSplitterVerBumpIcon() {
-        return FastIcons.getSplitterVerBumpIcon();
-    }
+	@Override
+	public Icon getTreeCollapsedIcon() {
+		return BaseIcons.getTreeCollapsedIcon();
+	}
 
-    @Override
-    public Icon getThumbHorIcon() {
-        return FastIcons.getThumbHorIcon();
-    }
+	@Override
+	public Icon getTreeExpandedIcon() {
+		return BaseIcons.getTreeExpandedIcon();
+	}
 
-    @Override
-    public Icon getThumbVerIcon() {
-        return FastIcons.getThumbVerIcon();
-    }
+	@Override
+	public Icon getTreeLeafIcon() {
+		return BaseIcons.getTreeLeafIcon();
+	}
 
-    @Override
-    public Icon getThumbHorIconRollover() {
-        return FastIcons.getThumbHorIconRollover();
-    }
+	@Override
+	public Icon getTreeOpenIcon() {
+		return BaseIcons.getTreeOpenedIcon();
+	}
 
-    @Override
-    public Icon getThumbVerIconRollover() {
-        return FastIcons.getThumbVerIconRollover();
-    }
-    
+	@Override
+	public Icon getUpArrowIcon() {
+		return BaseIcons.getUpArrowIcon();
+	}
+
 } // end of class FastIconFactory

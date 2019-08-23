@@ -1,23 +1,23 @@
 /*
 * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
+*
 * JTattoo is multiple licensed. If your are an open source developer you can use
 * it under the terms and conditions of the GNU General Public License version 2.0
 * or later as published by the Free Software Foundation.
-*  
+*
 * see: gpl-2.0.txt
-* 
+*
 * If you pay for a license you will become a registered user who could use the
 * software under the terms and conditions of the GNU Lesser General Public License
 * version 2.0 or later with classpath exception as published by the Free Software
 * Foundation.
-* 
+*
 * see: lgpl-2.0.txt
 * see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
+*
+* Registered users could also use JTattoo under the terms and conditions of the
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
+*
 * see: APACHE-LICENSE-2.0.txt
 */
 
@@ -30,90 +30,90 @@ import javax.swing.Icon;
  */
 public interface AbstractIconFactory {
 
-    public Icon getOptionPaneErrorIcon();
+	public Icon getCheckBoxIcon();
 
-    public Icon getOptionPaneWarningIcon();
+	public Icon getCloseIcon();
 
-    public Icon getOptionPaneInformationIcon();
+	public Icon getComboBoxIcon();
 
-    public Icon getOptionPaneQuestionIcon();
+	public Icon getDownArrowIcon();
 
-    public Icon getFileChooserUpFolderIcon();
+	public Icon getFileChooserDetailViewIcon();
 
-    public Icon getFileChooserHomeFolderIcon();
+	public Icon getFileChooserHomeFolderIcon();
 
-    public Icon getFileChooserNewFolderIcon();
+	public Icon getFileChooserListViewIcon();
 
-    public Icon getFileChooserDetailViewIcon();
+	public Icon getFileChooserNewFolderIcon();
 
-    public Icon getFileChooserListViewIcon();
-    
-    public Icon getFileViewComputerIcon();
+	public Icon getFileChooserUpFolderIcon();
 
-    public Icon getFileViewFloppyDriveIcon();
+	public Icon getFileViewComputerIcon();
 
-    public Icon getFileViewHardDriveIcon();
+	public Icon getFileViewFloppyDriveIcon();
 
-    public Icon getMenuIcon();
+	public Icon getFileViewHardDriveIcon();
 
-    public Icon getIconIcon();
+	public Icon getIconIcon();
 
-    public Icon getMaxIcon();
+	public Icon getLeftArrowIcon();
 
-    public Icon getMinIcon();
+	public Icon getMaxIcon();
 
-    public Icon getCloseIcon();
+	public Icon getMenuArrowIcon();
 
-    public Icon getPaletteCloseIcon();
+	public Icon getMenuCheckBoxIcon();
 
-    public Icon getRadioButtonIcon();
+	public Icon getMenuIcon();
 
-    public Icon getCheckBoxIcon();
+	public Icon getMenuRadioButtonIcon();
 
-    public Icon getComboBoxIcon();
+	public Icon getMinIcon();
 
-    public Icon getTreeOpenIcon();
-    
-    public Icon getTreeCloseIcon();
+	public Icon getOptionPaneErrorIcon();
 
-    public Icon getTreeLeafIcon();
+	public Icon getOptionPaneInformationIcon();
 
-    public Icon getTreeCollapsedIcon();
+	public Icon getOptionPaneQuestionIcon();
 
-    public Icon getTreeExpandedIcon();
+	public Icon getOptionPaneWarningIcon();
 
-    public Icon getMenuArrowIcon();
+	public Icon getPaletteCloseIcon();
 
-    public Icon getMenuCheckBoxIcon();
+	public Icon getRadioButtonIcon();
 
-    public Icon getMenuRadioButtonIcon();
+	public Icon getRightArrowIcon();
 
-    public Icon getUpArrowIcon();
+	public Icon getSplitterDownArrowIcon();
 
-    public Icon getDownArrowIcon();
+	public Icon getSplitterHorBumpIcon();
 
-    public Icon getLeftArrowIcon();
+	public Icon getSplitterLeftArrowIcon();
 
-    public Icon getRightArrowIcon();
+	public Icon getSplitterRightArrowIcon();
 
-    public Icon getSplitterUpArrowIcon();
+	public Icon getSplitterUpArrowIcon();
 
-    public Icon getSplitterDownArrowIcon();
+	public Icon getSplitterVerBumpIcon();
 
-    public Icon getSplitterLeftArrowIcon();
+	public Icon getThumbHorIcon();
 
-    public Icon getSplitterRightArrowIcon();
+	public Icon getThumbHorIconRollover();
 
-    public Icon getSplitterHorBumpIcon();
+	public Icon getThumbVerIcon();
 
-    public Icon getSplitterVerBumpIcon();
+	public Icon getThumbVerIconRollover();
 
-    public Icon getThumbHorIcon();
+	public Icon getTreeCloseIcon();
 
-    public Icon getThumbVerIcon();
+	public Icon getTreeCollapsedIcon();
 
-    public Icon getThumbHorIconRollover();
+	public Icon getTreeExpandedIcon();
 
-    public Icon getThumbVerIconRollover();
-    
+	public Icon getTreeLeafIcon();
+
+	public Icon getTreeOpenIcon();
+
+	public Icon getUpArrowIcon();
+
 } // end of interface AbstractIconFactory

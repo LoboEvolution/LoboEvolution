@@ -1,260 +1,263 @@
 /*
 * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
+*
 * JTattoo is multiple licensed. If your are an open source developer you can use
 * it under the terms and conditions of the GNU General Public License version 2.0
 * or later as published by the Free Software Foundation.
-*  
+*
 * see: gpl-2.0.txt
-* 
+*
 * If you pay for a license you will become a registered user who could use the
 * software under the terms and conditions of the GNU Lesser General Public License
 * version 2.0 or later with classpath exception as published by the Free Software
 * Foundation.
-* 
+*
 * see: lgpl-2.0.txt
 * see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
+*
+* Registered users could also use JTattoo under the terms and conditions of the
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
+*
 * see: APACHE-LICENSE-2.0.txt
  */
 package com.jtattoo.plaf.noire;
 
-import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
+
+import com.jtattoo.plaf.AbstractIconFactory;
+import com.jtattoo.plaf.BaseIcons;
+import com.jtattoo.plaf.hifi.HiFiIcons;
 
 /**
  * @author Michael Hagen
  */
 public class NoireIconFactory implements AbstractIconFactory {
 
-    private static NoireIconFactory instance = null;
+	private static NoireIconFactory instance = null;
 
-    private NoireIconFactory() {
-    }
+	public static synchronized NoireIconFactory getInstance() {
+		if (instance == null) {
+			instance = new NoireIconFactory();
+		}
+		return instance;
+	}
 
-    public static synchronized NoireIconFactory getInstance() {
-        if (instance == null) {
-            instance = new NoireIconFactory();
-        }
-        return instance;
-    }
+	private NoireIconFactory() {
+	}
 
-    @Override
-    public Icon getOptionPaneErrorIcon() {
-        return NoireIcons.getOptionPaneErrorIcon();
-    }
+	@Override
+	public Icon getCheckBoxIcon() {
+		return HiFiIcons.getCheckBoxIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneWarningIcon() {
-        return NoireIcons.getOptionPaneWarningIcon();
-    }
+	@Override
+	public Icon getCloseIcon() {
+		return HiFiIcons.getCloseIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneInformationIcon() {
-        return NoireIcons.getOptionPaneInformationIcon();
-    }
+	@Override
+	public Icon getComboBoxIcon() {
+		return HiFiIcons.getComboBoxIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneQuestionIcon() {
-        return NoireIcons.getOptionPaneQuestionIcon();
-    }
+	@Override
+	public Icon getDownArrowIcon() {
+		return NoireIcons.getDownArrowIcon();
+	}
 
-    @Override
-    public Icon getFileChooserUpFolderIcon() {
-        return NoireIcons.getFileChooserUpFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserDetailViewIcon() {
+		return BaseIcons.getFileChooserDetailViewIcon();
+	}
 
-    @Override
-    public Icon getFileChooserHomeFolderIcon() {
-        return NoireIcons.getFileChooserHomeFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserHomeFolderIcon() {
+		return BaseIcons.getFileChooserHomeFolderIcon();
+	}
 
-    @Override
-    public Icon getFileChooserNewFolderIcon() {
-        return NoireIcons.getFileChooserNewFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserListViewIcon() {
+		return BaseIcons.getFileChooserListViewIcon();
+	}
 
-    @Override
-    public Icon getFileChooserListViewIcon() {
-        return NoireIcons.getFileChooserListViewIcon();
-    }
+	@Override
+	public Icon getFileChooserNewFolderIcon() {
+		return BaseIcons.getFileChooserNewFolderIcon();
+	}
 
-    @Override
-    public Icon getFileChooserDetailViewIcon() {
-        return NoireIcons.getFileChooserDetailViewIcon();
-    }
+	@Override
+	public Icon getFileChooserUpFolderIcon() {
+		return BaseIcons.getFileChooserUpFolderIcon();
+	}
 
-    @Override
-    public Icon getFileViewComputerIcon() {
-        return NoireIcons.getFileViewComputerIcon();
-    }
+	@Override
+	public Icon getFileViewComputerIcon() {
+		return BaseIcons.getFileViewComputerIcon();
+	}
 
-    @Override
-    public Icon getFileViewFloppyDriveIcon() {
-        return NoireIcons.getFileViewFloppyDriveIcon();
-    }
+	@Override
+	public Icon getFileViewFloppyDriveIcon() {
+		return BaseIcons.getFileViewFloppyDriveIcon();
+	}
 
-    @Override
-    public Icon getFileViewHardDriveIcon() {
-        return NoireIcons.getFileViewHardDriveIcon();
-    }
+	@Override
+	public Icon getFileViewHardDriveIcon() {
+		return BaseIcons.getFileViewHardDriveIcon();
+	}
 
-    @Override
-    public Icon getMenuIcon() {
-        return NoireIcons.getMenuIcon();
-    }
+	@Override
+	public Icon getIconIcon() {
+		return HiFiIcons.getIconIcon();
+	}
 
-    @Override
-    public Icon getIconIcon() {
-        return NoireIcons.getIconIcon();
-    }
+	@Override
+	public Icon getLeftArrowIcon() {
+		return NoireIcons.getLeftArrowIcon();
+	}
 
-    @Override
-    public Icon getMaxIcon() {
-        return NoireIcons.getMaxIcon();
-    }
+	@Override
+	public Icon getMaxIcon() {
+		return HiFiIcons.getMaxIcon();
+	}
 
-    @Override
-    public Icon getMinIcon() {
-        return NoireIcons.getMinIcon();
-    }
+	@Override
+	public Icon getMenuArrowIcon() {
+		return HiFiIcons.getMenuArrowIcon();
+	}
 
-    @Override
-    public Icon getCloseIcon() {
-        return NoireIcons.getCloseIcon();
-    }
+	@Override
+	public Icon getMenuCheckBoxIcon() {
+		return BaseIcons.getMenuCheckBoxIcon();
+	}
 
-    @Override
-    public Icon getPaletteCloseIcon() {
-        return NoireIcons.getPaletteCloseIcon();
-    }
+	@Override
+	public Icon getMenuIcon() {
+		return BaseIcons.getMenuIcon();
+	}
 
-    @Override
-    public Icon getRadioButtonIcon() {
-        return NoireIcons.getRadioButtonIcon();
-    }
+	@Override
+	public Icon getMenuRadioButtonIcon() {
+		return BaseIcons.getMenuRadioButtonIcon();
+	}
 
-    @Override
-    public Icon getCheckBoxIcon() {
-        return NoireIcons.getCheckBoxIcon();
-    }
+	@Override
+	public Icon getMinIcon() {
+		return HiFiIcons.getMinIcon();
+	}
 
-    @Override
-    public Icon getComboBoxIcon() {
-        return NoireIcons.getComboBoxIcon();
-    }
+	@Override
+	public Icon getOptionPaneErrorIcon() {
+		return BaseIcons.getOptionPaneErrorIcon();
+	}
 
-    @Override
-    public Icon getTreeOpenIcon() {
-        return NoireIcons.getTreeOpenedIcon();
-    }
+	@Override
+	public Icon getOptionPaneInformationIcon() {
+		return BaseIcons.getOptionPaneInformationIcon();
+	}
 
-    @Override
-    public Icon getTreeCloseIcon() {
-        return NoireIcons.getTreeClosedIcon();
-    }
+	@Override
+	public Icon getOptionPaneQuestionIcon() {
+		return BaseIcons.getOptionPaneQuestionIcon();
+	}
 
-    @Override
-    public Icon getTreeLeafIcon() {
-        return NoireIcons.getTreeLeafIcon();
-    }
+	@Override
+	public Icon getOptionPaneWarningIcon() {
+		return BaseIcons.getOptionPaneWarningIcon();
+	}
 
-    @Override
-    public Icon getTreeCollapsedIcon() {
-        return NoireIcons.getTreeCollapsedIcon();
-    }
+	@Override
+	public Icon getPaletteCloseIcon() {
+		return BaseIcons.getPaletteCloseIcon();
+	}
 
-    @Override
-    public Icon getTreeExpandedIcon() {
-        return NoireIcons.getTreeExpandedIcon();
-    }
+	@Override
+	public Icon getRadioButtonIcon() {
+		return HiFiIcons.getRadioButtonIcon();
+	}
 
-    @Override
-    public Icon getMenuArrowIcon() {
-        return NoireIcons.getMenuArrowIcon();
-    }
+	@Override
+	public Icon getRightArrowIcon() {
+		return NoireIcons.getRightArrowIcon();
+	}
 
-    @Override
-    public Icon getMenuCheckBoxIcon() {
-        return NoireIcons.getMenuCheckBoxIcon();
-    }
+	@Override
+	public Icon getSplitterDownArrowIcon() {
+		return HiFiIcons.getSplitterDownArrowIcon();
+	}
 
-    @Override
-    public Icon getMenuRadioButtonIcon() {
-        return NoireIcons.getMenuRadioButtonIcon();
-    }
+	@Override
+	public Icon getSplitterHorBumpIcon() {
+		return HiFiIcons.getSplitterHorBumpIcon();
+	}
 
-    @Override
-    public Icon getUpArrowIcon() {
-        return NoireIcons.getUpArrowIcon();
-    }
+	@Override
+	public Icon getSplitterLeftArrowIcon() {
+		return HiFiIcons.getSplitterLeftArrowIcon();
+	}
 
-    @Override
-    public Icon getDownArrowIcon() {
-        return NoireIcons.getDownArrowIcon();
-    }
+	@Override
+	public Icon getSplitterRightArrowIcon() {
+		return HiFiIcons.getSplitterRightArrowIcon();
+	}
 
-    @Override
-    public Icon getLeftArrowIcon() {
-        return NoireIcons.getLeftArrowIcon();
-    }
+	@Override
+	public Icon getSplitterUpArrowIcon() {
+		return HiFiIcons.getSplitterUpArrowIcon();
+	}
 
-    @Override
-    public Icon getRightArrowIcon() {
-        return NoireIcons.getRightArrowIcon();
-    }
+	@Override
+	public Icon getSplitterVerBumpIcon() {
+		return HiFiIcons.getSplitterVerBumpIcon();
+	}
 
-    @Override
-    public Icon getSplitterDownArrowIcon() {
-        return NoireIcons.getSplitterDownArrowIcon();
-    }
+	@Override
+	public Icon getThumbHorIcon() {
+		return HiFiIcons.getThumbHorIcon();
+	}
 
-    @Override
-    public Icon getSplitterHorBumpIcon() {
-        return NoireIcons.getSplitterHorBumpIcon();
-    }
+	@Override
+	public Icon getThumbHorIconRollover() {
+		return HiFiIcons.getThumbHorIconRollover();
+	}
 
-    @Override
-    public Icon getSplitterLeftArrowIcon() {
-        return NoireIcons.getSplitterLeftArrowIcon();
-    }
+	@Override
+	public Icon getThumbVerIcon() {
+		return HiFiIcons.getThumbVerIcon();
+	}
 
-    @Override
-    public Icon getSplitterRightArrowIcon() {
-        return NoireIcons.getSplitterRightArrowIcon();
-    }
+	@Override
+	public Icon getThumbVerIconRollover() {
+		return HiFiIcons.getThumbVerIconRollover();
+	}
 
-    @Override
-    public Icon getSplitterUpArrowIcon() {
-        return NoireIcons.getSplitterUpArrowIcon();
-    }
+	@Override
+	public Icon getTreeCloseIcon() {
+		return BaseIcons.getTreeClosedIcon();
+	}
 
-    @Override
-    public Icon getSplitterVerBumpIcon() {
-        return NoireIcons.getSplitterVerBumpIcon();
-    }
+	@Override
+	public Icon getTreeCollapsedIcon() {
+		return HiFiIcons.getTreeCollapsedIcon();
+	}
 
-    @Override
-    public Icon getThumbHorIcon() {
-        return NoireIcons.getThumbHorIcon();
-    }
+	@Override
+	public Icon getTreeExpandedIcon() {
+		return HiFiIcons.getTreeExpandedIcon();
+	}
 
-    @Override
-    public Icon getThumbVerIcon() {
-        return NoireIcons.getThumbVerIcon();
-    }
+	@Override
+	public Icon getTreeLeafIcon() {
+		return BaseIcons.getTreeLeafIcon();
+	}
 
-    @Override
-    public Icon getThumbHorIconRollover() {
-        return NoireIcons.getThumbHorIconRollover();
-    }
+	@Override
+	public Icon getTreeOpenIcon() {
+		return BaseIcons.getTreeOpenedIcon();
+	}
 
-    @Override
-    public Icon getThumbVerIconRollover() {
-        return NoireIcons.getThumbVerIconRollover();
-    }
-    
+	@Override
+	public Icon getUpArrowIcon() {
+		return NoireIcons.getUpArrowIcon();
+	}
+
 } // end of class NoireIconFactory

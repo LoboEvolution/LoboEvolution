@@ -1,260 +1,262 @@
 /*
  * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
- *  
+ *
  * JTattoo is multiple licensed. If your are an open source developer you can use
  * it under the terms and conditions of the GNU General Public License version 2.0
  * or later as published by the Free Software Foundation.
- *  
+ *
  * see: gpl-2.0.txt
- * 
+ *
  * If you pay for a license you will become a registered user who could use the
  * software under the terms and conditions of the GNU Lesser General Public License
  * version 2.0 or later with classpath exception as published by the Free Software
  * Foundation.
- * 
+ *
  * see: lgpl-2.0.txt
  * see: classpath-exception.txt
- * 
- * Registered users could also use JTattoo under the terms and conditions of the 
+ *
+ * Registered users could also use JTattoo under the terms and conditions of the
  * Apache License, Version 2.0 as published by the Apache Software Foundation.
- *  
+ *
  * see: APACHE-LICENSE-2.0.txt
  */
 package com.jtattoo.plaf.graphite;
 
-import com.jtattoo.plaf.AbstractIconFactory;
 import javax.swing.Icon;
+
+import com.jtattoo.plaf.AbstractIconFactory;
+import com.jtattoo.plaf.BaseIcons;
 
 /**
  * @author Michael Hagen
  */
 public class GraphiteIconFactory implements AbstractIconFactory {
 
-    private static GraphiteIconFactory instance = null;
+	private static GraphiteIconFactory instance = null;
 
-    private GraphiteIconFactory() {
-    }
+	public static synchronized GraphiteIconFactory getInstance() {
+		if (instance == null) {
+			instance = new GraphiteIconFactory();
+		}
+		return instance;
+	}
 
-    public static synchronized GraphiteIconFactory getInstance() {
-        if (instance == null) {
-            instance = new GraphiteIconFactory();
-        }
-        return instance;
-    }
+	private GraphiteIconFactory() {
+	}
 
-    @Override
-    public Icon getOptionPaneErrorIcon() {
-        return GraphiteIcons.getOptionPaneErrorIcon();
-    }
+	@Override
+	public Icon getCheckBoxIcon() {
+		return BaseIcons.getCheckBoxIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneWarningIcon() {
-        return GraphiteIcons.getOptionPaneWarningIcon();
-    }
+	@Override
+	public Icon getCloseIcon() {
+		return GraphiteIcons.getCloseIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneInformationIcon() {
-        return GraphiteIcons.getOptionPaneInformationIcon();
-    }
+	@Override
+	public Icon getComboBoxIcon() {
+		return BaseIcons.getComboBoxIcon();
+	}
 
-    @Override
-    public Icon getOptionPaneQuestionIcon() {
-        return GraphiteIcons.getOptionPaneQuestionIcon();
-    }
+	@Override
+	public Icon getDownArrowIcon() {
+		return BaseIcons.getDownArrowIcon();
+	}
 
-    @Override
-    public Icon getFileChooserUpFolderIcon() {
-        return GraphiteIcons.getFileChooserUpFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserDetailViewIcon() {
+		return BaseIcons.getFileChooserDetailViewIcon();
+	}
 
-    @Override
-    public Icon getFileChooserHomeFolderIcon() {
-        return GraphiteIcons.getFileChooserHomeFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserHomeFolderIcon() {
+		return BaseIcons.getFileChooserHomeFolderIcon();
+	}
 
-    @Override
-    public Icon getFileChooserNewFolderIcon() {
-        return GraphiteIcons.getFileChooserNewFolderIcon();
-    }
+	@Override
+	public Icon getFileChooserListViewIcon() {
+		return BaseIcons.getFileChooserListViewIcon();
+	}
 
-    @Override
-    public Icon getFileChooserListViewIcon() {
-        return GraphiteIcons.getFileChooserListViewIcon();
-    }
+	@Override
+	public Icon getFileChooserNewFolderIcon() {
+		return BaseIcons.getFileChooserNewFolderIcon();
+	}
 
-    @Override
-    public Icon getFileChooserDetailViewIcon() {
-        return GraphiteIcons.getFileChooserDetailViewIcon();
-    }
+	@Override
+	public Icon getFileChooserUpFolderIcon() {
+		return BaseIcons.getFileChooserUpFolderIcon();
+	}
 
-    @Override
-    public Icon getFileViewComputerIcon() {
-        return GraphiteIcons.getFileViewComputerIcon();
-    }
+	@Override
+	public Icon getFileViewComputerIcon() {
+		return BaseIcons.getFileViewComputerIcon();
+	}
 
-    @Override
-    public Icon getFileViewFloppyDriveIcon() {
-        return GraphiteIcons.getFileViewFloppyDriveIcon();
-    }
+	@Override
+	public Icon getFileViewFloppyDriveIcon() {
+		return BaseIcons.getFileViewFloppyDriveIcon();
+	}
 
-    @Override
-    public Icon getFileViewHardDriveIcon() {
-        return GraphiteIcons.getFileViewHardDriveIcon();
-    }
+	@Override
+	public Icon getFileViewHardDriveIcon() {
+		return BaseIcons.getFileViewHardDriveIcon();
+	}
 
-    @Override
-    public Icon getMenuIcon() {
-        return GraphiteIcons.getMenuIcon();
-    }
+	@Override
+	public Icon getIconIcon() {
+		return GraphiteIcons.getIconIcon();
+	}
 
-    @Override
-    public Icon getIconIcon() {
-        return GraphiteIcons.getIconIcon();
-    }
+	@Override
+	public Icon getLeftArrowIcon() {
+		return BaseIcons.getLeftArrowIcon();
+	}
 
-    @Override
-    public Icon getMaxIcon() {
-        return GraphiteIcons.getMaxIcon();
-    }
+	@Override
+	public Icon getMaxIcon() {
+		return GraphiteIcons.getMaxIcon();
+	}
 
-    @Override
-    public Icon getMinIcon() {
-        return GraphiteIcons.getMinIcon();
-    }
+	@Override
+	public Icon getMenuArrowIcon() {
+		return BaseIcons.getMenuArrowIcon();
+	}
 
-    @Override
-    public Icon getCloseIcon() {
-        return GraphiteIcons.getCloseIcon();
-    }
+	@Override
+	public Icon getMenuCheckBoxIcon() {
+		return BaseIcons.getMenuCheckBoxIcon();
+	}
 
-    @Override
-    public Icon getPaletteCloseIcon() {
-        return GraphiteIcons.getPaletteCloseIcon();
-    }
+	@Override
+	public Icon getMenuIcon() {
+		return BaseIcons.getMenuIcon();
+	}
 
-    @Override
-    public Icon getRadioButtonIcon() {
-        return GraphiteIcons.getRadioButtonIcon();
-    }
+	@Override
+	public Icon getMenuRadioButtonIcon() {
+		return BaseIcons.getMenuRadioButtonIcon();
+	}
 
-    @Override
-    public Icon getCheckBoxIcon() {
-        return GraphiteIcons.getCheckBoxIcon();
-    }
+	@Override
+	public Icon getMinIcon() {
+		return GraphiteIcons.getMinIcon();
+	}
 
-    @Override
-    public Icon getComboBoxIcon() {
-        return GraphiteIcons.getComboBoxIcon();
-    }
+	@Override
+	public Icon getOptionPaneErrorIcon() {
+		return BaseIcons.getOptionPaneErrorIcon();
+	}
 
-    @Override
-    public Icon getTreeOpenIcon() {
-        return GraphiteIcons.getTreeOpenedIcon();
-    }
+	@Override
+	public Icon getOptionPaneInformationIcon() {
+		return BaseIcons.getOptionPaneInformationIcon();
+	}
 
-    @Override
-    public Icon getTreeCloseIcon() {
-        return GraphiteIcons.getTreeClosedIcon();
-    }
+	@Override
+	public Icon getOptionPaneQuestionIcon() {
+		return BaseIcons.getOptionPaneQuestionIcon();
+	}
 
-    @Override
-    public Icon getTreeLeafIcon() {
-        return GraphiteIcons.getTreeLeafIcon();
-    }
+	@Override
+	public Icon getOptionPaneWarningIcon() {
+		return BaseIcons.getOptionPaneWarningIcon();
+	}
 
-    @Override
-    public Icon getTreeCollapsedIcon() {
-        return GraphiteIcons.getTreeCollapsedIcon();
-    }
+	@Override
+	public Icon getPaletteCloseIcon() {
+		return BaseIcons.getPaletteCloseIcon();
+	}
 
-    @Override
-    public Icon getTreeExpandedIcon() {
-        return GraphiteIcons.getTreeExpandedIcon();
-    }
+	@Override
+	public Icon getRadioButtonIcon() {
+		return BaseIcons.getRadioButtonIcon();
+	}
 
-    @Override
-    public Icon getMenuArrowIcon() {
-        return GraphiteIcons.getMenuArrowIcon();
-    }
+	@Override
+	public Icon getRightArrowIcon() {
+		return BaseIcons.getRightArrowIcon();
+	}
 
-    @Override
-    public Icon getMenuCheckBoxIcon() {
-        return GraphiteIcons.getMenuCheckBoxIcon();
-    }
+	@Override
+	public Icon getSplitterDownArrowIcon() {
+		return BaseIcons.getSplitterDownArrowIcon();
+	}
 
-    @Override
-    public Icon getMenuRadioButtonIcon() {
-        return GraphiteIcons.getMenuRadioButtonIcon();
-    }
+	@Override
+	public Icon getSplitterHorBumpIcon() {
+		return BaseIcons.getSplitterHorBumpIcon();
+	}
 
-    @Override
-    public Icon getUpArrowIcon() {
-        return GraphiteIcons.getUpArrowIcon();
-    }
+	@Override
+	public Icon getSplitterLeftArrowIcon() {
+		return BaseIcons.getSplitterLeftArrowIcon();
+	}
 
-    @Override
-    public Icon getDownArrowIcon() {
-        return GraphiteIcons.getDownArrowIcon();
-    }
+	@Override
+	public Icon getSplitterRightArrowIcon() {
+		return BaseIcons.getSplitterRightArrowIcon();
+	}
 
-    @Override
-    public Icon getLeftArrowIcon() {
-        return GraphiteIcons.getLeftArrowIcon();
-    }
+	@Override
+	public Icon getSplitterUpArrowIcon() {
+		return BaseIcons.getSplitterUpArrowIcon();
+	}
 
-    @Override
-    public Icon getRightArrowIcon() {
-        return GraphiteIcons.getRightArrowIcon();
-    }
+	@Override
+	public Icon getSplitterVerBumpIcon() {
+		return BaseIcons.getSplitterVerBumpIcon();
+	}
 
-    @Override
-    public Icon getSplitterDownArrowIcon() {
-        return GraphiteIcons.getSplitterDownArrowIcon();
-    }
+	@Override
+	public Icon getThumbHorIcon() {
+		return BaseIcons.getThumbHorIcon();
+	}
 
-    @Override
-    public Icon getSplitterHorBumpIcon() {
-        return GraphiteIcons.getSplitterHorBumpIcon();
-    }
+	@Override
+	public Icon getThumbHorIconRollover() {
+		return BaseIcons.getThumbHorIconRollover();
+	}
 
-    @Override
-    public Icon getSplitterLeftArrowIcon() {
-        return GraphiteIcons.getSplitterLeftArrowIcon();
-    }
+	@Override
+	public Icon getThumbVerIcon() {
+		return BaseIcons.getThumbVerIcon();
+	}
 
-    @Override
-    public Icon getSplitterRightArrowIcon() {
-        return GraphiteIcons.getSplitterRightArrowIcon();
-    }
+	@Override
+	public Icon getThumbVerIconRollover() {
+		return BaseIcons.getThumbVerIconRollover();
+	}
 
-    @Override
-    public Icon getSplitterUpArrowIcon() {
-        return GraphiteIcons.getSplitterUpArrowIcon();
-    }
+	@Override
+	public Icon getTreeCloseIcon() {
+		return BaseIcons.getTreeClosedIcon();
+	}
 
-    @Override
-    public Icon getSplitterVerBumpIcon() {
-        return GraphiteIcons.getSplitterVerBumpIcon();
-    }
+	@Override
+	public Icon getTreeCollapsedIcon() {
+		return BaseIcons.getTreeCollapsedIcon();
+	}
 
-    @Override
-    public Icon getThumbHorIcon() {
-        return GraphiteIcons.getThumbHorIcon();
-    }
+	@Override
+	public Icon getTreeExpandedIcon() {
+		return BaseIcons.getTreeExpandedIcon();
+	}
 
-    @Override
-    public Icon getThumbVerIcon() {
-        return GraphiteIcons.getThumbVerIcon();
-    }
+	@Override
+	public Icon getTreeLeafIcon() {
+		return BaseIcons.getTreeLeafIcon();
+	}
 
-    @Override
-    public Icon getThumbHorIconRollover() {
-        return GraphiteIcons.getThumbHorIconRollover();
-    }
+	@Override
+	public Icon getTreeOpenIcon() {
+		return BaseIcons.getTreeOpenedIcon();
+	}
 
-    @Override
-    public Icon getThumbVerIconRollover() {
-        return GraphiteIcons.getThumbVerIconRollover();
-    }
-    
+	@Override
+	public Icon getUpArrowIcon() {
+		return BaseIcons.getUpArrowIcon();
+	}
+
 } // end of class GraphiteIconFactory

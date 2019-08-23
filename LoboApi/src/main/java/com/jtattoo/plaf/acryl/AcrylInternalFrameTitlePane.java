@@ -1,241 +1,259 @@
 /*
 * Copyright (c) 2002 and later by MH Software-Entwicklung. All Rights Reserved.
-*  
+*
 * JTattoo is multiple licensed. If your are an open source developer you can use
 * it under the terms and conditions of the GNU General Public License version 2.0
 * or later as published by the Free Software Foundation.
-*  
+*
 * see: gpl-2.0.txt
-* 
+*
 * If you pay for a license you will become a registered user who could use the
 * software under the terms and conditions of the GNU Lesser General Public License
 * version 2.0 or later with classpath exception as published by the Free Software
 * Foundation.
-* 
+*
 * see: lgpl-2.0.txt
 * see: classpath-exception.txt
-* 
-* Registered users could also use JTattoo under the terms and conditions of the 
+*
+* Registered users could also use JTattoo under the terms and conditions of the
 * Apache License, Version 2.0 as published by the Apache Software Foundation.
-*  
+*
 * see: APACHE-LICENSE-2.0.txt
 */
- 
+
 package com.jtattoo.plaf.acryl;
 
-import com.jtattoo.plaf.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.LayoutManager;
+
 import javax.swing.Icon;
 import javax.swing.JInternalFrame;
+
+import com.jtattoo.plaf.AbstractLookAndFeel;
+import com.jtattoo.plaf.BaseInternalFrameTitlePane;
+import com.jtattoo.plaf.ColorHelper;
+import com.jtattoo.plaf.JTattooUtilities;
 
 /**
  * @author Michael Hagen
  */
 public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
-    public AcrylInternalFrameTitlePane(JInternalFrame f) {
-        super(f);
-    }
+	// --------------------------------------------------------------------------------------------
+	class BaseTitlePaneLayout extends TitlePaneLayout {
 
-    @Override
-    protected LayoutManager createLayout() {
-        return new BaseTitlePaneLayout();
-    }
+		@Override
+		public void addLayoutComponent(String name, Component c) {
+		}
 
-    @Override
-    protected int getHorSpacing() {
-        return 1;
-    }
+		@Override
+		public void layoutContainer(Container c) {
+			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
+				layoutMacStyle(c);
+			} else {
+				layoutDefault(c);
+			}
+		}
 
-    @Override
-    protected int getVerSpacing() {
-        return 3;
-    }
+		public void layoutDefault(Container c) {
+			boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
 
-    @Override
-    public void paintBorder(Graphics g) {
-        if (isActive()) {
-            g.setColor(AbstractLookAndFeel.getWindowBorderColor());
-        } else {
-            g.setColor(AbstractLookAndFeel.getWindowInactiveBorderColor());
-        }
-        g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
-    }
+			int spacing = getHorSpacing();
+			int w = getWidth();
+			int h = getHeight();
 
-    @Override
-    public void paintText(Graphics g, int x, int y, String title) {
-        Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();
-        if (isActive()) {
-            shadowColor = ColorHelper.darker(shadowColor, 30);
-        }
-        g.setColor(shadowColor);
-        JTattooUtilities.drawString(frame, g, title, x - 1, y - 2);
-        JTattooUtilities.drawString(frame, g, title, x - 1, y );
-        JTattooUtilities.drawString(frame, g, title, x + 1, y - 2);
-        JTattooUtilities.drawString(frame, g, title, x + 1, y);
-        if (isActive()) {
-            g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
-        } else {
-            g.setColor(AbstractLookAndFeel.getWindowInactiveTitleForegroundColor());
-        }
-        JTattooUtilities.drawString(frame, g, title, x, y - 1);
-    }
+			// assumes all buttons have the same dimensions these dimensions include the
+			// borders
+			int btnHeight = h - getVerSpacing();
+			int btnWidth = btnHeight + 10;
 
-//--------------------------------------------------------------------------------------------
-    class BaseTitlePaneLayout extends TitlePaneLayout {
+			int x = leftToRight ? w - spacing : 0;
+			int y = Math.max(0, (h - btnHeight) / 2 - 1);
 
-        @Override
-        public void addLayoutComponent(String name, Component c) {
-        }
+			if (frame.isClosable()) {
+				x += leftToRight ? -btnWidth : spacing;
+				closeButton.setBounds(x, y, btnWidth, btnHeight);
+				if (!leftToRight) {
+					x += btnWidth;
+				}
+			}
 
-        @Override
-        public void removeLayoutComponent(Component c) {
-        }
+			if (frame.isMaximizable() && !isPalette) {
+				x += leftToRight ? -spacing - btnWidth : spacing;
+				maxButton.setBounds(x, y, btnWidth, btnHeight);
+				if (!leftToRight) {
+					x += btnWidth;
+				}
+			}
 
-        @Override
-        public Dimension preferredLayoutSize(Container c) {
-            return minimumLayoutSize(c);
-        }
+			if (frame.isIconifiable() && !isPalette) {
+				x += leftToRight ? -spacing - btnWidth : spacing;
+				iconButton.setBounds(x, y, btnWidth, btnHeight);
+				if (!leftToRight) {
+					x += btnWidth;
+				}
+			}
 
-        @Override
-        public Dimension minimumLayoutSize(Container c) {
-            int width = 30;
-            if (frame.isClosable()) {
-                width += 21;
-            }
-            if (frame.isMaximizable()) {
-                width += 16 + (frame.isClosable() ? 10 : 4);
-            }
-            if (frame.isIconifiable()) {
-                width += 16 + (frame.isMaximizable() ? 2 : (frame.isClosable() ? 10 : 4));
-            }
-            FontMetrics fm = JTattooUtilities.getFontMetrics(AcrylInternalFrameTitlePane.this, null, getFont());
-            String frameTitle = frame.getTitle();
-            int title_w = frameTitle != null ? fm.stringWidth(frameTitle) : 0;
-            int title_length = frameTitle != null ? frameTitle.length() : 0;
+			buttonsWidth = leftToRight ? w - x : x;
 
-            if (title_length > 2) {
-                int subtitle_w = fm.stringWidth(frame.getTitle().substring(0, 2) + "...");
-                width += (title_w < subtitle_w) ? title_w : subtitle_w;
-            } else {
-                width += title_w;
-            }
+			if (customTitlePanel != null) {
+				int maxWidth = w - buttonsWidth - spacing - 20;
+				Icon icon = frame.getFrameIcon();
+				if (icon != null) {
+					maxWidth -= icon.getIconWidth();
+					maxWidth -= spacing;
+				}
+				int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
+				int cph = h;
+				int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
+				int cpy = 0;
+				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+				buttonsWidth += customTitlePanel.getPreferredSize().width;
+			}
+		}
 
-            int height = paletteTitleHeight;
-            if (!isPalette) {
-                int fontHeight = fm.getHeight() + 5;
-                Icon icon = isMacStyleWindowDecoration() ? null : frame.getFrameIcon();
-                int iconHeight = 0;
-                if (icon != null) {
-                    iconHeight = Math.min(icon.getIconHeight(), 18);
-                }
-                iconHeight += 5;
-                height = Math.max(fontHeight, iconHeight);
-            }
-            return new Dimension(width, height);
-        }
+		private void layoutMacStyle(Container c) {
+			int spacing = getHorSpacing();
+			int h = getHeight();
 
-        @Override
-        public void layoutContainer(Container c) {
-            if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
-                layoutMacStyle(c);
-            } else {
-                layoutDefault(c);
-            }
-        }
+			// assumes all buttons have the same dimensions these dimensions include the
+			// borders
+			int btnHeight = h - getVerSpacing();
+			int btnWidth = btnHeight;
 
-        public void layoutDefault(Container c) {
-            boolean leftToRight = JTattooUtilities.isLeftToRight(frame);
+			int x = 0;
+			int y = 0;
 
-            int spacing = getHorSpacing();
-            int w = getWidth();
-            int h = getHeight();
+			if (frame.isClosable()) {
+				closeButton.setBounds(x, y, btnWidth, btnHeight);
+				x += btnWidth + spacing;
+			}
+			if (frame.isIconifiable() && !isPalette) {
+				iconButton.setBounds(x, y, btnWidth, btnHeight);
+				x += btnWidth + spacing;
+			}
+			if (frame.isMaximizable() && !isPalette) {
+				maxButton.setBounds(x, y, btnWidth, btnHeight);
+				x += btnWidth + spacing;
+			}
 
-            // assumes all buttons have the same dimensions these dimensions include the borders
-            int btnHeight = h - getVerSpacing();
-            int btnWidth = btnHeight + 10;
+			buttonsWidth = x;
 
-            int x = leftToRight ? w - spacing : 0;
-            int y = Math.max(0, ((h - btnHeight) / 2) - 1);
+			if (customTitlePanel != null) {
+				int cpx = buttonsWidth + 5;
+				int cpy = 0;
+				int cpw = customTitlePanel.getPreferredSize().width;
+				int cph = h;
+				customTitlePanel.setBounds(cpx, cpy, cpw, cph);
+				buttonsWidth += cpw + 5;
+			}
+		}
 
-            if (frame.isClosable()) {
-                x += leftToRight ? -btnWidth : spacing;
-                closeButton.setBounds(x, y, btnWidth, btnHeight);
-                if (!leftToRight) {
-                    x += btnWidth;
-                }
-            }
+		@Override
+		public Dimension minimumLayoutSize(Container c) {
+			int width = 30;
+			if (frame.isClosable()) {
+				width += 21;
+			}
+			if (frame.isMaximizable()) {
+				width += 16 + (frame.isClosable() ? 10 : 4);
+			}
+			if (frame.isIconifiable()) {
+				width += 16 + (frame.isMaximizable() ? 2 : frame.isClosable() ? 10 : 4);
+			}
+			FontMetrics fm = JTattooUtilities.getFontMetrics(AcrylInternalFrameTitlePane.this, null, getFont());
+			String frameTitle = frame.getTitle();
+			int title_w = frameTitle != null ? fm.stringWidth(frameTitle) : 0;
+			int title_length = frameTitle != null ? frameTitle.length() : 0;
 
-            if (frame.isMaximizable() && !isPalette) {
-                x += leftToRight ? -spacing - btnWidth : spacing;
-                maxButton.setBounds(x, y, btnWidth, btnHeight);
-                if (!leftToRight) {
-                    x += btnWidth;
-                }
-            }
+			if (title_length > 2) {
+				int subtitle_w = fm.stringWidth(frame.getTitle().substring(0, 2) + "...");
+				width += title_w < subtitle_w ? title_w : subtitle_w;
+			} else {
+				width += title_w;
+			}
 
-            if (frame.isIconifiable() && !isPalette) {
-                x += leftToRight ? -spacing - btnWidth : spacing;
-                iconButton.setBounds(x, y, btnWidth, btnHeight);
-                if (!leftToRight) {
-                    x += btnWidth;
-                }
-            }
+			int height = paletteTitleHeight;
+			if (!isPalette) {
+				int fontHeight = fm.getHeight() + 5;
+				Icon icon = isMacStyleWindowDecoration() ? null : frame.getFrameIcon();
+				int iconHeight = 0;
+				if (icon != null) {
+					iconHeight = Math.min(icon.getIconHeight(), 18);
+				}
+				iconHeight += 5;
+				height = Math.max(fontHeight, iconHeight);
+			}
+			return new Dimension(width, height);
+		}
 
-            buttonsWidth = leftToRight ? w - x : x;
-            
-            if (customTitlePanel != null) {
-                int maxWidth = w - buttonsWidth - spacing - 20;
-                Icon icon = frame.getFrameIcon();
-                if (icon != null) {
-                    maxWidth -= icon.getIconWidth();
-                    maxWidth -= spacing;
-                }
-                int cpw = Math.min(maxWidth, customTitlePanel.getPreferredSize().width);
-                int cph = h;
-                int cpx = leftToRight ? w - buttonsWidth - cpw : buttonsWidth;
-                int cpy = 0;
-                customTitlePanel.setBounds(cpx, cpy, cpw, cph);
-                buttonsWidth += customTitlePanel.getPreferredSize().width;
-            }
-        }
+		@Override
+		public Dimension preferredLayoutSize(Container c) {
+			return minimumLayoutSize(c);
+		}
 
-        private void layoutMacStyle(Container c) {
-            int spacing = getHorSpacing();
-            int h = getHeight();
-            
-            // assumes all buttons have the same dimensions these dimensions include the borders
-            int btnHeight = h - getVerSpacing();
-            int btnWidth = btnHeight;
+		@Override
+		public void removeLayoutComponent(Component c) {
+		}
 
-            int x = 0;
-            int y = 0;
+	} // end class BaseTitlePaneLayout
 
-            if (frame.isClosable()) {
-                closeButton.setBounds(x, y, btnWidth, btnHeight);
-                x += btnWidth + spacing;
-            }
-            if (frame.isIconifiable() && !isPalette) {
-                iconButton.setBounds(x, y, btnWidth, btnHeight);
-                x += btnWidth + spacing;
-            }
-            if (frame.isMaximizable() && !isPalette) {
-                maxButton.setBounds(x, y, btnWidth, btnHeight);
-                x += btnWidth + spacing;
-            }
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
-            buttonsWidth = x;
-            
-            if (customTitlePanel != null) {
-                int cpx = buttonsWidth + 5;
-                int cpy = 0;
-                int cpw = customTitlePanel.getPreferredSize().width;
-                int cph = h;
-                customTitlePanel.setBounds(cpx, cpy, cpw, cph);
-                buttonsWidth += cpw + 5;
-            }
-        }
+	public AcrylInternalFrameTitlePane(JInternalFrame f) {
+		super(f);
+	}
 
-    } // end class BaseTitlePaneLayout
+	@Override
+	protected LayoutManager createLayout() {
+		return new BaseTitlePaneLayout();
+	}
+
+	@Override
+	protected int getHorSpacing() {
+		return 1;
+	}
+
+	@Override
+	protected int getVerSpacing() {
+		return 3;
+	}
+
+	@Override
+	public void paintBorder(Graphics g) {
+		if (isActive()) {
+			g.setColor(AbstractLookAndFeel.getWindowBorderColor());
+		} else {
+			g.setColor(AbstractLookAndFeel.getWindowInactiveBorderColor());
+		}
+		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
+	}
+
+	@Override
+	public void paintText(Graphics g, int x, int y, String title) {
+		Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();
+		if (isActive()) {
+			shadowColor = ColorHelper.darker(shadowColor, 30);
+		}
+		g.setColor(shadowColor);
+		JTattooUtilities.drawString(frame, g, title, x - 1, y - 2);
+		JTattooUtilities.drawString(frame, g, title, x - 1, y);
+		JTattooUtilities.drawString(frame, g, title, x + 1, y - 2);
+		JTattooUtilities.drawString(frame, g, title, x + 1, y);
+		if (isActive()) {
+			g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
+		} else {
+			g.setColor(AbstractLookAndFeel.getWindowInactiveTitleForegroundColor());
+		}
+		JTattooUtilities.drawString(frame, g, title, x, y - 1);
+	}
 
 } // end of class AcrylInternalFrameTitlePane
