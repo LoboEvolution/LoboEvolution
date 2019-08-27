@@ -33,12 +33,12 @@ import java.util.StringTokenizer;
 
 import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
+import org.lobo.html.CSSValues;
 import org.lobo.info.SVGInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
 import org.lobo.laf.LAFSettings;
-import org.lobobrowser.html.CSSValuesProperties;
 import org.lobobrowser.html.dom.smil.ElementTargetAttributes;
 import org.lobobrowser.html.dom.smil.Time;
 import org.lobobrowser.html.dom.smil.TimeList;
@@ -85,10 +85,10 @@ public class SVGUtility {
 	public static Font getFontValue(String ff, String fs) {
 		FontKey key = new FontKey();
 		key.setFontFamily(ff != null ? ff : Font.SANS_SERIF);
-		key.setFontStyle(CSSValuesProperties.ITALIC);
-		key.setFontVariant(CSSValuesProperties.SMALL_CAPS);
-		key.setFontWeight(CSSValuesProperties.BOLD);
-		key.setFontSize(fs != null ? FontValues.getFontSize(fs, null) : new LAFSettings().getIstance().getFontSize());
+		key.setFontStyle(CSSValues.ITALIC.getValue());
+		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
+		key.setFontWeight(CSSValues.BOLD.getValue());
+		key.setFontSize(fs != null ? FontValues.getFontSize(fs, null) : new LAFSettings().getInstance().getFontSize());
 		key.setLocales(null);
 		key.setSuperscript(null);
 		key.setLetterSpacing(0);

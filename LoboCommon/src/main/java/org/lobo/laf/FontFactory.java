@@ -47,6 +47,19 @@ import org.lobo.common.Strings;
  * @author J. H. S.
  */
 public class FontFactory {
+	
+	
+	/** The default font name. */
+	private String defaultFontName = new LAFSettings().getInstance().getFont();
+
+	/** The font families. */
+	private final Set<String> fontFamilies = new HashSet<String>();
+
+	/** The font map. */
+	private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>();
+
+	/** The registered fonts. */
+	private final Map<String, Font> registeredFonts = new HashMap<String, Font>();
 
 	/** The Constant instance. */
 	private static final FontFactory instance = new FontFactory();
@@ -91,18 +104,6 @@ public class FontFactory {
 
 		return baseFont.deriveFont(additionalAttributes);
 	}
-
-	/** The default font name. */
-	private String defaultFontName = new LAFSettings().getIstance().getFont();
-
-	/** The font families. */
-	private final Set<String> fontFamilies = new HashSet<String>(40);
-
-	/** The font map. */
-	private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>(50);
-
-	/** The registered fonts. */
-	private final Map<String, Font> registeredFonts = new HashMap<String, Font>(0);
 
 	/**
 	 * Instantiates a new font factory.

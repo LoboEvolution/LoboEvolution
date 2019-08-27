@@ -34,6 +34,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
@@ -153,7 +154,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private String inputEncoding;
 
-	private Set<?> locales;
+	private Set<Locale> locales;
 
 	private Function onloadHandler;
 
@@ -491,7 +492,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * Gets an <i>immutable</i> set of locales previously set for this document.
 	 */
-	public Set<?> getLocales() {
+	public Set<Locale> getLocales() {
 		return this.locales;
 	}
 
@@ -872,7 +873,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param locales An <i>immutable</i> set of <code>java.util.Locale</code>
 	 *                instances.
 	 */
-	public void setLocales(Set<?> locales) {
+	public void setLocales(Set<Locale> locales) {
 		this.locales = locales;
 	}
 

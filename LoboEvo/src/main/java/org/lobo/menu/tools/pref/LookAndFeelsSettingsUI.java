@@ -35,6 +35,8 @@ import javax.swing.border.TitledBorder;
 
 import org.lobo.gui.ColorComboBox;
 import org.lobo.gui.FontLabel;
+import org.lobo.laf.LAFType;
+import org.lobo.laf.FontType;
 import org.lobo.laf.LAFSettings;
 
 /**
@@ -82,7 +84,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	private final JCheckBox italicCheckBox;
 
 	/** The settings. */
-	private final LAFSettings laf = new LAFSettings().getIstance();
+	private final LAFSettings laf = new LAFSettings().getInstance();
 
 	/** The Luna Box. */
 	private final JCheckBox lunaCheckBox;
@@ -123,26 +125,26 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		final JPanel groupBox = new JPanel();
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 
-		this.boldCheckBox = new JCheckBox(LAFSettings.BOLD);
-		this.italicCheckBox = new JCheckBox(LAFSettings.ITALIC);
-		this.underlineCheckBox = new JCheckBox(LAFSettings.UNDERLINE);
-		this.strikethroughCheckBox = new JCheckBox(LAFSettings.STRIKETHROUGH);
-		this.subscriptCheckBox = new JCheckBox(LAFSettings.SUBSCRIPT);
-		this.superscriptCheckBox = new JCheckBox(LAFSettings.SUPERSCRIPT);
+		this.boldCheckBox = new JCheckBox(LAFType.BOLD.getValue());
+		this.italicCheckBox = new JCheckBox(LAFType.ITALIC.getValue());
+		this.underlineCheckBox = new JCheckBox(FontType.UNDERLINE.getValue());
+		this.strikethroughCheckBox = new JCheckBox(FontType.STRIKETHROUGH.getValue());
+		this.subscriptCheckBox = new JCheckBox(FontType.SUBSCRIPT.getValue());
+		this.superscriptCheckBox = new JCheckBox(FontType.SUPERSCRIPT.getValue());
 
-		this.acrylCheckBox = new JCheckBox(LAFSettings.ACRYL);
-		this.aeroCheckBox = new JCheckBox(LAFSettings.AERO);
-		this.aluminiumCheckBox = new JCheckBox(LAFSettings.ALUMINIUM);
-		this.bernsteinCheckBox = new JCheckBox(LAFSettings.BERNSTEIN);
-		this.fastCheckBox = new JCheckBox(LAFSettings.FAST);
-		this.graphiteCheckBox = new JCheckBox(LAFSettings.GRAPHITE);
-		this.hiFiCheckBox = new JCheckBox(LAFSettings.HIFI);
-		this.lunaCheckBox = new JCheckBox(LAFSettings.LUNA);
-		this.mcWinCheckBox = new JCheckBox(LAFSettings.MCWIN);
-		this.mintCheckBox = new JCheckBox(LAFSettings.MINT);
-		this.noireCheckBox = new JCheckBox(LAFSettings.NOIRE);
-		this.smartCheckBox = new JCheckBox(LAFSettings.SMART);
-		this.textureCheckBox = new JCheckBox(LAFSettings.TEXTURE);
+		this.acrylCheckBox = new JCheckBox(LAFType.ACRYL.getValue());
+		this.aeroCheckBox = new JCheckBox(LAFType.AERO.getValue());
+		this.aluminiumCheckBox = new JCheckBox(LAFType.ALUMINIUM.getValue());
+		this.bernsteinCheckBox = new JCheckBox(LAFType.BERNSTEIN.getValue());
+		this.fastCheckBox = new JCheckBox(LAFType.FAST.getValue());
+		this.graphiteCheckBox = new JCheckBox(LAFType.GRAPHITE.getValue());
+		this.hiFiCheckBox = new JCheckBox(LAFType.HIFI.getValue());
+		this.lunaCheckBox = new JCheckBox(LAFType.LUNA.getValue());
+		this.mcWinCheckBox = new JCheckBox(LAFType.MCWIN.getValue());
+		this.mintCheckBox = new JCheckBox(LAFType.MINT.getValue());
+		this.noireCheckBox = new JCheckBox(LAFType.NOIRE.getValue());
+		this.smartCheckBox = new JCheckBox(LAFType.SMART.getValue());
+		this.textureCheckBox = new JCheckBox(FontType.TEXTURE.getValue());
 		this.colorComboBox = new ColorComboBox();
 		this.colorComboBox.setPreferredSize(new Dimension(400, 20));
 		this.fontList = new JComboBox<String>(LAFSettings.getFonts("FONT"));
@@ -293,7 +295,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.subscriptCheckBox.setSelected(false);
 		this.superscriptCheckBox.setSelected(false);
 		this.fontSizeList.setSelectedItem("14");
-		this.fontList.setSelectedItem(LAFSettings.TIMES_NEW_ROMAN);
+		this.fontList.setSelectedItem(FontType.TIMES_NEW_ROMAN.getValue());
 		this.acrylCheckBox.revalidate();
 		this.aeroCheckBox.revalidate();
 		this.aluminiumCheckBox.revalidate();
@@ -317,7 +319,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 		this.previewLabel.setText(this.PREVIEW_TEXT);
 		final Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
-		attributes.put(FAMILY, LAFSettings.TIMES_NEW_ROMAN);
+		attributes.put(FAMILY, FontType.TIMES_NEW_ROMAN.getValue());
 		attributes.put(SIZE, (float) 14.0);
 		this.previewLabel.setFont(new Font(attributes));
 		this.previewLabel.setForeground(Color.BLACK);

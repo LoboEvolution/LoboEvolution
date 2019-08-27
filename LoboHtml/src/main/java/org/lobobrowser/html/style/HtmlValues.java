@@ -33,10 +33,9 @@ import java.util.StringTokenizer;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
-import org.lobobrowser.html.CSSValuesProperties;
 import org.w3c.dom.css.CSS3Properties;
 
-public class HtmlValues implements CSSValuesProperties {
+public class HtmlValues {
 	public static final int BORDER_STYLE_DASHED = 3;
 	public static final int BORDER_STYLE_DOTTED = 2;
 	public static final int BORDER_STYLE_DOUBLE = 5;

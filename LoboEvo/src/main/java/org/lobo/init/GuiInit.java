@@ -27,7 +27,7 @@ import com.jtattoo.plaf.texture.TextureLookAndFeel;
 public class GuiInit {
 
 	public static void initLookAndFeel() throws Exception {
-		final LAFSettings settings = new LAFSettings().getIstance();
+		final LAFSettings settings = new LAFSettings().getInstance();
 		final Properties props = new Properties();
 		props.put("logoString", "Lobo Evolution");
 

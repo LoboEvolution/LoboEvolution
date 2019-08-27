@@ -14,26 +14,11 @@ import org.lobo.store.SQLiteCommon;
 /**
  * The Class LAFSettings.
  */
-public class LAFSettings implements FontCommon, Serializable {
+public class LAFSettings implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
-	public static String[] getFonts(String type) {
-		final List<String> fonts = new ArrayList<String>();
-		final String query = "SELECT name FROM " + type;
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				Statement stmt = conn.createStatement();
-				ResultSet rs = stmt.executeQuery(query)) {
-			while (rs != null && rs.next()) {
-				fonts.add(rs.getString(1));
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return fonts.toArray(new String[fonts.size()]);
-	}
-
+	
 	/** The Acryl . */
 	private boolean acryl = false;
 
@@ -56,7 +41,7 @@ public class LAFSettings implements FontCommon, Serializable {
 	private boolean fast = false;
 
 	/** The Font . */
-	private String font = TIMES_NEW_ROMAN;
+	private String font = FontType.TIMES_NEW_ROMAN.getValue();
 
 	/** The Font Size . */
 	private float fontSize = 14.0f;
@@ -104,6 +89,21 @@ public class LAFSettings implements FontCommon, Serializable {
 
 	/** The Underline . */
 	private boolean underline = false;
+	
+	public static String[] getFonts(String type) {
+		final List<String> fonts = new ArrayList<String>();
+		final String query = "SELECT name FROM " + type;
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(query)) {
+			while (rs != null && rs.next()) {
+				fonts.add(rs.getString(1));
+			}
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		return fonts.toArray(new String[fonts.size()]);
+	}
 
 	/**
 	 * @return the color
@@ -131,9 +131,9 @@ public class LAFSettings implements FontCommon, Serializable {
 	}
 
 	/**
-	 * @return the istance
+	 * @return the instance
 	 */
-	public LAFSettings getIstance() {
+	public LAFSettings getInstance() {
 		LAFSettings laf = retriveFontDate();
 		if (laf == null) {
 			laf = this;

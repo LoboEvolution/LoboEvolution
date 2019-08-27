@@ -49,7 +49,7 @@ public class FontKey {
 		this.fontStyle = null;
 		this.fontVariant = null;
 		this.fontWeight = null;
-		this.fontSize = new LAFSettings().getIstance().getFontSize();
+		this.fontSize = new LAFSettings().getInstance().getFontSize();
 		this.locales = null;
 		this.superscript = null;
 		this.letterSpacing = 0;
@@ -239,7 +239,7 @@ public class FontKey {
 	/**
 	 * @param locales the locales to set
 	 */
-	public void setLocales(Set locales) {
+	public void setLocales(Set<Locale> locales) {
 		this.locales = locales;
 	}
 
