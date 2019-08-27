@@ -26,6 +26,7 @@ package org.lobobrowser.html.dom.domimpl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lobo.html.HTMLTag;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.w3c.dom.DOMException;
 
@@ -36,110 +37,110 @@ class ElementFactory {
 		return instance;
 	}
 
-	private final Map<String, HTMLElementBuilder> builders = new HashMap<String, HTMLElementBuilder>();
+	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<HTMLTag, HTMLElementBuilder>();
 
 	private ElementFactory() {
 		// This sets up builders for each known element tag.
-		final Map<String, HTMLElementBuilder> builders = this.builders;
-		builders.put("HTML", new HTMLElementBuilder.Html());
-		builders.put("TITLE", new HTMLElementBuilder.Title());
-		builders.put("BASE", new HTMLElementBuilder.Base());
-        builders.put("HEAD", new HTMLElementBuilder.Head());
+		final Map<HTMLTag, HTMLElementBuilder> builders = this.builders;
+		builders.put(HTMLTag.HTML, new HTMLElementBuilder.Html());
+		builders.put(HTMLTag.TITLE, new HTMLElementBuilder.Title());
+		builders.put(HTMLTag.BASE, new HTMLElementBuilder.Base());
+        builders.put(HTMLTag.HEAD, new HTMLElementBuilder.Head());
 
 		final HTMLElementBuilder div = new HTMLElementBuilder.Div();
-		builders.put("DIV", div);
-		builders.put("DL", div);
+		builders.put(HTMLTag.DIV, div);
+		builders.put(HTMLTag.DL, div);
 
-		builders.put("BODY", new HTMLElementBuilder.Body());
-		builders.put("CENTER", new HTMLElementBuilder.Center());
-		builders.put("CAPTION", new HTMLElementBuilder.Center());
-		builders.put("PRE", new HTMLElementBuilder.Pre());
-		builders.put("P", new HTMLElementBuilder.P());
+		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
+		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());
+		builders.put(HTMLTag.CAPTION, new HTMLElementBuilder.Center());
+		builders.put(HTMLTag.PRE, new HTMLElementBuilder.Pre());
+		builders.put(HTMLTag.P, new HTMLElementBuilder.P());
 
 		final HTMLElementBuilder bq = new HTMLElementBuilder.Blockquote();
-		builders.put("BLOCKQUOTE", bq);
-		builders.put("DD", bq);
+		builders.put(HTMLTag.BLOCKQUOTE, bq);
+		builders.put(HTMLTag.DD, bq);
 
-		builders.put("SPAN", new HTMLElementBuilder.Span());
-		builders.put("SCRIPT", new HTMLElementBuilder.Script());
-		builders.put("IMG", new HTMLElementBuilder.Img());
-		builders.put("STYLE", new HTMLElementBuilder.Style());
-		builders.put("LINK", new HTMLElementBuilder.Link());
-		builders.put("A", new HTMLElementBuilder.Anchor());
-		builders.put("ANCHOR", new HTMLElementBuilder.Anchor());
-		builders.put("TABLE", new HTMLElementBuilder.Table());
-		builders.put("TD", new HTMLElementBuilder.Td());
-		builders.put("TH", new HTMLElementBuilder.Th());
-		builders.put("TR", new HTMLElementBuilder.Tr());
-		builders.put("FORM", new HTMLElementBuilder.Form());
-		builders.put("INPUT", new HTMLElementBuilder.Input());
-		builders.put("BUTTON", new HTMLElementBuilder.Button());
-		builders.put("TEXTAREA", new HTMLElementBuilder.Textarea());
-		builders.put("SELECT", new HTMLElementBuilder.Select());
-		builders.put("OPTION", new HTMLElementBuilder.Option());
-		builders.put("FRAMESET", new HTMLElementBuilder.Frameset());
-		builders.put("FRAME", new HTMLElementBuilder.Frame());
-		builders.put("IFRAME", new HTMLElementBuilder.IFrame());
-		builders.put("UL", new HTMLElementBuilder.Ul());
-		builders.put("OL", new HTMLElementBuilder.Ol());
-		builders.put("LI", new HTMLElementBuilder.Li());
-		builders.put("HR", new HTMLElementBuilder.Hr());
-		builders.put("BR", new HTMLElementBuilder.Br());
-		builders.put("OBJECT", new HTMLElementBuilder.HtmlObject());
-		builders.put("EMBED", new HTMLElementBuilder.NonStandard());
+		builders.put(HTMLTag.SPAN, new HTMLElementBuilder.Span());
+		builders.put(HTMLTag.SCRIPT, new HTMLElementBuilder.Script());
+		builders.put(HTMLTag.IMG, new HTMLElementBuilder.Img());
+		builders.put(HTMLTag.STYLE, new HTMLElementBuilder.Style());
+		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
+		builders.put(HTMLTag.A, new HTMLElementBuilder.Anchor());
+		builders.put(HTMLTag.ANCHOR, new HTMLElementBuilder.Anchor());
+		builders.put(HTMLTag.TABLE, new HTMLElementBuilder.Table());
+		builders.put(HTMLTag.TD, new HTMLElementBuilder.Td());
+		builders.put(HTMLTag.TH, new HTMLElementBuilder.Th());
+		builders.put(HTMLTag.TR, new HTMLElementBuilder.Tr());
+		builders.put(HTMLTag.FORM, new HTMLElementBuilder.Form());
+		builders.put(HTMLTag.INPUT, new HTMLElementBuilder.Input());
+		builders.put(HTMLTag.BUTTON, new HTMLElementBuilder.Button());
+		builders.put(HTMLTag.TEXTAREA, new HTMLElementBuilder.Textarea());
+		builders.put(HTMLTag.SELECT, new HTMLElementBuilder.Select());
+		builders.put(HTMLTag.OPTION, new HTMLElementBuilder.Option());
+		builders.put(HTMLTag.FRAMESET, new HTMLElementBuilder.Frameset());
+		builders.put(HTMLTag.FRAME, new HTMLElementBuilder.Frame());
+		builders.put(HTMLTag.IFRAME, new HTMLElementBuilder.IFrame());
+		builders.put(HTMLTag.UL, new HTMLElementBuilder.Ul());
+		builders.put(HTMLTag.OL, new HTMLElementBuilder.Ol());
+		builders.put(HTMLTag.LI, new HTMLElementBuilder.Li());
+		builders.put(HTMLTag.HR, new HTMLElementBuilder.Hr());
+		builders.put(HTMLTag.BR, new HTMLElementBuilder.Br());
+		builders.put(HTMLTag.OBJECT, new HTMLElementBuilder.HtmlObject());
+		builders.put(HTMLTag.EMBED, new HTMLElementBuilder.NonStandard());
 
-		builders.put("TT", new HTMLElementBuilder.Tt());
-		builders.put("CODE", new HTMLElementBuilder.Code());
-		builders.put("SMALL", new HTMLElementBuilder.Small());
-		builders.put("B", new HTMLElementBuilder.Strong());
-		builders.put("STRONG", new HTMLElementBuilder.Strong());
+		builders.put(HTMLTag.TT, new HTMLElementBuilder.Tt());
+		builders.put(HTMLTag.CODE, new HTMLElementBuilder.Code());
+		builders.put(HTMLTag.SMALL, new HTMLElementBuilder.Small());
+		builders.put(HTMLTag.B, new HTMLElementBuilder.Strong());
+		builders.put(HTMLTag.STRONG, new HTMLElementBuilder.Strong());
 
-		builders.put("U", new HTMLElementBuilder.Underline());
-		builders.put("STRIKE", new HTMLElementBuilder.Strike());
-		builders.put("SUP", new HTMLElementBuilder.Sup());
-		builders.put("SUB", new HTMLElementBuilder.Sub());
+		builders.put(HTMLTag.U, new HTMLElementBuilder.Underline());
+		builders.put(HTMLTag.STRIKE, new HTMLElementBuilder.Strike());
+		builders.put(HTMLTag.SUP, new HTMLElementBuilder.Sup());
+		builders.put(HTMLTag.SUB, new HTMLElementBuilder.Sub());
 
 		final HTMLElementBuilder em = new HTMLElementBuilder.Em();
-		builders.put("I", em);
-		builders.put("EM", em);
-		builders.put("CITE", em);
+		builders.put(HTMLTag.I, em);
+		builders.put(HTMLTag.EM, em);
+		builders.put(HTMLTag.CITE, em);
 
 		final HTMLElementBuilder heading = new HTMLElementBuilder.Heading();
-		builders.put("H1", heading);
-		builders.put("H2", heading);
-		builders.put("H3", heading);
-		builders.put("H4", heading);
-		builders.put("H5", heading);
-		builders.put("H6", heading);
+		builders.put(HTMLTag.H1, heading);
+		builders.put(HTMLTag.H2, heading);
+		builders.put(HTMLTag.H3, heading);
+		builders.put(HTMLTag.H4, heading);
+		builders.put(HTMLTag.H5, heading);
+		builders.put(HTMLTag.H6, heading);
 
-		builders.put("CANVAS", new HTMLElementBuilder.Canvas());
+		builders.put(HTMLTag.CANVAS, new HTMLElementBuilder.Canvas());
 
-		builders.put("SVG", new HTMLElementBuilder.SVG());
-		builders.put("CIRCLE", new HTMLElementBuilder.SVGCircle());
-		builders.put("RECT", new HTMLElementBuilder.SVGRect());
-		builders.put("ELLIPSE", new HTMLElementBuilder.SVGEllipse());
-		builders.put("LINE", new HTMLElementBuilder.SVGLine());
-		builders.put("POLYGON", new HTMLElementBuilder.SVGPolygon());
-		builders.put("POLYLINE", new HTMLElementBuilder.SVGPolyline());
-		builders.put("PATH", new HTMLElementBuilder.SVGPath());
-		builders.put("G", new HTMLElementBuilder.SVGG());
-		builders.put("DEFS", new HTMLElementBuilder.SVGDefs());
-		builders.put("USE", new HTMLElementBuilder.SVGUse());
-		builders.put("SYMBOL", new HTMLElementBuilder.SVGSymbol());
-		builders.put("TEXT_HTML", new HTMLElementBuilder.SVGText());
-		builders.put("RADIAL_GRADIENT", new HTMLElementBuilder.SVGRadialGradient());
-		builders.put("LINEAR_GRADIENT", new HTMLElementBuilder.SVGLinearGradient());
-		builders.put("STOP", new HTMLElementBuilder.SVGStop());
-		builders.put("CLIPPATH", new HTMLElementBuilder.SVGClipPath());
-		builders.put("ANIMATE", new HTMLElementBuilder.SVGAnimate());
-		builders.put("ANIMATE_TRASFORM", new HTMLElementBuilder.SVGAnimateTrasform());
-		builders.put("ANIMATE_COLOR", new HTMLElementBuilder.SVGAnimateColor());
+		builders.put(HTMLTag.SVG, new HTMLElementBuilder.SVG());
+		builders.put(HTMLTag.CIRCLE, new HTMLElementBuilder.SVGCircle());
+		builders.put(HTMLTag.RECT, new HTMLElementBuilder.SVGRect());
+		builders.put(HTMLTag.ELLIPSE, new HTMLElementBuilder.SVGEllipse());
+		builders.put(HTMLTag.LINE, new HTMLElementBuilder.SVGLine());
+		builders.put(HTMLTag.POLYGON, new HTMLElementBuilder.SVGPolygon());
+		builders.put(HTMLTag.POLYLINE, new HTMLElementBuilder.SVGPolyline());
+		builders.put(HTMLTag.PATH, new HTMLElementBuilder.SVGPath());
+		builders.put(HTMLTag.G, new HTMLElementBuilder.SVGG());
+		builders.put(HTMLTag.DEFS, new HTMLElementBuilder.SVGDefs());
+		builders.put(HTMLTag.USE, new HTMLElementBuilder.SVGUse());
+		builders.put(HTMLTag.SYMBOL, new HTMLElementBuilder.SVGSymbol());
+		builders.put(HTMLTag.TEXT_HTML, new HTMLElementBuilder.SVGText());
+		builders.put(HTMLTag.RADIAL_GRADIENT, new HTMLElementBuilder.SVGRadialGradient());
+		builders.put(HTMLTag.LINEAR_GRADIENT, new HTMLElementBuilder.SVGLinearGradient());
+		builders.put(HTMLTag.STOP, new HTMLElementBuilder.SVGStop());
+		builders.put(HTMLTag.CLIPPATH, new HTMLElementBuilder.SVGClipPath());
+		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
+		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
+		builders.put(HTMLTag.ANIMATE_COLOR, new HTMLElementBuilder.SVGAnimateColor());
 	}
 
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
 		final String normalName = name.toUpperCase();
 		// No need to synchronize; read-only map at this point.
-		final HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(normalName);
+		final HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(HTMLTag.get(normalName));
 		if (builder == null) {
 			// TODO: IE would assume name is html text here?
 			final HTMLElementImpl element = new HTMLElementImpl(name);
