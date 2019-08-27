@@ -223,7 +223,7 @@ public class SVGBasicControl extends SVGStyle {
 		SVGPoint subPathStartPoint = null;
 		SVGPathSegList list = (SVGPathSegList)svgi.getPathSegList();
 		boolean startOfSubPath = true;
-		int numPathSegs = list.getNumberOfItems();
+		int numPathSegs = list == null ? 0 : list.getNumberOfItems();
 		float lastX = 0;
 		float lastY = 0;
 
