@@ -16,13 +16,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.lobo.html.CSSValues;
 import org.lobo.info.CanvasInfo;
 import org.lobo.laf.ColorFactory;
-import org.lobo.laf.FontCommon;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
+import org.lobo.laf.LAFType;
 import org.lobo.laf.LAFSettings;
-import org.lobobrowser.html.CSSValuesProperties;
 import org.lobobrowser.html.dom.CanvasGradient;
 import org.lobobrowser.html.dom.CanvasPattern;
 import org.lobobrowser.html.dom.CanvasRenderingContext2D;
@@ -31,7 +31,6 @@ import org.lobobrowser.html.dom.HTMLCanvasElement;
 import org.lobobrowser.html.dom.HTMLImageElement;
 import org.lobobrowser.html.dom.ImageData;
 import org.lobobrowser.html.dom.TextMetrics;
-import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlValues;
 
 
@@ -731,46 +730,57 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement
 	 *            the font
 	 * @return the font value
 	 */
-	private Font getFontValue(String font) {
+	private Font getFontValue(String fontSpec) {
 
 		FontKey key = new FontKey();
 		key.setFontFamily(Font.SANS_SERIF);
-		key.setFontStyle(FontCommon.ITALIC);
-		key.setFontVariant(CSSValuesProperties.SMALL_CAPS);
-		key.setFontWeight(FontCommon.BOLD);
-		key.setFontSize(new LAFSettings().getIstance().getFontSize());
+		key.setFontStyle(LAFType.ITALIC.getValue());
+		key.setFontVariant(CSSValues.SMALL_CAPS.getValue());
+		key.setFontWeight(LAFType.BOLD.getValue());
+		key.setFontSize(new LAFSettings().getInstance().getFontSize());
 		key.setLocales(null);
 		key.setSuperscript(null);
 		key.setLetterSpacing(0);
 		key.setStrikethrough(false);
 		key.setUnderline(0);
-		
-		String[] arrFont = font.split(" ");
 
-		for (int i = 0; i < arrFont.length; i++) {
-			String prop = arrFont[i];
-			if (prop.contains("px") || prop.contains("pt")) {
-				key.setFontSize(FontValues.getFontSize(prop, null));
+		final String[] tokens = HtmlValues.splitCssValue(fontSpec);
+		String token = null;
+		final int length = tokens.length;
+		int i;
+		for (i = 0; i < length; i++) {
+			token = tokens[i];
+			if (HtmlValues.isFontStyle(token)) {
+				key.setFontStyle(token);
+				continue;
 			}
-
-			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.ITALIC)
-					|| prop.contains(CSSValuesProperties.OBLIQUE)) {
-				key.setFontStyle(prop);
+			if (HtmlValues.isFontVariant(token)) {
+				key.setFontVariant(token);
+				continue;
 			}
-
-			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.SMALL_CAPS)) {
-				key.setFontVariant(prop);
+			if (HtmlValues.isFontWeight(token)) {
+				key.setFontWeight(token);
+				continue;
 			}
-
-			if (prop.contains(CSSValuesProperties.NORMAL) || prop.contains(CSSValuesProperties.BOLD)
-					|| prop.contains(CSSValuesProperties.BOLDER) || prop.contains(CSSValuesProperties.LIGHTER)) {
-				key.setFontSize(Integer.parseInt(prop));
-			}
-
-			if (i == arrFont.length - 1) {
-				key.setFontFamily(prop);
-			}
+			// Otherwise exit loop
+			break;
 		}
+		if (token != null) {
+			final int slashIdx = token.indexOf('/');
+			final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
+			int errorValue = new Float(new LAFSettings().getInstance().getFontSize()).intValue();
+			key.setFontSize(HtmlValues.getPixelSize(fontSizeText, null, errorValue));
+
+			if (++i < length) {
+				final StringBuffer fontFamilyBuff = new StringBuffer();
+				do {
+					token = tokens[i];
+					fontFamilyBuff.append(token);
+					fontFamilyBuff.append(' ');
+				} while (++i < length);
+				key.setFontFamily(fontFamilyBuff.toString());
+			}
+		}		
 		return FontFactory.getInstance().getFont(key);
 	}
 
