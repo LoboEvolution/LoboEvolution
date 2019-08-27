@@ -1475,8 +1475,9 @@ public class Context
             // For compatibility IllegalArgumentException can not be thrown here
             lineno = 0;
         }
-        return (Script) compileImpl(null, in, null, sourceName, lineno,
-                                    securityDomain, false, null, null);
+
+        return (Script) compileImpl(null, Kit.readReader(in), sourceName, lineno,
+                securityDomain, false, null, null);
     }
 
     /**
@@ -1514,7 +1515,7 @@ public class Context
                                Object securityDomain)
     {
         try {
-            return (Script) compileImpl(null, null, source, sourceName, lineno,
+            return (Script) compileImpl(null, source, sourceName, lineno,
                                         securityDomain, false,
                                         compiler, compilationErrorReporter);
         } catch (IOException ioe) {
@@ -1555,7 +1556,7 @@ public class Context
                                    Object securityDomain)
     {
         try {
-            return (Function) compileImpl(scope, null, source, sourceName,
+            return (Function) compileImpl(scope, source, sourceName,
                                           lineno, securityDomain, true,
                                           compiler, compilationErrorReporter);
         }
@@ -2487,8 +2488,7 @@ public class Context
     }
 
     private Object compileImpl(Scriptable scope,
-                               Reader sourceReader, String sourceString,
-                               String sourceName, int lineno,
+                               String sourceString, String sourceName, int lineno,
                                Object securityDomain, boolean returnFunction,
                                Evaluator compiler,
                                ErrorReporter compilationErrorReporter)
@@ -2502,8 +2502,6 @@ public class Context
                 "securityDomain should be null if setSecurityController() was never called");
         }
 
-        // One of sourceReader or sourceString has to be null
-        if (!(sourceReader == null ^ sourceString == null)) Kit.codeBug();
         // scope should be given if and only if compiling function
         if (!(scope == null ^ returnFunction)) Kit.codeBug();
 
@@ -2513,14 +2511,7 @@ public class Context
             compilationErrorReporter = compilerEnv.getErrorReporter();
         }
 
-        if (debugger != null) {
-            if (sourceReader != null) {
-                sourceString = Kit.readReader(sourceReader);
-                sourceReader = null;
-            }
-        }
-
-        ScriptNode tree = parse(sourceReader, sourceString, sourceName, lineno,
+        ScriptNode tree = parse(sourceString, sourceName, lineno,
                                     compilerEnv, compilationErrorReporter, returnFunction);
 
         Object bytecode;
@@ -2532,11 +2523,11 @@ public class Context
             bytecode = compiler.compile(compilerEnv, tree, tree.getEncodedSource(), returnFunction);
         } catch (ClassFileFormatException e) {
             // we hit some class file limit, fall back to interpreter or report
-            compiler = createInterpreter();
 
             // we have to recreate the tree because the compile call might have changed the tree already
-            tree = parse(sourceReader, sourceString, sourceName, lineno,
-                            compilerEnv, compilationErrorReporter, returnFunction);
+            tree = parse(sourceString, sourceName, lineno, compilerEnv, compilationErrorReporter, returnFunction);
+
+            compiler = createInterpreter();
             bytecode = compiler.compile(compilerEnv, tree, tree.getEncodedSource(), returnFunction);
         }
 
@@ -2560,8 +2551,7 @@ public class Context
         return result;
     }
 
-    private ScriptNode parse(Reader sourceReader, String sourceString,
-            String sourceName, int lineno,
+    private ScriptNode parse(String sourceString, String sourceName, int lineno,
             CompilerEnvirons compilerEnv, ErrorReporter compilationErrorReporter,
             boolean returnFunction) throws IOException {
         Parser p = new Parser(compilerEnv, compilationErrorReporter);
@@ -2572,12 +2562,7 @@ public class Context
             p.setDefaultUseStrictDirective(true);
         }
 
-        AstRoot ast;
-        if (sourceString != null) {
-            ast = p.parse(sourceString, sourceName, lineno);
-        } else {
-            ast = p.parse(sourceReader, sourceName, lineno);
-        }
+        AstRoot ast = p.parse(sourceString, sourceName, lineno);
         if (returnFunction) {
             // parser no longer adds function to script node
             if (!(ast.getFirstChild() != null
