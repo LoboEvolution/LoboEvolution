@@ -19,7 +19,8 @@ package com.gargoylesoftware.css.parser.selector;
  */
 public class ChildSelector extends AbstractSelector {
 
-    private Selector ancestorSelector_;
+	private static final long serialVersionUID = 1L;
+	private Selector ancestorSelector_;
     private SimpleSelector simpleSelector_;
 
     /**

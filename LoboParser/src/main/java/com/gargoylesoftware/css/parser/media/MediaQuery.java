@@ -26,7 +26,8 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
  */
 public class MediaQuery extends AbstractLocatable implements Serializable {
 
-    private String media_;
+	private static final long serialVersionUID = 1L;
+	private String media_;
     private List<Property> properties_;
     private boolean isOnly_;
     private boolean isNot_;

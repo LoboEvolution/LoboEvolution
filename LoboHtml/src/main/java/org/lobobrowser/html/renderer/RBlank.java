@@ -26,7 +26,6 @@ package org.lobobrowser.html.renderer;
 import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.style.RenderState;

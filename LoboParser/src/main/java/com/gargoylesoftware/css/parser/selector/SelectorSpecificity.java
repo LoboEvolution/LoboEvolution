@@ -27,7 +27,9 @@ import com.gargoylesoftware.css.parser.condition.Condition;
  */
 public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
 
-    /**
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * The specificity for declarations made in the style attributes of an element.
      */
     public static final SelectorSpecificity FROM_STYLE_ATTRIBUTE = new SelectorSpecificity(1, 0, 0, 0);

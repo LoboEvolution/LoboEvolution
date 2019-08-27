@@ -29,7 +29,9 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
 
-    private String href_;
+	private static final long serialVersionUID = 1L;
+	
+	private String href_;
     private MediaListImpl media_;
 
     /**

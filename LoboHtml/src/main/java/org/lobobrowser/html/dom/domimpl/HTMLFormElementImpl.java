@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLFormElement;
-import org.lobobrowser.html.dom.NodeFilter;
 import org.lobobrowser.html.dom.filter.InputFilter;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HtmlRendererContext;

@@ -24,8 +24,9 @@ import com.gargoylesoftware.css.util.LangUtils;
  * @author Ronald Brill
  */
 public class Locator implements Serializable {
-
-    private String uri_;
+	
+	private static final long serialVersionUID = 1L;
+	private String uri_;
     private int lineNumber_;
     private int columnNumber_;
 

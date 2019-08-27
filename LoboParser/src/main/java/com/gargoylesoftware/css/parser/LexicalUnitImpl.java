@@ -26,7 +26,8 @@ import java.util.Locale;
  */
 public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, Serializable {
 
-    private LexicalUnitType lexicalUnitType_;
+	private static final long serialVersionUID = 1L;
+	private LexicalUnitType lexicalUnitType_;
     private LexicalUnit nextLexicalUnit_;
     private LexicalUnit previousLexicalUnit_;
     private double doubleValue_;

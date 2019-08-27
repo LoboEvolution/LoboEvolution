@@ -25,7 +25,7 @@ package org.lobobrowser.html.style;
  * determined from elements.
  */
 public class RenderThreadState {
-	private static final ThreadLocal stateTL = new ThreadLocal();
+	private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<RenderThreadState>();
 
 	public static RenderThreadState getState() {
 		RenderThreadState ts = (RenderThreadState) stateTL.get();

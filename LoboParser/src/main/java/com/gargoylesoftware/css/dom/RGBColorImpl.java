@@ -28,7 +28,8 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
  */
 public class RGBColorImpl implements Serializable {
 
-    private CSSValueImpl red_;
+	private static final long serialVersionUID = 1L;
+	private CSSValueImpl red_;
     private CSSValueImpl green_;
     private CSSValueImpl blue_;
 

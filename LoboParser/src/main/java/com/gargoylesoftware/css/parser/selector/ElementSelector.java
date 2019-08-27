@@ -25,8 +25,9 @@ import com.gargoylesoftware.css.parser.condition.Condition;
  * @author Ronald Brill
  */
 public class ElementSelector extends AbstractSelector implements SimpleSelector {
-
-    private final String localName_;
+	
+	private static final long serialVersionUID = 1L;
+	private final String localName_;
     private final String localNameLC_;
     private List<Condition> conditions_;
 

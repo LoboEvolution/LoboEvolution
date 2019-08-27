@@ -34,14 +34,13 @@ import org.w3c.dom.NodeList;
 class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeList {
 	private final NodeFilter filter;
 	private final Object lock;
-	private final Collection sourceNodeList;
+	private final Collection<Node> sourceNodeList;
 
 	/**
 	 * @param filter
 	 * @param list
 	 */
-	public FilteredNodeListImpl(NodeFilter filter, Collection list, Object lock) {
-		super();
+	public FilteredNodeListImpl(NodeFilter filter, Collection<Node> list, Object lock) {
 		this.filter = filter;
 		this.sourceNodeList = list;
 		this.lock = lock;
@@ -51,9 +50,9 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator i = this.sourceNodeList.iterator();
+			final Iterator<Node> i = this.sourceNodeList.iterator();
 			while (i.hasNext()) {
-				final Node node = (Node) i.next();
+				final Node node = i.next();
 				if (this.filter.accept(node)) {
 					count++;
 				}
@@ -66,7 +65,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 	public Node item(int index) {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator i = this.sourceNodeList.iterator();
+			final Iterator<Node> i = this.sourceNodeList.iterator();
 			while (i.hasNext()) {
 				final Node node = (Node) i.next();
 				if (this.filter.accept(node)) {

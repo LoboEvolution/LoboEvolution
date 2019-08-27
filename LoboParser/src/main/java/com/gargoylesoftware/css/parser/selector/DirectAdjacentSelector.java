@@ -19,7 +19,8 @@ package com.gargoylesoftware.css.parser.selector;
  */
 public class DirectAdjacentSelector extends AbstractSelector {
 
-    private final Selector selector_;  // child
+	private static final long serialVersionUID = 1L;
+	private final Selector selector_;  // child
     private final SimpleSelector simpleSelector_;
 
     /**

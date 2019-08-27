@@ -150,7 +150,7 @@ public class FontFactory {
 		final String fontNames = key.getFontFamily();
 		final int letterSpacing = key.getLetterSpacing();
 		String matchingFace = null;
-		final Set fontFamilies = this.fontFamilies;
+		final Set<String> fontFamilies = this.fontFamilies;
 		final Map<String, Font> registeredFonts = this.registeredFonts;
 		Font baseFont = null;
 		if (fontNames != null) {
@@ -187,17 +187,17 @@ public class FontFactory {
 			return f.deriveFont(attributes);
 		} else if (matchingFace != null) {
 			final Font font = createFont(matchingFace, fontStyle, Math.round(key.getFontSize()));
-			final Set locales = key.getLocales();
+			final Set<Locale> locales = key.getLocales();
 			if (locales == null) {
 				final Locale locale = Locale.getDefault();
 				if (font.canDisplayUpTo(locale.getDisplayLanguage(locale)) == -1) {
 					return font.deriveFont(attributes);
 				}
 			} else {
-				final Iterator i = locales.iterator();
+				final Iterator<Locale> i = locales.iterator();
 				boolean allMatch = true;
 				while (i.hasNext()) {
-					final Locale locale = (Locale) i.next();
+					final Locale locale = i.next();
 					if (font.canDisplayUpTo(locale.getDisplayLanguage(locale)) != -1) {
 						allMatch = false;
 						break;

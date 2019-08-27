@@ -27,7 +27,8 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSRuleListImpl implements Serializable {
 
-    private List<AbstractCSSRuleImpl> rules_ = new ArrayList<>();
+	private static final long serialVersionUID = 1L;
+	private List<AbstractCSSRuleImpl> rules_ = new ArrayList<>();
 
     /**
      * @return the rules

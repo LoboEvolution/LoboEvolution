@@ -24,7 +24,6 @@
 package org.lobobrowser.html.dom.domimpl;
 
 import java.io.File;
-import java.util.logging.Level;
 
 import org.lobo.common.Strings;
 import org.lobobrowser.html.FormInput;

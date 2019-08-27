@@ -25,7 +25,8 @@ import com.gargoylesoftware.css.parser.Locator;
  */
 public class PseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 
-    private final String value_;
+	private static final long serialVersionUID = 1L;
+	private final String value_;
     private final boolean doubleColon_;
 
     /**

@@ -23,7 +23,8 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
  */
 public abstract class AbstractSelector extends AbstractLocatable implements Selector, Serializable {
 
-    private SelectorSpecificity specificity_;
+	private static final long serialVersionUID = 1L;
+	private SelectorSpecificity specificity_;
 
     @Override
     public SelectorSpecificity getSelectorSpecificity() {

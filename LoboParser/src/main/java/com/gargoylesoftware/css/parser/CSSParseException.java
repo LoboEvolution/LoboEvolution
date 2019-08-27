@@ -21,7 +21,8 @@ package com.gargoylesoftware.css.parser;
  */
 public class CSSParseException extends CSSException {
 
-    private String uri_;
+	private static final long serialVersionUID = 1L;
+	private String uri_;
     private int lineNumber_;
     private int columnNumber_;
 

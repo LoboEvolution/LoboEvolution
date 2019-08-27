@@ -30,8 +30,8 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSStyleDeclarationImpl implements Serializable {
 
-    private static final String PRIORITY_IMPORTANT = "important";
-
+	private static final long serialVersionUID = 1L;
+	private static final String PRIORITY_IMPORTANT = "important";
     private AbstractCSSRuleImpl parentRule_;
     private List<Property> properties_ = new ArrayList<>();
 

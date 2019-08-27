@@ -22,6 +22,8 @@ import org.w3c.dom.DOMException;
  * @author Ronald Brill
  */
 public class DOMExceptionImpl extends DOMException {
+	
+	private static final long serialVersionUID = 1L;
 
     /** SYNTAX_ERROR = 0. */
     public static final int SYNTAX_ERROR = 0;

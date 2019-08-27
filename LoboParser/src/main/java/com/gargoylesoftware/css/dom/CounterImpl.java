@@ -28,7 +28,8 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
  */
 public class CounterImpl implements Serializable {
 
-    private String identifier_;
+	private static final long serialVersionUID = 1L;
+	private String identifier_;
     private String listStyle_;
     private String separator_;
 

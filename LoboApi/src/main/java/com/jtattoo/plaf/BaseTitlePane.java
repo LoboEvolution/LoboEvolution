@@ -52,6 +52,7 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -655,7 +656,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	protected Image getFrameIconImage() {
 		// try to find icon for dialog windows
 		if (getFrame() == null) {
-			java.util.List icons = getWindow().getIconImages();
+			List<Image> icons = getWindow().getIconImages();
 			// No icon found ? search in window chain for an icon
 			if (icons == null || icons.isEmpty()) {
 				Window owner = getWindow().getOwner();

@@ -60,7 +60,7 @@ public class StyleSheetRenderState implements RenderState {
 	private Integer cachedFloat;
 	private Integer cachedPosition;
 	private Integer cachedVisibility;
-	private Map<String, ArrayList<?>> counters = null;
+	private Map<String, ArrayList<Integer>> counters = null;
 	protected final HTMLDocumentImpl document;
 	protected final HTMLElementImpl element;
 	private Color iBackgroundColor = INVALID_COLOR;
@@ -163,7 +163,7 @@ public class StyleSheetRenderState implements RenderState {
 	}
 
 	private void applyBackgroundRepeat(BackgroundInfo binfo, String backgroundRepeatText) {
-		final String brtl = backgroundRepeatText.toLowerCase();
+		final String brtl = backgroundRepeatText.toLowerCase();		
 		if ("repeat".equals(brtl)) {
 			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT;
 		} else if ("repeat-x".equals(brtl)) {
@@ -300,9 +300,9 @@ public class StyleSheetRenderState implements RenderState {
 			return binfo;
 		}
 		
-		if (element != null) {
+		if (element != null && !"BODY".equals(element.getNodeName())) {
 			binfo = null;
-		}		
+		}
 		
 		if (props != null) {
 			final String backgroundColorText = props.getBackgroundColor();
@@ -333,7 +333,7 @@ public class StyleSheetRenderState implements RenderState {
 				applyBackgroundImage(binfo, backgroundImageText, this.document);
 			}
 		}
-		this.iBackgroundInfo = binfo;
+		this.iBackgroundInfo = binfo;		
 		return binfo;
 	}
 
@@ -393,15 +393,15 @@ public class StyleSheetRenderState implements RenderState {
 		if (prs != null) {
 			return prs.getCount(counter, nesting);
 		}
-		final Map<String, ArrayList<?>> counters = this.counters;
+		final Map<String, ArrayList<Integer>> counters = this.counters;
 		if (counters == null) {
 			return 0;
 		}
-		final ArrayList<?> counterArray = (ArrayList<?>) counters.get(counter);
+		final ArrayList<Integer> counterArray = counters.get(counter);
 		if (nesting < 0 || nesting >= counterArray.size()) {
 			return 0;
 		}
-		final Integer integer = (Integer) counterArray.get(nesting);
+		final Integer integer = counterArray.get(nesting);
 		return integer == null ? 0 : integer.intValue();
 	}
 
@@ -870,7 +870,6 @@ public class StyleSheetRenderState implements RenderState {
 			return v.intValue();
 		}
 		final AbstractCSSProperties props = getCssProperties();
-		int visibility;
 		
 		if (props != null && Strings.isNotBlank(props.getVisibility())) {
 			switch (props.getVisibility()) {
@@ -964,13 +963,13 @@ public class StyleSheetRenderState implements RenderState {
 		if (prs != null) {
 			return prs.incrementCount(counter, nesting);
 		}
-		Map<String, ArrayList<?>> counters = this.counters;
+		Map<String, ArrayList<Integer>> counters = this.counters;
 		if (counters == null) {
-			counters = new HashMap<String, ArrayList<?>>(2);
+			counters = new HashMap<String, ArrayList<Integer>>();
 			this.counters = counters;
-			counters.put(counter, new ArrayList<Object>(0));
+			counters.put(counter, new ArrayList<Integer>());
 		}
-		final ArrayList<Integer> counterArray = (ArrayList<Integer>) counters.get(counter);
+		final ArrayList<Integer> counterArray = counters.get(counter);
 		while (counterArray.size() <= nesting) {
 			counterArray.add(null);
 		}
@@ -1026,11 +1025,11 @@ public class StyleSheetRenderState implements RenderState {
 		if (prs != null) {
 			prs.resetCount(counter, nesting, value);
 		} else {
-			Map<String, ArrayList<?>> counters = this.counters;
+			Map<String, ArrayList<Integer>> counters = this.counters;
 			if (counters == null) {
-				counters = new HashMap<String, ArrayList<?>>(2);
+				counters = new HashMap<String, ArrayList<Integer>>();
 				this.counters = counters;
-				counters.put(counter, new ArrayList<Object>(0));
+				counters.put(counter, new ArrayList<Integer>());
 			}
 			final ArrayList<Integer> counterArray = (ArrayList<Integer>) counters.get(counter);
 			while (counterArray.size() <= nesting) {

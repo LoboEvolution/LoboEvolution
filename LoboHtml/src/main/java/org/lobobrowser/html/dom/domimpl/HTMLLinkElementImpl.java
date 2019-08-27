@@ -30,7 +30,6 @@ import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.UserDataHandler;
-import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 

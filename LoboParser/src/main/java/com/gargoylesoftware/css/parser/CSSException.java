@@ -18,6 +18,8 @@ package com.gargoylesoftware.css.parser;
  * @author Ronald Brill
  */
 public class CSSException extends RuntimeException {
+	
+	private static final long serialVersionUID = 1L;
 
     /** Enum for error codes. */
     protected enum ErrorCode {

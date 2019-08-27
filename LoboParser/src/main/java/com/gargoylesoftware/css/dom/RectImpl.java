@@ -28,7 +28,8 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
  */
 public class RectImpl implements Serializable {
 
-    private CSSValueImpl top_;
+	private static final long serialVersionUID = 1L;
+	private CSSValueImpl top_;
     private CSSValueImpl right_;
     private CSSValueImpl bottom_;
     private CSSValueImpl left_;

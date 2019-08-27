@@ -49,7 +49,6 @@ import org.lobo.info.CanvasInfo;
 import org.lobobrowser.html.dom.HTMLCanvasElement;
 import org.lobobrowser.html.dom.HTMLImageElement;
 import org.lobobrowser.html.dom.domimpl.HTMLCanvasElementImpl;
-import org.lobobrowser.http.UserAgentContext;
 
 /**
  * The Class CanvasControl.

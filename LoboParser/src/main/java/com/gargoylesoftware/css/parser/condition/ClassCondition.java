@@ -25,7 +25,8 @@ import com.gargoylesoftware.css.parser.Locator;
  */
 public class ClassCondition extends AbstractLocatable implements Condition, Serializable {
 
-    private final String value_;
+	private static final long serialVersionUID = 1L;
+	private final String value_;
 
     /**
      * Ctor.

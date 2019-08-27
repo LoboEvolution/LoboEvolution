@@ -24,7 +24,6 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 

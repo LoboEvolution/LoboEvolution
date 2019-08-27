@@ -23,8 +23,6 @@
  */
 package org.lobobrowser.html.dom.domimpl;
 
-import java.util.ArrayList;
-
 import org.lobo.common.Nodes;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;

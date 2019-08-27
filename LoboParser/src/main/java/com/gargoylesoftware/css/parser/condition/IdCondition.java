@@ -23,7 +23,9 @@ import com.gargoylesoftware.css.parser.Locator;
  * @author Ronald Brill
  */
 public class IdCondition extends AbstractLocatable implements Condition, Serializable {
-
+	
+	private static final long serialVersionUID = 1L;
+	
     private final String value_;
 
     /**

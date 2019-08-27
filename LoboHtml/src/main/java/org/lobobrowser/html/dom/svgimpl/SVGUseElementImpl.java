@@ -25,9 +25,6 @@ import org.lobobrowser.html.dom.svg.SVGAnimatedTransformList;
 import org.lobobrowser.html.dom.svg.SVGElementInstance;
 import org.lobobrowser.html.dom.svg.SVGUseElement;
 import org.lobobrowser.html.style.AbstractCSSProperties;
-import org.w3c.dom.events.Event;
-import org.w3c.dom.events.EventException;
-import org.w3c.dom.events.EventListener;
 
 public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElement {
 

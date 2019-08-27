@@ -159,15 +159,12 @@ public class RBlock extends BaseElementRenderable {
 	private BoundableRenderable armedRenderable;
 	protected final RBlockViewport bodyLayout;
 
-	protected final Map cachedLayout = new Hashtable(5);
+	protected final Map<LayoutKey, LayoutValue> cachedLayout = new Hashtable<LayoutKey, LayoutValue>();
 	protected int defaultOverflowX = RenderState.OVERFLOW_NONE;
 	protected int defaultOverflowY = RenderState.OVERFLOW_NONE;
 	protected RenderableSpot endSelection;
 	protected final FrameContext frameContext;
 	protected boolean hasHScrollBar = false;
-
-	// Validation-dependent variables...
-	// private Dimension layoutSize = null;
 
 	protected boolean hasVScrollBar = false;
 	protected JScrollBar hScrollBar;
@@ -254,7 +251,7 @@ public class RBlock extends BaseElementRenderable {
 		final int whiteSpace = renderState == null ? RenderState.WS_NORMAL : renderState.getWhiteSpace();
 		final LayoutKey key = new LayoutKey(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource,
 				defaultOverflowX, defaultOverflowY, whiteSpace, font);
-		final Map cachedLayout = this.cachedLayout;
+		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
 		LayoutValue value;
 		if (sizeOnly) {
 			value = (LayoutValue) cachedLayout.get(key);

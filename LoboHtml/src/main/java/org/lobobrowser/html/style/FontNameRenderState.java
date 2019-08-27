@@ -22,11 +22,6 @@
 package org.lobobrowser.html.style;
 
 import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Toolkit;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 
 public class FontNameRenderState extends StyleSheetRenderState {

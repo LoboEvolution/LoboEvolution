@@ -22,7 +22,8 @@ import com.gargoylesoftware.css.parser.Locator;
  */
 public class PseudoElementSelector extends AbstractSelector implements SimpleSelector {
 
-    private final String localName_;
+	private static final long serialVersionUID = 1L;
+	private final String localName_;
     private final boolean doubleColon_;
 
     /**

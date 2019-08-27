@@ -19,7 +19,8 @@ package com.gargoylesoftware.css.parser.selector;
  */
 public class GeneralAdjacentSelector extends AbstractSelector {
 
-    private final Selector selector_;
+	private static final long serialVersionUID = 1L;
+	private final Selector selector_;
     private final SimpleSelector simpleSelector_;
 
     /**

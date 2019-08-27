@@ -25,15 +25,11 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import org.lobo.common.Urls;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
@@ -53,7 +49,6 @@ public class HtmlValues implements CSSValuesProperties {
 	public static final int BORDER_STYLE_RIDGE = 7;
 	public static final int BORDER_STYLE_SOLID = 4;
 	public static final int DEFAULT_BORDER_WIDTH = 2;
-	private static final Logger logger = Logger.getLogger(HtmlValues.class.getName());
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
 
 	static {

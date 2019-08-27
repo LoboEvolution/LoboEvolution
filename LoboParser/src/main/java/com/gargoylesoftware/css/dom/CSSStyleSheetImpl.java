@@ -44,7 +44,8 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
  */
 public class CSSStyleSheetImpl implements Serializable {
 
-    private boolean disabled_;
+	private static final long serialVersionUID = 1L;
+	private boolean disabled_;
     private Node ownerNode_;
     private String href_;
     private String title_;

@@ -1,6 +1,7 @@
 package org.lobo.laf;
 
 import java.awt.Font;
+import java.util.Locale;
 import java.util.Set;
 
 import org.lobo.common.Objects;
@@ -32,7 +33,7 @@ public class FontKey {
 	private Integer letterSpacing;
 
 	/** The locales. */
-	private Set locales;
+	private Set<Locale> locales;
 
 	/** The strikethrough. */
 	private Boolean strikethrough;
@@ -131,7 +132,7 @@ public class FontKey {
 	/**
 	 * @return the locales
 	 */
-	public Set getLocales() {
+	public Set<Locale> getLocales() {
 		return this.locales;
 	}
 

@@ -37,7 +37,9 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSValueImpl extends AbstractLocatable implements Serializable {
 
-    /**
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * CSSValueType enum.
      */
     public enum CSSValueType {

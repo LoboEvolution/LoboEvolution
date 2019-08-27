@@ -36,7 +36,8 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
  */
 public class MediaListImpl extends AbstractLocatable implements Serializable {
 
-    private List<MediaQuery> mediaQueries_;
+	private static final long serialVersionUID = 1L;
+	private List<MediaQuery> mediaQueries_;
 
     /**
      * Creates new MediaList.

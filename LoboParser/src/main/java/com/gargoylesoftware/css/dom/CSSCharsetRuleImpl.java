@@ -29,7 +29,9 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
 
-    private String encoding_;
+	private static final long serialVersionUID = 1L;
+	
+	private String encoding_;
 
     /**
      * Ctor.

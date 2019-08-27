@@ -23,7 +23,8 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
  */
 public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements Serializable {
 
-    private CSSStyleSheetImpl parentStyleSheet_;
+	private static final long serialVersionUID = 1L;
+	private CSSStyleSheetImpl parentStyleSheet_;
     private AbstractCSSRuleImpl parentRule_;
 
     /**

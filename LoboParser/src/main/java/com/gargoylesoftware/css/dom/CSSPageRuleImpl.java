@@ -29,7 +29,8 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
 
-    private String pseudoPage_;
+	private static final long serialVersionUID = 1L;
+	private String pseudoPage_;
     private CSSStyleDeclarationImpl style_;
 
     /**

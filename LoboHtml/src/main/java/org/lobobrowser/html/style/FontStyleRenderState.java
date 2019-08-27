@@ -40,7 +40,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 
 	private FontMetrics iFontMetrics;
 
-	Map iWordInfoMap = null;
+	Map<String, WordInfo> iWordInfoMap = null;
 
 	private final int style;
 
@@ -99,9 +99,9 @@ public class FontStyleRenderState extends RenderStateDelegator {
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
 		// No synchronization necessary.
-		Map map = this.iWordInfoMap;
+		Map<String, WordInfo> map = this.iWordInfoMap;
 		if (map == null) {
-			map = new HashMap(1);
+			map = new HashMap<String, WordInfo>();
 			this.iWordInfoMap = map;
 		}
 		WordInfo wi = (WordInfo) map.get(word);
@@ -124,7 +124,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		this.delegate.invalidate();
 		this.iFont = null;
 		this.iFontMetrics = null;
-		final Map map = this.iWordInfoMap;
+		final Map<String, WordInfo> map = this.iWordInfoMap;
 		if (map != null) {
 			map.clear();
 		}

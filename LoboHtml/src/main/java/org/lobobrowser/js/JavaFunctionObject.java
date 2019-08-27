@@ -23,9 +23,7 @@ package org.lobobrowser.js;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
-import java.util.Objects;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EvaluatorException;
 import org.mozilla.javascript.Function;
@@ -34,10 +32,7 @@ import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.WrappedException;
 
 public class JavaFunctionObject extends ScriptableObject implements Function {
-	private static final Logger logger = Logger.getLogger(JavaFunctionObject.class.getName());
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private final String className;
 	private final ArrayList<Method> methods = new ArrayList<Method>();

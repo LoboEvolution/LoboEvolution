@@ -26,7 +26,9 @@ import com.gargoylesoftware.css.parser.CSSParseException;
  */
 public class ThrowCssExceptionErrorHandler implements CSSErrorHandler, Serializable {
 
-    /**
+	private static final long serialVersionUID = 1L;
+	
+	/**
      * Singleton.
      */
     public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();

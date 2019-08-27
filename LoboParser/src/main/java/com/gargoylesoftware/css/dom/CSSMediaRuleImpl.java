@@ -32,7 +32,8 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
  */
 public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
-    private MediaListImpl mediaList_;
+	private static final long serialVersionUID = 1L;
+	private MediaListImpl mediaList_;
     private CSSRuleListImpl cssRules_;
 
     /**

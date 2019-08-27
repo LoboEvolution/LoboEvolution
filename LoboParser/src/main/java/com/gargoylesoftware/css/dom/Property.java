@@ -24,7 +24,8 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class Property extends AbstractLocatable implements Serializable {
 
-    private String name_;
+	private static final long serialVersionUID = 1L;
+	private String name_;
     private CSSValueImpl value_;
     private boolean important_;
 

@@ -22,8 +22,9 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
  * @author Ronlad Brill
  */
 public class PrefixAttributeCondition extends AbstractLocatable implements Condition, Serializable {
-
-    private final String localName_;
+	
+	private static final long serialVersionUID = 1L;
+	private final String localName_;
     private final String value_;
 
     /**

@@ -30,7 +30,8 @@ import com.gargoylesoftware.css.util.LangUtils;
  */
 public class CSSStyleRuleImpl extends AbstractCSSRuleImpl {
 
-    private SelectorList selectors_;
+	private static final long serialVersionUID = 1L;
+	private SelectorList selectors_;
     private CSSStyleDeclarationImpl style_;
 
     /**

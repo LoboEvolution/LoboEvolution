@@ -27,18 +27,18 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.lobobrowser.js.AbstractScriptableDelegate;
+import org.w3c.dom.Node;
 
 public class FilteredObjectList extends AbstractScriptableDelegate {
 	private final ObjectFilter filter;
 	private final Object lock;
-	private final Collection sourceNodeList;
+	private final Collection<Node> sourceNodeList;
 
 	/**
 	 * @param filter
 	 * @param list
 	 */
-	public FilteredObjectList(ObjectFilter filter, Collection list, Object lock) {
-		super();
+	public FilteredObjectList(ObjectFilter filter, Collection<Node> list, Object lock) {
 		this.filter = filter;
 		this.sourceNodeList = list;
 		this.lock = lock;
@@ -47,9 +47,9 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator i = this.sourceNodeList.iterator();
+			final Iterator<Node> i = this.sourceNodeList.iterator();
 			while (i.hasNext()) {
-				final Object node = i.next();
+				final Node node = i.next();
 				if (this.filter.accept(node)) {
 					count++;
 				}
@@ -61,9 +61,9 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	public Object item(int index) {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator i = this.sourceNodeList.iterator();
+			final Iterator<Node> i = this.sourceNodeList.iterator();
 			while (i.hasNext()) {
-				final Object node = i.next();
+				final Node node = i.next();
 				if (this.filter.accept(node)) {
 					if (count == index) {
 						return node;

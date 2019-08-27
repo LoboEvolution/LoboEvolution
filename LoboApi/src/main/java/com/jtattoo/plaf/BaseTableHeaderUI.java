@@ -261,9 +261,9 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 			return new Dimension(0, 0);
 		}
 		long width = 0;
-		Enumeration enumeration = header.getColumnModel().getColumns();
+		Enumeration<TableColumn> enumeration = header.getColumnModel().getColumns();
 		while (enumeration.hasMoreElements()) {
-			TableColumn aColumn = (TableColumn) enumeration.nextElement();
+			TableColumn aColumn = enumeration.nextElement();
 			width = width + aColumn.getPreferredWidth();
 		}
 		if (width > Integer.MAX_VALUE) {
