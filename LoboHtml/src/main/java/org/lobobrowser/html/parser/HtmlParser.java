@@ -30,15 +30,17 @@ import java.io.LineNumberReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.html.Entities;
+import org.lobo.html.HTMLObject;
+import org.lobo.html.HTMLTag;
+import org.lobo.info.ElementInfo;
 import org.lobobrowser.html.io.WritableLineReader;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.DOMException;
@@ -55,8 +57,6 @@ import org.xml.sax.SAXException;
  * may be used directly when a different DOM implementation is preferred.
  */
 public class HtmlParser {
-	private static final Map<String, ElementInfo> ELEMENT_INFOS = new HashMap<String, ElementInfo>();
-	private static final Map<String, Character> ENTITIES = new HashMap<String, Character>();
 	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
 
 	public static final String MODIFYING_KEY = "cobra.suspend";
@@ -73,371 +73,8 @@ public class HtmlParser {
 
 	private static final int TOKEN_TEXT = 2;
 
-	static {
-		final Map<String, Character> entities = ENTITIES;
-		entities.put("amp", new Character('&'));
-		entities.put("lt", new Character('<'));
-		entities.put("gt", new Character('>'));
-		entities.put("quot", new Character('"'));
-		entities.put("nbsp", new Character((char) 160));
-
-		entities.put("lsquo", new Character('\u2018'));
-		entities.put("rsquo", new Character('\u2019'));
-
-		entities.put("frasl", new Character((char) 47));
-		entities.put("ndash", new Character((char) 8211));
-		entities.put("mdash", new Character((char) 8212));
-		entities.put("iexcl", new Character((char) 161));
-		entities.put("cent", new Character((char) 162));
-		entities.put("pound", new Character((char) 163));
-		entities.put("curren", new Character((char) 164));
-		entities.put("yen", new Character((char) 165));
-		entities.put("brvbar", new Character((char) 166));
-		entities.put("brkbar", new Character((char) 166));
-		entities.put("sect", new Character((char) 167));
-		entities.put("uml", new Character((char) 168));
-		entities.put("die", new Character((char) 168));
-		entities.put("copy", new Character((char) 169));
-		entities.put("ordf", new Character((char) 170));
-		entities.put("laquo", new Character((char) 171));
-		entities.put("not", new Character((char) 172));
-		entities.put("shy", new Character((char) 173));
-		entities.put("reg", new Character((char) 174));
-		entities.put("macr", new Character((char) 175));
-		entities.put("hibar", new Character((char) 175));
-		entities.put("deg", new Character((char) 176));
-		entities.put("plusmn", new Character((char) 177));
-		entities.put("sup2", new Character((char) 178));
-		entities.put("sup3", new Character((char) 179));
-		entities.put("acute", new Character((char) 180));
-		entities.put("micro", new Character((char) 181));
-		entities.put("para", new Character((char) 182));
-		entities.put("middot", new Character((char) 183));
-		entities.put("cedil", new Character((char) 184));
-		entities.put("sup1", new Character((char) 185));
-		entities.put("ordm", new Character((char) 186));
-		entities.put("raquo", new Character((char) 187));
-		entities.put("frac14", new Character((char) 188));
-		entities.put("frac12", new Character((char) 189));
-		entities.put("frac34", new Character((char) 190));
-		entities.put("iquest", new Character((char) 191));
-		entities.put("Agrave", new Character((char) 192));
-		entities.put("Aacute", new Character((char) 193));
-		entities.put("Acirc", new Character((char) 194));
-		entities.put("Atilde", new Character((char) 195));
-		entities.put("Auml", new Character((char) 196));
-		entities.put("Aring", new Character((char) 197));
-		entities.put("AElig", new Character((char) 198));
-		entities.put("Ccedil", new Character((char) 199));
-		entities.put("Egrave", new Character((char) 200));
-		entities.put("Eacute", new Character((char) 201));
-		entities.put("Ecirc", new Character((char) 202));
-		entities.put("Euml", new Character((char) 203));
-		entities.put("Igrave", new Character((char) 204));
-		entities.put("Iacute", new Character((char) 205));
-		entities.put("Icirc", new Character((char) 206));
-		entities.put("Iuml", new Character((char) 207));
-		entities.put("ETH", new Character((char) 208));
-		entities.put("Ntilde", new Character((char) 209));
-		entities.put("Ograve", new Character((char) 210));
-		entities.put("Oacute", new Character((char) 211));
-		entities.put("Ocirc", new Character((char) 212));
-		entities.put("Otilde", new Character((char) 213));
-		entities.put("Ouml", new Character((char) 214));
-		entities.put("times", new Character((char) 215));
-		entities.put("Oslash", new Character((char) 216));
-		entities.put("Ugrave", new Character((char) 217));
-		entities.put("Uacute", new Character((char) 218));
-		entities.put("Ucirc", new Character((char) 219));
-		entities.put("Uuml", new Character((char) 220));
-		entities.put("Yacute", new Character((char) 221));
-		entities.put("THORN", new Character((char) 222));
-		entities.put("szlig", new Character((char) 223));
-		entities.put("agrave", new Character((char) 224));
-		entities.put("aacute", new Character((char) 225));
-		entities.put("acirc", new Character((char) 226));
-		entities.put("atilde", new Character((char) 227));
-		entities.put("auml", new Character((char) 228));
-		entities.put("aring", new Character((char) 229));
-		entities.put("aelig", new Character((char) 230));
-		entities.put("ccedil", new Character((char) 231));
-		entities.put("egrave", new Character((char) 232));
-		entities.put("eacute", new Character((char) 233));
-		entities.put("ecirc", new Character((char) 234));
-		entities.put("euml", new Character((char) 235));
-		entities.put("igrave", new Character((char) 236));
-		entities.put("iacute", new Character((char) 237));
-		entities.put("icirc", new Character((char) 238));
-		entities.put("iuml", new Character((char) 239));
-		entities.put("eth", new Character((char) 240));
-		entities.put("ntilde", new Character((char) 241));
-		entities.put("ograve", new Character((char) 242));
-		entities.put("oacute", new Character((char) 243));
-		entities.put("ocirc", new Character((char) 244));
-		entities.put("otilde", new Character((char) 245));
-		entities.put("ouml", new Character((char) 246));
-		entities.put("divide", new Character((char) 247));
-		entities.put("oslash", new Character((char) 248));
-		entities.put("ugrave", new Character((char) 249));
-		entities.put("uacute", new Character((char) 250));
-		entities.put("ucirc", new Character((char) 251));
-		entities.put("uuml", new Character((char) 252));
-		entities.put("yacute", new Character((char) 253));
-		entities.put("thorn", new Character((char) 254));
-		entities.put("yuml", new Character((char) 255));
-
-		// symbols from http://de.selfhtml.org/html/referenz/zeichen.htm
-
-		// greek letters
-		entities.put("Alpha", new Character((char) 913));
-		entities.put("Beta", new Character((char) 914));
-		entities.put("Gamma", new Character((char) 915));
-		entities.put("Delta", new Character((char) 916));
-		entities.put("Epsilon", new Character((char) 917));
-		entities.put("Zeta", new Character((char) 918));
-		entities.put("Eta", new Character((char) 919));
-		entities.put("Theta", new Character((char) 920));
-		entities.put("Iota", new Character((char) 921));
-		entities.put("Kappa", new Character((char) 922));
-		entities.put("Lambda", new Character((char) 923));
-		entities.put("Mu", new Character((char) 924));
-		entities.put("Nu", new Character((char) 925));
-		entities.put("Xi", new Character((char) 926));
-		entities.put("Omicron", new Character((char) 927));
-		entities.put("Pi", new Character((char) 928));
-		entities.put("Rho", new Character((char) 929));
-		entities.put("Sigma", new Character((char) 930));
-		entities.put("Sigmaf", new Character((char) 931));
-		entities.put("Tau", new Character((char) 932));
-		entities.put("Upsilon", new Character((char) 933));
-		entities.put("Phi", new Character((char) 934));
-		entities.put("Chi", new Character((char) 935));
-		entities.put("Psi", new Character((char) 936));
-		entities.put("Omega", new Character((char) 937));
-
-		entities.put("alpha", new Character((char) 945));
-		entities.put("beta", new Character((char) 946));
-		entities.put("gamma", new Character((char) 947));
-		entities.put("delta", new Character((char) 948));
-		entities.put("epsilon", new Character((char) 949));
-		entities.put("zeta", new Character((char) 950));
-		entities.put("eta", new Character((char) 951));
-		entities.put("theta", new Character((char) 952));
-		entities.put("iota", new Character((char) 953));
-		entities.put("kappa", new Character((char) 954));
-		entities.put("lambda", new Character((char) 955));
-		entities.put("mu", new Character((char) 956));
-		entities.put("nu", new Character((char) 957));
-		entities.put("xi", new Character((char) 958));
-		entities.put("omicron", new Character((char) 959));
-		entities.put("pi", new Character((char) 960));
-		entities.put("rho", new Character((char) 961));
-		entities.put("sigma", new Character((char) 962));
-		entities.put("sigmaf", new Character((char) 963));
-		entities.put("tau", new Character((char) 964));
-		entities.put("upsilon", new Character((char) 965));
-		entities.put("phi", new Character((char) 966));
-		entities.put("chi", new Character((char) 967));
-		entities.put("psi", new Character((char) 968));
-		entities.put("omega", new Character((char) 969));
-		entities.put("thetasym", new Character((char) 977));
-		entities.put("upsih", new Character((char) 978));
-		entities.put("piv", new Character((char) 982));
-
-		// math symbols
-		entities.put("forall", new Character((char) 8704));
-		entities.put("part", new Character((char) 8706));
-		entities.put("exist", new Character((char) 8707));
-		entities.put("empty", new Character((char) 8709));
-		entities.put("nabla", new Character((char) 8711));
-		entities.put("isin", new Character((char) 8712));
-		entities.put("notin", new Character((char) 8713));
-		entities.put("ni", new Character((char) 8715));
-		entities.put("prod", new Character((char) 8719));
-		entities.put("sum", new Character((char) 8721));
-		entities.put("minus", new Character((char) 8722));
-		entities.put("lowast", new Character((char) 8727));
-		entities.put("radic", new Character((char) 8730));
-		entities.put("prop", new Character((char) 8733));
-		entities.put("infin", new Character((char) 8734));
-		entities.put("ang", new Character((char) 8736));
-		entities.put("and", new Character((char) 8743));
-		entities.put("or", new Character((char) 8744));
-		entities.put("cap", new Character((char) 8745));
-		entities.put("cup", new Character((char) 8746));
-		entities.put("int", new Character((char) 8747));
-		entities.put("there4", new Character((char) 8756));
-		entities.put("sim", new Character((char) 8764));
-		entities.put("cong", new Character((char) 8773));
-		entities.put("asymp", new Character((char) 8776));
-		entities.put("ne", new Character((char) 8800));
-		entities.put("equiv", new Character((char) 8801));
-		entities.put("le", new Character((char) 8804));
-		entities.put("ge", new Character((char) 8805));
-		entities.put("sub", new Character((char) 8834));
-		entities.put("sup", new Character((char) 8835));
-		entities.put("nsub", new Character((char) 8836));
-		entities.put("sube", new Character((char) 8838));
-		entities.put("supe", new Character((char) 8839));
-		entities.put("oplus", new Character((char) 8853));
-		entities.put("otimes", new Character((char) 8855));
-		entities.put("perp", new Character((char) 8869));
-		entities.put("sdot", new Character((char) 8901));
-		entities.put("loz", new Character((char) 9674));
-
-		// technical symbols
-		entities.put("lceil", new Character((char) 8968));
-		entities.put("rceil", new Character((char) 8969));
-		entities.put("lfloor", new Character((char) 8970));
-		entities.put("rfloor", new Character((char) 8971));
-		entities.put("lang", new Character((char) 9001));
-		entities.put("rang", new Character((char) 9002));
-
-		// arrow symbols
-		entities.put("larr", new Character((char) 8592));
-		entities.put("uarr", new Character((char) 8593));
-		entities.put("rarr", new Character((char) 8594));
-		entities.put("darr", new Character((char) 8595));
-		entities.put("harr", new Character((char) 8596));
-		entities.put("crarr", new Character((char) 8629));
-		entities.put("lArr", new Character((char) 8656));
-		entities.put("uArr", new Character((char) 8657));
-		entities.put("rArr", new Character((char) 8658));
-		entities.put("dArr", new Character((char) 8659));
-		entities.put("hArr", new Character((char) 8960));
-
-		// divers symbols
-		entities.put("bull", new Character((char) 8226));
-		entities.put("prime", new Character((char) 8242));
-		entities.put("Prime", new Character((char) 8243));
-		entities.put("oline", new Character((char) 8254));
-		entities.put("weierp", new Character((char) 8472));
-		entities.put("image", new Character((char) 8465));
-		entities.put("real", new Character((char) 8476));
-		entities.put("trade", new Character((char) 8482));
-		entities.put("euro", new Character((char) 8364));
-		entities.put("alefsym", new Character((char) 8501));
-		entities.put("spades", new Character((char) 9824));
-		entities.put("clubs", new Character((char) 9827));
-		entities.put("hearts", new Character((char) 9829));
-		entities.put("diams", new Character((char) 9830));
-
-		// ext lat symbols
-		entities.put("OElig", new Character((char) 338));
-		entities.put("oelig", new Character((char) 339));
-		entities.put("Scaron", new Character((char) 352));
-		entities.put("scaron", new Character((char) 353));
-		entities.put("fnof", new Character((char) 402));
-
-		// interpunction
-		entities.put("ensp", new Character((char) 8194));
-		entities.put("emsp", new Character((char) 8195));
-		entities.put("thinsp", new Character((char) 8201));
-		entities.put("zwnj", new Character((char) 8204));
-		entities.put("zwj", new Character((char) 8205));
-		entities.put("lrm", new Character((char) 8206));
-		entities.put("rlm", new Character((char) 8207));
-
-		entities.put("sbquo", new Character((char) 8218));
-		entities.put("ldquo", new Character((char) 8220));
-		entities.put("rdquo", new Character((char) 8221));
-		entities.put("bdquo", new Character((char) 8222));
-		entities.put("dagger", new Character((char) 8224));
-		entities.put("Dagger", new Character((char) 8225));
-		entities.put("hellip", new Character((char) 8230));
-		entities.put("permil", new Character((char) 8240));
-		entities.put("lsaquo", new Character((char) 8249));
-		entities.put("rsaquo", new Character((char) 8250));
-
-		// diacrit symb
-		entities.put("circ", new Character((char) 710));
-		entities.put("tilde", new Character((char) 732));
-
-		final Map<String, ElementInfo> elementInfos = ELEMENT_INFOS;
-
-		elementInfos.put("NOSCRIPT", new ElementInfo(true, ElementInfo.END_ELEMENT_REQUIRED, null, true));
-
-		final ElementInfo optionalEndElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL);
-		final ElementInfo forbiddenEndElement = new ElementInfo(false, ElementInfo.END_ELEMENT_FORBIDDEN);
-		final ElementInfo onlyTextDE = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, true);
-		final ElementInfo onlyText = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, false);
-
-		final Set<String> tableCellStopElements = new HashSet<String>();
-		tableCellStopElements.add("TH");
-		tableCellStopElements.add("TD");
-		tableCellStopElements.add("TR");
-		final ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL,
-				tableCellStopElements);
-
-		final Set<String> headStopElements = new HashSet<String>();
-		headStopElements.add("BODY");
-		headStopElements.add("DIV");
-		headStopElements.add("SPAN");
-		headStopElements.add("TABLE");
-		final ElementInfo headElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
-
-		final Set<String> optionStopElements = new HashSet<String>();
-		optionStopElements.add("OPTION");
-		optionStopElements.add("SELECT");
-		final ElementInfo optionElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
-
-		final Set<String> paragraphStopElements = new HashSet<String>();
-		paragraphStopElements.add("P");
-		paragraphStopElements.add("DIV");
-		paragraphStopElements.add("TABLE");
-		paragraphStopElements.add("PRE");
-		paragraphStopElements.add("UL");
-		paragraphStopElements.add("OL");
-		final ElementInfo paragraphElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL,
-				paragraphStopElements);
-
-//		Set liStopElements = new HashSet();
-//		liStopElements.add("LI");
-//		liStopElements.add("UL");
-//		liStopElements.add("OL");
-
-		elementInfos.put("SCRIPT", onlyText);
-		elementInfos.put("STYLE", onlyText);
-		elementInfos.put("TEXTAREA", onlyTextDE);
-		elementInfos.put("IMG", forbiddenEndElement);
-		elementInfos.put("META", forbiddenEndElement);
-		elementInfos.put("LINK", forbiddenEndElement);
-		elementInfos.put("BASE", forbiddenEndElement);
-		elementInfos.put("INPUT", forbiddenEndElement);
-		elementInfos.put("FRAME", forbiddenEndElement);
-		elementInfos.put("BR", forbiddenEndElement);
-		elementInfos.put("HR", forbiddenEndElement);
-		elementInfos.put("EMBED", forbiddenEndElement);
-		elementInfos.put("SPACER", forbiddenEndElement);
-
-		elementInfos.put("P", paragraphElement);
-		elementInfos.put("LI", optionalEndElement);
-		elementInfos.put("DT", optionalEndElement);
-		elementInfos.put("DD", optionalEndElement);
-		elementInfos.put("TR", optionalEndElement);
-		elementInfos.put("TH", tableCellElement);
-		elementInfos.put("TD", tableCellElement);
-		elementInfos.put("HEAD", headElement);
-		elementInfos.put("OPTION", optionElement);
-
-		// Note: The specification states anchors have
-		// a required end element, but browsers generally behave
-		// as if it's optional.
-		elementInfos.put("A", optionalEndElement);
-		elementInfos.put("ANCHOR", optionalEndElement);
-		// TODO: Keep adding tags here
-	}
-
-	public static boolean isDecodeEntities(String elementName) {
-		final ElementInfo einfo = (ElementInfo) ELEMENT_INFOS.get(elementName.toUpperCase());
-		return einfo == null ? true : einfo.decodeEntities;
-	}
-
 	private final Document document;
 
-	/**
-	 * Only set when readAttribute returns false.
-	 */
 	private boolean justReadEmptyElement = false;
 
 	private boolean justReadTagBegin = false;
@@ -525,13 +162,18 @@ public class HtmlParser {
 			startIdx = colonIdx + 1;
 		}
 	}
+	
+	public static boolean isDecodeEntities(String elementName) {
+		final ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
+		return einfo == null ? true : einfo.decodeEntities;
+	}
 
 	private final int getEntityChar(String spec) {
 		// TODO: Declared entities
-		Character c = (Character) ENTITIES.get(spec);
+		Character c = (Character) HTMLObject.ENTITIES.get(Entities.get(spec));
 		if (c == null) {
 			final String specTL = spec.toLowerCase();
-			c = (Character) ENTITIES.get(specTL);
+			c = (Character) HTMLObject.ENTITIES.get(Entities.get(specTL));
 			if (c == null) {
 				return -1;
 			}
@@ -710,7 +352,7 @@ public class HtmlParser {
 	 * @throws StopException
 	 * @throws SAXException
 	 */
-	private final int parseToken(Node parent, LineNumberReader reader, Set<String> stopTags, LinkedList<String> ancestors)
+	private final int parseToken(Node parent, LineNumberReader reader, Set<HTMLTag> stopTags, LinkedList<String> ancestors)
 			throws IOException, StopException, SAXException {
 		final Document doc = this.document;
 		final StringBuffer textSb = readUpToTagBegin(reader);
@@ -767,7 +409,7 @@ public class HtmlParser {
 								;
 							}
 						}
-						if (stopTags != null && stopTags.contains(normalTag)) {
+						if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
 							// Throw before appending to parent.
 							// After attributes are set.
 							// After MODIFYING_KEY is set.
@@ -777,19 +419,19 @@ public class HtmlParser {
 						// This is necessary for incremental rendering.
 						parent.appendChild(element);
 						if (!this.justReadEmptyElement) {
-							ElementInfo einfo = (ElementInfo) ELEMENT_INFOS.get(normalTag);
+							ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalTag));
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
-								Set<String> newStopSet = einfo == null ? null : einfo.stopTags;
+								Set<HTMLTag> newStopSet = einfo == null ? null : einfo.stopTags;
 								if (newStopSet == null) {
 									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
-										newStopSet = Collections.singleton(normalTag);
+										newStopSet = Collections.singleton(HTMLTag.get(normalTag));
 									}
 								}
 								if (stopTags != null) {
 									if (newStopSet != null) {
-										final Set<String> newStopSet2 = new HashSet<String>();
+										final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
 										newStopSet2.addAll(stopTags);
 										newStopSet2.addAll(newStopSet);
 										newStopSet = newStopSet2;
@@ -820,12 +462,8 @@ public class HtmlParser {
 												if (normalTag.equals(normalLastTag)) {
 													return TOKEN_FULL_ELEMENT;
 												} else {
-													final ElementInfo closeTagInfo = (ElementInfo) ELEMENT_INFOS
-															.get(normalLastTag);
-													if (closeTagInfo == null
-															|| closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN) {
-														// TODO: Rather inefficient algorithm, but it's probably
-														// executed infrequently?
+													final ElementInfo closeTagInfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalLastTag));
+													if (closeTagInfo == null  || closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 														final Iterator<String> i = ancestors.iterator();
 														if (i.hasNext()) {
 															i.next();
@@ -848,24 +486,19 @@ public class HtmlParser {
 											final Element newElement = se.getElement();
 											tag = newElement.getTagName();
 											normalTag = tag.toUpperCase();
-											// If a subelement throws StopException with
-											// a tag matching the current stop tag, the exception
-											// is rethrown (e.g. <TR><TD>blah<TR><TD>blah)
-											if (stopTags != null && stopTags.contains(normalTag)) {
+											if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
 												throw se;
 											}
-											einfo = (ElementInfo) ELEMENT_INFOS.get(normalTag);
-											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
-													: einfo.endElementType;
+											einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalTag));
+											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 											childrenOk = einfo == null ? true : einfo.childElementOk;
 											newStopSet = einfo == null ? null : einfo.stopTags;
-											if (newStopSet == null) {
-												if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
-													newStopSet = Collections.singleton(normalTag);
-												}
+											if (newStopSet == null && endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
+												newStopSet = Collections.singleton(HTMLTag.get(normalTag));
+
 											}
 											if (stopTags != null && newStopSet != null) {
-												final Set<String> newStopSet2 = new HashSet<String>();
+												final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
 												newStopSet2.addAll(stopTags);
 												newStopSet2.addAll(newStopSet);
 												newStopSet = newStopSet2;

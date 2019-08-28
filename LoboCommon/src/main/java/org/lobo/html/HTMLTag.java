@@ -31,12 +31,18 @@ public enum HTMLTag {
 	BLOCKQUOTE("BLOCKQUOTE"),
 
 	DD("DD"),
+	
+	DT("DT"),
 
 	SPAN("SPAN"),
 
 	SCRIPT("SCRIPT"),
 
 	IMG("IMG"),
+	
+	META("META"),
+	
+	SPACER("SPACER"),
 
 	STYLE("STYLE"),
 
@@ -162,7 +168,9 @@ public enum HTMLTag {
 
 	ANIMATE_TRASFORM("ANIMATE_TRASFORM"),
 
-	ANIMATE_COLOR("ANIMATE_COLOR");
+	ANIMATE_COLOR("ANIMATE_COLOR"),
+	
+	NOSCRIPT("NOSCRIPT");
 	
 	private String value;
 	private static final Map<String, HTMLTag> ENUM_MAP;

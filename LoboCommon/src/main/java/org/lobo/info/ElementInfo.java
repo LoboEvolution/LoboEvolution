@@ -21,11 +21,13 @@
 /*
  * Created on Oct 23, 2005
  */
-package org.lobobrowser.html.parser;
+package org.lobo.info;
 
 import java.util.Set;
 
-class ElementInfo {
+import org.lobo.html.HTMLTag;
+
+public class ElementInfo {
 	public static final int END_ELEMENT_FORBIDDEN = 0;
 	public static final int END_ELEMENT_OPTIONAL = 1;
 	public static final int END_ELEMENT_REQUIRED = 2;
@@ -34,7 +36,7 @@ class ElementInfo {
 
 	public final int endElementType;
 	public final boolean noScriptElement;
-	public final Set<String> stopTags;
+	public final Set<HTMLTag> stopTags;
 
 	/**
 	 * @param ok
@@ -60,7 +62,7 @@ class ElementInfo {
 	 * @param ok
 	 * @param type
 	 */
-	public ElementInfo(boolean ok, int type, Set<String> stopTags) {
+	public ElementInfo(boolean ok, int type, Set<HTMLTag> stopTags) {
 		this.childElementOk = ok;
 		this.endElementType = type;
 		this.stopTags = stopTags;
@@ -68,7 +70,7 @@ class ElementInfo {
 		this.decodeEntities = true;
 	}
 
-	public ElementInfo(boolean ok, int type, Set<String> stopTags, boolean noScriptElement) {
+	public ElementInfo(boolean ok, int type, Set<HTMLTag> stopTags, boolean noScriptElement) {
 		this.childElementOk = ok;
 		this.endElementType = type;
 		this.stopTags = stopTags;
