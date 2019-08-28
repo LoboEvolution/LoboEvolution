@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import java.util.Iterator;
 
 import org.lobo.common.ArrayUtilities;
+import org.lobo.info.FloatingInfo;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 public class RRelative extends BaseRCollection {

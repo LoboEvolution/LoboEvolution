@@ -45,6 +45,7 @@ import javax.swing.SwingUtilities;
 
 import org.lobo.common.ArrayUtilities;
 import org.lobo.common.Strings;
+import org.lobo.info.FloatingInfo;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.dom.svgimpl.SVGSVGElementImpl;
 import org.lobobrowser.html.dom.domimpl.DocumentFragmentImpl;
@@ -1551,7 +1552,7 @@ public class RBlockViewport extends BaseRCollection {
 	private void importFloatingInfo(FloatingInfo floatingInfo, BoundableRenderable block) {
 		final int shiftX = floatingInfo.shiftX + block.getX();
 		final int shiftY = floatingInfo.shiftY + block.getY();
-		final ExportableFloat[] floats = floatingInfo.floats;
+		final ExportableFloat[] floats = (ExportableFloat[])floatingInfo.floats;
 		final int length = floats.length;
 		for (int i = 0; i < length; i++) {
 			final ExportableFloat ef = floats[i];

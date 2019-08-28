@@ -27,6 +27,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 
+import org.lobo.info.BackgroundInfo;
+import org.lobo.info.BorderInfo;
+import org.lobo.info.WordInfo;
+
 /**
  * @author J. H. S.
  */

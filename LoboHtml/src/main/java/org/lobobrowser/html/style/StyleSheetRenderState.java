@@ -34,6 +34,9 @@ import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.lobo.common.Strings;
+import org.lobo.info.BackgroundInfo;
+import org.lobo.info.BorderInfo;
+import org.lobo.info.WordInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;

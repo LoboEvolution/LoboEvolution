@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 
 import org.lobo.common.Objects;
 import org.lobo.common.Urls;
+import org.lobo.info.FontInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 import org.w3c.dom.DOMException;

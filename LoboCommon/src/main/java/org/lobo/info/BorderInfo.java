@@ -18,14 +18,14 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-package org.lobobrowser.html.style;
+package org.lobo.info;
 
 import java.awt.Color;
 
 public class BorderInfo {
 	public Color bottomColor;
 	public int bottomStyle;
-	public HtmlInsets insets;
+	public Object insets;
 	public Color leftColor;
 
 	public int leftStyle;

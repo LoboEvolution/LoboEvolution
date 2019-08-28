@@ -1,6 +1,6 @@
 /*
     GNU LESSER GENERAL PUBLIC LICENSE
-    Copyright (C) 2006 The Lobo Project. Copyright (C) 2014 Lobo Evolution
+    Copyright (C) 2006 The XAMJ Project
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -18,12 +18,17 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-package org.lobobrowser.html.style;
+package org.lobo.info;
 
-class FontInfo {
-	public String fontFamily;
-	public String fontSize;
-	public String fontStyle;
-	public String fontVariant;
-	public String fontWeight;
+
+public class FloatingInfo {
+	public final Object[] floats;
+	public final int shiftX, shiftY;
+
+	public FloatingInfo(int shiftX, int shiftY, Object[] floats) {
+		super();
+		this.shiftX = shiftX;
+		this.shiftY = shiftY;
+		this.floats = floats;
+	}
 }

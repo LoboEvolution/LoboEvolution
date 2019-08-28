@@ -23,6 +23,8 @@ package org.lobobrowser.html.style;
 import java.awt.Color;
 
 import org.lobo.common.Strings;
+import org.lobo.info.BackgroundInfo;
+import org.lobo.info.BorderInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableElementImpl;

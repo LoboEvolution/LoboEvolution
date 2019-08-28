@@ -25,6 +25,7 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Dimension;
 
+import org.lobo.info.SizeInfo;
 import org.lobobrowser.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.RenderState;
@@ -154,12 +155,12 @@ class RTableCell extends RBlock {
 		return true;
 	}
 
-	public void setCellBounds(TableMatrix.SizeInfo[] colSizes, TableMatrix.SizeInfo[] rowSizes, int hasBorder,
+	public void setCellBounds(SizeInfo[] colSizes, SizeInfo[] rowSizes, int hasBorder,
 			int cellSpacingX, int cellSpacingY) {
 		final int vcol = getVirtualColumn();
 		final int vrow = getVirtualRow();
-		final TableMatrix.SizeInfo colSize = colSizes[vcol];
-		final TableMatrix.SizeInfo rowSize = rowSizes[vrow];
+		final SizeInfo colSize = colSizes[vcol];
+		final SizeInfo rowSize = rowSizes[vrow];
 		final int x = colSize.offset;
 		final int y = rowSize.offset;
 		int width;

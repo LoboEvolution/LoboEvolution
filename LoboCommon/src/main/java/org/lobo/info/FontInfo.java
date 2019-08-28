@@ -18,22 +18,12 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-package org.lobobrowser.html.style;
+package org.lobo.info;
 
-import java.awt.Color;
-import java.net.URL;
-
-public class BackgroundInfo {
-	public static final int BR_NO_REPEAT = 1;
-	public static final int BR_REPEAT = 0;
-	public static final int BR_REPEAT_X = 2;
-	public static final int BR_REPEAT_Y = 3;
-	public Color backgroundColor;
-	public URL backgroundImage;
-	public int backgroundRepeat = BR_REPEAT;
-
-	public int backgroundXPosition;
-	public boolean backgroundXPositionAbsolute;
-	public int backgroundYPosition;
-	public boolean backgroundYPositionAbsolute;
+public class FontInfo {
+	public String fontFamily;
+	public String fontSize;
+	public String fontStyle;
+	public String fontVariant;
+	public String fontWeight;
 }

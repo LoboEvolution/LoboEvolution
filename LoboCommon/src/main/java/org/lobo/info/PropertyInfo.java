@@ -17,21 +17,43 @@
     Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
-*/
-/*
- * Created on Apr 17, 2005
  */
-package org.lobobrowser.html.style;
+package org.lobo.info;
 
-import java.awt.FontMetrics;
+import java.lang.reflect.Method;
 
-/**
- * @author J. H. S.
- */
-class WordInfo {
-	public int ascentPlusLeading;
-	public int descent;
-	public FontMetrics fontMetrics;
-	public int height;
-	public int width;
+public class PropertyInfo {
+	private Method getter, setter;
+	private final String name;
+	private final Class propertyType;
+
+	public PropertyInfo(String name, Class propType) {
+		super();
+		this.name = name;
+		this.propertyType = propType;
+	}
+
+	public Method getGetter() {
+		return this.getter;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public Class getPropertyType() {
+		return this.propertyType;
+	}
+
+	public Method getSetter() {
+		return this.setter;
+	}
+
+	public void setGetter(Method getter) {
+		this.getter = getter;
+	}
+
+	public void setSetter(Method setter) {
+		this.setter = setter;
+	}
 }

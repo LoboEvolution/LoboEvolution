@@ -27,6 +27,7 @@ import java.awt.Toolkit;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lobo.info.WordInfo;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
 

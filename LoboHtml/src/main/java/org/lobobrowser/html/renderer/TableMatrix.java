@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.lobo.info.SizeInfo;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
 import org.lobobrowser.html.dom.NodeFilter;
 import org.lobobrowser.html.dom.filter.ColumnsFilter;
@@ -47,14 +48,6 @@ import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 
 class TableMatrix {
-
-	public static class SizeInfo {
-		public int actualSize;
-		public HtmlLength htmlLength;
-		public int layoutSize;
-		public int minSize;
-		public int offset;
-	}
 
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 
@@ -296,7 +289,7 @@ class TableMatrix {
 			if (difference > 0 || difference < 0 && expand) {
 				int absoluteWidthTotal = 0;
 				for (int i = 0; i < numCols; i++) {
-					final HtmlLength widthLength = columnSizes[i].htmlLength;
+					final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
 					if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
 						absoluteWidthTotal += columnSizes[i].actualSize;
 					}
@@ -309,7 +302,7 @@ class TableMatrix {
 					final double ratio = (double) expectedAbsoluteWidthTotal / absoluteWidthTotal;
 					for (int i = 0; i < numCols; i++) {
 						final SizeInfo sizeInfo = columnSizes[i];
-						final HtmlLength widthLength = columnSizes[i].htmlLength;
+						final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
 						if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
 							final int oldActualSize = sizeInfo.actualSize;
 							int newActualSize = (int) Math.round(oldActualSize * ratio);
@@ -333,7 +326,7 @@ class TableMatrix {
 				if (difference > 0 || difference < 0 && expand) {
 					int percentWidthTotal = 0;
 					for (int i = 0; i < numCols; i++) {
-						final HtmlLength widthLength = columnSizes[i].htmlLength;
+						final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
 						if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
 							percentWidthTotal += columnSizes[i].actualSize;
 						}
@@ -346,7 +339,7 @@ class TableMatrix {
 						final double ratio = (double) expectedPercentWidthTotal / percentWidthTotal;
 						for (int i = 0; i < numCols; i++) {
 							final SizeInfo sizeInfo = columnSizes[i];
-							final HtmlLength widthLength = columnSizes[i].htmlLength;
+							final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
 							if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
 								final int oldActualSize = sizeInfo.actualSize;
 								int newActualSize = (int) Math.round(oldActualSize * ratio);
@@ -557,7 +550,7 @@ class TableMatrix {
 		int otherMinSize = 0;
 		for (int i = 0; i < numRows; i++) {
 			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = rowSizeInfo.htmlLength;
+			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
 				int actualSizeInt = heightLength.getLength(cellAvailHeight);
 				if (actualSizeInt < rowSizeInfo.minSize) {
@@ -576,7 +569,7 @@ class TableMatrix {
 			final double ratio = (double) (cellAvailHeight - otherMinSize) / heightUsedbyPercent;
 			for (int i = 0; i < numRows; i++) {
 				final SizeInfo rowSizeInfo = rowSizes[i];
-				final HtmlLength heightLength = rowSizeInfo.htmlLength;
+				final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 				if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
 					final int actualSize = rowSizeInfo.actualSize;
 					final int prevActualSize = actualSize;
@@ -597,7 +590,7 @@ class TableMatrix {
 		int numNoHeightColumns = 0;
 		for (int i = 0; i < numRows; i++) {
 			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = rowSizeInfo.htmlLength;
+			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength != null && heightLength.getLengthType() != HtmlLength.LENGTH) {
 				// TODO: MULTI-LENGTH not supported
 				int actualSizeInt = heightLength.getRawValue();
@@ -619,7 +612,7 @@ class TableMatrix {
 					/ heightUsedByAbsolute;
 			for (int i = 0; i < numRows; i++) {
 				final SizeInfo rowSizeInfo = rowSizes[i];
-				final HtmlLength heightLength = rowSizeInfo.htmlLength;
+				final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 				if (heightLength != null && heightLength.getLengthType() != HtmlLength.LENGTH) {
 					final int actualSize = rowSizeInfo.actualSize;
 					final int prevActualSize = actualSize;
@@ -639,7 +632,7 @@ class TableMatrix {
 		int heightUsedByRemaining = 0;
 		for (int i = 0; i < numRows; i++) {
 			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = rowSizeInfo.htmlLength;
+			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength == null) {
 				int actualSizeInt = remainingHeight / numNoHeightColumns;
 				if (actualSizeInt < rowSizeInfo.minSize) {
@@ -684,7 +677,7 @@ class TableMatrix {
 		int percentSum = 0;
 		for (int i = 0; i < numRows; i++) {
 			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = rowSizeInfo.htmlLength;
+			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.PIXELS) {
 				// TODO: MULTI-LENGTH not supported
 				int actualSizeInt = heightLength.getRawValue();
@@ -704,7 +697,7 @@ class TableMatrix {
 		// Set sizes to in row height
 		for (int i = 0; i < numRows; i++) {
 			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength widthLength = rowSizeInfo.htmlLength;
+			final HtmlLength widthLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (widthLength == null) {
 				final int actualSizeInt = rowSizeInfo.minSize;
 				heightUsedByNoSize += actualSizeInt;
@@ -720,7 +713,7 @@ class TableMatrix {
 		int heightUsedByPercent = 0;
 		for (int i = 0; i < numRows; i++) {
 			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = rowSizeInfo.htmlLength;
+			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
 				int actualSizeInt = heightLength.getLength(expectedTotalCellHeight);
 				if (actualSizeInt < rowSizeInfo.minSize) {
@@ -754,7 +747,7 @@ class TableMatrix {
 		int widthUsedByPercent = 0;
 		for (int i = 0; i < numCols; i++) {
 			final SizeInfo colSizeInfo = columnSizes[i];
-			final HtmlLength widthLength = colSizeInfo.htmlLength;
+			final HtmlLength widthLength = (HtmlLength)colSizeInfo.htmlLength;
 			if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
 				final int actualSizeInt = widthLength.getLength(cellAvailWidth);
 				widthUsedByPercent += actualSizeInt;
@@ -767,7 +760,7 @@ class TableMatrix {
 		int numNoWidthColumns = 0;
 		for (int i = 0; i < numCols; i++) {
 			final SizeInfo colSizeInfo = columnSizes[i];
-			final HtmlLength widthLength = colSizeInfo.htmlLength;
+			final HtmlLength widthLength = (HtmlLength)colSizeInfo.htmlLength;
 			if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
 				// TODO: MULTI-LENGTH not supported
 				final int actualSizeInt = widthLength.getRawValue();
@@ -777,27 +770,6 @@ class TableMatrix {
 				numNoWidthColumns++;
 			}
 		}
-
-		// Tentative width of all columns without a declared
-		// width is set to zero. The pre-render will determine
-		// a better size.
-
-//		// Assign all columns without widths now
-//		int widthUsedByUnspecified = 0;
-//		if(setNoWidthColumns) {
-//			int remainingWidth = cellAvailWidth - widthUsedByAbsolute - widthUsedByPercent;
-//			if(remainingWidth > 0) {
-//				for(int i = 0; i < numCols; i++) {
-//					SizeInfo colSizeInfo = columnSizes[i];
-//					HtmlLength widthLength = colSizeInfo.htmlLength;
-//					if(widthLength == null) {
-//						int actualSizeInt = remainingWidth / numNoWidthColumns;
-//						widthUsedByUnspecified += actualSizeInt;
-//						colSizeInfo.actualSize = actualSizeInt;
-//					}
-//				}
-//			}		
-//		}
 
 		// Contract if necessary. This is done again later, but this is
 		// an optimization, as it may prevent re-layout. It is only done
@@ -816,7 +788,7 @@ class TableMatrix {
 					final double ratio = (double) expectedAbsoluteWidthTotal / widthUsedByAbsolute;
 					for (int i = 0; i < numCols; i++) {
 						final SizeInfo sizeInfo = columnSizes[i];
-						final HtmlLength widthLength = columnSizes[i].htmlLength;
+						final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
 						if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
 							final int oldActualSize = sizeInfo.actualSize;
 							final int newActualSize = (int) Math.round(oldActualSize * ratio);
@@ -837,7 +809,7 @@ class TableMatrix {
 						final double ratio = (double) expectedPercentWidthTotal / widthUsedByPercent;
 						for (int i = 0; i < numCols; i++) {
 							final SizeInfo sizeInfo = columnSizes[i];
-							final HtmlLength widthLength = columnSizes[i].htmlLength;
+							final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
 							if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
 								final int oldActualSize = sizeInfo.actualSize;
 								final int newActualSize = (int) Math.round(oldActualSize * ratio);

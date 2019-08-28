@@ -40,6 +40,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JScrollBar;
 
+import org.lobo.info.FloatingInfo;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.lobobrowser.html.style.BlockRenderState;

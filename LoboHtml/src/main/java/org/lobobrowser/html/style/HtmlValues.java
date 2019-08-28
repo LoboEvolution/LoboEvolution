@@ -30,6 +30,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import org.lobo.info.BorderInfo;
+import org.lobo.info.FontInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;

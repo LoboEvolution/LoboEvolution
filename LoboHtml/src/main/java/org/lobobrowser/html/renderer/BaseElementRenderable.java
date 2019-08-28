@@ -39,12 +39,12 @@ import java.util.List;
 import java.util.logging.Level;
 
 import org.lobo.common.Strings;
+import org.lobo.info.BackgroundInfo;
+import org.lobo.info.BorderInfo;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.style.AbstractCSSProperties;
-import org.lobobrowser.html.style.BackgroundInfo;
-import org.lobobrowser.html.style.BorderInfo;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.html.style.RenderState;
@@ -181,7 +181,7 @@ abstract class BaseElementRenderable extends BaseRCollection
 		} else {
 			final BorderInfo borderInfo = rs.getBorderInfo();
 			this.borderInfo = borderInfo;
-			final HtmlInsets binsets = borderInfo == null ? null : borderInfo.insets;
+			final HtmlInsets binsets = borderInfo == null ? null : (HtmlInsets)borderInfo.insets;
 			final HtmlInsets minsets = rs.getMarginInsets();
 			final HtmlInsets pinsets = rs.getPaddingInsets();
 			int dpleft = 0, dpright = 0, dptop = 0, dpbottom = 0;

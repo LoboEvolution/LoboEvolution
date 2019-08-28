@@ -24,6 +24,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.lobo.info.PropertyInfo;
 import org.mozilla.javascript.Function;
 
 public class JavaClassWrapper {
