@@ -47,7 +47,7 @@ import org.lobobrowser.html.renderer.BoundableRenderable;
 import org.lobobrowser.html.renderer.FrameContext;
 import org.lobobrowser.html.renderer.NodeRenderer;
 import org.lobobrowser.html.renderer.RenderableSpot;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobo.common.EventDispatch2;
@@ -603,7 +603,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * <p>
 	 * This method has no effect on FRAMESETs.
 	 * 
-	 * @param overflow See {@link org.lobobrowser.html.style.RenderState}.
+	 * @param overflow See {@link org.lobobrowser.html.renderstate.RenderState}.
 	 */
 	public void setDefaultOverflowX(int overflow) {
 		this.defaultOverflowX = overflow;
@@ -618,7 +618,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * <p>
 	 * This method has no effect on FRAMESETs.
 	 * 
-	 * @param overflow See {@link org.lobobrowser.html.style.RenderState}.
+	 * @param overflow See {@link org.lobobrowser.html.renderstate.RenderState}.
 	 */
 	public void setDefaultOverflowY(int overflow) {
 		this.defaultOverflowY = overflow;

@@ -67,7 +67,7 @@ public interface BrowserFrame {
 	 * Sets the default horizontal overflow of the browser frame.
 	 * 
 	 * @param overflowX See constants in
-	 *                  {@link org.lobobrowser.html.style.RenderState}.
+	 *                  {@link org.lobobrowser.html.renderstate.RenderState}.
 	 */
 	void setDefaultOverflowX(int overflowX);
 
@@ -75,7 +75,7 @@ public interface BrowserFrame {
 	 * Sets the default vertical overflow of the browser frame.
 	 * 
 	 * @param overflowY See constants in
-	 *                  {@link org.lobobrowser.html.style.RenderState}.
+	 *                  {@link org.lobobrowser.html.renderstate.RenderState}.
 	 */
 	void setDefaultOverflowY(int overflowY);
 }

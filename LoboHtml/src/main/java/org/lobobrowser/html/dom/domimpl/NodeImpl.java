@@ -37,8 +37,8 @@ import java.util.logging.Logger;
 
 import org.lobo.common.Strings;
 import org.lobobrowser.html.parser.HtmlParser;
-import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.html.style.StyleSheetRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.renderstate.StyleSheetRenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobobrowser.js.AbstractScriptableDelegate;

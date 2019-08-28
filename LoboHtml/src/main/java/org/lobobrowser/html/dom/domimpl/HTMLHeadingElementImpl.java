@@ -21,9 +21,9 @@
 package org.lobobrowser.html.dom.domimpl;
 
 import org.lobobrowser.html.dom.HTMLHeadingElement;
+import org.lobobrowser.html.renderstate.HeadingRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSSProperties;
-import org.lobobrowser.html.style.HeadingRenderState;
-import org.lobobrowser.html.style.RenderState;
 
 public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTMLHeadingElement {
 	public HTMLHeadingElementImpl(String name) {

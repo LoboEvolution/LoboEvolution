@@ -3,8 +3,8 @@ package org.lobobrowser.html.dom.domimpl;
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.dom.HTMLIFrameElement;
 import org.lobobrowser.html.js.Window;
-import org.lobobrowser.html.style.IFrameRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.IFrameRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.w3c.dom.Document;
 
 public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTMLIFrameElement, FrameNode {

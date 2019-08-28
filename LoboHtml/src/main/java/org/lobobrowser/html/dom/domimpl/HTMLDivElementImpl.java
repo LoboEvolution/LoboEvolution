@@ -22,8 +22,8 @@
 package org.lobobrowser.html.dom.domimpl;
 
 import org.lobobrowser.html.dom.HTMLDivElement;
-import org.lobobrowser.html.style.BlockRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.BlockRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDivElement {
 

@@ -19,11 +19,11 @@ import org.lobobrowser.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.Event;
 
-class HtmlController {
+public class HtmlController {
 	private static final HtmlController instance = new HtmlController();
 	private static final Logger logger = Logger.getLogger(HtmlController.class.getName());
 
-	static HtmlController getInstance() {
+	public static HtmlController getInstance() {
 		return instance;
 	}
 

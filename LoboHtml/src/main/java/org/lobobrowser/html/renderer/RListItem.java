@@ -27,8 +27,8 @@ import java.awt.Insets;
 
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.domimpl.NodeImpl;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.ListStyle;
-import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 

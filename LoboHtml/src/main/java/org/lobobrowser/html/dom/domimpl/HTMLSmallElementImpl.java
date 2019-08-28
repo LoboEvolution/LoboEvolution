@@ -20,9 +20,9 @@
 */
 package org.lobobrowser.html.dom.domimpl;
 
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.FontValues;
-import org.lobobrowser.html.style.RenderState;
 
 
 public class HTMLSmallElementImpl extends HTMLAbstractUIElement {

@@ -24,8 +24,8 @@
 package org.lobobrowser.html.dom.domimpl;
 
 import org.lobobrowser.html.dom.HTMLUListElement;
-import org.lobobrowser.html.style.ListRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.ListRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLUListElement {
 	public HTMLUListElementImpl(String name) {

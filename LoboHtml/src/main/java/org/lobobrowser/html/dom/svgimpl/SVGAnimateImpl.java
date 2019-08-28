@@ -30,10 +30,10 @@ import javax.swing.Timer;
 
 import org.lobo.info.SVGInfo;
 import org.lobo.laf.ColorFactory;
+import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.dom.smil.ElementTargetAttributes;
 import org.lobobrowser.html.dom.svg.SVGTransform;
 import org.lobobrowser.html.dom.svg.SVGTransformList;
-import org.lobobrowser.html.renderer.RUIControl;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 
 

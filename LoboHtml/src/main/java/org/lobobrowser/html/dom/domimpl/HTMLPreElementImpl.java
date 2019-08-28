@@ -24,9 +24,9 @@
 package org.lobobrowser.html.dom.domimpl;
 
 import org.lobobrowser.html.dom.HTMLPreElement;
+import org.lobobrowser.html.renderstate.PreRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.PreRenderState;
-import org.lobobrowser.html.style.RenderState;
 
 public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPreElement {
 	public HTMLPreElementImpl(String name) {

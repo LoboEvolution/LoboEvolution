@@ -22,8 +22,8 @@ package org.lobobrowser.html.renderer;
 
 import java.awt.Insets;
 
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.RenderState;
 
 public class DelayedPair {
 	

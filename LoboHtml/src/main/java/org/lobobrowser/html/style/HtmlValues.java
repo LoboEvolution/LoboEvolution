@@ -35,6 +35,7 @@ import org.lobo.info.FontInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.w3c.dom.css.CSS3Properties;
 
 public class HtmlValues {

@@ -7,6 +7,7 @@ import java.awt.font.TextAttribute;
 
 import org.lobo.html.CSSValues;
 import org.lobo.laf.LAFSettings;
+import org.lobobrowser.html.renderstate.RenderState;
 
 public class FontValues extends HtmlValues {
 	public static final String getFontFamily(String spec, RenderState parentRenderState) {

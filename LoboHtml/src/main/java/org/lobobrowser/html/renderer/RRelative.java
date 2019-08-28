@@ -26,6 +26,7 @@ import java.util.Iterator;
 
 import org.lobo.common.ArrayUtilities;
 import org.lobo.info.FloatingInfo;
+import org.lobobrowser.html.control.RUIControl;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 
 public class RRelative extends BaseRCollection {

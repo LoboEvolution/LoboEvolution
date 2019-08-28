@@ -20,8 +20,8 @@
 */
 package org.lobobrowser.html.dom.domimpl;
 
-import org.lobobrowser.html.style.BlockQuoteRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.BlockQuoteRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 public class HTMLBlockQuoteElementImpl extends HTMLAbstractUIElement {
 	public HTMLBlockQuoteElementImpl(String name) {

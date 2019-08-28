@@ -44,16 +44,16 @@ import org.lobo.info.BorderInfo;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.RenderState;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobo.common.GUITasks;
 import org.w3c.dom.css.CSS3Properties;
 
-abstract class BaseElementRenderable extends BaseRCollection
+public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver {
 	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
 

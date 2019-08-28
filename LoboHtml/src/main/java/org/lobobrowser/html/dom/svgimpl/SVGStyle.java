@@ -37,7 +37,7 @@ import org.lobo.common.Nodes;
 import org.lobo.common.Strings;
 import org.lobo.info.SVGInfo;
 import org.lobo.laf.ColorFactory;
-import org.lobobrowser.html.renderer.BaseControl;
+import org.lobobrowser.html.control.BaseControl;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlValues;
 import org.w3c.dom.Element;

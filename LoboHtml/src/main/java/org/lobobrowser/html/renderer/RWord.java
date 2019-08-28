@@ -28,7 +28,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 
 import org.lobobrowser.html.dom.domimpl.ModelNode;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 final class RWord extends BaseBoundableRenderable {
 	public final int ascentPlusLeading;

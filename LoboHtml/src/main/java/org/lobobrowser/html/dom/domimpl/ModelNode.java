@@ -25,7 +25,7 @@ package org.lobobrowser.html.dom.domimpl;
 
 import java.net.MalformedURLException;
 
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 /**
  * A generic node interface. The idea is that implementors could be W3C nodes or

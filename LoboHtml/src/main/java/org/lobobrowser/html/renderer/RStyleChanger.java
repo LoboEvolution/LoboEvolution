@@ -26,7 +26,7 @@ package org.lobobrowser.html.renderer;
 import java.awt.Graphics;
 
 import org.lobobrowser.html.dom.domimpl.ModelNode;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 /**
  * @author J. H. S.

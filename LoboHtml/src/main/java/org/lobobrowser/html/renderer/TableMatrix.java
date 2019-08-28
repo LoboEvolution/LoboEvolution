@@ -35,6 +35,8 @@ import org.lobo.info.SizeInfo;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
 import org.lobobrowser.html.dom.NodeFilter;
 import org.lobobrowser.html.dom.filter.ColumnsFilter;
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.renderstate.RenderThreadState;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableElementImpl;
@@ -42,8 +44,6 @@ import org.lobobrowser.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.lobobrowser.html.style.AbstractCSSProperties;
 import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
-import org.lobobrowser.html.style.RenderState;
-import org.lobobrowser.html.style.RenderThreadState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 

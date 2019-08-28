@@ -1,7 +1,7 @@
 package org.lobobrowser.html.dom.domimpl;
 
-import org.lobobrowser.html.style.FontStyleRenderState;
-import org.lobobrowser.html.style.RenderState;
+import org.lobobrowser.html.renderstate.FontStyleRenderState;
+import org.lobobrowser.html.renderstate.RenderState;
 
 /**
  * Element used for SUB

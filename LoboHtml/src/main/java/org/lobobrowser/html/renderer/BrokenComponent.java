@@ -5,10 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-class BrokenComponent extends Component {
-	/**
-	 * 
-	 */
+public class BrokenComponent extends Component {
+
 	private static final long serialVersionUID = 1L;
 
 	@Override
