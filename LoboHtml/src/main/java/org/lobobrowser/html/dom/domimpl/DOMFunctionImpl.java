@@ -6,11 +6,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.lobo.common.Nodes;
 import org.lobobrowser.html.dom.filter.ClassNameFilter;
 import org.lobobrowser.html.dom.filter.ElementFilter;
 import org.lobobrowser.html.dom.filter.TagNameFilter;
 import org.lobobrowser.html.js.Executor;
+import org.lobobrowser.html.style.CSSUtilities;
+import org.lobobrowser.html.style.StyleSheetAggregator;
 import org.lobobrowser.http.UserAgentContext;
+
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -38,6 +44,37 @@ public class DOMFunctionImpl extends NodeImpl {
 	public NodeList getElementsByClassName(String classNames) {
 		return getNodeList(new ClassNameFilter(classNames));
 	}
+	
+    public Element querySelector(String selectors) {
+    	SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+    	if (selectorList != null) {
+    		NodeList childNodes = getDescendents(new ElementFilter(null), true);
+    		for (Node child : Nodes.iterable(childNodes)) {
+                for (Selector selector : selectorList) {                	
+                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null, true)) {
+                        return (Element)child;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    public NodeList querySelectorAll(String selectors) {
+    	final ArrayList<Node> al = new ArrayList<Node>();
+    	SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
+    	if (selectorList != null) {
+    		NodeList childNodes = getDescendents(new ElementFilter(null), true);
+    		for (Node child : Nodes.iterable(childNodes)) {
+                for (Selector selector : selectorList) {                	
+                	if (child instanceof Element && StyleSheetAggregator.selects(selector, child, null, true)) {
+                        al.add(child);
+                    }
+                }
+            }
+        }
+        return new NodeListImpl(al);
+    }
 		
 	public void addEventListener(final String type, final Function listener) {
 	    addEventListener(type, listener, false);

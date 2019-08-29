@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.lobo.common.Nodes;
 import org.lobo.info.SizeInfo;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
 import org.lobobrowser.html.dom.NodeFilter;
@@ -46,6 +47,8 @@ import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 class TableMatrix {
 
@@ -1221,11 +1224,10 @@ class TableMatrix {
 		final ArrayList<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
 		final Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(2);
-		final ArrayList<?> cellList = te.getDescendents(COLUMNS_FILTER, false);
+		final NodeList cellList = te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
-		final Iterator<?> ci = cellList.iterator();
-		while (ci.hasNext()) {
-			final HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) ci.next();
+		for (Node node : Nodes.iterable(cellList)) {
+			final HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) node;
 			final HTMLTableRowElementImpl rowElement = getParentRow(columnNode);
 			if (rowElement != null && rowElement.getRenderState().getDisplay() == RenderState.DISPLAY_NONE) {
 				// Skip row [ 2047122 ]

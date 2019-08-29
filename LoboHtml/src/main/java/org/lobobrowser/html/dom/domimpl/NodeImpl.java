@@ -336,15 +336,15 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 
 	/**
-	 * Creates an <code>ArrayList</code> of descendent nodes that the given filter
+	 * Creates an <code>NodeList</code> of descendent nodes that the given filter
 	 * condition.
 	 */
-	public ArrayList<Node> getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
+	public NodeList getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
 		final ArrayList<Node> al = new ArrayList<Node>();
 		synchronized (this.treeLock) {
 			extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 		}
-		return al;
+		return new NodeListImpl(al);
 	}
 
 	/*

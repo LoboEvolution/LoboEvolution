@@ -108,6 +108,11 @@ public class StyleSheetAggregator {
 		}
 		return matchingRules;
 	}
+	
+	public static boolean selects(final Selector selector, final Node node, final String pseudoElement,
+			final boolean fromQuerySelectorAll) {
+		return new StyleSheetAggregator().selects(selector, (HTMLElement)node, pseudoElement, fromQuerySelectorAll);
+	}
 
 	private List<CSSStyleSheetImpl.SelectorEntry> selects(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
 			final HTMLElement element, final String pseudoElement, final boolean fromQuerySelectorAll, final String[] classes) {
