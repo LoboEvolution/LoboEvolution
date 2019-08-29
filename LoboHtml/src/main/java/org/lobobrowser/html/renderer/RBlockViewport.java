@@ -316,8 +316,8 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private static class InputLayout2 extends CommonWidgetLayout {
-		public InputLayout2() {
+	private static class InputLayout extends CommonWidgetLayout {
+		public InputLayout() {
 			super(ADD_INLINE);
 		}
 
@@ -461,8 +461,8 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private static class TextAreaLayout2 extends CommonWidgetLayout {
-		public TextAreaLayout2() {
+	private static class TextAreaLayout extends CommonWidgetLayout {
+		public TextAreaLayout() {
 			super(ADD_INLINE);
 		}
 
@@ -536,8 +536,8 @@ public class RBlockViewport extends BaseRCollection {
 		final AnchorLayout anchor = new AnchorLayout();
 		el.put("A", anchor);
 		el.put("ANCHOR", anchor);
-		el.put("INPUT", new InputLayout2());
-		el.put("TEXTAREA", new TextAreaLayout2());
+		el.put("INPUT", new InputLayout());
+		el.put("TEXTAREA", new TextAreaLayout());
 		el.put("SELECT", new SelectLayout());
 		final ListItemLayout list = new ListItemLayout();
 		el.put("UL", list);
