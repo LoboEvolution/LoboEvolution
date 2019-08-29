@@ -154,8 +154,8 @@ public class FontValues extends HtmlValues {
 	public static Integer getFontUnderline(String spec) {
 		final String underline = spec;
 
-		if (CSSValues.get(underline) != null) {
-			return TextAttribute.UNDERLINE_LOW_ONE_PIXEL;
+		if (CSSValues.get(underline).equals(CSSValues.UNDERLINE)) {
+			return TextAttribute.UNDERLINE_LOW_TWO_PIXEL;
 		}
 
 		if (underline == null && new LAFSettings().getInstance().isUnderline()) {
