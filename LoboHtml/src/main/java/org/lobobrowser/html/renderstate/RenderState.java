@@ -24,8 +24,10 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.util.Optional;
 
 import org.lobo.info.BackgroundInfo;
 import org.lobo.info.BorderInfo;
@@ -162,4 +164,8 @@ public interface RenderState {
     String getRight();
 
     String getBottom();
+    
+    Optional<Cursor> getCursor();
+    
+    void setCursor(Optional<Cursor> cursor);
 }

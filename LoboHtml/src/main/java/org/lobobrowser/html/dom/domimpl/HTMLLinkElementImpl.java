@@ -20,12 +20,21 @@
 */
 package org.lobobrowser.html.dom.domimpl;
 
+import java.awt.Color;
+import java.awt.Cursor;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Optional;
+
+import org.lobo.laf.ColorFactory;
+import org.lobobrowser.html.dom.HTMLBodyElement;
+import org.lobobrowser.html.dom.HTMLDocument;
 import org.lobobrowser.html.dom.HTMLLinkElement;
 import org.lobobrowser.html.parser.HtmlParser;
-import org.lobobrowser.html.renderstate.AnchorRenderState;
 import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.renderstate.TextDecorationRenderState;
+import org.lobobrowser.html.renderstate.ColorRenderState;
+import org.lobobrowser.html.renderstate.CursorRenderState;
 import org.lobobrowser.html.style.CSSUtilities;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
@@ -44,10 +53,35 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
+		RenderState tmpRenderState = prevRenderState;
 		if (hasAttribute("href")) {
-            prevRenderState = new AnchorRenderState(prevRenderState, this);
+			tmpRenderState = new TextDecorationRenderState(tmpRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
+			tmpRenderState = new ColorRenderState(tmpRenderState, this.linkColor());
+			tmpRenderState = new CursorRenderState(tmpRenderState, Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)));
 		}
-		return super.createRenderState(prevRenderState);
+		return super.createRenderState(tmpRenderState);
+	}
+	
+	private Color linkColor() {
+		HTMLDocument doc = (HTMLDocument) this.document;
+		if (doc != null) {
+			HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
+			if (body != null) {
+				String vlink = body.getVLink();
+				String link = body.getLink();
+				if (vlink != null || link != null) {
+					HtmlRendererContext rcontext = this.getHtmlRendererContext();
+					if (rcontext != null) {
+						boolean visited = rcontext.isVisitedLink(this);
+						String colorText = visited ? vlink : link;
+						if (colorText != null) {
+							return ColorFactory.getInstance().getColor(colorText);
+						}
+					}
+				}
+			}
+		}
+		return Color.BLUE;
 	}
 
 	public String getAbsoluteHref() {

@@ -24,17 +24,22 @@
 package org.lobobrowser.html.renderer;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
 import org.lobobrowser.html.dom.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.http.HtmlRendererContext;
 
 /**
  * @author J. H. S.
@@ -289,6 +294,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		if (triggerEvent) {
 			if (isContainedByNode()) {
 				HtmlController.getInstance().onMouseOver(this.modelNode, event, x, y, limit);
+				resetCursorOnMouseOut(this.modelNode, limit);
 			}
 		}
 	}
@@ -297,6 +303,30 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
 		if (isContainedByNode()) {
 			HtmlController.getInstance().onMouseOut(this.modelNode, event, x, y, limit);
+		}
+	}
+
+	private static void resetCursorOnMouseOut(final ModelNode nodeStart, final ModelNode limit) {
+		Optional<Cursor> foundCursorOpt = Optional.empty();
+		ModelNode node = limit;
+		while (node != null) {
+			
+			if (node instanceof NodeImpl) {
+				final NodeImpl uiElement = (NodeImpl) node;
+				final RenderState rs = uiElement.getRenderState();
+				final Optional<Cursor> cursorOpt = rs.getCursor();
+				foundCursorOpt = cursorOpt;
+				if (cursorOpt.isPresent()) {
+					break;
+				}
+			}
+			node = node.getParentModelNode();
+		}
+
+		if (nodeStart instanceof NodeImpl) {
+			final NodeImpl uiElement = (NodeImpl) nodeStart;
+			final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+			rcontext.setCursor(foundCursorOpt);
 		}
 	}
 

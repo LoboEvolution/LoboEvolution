@@ -250,6 +250,7 @@ public enum CSSValues {
 	}
 
 	public static CSSValues get(String actionName) {
-		return ENUM_MAP.get(actionName);
+		CSSValues value = ENUM_MAP.get(actionName);
+		return value == null ? CSSValues.NONE : value;
 	}
 }

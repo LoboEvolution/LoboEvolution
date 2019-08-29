@@ -33,7 +33,7 @@ public class HTMLStrikeElementImpl extends HTMLAbstractUIElement {
 
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
-        prevRenderState = new TextDecorationRenderState(prevRenderState, this, RenderState.MASK_TEXTDECORATION_LINE_THROUGH);
+        prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_LINE_THROUGH);
 		return super.createRenderState(prevRenderState);
 	}
 }

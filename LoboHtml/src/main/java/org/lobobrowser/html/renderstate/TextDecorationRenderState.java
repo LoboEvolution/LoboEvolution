@@ -21,24 +21,29 @@
 
 package org.lobobrowser.html.renderstate;
 
-import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+public class TextDecorationRenderState extends RenderStateDelegator {
 
-public class TextDecorationRenderState extends StyleSheetRenderState {
-	
-	private final int textDecorationMask;
-	
-	private RenderState delegate;
+	/** The text decoration mask. */
+	private int textDecorationMask;
 
-	public TextDecorationRenderState(RenderState prevRenderState, HTMLElementImpl element, final int textDecorationMask) {
-		super(prevRenderState, element);
+	/**
+	 * Instantiates a new text decoration render state.
+	 *
+	 * @param prevRenderState
+	 *            the prev render state
+	 * @param textDecorationMask
+	 *            the text decoration mask
+	 */
+	public TextDecorationRenderState(RenderState prevRenderState, int textDecorationMask) {
+		super(prevRenderState);
 		this.textDecorationMask = textDecorationMask;
-		this.delegate = prevRenderState;
 	}
+
 
 	@Override
 	public int getTextDecorationMask() {
-		final RenderState prs = this.delegate;
-		final int parentMask = prs == null ? 0 : prs.getTextDecorationMask();
+		RenderState prs = this.delegate;
+		int parentMask = prs == null ? 0 : prs.getTextDecorationMask();
 		return parentMask | this.textDecorationMask;
 	}
 }

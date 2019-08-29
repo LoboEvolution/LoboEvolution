@@ -24,6 +24,7 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Toolkit;
@@ -31,9 +32,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.StringTokenizer;
 
 import org.lobo.common.Strings;
+import org.lobo.html.CSSValues;
 import org.lobo.info.BackgroundInfo;
 import org.lobo.info.BorderInfo;
 import org.lobo.info.WordInfo;
@@ -108,6 +111,8 @@ public class StyleSheetRenderState implements RenderState {
 	protected final RenderState prevRenderState;
 	
     private Integer cachedClear = null;
+    
+    private Optional<Cursor> cursor;
 
 	public StyleSheetRenderState(HTMLDocumentImpl document) {
 		this.prevRenderState = null;
@@ -1118,6 +1123,44 @@ public class StyleSheetRenderState implements RenderState {
     public String getBottom() {
         final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getBottom();
+    }
+    
+    @Override
+    public void setCursor(Optional<Cursor> cursor) {
+       this.cursor = cursor;
+        
+    }
+
+   @Override
+    public Optional<Cursor> getCursor() {
+        Optional<Cursor> prevCursorOpt = Optional.empty();
+        AbstractCSSProperties props = this.getCssProperties();
+
+        if (this.cursor != null) {
+            prevCursorOpt = this.cursor;
+        }
+
+        if (props == null) {
+            return prevCursorOpt;
+        }
+        
+        String cursor = props.getPropertyValue("cursor");
+        CSSValues key = CSSValues.get(cursor);
+                
+		switch (key) {
+		case POINTER:
+			return Optional.of(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		case CROSSHAIR:
+			return Optional.of(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+		case MOVE:
+			return Optional.of(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+		case TEXT_CSS:
+			return Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
+		case WAIT:
+			return Optional.of(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+		default:
+			return prevCursorOpt;
+        }
     }
 
 }

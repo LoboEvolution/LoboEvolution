@@ -21,8 +21,10 @@
 package org.lobobrowser.html.renderstate;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.util.Optional;
 
 import org.lobo.info.BackgroundInfo;
 import org.lobo.info.BorderInfo;
@@ -227,8 +229,18 @@ public abstract class RenderStateDelegator implements RenderState {
         return this.delegate.getBottom();
     }
 
-    @Override
-    public String getRight() {
-        return this.delegate.getRight();
-    }
+	@Override
+	public String getRight() {
+		return this.delegate.getRight();
+	}
+
+	@Override
+	public Optional<Cursor> getCursor() {
+		return this.delegate.getCursor();
+	}
+
+	@Override
+	public void setCursor(Optional<Cursor> cursor) {
+		this.delegate.setCursor(cursor);
+	}
 }

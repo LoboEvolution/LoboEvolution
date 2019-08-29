@@ -24,6 +24,7 @@
 package org.lobobrowser.http;
 
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -35,6 +36,7 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -527,6 +529,11 @@ public class HtmlRendererContext {
 	public void setStatus(String message) {
 		this.warn("setStatus(): Not overridden");
 	}
+
+    public void setCursor(Optional<Cursor> cursorOpt) {
+        Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
+        htmlPanel.setCursor(cursor);
+    }
 
 	/**
 	 * Implements simple navigation and form submission with incremental rendering
