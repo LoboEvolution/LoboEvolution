@@ -30,7 +30,7 @@ import org.lobobrowser.http.UserAgentContext;
 
 class RList extends BaseRListElement {
 	public RList(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer parentContainer, RCollection parent) {
+			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
 	}
 

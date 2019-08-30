@@ -43,7 +43,7 @@ class RListItem extends BaseRListElement {
 	private Integer value = null;
 
 	public RListItem(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
-			FrameContext frameContext, RenderableContainer parentContainer, RCollection parent) {
+			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
 	}
 
