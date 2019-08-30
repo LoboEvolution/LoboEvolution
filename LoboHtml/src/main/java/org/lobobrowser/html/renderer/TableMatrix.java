@@ -54,56 +54,14 @@ class TableMatrix {
 
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 
-	private static HtmlLength getHeightLength(HTMLElementImpl element, int availHeight) {
-		try {
-			final AbstractCSSProperties props = element.getCurrentStyle();
-			final String heightText = props == null ? null : props.getHeight();
-			if (heightText == null) {
-				final String ha = element.getAttribute("height");
-				if (ha == null) {
-					return null;
-				} else {
-					return new HtmlLength(ha);
-				}
-			} else {
-				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight));
-			}
-		} catch (final Exception err) {
-			return null;
-		}
-	}
-
-	private static HtmlLength getWidthLength(HTMLElementImpl element, int availWidth) {
-		try {
-			final AbstractCSSProperties props = element.getCurrentStyle();
-			final String widthText = props == null ? null : props.getWidth();
-			if (widthText == null) {
-				final String widthAttr = element.getAttribute("width");
-				if (widthAttr == null) {
-					return null;
-				}
-				return new HtmlLength(widthAttr);
-			} else {
-				return new HtmlLength(HtmlValues.getPixelSize(widthText, element.getRenderState(), 0, availWidth));
-			}
-		} catch (final Exception err) {
-			return null;
-		}
-	}
-
 	private final ArrayList<RTableCell> ALL_CELLS = new ArrayList<RTableCell>();
 	private BoundableRenderable armedRenderable;
 	private int cellSpacingX;
-	// private int border;
 	private int cellSpacingY;
 	private SizeInfo[] columnSizes;
 
 	private final RenderableContainer container;
 	private final FrameContext frameContext;
-	/*
-	 * This is so that we can draw the lines inside the table that appear when a
-	 * border attribute is used.
-	 */
 	private int hasOldStyleBorder;
 	private int heightsOfExtras;
 
@@ -135,6 +93,110 @@ class TableMatrix {
 		this.frameContext = frameContext;
 		this.relement = relement;
 		this.container = tableAsContainer;
+	}
+	
+	public static HtmlLength getWidthLength(HTMLElementImpl element, int availWidth) {
+		try {
+			AbstractCSSProperties props = element.getCurrentStyle();
+			String widthText = props == null ? null : props.getWidth();
+			if (widthText == null) {
+				String widthAttr = element.getAttribute("width");
+				if (widthAttr == null) {
+					return null;
+				}
+				return new HtmlLength(widthAttr);
+			} else {
+
+				if ("inherit".equals(widthText)) {
+					widthText = element.getParentStyle().getWidth();
+				}
+
+				int width = -1;
+
+				if (widthText != null) {
+					width = HtmlValues.getPixelSize(widthText, element.getRenderState(), 0, availWidth);
+				}
+
+				if (props.getMaxWidth() != null) {
+					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0,
+							availWidth);
+
+					if (width == 0 || width > maxWidth) {
+						width = maxWidth;
+					}
+				}
+
+				if (props.getMinWidth() != null) {
+					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0,
+							availWidth);
+
+					if (width == 0 || width < minWidth) {
+						width = minWidth;
+					}
+				}
+
+				return new HtmlLength(width);
+			}
+		} catch (Exception err) {
+			return null;
+		}
+	}
+
+	/**
+	 * Gets the height length.
+	 *
+	 * @param element
+	 *            the element
+	 * @param availHeight
+	 *            the avail height
+	 * @return the height length
+	 */
+	public static HtmlLength getHeightLength(HTMLElementImpl element, int availHeight) {
+		try {
+			AbstractCSSProperties props = element.getCurrentStyle();
+			String heightText = props == null ? null : props.getHeight();
+			if (heightText == null) {
+				String ha = element.getAttribute("height");
+				if (ha == null) {
+					return null;
+				} else {
+					return new HtmlLength(ha);
+				}
+			} else {
+
+				if ("inherit".equals(heightText)) {
+					heightText = element.getParentStyle().getHeight();
+				}
+
+				int height = -1;
+
+				if (heightText != null) {
+					height = HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight);
+				}
+
+				if (props.getMaxHeight() != null) {
+					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0,
+							availHeight);
+
+					if (height == 0 || height > maxHeight) {
+						height = maxHeight;
+					}
+				}
+
+				if (props.getMinHeight() != null) {
+					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0,
+							availHeight);
+
+					if (height == 0 || height < minHeight) {
+						height = minHeight;
+					}
+				}
+
+				return new HtmlLength(HtmlValues.getPixelSize(heightText, element.getRenderState(), 0, availHeight));
+			}
+		} catch (Exception err) {
+			return null;
+		}
 	}
 
 	/**
@@ -220,13 +282,6 @@ class TableMatrix {
 			if (si.actualSize < si.layoutSize) {
 				si.actualSize = si.layoutSize;
 			}
-//			else if(si.htmlLength == null) {
-//				// For cells without a declared width, see if
-//				// their tentative width is a bit too big.
-//				if(si.actualSize > si.layoutSize) {
-//					si.actualSize = si.layoutSize;
-//				}
-//			}
 		}
 	}
 
