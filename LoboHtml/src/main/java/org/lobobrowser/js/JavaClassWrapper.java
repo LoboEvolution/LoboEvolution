@@ -43,6 +43,7 @@ public class JavaClassWrapper {
 		String capPropertyName;
 		String propertyName;
 		boolean getter = false;
+		boolean setter = false;
 		if (methodName.startsWith("get")) {
 			capPropertyName = methodName.substring(3);
 			propertyName = propertyUncapitalize(capPropertyName);
@@ -50,6 +51,7 @@ public class JavaClassWrapper {
 		} else if (methodName.startsWith("set")) {
 			capPropertyName = methodName.substring(3);
 			propertyName = propertyUncapitalize(capPropertyName);
+			setter = method.getReturnType() == Void.TYPE;
 		} else if (methodName.startsWith("is")) {
 			capPropertyName = methodName.substring(2);
 			propertyName = propertyUncapitalize(capPropertyName);
@@ -65,7 +67,9 @@ public class JavaClassWrapper {
 		}
 		if (getter) {
 			pinfo.setGetter(method);
-		} else {
+		}
+
+		if (setter) {
 			pinfo.setSetter(method);
 		}
 	}
