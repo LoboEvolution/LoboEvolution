@@ -713,7 +713,6 @@ public class HtmlParser {
 			} else if (Character.isWhitespace(ch)) {
 				lastCharSlash = false;
 			} else {
-				lastCharSlash = false;
 				if (ch == '"') {
 					openQuote = '"';
 				} else if (ch == '\'') {
@@ -723,8 +722,13 @@ public class HtmlParser {
 					if (attributeValue == null) {
 						attributeValue = new StringBuffer(6);
 					}
+
+					if (lastCharSlash) {
+						attributeValue.append('/');
+					}
 					attributeValue.append(ch);
 				}
+				lastCharSlash = false;
 				break;
 			}
 		}
