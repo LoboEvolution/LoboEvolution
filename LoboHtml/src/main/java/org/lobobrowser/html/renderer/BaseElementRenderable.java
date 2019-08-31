@@ -791,7 +791,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					if (w != -1 && h != -1) {
 						
 			            final int imageY = getImageY(totalHeight, binfo, h);
-			            final int imageX = getImageX(totalHeight, binfo, h);
+			            final int imageX = getImageX(totalWidth, binfo, w);
 
 			            final int baseX = (bkgBounds.x / w) * w - (w - imageX);
 			            final int baseY = (bkgBounds.y / h) * h - (h - imageY);
