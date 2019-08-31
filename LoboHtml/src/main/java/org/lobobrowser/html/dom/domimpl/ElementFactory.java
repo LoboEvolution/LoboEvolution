@@ -24,6 +24,7 @@
 package org.lobobrowser.html.dom.domimpl;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.lobo.html.HTMLTag;
@@ -138,11 +139,9 @@ class ElementFactory {
 	}
 
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
-		final String normalName = name.toUpperCase();
-		// No need to synchronize; read-only map at this point.
+	    final String normalName = name.toUpperCase(Locale.ENGLISH);
 		final HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(HTMLTag.get(normalName));
 		if (builder == null) {
-			// TODO: IE would assume name is html text here?
 			final HTMLElementImpl element = new HTMLElementImpl(name);
 			element.setOwnerDocument(document);
 			return element;
