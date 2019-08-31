@@ -1,7 +1,9 @@
 package org.lobobrowser.html.renderer;
 
+import java.awt.Cursor;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,9 +14,11 @@ import org.lobobrowser.html.dom.domimpl.HTMLInputElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLLinkElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLSelectElementImpl;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
+import org.lobobrowser.html.dom.domimpl.NodeImpl;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.html.js.events.EventImpl;
 import org.lobobrowser.html.js.events.MouseEventImpl;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.events.Event;
@@ -267,6 +271,60 @@ public class HtmlController {
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 				if (rcontext != null) {
 					rcontext.onMouseOver(uiElement, event);
+				}
+			}
+			node = node.getParentModelNode();
+		}
+	}
+	
+	
+	public void onMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart, final MouseEvent event, final int x, final int y, final ModelNode limit) {
+		ModelNode node = nodeStart;
+		while (node != null) {
+			if (node == limit) {
+				break;
+			}
+			if (node instanceof HTMLAbstractUIElement) {
+				final HTMLAbstractUIElement uiElement = (HTMLAbstractUIElement) node;
+				uiElement.setMouseOver(true);
+				final Function f = uiElement.getOnmouseover();
+				if (f != null) {
+					final MouseEventImpl evt = new MouseEventImpl();
+					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
+					evt.setIe(event);
+					Executor.executeFunction(uiElement, f, evt);
+				}
+				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+				if (rcontext != null) {
+					rcontext.onMouseOver(uiElement, event);
+				}
+			}
+			node = node.getParentModelNode();
+		}
+
+		setMouseOnMouseOver(renderable, nodeStart, limit);
+	}
+
+	private static void setMouseOnMouseOver(final BaseBoundableRenderable renderable, final ModelNode nodeStart, final ModelNode limit) {
+		ModelNode node = nodeStart;
+		while (node != null) {
+			if (node == limit) {
+				break;
+			}
+			if (node instanceof NodeImpl) {
+				final NodeImpl uiElement = (NodeImpl) node;
+				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
+				final RenderState rs = uiElement.getRenderState();
+				final Optional<Cursor> cursorOpt = rs.getCursor();
+				if (cursorOpt.isPresent()) {
+					rcontext.setCursor(cursorOpt);
+					break;
+				} else {
+					if (node.getParentModelNode() == limit) {
+						if (renderable instanceof RWord || renderable instanceof RBlank) {
+							rcontext.setCursor(Optional.of(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR)));
+						}
+					}
 				}
 			}
 			node = node.getParentModelNode();
