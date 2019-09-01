@@ -24,8 +24,8 @@ import java.awt.Color;
 
 import org.lobo.info.BorderInfo;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.style.BorderInsets;
 import org.lobobrowser.html.style.HtmlInsets;
-import org.lobobrowser.html.style.HtmlValues;
 
 public class IFrameRenderState extends StyleSheetRenderState {
 	public IFrameRenderState(RenderState prevRenderState, HTMLElementImpl element) {
@@ -39,9 +39,9 @@ public class IFrameRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.topStyle == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.bottomStyle == HtmlValues.BORDER_STYLE_NONE && binfo.leftStyle == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.rightStyle == HtmlValues.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.topStyle == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.bottomStyle == BorderInsets.BORDER_STYLE_NONE && binfo.leftStyle == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.rightStyle == BorderInsets.BORDER_STYLE_NONE) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -78,7 +78,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 					binfo.bottomColor = Color.LIGHT_GRAY;
 				}
 				if (value != 0) {
-					binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = HtmlValues.BORDER_STYLE_SOLID;
+					binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = BorderInsets.BORDER_STYLE_SOLID;
 				}
 			}
 		}

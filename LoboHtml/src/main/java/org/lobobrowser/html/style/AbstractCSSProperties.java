@@ -32,6 +32,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.lobo.common.Objects;
+import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobo.info.FontInfo;
 import org.lobo.laf.ColorFactory;
@@ -154,8 +155,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
-				boolean important) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
 			properties.setPropertyValueLCAlt(BORDER, newValue, important);
 			properties.setPropertyValueProcessed(BORDER_TOP, newValue, declaration, important);
 			properties.setPropertyValueProcessed(BORDER_LEFT, newValue, declaration, important);
@@ -176,10 +176,9 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclarationImpl declaration,
-				boolean important) {
+		public void changeValue(AbstractCSSProperties properties, String value, CSSStyleDeclarationImpl declaration, boolean important) {
 			properties.setPropertyValueLCAlt(this.name, value, important);
-			if (value != null && value.length() > 0) {
+			if (Strings.isNotBlank(value)) {
 				final String[] array = HtmlValues.splitCssValue(value);
 				String color = null;
 				String style = null;
@@ -194,15 +193,23 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 					}
 				}
 				final String name = this.name;
+				if (style != null) {
+					properties.setPropertyValueLCAlt(name + "-style", style, important);
+					if(color == null) {
+						color = "black";
+					}
+					
+					if(width == null) {
+						width = "2px";
+					}
+				}
+				
 				if (color != null) {
 					properties.setPropertyValueLCAlt(name + "-color", color, important);
 				}
 				if (width != null) {
 					properties.setPropertyValueLCAlt(name + "-width", width, important);
-				}
-				if (style != null) {
-					properties.setPropertyValueLCAlt(name + "-style", style, important);
-				}
+				}				
 			}
 		}
 	}
@@ -216,7 +223,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
 				boolean important) {
 			properties.setPropertyValueLCAlt(FONT, newValue, important);
-			if (newValue != null && newValue.length() > 0) {
+			if (Strings.isNotBlank(newValue)) {
 				final String fontSpecTL = newValue.toLowerCase();
 				final FontInfo fontInfo = (FontInfo) HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
 				if (fontInfo != null) {
@@ -296,10 +303,17 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		}
 
 		@Override
-		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration,
-				boolean important) {
-			properties.setPropertyValueLCAlt(this.property, newValue, important);
-			if (newValue != null && newValue.length() > 0) {
+		public void changeValue(AbstractCSSProperties properties, String newValue, CSSStyleDeclarationImpl declaration, boolean important) {
+			
+			if (Strings.isNotBlank(newValue)) {
+				properties.setPropertyValueLCAlt(this.property, newValue, important);
+				if (BORDER_STYLE.equals(property)) {
+					properties.setPropertyValueLCAlt(BORDER_TOP_WIDTH, "2px", important);
+					properties.setPropertyValueLCAlt(BORDER_BOTTOM_WIDTH, "2px", important);
+					properties.setPropertyValueLCAlt(BORDER_LEFT_WIDTH, "2px", important);
+					properties.setPropertyValueLCAlt(BORDER_RIGHT_WIDTH, "2px", important);
+				}
+				
 				final String[] array = HtmlValues.splitCssValue(newValue);
 				final int size = array.length;
 				if (size == 1) {
@@ -364,6 +378,10 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		subSetters.put(BORDER_LEFT, new BorderSetter2(BORDER_LEFT));
 		subSetters.put(BORDER_BOTTOM, new BorderSetter2(BORDER_BOTTOM));
 		subSetters.put(BORDER_RIGHT, new BorderSetter2(BORDER_RIGHT));
+		subSetters.put(BORDER_TOP_STYLE, new BorderSetter2(BORDER_TOP));
+		subSetters.put(BORDER_LEFT_STYLE, new BorderSetter2(BORDER_LEFT));
+		subSetters.put(BORDER_BOTTOM_STYLE, new BorderSetter2(BORDER_BOTTOM));
+		subSetters.put(BORDER_RIGHT_STYLE, new BorderSetter2(BORDER_RIGHT));
 		subSetters.put(BORDER_COLOR, new FourCornersSetter(BORDER_COLOR, "border-", "-color"));
 		subSetters.put(BORDER_STYLE, new FourCornersSetter(BORDER_STYLE, "border-", "-style"));
 		subSetters.put(BORDER_WIDTH, new FourCornersSetter(BORDER_WIDTH, "border-", "-width"));
@@ -1801,8 +1819,8 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 */
 	@Override
 	public void setBorderBottomStyle(String borderBottomStyle) throws DOMException {
-		this.setPropertyValueLC(BORDER_BOTTOM_STYLE, borderBottomStyle);
-		this.context.informLookInvalid();
+		new BorderSetter2(BORDER_BOTTOM).changeValue(this, borderBottomStyle, null);
+		this.context.informInvalid();
 	}
 
 	/*
@@ -1868,8 +1886,8 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 */
 	@Override
 	public void setBorderLeftStyle(String borderLeftStyle) throws DOMException {
-		this.setPropertyValueLC(BORDER_LEFT_STYLE, borderLeftStyle);
-		this.context.informLookInvalid();
+		new BorderSetter2(BORDER_LEFT).changeValue(this, borderLeftStyle, null);
+		this.context.informInvalid();
 	}
 
 	/*
@@ -1912,8 +1930,8 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 */
 	@Override
 	public void setBorderRightStyle(String borderRightStyle) throws DOMException {
-		this.setPropertyValueLC(BORDER_RIGHT_STYLE, borderRightStyle);
-		this.context.informLookInvalid();
+		new BorderSetter2(BORDER_RIGHT).changeValue(this, borderRightStyle, null);
+		this.context.informInvalid();
 	}
 
 	/*
@@ -1978,8 +1996,8 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 */
 	@Override
 	public void setBorderTopStyle(String borderTopStyle) throws DOMException {
-		this.setPropertyValueLC(BORDER_TOP_STYLE, borderTopStyle);
-		this.context.informLookInvalid();
+		new BorderSetter2(BORDER_TOP).changeValue(this, borderTopStyle, null);
+		this.context.informInvalid();
 	}
 
 	/*

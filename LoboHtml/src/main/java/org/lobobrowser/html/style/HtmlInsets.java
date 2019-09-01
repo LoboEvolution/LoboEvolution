@@ -22,13 +22,148 @@ package org.lobobrowser.html.style;
 
 import java.awt.Insets;
 
+import org.lobobrowser.html.renderstate.RenderState;
+
 public class HtmlInsets {
 	public static final int TYPE_AUTO = 2;
 	public static final int TYPE_PERCENT = 3;
 	public static final int TYPE_PIXELS = 1;
 	public static final int TYPE_UNDEFINED = 0;
+	
+	public int top, bottom, left, right;
 
-	private static int getInsetPixels(int value, int type, int defaultValue, int availSize, int autoValue) {
+	/* Types assumed to be initialized as UNDEFINED */
+	public int topType, bottomType, leftType, rightType;
+
+	public HtmlInsets() {
+	}
+
+	public Insets getAWTInsets(int defaultTop, int defaultLeft, int defaultBottom, int defaultRight,
+			int availWidth, int availHeight, int autoX, int autoY) {
+		final int top = getInsetPixels(this.top, this.topType, defaultTop, availHeight, autoY);
+		final int left = getInsetPixels(this.left, this.leftType, defaultLeft, availWidth, autoX);
+		final int bottom = getInsetPixels(this.bottom, this.bottomType, defaultBottom, availHeight, autoY);
+		final int right = getInsetPixels(this.right, this.rightType, defaultRight, availWidth, autoX);
+		return new Insets(top, left, bottom, right);
+	}
+	
+	public Insets getSimpleAWTInsets(int availWidth, int availHeight) {
+		final int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
+		final int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
+		final int bottom = getInsetPixels(this.bottom, this.bottomType, 0, availHeight, 0);
+		final int right = getInsetPixels(this.right, this.rightType, 0, availWidth, 0);
+		return new Insets(top, left, bottom, right);
+	}
+	
+	protected static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			return insets;
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if ("auto".equalsIgnoreCase(sizeText)) {
+			insets.bottomType = HtmlInsets.TYPE_AUTO;
+		} else if (sizeText.endsWith("%")) {
+			insets.bottomType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.bottom = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (final Exception nfe) {
+				insets.bottom = 0;
+			}
+		} else {
+			insets.bottomType = HtmlInsets.TYPE_PIXELS;
+			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	protected static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			return insets;
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if ("auto".equalsIgnoreCase(sizeText)) {
+			insets.leftType = HtmlInsets.TYPE_AUTO;
+		} else if (sizeText.endsWith("%")) {
+			insets.leftType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.left = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (final Exception nfe) {
+				insets.left = 0;
+			}
+		} else {
+			insets.leftType = HtmlInsets.TYPE_PIXELS;
+			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	protected static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			return insets;
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if ("auto".equalsIgnoreCase(sizeText)) {
+			insets.rightType = HtmlInsets.TYPE_AUTO;
+		} else if (sizeText.endsWith("%")) {
+			insets.rightType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.right = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (final Exception nfe) {
+				insets.right = 0;
+			}
+		} else {
+			insets.rightType = HtmlInsets.TYPE_PIXELS;
+			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+
+	protected static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
+		if (sizeText == null) {
+			return insets;
+		}
+		sizeText = sizeText.trim();
+		if (sizeText.length() == 0) {
+			return insets;
+		}
+		if (insets == null) {
+			insets = new HtmlInsets();
+		}
+		if ("auto".equalsIgnoreCase(sizeText)) {
+			insets.topType = HtmlInsets.TYPE_AUTO;
+		} else if (sizeText.endsWith("%")) {
+			insets.topType = HtmlInsets.TYPE_PERCENT;
+			try {
+				insets.top = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
+			} catch (final Exception nfe) {
+				insets.top = 0;
+			}
+		} else {
+			insets.topType = HtmlInsets.TYPE_PIXELS;
+			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
+		}
+		return insets;
+	}
+	
+	private int getInsetPixels(int value, int type, int defaultValue, int availSize, int autoValue) {
 		if (type == TYPE_PIXELS) {
 			return value;
 		} else if (type == TYPE_UNDEFINED) {
@@ -40,23 +175,6 @@ public class HtmlInsets {
 		} else {
 			throw new IllegalStateException();
 		}
-	}
-
-	public int top, bottom, left, right;
-
-	/* Types assumed to be initialized as UNDEFINED */
-	public int topType, bottomType, leftType, rightType;
-
-	public HtmlInsets() {
-	}
-
-	public java.awt.Insets getAWTInsets(int defaultTop, int defaultLeft, int defaultBottom, int defaultRight,
-			int availWidth, int availHeight, int autoX, int autoY) {
-		final int top = getInsetPixels(this.top, this.topType, defaultTop, availHeight, autoY);
-		final int left = getInsetPixels(this.left, this.leftType, defaultLeft, availWidth, autoX);
-		final int bottom = getInsetPixels(this.bottom, this.bottomType, defaultBottom, availHeight, autoY);
-		final int right = getInsetPixels(this.right, this.rightType, defaultRight, availWidth, autoX);
-		return new Insets(top, left, bottom, right);
 	}
 
 	public int getBottom() {
@@ -81,14 +199,6 @@ public class HtmlInsets {
 
 	public int getRightType() {
 		return this.rightType;
-	}
-
-	public java.awt.Insets getSimpleAWTInsets(int availWidth, int availHeight) {
-		final int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
-		final int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
-		final int bottom = getInsetPixels(this.bottom, this.bottomType, 0, availHeight, 0);
-		final int right = getInsetPixels(this.right, this.rightType, 0, availWidth, 0);
-		return new Insets(top, left, bottom, right);
 	}
 
 	public int getTop() {

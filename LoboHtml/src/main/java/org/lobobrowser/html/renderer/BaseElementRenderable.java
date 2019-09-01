@@ -46,6 +46,7 @@ import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.ModelNode;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.style.AbstractCSSProperties;
+import org.lobobrowser.html.style.BorderInsets;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.http.HttpRequest;
@@ -865,11 +866,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				final BorderInfo borderInfo = this.borderInfo;
 				if (btop > 0) {
 					g.setColor(getBorderTopColor());
-					final int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID : borderInfo.topStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.topStyle;
 					for (int i = 0; i < btop; i++) {
 						final int leftOffset = i * bleft / btop;
 						final int rightOffset = i * bright / btop;
-						if (borderStyle == HtmlValues.BORDER_STYLE_DASHED) {
+						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
 							GUITasks.drawDashed(g, startX + leftOffset, startY + i,
 									startX + totalWidth - rightOffset - 1, startY + i, 10 + btop, 6);
 						} else {
@@ -879,13 +880,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					}
 				}
 				if (bright > 0) {
-					final int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID : borderInfo.rightStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.rightStyle;
 					g.setColor(getBorderRightColor());
 					final int lastX = startX + totalWidth - 1;
 					for (int i = 0; i < bright; i++) {
 						final int topOffset = i * btop / bright;
 						final int bottomOffset = i * bbottom / bright;
-						if (borderStyle == HtmlValues.BORDER_STYLE_DASHED) {
+						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
 							GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i,
 									startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
 						} else {
@@ -895,13 +896,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					}
 				}
 				if (bbottom > 0) {
-					final int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID : borderInfo.bottomStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.bottomStyle;
 					g.setColor(getBorderBottomColor());
 					final int lastY = startY + totalHeight - 1;
 					for (int i = 0; i < bbottom; i++) {
 						final int leftOffset = i * bleft / bbottom;
 						final int rightOffset = i * bright / bbottom;
-						if (borderStyle == HtmlValues.BORDER_STYLE_DASHED) {
+						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
 							GUITasks.drawDashed(g, startX + leftOffset, lastY - i,
 									startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
 						} else {
@@ -911,12 +912,12 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					}
 				}
 				if (bleft > 0) {
-					final int borderStyle = borderInfo == null ? HtmlValues.BORDER_STYLE_SOLID : borderInfo.leftStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.leftStyle;
 					g.setColor(getBorderLeftColor());
 					for (int i = 0; i < bleft; i++) {
 						final int topOffset = i * btop / bleft;
 						final int bottomOffset = i * bbottom / bleft;
-						if (borderStyle == HtmlValues.BORDER_STYLE_DASHED) {
+						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
 							GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i,
 									startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
 						} else {

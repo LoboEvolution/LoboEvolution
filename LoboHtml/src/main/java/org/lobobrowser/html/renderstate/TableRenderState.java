@@ -28,8 +28,8 @@ import org.lobo.info.BorderInfo;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableElementImpl;
+import org.lobobrowser.html.style.BorderInsets;
 import org.lobobrowser.html.style.HtmlInsets;
-import org.lobobrowser.html.style.HtmlValues;
 
 public class TableRenderState extends StyleSheetRenderState {
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
@@ -77,9 +77,9 @@ public class TableRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.topStyle == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.bottomStyle == HtmlValues.BORDER_STYLE_NONE && binfo.leftStyle == HtmlValues.BORDER_STYLE_NONE
-				&& binfo.rightStyle == HtmlValues.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.topStyle == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.bottomStyle == BorderInsets.BORDER_STYLE_NONE && binfo.leftStyle == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.rightStyle == BorderInsets.BORDER_STYLE_NONE) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -122,7 +122,7 @@ public class TableRenderState extends StyleSheetRenderState {
 						binfo.bottomColor = Color.GRAY;
 					}
 					if (value != 0) {
-						binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = HtmlValues.BORDER_STYLE_SOLID;
+						binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = BorderInsets.BORDER_STYLE_SOLID;
 					}
 				}
 			}

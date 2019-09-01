@@ -48,9 +48,11 @@ import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
 import org.lobobrowser.html.renderer.LineBreak;
 import org.lobobrowser.html.style.AbstractCSSProperties;
+import org.lobobrowser.html.style.BorderInsets;
 import org.lobobrowser.html.style.FontValues;
 import org.lobobrowser.html.style.HtmlInsets;
 import org.lobobrowser.html.style.HtmlValues;
+import org.lobobrowser.html.style.MarginInsets;
 import org.w3c.dom.css.CSS3Properties;
 
 /**
@@ -367,7 +369,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final AbstractCSSProperties props = getCssProperties();
 		if (props != null) {
-			binfo = HtmlValues.getBorderInfo(props, this);
+			binfo = BorderInsets.getBorderInfo(props, this);
 		} else {
 			binfo = null;
 		}
@@ -585,7 +587,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = HtmlValues.getMarginInsets(props, this);
+			mi = MarginInsets.getMarginInsets(props, this);
 		}
 		this.marginInsets = mi;
 		return mi;
@@ -694,7 +696,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (props == null) {
 			mi = null;
 		} else {
-			mi = HtmlValues.getPaddingInsets(props, this);
+			mi = MarginInsets.getPaddingInsets(props, this);
 			this.paddingInsets = mi;
 		}
 		return mi;

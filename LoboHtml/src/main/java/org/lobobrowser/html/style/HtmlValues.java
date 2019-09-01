@@ -30,27 +30,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.lobo.info.BorderInfo;
 import org.lobo.info.FontInfo;
-import org.lobo.laf.ColorFactory;
 import org.lobo.laf.FontFactory;
 import org.lobo.laf.FontKey;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.w3c.dom.css.CSS3Properties;
 
 public class HtmlValues {
-	public static final int BORDER_STYLE_DASHED = 3;
-	public static final int BORDER_STYLE_DOTTED = 2;
-	public static final int BORDER_STYLE_DOUBLE = 5;
 
-	public static final int BORDER_STYLE_GROOVE = 6;
-	public static final int BORDER_STYLE_HIDDEN = 1;
-	public static final int BORDER_STYLE_INSET = 8;
-	public static final int BORDER_STYLE_NONE = 0;
-	public static final int BORDER_STYLE_OUTSET = 9;
-	public static final int BORDER_STYLE_RIDGE = 7;
-	public static final int BORDER_STYLE_SOLID = 4;
-	public static final int DEFAULT_BORDER_WIDTH = 2;
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
 
 	static {
@@ -61,59 +48,6 @@ public class HtmlValues {
 		SYSTEM_FONTS.put("message-box", systemFont);
 		SYSTEM_FONTS.put("small-caption", systemFont);
 		SYSTEM_FONTS.put("status-bar", systemFont);
-	}
-
-	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
-		final BorderInfo binfo = new BorderInfo();
-
-		binfo.topStyle = getBorderStyle(properties.getBorderTopStyle());
-		binfo.rightStyle = getBorderStyle(properties.getBorderRightStyle());
-		binfo.bottomStyle = getBorderStyle(properties.getBorderBottomStyle());
-		binfo.leftStyle = getBorderStyle(properties.getBorderLeftStyle());
-
-		final ColorFactory cf = ColorFactory.getInstance();
-		final String topColorSpec = properties.getBorderTopColor();
-		if (topColorSpec != null) {
-			binfo.topColor = cf.getColor(topColorSpec);
-		}
-		final String rightColorSpec = properties.getBorderRightColor();
-		if (rightColorSpec != null) {
-			binfo.rightColor = cf.getColor(rightColorSpec);
-		}
-		final String bottomColorSpec = properties.getBorderBottomColor();
-		if (bottomColorSpec != null) {
-			binfo.bottomColor = cf.getColor(bottomColorSpec);
-		}
-		final String leftColorSpec = properties.getBorderLeftColor();
-		if (leftColorSpec != null) {
-			binfo.leftColor = cf.getColor(leftColorSpec);
-		}
-
-		HtmlValues.populateBorderInsets(binfo, properties, renderState);
-
-		return binfo;
-	}
-
-	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS3Properties cssProperties,
-			RenderState renderState) {
-		HtmlInsets insets = null;
-		if (borderStyles.top != HtmlValues.BORDER_STYLE_NONE) {
-			final String topText = cssProperties.getBorderTopWidth();
-			insets = updateTopInset(insets, topText, renderState);
-		}
-		if (borderStyles.left != HtmlValues.BORDER_STYLE_NONE) {
-			final String leftText = cssProperties.getBorderLeftWidth();
-			insets = updateLeftInset(insets, leftText, renderState);
-		}
-		if (borderStyles.bottom != HtmlValues.BORDER_STYLE_NONE) {
-			final String bottomText = cssProperties.getBorderBottomWidth();
-			insets = updateBottomInset(insets, bottomText, renderState);
-		}
-		if (borderStyles.right != HtmlValues.BORDER_STYLE_NONE) {
-			final String rightText = cssProperties.getBorderRightWidth();
-			insets = updateRightInset(insets, rightText, renderState);
-		}
-		return insets;
 	}
 
 	public static Insets getInsets(String insetsSpec, RenderState renderState, boolean negativeOK) {
@@ -246,32 +180,6 @@ public class HtmlValues {
 		}
 	}
 
-	public static HtmlInsets getMarginInsets(CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		final String topText = cssProperties.getMarginTop();
-		insets = updateTopInset(insets, topText, renderState);
-		final String leftText = cssProperties.getMarginLeft();
-		insets = updateLeftInset(insets, leftText, renderState);
-		final String bottomText = cssProperties.getMarginBottom();
-		insets = updateBottomInset(insets, bottomText, renderState);
-		final String rightText = cssProperties.getMarginRight();
-		insets = updateRightInset(insets, rightText, renderState);
-		return insets;
-	}
-
-	public static HtmlInsets getPaddingInsets(CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		final String topText = cssProperties.getPaddingTop();
-		insets = updateTopInset(insets, topText, renderState);
-		final String leftText = cssProperties.getPaddingLeft();
-		insets = updateLeftInset(insets, leftText, renderState);
-		final String bottomText = cssProperties.getPaddingBottom();
-		insets = updateBottomInset(insets, bottomText, renderState);
-		final String rightText = cssProperties.getPaddingRight();
-		insets = updateRightInset(insets, rightText, renderState);
-		return insets;
-	}
-	
 	public static final int getPixelSize(String spec, RenderState renderState, int errorValue) {
 		try {
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
@@ -376,27 +284,6 @@ public class HtmlValues {
 	
 	public static boolean isUrl(String token) {
 		return token.toLowerCase().startsWith("url(");
-	}
-
-	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
-		HtmlInsets insets = null;
-		if (binfo.topStyle != HtmlValues.BORDER_STYLE_NONE) {
-			final String topText = cssProperties.getBorderTopWidth();
-			insets = updateTopInset(insets, topText, renderState);
-		}
-		if (binfo.leftStyle != HtmlValues.BORDER_STYLE_NONE) {
-			final String leftText = cssProperties.getBorderLeftWidth();
-			insets = updateLeftInset(insets, leftText, renderState);
-		}
-		if (binfo.bottomStyle != HtmlValues.BORDER_STYLE_NONE) {
-			final String bottomText = cssProperties.getBorderBottomWidth();
-			insets = updateBottomInset(insets, bottomText, renderState);
-		}
-		if (binfo.rightStyle != HtmlValues.BORDER_STYLE_NONE) {
-			final String rightText = cssProperties.getBorderRightWidth();
-			insets = updateRightInset(insets, rightText, renderState);
-		}
-		binfo.insets = insets;
 	}
 
 	public static String quoteAndEscape(String text) {
@@ -529,36 +416,6 @@ public class HtmlValues {
 		return result.toString();
 	}
 
-	private static int getBorderStyle(String styleText) {
-		if (styleText == null || styleText.length() == 0) {
-			return HtmlValues.BORDER_STYLE_NONE;
-		}
-		final String stl = styleText.toLowerCase();
-		if ("solid".equals(stl)) {
-			return BORDER_STYLE_SOLID;
-		} else if ("dashed".equals(stl)) {
-			return BORDER_STYLE_DASHED;
-		} else if ("dotted".equals(stl)) {
-			return BORDER_STYLE_DOTTED;
-		} else if ("none".equals(stl)) {
-			return BORDER_STYLE_NONE;
-		} else if ("hidden".equals(stl)) {
-			return BORDER_STYLE_HIDDEN;
-		} else if ("double".equals(stl)) {
-			return BORDER_STYLE_DOUBLE;
-		} else if ("groove".equals(stl)) {
-			return BORDER_STYLE_GROOVE;
-		} else if ("ridge".equals(stl)) {
-			return BORDER_STYLE_RIDGE;
-		} else if ("inset".equals(stl)) {
-			return BORDER_STYLE_INSET;
-		} else if ("outset".equals(stl)) {
-			return BORDER_STYLE_OUTSET;
-		} else {
-			return BORDER_STYLE_NONE;
-		}
-	}
-
 	private static int inches(double value, int dpi, String text) {
 		double val = Double.parseDouble(text);
 		final double inches = val / value;
@@ -584,113 +441,5 @@ public class HtmlValues {
 			return true;
 		}
 		return false;
-	}
-	
-	private static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.bottomType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.bottomType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.bottom = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.bottom = 0;
-			}
-		} else {
-			insets.bottomType = HtmlInsets.TYPE_PIXELS;
-			insets.bottom = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	private static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.leftType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.leftType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.left = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.left = 0;
-			}
-		} else {
-			insets.leftType = HtmlInsets.TYPE_PIXELS;
-			insets.left = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	private static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.rightType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.rightType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.right = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.right = 0;
-			}
-		} else {
-			insets.rightType = HtmlInsets.TYPE_PIXELS;
-			insets.right = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
-	}
-
-	private static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
-		if (sizeText == null) {
-			return insets;
-		}
-		sizeText = sizeText.trim();
-		if (sizeText.length() == 0) {
-			return insets;
-		}
-		if (insets == null) {
-			insets = new HtmlInsets();
-		}
-		if ("auto".equalsIgnoreCase(sizeText)) {
-			insets.topType = HtmlInsets.TYPE_AUTO;
-		} else if (sizeText.endsWith("%")) {
-			insets.topType = HtmlInsets.TYPE_PERCENT;
-			try {
-				insets.top = Integer.parseInt(sizeText.substring(0, sizeText.length() - 1));
-			} catch (final Exception nfe) {
-				insets.top = 0;
-			}
-		} else {
-			insets.topType = HtmlInsets.TYPE_PIXELS;
-			insets.top = HtmlValues.getPixelSize(sizeText, renderState, 0);
-		}
-		return insets;
 	}
 }
