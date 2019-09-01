@@ -170,7 +170,9 @@ public enum HTMLTag {
 
 	ANIMATE_COLOR("ANIMATE_COLOR"),
 	
-	NOSCRIPT("NOSCRIPT");
+	NOSCRIPT("NOSCRIPT"),
+	
+	APPLET("APPLET");
 	
 	private String value;
 	private static final Map<String, HTMLTag> ENUM_MAP;

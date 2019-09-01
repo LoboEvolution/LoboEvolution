@@ -45,6 +45,7 @@ import javax.swing.SwingUtilities;
 
 import org.lobo.common.ArrayUtilities;
 import org.lobo.common.Strings;
+import org.lobo.html.HTMLTag;
 import org.lobo.info.FloatingInfo;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.control.BaseInputControl;
@@ -493,7 +494,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
-	private static final Map<String, MarkupLayout> elementLayout = new HashMap<String, MarkupLayout>();
+	private static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<HTMLTag, MarkupLayout>();
 
 	private static final Logger logger = Logger.getLogger(RBlockViewport.class.getName());
 
@@ -504,67 +505,67 @@ public class RBlockViewport extends BaseRCollection {
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 
 	static {
-		final Map<String, MarkupLayout> el = elementLayout;
+		final Map<HTMLTag, MarkupLayout> el = elementLayout;
 		final EmLayout em = new EmLayout();
-		el.put("I", em);
-		el.put("EM", em);
-		el.put("CITE", em);
-		el.put("H1", new HLayout(24));
-		el.put("H2", new HLayout(18));
-		el.put("H3", new HLayout(15));
-		el.put("H4", new HLayout(12));
-		el.put("H5", new HLayout(10));
-		el.put("H6", new HLayout(8));
+		el.put(HTMLTag.I,em);
+		el.put(HTMLTag.EM,em);
+		el.put(HTMLTag.CITE,em);
+		el.put(HTMLTag.H1,new HLayout(24));
+		el.put(HTMLTag.H2,new HLayout(18));
+		el.put(HTMLTag.H3,new HLayout(15));
+		el.put(HTMLTag.H4,new HLayout(12));
+		el.put(HTMLTag.H5,new HLayout(10));
+		el.put(HTMLTag.H6,new HLayout(8));
 		final StrongLayout strong = new StrongLayout();
-		el.put("B", strong);
-		el.put("STRONG", strong);
-		el.put("TH", strong);
-		el.put("U", new ULayout());
-		el.put("STRIKE", new StrikeLayout());
-		el.put("BR", new BrLayout());
-		el.put("P", new PLayout());
-		el.put("NOSCRIPT", new NoScriptLayout());
+		el.put(HTMLTag.B,strong);
+		el.put(HTMLTag.STRONG,strong);
+		el.put(HTMLTag.TH,strong);
+		el.put(HTMLTag.U,new ULayout());
+		el.put(HTMLTag.STRIKE,new StrikeLayout());
+		el.put(HTMLTag.BR,new BrLayout());
+		el.put(HTMLTag.P,new PLayout());
+		el.put(HTMLTag.NOSCRIPT,new NoScriptLayout());
 		final NopLayout nop = new NopLayout();
-		el.put("SCRIPT", nop);
-		el.put("HEAD", nop);
-		el.put("TITLE", nop);
-		el.put("META", nop);
-		el.put("STYLE", nop);
-		el.put("LINK", nop);
-		el.put("IMG", new ImgLayout());
-		el.put("TABLE", new TableLayout());		
+		el.put(HTMLTag.SCRIPT,nop);
+		el.put(HTMLTag.HEAD,nop);
+		el.put(HTMLTag.TITLE,nop);
+		el.put(HTMLTag.META,nop);
+		el.put(HTMLTag.STYLE,nop);
+		el.put(HTMLTag.LINK,nop);
+		el.put(HTMLTag.IMG,new ImgLayout());
+		el.put(HTMLTag.TABLE,new TableLayout());		
 		final AnchorLayout anchor = new AnchorLayout();
-		el.put("A", anchor);
-		el.put("ANCHOR", anchor);
-		el.put("INPUT", new InputLayout());
-		el.put("TEXTAREA", new TextAreaLayout());
-		el.put("SELECT", new SelectLayout());
+		el.put(HTMLTag.A,anchor);
+		el.put(HTMLTag.ANCHOR,anchor);
+		el.put(HTMLTag.INPUT,new InputLayout());
+		el.put(HTMLTag.TEXTAREA,new TextAreaLayout());
+		el.put(HTMLTag.SELECT,new SelectLayout());
 		final ListItemLayout list = new ListItemLayout();
-		el.put("UL", list);
-		el.put("OL", list);
-		el.put("LI", list);
+		el.put(HTMLTag.UL,list);
+		el.put(HTMLTag.OL,list);
+		el.put(HTMLTag.LI,list);
 		final CommonBlockLayout cbl = new CommonBlockLayout();
-		el.put("PRE", cbl);
-		el.put("CENTER", cbl);
-		el.put("CAPTION", cbl);
+		el.put(HTMLTag.PRE,cbl);
+		el.put(HTMLTag.CENTER,cbl);
+		el.put(HTMLTag.CAPTION,cbl);
 		final DivLayout div = new DivLayout();
-		el.put("DIV", div);
-		el.put("BODY", div);
-		el.put("DL", div);
-		el.put("DT", div);
-		el.put("HTML", div);
+		el.put(HTMLTag.DIV,div);
+		el.put(HTMLTag.BODY,div);
+		el.put(HTMLTag.DL,div);
+		el.put(HTMLTag.DT,div);
+		el.put(HTMLTag.HTML,div);
 		final BlockQuoteLayout bq = new BlockQuoteLayout();
-		el.put("BLOCKQUOTE", bq);
-		el.put("DD", bq);
-		el.put("HR", new HrLayout());
-		el.put("SPAN", new SpanLayout());
+		el.put(HTMLTag.BLOCKQUOTE,bq);
+		el.put(HTMLTag.DD,bq);
+		el.put(HTMLTag.HR,new HrLayout());
+		el.put(HTMLTag.SPAN,new SpanLayout());
 		final ObjectLayout ol = new ObjectLayout(false);
-		el.put("OBJECT", new ObjectLayout(true));
-		el.put("APPLET", ol);
-		el.put("EMBED", ol);
-		el.put("CANVAS", new CanvasLayout());
-		el.put("SVG", new SVGLayout());
-		//el.put("IFRAME", new IFrameLayout());
+		el.put(HTMLTag.OBJECT,new ObjectLayout(true));
+		el.put(HTMLTag.APPLET,ol);
+		el.put(HTMLTag.EMBED,ol);
+		el.put(HTMLTag.CANVAS,new CanvasLayout());
+		el.put(HTMLTag.SVG,new SVGLayout());
+		//el.put(HTMLTag.IFRAME,new IFrameLayout());
 	}
 
 	private static int getPosition(HTMLElementImpl element) {
@@ -1774,7 +1775,7 @@ public class RBlockViewport extends BaseRCollection {
 				case Node.ELEMENT_NODE:
 					this.currentLine.addStyleChanger(new RStyleChanger(child));
 					final String nodeName = child.getNodeName().toUpperCase();
-					MarkupLayout ml = (MarkupLayout) elementLayout.get(nodeName);
+					MarkupLayout ml = (MarkupLayout) elementLayout.get(HTMLTag.get(nodeName));
 					if (ml == null) {
 						ml = miscLayout;
 					}
