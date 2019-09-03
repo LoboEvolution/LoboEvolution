@@ -12,7 +12,7 @@ import org.lobo.tab.TabbedHtml;
 import org.lobo.tab.TabbedPanePopupMenu;
 import org.lobo.welcome.WelcomePanel;
 
-public class BrowserPanel extends JPanel {
+public class BrowserPanel extends JPanel implements IBrowserPanel {
 	private static final long serialVersionUID = 1L;
 
 	private final JScrollPane scroll;

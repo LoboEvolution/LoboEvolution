@@ -1,6 +1,5 @@
 package org.lobo.http;
 
-import java.awt.Dimension;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -44,33 +43,12 @@ public class NavigationManager {
 	}
 
 	public static HtmlPanel getHtmlPanel(String uri) {
+		final NavigationHistory history = new NavigationHistory();
 		final HtmlPanel panel = new HtmlPanel();
-		try {
-			final NavigationHistory history = new NavigationHistory();
-			final URL url = new URL(uri);
-			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
-
-			CookieManager.putCookies(uri);
-			history.addAsRecent(uri);
-
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-					Reader reader = new InputStreamReader(in, "utf-8");) {
-
-				final InputSource is = new InputSourceImpl(reader, uri);
-
-				final UserAgentContext ucontext = new UserAgentContext();
-				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
-				panel.setPreferredSize(new Dimension(800, 400));
-				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
-				final Document document = builder.parse(is);
-				panel.setDocument(document, rendererContext);
-			}
-
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return panel;
+		HtmlPanel newpanel = panel.createHtmlPanel(uri);
+		CookieManager.putCookies(uri);
+		history.addAsRecent(uri);
+		return newpanel;
 	}
 
 	public static HtmlPanel getHtmlPanelSearch(String search) {

@@ -41,18 +41,26 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import org.lobo.common.BufferExceededException;
 import org.lobo.common.RecordedInputStream;
 import org.lobo.common.Urls;
+import org.lobo.component.IBrowserPanel;
 import org.lobo.net.HttpNetwork;
+import org.lobo.tab.DnDTabbedPane;
+import org.lobo.tab.TabbedPanePopupMenu;
 import org.lobobrowser.html.BrowserFrame;
 import org.lobobrowser.html.FormInput;
 import org.lobobrowser.html.HtmlObject;
 import org.lobobrowser.html.dom.HTMLCollection;
 import org.lobobrowser.html.dom.HTMLElement;
+import org.lobobrowser.html.dom.domimpl.HTMLAbstractUIElement;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLImageElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLLinkElementImpl;
+import org.lobobrowser.html.gui.HtmlContextMenu;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
@@ -72,7 +80,7 @@ public class HtmlRendererContext {
 	private static final Logger logger = Logger.getLogger(HtmlRendererContext.class.getName());
 
 	private static java.awt.Window getWindow(Component c) {
-		java.awt.Component current = c;
+		Component current = c;
 		while (current != null && !(current instanceof java.awt.Window)) {
 			current = current.getParent();
 		}
@@ -81,9 +89,6 @@ public class HtmlRendererContext {
 
 	private UserAgentContext bcontext = null;
 
-	/**
-	 * The connection currently opened by openSync() if any.
-	 */
 	protected URLConnection currentConnection;
 
 	private HtmlPanel htmlPanel;
@@ -97,24 +102,19 @@ public class HtmlRendererContext {
 	/**
 	 * Constructs a HtmlRendererContext that is a child of another
 	 * <code>{@link HtmlRendererContext}</code>.
-	 * 
-	 * @param contextComponent The component that will render HTML.
 	 * @param parentRcontext   The parent's renderer context.
 	 */
-	public HtmlRendererContext(HtmlPanel contextComponent, HtmlRendererContext parentRcontext) {
-		this.htmlPanel = contextComponent;
+	public HtmlRendererContext(HtmlPanel htmlPanel, HtmlRendererContext parentRcontext) {
+		this.htmlPanel = htmlPanel;
 		this.parentRcontext = parentRcontext;
 		this.bcontext = parentRcontext == null ? null : parentRcontext.getUserAgentContext();
 	}
 
 	/**
 	 * Constructs a HtmlRendererContext.
-	 * 
-	 * @param contextComponent The component that will render HTML.
-	 * @see SimpleUserAgentContext
 	 */
-	public HtmlRendererContext(HtmlPanel contextComponent, UserAgentContext ucontext) {
-		this.htmlPanel = contextComponent;
+	public HtmlRendererContext(HtmlPanel htmlPanel, UserAgentContext ucontext) {
+		this.htmlPanel = htmlPanel;
 		this.parentRcontext = null;
 		this.bcontext = ucontext;
 	}
@@ -413,14 +413,44 @@ public class HtmlRendererContext {
 	public void navigate(final URL href, String target) {
 		submitForm("GET", href, target, null, null);
 	}
+	
+	public void openTabNavigate(String fullURL) {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+		final int indexPanel = tabbedPane.getIndex();
+		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+
+		HtmlPanel hpanel = htmlPanel.createHtmlPanel(fullURL);
+		hpanel.setBrowserPanel(bpanel);
+		tabbedPane.insertTab("New Tab", null, hpanel, null, indexPanel + 1);
+		tabbedPane.setSelectedIndex(indexPanel + 1);
+		bpanel.getScroll().getViewport().add(tabbedPane);
+	}
 
 	/**
 	 * This method must be overridden to implement a context menu.
 	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
+
+		HtmlContextMenu menu = new HtmlContextMenu(element, this);
+
+		if (element instanceof HTMLImageElementImpl) {
+			JPopupMenu popupMenuImage = menu.popupMenuImage();
+			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			return false;
+		} else if (element instanceof HTMLLinkElementImpl) {
+
+			JPopupMenu popupMenuImage = menu.popupMenuLink();
+			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			return false;
+		} else if (element instanceof HTMLAbstractUIElement) {
+			JPopupMenu popupMenuImage = menu.popupMenuAbstractUI();
+			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			return false;
+		}
+
 		return true;
 	}
-
 	public boolean onDoubleClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}

@@ -23,10 +23,15 @@
  */
 package org.lobobrowser.html.gui;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
@@ -52,8 +57,11 @@ import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
 import org.lobo.common.EventDispatch2;
 import org.lobo.common.WrapperLayout;
+import org.lobo.component.IBrowserPanel;
+import org.lobo.net.HttpNetwork;
 import org.w3c.dom.Document;
 import org.w3c.dom.Text;
+import org.xml.sax.InputSource;
 
 /**
  * The <code>HtmlPanel</code> class is a Swing component that can render a HTML
@@ -127,14 +135,21 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private static final long serialVersionUID = 1L;
 
 	private volatile int defaultOverflowX = RenderState.OVERFLOW_AUTO;
+	
 	private volatile int defaultOverflowY = RenderState.OVERFLOW_AUTO;
+	
 	protected volatile FrameSetPanel frameSetPanel;
+	
 	protected volatile HtmlBlockPanel htmlBlockPanel;
+	
 	private volatile boolean isFrameSet = false;
+	
 	private volatile NodeRenderer nodeRenderer = null;
+	
 	private final Runnable notificationImmediateAction;
 
 	private final DocumentNotificationListener notificationListener;
+	
 	private final ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>();
 
 	private final Timer notificationTimer;
@@ -144,6 +159,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private volatile NodeImpl rootNode;
 
 	private final EventDispatch2 selectionDispatch = new SelectionDispatch();
+
+	private IBrowserPanel browserPanel;
 
 	/**
 	 * Constructs an <code>HtmlPanel</code>.
@@ -164,11 +181,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			notifs.add(notification);
 		}
 		if (SwingUtilities.isEventDispatchThread()) {
-			// In this case we want the notification to be processed
-			// immediately. However, we don't want potential recursions
-			// to occur when a Javascript property is set in the GUI thread.
-			// Additionally, many property values may be set in one
-			// event block.
 			SwingUtilities.invokeLater(this.notificationImmediateAction);
 		} else {
 			this.notificationTimer.restart();
@@ -717,6 +729,33 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			throw new IllegalStateException("Unexpected condition.", se);
 		}
 	}
+	
+	
+	public HtmlPanel createHtmlPanel(String uri) {
+		final HtmlPanel panel = new HtmlPanel();
+		try {
+			final URL url = new URL(uri);
+			final URLConnection connection = url.openConnection();
+			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+
+			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+					Reader reader = new InputStreamReader(in, "utf-8");) {
+
+				final InputSource is = new InputSourceImpl(reader, uri);
+
+				final UserAgentContext ucontext = new UserAgentContext();
+				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
+				panel.setPreferredSize(new Dimension(800, 400));
+				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(),rendererContext);
+				final Document document = builder.parse(is);
+				panel.setDocument(document, rendererContext);
+			}
+
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		return panel;
+	}
 
 	/**
 	 * Sets a preferred width that serves as a hint in calculating the preferred
@@ -761,5 +800,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		removeAll();
 		this.add(fsp);
 		fsp.setRootNode(fsrn);
+	}
+	
+	public IBrowserPanel getBrowserPanel() {
+		return browserPanel;
+	}
+
+	public void setBrowserPanel(IBrowserPanel browserPanel) {
+		this.browserPanel = browserPanel;
 	}
 }

@@ -5,8 +5,7 @@ import java.awt.Component;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
-import org.lobo.component.BrowserPanel;
-import org.lobo.welcome.WelcomePanel;
+import org.lobo.component.IBrowserPanel;
 
 public class TabbedPanePopupMenu extends JPopupMenu {
 
@@ -24,10 +23,10 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 
 	protected transient int count;
 
-	public TabbedPanePopupMenu(BrowserPanel panel) {
+	public TabbedPanePopupMenu(IBrowserPanel panel) {
 		add("New tab").addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
-			tabbedPane.addTab("New Tab", new WelcomePanel(panel));
+			//tabbedPane.addTab("New Tab", new WelcomePanel(panel));
 			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
 			this.count++;
 		});

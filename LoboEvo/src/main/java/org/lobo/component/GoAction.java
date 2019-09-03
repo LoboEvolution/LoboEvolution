@@ -8,14 +8,15 @@ import javax.swing.JTextField;
 import org.lobo.http.NavigationManager;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
+import org.lobobrowser.html.gui.HtmlPanel;
 
 public class GoAction implements ActionListener {
 
 	private final JTextField addressBar;
 
-	private final BrowserPanel panel;
+	private final IBrowserPanel panel;
 
-	public GoAction(BrowserPanel panel, JTextField addressBar) {
+	public GoAction(IBrowserPanel panel, JTextField addressBar) {
 		this.panel = panel;
 		this.addressBar = addressBar;
 	}
@@ -26,8 +27,9 @@ public class GoAction implements ActionListener {
 		this.panel.getTabbedPane().remove(indexPanel);
 		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
-		tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(this.addressBar.getText()), null,
-				indexPanel);
+		HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(this.addressBar.getText());
+		htmlPanel.setBrowserPanel(panel);
+		tabbedPane.insertTab("New Tab", null, htmlPanel, null, indexPanel);
 		tabbedPane.setSelectedIndex(indexPanel);
 	}
 }
