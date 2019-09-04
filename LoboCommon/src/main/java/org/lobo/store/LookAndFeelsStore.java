@@ -1,4 +1,4 @@
-package org.lobo.menu.tools.pref;
+package org.lobo.store;
 
 import java.awt.Color;
 import java.sql.Connection;
@@ -6,10 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
 import org.lobo.laf.LAFSettings;
-import org.lobo.menu.tools.pref.search.SearchEngine;
-import org.lobo.store.SQLiteCommon;
 
-public class LookAndFeelsSettings {
+public class LookAndFeelsStore {
 
 	private final String DELETE_LAF = "DELETE FROM LOOK_AND_FEEL";
 
@@ -48,7 +46,7 @@ public class LookAndFeelsSettings {
 	 *
 	 * @param search
 	 */
-	public void insertFileSelected(SearchEngine search) {
+	public void insertFileSelected(SearchEngineStore search) {
 		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_SEARCH2)) {
 			pstmt.setString(1, search.getName());

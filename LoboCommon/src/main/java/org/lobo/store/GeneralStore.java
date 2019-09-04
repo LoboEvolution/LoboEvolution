@@ -1,4 +1,4 @@
-package org.lobo.menu.tools.pref;
+package org.lobo.store;
 
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -10,13 +10,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lobo.store.SQLiteCommon;
-
 /**
  * General browser settings. This is a singleton class with an instance obtained
  * by calling {@link #getInstance()}.
  */
-public class GeneralSettings implements Serializable {
+public class GeneralStore implements Serializable {
 
 	private static String DELETE_NETWORK = "DELETE FROM NETWORK";
 
@@ -102,8 +100,8 @@ public class GeneralSettings implements Serializable {
 		return bounds;
 	}
 
-	public static GeneralSettings getNetwork() {
-		final GeneralSettings setting = new GeneralSettings();
+	public static GeneralStore getNetwork() {
+		final GeneralStore setting = new GeneralStore();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(NETWORK)) {
 			try (ResultSet rs = pstmt.executeQuery()) {

@@ -22,6 +22,7 @@ import org.lobo.gui.FormPanel;
 import org.lobo.gui.SwingTasks;
 import org.lobo.menu.tools.pref.startup.StartupListControl;
 import org.lobo.net.HttpNetwork;
+import org.lobo.store.GeneralStore;
 
 public class GeneralSettingsUI extends AbstractSettingsUI {
 
@@ -243,7 +244,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		final GeneralSettings network = GeneralSettings.getNetwork();
+		final GeneralStore network = GeneralStore.getNetwork();
 		this.javscriptPanel.setSelected(network.isJs());
 		this.cssPanel.setSelected(network.isCss());
 		this.cookiePanel.setSelected(network.isCookie());
@@ -251,11 +252,11 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.navigationPanel.setSelected(network.isNavigation());
 		this.userAgentField.setValue(HttpNetwork.getUserAgentValue());
 
-		final Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
+		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 		this.width.setValue(String.valueOf(initialWindowBounds.getWidth()));
 		this.height.setValue(String.valueOf(initialWindowBounds.getHeight()));
 
-		this.startupPages.setStrings(GeneralSettings.getStartupURLs());
+		this.startupPages.setStrings(GeneralStore.getStartupURLs());
 
 		this.javscriptPanel.revalidate();
 		this.cssPanel.revalidate();
@@ -273,7 +274,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void restoreDefaults() {
-		GeneralSettings.restoreDefaults();
+		GeneralStore.restoreDefaults();
 		loadSettings();
 	}
 
@@ -284,7 +285,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() {
-		final Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
+		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 		final String userAgent = this.userAgentField.getValue();
 		final boolean js = this.javscriptPanel.isSelected();
 		final boolean css = this.cssPanel.isSelected();
@@ -294,17 +295,17 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		final int width = Double.valueOf(this.width.getValue()).intValue();
 		final int height = Double.valueOf(this.height.getValue()).intValue();
 
-		GeneralSettings.deleteNetwork();
-		GeneralSettings.deleteUserAgent();
-		GeneralSettings.deleteStartUpUrl();
-		GeneralSettings.insertNetwork(js, css, cookie, cache, navigation);
-		GeneralSettings.insertUserAgent(userAgent);
-		GeneralSettings.insertBounds(new Rectangle(width, height));
+		GeneralStore.deleteNetwork();
+		GeneralStore.deleteUserAgent();
+		GeneralStore.deleteStartUpUrl();
+		GeneralStore.insertNetwork(js, css, cookie, cache, navigation);
+		GeneralStore.insertUserAgent(userAgent);
+		GeneralStore.insertBounds(new Rectangle(width, height));
 
 		final List<String> strings = this.startupPages.getStrings();
 		for (final String url : strings) {
 			if (Strings.isNotBlank(url)) {
-				GeneralSettings.insertStartupUrl(url);
+				GeneralStore.insertStartupUrl(url);
 			}
 		}
 

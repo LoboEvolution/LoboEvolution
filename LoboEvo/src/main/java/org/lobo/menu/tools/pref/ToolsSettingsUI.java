@@ -19,8 +19,10 @@ import org.lobo.gui.ItemEditorFactory;
 import org.lobo.gui.SwingTasks;
 import org.lobo.menu.tools.pref.data.ImportDataAction;
 import org.lobo.menu.tools.pref.search.ItemListControl;
-import org.lobo.menu.tools.pref.search.SearchEngine;
 import org.lobo.menu.tools.pref.search.SearchEngineEditor;
+import org.lobo.store.GeneralStore;
+import org.lobo.store.SearchEngineStore;
+import org.lobo.store.ToolsStore;
 
 /**
  * The Class ToolsSettingsUI.
@@ -63,7 +65,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	private CheckBoxPanel mozillaPanel;
 
 	/** The search engine list control. */
-	private ItemListControl<SearchEngine> searchEngineListControl;
+	private ItemListControl<SearchEngineStore> searchEngineListControl;
 
 	/**
 	 * Instantiates a new tools settings ui.
@@ -74,8 +76,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	private void createAndShowGUI() {
 
-		final ItemEditorFactory<SearchEngine> factory = () -> new SearchEngineEditor();
-		this.searchEngineListControl = new ItemListControl<SearchEngine>(factory);
+		final ItemEditorFactory<SearchEngineStore> factory = () -> new SearchEngineEditor();
+		this.searchEngineListControl = new ItemListControl<SearchEngineStore>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
 
 		final FormPanel historyPanel = new FormPanel();
@@ -246,8 +248,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		final ToolsSettings settings = new ToolsSettings();
-		final GeneralSettings genSettings = GeneralSettings.getNetwork();
+		final ToolsStore settings = new ToolsStore();
+		final GeneralStore genSettings = GeneralStore.getNetwork();
 		if (genSettings.isNavigation()) {
 			this.searchEngineListControl.setItems(settings.getSearchEngines());
 		}
@@ -260,7 +262,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void restoreDefaults() {
-		final ToolsSettings settings = new ToolsSettings();
+		final ToolsStore settings = new ToolsStore();
 		settings.restoreDefaults();
 		loadSettings();
 	}
@@ -272,16 +274,16 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() {
-		final ToolsSettings settings = new ToolsSettings();
-		final GeneralSettings genSettings = GeneralSettings.getNetwork();
-		final Collection<SearchEngine> items = this.searchEngineListControl.getItems();
+		final ToolsStore settings = new ToolsStore();
+		final GeneralStore genSettings = GeneralStore.getNetwork();
+		final Collection<SearchEngineStore> items = this.searchEngineListControl.getItems();
 		settings.deleteSearchEngine();
 		int i = 0;
 
 		if (genSettings.isNavigation()) {
-			for (final SearchEngine searchEngine : items) {
-				settings.insertSearch(searchEngine.getName(), searchEngine.getDescription(), searchEngine.getBaseUrl(),
-						searchEngine.getQueryParameter(), i == 0 ? true : false);
+			for (final SearchEngineStore searchEngineStore : items) {
+				settings.insertSearch(searchEngineStore.getName(), searchEngineStore.getDescription(), searchEngineStore.getBaseUrl(),
+						searchEngineStore.getQueryParameter(), i == 0 ? true : false);
 				i++;
 			}
 		}

@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.lobo.menu.MenuBar;
-import org.lobo.menu.tools.pref.GeneralSettings;
+import org.lobo.store.GeneralStore;
 import org.lobo.welcome.WelcomePanel;
 
 public class BrowserFrame extends JFrame implements IBrowserFrame {
@@ -34,7 +34,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		this.panel = new BrowserPanel(this);
 		final WelcomePanel welcome = this.panel.getWelcome();
 		if (welcome != null) {
-			final Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
+			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 			final int width = new Double(initialWindowBounds.getWidth()).intValue();
 			final int height = new Double(initialWindowBounds.getHeight()).intValue();
 			final Dimension dim = new Dimension(width, height);

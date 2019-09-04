@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import org.lobo.menu.tools.pref.GeneralSettings;
+import org.lobo.store.GeneralStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedHtml;
 import org.lobo.tab.TabbedPanePopupMenu;
@@ -29,7 +29,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 		this.scroll = new JScrollPane();
 		this.tabbedPane = new DnDTabbedPane();
 		this.tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this));
-		final List<String> startupURLs = GeneralSettings.getStartupURLs();
+		final List<String> startupURLs = GeneralStore.getStartupURLs();
 
 		if (startupURLs.size() == 0) {
 			this.welcome = new WelcomePanel(this);

@@ -1,4 +1,4 @@
-package org.lobo.menu.tools.pref;
+package org.lobo.store;
 
 import java.io.Serializable;
 import java.net.InetSocketAddress;
@@ -9,10 +9,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import org.lobo.http.NetRoutines;
-import org.lobo.store.SQLiteCommon;
+import org.lobo.net.NetRoutines;
 
-public class ConnectionSettings implements Serializable {
+
+public class ConnectionStore implements Serializable {
 
 	private static String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
 
@@ -21,27 +21,6 @@ public class ConnectionSettings implements Serializable {
 	private static String INSERT_CONNECTIONS = "INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)";
 
 	private static final long serialVersionUID = 1L;
-
-	public static ConnectionSettings getConnection() {
-		final ConnectionSettings setting = new ConnectionSettings();
-		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-				PreparedStatement pstmt = conn.prepareStatement(CONNECTIONS)) {
-			try (ResultSet rs = pstmt.executeQuery()) {
-				while (rs != null && rs.next()) {
-					setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
-					setting.setUserName(rs.getString(2));
-					setting.setPassword(rs.getString(3));
-					setting.setAuthenticated(rs.getInt(4) == 1 ? true : false);
-					final InetSocketAddress socketAddress = new InetSocketAddress(rs.getString(5), rs.getInt(6));
-					setting.setInetSocketAddress(socketAddress);
-					setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
-				}
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
-		}
-		return setting;
-	}
 
 	/** The authenticated. */
 	private boolean authenticated;
@@ -67,7 +46,28 @@ public class ConnectionSettings implements Serializable {
 	/**
 	 * Instantiates a new connection settings.
 	 */
-	public ConnectionSettings() {
+	public ConnectionStore() {
+	}
+	
+	public static ConnectionStore getConnection() {
+		final ConnectionStore setting = new ConnectionStore();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(CONNECTIONS)) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
+					setting.setUserName(rs.getString(2));
+					setting.setPassword(rs.getString(3));
+					setting.setAuthenticated(rs.getInt(4) == 1 ? true : false);
+					final InetSocketAddress socketAddress = new InetSocketAddress(rs.getString(5), rs.getInt(6));
+					setting.setInetSocketAddress(socketAddress);
+					setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
+				}
+			}
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		return setting;
 	}
 
 	public void deleteConnection() {

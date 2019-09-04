@@ -36,6 +36,7 @@ import javax.swing.border.TitledBorder;
 import org.lobo.gui.ColorComboBox;
 import org.lobo.gui.FontLabel;
 import org.lobo.laf.LAFType;
+import org.lobo.store.LookAndFeelsStore;
 import org.lobo.laf.FontType;
 import org.lobo.laf.LAFSettings;
 
@@ -353,7 +354,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		laf.setBold(this.boldCheckBox.isSelected());
 
 		if (validate(laf)) {
-			final LookAndFeelsSettings sql = new LookAndFeelsSettings();
+			final LookAndFeelsStore sql = new LookAndFeelsStore();
 			sql.deleteLAF();
 			sql.insertLAF(laf);
 		}

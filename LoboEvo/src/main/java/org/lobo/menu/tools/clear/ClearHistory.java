@@ -4,9 +4,9 @@ import java.io.File;
 
 import org.lobo.http.CookieManager;
 import org.lobo.http.NavigationHistory;
-import org.lobo.menu.bookmarks.BookmarksHistory;
-import org.lobo.menu.tools.pref.ToolsSettings;
+import org.lobo.store.BookmarksStore;
 import org.lobo.store.SQLiteCommon;
+import org.lobo.store.ToolsStore;
 
 public class ClearHistory {
 
@@ -14,7 +14,7 @@ public class ClearHistory {
 	 * Clear Bookmarks.
 	 */
 	protected void clearBookmarks() {
-		final BookmarksHistory hist = new BookmarksHistory();
+		final BookmarksStore hist = new BookmarksStore();
 		hist.deleteBookmarks();
 	}
 
@@ -38,7 +38,7 @@ public class ClearHistory {
 	 * Clear Bookmarks.
 	 */
 	protected void clearNavigation() {
-		final ToolsSettings ts = new ToolsSettings();
+		final ToolsStore ts = new ToolsStore();
 		ts.deleteSearchEngine();
 		final NavigationHistory hist = new NavigationHistory();
 		hist.deleteHost();

@@ -1,4 +1,4 @@
-package org.lobo.menu.bookmarks;
+package org.lobo.store;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -11,12 +11,11 @@ import java.util.List;
 
 import org.lobo.common.Strings;
 import org.lobo.info.BookmarkInfo;
-import org.lobo.store.SQLiteCommon;
 
 /**
- * The Class BookmarksHistory.
+ * The Class BookmarksStore.
  */
-public class BookmarksHistory implements Serializable {
+public class BookmarksStore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

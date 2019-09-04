@@ -18,7 +18,7 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-package org.lobo.http;
+package org.lobo.net;
 
 import java.net.InetAddress;
 

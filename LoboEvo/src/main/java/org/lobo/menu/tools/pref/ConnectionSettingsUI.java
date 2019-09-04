@@ -16,6 +16,7 @@ import org.lobo.gui.FieldType;
 import org.lobo.gui.FormField;
 import org.lobo.gui.FormPanel;
 import org.lobo.gui.SwingTasks;
+import org.lobo.store.ConnectionStore;
 
 public class ConnectionSettingsUI extends AbstractSettingsUI {
 
@@ -143,7 +144,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 * Load settings.
 	 */
 	private void loadSettings() {
-		final ConnectionSettings settings = ConnectionSettings.getConnection();
+		final ConnectionStore settings = ConnectionStore.getConnection();
 		switch (settings.getProxyType()) {
 		case DIRECT:
 			this.noProxyRadioButton.setSelected(true);
@@ -178,7 +179,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void restoreDefaults() {
-		final ConnectionSettings settings = new ConnectionSettings();
+		final ConnectionStore settings = new ConnectionStore();
 		settings.restoreDefaults();
 		loadSettings();
 	}
@@ -190,7 +191,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	 */
 	@Override
 	public void save() throws RuntimeException {
-		final ConnectionSettings settings = new ConnectionSettings();
+		final ConnectionStore settings = new ConnectionStore();
 		Proxy.Type proxyType;
 		if (this.noProxyRadioButton.isSelected()) {
 			proxyType = Proxy.Type.DIRECT;

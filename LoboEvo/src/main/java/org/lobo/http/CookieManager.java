@@ -16,7 +16,7 @@ import java.util.Map;
 import org.lobo.common.Domains;
 import org.lobo.common.Strings;
 import org.lobo.info.CookieInfo;
-import org.lobo.menu.tools.pref.GeneralSettings;
+import org.lobo.store.GeneralStore;
 import org.lobo.store.SQLiteCommon;
 import org.lobo.util.DateUtil;
 
@@ -51,7 +51,7 @@ public class CookieManager {
 
 	private static List<CookieInfo> getCookies(String hostName, String path) {
 		final List<CookieInfo> cookies = new ArrayList<CookieInfo>();
-		final GeneralSettings settings = GeneralSettings.getNetwork();
+		final GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
 			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 					PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.COOKIES)) {
@@ -173,7 +173,7 @@ public class CookieManager {
 			expiresDate = du.determineDateFormat(expires, Locale.US);
 		}
 
-		final GeneralSettings settings = GeneralSettings.getNetwork();
+		final GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
 			saveCookie(domain, path, cookieName, expiresDate, cookieValue, maxAge, Strings.isNotBlank(secure),
 					Strings.isNotBlank(httpOnly));

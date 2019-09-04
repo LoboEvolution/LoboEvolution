@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
-import org.lobo.menu.tools.pref.ToolsSettings;
+import org.lobo.store.ToolsStore;
 
 public class SetAsDefaultAction<T> extends AbstractAction {
 
@@ -36,7 +36,7 @@ public class SetAsDefaultAction<T> extends AbstractAction {
 	 * Removes the selected item.
 	 */
 	private void setDefault() {
-		final ToolsSettings tools = new ToolsSettings();
+		final ToolsStore tools = new ToolsStore();
 		final String name = String.valueOf(this.item.getComboBox().getSelectedItem());
 		tools.unselectedSearch();
 		tools.selectedSearch(name);

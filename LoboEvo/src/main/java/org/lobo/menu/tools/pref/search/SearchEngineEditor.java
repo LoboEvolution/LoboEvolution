@@ -5,9 +5,10 @@ import org.lobo.gui.AbstractItemEditor;
 import org.lobo.gui.FieldType;
 import org.lobo.gui.FormField;
 import org.lobo.gui.FormPanel;
+import org.lobo.store.SearchEngineStore;
 import org.lobo.common.WrapperLayout;
 
-public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
+public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -51,8 +52,8 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 	 * @see org.loboevolution.primary.gui.AbstractItemEditor#getItem()
 	 */
 	@Override
-	public SearchEngine getItem() {
-		final SearchEngine se = new SearchEngine();
+	public SearchEngineStore getItem() {
+		final SearchEngineStore se = new SearchEngineStore();
 		se.setName(this.nameField.getValue());
 		se.setDescription(this.descriptionField.getValue());
 		se.setBaseUrl(this.baseUrlField.getValue());
@@ -67,7 +68,7 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngine> {
 	 * org.loboevolution.primary.gui.AbstractItemEditor#setItem(java.lang.Object)
 	 */
 	@Override
-	public void setItem(SearchEngine item) {
+	public void setItem(SearchEngineStore item) {
 		this.nameField.setValue(item.getName());
 		this.descriptionField.setValue(item.getDescription());
 		this.baseUrlField.setValue(item.getBaseUrl());

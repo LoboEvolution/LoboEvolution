@@ -7,9 +7,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-import org.lobo.menu.tools.pref.ToolsSettings;
-import org.lobo.menu.tools.pref.search.SearchEngine;
 import org.lobo.net.HttpNetwork;
+import org.lobo.store.SearchEngineStore;
+import org.lobo.store.ToolsStore;
 import org.lobobrowser.html.gui.HtmlPanel;
 import org.lobobrowser.html.parser.DocumentBuilderImpl;
 import org.lobobrowser.html.parser.InputSourceImpl;
@@ -52,11 +52,11 @@ public class NavigationManager {
 	}
 
 	public static HtmlPanel getHtmlPanelSearch(String search) {
-		final ToolsSettings tools = new ToolsSettings();
-		final List<SearchEngine> searchEngines = tools.getSearchEngines();
-		for (final SearchEngine searchEngine : searchEngines) {
-			if (searchEngine.isSelected()) {
-				final String uri = searchEngine.getBaseUrl() + search.replace(" ", "%20");
+		final ToolsStore tools = new ToolsStore();
+		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();
+		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
+			if (searchEngineStore.isSelected()) {
+				final String uri = searchEngineStore.getBaseUrl() + search.replace(" ", "%20");
 				return getHtmlPanel(uri);
 			}
 		}

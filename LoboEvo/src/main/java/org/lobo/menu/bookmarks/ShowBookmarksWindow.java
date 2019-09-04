@@ -29,6 +29,7 @@ import org.lobo.component.BrowserFrame;
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationManager;
 import org.lobo.info.BookmarkInfo;
+import org.lobo.store.BookmarksStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
 
@@ -101,7 +102,7 @@ public class ShowBookmarksWindow extends JFrame {
 	private Component tablePane(BrowserFrame frame, Integer num) {
 		final Object columnNames[] = { "Title", "Description", "Url", "Tag" };
 		final List<String[]> values = new ArrayList<String[]>();
-		final BookmarksHistory history = new BookmarksHistory();
+		final BookmarksStore history = new BookmarksStore();
 		final List<BookmarkInfo> allEntries = history.getBookmarks(num);
 		for (final BookmarkInfo binfo : allEntries) {
 			values.add(new String[] { binfo.getTitle(), binfo.getDescription(), binfo.getUrl().toString(),

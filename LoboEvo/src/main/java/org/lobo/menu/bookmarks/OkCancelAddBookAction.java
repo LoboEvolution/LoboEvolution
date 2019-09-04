@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import org.lobo.common.Strings;
 import org.lobo.info.BookmarkInfo;
+import org.lobo.store.BookmarksStore;
 
 public class OkCancelAddBookAction extends AbstractAction {
 
@@ -23,7 +24,7 @@ public class OkCancelAddBookAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		final BookmarksHistory book = new BookmarksHistory();
+		final BookmarksStore book = new BookmarksStore();
 		if (this.add) {
 			book.insertBookmark(getinfo());
 			JOptionPane.showMessageDialog(this.window, "Bookmark Added!");

@@ -1,4 +1,4 @@
-package org.lobo.menu.tools.pref;
+package org.lobo.store;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -9,13 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lobo.menu.tools.pref.search.SearchEngine;
-import org.lobo.store.SQLiteCommon;
-
 /**
- * The Class ToolsSettings.
+ * The Class ToolsStore.
  */
-public class ToolsSettings implements Serializable {
+public class ToolsStore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,25 +35,25 @@ public class ToolsSettings implements Serializable {
 		}
 	}
 
-	public List<SearchEngine> getSearchEngines() {
-		final List<SearchEngine> searchEngines = new ArrayList<SearchEngine>();
+	public List<SearchEngineStore> getSearchEngines() {
+		final List<SearchEngineStore> searchEngineStores = new ArrayList<SearchEngineStore>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(this.SEARCH2)) {
 			while (rs != null && rs.next()) {
-				final SearchEngine se = new SearchEngine();
+				final SearchEngineStore se = new SearchEngineStore();
 				se.setName(rs.getString(1));
 				se.setDescription(rs.getString(2));
 				se.setBaseUrl(rs.getString(3));
 				se.setQueryParameter(rs.getString(4));
 				se.setType(rs.getString(5));
 				se.setSelected(rs.getInt(6) == 1 ? true : false);
-				searchEngines.add(se);
+				searchEngineStores.add(se);
 			}
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-		return searchEngines;
+		return searchEngineStores;
 	}
 
 	/**
@@ -64,11 +61,11 @@ public class ToolsSettings implements Serializable {
 	 *
 	 * @return the selected search engine
 	 */
-	public SearchEngine getSelectedSearchEngine() {
-		final List<SearchEngine> searchEngines = getSearchEngines();
-		for (final SearchEngine searchEngine : searchEngines) {
-			if (searchEngine.isSelected()) {
-				return searchEngine;
+	public SearchEngineStore getSelectedSearchEngine() {
+		final List<SearchEngineStore> searchEngineStores = getSearchEngines();
+		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
+			if (searchEngineStore.isSelected()) {
+				return searchEngineStore;
 			}
 		}
 		return null;

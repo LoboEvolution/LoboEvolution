@@ -1,4 +1,4 @@
-package org.lobo.menu.tools.pref.search;
+package org.lobo.store;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -7,9 +7,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 /**
- * The Class SearchEngine.
+ * The Class SearchEngineStore.
  */
-public class SearchEngine implements Serializable {
+public class SearchEngineStore implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 225745010000001000L;

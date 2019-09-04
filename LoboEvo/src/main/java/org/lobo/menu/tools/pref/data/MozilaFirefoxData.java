@@ -12,7 +12,7 @@ import org.lobo.http.CookieManager;
 import org.lobo.http.NavigationHistory;
 import org.lobo.info.BookmarkInfo;
 import org.lobo.info.CookieInfo;
-import org.lobo.menu.bookmarks.BookmarksHistory;
+import org.lobo.store.BookmarksStore;
 import org.lobo.store.SQLiteCommon;
 
 public class MozilaFirefoxData extends BrowserData {
@@ -84,7 +84,7 @@ public class MozilaFirefoxData extends BrowserData {
 		for (final String path : files) {
 			final List<BookmarkInfo> bookmarks = getBookmarkInfo(path);
 			for (final BookmarkInfo info : bookmarks) {
-				final BookmarksHistory hist = new BookmarksHistory();
+				final BookmarksStore hist = new BookmarksStore();
 				hist.insertBookmark(info);
 			}
 		}
