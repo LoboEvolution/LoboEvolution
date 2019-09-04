@@ -46,6 +46,7 @@ import javax.swing.JPopupMenu;
 import org.lobo.common.BufferExceededException;
 import org.lobo.common.RecordedInputStream;
 import org.lobo.common.Urls;
+import org.lobo.component.IBrowserFrame;
 import org.lobo.component.IBrowserPanel;
 import org.lobo.net.HttpNetwork;
 import org.lobo.tab.DnDTabbedPane;
@@ -384,6 +385,9 @@ public class HtmlRendererContext {
 	 * Implements the link click handler by invoking {@link #navigate(URL, String)}.
 	 */
 	public void linkClicked(HTMLElement linkNode, URL url, String target) {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		browserFrame.getToolbar().getAddressBar().setText(url.toString());
 		this.navigate(url, target);
 	}
 
@@ -401,7 +405,7 @@ public class HtmlRendererContext {
 	 * @see #navigate(URL, String)
 	 */
 	public void navigate(String fullURL) throws Exception {
-		final java.net.URL href = Urls.createURL(null, fullURL);
+		final URL href = Urls.createURL(null, fullURL);
 		this.navigate(href, "_this");
 	}
 
@@ -424,6 +428,8 @@ public class HtmlRendererContext {
 		hpanel.setBrowserPanel(bpanel);
 		tabbedPane.insertTab("New Tab", null, hpanel, null, indexPanel + 1);
 		tabbedPane.setSelectedIndex(indexPanel + 1);
+		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		browserFrame.getToolbar().getAddressBar().setText(fullURL);
 		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 
@@ -587,7 +593,7 @@ public class HtmlRendererContext {
 	 * 
 	 * @see #navigate(URL, String)
 	 */
-	public void submitForm(final String method, final java.net.URL action, final String target, final String enctype,
+	public void submitForm(final String method, final URL action, final String target, final String enctype,
 			final FormInput[] formInputs) {
 		// This method implements simple incremental rendering.
 		if (target != null) {

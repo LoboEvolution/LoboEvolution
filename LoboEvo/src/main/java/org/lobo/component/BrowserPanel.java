@@ -20,10 +20,12 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	private final DnDTabbedPane tabbedPane;
 
 	private WelcomePanel welcome;
+	
+	private BrowserFrame browserFrame;
 
-	public BrowserPanel() {
-
+	public BrowserPanel(BrowserFrame browserFrame) {
 		super(new BorderLayout());
+		this.browserFrame = browserFrame;
 		this.scroll = new JScrollPane();
 		this.tabbedPane = new DnDTabbedPane();
 		this.tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this));
@@ -66,5 +68,12 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	 */
 	public WelcomePanel getWelcome() {
 		return this.welcome;
+	}
+	
+	/**
+	 * @return the browserFrame
+	 */
+	public BrowserFrame getBrowserFrame() {
+		return browserFrame;
 	}
 }

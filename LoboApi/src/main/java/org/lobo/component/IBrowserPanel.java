@@ -9,5 +9,7 @@ public interface IBrowserPanel {
 	DnDTabbedPane getTabbedPane();
 	
 	JScrollPane getScroll();
+	
+	IBrowserFrame getBrowserFrame();
 
 }

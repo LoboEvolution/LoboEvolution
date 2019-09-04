@@ -26,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Optional;
 
+import org.lobo.common.Strings;
 import org.lobo.laf.ColorFactory;
 import org.lobobrowser.html.dom.HTMLBodyElement;
 import org.lobobrowser.html.dom.HTMLDocument;
@@ -154,7 +155,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		final HtmlRendererContext rcontext = getHtmlRendererContext();
 		if (rcontext != null) {
 			final String href = getHref();
-			if (href != null && href.length() > 0) {
+			if (Strings.isNotBlank(href)) {
 				final String target = getTarget();
 				try {
 					final URL url = getFullURL(href);

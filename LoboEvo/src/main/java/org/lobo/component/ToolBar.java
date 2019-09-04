@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
-public class ToolBar extends JToolBar {
+public class ToolBar extends JToolBar implements IToolBar {
 
 	private static final long serialVersionUID = 1L;
 

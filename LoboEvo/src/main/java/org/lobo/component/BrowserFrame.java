@@ -16,7 +16,7 @@ import org.lobo.menu.MenuBar;
 import org.lobo.menu.tools.pref.GeneralSettings;
 import org.lobo.welcome.WelcomePanel;
 
-public class BrowserFrame extends JFrame {
+public class BrowserFrame extends JFrame implements IBrowserFrame {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public class BrowserFrame extends JFrame {
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		this.panel = new BrowserPanel();
+		this.panel = new BrowserPanel(this);
 		final WelcomePanel welcome = this.panel.getWelcome();
 		if (welcome != null) {
 			final Rectangle initialWindowBounds = GeneralSettings.getInitialWindowBounds();
