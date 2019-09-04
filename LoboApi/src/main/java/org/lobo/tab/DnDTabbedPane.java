@@ -11,6 +11,11 @@ import java.awt.dnd.DropTargetListener;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeListener;
 
+import org.lobo.common.Strings;
+import org.lobo.component.IBrowserFrame;
+import org.lobo.component.IBrowserPanel;
+import org.lobo.store.TabStore;
+
 public class DnDTabbedPane extends JTabbedPane {
 
 	private static final long serialVersionUID = 1L;
@@ -24,9 +29,9 @@ public class DnDTabbedPane extends JTabbedPane {
 	private GlassPane glass;
 
 	private int index;
-
-	public DnDTabbedPane() {
-		init();
+	
+	public DnDTabbedPane(IBrowserPanel browserPanel) {
+		init(browserPanel);
 	}
 
 	protected int getDropIndex(Point p) {
@@ -55,17 +60,20 @@ public class DnDTabbedPane extends JTabbedPane {
 		return this.index;
 	}
 
-	private void init() {
+	private void init(IBrowserPanel browserPanel) {
 		setUI(new TabbedPaneUI(this));
 		new DropTarget(this, DnDConstants.ACTION_COPY_OR_MOVE, this.dropTargetListener, true);
-		new DragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE,
-				this.dragGestureListener);
+		new DragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, this.dragGestureListener);
 		final ChangeListener changeListener = changeEvent -> {
 			final JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+			IBrowserFrame browserFrame = browserPanel.getBrowserFrame();
+			String uri = TabStore.getTab(sourceTabbedPane.getSelectedIndex());
+			if (browserFrame.getToolbar() != null && Strings.isNotBlank(uri)) {
+				browserFrame.getToolbar().getAddressBar().setText(uri);
+			}
 			setIndex(sourceTabbedPane.getSelectedIndex());
 		};
 		addChangeListener(changeListener);
-
 	}
 
 	/**

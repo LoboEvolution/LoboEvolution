@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JTextField;
 
 import org.lobo.http.NavigationManager;
+import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
 import org.lobobrowser.html.gui.HtmlPanel;
@@ -31,5 +32,7 @@ public class GoAction implements ActionListener {
 		htmlPanel.setBrowserPanel(panel);
 		tabbedPane.insertTab("New Tab", null, htmlPanel, null, indexPanel);
 		tabbedPane.setSelectedIndex(indexPanel);
+		TabStore.deleteTab(indexPanel);
+		TabStore.insertTab(indexPanel, this.addressBar.getText());
 	}
 }

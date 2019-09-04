@@ -15,3 +15,5 @@ CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter t
 CREATE TABLE STARTUP (baseUrl text);
 CREATE TABLE SIZE (width integer, height integer);
 CREATE TABLE USER_AGENT (description text);
+CREATE TABLE TAB (index_tab integer, url text);
+);

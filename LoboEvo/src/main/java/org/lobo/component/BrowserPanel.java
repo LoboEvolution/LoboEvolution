@@ -27,7 +27,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 		super(new BorderLayout());
 		this.browserFrame = browserFrame;
 		this.scroll = new JScrollPane();
-		this.tabbedPane = new DnDTabbedPane();
+		this.tabbedPane = new DnDTabbedPane(this);
 		this.tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this));
 		final List<String> startupURLs = GeneralStore.getStartupURLs();
 

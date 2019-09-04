@@ -2,6 +2,7 @@ package org.lobo.tab;
 
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationManager;
+import org.lobo.store.TabStore;
 
 public class TabbedHtml {
 
@@ -10,5 +11,6 @@ public class TabbedHtml {
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
 		tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(url), null, indexPanel);
 		tabbedPane.setSelectedIndex(indexPanel);
+		TabStore.insertTab(indexPanel, url);
 	}
 }

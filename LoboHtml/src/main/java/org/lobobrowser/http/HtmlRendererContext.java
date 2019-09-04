@@ -49,6 +49,7 @@ import org.lobo.common.Urls;
 import org.lobo.component.IBrowserFrame;
 import org.lobo.component.IBrowserPanel;
 import org.lobo.net.HttpNetwork;
+import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
 import org.lobobrowser.html.BrowserFrame;
@@ -386,8 +387,12 @@ public class HtmlRendererContext {
 	 */
 	public void linkClicked(HTMLElement linkNode, URL url, String target) {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
 		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText(url.toString());
+		final int indexPanel = tabbedPane.getIndex();
+		TabStore.deleteTab(indexPanel);
+		TabStore.insertTab(indexPanel, url.toString());
 		this.navigate(url, target);
 	}
 
@@ -423,13 +428,14 @@ public class HtmlRendererContext {
 		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
 		final int indexPanel = tabbedPane.getIndex();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
-
+		int index = indexPanel +1;
 		HtmlPanel hpanel = htmlPanel.createHtmlPanel(fullURL);
 		hpanel.setBrowserPanel(bpanel);
-		tabbedPane.insertTab("New Tab", null, hpanel, null, indexPanel + 1);
-		tabbedPane.setSelectedIndex(indexPanel + 1);
+		tabbedPane.insertTab("New Tab", null, hpanel, null, index);
+		tabbedPane.setSelectedIndex(index);
 		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText(fullURL);
+		TabStore.insertTab(index, fullURL);
 		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 

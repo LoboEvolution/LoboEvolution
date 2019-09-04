@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 import org.lobo.component.BrowserFrame;
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationManager;
+import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
 
@@ -30,12 +31,14 @@ public class OpenFileAction extends AbstractAction {
 		final int returnValue = fileChooser.showOpenDialog(panel);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			final File selectedFile = fileChooser.getSelectedFile();
-			final int indexPanel = panel.getTabbedPane().getIndex();
+			final int indexPanel = panel.getTabbedPane().getIndex() +1;
+			String url = selectedFile.toURI().toString();
 			final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 			tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-			tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(selectedFile.toURI().toString()), null,
-					indexPanel + 1);
-			tabbedPane.setSelectedIndex(indexPanel + 1);
+			tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(url), null, indexPanel);
+			tabbedPane.setSelectedIndex(indexPanel);
+			TabStore.insertTab(indexPanel, url);
+			
 		}
 	}
 }

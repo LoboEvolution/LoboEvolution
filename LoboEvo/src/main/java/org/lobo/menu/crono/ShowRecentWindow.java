@@ -28,6 +28,7 @@ import org.lobo.component.BrowserFrame;
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationHistory;
 import org.lobo.http.NavigationManager;
+import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
 
@@ -119,12 +120,12 @@ public class ShowRecentWindow extends JFrame {
 					item.setIcon(ico);
 					item.addActionListener(e1 -> {
 						final BrowserPanel panel = frame.getPanel();
-						final int indexPanel = panel.getTabbedPane().getIndex();
+						final int indexPanel = panel.getTabbedPane().getIndex() + 1;
 						final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 						tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-						tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(vals[0]), null,
-								indexPanel + 1);
-						tabbedPane.setSelectedIndex(indexPanel + 1);
+						tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(vals[0]), null, indexPanel);
+						tabbedPane.setSelectedIndex(indexPanel);
+						TabStore.insertTab(indexPanel, vals[0]);
 					});
 					popupMenu.add(item);
 					jtable.setComponentPopupMenu(popupMenu);

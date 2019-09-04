@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationManager;
+import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
 
@@ -65,9 +66,9 @@ public class LoginButton extends JLabel {
 				panel.getTabbedPane().remove(indexPanel);
 				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-				tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanelSearch(text.getText()), null,
-						indexPanel);
+				tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanelSearch(text.getText()), null, indexPanel);
 				tabbedPane.setSelectedIndex(indexPanel);
+				TabStore.insertTab(indexPanel, text.getText());
 			}
 		});
 	}
