@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import org.lobo.menu.MenuBar;
 import org.lobo.store.GeneralStore;
+import org.lobo.store.TabStore;
 import org.lobo.welcome.WelcomePanel;
 
 public class BrowserFrame extends JFrame implements IBrowserFrame {
@@ -65,7 +66,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// TODO
+				TabStore.deleteAll();
 			}
 		});
 	}
