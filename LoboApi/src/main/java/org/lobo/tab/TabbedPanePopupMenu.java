@@ -1,11 +1,16 @@
 package org.lobo.tab;
 
 import java.awt.Component;
+import java.util.List;
 
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
+import org.lobo.component.IBrowserFrame;
 import org.lobo.component.IBrowserPanel;
+import org.lobo.info.TabInfo;
+import org.lobo.store.TabStore;
 
 public class TabbedPanePopupMenu extends JPopupMenu {
 
@@ -21,28 +26,28 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 
 	private final JMenuItem closeRight;
 
-	protected transient int count;
-
 	public TabbedPanePopupMenu(IBrowserPanel panel) {
 		add("New tab").addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
-			//tabbedPane.addTab("New Tab", new WelcomePanel(panel));
-			tabbedPane.setSelectedIndex(tabbedPane.getTabCount() - 1);
-			this.count++;
+			int index = tabbedPane.getSelectedIndex() + 1;
+			newTab(index, tabbedPane, panel);
 		});
 		addSeparator();
 		this.closePage = add("Close");
 		this.closePage.addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
-			tabbedPane.remove(tabbedPane.getSelectedIndex());
+			int tabidx = tabbedPane.getSelectedIndex();
+			tabbedPane.remove(tabidx);
+			closeTab(tabidx, tabbedPane, panel);
 		});
 		addSeparator();
 		this.closeAll = add("Close all");
 		this.closeAll.addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
 			tabbedPane.removeAll();
+			closeAllTab();
 		});
-		this.closeAllButActive = add("Close all but active");
+		this.closeAllButActive = add("Close other");
 		this.closeAllButActive.addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
 			final int tabidx = tabbedPane.getSelectedIndex();
@@ -50,6 +55,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 			final Component cmp = tabbedPane.getComponentAt(tabidx);
 			tabbedPane.removeAll();
 			tabbedPane.addTab(title, cmp);
+			closeOtherTab(tabidx, tabbedPane, panel);
 		});
 		this.closeRight = add("Close right");
 		this.closeRight.setVisible(false);
@@ -60,6 +66,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 			final int count = tabbedPane.getTabCount() - 1;
 			for (int i = count; i > tabidx; i--) {
 				tabbedPane.removeTabAt(i);
+				TabStore.deleteTab(i);
 			}
 		});
 		this.closeLeft = add("Close left");
@@ -68,6 +75,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 			final int tabidx = tabbedPane.getSelectedIndex();
 			for (int i = tabidx - 1; i >= 0; i--) {
 				tabbedPane.removeTabAt(i);
+				closeTab(i, tabbedPane, panel);
 			}
 		});
 	}
@@ -85,4 +93,60 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 			super.show(c, x, y);
 		}
 	}
+	
+	
+	private void newTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
+		tabbedPane.insertTab("New Tab", null, new JPanel(), null, index);
+		tabbedPane.setSelectedIndex(index);
+		TabStore.insertTab(index, "");
+		IBrowserFrame browserFrame = panel.getBrowserFrame();
+		browserFrame.getToolbar().getAddressBar().setText("");
+		panel.getScroll().getViewport().add(tabbedPane);
+	}
+	
+	private void closeTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
+		List<TabInfo> tabs = TabStore.getTabs();
+		for (int i = 0; i < tabs.size(); i++) {
+			
+			if(i == index) {
+				TabStore.deleteTab(index);
+			}
+			
+			if(i > index) {
+				TabInfo tabInfo = tabs.get(i);
+				TabStore.deleteTab(i);
+				TabStore.insertTab(i-1, tabInfo.getUrl());
+				IBrowserFrame browserFrame = panel.getBrowserFrame();
+				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
+			}
+		}
+		panel.getScroll().getViewport().add(tabbedPane);
+	}
+	
+	
+	private void closeAllTab() {
+		List<TabInfo> tabs = TabStore.getTabs();
+		for (int i = 0; i < tabs.size(); i++) {
+			TabStore.deleteTab(i);
+
+		}
+	}
+	
+	private void closeOtherTab(int index, DnDTabbedPane tabbedPane, IBrowserPanel panel) {
+		List<TabInfo> tabs = TabStore.getTabs();
+		for (int i = 0; i < tabs.size(); i++) {
+			if(i != index) {
+				TabStore.deleteTab(i);
+			} else {
+				TabInfo tabInfo = tabs.get(index);
+				TabStore.deleteTab(index);
+				TabStore.insertTab(0, tabInfo.getUrl());
+				IBrowserFrame browserFrame = panel.getBrowserFrame();
+				browserFrame.getToolbar().getAddressBar().setText(tabInfo.getUrl());
+			}
+
+		}
+		panel.getScroll().getViewport().add(tabbedPane);
+	}
+	
 }
