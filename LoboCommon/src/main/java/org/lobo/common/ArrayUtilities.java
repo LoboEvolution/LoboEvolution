@@ -1,7 +1,9 @@
 package org.lobo.common;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 
@@ -17,6 +19,14 @@ public class ArrayUtilities {
 
 	public static <T> Iterator<T> iterator(final T[] array, final int offset, final int length) {
 		return new ArrayIterator<>(array, offset, length);
+	}
+	
+	public static <T> void moveItem(int sourceIndex, int targetIndex, List<T> list) {
+	    if (sourceIndex <= targetIndex) {
+	        Collections.rotate(list.subList(sourceIndex, targetIndex + 1), -1);
+	    } else {
+	        Collections.rotate(list.subList(targetIndex, sourceIndex + 1), 1);
+	    }
 	}
 	
 	public static Iterator singletonIterator(final Object item) {

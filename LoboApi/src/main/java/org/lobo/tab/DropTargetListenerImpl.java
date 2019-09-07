@@ -5,8 +5,15 @@ import java.awt.Point;
 import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
+
+import org.lobo.common.ArrayUtilities;
+import org.lobo.component.IBrowserFrame;
+import org.lobo.info.TabInfo;
+import org.lobo.store.TabStore;
 
 public class DropTargetListenerImpl extends DropTargetAdapter {
 
@@ -28,14 +35,27 @@ public class DropTargetListenerImpl extends DropTargetAdapter {
 		final Point p = e.getLocation();
 		final int idx = this.tabbed.getDropIndex(p);
 		if (idx > -1 && this.tabbed.dragTabIdx > -1 && idx != this.tabbed.dragTabIdx) {
-			final Component tab = this.tabbed.getTabComponentAt(this.tabbed.dragTabIdx);
-			final Component comp = this.tabbed.getComponentAt(this.tabbed.dragTabIdx);
-			final String title = this.tabbed.getTitleAt(this.tabbed.dragTabIdx);
-			final Icon icon = this.tabbed.getIconAt(this.tabbed.dragTabIdx);
-			final String tip = this.tabbed.getToolTipTextAt(this.tabbed.dragTabIdx);
-			this.tabbed.removeTabAt(this.tabbed.dragTabIdx);
-			this.tabbed.insertTab(title, icon, comp, tip, idx);
-			this.tabbed.setTabComponentAt(idx, tab);
+			List<TabInfo> tabs = TabStore.getTabs();
+			List<Component> comps = new ArrayList<Component>(); 
+			for (int i = 0; i < tabs.size(); i++) {
+				Component comp = this.tabbed.getComponentAt(i);
+				comps.add(comp);
+			}
+			
+			tabbed.removeAll();
+			TabStore.deleteAll();
+			ArrayUtilities.moveItem(this.tabbed.dragTabIdx, idx, tabs);
+			ArrayUtilities.moveItem(this.tabbed.dragTabIdx, idx, comps);
+
+			for (int i = 0; i < tabs.size(); i++) {
+				TabInfo tabInfo = tabs.get(i);
+				Component cmp = comps.get(i);
+				TabStore.insertTab(i, tabInfo.getUrl());
+				tabbed.addTab("New Tab", cmp);
+			}
+			IBrowserFrame browserFrame = tabbed.getBrowserPanel().getBrowserFrame();
+			browserFrame.getToolbar().getAddressBar().setText(tabs.get(idx).getUrl());
+			tabbed.getBrowserPanel().getScroll().getViewport().add(this.tabbed);
 			this.tabbed.setSelectedIndex(idx);
 			e.dropComplete(true);
 		} else {
@@ -43,5 +63,4 @@ public class DropTargetListenerImpl extends DropTargetAdapter {
 		}
 		this.tabbed.dragTabIdx = -1;
 	}
-
 }

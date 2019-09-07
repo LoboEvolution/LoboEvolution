@@ -426,9 +426,8 @@ public class HtmlRendererContext {
 	public void openTabNavigate(String fullURL) {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		final int indexPanel = tabbedPane.getIndex();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
-		int index = indexPanel +1;
+		final int index = TabStore.getTabs().size();
 		HtmlPanel hpanel = htmlPanel.createHtmlPanel(fullURL);
 		hpanel.setBrowserPanel(bpanel);
 		tabbedPane.insertTab("New Tab", null, hpanel, null, index);

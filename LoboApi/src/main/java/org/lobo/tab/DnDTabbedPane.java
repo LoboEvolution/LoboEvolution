@@ -27,6 +27,8 @@ public class DnDTabbedPane extends JTabbedPane {
 	private final DropTargetListener dropTargetListener = new DropTargetListenerImpl(this);
 
 	private GlassPane glass;
+	
+	private IBrowserPanel browserPanel;
 
 	private int index;
 	
@@ -62,6 +64,7 @@ public class DnDTabbedPane extends JTabbedPane {
 
 	private void init(IBrowserPanel browserPanel) {
 		setUI(new TabbedPaneUI(this));
+		this.browserPanel = browserPanel;
 		new DropTarget(this, DnDConstants.ACTION_COPY_OR_MOVE, this.dropTargetListener, true);
 		new DragSource().createDefaultDragGestureRecognizer(this, DnDConstants.ACTION_COPY_OR_MOVE, this.dragGestureListener);
 		final ChangeListener changeListener = changeEvent -> {
@@ -81,5 +84,12 @@ public class DnDTabbedPane extends JTabbedPane {
 	 */
 	public void setIndex(int index) {
 		this.index = index;
+	}
+
+	/**
+	 * @return the browserPanel
+	 */
+	public IBrowserPanel getBrowserPanel() {
+		return browserPanel;
 	}
 }
