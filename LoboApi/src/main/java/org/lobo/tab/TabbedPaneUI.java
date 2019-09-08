@@ -18,11 +18,11 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 
 	private static final int ADDED_TAB_WIDTH = 10;
 
-	private static final Color SELECTED_TAB_COLOR = Color.LIGHT_GRAY;
+	private static final Color SELECTED_TAB_COLOR = Color.BLACK;
 
 	private static final int SPACE_BETWEEN_TAB = 1;
 
-	private static final Color TAB_COLOR = Color.GRAY;
+	private static final Color TAB_COLOR = Color.BLACK;
 
 	public static ComponentUI createUI(JComponent c) {
 		return new TabbedPaneUI((JTabbedPane) c);
