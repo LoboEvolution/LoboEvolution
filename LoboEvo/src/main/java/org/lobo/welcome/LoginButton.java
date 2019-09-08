@@ -14,11 +14,15 @@ import java.util.HashMap;
 
 import javax.swing.JLabel;
 
+import org.lobo.common.Strings;
 import org.lobo.component.BrowserPanel;
+import org.lobo.component.IBrowserPanel;
 import org.lobo.http.NavigationManager;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.gui.HtmlPanel;
 
 public class LoginButton extends JLabel {
 	private static final long serialVersionUID = 1L;
@@ -66,9 +70,15 @@ public class LoginButton extends JLabel {
 				panel.getTabbedPane().remove(indexPanel);
 				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-				tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanelSearch(text.getText()), null, indexPanel);
+				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(text.getText());
+				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
+				tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
 				tabbedPane.setSelectedIndex(indexPanel);
-				TabStore.insertTab(indexPanel, text.getText());
+				final IBrowserPanel bpanel = hpanel.getBrowserPanel();
+				bpanel.getScroll().getViewport().add(tabbedPane);
+				TabStore.deleteTab(indexPanel);
+				TabStore.insertTab(indexPanel, text.getText(), title);
 			}
 		});
 	}

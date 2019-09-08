@@ -6,12 +6,15 @@ import java.io.File;
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 
+import org.lobo.common.Strings;
 import org.lobo.component.BrowserFrame;
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationManager;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.gui.HtmlPanel;
 
 public class OpenFileAction extends AbstractAction {
 
@@ -31,14 +34,16 @@ public class OpenFileAction extends AbstractAction {
 		final int returnValue = fileChooser.showOpenDialog(panel);
 		if (returnValue == JFileChooser.APPROVE_OPTION) {
 			final File selectedFile = fileChooser.getSelectedFile();
+			final String url = selectedFile.toURI().toString();
 			final int indexPanel = panel.getTabbedPane().getIndex() +1;
-			String url = selectedFile.toURI().toString();
 			final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 			tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-			tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(url), null, indexPanel);
+			HtmlPanel hpanel = NavigationManager.getHtmlPanel(url);
+			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
+			tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
 			tabbedPane.setSelectedIndex(indexPanel);
-			TabStore.insertTab(indexPanel, url);
-			
+			TabStore.insertTab(indexPanel, url, title);
 		}
 	}
 }

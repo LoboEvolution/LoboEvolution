@@ -171,7 +171,8 @@ public class HtmlContextMenu {
 		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 		menuItem.addActionListener(e -> {
 			try {
-				context.openTabNavigate(link.getAbsoluteHref());
+				final URL url = new URL(link.getAbsoluteHref());
+				context.linkClicked(url, true);
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}

@@ -7,9 +7,6 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.Icon;
-
 import org.lobo.common.ArrayUtilities;
 import org.lobo.component.IBrowserFrame;
 import org.lobo.info.TabInfo;
@@ -50,8 +47,8 @@ public class DropTargetListenerImpl extends DropTargetAdapter {
 			for (int i = 0; i < tabs.size(); i++) {
 				TabInfo tabInfo = tabs.get(i);
 				Component cmp = comps.get(i);
-				TabStore.insertTab(i, tabInfo.getUrl());
-				tabbed.addTab("New Tab", cmp);
+				TabStore.insertTab(i, tabInfo.getUrl(), tabInfo.getTitle());
+				tabbed.addTab(tabInfo.getTitle(), null, cmp, tabInfo.getTitle());
 			}
 			IBrowserFrame browserFrame = tabbed.getBrowserPanel().getBrowserFrame();
 			browserFrame.getToolbar().getAddressBar().setText(tabs.get(idx).getUrl());

@@ -45,6 +45,7 @@ import javax.swing.JPopupMenu;
 
 import org.lobo.common.BufferExceededException;
 import org.lobo.common.RecordedInputStream;
+import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobo.component.IBrowserFrame;
 import org.lobo.component.IBrowserPanel;
@@ -385,15 +386,32 @@ public class HtmlRendererContext {
 	/**
 	 * Implements the link click handler by invoking {@link #navigate(URL, String)}.
 	 */
-	public void linkClicked(HTMLElement linkNode, URL url, String target) {
+	public void linkClicked(URL url, boolean isNewTab) {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		browserFrame.getToolbar().getAddressBar().setText(url.toString());
-		final int indexPanel = tabbedPane.getIndex();
-		TabStore.deleteTab(indexPanel);
-		TabStore.insertTab(indexPanel, url.toString());
-		this.navigate(url, target);
+		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		int index = -1;
+		
+		if(isNewTab) {
+			index = TabStore.getTabs().size();
+		} else {
+			index = tabbedPane.getIndex();
+		}
+		
+		String fullURL = url.toString();
+		final HtmlPanel hpanel = htmlPanel.createHtmlPanel(fullURL );
+		hpanel.setBrowserPanel(bpanel);
+		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+		if(!isNewTab) {
+			tabbedPane.remove(index);
+		}
+		tabbedPane.insertTab(title, null, hpanel, title, index);
+		tabbedPane.setSelectedIndex(index);
+		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		browserFrame.getToolbar().getAddressBar().setText(fullURL);
+		TabStore.insertTab(index, fullURL, title);
+		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 
 	public void moveInHistory(int offset) {
@@ -423,28 +441,11 @@ public class HtmlRendererContext {
 		submitForm("GET", href, target, null, null);
 	}
 	
-	public void openTabNavigate(String fullURL) {
-		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
-		final int index = TabStore.getTabs().size();
-		HtmlPanel hpanel = htmlPanel.createHtmlPanel(fullURL);
-		hpanel.setBrowserPanel(bpanel);
-		tabbedPane.insertTab("New Tab", null, hpanel, null, index);
-		tabbedPane.setSelectedIndex(index);
-		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		browserFrame.getToolbar().getAddressBar().setText(fullURL);
-		TabStore.insertTab(index, fullURL);
-		bpanel.getScroll().getViewport().add(tabbedPane);
-	}
-
 	/**
 	 * This method must be overridden to implement a context menu.
 	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
-
 		HtmlContextMenu menu = new HtmlContextMenu(element, this);
-
 		if (element instanceof HTMLImageElementImpl) {
 			JPopupMenu popupMenuImage = menu.popupMenuImage();
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
@@ -459,7 +460,6 @@ public class HtmlRendererContext {
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		}
-
 		return true;
 	}
 	public boolean onDoubleClick(HTMLElement element, MouseEvent event) {

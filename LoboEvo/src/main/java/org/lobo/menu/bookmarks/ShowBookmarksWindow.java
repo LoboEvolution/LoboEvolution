@@ -25,6 +25,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import org.lobo.common.Strings;
 import org.lobo.component.BrowserFrame;
 import org.lobo.component.BrowserPanel;
 import org.lobo.http.NavigationManager;
@@ -33,6 +34,8 @@ import org.lobo.store.BookmarksStore;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
+import org.lobobrowser.html.gui.HtmlPanel;
 
 public class ShowBookmarksWindow extends JFrame {
 
@@ -131,10 +134,13 @@ public class ShowBookmarksWindow extends JFrame {
 						final BrowserPanel panel = frame.getPanel();
 						final int indexPanel = panel.getTabbedPane().getIndex() + 1;
 						final DnDTabbedPane tabbedPane = panel.getTabbedPane();
+						HtmlPanel hpanel = NavigationManager.getHtmlPanel(vals[2]);
+						final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+						final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 						tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-						tabbedPane.insertTab("New Tab", null, NavigationManager.getHtmlPanel(vals[2]), null, indexPanel);
+						tabbedPane.insertTab(title, null, hpanel, title, indexPanel);
 						tabbedPane.setSelectedIndex(indexPanel);
-						TabStore.insertTab(indexPanel, vals[2]);
+						TabStore.insertTab(indexPanel, vals[2], title);
 					});
 					popupMenu.add(item);
 					jtable.setComponentPopupMenu(popupMenu);

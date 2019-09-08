@@ -10,6 +10,8 @@ public class TabInfo implements Serializable {
 	
 	private String indexTab;
 	
+	private String title;
+	
 	
 	public String getUrl() {
 		return url;
@@ -25,6 +27,20 @@ public class TabInfo implements Serializable {
 
 	public void setIndexTab(String indexTab) {
 		this.indexTab = indexTab;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 

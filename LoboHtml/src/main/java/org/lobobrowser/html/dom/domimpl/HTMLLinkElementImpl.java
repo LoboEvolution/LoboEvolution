@@ -156,13 +156,12 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		if (rcontext != null) {
 			final String href = getHref();
 			if (Strings.isNotBlank(href)) {
-				final String target = getTarget();
 				try {
 					final URL url = getFullURL(href);
 					if (url == null) {
 						this.warn("Unable to resolve URI: [" + href + "].");
 					} else {
-						rcontext.linkClicked(this, url, target);
+						rcontext.linkClicked(url, false);
 					}
 				} catch (final MalformedURLException mfu) {
 					this.warn("Malformed URI: [" + href + "].", mfu);
