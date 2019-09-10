@@ -32,7 +32,6 @@ public class MenuBar extends JMenuBar {
 		add(getEditMenu());
 		add(getViewMenu(frame));
 		add(getBookmarksMenu(frame));
-		add(getNavigationMenu(frame));
 		add(getChronologyMenu(frame));
 		add(getToolsMenu(frame));
 		add(getHelpMenu(frame));
@@ -119,26 +118,6 @@ public class MenuBar extends JMenuBar {
 		menu.add(menuItem("Wiki", new OpenInTabAction(frame, wiki)));
 		menu.addSeparator();
 		menu.add(menuItem("Discussion Forum", new OpenInTabAction(frame, forum)));
-		return menu;
-	}
-
-	/**
-	 * Gets the navigation menu.
-	 *
-	 * @return the navigation menu
-	 */
-	public JMenu getNavigationMenu(BrowserFrame frame) {
-		final JMenu menu = new JMenu("Navigation");
-		menu.setMnemonic('N');
-
-		// menu.add(menuItem("Back", 'B', "ctrl B", new BackAction(window,
-		// actionPool)));
-		// menu.add(menuItem("Forward", 'F', new ForwardAction(window, actionPool)));
-		// menu.add(menuItem("Stop", 'S', KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-		// new StopAction(this, window)));
-		// menu.add(menuItem("Reload", 'R', KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0),
-		// new ReloadAction(window, actionPool)));
-
 		return menu;
 	}
 

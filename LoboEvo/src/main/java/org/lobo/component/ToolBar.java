@@ -65,27 +65,24 @@ public class ToolBar extends JToolBar implements IToolBar {
 		back.setIcon(icon);
 		back.setToolTipText("Back");
 		back.setBorder(BorderFactory.createEmptyBorder());
+		back.addActionListener(new BackAction(panel, this.addressBar));
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/forward.png"));
 		final JButton forward = new JButton();
 		forward.setIcon(icon);
 		forward.setToolTipText("Forward");
 		forward.setBorder(BorderFactory.createEmptyBorder());
+		forward.addActionListener(new ForwardAction(panel, this.addressBar));
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/reload.png"));
 		final JButton refresh = new JButton();
 		refresh.setIcon(icon);
 		refresh.setToolTipText("Refresh");
 		refresh.setBorder(BorderFactory.createEmptyBorder());
+		refresh.addActionListener(new GoAction(panel, this.addressBar));
 
 		this.addressBar.setEditable(true);
 		this.addressBar.setBackground(Color.LIGHT_GRAY);
-
-		icon = new ImageIcon(classLoader.getResource("org/lobo/image/stop.png"));
-		final JButton stop = new JButton();
-		stop.setIcon(icon);
-		stop.setToolTipText("Stop");
-		stop.setBorder(BorderFactory.createEmptyBorder());
 
 		icon = new ImageIcon(classLoader.getResource("org/lobo/image/go.png"));
 		final JButton go = new JButton();
@@ -99,6 +96,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 		home.setIcon(icon);
 		home.setToolTipText("Home");
 		home.setBorder(BorderFactory.createEmptyBorder());
+		home.addActionListener(new HomeAction(panel));
 
 		final JPanel panel1 = new JPanel();
 		panel1.setLayout(new BorderLayout());
@@ -108,7 +106,6 @@ public class ToolBar extends JToolBar implements IToolBar {
 
 		final JPanel panel2 = new JPanel();
 		panel2.setLayout(new BorderLayout());
-		panel2.add(stop, BorderLayout.CENTER);
 		panel2.add(go, BorderLayout.WEST);
 		panel2.add(home, BorderLayout.EAST);
 
