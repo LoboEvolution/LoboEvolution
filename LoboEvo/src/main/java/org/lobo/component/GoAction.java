@@ -1,8 +1,8 @@
 package org.lobo.component;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 
 import org.lobo.common.Strings;
@@ -13,7 +13,9 @@ import org.lobo.tab.TabbedPanePopupMenu;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.html.gui.HtmlPanel;
 
-public class GoAction implements ActionListener {
+public class GoAction extends AbstractAction {
+
+	private static final long serialVersionUID = 1L;
 
 	private final JTextField addressBar;
 
@@ -26,17 +28,21 @@ public class GoAction implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		final int indexPanel = this.panel.getTabbedPane().getIndex();
-		this.panel.getTabbedPane().remove(indexPanel);
 		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
-		HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(this.addressBar.getText());
+		final int indexPanel = tabbedPane.getSelectedIndex();
+		final String text = this.addressBar.getText();
+		final HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(text, indexPanel);
 		htmlPanel.setBrowserPanel(panel);
+		
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
-		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
+		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+		tabbedPane.remove(indexPanel);
 		tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
-		tabbedPane.setSelectedIndex(indexPanel);
+		panel.getScroll().getViewport().add(tabbedPane);
+		
 		TabStore.deleteTab(indexPanel);
-		TabStore.insertTab(indexPanel, this.addressBar.getText(), title);
+		TabStore.insertTab(indexPanel, text, title);
+		
 	}
 }
