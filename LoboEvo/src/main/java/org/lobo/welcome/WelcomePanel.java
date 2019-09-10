@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import org.lobo.component.BrowserPanel;
+import org.lobo.component.IBrowserPanel;
 
 public class WelcomePanel extends JPanel {
 
@@ -14,7 +14,7 @@ public class WelcomePanel extends JPanel {
 
 	private final TextFieldUsername text;
 
-	public WelcomePanel(BrowserPanel panel) {
+	public WelcomePanel(IBrowserPanel panel) {
 		this.text = new TextFieldUsername();
 		this.button = new LoginButton(panel, this.text);
 		setBackground(new Color(37, 51, 61));

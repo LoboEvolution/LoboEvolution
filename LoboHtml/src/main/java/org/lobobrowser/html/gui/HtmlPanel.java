@@ -731,7 +731,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 	
 	
-	public HtmlPanel createHtmlPanel(String uri) {
+	public static HtmlPanel createHtmlPanel(String uri) {
 		final HtmlPanel panel = new HtmlPanel();
 		try {
 			final URL url = new URL(uri);

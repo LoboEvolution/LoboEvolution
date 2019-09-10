@@ -15,7 +15,6 @@ import java.util.HashMap;
 import javax.swing.JLabel;
 
 import org.lobo.common.Strings;
-import org.lobo.component.BrowserPanel;
 import org.lobo.component.IBrowserPanel;
 import org.lobo.http.NavigationManager;
 import org.lobo.store.TabStore;
@@ -43,7 +42,7 @@ public class LoginButton extends JLabel {
 
 	private final int ROUNDNESS = 8;
 
-	public LoginButton(BrowserPanel panel, TextFieldUsername text) {
+	public LoginButton(IBrowserPanel panel, TextFieldUsername text) {
 
 		setBackground(this.COLOR_BACKGROUND);
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
