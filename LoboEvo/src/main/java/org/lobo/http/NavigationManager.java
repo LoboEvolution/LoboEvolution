@@ -42,26 +42,24 @@ public class NavigationManager {
 		return null;
 	}
 
-	public static HtmlPanel getHtmlPanel(String uri) {
+	public static HtmlPanel getHtmlPanel(String uri, int index) {
 		final NavigationHistory history = new NavigationHistory();
-		final HtmlPanel panel = new HtmlPanel();
-		HtmlPanel newpanel = panel.createHtmlPanel(uri);
 		CookieManager.putCookies(uri);
-		history.addAsRecent(uri);
-		return newpanel;
+		history.addAsRecent(uri,index);
+		return HtmlPanel.createHtmlPanel(uri);
 	}
 
-	public static HtmlPanel getHtmlPanelSearch(String search) {
+	public static HtmlPanel getHtmlPanelSearch(String search, int indexPanel) {
 		final ToolsStore tools = new ToolsStore();
 		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();
 		for (final SearchEngineStore searchEngineStore : searchEngineStores) {
 			if (searchEngineStore.isSelected()) {
 				final String uri = searchEngineStore.getBaseUrl() + search.replace(" ", "%20");
-				return getHtmlPanel(uri);
+				return getHtmlPanel(uri, indexPanel);
 			}
 		}
 
 		final String uri = "https://www.google.com/search?q=" + search.replace(" ", "%20");
-		return getHtmlPanel(uri);
+		return getHtmlPanel(uri, indexPanel);
 	}
 }

@@ -12,7 +12,7 @@ public class TabbedHtml {
 
 	public void tab(BrowserPanel panel, String url, int index) {
 		final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-		final HtmlPanel hpanel = NavigationManager.getHtmlPanel(url);
+		final HtmlPanel hpanel = NavigationManager.getHtmlPanel(url, index);
 		hpanel.setBrowserPanel(panel);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	

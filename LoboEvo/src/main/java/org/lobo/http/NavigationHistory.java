@@ -16,12 +16,13 @@ public class NavigationHistory {
 
 	private final String HOST = "SELECT DISTINCT baseUrl FROM HOST LIMIT ?";
 
-	private final String INSERT_HOST = "INSERT INTO HOST (baseUrl) VALUES(?)";
+	private final String INSERT_HOST = "INSERT INTO HOST (baseUrl, tab) VALUES(?,?)";
 
-	public void addAsRecent(String uri) {
+	public void addAsRecent(String uri, int index) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_HOST)) {
 			pstmt.setString(1, new URL(uri).toExternalForm());
+			pstmt.setInt(2, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			e.printStackTrace();

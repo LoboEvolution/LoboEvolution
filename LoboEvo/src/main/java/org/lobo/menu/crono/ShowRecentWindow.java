@@ -125,7 +125,7 @@ public class ShowRecentWindow extends JFrame {
 						final BrowserPanel panel = frame.getPanel();
 						final int indexPanel = panel.getTabbedPane().getIndex() + 1;
 						final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-						HtmlPanel hpanel = NavigationManager.getHtmlPanel(vals[0]);
+						HtmlPanel hpanel = NavigationManager.getHtmlPanel(vals[0], indexPanel);
 						final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 						final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 						tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));

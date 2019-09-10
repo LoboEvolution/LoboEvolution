@@ -70,7 +70,7 @@ public class LoginButton extends JLabel {
 				panel.getTabbedPane().remove(indexPanel);
 				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(text.getText());
+				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(text.getText(), indexPanel);
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 				tabbedPane.insertTab(title, null, hpanel, title, indexPanel);

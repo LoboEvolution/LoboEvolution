@@ -126,7 +126,7 @@ public class GoogleChromeData extends BrowserData {
 				final List<String> hosts = getHostEntries(path);
 				for (final String host : hosts) {
 					final NavigationHistory nav = new NavigationHistory();
-					nav.addAsRecent(host);
+					nav.addAsRecent(host, -1);
 				}
 			}
 		} catch (final Exception e) {
