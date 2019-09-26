@@ -18,6 +18,8 @@ public class TabStore {
 	private static String DELETE_TAB_ALL = "DELETE FROM TAB";
 
 	private static String TAB = "SELECT url FROM TAB WHERE index_tab = ?";
+	
+	private static String TAB_URL = "SELECT DISTINCT url FROM TAB";
 
 	private static String TABS = "SELECT index_tab, url, title FROM TAB";
 	
@@ -83,6 +85,21 @@ public class TabStore {
 					ti.setUrl(rs.getString(2));
 					ti.setTitle(rs.getString(3));
 					urls.add(ti);
+				}
+			}
+		} catch (final Exception e) {
+			e.printStackTrace();
+		}
+		return urls;
+	}
+	
+	public static List<String> getUrls() {
+		List<String> urls = new ArrayList<String>();
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(TAB_URL)) {
+			try (ResultSet rs = pstmt.executeQuery()) {
+				while (rs != null && rs.next()) {
+					urls.add(rs.getString(1));
 				}
 			}
 		} catch (final Exception e) {

@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -36,7 +35,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 		setEnabled(false);
 		setFloatable(false);
 
-		this.addressBar = new JTextField(10) {
+		this.addressBar = new JTextField() {
 			private static final long serialVersionUID = 1L;
 
 			@Override
@@ -57,7 +56,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 				setBorder(new RoundedCornerBorder());
 			}
 		};
-
+		
 		final ClassLoader classLoader = getClass().getClassLoader();
 
 		ImageIcon icon = new ImageIcon(classLoader.getResource("org/lobo/image/back.png"));

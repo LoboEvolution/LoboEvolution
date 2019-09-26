@@ -6,6 +6,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 
 import org.lobo.common.Strings;
+import org.lobo.component.input.Autocomplete;
 import org.lobo.http.NavigationManager;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
@@ -44,5 +45,8 @@ public class GoAction extends AbstractAction {
 		
 		TabStore.deleteTab(indexPanel);
 		TabStore.insertTab(indexPanel, text, title);
+		addressBar.removeAll();
+		Autocomplete.setupAutoComplete(addressBar, TabStore.getUrls());
+		
 	}
 }
