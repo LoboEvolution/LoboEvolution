@@ -359,8 +359,6 @@ public class RBlockViewport extends BaseRCollection {
 			final UserAgentContext ucontext = bodyLayout.userAgentContext;
 			if (!ucontext.isScriptingEnabled()) {
 				bodyLayout.layoutMarkup(markupElement);
-			} else {
-				// NOP
 			}
 		}
 	}

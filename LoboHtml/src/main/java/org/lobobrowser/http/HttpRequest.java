@@ -107,7 +107,7 @@ public class HttpRequest {
 
 	private String statusText;
 
-	public HttpRequest(UserAgentContext context, java.net.Proxy proxy) {
+	public HttpRequest(UserAgentContext context, Proxy proxy) {
 		this.proxy = proxy;
 	}
 
@@ -270,8 +270,7 @@ public class HttpRequest {
 			final String password) throws IOException {
 		abort();
 		final Proxy proxy = this.proxy;
-		final URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection()
-				: url.openConnection(proxy);
+		final URLConnection c = proxy == null || proxy == Proxy.NO_PROXY ? url.openConnection() : url.openConnection(proxy);
 		synchronized (this) {
 			this.connection = c;
 			this.isAsync = asyncFlag;

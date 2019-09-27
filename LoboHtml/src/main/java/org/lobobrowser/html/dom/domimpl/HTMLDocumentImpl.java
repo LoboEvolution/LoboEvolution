@@ -311,8 +311,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public String getCookie() {
 		final SecurityManager sm = System.getSecurityManager();
 		if (sm != null) {
-			return (String) AccessController.doPrivileged((PrivilegedAction<Object>) () -> HTMLDocumentImpl.this.ucontext
-					.getCookie(HTMLDocumentImpl.this.documentURL));
+			return (String) AccessController.doPrivileged((PrivilegedAction<Object>) () -> HTMLDocumentImpl.this.ucontext.getCookie(HTMLDocumentImpl.this.documentURL));
 		} else {
 			return this.ucontext.getCookie(this.documentURL);
 		}

@@ -302,10 +302,6 @@ public class HtmlRendererContext {
 	 * different proxy setting.
 	 */
 	protected Proxy getProxy() {
-		final Object ucontext = getUserAgentContext();
-		if (ucontext instanceof UserAgentContext) {
-			return ((UserAgentContext) ucontext).getProxy();
-		}
 		return Proxy.NO_PROXY;
 	}
 
@@ -399,7 +395,7 @@ public class HtmlRendererContext {
 		}
 		
 		String fullURL = url.toString();
-		final HtmlPanel hpanel = htmlPanel.createHtmlPanel(fullURL );
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
 		hpanel.setBrowserPanel(bpanel);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";

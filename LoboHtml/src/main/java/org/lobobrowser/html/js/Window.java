@@ -491,7 +491,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		synchronized (this) {
 			Navigator nav = this.navigator;
 			if (nav == null) {
-				nav = new Navigator(this.uaContext);
+				nav = new Navigator();
 				this.navigator = nav;
 			}
 			return nav;

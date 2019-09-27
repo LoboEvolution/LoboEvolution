@@ -49,13 +49,9 @@ public class Executor {
 	 * @param ucontext
 	 */
 	public static Context createContext(java.net.URL codeSource, UserAgentContext ucontext) {
-		final Context prev = Context.getCurrentContext();
 		final Context ctx = Context.enter();
 		ctx.setLanguageVersion(Context.VERSION_1_8);
-		ctx.setOptimizationLevel(ucontext.getScriptingOptimizationLevel());
-		if (prev == null) {
-			ctx.setSecurityController(new SecurityControllerImpl(codeSource, ucontext.getSecurityPolicy()));
-		}
+		ctx.setOptimizationLevel(-1);
 		return ctx;
 	}
 

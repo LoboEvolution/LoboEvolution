@@ -21,51 +21,27 @@
 
 package org.lobobrowser.html.js;
 
-import org.lobobrowser.http.UserAgentContext;
+import org.lobo.net.HttpNetwork;
 import org.lobobrowser.js.AbstractScriptableDelegate;
 
 public class Navigator extends AbstractScriptableDelegate {
-	public class MimeTypesCollection {
-		// Class must be public to allow JavaScript access
-		public int getLength() {
-			return 0;
-		}
-
-		public Object item(int index) {
-			return null;
-		}
-
-		public Object namedItem(String name) {
-			return null;
-		}
-	}
-
-	private final UserAgentContext context;
-
+	
 	private MimeTypesCollection mimeTypes;
 
-	/**
-	 * @param context
-	 */
-	Navigator(UserAgentContext context) {
-		super();
-		this.context = context;
-	}
-
 	public String getAppCodeName() {
-		return this.context.getAppCodeName();
+		return this.getAppName();
 	}
 
 	public String getAppMinorVersion() {
-		return this.context.getAppMinorVersion();
+		return "99.3";
 	}
 
 	public String getAppName() {
-		return this.context.getAppName();
+		return "Lobo";
 	}
 
 	public String getAppVersion() {
-		return this.context.getAppVersion();
+		return "0";
 	}
 
 	public MimeTypesCollection getMimeTypes() {
@@ -80,23 +56,37 @@ public class Navigator extends AbstractScriptableDelegate {
 	}
 
 	public String getPlatform() {
-		return this.context.getPlatform();
+		return System.getProperty("os.name");
 	}
 
 	public String getProduct() {
-		return this.context.getProduct();
+		return this.getAppName();
 	}
 
 	public String getUserAgent() {
-		return this.context.getUserAgent();
+		return HttpNetwork.getUserAgentValue();
 	}
 
 	public String getVendor() {
-		return this.context.getVendor();
+		return "The Lobo Evolution";
 	}
 
 	public boolean javaEnabled() {
-		// True always?
 		return true;
+	}
+
+	public class MimeTypesCollection {
+		// Class must be public to allow JavaScript access
+		public int getLength() {
+			return 0;
+		}
+
+		public Object item(int index) {
+			return null;
+		}
+
+		public Object namedItem(String name) {
+			return null;
+		}
 	}
 }
