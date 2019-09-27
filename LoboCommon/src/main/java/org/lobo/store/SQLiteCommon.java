@@ -8,11 +8,19 @@ public class SQLiteCommon {
 
 	public static final String INSERT_COOKIES = "INSERT INTO COOKIE (cookieName, cookieValue, domain, path, expires, maxAge,secure, httponly) VALUES(?,?,?,?,?,?,?,?)";
 
-	public static final String INPUT = "SELECT DISTINCT value from INPUT where (name like ?) ";
+	public static final String SOURCE_CACHE = "SELECT source FROM cache WHERE baseUrl = ? AND type = ? AND strftime('%Y-%m-%d %H:%M:%S', lastModified) > strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime')";
+        
+    public static final String CHECK_CACHE = "SELECT count(*) FROM cache WHERE baseUrl = ? AND contenLenght = ? AND etag = ? AND type = ?";
+    
+    public static final String INSERT_CACHE = "INSERT INTO CACHE (baseUrl, source, contenLenght, etag, lastModified, type) VALUES(?,?,?,?,?,?)";
+    
+    public static final String INPUT = "SELECT DISTINCT value from INPUT where (name like ?) ";
 	
 	public static final String INSERT_INPUT= "INSERT INTO INPUT (name, value) VALUES(?,?)";
 	
 	public static final String DELETE_INPUT = "DELETE FROM INPUT";
+	
+    public static final String DELETE_SOURCE_CACHE = "DELETE FROM cache WHERE baseUrl = ? AND type = ? AND strftime('%Y-%m-%d %H:%M:%S', lastModified) < strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime')";
 	
 	/** The Constant SETTINGS_DIR. */
 	public static final String JDBC_SQLITE = "jdbc:sqlite:";

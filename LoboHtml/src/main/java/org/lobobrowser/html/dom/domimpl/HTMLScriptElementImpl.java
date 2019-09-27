@@ -29,6 +29,7 @@ import java.security.PrivilegedAction;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.lobo.store.ExternalResourcesStore;
 import org.lobobrowser.html.dom.HTMLScriptElement;
 import org.lobobrowser.html.js.Executor;
 import org.lobobrowser.http.HttpRequest;
@@ -111,44 +112,12 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			if (src == null) {
 				text = getText();
 				scriptURI = doc.getBaseURI();
-				baseLineNumber = 1; // TODO: Line number of inner text??
+				baseLineNumber = 1;
 			} else {
-				informExternalScriptLoading();
-				final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
+				this.informExternalScriptLoading();
+				URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 				scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-				try {
-					final HttpRequest request = bcontext.createHttpRequest();
-					// Perform a synchronous request
-					final SecurityManager sm = System.getSecurityManager();
-					if (sm == null) {
-						try {
-							request.open("GET", scriptURI, false);
-							request.send(null);
-						} catch (Exception thrown) {
-							logger.log(Level.WARNING, "processScript()", thrown);
-						}
-					} else {
-						AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-							// Code might have restrictions on accessing
-							// items from elsewhere.
-							try {
-								request.open("GET", scriptURI, false);
-								request.send(null);
-							} catch (final Exception thrown) {
-								logger.log(Level.WARNING, "processScript()", thrown);
-							}
-							return null;
-						});
-					}
-					final int status = request.getStatus();
-					if (status != 200 && status != 0) {
-						this.warn("Script at [" + scriptURI + "] failed to load; HTTP status: " + status + ".");
-						return;
-					}
-					text = request.getResponseText();
-				} catch (final Exception err) {
-					err.printStackTrace();
-				}
+				text = ExternalResourcesStore.getSourceCache(scriptURI, "JS");
 				baseLineNumber = 1;
 			}
 			final Context ctx = Executor.createContext(getDocumentURL(), bcontext);

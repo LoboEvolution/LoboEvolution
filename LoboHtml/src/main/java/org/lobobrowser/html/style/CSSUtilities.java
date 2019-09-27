@@ -33,6 +33,7 @@ import java.util.logging.Logger;
 
 import org.lobo.common.Strings;
 import org.lobo.common.Urls;
+import org.lobo.store.ExternalResourcesStore;
 import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.HttpRequest;
 import org.lobobrowser.http.UserAgentContext;
@@ -92,60 +93,16 @@ public class CSSUtilities {
 		}
 		return false;
 	}
+	
+	public static CSSStyleSheetImpl parseCssExternal(String href, HTMLDocumentImpl doc) throws Exception {
+		CSSOMParser parser = new CSSOMParser();
+		URL baseURL = new URL(doc.getBaseURI());
+		URL scriptURL = Urls.createURL(baseURL, href);
+		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
+		String source = ExternalResourcesStore.getSourceCache(scriptURI, "CSS");
+		InputSource is = getCssInputSourceForStyleSheet(source, doc.getBaseURI());
+		return parser.parseStyleSheet(is, null);
 
-	public static CSSStyleSheetImpl parse(Node ownerNode, String href, HTMLDocumentImpl doc, String baseUri,
-			boolean considerDoubleSlashComments) throws Exception {
-		final UserAgentContext bcontext = doc.getUserAgentContext();
-		final HttpRequest request = bcontext.createHttpRequest();
-		final URL baseURL = new URL(baseUri);
-		final URL scriptURL = Urls.createURL(baseURL, href);
-		final String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
-		// Perform a synchronous request
-		final SecurityManager sm = System.getSecurityManager();
-		if (sm == null) {
-			try {
-				request.open("GET", scriptURI, false);
-				request.send(null);
-			} catch (Exception thrown) {
-				logger.log(Level.WARNING, "parse()", thrown);
-			}
-
-		} else {
-			// Code might have restrictions on loading items from elsewhere.
-			AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-				try {
-					request.open("GET", scriptURI, false);
-					request.send(null);
-				} catch (Exception thrown) {
-					logger.log(Level.WARNING, "parse()", thrown);
-				}
-				return null;
-			});
-		}
-		final int status = request.getStatus();
-		if (status != 200 && status != 0) {
-			logger.warning("Unable to parse CSS. URI=[" + scriptURI + "]. Response status was " + status + ".");
-			return null;
-		}
-
-		final String text = request.getResponseText();
-		if (Strings.isNotBlank(text)) {
-			final String processedText = considerDoubleSlashComments ? preProcessCss(text) : text;
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-			final InputSource is = getCssInputSourceForStyleSheet(processedText, scriptURI);
-			is.setURI(scriptURI);
-			try {
-				final CSSStyleSheetImpl sheet = (CSSStyleSheetImpl) parser.parseStyleSheet(is, null);
-				sheet.setHref(scriptURI);
-				sheet.setOwnerNode(ownerNode);
-				return sheet;
-			} catch (final Throwable err) {
-				logger.log(Level.WARNING, "Unable to parse CSS. URI=[" + scriptURI + "].", err);
-				return null;
-			}
-		} else {
-			return null;
-		}
 	}
 	
 	public static SelectorList getSelectorList(final String selectors) {

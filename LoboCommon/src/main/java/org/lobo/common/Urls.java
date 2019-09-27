@@ -3,9 +3,17 @@ package org.lobo.common;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.StringTokenizer;
 
 public class Urls {
+	
+	/** The Constant PATTERN_RFC1123. */
+	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
 	public static URL createURL(URL baseUrl, String relativeUrl) throws Exception {
 		if (relativeUrl.contains("javascript:void")) {
@@ -105,5 +113,44 @@ public class Urls {
 			}
 		}
 		return sb.toString();
+	}
+	
+	public static Long getExpiration(URLConnection connection, long baseTime) {
+		String cacheControl = connection.getHeaderField("Cache-Control");
+		if (cacheControl != null) {
+			StringTokenizer tok = new StringTokenizer(cacheControl, ",");
+			while (tok.hasMoreTokens()) {
+				String token = tok.nextToken().trim().toLowerCase();
+				if ("must-revalidate".equals(token)) {
+					return Long.valueOf(0);
+				} else if (token.startsWith("max-age")) {
+					int eqIdx = token.indexOf('=');
+					if (eqIdx != -1) {
+						String value = token.substring(eqIdx + 1).trim();
+						try {
+							return Long.valueOf(baseTime + Integer.parseInt(value));
+						} catch (NumberFormatException nfe) {
+							nfe.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		String expires = connection.getHeaderField("Expires");
+		if (expires != null) {
+			try {
+				synchronized (PATTERN_RFC1123) {
+					Date expDate = PATTERN_RFC1123.parse(expires);
+					return Long.valueOf(expDate.getTime());
+				}
+			} catch (ParseException pe) {
+				try {
+					return Long.valueOf(baseTime + Integer.parseInt(expires));
+				} catch (NumberFormatException nfe) {
+					nfe.printStackTrace();
+				}
+			}
+		}
+		return null;
 	}
 }
