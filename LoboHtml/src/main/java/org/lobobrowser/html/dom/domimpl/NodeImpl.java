@@ -376,7 +376,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	@Override
 	public Node getFirstChild() {
-		return this.nodeList.get(0);
+		if (this.nodeList == null)
+			return null;
+
+		int size = this.nodeList.getLength();
+		if (size > 0)
+			return this.nodeList.get(0);
+		return null;
 	}
 
 	/*
