@@ -113,12 +113,11 @@ public class FontValues extends HtmlValues {
 
 	public static boolean getFontStrikeThrough(String spec) {
 		final String strikethrough = spec;
-
-		if (CSSValues.get(strikethrough) != null) {
+		if (CSSValues.get(strikethrough).equals(CSSValues.LINE_THROUGH)) {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 
-		if (strikethrough == null && new LAFSettings().getInstance().isUnderline()) {
+		if (strikethrough == null && new LAFSettings().getInstance().isStrikethrough()) {
 			return TextAttribute.STRIKETHROUGH_ON;
 		}
 		return false;
