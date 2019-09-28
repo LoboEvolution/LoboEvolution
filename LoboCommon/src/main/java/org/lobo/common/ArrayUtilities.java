@@ -17,8 +17,8 @@ public class ArrayUtilities {
 		return collection != null && !collection.isEmpty();
 	}
 
-	public static <T> Iterator<T> iterator(final T[] array, final int offset, final int length) {
-		return new ArrayIterator<>(array, offset, length);
+	public static Iterator iterator(Object[] array, int offset, int length) {
+		return new ArrayIterator(array, offset, length);
 	}
 	
 	public static <T> void moveItem(int sourceIndex, int targetIndex, List<T> list) {
