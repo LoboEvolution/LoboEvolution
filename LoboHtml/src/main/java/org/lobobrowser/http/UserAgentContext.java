@@ -26,6 +26,11 @@ public class UserAgentContext {
 		return settings.isCss();
 	}
 	
+	public boolean isNavigationEnabled() {
+		GeneralStore settings = GeneralStore.getNetwork();
+		return settings.isNavigation();
+	}
+	
 	public String getCookie(URL url) {
 		List<Cookie> cookies = CookieStore.getCookies(url.getHost(), url.getPath());
 		StringBuilder cookieText = new StringBuilder();

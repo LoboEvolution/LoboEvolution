@@ -135,15 +135,6 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 		return getAttribute("src");
 	}
 
-	/**
-	 * Gets input type in lowercase.
-	 */
-	@Override
-	public String getType() {
-		final String type = getAttribute("type");
-		return type == null ? null : type.toLowerCase();
-	}
-
 	@Override
 	public String getUseMap() {
 		return getAttribute("usemap");

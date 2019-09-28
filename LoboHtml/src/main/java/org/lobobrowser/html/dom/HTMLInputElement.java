@@ -194,6 +194,8 @@ public interface HTMLInputElement extends HTMLElement {
 	 * the element. See the value attribute definition in HTML 4.01.
 	 */
 	String getValue();
+	
+	boolean getAutocomplete();
 
 	/**
 	 * Select the contents of the text area. For <code>INPUT</code> elements whose

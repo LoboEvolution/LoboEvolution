@@ -125,6 +125,12 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 			ic.focus();
 		}
 	}
+	
+
+	public String getType() {
+		final String type = getAttribute("type");
+		return type == null ? null : type.toLowerCase();
+	}
 
 	public String getAccept() {
 		return getAttribute("accept");
@@ -162,6 +168,11 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	public boolean getChecked() {
 		final InputContext ic = this.inputContext;
 		return ic == null ? false : ic.getChecked();
+	}
+	
+	public boolean getAutocomplete() {
+		String autocomplete = this.getAttribute("autocomplete");
+		return "on".equalsIgnoreCase(autocomplete);
 	}
 
 	protected File getFileValue() {

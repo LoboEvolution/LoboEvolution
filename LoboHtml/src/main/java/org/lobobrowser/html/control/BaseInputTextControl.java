@@ -28,16 +28,24 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.PlainDocument;
 
+import org.lobo.common.ArrayUtilities;
 import org.lobo.common.Strings;
 import org.lobo.common.WrapperLayout;
+import org.lobo.component.input.Autocomplete;
+import org.lobo.store.InputStore;
 import org.lobobrowser.html.dom.domimpl.HTMLBaseInputElement;
 
 abstract class BaseInputTextControl extends BaseInputControl {
@@ -59,16 +67,38 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	public BaseInputTextControl(final HTMLBaseInputElement modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
+		final boolean autocomplete = modelNode.getAutocomplete();
+		final String id = modelNode.getId();
+		final String name = modelNode.getName();
+		final String type = modelNode.getType();
 		final JTextComponent widget = createTextField();
 		final Font font = widget.getFont();
 		widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
 		widget.setDocument(new LimitedDocument());
 		widget.setText(modelNode.getValue());
 		widget.setSelectionColor(Color.BLUE);
-		this.widget = widget;
-		if(Strings.isNotBlank(modelNode.getPlaceholder())) {
+
+		if (autocomplete && !"password".equalsIgnoreCase(type)) {
+			List<String> list = suggestionList(id, name, type);
+			if (ArrayUtilities.isNotBlank(list)) {
+				Autocomplete.setupAutoComplete((JTextField) widget, list);
+			}
+		}
+		
+        if(Strings.isNotBlank(modelNode.getPlaceholder())) {
 			placeholder(modelNode.getPlaceholder());
 		}
+		
+		widget.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent event) {
+				if (autocomplete && !"password".equalsIgnoreCase(type)) {
+					InputStore.insertLogin(id, name, type, widget.getText(), modelNode.getUserAgentContext().isNavigationEnabled());
+				}
+			}
+		});
+		
+		this.widget = widget;
 		this.add(widget);
 	}
 	
@@ -120,6 +150,29 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	}
 
 	@Override
+	public void reset(int availWidth, int availHeight) {
+		super.reset(availWidth, availHeight);
+		final RUIControl ruiControl = this.ruicontrol;
+		final Insets borderInsets = ruiControl.getBorderInsets();
+		final String maxLengthText = this.controlElement.getAttribute("max-length");
+		if (maxLengthText != null) {
+			try {
+				this.maxLength = Integer.parseInt(maxLengthText);
+			} catch (NumberFormatException nfe) {
+				nfe.printStackTrace();
+			}
+		}
+
+		widget.setMargin(new Insets(ruiControl.getMarginTop(), ruiControl.getMarginLeft(), ruiControl.getMarginBottom(), ruiControl.getMarginRight()));
+		if (borderInsets.top == 0 && borderInsets.left == 0 && borderInsets.bottom == 0 && borderInsets.right == 0) {
+			widget.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		} else {
+			widget.setBorder(BorderFactory.createMatteBorder(borderInsets.top, borderInsets.left, borderInsets.bottom, borderInsets.right, Color.BLACK));
+		}
+
+	}
+	
+	@Override
 	public boolean getReadOnly() {
 		return !this.widget.isEditable();
 	}
@@ -128,19 +181,6 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	@Override
 	public String getValue() {
 		return this.widget.getText();
-	}
-
-	@Override
-	public void reset(int availWidth, int availHeight) {
-		super.reset(availWidth, availHeight);
-		final String maxLengthText = this.controlElement.getAttribute("maxlength");
-		if (maxLengthText != null) {
-			try {
-				this.maxLength = Integer.parseInt(maxLengthText);
-			} catch (final NumberFormatException nfe) {
-				// ignore
-			}
-		}
 	}
 
 	@Override
@@ -186,6 +226,16 @@ abstract class BaseInputTextControl extends BaseInputControl {
 	public void setTextWrittenIn(boolean textWrittenIn) {
 		this.textWrittenIn = textWrittenIn;
 	}
+	
+	private List<String> suggestionList(String id, String name, String type) {
+        List<String> list = InputStore.autocomplete(id);
+        if(ArrayUtilities.isNotBlank(list)) return list;
+        list = InputStore.autocomplete(name);
+        if(ArrayUtilities.isNotBlank(list)) return list;
+        list = InputStore.autocomplete(type);
+        if(ArrayUtilities.isNotBlank(list)) return list;
+        return new ArrayList<String>();
+    }
 
 	private class LimitedDocument extends PlainDocument {
 
