@@ -54,7 +54,7 @@ public class ExternalResourcesStore {
 		final URLConnection con = url.openConnection();
 		String eTag = con.getHeaderField("Etag");
 		long lastModified = Urls.getExpiration(con, System.currentTimeMillis());
-		int contentLenght = Integer.parseInt(con.getHeaderField("Content-Length"));
+		int contentLenght = Integer.parseInt(con.getHeaderField("Content-Length") == null ? "0" : con.getHeaderField("Content-Length"));
 		String cacheControl = con.getHeaderField("Cache-Control");
 		boolean isNoStore = false;
 		if (cacheControl != null) {

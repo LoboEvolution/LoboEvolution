@@ -77,6 +77,7 @@ abstract class BaseInputTextControl extends BaseInputControl {
 		widget.setDocument(new LimitedDocument());
 		widget.setText(modelNode.getValue());
 		widget.setSelectionColor(Color.BLUE);
+		this.widget = widget;
 
 		if (autocomplete && !"password".equalsIgnoreCase(type)) {
 			List<String> list = suggestionList(id, name, type);
@@ -98,7 +99,6 @@ abstract class BaseInputTextControl extends BaseInputControl {
 			}
 		});
 		
-		this.widget = widget;
 		this.add(widget);
 	}
 	

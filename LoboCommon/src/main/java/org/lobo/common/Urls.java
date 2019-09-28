@@ -151,6 +151,6 @@ public class Urls {
 				}
 			}
 		}
-		return null;
+		return 0L;
 	}
 }
