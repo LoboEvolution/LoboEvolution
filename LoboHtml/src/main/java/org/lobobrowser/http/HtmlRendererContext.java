@@ -25,6 +25,7 @@ package org.lobobrowser.http;
 
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Window;
 import java.awt.event.MouseEvent;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
@@ -490,9 +492,24 @@ public class HtmlRendererContext {
 	 * @param replace        Whether an existing window with the same name should be
 	 *                       replaced.
 	 */
-	public HtmlRendererContext open(java.net.URL url, String windowName, String windowFeatures, boolean replace) {
-		this.warn("open(): Not overridden");
-		return null;
+	public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		int index = TabStore.getTabs().size();
+		String fullURL = url.toString();
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
+		hpanel.setBrowserPanel(bpanel);
+		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+		tabbedPane.insertTab(title, null, hpanel, title, index);
+		tabbedPane.setSelectedIndex(index);
+		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		browserFrame.getToolbar().getAddressBar().setText(fullURL);
+		TabStore.insertTab(index, fullURL, title);
+		LinkStore.insertLinkVisited(fullURL);
+		bpanel.getScroll().getViewport().add(tabbedPane);
+		return nodeImpl.getHtmlRendererContext();
 	}
 
 	/**
@@ -512,21 +529,21 @@ public class HtmlRendererContext {
 			try {
 				final URL url = new URL(document.getDocumentURI());
 				this.navigate(url, null);
-			} catch (final java.net.MalformedURLException throwable) {
+			} catch (final MalformedURLException throwable) {
 				this.warn("reload(): Malformed URL", throwable);
 			}
 		}
 	}
 
 	public void resizeBy(int byWidth, int byHeight) {
-		final java.awt.Window window = getWindow(this.htmlPanel);
+		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
 			window.setSize(window.getWidth() + byWidth, window.getHeight() + byHeight);
 		}
 	}
 
 	public void resizeTo(int width, int height) {
-		final java.awt.Window window = getWindow(this.htmlPanel);
+		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
 			window.setSize(width, height);
 		}

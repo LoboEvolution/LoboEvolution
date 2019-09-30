@@ -27,9 +27,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.WeakHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -254,12 +255,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
     private Scriptable windowScope;
     
- 	private static Random RANDOM1;
-    
-    private static Random RANDOM2;
-    
-    private static Random RANDOM3;
-
 	public Window(HtmlRendererContext rcontext, UserAgentContext uaContext) {
 		// TODO: Probably need to create a new Window instance
 		// for every document. Sharing of Window state between
@@ -672,8 +667,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	public Window open(String url) {
-		long lng = Math.abs(RANDOM1.nextLong() ^ RANDOM2.nextLong() ^ RANDOM3.nextLong());
-		return this.open(url, "window:" + String.valueOf(lng));
+		return this.open(url, "windows");
 	}
 
 	public Window open(String url, String windowName) {
@@ -687,14 +681,14 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public Window open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
-			java.net.URL url;
+			URL url;
 			final Object document = this.document;
 			if (document instanceof HTMLDocumentImpl) {
 				url = ((HTMLDocumentImpl) document).getFullURL(relativeUrl);
 			} else {
 				try {
-					url = new java.net.URL(relativeUrl);
-				} catch (final java.net.MalformedURLException mfu) {
+					url = new URL(relativeUrl);
+				} catch (final MalformedURLException mfu) {
 					throw new IllegalArgumentException("Malformed URI: " + relativeUrl);
 				}
 			}
