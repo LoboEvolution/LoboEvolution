@@ -22,6 +22,13 @@ public class SQLiteCommon {
 	
     public static final String DELETE_SOURCE_CACHE = "DELETE FROM cache WHERE baseUrl = ? AND type = ? AND strftime('%Y-%m-%d %H:%M:%S', lastModified) < strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime')";
 	
+    public static final String DELETE_LINK = "DELETE FROM LINK_VISITED";
+    
+    public static final String INSERT_LINK = "INSERT INTO LINK_VISITED VALUES(?)";
+    
+    public static final String LINK = "SELECT COUNT(*) FROM LINK_VISITED WHERE HREF = ?";
+        
+    
 	/** The Constant SETTINGS_DIR. */
 	public static final String JDBC_SQLITE = "jdbc:sqlite:";
 

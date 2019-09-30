@@ -31,8 +31,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import org.lobo.common.Strings;
+import org.lobo.store.LinkStore;
 import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLInputElement;
+import org.lobobrowser.html.dom.HTMLLinkElement;
 import org.lobobrowser.html.dom.HTMLSelectElement;
 import org.lobobrowser.html.dom.HTMLTextAreaElement;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
@@ -366,6 +368,15 @@ public class StyleSheetAggregator {
 		case "optional":
 			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
 					|| element instanceof HTMLTextAreaElement) && !element.hasAttribute("required");
+
+		case "link": 
+			return (element instanceof HTMLLinkElement);
+
+		case "visited":
+			if(element instanceof HTMLLinkElement) {
+				HTMLLinkElement elem = (HTMLLinkElement)element;
+				return LinkStore.isVisited(elem.getHref());
+			}
 
 		case "first-child":
 			for (Node n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {

@@ -50,6 +50,7 @@ import org.lobo.common.Urls;
 import org.lobo.component.IBrowserFrame;
 import org.lobo.component.IBrowserPanel;
 import org.lobo.net.HttpNetwork;
+import org.lobo.store.LinkStore;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
@@ -372,11 +373,8 @@ public class HtmlRendererContext {
 		return true;
 	}
 
-	/**
-	 * Should be overridden to return true if the link has been visited.
-	 */
-	public boolean isVisitedLink(HTMLElementImpl link) {
-		return false;
+	public boolean isVisitedLink(HTMLLinkElementImpl link) {
+		return LinkStore.isVisited(link.getHref());
 	}
 
 	/**
@@ -407,6 +405,7 @@ public class HtmlRendererContext {
 		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
 		browserFrame.getToolbar().getAddressBar().setText(fullURL);
 		TabStore.insertTab(index, fullURL, title);
+		LinkStore.insertLinkVisited(fullURL);
 		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 

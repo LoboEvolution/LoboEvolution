@@ -44,6 +44,11 @@ import org.w3c.dom.UserDataHandler;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLinkElement {
+	
+	private String COLOR_VISITED = "#551A8B";
+	
+	private String DEFAULT_COLOR = "Blue";
+	
 	private boolean disabled;
 
 	private CSSStyleSheetImpl styleSheet;
@@ -64,22 +69,24 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	}
 	
 	private Color linkColor() {
-		HTMLDocument doc = (HTMLDocument) this.document;
-		if (doc != null) {
-			HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
-			if (body != null) {
-				String vlink = body.getVLink();
-				String link = body.getLink();
-				if (vlink != null || link != null) {
-					HtmlRendererContext rcontext = this.getHtmlRendererContext();
-					if (rcontext != null) {
-						boolean visited = rcontext.isVisitedLink(this);
-						String colorText = visited ? vlink : link;
-						if (colorText != null) {
-							return ColorFactory.getInstance().getColor(colorText);
-						}
-					}
+		HtmlRendererContext rcontext = this.getHtmlRendererContext();
+		if (rcontext != null) {
+			boolean visited = rcontext.isVisitedLink(this);
+			String vlink = null;
+			String link = null;
+			HTMLDocument doc = (HTMLDocument) this.document;
+			if (doc != null) {
+				HTMLBodyElement body = (HTMLBodyElement) doc.getBody();
+				if (body != null) {
+					vlink = body.getVLink();
+					link = body.getLink();
 				}
+			}
+			vlink = (vlink == null) ? COLOR_VISITED : vlink;
+			link = (link == null) ? DEFAULT_COLOR : link;
+			String colorText = visited ? vlink : link;
+			if (colorText != null) {
+				return ColorFactory.getInstance().getColor(colorText);
 			}
 		}
 		return Color.BLUE;
