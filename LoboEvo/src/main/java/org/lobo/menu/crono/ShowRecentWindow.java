@@ -27,8 +27,8 @@ import javax.swing.table.TableRowSorter;
 import org.lobo.common.Strings;
 import org.lobo.component.BrowserFrame;
 import org.lobo.component.BrowserPanel;
-import org.lobo.http.NavigationHistory;
 import org.lobo.http.NavigationManager;
+import org.lobo.store.NavigationStore;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
@@ -102,7 +102,7 @@ public class ShowRecentWindow extends JFrame {
 	 */
 	private Component tablePane(BrowserFrame frame) {
 		final Object columnNames[] = { "" };
-		final NavigationHistory history = new NavigationHistory();
+		final NavigationStore history = new NavigationStore();
 		final List<String[]> hostEntries = history.getRecentHostEntries(100);
 		final JTable jtable = new JTable(hostEntries.toArray(new Object[][] {}), columnNames);
 		this.rowSorter = new TableRowSorter<>(jtable.getModel());

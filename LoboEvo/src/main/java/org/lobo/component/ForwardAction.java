@@ -7,7 +7,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JTextField;
 
 import org.lobo.common.Strings;
-import org.lobo.http.NavigationHistory;
+import org.lobo.store.NavigationStore;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
@@ -29,7 +29,7 @@ public class ForwardAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
-		NavigationHistory nh = new NavigationHistory();
+		NavigationStore nh = new NavigationStore();
 		final String url = this.addressBar.getText();
 		String text = url;
 		final int indexPanel = this.panel.getTabbedPane().getSelectedIndex();

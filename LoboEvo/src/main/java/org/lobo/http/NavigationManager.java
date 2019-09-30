@@ -8,6 +8,7 @@ import java.net.URLConnection;
 import java.util.List;
 
 import org.lobo.net.HttpNetwork;
+import org.lobo.store.NavigationStore;
 import org.lobo.store.SearchEngineStore;
 import org.lobo.store.ToolsStore;
 import org.lobobrowser.html.gui.HtmlPanel;
@@ -43,7 +44,7 @@ public class NavigationManager {
 	}
 
 	public static HtmlPanel getHtmlPanel(String uri, int index) {
-		final NavigationHistory history = new NavigationHistory();
+		final NavigationStore history = new NavigationStore();
 		CookieManager.putCookies(uri);
 		history.addAsRecent(uri,index);
 		return HtmlPanel.createHtmlPanel(uri);

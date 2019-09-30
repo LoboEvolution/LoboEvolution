@@ -13,10 +13,10 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.lobo.http.CookieManager;
-import org.lobo.http.NavigationHistory;
 import org.lobo.info.BookmarkInfo;
 import org.lobo.info.CookieInfo;
 import org.lobo.store.BookmarksStore;
+import org.lobo.store.NavigationStore;
 import org.lobo.store.SQLiteCommon;
 
 public class GoogleChromeData extends BrowserData {
@@ -125,7 +125,7 @@ public class GoogleChromeData extends BrowserData {
 			for (final String path : files) {
 				final List<String> hosts = getHostEntries(path);
 				for (final String host : hosts) {
-					final NavigationHistory nav = new NavigationHistory();
+					final NavigationStore nav = new NavigationStore();
 					nav.addAsRecent(host, -1);
 				}
 			}

@@ -3,8 +3,8 @@ package org.lobo.menu.tools.clear;
 import java.io.File;
 
 import org.lobo.http.CookieManager;
-import org.lobo.http.NavigationHistory;
 import org.lobo.store.BookmarksStore;
+import org.lobo.store.NavigationStore;
 import org.lobo.store.SQLiteCommon;
 import org.lobo.store.ToolsStore;
 
@@ -40,7 +40,7 @@ public class ClearHistory {
 	protected void clearNavigation() {
 		final ToolsStore ts = new ToolsStore();
 		ts.deleteSearchEngine();
-		final NavigationHistory hist = new NavigationHistory();
+		final NavigationStore hist = new NavigationStore();
 		hist.deleteHost();
 
 	}

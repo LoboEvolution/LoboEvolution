@@ -38,12 +38,14 @@ import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JTextField;
 
 import org.lobo.common.BufferExceededException;
 import org.lobo.common.RecordedInputStream;
@@ -51,8 +53,10 @@ import org.lobo.common.Strings;
 import org.lobo.common.Urls;
 import org.lobo.component.IBrowserFrame;
 import org.lobo.component.IBrowserPanel;
+import org.lobo.component.IToolBar;
 import org.lobo.net.HttpNetwork;
 import org.lobo.store.LinkStore;
+import org.lobo.store.NavigationStore;
 import org.lobo.store.TabStore;
 import org.lobo.tab.DnDTabbedPane;
 import org.lobo.tab.TabbedPanePopupMenu;
@@ -137,9 +141,37 @@ public class HtmlRendererContext {
 	 * be overridden.
 	 */
 	public void back() {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "back() does nothing, unless overridden.");
-		}
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		final IToolBar toolbar = browserFrame.getToolbar();
+		final JTextField addressBar = toolbar.getAddressBar();
+		String url = addressBar.getText();
+		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		NavigationStore nh = new NavigationStore();
+        
+        final int indexPanel = tabbedPane.getSelectedIndex();
+        List<String> tabsById = nh.getHostOrdered(indexPanel);
+        
+        for (int i = 0; i < tabsById.size(); i++) {
+            String tab = tabsById.get(i);
+            if(tab.equals(url) && i > 0) {
+            	url = tabsById.get(i - 1);
+            }
+        }
+
+        final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(url);
+    	hpanel.setBrowserPanel(bpanel);
+		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+        tabbedPane.remove(indexPanel);
+        tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
+		
+        browserFrame.getToolbar().getAddressBar().setText(url);
+        bpanel.getScroll().getViewport().add(tabbedPane);
+        
+        TabStore.deleteTab(indexPanel);
+        TabStore.insertTab(indexPanel, url, title);
 	}
 
 	/**
@@ -197,8 +229,6 @@ public class HtmlRendererContext {
 		}
 	}
 
-	// Methods useful to Window below:
-
 	/**
 	 * It should request focus for the current browser window. This implementation
 	 * does nothing and should be overridden.
@@ -208,9 +238,37 @@ public class HtmlRendererContext {
 	}
 
 	public void forward() {
-		if (logger.isLoggable(Level.WARNING)) {
-			logger.log(Level.WARNING, "forward() does nothing, unless overridden.");
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+		final IToolBar toolbar = browserFrame.getToolbar();
+		final JTextField addressBar = toolbar.getAddressBar();
+		String url = addressBar.getText();
+		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+		NavigationStore nh = new NavigationStore();
+        
+        final int indexPanel = tabbedPane.getSelectedIndex();
+        List<String> tabsById = nh.getHostOrdered(indexPanel);
+        
+		for (int i = 0; i < tabsById.size(); i++) {
+			String tab = tabsById.get(i);
+			if (tab.equals(url) && i < tabsById.size() - 1) {
+				url = tabsById.get(i + 1);
+			}
 		}
+
+        final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(url);
+    	hpanel.setBrowserPanel(bpanel);
+		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+        tabbedPane.remove(indexPanel);
+        tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
+		
+        browserFrame.getToolbar().getAddressBar().setText(url);
+        bpanel.getScroll().getViewport().add(tabbedPane);
+        
+        TabStore.deleteTab(indexPanel);
+        TabStore.insertTab(indexPanel, url, title);
 	}
 
 	public String getCurrentURL() {
@@ -339,8 +397,7 @@ public class HtmlRendererContext {
 	public UserAgentContext getUserAgentContext() {
 		synchronized (this) {
 			if (this.bcontext == null) {
-				this.warn(
-						"getUserAgentContext(): UserAgentContext not provided in constructor. Creating a simple one.");
+				this.warn("getUserAgentContext(): UserAgentContext not provided in constructor. Creating a simple one.");
 				this.bcontext = new UserAgentContext();
 			}
 			return this.bcontext;

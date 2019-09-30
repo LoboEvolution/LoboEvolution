@@ -1,4 +1,4 @@
-package org.lobo.http;
+package org.lobo.store;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -8,9 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.lobo.store.SQLiteCommon;
-
-public class NavigationHistory {
+public class NavigationStore {
 
 	private final String DELETE_HOST = "DELETE FROM HOST";
 
