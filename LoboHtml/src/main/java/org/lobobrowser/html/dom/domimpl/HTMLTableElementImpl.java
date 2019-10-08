@@ -57,7 +57,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	@Override
 	public HTMLElement createCaption() {
-		final org.w3c.dom.Document doc = this.document;
+		final Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("caption");
 	}
 
@@ -68,14 +68,20 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	@Override
 	public HTMLElement createTFoot() {
-		final org.w3c.dom.Document doc = this.document;
+		final Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("tfoot");
 	}
 
 	@Override
 	public HTMLElement createTHead() {
-		final org.w3c.dom.Document doc = this.document;
+		final Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("thead");
+	}
+	
+	@Override
+	public HTMLElement createTBody() {
+		Document doc = this.document;
+		return doc == null ? null : (HTMLElement) doc.createElement("tbody");
 	}
 
 	@Override
@@ -105,6 +111,11 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	@Override
 	public void deleteTHead() {
 		removeChildren(new ElementFilter("THEAD"));
+	}
+	
+	@Override
+	public void deleteTBody() {
+		removeChildren(new ElementFilter("TBODY"));
 	}
 
 	@Override

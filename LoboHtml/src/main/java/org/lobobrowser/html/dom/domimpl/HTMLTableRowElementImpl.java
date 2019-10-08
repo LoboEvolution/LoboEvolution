@@ -29,14 +29,22 @@ import org.lobobrowser.html.dom.HTMLElement;
 import org.lobobrowser.html.dom.HTMLTableCellElement;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
 import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.renderstate.RenderState;
+import org.lobobrowser.html.renderstate.TableRowRenderState;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement {
+	
 	public HTMLTableRowElementImpl() {
 		super("TR", true);
 	}
+	
+    @Override
+    protected RenderState createRenderState(RenderState prevRenderState) {
+        return new TableRowRenderState(prevRenderState, this);
+    }
 
 	public HTMLTableRowElementImpl(String name) {
 		super(name, true);

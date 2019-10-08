@@ -110,6 +110,13 @@ public abstract class HTMLElementBuilder {
 			return new HTMLCenterElementImpl(name);
 		}
 	}
+	
+	public static class Caption extends HTMLElementBuilder {
+		@Override
+		public HTMLElementImpl build(String name) {
+			return new HTMLTableCaptionElementImpl(name);
+		}
+	}
 
 	public static class Code extends HTMLElementBuilder {
 		@Override

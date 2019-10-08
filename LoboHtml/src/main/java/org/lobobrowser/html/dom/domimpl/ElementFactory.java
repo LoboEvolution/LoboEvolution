@@ -54,7 +54,7 @@ class ElementFactory {
 
 		builders.put(HTMLTag.BODY, new HTMLElementBuilder.Body());
 		builders.put(HTMLTag.CENTER, new HTMLElementBuilder.Center());
-		builders.put(HTMLTag.CAPTION, new HTMLElementBuilder.Center());
+		builders.put(HTMLTag.CAPTION, new HTMLElementBuilder.Caption());
 		builders.put(HTMLTag.PRE, new HTMLElementBuilder.Pre());
 		builders.put(HTMLTag.P, new HTMLElementBuilder.P());
 

@@ -20,14 +20,19 @@
 */
 package org.lobobrowser.html.dom.filter;
 
-import org.lobobrowser.html.dom.HTMLTableCellElement;
 import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.renderstate.RenderState;
 import org.w3c.dom.Node;
 
 public class ColumnsFilter implements NodeFilter {
 
 	@Override
 	public final boolean accept(Node node) {
-		return node instanceof HTMLTableCellElement;
+        if (node instanceof HTMLElementImpl) {
+            final HTMLElementImpl elem = (HTMLElementImpl) node;
+            return elem.getRenderState().getDisplay() == RenderState.DISPLAY_TABLE_CELL;
+        }
+        return false;
 	}
 }

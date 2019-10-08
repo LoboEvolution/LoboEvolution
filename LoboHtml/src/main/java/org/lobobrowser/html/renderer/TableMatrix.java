@@ -32,13 +32,17 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.lobo.common.Nodes;
+import org.lobo.info.CaptionSizeInfo;
 import org.lobo.info.SizeInfo;
 import org.lobobrowser.html.dom.HTMLTableRowElement;
 import org.lobobrowser.html.dom.NodeFilter;
+import org.lobobrowser.html.dom.filter.CaptionFilter;
 import org.lobobrowser.html.dom.filter.ColumnsFilter;
 import org.lobobrowser.html.renderstate.RenderState;
 import org.lobobrowser.html.renderstate.RenderThreadState;
+import org.lobobrowser.html.dom.domimpl.HTMLCollectionImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLTableCaptionElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableElementImpl;
 import org.lobobrowser.html.dom.domimpl.HTMLTableRowElementImpl;
@@ -47,40 +51,43 @@ import org.lobobrowser.html.style.HtmlLength;
 import org.lobobrowser.html.style.HtmlValues;
 import org.lobobrowser.http.HtmlRendererContext;
 import org.lobobrowser.http.UserAgentContext;
+import org.loboevolution.html.renderertable.RTableCaption;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 class TableMatrix {
 
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
-
+	
+	private final ArrayList<HTMLTableRowElement> ROW_ELEMENTS = new ArrayList<HTMLTableRowElement>();
+	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
 	private final ArrayList<RTableCell> ALL_CELLS = new ArrayList<RTableCell>();
-	private BoundableRenderable armedRenderable;
-	private int cellSpacingX;
-	private int cellSpacingY;
+	
 	private SizeInfo[] columnSizes;
-
+	private SizeInfo[] rowSizes;
+	private CaptionSizeInfo captionSize;
+	
 	private final RenderableContainer container;
 	private final FrameContext frameContext;
-	private int hasOldStyleBorder;
-	private int heightsOfExtras;
-
 	private final UserAgentContext parserContext;
-
-	private final RElement relement;
-
 	private final HtmlRendererContext rendererContext;
 
-	private final ArrayList<HTMLTableRowElement> ROW_ELEMENTS = new ArrayList<HTMLTableRowElement>();
-
-	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
-	private SizeInfo[] rowSizes;
-	private final HTMLElementImpl tableElement;
-
+	private int cellSpacingX;
+	private int cellSpacingY;
+	private int hasOldStyleBorder;
+	private int heightsOfExtras;
 	private int tableHeight;
 	private int tableWidth;
-	private HtmlLength tableWidthLength;
 	private int widthsOfExtras;
+
+	private final RElement relement;
+	private final HTMLElementImpl tableElement;
+	private HTMLTableCaptionElementImpl captionElement;
+	private BoundableRenderable armedRenderable;
+
+	private RTableCaption caption;
+	private HtmlLength tableWidthLength;
+	
 
 	/**
 	 * @param element
@@ -285,7 +292,7 @@ class TableMatrix {
 		}
 	}
 
-	private int adjustWidthsForExpectedMax(SizeInfo[] columnSizes, int cellAvailWidth, boolean expand) {
+	private int adjustWidthsForExpectedMax(SizeInfo[] columnSizes, int cellAvailWidth, boolean expand, int captionWith, int widthOfExtras) {
 		final int hasBorder = this.hasOldStyleBorder;
 		final int cellSpacingX = this.cellSpacingX;
 		int currentTotal = 0;
@@ -296,128 +303,25 @@ class TableMatrix {
 		int difference = currentTotal - cellAvailWidth;
 		if (difference > 0 || difference < 0 && expand) {
 			// First, try to contract/expand columns with no width
-			int noWidthTotal = 0;
-			int numNoWidth = 0;
-			for (int i = 0; i < numCols; i++) {
-				if (columnSizes[i].htmlLength == null) {
-					numNoWidth++;
-					noWidthTotal += columnSizes[i].actualSize;
+			currentTotal = expandColumns(columnSizes, cellAvailWidth, expand, hasBorder, cellSpacingX, currentTotal, numCols, difference);
+		}
+		
+		if (this.captionSize != null) {
+			if (cellAvailWidth + widthOfExtras > captionWith) {
+				int differenceCaption = currentTotal - captionWith - widthOfExtras;
+				if (differenceCaption < 0) {
+					currentTotal = expandColumns(columnSizes, captionWith, expand, hasBorder, cellSpacingX, currentTotal, numCols, differenceCaption);
 				}
-			}
-			if (noWidthTotal > 0) {
-				// TODO: This is not shrinking correctly.
-				int expectedNoWidthTotal = noWidthTotal - difference;
-				if (expectedNoWidthTotal < 0) {
-					expectedNoWidthTotal = 0;
-				}
-				final double ratio = (double) expectedNoWidthTotal / noWidthTotal;
-				int noWidthCount = 0;
-				for (int i = 0; i < numCols; i++) {
-					final SizeInfo sizeInfo = columnSizes[i];
-					if (sizeInfo.htmlLength == null) {
-						final int oldActualSize = sizeInfo.actualSize;
-						int newActualSize;
-						if (++noWidthCount == numNoWidth) {
-							// Last column without a width.
-							final int currentDiff = currentTotal - cellAvailWidth;
-							newActualSize = oldActualSize - currentDiff;
-							if (newActualSize < 0) {
-								newActualSize = 0;
-							}
-						} else {
-							newActualSize = (int) Math.round(oldActualSize * ratio);
-						}
-						sizeInfo.actualSize = newActualSize;
-						if (newActualSize < sizeInfo.layoutSize) {
-							// See if it actually fits.
-							layoutColumn(columnSizes, sizeInfo, i, cellSpacingX, hasBorder);
-							if (newActualSize < sizeInfo.layoutSize) {
-								// Didn't fit.
-								newActualSize = sizeInfo.layoutSize;
-								sizeInfo.actualSize = newActualSize;
-							}
-						}
-						currentTotal += newActualSize - oldActualSize;
-					}
-				}
-				difference = currentTotal - cellAvailWidth;
-			}
-
-			// See if absolutes need to be contracted
-			if (difference > 0 || difference < 0 && expand) {
-				int absoluteWidthTotal = 0;
-				for (int i = 0; i < numCols; i++) {
-					final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
-					if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
-						absoluteWidthTotal += columnSizes[i].actualSize;
-					}
-				}
-				if (absoluteWidthTotal > 0) {
-					int expectedAbsoluteWidthTotal = absoluteWidthTotal - difference;
-					if (expectedAbsoluteWidthTotal < 0) {
-						expectedAbsoluteWidthTotal = 0;
-					}
-					final double ratio = (double) expectedAbsoluteWidthTotal / absoluteWidthTotal;
-					for (int i = 0; i < numCols; i++) {
-						final SizeInfo sizeInfo = columnSizes[i];
-						final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
-						if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
-							final int oldActualSize = sizeInfo.actualSize;
-							int newActualSize = (int) Math.round(oldActualSize * ratio);
-							sizeInfo.actualSize = newActualSize;
-							if (newActualSize < sizeInfo.layoutSize) {
-								// See if it actually fits.
-								layoutColumn(columnSizes, sizeInfo, i, cellSpacingX, hasBorder);
-								if (newActualSize < sizeInfo.layoutSize) {
-									// Didn't fit.
-									newActualSize = sizeInfo.layoutSize;
-									sizeInfo.actualSize = newActualSize;
-								}
-							}
-							currentTotal += newActualSize - oldActualSize;
-						}
-					}
-					difference = currentTotal - cellAvailWidth;
-				}
-
-				// See if percentages need to be contracted
-				if (difference > 0 || difference < 0 && expand) {
-					int percentWidthTotal = 0;
-					for (int i = 0; i < numCols; i++) {
-						final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
-						if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
-							percentWidthTotal += columnSizes[i].actualSize;
-						}
-					}
-					if (percentWidthTotal > 0) {
-						int expectedPercentWidthTotal = percentWidthTotal - difference;
-						if (expectedPercentWidthTotal < 0) {
-							expectedPercentWidthTotal = 0;
-						}
-						final double ratio = (double) expectedPercentWidthTotal / percentWidthTotal;
-						for (int i = 0; i < numCols; i++) {
-							final SizeInfo sizeInfo = columnSizes[i];
-							final HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
-							if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
-								final int oldActualSize = sizeInfo.actualSize;
-								int newActualSize = (int) Math.round(oldActualSize * ratio);
-								sizeInfo.actualSize = newActualSize;
-								if (newActualSize < sizeInfo.layoutSize) {
-									// See if it actually fits.
-									layoutColumn(columnSizes, sizeInfo, i, cellSpacingX, hasBorder);
-									if (newActualSize < sizeInfo.layoutSize) {
-										// Didn't fit.
-										newActualSize = sizeInfo.layoutSize;
-										sizeInfo.actualSize = newActualSize;
-									}
-								}
-								currentTotal += newActualSize - oldActualSize;
-							}
-						}
-					}
+				this.captionSize.setWidth(currentTotal + widthOfExtras);
+			} else {
+				if (currentTotal + widthOfExtras > captionWith) {
+					this.captionSize.setWidth(currentTotal + widthOfExtras);
+				} else {
+					currentTotal = expandColumns(columnSizes, captionWith - widthOfExtras, expand, hasBorder, cellSpacingX, currentTotal, numCols, currentTotal);
 				}
 			}
 		}
+		
 		return currentTotal;
 	}
 
@@ -446,12 +350,12 @@ class TableMatrix {
 			}
 			final SizeInfo rowSizeInfo = new SizeInfo();
 			rowSizes[i] = rowSizeInfo;
-			HTMLTableRowElement rowElement = rowElements.size() > i ? rowElements.get(i) : null;
+			HTMLTableRowElementImpl rowElement = rowElements.size() > i ? (HTMLTableRowElementImpl)rowElements.get(i) : null;
 			final String rowHeightText = rowElement == null ? null : rowElement.getAttribute("height");
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
 				try {
-					rowHeightLength = new HtmlLength(rowHeightText);
+                    rowHeightLength = new HtmlLength(HtmlValues.getPixelSize(rowHeightText, rowElement.getRenderState(), 0));
 				} catch (final Exception err) {
 					// ignore
 				}
@@ -510,6 +414,10 @@ class TableMatrix {
 			final SizeInfo colSizeInfo = new SizeInfo();
 			colSizeInfo.htmlLength = bestWidthLength;
 			columnSizes[i] = colSizeInfo;
+		}
+		
+		if (this.caption != null) {
+			this.captionSize = new CaptionSizeInfo();
 		}
 	}
 
@@ -571,7 +479,8 @@ class TableMatrix {
 
 		// Adjust for expected total width
 
-		adjustWidthsForExpectedMax(columnSizes, cellAvailWidth, widthKnown);
+		adjustWidthsForExpectedMax(columnSizes, cellAvailWidth, widthKnown,
+				captionSize != null ? captionSize.getWidth() : 0, widthsOfExtras);
 	}
 
 	private void determineRowSizes(int hasBorder, int cellSpacing, int availHeight, boolean sizeOnly) {
@@ -650,7 +559,6 @@ class TableMatrix {
 			final SizeInfo rowSizeInfo = rowSizes[i];
 			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength != null && heightLength.getLengthType() != HtmlLength.LENGTH) {
-				// TODO: MULTI-LENGTH not supported
 				int actualSizeInt = heightLength.getRawValue();
 				if (actualSizeInt < rowSizeInfo.minSize) {
 					actualSizeInt = rowSizeInfo.minSize;
@@ -662,8 +570,6 @@ class TableMatrix {
 				noHeightMinSize += rowSizeInfo.minSize;
 			}
 		}
-
-		// Check if absolute sizing is too much
 
 		if (heightUsedByAbsolute + heightUsedbyPercent + noHeightMinSize > cellAvailHeight) {
 			final double ratio = (double) (cellAvailHeight - noHeightMinSize - heightUsedbyPercent)
@@ -700,6 +606,10 @@ class TableMatrix {
 				rowSizeInfo.actualSize = actualSizeInt;
 			}
 		}
+		
+		if (captionSize != null) {
+			heightUsedByRemaining += captionSize.getHeight();
+		}
 
 		// Calculate actual table width
 
@@ -717,11 +627,6 @@ class TableMatrix {
 			this.tableHeight = tableHeight;
 		}
 
-		// TODO:
-		// This final render is probably unnecessary. Avoid exponential rendering
-		// by setting a single height of subcell. Verify that IE only sets height
-		// of subcells when height of row or table are specified.
-
 		finalRender(hasBorder, cellSpacing, sizeOnly);
 	}
 
@@ -737,7 +642,6 @@ class TableMatrix {
 			final SizeInfo rowSizeInfo = rowSizes[i];
 			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.htmlLength;
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.PIXELS) {
-				// TODO: MULTI-LENGTH not supported
 				int actualSizeInt = heightLength.getRawValue();
 				if (actualSizeInt < rowSizeInfo.minSize) {
 					actualSizeInt = rowSizeInfo.minSize;
@@ -820,7 +724,6 @@ class TableMatrix {
 			final SizeInfo colSizeInfo = columnSizes[i];
 			final HtmlLength widthLength = (HtmlLength)colSizeInfo.htmlLength;
 			if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
-				// TODO: MULTI-LENGTH not supported
 				final int actualSizeInt = widthLength.getRawValue();
 				widthUsedByAbsolute += actualSizeInt;
 				colSizeInfo.actualSize = actualSizeInt;
@@ -828,10 +731,6 @@ class TableMatrix {
 				numNoWidthColumns++;
 			}
 		}
-
-		// Contract if necessary. This is done again later, but this is
-		// an optimization, as it may prevent re-layout. It is only done
-		// if all columns have some kind of declared width.
 
 		if (numNoWidthColumns == 0) {
 			int totalWidthUsed = widthUsedByPercent + widthUsedByAbsolute;
@@ -888,44 +787,56 @@ class TableMatrix {
 
 		// Set row offsets
 
-		final SizeInfo[] rowSizes = this.rowSizes;
-		final int numRows = rowSizes.length;
+		SizeInfo[] rowSizes = this.rowSizes;
+		int numRows = rowSizes.length;
 		int yoffset = insets.top;
-		final int cellSpacingY = this.cellSpacingY;
-		final int hasBorder = this.hasOldStyleBorder;
+		int cellSpacingY = this.cellSpacingY;
+		int hasBorder = this.hasOldStyleBorder;
+
+		if (this.captionSize != null && !isCaptionBotton()) {
+			yoffset += this.captionSize.getHeight();
+			yoffset += hasBorder;
+		}
 		for (int i = 0; i < numRows; i++) {
 			yoffset += cellSpacingY;
 			yoffset += hasBorder;
-			final SizeInfo rowSizeInfo = rowSizes[i];
+			SizeInfo rowSizeInfo = rowSizes[i];
 			rowSizeInfo.offset = yoffset;
 			yoffset += rowSizeInfo.actualSize;
 			yoffset += hasBorder;
 		}
+		if (this.captionSize != null && isCaptionBotton()) {
+			this.captionSize.setHeightOffset(yoffset + insets.bottom);
+			yoffset += this.captionSize.getHeight();
+			yoffset += hasBorder;
+		}
+
 		this.tableHeight = yoffset + cellSpacingY + insets.bottom;
 
 		// Set colum offsets
 
-		final SizeInfo[] colSizes = this.columnSizes;
-		final int numColumns = colSizes.length;
+		SizeInfo[] colSizes = this.columnSizes;
+		int numColumns = colSizes.length;
 		int xoffset = insets.left;
-		final int cellSpacingX = this.cellSpacingX;
+		int cellSpacingX = this.cellSpacingX;
 		for (int i = 0; i < numColumns; i++) {
 			xoffset += cellSpacingX;
 			xoffset += hasBorder;
-			final SizeInfo colSizeInfo = colSizes[i];
+			SizeInfo colSizeInfo = colSizes[i];
 			colSizeInfo.offset = xoffset;
 			xoffset += colSizeInfo.actualSize;
 			xoffset += hasBorder;
 		}
+
 		this.tableWidth = xoffset + cellSpacingX + insets.right;
 
-		// Set offsets of each cell
-
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
-		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		for (RTableCell cell : allCells) {
 			cell.setCellBounds(colSizes, rowSizes, hasBorder, cellSpacingX, cellSpacingY);
+		}
+		
+		if (this.caption != null) {
+			this.caption.setBounds(0, this.captionSize.getHeightOffset(), this.tableWidth, this.captionSize.getHeight());
 		}
 	}
 
@@ -984,6 +895,11 @@ class TableMatrix {
 					rowSizes[row].actualSize += size.height - totalCellHeight;
 				}
 			}
+		}
+		
+		if (this.captionSize != null) {
+			this.caption.doLayout(this.captionSize.getWidth(), this.captionSize.getHeight(), true, true, null,
+					RenderState.OVERFLOW_NONE, RenderState.OVERFLOW_NONE, true);
 		}
 	}
 
@@ -1046,71 +962,6 @@ class TableMatrix {
 	 */
 	public int getTableWidth() {
 		return this.tableWidth;
-	}
-
-
-	private void layoutColumn(SizeInfo[] columnSizes, SizeInfo colSize, int col, int cellSpacingX, int hasBorder) {
-		final SizeInfo[] rowSizes = this.rowSizes;
-		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
-		final int numRows = rows.size();
-		final int actualSize = colSize.actualSize;
-		colSize.layoutSize = 0;
-		for (int row = 0; row < numRows;) {
-			// SizeInfo rowSize = rowSizes[row];
-			final ArrayList<VirtualCell> columns = rows.get(row);
-			VirtualCell vc = columns.size() > row ? columns.get(row) : null;
-			final RTableCell ac = vc == null ? null : vc.getActualCell();
-			if (ac != null) {
-				if (ac.getVirtualRow() == row) {
-					// Only process actual cells with a row
-					// beginning at the current row being processed.
-					final int colSpan = ac.getColSpan();
-					if (colSpan > 1) {
-						final int firstCol = ac.getVirtualColumn();
-						final int cellExtras = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
-						int vcActualWidth = cellExtras;
-						for (int x = 0; x < colSpan; x++) {
-							vcActualWidth += columnSizes[firstCol + x].actualSize;
-						}
-						// TODO: better height possible
-						final Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
-						final int vcRenderWidth = size.width;
-
-						final int denominator = vcActualWidth - cellExtras;
-						int newTentativeCellWidth;
-						if (denominator > 0) {
-							newTentativeCellWidth = actualSize * (vcRenderWidth - cellExtras) / denominator;
-						} else {
-							newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
-						}
-						if (newTentativeCellWidth > colSize.layoutSize) {
-							colSize.layoutSize = newTentativeCellWidth;
-						}
-						final int rowSpan = ac.getRowSpan();
-						final int vch = (size.height - (rowSpan - 1) * (this.cellSpacingY + 2 * hasBorder)) / rowSpan;
-						for (int y = 0; y < rowSpan; y++) {
-							if (rowSizes[row + y].minSize < vch) {
-								rowSizes[row + y].minSize = vch;
-							}
-						}
-					} else {
-						// TODO: better height possible
-						final Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
-						if (size.width > colSize.layoutSize) {
-							colSize.layoutSize = size.width;
-						}
-						final int rowSpan = ac.getRowSpan();
-						final int vch = (size.height - (rowSpan - 1) * (this.cellSpacingY + 2 * hasBorder)) / rowSpan;
-						for (int y = 0; y < rowSpan; y++) {
-							if (rowSizes[row + y].minSize < vch) {
-								rowSizes[row + y].minSize = vch;
-							}
-						}
-					}
-				}
-			}
-			row++;
-		}
 	}
 
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
@@ -1235,7 +1086,6 @@ class TableMatrix {
 		final int numCells = allCells.size();
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
-			// Should clip table cells, just in case.
 			final Graphics newG = g.create(cell.x, cell.y, cell.width, cell.height);
 			try {
 				cell.paint(newG);
@@ -1243,21 +1093,17 @@ class TableMatrix {
 				newG.dispose();
 			}
 		}
+		
+		if (this.caption != null) {
+			Graphics newG = g.create(this.caption.x, this.caption.y, this.caption.width, this.caption.height);
+			try {
+				this.caption.paint(newG);
+			} finally {
+				newG.dispose();
+			}
+		}
 
 		if (this.hasOldStyleBorder > 0) {
-//			// Paint table border
-//			
-//			int tableWidth = this.tableWidth;
-//			int tableHeight = this.tableHeight;
-//			g.setColor(Color.BLACK); //TODO: Actual border color
-//			int x = insets.left;
-//			int y = insets.top;
-//			for(int i = 0; i < border; i++) {
-//				g.drawRect(x + i, y + i, tableWidth - i * 2 - 1, tableHeight - i * 2 - 1);
-//			}
-
-			// Paint cell borders
-
 			g.setColor(Color.GRAY);
 			for (int i = 0; i < numCells; i++) {
 				final RTableCell cell = (RTableCell) allCells.get(i);
@@ -1353,6 +1199,12 @@ class TableMatrix {
 
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
+		if (caption != null) {
+			caption.doLayout(0, 0, true, true, null, 0, 0, true);
+			captionSize.setHeight(caption.height);
+			captionSize.setWidth(caption.width);
+		}
+		
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
 			final int col = cell.getVirtualColumn();
@@ -1457,6 +1309,15 @@ class TableMatrix {
 		this.cellSpacingY = cellSpacing;
 
 		this.tableWidthLength = TableMatrix.getWidthLength(this.tableElement, availWidth);
+		
+		HTMLCollectionImpl captionList = new HTMLCollectionImpl(tableElement, new CaptionFilter());
+		if (captionList.getLength() > 0) {
+			HTMLTableCaptionElementImpl capt = (HTMLTableCaptionElementImpl) captionList.item(0);
+			this.captionElement = capt;
+			this.caption = new RTableCaption(capt, parserContext, rendererContext, frameContext, container);
+		} else {
+			this.caption = null;
+		}
 
 		populateRows();
 		adjustForCellSpans();
@@ -1479,5 +1340,210 @@ class TableMatrix {
 		}
 		this.heightsOfExtras = heightsOfExtras;
 		this.hasOldStyleBorder = border > 0 ? 1 : 0;
+	}
+	
+	private int expandColumns(SizeInfo[] columnSizes, int cellAvailWidth, boolean expand, int hasBorder,
+			int cellSpacingX, int currentTotal, int numCols, int difference) {
+		int noWidthTotal = 0;
+		int numNoWidth = 0;
+		for (int i = 0; i < numCols; i++) {
+			if (columnSizes[i].htmlLength == null) {
+				numNoWidth++;
+				noWidthTotal += columnSizes[i].actualSize;
+			}
+		}
+		if (noWidthTotal > 0) {
+			currentTotal = adjustCurrentTotal2(columnSizes, this.rowSizes, this.ROWS, cellSpacingX, numCols,
+														   noWidthTotal, difference, cellSpacingX, hasBorder, numNoWidth, cellAvailWidth, currentTotal);
+			difference = currentTotal - cellAvailWidth;
+		}
+
+		// See if absolutes need to be contracted
+		if (difference > 0 || difference < 0 && expand) {
+			int absoluteWidthTotal = 0;
+			for (int i = 0; i < numCols; i++) {
+				HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
+				if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
+					absoluteWidthTotal += columnSizes[i].actualSize;
+				}
+			}
+			if (absoluteWidthTotal > 0) {
+				currentTotal = adjustCurrentTotal(columnSizes, this.rowSizes, this.ROWS, cellSpacingY, numCols, absoluteWidthTotal, difference, cellSpacingX, hasBorder, currentTotal);
+				difference = currentTotal - cellAvailWidth;
+			}
+
+			// See if percentages need to be contracted
+			if (difference > 0 || difference < 0 && expand) {
+				int percentWidthTotal = 0;
+				for (int i = 0; i < numCols; i++) {
+					HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
+					if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
+						percentWidthTotal += columnSizes[i].actualSize;
+					}
+				}
+				if (percentWidthTotal > 0) {
+					currentTotal = adjustCurrentTotal(columnSizes, this.rowSizes, this.ROWS, cellSpacingY, numCols, percentWidthTotal, difference, cellSpacingX, hasBorder, currentTotal);
+				}
+			}
+		}
+		return currentTotal;
+	}
+	
+	private boolean isCaptionBotton() {
+		if (this.captionElement != null) {
+			AbstractCSSProperties props = captionElement.getCurrentStyle();
+			String captionSide = props == null ? null : props.getCaptionSide();
+			if (props == null) {
+				captionSide = this.captionElement.getCaptionSide();
+			}
+			if (captionSide == null) {
+				return false;
+			} else {
+				return "bottom".equals(captionSide);
+			}
+		}
+		return false;
+	}
+	
+	public static int adjustCurrentTotal(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
+			ArrayList<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
+			int widthTotal, int difference, int cellSpacingX, int hasBorder, int currTotal) {
+		
+		int currentTotal = currTotal;
+		int expectedPercentWidthTotal = widthTotal - difference;
+		if (expectedPercentWidthTotal < 0) {
+			expectedPercentWidthTotal = 0;
+		}
+		double ratio = (double) expectedPercentWidthTotal / widthTotal;
+		for (int i = 0; i < numCols; i++) {
+			SizeInfo sizeInfo = columnSizes[i];
+			HtmlLength widthLength = (HtmlLength)columnSizes[i].htmlLength;
+			if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
+				int oldActualSize = sizeInfo.actualSize;
+				int newActualSize = (int) Math.round(oldActualSize * ratio);
+				sizeInfo.actualSize = newActualSize;
+				if (newActualSize < sizeInfo.layoutSize) {
+					// See if it actually fits.
+					layoutColumn(columnSizes, rowLenght, ROWS, sizeInfo, i, cellSpacingY, cellSpacingX, hasBorder);
+					if (newActualSize < sizeInfo.layoutSize) {
+						// Didn't fit.
+						newActualSize = sizeInfo.layoutSize;
+						sizeInfo.actualSize = newActualSize;
+					}
+				}
+				currentTotal += newActualSize - oldActualSize;
+			}
+		}
+		return currentTotal;
+	}
+	
+	public static int adjustCurrentTotal2(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
+			ArrayList<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
+			int widthTotal, int difference, int cellSpacingX, int hasBorder, int numNoWidth, int cellAvailWidth, int currTotal) {
+		
+		int currentTotal = currTotal;
+		int expectedPercentWidthTotal = widthTotal - difference;
+		if (expectedPercentWidthTotal < 0) {
+			expectedPercentWidthTotal = 0;
+		}
+		double ratio = (double) expectedPercentWidthTotal / widthTotal;
+		int noWidthCount = 0;
+		for (int i = 0; i < numCols; i++) {
+			SizeInfo sizeInfo = columnSizes[i];
+			if (sizeInfo.htmlLength == null) {
+				int oldActualSize = sizeInfo.actualSize;
+				int newActualSize;
+				if (++noWidthCount == numNoWidth) {
+					// Last column without a width.
+					int currentDiff = currentTotal - cellAvailWidth;
+					newActualSize = oldActualSize - currentDiff;
+					if (newActualSize < 0) {
+						newActualSize = 0;
+					}
+				} else {
+					newActualSize = (int) Math.round(oldActualSize * ratio);
+				}
+				sizeInfo.actualSize = newActualSize;
+				if (newActualSize < sizeInfo.layoutSize) {
+					// See if it actually fits.
+					layoutColumn(columnSizes, rowLenght, ROWS, sizeInfo, i, cellSpacingY, cellSpacingX, hasBorder);
+					if (newActualSize < sizeInfo.layoutSize) {
+						// Didn't fit.
+						newActualSize = sizeInfo.layoutSize;
+						sizeInfo.actualSize = newActualSize;
+					}
+				}
+				currentTotal += newActualSize - oldActualSize;
+			}
+		}
+		return currentTotal;
+	}
+	
+	private static void layoutColumn(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
+			ArrayList<ArrayList<VirtualCell>> ROWS, SizeInfo colSize, int col, int cellSpacingY, int cellSpacingX,
+			int hasBorder) {
+		SizeInfo[] rowSizes = rowLenght;
+		ArrayList<ArrayList<VirtualCell>> rows = ROWS;
+		int numRows = rows.size();
+		int actualSize = colSize.actualSize;
+		colSize.layoutSize = 0;
+		for (int row = 0; row < numRows;) {
+			// SizeInfo rowSize = rowSizes[row];
+			ArrayList<VirtualCell> columns = rows.get(row);
+			VirtualCell vc = null;
+			int sizeCol = columns.size();
+			if (sizeCol > col) {
+				vc = columns.get(col);
+				RTableCell ac = vc.getActualCell();
+				if (ac != null && ac.getVirtualRow() == row) {
+					// Only process actual cells with a row
+					// beginning at the current row being processed.
+					int colSpan = ac.getColSpan();
+					if (colSpan > 1) {
+						int firstCol = ac.getVirtualColumn();
+						int cellExtras = (colSpan - 1) * (cellSpacingX + 2 * hasBorder);
+						int vcActualWidth = cellExtras;
+						for (int x = 0; x < colSpan; x++) {
+							vcActualWidth += columnSizes[firstCol + x].actualSize;
+						}
+
+						Dimension size = ac.doCellLayout(vcActualWidth, 0, true, true, true);
+						int vcRenderWidth = size.width;
+
+						int denominator = vcActualWidth - cellExtras;
+						int newTentativeCellWidth;
+						if (denominator > 0) {
+							newTentativeCellWidth = actualSize * (vcRenderWidth - cellExtras) / denominator;
+						} else {
+							newTentativeCellWidth = (vcRenderWidth - cellExtras) / colSpan;
+						}
+						if (newTentativeCellWidth > colSize.layoutSize) {
+							colSize.layoutSize = newTentativeCellWidth;
+						}
+						int rowSpan = ac.getRowSpan();
+						int vch = (size.height - (rowSpan - 1) * (cellSpacingY + 2 * hasBorder)) / rowSpan;
+						for (int y = 0; y < rowSpan; y++) {
+							if (rowSizes[row + y].minSize < vch) {
+								rowSizes[row + y].minSize = vch;
+							}
+						}
+					} else {
+						Dimension size = ac.doCellLayout(actualSize, 0, true, true, true);
+						if (size.width > colSize.layoutSize) {
+							colSize.layoutSize = size.width;
+						}
+						int rowSpan = ac.getRowSpan();
+						int vch = (size.height - (rowSpan - 1) * (cellSpacingY + 2 * hasBorder)) / rowSpan;
+						for (int y = 0; y < rowSpan; y++) {
+							if (rowSizes[row + y].minSize < vch) {
+								rowSizes[row + y].minSize = vch;
+							}
+						}
+
+					}
+				}
+			}
+			row++;
+		}
 	}
 }

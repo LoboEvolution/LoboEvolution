@@ -68,6 +68,13 @@ public interface HTMLTableElement extends HTMLElement {
 	 * @return A new table header element (<code>THEAD</code>).
 	 */
 	HTMLElement createTHead();
+	
+	/**
+	 * Create a table body row or return an existing one.
+	 * 
+	 * @return A new table header element (<code>BODY</code>).
+	 */
+	HTMLElement createTBody();
 
 	/**
 	 * Delete the table caption, if one exists.
@@ -97,6 +104,11 @@ public interface HTMLTableElement extends HTMLElement {
 	 * Delete the header from the table, if one exists.
 	 */
 	void deleteTHead();
+	
+	/**
+	 * Delete the body from the table, if one exists.
+	 */
+	void deleteTBody();
 
 	/**
 	 * Specifies the table's position with respect to the rest of the document. See

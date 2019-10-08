@@ -57,7 +57,9 @@ public class RLayout {
 		el.put(HTMLTag.STYLE,nop);
 		el.put(HTMLTag.LINK,nop);
 		el.put(HTMLTag.IMG,new ImgLayout());
-		el.put(HTMLTag.TABLE,new TableLayout());		
+		el.put(HTMLTag.TABLE,new TableLayout());
+		el.put(HTMLTag.TR, new TableRowLayout());
+		el.put(HTMLTag.TD, new TableCellLayout());
 		final AnchorLayout anchor = new AnchorLayout();
 		el.put(HTMLTag.A,anchor);
 		el.put(HTMLTag.ANCHOR,anchor);
@@ -154,6 +156,7 @@ public class RLayout {
 	            }
 	            break;
 	        case RenderState.DISPLAY_BLOCK:
+	        case RenderState.DISPLAY_TABLE_ROW:
 	            bodyLayout.layoutRBlock(markupElement);
 	            break;
 	        case RenderState.DISPLAY_LIST_ITEM:
@@ -164,17 +167,15 @@ public class RLayout {
 	                bodyLayout.layoutListItem(markupElement);
 	            }
 	            break;
-	        case RenderState.DISPLAY_TABLE:
-	            bodyLayout.layoutRTable(markupElement);
-	            break;
+			case RenderState.DISPLAY_TABLE:
+                bodyLayout.layoutRTable(markupElement);
+                break;
 	        case RenderState.DISPLAY_INLINE_TABLE:
-	            bodyLayout.layoutRInlineBlock(markupElement);
-	            break;
 	        case RenderState.DISPLAY_INLINE_BLOCK:
 	            bodyLayout.layoutRInlineBlock(markupElement);
 	            break;
+	        case RenderState.DISPLAY_TABLE_CELL:
 	        default:
-	            // Assume INLINE
 	            bodyLayout.layoutMarkup(markupElement);
 	            break;
 	        }
@@ -437,6 +438,18 @@ public class RLayout {
 	protected static class TableLayout extends CommonLayout {
 		public TableLayout() {
 			super(RenderState.DISPLAY_TABLE);
+		}
+	}
+	
+	protected static class TableRowLayout extends CommonLayout {
+		public TableRowLayout() {
+			super(RenderState.DISPLAY_TABLE_ROW);
+		}
+	}
+	
+	protected static class TableCellLayout extends CommonLayout {
+		public TableCellLayout() {
+			super(RenderState.DISPLAY_TABLE_CELL);
 		}
 	}
 
