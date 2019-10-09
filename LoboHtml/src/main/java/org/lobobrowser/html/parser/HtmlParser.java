@@ -275,7 +275,7 @@ public class HtmlParser {
 	 */
 	private final int parseForEndTag(Node parent, LineNumberReader reader, String tagName, boolean addTextNode,
 			boolean decodeEntities) throws IOException, SAXException {
-		final Document doc = this.document;
+		Document doc = this.document;
 		int intCh;
 		StringBuffer sb = new StringBuffer();
 		while ((intCh = reader.read()) != -1) {
@@ -285,11 +285,11 @@ public class HtmlParser {
 				if (intCh != -1) {
 					ch = (char) intCh;
 					if (ch == '/') {
-						final StringBuffer tempBuffer = new StringBuffer();
+						StringBuffer tempBuffer = new StringBuffer();
 						INNER: while ((intCh = reader.read()) != -1) {
 							ch = (char) intCh;
 							if (ch == '>') {
-								final String thisTag = tempBuffer.toString().trim();
+								String thisTag = tempBuffer.toString().trim();
 								if (thisTag.equalsIgnoreCase(tagName)) {
 									this.justReadTagBegin = false;
 									this.justReadTagEnd = true;
@@ -297,11 +297,11 @@ public class HtmlParser {
 									this.normalLastTag = thisTag.toUpperCase();
 									if (addTextNode) {
 										if (decodeEntities) {
-											sb = entityDecode(sb);
+											sb = this.entityDecode(sb);
 										}
-										final String text = sb.toString();
+										String text = sb.toString();
 										if (text.length() != 0) {
-											final Node textNode = doc.createTextNode(text);
+											Node textNode = doc.createTextNode(text);
 											parent.appendChild(textNode);
 										}
 									}
@@ -315,23 +315,38 @@ public class HtmlParser {
 						}
 						sb.append("</");
 						sb.append(tempBuffer);
+					} else if (ch == '!') {
+						final String nextSeven = readN(reader, 7);
+						if ("[CDATA[".equals(nextSeven)) {
+							readCData(reader, sb);
+						} else {
+							sb.append('!');
+							if (nextSeven != null) {
+								sb.append(nextSeven);
+							}
+						}
 					} else {
 						sb.append('<');
+						sb.append(ch);
 					}
+				} else {
+					sb.append('<');
 				}
+			} else {
+				sb.append(ch);
 			}
-			sb.append(ch);
 		}
+
 		this.justReadTagBegin = false;
 		this.justReadTagEnd = false;
 		this.justReadEmptyElement = false;
 		if (addTextNode) {
 			if (decodeEntities) {
-				sb = entityDecode(sb);
+				sb = this.entityDecode(sb);
 			}
-			final String text = sb.toString();
+			String text = sb.toString();
 			if (text.length() != 0) {
-				final Node textNode = doc.createTextNode(text);
+				Node textNode = doc.createTextNode(text);
 				parent.appendChild(textNode);
 			}
 		}
@@ -401,7 +416,10 @@ public class HtmlParser {
 					parent.appendChild(doc.createProcessingInstruction(tag, data.toString()));
 					return TOKEN_FULL_ELEMENT;
 				} else {
-					Element element = doc.createElement(tag);
+					int localIndex = normalTag.indexOf(':');
+                    boolean tagHasPrefix = localIndex > 0;
+                    String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
+                    Element element = doc.createElement(localName);
 					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 					try {
 						if (!this.justReadTagEnd) {
@@ -419,7 +437,7 @@ public class HtmlParser {
 						// This is necessary for incremental rendering.
 						parent.appendChild(element);
 						if (!this.justReadEmptyElement) {
-							ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalTag));
+							ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(localName));
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
@@ -988,4 +1006,53 @@ public class HtmlParser {
 		this.justReadEmptyElement = false;
 		return sb;
 	}
+
+	private static void readCData(LineNumberReader reader, StringBuffer sb) throws IOException {
+		int next = reader.read();
+		while (next >= 0) {
+			final char nextCh = (char) next;
+			if (nextCh == ']') {
+				final String next2 = readN(reader, 2);
+				if (next2 != null) {
+					if ("]>".equals(next2)) {
+						break;
+					} else {
+						sb.append(next2);
+						next = reader.read();
+					}
+				} else {
+					break;
+				}
+			} else {
+				sb.append(nextCh);
+				next = reader.read();
+			}
+		}
+	}
+
+	private static String readN(final LineNumberReader reader, final int n) {
+		char[] chars = new char[n];
+		int i = 0;
+		while (i < n) {
+			int ich = -1;
+			try {
+				ich = reader.read();
+			} catch (IOException e) {
+				break;
+			}
+			if (ich >= 0) {
+				chars[i] = (char) ich;
+				i += 1;
+			} else {
+				break;
+			}
+		}
+
+		if (i == 0) {
+			return null;
+		} else {
+			return new String(chars, 0, i);
+		}
+	}
+
 }
