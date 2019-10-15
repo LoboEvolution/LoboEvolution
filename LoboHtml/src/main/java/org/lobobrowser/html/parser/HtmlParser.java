@@ -94,7 +94,7 @@ public class HtmlParser {
 
 	private final static Pattern doctypePattern = Pattern.compile("(\\S+)\\s+PUBLIC\\s+\"([^\"]*)\"\\s+\"([^\"]*)\".*>");
 
-	private final static String[] elementsThatDontNeedBodyElement = { "HTML", "META", "TITLE", "LINK", "SCRIPT", "STYLE" };
+	private final static String[] elementsThatDontNeedBodyElement = { "HTML", "HEAD", "META", "TITLE", "LINK", "SCRIPT", "STYLE" };
 
 	private final static String[] elementsThatDontNeedHeadElement = { "HTML", "P", "DIV", "SPAN", "UL", "OL", "LI", "A",
 			"IMG", "IFRAME", "TABLE", "TBODY", "THEAD", "TR", "TH", "TD", "MATHML", "FRAMESET" };
@@ -1101,7 +1101,6 @@ public class HtmlParser {
 
 	private void ensureBodyElement(final Node parent) {
 		if (lastBodyElement == null) {
-			// System.out.println("Inserting BODY");
 			lastBodyElement = document.createElement("BODY");
 			parent.appendChild(lastBodyElement);
 		}
