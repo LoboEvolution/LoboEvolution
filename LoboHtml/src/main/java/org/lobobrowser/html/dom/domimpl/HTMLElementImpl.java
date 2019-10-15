@@ -708,7 +708,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			this.warn("setInnerHTML(): Element " + this + " does not belong to a document.");
 			return;
 		}
-		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null);
+		final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
 		this.nodeList.clear();
 		// Should not synchronize around parser probably.
 		try {

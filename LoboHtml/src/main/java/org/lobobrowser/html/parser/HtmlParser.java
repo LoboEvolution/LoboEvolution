@@ -18,17 +18,12 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Aug 28, 2005
- */
+
 package org.lobobrowser.html.parser;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -36,12 +31,16 @@ import java.util.LinkedList;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.lobo.common.ArrayUtilities;
 import org.lobo.html.Entities;
 import org.lobo.html.HTMLObject;
 import org.lobo.html.HTMLTag;
 import org.lobo.info.ElementInfo;
-import org.lobobrowser.html.io.WritableLineReader;
+import org.lobobrowser.html.dom.domimpl.DocumentTypeImpl;
+import org.lobobrowser.html.dom.domimpl.HTMLDocumentImpl;
 import org.lobobrowser.http.UserAgentContext;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
@@ -85,6 +84,20 @@ public class HtmlParser {
 
 	private final UserAgentContext ucontext;
 
+	private Node lastRootElement = null;
+
+	private Node lastHeadElement = null;
+
+	private Node lastBodyElement = null;
+
+	private boolean needRoot = false;
+
+	private final static Pattern doctypePattern = Pattern.compile("(\\S+)\\s+PUBLIC\\s+\"([^\"]*)\"\\s+\"([^\"]*)\".*>");
+
+	private final static String[] elementsThatDontNeedBodyElement = { "HTML", "META", "TITLE", "LINK", "SCRIPT", "STYLE" };
+
+	private final static String[] elementsThatDontNeedHeadElement = { "HTML", "P", "DIV", "SPAN", "UL", "OL", "LI", "A",
+			"IMG", "IFRAME", "TABLE", "TBODY", "THEAD", "TR", "TH", "TD", "MATHML", "FRAMESET" };
 
 	/**
 	 * Constructs a <code>HtmlParser</code>.
@@ -103,137 +116,45 @@ public class HtmlParser {
 	 * @param ucontext     The user agent context.
 	 * @param document     An W3C Document instance.
 	 * @param errorHandler The error handler.
-	 * @param publicId     The public ID of the document.
-	 * @param systemId     The system ID of the document.
+	 * @param needRoot
 	 */
-	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler) {
+	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler, final boolean needRoot) {
 		this.ucontext = ucontext;
 		this.document = document;
+		this.needRoot = needRoot;
 	}
 
-	private final StringBuffer entityDecode(StringBuffer rawText) throws org.xml.sax.SAXException {
-		int startIdx = 0;
-		StringBuffer sb = null;
-		for (;;) {
-			final int ampIdx = rawText.indexOf("&", startIdx);
-			if (ampIdx == -1) {
-				if (sb == null) {
-					return rawText;
-				} else {
-					sb.append(rawText.substring(startIdx));
-					return sb;
-				}
-			}
-			if (sb == null) {
-				sb = new StringBuffer();
-			}
-			sb.append(rawText.substring(startIdx, ampIdx));
-			final int colonIdx = rawText.indexOf(";", ampIdx);
-			if (colonIdx == -1) {
-				sb.append('&');
-				startIdx = ampIdx + 1;
-				continue;
-			}
-			final String spec = rawText.substring(ampIdx + 1, colonIdx);
-			if (spec.startsWith("#")) {
-				final String number = spec.substring(1).toLowerCase();
-				int decimal;
-				try {
-					if (number.startsWith("x")) {
-						decimal = Integer.parseInt(number.substring(1), 16);
-					} else {
-						decimal = Integer.parseInt(number);
-					}
-				} catch (final NumberFormatException nfe) {
-					logger.log(Level.WARNING, "entityDecode()", nfe);
-					decimal = 0;
-				}
-				sb.append((char) decimal);
-			} else {
-				final int chInt = getEntityChar(spec);
-				if (chInt == -1) {
-					sb.append('&');
-					sb.append(spec);
-					sb.append(';');
-				} else {
-					sb.append((char) chInt);
-				}
-			}
-			startIdx = colonIdx + 1;
-		}
-	}
-	
 	public static boolean isDecodeEntities(String elementName) {
 		final ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
 		return einfo == null ? true : einfo.decodeEntities;
 	}
 
-	private final int getEntityChar(String spec) {
-		// TODO: Declared entities
-		Character c = (Character) HTMLObject.ENTITIES.get(Entities.get(spec));
-		if (c == null) {
-			final String specTL = spec.toLowerCase();
-			c = (Character) HTMLObject.ENTITIES.get(Entities.get(specTL));
-			if (c == null) {
-				return -1;
-			}
-		}
-		return c.charValue();
-	}
-
-	/**
-	 * Parses HTML from an input stream, assuming the character set is ISO-8859-1.
-	 * 
-	 * @param in The input stream.
-	 * @throws IOException  Thrown when there are errors reading the stream.
-	 * @throws SAXException Thrown when there are parse errors.
-	 */
-	public void parse(InputStream in) throws IOException, SAXException, UnsupportedEncodingException {
-		this.parse(in, "ISO-8859-1");
-	}
-
-	/**
-	 * Parses HTML from an input stream, using the given character set.
-	 * 
-	 * @param in      The input stream.
-	 * @param charset The character set.
-	 * @throws IOException                  Thrown when there's an error reading
-	 *                                      from the stream.
-	 * @throws SAXException                 Thrown when there is a parser error.
-	 * @throws UnsupportedEncodingException Thrown if the character set is not
-	 *                                      supported.
-	 */
-	public void parse(InputStream in, String charset) throws IOException, SAXException, UnsupportedEncodingException {
-		final WritableLineReader reader = new WritableLineReader(new InputStreamReader(in, charset));
-		this.parse(reader);
-	}
-
-	public void parse(LineNumberReader reader) throws IOException, SAXException {
-		final Document doc = this.document;
-		this.parse(reader, doc);
-	}
-
 	/**
 	 * This method may be used when the DOM should be built under a given node, such
 	 * as when <code>innerHTML</code> is used in Javascript.
-	 * 
+	 *
 	 * @param reader A LineNumberReader for the document.
 	 * @param parent The root node for the parsed DOM.
 	 * @throws IOException
 	 * @throws SAXException
 	 */
-	public void parse(LineNumberReader reader, Node parent) throws IOException, SAXException {
+	public void parse(final LineNumberReader reader, final Node parent) throws IOException, SAXException {
+
 		// Note: Parser does not clear document. It could be used incrementally.
 		try {
 			parent.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 			try {
-				while (parseToken(parent, reader, null, new LinkedList<String>()) != TOKEN_EOD) {
-					;
+				while (this.parseToken(parent, reader, null, new LinkedList<String>()) != TOKEN_EOD) {
 				}
 			} catch (final StopException se) {
 				throw new SAXException("Unexpected flow exception", se);
 			}
 		} finally {
+			if (needRoot) {
+				ensureRootElement(parent);
+				ensureHeadElement(lastRootElement);
+				ensureBodyElement(lastRootElement);
+			}
 			parent.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
 		}
 	}
@@ -241,41 +162,300 @@ public class HtmlParser {
 	/**
 	 * Parses HTML given by a <code>Reader</code>. This method appends nodes to the
 	 * document provided to the parser.
-	 * 
+	 *
 	 * @param reader An instance of <code>Reader</code>.
 	 * @throws IOException  Thrown if there are errors reading the input stream.
 	 * @throws SAXException Thrown if there are parse errors.
 	 */
-	public void parse(Reader reader) throws IOException, SAXException {
+	public void parse(final Reader reader) throws IOException, SAXException {
 		this.parse(new LineNumberReader(reader));
 	}
 
 	/**
 	 * This method may be used when the DOM should be built under a given node, such
 	 * as when <code>innerHTML</code> is used in Javascript.
-	 * 
+	 *
 	 * @param reader A document reader.
 	 * @param parent The root node for the parsed DOM.
 	 * @throws IOException
 	 * @throws SAXException
 	 */
-	public void parse(Reader reader, Node parent) throws IOException, SAXException {
+	public void parse(final Reader reader, final Node parent) throws IOException, SAXException {
 		this.parse(new LineNumberReader(reader), parent);
+	}
+
+	public void parse(final LineNumberReader reader) throws IOException, SAXException {
+		final Document doc = this.document;
+		this.parse(reader, doc);
+	}
+
+	/**
+	 * Parses text followed by one element.
+	 *
+	 * @param parent
+	 * @param reader
+	 * @param stopAtTagUC If this tag is encountered, the method throws
+	 *                    StopException.
+	 * @param stopTags    If tags in this set are encountered, the method throws
+	 *                    StopException.
+	 * @return
+	 * @throws IOException
+	 * @throws StopException
+	 * @throws SAXException
+	 */
+	private final int parseToken(final Node parent, final LineNumberReader reader, final Set<HTMLTag> stopTags,
+			final LinkedList<String> ancestors) throws IOException, StopException, SAXException {
+		final Document doc = this.document;
+		final HTMLDocumentImpl htmlDoc = (HTMLDocumentImpl) doc;
+		final StringBuffer textSb = this.readUpToTagBegin(reader);
+		if (textSb == null) {
+			return TOKEN_EOD;
+		}
+		if (textSb.length() != 0) {
+			// int textLine = reader.getLineNumber();
+			final StringBuffer decText = entityDecode(textSb);
+			final Node textNode = doc.createTextNode(decText.toString());
+			try {
+				safeAppendChild(parent, textNode);
+			} catch (final DOMException de) {
+				if ((parent.getNodeType() != Node.DOCUMENT_NODE) || (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+					logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+				}
+			}
+		}
+		if (this.justReadTagBegin) {
+			String tag = this.readTag(parent, reader);
+			if (tag == null) {
+				return TOKEN_EOD;
+			}
+			String normalTag = tag.toUpperCase();
+			try {
+				if (tag.startsWith("!")) {
+					if ("!--".equals(tag)) {
+						// int commentLine = reader.getLineNumber();
+						final StringBuffer comment = this.passEndOfComment(reader);
+						final StringBuffer decText = entityDecode(comment);
+
+						safeAppendChild(parent, doc.createComment(decText.toString()));
+
+						return TOKEN_COMMENT;
+					} else if ("!DOCTYPE".equals(tag)) {
+						final String doctypeStr = this.parseEndOfTag(reader);
+						final Matcher doctypeMatcher = doctypePattern.matcher(doctypeStr);
+						if (doctypeMatcher.matches()) {
+							final String qName = doctypeMatcher.group(1);
+							final String publicId = doctypeMatcher.group(2);
+							final String systemId = doctypeMatcher.group(3);
+							final DocumentTypeImpl doctype = new DocumentTypeImpl(qName, publicId, systemId);
+							htmlDoc.setDoctype(doctype);
+							needRoot = false;
+						}
+						return TOKEN_BAD;
+					} else {
+						passEndOfTag(reader);
+						return TOKEN_BAD;
+					}
+				} else if (tag.startsWith("/")) {
+					tag = tag.substring(1);
+					normalTag = normalTag.substring(1);
+					this.passEndOfTag(reader);
+					return TOKEN_END_ELEMENT;
+				} else if (tag.startsWith("?")) {
+					tag = tag.substring(1);
+					final StringBuffer data = readProcessingInstruction(reader);
+
+					safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
+
+					return TOKEN_FULL_ELEMENT;
+				} else {
+					final int localIndex = normalTag.indexOf(':');
+					final boolean tagHasPrefix = localIndex > 0;
+					final String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
+					Element element = doc.createElement(localName);
+					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
+					try {
+						if (!this.justReadTagEnd) {
+							while (this.readAttribute(reader, element)) {
+								// EMPTY LOOP
+							}
+						}
+						if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
+							// Throw before appending to parent.
+							// After attributes are set.
+							// After MODIFYING_KEY is set.
+							throw new StopException(element);
+						}
+						// Add element to parent before children are added.
+						// This is necessary for incremental rendering.
+						safeAppendChild(parent, element);
+						if (!this.justReadEmptyElement) {
+							ElementInfo einfo = HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(localName.toUpperCase()));
+							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
+							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
+								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
+								Set<HTMLTag> newStopSet = einfo == null ? null : einfo.stopTags;
+								if (newStopSet == null) {
+									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
+										newStopSet = Collections.singleton(HTMLTag.get(normalTag));
+									}
+								}
+								if (stopTags != null) {
+									if (newStopSet != null) {
+										final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
+										newStopSet2.addAll(stopTags);
+										newStopSet2.addAll(newStopSet);
+										newStopSet = newStopSet2;
+									} else {
+										newStopSet = endTagType == ElementInfo.END_ELEMENT_REQUIRED ? null : stopTags;
+									}
+								}
+								ancestors.addFirst(normalTag);
+								try {
+									for (;;) {
+										try {
+											int token;
+											if ((einfo != null) && einfo.noScriptElement) {
+												final UserAgentContext ucontext = this.ucontext;
+												if ((ucontext == null) || ucontext.isScriptingEnabled()) {
+													token = this.parseForEndTag(parent, reader, tag, false, shouldDecodeEntities(einfo));
+												} else {
+													token = this.parseToken(element, reader, newStopSet, ancestors);
+												}
+											} else {
+												token = childrenOk
+														? this.parseToken(element, reader, newStopSet, ancestors)
+														: this.parseForEndTag(element, reader, tag, true,
+																shouldDecodeEntities(einfo));
+											}
+											if (token == TOKEN_END_ELEMENT) {
+												final String normalLastTag = this.normalLastTag;
+												if (normalTag.equalsIgnoreCase(normalLastTag)) {
+													return TOKEN_FULL_ELEMENT;
+												} else {
+													final ElementInfo closeTagInfo = HTMLObject.ELEMENT_INFOS
+															.get(HTMLTag.get(normalLastTag.toUpperCase()));
+													if ((closeTagInfo == null)
+															|| (closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN)) {
+														// TODO: Rather inefficient algorithm, but it's
+														// probably executed infrequently?
+														final Iterator<String> i = ancestors.iterator();
+														if (i.hasNext()) {
+															i.next();
+															while (i.hasNext()) {
+																final String normalAncestorTag = i.next();
+																if (normalLastTag.equals(normalAncestorTag)) {
+																	normalTag = normalLastTag;
+																	return TOKEN_END_ELEMENT;
+																}
+															}
+														}
+													}
+													// TODO: Working here
+												}
+											} else if (token == TOKEN_EOD) {
+												return TOKEN_EOD;
+											}
+										} catch (final StopException se) {
+											// newElement does not have a parent.
+											final Element newElement = se.getElement();
+											tag = newElement.getTagName();
+											normalTag = tag.toUpperCase();
+											if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
+												throw se;
+											}
+											einfo = HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
+											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
+													: einfo.endElementType;
+											childrenOk = einfo == null ? true : einfo.childElementOk;
+											newStopSet = einfo == null ? null : einfo.stopTags;
+											if (newStopSet == null) {
+												if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
+													newStopSet = Collections.singleton(HTMLTag.get(normalTag));
+												}
+											}
+											if (stopTags != null && newStopSet != null) {
+												final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
+												newStopSet2.addAll(stopTags);
+												newStopSet2.addAll(newStopSet);
+												newStopSet = newStopSet2;
+											}
+											ancestors.removeFirst();
+											ancestors.addFirst(normalTag);
+											// Switch element
+											element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
+											// newElement should have been suspended.
+											element = newElement;
+											// Add to parent
+											safeAppendChild(parent, element);
+											if (this.justReadEmptyElement) {
+												return TOKEN_BEGIN_ELEMENT;
+											}
+										}
+									}
+								} finally {
+									ancestors.removeFirst();
+								}
+							}
+						}
+						return TOKEN_BEGIN_ELEMENT;
+					} finally {
+						// This can inform elements to continue with notifications.
+						// It can also cause Javascript to be loaded / processed.
+						// Update: Elements now use Document.addJob() to delay processing
+						element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
+					}
+				}
+			} finally {
+				this.normalLastTag = normalTag;
+			}
+		} else {
+			this.normalLastTag = null;
+			return TOKEN_TEXT;
+		}
+	}
+
+	/**
+	 * Reads text until the beginning of the next tag. Leaves the reader offset past
+	 * the opening angle bracket. Returns null only on EOF.
+	 */
+	private final StringBuffer readUpToTagBegin(final LineNumberReader reader) throws IOException, SAXException {
+		StringBuffer sb = null;
+		int intCh;
+		while ((intCh = reader.read()) != -1) {
+			final char ch = (char) intCh;
+			if (ch == '<') {
+				this.justReadTagBegin = true;
+				this.justReadTagEnd = false;
+				this.justReadEmptyElement = false;
+				if (sb == null) {
+					sb = new StringBuffer(0);
+				}
+				return sb;
+			}
+			if (sb == null) {
+				sb = new StringBuffer();
+			}
+			sb.append(ch);
+		}
+		this.justReadTagBegin = false;
+		this.justReadTagEnd = false;
+		this.justReadEmptyElement = false;
+		return sb;
 	}
 
 	/**
 	 * Assumes that the content is completely made up of text, and parses until an
 	 * ending tag is found.
-	 * 
+	 *
 	 * @param parent
 	 * @param reader
 	 * @param tagName
 	 * @return
 	 * @throws IOException
 	 */
-	private final int parseForEndTag(Node parent, LineNumberReader reader, String tagName, boolean addTextNode,
-			boolean decodeEntities) throws IOException, SAXException {
-		Document doc = this.document;
+	private final int parseForEndTag(Node parent, final LineNumberReader reader, final String tagName,
+			final boolean addTextNode, final boolean decodeEntities) throws IOException, SAXException {
+		final Document doc = this.document;
 		int intCh;
 		StringBuffer sb = new StringBuffer();
 		while ((intCh = reader.read()) != -1) {
@@ -285,27 +465,27 @@ public class HtmlParser {
 				if (intCh != -1) {
 					ch = (char) intCh;
 					if (ch == '/') {
-						StringBuffer tempBuffer = new StringBuffer();
+						final StringBuffer tempBuffer = new StringBuffer();
 						INNER: while ((intCh = reader.read()) != -1) {
 							ch = (char) intCh;
 							if (ch == '>') {
-								String thisTag = tempBuffer.toString().trim();
+								final String thisTag = tempBuffer.toString().trim();
 								if (thisTag.equalsIgnoreCase(tagName)) {
 									this.justReadTagBegin = false;
 									this.justReadTagEnd = true;
 									this.justReadEmptyElement = false;
-									this.normalLastTag = thisTag.toUpperCase();
+									this.normalLastTag = thisTag;
 									if (addTextNode) {
 										if (decodeEntities) {
-											sb = this.entityDecode(sb);
+											sb = entityDecode(sb);
 										}
-										String text = sb.toString();
+										final String text = sb.toString();
 										if (text.length() != 0) {
-											Node textNode = doc.createTextNode(text);
-											parent.appendChild(textNode);
+											final Node textNode = doc.createTextNode(text);
+											safeAppendChild(parent, textNode);
 										}
 									}
-									return HtmlParser.TOKEN_END_ELEMENT;
+									return TOKEN_END_ELEMENT;
 								} else {
 									break INNER;
 								}
@@ -336,226 +516,210 @@ public class HtmlParser {
 				sb.append(ch);
 			}
 		}
-
 		this.justReadTagBegin = false;
 		this.justReadTagEnd = false;
 		this.justReadEmptyElement = false;
 		if (addTextNode) {
 			if (decodeEntities) {
-				sb = this.entityDecode(sb);
+				sb = entityDecode(sb);
 			}
-			String text = sb.toString();
+			final String text = sb.toString();
 			if (text.length() != 0) {
-				Node textNode = doc.createTextNode(text);
-				parent.appendChild(textNode);
+				final Node textNode = doc.createTextNode(text);
+				safeAppendChild(parent, textNode);
 			}
 		}
 		return HtmlParser.TOKEN_EOD;
 	}
 
-	/**
-	 * Parses text followed by one element.
-	 * 
-	 * @param parent
-	 * @param reader
-	 * @param stopAtTagUC If this tag is encountered, the method throws
-	 *                    StopException.
-	 * @param stopTags    If tags in this set are encountered, the method throws
-	 *                    StopException.
-	 * @return
-	 * @throws IOException
-	 * @throws StopException
-	 * @throws SAXException
-	 */
-	private final int parseToken(Node parent, LineNumberReader reader, Set<HTMLTag> stopTags, LinkedList<String> ancestors)
-			throws IOException, StopException, SAXException {
-		final Document doc = this.document;
-		final StringBuffer textSb = readUpToTagBegin(reader);
-		if (textSb == null) {
-			return TOKEN_EOD;
-		}
-		if (textSb.length() != 0) {
-			// int textLine = reader.getLineNumber();
-			final StringBuffer decText = entityDecode(textSb);
-			final Node textNode = doc.createTextNode(decText.toString());
-			try {
-				parent.appendChild(textNode);
-			} catch (final DOMException de) {
-				if (parent.getNodeType() != Node.DOCUMENT_NODE || de.code != DOMException.HIERARCHY_REQUEST_ERR) {
-					logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
-				}
-			}
-		}
-		if (this.justReadTagBegin) {
-			String tag = readTag(parent, reader);
-			if (tag == null) {
-				return TOKEN_EOD;
-			}
-			String normalTag = tag.toUpperCase();
-			try {
-				if (tag.startsWith("!")) {
-					if ("!--".equals(tag)) {
-						// int commentLine = reader.getLineNumber();
-						final StringBuffer comment = passEndOfComment(reader);
-						final StringBuffer decText = entityDecode(comment);
-						parent.appendChild(doc.createComment(decText.toString()));
-						return TOKEN_COMMENT;
-					} else {
-						// TODO: DOCTYPE node
-						passEndOfTag(reader);
-						return TOKEN_BAD;
-					}
-				} else if (tag.startsWith("/")) {
-					tag = tag.substring(1);
-					normalTag = normalTag.substring(1);
-					passEndOfTag(reader);
-					return TOKEN_END_ELEMENT;
-				} else if (tag.startsWith("?")) {
-					tag = tag.substring(1);
-					final StringBuffer data = readProcessingInstruction(reader);
-					parent.appendChild(doc.createProcessingInstruction(tag, data.toString()));
-					return TOKEN_FULL_ELEMENT;
-				} else {
-					int localIndex = normalTag.indexOf(':');
-                    boolean tagHasPrefix = localIndex > 0;
-                    String localName = tagHasPrefix ? normalTag.substring(localIndex + 1) : normalTag;
-                    Element element = doc.createElement(localName);
-					element.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
-					try {
-						if (!this.justReadTagEnd) {
-							while (readAttribute(reader, element)) {
-								;
-							}
-						}
-						if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
-							// Throw before appending to parent.
-							// After attributes are set.
-							// After MODIFYING_KEY is set.
-							throw new StopException(element);
-						}
-						// Add element to parent before children are added.
-						// This is necessary for incremental rendering.
-						parent.appendChild(element);
-						if (!this.justReadEmptyElement) {
-							ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(localName));
-							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
-							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
-								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
-								Set<HTMLTag> newStopSet = einfo == null ? null : einfo.stopTags;
-								if (newStopSet == null) {
-									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
-										newStopSet = Collections.singleton(HTMLTag.get(normalTag));
-									}
-								}
-								if (stopTags != null) {
-									if (newStopSet != null) {
-										final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
-										newStopSet2.addAll(stopTags);
-										newStopSet2.addAll(newStopSet);
-										newStopSet = newStopSet2;
-									} else {
-										newStopSet = endTagType == ElementInfo.END_ELEMENT_REQUIRED ? null : stopTags;
-									}
-								}
-								ancestors.addFirst(normalTag);
-								try {
-									for (;;) {
-										try {
-											int token;
-											if (einfo != null && einfo.noScriptElement) {
-												final UserAgentContext ucontext = this.ucontext;
-												if (ucontext == null || ucontext.isScriptingEnabled()) {
-													token = parseForEndTag(parent, reader, tag, false,
-															einfo.decodeEntities);
-												} else {
-													token = parseToken(element, reader, newStopSet, ancestors);
-												}
-											} else {
-												token = childrenOk ? parseToken(element, reader, newStopSet, ancestors)
-														: parseForEndTag(element, reader, tag, true,
-																einfo.decodeEntities);
-											}
-											if (token == TOKEN_END_ELEMENT) {
-												final String normalLastTag = this.normalLastTag;
-												if (normalTag.equals(normalLastTag)) {
-													return TOKEN_FULL_ELEMENT;
-												} else {
-													final ElementInfo closeTagInfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalLastTag));
-													if (closeTagInfo == null  || closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN) {
-														final Iterator<String> i = ancestors.iterator();
-														if (i.hasNext()) {
-															i.next();
-															while (i.hasNext()) {
-																final String normalAncestorTag = (String) i.next();
-																if (normalLastTag.equals(normalAncestorTag)) {
-																	normalTag = normalLastTag;
-																	return TOKEN_END_ELEMENT;
-																}
-															}
-														}
-													}
-													// TODO: Working here
-												}
-											} else if (token == TOKEN_EOD) {
-												return TOKEN_EOD;
-											}
-										} catch (final StopException se) {
-											// newElement does not have a parent.
-											final Element newElement = se.getElement();
-											tag = newElement.getTagName();
-											normalTag = tag.toUpperCase();
-											if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
-												throw se;
-											}
-											einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalTag));
-											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
-											childrenOk = einfo == null ? true : einfo.childElementOk;
-											newStopSet = einfo == null ? null : einfo.stopTags;
-											if (newStopSet == null && endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
-												newStopSet = Collections.singleton(HTMLTag.get(normalTag));
+	private static void readCData(LineNumberReader reader, StringBuffer sb) throws IOException {
 
-											}
-											if (stopTags != null && newStopSet != null) {
-												final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
-												newStopSet2.addAll(stopTags);
-												newStopSet2.addAll(newStopSet);
-												newStopSet = newStopSet2;
-											}
-											ancestors.removeFirst();
-											ancestors.addFirst(normalTag);
-											// Switch element
-											element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
-											// newElement should have been suspended.
-											element = newElement;
-											// Add to parent
-											parent.appendChild(element);
-											if (this.justReadEmptyElement) {
-												return TOKEN_BEGIN_ELEMENT;
-											}
-										}
-									}
-								} finally {
-									ancestors.removeFirst();
-								}
-							}
-						}
-						return TOKEN_BEGIN_ELEMENT;
-					} finally {
-						// This can inform elements to continue with notifications.
-						// It can also cause Javascript to get processed.
-						element.setUserData(MODIFYING_KEY, Boolean.FALSE, null);
+		int next = reader.read();
+
+		while (next >= 0) {
+			final char nextCh = (char) next;
+			if (nextCh == ']') {
+				final String next2 = readN(reader, 2);
+				if (next2 != null) {
+					if ("]>".equals(next2)) {
+						break;
+					} else {
+						sb.append(nextCh);
+						sb.append(next2);
+						next = reader.read();
 					}
+				} else {
+					break;
 				}
-			} finally {
-				this.normalLastTag = normalTag;
+			} else {
+				sb.append(nextCh);
+				next = reader.read();
 			}
-		} else {
-			this.normalLastTag = null;
-			return TOKEN_TEXT;
 		}
 	}
 
-	private final StringBuffer passEndOfComment(LineNumberReader reader) throws IOException {
+	// Tries to read at most n characters.
+	private static String readN(final LineNumberReader reader, final int n) {
+		char[] chars = new char[n];
+		int i = 0;
+		while (i < n) {
+			int ich = -1;
+			try {
+				ich = reader.read();
+			} catch (IOException e) {
+				break;
+			}
+			if (ich >= 0) {
+				chars[i] = (char) ich;
+				i += 1;
+			} else {
+				break;
+			}
+		}
+
+		if (i == 0) {
+			return null;
+		} else {
+			return new String(chars, 0, i);
+		}
+	}
+
+	/**
+	 * The reader offset should be
+	 *
+	 * @param reader
+	 * @return
+	 */
+	private final String readTag(final Node parent, final LineNumberReader reader) throws IOException {
+		final StringBuffer sb = new StringBuffer();
+		int chInt;
+		chInt = reader.read();
+		if (chInt != -1) {
+			boolean cont = true;
+			char ch;
+			LOOP: for (;;) {
+				ch = (char) chInt;
+				if (Character.isLetter(ch)) {
+					// Speed up normal case
+					break LOOP;
+				} else if (ch == '!') {
+					sb.append('!');
+					chInt = reader.read();
+					if (chInt != -1) {
+						ch = (char) chInt;
+						if (ch == '-') {
+							sb.append('-');
+							chInt = reader.read();
+							if (chInt != -1) {
+								ch = (char) chInt;
+								if (ch == '-') {
+									sb.append('-');
+									cont = false;
+								}
+							} else {
+								cont = false;
+							}
+						}
+					} else {
+						cont = false;
+					}
+				} else if (ch == '/') {
+					sb.append(ch);
+					chInt = reader.read();
+					if (chInt != -1) {
+						ch = (char) chInt;
+					} else {
+						cont = false;
+					}
+				} else if (ch == '<') {
+					final StringBuffer ltText = new StringBuffer(3);
+					ltText.append('<');
+					while ((chInt = reader.read()) == '<') {
+						ltText.append('<');
+					}
+					final Document doc = this.document;
+					final Node textNode = doc.createTextNode(ltText.toString());
+					try {
+						parent.appendChild(textNode);
+					} catch (final DOMException de) {
+						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
+								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+						}
+					}
+					if (chInt == -1) {
+						cont = false;
+					} else {
+						continue LOOP;
+					}
+				} else if (Character.isWhitespace(ch)) {
+					final StringBuffer ltText = new StringBuffer();
+					ltText.append('<');
+					ltText.append(ch);
+					while ((chInt = reader.read()) != -1) {
+						ch = (char) chInt;
+						if (ch == '<') {
+							chInt = reader.read();
+							break;
+						}
+						ltText.append(ch);
+					}
+					final Document doc = this.document;
+					final Node textNode = doc.createTextNode(ltText.toString());
+					try {
+						parent.appendChild(textNode);
+					} catch (final DOMException de) {
+						if ((parent.getNodeType() != Node.DOCUMENT_NODE)
+								|| (de.code != DOMException.HIERARCHY_REQUEST_ERR)) {
+							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
+						}
+					}
+					if (chInt == -1) {
+						cont = false;
+					} else {
+						continue LOOP;
+					}
+				}
+				break LOOP;
+			}
+			if (cont) {
+				boolean lastCharSlash = false;
+				for (;;) {
+					if (Character.isWhitespace(ch)) {
+						break;
+					} else if (ch == '>') {
+						this.justReadTagEnd = true;
+						this.justReadTagBegin = false;
+						this.justReadEmptyElement = lastCharSlash;
+						final String tag = sb.toString();
+						return tag;
+					} else if (ch == '/') {
+						lastCharSlash = true;
+					} else {
+						if (lastCharSlash) {
+							sb.append('/');
+						}
+						lastCharSlash = false;
+						sb.append(ch);
+					}
+					chInt = reader.read();
+					if (chInt == -1) {
+						break;
+					}
+					ch = (char) chInt;
+				}
+			}
+		}
+		if (sb.length() > 0) {
+			this.justReadTagEnd = false;
+			this.justReadTagBegin = false;
+			this.justReadEmptyElement = false;
+		}
+		final String tag = sb.toString();
+		return tag;
+	}
+
+	private final StringBuffer passEndOfComment(final LineNumberReader reader) throws IOException {
 		if (this.justReadTagEnd) {
 			return new StringBuffer(0);
 		}
@@ -624,7 +788,34 @@ public class HtmlParser {
 		return sb;
 	}
 
-	private final void passEndOfTag(Reader reader) throws IOException {
+	private final String parseEndOfTag(final Reader reader) throws IOException {
+		if (this.justReadTagEnd) {
+			return "";
+		}
+		StringBuilder result = new StringBuilder();
+		boolean readSomething = false;
+		for (;;) {
+			final int chInt = reader.read();
+			if (chInt == -1) {
+				break;
+			}
+			result.append((char) chInt);
+			readSomething = true;
+			final char ch = (char) chInt;
+			if (ch == '>') {
+				this.justReadTagEnd = true;
+				this.justReadTagBegin = false;
+				return result.toString();
+			}
+		}
+		if (readSomething) {
+			this.justReadTagBegin = false;
+			this.justReadTagEnd = false;
+		}
+		return result.toString();
+	}
+
+	private final void passEndOfTag(final Reader reader) throws IOException {
 		if (this.justReadTagEnd) {
 			return;
 		}
@@ -648,7 +839,22 @@ public class HtmlParser {
 		}
 	}
 
-	private final boolean readAttribute(LineNumberReader reader, Element element) throws IOException, SAXException {
+	private final StringBuffer readProcessingInstruction(final LineNumberReader reader) throws IOException {
+		final StringBuffer pidata = new StringBuffer();
+		if (this.justReadTagEnd) {
+			return pidata;
+		}
+		int ch;
+		for (ch = reader.read(); (ch != -1) && (ch != '>'); ch = reader.read()) {
+			pidata.append((char) ch);
+		}
+		this.justReadTagBegin = false;
+		this.justReadTagEnd = ch != -1;
+		return pidata;
+	}
+
+	private final boolean readAttribute(final LineNumberReader reader, final Element element)
+			throws IOException, SAXException {
 		if (this.justReadTagEnd) {
 			return false;
 		}
@@ -662,7 +868,7 @@ public class HtmlParser {
 		for (;;) {
 			final int chInt = reader.read();
 			if (chInt == -1) {
-				if (attributeName != null && attributeName.length() != 0) {
+				if ((attributeName != null) && (attributeName.length() != 0)) {
 					final String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 					attributeName.setLength(0);
@@ -678,7 +884,7 @@ public class HtmlParser {
 				blankFound = false;
 				break;
 			} else if (ch == '>') {
-				if (attributeName != null && attributeName.length() != 0) {
+				if ((attributeName != null) && (attributeName.length() != 0)) {
 					final String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 				}
@@ -696,7 +902,7 @@ public class HtmlParser {
 				lastCharSlash = false;
 				if (blankFound) {
 					blankFound = false;
-					if (attributeName != null && attributeName.length() != 0) {
+					if ((attributeName != null) && (attributeName.length() != 0)) {
 						final String attributeNameStr = attributeName.toString();
 						element.setAttribute(attributeNameStr, attributeNameStr);
 						attributeName.setLength(0);
@@ -718,7 +924,7 @@ public class HtmlParser {
 			}
 			final char ch = (char) chInt;
 			if (ch == '>') {
-				if (attributeName != null && attributeName.length() != 0) {
+				if ((attributeName != null) && (attributeName.length() != 0)) {
 					final String attributeNameStr = attributeName.toString();
 					element.setAttribute(attributeNameStr, attributeNameStr);
 				}
@@ -737,10 +943,7 @@ public class HtmlParser {
 					openQuote = '\'';
 				} else {
 					openQuote = -1;
-					if (attributeValue == null) {
-						attributeValue = new StringBuffer(6);
-					}
-
+					attributeValue = new StringBuffer(6);
 					if (lastCharSlash) {
 						attributeValue.append('/');
 					}
@@ -759,7 +962,7 @@ public class HtmlParser {
 				break;
 			}
 			final char ch = (char) chInt;
-			if (openQuote != -1 && ch == openQuote) {
+			if ((openQuote != -1) && (ch == openQuote)) {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
@@ -776,7 +979,7 @@ public class HtmlParser {
 				this.justReadTagBegin = false;
 				this.justReadTagEnd = false;
 				return true;
-			} else if (openQuote == -1 && ch == '>') {
+			} else if ((openQuote == -1) && (ch == '>')) {
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
 					if (attributeValue == null) {
@@ -790,7 +993,7 @@ public class HtmlParser {
 				this.justReadTagEnd = true;
 				this.justReadEmptyElement = lastCharSlash;
 				return false;
-			} else if (openQuote == -1 && Character.isWhitespace(ch)) {
+			} else if ((openQuote == -1) && Character.isWhitespace(ch)) {
 				lastCharSlash = false;
 				if (attributeName != null) {
 					final String attributeNameStr = attributeName.toString();
@@ -829,230 +1032,154 @@ public class HtmlParser {
 		return false;
 	}
 
-	private final StringBuffer readProcessingInstruction(LineNumberReader reader) throws IOException {
-		final StringBuffer pidata = new StringBuffer();
-		if (this.justReadTagEnd) {
-			return pidata;
+	private static boolean hasAncestorTag(final Node node, final String tag) {
+		if (node == null) {
+			return false;
+		} else if (tag.equalsIgnoreCase(node.getNodeName())) {
+			return true;
+		} else {
+			return hasAncestorTag(node.getParentNode(), tag);
 		}
-		int ch;
-		for (ch = reader.read(); ch != -1 && ch != '>'; ch = reader.read()) {
-			pidata.append((char) ch);
-		}
-		this.justReadTagBegin = false;
-		this.justReadTagEnd = ch != -1;
-		return pidata;
 	}
 
-	/**
-	 * The reader offset should be
-	 * 
-	 * @param reader
-	 * @return
-	 */
-	private final String readTag(Node parent, LineNumberReader reader) throws IOException {
-		final StringBuffer sb = new StringBuffer();
-		int chInt;
-		chInt = reader.read();
-		if (chInt != -1) {
-			boolean cont = true;
-			char ch;
-			LOOP: for (;;) {
-				ch = (char) chInt;
-				if (Character.isLetter(ch)) {
-					// Speed up normal case
-					break LOOP;
-				} else if (ch == '!') {
-					sb.append('!');
-					chInt = reader.read();
-					if (chInt != -1) {
-						ch = (char) chInt;
-						if (ch == '-') {
-							sb.append('-');
-							chInt = reader.read();
-							if (chInt != -1) {
-								ch = (char) chInt;
-								if (ch == '-') {
-									sb.append('-');
-									cont = false;
-								}
-							} else {
-								cont = false;
-							}
-						}
-					} else {
-						cont = false;
-					}
-				} else if (ch == '/') {
-					sb.append(ch);
-					chInt = reader.read();
-					if (chInt != -1) {
-						ch = (char) chInt;
-					} else {
-						cont = false;
-					}
-				} else if (ch == '<') {
-					final StringBuffer ltText = new StringBuffer(3);
-					ltText.append('<');
-					while ((chInt = reader.read()) == '<') {
-						ltText.append('<');
-					}
-					final Document doc = this.document;
-					final Node textNode = doc.createTextNode(ltText.toString());
-					try {
-						parent.appendChild(textNode);
-					} catch (final DOMException de) {
-						if (parent.getNodeType() != Node.DOCUMENT_NODE
-								|| de.code != DOMException.HIERARCHY_REQUEST_ERR) {
-							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
-						}
-					}
-					if (chInt == -1) {
-						cont = false;
-					} else {
-						continue LOOP;
-					}
-				} else if (Character.isWhitespace(ch)) {
-					final StringBuffer ltText = new StringBuffer();
-					ltText.append('<');
-					ltText.append(ch);
-					while ((chInt = reader.read()) != -1) {
-						ch = (char) chInt;
-						if (ch == '<') {
-							chInt = reader.read();
-							break;
-						}
-						ltText.append(ch);
-					}
-					final Document doc = this.document;
-					final Node textNode = doc.createTextNode(ltText.toString());
-					try {
-						parent.appendChild(textNode);
-					} catch (final DOMException de) {
-						if (parent.getNodeType() != Node.DOCUMENT_NODE
-								|| de.code != DOMException.HIERARCHY_REQUEST_ERR) {
-							logger.log(Level.WARNING, "parseToken(): Unable to append child to " + parent + ".", de);
-						}
-					}
-					if (chInt == -1) {
-						cont = false;
-					} else {
-						continue LOOP;
-					}
-				}
-				break LOOP;
+	private void safeAppendChild(final Node parent, final Node child) {
+		Node newParent = parent;
+		if (needRoot) {
+			final String nodeName = child.getNodeName();
+			if ("HTML".equalsIgnoreCase(nodeName)) {
+				lastRootElement = child;
+			} else if ((child instanceof Element) && (depthAtMost(parent, 1)) && (!hasAncestorTag(parent, "HTML"))) {
+				ensureRootElement(parent);
+				newParent = lastRootElement;
 			}
-			if (cont) {
-				boolean lastCharSlash = false;
-				for (;;) {
-					if (Character.isWhitespace(ch)) {
-						break;
-					} else if (ch == '>') {
-						this.justReadTagEnd = true;
-						this.justReadTagBegin = false;
-						this.justReadEmptyElement = lastCharSlash;
-						final String tag = sb.toString();
-						return tag;
-					} else if (ch == '/') {
-						lastCharSlash = true;
-					} else {
-						if (lastCharSlash) {
-							sb.append('/');
-						}
-						lastCharSlash = false;
-						sb.append(ch);
-					}
-					chInt = reader.read();
-					if (chInt == -1) {
-						break;
-					}
-					ch = (char) chInt;
+		}
+
+		ensureBodyAppendChild(newParent, child);
+	}
+
+	private void ensureRootElement(final Node parent) {
+		if (lastRootElement == null) {
+			// System.out.println("Inserting HTML");
+			lastRootElement = document.createElement("HTML");
+			parent.appendChild(lastRootElement);
+		}
+	}
+
+	private static boolean depthAtMost(final Node n, final int maxDepth) {
+		if (maxDepth <= 0) {
+			return false;
+		} else {
+			final Node parent = n.getParentNode();
+			return parent == null ? true : depthAtMost(parent, maxDepth - 1);
+		}
+	}
+
+	private void ensureBodyAppendChild(final Node parent, final Node child) {
+		Node newParent = parent;
+		if (needRoot) {
+			// final String nodeName = child.getNodeName();
+			final String nodeNameTU = child.getNodeName().toUpperCase();
+			if ("BODY".equals(nodeNameTU)) {
+				lastBodyElement = child;
+				// System.out.println("Found body elem: " + child);
+			} else if ("HEAD".equals(nodeNameTU)) {
+				lastHeadElement = child;
+			} else if ((child instanceof Element) && (depthAtMost(parent, 2))) {
+				final boolean dontNeedBody = ArrayUtilities.contains(elementsThatDontNeedBodyElement, nodeNameTU);
+				final boolean dontNeedHead = ArrayUtilities.contains(elementsThatDontNeedHeadElement, nodeNameTU);
+				if ((!hasAncestorTag(parent, "BODY")) && (!dontNeedBody)) {
+					ensureBodyElement(parent);
+					newParent = lastBodyElement;
+				} else if ((!hasAncestorTag(parent, "HEAD")) && (!dontNeedHead)) {
+					ensureHeadElement(parent);
+					newParent = lastHeadElement;
 				}
 			}
 		}
-		if (sb.length() > 0) {
-			this.justReadTagEnd = false;
-			this.justReadTagBegin = false;
-			this.justReadEmptyElement = false;
-		}
-		final String tag = sb.toString();
-		return tag;
+		newParent.appendChild(child);
 	}
 
-	/**
-	 * Reads text until the beginning of the next tag. Leaves the reader offset past
-	 * the opening angle bracket. Returns null only on EOF.
-	 */
-	private final StringBuffer readUpToTagBegin(LineNumberReader reader) throws IOException, SAXException {
+	private void ensureBodyElement(final Node parent) {
+		if (lastBodyElement == null) {
+			// System.out.println("Inserting BODY");
+			lastBodyElement = document.createElement("BODY");
+			parent.appendChild(lastBodyElement);
+		}
+	}
+
+	private void ensureHeadElement(final Node parent) {
+		if (lastHeadElement == null) {
+			// System.out.println("Inserting HEAD");
+			lastHeadElement = document.createElement("HEAD");
+			parent.appendChild(lastHeadElement);
+		}
+	}
+
+	private boolean shouldDecodeEntities(final ElementInfo einfo) {
+		return (einfo == null ? true : einfo.decodeEntities);
+	}
+
+	private final static StringBuffer entityDecode(final StringBuffer rawText) throws org.xml.sax.SAXException {
+		int startIdx = 0;
 		StringBuffer sb = null;
-		int intCh;
-		while ((intCh = reader.read()) != -1) {
-			final char ch = (char) intCh;
-			if (ch == '<') {
-				this.justReadTagBegin = true;
-				this.justReadTagEnd = false;
-				this.justReadEmptyElement = false;
+		for (;;) {
+			final int ampIdx = rawText.indexOf("&", startIdx);
+			if (ampIdx == -1) {
 				if (sb == null) {
-					sb = new StringBuffer(0);
+					return rawText;
+				} else {
+					sb.append(rawText.substring(startIdx));
+					return sb;
 				}
-				return sb;
 			}
 			if (sb == null) {
 				sb = new StringBuffer();
 			}
-			sb.append(ch);
-		}
-		this.justReadTagBegin = false;
-		this.justReadTagEnd = false;
-		this.justReadEmptyElement = false;
-		return sb;
-	}
-
-	private static void readCData(LineNumberReader reader, StringBuffer sb) throws IOException {
-		int next = reader.read();
-		while (next >= 0) {
-			final char nextCh = (char) next;
-			if (nextCh == ']') {
-				final String next2 = readN(reader, 2);
-				if (next2 != null) {
-					if ("]>".equals(next2)) {
-						break;
+			sb.append(rawText.substring(startIdx, ampIdx));
+			final int colonIdx = rawText.indexOf(";", ampIdx);
+			if (colonIdx == -1) {
+				sb.append('&');
+				startIdx = ampIdx + 1;
+				continue;
+			}
+			final String spec = rawText.substring(ampIdx + 1, colonIdx);
+			if (spec.startsWith("#")) {
+				final String number = spec.substring(1).toLowerCase();
+				int decimal;
+				try {
+					if (number.startsWith("x")) {
+						decimal = Integer.parseInt(number.substring(1), 16);
 					} else {
-						sb.append(next2);
-						next = reader.read();
+						decimal = Integer.parseInt(number);
 					}
-				} else {
-					break;
+				} catch (final NumberFormatException nfe) {
+					logger.log(Level.WARNING, "entityDecode()", nfe);
+					decimal = 0;
 				}
+				sb.append((char) decimal);
 			} else {
-				sb.append(nextCh);
-				next = reader.read();
+				final int chInt = getEntityChar(spec);
+				if (chInt == -1) {
+					sb.append('&');
+					sb.append(spec);
+					sb.append(';');
+				} else {
+					sb.append((char) chInt);
+				}
 			}
+			startIdx = colonIdx + 1;
 		}
 	}
 
-	private static String readN(final LineNumberReader reader, final int n) {
-		char[] chars = new char[n];
-		int i = 0;
-		while (i < n) {
-			int ich = -1;
-			try {
-				ich = reader.read();
-			} catch (IOException e) {
-				break;
-			}
-			if (ich >= 0) {
-				chars[i] = (char) ich;
-				i += 1;
-			} else {
-				break;
+	private final static int getEntityChar(final String spec) {
+		Character c = (Character) HTMLObject.ENTITIES.get(Entities.get(spec));
+		if (c == null) {
+			final String specTL = spec.toLowerCase();
+			c = (Character) HTMLObject.ENTITIES.get(Entities.get(specTL));
+			if (c == null) {
+				return -1;
 			}
 		}
-
-		if (i == 0) {
-			return null;
-		} else {
-			return new String(chars, 0, i);
-		}
+		return c.charValue();
 	}
-
 }

@@ -598,7 +598,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		if (reader != null) {
 			try {
 				final ErrorHandler errorHandler = new LocalErrorHandler();
-				final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler);
+				final HtmlParser parser = new HtmlParser(ucontext, document, errorHandler, true);
 				parser.parse(reader);
 			} finally {
 				if (closeReader) {
@@ -771,7 +771,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		// Assumed to execute in a lock
 		// Assumed that text is not broken up HTML.
 		final ErrorHandler errorHandler = new LocalErrorHandler();
-		final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler);
+		final HtmlParser parser = new HtmlParser(this.ucontext, this, errorHandler, true);
 		final StringReader strReader = new StringReader(text);
 		try {
 			// This sets up another Javascript scope Window. Does it matter?
