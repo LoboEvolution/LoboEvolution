@@ -45,7 +45,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getlocalName()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getlocalName()
 	 */
 	@Override
 	public String getLocalName() {
@@ -55,7 +55,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeName()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeName()
 	 */
 	@Override
 	public String getNodeName() {
@@ -65,7 +65,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeType()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeType()
 	 */
 	@Override
 	public short getNodeType() {
@@ -75,7 +75,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeValue()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeValue()
 	 */
 	@Override
 	public String getNodeValue() throws DOMException {
@@ -124,7 +124,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#setnodeValue(java.lang.String)
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#setnodeValue(java.lang.String)
 	 */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {

@@ -1604,7 +1604,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -1628,7 +1628,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
 	@Override
@@ -1649,7 +1649,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -1674,7 +1674,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override

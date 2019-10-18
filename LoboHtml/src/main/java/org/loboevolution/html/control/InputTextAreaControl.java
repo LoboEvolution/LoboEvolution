@@ -72,7 +72,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getCols()
+	 * @see org.loboevolution.html.rendered.BaseInputControl#getCols()
 	 */
 	@Override
 	public int getCols() {
@@ -108,7 +108,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getReadOnly()
+	 * @see org.loboevolution.html.rendered.BaseInputControl#getReadOnly()
 	 */
 	@Override
 	public boolean getReadOnly() {
@@ -118,7 +118,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getRows()
+	 * @see org.loboevolution.html.rendered.BaseInputControl#getRows()
 	 */
 	@Override
 	public int getRows() {
@@ -128,7 +128,7 @@ public class InputTextAreaControl extends BaseInputControl {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BaseInputControl#getValue()
+	 * @see org.loboevolution.html.rendered.BaseInputControl#getValue()
 	 */
 	@Override
 	public String getValue() {

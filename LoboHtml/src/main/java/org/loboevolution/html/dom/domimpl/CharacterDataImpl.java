@@ -49,7 +49,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#cloneNode(boolean)
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#cloneNode(boolean)
 	 */
 	@Override
 	public Node cloneNode(boolean deep) {

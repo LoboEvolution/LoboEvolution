@@ -71,7 +71,7 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.HTMLElementImpl#assignAttributeField(java.lang.
+	 * @see org.loboevolution.html.dom.domimpl.HTMLElementImpl#assignAttributeField(java.lang.
 	 * String, java.lang.String)
 	 */
 	@Override

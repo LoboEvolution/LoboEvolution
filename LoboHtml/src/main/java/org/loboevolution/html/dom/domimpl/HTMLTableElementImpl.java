@@ -156,7 +156,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getHeightLength()
+	 * @see org.loboevolution.html.rendered.RenderableContext#getHeightLength()
 	 */
 	public HtmlLength getHeightLength(int availHeight) {
 		try {
@@ -210,7 +210,7 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getWidthLength()
+	 * @see org.loboevolution.html.rendered.RenderableContext#getWidthLength()
 	 */
 	public HtmlLength getWidthLength(int availWidth) {
 		try {

@@ -191,7 +191,7 @@ class RTable extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BoundableRenderable#getRenderablePoint(int,
+	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
 	@Override
@@ -220,7 +220,7 @@ class RTable extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContainer#getBackground()
+	 * @see org.loboevolution.html.rendered.RenderableContainer#getBackground()
 	 */
 	@Override
 	public Color getPaintedBackgroundColor() {
@@ -230,7 +230,7 @@ class RTable extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RCollection#getRenderables()
+	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
 	 */
 	@Override
 	public Iterator getRenderables() {
@@ -298,7 +298,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -326,7 +326,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
 	@Override
@@ -338,7 +338,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -366,7 +366,7 @@ class RTable extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override

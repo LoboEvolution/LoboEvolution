@@ -277,7 +277,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getAlignmentX()
+	 * @see org.loboevolution.html.rendered.RenderableContext#getAlignmentX()
 	 */
 	public float getAlignmentX() {
 		return 0.5f;
@@ -286,7 +286,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getAlignmentY()
+	 * @see org.loboevolution.html.rendered.RenderableContext#getAlignmentY()
 	 */
 	public float getAlignmentY() {
 		return 0.5f;
@@ -351,7 +351,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#getDocumentItem(java.lang.String)
+	 * org.loboevolution.html.rendered.RenderableContext#getDocumentItem(java.lang.String)
 	 */
 	@Override
 	public Object getDocumentItem(String name) {
@@ -388,7 +388,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContext#getFullURL(java.lang.String)
+	 * @see org.loboevolution.html.rendered.RenderableContext#getFullURL(java.lang.String)
 	 */
 	@Override
 	public URL getFullURL(String spec) throws MalformedURLException {
@@ -811,8 +811,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#isEqualOrDescendentOf(org.xamjwg.
-	 * html.renderer.RenderableContext)
+	 * org.loboevolution.html.rendered.RenderableContext#isEqualOrDescendentOf(org.loboevolution.html.rendered.RenderableContext)
 	 */
 	@Override
 	public final boolean isEqualOrDescendentOf(ModelNode otherContext) {
@@ -1023,7 +1022,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.RenderableContext#setDocumentItem(java.lang.String,
+	 * org.loboevolution.html.rendered.RenderableContext#setDocumentItem(java.lang.String,
 	 * java.lang.Object)
 	 */
 	@Override

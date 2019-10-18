@@ -299,7 +299,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getbaseURI()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getbaseURI()
 	 */
 	@Override
 	public String getBaseURI() {

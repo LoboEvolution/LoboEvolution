@@ -129,7 +129,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getattributes()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getattributes()
 	 */
 	@Override
 	public NamedNodeMap getAttributes() {
@@ -159,7 +159,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getLocalName()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getLocalName()
 	 */
 	@Override
 	public String getLocalName() {
@@ -169,7 +169,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeName()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeName()
 	 */
 	@Override
 	public String getNodeName() {
@@ -179,7 +179,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeType()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeType()
 	 */
 	@Override
 	public short getNodeType() {
@@ -189,7 +189,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getNodeValue()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeValue()
 	 */
 	@Override
 	public String getNodeValue() throws DOMException {
@@ -389,7 +389,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#setNodeValue(java.lang.String)
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#setNodeValue(java.lang.String)
 	 */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {

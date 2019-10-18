@@ -255,8 +255,7 @@ public class RUIControl extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#invalidateState(org.xamjwg.html.
-	 * renderer.RenderableContext)
+	 * org.loboevolution.html.rendered.BoundableRenderable#invalidateState(org.loboevolution.html.rendered.RenderableContext)
 	 */
 	public void invalidateRenderStyle() {
 		// NOP - No RenderStyle below this node.
@@ -286,9 +285,9 @@ public class RUIControl extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BoundableRenderable#paintSelection(java.awt.
-	 * Graphics, boolean, org.xamjwg.html.renderer.RenderablePoint,
-	 * org.xamjwg.html.renderer.RenderablePoint)
+	 * @see org.loboevolution.html.rendered.BoundableRenderable#paintSelection(java.awt.
+	 * Graphics, boolean, org.loboevolution.html.rendered.RenderablePoint,
+	 * org.loboevolution.html.rendered.RenderablePoint)
 	 */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
@@ -323,12 +322,6 @@ public class RUIControl extends BaseElementRenderable {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.ContainingBlockContext#repaint(org.xamjwg.html.
-	 * renderer.RenderableContext)
-	 */
 	@Override
 	public void repaint(ModelNode modelNode) {
 		final Object widget = this.widget;

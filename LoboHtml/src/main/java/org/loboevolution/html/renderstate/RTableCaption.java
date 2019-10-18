@@ -18,7 +18,7 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.renderertable;
+package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
 import org.loboevolution.html.renderer.FrameContext;

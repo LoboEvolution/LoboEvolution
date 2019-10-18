@@ -38,6 +38,7 @@ import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
+import org.loboevolution.html.renderstate.RTableCaption;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
@@ -51,7 +52,6 @@ import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.html.renderertable.RTableCaption;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -906,7 +906,7 @@ class TableMatrix {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BoundableRenderable#getRenderablePoint(int,
+	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
@@ -984,7 +984,7 @@ class TableMatrix {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
@@ -1007,7 +1007,7 @@ class TableMatrix {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
@@ -1024,7 +1024,7 @@ class TableMatrix {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
@@ -1048,7 +1048,7 @@ class TableMatrix {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {

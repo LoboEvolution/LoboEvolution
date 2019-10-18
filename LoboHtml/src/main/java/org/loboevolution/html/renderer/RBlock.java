@@ -604,7 +604,7 @@ public class RBlock extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.BoundableRenderable#getRenderablePoint(int,
+	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
 	@Override
@@ -634,7 +634,7 @@ public class RBlock extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RCollection#getRenderables()
+	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
 	 */
 	@Override
 	public Iterator getRenderables() {
@@ -784,7 +784,7 @@ public class RBlock extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseClick(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -808,7 +808,7 @@ public class RBlock extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseDisarmed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
 	@Override
@@ -843,7 +843,7 @@ public class RBlock extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMousePressed(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -876,7 +876,7 @@ public class RBlock extends BaseElementRenderable {
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * org.xamjwg.html.renderer.BoundableRenderable#onMouseReleased(java.awt.event.
+	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
 	@Override
@@ -989,9 +989,9 @@ public class RBlock extends BaseElementRenderable {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.UIControl#paintSelection(java.awt.Graphics,
-	 * boolean, org.xamjwg.html.renderer.RenderablePoint,
-	 * org.xamjwg.html.renderer.RenderablePoint)
+	 * @see org.loboevolution.html.rendered.UIControl#paintSelection(java.awt.Graphics,
+	 * boolean, org.loboevolution.html.rendered.RenderablePoint,
+	 * org.loboevolution.html.rendered.RenderablePoint)
 	 */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
@@ -1005,54 +1005,8 @@ public class RBlock extends BaseElementRenderable {
 		} finally {
 			newG.dispose();
 		}
-		// boolean endSelectionLater = false;
-		// if(inSelection) {
-		// if(startPoint.renderable == this || endPoint.renderable == this) {
-		// return false;
-		// }
-		// }
-		// else {
-		// if(startPoint.renderable == this || endPoint.renderable == this) {
-		// // This can only occur if the selection point
-		// // is on the margin or border or the block.
-		// inSelection = true;
-		// if(startPoint.renderable == this && endPoint.renderable == this) {
-		// // Start and end selection points on margin or border.
-		// endSelectionLater = true;
-		// }
-		// }
-		// }
-		// RBlockViewport bodyLayout = this.bodyLayout;
-		// if(bodyLayout != null) {
-		// Insets insets = this.getInsetsMarginBorder(this.hasHScrollBar,
-		// this.hasVScrollBar);
-		// Graphics newG = g.create(insets.left, insets.top, this.width -
-		// insets.left - insets.right, this.height - insets.top -
-		// insets.bottom);
-		// try {
-		// newG.translate(bodyLayout.x - insets.left, bodyLayout.y -
-		// insets.top);
-		// boolean newInSelection = bodyLayout.paintSelection(newG, inSelection,
-		// startPoint, endPoint);
-		// if(endSelectionLater) {
-		// return false;
-		// }
-		// return newInSelection;
-		// } finally {
-		// newG.dispose();
-		// }
-		// }
-		// else {
-		// return inSelection;
-		// }
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.xamjwg.html.domimpl.ContainingBlockContext#repaint(org.xamjwg.html.
-	 * domimpl.RenderableContext)
-	 */
 	@Override
 	public void repaint(ModelNode modelNode) {
 		// this.invalidateRenderStyle();

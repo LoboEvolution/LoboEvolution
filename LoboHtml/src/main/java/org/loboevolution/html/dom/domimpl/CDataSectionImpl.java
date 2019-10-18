@@ -39,7 +39,7 @@ public class CDataSectionImpl extends TextImpl implements CDATASection {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeName()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeName()
 	 */
 	@Override
 	public String getNodeName() {
@@ -49,7 +49,7 @@ public class CDataSectionImpl extends TextImpl implements CDATASection {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.domimpl.NodeImpl#getnodeType()
+	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeType()
 	 */
 	@Override
 	public short getNodeType() {

@@ -102,7 +102,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContainer#add(java.awt.Component)
+	 * @see org.loboevolution.html.rendered.RenderableContainer#add(java.awt.Component)
 	 */
 	@Override
 	public Component addComponent(Component component) {
@@ -127,7 +127,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.xamjwg.html.renderer.RenderableContainer#add(java.awt.Component)
+	 * @see org.loboevolution.html.rendered.RenderableContainer#add(java.awt.Component)
 	 */
 	@Override
 	public void addDelayedPair(DelayedPair pair) {
