@@ -1,0 +1,59 @@
+package org.loboevolution.tab;
+
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.InvalidDnDOperationException;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+
+import javax.swing.SwingUtilities;
+
+public class DragGestureListenerImpl implements DragGestureListener {
+
+	private DragSourceAdapterImpl dragSourceListener = null;
+
+	private final Image emptyImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+
+	private final Point emptyPoint = new Point();
+
+	private final DnDTabbedPane tab;
+
+	private final Transferable transferable = new TransferableImpl();
+
+	public DragGestureListenerImpl(DnDTabbedPane tab) {
+		this.tab = tab;
+		this.dragSourceListener = new DragSourceAdapterImpl(tab);
+	}
+
+	@Override
+	public void dragGestureRecognized(DragGestureEvent dge) {
+		if (this.tab.getTabCount() < 2 || !SwingUtilities.isLeftMouseButton((MouseEvent) dge.getTriggerEvent())) {
+			return;
+		}
+
+		final Point p = dge.getDragOrigin();
+		this.tab.dragTabIdx = this.tab.indexAtLocation(p.x, p.y);
+
+		if (this.tab.dragTabIdx < 0 || !this.tab.isEnabledAt(this.tab.dragTabIdx)) {
+			this.tab.dragTabIdx = -1;
+			return;
+		}
+		this.tab.setSelectedIndex(this.tab.dragTabIdx);
+
+		this.tab.getRootPane().setGlassPane(this.tab.getGlass());
+
+		this.tab.getGlass().createImage(dge.getComponent());
+
+		try {
+			dge.startDrag(DragSource.DefaultMoveDrop, this.emptyImage, this.emptyPoint, this.transferable,
+					this.dragSourceListener);
+		} catch (final InvalidDnDOperationException e) {
+			e.printStackTrace();
+		}
+	}
+
+}

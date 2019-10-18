@@ -48,7 +48,7 @@
 		<mkdir dir="build"/>
 		<jar destfile="build/LoboEvo.jar" basedir="bin">
 			<manifest>
-				<attribute name="Main-Class" value="org.lobo.init.PlatformInit"/>
+				<attribute name="Main-Class" value="org.loboevolution.init.PlatformInit"/>
 			</manifest>
 		</jar>
 	</target>

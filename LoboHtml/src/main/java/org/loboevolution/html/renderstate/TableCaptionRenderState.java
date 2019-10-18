@@ -20,9 +20,9 @@
  */
 package org.loboevolution.html.renderstate;
 
-import org.lobobrowser.html.dom.domimpl.HTMLElementImpl;
-import org.lobobrowser.html.renderstate.DisplayRenderState;
-import org.lobobrowser.html.renderstate.RenderState;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.renderstate.DisplayRenderState;
+import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * The Class TableCaptionRenderState.

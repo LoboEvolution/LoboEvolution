@@ -20,12 +20,12 @@
  */
 package org.loboevolution.html.renderertable;
 
-import org.lobobrowser.html.dom.domimpl.HTMLTableCaptionElementImpl;
-import org.lobobrowser.html.renderer.FrameContext;
-import org.lobobrowser.html.renderer.RBlock;
-import org.lobobrowser.html.renderer.RenderableContainer;
-import org.lobobrowser.http.HtmlRendererContext;
-import org.lobobrowser.http.UserAgentContext;
+import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
+import org.loboevolution.html.renderer.FrameContext;
+import org.loboevolution.html.renderer.RBlock;
+import org.loboevolution.html.renderer.RenderableContainer;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.http.UserAgentContext;
 
 /**
  * The Class RTableCaption.
