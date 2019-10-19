@@ -255,11 +255,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
-	 */
 	@Override
 	public void restoreDefaults() {
 		final ToolsStore settings = new ToolsStore();
@@ -267,11 +262,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		loadSettings();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.prefs.AbstractSettingsUI#save()
-	 */
 	@Override
 	public void save() {
 		final ToolsStore settings = new ToolsStore();

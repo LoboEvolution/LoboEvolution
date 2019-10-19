@@ -46,11 +46,6 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 		this.add(this.formPanel);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.AbstractItemEditor#getItem()
-	 */
 	@Override
 	public SearchEngineStore getItem() {
 		final SearchEngineStore se = new SearchEngineStore();
@@ -61,12 +56,6 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 		return se;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.primary.gui.AbstractItemEditor#setItem(java.lang.Object)
-	 */
 	@Override
 	public void setItem(SearchEngineStore item) {
 		this.nameField.setValue(item.getName());
@@ -76,11 +65,6 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 		this.formPanel.revalidate();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.AbstractItemEditor#validateItem()
-	 */
 	@Override
 	public void validateItem() {
 		if (Strings.isBlank(this.nameField.getValue()) || Strings.isBlank(this.baseUrlField.getValue())

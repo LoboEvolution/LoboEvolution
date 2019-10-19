@@ -58,6 +58,7 @@ import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IToolBar;
 import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.pdf.PdfDialog;
 import org.loboevolution.store.LinkStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
@@ -444,32 +445,37 @@ public class HtmlRendererContext {
 	 * Implements the link click handler by invoking {@link #navigate(URL, String)}.
 	 */
 	public void linkClicked(URL url, boolean isNewTab) {
-		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
-		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
-		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
-		int index = -1;
-		
-		if(isNewTab) {
-			index = TabStore.getTabs().size();
-		} else {
-			index = tabbedPane.getIndex();
-		}
-		
 		String fullURL = url.toString();
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
-		hpanel.setBrowserPanel(bpanel);
-		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
-		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
-		if(!isNewTab) {
-			tabbedPane.remove(index);
+		if (fullURL.endsWith(".pdf")) {
+			PdfDialog viewer = new PdfDialog(true);
+			viewer.doOpen(fullURL);
+		} else {
+			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
+			int index = -1;
+
+			if (isNewTab) {
+				index = TabStore.getTabs().size();
+			} else {
+				index = tabbedPane.getIndex();
+			}
+
+			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
+			hpanel.setBrowserPanel(bpanel);
+			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+			if (!isNewTab) {
+				tabbedPane.remove(index);
+			}
+			tabbedPane.insertTab(title, null, hpanel, title, index);
+			tabbedPane.setSelectedIndex(index);
+			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+			browserFrame.getToolbar().getAddressBar().setText(fullURL);
+			TabStore.insertTab(index, fullURL, title);
+			LinkStore.insertLinkVisited(fullURL);
+			bpanel.getScroll().getViewport().add(tabbedPane);
 		}
-		tabbedPane.insertTab(title, null, hpanel, title, index);
-		tabbedPane.setSelectedIndex(index);
-		final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-		browserFrame.getToolbar().getAddressBar().setText(fullURL);
-		TabStore.insertTab(index, fullURL, title);
-		LinkStore.insertLinkVisited(fullURL);
-		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 
 	public void moveInHistory(int offset) {
@@ -503,7 +509,6 @@ public class HtmlRendererContext {
 	 * This method must be overridden to implement a context menu.
 	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
-		
 		HTMLElementImpl elem = (HTMLElementImpl) element;
 		HTMLImageElementImpl elmImg = new HTMLImageElementImpl();
 		if (elem.getCurrentStyle() != null && Strings.isNotBlank(elem.getCurrentStyle().getBackgroundImage())) {
@@ -515,7 +520,6 @@ public class HtmlRendererContext {
 			elmImg.setSrc(quotedUri);
 			element = elmImg;
 		}
-		
 		HtmlContextMenu menu = new HtmlContextMenu(element, this);
 		if (element instanceof HTMLImageElementImpl) {
 			JPopupMenu popupMenuImage = menu.popupMenuImage();

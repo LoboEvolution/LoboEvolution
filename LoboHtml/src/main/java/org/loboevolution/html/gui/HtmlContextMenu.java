@@ -174,7 +174,6 @@ public class HtmlContextMenu {
 			}
 		});
 		popupMenu.add(menuItem);
-
 		JMenuItem copyLinkURL = new JMenuItem("Copy link URL");
 		copyLinkURL.setIcon(IconFactory.getInstance().getIcon(COPY));
 		copyLinkURL.addActionListener(e -> {
@@ -182,19 +181,14 @@ public class HtmlContextMenu {
 			clipboard.setContents(new StringSelection(link.getAbsoluteHref()), null);
 		});
 		popupMenu.add(copyLinkURL);
-
 		JMenuItem saveImage = new JMenuItem("Save destination");
-
 		saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
 		saveImage.addActionListener(e -> {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 			fileChooser.setAcceptAllFileFilterUsed(true);
-
 			int returnValue = fileChooser.showSaveDialog(context.getHtmlPanel());
-
 			if (returnValue == JFileChooser.APPROVE_OPTION) {
-
 				File selectedFile = getSelectedFileWithExtension(fileChooser);
 				if (selectedFile.exists()) {
 					int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?", "Confirm Overwrite",
@@ -230,9 +224,7 @@ public class HtmlContextMenu {
 			}
 		});
 		popupMenu.add(saveImage);
-
 		return popupMenu;
-
 	}
 
 	/**

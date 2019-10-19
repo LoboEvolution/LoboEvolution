@@ -172,11 +172,6 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		this.hostPortPanel.revalidate();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
-	 */
 	@Override
 	public void restoreDefaults() {
 		final ConnectionStore settings = new ConnectionStore();
@@ -184,11 +179,6 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		loadSettings();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.prefs.AbstractSettingsUI#save()
-	 */
 	@Override
 	public void save() throws RuntimeException {
 		final ConnectionStore settings = new ConnectionStore();

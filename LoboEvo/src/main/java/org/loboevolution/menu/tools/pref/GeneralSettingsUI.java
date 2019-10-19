@@ -267,22 +267,12 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.dimensionPanel.revalidate();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.prefs.AbstractSettingsUI#restoreDefaults()
-	 */
 	@Override
 	public void restoreDefaults() {
 		GeneralStore.restoreDefaults();
 		loadSettings();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.primary.gui.prefs.AbstractSettingsUI#save()
-	 */
 	@Override
 	public void save() {
 		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
