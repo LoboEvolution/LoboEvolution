@@ -27,6 +27,7 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Window;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -43,7 +44,9 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
@@ -74,6 +77,7 @@ import org.loboevolution.html.gui.HtmlContextMenu;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
+import org.loboevolution.img.ImageViewer;
 import org.xml.sax.InputSource;
 
 /**
@@ -499,19 +503,31 @@ public class HtmlRendererContext {
 	 * This method must be overridden to implement a context menu.
 	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
+		
+		HTMLElementImpl elem = (HTMLElementImpl) element;
+		HTMLImageElementImpl elmImg = new HTMLImageElementImpl();
+		if (elem.getCurrentStyle() != null && Strings.isNotBlank(elem.getCurrentStyle().getBackgroundImage())) {
+			final String backgroundImageText = elem.getCurrentStyle().getBackgroundImage();
+			String start = "url(";
+			int startIdx = start.length() + 1;
+			int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
+			String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
+			elmImg.setSrc(quotedUri);
+			element = elmImg;
+		}
+		
 		HtmlContextMenu menu = new HtmlContextMenu(element, this);
 		if (element instanceof HTMLImageElementImpl) {
 			JPopupMenu popupMenuImage = menu.popupMenuImage();
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		} else if (element instanceof HTMLLinkElementImpl) {
-
-			JPopupMenu popupMenuImage = menu.popupMenuLink();
-			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			JPopupMenu popupMenuLink = menu.popupMenuLink();
+			popupMenuLink.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		} else if (element instanceof HTMLAbstractUIElement) {
-			JPopupMenu popupMenuImage = menu.popupMenuAbstractUI();
-			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
+			JPopupMenu popupMenuAbstract = menu.popupMenuAbstractUI();
+			popupMenuAbstract.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		}
 		return true;
@@ -567,6 +583,29 @@ public class HtmlRendererContext {
 		LinkStore.insertLinkVisited(fullURL);
 		bpanel.getScroll().getViewport().add(tabbedPane);
 		return nodeImpl.getHtmlRendererContext();
+	}
+	
+
+	public void openImageViewer(URL srcUrl) {
+		try {
+			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+			final BufferedImage img = ImageIO.read(srcUrl);
+			final ImageViewer viewer = new ImageViewer(img);
+			final String title = "Image Viewer";
+			String fullURL = srcUrl.toString();
+			int index = TabStore.getTabs().size();
+			JPanel jPanel = new JPanel();
+			jPanel.add(viewer.getComponent());
+			browserFrame.getToolbar().getAddressBar().setText(fullURL);
+			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
+			TabStore.insertTab(index, fullURL, title);
+			LinkStore.insertLinkVisited(fullURL);
+			bpanel.getScroll().getViewport().add(tabbedPane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

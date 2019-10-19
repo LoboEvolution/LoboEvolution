@@ -63,8 +63,6 @@ public class HtmlController {
 			}
 			final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 			if (rcontext != null) {
-				// Needs to be done after Javascript, so the script
-				// is able to prevent it.
 				if (!rcontext.onContextMenu(uiElement, event)) {
 					return false;
 				}

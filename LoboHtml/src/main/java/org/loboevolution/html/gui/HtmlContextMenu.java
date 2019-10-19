@@ -104,7 +104,7 @@ public class HtmlContextMenu {
 			JMenuItem menuItem = new JMenuItem("View image");
 			menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
 			menuItem.addActionListener(e -> {
-				context.navigate(srcUrl, null);
+				context.openImageViewer(srcUrl);
 			});
 			popupMenu.add(menuItem);
 
@@ -124,11 +124,8 @@ public class HtmlContextMenu {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 				fileChooser.setAcceptAllFileFilterUsed(true);
-
 				int returnValue = fileChooser.showSaveDialog(context.getHtmlPanel());
-
 				if (returnValue == JFileChooser.APPROVE_OPTION) {
-
 					File selectedFile = getSelectedFileWithExtension(fileChooser);
 					if (selectedFile.exists()) {
 						int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?",
@@ -138,7 +135,6 @@ public class HtmlContextMenu {
 						}
 					}
 					BufferedImage image = null;
-
 					try {
 						int dot = srcUrl.toExternalForm().lastIndexOf('.');
 						String ext = srcUrl.toExternalForm().substring(dot + 1);
