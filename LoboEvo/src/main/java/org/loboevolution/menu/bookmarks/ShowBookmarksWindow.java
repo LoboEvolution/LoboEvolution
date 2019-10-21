@@ -1,7 +1,9 @@
 package org.loboevolution.menu.bookmarks;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -9,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -109,12 +112,14 @@ public class ShowBookmarksWindow extends JFrame {
 		final BookmarksStore history = new BookmarksStore();
 		final List<BookmarkInfo> allEntries = history.getBookmarks(num);
 		for (final BookmarkInfo binfo : allEntries) {
-			values.add(new String[] { binfo.getTitle(), binfo.getDescription(), binfo.getUrl().toString(),
-					binfo.getTagsText() });
+			values.add(new String[] { binfo.getTitle(), binfo.getDescription(), binfo.getUrl().toString(), binfo.getTagsText() });
 		}
 
 		final JTable jtable = new JTable(values.toArray(new Object[][] {}), columnNames);
 		this.rowSorter = new TableRowSorter<>(jtable.getModel());
+		jtable.setFont(new Font("Segoe UI", 0, 12));
+		jtable.setGridColor(new Color(255, 255, 255));
+		jtable.setRowHeight(22);
 		jtable.setPreferredScrollableViewportSize(jtable.getPreferredSize());
 		jtable.setShowGrid(false);
 		jtable.setRowSorter(this.rowSorter);
@@ -148,6 +153,10 @@ public class ShowBookmarksWindow extends JFrame {
 				}
 			}
 		});
-		return new JScrollPane(jtable);
+		
+		JScrollPane pane = new JScrollPane();
+		pane.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
+		pane.setViewportView(jtable);
+		return pane;
 	}
 }

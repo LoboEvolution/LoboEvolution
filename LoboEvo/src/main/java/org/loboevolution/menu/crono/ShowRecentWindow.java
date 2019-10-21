@@ -1,13 +1,16 @@
 package org.loboevolution.menu.crono;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -106,6 +109,9 @@ public class ShowRecentWindow extends JFrame {
 		final List<String[]> hostEntries = history.getRecentHostEntries(100);
 		final JTable jtable = new JTable(hostEntries.toArray(new Object[][] {}), columnNames);
 		this.rowSorter = new TableRowSorter<>(jtable.getModel());
+		jtable.setFont(new Font("Segoe UI", 0, 12));
+		jtable.setGridColor(new Color(255, 255, 255));
+		jtable.setRowHeight(22);
 		jtable.setPreferredScrollableViewportSize(jtable.getPreferredSize());
 		jtable.setTableHeader(null);
 		jtable.setShowGrid(false);
@@ -139,7 +145,10 @@ public class ShowRecentWindow extends JFrame {
 				}
 			}
 		});
-		return new JScrollPane(jtable);
+		JScrollPane pane = new JScrollPane();
+		pane.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255)));
+		pane.setViewportView(jtable);
+		return pane;
 	}
 
 }
