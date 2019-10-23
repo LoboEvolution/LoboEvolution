@@ -26,6 +26,7 @@ package org.loboevolution.html.dom.domimpl;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
@@ -34,6 +35,7 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Context;
+import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
@@ -98,49 +100,58 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		if (bcontext == null) {
 			throw new IllegalStateException("No user agent context.");
 		}
-		
+
 		final Document doc = this.document;
 		final Scriptable scope = (Scriptable) doc.getUserData(Executor.SCOPE_KEY);
-		
-        if (scope == null) {
-            throw new IllegalStateException("Scriptable (scope) instance was expected to be keyed as UserData to document using " + Executor.SCOPE_KEY);
-        }
+
+		if (scope == null) {
+			throw new IllegalStateException(
+					"Scriptable (scope) instance was expected to be keyed as UserData to document using "
+							+ Executor.SCOPE_KEY);
+		}
 
 		if (bcontext.isScriptingEnabled()) {
 			final Context ctx = Executor.createContext(getDocumentURL(), bcontext);
-            ctx.setLanguageVersion(Context.VERSION_1_8);
-            ctx.setOptimizationLevel(-1);
+			ctx.setLanguageVersion(Context.VERSION_1_8);
+			ctx.setOptimizationLevel(-1);
 			final String src = getSrc();
-
-			if (Strings.isNotBlank(src)) {
-				BufferedReader br = null;
-				try {
-	                this.informExternalScriptLoading();
-	                URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
-	                String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-					final URL url = new URL(src);
-					br = new BufferedReader(new InputStreamReader(url.openStream()));
-					ctx.evaluateReader(scope, br, scriptURI, 1, null);
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
+			try {
+				if (Strings.isNotBlank(src)) {
+					BufferedReader br = null;
 					try {
-						if (br != null) {
-							br.close();
-						}
+						this.informExternalScriptLoading();
+						URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
+						String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
+						final URL url = new URL(src);
+						br = new BufferedReader(new InputStreamReader(url.openStream()));
+						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (Exception e) {
 						e.printStackTrace();
+					} finally {
+						try {
+							if (br != null) {
+								br.close();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
+				} else {
+					String scriptURI = doc.getBaseURI();
+					text = getText();
+					ctx.evaluateString(scope, text, scriptURI, 1, null);
 				}
-			} else {
-                String scriptURI = doc.getBaseURI();
-				text = getText();
-				ctx.evaluateString(scope, text, scriptURI, 1, null);
+			} catch (final RhinoException ecmaError) {
+				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
+				logger.log(Level.WARNING, "Javascript error at " + error, ecmaError.getMessage());
+			} catch (final Throwable err) {
+				logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
 			} finally {
 				Context.exit();
 			}
 		}
 	}
+
 	@Override
 	public void setDefer(boolean defer) {
 		this.defer = defer;
