@@ -66,7 +66,6 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.HttpRequest;
 import org.loboevolution.http.UserAgentContext;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.DOMException;
@@ -87,20 +86,6 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
  * Implementation of the W3C <code>HTMLDocument</code> interface.
  */
 public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
-
-	private static class ImageInfo {
-		public ImageEvent imageEvent;
-		private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
-		public boolean loaded;
-
-		void addListener(ImageListener listener) {
-			this.listeners.add(listener);
-		}
-
-		ImageListener[] getListeners() {
-			return (ImageListener[]) this.listeners.toArray(ImageListener.EMPTY_ARRAY);
-		}
-	}
 
 	private class LocalWritableLineReader extends WritableLineReader {
 		/**
@@ -132,8 +117,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private volatile String baseURI;
 
-	private final ImageEvent BLANK_IMAGE_EVENT = new ImageEvent(this, null);
-
 	private HTMLElement body;
 
 	private String defaultTarget;
@@ -149,8 +132,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
     private final Map<String, Element> elementsById = new HashMap<String, Element>();
 
 	private final Map<String, Element> elementsByName = new HashMap<String, Element>();
-
-	private final Map<String, ImageInfo> imageInfos = new HashMap<String, ImageInfo>();
 
 	private String inputEncoding;
 
@@ -612,99 +593,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 					}
 				}
 			}
-		}
-	}
-
-	/**
-	 * Loads images asynchronously such that they are shared if loaded
-	 * simultaneously from the same URI. Informs the listener immediately if an
-	 * image is already known.
-	 * 
-	 * @param relativeUri
-	 * @param imageListener
-	 */
-	protected void loadImage(String relativeUri, ImageListener imageListener) {
-		final HtmlRendererContext rcontext = getHtmlRendererContext();
-		if (rcontext == null || !rcontext.isImageLoadingEnabled()) {
-			// Ignore image loading when there's no renderer context.
-			// Consider Cobra users who are only using the parser.
-			imageListener.imageLoaded(this.BLANK_IMAGE_EVENT);
-			return;
-		}
-		final URL url = getFullURL(relativeUri);
-		if (url == null) {
-			imageListener.imageLoaded(this.BLANK_IMAGE_EVENT);
-			return;
-		}
-		final String urlText = url.toExternalForm();
-		final Map<String, ImageInfo> map = this.imageInfos;
-		ImageEvent event = null;
-		synchronized (map) {
-			final ImageInfo info = (ImageInfo) map.get(urlText);
-			if (info != null) {
-				if (info.loaded) {
-					// TODO: This can't really happen because ImageInfo
-					// is removed right after image is loaded.
-					event = info.imageEvent;
-				} else {
-					info.addListener(imageListener);
-				}
-			} else {
-				final UserAgentContext uac = rcontext.getUserAgentContext();
-				final HttpRequest httpRequest = uac.createHttpRequest();
-				final ImageInfo newInfo = new ImageInfo();
-				map.put(urlText, newInfo);
-				newInfo.addListener(imageListener);
-				httpRequest.addReadyStateChangeListener(() -> {
-					if (httpRequest.getReadyState() == HttpRequest.STATE_COMPLETE) {
-						final java.awt.Image newImage = httpRequest.getResponseImage();
-						final ImageEvent newEvent = newImage == null ? null
-								: new ImageEvent(HTMLDocumentImpl.this, newImage);
-						ImageListener[] listeners;
-						synchronized (map) {
-							newInfo.imageEvent = newEvent;
-							newInfo.loaded = true;
-							listeners = newEvent == null ? null : newInfo.getListeners();
-							// Must remove from map in the locked block
-							// that got the listeners. Otherwise a new
-							// listener might miss the event??
-							map.remove(urlText);
-						}
-						if (listeners != null) {
-							final int llength = listeners.length;
-							for (int i = 0; i < llength; i++) {
-								// Call holding no locks
-								listeners[i].imageLoaded(newEvent);
-							}
-						}
-					}
-				});
-				final SecurityManager sm = System.getSecurityManager();
-				if (sm == null) {
-					try {
-						httpRequest.open("GET", url, true);
-						httpRequest.send(null);
-					} catch (Exception thrown) {
-						logger.log(Level.WARNING, "loadImage()", thrown);
-					}
-				} else {
-					AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-						// Code might have restrictions on accessing
-						// items from elsewhere.
-						try {
-							httpRequest.open("GET", url, true);
-							httpRequest.send(null);
-						} catch (Exception thrown) {
-							logger.log(Level.WARNING, "loadImage()", thrown);
-						}
-						return null;
-					});
-				}
-			}
-		}
-		if (event != null) {
-			// Call holding no locks.
-			imageListener.imageLoaded(event);
 		}
 	}
 

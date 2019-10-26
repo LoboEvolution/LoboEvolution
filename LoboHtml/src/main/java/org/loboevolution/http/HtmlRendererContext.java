@@ -57,13 +57,6 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IToolBar;
-import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.pdf.PdfDialog;
-import org.loboevolution.store.LinkStore;
-import org.loboevolution.store.NavigationStore;
-import org.loboevolution.store.TabStore;
-import org.loboevolution.tab.DnDTabbedPane;
-import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.BrowserFrame;
 import org.loboevolution.html.FormInput;
 import org.loboevolution.html.HtmlObject;
@@ -79,6 +72,13 @@ import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.img.ImageViewer;
+import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.pdf.PdfDialog;
+import org.loboevolution.store.LinkStore;
+import org.loboevolution.store.NavigationStore;
+import org.loboevolution.store.TabStore;
+import org.loboevolution.tab.DnDTabbedPane;
+import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.xml.sax.InputSource;
 
 /**
@@ -606,6 +606,25 @@ public class HtmlRendererContext {
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			TabStore.insertTab(index, fullURL, title);
 			LinkStore.insertLinkVisited(fullURL);
+			bpanel.getScroll().getViewport().add(tabbedPane);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void openImageViewer(String fullURL, InputStream stream) {
+		try {
+			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+			final BufferedImage img = ImageIO.read(stream);
+			final ImageViewer viewer = new ImageViewer(img);
+			final String title = "Image Viewer";
+			int index = TabStore.getTabs().size();
+			JPanel jPanel = new JPanel();
+			jPanel.add(viewer.getComponent());
+			browserFrame.getToolbar().getAddressBar().setText(fullURL);
+			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			bpanel.getScroll().getViewport().add(tabbedPane);
 		} catch (IOException e) {
 			e.printStackTrace();

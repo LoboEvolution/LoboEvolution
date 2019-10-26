@@ -23,24 +23,15 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Image;
 import java.io.File;
-import java.util.ArrayList;
-
 import org.loboevolution.html.FormInput;
 import org.loboevolution.html.dom.HTMLFormElement;
-import org.loboevolution.html.js.Executor;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 
 public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
-	protected String deferredValue;
-	private Image image = null;
-
-	private final ArrayList<ImageListener> imageListeners = new ArrayList<ImageListener>(1);
-
-	private String imageSrc;
+	protected String deferredValue;;
 
 	protected InputContext inputContext;
 
@@ -50,71 +41,11 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		super(name);
 	}
 
-	/**
-	 * Adds a listener of image loading events. The listener gets called right away
-	 * if there's already an image.
-	 * 
-	 * @param listener
-	 */
-	public void addImageListener(ImageListener listener) {
-		final ArrayList<ImageListener> l = this.imageListeners;
-		java.awt.Image currentImage;
-		synchronized (l) {
-			currentImage = this.image;
-			l.add(listener);
-		}
-		if (currentImage != null) {
-			listener.imageLoaded(new ImageEvent(this, currentImage));
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.domimpl.HTMLElementImpl#assignAttributeField(java.lang.
-	 * String, java.lang.String)
-	 */
-	@Override
-	protected void assignAttributeField(String normalName, String value) {
-		if ("value".equals(normalName)) {
-			final InputContext ic = this.inputContext;
-			if (ic != null) {
-				ic.setValue(value);
-			}
-		} else if ("src".equals(normalName)) {
-			loadImage(value);
-		} else {
-			super.assignAttributeField(normalName, value);
-		}
-	}
-
 	@Override
 	public void blur() {
 		final InputContext ic = this.inputContext;
 		if (ic != null) {
 			ic.blur();
-		}
-	}
-
-	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
-		final ArrayList<ImageListener> l = this.imageListeners;
-		ImageListener[] listenerArray;
-		synchronized (l) {
-			if (!expectedImgSrc.equals(this.imageSrc)) {
-				return;
-			}
-			this.image = event.image;
-			// Get array of listeners while holding lock.
-			listenerArray = (ImageListener[]) l.toArray(ImageListener.EMPTY_ARRAY);
-		}
-		final int llength = listenerArray.length;
-		for (int i = 0; i < llength; i++) {
-			// Inform listener, holding no lock.
-			listenerArray[i].imageLoaded(event);
-		}
-		final Function onload = getOnload();
-		if (onload != null) {
-			Executor.executeFunction(HTMLBaseInputElement.this, onload, null);
 		}
 	}
 
@@ -192,12 +123,6 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		return (HTMLFormElement) parent;
 	}
 
-	public final Image getImage() {
-		synchronized (this.imageListeners) {
-			return this.image;
-		}
-	}
-
 	public String getName() {
 		return getAttribute("name");
 	}
@@ -229,26 +154,6 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 				final String val = getAttribute("value");
 				return val == null ? "" : val;
 			}
-		}
-	}
-
-	private void loadImage(String src) {
-		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-		if (document != null) {
-			synchronized (this.imageListeners) {
-				this.imageSrc = src;
-				this.image = null;
-			}
-			if (src != null) {
-				document.loadImage(src, new LocalImageListener(src));
-			}
-		}
-	}
-
-	public void removeImageListener(ImageListener listener) {
-		final ArrayList<ImageListener> l = this.imageListeners;
-		synchronized (l) {
-			l.remove(l);
 		}
 	}
 
@@ -348,24 +253,18 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 		}
 	}
 
+	public String getSrc() {
+		return this.getAttribute("src");
+	}
+
+	public void setSrc(String src) {
+		this.setAttribute("src", src);
+	}
+
 	public void submitForm(FormInput[] extraFormInputs) {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null) {
 			form.submit(extraFormInputs);
 		}
 	}
-
-	private class LocalImageListener implements ImageListener {
-		private final String expectedImgSrc;
-
-		public LocalImageListener(String imgSrc) {
-			this.expectedImgSrc = imgSrc;
-		}
-
-		@Override
-		public void imageLoaded(ImageEvent event) {
-			dispatchEvent(this.expectedImgSrc, event);
-		}
-	}
-
 }

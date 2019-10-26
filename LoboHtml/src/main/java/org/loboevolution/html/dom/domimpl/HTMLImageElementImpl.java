@@ -23,35 +23,13 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Image;
-import java.util.ArrayList;
-
 import org.loboevolution.html.dom.HTMLImageElement;
-import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
 
 public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLImageElement {
-	private class LocalImageListener implements ImageListener {
-		private final String expectedImgSrc;
-
-		public LocalImageListener(String imgSrc) {
-			this.expectedImgSrc = imgSrc;
-		}
-
-		@Override
-		public void imageLoaded(ImageEvent event) {
-			dispatchEvent(this.expectedImgSrc, event);
-		}
-	}
-
-	private Image image = null;
-
-	private String imageSrc;
-
-	private final ArrayList<ImageListener> listeners = new ArrayList<ImageListener>(1);
-
+	
 	private Function onload;
 
 	public HTMLImageElementImpl() {
@@ -62,62 +40,9 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		super(name);
 	}
 
-	/**
-	 * Adds a listener of image loading events. The listener gets called right away
-	 * if there's already an image.
-	 * 
-	 * @param listener
-	 */
-	public void addImageListener(ImageListener listener) {
-		final ArrayList<ImageListener> l = this.listeners;
-		java.awt.Image currentImage;
-		synchronized (l) {
-			currentImage = this.image;
-			l.add(listener);
-		}
-		if (currentImage != null) {
-			// Call listener right away if there's already an
-			// image; holding no locks.
-			listener.imageLoaded(new ImageEvent(this, currentImage));
-			// Should not call onload handler here. That's taken
-			// care of otherwise.
-		}
-	}
-
-	@Override
-	protected void assignAttributeField(String normalName, String value) {
-		super.assignAttributeField(normalName, value);
-		if ("src".equals(normalName)) {
-			loadImage(value);
-		}
-	}
-
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ImageRenderState(prevRenderState, this);
-	}
-
-	private void dispatchEvent(String expectedImgSrc, ImageEvent event) {
-		final ArrayList<ImageListener> l = this.listeners;
-		ImageListener[] listenerArray;
-		synchronized (l) {
-			if (!expectedImgSrc.equals(this.imageSrc)) {
-				return;
-			}
-			this.image = event.image;
-			// Get array of listeners while holding lock.
-			listenerArray = (ImageListener[]) l.toArray(ImageListener.EMPTY_ARRAY);
-		}
-		final int llength = listenerArray.length;
-		for (int i = 0; i < llength; i++) {
-			// Inform listener, holding no lock.
-			listenerArray[i].imageLoaded(event);
-		}
-		final Function onload = getOnload();
-		if (onload != null) {
-			// TODO: onload event object?
-			Executor.executeFunction(HTMLImageElementImpl.this, onload, null);
-		}
 	}
 
 	@Override
@@ -144,12 +69,6 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	@Override
 	public int getHspace() {
 		return getAttributeAsInt("hspace", 0);
-	}
-
-	public final java.awt.Image getImage() {
-		synchronized (this.listeners) {
-			return this.image;
-		}
 	}
 
 	@Override
@@ -190,26 +109,6 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	public int getWidth() {
 		final UINode r = this.uiNode;
 		return r == null ? 0 : r.getBounds().width;
-	}
-
-	private void loadImage(String src) {
-		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
-		if (document != null) {
-			synchronized (this.listeners) {
-				this.imageSrc = src;
-				this.image = null;
-			}
-			if (src != null) {
-				document.loadImage(src, new LocalImageListener(src));
-			}
-		}
-	}
-
-	public void removeImageListener(ImageListener listener) {
-		final ArrayList<ImageListener> l = this.listeners;
-		synchronized (l) {
-			l.remove(l);
-		}
 	}
 
 	@Override

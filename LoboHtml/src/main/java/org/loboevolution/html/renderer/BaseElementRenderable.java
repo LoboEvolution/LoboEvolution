@@ -29,8 +29,6 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -41,6 +39,7 @@ import java.util.logging.Level;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
+import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
@@ -49,7 +48,6 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
-import org.loboevolution.http.HttpRequest;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.common.GUITasks;
 import org.w3c.dom.css.CSS3Properties;
@@ -168,13 +166,20 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		
 		binfo = rs.getBackgroundInfo();	
         this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
-		final URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;
+		final URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;		
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
 			this.lastBackgroundImageUri = null;
 		} else if (!backgroundImageUri.equals(this.lastBackgroundImageUri)) {
 			this.lastBackgroundImageUri = backgroundImageUri;
-			loadBackgroundImage(backgroundImageUri);
+			backgroundImage = HttpNetwork.getImage(lastBackgroundImageUri.toString(), null);
+			if (backgroundImage != null) {
+				final int w = backgroundImage.getWidth(BaseElementRenderable.this);
+				final int h = backgroundImage.getHeight(BaseElementRenderable.this);
+				if (w != -1 && h != -1) {
+					BaseElementRenderable.this.repaint();
+				}
+			}
 		}
 		final AbstractCSSProperties props = rootElement.getCurrentStyle();
 		if (props == null) {
@@ -695,53 +700,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		} finally {
 			this.layoutUpTreeCanBeInvalidated = true;
 			this.layoutDeepCanBeInvalidated = true;
-		}
-	}
-
-	protected void loadBackgroundImage(final URL imageURL) {
-		final UserAgentContext ctx = this.userAgentContext;
-		if (ctx != null) {
-			final HttpRequest request = ctx.createHttpRequest();
-			request.addReadyStateChangeListener(() -> {
-				final int readyState = request.getReadyState();
-				if (readyState == HttpRequest.STATE_COMPLETE) {
-					final int status = request.getStatus();
-					if (status == 200 || status == 0) {
-						final Image img = request.getResponseImage();
-						if (img != null) {
-							BaseElementRenderable.this.backgroundImage = img;
-							// Cause observer to be called
-							final int w = img.getWidth(BaseElementRenderable.this);
-							final int h = img.getHeight(BaseElementRenderable.this);
-							// Maybe image already done...
-							if (w != -1 && h != -1) {
-								BaseElementRenderable.this.repaint();
-							}
-						}
-					}
-				}
-			});
-			final SecurityManager sm = System.getSecurityManager();
-			if (sm == null) {
-				try {
-					request.open("GET", imageURL);
-					request.send(null);
-				} catch (Exception thrown) {
-					logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
-				}
-			} else {
-				AccessController.doPrivileged((PrivilegedAction<Object>) () -> {
-					// Code might have restrictions on accessing
-					// items from elsewhere.
-					try {
-						request.open("GET", imageURL);
-						request.send(null);
-					} catch (Exception thrown) {
-						logger.log(Level.WARNING, "loadBackgroundImage()", thrown);
-					}
-					return null;
-				});
-			}
 		}
 	}
 	

@@ -185,7 +185,7 @@ public class InfoPageWindow extends JFrame {
 				for (final int element : selectedRow) {
 					for (final int selectedColumn : selectedColumns) {
 						final String href = (String) jtable.getValueAt(element, selectedColumn);
-						jPanelImg.add(new JLabel(new ImageIcon(HttpNetwork.getImage(href))));
+						jPanelImg.add(new JLabel(new ImageIcon(HttpNetwork.getImage(href, null))));
 						jPanelImg.repaint();
 					}
 				}

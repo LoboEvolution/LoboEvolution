@@ -30,6 +30,7 @@ import java.awt.FontMetrics;
 import java.awt.Toolkit;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -235,6 +236,11 @@ public class StyleSheetRenderState implements RenderState {
                     binfo.backgroundImage = null;
                 }
             } else {
+            	if (quotedUri.contains(";base64,")) {
+    				final String base64 = backgroundImageText.split(";base64,")[1];
+    				final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+    				quotedUri = new String(decodedBytes);
+            	}
                 binfo.backgroundImage = document.getFullURL(quotedUri);
             }
         }

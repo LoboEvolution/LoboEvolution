@@ -34,13 +34,12 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.dom.domimpl.ImageEvent;
-import org.loboevolution.html.dom.domimpl.ImageListener;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.net.HttpNetwork;
 
-public class ImgControl extends BaseControl implements ImageListener {
+public class ImgControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,7 +57,7 @@ public class ImgControl extends BaseControl implements ImageListener {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		alt = modelNode.getAlt() != null ? modelNode.getAlt() : "";
-		modelNode.addImageListener(this);
+		image = HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI());
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -90,19 +89,6 @@ public class ImgControl extends BaseControl implements ImageListener {
 	@Override
 	public int getVAlign() {
 		return this.valign;
-	}
-
-	@Override
-	public void imageLoaded(ImageEvent event) {
-		final Image image = event.image;
-		this.image = image;
-		if (image != null) {
-			final int width = image.getWidth(this);
-			final int height = image.getHeight(this);
-			if (width != -1 && height != -1) {
-				repaint();
-			}
-		}
 	}
 
 	@Override

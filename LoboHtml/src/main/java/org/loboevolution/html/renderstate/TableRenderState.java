@@ -21,6 +21,7 @@
 package org.loboevolution.html.renderstate;
 
 import java.awt.Color;
+import java.util.Base64;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.BackgroundInfo;
@@ -58,11 +59,17 @@ public class TableRenderState extends StyleSheetRenderState {
 			}
 		}
 		if (binfo == null || binfo.backgroundImage == null) {
-			final String background = element.getAttribute("background");
+			String background = element.getAttribute("background");
 			if (Strings.isNotBlank(background)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
+				
+				if (background.contains(";base64,")) {
+                    final String base64 = background.split(";base64,")[1];
+                    final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+                    background = new String(decodedBytes);
+                }
 				binfo.backgroundImage = this.document.getFullURL(background);
 			}
 		}

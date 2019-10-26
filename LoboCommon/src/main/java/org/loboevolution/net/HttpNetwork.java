@@ -3,6 +3,7 @@ package org.loboevolution.net;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,11 +15,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Base64;
 import java.util.zip.GZIPInputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
 import org.loboevolution.store.SQLiteCommon;
 
 public class HttpNetwork {
@@ -66,30 +70,54 @@ public class HttpNetwork {
 		return in;
 	}
 
-	public static Image getImage(String href) {
+	public static Image getImage(String href, String baseUri) {
 		try {
-			final URL u = new URL(href);
-			final URLConnection connection = u.openConnection();
-			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
-			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-					Reader reader = new InputStreamReader(in, "utf-8");) {
+			if (Strings.isBlank(href))
+				return null;
 
-				if (href.startsWith("https")) {
-					return Toolkit.getDefaultToolkit().createImage(ImageIO.read(in).getSource());
-				} else if (href.endsWith(".gif")) {
-					try {
-						return new ImageIcon(u).getImage();
-					} catch (final Exception e) {
+			if (href.contains(";base64,")) {
+				final String base64 = href.split(";base64,")[1];
+				byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+				try (InputStream stream = new ByteArrayInputStream(decodedBytes);) {
+					return ImageIO.read(stream);
+				}
+			} else {
+
+				String scriptURI = href;
+				if (Strings.isNotBlank(baseUri)) {
+					final URL baseURL = new URL(baseUri);
+					final URL scriptURL = Urls.createURL(baseURL, href);
+					scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
+				}
+
+				final URL u = new URL(scriptURI);
+				final URLConnection connection = u.openConnection();
+				connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+						Reader reader = new InputStreamReader(in, "utf-8");) {
+
+					if (href.contains(";base64,")) {
+						final String base64 = href.split(";base64,")[1];
+						byte[] decodedBytes = Base64.getDecoder().decode(base64);
+						InputStream stream = new ByteArrayInputStream(decodedBytes);
+						return ImageIO.read(stream);
+					} else if (href.startsWith("https")) {
+						return Toolkit.getDefaultToolkit().createImage(ImageIO.read(in).getSource());
+					} else if (href.endsWith(".gif")) {
+						try {
+							return new ImageIcon(u).getImage();
+						} catch (final Exception e) {
+							return ImageIO.read(in);
+						}
+					} else if (href.endsWith(".bmp")) {
+						try {
+							return ImageIO.read(in);
+						} catch (final IOException e) {
+							e.printStackTrace();
+						}
+					} else {
 						return ImageIO.read(in);
 					}
-				} else if (href.endsWith(".bmp")) {
-					try {
-						return ImageIO.read(in);
-					} catch (final IOException e) {
-						e.printStackTrace();
-					}
-				} else {
-					return ImageIO.read(in);
 				}
 			}
 		} catch (final Exception e) {
@@ -97,7 +125,7 @@ public class HttpNetwork {
 		}
 		return null;
 	}
-	
+
 	public static String getSource(String uri) {
 		try {
 			final URL url = new URL(uri);

@@ -301,6 +301,16 @@ public class Strings {
 	}
 
 	/**
+	 * Linearize string.
+	 *
+	 * @param text the text
+	 * @return string
+	 */
+	public static String linearize(String text) {
+		return text == null ? "" : text.replaceAll("(\r\n|\n)", "").replaceAll("\\s+", "");
+	}
+
+	/**
 	 * Checks if is java identifier.
 	 *
 	 * @param id the id

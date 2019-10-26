@@ -83,12 +83,14 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 					} else {
 						try {
 							final URL styleUrl = Urls.createURL(null, baseHref);
-							finalValue = "url("
-									+ HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm())
-									+ ")";
+							if(tentativeUri.contains("data:image")) {
+								finalValue = tentativeUri;
+							} else {
+								finalValue = "url(" + HtmlValues.quoteAndEscape(Urls.createURL(styleUrl, tentativeUri).toExternalForm()) + ")";
+							}
+							
 						} catch (final Exception mfu) {
-							logger.log(Level.WARNING, "Unable to create URL for URI=[" + tentativeUri + "], with base=["
-									+ baseHref + "].", mfu);
+							logger.log(Level.WARNING, "Unable to create URL for URI=[" + tentativeUri + "], with base=[" + baseHref + "].", mfu);
 							finalValue = newValue;
 						}
 					}

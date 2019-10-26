@@ -24,13 +24,16 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Base64;
+
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
@@ -39,12 +42,12 @@ import javax.swing.JPopupMenu;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.laf.IconFactory;
-import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.laf.IconFactory;
+import org.loboevolution.net.HttpNetwork;
 
 /**
  * The Class HtmlContextMenu.
@@ -96,62 +99,87 @@ public class HtmlContextMenu {
 	public JPopupMenu popupMenuImage() {
 
 		JPopupMenu popupMenu = new JPopupMenu();
-		HTMLImageElementImpl img = (HTMLImageElementImpl) element;
-		URL srcUrl;
-		try {
-			srcUrl = img.getFullURL(img.getSrc());
+		final HTMLImageElementImpl img = (HTMLImageElementImpl) element;
+		final String href = img.getSrc();
+		JMenuItem menuItem = new JMenuItem("View image");
+		menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
+		menuItem.addActionListener(e -> {
+			if (href.contains(";base64,")) {
+				final String base64 = href.split(";base64,")[1];
+				byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+				try (InputStream stream = new ByteArrayInputStream(decodedBytes);) {
+					context.openImageViewer(href, stream);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				try {
+					context.openImageViewer(img.getFullURL(href));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		popupMenu.add(menuItem);
 
-			JMenuItem menuItem = new JMenuItem("View image");
-			menuItem.setIcon(IconFactory.getInstance().getIcon(SEARCH));
-			menuItem.addActionListener(e -> {
-				context.openImageViewer(srcUrl);
-			});
-			popupMenu.add(menuItem);
+		JMenuItem copyImageURL = new JMenuItem("Copy Image URL");
+		copyImageURL.setIcon(IconFactory.getInstance().getIcon(COPY));
+		copyImageURL.addActionListener(e -> {
+			Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+			String clip = "";
+			if (!href.contains(";base64,")) {
+				try {
+					clip = img.getFullURL(href).toExternalForm();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				clip = href;
+			}
+			clipboard.setContents(new StringSelection(clip), null);
+		});
+		popupMenu.add(copyImageURL);
 
-			JMenuItem copyImageURL = new JMenuItem("Copy Image URL");
-
-			copyImageURL.setIcon(IconFactory.getInstance().getIcon(COPY));
-			copyImageURL.addActionListener(e -> {
-				Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-				clipboard.setContents(new StringSelection(srcUrl.toExternalForm()), null);
-			});
-			popupMenu.add(copyImageURL);
-
-			JMenuItem saveImage = new JMenuItem("Save Image");
-
-			saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
-			saveImage.addActionListener(e -> {
-				JFileChooser fileChooser = new JFileChooser();
-				fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-				fileChooser.setAcceptAllFileFilterUsed(true);
-				int returnValue = fileChooser.showSaveDialog(context.getHtmlPanel());
-				if (returnValue == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = getSelectedFileWithExtension(fileChooser);
-					if (selectedFile.exists()) {
-						int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?",
-								"Confirm Overwrite", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
-						if (response == JOptionPane.CANCEL_OPTION) {
-							return;
-						}
+		JMenuItem saveImage = new JMenuItem("Save Image");
+		saveImage.setIcon(IconFactory.getInstance().getIcon(SAVE));
+		saveImage.addActionListener(e -> {
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+			fileChooser.setAcceptAllFileFilterUsed(true);
+			int returnValue = fileChooser.showSaveDialog(context.getHtmlPanel());
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = getSelectedFileWithExtension(fileChooser);
+				if (selectedFile.exists()) {
+					int response = JOptionPane.showConfirmDialog(null, "Overwrite existing file?", "Confirm Overwrite",
+							JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (response == JOptionPane.CANCEL_OPTION) {
+						return;
 					}
-					BufferedImage image = null;
-					try {
+				}
+				BufferedImage image = null;
+				try {
+
+					if (!href.contains(";base64,")) {
+						URL srcUrl = img.getFullURL(href);
 						int dot = srcUrl.toExternalForm().lastIndexOf('.');
 						String ext = srcUrl.toExternalForm().substring(dot + 1);
 						image = ImageIO.read(srcUrl);
 						ImageIO.write(image, ext, selectedFile);
-					} catch (Exception e1) {
-						e1.printStackTrace();
+					} else {
+						final String base64 = href.split(";base64,")[1];
+						byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+						try (InputStream stream = new ByteArrayInputStream(decodedBytes);) {
+							image = ImageIO.read(stream);
+							ImageIO.write(image, href, selectedFile);
+						}
 					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
 				}
-			});
-			popupMenu.add(saveImage);
-
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
+			}
+		});
+		popupMenu.add(saveImage);
 		return popupMenu;
-
 	}
 
 	/**
