@@ -38,11 +38,16 @@
 				<include name="**/*"/>
 			</patternset>
 		</unzip>
-		<javac srcdir="../LoboCommon/src/main/java" destdir="bin" includeantruntime="false"/>
-		<javac srcdir="../LoboApi/src/main/java" destdir="bin" includeantruntime="false"/>
-		<javac srcdir="../LoboParser/src/main/java" destdir="bin" includeantruntime="false"/>
-		<javac srcdir="../LoboHtml/src/main/java" destdir="bin" includeantruntime="false"/>
-		<javac srcdir="src" destdir="bin" includeantruntime="false"/>
+		<unzip src="../LoboCommon/lib/xalan.jar" dest="bin">
+			<patternset>
+				<include name="**/*" />
+			</patternset>
+		</unzip>
+		<javac srcdir="../LoboCommon/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="../LoboApi/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="../LoboParser/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="../LoboHtml/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="src" destdir="bin" includeantruntime="false" source="1.8" />
 	</target>
 	<target name="jar">
 		<mkdir dir="build"/>
