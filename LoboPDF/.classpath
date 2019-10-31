@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="src/main/resources"/>
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/LoboParser"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/LoboApi"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/LoboCommon"/>
-	<classpathentry kind="lib" path="/LoboLib/lib/xalan.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/LoboPDF"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

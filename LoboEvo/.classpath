@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="/LoboLib/lib/rsyntaxtextarea.jar"/>
 	<classpathentry kind="lib" path="/LoboLib/lib/sqlite-jdbc-3.21.0.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/LoboJTattoo"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/LoboPDF"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
