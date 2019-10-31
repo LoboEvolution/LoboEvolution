@@ -5,6 +5,7 @@
 		<delete dir="../LoboCommon/bin"/>
 		<delete dir="../LoboJTattoo/bin"/>
 		<delete dir="../LoboPDF/bin"/>
+		<delete dir="../LoboIViewer/bin"/>
 		<delete dir="../LoboParser/bin"/>
 		<delete dir="../LoboHtml/bin"/>
 		<delete dir="bin"/>
@@ -15,6 +16,7 @@
 		<mkdir dir="../LoboCommon/bin"/>
 		<delete dir="../LoboJTattoo/bin"/>
 		<delete dir="../LoboPDF/bin"/>
+		<delete dir="../LoboIViewer/bin"/>
 		<mkdir dir="../LoboParser/bin"/>
 		<mkdir dir="../LoboHtml/bin"/>
 		<mkdir dir="bin"/>
@@ -23,6 +25,7 @@
 			<fileset dir="../LoboCommon/src/main/resources"/>
 			<fileset dir="../LoboJTattoo/src/main/resources"/>
 			<fileset dir="../LoboPDF/src/main/resources"/>
+			<fileset dir="../LoboIViewer/src/main/resources"/>
 		</copy>
 		<unzip src="../LoboLib/lib/log4j-api-2.8.1.jar" dest="bin">
 			<patternset>
@@ -52,6 +55,7 @@
 		<javac srcdir="../LoboCommon/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboJTattoo/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboPDF/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="../LoboIViewer/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboApi/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboParser/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboHtml/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
