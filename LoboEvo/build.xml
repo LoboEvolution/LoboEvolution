@@ -44,6 +44,7 @@
 			</patternset>
 		</unzip>
 		<javac srcdir="../LoboCommon/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="../LoboJTattoo/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboApi/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboParser/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
 		<javac srcdir="../LoboHtml/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
