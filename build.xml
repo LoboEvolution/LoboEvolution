@@ -1,0 +1,73 @@
+<project name="project" default="default">
+	<target name="default" depends="clean,compile,jar" />
+	<target name="clean">
+		<delete dir="${user.home}/lobo/store"/>
+		<delete dir="LoboApi/bin"/>
+		<delete dir="LoboCommon/bin"/>
+		<delete dir="LoboJTattoo/bin"/>
+		<delete dir="LoboPDF/bin"/>
+		<delete dir="LoboIViewer/bin"/>
+		<delete dir="LoboParser/bin"/>
+		<delete dir="LoboHtml/bin"/>
+		<delete dir="bin"/>
+	</target>
+	<target name="compile">
+		<mkdir dir="${user.home}/lobo/store"/>
+		<mkdir dir="LoboApi/bin"/>
+		<mkdir dir="LoboCommon/bin"/>
+		<delete dir="LoboJTattoo/bin"/>
+		<delete dir="LoboPDF/bin"/>
+		<delete dir="LoboIViewer/bin"/>
+		<mkdir dir="LoboParser/bin"/>
+		<mkdir dir="LoboHtml/bin"/>
+		<mkdir dir="bin"/>
+		<copy todir="bin">
+			<fileset dir="LoboApi/src/main/resources"/>
+			<fileset dir="LoboCommon/src/main/resources"/>
+			<fileset dir="LoboJTattoo/src/main/resources"/>
+			<fileset dir="LoboPDF/src/main/resources"/>
+			<fileset dir="LoboIViewer/src/main/resources"/>
+		</copy>
+		<unzip src="LoboLib/lib/log4j-api-2.8.1.jar" dest="bin">
+			<patternset>
+				<include name="**/*class"/>
+			</patternset>
+		</unzip>
+		<unzip src="LoboLib/lib/log4j-core-2.8.1.jar" dest="bin">
+			<patternset>
+				<include name="**/*class"/>
+			</patternset>
+		</unzip>
+		<unzip src="LoboLib/lib/rsyntaxtextarea.jar" dest="bin">
+			<patternset>
+				<include name="**/*"/>
+			</patternset>
+		</unzip>
+		<unzip src="LoboLib/lib/sqlite-jdbc-3.21.0.jar" dest="bin">
+			<patternset>
+				<include name="**/*"/>
+			</patternset>
+		</unzip>
+		<unzip src="LoboLib/lib/xalan.jar" dest="bin">
+			<patternset>
+				<include name="**/*" />
+			</patternset>
+		</unzip>
+		<javac srcdir="LoboCommon/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboJTattoo/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboPDF/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboIViewer/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboApi/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboParser/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboHtml/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+		<javac srcdir="LoboEvo/src/main/java" destdir="bin" includeantruntime="false" source="1.8" />
+	</target>
+	<target name="jar">
+		<mkdir dir="build"/>
+		<jar destfile="build/LoboEvo.jar" basedir="bin">
+			<manifest>
+				<attribute name="Main-Class" value="org.loboevolution.init.PlatformInit"/>
+			</manifest>
+		</jar>
+	</target>
+</project>
