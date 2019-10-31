@@ -18,27 +18,27 @@
 			<fileset dir="../LoboApi/src/main/resources"/>
 			<fileset dir="../LoboCommon/src/main/resources"/>
 		</copy>
-		<unzip src="../LoboHtml/lib/log4j-api-2.8.1.jar" dest="bin">
+		<unzip src="../LoboLib/lib/log4j-api-2.8.1.jar" dest="bin">
 			<patternset>
 				<include name="**/*class"/>
 			</patternset>
 		</unzip>
-		<unzip src="../LoboHtml/lib/log4j-core-2.8.1.jar" dest="bin">
+		<unzip src="../LoboLib/lib/log4j-core-2.8.1.jar" dest="bin">
 			<patternset>
 				<include name="**/*class"/>
 			</patternset>
 		</unzip>
-		<unzip src="../LoboCommon/lib/rsyntaxtextarea.jar" dest="bin">
+		<unzip src="../LoboLib/lib/rsyntaxtextarea.jar" dest="bin">
 			<patternset>
 				<include name="**/*"/>
 			</patternset>
 		</unzip>
-		<unzip src="../LoboCommon/lib/sqlite-jdbc-3.21.0.jar" dest="bin">
+		<unzip src="../LoboLib/lib/sqlite-jdbc-3.21.0.jar" dest="bin">
 			<patternset>
 				<include name="**/*"/>
 			</patternset>
 		</unzip>
-		<unzip src="../LoboCommon/lib/xalan.jar" dest="bin">
+		<unzip src="../LoboLib/lib/xalan.jar" dest="bin">
 			<patternset>
 				<include name="**/*" />
 			</patternset>

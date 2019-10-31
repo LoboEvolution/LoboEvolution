@@ -5,6 +5,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/LoboParser"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/LoboApi"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/LoboCommon"/>
-	<classpathentry kind="lib" path="/LoboCommon/lib/xalan.jar"/>
+	<classpathentry kind="lib" path="/LoboLib/lib/xalan.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
