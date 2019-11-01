@@ -60,7 +60,6 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		synchronized (this.lock) {
 			int count = 0;
 			for (Node node : sourceNodeList) {
-				final Node node = i.next();
 				if (this.filter.accept(node)) {
 					if (count == index) {
 						return node;
