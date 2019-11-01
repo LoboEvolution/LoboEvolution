@@ -1,4 +1,5 @@
 <project name="project" default="default">
+	<property name="build.compiler" value="extJavac"/>
 	<target name="default" depends="clean,compile,jar" />
 	<target name="clean">
 		<delete dir="${user.home}/lobo/store"/>
