@@ -220,9 +220,8 @@ class RLine extends BaseRCollection {
 			if (cancel) {
 				// Oops. Need to undo overflow.
 				if (overflow != null) {
-					final Iterator<Renderable> i = overflow.iterator();
-					while (i.hasNext()) {
-						renderables.add(i.next());
+					for (Renderable renderable : overflow) {
+						renderables.add(renderable);
 					}
 				}
 			} else {

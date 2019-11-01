@@ -25,7 +25,6 @@ package org.loboevolution.html.dom.domimpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -41,9 +40,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	private final Map<String, Node> attributes = new HashMap<String, Node>();
 
 	public NamedNodeMapImpl(Element owner, Map<?, ?> attribs) {
-		final Iterator<?> i = attribs.entrySet().iterator();
-		while (i.hasNext()) {
-			final Map.Entry entry = (Map.Entry) i.next();
+		for (Map.Entry entry : attribs.entrySet()) {
 			final String name = (String) entry.getKey();
 			final String value = (String) entry.getValue();
 			// TODO: "specified" attributes

@@ -901,9 +901,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		final Collection<DelayedPair> gc = this.delayedPairs;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
-			final Iterator<DelayedPair> i = gc.iterator();
-			while (i.hasNext()) {
-				final DelayedPair pair = (DelayedPair) i.next();
+			for (DelayedPair pair : gc) {
 				if (pair.containingBlock != this) {
 					rc.addDelayedPair(pair);
 				}
@@ -917,9 +915,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		final Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
-			final Iterator<Component> i = gc.iterator();
-			while (i.hasNext()) {
-				rc.addComponent((Component) i.next());
+			for (Component component : gc) {
+				rc.addComponent(component);
 			}
 		}
 	}

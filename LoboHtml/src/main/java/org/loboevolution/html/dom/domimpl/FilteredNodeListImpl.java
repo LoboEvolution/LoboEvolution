@@ -24,7 +24,6 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -50,9 +49,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator<Node> i = this.sourceNodeList.iterator();
-			while (i.hasNext()) {
-				final Node node = i.next();
+			for (Node node : sourceNodeList) {
 				if (this.filter.accept(node)) {
 					count++;
 				}
@@ -65,9 +62,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 	public Node item(int index) {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator<Node> i = this.sourceNodeList.iterator();
-			while (i.hasNext()) {
-				final Node node = (Node) i.next();
+			for (Node node : sourceNodeList) {
 				if (this.filter.accept(node)) {
 					if (count == index) {
 						return node;

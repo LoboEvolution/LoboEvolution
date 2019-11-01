@@ -158,11 +158,9 @@ class RTable extends BaseElementRenderable {
 			// Only needs to be done if layout was
 			// forced. Otherwise, they should've
 			// been imported already.
-			final Collection<?> pairs = this.delayedPairs;
+			final Collection<DelayedPair> pairs = this.delayedPairs;
 			if (pairs != null) {
-				final Iterator<?> i = pairs.iterator();
-				while (i.hasNext()) {
-					final DelayedPair pair = (DelayedPair) i.next();
+				for (DelayedPair pair : pairs) {
 					if (pair.containingBlock == this) {
 						importDelayedPair(pair);
 					}
@@ -198,9 +196,7 @@ class RTable extends BaseElementRenderable {
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			final Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i.next();
+			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.renderable;
 				final int childX = x - r.getX();
 				final int childY = y - r.getY();
@@ -237,9 +233,7 @@ class RTable extends BaseElementRenderable {
 		final SortedSet<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			final Collection c = new java.util.LinkedList();
-			final Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				final PositionedRenderable pr = i.next();
+			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.renderable;
 				c.add(r);
 			}
@@ -277,9 +271,7 @@ class RTable extends BaseElementRenderable {
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			final Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i.next();
+			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.renderable;
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
@@ -305,9 +297,7 @@ class RTable extends BaseElementRenderable {
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			final Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i.next();
+			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.renderable;
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
@@ -345,9 +335,7 @@ class RTable extends BaseElementRenderable {
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			final Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i.next();
+			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.renderable;
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
@@ -373,9 +361,7 @@ class RTable extends BaseElementRenderable {
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
-			final Iterator<PositionedRenderable> i = prs.iterator();
-			while (i.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i.next();
+			for (PositionedRenderable pr : prs) {
 				final BoundableRenderable r = pr.renderable;
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
@@ -405,9 +391,7 @@ class RTable extends BaseElementRenderable {
 			tm.paint(g, size);
 			final Collection<PositionedRenderable> prs = this.positionedRenderables;
 			if (prs != null) {
-				final Iterator<PositionedRenderable> i = prs.iterator();
-				while (i.hasNext()) {
-					final PositionedRenderable pr = (PositionedRenderable) i.next();
+				for (PositionedRenderable pr : prs) {
 					final BoundableRenderable r = pr.renderable;
 					r.paintTranslated(g);
 				}

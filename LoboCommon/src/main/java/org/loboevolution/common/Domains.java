@@ -59,9 +59,7 @@ public class Domains {
 	 * @return
 	 */
 	public static boolean endsWithGTLD(String host) {
-		final Iterator<String> i = gTLDs.iterator();
-		while (i.hasNext()) {
-			final String ending = i.next();
+		for (String ending : gTLDs) {
 			if (host.endsWith(ending)) {
 				return true;
 			}

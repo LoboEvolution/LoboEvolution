@@ -47,9 +47,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator<Node> i = this.sourceNodeList.iterator();
-			while (i.hasNext()) {
-				final Node node = i.next();
+			for (Node node : sourceNodeList) {
 				if (this.filter.accept(node)) {
 					count++;
 				}
@@ -61,8 +59,7 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 	public Object item(int index) {
 		synchronized (this.lock) {
 			int count = 0;
-			final Iterator<Node> i = this.sourceNodeList.iterator();
-			while (i.hasNext()) {
+			for (Node node : sourceNodeList) {
 				final Node node = i.next();
 				if (this.filter.accept(node)) {
 					if (count == index) {

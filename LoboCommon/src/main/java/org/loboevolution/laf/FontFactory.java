@@ -31,7 +31,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -195,10 +194,8 @@ public class FontFactory {
 					return font.deriveFont(attributes);
 				}
 			} else {
-				final Iterator<Locale> i = locales.iterator();
 				boolean allMatch = true;
-				while (i.hasNext()) {
-					final Locale locale = i.next();
+				for (Locale locale : locales) {
 					if (font.canDisplayUpTo(locale.getDisplayLanguage(locale)) != -1) {
 						allMatch = false;
 						break;

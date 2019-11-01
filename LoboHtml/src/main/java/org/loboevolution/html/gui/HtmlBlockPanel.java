@@ -656,9 +656,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				revalidatePanel();
 			} else {
 				if (repainters != null) {
-					final Iterator<RElement> i = repainters.iterator();
-					while (i.hasNext()) {
-						final RElement element = (RElement) i.next();
+					for (RElement element : repainters) {
 						element.repaint();
 					}
 				}
