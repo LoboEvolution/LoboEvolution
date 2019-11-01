@@ -122,7 +122,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						this.informExternalScriptLoading();
 						URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
 						String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-						final URL url = new URL(src);
+						final URL url = new URL(scriptURI);
 						br = new BufferedReader(new InputStreamReader(url.openStream()));
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (Exception e) {
