@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.loboevolution.info.ElementInfo;
 
-public class HTMLObject {
+public class HTMLEntities {
 	
 	public static final Map<HTMLTag, ElementInfo> ELEMENT_INFOS = new HashMap<HTMLTag, ElementInfo>();
 	public static final Map<Entities, Character> ENTITIES = new HashMap<Entities, Character>();

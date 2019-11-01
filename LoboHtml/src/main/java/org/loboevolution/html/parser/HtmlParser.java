@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.Entities;
-import org.loboevolution.html.HTMLObject;
+import org.loboevolution.html.HTMLEntities;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.info.ElementInfo;
 import org.loboevolution.html.dom.domimpl.DocumentTypeImpl;
@@ -125,7 +125,7 @@ public class HtmlParser {
 	}
 
 	public static boolean isDecodeEntities(String elementName) {
-		final ElementInfo einfo = (ElementInfo) HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
+		final ElementInfo einfo = (ElementInfo) HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
 		return einfo == null ? true : einfo.decodeEntities;
 	}
 
@@ -289,7 +289,7 @@ public class HtmlParser {
 						// This is necessary for incremental rendering.
 						safeAppendChild(parent, element);
 						if (!this.justReadEmptyElement) {
-							ElementInfo einfo = HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(localName.toUpperCase()));
+							ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(localName.toUpperCase()));
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
 								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
@@ -332,7 +332,7 @@ public class HtmlParser {
 												if (normalTag.equalsIgnoreCase(normalLastTag)) {
 													return TOKEN_FULL_ELEMENT;
 												} else {
-													final ElementInfo closeTagInfo = HTMLObject.ELEMENT_INFOS
+													final ElementInfo closeTagInfo = HTMLEntities.ELEMENT_INFOS
 															.get(HTMLTag.get(normalLastTag.toUpperCase()));
 													if ((closeTagInfo == null)
 															|| (closeTagInfo.endElementType != ElementInfo.END_ELEMENT_FORBIDDEN)) {
@@ -363,7 +363,7 @@ public class HtmlParser {
 											if (stopTags != null && stopTags.contains(HTMLTag.get(normalTag))) {
 												throw se;
 											}
-											einfo = HTMLObject.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
+											einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
 											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
 													: einfo.endElementType;
 											childrenOk = einfo == null ? true : einfo.childElementOk;
@@ -1171,10 +1171,10 @@ public class HtmlParser {
 	}
 
 	private final static int getEntityChar(final String spec) {
-		Character c = (Character) HTMLObject.ENTITIES.get(Entities.get(spec));
+		Character c = (Character) HTMLEntities.ENTITIES.get(Entities.get(spec));
 		if (c == null) {
 			final String specTL = spec.toLowerCase();
-			c = (Character) HTMLObject.ENTITIES.get(Entities.get(specTL));
+			c = (Character) HTMLEntities.ENTITIES.get(Entities.get(specTL));
 			if (c == null) {
 				return -1;
 			}
