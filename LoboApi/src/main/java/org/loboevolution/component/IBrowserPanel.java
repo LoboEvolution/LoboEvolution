@@ -11,5 +11,7 @@ public interface IBrowserPanel {
 	JScrollPane getScroll();
 	
 	IBrowserFrame getBrowserFrame();
+	
+	IWelcomePanel getWelcome();
 
 }

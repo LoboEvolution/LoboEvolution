@@ -36,8 +36,8 @@ public class GoAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
+		final String url = this.addressBar.getText();
 		try {
-			final String url = this.addressBar.getText();
 			final BufferedImage image = ImageIO.read(new URL(url));
 			if (image != null) {
 				goUrlImage(image, url);
@@ -50,7 +50,12 @@ public class GoAction extends AbstractAction {
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			if (url.endsWith(".pdf")) {
+				PdfDialog viewer = new PdfDialog(true);
+				viewer.doOpen(url);
+			} else {
+				goURl(url);
+			}
 		}
 	}
 

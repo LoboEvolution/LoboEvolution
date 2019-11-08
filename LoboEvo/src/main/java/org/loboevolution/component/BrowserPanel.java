@@ -19,7 +19,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 
 	private final DnDTabbedPane tabbedPane;
 
-	private WelcomePanel welcome;
+	private IWelcomePanel welcome;
 	
 	private BrowserFrame browserFrame;
 
@@ -33,7 +33,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 
 		if (startupURLs.size() == 0) {
 			this.welcome = new WelcomePanel(this);
-			this.tabbedPane.addTab("Welcome", this.welcome);
+			this.tabbedPane.addTab("Welcome", this.welcome.getWelocome());
 		} else if (startupURLs.size() == 1) {
 			final TabbedHtml html = new TabbedHtml();
 			final String url = startupURLs.get(0);
@@ -66,7 +66,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	/**
 	 * @return the welcome
 	 */
-	public WelcomePanel getWelcome() {
+	public IWelcomePanel getWelcome() {
 		return this.welcome;
 	}
 	

@@ -5,8 +5,9 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import org.loboevolution.component.IBrowserPanel;
+import org.loboevolution.component.IWelcomePanel;
 
-public class WelcomePanel extends JPanel {
+public class WelcomePanel extends JPanel implements IWelcomePanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,5 +35,10 @@ public class WelcomePanel extends JPanel {
 			this.text.setBounds(x, y, width, height);
 			this.button.setBounds(x1, 170, width / 2, height);
 		}
+	}
+
+	@Override
+	public JPanel getWelocome() {
+		return this;
 	}
 }

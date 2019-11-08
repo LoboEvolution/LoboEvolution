@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.dnd.DropTarget;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.WindowAdapter;
@@ -15,7 +16,6 @@ import javax.swing.JPanel;
 import org.loboevolution.menu.MenuBar;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.TabStore;
-import org.loboevolution.welcome.WelcomePanel;
 
 public class BrowserFrame extends JFrame implements IBrowserFrame {
 
@@ -33,7 +33,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		contentPane.setLayout(new BorderLayout());
 
 		this.panel = new BrowserPanel(this);
-		final WelcomePanel welcome = this.panel.getWelcome();
+		final IWelcomePanel welcome = this.panel.getWelcome();
 		if (welcome != null) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
 			final int width = new Double(initialWindowBounds.getWidth()).intValue();
@@ -45,6 +45,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		this.toolbar = new ToolBar(this.panel);
 
 		setJMenuBar(new MenuBar(this));
+		new DropTarget(welcome.getWelocome(), new DragDropListener(panel));
 
 		final JPanel basicPanel = new JPanel();
 		basicPanel.setLayout(new BorderLayout());
@@ -55,7 +56,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				final WelcomePanel welcome = BrowserFrame.this.panel.getWelcome();
+				final IWelcomePanel welcome = BrowserFrame.this.panel.getWelcome();
 				final Dimension dim = new Dimension(getWidth(), getHeight());
 				welcome.setSize(dim);
 				welcome.setPreferredSize(dim);
