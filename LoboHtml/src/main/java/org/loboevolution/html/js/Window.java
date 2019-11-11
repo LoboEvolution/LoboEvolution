@@ -53,6 +53,7 @@ import org.loboevolution.html.dom.domimpl.TextImpl;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.js.events.UIEventImpl;
+import org.loboevolution.html.js.geolocation.IPAddressBasedGeoAcquirer;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -486,7 +487,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		synchronized (this) {
 			Navigator nav = this.navigator;
 			if (nav == null) {
-				nav = new Navigator();
+				nav = new Navigator(this);
 				this.navigator = nav;
 			}
 			return nav;

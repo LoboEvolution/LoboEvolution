@@ -21,38 +21,36 @@
 
 package org.loboevolution.html.js;
 
-import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.html.js.geolocation.Geolocation;
 import org.loboevolution.js.AbstractScriptableDelegate;
+import org.loboevolution.net.HttpNetwork;
 
 public class Navigator extends AbstractScriptableDelegate {
 	
-	private MimeTypesCollection mimeTypes;
-
-	public String getAppCodeName() {
-		return this.getAppName();
+	private Window window;
+	
+	public Navigator(Window window) {
+		this.window = window;
 	}
 
-	public String getAppMinorVersion() {
-		return "99.3";
+	public Geolocation getGeolocation() {
+		return new Geolocation(window);
+	}
+
+	public boolean isOnLine() {
+		return true;
+	}
+
+	public String getLanguage() {
+		return "EN";
 	}
 
 	public String getAppName() {
-		return "Lobo";
+		return "Lobo Evolution";
 	}
 
 	public String getAppVersion() {
-		return "0";
-	}
-
-	public MimeTypesCollection getMimeTypes() {
-		synchronized (this) {
-			MimeTypesCollection mt = this.mimeTypes;
-			if (mt == null) {
-				mt = new MimeTypesCollection();
-				this.mimeTypes = mt;
-			}
-			return mt;
-		}
+		return "0.99.3";
 	}
 
 	public String getPlatform() {
@@ -65,28 +63,5 @@ public class Navigator extends AbstractScriptableDelegate {
 
 	public String getUserAgent() {
 		return HttpNetwork.getUserAgentValue();
-	}
-
-	public String getVendor() {
-		return "The Lobo Evolution";
-	}
-
-	public boolean javaEnabled() {
-		return true;
-	}
-
-	public class MimeTypesCollection {
-		// Class must be public to allow JavaScript access
-		public int getLength() {
-			return 0;
-		}
-
-		public Object item(int index) {
-			return null;
-		}
-
-		public Object namedItem(String name) {
-			return null;
-		}
 	}
 }
