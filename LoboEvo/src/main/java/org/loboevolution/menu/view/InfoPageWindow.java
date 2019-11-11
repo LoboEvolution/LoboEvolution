@@ -70,9 +70,13 @@ public class InfoPageWindow extends JFrame {
 
 				for (final int element : selectedRow) {
 					for (final int selectedColumn : selectedColumns) {
-						final String href = (String) jtable.getValueAt(element, selectedColumn);
-						textArea.setText(HttpNetwork.getSource(href));
-						textArea.repaint();
+						try {
+							final String href = (String) jtable.getValueAt(element, selectedColumn);
+							textArea.setText(HttpNetwork.getSource(href));
+							textArea.repaint();
+						} catch (Exception ex) {
+							ex.printStackTrace();
+						}
 					}
 				}
 			});

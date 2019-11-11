@@ -796,8 +796,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		final Function onloadHandler = this.onloadHandler;
 		if (onloadHandler != null) {
-			if (org.loboevolution.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
-				Executor.executeFunction(this, onloadHandler, null);
+			if (HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {
+				Executor.executeFunction(this, onloadHandler, null, new Object[0]);
 			}
 		}
 		return super.setUserData(key, data, handler);

@@ -204,7 +204,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		final Function onsubmit = getOnsubmit();
 		if (onsubmit != null) {
 			// TODO: onsubmit event object?
-			if (!Executor.executeFunction(this, onsubmit, null)) {
+			if (!Executor.executeFunction(this, onsubmit, null, new Object[0])) {
 				return;
 			}
 		}

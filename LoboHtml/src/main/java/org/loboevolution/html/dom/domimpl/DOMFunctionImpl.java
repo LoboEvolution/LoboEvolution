@@ -109,7 +109,7 @@ public class DOMFunctionImpl extends NodeImpl {
 			if (handlers != null) {
 				for (final Function h : handlers) {
 					if(!clicked.contains(htmlElementImpl)){
-					Executor.executeFunction(this, h, evt);
+					Executor.executeFunction(this, h, evt, new Object[0]);
 					clicked.add(htmlElementImpl);
 				}else {
 					clicked.clear();

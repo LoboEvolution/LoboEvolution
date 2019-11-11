@@ -38,7 +38,7 @@ public class HtmlController {
 			if (f != null) {
 				final Event evt = new EventImpl();
 				evt.initEvent("channge", false, false);
-				if (!Executor.executeFunction(uiElement, f, evt)) {
+				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
 			}
@@ -57,7 +57,7 @@ public class HtmlController {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("contextmenu", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 				evt.setIe(event);
-				if (!Executor.executeFunction(uiElement, f, evt)) {
+				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
 			}
@@ -89,7 +89,7 @@ public class HtmlController {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("dblclick", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 				evt.setIe(event);
-				if (!Executor.executeFunction(uiElement, f, evt)) {
+				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
 			}
@@ -137,7 +137,7 @@ public class HtmlController {
 			evt.setIe(event);
 			uiElement.dispatchEvent(uiElement, evt);
 			if (f != null) {
-				if (!Executor.executeFunction(uiElement, f, evt)) {
+				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
 			}
@@ -210,7 +210,7 @@ public class HtmlController {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("mousedown", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 				evt.setIe(event);
-				pass = Executor.executeFunction(uiElement, f, evt);
+				pass = Executor.executeFunction(uiElement, f, evt, new Object[0]);
 			}
 		}
 		if (node instanceof HTMLLinkElementImpl) {
@@ -240,7 +240,7 @@ public class HtmlController {
 					final MouseEventImpl evt = new MouseEventImpl();
 					evt.initMouseEvent("mouseout", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt);
+					Executor.executeFunction(uiElement, f, evt, new Object[0]);
 				}
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 				if (rcontext != null) {
@@ -264,7 +264,7 @@ public class HtmlController {
 					final MouseEventImpl evt = new MouseEventImpl();
 					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt);
+					Executor.executeFunction(uiElement, f, evt, new Object[0]);
 				}
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 				if (rcontext != null) {
@@ -290,7 +290,7 @@ public class HtmlController {
 					final MouseEventImpl evt = new MouseEventImpl();
 					evt.initMouseEvent("mouseover", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 					evt.setIe(event);
-					Executor.executeFunction(uiElement, f, evt);
+					Executor.executeFunction(uiElement, f, evt, new Object[0]);
 				}
 				final HtmlRendererContext rcontext = uiElement.getHtmlRendererContext();
 				if (rcontext != null) {
@@ -341,7 +341,7 @@ public class HtmlController {
 				final MouseEventImpl evt = new MouseEventImpl();
 				evt.initMouseEvent("mouseup", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 				evt.setIe(event);
-				pass = Executor.executeFunction(uiElement, f, evt);
+				pass = Executor.executeFunction(uiElement, f, evt, new Object[0]);
 			}
 		}
 		if (node instanceof HTMLLinkElementImpl) {
@@ -373,7 +373,7 @@ public class HtmlController {
 				evt.initMouseEvent("click", false, false, null, 0, 0, 0, x, y, true, true, true, true, (short) 0, null);
 				evt.setIe(event);
 				uiElement.dispatchEvent(uiElement, evt);
-				if (!Executor.executeFunction(uiElement, f, evt)) {
+				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
 			}

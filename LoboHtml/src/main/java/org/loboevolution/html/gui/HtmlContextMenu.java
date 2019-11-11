@@ -239,7 +239,7 @@ public class HtmlContextMenu {
 						OutputStream ops = new FileOutputStream(selectedFile);
 						baos.writeTo(ops);
 						baos.flush();
-					} catch (IOException e2) {
+					} catch (Exception e2) {
 						e1.printStackTrace();
 					} finally {
 						try {

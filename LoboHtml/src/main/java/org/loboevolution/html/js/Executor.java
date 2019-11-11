@@ -20,6 +20,7 @@
 */
 package org.loboevolution.html.js;
 
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,18 +49,18 @@ public class Executor {
 	 * @param codeSource
 	 * @param ucontext
 	 */
-	public static Context createContext(java.net.URL codeSource, UserAgentContext ucontext) {
+	public static Context createContext(URL codeSource, UserAgentContext ucontext) {
 		final Context ctx = Context.enter();
 		ctx.setLanguageVersion(Context.VERSION_1_8);
 		ctx.setOptimizationLevel(-1);
 		return ctx;
 	}
 
-	public static boolean executeFunction(NodeImpl element, Function f, Event event) {
-		return Executor.executeFunction(element, element, f, event);
+	public static boolean executeFunction(NodeImpl element, Function f, Event event, Object[] obj) {
+		return Executor.executeFunction(element, element, f, event, obj);
 	}
 
-	public static boolean executeFunction(NodeImpl element, Object thisObject, Function f, Event event) {
+	public static boolean executeFunction(NodeImpl element, Object thisObject, Function f, Event event, Object[] obj) {
 		final Document doc = element.getOwnerDocument();
 		if (doc == null) {
 			throw new IllegalStateException("Element does not belong to a document.");
@@ -77,7 +78,7 @@ public class Executor {
 			try {
 				final Scriptable eventScriptable = (Scriptable) js.getJavascriptObject(event, thisScope);
 				ScriptableObject.defineProperty(thisScope, "event", eventScriptable, ScriptableObject.READONLY);
-				final Object result = f.call(ctx, thisScope, thisScope, new Object[0]);
+				final Object result = f.call(ctx, thisScope, thisScope, obj);
 				if (!(result instanceof Boolean)) {
 					return true;
 				}
@@ -91,7 +92,7 @@ public class Executor {
 		}
 	}
 
-	public static boolean executeFunction(Scriptable thisScope, Function f, java.net.URL codeSource,
+	public static boolean executeFunction(Scriptable thisScope, Function f, URL codeSource,
 			UserAgentContext ucontext) {
 		final Context ctx = createContext(codeSource, ucontext);
 		try {

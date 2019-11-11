@@ -126,18 +126,15 @@ public class HttpNetwork {
 		return null;
 	}
 
-	public static String getSource(String uri) {
-		try {
-			final URL url = new URL(uri);
-			final URLConnection connection = url.openConnection();
-			connection.setRequestProperty("User-Agent", getUserAgentValue());
-			try (InputStream in = openConnectionCheckRedirects(connection)) {
-				return toString(in);
-			}
-		} catch (final Exception e) {
-			e.printStackTrace();
+	public static String getSource(String uri) throws Exception {
+
+		final URL url = new URL(uri);
+		final URLConnection connection = url.openConnection();
+		connection.setRequestProperty("User-Agent", getUserAgentValue());
+		try (InputStream in = openConnectionCheckRedirects(connection)) {
+			return toString(in);
 		}
-		return "";
+
 	}
 
 	public static String getUserAgentValue() {

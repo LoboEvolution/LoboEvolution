@@ -57,7 +57,7 @@ public class SaveFileAction extends AbstractAction {
 				final OutputStream ops = new FileOutputStream(selectedFile);
 				baos.writeTo(ops);
 				baos.flush();
-			} catch (final IOException e1) {
+			} catch (final Exception e1) {
 				e1.printStackTrace();
 			} finally {
 				try {

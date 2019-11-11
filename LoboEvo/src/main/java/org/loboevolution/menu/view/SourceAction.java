@@ -21,11 +21,15 @@ public class SourceAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		final ToolBar bar = this.frame.getToolbar();
-		final SourceViewerWindow textViewer = new SourceViewerWindow();
-		textViewer.setText(HttpNetwork.getSource(bar.getAddressBar().getText()));
-		textViewer.setSize(new Dimension(600, 400));
-		textViewer.setLocationByPlatform(true);
-		textViewer.setVisible(true);
+		try {
+			final ToolBar bar = this.frame.getToolbar();
+			final SourceViewerWindow textViewer = new SourceViewerWindow();
+			textViewer.setText(HttpNetwork.getSource(bar.getAddressBar().getText()));
+			textViewer.setSize(new Dimension(600, 400));
+			textViewer.setLocationByPlatform(true);
+			textViewer.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
