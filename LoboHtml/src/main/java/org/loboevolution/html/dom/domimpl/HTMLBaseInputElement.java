@@ -35,11 +35,22 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 
 	protected InputContext inputContext;
 
-	private Function onload;
-
 	public HTMLBaseInputElement(String name) {
 		super(name);
 	}
+
+	@Override
+	protected void assignAttributeField(String normalName, String value) {
+		if ("onload".equals(normalName)) {
+			final Function onload = getEventFunction(null, normalName);
+			if (onload != null) {
+				setOnload(onload);
+			}
+		} else {
+			super.assignAttributeField(normalName, value);
+		}
+	}
+
 
 	@Override
 	public void blur() {
@@ -128,7 +139,12 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	public Function getOnload() {
-		return getEventFunction(this.onload, "onload");
+		final Object document = this.document;
+		if (document instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) document).getOnloadHandler();
+		} else {
+			return null;
+		}
 	}
 
 	public boolean getReadOnly() {
@@ -223,7 +239,10 @@ public class HTMLBaseInputElement extends HTMLAbstractUIElement {
 	}
 
 	public void setOnload(Function onload) {
-		this.onload = onload;
+		final Object document = this.document;
+		if (document instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) document).setOnloadHandler(onload);
+		}
 	}
 
 	public void setReadOnly(boolean readOnly) {

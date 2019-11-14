@@ -30,14 +30,24 @@ import org.mozilla.javascript.Function;
 
 public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLImageElement {
 	
-	private Function onload;
-
 	public HTMLImageElementImpl() {
 		super("IMG");
 	}
 
 	public HTMLImageElementImpl(String name) {
 		super(name);
+	}
+	
+	@Override
+	protected void assignAttributeField(String normalName, String value) {
+		if ("onload".equals(normalName)) {
+			final Function onload = getEventFunction(null, normalName);
+			if (onload != null) {
+				setOnload(onload);
+			}
+		} else {
+			super.assignAttributeField(normalName, value);
+		}
 	}
 
 	@Override
@@ -87,7 +97,12 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	public Function getOnload() {
-		return getEventFunction(this.onload, "onload");
+		final Object document = this.document;
+		if (document instanceof HTMLDocumentImpl) {
+			return ((HTMLDocumentImpl) document).getOnloadHandler();
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -152,7 +167,10 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	public void setOnload(Function onload) {
-		this.onload = onload;
+		final Object document = this.document;
+		if (document instanceof HTMLDocumentImpl) {
+			((HTMLDocumentImpl) document).setOnloadHandler(onload);
+		}
 	}
 
 	/**
