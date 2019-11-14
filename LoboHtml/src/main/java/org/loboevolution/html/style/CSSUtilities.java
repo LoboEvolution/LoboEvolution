@@ -23,21 +23,16 @@ package org.loboevolution.html.style;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.store.ExternalResourcesStore;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.http.HttpRequest;
 import org.loboevolution.http.UserAgentContext;
-import org.w3c.dom.Node;
 import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
@@ -47,10 +42,9 @@ import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 public class CSSUtilities {
-	private static final Logger logger = Logger.getLogger(CSSUtilities.class.getName());
 
 	public static InputSource getCssInputSourceForStyleSheet(String text, String scriptURI) {
-		final java.io.Reader reader = new StringReader(text);
+		final Reader reader = new StringReader(text);
 		final InputSource is = new InputSource(reader);
 		is.setURI(scriptURI);
 		return is;

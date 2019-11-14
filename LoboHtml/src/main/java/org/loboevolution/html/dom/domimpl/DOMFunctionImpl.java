@@ -81,11 +81,19 @@ public class DOMFunctionImpl extends NodeImpl {
 	}
 
 	public void addEventListener(String type, Function listener, boolean useCapture) {
-		List<Function> handlerList = new ArrayList<Function>();
-		handlerList.add(listener);
-		final Map<String, List<Function>> onEventListeners = new HashMap<String, List<Function>>();
-		onEventListeners.put(type, handlerList);
-		this.onEventHandlers.put((NodeImpl)this, onEventListeners);
+		if ("load".equals(type) || "DOMContentLoaded".equals(type)) {
+			onloadEvent(listener);
+		} else {
+			List<Function> handlerList = new ArrayList<Function>();
+			handlerList.add(listener);
+			final Map<String, List<Function>> onEventListeners = new HashMap<String, List<Function>>();
+			onEventListeners.put(type, handlerList);
+			this.onEventHandlers.put((NodeImpl) this, onEventListeners);
+		}
+	}
+	
+	private void onloadEvent(Function onloadHandler) {
+		Executor.executeFunction(this, onloadHandler, null, new Object[0]);
 	}
 		
 	public void removeEventListener(String script, Function function) {
