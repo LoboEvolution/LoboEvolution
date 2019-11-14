@@ -28,6 +28,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
+import org.w3c.dom.Element;
 
 public class DOMImplementationImpl implements DOMImplementation {
 	private final UserAgentContext context;
@@ -37,9 +38,16 @@ public class DOMImplementationImpl implements DOMImplementation {
 	}
 
 	@Override
-	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype)
-			throws DOMException {
+	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException {
 		return new HTMLDocumentImpl(this.context);
+	}
+	
+	public Document createHTMLDocument(String title) throws DOMException {
+		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
+		final Element body = doc.createElement("BODY");
+		doc.setTitle(title);
+		doc.setBody((HTMLElementImpl)body);
+		return doc;
 	}
 
 	@Override
