@@ -315,7 +315,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	@Override
 	public URL getDocumentURL() {
-		// TODO: Security considerations?
 		return this.documentURL;
 	}
 
@@ -323,7 +322,10 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public String getDomain() {
 		return this.domain;
 	}
-
+	
+	public String getReadyState() {
+		return "complete"; //TODO stub
+	}
 
 
 	/**
