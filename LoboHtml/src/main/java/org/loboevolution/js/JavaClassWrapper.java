@@ -109,7 +109,7 @@ public class JavaClassWrapper {
 	private boolean isPropertyMethod(String name, Method method) {
 		if (name.startsWith("get") || name.startsWith("is")) {
 			return method.getParameterTypes().length == 0;
-		} else if (name.startsWith("set")) {
+		} else if (name.startsWith("set") && !name.equals("setTimeout")) {
 			return method.getParameterTypes().length == 1;
 		} else {
 			return false;
