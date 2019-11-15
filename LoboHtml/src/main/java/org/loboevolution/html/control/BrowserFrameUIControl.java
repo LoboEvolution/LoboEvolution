@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
 
+import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.BrowserFrame;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.ModelNode;
-import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlInsets;
@@ -56,7 +56,7 @@ class BrowserFrameUIControl implements UIControl {
 
 	@Override
 	public int getVAlign() {
-		return RElement.VALIGN_BASELINE;
+		return AlignValues.BASELINE.getValue();
 	}
 
 	@Override

@@ -27,9 +27,9 @@ import java.awt.ComponentOrientation;
 import java.awt.Graphics;
 import java.io.File;
 
+import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.dom.domimpl.InputContext;
-import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.style.HtmlValues;
 
@@ -117,7 +117,7 @@ public abstract class BaseInputControl extends BaseControl implements InputConte
 
 	@Override
 	public int getVAlign() {
-		return RElement.VALIGN_ABSBOTTOM;
+		return AlignValues.ABSBOTTOM.getValue();
 	}
 
 	@Override

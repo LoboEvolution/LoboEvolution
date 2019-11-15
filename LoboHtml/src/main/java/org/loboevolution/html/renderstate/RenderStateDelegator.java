@@ -243,4 +243,9 @@ public abstract class RenderStateDelegator implements RenderState {
 	public void setCursor(Optional<Cursor> cursor) {
 		this.delegate.setCursor(cursor);
 	}
+
+	@Override
+	public String getVerticalAlign() {
+		return this.delegate.getVerticalAlign();
+	}
 }

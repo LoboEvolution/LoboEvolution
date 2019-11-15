@@ -18,36 +18,53 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Nov 5, 2005
- */
-package org.loboevolution.html.control;
+package org.loboevolution.html;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.loboevolution.html.AlignValues;
-
-public abstract interface UIControl {
-	Color getBackgroundColor();
-
-	Component getComponent();
-
-	Dimension getPreferredSize();
-
-	default int getVAlign() {
-		return AlignValues.BASELINE.getValue();
+public enum AlignValues {
+	
+	NONE(-1),
+	
+	TOP(0),
+	
+	MIDDLE(1),
+	
+	BOTTOM(2),
+	
+	ABSMIDDLE(3),
+	
+	ABSBOTTOM(4),
+	
+	BASELINE(5);
+	
+	private int value;
+	private static final Map<Integer, AlignValues> ENUM_MAP;
+	
+	static {
+		Map<Integer, AlignValues> map = new HashMap<Integer, AlignValues>();
+		for (AlignValues instance : AlignValues.values()) {
+			map.put(instance.getValue(), instance);
+		}
+		ENUM_MAP = Collections.unmodifiableMap(map);
 	}
 
-	void invalidate();
+	AlignValues(Integer value) {
+		this.value = value;
+	}
 
-	void paint(Graphics g);
+	public Integer getValue() {
+		return value;
+	}
 
-	void reset(int availWidth, int availHeight);
+	public boolean isEqual(Integer value) {
+		return this.value == value;
+	}
 
-	void setBounds(int x, int y, int width, int height);
-
-	void setRUIControl(RUIControl ruicontrol);
+	public static AlignValues get(Integer actionName) {
+		AlignValues value = ENUM_MAP.get(actionName);
+		return value == null ? AlignValues.NONE : value;
+	}
 }

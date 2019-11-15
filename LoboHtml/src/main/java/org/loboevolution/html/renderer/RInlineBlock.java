@@ -67,12 +67,6 @@ public class RInlineBlock extends BaseElementRenderable {
 	}
 
 	@Override
-	public int getVAlign() {
-		// Not used
-		return VALIGN_BASELINE;
-	}
-
-	@Override
 	public void repaint(final ModelNode modelNode) {
 		this.child.repaint(modelNode);
 	}

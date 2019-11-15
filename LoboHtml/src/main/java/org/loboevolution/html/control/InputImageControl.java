@@ -29,10 +29,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.WrapperLayout;
+import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
-import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.HttpNetwork;
 
@@ -46,7 +46,7 @@ public class InputImageControl extends BaseInputControl {
 
 	private Dimension preferredSize;
 
-	private int valign = RElement.VALIGN_BASELINE;
+	private int valign = AlignValues.BASELINE.getValue();
 	
 	private boolean mouseBeingPressed;
 
@@ -127,25 +127,25 @@ public class InputImageControl extends BaseInputControl {
 
 		switch (alignText) {
 		case "middle":
-			valign = RElement.VALIGN_MIDDLE;
+			valign = AlignValues.MIDDLE.getValue();
 			break;
 		case "absmiddle":
-			valign = RElement.VALIGN_ABSMIDDLE;
+			valign = AlignValues.ABSMIDDLE.getValue();
 			break;
 		case "top":
-			valign = RElement.VALIGN_TOP;
+			valign = AlignValues.TOP.getValue();
 			break;
 		case "bottom":
-			valign = RElement.VALIGN_BOTTOM;
+			valign = AlignValues.BOTTOM.getValue();
 			break;
 		case "baseline":
-			valign = RElement.VALIGN_BASELINE;
+			valign = AlignValues.BASELINE.getValue();
 			break;
 		case "absbottom":
-			valign = RElement.VALIGN_ABSBOTTOM;
+			valign = AlignValues.ABSBOTTOM.getValue();
 			break;
 		default:
-			valign = RElement.VALIGN_BASELINE;
+			valign = AlignValues.BASELINE.getValue();
 			break;
 		}
 		this.valign = valign;

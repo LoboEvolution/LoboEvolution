@@ -1170,5 +1170,11 @@ public class StyleSheetRenderState implements RenderState {
 			return prevCursorOpt;
         }
     }
+   
+   @Override
+   public String getVerticalAlign() {
+	   final AbstractCSSProperties props = this.getCssProperties();
+       return props == null ? null : props.getVerticalAlign();
+   }
 
 }

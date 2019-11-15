@@ -666,12 +666,6 @@ public class RBlock extends BaseElementRenderable {
 		};
 	}
 
-	@Override
-	public int getVAlign() {
-		// Not used
-		return VALIGN_BASELINE;
-	}
-
 	public int getViewportListNesting(int blockNesting) {
 		return blockNesting;
 	}

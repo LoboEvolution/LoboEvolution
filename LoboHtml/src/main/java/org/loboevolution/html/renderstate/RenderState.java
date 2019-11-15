@@ -165,6 +165,8 @@ public interface RenderState {
 
     String getBottom();
     
+    String getVerticalAlign();
+    
     Optional<Cursor> getCursor();
     
     void setCursor(Optional<Cursor> cursor);

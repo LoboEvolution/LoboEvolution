@@ -7,7 +7,6 @@ import java.awt.Graphics;
 
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.renderer.BrokenComponent;
-import org.loboevolution.html.renderer.RElement;
 import org.loboevolution.html.renderer.RenderableSpot;
 
 public class UIControlWrapper implements UIControl {
@@ -38,11 +37,6 @@ public class UIControlWrapper implements UIControl {
 	@Override
 	public Dimension getPreferredSize() {
 		return this.component.getPreferredSize();
-	}
-
-	@Override
-	public int getVAlign() {
-		return RElement.VALIGN_BASELINE;
 	}
 
 	@Override

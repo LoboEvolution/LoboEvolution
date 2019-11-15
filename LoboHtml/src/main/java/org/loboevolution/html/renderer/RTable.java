@@ -247,12 +247,6 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
-	@Override
-	public int getVAlign() {
-		// Not used
-		return VALIGN_BASELINE;
-	}
-
 	private void importDelayedPair(DelayedPair pair) {
 		pair.positionPairChild();
 		final BoundableRenderable r = pair.child;

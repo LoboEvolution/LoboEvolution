@@ -21,6 +21,7 @@
 
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.UINode;
 
 /**
@@ -28,14 +29,6 @@ import org.loboevolution.html.dom.domimpl.UINode;
  * etc.
  */
 public interface RElement extends RCollection, UINode {
-	int VALIGN_ABSBOTTOM = 4;
-
-	int VALIGN_ABSMIDDLE = 3;
-
-	int VALIGN_BASELINE = 5;
-	int VALIGN_BOTTOM = 2;
-	int VALIGN_MIDDLE = 1;
-	int VALIGN_TOP = 0;
 
 	int getCollapsibleMarginBottom();
 
@@ -53,7 +46,9 @@ public interface RElement extends RCollection, UINode {
 	 * Vertical alignment for elements rendered in a line. Returns one of the
 	 * constants defined in this class.
 	 */
-	int getVAlign();
+	default int getVAlign() {
+		return AlignValues.BASELINE.getValue();
+	}
 
 	/**
 	 * Lays out the subtree below the RElement. The RElement is expected to set its

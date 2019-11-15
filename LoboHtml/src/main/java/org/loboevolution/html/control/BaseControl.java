@@ -30,8 +30,8 @@ import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 
+import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.renderer.RElement;
 
 public abstract class BaseControl extends JComponent implements UIControl {
 	private static final Logger logger = Logger.getLogger(BaseControl.class.getName());
@@ -67,7 +67,7 @@ public abstract class BaseControl extends JComponent implements UIControl {
 
 	@Override
 	public int getVAlign() {
-		return RElement.VALIGN_BASELINE;
+		return AlignValues.BASELINE.getValue();
 	}
 
 	/**

@@ -28,10 +28,12 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 
+import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -126,12 +128,13 @@ class RLine extends BaseRCollection {
 		final int ph = relement.getHeight();
 		int requiredHeight;
 		final int valign = relement.getVAlign();
-		switch (valign) {
-		case RElement.VALIGN_BASELINE:
-		case RElement.VALIGN_BOTTOM:
+		final AlignValues key = AlignValues.get(valign);
+		switch (key) {
+		case BASELINE:
+		case BOTTOM:
 			requiredHeight = ph + boundsh - this.baseLineOffset;
 			break;
-		case RElement.VALIGN_MIDDLE:
+		case MIDDLE:
 			requiredHeight = Math.max(ph, ph / 2 + boundsh - this.baseLineOffset);
 			break;
 		default:
@@ -249,7 +252,7 @@ class RLine extends BaseRCollection {
 		}
 		if (extraHeight > 0) {
 			final int newHeight = this.height + extraHeight;
-			adjustHeight(newHeight, newHeight, RElement.VALIGN_ABSBOTTOM);
+			adjustHeight(newHeight, newHeight, AlignValues.BOTTOM.getValue());
 		}
 		this.renderables.add(rword);
 		rword.setParent(this);
@@ -291,26 +294,23 @@ class RLine extends BaseRCollection {
 			}
 		}
 		final int textHeight = maxDescent + maxAscentPlusLeading;
-
-		// TODO: Need to take into account previous RElement's and
-		// their alignments?
-
 		int baseline;
-		switch (valign) {
-		case RElement.VALIGN_ABSBOTTOM:
+		AlignValues key = AlignValues.get(valign);
+		switch (key) {
+		case ABSBOTTOM:
 			baseline = newHeight - maxDescent;
 			break;
-		case RElement.VALIGN_ABSMIDDLE:
+		case ABSMIDDLE:
 			baseline = (newHeight + textHeight) / 2 - maxDescent;
 			break;
-		case RElement.VALIGN_BASELINE:
-		case RElement.VALIGN_BOTTOM:
+		case BASELINE:
+		case BOTTOM:
 			baseline = elementHeight;
 			break;
-		case RElement.VALIGN_MIDDLE:
+		case MIDDLE:
 			baseline = newHeight / 2;
 			break;
-		case RElement.VALIGN_TOP:
+		case TOP:
 			baseline = maxAscentPlusLeading;
 			break;
 		default:
@@ -391,67 +391,6 @@ class RLine extends BaseRCollection {
 		}
 	}
 
-//	/**
-//	 * Positions line elements vertically.
-//	 */
-//	public final void positionVertically() {		
-//		ArrayList renderables = this.renderables;
-//
-//		// Find word maximum metrics.
-//		int maxDescent = 0;
-//		int maxAscentPlusLeading = 0;
-//		int maxWordHeight = 0;
-//		for(Iterator i = renderables.iterator(); i.hasNext(); ) {
-//			Renderable r = (Renderable) i.next();
-//			if(r instanceof RWord) {
-//				RWord rword = (RWord) r;
-//				int descent = rword.descent;
-//				if(descent > maxDescent) {
-//					maxDescent = descent;
-//				}
-//				int ascentPlusLeading = rword.ascentPlusLeading;
-//				if(ascentPlusLeading > maxAscentPlusLeading) {
-//					maxAscentPlusLeading = ascentPlusLeading;
-//				}
-//				if(rword.height > maxWordHeight) {
-//					maxWordHeight = rword.height;
-//				}
-//			}
-//		}
-//
-//		// Determine proper baseline
-//		int lineHeight = this.height;
-//		int baseLine = lineHeight - maxDescent;
-//		for(Iterator i = renderables.iterator(); i.hasNext(); ) {
-//			Renderable r = (Renderable) i.next();
-//			if(r instanceof RElement) {
-//				RElement relement = (RElement) r;
-//				switch(relement.getVAlign()) {
-//				case RElement.VALIGN_ABSBOTTOM:
-//					//TODO
-//					break;
-//				case RElement.VALIGN_ABSMIDDLE:
-//					int midWord = baseLine + maxDescent - maxWordHeight / 2; 
-//					int halfElementHeight = relement.getHeight() / 2;
-//					if(midWord + halfElementHeight > lineHeight) {
-//						// Change baseLine
-//						midWord = lineHeight - halfElementHeight;
-//						baseLine = midWord + maxWordHeight / 2 - maxDescent;
-//					}
-//					else if(midWord - halfElementHeight < 0) {
-//						midWord = halfElementHeight;
-//						baseLine = midWord + maxWordHeight / 2 - maxDescent;
-//					}
-//					else {
-//						relement.setY(midWord - halfElementHeight);
-//					}
-//					break;
-//				}
-//			}
-//		}
-//				
-//	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -483,7 +422,7 @@ class RLine extends BaseRCollection {
 	}
 
 	@Override
-	public boolean onDoubleClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -495,7 +434,7 @@ class RLine extends BaseRCollection {
 	}
 
 	@Override
-	public boolean onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -507,7 +446,7 @@ class RLine extends BaseRCollection {
 	}
 
 	@Override
-	public boolean onMouseDisarmed(java.awt.event.MouseEvent event) {
+	public boolean onMouseDisarmed(MouseEvent event) {
 		final BoundableRenderable target = this.mousePressTarget;
 		if (target != null) {
 			this.mousePressTarget = null;
@@ -518,7 +457,7 @@ class RLine extends BaseRCollection {
 	}
 
 	@Override
-	public boolean onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -530,47 +469,8 @@ class RLine extends BaseRCollection {
 		}
 	}
 
-//	public final void adjustHorizontalBounds(int newX, int newMaxWidth) throws OverflowException {
-//		this.x = newX;
-//		this.desiredMaxWidth = newMaxWidth;
-//		int topX = newX + newMaxWidth;
-//		ArrayList renderables = this.renderables;
-//		int size = renderables.size();
-//		ArrayList overflown = null;
-//		Rectangle lastInLine = null;
-//		for(int i = 0; i < size; i++) {
-//			Object r = renderables.get(i);
-//			if(overflown == null) {
-//				if(r instanceof BoundableRenderable) {
-//					BoundableRenderable br = (BoundableRenderable) r;
-//					Rectangle brb = br.getBounds();
-//					int x2 = brb.x + brb.width;
-//					if(x2 > topX) {
-//						overflown = new ArrayList(1);
-//					}
-//					else {
-//						lastInLine = brb;
-//					}
-//				}
-//			}
-//			/* must not be else here */
-//			if(overflown != null) {
-//				//TODO: This could break a word across markup boundary.
-//				overflown.add(r);
-//				renderables.remove(i--);
-//				size--;
-//			}
-//		}
-//		if(overflown != null) {
-//			if(lastInLine != null) {
-//				this.width = this.xoffset = lastInLine.x + lastInLine.width;
-//			}
-//			throw new OverflowException(overflown);
-//		}
-//	}
-
 	@Override
-	public boolean onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
+	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
@@ -649,30 +549,24 @@ class RLine extends BaseRCollection {
 	 * @param valign
 	 */
 	private final void setElementY(RElement relement, int elementHeight, int valign) {
-		// At this point height should be more than what's needed.
 		int yoffset;
-		switch (valign) {
-		case RElement.VALIGN_ABSBOTTOM:
+		AlignValues key = AlignValues.get(valign);
+		switch (key) {
+		case BOTTOM:
 			yoffset = this.height - elementHeight;
 			break;
-		case RElement.VALIGN_ABSMIDDLE:
+		case MIDDLE:
 			yoffset = (this.height - elementHeight) / 2;
 			break;
-		case RElement.VALIGN_BASELINE:
-		case RElement.VALIGN_BOTTOM:
+		case BASELINE:
 			yoffset = this.baseLineOffset - elementHeight;
 			break;
-		case RElement.VALIGN_MIDDLE:
-			yoffset = this.baseLineOffset - elementHeight / 2;
-			break;
-		case RElement.VALIGN_TOP:
+		case TOP:
 			yoffset = 0;
 			break;
 		default:
 			yoffset = this.baseLineOffset - elementHeight;
 		}
-		// RLine only sets origins, not sizes.
-		// relement.setBounds(x, yoffset, width, height);
 		relement.setY(yoffset);
 	}
 
