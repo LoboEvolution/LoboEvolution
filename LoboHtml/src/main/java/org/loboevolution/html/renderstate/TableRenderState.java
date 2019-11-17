@@ -48,17 +48,17 @@ public class TableRenderState extends StyleSheetRenderState {
 		// Apply style based on deprecated attributes.
 		binfo = super.getBackgroundInfo();
 		final HTMLTableElementImpl element = (HTMLTableElementImpl) this.element;
-		if (binfo == null || binfo.backgroundColor == null) {
+		if (binfo == null || binfo.getBackgroundColor() == null) {
 			final String bgColor = element.getBgColor();
 			if (Strings.isNotBlank(bgColor)) {
 				final Color bgc = ColorFactory.getInstance().getColor(bgColor);
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
-				binfo.backgroundColor = bgc;
+				binfo.setBackgroundColor(bgc);
 			}
 		}
-		if (binfo == null || binfo.backgroundImage == null) {
+		if (binfo == null || binfo.getBackgroundImage() == null) {
 			String background = element.getAttribute("background");
 			if (Strings.isNotBlank(background)) {
 				if (binfo == null) {
@@ -70,7 +70,7 @@ public class TableRenderState extends StyleSheetRenderState {
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
                     background = new String(decodedBytes);
                 }
-				binfo.backgroundImage = this.document.getFullURL(background);
+				binfo.setBackgroundImage(this.document.getFullURL(background));
 			}
 		}
 		this.backgroundInfo = binfo;
@@ -84,9 +84,11 @@ public class TableRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.topStyle == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.bottomStyle == BorderInsets.BORDER_STYLE_NONE && binfo.leftStyle == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.rightStyle == BorderInsets.BORDER_STYLE_NONE) {
+		binfo = super.getBorderInfo();
+		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -115,21 +117,24 @@ public class TableRenderState extends StyleSheetRenderState {
 					final HtmlInsets borderInsets = new HtmlInsets();
 					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
 					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-					binfo.insets = borderInsets;
-					if (binfo.topColor == null) {
-						binfo.topColor = Color.LIGHT_GRAY;
+					binfo.setInsets(borderInsets);
+					if (binfo.getTopColor() == null) {
+						binfo.setTopColor(Color.DARK_GRAY);
 					}
-					if (binfo.leftColor == null) {
-						binfo.leftColor = Color.LIGHT_GRAY;
+					if (binfo.getLeftColor() == null) {
+						binfo.setLeftColor(Color.DARK_GRAY);
 					}
-					if (binfo.rightColor == null) {
-						binfo.rightColor = Color.GRAY;
+					if (binfo.getRightColor() == null) {
+						binfo.setRightColor(Color.LIGHT_GRAY);
 					}
-					if (binfo.bottomColor == null) {
-						binfo.bottomColor = Color.GRAY;
+					if (binfo.getBottomColor() == null) {
+						binfo.setBottomColor(Color.LIGHT_GRAY);
 					}
 					if (value != 0) {
-						binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = BorderInsets.BORDER_STYLE_SOLID;
+						binfo.setTopStyle(BorderInsets.BORDER_STYLE_SOLID);
+						binfo.setLeftStyle(BorderInsets.BORDER_STYLE_SOLID);
+						binfo.setRightStyle(BorderInsets.BORDER_STYLE_SOLID);
+						binfo.setBottomStyle(BorderInsets.BORDER_STYLE_SOLID);
 					}
 				}
 			}

@@ -39,9 +39,9 @@ public class IFrameRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.topStyle == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.bottomStyle == BorderInsets.BORDER_STYLE_NONE && binfo.leftStyle == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.rightStyle == BorderInsets.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE && binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -64,21 +64,24 @@ public class IFrameRenderState extends StyleSheetRenderState {
 				final HtmlInsets borderInsets = new HtmlInsets();
 				borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value != 0 ? 1 : 0;
 				borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = HtmlInsets.TYPE_PIXELS;
-				binfo.insets = borderInsets;
-				if (binfo.topColor == null) {
-					binfo.topColor = Color.DARK_GRAY;
+				binfo.setInsets(borderInsets);
+				if (binfo.getTopColor() == null) {
+					binfo.setTopColor(Color.DARK_GRAY);
 				}
-				if (binfo.leftColor == null) {
-					binfo.leftColor = Color.DARK_GRAY;
+				if (binfo.getLeftColor() == null) {
+					binfo.setLeftColor(Color.DARK_GRAY);
 				}
-				if (binfo.rightColor == null) {
-					binfo.rightColor = Color.LIGHT_GRAY;
+				if (binfo.getRightColor() == null) {
+					binfo.setRightColor(Color.LIGHT_GRAY);
 				}
-				if (binfo.bottomColor == null) {
-					binfo.bottomColor = Color.LIGHT_GRAY;
+				if (binfo.getBottomColor() == null) {
+					binfo.setBottomColor(Color.LIGHT_GRAY);
 				}
 				if (value != 0) {
-					binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = BorderInsets.BORDER_STYLE_SOLID;
+					binfo.setTopStyle(BorderInsets.BORDER_STYLE_SOLID);
+					binfo.setLeftStyle(BorderInsets.BORDER_STYLE_SOLID);
+					binfo.setRightStyle(BorderInsets.BORDER_STYLE_SOLID);
+					binfo.setBottomStyle(BorderInsets.BORDER_STYLE_SOLID);
 				}
 			}
 		}

@@ -138,7 +138,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		if (parentNode instanceof HTMLTableRowElementImpl) {
 			rowElement = (HTMLTableRowElementImpl) parentNode;
 		}
-		if (binfo == null || binfo.backgroundColor == null) {
+		if (binfo == null || binfo.getBackgroundColor() == null) {
 			String bgColor = element.getBgColor();
 			if (Strings.isNotBlank(bgColor)) {
 				if (rowElement != null) {
@@ -150,10 +150,10 @@ public class TableCellRenderState extends DisplayRenderState {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
-				binfo.backgroundColor = bgc;
+				binfo.setBackgroundColor(bgc);
 			}
 		}
-		if (binfo == null || binfo.backgroundImage == null) {
+		if (binfo == null || binfo.getBackgroundImage() == null) {
 			String background = element.getAttribute("background");
 			if (Strings.isNotBlank(background)) {
 				if (binfo == null) {
@@ -165,7 +165,7 @@ public class TableCellRenderState extends DisplayRenderState {
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
                     background = new String(decodedBytes);
                 }
-				binfo.backgroundImage = this.document.getFullURL(background);
+				binfo.setBackgroundImage(this.document.getFullURL(background));
 			}
 		}
 		this.backgroundInfo = binfo;

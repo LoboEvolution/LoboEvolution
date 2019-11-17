@@ -22,13 +22,50 @@ package org.loboevolution.info;
 
 
 public class FloatingInfo {
-	public final Object[] floats;
-	public final int shiftX, shiftY;
+	
+	private Object[] floats;
+	
+	private int shiftX, shiftY;
 
-	public FloatingInfo(int shiftX, int shiftY, Object[] floats) {
-		super();
-		this.shiftX = shiftX;
-		this.shiftY = shiftY;
+	/**
+	 * @return the floats
+	 */
+	public Object[] getFloats() {
+		return floats;
+	}
+
+	/**
+	 * @return the shiftX
+	 */
+	public int getShiftX() {
+		return shiftX;
+	}
+
+	/**
+	 * @return the shiftY
+	 */
+	public int getShiftY() {
+		return shiftY;
+	}
+
+	/**
+	 * @param floats the floats to set
+	 */
+	public void setFloats(Object[] floats) {
 		this.floats = floats;
+	}
+
+	/**
+	 * @param shiftX the shiftX to set
+	 */
+	public void setShiftX(int shiftX) {
+		this.shiftX = shiftX;
+	}
+
+	/**
+	 * @param shiftY the shiftY to set
+	 */
+	public void setShiftY(int shiftY) {
+		this.shiftY = shiftY;
 	}
 }

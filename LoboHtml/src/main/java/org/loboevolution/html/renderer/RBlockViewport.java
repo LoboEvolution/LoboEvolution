@@ -766,15 +766,17 @@ public class RBlockViewport extends BaseRCollection {
 		return block.getHeight() - Math.min(blockMarginBottom, parentMarginBottom);
 	}
 
-	// ----------------------------------------------------------------
-
 	public FloatingInfo getExportableFloatingInfo() {
 		final ArrayList<ExportableFloat> ef = this.exportableFloats;
 		if (ef == null) {
 			return null;
 		}
 		final ExportableFloat[] floats = (ExportableFloat[]) ef.toArray(ExportableFloat.EMPTY_ARRAY);
-		return new FloatingInfo(0, 0, floats);
+		final FloatingInfo fInfo = new FloatingInfo();
+		fInfo.setShiftX(0);
+		fInfo.setShiftY(0);
+		fInfo.setFloats(floats);
+		return fInfo;
 	}
 
 	public int getFirstBaselineOffset() {
@@ -1022,9 +1024,9 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private void importFloatingInfo(FloatingInfo floatingInfo, BoundableRenderable block) {
-		final int shiftX = floatingInfo.shiftX + block.getX();
-		final int shiftY = floatingInfo.shiftY + block.getY();
-		final ExportableFloat[] floats = (ExportableFloat[])floatingInfo.floats;
+		final int shiftX = floatingInfo.getShiftX() + block.getX();
+		final int shiftY = floatingInfo.getShiftY() + block.getY();
+		final ExportableFloat[] floats = (ExportableFloat[])floatingInfo.getFloats();
 		final int length = floats.length;
 		for (int i = 0; i < length; i++) {
 			final ExportableFloat ef = floats[i];

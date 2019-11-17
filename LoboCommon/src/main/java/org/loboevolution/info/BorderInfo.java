@@ -23,15 +23,150 @@ package org.loboevolution.info;
 import java.awt.Color;
 
 public class BorderInfo {
-	public Color bottomColor;
-	public int bottomStyle;
-	public Object insets;
-	public Color leftColor;
+	
+	private Color bottomColor;
+	
+	private Color leftColor;
 
-	public int leftStyle;
-	public Color rightColor;
-	public int rightStyle;
-	public Color topColor;
+	private Color rightColor;
+	
+	private Color topColor;
+	
+	private Object insets;
+	
+	private int leftStyle;
+	
+	private int bottomStyle;
+	
+	private int rightStyle;
+	
+	private int topStyle;
 
-	public int topStyle;
+	/**
+	 * @return the bottomColor
+	 */
+	public Color getBottomColor() {
+		return bottomColor;
+	}
+
+	/**
+	 * @return the leftColor
+	 */
+	public Color getLeftColor() {
+		return leftColor;
+	}
+
+	/**
+	 * @return the rightColor
+	 */
+	public Color getRightColor() {
+		return rightColor;
+	}
+
+	/**
+	 * @return the topColor
+	 */
+	public Color getTopColor() {
+		return topColor;
+	}
+
+	/**
+	 * @return the insets
+	 */
+	public Object getInsets() {
+		return insets;
+	}
+
+	/**
+	 * @return the leftStyle
+	 */
+	public int getLeftStyle() {
+		return leftStyle;
+	}
+
+	/**
+	 * @return the bottomStyle
+	 */
+	public int getBottomStyle() {
+		return bottomStyle;
+	}
+
+	/**
+	 * @return the rightStyle
+	 */
+	public int getRightStyle() {
+		return rightStyle;
+	}
+
+	/**
+	 * @return the topStyle
+	 */
+	public int getTopStyle() {
+		return topStyle;
+	}
+
+	/**
+	 * @param bottomColor the bottomColor to set
+	 */
+	public void setBottomColor(Color bottomColor) {
+		this.bottomColor = bottomColor;
+	}
+
+	/**
+	 * @param leftColor the leftColor to set
+	 */
+	public void setLeftColor(Color leftColor) {
+		this.leftColor = leftColor;
+	}
+
+	/**
+	 * @param rightColor the rightColor to set
+	 */
+	public void setRightColor(Color rightColor) {
+		this.rightColor = rightColor;
+	}
+
+	/**
+	 * @param topColor the topColor to set
+	 */
+	public void setTopColor(Color topColor) {
+		this.topColor = topColor;
+	}
+
+	/**
+	 * @param insets the insets to set
+	 */
+	public void setInsets(Object insets) {
+		this.insets = insets;
+	}
+
+	/**
+	 * @param leftStyle the leftStyle to set
+	 */
+	public void setLeftStyle(int leftStyle) {
+		this.leftStyle = leftStyle;
+	}
+
+	/**
+	 * @param bottomStyle the bottomStyle to set
+	 */
+	public void setBottomStyle(int bottomStyle) {
+		this.bottomStyle = bottomStyle;
+	}
+
+	/**
+	 * @param rightStyle the rightStyle to set
+	 */
+	public void setRightStyle(int rightStyle) {
+		this.rightStyle = rightStyle;
+	}
+
+	/**
+	 * @param topStyle the topStyle to set
+	 */
+	public void setTopStyle(int topStyle) {
+		this.topStyle = topStyle;
+	}	
+	
+
 }

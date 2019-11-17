@@ -27,15 +27,15 @@ public class BorderInsets {
 	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
 
-		binfo.topStyle = getBorderStyle(properties.getBorderTopStyle());
-		binfo.rightStyle = getBorderStyle(properties.getBorderRightStyle());
-		binfo.bottomStyle = getBorderStyle(properties.getBorderBottomStyle());
-		binfo.leftStyle = getBorderStyle(properties.getBorderLeftStyle());
+		binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
+		binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
+		binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
+		binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
 		
-		binfo.topColor = getBorderColor(properties.getBorderTopColor(), renderState);
-	    binfo.rightColor = getBorderColor(properties.getBorderRightColor(), renderState);
-	    binfo.bottomColor = getBorderColor(properties.getBorderBottomColor(), renderState);
-	    binfo.leftColor = getBorderColor(properties.getBorderLeftColor(), renderState);
+		binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), renderState));
+	    binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), renderState));
+	    binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), renderState));
+	    binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), renderState));
 
 		populateBorderInsets(binfo, properties, renderState);
 
@@ -65,23 +65,23 @@ public class BorderInsets {
 	
 	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
-		if (binfo.topStyle != BORDER_STYLE_NONE) {
+		if (binfo.getTopStyle() != BORDER_STYLE_NONE) {
 			final String topText = cssProperties.getBorderTopWidth();
 			insets = HtmlInsets.updateTopInset(insets, topText, renderState);
 		}
-		if (binfo.leftStyle != BORDER_STYLE_NONE) {
+		if (binfo.getLeftStyle() != BORDER_STYLE_NONE) {
 			final String leftText = cssProperties.getBorderLeftWidth();
 			insets = HtmlInsets.updateLeftInset(insets, leftText, renderState);
 		}
-		if (binfo.bottomStyle != BORDER_STYLE_NONE) {
+		if (binfo.getBottomStyle() != BORDER_STYLE_NONE) {
 			final String bottomText = cssProperties.getBorderBottomWidth();
 			insets = HtmlInsets.updateBottomInset(insets, bottomText, renderState);
 		}
-		if (binfo.rightStyle != BORDER_STYLE_NONE) {
+		if (binfo.getRightStyle() != BORDER_STYLE_NONE) {
 			final String rightText = cssProperties.getBorderRightWidth();
 			insets = HtmlInsets.updateRightInset(insets, rightText, renderState);
 		}
-		binfo.insets = insets;
+		binfo.setInsets(insets);
 	}
 	
 	private static Color getBorderColor(final String colorSpec, final RenderState renderState) {

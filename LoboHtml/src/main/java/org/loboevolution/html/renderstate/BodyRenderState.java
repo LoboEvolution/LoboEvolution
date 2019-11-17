@@ -42,13 +42,13 @@ public class BodyRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBackgroundInfo();
-		if (binfo == null || binfo.backgroundColor == null) {
+		if (binfo == null || binfo.getBackgroundColor() == null) {
 			final String bgcolor = this.element.getAttribute("bgcolor");
 			if (Strings.isNotBlank(bgcolor)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
-				binfo.backgroundColor = ColorFactory.getInstance().getColor(bgcolor);
+				binfo.setBackgroundColor(ColorFactory.getInstance().getColor(bgcolor));
 			}
 		}
 		this.iBackgroundInfo = binfo;

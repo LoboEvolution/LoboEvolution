@@ -41,9 +41,9 @@ public class ImageRenderState extends StyleSheetRenderState {
 			return binfo;
 		}
 		binfo = super.getBorderInfo();
-		if (binfo == null || binfo.topStyle == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.bottomStyle == BorderInsets.BORDER_STYLE_NONE && binfo.leftStyle == BorderInsets.BORDER_STYLE_NONE
-				&& binfo.rightStyle == BorderInsets.BORDER_STYLE_NONE) {
+		if (binfo == null || binfo.getTopStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getBottomStyle() == BorderInsets.BORDER_STYLE_NONE && binfo.getLeftStyle() == BorderInsets.BORDER_STYLE_NONE
+				&& binfo.getRightStyle() == BorderInsets.BORDER_STYLE_NONE) {
 			if (binfo == null) {
 				binfo = new BorderInfo();
 			}
@@ -72,21 +72,24 @@ public class ImageRenderState extends StyleSheetRenderState {
 					final HtmlInsets borderInsets = new HtmlInsets();
 					borderInsets.top = borderInsets.left = borderInsets.right = borderInsets.bottom = value;
 					borderInsets.topType = borderInsets.leftType = borderInsets.rightType = borderInsets.bottomType = valueType;
-					binfo.insets = borderInsets;
-					if (binfo.topColor == null) {
-						binfo.topColor = Color.BLACK;
+					binfo.setInsets(borderInsets);
+					if (binfo.getTopColor() == null) {
+						binfo.setTopColor(Color.BLACK);
 					}
-					if (binfo.leftColor == null) {
-						binfo.leftColor = Color.BLACK;
+					if (binfo.getLeftColor() == null) {
+						binfo.setLeftColor(Color.BLACK);
 					}
-					if (binfo.rightColor == null) {
-						binfo.rightColor = Color.BLACK;
+					if (binfo.getRightColor() == null) {
+						binfo.setRightColor(Color.BLACK);
 					}
-					if (binfo.bottomColor == null) {
-						binfo.bottomColor = Color.BLACK;
+					if (binfo.getBottomColor() == null) {
+						binfo.setBottomColor(Color.BLACK);
 					}
 					if (value != 0) {
-						binfo.topStyle = binfo.leftStyle = binfo.rightStyle = binfo.bottomStyle = BorderInsets.BORDER_STYLE_SOLID;
+						binfo.setTopStyle(BorderInsets.BORDER_STYLE_SOLID);
+						binfo.setLeftStyle(BorderInsets.BORDER_STYLE_SOLID);
+						binfo.setRightStyle(BorderInsets.BORDER_STYLE_SOLID);
+						binfo.setBottomStyle(BorderInsets.BORDER_STYLE_SOLID);
 					}
 				}
 			}

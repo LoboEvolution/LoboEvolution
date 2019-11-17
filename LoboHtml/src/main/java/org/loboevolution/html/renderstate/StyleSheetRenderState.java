@@ -131,41 +131,41 @@ public class StyleSheetRenderState implements RenderState {
 
 	private void applyBackgroundHorizontalPositon(BackgroundInfo binfo, String xposition) {
 		if (xposition.endsWith("%")) {
-			binfo.backgroundXPositionAbsolute = false;
+			binfo.setBackgroundXPositionAbsolute(false);
 			try {
-				binfo.backgroundXPosition = (int) Double
-						.parseDouble(xposition.substring(0, xposition.length() - 1).trim());
+				binfo.setBackgroundXPosition((int) Double
+						.parseDouble(xposition.substring(0, xposition.length() - 1).trim()));
 			} catch (final NumberFormatException nfe) {
-				binfo.backgroundXPosition = 0;
+				binfo.setBackgroundXPosition(0);
 			}
 		} else if ("center".equalsIgnoreCase(xposition)) {
-			binfo.backgroundXPositionAbsolute = false;
-			binfo.backgroundXPosition = 50;
+			binfo.setBackgroundXPositionAbsolute(false);
+			binfo.setBackgroundXPosition(50);
 		} else if ("right".equalsIgnoreCase(xposition)) {
-			binfo.backgroundXPositionAbsolute = false;
-			binfo.backgroundXPosition = 100;
+			binfo.setBackgroundXPositionAbsolute(false);
+			binfo.setBackgroundXPosition(100);
 		} else if ("left".equalsIgnoreCase(xposition)) {
-			binfo.backgroundXPositionAbsolute = false;
-			binfo.backgroundXPosition = 0;
+			binfo.setBackgroundXPositionAbsolute(false);
+			binfo.setBackgroundXPosition(0);
 		} else if ("bottom".equalsIgnoreCase(xposition)) {
 			// Can happen
-			binfo.backgroundYPositionAbsolute = false;
-			binfo.backgroundYPosition = 100;
+			binfo.setBackgroundYPositionAbsolute(false);
+			binfo.setBackgroundYPosition(100);
 		} else if ("top".equalsIgnoreCase(xposition)) {
 			// Can happen
-			binfo.backgroundYPositionAbsolute = false;
-			binfo.backgroundYPosition = 0;
+			binfo.setBackgroundYPositionAbsolute(false);
+			binfo.setBackgroundYPosition(0);
 		} else {
-			binfo.backgroundXPositionAbsolute = true;
-			binfo.backgroundXPosition = HtmlValues.getPixelSize(xposition, this, 0);
+			binfo.setBackgroundXPositionAbsolute(true);
+			binfo.setBackgroundXPosition(HtmlValues.getPixelSize(xposition, this, 0));
 		}
 	}
 
 	private void applyBackgroundPosition(BackgroundInfo binfo, String position) {
-		binfo.backgroundXPositionAbsolute = false;
-		binfo.backgroundYPositionAbsolute = false;
-		binfo.backgroundXPosition = 50;
-		binfo.backgroundYPosition = 50;
+		binfo.setBackgroundXPositionAbsolute(false);
+		binfo.setBackgroundYPositionAbsolute(false);
+		binfo.setBackgroundXPosition(50);
+		binfo.setBackgroundYPosition(50);
 		final StringTokenizer tok = new StringTokenizer(position, " \t\r\n");
 		if (tok.hasMoreTokens()) {
 			final String xposition = tok.nextToken();
@@ -180,45 +180,45 @@ public class StyleSheetRenderState implements RenderState {
 	private void applyBackgroundRepeat(BackgroundInfo binfo, String backgroundRepeatText) {
 		final String brtl = backgroundRepeatText.toLowerCase();		
 		if ("repeat".equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT;
+			binfo.setBackgroundRepeat(BackgroundInfo.BR_REPEAT);
 		} else if ("repeat-x".equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT_X;
+			binfo.setBackgroundRepeat(BackgroundInfo.BR_REPEAT_X);
 		} else if ("repeat-y".equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_REPEAT_Y;
+			binfo.setBackgroundRepeat(BackgroundInfo.BR_REPEAT_Y);
 		} else if ("no-repeat".equals(brtl)) {
-			binfo.backgroundRepeat = BackgroundInfo.BR_NO_REPEAT;
+			binfo.setBackgroundRepeat(BackgroundInfo.BR_NO_REPEAT);
 		}
 	}
 
 	private void applyBackgroundVerticalPosition(BackgroundInfo binfo, String yposition) {
 		if (yposition.endsWith("%")) {
-			binfo.backgroundYPositionAbsolute = false;
+			binfo.setBackgroundYPositionAbsolute(false);
 			try {
-				binfo.backgroundYPosition = (int) Double
-						.parseDouble(yposition.substring(0, yposition.length() - 1).trim());
+				binfo.setBackgroundYPosition((int) Double
+						.parseDouble(yposition.substring(0, yposition.length() - 1).trim()));
 			} catch (final NumberFormatException nfe) {
-				binfo.backgroundYPosition = 0;
+				binfo.setBackgroundYPosition(0);
 			}
 		} else if ("center".equalsIgnoreCase(yposition)) {
-			binfo.backgroundYPositionAbsolute = false;
-			binfo.backgroundYPosition = 50;
+			binfo.setBackgroundYPositionAbsolute(false);
+			binfo.setBackgroundYPosition(50);
 		} else if ("bottom".equalsIgnoreCase(yposition)) {
-			binfo.backgroundYPositionAbsolute = false;
-			binfo.backgroundYPosition = 100;
+			binfo.setBackgroundYPositionAbsolute(false);
+			binfo.setBackgroundYPosition(100);
 		} else if ("top".equalsIgnoreCase(yposition)) {
-			binfo.backgroundYPositionAbsolute = false;
-			binfo.backgroundYPosition = 0;
+			binfo.setBackgroundYPositionAbsolute(false);
+			binfo.setBackgroundYPosition(0);
 		} else if ("right".equalsIgnoreCase(yposition)) {
 			// Can happen
-			binfo.backgroundXPositionAbsolute = false;
-			binfo.backgroundXPosition = 100;
+			binfo.setBackgroundXPositionAbsolute(false);
+			binfo.setBackgroundXPosition(100);
 		} else if ("left".equalsIgnoreCase(yposition)) {
 			// Can happen
-			binfo.backgroundXPositionAbsolute = false;
-			binfo.backgroundXPosition = 0;
+			binfo.setBackgroundXPositionAbsolute(false);
+			binfo.setBackgroundXPosition(0);
 		} else {
-			binfo.backgroundYPositionAbsolute = true;
-			binfo.backgroundYPosition = HtmlValues.getPixelSize(yposition, this, 0);
+			binfo.setBackgroundYPositionAbsolute(true);
+			binfo.setBackgroundYPosition(HtmlValues.getPixelSize(yposition, this, 0));
 		}
 	}
 
@@ -231,9 +231,9 @@ public class StyleSheetRenderState implements RenderState {
             String[] items = {"http", "https", "file"};            
             if(Strings.containsWords(quotedUri, items)) {
                 try {
-                    binfo.backgroundImage = new URL(quotedUri);
+                    binfo.setBackgroundImage(new URL(quotedUri));
                 } catch (Exception e) {
-                    binfo.backgroundImage = null;
+                    binfo.setBackgroundImage(null);
                 }
             } else {
             	if (quotedUri.contains(";base64,")) {
@@ -241,7 +241,7 @@ public class StyleSheetRenderState implements RenderState {
     				final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
     				quotedUri = new String(decodedBytes);
             	}
-                binfo.backgroundImage = document.getFullURL(quotedUri);
+                binfo.setBackgroundImage(document.getFullURL(quotedUri));
             }
         }
     }
@@ -297,7 +297,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		Color localColor;
 		final BackgroundInfo binfo = getBackgroundInfo();
-		localColor = binfo == null ? null : binfo.backgroundColor;
+		localColor = binfo == null ? null : binfo.getBackgroundColor();
 		if (localColor == null && getDisplay() == DISPLAY_INLINE) {
 			final RenderState prs = this.prevRenderState;
 			if (prs != null) {
@@ -338,7 +338,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 			
 			if (Strings.isNotBlank(backgroundColorText)) {
-				binfo.backgroundColor = ColorFactory.getInstance().getColor(backgroundColorText);
+				binfo.setBackgroundColor(ColorFactory.getInstance().getColor(backgroundColorText));
 			}
 			
 			if (Strings.isNotBlank(backgroundRepeatText)) {
@@ -758,7 +758,7 @@ public class StyleSheetRenderState implements RenderState {
 			localColor = null;
 		} else {
 			final BackgroundInfo binfo = getBackgroundInfo();
-			localColor = binfo == null ? null : binfo.backgroundColor;
+			localColor = binfo == null ? null : binfo.getBackgroundColor();
 			if (localColor == null) {
 				final RenderState prs = this.prevRenderState;
 				if (prs != null) {
@@ -967,11 +967,11 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		wi = new WordInfo();
 		final FontMetrics fm = getFontMetrics();
-		wi.fontMetrics = fm;
-		wi.ascentPlusLeading = fm.getAscent() + fm.getLeading();
-		wi.descent = fm.getDescent();
-		wi.height = fm.getHeight();
-		wi.width = fm.stringWidth(word);
+		wi.setFontMetrics(fm);
+		wi.setAscentPlusLeading(fm.getAscent() + fm.getLeading());
+		wi.setDescent(fm.getDescent());
+		wi.setHeight(fm.getHeight());
+		wi.setWidth(fm.stringWidth(word));
 		map.put(word, wi);
 		return wi;
 	}

@@ -29,9 +29,84 @@ import java.awt.FontMetrics;
  * @author J. H. S.
  */
 public class WordInfo {
-	public int ascentPlusLeading;
-	public int descent;
-	public FontMetrics fontMetrics;
-	public int height;
-	public int width;
+	
+	private int ascentPlusLeading;
+	
+	private int descent;
+	
+	private FontMetrics fontMetrics;
+	
+	private int height;
+	
+	private int width;
+
+	/**
+	 * @return the ascentPlusLeading
+	 */
+	public int getAscentPlusLeading() {
+		return ascentPlusLeading;
+	}
+
+	/**
+	 * @return the descent
+	 */
+	public int getDescent() {
+		return descent;
+	}
+
+	/**
+	 * @return the fontMetrics
+	 */
+	public FontMetrics getFontMetrics() {
+		return fontMetrics;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param ascentPlusLeading the ascentPlusLeading to set
+	 */
+	public void setAscentPlusLeading(int ascentPlusLeading) {
+		this.ascentPlusLeading = ascentPlusLeading;
+	}
+
+	/**
+	 * @param descent the descent to set
+	 */
+	public void setDescent(int descent) {
+		this.descent = descent;
+	}
+
+	/**
+	 * @param fontMetrics the fontMetrics to set
+	 */
+	public void setFontMetrics(FontMetrics fontMetrics) {
+		this.fontMetrics = fontMetrics;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
 }

@@ -160,8 +160,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 		
 		binfo = rs.getBackgroundInfo();	
-        this.backgroundColor = binfo == null ? null : binfo.backgroundColor;
-		final URL backgroundImageUri = binfo == null ? null : binfo.backgroundImage;		
+        this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
+		final URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();		
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
 			this.lastBackgroundImageUri = null;
@@ -182,7 +182,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		} else {
 			final BorderInfo borderInfo = rs.getBorderInfo();
 			this.borderInfo = borderInfo;
-			final HtmlInsets binsets = borderInfo == null ? null : (HtmlInsets)borderInfo.insets;
+			final HtmlInsets binsets = borderInfo == null ? null : (HtmlInsets)borderInfo.getInsets();
 			final HtmlInsets minsets = rs.getMarginInsets();
 			final HtmlInsets pinsets = rs.getPaddingInsets();
 			int dpleft = 0, dpright = 0, dptop = 0, dpbottom = 0;
@@ -238,10 +238,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			              : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY));
 			}
 			if (borderInfo != null) {
-				this.borderTopColor = borderInfo.topColor;
-				this.borderLeftColor = borderInfo.leftColor;
-				this.borderBottomColor = borderInfo.bottomColor;
-				this.borderRightColor = borderInfo.rightColor;
+				this.borderTopColor = borderInfo.getTopColor();
+				this.borderLeftColor = borderInfo.getLeftColor();
+				this.borderBottomColor = borderInfo.getBottomColor();
+				this.borderRightColor = borderInfo.getRightColor();
 			} else {
 				this.borderTopColor = null;
 				this.borderLeftColor = null;
@@ -754,19 +754,19 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			            final int topX = bkgBounds.x + bkgBounds.width;
 			            final int topY = bkgBounds.y + bkgBounds.height;
 			            
-			            switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.backgroundRepeat) {
+			            switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
 						case BackgroundInfo.BR_NO_REPEAT:
 							int _imageX;
-							if (binfo.backgroundXPositionAbsolute) {
-								_imageX = binfo.backgroundXPosition;
+							if (binfo.isBackgroundXPositionAbsolute()) {
+								_imageX = binfo.getBackgroundXPosition();
 							} else {
-								_imageX = binfo.backgroundXPosition * (totalWidth - w) / 100;
+								_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
 							}
 							int _imageY;
-							if (binfo.backgroundYPositionAbsolute) {
-								_imageY = binfo.backgroundYPosition;
+							if (binfo.isBackgroundYPositionAbsolute()) {
+								_imageY = binfo.getBackgroundYPosition();
 							} else {
-								_imageY = binfo.backgroundYPosition * (totalHeight - h) / 100;
+								_imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
 							}
 							g.drawImage(image, _imageX, _imageY, w, h, this);
 							break;
@@ -820,7 +820,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				final BorderInfo borderInfo = this.borderInfo;
 				if (btop > 0) {
 					g.setColor(getBorderTopColor());
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.topStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getTopStyle();
 					for (int i = 0; i < btop; i++) {
 						final int leftOffset = i * bleft / btop;
 						final int rightOffset = i * bright / btop;
@@ -834,7 +834,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					}
 				}
 				if (bright > 0) {
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.rightStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getRightStyle();
 					g.setColor(getBorderRightColor());
 					final int lastX = startX + totalWidth - 1;
 					for (int i = 0; i < bright; i++) {
@@ -850,7 +850,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					}
 				}
 				if (bbottom > 0) {
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.bottomStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getBottomStyle();
 					g.setColor(getBorderBottomColor());
 					final int lastY = startY + totalHeight - 1;
 					for (int i = 0; i < bbottom; i++) {
@@ -866,7 +866,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					}
 				}
 				if (bleft > 0) {
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.leftStyle;
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getLeftStyle();
 					g.setColor(getBorderLeftColor());
 					for (int i = 0; i < bleft; i++) {
 						final int topOffset = i * btop / bleft;
@@ -935,10 +935,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (binfo == null) {
 			return 0;
 		} else {
-			if (binfo.backgroundYPositionAbsolute) {
-				return binfo.backgroundYPosition;
+			if (binfo.isBackgroundYPositionAbsolute()) {
+				return binfo.getBackgroundYPosition();
 			} else {
-				return (binfo.backgroundYPosition * (totalHeight - h)) / 100;
+				return (binfo.getBackgroundYPosition() * (totalHeight - h)) / 100;
 			}
 		}
 	}
@@ -947,10 +947,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (binfo == null) {
 			return 0;
 		} else {
-			if (binfo.backgroundXPositionAbsolute) {
-				return binfo.backgroundXPosition;
+			if (binfo.isBackgroundXPositionAbsolute()) {
+				return binfo.getBackgroundXPosition();
 			} else {
-				return (binfo.backgroundXPosition * (totalWidth - w)) / 100;
+				return (binfo.getBackgroundXPosition() * (totalWidth - w)) / 100;
 			}
 		}
 	}

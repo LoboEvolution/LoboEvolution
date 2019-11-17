@@ -229,20 +229,20 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				final String fontSpecTL = newValue.toLowerCase();
 				final FontInfo fontInfo = (FontInfo) HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
 				if (fontInfo != null) {
-					if (fontInfo.fontFamily != null) {
-						properties.setPropertyValueLCAlt(FONT_FAMILY, fontInfo.fontFamily, important);
+					if (fontInfo.getFontFamily() != null) {
+						properties.setPropertyValueLCAlt(FONT_FAMILY, fontInfo.getFontFamily(), important);
 					}
-					if (fontInfo.fontSize != null) {
-						properties.setPropertyValueLCAlt(FONT_SIZE, fontInfo.fontSize, important);
+					if (fontInfo.getFontSize() != null) {
+						properties.setPropertyValueLCAlt(FONT_SIZE, fontInfo.getFontSize(), important);
 					}
-					if (fontInfo.fontStyle != null) {
-						properties.setPropertyValueLCAlt(FONT_STYLE, fontInfo.fontStyle, important);
+					if (fontInfo.getFontStyle() != null) {
+						properties.setPropertyValueLCAlt(FONT_STYLE, fontInfo.getFontStyle(), important);
 					}
-					if (fontInfo.fontVariant != null) {
-						properties.setPropertyValueLCAlt(FONT_VARIANT, fontInfo.fontVariant, important);
+					if (fontInfo.getFontVariant() != null) {
+						properties.setPropertyValueLCAlt(FONT_VARIANT, fontInfo.getFontVariant(), important);
 					}
-					if (fontInfo.fontWeight != null) {
-						properties.setPropertyValueLCAlt(FONT_WEIGHT, fontInfo.fontWeight, important);
+					if (fontInfo.getFontWeight() != null) {
+						properties.setPropertyValueLCAlt(FONT_WEIGHT, fontInfo.getFontWeight(), important);
 					}
 					return;
 				}

@@ -21,9 +21,84 @@
 package org.loboevolution.info;
 
 public class FontInfo {
-	public String fontFamily;
-	public String fontSize;
-	public String fontStyle;
-	public String fontVariant;
-	public String fontWeight;
+	
+	private String fontFamily;
+	
+	private String fontSize;
+	
+	private String fontStyle;
+	
+	private String fontVariant;
+	
+	private String fontWeight;
+
+	/**
+	 * @return the fontFamily
+	 */
+	public String getFontFamily() {
+		return fontFamily;
+	}
+
+	/**
+	 * @return the fontSize
+	 */
+	public String getFontSize() {
+		return fontSize;
+	}
+
+	/**
+	 * @return the fontStyle
+	 */
+	public String getFontStyle() {
+		return fontStyle;
+	}
+
+	/**
+	 * @return the fontVariant
+	 */
+	public String getFontVariant() {
+		return fontVariant;
+	}
+
+	/**
+	 * @return the fontWeight
+	 */
+	public String getFontWeight() {
+		return fontWeight;
+	}
+
+	/**
+	 * @param fontFamily the fontFamily to set
+	 */
+	public void setFontFamily(String fontFamily) {
+		this.fontFamily = fontFamily;
+	}
+
+	/**
+	 * @param fontSize the fontSize to set
+	 */
+	public void setFontSize(String fontSize) {
+		this.fontSize = fontSize;
+	}
+
+	/**
+	 * @param fontStyle the fontStyle to set
+	 */
+	public void setFontStyle(String fontStyle) {
+		this.fontStyle = fontStyle;
+	}
+
+	/**
+	 * @param fontVariant the fontVariant to set
+	 */
+	public void setFontVariant(String fontVariant) {
+		this.fontVariant = fontVariant;
+	}
+
+	/**
+	 * @param fontWeight the fontWeight to set
+	 */
+	public void setFontWeight(String fontWeight) {
+		this.fontWeight = fontWeight;
+	}
 }

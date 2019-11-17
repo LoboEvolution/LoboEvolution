@@ -141,8 +141,8 @@ class RTableCell extends RBlock {
 		final int vrow = getVirtualRow();
 		final SizeInfo colSize = colSizes[vcol];
 		final SizeInfo rowSize = rowSizes[vrow];
-		final int x = colSize.offset;
-		final int y = rowSize.offset;
+		final int x = colSize.getOffset();
+		final int y = rowSize.getOffset();
 		int width;
 		int height;
 		final int colSpan = getColSpan();
@@ -150,26 +150,26 @@ class RTableCell extends RBlock {
 			width = 0;
 			for (int i = 0; i < colSpan; i++) {
 				final int vc = vcol + i;
-				width += colSizes[vc].actualSize;
+				width += colSizes[vc].getActualSize();
 				if (i + 1 < colSpan) {
 					width += cellSpacingX + hasBorder * 2;
 				}
 			}
 		} else {
-			width = colSizes[vcol].actualSize;
+			width = colSizes[vcol].getActualSize();
 		}
 		final int rowSpan = getRowSpan();
 		if (rowSpan > 1) {
 			height = 0;
 			for (int i = 0; i < rowSpan; i++) {
 				final int vr = vrow + i;
-				height += rowSizes[vr].actualSize;
+				height += rowSizes[vr].getActualSize();
 				if (i + 1 < rowSpan) {
 					height += cellSpacingY + hasBorder * 2;
 				}
 			}
 		} else {
-			height = rowSizes[vrow].actualSize;
+			height = rowSizes[vrow].getActualSize();
 		}
 		setBounds(x, y, width, height);
 	}
