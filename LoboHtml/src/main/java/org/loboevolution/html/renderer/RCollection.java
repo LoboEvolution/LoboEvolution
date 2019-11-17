@@ -34,7 +34,7 @@ public interface RCollection extends BoundableRenderable {
 	/**
 	 * Gets the collection of {@link Renderable} children.
 	 */
-	Iterator getRenderables();
+	Iterator<Renderable> getRenderables();
 
 	/**
 	 * Invalidates layout in all descendents.

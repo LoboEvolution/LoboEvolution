@@ -505,16 +505,16 @@ class RLine extends BaseRCollection {
 			final Font font = rs.getFont();
 			g.setFont(font);
 		}
-		
+
 		final Iterator<Renderable> i = this.renderables.iterator();
 		if (i != null) {
 			while (i.hasNext()) {
 				final Object r = i.next();
 				if (r instanceof RElement) {
-					// RElement's should be clipped.
+					// RElements should be translated.
 					final RElement relement = (RElement) r;
-					final Graphics newG = g.create(relement.getX(), relement.getY(), relement.getWidth(),
-							relement.getHeight());
+					final Graphics newG = g.create();
+					newG.translate(relement.getX(), relement.getY());
 					try {
 						relement.paint(newG);
 					} finally {

@@ -26,67 +26,72 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 
 public class DelayedPair {
-	
-	public final RenderableContainer containingBlock;
-	private final RenderableContainer immediateContainingBlock;
-	public final BoundableRenderable child;
-	private final String left;
-	private final String top;
-	private final String bottom;
-	private final String right;
-	private final RenderState rs;
-	private final int currY;
 
-	public DelayedPair(final RenderableContainer immediateContainingBlock, final RenderableContainer containingBlock,
-			final BoundableRenderable child, final String left, final String right, final String top,
-			final String bottom, final RenderState rs, final int currY) {
-		this.immediateContainingBlock = immediateContainingBlock;
-		this.containingBlock = containingBlock;
-		this.child = child;
-		this.left = left;
-		this.right = right;
-		this.top = top;
-		this.bottom = bottom;
-		this.rs = rs;
-		this.currY = currY;
+	private RenderableContainer containingBlock;
+
+	private BoundableRenderable child;
+
+	private RenderableContainer immediateContainingBlock;
+
+	private RenderState rs;
+
+	private String left;
+
+	private String top;
+
+	private String bottom;
+
+	private String right;
+
+	private int initX;
+
+	private int initY;
+
+	private String width;
+
+	private String height;
+
+	private boolean isFixed;
+
+	public DelayedPair() {
 	}
-	
+
 	public void positionPairChild() {
 		final RenderableContainer parent = this.containingBlock;
 		final BoundableRenderable child = this.child;
 		Integer x = this.getLeft();
 		Integer y = this.getTop();
-		Integer width = null;
-		Integer height = null;
+	    Integer width = getWidth();
+	    Integer height = getHeight();
 		final Integer right = this.getRight();
 		final Integer bottom = this.getBottom();
 		if (right != null) {
 			if (x != null) {
 				width = parent.getInnerWidth() - (x + right);
 			} else {
-				x = parent.getInnerWidth() - (child.getWidth() + right);
+		        final int childWidth = width == null? child.getWidth() : width;
+		        x = parent.getInnerWidth() - (childWidth + right);
 			}
 		}
 		if (bottom != null) {
 			if (y != null) {
 				height = parent.getInnerHeight() - (y + bottom);
 			} else {
-				y = parent.getInnerHeight() - child.getHeight() - bottom;
+		        final int childHeight = height == null? child.getHeight() : height;
+		        y = parent.getInnerHeight() - (childHeight + bottom);
 			}
 		}
-		if (x != null) {
-			child.setX(x);
-		} else {
-			child.setX(0);
-		}
+
+		child.setX(x == null ? initX : x);
+
 		if (y != null) {
 			child.setY(y);
 		} else {
 			if (this.immediateContainingBlock != parent) {
 				final Insets immediateInsets = this.immediateContainingBlock.getInsets(false, false);
-				child.setY((this.currY + (this.immediateContainingBlock.getY() + immediateInsets.top)) - parent.getY());
+				child.setY((this.initY + (this.immediateContainingBlock.getY() + immediateInsets.top)) - parent.getY());
 			} else {
-				child.setY(this.currY);
+				child.setY(this.initY);
 			}
 		}
 		if (width != null) {
@@ -97,22 +102,30 @@ public class DelayedPair {
 		}
 	}
 
-	public Integer getLeft() {
+	private Integer getLeft() {
 		return helperGetPixelSize(left, rs, 0, containingBlock.getInnerWidth());
 	}
 
-	public Integer getRight() {
+	private Integer getRight() {
 		return helperGetPixelSize(right, rs, 0, containingBlock.getInnerWidth());
 	}
 
-	public Integer getTop() {
+	private Integer getTop() {
 		return helperGetPixelSize(top, rs, 0, containingBlock.getInnerHeight());
 	}
 
-	public Integer getBottom() {
+	private Integer getBottom() {
 		return helperGetPixelSize(bottom, rs, 0, containingBlock.getInnerHeight());
 	}
-	
+
+	private Integer getWidth() {
+		return helperGetPixelSize(width, rs, 0, containingBlock.getInnerWidth());
+	}
+
+	private Integer getHeight() {
+		return helperGetPixelSize(height, rs, 0, containingBlock.getInnerHeight());
+	}
+
 	private static Integer helperGetPixelSize(final String spec, final RenderState rs, final int errorValue,
 			final int avail) {
 		if (spec != null) {
@@ -120,5 +133,145 @@ public class DelayedPair {
 		} else {
 			return null;
 		}
+	}
+
+	/**
+	 * @return the containingBlock
+	 */
+	public RenderableContainer getContainingBlock() {
+		return containingBlock;
+	}
+
+	/**
+	 * @return the child
+	 */
+	public BoundableRenderable getChild() {
+		return child;
+	}
+
+	/**
+	 * @return the immediateContainingBlock
+	 */
+	public RenderableContainer getImmediateContainingBlock() {
+		return immediateContainingBlock;
+	}
+
+	/**
+	 * @return the rs
+	 */
+	public RenderState getRs() {
+		return rs;
+	}
+
+	/**
+	 * @return the initX
+	 */
+	public int getInitX() {
+		return initX;
+	}
+
+	/**
+	 * @return the initY
+	 */
+	public int getInitY() {
+		return initY;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(String width) {
+		this.width = width;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(String height) {
+		this.height = height;
+	}
+
+	/**
+	 * @return the isFixed
+	 */
+	public boolean isFixed() {
+		return isFixed;
+	}
+
+	/**
+	 * @param containingBlock the containingBlock to set
+	 */
+	public void setContainingBlock(RenderableContainer containingBlock) {
+		this.containingBlock = containingBlock;
+	}
+
+	/**
+	 * @param child the child to set
+	 */
+	public void setChild(BoundableRenderable child) {
+		this.child = child;
+	}
+
+	/**
+	 * @param immediateContainingBlock the immediateContainingBlock to set
+	 */
+	public void setImmediateContainingBlock(RenderableContainer immediateContainingBlock) {
+		this.immediateContainingBlock = immediateContainingBlock;
+	}
+
+	/**
+	 * @param rs the rs to set
+	 */
+	public void setRs(RenderState rs) {
+		this.rs = rs;
+	}
+
+	/**
+	 * @param left the left to set
+	 */
+	public void setLeft(String left) {
+		this.left = left;
+	}
+
+	/**
+	 * @param top the top to set
+	 */
+	public void setTop(String top) {
+		this.top = top;
+	}
+
+	/**
+	 * @param bottom the bottom to set
+	 */
+	public void setBottom(String bottom) {
+		this.bottom = bottom;
+	}
+
+	/**
+	 * @param right the right to set
+	 */
+	public void setRight(String right) {
+		this.right = right;
+	}
+
+	/**
+	 * @param initX the initX to set
+	 */
+	public void setInitX(int initX) {
+		this.initX = initX;
+	}
+
+	/**
+	 * @param initY the initY to set
+	 */
+	public void setInitY(int initY) {
+		this.initY = initY;
+	}
+
+	/**
+	 * @param isFixed the isFixed to set
+	 */
+	public void setFixed(boolean isFixed) {
+		this.isFixed = isFixed;
 	}
 }

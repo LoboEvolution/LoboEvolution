@@ -70,6 +70,7 @@ import org.loboevolution.html.renderer.BoundableRenderable;
 import org.loboevolution.html.renderer.DelayedPair;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.NodeRenderer;
+import org.loboevolution.html.renderer.PositionedRenderable;
 import org.loboevolution.html.renderer.RBlock;
 import org.loboevolution.html.renderer.RCollection;
 import org.loboevolution.html.renderer.RElement;
@@ -694,12 +695,13 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	 * Gets an aggregate of the bounds of renderer leaf nodes.
 	 */
 	private Rectangle scanNodeBounds(RCollection root, Node node, RCollection relativeTo) {
-		final Iterator<?> i = root.getRenderables();
+		final Iterator<Renderable> i = root.getRenderables();
 		Rectangle resultBounds = null;
 		BoundableRenderable prevBoundable = null;
 		if (i != null) {
 			while (i.hasNext()) {
-				final Renderable r = (Renderable) i.next();
+		        final Renderable rn = i.next();
+		        final Renderable r = rn instanceof PositionedRenderable ? (((PositionedRenderable)rn).getRenderable()) : rn;
 				Rectangle subBounds = null;
 				if (r instanceof RCollection) {
 					final RCollection rc = (RCollection) r;

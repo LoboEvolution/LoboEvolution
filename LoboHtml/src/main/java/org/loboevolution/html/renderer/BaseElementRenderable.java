@@ -104,11 +104,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	@Override
 	public Component addComponent(Component component) {
-		// Expected to be called in GUI thread.
-		// Adds only in local collection.
-		// Does not remove from parent.
-		// Sending components to parent is done
-		// by sendGUIComponentsToParent().
 		Collection<Component> gc = this.guiComponents;
 		if (gc == null) {
 			gc = new HashSet<Component>(1);
@@ -644,6 +639,21 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	}
 
 	/**
+	 * Lays out children, and deals with "valid" state. Override doLayout method
+	 * instead of this one.
+	 */
+	@Override
+	public void layout(int availWidth, int availHeight, boolean sizeOnly) {
+		// Must call doLayout regardless of validity state.
+		try {
+			doLayout(availWidth, availHeight, sizeOnly);
+		} finally {
+			this.layoutUpTreeCanBeInvalidated = true;
+			this.layoutDeepCanBeInvalidated = true;
+		}
+	}
+
+	/**
 	 * Invalidates this Renderable and all descendents. This is only used in special
 	 * cases, such as when a new style sheet is added.
 	 */
@@ -652,10 +662,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (this.layoutDeepCanBeInvalidated) {
 			this.layoutDeepCanBeInvalidated = false;
 			invalidateLayoutLocal();
-			final Iterator<?> i = getRenderables();
+			final Iterator<Renderable> i = getRenderables();
 			if (i != null) {
 				while (i.hasNext()) {
-					final Object r = i.next();
+					final Renderable rn = i.next();
+					final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 					if (r instanceof RCollection) {
 						((RCollection) r).invalidateLayoutDeep();
 					}
@@ -686,21 +697,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	protected boolean isMarginBoundary() {
 		return this.overflowY != RenderState.OVERFLOW_VISIBLE && this.overflowX != RenderState.OVERFLOW_NONE
 				|| this.modelNode instanceof HTMLDocumentImpl;
-	}
-
-	/**
-	 * Lays out children, and deals with "valid" state. Override doLayout method
-	 * instead of this one.
-	 */
-	@Override
-	public void layout(int availWidth, int availHeight, boolean sizeOnly) {
-		// Must call doLayout regardless of validity state.
-		try {
-			doLayout(availWidth, availHeight, sizeOnly);
-		} finally {
-			this.layoutUpTreeCanBeInvalidated = true;
-			this.layoutDeepCanBeInvalidated = true;
-		}
 	}
 	
 	@Override
@@ -902,7 +898,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
 			for (DelayedPair pair : gc) {
-				if (pair.containingBlock != this) {
+				if (pair.getContainingBlock() != this) {
 					rc.addDelayedPair(pair);
 				}
 			}

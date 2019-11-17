@@ -20,19 +20,105 @@
 */
 package org.loboevolution.html.renderer;
 
-class PositionedRenderable {
-	public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
-	public final boolean isFloat;
-	public final int ordinal;
-	public final BoundableRenderable renderable;
-	public final boolean verticalAlignable;
+import java.awt.Graphics;
 
-	public PositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable, int ordinal,
-			boolean isFloat) {
-		super();
+import org.loboevolution.html.dom.domimpl.ModelNode;
+
+public class PositionedRenderable implements Renderable {
+	
+	public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
+	
+	private BoundableRenderable renderable;
+	
+	private boolean verticalAlignable;
+	
+	private boolean isFloat;
+	
+	private boolean isFixed;
+	
+	private int ordinal;
+
+	public PositionedRenderable() {
+
+	}
+
+	@Override
+	public void paint(final Graphics g) {
+		this.renderable.paintTranslated(g);
+	}
+
+	@Override
+	public ModelNode getModelNode() {
+		return this.renderable.getModelNode();
+	}
+
+	/**
+	 * @return the renderable
+	 */
+	public BoundableRenderable getRenderable() {
+		return renderable;
+	}
+
+	/**
+	 * @return the verticalAlignable
+	 */
+	public boolean isVerticalAlignable() {
+		return verticalAlignable;
+	}
+
+	/**
+	 * @return the isFloat
+	 */
+	public boolean isFloat() {
+		return isFloat;
+	}
+
+	/**
+	 * @return the isFixed
+	 */
+	public boolean isFixed() {
+		return isFixed;
+	}
+
+	/**
+	 * @return the ordinal
+	 */
+	public int getOrdinal() {
+		return ordinal;
+	}
+
+	/**
+	 * @param renderable the renderable to set
+	 */
+	public void setRenderable(BoundableRenderable renderable) {
 		this.renderable = renderable;
+	}
+
+	/**
+	 * @param verticalAlignable the verticalAlignable to set
+	 */
+	public void setVerticalAlignable(boolean verticalAlignable) {
 		this.verticalAlignable = verticalAlignable;
-		this.ordinal = ordinal;
+	}
+
+	/**
+	 * @param isFloat the isFloat to set
+	 */
+	public void setFloat(boolean isFloat) {
 		this.isFloat = isFloat;
+	}
+
+	/**
+	 * @param isFixed the isFixed to set
+	 */
+	public void setFixed(boolean isFixed) {
+		this.isFixed = isFixed;
+	}
+
+	/**
+	 * @param ordinal the ordinal to set
+	 */
+	public void setOrdinal(int ordinal) {
+		this.ordinal = ordinal;
 	}
 }

@@ -36,4 +36,8 @@ public interface Renderable {
 	ModelNode getModelNode();
 
 	void paint(Graphics g);
+
+	default public boolean isFixed() {
+		return false;
+	}
 }

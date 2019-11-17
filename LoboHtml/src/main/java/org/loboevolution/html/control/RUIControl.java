@@ -38,6 +38,7 @@ import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.renderer.BaseElementRenderable;
 import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RBlockViewport;
+import org.loboevolution.html.renderer.Renderable;
 import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderstate.RenderState;
@@ -226,7 +227,7 @@ public class RUIControl extends BaseElementRenderable {
 	}
 
 	@Override
-	public Iterator<?> getRenderables() {
+	public Iterator<Renderable> getRenderables() {
 		// No children for GUI controls
 		return null;
 	}

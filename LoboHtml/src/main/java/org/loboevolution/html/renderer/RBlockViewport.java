@@ -17,9 +17,6 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Apr 16, 2005
- */
 package org.loboevolution.html.renderer;
 
 import java.awt.FontMetrics;
@@ -73,7 +70,6 @@ import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
-import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.w3c.dom.Node;
@@ -319,33 +315,15 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	private boolean addElsewhereIfPositioned(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute,
 			boolean layoutIfPositioned, boolean obeysFloats) {
-		// At this point block already has bounds.
 		final AbstractCSSProperties style = element.getCurrentStyle();
 		final int position = getPosition(element);
 		final boolean absolute = position == RenderState.POSITION_ABSOLUTE;
-		final boolean relative = position == RenderState.POSITION_RELATIVE;
-		boolean fixed = position == RenderState.POSITION_FIXED;
-		if (absolute || relative || fixed) {
+		final boolean fixed = position == RenderState.POSITION_FIXED;
+		if (absolute || fixed) {
 			if (layoutIfPositioned) {
-				// Presumes the method will return true.
 				if (renderable instanceof RBlock) {
 					final RBlock block = (RBlock) renderable;
-					FloatingBoundsSource inheritedFloatBoundsSource = null;
-					if (relative) {
-						final Insets paddingInsets = this.paddingInsets;
-						final RLine line = this.currentLine;
-						// Inform line done before layout so floats are considered.
-						lineDone(line);
-						final int newY = line == null ? paddingInsets.top : line.y + line.height;
-						final int expectedWidth = this.availContentWidth;
-						final int blockShiftRight = paddingInsets.right;
-						final int newX = paddingInsets.left;
-						final FloatingBounds floatBounds = this.floatBounds;
-						inheritedFloatBoundsSource = floatBounds == null ? null : new ParentFloatingBoundsSource(blockShiftRight, expectedWidth, newX, newY, floatBounds);
-					}
-					final boolean floating = element.getRenderState().getFloat() != RenderState.FLOAT_NONE;
-					final boolean growHorizontally = relative && !floating;
-					block.layout(this.availContentWidth, this.availContentHeight, growHorizontally, false, inheritedFloatBoundsSource, this.sizeOnly);
+			          block.layout(this.availContentWidth, this.availContentHeight, false, false, null, this.sizeOnly);
 				} else {
 					renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 				}
@@ -353,68 +331,12 @@ public class RBlockViewport extends BaseRCollection {
 			final RenderState rs = element.getRenderState();
 			final String leftText = style.getLeft();
 			final String rightText = style.getRight();
-		    final String bottomText = style.getBottom();
-		    final String topText = style.getTop();
-			final RLine line = this.currentLine;
-			final int lineBottomY = line == null ? 0 : line.getY() + line.getHeight();
-			int newLeft;
-			if (!"auto".equals(leftText)) {
-				newLeft = HtmlValues.getPixelSize(leftText, rs, 0, this.availContentWidth);
-			} else {
-				if (rightText != null) {
-					final int right = HtmlValues.getPixelSize(rightText, rs, 0, this.availContentWidth);
-					if (relative) {
-						newLeft = -right;
-					} else {
-						newLeft = this.desiredWidth - right - renderable.getWidth();
-					}
-				} else {
-					newLeft = 0;
-				}
-			}
-			int newTop = relative ? 0 : lineBottomY;
-			if (!"auto".equals(topText)) {
-				newTop = HtmlValues.getPixelSize(topText, rs, newTop, this.availContentHeight);
-			} else {
-				if (bottomText != null) {
-					final int bottom = HtmlValues.getPixelSize(bottomText, rs, 0, this.availContentHeight);
-					if (relative) {
-						newTop = -bottom;
-					} else {
-						newTop = Math.max(0, this.desiredHeight - bottom - renderable.getHeight());
-					}
-				}
-			}
-			if (relative) {
-				// First, try to add normally.
-				final RRelative rrel = new RRelative(this.container, element, renderable, newLeft, newTop);
-				rrel.assignDimension();
-				if (!addElsewhereIfFloat(rrel, element, usesAlignAttribute, style, true)) {
-					boolean centerBlock = false;
-					if (renderable instanceof RTable) {
-						final String align = element.getAttribute("align");
-						centerBlock = align != null && align.equalsIgnoreCase("center");
-					}
-					this.addAsSeqBlock(rrel, obeysFloats, true, true, centerBlock);
-					// Need to import float boxes from relative, after
-					// the box's origin has been set.
-					final FloatingInfo floatingInfo = rrel.getExportableFloatingInfo();
-					if (floatingInfo != null) {
-						importFloatingInfo(floatingInfo, rrel);
-					}
-				} else {
-					// Adjust size of RRelative again - float might have been adjusted.
-					rrel.assignDimension();
-				}
-			} else {
-		        this.scheduleAbsDelayedPair(renderable, leftText, rightText, topText, bottomText, rs, currentLine.getY() + currentLine.getHeight());
-				return true;
-			}
-			final int newBottomY = renderable.getY() + renderable.getHeight();
-			checkY(newBottomY);
-			if (newBottomY > this.maxY) {
-				this.maxY = newBottomY;
-			}
+			final String bottomText = style.getBottom();
+			final String topText = style.getTop();
+			final String widthText = style.getWidth();
+			final String heightText = style.getHeight();
+			this.scheduleAbsDelayedPair(renderable, leftText, rightText, topText, bottomText, widthText, heightText, rs,
+										currentLine.getX(), currentLine.getY() + currentLine.getHeight(), absolute);
 			return true;
 		} else {
 			if (addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned)) {
@@ -424,13 +346,14 @@ public class RBlockViewport extends BaseRCollection {
 		return false;
 	}
 
-	private void addExportableFloat(BoundableRenderable element, boolean leftFloat, int origX, int origY) {
+	private void addExportableFloat(final BoundableRenderable element, final boolean leftFloat, final int origX, final int origY) {
 		ArrayList<ExportableFloat> ep = this.exportableFloats;
 		if (ep == null) {
 			ep = new ArrayList<ExportableFloat>(1);
 			this.exportableFloats = ep;
 		}
-		ep.add(new ExportableFloat(element, leftFloat, origX, origY));
+		ExportableFloat ef = new ExportableFloat(element, leftFloat, origX, origY);
+		ep.add(ef);
 	}
 
 	private RLine addLine(ModelNode startNode, RLine prevLine, int newLineY) {
@@ -543,15 +466,21 @@ public class RBlockViewport extends BaseRCollection {
 		this.currentLine = addLine(startNode, line, newLineY);
 	}
 
-	private final void addPositionedRenderable(BoundableRenderable renderable, boolean verticalAlignable,
-			boolean isFloat) {
-		// Expected to be called only in GUI thread.
+	private final void addPositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable,
+			final boolean isFloat, final boolean isFixed) {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null) {
-			others = new TreeSet<PositionedRenderable>(new ZIndexComparator());
+			others = new TreeSet<>(new ZIndexComparator());
 			this.positionedRenderables = others;
 		}
-		others.add(new PositionedRenderable(renderable, verticalAlignable, this.positionedOrdinal++, isFloat));
+		
+		final PositionedRenderable posRes = new PositionedRenderable();
+		posRes.setRenderable(renderable);
+		posRes.setVerticalAlignable(verticalAlignable);
+		posRes.setOrdinal(positionedOrdinal++);
+		posRes.setFloat(isFloat);
+		posRes.setFixed(isFixed);
+		others.add(posRes);
 		renderable.setParent(this);
 		if (renderable instanceof RUIControl) {
 			this.container.addComponent(((RUIControl) renderable).widget.getComponent());
@@ -605,7 +534,6 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 		addRenderableToLine(renderable);
-		bubbleUpIfRelative(element, renderable);
 	}
 
 	private void addWordToLine(RWord renderable) {
@@ -722,8 +650,8 @@ public class RBlockViewport extends BaseRCollection {
 					final Iterator<PositionedRenderable> i2 = others.iterator();
 					while (i2.hasNext()) {
 						final PositionedRenderable pr = (PositionedRenderable) i2.next();
-						if (pr.verticalAlignable) {
-							final BoundableRenderable br = pr.renderable;
+						if (pr.isVerticalAlignable()) {
+							final BoundableRenderable br = pr.getRenderable();
 							final int newY = br.getY() + shift;
 							br.setY(newY);
 							if (newY + br.getHeight() > this.maxY) {
@@ -943,7 +871,7 @@ public class RBlockViewport extends BaseRCollection {
 			return sr == null ? null : sr.iterator();
 		} else {
 			final ArrayList<Renderable> allRenderables = new ArrayList<Renderable>();
-			this.populateZIndexGroups(others, this.seqRenderables, allRenderables);
+			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
 			return allRenderables.iterator();
 		}
 	}
@@ -965,7 +893,7 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (index = size; --index >= 0;) {
 				final PositionedRenderable pr = otherArray[index];
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				if (r.getZIndex() < 0) {
 					break;
 				}
@@ -1002,7 +930,7 @@ public class RBlockViewport extends BaseRCollection {
 			// Must go in reverse order
 			for (; index >= 0; index--) {
 				final PositionedRenderable pr = otherArray[index];
-				final Renderable r = pr.renderable;
+				final Renderable r = pr.getRenderable();
 				if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
 					final Rectangle rbounds = br.getBounds();
@@ -1022,10 +950,7 @@ public class RBlockViewport extends BaseRCollection {
 		return this.getRenderables(point.x, point.y);
 	}
 
-	public Iterator<Renderable> getRenderables(Rectangle clipBounds) {
-		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
-			logger.warning("getRenderables(): Invoked outside GUI dispatch thread.");
-		}
+	private Iterator<Renderable> getRenderables(Rectangle clipBounds) {
 		final ArrayList<Renderable> sr = this.seqRenderables;
 		Iterator<Renderable> baseIterator = null;
 		if (sr != null) {
@@ -1037,25 +962,20 @@ public class RBlockViewport extends BaseRCollection {
 		if (others == null || others.size() == 0) {
 			return baseIterator;
 		} else {
-			final ArrayList<PositionedRenderable> matches = new ArrayList<PositionedRenderable>();
+			final ArrayList<PositionedRenderable> matches = new ArrayList<>();
 			// ArrayList "matches" keeps the order from "others".
 			final Iterator<PositionedRenderable> i = others.iterator();
 			while (i.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i.next();
-				final Object r = pr.renderable;
-				if (r instanceof BoundableRenderable) {
-					final BoundableRenderable br = (BoundableRenderable) r;
-					final Rectangle rbounds = br.getBounds();
-					if (clipBounds.intersects(rbounds)) {
-						matches.add(pr);
-					}
+				final PositionedRenderable pr = i.next();
+				if (pr.isFixed() || clipBounds.intersects(pr.getRenderable().getBounds())) {
+					matches.add(pr);
 				}
 			}
 			if (matches.size() == 0) {
 				return baseIterator;
 			} else {
-				final ArrayList<Renderable> destination = new ArrayList<Renderable>();
-				this.populateZIndexGroups(matches, baseIterator, destination);
+				final ArrayList<Renderable> destination = new ArrayList<>();
+				populateZIndexGroups(matches, baseIterator, destination);
 				return destination.iterator();
 			}
 		}
@@ -1069,22 +989,22 @@ public class RBlockViewport extends BaseRCollection {
 			return sr == null ? Renderable.EMPTY_ARRAY : (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 		} else {
 			final ArrayList<Renderable> allRenderables = new ArrayList<Renderable>();
-			this.populateZIndexGroups(others, this.seqRenderables, allRenderables);
+			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
 			return (Renderable[]) allRenderables.toArray(Renderable.EMPTY_ARRAY);
 		}
 	}
 
-	void importDelayedPair(DelayedPair pair) {
+	void importDelayedPair(final DelayedPair pair) {
 		pair.positionPairChild();
-		final BoundableRenderable r = pair.child;
-		addPositionedRenderable(r, false, false);
+		final BoundableRenderable r = pair.getChild();
+		this.addPositionedRenderable(r, false, false, pair.isFixed());
 	}
 
 	private void importFloat(ExportableFloat ef, int shiftX, int shiftY) {
 		final BoundableRenderable renderable = ef.element;
 		final int newX = ef.origX + shiftX;
 		final int newY = ef.origY + shiftY;
-		renderable.setOrigin(newX, newY);
+	    renderable.setOrigin(newX, newY);
 		final FloatingBounds prevBounds = this.floatBounds;
 		int offsetFromBorder;
 		final boolean leftFloat = ef.leftFloat;
@@ -1093,12 +1013,11 @@ public class RBlockViewport extends BaseRCollection {
 		} else {
 			offsetFromBorder = this.desiredWidth - newX;
 		}
-		this.floatBounds = new FloatingViewportBounds(prevBounds, leftFloat, newY, offsetFromBorder,
-				renderable.getHeight());
+		this.floatBounds = new FloatingViewportBounds(prevBounds, leftFloat, newY, offsetFromBorder, renderable.getHeight());
 		if (isFloatLimit()) {
-			addPositionedRenderable(renderable, true, true);
+			addPositionedRenderable(renderable, true, true, false);
 		} else {
-			addExportableFloat(renderable, leftFloat, newX, newY);
+		      addExportableFloat(renderable, leftFloat, newX, newY);
 		}
 	}
 
@@ -1234,7 +1153,7 @@ public class RBlockViewport extends BaseRCollection {
 			final Iterator<?> i = delayedPairs.iterator();
 			while (i.hasNext()) {
 				final DelayedPair pair = (DelayedPair) i.next();
-				if (pair.containingBlock == container) {
+				if (pair.getContainingBlock() == container) {
 					importDelayedPair(pair);
 				}
 			}
@@ -1275,11 +1194,11 @@ public class RBlockViewport extends BaseRCollection {
 			final Iterator<PositionedRenderable> i = posRenderables.iterator();
 			while (i.hasNext()) {
 				final PositionedRenderable pr = (PositionedRenderable) i.next();
-				final BoundableRenderable br = pr.renderable;
+				final BoundableRenderable br = pr.getRenderable();
 				if (br.getX() + br.getWidth() > this.maxX) {
 					this.maxX = br.getX() + br.getWidth();
 				}
-				if (isFloatLimit || !pr.isFloat) {
+				if (isFloatLimit || !pr.isFloat()) {
 					if (br.getY() + br.getHeight() > maxY) {
 						this.maxY = maxY = br.getY() + br.getHeight();
 					}
@@ -1470,7 +1389,6 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
 		addRenderableToLine(inlineBlock);
-		bubbleUpIfRelative(markupElement, inlineBlock);
 	}
 
 	private void layoutText(NodeImpl textNode) {
@@ -1705,21 +1623,30 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	@Override
-	public void paint(Graphics g) {
-		final Rectangle clipBounds = g.getClipBounds();
-		final Iterator<Renderable> i = this.getRenderables(clipBounds);
-		if (i != null) {
-			while (i.hasNext()) {
-				final Object robj = i.next();
-				// The expected behavior in HTML is for boxes
-				// not to be clipped unless overflow=hidden.
-				if (robj instanceof BoundableRenderable) {
-					final BoundableRenderable renderable = (BoundableRenderable) robj;
-					renderable.paintTranslated(g);
-					// numRenderables++;
-				} else {
-					((Renderable) robj).paint(g);
+	public void paint(final Graphics gIn) {
+		final boolean translationRequired = (x | y) != 0;
+		final Graphics g = translationRequired ? gIn.create() : gIn;
+		if (translationRequired) {
+			g.translate(x, y);
+		}
+		try {
+			final Rectangle clipBounds = g.getClipBounds();
+			final Iterator<Renderable> i = this.getRenderables(clipBounds);
+			if (i != null) {
+				while (i.hasNext()) {
+					final Renderable robj = i.next();
+					if (robj instanceof BoundableRenderable) {
+						final BoundableRenderable renderable = (BoundableRenderable) robj;
+						renderable.paintTranslated(g);
+					} else {
+						final Graphics selectedG = robj.isFixed() ? gIn : g;
+						robj.paint(selectedG);
+					}
 				}
+			}
+		} finally {
+			if (translationRequired) {
+				g.dispose();
 			}
 		}
 	}
@@ -1788,7 +1715,7 @@ public class RBlockViewport extends BaseRCollection {
 		// Add element to collection
 		final boolean isFloatLimit = isFloatLimit();
 		if (isFloatLimit) {
-			addPositionedRenderable(element, true, true);
+			addPositionedRenderable(element, true, true, false);
 		} else {
 			addExportableFloat(element, leftFloat, boxX, boxY);
 		}
@@ -1805,37 +1732,39 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param others         An ordered collection.
 	 * @param seqRenderables
 	 * @param destination
 	 */
-	private void populateZIndexGroups(Collection<PositionedRenderable> others, List<Renderable> seqRenderables, ArrayList<Renderable> destination) {
-		this.populateZIndexGroups(others, seqRenderables == null ? null : seqRenderables.iterator(), destination);
+	private void populateZIndexGroupsIterator(final Collection<PositionedRenderable> others,
+			final Collection<Renderable> seqRenderables, final ArrayList<Renderable> destination) {
+		populateZIndexGroups(others, seqRenderables == null ? null : seqRenderables.iterator(), destination);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param others                 An ordered collection.
 	 * @param seqRenderablesIterator
 	 * @param destination
 	 */
-	private void populateZIndexGroups(Collection<PositionedRenderable> others, Iterator<Renderable> seqRenderablesIterator, ArrayList<Renderable> destination) {
+	private static void populateZIndexGroups(final Collection<PositionedRenderable> others,
+			final Iterator<Renderable> seqRenderablesIterator, final ArrayList<Renderable> destination) {
 		// First, others with z-index < 0
 		final Iterator<PositionedRenderable> i1 = others.iterator();
 		Renderable pending = null;
 		while (i1.hasNext()) {
-			final PositionedRenderable pr = (PositionedRenderable) i1.next();
-			final BoundableRenderable r = pr.renderable;
+			final PositionedRenderable pr = i1.next();
+			final BoundableRenderable r = pr.getRenderable();
 			if (r.getZIndex() >= 0) {
-				pending = r;
+		        pending = pr;
 				break;
 			}
-			destination.add(r);
+			destination.add(pr);
 		}
 
 		// Second, sequential renderables
-		final Iterator<Renderable> i2 = seqRenderablesIterator;
+		final Iterator<? extends Renderable> i2 = seqRenderablesIterator;
 		if (i2 != null) {
 			while (i2.hasNext()) {
 				destination.add(i2.next());
@@ -1846,9 +1775,8 @@ public class RBlockViewport extends BaseRCollection {
 		if (pending != null) {
 			destination.add(pending);
 			while (i1.hasNext()) {
-				final PositionedRenderable pr = (PositionedRenderable) i1.next();
-				final Renderable r = pr.renderable;
-				destination.add(r);
+				final PositionedRenderable pr = i1.next();
+				destination.add(pr);
 			}
 		}
 	}
@@ -1885,7 +1813,6 @@ public class RBlockViewport extends BaseRCollection {
 			}
 			// Now add line, after float is set.
 			addLineAfterBlock(renderable, false);
-			bubbleUpIfRelative(markupElement, renderable);
 		}
 	}
 
@@ -1910,58 +1837,53 @@ public class RBlockViewport extends BaseRCollection {
 				centerBlock = align != null && align.equalsIgnoreCase("center");
 			}
 			addAsSeqBlock(renderable, obeysFloats, false, true, centerBlock);
-			bubbleUpIfRelative(markupElement, renderable);
 		}
 	}
 
+	/**
+	 * @param absolute if true, then position is absolute, else fixed
+	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final String leftText,
-			final String rightText, final String topText, final String bottomText, final RenderState rs,
-			final int currY) {
-		RenderableContainer container = this.container;
-		while(true) {
-			if (container instanceof Renderable) {
-				final Object node = ((Renderable) container).getModelNode();
-				if (node instanceof HTMLElementImpl) {
-					final HTMLElementImpl element = (HTMLElementImpl) node;
-					final int position = getPosition(element);
-					if (position != RenderState.POSITION_STATIC) {
-						break;
-					}
-					final RenderableContainer newContainer = container.getParentContainer();
-					if (newContainer == null) {
-						break;
-					}
-					container = newContainer;
-				} else {
+			final String rightText, final String topText, final String bottomText, final String widthText,
+			final String heightText, final RenderState rs, final int currX, final int currY, final boolean absolute) {
+		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container)  : getRootContainer(container);
+		final DelayedPair pair = new DelayedPair();
+		pair.setImmediateContainingBlock(container);
+		pair.setContainingBlock(containingBlock);
+		pair.setChild(renderable);
+		pair.setLeft(leftText);
+		pair.setRight(rightText);
+		pair.setTop(topText);
+		pair.setBottom(bottomText);
+		pair.setWidth(widthText);
+		pair.setHeight(heightText);
+		pair.setRs(rs);
+		pair.setInitY(currY);
+		pair.setInitX(currX);
+		pair.setFixed(!absolute);
+		this.container.addDelayedPair(pair);
+	}
+
+	private static RenderableContainer getRootContainer(final RenderableContainer container) {
+		RenderableContainer c = container.getParentContainer();
+		RenderableContainer prevC = container;
+		for (;;) {
+			if (c instanceof RenderableContainer) {
+				final RenderableContainer newContainer = c.getParentContainer();
+				if (newContainer == null) {
 					break;
 				}
+				prevC = c;
+				c = newContainer;
 			} else {
 				break;
 			}
 		}
-		final DelayedPair pair = new DelayedPair(this.container, container, renderable, leftText, rightText, topText, bottomText, rs, currY);
-		this.container.addDelayedPair(pair);
+		return prevC;
 	}
 
-	/* This is used to bubble up relative elements (on the z-axis) */
-	private boolean bubbleUpIfRelative(final HTMLElementImpl markupElement, final RElement renderable) {
-		final int position = getPosition(markupElement);
-		final boolean isRelative = position == RenderState.POSITION_RELATIVE;
-		if (isRelative) {
-			final RenderableContainer con = getPositionedAncestor(container);
-			final DelayedPair dp = new DelayedPair(container, con, renderable, null, null, null, null, null, 0);
-			container.addDelayedPair(dp);
-			if (renderable instanceof RUIControl) {
-				this.container.addComponent(((RUIControl) renderable).widget.getComponent());
-			}
-			return true;
-		}
-
-		return false;
-	}
-	
 	private static RenderableContainer getPositionedAncestor(RenderableContainer containingBlock) {
-		while (true) {
+		for (;;) {
 			if (containingBlock instanceof Renderable) {
 				final ModelNode node = ((Renderable) containingBlock).getModelNode();
 				if (node instanceof HTMLElementImpl) {

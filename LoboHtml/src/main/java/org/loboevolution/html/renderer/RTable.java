@@ -106,15 +106,21 @@ class RTable extends BaseElementRenderable {
 		this.tableMatrix = new TableMatrix(modelNode, pcontext, rcontext, frameContext, this, this);
 	}
 
-	private final void addPositionedRenderable(BoundableRenderable renderable, boolean verticalAlignable,
-			boolean isFloat) {
-		// Expected to be called only in GUI thread.
+	private final void addPositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable,
+											   final boolean isFloat, final boolean isFixed) {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null) {
 			others = new TreeSet<PositionedRenderable>(new ZIndexComparator());
 			this.positionedRenderables = others;
 		}
-		others.add(new PositionedRenderable(renderable, verticalAlignable, this.otherOrdinal++, isFloat));
+		
+		final PositionedRenderable posRes = new PositionedRenderable();
+		posRes.setRenderable(renderable);
+		posRes.setVerticalAlignable(verticalAlignable);
+		posRes.setOrdinal(otherOrdinal++);
+		posRes.setFloat(isFloat);
+		posRes.setFixed(isFixed);
+		others.add(posRes);
 		renderable.setParent(this);
 		if (renderable instanceof RUIControl) {
 			this.container.addComponent(((RUIControl) renderable).widget.getComponent());
@@ -161,7 +167,7 @@ class RTable extends BaseElementRenderable {
 			final Collection<DelayedPair> pairs = this.delayedPairs;
 			if (pairs != null) {
 				for (DelayedPair pair : pairs) {
-					if (pair.containingBlock == this) {
+					if (this == pair.getContainingBlock()) {
 						importDelayedPair(pair);
 					}
 				}
@@ -197,7 +203,7 @@ class RTable extends BaseElementRenderable {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				final int childX = x - r.getX();
 				final int childY = y - r.getY();
 				final RenderableSpot rs = r.getLowestRenderableSpot(childX, childY);
@@ -234,7 +240,7 @@ class RTable extends BaseElementRenderable {
 		if (prs != null) {
 			final Collection c = new java.util.LinkedList();
 			for (PositionedRenderable pr : prs) {
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				c.add(r);
 			}
 			final Iterator i2 = this.tableMatrix.getRenderables();
@@ -249,8 +255,8 @@ class RTable extends BaseElementRenderable {
 
 	private void importDelayedPair(DelayedPair pair) {
 		pair.positionPairChild();
-		final BoundableRenderable r = pair.child;
-		addPositionedRenderable(r, false, false);
+	    final BoundableRenderable r = pair.getChild();
+	    this.addPositionedRenderable(r, false, false, pair.isFixed());
 	}
 
 	@Override
@@ -266,7 +272,7 @@ class RTable extends BaseElementRenderable {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					final int childX = x - r.getX();
@@ -292,7 +298,7 @@ class RTable extends BaseElementRenderable {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					final int childX = x - r.getX();
@@ -330,7 +336,7 @@ class RTable extends BaseElementRenderable {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					final int childX = x - r.getX();
@@ -356,7 +362,7 @@ class RTable extends BaseElementRenderable {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
 		if (prs != null) {
 			for (PositionedRenderable pr : prs) {
-				final BoundableRenderable r = pr.renderable;
+				final BoundableRenderable r = pr.getRenderable();
 				final Rectangle bounds = r.getBounds();
 				if (bounds.contains(x, y)) {
 					final int childX = x - r.getX();
@@ -386,7 +392,7 @@ class RTable extends BaseElementRenderable {
 			final Collection<PositionedRenderable> prs = this.positionedRenderables;
 			if (prs != null) {
 				for (PositionedRenderable pr : prs) {
-					final BoundableRenderable r = pr.renderable;
+					final BoundableRenderable r = pr.getRenderable();
 					r.paintTranslated(g);
 				}
 			}

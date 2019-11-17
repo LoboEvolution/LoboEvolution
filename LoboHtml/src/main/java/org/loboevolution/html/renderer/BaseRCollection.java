@@ -70,10 +70,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				checkPoint1 = endPoint.getPoint();
 			}
 		}
-		final Iterator i = getRenderables();
+		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
 			while (i.hasNext()) {
-				final Object robj = i.next();
+		        final Renderable rn = i.next();
+		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (robj instanceof BoundableRenderable) {
 					final BoundableRenderable renderable = (BoundableRenderable) robj;
 					if (!inSelection) {
@@ -123,10 +124,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	}
 
 	public BoundableRenderable getRenderable(int x, int y) {
-		final Iterator i = getRenderables();
+		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
 			while (i.hasNext()) {
-				final Object r = i.next();
+		        final Renderable rn = i.next();
+		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof BoundableRenderable) {
 					final BoundableRenderable br = (BoundableRenderable) r;
                     if (br instanceof RBlockViewport) {
@@ -149,10 +151,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		// if it's true that non-layable components
 		// are not in RLine's anymore.
 		invalidateLayoutLocal();
-		final Iterator renderables = getRenderables();
+		final Iterator<Renderable> renderables = getRenderables();
 		if (renderables != null) {
 			while (renderables.hasNext()) {
-				final Object r = renderables.next();
+		        final Renderable rn = renderables.next();
+		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof RCollection) {
 					((RCollection) r).invalidateLayoutDeep();
 				}
@@ -234,10 +237,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				checkPoint1 = endPoint.getPoint();
 			}
 		}
-		final Iterator i = getRenderables();
+		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
 			while (i.hasNext()) {
-				final Object robj = i.next();
+		        final Renderable rn = i.next();
+		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (robj instanceof BoundableRenderable) {
 					final BoundableRenderable renderable = (BoundableRenderable) robj;
 					final Rectangle bounds = renderable.getBounds();
@@ -290,10 +294,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	 */
 	@Override
 	public void updateWidgetBounds(int guiX, int guiY) {
-		final Iterator i = getRenderables();
+		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
 			while (i.hasNext()) {
-				final Object r = i.next();
+		        final Renderable rn = i.next();
+		        final Renderable r = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (r instanceof RCollection) {
 					// RUIControl is a RCollection too.
 					final RCollection rc = (RCollection) r;

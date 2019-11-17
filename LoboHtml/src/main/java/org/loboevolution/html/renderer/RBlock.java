@@ -18,9 +18,6 @@
 
  Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
  */
-/*
- * Created on Apr 16, 2005
- */
 package org.loboevolution.html.renderer;
 
 import java.awt.Color;
@@ -46,6 +43,7 @@ import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.RenderThreadState;
+import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import java.util.Objects;
@@ -172,6 +170,9 @@ public class RBlock extends BaseElementRenderable {
 
 	private LayoutKey lastLayoutKey = null;
 	private LayoutValue lastLayoutValue = null;
+
+	private int relativeOffsetX = 0;
+	private int relativeOffsetY = 0;
 
 	protected final int listNesting;
 
@@ -492,8 +493,6 @@ public class RBlock extends BaseElementRenderable {
 			prelimBlockHeight = bodyHeight + insetsTotalHeight;
 		}
 
-		final boolean visibleX = overflowX == RenderState.OVERFLOW_VISIBLE || overflowX == RenderState.OVERFLOW_NONE;
-		final boolean visibleY = overflowY == RenderState.OVERFLOW_VISIBLE || overflowY == RenderState.OVERFLOW_NONE;
 		int resultingWidth;
 		int resultingHeight;
 		if (adjDeclaredWidth == -1) {
@@ -502,7 +501,7 @@ public class RBlock extends BaseElementRenderable {
 				resultingWidth = Math.max(tentativeWidth, SCROLL_BAR_THICKNESS);
 			}
 		} else {
-			resultingWidth = visibleX ? Math.max(prelimBlockWidth, adjDeclaredWidth) : adjDeclaredWidth;
+			resultingWidth = adjDeclaredWidth;
 		}
 		if (!sizeOnly) {
 			// Align horizontally now. This may change canvas height.
@@ -522,7 +521,7 @@ public class RBlock extends BaseElementRenderable {
 				resultingHeight = Math.max(tentativeHeight, SCROLL_BAR_THICKNESS);
 			}
 		} else {
-			resultingHeight = visibleY ? Math.max(prelimBlockHeight, adjDeclaredHeight) : adjDeclaredHeight;
+		      resultingHeight = adjDeclaredHeight;
 		}
 		if (!sizeOnly) {
 			// Align vertically now
@@ -562,7 +561,42 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.y = insets.top;
 		}
 
+	    setupRelativePosition(rs, availWidth);
 		return new LayoutValue(resultingWidth, resultingHeight, hscroll, vscroll);
+	}
+
+	  private void setupRelativePosition(final RenderState rs, final int availWidth) {
+		if (rs.getPosition() == RenderState.POSITION_RELATIVE) {
+			final String leftText = rs.getLeft();
+			final String topText = rs.getTop();
+			int left = 0;
+			if (leftText != null) {
+				left = HtmlValues.getPixelSize(leftText, rs, 0, availWidth);
+			} else {
+				final String rightText = rs.getRight();
+				if (rightText != null) {
+					final int right = HtmlValues.getPixelSize(rightText, rs, 0, availWidth);
+					left = -right;
+				}
+			}
+
+			int top = 0;
+			if (topText != null) {
+				top = HtmlValues.getPixelSize(topText, rs, top, this.height);
+			} else {
+				final String bottomText = rs.getBottom();
+				if (bottomText != null) {
+					final int bottom = HtmlValues.getPixelSize(bottomText, rs, 0, this.height);
+					top = -bottom;
+				}
+			}
+
+			this.relativeOffsetX = left;
+			this.relativeOffsetY = top;
+		} else {
+			this.relativeOffsetX = 0;
+			this.relativeOffsetY = 0;
+		}
 	}
 
 	public int getDefaultOverflowX() {
@@ -579,6 +613,7 @@ public class RBlock extends BaseElementRenderable {
 			return null;
 		}
 		final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
+
 		return new FloatingInfo(info.shiftX + insets.left, info.shiftY + insets.top, info.floats);
 	}
 
@@ -901,14 +936,20 @@ public class RBlock extends BaseElementRenderable {
 	}
 
 	@Override
-	public void paint(Graphics g) {
+	public void paint(final Graphics gIn) {
 		final RenderState rs = this.modelNode.getRenderState();
 		if (rs != null && rs.getVisibility() != RenderState.VISIBILITY_VISIBLE) {
-			// Just don't paint it.
 			return;
 		}
-		prePaint(g);
+
+		final boolean isRelative = (relativeOffsetX | relativeOffsetY) != 0;
+		final Graphics g = isRelative ? gIn.create() : gIn;
+		if (isRelative) {
+			g.translate(relativeOffsetX, relativeOffsetY);
+		}
+
 		try {
+			this.prePaint(g);
 			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
 			final RBlockViewport bodyLayout = this.bodyLayout;
 			if (bodyLayout != null) {
@@ -916,15 +957,7 @@ public class RBlock extends BaseElementRenderable {
 				final int overflowY = this.overflowY;
 				if ((overflowX == RenderState.OVERFLOW_NONE || overflowX == RenderState.OVERFLOW_VISIBLE)
 						&& (overflowY == RenderState.OVERFLOW_NONE || overflowY == RenderState.OVERFLOW_VISIBLE)) {
-					// Simply translate.
-					final int bx = bodyLayout.x;
-					final int by = bodyLayout.y;
-					g.translate(bx, by);
-					try {
-						bodyLayout.paint(g);
-					} finally {
-						g.translate(-bx, -by);
-					}
+			          bodyLayout.paint(g);
 				} else {
 					// Clip when there potential scrolling or hidden overflow
 					// was requested.
@@ -932,7 +965,7 @@ public class RBlock extends BaseElementRenderable {
 							this.height - insets.top - insets.bottom);
 					try {
 						// Second, translate
-						newG.translate(bodyLayout.x - insets.left, bodyLayout.y - insets.top);
+			            newG.translate(-insets.left, -insets.top);
 						// Third, paint in clipped + translated region.
 						bodyLayout.paint(newG);
 					} finally {
@@ -975,8 +1008,10 @@ public class RBlock extends BaseElementRenderable {
 			}
 
 		} finally {
-			// Must always call super implementation
-			super.paint(g);
+			if (isRelative) {
+				g.dispose();
+			}
+			super.paint(gIn);
 		}
 	}
 
