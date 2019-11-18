@@ -6,12 +6,10 @@
     xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
     <description>
-Rules which enforce generally accepted best practices.
+    	Rules which enforce generally accepted best practices.
     </description>
-	
-	<excludes>
-        <exclude>.*/storage/*.*</exclude>
-    </excludes>
+
+    <exclude-pattern>.*/storage/.*</exclude-pattern>
 
     <rule name="AbstractClassWithoutAbstractMethod"
           language="java"
