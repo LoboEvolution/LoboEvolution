@@ -58,8 +58,8 @@ mvn install
 ```shell
 gradle default
 ```
-### How-To
-[How-To](https://github.com/oswetto/LoboEvolution/wiki/How-To)
+### How To Do
+[TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)
 
 ### Status build
 [Build](https://github.com/oswetto/LoboEvolution/actions)
