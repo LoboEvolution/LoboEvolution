@@ -329,14 +329,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 			}
 			final RenderState rs = element.getRenderState();
-			final String leftText = style.getLeft();
-			final String rightText = style.getRight();
-			final String bottomText = style.getBottom();
-			final String topText = style.getTop();
-			final String widthText = style.getWidth();
-			final String heightText = style.getHeight();
-			this.scheduleAbsDelayedPair(renderable, leftText, rightText, topText, bottomText, widthText, heightText, rs,
-										currentLine.getX(), currentLine.getY() + currentLine.getHeight(), absolute);
+			this.scheduleAbsDelayedPair(renderable, style, rs, currentLine, absolute);
 			return true;
 		} else {
 			if (addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned)) {
@@ -1845,23 +1838,22 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
-	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final String leftText,
-			final String rightText, final String topText, final String bottomText, final String widthText,
-			final String heightText, final RenderState rs, final int currX, final int currY, final boolean absolute) {
+	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final AbstractCSSProperties style,
+			final RenderState rs, final RLine line, final boolean absolute) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container)  : getRootContainer(container);
 		final DelayedPair pair = new DelayedPair();
 		pair.setImmediateContainingBlock(container);
 		pair.setContainingBlock(containingBlock);
 		pair.setChild(renderable);
-		pair.setLeft(leftText);
-		pair.setRight(rightText);
-		pair.setTop(topText);
-		pair.setBottom(bottomText);
-		pair.setWidth(widthText);
-		pair.setHeight(heightText);
+		pair.setLeft(style.getLeft());
+		pair.setRight(style.getRight());
+		pair.setTop(style.getTop());
+		pair.setBottom(style.getBottom());
+		pair.setWidth(style.getWidth());
+		pair.setHeight(style.getHeight());
 		pair.setRs(rs);
-		pair.setInitY(currY);
-		pair.setInitX(currX);
+		pair.setInitY(currentLine.getY() + currentLine.getHeight());
+		pair.setInitX(currentLine.getX());
 		pair.setFixed(!absolute);
 		this.container.addDelayedPair(pair);
 	}
