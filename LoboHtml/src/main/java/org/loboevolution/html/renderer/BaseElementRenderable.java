@@ -26,6 +26,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.ImageObserver;
 import java.net.URL;
@@ -674,6 +675,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 		}
 	}
+	
+	@Override
+	  public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
+	    final Point p = descendent.getOriginRelativeTo(this);
+	    p.translate(x, y);
+	    return p;
+	  }
 
 	@Override
 	protected void invalidateLayoutLocal() {

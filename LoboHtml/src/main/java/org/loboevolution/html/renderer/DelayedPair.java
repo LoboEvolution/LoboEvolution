@@ -21,6 +21,7 @@
 package org.loboevolution.html.renderer;
 
 import java.awt.Insets;
+import java.awt.Point;
 
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
@@ -82,18 +83,15 @@ public class DelayedPair {
 			}
 		}
 
-		child.setX(x == null ? initX : x);
+	    final Point tp = containingBlock.translateDescendentPoint((BoundableRenderable)(immediateContainingBlock), initX, initY);
+	    if (this.immediateContainingBlock != parent) {
+	        final Insets immediateInsets = this.immediateContainingBlock.getInsetsMarginBorder(false, false);
+	        tp.translate(immediateInsets.left, immediateInsets.top);
+	    }
 
-		if (y != null) {
-			child.setY(y);
-		} else {
-			if (this.immediateContainingBlock != parent) {
-				final Insets immediateInsets = this.immediateContainingBlock.getInsets(false, false);
-				child.setY((this.initY + (this.immediateContainingBlock.getY() + immediateInsets.top)) - parent.getY());
-			} else {
-				child.setY(this.initY);
-			}
-		}
+	    child.setX((x == null ? tp.x : x));
+	    child.setY((y == null ? tp.y : y));
+
 		if (width != null) {
 			child.setWidth(width);
 		}

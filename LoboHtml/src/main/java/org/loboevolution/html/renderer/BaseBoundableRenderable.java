@@ -142,7 +142,8 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		RCollection parent = this.parent;
 		for (;;) {
 			if (parent == null) {
-				throw new java.lang.IllegalArgumentException("Not an ancestor: " + ancestor);
+		        System.err.println("Not an ancestor: " + ancestor);
+		        return new Point(x, y);
 			}
 			if (parent == ancestor) {
 				return new Point(x, y);
@@ -446,18 +447,5 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	@Override
 	public void setY(int y) {
 		this.y = y;
-	}
-
-	protected final Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
-		while (descendent != this) {
-			if (descendent == null) {
-				throw new IllegalStateException("Not descendent");
-			}
-			x += descendent.getX();
-			y += descendent.getY();
-			// Coordinates are always relative to actual parent?
-			descendent = descendent.getParent();
-		}
-		return new Point(x, y);
 	}
 }

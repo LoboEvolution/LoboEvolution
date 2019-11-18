@@ -892,6 +892,10 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		throw new UnsupportedOperationException("Method added while fixing #20. Not implemented yet.");
 	}
 
+	public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
+		return rblock.translateDescendentPoint(descendent, x, y);
+	}
+
 	protected void validateAll() {
 		Component toValidate = this;
 		for (;;) {

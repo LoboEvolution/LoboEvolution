@@ -24,6 +24,7 @@ package org.loboevolution.html.renderer;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
+import java.awt.Point;
 import java.util.Collection;
 
 /**
@@ -41,8 +42,6 @@ public interface RenderableContainer {
 	void focus();
 
 	Collection getDelayedPairs();
-
-	java.awt.Point getGUIPoint(int x, int y);
 
 	Color getPaintedBackgroundColor();
 
@@ -65,4 +64,8 @@ public interface RenderableContainer {
     default int getInnerWidth() {return 0;};
 
     default int getInnerHeight() {return 0;};
+    
+    Point getGUIPoint(int x, int y);
+    
+    Point translateDescendentPoint(BoundableRenderable descendent, int x, int y);
 }
