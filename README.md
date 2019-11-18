@@ -5,8 +5,8 @@
 	<a href="https://www.codacy.com/app/ivan.difrancesco/LoboEvolution?utm_source=github.com&utm_medium=referral&utm_content=oswetto/LoboEvolution&utm_campaign=badger" alt="Codacy">
 		<img src="https://api.codacy.com/project/badge/Grade/5668f2c4c7ca4e5188cb97aff090c56d" />
 	</a>
-	<a href="https://codebeat.co/projects/github-com-oswetto-loboevolution-master" alt="Codebeat">
-		<img src="https://codebeat.co/badges/427830dc-6b70-4ce2-9daa-f19a422eb548" />
+	<a href="https://codebeat.co/projects/github-com-oswetto-loboevolution-master">
+		<img alt="codebeat badge" src="https://codebeat.co/badges/8057c847-c70f-49a7-9b5f-07f2b568de2e" />
 	</a>
 	<a href="https://codeclimate.com/github/oswetto/LoboEvolution/maintainability">
 		<img src="https://api.codeclimate.com/v1/badges/e98fd103016736dbf9f3/maintainability" alt="Maintainability">
