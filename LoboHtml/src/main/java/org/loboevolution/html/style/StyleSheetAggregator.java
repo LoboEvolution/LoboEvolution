@@ -291,7 +291,7 @@ public class StyleSheetAggregator {
 
 	private boolean selects(final String condition, final String attribute, final char separator) {
 		final int conditionLength = condition.length();
-		if (conditionLength < 1) {
+		if (conditionLength < 0 || attribute == null) {
 			return false;
 		}
 
