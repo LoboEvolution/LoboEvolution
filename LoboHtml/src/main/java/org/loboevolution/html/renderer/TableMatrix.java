@@ -34,6 +34,7 @@ import java.util.Map;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.info.CaptionSizeInfo;
 import org.loboevolution.info.SizeInfo;
+import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.filter.CaptionFilter;
@@ -1124,52 +1125,54 @@ class TableMatrix {
 		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
 		final ArrayList<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
-		final Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>(2);
+		final Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>();
 		final NodeList cellList = te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
 		for (Node node : Nodes.iterable(cellList)) {
-			final HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) node;
-			final HTMLTableRowElementImpl rowElement = getParentRow(columnNode);
-			if (rowElement != null && rowElement.getRenderState().getDisplay() == RenderState.DISPLAY_NONE) {
-				// Skip row [ 2047122 ]
-				continue;
-			}
-			ArrayList<VirtualCell> row;
-			if (rowElement != null) {
-				currentNullRow = null;
-				row = (ArrayList<VirtualCell>) rowElementToRowArray.get(rowElement);
-				if (row == null) {
-					row = new ArrayList<VirtualCell>();
-					rowElementToRowArray.put(rowElement, row);
-					rows.add(row);
-					rowElements.add(rowElement);
+			if (node instanceof HTMLTableCellElement) {
+				final HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) node;
+				final HTMLTableRowElementImpl rowElement = getParentRow(columnNode);
+				if (rowElement != null && rowElement.getRenderState().getDisplay() == RenderState.DISPLAY_NONE) {
+					// Skip row [ 2047122 ]
+					continue;
 				}
-			} else {
-				// Doesn't have a TR parent. Let's add a ROW just for itself.
-				// Both IE and FireFox have this behavior.
-				if (currentNullRow != null) {
-					row = currentNullRow;
+				ArrayList<VirtualCell> row;
+				if (rowElement != null) {
+					currentNullRow = null;
+					row = (ArrayList<VirtualCell>) rowElementToRowArray.get(rowElement);
+					if (row == null) {
+						row = new ArrayList<VirtualCell>();
+						rowElementToRowArray.put(rowElement, row);
+						rows.add(row);
+						rowElements.add(rowElement);
+					}
 				} else {
-					row = new ArrayList<VirtualCell>();
-					currentNullRow = row;
-					rows.add(row);
-					// Null TR element must be added to match.
-					rowElements.add(null);
+					// Doesn't have a TR parent. Let's add a ROW just for itself.
+					// Both IE and FireFox have this behavior.
+					if (currentNullRow != null) {
+						row = currentNullRow;
+					} else {
+						row = new ArrayList<VirtualCell>();
+						currentNullRow = row;
+						rows.add(row);
+						// Null TR element must be added to match.
+						rowElements.add(null);
+					}
 				}
+				RTableCell ac = (RTableCell) columnNode.getUINode();
+				if (ac == null) {
+					// Saved UI nodes must be reused, because they
+					// can contain a collection of GUI components.
+					ac = new RTableCell(columnNode, this.parserContext, this.rendererContext, this.frameContext,
+							this.container);
+					ac.setParent(this.relement);
+					columnNode.setUINode(ac);
+				}
+				final VirtualCell vc = new VirtualCell(ac, true);
+				ac.setTopLeftVirtualCell(vc);
+				row.add(vc);
+				allCells.add(ac);
 			}
-			RTableCell ac = (RTableCell) columnNode.getUINode();
-			if (ac == null) {
-				// Saved UI nodes must be reused, because they
-				// can contain a collection of GUI components.
-				ac = new RTableCell(columnNode, this.parserContext, this.rendererContext, this.frameContext,
-						this.container);
-				ac.setParent(this.relement);
-				columnNode.setUINode(ac);
-			}
-			final VirtualCell vc = new VirtualCell(ac, true);
-			ac.setTopLeftVirtualCell(vc);
-			row.add(vc);
-			allCells.add(ac);
 		}
 	}
 
