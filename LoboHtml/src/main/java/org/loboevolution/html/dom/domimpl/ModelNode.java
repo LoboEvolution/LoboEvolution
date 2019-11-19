@@ -24,6 +24,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -32,12 +33,10 @@ import org.loboevolution.html.renderstate.RenderState;
  * not.
  */
 public interface ModelNode {
-	// There shouldn't be any references to GUI components here.
-	// Events are processed by controller in renderer package.
 
 	Object getDocumentItem(String name);
 
-	java.net.URL getFullURL(String spec) throws MalformedURLException;
+	URL getFullURL(String spec) throws MalformedURLException;
 
 	ModelNode getParentModelNode();
 

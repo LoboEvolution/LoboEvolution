@@ -536,6 +536,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
         return getInsets(hscroll, vscroll, true, true, false);
     }
 
+	public Insets getInsetsPadding(final boolean hscroll, final boolean vscroll) {
+		return getInsets(hscroll, vscroll, false, false, true);
+	}	 
+
     private Insets getInsets(final boolean hscroll, final boolean vscroll, final boolean includeMI,
             final boolean includeBI, final boolean includePI) {
 		this.modelNode.getRenderState();
@@ -709,6 +713,19 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	
 	@Override
 	public void paint(Graphics g) {}
+
+	 @Override
+	  public Rectangle getClipBounds() {
+	    final Insets insets = this.getInsetsPadding(false, false);
+	    final int hInset = insets.left + insets.right;
+	    final int vInset = insets.top + insets.bottom;
+	    if (((overflowX == RenderState.OVERFLOW_NONE) || (overflowX == RenderState.OVERFLOW_VISIBLE))
+	        && ((overflowY == RenderState.OVERFLOW_NONE) || (overflowY == RenderState.OVERFLOW_VISIBLE))) {;
+	      return null;
+	    } else {
+	      return new Rectangle(insets.left, insets.top, this.width - hInset, this.height - vInset);
+	    }
+	  }
 
 	protected void prePaint(Graphics g) {
 		final int startWidth = this.width;

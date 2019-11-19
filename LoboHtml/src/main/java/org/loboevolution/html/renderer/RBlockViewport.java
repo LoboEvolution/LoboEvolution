@@ -61,6 +61,7 @@ import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -1635,7 +1636,27 @@ public class RBlockViewport extends BaseRCollection {
 						renderable.paintTranslated(g);
 					} else {
 						final Graphics selectedG = robj.isFixed() ? gIn : g;
-						robj.paint(selectedG);
+						if (getModelNode() instanceof HTMLDocument) {
+							final Renderable htmlRenderable = robj.findHtmlRenderable(this);
+							if (htmlRenderable != null) {
+								final Rectangle htmlBounds = ((RBlock) htmlRenderable).getClipBoundsWithoutInsets();
+								if (htmlBounds != null) {
+									final Graphics clippedG = selectedG.create(0, 0, htmlBounds.width,
+											htmlBounds.height);
+									try {
+										robj.paint(clippedG);
+									} finally {
+										clippedG.dispose();
+									}
+								} else {
+									robj.paint(selectedG);
+								}
+							} else {
+								robj.paint(selectedG);
+							}
+						} else {
+							robj.paint(selectedG);
+						}
 					}
 				}
 			}
@@ -1934,5 +1955,10 @@ public class RBlockViewport extends BaseRCollection {
 	@Override
 	public String toString() {
 		return "RBlockViewport[node=" + this.modelNode + "]";
+	}
+
+	@Override
+	public Rectangle getClipBounds() {
+		return ((RBlock) container).getClipBounds();
 	}
 }

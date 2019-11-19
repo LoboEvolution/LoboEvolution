@@ -38,6 +38,7 @@ import java.util.logging.Logger;
 import javax.swing.JScrollBar;
 
 import org.loboevolution.info.FloatingInfo;
+import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.renderstate.BlockRenderState;
@@ -471,8 +472,19 @@ public class RBlock extends BaseElementRenderable {
 		final int bodyWidth = bodyLayout.width;
 		final int bodyHeight = bodyLayout.height;
 		final int prelimBlockWidth = bodyWidth + insetsTotalWidth;
-		int prelimBlockHeight = bodyHeight + insetsTotalHeight;//TODO
-		
+		int prelimBlockHeight = bodyHeight + insetsTotalHeight;
+
+		if ((vauto || vscroll) && ((prelimBlockHeight - insetsTotalHeight) < bodyLayout.getHeight())) {
+			final boolean isHtmlElem = getModelNode() instanceof HTMLHtmlElement;
+			if (isHtmlElem) {
+				prelimBlockHeight = bodyLayout.getHeight() + insetsTotalHeight;
+			} else {
+				vscroll = true;
+				insets = this.getInsetsMarginBorder(hscroll, vscroll);
+				insetsTotalWidth = insets.left + insets.right;
+			}
+		}
+
 		int adjDeclaredWidth = -1;
 		int adjDeclaredHeight = -1;
 		
@@ -650,13 +662,15 @@ public class RBlock extends BaseElementRenderable {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-			if (x > insets.left && x < this.width - insets.right && y > insets.top && y < this.height - insets.bottom) {
-				return bodyLayout.getLowestRenderableSpot(x - bodyLayout.x, y - bodyLayout.y);
+			if ((x - relativeOffsetX > insets.left) && (x - relativeOffsetX < (this.width - insets.right))
+					&& (y - relativeOffsetY > insets.top) && (y - relativeOffsetY < (this.height - insets.bottom))) {
+				return bodyLayout.getLowestRenderableSpot(x - relativeOffsetX - bodyLayout.x,
+						y - relativeOffsetY - bodyLayout.y);
 			} else {
-				return new RenderableSpot(this, x, y);
+				return new RenderableSpot(this, x - relativeOffsetX, y - relativeOffsetY);
 			}
 		} else {
-			return new RenderableSpot(this, x, y);
+			return new RenderableSpot(this, x - relativeOffsetX, y - relativeOffsetY);
 		}
 	}
 
@@ -1079,30 +1093,30 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
-	public void scrollBy(int orientation, int offset) {
+	public boolean scrollBy(int orientation, int offset) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			switch (orientation) {
 			case JScrollBar.HORIZONTAL:
-				scrollHorizontalTo(bodyLayout.x - offset);
-				break;
+				return scrollHorizontalTo(bodyLayout.x - offset);
 			case JScrollBar.VERTICAL:
-				scrollVerticalTo(bodyLayout.y - offset);
-				break;
+				return scrollVerticalTo(bodyLayout.y - offset);
 			}
 		}
+		return false;
 	}
 
-	public void scrollByUnits(int orientation, int units) {
+	public boolean scrollByUnits(int orientation, int units) {
 		final int offset = orientation == JScrollBar.VERTICAL ? getVUnitIncrement(null) * units : units;
-		scrollBy(orientation, offset);
+		return this.scrollBy(orientation, offset);
 	}
 
-	public void scrollHorizontalTo(int newX) {
+	public boolean scrollHorizontalTo(int newX) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
 			final int viewPortX = newX;
+			final int prevX = bodyLayout.x;
 			if (viewPortX > insets.left) {
 				bodyLayout.x = insets.left;
 			} else if (viewPortX < this.width - insets.right - bodyLayout.width) {
@@ -1113,7 +1127,9 @@ public class RBlock extends BaseElementRenderable {
 			resetScrollBars(null);
 			this.updateWidgetBounds();
 			this.repaint();
+			return bodyLayout.x != prevX;
 		}
+		return false;
 	}
 
 	/**
@@ -1152,20 +1168,10 @@ public class RBlock extends BaseElementRenderable {
 			}
 			if (needCorrection) {
 				correctViewportOrigin(insets, this.width, this.height);
+		        this.resetScrollBars(null);
 			}
 		}
 	}
-
-//	public FloatingBounds getExportableFloatingBounds() {
-//		RBlockViewport viewport = this.bodyLayout;
-//		FloatingBounds viewportBounds = viewport.getExportableFloatingBounds();
-//		if (viewportBounds == null) {
-//			return null;
-//		}
-//		Insets insets = this.getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
-//		return new ShiftedFloatingBounds(viewportBounds, insets.left,
-//				insets.right, viewport.y);
-//	}
 
 	private void scrollToSBValue(int orientation, int value) {
 		final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
@@ -1181,11 +1187,12 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
-	public void scrollVerticalTo(int newY) {
+	public boolean scrollVerticalTo(int newY) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
 			final Insets insets = getInsetsMarginBorder(this.hasHScrollBar, this.hasVScrollBar);
 			final int viewPortY = newY;
+			final int prevY = bodyLayout.y;
 			if (viewPortY > insets.top) {
 				bodyLayout.y = insets.top;
 			} else if (viewPortY < this.height - insets.bottom - bodyLayout.height) {
@@ -1196,6 +1203,19 @@ public class RBlock extends BaseElementRenderable {
 			resetScrollBars(null);
 			this.updateWidgetBounds();
 			this.repaint();
+			return bodyLayout.y != prevY;
+		}
+		return false;
+	}
+	
+	@Override
+	public Rectangle getClipBoundsWithoutInsets() {
+		final int hInset = this.hasVScrollBar ? SCROLL_BAR_THICKNESS : 0;
+		final int vInset = this.hasHScrollBar ? SCROLL_BAR_THICKNESS : 0;
+		if (!(this.hasHScrollBar || this.hasVScrollBar)) {
+			return null;
+		} else {
+			return new Rectangle(-relativeOffsetX, -relativeOffsetY, this.width - hInset, this.height - vInset);
 		}
 	}
 

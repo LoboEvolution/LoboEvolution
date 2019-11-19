@@ -24,7 +24,9 @@
 package org.loboevolution.html.renderer;
 
 import java.awt.Graphics;
+import java.util.Iterator;
 
+import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 
 /**
@@ -39,5 +41,18 @@ public interface Renderable {
 
 	default public boolean isFixed() {
 		return false;
+	}
+	
+	default Renderable findHtmlRenderable(RCollection root) {
+		final Iterator<? extends Renderable> rs = root.getRenderables();
+		if (rs != null) {
+			while (rs.hasNext()) {
+				final Renderable r = rs.next();
+				if (r.getModelNode() instanceof HTMLHtmlElement) {
+					return r;
+				}
+			}
+		}
+		return null;
 	}
 }

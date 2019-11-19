@@ -21,6 +21,7 @@
 
 package org.loboevolution.html.renderer;
 
+import java.awt.Rectangle;
 import java.util.Iterator;
 
 /**
@@ -31,15 +32,15 @@ public interface RCollection extends BoundableRenderable {
 
 	void focus();
 
-	/**
-	 * Gets the collection of {@link Renderable} children.
-	 */
-	Iterator<Renderable> getRenderables();
-
-	/**
-	 * Invalidates layout in all descendents.
-	 */
 	void invalidateLayoutDeep();
 
 	void updateWidgetBounds(int guiX, int guiY);
+	
+	Iterator<Renderable> getRenderables();
+	
+	BoundableRenderable getRenderable(final int x, final int y);
+	
+	Rectangle getClipBounds();
+	
+	Rectangle getClipBoundsWithoutInsets();
 }

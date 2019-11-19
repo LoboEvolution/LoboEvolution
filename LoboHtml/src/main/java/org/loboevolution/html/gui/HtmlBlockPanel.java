@@ -23,6 +23,7 @@
  */
 package org.loboevolution.html.gui;
 
+import java.awt.Adjustable;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
@@ -62,6 +63,7 @@ import javax.swing.SwingUtilities;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
@@ -529,13 +531,52 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		}
 	}
 
+	private Renderable getInnerMostRenderable(final int x, final int y) {
+		final RBlock block = this.rblock;
+		Renderable r = block.getRenderable(x - block.getX(), y - block.getY());
+		Renderable inner = null;
+		do {
+			if (r instanceof RCollection) {
+				RCollection rc = (RCollection) r;
+				inner = rc.getRenderable(x - rc.getX(), y - rc.getY());
+				if (inner != null) {
+					r = inner;
+				}
+			} else {
+				inner = null;
+			}
+		} while (inner != null);
+
+		return r;
+	}
+
+	private RBlock getContainingBlock(final Renderable r) {
+		if (r instanceof RBlock) {
+			return (RBlock) r;
+		} else if (r == null) {
+			return null;
+		} else if (r instanceof BoundableRenderable) {
+			return getContainingBlock(((BoundableRenderable) r).getParent());
+		} else {
+			return null;
+		}
+	}
+
 	private void onMouseWheelMoved(MouseWheelEvent mwe) {
 		final RBlock block = this.rblock;
 		if (block != null) {
 			switch (mwe.getScrollType()) {
 			case MouseWheelEvent.WHEEL_UNIT_SCROLL:
 				final int units = mwe.getWheelRotation() * mwe.getScrollAmount();
-				block.scrollByUnits(JScrollBar.VERTICAL, units);
+				final Renderable innerMostRenderable = getInnerMostRenderable(mwe.getX(), mwe.getY());
+				boolean consumed = false;
+				RBlock innerBlock = getContainingBlock(innerMostRenderable);
+				do {
+					if (innerBlock != null) {
+						consumed = innerBlock.scrollByUnits(Adjustable.VERTICAL, units);
+						innerBlock = getContainingBlock(innerBlock.getParent());
+					}
+				} while ((!consumed) && (innerBlock != null));
 				break;
 			}
 		}
@@ -779,7 +820,9 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public void scrollTo(Rectangle bounds, boolean xIfNeeded, boolean yIfNeeded) {
 		final RBlock block = this.rblock;
 		if (block != null) {
-			block.scrollTo(bounds, xIfNeeded, yIfNeeded);
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) getRootNode();
+			RBlock bodyBlock = (RBlock) ((HTMLElementImpl) doc.getBody()).getUINode();
+			bodyBlock.scrollTo(bounds, xIfNeeded, yIfNeeded);
 		}
 	}
 

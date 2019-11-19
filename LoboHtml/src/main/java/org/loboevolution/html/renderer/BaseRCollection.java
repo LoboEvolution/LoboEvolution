@@ -24,28 +24,11 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 			// TODO: Remove local focus
 		}
 	}
-
-	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {
-		if (bounds.y > selectionPoint.y) {
-			return true;
-		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
-				&& selectionPoint.x < bounds.x) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private boolean checkStartSelection(Rectangle bounds, Point selectionPoint) {
-		if (bounds.y > selectionPoint.y) {
-			return true;
-		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
-				&& bounds.x > selectionPoint.x) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
+	  @Override
+	  public Rectangle getClipBoundsWithoutInsets() {
+	    return getClipBounds();
+	  }
 
 	@Override
 	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
@@ -120,7 +103,6 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	@Override
 	public void focus() {
 		this.container.focus();
-		// TODO: Plus local focus
 	}
 
 	public BoundableRenderable getRenderable(int x, int y) {
@@ -305,6 +287,28 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 					rc.updateWidgetBounds(guiX + rc.getX(), guiY + rc.getY());
 				}
 			}
+		}
+	}
+	
+	private boolean checkEndSelection(Rectangle bounds, Point selectionPoint) {
+		if (bounds.y > selectionPoint.y) {
+			return true;
+		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
+				&& selectionPoint.x < bounds.x) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private boolean checkStartSelection(Rectangle bounds, Point selectionPoint) {
+		if (bounds.y > selectionPoint.y) {
+			return true;
+		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
+				&& bounds.x > selectionPoint.x) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }

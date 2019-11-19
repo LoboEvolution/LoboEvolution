@@ -142,7 +142,6 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		RCollection parent = this.parent;
 		for (;;) {
 			if (parent == null) {
-		        System.err.println("Not an ancestor: " + ancestor);
 		        return new Point(x, y);
 			}
 			if (parent == ancestor) {
@@ -153,6 +152,35 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 			parent = parent.getParent();
 		}
 	}
+	
+	@Override
+	public Point getOriginRelativeToNoScroll(final RCollection ancestor) {
+	    if (ancestor == this) {
+	      return new Point(0, 0);
+	    }
+
+	    int x = this.getX();
+	    int y = this.getY();
+
+
+	    if (this instanceof RBlockViewport) {
+	      x -= 0;
+	      y -= 0;
+	    }
+
+	    RCollection parent = this.parent;
+	    for (;;) {
+	      if (parent == null) {
+	        return new Point(x, y);
+	      }
+	      if (parent == ancestor) {
+	        return new Point(x, y);
+	      }
+	      x += parent.getX();
+	      y += parent.getY();
+	      parent = parent.getParent();
+	    }
+	  }
 
 	@Override
 	public RCollection getParent() {

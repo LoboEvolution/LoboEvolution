@@ -42,7 +42,6 @@ import org.loboevolution.html.renderstate.RenderState;
  */
 class RLine extends BaseRCollection {
 	private boolean allowOverflow = false;
-	// private final RenderState startRenderState;
 	private int baseLineOffset;
 	private int desiredMaxWidth;
 
@@ -576,5 +575,11 @@ class RLine extends BaseRCollection {
 
 	public final void simplyAdd(Renderable r) {
 		this.renderables.add(r);
+	}
+
+	@Override
+	public Rectangle getClipBounds() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -33,50 +33,35 @@ import org.loboevolution.html.dom.domimpl.ModelNode;
  * interface.
  */
 public interface BoundableRenderable extends Renderable {
-	boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
-			RenderableSpot endPoint);
-
+	
+	Dimension getSize();
+	
 	Rectangle getBounds();
-
-	java.awt.Point getGUIPoint(int clientX, int clientY);
-
-	int getHeight();
-
+	
 	RenderableSpot getLowestRenderableSpot(int x, int y);
+	
+	Point getGUIPoint(int clientX, int clientY);
 
-	@Override
-	ModelNode getModelNode();
-
-	int getOrdinal();
-
-	Point getOrigin();
-
-	/**
-	 * Returns {@link #getOriginalParent()} if not null. Otherwise it returns
-	 * {@link #getParent()}.
-	 */
-	RCollection getOriginalOrCurrentParent();
-
-	/**
-	 * Gets the parent set with {@link #setOriginalParent(RCollection)}. It
-	 * represents the parent where the renderable would have been originally
-	 * rendered according to the DOM. This will be non-null only if
-	 * {@link #getParent()} is not the parent where this renderable would have been
-	 * originally rendered.
-	 */
-	RCollection getOriginalParent();
-
-	Point getOriginRelativeTo(RCollection ancestor);
-
-	/**
-	 * Gets the parent where the renderable is rendered.
-	 */
-	RCollection getParent();
+	Point getOrigin();	
 
 	Point getRenderablePoint(int guiX, int guiY);
 
-	Dimension getSize();
+	Point getOriginRelativeTo(RCollection ancestor);
+	
+	Point getOriginRelativeToNoScroll(RCollection ancestor);
 
+	ModelNode getModelNode();
+
+	RCollection getOriginalOrCurrentParent();
+
+	RCollection getOriginalParent();
+
+	RCollection getParent();
+
+	int getOrdinal();
+	
+	int getHeight();
+	
 	int getWidth();
 
 	int getX();
@@ -85,12 +70,6 @@ public interface BoundableRenderable extends Renderable {
 
 	int getZIndex();
 
-	void invalidateLayoutUpTree();
-
-	/**
-	 * Returns true if the renderable is fully contained by its modelNode, but said
-	 * modelNode does not fully contain an ancestor renderable.
-	 */
 	boolean isContainedByNode();
 
 	boolean onDoubleClick(MouseEvent event, int x, int y);
@@ -101,35 +80,20 @@ public interface BoundableRenderable extends Renderable {
 
 	void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit);
 
-	void onMouseOut(MouseEvent event, int x, int y, ModelNode limit);
-
-	/**
-	 * Returns false if the event is consumed. True to propagate further.
-	 */
 	boolean onMousePressed(MouseEvent event, int x, int y);
 
 	boolean onMouseReleased(MouseEvent event, int x, int y);
 
 	boolean onRightClick(MouseEvent event, int x, int y);
 
-	/**
-	 * Asks the Renderable to paint the selection between two points. Nothing will
-	 * be done if the points are outside the Renderable.
-	 * 
-	 * @param g
-	 * @param inSelection
-	 * @param startPoint
-	 * @param endPoint
-	 * @return True iff it's in selection when finished painting.
-	 */
 	boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
 
-	/**
-	 * Paints by either creating a new clipped graphics context corresponding to the
-	 * bounds of the Renderable, or by translating the origin.
-	 * 
-	 * @param g Parent's Graphics context.
-	 */
+	boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
+	
+	void invalidateLayoutUpTree();
+	
+	void onMouseOut(MouseEvent event, int x, int y, ModelNode limit);
+	
 	void paintTranslated(Graphics g);
 
 	void relayout();
