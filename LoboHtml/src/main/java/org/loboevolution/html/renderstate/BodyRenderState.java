@@ -44,11 +44,19 @@ public class BodyRenderState extends StyleSheetRenderState {
 		binfo = super.getBackgroundInfo();
 		if (binfo == null || binfo.getBackgroundColor() == null) {
 			final String bgcolor = this.element.getAttribute("bgcolor");
+			final String background = this.element.getAttribute("background");
 			if (Strings.isNotBlank(bgcolor)) {
 				if (binfo == null) {
 					binfo = new BackgroundInfo();
 				}
 				binfo.setBackgroundColor(ColorFactory.getInstance().getColor(bgcolor));
+			}
+			
+			if (Strings.isNotBlank(background)) {
+				if (binfo == null) {
+					binfo = new BackgroundInfo();
+				}
+				binfo.setBackgroundImage(this.document.getFullURL(background));
 			}
 		}
 		this.iBackgroundInfo = binfo;
