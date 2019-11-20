@@ -25,6 +25,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Insets;
 
+import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
@@ -52,7 +53,6 @@ class RListItem extends BaseRListElement {
 			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
 		super.doLayout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, defaultOverflowX,
 				defaultOverflowY, sizeOnly);
-		// Note: Count must be calculated even if layout is valid.
 		final RenderState renderState = this.modelNode.getRenderState();
 		final Integer value = getValue();
 		if (value == UNSET) {
@@ -102,21 +102,21 @@ class RListItem extends BaseRListElement {
 		final RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {
 			final ListStyle listStyle = this.listStyle;
-			int bulletType = listStyle == null ? ListStyle.TYPE_UNSET : listStyle.type;
-			if (bulletType != ListStyle.TYPE_NONE) {
-				if (bulletType == ListStyle.TYPE_UNSET) {
+			ListValues bulletType = listStyle == null ? ListValues.TYPE_UNSET : ListValues.get(listStyle.getType());
+			if (bulletType != ListValues.TYPE_NONE) {
+				if (bulletType == ListValues.TYPE_UNSET) {
 					RCollection parent = getOriginalOrCurrentParent();
 					if (!(parent instanceof RList)) {
 						parent = parent.getOriginalOrCurrentParent();
 					}
 					if (parent instanceof RList) {
 						final ListStyle parentListStyle = ((RList) parent).listStyle;
-						bulletType = parentListStyle == null ? ListStyle.TYPE_DISC : parentListStyle.type;
+						bulletType = parentListStyle == null ? ListValues.TYPE_DISC : ListValues.get(parentListStyle.getType());
 					} else {
-						bulletType = ListStyle.TYPE_DISC;
+						bulletType = ListValues.TYPE_DISC;
 					}
 				}
-				// Paint bullets
+
 				final Color prevColor = g.getColor();
 				g.setColor(rs.getColor());
 				try {
@@ -124,30 +124,45 @@ class RListItem extends BaseRListElement {
 					final Insets paddingInsets = this.paddingInsets;
 					final int baselineOffset = layout.getFirstBaselineOffset();
 					final int bulletRight = (marginInsets == null ? 0 : marginInsets.left) - BULLET_RMARGIN;
-					final int bulletBottom = insets.top + baselineOffset
-							+ (paddingInsets == null ? 0 : paddingInsets.top);
+					final int bulletBottom = insets.top + baselineOffset + (paddingInsets == null ? 0 : paddingInsets.top);
 					final int bulletTop = bulletBottom - BULLET_HEIGHT;
 					final int bulletLeft = bulletRight - BULLET_WIDTH;
 					final int bulletNumber = this.count;
 					String numberText = null;
+					
 					switch (bulletType) {
-					case ListStyle.TYPE_DECIMAL:
+					case TYPE_DECIMAL:
 						numberText = bulletNumber + ".";
 						break;
-					case ListStyle.TYPE_LOWER_ALPHA:
-						numberText = (char) ('a' + bulletNumber) + ".";
+					case TYPE_DECIMAL_LEADING_ZERO:
+						if(bulletNumber<10)	
+							numberText = "0" + bulletNumber + ".";
+						else
+							numberText = bulletNumber + ".";
 						break;
-					case ListStyle.TYPE_UPPER_ALPHA:
-						numberText = (char) ('A' + bulletNumber) + ".";
+					case TYPE_LOWER_ALPHA:
+						numberText = ((char) ('a' + (bulletNumber - 1))) + ".";
 						break;
-					case ListStyle.TYPE_DISC:
+					case TYPE_UPPER_ALPHA:
+						numberText = ((char) ('A' + (bulletNumber - 1))) + ".";
+						break;
+					case TYPE_DISC:
 						g.fillOval(bulletLeft, bulletTop, BULLET_WIDTH, BULLET_HEIGHT);
 						break;
-					case ListStyle.TYPE_CIRCLE:
+					case TYPE_CIRCLE:
 						g.drawOval(bulletLeft, bulletTop, BULLET_WIDTH, BULLET_HEIGHT);
 						break;
-					case ListStyle.TYPE_SQUARE:
+					case TYPE_SQUARE:
 						g.fillRect(bulletLeft, bulletTop, BULLET_WIDTH, BULLET_HEIGHT);
+						break;
+					case TYPE_LOWER_ROMAN:
+						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";;
+						break;
+					case TYPE_UPPER_ROMAN:
+						numberText = ListStyle.getRomanNumerals(bulletNumber).toUpperCase() + ".";
+						break;
+					default:
+						numberText = null;
 						break;
 					}
 					if (numberText != null) {

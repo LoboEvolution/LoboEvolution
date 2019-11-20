@@ -33,8 +33,8 @@ import java.util.StringTokenizer;
 import org.loboevolution.info.FontInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+import org.loboevolution.html.ListValues;
 import org.loboevolution.html.renderstate.RenderState;
-import org.w3c.dom.css.CSS3Properties;
 
 public class HtmlValues {
 
@@ -112,71 +112,60 @@ public class HtmlValues {
 		final ListStyle listStyle = new ListStyle();
 		final String[] tokens = HtmlValues.splitCssValue(listStyleText);
 		for (final String token : tokens) {
-			final int listStyleType = HtmlValues.getListStyleType(token);
-			if (listStyleType != ListStyle.TYPE_UNSET) {
-				listStyle.type = listStyleType;
+			final ListValues listStyleType = HtmlValues.getListStyleType(token);
+			if (listStyleType != ListValues.TYPE_UNSET) {
+				listStyle.setType(listStyleType.getValue());
 			} else if (HtmlValues.isUrl(token)) {
 				// TODO: listStyle.image
 			} else {
-				final int listStylePosition = HtmlValues.getListStylePosition(token);
-				if (listStylePosition != ListStyle.POSITION_UNSET) {
-					listStyle.position = listStylePosition;
+				final ListValues listStylePosition = HtmlValues.getListStylePosition(token);
+				if (listStylePosition != ListValues.POSITION_UNSET) {
+					listStyle.setPosition(listStylePosition.getValue());
 				}
 			}
 		}
 		return listStyle;
 	}
 
-	public static int getListStylePosition(String token) {
+	public static ListValues getListStylePosition(String token) {
 		final String tokenTL = token.toLowerCase();
-		if ("inside".equals(tokenTL)) {
-			return ListStyle.POSITION_INSIDE;
-		} else if ("outside".equals(tokenTL)) {
-			return ListStyle.POSITION_OUTSIDE;
-		} else {
-			return ListStyle.POSITION_UNSET;
+		switch (tokenTL) {
+		case "inside":
+			return ListValues.POSITION_INSIDE;
+		case "outside":
+			return ListValues.POSITION_OUTSIDE;
+		default:
+			return ListValues.POSITION_UNSET;
 		}
 	}
 
-	public static int getListStyleType(String token) {
+	public static ListValues getListStyleType(String token) {
 		final String tokenTL = token.toLowerCase();
-		if ("none".equals(tokenTL)) {
-			return ListStyle.TYPE_NONE;
-		} else if ("disc".equals(tokenTL)) {
-			return ListStyle.TYPE_DISC;
-		} else if ("circle".equals(tokenTL)) {
-			return ListStyle.TYPE_CIRCLE;
-		} else if ("square".equals(tokenTL)) {
-			return ListStyle.TYPE_SQUARE;
-		} else if ("decimal".equals(tokenTL)) {
-			return ListStyle.TYPE_DECIMAL;
-		} else if ("lower-alpha".equals(tokenTL) || "lower-latin".equals(tokenTL)) {
-			return ListStyle.TYPE_LOWER_ALPHA;
-		} else if ("upper-alpha".equals(tokenTL) || "upper-latin".equals(tokenTL)) {
-			return ListStyle.TYPE_UPPER_ALPHA;
-		} else {
-			// TODO: Many types missing here
-			return ListStyle.TYPE_UNSET;
-		}
-	}
-
-	public static int getListStyleTypeDeprecated(String token) {
-		final String tokenTL = token.toLowerCase();
-		if ("disc".equals(tokenTL)) {
-			return ListStyle.TYPE_DISC;
-		} else if ("circle".equals(tokenTL)) {
-			return ListStyle.TYPE_CIRCLE;
-		} else if ("square".equals(tokenTL)) {
-			return ListStyle.TYPE_SQUARE;
-		} else if ("1".equals(tokenTL)) {
-			return ListStyle.TYPE_DECIMAL;
-		} else if ("a".equals(tokenTL)) {
-			return ListStyle.TYPE_LOWER_ALPHA;
-		} else if ("A".equals(tokenTL)) {
-			return ListStyle.TYPE_UPPER_ALPHA;
-		} else {
-			// TODO: Missing i, I.
-			return ListStyle.TYPE_UNSET;
+		switch (tokenTL) {
+		case "none":
+			return ListValues.TYPE_NONE;
+		case "disc":
+			return ListValues.TYPE_DISC;
+		case "circle":
+			return ListValues.TYPE_CIRCLE;
+		case "square":
+			return ListValues.TYPE_SQUARE;
+		case "decimal":
+			return ListValues.TYPE_DECIMAL;
+		case "decimal-leading-zero":
+			return ListValues.TYPE_DECIMAL_LEADING_ZERO;
+		case "lower-alpha":
+		case "lower-latin":
+			return ListValues.TYPE_LOWER_ALPHA;
+		case "upper-alpha":
+		case "upper-latin":
+			return ListValues.TYPE_UPPER_ALPHA;
+		case "lower-roman":
+			return ListValues.TYPE_LOWER_ROMAN;
+		case "upper-roman":
+			return ListValues.TYPE_UPPER_ROMAN;
+		default:
+			return ListValues.TYPE_UNSET;
 		}
 	}
 

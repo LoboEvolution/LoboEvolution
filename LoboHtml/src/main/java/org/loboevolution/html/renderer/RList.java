@@ -20,6 +20,7 @@
 */
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.renderstate.RenderState;
@@ -38,7 +39,7 @@ class RList extends BaseRListElement {
 	protected void applyStyle(int availWidth, int availHeight) {
 		super.applyStyle(availWidth, availHeight);
 		ListStyle listStyle = this.listStyle;
-		if (listStyle == null || listStyle.type == ListStyle.TYPE_UNSET) {
+		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
 			final Object rootNode = this.modelNode;
 			if (!(rootNode instanceof HTMLElementImpl)) {
 				return;
@@ -51,14 +52,14 @@ class RList extends BaseRListElement {
 			if ("ul".equalsIgnoreCase(rootElement.getTagName())) {
 				final int listNesting = this.listNesting;
 				if (listNesting == 0) {
-					listStyle.type = ListStyle.TYPE_DISC;
+					listStyle.setType(ListValues.TYPE_DISC.getValue());
 				} else if (listNesting == 1) {
-					listStyle.type = ListStyle.TYPE_CIRCLE;
+					listStyle.setType(ListValues.TYPE_CIRCLE.getValue());
 				} else {
-					listStyle.type = ListStyle.TYPE_SQUARE;
+					listStyle.setType(ListValues.TYPE_SQUARE.getValue());
 				}
 			} else {
-				listStyle.type = ListStyle.TYPE_DECIMAL;
+				listStyle.setType(ListValues.TYPE_DECIMAL.getValue());
 			}
 		}
 	}

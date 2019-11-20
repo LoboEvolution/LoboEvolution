@@ -20,6 +20,7 @@
 */
 package org.loboevolution.html.renderer;
 
+import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -57,24 +58,24 @@ class BaseRListElement extends RBlock {
 		}
 		final String listStyleTypeText = props.getListStyleType();
 		if (listStyleTypeText != null) {
-			final int listType = HtmlValues.getListStyleType(listStyleTypeText);
-			if (listType != ListStyle.TYPE_UNSET) {
+			final ListValues listType = HtmlValues.getListStyleType(listStyleTypeText);
+			if (listType != ListValues.TYPE_UNSET) {
 				if (listStyle == null) {
 					listStyle = new ListStyle();
 				}
-				listStyle.type = listType;
+				listStyle.setType(listType.getValue());
 			}
 		}
-		if (listStyle == null || listStyle.type == ListStyle.TYPE_UNSET) {
+		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
 			final String typeAttributeText = rootElement.getAttribute("type");
 			if (typeAttributeText != null) {
-				final int newStyleType = HtmlValues.getListStyleTypeDeprecated(typeAttributeText);
-				if (newStyleType != ListStyle.TYPE_UNSET) {
+				final ListValues newStyleType = HtmlValues.getListStyleType(typeAttributeText);
+				if (newStyleType != ListValues.TYPE_UNSET) {
 					if (listStyle == null) {
 						listStyle = new ListStyle();
 						this.listStyle = listStyle;
 					}
-					listStyle.type = newStyleType;
+					listStyle.setType(newStyleType.getValue());
 				}
 			}
 		}
