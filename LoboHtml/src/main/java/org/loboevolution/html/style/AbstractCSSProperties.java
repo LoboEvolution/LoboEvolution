@@ -120,7 +120,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				for (final String token : tokens) {
 					if (ColorFactory.getInstance().isColor(token)) {
 						color = token;
-					} else if (HtmlValues.isUrl(token)) {
+					} else if (HtmlValues.isUrl(token) || HtmlValues.isGradient(token)) {
 						image = token;
 					} else if (HtmlValues.isBackgroundRepeat(token)) {
 						backgroundRepeat = token;

@@ -28,6 +28,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -35,6 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
+
+import javax.imageio.ImageIO;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
@@ -51,6 +55,7 @@ import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.FontValues;
+import org.loboevolution.html.style.GradientStyle;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.MarginInsets;
@@ -60,62 +65,78 @@ import org.w3c.dom.css.CSS3Properties;
  * @author J. H. S.
  */
 public class StyleSheetRenderState implements RenderState {
+	
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
+	
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
+	
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
+	
 	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
+	
 	protected static final Color INVALID_COLOR = new Color(100, 0, 100);
+	
 	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
+	
+	protected HtmlInsets paddingInsets = INVALID_INSETS;
 
-	private int alignXPercent = -1;
+	protected HtmlInsets marginInsets = INVALID_INSETS;
+
+	protected final HTMLDocumentImpl document;
+	
+	protected final HTMLElementImpl element;
+	
 	protected BorderInfo borderInfo = INVALID_BORDER_INFO;
 
-	private Integer cachedFloat;
-	private Integer cachedPosition;
-	private Integer cachedVisibility;
-	private Map<String, ArrayList<Integer>> counters = null;
-	protected final HTMLDocumentImpl document;
-	protected final HTMLElementImpl element;
-	private Color iBackgroundColor = INVALID_COLOR;
 	protected BackgroundInfo iBackgroundInfo = INVALID_BACKGROUND_INFO;
-	private int iBlankWidth = -1;
-	private Color iColor;
+	
+	private Color iOverlayColor = INVALID_COLOR;
 
+	private Color iTextBackgroundColor = INVALID_COLOR;
+	
+	private Color iBackgroundColor = INVALID_COLOR;
+
+	private Integer cachedFloat;
+	
+	private Integer cachedPosition;
+	
+	private Integer cachedVisibility;
+	
 	private Integer iDisplay;
+
+	protected Integer iWhiteSpace;
+
+	private Integer cachedClear = null;
+    
+    private int iBlankWidth = -1;
+
+	private int alignXPercent = -1;
+	
+	private int iTextDecoration = -1;
+
+	private int iTextTransform = -1;
+	
+	protected int overflowX = -1;
+
+	protected int overflowY = -1;
+
+	private Map<String, ArrayList<Integer>> counters = null;
+	
+	private Color iColor;
 
 	private Font iFont;
 
 	private FontMetrics iFontMetrics;
 
 	private boolean iHighlight;
-
-	private Color iOverlayColor = INVALID_COLOR;
-
-	private Color iTextBackgroundColor = INVALID_COLOR;
-
-	private int iTextDecoration = -1;
-
+	
 	private String iTextIndentText = null;
 
-	private int iTextTransform = -1;
-
-	protected Integer iWhiteSpace;
+	protected final RenderState prevRenderState;
+	    
+    private Optional<Cursor> cursor;
 
 	Map<String, WordInfo> iWordInfoMap = null;
-
-	protected HtmlInsets marginInsets = INVALID_INSETS;
-
-	protected int overflowX = -1;
-
-	protected int overflowY = -1;
-
-	protected HtmlInsets paddingInsets = INVALID_INSETS;
-
-	protected final RenderState prevRenderState;
-	
-    private Integer cachedClear = null;
-    
-    private Optional<Cursor> cursor;
 
 	public StyleSheetRenderState(HTMLDocumentImpl document) {
 		this.prevRenderState = null;
@@ -222,8 +243,9 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-    private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document) {
-        if (backgroundImageText.contains("url")) {
+    private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document, AbstractCSSProperties props) {
+
+    	if (HtmlValues.isUrl(backgroundImageText)) {
             String start = "url(";
             int startIdx = start.length() +1;
             int closingIdx = backgroundImageText.lastIndexOf(')') -1;
@@ -243,7 +265,19 @@ public class StyleSheetRenderState implements RenderState {
             	}
                 binfo.setBackgroundImage(document.getFullURL(quotedUri));
             }
-        }
+		} else if (HtmlValues.isGradient(backgroundImageText)) {
+			try {
+				GradientStyle style = new GradientStyle();
+				BufferedImage img = style.gradientToImg(props, this, backgroundImageText);
+				if (img != null) {
+					File f = File.createTempFile("temp", null);
+					ImageIO.write(img, "png", f);
+					binfo.setBackgroundImage(f.toURI().toURL());
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
     }
 	
 	@Override
@@ -350,7 +384,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 			
 			if (Strings.isNotBlank(backgroundImageText)) {
-				applyBackgroundImage(binfo, backgroundImageText, this.document);
+				applyBackgroundImage(binfo, backgroundImageText, this.document, props);
 			}
 		}
 		this.iBackgroundInfo = binfo;		

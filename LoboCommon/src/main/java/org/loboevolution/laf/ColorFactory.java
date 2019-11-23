@@ -22,34 +22,7 @@ public class ColorFactory {
 	private static ColorFactory instance;
 
 	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
-
-	/**
-	 * Gets the instance.
-	 *
-	 * @return the instance
-	 */
-	public static synchronized final ColorFactory getInstance() {
-		if (instance == null) {
-			instance = new ColorFactory();
-		}
-		return instance;
-	}
-
-	/**
-	 * Normalize color component within allow range 0..255
-	 *
-	 * @param colorComponent any value
-	 * @return 0 <= value <= 255
-	 */
-	private static int normalize(int colorComponent) {
-		if (colorComponent > 255) {
-			colorComponent = 255;
-		} else if (colorComponent < 0) {
-			colorComponent = 0;
-		}
-		return colorComponent;
-	}
-
+	
 	/** The color map. */
 	private Map<String, Color> colorMap = new HashMap<String, Color>(510);
 
@@ -67,6 +40,18 @@ public class ColorFactory {
 	/** The Constant RGBA_START. */
 	private final String RGBA_START = "rgba(";
 
+	/**
+	 * Gets the instance.
+	 *
+	 * @return the instance
+	 */
+	public static synchronized final ColorFactory getInstance() {
+		if (instance == null) {
+			instance = new ColorFactory();
+		}
+		return instance;
+	}
+	
 	/**
 	 * Instantiates a new color factory.
 	 */
@@ -343,16 +328,39 @@ public class ColorFactory {
 	}
 
 	private Color HexToColor(String hex) {
+		Integer red = -1;
+		Integer green = -1;
+		Integer blue = -1;
+		Integer alpha = -1;
 		hex = hex.replace("#", "");
 		switch (hex.length()) {
 		case 6:
-			return new Color(Integer.valueOf(hex.substring(0, 2), 16), Integer.valueOf(hex.substring(2, 4), 16),
-					Integer.valueOf(hex.substring(4, 6), 16));
+			red = Integer.valueOf(hex.substring(0, 2), 16);
+			green = Integer.valueOf(hex.substring(2, 4), 16);
+			blue = Integer.valueOf(hex.substring(4, 6), 16);
+			return new Color(red, green, blue);
 		case 8:
-			return new Color(Integer.valueOf(hex.substring(0, 2), 16), Integer.valueOf(hex.substring(2, 4), 16),
-					Integer.valueOf(hex.substring(4, 6), 16), Integer.valueOf(hex.substring(6, 8), 16));
+			red = Integer.valueOf(hex.substring(0, 2), 16);
+			green = Integer.valueOf(hex.substring(2, 4), 16);
+			blue = Integer.valueOf(hex.substring(4, 6), 16);
+			alpha = Integer.valueOf(hex.substring(6, 8), 16);
+			return new Color(red, green, blue, alpha);
 		}
 		return null;
 	}
-
+	
+	/**
+	 * Normalize color component within allow range 0..255
+	 *
+	 * @param colorComponent any value
+	 * @return 0 <= value <= 255
+	 */
+	private static int normalize(int colorComponent) {
+		if (colorComponent > 255) {
+			colorComponent = 255;
+		} else if (colorComponent < 0) {
+			colorComponent = 0;
+		}
+		return colorComponent;
+	}
 }

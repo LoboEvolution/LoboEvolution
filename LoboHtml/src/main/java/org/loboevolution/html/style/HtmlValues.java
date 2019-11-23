@@ -274,7 +274,11 @@ public class HtmlValues {
 	public static boolean isUrl(String token) {
 		return token.toLowerCase().startsWith("url(");
 	}
-
+	
+	public static boolean isGradient(String token) {
+		return token.toLowerCase().contains("gradient");
+	}
+	
 	public static String quoteAndEscape(String text) {
 		final StringBuffer result = new StringBuffer();
 		result.append("'");
