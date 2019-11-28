@@ -363,7 +363,7 @@ public class Strings {
 	 * @param text the text
 	 * @return the string
 	 */
-	public static String leadingDigits(String text) {
+	private static String leadingDigits(String text) {
 		final char[] list = text.toCharArray();
 		StringBuilder buffer = null;
 		for (final char ch : list) {
@@ -386,7 +386,7 @@ public class Strings {
 	 * @param text the text
 	 * @return the string
 	 */
-	public static String leadingNonDigits(String text) {
+	private static String leadingNonDigits(String text) {
 		StringBuilder buffer = null;
 		final char[] list = text.toCharArray();
 		for (final char ch : list) {

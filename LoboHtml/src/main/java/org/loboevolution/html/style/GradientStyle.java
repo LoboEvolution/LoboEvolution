@@ -113,29 +113,43 @@ public class GradientStyle {
 		return image;
 	}
 
-	private float[] fractions(String quote) {
+	private static float[] fractions(final String quote) {
 		ArrayList<Float> listFractions = new ArrayList<Float>();
 		String quoteTmp = quote;
 		quoteTmp = quoteTmp.replace(" ", "");
 		char[] charArray = quoteTmp.toCharArray();
+		boolean isColored = false;
 		String color = "";
 		for (int i = 0; i < charArray.length; i++) {
 			char c = charArray[i];
-			if (Strings.isNotBlank(color) && c == ',') {
-				setFractions(listFractions, charArray, i, color);
-				color = "";
+			if (Strings.isNotBlank(color) && !color.startsWith("rgb")) {
+				Color clr = ColorFactory.getInstance().getColor(color);
+				if (clr != null) {
+					setFractions(listFractions, charArray, i, color);
+					color = "";
+					isColored = true;
+				}
 			}
 
 			if (Strings.isNotBlank(color) || c != ',') {
 				color += c;
 			}
+			
+			if (isColored && (c == ',' || c == '%')) {
+				isColored = false;
+				color = "";
+			}
 
 			if (color.startsWith("rgb") && c == ')') {
 				setFractions(listFractions, charArray, i, color);
-				color = "";
-			} else if (!color.startsWith("rgb") && i == charArray.length - 1) {
-				setFractions(listFractions, charArray, i, color);
-				color = "";
+				isColored = true;
+			} else if (Strings.isNotBlank(color) &&  !color.startsWith("rgb") && i == charArray.length - 1) {
+				
+				Color clr = ColorFactory.getInstance().getColor(color);
+				if (clr != null) {
+					setFractions(listFractions, charArray, i, color);
+					color = "";
+				}
 			}
 		}
 
@@ -149,32 +163,42 @@ public class GradientStyle {
 		return fractions;
 	}
 
-	private  Color[] colors(String quote) {
+	private  Color[] colors(final String quote) {
 		ArrayList<Color> colors = new ArrayList<Color>();
 		String quoteTmp = quote;
 		quoteTmp = quote.replace(" ", "");
 		char[] charArray = quoteTmp.toCharArray();
+		boolean isColored = false;
 		String color = "";
 		for (int i = 0; i < charArray.length; i++) {
 			char c = charArray[i];
-			
-			if(Strings.isNotBlank(color) && c == ',') {
-				color = color.replaceAll("[^A-Za-z]+", "");
-				colors.add(ColorFactory.getInstance().getColor(color));
-				color = "";
+			if (Strings.isNotBlank(color) && !color.startsWith("rgb")) {
+				Color clr = ColorFactory.getInstance().getColor(color);
+				if (clr != null) {
+					colors.add(ColorFactory.getInstance().getColor(color));
+					color = "";
+					isColored = true;
+				}
 			}
 			
 			if(Strings.isNotBlank(color) || c != ',') {
 				color += c;
 			}
 			
-			if(color.startsWith("rgb") && c == ')') {
-				color = color.replaceAll("[^A-Za-z]+", "");
-				colors.add(ColorFactory.getInstance().getColor(color));
+			if (isColored && (c == ',' || c == '%')) {
+				isColored = false;
 				color = "";
-			} else if(!color.startsWith("rgb") && i == charArray.length -1) {
-				color = color.replaceAll("[^A-Za-z]+", "");
+			}
+			
+			if (color.startsWith("rgb") && c == ')') {
 				colors.add(ColorFactory.getInstance().getColor(color));
+				isColored = true;
+			} else if (Strings.isNotBlank(color) &&  !color.startsWith("rgb") && i == charArray.length - 1) {
+				Color clr = ColorFactory.getInstance().getColor(color);
+				if (clr != null) {
+					colors.add(ColorFactory.getInstance().getColor(color));
+					color = "";
+				}
 			}
 		}
 		
