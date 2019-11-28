@@ -1,5 +1,6 @@
 package org.loboevolution.common;
 
+import java.awt.Color;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
@@ -58,6 +59,26 @@ public class ArrayUtilities {
 		};
 	}
 	
+
+	public static Color[] removeColor(Color[] arr, int index) {
+		if (arr == null || index < 0 || index >= arr.length) {
+			return arr;
+		}
+		Color[] anotherArray = new Color[arr.length - 1];
+		System.arraycopy(arr, 0, anotherArray, 0, index);
+		System.arraycopy(arr, index + 1, anotherArray, index, arr.length - index - 1);
+		return anotherArray;
+	}
+	
+	public static <T> boolean contains(final T[] ts, final T t) {
+		for (final T e : ts) {
+			if (Objects.equals(e, t)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	private static class ArrayIterator<T> implements Iterator<T> {
 		private final T[] array;
 		private final int top;
@@ -96,14 +117,4 @@ public class ArrayUtilities {
 			throw new UnsupportedOperationException();
 		}
 	}
-
-	public static <T> boolean contains(final T[] ts, final T t) {
-		for (final T e : ts) {
-			if (Objects.equals(e, t)) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 }

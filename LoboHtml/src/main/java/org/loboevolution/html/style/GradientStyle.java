@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.ColorFactory;
@@ -94,24 +95,24 @@ public class GradientStyle {
 		final int closingIdx = backgroundImage.lastIndexOf(')');
 		final String quote = backgroundImage.substring(startIdx, closingIdx);
 		final String values = gradientValues(quote);
-		final float[] fractions = fractions(values);
-		final Color[] colors = colors(values);
 		final int width = getWidth(props, renderState);
 		final int height = getHeight(props, renderState);
-
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2 = image.createGraphics();
-		Point2D center = new Point2D.Float(width/2, height/2);
-		float radius = width/2;
+		final BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		final Graphics2D g2 = image.createGraphics();
+		final Point2D center = new Point2D.Float(width/2, height/2);
+		final float radius = width/2;
+		final float[] fractions = fractions(values.substring(0, values.lastIndexOf(",")));
+		Color[] colors = colors(values);
+		final Color background = colors[colors.length-1];
+		colors = ArrayUtilities.removeColor(colors, colors.length-1);
 		RadialGradientPaint p = new RadialGradientPaint(center, radius, fractions, colors, cMethod);
-		
-		g2.setColor(Color.red);
+		g2.setColor(background);
 		g2.fillRect(0, 0, width, height);
 		g2.setPaint(p);
 		g2.fillOval(0, 0, width - 1, height - 1);
 		return image;
 	}
-	
+
 	private float[] fractions(String quote) {
 		ArrayList<Float> listFractions = new ArrayList<Float>();
 		String quoteTmp = quote;
