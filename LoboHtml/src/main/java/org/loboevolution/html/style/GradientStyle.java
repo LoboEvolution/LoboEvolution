@@ -6,6 +6,7 @@ import java.awt.LinearGradientPaint;
 import java.awt.MultipleGradientPaint.CycleMethod;
 import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -55,6 +56,8 @@ public class GradientStyle {
 		final int width = getWidth(props, renderState);
 		final int height = getHeight(props, renderState);
 		LinearGradientPaint linearGradientPaint = null;
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g2 = image.createGraphics();
 		switch (direction) {
 		case "to right":
 			linearGradientPaint = new LinearGradientPaint(0, 0, width, 0, fractions, colors, cMethod);
@@ -76,12 +79,19 @@ public class GradientStyle {
 			break;
 		case "to bottom":
 		default:
-			linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, fractions, colors, cMethod);
+			if (direction.contains("deg")) {
+				Collections.reverse(Arrays.asList(colors));
+				double rotation = Double.valueOf(direction.substring(0, direction.lastIndexOf('d')));
+				AffineTransform tf = AffineTransform.getTranslateInstance(-width / 2, -height / 2);
+		        tf.preConcatenate(AffineTransform.getRotateInstance(Math.toRadians(rotation)));
+		        tf.preConcatenate(AffineTransform.getTranslateInstance(width / 2, height / 2));
+		        g2.setTransform(tf);
+				linearGradientPaint = new LinearGradientPaint(0, 0, width, height, fractions, colors, cMethod);
+			} else {
+				linearGradientPaint = new LinearGradientPaint(0, 0, 0, height, fractions, colors, cMethod);
+			}
 			break;
 		}
-	
-		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-		Graphics2D g2 = image.createGraphics();
 		g2.setColor(Color.white);
         g2.fillRect(0, 0, width, height);
         g2.setPaint(linearGradientPaint);
@@ -245,7 +255,7 @@ public class GradientStyle {
 		String values = "";
 		String[] split = quote.split(",");
 		for (String val : split) {
-			if (val.contains("to")) {
+			if (val.contains("to") || val.contains("deg")) {
 				values = val;
 			}
 		}
@@ -257,7 +267,7 @@ public class GradientStyle {
 		String[] split = quote.split(",");
 		for (int i = 0; i < split.length; i++) {
 			String qut = split[i];
-			if (!qut.contains("to")) {
+			if (!qut.contains("to") && !qut.contains("deg")) {
 				if (i == split.length - 1) {
 					values += qut;
 				} else {
