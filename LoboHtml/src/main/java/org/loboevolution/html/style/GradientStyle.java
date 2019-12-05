@@ -132,7 +132,7 @@ public class GradientStyle {
 		String color = "";
 		for (int i = 0; i < charArray.length; i++) {
 			char c = charArray[i];
-			if (Strings.isNotBlank(color) && !color.startsWith("rgb")) {
+			if (Strings.isNotBlank(color) &&  !ColorFactory.getInstance().isRgbOrHsl(color)) {
 				Color clr = ColorFactory.getInstance().getColor(color);
 				if (clr != null) {
 					setFractions(listFractions, charArray, i, color);
@@ -150,10 +150,10 @@ public class GradientStyle {
 				color = "";
 			}
 
-			if (color.startsWith("rgb") && c == ')') {
+			if (ColorFactory.getInstance().isRgbOrHsl(color) && c == ')') {
 				setFractions(listFractions, charArray, i, color);
 				isColored = true;
-			} else if (Strings.isNotBlank(color) &&  !color.startsWith("rgb") && i == charArray.length - 1) {
+			} else if (Strings.isNotBlank(color) &&  !ColorFactory.getInstance().isRgbOrHsl(color) && i == charArray.length - 1) {
 				
 				Color clr = ColorFactory.getInstance().getColor(color);
 				if (clr != null) {
@@ -182,7 +182,7 @@ public class GradientStyle {
 		String color = "";
 		for (int i = 0; i < charArray.length; i++) {
 			char c = charArray[i];
-			if (Strings.isNotBlank(color) && !color.startsWith("rgb")) {
+			if (Strings.isNotBlank(color) && !ColorFactory.getInstance().isRgbOrHsl(color)) {
 				Color clr = ColorFactory.getInstance().getColor(color);
 				if (clr != null) {
 					colors.add(ColorFactory.getInstance().getColor(color));
@@ -200,10 +200,10 @@ public class GradientStyle {
 				color = "";
 			}
 			
-			if (color.startsWith("rgb") && c == ')') {
+			if (ColorFactory.getInstance().isRgbOrHsl(color) && c == ')') {
 				colors.add(ColorFactory.getInstance().getColor(color));
 				isColored = true;
-			} else if (Strings.isNotBlank(color) &&  !color.startsWith("rgb") && i == charArray.length - 1) {
+			} else if (Strings.isNotBlank(color) &&  !ColorFactory.getInstance().isRgbOrHsl(color) && i == charArray.length - 1) {
 				Color clr = ColorFactory.getInstance().getColor(color);
 				if (clr != null) {
 					colors.add(ColorFactory.getInstance().getColor(color));

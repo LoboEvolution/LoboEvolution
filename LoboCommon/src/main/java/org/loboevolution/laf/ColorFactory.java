@@ -166,7 +166,7 @@ public class ColorFactory {
 	private Color getRGB(Color c, String normalSpec) {
 		Color color = null;
 		if (c == null && normalSpec.startsWith(this.RGB_START)) {
-			final int endIdx = normalSpec.lastIndexOf(')');
+			final int endIdx = normalSpec.indexOf(')');
 			String commaValues = "";
 
 			if (endIdx == -1) {
@@ -267,6 +267,23 @@ public class ColorFactory {
 			return this.colorMap.containsKey(normalSpec);
 		}
 	}
+	
+	public boolean isRgbOrHsl(String colorSpec) {
+		final String normalSpec = colorSpec.toLowerCase();
+
+		if (normalSpec.startsWith(this.RGBA_START)) {
+			return true;
+		} else if (normalSpec.startsWith(this.RGB_START)) {
+			return true;
+		} else if (normalSpec.startsWith(this.HSLA_START)) {
+			return true;
+		} else if (normalSpec.startsWith(this.HSL_START)) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 
 	private Map<String, Color> mapColor() {
 		final Map<String, Color> colorMap = new HashMap<String, Color>();
