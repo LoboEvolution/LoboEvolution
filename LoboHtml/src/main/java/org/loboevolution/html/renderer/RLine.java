@@ -238,27 +238,24 @@ class RLine extends BaseRCollection {
 			}
 		}
 
-		// Add it
+		
 
-		int extraHeight = 0;
-		final int maxDescent = this.height - this.baseLineOffset;
-		if (rword.descent > maxDescent) {
-			extraHeight += rword.descent - maxDescent;
-		}
-		final int maxAscentPlusLeading = this.baseLineOffset;
-		if (rword.ascentPlusLeading > maxAscentPlusLeading) {
-			extraHeight += rword.ascentPlusLeading - maxAscentPlusLeading;
-		}
-		if (extraHeight > 0) {
-			final int newHeight = this.height + extraHeight;
-			adjustHeight(newHeight, newHeight, AlignValues.BOTTOM.getValue());
-		}
-		this.renderables.add(rword);
-		rword.setParent(this);
-		final int x = offset;
-		offset += wiwidth;
-		this.width = this.xoffset = offset;
-		rword.setOrigin(x, this.baseLineOffset - rword.ascentPlusLeading);
+	    int extraHeight = 0;
+	    final int maxAscentPlusLeading = this.baseLineOffset;
+	    if (rword.ascentPlusLeading > maxAscentPlusLeading) {
+	      extraHeight += (rword.ascentPlusLeading - maxAscentPlusLeading) + rword.descent;
+	    }
+	    
+	    if (extraHeight > 0) {
+	      final int newHeight = (this.height + extraHeight);
+	      this.adjustHeight(newHeight, newHeight, AlignValues.BOTTOM.getValue());
+	    }
+	    this.renderables.add(rword);
+	    rword.setParent(this);
+	    final int x = offset;
+	    offset += wiwidth;
+	    this.width = this.xoffset = offset;
+	    rword.setOrigin(x, this.baseLineOffset - rword.ascentPlusLeading);
 	}
 
 	/**
