@@ -29,16 +29,6 @@
 			<fileset dir="LoboPDF/src/main/resources"/>
 			<fileset dir="LoboIViewer/src/main/resources"/>
 		</copy>
-		<unzip src="LoboLib/lib/log4j-api-2.8.1.jar" dest="bin">
-			<patternset>
-				<include name="**/*class"/>
-			</patternset>
-		</unzip>
-		<unzip src="LoboLib/lib/log4j-core-2.8.1.jar" dest="bin">
-			<patternset>
-				<include name="**/*class"/>
-			</patternset>
-		</unzip>
 		<unzip src="LoboLib/lib/rsyntaxtextarea.jar" dest="bin">
 			<patternset>
 				<include name="**/*"/>
