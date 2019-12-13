@@ -30,7 +30,7 @@ public class GeneralStore implements Serializable {
 
 	private static String INSERT_STARTUP = "INSERT INTO STARTUP (baseUrl) VALUES(?)";
 
-	private static String INSERT_USER_AGENT = "INSERT INTO USER_AGENT (text) VALUES(?)";
+	private static String INSERT_USER_AGENT = "INSERT INTO USER_AGENT (description) VALUES(?)";
 
 	private static String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation FROM NETWORK";
 
@@ -91,8 +91,7 @@ public class GeneralStore implements Serializable {
 			}
 		} catch (final Exception e) {
 			e.printStackTrace();
-		}
-
+		}	
 		if (width > -1 && height > -1) {
 			bounds = new Rectangle(width, height);
 		}

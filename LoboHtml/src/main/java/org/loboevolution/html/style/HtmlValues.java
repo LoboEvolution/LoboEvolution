@@ -33,6 +33,7 @@ import java.util.StringTokenizer;
 import org.loboevolution.info.FontInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.renderstate.RenderState;
 
@@ -129,10 +130,11 @@ public class HtmlValues {
 
 	public static ListValues getListStylePosition(String token) {
 		final String tokenTL = token.toLowerCase();
-		switch (tokenTL) {
-		case "inside":
+		CSSValues tkn = CSSValues.get(tokenTL);
+		switch (tkn) {
+		case INSIDE:
 			return ListValues.POSITION_INSIDE;
-		case "outside":
+		case OUTSIDE:
 			return ListValues.POSITION_OUTSIDE;
 		default:
 			return ListValues.POSITION_UNSET;
@@ -141,28 +143,29 @@ public class HtmlValues {
 
 	public static ListValues getListStyleType(String token) {
 		final String tokenTL = token.toLowerCase();
-		switch (tokenTL) {
-		case "none":
+		CSSValues tkn = CSSValues.get(tokenTL);
+		switch (tkn) {
+		case NONE:
 			return ListValues.TYPE_NONE;
-		case "disc":
+		case DISC:
 			return ListValues.TYPE_DISC;
-		case "circle":
+		case CIRCLE:
 			return ListValues.TYPE_CIRCLE;
-		case "square":
+		case SQUARE:
 			return ListValues.TYPE_SQUARE;
-		case "decimal":
+		case DECIMAL:
 			return ListValues.TYPE_DECIMAL;
-		case "decimal-leading-zero":
+		case DECIMAL_LEADING_ZERO:
 			return ListValues.TYPE_DECIMAL_LEADING_ZERO;
-		case "lower-alpha":
-		case "lower-latin":
+		case LOWER_ALPHA:
+		case LOWER_LATIN:
 			return ListValues.TYPE_LOWER_ALPHA;
-		case "upper-alpha":
-		case "upper-latin":
+		case UPPER_ALPHA:
+		case UPPER_LATIN:
 			return ListValues.TYPE_UPPER_ALPHA;
-		case "lower-roman":
+		case LOWER_ROMAN:
 			return ListValues.TYPE_LOWER_ROMAN;
-		case "upper-roman":
+		case UPPER_ROMAN:
 			return ListValues.TYPE_UPPER_ROMAN;
 		default:
 			return ListValues.TYPE_UNSET;

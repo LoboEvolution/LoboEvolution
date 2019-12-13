@@ -251,6 +251,6 @@ public enum CSSValues {
 
 	public static CSSValues get(String actionName) {
 		CSSValues value = ENUM_MAP.get(actionName);
-		return value == null ? CSSValues.NONE : value;
+		return value == null ? CSSValues.DEFAULT : value;
 	}
 }

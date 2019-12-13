@@ -34,6 +34,7 @@ import java.util.logging.Logger;
 import org.loboevolution.common.Objects;
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.info.FontInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -118,7 +119,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				String backgroundRepeat = null;
 				String position = null;
 				for (final String token : tokens) {
-					if (ColorFactory.getInstance().isColor(token)) {
+					if (ColorFactory.getInstance().isColor(token) || CSSValues.INITIAL.equals(CSSValues.get(token))) {
 						color = token;
 					} else if (HtmlValues.isUrl(token) || HtmlValues.isGradient(token)) {
 						image = token;
@@ -135,6 +136,9 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 					}
 				}
 				if (color != null) {
+					if(CSSValues.INITIAL.equals(CSSValues.get(color))){
+						color = "white";
+					}
 					properties.setPropertyValueLCAlt(BACKGROUND_COLOR, color, important);
 				}
 				if (image != null) {
