@@ -24,8 +24,11 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,6 +37,7 @@ import org.loboevolution.html.dom.HTMLScriptElement;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.net.HttpNetwork;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.RhinoException;
 import org.mozilla.javascript.Scriptable;
@@ -117,24 +121,17 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			final String src = getSrc();
 			try {
 				if (Strings.isNotBlank(src)) {
-					BufferedReader br = null;
-					try {
-						this.informExternalScriptLoading();
-						URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
-						String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
-						final URL url = new URL(scriptURI);
-						br = new BufferedReader(new InputStreamReader(url.openStream()));
+					final URL scriptURL = ((HTMLDocumentImpl) doc).getFullURL(src);
+					final String scriptURI = scriptURL == null ? src : scriptURL.toExternalForm();
+					final URL u = new URL(scriptURI);
+					final URLConnection connection = u.openConnection();
+					connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
+					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
+							Reader reader = new InputStreamReader(in, "utf-8");) {
+						BufferedReader br = new BufferedReader(reader);						
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (Exception e) {
 						e.printStackTrace();
-					} finally {
-						try {
-							if (br != null) {
-								br.close();
-							}
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
 					}
 				} else {
 					String scriptURI = doc.getBaseURI();
