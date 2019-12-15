@@ -195,9 +195,6 @@ public class RBlock extends BaseElementRenderable {
 				rcontext, frameContext, this);
 		this.bodyLayout = bl;
 		bl.setOriginalParent(this);
-		// Initialize origin of RBlockViewport to be as far top-left as
-		// possible.
-		// This will be corrected on first layout.
 		bl.setX(Short.MAX_VALUE);
 		bl.setY(Short.MAX_VALUE);
 	}
@@ -605,9 +602,6 @@ public class RBlock extends BaseElementRenderable {
 
 			this.relativeOffsetX = left;
 			this.relativeOffsetY = top;
-		} else {
-			this.relativeOffsetX = 0;
-			this.relativeOffsetY = 0;
 		}
 	}
 
@@ -771,13 +765,26 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
-	// public final boolean couldBeScrollable() {
-//		int overflow = this.getOverflow();
-//		return overflow != OVERFLOW_NONE
-//				&& (overflow == OVERFLOW_SCROLL
-//						|| overflow == OVERFLOW_VERTICAL || overflow == OVERFLOW_AUTO);
-//	}
-//
+	@Override
+	public int getX() {
+		return super.getX() + relativeOffsetX;
+	}
+
+	@Override
+	public int getY() {
+		return super.getY() + relativeOffsetY;
+	}
+
+	@Override
+	public int getVisualWidth() {
+		return Math.max(super.getVisualWidth(), bodyLayout.getVisualWidth());
+	}
+
+	@Override
+	public int getVisualHeight() {
+		return Math.max(super.getVisualHeight(), bodyLayout.getVisualHeight());
+	}
+
 	public final boolean isOverflowVisibleX() {
 		final int overflow = this.overflowX;
 		return overflow == RenderState.OVERFLOW_NONE || overflow == RenderState.OVERFLOW_VISIBLE;
@@ -802,7 +809,6 @@ public class RBlock extends BaseElementRenderable {
 		} finally {
 			this.layoutUpTreeCanBeInvalidated = true;
 			this.layoutDeepCanBeInvalidated = true;
-			// this.renderStyleCanBeInvalidated = true;
 		}
 	}
 
@@ -826,13 +832,6 @@ public class RBlock extends BaseElementRenderable {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
-	 * MouseEvent, int, int)
-	 */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -850,13 +849,6 @@ public class RBlock extends BaseElementRenderable {
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
-	 * MouseEvent)
-	 */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
 		final BoundableRenderable br = this.armedRenderable;
@@ -870,20 +862,6 @@ public class RBlock extends BaseElementRenderable {
 			return true;
 		}
 	}
-
-	// public boolean extractSelectionText(StringBuffer buffer, boolean
-	// inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
-	// RBlockViewport bodyLayout = this.bodyLayout;
-	// if(bodyLayout != null) {
-	// inSelection = inSelection ? endPoint.renderable != this :
-	// startPoint.renderable == this;
-	// return bodyLayout.extractSelectionText(buffer, inSelection, startPoint,
-	// endPoint);
-	// }
-	// else {
-	// return inSelection;
-	// }
-	// }
 
 	/*
 	 * (non-Javadoc)

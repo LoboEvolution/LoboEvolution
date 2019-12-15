@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.Collection;
 
 /**
@@ -64,6 +65,12 @@ public interface RenderableContainer {
     default int getInnerWidth() {return 0;};
 
     default int getInnerHeight() {return 0;};
+    
+    Rectangle getVisualBounds();
+    
+    int getVisualWidth();
+    
+    int getVisualHeight();
     
     Point getGUIPoint(int x, int y);
     

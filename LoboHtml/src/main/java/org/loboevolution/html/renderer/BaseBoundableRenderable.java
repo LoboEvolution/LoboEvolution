@@ -45,33 +45,26 @@ import org.loboevolution.http.HtmlRendererContext;
  * @author J. H. S.
  */
 abstract class BaseBoundableRenderable extends BaseRenderable implements BoundableRenderable {
-	
+
 	protected static final Logger logger = Logger.getLogger(BaseBoundableRenderable.class.getName());
-	
+
 	protected static final Color SELECTION_COLOR = Color.BLUE;
-	
+
 	protected static final Color SELECTION_XOR = Color.LIGHT_GRAY;
 
 	protected final RenderableContainer container;
-	
-	/**
-	 * Starts as true because ancestors could be invalidated.
-	 */
+
 	protected boolean layoutUpTreeCanBeInvalidated = true;
 
 	protected final ModelNode modelNode;
 
-	/**
-	 * Parent for invalidation.
-	 */
 	protected RCollection originalParent;
 
-	/**
-	 * Parent for graphics coordinates.
-	 */
 	protected RCollection parent;
 
-	public int x, y, width, height;
+	protected int x, y;
+
+	public int width, height;
 
 	public BaseBoundableRenderable(RenderableContainer container, ModelNode modelNode) {
 		this.container = container;
@@ -79,7 +72,9 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	}
 
 	public boolean contains(int x, int y) {
-		return x >= this.x && y >= this.y && x < this.x + this.width && y < this.y + this.height;
+		final int mx = this.getX();
+		final int my = this.getY();
+		return (x >= mx) && (y >= my) && (x < (mx + this.getVisualWidth())) && (y < (my + this.getVisualHeight()));
 	}
 
 	public Color getBlockBackgroundColor() {
@@ -89,6 +84,18 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	@Override
 	public Rectangle getBounds() {
 		return new Rectangle(this.x, this.y, this.width, this.height);
+	}
+
+	public int getVisualHeight() {
+		return getHeight();
+	}
+
+	public int getVisualWidth() {
+		return getWidth();
+	}
+
+	public Rectangle getVisualBounds() {
+		return new Rectangle(getX(), getY(), getVisualWidth(), getVisualHeight());
 	}
 
 	@Override
@@ -142,7 +149,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		RCollection parent = this.parent;
 		for (;;) {
 			if (parent == null) {
-		        return new Point(x, y);
+				return new Point(x, y);
 			}
 			if (parent == ancestor) {
 				return new Point(x, y);
@@ -152,35 +159,34 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 			parent = parent.getParent();
 		}
 	}
-	
+
 	@Override
 	public Point getOriginRelativeToNoScroll(final RCollection ancestor) {
-	    if (ancestor == this) {
-	      return new Point(0, 0);
-	    }
+		if (ancestor == this) {
+			return new Point(0, 0);
+		}
 
-	    int x = this.getX();
-	    int y = this.getY();
+		int x = this.getX();
+		int y = this.getY();
 
+		if (this instanceof RBlockViewport) {
+			x -= 0;
+			y -= 0;
+		}
 
-	    if (this instanceof RBlockViewport) {
-	      x -= 0;
-	      y -= 0;
-	    }
-
-	    RCollection parent = this.parent;
-	    for (;;) {
-	      if (parent == null) {
-	        return new Point(x, y);
-	      }
-	      if (parent == ancestor) {
-	        return new Point(x, y);
-	      }
-	      x += parent.getX();
-	      y += parent.getY();
-	      parent = parent.getParent();
-	    }
-	  }
+		RCollection parent = this.parent;
+		for (;;) {
+			if (parent == null) {
+				return new Point(x, y);
+			}
+			if (parent == ancestor) {
+				return new Point(x, y);
+			}
+			x += parent.getX();
+			y += parent.getY();
+			parent = parent.getParent();
+		}
+	}
 
 	@Override
 	public RCollection getParent() {
@@ -256,7 +262,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public void markLayoutValid() {
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
-	
+
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final ModelNode me = this.modelNode;
@@ -317,7 +323,6 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		}
 	}
 
-
 	@Override
 	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		if (triggerEvent) {
@@ -339,7 +344,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		Optional<Cursor> foundCursorOpt = Optional.empty();
 		ModelNode node = limit;
 		while (node != null) {
-			
+
 			if (node instanceof NodeImpl) {
 				final NodeImpl uiElement = (NodeImpl) node;
 				final RenderState rs = uiElement.getRenderState();
@@ -422,7 +427,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 	public void repaint(int x, int y, int width, int height) {
 		final Renderable parent = this.parent;
 		if (parent instanceof BoundableRenderable) {
-			((BoundableRenderable) parent).repaint(x + this.x, y + this.y, width, height);
+			 ((BoundableRenderable) parent).repaint(x + this.getX(), y + this.getY(), width, height);
 		} else if (parent == null) {
 			// Has to be top RBlock.
 			this.container.repaint(x, y, width, height);

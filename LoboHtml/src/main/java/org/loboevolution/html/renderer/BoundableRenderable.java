@@ -33,21 +33,25 @@ import org.loboevolution.html.dom.domimpl.ModelNode;
  * interface.
  */
 public interface BoundableRenderable extends Renderable {
-	
+
 	Dimension getSize();
-	
+
 	Rectangle getBounds();
-	
+
+	Rectangle getVisualBounds();
+
+	boolean contains(final int x, final int y);
+
 	RenderableSpot getLowestRenderableSpot(int x, int y);
-	
+
 	Point getGUIPoint(int clientX, int clientY);
 
-	Point getOrigin();	
+	Point getOrigin();
 
 	Point getRenderablePoint(int guiX, int guiY);
 
 	Point getOriginRelativeTo(RCollection ancestor);
-	
+
 	Point getOriginRelativeToNoScroll(RCollection ancestor);
 
 	ModelNode getModelNode();
@@ -59,10 +63,14 @@ public interface BoundableRenderable extends Renderable {
 	RCollection getParent();
 
 	int getOrdinal();
-	
+
 	int getHeight();
-	
+
 	int getWidth();
+
+	int getVisualHeight();
+
+	int getVisualWidth();
 
 	int getX();
 
@@ -88,12 +96,13 @@ public interface BoundableRenderable extends Renderable {
 
 	boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
 
-	boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
-	
+	boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+			RenderableSpot endPoint);
+
 	void invalidateLayoutUpTree();
-	
+
 	void onMouseOut(MouseEvent event, int x, int y, ModelNode limit);
-	
+
 	void paintTranslated(Graphics g);
 
 	void relayout();

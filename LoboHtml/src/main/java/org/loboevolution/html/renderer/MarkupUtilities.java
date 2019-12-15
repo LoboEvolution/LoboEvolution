@@ -25,236 +25,114 @@ package org.loboevolution.html.renderer;
 
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * @author J. H. S.
- */
 class MarkupUtilities {
 
-	private static int findFirstIndex(Renderable[] renderables, Rectangle clipArea, int index, int length,
-			boolean vertical) {
-		if (length == 1) {
-			final Renderable r = renderables[index];
-			Rectangle rbounds;
-			if (r instanceof BoundableRenderable) {
-				rbounds = ((BoundableRenderable) r).getBounds();
-			} else {
-				return -1;
-			}
-			if (intersects(rbounds, clipArea, vertical)) {
-				return index;
-			} else {
-				return -1;
-			}
-		} else {
-			final int middleIndex = index + length / 2;
-			final Renderable r = renderables[middleIndex];
-			Rectangle rbounds;
-			if (r instanceof BoundableRenderable) {
-				rbounds = ((BoundableRenderable) r).getBounds();
-			} else {
-				final int leftIndex = findFirstIndex(renderables, clipArea, index, middleIndex - index, vertical);
-				if (leftIndex != -1) {
-					return leftIndex;
-				}
-				return findFirstIndex(renderables, clipArea, middleIndex + 1, length - (middleIndex - index + 1),
-						vertical);
-			}
-			if (vertical) {
-				if (rbounds.y + rbounds.height < clipArea.y) {
-					final int newLen = length - (middleIndex - index + 1);
-					return newLen == 0 ? -1 : findFirstIndex(renderables, clipArea, middleIndex + 1, newLen, vertical);
-				} else {
-					final int newLen = middleIndex - index;
-					final int resultIdx = newLen == 0 ? -1
-							: findFirstIndex(renderables, clipArea, index, newLen, vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
-					}
-					return resultIdx;
-				}
-			} else {
-				if (rbounds.x + rbounds.width < clipArea.x) {
-					return findFirstIndex(renderables, clipArea, middleIndex + 1, length - (middleIndex - index),
-							vertical);
-				} else {
-					final int resultIdx = findFirstIndex(renderables, clipArea, index, middleIndex - index, vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
-					}
-					return resultIdx;
-				}
-			}
-		}
-	}
+  private MarkupUtilities() {
+    super();
+  }
 
-	private static int findLastIndex(Renderable[] renderables, Rectangle clipArea, int index, int length,
-			boolean vertical) {
-		if (length == 1) {
-			final Renderable r = renderables[index];
-			Rectangle rbounds;
-			if (r instanceof BoundableRenderable) {
-				rbounds = ((BoundableRenderable) r).getBounds();
-			} else {
-				return -1;
-			}
-			if (intersects(clipArea, rbounds, vertical)) {
-				return index;
-			} else {
-				return -1;
-			}
-		} else {
-			final int middleIndex = index + length / 2;
-			final Renderable r = renderables[middleIndex];
-			Rectangle rbounds;
-			if (r instanceof BoundableRenderable) {
-				rbounds = ((BoundableRenderable) r).getBounds();
-			} else {
-				final int rightIndex = findLastIndex(renderables, clipArea, middleIndex + 1,
-						length - (middleIndex - index + 1), vertical);
-				if (rightIndex != -1) {
-					return rightIndex;
-				}
-				return findLastIndex(renderables, clipArea, index, middleIndex - index, vertical);
-			}
-			if (vertical) {
-				if (rbounds.y > clipArea.y + clipArea.height) {
-					return findLastIndex(renderables, clipArea, index, middleIndex - index, vertical);
-				} else {
-					final int newLen = length - (middleIndex - index + 1);
-					final int resultIdx = newLen == 0 ? -1
-							: findLastIndex(renderables, clipArea, middleIndex + 1, newLen, vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
-					}
-					return resultIdx;
-				}
-			} else {
-				if (rbounds.x > clipArea.x + clipArea.width) {
-					return findLastIndex(renderables, clipArea, index, middleIndex - index, vertical);
-				} else {
-					final int resultIdx = findLastIndex(renderables, clipArea, middleIndex + 1,
-							length - (middleIndex - index + 1), vertical);
-					if (resultIdx == -1) {
-						if (intersects(clipArea, rbounds, vertical)) {
-							return middleIndex;
-						}
-					}
-					return resultIdx;
-				}
-			}
-		}
-	}
+  public static BoundableRenderable findRenderable(final Renderable[] renderables, final Point point, final boolean vertical) {
+    return findRenderable(renderables, point, 0, renderables.length, vertical);
+  }
 
-	public static BoundableRenderable findRenderable(Renderable[] renderables, int x, int y, boolean vertical) {
-		return findRenderable(renderables, x, y, 0, renderables.length, vertical);
-	}
+  public static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
+    return findRenderable(renderables, x, y, 0, renderables.length, vertical);
+  }
 
-	private static BoundableRenderable findRenderable(Renderable[] renderables, int x, int y, int firstIndex,
-			int length, boolean vertical) {
-		if (length == 0) {
-			return null;
-		}
-		if (length == 1) {
-			final Renderable r = renderables[firstIndex];
-			if (!(r instanceof BoundableRenderable)) {
-				return null;
-			}
-			final BoundableRenderable br = (BoundableRenderable) r;
-			final Rectangle rbounds = br.getBounds();
-			return rbounds.contains(x, y) ? br : null;
-		} else {
-			final int middleIndex = firstIndex + length / 2;
-			final Renderable r = renderables[middleIndex];
-			Rectangle rbounds;
-			if (r instanceof BoundableRenderable) {
-				rbounds = ((BoundableRenderable) r).getBounds();
-			} else {
-				final BoundableRenderable rleft = findRenderable(renderables, x, y, firstIndex,
-						middleIndex - firstIndex, vertical);
-				if (rleft != null) {
-					return rleft;
-				}
-				return findRenderable(renderables, x, y, middleIndex + 1, length - (middleIndex - firstIndex + 1),
-						vertical);
-			}
-			if (rbounds.contains(x, y)) {
-				return (BoundableRenderable) r;
-			}
-			if (vertical) {
-				if (y < rbounds.y) {
-					return findRenderable(renderables, x, y, firstIndex, middleIndex - firstIndex, vertical);
-				} else {
-					return findRenderable(renderables, x, y, middleIndex + 1, length - (middleIndex - firstIndex + 1),
-							vertical);
-				}
-			} else {
-				if (x < rbounds.x) {
-					return findRenderable(renderables, x, y, firstIndex, middleIndex - firstIndex, vertical);
-				} else {
-					return findRenderable(renderables, x, y, middleIndex + 1, length - (middleIndex - firstIndex + 1),
-							vertical);
-				}
-			}
-		}
-	}
+  private static BoundableRenderable findRenderable(final Renderable[] renderables, final Point point, final int firstIndex,
+      final int length, final boolean vertical) {
+    return findRenderable(renderables, point.x, point.y, firstIndex, length, vertical);
+  }
 
-	public static BoundableRenderable findRenderable(Renderable[] renderables, Point point, boolean vertical) {
-		return findRenderable(renderables, point, 0, renderables.length, vertical);
-	}
+  private static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final int firstIndex,
+      final int length, final boolean vertical) {
+    for (int i = firstIndex + length - 1; i >= firstIndex; i--) {
+      if (renderables[i] instanceof BoundableRenderable) {
+        final BoundableRenderable br2 = (BoundableRenderable) renderables[i];
+        if (br2.contains(x, y)) {
+          return br2;
+        }
+      }
+    }
+    return null;
+  }
 
-	private static BoundableRenderable findRenderable(Renderable[] renderables, Point point, int firstIndex, int length,
-			boolean vertical) {
-		return findRenderable(renderables, point.x, point.y, firstIndex, length, vertical);
-	}
+  // Linear scan version
+  public static List<BoundableRenderable> findRenderables(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
+    List<BoundableRenderable> found = null;
+    for (int i = 0; i < renderables.length; i++) {
+      if (renderables[i] instanceof BoundableRenderable) {
+        final BoundableRenderable br = (BoundableRenderable) renderables[i];
+        if (br.contains(x, y)) {
+          if (found == null) {
+            found = new ArrayList<>();
+          }
+          found.add(br);
+        }
+      }
+    }
+    return found;
+  }
+  
+  public static Range findRenderables(final Renderable[] renderables, final Rectangle clipArea, final boolean vertical) {
+    return findRenderables(renderables, clipArea, 0, renderables.length, vertical);
+  }
 
-	public static Range findRenderables(Renderable[] renderables, Rectangle clipArea, boolean vertical) {
-		return findRenderables(renderables, clipArea, 0, renderables.length, vertical);
-	}
+  private static Range findRenderables(final Renderable[] renderables, final Rectangle clipArea, final int firstIndex, final int length,
+      final boolean vertical) {
+    if (length == 0) {
+      return new Range(0, 0);
+    }
+    int offset1 = findFirstIndex(renderables, clipArea, firstIndex, length, vertical);
+    int offset2 = findLastIndex(renderables, clipArea, firstIndex, length, vertical);
+    if ((offset1 == -1) && (offset2 == -1)) {
+      return new Range(0, 0);
+    }
+    if (offset1 == -1) {
+      offset1 = firstIndex;
+    }
+    if (offset2 == -1) {
+      offset2 = (firstIndex + length) - 1;
+    }
+    return new Range(offset1, (offset2 - offset1) + 1);
+  }
+  
+  private static int findFirstIndex(final Renderable[] renderables, final Rectangle clipArea, final int index, final int length,
+      final boolean vertical) {
+    for (int i = index; i < length; i++) {
+      final Renderable ri = renderables[i];
+      if (ri instanceof BoundableRenderable) {
+        final BoundableRenderable br = (BoundableRenderable) ri;
+        if (intersects(clipArea, br.getVisualBounds(), vertical)) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
 
-	private static Range findRenderables(Renderable[] renderables, Rectangle clipArea, int firstIndex, int length,
-			boolean vertical) {
-		if (length == 0) {
-			return new Range(0, 0);
-		}
-		int offset1 = findFirstIndex(renderables, clipArea, firstIndex, length, vertical);
-		int offset2 = findLastIndex(renderables, clipArea, firstIndex, length, vertical);
-		if (offset1 == -1 && offset2 == -1) {
-			// if(logger.isLoggable(Level.INFO))logger.info("findRenderables(): Range not
-			// found for clipArea=" + clipArea + ",length=" + length);
-			// for(int i = firstIndex; i < length; i++) {
-			// logger.info("findRenderables(): renderable.bounds=" +
-			// renderables[i].getBounds());
-			// }
-			return new Range(0, 0);
-		}
-		if (offset1 == -1) {
-			offset1 = firstIndex;
-		}
-		if (offset2 == -1) {
-			offset2 = firstIndex + length - 1;
-		}
-		return new Range(offset1, offset2 - offset1 + 1);
-	}
-
-	private static boolean intersects(Rectangle rect1, Rectangle rect2, boolean vertical) {
-		if (vertical) {
-			return !(rect1.y > rect2.y + rect2.height || rect2.y > rect1.y + rect1.height);
-		} else {
-			return !(rect1.x > rect2.x + rect2.width || rect2.x > rect1.x + rect1.width);
-		}
-	}
-
-	/**
-	 * 
-	 */
-	private MarkupUtilities() {
-		super();
-	}
+  private static int findLastIndex(final Renderable[] renderables, final Rectangle clipArea, final int index, final int length,
+      final boolean vertical) {
+    for (int i = index + length - 1; i >= index; i--) {
+      final Renderable ri = renderables[i];
+      if (ri instanceof BoundableRenderable) {
+        final BoundableRenderable br = (BoundableRenderable) ri;
+        if (intersects(clipArea, br.getVisualBounds(), vertical)) {
+          return i;
+        }
+      }
+    }
+    return -1;
+  }
+  
+  private static boolean intersects(final Rectangle rect1, final Rectangle rect2, final boolean vertical) {
+    if (vertical) {
+      return !((rect1.y > (rect2.y + rect2.height)) || (rect2.y > (rect1.y + rect1.height)));
+    } else {
+      return !((rect1.x > (rect2.x + rect2.width)) || (rect2.x > (rect1.x + rect1.width)));
+    }
+  }
 }

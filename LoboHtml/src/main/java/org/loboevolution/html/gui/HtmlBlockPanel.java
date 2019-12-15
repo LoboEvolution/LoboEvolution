@@ -935,6 +935,21 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		throw new UnsupportedOperationException("Method added while fixing #20. Not implemented yet.");
 	}
 
+	@Override
+	public int getVisualHeight() {
+		return rblock.getVisualHeight();
+	}
+
+	@Override
+	public int getVisualWidth() {
+		return rblock.getVisualWidth();
+	}
+
+	@Override
+	public Rectangle getVisualBounds() {
+		return new Rectangle(getX(), getY(), getVisualWidth(), getVisualHeight());
+	}
+	
 	public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
 		return rblock.translateDescendentPoint(descendent, x, y);
 	}
