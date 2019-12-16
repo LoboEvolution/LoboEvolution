@@ -61,7 +61,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 				if (robj instanceof BoundableRenderable) {
 					final BoundableRenderable renderable = (BoundableRenderable) robj;
 					if (!inSelection) {
-						final Rectangle bounds = renderable.getBounds();
+						final Rectangle bounds = renderable.getVisualBounds();
 						if (checkPoint1 != null && checkStartSelection(bounds, checkPoint1)) {
 							if (checkPoint2 != null) {
 								checkPoint1 = checkPoint2;
@@ -76,7 +76,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 							inSelection = true;
 						}
 					} else if (inSelection && checkPoint1 != null
-							&& checkEndSelection(renderable.getBounds(), checkPoint1)) {
+							&& checkEndSelection(renderable.getVisualBounds(), checkPoint1)) {
 						return false;
 					}
 					final boolean newInSelection = renderable.extractSelectionText(buffer, inSelection, startPoint,
@@ -221,7 +221,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		        final Renderable robj = (rn instanceof PositionedRenderable) ? ((PositionedRenderable) rn).getRenderable() : rn;
 				if (robj instanceof BoundableRenderable) {
 					final BoundableRenderable renderable = (BoundableRenderable) robj;
-					final Rectangle bounds = renderable.getBounds();
+					final Rectangle bounds = renderable.getVisualBounds();
 					if (!inSelection) {
 						if (checkPoint1 != null && checkStartSelection(bounds, checkPoint1)) {
 							if (checkPoint2 != null) {

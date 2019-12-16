@@ -380,7 +380,7 @@ class RLine extends BaseRCollection {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable br = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (br != null) {
-			final Rectangle rbounds = br.getBounds();
+			final Rectangle rbounds = br.getVisualBounds();
 			return br.getLowestRenderableSpot(x - rbounds.x, y - rbounds.y);
 		} else {
 			return new RenderableSpot(this, x, y);
