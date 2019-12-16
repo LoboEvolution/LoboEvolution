@@ -25,6 +25,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.HTMLStyleElement;
+import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.style.CSSUtilities;
 import org.w3c.dom.UserDataHandler;
 
@@ -111,7 +112,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (org.loboevolution.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processStyle();
 		}
 		return super.setUserData(key, data, handler);

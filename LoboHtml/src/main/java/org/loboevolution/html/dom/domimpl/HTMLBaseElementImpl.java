@@ -20,6 +20,7 @@
 */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.parser.HtmlParser;
 import org.w3c.dom.UserDataHandler;
 
 public class HTMLBaseElementImpl extends HTMLElementImpl {
@@ -37,7 +38,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
-		if (org.loboevolution.html.parser.HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
+		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
 			processBaseTag();
 		}
 		return super.setUserData(key, data, handler);

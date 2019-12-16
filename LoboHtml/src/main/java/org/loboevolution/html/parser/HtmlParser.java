@@ -235,9 +235,7 @@ public class HtmlParser {
 						// int commentLine = reader.getLineNumber();
 						final StringBuffer comment = this.passEndOfComment(reader);
 						final StringBuffer decText = entityDecode(comment);
-
 						safeAppendChild(parent, doc.createComment(decText.toString()));
-
 						return TOKEN_COMMENT;
 					} else if ("!DOCTYPE".equals(tag)) {
 						final String doctypeStr = this.parseEndOfTag(reader);
@@ -263,9 +261,7 @@ public class HtmlParser {
 				} else if (tag.startsWith("?")) {
 					tag = tag.substring(1);
 					final StringBuffer data = readProcessingInstruction(reader);
-
 					safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
-
 					return TOKEN_FULL_ELEMENT;
 				} else {
 					final int localIndex = normalTag.indexOf(':');

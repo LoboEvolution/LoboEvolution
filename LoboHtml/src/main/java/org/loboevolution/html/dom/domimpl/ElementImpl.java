@@ -29,6 +29,8 @@ import java.util.Map;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.parser.HtmlParser;
+
 import java.util.Objects;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
@@ -266,7 +268,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 
 	@Override
 	protected String htmlEncodeChildText(String text) {
-		if (org.loboevolution.html.parser.HtmlParser.isDecodeEntities(this.name)) {
+		if (HtmlParser.isDecodeEntities(this.name)) {
 			return Strings.strictHtmlEncode(text, false);
 		} else {
 			return text;
