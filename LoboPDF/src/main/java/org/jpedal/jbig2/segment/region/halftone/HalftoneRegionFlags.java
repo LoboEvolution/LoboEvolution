@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.region.halftone;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class HalftoneRegionFlags extends Flags {
 
+	private static final Logger logger = Logger.getLogger(HalftoneRegionFlags.class.getName());
     public static String H_MMR = "H_MMR";
     public static String H_TEMPLATE = "H_TEMPLATE";
     public static String H_ENABLE_SKIP = "H_ENABLE_SKIP";
@@ -80,6 +83,6 @@ public class HalftoneRegionFlags extends Flags {
 
 		
 		if(JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
     }
 }

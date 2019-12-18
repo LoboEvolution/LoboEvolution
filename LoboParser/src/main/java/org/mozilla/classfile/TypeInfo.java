@@ -6,6 +6,8 @@
 
 package org.mozilla.classfile;
 
+import java.util.logging.Logger;
+
 /**
  * Helper class for internal representations of type information. In most
  * cases, type information can be represented by a constant, but in some
@@ -14,6 +16,9 @@ package org.mozilla.classfile;
  * always in bits 0-7.
  */
 final class TypeInfo {
+
+  private static final Logger logger = Logger.getLogger(TypeInfo.class.getName());
+	
   private TypeInfo() { }
 
   static final int TOP = 0;
@@ -233,10 +238,7 @@ final class TypeInfo {
 
   static void print(int[] locals, int localsTop, int[] stack, int stackTop,
       ConstantPool pool) {
-    System.out.print("locals: ");
-    System.out.println(toString(locals, localsTop, pool));
-    System.out.print("stack: ");
-    System.out.println(toString(stack, stackTop, pool));
-    System.out.println();
+    logger.info("locals: "+toString(locals, localsTop, pool));
+    logger.info("stack: "+ toString(stack, stackTop, pool));
   }
 }

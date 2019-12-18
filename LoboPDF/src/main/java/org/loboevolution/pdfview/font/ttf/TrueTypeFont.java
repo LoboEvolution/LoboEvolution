@@ -29,6 +29,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
@@ -39,6 +40,7 @@ import org.loboevolution.pdfview.PDFDebugger;
  */
 public class TrueTypeFont {
 
+	private static final Logger logger = Logger.getLogger(TrueTypeFont.class.getName());
     private final int type;
     // could be a ByteBuffer or a TrueTypeTable
 
@@ -403,11 +405,11 @@ public class TrueTypeFont {
 	public String toString () {
         StringBuffer buf = new StringBuffer ();
 
-        System.out.println ("Type         : " + getType ());
-        System.out.println ("NumTables    : " + getNumTables ());
-        System.out.println ("SearchRange  : " + getSearchRange ());
-        System.out.println ("EntrySelector: " + getEntrySelector ());
-        System.out.println ("RangeShift   : " + getRangeShift ());
+        logger.info ("Type         : " + getType ());
+        logger.info ("NumTables    : " + getNumTables ());
+        logger.info ("SearchRange  : " + getSearchRange ());
+        logger.info ("EntrySelector: " + getEntrySelector ());
+        logger.info ("RangeShift   : " + getRangeShift ());
 
         for (Iterator<Map.Entry<String, Object>> i = this.tables.entrySet ().iterator (); i.hasNext ();) {
             Map.Entry<String, Object> e = i.next ();
@@ -419,7 +421,7 @@ public class TrueTypeFont {
                 table = (TrueTypeTable) e.getValue ();
             }
 
-            System.out.println (table);
+            logger.info (table);
         }
 
         return buf.toString ();
@@ -439,8 +441,8 @@ public class TrueTypeFont {
      */
     public static void main (String[] args) {
         if (args.length != 1) {
-            System.out.println ("Usage: ");
-            System.out.println ("    TrueTypeParser <filename>");
+            logger.info ("Usage: ");
+            logger.info ("    TrueTypeParser <filename>");
             System.exit (-1);
         }
 
@@ -454,7 +456,7 @@ public class TrueTypeFont {
 
             TrueTypeFont ttp = TrueTypeFont.parseFont (data);
 
-            System.out.println (ttp);
+            logger.info (ttp);
 
             InputStream fontStream = new ByteArrayInputStream (ttp.writeFont ());
 

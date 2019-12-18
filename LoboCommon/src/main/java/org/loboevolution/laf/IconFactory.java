@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 
@@ -33,6 +34,8 @@ import org.loboevolution.common.IORoutines;
  * A factory for creating Icon objects.
  */
 public class IconFactory {
+
+    private final static Logger LOGGER = Logger.getLogger(IconFactory.class.getName());
 
 	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();
@@ -69,7 +72,7 @@ public class IconFactory {
 				if (icon == null) {
 					InputStream in = this.getClass().getResourceAsStream(resourcePath);
 					if (in == null) {
-						System.out.println("getIcon(): Resource path " + resourcePath + " not found.");
+						LOGGER.info("getIcon(): Resource path " + resourcePath + " not found.");
 						return null;
 					}
 					try {

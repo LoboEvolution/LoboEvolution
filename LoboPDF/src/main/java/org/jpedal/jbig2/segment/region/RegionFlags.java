@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.region;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class RegionFlags extends Flags {
 
+	private static final Logger logger = Logger.getLogger(RegionFlags.class.getName());
 	public static String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
 
 	public void setFlags(int flagsAsInt) {
@@ -63,6 +66,6 @@ public class RegionFlags extends Flags {
 		flags.put(EXTERNAL_COMBINATION_OPERATOR, new Integer(flagsAsInt & 7));
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }

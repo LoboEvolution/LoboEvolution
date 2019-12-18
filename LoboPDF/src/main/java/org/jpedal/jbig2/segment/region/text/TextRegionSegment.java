@@ -53,6 +53,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.HuffmanDecoder;
@@ -66,6 +67,8 @@ import org.jpedal.jbig2.segment.symboldictionary.SymbolDictionarySegment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
 public class TextRegionSegment extends RegionSegment {
+	
+	private static final Logger logger = Logger.getLogger(TextRegionSegment.class.getName());
 	private TextRegionFlags textRegionFlags = new TextRegionFlags();
 
 	private TextRegionHuffmanFlags textRegionHuffmanFlags = new TextRegionHuffmanFlags();
@@ -82,7 +85,7 @@ public class TextRegionSegment extends RegionSegment {
 
 	public void readSegment() throws IOException, JBIG2Exception {
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("==== Reading Text Region ====");
+			logger.info("==== Reading Text Region ====");
 
 		super.readSegment();
 
@@ -94,7 +97,7 @@ public class TextRegionSegment extends RegionSegment {
 		int noOfSymbolInstances = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("noOfSymbolInstances = " + noOfSymbolInstances);
+			logger.info("noOfSymbolInstances = " + noOfSymbolInstances);
 
 		int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
 		int[] referredToSegments = segmentHeader.getReferredToSegments();
@@ -104,7 +107,7 @@ public class TextRegionSegment extends RegionSegment {
 		int noOfSymbols = 0;
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("noOfReferredToSegments = " + noOfReferredToSegments);
+			logger.info("noOfReferredToSegments = " + noOfReferredToSegments);
 
 		for (int i = 0; i < noOfReferredToSegments; i++) {
 			Segment seg = decoder.findSegment(referredToSegments[i]);
@@ -303,7 +306,7 @@ public class TextRegionSegment extends RegionSegment {
 			JBIG2Bitmap pageBitmap = pageSegment.getPageBitmap();
 
 			if (JBIG2StreamDecoder.debug)
-				System.out.println(pageBitmap + " " + bitmap);
+				logger.info(pageBitmap + " " + bitmap);
 
 			int externalCombinationOperator = regionFlags.getFlagValue(RegionFlags.EXTERNAL_COMBINATION_OPERATOR);
 			pageBitmap.combine(bitmap, regionBitmapXLocation, regionBitmapYLocation, externalCombinationOperator);
@@ -324,7 +327,7 @@ public class TextRegionSegment extends RegionSegment {
 		textRegionFlags.setFlags(flags);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("text region Segment flags = " + flags);
+			logger.info("text region Segment flags = " + flags);
 
 		boolean sbHuff = textRegionFlags.getFlagValue(TextRegionFlags.SB_HUFF) != 0;
 		if (sbHuff) {
@@ -336,7 +339,7 @@ public class TextRegionSegment extends RegionSegment {
 			textRegionHuffmanFlags.setFlags(flags);
 
 			if (JBIG2StreamDecoder.debug)
-				System.out.println("text region segment Huffman flags = " + flags);
+				logger.info("text region segment Huffman flags = " + flags);
 		}
 
 		boolean sbRefine = textRegionFlags.getFlagValue(TextRegionFlags.SB_REFINE) != 0;

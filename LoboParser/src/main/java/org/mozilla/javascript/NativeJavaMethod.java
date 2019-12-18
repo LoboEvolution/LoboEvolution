@@ -10,6 +10,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Logger;
 
 /**
  * This class reflects Java methods into the JavaScript environment and
@@ -24,6 +25,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class NativeJavaMethod extends BaseFunction
 {
     private static final long serialVersionUID = -3440381785576412928L;
+    
+    private static final Logger logger = Logger.getLogger(NativeJavaMethod.class.getName());
 
     NativeJavaMethod(MemberBox[] methods)
     {
@@ -550,7 +553,7 @@ public class NativeJavaMethod extends BaseFunction
             sb.append(" for arguments (");
             sb.append(scriptSignature(args));
             sb.append(')');
-            System.out.println(sb);
+            logger.info(sb.toString());
         }
     }
 

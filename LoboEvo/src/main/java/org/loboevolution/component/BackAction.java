@@ -2,6 +2,7 @@ package org.loboevolution.component;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
@@ -15,6 +16,8 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
 public class BackAction extends AbstractAction {
+
+    private final static Logger logger = Logger.getLogger(BackAction.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +40,7 @@ public class BackAction extends AbstractAction {
 		
 		for (int i = 0; i < tabsById.size(); i++) {
 			String tab = tabsById.get(i);
-			System.out.println(tab + " " + i);
+			logger.info(tab + " " + i);
 			if(tab.equals(url) && i > 0) {
 				text = tabsById.get(i - 1);
 			}

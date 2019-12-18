@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 /**
  * Map to associate non-negative integers to objects or integers.
@@ -24,6 +25,8 @@ import java.io.Serializable;
 public class UintMap implements Serializable
 {
     private static final long serialVersionUID = 4242698212885848444L;
+    
+    private static final Logger logger = Logger.getLogger(UintMap.class.getName());
 
 // Map implementation via hashtable,
 // follows "The Art of Computer Programming" by Donald E. Knuth
@@ -562,7 +565,7 @@ public class UintMap implements Serializable
         }
         checkSameMaps(map, (UintMap)writeAndRead(map));
 
-        System.out.println(); System.out.flush();
+        logger.info(); System.out.flush();
 
     }
 

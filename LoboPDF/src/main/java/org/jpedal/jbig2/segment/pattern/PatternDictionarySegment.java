@@ -56,9 +56,11 @@ import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class PatternDictionarySegment extends Segment {
-
+	
+	private static final Logger logger = Logger.getLogger(PatternDictionarySegment.class.getName());
 	PatternDictionaryFlags patternDictionaryFlags = new PatternDictionaryFlags();
 	private int width;
 	private int height;
@@ -78,14 +80,14 @@ public class PatternDictionarySegment extends Segment {
 		height = decoder.readByte();
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("pattern dictionary size = " + width + " , " + height);
+			logger.info("pattern dictionary size = " + width + " , " + height);
 
 		short[] buf = new short[4];
 		decoder.readByte(buf);
 		grayMax = BinaryOperation.getInt32(buf);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("grey max = " + grayMax);
+			logger.info("grey max = " + grayMax);
 
 		boolean useMMR = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_MMR) == 1;
 		int template = patternDictionaryFlags.getFlagValue(PatternDictionaryFlags.HD_TEMPLATE);
@@ -134,7 +136,7 @@ public class PatternDictionarySegment extends Segment {
 		patternDictionaryFlags.setFlags(patternDictionaryFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("pattern Dictionary flags = " + patternDictionaryFlagsField);
+			logger.info("pattern Dictionary flags = " + patternDictionaryFlagsField);
 	}
 
 	public PatternDictionaryFlags getPatternDictionaryFlags() {

@@ -60,8 +60,11 @@ import org.jpedal.jbig2.segment.region.RegionSegment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class HalftoneRegionSegment extends RegionSegment {
+	
+	private static final Logger logger = Logger.getLogger(HalftoneRegionSegment.class.getName());
 	private HalftoneRegionFlags halftoneRegionFlags = new HalftoneRegionFlags();
 
 	private boolean inlineImage;
@@ -95,7 +98,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 		int gridY = BinaryOperation.getInt32(buf);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("grid pos and size = " + gridX + ',' + gridY + ' ' + gridWidth + ',' + gridHeight);
+			logger.info("grid pos and size = " + gridX + ',' + gridY + ' ' + gridWidth + ',' + gridHeight);
 
 		buf = new short[2];
 		decoder.readByte(buf);
@@ -106,17 +109,17 @@ public class HalftoneRegionSegment extends RegionSegment {
 		int stepY = BinaryOperation.getInt16(buf);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("step size = " + stepX + ',' + stepY);
+			logger.info("step size = " + stepX + ',' + stepY);
 
 		int[] referedToSegments = segmentHeader.getReferredToSegments();
 		if (referedToSegments.length != 1) {
-			System.out.println("Error in halftone Segment. refSegs should == 1");
+			logger.info("Error in halftone Segment. refSegs should == 1");
 		}
 
 		Segment segment = decoder.findSegment(referedToSegments[0]);
 		if (segment.getSegmentHeader().getSegmentType() != Segment.PATTERN_DICTIONARY) {
 			if(JBIG2StreamDecoder.debug)
-				System.out.println("Error in halftone Segment. bad symbol dictionary reference");
+				logger.info("Error in halftone Segment. bad symbol dictionary reference");
 		}
 		
 		PatternDictionarySegment patternDictionarySegment = (PatternDictionarySegment) segment;
@@ -132,7 +135,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 		int patternHeight = bitmap.getHeight();
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("pattern size = " + patternWidth + ',' + patternHeight);
+			logger.info("pattern size = " + patternWidth + ',' + patternHeight);
 
 		boolean useMMR = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_MMR) != 0;
 		int template = halftoneRegionFlags.getFlagValue(HalftoneRegionFlags.H_TEMPLATE);
@@ -233,7 +236,7 @@ public class HalftoneRegionSegment extends RegionSegment {
 		halftoneRegionFlags.setFlags(halftoneRegionFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("generic region Segment flags = " + halftoneRegionFlagsField);
+			logger.info("generic region Segment flags = " + halftoneRegionFlagsField);
 	}
 
 	public HalftoneRegionFlags getHalftoneRegionFlags() {

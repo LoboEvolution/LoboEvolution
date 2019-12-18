@@ -1055,7 +1055,7 @@ public class HtmlParser {
 
 	private void ensureRootElement(final Node parent) {
 		if (lastRootElement == null) {
-			// System.out.println("Inserting HTML");
+		    //logger.info("Inserting HTML");
 			lastRootElement = document.createElement("HTML");
 			parent.appendChild(lastRootElement);
 		}
@@ -1077,7 +1077,7 @@ public class HtmlParser {
 			final String nodeNameTU = child.getNodeName().toUpperCase();
 			if ("BODY".equals(nodeNameTU)) {
 				lastBodyElement = child;
-				// System.out.println("Found body elem: " + child);
+				// logger.info("Found body elem: " + child);
 			} else if ("HEAD".equals(nodeNameTU)) {
 				lastHeadElement = child;
 			} else if ((child instanceof Element) && (depthAtMost(parent, 2))) {
@@ -1104,7 +1104,7 @@ public class HtmlParser {
 
 	private void ensureHeadElement(final Node parent) {
 		if (lastHeadElement == null) {
-			// System.out.println("Inserting HEAD");
+			// logger.info("Inserting HEAD");
 			lastHeadElement = document.createElement("HEAD");
 			parent.appendChild(lastHeadElement);
 		}

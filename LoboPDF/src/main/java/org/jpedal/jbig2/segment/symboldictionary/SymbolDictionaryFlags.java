@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.symboldictionary;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class SymbolDictionaryFlags extends Flags {
 
+	private static final Logger logger = Logger.getLogger(SymbolDictionaryFlags.class.getName());
 	public static String SD_HUFF = "SD_HUFF";
 	public static String SD_REF_AGG = "SD_REF_AGG";
 	public static String SD_HUFF_DH = "SD_HUFF_DH";
@@ -99,6 +102,6 @@ public class SymbolDictionaryFlags extends Flags {
 		flags.put(SD_R_TEMPLATE, new Integer((flagsAsInt >> 12) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }

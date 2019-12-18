@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.pattern;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class PatternDictionaryFlags extends Flags {
-
+	
+	private static final Logger logger = Logger.getLogger(PatternDictionaryFlags.class.getName());
 	public static String HD_MMR = "HD_MMR";
 	public static String HD_TEMPLATE = "HD_TEMPLATE";
 
@@ -67,6 +70,6 @@ public class PatternDictionaryFlags extends Flags {
 		flags.put(HD_TEMPLATE, new Integer((flagsAsInt >> 1) & 3));
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }
