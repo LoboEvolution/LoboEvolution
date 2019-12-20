@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.region.generic;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class GenericRegionFlags extends Flags {
 
+	private static final Logger logger = Logger.getLogger(GenericRegionFlags.class.getName());
 	public static String MMR = "MMR";
 	public static String GB_TEMPLATE = "GB_TEMPLATE";
 	public static String TPGDON = "TPGDON";
@@ -72,6 +75,6 @@ public class GenericRegionFlags extends Flags {
 		
 		
 		if(JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }

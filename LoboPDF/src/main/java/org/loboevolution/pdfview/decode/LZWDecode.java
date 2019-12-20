@@ -21,6 +21,7 @@ package org.loboevolution.pdfview.decode;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.util.logging.Logger;
 
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
@@ -66,7 +67,8 @@ import org.loboevolution.pdfview.PDFParseException;
  * @author Mike Wessler
  */
 public class LZWDecode {
-
+	
+	private static final Logger logger = Logger.getLogger(LZWDecode.class.getName());
     ByteBuffer buf;
     int bytepos;
     int bitpos;
@@ -159,7 +161,7 @@ public class LZWDecode {
                     this.dict[this.dictlen++] = p;
                 } else {  // not in the dictionary (should==dictlen)
                     //		    if (cW!=dictlen) {
-                    //			System.out.println("Got a bouncy code: "+cW+" (dictlen="+dictlen+")");
+                    //			logger.info("Got a bouncy code: "+cW+" (dictlen="+dictlen+")");
                     //		    }
                     byte[] p = new byte[this.dict[pW].length + 1];
                     System.arraycopy(this.dict[pW], 0, p, 0, this.dict[pW].length);

@@ -20,6 +20,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
@@ -54,6 +55,8 @@ import org.mozilla.javascript.ast.ScriptNode;
 
 public class Codegen implements Evaluator
 {
+	private static final Logger logger = Logger.getLogger(Codegen.class.getName());
+	
     @Override
     public void captureStackInfo(RhinoException ex) {
         throw new UnsupportedOperationException();
@@ -179,7 +182,7 @@ public class Codegen implements Evaluator
         transform(scriptOrFn);
 
         if (Token.printTrees) {
-            System.out.println(scriptOrFn.toStringTree(scriptOrFn));
+            logger.info(scriptOrFn.toStringTree(scriptOrFn));
         }
 
         if (returnFunction) {
@@ -2925,7 +2928,7 @@ class BodyCodegen
     private void generateIfJump(Node node, Node parent,
                                 int trueLabel, int falseLabel)
     {
-        // System.out.println("gen code for " + node.toString());
+        // logger.info("gen code for " + node.toString());
 
         int type = node.getType();
         Node child = node.getFirstChild();

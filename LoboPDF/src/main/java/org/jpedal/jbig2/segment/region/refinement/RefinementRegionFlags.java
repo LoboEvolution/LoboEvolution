@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.region.refinement;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class RefinementRegionFlags extends Flags {
-
+	
+	private static final Logger logger = Logger.getLogger(RefinementRegionFlags.class.getName());
 	public static String GR_TEMPLATE = "GR_TEMPLATE";
 	public static String TPGDON = "TPGDON";
 
@@ -67,6 +70,6 @@ public class RefinementRegionFlags extends Flags {
 		flags.put(TPGDON, new Integer((flagsAsInt >> 1) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }

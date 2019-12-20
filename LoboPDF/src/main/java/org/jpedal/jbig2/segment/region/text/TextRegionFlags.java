@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.region.text;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class TextRegionFlags extends Flags {
 
+	private static final Logger logger = Logger.getLogger(TextRegionFlags.class.getName());
 	public static String SB_HUFF = "SB_HUFF";
 	public static String SB_REFINE = "SB_REFINE";
 	public static String LOG_SB_STRIPES = "LOG_SB_STRIPES";
@@ -98,6 +101,6 @@ public class TextRegionFlags extends Flags {
 		flags.put(SB_R_TEMPLATE, new Integer((flagsAsInt >> 15) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }

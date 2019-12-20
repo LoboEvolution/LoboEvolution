@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFFile;
@@ -37,6 +38,7 @@ import org.loboevolution.pdfview.PDFObject;
  */
 public class Type1Font extends OutlineFont {
 
+	private static final Logger logger = Logger.getLogger(Type1Font.class.getName());
     String chr2name[];
     int password;
     byte[] subrs[];
@@ -585,7 +587,7 @@ public class Type1Font extends OutlineFont {
                         				flexArray[12], flexArray[13]);
                         		flexMode = false;
                         		this.sloc = 0;
-                        		//System.out.println("End Flex " + flexPt);
+                        		//logger.info("End Flex " + flexPt);
                         		break;
                         	}
                         }

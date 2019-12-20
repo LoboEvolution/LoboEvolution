@@ -58,8 +58,11 @@ import org.jpedal.jbig2.segment.region.RegionFlags;
 import org.jpedal.jbig2.segment.region.RegionSegment;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class GenericRegionSegment extends RegionSegment {
+	
+	private static final Logger logger = Logger.getLogger(GenericRegionSegment.class.getName());
     private GenericRegionFlags genericRegionFlags = new GenericRegionFlags();
 
     private boolean inlineImage;
@@ -75,7 +78,7 @@ public class GenericRegionSegment extends RegionSegment {
     public void readSegment() throws IOException, JBIG2Exception {
     	
     	if(JBIG2StreamDecoder.debug)
-    		System.out.println("==== Reading Immediate Generic Region ====");
+    		logger.info("==== Reading Immediate Generic Region ====");
     	
     	super.readSegment();
         
@@ -189,7 +192,7 @@ public class GenericRegionSegment extends RegionSegment {
         genericRegionFlags.setFlags(genericRegionFlagsField);
         
         if(JBIG2StreamDecoder.debug)
-        	System.out.println("generic region Segment flags = " + genericRegionFlagsField);
+        	logger.info("generic region Segment flags = " + genericRegionFlagsField);
     }
 
     public GenericRegionFlags getGenericRegionFlags() {

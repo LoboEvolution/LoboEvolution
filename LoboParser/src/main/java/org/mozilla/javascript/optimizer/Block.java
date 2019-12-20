@@ -9,6 +9,7 @@ import java.io.StringWriter;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.mozilla.javascript.Node;
 import org.mozilla.javascript.ObjArray;
@@ -18,11 +19,11 @@ import org.mozilla.javascript.ast.Jump;
 
 class Block
 {
+	private static final Logger logger = Logger.getLogger(Block.class.getName());
 
     private static class FatBlock
     {
-
-        private static Block[] reduceToArray(ObjToIntMap map)
+    	        private static Block[] reduceToArray(ObjToIntMap map)
         {
             Block[] result = null;
             if (!map.isEmpty()) {
@@ -76,9 +77,9 @@ class Block
 
         if (DEBUG) {
             ++debug_blockCount;
-            System.out.println("-------------------"+fn.fnode.getFunctionName()+"  "+debug_blockCount+"--------");
-            System.out.println(fn.fnode.toStringTree(fn.fnode));
-            System.out.println(toString(theBlocks, statementNodes));
+            logger.info("-------------------"+fn.fnode.getFunctionName()+"  "+debug_blockCount+"--------");
+            logger.info(fn.fnode.toStringTree(fn.fnode));
+            logger.info(toString(theBlocks, statementNodes));
         }
 
         reachingDefDataFlow(fn, statementNodes, theBlocks, varTypes);
@@ -86,12 +87,12 @@ class Block
 
         if (DEBUG) {
             for (int i = 0; i < theBlocks.length; i++) {
-                System.out.println("For block " + theBlocks[i].itsBlockID);
+                logger.info("For block " + theBlocks[i].itsBlockID);
                 theBlocks[i].printLiveOnEntrySet(fn);
             }
-            System.out.println("Variable Table, size = " + varCount);
+            logger.info("Variable Table, size = " + varCount);
             for (int i = 0; i != varCount; i++) {
-                System.out.println("["+i+"] type: "+varTypes[i]);
+                logger.info("["+i+"] type: "+varTypes[i]);
             }
         }
 
@@ -624,13 +625,13 @@ class Block
             for (int i = 0; i < fn.getVarCount(); i++) {
                 String name = fn.fnode.getParamOrVarName(i);
                 if (itsUseBeforeDefSet.get(i))
-                    System.out.println(name + " is used before def'd");
+                    logger.info(name + " is used before def'd");
                 if (itsNotDefSet.get(i))
-                    System.out.println(name + " is not def'd");
+                    logger.info(name + " is not def'd");
                 if (itsLiveOnEntrySet.get(i))
-                    System.out.println(name + " is live on entry");
+                    logger.info(name + " is live on entry");
                 if (itsLiveOnExitSet.get(i))
-                    System.out.println(name + " is live on exit");
+                    logger.info(name + " is live on exit");
             }
         }
     }

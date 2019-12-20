@@ -20,9 +20,11 @@ package org.loboevolution.pdfview;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.logging.Logger;
 
 public class HexDump {
-
+	
+	private static final Logger logger = Logger.getLogger(HexDump.class.getName());
     public static void printData(byte[] data) {
         char[] parts = new char[17];
         int partsloc = 0;
@@ -40,32 +42,32 @@ public class HexDump {
                 int end = Integer.toHexString(i).length();
 
                 for (int j = start; j > end; j--) {
-                    System.out.print("0");
+                	logger.info("0");
                 }
-                System.out.print(Integer.toHexString(i) + ": ");
+                logger.info(Integer.toHexString(i) + ": ");
             }
             if (d < 16) {
-                System.out.print("0" + Integer.toHexString(d));
+            	logger.info("0" + Integer.toHexString(d));
             } else {
-                System.out.print(Integer.toHexString(d));
+            	logger.info(Integer.toHexString(d));
             }
             if ((i & 15) == 15 || i == data.length - 1) {
-                System.out.println("      " + new String(parts));
+                logger.info("      " + new String(parts));
                 partsloc = 0;
             } else if ((i & 7) == 7) {
-                System.out.print("  ");
+            	logger.info("  ");
                 parts[partsloc++] = ' ';
             } else if ((i & 1) == 1) {
-                System.out.print(" ");
+            	logger.info(" ");
             }
         }
-        System.out.println();
+        logger.info();
     }
 
     public static void main(String args[]) {
         if (args.length != 1) {
-            System.out.println("Usage: ");
-            System.out.println("    HexDump <filename>");
+            logger.info("Usage: ");
+            logger.info("    HexDump <filename>");
             System.exit(-1);
         }
 

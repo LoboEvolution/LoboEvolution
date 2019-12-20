@@ -7,6 +7,7 @@
 package org.mozilla.javascript.regexp;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
@@ -38,7 +39,9 @@ import org.mozilla.javascript.Undefined;
 public class NativeRegExp extends IdScriptableObject implements Function
 {
     private static final long serialVersionUID = 4965263491464903264L;
-
+    
+    private static final Logger logger = Logger.getLogger(NativeRegExp.class.getName());
+    
     private static final Object REGEXP_TAG = new Object();
 
     public static final int JSREG_GLOB = 0x1;       // 'g' flag: global
@@ -309,7 +312,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         CompilerState state = new CompilerState(cx, regexp.source, length, flags);
         if (flat && length > 0) {
             if (debug) {
-                System.out.println("flat = \"" + str + "\"");
+               logger.info("flat = \"" + str + "\"");
             }
             state.result = new RENode(REOP_FLAT);
             state.result.chr = state.cpbegin[0];
@@ -339,12 +342,11 @@ public class NativeRegExp extends IdScriptableObject implements Function
         regexp.program[endPC++] = REOP_END;
 
         if (debug) {
-            System.out.println("Prog. length = " + endPC);
+           logger.info("Prog. length = " + endPC);
             for (int i = 0; i < endPC; i++) {
                 System.out.print(regexp.program[i]);
                 if (i < (endPC - 1)) System.out.print(", ");
             }
-            System.out.println();
         }
         regexp.parenCount = state.parenCount;
 
@@ -376,7 +378,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
         if (debug) {
             if (regexp.anchorCh >= 0) {
-                System.out.println("Anchor ch = '" + (char)regexp.anchorCh + "'");
+               logger.info("Anchor ch = '" + (char)regexp.anchorCh + "'");
             }
         }
         return regexp;

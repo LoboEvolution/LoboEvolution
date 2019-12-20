@@ -6,6 +6,8 @@
 
 package org.mozilla.classfile;
 
+import java.util.logging.Logger;
+
 /**
  * A super block is defined as a contiguous chunk of code with a single entry
  * point and multiple exit points (therefore ending in an unconditional jump
@@ -14,6 +16,9 @@ package org.mozilla.classfile;
  * start.
  */
 final class SuperBlock {
+	
+	private static final Logger logger = Logger.getLogger(SuperBlock.class.getName());
+	
   SuperBlock(int index, int start, int end, int[] initialLocals) {
     this.index = index;
     this.start = start;
@@ -92,10 +97,10 @@ final class SuperBlock {
       return localsChanged || stackChanged;
     } else {
       if (ClassFileWriter.StackMapTable.DEBUGSTACKMAP) {
-        System.out.println("bad merge");
-        System.out.println("current type state:");
+        logger.info("bad merge");
+        logger.info("current type state:");
         TypeInfo.print(this.locals, this.stack, pool);
-        System.out.println("incoming type state:");
+        logger.info("incoming type state:");
         TypeInfo.print(locals, localsTop, stack, stackTop, pool);
       }
       throw new IllegalArgumentException("bad merge attempt");

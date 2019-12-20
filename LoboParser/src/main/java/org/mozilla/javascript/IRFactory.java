@@ -8,6 +8,7 @@ package org.mozilla.javascript;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.mozilla.javascript.ast.ArrayComprehension;
 import org.mozilla.javascript.ast.ArrayComprehensionLoop;
@@ -80,6 +81,8 @@ import org.mozilla.javascript.ast.Yield;
  */
 public final class IRFactory extends Parser
 {
+	private static final Logger logger = Logger.getLogger(IRFactory.class.getName());
+	
     private static final int LOOP_DO_WHILE = 0;
     private static final int LOOP_WHILE    = 1;
     private static final int LOOP_FOR      = 2;
@@ -111,8 +114,8 @@ public final class IRFactory extends Parser
         int sourceStartOffset = decompiler.getCurrentOffset();
 
         if (Token.printTrees) {
-            System.out.println("IRFactory.transformTree");
-            System.out.println(root.debugPrint());
+            logger.info("IRFactory.transformTree");
+            logger.info(root.debugPrint());
         }
         ScriptNode script = (ScriptNode)transform(root);
 

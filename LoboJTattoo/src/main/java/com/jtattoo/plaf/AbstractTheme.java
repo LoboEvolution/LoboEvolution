@@ -29,6 +29,7 @@ import java.awt.RenderingHints;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.plaf.ColorUIResource;
@@ -37,6 +38,8 @@ import javax.swing.plaf.metal.MetalTheme;
 
 public abstract class AbstractTheme extends MetalTheme {
 
+	private static final Logger logger = Logger.getLogger(AbstractTheme.class.getName());
+	
 	public static final int TEXT_ANTIALIAS_DEFAULT = 0;
 	public static final int TEXT_ANTIALIAS_GRAY = 1;
 	public static final int TEXT_ANTIALIAS_HRGB = 2;
@@ -217,7 +220,7 @@ public abstract class AbstractTheme extends MetalTheme {
 				}
 				return new ColorUIResource(r, g, b);
 			} catch (NumberFormatException ex) {
-				System.out.println("Exception while parsing color property: " + colorProp);
+				logger.severe("Exception while parsing color property: " + colorProp);
 			}
 		}
 		return color;
@@ -235,7 +238,7 @@ public abstract class AbstractTheme extends MetalTheme {
 		try {
 			val = Integer.parseInt(intProp);
 		} catch (NumberFormatException ex) {
-			System.out.println("Exception while parsing int property: " + intProp);
+			logger.severe("Exception while parsing int property: " + intProp);
 		}
 		return val;
 	}

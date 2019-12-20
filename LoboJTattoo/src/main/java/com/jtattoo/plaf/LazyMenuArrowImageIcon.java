@@ -26,6 +26,7 @@ package com.jtattoo.plaf;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -35,6 +36,8 @@ import javax.swing.ImageIcon;
  * @author Michael Hagen
  */
 public class LazyMenuArrowImageIcon implements Icon {
+	
+	private static final Logger logger = Logger.getLogger(LazyMenuArrowImageIcon.class.getName());
 
 	private String leftToRightName = null;
 	private String rightToLefttName = null;
@@ -79,7 +82,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 			try {
 				leftToRightIcon = new ImageIcon(LazyMenuArrowImageIcon.class.getResource(leftToRightName));
 			} catch (Throwable t) {
-				System.out.println("ERROR: loading image " + leftToRightName + " failed!");
+				logger.severe("ERROR: loading image " + leftToRightName + " failed!");
 			}
 		}
 		return leftToRightIcon;
@@ -90,7 +93,7 @@ public class LazyMenuArrowImageIcon implements Icon {
 			try {
 				rightToLeftIcon = new ImageIcon(LazyMenuArrowImageIcon.class.getResource(rightToLefttName));
 			} catch (Throwable t) {
-				System.out.println("ERROR: loading image " + rightToLefttName + " failed!");
+				logger.severe("ERROR: loading image " + rightToLefttName + " failed!");
 			}
 		}
 		return rightToLeftIcon;

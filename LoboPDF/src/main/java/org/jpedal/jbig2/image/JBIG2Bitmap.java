@@ -56,6 +56,7 @@ import java.awt.image.DataBufferByte;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.ArithmeticDecoder;
@@ -66,7 +67,8 @@ import org.jpedal.jbig2.decoders.MMRDecoder;
 import org.jpedal.jbig2.util.BinaryOperation;
 
 public final class JBIG2Bitmap {
-
+	
+	private static final Logger logger = Logger.getLogger(JBIG2Bitmap.class.getName());
 	private int width, height, line;
 	private int bitmapNumber;
 	public FastBitSet data;
@@ -234,7 +236,7 @@ public final class JBIG2Bitmap {
 						break;
 					default:
 						if (JBIG2StreamDecoder.debug)
-							System.out.println("Illegal code in JBIG2 MMR bitmap data");
+							logger.info("Illegal code in JBIG2 MMR bitmap data");
 
 						break;
 					}
@@ -254,7 +256,7 @@ public final class JBIG2Bitmap {
 			} else {
 				if (mmrDecoder.get24Bits() != 0x001001) {
 					if (JBIG2StreamDecoder.debug)
-						System.out.println("Missing EOFB in JBIG2 MMR bitmap data");
+						logger.info("Missing EOFB in JBIG2 MMR bitmap data");
 				}
 			}
 
@@ -705,7 +707,7 @@ public final class JBIG2Bitmap {
 
 				if (symbolID >= noOfSymbols) {
 					if (JBIG2StreamDecoder.debug)
-						System.out.println("Invalid symbol number in JBIG2 text region");
+						logger.info("Invalid symbol number in JBIG2 text region");
 				} else {
 					symbolBitmap = null;
 
@@ -1041,12 +1043,12 @@ public final class JBIG2Bitmap {
 //		
 //		//ShowGUIMessage.showGUIMessage("x", this.getBufferedImage(), "xx");
 //		
-//		System.out.println(">>> getSlice x = "+x+" y = "+y+ " width = "+width+ " height = "+height);
-//		System.out.println(">>> baseImage width = "+this.width+ " height = "+this.height);
+//		logger.info(">>> getSlice x = "+x+" y = "+y+ " width = "+width+ " height = "+height);
+//		logger.info(">>> baseImage width = "+this.width+ " height = "+this.height);
 //		
-//		System.out.println("counter = "+counter);
+//		logger.info("counter = "+counter);
 //		if(counter == 17){
-//			System.out.println();
+//			logger.info();
 //			//ShowGUIMessage.showGUIMessage("x", this.getBufferedImage(), "xx");
 //		}
 //		
@@ -1072,7 +1074,7 @@ public final class JBIG2Bitmap {
 /*		int sliceRow = 0, sliceCol = 0;
 		for (int row = y; row < height; row++) {
 			for (int col = x; col < x + width; col++) {
-				//System.out.println("row = "+row +" column = "+col);
+				//logger.info("row = "+row +" column = "+col);
 				//slice.setPixel(sliceCol, sliceRow, getPixel(col, row));
 				slice.data.set(sliceRow*slice.width + sliceCol, data.get(row*this.width + col));
 				sliceCol++;
@@ -1131,7 +1133,7 @@ public final class JBIG2Bitmap {
 	}
 	
 	public void expand(int newHeight, int defaultPixel) {
-//		System.out.println("expand FastBitSet");
+//		logger.info("expand FastBitSet");
 //		FastBitSet newData = new FastBitSet(width, newHeight);
 //
 //		for (int row = 0; row < height; row++) {

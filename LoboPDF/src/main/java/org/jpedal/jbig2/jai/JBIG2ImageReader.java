@@ -60,6 +60,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
@@ -73,7 +74,8 @@ import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
 
 public class JBIG2ImageReader extends ImageReader {
-
+	
+	private static final Logger logger = Logger.getLogger(JBIG2ImageReader.class.getName());
 	private JBIG2Decoder decoder;
 	private ImageInputStream stream;
 	private boolean readFile;
@@ -445,7 +447,7 @@ public class JBIG2ImageReader extends ImageReader {
 					// System.err.println("index="+index);
 					System.err.println(((yy + (y * sampling)) * origLineLength) + " " + (((x * sampling) + (xx * comp) + jj)));
 					System.err.println("w=" + w + " h=" + h + " sampling=" + sampling + " x=" + x + " y=" + y);
-					// System.out.println("xx="+xx+" yy="+yy);
+					// logger.info("xx="+xx+" yy="+yy);
 					e.printStackTrace();
 					// <end-demo><end-full>
 				}
@@ -455,7 +457,7 @@ public class JBIG2ImageReader extends ImageReader {
 		if (sampling > 1) {
 			final int[] bands = { 0 };
 
-			// System.out.println("w=" + w + " h=" + h + " size=" +
+			// logger.info("w=" + w + " h=" + h + " size=" +
 			// data.length);
 			// WritableRaster raster =Raster.createPackedRaster(new
 			// DataBufferByte(newData, newData.length), newW, newH, 1, null);

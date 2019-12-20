@@ -6,6 +6,8 @@
 
 package org.mozilla.javascript;
 
+import java.util.logging.Logger;
+
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
 import org.mozilla.javascript.ast.ScriptNode;
@@ -15,6 +17,8 @@ import org.mozilla.javascript.ast.ScriptNode;
  */
 class CodeGenerator extends Icode {
 
+	private static final Logger logger = Logger.getLogger(CodeGenerator.class.getName());
+	
     private static final int MIN_LABEL_TABLE_SIZE = 32;
     private static final int MIN_FIXUP_TABLE_SIZE = 40;
 
@@ -54,15 +58,15 @@ class CodeGenerator extends Icode {
         this.compilerEnv = compilerEnv;
 
         if (Token.printTrees) {
-            System.out.println("before transform:");
-            System.out.println(tree.toStringTree(tree));
+           logger.info("before transform:");
+           logger.info(tree.toStringTree(tree));
         }
 
         new NodeTransformer().transform(tree, compilerEnv);
 
         if (Token.printTrees) {
-            System.out.println("after transform:");
-            System.out.println(tree.toStringTree(tree));
+           logger.info("after transform:");
+           logger.info(tree.toStringTree(tree));
         }
 
         if (returnFunction) {

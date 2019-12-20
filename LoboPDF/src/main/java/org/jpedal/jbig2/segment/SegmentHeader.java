@@ -49,10 +49,13 @@
 */
 package org.jpedal.jbig2.segment;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 
 public class SegmentHeader {
 
+	private static final Logger logger = Logger.getLogger(SegmentHeader.class.getName());
 	private int segmentNumber;
 
 	private int segmentType;
@@ -76,9 +79,9 @@ public class SegmentHeader {
 		deferredNonRetainSet = (SegmentHeaderFlags & 80) == 80; // 64 = 10000000
 
 		if (JBIG2StreamDecoder.debug) {
-			System.out.println("SegmentType = " + segmentType);
-			System.out.println("pageAssociationSizeSet = " + pageAssociationSizeSet);
-			System.out.println("deferredNonRetainSet = " + deferredNonRetainSet);
+			logger.info("SegmentType = " + segmentType);
+			logger.info("pageAssociationSizeSet = " + pageAssociationSizeSet);
+			logger.info("deferredNonRetainSet = " + deferredNonRetainSet);
 		}
 	}
 

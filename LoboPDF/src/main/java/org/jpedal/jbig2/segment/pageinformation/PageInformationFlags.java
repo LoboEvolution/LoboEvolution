@@ -49,11 +49,14 @@
 */
 package org.jpedal.jbig2.segment.pageinformation;
 
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Flags;
 
 public class PageInformationFlags extends Flags {
 
+	private static final Logger logger = Logger.getLogger(PageInformationFlags.class.getName());
 	public static String DEFAULT_PIXEL_VALUE = "DEFAULT_PIXEL_VALUE";
 	public static String DEFAULT_COMBINATION_OPERATOR = "DEFAULT_COMBINATION_OPERATOR";
 
@@ -67,6 +70,6 @@ public class PageInformationFlags extends Flags {
 		flags.put(DEFAULT_COMBINATION_OPERATOR, new Integer((flagsAsInt >> 3) & 3));
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println(flags);
+			logger.info(flags);
 	}
 }

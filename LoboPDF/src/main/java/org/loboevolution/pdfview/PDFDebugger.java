@@ -8,10 +8,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
 public class PDFDebugger {
+	
+	private static final Logger logger = Logger.getLogger(PDFDebugger.class.getName());
     public final static String DEBUG_DCTDECODE_DATA = "debugdctdecode";
     public static final boolean DEBUG_TEXT = false;
     public static final boolean DEBUG_IMAGES = false;
@@ -56,7 +59,7 @@ public class PDFDebugger {
     // TODO: add debug level and print it? 
     public static void debug(String msg, int level) {
         if (level > debuglevel) {
-            System.out.println(escape(msg));
+            logger.info(escape(msg));
         }
     }
 
@@ -89,15 +92,15 @@ public class PDFDebugger {
     public static void logPath(GeneralPath path, String operation) {
         if (PDFDebugger.DEBUG_PATH){
             if (operation != null) {
-                System.out.println("Operation: " + operation + "; ");
+                logger.info("Operation: " + operation + "; ");
             }
-            System.out.println("Current path: ");
+            logger.info("Current path: ");
             Rectangle b = path.getBounds();
             if (b != null)
-                System.out.println("        Bounds [x=" + b.x + ",y=" + b.y + ",width=" + b.width + ",height=" + b.height + "]");
+                logger.info("        Bounds [x=" + b.x + ",y=" + b.y + ",width=" + b.width + ",height=" + b.height + "]");
             Point2D p = path.getCurrentPoint();
             if (p != null)
-                System.out.println("        Point  [x=" + p.getX() + ",y=" + p.getY() + "]");
+                logger.info("        Point  [x=" + p.getX() + ",y=" + p.getY() + "]");
         }
     }
 

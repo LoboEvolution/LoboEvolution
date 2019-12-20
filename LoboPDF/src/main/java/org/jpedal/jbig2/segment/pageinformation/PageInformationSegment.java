@@ -56,9 +56,11 @@ import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class PageInformationSegment extends Segment {
 
+	private static final Logger logger = Logger.getLogger(PageInformationSegment.class.getName());
 	private int pageBitmapHeight, pageBitmapWidth;
 	private int yResolution, xResolution;
 
@@ -82,7 +84,7 @@ public class PageInformationSegment extends Segment {
 	public void readSegment() throws IOException, JBIG2Exception {
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("==== Reading Page Information Dictionary ====");
+			logger.info("==== Reading Page Information Dictionary ====");
 
 		short[] buff = new short[4];
 		decoder.readByte(buff);
@@ -93,7 +95,7 @@ public class PageInformationSegment extends Segment {
 		pageBitmapHeight = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("Bitmap size = " + pageBitmapWidth + 'x' + pageBitmapHeight);
+			logger.info("Bitmap size = " + pageBitmapWidth + 'x' + pageBitmapHeight);
 
 		buff = new short[4];
 		decoder.readByte(buff);
@@ -104,7 +106,7 @@ public class PageInformationSegment extends Segment {
 		yResolution = BinaryOperation.getInt32(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("Resolution = " + xResolution + 'x' + yResolution);
+			logger.info("Resolution = " + xResolution + 'x' + yResolution);
 
 		/** extract page information flags */
 		short pageInformationFlagsField = decoder.readByte();
@@ -112,14 +114,14 @@ public class PageInformationSegment extends Segment {
 		pageInformationFlags.setFlags(pageInformationFlagsField);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("symbolDictionaryFlags = " + pageInformationFlagsField);
+			logger.info("symbolDictionaryFlags = " + pageInformationFlagsField);
 
 		buff = new short[2];
 		decoder.readByte(buff);
 		pageStriping = BinaryOperation.getInt16(buff);
 
 		if (JBIG2StreamDecoder.debug)
-			System.out.println("Page Striping = " + pageStriping);
+			logger.info("Page Striping = " + pageStriping);
 
 		int defPix = pageInformationFlags.getFlagValue(PageInformationFlags.DEFAULT_PIXEL_VALUE);
 
