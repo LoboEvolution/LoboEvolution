@@ -70,6 +70,6 @@ public class PatternDictionaryFlags extends Flags {
 		flags.put(HD_TEMPLATE, new Integer((flagsAsInt >> 1) & 3));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

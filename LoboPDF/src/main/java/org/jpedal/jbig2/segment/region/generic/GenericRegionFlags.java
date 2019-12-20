@@ -75,6 +75,6 @@ public class GenericRegionFlags extends Flags {
 		
 		
 		if(JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

@@ -66,6 +66,6 @@ public class RegionFlags extends Flags {
 		flags.put(EXTERNAL_COMBINATION_OPERATOR, new Integer(flagsAsInt & 7));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

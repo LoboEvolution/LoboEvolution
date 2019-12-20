@@ -70,6 +70,6 @@ public class PageInformationFlags extends Flags {
 		flags.put(DEFAULT_COMBINATION_OPERATOR, new Integer((flagsAsInt >> 3) & 3));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

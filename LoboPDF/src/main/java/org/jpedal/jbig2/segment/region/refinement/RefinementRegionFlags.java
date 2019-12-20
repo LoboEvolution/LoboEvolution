@@ -70,6 +70,6 @@ public class RefinementRegionFlags extends Flags {
 		flags.put(TPGDON, new Integer((flagsAsInt >> 1) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

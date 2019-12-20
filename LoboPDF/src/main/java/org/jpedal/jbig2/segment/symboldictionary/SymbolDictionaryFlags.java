@@ -102,6 +102,6 @@ public class SymbolDictionaryFlags extends Flags {
 		flags.put(SD_R_TEMPLATE, new Integer((flagsAsInt >> 12) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

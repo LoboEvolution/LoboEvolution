@@ -421,7 +421,7 @@ public class TrueTypeFont {
                 table = (TrueTypeTable) e.getValue ();
             }
 
-            logger.info (table);
+            logger.info("table: " + table);
         }
 
         return buf.toString ();
@@ -456,7 +456,7 @@ public class TrueTypeFont {
 
             TrueTypeFont ttp = TrueTypeFont.parseFont (data);
 
-            logger.info (ttp);
+            logger.info ("ttp: " + ttp);
 
             InputStream fontStream = new ByteArrayInputStream (ttp.writeFont ());
 

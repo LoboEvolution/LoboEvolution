@@ -94,6 +94,6 @@ public class TextRegionHuffmanFlags extends Flags {
 		flags.put(SB_HUFF_RSIZE, new Integer((flagsAsInt >> 14) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

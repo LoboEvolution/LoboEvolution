@@ -101,6 +101,6 @@ public class TextRegionFlags extends Flags {
 		flags.put(SB_R_TEMPLATE, new Integer((flagsAsInt >> 15) & 1));
 
 		if (JBIG2StreamDecoder.debug)
-			logger.info(flags);
+			logger.info("flags: " + flags);
 	}
 }

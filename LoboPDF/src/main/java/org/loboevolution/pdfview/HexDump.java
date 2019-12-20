@@ -61,7 +61,6 @@ public class HexDump {
             	logger.info(" ");
             }
         }
-        logger.info();
     }
 
     public static void main(String args[]) {
