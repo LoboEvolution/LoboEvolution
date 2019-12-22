@@ -247,6 +247,31 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 *            the new text baseline
 	 */
 	void setTextBaseline(String arg);
+	
+
+	 /**
+	 * @param x             the x
+	 * @param y             the y
+	 * @param radiusX       the radiusX
+	 * @param radiusY       the radiusY
+	 * @param rotation      the rotation
+	 * @param startAngle    the start angle
+	 * @param endAngle      the end angle
+	 */
+	void ellipse(int x, int y, int radiusX, int radiusY, int rotation, int startAngle, int endAngle);
+	
+	 /**
+	 * @param x             the x
+	 * @param y             the y
+	 * @param radiusX       the radiusX
+	 * @param radiusY       the radiusY
+	 * @param rotation      the rotation
+	 * @param startAngle    the start angle
+	 * @param endAngle      the end angle
+	 * @param anticlockwise is anti-clockwise
+	 */
+	void ellipse(int x, int y, int radiusX, int radiusY, int rotation, int startAngle, int endAngle, boolean anticlockwise);
+
 
 	/**
 	 * Arc.

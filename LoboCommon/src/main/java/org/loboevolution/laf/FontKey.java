@@ -54,7 +54,7 @@ public class FontKey {
 		this.superscript = null;
 		this.letterSpacing = 0;
 		this.strikethrough = false;
-		this.underline = 0;
+		this.underline = null;
 	}
 
 	/*

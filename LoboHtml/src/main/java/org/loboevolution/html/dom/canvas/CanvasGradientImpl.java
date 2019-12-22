@@ -18,10 +18,14 @@
 
     Contact info: ivan.difrancesco@yahoo.it
  */
-package org.loboevolution.html.dom.domimpl;
+package org.loboevolution.html.dom.canvas;
 
 import java.awt.Color;
+import java.awt.LinearGradientPaint;
+import java.awt.Paint;
+import java.awt.RadialGradientPaint;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.loboevolution.laf.ColorFactory;
@@ -29,9 +33,9 @@ import org.loboevolution.html.dom.CanvasGradient;
 
 
 /**
- * The Class DOMCanvasGradientImpl.
+ * The Class CanvasGradientImpl.
  */
-public class DOMCanvasGradientImpl implements CanvasGradient {
+public class CanvasGradientImpl implements CanvasGradient {
 
 	/** The fractions. */
 	private List<Float> fractions;
@@ -57,7 +61,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	/** The r2. */
 	private Double r2;
 
-	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
+	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
 		this.linearX = Double.valueOf(x0.toString());
@@ -66,7 +70,7 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 		this.linearY1 = Double.valueOf(y1.toString());
 	}
 
-	public DOMCanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
+	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
 		this.linearX = Double.valueOf(x0.toString());
@@ -81,7 +85,41 @@ public class DOMCanvasGradientImpl implements CanvasGradient {
 	public void addColorStop(String offset, String color) {
 		fractions.add(Float.valueOf(offset));
 		colors.add(ColorFactory.getInstance().getColor(color));
+	}
+	
+	
+	/**
+	 * gradient.
+	 *
+	 * @return gradient paint
+	 */
+	protected Paint gradient() {
 
+        float[] floatArray = new float[fractions.size()];
+		int i = 0;
+
+		for (Float f : fractions) {
+			floatArray[i++] = f != null ? f : Float.NaN;
+		}
+
+		Color[] colorArray = new Color[colors.size()];
+		int a = 0;
+
+		for (Color c : colors) {
+			colorArray[a++] = c;
+		}
+
+		Arrays.sort(floatArray);
+
+		if (r2 != null) {
+			return new RadialGradientPaint(linearX.floatValue(), linearY.floatValue(), r2.floatValue(),
+					linearX1.floatValue(), linearY1.floatValue(), floatArray, colorArray,
+					RadialGradientPaint.CycleMethod.NO_CYCLE);
+
+		} else {
+			return new LinearGradientPaint(linearX.floatValue(), linearX1.floatValue(), linearY.floatValue(),
+					linearY1.floatValue(), floatArray, colorArray);
+		}
 	}
 
 	/**
