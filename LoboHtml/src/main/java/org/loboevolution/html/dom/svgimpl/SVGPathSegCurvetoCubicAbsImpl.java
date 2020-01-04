@@ -1,46 +1,22 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
-import org.loboevolution.html.dom.svg.SVGPathSeg;
 import org.loboevolution.html.dom.svg.SVGPathSegCurvetoCubicAbs;
 
-public class SVGPathSegCurvetoCubicAbsImpl extends SVGPathSegImpl implements SVGPathSegCurvetoCubicAbs {
+public class SVGPathSegCurvetoCubicAbsImpl implements SVGPathSegCurvetoCubicAbs {
 
-	private static final long serialVersionUID = -6722776032077341870L;
+	private float x;
+
+	private float y;
 
 	private float x1;
-	private float x2;
+
 	private float y1;
+
+	private float x2;
+
 	private float y2;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param x1
-	 * @param y1
-	 * @param x2
-	 * @param y2
-	 */
-	public SVGPathSegCurvetoCubicAbsImpl(float x1, float y1, float x2, float y2, float x, float y) {
+	public SVGPathSegCurvetoCubicAbsImpl(float x, float y, float x1, float y1, float x2, float y2) {
 		this.x = x;
 		this.y = y;
 		this.x1 = x1;
@@ -51,13 +27,32 @@ public class SVGPathSegCurvetoCubicAbsImpl extends SVGPathSegImpl implements SVG
 
 	@Override
 	public short getPathSegType() {
-		return SVGPathSeg.PATHSEG_CURVETO_CUBIC_ABS;
+		return PATHSEG_CURVETO_CUBIC_ABS;
 	}
 
 	@Override
 	public String getPathSegTypeAsLetter() {
-
 		return "C";
+	}
+
+	@Override
+	public float getX() {
+		return x;
+	}
+
+	@Override
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	@Override
+	public float getY() {
+		return y;
+	}
+
+	@Override
+	public void setY(float y) {
+		this.y = y;
 	}
 
 	@Override

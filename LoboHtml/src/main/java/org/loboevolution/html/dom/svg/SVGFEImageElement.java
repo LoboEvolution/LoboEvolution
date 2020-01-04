@@ -23,6 +23,6 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFEImageElement extends SVGElement, SVGURIReference, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGFilterPrimitiveStandardAttributes {
 
-	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
+	SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
 
 }

@@ -22,7 +22,8 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedRect {
-	public SVGRect getBaseVal();
 
-	public SVGRect getAnimVal();
+	SVGRect getBaseVal();
+
+	SVGRect getAnimVal();
 }

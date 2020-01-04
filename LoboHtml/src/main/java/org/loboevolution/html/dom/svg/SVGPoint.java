@@ -23,13 +23,13 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGPoint {
-	public float getX();
+	float getX();
 
-	public void setX(float x) throws DOMException;
+	void setX(float x) throws DOMException;
 
-	public float getY();
+	float getY();
 
-	public void setY(float y) throws DOMException;
+	void setY(float y) throws DOMException;
 
-	public SVGPoint matrixTransform(SVGMatrix matrix);
+	SVGPoint matrixTransform(SVGMatrix matrix);
 }

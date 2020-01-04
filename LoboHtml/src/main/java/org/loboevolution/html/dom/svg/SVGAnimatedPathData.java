@@ -21,11 +21,11 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedPathData {
-	public SVGPathSegList getPathSegList();
+	SVGPathSegList getPathSegList();
 
-	public SVGPathSegList getNormalizedPathSegList();
+	SVGPathSegList getNormalizedPathSegList();
 
-	public SVGPathSegList getAnimatedPathSegList();
+	SVGPathSegList getAnimatedPathSegList();
 
-	public SVGPathSegList getAnimatedNormalizedPathSegList();
+	SVGPathSegList getAnimatedNormalizedPathSegList();
 }

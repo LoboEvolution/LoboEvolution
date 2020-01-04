@@ -1,24 +1,3 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
-
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGRect;
@@ -26,56 +5,60 @@ import org.w3c.dom.DOMException;
 
 public class SVGRectImpl implements SVGRect {
 
-	private float x;
-	private float y;
-	private float width;
-	private float height;
+	public SVGRectImpl(int i, int j, float value, float value2) {
+		// TODO Auto-generated constructor stub
+	}
 
-	public SVGRectImpl(float x, float y, float width, float height) {
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+	public SVGRectImpl() {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public float getX() {
-		return x;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public void setX(float x) throws DOMException {
-		this.x = x;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public float getY() {
-		return y;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public void setY(float y) throws DOMException {
-		this.y = y;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public float getWidth() {
-		return width;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public void setWidth(float width) throws DOMException {
-		this.width = width;
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public float getHeight() {
-		return height;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public void setHeight(float height) throws DOMException {
-		this.height = height;
+		// TODO Auto-generated method stub
+		
 	}
 
 }

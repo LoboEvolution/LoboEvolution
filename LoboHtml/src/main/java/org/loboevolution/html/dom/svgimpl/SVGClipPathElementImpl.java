@@ -1,43 +1,218 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.GeneralPath;
+import java.awt.geom.Path2D;
+
+import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.svg.Drawable;
+import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
-import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
 import org.loboevolution.html.dom.svg.SVGClipPathElement;
+import org.loboevolution.html.dom.svg.SVGElement;
+import org.loboevolution.html.dom.svg.SVGStringList;
+import org.loboevolution.html.dom.svg.SVGTransformable;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-public class SVGClipPathElementImpl extends SVGSVGElementImpl implements SVGClipPathElement {
-
+public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathElement {
+	
+	
 	public SVGClipPathElementImpl(String name) {
 		super(name);
 	}
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute("transform"));
+	public SVGStringList getRequiredFeatures() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SVGStringList getRequiredExtensions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SVGStringList getSystemLanguage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean hasExtension(String extension) {
+		if (extension.equalsIgnoreCase("svg")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public String getXMLlang() {
+		return getAttribute("xml:lang");
+	}
+
+	@Override
+	public void setXMLlang(String xmllang) throws DOMException {
+		setAttribute("xml:lang", xmllang);
+	}
+
+	@Override
+	public String getXMLspace() {
+		return getAttribute("xml:space");
+	}
+
+	@Override
+	public void setXMLspace(String xmlspace) throws DOMException {
+		setAttribute("xml:space", xmlspace);
+	}
+
+	@Override
+	public SVGAnimatedBoolean getExternalResourcesRequired() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public SVGAnimatedEnumeration getClipPathUnits() {
-		// TODO Auto-generated method stub
-		return null;
+		return new SVGAnimatedEnumerationImpl(SVG_UNIT_TYPE_USERSPACEONUSE);
 	}
+	
+	protected Shape getClippingShape(SVGElement clippedElement) {
+		Area clipArea = null;
+		AffineTransform clipTransform = new AffineTransform();
+		if (hasChildNodes()) {
+			NodeList children = getChildNodes();
+			for (Node child : Nodes.iterable(children)) {
+				if (child instanceof SVGUseElementImpl) {
+					String href = ((SVGUseElementImpl) child).getHref().getAnimVal();
+					if (href.length() > 0) {
+						int index = href.indexOf('#');
+						if (index != -1) {
+							String id = href.substring(index + 1).trim();
+							Element ref = (Element) child(id);
+							if (ref != null) {
+								Shape childShape = ((Drawable) ref).createShape(clipTransform);
+
+								if (childShape != null) {
+									AffineTransform childAffineTransform = clipTransform;
+									if (ref instanceof SVGTransformable) {
+										SVGTransformListImpl childTransform = (SVGTransformListImpl) ((SVGTransformable) ref).getTransform().getAnimVal();
+										if (childTransform != null) {
+											childAffineTransform.concatenate(childTransform.getAffineTransform());
+										}
+									}
+
+									GeneralPath path = new GeneralPath(childShape);
+									path.transform(childAffineTransform);
+									String clipRule = ((SVGStylableImpl) child).getClipRule();
+									SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
+
+									if (clipRule.equals("evenodd")) {
+										path.setWindingRule(Path2D.WIND_EVEN_ODD);
+									} else {
+										path.setWindingRule(Path2D.WIND_NON_ZERO);
+									}
+
+									Area childClipArea = new Area(path);
+									if (clipPath != null) {
+										Shape clipShape = clipPath.getClippingShape(clippedElement);
+										if (clipShape != null) {
+											childClipArea.intersect(new Area(clipShape));
+										}
+									}
+
+									if (clipArea == null) {
+										clipArea = childClipArea;
+									} else {
+										clipArea.add(childClipArea);
+									}
+								}
+							}
+						}
+					}
+				} else if (child instanceof Drawable) {
+					Shape childShape = ((Drawable) child).createShape(clipTransform);
+					if (childShape != null) {
+						AffineTransform childAffineTransform = clipTransform;
+						if (child instanceof SVGTransformable) {
+							SVGAnimatedTransformListImpl childTransform = (SVGAnimatedTransformListImpl) ((SVGTransformable) child).getTransform();
+							if (childTransform != null) {
+								childAffineTransform.concatenate(
+										((SVGTransformListImpl) childTransform.getAnimVal()).getAffineTransform());
+							}
+						}
+
+						GeneralPath path = new GeneralPath(childShape);
+						path.transform(childAffineTransform);
+
+						String clipRule = ((SVGStylableImpl) child).getClipRule();
+						SVGClipPathElementImpl clipPath = ((SVGStylableImpl) child).getClippingPath();
+
+						if (clipRule.equals("evenodd")) {
+							path.setWindingRule(Path2D.WIND_EVEN_ODD);
+						} else {
+							path.setWindingRule(Path2D.WIND_NON_ZERO);
+						}
+
+						Area childClipArea = new Area(path);
+
+						// see if child has a clipPath property
+						if (clipPath != null) {
+							Shape clipShape = clipPath.getClippingShape(clippedElement);
+							if (clipShape != null) {
+								childClipArea.intersect(new Area(clipShape));
+							}
+						}
+
+						if (clipArea == null) {
+							clipArea = childClipArea;
+						} else {
+							clipArea.add(childClipArea);
+						}
+					}
+
+				}
+			}
+		}
+
+		SVGClipPathElementImpl clipPath = getClippingPath();
+		getClipRule();
+
+		if (clipPath != null) {
+			Shape clipShape = clipPath.getClippingShape(clippedElement);
+			if (clipShape != null) {
+				if (clipArea == null) {
+					clipArea = new Area(clipShape);
+				} else {
+					clipArea.intersect(new Area(clipShape));
+				}
+			}
+		}
+
+		if (clipArea != null) {
+			Shape clipShape = clipArea;
+			if (getClipPathUnits().getAnimVal() == SVG_UNIT_TYPE_OBJECTBOUNDINGBOX) {
+				SVGRectImpl bbox = null;
+				if (clippedElement instanceof SVGTransformable) {
+					bbox = (SVGRectImpl) ((SVGTransformable) clippedElement).getBBox();
+				} else if (clippedElement instanceof SVGSVGElementImpl) {
+					bbox = (SVGRectImpl) ((SVGSVGElementImpl) clippedElement).getBBox();
+				}
+				if (bbox != null) {
+					AffineTransform clipTrans = AffineTransform.getTranslateInstance(bbox.getX(), bbox.getY());
+					clipTrans.scale(bbox.getWidth(), bbox.getHeight());
+					clipShape = clipTrans.createTransformedShape(clipShape);
+					return clipShape;
+				}
+			}
+		}
+		return clipArea;
+	}	
 }

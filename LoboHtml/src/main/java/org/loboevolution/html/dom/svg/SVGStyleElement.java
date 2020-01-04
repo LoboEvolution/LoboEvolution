@@ -23,19 +23,19 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGStyleElement extends SVGElement {
-	public String getXMLspace();
+	String getXMLspace();
 
-	public void setXMLspace(String xmlspace) throws DOMException;
+	void setXMLspace(String xmlspace) throws DOMException;
 
-	public String getType();
+	String getType();
 
-	public void setType(String type) throws DOMException;
+	void setType(String type) throws DOMException;
 
-	public String getMedia();
+	String getMedia();
 
-	public void setMedia(String media) throws DOMException;
+	void setMedia(String media) throws DOMException;
 
-	public String getTitle();
+	String getTitle();
 
-	public void setTitle(String title) throws DOMException;
+	void setTitle(String title) throws DOMException;
 }

@@ -21,9 +21,9 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFEPointLightElement extends SVGElement {
-	public SVGAnimatedNumber getX();
+	SVGAnimatedNumber getX();
 
-	public SVGAnimatedNumber getY();
+	SVGAnimatedNumber getY();
 
-	public SVGAnimatedNumber getZ();
+	SVGAnimatedNumber getZ();
 }

@@ -24,48 +24,30 @@ package org.loboevolution.html.control;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.info.SVGInfo;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 
-
-public class SVGControl extends SVGBasicControl {
+public class SVGControl extends BaseControl {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
+
 	protected static final Logger logger = Logger.getLogger(SVGControl.class.getName());
 
 	private SVGSVGElementImpl modelNode;
 
-	private List<SVGInfo> svgList = new ArrayList<SVGInfo>();
-
 	public SVGControl(SVGSVGElementImpl modelNode) {
 		super(modelNode);
 		this.modelNode = modelNode;
-		svgList = childNodes(modelNode);
+		modelNode.setPainted(false);
 	}
 
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		try {
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			SVGInfo group = getSvgiGroup();
-			svgTransform(g2d, new SVGInfo(), group);
-
-			for (int i = 0; i < svgList.size(); i++) {
-				SVGInfo svgi = svgList.get(i);
-				draw(g2d, svgi, modelNode, i);
-			}
-
-		} catch (Exception ex) {
-			logger.log(Level.SEVERE, "Error", ex);
-		}
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		modelNode.draw(g2d);
+		modelNode.setPainted(true);
 	}
 }

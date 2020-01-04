@@ -21,5 +21,5 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGGElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
-		SVGTransformable {
+		SVGTransformable, Drawable {
 }

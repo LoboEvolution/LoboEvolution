@@ -23,35 +23,32 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGPathSegArcRel extends SVGPathSeg {
-	@Override
-	public float getX();
 
-	@Override
-	public void setX(float x) throws DOMException;
+	float getX();
 
-	@Override
-	public float getY();
+	void setX(float x) throws DOMException;
 
-	@Override
-	public void setY(float y) throws DOMException;
+	float getY();
 
-	public float getR1();
+	void setY(float y) throws DOMException;
 
-	public void setR1(float r1) throws DOMException;
+	float getR1();
 
-	public float getR2();
+	void setR1(float r1) throws DOMException;
 
-	public void setR2(float r2) throws DOMException;
+	float getR2();
 
-	public float getAngle();
+	void setR2(float r2) throws DOMException;
 
-	public void setAngle(float angle) throws DOMException;
+	float getAngle();
 
-	public boolean getLargeArcFlag();
+	void setAngle(float angle) throws DOMException;
 
-	public void setLargeArcFlag(boolean largeArcFlag) throws DOMException;
+	boolean getLargeArcFlag();
 
-	public boolean getSweepFlag();
+	void setLargeArcFlag(boolean largeArcFlag) throws DOMException;
 
-	public void setSweepFlag(boolean sweepFlag) throws DOMException;
+	boolean getSweepFlag();
+
+	void setSweepFlag(boolean sweepFlag) throws DOMException;
 }

@@ -25,7 +25,7 @@ import org.w3c.dom.css.CSSValue;
 
 public interface SVGStylable {
 
-	public String getClassName();
+	SVGAnimatedString getSvgClassName();
 
 	public AbstractCSSProperties getStyle();
 

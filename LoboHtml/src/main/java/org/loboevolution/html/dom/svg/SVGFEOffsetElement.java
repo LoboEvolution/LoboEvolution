@@ -21,9 +21,9 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFEOffsetElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
-	public SVGAnimatedString getIn1();
+	SVGAnimatedString getIn1();
 
-	public SVGAnimatedNumber getDx();
+	SVGAnimatedNumber getDx();
 
-	public SVGAnimatedNumber getDy();
+	SVGAnimatedNumber getDy();
 }

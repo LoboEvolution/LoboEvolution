@@ -20,13 +20,13 @@
  */
 package org.loboevolution.html.dom.svg;
 
-public interface SVGForeignObjectElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
-		SVGStylable, SVGTransformable {
-	public SVGAnimatedLength getX();
+public interface SVGForeignObjectElement
+		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGTransformable {
+	SVGAnimatedLength getX();
 
-	public SVGAnimatedLength getY();
+	SVGAnimatedLength getY();
 
-	public SVGAnimatedLength getWidth();
+	SVGAnimatedLength getWidth();
 
-	public SVGAnimatedLength getHeight();
+	SVGAnimatedLength getHeight();
 }

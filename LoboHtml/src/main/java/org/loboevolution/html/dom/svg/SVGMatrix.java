@@ -20,52 +20,57 @@
  */
 package org.loboevolution.html.dom.svg;
 
+import java.awt.geom.AffineTransform;
+
 import org.w3c.dom.DOMException;
 
 public interface SVGMatrix {
-	public float getA();
 
-	public void setA(float a) throws DOMException;
+	float getA();
 
-	public float getB();
+	void setA(float a) throws DOMException;
 
-	public void setB(float b) throws DOMException;
+	float getB();
 
-	public float getC();
+	void setB(float b) throws DOMException;
 
-	public void setC(float c) throws DOMException;
+	float getC();
 
-	public float getD();
+	void setC(float c) throws DOMException;
 
-	public void setD(float d) throws DOMException;
+	float getD();
 
-	public float getE();
+	void setD(float d) throws DOMException;
 
-	public void setE(float e) throws DOMException;
+	float getE();
 
-	public float getF();
+	void setE(float e) throws DOMException;
 
-	public void setF(float f) throws DOMException;
+	float getF();
 
-	public SVGMatrix multiply(SVGMatrix secondMatrix);
+	void setF(float f) throws DOMException;
 
-	public SVGMatrix inverse() throws SVGException;
+	SVGMatrix multiply(SVGMatrix secondMatrix);
 
-	public SVGMatrix translate(float x, float y);
+	SVGMatrix inverse() throws SVGException;
 
-	public SVGMatrix scale(float scaleFactor);
+	SVGMatrix translate(float x, float y);
 
-	public SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
+	SVGMatrix scale(float scaleFactor);
 
-	public SVGMatrix rotate(float angle);
+	SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
 
-	public SVGMatrix rotateFromVector(float x, float y) throws SVGException;
+	SVGMatrix rotate(float angle);
 
-	public SVGMatrix flipX();
+	SVGMatrix rotateFromVector(float x, float y) throws SVGException;
 
-	public SVGMatrix flipY();
+	SVGMatrix flipX();
 
-	public SVGMatrix skewX(float angle);
+	SVGMatrix flipY();
 
-	public SVGMatrix skewY(float angle);
+	SVGMatrix skewX(float angle);
+
+	SVGMatrix skewY(float angle);
+
+	AffineTransform getAffineTransform();
 }

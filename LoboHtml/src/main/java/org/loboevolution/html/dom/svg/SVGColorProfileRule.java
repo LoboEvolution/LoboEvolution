@@ -23,15 +23,15 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGColorProfileRule extends SVGCSSRule, SVGRenderingIntent {
-	public String getSrc();
+	String getSrc();
 
-	public void setSrc(String src) throws DOMException;
+	void setSrc(String src) throws DOMException;
 
-	public String getName();
+	String getName();
 
-	public void setName(String name) throws DOMException;
+	void setName(String name) throws DOMException;
 
-	public short getRenderingIntent();
+	short getRenderingIntent();
 
-	public void setRenderingIntent(short renderingIntent) throws DOMException;
+	void setRenderingIntent(short renderingIntent) throws DOMException;
 }

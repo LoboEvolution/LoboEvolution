@@ -1,32 +1,23 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
-import org.loboevolution.html.dom.svg.SVGAnimatedString;
-import org.loboevolution.html.dom.svg.SVGAnimatedTransformList;
-import org.loboevolution.html.dom.svg.SVGElementInstance;
-import org.loboevolution.html.dom.svg.SVGUseElement;
-import org.loboevolution.html.style.AbstractCSSProperties;
+import java.awt.Graphics2D;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
 
-public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElement {
+import org.loboevolution.common.Nodes;
+import org.loboevolution.html.dom.svg.Drawable;
+import org.loboevolution.html.dom.svg.SVGAnimatedLength;
+import org.loboevolution.html.dom.svg.SVGAnimatedString;
+import org.loboevolution.html.dom.svg.SVGElementInstance;
+import org.loboevolution.html.dom.svg.SVGMatrix;
+import org.loboevolution.html.dom.svg.SVGUseElement;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
+	
+	private Graphics2D graphics;
 
 	public SVGUseElementImpl(String name) {
 		super(name);
@@ -42,8 +33,23 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 	}
 
 	@Override
-	public SVGAnimatedTransformList getTransform() {
-		return new SVGAnimatedTransformListImpl(this.getAttribute("transform"));
+	public SVGAnimatedLength getX() {
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x")));
+	}
+
+	@Override
+	public SVGAnimatedLength getY() {
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y")));
+	}
+
+	@Override
+	public SVGAnimatedLength getWidth() {
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("width")));
+	}
+
+	@Override
+	public SVGAnimatedLength getHeight() {
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
 	}
 
 	@Override
@@ -59,47 +65,35 @@ public class SVGUseElementImpl extends SVGSVGElementImpl implements SVGUseElemen
 	}
 
 	@Override
-	public AbstractCSSProperties getSVGStyle() {
-		AbstractCSSProperties style = this.getStyle();
-		boolean isStyle = false;
-		if (this.getFill() != null) {
-			style.setFill(this.getFill());
-			isStyle = true;
-		}
+	public void draw(Graphics2D graphics) {
+		this.graphics = graphics;
+		final SVGMatrix ctm = getCTM();
+		createShape(ctm.getAffineTransform());
+	}
 
-		if (this.getStroke() != null) {
-			style.setStroke(this.getStroke());
+	@Override
+	public Shape createShape(AffineTransform transform) {
+		String href = getHref().getBaseVal();
+		if (href.toLowerCase().indexOf("#") != -1) {
+			int hashIndex = href.indexOf('#');
+			if (hashIndex != -1) {
+				String idElement = href.substring(hashIndex + 1, href.length());
+				Element elementById = (Element) child(idElement);
+				if (elementById instanceof SVGSymbolElementImpl) {
+					SVGSymbolElementImpl symbol = (SVGSymbolElementImpl) elementById;
+					NodeList childNodes = symbol.getChildNodes();
+					for (Node child : Nodes.iterable(childNodes)) {
+						if (child instanceof Drawable) {
+							Drawable drawable = (Drawable) child;
+							drawable.draw(graphics);
+						}
+					}
+				} else if (elementById instanceof Drawable) {
+					Drawable drawable = (Drawable) elementById;
+					drawable.draw(graphics);
+				}
+			}
 		}
-
-		if (this.getStrokeDashArray() != null) {
-			style.setStrokeDashArray(this.getStrokeDashArray());
-			isStyle = true;
-		}
-
-		if (this.getStrokeLineCap() != null) {
-			style.setStrokeLineCap(this.getStrokeLineCap());
-			isStyle = true;
-		}
-
-		if (this.getStrokeMiterLimit() != null) {
-			style.setStrokeMiterLimit(this.getStrokeMiterLimit());
-			isStyle = true;
-		}
-
-		if (this.getStrokeOpacity() != null) {
-			style.setStrokeOpacity(this.getStrokeOpacity());
-			isStyle = true;
-		}
-
-		if (this.getStrokeWidth() != null) {
-			style.setStrokeWidth(this.getStrokeWidth());
-			isStyle = true;
-		}
-
-		if (!isStyle) {
-			style = null;
-		}
-
-		return style;
+		return null;
 	}
 }

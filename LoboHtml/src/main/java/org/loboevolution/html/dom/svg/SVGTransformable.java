@@ -23,7 +23,8 @@ package org.loboevolution.html.dom.svg;
 import org.loboevolution.html.style.AbstractCSSProperties;
 
 public interface SVGTransformable extends SVGLocatable {
-	public SVGAnimatedTransformList getTransform();
+
+	SVGAnimatedTransformList getTransform();
 
 	public AbstractCSSProperties getSVGStyle();
 }

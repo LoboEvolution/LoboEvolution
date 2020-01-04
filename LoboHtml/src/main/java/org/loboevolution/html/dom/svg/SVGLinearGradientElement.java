@@ -22,11 +22,11 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGLinearGradientElement extends SVGGradientElement {
-	public SVGAnimatedLength getX1();
+	SVGAnimatedLength getX1();
 
-	public SVGAnimatedLength getY1();
+	SVGAnimatedLength getY1();
 
-	public SVGAnimatedLength getX2();
+	SVGAnimatedLength getX2();
 
-	public SVGAnimatedLength getY2();
+	SVGAnimatedLength getY2();
 }

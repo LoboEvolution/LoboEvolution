@@ -21,19 +21,19 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFESpotLightElement extends SVGElement {
-	public SVGAnimatedNumber getX();
+	SVGAnimatedNumber getX();
 
-	public SVGAnimatedNumber getY();
+	SVGAnimatedNumber getY();
 
-	public SVGAnimatedNumber getZ();
+	SVGAnimatedNumber getZ();
 
-	public SVGAnimatedNumber getPointsAtX();
+	SVGAnimatedNumber getPointsAtX();
 
-	public SVGAnimatedNumber getPointsAtY();
+	SVGAnimatedNumber getPointsAtY();
 
-	public SVGAnimatedNumber getPointsAtZ();
+	SVGAnimatedNumber getPointsAtZ();
 
-	public SVGAnimatedNumber getSpecularExponent();
+	SVGAnimatedNumber getSpecularExponent();
 
-	public SVGAnimatedNumber getLimitingConeAngle();
+	SVGAnimatedNumber getLimitingConeAngle();
 }

@@ -25,11 +25,13 @@ import org.w3c.dom.Element;
 
 public interface SVGElement extends Element {
 
-	public String getId();
+	String getId();
 
-	public void setId(String id) throws DOMException;
+	void setId(String id) throws DOMException;
 
-	public SVGSVGElement getOwnerSVGElement();
+	SVGSVGElement getOwnerSVGElement();
+	
+	void setOwnerSVGElement(SVGSVGElement elem);
 
-	public SVGElement getViewportElement();
+	SVGElement getViewportElement();
 }

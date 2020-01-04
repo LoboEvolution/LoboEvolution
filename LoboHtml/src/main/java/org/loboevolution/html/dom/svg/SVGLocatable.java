@@ -22,15 +22,15 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGLocatable {
-	public SVGElement getNearestViewportElement();
+	SVGElement getNearestViewportElement();
 
-	public SVGElement getFarthestViewportElement();
+	SVGElement getFarthestViewportElement();
 
-	public SVGRect getBBox();
+	SVGRect getBBox();
 
-	public SVGMatrix getCTM();
+	SVGMatrix getCTM();
 
-	public SVGMatrix getScreenCTM();
+	SVGMatrix getScreenCTM();
 
-	public SVGMatrix getTransformToElement(SVGElement element) throws SVGException;
+	SVGMatrix getTransformToElement(SVGElement element) throws SVGException;
 }

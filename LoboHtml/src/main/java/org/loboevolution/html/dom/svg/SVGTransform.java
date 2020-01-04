@@ -22,29 +22,29 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGTransform {
 	// Transform Types
-	public static final short SVG_TRANSFORM_UNKNOWN = 0;
-	public static final short SVG_TRANSFORM_MATRIX = 1;
-	public static final short SVG_TRANSFORM_TRANSLATE = 2;
-	public static final short SVG_TRANSFORM_SCALE = 3;
-	public static final short SVG_TRANSFORM_ROTATE = 4;
-	public static final short SVG_TRANSFORM_SKEWX = 5;
-	public static final short SVG_TRANSFORM_SKEWY = 6;
+	static final short SVG_TRANSFORM_UNKNOWN = 0;
+	static final short SVG_TRANSFORM_MATRIX = 1;
+	static final short SVG_TRANSFORM_TRANSLATE = 2;
+	static final short SVG_TRANSFORM_SCALE = 3;
+	static final short SVG_TRANSFORM_ROTATE = 4;
+	static final short SVG_TRANSFORM_SKEWX = 5;
+	static final short SVG_TRANSFORM_SKEWY = 6;
 
-	public short getType();
+	short getType();
 
-	public SVGMatrix getMatrix();
+	SVGMatrix getMatrix();
 
-	public float getAngle();
+	float getAngle();
 
-	public void setMatrix(SVGMatrix matrix);
+	void setMatrix(SVGMatrix matrix);
 
-	public void setTranslate(float tx, float ty);
+	void setTranslate(float tx, float ty);
 
-	public void setScale(float sx, float sy);
+	void setScale(float sx, float sy);
 
-	public void setRotate(float angle, float cx, float cy);
+	void setRotate(float angle, float cx, float cy);
 
-	public void setSkewX(float angle);
+	void setSkewX(float angle);
 
-	public void setSkewY(float angle);
+	void setSkewY(float angle);
 }

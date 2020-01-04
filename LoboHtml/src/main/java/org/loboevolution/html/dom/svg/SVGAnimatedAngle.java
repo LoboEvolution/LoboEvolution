@@ -22,7 +22,7 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedAngle {
-	public SVGAngle getBaseVal();
+	SVGAngle getBaseVal();
 
-	public SVGAngle getAnimVal();
+	SVGAngle getAnimVal();
 }

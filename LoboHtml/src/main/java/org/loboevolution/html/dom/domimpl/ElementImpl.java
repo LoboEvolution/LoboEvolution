@@ -110,7 +110,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	// private String title;
 
 	@Override
-	public final String getAttribute(String name) {
+	public String getAttribute(String name) {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;

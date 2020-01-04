@@ -26,8 +26,7 @@ public interface EventListenerInitializer {
 	 * This method is called by the SVG viewer when the scripts are loaded to
 	 * register the listener needed.
 	 * 
-	 * @param doc
-	 *            The current document.
+	 * @param doc The current document.
 	 */
-	public void initializeEventListeners(SVGDocument doc);
+	void initializeEventListeners(SVGDocument doc);
 }

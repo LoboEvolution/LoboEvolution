@@ -23,13 +23,13 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.events.UIEvent;
 
 public interface SVGZoomEvent extends UIEvent {
-	public SVGRect getZoomRectScreen();
+	SVGRect getZoomRectScreen();
 
-	public float getPreviousScale();
+	float getPreviousScale();
 
-	public SVGPoint getPreviousTranslate();
+	SVGPoint getPreviousTranslate();
 
-	public float getNewScale();
+	float getNewScale();
 
-	public SVGPoint getNewTranslate();
+	SVGPoint getNewTranslate();
 }

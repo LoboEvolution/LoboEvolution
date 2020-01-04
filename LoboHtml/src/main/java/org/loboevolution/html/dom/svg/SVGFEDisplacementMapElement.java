@@ -22,19 +22,19 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGFEDisplacementMapElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Channel Selectors
-	public static final short SVG_CHANNEL_UNKNOWN = 0;
-	public static final short SVG_CHANNEL_R = 1;
-	public static final short SVG_CHANNEL_G = 2;
-	public static final short SVG_CHANNEL_B = 3;
-	public static final short SVG_CHANNEL_A = 4;
+	static final short SVG_CHANNEL_UNKNOWN = 0;
+	static final short SVG_CHANNEL_R = 1;
+	static final short SVG_CHANNEL_G = 2;
+	static final short SVG_CHANNEL_B = 3;
+	static final short SVG_CHANNEL_A = 4;
 
-	public SVGAnimatedString getIn1();
+	SVGAnimatedString getIn1();
 
-	public SVGAnimatedString getIn2();
+	SVGAnimatedString getIn2();
 
-	public SVGAnimatedNumber getScale();
+	SVGAnimatedNumber getScale();
 
-	public SVGAnimatedEnumeration getXChannelSelector();
+	SVGAnimatedEnumeration getXChannelSelector();
 
-	public SVGAnimatedEnumeration getYChannelSelector();
+	SVGAnimatedEnumeration getYChannelSelector();
 }

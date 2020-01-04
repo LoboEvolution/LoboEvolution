@@ -20,6 +20,6 @@
  */
 package org.loboevolution.html.dom.svg;
 
-public interface SVGSwitchElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
-		SVGTransformable {
+public interface SVGSwitchElement
+		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGTransformable {
 }

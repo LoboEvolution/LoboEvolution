@@ -1,198 +1,204 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
-
 package org.loboevolution.html.dom.svgimpl;
 
 import java.awt.geom.AffineTransform;
+import java.awt.geom.NoninvertibleTransformException;
 
 import org.loboevolution.html.dom.svg.SVGException;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.w3c.dom.DOMException;
 
 public class SVGMatrixImpl implements SVGMatrix {
-
+	
 	private AffineTransform transform;
 
-	private float a;
-	private float b;
-	private float c;
-	private float d;
-	private float e;
-	private float f;
-
 	public SVGMatrixImpl() {
+		transform = new AffineTransform();
 	}
 
-	public SVGMatrixImpl(float a, float b, float c, float d, float e, float f) {
-		this.a = a;
-		this.b = b;
-		this.c = c;
-		this.d = d;
-		this.e = e;
-		this.f = f;
+	public SVGMatrixImpl(SVGMatrixImpl matrix) {
+		transform = new AffineTransform(matrix.transform);
 	}
 
 	@Override
 	public float getA() {
-		return a;
+		return (float) transform.getScaleX();
 	}
 
 	@Override
 	public void setA(float a) throws DOMException {
-		this.a = a;
+		final float b = getB();
+		final float c = getC();
+		final float d = getD();
+		final float e = getE();
+		final float f = getF();
+		transform = new AffineTransform(a, b, c, d, e, f);
 
 	}
 
 	@Override
 	public float getB() {
-		return b;
+		return (float) transform.getShearY();
 	}
 
 	@Override
 	public void setB(float b) throws DOMException {
-		this.b = b;
+		final float a = getA();
+		final float c = getC();
+		final float d = getD();
+		final float e = getE();
+		final float f = getF();
+		transform = new AffineTransform(a, b, c, d, e, f);
+
 	}
 
 	@Override
 	public float getC() {
-		return c;
+		return (float) transform.getShearX();
 	}
 
 	@Override
 	public void setC(float c) throws DOMException {
-		this.c = c;
+		final float a = getA();
+		final float b = getB();
+		final float d = getD();
+		final float e = getE();
+		final float f = getF();
+		transform = new AffineTransform(a, b, c, d, e, f);
+
 	}
 
 	@Override
 	public float getD() {
-		return d;
+		return (float) transform.getScaleY();
 	}
 
 	@Override
 	public void setD(float d) throws DOMException {
-		this.d = d;
+		final float a = getA();
+		final float b = getB();
+		final float c = getC();
+		final float e = getE();
+		final float f = getF();
+		transform = new AffineTransform(a, b, c, d, e, f);
+
 	}
 
 	@Override
 	public float getE() {
-		return e;
+		return (float) transform.getTranslateX();
 	}
 
 	@Override
 	public void setE(float e) throws DOMException {
-		this.e = e;
+		final float a = getA();
+		final float b = getB();
+		final float c = getC();
+		final float d = getD();
+		final float f = getF();
+		transform = new AffineTransform(a, b, c, d, e, f);
+
 	}
 
 	@Override
 	public float getF() {
-		return f;
+		return (float) transform.getTranslateY();
 	}
 
 	@Override
 	public void setF(float f) throws DOMException {
-		this.f = f;
-
+		final float a = getA();
+		final float b = getB();
+		final float c = getC();
+		final float d = getD();
+		final float e = getE();
+		transform = new AffineTransform(a, b, c, d, e, f);
 	}
 
 	@Override
 	public SVGMatrix multiply(SVGMatrix secondMatrix) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.concatenate(((SVGMatrixImpl) secondMatrix).transform);
+		return result;
 	}
 
 	@Override
 	public SVGMatrix inverse() throws SVGException {
-		// TODO Auto-generated method stub
-		return null;
+		AffineTransform inverse;
+		try {
+			inverse = this.transform.createInverse();
+		} catch (NoninvertibleTransformException e) {
+			return null;
+		}
+
+		SVGMatrixImpl result = new SVGMatrixImpl();
+		result.transform = new AffineTransform(inverse);
+		return result;
 	}
 
 	@Override
 	public SVGMatrix translate(float x, float y) {
-		SVGMatrixImpl mtrx = new SVGMatrixImpl();
-		mtrx.setTransform(new AffineTransform(a, b, c, d, e, f));
-		return mtrx;
-
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.translate(x, y);
+		return result;
 	}
 
 	@Override
 	public SVGMatrix scale(float scaleFactor) {
-		// TODO Auto-generated method stub
-		return null;
+		return scaleNonUniform(scaleFactor, scaleFactor);
 	}
 
 	@Override
 	public SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.scale(scaleFactorX, scaleFactorY);
+		return result;
 	}
 
 	@Override
 	public SVGMatrix rotate(float angle) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.rotate(Math.toRadians(angle));
+		return result;
 	}
 
 	@Override
 	public SVGMatrix rotateFromVector(float x, float y) throws SVGException {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		double angle = Math.atan(y / x);
+		result.transform.rotate(angle);
+		return result;
 	}
 
 	@Override
 	public SVGMatrix flipX() {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.concatenate(new AffineTransform(-1, 0, 0, 1, 0, 0));
+		return result;
 	}
 
 	@Override
 	public SVGMatrix flipY() {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.concatenate(new AffineTransform(1, 0, 0, -1, 0, 0));
+		return result;
 	}
 
 	@Override
 	public SVGMatrix skewX(float angle) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.concatenate(new AffineTransform(1, 0, Math.tan(Math.toRadians(angle)), 1, 0, 0));
+		return result;
 	}
 
 	@Override
 	public SVGMatrix skewY(float angle) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGMatrixImpl result = new SVGMatrixImpl(this);
+		result.transform.concatenate(new AffineTransform(1, Math.tan(Math.toRadians(angle)), 0, 1, 0, 0));
+		return result;
 	}
-
-	/**
-	 * @return the transform
-	 */
-	public AffineTransform getTransform() {
+	
+	public AffineTransform getAffineTransform() {
 		return transform;
-	}
-
-	/**
-	 * @param transform
-	 *            the transform to set
-	 */
-	public void setTransform(AffineTransform transform) {
-		this.transform = transform;
 	}
 
 }

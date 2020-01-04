@@ -1,32 +1,12 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
-
 package org.loboevolution.html.dom.svgimpl;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.StringTokenizer;
 
-import org.loboevolution.util.DateUtil;
 import org.loboevolution.html.dom.smil.Time;
+import org.loboevolution.util.DateUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 
@@ -64,7 +44,7 @@ public class TimeImpl implements Time {
 		} else if ((timeValue.startsWith("repeat("))) {
 			mTimeType = SMIL_TIME_REPEAT;
 		} else{
-			mResolvedOffset = SVGUtility.getClockMilliSecs(timeValue);
+			mResolvedOffset = getClockMilliSecs(timeValue);
             mResolved = true;
             mTimeType = SMIL_TIME_OFFSET;
 		}
@@ -144,5 +124,43 @@ public class TimeImpl implements Time {
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	protected static float getClockMilliSecs(String clockVal) {
+		try {
+			if (clockVal.indexOf(':') != -1) {
+				StringTokenizer st = new StringTokenizer(clockVal, ":");
+				int numTokens = st.countTokens();
+				if (numTokens == 3) { // is a full clock value
+					int hours = Integer.parseInt(st.nextToken());
+					int minutes = Integer.parseInt(st.nextToken());
+					float seconds = Float.parseFloat(st.nextToken());
+					return (hours * 3600 + minutes * 60 + seconds) * 1000;
+				} else if (numTokens == 2) { // is a partial clock value
+					int minutes = Integer.parseInt(st.nextToken());
+					float seconds = Float.parseFloat(st.nextToken());
+					return (minutes * 60 + seconds) * 1000;
+				} else {
+					return 0;
+				}
+			} else {
+				if (clockVal.indexOf('h') != -1) {
+					float hour = Float.parseFloat(clockVal.substring(0, clockVal.indexOf('h')));
+					return (hour * 3600) * 1000;
+				} else if (clockVal.indexOf("min") != -1) {
+					float min = Float.parseFloat(clockVal.substring(0, clockVal.indexOf("min")));
+					return (min * 60) * 1000;
+				} else if (clockVal.indexOf("ms") != -1) {
+					return Float.parseFloat(clockVal.substring(0, clockVal.indexOf("ms")));
+				} else if (clockVal.indexOf('s') != -1) {
+					float secs = Float.parseFloat(clockVal.substring(0, clockVal.indexOf('s')));
+					return secs * 1000;
+				} else {
+					float secs = Float.parseFloat(clockVal);
+					return secs * 1000;
+				}
+			}
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 }

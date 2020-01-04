@@ -21,15 +21,15 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGViewSpec extends SVGZoomAndPan, SVGFitToViewBox {
-	public SVGTransformList getTransform();
+	SVGTransformList getTransform();
 
-	public SVGElement getViewTarget();
+	SVGElement getViewTarget();
 
-	public String getViewBoxString();
+	String getViewBoxString();
 
-	public String getPreserveAspectRatioString();
+	String getPreserveAspectRatioString();
 
-	public String getTransformString();
+	String getTransformString();
 
-	public String getViewTargetString();
+	String getViewTargetString();
 }

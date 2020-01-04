@@ -23,15 +23,12 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGPathSegCurvetoQuadraticSmoothRel extends SVGPathSeg {
-	@Override
-	public float getX();
 
-	@Override
-	public void setX(float x) throws DOMException;
+	float getX();
 
-	@Override
-	public float getY();
+	void setX(float x) throws DOMException;
 
-	@Override
-	public void setY(float y) throws DOMException;
+	float getY();
+
+	void setY(float y) throws DOMException;
 }

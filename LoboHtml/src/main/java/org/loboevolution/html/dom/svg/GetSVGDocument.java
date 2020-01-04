@@ -23,5 +23,5 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface GetSVGDocument {
-	public SVGDocument getSVGDocument() throws DOMException;
+	SVGDocument getSVGDocument() throws DOMException;
 }

@@ -21,14 +21,14 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGImageElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace,
-		SVGExternalResourcesRequired, SVGStylable, SVGTransformable {
-	public SVGAnimatedLength getX();
+		SVGExternalResourcesRequired, SVGStylable, SVGTransformable, Drawable {
+	SVGAnimatedLength getX();
 
-	public SVGAnimatedLength getY();
+	SVGAnimatedLength getY();
 
-	public SVGAnimatedLength getWidth();
+	SVGAnimatedLength getWidth();
 
-	public SVGAnimatedLength getHeight();
+	SVGAnimatedLength getHeight();
 
-	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
+	SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
 }

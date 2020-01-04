@@ -22,13 +22,13 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGDocument {
 
-	public String getTitle();
+	String getTitle();
 
-	public String getReferrer();
+	String getReferrer();
 
-	public String getDomain();
+	String getDomain();
 
-	public String getURL();
+	String getURL();
 
-	public SVGSVGElement getRootElement();
+	SVGSVGElement getRootElement();
 }
