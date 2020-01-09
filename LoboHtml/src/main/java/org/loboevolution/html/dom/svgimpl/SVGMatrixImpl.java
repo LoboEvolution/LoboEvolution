@@ -19,6 +19,10 @@ public class SVGMatrixImpl implements SVGMatrix {
 		transform = new AffineTransform(matrix.transform);
 	}
 
+	public SVGMatrixImpl(float a, float b, float c, float d, float e, float f) {
+		transform = new AffineTransform(a, b, c, d, e, f);
+	}
+
 	@Override
 	public float getA() {
 		return (float) transform.getScaleX();

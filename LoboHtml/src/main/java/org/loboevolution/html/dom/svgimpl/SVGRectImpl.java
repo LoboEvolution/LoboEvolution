@@ -5,60 +5,59 @@ import org.w3c.dom.DOMException;
 
 public class SVGRectImpl implements SVGRect {
 
-	public SVGRectImpl(int i, int j, float value, float value2) {
-		// TODO Auto-generated constructor stub
-	}
+	private float x;
 
-	public SVGRectImpl() {
-		// TODO Auto-generated constructor stub
+	private float y;
+
+	private float width;
+
+	private float height;
+
+	public SVGRectImpl(float x, float y, float width, float height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 
 	@Override
 	public float getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return x;
 	}
 
 	@Override
 	public void setX(float x) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.x = x;
 	}
 
 	@Override
 	public float getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return y;
 	}
 
 	@Override
 	public void setY(float y) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.y = y;
 	}
 
 	@Override
 	public float getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return width;
 	}
 
 	@Override
 	public void setWidth(float width) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.width = width;
 	}
 
 	@Override
 	public float getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return height;
 	}
 
 	@Override
 	public void setHeight(float height) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.height = height;
 	}
 
 }

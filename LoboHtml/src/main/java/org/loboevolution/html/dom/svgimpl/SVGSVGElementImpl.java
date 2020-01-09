@@ -17,7 +17,6 @@ import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.filter.IdFilter;
 import org.loboevolution.html.dom.svg.Drawable;
 import org.loboevolution.html.dom.svg.SVGAngle;
-import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio;
 import org.loboevolution.html.dom.svg.SVGAnimatedRect;
@@ -30,7 +29,6 @@ import org.loboevolution.html.dom.svg.SVGNumber;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
-import org.loboevolution.html.dom.svg.SVGStringList;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.loboevolution.html.dom.svg.SVGUseElement;
@@ -80,67 +78,11 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	public SVGSVGElementImpl(String name) {
 		super(name);
 		currentTranslate = new SVGPointImpl();
-		viewport = new SVGRectImpl();
-		viewport.setWidth(getWidth().getBaseVal().getValue());
-		viewport.setHeight(getHeight().getBaseVal().getValue());
-	}
-
-	@Override
-	public SVGStringList getRequiredFeatures() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SVGStringList getRequiredExtensions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SVGStringList getSystemLanguage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean hasExtension(String extension) {
-		return extension.equalsIgnoreCase("svg") ? true : false;
-	}
-
-	@Override
-	public String getXMLlang() {
-		return getAttribute("xml:lang");
-	}
-
-	@Override
-	public void setXMLlang(String xmllang) throws DOMException {
-		if (xmllang != null) {
-			super.setAttribute("xml:lang", xmllang);
-		} else {
-			removeAttribute("xml:lang");
-		}
-	}
-
-	@Override
-	public String getXMLspace() {
-		return getAttribute("xml:space");
-	}
-
-	@Override
-	public void setXMLspace(String xmlspace) throws DOMException {
-		if (xmlspace != null) {
-			super.setAttribute("xml:space", xmlspace);
-		} else {
-			removeAttribute("xml:space");
-		}
-		
-	}
-
-	@Override
-	public SVGAnimatedBoolean getExternalResourcesRequired() {
-		// TODO Auto-generated method stub
-		return null;
+		float x = getX().getBaseVal().getValue();
+		float y = getY().getBaseVal().getValue();
+		float width = getWidth().getBaseVal().getValue();
+		float height = getHeight().getBaseVal().getValue();
+		viewport = new SVGRectImpl(x, y, width, height);
 	}
 
 	@Override
@@ -148,7 +90,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		if (viewBox == null) {
 			final float width = getWidth().getBaseVal().getValue();
 			final float height = getHeight().getBaseVal().getValue();
-			viewBox = new SVGAnimatedRectImpl(new SVGRectImpl(0, 0, width, height), this);
+			viewBox = new SVGAnimatedRectImpl(new SVGRectImpl(0, 0, width, height));
 		}
 		return viewBox;
 	}
@@ -222,14 +164,11 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	@Override
 	public SVGRect getViewport() {
-		if (viewport == null) {
-			viewport = new SVGRectImpl();
-			viewport.setX(getX().getBaseVal().getValue());
-			viewport.setY(getY().getBaseVal().getValue());
-			viewport.setWidth(getWidth().getBaseVal().getValue());
-			viewport.setHeight(getHeight().getBaseVal().getValue());
-		}
-		return viewport;
+		float x = getX().getBaseVal().getValue();
+		float y = getY().getBaseVal().getValue();
+		float width = getWidth().getBaseVal().getValue();
+		float height = getHeight().getBaseVal().getValue();
+		return new SVGRectImpl(x, y, width, height);
 	}
 
 	@Override
@@ -397,7 +336,11 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 	@Override
 	public SVGRect createSVGRect() {
-		return new SVGRectImpl();
+		float x = getX().getBaseVal().getValue();
+		float y = getY().getBaseVal().getValue();
+		float width = getWidth().getBaseVal().getValue();
+		float height = getHeight().getBaseVal().getValue();
+		return new SVGRectImpl(x, y, width, height);
 	}
 
 	@Override

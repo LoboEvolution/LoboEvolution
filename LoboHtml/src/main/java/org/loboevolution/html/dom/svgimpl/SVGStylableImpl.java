@@ -9,9 +9,9 @@ import java.awt.Shape;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.html.dom.svg.SVGAnimatedString;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGStylable;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
@@ -22,30 +22,24 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.css.CSSValue;
 
 public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
-
+	
 	public SVGStylableImpl(String name) {
 		super(name);
-	}
-
-	@Override
-	public SVGAnimatedString getSvgClassName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CSSValue getPresentationAttribute(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		this.setStyle(getAttribute("style"));
 	}
 	
+	@Override
+	public AbstractCSSProperties getStyle() {
+		return super.getStyle();
+	}
+
 	public Paint getFillPaint(Shape shape) {
-		Paint fillPaint = null;
-		final String fill = getAttribute("fill");
-		final String fillOpacity = getAttribute("fill-opacity");
+		AbstractCSSProperties style = getStyle();
+		Paint fillPaint = null;		
+		final String fill =  Strings.isNotBlank(style.getFill()) ? style.getFill() : getAttribute("fill");
+		final String fillOpacity = Strings.isNotBlank(style.getFillOpacity()) ? style.getFillOpacity() : getAttribute("fill-opacity");
 		if (fill!= null && fill.toLowerCase().indexOf("url") != -1) {
 			int hashIndex = fill.indexOf('#');
 			if (hashIndex != -1) {
@@ -67,10 +61,10 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 	public Paint getStrokelPaint(Shape shape) {
+		AbstractCSSProperties style = getStyle();
 		Paint strokePaint = null;
-		final String stroke = getAttribute("stroke");
-		final String strokeOpacity = getAttribute("stroke-opacity");
-
+		final String stroke = Strings.isNotBlank(style.getStroke()) ? style.getStroke() : getAttribute("stroke");
+		final String strokeOpacity = Strings.isNotBlank(style.getStrokeOpacity()) ? style.getStrokeOpacity() : getAttribute("stroke-opacity");
 		if (stroke!= null && stroke.toLowerCase().indexOf("url") != -1) {
 			int hashIndex = stroke.indexOf('#');
 			if (hashIndex != -1) {
@@ -90,35 +84,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		}
 		return strokePaint;
 	}
-
-	public boolean getVisibility() {
-		final String visibility = getAttribute("visibility");
-		return "visible".equals(visibility);
-	}
-
-	public boolean getDisplay() {
-		final String visibility = getAttribute("display");
-		return !"none".equals(visibility);
-	}
-	
-	public float getOpacity() {
-		final String opacityStr = getAttribute("opacity");
-		float opacity = 1;
-		if (opacityStr != null) {
-			opacity = Float.parseFloat(opacityStr);
-		}
-		if (opacity > 1) {
-			opacity = 1;
-		}
-		if (opacity < 0) {
-			opacity = 0;
-		}
-		return opacity;
-	}
 	
 	public int getStrokeLineCap() {
+		AbstractCSSProperties style = getStyle();
 		int intLineCap = -1;
-		final String strokeLinecap = getAttribute("stroke-linecap");
+		final String strokeLinecap = Strings.isNotBlank(style.getStrokeLineCap()) ? style.getStrokeLineCap() : getAttribute("stroke-linecap");
 		switch (Strings.isNotBlank(strokeLinecap) ? strokeLinecap : "") {
 		case "round":
 			intLineCap = BasicStroke.CAP_ROUND;
@@ -137,8 +107,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	public int getStrokeLinejoin() {
+		AbstractCSSProperties style = getStyle();
 		int lineJoin = -1;
-		final String strokeLinejoin = getAttribute("stroke-linejoin");
+		final String strokeLinejoin = Strings.isNotBlank(style.getStrokeLineJoin()) ? style.getStrokeLineJoin() : getAttribute("stroke-linejoin");
 		switch (Strings.isNotBlank(strokeLinejoin) ? strokeLinejoin : "") {
 		case "miter":
 			lineJoin = BasicStroke.JOIN_MITER;
@@ -157,8 +128,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	public int getStrokeWidth() {
+		AbstractCSSProperties style = getStyle();
 		int strokeWidth = 1;
-		final String strokeWidthProp = getAttribute("stroke-width");
+		final String strokeWidthProp = Strings.isNotBlank(style.getStrokeWidth()) ? style.getStrokeWidth() : getAttribute("stroke-width");
 		if (Strings.isNotBlank(strokeWidthProp)) {
 			strokeWidth = HtmlValues.getPixelSize(strokeWidthProp, null, 1);
 		}
@@ -166,8 +138,9 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	public int getStrokeMiterlimit() {
+		AbstractCSSProperties style = getStyle();
 		int miterlimit = 4;
-		final String strokeMiterlimit = getAttribute("stroke-miterlimit");
+		final String strokeMiterlimit = Strings.isNotBlank(style.getStrokeMiterLimit()) ? style.getStrokeMiterLimit() : getAttribute("stroke-miterlimit");
 		if (Strings.isNotBlank(strokeMiterlimit)) {
 			miterlimit = HtmlValues.getPixelSize(strokeMiterlimit, null, 4);
 		}
@@ -175,10 +148,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	public float[] getStrokeDashArray() {
+		AbstractCSSProperties style = getStyle();
 		float[] dashArray = null;
-		final String strokeMiterlimit = getAttribute("stroke-dasharray");
-		if (Strings.isNotBlank(strokeMiterlimit)) {
-			String parts[] = strokeMiterlimit.split("\\s*,\\s*|\\s+");
+		final String dasharray = Strings.isNotBlank(style.getStrokeDashArray()) ? style.getStrokeDashArray() : getAttribute("stroke-dasharray");
+		if (Strings.isNotBlank(dasharray)) {
+			String parts[] = dasharray.split("\\s*,\\s*|\\s+");
 			dashArray = new float[parts.length];
 			int i = 0;
 			for (String str : parts) {
@@ -188,9 +162,38 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		}
 		return dashArray;
 	}
+
+	public boolean getVisibility() {
+		AbstractCSSProperties style = getStyle();
+		final String visibility = Strings.isNotBlank(style.getVisibility()) ? style.getVisibility() : getAttribute("visibility");
+		return "visible".equals(visibility);
+	}
+
+	public boolean getDisplay() {
+		AbstractCSSProperties style = getStyle();
+		final String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
+		return !"none".equals(display);
+	}
+	
+	public float getOpacity() {
+		AbstractCSSProperties style = getStyle();
+		final String opacityStr = Strings.isNotBlank(style.getOpacity()) ? style.getOpacity() : getAttribute("opacity");
+		float opacity = 1;
+		if (opacityStr != null) {
+			opacity = Float.parseFloat(opacityStr);
+		}
+		if (opacity > 1) {
+			opacity = 1;
+		}
+		if (opacity < 0) {
+			opacity = 0;
+		}
+		return opacity;
+	}
 	
 	public SVGClipPathElementImpl getClippingPath() {
-		String clipPathString = getAttribute("clip-path");
+		AbstractCSSProperties style = getStyle();
+		String clipPathString = Strings.isNotBlank(style.getClipPath()) ? style.getClipPath() : getAttribute("clip-path");
 		if (clipPathString != null) {
 			if (clipPathString.toLowerCase().indexOf("url") != -1) {
 				int hashIndex = clipPathString.indexOf('#');
@@ -207,7 +210,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	public String getClipRule() {
-		String clipRuleVal = getAttribute("clip-rule");
+		AbstractCSSProperties style = getStyle();
+		String clipRuleVal = Strings.isNotBlank(style.getClipRule()) ? style.getClipRule() : getAttribute("clip-rule");
 		if (clipRuleVal != null) {
 			return clipRuleVal;
 		} else {
@@ -216,7 +220,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	public Color getStopColor() {
-		String stopcolor = this.getAttribute("stop-color");
+		AbstractCSSProperties style = getStyle();
+		String stopcolor = Strings.isNotBlank(style.getStopColor()) ? style.getStopColor() : this.getAttribute("stop-color");
 		Color color = Color.BLACK;
 		if (stopcolor != null) {
 			color = ColorFactory.getInstance().getColor(stopcolor);
@@ -226,7 +231,8 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 	public String getStopOpacity() {
-		String opacity = this.getAttribute("stop-opacity");
+		AbstractCSSProperties style = getStyle();
+		String opacity = Strings.isNotBlank(style.getStopOpacity()) ? style.getStopOpacity() : this.getAttribute("stop-opacity");
 		if (opacity == null) {
 			opacity = "1";
 		}
@@ -237,8 +243,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	public String getTextAnchor() {
 		return getAttribute("text-anchor");
 	}
-
-
+	
 	public Font getFont() {
 		FontKey key = new FontKey();
 		key.setFontFamily(Font.SANS_SERIF);

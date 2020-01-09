@@ -21,13 +21,8 @@
 package org.loboevolution.html.dom.svg;
 
 import org.loboevolution.html.style.AbstractCSSProperties;
-import org.w3c.dom.css.CSSValue;
 
 public interface SVGStylable {
 
-	SVGAnimatedString getSvgClassName();
-
-	public AbstractCSSProperties getStyle();
-
-	public CSSValue getPresentationAttribute(String name);
+	AbstractCSSProperties getStyle();
 }

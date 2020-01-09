@@ -6,6 +6,7 @@ import org.loboevolution.html.dom.svg.SVGLocatable;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 import org.loboevolution.html.dom.svg.SVGRect;
 import org.loboevolution.html.dom.svg.SVGTransform;
+import org.loboevolution.html.dom.svg.SVGTransformList;
 import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.w3c.dom.Node;
 
@@ -37,9 +38,12 @@ public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 	public SVGMatrix getCTM() {
 		SVGMatrix thisMatrix = new SVGMatrixImpl();
 		if (this instanceof SVGTransformable) {
-			SVGTransform consolidate = ((SVGTransformable) this).getTransform().getAnimVal().consolidate();
-			if (consolidate != null) {
-				thisMatrix = new SVGMatrixImpl((SVGMatrixImpl) consolidate.getMatrix());
+			SVGTransformList transofrm = ((SVGTransformable) this).getTransform().getAnimVal();
+			if (transofrm != null) {
+				SVGTransform consolidate = transofrm.consolidate();
+				if (consolidate != null) {
+					thisMatrix = new SVGMatrixImpl((SVGMatrixImpl) consolidate.getMatrix());
+				}
 			}
 		}
 

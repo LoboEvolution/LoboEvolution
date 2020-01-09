@@ -8,13 +8,10 @@ import java.awt.geom.Path2D;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.html.dom.svg.Drawable;
-import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGAnimatedEnumeration;
 import org.loboevolution.html.dom.svg.SVGClipPathElement;
 import org.loboevolution.html.dom.svg.SVGElement;
-import org.loboevolution.html.dom.svg.SVGStringList;
 import org.loboevolution.html.dom.svg.SVGTransformable;
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -24,59 +21,6 @@ public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathEle
 	
 	public SVGClipPathElementImpl(String name) {
 		super(name);
-	}
-
-	@Override
-	public SVGStringList getRequiredFeatures() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SVGStringList getRequiredExtensions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public SVGStringList getSystemLanguage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean hasExtension(String extension) {
-		if (extension.equalsIgnoreCase("svg")) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public String getXMLlang() {
-		return getAttribute("xml:lang");
-	}
-
-	@Override
-	public void setXMLlang(String xmllang) throws DOMException {
-		setAttribute("xml:lang", xmllang);
-	}
-
-	@Override
-	public String getXMLspace() {
-		return getAttribute("xml:space");
-	}
-
-	@Override
-	public void setXMLspace(String xmlspace) throws DOMException {
-		setAttribute("xml:space", xmlspace);
-	}
-
-	@Override
-	public SVGAnimatedBoolean getExternalResourcesRequired() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

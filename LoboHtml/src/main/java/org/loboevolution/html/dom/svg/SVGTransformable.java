@@ -20,11 +20,7 @@
  */
 package org.loboevolution.html.dom.svg;
 
-import org.loboevolution.html.style.AbstractCSSProperties;
-
 public interface SVGTransformable extends SVGLocatable {
 
 	SVGAnimatedTransformList getTransform();
-
-	public AbstractCSSProperties getSVGStyle();
 }

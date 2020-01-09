@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL LICENSE
+   GNU GENERAL LICENSE
     Copyright (C) 2014 - 2018 Lobo Evolution
 
     This program is free software; you can redistribute it and/or

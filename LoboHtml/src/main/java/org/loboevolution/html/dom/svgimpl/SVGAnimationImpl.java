@@ -7,9 +7,12 @@ import org.loboevolution.html.dom.smil.ElementTargetAttributes;
 import org.loboevolution.html.dom.smil.SMILAnimation;
 import org.loboevolution.html.dom.smil.Time;
 import org.loboevolution.html.dom.smil.TimeList;
+import org.loboevolution.html.dom.svg.SVGTransform;
 import org.w3c.dom.DOMException;
 
 public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
+	
+	private SVGAnimateImpl animate;
 
 	public SVGAnimationImpl(String name) {
 		super(name);
@@ -24,12 +27,31 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	public void setAttributeName(String attributeName) {
 		this.setAttribute("attributeName", attributeName);		
 	}
+	
+	public short getType() {
+		String type = this.getAttribute("type");
+			
+		switch (type) {
+		case "translate":
+			return SVGTransform.SVG_TRANSFORM_TRANSLATE;
+		case "scale":
+			return SVGTransform.SVG_TRANSFORM_SCALE;
+		case "rotate":
+			return SVGTransform.SVG_TRANSFORM_ROTATE;
+		case "skewX":
+			return SVGTransform.SVG_TRANSFORM_SKEWX;
+		case "skewY":
+			return SVGTransform.SVG_TRANSFORM_SKEWY;
+		default:
+			return SVGTransform.SVG_TRANSFORM_UNKNOWN;
+		}
+	}
 
 	@Override
 	public short getAttributeType() {
 		String type = this.getAttribute("attributeType");
 		if (type == null)
-			return ElementTargetAttributes.ATTRIBUTE_TYPE_XML;
+			return ElementTargetAttributes.ATTRIBUTE_TYPE_AUTO;
 
 		switch (type) {
 		case "xml":
@@ -71,12 +93,6 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	}
 
 	@Override
-	public void setBegin(TimeList begin) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public TimeList getEnd() {
 		ArrayList<Time> beginTimeList = new ArrayList<Time>();
 		String begin = this.getAttribute("end");
@@ -99,12 +115,6 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	}
 
 	@Override
-	public void setEnd(TimeList end) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public float getDur() {
 		String duration = this.getAttribute("dur");
 		return TimeImpl.getClockMilliSecs(duration);
@@ -112,20 +122,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	@Override
 	public void setDur(float dur) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public short getRestart() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setRestart(short restart) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute("dur", String.valueOf(dur));
 	}
 
 	@Override
@@ -135,37 +132,43 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 
 	@Override
 	public void setFill(String fill) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute("fill", fill);
 	}
 
 	@Override
 	public float getRepeatCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		String rc = this.getAttribute("repeatCount");
+		if(rc == null) return 0;
+		if("indefinite".equals(rc)) return Float.MAX_VALUE;
+		return Float.parseFloat(rc);
 	}
 
 	@Override
 	public void setRepeatCount(float repeatCount) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute("repeatCount", String.valueOf(repeatCount));
 	}
 
 	@Override
 	public float getRepeatDur() {
-		// TODO Auto-generated method stub
-		return 0;
+		String rd = this.getAttribute("repeatDur");
+		if(rd == null) return 5000;
+		if("indefinite".equals(rd)) return Float.MAX_VALUE;
+		return TimeImpl.getClockMilliSecs(rd);
 	}
 
 	@Override
 	public void setRepeatDur(float repeatDur) throws DOMException {
-		// TODO Auto-generated method stub
-		
+		this.setAttribute("repeatDur", String.valueOf(repeatDur));
 	}
 
 	@Override
 	public boolean beginElement() {
-		// TODO Auto-generated method stub
+		String restart = getAttribute("restart");
+		if (!("never").equalsIgnoreCase(restart)) {
+			SVGAnimateImpl anime = getAnimate();
+			anime.restart();
+			return true;
+		}
 		return false;
 	}
 
@@ -176,93 +179,15 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	}
 
 	@Override
-	public void pauseElement() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void resumeElement() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void seekElement(float seekTo) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean beginElementAt(float offset) throws DOMException {
-		// TODO Auto-generated method stub
-		return false;
+		setDur(offset);
+		return beginElement();
 	}
 
 	@Override
 	public boolean endElementAt(float offset) throws DOMException {
 		// TODO Auto-generated method stub
 		return false;
-	}
-
-	@Override
-	public short getAdditive() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setAdditive(short additive) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public short getAccumulate() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setAccumulate(short accumulate) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public short getCalcMode() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setCalcMode(short calcMode) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String getKeySplines() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setKeySplines(String keySplines) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public TimeList getKeyTimes() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setKeyTimes(TimeList keyTimes) throws DOMException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -303,5 +228,14 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	@Override
 	public void setBy(String by) throws DOMException {
 		this.setAttribute("by", by);
+	}
+	
+	
+	protected SVGAnimateImpl getAnimate() {
+		return animate;
+	}
+	
+	protected void setAnimate(SVGAnimateImpl animate) {
+		this.animate = animate;
 	}
 }

@@ -56,9 +56,9 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
 	 */
-	public short getAdditive();
+	default short getAdditive() {return 0;}
 
-	public void setAdditive(short additive) throws DOMException;
+	default void setAdditive(short additive) {}
 
 	
 
@@ -70,9 +70,9 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
 	 */
-	public short getAccumulate();
+	default short getAccumulate() {return 0;}
 
-	public void setAccumulate(short accumulate) throws DOMException;
+	default void setAccumulate(short accumulate) {};
 
 	/**
 	 * A code representing the value of the calcMode attribute, as defined
@@ -82,9 +82,9 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
 	 */
-	public short getCalcMode();
+	default short getCalcMode() {return 0;}
 
-	public void setCalcMode(short calcMode) throws DOMException;
+	default void setCalcMode(short calcMode) {};
 
 	/**
 	 * A <code>DOMString</code> representing the value of the keySplines
@@ -94,9 +94,9 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
 	 */
-	public String getKeySplines();
+	default String getKeySplines() {return "";}
 
-	public void setKeySplines(String keySplines) throws DOMException;
+	default void setKeySplines(String keySplines) {};
 
 	/**
 	 * A list of the time value of the keyTimes attribute.
@@ -105,9 +105,9 @@ public interface SMILAnimation extends SMILElement, ElementTargetAttributes, Ele
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
 	 */
-	public TimeList getKeyTimes();
+	default TimeList getKeyTimes() {return null;}
 
-	public void setKeyTimes(TimeList keyTimes) throws DOMException;
+	default void setKeyTimes(TimeList keyTimes)  {};
 
 	/**
 	 * A <code>DOMString</code> representing the value of the values attribute.

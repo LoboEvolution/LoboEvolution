@@ -106,6 +106,12 @@ public interface CSSProperties {
 
 	/** The Constant CLIP. */
 	String CLIP = "clip";
+	
+	/** The Constant CLIP PATH. */
+	String CLIP_PATH = "clip-path";
+	
+	/** The Constant CLIP RULE. */
+	String CLIP_RULE = "clip-rule";
 
 	/** The Constant COLOR. */
 	String COLOR = "color";
@@ -355,6 +361,9 @@ public interface CSSProperties {
 
 	/** The Constant STROKE_LIEN_CAP. */
 	String STROKE_LINE_CAP = "stroke-linecap";
+	
+	/** The Constant STROKE_LIEN_JOIN. */
+	String STROKE_LINE_JOINP = "stroke-linejoin";
 
 	/** The Constant STROKE_OPACITY. */
 	String STROKE_OPACITY = "stroke-opacity";
@@ -382,6 +391,9 @@ public interface CSSProperties {
 
 	/** The Constant TOP. */
 	String TOP = "top";
+	
+	/** The Constant TRANSFORM. */
+	String TRANSFORM = "transform";
 
 	/** The Constant UNICODE_BIDI. */
 	String UNICODE_BIDI = "unicode-bidi";

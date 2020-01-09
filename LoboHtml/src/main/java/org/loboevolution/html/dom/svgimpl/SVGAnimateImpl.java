@@ -34,18 +34,53 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	private float from;
 	
 	private float to;
+
+	private float sxFrom = 0;
+
+	private float sxTo = 0;
+
+	private float syFrom = 0;
+
+	private float syTo = 0;
+
+	private float txFrom = 0;
+
+	private float tyFrom = 0;
+
+	private float txTo = 0;
+
+	private float tyTo = 0;
+	
+	private float angleFrom = 0;
+
+	private float cxFrom = 0;
+
+	private float cyFrom = 0;
+
+	private float angleTo = 0;
+
+	private float cxTo = 0;
+
+	private float cyTo = 0;
+		
+	private long dur;
+	
+	String from_trans = "";
+
+	String to_trans = "";
 	
 	private Timer timer;
 	
 	private SVGElementImpl elem;
 	
 	private SVGAnimateElementImpl animate;
-	
+		
 	public SVGAnimateImpl(SVGElementImpl elem, SVGAnimateElementImpl animate) {
 		this.elem = elem;
 		this.animate = animate;
 		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
 		if (!ownerSVGElement.isPainted()) {
+			dur = System.currentTimeMillis();
 			timer = new Timer(timerDelay(animate), this);
 			timer.setInitialDelay(begin(animate));
 			timer.start();
@@ -94,18 +129,24 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			from++;	
 		}
 
-		elem.setAttribute(type, String.valueOf(from));
-		if (from == to) {
+		elem.setAttribute(type, String.valueOf(from));		
+		
+		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
 			timer.stop();
 		}
+
+		if (animate.getDur() == 0 && (from == to)) {
+			timer.stop();
+		}
+
 		counter++;
 	}
 	
 	private void animateColor(SVGElementImpl elem) {
 		if (counter == 0) {
-			Color from_color = Color.RED;
-			Color to_color = Color.GREEN;
-
+			Color from_color = ColorFactory.getInstance().getColor(animate.getFrom());
+			Color to_color = ColorFactory.getInstance().getColor(animate.getTo());
+			
 			f_red = from_color.getRed();
 			f_green = from_color.getGreen();
 			f_blue = from_color.getBlue();
@@ -136,14 +177,176 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
 		elem.setAttribute("fill", rgb);
 		
-		if (++counter > 255) {
+		boolean end = (++counter > 255);
+				
+		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+			timer.stop();
+		}
+		
+		if (animate.getDur() == 0 && end) {
 			timer.stop();
 		}
 	}
 	
+	
+	
 	private void animateTransform(SVGElementImpl elem) {
-		// TODO Auto-generated method stub
+		String transformString = "";
+		if (counter == 0) {
+			from_trans = animate.getFrom();
+			to_trans = animate.getTo();
+		}
 		
+		StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+		StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+
+		switch (animate.getType()) {
+		case SVGTransform.SVG_TRANSFORM_TRANSLATE:
+
+			if (stFrom.countTokens() == 1) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+				tyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			if (stTo.countTokens() == 1) {
+				txTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				txTo = Float.parseFloat(stTo.nextToken());
+				tyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			if (txFrom > txTo)
+				txFrom--;
+
+			if (txFrom < txTo)
+				txFrom++;
+
+			if (tyFrom > tyTo)
+				tyFrom--;
+
+			if (tyFrom < tyTo)
+				tyFrom++;
+
+			from_trans = txFrom + ", " + tyFrom;
+			transformString = "translate(" + from_trans + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_SCALE:
+
+			if (stFrom.countTokens() == 1) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+				syFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			if (stTo.countTokens() == 1) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+				syTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			if (sxFrom > sxTo)
+				sxFrom--;
+
+			if (sxFrom < sxTo)
+				sxFrom++;
+
+			if (syFrom > syTo)
+				syFrom--;
+
+			if (syFrom < syTo)
+				syFrom++;
+
+			if (syFrom == 0) {
+				to_trans = String.valueOf(Float.parseFloat(to_trans));
+			} else {
+				from_trans = sxFrom + ", " + syFrom;
+			}
+
+			transformString = "scale(" + from_trans + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_ROTATE:
+
+			if (stFrom.countTokens() == 1) {
+				angleFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 3) {
+				angleFrom = Float.parseFloat(stFrom.nextToken());
+				cxFrom = Float.parseFloat(stFrom.nextToken());
+				cyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			if (stTo.countTokens() == 1) {
+				angleTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 3) {
+				angleTo = Float.parseFloat(stTo.nextToken());
+				cxTo = Float.parseFloat(stTo.nextToken());
+				cyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			if (angleFrom > angleTo)
+				angleFrom--;
+
+			if (angleFrom < angleTo)
+				angleFrom++;
+
+			if (cxFrom > cxTo)
+				cxFrom--;
+
+			if (cxFrom < cxTo)
+				cxFrom++;
+
+			if (cyFrom > cyTo)
+				cyFrom--;
+
+			if (cyFrom < cyTo)
+				cyFrom++;
+
+			from_trans = angleFrom + ", " + cxFrom + ", " + cyFrom;
+			transformString = "rotate(" + from_trans + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_SKEWX:
+
+			sxFrom = Float.parseFloat(from_trans);
+			sxTo = Float.parseFloat(to_trans);
+
+			if (sxFrom > sxTo)
+				sxFrom--;
+
+			if (sxFrom < sxTo)
+				sxFrom++;
+
+			transformString = "skewX(" + sxFrom + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_SKEWY:
+
+			sxFrom = Float.parseFloat(from_trans);
+			sxTo = Float.parseFloat(to_trans);
+
+			if (sxFrom > sxTo)
+				sxFrom--;
+
+			if (sxFrom < sxTo)
+				sxFrom++;
+			transformString = "skewY(" + sxFrom + ")";
+			break;
+		default:
+			break;
+		}
+
+		elem.setAttribute("transform", transformString);
+		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+			timer.stop();
+		}
+		counter++;
+	}
+	
+	public void restart() {
+		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
+		ownerSVGElement.setPainted(false);
+		new SVGAnimateImpl(elem, animate);
 	}
 	
 	
