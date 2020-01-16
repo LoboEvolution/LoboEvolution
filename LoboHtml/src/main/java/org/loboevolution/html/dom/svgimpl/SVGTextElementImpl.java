@@ -58,8 +58,8 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	@Override
 	public SVGAnimatedLength getTextLength() {
-		// TODO Auto-generated method stub
-		return null;
+		final String text = getText();
+		return new SVGAnimatedLengthImpl(new SVGLengthImpl(text.length()));
 	}
 
 	@Override
@@ -70,26 +70,27 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
 	@Override
 	public int getNumberOfChars() {
-		// TODO Auto-generated method stub
-		return 0;
+		final String text = getText();
+		return text.toCharArray().length;
 	}
 
 	@Override
 	public float getComputedTextLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		final String text = getText();
+		return text.length();
 	}
 
 	@Override
 	public float getSubStringLength(int charnum, int nchars) throws DOMException {
-		// TODO Auto-generated method stub
-		return 0;
+		String text = getText();
+		text = text.substring(charnum, nchars);
+		return text.length();
 	}
 
 	@Override
 	public SVGPoint getStartPositionOfChar(int charnum) throws DOMException {
 		// TODO Auto-generated method stub
-		return null;
+		return new SVGPointImpl();
 	}
 
 	@Override

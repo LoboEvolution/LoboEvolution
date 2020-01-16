@@ -9,6 +9,7 @@ import java.awt.Shape;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
+import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
 import org.loboevolution.html.dom.svg.SVGStylable;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -298,5 +299,91 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 			}
 		}
 		return null;
+	}
+	
+	
+	protected void drawStyle(Node node) {
+		AbstractCSSProperties style = getStyle();
+		SVGElement child = (SVGElement) node;
+		
+		final String fill = Strings.isNotBlank(style.getFill()) ? style.getFill() : getAttribute("fill");
+		if (Strings.isNotBlank(fill)) {
+			child.setAttribute("fill", fill);
+		}
+
+		final String fillop = Strings.isNotBlank(style.getFillOpacity()) ? style.getFillOpacity() : getAttribute("fill-opacity");
+		if (Strings.isNotBlank(fillop)) {
+			child.setAttribute("fill-opacity", fillop);
+		}
+	
+		final String stroke = Strings.isNotBlank(style.getStroke()) ? style.getStroke() : getAttribute("stroke");
+		if (Strings.isNotBlank(stroke)) {
+			child.setAttribute("stroke", stroke);
+		}
+
+		final String strokeop = Strings.isNotBlank(style.getStrokeOpacity()) ? style.getStrokeOpacity() : getAttribute("stroke-opacity");
+		if (Strings.isNotBlank(strokeop)) {
+			child.setAttribute("stroke-opacity", strokeop);
+		}
+		
+		final String swidth = Strings.isNotBlank(style.getStrokeWidth()) ? style.getStrokeWidth() : getAttribute("stroke-width");
+		if (Strings.isNotBlank(swidth)) {
+			child.setAttribute("stroke-width", swidth);
+		}
+		
+		final String slinecap = Strings.isNotBlank(style.getStrokeLineCap()) ? style.getStrokeLineCap() : getAttribute("stroke-linecap");
+		if (Strings.isNotBlank(slinecap)) {
+			child.setAttribute("stroke-linecap", slinecap);
+		}
+		
+		final String slinejoin = Strings.isNotBlank(style.getStrokeLineJoin()) ? style.getStrokeLineJoin() : getAttribute("stroke-linejoin");
+		if (Strings.isNotBlank(slinejoin)) {
+			child.setAttribute("stroke-linejoin", slinejoin);
+		}
+		
+		final String smiterlimit = Strings.isNotBlank(style.getStrokeMiterLimit()) ? style.getStrokeMiterLimit() : getAttribute("stroke-miterlimit");
+		if (Strings.isNotBlank(smiterlimit)) {
+			child.setAttribute("stroke-miterlimit", smiterlimit);
+		}
+		
+		final String sdasharray = Strings.isNotBlank(style.getStrokeDashArray()) ? style.getStrokeDashArray() : getAttribute("stroke-dasharray");
+		if (Strings.isNotBlank(sdasharray)) {
+			child.setAttribute("stroke-dasharray", sdasharray);
+		}
+		
+		final String opacity = Strings.isNotBlank(style.getOpacity()) ? style.getOpacity() : getAttribute("opacity");
+		if (Strings.isNotBlank(opacity)) {
+			child.setAttribute("opacity", opacity);
+		}
+
+		final String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
+		if (Strings.isNotBlank(display)) {
+			child.setAttribute("display", display);
+		}
+		
+		final String visibility = Strings.isNotBlank(style.getVisibility()) ? style.getVisibility() : getAttribute("visibility");
+		if (Strings.isNotBlank(visibility)) {
+			child.setAttribute("visibility", visibility);
+		}
+		
+		final String clipPath = Strings.isNotBlank(style.getClipPath()) ? style.getClipPath() : getAttribute("clip-path");
+		if (Strings.isNotBlank(clipPath)) {
+			child.setAttribute("clip-path", clipPath);
+		}
+		
+		final String clipRule = Strings.isNotBlank(style.getClipRule()) ? style.getClipRule() : getAttribute("clip-rule");
+		if (Strings.isNotBlank(clipRule)) {
+			child.setAttribute("clip-rule", clipRule);
+		}
+		
+		final String stopColor = Strings.isNotBlank(style.getStopColor()) ? style.getStopColor() : getAttribute("stop-color");
+		if (Strings.isNotBlank(stopColor)) {
+			child.setAttribute("stop-color", stopColor);
+		}
+		
+		final String stopOpacity = Strings.isNotBlank(style.getStopOpacity()) ? style.getStopOpacity() : getAttribute("stop-opacity");
+		if (Strings.isNotBlank(stopOpacity)) {
+			child.setAttribute("stop-opacity", stopOpacity);
+		}
 	}
 }

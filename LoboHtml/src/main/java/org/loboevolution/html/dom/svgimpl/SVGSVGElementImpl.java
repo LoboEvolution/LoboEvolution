@@ -486,8 +486,9 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 			}
 		}
 		for (Node node : drawableChildren) {
-			SVGElement elem = (SVGElement)node;
-			elem.setOwnerSVGElement(this);
+			SVGElement selem = (SVGElement)node;
+			selem.setOwnerSVGElement(this);
+			drawStyle(node);
 			Drawable child = (Drawable) node;
 			child.draw(graphics);
 		}

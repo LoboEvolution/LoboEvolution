@@ -147,9 +147,10 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 				}
 			}
 		}
-		int numDrawableChildren = drawableChildren.size();
-		for (int i = 0; i < numDrawableChildren; i++) {
-			Drawable child = (Drawable) drawableChildren.get(i);
+
+		for (Node node : drawableChildren) {
+			drawStyle(node);
+			Drawable child = (Drawable) node;
 			child.draw(graphics);
 		}
 	}
