@@ -11,6 +11,7 @@ import static org.mozilla.javascript.ScriptRuntimeES6.requireObjectCoercible;
 
 import java.text.Collator;
 import java.text.Normalizer;
+import java.util.Locale;
 
 import org.mozilla.javascript.regexp.NativeRegExp;
 
@@ -330,12 +331,12 @@ final class NativeString extends IdScriptableObject
                 case Id_toLowerCase:
                     // See ECMA 15.5.4.11
                     return ScriptRuntime.toString(thisObj).toLowerCase(
-                        ScriptRuntime.ROOT_LOCALE);
+                        Locale.ROOT);
 
                 case Id_toUpperCase:
                     // See ECMA 15.5.4.12
                     return ScriptRuntime.toString(thisObj).toUpperCase(
-                        ScriptRuntime.ROOT_LOCALE);
+                        Locale.ROOT);
 
                 case Id_substr:
                     return js_substr(ScriptRuntime.toCharSequence(thisObj), args);
@@ -619,7 +620,7 @@ final class NativeString extends IdScriptableObject
 
         if (position < 0) position = 0;
         else if (position > target.length()) position = target.length();
-        else if (methodId == Id_endsWith && (position != position  || position > target.length())) position = target.length();
+        else if (methodId == Id_endsWith && (Double.isNaN(position) || position > target.length())) position = target.length();
 
         if (Id_endsWith == methodId) {
             if (args.length == 0 || args.length == 1 || (args.length == 2 && args[1] == Undefined.instance)) position = target.length();
@@ -639,7 +640,7 @@ final class NativeString extends IdScriptableObject
         String search = ScriptRuntime.toString(args, 0);
         double end = ScriptRuntime.toNumber(args, 1);
 
-        if (end != end || end > target.length())
+        if (Double.isNaN(end) || end > target.length())
             end = target.length();
         else if (end < 0)
             end = 0;

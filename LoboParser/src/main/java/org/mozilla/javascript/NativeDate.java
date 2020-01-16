@@ -37,12 +37,6 @@ final class NativeDate extends IdScriptableObject
 
     private NativeDate()
     {
-        if (thisTimeZone == null) {
-            // j.u.TimeZone is synchronized, so setting class statics from it
-            // should be OK.
-            thisTimeZone = TimeZone.getDefault();
-            LocalTZA = thisTimeZone.getRawOffset();
-        }
     }
 
     @Override
@@ -172,7 +166,7 @@ final class NativeDate extends IdScriptableObject
                 Object tv = ScriptRuntime.toPrimitive(o, ScriptRuntime.NumberClass);
                 if (tv instanceof Number) {
                     double d = ((Number) tv).doubleValue();
-                    if (d != d || Double.isInfinite(d)) {
+                    if (Double.isNaN(d) || Double.isInfinite(d)) {
                         return null;
                     }
                 }
@@ -211,7 +205,7 @@ final class NativeDate extends IdScriptableObject
           case Id_toString:
           case Id_toTimeString:
           case Id_toDateString:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 return date_format(t, id);
             }
             return js_NaN_date_str;
@@ -219,13 +213,13 @@ final class NativeDate extends IdScriptableObject
           case Id_toLocaleString:
           case Id_toLocaleTimeString:
           case Id_toLocaleDateString:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 return toLocale_helper(t, id);
             }
             return js_NaN_date_str;
 
           case Id_toUTCString:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 return js_toUTCString(t);
             }
             return js_NaN_date_str;
@@ -240,7 +234,7 @@ final class NativeDate extends IdScriptableObject
           case Id_getYear:
           case Id_getFullYear:
           case Id_getUTCFullYear:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id != Id_getUTCFullYear) t = LocalTime(t);
                 t = YearFromTime(t);
                 if (id == Id_getYear) {
@@ -257,7 +251,7 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getMonth:
           case Id_getUTCMonth:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getMonth) t = LocalTime(t);
                 t = MonthFromTime(t);
             }
@@ -265,7 +259,7 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getDate:
           case Id_getUTCDate:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getDate) t = LocalTime(t);
                 t = DateFromTime(t);
             }
@@ -273,7 +267,7 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getDay:
           case Id_getUTCDay:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getDay) t = LocalTime(t);
                 t = WeekDay(t);
             }
@@ -281,7 +275,7 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getHours:
           case Id_getUTCHours:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getHours) t = LocalTime(t);
                 t = HourFromTime(t);
             }
@@ -289,7 +283,7 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getMinutes:
           case Id_getUTCMinutes:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getMinutes) t = LocalTime(t);
                 t = MinFromTime(t);
             }
@@ -297,7 +291,7 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getSeconds:
           case Id_getUTCSeconds:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getSeconds) t = LocalTime(t);
                 t = SecFromTime(t);
             }
@@ -305,14 +299,14 @@ final class NativeDate extends IdScriptableObject
 
           case Id_getMilliseconds:
           case Id_getUTCMilliseconds:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 if (id == Id_getMilliseconds) t = LocalTime(t);
                 t = msFromTime(t);
             }
             return ScriptRuntime.wrapNumber(t);
 
           case Id_getTimezoneOffset:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 t = (t - LocalTime(t)) / msPerMinute;
             }
             return ScriptRuntime.wrapNumber(t);
@@ -348,10 +342,10 @@ final class NativeDate extends IdScriptableObject
             {
                 double year = ScriptRuntime.toNumber(args, 0);
 
-                if (year != year || Double.isInfinite(year)) {
+                if (Double.isNaN(year) || Double.isInfinite(year)) {
                     t = ScriptRuntime.NaN;
                 } else {
-                    if (t != t) {
+                    if (Double.isNaN(t)) {
                         t = 0;
                     } else {
                         t = LocalTime(t);
@@ -371,7 +365,7 @@ final class NativeDate extends IdScriptableObject
             return ScriptRuntime.wrapNumber(t);
 
           case Id_toISOString:
-            if (t == t) {
+            if (!Double.isNaN(t)) {
                 return js_toISOString(t);
             }
             String msg = ScriptRuntime.getMessage0("msg.invalid.date");
@@ -538,7 +532,7 @@ final class NativeDate extends IdScriptableObject
 
         // d: date count from 1 March
         int mdays, mstart;
-        switch (Math.round(d / 30)) { // approx number of month since March
+        switch (d / 30) { // approx number of month since March
             case 0: return d + 1;
             case 1: mdays = 31; mstart = 31; break;
             case 2: mdays = 30; mstart = 31+30; break;
@@ -706,7 +700,7 @@ final class NativeDate extends IdScriptableObject
 
     private static double TimeClip(double d)
     {
-        if (d != d ||
+        if (Double.isNaN(d) ||
             d == Double.POSITIVE_INFINITY ||
             d == Double.NEGATIVE_INFINITY ||
             Math.abs(d) > HalfTimeDomain)
@@ -747,7 +741,7 @@ final class NativeDate extends IdScriptableObject
         for (loop = 0; loop < MAXARGS; loop++) {
             if (loop < args.length) {
                 d = ScriptRuntime.toNumber(args[loop]);
-                if (d != d || Double.isInfinite(d)) {
+                if (Double.isNaN(d) || Double.isInfinite(d)) {
                     return ScriptRuntime.NaN;
                 }
                 array[loop] = ScriptRuntime.toInteger(args[loop]);
@@ -932,7 +926,7 @@ final class NativeDate extends IdScriptableObject
     private static double date_parseString(String s)
     {
         double d = parseISOString(s);
-        if (d == d) {
+        if (!Double.isNaN(d)) {
             return d;
         }
 
@@ -1188,9 +1182,6 @@ final class NativeDate extends IdScriptableObject
             }
             append0PaddedUint(result, offset, 4);
 
-            if (timeZoneFormatter == null)
-                timeZoneFormatter = new SimpleDateFormat("zzz");
-
             // Find an equivalent year before getting the timezone
             // comment.  See DaylightSavingTA.
             if (t < 0.0) {
@@ -1257,25 +1248,12 @@ final class NativeDate extends IdScriptableObject
         DateFormat formatter;
         switch (methodId) {
           case Id_toLocaleString:
-            if (localeDateTimeFormatter == null) {
-                localeDateTimeFormatter
-                    = DateFormat.getDateTimeInstance(DateFormat.LONG,
-                                                     DateFormat.LONG);
-            }
             formatter = localeDateTimeFormatter;
             break;
           case Id_toLocaleTimeString:
-            if (localeTimeFormatter == null) {
-                localeTimeFormatter
-                    = DateFormat.getTimeInstance(DateFormat.LONG);
-            }
             formatter = localeTimeFormatter;
             break;
           case Id_toLocaleDateString:
-            if (localeDateFormatter == null) {
-                localeDateFormatter
-                    = DateFormat.getDateInstance(DateFormat.LONG);
-            }
             formatter = localeDateFormatter;
             break;
           default: throw new AssertionError(); // unreachable
@@ -1448,7 +1426,7 @@ final class NativeDate extends IdScriptableObject
         double[] nums = new double[4];
         for (int i = 0; i < numNums; i++) {
             double d = ScriptRuntime.toNumber(args[i]);
-            if (d != d || Double.isInfinite(d)) {
+            if (Double.isNaN(d) || Double.isInfinite(d)) {
                 hasNaN = true;
             } else {
                 nums[i] = ScriptRuntime.toInteger(d);
@@ -1457,7 +1435,7 @@ final class NativeDate extends IdScriptableObject
 
         // just return NaN if the date is already NaN,
         // limit checks that happen in MakeTime in ECMA.
-        if (hasNaN || date != date) {
+        if (hasNaN || Double.isNaN(date)) {
             return ScriptRuntime.NaN;
         }
 
@@ -1540,7 +1518,7 @@ final class NativeDate extends IdScriptableObject
         double[] nums = new double[3];
         for (int i = 0; i < numNums; i++) {
             double d = ScriptRuntime.toNumber(args[i]);
-            if (d != d || Double.isInfinite(d)) {
+            if (Double.isNaN(d) || Double.isInfinite(d)) {
                 hasNaN = true;
             } else {
                 nums[i] = ScriptRuntime.toInteger(d);
@@ -1558,7 +1536,7 @@ final class NativeDate extends IdScriptableObject
 
         /* return NaN if date is NaN and we're not setting the year,
          * If we are, use 0 as the time. */
-        if (date != date) {
+        if (Double.isNaN(date)) {
             if (maxargs < 3) {
                 return ScriptRuntime.NaN;
             }
@@ -1777,12 +1755,15 @@ final class NativeDate extends IdScriptableObject
 // #/string_id_map#
 
     /* cached values */
-    private static TimeZone thisTimeZone;
-    private static double LocalTZA;
-    private static DateFormat timeZoneFormatter;
-    private static DateFormat localeDateTimeFormatter;
-    private static DateFormat localeDateFormatter;
-    private static DateFormat localeTimeFormatter;
+    private static final TimeZone thisTimeZone = TimeZone.getDefault();
+    private static final double LocalTZA = thisTimeZone.getRawOffset();
+    private static final DateFormat timeZoneFormatter = new SimpleDateFormat("zzz");
+    private static final DateFormat localeDateTimeFormatter =
+        DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG);
+    private static final DateFormat localeDateFormatter =
+        DateFormat.getDateInstance(DateFormat.LONG);
+    private static final DateFormat localeTimeFormatter =
+        DateFormat.getTimeInstance(DateFormat.LONG);
 
     private double date;
 }

@@ -7,9 +7,9 @@
 package org.mozilla.javascript;
 
 public abstract class ES6Iterator extends IdScriptableObject {
-	
-	private static final long serialVersionUID = 1L;
-	
+
+    private static final long serialVersionUID = 2438373029140003950L;
+
     static void init(ScriptableObject scope, boolean sealed, IdScriptableObject prototype, String tag) {
         if (scope != null) {
             prototype.setParentScope(scope);
@@ -140,5 +140,6 @@ public abstract class ES6Iterator extends IdScriptableObject {
 
     public static final String NEXT_METHOD = "next";
     public static final String DONE_PROPERTY = "done";
+    public static final String RETURN_PROPERTY = "return";
     public static final String VALUE_PROPERTY = "value";
 }

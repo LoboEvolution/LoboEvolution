@@ -446,15 +446,6 @@ public class Parser
         return tt;
     }
 
-    private int nextFlaggedToken()
-        throws IOException
-    {
-        peekToken();
-        int ttFlagged = currentFlaggedToken;
-        consumeToken();
-        return ttFlagged;
-    }
-
     private boolean matchToken(int toMatch, boolean ignoreComment)
         throws IOException
     {
@@ -2629,7 +2620,7 @@ public class Parser
                   return memberExprTail(true, xmlInitializer());
               }
               // Fall thru to the default handling of RELOP
-              // fallthru
+              // fall through
 
           default:
               AstNode pn = memberExpr(true);
@@ -3281,6 +3272,8 @@ public class Parser
                     elements.add(new EmptyExpression(ts.tokenBeg, 1));
                     skipCount++;
                 }
+            } else if(tt == Token.COMMENT) {
+                consumeToken();
             } else if (tt == Token.RB) {
                 consumeToken();
                 // for ([a,] in obj) is legal, but for ([a] in obj) is
@@ -3408,7 +3401,7 @@ public class Parser
                     isForOf = true;
                     break;
                 }
-                // fallthru
+                // fall through
             default:
                 reportError("msg.in.after.for.name");
             }

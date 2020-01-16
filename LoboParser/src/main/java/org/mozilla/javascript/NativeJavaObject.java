@@ -217,6 +217,9 @@ public class NativeJavaObject
             if (javaObject instanceof Boolean) {
                 hint = ScriptRuntime.BooleanClass;
             }
+            if (javaObject instanceof Number) {
+                hint = ScriptRuntime.NumberClass;
+            }
         }
         if (hint == null || hint == ScriptRuntime.StringClass) {
             value = javaObject.toString();
@@ -692,7 +695,8 @@ public class NativeJavaObject
                 reportConversionError(value, type);
             }
             else if (type.isInterface() && (value instanceof NativeObject
-                    || value instanceof NativeFunction)) {
+                    || value instanceof NativeFunction
+                    || value instanceof ArrowFunction)) {
                 // Try to use function/object as implementation of Java interface.
                 return createInterfaceAdapter(type, (ScriptableObject) value);
             } else {
@@ -923,7 +927,7 @@ public class NativeJavaObject
         }
 
         if (staticType != null) {
-            out.writeObject(staticType.getClass().getName());
+            out.writeObject(staticType.getName());
         } else {
             out.writeObject(null);
         }

@@ -254,25 +254,17 @@ public class NativeJavaMethod extends BaseFunction
 
     int findCachedFunction(Context cx, Object[] args) {
         if (methods.length > 1) {
-            if (overloadCache != null) {
-                for (ResolvedOverload ovl : overloadCache) {
-                    if (ovl.matches(args)) {
-                        return ovl.index;
-                    }
+            for (ResolvedOverload ovl : overloadCache) {
+                if (ovl.matches(args)) {
+                    return ovl.index;
                 }
-            } else {
-                overloadCache = new CopyOnWriteArrayList<ResolvedOverload>();
             }
             int index = findFunction(cx, methods, args);
             // As a sanity measure, don't let the lookup cache grow longer
             // than twice the number of overloaded methods
             if (overloadCache.size() < methods.length * 2) {
-                synchronized (overloadCache) {
-                    ResolvedOverload ovl = new ResolvedOverload(args, index);
-                    if (!overloadCache.contains(ovl)) {
-                        overloadCache.add(0, ovl);
-                    }
-                }
+                ResolvedOverload ovl = new ResolvedOverload(args, index);
+                overloadCache.addIfAbsent(ovl);
             }
             return index;
         }

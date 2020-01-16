@@ -8,9 +8,14 @@ package org.mozilla.javascript;
 
 import java.util.logging.Logger;
 
+import org.mozilla.javascript.ast.AstNode;
+import org.mozilla.javascript.ast.AstRoot;
+import org.mozilla.javascript.ast.Block;
 import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.Jump;
+import org.mozilla.javascript.ast.Scope;
 import org.mozilla.javascript.ast.ScriptNode;
+import org.mozilla.javascript.ast.VariableInitializer;
 
 /**
  * Generates bytecode for the Interpreter.
@@ -108,6 +113,8 @@ class CodeGenerator extends Icode {
             itsData.isStrict = true;
         }
 
+        itsData.declaredAsVar = (theFunction.getParent() instanceof VariableInitializer);
+
         generateICodeFromTree(theFunction.getLastChild());
     }
 
@@ -195,6 +202,13 @@ class CodeGenerator extends Icode {
             gen.itsData = new InterpreterData(itsData);
             gen.generateFunctionICode();
             array[i] = gen.itsData;
+
+            final AstNode fnParent = fn.getParent();
+            if (!(fnParent instanceof AstRoot
+                    || fnParent instanceof Scope
+                    || fnParent instanceof Block)) {
+                        gen.itsData.declaredAsFunctionExpression = true;
+            }
         }
         itsData.itsNestedFunctions = array;
     }
@@ -277,7 +291,7 @@ class CodeGenerator extends Icode {
           case Token.EMPTY:
           case Token.WITH:
             updateLineNumber(node);
-            // fallthru
+            // fall through
           case Token.SCRIPT:
             while (child != null) {
                 visitStatement(child, initialStackDepth);
