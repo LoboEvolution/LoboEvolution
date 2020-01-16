@@ -23,27 +23,27 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStylable {
-	public String getGlyphRef();
+	String getGlyphRef();
 
-	public void setGlyphRef(String glyphRef) throws DOMException;
+	void setGlyphRef(String glyphRef) throws DOMException;
 
-	public String getFormat();
+	String getFormat();
 
-	public void setFormat(String format) throws DOMException;
+	void setFormat(String format) throws DOMException;
 
-	public float getX();
+	float getX();
 
-	public void setX(float x) throws DOMException;
+	void setX(float x) throws DOMException;
 
-	public float getY();
+	float getY();
 
-	public void setY(float y) throws DOMException;
+	void setY(float y) throws DOMException;
 
-	public float getDx();
+	float getDx();
 
-	public void setDx(float dx) throws DOMException;
+	void setDx(float dx) throws DOMException;
 
-	public float getDy();
+	float getDy();
 
-	public void setDy(float dy) throws DOMException;
+	void setDy(float dy) throws DOMException;
 }

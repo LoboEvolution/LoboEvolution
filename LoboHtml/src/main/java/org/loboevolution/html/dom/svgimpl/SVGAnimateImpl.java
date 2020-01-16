@@ -1,558 +1,477 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
-
 package org.loboevolution.html.dom.svgimpl;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.StringTokenizer;
+
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
-import org.loboevolution.info.SVGInfo;
-import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.smil.ElementTargetAttributes;
+import org.loboevolution.html.dom.smil.TimeList;
 import org.loboevolution.html.dom.svg.SVGTransform;
-import org.loboevolution.html.dom.svg.SVGTransformList;
-import org.loboevolution.html.style.AbstractCSSProperties;
-
+import org.loboevolution.laf.ColorFactory;
 
 public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
-	private Timer timer;
-	private transient SVGInfo info;
-	private transient RUIControl ruicontrol;
-	private transient SVGAnimationImpl animate;
-	private float from_xml;
-	private float to_xml;
-	private String from_trans;
-	private String to_trans;
-	private Color from_color;
-	private Color to_color;
-	private int count;
-	private long repeatDuration;
 
-	public SVGAnimateImpl(SVGInfo info, RUIControl ruicontrol) {
-		this.info = info;
-		this.ruicontrol = ruicontrol;
-		this.animate = (SVGAnimationImpl)info.getAnimate();
-		count = 0;
-		int time = SVGUtility.timerDelay(animate);
-		timer = new Timer(time, this);
-		timer.setInitialDelay(SVGUtility.begin(animate));
-		startAnimation();
+	private int counter;
+	
+	private int f_red = 0;
+	
+	private int f_green = 0;
+	
+	private int f_blue = 0;
+	
+	private int t_red = 0;
+	
+	private int t_green = 0;
+	
+	private int t_blue = 0;
+	
+	private float from;
+	
+	private float to;
+
+	private float sxFrom = 0;
+
+	private float sxTo = 0;
+
+	private float syFrom = 0;
+
+	private float syTo = 0;
+
+	private float txFrom = 0;
+
+	private float tyFrom = 0;
+
+	private float txTo = 0;
+
+	private float tyTo = 0;
+	
+	private float angleFrom = 0;
+
+	private float cxFrom = 0;
+
+	private float cyFrom = 0;
+
+	private float angleTo = 0;
+
+	private float cxTo = 0;
+
+	private float cyTo = 0;
+		
+	private long dur;
+	
+	String from_trans = "";
+
+	String to_trans = "";
+	
+	private Timer timer;
+	
+	private SVGElementImpl elem;
+	
+	private SVGAnimateElementImpl animate;
+		
+	public SVGAnimateImpl(SVGElementImpl elem, SVGAnimateElementImpl animate) {
+		this.elem = elem;
+		this.animate = animate;
+		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
+		if (!ownerSVGElement.isPainted()) {
+			dur = System.currentTimeMillis();
+			timer = new Timer(timerDelay(animate), this);
+			timer.setInitialDelay(begin(animate));
+			timer.start();
+		}
 	}
 
-	@Override
 	public void actionPerformed(ActionEvent e) {
-		switch (this.animate.getAttributeName().toLowerCase()) {
+		final String attribute = animate.getAttributeName().toLowerCase();
+		switch (attribute) {
 		case "width":
-			animateWidth();
-			break;
 		case "height":
-			animateHeight();
-			break;
-		case "y":
-		case "cy":
-			animateY();
-			break;
 		case "x":
+		case "y":
 		case "cx":
-			animateX();
-			break;
+		case "cy":
 		case "x1":
-			animateX1();
-			break;
 		case "x2":
-			animateX2();
-			break;
 		case "y1":
-			animateY1();
-			break;
 		case "y2":
-			animateY2();
-			break;
 		case "r":
-			animateR();
+			animateSize(elem, attribute);
 			break;
 		case "fill":
 		case "stroke":
-			animate();
+			animateColor(elem);
 			break;
 		case "transform":
-			animateTransform();
+			animateTransform(elem);
 			break;
 		default:
 			break;
 		}
 	}
-	
-	private void animateWidth() {
+
+	private void animateSize(SVGElementImpl elem, String type) {
+		if (counter == 0) {
+			from = Float.parseFloat(animate.getFrom());
+			to = Float.parseFloat(animate.getTo());
+		}
+
+		if (from > to) {
+			from--;
+		}
+
+		if (to > from) {
+			from++;	
+		}
+
+		elem.setAttribute(type, String.valueOf(from));		
 		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setWidth(from_xml);
-			}
-		
-		} else {
-			from_xml++;
-			info.setWidth(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateHeight() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setHeight(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setHeight(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateX() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setX(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setX(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateY() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setY(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setY(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateR() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setR(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setR(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateX1() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setX1(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setX1(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateX2() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setX2(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setX2(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateY1() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setY1(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setY1(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-
-	private void animateY2() {
-		
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_xml >= to_xml) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_xml = Float.parseFloat(this.animate.getFrom());
-				info.setY2(from_xml);
-			}
-		} else {
-			from_xml++;
-			info.setY2(from_xml);
-			ruicontrol.relayout();
-		}
-	}
-	
-	private void animate() {
-
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_color.getRGB() == to_color.getRGB()) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_color = ColorFactory.getInstance().getColor(this.animate.getFrom());
-				AbstractCSSProperties style = (AbstractCSSProperties)info.getStyle(); 
-				style.setFill("rgb(" + from_color.getRed() + "," + from_color.getGreen() + "," + from_color.getBlue() + ")");
-			}
-		} else {
-
-			int f_red = from_color.getRed();
-			int f_green = from_color.getGreen();
-			int f_blue = from_color.getBlue();
-
-			int t_red = to_color.getRed();
-			int t_green = to_color.getGreen();
-			int t_blue = to_color.getBlue();
-
-			if (f_red > t_red)
-				f_red--;
-
-			if (f_red < t_red)
-				f_red++;
-
-			if (f_green > t_green)
-				f_green--;
-
-			if (f_green < t_green)
-				f_green++;
-
-			if (f_blue > t_blue)
-				f_blue--;
-
-			if (f_blue < t_blue)
-				f_blue++;
-
-			String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
-			from_color = ColorFactory.getInstance().getColor(rgb);
-			AbstractCSSProperties style = (AbstractCSSProperties)info.getStyle(); 
-			style.setStroke(rgb);
-			ruicontrol.relayout();
-		}
-	}
-	
-	private void animateTransform() {
-				
-		if(this.animate.getRepeatDur() <= (System.currentTimeMillis() - repeatDuration)){
-			stopAnimation();
-		}
-		
-		if (from_trans.equals(to_trans)) {
-			if (this.animate.getRepeatCount() == count) {
-				stopAnimation();
-			} else {
-				count++;
-				from_trans = animate.getFrom();
-			}
-		} else {
-			String transformString = "";
-			SVGAnimationImpl animate = (SVGAnimationImpl)info.getAnimate();
-			StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
-			
-			if (animate.getType() == SVGTransform.SVG_TRANSFORM_TRANSLATE) {
-
-				float txFrom = 0;
-				float tyFrom = 0;
-				if (stFrom.countTokens() == 1) {
-					txFrom = Float.parseFloat(stFrom.nextToken());
-				} else if (stFrom.countTokens() == 2) {
-					txFrom = Float.parseFloat(stFrom.nextToken());
-					tyFrom = Float.parseFloat(stFrom.nextToken());
-				}
-
-				StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
-				float txTo = 0;
-				float tyTo = 0;
-				if (stTo.countTokens() == 1) {
-					txTo = Float.parseFloat(stTo.nextToken());
-				} else if (stTo.countTokens() == 2) {
-					txTo = Float.parseFloat(stTo.nextToken());
-					tyTo = Float.parseFloat(stTo.nextToken());
-				}
-
-				if (txFrom > txTo)
-					txFrom--;
-
-				if (txFrom < txTo)
-					txFrom++;
-
-				if (tyFrom > tyTo)
-					tyFrom--;
-
-				if (tyFrom < tyTo)
-					tyFrom++;
-
-				from_trans = txFrom + ", " + tyFrom;
-				to_trans = tyFrom + ", " + tyTo;
-				transformString = "translate(" + from_trans + ")";
-
-			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SCALE) {
-
-				float sxFrom = 0;
-				float syFrom = 0;
-				if (stFrom.countTokens() == 1) {
-					sxFrom = Float.parseFloat(stFrom.nextToken());
-				} else if (stFrom.countTokens() == 2) {
-					sxFrom = Float.parseFloat(stFrom.nextToken());
-					syFrom = Float.parseFloat(stFrom.nextToken());
-				}
-
-				StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
-				float sxTo = 0;
-				float syTo = 0;
-				if (stTo.countTokens() == 1) {
-					sxTo = Float.parseFloat(stTo.nextToken());
-				} else if (stTo.countTokens() == 2) {
-					sxTo = Float.parseFloat(stTo.nextToken());
-					syTo = Float.parseFloat(stTo.nextToken());
-				}
-
-				if (sxFrom > sxTo)
-					sxFrom--;
-
-				if (sxFrom < sxTo)
-					sxFrom++;
-
-				if (syFrom > syTo)
-					syFrom--;
-
-				if (syFrom < syTo)
-					syFrom++;
-				
-				if(syFrom == 0){
-					from_trans = String.valueOf(sxFrom);
-					to_trans = String.valueOf(Float.parseFloat(to_trans));
-				} else{
-					from_trans = sxFrom + ", " + syFrom;
-					to_trans = syFrom + ", " + syTo;
-				}
-
-				transformString = "scale(" + from_trans + ")";
-				
-			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_ROTATE) {
-
-				float angleFrom = 0;
-				float cxFrom = 0;
-				float cyFrom = 0;
-				
-				if (stFrom.countTokens() == 1) {
-					angleFrom = Float.parseFloat(stFrom.nextToken());
-				} else if (stFrom.countTokens() == 3) {
-					angleFrom = Float.parseFloat(stFrom.nextToken());
-					cxFrom = Float.parseFloat(stFrom.nextToken());
-					cyFrom = Float.parseFloat(stFrom.nextToken());
-				}
-
-				StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
-				float angleTo = 0;
-				float cxTo = 0;
-				float cyTo = 0;
-				if (stTo.countTokens() == 1) {
-					angleTo = Float.parseFloat(stTo.nextToken());
-				} else if (stTo.countTokens() == 3) {
-					angleTo = Float.parseFloat(stTo.nextToken());
-					cxTo = Float.parseFloat(stTo.nextToken());
-					cyTo = Float.parseFloat(stTo.nextToken());
-				}
-
-				if (angleFrom > angleTo)
-					angleFrom--;
-
-				if (angleFrom < angleTo)
-					angleFrom++;
-
-				if (cxFrom > cxTo)
-					cxFrom--;
-
-				if (cxFrom < cxTo)
-					cxFrom++;
-
-				if (cyFrom > cyTo)
-					cyFrom--;
-
-				if (cyFrom < cyTo)
-					cyFrom++;
-
-				from_trans = angleFrom + ", " + cxFrom + ", " + cyFrom;
-				to_trans = angleTo + ", " + cxTo + ", " + cyTo;
-				transformString = "rotate(" + from_trans + ")";
-
-			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SKEWX) {
-
-				float sxFrom = Float.parseFloat(from_trans);
-				float sxTo = Float.parseFloat(to_trans);
-
-				if (sxFrom > sxTo)
-					sxFrom--;
-
-				if (sxFrom < sxTo)
-					sxFrom++;
-				
-				from_trans = String.valueOf(sxFrom);
-				to_trans = String.valueOf(sxTo);
-				transformString = "skewX(" + sxFrom + ")";
-
-			} else if (animate.getType() == SVGTransform.SVG_TRANSFORM_SKEWY) {
-
-				float sxFrom = Float.parseFloat(from_trans);
-				float sxTo = Float.parseFloat(to_trans);
-
-				if (sxFrom > sxTo)
-					sxFrom--;
-
-				if (sxFrom < sxTo)
-					sxFrom++;
-				
-				from_trans = String.valueOf(sxFrom);
-				to_trans = String.valueOf(sxTo);
-				transformString = "skewY(" + sxFrom + ")";
-			}
-			
-			SVGTransformList transformList = SVGTransformListImpl.createTransformList(transformString);
-			info.setTransformList(transformList);
-			ruicontrol.relayout();
-		}
-	}
-	
-	private void startAnimation() {
-		if (!timer.isRunning()) {
-			SVGAnimationImpl animate = (SVGAnimationImpl)info.getAnimate();
-			if ("transform".equalsIgnoreCase(animate.getAttributeName())) {
-				from_trans = animate.getFrom();
-				to_trans = animate.getTo();
-			} else if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
-				from_xml = Float.parseFloat(animate.getFrom());
-				to_xml = Float.parseFloat(animate.getTo());
-			} else {
-				from_color = ColorFactory.getInstance().getColor(animate.getFrom());
-				to_color = ColorFactory.getInstance().getColor(animate.getTo());
-			}
-			repeatDuration = System.currentTimeMillis();
-			timer.start();
-		}
-	}
-
-	private void stopAnimation() {
-		if (timer.isRunning()) {
+		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
 			timer.stop();
 		}
+
+		if (animate.getDur() == 0 && (from == to)) {
+			timer.stop();
+		}
+
+		counter++;
+	}
+	
+	private void animateColor(SVGElementImpl elem) {
+		if (counter == 0) {
+			Color from_color = ColorFactory.getInstance().getColor(animate.getFrom());
+			Color to_color = ColorFactory.getInstance().getColor(animate.getTo());
+			
+			f_red = from_color.getRed();
+			f_green = from_color.getGreen();
+			f_blue = from_color.getBlue();
+
+			t_red = to_color.getRed();
+			t_green = to_color.getGreen();
+			t_blue = to_color.getBlue();
+		}
+
+		if (f_red > t_red)
+			f_red--;
+
+		if (f_red < t_red)
+			f_red++;
+
+		if (f_green > t_green)
+			f_green--;
+
+		if (f_green < t_green)
+			f_green++;
+
+		if (f_blue > t_blue)
+			f_blue--;
+
+		if (f_blue < t_blue)
+			f_blue++;
+
+		String rgb = "rgb(" + f_red + "," + f_green + "," + f_blue + ")";
+		elem.setAttribute("fill", rgb);
+		
+		boolean end = (++counter > 255);
+				
+		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+			timer.stop();
+		}
+		
+		if (animate.getDur() == 0 && end) {
+			timer.stop();
+		}
+	}
+	
+	
+	
+	private void animateTransform(SVGElementImpl elem) {
+		String transformString = "";
+		if (counter == 0) {
+			from_trans = animate.getFrom();
+			to_trans = animate.getTo();
+		}
+		
+		StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+		StringTokenizer stTo = new StringTokenizer(to_trans, " ,");
+
+		switch (animate.getType()) {
+		case SVGTransform.SVG_TRANSFORM_TRANSLATE:
+
+			if (stFrom.countTokens() == 1) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+				tyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			if (stTo.countTokens() == 1) {
+				txTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				txTo = Float.parseFloat(stTo.nextToken());
+				tyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			if (txFrom > txTo)
+				txFrom--;
+
+			if (txFrom < txTo)
+				txFrom++;
+
+			if (tyFrom > tyTo)
+				tyFrom--;
+
+			if (tyFrom < tyTo)
+				tyFrom++;
+
+			from_trans = txFrom + ", " + tyFrom;
+			transformString = "translate(" + from_trans + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_SCALE:
+
+			if (stFrom.countTokens() == 1) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+				syFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			if (stTo.countTokens() == 1) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+				syTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			if (sxFrom > sxTo)
+				sxFrom--;
+
+			if (sxFrom < sxTo)
+				sxFrom++;
+
+			if (syFrom > syTo)
+				syFrom--;
+
+			if (syFrom < syTo)
+				syFrom++;
+
+			if (syFrom == 0) {
+				to_trans = String.valueOf(Float.parseFloat(to_trans));
+			} else {
+				from_trans = sxFrom + ", " + syFrom;
+			}
+
+			transformString = "scale(" + from_trans + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_ROTATE:
+
+			if (stFrom.countTokens() == 1) {
+				angleFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 3) {
+				angleFrom = Float.parseFloat(stFrom.nextToken());
+				cxFrom = Float.parseFloat(stFrom.nextToken());
+				cyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			if (stTo.countTokens() == 1) {
+				angleTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 3) {
+				angleTo = Float.parseFloat(stTo.nextToken());
+				cxTo = Float.parseFloat(stTo.nextToken());
+				cyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			if (angleFrom > angleTo)
+				angleFrom--;
+
+			if (angleFrom < angleTo)
+				angleFrom++;
+
+			if (cxFrom > cxTo)
+				cxFrom--;
+
+			if (cxFrom < cxTo)
+				cxFrom++;
+
+			if (cyFrom > cyTo)
+				cyFrom--;
+
+			if (cyFrom < cyTo)
+				cyFrom++;
+
+			from_trans = angleFrom + ", " + cxFrom + ", " + cyFrom;
+			transformString = "rotate(" + from_trans + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_SKEWX:
+
+			sxFrom = Float.parseFloat(from_trans);
+			sxTo = Float.parseFloat(to_trans);
+
+			if (sxFrom > sxTo)
+				sxFrom--;
+
+			if (sxFrom < sxTo)
+				sxFrom++;
+
+			transformString = "skewX(" + sxFrom + ")";
+			break;
+		case SVGTransform.SVG_TRANSFORM_SKEWY:
+
+			sxFrom = Float.parseFloat(from_trans);
+			sxTo = Float.parseFloat(to_trans);
+
+			if (sxFrom > sxTo)
+				sxFrom--;
+
+			if (sxFrom < sxTo)
+				sxFrom++;
+			transformString = "skewY(" + sxFrom + ")";
+			break;
+		default:
+			break;
+		}
+
+		elem.setAttribute("transform", transformString);
+		if(animate.getDur() > 0 && animate.getDur() <= (System.currentTimeMillis() - dur)){
+			timer.stop();
+		}
+		counter++;
+	}
+	
+	public void restart() {
+		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
+		ownerSVGElement.setPainted(false);
+		new SVGAnimateImpl(elem, animate);
+	}
+	
+	
+	public int timerDelay(SVGAnimationImpl animate) {
+		if (animate.getDur() == 0)
+			return 5;
+
+		if ("transform".equalsIgnoreCase(animate.getAttributeName())) {
+			return timeDelayTransform(animate);
+		} else if (ElementTargetAttributes.ATTRIBUTE_TYPE_XML == animate.getAttributeType()) {
+			return timerDelayFloat(animate);
+		} else {
+			return timerDelayColor(animate);
+		}
+	}
+	
+	private int begin(SVGAnimationImpl animate){
+		TimeList begin = animate.getBegin();
+		TimeImpl time = (TimeImpl)begin.item(0);
+		return Double.valueOf(time.getResolvedOffset()).intValue();
+	}
+
+	private int timerDelayFloat(SVGAnimationImpl animate) {
+		float dur = animate.getDur();
+		float from = Float.parseFloat(animate.getFrom());
+		float to = Float.parseFloat(animate.getTo());
+		float range = to - from;
+		return Math.round(dur / range);
+	}
+
+	private int timerDelayColor(SVGAnimationImpl animate) {
+		float dur = animate.getDur();
+		Color from = ColorFactory.getInstance().getColor(animate.getFrom());
+		Color to = ColorFactory.getInstance().getColor(animate.getTo());
+		float range = (to.getRed() - from.getRed()) + (to.getBlue() - from.getBlue()) + (to.getGreen() - from.getGreen());
+		if(range == 0) return 255;
+		return Math.round(dur / range);
+	}
+
+	private int timeDelayTransform(SVGAnimationImpl animate) {
+		float dur = animate.getDur();
+		float range = 0;
+		float sxFrom = 0;
+		float sxTo = 0;
+		String from_trans = animate.getFrom();
+		String to_trans = animate.getTo();
+		StringTokenizer stFrom = new StringTokenizer(from_trans, " ,");
+		StringTokenizer stTo = null;
+		switch (animate.getAttributeType()) {
+		case SVGTransform.SVG_TRANSFORM_TRANSLATE:
+			float txFrom = 0;
+			float tyFrom = 0;
+			if (stFrom.countTokens() == 1) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				txFrom = Float.parseFloat(stFrom.nextToken());
+				tyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			stTo = new StringTokenizer(to_trans, " ,");
+			float txTo = 0;
+			float tyTo = 0;
+			if (stTo.countTokens() == 1) {
+				txTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				txTo = Float.parseFloat(stTo.nextToken());
+				tyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			range = (txTo - txFrom) + (tyTo - tyFrom);
+			return Math.round(dur / range);
+		case SVGTransform.SVG_TRANSFORM_SCALE:
+			sxFrom = 0;
+			float syFrom = 0;
+			if (stFrom.countTokens() == 1) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+			} else if (stFrom.countTokens() == 2) {
+				sxFrom = Float.parseFloat(stFrom.nextToken());
+				syFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			stTo = new StringTokenizer(to_trans, " ,");
+			sxTo = 0;
+			float syTo = 0;
+			if (stTo.countTokens() == 1) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+			} else if (stTo.countTokens() == 2) {
+				sxTo = Float.parseFloat(stTo.nextToken());
+				syTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			range = (sxTo - sxFrom) + (syTo - syFrom);
+			return Math.round(dur / range);
+		case SVGTransform.SVG_TRANSFORM_ROTATE:
+
+			float cxFrom = 0;
+			float cyFrom = 0;
+
+			if (stFrom.countTokens() == 3) {
+				cxFrom = Float.parseFloat(stFrom.nextToken());
+				cyFrom = Float.parseFloat(stFrom.nextToken());
+			}
+
+			stTo = new StringTokenizer(to_trans, " ,");
+			float cxTo = 0;
+			float cyTo = 0;
+
+			if (stTo.countTokens() == 3) {
+				cxTo = Float.parseFloat(stTo.nextToken());
+				cyTo = Float.parseFloat(stTo.nextToken());
+			}
+
+			range = (cxTo - cxFrom) + (cyTo - cyFrom);
+			return Math.round(dur / range);
+		case SVGTransform.SVG_TRANSFORM_SKEWX:
+			sxFrom = Float.parseFloat(from_trans);
+			sxTo = Float.parseFloat(to_trans);
+			range = sxTo - sxFrom;
+			return Math.round(dur / range);
+		case SVGTransform.SVG_TRANSFORM_SKEWY:
+			sxFrom = Float.parseFloat(from_trans);
+			sxTo = Float.parseFloat(to_trans);
+			range = sxTo - sxFrom;
+			return Math.round(dur / range);
+		default:
+			return 0;}
 	}
 }

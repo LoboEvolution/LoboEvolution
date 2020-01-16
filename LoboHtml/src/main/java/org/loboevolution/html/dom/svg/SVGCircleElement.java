@@ -21,11 +21,11 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGCircleElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
-		SVGTransformable {
+		SVGTransformable, Drawable {
 
-	public SVGAnimatedLength getCx();
+	SVGAnimatedLength getCx();
 
-	public SVGAnimatedLength getCy();
+	SVGAnimatedLength getCy();
 
-	public SVGAnimatedLength getR();
+	SVGAnimatedLength getR();
 }

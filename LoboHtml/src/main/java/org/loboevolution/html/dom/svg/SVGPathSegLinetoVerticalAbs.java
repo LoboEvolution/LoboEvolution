@@ -23,9 +23,8 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGPathSegLinetoVerticalAbs extends SVGPathSeg {
-	@Override
-	public float getY();
 
-	@Override
-	public void setY(float y) throws DOMException;
+	void setY(float y) throws DOMException;
+
+	float getY();
 }

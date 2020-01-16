@@ -25,20 +25,20 @@ import org.w3c.dom.css.RGBColor;
 
 public interface SVGColor extends CSSValue {
 	// Color Types
-	public static final short SVG_COLORTYPE_UNKNOWN = 0;
-	public static final short SVG_COLORTYPE_RGBCOLOR = 1;
-	public static final short SVG_COLORTYPE_RGBCOLOR_ICCCOLOR = 2;
-	public static final short SVG_COLORTYPE_CURRENTCOLOR = 3;
+	static final short SVG_COLORTYPE_UNKNOWN = 0;
+	static final short SVG_COLORTYPE_RGBCOLOR = 1;
+	static final short SVG_COLORTYPE_RGBCOLOR_ICCCOLOR = 2;
+	static final short SVG_COLORTYPE_CURRENTCOLOR = 3;
 
-	public short getColorType();
+	short getColorType();
 
 	public RGBColor getRGBColor();
 
-	public SVGICCColor getICCColor();
+	SVGICCColor getICCColor();
 
-	public void setRGBColor(String rgbColor) throws SVGException;
+	void setRGBColor(String rgbColor) throws SVGException;
 
-	public void setRGBColorICCColor(String rgbColor, String iccColor) throws SVGException;
+	void setRGBColorICCColor(String rgbColor, String iccColor) throws SVGException;
 
-	public void setColor(short colorType, String rgbColor, String iccColor) throws SVGException;
+	void setColor(short colorType, String rgbColor, String iccColor) throws SVGException;
 }

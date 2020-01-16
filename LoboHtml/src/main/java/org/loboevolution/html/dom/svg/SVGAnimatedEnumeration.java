@@ -23,9 +23,9 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGAnimatedEnumeration {
-	public short getBaseVal();
+	short getBaseVal();
 
-	public void setBaseVal(short baseVal) throws DOMException;
+	void setBaseVal(short baseVal) throws DOMException;
 
-	public short getAnimVal();
+	short getAnimVal();
 }

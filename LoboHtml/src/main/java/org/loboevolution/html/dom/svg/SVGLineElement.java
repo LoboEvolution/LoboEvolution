@@ -22,12 +22,13 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGLineElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
-		SVGTransformable {
-	public SVGAnimatedLength getX1();
+		SVGTransformable, Drawable {
 
-	public SVGAnimatedLength getY1();
+	SVGAnimatedLength getX1();
 
-	public SVGAnimatedLength getX2();
+	SVGAnimatedLength getY1();
 
-	public SVGAnimatedLength getY2();
+	SVGAnimatedLength getX2();
+
+	SVGAnimatedLength getY2();
 }

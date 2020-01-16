@@ -21,5 +21,5 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGViewElement extends SVGElement, SVGExternalResourcesRequired, SVGFitToViewBox, SVGZoomAndPan {
-	public SVGStringList getViewTarget();
+	SVGStringList getViewTarget();
 }

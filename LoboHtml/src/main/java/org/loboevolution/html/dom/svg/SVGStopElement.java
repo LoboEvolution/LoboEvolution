@@ -21,5 +21,5 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGStopElement extends SVGElement, SVGStylable {
-	public SVGAnimatedNumber getOffset();
+	SVGAnimatedNumber getOffset();
 }

@@ -117,8 +117,8 @@ class ElementFactory {
 		builders.put(HTMLTag.CANVAS, new HTMLElementBuilder.Canvas());
 
 		builders.put(HTMLTag.SVG, new HTMLElementBuilder.SVG());
-		builders.put(HTMLTag.CIRCLE, new HTMLElementBuilder.SVGCircle());
 		builders.put(HTMLTag.RECT, new HTMLElementBuilder.SVGRect());
+		builders.put(HTMLTag.CIRCLE, new HTMLElementBuilder.SVGCircle());
 		builders.put(HTMLTag.ELLIPSE, new HTMLElementBuilder.SVGEllipse());
 		builders.put(HTMLTag.LINE, new HTMLElementBuilder.SVGLine());
 		builders.put(HTMLTag.POLYGON, new HTMLElementBuilder.SVGPolygon());
@@ -128,14 +128,14 @@ class ElementFactory {
 		builders.put(HTMLTag.DEFS, new HTMLElementBuilder.SVGDefs());
 		builders.put(HTMLTag.USE, new HTMLElementBuilder.SVGUse());
 		builders.put(HTMLTag.SYMBOL, new HTMLElementBuilder.SVGSymbol());
-		builders.put(HTMLTag.TEXT_HTML, new HTMLElementBuilder.SVGText());
+		builders.put(HTMLTag.TEXT, new HTMLElementBuilder.SVGText());
 		builders.put(HTMLTag.RADIAL_GRADIENT, new HTMLElementBuilder.SVGRadialGradient());
 		builders.put(HTMLTag.LINEAR_GRADIENT, new HTMLElementBuilder.SVGLinearGradient());
 		builders.put(HTMLTag.STOP, new HTMLElementBuilder.SVGStop());
 		builders.put(HTMLTag.CLIPPATH, new HTMLElementBuilder.SVGClipPath());
 		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
 		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
-		builders.put(HTMLTag.ANIMATE_COLOR, new HTMLElementBuilder.SVGAnimateColor());
+		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());
 	}
 
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {

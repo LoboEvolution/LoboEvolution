@@ -25,7 +25,6 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.svgimpl.SVGAnimateColorElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGAnimateElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGAnimateTransformElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGCircleElementImpl;
@@ -33,6 +32,7 @@ import org.loboevolution.html.dom.svgimpl.SVGClipPathElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGDefsElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGEllipseElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGGElementImpl;
+import org.loboevolution.html.dom.svgimpl.SVGImageElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGLineElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGLinearGradientElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGPathElementImpl;
@@ -390,19 +390,12 @@ public abstract class HTMLElementBuilder {
 			return new HTMLUnderlineElementImpl(name);
 		}
 	}
-
+	
 	public static final class SVG extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
 			return new SVGSVGElementImpl(name);
-		}
-	}
-
-	public static final class SVGAnimateColor extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(String name) {
-			return new SVGAnimateColorElementImpl(name);
-		}
+		}		
 	}
 
 	public static final class SVGAnimateTrasform extends HTMLElementBuilder {
@@ -482,13 +475,34 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
-	public static final class SVGPath extends HTMLElementBuilder {
+	public static final class SVGRect extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
-			return new SVGPathElementImpl(name);
+			return new SVGRectElementImpl(name);
 		}
 	}
-
+	
+	public static final class SVGCircle extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGCircleElementImpl(name);
+		}
+	}
+	
+	public static final class SVGEllipse extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGEllipseElementImpl(name);
+		}
+	}
+	
+	public static final class SVGLine extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new SVGLineElementImpl(name);
+		}
+	}
+	
 	public static final class SVGPolyline extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
@@ -502,33 +516,18 @@ public abstract class HTMLElementBuilder {
 			return new SVGPolygonElementImpl(name);
 		}
 	}
-
-	public static final class SVGLine extends HTMLElementBuilder {
+	
+	public static final class SVGPath extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
-			return new SVGLineElementImpl(name);
+			return new SVGPathElementImpl(name);
 		}
 	}
-
-	public static final class SVGEllipse extends HTMLElementBuilder {
+	
+	public static final class SVGImage extends HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
-			return new SVGEllipseElementImpl(name);
-		}
-
-	}
-
-	public static final class SVGRect extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(String name) {
-			return new SVGRectElementImpl(name);
-		}
-	}
-
-	public static final class SVGCircle extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(String name) {
-			return new SVGCircleElementImpl(name);
+			return new SVGImageElementImpl(name);
 		}
 	}
 

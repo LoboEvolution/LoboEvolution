@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFEDistantLightElement extends SVGElement {
-	public SVGAnimatedNumber getAzimuth();
+	SVGAnimatedNumber getAzimuth();
 
-	public SVGAnimatedNumber getElevation();
+	SVGAnimatedNumber getElevation();
 }

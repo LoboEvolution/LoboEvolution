@@ -23,19 +23,19 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.events.EventTarget;
 
 public interface SVGElementInstance extends EventTarget {
-	public SVGElement getCorrespondingElement();
+	SVGElement getCorrespondingElement();
 
-	public SVGUseElement getCorrespondingUseElement();
+	SVGUseElement getCorrespondingUseElement();
 
-	public SVGElementInstance getParentNode();
+	SVGElementInstance getParentNode();
 
-	public SVGElementInstanceList getChildNodes();
+	SVGElementInstanceList getChildNodes();
 
-	public SVGElementInstance getFirstChild();
+	SVGElementInstance getFirstChild();
 
-	public SVGElementInstance getLastChild();
+	SVGElementInstance getLastChild();
 
-	public SVGElementInstance getPreviousSibling();
+	SVGElementInstance getPreviousSibling();
 
-	public SVGElementInstance getNextSibling();
+	SVGElementInstance getNextSibling();
 }

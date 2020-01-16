@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedPoints {
-	public SVGPointList getPoints();
+	SVGPointList getPoints();
 
-	public SVGPointList getAnimatedPoints();
+	SVGPointList getAnimatedPoints();
 }

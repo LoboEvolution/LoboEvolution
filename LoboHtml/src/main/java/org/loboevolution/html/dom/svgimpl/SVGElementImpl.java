@@ -1,74 +1,79 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
+import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
+import org.loboevolution.html.dom.svg.SVGAnimatedBoolean;
 import org.loboevolution.html.dom.svg.SVGElement;
 import org.loboevolution.html.dom.svg.SVGSVGElement;
-import org.loboevolution.html.dom.svg.SVGSymbolElement;
-import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
-import org.w3c.dom.Node;
+import org.loboevolution.html.dom.svg.SVGStringList;
+import org.w3c.dom.DOMException;
 
 public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement {
 
-	private SVGDocumentImpl ownerDoc = null;
+	private SVGSVGElement ownerSvg;
+
+	private SVGStringListImpl requiredFeatures;
+
+	private SVGStringListImpl requiredExtensions;
+
+	private SVGStringListImpl systemLanguage;
 
 	public SVGElementImpl(String name) {
 		super(name);
 	}
 
-	public SVGDocumentImpl getOwnerDoc() {
-		return ownerDoc;
-	}
-
-	public void setOwnerDoc(SVGDocumentImpl v) {
-		this.ownerDoc = v;
-	}
-
 	@Override
 	public SVGSVGElement getOwnerSVGElement() {
-		if (getParentNode() == ownerDoc) {
-			return null;
-		}
-		Node parent = getParentNode();
-		while (parent != null && !(parent instanceof SVGSVGElement)) {
-			parent = parent.getParentNode();
-		}
-
-		if (parent instanceof SVGGElementImpl) {
-			SVGGElementImpl a = (SVGGElementImpl) parent;
-			return a.getSvg();
-		}
-
-		return (SVGSVGElement) parent;
+		return ownerSvg;
 	}
 
 	@Override
 	public SVGElement getViewportElement() {
-		if (getParentNode() == ownerDoc) {
-			return null;
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SVGAnimatedBoolean getExternalResourcesRequired() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public SVGStringList getRequiredFeatures() {
+		return requiredFeatures;
+	}
+
+	public SVGStringList getRequiredExtensions() {
+		return requiredExtensions;
+	}
+
+	public SVGStringList getSystemLanguage() {
+		return systemLanguage;
+	}
+
+	public boolean hasExtension(String extension) {
+		if (extension.equalsIgnoreCase("svg")) {
+			return true;
+		} else {
+			return false;
 		}
-		Node parent = getParentNode();
-		while (parent != null && !(parent instanceof SVGSVGElement || parent instanceof SVGSymbolElement)) {
-			parent = parent.getParentNode();
-		}
-		return (SVGElement) parent;
+	}
+	
+	public String getXMLlang() {
+		return getAttribute("xml:lang");
+	}
+
+	public void setXMLlang(String xmllang) throws DOMException {
+		setAttribute("xml:lang", xmllang);
+	}
+
+	public String getXMLspace() {
+		return getAttribute("xml:space");
+	}
+
+	public void setXMLspace(String xmlspace) throws DOMException {
+		setAttribute("xml:space", xmlspace);
+	}
+
+	public void setOwnerSVGElement(SVGSVGElement ownerSvg) {
+		this.ownerSvg = ownerSvg;
 	}
 }

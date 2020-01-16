@@ -23,9 +23,9 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGAnimatedInteger {
-	public int getBaseVal();
+	int getBaseVal();
 
-	public void setBaseVal(int baseVal) throws DOMException;
+	void setBaseVal(int baseVal) throws DOMException;
 
-	public int getAnimVal();
+	int getAnimVal();
 }

@@ -20,5 +20,5 @@
  */
 package org.loboevolution.html.dom.svg;
 
-public interface SVGTextElement extends SVGTextPositioningElement, SVGTransformable {
+public interface SVGTextElement extends SVGTextPositioningElement, SVGTransformable, Drawable {
 }

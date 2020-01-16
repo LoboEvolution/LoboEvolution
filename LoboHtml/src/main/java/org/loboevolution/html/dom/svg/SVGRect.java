@@ -24,19 +24,19 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGRect {
-	public float getX();
+	float getX();
 
-	public void setX(float x) throws DOMException;
+	void setX(float x) throws DOMException;
 
-	public float getY();
+	float getY();
 
-	public void setY(float y) throws DOMException;
+	void setY(float y) throws DOMException;
 
-	public float getWidth();
+	float getWidth();
 
-	public void setWidth(float width) throws DOMException;
+	void setWidth(float width) throws DOMException;
 
-	public float getHeight();
+	float getHeight();
 
-	public void setHeight(float height) throws DOMException;
+	void setHeight(float height) throws DOMException;
 }

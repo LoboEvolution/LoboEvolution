@@ -24,33 +24,33 @@ import org.w3c.dom.DOMException;
 
 public interface SVGLength {
 	// Length Unit Types
-	public static final short SVG_LENGTHTYPE_UNKNOWN = 0;
-	public static final short SVG_LENGTHTYPE_NUMBER = 1;
-	public static final short SVG_LENGTHTYPE_PERCENTAGE = 2;
-	public static final short SVG_LENGTHTYPE_EMS = 3;
-	public static final short SVG_LENGTHTYPE_EXS = 4;
-	public static final short SVG_LENGTHTYPE_PX = 5;
-	public static final short SVG_LENGTHTYPE_CM = 6;
-	public static final short SVG_LENGTHTYPE_MM = 7;
-	public static final short SVG_LENGTHTYPE_IN = 8;
-	public static final short SVG_LENGTHTYPE_PT = 9;
-	public static final short SVG_LENGTHTYPE_PC = 10;
+	static final short SVG_LENGTHTYPE_UNKNOWN = 0;
+	static final short SVG_LENGTHTYPE_NUMBER = 1;
+	static final short SVG_LENGTHTYPE_PERCENTAGE = 2;
+	static final short SVG_LENGTHTYPE_EMS = 3;
+	static final short SVG_LENGTHTYPE_EXS = 4;
+	static final short SVG_LENGTHTYPE_PX = 5;
+	static final short SVG_LENGTHTYPE_CM = 6;
+	static final short SVG_LENGTHTYPE_MM = 7;
+	static final short SVG_LENGTHTYPE_IN = 8;
+	static final short SVG_LENGTHTYPE_PT = 9;
+	static final short SVG_LENGTHTYPE_PC = 10;
 
-	public short getUnitType();
+	short getUnitType();
 
-	public float getValue();
+	float getValue();
 
-	public void setValue(float value) throws DOMException;
+	void setValue(float value) throws DOMException;
 
-	public float getValueInSpecifiedUnits();
+	float getValueInSpecifiedUnits();
 
-	public void setValueInSpecifiedUnits(float valueInSpecifiedUnits) throws DOMException;
+	void setValueInSpecifiedUnits(float valueInSpecifiedUnits) throws DOMException;
 
-	public String getValueAsString();
+	String getValueAsString();
 
-	public void setValueAsString(String valueAsString) throws DOMException;
+	void setValueAsString(String valueAsString) throws DOMException;
 
-	public void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits);
+	void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits);
 
-	public void convertToSpecifiedUnits(short unitType);
+	void convertToSpecifiedUnits(short unitType);
 }

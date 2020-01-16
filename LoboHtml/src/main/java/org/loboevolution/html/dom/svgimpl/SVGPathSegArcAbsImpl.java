@@ -1,66 +1,61 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
-import org.loboevolution.html.dom.svg.SVGPathSeg;
 import org.loboevolution.html.dom.svg.SVGPathSegArcAbs;
 
-public class SVGPathSegArcAbsImpl extends SVGPathSegImpl implements SVGPathSegArcAbs {
+public class SVGPathSegArcAbsImpl implements SVGPathSegArcAbs {
 
-	private static final long serialVersionUID = -6722776032077341870L;
+	private float x;
+
+	private float y;
 
 	private float r1;
+
 	private float r2;
+
 	private float angle;
-	private boolean sweepFlag;
+
 	private boolean largeArcFlag;
 
-	/**
-	 * @param x2
-	 * @param y2
-	 * @param r12
-	 * @param r22
-	 * @param angle2
-	 * @param largeArcFlag2
-	 * @param sweepFlag2
-	 */
-	public SVGPathSegArcAbsImpl(float x2, float y2, float r12, float r22, float angle2, boolean largeArcFlag2,
-			boolean sweepFlag2) {
-		this.x = x2;
-		this.y = y2;
-		this.r1 = r12;
-		this.r2 = r22;
-		this.angle = angle2;
-		this.sweepFlag = sweepFlag2;
-		this.largeArcFlag = largeArcFlag2;
+	private boolean sweepFlag;
+
+	public SVGPathSegArcAbsImpl(float x, float y, float r1, float r2, float angle, boolean largeArcFlag, boolean sweepFlag) {
+		this.x = x;
+		this.y = y;
+		this.r1 = r1;
+		this.r2 = r2;
+		this.angle = angle;
+		this.largeArcFlag = largeArcFlag;
+		this.sweepFlag = sweepFlag;
 	}
 
 	@Override
 	public short getPathSegType() {
-		return SVGPathSeg.PATHSEG_ARC_ABS;
+		return PATHSEG_ARC_ABS;
 	}
 
 	@Override
 	public String getPathSegTypeAsLetter() {
 		return "A";
+	}
+
+	@Override
+	public float getX() {
+		return x;
+	}
+
+	@Override
+	public void setX(float x) {
+		this.x = x;
+	}
+
+	@Override
+	public float getY() {
+		return y;
+	}
+
+	@Override
+	public void setY(float y) {
+		this.y = y;
 	}
 
 	@Override

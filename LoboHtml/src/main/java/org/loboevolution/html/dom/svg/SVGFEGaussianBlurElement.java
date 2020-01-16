@@ -21,11 +21,11 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFEGaussianBlurElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
-	public SVGAnimatedString getIn1();
+	SVGAnimatedString getIn1();
 
-	public SVGAnimatedNumber getStdDeviationX();
+	SVGAnimatedNumber getStdDeviationX();
 
-	public SVGAnimatedNumber getStdDeviationY();
+	SVGAnimatedNumber getStdDeviationY();
 
-	public void setStdDeviation(float stdDeviationX, float stdDeviationY);
+	void setStdDeviation(float stdDeviationX, float stdDeviationY);
 }

@@ -25,29 +25,29 @@ import org.w3c.dom.DOMException;
 public interface SVGTextContentElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable {
 	// lengthAdjust Types
-	public static final short LENGTHADJUST_UNKNOWN = 0;
-	public static final short LENGTHADJUST_SPACING = 1;
-	public static final short LENGTHADJUST_SPACINGANDGLYPHS = 2;
+	static final short LENGTHADJUST_UNKNOWN = 0;
+	static final short LENGTHADJUST_SPACING = 1;
+	static final short LENGTHADJUST_SPACINGANDGLYPHS = 2;
 
-	public SVGAnimatedLength getTextLength();
+	SVGAnimatedLength getTextLength();
 
-	public SVGAnimatedEnumeration getLengthAdjust();
+	SVGAnimatedEnumeration getLengthAdjust();
 
-	public int getNumberOfChars();
+	int getNumberOfChars();
 
-	public float getComputedTextLength();
+	float getComputedTextLength();
 
-	public float getSubStringLength(int charnum, int nchars) throws DOMException;
+	float getSubStringLength(int charnum, int nchars) throws DOMException;
 
-	public SVGPoint getStartPositionOfChar(int charnum) throws DOMException;
+	SVGPoint getStartPositionOfChar(int charnum) throws DOMException;
 
-	public SVGPoint getEndPositionOfChar(int charnum) throws DOMException;
+	SVGPoint getEndPositionOfChar(int charnum) throws DOMException;
 
-	public SVGRect getExtentOfChar(int charnum) throws DOMException;
+	SVGRect getExtentOfChar(int charnum) throws DOMException;
 
-	public float getRotationOfChar(int charnum) throws DOMException;
+	float getRotationOfChar(int charnum) throws DOMException;
 
-	public int getCharNumAtPosition(SVGPoint point);
+	int getCharNumAtPosition(SVGPoint point);
 
-	public void selectSubString(int charnum, int nchars) throws DOMException;
+	void selectSubString(int charnum, int nchars) throws DOMException;
 }

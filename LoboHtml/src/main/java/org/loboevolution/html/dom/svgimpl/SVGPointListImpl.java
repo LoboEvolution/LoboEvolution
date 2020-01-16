@@ -1,23 +1,3 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
 import java.util.ArrayList;
@@ -30,64 +10,75 @@ import org.w3c.dom.DOMException;
 
 public class SVGPointListImpl implements SVGPointList {
 
-	private List<SVGPoint> points;
+	private List<SVGPoint> pointList;
 
 	public SVGPointListImpl() {
-		this(new SVGPoint[0]);
-	}
-
-	public SVGPointListImpl(SVGPoint[] points) {
-		this.points = new ArrayList<SVGPoint>();
-		for (SVGPoint s : points) {
-			this.points.add(s);
-		}
+		pointList = new ArrayList<SVGPoint>();
 	}
 
 	@Override
 	public int getNumberOfItems() {
-		return points.size();
+		return pointList.size();
 	}
 
 	@Override
 	public void clear() throws DOMException {
-		points.clear();
+		pointList.clear();
 	}
 
 	@Override
 	public SVGPoint initialize(SVGPoint newItem) throws DOMException, SVGException {
-		points = new ArrayList<SVGPoint>();
-		points.add(newItem);
+		pointList = new ArrayList<SVGPoint>();
+		pointList.add(newItem);
 		return newItem;
 	}
 
 	@Override
 	public SVGPoint getItem(int index) throws DOMException {
-		return points.get(index);
+		return pointList.get(index);
 	}
 
 	@Override
 	public SVGPoint insertItemBefore(SVGPoint newItem, int index) throws DOMException, SVGException {
-		points.add(index, newItem);
+
+		if (pointList.contains(newItem)) {
+			pointList.remove(newItem);
+		}
+
+		if (index < 0) {
+			pointList.add(0, newItem);
+		} else if (index > getNumberOfItems() - 1) { // insert at end
+			pointList.add(newItem);
+		} else {
+			pointList.add(index, newItem);
+		}
 		return newItem;
 	}
 
 	@Override
 	public SVGPoint replaceItem(SVGPoint newItem, int index) throws DOMException, SVGException {
-		points.remove(index);
-		points.add(index, newItem);
+
+		if (pointList.contains(newItem)) {
+			pointList.remove(newItem);
+		}
+
+		if (index < 0 || index > getNumberOfItems() - 1) {
+			return null;
+		}
+
+		pointList.remove(index);
+		pointList.add(index, newItem);
 		return newItem;
 	}
 
 	@Override
 	public SVGPoint removeItem(int index) throws DOMException {
-		SVGPoint item = points.get(index);
-		points.remove(index);
-		return item;
+		return pointList.remove(index);
 	}
 
 	@Override
 	public SVGPoint appendItem(SVGPoint newItem) throws DOMException, SVGException {
-		points.add(newItem);
+		pointList.add(newItem);
 		return newItem;
 	}
 }

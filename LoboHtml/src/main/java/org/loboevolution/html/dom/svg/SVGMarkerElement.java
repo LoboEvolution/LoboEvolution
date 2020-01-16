@@ -23,29 +23,29 @@ package org.loboevolution.html.dom.svg;
 public interface SVGMarkerElement
 		extends SVGElement, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGFitToViewBox {
 	// Marker Unit Types
-	public static final short SVG_MARKERUNITS_UNKNOWN = 0;
-	public static final short SVG_MARKERUNITS_USERSPACEONUSE = 1;
-	public static final short SVG_MARKERUNITS_STROKEWIDTH = 2;
+	static final short SVG_MARKERUNITS_UNKNOWN = 0;
+	static final short SVG_MARKERUNITS_USERSPACEONUSE = 1;
+	static final short SVG_MARKERUNITS_STROKEWIDTH = 2;
 	// Marker Orientation Types
-	public static final short SVG_MARKER_ORIENT_UNKNOWN = 0;
-	public static final short SVG_MARKER_ORIENT_AUTO = 1;
-	public static final short SVG_MARKER_ORIENT_ANGLE = 2;
+	static final short SVG_MARKER_ORIENT_UNKNOWN = 0;
+	static final short SVG_MARKER_ORIENT_AUTO = 1;
+	static final short SVG_MARKER_ORIENT_ANGLE = 2;
 
-	public SVGAnimatedLength getRefX();
+	SVGAnimatedLength getRefX();
 
-	public SVGAnimatedLength getRefY();
+	SVGAnimatedLength getRefY();
 
-	public SVGAnimatedEnumeration getMarkerUnits();
+	SVGAnimatedEnumeration getMarkerUnits();
 
-	public SVGAnimatedLength getMarkerWidth();
+	SVGAnimatedLength getMarkerWidth();
 
-	public SVGAnimatedLength getMarkerHeight();
+	SVGAnimatedLength getMarkerHeight();
 
-	public SVGAnimatedEnumeration getOrientType();
+	SVGAnimatedEnumeration getOrientType();
 
-	public SVGAnimatedAngle getOrientAngle();
+	SVGAnimatedAngle getOrientAngle();
 
-	public void setOrientToAuto();
+	void setOrientToAuto();
 
-	public void setOrientToAngle(SVGAngle angle);
+	void setOrientToAngle(SVGAngle angle);
 }

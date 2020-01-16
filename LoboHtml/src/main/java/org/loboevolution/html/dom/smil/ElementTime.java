@@ -47,7 +47,7 @@ public interface ElementTime {
 	 */
 	public TimeList getBegin();
 
-	public void setBegin(TimeList begin) throws DOMException;
+	default void setBegin(TimeList begin) {}
 
 	/**
 	 * The list of active ends for this node.
@@ -58,7 +58,7 @@ public interface ElementTime {
 	 */
 	public TimeList getEnd();
 
-	public void setEnd(TimeList end) throws DOMException;
+	default void setEnd(TimeList end) {}
 
 	/**
 	 * The desired simple duration value of this node in seconds. Negative value
@@ -80,9 +80,9 @@ public interface ElementTime {
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
 	 */
-	public short getRestart();
+	default short getRestart() {return 0;}
 
-	public void setRestart(short restart) throws DOMException;
+	default void setRestart(short restart) {};
 
 	/**
 	 * A code representing the value of the fill attribute, as defined above.
@@ -156,12 +156,12 @@ public interface ElementTime {
 	 * Causes this element to pause the local timeline (subject to sync
 	 * constraints).
 	 */
-	public void pauseElement();
+	default void pauseElement() {}
 
 	/**
 	 * Causes this element to resume a paused local timeline.
 	 */
-	public void resumeElement();
+	default void resumeElement() {}
 
 	/**
 	 * Seeks this element to the specified point on the local timeline (subject
@@ -171,6 +171,6 @@ public interface ElementTime {
 	 * @param seekTo
 	 *            The desired position on the local timeline in milliseconds.
 	 */
-	public void seekElement(float seekTo);
+	default void seekElement(float seekTo) {}
 
 }

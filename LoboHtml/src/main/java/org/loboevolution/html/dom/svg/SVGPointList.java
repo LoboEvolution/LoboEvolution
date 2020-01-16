@@ -23,19 +23,20 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGPointList {
-	public int getNumberOfItems();
 
-	public void clear() throws DOMException;
+	int getNumberOfItems();
 
-	public SVGPoint initialize(SVGPoint newItem) throws DOMException, SVGException;
+	void clear() throws DOMException;
 
-	public SVGPoint getItem(int index) throws DOMException;
+	SVGPoint initialize(SVGPoint newItem) throws DOMException, SVGException;
 
-	public SVGPoint insertItemBefore(SVGPoint newItem, int index) throws DOMException, SVGException;
+	SVGPoint getItem(int index) throws DOMException;
 
-	public SVGPoint replaceItem(SVGPoint newItem, int index) throws DOMException, SVGException;
+	SVGPoint insertItemBefore(SVGPoint newItem, int index) throws DOMException, SVGException;
 
-	public SVGPoint removeItem(int index) throws DOMException;
+	SVGPoint replaceItem(SVGPoint newItem, int index) throws DOMException, SVGException;
 
-	public SVGPoint appendItem(SVGPoint newItem) throws DOMException, SVGException;
+	SVGPoint removeItem(int index) throws DOMException;
+
+	SVGPoint appendItem(SVGPoint newItem) throws DOMException, SVGException;
 }

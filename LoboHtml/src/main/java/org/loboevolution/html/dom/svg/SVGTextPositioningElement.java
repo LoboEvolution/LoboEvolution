@@ -22,9 +22,13 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGTextPositioningElement extends SVGTextContentElement {
 
-	public SVGAnimatedLengthList getDx();
+	SVGAnimatedLength getX();
 
-	public SVGAnimatedLengthList getDy();
+	SVGAnimatedLength getY();
 
-	public SVGAnimatedNumberList getRotate();
+	SVGAnimatedLength getDx();
+
+	SVGAnimatedLength getDy();
+
+	SVGAnimatedNumberList getRotate();
 }

@@ -21,7 +21,8 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGCursorElement extends SVGElement, SVGURIReference, SVGTests, SVGExternalResourcesRequired {
-	public SVGAnimatedLength getX();
 
-	public SVGAnimatedLength getY();
+	SVGAnimatedLength getX();
+
+	SVGAnimatedLength getY();
 }

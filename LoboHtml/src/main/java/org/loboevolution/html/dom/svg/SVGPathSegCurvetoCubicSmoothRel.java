@@ -23,23 +23,20 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
-	@Override
-	public float getX();
 
-	@Override
-	public void setX(float x) throws DOMException;
+	float getX();
 
-	@Override
-	public float getY();
+	void setX(float x) throws DOMException;
 
-	@Override
-	public void setY(float y) throws DOMException;
+	float getY();
 
-	public float getX2();
+	void setY(float y) throws DOMException;
 
-	public void setX2(float x2) throws DOMException;
+	float getX2();
 
-	public float getY2();
+	void setX2(float x2) throws DOMException;
 
-	public void setY2(float y2) throws DOMException;
+	float getY2();
+
+	void setY2(float y2) throws DOMException;
 }

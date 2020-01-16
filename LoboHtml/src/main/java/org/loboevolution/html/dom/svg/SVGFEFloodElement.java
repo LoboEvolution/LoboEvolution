@@ -21,5 +21,5 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFEFloodElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
-	public SVGAnimatedString getIn1();
+	SVGAnimatedString getIn1();
 }

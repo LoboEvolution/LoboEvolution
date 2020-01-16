@@ -23,11 +23,11 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGLangSpace {
-	public String getXMLlang();
+	String getXMLlang();
 
-	public void setXMLlang(String xmllang) throws DOMException;
+	void setXMLlang(String xmllang) throws DOMException;
 
-	public String getXMLspace();
+	String getXMLspace();
 
-	public void setXMLspace(String xmlspace) throws DOMException;
+	void setXMLspace(String xmlspace) throws DOMException;
 }

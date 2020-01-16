@@ -21,12 +21,13 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGEllipseElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
-		SVGStylable, SVGTransformable {
-	public SVGAnimatedLength getCx();
+		SVGStylable, SVGTransformable, Drawable {
 
-	public SVGAnimatedLength getCy();
+	SVGAnimatedLength getCx();
 
-	public SVGAnimatedLength getRx();
+	SVGAnimatedLength getCy();
 
-	public SVGAnimatedLength getRy();
+	SVGAnimatedLength getRx();
+
+	SVGAnimatedLength getRy();
 }

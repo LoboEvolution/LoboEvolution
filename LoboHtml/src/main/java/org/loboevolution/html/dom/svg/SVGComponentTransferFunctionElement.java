@@ -22,24 +22,24 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGComponentTransferFunctionElement extends SVGElement {
 	// Component Transfer Types
-	public static final short SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN = 0;
-	public static final short SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY = 1;
-	public static final short SVG_FECOMPONENTTRANSFER_TYPE_TABLE = 2;
-	public static final short SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE = 3;
-	public static final short SVG_FECOMPONENTTRANSFER_TYPE_LINEAR = 4;
-	public static final short SVG_FECOMPONENTTRANSFER_TYPE_GAMMA = 5;
+	static final short SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN = 0;
+	static final short SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY = 1;
+	static final short SVG_FECOMPONENTTRANSFER_TYPE_TABLE = 2;
+	static final short SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE = 3;
+	static final short SVG_FECOMPONENTTRANSFER_TYPE_LINEAR = 4;
+	static final short SVG_FECOMPONENTTRANSFER_TYPE_GAMMA = 5;
 
-	public SVGAnimatedEnumeration getType();
+	SVGAnimatedEnumeration getType();
 
-	public SVGAnimatedNumberList getTableValues();
+	SVGAnimatedNumberList getTableValues();
 
-	public SVGAnimatedNumber getSlope();
+	SVGAnimatedNumber getSlope();
 
-	public SVGAnimatedNumber getIntercept();
+	SVGAnimatedNumber getIntercept();
 
-	public SVGAnimatedNumber getAmplitude();
+	SVGAnimatedNumber getAmplitude();
 
-	public SVGAnimatedNumber getExponent();
+	SVGAnimatedNumber getExponent();
 
-	public SVGAnimatedNumber getOffset();
+	SVGAnimatedNumber getOffset();
 }

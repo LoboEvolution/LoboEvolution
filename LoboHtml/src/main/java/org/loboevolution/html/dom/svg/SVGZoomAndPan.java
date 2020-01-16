@@ -24,11 +24,11 @@ import org.w3c.dom.DOMException;
 
 public interface SVGZoomAndPan {
 	// Zoom and Pan Types
-	public static final short SVG_ZOOMANDPAN_UNKNOWN = 0;
-	public static final short SVG_ZOOMANDPAN_DISABLE = 1;
-	public static final short SVG_ZOOMANDPAN_MAGNIFY = 2;
+	static final short SVG_ZOOMANDPAN_UNKNOWN = 0;
+	static final short SVG_ZOOMANDPAN_DISABLE = 1;
+	static final short SVG_ZOOMANDPAN_MAGNIFY = 2;
 
-	public short getZoomAndPan();
+	short getZoomAndPan();
 
-	public void setZoomAndPan(short zoomAndPan) throws DOMException;
+	void setZoomAndPan(short zoomAndPan) throws DOMException;
 }

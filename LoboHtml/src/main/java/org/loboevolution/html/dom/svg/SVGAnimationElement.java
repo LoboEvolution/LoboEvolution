@@ -23,13 +23,13 @@ package org.loboevolution.html.dom.svg;
 import org.loboevolution.html.dom.smil.ElementTimeControl;
 import org.w3c.dom.DOMException;
 
-public interface SVGAnimationElement
-		extends SVGElement, SVGTests, SVGExternalResourcesRequired, ElementTimeControl {
-	public SVGElement getTargetElement();
+public interface SVGAnimationElement extends SVGElement, SVGTests, SVGExternalResourcesRequired, ElementTimeControl {
 
-	public float getStartTime();
+	SVGElement getTargetElement();
 
-	public float getCurrentTime();
+	float getStartTime();
 
-	public float getSimpleDuration() throws DOMException;
+	float getCurrentTime();
+
+	float getSimpleDuration() throws DOMException;
 }

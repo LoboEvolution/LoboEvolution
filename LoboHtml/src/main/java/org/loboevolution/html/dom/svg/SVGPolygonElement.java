@@ -21,5 +21,5 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGPolygonElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
-		SVGStylable, SVGTransformable, SVGAnimatedPoints {
+		SVGStylable, SVGTransformable, SVGAnimatedPoints, Drawable {
 }

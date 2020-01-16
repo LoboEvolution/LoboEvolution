@@ -21,11 +21,11 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFESpecularLightingElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
-	public SVGAnimatedString getIn1();
+	SVGAnimatedString getIn1();
 
-	public SVGAnimatedNumber getSurfaceScale();
+	SVGAnimatedNumber getSurfaceScale();
 
-	public SVGAnimatedNumber getSpecularConstant();
+	SVGAnimatedNumber getSpecularConstant();
 
-	public SVGAnimatedNumber getSpecularExponent();
+	SVGAnimatedNumber getSpecularExponent();
 }

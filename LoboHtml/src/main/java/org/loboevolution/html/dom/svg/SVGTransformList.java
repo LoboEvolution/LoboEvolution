@@ -23,23 +23,23 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGTransformList {
-	public int getNumberOfItems();
+	int getNumberOfItems();
 
-	public void clear() throws DOMException;
+	void clear() throws DOMException;
 
-	public SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException;
+	SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException;
 
-	public SVGTransform getItem(int index) throws DOMException;
+	SVGTransform getItem(int index) throws DOMException;
 
-	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException;
+	SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException;
 
-	public SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException;
+	SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException;
 
-	public SVGTransform removeItem(int index) throws DOMException;
+	SVGTransform removeItem(int index) throws DOMException;
 
-	public SVGTransform appendItem(SVGTransform newItem) throws DOMException, SVGException;
+	SVGTransform appendItem(SVGTransform newItem) throws DOMException, SVGException;
 
-	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
+	SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
 
-	public SVGTransform consolidate();
+	SVGTransform consolidate();
 }

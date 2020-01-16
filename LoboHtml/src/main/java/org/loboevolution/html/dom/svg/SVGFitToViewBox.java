@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFitToViewBox {
-	public SVGAnimatedRect getViewBox();
+	SVGAnimatedRect getViewBox();
 
-	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
+	SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
 }

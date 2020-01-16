@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedNumberList {
-	public SVGNumberList getBaseVal();
+	SVGNumberList getBaseVal();
 
-	public SVGNumberList getAnimVal();
+	SVGNumberList getAnimVal();
 }

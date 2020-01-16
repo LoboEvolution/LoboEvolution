@@ -21,13 +21,13 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGFEDiffuseLightingElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
-	public SVGAnimatedString getIn1();
+	SVGAnimatedString getIn1();
 
-	public SVGAnimatedNumber getSurfaceScale();
+	SVGAnimatedNumber getSurfaceScale();
 
-	public SVGAnimatedNumber getDiffuseConstant();
+	SVGAnimatedNumber getDiffuseConstant();
 
-	public SVGAnimatedNumber getKernelUnitLengthX();
+	SVGAnimatedNumber getKernelUnitLengthX();
 
-	public SVGAnimatedNumber getKernelUnitLengthY();
+	SVGAnimatedNumber getKernelUnitLengthY();
 }

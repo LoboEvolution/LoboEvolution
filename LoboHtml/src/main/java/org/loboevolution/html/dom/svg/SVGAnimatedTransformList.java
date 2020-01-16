@@ -22,7 +22,8 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedTransformList {
-	public SVGTransformList getBaseVal();
 
-	public SVGTransformList getAnimVal();
+	SVGTransformList getBaseVal();
+
+	SVGTransformList getAnimVal();
 }

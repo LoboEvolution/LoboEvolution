@@ -22,30 +22,30 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGFEConvolveMatrixElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Edge Mode Values
-	public static final short SVG_EDGEMODE_UNKNOWN = 0;
-	public static final short SVG_EDGEMODE_DUPLICATE = 1;
-	public static final short SVG_EDGEMODE_WRAP = 2;
-	public static final short SVG_EDGEMODE_NONE = 3;
+	static final short SVG_EDGEMODE_UNKNOWN = 0;
+	static final short SVG_EDGEMODE_DUPLICATE = 1;
+	static final short SVG_EDGEMODE_WRAP = 2;
+	static final short SVG_EDGEMODE_NONE = 3;
 
-	public SVGAnimatedInteger getOrderX();
+	SVGAnimatedInteger getOrderX();
 
-	public SVGAnimatedInteger getOrderY();
+	SVGAnimatedInteger getOrderY();
 
-	public SVGAnimatedNumberList getKernelMatrix();
+	SVGAnimatedNumberList getKernelMatrix();
 
-	public SVGAnimatedNumber getDivisor();
+	SVGAnimatedNumber getDivisor();
 
-	public SVGAnimatedNumber getBias();
+	SVGAnimatedNumber getBias();
 
-	public SVGAnimatedInteger getTargetX();
+	SVGAnimatedInteger getTargetX();
 
-	public SVGAnimatedInteger getTargetY();
+	SVGAnimatedInteger getTargetY();
 
-	public SVGAnimatedEnumeration getEdgeMode();
+	SVGAnimatedEnumeration getEdgeMode();
 
-	public SVGAnimatedNumber getKernelUnitLengthX();
+	SVGAnimatedNumber getKernelUnitLengthX();
 
-	public SVGAnimatedNumber getKernelUnitLengthY();
+	SVGAnimatedNumber getKernelUnitLengthY();
 
-	public SVGAnimatedBoolean getPreserveAlpha();
+	SVGAnimatedBoolean getPreserveAlpha();
 }

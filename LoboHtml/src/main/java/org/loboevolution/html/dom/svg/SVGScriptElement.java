@@ -23,7 +23,7 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 
 public interface SVGScriptElement extends SVGElement, SVGURIReference, SVGExternalResourcesRequired {
-	public String getType();
+	String getType();
 
-	public void setType(String type) throws DOMException;
+	void setType(String type) throws DOMException;
 }

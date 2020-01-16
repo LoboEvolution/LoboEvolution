@@ -1,25 +1,6 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -32,81 +13,118 @@ import org.w3c.dom.DOMException;
 
 public class SVGTransformListImpl implements SVGTransformList {
 	
-	private List<SVGTransform> points;
+	private List<SVGTransform> transList;
 
 	public SVGTransformListImpl() {
-		this(new SVGTransform[0]);
-	}
-
-	public SVGTransformListImpl(SVGTransform[] points) {
-		this.points = new ArrayList<SVGTransform>();
-		for (SVGTransform s : points) {
-			this.points.add(s);
-		}
+		transList = new ArrayList<SVGTransform>();
 	}
 
 	@Override
 	public int getNumberOfItems() {
-		return points.size();
+		return transList.size();
 	}
 
 	@Override
 	public void clear() throws DOMException {
-		points.clear();
+		transList.clear();
 	}
 
 	@Override
 	public SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException {
-		points = new ArrayList<SVGTransform>();
-		points.add(newItem);
+		transList = new ArrayList<SVGTransform>();
+		transList.add(newItem);
 		return newItem;
 	}
 
 	@Override
 	public SVGTransform getItem(int index) throws DOMException {
-		return points.get(index);
+		return transList.get(index);
 	}
 
 	@Override
 	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException {
-		points.add(index, newItem);
+
+		if (transList.contains(newItem)) {
+			transList.remove(newItem);
+		}
+
+		if (index < 0) {
+			transList.add(0, newItem);
+		} else if (index > getNumberOfItems() - 1) { // insert at end
+			transList.add(newItem);
+		} else {
+			transList.add(index, newItem);
+		}
 		return newItem;
 	}
 
 	@Override
 	public SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException {
-		points.remove(index);
-		points.add(index, newItem);
+
+		if (transList.contains(newItem)) {
+			transList.remove(newItem);
+		}
+
+		if (index < 0 || index > getNumberOfItems() - 1) {
+			return null;
+		}
+
+		transList.remove(index);
+		transList.add(index, newItem);
 		return newItem;
 	}
 
 	@Override
 	public SVGTransform removeItem(int index) throws DOMException {
-		SVGTransform item = points.get(index);
-		points.remove(index);
-		return item;
+		return transList.remove(index);
 	}
 
 	@Override
 	public SVGTransform appendItem(SVGTransform newItem) throws DOMException, SVGException {
-		points.add(newItem);
+		transList.add(newItem);
 		return newItem;
 	}
 
 	@Override
 	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix) {
-		// TODO Auto-generated method stub
-		return null;
+		SVGTransform transform = new SVGTransformImpl();
+		transform.setMatrix(matrix);
+		return transform;
 	}
 
 	@Override
 	public SVGTransform consolidate() {
-		// TODO Auto-generated method stub
-		return null;
+		int numTransforms = getNumberOfItems();
+		if (numTransforms == 0) {
+			return null;
+		}
+		SVGTransform transform = getItem(0);
+		SVGMatrix result = transform.getMatrix();
+		for (SVGTransform svgTransform : transList) {
+			result = result.multiply(svgTransform.getMatrix());
+		}
+		SVGTransform newTransform = new SVGTransformImpl();
+		newTransform.setMatrix(result);
+		initialize(newTransform);
+		return newTransform;
 	}
-	
+
+	protected AffineTransform getAffineTransform() {
+		int numTransforms = getNumberOfItems();
+		if (numTransforms == 0) {
+			return new AffineTransform();
+		}
+
+		SVGTransform transform = getItem(0);
+		SVGMatrix result = transform.getMatrix();
+		for (int i = 1; i < numTransforms; i++) {
+			transform = getItem(i);
+			result = result.multiply(transform.getMatrix());
+		}
+		return new AffineTransform(result.getA(), result.getB(), result.getC(), result.getD(), result.getE(), result.getF());
+	}
+
 	public static SVGTransformList createTransformList(String transformString) {
-		
 		String SCALE = "scale";
 		String TRANSLATE = "translate";
 		String MATRIX = "matrix";
@@ -121,16 +139,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 		transformString = transformString.trim();
 		SVGTransformListImpl transformList = new SVGTransformListImpl();
 		StringTokenizer st = new StringTokenizer(transformString, "()", false);
-
 		while (st.hasMoreTokens()) {
-
 			String transformType = st.nextToken().trim();
 			if (!st.hasMoreTokens()) {
 				break;
 			}
-
 			String transformArgs = st.nextToken().trim();
-			if (transformType.equals(MATRIX)) {
+			if (transformType.contains(MATRIX)) {
 				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
 				int numArgs = st1.countTokens();
 				if (numArgs == 6) {
@@ -145,7 +160,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 					transform.setMatrix(matrix);
 					transformList.appendItem(transform);
 				}
-			} else if (transformType.equals(TRANSLATE)) {
+			} else if (transformType.contains(TRANSLATE)) {
 				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
 				int numArgs = st1.countTokens();
 				float tx = 0;
@@ -164,7 +179,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_TRANSLATE);
 				transform.setTranslate(tx, ty);
 				transformList.appendItem(transform);
-			} else if (transformType.equals(SCALE)) {
+			} else if (transformType.contains(SCALE)) {
 				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
 				int numArgs = st1.countTokens();
 				float sx = 0;
@@ -184,7 +199,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SCALE);
 				transform.setScale(sx, sy);
 				transformList.appendItem(transform);
-			} else if (transformType.equals(ROTATE)) {
+			} else if (transformType.contains(ROTATE)) {
 				StringTokenizer st1 = new StringTokenizer(transformArgs, ", ", false);
 				int numArgs = st1.countTokens();
 				float angle = 0;
@@ -208,12 +223,12 @@ public class SVGTransformListImpl implements SVGTransformList {
 				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_ROTATE);
 				transform.setRotate(angle, cx, cy);
 				transformList.appendItem(transform);
-			} else if (transformType.equals(SKEW_X)) {
+			} else if (transformType.contains(SKEW_X)) {
 				float skewAngle = Float.parseFloat(transformArgs);
 				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWX);
 				transform.setSkewX(skewAngle);
 				transformList.appendItem(transform);
-			} else if (transformType.equals(SKEW_Y)) {
+			} else if (transformType.contains(SKEW_Y)) {
 				float skewAngle = Float.parseFloat(transformArgs);
 				SVGTransformImpl transform = new SVGTransformImpl(SVGTransform.SVG_TRANSFORM_SKEWY);
 				transform.setSkewY(skewAngle);

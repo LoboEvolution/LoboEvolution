@@ -1,5 +1,5 @@
 /*
-    GNU GENERAL LICENSE
+   GNU GENERAL LICENSE
     Copyright (C) 2014 - 2018 Lobo Evolution
 
     This program is free software; you can redistribute it and/or
@@ -24,5 +24,5 @@ import org.w3c.dom.css.CSSRule;
 
 public interface SVGCSSRule extends CSSRule {
 	// Additional CSS RuleType to support ICC color specifications
-	public static final short COLOR_PROFILE_RULE = 7;
+	static final short COLOR_PROFILE_RULE = 7;
 }

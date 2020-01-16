@@ -21,5 +21,5 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGURIReference {
-	public SVGAnimatedString getHref();
+	SVGAnimatedString getHref();
 }

@@ -21,7 +21,7 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAnimatedPreserveAspectRatio {
-	public SVGPreserveAspectRatio getBaseVal();
+	SVGPreserveAspectRatio getBaseVal();
 
-	public SVGPreserveAspectRatio getAnimVal();
+	SVGPreserveAspectRatio getAnimVal();
 }

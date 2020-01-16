@@ -1,49 +1,29 @@
-/*
-    GNU GENERAL LICENSE
-    Copyright (C) 2014 - 2018 Lobo Evolution
-
-    This program is free software; you can redistribute it and/or
-    modify it under the terms of the GNU General Public
-    License as published by the Free Software Foundation; either
-    verion 3 of the License, or (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    General License for more details.
-
-    You should have received a copy of the GNU General Public
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    
-
-    Contact info: ivan.difrancesco@yahoo.it
- */
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGAnimatedNumber;
-import org.loboevolution.html.dom.svg.SVGNumber;
 import org.w3c.dom.DOMException;
 
 public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
 
-	private SVGNumber num;
+	private SVGNumberImpl svgNumber;
 
-	public SVGAnimatedNumberImpl(SVGNumberImpl svgNumberImpl) {
-		this.num = svgNumberImpl;
+	public SVGAnimatedNumberImpl(SVGNumberImpl svgNumber) {
+		this.svgNumber = svgNumber;
 	}
 
 	@Override
 	public float getBaseVal() {
-		return num.getValue();
+		return svgNumber.getValue();
 	}
 
 	@Override
 	public void setBaseVal(float baseVal) throws DOMException {
-		num.setValue(baseVal);
+		svgNumber.setValue(baseVal);
+
 	}
 
 	@Override
 	public float getAnimVal() {
-		return num.getValue();
+		return svgNumber.getValue();
 	}
 }

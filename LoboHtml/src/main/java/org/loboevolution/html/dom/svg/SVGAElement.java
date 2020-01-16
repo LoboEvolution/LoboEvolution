@@ -22,6 +22,6 @@
 package org.loboevolution.html.dom.svg;
 
 public interface SVGAElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
-		SVGStylable, SVGTransformable {
-	public SVGAnimatedString getTarget();
+		SVGStylable, SVGTransformable, Drawable {
+	SVGAnimatedString getTarget();
 }

@@ -22,15 +22,15 @@ package org.loboevolution.html.dom.svg;
 
 public interface SVGMaskElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGUnitTypes {
-	public SVGAnimatedEnumeration getMaskUnits();
+	SVGAnimatedEnumeration getMaskUnits();
 
-	public SVGAnimatedEnumeration getMaskContentUnits();
+	SVGAnimatedEnumeration getMaskContentUnits();
 
-	public SVGAnimatedLength getX();
+	SVGAnimatedLength getX();
 
-	public SVGAnimatedLength getY();
+	SVGAnimatedLength getY();
 
-	public SVGAnimatedLength getWidth();
+	SVGAnimatedLength getWidth();
 
-	public SVGAnimatedLength getHeight();
+	SVGAnimatedLength getHeight();
 }

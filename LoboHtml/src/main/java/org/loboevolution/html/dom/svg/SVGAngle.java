@@ -24,27 +24,27 @@ import org.w3c.dom.DOMException;
 
 public interface SVGAngle {
 	// Angle Unit Types
-	public static final short SVG_ANGLETYPE_UNKNOWN = 0;
-	public static final short SVG_ANGLETYPE_UNSPECIFIED = 1;
-	public static final short SVG_ANGLETYPE_DEG = 2;
-	public static final short SVG_ANGLETYPE_RAD = 3;
-	public static final short SVG_ANGLETYPE_GRAD = 4;
+	static final short SVG_ANGLETYPE_UNKNOWN = 0;
+	static final short SVG_ANGLETYPE_UNSPECIFIED = 1;
+	static final short SVG_ANGLETYPE_DEG = 2;
+	static final short SVG_ANGLETYPE_RAD = 3;
+	static final short SVG_ANGLETYPE_GRAD = 4;
 
-	public short getUnitType();
+	short getUnitType();
 
-	public float getValue();
+	float getValue();
 
-	public void setValue(float value) throws DOMException;
+	void setValue(float value) throws DOMException;
 
-	public float getValueInSpecifiedUnits();
+	float getValueInSpecifiedUnits();
 
-	public void setValueInSpecifiedUnits(float valueInSpecifiedUnits) throws DOMException;
+	void setValueInSpecifiedUnits(float valueInSpecifiedUnits) throws DOMException;
 
-	public String getValueAsString();
+	String getValueAsString();
 
-	public void setValueAsString(String valueAsString) throws DOMException;
+	void setValueAsString(String valueAsString) throws DOMException;
 
-	public void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits);
+	void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits);
 
-	public void convertToSpecifiedUnits(short unitType);
+	void convertToSpecifiedUnits(short unitType);
 }
