@@ -23,6 +23,8 @@ import java.awt.color.ColorSpace;
 import java.awt.color.ICC_ColorSpace;
 import java.awt.color.ICC_Profile;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 import org.loboevolution.pdfview.BaseWatchable;
 
@@ -45,8 +47,11 @@ public class CMYKColorSpace extends ColorSpace {
 	public CMYKColorSpace() {
 		super(ColorSpace.TYPE_CMYK, 4);
 		try {
-			icc = ICC_Profile.getInstance(getClass().getResourceAsStream("/org/monte/media/jpeg/Generic_CMYK_Profile.icc"));
-			icc_cs = new ICC_ColorSpace(icc);
+			URL resource = ICC_Profile.class.getResource("/org/monte/media/jpeg/Generic_CMYK_Profile.icc");
+			try (InputStream stream = resource.openStream()) {
+				icc = ICC_Profile.getInstance(resource.openStream());
+				icc_cs = new ICC_ColorSpace(icc);
+			}			
 		} catch (IOException e) {
 		    BaseWatchable.getErrorHandler().publishException(e);
 		}

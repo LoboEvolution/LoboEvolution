@@ -21,10 +21,12 @@ package org.loboevolution.pdfview.font;
 import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 import java.util.Properties;
 
 import org.loboevolution.pdfview.PDFObject;
+import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 
 /**
  * This class represents the 14 built-in fonts.  It reads these fonts
@@ -175,10 +177,13 @@ public class BuiltinFont extends Type1Font {
      */
     private void parseFont(String baseFont) throws IOException {
         // load the base fonts properties files, if it isn't already loaded
-        if (props == null) {
-            props = new Properties();
-            props.load(BuiltinFont.class.getResourceAsStream("res/BaseFonts.properties"));
-        }
+		if (props == null) {
+			props = new Properties();
+			URL resource = BuiltinFont.class.getResource("/org/loboevolution/pdfview/font/res/BaseFonts.properties");
+			try (InputStream stream = resource.openStream()) {
+				props.load(stream);
+			}
+		}
 
         // make sure we're a known font
         if (!props.containsKey(baseFont + ".file")) {

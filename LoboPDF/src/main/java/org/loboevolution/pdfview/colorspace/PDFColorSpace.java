@@ -24,6 +24,8 @@ import java.awt.color.ICC_ColorSpace;
 import java.awt.color.ICC_Profile;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.Map;
 
 import org.loboevolution.pdfview.PDFObject;
@@ -63,19 +65,19 @@ public class PDFColorSpace {
     /** graySpace and the gamma correction for it. */
     private static PDFColorSpace graySpace;
 
-    static {
-        boolean useSGray = true;
+	static {
+		boolean useSGray = true;
 
-        try {
-            graySpace = new PDFColorSpace((!useSGray)
-                    ? ColorSpace.getInstance(ColorSpace.CS_GRAY)
-                    : new ICC_ColorSpace(ICC_Profile.getInstance(
-                            PDFColorSpace.class.getResourceAsStream(
-                                ("sGray.icc")))));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
+		try {
+			URL resource = PDFColorSpace.class.getResource("/org/loboevolution/pdfview/colorspace/sGray.icc");
+			try (InputStream stream = resource.openStream()) {
+				graySpace = new PDFColorSpace((!useSGray) ? ColorSpace.getInstance(ColorSpace.CS_GRAY)
+						: new ICC_ColorSpace(ICC_Profile.getInstance(stream)));
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
     /** the color space */
     ColorSpace cs;

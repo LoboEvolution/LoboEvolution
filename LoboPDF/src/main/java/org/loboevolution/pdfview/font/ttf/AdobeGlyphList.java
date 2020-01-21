@@ -1,6 +1,7 @@
 package org.loboevolution.pdfview.font.ttf;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -71,57 +72,59 @@ public class AdobeGlyphList {
      * <p>We initialize by creating the storage and parsing the glyphlist
      * into the tables.</p>
      */
-    private AdobeGlyphList() {
-        glyphToUnicodes = new HashMap<String, int[]>(4500);
-        unicodeToGlyph = new HashMap<Integer, String>(4500);
-        glyphLoaderThread = new Thread(new Runnable() {
+	private AdobeGlyphList() {
+		glyphToUnicodes = new HashMap<String, int[]>(4500);
+		unicodeToGlyph = new HashMap<Integer, String>(4500);
+		glyphLoaderThread = new Thread(new Runnable() {
 
-            @Override
+			@Override
 			public void run() {
-                int[] codes;
-                StringTokenizer codeTokens;
-                String glyphName;
-                StringTokenizer tokens;
-                ArrayList<String> unicodes = new ArrayList<String>();
+				int[] codes;
+				StringTokenizer codeTokens;
+				String glyphName;
+				StringTokenizer tokens;
+				ArrayList<String> unicodes = new ArrayList<String>();
+				URL resource = getClass().getResource("/org/loboevolution/pdfview/font/ttf/resource/glyphlist.txt");
+				try (InputStream istr = resource.openStream()) {
+					BufferedReader reader = new BufferedReader(new InputStreamReader(istr));
+					String line = "";
+					while (line != null) {
+						try {
+							unicodes.clear();
+							line = reader.readLine();
+							if (line == null) {
+								break;
+							}
+							line = line.trim();
+							if (line.length() > 0 && !line.startsWith("#")) {
+								// ignore comment lines
+								tokens = new StringTokenizer(line, ";");
+								glyphName = tokens.nextToken();
+								codeTokens = new StringTokenizer(tokens.nextToken(), " ");
+								while (codeTokens.hasMoreTokens()) {
+									unicodes.add(codeTokens.nextToken());
+								}
+								codes = new int[unicodes.size()];
+								for (int i = 0; i < unicodes.size(); i++) {
+									codes[i] = Integer.parseInt(unicodes.get(i), 16);
+									unicodeToGlyph.put(Integer.valueOf(codes[i]), glyphName);
+								}
+								glyphToUnicodes.put(glyphName, codes);
+							}
 
-                InputStream istr = getClass().getResourceAsStream("/com/sun/pdfview/font/ttf/resource/glyphlist.txt");
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(istr));
-                String line = "";
-                while (line != null) {
-                    try {
-                        unicodes.clear();
-                        line = reader.readLine();
-                        if (line == null) {
-                            break;
-                        }
-                        line = line.trim();
-                        if (line.length() > 0 && !line.startsWith("#")) {
-                            // ignore comment lines
-                            tokens = new StringTokenizer(line, ";");
-                            glyphName = tokens.nextToken();
-                            codeTokens = new StringTokenizer(tokens.nextToken(), " ");
-                            while (codeTokens.hasMoreTokens()) {
-                                unicodes.add(codeTokens.nextToken());
-                            }
-                            codes = new int[unicodes.size()];
-                            for (int i = 0; i < unicodes.size(); i++) {
-                                codes[i] = Integer.parseInt(unicodes.get(i), 16);
-                                unicodeToGlyph.put(Integer.valueOf(codes[i]), glyphName);
-                            }
-                            glyphToUnicodes.put(glyphName, codes);
-                        }
-
-                    } catch (IOException ex) {
-                        break;
-                    }
-                }
-            }
-        }, "Adobe Glyph Loader Thread");
-        glyphLoaderThread.setDaemon(true);
-        glyphLoaderThread.setPriority(Thread.MIN_PRIORITY);
-        glyphLoaderThread.start();
-    }
+						} catch (IOException ex) {
+							break;
+						}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}, "Adobe Glyph Loader Thread");
+		glyphLoaderThread.setDaemon(true);
+		glyphLoaderThread.setPriority(Thread.MIN_PRIORITY);
+		glyphLoaderThread.start();
+	}
 
     /**
      * translate a glyph name into the possible unicode values that it
