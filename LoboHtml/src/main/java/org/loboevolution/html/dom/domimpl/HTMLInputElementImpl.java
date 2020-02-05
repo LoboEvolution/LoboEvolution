@@ -23,33 +23,25 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.io.File;
-
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.FormInput;
+import org.loboevolution.html.control.InputControl;
+import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
+import org.loboevolution.html.dom.input.InputButton;
+import org.loboevolution.html.dom.input.InputCheckbox;
+import org.loboevolution.html.dom.input.InputColorPicker;
+import org.loboevolution.html.dom.input.InputDataTime;
+import org.loboevolution.html.dom.input.InputFile;
+import org.loboevolution.html.dom.input.InputHidden;
+import org.loboevolution.html.dom.input.InputImage;
+import org.loboevolution.html.dom.input.InputNumber;
+import org.loboevolution.html.dom.input.InputPassword;
+import org.loboevolution.html.dom.input.InputRadio;
+import org.loboevolution.html.dom.input.InputRange;
+import org.loboevolution.html.dom.input.InputText;
+import org.w3c.dom.Node;
 
-public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
-	
-	private final String IMAGE = "image";
-	
-	private final String SUBMIT = "submit";
-	
-	private final String TEXT = "tetx";
-	
-	private final String PASSWORD = "password";
-	
-	private final String HIDDEN = "hidden";
-	
-	private final String RADIO = "radio";
-	
-	private final String CHECKBOX = "checkbox";
-	
-	private final String RESET = "reset";
-	
-	private final String FILE = "file";
-	
-	private boolean defaultChecked;
+public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLInputElement {
 
 	public HTMLInputElementImpl(String name) {
 		super(name);
@@ -57,154 +49,206 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public void click() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.click();
-		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public String getAccept() {
+		return getAttribute("accept");
+	}
+
+	@Override
+	public String getAccessKey() {
+		return getAttribute("accessKey");
+	}
+
+	@Override
+	public String getAlign() {
+		return getAttribute("align");
+	}
+
+	@Override
+	public String getAlt() {
+		return getAttribute("alit");
 	}
 
 	@Override
 	public boolean getChecked() {
-		final InputContext ic = this.inputContext;
-		if (ic == null) {
-			return getAttributeAsBoolean("checked");
-		} else {
-			return ic.getChecked();
-		}
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean getDefaultChecked() {
-		return this.defaultChecked;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
-	protected FormInput[] getFormInputs() {
-		final String type = Strings.isBlank(getType()) ? "" : getType();
-		final String name = getName();
-		if (name == null) {
-			return null;
-		}
+	public String getDefaultValue() {
+		return getAttribute("defaultValue");
+	}
 
-		switch (type) {
-		case TEXT:
-		case PASSWORD:
-		case HIDDEN:
-		case "":
-			return new FormInput[] { new FormInput(name, getValue()) };
-		case RADIO:
-		case CHECKBOX:
-			if (getChecked()) {
-				String value = getValue();
-				if (value == null || value.length() == 0) {
-					value = "on";
-				}
-				return new FormInput[] { new FormInput(name, value) };
-			} else {
-				return null;
-			}
-		case SUBMIT:
-		case IMAGE:
-			return null;
-		case FILE:
-			final File files = getFileValue();
-			if (files == null) {
-				return null;
-			} else {
-				return new FormInput[] { new FormInput(name, files) };
-			}
-		default:
-			return null;
+	@Override
+	public boolean getDisabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public HTMLFormElement getForm() {
+		Node parent = getParentNode();
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
 		}
+		return (HTMLFormElement) parent;
 	}
 
 	@Override
 	public int getMaxLength() {
-		final InputContext ic = this.inputContext;
-		return ic == null ? 0 : ic.getMaxLength();
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getName() {
+		return getAttribute("name");
+	}
+
+	@Override
+	public boolean getReadOnly() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public int getSize() {
-		final InputContext ic = this.inputContext;
-		return ic == null ? 0 : ic.getControlSize();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public String getSrc() {
-		return getAttribute("src");
+		return this.getAttribute("src");
+	}
+
+	@Override
+	public int getTabIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String getType() {
+		final String type = getAttribute("type");
+		return type == null ? null : type.toLowerCase();
 	}
 
 	@Override
 	public String getUseMap() {
-		return getAttribute("usemap");
-	}
-
-	public boolean isImageInput() {
-		final String type = getType();
-		return IMAGE.equals(type);
-	}
-
-	public boolean isResetInput() {
-		final String type = getType();
-		return RESET.equals(type);
-	}
-
-	public boolean isSubmitInput() {
-		final String type = getType();
-		return SUBMIT.equals(type);
-	}
-
-	public boolean isSubmittableWithEnterKey() {
-		final String type = getType();
-		return (Strings.isBlank(type) || TEXT.equals(type) || PASSWORD.equals(type));
-	}
-
-	public boolean isSubmittableWithPress() {
-		final String type = getType();
-		return SUBMIT.equals(type) || IMAGE.equals(type);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
-	void resetInput() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.resetInput();
-		}
+	public String getValue() {
+		final String val = getAttribute("value");
+		return val == null ? "" : val;
+	}
+
+	@Override
+	public boolean getAutocomplete() {
+		String autocomplete = this.getAttribute("autocomplete");
+		return "on".equalsIgnoreCase(autocomplete);
+	}
+
+	public String getPlaceholder() {
+		return this.getAttribute("placeholder");
+	}
+	
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void setAccept(String accept) {
+		setAttribute("accept", accept);
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		setAttribute("accessKey", accessKey);
+	}
+
+	@Override
+	public void setAlign(String align) {
+		setAttribute("align", align);
+	}
+
+	@Override
+	public void setAlt(String alt) {
+		setAttribute("alt", alt);
 	}
 
 	@Override
 	public void setChecked(boolean checked) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setChecked(checked);
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setDefaultChecked(boolean defaultChecked) {
-		this.defaultChecked = defaultChecked;
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDefaultValue(String defaultValue) {
+		setAttribute("defaultValue", defaultValue);
+	}
+
+	@Override
+	public void setDisabled(boolean disabled) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setMaxLength(int maxLength) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setMaxLength(maxLength);
-		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setName(String name) {
+		setAttribute("name", name);
+	}
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setSize(int size) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setControlSize(size);
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void setSrc(String src) {
-		setAttribute("src", src);
+		this.setAttribute("src", src);
+		
+	}
+
+	@Override
+	public void setTabIndex(int tabIndex) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -214,6 +258,76 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 
 	@Override
 	public void setUseMap(String useMap) {
-		setAttribute("usemap", useMap);
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setValue(String value) {
+		setAttribute("value", value);
+	}
+	
+	public void setPlaceholder(String placeholder) {
+		this.setAttribute("placeholder", placeholder);
+
+	}
+
+	public void draw(InputControl ic) {
+		final String type = getType();
+		
+		if (Strings.isBlank(type)) {
+			new InputText(this, ic);
+		}
+
+		switch (type.toLowerCase()) {
+		case "text":
+			new InputText(this, ic);
+			break;
+		case "hidden":
+			new InputHidden(this, ic);
+			break;
+		case "submit":
+			new InputButton(this, ic);
+			break;
+		case "password":
+			new InputPassword(this, ic);
+			break;
+		case "file":
+			new InputFile(this, ic);
+			break;
+		case "number":
+			new InputNumber(this, ic);
+			break;
+		case "color":
+			new InputColorPicker(this, ic);
+			break;
+		case "radio":
+			new InputRadio(this, ic);
+			break;
+		case "checkbox":
+			new InputCheckbox(this, ic);
+			break;
+		case "button":
+			new InputButton(this, ic);
+			break;
+		case "image":
+			new InputImage(this, ic);
+			break;
+		case "reset":
+			new InputButton(this, ic);
+			break;
+		case "range":
+			new InputRange(this, ic);
+			break;
+		case "date":
+		case "datetime-local":
+		case "month":
+		case "time":
+			new InputDataTime(this, ic);
+			break;
+		default:
+			new InputText(this, ic);
+			break;
+		}
 	}
 }

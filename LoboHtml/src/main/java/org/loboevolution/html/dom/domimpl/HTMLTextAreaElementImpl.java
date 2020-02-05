@@ -23,10 +23,10 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.FormInput;
+import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLTextAreaElement;
 
-public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTMLTextAreaElement {
+public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HTMLTextAreaElement {
 	public HTMLTextAreaElementImpl() {
 		super("TEXTAREA");
 	}
@@ -35,70 +35,129 @@ public class HTMLTextAreaElementImpl extends HTMLBaseInputElement implements HTM
 		super(name);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.HTMLTextAreaElement#getCols()
-	 */
+	@Override
+	public String getAccessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	@Override
 	public int getCols() {
-		final InputContext ic = this.inputContext;
-		return ic == null ? 0 : ic.getCols();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	protected FormInput[] getFormInputs() {
-		final String name = getName();
-		if (name == null) {
-			return null;
-		}
-		return new FormInput[] { new FormInput(name, getValue()) };
+	public String getDefaultValue() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.HTMLTextAreaElement#getRows()
-	 */
+	@Override
+	public boolean getDisabled() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public HTMLFormElement getForm() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getReadOnly() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	@Override
 	public int getRows() {
-		final InputContext ic = this.inputContext;
-		return ic == null ? 0 : ic.getRows();
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.HTMLTextAreaElement#getType()
-	 */
+	@Override
+	public int getTabIndex() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	@Override
 	public String getType() {
-		return "textarea";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.HTMLTextAreaElement#setCols(int)
-	 */
+	@Override
+	public String getValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void setCols(int cols) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setCols(cols);
-		}
+		// TODO Auto-generated method stub
+		
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.loboevolution.html.dom.HTMLTextAreaElement#setRows(int)
-	 */
+	@Override
+	public void setDefaultValue(String defaultValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDisabled(boolean disabled) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setName(String name) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void setRows(int rows) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setRows(rows);
-		}
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setTabIndex(int tabIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setValue(String value) {
+		// TODO Auto-generated method stub
+		
 	}
 }

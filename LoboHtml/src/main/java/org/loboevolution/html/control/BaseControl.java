@@ -93,4 +93,8 @@ public abstract class BaseControl extends JComponent implements UIControl {
 	public void setRUIControl(RUIControl ruicontrol) {
 		this.ruicontrol = ruicontrol;
 	}
+	
+	public RUIControl getRUIControl() {
+		return ruicontrol;
+	}
 }

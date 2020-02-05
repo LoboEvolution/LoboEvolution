@@ -82,14 +82,14 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 		if (parent instanceof HTMLSelectElementImpl) {
 			final HTMLSelectElementImpl parentSelect = (HTMLSelectElementImpl) parent;
 			if (changed || parentSelect.getSelectedIndex() == -1) {
-				if (selected) {
+				/*if (selected) {
 					parentSelect.setSelectedIndexImpl(getIndex());
 				} else {
 					final int currentIndex = parentSelect.getSelectedIndex();
 					if (currentIndex != -1 && currentIndex == getIndex()) {
 						parentSelect.setSelectedIndexImpl(-1);
 					}
-				}
+				}*/ //TODO
 			}
 		}
 	}

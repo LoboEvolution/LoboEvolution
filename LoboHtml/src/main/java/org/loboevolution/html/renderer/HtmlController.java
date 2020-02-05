@@ -7,21 +7,17 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.html.FormInput;
 import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
-import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.events.Event;
 
 public class HtmlController {
 	private static final HtmlController instance = new HtmlController();
@@ -32,7 +28,7 @@ public class HtmlController {
 	}
 
 	public boolean onChange(ModelNode node) {
-		if (node instanceof HTMLSelectElementImpl) {
+		/*if (node instanceof HTMLSelectElementImpl) {
 			final HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
 			final Function f = uiElement.getOnchange();
 			if (f != null) {
@@ -42,7 +38,7 @@ public class HtmlController {
 					return false;
 				}
 			}
-		}
+		}*/ //TODO
 		return false;
 	}
 
@@ -110,14 +106,14 @@ public class HtmlController {
 	/**
 	 * @return True to propagate further and false if the event was consumed.
 	 */
-	public boolean onEnterPressed(ModelNode node, InputEvent event) {
-		if (node instanceof HTMLInputElementImpl) {
+	public boolean onEnterPressed(ModelNode node, InputEvent event) { //TODO
+		/*if (node instanceof HTMLInputElementImpl) {
 			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
 			if (hie.isSubmittableWithEnterKey()) {
 				hie.submitForm(null);
 				return false;
 			}
-		}
+		}*/
 		// No propagation
 		return false;
 	}
@@ -152,7 +148,7 @@ public class HtmlController {
 			((HTMLLinkElementImpl) node).navigate();
 			return false;
 		} else if (node instanceof HTMLButtonElementImpl) {
-			final HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
+			/*final HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
 			final String rawType = button.getAttribute("type");
 			String type;
 			if (rawType == null) {
@@ -173,7 +169,7 @@ public class HtmlController {
 				button.resetForm();
 			} else {
 				// NOP for "button"!
-			}
+			}*/ //TODO
 			return false;
 		}
 		final ModelNode parent = node.getParentModelNode();
@@ -380,7 +376,7 @@ public class HtmlController {
 		}
 		if (node instanceof HTMLInputElementImpl) {
 			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-			if (hie.isSubmitInput()) {
+			/*if (hie.isSubmitInput()) {
 				FormInput[] formInputs;
 				final String name = hie.getName();
 				if (name == null) {
@@ -397,7 +393,7 @@ public class HtmlController {
 				hie.submitForm(extraFormInputs);
 			} else if (hie.isResetInput()) {
 				hie.resetForm();
-			}
+			}*/ ///TODO
 		}
 		// No propagate
 		return false;
