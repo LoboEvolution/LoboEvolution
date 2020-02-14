@@ -7,11 +7,14 @@ import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
+import javax.swing.event.MouseInputAdapter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
@@ -22,13 +25,17 @@ import org.loboevolution.component.input.Autocomplete;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.store.InputStore;
 
 public class InputText {
+	
+	private static final Logger logger = Logger.getLogger(InputText.class.getName());
 
 	private static final float DEFAULT_FONT_SIZE = 14.0f;
 		
-	protected JTextField widget = new JTextField();
+	protected JTextField iText = new JTextField();
 	
 	private boolean textWrittenIn;
 	
@@ -41,62 +48,107 @@ public class InputText {
 		final String name = modelNode.getName();
 		final String type = modelNode.getType();
 		
-		final Font font = widget.getFont();
-		widget.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
-		widget.setDocument(new LimitedDocument());
-		widget.setText(modelNode.getValue());
-		widget.setSelectionColor(Color.BLUE);
-		final Dimension ps = widget.getPreferredSize();
-		widget.setPreferredSize(new Dimension(128, ps.height));
+		final Font font = iText.getFont();
+		iText.setFont(font.deriveFont(DEFAULT_FONT_SIZE));
+		iText.setDocument(new LimitedDocument());
+		iText.setText(modelNode.getValue());
+		iText.setSelectionColor(Color.BLUE);
+		final Dimension ps = iText.getPreferredSize();
+		final int size = modelNode.getSize();
+		final int width = (128/15) * size;
+		iText.setPreferredSize(new Dimension(width, ps.height));
 
 		if (autocomplete && !"password".equalsIgnoreCase(type)) {
 			List<String> list = suggestionList(id, name, type);
 			if (ArrayUtilities.isNotBlank(list)) {
-				Autocomplete.setupAutoComplete((JTextField) widget, list);
+				Autocomplete.setupAutoComplete((JTextField) iText, list);
 			}
 		}
 
 		if (Strings.isNotBlank(modelNode.getPlaceholder())) {
 			placeholder(modelNode.getPlaceholder());
 		}
+		
+		iText.setEnabled(!modelNode.getDisabled());
+		iText.setEditable(!modelNode.getReadOnly());
 
-		widget.addFocusListener(new FocusAdapter() {
+		iText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent event) {
 				if (autocomplete && !"password".equalsIgnoreCase(type)) {
-					InputStore.insertLogin(id, name, type, widget.getText(),
-							modelNode.getUserAgentContext().isNavigationEnabled());
+					InputStore.insertLogin(id, name, type, iText.getText(), modelNode.getUserAgentContext().isNavigationEnabled());
 				}
 			}
 		});
+
+		iText.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
+
+		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
+
+			@Override
+			public void mouseEntered(final MouseEvent e) {
+				if (modelNode.getOnmouseover() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnmouseover(), null, new Object[] {});
+				}
+			}
+		};
+		iText.addMouseListener(mouseHandler);
 		
 		RUIControl ruiControl = ic.getRUIControl();
 		final Insets borderInsets = ruiControl.getBorderInsets();
 		
-		widget.setMargin(new Insets(ruiControl.getMarginTop(), ruiControl.getMarginLeft(), ruiControl.getMarginBottom(), ruiControl.getMarginRight()));
+		iText.setMargin(new Insets(ruiControl.getMarginTop(), ruiControl.getMarginLeft(), ruiControl.getMarginBottom(), ruiControl.getMarginRight()));
 		if (borderInsets.top == 0 && borderInsets.left == 0 && borderInsets.bottom == 0 && borderInsets.right == 0) {
-			widget.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+			iText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		} else {
-			widget.setBorder(BorderFactory.createMatteBorder(borderInsets.top, borderInsets.left, borderInsets.bottom, borderInsets.right, Color.BLACK));
+			iText.setBorder(BorderFactory.createMatteBorder(borderInsets.top, borderInsets.left, borderInsets.bottom, borderInsets.right, Color.BLACK));
 		}
 
-		ic.add(widget);
+		ic.add(iText);
 	}
-
+	
+	public void selectAll() {
+		iText.selectAll();
+		iText.requestFocus();
+	}
+	
+	public void focus() {
+		iText.setFocusable(true);
+		iText.requestFocus();
+	}
+	
+	public void blur() {
+		iText.setFocusable(false);
+	}
+	
+	public void setSelectionRange(int start, int end){
+		iText.setSelectionStart(start);
+		iText.setSelectionEnd(end);
+	}
+	
+	public void setRangeText(int start, int end, String text) {
+		try {
+			iText.getDocument().insertString(start, text, null);
+			setSelectionRange(start, end);
+		} catch (BadLocationException e) {
+			logger.severe(e.getMessage());
+		}
+	}
+	
 	private void placeholder(String text) {
 		this.customizeText(text);
 
-		widget.addFocusListener(new FocusListener() {
+		iText.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (!isTextWrittenIn()) {
-					widget.setText("");
+					iText.setText("");
 				}
 			}
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (Strings.isBlank(widget.getText())) {
+				if (Strings.isBlank(iText.getText())) {
 					customizeText(text);
 				}
 			}
@@ -104,8 +156,8 @@ public class InputText {
 	}
 
 	private void customizeText(String text) {
-		widget.setText(text);
-		widget.setForeground(new Color(160, 160, 160));
+		iText.setText(text);
+		iText.setForeground(new Color(160, 160, 160));
 		setTextWrittenIn(false);
 	}
 
@@ -121,14 +173,6 @@ public class InputText {
 			return list;
 		return new ArrayList<String>();
 	}
-	
-	public boolean isTextWrittenIn() {
-		return textWrittenIn;
-	}
-
-	public void setTextWrittenIn(boolean textWrittenIn) {
-		this.textWrittenIn = textWrittenIn;
-	}
 
 	private class LimitedDocument extends PlainDocument {
 
@@ -136,29 +180,27 @@ public class InputText {
 
 		@Override
 		public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-			final String maxLengthText = modelNode.getAttribute("max-length");
-			int max = -1;
-			if (maxLengthText != null) {
-				try {
-					max = Integer.parseInt(maxLengthText);
-				} catch (NumberFormatException nfe) {}
+			int max = modelNode.getMaxLength();
+
+			final int docLength = getLength();
+			if (docLength >= max) {
+				return;
 			}
-			
-			if (max != -1) {
-				final int docLength = getLength();
-				if (docLength >= max) {
-					return;
-				}
-				final int strLen = str.length();
-				if (docLength + strLen > max) {
-					final String shorterStr = str.substring(0, max - docLength);
-					super.insertString(offs, shorterStr, a);
-				} else {
-					super.insertString(offs, str, a);
-				}
+			final int strLen = str.length();
+			if (docLength + strLen > max) {
+				final String shorterStr = str.substring(0, max - docLength);
+				super.insertString(offs, shorterStr, a);
 			} else {
 				super.insertString(offs, str, a);
 			}
 		}
+	}
+	
+	public boolean isTextWrittenIn() {
+		return textWrittenIn;
+	}
+
+	public void setTextWrittenIn(boolean textWrittenIn) {
+		this.textWrittenIn = textWrittenIn;
 	}
 }

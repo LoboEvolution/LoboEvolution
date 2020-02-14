@@ -13,8 +13,8 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
 public class InputDataTime {
-	
-	  private final static Logger logger = Logger.getLogger(InputDataTime.class.getName());
+
+	private final static Logger logger = Logger.getLogger(InputDataTime.class.getName());
 
 	public InputDataTime(HTMLInputElementImpl modelNode, InputControl ic) {
 

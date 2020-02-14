@@ -39,18 +39,16 @@ import org.loboevolution.html.dom.input.InputPassword;
 import org.loboevolution.html.dom.input.InputRadio;
 import org.loboevolution.html.dom.input.InputRange;
 import org.loboevolution.html.dom.input.InputText;
+import org.loboevolution.html.js.Executor;
+import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 
 public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLInputElement {
+	
+	private InputText text;
 
 	public HTMLInputElementImpl(String name) {
 		super(name);
-	}
-
-	@Override
-	public void click() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -64,36 +62,20 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	@Override
-	public String getAlign() {
-		return getAttribute("align");
-	}
-
-	@Override
 	public String getAlt() {
 		return getAttribute("alit");
 	}
 
 	@Override
 	public boolean getChecked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean getDefaultChecked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String getDefaultValue() {
-		return getAttribute("defaultValue");
+		final String checked = getAttribute("checked");
+		return checked == null ? false : true;
 	}
 
 	@Override
 	public boolean getDisabled() {
-		// TODO Auto-generated method stub
-		return false;
+		final String disabled = getAttribute("disabled");
+		return disabled == null ? false : true;
 	}
 
 	@Override
@@ -107,8 +89,12 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	public int getMaxLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			final String maxLength = getAttribute("maxLength");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return Integer.MAX_VALUE;
+		}
 	}
 
 	@Override
@@ -118,14 +104,18 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	public boolean getReadOnly() {
-		// TODO Auto-generated method stub
-		return false;
+		final String readonly = getAttribute("readonly");
+		return readonly == null ? false : true;
 	}
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			final String maxLength = getAttribute("size");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return 20;
+		}
 	}
 
 	@Override
@@ -134,21 +124,9 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	@Override
-	public int getTabIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public String getType() {
 		final String type = getAttribute("type");
 		return type == null ? null : type.toLowerCase();
-	}
-
-	@Override
-	public String getUseMap() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -169,8 +147,35 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	
 	@Override
 	public void select() {
-		// TODO Auto-generated method stub
-		
+		if(text!= null) text.selectAll();
+	}
+	
+	@Override
+	public void click() {
+		Function onclick = getOnclick();		
+		if(onclick!= null) {
+			Executor.executeFunction(this, onclick, null, new Object[] {});
+		}
+	}
+	
+	@Override
+	public void blur() {
+		if(text!= null) text.blur();
+	}
+	
+	@Override
+	public void focus() {
+		if(text!= null) text.focus();
+	}
+	
+	@Override
+	public void setSelectionRange(int start, int end) {
+		if(text!= null) text.setSelectionRange(start, end);
+	} 
+	
+	@Override
+	public void setRangeText(String select, int start, int end, String preserve) {
+		text.setRangeText(start, end, select);
 	}
 	
 	@Override
@@ -184,42 +189,23 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	}
 
 	@Override
-	public void setAlign(String align) {
-		setAttribute("align", align);
-	}
-
-	@Override
 	public void setAlt(String alt) {
 		setAttribute("alt", alt);
 	}
 
 	@Override
 	public void setChecked(boolean checked) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setDefaultChecked(boolean defaultChecked) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setDefaultValue(String defaultValue) {
-		setAttribute("defaultValue", defaultValue);
+		setAttribute("checked", String.valueOf(checked));
 	}
 
 	@Override
 	public void setDisabled(boolean disabled) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("disabled", String.valueOf(disabled));
 	}
 
 	@Override
 	public void setMaxLength(int maxLength) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("maxLength", String.valueOf(maxLength));
 	}
 
 	@Override
@@ -229,37 +215,22 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	@Override
 	public void setReadOnly(boolean readOnly) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("readonly", String.valueOf(readOnly));
 	}
 
 	@Override
 	public void setSize(int size) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("size", String.valueOf(size));
 	}
 
 	@Override
 	public void setSrc(String src) {
 		this.setAttribute("src", src);
-		
-	}
-
-	@Override
-	public void setTabIndex(int tabIndex) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
-	}
-
-	@Override
-	public void setUseMap(String useMap) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -276,12 +247,12 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		final String type = getType();
 		
 		if (Strings.isBlank(type)) {
-			new InputText(this, ic);
+			text = new InputText(this, ic);
 		}
 
 		switch (type.toLowerCase()) {
 		case "text":
-			new InputText(this, ic);
+			text = new InputText(this, ic);
 			break;
 		case "hidden":
 			new InputHidden(this, ic);
@@ -326,7 +297,7 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 			new InputDataTime(this, ic);
 			break;
 		default:
-			new InputText(this, ic);
+			text = new InputText(this, ic);
 			break;
 		}
 	}

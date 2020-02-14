@@ -12,5 +12,4 @@ public class InputHidden {
         hidden.setVisible(false);
         ic.add(hidden);
 	}
-
 }

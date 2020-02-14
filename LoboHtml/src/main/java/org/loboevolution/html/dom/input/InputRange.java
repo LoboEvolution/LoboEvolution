@@ -20,7 +20,5 @@ public class InputRange {
 		rangeSlider.setMaximum(max);
 		rangeSlider.setValue(value);
 		ic.add(rangeSlider);
-
 	}
-
 }

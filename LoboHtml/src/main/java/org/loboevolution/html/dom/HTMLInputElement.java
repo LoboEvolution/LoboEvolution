@@ -60,6 +60,10 @@ public interface HTMLInputElement extends HTMLElement {
 	 * Gives keyboard focus to this element.
 	 */
 	void focus();
+	
+	void setSelectionRange(int start, int end); 
+	
+	void setRangeText(String select, int start, int end, String preserve);
 
 	/**
 	 * A comma-separated list of content types that a server processing this form
@@ -72,13 +76,6 @@ public interface HTMLInputElement extends HTMLElement {
 	 * accesskey attribute definition in HTML 4.01.
 	 */
 	String getAccessKey();
-
-	/**
-	 * Aligns this object (vertically or horizontally) with respect to its
-	 * surrounding text. See the align attribute definition in HTML 4.01. This
-	 * attribute is deprecated in HTML 4.01.
-	 */
-	String getAlign();
 
 	/**
 	 * Alternate text for user agents not rendering the normal content of this
@@ -101,22 +98,6 @@ public interface HTMLInputElement extends HTMLElement {
 	 */
 	boolean getChecked();
 
-	/**
-	 * When <code>type</code> has the value "radio" or "checkbox", this represents
-	 * the HTML checked attribute of the element. The value of this attribute does
-	 * not change if the state of the corresponding form control, in an interactive
-	 * user agent, changes. See the checked attribute definition in HTML 4.01.
-	 */
-	boolean getDefaultChecked();
-
-	/**
-	 * When the <code>type</code> attribute of the element has the value "text",
-	 * "file" or "password", this represents the HTML value attribute of the
-	 * element. The value of this attribute does not change if the contents of the
-	 * corresponding form control, in an interactive user agent, changes. See the
-	 * value attribute definition in HTML 4.01.
-	 */
-	String getDefaultValue();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
@@ -165,23 +146,12 @@ public interface HTMLInputElement extends HTMLElement {
 	String getSrc();
 
 	/**
-	 * Index that represents the element's position in the tabbing order. See the
-	 * tabindex attribute definition in HTML 4.01.
-	 */
-	int getTabIndex();
-
-	/**
 	 * The type of control created (all lower case). See the type attribute
 	 * definition in HTML 4.01.
 	 * 
 	 * @version DOM Level 2
 	 */
 	String getType();
-
-	/**
-	 * Use client-side image map. See the usemap attribute definition in HTML 4.01.
-	 */
-	String getUseMap();
 
 	/**
 	 * When the <code>type</code> attribute of the element has the value "text",
@@ -216,12 +186,6 @@ public interface HTMLInputElement extends HTMLElement {
 	 */
 	void setAccessKey(String accessKey);
 
-	/**
-	 * Aligns this object (vertically or horizontally) with respect to its
-	 * surrounding text. See the align attribute definition in HTML 4.01. This
-	 * attribute is deprecated in HTML 4.01.
-	 */
-	void setAlign(String align);
 
 	/**
 	 * Alternate text for user agents not rendering the normal content of this
@@ -244,22 +208,6 @@ public interface HTMLInputElement extends HTMLElement {
 	 */
 	void setChecked(boolean checked);
 
-	/**
-	 * When <code>type</code> has the value "radio" or "checkbox", this represents
-	 * the HTML checked attribute of the element. The value of this attribute does
-	 * not change if the state of the corresponding form control, in an interactive
-	 * user agent, changes. See the checked attribute definition in HTML 4.01.
-	 */
-	void setDefaultChecked(boolean defaultChecked);
-
-	/**
-	 * When the <code>type</code> attribute of the element has the value "text",
-	 * "file" or "password", this represents the HTML value attribute of the
-	 * element. The value of this attribute does not change if the contents of the
-	 * corresponding form control, in an interactive user agent, changes. See the
-	 * value attribute definition in HTML 4.01.
-	 */
-	void setDefaultValue(String defaultValue);
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
@@ -302,23 +250,12 @@ public interface HTMLInputElement extends HTMLElement {
 	void setSrc(String src);
 
 	/**
-	 * Index that represents the element's position in the tabbing order. See the
-	 * tabindex attribute definition in HTML 4.01.
-	 */
-	void setTabIndex(int tabIndex);
-
-	/**
 	 * The type of control created (all lower case). See the type attribute
 	 * definition in HTML 4.01.
 	 * 
 	 * @version DOM Level 2
 	 */
 	void setType(String type);
-
-	/**
-	 * Use client-side image map. See the usemap attribute definition in HTML 4.01.
-	 */
-	void setUseMap(String useMap);
 
 	/**
 	 * When the <code>type</code> attribute of the element has the value "text",

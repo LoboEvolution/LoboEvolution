@@ -20,7 +20,7 @@ public class InputNumber extends InputText {
 
 	public InputNumber(HTMLInputElementImpl modelNode, InputControl ic) {
 		super(modelNode, ic);
-		numeric = (JTextField) this.widget;
+		numeric = (JTextField) this.iText;
         String value = modelNode.getValue();
         min = modelNode.getAttribute("min");
         max = modelNode.getAttribute("max");

@@ -3,12 +3,15 @@ package org.loboevolution.html.dom.input;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.event.MouseInputAdapter;
 
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.js.Executor;
 
 public class InputColorPicker {
 
@@ -31,6 +34,17 @@ public class InputColorPicker {
 				widget.setBackground(c);
 			}
 		});
+
+		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
+
+			@Override
+			public void mouseEntered(final MouseEvent e) {
+				if (modelNode.getOnmouseover() != null) {
+					Executor.executeFunction(modelNode, modelNode.getOnmouseover(), null, new Object[] {});
+				}
+			}
+		};
+		widget.addMouseListener(mouseHandler);
 
 		ic.add(widget);
 	}
