@@ -24,6 +24,7 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.html.FormInput;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
@@ -300,5 +301,48 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 			text = new InputText(this, ic);
 			break;
 		}
+	}
+	
+	public void submit() {
+		FormInput[] formInputs;
+		final String name = getName();
+		if (name == null) {
+			formInputs = null;
+		} else {
+			formInputs = new FormInput[] { new FormInput(name, getValue()) };
+		}
+
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
+		if (form != null) {
+			form.submit(formInputs);
+		}
+	}
+
+	public void reset() {
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
+		if (form != null) {
+			form.reset();
+		}
+	}
+
+	public void submitImage(int x, int y) {
+		final String name = getName();
+		final String prefix = name == null ? "" : name + ".";
+		final FormInput[] extraFormInputs = new FormInput[] { new FormInput(prefix + "x", String.valueOf(x)), new FormInput(prefix + "y", String.valueOf(y)) };
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
+		if (form != null) {
+			form.submit(extraFormInputs);
+		}
+	}
+
+	public void submitForm(final FormInput[] extraFormInputs) {
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) this.getForm();
+		if (form != null) {
+			form.submit(extraFormInputs);
+		}
+	}
+
+	public void resetInput() {
+		if(text != null) text.reset();
 	}
 }

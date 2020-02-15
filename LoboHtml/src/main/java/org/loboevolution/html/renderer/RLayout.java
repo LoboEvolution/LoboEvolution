@@ -1,10 +1,12 @@
 package org.loboevolution.html.renderer;
 
+import java.awt.Button;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.HtmlObject;
+import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.control.CanvasControl;
 import org.loboevolution.html.control.ImgControl;
 import org.loboevolution.html.control.InputControl;
@@ -14,6 +16,7 @@ import org.loboevolution.html.control.SVGControl;
 import org.loboevolution.html.control.SelectControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.control.UIControlWrapper;
+import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
@@ -66,6 +69,7 @@ public class RLayout {
 		el.put(HTMLTag.INPUT,new InputLayout());
 		el.put(HTMLTag.TEXTAREA,new TextAreaLayout());
 		el.put(HTMLTag.SELECT,new SelectLayout());
+		el.put(HTMLTag.BUTTON, new ButtonLayout());
 		final ListItemLayout list = new ListItemLayout();
 		el.put(HTMLTag.UL,list);
 		el.put(HTMLTag.OL,list);
@@ -454,6 +458,19 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
+					bodyLayout.userAgentContext);
+		}
+	}
+	
+	protected static class ButtonLayout extends CommonWidgetLayout {
+		public ButtonLayout() {
+			super(ADD_INLINE);
+		}
+
+		@Override
+		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+			UIControl control = new ButtonControl((HTMLButtonElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}

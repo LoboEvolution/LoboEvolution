@@ -428,15 +428,6 @@ public class HtmlRendererContext {
 		return true;
 	}
 
-	/**
-	 * Indicates whether navigation (via
-	 * {@link #submitForm(String, URL, String, String, FormInput[])}) should be
-	 * asynchronous. This overridable implementation returns <code>true</code>.
-	 */
-	protected boolean isNavigationAsynchronous() {
-		return true;
-	}
-
 	public boolean isVisitedLink(HTMLLinkElementImpl link) {
 		return LinkStore.isVisited(link.getHref());
 	}
@@ -729,11 +720,8 @@ public class HtmlRendererContext {
 	 * 
 	 * @see #navigate(URL, String)
 	 */
-	public void submitForm(final String method, final URL action, final String target, final String enctype,
-			final FormInput[] formInputs) {
-		// This method implements simple incremental rendering.
+	public void submitForm(final String method, final URL action, final String target, final String enctype, final FormInput[] formInputs) {
 		if (target != null) {
-
 			final String actualTarget = target.trim().toLowerCase();
 			if ("_top".equals(actualTarget)) {
 				getTop().navigate(action, null);
@@ -747,32 +735,27 @@ public class HtmlRendererContext {
 			} else if ("_blank".equals(actualTarget)) {
 				open(action, "cobra.blank", "", false);
 				return;
-			} else if ("_this".equals(actualTarget)) {
-				// fall through
-			} else {
-				logger.warning("submitForm(): Link target unrecognized: " + actualTarget);
 			}
 		}
 
-		// Make request asynchronously.
-		if (isNavigationAsynchronous()) {
-			new Thread() {
-				@Override
-				public void run() {
-					try {
-						HtmlRendererContext.this.submitFormSync(method, action, target, enctype, formInputs);
-					} catch (final Exception err) {
-						HtmlRendererContext.this.error("navigate(): Error loading or parsing request.", err);
-					}
-				}
-			}.start();
-		} else {
-			try {
-				HtmlRendererContext.this.submitFormSync(method, action, target, enctype, formInputs);
-			} catch (final Exception err) {
-				HtmlRendererContext.this.error("navigate(): Error loading or parsing request.", err);
-			}
+		try {
+			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
+			final int indexPanel = tabbedPane.getSelectedIndex();
+			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(action.toString());
+	    	hpanel.setBrowserPanel(bpanel);
+			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
+			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
+			tabbedPane.remove(indexPanel);
+			tabbedPane.insertTab(title, null, htmlPanel, title, indexPanel);
+			browserFrame.getToolbar().getAddressBar().setText(action.toString());
+			bpanel.getScroll().getViewport().add(tabbedPane);
+			submitFormSync(method, action, target, enctype, formInputs);
+		} catch (final Exception err) {
+			error("navigate(): Error loading or parsing request.", err);
 		}
+
 	}
 
 	/**
@@ -795,7 +778,6 @@ public class HtmlRendererContext {
 		URL resolvedURL;
 		if ("GET".equals(actualMethod) && formInputs != null) {
 			boolean firstParam = true;
-			// TODO: What about the userInfo part of the URL?
 			final URL noRefAction = new URL(action.getProtocol(), action.getHost(), action.getPort(), action.getFile());
 			final StringBuffer newUrlBuffer = new StringBuffer(noRefAction.toExternalForm());
 			if (action.getQuery() == null) {
@@ -845,7 +827,7 @@ public class HtmlRendererContext {
 		}
 		System.currentTimeMillis();
 		// Using potentially different URL for loading.
-		final Proxy proxy = HtmlRendererContext.this.getProxy();
+		final Proxy proxy = getProxy();
 		final boolean isPost = "POST".equals(actualMethod);
 		final URLConnection connection = proxy == null || proxy == Proxy.NO_PROXY ? urlForLoading.openConnection()
 				: urlForLoading.openConnection(proxy);
@@ -910,14 +892,14 @@ public class HtmlRendererContext {
 					} else {
 						java.net.URL href;
 						href = Urls.createURL(action, location);
-						HtmlRendererContext.this.navigate(href, target);
+						navigate(href, target);
 					}
 					return;
 				}
 			}
 			final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
 			try {
-				HtmlRendererContext.this.sourceCode = null;
+				sourceCode = null;
 				final RecordedInputStream rin = new RecordedInputStream(in, 1000000);
 				final InputStream bin = new BufferedInputStream(rin, 8192);
 				final String actualURI = urlForLoading.toExternalForm();
@@ -934,9 +916,9 @@ public class HtmlRendererContext {
 					panel.scrollToElement(ref);
 				}
 				try {
-					HtmlRendererContext.this.sourceCode = rin.getString("ISO-8859-1");
+					sourceCode = rin.getString("ISO-8859-1");
 				} catch (final BufferExceededException bee) {
-					HtmlRendererContext.this.sourceCode = "[TOO BIG]";
+					sourceCode = "[TOO BIG]";
 				}
 			} finally {
 				in.close();

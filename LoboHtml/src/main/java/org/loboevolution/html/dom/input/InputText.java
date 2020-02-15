@@ -81,7 +81,7 @@ public class InputText {
 			}
 		});
 
-		iText.addActionListener(event -> HtmlController.getInstance().onPressed(modelNode, null, 0, 0));
+		iText.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
 
 		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
 
@@ -124,6 +124,10 @@ public class InputText {
 	public void setSelectionRange(int start, int end){
 		iText.setSelectionStart(start);
 		iText.setSelectionEnd(end);
+	}
+	
+	public void reset() {
+		iText.setText("");
 	}
 	
 	public void setRangeText(int start, int end, String text) {

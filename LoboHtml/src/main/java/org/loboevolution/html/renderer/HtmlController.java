@@ -106,15 +106,9 @@ public class HtmlController {
 	/**
 	 * @return True to propagate further and false if the event was consumed.
 	 */
-	public boolean onEnterPressed(ModelNode node, InputEvent event) { //TODO
-		/*if (node instanceof HTMLInputElementImpl) {
-			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-			if (hie.isSubmittableWithEnterKey()) {
-				hie.submitForm(null);
-				return false;
-			}
-		}*/
-		// No propagation
+	public boolean onEnterPressed(ModelNode node) {
+		final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
+		hie.submitForm(null);
 		return false;
 	}
 
@@ -148,28 +142,18 @@ public class HtmlController {
 			((HTMLLinkElementImpl) node).navigate();
 			return false;
 		} else if (node instanceof HTMLButtonElementImpl) {
-			/*final HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
-			final String rawType = button.getAttribute("type");
-			String type;
-			if (rawType == null) {
-				type = "submit";
-			} else {
-				type = rawType.trim().toLowerCase();
+			final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
+			switch (btn.getType()) {
+			case "submit":
+				btn.submit();
+				break;
+			case "reset":
+				btn.reset();
+				break;
+			case "button":
+			default:
+				break;
 			}
-			if ("submit".equals(type)) {
-				FormInput[] formInputs;
-				final String name = button.getName();
-				if (name == null) {
-					formInputs = null;
-				} else {
-					formInputs = new FormInput[] { new FormInput(name, button.getValue()) };
-				}
-				button.submitForm(formInputs);
-			} else if ("reset".equals(type)) {
-				button.resetForm();
-			} else {
-				// NOP for "button"!
-			}*/ //TODO
 			return false;
 		}
 		final ModelNode parent = node.getParentModelNode();
@@ -374,28 +358,24 @@ public class HtmlController {
 				}
 			}
 		}
+		
 		if (node instanceof HTMLInputElementImpl) {
 			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-			/*if (hie.isSubmitInput()) {
-				FormInput[] formInputs;
-				final String name = hie.getName();
-				if (name == null) {
-					formInputs = null;
-				} else {
-					formInputs = new FormInput[] { new FormInput(name, hie.getValue()) };
-				}
-				hie.submitForm(formInputs);
-			} else if (hie.isImageInput()) {
-				final String name = hie.getName();
-				final String prefix = name == null ? "" : name + ".";
-				final FormInput[] extraFormInputs = new FormInput[] { new FormInput(prefix + "x", String.valueOf(x)),
-						new FormInput(prefix + "y", String.valueOf(y)) };
-				hie.submitForm(extraFormInputs);
-			} else if (hie.isResetInput()) {
-				hie.resetForm();
-			}*/ ///TODO
+			switch (hie.getType()) {
+			case "submit":
+				hie.submit();
+				break;
+			case "reset":
+				hie.reset();
+				break;
+			case "image":
+				hie.submitImage(x, y);
+				break;
+			case "button":
+			default:
+				break;
+			}
 		}
-		// No propagate
 		return false;
 	}
 }

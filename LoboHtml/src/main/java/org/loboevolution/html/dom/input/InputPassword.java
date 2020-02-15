@@ -26,7 +26,7 @@ public class InputPassword {
 		pwd.setEnabled(!modelNode.getDisabled());
 		pwd.setEditable(!modelNode.getReadOnly());
 		pwd.setDocument(new LimitedDocument());
-		pwd.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
+		pwd.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode));
 		final Dimension ps = 		pwd.getPreferredSize();
 		final int size = modelNode.getSize();
 		final int width = (128/15) * size;
