@@ -11,9 +11,11 @@ import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
+import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
@@ -28,17 +30,17 @@ public class HtmlController {
 	}
 
 	public boolean onChange(ModelNode node) {
-		/*if (node instanceof HTMLSelectElementImpl) {
+		if (node instanceof HTMLSelectElementImpl) {
 			final HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
 			final Function f = uiElement.getOnchange();
 			if (f != null) {
-				final Event evt = new EventImpl();
-				evt.initEvent("channge", false, false);
+				final EventImpl evt = new EventImpl();
+				evt.initEvent("change", false, false);
 				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
 			}
-		}*/ //TODO
+		}
 		return false;
 	}
 

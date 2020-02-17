@@ -158,6 +158,11 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 				final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
 				btn.resetInput();
 			}
+			
+			if (node instanceof HTMLSelectElementImpl) {
+				final HTMLSelectElementImpl slct = (HTMLSelectElementImpl) node;
+				slct.resetInput();
+			}
 		});
 	}
 

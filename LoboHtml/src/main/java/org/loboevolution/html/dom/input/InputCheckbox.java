@@ -11,9 +11,10 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
 
 public class InputCheckbox {
+	
+	final JCheckBox checkBox = new JCheckBox();
 
 	public InputCheckbox(HTMLInputElementImpl modelNode, InputControl ic) {
-		final JCheckBox checkBox = new JCheckBox();
 		checkBox.setOpaque(false);
 		if(modelNode.getTitle() != null) checkBox.setToolTipText(modelNode.getTitle());
 		checkBox.setVisible(!modelNode.getHidden());
@@ -35,5 +36,9 @@ public class InputCheckbox {
 		checkBox.addMouseListener(mouseHandler);
 		
 		ic.add(checkBox);
+	}
+
+	public void reset() {
+		checkBox.setSelected(false);
 	}
 }

@@ -47,6 +47,16 @@ import org.w3c.dom.Node;
 public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLInputElement {
 	
 	private InputText text;
+	
+	private InputRadio radio;
+	
+	private InputCheckbox checkbox;
+	
+	private InputNumber number;
+	
+	private InputPassword password;
+	
+	private InputColorPicker color;
 
 	public HTMLInputElementImpl(String name) {
 		super(name);
@@ -262,22 +272,22 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 			new InputButton(this, ic);
 			break;
 		case "password":
-			new InputPassword(this, ic);
+			password = new InputPassword(this, ic);
 			break;
 		case "file":
 			new InputFile(this, ic);
 			break;
 		case "number":
-			new InputNumber(this, ic);
+			number = new InputNumber(this, ic);
 			break;
 		case "color":
-			new InputColorPicker(this, ic);
+			color = new InputColorPicker(this, ic);
 			break;
 		case "radio":
-			new InputRadio(this, ic);
+			radio = new InputRadio(this, ic);
 			break;
 		case "checkbox":
-			new InputCheckbox(this, ic);
+			checkbox = new InputCheckbox(this, ic);
 			break;
 		case "button":
 			new InputButton(this, ic);
@@ -344,5 +354,10 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 
 	public void resetInput() {
 		if(text != null) text.reset();
+		if(radio != null) radio.reset();
+		if(checkbox != null) checkbox.reset();
+		if(color != null) color.reset();
+		if(number != null) number.reset();
+		if(password != null) password.reset();
 	}
 }

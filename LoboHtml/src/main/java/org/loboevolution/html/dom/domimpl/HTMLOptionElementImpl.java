@@ -30,8 +30,7 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	public int getIndex() {
 		final Object parent = getParentNode();
 		if (parent instanceof HTMLSelectElement) {
-			final HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) ((HTMLSelectElement) parent)
-					.getOptions();
+			final HTMLOptionsCollectionImpl options = (HTMLOptionsCollectionImpl) ((HTMLSelectElement) parent).getOptions();
 			return options.indexOf(this);
 		} else {
 			return -1;

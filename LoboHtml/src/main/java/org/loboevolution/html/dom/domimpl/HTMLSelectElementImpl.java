@@ -1,69 +1,72 @@
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.html.control.SelectControl;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.HTMLSelectElement;
+import org.loboevolution.html.dom.input.SelectOption;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
 public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTMLSelectElement {
+	
+	private SelectOption selectOption;
+	
+	private int selectedIndex = -1;
 	
 	public HTMLSelectElementImpl(String name) {
 		super(name);
 	}
 
 	@Override
-	public void add(HTMLElement element, HTMLElement before) throws DOMException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean getDisabled() {
-		// TODO Auto-generated method stub
-		return false;
+		final String disabled = getAttribute("disabled");
+		return disabled == null ? false : true;
 	}
 
 	@Override
 	public HTMLFormElement getForm() {
-		// TODO Auto-generated method stub
-		return null;
+		Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
 	}
 
 	@Override
 	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		try {
+			final String maxLength = getAttribute("length");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return Integer.MAX_VALUE;
+		}
 	}
 
 	@Override
 	public boolean getMultiple() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.getAttributeAsBoolean("multiple");
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("name");
 	}
 
 	@Override
 	public HTMLOptionsCollection getOptions() {
-		// TODO Auto-generated method stub
-		return null;
+		return new HTMLOptionsCollectionImpl(this);
 	}
 
 	@Override
 	public int getSelectedIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+		return selectedIndex;
 	}
 
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return getOptions().getLength();
 	}
 
 	@Override
@@ -74,55 +77,46 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.getMultiple() ? "select-multiple" : "select-one";
 	}
 
 	@Override
 	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("value");
 	}
 
 	@Override
 	public void remove(int index) {
-		// TODO Auto-generated method stub
-		
+		removeChild(getOptions().item(index));
 	}
 
 	@Override
 	public void setDisabled(boolean disabled) {
-		// TODO Auto-generated method stub
+		setAttribute("disabled", String.valueOf(disabled));
 		
 	}
 
 	@Override
 	public void setLength(int length) throws DOMException {
-		// TODO Auto-generated method stub
+		setAttribute("length", String.valueOf(length));
 		
 	}
 
 	@Override
 	public void setMultiple(boolean multiple) {
-		// TODO Auto-generated method stub
+		setAttribute("multiple", String.valueOf(multiple));
 		
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
+		setAttribute("name", String.valueOf(name));
 		
 	}
 
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setSize(int size) {
-		// TODO Auto-generated method stub
+		this.selectedIndex = selectedIndex;
 		
 	}
 
@@ -134,7 +128,21 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 
 	@Override
 	public void setValue(String value) {
+		setAttribute("value", String.valueOf(value));
+		
+	}
+	
+	@Override
+	public void add(HTMLElement element, HTMLElement before) throws DOMException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void draw(SelectControl selectControl) {
+		selectOption = new SelectOption(this, selectControl);
+	}
+	
+	public void resetInput() {
+		if (selectOption!= null) selectOption.resetInput();
 	}
 }

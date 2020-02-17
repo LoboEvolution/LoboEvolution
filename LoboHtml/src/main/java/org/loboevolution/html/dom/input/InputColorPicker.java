@@ -14,9 +14,13 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 
 public class InputColorPicker {
+	
+	private HTMLInputElementImpl modelNode;
+	
+	JButton widget = new JButton("Choose Color");
 
 	public InputColorPicker(HTMLInputElementImpl modelNode, InputControl ic) {
-		JButton widget = new JButton("Choose Color");
+		this.modelNode = modelNode;
 		if (modelNode.getTitle() != null) {
 			widget.setToolTipText(modelNode.getTitle());
 		}
@@ -47,5 +51,13 @@ public class InputColorPicker {
 		widget.addMouseListener(mouseHandler);
 
 		ic.add(widget);
+	}
+
+	public void reset() {
+		Color c = Color.BLACK;
+		String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
+		modelNode.setValue(value);
+		widget.setToolTipText(value);
+		widget.setBackground(c);
 	}
 }

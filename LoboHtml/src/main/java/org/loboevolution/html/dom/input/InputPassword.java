@@ -14,10 +14,11 @@ import org.loboevolution.html.renderer.HtmlController;
 public class InputPassword {
 
 	private HTMLInputElementImpl modelNode;
+	
+	JPasswordField pwd = new JPasswordField();
 
 	public InputPassword(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
-		JPasswordField pwd = new JPasswordField();
 		if (modelNode.getTitle() != null)
 			pwd.setToolTipText(modelNode.getTitle());
 		pwd.setVisible(!modelNode.getHidden());
@@ -54,5 +55,9 @@ public class InputPassword {
 				super.insertString(offs, str, a);
 			}
 		}
+	}
+
+	public void reset() {
+		pwd.setText("");
 	}
 }

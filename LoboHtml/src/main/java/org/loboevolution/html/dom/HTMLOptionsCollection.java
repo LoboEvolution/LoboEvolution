@@ -32,7 +32,6 @@
 
 package org.loboevolution.html.dom;
 
-import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
 /**
@@ -79,13 +78,4 @@ public interface HTMLOptionsCollection {
 	 *         <code>null</code>.
 	 */
 	Node namedItem(String name);
-
-	/**
-	 * This attribute specifies the length or size of the list.
-	 * 
-	 * @exception DOMException NOT_SUPPORTED_ERR: if setting the length is not
-	 *                         allowed by the implementation.
-	 */
-	void setLength(int length) throws DOMException;
-
 }

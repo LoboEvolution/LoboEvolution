@@ -20,7 +20,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	private Map<String, Function> functionByAttribute = null;
 
 	private Function onfocus, onblur, onclick, ondblclick, onmousedown, onmouseup, onmouseover, onmousemove, onmouseout,
-			onkeypress, onkeydown, onkeyup, oncontextmenu;
+			onkeypress, onkeydown, onkeyup, oncontextmenu, onchange;
 
 	public HTMLAbstractUIElement(String name) {
 		super(name);
@@ -164,6 +164,10 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 	public Function getOnmouseup() {
 		return getEventFunction(this.onmouseup, "onmouseup");
 	}
+	
+	public Function getOnchange() {
+		return getEventFunction(this.onchange, "onchange");
+	}
 
 	public void setOnblur(Function onblur) {
 		this.onblur = onblur;
@@ -215,5 +219,9 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 
 	public void setOnmouseup(Function onmouseup) {
 		this.onmouseup = onmouseup;
+	}
+	
+	public void setOnchange(Function onchange) {
+		this.onchange = onchange;
 	}
 }

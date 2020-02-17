@@ -9,9 +9,10 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 public class InputRadio {
 	
 	private ButtonGroup buttonGroup;
+	
+	final JRadioButton radio = new JRadioButton();
 
 	public InputRadio(HTMLInputElementImpl modelNode, InputControl ic) {
-		final JRadioButton radio = new JRadioButton();
 		radio.setOpaque(false);
 		if(modelNode.getTitle() != null) radio.setToolTipText(modelNode.getTitle());
 		radio.setVisible(!modelNode.getHidden());
@@ -35,9 +36,11 @@ public class InputRadio {
 		} else {
 			this.buttonGroup = null;
 		}
-		radio.setSelected(modelNode.getAttributeAsBoolean("checked"));
 
 		ic.add(radio);
 	}
 
+	public void reset() {
+		radio.setSelected(false);
+	}
 }
