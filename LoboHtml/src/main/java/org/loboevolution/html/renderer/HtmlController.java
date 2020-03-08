@@ -7,7 +7,6 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.loboevolution.html.FormInput;
 import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
@@ -21,7 +20,6 @@ import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;
-import org.w3c.dom.events.Event;
 
 public class HtmlController {
 	private static final HtmlController instance = new HtmlController();
@@ -36,8 +34,8 @@ public class HtmlController {
 			final HTMLSelectElementImpl uiElement = (HTMLSelectElementImpl) node;
 			final Function f = uiElement.getOnchange();
 			if (f != null) {
-				final Event evt = new EventImpl();
-				evt.initEvent("channge", false, false);
+				final EventImpl evt = new EventImpl();
+				evt.initEvent("change", false, false);
 				if (!Executor.executeFunction(uiElement, f, evt, new Object[0])) {
 					return false;
 				}
@@ -110,15 +108,9 @@ public class HtmlController {
 	/**
 	 * @return True to propagate further and false if the event was consumed.
 	 */
-	public boolean onEnterPressed(ModelNode node, InputEvent event) {
-		if (node instanceof HTMLInputElementImpl) {
-			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-			if (hie.isSubmittableWithEnterKey()) {
-				hie.submitForm(null);
-				return false;
-			}
-		}
-		// No propagation
+	public boolean onEnterPressed(ModelNode node) {
+		final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
+		hie.submitForm(null);
 		return false;
 	}
 
@@ -152,27 +144,17 @@ public class HtmlController {
 			((HTMLLinkElementImpl) node).navigate();
 			return false;
 		} else if (node instanceof HTMLButtonElementImpl) {
-			final HTMLButtonElementImpl button = (HTMLButtonElementImpl) node;
-			final String rawType = button.getAttribute("type");
-			String type;
-			if (rawType == null) {
-				type = "submit";
-			} else {
-				type = rawType.trim().toLowerCase();
-			}
-			if ("submit".equals(type)) {
-				FormInput[] formInputs;
-				final String name = button.getName();
-				if (name == null) {
-					formInputs = null;
-				} else {
-					formInputs = new FormInput[] { new FormInput(name, button.getValue()) };
-				}
-				button.submitForm(formInputs);
-			} else if ("reset".equals(type)) {
-				button.resetForm();
-			} else {
-				// NOP for "button"!
+			final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
+			switch (btn.getType()) {
+			case "submit":
+				btn.submit();
+				break;
+			case "reset":
+				btn.reset();
+				break;
+			case "button":
+			default:
+				break;
 			}
 			return false;
 		}
@@ -378,28 +360,24 @@ public class HtmlController {
 				}
 			}
 		}
+		
 		if (node instanceof HTMLInputElementImpl) {
 			final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
-			if (hie.isSubmitInput()) {
-				FormInput[] formInputs;
-				final String name = hie.getName();
-				if (name == null) {
-					formInputs = null;
-				} else {
-					formInputs = new FormInput[] { new FormInput(name, hie.getValue()) };
-				}
-				hie.submitForm(formInputs);
-			} else if (hie.isImageInput()) {
-				final String name = hie.getName();
-				final String prefix = name == null ? "" : name + ".";
-				final FormInput[] extraFormInputs = new FormInput[] { new FormInput(prefix + "x", String.valueOf(x)),
-						new FormInput(prefix + "y", String.valueOf(y)) };
-				hie.submitForm(extraFormInputs);
-			} else if (hie.isResetInput()) {
-				hie.resetForm();
+			switch (hie.getType()) {
+			case "submit":
+				hie.submit();
+				break;
+			case "reset":
+				hie.reset();
+				break;
+			case "image":
+				hie.submitImage(x, y);
+				break;
+			case "button":
+			default:
+				break;
 			}
 		}
-		// No propagate
 		return false;
 	}
 }

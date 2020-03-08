@@ -1,24 +1,27 @@
 package org.loboevolution.html.renderer;
 
+import java.awt.Button;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.HtmlObject;
-import org.loboevolution.html.control.BaseInputControl;
+import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.control.CanvasControl;
 import org.loboevolution.html.control.ImgControl;
-import org.loboevolution.html.control.InputSelectControl;
-import org.loboevolution.html.control.InputTextAreaControl;
+import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RImgControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.SVGControl;
+import org.loboevolution.html.control.SelectControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.control.UIControlWrapper;
-import org.loboevolution.html.dom.domimpl.HTMLBaseInputElement;
+import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
@@ -66,6 +69,7 @@ public class RLayout {
 		el.put(HTMLTag.INPUT,new InputLayout());
 		el.put(HTMLTag.TEXTAREA,new TextAreaLayout());
 		el.put(HTMLTag.SELECT,new SelectLayout());
+		el.put(HTMLTag.BUTTON, new ButtonLayout());
 		final ListItemLayout list = new ListItemLayout();
 		el.put(HTMLTag.UL,list);
 		el.put(HTMLTag.OL,list);
@@ -311,14 +315,9 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-			final BaseInputControl uiControl = bodyLayout.createInputControl(bie);
-			if (uiControl == null) {
-				return null;
-			}
-			bie.setInputContext(uiControl);
-			return new RUIControl(markupElement, uiControl, bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
+			UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
+			return new RUIControl(markupElement,control, bodyLayout.container,
+					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
 
@@ -409,10 +408,8 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-			final BaseInputControl uiControl = new InputSelectControl(bie);
-			bie.setInputContext(uiControl);
-			return new RUIControl(markupElement, uiControl, bodyLayout.container, bodyLayout.frameContext,
+			UIControl control = new SelectControl((HTMLSelectElementImpl) markupElement);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}
 	}
@@ -460,9 +457,20 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final HTMLBaseInputElement bie = (HTMLBaseInputElement) markupElement;
-			final BaseInputControl control = new InputTextAreaControl(bie);
-			bie.setInputContext(control);
+			UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
+					bodyLayout.userAgentContext);
+		}
+	}
+	
+	protected static class ButtonLayout extends CommonWidgetLayout {
+		public ButtonLayout() {
+			super(ADD_INLINE);
+		}
+
+		@Override
+		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+			UIControl control = new ButtonControl((HTMLButtonElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}

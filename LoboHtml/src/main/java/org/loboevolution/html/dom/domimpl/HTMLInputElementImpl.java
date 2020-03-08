@@ -23,188 +23,220 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.io.File;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.FormInput;
+import org.loboevolution.html.control.InputControl;
+import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
+import org.loboevolution.html.dom.input.InputButton;
+import org.loboevolution.html.dom.input.InputCheckbox;
+import org.loboevolution.html.dom.input.InputColorPicker;
+import org.loboevolution.html.dom.input.InputDataTime;
+import org.loboevolution.html.dom.input.InputFile;
+import org.loboevolution.html.dom.input.InputHidden;
+import org.loboevolution.html.dom.input.InputImage;
+import org.loboevolution.html.dom.input.InputNumber;
+import org.loboevolution.html.dom.input.InputPassword;
+import org.loboevolution.html.dom.input.InputRadio;
+import org.loboevolution.html.dom.input.InputRange;
+import org.loboevolution.html.dom.input.InputText;
+import org.loboevolution.html.js.Executor;
+import org.mozilla.javascript.Function;
+import org.w3c.dom.Node;
 
-public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLInputElement {
+public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLInputElement {
 	
-	private final String IMAGE = "image";
+	private InputText text;
 	
-	private final String SUBMIT = "submit";
+	private InputRadio radio;
 	
-	private final String TEXT = "tetx";
+	private InputCheckbox checkbox;
 	
-	private final String PASSWORD = "password";
+	private InputNumber number;
 	
-	private final String HIDDEN = "hidden";
+	private InputPassword password;
 	
-	private final String RADIO = "radio";
-	
-	private final String CHECKBOX = "checkbox";
-	
-	private final String RESET = "reset";
-	
-	private final String FILE = "file";
-	
-	private boolean defaultChecked;
+	private InputColorPicker color;
 
 	public HTMLInputElementImpl(String name) {
 		super(name);
 	}
 
 	@Override
-	public void click() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.click();
-		}
+	public String getAccept() {
+		return getAttribute("accept");
+	}
+
+	@Override
+	public String getAccessKey() {
+		return getAttribute("accessKey");
+	}
+
+	@Override
+	public String getAlt() {
+		return getAttribute("alit");
 	}
 
 	@Override
 	public boolean getChecked() {
-		final InputContext ic = this.inputContext;
-		if (ic == null) {
-			return getAttributeAsBoolean("checked");
-		} else {
-			return ic.getChecked();
-		}
+		final String checked = getAttribute("checked");
+		return checked == null ? false : true;
 	}
 
 	@Override
-	public boolean getDefaultChecked() {
-		return this.defaultChecked;
+	public boolean getDisabled() {
+		final String disabled = getAttribute("disabled");
+		return disabled == null ? false : true;
 	}
 
 	@Override
-	protected FormInput[] getFormInputs() {
-		final String type = Strings.isBlank(getType()) ? "" : getType();
-		final String name = getName();
-		if (name == null) {
-			return null;
+	public HTMLFormElement getForm() {
+		Node parent = getParentNode();
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
 		}
-
-		switch (type) {
-		case TEXT:
-		case PASSWORD:
-		case HIDDEN:
-		case "":
-			return new FormInput[] { new FormInput(name, getValue()) };
-		case RADIO:
-		case CHECKBOX:
-			if (getChecked()) {
-				String value = getValue();
-				if (value == null || value.length() == 0) {
-					value = "on";
-				}
-				return new FormInput[] { new FormInput(name, value) };
-			} else {
-				return null;
-			}
-		case SUBMIT:
-		case IMAGE:
-			return null;
-		case FILE:
-			final File files = getFileValue();
-			if (files == null) {
-				return null;
-			} else {
-				return new FormInput[] { new FormInput(name, files) };
-			}
-		default:
-			return null;
-		}
+		return (HTMLFormElement) parent;
 	}
 
 	@Override
 	public int getMaxLength() {
-		final InputContext ic = this.inputContext;
-		return ic == null ? 0 : ic.getMaxLength();
+		try {
+			final String maxLength = getAttribute("maxLength");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return Integer.MAX_VALUE;
+		}
+	}
+
+	@Override
+	public String getName() {
+		return getAttribute("name");
+	}
+
+	@Override
+	public boolean getReadOnly() {
+		final String readonly = getAttribute("readonly");
+		return readonly == null ? false : true;
 	}
 
 	@Override
 	public int getSize() {
-		final InputContext ic = this.inputContext;
-		return ic == null ? 0 : ic.getControlSize();
+		try {
+			final String maxLength = getAttribute("size");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return 20;
+		}
 	}
 
 	@Override
 	public String getSrc() {
-		return getAttribute("src");
+		return this.getAttribute("src");
 	}
 
 	@Override
-	public String getUseMap() {
-		return getAttribute("usemap");
-	}
-
-	public boolean isImageInput() {
-		final String type = getType();
-		return IMAGE.equals(type);
-	}
-
-	public boolean isResetInput() {
-		final String type = getType();
-		return RESET.equals(type);
-	}
-
-	public boolean isSubmitInput() {
-		final String type = getType();
-		return SUBMIT.equals(type);
-	}
-
-	public boolean isSubmittableWithEnterKey() {
-		final String type = getType();
-		return (Strings.isBlank(type) || TEXT.equals(type) || PASSWORD.equals(type));
-	}
-
-	public boolean isSubmittableWithPress() {
-		final String type = getType();
-		return SUBMIT.equals(type) || IMAGE.equals(type);
+	public String getType() {
+		final String type = getAttribute("type");
+		return type == null ? null : type.toLowerCase();
 	}
 
 	@Override
-	void resetInput() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.resetInput();
+	public String getValue() {
+		final String val = getAttribute("value");
+		return val == null ? "" : val;
+	}
+
+	@Override
+	public boolean getAutocomplete() {
+		String autocomplete = this.getAttribute("autocomplete");
+		return "on".equalsIgnoreCase(autocomplete);
+	}
+
+	public String getPlaceholder() {
+		return this.getAttribute("placeholder");
+	}
+	
+	@Override
+	public void select() {
+		if(text!= null) text.selectAll();
+	}
+	
+	@Override
+	public void click() {
+		Function onclick = getOnclick();		
+		if(onclick!= null) {
+			Executor.executeFunction(this, onclick, null, new Object[] {});
 		}
+	}
+	
+	@Override
+	public void blur() {
+		if(text!= null) text.blur();
+	}
+	
+	@Override
+	public void focus() {
+		if(text!= null) text.focus();
+	}
+	
+	@Override
+	public void setSelectionRange(int start, int end) {
+		if(text!= null) text.setSelectionRange(start, end);
+	} 
+	
+	@Override
+	public void setRangeText(String select, int start, int end, String preserve) {
+		text.setRangeText(start, end, select);
+	}
+	
+	@Override
+	public void setAccept(String accept) {
+		setAttribute("accept", accept);
+	}
+
+	@Override
+	public void setAccessKey(String accessKey) {
+		setAttribute("accessKey", accessKey);
+	}
+
+	@Override
+	public void setAlt(String alt) {
+		setAttribute("alt", alt);
 	}
 
 	@Override
 	public void setChecked(boolean checked) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setChecked(checked);
-		}
+		setAttribute("checked", String.valueOf(checked));
 	}
 
 	@Override
-	public void setDefaultChecked(boolean defaultChecked) {
-		this.defaultChecked = defaultChecked;
+	public void setDisabled(boolean disabled) {
+		setAttribute("disabled", String.valueOf(disabled));
 	}
 
 	@Override
 	public void setMaxLength(int maxLength) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setMaxLength(maxLength);
-		}
+		setAttribute("maxLength", String.valueOf(maxLength));
+	}
+
+	@Override
+	public void setName(String name) {
+		setAttribute("name", name);
+	}
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		setAttribute("readonly", String.valueOf(readOnly));
 	}
 
 	@Override
 	public void setSize(int size) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setControlSize(size);
-		}
+		setAttribute("size", String.valueOf(size));
 	}
 
 	@Override
 	public void setSrc(String src) {
-		setAttribute("src", src);
+		this.setAttribute("src", src);
 	}
 
 	@Override
@@ -213,7 +245,119 @@ public class HTMLInputElementImpl extends HTMLBaseInputElement implements HTMLIn
 	}
 
 	@Override
-	public void setUseMap(String useMap) {
-		setAttribute("usemap", useMap);
+	public void setValue(String value) {
+		setAttribute("value", value);
+	}
+	
+	public void setPlaceholder(String placeholder) {
+		this.setAttribute("placeholder", placeholder);
+
+	}
+
+	public void draw(InputControl ic) {
+		final String type = getType();
+		
+		if (Strings.isBlank(type)) {
+			text = new InputText(this, ic);
+		}
+
+		switch (type.toLowerCase()) {
+		case "text":
+			text = new InputText(this, ic);
+			break;
+		case "hidden":
+			new InputHidden(this, ic);
+			break;
+		case "submit":
+			new InputButton(this, ic);
+			break;
+		case "password":
+			password = new InputPassword(this, ic);
+			break;
+		case "file":
+			new InputFile(this, ic);
+			break;
+		case "number":
+			number = new InputNumber(this, ic);
+			break;
+		case "color":
+			color = new InputColorPicker(this, ic);
+			break;
+		case "radio":
+			radio = new InputRadio(this, ic);
+			break;
+		case "checkbox":
+			checkbox = new InputCheckbox(this, ic);
+			break;
+		case "button":
+			new InputButton(this, ic);
+			break;
+		case "image":
+			new InputImage(this, ic);
+			break;
+		case "reset":
+			new InputButton(this, ic);
+			break;
+		case "range":
+			new InputRange(this, ic);
+			break;
+		case "date":
+		case "datetime-local":
+		case "month":
+		case "time":
+			new InputDataTime(this, ic);
+			break;
+		default:
+			text = new InputText(this, ic);
+			break;
+		}
+	}
+	
+	public void submit() {
+		FormInput[] formInputs;
+		final String name = getName();
+		if (name == null) {
+			formInputs = null;
+		} else {
+			formInputs = new FormInput[] { new FormInput(name, getValue()) };
+		}
+
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
+		if (form != null) {
+			form.submit(formInputs);
+		}
+	}
+
+	public void reset() {
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
+		if (form != null) {
+			form.reset();
+		}
+	}
+
+	public void submitImage(int x, int y) {
+		final String name = getName();
+		final String prefix = name == null ? "" : name + ".";
+		final FormInput[] extraFormInputs = new FormInput[] { new FormInput(prefix + "x", String.valueOf(x)), new FormInput(prefix + "y", String.valueOf(y)) };
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
+		if (form != null) {
+			form.submit(extraFormInputs);
+		}
+	}
+
+	public void submitForm(final FormInput[] extraFormInputs) {
+		final HTMLFormElementImpl form = (HTMLFormElementImpl) this.getForm();
+		if (form != null) {
+			form.submit(extraFormInputs);
+		}
+	}
+
+	public void resetInput() {
+		if(text != null) text.reset();
+		if(radio != null) radio.reset();
+		if(checkbox != null) checkbox.reset();
+		if(color != null) color.reset();
+		if(number != null) number.reset();
+		if(password != null) password.reset();
 	}
 }

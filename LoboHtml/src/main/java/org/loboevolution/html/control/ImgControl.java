@@ -96,8 +96,6 @@ public class ImgControl extends BaseControl {
 		super.paintComponent(g);
 		final Dimension size = this.getSize();
 		final Insets insets = this.getInsets();
-		synchronized (this) {
-		}
 		final Image image = this.image;
 		if (image != null) {
 			g.drawImage(image, insets.left, insets.top, size.width - insets.left - insets.right,

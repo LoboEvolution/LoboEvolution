@@ -18,40 +18,38 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Jan 15, 2006
- */
 package org.loboevolution.html.control;
 
-import javax.swing.JTextField;
-import javax.swing.text.JTextComponent;
+import java.awt.ComponentOrientation;
 
-import org.loboevolution.html.dom.domimpl.HTMLBaseInputElement;
-import org.loboevolution.html.renderer.HtmlController;
+import org.loboevolution.common.WrapperLayout;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
-public class InputTextControl extends BaseInputTextControl {
+public class InputControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
-
-	public InputTextControl(final HTMLBaseInputElement modelNode) {
+	
+	private HTMLInputElementImpl  modelNode;
+	
+	public InputControl(HTMLInputElementImpl modelNode) {
 		super(modelNode);
-		JTextField text = (JTextField) this.widget;
-		if (modelNode.getTitle() != null) text.setToolTipText(modelNode.getTitle());
-		text.setVisible(!modelNode.getHidden());
-		
-		text.applyComponentOrientation(direction(modelNode.getDir()));
-		text.setEditable(new Boolean(modelNode.getContentEditable()));
-		text.setEnabled(!modelNode.getDisabled());
-		text.addActionListener(event -> HtmlController.getInstance().onEnterPressed(modelNode, null));
-	}
-
-	@Override
-	protected JTextComponent createTextField() {
-		return new JTextField();
+		setLayout(WrapperLayout.getInstance());
+		this.modelNode = modelNode;
 	}
 
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
+		modelNode.draw(this);
+	}
+	
+	public ComponentOrientation direction(String dir) {
+		if ("ltr".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.LEFT_TO_RIGHT;
+		} else if ("rtl".equalsIgnoreCase(dir)) {
+			return ComponentOrientation.RIGHT_TO_LEFT;
+		} else {
+			return ComponentOrientation.UNKNOWN;
+		}
 	}
 }

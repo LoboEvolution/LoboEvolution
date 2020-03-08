@@ -39,31 +39,15 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 import org.loboevolution.common.ArrayUtilities;
-import org.loboevolution.common.Strings;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.info.FloatingInfo;
-import org.loboevolution.html.control.BaseInputControl;
 import org.loboevolution.html.control.HrControl;
-import org.loboevolution.html.control.InputButtonControl;
-import org.loboevolution.html.control.InputCheckboxControl;
-import org.loboevolution.html.control.InputColorPickerControl;
-import org.loboevolution.html.control.InputEmailControl;
-import org.loboevolution.html.control.InputFileControl;
-import org.loboevolution.html.control.InputHiddenControl;
-import org.loboevolution.html.control.InputImageControl;
-import org.loboevolution.html.control.InputNumberControl;
-import org.loboevolution.html.control.InputPasswordControl;
-import org.loboevolution.html.control.InputPhoneControl;
-import org.loboevolution.html.control.InputRadioControl;
-import org.loboevolution.html.control.InputTextControl;
-import org.loboevolution.html.control.InputUrlControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.renderer.RLayout.MiscLayout;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.DocumentFragmentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLBaseInputElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
@@ -664,49 +648,6 @@ public class RBlockViewport extends BaseRCollection {
 	private final void checkY(int y) {
 		if (this.yLimit != -1 && y > this.yLimit) {
 			throw SEE;
-		}
-	}
-
-	public final BaseInputControl createInputControl(HTMLBaseInputElement markupElement) {
-		String type = markupElement.getAttribute("type");
-		if (type == null) {
-			return new InputTextControl(markupElement);
-		}
-
-		type = Strings.isBlank(type) ? "" : type.toLowerCase();
-		switch (type) {
-		case "text":
-			return new InputTextControl(markupElement);
-		case "hidden":
-			return new InputHiddenControl(markupElement);
-		case "submit":
-			return new InputButtonControl(markupElement);
-		case "password":
-			return new InputPasswordControl(markupElement);
-		case "file":
-			return new InputFileControl(markupElement);
-		case "number":
-			return new InputNumberControl(markupElement);
-		case "email":
-			return new InputEmailControl(markupElement);
-		case "color":
-			return new InputColorPickerControl(markupElement);
-		case "url":
-			return new InputUrlControl(markupElement);
-		case "tel":
-			return new InputPhoneControl(markupElement);
-		case "radio":
-			return new InputRadioControl(markupElement);
-		case "checkbox":
-			return new InputCheckboxControl(markupElement);
-		case "button":
-			return new InputButtonControl(markupElement);
-		case "image":
-			return new InputImageControl(markupElement);
-		case "reset":
-			return new InputButtonControl(markupElement);
-		default:
-			return new InputTextControl(markupElement);
 		}
 	}
 

@@ -184,11 +184,6 @@ public interface HTMLSelectElement extends HTMLElement {
 	void setSelectedIndex(int selectedIndex);
 
 	/**
-	 * Number of visible rows. See the size attribute definition in HTML 4.01.
-	 */
-	void setSize(int size);
-
-	/**
 	 * Index that represents the element's position in the tabbing order. See the
 	 * tabindex attribute definition in HTML 4.01.
 	 */

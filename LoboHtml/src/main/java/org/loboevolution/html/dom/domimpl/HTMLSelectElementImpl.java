@@ -1,176 +1,148 @@
 package org.loboevolution.html.dom.domimpl;
 
-import java.util.ArrayList;
-
-import org.loboevolution.html.FormInput;
+import org.loboevolution.html.control.SelectControl;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.HTMLSelectElement;
-import org.mozilla.javascript.Function;
+import org.loboevolution.html.dom.input.SelectOption;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
-public class HTMLSelectElementImpl extends HTMLBaseInputElement implements HTMLSelectElement {
-	private int deferredSelectedIndex = -1;
-
-	private Boolean multipleState = null;
-
-	private Function onchange;
-
-	private HTMLOptionsCollection options;
-
+public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTMLSelectElement {
+	
+	private SelectOption selectOption;
+	
+	private int selectedIndex = -1;
+	
 	public HTMLSelectElementImpl(String name) {
 		super(name);
 	}
 
 	@Override
-	public void add(HTMLElement element, HTMLElement before) throws DOMException {
-		insertBefore(element, before);
+	public boolean getDisabled() {
+		final String disabled = getAttribute("disabled");
+		return disabled == null ? false : true;
 	}
 
 	@Override
-	protected FormInput[] getFormInputs() {
-		// Needs to be overriden for forms to submit.
-		final InputContext ic = this.inputContext;
-		String[] values = ic == null ? null : ic.getValues();
-		if (values == null) {
-			final String value = getValue();
-			values = value == null ? null : new String[] { value };
-			if (values == null) {
-				return null;
-			}
+	public HTMLFormElement getForm() {
+		Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
 		}
-		final String name = getName();
-		if (name == null) {
-			return null;
-		}
-		final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();
-		for (final String value : values) {
-			formInputs.add(new FormInput(name, value));
-		}
-		return (FormInput[]) formInputs.toArray(FormInput.EMPTY_ARRAY);
+		return (HTMLFormElement) parent;
 	}
 
 	@Override
 	public int getLength() {
-		return getOptions().getLength();
+		try {
+			final String maxLength = getAttribute("length");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return Integer.MAX_VALUE;
+		}
 	}
 
 	@Override
 	public boolean getMultiple() {
-		final Boolean m = this.multipleState;
-		if (m != null) {
-			return m.booleanValue();
-		}
-		return getAttributeAsBoolean("multiple");
+		return this.getAttributeAsBoolean("multiple");
 	}
 
-	public Function getOnchange() {
-		return getEventFunction(this.onchange, "onchange");
+	@Override
+	public String getName() {
+		return getAttribute("name");
 	}
 
 	@Override
 	public HTMLOptionsCollection getOptions() {
-		synchronized (this) {
-			if (this.options == null) {
-				this.options = new HTMLOptionsCollectionImpl(this);
-			}
-			return this.options;
-		}
+		return new HTMLOptionsCollectionImpl(this);
 	}
 
 	@Override
 	public int getSelectedIndex() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			return ic.getSelectedIndex();
-		} else {
-			return this.deferredSelectedIndex;
-		}
+		return selectedIndex;
 	}
 
 	@Override
 	public int getSize() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			return ic.getVisibleSize();
-		} else {
-			return 0;
-		}
+		return getOptions().getLength();
+	}
+
+	@Override
+	public int getTabIndex() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
 	public String getType() {
-		return getMultiple() ? "select-multiple" : "select-one";
+		return this.getMultiple() ? "select-multiple" : "select-one";
+	}
+
+	@Override
+	public String getValue() {
+		return getAttribute("value");
 	}
 
 	@Override
 	public void remove(int index) {
-		try {
-			removeChild(getOptions().item(index));
-		} catch (final DOMException de) {
-			this.warn("remove(): Unable to remove option at index " + index + ".", de);
-		}
+		removeChild(getOptions().item(index));
 	}
 
 	@Override
-	public void resetInput() {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.resetInput();
-		}
-	}
-
-	@Override
-	public void setInputContext(InputContext ic) {
-		super.setInputContext(ic);
-		if (ic != null) {
-			ic.setSelectedIndex(this.deferredSelectedIndex);
-		}
+	public void setDisabled(boolean disabled) {
+		setAttribute("disabled", String.valueOf(disabled));
+		
 	}
 
 	@Override
 	public void setLength(int length) throws DOMException {
-		getOptions().setLength(length);
+		setAttribute("length", String.valueOf(length));
+		
 	}
 
 	@Override
 	public void setMultiple(boolean multiple) {
-		final boolean prevMultiple = getMultiple();
-		this.multipleState = Boolean.valueOf(multiple);
-		if (prevMultiple != multiple) {
-			informLayoutInvalid();
-		}
+		setAttribute("multiple", String.valueOf(multiple));
+		
 	}
 
-	public void setOnchange(Function value) {
-		this.onchange = value;
+	@Override
+	public void setName(String name) {
+		setAttribute("name", String.valueOf(name));
+		
 	}
 
 	@Override
 	public void setSelectedIndex(int selectedIndex) {
-		setSelectedIndexImpl(selectedIndex);
-		final HTMLOptionsCollection options = getOptions();
-		final int length = options.getLength();
-		for (int i = 0; i < length; i++) {
-			final HTMLOptionElementImpl option = (HTMLOptionElementImpl) options.item(i);
-			option.setSelectedImpl(i == selectedIndex);
-		}
-	}
-
-	void setSelectedIndexImpl(int selectedIndex) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setSelectedIndex(selectedIndex);
-		} else {
-			this.deferredSelectedIndex = selectedIndex;
-		}
+		this.selectedIndex = selectedIndex;
+		
 	}
 
 	@Override
-	public void setSize(int size) {
-		final InputContext ic = this.inputContext;
-		if (ic != null) {
-			ic.setVisibleSize(size);
-		}
+	public void setTabIndex(int tabIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setValue(String value) {
+		setAttribute("value", String.valueOf(value));
+		
+	}
+	
+	@Override
+	public void add(HTMLElement element, HTMLElement before) throws DOMException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void draw(SelectControl selectControl) {
+		selectOption = new SelectOption(this, selectControl);
+	}
+	
+	public void resetInput() {
+		if (selectOption!= null) selectOption.resetInput();
 	}
 }

@@ -147,10 +147,21 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 	}
 
 	@Override
-	public void reset() {
+	public void reset() { 
 		visit(node -> {
-			if (node instanceof HTMLBaseInputElement) {
-				((HTMLBaseInputElement) node).resetInput();
+			if (node instanceof HTMLInputElementImpl) {
+				final HTMLInputElementImpl hie = (HTMLInputElementImpl) node;
+				hie.resetInput();
+			}
+			
+			if (node instanceof HTMLButtonElementImpl) {
+				final HTMLButtonElementImpl btn = (HTMLButtonElementImpl) node;
+				btn.resetInput();
+			}
+			
+			if (node instanceof HTMLSelectElementImpl) {
+				final HTMLSelectElementImpl slct = (HTMLSelectElementImpl) node;
+				slct.resetInput();
 			}
 		});
 	}
