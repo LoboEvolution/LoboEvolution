@@ -41,6 +41,7 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.dom.domimpl.CommentImpl;
+import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDivElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -151,8 +152,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				if (function == null) {
 					throw new IllegalStateException("Cannot perform operation. Function is no longer available.");
 				}
-				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(),
-						window.getUserAgentContext());
+				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(), window.getUserAgentContext());
 			} catch (final Throwable err) {
 				logger.log(Level.WARNING, "actionPerformed()", err);
 			}
@@ -202,6 +202,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
 	/** The Constant DOMPARSER_WRAPPER. */
 	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(DOMParser.class);
+	
+	/** The Constant ELEMPARSER_WRAPPER. */
+	private static final JavaClassWrapper ELEMARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(ElementImpl.class);
 	
 	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
 	
@@ -635,6 +638,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		
 		Function domParser = JavaObjectWrapper.getConstructor("DOMParser", DOMPARSER_WRAPPER, jiDomParser);
 		ScriptableObject.defineProperty(ws, "DOMParser", domParser, ScriptableObject.READONLY);
+		
+		Function elmParser = JavaObjectWrapper.getConstructor("Element", ELEMARSER_WRAPPER, jiDomParser);
+		ScriptableObject.defineProperty(ws, "Element", elmParser, ScriptableObject.READONLY);
 
 		defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
         defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
@@ -643,7 +649,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
         defineElementClass(ws, doc, "Option", "option", HTMLOptionElementImpl.class);
         defineElementClass(ws, doc, "Select", "select", HTMLSelectElementImpl.class);
         defineElementClass(ws, doc, "HTMLDivElement", "div", HTMLDivElementImpl.class);
-	}
+        defineElementClass(ws, doc, "HTMLElement", "html", HTMLElementImpl.class);
+    }
 
 	public boolean isClosed() {
 		final HtmlRendererContext rcontext = this.rcontext;
@@ -757,6 +764,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	public void scrollTo(int x, int y) {
+		scroll(x, y);
+	}
+	
+	public void scroll(int x, int y) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
 			rcontext.scroll(x, y);
