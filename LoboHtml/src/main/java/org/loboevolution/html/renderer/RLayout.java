@@ -1,6 +1,5 @@
 package org.loboevolution.html.renderer;
 
-import java.awt.Button;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +7,7 @@ import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.control.CanvasControl;
+import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.control.ImgControl;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RImgControl;
@@ -19,6 +19,7 @@ import org.loboevolution.html.control.UIControlWrapper;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
@@ -95,7 +96,7 @@ public class RLayout {
 		el.put(HTMLTag.EMBED,ol);
 		el.put(HTMLTag.CANVAS,new CanvasLayout());
 		el.put(HTMLTag.SVG,new SVGLayout());
-		//el.put(HTMLTag.IFRAME,new IFrameLayout());
+		el.put(HTMLTag.IFRAME,new IFrameLayout());
 	}
 	
 	protected static class AnchorLayout extends CommonLayout {
@@ -320,7 +321,20 @@ public class RLayout {
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
+	
+	protected static class IFrameLayout extends CommonWidgetLayout {
+		public IFrameLayout() {
+			super(ADD_INLINE);
+		}
 
+		@Override
+		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+			UIControl control = new FrameControl((HTMLIFrameElementImpl)markupElement);
+			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
+					bodyLayout.userAgentContext);
+		}
+	}
+	
 	protected static class ListItemLayout extends CommonLayout {
 		public ListItemLayout() {
 			super(RenderState.DISPLAY_LIST_ITEM);

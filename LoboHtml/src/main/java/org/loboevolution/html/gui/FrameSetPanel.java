@@ -36,8 +36,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import org.loboevolution.html.BrowserFrame;
-import org.loboevolution.html.dom.domimpl.FrameNode;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.renderer.NodeRenderer;
@@ -100,7 +98,7 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 						fsp.setRootNode(frameElement);
 						frameComponents[i] = fsp;
 					} else {
-						if (frameElement instanceof FrameNode) {
+						/*if (frameElement instanceof FrameNode) {
 							final BrowserFrame frame = context.createBrowserFrame();
 							((FrameNode) frameElement).setBrowserFrame(frame);
 							final String src = frameElement.getAttribute("src");
@@ -118,7 +116,8 @@ public class FrameSetPanel extends JComponent implements NodeRenderer {
 							frameComponents[i] = frame.getComponent();
 						} else {
 							frameComponents[i] = new JPanel();
-						}
+						}*/
+						frameComponents[i] = new JPanel();
 					}
 
 				}

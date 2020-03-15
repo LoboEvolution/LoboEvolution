@@ -1,35 +1,21 @@
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.BrowserFrame;
+import java.awt.Dimension;
+
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.dom.HTMLIFrameElement;
-import org.loboevolution.html.js.Window;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.renderstate.IFrameRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.w3c.dom.Document;
 
-public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTMLIFrameElement, FrameNode {
-	private volatile BrowserFrame browserFrame;
+public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTMLIFrameElement {
 
 	public HTMLIFrameElementImpl(String name) {
 		super(name);
 	}
-
-	@Override
-	protected void assignAttributeField(String normalName, String value) {
-		if ("src".equals(normalName)) {
-			final BrowserFrame frame = this.browserFrame;
-			if (frame != null) {
-				try {
-					frame.loadURL(getFullURL(value));
-				} catch (final java.net.MalformedURLException mfu) {
-					this.warn("assignAttributeField(): Unable to navigate to src.", mfu);
-				}
-			}
-		} else {
-			super.assignAttributeField(normalName, value);
-		}
-	}
-
+	
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new IFrameRenderState(prevRenderState, this);
@@ -41,28 +27,8 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	}
 
 	@Override
-	public BrowserFrame getBrowserFrame() {
-		return this.browserFrame;
-	}
-
-	@Override
 	public Document getContentDocument() {
-		// TODO: Domain-based security
-		final BrowserFrame frame = this.browserFrame;
-		if (frame == null) {
-			// Not loaded yet
-			return null;
-		}
-		return frame.getContentDocument();
-	}
-
-	public Window getContentWindow() {
-		final BrowserFrame frame = this.browserFrame;
-		if (frame == null) {
-			// Not loaded yet
-			return null;
-		}
-		return Window.getWindow(frame.getHtmlRendererContext());
+		return null;
 	}
 
 	@Override
@@ -116,21 +82,6 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	}
 
 	@Override
-	public void setBrowserFrame(BrowserFrame frame) {
-		this.browserFrame = frame;
-		if (frame != null) {
-			final String src = getAttribute("src");
-			if (src != null) {
-				try {
-					frame.loadURL(getFullURL(src));
-				} catch (final java.net.MalformedURLException mfu) {
-					this.warn("setBrowserFrame(): Unable to navigate to src.", mfu);
-				}
-			}
-		}
-	}
-
-	@Override
 	public void setFrameBorder(String frameBorder) {
 		setAttribute("frameborder", frameBorder);
 	}
@@ -173,5 +124,13 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public void setWidth(String width) {
 		setAttribute("width", width);
+	}
+
+	public void draw(FrameControl frameControl) {
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(getSrc());
+		if(Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
+			hpanel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
+		}
+		frameControl.add(hpanel);		
 	}
 }

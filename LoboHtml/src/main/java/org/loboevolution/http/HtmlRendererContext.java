@@ -57,8 +57,6 @@ import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IToolBar;
-import org.loboevolution.html.BrowserFrame;
-import org.loboevolution.html.FormInput;
 import org.loboevolution.html.HtmlObject;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
@@ -67,6 +65,7 @@ import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
+import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.gui.HtmlContextMenu;
 import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
@@ -202,11 +201,6 @@ public class HtmlRendererContext {
 		final int retValue = JOptionPane.showConfirmDialog(this.htmlPanel, message, "Confirm",
 				JOptionPane.YES_NO_OPTION);
 		return retValue == JOptionPane.YES_OPTION;
-	}
-
-	public BrowserFrame createBrowserFrame() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/**

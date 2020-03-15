@@ -23,46 +23,21 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.BrowserFrame;
 import org.loboevolution.html.dom.HTMLFrameElement;
-import org.loboevolution.html.js.Window;
 import org.w3c.dom.Document;
 
-public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameElement, FrameNode {
-	private volatile BrowserFrame browserFrame;
-
+public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameElement {
+	
 	private boolean noResize;
 
 	public HTMLFrameElementImpl(String name) {
 		super(name);
 	}
-
-	public HTMLFrameElementImpl(String name, boolean noStyleSheet) {
-		super(name, noStyleSheet);
-	}
-
-	@Override
-	public BrowserFrame getBrowserFrame() {
-		return this.browserFrame;
-	}
-
+	
 	@Override
 	public Document getContentDocument() {
-		final BrowserFrame frame = this.browserFrame;
-		if (frame == null) {
-			// Not loaded yet
-			return null;
-		}
-		return frame.getContentDocument();
-	}
-
-	public Window getContentWindow() {
-		final BrowserFrame frame = this.browserFrame;
-		if (frame == null) {
-			// Not loaded yet
-			return null;
-		}
-		return Window.getWindow(frame.getHtmlRendererContext());
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
@@ -106,11 +81,6 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	}
 
 	@Override
-	public void setBrowserFrame(BrowserFrame frame) {
-		this.browserFrame = frame;
-	}
-
-	@Override
 	public void setFrameBorder(String frameBorder) {
 		setAttribute("frameBorder", frameBorder);
 	}
@@ -149,5 +119,4 @@ public class HTMLFrameElementImpl extends HTMLElementImpl implements HTMLFrameEl
 	public void setSrc(String src) {
 		setAttribute("src", src);
 	}
-
 }
