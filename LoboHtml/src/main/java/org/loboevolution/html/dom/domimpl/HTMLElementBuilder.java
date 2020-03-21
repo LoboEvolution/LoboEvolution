@@ -146,20 +146,6 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
-	public static class Frame extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLFrameElementImpl(name);
-		}
-	}
-
-	public static class Frameset extends HTMLElementBuilder {
-		@Override
-		public HTMLElementImpl build(String name) {
-			return new HTMLFrameSetElementImpl(name);
-		}
-	}
-
 	public static class GenericMarkup extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {

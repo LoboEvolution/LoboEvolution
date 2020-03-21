@@ -79,8 +79,6 @@ class ElementFactory {
 		builders.put(HTMLTag.TEXTAREA, new HTMLElementBuilder.Textarea());
 		builders.put(HTMLTag.SELECT, new HTMLElementBuilder.Select());
 		builders.put(HTMLTag.OPTION, new HTMLElementBuilder.Option());
-		builders.put(HTMLTag.FRAMESET, new HTMLElementBuilder.Frameset());
-		builders.put(HTMLTag.FRAME, new HTMLElementBuilder.Frame());
 		builders.put(HTMLTag.IFRAME, new HTMLElementBuilder.IFrame());
 		builders.put(HTMLTag.UL, new HTMLElementBuilder.Ul());
 		builders.put(HTMLTag.OL, new HTMLElementBuilder.Ol());

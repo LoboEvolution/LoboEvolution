@@ -52,7 +52,6 @@ import org.loboevolution.html.dom.filter.CommandFilter;
 import org.loboevolution.html.dom.filter.ElementNameFilter;
 import org.loboevolution.html.dom.filter.EmbedFilter;
 import org.loboevolution.html.dom.filter.FormFilter;
-import org.loboevolution.html.dom.filter.FrameFilter;
 import org.loboevolution.html.dom.filter.HeadFilter;
 import org.loboevolution.html.dom.filter.ImageFilter;
 import org.loboevolution.html.dom.filter.LinkFilter;
@@ -385,12 +384,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
     public HTMLCollection getForms() {
         synchronized (this) {
             return new HTMLCollectionImpl(this, new FormFilter());
-        }
-    }
-
-    public HTMLCollection getFrames() {
-        synchronized (this) {
-            return new HTMLCollectionImpl(this, new FrameFilter());
         }
     }
     

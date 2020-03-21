@@ -40,10 +40,7 @@ import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.HTMLFrameSetElement;
 import org.loboevolution.html.dom.domimpl.DocumentNotificationListener;
-import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.parser.DocumentBuilderImpl;
@@ -60,7 +57,7 @@ import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.net.HttpNetwork;
 import org.w3c.dom.Document;
-import org.w3c.dom.Text;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 /**
@@ -138,11 +135,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	
 	private volatile int defaultOverflowY = RenderState.OVERFLOW_AUTO;
 	
-	protected volatile FrameSetPanel frameSetPanel;
-	
 	protected volatile HtmlBlockPanel htmlBlockPanel;
-	
-	private volatile boolean isFrameSet = false;
 	
 	private volatile NodeRenderer nodeRenderer = null;
 	
@@ -221,7 +214,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.rootNode = null;
 		this.htmlBlockPanel = null;
 		this.nodeRenderer = null;
-		this.isFrameSet = false;
 		removeAll();
 		revalidate();
 		this.repaint();
@@ -238,14 +230,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		} else {
 			return false;
 		}
-	}
-
-	/**
-	 * Method invoked internally to create a {@link FrameSetPanel}. It is made
-	 * available so it can be overridden.
-	 */
-	protected FrameSetPanel createFrameSetPanel() {
-		return new FrameSetPanel();
 	}
 
 	/**
@@ -293,69 +277,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		return htmlBlock == null ? null : htmlBlock.getRootRenderable();
 	}
 
-	private NodeImpl getFrameSet(NodeImpl node) {
-		final NodeImpl[] children = node.getChildrenArray();
-		if (children == null) {
-			return null;
-		}
-		final int length = children.length;
-		NodeImpl frameSet = null;
-		for (int i = 0; i < length; i++) {
-			final NodeImpl child = children[i];
-			if (child instanceof Text) {
-				// Ignore
-			} else if (child instanceof ElementImpl) {
-				final String tagName = child.getNodeName();
-				if ("HEAD".equalsIgnoreCase(tagName) || "NOFRAMES".equalsIgnoreCase(tagName)
-						|| "TITLE".equalsIgnoreCase(tagName) || "META".equalsIgnoreCase(tagName)
-						|| "SCRIPT".equalsIgnoreCase(tagName) || "NOSCRIPT".equalsIgnoreCase(tagName)) {
-					// ignore it
-				} else if ("FRAMESET".equalsIgnoreCase(tagName)) {
-					frameSet = child;
-					break;
-				} else {
-					if (hasSomeHtml((ElementImpl) child)) {
-						return null;
-					}
-				}
-			}
-		}
-		return frameSet;
-	}
-
-	/**
-	 * Gets an instance of {@link FrameSetPanel} in case the currently rendered page
-	 * is a FRAMESET.
-	 * <p>
-	 * Note: This method should be invoked in the GUI thread.
-	 * 
-	 * @return A <code>FrameSetPanel</code> instance or <code>null</code> if the
-	 *         document currently rendered is not a FRAMESET.
-	 */
-	public FrameSetPanel getFrameSetPanel() {
-		final int componentCount = getComponentCount();
-		if (componentCount == 0) {
-			return null;
-		}
-		final Object c = getComponent(0);
-		if (c instanceof FrameSetPanel) {
-			return (FrameSetPanel) c;
-		}
-		return null;
-	}
-
-	private NodeImpl getFrameSetRootNode(NodeImpl node) {
-		if (node instanceof Document) {
-			final ElementImpl element = (ElementImpl) ((Document) node).getDocumentElement();
-			if (element != null && "HTML".equalsIgnoreCase(element.getTagName())) {
-				return getFrameSet(element);
-			} else {
-				return getFrameSet(node);
-			}
-		} else {
-			return null;
-		}
-	}
 
 	/**
 	 * Gets the HTML DOM node currently rendered if any.
@@ -374,7 +295,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * @return A node enclosing the current selection, or <code>null</code> if there
 	 *         is no such node. It also returns <code>null</code> for FRAMESETs.
 	 */
-	public org.w3c.dom.Node getSelectionNode() {
+	public Node getSelectionNode() {
 		final HtmlBlockPanel block = this.htmlBlockPanel;
 		if (block == null) {
 			return null;
@@ -410,31 +331,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 
-	private boolean hasSomeHtml(ElementImpl element) {
-		final String tagName = element.getTagName();
-		if ("HEAD".equalsIgnoreCase(tagName) || "TITLE".equalsIgnoreCase(tagName) || "META".equalsIgnoreCase(tagName)) {
-			return false;
-		}
-		final NodeImpl[] children = element.getChildrenArray();
-		if (children != null) {
-			final int length = children.length;
-			for (int i = 0; i < length; i++) {
-				final NodeImpl child = children[i];
-				if (child instanceof Text) {
-					final String textContent = ((Text) child).getTextContent();
-					if (Strings.isNotBlank(textContent)) {
-						return false;
-					}
-				} else if (child instanceof ElementImpl) {
-					if (hasSomeHtml((ElementImpl) child)) {
-						return false;
-					}
-				}
-			}
-		}
-		return true;
-	}
-
 	private void processNotifications() {
 		// This is called in the GUI thread.
 		final ArrayList<DocumentNotification> notifs = this.notifications;
@@ -448,23 +344,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			notifsArray = (DocumentNotification[]) notifs.toArray(notifsArray);
 			notifs.clear();
 		}
-		final int length = notifsArray.length;
-		for (int i = 0; i < length; i++) {
-			final DocumentNotification dn = notifsArray[i];
-			if (dn.node instanceof HTMLFrameSetElement && this.htmlBlockPanel != null) {
-				if (resetIfFrameSet()) {
-					// Revalidation already taken care of.
-					return;
-				}
-			}
-		}
+		
 		final HtmlBlockPanel blockPanel = this.htmlBlockPanel;
 		if (blockPanel != null) {
 			blockPanel.processDocumentNotifications(notifsArray);
-		}
-		final FrameSetPanel frameSetPanel = this.frameSetPanel;
-		if (frameSetPanel != null) {
-			frameSetPanel.processDocumentNotifications(notifsArray);
 		}
 	}
 
@@ -473,25 +356,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	public void removeSelectionChangeListener(SelectionChangeListener listener) {
 		this.selectionDispatch.removeListener(listener);
-	}
-
-	private boolean resetIfFrameSet() {
-		final NodeImpl nodeImpl = this.rootNode;
-		final NodeImpl fsrn = getFrameSetRootNode(nodeImpl);
-		final boolean newIfs = fsrn != null;
-		if (newIfs != this.isFrameSet || getComponentCount() == 0) {
-			this.isFrameSet = newIfs;
-			if (newIfs) {
-				setUpFrameSet(fsrn);
-				final NodeRenderer nr = this.nodeRenderer;
-				nr.setRootNode(fsrn);
-				// Set proper bounds and repaint.
-				validate();
-				this.repaint();
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -677,25 +541,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) node;
 		nodeImpl.addDocumentNotificationListener(this.notificationListener);
 		this.rootNode = nodeImpl;
-		final NodeImpl fsrn = getFrameSetRootNode(nodeImpl);
-		final boolean newIfs = fsrn != null;
-		if (newIfs != this.isFrameSet || getComponentCount() == 0) {
-			this.isFrameSet = newIfs;
-			if (newIfs) {
-				setUpFrameSet(fsrn);
-			} else {
-				setUpAsBlock(rcontext.getUserAgentContext(), rcontext);
-			}
+		if (getComponentCount() == 0) {
+			setUpAsBlock(rcontext.getUserAgentContext(), rcontext);
 		}
 		final NodeRenderer nr = this.nodeRenderer;
 		if (nr != null) {
-			// These subcomponents should take care
-			// of revalidation.
-			if (newIfs) {
-				nr.setRootNode(fsrn);
-			} else {
-				nr.setRootNode(nodeImpl);
-			}
+			nr.setRootNode(nodeImpl);
+
 		} else {
 			invalidate();
 			validate();
@@ -785,21 +637,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		shp.setDefaultOverflowX(this.defaultOverflowX);
 		shp.setDefaultOverflowY(this.defaultOverflowY);
 		this.htmlBlockPanel = shp;
-		this.frameSetPanel = null;
 		removeAll();
 		this.add(shp);
 		this.nodeRenderer = shp;
-	}
-
-	private void setUpFrameSet(NodeImpl fsrn) {
-		this.isFrameSet = true;
-		this.htmlBlockPanel = null;
-		final FrameSetPanel fsp = createFrameSetPanel();
-		this.frameSetPanel = fsp;
-		this.nodeRenderer = fsp;
-		removeAll();
-		this.add(fsp);
-		fsp.setRootNode(fsrn);
 	}
 	
 	public IBrowserPanel getBrowserPanel() {

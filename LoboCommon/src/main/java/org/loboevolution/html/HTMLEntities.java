@@ -333,7 +333,6 @@ public class HTMLEntities {
 		elementInfos.put(HTMLTag.LINK, forbiddenEndElement);
 		elementInfos.put(HTMLTag.BASE, forbiddenEndElement);
 		elementInfos.put(HTMLTag.INPUT, forbiddenEndElement);
-		elementInfos.put(HTMLTag.FRAME, forbiddenEndElement);
 		elementInfos.put(HTMLTag.BR, forbiddenEndElement);
 		elementInfos.put(HTMLTag.HR, forbiddenEndElement);
 		elementInfos.put(HTMLTag.EMBED, forbiddenEndElement);

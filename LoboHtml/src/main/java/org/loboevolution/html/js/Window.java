@@ -37,7 +37,6 @@ import java.util.logging.Logger;
 
 import javax.swing.Timer;
 
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.dom.domimpl.CommentImpl;
@@ -430,14 +429,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return this.document;
 	}
 
-	public HTMLCollection getFrames() {
-		final Document doc = this.document;
-		if (doc instanceof HTMLDocumentImpl) {
-			return ((HTMLDocumentImpl) doc).getFrames();
-		}
-		return null;
-	}
-
 	public History getHistory() {
 		synchronized (this) {
 			History history = this.history;
@@ -459,10 +450,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public int getLength() {
 		if (this.lengthSet) {
 			return this.length;
-		} else {
-			final HTMLCollection frames = getFrames();
-			return frames == null ? 0 : frames.getLength();
 		}
+		return 0;
 	}
 
 	public Location getLocation() {

@@ -58,7 +58,6 @@ import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IToolBar;
 import org.loboevolution.html.HtmlObject;
-import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLAbstractUIElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -301,19 +300,6 @@ public class HtmlRendererContext {
 		return encoding == null ? "ISO-8859-1" : encoding;
 	}
 
-	/**
-	 * Gets a collection of current document frames, by querying the document
-	 * currently held by the local {@link org.loboevolution.html.gui.HtmlPanel}
-	 * instance.
-	 */
-	public HTMLCollection getFrames() {
-		final Object rootNode = this.htmlPanel.getRootNode();
-		if (rootNode instanceof HTMLDocumentImpl) {
-			return ((HTMLDocumentImpl) rootNode).getFrames();
-		} else {
-			return null;
-		}
-	}
 
 	public int getHistoryLength() {
 		return 0;
@@ -712,7 +698,9 @@ public class HtmlRendererContext {
 	 * {@link #isNavigationAsynchronous()}.
 	 * </ul>
 	 * 
-	 * @see #navigate(URL, String)
+	 * @see #navigate(URL, String
+	 * 
+	 * )
 	 */
 	public void submitForm(final String method, final URL action, final String target, final String enctype, final FormInput[] formInputs) {
 		if (target != null) {

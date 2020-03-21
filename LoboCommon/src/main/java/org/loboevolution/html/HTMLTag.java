@@ -33,8 +33,6 @@ public enum HTMLTag {
 	EM("EM"),
 	EMBED("EMBED"),
 	FORM("FORM"),
-	FRAME("FRAME"),
-	FRAMESET("FRAMESET"),
 	G("G"),
 	H1("H1"),
 	H2("H2"),
