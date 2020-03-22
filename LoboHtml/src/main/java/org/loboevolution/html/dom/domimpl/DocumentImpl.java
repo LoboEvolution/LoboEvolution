@@ -39,6 +39,8 @@ public class DocumentImpl extends DOMFunctionImpl implements Document, DocumentE
 	private String documentURI;
 
 	private DocumentType doctype;
+	
+	private boolean isrss = false;
 
 	@Override
 	public Node adoptNode(Node source) throws DOMException {
@@ -49,7 +51,8 @@ public class DocumentImpl extends DOMFunctionImpl implements Document, DocumentE
 
 	@Override
 	public Element createElement(String tagName) throws DOMException {
-		return ElementFactory.getInstance().createElement((HTMLDocumentImpl) this, tagName);
+		if("rss".equalsIgnoreCase(tagName)) {isrss = true;}
+		return new ElementFactory(isrss).createElement((HTMLDocumentImpl) this, tagName);
 	}
 
 	@Override
