@@ -29,7 +29,6 @@ import org.loboevolution.html.dom.rss.RSSChanelElementImpl;
 import org.loboevolution.html.dom.rss.RSSDescriptionElementImpl;
 import org.loboevolution.html.dom.rss.RSSElementImpl;
 import org.loboevolution.html.dom.rss.RSSItemElementImpl;
-import org.loboevolution.html.dom.rss.RSSLinkElementImpl;
 import org.loboevolution.html.dom.rss.RSSTitleElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGAnimateElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGAnimateTransformElementImpl;
@@ -548,13 +547,6 @@ public abstract class HTMLElementBuilder {
 		@Override
 		protected HTMLElementImpl build(String name) {
 			return new RSSDescriptionElementImpl(name);
-		}		
-	}
-	
-	public static final class RSSLink extends HTMLElementBuilder {
-		@Override
-		protected HTMLElementImpl build(String name) {
-			return new RSSLinkElementImpl(name);
 		}		
 	}
 	

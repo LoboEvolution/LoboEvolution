@@ -124,15 +124,14 @@ class ElementFactory {
 		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
 		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
 		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());
+		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
 
 		builders.put(HTMLTag.RSS, new HTMLElementBuilder.RSS());
 		builders.put(HTMLTag.CHANNEL, new HTMLElementBuilder.Channel());
 		builders.put(HTMLTag.TITLE, isRss ? new HTMLElementBuilder.RSSTitle() : new HTMLElementBuilder.Title());
 		builders.put(HTMLTag.DESCRIPTION, new HTMLElementBuilder.RSSDescription());
-		builders.put(HTMLTag.LINK, isRss ? new HTMLElementBuilder.RSSLink() : new HTMLElementBuilder.Link());
 		builders.put(HTMLTag.ITEM, new HTMLElementBuilder.RSSItem());
-		
-		
+	
 	}
 
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
