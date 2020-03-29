@@ -49,9 +49,9 @@ class ElementFactory {
 		builders.put(HTMLTag.PRE, new HTMLElementBuilder.Pre());
 		builders.put(HTMLTag.P, new HTMLElementBuilder.P());
 
-		final HTMLElementBuilder bq = new HTMLElementBuilder.Blockquote();
-		builders.put(HTMLTag.BLOCKQUOTE, bq);
-		builders.put(HTMLTag.DD, bq);
+		final HTMLElementBuilder quote = new HTMLElementBuilder.Quote();
+		builders.put(HTMLTag.BLOCKQUOTE, quote);
+		builders.put(HTMLTag.DD, quote);
 
 		builders.put(HTMLTag.SPAN, new HTMLElementBuilder.Span());
 		builders.put(HTMLTag.SCRIPT, new HTMLElementBuilder.Script());

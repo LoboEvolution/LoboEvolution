@@ -74,10 +74,10 @@ public abstract class HTMLElementBuilder {
 		}
 	}
 
-	public static class Blockquote extends HTMLElementBuilder {
+	public static class Quote extends HTMLElementBuilder {
 		@Override
 		public HTMLElementImpl build(String name) {
-			return new HTMLBlockQuoteElementImpl(name);
+			return new HTMLQuoteElementImpl(name);
 		}
 	}
 

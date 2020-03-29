@@ -20,16 +20,20 @@
 */
 package org.loboevolution.html.dom.domimpl;
 
-import org.loboevolution.html.renderstate.BlockQuoteRenderState;
-import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.dom.HTMLQuoteElement;
 
-public class HTMLBlockQuoteElementImpl extends HTMLAbstractUIElement {
-	public HTMLBlockQuoteElementImpl(String name) {
+public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteElement {
+
+	public HTMLQuoteElementImpl(String name) {
 		super(name);
 	}
 
+	public String getCite() {
+		return getAttribute("cite");
+	}
+
 	@Override
-	protected RenderState createRenderState(RenderState prevRenderState) {
-		return new BlockQuoteRenderState(prevRenderState, this);
+	public void setCite(String cite) {
+		setAttribute("cite", cite);
 	}
 }
