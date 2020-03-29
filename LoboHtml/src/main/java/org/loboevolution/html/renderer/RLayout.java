@@ -11,6 +11,7 @@ import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.control.ImgControl;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RImgControl;
+import org.loboevolution.html.control.RSSControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.SVGControl;
 import org.loboevolution.html.control.SelectControl;
@@ -24,6 +25,7 @@ import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.dom.rss.RSSElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
@@ -97,6 +99,7 @@ public class RLayout {
 		el.put(HTMLTag.CANVAS,new CanvasLayout());
 		el.put(HTMLTag.SVG,new SVGLayout());
 		el.put(HTMLTag.IFRAME,new IFrameLayout());
+		el.put(HTMLTag.RSS,new RSSLayout());
 	}
 	
 	protected static class AnchorLayout extends CommonLayout {
@@ -253,6 +256,19 @@ public class RLayout {
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			UIControl control = new SVGControl((SVGSVGElementImpl) markupElement);
+			return new RUIControl(markupElement,control, bodyLayout.container,
+					bodyLayout.frameContext, bodyLayout.userAgentContext);
+		}
+	}
+	
+	protected static class RSSLayout extends CommonWidgetLayout {
+		public RSSLayout() {
+			super(ADD_AS_BLOCK);
+		}
+
+		@Override
+		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
+			UIControl control = new RSSControl((RSSElementImpl) markupElement);
 			return new RUIControl(markupElement,control, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}

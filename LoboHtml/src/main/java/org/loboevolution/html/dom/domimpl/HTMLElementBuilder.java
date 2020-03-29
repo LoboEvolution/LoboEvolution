@@ -25,6 +25,11 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.rss.RSSChanelElementImpl;
+import org.loboevolution.html.dom.rss.RSSDescriptionElementImpl;
+import org.loboevolution.html.dom.rss.RSSElementImpl;
+import org.loboevolution.html.dom.rss.RSSItemElementImpl;
+import org.loboevolution.html.dom.rss.RSSTitleElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGAnimateElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGAnimateTransformElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGCircleElementImpl;
@@ -516,7 +521,42 @@ public abstract class HTMLElementBuilder {
 			return new SVGImageElementImpl(name);
 		}
 	}
+	
+	public static final class RSS extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new RSSElementImpl(name);
+		}		
+	}
+	
+	public static final class Channel extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new RSSChanelElementImpl(name);
+		}		
+	}
+	
+	public static final class RSSTitle extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new RSSTitleElementImpl(name);
+		}		
+	}
 
+	public static final class RSSDescription extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new RSSDescriptionElementImpl(name);
+		}		
+	}
+	
+	public static final class RSSItem extends HTMLElementBuilder {
+		@Override
+		protected HTMLElementImpl build(String name) {
+			return new RSSItemElementImpl(name);
+		}		
+	}
+	
 	protected abstract HTMLElementImpl build(String name);
 
 	public final HTMLElement create(HTMLDocument document, String name) {

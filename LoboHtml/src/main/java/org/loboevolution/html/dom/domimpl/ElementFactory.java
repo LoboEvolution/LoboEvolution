@@ -18,9 +18,6 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Oct 8, 2005
- */
 package org.loboevolution.html.dom.domimpl;
 
 import java.util.HashMap;
@@ -32,19 +29,13 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.w3c.dom.DOMException;
 
 class ElementFactory {
-	private static ElementFactory instance = new ElementFactory();
-
-	public static ElementFactory getInstance() {
-		return instance;
-	}
-
+	
 	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<HTMLTag, HTMLElementBuilder>();
 
-	private ElementFactory() {
+	public  ElementFactory(boolean isRss) {
 		// This sets up builders for each known element tag.
 		final Map<HTMLTag, HTMLElementBuilder> builders = this.builders;
-		builders.put(HTMLTag.HTML, new HTMLElementBuilder.Html());
-		builders.put(HTMLTag.TITLE, new HTMLElementBuilder.Title());
+		builders.put(HTMLTag.HTML, new HTMLElementBuilder.Html());		
 		builders.put(HTMLTag.BASE, new HTMLElementBuilder.Base());
         builders.put(HTMLTag.HEAD, new HTMLElementBuilder.Head());
 
@@ -66,7 +57,6 @@ class ElementFactory {
 		builders.put(HTMLTag.SCRIPT, new HTMLElementBuilder.Script());
 		builders.put(HTMLTag.IMG, new HTMLElementBuilder.Img());
 		builders.put(HTMLTag.STYLE, new HTMLElementBuilder.Style());
-		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
 		builders.put(HTMLTag.A, new HTMLElementBuilder.Anchor());
 		builders.put(HTMLTag.ANCHOR, new HTMLElementBuilder.Anchor());
 		builders.put(HTMLTag.TABLE, new HTMLElementBuilder.Table());
@@ -134,6 +124,14 @@ class ElementFactory {
 		builders.put(HTMLTag.ANIMATE, new HTMLElementBuilder.SVGAnimate());
 		builders.put(HTMLTag.ANIMATE_TRASFORM, new HTMLElementBuilder.SVGAnimateTrasform());
 		builders.put(HTMLTag.IMAGE, new HTMLElementBuilder.SVGImage());
+		builders.put(HTMLTag.LINK, new HTMLElementBuilder.Link());
+
+		builders.put(HTMLTag.RSS, new HTMLElementBuilder.RSS());
+		builders.put(HTMLTag.CHANNEL, new HTMLElementBuilder.Channel());
+		builders.put(HTMLTag.TITLE, isRss ? new HTMLElementBuilder.RSSTitle() : new HTMLElementBuilder.Title());
+		builders.put(HTMLTag.DESCRIPTION, new HTMLElementBuilder.RSSDescription());
+		builders.put(HTMLTag.ITEM, new HTMLElementBuilder.RSSItem());
+	
 	}
 
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
