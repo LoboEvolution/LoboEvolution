@@ -120,6 +120,10 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	public void send(String content) throws Exception {
 		this.request.send(content);
 	}
+	
+	public void send() throws Exception {
+		this.request.send((String)null);
+	}
 
 	public void setOnreadystatechange(final Function value) {
 		synchronized (this) {
