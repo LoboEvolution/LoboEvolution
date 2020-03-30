@@ -39,7 +39,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	}
 
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		if (this == startPoint.renderable || this == endPoint.renderable) {
 			if (inSelection) {

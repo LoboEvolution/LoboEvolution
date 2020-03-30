@@ -73,7 +73,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 			throw new WrappedException(new InvocationTargetException(ite.getCause(),
 					"Unable to call " + this.className + " on " + jcw.getJavaObject() + "."));
 		} catch (final IllegalArgumentException iae) {
-			final StringBuffer argTypes = new StringBuffer();
+			final StringBuilder argTypes = new StringBuilder();
 			for (int i = 0; i < actualArgs.length; i++) {
 				if (i > 0) {
 					argTypes.append(", ");

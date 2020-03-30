@@ -148,7 +148,7 @@ public class HttpRequest {
 	private String getAllResponseHeaders(URLConnection c) {
 		int idx = 0;
 		String value;
-		final StringBuffer buf = new StringBuffer();
+		final StringBuilder buf = new StringBuilder();
 		while ((value = c.getHeaderField(idx)) != null) {
 			final String key = c.getHeaderFieldKey(idx);
 			buf.append(key);

@@ -207,13 +207,13 @@ public class HtmlParser {
 			final LinkedList<String> ancestors) throws IOException, StopException, SAXException {
 		final Document doc = this.document;
 		final HTMLDocumentImpl htmlDoc = (HTMLDocumentImpl) doc;
-		final StringBuffer textSb = this.readUpToTagBegin(reader);
+		final StringBuilder textSb = this.readUpToTagBegin(reader);
 		if (textSb == null) {
 			return TOKEN_EOD;
 		}
 		if (textSb.length() != 0) {
 			// int textLine = reader.getLineNumber();
-			final StringBuffer decText = entityDecode(textSb);
+			final StringBuilder decText = entityDecode(textSb);
 			final Node textNode = doc.createTextNode(decText.toString());
 			try {
 				safeAppendChild(parent, textNode);
@@ -233,8 +233,8 @@ public class HtmlParser {
 				if (tag.startsWith("!")) {
 					if ("!--".equals(tag)) {
 						// int commentLine = reader.getLineNumber();
-						final StringBuffer comment = this.passEndOfComment(reader);
-						final StringBuffer decText = entityDecode(comment);
+						final StringBuilder comment = this.passEndOfComment(reader);
+						final StringBuilder decText = entityDecode(comment);
 						safeAppendChild(parent, doc.createComment(decText.toString()));
 						return TOKEN_COMMENT;
 					} else if ("!DOCTYPE".equals(tag)) {
@@ -260,7 +260,7 @@ public class HtmlParser {
 					return TOKEN_END_ELEMENT;
 				} else if (tag.startsWith("?")) {
 					tag = tag.substring(1);
-					final StringBuffer data = readProcessingInstruction(reader);
+					final StringBuilder data = readProcessingInstruction(reader);
 					safeAppendChild(parent, doc.createProcessingInstruction(tag, data.toString()));
 					return TOKEN_FULL_ELEMENT;
 				} else {
@@ -414,8 +414,8 @@ public class HtmlParser {
 	 * Reads text until the beginning of the next tag. Leaves the reader offset past
 	 * the opening angle bracket. Returns null only on EOF.
 	 */
-	private final StringBuffer readUpToTagBegin(final LineNumberReader reader) throws IOException, SAXException {
-		StringBuffer sb = null;
+	private final StringBuilder readUpToTagBegin(final LineNumberReader reader) throws IOException, SAXException {
+		StringBuilder sb = null;
 		int intCh;
 		while ((intCh = reader.read()) != -1) {
 			final char ch = (char) intCh;
@@ -424,12 +424,12 @@ public class HtmlParser {
 				this.justReadTagEnd = false;
 				this.justReadEmptyElement = false;
 				if (sb == null) {
-					sb = new StringBuffer(0);
+					sb = new StringBuilder(0);
 				}
 				return sb;
 			}
 			if (sb == null) {
-				sb = new StringBuffer();
+				sb = new StringBuilder();
 			}
 			sb.append(ch);
 		}
@@ -453,7 +453,7 @@ public class HtmlParser {
 			final boolean addTextNode, final boolean decodeEntities) throws IOException, SAXException {
 		final Document doc = this.document;
 		int intCh;
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		while ((intCh = reader.read()) != -1) {
 			char ch = (char) intCh;
 			if (ch == '<') {
@@ -461,7 +461,7 @@ public class HtmlParser {
 				if (intCh != -1) {
 					ch = (char) intCh;
 					if (ch == '/') {
-						final StringBuffer tempBuffer = new StringBuffer();
+						final StringBuilder tempBuffer = new StringBuilder();
 						INNER: while ((intCh = reader.read()) != -1) {
 							ch = (char) intCh;
 							if (ch == '>') {
@@ -528,7 +528,7 @@ public class HtmlParser {
 		return HtmlParser.TOKEN_EOD;
 	}
 
-	private static void readCData(LineNumberReader reader, StringBuffer sb) throws IOException {
+	private static void readCData(LineNumberReader reader, StringBuilder sb) throws IOException {
 
 		int next = reader.read();
 
@@ -587,7 +587,7 @@ public class HtmlParser {
 	 * @return
 	 */
 	private final String readTag(final Node parent, final LineNumberReader reader) throws IOException {
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		int chInt;
 		chInt = reader.read();
 		if (chInt != -1) {
@@ -628,7 +628,7 @@ public class HtmlParser {
 						cont = false;
 					}
 				} else if (ch == '<') {
-					final StringBuffer ltText = new StringBuffer(3);
+					final StringBuilder ltText = new StringBuilder(3);
 					ltText.append('<');
 					while ((chInt = reader.read()) == '<') {
 						ltText.append('<');
@@ -649,7 +649,7 @@ public class HtmlParser {
 						continue LOOP;
 					}
 				} else if (Character.isWhitespace(ch)) {
-					final StringBuffer ltText = new StringBuffer();
+					final StringBuilder ltText = new StringBuilder();
 					ltText.append('<');
 					ltText.append(ch);
 					while ((chInt = reader.read()) != -1) {
@@ -715,11 +715,11 @@ public class HtmlParser {
 		return tag;
 	}
 
-	private final StringBuffer passEndOfComment(final LineNumberReader reader) throws IOException {
+	private final StringBuilder passEndOfComment(final LineNumberReader reader) throws IOException {
 		if (this.justReadTagEnd) {
-			return new StringBuffer(0);
+			return new StringBuilder(0);
 		}
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		OUTER: for (;;) {
 			int chInt = reader.read();
 			if (chInt == -1) {
@@ -734,7 +734,7 @@ public class HtmlParser {
 				}
 				ch = (char) chInt;
 				if (ch == '-') {
-					StringBuffer extra = null;
+					StringBuilder extra = null;
 					INNER: for (;;) {
 						chInt = reader.read();
 						if (chInt == -1) {
@@ -751,13 +751,13 @@ public class HtmlParser {
 						} else if (ch == '-') {
 							// Allow any number of dashes at the end
 							if (extra == null) {
-								extra = new StringBuffer();
+								extra = new StringBuilder();
 								extra.append("--");
 							}
 							extra.append("-");
 						} else if (Character.isWhitespace(ch)) {
 							if (extra == null) {
-								extra = new StringBuffer();
+								extra = new StringBuilder();
 								extra.append("--");
 							}
 							extra.append(ch);
@@ -835,8 +835,8 @@ public class HtmlParser {
 		}
 	}
 
-	private final StringBuffer readProcessingInstruction(final LineNumberReader reader) throws IOException {
-		final StringBuffer pidata = new StringBuffer();
+	private final StringBuilder readProcessingInstruction(final LineNumberReader reader) throws IOException {
+		final StringBuilder pidata = new StringBuilder();
 		if (this.justReadTagEnd) {
 			return pidata;
 		}
@@ -858,7 +858,7 @@ public class HtmlParser {
 		// Read attribute name up to '=' character.
 		// May read several attribute names without explicit values.
 
-		StringBuffer attributeName = null;
+		StringBuilder attributeName = null;
 		boolean blankFound = false;
 		boolean lastCharSlash = false;
 		for (;;) {
@@ -905,13 +905,13 @@ public class HtmlParser {
 					}
 				}
 				if (attributeName == null) {
-					attributeName = new StringBuffer(6);
+					attributeName = new StringBuilder(6);
 				}
 				attributeName.append(ch);
 			}
 		}
 		// Read blanks up to open quote or first non-blank.
-		StringBuffer attributeValue = null;
+		StringBuilder attributeValue = null;
 		int openQuote = -1;
 		for (;;) {
 			final int chInt = reader.read();
@@ -939,7 +939,7 @@ public class HtmlParser {
 					openQuote = '\'';
 				} else {
 					openQuote = -1;
-					attributeValue = new StringBuffer(6);
+					attributeValue = new StringBuilder(6);
 					if (lastCharSlash) {
 						attributeValue.append('/');
 					}
@@ -968,7 +968,7 @@ public class HtmlParser {
 						// processed by major browsers.
 						element.setAttribute(attributeNameStr, "");
 					} else {
-						final StringBuffer actualAttributeValue = entityDecode(attributeValue);
+						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
 						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
 					}
 				}
@@ -981,7 +981,7 @@ public class HtmlParser {
 					if (attributeValue == null) {
 						element.setAttribute(attributeNameStr, null);
 					} else {
-						final StringBuffer actualAttributeValue = entityDecode(attributeValue);
+						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
 						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
 					}
 				}
@@ -996,7 +996,7 @@ public class HtmlParser {
 					if (attributeValue == null) {
 						element.setAttribute(attributeNameStr, null);
 					} else {
-						final StringBuffer actualAttributeValue = entityDecode(attributeValue);
+						final StringBuilder actualAttributeValue = entityDecode(attributeValue);
 						element.setAttribute(attributeNameStr, actualAttributeValue.toString());
 					}
 				}
@@ -1005,7 +1005,7 @@ public class HtmlParser {
 				return true;
 			} else {
 				if (attributeValue == null) {
-					attributeValue = new StringBuffer(6);
+					attributeValue = new StringBuilder(6);
 				}
 				if (lastCharSlash) {
 					attributeValue.append('/');
@@ -1021,7 +1021,7 @@ public class HtmlParser {
 			if (attributeValue == null) {
 				element.setAttribute(attributeNameStr, null);
 			} else {
-				final StringBuffer actualAttributeValue = entityDecode(attributeValue);
+				final StringBuilder actualAttributeValue = entityDecode(attributeValue);
 				element.setAttribute(attributeNameStr, actualAttributeValue.toString());
 			}
 		}
@@ -1114,9 +1114,9 @@ public class HtmlParser {
 		return (einfo == null ? true : einfo.decodeEntities);
 	}
 
-	private final static StringBuffer entityDecode(final StringBuffer rawText) throws org.xml.sax.SAXException {
+	private final static StringBuilder entityDecode(final StringBuilder rawText) throws org.xml.sax.SAXException {
 		int startIdx = 0;
-		StringBuffer sb = null;
+		StringBuilder sb = null;
 		for (;;) {
 			final int ampIdx = rawText.indexOf("&", startIdx);
 			if (ampIdx == -1) {
@@ -1128,7 +1128,7 @@ public class HtmlParser {
 				}
 			}
 			if (sb == null) {
-				sb = new StringBuffer();
+				sb = new StringBuilder();
 			}
 			sb.append(rawText.substring(startIdx, ampIdx));
 			final int colonIdx = rawText.indexOf(";", ampIdx);

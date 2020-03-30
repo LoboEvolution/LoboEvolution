@@ -402,7 +402,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		final RenderableSpot start = this.startSelection;
 		final RenderableSpot end = this.endSelection;
 		if (start != null && end != null) {
-			final StringBuffer buffer = new StringBuffer();
+			final StringBuilder buffer = new StringBuilder();
 			this.rblock.extractSelectionText(buffer, false, start, end);
 			return buffer.toString();
 		} else {

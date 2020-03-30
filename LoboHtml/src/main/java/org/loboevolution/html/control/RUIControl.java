@@ -192,7 +192,7 @@ public class RUIControl extends BaseElementRenderable {
 	}
 
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		// No text here
 		return inSelection;

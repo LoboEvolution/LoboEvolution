@@ -589,7 +589,7 @@ public class Type1CFont extends OutlineFont {
      * replaced by "<###>" where ## is the value of the byte.
      */
     private String safe (String src) {
-        StringBuffer sb = new StringBuffer ();
+        StringBuilder sb = new StringBuilder ();
         for (int i = 0; i < src.length (); i++) {
             char c = src.charAt (i);
             if (c >= 32 && c < 128) {

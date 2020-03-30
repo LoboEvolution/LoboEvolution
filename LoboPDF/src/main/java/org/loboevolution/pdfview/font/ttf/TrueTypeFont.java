@@ -403,7 +403,7 @@ public class TrueTypeFont {
      */
     @Override
 	public String toString () {
-        StringBuffer buf = new StringBuffer ();
+        StringBuilder buf = new StringBuilder ();
 
         logger.info ("Type         : " + getType ());
         logger.info ("NumTables    : " + getNumTables ());

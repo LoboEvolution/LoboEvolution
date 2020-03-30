@@ -281,7 +281,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 						properties.setPropertyValueLCAlt(LINE_HEIGHT, lineHeightText, important);
 					}
 					if (++i < length) {
-						final StringBuffer fontFamilyBuff = new StringBuffer();
+						final StringBuilder fontFamilyBuff = new StringBuilder();
 						do {
 							token = tokens[i];
 							fontFamilyBuff.append(token);

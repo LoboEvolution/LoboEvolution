@@ -31,7 +31,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	  }
 
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		Point checkPoint1 = null;
 		Point checkPoint2 = null;

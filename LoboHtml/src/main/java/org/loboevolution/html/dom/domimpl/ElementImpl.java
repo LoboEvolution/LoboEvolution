@@ -205,14 +205,14 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * @param includeComment
 	 */
 	protected String getRawInnerText(boolean includeComment) {
-		StringBuffer sb = null;
+		StringBuilder sb = null;
 		for (Node node : Nodes.iterable(nodeList)) {
 			if (node instanceof Text) {
 				final Text tn = (Text) node;
 				final String txt = tn.getNodeValue();
 				if (Strings.isNotBlank(txt)) {
 					if (sb == null) {
-						sb = new StringBuffer();
+						sb = new StringBuilder();
 					}
 					sb.append(txt);
 				}
@@ -221,7 +221,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 				final String txt = en.getRawInnerText(includeComment);
 				if (Strings.isNotBlank(txt)) {
 					if (sb == null) {
-						sb = new StringBuffer();
+						sb = new StringBuilder();
 					}
 					sb.append(txt);
 				}
@@ -230,7 +230,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 				final String txt = cn.getNodeValue();
 				if (Strings.isNotBlank(txt)) {
 					if (sb == null) {
-						sb = new StringBuffer();
+						sb = new StringBuilder();
 					}
 					sb.append(txt);
 				}
@@ -404,7 +404,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 
 	@Override
 	public String toString() {
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		sb.append(getNodeName());
 		sb.append(" [");
 		final NamedNodeMap attribs = getAttributes();

@@ -283,7 +283,7 @@ public class HtmlValues {
 	}
 	
 	public static String quoteAndEscape(String text) {
-		final StringBuffer result = new StringBuffer();
+		final StringBuilder result = new StringBuilder();
 		result.append("'");
 		int index = 0;
 		final int length = text.length();
@@ -309,21 +309,21 @@ public class HtmlValues {
 		final ArrayList<String> tokens = new ArrayList<String>(4);
 		final int len = cssValue.length();
 		int parenCount = 0;
-		StringBuffer currentWord = null;
+		StringBuilder currentWord = null;
 		for (int i = 0; i < len; i++) {
 			final char ch = cssValue.charAt(i);
 			switch (ch) {
 			case '(':
 				parenCount++;
 				if (currentWord == null) {
-					currentWord = new StringBuffer();
+					currentWord = new StringBuilder();
 				}
 				currentWord.append(ch);
 				break;
 			case ')':
 				parenCount--;
 				if (currentWord == null) {
-					currentWord = new StringBuffer();
+					currentWord = new StringBuilder();
 				}
 				currentWord.append(ch);
 				break;
@@ -340,7 +340,7 @@ public class HtmlValues {
 				}
 			default:
 				if (currentWord == null) {
-					currentWord = new StringBuffer();
+					currentWord = new StringBuilder();
 				}
 				currentWord.append(ch);
 				break;
@@ -353,7 +353,7 @@ public class HtmlValues {
 	}
 
 	public static String unquoteAndUnescape(String text) {
-		final StringBuffer result = new StringBuffer();
+		final StringBuilder result = new StringBuilder();
 		int index = 0;
 		final int length = text.length();
 		boolean escape = false;

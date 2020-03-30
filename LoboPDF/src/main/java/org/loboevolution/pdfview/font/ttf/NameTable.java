@@ -325,7 +325,7 @@ public class NameTable extends TrueTypeTable {
     /** Get a pretty string */
     @Override
 	public String toString() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         String indent = "    ";
         
         buf.append(indent + "Format: " + getFormat() + "\n");

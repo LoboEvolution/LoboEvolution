@@ -389,7 +389,7 @@ public class CMapFormat4 extends CMap {
     
     /** Get a pretty string */
     @Override public String toString() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         String indent = "        ";
         
         buf.append(super.toString());

@@ -69,7 +69,7 @@ public class PDFDebugger {
     }
 
     public static String escape(String msg) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < msg.length(); i++) {
             char c = msg.charAt(i);
             if (c != '\n' && (c < 32 || c >= 127)) {

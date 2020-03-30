@@ -60,7 +60,7 @@ public class PDFTextFormat implements Cloneable {
     private boolean inuse = false;
     // private Object array[]= new Object[1];
     /** build text rep of word */
-    private final StringBuffer word = new StringBuffer();
+    private final StringBuilder word = new StringBuilder();
     // this is where we build and keep the word list for this page.
     /** start location of the hunk of text */
     private final Point2D.Float wordStart;

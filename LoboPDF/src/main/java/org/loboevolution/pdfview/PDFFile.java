@@ -657,7 +657,7 @@ public class PDFFile {
             int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
         // we've already read the <. Now get the hex bytes until >
         int val;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         while ((val = readHexPair()) >= 0) {
             sb.append((char) val);
         }
@@ -708,7 +708,7 @@ public class PDFFile {
         // *balanced* ) appears.  Translate \r \n \t \b \f \( \) \\ \ddd
         // if a cr/lf follows a backslash, ignore the cr/lf
         int parencount = 1;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         while (buf.hasRemaining() && parencount > 0) {
             c = this.buf.get() & 0xFF;
@@ -805,7 +805,7 @@ public class PDFFile {
      * encountered.  If a '\r' is encountered, it is discarded.
      */
     private String readLine() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         while (this.buf.remaining() > 0) {
             char c = (char) this.buf.get();
@@ -863,7 +863,7 @@ public class PDFFile {
     private PDFObject readName() throws IOException {
         // we've already read the / that begins the name.
         // all we have to check for is #hh hex notations.
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         int c;
         while (this.buf.hasRemaining() && isRegularCharacter(c = this.buf.get())) {
             if (c < '!' && c > '~') {
@@ -927,7 +927,7 @@ public class PDFFile {
      */
     private PDFObject readKeyword(char start) throws IOException {
         // we've read the first character (it's passed in as the argument)
-        StringBuffer sb = new StringBuffer(String.valueOf(start));
+        StringBuilder sb = new StringBuilder(String.valueOf(start));
         int c;
         while (buf.hasRemaining() && isRegularCharacter(c = this.buf.get())) {
             sb.append((char) c);

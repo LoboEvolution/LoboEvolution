@@ -114,7 +114,7 @@ public class CSSUtilities {
 		try {
 			final BufferedReader reader = new BufferedReader(new StringReader(text));
 			String line;
-			final StringBuffer sb = new StringBuffer();
+			final StringBuilder sb = new StringBuilder();
 			String pendingLine = null;
 			// Only last line should be trimmed.
 			while ((line = reader.readLine()) != null) {

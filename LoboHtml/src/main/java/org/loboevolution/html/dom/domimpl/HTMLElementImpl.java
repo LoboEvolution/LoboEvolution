@@ -99,7 +99,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return style;
 	}
 
-	protected void appendOuterHTMLImpl(StringBuffer buffer) {
+	protected void appendOuterHTMLImpl(StringBuilder buffer) {
 		final String tagName = getTagName();
 		buffer.append('<');
 		buffer.append(tagName);
@@ -408,7 +408,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	}
 
 	public String getOuterHTML() {
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
 			appendOuterHTMLImpl(buffer);
 		}

@@ -219,7 +219,7 @@ public class CmapTable extends TrueTypeTable {
     
     /** Print a pretty string */
     @Override public String toString() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         String indent = "    ";
     
         buf.append(indent + "Version: " + this.getVersion() + "\n");

@@ -890,7 +890,7 @@ class PDFXformCmd extends PDFCmd {
 
     @Override
     public String getDetails() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append("PDFXformCommand: \n");
         buf.append(this.at.toString());
         return buf.toString();

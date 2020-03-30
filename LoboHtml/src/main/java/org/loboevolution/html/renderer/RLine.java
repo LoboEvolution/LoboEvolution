@@ -344,7 +344,7 @@ class RLine extends BaseRCollection {
 	}
 
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		final boolean result = super.extractSelectionText(buffer, inSelection, startPoint, endPoint);
 		if (result) {

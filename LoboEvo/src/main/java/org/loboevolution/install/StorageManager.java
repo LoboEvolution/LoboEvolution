@@ -91,7 +91,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				Statement stmt = conn.createStatement()) {
 			String s = new String();
-			final StringBuffer sb = new StringBuffer();
+			final StringBuilder sb = new StringBuilder();
 			final boolean isTable = "table.sql".equals(fl.getName()) ? true : false;
 			try (FileReader fr = new FileReader(fl); BufferedReader br = new BufferedReader(fr)) {
 				while ((s = br.readLine()) != null) {

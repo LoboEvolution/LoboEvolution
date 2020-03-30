@@ -201,7 +201,7 @@ public class PDFParser extends BaseWatchable {
         // examine the character:
         while (c == '%') {
             // skip comments
-            StringBuffer comment = new StringBuffer();
+            StringBuilder comment = new StringBuilder();
             while (this.loc < this.stream.length && c != '\n') {
                 comment.append((char) c);
                 c = this.stream[this.loc++];
@@ -318,7 +318,7 @@ public class PDFParser extends BaseWatchable {
     */
     private String readString() {
         int parenLevel = 0;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         while (this.loc < this.stream.length) {
             int c = this.stream[this.loc++];
             if (c == ')') {
@@ -372,7 +372,7 @@ public class PDFParser extends BaseWatchable {
     * @return the byte array
     */
     private String readByteArray() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         int count = 0;
         char w = (char) 0;
         // read individual bytes and format into a character array

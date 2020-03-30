@@ -96,7 +96,7 @@ public interface BoundableRenderable extends Renderable {
 
 	boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint);
 
-	boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint);
 
 	void invalidateLayoutUpTree();

@@ -94,7 +94,7 @@ public class PDFGlyph {
 
     @Override
     public String toString() {
-        StringBuffer str = new StringBuffer();
+        StringBuilder str = new StringBuilder();
         str.append(this.name);
         return str.toString();
     }

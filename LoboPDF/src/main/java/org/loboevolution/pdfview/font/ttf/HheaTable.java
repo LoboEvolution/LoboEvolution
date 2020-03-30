@@ -168,7 +168,7 @@ public class HheaTable extends TrueTypeTable {
      */
     @Override
 	public String toString() {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         String indent = "    ";
         
         buf.append(indent + "Version             : " + Integer.toHexString(getVersion()) + "\n");

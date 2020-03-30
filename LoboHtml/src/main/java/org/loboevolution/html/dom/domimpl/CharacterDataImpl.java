@@ -60,8 +60,8 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 
 	@Override
 	public void deleteData(int offset, int count) throws DOMException {
-		final StringBuffer buffer = new StringBuffer(this.text);
-		final StringBuffer result = buffer.delete(offset, offset + count);
+		final StringBuilder buffer = new StringBuilder(this.text);
+		final StringBuilder result = buffer.delete(offset, offset + count);
 		this.text = result.toString();
 		if (!this.notificationsSuspended) {
 			informInvalid();
@@ -89,8 +89,8 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 
 	@Override
 	public void insertData(int offset, String arg) throws DOMException {
-		final StringBuffer buffer = new StringBuffer(this.text);
-		final StringBuffer result = buffer.insert(offset, arg);
+		final StringBuilder buffer = new StringBuilder(this.text);
+		final StringBuilder result = buffer.insert(offset, arg);
 		this.text = result.toString();
 		if (!this.notificationsSuspended) {
 			informInvalid();
@@ -99,8 +99,8 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 
 	@Override
 	public void replaceData(int offset, int count, String arg) throws DOMException {
-		final StringBuffer buffer = new StringBuffer(this.text);
-		final StringBuffer result = buffer.replace(offset, offset + count, arg);
+		final StringBuilder buffer = new StringBuilder(this.text);
+		final StringBuilder result = buffer.replace(offset, offset + count, arg);
 		this.text = result.toString();
 		if (!this.notificationsSuspended) {
 			informInvalid();

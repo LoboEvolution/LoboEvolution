@@ -118,7 +118,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
-	protected void appendInnerHTMLImpl(StringBuffer buffer) {
+	protected void appendInnerHTMLImpl(StringBuilder buffer) {
 		for (Node child : Nodes.iterable(nodeList)) {
 			if (child instanceof HTMLElementImpl) {
 				((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
@@ -134,7 +134,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
-	protected void appendInnerTextImpl(StringBuffer buffer) {
+	protected void appendInnerTextImpl(StringBuilder buffer) {
 		for (Node child : Nodes.iterable(nodeList)) {
 			if (child instanceof ElementImpl) {
 				((ElementImpl) child).appendInnerTextImpl(buffer);
@@ -411,7 +411,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 
 	public String getInnerHTML() {
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
 			appendInnerHTMLImpl(buffer);
 		}
@@ -423,7 +423,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * representation. BR elements are converted to line breaks, and so forth.
 	 */
 	public String getInnerText() {
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		synchronized (this.treeLock) {
 			appendInnerTextImpl(buffer);
 		}
@@ -606,7 +606,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	@Override
 	public String getTextContent() throws DOMException {
-		final StringBuffer sb = new StringBuffer();
+		final StringBuilder sb = new StringBuilder();
 		for (Node node : Nodes.iterable(nodeList)) {
 			final short type = node.getNodeType();
 			switch (type) {
@@ -935,7 +935,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				if (idx == -1) {
 					throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
 				}
-				final StringBuffer textBuffer = new StringBuffer();
+				final StringBuilder textBuffer = new StringBuilder();
 				int firstIdx = idx;
 				final List<Node> toDelete = new LinkedList<Node>();
 				for (int adjIdx = idx; --adjIdx >= 0;) {

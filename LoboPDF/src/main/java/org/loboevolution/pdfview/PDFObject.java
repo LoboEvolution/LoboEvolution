@@ -612,7 +612,7 @@ public class PDFObject {
     public String toString() {
         try {
             if (type == INDIRECT) {
-                StringBuffer str = new StringBuffer ();
+                StringBuilder str = new StringBuilder ();
                 str.append("Indirect to #" + ((PDFXref) value).getID());
                 try {
                     str.append("\n" + dereference().toString());
@@ -631,7 +631,7 @@ public class PDFObject {
             } else if (type == ARRAY) {
                 return "Array, length=" + ((PDFObject[]) value).length;
             } else if (type == DICTIONARY) {
-                StringBuffer sb = new StringBuffer();
+                StringBuilder sb = new StringBuilder();
                 PDFObject obj = getDictRef("Type");
                 if (obj != null) {
                     sb.append(obj.getStringValue());
@@ -665,7 +665,7 @@ public class PDFObject {
             } else if (type == KEYWORD) {
                 return "Keyword: " + getStringValue();
             /*	    } else if (type==IMAGE) {
-            StringBuffer sb= new StringBuffer();
+            StringBuilder sb= new StringBuilder();
             java.awt.Image im= (java.awt.Image)stream;
             sb.append("Image ("+im.getWidth(null)+"x"+im.getHeight(null)+", with keys:");
             HashMap hm= (HashMap)value;

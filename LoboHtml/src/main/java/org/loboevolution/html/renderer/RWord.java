@@ -52,7 +52,7 @@ final class RWord extends BaseBoundableRenderable {
 	}
 
 	@Override
-	public boolean extractSelectionText(StringBuffer buffer, boolean inSelection, RenderableSpot startPoint,
+	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		int startX = -1;
 		int endX = -1;

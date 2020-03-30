@@ -1335,7 +1335,7 @@ public class RBlockViewport extends BaseRCollection {
 			try {
 				final int length = text.length();
 				boolean firstWord = true;
-				final StringBuffer word = new StringBuffer(12);
+				final StringBuilder word = new StringBuilder(12);
 				for (int i = 0; i < length; i++) {
 					char ch = text.charAt(i);
 					if (Character.isWhitespace(ch)) {
@@ -1377,7 +1377,7 @@ public class RBlockViewport extends BaseRCollection {
 		} else {
 			final int length = text.length();
 			boolean lastCharSlashR = false;
-			final StringBuffer line = new StringBuffer();
+			final StringBuilder line = new StringBuilder();
 			for (int i = 0; i < length; i++) {
 				final char ch = text.charAt(i);
 				switch (ch) {

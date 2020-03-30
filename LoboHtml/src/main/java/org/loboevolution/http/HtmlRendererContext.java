@@ -761,7 +761,7 @@ public class HtmlRendererContext {
 		if ("GET".equals(actualMethod) && formInputs != null) {
 			boolean firstParam = true;
 			final URL noRefAction = new URL(action.getProtocol(), action.getHost(), action.getPort(), action.getFile());
-			final StringBuffer newUrlBuffer = new StringBuffer(noRefAction.toExternalForm());
+			final StringBuilder newUrlBuffer = new StringBuilder(noRefAction.toExternalForm());
 			if (action.getQuery() == null) {
 				newUrlBuffer.append("?");
 			} else {
