@@ -68,7 +68,7 @@ public class TableRenderState extends StyleSheetRenderState {
 				if (background.contains(";base64,")) {
                     final String base64 = background.split(";base64,")[1];
                     final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-                    background = new String(decodedBytes);
+                    background = String.valueOf(decodedBytes);
                 }
 				binfo.setBackgroundImage(this.document.getFullURL(background));
 			}

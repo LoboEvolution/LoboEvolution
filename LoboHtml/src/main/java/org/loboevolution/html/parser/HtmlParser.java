@@ -576,7 +576,7 @@ public class HtmlParser {
 		if (i == 0) {
 			return null;
 		} else {
-			return new String(chars, 0, i);
+			return String.valueOf(chars, 0, i);
 		}
 	}
 

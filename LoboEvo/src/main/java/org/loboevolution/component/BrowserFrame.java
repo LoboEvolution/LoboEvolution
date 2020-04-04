@@ -36,8 +36,8 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		final IWelcomePanel welcome = this.panel.getWelcome();
 		if (welcome != null) {
 			final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();
-			final int width = new Double(initialWindowBounds.getWidth()).intValue();
-			final int height = new Double(initialWindowBounds.getHeight()).intValue();
+			final int width = Double.valueOf(initialWindowBounds.getWidth()).intValue();
+			final int height = Double.valueOf(initialWindowBounds.getHeight()).intValue();
 			final Dimension dim = new Dimension(width, height);
 			welcome.setSize(dim);
 			welcome.setPreferredSize(dim);

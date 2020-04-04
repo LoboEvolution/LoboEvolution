@@ -37,7 +37,7 @@ class RListItem extends BaseRListElement {
 	private static final int BULLET_HEIGHT = 5;
 	private static final int BULLET_RMARGIN = 5;
 	private static final int BULLET_WIDTH = 5;
-	private static final Integer UNSET = new Integer(Integer.MIN_VALUE);
+	private static final Integer UNSET = Integer.valueOf(Integer.MIN_VALUE);
 
 	private int count;
 

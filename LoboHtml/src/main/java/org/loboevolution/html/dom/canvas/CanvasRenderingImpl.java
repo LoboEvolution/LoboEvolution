@@ -200,7 +200,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		if (token != null) {
 			final int slashIdx = token.indexOf('/');
 			final String fontSizeText = slashIdx == -1 ? token : token.substring(0, slashIdx);
-			int errorValue = new Float(new LAFSettings().getInstance().getFontSize()).intValue();
+			int errorValue = Float.valueOf(new LAFSettings().getInstance().getFontSize()).intValue();
 			key.setFontSize(HtmlValues.getPixelSize(fontSizeText, null, errorValue));
 			if (++i < length) {
 				final StringBuilder fontFamilyBuff = new StringBuilder();

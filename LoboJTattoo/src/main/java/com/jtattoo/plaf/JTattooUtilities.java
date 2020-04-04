@@ -331,7 +331,7 @@ public class JTattooUtilities {
 						version += ver.charAt(i);
 					}
 				}
-				javaVersion = new Double(version);
+				javaVersion = Double.valueOf(version);
 			} catch (NumberFormatException ex) {
 				javaVersion = 1.3;
 			}
@@ -355,7 +355,7 @@ public class JTattooUtilities {
 						version += ver.charAt(i);
 					}
 				}
-				osVersion = new Double(version);
+				osVersion = Double.valueOf(version);
 			} catch (NumberFormatException ex) {
 				osVersion = 1.0;
 			}

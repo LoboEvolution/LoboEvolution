@@ -292,7 +292,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 *      interface Definition</a>
 	 */
 	public void clearInterval(int aTimerID) {
-		final Integer key = new Integer(aTimerID);
+		final Integer key = Integer.valueOf(aTimerID);
 		forgetTask(key, true);
 	}
 
@@ -316,7 +316,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	public void clearTimeout(int timeoutID) {
-		final Integer key = new Integer(timeoutID);
+		final Integer key = Integer.valueOf(timeoutID);
 		forgetTask(key, true);
 	}
 
@@ -798,7 +798,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		final ActionListener task = new FunctionTimerTask(this, timeIDInt, aFunction, false);
 		int t = (int) aTimeInMs;
 		if (t < 1) {
@@ -825,7 +825,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + aTimeInMs + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		final ActionListener task = new ExpressionTimerTask(this, timeIDInt, aExpression, false);
 		int t = (int) aTimeInMs;
 		if (t < 1) {
@@ -886,7 +886,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		final ActionListener task = new FunctionTimerTask(this, timeIDInt, function, true);
 		int t = (int) millis;
 		if (t < 1) {
@@ -907,7 +907,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
 		}
 		final int timeID = generateTimerID();
-		final Integer timeIDInt = new Integer(timeID);
+		final Integer timeIDInt = Integer.valueOf(timeID);
 		final ActionListener task = new ExpressionTimerTask(this, timeIDInt, expr, true);
 		int t = (int) millis;
 		if (t < 1) {

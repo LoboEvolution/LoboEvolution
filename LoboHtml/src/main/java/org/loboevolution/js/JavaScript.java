@@ -73,17 +73,17 @@ public class JavaScript {
 			}
 		} else if (type == int.class || type == Integer.class) {
 			if (javascriptObject instanceof Double) {
-				return new Integer(((Double) javascriptObject).intValue());
+				return Integer.valueOf(((Double) javascriptObject).intValue());
 			} else if (javascriptObject instanceof Integer) {
 				return javascriptObject;
 			} else if (javascriptObject instanceof String) {
 				return Integer.valueOf((String) javascriptObject);
 			} else if (javascriptObject instanceof Short) {
-				return new Integer(((Short) javascriptObject).shortValue());
+				return Integer.valueOf(((Short) javascriptObject).shortValue());
 			} else if (javascriptObject instanceof Long) {
-				return new Integer(((Long) javascriptObject).intValue());
+				return Integer.valueOf(((Long) javascriptObject).intValue());
 			} else if (javascriptObject instanceof Float) {
-				return new Integer(((Float) javascriptObject).intValue());
+				return Integer.valueOf(((Float) javascriptObject).intValue());
 			} else {
 				return javascriptObject;
 			}

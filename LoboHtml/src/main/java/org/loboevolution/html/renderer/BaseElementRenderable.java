@@ -55,7 +55,7 @@ import org.w3c.dom.css.CSS3Properties;
 
 public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver {
-	protected static final Integer INVALID_SIZE = new Integer(Integer.MIN_VALUE);
+	protected static final Integer INVALID_SIZE = Integer.valueOf(Integer.MIN_VALUE);
 
 	protected static final int SCROLL_BAR_THICKNESS = 16;
 
@@ -404,7 +404,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (dh == INVALID_SIZE || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			final int dhInt = getDeclaredHeightImpl(renderState, actualAvailHeight);
-			dh = dhInt == -1 ? null : new Integer(dhInt);
+			dh = dhInt == -1 ? null : Integer.valueOf(dhInt);
 			this.declaredHeight = dh;
 		}
 		return dh;
@@ -459,7 +459,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (dw == INVALID_SIZE || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			final int dwInt = getDeclaredWidthImpl(renderState, actualAvailWidth);
-			dw = dwInt == -1 ? null : new Integer(dwInt);
+			dw = dwInt == -1 ? null : Integer.valueOf(dwInt);
 			this.declaredWidth = dw;
 		}
 		return dw;

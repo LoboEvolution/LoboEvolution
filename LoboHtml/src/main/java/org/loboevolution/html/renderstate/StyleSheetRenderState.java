@@ -411,7 +411,7 @@ public class StyleSheetRenderState implements RenderState {
 			displayInt = this.getDefaultDisplay();
 			break;
 		}
-		this.iDisplay = new Integer(displayInt);
+		this.iDisplay = Integer.valueOf(displayInt);
 		return displayInt;
 	}
 
@@ -910,7 +910,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 			break;
 		}
-		this.iWhiteSpace = new Integer(wsValue);
+		this.iWhiteSpace = Integer.valueOf(wsValue);
 		return wsValue;
 	}
 
@@ -957,7 +957,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final Integer integer = (Integer) counterArray.get(nesting);
 		final int prevValue = integer == null ? 0 : integer.intValue();
-		counterArray.set(nesting, new Integer(prevValue + 1));
+		counterArray.set(nesting, Integer.valueOf(prevValue + 1));
 		return prevValue;
 	}
 
@@ -1017,7 +1017,7 @@ public class StyleSheetRenderState implements RenderState {
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}
-			counterArray.set(nesting, new Integer(value));
+			counterArray.set(nesting, Integer.valueOf(value));
 		}
 	}
 
@@ -1042,13 +1042,13 @@ public class StyleSheetRenderState implements RenderState {
 			CSSValues clear = CSSValues.get(clearStr);
 			switch (clear) {
 			case RIGHT:
-				cachedClear = new Integer(LineBreak.RIGHT);
+				cachedClear = Integer.valueOf(LineBreak.RIGHT);
 				break;
 			case LEFT:
-				cachedClear = new Integer(LineBreak.LEFT);
+				cachedClear = Integer.valueOf(LineBreak.LEFT);
 				break;
 			default:
-				cachedClear = new Integer(LineBreak.NONE);
+				cachedClear = Integer.valueOf(LineBreak.NONE);
 				break;
 			}
 		}
@@ -1342,7 +1342,7 @@ public class StyleSheetRenderState implements RenderState {
            	if (quotedUri.contains(";base64,")) {
    				final String base64 = backgroundImageText.split(";base64,")[1];
    				final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-   				quotedUri = new String(decodedBytes);
+   				quotedUri = String.valueOf(decodedBytes);
            	}
                binfo.setBackgroundImage(document.getFullURL(quotedUri));
            }
