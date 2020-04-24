@@ -50,7 +50,7 @@ public class Navigator extends AbstractScriptableDelegate {
 	}
 
 	public String getAppVersion() {
-		return "0.99.3";
+		return "1.0";
 	}
 
 	public String getPlatform() {
