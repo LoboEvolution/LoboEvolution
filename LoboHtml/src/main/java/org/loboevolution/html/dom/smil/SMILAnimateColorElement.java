@@ -22,7 +22,10 @@
 package org.loboevolution.html.dom.smil;
 
 /**
- * This interface represents the SMIL <code>animateColor</code> element.
+ * This interface represents the SMIL animateColor element.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILAnimateColorElement extends SMILAnimation {
 }

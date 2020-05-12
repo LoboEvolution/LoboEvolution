@@ -36,18 +36,18 @@ SOFTWARE.
 /**
  * A JSON Pointer is a simple query language defined for JSON documents by
  * <a href="https://tools.ietf.org/html/rfc6901">RFC 6901</a>.
- * 
+ *
  * In a nutshell, JSONPointer allows the user to navigate into a JSON document
  * using strings, and retrieve targeted objects, like a simple form of XPATH.
  * Path segments are separated by the '/' char, which signifies the root of
- * the document when it appears as the first char of the string. Array 
+ * the document when it appears as the first char of the string. Array
  * elements are navigated using ordinals, counting from 0. JSONPointer strings
  * may be extended to any arbitrary number of segments. If the navigation
  * is successful, the matched item is returned. A matched item may be a
- * JSONObject, a JSONArray, or a JSON value. If the JSONPointer string building 
+ * JSONObject, a JSONArray, or a JSON value. If the JSONPointer string building
  * fails, an appropriate exception is thrown. If the navigation fails to find
- * a match, a JSONPointerException is thrown. 
- * 
+ * a match, a JSONPointerException is thrown.
+ *
  * @author JSON.org
  * @version 2016-05-14
  */
@@ -67,6 +67,7 @@ public class JSONPointer {
 
         /**
          * Creates a {@code JSONPointer} instance using the tokens previously set using the
+         *  @return {@code this}
          * {@link #append(String)} method calls.
          */
         public JSONPointer build() {
@@ -107,19 +108,18 @@ public class JSONPointer {
     }
 
     /**
-     * Static factory method for {@link Builder}. Example usage:
-     * 
-     * <pre><code>
+     * Static factory method for {@link org.json.JSONPointer.Builder}. Example usage:
+     *
+     * <pre>
      * JSONPointer pointer = JSONPointer.builder()
      *       .append("obj")
      *       .append("other~key").append("another/key")
      *       .append("\"")
      *       .append(0)
      *       .build();
-     * </code></pre>
-     * 
-     *  @return a builder instance which can be used to construct a {@code JSONPointer} instance by chained
-     *  {@link Builder#append(String)} calls.
+     * </pre>
+     *
+     * @return a {@link org.json.JSONPointer.Builder} object.
      */
     public static Builder builder() {
         return new Builder();
@@ -132,9 +132,9 @@ public class JSONPointer {
      * Pre-parses and initializes a new {@code JSONPointer} instance. If you want to
      * evaluate the same JSON Pointer on different JSON documents then it is recommended
      * to keep the {@code JSONPointer} instances due to performance considerations.
-     * 
+     *
      * @param pointer the JSON String or URI Fragment representation of the JSON pointer.
-     * @throws IllegalArgumentException if {@code pointer} is not a valid JSON pointer
+     * @throws java.lang.IllegalArgumentException if {@code pointer} is not a valid JSON pointer
      */
     public JSONPointer(final String pointer) {
         if (pointer == null) {
@@ -163,6 +163,11 @@ public class JSONPointer {
         }
     }
 
+    /**
+     * <p>Constructor for JSONPointer.</p>
+     *
+     * @param refTokens a {@link java.util.List} object.
+     */
     public JSONPointer(List<String> refTokens) {
         this.refTokens = new ArrayList<String>(refTokens);
     }
@@ -175,13 +180,13 @@ public class JSONPointer {
 
     /**
      * Evaluates this JSON Pointer on the given {@code document}. The {@code document}
-     * is usually a {@link JSONObject} or a {@link JSONArray} instance, but the empty
+     * is usually a {@link org.json.JSONObject} or a {@link org.json.JSONArray} instance, but the empty
      * JSON Pointer ({@code ""}) can be evaluated on any JSON values and in such case the
-     * returned value will be {@code document} itself. 
-     * 
+     * returned value will be {@code document} itself.
+     *
      * @param document the JSON document which should be the subject of querying.
      * @return the result of the evaluation
-     * @throws JSONPointerException if an error occurs during evaluation
+     * @throws org.json.JSONPointerException if an error occurs during evaluation
      */
     public Object queryFrom(Object document) throws JSONPointerException {
         if (this.refTokens.isEmpty()) {
@@ -228,6 +233,8 @@ public class JSONPointer {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns a string representing the JSONPointer path value using string
      * representation
      */
@@ -258,6 +265,8 @@ public class JSONPointer {
     /**
      * Returns a string representing the JSONPointer path value using URI
      * fragment identifier representation
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String toURIFragment() {
         try {

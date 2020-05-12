@@ -39,29 +39,40 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLOptGroupElement extends HTMLElement {
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getDisabled();
 
 	/**
 	 * Assigns a label to this option group. See the label attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getLabel();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param disabled a boolean.
 	 */
 	void setDisabled(boolean disabled);
 
 	/**
 	 * Assigns a label to this option group. See the label attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param label a {@link java.lang.String} object.
 	 */
 	void setLabel(String label);
 

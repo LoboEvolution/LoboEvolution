@@ -44,7 +44,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>HiFiBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiBorders extends BaseBorders {
 
@@ -327,6 +330,11 @@ public class HiFiBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -334,6 +342,11 @@ public class HiFiBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -341,6 +354,11 @@ public class HiFiBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -348,6 +366,11 @@ public class HiFiBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getScrollPaneBorder() {
 		if (scrollPaneBorder == null) {
 			scrollPaneBorder = new ScrollPaneBorder();
@@ -355,6 +378,11 @@ public class HiFiBorders extends BaseBorders {
 		return scrollPaneBorder;
 	}
 
+	/**
+	 * <p>getTableScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTableScrollPaneBorder() {
 		if (tableScrollPaneBorder == null) {
 			tableScrollPaneBorder = new ScrollPaneBorder();
@@ -362,10 +390,20 @@ public class HiFiBorders extends BaseBorders {
 		return tableScrollPaneBorder;
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}
 
+	/**
+	 * <p>getToolBarBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToolBarBorder() {
 		if (toolBarBorder == null) {
 			toolBarBorder = new ToolBarBorder();

@@ -22,6 +22,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The public interface ImageData.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ImageData {
 

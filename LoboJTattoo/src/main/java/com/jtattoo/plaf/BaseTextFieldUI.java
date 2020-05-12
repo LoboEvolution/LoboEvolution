@@ -44,10 +44,14 @@ import javax.swing.plaf.metal.MetalTextFieldUI;
 import javax.swing.text.DefaultEditorKit;
 
 /**
+ * <p>BaseTextFieldUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseTextFieldUI extends MetalTextFieldUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseTextFieldUI();
 	}
@@ -56,6 +60,7 @@ public class BaseTextFieldUI extends MetalTextFieldUI {
 
 	private FocusListener focusListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installKeyboardActions() {
 		super.installKeyboardActions();
@@ -72,6 +77,7 @@ public class BaseTextFieldUI extends MetalTextFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -109,6 +115,7 @@ public class BaseTextFieldUI extends MetalTextFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g) {
 		g.setColor(getComponent().getBackground());
@@ -123,6 +130,7 @@ public class BaseTextFieldUI extends MetalTextFieldUI {
 		g.fillRect(0, 0, getComponent().getWidth(), getComponent().getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintSafely(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -138,6 +146,7 @@ public class BaseTextFieldUI extends MetalTextFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		getComponent().removeFocusListener(focusListener);

@@ -41,14 +41,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseButtonUI;
 
 /**
+ * <p>LunaButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaButtonUI extends BaseButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new LunaButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		int w = b.getWidth();
@@ -78,6 +83,7 @@ public class LunaButtonUI extends BaseButtonUI {
 		g2D.setClip(savedClip);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
 			Rectangle iconRect) {

@@ -10,32 +10,48 @@ import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGEllipseElement;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 
+/**
+ * <p>SVGEllipseElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseElement {
 
+	/**
+	 * <p>Constructor for SVGEllipseElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGEllipseElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getCx() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("cx")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getCy() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("cy")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getRx() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("rx")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getRy() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("ry")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
@@ -44,6 +60,7 @@ public class SVGEllipseElementImpl extends SVGGraphic implements SVGEllipseEleme
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		AffineTransform inverseTransform;

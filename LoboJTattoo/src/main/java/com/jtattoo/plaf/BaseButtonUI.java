@@ -47,24 +47,34 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
 /**
+ * <p>BaseButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseButtonUI extends BasicButtonUI {
 
+	/** Constant viewRect */
 	protected static Rectangle viewRect = new Rectangle();
+	/** Constant textRect */
 	protected static Rectangle textRect = new Rectangle();
+	/** Constant iconRect */
 	protected static Rectangle iconRect = new Rectangle();
+	/** Constant defaultColors */
 	protected static Color[] defaultColors = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected BasicButtonListener createButtonListener(AbstractButton b) {
 		return new BaseButtonListener(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
@@ -72,6 +82,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		b.setRolloverEnabled(true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installKeyboardActions(AbstractButton b) {
 		super.installKeyboardActions(b);
@@ -85,6 +96,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -148,6 +160,12 @@ public class BaseButtonUI extends BasicButtonUI {
 		}
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param b a {@link javax.swing.AbstractButton} object.
+	 */
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
@@ -201,6 +219,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
 			Rectangle iconRect) {
@@ -208,6 +227,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		BasicGraphicsUtils.drawDashedRect(g, 4, 3, b.getWidth() - 8, b.getHeight() - 6);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
 		ButtonModel model = b.getModel();
@@ -253,6 +273,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallDefaults(AbstractButton b) {
 		super.uninstallDefaults(b);

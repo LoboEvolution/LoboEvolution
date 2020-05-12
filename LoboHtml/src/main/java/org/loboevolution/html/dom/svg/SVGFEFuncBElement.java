@@ -20,5 +20,11 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEFuncBElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEFuncBElement extends SVGComponentTransferFunctionElement {
 }

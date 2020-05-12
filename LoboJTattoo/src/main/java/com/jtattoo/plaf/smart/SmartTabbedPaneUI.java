@@ -36,13 +36,18 @@ import com.jtattoo.plaf.BaseTabbedPaneUI;
 
 /**
  * author Michael Hagen
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new SmartTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color getGapColor(int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex()) {
@@ -51,6 +56,7 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 		return super.getGapColor(tabIndex);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Font getTabFont(boolean isSelected) {
 		if (isSelected) {
@@ -60,11 +66,13 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean hasInnerBorder() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();
@@ -72,6 +80,7 @@ public class SmartTabbedPaneUI extends BaseTabbedPaneUI {
 		contentBorderInsets = new Insets(0, 0, 0, 0);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 			boolean isSelected) {

@@ -11,17 +11,30 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
+/**
+ * <p>ToolBar class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ToolBar extends JToolBar implements IToolBar {
 
 	private static final long serialVersionUID = 1L;
 
 	private JTextField addressBar;
 
+	/**
+	 * <p>Constructor for ToolBar.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.BrowserPanel} object.
+	 */
 	public ToolBar(BrowserPanel panel) {
 		init(panel);
 	}
 
 	/**
+	 * <p>Getter for the field addressBar.</p>
+	 *
 	 * @return the addressBar
 	 */
 	public JTextField getAddressBar() {

@@ -42,6 +42,9 @@ import org.loboevolution.laf.LAFSettings;
 
 /**
  * The Class LookAndFeelsSettingsUI.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
@@ -121,6 +124,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	/** The Underline Box. */
 	private final JCheckBox underlineCheckBox;
 
+	/**
+	 * <p>Constructor for LookAndFeelsSettingsUI.</p>
+	 */
 	public LookAndFeelsSettingsUI() {
 
 		final JPanel groupBox = new JPanel();
@@ -274,6 +280,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		return p;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void restoreDefaults() {
 		this.acrylCheckBox.setSelected(false);
@@ -327,6 +334,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void save() {
 		final LAFSettings laf = new LAFSettings();

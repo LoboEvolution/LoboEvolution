@@ -27,36 +27,53 @@ import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+/**
+ * <p>CommentImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CommentImpl extends CharacterDataImpl implements Comment {
+	/**
+	 * <p>Constructor for CommentImpl.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 */
 	public CommentImpl(String text) {
 		super(text);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Node createSimilarNode() {
 		return new CommentImpl(this.text);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return "#comment";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getNodeType() {
 		return Node.COMMENT_NODE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() throws DOMException {
 		return getTextContent();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
 		setTextContent(nodeValue);

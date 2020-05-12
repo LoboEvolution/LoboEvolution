@@ -33,7 +33,10 @@ import com.jtattoo.plaf.BaseSplitPaneDivider;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AluminiumSplitPaneDivider class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
 
@@ -42,10 +45,16 @@ public class AluminiumSplitPaneDivider extends BaseSplitPaneDivider {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for AluminiumSplitPaneDivider.</p>
+	 *
+	 * @param ui a {@link com.jtattoo.plaf.aluminium.AluminiumSplitPaneUI} object.
+	 */
 	public AluminiumSplitPaneDivider(AluminiumSplitPaneUI ui) {
 		super(ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		if (JTattooUtilities.isMac() || !AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {

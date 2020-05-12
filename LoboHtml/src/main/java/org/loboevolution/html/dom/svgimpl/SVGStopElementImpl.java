@@ -3,12 +3,24 @@ package org.loboevolution.html.dom.svgimpl;
 import org.loboevolution.html.dom.svg.SVGAnimatedNumber;
 import org.loboevolution.html.dom.svg.SVGStopElement;
 
+/**
+ * <p>SVGStopElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGStopElementImpl extends SVGGraphic implements SVGStopElement {
 
+	/**
+	 * <p>Constructor for SVGStopElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGStopElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedNumber getOffset() {
 		final String value = this.getAttribute("offset");

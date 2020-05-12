@@ -29,14 +29,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseRootPaneUI;
 
 /**
+ * <p>HiFiRootPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiRootPaneUI extends BaseRootPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiRootPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JComponent createTitlePane(JRootPane root) {
 		return new HiFiTitlePane(root, this);

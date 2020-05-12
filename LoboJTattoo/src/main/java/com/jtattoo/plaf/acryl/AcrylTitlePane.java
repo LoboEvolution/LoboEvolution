@@ -41,7 +41,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AcrylTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylTitlePane extends BaseTitlePane {
 
@@ -192,25 +195,35 @@ public class AcrylTitlePane extends BaseTitlePane {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for AcrylTitlePane.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 */
 	public AcrylTitlePane(JRootPane root, BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public LayoutManager createLayout() {
 		return new TitlePaneLayout();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getHorSpacing() {
 		return 1;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getVerSpacing() {
 		return 3;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {
@@ -221,6 +234,7 @@ public class AcrylTitlePane extends BaseTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();

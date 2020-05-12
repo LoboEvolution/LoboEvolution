@@ -9,6 +9,9 @@ import org.loboevolution.common.WrapperLayout;
 
 /**
  * The Class PreferencesPanel.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class PreferencesPanel extends JPanel {
 

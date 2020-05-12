@@ -22,21 +22,71 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGPathSegCurvetoCubicSmoothRel interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPathSegCurvetoCubicSmoothRel extends SVGPathSeg {
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX();
 
+	/**
+	 * <p>setX.</p>
+	 *
+	 * @param x a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setX(float x) throws DOMException;
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a float.
+	 */
 	float getY();
 
+	/**
+	 * <p>setY.</p>
+	 *
+	 * @param y a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setY(float y) throws DOMException;
 
+	/**
+	 * <p>getX2.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX2();
 
+	/**
+	 * <p>setX2.</p>
+	 *
+	 * @param x2 a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setX2(float x2) throws DOMException;
 
+	/**
+	 * <p>getY2.</p>
+	 *
+	 * @return a float.
+	 */
 	float getY2();
 
+	/**
+	 * <p>setY2.</p>
+	 *
+	 * @param y2 a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setY2(float y2) throws DOMException;
 }

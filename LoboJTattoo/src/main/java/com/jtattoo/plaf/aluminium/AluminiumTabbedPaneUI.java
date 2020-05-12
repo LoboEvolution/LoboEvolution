@@ -37,17 +37,22 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AluminiumTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 
 	private static Color TOP_SELECTED_TAB_COLORS[] = null;
 	private static Color BOTTOM_SELECTED_TAB_COLORS[] = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AluminiumTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
 		Color backColor = tabPane.getBackgroundAt(tabIndex);
@@ -61,6 +66,7 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 		return super.getTabColors(tabIndex, isSelected, isRollover);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Font getTabFont(boolean isSelected) {
 		if (isSelected) {
@@ -70,11 +76,13 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean hasInnerBorder() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();
@@ -87,6 +95,7 @@ public class AluminiumTabbedPaneUI extends BaseTabbedPaneUI {
 		BOTTOM_SELECTED_TAB_COLORS = ColorHelper.createColorArr(c, cLo, 20);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 			boolean isSelected) {

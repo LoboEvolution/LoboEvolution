@@ -25,76 +25,120 @@ import org.w3c.dom.DOMException;
 
 /**
  * Defines the test attributes interface. See the Test attributes definition .
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ElementTest {
 	/**
 	 * The systemBitrate value.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a int.
 	 */
 	public int getSystemBitrate();
 
+	/**
+	 * <p>setSystemBitrate.</p>
+	 *
+	 * @param systemBitrate a int.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setSystemBitrate(int systemBitrate) throws DOMException;
 
 	/**
 	 * The systemCaptions value.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a boolean.
 	 */
 	public boolean getSystemCaptions();
 
+	/**
+	 * <p>setSystemCaptions.</p>
+	 *
+	 * @param systemCaptions a boolean.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setSystemCaptions(boolean systemCaptions) throws DOMException;
 
 	/**
 	 * The systemLanguage value.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getSystemLanguage();
 
+	/**
+	 * <p>setSystemLanguage.</p>
+	 *
+	 * @param systemLanguage a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setSystemLanguage(String systemLanguage) throws DOMException;
 
 	/**
 	 * The result of the evaluation of the systemRequired attribute.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean getSystemRequired();
 
 	/**
 	 * The result of the evaluation of the systemScreenSize attribute.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean getSystemScreenSize();
 
 	/**
 	 * The result of the evaluation of the systemScreenDepth attribute.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean getSystemScreenDepth();
 
 	/**
 	 * The value of the systemOverdubOrSubtitle attribute.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getSystemOverdubOrSubtitle();
 
+	/**
+	 * <p>setSystemOverdubOrSubtitle.</p>
+	 *
+	 * @param systemOverdubOrSubtitle a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setSystemOverdubOrSubtitle(String systemOverdubOrSubtitle) throws DOMException;
 
 	/**
 	 * The value of the systemAudioDesc attribute.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a boolean.
 	 */
 	public boolean getSystemAudioDesc();
 
+	/**
+	 * <p>setSystemAudioDesc.</p>
+	 *
+	 * @param systemAudioDesc a boolean.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setSystemAudioDesc(boolean systemAudioDesc) throws DOMException;
 
 }

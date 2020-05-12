@@ -39,6 +39,12 @@ import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.laf.LAFType;
 import org.loboevolution.net.HttpNetwork;
 
+/**
+ * <p>CanvasRenderingImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	
 	/** The canvas. */
@@ -113,6 +119,11 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
     /** The shadow offset y*/
     private Integer shadowOffsetY;
 
+	/**
+	 * <p>Constructor for CanvasRenderingImpl.</p>
+	 *
+	 * @param canvas a {@link org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl} object.
+	 */
 	public CanvasRenderingImpl(HTMLCanvasElementImpl canvas) {
 		this.canvas = canvas;
 		image = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -136,16 +147,19 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
         baseline = "alphabetic";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCanvasElement getCanvas() {
 		return this.canvas;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getFillStyle() {
 		return fillStyle;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFillStyle(Object style) {
 		if (style instanceof CanvasGradient) {
@@ -158,6 +172,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
 		if (this.font == null) {
@@ -168,6 +183,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		return this.font;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFont(String fontSpec) {
 		FontKey key = new FontKey();
@@ -215,11 +231,13 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		this.font = FontFactory.getInstance().getFont(key);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Double getGlobalAlpha() {
 		return globalAlpha.doubleValue();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setGlobalAlpha(Double globalAlpha) {
 		if (globalAlpha >= 0 && globalAlpha <= 1) {
@@ -229,17 +247,20 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
         }
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getGlobalCompositeOperation() {
 		return globalCompositeOperation;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setGlobalCompositeOperation(String op) {
 		globalCompositeOperation = op;
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLineCap() {
 		switch (intLineCap) {
@@ -252,6 +273,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLineCap(String lineCap) {
 		switch (lineCap) {
@@ -267,6 +289,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLineJoin() {
 		switch (intlineJoin) {
@@ -279,6 +302,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLineJoin(String lineJoin) {
 		switch (lineJoin) {
@@ -294,71 +318,85 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLineWidth() {
 		return lineWidth;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLineWidth(int lw) {
 		lineWidth = lw;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMiterLimit() {
 		return miterLimit;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setMiterLimit(int ml) {
 		miterLimit = ml;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getShadowBlur() {
 		return shadowBlur == null ? 6 : shadowBlur;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setShadowBlur(int shadowBlur) {
 		this.shadowBlur = shadowBlur;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getShadowColor() {
 		return Strings.isBlank(shadowColor) ? "black" : shadowColor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setShadowColor(String shadowColor) {
 		this.shadowColor = shadowColor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getShadowOffsetX() {
 		return shadowOffsetX == null ? 0 : shadowOffsetX;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setShadowOffsetX(int shadowOffsetX) {
 		this.shadowOffsetX = shadowOffsetX;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getShadowOffsetY() {
 		return shadowOffsetY == null ? 0 : shadowOffsetY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setShadowOffsetY(int shadowOffsetY) {
 		this.shadowOffsetY = shadowOffsetY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getStrokeStyle() {
 		return strokeStyle;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setStrokeStyle(Object style) {
 		if (style instanceof CanvasGradient) {
@@ -371,58 +409,69 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTextAlign() {
 		return textAlign;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTextAlign(String textAlign) {
 		this.textAlign = textAlign;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTextBaseline() {
 		return baseline;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTextBaseline(String bs) {
 		baseline = bs;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void arc(int x, int y, int radius, int startAngle, int endAngle) {
 		path.append(buildArc(x, y, radius, startAngle, endAngle, false), true);
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void arc(int x, int y, int radius, int startAngle, int endAngle, boolean anticlockwise) {
 		path.append(buildArc(x, y, radius, startAngle, endAngle, anticlockwise), true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void arcTo(int x1, int y1, int x2, int y2, int radius) {
 		// TODO Auto-generated method stub
 
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void ellipse(int x, int y, int radiusX, int radiusY, int rotation, int startAngle, int endAngle) {
 		// TODO Auto-generated method stub
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void ellipse(int x, int y, int radiusX, int radiusY, int rotation, int startAngle, int endAngle, boolean anticlockwise) {
 		// TODO Auto-generated method stub
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void beginPath() {
 		path = new GeneralPath();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void bezierCurveTo(int cp1x, int cp1y, int cp2x, int cp2y, int x, int y) {
 		Graphics2D graphics = createGraphics();
@@ -431,6 +480,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		path.curveTo(xy[0], xy[1], xy[2], xy[3], xy[4], xy[5]);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clearRect(int x, int y, int width, int height) {
 		Graphics2D graphics = createGraphics();
@@ -438,11 +488,13 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clearShadow() {
 		setShadowBlur(0);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clip() {
 		Graphics2D graphics = createGraphics();
@@ -452,31 +504,37 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		graphics.setTransform(t);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void closePath() {
 		path.closePath();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CanvasGradient createLinearGradient(Object x0, Object y0, Object x1, Object y1) {
 		return new CanvasGradientImpl(x0, y0, x1, y1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CanvasPattern createPattern(HTMLCanvasElement canvas, String repetitionType) {
 		return new CanvasPatternImpl(canvas, repetitionType);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CanvasPattern createPattern(HTMLImageElement image, String repetitionType) {
 		return new CanvasPatternImpl(image, repetitionType);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CanvasGradient createRadialGradient(Object x0, Object y0, Object r0, Object x1, Object y1, Object r1) {
 		return new CanvasGradientImpl(x0, y0, x1, y1, r0, r1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void drawImage(Object oImage, Integer x, Integer y) {
 		if (oImage instanceof HTMLImageElementImpl) {
@@ -489,6 +547,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void drawImage(Object oImage, Integer x, Integer y, Integer width, Integer height) {
 		if (oImage instanceof HTMLImageElementImpl) {
@@ -500,6 +559,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void drawImage(Object oImage, Integer sx, Integer sy, Integer sw, Integer sh, Integer dx, Integer dy, Integer dw, Integer dh) {
 		if (oImage instanceof HTMLImageElementImpl) {
@@ -516,6 +576,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void fill() {
 		Graphics2D graphics = createGraphics();
@@ -529,6 +590,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		graphics.fill(path);	
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void fillRect(int x, int y, int width, int height) {
 		Graphics2D graphics = createGraphics();
@@ -546,12 +608,14 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		graphics.fillRect(x, y, width, height);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void fillText(String text, int x, int y) {
 		fillText(text, x, y, 0);
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void fillText(String text, int x, int y, int maxWidth) {
 		Graphics2D graphics = createGraphics();
@@ -564,23 +628,27 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		graphics.drawString(text, f.x, f.y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public ImageData getImageData(int sx, int sy, int sw, int sh) {
 		final ImageDataImpl imageData = new ImageDataImpl(image, sx, sy, sw, sh);
         return imageData;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isPointInPath(int x, int y) {
 		Point2D p = new Point2D.Float(x, y);
 		return path.contains(p);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void lineTo(int x, int y) {
 		path.lineTo(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TextMetrics measureText(String text) {
 		Graphics2D graphics = createGraphics();
@@ -589,6 +657,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		return new CanvasTextMetricsImpl(rect.getWidth(), rect.getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void moveTo(int x, int y) {
 		Graphics2D graphics = createGraphics();
@@ -597,16 +666,19 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		path.moveTo((float) p.getX(), (float) p.getY());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void putImageData(ImageData imagedata, int dx, int dy) {
 		// TODO Auto-generated method stub
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void putImageData(ImageData imagedata, int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight) {
 		// TODO Auto-generated method stub
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void quadraticCurveTo(int cpx, int cpy, int x, int y) {
 		Graphics2D graphics = createGraphics();
@@ -615,38 +687,45 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		path.quadTo(xy[0], xy[1], xy[2], xy[3]);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void rect(int x, int y, int width, int height) {
 		path.append(new Rectangle2D.Double(x, y, width, height), true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void restore() {
 		// TODO Auto-generated method stub
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void rotate(double angle) {
 		rotate = angle;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void save() {
 		// TODO Auto-generated method stub
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void scale(int sx, int sy) {
 		scaleX = sx;
 		scaleY = sy;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTransform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
 		transform(m11, m12, m21, m22, dx, dy);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void stroke() {
 		Graphics2D graphics = createGraphics();
@@ -660,11 +739,13 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		graphics.draw(path);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void strokeRect(int x, int y, int width, int height) {
 		strokeRect(x, y, width, height, lineWidth);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void strokeRect(int x, int y, int width, int height, int lineWidth) {
 		Graphics2D graphics = createGraphics();
@@ -684,11 +765,13 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void strokeText(String text, int x, int y) {
 		strokeText(text, x, y, 0);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void strokeText(String text, int x, int y, int maxWidth) {
 		Graphics2D graphics = createGraphics();
@@ -706,11 +789,13 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 		graphics.draw(outline);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void transform(Double m11, Double m12, Double m21, Double m22, Double dx, Double dy) {
 		affineTransform = new AffineTransform(m11, m12, m21, m22, dx, dy);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void translate(int tx, int ty) {
 		translateX = tx;
@@ -718,6 +803,8 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	}
 	
 	/**
+	 * <p>Getter for the field image.</p>
+	 *
 	 * @return the image
 	 */
 	public BufferedImage getImage() {

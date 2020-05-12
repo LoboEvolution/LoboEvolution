@@ -20,19 +20,46 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGTextPathElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGTextPathElement extends SVGTextContentElement, SVGURIReference {
 	// textPath Method Types
+	/** Constant TEXTPATH_METHODTYPE_UNKNOWN=0 */
 	static final short TEXTPATH_METHODTYPE_UNKNOWN = 0;
+	/** Constant TEXTPATH_METHODTYPE_ALIGN=1 */
 	static final short TEXTPATH_METHODTYPE_ALIGN = 1;
+	/** Constant TEXTPATH_METHODTYPE_STRETCH=2 */
 	static final short TEXTPATH_METHODTYPE_STRETCH = 2;
 	// textPath Spacing Types
+	/** Constant TEXTPATH_SPACINGTYPE_UNKNOWN=0 */
 	static final short TEXTPATH_SPACINGTYPE_UNKNOWN = 0;
+	/** Constant TEXTPATH_SPACINGTYPE_AUTO=1 */
 	static final short TEXTPATH_SPACINGTYPE_AUTO = 1;
+	/** Constant TEXTPATH_SPACINGTYPE_EXACT=2 */
 	static final short TEXTPATH_SPACINGTYPE_EXACT = 2;
 
+	/**
+	 * <p>getStartOffset.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getStartOffset();
 
+	/**
+	 * <p>getMethod.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getMethod();
 
+	/**
+	 * <p>getSpacing.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getSpacing();
 }

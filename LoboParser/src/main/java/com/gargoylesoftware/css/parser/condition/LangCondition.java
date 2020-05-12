@@ -20,8 +20,10 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
+ * <p>LangCondition class.</p>
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class LangCondition extends AbstractLocatable implements Condition, Serializable {
 
@@ -30,6 +32,7 @@ public class LangCondition extends AbstractLocatable implements Condition, Seria
 
     /**
      * Ctor.
+     *
      * @param lang the language
      * @param locator the locato
      */
@@ -38,27 +41,25 @@ public class LangCondition extends AbstractLocatable implements Condition, Seria
         setLocator(locator);
     }
 
+    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.LANG_CONDITION;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getLocalName() {
         return null;
     }
 
-    /**
-     * @return the language
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValue() {
         return lang_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();

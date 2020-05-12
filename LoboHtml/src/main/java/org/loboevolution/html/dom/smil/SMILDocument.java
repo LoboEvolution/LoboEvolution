@@ -31,6 +31,9 @@ import org.w3c.dom.Document;
  * other document level issues. Are there issues with nested SMIL files? Is it
  * worth talking about different document scenarios, corresponding to differing
  * profiles? E.g. Standalone SMIL, HTML integration, etc.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILDocument extends Document, ElementSequentialTimeContainer {
 }

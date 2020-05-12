@@ -20,9 +20,25 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGPathSegLinetoHorizontalAbs interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPathSegLinetoHorizontalAbs extends SVGPathSeg {
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX();
 
+	/**
+	 * <p>setX.</p>
+	 *
+	 * @param x a float.
+	 */
 	void setX(float x);
 }

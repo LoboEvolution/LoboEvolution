@@ -12,10 +12,22 @@ import javax.swing.text.MaskFormatter;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
+/**
+ * <p>InputDataTime class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputDataTime {
 
 	private final static Logger logger = Logger.getLogger(InputDataTime.class.getName());
 
+	/**
+	 * <p>Constructor for InputDataTime.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputDataTime(HTMLInputElementImpl modelNode, InputControl ic) {
 
 		try {

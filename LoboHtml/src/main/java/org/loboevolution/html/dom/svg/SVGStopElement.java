@@ -20,6 +20,17 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGStopElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGStopElement extends SVGElement, SVGStylable {
+	/**
+	 * <p>getOffset.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getOffset();
 }

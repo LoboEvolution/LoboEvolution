@@ -91,7 +91,14 @@ class TableMatrix {
 	
 
 	/**
-	 * @param element
+	 * <p>Constructor for TableMatrix.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param tableAsContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param relement a {@link org.loboevolution.html.renderer.RElement} object.
 	 */
 	public TableMatrix(HTMLElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer tableAsContainer, RElement relement) {
@@ -103,6 +110,13 @@ class TableMatrix {
 		this.container = tableAsContainer;
 	}
 	
+	/**
+	 * <p>getWidthLength.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param availWidth a int.
+	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
+	 */
 	public static HtmlLength getWidthLength(HTMLElementImpl element, int availWidth) {
 		try {
 			AbstractCSSProperties props = element.getCurrentStyle();
@@ -326,6 +340,13 @@ class TableMatrix {
 		return currentTotal;
 	}
 
+	/**
+	 * <p>build.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param sizeOnly a boolean.
+	 */
 	public void build(int availWidth, int availHeight, boolean sizeOnly) {
 		final int hasBorder = this.hasOldStyleBorder;
 		determineColumnSizes(hasBorder, this.cellSpacingX, this.cellSpacingY, availWidth);
@@ -783,6 +804,8 @@ class TableMatrix {
 
 	/**
 	 * Sets bounds of each cell's component, and sumps up table width and height.
+	 *
+	 * @param insets a {@link java.awt.Insets} object.
 	 */
 	public final void doLayout(Insets insets) {
 
@@ -841,6 +864,7 @@ class TableMatrix {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void finalize() throws Throwable {
 		super.finalize();
@@ -910,6 +934,13 @@ class TableMatrix {
 	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
+	/**
+	 * <p>getLowestRenderableSpot.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 * @return a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
@@ -926,10 +957,20 @@ class TableMatrix {
 		return null;
 	}
 
+	/**
+	 * <p>getNumColumns.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getNumColumns() {
 		return this.columnSizes.length;
 	}
 
+	/**
+	 * <p>getNumRows.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getNumRows() {
 		return this.ROWS.size();
 	}
@@ -947,11 +988,18 @@ class TableMatrix {
 		}
 	}
 
+	/**
+	 * <p>getRenderables.</p>
+	 *
+	 * @return a {@link java.util.Iterator} object.
+	 */
 	public Iterator<RTableCell> getRenderables() {
 		return this.ALL_CELLS.iterator();
 	}
 
 	/**
+	 * <p>Getter for the field tableHeight.</p>
+	 *
 	 * @return Returns the tableHeight.
 	 */
 	public int getTableHeight() {
@@ -959,12 +1007,22 @@ class TableMatrix {
 	}
 
 	/**
+	 * <p>Getter for the field tableWidth.</p>
+	 *
 	 * @return Returns the tableWidth.
 	 */
 	public int getTableWidth() {
 		return this.tableWidth;
 	}
 
+	/**
+	 * <p>onDoubleClick.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @return a boolean.
+	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
@@ -987,6 +1045,14 @@ class TableMatrix {
 	 * @see
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
+	 */
+	/**
+	 * <p>onMouseClick.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @return a boolean.
 	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
@@ -1011,6 +1077,12 @@ class TableMatrix {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
+	/**
+	 * <p>onMouseDisarmed.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @return a boolean.
+	 */
 	public boolean onMouseDisarmed(MouseEvent event) {
 		final BoundableRenderable ar = this.armedRenderable;
 		if (ar != null) {
@@ -1027,6 +1099,14 @@ class TableMatrix {
 	 * @see
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
+	 */
+	/**
+	 * <p>onMousePressed.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @return a boolean.
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
@@ -1051,6 +1131,14 @@ class TableMatrix {
 	 * @see
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
+	 */
+	/**
+	 * <p>onMouseReleased.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @return a boolean.
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
@@ -1082,6 +1170,12 @@ class TableMatrix {
 		return true;
 	}
 
+	/**
+	 * <p>paint.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param size a {@link java.awt.Dimension} object.
+	 */
 	public final void paint(Graphics g, Dimension size) {
 		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
@@ -1296,6 +1390,10 @@ class TableMatrix {
 
 	/**
 	 * Called on every relayout. Element children might have changed.
+	 *
+	 * @param insets a {@link java.awt.Insets} object.
+	 * @param availWidth a int.
+	 * @param availHeight a int.
 	 */
 	public void reset(Insets insets, int availWidth, int availHeight) {
 		// TODO: Incorporate into build() and calculate
@@ -1408,6 +1506,21 @@ class TableMatrix {
 		return false;
 	}
 	
+	/**
+	 * <p>adjustCurrentTotal.</p>
+	 *
+	 * @param columnSizes an array of {@link org.loboevolution.info.SizeInfo} objects.
+	 * @param rowLenght an array of {@link org.loboevolution.info.SizeInfo} objects.
+	 * @param ROWS a {@link java.util.ArrayList} object.
+	 * @param cellSpacingY a int.
+	 * @param numCols a int.
+	 * @param widthTotal a int.
+	 * @param difference a int.
+	 * @param cellSpacingX a int.
+	 * @param hasBorder a int.
+	 * @param currTotal a int.
+	 * @return a int.
+	 */
 	public static int adjustCurrentTotal(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
 			ArrayList<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
 			int widthTotal, int difference, int cellSpacingX, int hasBorder, int currTotal) {
@@ -1440,6 +1553,23 @@ class TableMatrix {
 		return currentTotal;
 	}
 	
+	/**
+	 * <p>adjustCurrentTotal2.</p>
+	 *
+	 * @param columnSizes an array of {@link org.loboevolution.info.SizeInfo} objects.
+	 * @param rowLenght an array of {@link org.loboevolution.info.SizeInfo} objects.
+	 * @param ROWS a {@link java.util.ArrayList} object.
+	 * @param cellSpacingY a int.
+	 * @param numCols a int.
+	 * @param widthTotal a int.
+	 * @param difference a int.
+	 * @param cellSpacingX a int.
+	 * @param hasBorder a int.
+	 * @param numNoWidth a int.
+	 * @param cellAvailWidth a int.
+	 * @param currTotal a int.
+	 * @return a int.
+	 */
 	public static int adjustCurrentTotal2(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
 			ArrayList<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
 			int widthTotal, int difference, int cellSpacingX, int hasBorder, int numNoWidth, int cellAvailWidth, int currTotal) {

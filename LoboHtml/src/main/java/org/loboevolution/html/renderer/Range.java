@@ -31,8 +31,10 @@ class Range {
 	public final int offset;
 
 	/**
-	 * @param offset
-	 * @param length
+	 * <p>Constructor for Range.</p>
+	 *
+	 * @param offset a int.
+	 * @param length a int.
 	 */
 	public Range(final int offset, final int length) {
 		super();
@@ -40,6 +42,7 @@ class Range {
 		this.length = length;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Range[offset=" + this.offset + ",length=" + this.length + "]";

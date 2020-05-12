@@ -6,8 +6,10 @@ import javax.swing.AbstractAction;
 
 /**
  * The Class CancelAction.
- * 
- * @param <T>
+ *
+ * @param <T> a T object.
+ * @author utente
+ * @version $Id: $Id
  */
 public class CancelAction<T> extends AbstractAction {
 
@@ -16,6 +18,11 @@ public class CancelAction<T> extends AbstractAction {
 
 	private transient ItemEditorDialog<T> item;
 
+	/**
+	 * <p>Constructor for CancelAction.</p>
+	 *
+	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemEditorDialog} object.
+	 */
 	public CancelAction(ItemEditorDialog<T> item) {
 		this.item = item;
 	}
@@ -26,6 +33,7 @@ public class CancelAction<T> extends AbstractAction {
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 	 * ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.item.setResultingItem(null);

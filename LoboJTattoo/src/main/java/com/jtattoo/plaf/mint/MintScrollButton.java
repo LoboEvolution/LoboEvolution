@@ -25,7 +25,10 @@ package com.jtattoo.plaf.mint;
 import com.jtattoo.plaf.XPScrollButton;
 
 /**
+ * <p>MintScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintScrollButton extends XPScrollButton {
 
@@ -34,6 +37,12 @@ public class MintScrollButton extends XPScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for MintScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public MintScrollButton(int direction, int width) {
 		super(direction, width);
 	}

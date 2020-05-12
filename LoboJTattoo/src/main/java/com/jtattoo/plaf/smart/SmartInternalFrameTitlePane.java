@@ -38,7 +38,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>SmartInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -47,10 +50,16 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for SmartInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public SmartInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -127,10 +136,12 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, height - 1, width, height - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintPalette(Graphics g) {
 		int width = getWidth();
@@ -177,6 +188,7 @@ public class SmartInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g2D.setComposite(composite);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {

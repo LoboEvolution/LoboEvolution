@@ -20,6 +20,12 @@
 */
 package org.loboevolution.info;
 
+/**
+ * <p>FontInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FontInfo {
 	
 	private String fontFamily;
@@ -33,6 +39,8 @@ public class FontInfo {
 	private String fontWeight;
 
 	/**
+	 * <p>Getter for the field fontFamily.</p>
+	 *
 	 * @return the fontFamily
 	 */
 	public String getFontFamily() {
@@ -40,6 +48,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Getter for the field fontSize.</p>
+	 *
 	 * @return the fontSize
 	 */
 	public String getFontSize() {
@@ -47,6 +57,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Getter for the field fontStyle.</p>
+	 *
 	 * @return the fontStyle
 	 */
 	public String getFontStyle() {
@@ -54,6 +66,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Getter for the field fontVariant.</p>
+	 *
 	 * @return the fontVariant
 	 */
 	public String getFontVariant() {
@@ -61,6 +75,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Getter for the field fontWeight.</p>
+	 *
 	 * @return the fontWeight
 	 */
 	public String getFontWeight() {
@@ -68,6 +84,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Setter for the field fontFamily.</p>
+	 *
 	 * @param fontFamily the fontFamily to set
 	 */
 	public void setFontFamily(String fontFamily) {
@@ -75,6 +93,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Setter for the field fontSize.</p>
+	 *
 	 * @param fontSize the fontSize to set
 	 */
 	public void setFontSize(String fontSize) {
@@ -82,6 +102,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Setter for the field fontStyle.</p>
+	 *
 	 * @param fontStyle the fontStyle to set
 	 */
 	public void setFontStyle(String fontStyle) {
@@ -89,6 +111,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Setter for the field fontVariant.</p>
+	 *
 	 * @param fontVariant the fontVariant to set
 	 */
 	public void setFontVariant(String fontVariant) {
@@ -96,6 +120,8 @@ public class FontInfo {
 	}
 
 	/**
+	 * <p>Setter for the field fontWeight.</p>
+	 *
 	 * @param fontWeight the fontWeight to set
 	 */
 	public void setFontWeight(String fontWeight) {

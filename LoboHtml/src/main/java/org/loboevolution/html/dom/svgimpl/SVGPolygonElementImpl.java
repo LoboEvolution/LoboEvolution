@@ -12,22 +12,36 @@ import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
 import org.loboevolution.html.dom.svg.SVGPolygonElement;
 
+/**
+ * <p>SVGPolygonElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonElement {
 
+	/**
+	 * <p>Constructor for SVGPolygonElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGPolygonElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPointList getPoints() {
 		return constructPointList(getAttribute("points"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPointList getAnimatedPoints() {
 		return constructPointList(getAttribute("points"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
@@ -36,6 +50,7 @@ public class SVGPolygonElementImpl extends SVGGraphic implements SVGPolygonEleme
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();

@@ -16,7 +16,7 @@
 	</a>
 </p>
 <p align="center">
-	<a href="https://oswetto.github.io/LoboEvolution/">
+	<a href="https://loboevolution.github.io/LoboEvolution-maven-release/index.html">
 		<img src="https://inch-ci.org/github/oswetto/LoboEvolution.svg" alt="Docs">
 	</a>
 	<a href="http://sourceforge.net/projects/loboevolution/">

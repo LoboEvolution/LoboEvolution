@@ -7,12 +7,28 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>RSSChanelElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RSSChanelElementImpl extends HTMLElementImpl {
 	
+	/**
+	 * <p>Constructor for RSSChanelElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public RSSChanelElementImpl(String name) {
 		super(name);
 	}
 
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param graphics a {@link java.awt.Graphics2D} object.
+	 */
 	public void draw(Graphics2D graphics) {
 		if (hasChildNodes()) {
 			int y = 10;

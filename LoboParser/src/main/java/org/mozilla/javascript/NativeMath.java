@@ -34,9 +34,11 @@ final class NativeMath extends IdScriptableObject
     {
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() { return "Math"; }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -102,6 +104,7 @@ final class NativeMath extends IdScriptableObject
         }
     }
 
+    /** {@inheritDoc} */
     @SuppressWarnings("SelfAssignment")
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
@@ -464,6 +467,7 @@ final class NativeMath extends IdScriptableObject
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

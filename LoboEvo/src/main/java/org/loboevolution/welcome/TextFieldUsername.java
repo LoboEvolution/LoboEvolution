@@ -13,6 +13,12 @@ import java.util.HashMap;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+/**
+ * <p>TextFieldUsername class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextFieldUsername extends JTextField {
 
 	private static final long serialVersionUID = 1L;
@@ -31,6 +37,9 @@ public class TextFieldUsername extends JTextField {
 
 	private final int ROUNDNESS = 8;
 
+	/**
+	 * <p>Constructor for TextFieldUsername.</p>
+	 */
 	public TextFieldUsername() {
 		setOpaque(false);
 		setBackground(this.COLOR_BACKGROUND);
@@ -76,6 +85,7 @@ public class TextFieldUsername extends JTextField {
 		return g2;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBorder(Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
@@ -83,6 +93,7 @@ public class TextFieldUsername extends JTextField {
 		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, this.ROUNDNESS, this.ROUNDNESS);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintComponent(Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
@@ -91,6 +102,11 @@ public class TextFieldUsername extends JTextField {
 		super.paintComponent(g2);
 	}
 
+	/**
+	 * <p>Setter for the field borderColor.</p>
+	 *
+	 * @param color a {@link java.awt.Color} object.
+	 */
 	protected void setBorderColor(Color color) {
 		this.borderColor = color;
 		repaint();

@@ -32,12 +32,16 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicLabelUI;
 
 /**
+ * <p>BaseLabelUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseLabelUI extends BasicLabelUI {
 
 	private static BaseLabelUI baseLabelUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (baseLabelUI == null) {
 			baseLabelUI = new BaseLabelUI();
@@ -45,6 +49,7 @@ public class BaseLabelUI extends BasicLabelUI {
 		return baseLabelUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemIndex = l.getDisplayedMnemonicIndex();
@@ -54,6 +59,7 @@ public class BaseLabelUI extends BasicLabelUI {
 		JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemIndex = l.getDisplayedMnemonicIndex();

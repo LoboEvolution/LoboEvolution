@@ -26,7 +26,10 @@ package org.loboevolution.info;
 import java.awt.FontMetrics;
 
 /**
+ * <p>WordInfo class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class WordInfo {
 	
@@ -41,6 +44,8 @@ public class WordInfo {
 	private int width;
 
 	/**
+	 * <p>Getter for the field ascentPlusLeading.</p>
+	 *
 	 * @return the ascentPlusLeading
 	 */
 	public int getAscentPlusLeading() {
@@ -48,6 +53,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Getter for the field descent.</p>
+	 *
 	 * @return the descent
 	 */
 	public int getDescent() {
@@ -55,6 +62,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Getter for the field fontMetrics.</p>
+	 *
 	 * @return the fontMetrics
 	 */
 	public FontMetrics getFontMetrics() {
@@ -62,6 +71,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Getter for the field height.</p>
+	 *
 	 * @return the height
 	 */
 	public int getHeight() {
@@ -69,6 +80,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Getter for the field width.</p>
+	 *
 	 * @return the width
 	 */
 	public int getWidth() {
@@ -76,6 +89,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Setter for the field ascentPlusLeading.</p>
+	 *
 	 * @param ascentPlusLeading the ascentPlusLeading to set
 	 */
 	public void setAscentPlusLeading(int ascentPlusLeading) {
@@ -83,6 +98,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Setter for the field descent.</p>
+	 *
 	 * @param descent the descent to set
 	 */
 	public void setDescent(int descent) {
@@ -90,6 +107,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Setter for the field fontMetrics.</p>
+	 *
 	 * @param fontMetrics the fontMetrics to set
 	 */
 	public void setFontMetrics(FontMetrics fontMetrics) {
@@ -97,6 +116,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Setter for the field height.</p>
+	 *
 	 * @param height the height to set
 	 */
 	public void setHeight(int height) {
@@ -104,6 +125,8 @@ public class WordInfo {
 	}
 
 	/**
+	 * <p>Setter for the field width.</p>
+	 *
 	 * @param width the width to set
 	 */
 	public void setWidth(int width) {

@@ -12,6 +12,12 @@ import javax.swing.JTabbedPane;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
+/**
+ * <p>TabbedPaneUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TabbedPaneUI extends BasicTabbedPaneUI {
 
 	private static final int ADDED_TAB_HEIGTH = 2;
@@ -24,10 +30,16 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 
 	private static final Color TAB_COLOR = Color.BLACK;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TabbedPaneUI((JTabbedPane) c);
 	}
 
+	/**
+	 * <p>Constructor for TabbedPaneUI.</p>
+	 *
+	 * @param tabbedPane a {@link javax.swing.JTabbedPane} object.
+	 */
 	public TabbedPaneUI(JTabbedPane tabbedPane) {
 		// FONT: BOLD
 		tabbedPane.setFont(tabbedPane.getFont().deriveFont(Font.BOLD));
@@ -41,6 +53,7 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	}
 
 	// overrided to add spaces between tabs.
+	/** {@inheritDoc} */
 	@Override
 	protected LayoutManager createLayoutManager() {
 		if (this.tabPane.getTabLayoutPolicy() == JTabbedPane.SCROLL_TAB_LAYOUT) {
@@ -64,6 +77,7 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
@@ -80,6 +94,7 @@ public class TabbedPaneUI extends BasicTabbedPaneUI {
 	}
 
 	// overrided to paint the selected tab with a different color.
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 			boolean isSelected) {

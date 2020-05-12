@@ -11,24 +11,36 @@ import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.html.dom.svg.SVGTransformList;
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGTransformListImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGTransformListImpl implements SVGTransformList {
 	
 	private List<SVGTransform> transList;
 
+	/**
+	 * <p>Constructor for SVGTransformListImpl.</p>
+	 */
 	public SVGTransformListImpl() {
 		transList = new ArrayList<SVGTransform>();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getNumberOfItems() {
 		return transList.size();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clear() throws DOMException {
 		transList.clear();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException {
 		transList = new ArrayList<SVGTransform>();
@@ -36,11 +48,13 @@ public class SVGTransformListImpl implements SVGTransformList {
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform getItem(int index) throws DOMException {
 		return transList.get(index);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException {
 
@@ -58,6 +72,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException {
 
@@ -74,17 +89,20 @@ public class SVGTransformListImpl implements SVGTransformList {
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform removeItem(int index) throws DOMException {
 		return transList.remove(index);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform appendItem(SVGTransform newItem) throws DOMException, SVGException {
 		transList.add(newItem);
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix) {
 		SVGTransform transform = new SVGTransformImpl();
@@ -92,6 +110,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 		return transform;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform consolidate() {
 		int numTransforms = getNumberOfItems();
@@ -109,6 +128,11 @@ public class SVGTransformListImpl implements SVGTransformList {
 		return newTransform;
 	}
 
+	/**
+	 * <p>getAffineTransform.</p>
+	 *
+	 * @return a {@link java.awt.geom.AffineTransform} object.
+	 */
 	protected AffineTransform getAffineTransform() {
 		int numTransforms = getNumberOfItems();
 		if (numTransforms == 0) {
@@ -124,6 +148,12 @@ public class SVGTransformListImpl implements SVGTransformList {
 		return new AffineTransform(result.getA(), result.getB(), result.getC(), result.getD(), result.getE(), result.getF());
 	}
 
+	/**
+	 * <p>createTransformList.</p>
+	 *
+	 * @param transformString a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransformList} object.
+	 */
 	public static SVGTransformList createTransformList(String transformString) {
 		String SCALE = "scale";
 		String TRANSLATE = "translate";

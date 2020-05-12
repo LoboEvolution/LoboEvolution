@@ -26,8 +26,9 @@ import java.util.EventObject;
 
 /**
  * An event indicating that a mouse action occured over an image.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public class ImageMouseEvent extends EventObject {
 	private static final long serialVersionUID = 1L;
@@ -35,6 +36,15 @@ public class ImageMouseEvent extends EventObject {
 	private int x, y;
 	private MouseEvent orig;
 
+	/**
+	 * <p>Constructor for ImageMouseEvent.</p>
+	 *
+	 * @param source a {@link java.lang.Object} object.
+	 * @param image a {@link java.awt.image.BufferedImage} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param orig a {@link java.awt.event.MouseEvent} object.
+	 */
 	public ImageMouseEvent(Object source, BufferedImage image, int x, int y, MouseEvent orig) {
 		super(source);
 		this.image = image;
@@ -45,7 +55,7 @@ public class ImageMouseEvent extends EventObject {
 
 	/**
 	 * Returns the image on which the event occured.
-	 * 
+	 *
 	 * @return the image
 	 */
 	public BufferedImage getImage() {
@@ -54,7 +64,7 @@ public class ImageMouseEvent extends EventObject {
 
 	/**
 	 * Returns the x coordinate of the pixel related to the event.
-	 * 
+	 *
 	 * @return the x coordinate of the pixel related to the event
 	 */
 	public int getX() {
@@ -63,7 +73,7 @@ public class ImageMouseEvent extends EventObject {
 
 	/**
 	 * Returns the y coordinate of the pixel related to the event.
-	 * 
+	 *
 	 * @return the y coordinate of the pixel related to the event
 	 */
 	public int getY() {
@@ -72,9 +82,9 @@ public class ImageMouseEvent extends EventObject {
 
 	/**
 	 * Returns the mouse event that caused this image mouse event. This can
-	 * occasionally be <code>null</code>, for example for the exit event fired when
-	 * the image is set to <code>null</code>.
-	 * 
+	 * occasionally be null, for example for the exit event fired when
+	 * the image is set to null.
+	 *
 	 * @return the original event
 	 */
 	public MouseEvent getOriginalEvent() {

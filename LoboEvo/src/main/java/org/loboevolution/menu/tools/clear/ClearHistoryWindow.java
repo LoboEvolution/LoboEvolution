@@ -14,6 +14,12 @@ import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.gui.CheckBoxPanel;
 import org.loboevolution.gui.FormPanel;
 
+/**
+ * <p>ClearHistoryWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ClearHistoryWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -36,6 +42,11 @@ public class ClearHistoryWindow extends JFrame {
 	/** The navigation panel. */
 	private CheckBoxPanel navigationPanel;
 
+	/**
+	 * <p>Constructor for ClearHistoryWindow.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public ClearHistoryWindow(BrowserFrame frame) {
 		createAndShowGUI(frame);
 	}
@@ -59,6 +70,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field bookmarkPanel.</p>
+	 *
 	 * @return the bookmarkPanel
 	 */
 	public CheckBoxPanel getBookmarkPanel() {
@@ -66,6 +79,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field cachePanel.</p>
+	 *
 	 * @return the cachePanel
 	 */
 	public CheckBoxPanel getCachePanel() {
@@ -73,6 +88,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field cookiePanel.</p>
+	 *
 	 * @return the cookiePanel
 	 */
 	public CheckBoxPanel getCookiePanel() {
@@ -97,6 +114,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field historyButton.</p>
+	 *
 	 * @return the historyButton
 	 */
 	public JButton getHistoryButton() {
@@ -104,6 +123,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field historyPanel.</p>
+	 *
 	 * @return the historyPanel
 	 */
 	public FormPanel getHistoryPanel() {
@@ -111,6 +132,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field navigationPanel.</p>
+	 *
 	 * @return the navigationPanel
 	 */
 	public CheckBoxPanel getNavigationPanel() {
@@ -118,6 +141,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field bookmarkPanel.</p>
+	 *
 	 * @param bookmarkPanel the bookmarkPanel to set
 	 */
 	public void setBookmarkPanel(CheckBoxPanel bookmarkPanel) {
@@ -125,6 +150,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field cachePanel.</p>
+	 *
 	 * @param cachePanel the cachePanel to set
 	 */
 	public void setCachePanel(CheckBoxPanel cachePanel) {
@@ -132,6 +159,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field cookiePanel.</p>
+	 *
 	 * @param cookiePanel the cookiePanel to set
 	 */
 	public void setCookiePanel(CheckBoxPanel cookiePanel) {
@@ -139,6 +168,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field historyButton.</p>
+	 *
 	 * @param historyButton the historyButton to set
 	 */
 	public void setHistoryButton(JButton historyButton) {
@@ -146,6 +177,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field historyPanel.</p>
+	 *
 	 * @param historyPanel the historyPanel to set
 	 */
 	public void setHistoryPanel(FormPanel historyPanel) {
@@ -153,6 +186,8 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field navigationPanel.</p>
+	 *
 	 * @param navigationPanel the navigationPanel to set
 	 */
 	public void setNavigationPanel(CheckBoxPanel navigationPanel) {

@@ -12,6 +12,12 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
+/**
+ * <p>ColorComboBox class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ColorComboBox extends JComboBox<Object> {
 
 	class ColorComboRenderer extends JPanel implements ListCellRenderer<Object> {
@@ -42,6 +48,9 @@ public class ColorComboBox extends JComboBox<Object> {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for ColorComboBox.</p>
+	 */
 	public ColorComboBox() {
 		createAndShowGUI();
 	}

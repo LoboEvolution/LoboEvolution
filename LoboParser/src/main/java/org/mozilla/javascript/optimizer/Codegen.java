@@ -51,37 +51,43 @@ import org.mozilla.javascript.ast.ScriptNode;
  *
  * @author Norris Boyd
  * @author Roger Lawrence
+ * @version $Id: $Id
  */
-
 public class Codegen implements Evaluator
 {
 	private static final Logger logger = Logger.getLogger(Codegen.class.getName());
 	
+    /** {@inheritDoc} */
     @Override
     public void captureStackInfo(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getSourcePositionFromStack(Context cx, int[] linep) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getPatchedStack(RhinoException ex, String nativeStackTrace) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<String> getScriptStack(RhinoException ex) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setEvalScriptFlag(Script script) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
@@ -110,6 +116,7 @@ public class Codegen implements Evaluator
         return new Object[] { mainClassName, mainClassBytes };
     }
 
+    /** {@inheritDoc} */
     @Override
     public Script createScriptObject(Object bytecode,
                                      Object staticSecurityDomain)
@@ -126,6 +133,7 @@ public class Codegen implements Evaluator
         return script;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Function createFunctionObject(Context cx, Scriptable scope,
                                          Object bytecode,
@@ -171,6 +179,16 @@ public class Codegen implements Evaluator
         throw new RuntimeException("Malformed optimizer package " + e);
     }
 
+    /**
+     * <p>compileToClassFile.</p>
+     *
+     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
+     * @param mainClassName a {@link java.lang.String} object.
+     * @param scriptOrFn a {@link org.mozilla.javascript.ast.ScriptNode} object.
+     * @param encodedSource a {@link java.lang.String} object.
+     * @param returnFunction a boolean.
+     * @return an array of {@link byte} objects.
+     */
     public byte[] compileToClassFile(CompilerEnvirons compilerEnv,
                                      String mainClassName,
                                      ScriptNode scriptOrFn,
@@ -1220,6 +1238,11 @@ public class Codegen implements Evaluator
         throw new RuntimeException("Bad tree in codegen");
     }
 
+     /**
+      * <p>Setter for the field mainMethodClass.</p>
+      *
+      * @param className a {@link java.lang.String} object.
+      */
      public void setMainMethodClass(String className)
      {
          mainMethodClass = className;
@@ -4382,7 +4405,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
 
     /**
      * Generate calls to ScriptRuntime.addInstructionCount to keep track of
-     * executed instructions and call <code>observeInstructionCount()</code>
+     * executed instructions and call observeInstructionCount()
      * if a threshold is exceeded.<br>
      * Calculates the count from getCurrentCodeOffset - savedCodeOffset
      */
@@ -4396,7 +4419,7 @@ Else pass the JS object in the aReg and 0.0 in the dReg.
 
     /**
      * Generate calls to ScriptRuntime.addInstructionCount to keep track of
-     * executed instructions and call <code>observeInstructionCount()</code>
+     * executed instructions and call observeInstructionCount()
      * if a threshold is exceeded.<br>
      * Takes the count as a parameter - used to add monitoring to loops and
      * other blocks that don't have any ops - this allows

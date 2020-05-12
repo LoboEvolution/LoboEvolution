@@ -29,14 +29,23 @@ import java.util.Iterator;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 
+/**
+ * <p>FilteredObjectList class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FilteredObjectList extends AbstractScriptableDelegate {
 	private final ObjectFilter filter;
 	private final Object lock;
 	private final Collection<Node> sourceNodeList;
 
 	/**
-	 * @param filter
-	 * @param list
+	 * <p>Constructor for FilteredObjectList.</p>
+	 *
+	 * @param filter a {@link org.loboevolution.html.js.ObjectFilter} object.
+	 * @param list a {@link java.util.Collection} object.
+	 * @param lock a {@link java.lang.Object} object.
 	 */
 	public FilteredObjectList(ObjectFilter filter, Collection<Node> list, Object lock) {
 		this.filter = filter;
@@ -44,6 +53,11 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		this.lock = lock;
 	}
 
+	/**
+	 * <p>getLength.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getLength() {
 		synchronized (this.lock) {
 			int count = 0;
@@ -56,6 +70,12 @@ public class FilteredObjectList extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>item.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link java.lang.Object} object.
+	 */
 	public Object item(int index) {
 		synchronized (this.lock) {
 			int count = 0;

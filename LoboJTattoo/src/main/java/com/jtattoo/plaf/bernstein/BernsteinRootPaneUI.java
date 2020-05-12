@@ -29,14 +29,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseRootPaneUI;
 
 /**
+ * <p>BernsteinRootPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinRootPaneUI extends BaseRootPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BernsteinRootPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JComponent createTitlePane(JRootPane root) {
 		return new BernsteinTitlePane(root, this);

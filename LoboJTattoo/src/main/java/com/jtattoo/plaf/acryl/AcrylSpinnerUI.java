@@ -38,23 +38,25 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AcrylSpinnerUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylSpinnerUI extends BaseSpinnerUI {
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Returns a new instance of AcrylSpinnerUI. SpinnerListUI delegates are
 	 * allocated one per JSpinner.
-	 *
-	 * @param c the JSpinner (not used)
 	 * @see ComponentUI#createUI
-	 * @return a new BasicSpinnerUI object
 	 */
 	public static ComponentUI createUI(JComponent c) {
 		return new AcrylSpinnerUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Component createNextButton() {
 		JButton button = (JButton) super.createNextButton();
@@ -69,6 +71,7 @@ public class AcrylSpinnerUI extends BaseSpinnerUI {
 		return button;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Component createPreviousButton() {
 		JButton button = (JButton) super.createPreviousButton();

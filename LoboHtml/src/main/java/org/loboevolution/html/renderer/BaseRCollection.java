@@ -11,10 +11,17 @@ import org.loboevolution.html.dom.domimpl.ModelNode;
 abstract class BaseRCollection extends BaseBoundableRenderable implements RCollection {
 	private BoundableRenderable renderableWithMouse = null;
 
+	/**
+	 * <p>Constructor for BaseRCollection.</p>
+	 *
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 */
 	public BaseRCollection(RenderableContainer container, ModelNode modelNode) {
 		super(container, modelNode);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void blur() {
 		final RCollection parent = this.parent;
@@ -25,11 +32,13 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 	}
 	
+	  /** {@inheritDoc} */
 	  @Override
 	  public Rectangle getClipBoundsWithoutInsets() {
 	    return getClipBounds();
 	  }
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -100,11 +109,13 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		return inSelection;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void focus() {
 		this.container.focus();
 	}
 
+	/** {@inheritDoc} */
 	public BoundableRenderable getRenderable(int x, int y) {
 		final Iterator<Renderable> i = getRenderables();
 		if (i != null) {
@@ -122,6 +133,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidateLayoutDeep() {
 		// TODO: May be pretty inefficient in RLine's
@@ -140,6 +152,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void onMouseMoved(MouseEvent event, int x, int y, boolean triggerEvent, ModelNode limit) {
 		super.onMouseMoved(event, x, y, triggerEvent, limit);
@@ -165,6 +178,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void onMouseOut(MouseEvent event, int x, int y, ModelNode limit) {
 		super.onMouseOut(event, x, y, limit);
@@ -181,6 +195,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onRightClick(MouseEvent event, int x, int y) {
 		final BoundableRenderable br = getRenderable(x, y);
@@ -191,6 +206,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		// TODO: Does this work with renderables that are absolutely positioned?
@@ -267,6 +283,8 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Updates bounds of all descendent's GUI components, based on root bounds.
 	 */
 	@Override

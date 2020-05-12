@@ -15,12 +15,14 @@ import org.loboevolution.store.SQLiteCommon;
  * A factory for creating Color objects.
  *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class ColorFactory {
 
 	/** The instance. */
 	private static ColorFactory instance;
 
+	/** Constant TRANSPARENT */
 	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 	
 	/** The color map. */
@@ -268,6 +270,12 @@ public class ColorFactory {
 		}
 	}
 	
+	/**
+	 * <p>isRgbOrHsl.</p>
+	 *
+	 * @param colorSpec a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean isRgbOrHsl(String colorSpec) {
 		final String normalSpec = colorSpec.toLowerCase();
 

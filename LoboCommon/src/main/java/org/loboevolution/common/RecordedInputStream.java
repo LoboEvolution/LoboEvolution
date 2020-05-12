@@ -33,8 +33,9 @@ import java.io.InputStream;
  * <p>
  * Note: Buffered streams should wrap this class as opposed to the other way
  * around.
- * 
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class RecordedInputStream extends InputStream {
 	private final InputStream delegate;
@@ -47,7 +48,10 @@ public class RecordedInputStream extends InputStream {
 	private final ByteArrayOutputStream store = new ByteArrayOutputStream();
 
 	/**
-	 * 
+	 * <p>Constructor for RecordedInputStream.</p>
+	 *
+	 * @param delegate a {@link java.io.InputStream} object.
+	 * @param maxBufferSize a int.
 	 */
 	public RecordedInputStream(InputStream delegate, int maxBufferSize) {
 		super();
@@ -60,6 +64,7 @@ public class RecordedInputStream extends InputStream {
 	 * 
 	 * @see java.io.InputStream#available()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int available() throws IOException {
 		return this.delegate.available();
@@ -70,11 +75,17 @@ public class RecordedInputStream extends InputStream {
 	 * 
 	 * @see java.io.InputStream#close()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void close() throws IOException {
 		this.delegate.close();
 	}
 
+	/**
+	 * <p>consumeToEOF.</p>
+	 *
+	 * @throws java.io.IOException if any.
+	 */
 	public void consumeToEOF() throws IOException {
 		final byte[] buffer = new byte[8192];
 		while (this.read(buffer) != -1) {
@@ -82,6 +93,12 @@ public class RecordedInputStream extends InputStream {
 		}
 	}
 
+	/**
+	 * <p>getBytesRead.</p>
+	 *
+	 * @return an array of {@link byte} objects.
+	 * @throws org.loboevolution.common.BufferExceededException if any.
+	 */
 	public byte[] getBytesRead() throws BufferExceededException {
 		if (this.hasReachedMaxBufferSize) {
 			throw new BufferExceededException();
@@ -89,6 +106,14 @@ public class RecordedInputStream extends InputStream {
 		return this.store.toByteArray();
 	}
 
+	/**
+	 * <p>getString.</p>
+	 *
+	 * @param encoding a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws java.io.UnsupportedEncodingException if any.
+	 * @throws org.loboevolution.common.BufferExceededException if any.
+	 */
 	public String getString(String encoding) throws java.io.UnsupportedEncodingException, BufferExceededException {
 		if (this.hasReachedMaxBufferSize) {
 			throw new BufferExceededException();
@@ -97,10 +122,16 @@ public class RecordedInputStream extends InputStream {
 		return new String(bytes, encoding);
 	}
 
+	/**
+	 * <p>hasReachedEOF.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean hasReachedEOF() {
 		return this.hasReachedEOF;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public synchronized void mark(int readlimit) {
 		if (this.hasReachedMaxBufferSize) {
@@ -114,6 +145,7 @@ public class RecordedInputStream extends InputStream {
 	 * 
 	 * @see java.io.InputStream#markSupported()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean markSupported() {
 		return true;
@@ -124,6 +156,7 @@ public class RecordedInputStream extends InputStream {
 	 * 
 	 * @see java.io.InputStream#read()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int read() throws IOException {
 		if (this.readPosition != -1 && this.readPosition < this.resetBuffer.length) {
@@ -151,6 +184,7 @@ public class RecordedInputStream extends InputStream {
 	 * 
 	 * @see java.io.InputStream#read(byte[], int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int read(byte[] buffer, int offset, int length) throws IOException {
 		if (this.readPosition != -1 && this.readPosition < this.resetBuffer.length) {
@@ -174,6 +208,7 @@ public class RecordedInputStream extends InputStream {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public synchronized void reset() throws IOException {
 		if (this.hasReachedMaxBufferSize) {

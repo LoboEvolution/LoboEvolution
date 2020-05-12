@@ -6,17 +6,29 @@ import java.awt.RenderingHints;
 
 import org.loboevolution.html.dom.rss.RSSElementImpl;
 
+/**
+ * <p>RSSControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RSSControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 	
 	private RSSElementImpl modelNode;
 
+	/**
+	 * <p>Constructor for RSSControl.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.rss.RSSElementImpl} object.
+	 */
 	public RSSControl(RSSElementImpl modelNode) {
 		super(modelNode);
 		this.modelNode = modelNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

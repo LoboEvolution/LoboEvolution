@@ -19,9 +19,8 @@ import java.util.logging.Logger;
  * operations on one thread before passing the map to others.
  *
  * @author Igor Bukanov
- *
+ * @version $Id: $Id
  */
-
 public class UintMap implements Serializable
 {
     private static final long serialVersionUID = 4242698212885848444L;
@@ -31,10 +30,18 @@ public class UintMap implements Serializable
 // Map implementation via hashtable,
 // follows "The Art of Computer Programming" by Donald E. Knuth
 
+    /**
+     * <p>Constructor for UintMap.</p>
+     */
     public UintMap() {
         this(4);
     }
 
+    /**
+     * <p>Constructor for UintMap.</p>
+     *
+     * @param initialCapacity a int.
+     */
     public UintMap(int initialCapacity) {
         if (initialCapacity < 0) Kit.codeBug();
         // Table grow when number of stored keys >= 3/4 of max capacity
@@ -45,14 +52,30 @@ public class UintMap implements Serializable
         if (check && power < 2) Kit.codeBug();
     }
 
+    /**
+     * <p>isEmpty.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return keyCount == 0;
     }
 
+    /**
+     * <p>size.</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return keyCount;
     }
 
+    /**
+     * <p>has.</p>
+     *
+     * @param key a int.
+     * @return a boolean.
+     */
     public boolean has(int key) {
         if (key < 0) Kit.codeBug();
         return 0 <= findIndex(key);
@@ -60,7 +83,9 @@ public class UintMap implements Serializable
 
     /**
      * Get object value assigned with key.
+     *
      * @return key object value or null if key is absent
+     * @param key a int.
      */
     public Object getObject(int key) {
         if (key < 0) Kit.codeBug();
@@ -75,7 +100,10 @@ public class UintMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
      * @return key integer value or defaultValue if key is absent
+     * @param key a int.
+     * @param defaultValue a int.
      */
     public int getInt(int key, int defaultValue) {
         if (key < 0) Kit.codeBug();
@@ -91,9 +119,11 @@ public class UintMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
      * @return key integer value or defaultValue if key does not exist or does
      * not have int value
-     * @throws RuntimeException if key does not exist
+     * @throws java.lang.RuntimeException if key does not exist
+     * @param key a int.
      */
     public int getExistingInt(int key) {
         if (key < 0) Kit.codeBug();
@@ -112,6 +142,9 @@ public class UintMap implements Serializable
     /**
      * Set object value of the key.
      * If key does not exist, also set its int value to 0.
+     *
+     * @param key a int.
+     * @param value a {@link java.lang.Object} object.
      */
     public void put(int key, Object value) {
         if (key < 0) Kit.codeBug();
@@ -125,6 +158,9 @@ public class UintMap implements Serializable
     /**
      * Set int value of the key.
      * If key does not exist, also set its object value to null.
+     *
+     * @param key a int.
+     * @param value a int.
      */
     public void put(int key, int value) {
         if (key < 0) Kit.codeBug();
@@ -142,6 +178,11 @@ public class UintMap implements Serializable
         keys[ivaluesShift + index] = value;
     }
 
+    /**
+     * <p>remove.</p>
+     *
+     * @param key a int.
+     */
     public void remove(int key) {
         if (key < 0) Kit.codeBug();
         int index = findIndex(key);
@@ -155,6 +196,9 @@ public class UintMap implements Serializable
         }
     }
 
+    /**
+     * <p>clear.</p>
+     */
     public void clear() {
         int N = 1 << power;
         if (keys != null) {
@@ -172,7 +216,11 @@ public class UintMap implements Serializable
         occupiedCount = 0;
     }
 
-    /** Return array of present keys */
+    /**
+     * Return array of present keys
+     *
+     * @return an array of {@link int} objects.
+     */
     public int[] getKeys() {
         int[] keys = this.keys;
         int n = keyCount;

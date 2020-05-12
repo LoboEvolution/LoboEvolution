@@ -26,6 +26,12 @@ import org.loboevolution.html.dom.ImageData;
 import org.mozilla.javascript.typedarrays.NativeArrayBuffer;
 import org.mozilla.javascript.typedarrays.NativeUint8ClampedArray;
 
+/**
+ * <p>ImageDataImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ImageDataImpl implements ImageData {
 
 	private int sx;
@@ -38,6 +44,15 @@ public class ImageDataImpl implements ImageData {
 	
 	private BufferedImage image;
 
+	/**
+	 * <p>Constructor for ImageDataImpl.</p>
+	 *
+	 * @param image a {@link java.awt.image.BufferedImage} object.
+	 * @param sx a int.
+	 * @param sy a int.
+	 * @param sw a int.
+	 * @param sh a int.
+	 */
 	public ImageDataImpl(BufferedImage image, int sx, int sy, int sw, int sh) {
 		this.image = image;
 		this.sx = sx;
@@ -46,6 +61,7 @@ public class ImageDataImpl implements ImageData {
 		this.height = sh;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getData() {
 		byte[] bytes = getBytes(width, height, sx, sy);
@@ -54,11 +70,13 @@ public class ImageDataImpl implements ImageData {
         return new NativeUint8ClampedArray(arrayBuffer, 0, bytes.length);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getHeight() {
 		return height;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getWidth() {
 		return width;

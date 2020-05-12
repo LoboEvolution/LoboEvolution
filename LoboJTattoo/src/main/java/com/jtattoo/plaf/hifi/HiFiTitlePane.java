@@ -33,7 +33,10 @@ import com.jtattoo.plaf.BaseTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiTitlePane extends BaseTitlePane {
 
@@ -42,19 +45,28 @@ public class HiFiTitlePane extends BaseTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for HiFiTitlePane.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 */
 	public HiFiTitlePane(JRootPane root, BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean centerButtons() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBorder(Graphics g) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		g.setColor(Color.black);

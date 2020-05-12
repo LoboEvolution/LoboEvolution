@@ -24,8 +24,15 @@ import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.domimpl.HTMLFormElementImpl;
 import org.w3c.dom.Node;
 
+/**
+ * <p>InputFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return HTMLFormElementImpl.isInput(node);

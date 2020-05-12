@@ -10,10 +10,22 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
 
+/**
+ * <p>InputCheckbox class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputCheckbox {
 	
 	final JCheckBox checkBox = new JCheckBox();
 
+	/**
+	 * <p>Constructor for InputCheckbox.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputCheckbox(HTMLInputElementImpl modelNode, InputControl ic) {
 		checkBox.setOpaque(false);
 		if(modelNode.getTitle() != null) checkBox.setToolTipText(modelNode.getTitle());
@@ -38,6 +50,9 @@ public class InputCheckbox {
 		ic.add(checkBox);
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		checkBox.setSelected(false);
 	}

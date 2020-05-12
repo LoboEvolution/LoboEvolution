@@ -31,22 +31,38 @@ import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>NodeListImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NodeListImpl extends AbstractScriptableDelegate implements NodeList {
 
 	private final List<Node> nodeList = Collections.synchronizedList(new ArrayList<Node>());
 
+	/**
+	 * <p>Constructor for NodeListImpl.</p>
+	 */
 	public NodeListImpl() {
 	}
 
+	/**
+	 * <p>Constructor for NodeListImpl.</p>
+	 *
+	 * @param collection a {@link java.util.List} object.
+	 */
 	public NodeListImpl(List<Node> collection) {
 		this.nodeList.addAll(collection);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		return this.nodeList.size();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
 		int size = this.nodeList.size();
@@ -57,42 +73,96 @@ public class NodeListImpl extends AbstractScriptableDelegate implements NodeList
 		}
 	}
 
+	/**
+	 * <p>add.</p>
+	 *
+	 * @param newChild a {@link org.w3c.dom.Node} object.
+	 */
 	public void add(Node newChild) {
 		this.nodeList.add(newChild);
 	}
 
+	/**
+	 * <p>add.</p>
+	 *
+	 * @param firstIdx a int.
+	 * @param textNode a {@link org.w3c.dom.Node} object.
+	 */
 	public void add(int firstIdx, Node textNode) {
 		this.nodeList.add(firstIdx, textNode);
 	}
 
+	/**
+	 * <p>indexOf.</p>
+	 *
+	 * @param child a {@link org.w3c.dom.Node} object.
+	 * @return a int.
+	 */
 	public int indexOf(Node child) {
 		return this.nodeList.indexOf(child);
 	}
 
+	/**
+	 * <p>remove.</p>
+	 *
+	 * @param i a int.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 */
 	public Node remove(int i) {
 		return this.nodeList.remove(i);
 	}
 
+	/**
+	 * <p>get.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 */
 	public Node get(int index) {
 		return this.nodeList.get(index);
 	}
 
+	/**
+	 * <p>remove.</p>
+	 *
+	 * @param oldChild a {@link org.w3c.dom.Node} object.
+	 * @return a boolean.
+	 */
 	public boolean remove(Node oldChild) {
 		return this.nodeList.remove(oldChild);
 	}
 
+	/**
+	 * <p>clear.</p>
+	 */
 	public void clear() {
 		this.nodeList.clear();
 	}
 
+	/**
+	 * <p>toArray.</p>
+	 *
+	 * @return an array of {@link org.loboevolution.html.dom.domimpl.NodeImpl} objects.
+	 */
 	public NodeImpl[] toArray() {
 		return this.nodeList.toArray(new NodeImpl[0]);
 	}
 
+	/**
+	 * <p>set.</p>
+	 *
+	 * @param idx a int.
+	 * @param newChild a {@link org.w3c.dom.Node} object.
+	 */
 	public void set(int idx, Node newChild) {
 		this.nodeList.set(idx, newChild);
 	}
 
+	/**
+	 * <p>removeAll.</p>
+	 *
+	 * @param toDelete a {@link java.util.List} object.
+	 */
 	public void removeAll(List<Node> toDelete) {
 		this.nodeList.removeAll(toDelete);
 	}

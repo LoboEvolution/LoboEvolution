@@ -43,6 +43,12 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
+/**
+ * <p>BaseInternalFrameUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
 	// -----------------------------------------------------------------------------
@@ -132,23 +138,36 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 
 	private static final String PALETTE_FRAME = "palette";
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseInternalFrameUI((JInternalFrame) c);
 	}
 
+	/**
+	 * <p>Constructor for BaseInternalFrameUI.</p>
+	 *
+	 * @param b a {@link javax.swing.JInternalFrame} object.
+	 */
 	public BaseInternalFrameUI(JInternalFrame b) {
 		super(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JComponent createNorthPane(JInternalFrame w) {
 		return new BaseInternalFrameTitlePane(w);
 	}
 
+	/**
+	 * <p>getTitlePane.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.BaseInternalFrameTitlePane} object.
+	 */
 	public BaseInternalFrameTitlePane getTitlePane() {
 		return (BaseInternalFrameTitlePane) titlePane;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
@@ -158,12 +177,14 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
 		frame.addPropertyChangeListener(MY_PROPERTY_CHANGE_HANDLER);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -174,6 +195,11 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 		stripContentBorder();
 	}
 
+	/**
+	 * <p>setPalette.</p>
+	 *
+	 * @param isPalette a boolean.
+	 */
 	public void setPalette(boolean isPalette) {
 		if (isPalette) {
 			frame.setBorder(UIManager.getBorder(FRAME_PALETTE_BORDER));
@@ -183,6 +209,9 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 		getTitlePane().setPalette(isPalette);
 	}
 
+	/**
+	 * <p>stripContentBorder.</p>
+	 */
 	public void stripContentBorder() {
 		Container cp = frame.getContentPane();
 		if (cp instanceof JComponent) {
@@ -194,18 +223,21 @@ public class BaseInternalFrameUI extends BasicInternalFrameUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallComponents() {
 		titlePane = null;
 		super.uninstallComponents();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		frame.removePropertyChangeListener(MY_PROPERTY_CHANGE_HANDLER);
 		super.uninstallListeners();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		Container cp = frame.getContentPane();

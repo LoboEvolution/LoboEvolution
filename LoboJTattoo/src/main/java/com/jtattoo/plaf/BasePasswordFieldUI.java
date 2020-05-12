@@ -44,10 +44,14 @@ import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.DefaultEditorKit;
 
 /**
+ * <p>BasePasswordFieldUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BasePasswordFieldUI();
 	}
@@ -56,6 +60,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 
 	private FocusListener focusListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installKeyboardActions() {
 		super.installKeyboardActions();
@@ -72,6 +77,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -108,6 +114,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g) {
 		g.setColor(getComponent().getBackground());
@@ -119,6 +126,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 		g.fillRect(0, 0, getComponent().getWidth(), getComponent().getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintSafely(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -134,6 +142,7 @@ public class BasePasswordFieldUI extends BasicPasswordFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		getComponent().removeFocusListener(focusListener);

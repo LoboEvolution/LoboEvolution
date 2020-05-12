@@ -20,6 +20,17 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGViewElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGViewElement extends SVGElement, SVGExternalResourcesRequired, SVGFitToViewBox, SVGZoomAndPan {
+	/**
+	 * <p>getViewTarget.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGStringList} object.
+	 */
 	SVGStringList getViewTarget();
 }

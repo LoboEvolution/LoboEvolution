@@ -8,6 +8,12 @@ import org.loboevolution.gui.FormPanel;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.common.WrapperLayout;
 
+/**
+ * <p>SearchEngineEditor class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 
 	/** The Constant serialVersionUID. */
@@ -46,6 +52,7 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 		this.add(this.formPanel);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SearchEngineStore getItem() {
 		final SearchEngineStore se = new SearchEngineStore();
@@ -56,6 +63,7 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 		return se;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setItem(SearchEngineStore item) {
 		this.nameField.setValue(item.getName());
@@ -65,6 +73,7 @@ public class SearchEngineEditor extends AbstractItemEditor<SearchEngineStore> {
 		this.formPanel.revalidate();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void validateItem() {
 		if (Strings.isBlank(this.nameField.getValue()) || Strings.isBlank(this.baseUrlField.getValue())

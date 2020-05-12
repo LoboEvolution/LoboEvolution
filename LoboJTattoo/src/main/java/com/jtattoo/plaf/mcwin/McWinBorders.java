@@ -38,7 +38,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>McWinBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinBorders extends BaseBorders {
 
@@ -191,6 +194,11 @@ public class McWinBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -198,6 +206,11 @@ public class McWinBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -205,6 +218,11 @@ public class McWinBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -212,10 +230,20 @@ public class McWinBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getTabbedPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTabbedPaneBorder() {
 		return null;
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}

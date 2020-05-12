@@ -28,12 +28,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>McWinCheckBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinCheckBoxUI extends McWinRadioButtonUI {
 
 	private static McWinCheckBoxUI checkBoxUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new McWinCheckBoxUI();
@@ -41,6 +45,7 @@ public class McWinCheckBoxUI extends McWinRadioButtonUI {
 		return checkBoxUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);

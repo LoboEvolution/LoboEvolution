@@ -5,6 +5,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
+/**
+ * <p>RemoveAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RemoveAction<T> extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
@@ -12,6 +18,11 @@ public class RemoveAction<T> extends AbstractAction {
 
 	private transient ItemListControl<T> item;
 
+	/**
+	 * <p>Constructor for RemoveAction.</p>
+	 *
+	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemListControl} object.
+	 */
 	public RemoveAction(ItemListControl<T> item) {
 		this.item = item;
 	}
@@ -22,6 +33,7 @@ public class RemoveAction<T> extends AbstractAction {
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 	 * ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (JOptionPane.showConfirmDialog(this.item, "Are you sure you want to remove the selected item?", "Confirm",

@@ -20,15 +20,46 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGImageElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGImageElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace,
 		SVGExternalResourcesRequired, SVGStylable, SVGTransformable, Drawable {
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY();
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getWidth();
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getHeight();
 
+	/**
+	 * <p>getPreserveAspectRatio.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio} object.
+	 */
 	SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
 }

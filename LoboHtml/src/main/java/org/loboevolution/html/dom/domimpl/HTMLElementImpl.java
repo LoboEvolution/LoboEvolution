@@ -54,6 +54,12 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
+/**
+ * <p>HTMLElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSPropertiesContext {
 	private Map<String, AbstractCSSProperties> computedStyles;
 
@@ -66,19 +72,31 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	private volatile AbstractCSSProperties localStyleDeclarationState;
 
+	/**
+	 * <p>Constructor for HTMLElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLElementImpl(String name) {
 		super(name);
 	}
 
+	/**
+	 * <p>Constructor for HTMLElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param noStyleSheet a boolean.
+	 */
 	public HTMLElementImpl(String name, boolean noStyleSheet) {
 		super(name);
 	}
 
 	/**
 	 * Adds style sheet declarations applicable to this element. A properties object
-	 * is created if necessary when the one passed is <code>null</code>.
-	 * 
-	 * @param style
+	 * is created if necessary when the one passed is null.
+	 *
+	 * @param style a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
 	 */
 	protected final AbstractCSSProperties addStyleSheetDeclarations(AbstractCSSProperties style) {
 		final Node pn = this.parentNode;
@@ -99,6 +117,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return style;
 	}
 
+	/**
+	 * <p>appendOuterHTMLImpl.</p>
+	 *
+	 * @param buffer a {@link java.lang.StringBuilder} object.
+	 */
 	protected void appendOuterHTMLImpl(StringBuilder buffer) {
 		final String tagName = getTagName();
 		buffer.append('<');
@@ -126,6 +149,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		buffer.append('>');
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void assignAttributeField(String normalName, String value) {
 		if (!this.notificationsSuspended) {
@@ -153,11 +177,17 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return false;
 	}
 
+	/**
+	 * <p>createDefaultStyleSheet.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 */
 	protected AbstractCSSProperties createDefaultStyleSheet() {
 		// Override to provide element defaults.
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		// Overrides NodeImpl method
@@ -165,6 +195,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return new StyleSheetRenderState(prevRenderState, this);
 	}
 
+	/**
+	 * <p>findStyleDeclarations.</p>
+	 *
+	 * @param elementName a {@link java.lang.String} object.
+	 * @param classes an array of {@link java.lang.String} objects.
+	 * @return a {@link java.util.List} object.
+	 */
 	protected final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
@@ -174,6 +211,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return ssa.getActiveStyleDeclarations(this, elementName, classes);
 	}
 
+	/**
+	 * <p>forgetLocalStyle.</p>
+	 */
 	protected final void forgetLocalStyle() {
 		synchronized (this) {
 			this.currentStyleDeclarationState = null;
@@ -182,6 +222,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>forgetStyle.</p>
+	 *
+	 * @param deep a boolean.
+	 */
 	protected final void forgetStyle(boolean deep) {
 		synchronized (this) {
 			this.currentStyleDeclarationState = null;
@@ -198,6 +243,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>getAncestor.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getAncestor(String elementTL) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -215,6 +266,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>getAncestorForJavaClass.</p>
+	 *
+	 * @param javaClass a {@link java.lang.Class} object.
+	 * @return a {@link java.lang.Object} object.
+	 */
 	protected Object getAncestorForJavaClass(Class<?> javaClass) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj == null || javaClass.isInstance(nodeObj)) {
@@ -229,9 +286,10 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/**
 	 * Get an ancestor that matches the element tag name given and the style class
 	 * given.
-	 * 
+	 *
 	 * @param elementTL An tag name in lowercase or an asterisk (*).
 	 * @param classTL   A class name in lowercase.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public HTMLElementImpl getAncestorWithClass(String elementTL, String classTL) {
 		final Object nodeObj = getParentNode();
@@ -247,6 +305,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>getAncestorWithId.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @param idTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getAncestorWithId(String elementTL, String idTL) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -263,29 +328,59 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>getAttributeAsBoolean.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean getAttributeAsBoolean(String name) {
 		return getAttribute(name) != null;
 	}
 
+	/**
+	 * <p>getAttributeAsInt.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param defaultValue a int.
+	 * @return a int.
+	 */
 	protected int getAttributeAsInt(String name, int defaultValue) {
 		final String value = getAttribute(name);
 		return HtmlValues.getPixelSize(value, null, defaultValue);
 	}
 
+	/**
+	 * <p>getCharset.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCharset() {
 		return getAttribute("charset");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
 		final String className = getAttribute("class");
 		return className == null ? "" : className;
 	}
 	
+	/**
+	 * <p>getClassList.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.DOMTokenList} object.
+	 */
 	public DOMTokenList getClassList() {
         return new DOMTokenListImpl(this, this.getClassName());
 	}
 
+	/**
+	 * <p>getComputedStyle.</p>
+	 *
+	 * @param pseudoElement a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 */
 	public AbstractCSSProperties getComputedStyle(String pseudoElement) {
 		if (pseudoElement == null) {
 			pseudoElement = "";
@@ -332,6 +427,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	/**
 	 * Gets the style object associated with the element. It may return null only if
 	 * the type of element does not handle stylesheets.
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
 	 */
 	public AbstractCSSProperties getCurrentStyle() {
 		AbstractCSSProperties sds;
@@ -366,6 +463,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDocumentBaseURI() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -378,23 +476,40 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/**
 	 * Gets form input due to the current element. It should return
-	 * <code>null</code> except when the element is a form input element.
+	 * null except when the element is a form input element.
+	 *
+	 * @return an array of {@link org.loboevolution.html.dom.input.FormInput} objects.
 	 */
 	protected FormInput[] getFormInputs() {
 		// Override in input elements
 		return null;
 	}
 
+	/**
+	 * <p>getOffsetHeight.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getOffsetHeight() {
 		final UINode uiNode = getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().height;
 	}
 
+	/**
+	 * <p>getOffsetLeft.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getOffsetLeft() {
 		final UINode uiNode = getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().x;
 	}
 
+	/**
+	 * <p>getOffsetTop.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getOffsetTop() {
 		// TODO: Sometimes this can be called while parsing, and
 		// browsers generally give the right answer.
@@ -402,11 +517,21 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().y;
 	}
 
+	/**
+	 * <p>getOffsetWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getOffsetWidth() {
 		final UINode uiNode = getUINode();
 		return uiNode == null ? 0 : uiNode.getBoundsRelativeToBlock().width;
 	}
 
+	/**
+	 * <p>getOuterHTML.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getOuterHTML() {
 		final StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
@@ -415,6 +540,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return buffer.toString();
 	}
 
+	/**
+	 * <p>getParent.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getParent(String elementTL) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -430,6 +561,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractCSSProperties getParentStyle() {
 		final Object parent = this.parentNode;
@@ -439,6 +571,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/**
+	 * <p>getParentWithClass.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @param classTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getParentWithClass(String elementTL, String classTL) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -451,6 +590,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/**
+	 * <p>getParentWithId.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @param idTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getParentWithId(String elementTL, String idTL) {
 		final Object nodeObj = getParentNode();
 		if (nodeObj instanceof HTMLElementImpl) {
@@ -465,6 +611,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/**
+	 * <p>getPreceedingSibling.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getPreceedingSibling(String elementTL) {
 		final HTMLElementImpl psibling = getPreceedingSiblingElement();
 		if (psibling != null) {
@@ -479,6 +631,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/**
+	 * <p>getPreceedingSiblingElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getPreceedingSiblingElement() {
 		final Node parentNode = getParentNode();
 		if (parentNode == null) {
@@ -502,6 +659,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/**
+	 * <p>getPreceedingSiblingWithClass.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @param classTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getPreceedingSiblingWithClass(String elementTL, String classTL) {
 		final HTMLElementImpl psibling = getPreceedingSiblingElement();
 		if (psibling != null) {
@@ -513,6 +677,13 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return null;
 	}
 
+	/**
+	 * <p>getPreceedingSiblingWithId.</p>
+	 *
+	 * @param elementTL a {@link java.lang.String} object.
+	 * @param idTL a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HTMLElementImpl getPreceedingSiblingWithId(String elementTL, String idTL) {
 		final HTMLElementImpl psibling = getPreceedingSiblingElement();
 		if (psibling != null) {
@@ -528,7 +699,9 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/**
 	 * Gets the pseudo-element lowercase names currently applicable to this element.
-	 * Method must return <code>null</code> if there are no such pseudo-elements.
+	 * Method must return null if there are no such pseudo-elements.
+	 *
+	 * @return a {@link java.util.Set} object.
 	 */
 	public Set<String> getPseudoNames() {
 		Set<String> pnset = null;
@@ -545,6 +718,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * Gets the local style object associated with the element. The properties
 	 * object returned only includes properties from the local style attribute. It
 	 * may return null only if the type of element does not handle stylesheets.
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
 	 */
 	public AbstractCSSProperties getStyle() {
 		AbstractCSSProperties sds;
@@ -638,6 +813,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		return hhs.booleanValue();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void informInvalid() {
 		// This is called when an attribute or child changes.
@@ -645,6 +821,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		super.informInvalid();
 	}
 
+	/**
+	 * <p>informInvalidAttibute.</p>
+	 *
+	 * @param normalName a {@link java.lang.String} object.
+	 */
 	public void informInvalidAttibute(String normalName) {
 		if ("style".equals(normalName)) {
 			this.forgetLocalStyle();
@@ -685,23 +866,44 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>setCharset.</p>
+	 *
+	 * @param charset a {@link java.lang.String} object.
+	 */
 	public void setCharset(String charset) {
 		setAttribute("charset", charset);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setClassName(String className) {
 		setAttribute("class", className);
 	}
 
+	/**
+	 * <p>setCurrentStyle.</p>
+	 *
+	 * @param value a {@link java.lang.Object} object.
+	 */
 	public void setCurrentStyle(Object value) {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Cannot set currentStyle property");
 	}
 	
+	/**
+	 * <p>getHidden.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean getHidden() {
 		return this.getAttribute("hidden") == null ? false : true;
 	}
 
+	/**
+	 * <p>setInnerHTML.</p>
+	 *
+	 * @param newHtml a {@link java.lang.String} object.
+	 */
 	public void setInnerHTML(String newHtml) {
 		final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
 		if (document == null) {
@@ -723,6 +925,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>setMouseOver.</p>
+	 *
+	 * @param mouseOver a boolean.
+	 */
 	public void setMouseOver(boolean mouseOver) {
 		if (this.isMouseOver != mouseOver) {
 			// Change isMouseOver field before checking to invalidate.
@@ -737,31 +944,41 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 	}
 
+	/**
+	 * <p>setStyle.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void setStyle(String value) {
 		this.setAttribute("style", value);
 	}
 	
+    /** {@inheritDoc} */
     @Override
     public String getContentEditable() {
         String contenteditable = this.getAttribute("contenteditable");
         return Strings.isBlank(contenteditable) ? "true" : contenteditable;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setContentEditable(String contenteditable) {
         this.setAttribute("contenteditable", contenteditable);
     }
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return super.toString() + "[currentStyle=" + getCurrentStyle() + "]";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void warn(String message) {
 		logger.log(Level.WARNING, message);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);

@@ -10,6 +10,9 @@ package com.gargoylesoftware.css.parser.javacc;
  *
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the public fields.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ParseException extends Exception {
 
@@ -30,6 +33,10 @@ public class ParseException extends Exception {
    * in the generated parser.  Calling this constructor generates
    * a new object of this type with the fields "currentToken",
    * "expectedTokenSequences", and "tokenImage" set.
+   *
+   * @param currentTokenVal a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
+   * @param expectedTokenSequencesVal an array of {@link int} objects.
+   * @param tokenImageVal an array of {@link java.lang.String} objects.
    */
   public ParseException(Token currentTokenVal,
                         int[][] expectedTokenSequencesVal,
@@ -51,12 +58,15 @@ public class ParseException extends Exception {
    * relevant information.  The JavaCC generated code does not use
    * these constructors.
    */
-
   public ParseException() {
     super();
   }
 
-  /** Constructor with message. */
+  /**
+   * Constructor with message.
+   *
+   * @param message a {@link java.lang.String} object.
+   */
   public ParseException(String message) {
     super(message);
   }

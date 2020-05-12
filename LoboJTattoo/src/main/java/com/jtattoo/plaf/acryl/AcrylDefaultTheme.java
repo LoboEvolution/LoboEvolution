@@ -30,8 +30,17 @@ import javax.swing.plaf.ColorUIResource;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
+/**
+ * <p>AcrylDefaultTheme class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class AcrylDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for AcrylDefaultTheme.</p>
+	 */
 	public AcrylDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -42,11 +51,13 @@ public class AcrylDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "AcrylTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -114,6 +125,7 @@ public class AcrylDefaultTheme extends AbstractTheme {
 		desktopColor = backgroundColor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

@@ -20,16 +20,52 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGViewSpec interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGViewSpec extends SVGZoomAndPan, SVGFitToViewBox {
+	/**
+	 * <p>getTransform.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransformList} object.
+	 */
 	SVGTransformList getTransform();
 
+	/**
+	 * <p>getViewTarget.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElement} object.
+	 */
 	SVGElement getViewTarget();
 
+	/**
+	 * <p>getViewBoxString.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getViewBoxString();
 
+	/**
+	 * <p>getPreserveAspectRatioString.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getPreserveAspectRatioString();
 
+	/**
+	 * <p>getTransformString.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getTransformString();
 
+	/**
+	 * <p>getViewTargetString.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getViewTargetString();
 }

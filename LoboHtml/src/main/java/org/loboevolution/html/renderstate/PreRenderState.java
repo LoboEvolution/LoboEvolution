@@ -23,11 +23,24 @@ package org.loboevolution.html.renderstate;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.AbstractCSSProperties;
 
+/**
+ * <p>PreRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class PreRenderState extends BlockRenderState {
+	/**
+	 * <p>Constructor for PreRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public PreRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getWhiteSpace() {
 		final Integer ws = this.iWhiteSpace;

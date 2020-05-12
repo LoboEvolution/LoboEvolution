@@ -26,14 +26,16 @@ import org.mozilla.javascript.UniqueTag;
  * creation of the ScriptableInputStream.
  *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
-
 public class ScriptableInputStream extends ObjectInputStream {
 
     /**
      * Create a ScriptableInputStream.
+     *
      * @param in the InputStream to read from.
      * @param scope the top-level scope to create the object in.
+     * @throws java.io.IOException if any.
      */
     public ScriptableInputStream(InputStream in, Scriptable scope)
         throws IOException
@@ -47,6 +49,7 @@ public class ScriptableInputStream extends ObjectInputStream {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Class<?> resolveClass(ObjectStreamClass desc)
         throws IOException, ClassNotFoundException
@@ -62,6 +65,7 @@ public class ScriptableInputStream extends ObjectInputStream {
         return super.resolveClass(desc);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object resolveObject(Object obj)
         throws IOException

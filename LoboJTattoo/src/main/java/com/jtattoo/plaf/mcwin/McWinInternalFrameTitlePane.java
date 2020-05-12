@@ -38,7 +38,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>McWinInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -208,15 +211,22 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for McWinInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public McWinInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected LayoutManager createLayout() {
 		return new MyTitlePaneLayout();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (JTattooUtilities.isActive(this)) {
@@ -227,6 +237,7 @@ public class McWinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {

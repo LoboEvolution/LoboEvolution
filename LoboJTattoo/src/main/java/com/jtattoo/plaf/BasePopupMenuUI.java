@@ -42,7 +42,10 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 /**
+ * <p>BasePopupMenuUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BasePopupMenuUI extends BasicPopupMenuUI {
 
@@ -82,8 +85,10 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 	} // end of class MyPopupMenuListener
 
+	/** Constant robot */
 	protected static Robot robot = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BasePopupMenuUI();
 	}
@@ -92,6 +97,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 
 	protected MyPopupMenuListener myPopupListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	public Popup getPopup(JPopupMenu popupMenu, int x, int y) {
 		Popup popup = super.getPopup(popupMenu, x, y);
@@ -125,6 +131,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		return robot;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installListeners() {
 		super.installListeners();
@@ -134,6 +141,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -149,6 +157,7 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		screenImage = null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallListeners() {
 		if (!isMenuOpaque()) {
@@ -157,12 +166,14 @@ public class BasePopupMenuUI extends BasicPopupMenuUI {
 		super.uninstallListeners();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		super.uninstallUI(c);
 		c.setOpaque(true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (screenImage != null) {

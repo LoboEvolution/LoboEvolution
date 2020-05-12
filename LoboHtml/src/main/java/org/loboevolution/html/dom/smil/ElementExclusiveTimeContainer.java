@@ -28,23 +28,33 @@ import org.w3c.dom.NodeList;
  * This interface defines a time container with semantics based upon par, but
  * with the additional constraint that only one child element may play at a
  * time.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ElementExclusiveTimeContainer extends ElementTimeContainer {
 	/**
 	 * Controls the end of the container. Need to address thr id-ref value.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getEndSync();
 
+	/**
+	 * <p>setEndSync.</p>
+	 *
+	 * @param endSync a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setEndSync(String endSync) throws DOMException;
 
 	/**
 	 * This should support another method to get the ordered collection of
 	 * paused elements (the paused stack) at a given point in time.
-	 * 
+	 *
 	 * @return All paused elements at the current time.
 	 */
 	public NodeList getPausedElements();

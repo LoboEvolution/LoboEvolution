@@ -38,10 +38,14 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicFormattedTextFieldUI;
 
 /**
+ * <p>BaseFormattedTextFieldUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseFormattedTextFieldUI();
 	}
@@ -50,6 +54,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
 	private FocusListener focusListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -86,6 +91,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g) {
 		g.setColor(getComponent().getBackground());
@@ -97,6 +103,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 		g.fillRect(0, 0, getComponent().getWidth(), getComponent().getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintSafely(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -112,6 +119,7 @@ public class BaseFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		getComponent().removeFocusListener(focusListener);

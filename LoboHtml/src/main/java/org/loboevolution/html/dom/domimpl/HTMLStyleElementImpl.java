@@ -34,39 +34,60 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 
+/**
+ * <p>HTMLStyleElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleElement {
 	private boolean disabled;
 
 	private CSSStyleSheetImpl styleSheet;
 
+	/**
+	 * <p>Constructor for HTMLStyleElementImpl.</p>
+	 */
 	public HTMLStyleElementImpl() {
 		super("STYLE", true);
 	}
 
+	/**
+	 * <p>Constructor for HTMLStyleElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLStyleElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		// nop
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
 		return this.disabled;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getMedia() {
 		return getAttribute("media");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		return getAttribute("type");
 	}
 
+	/**
+	 * <p>processStyle.</p>
+	 */
 	protected void processStyle() {
 		this.styleSheet = null;
 		if (CSSUtilities.matchesMedia(getMedia(), getUserAgentContext())) {
@@ -91,6 +112,7 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
@@ -100,16 +122,19 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setMedia(String media) {
 		setAttribute("media", media);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {

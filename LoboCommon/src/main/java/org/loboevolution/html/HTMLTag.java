@@ -4,6 +4,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>HTMLTag class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public enum HTMLTag {
 	
 	A("A"),
@@ -108,14 +114,31 @@ public enum HTMLTag {
 		this.value = value;
 	}
 
+	/**
+	 * <p>Getter for the field value.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getValue() {
 		return value;
 	}
 
+	/**
+	 * <p>isEqual.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean isEqual(String value) {
 		return this.value.equals(value);
 	}
 
+	/**
+	 * <p>get.</p>
+	 *
+	 * @param actionName a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.HTMLTag} object.
+	 */
 	public static HTMLTag get(String actionName) {
 		return ENUM_MAP.get(actionName);
 	}

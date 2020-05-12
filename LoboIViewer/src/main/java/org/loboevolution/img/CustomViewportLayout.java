@@ -18,18 +18,26 @@ class CustomViewportLayout implements LayoutManager {
 
 	private final ImageViewer viewer;
 
+	/**
+	 * <p>Constructor for CustomViewportLayout.</p>
+	 *
+	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public CustomViewportLayout(ImageViewer viewer) {
 		this.viewer = viewer;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeLayoutComponent(Component comp) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension preferredLayoutSize(Container parent) {
 		BufferedImage image = viewer.getImage();
@@ -39,11 +47,13 @@ class CustomViewportLayout implements LayoutManager {
 			return new Dimension(image.getWidth(), image.getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension minimumLayoutSize(Container parent) {
 		return new Dimension(4, 4);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void layoutContainer(Container parent) {
 		JViewport vp = (JViewport) parent;

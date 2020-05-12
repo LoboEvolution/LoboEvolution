@@ -9,6 +9,12 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.BookmarksStore;
 
+/**
+ * <p>OkCancelAddBookAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class OkCancelAddBookAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -17,11 +23,18 @@ public class OkCancelAddBookAction extends AbstractAction {
 
 	private final AddBookmarkWindow window;
 
+	/**
+	 * <p>Constructor for OkCancelAddBookAction.</p>
+	 *
+	 * @param window a {@link org.loboevolution.menu.bookmarks.AddBookmarkWindow} object.
+	 * @param add a boolean.
+	 */
 	public OkCancelAddBookAction(AddBookmarkWindow window, boolean add) {
 		this.window = window;
 		this.add = add;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		final BookmarksStore book = new BookmarksStore();

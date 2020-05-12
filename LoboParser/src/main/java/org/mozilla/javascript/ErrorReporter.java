@@ -13,8 +13,8 @@ package org.mozilla.javascript;
  * errors during JavaScript translation or execution.
  *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
-
 public interface ErrorReporter {
 
     /**

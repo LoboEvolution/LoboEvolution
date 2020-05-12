@@ -28,12 +28,20 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>SmartBorderFactory class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartBorderFactory implements AbstractBorderFactory {
 
 	private static SmartBorderFactory instance = null;
 
+	/**
+	 * <p>Getter for the field instance.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.smart.SmartBorderFactory} object.
+	 */
 	public static synchronized SmartBorderFactory getInstance() {
 		if (instance == null) {
 			instance = new SmartBorderFactory();
@@ -44,96 +52,115 @@ public class SmartBorderFactory implements AbstractBorderFactory {
 	private SmartBorderFactory() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getButtonBorder() {
 		return SmartBorders.getButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getComboBoxBorder() {
 		return BaseBorders.getComboBoxBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getDesktopIconBorder() {
 		return BaseBorders.getDesktopIconBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getFocusFrameBorder() {
 		return BaseBorders.getFocusFrameBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getInternalFrameBorder() {
 		return SmartBorders.getInternalFrameBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getMenuBarBorder() {
 		return BaseBorders.getMenuBarBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getMenuItemBorder() {
 		return BaseBorders.getMenuItemBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getPaletteBorder() {
 		return SmartBorders.getPaletteBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getPopupMenuBorder() {
 		return BaseBorders.getPopupMenuBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getProgressBarBorder() {
 		return BaseBorders.getProgressBarBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getScrollPaneBorder() {
 		return BaseBorders.getScrollPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getSpinnerBorder() {
 		return BaseBorders.getSpinnerBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTabbedPaneBorder() {
 		return BaseBorders.getTabbedPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTableHeaderBorder() {
 		return BaseBorders.getTableHeaderBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTableScrollPaneBorder() {
 		return BaseBorders.getTableScrollPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTextBorder() {
 		return BaseBorders.getTextBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTextFieldBorder() {
 		return BaseBorders.getTextFieldBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getToggleButtonBorder() {
 		return SmartBorders.getToggleButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getToolBarBorder() {
 		return BaseBorders.getToolBarBorder();

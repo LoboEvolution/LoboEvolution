@@ -20,25 +20,67 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFETurbulenceElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFETurbulenceElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Turbulence Types
+	/** Constant SVG_TURBULENCE_TYPE_UNKNOWN=0 */
 	static final short SVG_TURBULENCE_TYPE_UNKNOWN = 0;
+	/** Constant SVG_TURBULENCE_TYPE_FRACTALNOISE=1 */
 	static final short SVG_TURBULENCE_TYPE_FRACTALNOISE = 1;
+	/** Constant SVG_TURBULENCE_TYPE_TURBULENCE=2 */
 	static final short SVG_TURBULENCE_TYPE_TURBULENCE = 2;
 	// Stitch Options
+	/** Constant SVG_STITCHTYPE_UNKNOWN=0 */
 	static final short SVG_STITCHTYPE_UNKNOWN = 0;
+	/** Constant SVG_STITCHTYPE_STITCH=1 */
 	static final short SVG_STITCHTYPE_STITCH = 1;
+	/** Constant SVG_STITCHTYPE_NOSTITCH=2 */
 	static final short SVG_STITCHTYPE_NOSTITCH = 2;
 
+	/**
+	 * <p>getBaseFrequencyX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getBaseFrequencyX();
 
+	/**
+	 * <p>getBaseFrequencyY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getBaseFrequencyY();
 
+	/**
+	 * <p>getNumOctaves.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getNumOctaves();
 
+	/**
+	 * <p>getSeed.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getSeed();
 
+	/**
+	 * <p>getStitchTiles.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getStitchTiles();
 
+	/**
+	 * <p>getType.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getType();
 }

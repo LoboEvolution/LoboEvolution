@@ -15,12 +15,24 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.net.Cookie;
 import org.loboevolution.util.DateUtil;
 
+/**
+ * <p>CookieStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CookieStore {
 	
 	/** The date pattern. */
 	private static final String PATTERN = "dd/MM/yyyy";
 
 	
+	/**
+	 * <p>saveCookie.</p>
+	 *
+	 * @param urlHostName a {@link java.lang.String} object.
+	 * @param cookieSpec a {@link java.lang.String} object.
+	 */
 	public static void saveCookie(String urlHostName, String cookieSpec) {
 		String cookieName = null;
 		String cookieValue = null;
@@ -114,6 +126,9 @@ public class CookieStore {
 	 *            the expires
 	 * @param value
 	 *            the value
+	 * @param maxAge a {@link java.lang.String} object.
+	 * @param secure a boolean.
+	 * @param httponly a boolean.
 	 */
 	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge, boolean secure, boolean httponly) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -133,6 +148,13 @@ public class CookieStore {
 		}
 	}
 
+	/**
+	 * <p>getCookies.</p>
+	 *
+	 * @param hostName a {@link java.lang.String} object.
+	 * @param path a {@link java.lang.String} object.
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<Cookie> getCookies(String hostName, String path) {
 		List<Cookie> cookies = new ArrayList<Cookie>();
 		GeneralStore settings = GeneralStore.getNetwork();

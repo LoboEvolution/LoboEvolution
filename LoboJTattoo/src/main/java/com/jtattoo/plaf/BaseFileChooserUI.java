@@ -38,7 +38,10 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalFileChooserUI;
 
 /**
+ * <p>BaseFileChooserUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseFileChooserUI extends MetalFileChooserUI {
 
@@ -68,6 +71,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 	private static final int PREF_HEIGHT = 340;
 	private static final Dimension PREF_SIZE = new Dimension(PREF_WIDTH, PREF_HEIGHT);
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseFileChooserUI((JFileChooser) c);
 	}
@@ -76,24 +80,28 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 
 	private AncestorListener ancestorListener = null;
 
+	/**
+	 * <p>Constructor for BaseFileChooserUI.</p>
+	 *
+	 * @param fileChooser a {@link javax.swing.JFileChooser} object.
+	 */
 	public BaseFileChooserUI(JFileChooser fileChooser) {
 		super(fileChooser);
 		fileView = new BaseFileView();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public FileView getFileView(JFileChooser fc) {
 		return fileView;
 	}
 
 	/**
-	 * Returns the preferred size of the specified <code>JFileChooser</code>. The
+	 * {@inheritDoc}
+	 *
+	 * Returns the preferred size of the specified JFileChooser. The
 	 * preferred size is at least as large, in both height and width, as the
 	 * preferred size recommended by the file chooser's layout manager.
-	 *
-	 * @param c a <code>JFileChooser</code>
-	 * @return a <code>Dimension</code> specifying the preferred width and height of
-	 *         the file chooser
 	 */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
@@ -107,6 +115,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners(JFileChooser fc) {
 		super.installListeners(fc);
@@ -132,6 +141,7 @@ public class BaseFileChooserUI extends MetalFileChooserUI {
 		fc.addAncestorListener(ancestorListener);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners(JFileChooser fc) {
 		super.uninstallListeners(fc);

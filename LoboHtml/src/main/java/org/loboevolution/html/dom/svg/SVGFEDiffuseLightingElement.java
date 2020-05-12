@@ -20,14 +20,45 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEDiffuseLightingElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEDiffuseLightingElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 
+	/**
+	 * <p>getSurfaceScale.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getSurfaceScale();
 
+	/**
+	 * <p>getDiffuseConstant.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getDiffuseConstant();
 
+	/**
+	 * <p>getKernelUnitLengthX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getKernelUnitLengthX();
 
+	/**
+	 * <p>getKernelUnitLengthY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getKernelUnitLengthY();
 }

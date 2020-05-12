@@ -21,5 +21,11 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGMPathElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGMPathElement extends SVGElement, SVGURIReference, SVGExternalResourcesRequired {
 }

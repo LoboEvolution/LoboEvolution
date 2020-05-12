@@ -35,21 +35,37 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+/**
+ * <p>HTMLTableRowElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTableRowElement {
 	
+	/**
+	 * <p>Constructor for HTMLTableRowElementImpl.</p>
+	 */
 	public HTMLTableRowElementImpl() {
 		super("TR", true);
 	}
 	
+    /** {@inheritDoc} */
     @Override
     protected RenderState createRenderState(RenderState prevRenderState) {
         return new TableRowRenderState(prevRenderState, this);
     }
 
+	/**
+	 * <p>Constructor for HTMLTableRowElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLTableRowElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deleteCell(int index) throws DOMException {
 		int trcount = 0;
@@ -63,32 +79,38 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
 		return getAttribute("align");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBgColor() {
 		return getAttribute("bgcolor");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getCells() {
 		final NodeFilter filter = node -> node instanceof HTMLTableCellElementImpl;
         return new HTMLCollectionImpl(this, filter);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCh() {
 		return getAttribute("ch");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getChOff() {
 		return getAttribute("choff");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getRowIndex() {
 		final NodeImpl parent = (NodeImpl) getParentNode();
@@ -115,17 +137,20 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 		return -1;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getSectionRowIndex() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getVAlign() {
 		return getAttribute("valign");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement insertCell(int index) throws DOMException {
 		return this.insertCell(index, "TD");
@@ -162,35 +187,40 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	 * Inserts a TH element at the specified index.
 	 * <p>
 	 * Note: This method is non-standard.
-	 * 
+	 *
 	 * @param index The cell index to insert at.
 	 * @return The element that was inserted.
-	 * @throws DOMException When the index is out of range.
+	 * @throws org.w3c.dom.DOMException When the index is out of range.
 	 */
 	public HTMLElement insertHeader(int index) throws DOMException {
 		return this.insertCell(index, "TH");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
 		setAttribute("align", align);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBgColor(String bgColor) {
 		setAttribute("bgcolor", bgColor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCh(String ch) {
 		setAttribute("ch", ch);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setChOff(String chOff) {
 		setAttribute("choff", chOff);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setVAlign(String vAlign) {
 		setAttribute("valign", vAlign);

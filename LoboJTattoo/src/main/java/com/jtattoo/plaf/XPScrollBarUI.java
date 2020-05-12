@@ -35,22 +35,33 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>XPScrollBarUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class XPScrollBarUI extends BaseScrollBarUI {
 
+	/** Constant rolloverColors */
 	protected static Color rolloverColors[] = null;
+	/** Constant dragColors */
 	protected static Color dragColors[] = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new XPScrollBarUI();
 	}
 
+	/**
+	 * <p>getFrameColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	protected Color getFrameColor() {
 		return Color.white;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getThumbColors() {
 		if (isDragging) {
@@ -62,6 +73,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 		return AbstractLookAndFeel.getTheme().getThumbColors();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
@@ -74,6 +86,7 @@ public class XPScrollBarUI extends BaseScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		if (!c.isEnabled()) {

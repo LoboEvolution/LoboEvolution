@@ -23,6 +23,18 @@
  */
 package org.loboevolution.html.js;
 
+/**
+ * <p>ObjectFilter interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface ObjectFilter {
+	/**
+	 * <p>accept.</p>
+	 *
+	 * @param target a {@link java.lang.Object} object.
+	 * @return a boolean.
+	 */
 	boolean accept(Object target);
 }

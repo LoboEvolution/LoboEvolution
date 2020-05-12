@@ -35,156 +35,195 @@ import org.loboevolution.html.dom.svg.SVGPathSegMovetoRel;
 import org.loboevolution.html.dom.svg.SVGPoint;
 import org.loboevolution.html.dom.svg.SVGPointList;
 
+/**
+ * <p>SVGPathElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	private SVGPathSegList pathSegList;
 
 	private SVGPointList points;
 
+	/**
+	 * <p>Constructor for SVGPathElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGPathElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegList getPathSegList() {
 		return pathSegList;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegList getNormalizedPathSegList() {
 		return pathSegList;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegList getAnimatedPathSegList() {
 		return pathSegList;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegList getAnimatedNormalizedPathSegList() {
 		return pathSegList;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedNumber getPathLength() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getTotalLength() {
 		return pathSegList.getNumberOfItems();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPoint getPointAtLength(float distance) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getPathSegAtLength(float distance) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegClosePath createSVGPathSegClosePath() {
 		return new SVGPathSegClosePathImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegMovetoAbs createSVGPathSegMovetoAbs(float x, float y) {
 		return new SVGPathSegMovetoAbsImpl(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegMovetoRel createSVGPathSegMovetoRel(float x, float y) {
 		return new SVGPathSegMovetoRelImpl(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegLinetoAbs createSVGPathSegLinetoAbs(float x, float y) {
 		return new SVGPathSegLinetoAbsImpl(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegLinetoRel createSVGPathSegLinetoRel(float x, float y) {
 		return new SVGPathSegLinetoRelImpl(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoCubicAbs createSVGPathSegCurvetoCubicAbs(float x, float y, float x1, float y1, float x2, float y2) {
 		return new SVGPathSegCurvetoCubicAbsImpl(x, y, x1, y1, x2, y2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoCubicRel createSVGPathSegCurvetoCubicRel(float x, float y, float x1, float y1, float x2, float y2) {
 		return new SVGPathSegCurvetoCubicRelImpl(x, y, x1, y1, x2, y2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoQuadraticAbs createSVGPathSegCurvetoQuadraticAbs(float x, float y, float x1, float y1) {
 		return new SVGPathSegCurvetoQuadraticAbsImpl(x, y, x1, y1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoQuadraticRel createSVGPathSegCurvetoQuadraticRel(float x, float y, float x1, float y1) {
 		return new SVGPathSegCurvetoQuadraticRelImpl(x, y, x1, y1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegArcAbs createSVGPathSegArcAbs(float x, float y, float r1, float r2, float angle,
 			boolean largeArcFlag, boolean sweepFlag) {
 		return new SVGPathSegArcAbsImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegArcRel createSVGPathSegArcRel(float x, float y, float r1, float r2, float angle,
 			boolean largeArcFlag, boolean sweepFlag) {
 		return new SVGPathSegArcRelImpl(x, y, r1, r2, angle, largeArcFlag, sweepFlag);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegLinetoHorizontalAbs createSVGPathSegLinetoHorizontalAbs(float x) {
 		return new SVGPathSegLinetoHorizontalAbsImpl(x);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegLinetoHorizontalRel createSVGPathSegLinetoHorizontalRel(float x) {
 		return new SVGPathSegLinetoHorizontalRelImpl(x);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegLinetoVerticalAbs createSVGPathSegLinetoVerticalAbs(float y) {
 		return new SVGPathSegLinetoVerticalAbsImpl(y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegLinetoVerticalRel createSVGPathSegLinetoVerticalRel(float y) {
 		return new SVGPathSegLinetoVerticalRelImpl(y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoCubicSmoothAbs createSVGPathSegCurvetoCubicSmoothAbs(float x, float y, float x2, float y2) {
 		return new SVGPathSegCurvetoCubicSmoothAbsImpl(x, y, x2, y2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoCubicSmoothRel createSVGPathSegCurvetoCubicSmoothRel(float x, float y, float x2, float y2) {
 		return new SVGPathSegCurvetoCubicSmoothRelImpl(x, y, x2, y2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoQuadraticSmoothAbs createSVGPathSegCurvetoQuadraticSmoothAbs(float x, float y) {
 		return new SVGPathSegCurvetoQuadraticSmoothAbsImpl(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSegCurvetoQuadraticSmoothRel createSVGPathSegCurvetoQuadraticSmoothRel(float x, float y) {
 		return new SVGPathSegCurvetoQuadraticSmoothRelImpl(x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		String attribute = getAttribute("d");
@@ -194,6 +233,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();

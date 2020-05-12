@@ -15,6 +15,12 @@ import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.component.BrowserFrame;
 
+/**
+ * <p>PreferenceWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class PreferenceWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -31,8 +37,7 @@ public class PreferenceWindow extends JFrame {
 	/**
 	 * Instantiates a new preferences dialog.
 	 *
-	 * @param parent the parent
-	 * @throws HeadlessException the headless exception
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
 	public PreferenceWindow(BrowserFrame frame) {
 		this.frame = frame;
@@ -109,6 +114,8 @@ public class PreferenceWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field frame.</p>
+	 *
 	 * @return the frame
 	 */
 	public BrowserFrame getFrame() {
@@ -116,6 +123,8 @@ public class PreferenceWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field preferencesPanel.</p>
+	 *
 	 * @return the preferencesPanel
 	 */
 	public PreferencesPanel getPreferencesPanel() {
@@ -123,6 +132,8 @@ public class PreferenceWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field frame.</p>
+	 *
 	 * @param frame the frame to set
 	 */
 	public void setFrame(BrowserFrame frame) {

@@ -32,10 +32,18 @@ import com.jtattoo.plaf.BaseIcons;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>TextureIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureIcons extends BaseIcons {
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -51,6 +59,11 @@ public class TextureIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getDownArrowIcon() {
 		if (downArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -64,6 +77,11 @@ public class TextureIcons extends BaseIcons {
 		return downArrowIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -79,6 +97,11 @@ public class TextureIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getLeftArrowIcon() {
 		if (leftArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -92,6 +115,11 @@ public class TextureIcons extends BaseIcons {
 		return leftArrowIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -107,6 +135,11 @@ public class TextureIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -122,6 +155,11 @@ public class TextureIcons extends BaseIcons {
 		return minIcon;
 	}
 
+	/**
+	 * <p>getRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRightArrowIcon() {
 		if (rightArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -135,6 +173,11 @@ public class TextureIcons extends BaseIcons {
 		return rightArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterHorBumpIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterHorBumpIcon() {
 		if (splitterHorBumpIcon == null) {
 			splitterHorBumpIcon = new LazyImageIcon("texture/icons/SplitterHorBumps.gif");
@@ -142,6 +185,11 @@ public class TextureIcons extends BaseIcons {
 		return splitterHorBumpIcon;
 	}
 
+	/**
+	 * <p>getSplitterVerBumpIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterVerBumpIcon() {
 		if (splitterVerBumpIcon == null) {
 			splitterVerBumpIcon = new LazyImageIcon("texture/icons/SplitterVerBumps.gif");
@@ -149,6 +197,11 @@ public class TextureIcons extends BaseIcons {
 		return splitterVerBumpIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
 			if (thumbHorIcon == null) {
@@ -160,6 +213,11 @@ public class TextureIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
 			if (thumbHorIconRollover == null) {
@@ -171,6 +229,11 @@ public class TextureIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
 			if (thumbVerIcon == null) {
@@ -182,6 +245,11 @@ public class TextureIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if ("Default".equals(AbstractLookAndFeel.getTheme().getName())) {
 			if (thumbVerIconRollover == null) {
@@ -193,6 +261,11 @@ public class TextureIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getUpArrowIcon() {
 		if (upArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {

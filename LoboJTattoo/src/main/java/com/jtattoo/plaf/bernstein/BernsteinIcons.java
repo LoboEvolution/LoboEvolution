@@ -35,7 +35,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>BernsteinIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinIcons extends BaseIcons {
 
@@ -164,6 +167,11 @@ public class BernsteinIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getCheckBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
 			checkBoxIcon = new CheckBoxIcon();
@@ -171,6 +179,11 @@ public class BernsteinIcons extends BaseIcons {
 		return checkBoxIcon;
 	}
 
+	/**
+	 * <p>getRadioButtonIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRadioButtonIcon() {
 		if (radioButtonIcon == null) {
 			radioButtonIcon = new RadioButtonIcon();
@@ -178,6 +191,11 @@ public class BernsteinIcons extends BaseIcons {
 		return radioButtonIcon;
 	}
 
+	/**
+	 * <p>getSplitterDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterDownArrowIcon() {
 		if (splitterDownArrowIcon == null) {
 			splitterDownArrowIcon = new LazyImageIcon("bernstein/icons/SplitterDownArrow.gif");
@@ -185,6 +203,11 @@ public class BernsteinIcons extends BaseIcons {
 		return splitterDownArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterLeftArrowIcon() {
 		if (splitterLeftArrowIcon == null) {
 			splitterLeftArrowIcon = new LazyImageIcon("bernstein/icons/SplitterLeftArrow.gif");
@@ -192,6 +215,11 @@ public class BernsteinIcons extends BaseIcons {
 		return splitterLeftArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterRightArrowIcon() {
 		if (splitterRightArrowIcon == null) {
 			splitterRightArrowIcon = new LazyImageIcon("bernstein/icons/SplitterRightArrow.gif");
@@ -199,6 +227,11 @@ public class BernsteinIcons extends BaseIcons {
 		return splitterRightArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterUpArrowIcon() {
 		if (splitterUpArrowIcon == null) {
 			splitterUpArrowIcon = new LazyImageIcon("bernstein/icons/SplitterUpArrow.gif");
@@ -206,6 +239,11 @@ public class BernsteinIcons extends BaseIcons {
 		return splitterUpArrowIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if (thumbHorIcon == null) {
 			thumbHorIcon = new LazyImageIcon("bernstein/icons/radio.gif");
@@ -213,6 +251,11 @@ public class BernsteinIcons extends BaseIcons {
 		return thumbHorIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if (thumbHorIconRollover == null) {
 			thumbHorIconRollover = new LazyImageIcon("bernstein/icons/radio_rollover.gif");
@@ -220,6 +263,11 @@ public class BernsteinIcons extends BaseIcons {
 		return thumbHorIconRollover;
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if (thumbVerIcon == null) {
 			thumbVerIcon = new LazyImageIcon("bernstein/icons/radio.gif");
@@ -227,6 +275,11 @@ public class BernsteinIcons extends BaseIcons {
 		return thumbVerIcon;
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if (thumbVerIconRollover == null) {
 			thumbVerIconRollover = new LazyImageIcon("bernstein/icons/radio_rollover.gif");

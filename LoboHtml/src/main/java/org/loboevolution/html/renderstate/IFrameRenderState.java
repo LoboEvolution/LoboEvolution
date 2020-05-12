@@ -27,12 +27,25 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 
+/**
+ * <p>IFrameRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class IFrameRenderState extends StyleSheetRenderState {
 
+	/**
+	 * <p>Constructor for IFrameRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public IFrameRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
@@ -90,6 +103,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getOverflowX() {
 		int overflow = this.overflowX;
@@ -117,6 +131,7 @@ public class IFrameRenderState extends StyleSheetRenderState {
 		return overflow;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getOverflowY() {
 		int overflow = this.overflowY;

@@ -25,24 +25,42 @@ import java.awt.ComponentOrientation;
 import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
+/**
+ * <p>InputControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 	
 	private HTMLInputElementImpl  modelNode;
 	
+	/**
+	 * <p>Constructor for InputControl.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 */
 	public InputControl(HTMLInputElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
 		this.modelNode = modelNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		modelNode.draw(this);
 	}
 	
+	/**
+	 * <p>direction.</p>
+	 *
+	 * @param dir a {@link java.lang.String} object.
+	 * @return a {@link java.awt.ComponentOrientation} object.
+	 */
 	public ComponentOrientation direction(String dir) {
 		if ("ltr".equalsIgnoreCase(dir)) {
 			return ComponentOrientation.LEFT_TO_RIGHT;

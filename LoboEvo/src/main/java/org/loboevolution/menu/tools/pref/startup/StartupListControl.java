@@ -11,6 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
+/**
+ * <p>StartupListControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class StartupListControl extends JComponent {
 
 	/** The Constant serialVersionUID. */

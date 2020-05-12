@@ -8,14 +8,28 @@ import org.loboevolution.html.dom.svg.SVGPathSeg;
 import org.loboevolution.html.dom.svg.SVGPathSegList;
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGPathSegListImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGPathSegListImpl implements SVGPathSegList {
 
 	private List<SVGPathSeg> pointList;
 
+	/**
+	 * <p>Constructor for SVGPathSegListImpl.</p>
+	 */
 	public SVGPathSegListImpl() {
 		pointList = new ArrayList<SVGPathSeg>();
 	}
 
+	/**
+	 * <p>Constructor for SVGPathSegListImpl.</p>
+	 *
+	 * @param pathSegList a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
+	 */
 	public SVGPathSegListImpl(SVGPathSegList pathSegList) {
 		pointList = new ArrayList<SVGPathSeg>();
 		for (SVGPathSeg seg : pointList) {
@@ -195,16 +209,19 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getNumberOfItems() {
 		return pointList.size();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void clear() throws DOMException {
 		pointList.clear();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg initialize(SVGPathSeg newItem) throws DOMException, SVGException {
 		pointList = new ArrayList<SVGPathSeg>();
@@ -212,11 +229,13 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg getItem(int index) throws DOMException {
 		return pointList.get(index);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg insertItemBefore(SVGPathSeg newItem, int index) throws DOMException, SVGException {
 
@@ -234,6 +253,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg replaceItem(SVGPathSeg newItem, int index) throws DOMException, SVGException {
 
@@ -250,11 +270,13 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 		return newItem;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg removeItem(int index) throws DOMException {
 		return pointList.remove(index);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg appendItem(SVGPathSeg newItem) throws DOMException, SVGException {
 		pointList.add(newItem);

@@ -28,6 +28,7 @@ class DefaultErrorReporter implements ErrorReporter
         return r;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void warning(String message, String sourceURI, int line,
                         String lineText, int lineOffset)
@@ -40,6 +41,7 @@ class DefaultErrorReporter implements ErrorReporter
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void error(String message, String sourceURI, int line,
                       String lineText, int lineOffset)
@@ -68,6 +70,7 @@ class DefaultErrorReporter implements ErrorReporter
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public EvaluatorException runtimeError(String message, String sourceURI,
                                            int line, String lineText,

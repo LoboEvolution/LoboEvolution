@@ -21,12 +21,38 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGLinearGradientElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGLinearGradientElement extends SVGGradientElement {
+	/**
+	 * <p>getX1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX1();
 
+	/**
+	 * <p>getY1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY1();
 
+	/**
+	 * <p>getX2.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX2();
 
+	/**
+	 * <p>getY2.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY2();
 }

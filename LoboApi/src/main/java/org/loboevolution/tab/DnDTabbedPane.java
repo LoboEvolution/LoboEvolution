@@ -16,6 +16,12 @@ import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.store.TabStore;
 
+/**
+ * <p>DnDTabbedPane class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DnDTabbedPane extends JTabbedPane {
 
 	private static final long serialVersionUID = 1L;
@@ -32,10 +38,21 @@ public class DnDTabbedPane extends JTabbedPane {
 
 	private int index;
 	
+	/**
+	 * <p>Constructor for DnDTabbedPane.</p>
+	 *
+	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 */
 	public DnDTabbedPane(IBrowserPanel browserPanel) {
 		init(browserPanel);
 	}
 
+	/**
+	 * <p>getDropIndex.</p>
+	 *
+	 * @param p a {@link java.awt.Point} object.
+	 * @return a int.
+	 */
 	protected int getDropIndex(Point p) {
 		int idx = indexAtLocation(p.x, p.y);
 		if (idx == -1 && getTabCount() > 0) {
@@ -49,6 +66,8 @@ public class DnDTabbedPane extends JTabbedPane {
 	}
 
 	/**
+	 * <p>Getter for the field glass.</p>
+	 *
 	 * @return the glass
 	 */
 	protected GlassPane getGlass() {
@@ -56,6 +75,8 @@ public class DnDTabbedPane extends JTabbedPane {
 	}
 
 	/**
+	 * <p>Getter for the field index.</p>
+	 *
 	 * @return the index
 	 */
 	public int getIndex() {
@@ -80,6 +101,8 @@ public class DnDTabbedPane extends JTabbedPane {
 	}
 
 	/**
+	 * <p>Setter for the field index.</p>
+	 *
 	 * @param index the index to set
 	 */
 	public void setIndex(int index) {
@@ -87,6 +110,8 @@ public class DnDTabbedPane extends JTabbedPane {
 	}
 
 	/**
+	 * <p>Getter for the field browserPanel.</p>
+	 *
 	 * @return the browserPanel
 	 */
 	public IBrowserPanel getBrowserPanel() {

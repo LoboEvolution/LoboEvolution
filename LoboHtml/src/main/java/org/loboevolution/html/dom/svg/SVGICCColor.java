@@ -22,10 +22,32 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGICCColor interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGICCColor {
+	/**
+	 * <p>getColorProfile.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getColorProfile();
 
+	/**
+	 * <p>setColorProfile.</p>
+	 *
+	 * @param colorProfile a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setColorProfile(String colorProfile) throws DOMException;
 
+	/**
+	 * <p>getColors.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumberList} object.
+	 */
 	SVGNumberList getColors();
 }

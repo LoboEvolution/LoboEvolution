@@ -22,20 +22,66 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.events.EventTarget;
 
+/**
+ * <p>SVGElementInstance interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGElementInstance extends EventTarget {
+	/**
+	 * <p>getCorrespondingElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElement} object.
+	 */
 	SVGElement getCorrespondingElement();
 
+	/**
+	 * <p>getCorrespondingUseElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGUseElement} object.
+	 */
 	SVGUseElement getCorrespondingUseElement();
 
+	/**
+	 * <p>getParentNode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getParentNode();
 
+	/**
+	 * <p>getChildNodes.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstanceList} object.
+	 */
 	SVGElementInstanceList getChildNodes();
 
+	/**
+	 * <p>getFirstChild.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getFirstChild();
 
+	/**
+	 * <p>getLastChild.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getLastChild();
 
+	/**
+	 * <p>getPreviousSibling.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getPreviousSibling();
 
+	/**
+	 * <p>getNextSibling.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getNextSibling();
 }

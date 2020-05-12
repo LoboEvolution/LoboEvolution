@@ -27,17 +27,32 @@ import org.w3c.dom.CharacterData;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 
+/**
+ * <p>Abstract CharacterDataImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class CharacterDataImpl extends NodeImpl implements CharacterData {
 	protected volatile String text;
 
+	/**
+	 * <p>Constructor for CharacterDataImpl.</p>
+	 */
 	public CharacterDataImpl() {
 		super();
 	}
 
+	/**
+	 * <p>Constructor for CharacterDataImpl.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 */
 	public CharacterDataImpl(String text) {
 		this.text = text;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void appendData(String arg) throws DOMException {
 		this.text += arg;
@@ -51,6 +66,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#cloneNode(boolean)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode(boolean deep) {
 		final CharacterDataImpl newNode = (CharacterDataImpl) super.cloneNode(deep);
@@ -58,6 +74,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		return newNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deleteData(int offset, int count) throws DOMException {
 		final StringBuilder buffer = new StringBuilder(this.text);
@@ -68,25 +85,34 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		}
 	}
 
+	/**
+	 * <p>getClassName.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getClassName() {
 		return "HTMLCharacterData";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getData() throws DOMException {
 		return this.text;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		return this.text.length();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTextContent() throws DOMException {
 		return this.text;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void insertData(int offset, String arg) throws DOMException {
 		final StringBuilder buffer = new StringBuilder(this.text);
@@ -97,6 +123,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void replaceData(int offset, int count, String arg) throws DOMException {
 		final StringBuilder buffer = new StringBuilder(this.text);
@@ -107,6 +134,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setData(String data) throws DOMException {
 		this.text = data;
@@ -115,6 +143,7 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) throws DOMException {
 		this.text = textContent;
@@ -123,11 +152,13 @@ public abstract class CharacterDataImpl extends NodeImpl implements CharacterDat
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String substringData(int offset, int count) throws DOMException {
 		return this.text.substring(offset, offset + count);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		String someText = this.text;

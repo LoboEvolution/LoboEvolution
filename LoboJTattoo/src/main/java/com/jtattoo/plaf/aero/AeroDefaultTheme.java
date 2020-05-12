@@ -30,8 +30,17 @@ import javax.swing.plaf.ColorUIResource;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
+/**
+ * <p>AeroDefaultTheme class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class AeroDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for AeroDefaultTheme.</p>
+	 */
 	public AeroDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -42,11 +51,13 @@ public class AeroDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "AeroTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -102,6 +113,7 @@ public class AeroDefaultTheme extends AbstractTheme {
 		desktopColor = new ColorUIResource(240, 240, 240);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

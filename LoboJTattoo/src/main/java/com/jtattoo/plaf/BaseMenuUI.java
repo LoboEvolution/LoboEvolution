@@ -44,7 +44,10 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuUI;
 
 /**
+ * <p>BaseMenuUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseMenuUI extends BasicMenuUI {
 
@@ -74,17 +77,20 @@ public class BaseMenuUI extends BasicMenuUI {
 		}
 	} // end of class MyMouseInputHandler
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseMenuUI();
 	}
 
 	protected boolean paintRolloverBorder = true;
 
+	/** {@inheritDoc} */
 	@Override
 	protected MouseInputListener createMouseInputListener(JComponent c) {
 		return new MyMouseInputHandler();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
@@ -94,12 +100,23 @@ public class BaseMenuUI extends BasicMenuUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
 		c.setOpaque(false);
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
 		JMenuItem mi = (JMenuItem) c;
 		Color backColor = mi.getBackground();
@@ -145,6 +162,7 @@ public class BaseMenuUI extends BasicMenuUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
 		if (menuItem.isOpaque()) {
@@ -154,6 +172,7 @@ public class BaseMenuUI extends BasicMenuUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
 		ButtonModel model = menuItem.getModel();
@@ -183,6 +202,7 @@ public class BaseMenuUI extends BasicMenuUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		c.setOpaque(true);
@@ -193,6 +213,7 @@ public class BaseMenuUI extends BasicMenuUI {
 // inner classes
 //------------------------------------------------------------------------------
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		paintBackground(g, c, 0, 0, c.getWidth(), c.getHeight());

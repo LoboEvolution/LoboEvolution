@@ -38,11 +38,16 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLHRElement extends HTMLElement {
 	/**
 	 * Align the rule on the page. See the align attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAlign();
 
@@ -50,24 +55,32 @@ public interface HTMLHRElement extends HTMLElement {
 	 * Indicates to the user agent that there should be no shading in the rendering
 	 * of this element. See the noshade attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getNoShade();
 
 	/**
 	 * The height of the rule. See the size attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getSize();
 
 	/**
 	 * The width of the rule. See the width attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getWidth();
 
 	/**
 	 * Align the rule on the page. See the align attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align a {@link java.lang.String} object.
 	 */
 	void setAlign(String align);
 
@@ -75,18 +88,24 @@ public interface HTMLHRElement extends HTMLElement {
 	 * Indicates to the user agent that there should be no shading in the rendering
 	 * of this element. See the noshade attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param noShade a boolean.
 	 */
 	void setNoShade(boolean noShade);
 
 	/**
 	 * The height of the rule. See the size attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param size a {@link java.lang.String} object.
 	 */
 	void setSize(String size);
 
 	/**
 	 * The width of the rule. See the width attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param width a {@link java.lang.String} object.
 	 */
 	void setWidth(String width);
 

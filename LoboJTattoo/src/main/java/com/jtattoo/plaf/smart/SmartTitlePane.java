@@ -43,7 +43,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>SmartTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartTitlePane extends BaseTitlePane {
 
@@ -52,10 +55,17 @@ public class SmartTitlePane extends BaseTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for SmartTitlePane.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 */
 	public SmartTitlePane(JRootPane root, BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void createButtons() {
 		iconifyButton = new BaseTitleButton(iconifyAction, ICONIFY, iconifyIcon, 1.0f);
@@ -63,6 +73,7 @@ public class SmartTitlePane extends BaseTitlePane {
 		closeButton = new BaseTitleButton(closeAction, CLOSE, closeIcon, 1.0f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -144,6 +155,7 @@ public class SmartTitlePane extends BaseTitlePane {
 		g.drawLine(0, height - 1, width, height - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {
@@ -154,6 +166,7 @@ public class SmartTitlePane extends BaseTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {

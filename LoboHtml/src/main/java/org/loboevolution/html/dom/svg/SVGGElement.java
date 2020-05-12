@@ -20,6 +20,12 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGGElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGGElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
 		SVGTransformable, Drawable {
 }

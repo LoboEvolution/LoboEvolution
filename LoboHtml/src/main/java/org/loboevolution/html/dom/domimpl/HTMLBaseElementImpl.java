@@ -23,7 +23,18 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.parser.HtmlParser;
 import org.w3c.dom.UserDataHandler;
 
+/**
+ * <p>HTMLBaseElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLBaseElementImpl extends HTMLElementImpl {
+	/**
+	 * <p>Constructor for HTMLBaseElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLBaseElementImpl(String name) {
 		super(name, true);
 	}
@@ -36,6 +47,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {

@@ -13,14 +13,30 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>HtmlContent class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HtmlContent {
 
 	private final Document document;
 
+	/**
+	 * <p>Constructor for HtmlContent.</p>
+	 *
+	 * @param document a {@link org.w3c.dom.Document} object.
+	 */
 	public HtmlContent(Document document) {
 		this.document = document;
 	}
 
+	/**
+	 * <p>getJSList.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<MetaInfo> getJSList() {
 		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -51,6 +67,11 @@ public class HtmlContent {
 		return infoList;
 	}
 
+	/**
+	 * <p>getMediaList.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<MetaInfo> getMediaList() {
 		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -102,6 +123,11 @@ public class HtmlContent {
 		return infoList;
 	}
 
+	/**
+	 * <p>getMetaList.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<MetaInfo> getMetaList() {
 		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -128,6 +154,11 @@ public class HtmlContent {
 		return infoList;
 	}
 
+	/**
+	 * <p>getStyleList.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<MetaInfo> getStyleList() {
 		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;

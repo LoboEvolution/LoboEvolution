@@ -10,6 +10,9 @@ package org.mozilla.javascript.debug;
 
 /**
  * This interface exposes debugging information from objects.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface DebuggableObject {
 

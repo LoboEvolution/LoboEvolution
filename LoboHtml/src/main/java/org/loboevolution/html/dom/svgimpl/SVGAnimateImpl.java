@@ -13,6 +13,12 @@ import org.loboevolution.html.dom.smil.TimeList;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.loboevolution.laf.ColorFactory;
 
+/**
+ * <p>SVGAnimateImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGAnimateImpl extends JComponent implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -75,6 +81,12 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	
 	private SVGAnimateElementImpl animate;
 		
+	/**
+	 * <p>Constructor for SVGAnimateImpl.</p>
+	 *
+	 * @param elem a {@link org.loboevolution.html.dom.svgimpl.SVGElementImpl} object.
+	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimateElementImpl} object.
+	 */
 	public SVGAnimateImpl(SVGElementImpl elem, SVGAnimateElementImpl animate) {
 		this.elem = elem;
 		this.animate = animate;
@@ -87,6 +99,7 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		}
 	}
 
+	/** {@inheritDoc} */
 	public void actionPerformed(ActionEvent e) {
 		final String attribute = animate.getAttributeName().toLowerCase();
 		switch (attribute) {
@@ -343,6 +356,9 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 		counter++;
 	}
 	
+	/**
+	 * <p>restart.</p>
+	 */
 	public void restart() {
 		SVGSVGElementImpl ownerSVGElement = (SVGSVGElementImpl) elem.getOwnerSVGElement();
 		ownerSVGElement.setPainted(false);
@@ -350,6 +366,12 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	}
 	
 	
+	/**
+	 * <p>timerDelay.</p>
+	 *
+	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimationImpl} object.
+	 * @return a int.
+	 */
 	public int timerDelay(SVGAnimationImpl animate) {
 		if (animate.getDur() == 0)
 			return 5;

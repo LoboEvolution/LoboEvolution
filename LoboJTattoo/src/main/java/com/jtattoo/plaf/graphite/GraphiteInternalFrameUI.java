@@ -29,18 +29,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseInternalFrameUI;
 
 /**
+ * <p>GraphiteInternalFrameUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteInternalFrameUI extends BaseInternalFrameUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteInternalFrameUI((JInternalFrame) c);
 	}
 
+	/**
+	 * <p>Constructor for GraphiteInternalFrameUI.</p>
+	 *
+	 * @param b a {@link javax.swing.JInternalFrame} object.
+	 */
 	public GraphiteInternalFrameUI(JInternalFrame b) {
 		super(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JComponent createNorthPane(JInternalFrame w) {
 		titlePane = new GraphiteInternalFrameTitlePane(w);

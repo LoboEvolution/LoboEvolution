@@ -12,6 +12,12 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.SwingUtilities;
 
+/**
+ * <p>DragGestureListenerImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DragGestureListenerImpl implements DragGestureListener {
 
 	private DragSourceAdapterImpl dragSourceListener = null;
@@ -24,11 +30,17 @@ public class DragGestureListenerImpl implements DragGestureListener {
 
 	private final Transferable transferable = new TransferableImpl();
 
+	/**
+	 * <p>Constructor for DragGestureListenerImpl.</p>
+	 *
+	 * @param tab a {@link org.loboevolution.tab.DnDTabbedPane} object.
+	 */
 	public DragGestureListenerImpl(DnDTabbedPane tab) {
 		this.tab = tab;
 		this.dragSourceListener = new DragSourceAdapterImpl(tab);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragGestureRecognized(DragGestureEvent dge) {
 		if (this.tab.getTabCount() < 2 || !SwingUtilities.isLeftMouseButton((MouseEvent) dge.getTriggerEvent())) {

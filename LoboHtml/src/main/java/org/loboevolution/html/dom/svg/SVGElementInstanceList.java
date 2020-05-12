@@ -20,8 +20,25 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGElementInstanceList interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGElementInstanceList {
+	/**
+	 * <p>getLength.</p>
+	 *
+	 * @return a int.
+	 */
 	int getLength();
 
+	/**
+	 * <p>item.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance item(int index);
 }

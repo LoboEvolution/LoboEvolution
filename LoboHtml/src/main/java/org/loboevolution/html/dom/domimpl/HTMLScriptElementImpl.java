@@ -44,6 +44,12 @@ import org.mozilla.javascript.Scriptable;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
 
+/**
+ * <p>HTMLScriptElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScriptElement {
 	private static final Logger logger = Logger.getLogger(HTMLScriptElementImpl.class.getName());
 
@@ -51,39 +57,53 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 
 	private String text;
 
+	/**
+	 * <p>Constructor for HTMLScriptElementImpl.</p>
+	 */
 	public HTMLScriptElementImpl() {
 		super("SCRIPT", true);
 	}
 
+	/**
+	 * <p>Constructor for HTMLScriptElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLScriptElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		// nop
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getDefer() {
 		return this.defer;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getEvent() {
 		return getAttribute("event");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getHtmlFor() {
 		return getAttribute("htmlFor");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getSrc() {
 		return getAttribute("src");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getText() {
 		final String t = this.text;
@@ -94,11 +114,15 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		return getAttribute("type");
 	}
 
+	/**
+	 * <p>processScript.</p>
+	 */
 	protected final void processScript() {
 		final UserAgentContext bcontext = getUserAgentContext();
 		if (bcontext == null) {
@@ -149,36 +173,43 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDefer(boolean defer) {
 		this.defer = defer;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setEvent(String event) {
 		setAttribute("event", event);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHtmlFor(String htmlFor) {
 		setAttribute("htmlFor", htmlFor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSrc(String src) {
 		setAttribute("src", src);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setText(String text) {
 		this.text = text;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {

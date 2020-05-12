@@ -22,7 +22,14 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.css.CSSRule;
 
+/**
+ * <p>SVGCSSRule interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGCSSRule extends CSSRule {
 	// Additional CSS RuleType to support ICC color specifications
+	/** Constant COLOR_PROFILE_RULE=7 */
 	static final short COLOR_PROFILE_RULE = 7;
 }

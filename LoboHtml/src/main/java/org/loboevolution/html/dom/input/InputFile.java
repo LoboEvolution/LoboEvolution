@@ -13,12 +13,24 @@ import javax.swing.JTextField;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
+/**
+ * <p>InputFile class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputFile {
 	
 	private final JTextField textField = new JTextField();
 	
 	private InputControl control;
 
+	/**
+	 * <p>Constructor for InputFile.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputFile(HTMLInputElementImpl modelNode, InputControl ic) {
 		control = ic;
 		final JButton browseButton = new JButton();

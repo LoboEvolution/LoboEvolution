@@ -8,6 +8,9 @@ import javax.swing.text.JTextComponent;
 
 /**
  * The Class FormField.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class FormField {
 

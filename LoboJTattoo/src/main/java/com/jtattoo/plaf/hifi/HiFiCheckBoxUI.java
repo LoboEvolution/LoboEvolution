@@ -28,12 +28,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>HiFiCheckBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiCheckBoxUI extends HiFiRadioButtonUI {
 
 	private static HiFiCheckBoxUI checkBoxUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new HiFiCheckBoxUI();
@@ -41,6 +45,7 @@ public class HiFiCheckBoxUI extends HiFiRadioButtonUI {
 		return checkBoxUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);

@@ -43,6 +43,12 @@ import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 
+/**
+ * <p>HTMLLinkElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLinkElement {
 	
 	private String COLOR_VISITED = "#551A8B";
@@ -53,10 +59,16 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 
 	private CSSStyleSheetImpl styleSheet;
 
+	/**
+	 * <p>Constructor for HTMLLinkElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLLinkElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		RenderState tmpRenderState = prevRenderState;
@@ -92,6 +104,11 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return Color.BLUE;
 	}
 
+	/**
+	 * <p>getAbsoluteHref.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getAbsoluteHref() {
 		final HtmlRendererContext rcontext = getHtmlRendererContext();
 		if (rcontext != null) {
@@ -109,37 +126,44 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
 		return this.disabled;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getHref() {
 		final String href = getAttribute("href");
 		return href == null ? "" : href;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getHreflang() {
 		return getAttribute("hreflang");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getMedia() {
 		return getAttribute("media");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getRel() {
 		return getAttribute("rel");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getRev() {
 		return getAttribute("rev");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTarget() {
 		final String target = getAttribute("target");
@@ -150,11 +174,15 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return doc == null ? null : doc.getDefaultTarget();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		return getAttribute("type");
 	}
 
+	/**
+	 * <p>navigate.</p>
+	 */
 	public void navigate() {
 		if (this.disabled) {
 			return;
@@ -222,6 +250,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
@@ -231,41 +260,49 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHref(String href) {
 		setAttribute("href", href);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setHreflang(String hreflang) {
 		setAttribute("hreflang", hreflang);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setMedia(String media) {
 		setAttribute("media", media);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setRel(String rel) {
 		setAttribute("rel", rel);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setRev(String rev) {
 		setAttribute("rev", rev);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTarget(String target) {
 		setAttribute("target", target);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key) && data != Boolean.TRUE) {
@@ -274,6 +311,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return super.setUserData(key, data, handler);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		// Javascript code often depends on this being exactly href. See js9.html.

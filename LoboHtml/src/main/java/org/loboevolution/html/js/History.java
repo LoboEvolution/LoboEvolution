@@ -23,6 +23,12 @@ package org.loboevolution.html.js;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
+/**
+ * <p>History class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class History extends AbstractScriptableDelegate {
 	private final Window window;
 
@@ -30,6 +36,9 @@ public class History extends AbstractScriptableDelegate {
 		this.window = window;
 	}
 
+	/**
+	 * <p>back.</p>
+	 */
 	public void back() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {
@@ -37,6 +46,9 @@ public class History extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>forward.</p>
+	 */
 	public void forward() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {
@@ -44,26 +56,51 @@ public class History extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>getCurrent.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCurrent() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		return ctx != null ? ctx.getCurrentURL() : null;
 	}
 
+	/**
+	 * <p>getLength.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getLength() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		return ctx != null ? ctx.getHistoryLength() : 0;
 	}
 
+	/**
+	 * <p>getNext.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNext() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		return ctx != null ? ctx.getNextURL() : null;
 	}
 
+	/**
+	 * <p>getPrevious.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getPrevious() {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		return ctx != null ? ctx.getPreviousURL() : null;
 	}
 
+	/**
+	 * <p>go.</p>
+	 *
+	 * @param offset a int.
+	 */
 	public void go(int offset) {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {
@@ -71,6 +108,11 @@ public class History extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>go.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 */
 	public void go(String url) {
 		final HtmlRendererContext ctx = this.window.getHtmlRendererContext();
 		if (ctx != null) {

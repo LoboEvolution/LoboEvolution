@@ -20,10 +20,31 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEOffsetElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEOffsetElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 
+	/**
+	 * <p>getDx.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getDx();
 
+	/**
+	 * <p>getDy.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getDy();
 }

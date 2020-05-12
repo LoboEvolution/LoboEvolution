@@ -24,6 +24,9 @@ package org.loboevolution.html.dom.smil;
 /**
  * Declares layout properties for the top-layout element. See the top-layout
  * element definition .
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILTopLayoutElement extends SMILElement, ElementLayout {
 }

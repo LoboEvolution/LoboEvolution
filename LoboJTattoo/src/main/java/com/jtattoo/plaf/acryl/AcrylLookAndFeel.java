@@ -64,7 +64,10 @@ import com.jtattoo.plaf.BaseToolTipUI;
 import com.jtattoo.plaf.BaseTreeUI;
 
 /**
+ * <p>AcrylLookAndFeel class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylLookAndFeel extends AbstractLookAndFeel {
 
@@ -288,18 +291,39 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
 		themesMap.put("Red-Giant-Font", redGiantFontProps);
 	}
 
+	/**
+	 * <p>getThemeProperties.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.util.Properties} object.
+	 */
 	public static Properties getThemeProperties(String name) {
 		return themesMap.get(name);
 	}
 
+	/**
+	 * <p>getThemes.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getThemes() {
 		return themesList;
 	}
 
+	/**
+	 * <p>setCurrentTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setCurrentTheme(Properties themesProps) {
 		setTheme(themesProps);
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setTheme(Properties themesProps) {
 		currentThemeName = "acrylTheme";
 		if (myTheme == null) {
@@ -313,6 +337,11 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name) {
 		setTheme(themesMap.get(name));
 		if (myTheme != null) {
@@ -320,6 +349,13 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param licenseKey a {@link java.lang.String} object.
+	 * @param logoString a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
 		Properties props = themesMap.get(name);
 		if (props != null) {
@@ -332,6 +368,7 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createDefaultTheme() {
 		if (myTheme == null) {
@@ -340,31 +377,37 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
 		setTheme(myTheme);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractBorderFactory getBorderFactory() {
 		return AcrylBorderFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDescription() {
 		return "The Acryl Look and Feel";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractIconFactory getIconFactory() {
 		return AcrylIconFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getID() {
 		return "Acryl";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return "Acryl";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initClassDefaults(UIDefaults table) {
 		if (!"acrylTheme".equals(currentThemeName)) {
@@ -398,11 +441,13 @@ public class AcrylLookAndFeel extends AbstractLookAndFeel {
 		table.put("SpinnerUI", AcrylSpinnerUI.class.getName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isNativeLookAndFeel() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupportedLookAndFeel() {
 		return true;

@@ -29,14 +29,19 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import com.jtattoo.plaf.BaseSplitPaneUI;
 
 /**
+ * <p>TextureSplitPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureSplitPaneUI extends BaseSplitPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureSplitPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BasicSplitPaneDivider createDefaultDivider() {
 		return new TextureSplitPaneDivider(this);

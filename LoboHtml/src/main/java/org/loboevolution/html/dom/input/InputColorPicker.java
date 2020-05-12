@@ -13,12 +13,24 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.js.Executor;
 
+/**
+ * <p>InputColorPicker class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputColorPicker {
 	
 	private HTMLInputElementImpl modelNode;
 	
 	JButton widget = new JButton("Choose Color");
 
+	/**
+	 * <p>Constructor for InputColorPicker.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputColorPicker(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
 		if (modelNode.getTitle() != null) {
@@ -53,6 +65,9 @@ public class InputColorPicker {
 		ic.add(widget);
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		Color c = Color.BLACK;
 		String value = "#" + Integer.toHexString(c.getRGB()).substring(2);

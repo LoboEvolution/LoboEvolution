@@ -8,8 +8,9 @@ import javax.swing.event.EventListenerList;
  * Stores the x and y coordinate of a pixel. Either both coordinate is positive
  * or zero, indicating a valid pixel, or both are -1, indicating no pixel is
  * selected or should be shown.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public class PixelModel {
 
@@ -18,7 +19,7 @@ public class PixelModel {
 
 	/**
 	 * Adds a {@code ChangeListener} to the model.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener to add
 	 */
@@ -28,7 +29,7 @@ public class PixelModel {
 
 	/**
 	 * Removes a {@code ChangeListener} from the model.
-	 * 
+	 *
 	 * @param listener
 	 *            the listener to remove
 	 */
@@ -52,7 +53,7 @@ public class PixelModel {
 	/**
 	 * Changes the pixel stored in this model. If either coordinate is negative, the
 	 * new value of the model will be (-1, -1).
-	 * 
+	 *
 	 * @param x
 	 *            the new x coordinate
 	 * @param y
@@ -72,7 +73,7 @@ public class PixelModel {
 
 	/**
 	 * Returns the current x coordinate.
-	 * 
+	 *
 	 * @return the x coordinate
 	 */
 	public int getX() {
@@ -81,7 +82,7 @@ public class PixelModel {
 
 	/**
 	 * Returns the current y coordinate.
-	 * 
+	 *
 	 * @return the y coordinate
 	 */
 	public int getY() {
@@ -91,7 +92,7 @@ public class PixelModel {
 	/**
 	 * Returns whether the pixel is marked as invalid by setting one of the
 	 * coordinates to -1.
-	 * 
+	 *
 	 * @return {@code true} if the model does not have a valid pixel
 	 */
 	public boolean isInvalid() {

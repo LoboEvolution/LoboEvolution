@@ -31,12 +31,16 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BasePanelUI;
 
 /**
+ * <p>BernsteinPanelUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinPanelUI extends BasePanelUI {
 
 	private static BernsteinPanelUI panelUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (panelUI == null) {
 			panelUI = new BernsteinPanelUI();
@@ -44,6 +48,7 @@ public class BernsteinPanelUI extends BasePanelUI {
 		return panelUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque() && c.getBackground() instanceof ColorUIResource

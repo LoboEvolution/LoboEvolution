@@ -5,17 +5,29 @@ import org.loboevolution.html.dom.filter.OptionFilter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+/**
+ * <p>HTMLOptionsCollectionImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 
 	private NodeImpl rootNode;
 
 	private NodeListImpl rootList = null;
 
+	/**
+	 * <p>Constructor for HTMLOptionsCollectionImpl.</p>
+	 *
+	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	public HTMLOptionsCollectionImpl(NodeImpl rootNode) {
 		this.rootNode = rootNode;
 		rootList = (NodeListImpl) rootNode.getNodeList(new OptionFilter());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		if (rootList == null) {
@@ -25,6 +37,7 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
 		if (rootList == null) {
@@ -34,6 +47,7 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node namedItem(String name) {
 		final Document doc = this.rootNode.getOwnerDocument();
@@ -47,6 +61,12 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 		return null;
 	}
 	
+	/**
+	 * <p>indexOf.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @return a int.
+	 */
 	public int indexOf(Node node) {
 		if (rootList == null) {
 			return this.rootNode.getChildIndex(node);
@@ -55,6 +75,11 @@ public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 		}
 	}
 	
+	/**
+	 * <p>Getter for the field rootList.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.NodeListImpl} object.
+	 */
 	protected NodeListImpl getRootList() {
 		return rootList;
 	}

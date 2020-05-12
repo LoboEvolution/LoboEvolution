@@ -32,6 +32,11 @@ class ElementFactory {
 	
 	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<HTMLTag, HTMLElementBuilder>();
 
+	/**
+	 * <p>Constructor for ElementFactory.</p>
+	 *
+	 * @param isRss a boolean.
+	 */
 	public  ElementFactory(boolean isRss) {
 		// This sets up builders for each known element tag.
 		final Map<HTMLTag, HTMLElementBuilder> builders = this.builders;
@@ -134,6 +139,14 @@ class ElementFactory {
 	
 	}
 
+	/**
+	 * <p>createElement.</p>
+	 *
+	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
 	    final String normalName = name.toUpperCase(Locale.ENGLISH);
 		final HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(HTMLTag.get(normalName));

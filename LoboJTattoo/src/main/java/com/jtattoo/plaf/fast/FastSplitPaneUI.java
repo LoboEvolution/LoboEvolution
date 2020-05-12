@@ -29,14 +29,19 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import com.jtattoo.plaf.BaseSplitPaneUI;
 
 /**
+ * <p>FastSplitPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastSplitPaneUI extends BaseSplitPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastSplitPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BasicSplitPaneDivider createDefaultDivider() {
 		return new FastSplitPaneDivider(this);

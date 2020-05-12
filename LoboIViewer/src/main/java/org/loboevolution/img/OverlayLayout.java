@@ -28,32 +28,48 @@ import java.awt.LayoutManager;
 /* This layout manager ensures that the ImageComponent and all the overlays fill
 * the container exactly.
 */
+/**
+ * <p>OverlayLayout class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class OverlayLayout implements LayoutManager {
 	
 	private transient LayeredImageView layeredImageView;
 	
+	/**
+	 * <p>Constructor for OverlayLayout.</p>
+	 *
+	 * @param layeredImageView a {@link org.loboevolution.img.LayeredImageView} object.
+	 */
 	public OverlayLayout(LayeredImageView layeredImageView) {
 		this.layeredImageView = layeredImageView;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addLayoutComponent(String name, Component comp) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeLayoutComponent(Component comp) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension preferredLayoutSize(Container parent) {
 		return layeredImageView.getTheImage().getPreferredSize();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension minimumLayoutSize(Container parent) {
 		return layeredImageView.getTheImage().getMinimumSize();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void layoutContainer(Container parent) {
 		for (int i = 0; i < parent.getComponentCount(); i++) {

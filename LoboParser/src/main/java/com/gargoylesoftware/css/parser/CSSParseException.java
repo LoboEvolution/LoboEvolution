@@ -18,6 +18,7 @@ package com.gargoylesoftware.css.parser;
  * Encapsulate a CSS parse error or warning.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class CSSParseException extends CSSException {
 
@@ -42,7 +43,7 @@ public class CSSParseException extends CSSException {
     }
 
     /**
-
+     *
      * Wrap an existing exception in a CSSParseException.
      *
      * <p>This constructor is especially useful when an application is

@@ -19,7 +19,10 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
+ * <p>PrefixAttributeCondition class.</p>
+ *
  * @author Ronlad Brill
+ * @version $Id: $Id
  */
 public class PrefixAttributeCondition extends AbstractLocatable implements Condition, Serializable {
 	
@@ -29,6 +32,7 @@ public class PrefixAttributeCondition extends AbstractLocatable implements Condi
 
     /**
      * Ctor.
+     *
      * @param localName the loacl value
      * @param value the value
      */
@@ -37,27 +41,25 @@ public class PrefixAttributeCondition extends AbstractLocatable implements Condi
         value_ = value;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.PREFIX_ATTRIBUTE_CONDITION; //for now
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getLocalName() {
         return localName_;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValue() {
         return value_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

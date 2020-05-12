@@ -21,5 +21,11 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGMissingGlyphElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGMissingGlyphElement extends SVGElement, SVGStylable {
 }

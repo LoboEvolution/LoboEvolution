@@ -31,10 +31,11 @@ class ShiftedFloatingBounds implements FloatingBounds {
 	/**
 	 * Constructs the ShiftedFloatingBounds. Floatinb bounds moved up the hierarchy
 	 * of renderables will generally have positive shifts.
-	 * 
+	 *
 	 * @param prevBounds The baseline floating bounds.
-	 * @param shiftX     How much the original bounds have shifted in the X axis.
 	 * @param shiftY     How much the original bounds have shifted in the Y axis.
+	 * @param shiftLeft a int.
+	 * @param shiftRight a int.
 	 */
 	public ShiftedFloatingBounds(final FloatingBounds prevBounds, final int shiftLeft, final int shiftRight,
 			final int shiftY) {
@@ -45,6 +46,7 @@ class ShiftedFloatingBounds implements FloatingBounds {
 		this.shiftY = shiftY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		// Important for layout caching.
@@ -56,41 +58,49 @@ class ShiftedFloatingBounds implements FloatingBounds {
 				&& Objects.equals(this.prevBounds, other.prevBounds);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClearY(int y) {
 		return this.prevBounds.getClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getFirstClearY(int y) {
 		return this.prevBounds.getFirstClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLeft(int y) {
 		return this.prevBounds.getLeft(y - this.shiftY) + this.shiftLeft;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLeftClearY(int y) {
 		return this.prevBounds.getLeftClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMaxY() {
 		return this.prevBounds.getMaxY() + this.shiftY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getRight(int y) {
 		return this.prevBounds.getRight(y - this.shiftY) + this.shiftRight;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getRightClearY(int y) {
 		return this.prevBounds.getRightClearY(y - this.shiftY) + this.shiftY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		return this.shiftY ^ this.shiftLeft ^ this.shiftRight;

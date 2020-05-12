@@ -21,5 +21,11 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAltGlyphItemElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAltGlyphItemElement extends SVGElement {
 }

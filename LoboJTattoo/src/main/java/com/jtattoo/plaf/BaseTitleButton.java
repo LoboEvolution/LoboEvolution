@@ -32,7 +32,10 @@ import javax.swing.Action;
 import javax.swing.Icon;
 
 /**
+ * <p>BaseTitleButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseTitleButton extends NoFocusButton {
 
@@ -42,6 +45,14 @@ public class BaseTitleButton extends NoFocusButton {
 	private static final long serialVersionUID = 1L;
 	private float alpha = 1.0f;
 
+	/**
+	 * <p>Constructor for BaseTitleButton.</p>
+	 *
+	 * @param action a {@link javax.swing.Action} object.
+	 * @param accessibleName a {@link java.lang.String} object.
+	 * @param icon a {@link javax.swing.Icon} object.
+	 * @param alpha a float.
+	 */
 	public BaseTitleButton(Action action, String accessibleName, Icon icon, float alpha) {
 		setContentAreaFilled(false);
 		setBorderPainted(false);
@@ -53,6 +64,7 @@ public class BaseTitleButton extends NoFocusButton {
 		this.alpha = Math.max(0.2f, alpha);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		if (JTattooUtilities.isActive(this) || alpha >= 1.0) {

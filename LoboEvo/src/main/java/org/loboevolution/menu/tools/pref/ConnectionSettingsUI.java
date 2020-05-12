@@ -18,6 +18,12 @@ import org.loboevolution.gui.FormPanel;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.store.ConnectionStore;
 
+/**
+ * <p>ConnectionSettingsUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ConnectionSettingsUI extends AbstractSettingsUI {
 
 	/** The Constant serialVersionUID. */
@@ -172,6 +178,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		this.hostPortPanel.revalidate();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void restoreDefaults() {
 		final ConnectionStore settings = new ConnectionStore();
@@ -179,6 +186,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		loadSettings();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void save() throws RuntimeException {
 		final ConnectionStore settings = new ConnectionStore();

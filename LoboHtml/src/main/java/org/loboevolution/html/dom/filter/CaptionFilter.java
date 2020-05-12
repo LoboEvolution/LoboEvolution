@@ -27,9 +27,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class CaptionFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class CaptionFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public final boolean accept(Node node) {
 		if (node instanceof HTMLElementImpl) {

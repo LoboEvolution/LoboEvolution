@@ -20,19 +20,60 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGPatternElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPatternElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace,
 		SVGExternalResourcesRequired, SVGStylable, SVGFitToViewBox, SVGUnitTypes {
+	/**
+	 * <p>getPatternUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getPatternUnits();
 
+	/**
+	 * <p>getPatternContentUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getPatternContentUnits();
 
+	/**
+	 * <p>getPatternTransform.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedTransformList} object.
+	 */
 	SVGAnimatedTransformList getPatternTransform();
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY();
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getWidth();
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getHeight();
 }

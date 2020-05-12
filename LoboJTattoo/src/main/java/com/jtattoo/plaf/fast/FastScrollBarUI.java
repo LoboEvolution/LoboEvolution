@@ -36,14 +36,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>FastScrollBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastScrollBarUI extends BaseScrollBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastScrollBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createDecreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -53,6 +58,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createIncreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -62,6 +68,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
@@ -86,6 +93,7 @@ public class FastScrollBarUI extends BaseScrollBarUI {
 		g.translate(-thumbBounds.x, -thumbBounds.y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
 		g.setColor(AbstractLookAndFeel.getControlColorLight());

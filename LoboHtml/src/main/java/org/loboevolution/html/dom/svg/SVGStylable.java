@@ -22,7 +22,18 @@ package org.loboevolution.html.dom.svg;
 
 import org.loboevolution.html.style.AbstractCSSProperties;
 
+/**
+ * <p>SVGStylable interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGStylable {
 
+	/**
+	 * <p>getStyle.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 */
 	AbstractCSSProperties getStyle();
 }

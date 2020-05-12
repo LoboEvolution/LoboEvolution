@@ -27,6 +27,9 @@ import org.loboevolution.html.renderstate.TableCaptionRenderState;
 
 /**
  * The Class HTMLTableCaptionElementImpl.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implements HTMLTableCaptionElement {
 
@@ -41,12 +44,14 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 	}
 
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
 		return this.getAttribute("align");
 	}
 
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
 		this.setAttribute("align", align);
@@ -72,6 +77,7 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 	}
 
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		RenderState tmpRenderState = prevRenderState;

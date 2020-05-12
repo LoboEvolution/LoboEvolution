@@ -33,20 +33,26 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseScrollPaneUI;
 
 /**
+ * <p>TextureScrollPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureScrollPaneUI extends BaseScrollPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureScrollPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(JScrollPane p) {
 		super.installDefaults(p);
 		p.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (c.getBackground() instanceof ColorUIResource) {

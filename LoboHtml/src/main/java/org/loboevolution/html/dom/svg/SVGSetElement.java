@@ -20,5 +20,11 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGSetElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGSetElement extends SVGAnimationElement {
 }

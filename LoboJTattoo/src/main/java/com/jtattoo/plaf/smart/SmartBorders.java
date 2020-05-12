@@ -44,7 +44,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>SmartBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartBorders extends BaseBorders {
 
@@ -351,6 +354,11 @@ public class SmartBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -358,6 +366,11 @@ public class SmartBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -365,6 +378,11 @@ public class SmartBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getPaletteBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getPaletteBorder() {
 		if (paletteBorder == null) {
 			paletteBorder = new PaletteBorder();
@@ -372,6 +390,11 @@ public class SmartBorders extends BaseBorders {
 		return paletteBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -379,6 +402,11 @@ public class SmartBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}

@@ -10,32 +10,48 @@ import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGLineElement;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 
+/**
+ * <p>SVGLineElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 
+	/**
+	 * <p>Constructor for SVGLineElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGLineElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getX1() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x1")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getY1() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y1")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getX2() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x2")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getY2() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y2")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
@@ -44,6 +60,7 @@ public class SVGLineElementImpl extends SVGGraphic implements SVGLineElement {
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		AffineTransform inverseTransform;

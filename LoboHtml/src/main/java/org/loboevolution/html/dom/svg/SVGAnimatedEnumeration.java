@@ -22,10 +22,32 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGAnimatedEnumeration interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedEnumeration {
+	/**
+	 * <p>getBaseVal.</p>
+	 *
+	 * @return a short.
+	 */
 	short getBaseVal();
 
+	/**
+	 * <p>setBaseVal.</p>
+	 *
+	 * @param baseVal a short.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setBaseVal(short baseVal) throws DOMException;
 
+	/**
+	 * <p>getAnimVal.</p>
+	 *
+	 * @return a short.
+	 */
 	short getAnimVal();
 }

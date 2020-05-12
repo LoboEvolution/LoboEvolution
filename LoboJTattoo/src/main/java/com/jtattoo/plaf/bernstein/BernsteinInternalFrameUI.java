@@ -29,18 +29,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseInternalFrameUI;
 
 /**
+ * <p>BernsteinInternalFrameUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinInternalFrameUI extends BaseInternalFrameUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BernsteinInternalFrameUI((JInternalFrame) c);
 	}
 
+	/**
+	 * <p>Constructor for BernsteinInternalFrameUI.</p>
+	 *
+	 * @param b a {@link javax.swing.JInternalFrame} object.
+	 */
 	public BernsteinInternalFrameUI(JInternalFrame b) {
 		super(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JComponent createNorthPane(JInternalFrame w) {
 		titlePane = new BernsteinInternalFrameTitlePane(w);

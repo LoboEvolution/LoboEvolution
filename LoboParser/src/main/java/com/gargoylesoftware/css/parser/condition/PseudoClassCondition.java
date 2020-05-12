@@ -20,8 +20,10 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
+ * <p>PseudoClassCondition class.</p>
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class PseudoClassCondition extends AbstractLocatable implements Condition, Serializable {
 
@@ -31,6 +33,7 @@ public class PseudoClassCondition extends AbstractLocatable implements Condition
 
     /**
      * Ctor.
+     *
      * @param value the value
      * @param locator the locator
      * @param doubleColon true if was prefixed by double colon
@@ -41,27 +44,25 @@ public class PseudoClassCondition extends AbstractLocatable implements Condition
         doubleColon_ = doubleColon;
     }
 
+    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.PSEUDO_CLASS_CONDITION;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getLocalName() {
         return null;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getValue() {
         return value_;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

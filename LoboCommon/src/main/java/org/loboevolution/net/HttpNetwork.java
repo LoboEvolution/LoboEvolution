@@ -25,8 +25,15 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.store.SQLiteCommon;
 
+/**
+ * <p>HttpNetwork class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HttpNetwork {
 
+	/** Constant GZIP_ENCODING="gzip" */
 	public static String GZIP_ENCODING = "gzip";
 
 	private static String USER_AGENT = "SELECT DISTINCT description FROM USER_AGENT";
@@ -57,6 +64,13 @@ public class HttpNetwork {
 		}
 	}
 
+	/**
+	 * <p>getInputStream.</p>
+	 *
+	 * @param connection a {@link java.net.URLConnection} object.
+	 * @return a {@link java.io.InputStream} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public static InputStream getInputStream(URLConnection connection) throws IOException {
 		InputStream in;
 		if (connection instanceof HttpURLConnection) {
@@ -70,6 +84,13 @@ public class HttpNetwork {
 		return in;
 	}
 
+	/**
+	 * <p>getImage.</p>
+	 *
+	 * @param href a {@link java.lang.String} object.
+	 * @param baseUri a {@link java.lang.String} object.
+	 * @return a {@link java.awt.Image} object.
+	 */
 	public static Image getImage(String href, String baseUri) {
 		try {
 			if (Strings.isBlank(href))
@@ -126,6 +147,13 @@ public class HttpNetwork {
 		return null;
 	}
 
+	/**
+	 * <p>getSource.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public static String getSource(String uri) throws Exception {
 
 		final URL url = new URL(uri);
@@ -137,6 +165,11 @@ public class HttpNetwork {
 
 	}
 
+	/**
+	 * <p>getUserAgentValue.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getUserAgentValue() {
 		String userAgent = "";
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -152,6 +185,13 @@ public class HttpNetwork {
 		return userAgent;
 	}
 
+	/**
+	 * <p>openConnectionCheckRedirects.</p>
+	 *
+	 * @param c a {@link java.net.URLConnection} object.
+	 * @return a {@link java.io.InputStream} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public static InputStream openConnectionCheckRedirects(URLConnection c) throws Exception {
 		boolean redir;
 		int redirects = 0;
@@ -186,6 +226,13 @@ public class HttpNetwork {
 		return in;
 	}
 
+	/**
+	 * <p>toString.</p>
+	 *
+	 * @param inputStream a {@link java.io.InputStream} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public static String toString(InputStream inputStream) throws IOException {
 		final String newLine = System.getProperty("line.separator");
 		final StringBuilder result = new StringBuilder();

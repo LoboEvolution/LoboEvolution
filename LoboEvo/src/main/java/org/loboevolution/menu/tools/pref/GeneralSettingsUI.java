@@ -24,6 +24,12 @@ import org.loboevolution.menu.tools.pref.startup.StartupListControl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.GeneralStore;
 
+/**
+ * <p>GeneralSettingsUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class GeneralSettingsUI extends AbstractSettingsUI {
 
 	/** The Constant EDIT_LIST_CAPTION. */
@@ -123,6 +129,8 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field cachePanel.</p>
+	 *
 	 * @return the cachePanel
 	 */
 	public Component getCachePanel() {
@@ -130,6 +138,8 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field cookiePanel.</p>
+	 *
 	 * @return the cookiePanel
 	 */
 	public Component getCookiePanel() {
@@ -160,6 +170,8 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field dimensionPanel.</p>
+	 *
 	 * @return the dimensionPanel
 	 */
 	public FormPanel getDimensionPanel() {
@@ -185,6 +197,8 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field navigationPanel.</p>
+	 *
 	 * @return the navigationPanel
 	 */
 	public Component getNavigationPanel() {
@@ -267,12 +281,14 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.dimensionPanel.revalidate();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void restoreDefaults() {
 		GeneralStore.restoreDefaults();
 		loadSettings();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void save() {
 		final Rectangle initialWindowBounds = GeneralStore.getInitialWindowBounds();

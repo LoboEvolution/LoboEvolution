@@ -20,10 +20,31 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEPointLightElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEPointLightElement extends SVGElement {
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getY();
 
+	/**
+	 * <p>getZ.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getZ();
 }

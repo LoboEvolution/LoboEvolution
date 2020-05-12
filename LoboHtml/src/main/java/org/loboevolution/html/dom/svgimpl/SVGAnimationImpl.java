@@ -10,24 +10,42 @@ import org.loboevolution.html.dom.smil.TimeList;
 import org.loboevolution.html.dom.svg.SVGTransform;
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGAnimationImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	
 	private SVGAnimateImpl animate;
 
+	/**
+	 * <p>Constructor for SVGAnimationImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGAnimationImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAttributeName() {
 		return this.getAttribute("attributeName");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAttributeName(String attributeName) {
 		this.setAttribute("attributeName", attributeName);		
 	}
 	
+	/**
+	 * <p>getType.</p>
+	 *
+	 * @return a short.
+	 */
 	public short getType() {
 		String type = this.getAttribute("type");
 			
@@ -47,6 +65,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getAttributeType() {
 		String type = this.getAttribute("attributeType");
@@ -65,11 +84,13 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAttributeType(short attributeType) {
 		this.setAttribute("attributeType", String.valueOf(attributeType));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TimeList getBegin() {
 		ArrayList<Time> beginTimeList = new ArrayList<Time>();
@@ -92,6 +113,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		return new TimeListImpl(beginTimeList);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TimeList getEnd() {
 		ArrayList<Time> beginTimeList = new ArrayList<Time>();
@@ -114,27 +136,32 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		return new TimeListImpl(beginTimeList);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getDur() {
 		String duration = this.getAttribute("dur");
 		return TimeImpl.getClockMilliSecs(duration);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDur(float dur) throws DOMException {
 		this.setAttribute("dur", String.valueOf(dur));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFill() {
 		return this.getAttribute("fill");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFill(String fill) throws DOMException {
 		this.setAttribute("fill", fill);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getRepeatCount() {
 		String rc = this.getAttribute("repeatCount");
@@ -143,11 +170,13 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		return Float.parseFloat(rc);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setRepeatCount(float repeatCount) throws DOMException {
 		this.setAttribute("repeatCount", String.valueOf(repeatCount));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getRepeatDur() {
 		String rd = this.getAttribute("repeatDur");
@@ -156,11 +185,13 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		return TimeImpl.getClockMilliSecs(rd);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setRepeatDur(float repeatDur) throws DOMException {
 		this.setAttribute("repeatDur", String.valueOf(repeatDur));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean beginElement() {
 		String restart = getAttribute("restart");
@@ -172,69 +203,90 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean endElement() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean beginElementAt(float offset) throws DOMException {
 		setDur(offset);
 		return beginElement();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean endElementAt(float offset) throws DOMException {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getValues() {
 		return this.getAttribute("values");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValues(String values) throws DOMException {
 		this.setAttribute("values", values);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFrom() {
 		return this.getAttribute("from");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFrom(String from) throws DOMException {
 		this.setAttribute("from", from);	
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTo() {
 		return this.getAttribute("to");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTo(String to) throws DOMException {
 		this.setAttribute("to", to);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBy() {
 		return this.getAttribute("by");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBy(String by) throws DOMException {
 		this.setAttribute("by", by);
 	}
 	
 	
+	/**
+	 * <p>Getter for the field animate.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svgimpl.SVGAnimateImpl} object.
+	 */
 	protected SVGAnimateImpl getAnimate() {
 		return animate;
 	}
 	
+	/**
+	 * <p>Setter for the field animate.</p>
+	 *
+	 * @param animate a {@link org.loboevolution.html.dom.svgimpl.SVGAnimateImpl} object.
+	 */
 	protected void setAnimate(SVGAnimateImpl animate) {
 		this.animate = animate;
 	}

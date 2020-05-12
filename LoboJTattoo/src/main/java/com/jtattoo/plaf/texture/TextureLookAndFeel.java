@@ -51,7 +51,10 @@ import com.jtattoo.plaf.BaseToolTipUI;
 import com.jtattoo.plaf.BaseTreeUI;
 
 /**
+ * <p>TextureLookAndFeel class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureLookAndFeel extends AbstractLookAndFeel {
 
@@ -359,18 +362,39 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		themesMap.put("Snow-Large-Font", snowLargeFontProps);
 	}
 
+	/**
+	 * <p>getThemeProperties.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.util.Properties} object.
+	 */
 	public static Properties getThemeProperties(String name) {
 		return (Properties) themesMap.get(name);
 	}
 
+	/**
+	 * <p>getThemes.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getThemes() {
 		return themesList;
 	}
 
+	/**
+	 * <p>setCurrentTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setCurrentTheme(Properties themesProps) {
 		setTheme(themesProps);
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setTheme(Properties themesProps) {
 		currentThemeName = "textureTheme";
 		if (myTheme == null) {
@@ -386,6 +410,11 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name) {
 		setTheme((Properties) themesMap.get(name));
 		if (myTheme != null) {
@@ -393,6 +422,13 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param licenseKey a {@link java.lang.String} object.
+	 * @param logoString a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
 		Properties props = (Properties) themesMap.get(name);
 		if (props != null) {
@@ -405,6 +441,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createDefaultTheme() {
 		if (myTheme == null) {
@@ -415,31 +452,37 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		TextureUtils.setUpTextures();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractBorderFactory getBorderFactory() {
 		return TextureBorderFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDescription() {
 		return "The Texture Look and Feel";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractIconFactory getIconFactory() {
 		return TextureIconFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getID() {
 		return "Texture";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return "Texture";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initClassDefaults(UIDefaults table) {
 		if (!"textureTheme".equals(currentThemeName)) {
@@ -474,6 +517,7 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		table.put("SpinnerUI", BaseSpinnerUI.class.getName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
@@ -483,11 +527,13 @@ public class TextureLookAndFeel extends AbstractLookAndFeel {
 		table.put("ScrollBar.decrementButtonGap", -1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isNativeLookAndFeel() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupportedLookAndFeel() {
 		return true;

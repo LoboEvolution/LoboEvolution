@@ -38,12 +38,21 @@ import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.css.util.LangUtils;
 
-/** Token Manager. */
+/**
+ * Token Manager.
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 @SuppressWarnings("all") public class CSS3ParserTokenManager implements CSS3ParserConstants {
 
   /** Debug output. */
   public  java.io.PrintStream debugStream = System.out;
-  /** Set debug output. */
+  /**
+   * Set debug output.
+   *
+   * @param ds a {@link java.io.PrintStream} object.
+   */
   public  void setDebugStream(java.io.PrintStream ds) { debugStream = ds; }
 private final int jjStopStringLiteralDfa_0(int pos, long active0, long active1){
    switch (pos)
@@ -7159,6 +7168,11 @@ null, null, null, null, null, null, null, "\74\41\55\55", "\55\55\76", "\176\75"
 null, null, null, null, null, null, null, null, null, null, null, null, null, null, 
 null, null, null, null, null, null, null, null, null, null, null, null, null, null, 
 null, null, null, null, null, null, };
+/**
+ * <p>jjFillToken.</p>
+ *
+ * @return a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
+ */
 protected Token jjFillToken()
 {
    final Token t;
@@ -7350,7 +7364,11 @@ int jjround;
 int jjmatchedPos;
 int jjmatchedKind;
 
-/** Get the next Token. */
+/**
+ * Get the next Token.
+ *
+ * @return a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
+ */
 public Token getNextToken() 
 {
   Token matchedToken;
@@ -7584,21 +7602,33 @@ private void jjCheckNAddStates(int start, int end)
    } while (start++ != end);
 }
 
-    /** Constructor. */
+    /**
+     * Constructor.
+     *
+     * @param stream a {@link com.gargoylesoftware.css.parser.javacc.CharStream} object.
+     */
     public CSS3ParserTokenManager(CharStream stream){
 
 
     input_stream = stream;
   }
 
-  /** Constructor. */
+  /**
+   * Constructor.
+   *
+   * @param stream a {@link com.gargoylesoftware.css.parser.javacc.CharStream} object.
+   * @param lexState a int.
+   */
   public CSS3ParserTokenManager (CharStream stream, int lexState){
     ReInit(stream);
     SwitchTo(lexState);
   }
 
-  /** Reinitialise parser. */
-  
+  /**
+   * Reinitialise parser.
+   *
+   * @param stream a {@link com.gargoylesoftware.css.parser.javacc.CharStream} object.
+   */
   public void ReInit(CharStream stream)
   {
 
@@ -7619,7 +7649,12 @@ private void jjCheckNAddStates(int start, int end)
       jjrounds[i] = 0x80000000;
   }
 
-  /** Reinitialise parser. */
+  /**
+   * Reinitialise parser.
+   *
+   * @param stream a {@link com.gargoylesoftware.css.parser.javacc.CharStream} object.
+   * @param lexState a int.
+   */
   public void ReInit(CharStream stream, int lexState)
   
   {
@@ -7627,7 +7662,11 @@ private void jjCheckNAddStates(int start, int end)
     SwitchTo(lexState);
   }
 
-  /** Switch to specified lex state. */
+  /**
+   * Switch to specified lex state.
+   *
+   * @param lexState a int.
+   */
   public void SwitchTo(int lexState)
   {
     if (lexState >= 2 || lexState < 0)

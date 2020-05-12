@@ -39,47 +39,66 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLMetaElement extends HTMLElement {
 	/**
 	 * Associated information. See the content attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getContent();
 
 	/**
 	 * HTTP response header name [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF
 	 * RFC 2616</a>]. See the http-equiv attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getHttpEquiv();
 
 	/**
 	 * Meta information name. See the name attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getName();
 
 	/**
 	 * Select form of content. See the scheme attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getScheme();
 
 	/**
 	 * Associated information. See the content attribute definition in HTML 4.01.
+	 *
+	 * @param content a {@link java.lang.String} object.
 	 */
 	void setContent(String content);
 
 	/**
 	 * HTTP response header name [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF
 	 * RFC 2616</a>]. See the http-equiv attribute definition in HTML 4.01.
+	 *
+	 * @param httpEquiv a {@link java.lang.String} object.
 	 */
 	void setHttpEquiv(String httpEquiv);
 
 	/**
 	 * Meta information name. See the name attribute definition in HTML 4.01.
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	void setName(String name);
 
 	/**
 	 * Select form of content. See the scheme attribute definition in HTML 4.01.
+	 *
+	 * @param scheme a {@link java.lang.String} object.
 	 */
 	void setScheme(String scheme);
 

@@ -61,7 +61,10 @@ import com.jtattoo.plaf.BaseToolTipUI;
 import com.jtattoo.plaf.BaseTreeUI;
 
 /**
+ * <p>FastLookAndFeel class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastLookAndFeel extends AbstractLookAndFeel {
 
@@ -213,18 +216,39 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 		themesMap.put("Green-Giant-Font", greenGiantFontProps);
 	}
 
+	/**
+	 * <p>getThemeProperties.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.util.Properties} object.
+	 */
 	public static Properties getThemeProperties(String name) {
 		return (Properties) themesMap.get(name);
 	}
 
+	/**
+	 * <p>getThemes.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getThemes() {
 		return themesList;
 	}
 
+	/**
+	 * <p>setCurrentTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setCurrentTheme(Properties themesProps) {
 		setTheme(themesProps);
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setTheme(Properties themesProps) {
 		currentThemeName = "fastTheme";
 		if (myTheme == null) {
@@ -238,6 +262,11 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name) {
 		setTheme((Properties) themesMap.get(name));
 		if (myTheme != null) {
@@ -245,6 +274,13 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param licenseKey a {@link java.lang.String} object.
+	 * @param logoString a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
 		Properties props = (Properties) themesMap.get(name);
 		if (props != null) {
@@ -257,6 +293,7 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createDefaultTheme() {
 		if (myTheme == null) {
@@ -265,31 +302,37 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 		setTheme(myTheme);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractBorderFactory getBorderFactory() {
 		return FastBorderFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDescription() {
 		return "The Fast Look and Feel";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractIconFactory getIconFactory() {
 		return FastIconFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getID() {
 		return "Fast";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return "Fast";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initClassDefaults(UIDefaults table) {
 		if (!"fastTheme".equals(currentThemeName)) {
@@ -321,17 +364,20 @@ public class FastLookAndFeel extends AbstractLookAndFeel {
 		table.put("SpinnerUI", BaseSpinnerUI.class.getName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 		table.put("SplitPane.centerOneTouchButtons", Boolean.FALSE);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isNativeLookAndFeel() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupportedLookAndFeel() {
 		return true;

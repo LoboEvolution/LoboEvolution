@@ -29,11 +29,19 @@ import java.awt.Dimension;
 import java.awt.LayoutManager;
 
 /**
+ * <p>WrapperLayout class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class WrapperLayout implements LayoutManager {
 	private static WrapperLayout instance = new WrapperLayout();
 
+	/**
+	 * <p>Getter for the field instance.</p>
+	 *
+	 * @return a {@link org.loboevolution.common.WrapperLayout} object.
+	 */
 	public static WrapperLayout getInstance() {
 		return instance;
 	}
@@ -44,6 +52,7 @@ public class WrapperLayout implements LayoutManager {
 	 * @see java.awt.LayoutManager#addLayoutComponent(java.lang.String,
 	 * java.awt.Component)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void addLayoutComponent(String arg0, Component arg1) {
 	}
@@ -53,6 +62,7 @@ public class WrapperLayout implements LayoutManager {
 	 * 
 	 * @see java.awt.LayoutManager#layoutContainer(java.awt.Container)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void layoutContainer(Container arg0) {
 		final int count = arg0.getComponentCount();
@@ -69,6 +79,7 @@ public class WrapperLayout implements LayoutManager {
 	 * 
 	 * @see java.awt.LayoutManager#minimumLayoutSize(java.awt.Container)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Dimension minimumLayoutSize(Container arg0) {
 		final java.awt.Insets insets = arg0.getInsets();
@@ -86,6 +97,7 @@ public class WrapperLayout implements LayoutManager {
 	 * 
 	 * @see java.awt.LayoutManager#preferredLayoutSize(java.awt.Container)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Dimension preferredLayoutSize(Container arg0) {
 		final java.awt.Insets insets = arg0.getInsets();
@@ -103,6 +115,7 @@ public class WrapperLayout implements LayoutManager {
 	 * 
 	 * @see java.awt.LayoutManager#removeLayoutComponent(java.awt.Component)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void removeLayoutComponent(Component arg0) {
 	}

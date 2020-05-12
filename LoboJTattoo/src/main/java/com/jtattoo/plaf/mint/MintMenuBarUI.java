@@ -32,14 +32,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>MintMenuBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintMenuBarUI extends BasicMenuBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new MintMenuBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		int w = c.getWidth();

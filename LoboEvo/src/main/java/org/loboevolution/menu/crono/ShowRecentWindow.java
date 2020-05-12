@@ -38,6 +38,12 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>ShowRecentWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ShowRecentWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -48,6 +54,11 @@ public class ShowRecentWindow extends JFrame {
 	/** The row sorter. */
 	private transient TableRowSorter<TableModel> rowSorter;
 
+	/**
+	 * <p>Constructor for ShowRecentWindow.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public ShowRecentWindow(BrowserFrame frame) {
 		createAndShowGUI(frame);
 	}

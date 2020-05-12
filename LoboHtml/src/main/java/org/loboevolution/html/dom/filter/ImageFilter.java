@@ -26,9 +26,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class ImageFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ImageFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return node instanceof HTMLImageElement;

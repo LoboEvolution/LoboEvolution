@@ -20,12 +20,39 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGTests interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGTests {
+	/**
+	 * <p>getRequiredFeatures.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGStringList} object.
+	 */
 	SVGStringList getRequiredFeatures();
 
+	/**
+	 * <p>getRequiredExtensions.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGStringList} object.
+	 */
 	SVGStringList getRequiredExtensions();
 
+	/**
+	 * <p>getSystemLanguage.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGStringList} object.
+	 */
 	SVGStringList getSystemLanguage();
 
+	/**
+	 * <p>hasExtension.</p>
+	 *
+	 * @param extension a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	boolean hasExtension(String extension);
 }

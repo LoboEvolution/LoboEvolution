@@ -12,12 +12,24 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
+/**
+ * <p>InputNumber class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputNumber extends InputText {
 
 	private JTextField numeric;
 	private String min = "";
 	private String max = "";
 
+	/**
+	 * <p>Constructor for InputNumber.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputNumber(HTMLInputElementImpl modelNode, InputControl ic) {
 		super(modelNode, ic);
 		numeric = (JTextField) this.iText;

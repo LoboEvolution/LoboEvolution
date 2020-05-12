@@ -40,16 +40,21 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>GraphiteTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteTabbedPaneUI();
 	}
 
 	private Color sepColors[] = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		if (sepColors == null) {
@@ -63,6 +68,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 		return sepColors;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color getLoBorderColor(int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
@@ -71,6 +77,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 		return MetalLookAndFeel.getControlShadow();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Font getTabFont(boolean isSelected) {
 		if (isSelected) {
@@ -80,12 +87,14 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installComponents() {
 		simpleButtonBorder = true;
 		super.installComponents();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocusIndicator(Graphics g, int tabPlacement, Rectangle[] rects, int tabIndex,
 			Rectangle iconRect, Rectangle textRect, boolean isSelected) {
@@ -98,6 +107,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
 			Rectangle textRect, boolean isSelected) {

@@ -27,6 +27,9 @@ import org.w3c.dom.Node;
 
 /**
  * The Class ElementNameFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ElementNameFilter implements NodeFilter {
 
@@ -48,6 +51,7 @@ public class ElementNameFilter implements NodeFilter {
 	 * 
 	 * @see org.loboevolution.html.domfilter.NodeFilter#accept(org.w3c.dom.Node)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return node instanceof Element && this.name.equals(((Element) node).getAttribute("name"));

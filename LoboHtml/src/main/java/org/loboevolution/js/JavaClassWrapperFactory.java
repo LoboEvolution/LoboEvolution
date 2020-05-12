@@ -24,9 +24,20 @@ import java.lang.ref.WeakReference;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+/**
+ * <p>JavaClassWrapperFactory class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class JavaClassWrapperFactory {
 	private static JavaClassWrapperFactory instance;
 
+	/**
+	 * <p>Getter for the field instance.</p>
+	 *
+	 * @return a {@link org.loboevolution.js.JavaClassWrapperFactory} object.
+	 */
 	public static JavaClassWrapperFactory getInstance() {
 		if (instance == null) {
 			synchronized (JavaClassWrapperFactory.class) {
@@ -43,6 +54,12 @@ public class JavaClassWrapperFactory {
 	private JavaClassWrapperFactory() {
 	}
 
+	/**
+	 * <p>getClassWrapper.</p>
+	 *
+	 * @param clazz a {@link java.lang.Class} object.
+	 * @return a {@link org.loboevolution.js.JavaClassWrapper} object.
+	 */
 	public JavaClassWrapper getClassWrapper(Class clazz) {
 		synchronized (this) {
 			// WeakHashMaps where the value refers to

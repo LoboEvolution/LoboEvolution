@@ -8,20 +8,54 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 
+/**
+ * <p>ArrayUtilities class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ArrayUtilities {
 
+	/**
+	 * <p>isBlank.</p>
+	 *
+	 * @param collection a {@link java.util.Collection} object.
+	 * @return a boolean.
+	 */
 	public static boolean isBlank(Collection<?> collection) {
 		return collection == null || collection.isEmpty();
 	}
 
+	/**
+	 * <p>isNotBlank.</p>
+	 *
+	 * @param collection a {@link java.util.Collection} object.
+	 * @return a boolean.
+	 */
 	public static boolean isNotBlank(Collection<?> collection) {
 		return collection != null && !collection.isEmpty();
 	}
 
+	/**
+	 * <p>iterator.</p>
+	 *
+	 * @param array an array of {@link java.lang.Object} objects.
+	 * @param offset a int.
+	 * @param length a int.
+	 * @return a {@link java.util.Iterator} object.
+	 */
 	public static Iterator iterator(Object[] array, int offset, int length) {
 		return new ArrayIterator(array, offset, length);
 	}
 	
+	/**
+	 * <p>moveItem.</p>
+	 *
+	 * @param sourceIndex a int.
+	 * @param targetIndex a int.
+	 * @param list a {@link java.util.List} object.
+	 * @param <T> a T object.
+	 */
 	public static <T> void moveItem(int sourceIndex, int targetIndex, List<T> list) {
 	    if (sourceIndex <= targetIndex) {
 	        Collections.rotate(list.subList(sourceIndex, targetIndex + 1), -1);
@@ -30,6 +64,12 @@ public class ArrayUtilities {
 	    }
 	}
 	
+	/**
+	 * <p>singletonIterator.</p>
+	 *
+	 * @param item a {@link java.lang.Object} object.
+	 * @return a {@link java.util.Iterator} object.
+	 */
 	public static Iterator singletonIterator(final Object item) {
 		return new Iterator() {
 			private boolean gotItem = false;
@@ -60,6 +100,13 @@ public class ArrayUtilities {
 	}
 	
 
+	/**
+	 * <p>removeColor.</p>
+	 *
+	 * @param arr an array of {@link java.awt.Color} objects.
+	 * @param index a int.
+	 * @return an array of {@link java.awt.Color} objects.
+	 */
 	public static Color[] removeColor(Color[] arr, int index) {
 		if (arr == null || index < 0 || index >= arr.length) {
 			return arr;
@@ -70,6 +117,14 @@ public class ArrayUtilities {
 		return anotherArray;
 	}
 	
+	/**
+	 * <p>contains.</p>
+	 *
+	 * @param ts an array of T[] objects.
+	 * @param t a T object.
+	 * @param <T> a T object.
+	 * @return a boolean.
+	 */
 	public static <T> boolean contains(final T[] ts, final T t) {
 		for (final T e : ts) {
 			if (Objects.equals(e, t)) {

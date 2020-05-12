@@ -21,6 +21,12 @@
 package org.loboevolution.info;
 
 
+/**
+ * <p>FloatingInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FloatingInfo {
 	
 	private Object[] floats;
@@ -28,6 +34,8 @@ public class FloatingInfo {
 	private int shiftX, shiftY;
 
 	/**
+	 * <p>Getter for the field floats.</p>
+	 *
 	 * @return the floats
 	 */
 	public Object[] getFloats() {
@@ -35,6 +43,8 @@ public class FloatingInfo {
 	}
 
 	/**
+	 * <p>Getter for the field shiftX.</p>
+	 *
 	 * @return the shiftX
 	 */
 	public int getShiftX() {
@@ -42,6 +52,8 @@ public class FloatingInfo {
 	}
 
 	/**
+	 * <p>Getter for the field shiftY.</p>
+	 *
 	 * @return the shiftY
 	 */
 	public int getShiftY() {
@@ -49,6 +61,8 @@ public class FloatingInfo {
 	}
 
 	/**
+	 * <p>Setter for the field floats.</p>
+	 *
 	 * @param floats the floats to set
 	 */
 	public void setFloats(Object[] floats) {
@@ -56,6 +70,8 @@ public class FloatingInfo {
 	}
 
 	/**
+	 * <p>Setter for the field shiftX.</p>
+	 *
 	 * @param shiftX the shiftX to set
 	 */
 	public void setShiftX(int shiftX) {
@@ -63,6 +79,8 @@ public class FloatingInfo {
 	}
 
 	/**
+	 * <p>Setter for the field shiftY.</p>
+	 *
 	 * @param shiftY the shiftY to set
 	 */
 	public void setShiftY(int shiftY) {

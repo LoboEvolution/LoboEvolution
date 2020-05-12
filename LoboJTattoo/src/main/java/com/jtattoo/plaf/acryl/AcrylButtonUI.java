@@ -38,14 +38,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseButtonUI;
 
 /**
+ * <p>AcrylButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylButtonUI extends BaseButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AcrylButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {

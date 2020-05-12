@@ -20,24 +20,49 @@
 */
 package org.loboevolution.common;
 
+/**
+ * <p>BufferExceededException class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BufferExceededException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for BufferExceededException.</p>
+	 */
 	public BufferExceededException() {
 		super();
 	}
 
+	/**
+	 * <p>Constructor for BufferExceededException.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public BufferExceededException(String message) {
 		super(message);
 	}
 
+	/**
+	 * <p>Constructor for BufferExceededException.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param cause a {@link java.lang.Throwable} object.
+	 */
 	public BufferExceededException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * <p>Constructor for BufferExceededException.</p>
+	 *
+	 * @param cause a {@link java.lang.Throwable} object.
+	 */
 	public BufferExceededException(Throwable cause) {
 		super(cause);
 	}

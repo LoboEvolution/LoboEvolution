@@ -12,6 +12,12 @@ import java.sql.ResultSet;
 import org.loboevolution.net.NetRoutines;
 
 
+/**
+ * <p>ConnectionStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ConnectionStore implements Serializable {
 
 	private static String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
@@ -49,6 +55,11 @@ public class ConnectionStore implements Serializable {
 	public ConnectionStore() {
 	}
 	
+	/**
+	 * <p>getConnection.</p>
+	 *
+	 * @return a {@link org.loboevolution.store.ConnectionStore} object.
+	 */
 	public static ConnectionStore getConnection() {
 		final ConnectionStore setting = new ConnectionStore();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -70,6 +81,9 @@ public class ConnectionStore implements Serializable {
 		return setting;
 	}
 
+	/**
+	 * <p>deleteConnection.</p>
+	 */
 	public void deleteConnection() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
@@ -112,7 +126,7 @@ public class ConnectionStore implements Serializable {
 	}
 
 	/**
-	 * Gets a non-<code>null</code> <code>Proxy</code> insteance.
+	 * Gets a non-null Proxy insteance.
 	 *
 	 * @param host the host
 	 * @return the proxy
@@ -153,6 +167,9 @@ public class ConnectionStore implements Serializable {
 		return this.userName;
 	}
 
+	/**
+	 * <p>insertConnection.</p>
+	 */
 	public void insertConnection() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_CONNECTIONS)) {

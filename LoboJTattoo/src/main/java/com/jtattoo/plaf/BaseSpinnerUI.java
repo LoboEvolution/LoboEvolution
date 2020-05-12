@@ -41,8 +41,10 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
 /**
+ * <p>BaseSpinnerUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseSpinnerUI extends BasicSpinnerUI {
 	// --------------------------------------------------------------------------
@@ -224,12 +226,11 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 	private static final Dimension zeroSize = new Dimension(0, 0);
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Returns a new instance of BaseSpinnerUI. SpinnerListUI delegates are
 	 * allocated one per JSpinner.
-	 *
-	 * @param c the JSpinner (not used)
 	 * @see ComponentUI#createUI
-	 * @return a new BasicSpinnerUI object
 	 */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseSpinnerUI();
@@ -238,13 +239,13 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 	private MyLayoutManager myLayoutManager = null;
 
 	/**
-	 * Create a <code>LayoutManager</code> that manages the <code>editor</code>,
-	 * <code>nextButton</code>, and <code>previousButton</code> children of the
+	 * {@inheritDoc}
+	 *
+	 * Create a LayoutManager that manages the editor,
+	 * nextButton, and previousButton children of the
 	 * JSpinner. These three children must be added with a constraint that
 	 * identifies their role: "Editor", "Next", and "Previous". The default layout
 	 * manager can handle the absence of any of these children.
-	 *
-	 * @return a LayoutManager for the editor, next button, and previous button.
 	 * @see #createNextButton
 	 * @see #createPreviousButton
 	 * @see #createEditor
@@ -257,6 +258,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		return myLayoutManager;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Component createNextButton() {
 		JButton button = new SpinButton(SwingConstants.NORTH);
@@ -271,6 +273,7 @@ public class BaseSpinnerUI extends BasicSpinnerUI {
 		return button;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Component createPreviousButton() {
 		JButton button = new SpinButton(SwingConstants.SOUTH);

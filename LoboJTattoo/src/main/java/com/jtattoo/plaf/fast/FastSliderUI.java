@@ -40,7 +40,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>FastSliderUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastSliderUI extends BaseSliderUI {
 
@@ -130,34 +133,45 @@ public class FastSliderUI extends BaseSliderUI {
 
 	private static final ThumbVerIcon THUMB_VER_ICON = new ThumbVerIcon();
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastSliderUI((JSlider) c);
 	}
 
+	/**
+	 * <p>Constructor for FastSliderUI.</p>
+	 *
+	 * @param slider a {@link javax.swing.JSlider} object.
+	 */
 	public FastSliderUI(JSlider slider) {
 		super(slider);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Icon getThumbHorIcon() {
 		return THUMB_HOR_ICON;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Icon getThumbHorIconRollover() {
 		return THUMB_HOR_ICON;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Icon getThumbVerIcon() {
 		return THUMB_VER_ICON;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Icon getThumbVerIconRollover() {
 		return THUMB_VER_ICON;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintTrack(Graphics g) {
 		boolean leftToRight = JTattooUtilities.isLeftToRight(slider);

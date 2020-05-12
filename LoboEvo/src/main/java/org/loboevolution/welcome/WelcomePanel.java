@@ -7,6 +7,12 @@ import javax.swing.JPanel;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IWelcomePanel;
 
+/**
+ * <p>WelcomePanel class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class WelcomePanel extends JPanel implements IWelcomePanel {
 
 	private static final long serialVersionUID = 1L;
@@ -15,6 +21,11 @@ public class WelcomePanel extends JPanel implements IWelcomePanel {
 
 	private final TextFieldUsername text;
 
+	/**
+	 * <p>Constructor for WelcomePanel.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 */
 	public WelcomePanel(IBrowserPanel panel) {
 		this.text = new TextFieldUsername();
 		this.button = new LoginButton(panel, this.text);
@@ -24,6 +35,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel {
 		add(this.button);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void repaint() {
 		if (this.text != null) {
@@ -37,6 +49,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JPanel getWelocome() {
 		return this;

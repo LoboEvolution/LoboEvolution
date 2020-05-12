@@ -50,14 +50,18 @@ import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 
 /**
- * The <code>HtmlParser</code> class is an HTML DOM parser. This parser provides
+ * The HtmlParser class is an HTML DOM parser. This parser provides
  * the functionality for the standard DOM parser implementation
  * {@link org.loboevolution.html.parser.DocumentBuilderImpl}. This parser class
  * may be used directly when a different DOM implementation is preferred.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HtmlParser {
 	private static final Logger logger = Logger.getLogger(HtmlParser.class.getName());
 
+	/** Constant MODIFYING_KEY="cobra.suspend" */
 	public static final String MODIFYING_KEY = "cobra.suspend";
 	private static final int TOKEN_BAD = 6;
 
@@ -100,8 +104,8 @@ public class HtmlParser {
 			"IMG", "IFRAME", "TABLE", "TBODY", "THEAD", "TR", "TH", "TD", "MATHML", "FRAMESET" };
 
 	/**
-	 * Constructs a <code>HtmlParser</code>.
-	 * 
+	 * Constructs a HtmlParser.
+	 *
 	 * @param ucontext The user agent context.
 	 * @param document A W3C Document instance.
 	 */
@@ -111,12 +115,12 @@ public class HtmlParser {
 	}
 
 	/**
-	 * Constructs a <code>HtmlParser</code>.
-	 * 
+	 * Constructs a HtmlParser.
+	 *
 	 * @param ucontext     The user agent context.
 	 * @param document     An W3C Document instance.
 	 * @param errorHandler The error handler.
-	 * @param needRoot
+	 * @param needRoot a boolean.
 	 */
 	public HtmlParser(UserAgentContext ucontext, Document document, ErrorHandler errorHandler, final boolean needRoot) {
 		this.ucontext = ucontext;
@@ -124,6 +128,12 @@ public class HtmlParser {
 		this.needRoot = needRoot;
 	}
 
+	/**
+	 * <p>isDecodeEntities.</p>
+	 *
+	 * @param elementName a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isDecodeEntities(String elementName) {
 		final ElementInfo einfo = (ElementInfo) HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
 		return einfo == null ? true : einfo.decodeEntities;
@@ -131,12 +141,12 @@ public class HtmlParser {
 
 	/**
 	 * This method may be used when the DOM should be built under a given node, such
-	 * as when <code>innerHTML</code> is used in Javascript.
+	 * as when innerHTML is used in Javascript.
 	 *
 	 * @param reader A LineNumberReader for the document.
 	 * @param parent The root node for the parsed DOM.
-	 * @throws IOException
-	 * @throws SAXException
+	 * @throws java.io.IOException if any.
+	 * @throws org.xml.sax.SAXException if any.
 	 */
 	public void parse(final LineNumberReader reader, final Node parent) throws IOException, SAXException {
 
@@ -160,12 +170,12 @@ public class HtmlParser {
 	}
 
 	/**
-	 * Parses HTML given by a <code>Reader</code>. This method appends nodes to the
+	 * Parses HTML given by a Reader. This method appends nodes to the
 	 * document provided to the parser.
 	 *
-	 * @param reader An instance of <code>Reader</code>.
-	 * @throws IOException  Thrown if there are errors reading the input stream.
-	 * @throws SAXException Thrown if there are parse errors.
+	 * @param reader An instance of Reader.
+	 * @throws java.io.IOException if any.  Thrown if there are errors reading the input stream.
+	 * @throws org.xml.sax.SAXException Thrown if there are parse errors.
 	 */
 	public void parse(final Reader reader) throws IOException, SAXException {
 		this.parse(new LineNumberReader(reader));
@@ -173,17 +183,24 @@ public class HtmlParser {
 
 	/**
 	 * This method may be used when the DOM should be built under a given node, such
-	 * as when <code>innerHTML</code> is used in Javascript.
+	 * as when innerHTML is used in Javascript.
 	 *
 	 * @param reader A document reader.
 	 * @param parent The root node for the parsed DOM.
-	 * @throws IOException
-	 * @throws SAXException
+	 * @throws java.io.IOException if any.
+	 * @throws org.xml.sax.SAXException if any.
 	 */
 	public void parse(final Reader reader, final Node parent) throws IOException, SAXException {
 		this.parse(new LineNumberReader(reader), parent);
 	}
 
+	/**
+	 * <p>parse.</p>
+	 *
+	 * @param reader a {@link java.io.LineNumberReader} object.
+	 * @throws java.io.IOException if any.
+	 * @throws org.xml.sax.SAXException if any.
+	 */
 	public void parse(final LineNumberReader reader) throws IOException, SAXException {
 		final Document doc = this.document;
 		this.parse(reader, doc);

@@ -20,23 +20,75 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFilterElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFilterElement
 		extends SVGElement, SVGURIReference, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGUnitTypes {
+	/**
+	 * <p>getFilterUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getFilterUnits();
 
+	/**
+	 * <p>getPrimitiveUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getPrimitiveUnits();
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY();
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getWidth();
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getHeight();
 
+	/**
+	 * <p>getFilterResX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getFilterResX();
 
+	/**
+	 * <p>getFilterResY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getFilterResY();
 
+	/**
+	 * <p>setFilterRes.</p>
+	 *
+	 * @param filterResX a int.
+	 * @param filterResY a int.
+	 */
 	void setFilterRes(int filterResX, int filterResY);
 }

@@ -9,6 +9,12 @@ import javax.swing.AbstractAction;
 
 import org.loboevolution.gui.SwingTasks;
 
+/**
+ * <p>EditAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class EditAction<T> extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
@@ -23,6 +29,7 @@ public class EditAction<T> extends AbstractAction {
 	 * Instantiates a new edits the action.
 	 *
 	 * @param add the add
+	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemListControl} object.
 	 */
 	public EditAction(boolean add, ItemListControl<T> item) {
 		this.add = add;
@@ -35,6 +42,7 @@ public class EditAction<T> extends AbstractAction {
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 	 * ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final Frame parentFrame = SwingTasks.getFrame(this.item);

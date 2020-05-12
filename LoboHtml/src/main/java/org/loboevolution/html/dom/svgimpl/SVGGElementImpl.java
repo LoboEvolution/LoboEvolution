@@ -25,12 +25,24 @@ import org.loboevolution.html.dom.svg.SVGUseElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGGElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 
+	/**
+	 * <p>Constructor for SVGGElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGGElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		boolean display = getDisplay();
@@ -85,6 +97,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();

@@ -30,18 +30,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseInternalFrameUI;
 
 /**
+ * <p>AeroInternalFrameUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AeroInternalFrameUI extends BaseInternalFrameUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AeroInternalFrameUI((JInternalFrame) c);
 	}
 
+	/**
+	 * <p>Constructor for AeroInternalFrameUI.</p>
+	 *
+	 * @param b a {@link javax.swing.JInternalFrame} object.
+	 */
 	public AeroInternalFrameUI(JInternalFrame b) {
 		super(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JComponent createNorthPane(JInternalFrame w) {
 		titlePane = new AeroInternalFrameTitlePane(w);

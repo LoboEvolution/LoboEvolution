@@ -9,6 +9,9 @@ package org.mozilla.javascript;
 /**
  * Generic notion of callable object that can execute some script-related code
  * upon request with specified values for script scope and this objects.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface Callable
 {
@@ -17,7 +20,7 @@ public interface Callable
      *
      * @param cx the current Context for this thread
      * @param scope the scope to use to resolve properties.
-     * @param thisObj the JavaScript <code>this</code> object
+     * @param thisObj the JavaScript this object
      * @param args the array of arguments
      * @return the result of the call
      */

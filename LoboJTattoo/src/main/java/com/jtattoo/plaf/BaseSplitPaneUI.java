@@ -31,21 +31,27 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
+ * <p>BaseSplitPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseSplitPaneUI extends BasicSplitPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseSplitPaneUI();
 	}
 
 	protected PropertyChangeListener myPropertyChangeListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	public BasicSplitPaneDivider createDefaultDivider() {
 		return new BaseSplitPaneDivider(this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -57,6 +63,7 @@ public class BaseSplitPaneUI extends BasicSplitPaneUI {
 		getSplitPane().addPropertyChangeListener(myPropertyChangeListener);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		super.uninstallListeners();

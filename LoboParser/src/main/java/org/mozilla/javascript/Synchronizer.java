@@ -13,19 +13,19 @@ package org.mozilla.javascript;
  * methods in Javascript.
  *
  * Synchronized functions are created from ordinary Javascript
- * functions by the <code>Synchronizer</code> constructor, e.g.
- * <code>new Packages.org.mozilla.javascript.Synchronizer(fun)</code>.
+ * functions by the Synchronizer constructor, e.g.
+ * new Packages.org.mozilla.javascript.Synchronizer(fun).
  * The resulting object is a function that establishes an exclusive
- * lock on the <code>this</code> object of its invocation.
+ * lock on the this object of its invocation.
  *
  * The Rhino shell provides a short-cut for the creation of
- * synchronized methods: <code>sync(fun)</code> has the same effect as
+ * synchronized methods: sync(fun) has the same effect as
  * calling the above constructor.
  *
  * @see org.mozilla.javascript.Delegator
  * @author Matthias Radestock
+ * @version $Id: $Id
  */
-
 public class Synchronizer extends Delegator {
 
     private Object syncObject;
@@ -51,9 +51,7 @@ public class Synchronizer extends Delegator {
         this.syncObject = syncObject;
     }
 
-    /**
-     * @see org.mozilla.javascript.Function#call
-     */
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)

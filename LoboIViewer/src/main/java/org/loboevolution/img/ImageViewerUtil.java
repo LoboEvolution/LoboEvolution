@@ -5,8 +5,9 @@ import java.util.Iterator;
 
 /**
  * Utility methods for image viewers.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public final class ImageViewerUtil {
 	/** Private constructor. */
@@ -16,7 +17,7 @@ public final class ImageViewerUtil {
 	/**
 	 * Synchronizes the view state of multiple image viewers with respect to scroll
 	 * position and resize strategy, and other properties affecting display.
-	 * 
+	 *
 	 * @param first
 	 *            the first viewer
 	 * @param others
@@ -32,7 +33,7 @@ public final class ImageViewerUtil {
 	/**
 	 * Synchronizes the view state of multiple image viewers with respect to scroll
 	 * position and resize strategy, and other properties affecting display.
-	 * 
+	 *
 	 * @param viewers
 	 *            the viewers to synchronize
 	 */
@@ -48,14 +49,14 @@ public final class ImageViewerUtil {
 	}
 
 	/**
-	 * Synchronizes the {@link PixelInfoStatusBar}s associated with the viewers.
+	 * Synchronizes the {@link org.loboevolution.img.PixelInfoStatusBar}s associated with the viewers.
 	 * Viewers with a different or {@code null} status bar are ignored. When this
 	 * function returns, the {@code PixelInfoStatusBar}s among the viewer status
 	 * bars will share the same {@code PixelModel}, and thus display the same pixel.
 	 * <p>
 	 * The default status bar of ImageViewer is a {@code PixelInfoStatusBar}, so
 	 * this function can be used to synchronize the default status bars of viewers.
-	 * 
+	 *
 	 * @param viewers
 	 *            the viewers
 	 */

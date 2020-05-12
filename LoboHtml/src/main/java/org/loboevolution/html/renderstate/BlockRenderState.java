@@ -26,16 +26,31 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 /**
  * Render state for elements that are displayed as blocks by default.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class BlockRenderState extends StyleSheetRenderState {
+	/**
+	 * <p>Constructor for BlockRenderState.</p>
+	 *
+	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 */
 	public BlockRenderState(HTMLDocumentImpl document) {
 		super(document);
 	}
 
+	/**
+	 * <p>Constructor for BlockRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public BlockRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getDefaultDisplay() {
 		return DISPLAY_BLOCK;

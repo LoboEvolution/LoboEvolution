@@ -20,8 +20,24 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAnimatedPoints interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedPoints {
+	/**
+	 * <p>getPoints.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPointList} object.
+	 */
 	SVGPointList getPoints();
 
+	/**
+	 * <p>getAnimatedPoints.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPointList} object.
+	 */
 	SVGPointList getAnimatedPoints();
 }

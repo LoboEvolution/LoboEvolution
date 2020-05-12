@@ -27,14 +27,28 @@ import java.awt.Color;
 import java.awt.Window;
 
 /**
+ * <p>DecorationHelper class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class DecorationHelper {
 
+	/**
+	 * <p>isTranslucentWindowSupported.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isTranslucentWindowSupported() {
 		return JTattooUtilities.getJavaVersion() >= 1.7 && (JTattooUtilities.isMac() || JTattooUtilities.isWindows());
 	}
 
+	/**
+	 * <p>setTranslucentWindow.</p>
+	 *
+	 * @param wnd a {@link java.awt.Window} object.
+	 * @param translucent a boolean.
+	 */
 	public static void setTranslucentWindow(Window wnd, boolean translucent) {
 		if (isTranslucentWindowSupported()) {
 			if (JTattooUtilities.getJavaVersion() >= 1.7) {

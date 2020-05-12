@@ -29,24 +29,31 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.AbstractToolBarUI;
 
 /**
+ * <p>FastToolBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastToolBarUI extends AbstractToolBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastToolBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getNonRolloverBorder() {
 		return FastBorders.getToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getRolloverBorder() {
 		return FastBorders.getRolloverToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isButtonOpaque() {
 		return false;

@@ -29,7 +29,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.XPScrollButton;
 
 /**
+ * <p>HiFiScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiScrollButton extends XPScrollButton {
 
@@ -38,10 +41,17 @@ public class HiFiScrollButton extends XPScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for HiFiScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public HiFiScrollButton(int direction, int width) {
 		super(direction, width);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getFrameColor() {
 		Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);

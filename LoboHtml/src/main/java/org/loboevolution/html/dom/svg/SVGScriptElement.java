@@ -22,8 +22,25 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGScriptElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGScriptElement extends SVGElement, SVGURIReference, SVGExternalResourcesRequired {
+	/**
+	 * <p>getType.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getType();
 
+	/**
+	 * <p>setType.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setType(String type) throws DOMException;
 }

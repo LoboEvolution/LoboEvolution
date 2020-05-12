@@ -30,12 +30,16 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseDesktopPaneUI;
 
 /**
+ * <p>AluminiumDesktopPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumDesktopPaneUI extends BaseDesktopPaneUI {
 
 	private static AluminiumDesktopPaneUI desktopPaneUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (desktopPaneUI == null) {
 			desktopPaneUI = new AluminiumDesktopPaneUI();
@@ -43,6 +47,7 @@ public class AluminiumDesktopPaneUI extends BaseDesktopPaneUI {
 		return desktopPaneUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (c.getClientProperty("backgroundTexture") == null) {

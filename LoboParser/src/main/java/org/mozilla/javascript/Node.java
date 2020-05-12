@@ -22,9 +22,38 @@ import org.mozilla.javascript.ast.ScriptNode;
  *
  * @author Norris Boyd
  * @author Mike McCabe
+ * @version $Id: $Id
  */
 public class Node implements Iterable<Node>
 {
+    /** Constant FUNCTION_PROP=1 */
+    /** Constant LOCAL_PROP=2 */
+    /** Constant LOCAL_BLOCK_PROP=3 */
+    /** Constant REGEXP_PROP=4 */
+    /** Constant CASEARRAY_PROP=5 */
+    /** Constant TARGETBLOCK_PROP=6 */
+    /** Constant VARIABLE_PROP=7 */
+    /** Constant ISNUMBER_PROP=8 */
+    /** Constant DIRECTCALL_PROP=9 */
+    /** Constant SPECIALCALL_PROP=10 */
+    /** Constant SKIP_INDEXES_PROP=11 */
+    /** Constant OBJECT_IDS_PROP=12 */
+    /** Constant INCRDECR_PROP=13 */
+    /** Constant CATCH_SCOPE_PROP=14 */
+    /** Constant LABEL_ID_PROP=15 */
+    /** Constant MEMBER_TYPE_PROP=16 */
+    /** Constant NAME_PROP=17 */
+    /** Constant CONTROL_BLOCK_PROP=18 */
+    /** Constant PARENTHESIZED_PROP=19 */
+    /** Constant GENERATOR_END_PROP=20 */
+    /** Constant DESTRUCTURING_ARRAY_LENGTH=21 */
+    /** Constant DESTRUCTURING_NAMES=22 */
+    /** Constant DESTRUCTURING_PARAMS=23 */
+    /** Constant JSDOC_PROP=24 */
+    /** Constant EXPRESSION_CLOSURE_PROP=25 */
+    /** Constant DESTRUCTURING_SHORTHAND=26 */
+    /** Constant ARROW_FUNCTION_PROP=27 */
+    /** Constant LAST_PROP=27 */
     public static final int
         FUNCTION_PROP      =  1,
         LOCAL_PROP         =  2,
@@ -68,20 +97,31 @@ public class Node implements Iterable<Node>
 
     // values of ISNUMBER_PROP to specify
     // which of the children are Number types
+    /** Constant BOTH=0 */
+    /** Constant LEFT=1 */
+    /** Constant RIGHT=2 */
     public static final int
         BOTH = 0,
         LEFT = 1,
         RIGHT = 2;
 
+    /** Constant NON_SPECIALCALL=0 */
+    /** Constant SPECIALCALL_EVAL=1 */
+    /** Constant SPECIALCALL_WITH=2 */
     public static final int    // values for SPECIALCALL_PROP
         NON_SPECIALCALL  = 0,
         SPECIALCALL_EVAL = 1,
         SPECIALCALL_WITH = 2;
 
+    /** Constant DECR_FLAG=0x1 */
+    /** Constant POST_FLAG=0x2 */
     public static final int   // flags for INCRDECR_PROP
         DECR_FLAG = 0x1,
         POST_FLAG = 0x2;
 
+    /** Constant PROPERTY_FLAG=0x1 */
+    /** Constant ATTRIBUTE_FLAG=0x2 */
+    /** Constant DESCENDANTS_FLAG=0x4 */
     public static final int   // flags for MEMBER_TYPE_PROP
         PROPERTY_FLAG    = 0x1, // property access: element is valid name
         ATTRIBUTE_FLAG   = 0x2, // x.@y or x..@y
@@ -95,16 +135,34 @@ public class Node implements Iterable<Node>
         Object objectValue;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     */
     public Node(int nodeType) {
         type = nodeType;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     */
     public Node(int nodeType, Node child) {
         type = nodeType;
         first = last = child;
         child.next = null;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param left a {@link org.mozilla.javascript.Node} object.
+     * @param right a {@link org.mozilla.javascript.Node} object.
+     */
     public Node(int nodeType, Node left, Node right) {
         type = nodeType;
         first = left;
@@ -113,6 +171,14 @@ public class Node implements Iterable<Node>
         right.next = null;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param left a {@link org.mozilla.javascript.Node} object.
+     * @param mid a {@link org.mozilla.javascript.Node} object.
+     * @param right a {@link org.mozilla.javascript.Node} object.
+     */
     public Node(int nodeType, Node left, Node mid, Node right) {
         type = nodeType;
         first = left;
@@ -122,36 +188,85 @@ public class Node implements Iterable<Node>
         right.next = null;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param line a int.
+     */
     public Node(int nodeType, int line) {
         type = nodeType;
         lineno = line;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     * @param line a int.
+     */
     public Node(int nodeType, Node child, int line) {
         this(nodeType, child);
         lineno = line;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param left a {@link org.mozilla.javascript.Node} object.
+     * @param right a {@link org.mozilla.javascript.Node} object.
+     * @param line a int.
+     */
     public Node(int nodeType, Node left, Node right, int line) {
         this(nodeType, left, right);
         lineno = line;
     }
 
+    /**
+     * <p>Constructor for Node.</p>
+     *
+     * @param nodeType a int.
+     * @param left a {@link org.mozilla.javascript.Node} object.
+     * @param mid a {@link org.mozilla.javascript.Node} object.
+     * @param right a {@link org.mozilla.javascript.Node} object.
+     * @param line a int.
+     */
     public Node(int nodeType, Node left, Node mid, Node right, int line) {
         this(nodeType, left, mid, right);
         lineno = line;
     }
 
+    /**
+     * <p>newNumber.</p>
+     *
+     * @param number a double.
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public static Node newNumber(double number) {
         NumberLiteral n = new NumberLiteral();
         n.setNumber(number);
         return n;
     }
 
+    /**
+     * <p>newString.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public static Node newString(String str) {
         return newString(Token.STRING, str);
     }
 
+    /**
+     * <p>newString.</p>
+     *
+     * @param type a int.
+     * @param str a {@link java.lang.String} object.
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public static Node newString(int type, String str) {
         Name name = new Name();
         name.setIdentifier(str);
@@ -159,12 +274,20 @@ public class Node implements Iterable<Node>
         return name;
     }
 
+    /**
+     * <p>Getter for the field type.</p>
+     *
+     * @return a int.
+     */
     public int getType() {
         return type;
     }
 
     /**
      * Sets the node type and returns this node.
+     *
+     * @param type a int.
+     * @return a {@link org.mozilla.javascript.Node} object.
      */
     public Node setType(int type) {
         this.type = type;
@@ -173,6 +296,7 @@ public class Node implements Iterable<Node>
 
     /**
      * Gets the JsDoc comment string attached to this node.
+     *
      * @return the comment string or {@code null} if no JsDoc is attached to
      *     this node
      */
@@ -186,6 +310,7 @@ public class Node implements Iterable<Node>
 
     /**
      * Gets the JsDoc Comment object attached to this node.
+     *
      * @return the Comment or {@code null} if no JsDoc is attached to
      *     this node
      */
@@ -195,27 +320,55 @@ public class Node implements Iterable<Node>
 
     /**
      * Sets the JsDoc comment string attached to this node.
+     *
+     * @param jsdocNode a {@link org.mozilla.javascript.ast.Comment} object.
      */
     public void setJsDocNode(Comment jsdocNode) {
         putProp(JSDOC_PROP, jsdocNode);
     }
 
+    /**
+     * <p>hasChildren.</p>
+     *
+     * @return a boolean.
+     */
     public boolean hasChildren() {
         return first != null;
     }
 
+    /**
+     * <p>getFirstChild.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public Node getFirstChild() {
         return first;
     }
 
+    /**
+     * <p>getLastChild.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public Node getLastChild() {
         return last;
     }
 
+    /**
+     * <p>Getter for the field next.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public Node getNext() {
         return next;
     }
 
+    /**
+     * <p>getChildBefore.</p>
+     *
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public Node getChildBefore(Node child) {
         if (child == first)
             return null;
@@ -228,6 +381,11 @@ public class Node implements Iterable<Node>
         return n;
     }
 
+    /**
+     * <p>getLastSibling.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public Node getLastSibling() {
         Node n = this;
         while (n.next != null) {
@@ -236,6 +394,11 @@ public class Node implements Iterable<Node>
         return n;
     }
 
+    /**
+     * <p>addChildToFront.</p>
+     *
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     */
     public void addChildToFront(Node child) {
         child.next = first;
         first = child;
@@ -244,6 +407,11 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * <p>addChildToBack.</p>
+     *
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     */
     public void addChildToBack(Node child) {
         child.next = null;
         if (last == null) {
@@ -254,6 +422,11 @@ public class Node implements Iterable<Node>
         last = child;
     }
 
+    /**
+     * <p>addChildrenToFront.</p>
+     *
+     * @param children a {@link org.mozilla.javascript.Node} object.
+     */
     public void addChildrenToFront(Node children) {
         Node lastSib = children.getLastSibling();
         lastSib.next = first;
@@ -263,6 +436,11 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * <p>addChildrenToBack.</p>
+     *
+     * @param children a {@link org.mozilla.javascript.Node} object.
+     */
     public void addChildrenToBack(Node children) {
         if (last != null) {
             last.next = children;
@@ -275,6 +453,9 @@ public class Node implements Iterable<Node>
 
     /**
      * Add 'child' before 'node'.
+     *
+     * @param newChild a {@link org.mozilla.javascript.Node} object.
+     * @param node a {@link org.mozilla.javascript.Node} object.
      */
     public void addChildBefore(Node newChild, Node node) {
         if (newChild.next != null)
@@ -291,6 +472,9 @@ public class Node implements Iterable<Node>
 
     /**
      * Add 'child' after 'node'.
+     *
+     * @param newChild a {@link org.mozilla.javascript.Node} object.
+     * @param node a {@link org.mozilla.javascript.Node} object.
      */
     public void addChildAfter(Node newChild, Node node) {
         if (newChild.next != null)
@@ -302,6 +486,11 @@ public class Node implements Iterable<Node>
             last = newChild;
     }
 
+    /**
+     * <p>removeChild.</p>
+     *
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     */
     public void removeChild(Node child) {
         Node prev = getChildBefore(child);
         if (prev == null)
@@ -312,6 +501,12 @@ public class Node implements Iterable<Node>
         child.next = null;
     }
 
+    /**
+     * <p>replaceChild.</p>
+     *
+     * @param child a {@link org.mozilla.javascript.Node} object.
+     * @param newChild a {@link org.mozilla.javascript.Node} object.
+     */
     public void replaceChild(Node child, Node newChild) {
         newChild.next = child.next;
         if (child == first) {
@@ -325,6 +520,12 @@ public class Node implements Iterable<Node>
         child.next = null;
     }
 
+    /**
+     * <p>replaceChildAfter.</p>
+     *
+     * @param prevChild a {@link org.mozilla.javascript.Node} object.
+     * @param newChild a {@link org.mozilla.javascript.Node} object.
+     */
     public void replaceChildAfter(Node prevChild, Node newChild) {
         Node child = prevChild.next;
         newChild.next = child.next;
@@ -334,6 +535,9 @@ public class Node implements Iterable<Node>
         child.next = null;
     }
 
+    /**
+     * <p>removeChildren.</p>
+     */
     public void removeChildren() {
         first = last = null;
     }
@@ -393,6 +597,8 @@ public class Node implements Iterable<Node>
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Returns an {@link java.util.Iterator} over the node's children.
      */
     @Override
@@ -460,6 +666,11 @@ public class Node implements Iterable<Node>
         return item;
     }
 
+    /**
+     * <p>removeProp.</p>
+     *
+     * @param propType a int.
+     */
     public void removeProp(int propType)
     {
         PropListItem x = propListHead;
@@ -478,6 +689,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * <p>getProp.</p>
+     *
+     * @param propType a int.
+     * @return a {@link java.lang.Object} object.
+     */
     public Object getProp(int propType)
     {
         PropListItem item = lookupProperty(propType);
@@ -485,6 +702,13 @@ public class Node implements Iterable<Node>
         return item.objectValue;
     }
 
+    /**
+     * <p>getIntProp.</p>
+     *
+     * @param propType a int.
+     * @param defaultValue a int.
+     * @return a int.
+     */
     public int getIntProp(int propType, int defaultValue)
     {
         PropListItem item = lookupProperty(propType);
@@ -492,6 +716,12 @@ public class Node implements Iterable<Node>
         return item.intValue;
     }
 
+    /**
+     * <p>getExistingIntProp.</p>
+     *
+     * @param propType a int.
+     * @return a int.
+     */
     public int getExistingIntProp(int propType)
     {
         PropListItem item = lookupProperty(propType);
@@ -499,6 +729,12 @@ public class Node implements Iterable<Node>
         return item.intValue;
     }
 
+    /**
+     * <p>putProp.</p>
+     *
+     * @param propType a int.
+     * @param prop a {@link java.lang.Object} object.
+     */
     public void putProp(int propType, Object prop)
     {
         if (prop == null) {
@@ -509,6 +745,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * <p>putIntProp.</p>
+     *
+     * @param propType a int.
+     * @param prop a int.
+     */
     public void putIntProp(int propType, int prop)
     {
         PropListItem item = ensureProperty(propType);
@@ -517,42 +759,73 @@ public class Node implements Iterable<Node>
 
     /**
      * Return the line number recorded for this node.
+     *
      * @return the line number
      */
     public int getLineno() {
         return lineno;
     }
 
+    /**
+     * <p>Setter for the field lineno.</p>
+     *
+     * @param lineno a int.
+     */
     public void setLineno(int lineno) {
         this.lineno = lineno;
     }
 
-    /** Can only be called when <tt>getType() == Token.NUMBER</tt> */
+    /**
+     * Can only be called when <tt>getType() == Token.NUMBER</tt>
+     *
+     * @return a double.
+     */
     public final double getDouble() {
         return ((NumberLiteral)this).getNumber();
     }
 
+    /**
+     * <p>setDouble.</p>
+     *
+     * @param number a double.
+     */
     public final void setDouble(double number) {
         ((NumberLiteral)this).setNumber(number);
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     * Can only be called when node has String context.
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public final String getString() {
         return ((Name)this).getIdentifier();
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     * Can only be called when node has String context.
+     *
+     * @param s a {@link java.lang.String} object.
+     */
     public final void setString(String s) {
         if (s == null) Kit.codeBug();
         ((Name)this).setIdentifier(s);
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     * Can only be called when node has String context.
+     *
+     * @return a {@link org.mozilla.javascript.ast.Scope} object.
+     */
     public Scope getScope() {
         return ((Name)this).getScope();
     }
 
-    /** Can only be called when node has String context. */
+    /**
+     * Can only be called when node has String context.
+     *
+     * @param s a {@link org.mozilla.javascript.ast.Scope} object.
+     */
     public void setScope(Scope s) {
         if (s == null) Kit.codeBug();
         if (!(this instanceof Name)) {
@@ -561,17 +834,32 @@ public class Node implements Iterable<Node>
         ((Name)this).setScope(s);
     }
 
+    /**
+     * <p>newTarget.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Node} object.
+     */
     public static Node newTarget()
     {
         return new Node(Token.TARGET);
     }
 
+    /**
+     * <p>labelId.</p>
+     *
+     * @return a int.
+     */
     public final int labelId()
     {
         if (type != Token.TARGET && type != Token.YIELD) Kit.codeBug();
         return getIntProp(LABEL_ID_PROP, -1);
     }
 
+    /**
+     * <p>labelId.</p>
+     *
+     * @param labelId a int.
+     */
     public void labelId(int labelId)
     {
         if (type != Token.TARGET  && type != Token.YIELD) Kit.codeBug();
@@ -633,14 +921,19 @@ public class Node implements Iterable<Node>
      * Will be detected as (END_DROPS_OFF | END_RETURN_VALUE) by endCheck()
      */
     public static final int END_UNREACHED = 0;
+    /** Constant END_DROPS_OFF=1 */
     public static final int END_DROPS_OFF = 1;
+    /** Constant END_RETURNS=2 */
     public static final int END_RETURNS = 2;
+    /** Constant END_RETURNS_VALUE=4 */
     public static final int END_RETURNS_VALUE = 4;
+    /** Constant END_YIELDS=8 */
     public static final int END_YIELDS = 8;
 
     /**
      * Checks that every return usage in a function body is consistent with the
      * requirements of strict-mode.
+     *
      * @return true if the function satisfies strict mode requirement.
      */
     public boolean hasConsistentReturnUsage()
@@ -917,6 +1210,11 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * <p>hasSideEffects.</p>
+     *
+     * @return a boolean.
+     */
     public boolean hasSideEffects()
     {
         switch (type) {
@@ -1043,6 +1341,7 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -1212,6 +1511,12 @@ public class Node implements Iterable<Node>
         }
     }
 
+    /**
+     * <p>toStringTree.</p>
+     *
+     * @param treeTop a {@link org.mozilla.javascript.ast.ScriptNode} object.
+     * @return a {@link java.lang.String} object.
+     */
     public String toStringTree(ScriptNode treeTop) {
         if (Token.printTrees) {
             StringBuilder sb = new StringBuilder();

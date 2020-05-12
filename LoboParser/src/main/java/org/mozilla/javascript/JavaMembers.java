@@ -890,6 +890,7 @@ class FieldAndMethods extends NativeJavaMethod
         setPrototype(ScriptableObject.getFunctionPrototype(scope));
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> hint)
     {

@@ -8,6 +8,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>BrowserData class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BrowserData {
 
 	/**
@@ -48,6 +54,14 @@ public class BrowserData {
 		return "";
 	}
 
+	/**
+	 * <p>getFiles.</p>
+	 *
+	 * @param directoryPath a {@link java.lang.String} object.
+	 * @param cookieFilePaths a {@link java.util.List} object.
+	 * @param fileName a {@link java.lang.String} object.
+	 * @return a {@link java.util.List} object.
+	 */
 	protected static List<String> getFiles(String directoryPath, List<String> cookieFilePaths, String fileName) {
 		if (cookieFilePaths == null) {
 			cookieFilePaths = new ArrayList<String>();

@@ -53,8 +53,11 @@ import java.util.Objects;
  * Represents a HTML block in a rendered document, typically a DIV. The root
  * renderer node is of this type as well.
  * <p>
- * Immediately below an <code>RBlock</code> you will find a node of type
- * {@link RBlockViewport}.
+ * Immediately below an RBlock you will find a node of type
+ * {@link org.loboevolution.html.renderer.RBlockViewport}.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class RBlock extends BaseElementRenderable {
 	private static class LayoutKey {
@@ -154,6 +157,7 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/** Constant logger */
 	protected static final Logger logger = Logger.getLogger(RBlock.class.getName());
 	private static final int MAX_CACHE_SIZE = 10;
 	private BoundableRenderable armedRenderable;
@@ -185,6 +189,16 @@ public class RBlock extends BaseElementRenderable {
 
 	protected JScrollBar vScrollBar;
 
+	/**
+	 * <p>Constructor for RBlock.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param listNesting a int.
+	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param parentContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 */
 	public RBlock(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(parentContainer, modelNode, pcontext);
@@ -199,6 +213,7 @@ public class RBlock extends BaseElementRenderable {
 		bl.setY(Short.MAX_VALUE);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void clearStyle(boolean isRootBlock) {
 		super.clearStyle(isRootBlock);
@@ -228,6 +243,7 @@ public class RBlock extends BaseElementRenderable {
 		return corrected;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
 		// This is an override of an abstract method.
@@ -239,9 +255,15 @@ public class RBlock extends BaseElementRenderable {
 	 * Lays out and sets dimensions only if RBlock is invalid (or never before layed
 	 * out), if the parameters passed differ from the last layout, or if the current
 	 * font differs from the font for the last layout.
-	 * 
-	 * @param availWidth
-	 * @param availHeight
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param expandWidth a boolean.
+	 * @param expandHeight a boolean.
+	 * @param floatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
+	 * @param defaultOverflowX a int.
+	 * @param defaultOverflowY a int.
+	 * @param sizeOnly a boolean.
 	 */
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
@@ -292,6 +314,11 @@ public class RBlock extends BaseElementRenderable {
 		sendDelayedPairsToParent();
 	}
 
+	/**
+	 * <p>ensureVisible.</p>
+	 *
+	 * @param point a {@link java.awt.Point} object.
+	 */
 	public void ensureVisible(Point point) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -325,6 +352,7 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -339,6 +367,7 @@ public class RBlock extends BaseElementRenderable {
 		return result;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void finalize() throws Throwable {
 		super.finalize();
@@ -605,14 +634,29 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field defaultOverflowX.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getDefaultOverflowX() {
 		return this.defaultOverflowX;
 	}
 
+	/**
+	 * <p>Getter for the field defaultOverflowY.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getDefaultOverflowY() {
 		return this.defaultOverflowY;
 	}
 
+	/**
+	 * <p>getExportableFloatingInfo.</p>
+	 *
+	 * @return a {@link org.loboevolution.info.FloatingInfo} object.
+	 */
 	public FloatingInfo getExportableFloatingInfo() {
 		final FloatingInfo info = this.bodyLayout.getExportableFloatingInfo();
 		if (info == null) {
@@ -626,10 +670,20 @@ public class RBlock extends BaseElementRenderable {
 		return fInfo;
 	}
 
+	/**
+	 * <p>getFirstBaselineOffset.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getFirstBaselineOffset() {
 		return this.bodyLayout.getFirstBaselineOffset();
 	}
 
+	/**
+	 * <p>getFirstLineHeight.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getFirstLineHeight() {
 		return this.bodyLayout.getFirstLineHeight();
 	}
@@ -651,6 +705,7 @@ public class RBlock extends BaseElementRenderable {
 	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -668,11 +723,17 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getPaintedBackgroundColor() {
 		return this.backgroundColor;
 	}
 
+	/**
+	 * <p>getRBlockViewport.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderer.RBlockViewport} object.
+	 */
 	public RBlockViewport getRBlockViewport() {
 		return this.bodyLayout;
 	}
@@ -682,6 +743,7 @@ public class RBlock extends BaseElementRenderable {
 	 * 
 	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Iterator getRenderables() {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -712,6 +774,12 @@ public class RBlock extends BaseElementRenderable {
 		};
 	}
 
+	/**
+	 * <p>getViewportListNesting.</p>
+	 *
+	 * @param blockNesting a int.
+	 * @return a int.
+	 */
 	public int getViewportListNesting(int blockNesting) {
 		return blockNesting;
 	}
@@ -729,6 +797,8 @@ public class RBlock extends BaseElementRenderable {
 
 	/**
 	 * Gets the width the vertical scrollbar has when shown.
+	 *
+	 * @return a int.
 	 */
 	public int getVScrollBarWidth() {
 		return SCROLL_BAR_THICKNESS;
@@ -743,6 +813,8 @@ public class RBlock extends BaseElementRenderable {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * RBlocks should only be invalidated if one of their properties change, or if a
 	 * descendent changes, or if a style property of an ancestor is such that it
 	 * could produce layout changes in this RBlock.
@@ -765,42 +837,78 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getX() {
 		return super.getX() + relativeOffsetX;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getY() {
 		return super.getY() + relativeOffsetY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVisualWidth() {
 		return Math.max(super.getVisualWidth(), bodyLayout.getVisualWidth());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVisualHeight() {
 		return Math.max(super.getVisualHeight(), bodyLayout.getVisualHeight());
 	}
 
+	/**
+	 * <p>isOverflowVisibleX.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public final boolean isOverflowVisibleX() {
 		final int overflow = this.overflowX;
 		return overflow == RenderState.OVERFLOW_NONE || overflow == RenderState.OVERFLOW_VISIBLE;
 	}
 
+	/**
+	 * <p>isOverflowVisibleY.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public final boolean isOverflowVisibleY() {
 		final int overflow = this.overflowY;
 		return overflow == RenderState.OVERFLOW_NONE || overflow == RenderState.OVERFLOW_VISIBLE;
 	}
 
+	/**
+	 * <p>layout.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param expandWidth a boolean.
+	 * @param expandHeight a boolean.
+	 * @param floatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
+	 * @param sizeOnly a boolean.
+	 */
 	public final void layout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, boolean sizeOnly) {
 		this.layout(availWidth, availHeight, expandWidth, expandHeight, floatBoundsSource, this.defaultOverflowX,
 				this.defaultOverflowY, sizeOnly);
 	}
 
+	/**
+	 * <p>layout.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param expandWidth a boolean.
+	 * @param expandHeight a boolean.
+	 * @param floatBoundsSource a {@link org.loboevolution.html.renderer.FloatingBoundsSource} object.
+	 * @param defaultOverflowX a int.
+	 * @param defaultOverflowY a int.
+	 * @param sizeOnly a boolean.
+	 */
 	public final void layout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
 		try {
@@ -812,12 +920,24 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * <p>layout.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param expandWidth a boolean.
+	 * @param expandHeight a boolean.
+	 * @param defaultOverflowX a int.
+	 * @param defaultOverflowY a int.
+	 * @param sizeOnly a boolean.
+	 */
 	public final void layout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
 			int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
 		this.layout(availWidth, availHeight, expandWidth, expandHeight, null, defaultOverflowX, defaultOverflowY,
 				sizeOnly);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -832,6 +952,7 @@ public class RBlock extends BaseElementRenderable {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -849,6 +970,7 @@ public class RBlock extends BaseElementRenderable {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
 		final BoundableRenderable br = this.armedRenderable;
@@ -870,6 +992,7 @@ public class RBlock extends BaseElementRenderable {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -903,6 +1026,7 @@ public class RBlock extends BaseElementRenderable {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
@@ -930,6 +1054,7 @@ public class RBlock extends BaseElementRenderable {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics gIn) {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -1017,6 +1142,7 @@ public class RBlock extends BaseElementRenderable {
 	 * boolean, org.loboevolution.html.rendered.RenderablePoint,
 	 * org.loboevolution.html.rendered.RenderablePoint)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		final Graphics newG = g.create();
@@ -1031,6 +1157,7 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void repaint(ModelNode modelNode) {
 		// this.invalidateRenderStyle();
@@ -1071,6 +1198,13 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * <p>scrollBy.</p>
+	 *
+	 * @param orientation a int.
+	 * @param offset a int.
+	 * @return a boolean.
+	 */
 	public boolean scrollBy(int orientation, int offset) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -1084,11 +1218,24 @@ public class RBlock extends BaseElementRenderable {
 		return false;
 	}
 
+	/**
+	 * <p>scrollByUnits.</p>
+	 *
+	 * @param orientation a int.
+	 * @param units a int.
+	 * @return a boolean.
+	 */
 	public boolean scrollByUnits(int orientation, int units) {
 		final int offset = orientation == JScrollBar.VERTICAL ? getVUnitIncrement(null) * units : units;
 		return this.scrollBy(orientation, offset);
 	}
 
+	/**
+	 * <p>scrollHorizontalTo.</p>
+	 *
+	 * @param newX a int.
+	 * @return a boolean.
+	 */
 	public boolean scrollHorizontalTo(int newX) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -1115,13 +1262,13 @@ public class RBlock extends BaseElementRenderable {
 	 * possible.
 	 * <p>
 	 * This method should be invoked in the GUI thread.
-	 * 
+	 *
 	 * @param bounds    The bounds of the scrollable area that should become
 	 *                  visible.
-	 * @param xIfNeeded If this parameter is <code>true</code> the x coordinate is
+	 * @param xIfNeeded If this parameter is true the x coordinate is
 	 *                  changed only if the horizontal bounds are not currently
 	 *                  visible.
-	 * @param yIfNeeded If this parameter is <code>true</code> the y coordinate is
+	 * @param yIfNeeded If this parameter is true the y coordinate is
 	 *                  changed only if the vertical bounds are not currently
 	 *                  visible.
 	 */
@@ -1165,6 +1312,12 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * <p>scrollVerticalTo.</p>
+	 *
+	 * @param newY a int.
+	 * @return a boolean.
+	 */
 	public boolean scrollVerticalTo(int newY) {
 		final RBlockViewport bodyLayout = this.bodyLayout;
 		if (bodyLayout != null) {
@@ -1186,6 +1339,7 @@ public class RBlock extends BaseElementRenderable {
 		return false;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public Rectangle getClipBoundsWithoutInsets() {
 		final int hInset = this.hasVScrollBar ? SCROLL_BAR_THICKNESS : 0;
@@ -1197,27 +1351,49 @@ public class RBlock extends BaseElementRenderable {
 		}
 	}
 
+	/**
+	 * <p>Setter for the field defaultOverflowX.</p>
+	 *
+	 * @param defaultOverflowX a int.
+	 */
 	public void setDefaultOverflowX(int defaultOverflowX) {
 		this.defaultOverflowX = defaultOverflowX;
 	}
 
+	/**
+	 * <p>Setter for the field defaultOverflowY.</p>
+	 *
+	 * @param defaultOverflowY a int.
+	 */
 	public void setDefaultOverflowY(int defaultOverflowY) {
 		this.defaultOverflowY = defaultOverflowY;
 	}
 
+	/**
+	 * <p>setSelectionEnd.</p>
+	 *
+	 * @param rpoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 */
 	public void setSelectionEnd(RenderableSpot rpoint) {
 		this.endSelection = rpoint;
 	}
 
+	/**
+	 * <p>setSelectionStart.</p>
+	 *
+	 * @param rpoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 */
 	public void setSelectionStart(RenderableSpot rpoint) {
 		this.startSelection = rpoint;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "RBlock[node=" + this.modelNode + "]";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void updateWidgetBounds(int guiX, int guiY) {
 		super.updateWidgetBounds(guiX, guiY);

@@ -32,10 +32,16 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>HiFiDefaultTheme class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for HiFiDefaultTheme.</p>
+	 */
 	public HiFiDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -46,11 +52,13 @@ public class HiFiDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "HiFiTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -139,6 +147,7 @@ public class HiFiDefaultTheme extends AbstractTheme {
 		smallFont = new FontUIResource("Dialog", Font.PLAIN, 10);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

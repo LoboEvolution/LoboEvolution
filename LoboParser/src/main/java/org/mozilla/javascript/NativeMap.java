@@ -8,6 +8,12 @@ package org.mozilla.javascript;
 
 import java.util.Iterator;
 
+/**
+ * <p>NativeMap class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NativeMap extends IdScriptableObject {
     private static final long serialVersionUID = 1171922614280016891L;
     private static final Object MAP_TAG = "Map";
@@ -34,11 +40,13 @@ public class NativeMap extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Map";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -233,6 +241,7 @@ public class NativeMap extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -265,6 +274,7 @@ public class NativeMap extends IdScriptableObject {
         initPrototypeMethod(MAP_TAG, id, s, fnName, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -285,6 +295,7 @@ public class NativeMap extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

@@ -5,8 +5,20 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * <p>Files class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Files {
 
+	/**
+	 * <p>getResourceAsFile.</p>
+	 *
+	 * @param in a {@link java.io.InputStream} object.
+	 * @return a {@link java.io.File} object.
+	 */
 	public static File getResourceAsFile(InputStream in) {
 		try {
 			if (in == null) {

@@ -27,9 +27,22 @@ import org.mozilla.javascript.Scriptable;
  * classes can be mapped to JavaScript, implementing this interface ensures that
  * the Java object proxy is not garbage collected as long as the Java object is
  * not garbage collected.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ScriptableDelegate {
+	/**
+	 * <p>getScriptable.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Scriptable} object.
+	 */
 	Scriptable getScriptable();
 
+	/**
+	 * <p>setScriptable.</p>
+	 *
+	 * @param scriptable a {@link org.mozilla.javascript.Scriptable} object.
+	 */
 	void setScriptable(Scriptable scriptable);
 }

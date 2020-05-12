@@ -23,13 +23,31 @@ package org.loboevolution.html.renderstate;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;;
 
+/**
+ * <p>Abstract AbstractMarginRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class AbstractMarginRenderState extends BlockRenderState {
+	/**
+	 * <p>Constructor for AbstractMarginRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public AbstractMarginRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/**
+	 * <p>getDefaultMarginInsets.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	protected abstract HtmlInsets getDefaultMarginInsets();
 
+	/** {@inheritDoc} */
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets insets = this.marginInsets;

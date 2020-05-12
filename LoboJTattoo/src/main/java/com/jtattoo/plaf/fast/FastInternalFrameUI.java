@@ -29,18 +29,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseInternalFrameUI;
 
 /**
+ * <p>FastInternalFrameUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastInternalFrameUI extends BaseInternalFrameUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastInternalFrameUI((JInternalFrame) c);
 	}
 
+	/**
+	 * <p>Constructor for FastInternalFrameUI.</p>
+	 *
+	 * @param b a {@link javax.swing.JInternalFrame} object.
+	 */
 	public FastInternalFrameUI(JInternalFrame b) {
 		super(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JComponent createNorthPane(JInternalFrame w) {
 		titlePane = new FastInternalFrameTitlePane(w);

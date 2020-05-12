@@ -8,6 +8,9 @@ import org.loboevolution.common.Objects;
 
 /**
  * The Class FontKey.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class FontKey {
 
@@ -44,6 +47,9 @@ public class FontKey {
 	/** The underline. */
 	private Integer underline;
 
+	/**
+	 * <p>Constructor for FontKey.</p>
+	 */
 	public FontKey() {
 		this.fontFamily = Font.SANS_SERIF;
 		this.fontStyle = null;
@@ -62,6 +68,7 @@ public class FontKey {
 	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object other) {
 		if (Objects.equals(other, this)) {
@@ -81,6 +88,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field cachedHash.</p>
+	 *
 	 * @return the cachedHash
 	 */
 	public int getCachedHash() {
@@ -88,6 +97,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field fontFamily.</p>
+	 *
 	 * @return the fontFamily
 	 */
 	public String getFontFamily() {
@@ -95,6 +106,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field fontSize.</p>
+	 *
 	 * @return the fontSize
 	 */
 	public float getFontSize() {
@@ -102,6 +115,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field fontStyle.</p>
+	 *
 	 * @return the fontStyle
 	 */
 	public String getFontStyle() {
@@ -109,6 +124,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field fontVariant.</p>
+	 *
 	 * @return the fontVariant
 	 */
 	public String getFontVariant() {
@@ -116,6 +133,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field fontWeight.</p>
+	 *
 	 * @return the fontWeight
 	 */
 	public String getFontWeight() {
@@ -123,6 +142,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field letterSpacing.</p>
+	 *
 	 * @return the letterSpacing
 	 */
 	public Integer getLetterSpacing() {
@@ -130,6 +151,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field locales.</p>
+	 *
 	 * @return the locales
 	 */
 	public Set<Locale> getLocales() {
@@ -137,6 +160,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field strikethrough.</p>
+	 *
 	 * @return the strikethrough
 	 */
 	public Boolean getStrikethrough() {
@@ -144,6 +169,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field superscript.</p>
+	 *
 	 * @return the superscript
 	 */
 	public Integer getSuperscript() {
@@ -151,6 +178,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Getter for the field underline.</p>
+	 *
 	 * @return the underline
 	 */
 	public Integer getUnderline() {
@@ -162,6 +191,7 @@ public class FontKey {
 	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		int ch = this.cachedHash;
@@ -188,6 +218,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field cachedHash.</p>
+	 *
 	 * @param cachedHash the cachedHash to set
 	 */
 	public void setCachedHash(int cachedHash) {
@@ -195,6 +227,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field fontFamily.</p>
+	 *
 	 * @param fontFamily the fontFamily to set
 	 */
 	public void setFontFamily(String fontFamily) {
@@ -202,6 +236,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field fontSize.</p>
+	 *
 	 * @param fontSize the fontSize to set
 	 */
 	public void setFontSize(float fontSize) {
@@ -209,6 +245,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field fontStyle.</p>
+	 *
 	 * @param fontStyle the fontStyle to set
 	 */
 	public void setFontStyle(String fontStyle) {
@@ -216,6 +254,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field fontVariant.</p>
+	 *
 	 * @param fontVariant the fontVariant to set
 	 */
 	public void setFontVariant(String fontVariant) {
@@ -223,6 +263,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field fontWeight.</p>
+	 *
 	 * @param fontWeight the fontWeight to set
 	 */
 	public void setFontWeight(String fontWeight) {
@@ -230,6 +272,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field letterSpacing.</p>
+	 *
 	 * @param letterSpacing the letterSpacing to set
 	 */
 	public void setLetterSpacing(Integer letterSpacing) {
@@ -237,6 +281,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field locales.</p>
+	 *
 	 * @param locales the locales to set
 	 */
 	public void setLocales(Set<Locale> locales) {
@@ -244,6 +290,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field strikethrough.</p>
+	 *
 	 * @param strikethrough the strikethrough to set
 	 */
 	public void setStrikethrough(Boolean strikethrough) {
@@ -251,6 +299,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field superscript.</p>
+	 *
 	 * @param superscript the superscript to set
 	 */
 	public void setSuperscript(Integer superscript) {
@@ -258,6 +308,8 @@ public class FontKey {
 	}
 
 	/**
+	 * <p>Setter for the field underline.</p>
+	 *
 	 * @param underline the underline to set
 	 */
 	public void setUnderline(Integer underline) {
@@ -269,6 +321,7 @@ public class FontKey {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "FontKey[family=" + this.fontFamily + ",size=" + this.fontSize + ",style=" + this.fontStyle + ",weight="

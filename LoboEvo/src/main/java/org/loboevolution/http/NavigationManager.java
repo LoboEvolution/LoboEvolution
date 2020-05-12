@@ -19,8 +19,20 @@ import org.loboevolution.http.UserAgentContext;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+/**
+ * <p>NavigationManager class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NavigationManager {
 
+	/**
+	 * <p>getDocument.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Document} object.
+	 */
 	public static Document getDocument(String uri) {
 		final HtmlPanel panel = new HtmlPanel();
 		try {
@@ -43,6 +55,13 @@ public class NavigationManager {
 		return null;
 	}
 
+	/**
+	 * <p>getHtmlPanel.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 */
 	public static HtmlPanel getHtmlPanel(String uri, int index) {
 		final NavigationStore history = new NavigationStore();
 		CookieManager.putCookies(uri);
@@ -50,6 +69,13 @@ public class NavigationManager {
 		return HtmlPanel.createHtmlPanel(uri);
 	}
 
+	/**
+	 * <p>getHtmlPanelSearch.</p>
+	 *
+	 * @param search a {@link java.lang.String} object.
+	 * @param indexPanel a int.
+	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 */
 	public static HtmlPanel getHtmlPanelSearch(String search, int indexPanel) {
 		final ToolsStore tools = new ToolsStore();
 		final List<SearchEngineStore> searchEngineStores = tools.getSearchEngines();

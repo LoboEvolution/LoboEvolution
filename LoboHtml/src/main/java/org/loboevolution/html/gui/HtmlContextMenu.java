@@ -51,6 +51,9 @@ import org.loboevolution.net.HttpNetwork;
 
 /**
  * The Class HtmlContextMenu.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HtmlContextMenu {
 

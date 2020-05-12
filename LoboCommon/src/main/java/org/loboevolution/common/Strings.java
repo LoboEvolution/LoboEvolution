@@ -28,6 +28,9 @@ import java.util.StringTokenizer;
 
 /**
  * The Class Strings.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class Strings {
 
@@ -183,7 +186,7 @@ public class Strings {
 	 *
 	 * @param source the source
 	 * @return the hash32
-	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 * @throws java.io.UnsupportedEncodingException the unsupported encoding exception
 	 */
 	public static String getHash32(String source) throws UnsupportedEncodingException {
 		final String md5 = getMD5(source);
@@ -195,7 +198,7 @@ public class Strings {
 	 *
 	 * @param source the source
 	 * @return the hash64
-	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 * @throws java.io.UnsupportedEncodingException the unsupported encoding exception
 	 */
 	public static String getHash64(String source) throws UnsupportedEncodingException {
 		final String md5 = getMD5(source);
@@ -345,6 +348,12 @@ public class Strings {
 		return !isBlank(text);
 	}
 
+	/**
+	 * <p>isNumeric.</p>
+	 *
+	 * @param keyCode a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isNumeric(String keyCode) {
 		try {
 			if (Strings.isBlank(keyCode)) {
@@ -436,6 +445,13 @@ public class Strings {
 		return wordList.toArray(EMPTY_ARRAY);
 	}
 
+	/**
+	 * <p>splitUsingTokenizer.</p>
+	 *
+	 * @param subject a {@link java.lang.String} object.
+	 * @param delimiters a {@link java.lang.String} object.
+	 * @return an array of {@link java.lang.String} objects.
+	 */
 	public static String[] splitUsingTokenizer(String subject, String delimiters) {
 		final StringTokenizer strTkn = new StringTokenizer(subject, delimiters);
 		final ArrayList<String> arrLis = new ArrayList<String>(subject.length());
@@ -541,6 +557,14 @@ public class Strings {
 	private Strings() {
 	}
 
+	/**
+	 * <p>substringBetween.</p>
+	 *
+	 * @param str a {@link java.lang.String} object.
+	 * @param open a {@link java.lang.String} object.
+	 * @param close a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String substringBetween(String str, String open, String close) {
 		if (str == null || open == null || close == null) {
 			return null;
@@ -555,6 +579,12 @@ public class Strings {
 		return null;
 	}
 
+	/**
+	 * <p>unquoteSingle.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String unquoteSingle(final String text) {
 		final int length = text.length();
 		if (length >= 2) {
@@ -565,6 +595,13 @@ public class Strings {
 		return text;
 	}
 
+	/**
+	 * <p>containsWords.</p>
+	 *
+	 * @param inputString a {@link java.lang.String} object.
+	 * @param items an array of {@link java.lang.String} objects.
+	 * @return a boolean.
+	 */
 	public static boolean containsWords(String inputString, String[] items) {
 		boolean found = false;
 		for (String item : items) {

@@ -20,17 +20,53 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGMaskElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGMaskElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGUnitTypes {
+	/**
+	 * <p>getMaskUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getMaskUnits();
 
+	/**
+	 * <p>getMaskContentUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getMaskContentUnits();
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY();
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getWidth();
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getHeight();
 }

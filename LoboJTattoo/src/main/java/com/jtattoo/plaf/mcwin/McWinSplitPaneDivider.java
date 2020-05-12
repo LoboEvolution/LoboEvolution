@@ -28,7 +28,10 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseSplitPaneDivider;
 
 /**
+ * <p>McWinSplitPaneDivider class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 
@@ -37,10 +40,16 @@ public class McWinSplitPaneDivider extends BaseSplitPaneDivider {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for McWinSplitPaneDivider.</p>
+	 *
+	 * @param ui a {@link com.jtattoo.plaf.mcwin.McWinSplitPaneUI} object.
+	 */
 	public McWinSplitPaneDivider(McWinSplitPaneUI ui) {
 		super(ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		if (AbstractLookAndFeel.getTheme().isBrightMode()) {

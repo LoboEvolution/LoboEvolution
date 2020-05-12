@@ -70,11 +70,10 @@ import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 /**
  * Aggregates all style sheets in a document. Every time a new STYLE element is
  * found, it is added to the style sheet aggreagator by means of the
- * {@link #addStyleSheet(CSSStyleSheet)} method. HTML elements have a
- * <code>style</code> object that has a list of <code>CSSStyleDeclaration</code>
- * instances. The instances inserted in that list are obtained by means of the
- * {@link #getStyleDeclarations(HTMLElementImpl, String, String, String)}
- * method.
+ * {@link #addStyleSheet(CSSStyleSheetImpl)} method. 
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class StyleSheetAggregator {
 
@@ -82,21 +81,49 @@ public class StyleSheetAggregator {
 
 	private final List<CSSStyleSheetImpl> styleSheets;
 	
+	/**
+	 * <p>Constructor for StyleSheetAggregator.</p>
+	 */
 	public StyleSheetAggregator() {
 		styleSheets = new ArrayList<CSSStyleSheetImpl>();
 	}
 
+	/**
+	 * <p>addStyleSheets.</p>
+	 *
+	 * @param styleSheets a {@link java.util.List} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public final void addStyleSheets(List<CSSStyleSheetImpl> styleSheets) throws Exception {
 		for (CSSStyleSheetImpl sheet : styleSheets) {
 			addStyleSheet(sheet);
 		}
 	}
 
+	/**
+	 * <p>affectedByPseudoNameInAncestor.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param ancestor a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param elementName a {@link java.lang.String} object.
+	 * @param elementId a {@link java.lang.String} object.
+	 * @param classArray an array of {@link java.lang.String} objects.
+	 * @param pseudoName a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public final boolean affectedByPseudoNameInAncestor(HTMLElementImpl element, HTMLElementImpl ancestor,
 			String elementName, String elementId, String[] classArray, String pseudoName) {
 		return false;
 	}
 	
+	/**
+	 * <p>getActiveStyleDeclarations.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param elementName a {@link java.lang.String} object.
+	 * @param classes an array of {@link java.lang.String} objects.
+	 * @return a {@link java.util.List} object.
+	 */
 	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, final String[] classes) {
 		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<CSSStyleSheetImpl.SelectorEntry>();
 		
@@ -111,6 +138,15 @@ public class StyleSheetAggregator {
 		return matchingRules;
 	}
 	
+	/**
+	 * <p>selects.</p>
+	 *
+	 * @param selector a {@link com.gargoylesoftware.css.parser.selector.Selector} object.
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @param pseudoElement a {@link java.lang.String} object.
+	 * @param fromQuerySelectorAll a boolean.
+	 * @return a boolean.
+	 */
 	public static boolean selects(final Selector selector, final Node node, final String pseudoElement,
 			final boolean fromQuerySelectorAll) {
 		return new StyleSheetAggregator().selects(selector, (HTMLElement)node, pseudoElement, fromQuerySelectorAll);

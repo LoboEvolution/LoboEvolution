@@ -6,26 +6,28 @@ package org.mozilla.javascript;
 
 /**
  * This class distinguishes between the three different supported stack trace formats.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
-
 public enum StackStyle {
     /**
      * This is the default stack trace style in Rhino, which is like Java:
-     * <code>    at fileName:lineNumber (functionName)</code>
+     *     at fileName:lineNumber (functionName)
      */
     RHINO,
 
     /**
      * This stack trace style comes from the old Mozilla code:
-     * <code>functionName()@fileName:lineNumber</code>
+     * functionName()@fileName:lineNumber
      */
     MOZILLA,
 
     /**
      * This stack trace style matches that output from V8, either:
-     * <code>    at functionName (fileName:lineNumber:columnNumber)</code>
+     *     at functionName (fileName:lineNumber:columnNumber)
      * or, for anonymous functions:
-     * <code>    at fileName:lineNumber:columnNumber</code>
+     *     at fileName:lineNumber:columnNumber
      */
     V8
 }

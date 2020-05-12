@@ -32,29 +32,37 @@ import com.jtattoo.plaf.AbstractToolBarUI;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>HiFiToolBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiToolBarUI extends AbstractToolBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiToolBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getNonRolloverBorder() {
 		return BaseBorders.getToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getRolloverBorder() {
 		return HiFiBorders.getRolloverToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isButtonOpaque() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		HiFiUtils.fillComponent(g, c);

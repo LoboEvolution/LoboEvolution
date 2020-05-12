@@ -22,12 +22,40 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGAltGlyphElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAltGlyphElement extends SVGTextPositioningElement, SVGURIReference {
+	/**
+	 * <p>getGlyphRef.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getGlyphRef();
 
+	/**
+	 * <p>setGlyphRef.</p>
+	 *
+	 * @param glyphRef a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setGlyphRef(String glyphRef) throws DOMException;
 
+	/**
+	 * <p>getFormat.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getFormat();
 
+	/**
+	 * <p>setFormat.</p>
+	 *
+	 * @param format a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setFormat(String format) throws DOMException;
 }

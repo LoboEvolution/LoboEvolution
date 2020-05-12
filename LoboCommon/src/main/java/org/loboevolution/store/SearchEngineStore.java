@@ -8,6 +8,9 @@ import java.net.URLEncoder;
 
 /**
  * The Class SearchEngineStore.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SearchEngineStore implements Serializable {
 
@@ -69,6 +72,8 @@ public class SearchEngineStore implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field type.</p>
+	 *
 	 * @return the type
 	 */
 	public String getType() {
@@ -80,7 +85,7 @@ public class SearchEngineStore implements Serializable {
 	 *
 	 * @param query the query
 	 * @return the url
-	 * @throws MalformedURLException the malformed url exception
+	 * @throws java.net.MalformedURLException the malformed url exception
 	 */
 	public URL getURL(String query) throws MalformedURLException {
 		final String baseUrl = this.baseUrl;
@@ -93,11 +98,18 @@ public class SearchEngineStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>isSelected.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isSelected() {
 		return this.isSelected;
 	}
 
 	/**
+	 * <p>Setter for the field baseUrl.</p>
+	 *
 	 * @param baseUrl the baseUrl to set
 	 */
 	public void setBaseUrl(String baseUrl) {
@@ -105,6 +117,8 @@ public class SearchEngineStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field description.</p>
+	 *
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
@@ -114,13 +128,15 @@ public class SearchEngineStore implements Serializable {
 	/**
 	 * Gets the name.
 	 *
-	 * @return the name
+	 * @param name a {@link java.lang.String} object.
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
+	 * <p>Setter for the field queryParameter.</p>
+	 *
 	 * @param queryParameter the queryParameter to set
 	 */
 	public void setQueryParameter(String queryParameter) {
@@ -128,6 +144,8 @@ public class SearchEngineStore implements Serializable {
 	}
 
 	/**
+	 * <p>setSelected.</p>
+	 *
 	 * @param isSelected the isSelected to set
 	 */
 	public void setSelected(boolean isSelected) {
@@ -135,6 +153,8 @@ public class SearchEngineStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field type.</p>
+	 *
 	 * @param type the type to set
 	 */
 	public void setType(String type) {
@@ -146,6 +166,7 @@ public class SearchEngineStore implements Serializable {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return this.name;

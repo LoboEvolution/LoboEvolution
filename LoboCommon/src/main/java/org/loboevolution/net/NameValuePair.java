@@ -27,6 +27,7 @@ package org.loboevolution.net;
  * The Class NameValuePair.
  *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class NameValuePair extends AbstractBean implements Cloneable {
 	
@@ -92,6 +93,7 @@ public class NameValuePair extends AbstractBean implements Cloneable {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return name + "=" + value;

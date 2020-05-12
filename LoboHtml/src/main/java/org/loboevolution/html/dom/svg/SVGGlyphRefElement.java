@@ -22,28 +22,100 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGGlyphRefElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGGlyphRefElement extends SVGElement, SVGURIReference, SVGStylable {
+	/**
+	 * <p>getGlyphRef.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getGlyphRef();
 
+	/**
+	 * <p>setGlyphRef.</p>
+	 *
+	 * @param glyphRef a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setGlyphRef(String glyphRef) throws DOMException;
 
+	/**
+	 * <p>getFormat.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getFormat();
 
+	/**
+	 * <p>setFormat.</p>
+	 *
+	 * @param format a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setFormat(String format) throws DOMException;
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX();
 
+	/**
+	 * <p>setX.</p>
+	 *
+	 * @param x a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setX(float x) throws DOMException;
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a float.
+	 */
 	float getY();
 
+	/**
+	 * <p>setY.</p>
+	 *
+	 * @param y a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setY(float y) throws DOMException;
 
+	/**
+	 * <p>getDx.</p>
+	 *
+	 * @return a float.
+	 */
 	float getDx();
 
+	/**
+	 * <p>setDx.</p>
+	 *
+	 * @param dx a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setDx(float dx) throws DOMException;
 
+	/**
+	 * <p>getDy.</p>
+	 *
+	 * @return a float.
+	 */
 	float getDy();
 
+	/**
+	 * <p>setDy.</p>
+	 *
+	 * @param dy a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setDy(float dy) throws DOMException;
 }

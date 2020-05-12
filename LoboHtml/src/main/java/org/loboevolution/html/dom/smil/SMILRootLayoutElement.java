@@ -24,6 +24,9 @@ package org.loboevolution.html.dom.smil;
 /**
  * Declares layout properties for the root-layout element. See the root-layout
  * element definition .
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILRootLayoutElement extends SMILElement, ElementLayout {
 }

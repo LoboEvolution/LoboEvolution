@@ -41,7 +41,10 @@ import com.jtattoo.plaf.BaseBorders;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AluminiumBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumBorders extends BaseBorders {
 
@@ -193,6 +196,11 @@ public class AluminiumBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -200,6 +208,11 @@ public class AluminiumBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -207,6 +220,11 @@ public class AluminiumBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -214,6 +232,11 @@ public class AluminiumBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}

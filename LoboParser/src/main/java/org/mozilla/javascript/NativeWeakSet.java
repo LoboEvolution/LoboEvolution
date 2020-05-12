@@ -16,6 +16,9 @@ import java.util.WeakHashMap;
  * Java will GC the key only when there is no longer any reference to it other
  * than the weak reference. That means that it is important that the "value"
  * that we put in the WeakHashMap here is not one that contains the key.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class NativeWeakSet extends IdScriptableObject {
     private static final long serialVersionUID = 2065753364224029534L;
@@ -31,11 +34,13 @@ public class NativeWeakSet extends IdScriptableObject {
         m.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "WeakSet";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
         Scriptable thisObj, Object[] args) {
@@ -110,6 +115,7 @@ public class NativeWeakSet extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id) {
         if (id == SymbolId_toStringTag) {
@@ -130,6 +136,7 @@ public class NativeWeakSet extends IdScriptableObject {
         initPrototypeMethod(MAP_TAG, id, s, fnName, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -141,6 +148,7 @@ public class NativeWeakSet extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id;

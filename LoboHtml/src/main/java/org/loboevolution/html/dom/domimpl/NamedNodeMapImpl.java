@@ -34,11 +34,23 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
+/**
+ * <p>NamedNodeMapImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
 	
 	private final ArrayList<Node> attributeList = new ArrayList<Node>();
 	private final Map<String, Node> attributes = new HashMap<String, Node>();
 
+	/**
+	 * <p>Constructor for NamedNodeMapImpl.</p>
+	 *
+	 * @param owner a {@link org.w3c.dom.Element} object.
+	 * @param attribs a {@link java.util.Map} object.
+	 */
 	public NamedNodeMapImpl(Element owner, Map<?, ?> attribs) {
 		for (Map.Entry entry : attribs.entrySet()) {
 			final String name = (String) entry.getKey();
@@ -50,21 +62,25 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		return this.attributeList.size();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getNamedItem(String name) {
 		return (Node) this.attributes.get(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getNamedItemNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
 		int size = this.attributeList.size();
@@ -76,23 +92,29 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	}
 
 	/**
-	 * @param name
+	 * <p>namedItem.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Node} object.
 	 */
 	public Node namedItem(String name) {
 		// Method needed for Javascript indexing.
 		return getNamedItem(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node removeNamedItem(String name) throws DOMException {
 		return (Node) this.attributes.remove(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node removeNamedItemNS(String namespaceURI, String localName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node setNamedItem(Node arg) throws DOMException {
 		final Object prevValue = this.attributes.put(arg.getNodeName(), arg);
@@ -103,6 +125,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 		return arg;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node setNamedItemNS(Node arg) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No namespace support");

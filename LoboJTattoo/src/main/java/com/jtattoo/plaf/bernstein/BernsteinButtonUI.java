@@ -40,14 +40,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>BernsteinButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinButtonUI extends BaseButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BernsteinButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {

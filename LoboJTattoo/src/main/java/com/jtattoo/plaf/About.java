@@ -39,8 +39,10 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
+ * <p>About class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 
 // TODO:
@@ -54,6 +56,7 @@ public class About extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/** Constant JTATTOO_VERSION="Version: 1.6.12" */
 	public static String JTATTOO_VERSION = "Version: 1.6.12";
 
 	private static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
@@ -63,7 +66,7 @@ public class About extends JDialog {
 
 	/**
 	 * Starten der Anwendung
-	 * 
+	 *
 	 * @param args the command line arguments
 	 */
 	public static void main(String args[]) {
@@ -84,6 +87,9 @@ public class About extends JDialog {
 		}
 	}
 
+	/**
+	 * <p>Constructor for About.</p>
+	 */
 	public About() {
 		super((JFrame) null, "About JTattoo");
 		JPanel contentPanel = new JPanel(null);

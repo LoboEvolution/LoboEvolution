@@ -23,6 +23,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The Interface HTMLCanvasElement.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLCanvasElement extends HTMLElement {
 	

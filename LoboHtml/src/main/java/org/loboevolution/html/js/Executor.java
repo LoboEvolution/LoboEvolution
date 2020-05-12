@@ -34,20 +34,27 @@ import org.mozilla.javascript.ScriptableObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.events.Event;
 
+/**
+ * <p>Executor class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Executor {
 	private static final Logger logger = Logger.getLogger(Executor.class.getName());
 
 	/**
-	 * A document <code>UserData</code> key used to map Javascript scope in the HTML
+	 * A document UserData key used to map Javascript scope in the HTML
 	 * document.
 	 */
 	public static final String SCOPE_KEY = "cobra.js.scope";
 
 	/**
-	 * This method should be invoked instead of <code>Context.enter</code>.
-	 * 
-	 * @param codeSource
-	 * @param ucontext
+	 * This method should be invoked instead of Context.enter.
+	 *
+	 * @param codeSource a {@link java.net.URL} object.
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @return a {@link org.mozilla.javascript.Context} object.
 	 */
 	public static Context createContext(URL codeSource, UserAgentContext ucontext) {
 		final Context ctx = Context.enter();
@@ -56,10 +63,29 @@ public class Executor {
 		return ctx;
 	}
 
+	/**
+	 * <p>executeFunction.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param f a {@link org.mozilla.javascript.Function} object.
+	 * @param event a {@link org.w3c.dom.events.Event} object.
+	 * @param obj an array of {@link java.lang.Object} objects.
+	 * @return a boolean.
+	 */
 	public static boolean executeFunction(NodeImpl element, Function f, Event event, Object[] obj) {
 		return Executor.executeFunction(element, element, f, event, obj);
 	}
 
+	/**
+	 * <p>executeFunction.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param thisObject a {@link java.lang.Object} object.
+	 * @param f a {@link org.mozilla.javascript.Function} object.
+	 * @param event a {@link org.w3c.dom.events.Event} object.
+	 * @param obj an array of {@link java.lang.Object} objects.
+	 * @return a boolean.
+	 */
 	public static boolean executeFunction(NodeImpl element, Object thisObject, Function f, Event event, Object[] obj) {
 		final Document doc = element.getOwnerDocument();
 		if (doc == null) {
@@ -92,6 +118,15 @@ public class Executor {
 		}
 	}
 
+	/**
+	 * <p>executeFunction.</p>
+	 *
+	 * @param thisScope a {@link org.mozilla.javascript.Scriptable} object.
+	 * @param f a {@link org.mozilla.javascript.Function} object.
+	 * @param codeSource a {@link java.net.URL} object.
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @return a boolean.
+	 */
 	public static boolean executeFunction(Scriptable thisScope, Function f, URL codeSource,
 			UserAgentContext ucontext) {
 		final Context ctx = createContext(codeSource, ucontext);

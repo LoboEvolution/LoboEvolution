@@ -20,12 +20,38 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFESpecularLightingElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFESpecularLightingElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 
+	/**
+	 * <p>getSurfaceScale.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getSurfaceScale();
 
+	/**
+	 * <p>getSpecularConstant.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getSpecularConstant();
 
+	/**
+	 * <p>getSpecularExponent.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getSpecularExponent();
 }

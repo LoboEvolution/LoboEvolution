@@ -16,6 +16,12 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.w3c.dom.css.CSS3Properties;
 
+/**
+ * <p>TableCellRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TableCellRenderState extends DisplayRenderState {
 	private int alignXPercent = -1;
 
@@ -23,10 +29,17 @@ public class TableCellRenderState extends DisplayRenderState {
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 	private HtmlInsets paddingInsets = INVALID_INSETS;
 
+	/**
+	 * <p>Constructor for TableCellRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public TableCellRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element, RenderState.DISPLAY_TABLE_CELL);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getAlignXPercent() {
 		int axp = this.alignXPercent;
@@ -78,6 +91,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		return axp;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getAlignYPercent() {
 		int ayp = this.alignYPercent;
@@ -124,6 +138,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		return ayp;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.backgroundInfo;
@@ -172,6 +187,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		return binfo;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HtmlInsets getPaddingInsets() {
 		HtmlInsets insets = this.paddingInsets;
@@ -212,6 +228,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		return (HTMLTableElement) ancestor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getWhiteSpace() {
 		// Overrides super.
@@ -267,6 +284,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		return wsValue;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidate() {
 		super.invalidate();

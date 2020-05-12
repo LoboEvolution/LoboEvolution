@@ -28,43 +28,61 @@ import org.loboevolution.html.renderstate.ListRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 
+/**
+ * <p>HTMLOListElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLOListElement {
+	/**
+	 * <p>Constructor for HTMLOListElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLOListElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ListRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getCompact() {
 		final String compactText = getAttribute("compact");
 		return "compact".equalsIgnoreCase(compactText);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getStart() {
 		final String startText = getAttribute("start");
 		return HtmlValues.getPixelSize(startText, null, 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		return getAttribute("type");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCompact(boolean compact) {
 		setAttribute("compact", compact ? "compact" : null);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setStart(int start) {
 		setAttribute("start", String.valueOf(start));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);

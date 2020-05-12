@@ -24,18 +24,32 @@ package org.loboevolution.html.renderstate;
 import java.awt.Font;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
+/**
+ * <p>FontNameRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FontNameRenderState extends StyleSheetRenderState {
 	
 	private final String fontName;
 	
 	private RenderState delegate;
 
+	/**
+	 * <p>Constructor for FontNameRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param fontName a {@link java.lang.String} object.
+	 */
 	public FontNameRenderState(RenderState prevRenderState, HTMLElementImpl element, String fontName) {
 		super(prevRenderState, element);
 		this.fontName = fontName;
 		this.delegate = prevRenderState;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
 		final Font parentFont = this.delegate.getFont();

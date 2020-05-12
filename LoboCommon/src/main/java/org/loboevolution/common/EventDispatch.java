@@ -28,14 +28,25 @@ import java.util.EventObject;
 import java.util.LinkedList;
 
 /**
+ * <p>EventDispatch class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class EventDispatch {
 	private Collection<GenericEventListener> listeners;
 
+	/**
+	 * <p>Constructor for EventDispatch.</p>
+	 */
 	public EventDispatch() {
 	}
 
+	/**
+	 * <p>addListener.</p>
+	 *
+	 * @param listener a {@link org.loboevolution.common.GenericEventListener} object.
+	 */
 	public final void addListener(GenericEventListener listener) {
 		synchronized (this) {
 			if (this.listeners == null) {
@@ -45,10 +56,20 @@ public class EventDispatch {
 		}
 	}
 
+	/**
+	 * <p>createListenerCollection.</p>
+	 *
+	 * @return a {@link java.util.Collection} object.
+	 */
 	public Collection<GenericEventListener> createListenerCollection() {
 		return new LinkedList<GenericEventListener>();
 	}
 
+	/**
+	 * <p>fireEvent.</p>
+	 *
+	 * @param event a {@link java.util.EventObject} object.
+	 */
 	public final void fireEvent(EventObject event) {
 		GenericEventListener[] larray = null;
 		synchronized (this) {
@@ -64,6 +85,11 @@ public class EventDispatch {
 		}
 	}
 
+	/**
+	 * <p>removeListener.</p>
+	 *
+	 * @param listener a {@link org.loboevolution.common.GenericEventListener} object.
+	 */
 	public final void removeListener(GenericEventListener listener) {
 		synchronized (this) {
 			if (this.listeners != null) {

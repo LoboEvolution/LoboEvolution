@@ -7,8 +7,20 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.style.HtmlValues;
 
+/**
+ * <p>InputRange class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputRange {
 
+	/**
+	 * <p>Constructor for InputRange.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputRange(HTMLInputElementImpl modelNode, InputControl ic) {
 		final int min = HtmlValues.getPixelSize(modelNode.getAttribute("min"), null, 0);
 		final int max = HtmlValues.getPixelSize(modelNode.getAttribute("max"), null, 0);

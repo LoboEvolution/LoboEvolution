@@ -20,6 +20,12 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGPolylineElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPolylineElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGStylable, SVGTransformable, SVGAnimatedPoints, Drawable {
 }

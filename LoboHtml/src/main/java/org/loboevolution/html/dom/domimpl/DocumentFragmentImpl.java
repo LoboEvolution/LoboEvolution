@@ -27,36 +27,51 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Node;
 
+/**
+ * <p>DocumentFragmentImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DocumentFragmentImpl extends NodeImpl implements DocumentFragment {
+	/**
+	 * <p>Constructor for DocumentFragmentImpl.</p>
+	 */
 	public DocumentFragmentImpl() {
 		super();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Node createSimilarNode() {
 		return new DocumentFragmentImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return "#document-fragment";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getNodeType() {
 		return org.w3c.dom.Node.DOCUMENT_FRAGMENT_NODE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() throws DOMException {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
 	}

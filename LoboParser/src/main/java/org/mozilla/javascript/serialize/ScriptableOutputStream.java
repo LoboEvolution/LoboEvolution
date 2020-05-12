@@ -32,10 +32,10 @@ import org.mozilla.javascript.UniqueTag;
  * during deserialization.
  *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
 
 // API class
-
 public class ScriptableOutputStream extends ObjectOutputStream {
 
     /**
@@ -45,6 +45,7 @@ public class ScriptableOutputStream extends ObjectOutputStream {
      *
      * @param out the OutputStream to write to.
      * @param scope the scope containing the object.
+     * @throws java.io.IOException if any.
      */
     public ScriptableOutputStream(OutputStream out, Scriptable scope)
         throws IOException
@@ -57,6 +58,11 @@ public class ScriptableOutputStream extends ObjectOutputStream {
         excludeStandardObjectNames(); // XXX
     }
 
+    /**
+     * <p>excludeAllIds.</p>
+     *
+     * @param ids an array of {@link java.lang.Object} objects.
+     */
     public void excludeAllIds(Object[] ids) {
         for (Object id: ids) {
             if (id instanceof String &&
@@ -71,11 +77,12 @@ public class ScriptableOutputStream extends ObjectOutputStream {
      * Adds a qualified name to the list of object to be excluded from
      * serialization. Names excluded from serialization are looked up
      * in the new scope and replaced upon deserialization.
+     *
      * @param name a fully qualified name (of the form "a.b.c", where
      *             "a" must be a property of the top-level object). The object
      *             need not exist, in which case the name is ignored.
-     * @throws IllegalArgumentException if the object is not a
-     *         {@link Scriptable}.
+     * @throws java.lang.IllegalArgumentException if the object is not a
+     *         {@link org.mozilla.javascript.Scriptable}.
      */
     public void addOptionalExcludedName(String name) {
         Object obj = lookupQualifiedName(scope, name);
@@ -94,10 +101,11 @@ public class ScriptableOutputStream extends ObjectOutputStream {
      * Adds a qualified name to the list of objects to be excluded from
      * serialization. Names excluded from serialization are looked up
      * in the new scope and replaced upon deserialization.
+     *
      * @param name a fully qualified name (of the form "a.b.c", where
      *             "a" must be a property of the top-level object)
-     * @throws IllegalArgumentException if the object is not found or is not
-     *         a {@link Scriptable}.
+     * @throws java.lang.IllegalArgumentException if the object is not found or is not
+     *         a {@link org.mozilla.javascript.Scriptable}.
      */
     public void addExcludedName(String name) {
         Object obj = lookupQualifiedName(scope, name);
@@ -110,6 +118,9 @@ public class ScriptableOutputStream extends ObjectOutputStream {
 
     /**
      * Returns true if the name is excluded from serialization.
+     *
+     * @param name a {@link java.lang.String} object.
+     * @return a boolean.
      */
     public boolean hasExcludedName(String name) {
         return table.get(name) != null;
@@ -117,6 +128,8 @@ public class ScriptableOutputStream extends ObjectOutputStream {
 
     /**
      * Removes a name from the list of names to exclude.
+     *
+     * @param name a {@link java.lang.String} object.
      */
     public void removeExcludedName(String name) {
         table.remove(name);
@@ -177,6 +190,7 @@ public class ScriptableOutputStream extends ObjectOutputStream {
         private String name;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object replaceObject(Object obj) throws IOException
     {

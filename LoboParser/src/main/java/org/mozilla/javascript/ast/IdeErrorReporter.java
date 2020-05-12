@@ -28,6 +28,7 @@ import org.mozilla.javascript.ErrorReporter;
  * display bounds.<p>
  *
  * @author Steve Yegge
+ * @version $Id: $Id
  */
 public interface IdeErrorReporter extends ErrorReporter {
 

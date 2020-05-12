@@ -31,8 +31,17 @@ import javax.swing.plaf.FontUIResource;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
+/**
+ * <p>TextureDefaultTheme class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextureDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for TextureDefaultTheme.</p>
+	 */
 	public TextureDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -43,11 +52,13 @@ public class TextureDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "TextureTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -143,6 +154,7 @@ public class TextureDefaultTheme extends AbstractTheme {
 		windowTitleFont = new FontUIResource("Dialog", Font.BOLD, 13);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

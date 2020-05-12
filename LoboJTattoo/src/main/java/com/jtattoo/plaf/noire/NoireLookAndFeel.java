@@ -71,7 +71,10 @@ import com.jtattoo.plaf.hifi.HiFiToggleButtonUI;
 import com.jtattoo.plaf.hifi.HiFiToolBarUI;
 
 /**
+ * <p>NoireLookAndFeel class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class NoireLookAndFeel extends AbstractLookAndFeel {
 
@@ -123,18 +126,39 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 
 	}
 
+	/**
+	 * <p>getThemeProperties.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.util.Properties} object.
+	 */
 	public static Properties getThemeProperties(String name) {
 		return (Properties) themesMap.get(name);
 	}
 
+	/**
+	 * <p>getThemes.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getThemes() {
 		return themesList;
 	}
 
+	/**
+	 * <p>setCurrentTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setCurrentTheme(Properties themesProps) {
 		setTheme(themesProps);
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setTheme(Properties themesProps) {
 		currentThemeName = "noireTheme";
 		if (myTheme == null) {
@@ -148,11 +172,23 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name) {
 		AbstractTheme.setInternalName(name);
 		setTheme((Properties) themesMap.get(name));
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param licenseKey a {@link java.lang.String} object.
+	 * @param logoString a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
 		Properties props = (Properties) themesMap.get(name);
 		if (props != null) {
@@ -163,6 +199,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createDefaultTheme() {
 		if (myTheme == null) {
@@ -171,31 +208,37 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 		setTheme(myTheme);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractBorderFactory getBorderFactory() {
 		return HiFiBorderFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDescription() {
 		return "The Noire Look and Feel";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractIconFactory getIconFactory() {
 		return NoireIconFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getID() {
 		return "Noire";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return "Noire";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initClassDefaults(UIDefaults table) {
 		if (!"noireTheme".equals(currentThemeName)) {
@@ -228,11 +271,13 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 		table.put("SpinnerUI", BaseSpinnerUI.class.getName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isNativeLookAndFeel() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupportedLookAndFeel() {
 		return true;

@@ -73,6 +73,12 @@ import org.w3c.dom.events.EventException;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
+/**
+ * <p>Window class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private static class ExpressionTimerTask extends WeakWindowTask {
 		private final String expression;
@@ -215,6 +221,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getWindow.</p>
+	 *
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public static Window getWindow(HtmlRendererContext rcontext) {
 		if (rcontext == null) {
 			return null;
@@ -257,6 +269,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
     private Scriptable windowScope;
     
+	/**
+	 * <p>Constructor for Window.</p>
+	 *
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param uaContext a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public Window(HtmlRendererContext rcontext, UserAgentContext uaContext) {
 		// TODO: Probably need to create a new Window instance
 		// for every document. Sharing of Window state between
@@ -265,12 +283,20 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		this.uaContext = uaContext;
 	}
 
+	/**
+	 * <p>alert.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void alert(String message) {
 		if (this.rcontext != null) {
 			this.rcontext.alert(message);
 		}
 	}
 
+	/**
+	 * <p>back.</p>
+	 */
 	public void back() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -278,6 +304,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>blur.</p>
+	 */
 	public void blur() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -286,10 +315,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * <p>clearInterval.</p>
+	 *
 	 * @param aTimerID Timer ID to stop.
-	 * @see <a href=
-	 *      "http://developer.mozilla.org/en/docs/DOM:window.clearInterval">Window.clearInterval
-	 *      interface Definition</a>
 	 */
 	public void clearInterval(int aTimerID) {
 		final Integer key = Integer.valueOf(aTimerID);
@@ -315,11 +343,19 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>clearTimeout.</p>
+	 *
+	 * @param timeoutID a int.
+	 */
 	public void clearTimeout(int timeoutID) {
 		final Integer key = Integer.valueOf(timeoutID);
 		forgetTask(key, true);
 	}
 
+	/**
+	 * <p>close.</p>
+	 */
 	public void close() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -327,6 +363,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>confirm.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean confirm(String message) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -359,6 +401,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>focus.</p>
+	 */
 	public void focus() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -366,6 +411,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>forceGC.</p>
+	 */
 	public void forceGC() {
 		System.gc();
 	}
@@ -399,6 +447,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getComputedStyle.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param pseudoElement a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.css.CSS3Properties} object.
+	 */
 	public CSS3Properties getComputedStyle(HTMLElement element, String pseudoElement) {
 		if (element instanceof HTMLElementImpl) {
 			return ((HTMLElementImpl) element).getComputedStyle(pseudoElement);
@@ -407,10 +462,21 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 	
+    /**
+     * <p>getComputedStyle.</p>
+     *
+     * @param elt a {@link org.loboevolution.html.dom.HTMLElement} object.
+     * @return a {@link org.w3c.dom.css.CSS3Properties} object.
+     */
     public CSS3Properties getComputedStyle(HTMLElement elt) {
         return getComputedStyle(elt, null);
     }
 
+	/**
+	 * <p>getDefaultStatus.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getDefaultStatus() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -420,15 +486,26 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DocumentView getDocument() {
 		return this.document;
 	}
 
+	/**
+	 * <p>getDocumentNode.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Document} object.
+	 */
 	public Document getDocumentNode() {
 		return this.document;
 	}
 
+	/**
+	 * <p>Getter for the field history.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.History} object.
+	 */
 	public History getHistory() {
 		synchronized (this) {
 			History history = this.history;
@@ -440,12 +517,19 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getHtmlRendererContext.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
 	}
 
 	/**
 	 * Gets the number of frames.
+	 *
+	 * @return a int.
 	 */
 	public int getLength() {
 		if (this.lengthSet) {
@@ -454,6 +538,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return 0;
 	}
 
+	/**
+	 * <p>Getter for the field location.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Location} object.
+	 */
 	public Location getLocation() {
 		synchronized (this) {
 			Location location = this.location;
@@ -465,6 +554,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getName.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getName() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -474,6 +568,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field navigator.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Navigator} object.
+	 */
 	public Navigator getNavigator() {
 		synchronized (this) {
 			Navigator nav = this.navigator;
@@ -485,6 +584,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getOnload.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Function} object.
+	 */
 	public Function getOnload() {
 		final Document doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -494,10 +598,20 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field onunload.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Function} object.
+	 */
 	public Function getOnunload() {
 		return this.onunload;
 	}
 
+	/**
+	 * <p>getOpener.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window getOpener() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -507,6 +621,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getParent.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window getParent() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -516,6 +635,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field screen.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Screen} object.
+	 */
 	public Screen getScreen() {
 		synchronized (this) {
 			Screen nav = this.screen;
@@ -527,10 +651,20 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getSelf.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window getSelf() {
 		return this;
 	}
 
+	/**
+	 * <p>getStatus.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getStatus() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -540,6 +674,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getTop.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window getTop() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -549,14 +688,29 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>getUserAgentContext.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public UserAgentContext getUserAgentContext() {
 		return this.uaContext;
 	}
 
+	/**
+	 * <p>getWindow.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window getWindow() {
 		return this;
 	}
 
+	/**
+	 * <p>Getter for the field windowScope.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Scriptable} object.
+	 */
 	public Scriptable getWindowScope() {
 		synchronized (this) {
             Scriptable windowScope = this.windowScope;
@@ -641,6 +795,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
         defineElementClass(ws, doc, "HTMLElement", "html", HTMLElementImpl.class);
     }
 
+	/**
+	 * <p>isClosed.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isClosed() {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -650,6 +809,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>namedItem.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 */
 	public Node namedItem(String name) {
 		final HTMLDocumentImpl doc = this.document;
 		if (doc == null) {
@@ -662,18 +827,48 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return null;
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window open(String url) {
 		return this.open(url, "windows");
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 * @param windowName a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window open(String url, String windowName) {
 		return this.open(url, windowName, "", false);
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 * @param windowName a {@link java.lang.String} object.
+	 * @param windowFeatures a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window open(String url, String windowName, String windowFeatures) {
 		return this.open(url, windowName, windowFeatures, false);
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param relativeUrl a {@link java.lang.String} object.
+	 * @param windowName a {@link java.lang.String} object.
+	 * @param windowFeatures a {@link java.lang.String} object.
+	 * @param replace a boolean.
+	 * @return a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Window open(String relativeUrl, String windowName, String windowFeatures, boolean replace) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -695,14 +890,34 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>prompt.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String prompt(String message) {
 		return this.prompt(message, "");
 	}
 
+	/**
+	 * <p>prompt.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param inputDefault a int.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String prompt(String message, int inputDefault) {
 		return this.prompt(message, String.valueOf(inputDefault));
 	}
 
+	/**
+	 * <p>prompt.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param inputDefault a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String prompt(String message, String inputDefault) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -731,6 +946,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		timer.start();
 	}
 
+	/**
+	 * <p>resizeBy.</p>
+	 *
+	 * @param byWidth a int.
+	 * @param byHeight a int.
+	 */
 	public void resizeBy(int byWidth, int byHeight) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -738,6 +959,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>resizeTo.</p>
+	 *
+	 * @param width a int.
+	 * @param height a int.
+	 */
 	public void resizeTo(int width, int height) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -745,6 +972,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>scrollBy.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void scrollBy(int x, int y) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -752,10 +985,22 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>scrollTo.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void scrollTo(int x, int y) {
 		scroll(x, y);
 	}
 	
+	/**
+	 * <p>scroll.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void scroll(int x, int y) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -763,6 +1008,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>Setter for the field document.</p>
+	 *
+	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 */
 	public void setDocument(final HTMLDocumentImpl document) {
 		final Document prevDocument = this.document;
 		if (prevDocument != document) {
@@ -784,14 +1034,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * <p>setInterval.</p>
+	 *
 	 * @param aFunction Javascript function to invoke on each loop.
 	 * @param aTimeInMs Time in millisecund between each loop.
 	 * @return Return the timer ID to use as reference
-	 * @see <a href=
-	 *      "http://developer.mozilla.org/en/docs/DOM:window.setInterval">Window.setInterval
-	 *      interface definition</a>
-	 * @todo Make proper and refactore with
-	 *       {@link Window#setTimeout(Function, double)}.
+	 *       
 	 */
 	public int setInterval(final Function aFunction, final double aTimeInMs) {
 		if (aTimeInMs > Integer.MAX_VALUE || aTimeInMs < 0) {
@@ -811,14 +1059,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	}
 
 	/**
+	 * <p>setInterval.</p>
+	 *
 	 * @param aExpression Javascript expression to invoke on each loop.
 	 * @param aTimeInMs   Time in millisecund between each loop.
 	 * @return Return the timer ID to use as reference
-	 * @see <a href=
-	 *      "http://developer.mozilla.org/en/docs/DOM:window.setInterval">Window.setInterval
-	 *      interface definition</a>
-	 * @todo Make proper and refactore with
-	 *       {@link Window#setTimeout(String, double)}.
 	 */
 	public int setInterval(final String aExpression, double aTimeInMs) {
 		if (aTimeInMs > Integer.MAX_VALUE || aTimeInMs < 0) {
@@ -837,15 +1082,30 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return timeID;
 	}
 
+	/**
+	 * <p>Setter for the field length.</p>
+	 *
+	 * @param length a int.
+	 */
 	public void setLength(int length) {
 		this.lengthSet = true;
 		this.length = length;
 	}
 
+	/**
+	 * <p>Setter for the field location.</p>
+	 *
+	 * @param location a {@link java.lang.String} object.
+	 */
 	public void setLocation(String location) {
 		getLocation().setHref(location);
 	}
 
+	/**
+	 * <p>setOnload.</p>
+	 *
+	 * @param onload a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void setOnload(Function onload) {
 		// Note that body.onload overrides
 		// window.onload.
@@ -855,10 +1115,20 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>Setter for the field onunload.</p>
+	 *
+	 * @param onunload a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void setOnunload(Function onunload) {
 		this.onunload = onunload;
 	}
 
+	/**
+	 * <p>setOpener.</p>
+	 *
+	 * @param opener a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public void setOpener(Window opener) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -870,6 +1140,11 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>setStatus.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void setStatus(String message) {
 		final HtmlRendererContext rcontext = this.rcontext;
 		if (rcontext != null) {
@@ -877,10 +1152,23 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>setTimeout.</p>
+	 *
+	 * @param function a {@link org.mozilla.javascript.Function} object.
+	 * @return a int.
+	 */
 	public int setTimeout(final Function function) {
 		return setTimeout(function, 0);
 	}
 
+	/**
+	 * <p>setTimeout.</p>
+	 *
+	 * @param function a {@link org.mozilla.javascript.Function} object.
+	 * @param millis a double.
+	 * @return a int.
+	 */
 	public int setTimeout(final Function function, double millis) {
 		if (millis > Integer.MAX_VALUE || millis < 0) {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
@@ -898,10 +1186,23 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return timeID;
 	}
 
+	/**
+	 * <p>setTimeout.</p>
+	 *
+	 * @param expr a {@link java.lang.String} object.
+	 * @return a int.
+	 */
 	public int setTimeout(final String expr) {
 		return setTimeout(expr, 0);
 	}
 
+	/**
+	 * <p>setTimeout.</p>
+	 *
+	 * @param expr a {@link java.lang.String} object.
+	 * @param millis a double.
+	 * @return a int.
+	 */
 	public int setTimeout(final String expr, double millis) {
 		if (millis > Integer.MAX_VALUE || millis < 0) {
 			throw new IllegalArgumentException("Timeout value " + millis + " is not supported.");
@@ -919,6 +1220,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return timeID;
 	}
 	
+	/**
+	 * <p>addEventListener.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void addEventListener(String type, Function listener) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null && doc instanceof HTMLDocumentImpl) {
@@ -926,6 +1233,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>addEventListener.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 * @param useCapture a boolean.
+	 */
 	public void addEventListener(String type, Function listener, boolean useCapture) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null) {
@@ -933,6 +1247,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>dispatchEvent.</p>
+	 *
+	 * @param evt a {@link org.w3c.dom.events.Event} object.
+	 * @return a boolean.
+	 * @throws org.w3c.dom.events.EventException if any.
+	 */
 	public boolean dispatchEvent(Event evt) throws EventException {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null) {
@@ -941,6 +1262,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		return false;
 	}
 
+	/**
+	 * <p>removeEventListener.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void removeEventListener(String type, Function listener) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null) {
@@ -948,6 +1275,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * <p>removeEventListener.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param listener a {@link org.mozilla.javascript.Function} object.
+	 * @param useCapture a boolean.
+	 */
 	public void removeEventListener(String type, Function listener, boolean useCapture) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null) {

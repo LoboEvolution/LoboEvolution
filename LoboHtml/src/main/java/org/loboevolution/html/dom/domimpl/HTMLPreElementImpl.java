@@ -28,22 +28,36 @@ import org.loboevolution.html.renderstate.PreRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 
+/**
+ * <p>HTMLPreElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPreElement {
+	/**
+	 * <p>Constructor for HTMLPreElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLPreElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new PreRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getWidth() {
 		final String widthText = getAttribute("width");
 		return HtmlValues.getPixelSize(widthText, null, 0);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setWidth(int width) {
 		setAttribute("width", String.valueOf(width));

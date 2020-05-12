@@ -25,12 +25,21 @@ import org.loboevolution.html.renderstate.TextDecorationRenderState;
 
 /**
  * Element used for STRIKE.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLStrikeElementImpl extends HTMLAbstractUIElement {
+	/**
+	 * <p>Constructor for HTMLStrikeElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLStrikeElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
         prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_LINE_THROUGH);

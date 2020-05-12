@@ -20,5 +20,11 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFontElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFontElement extends SVGElement, SVGExternalResourcesRequired, SVGStylable {
 }

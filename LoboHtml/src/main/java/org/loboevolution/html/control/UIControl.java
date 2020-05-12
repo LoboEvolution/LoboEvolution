@@ -30,24 +30,77 @@ import java.awt.Graphics;
 
 import org.loboevolution.html.AlignValues;
 
+/**
+ * <p>Abstract UIControl interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract interface UIControl {
+	/**
+	 * <p>getBackgroundColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	Color getBackgroundColor();
 
+	/**
+	 * <p>getComponent.</p>
+	 *
+	 * @return a {@link java.awt.Component} object.
+	 */
 	Component getComponent();
 
+	/**
+	 * <p>getPreferredSize.</p>
+	 *
+	 * @return a {@link java.awt.Dimension} object.
+	 */
 	Dimension getPreferredSize();
 
+	/**
+	 * <p>getVAlign.</p>
+	 *
+	 * @return a int.
+	 */
 	default int getVAlign() {
 		return AlignValues.BASELINE.getValue();
 	}
 
+	/**
+	 * <p>invalidate.</p>
+	 */
 	void invalidate();
 
+	/**
+	 * <p>paint.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	void paint(Graphics g);
 
+	/**
+	 * <p>reset.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 */
 	void reset(int availWidth, int availHeight);
 
+	/**
+	 * <p>setBounds.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 * @param width a int.
+	 * @param height a int.
+	 */
 	void setBounds(int x, int y, int width, int height);
 
+	/**
+	 * <p>setRUIControl.</p>
+	 *
+	 * @param ruicontrol a {@link org.loboevolution.html.control.RUIControl} object.
+	 */
 	void setRUIControl(RUIControl ruicontrol);
 }

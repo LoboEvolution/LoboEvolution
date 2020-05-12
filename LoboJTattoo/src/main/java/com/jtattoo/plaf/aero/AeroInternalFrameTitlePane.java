@@ -37,7 +37,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AeroInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -76,10 +79,16 @@ public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for AeroInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public AeroInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createButtons() {
 		if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -92,16 +101,19 @@ public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getHorSpacing() {
 		return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 1 : 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getVerSpacing() {
 		return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 3 : 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {
@@ -112,6 +124,7 @@ public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {

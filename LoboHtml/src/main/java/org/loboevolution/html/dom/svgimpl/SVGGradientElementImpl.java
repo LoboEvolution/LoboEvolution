@@ -20,12 +20,24 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGGradientElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientElement {
 
+	/**
+	 * <p>Constructor for SVGGradientElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGGradientElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedString getHref() {
 		String href = this.getAttribute("xlink:href");
@@ -35,24 +47,34 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 		return new SVGAnimatedStringImpl(href);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedEnumeration getGradientUnits() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedTransformList getGradientTransform() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedEnumeration getSpreadMethod() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
+	/**
+	 * <p>gradient.</p>
+	 *
+	 * @param gradient a {@link org.w3c.dom.Element} object.
+	 * @param shape2d a {@link java.awt.Shape} object.
+	 * @return a {@link java.awt.Paint} object.
+	 */
 	public Paint gradient(Element gradient, Shape shape2d) {
 		if (gradient instanceof SVGRadialGradientElementImpl) {
 			SVGRadialGradientElementImpl radial = (SVGRadialGradientElementImpl) gradient;

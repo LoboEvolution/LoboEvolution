@@ -5,6 +5,12 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
+/**
+ * <p>PreferencesTree class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class PreferencesTree extends JTree {
 
 	/** The Constant serialVersionUID. */

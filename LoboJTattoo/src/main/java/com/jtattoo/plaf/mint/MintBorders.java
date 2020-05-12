@@ -41,7 +41,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>MintBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintBorders extends BaseBorders {
 
@@ -217,6 +220,11 @@ public class MintBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -224,6 +232,11 @@ public class MintBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -231,6 +244,11 @@ public class MintBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -238,6 +256,11 @@ public class MintBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();

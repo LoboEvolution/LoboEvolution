@@ -24,13 +24,25 @@ import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * <p>ClassNameFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ClassNameFilter implements NodeFilter {
 	private final String _class;
 
+	/**
+	 * <p>Constructor for ClassNameFilter.</p>
+	 *
+	 * @param _class a {@link java.lang.String} object.
+	 */
 	public ClassNameFilter(String _class) {
 		this._class = _class;
 	}
 
+	/** {@inheritDoc} */
 	public boolean accept(Node node) {
 		return (node instanceof Element)
 				&& this._class.equals(((Element) node).getAttribute("class"));

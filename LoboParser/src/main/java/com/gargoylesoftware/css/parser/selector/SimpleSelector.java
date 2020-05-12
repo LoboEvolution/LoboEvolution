@@ -18,6 +18,7 @@ package com.gargoylesoftware.css.parser.selector;
  * This interface is only for constraints on selectors.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public interface SimpleSelector extends Selector {
 }

@@ -23,6 +23,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The Interface TextMetrics.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface TextMetrics {
 

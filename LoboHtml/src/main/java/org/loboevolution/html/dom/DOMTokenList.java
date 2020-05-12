@@ -1,5 +1,11 @@
 package org.loboevolution.html.dom;
 
+/**
+ * <p>DOMTokenList interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface DOMTokenList {
 
     /**

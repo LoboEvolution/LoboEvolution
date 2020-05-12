@@ -37,8 +37,15 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>HtmlValues class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HtmlValues {
 
+	/** Constant SYSTEM_FONTS */
 	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
 
 	static {
@@ -51,6 +58,14 @@ public class HtmlValues {
 		SYSTEM_FONTS.put("status-bar", systemFont);
 	}
 
+	/**
+	 * <p>getInsets.</p>
+	 *
+	 * @param insetsSpec a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param negativeOK a boolean.
+	 * @return a {@link java.awt.Insets} object.
+	 */
 	public static Insets getInsets(String insetsSpec, RenderState renderState, boolean negativeOK) {
 		final int[] insetsArray = new int[4];
 		int size = 0;
@@ -109,6 +124,12 @@ public class HtmlValues {
 		}
 	}
 
+	/**
+	 * <p>getListStyle.</p>
+	 *
+	 * @param listStyleText a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.style.ListStyle} object.
+	 */
 	public static ListStyle getListStyle(String listStyleText) {
 		final ListStyle listStyle = new ListStyle();
 		final String[] tokens = HtmlValues.splitCssValue(listStyleText);
@@ -128,6 +149,12 @@ public class HtmlValues {
 		return listStyle;
 	}
 
+	/**
+	 * <p>getListStylePosition.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.ListValues} object.
+	 */
 	public static ListValues getListStylePosition(String token) {
 		final String tokenTL = token.toLowerCase();
 		CSSValues tkn = CSSValues.get(tokenTL);
@@ -141,6 +168,12 @@ public class HtmlValues {
 		}
 	}
 
+	/**
+	 * <p>getListStyleType.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.ListValues} object.
+	 */
 	public static ListValues getListStyleType(String token) {
 		final String tokenTL = token.toLowerCase();
 		CSSValues tkn = CSSValues.get(tokenTL);
@@ -172,6 +205,14 @@ public class HtmlValues {
 		}
 	}
 
+	/**
+	 * <p>getPixelSize.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param errorValue a int.
+	 * @return a int.
+	 */
 	public static final int getPixelSize(String spec, RenderState renderState, int errorValue) {
 		try {
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
@@ -221,6 +262,15 @@ public class HtmlValues {
 		}
 	}
 	
+	/**
+	 * <p>getPixelSize.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param errorValue a int.
+	 * @param availSize a int.
+	 * @return a int.
+	 */
 	public static final int getPixelSize(String spec, RenderState renderState, int errorValue, int availSize) {
 		try {
 			if (spec.endsWith("%")) {
@@ -235,17 +285,35 @@ public class HtmlValues {
 		}
 	}
 
+	/**
+	 * <p>isBackgroundPosition.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isBackgroundPosition(String token) {
 		return isLength(token) || token.endsWith("%") || token.equalsIgnoreCase("top")
 				|| token.equalsIgnoreCase("center") || token.equalsIgnoreCase("bottom")
 				|| token.equalsIgnoreCase("left") || token.equalsIgnoreCase("right");
 	}
 
+	/**
+	 * <p>isBackgroundRepeat.</p>
+	 *
+	 * @param repeat a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isBackgroundRepeat(String repeat) {
 		final String repeatTL = repeat.toLowerCase();
 		return repeatTL.indexOf("repeat") != -1;
 	}
 
+	/**
+	 * <p>isBorderStyle.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isBorderStyle(String token) {
 		final String tokenTL = token.toLowerCase();
 		return tokenTL.equals("solid") || tokenTL.equals("dashed") || tokenTL.equals("dotted")
@@ -254,14 +322,32 @@ public class HtmlValues {
 				|| tokenTL.equals("outset");
 	}
 
+	/**
+	 * <p>isFontStyle.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isFontStyle(String token) {
 		return "italic".equals(token) || "normal".equals(token) || "oblique".equals(token);
 	}
 
+	/**
+	 * <p>isFontVariant.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isFontVariant(String token) {
 		return "small-caps".equals(token) || "normal".equals(token);
 	}
 
+	/**
+	 * <p>isFontWeight.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isFontWeight(String token) {
 		if ("bold".equals(token) || "bolder".equals(token) || "lighter".equals(token)) {
 			return true;
@@ -274,14 +360,32 @@ public class HtmlValues {
 		}
 	}
 	
+	/**
+	 * <p>isUrl.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isUrl(String token) {
 		return token.toLowerCase().startsWith("url(");
 	}
 	
+	/**
+	 * <p>isGradient.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isGradient(String token) {
 		return token.toLowerCase().contains("gradient");
 	}
 	
+	/**
+	 * <p>quoteAndEscape.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String quoteAndEscape(String text) {
 		final StringBuilder result = new StringBuilder();
 		result.append("'");
@@ -305,6 +409,12 @@ public class HtmlValues {
 		return result.toString();
 	}
 
+	/**
+	 * <p>splitCssValue.</p>
+	 *
+	 * @param cssValue a {@link java.lang.String} object.
+	 * @return an array of {@link java.lang.String} objects.
+	 */
 	public static String[] splitCssValue(String cssValue) {
 		final ArrayList<String> tokens = new ArrayList<String>(4);
 		final int len = cssValue.length();
@@ -352,6 +462,12 @@ public class HtmlValues {
 		return tokens.toArray(new String[tokens.size()]);
 	}
 
+	/**
+	 * <p>unquoteAndUnescape.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String unquoteAndUnescape(String text) {
 		final StringBuilder result = new StringBuilder();
 		int index = 0;

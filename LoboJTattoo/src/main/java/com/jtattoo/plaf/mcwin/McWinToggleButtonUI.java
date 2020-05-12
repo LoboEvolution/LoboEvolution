@@ -36,14 +36,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseToggleButtonUI;
 
 /**
+ * <p>McWinToggleButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinToggleButtonUI extends BaseToggleButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinToggleButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {

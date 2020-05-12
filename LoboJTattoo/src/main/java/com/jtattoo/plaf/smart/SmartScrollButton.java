@@ -28,7 +28,10 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseScrollButton;
 
 /**
+ * <p>SmartScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartScrollButton extends BaseScrollButton {
 
@@ -37,10 +40,17 @@ public class SmartScrollButton extends BaseScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for SmartScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public SmartScrollButton(int direction, int width) {
 		super(direction, width);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

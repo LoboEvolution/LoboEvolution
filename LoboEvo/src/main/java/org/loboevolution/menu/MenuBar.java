@@ -23,10 +23,21 @@ import org.loboevolution.menu.view.FullScreenAction;
 import org.loboevolution.menu.view.InfoPageAction;
 import org.loboevolution.menu.view.SourceAction;
 
+/**
+ * <p>MenuBar class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class MenuBar extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for MenuBar.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public MenuBar(BrowserFrame frame) {
 		add(getFileMenu(frame));
 		add(getEditMenu());
@@ -41,6 +52,7 @@ public class MenuBar extends JMenuBar {
 	 * Gets the bookmarks menu.
 	 *
 	 * @return the bookmarks menu
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
 	public JMenu getBookmarksMenu(BrowserFrame frame) {
 		final JMenu menu = new JMenu("Bookmarks");
@@ -54,6 +66,7 @@ public class MenuBar extends JMenuBar {
 	 * Gets the chronology menu.
 	 *
 	 * @return the chronology menu
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
 	public JMenu getChronologyMenu(BrowserFrame frame) {
 		final JMenu menu = new JMenu("Recent");
@@ -97,6 +110,7 @@ public class MenuBar extends JMenuBar {
 	 * Gets the help menu.
 	 *
 	 * @return the help menu
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
 	public JMenu getHelpMenu(BrowserFrame frame) {
 		final String homePage = "http://sourceforge.net/projects/loboevolution/";
@@ -125,6 +139,7 @@ public class MenuBar extends JMenuBar {
 	 * Gets the tools menu.
 	 *
 	 * @return the tools menu
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
 	public JMenu getToolsMenu(BrowserFrame frame) {
 		final JMenu menu = new JMenu("Tools");
@@ -139,6 +154,7 @@ public class MenuBar extends JMenuBar {
 	 * Gets the view menu.
 	 *
 	 * @return the view menu
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
 	 */
 	public JMenu getViewMenu(BrowserFrame frame) {
 		final JMenu menu = new JMenu("View");

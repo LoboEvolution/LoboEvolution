@@ -31,12 +31,16 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BasePanelUI;
 
 /**
+ * <p>AluminiumPanelUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumPanelUI extends BasePanelUI {
 
 	private static AluminiumPanelUI panelUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (panelUI == null) {
 			panelUI = new AluminiumPanelUI();
@@ -44,6 +48,7 @@ public class AluminiumPanelUI extends BasePanelUI {
 		return panelUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque() && c.getBackground() instanceof ColorUIResource

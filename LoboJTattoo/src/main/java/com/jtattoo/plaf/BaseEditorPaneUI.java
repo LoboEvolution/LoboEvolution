@@ -43,10 +43,14 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
 /**
+ * <p>BaseEditorPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseEditorPaneUI extends BasicEditorPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseEditorPaneUI();
 	}
@@ -55,12 +59,14 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 
 	private FocusListener focusListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();
 		updateBackground();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installKeyboardActions() {
 		super.installKeyboardActions();
@@ -77,6 +83,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -113,6 +120,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g) {
 		g.setColor(getComponent().getBackground());
@@ -124,6 +132,7 @@ public class BaseEditorPaneUI extends BasicEditorPaneUI {
 		g.fillRect(0, 0, getComponent().getWidth(), getComponent().getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		getComponent().removeFocusListener(focusListener);

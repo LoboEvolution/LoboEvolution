@@ -32,14 +32,19 @@ import javax.swing.plaf.basic.BasicMenuBarUI;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>BernsteinMenuBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinMenuBarUI extends BasicMenuBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent x) {
 		return new BernsteinMenuBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -49,6 +54,7 @@ public class BernsteinMenuBarUI extends BasicMenuBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		BernsteinUtils.fillComponent(g, c);

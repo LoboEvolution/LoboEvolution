@@ -33,18 +33,23 @@
 package org.loboevolution.html.dom;
 
 /**
- * For the <code>Q</code> and <code>BLOCKQUOTE</code> elements. See the Q
+ * For the Q and BLOCKQUOTE elements. See the Q
  * element definition in HTML 4.01.
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLQuoteElement extends HTMLElement {
 	/**
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a source document or message. See the cite attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getCite();
 
@@ -52,6 +57,8 @@ public interface HTMLQuoteElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a source document or message. See the cite attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param cite a {@link java.lang.String} object.
 	 */
 	void setCite(String cite);
 

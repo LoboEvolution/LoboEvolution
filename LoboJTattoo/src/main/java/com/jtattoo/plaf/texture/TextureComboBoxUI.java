@@ -43,6 +43,12 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.NoFocusButton;
 import com.jtattoo.plaf.luna.LunaIcons;
 
+/**
+ * <p>TextureComboBoxUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextureComboBoxUI extends BaseComboBoxUI {
 
 	// --------------------------------------------------------------------------------------------------
@@ -116,15 +122,18 @@ public class TextureComboBoxUI extends BaseComboBoxUI {
 		}
 	} // end of class ArrowButton
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureComboBoxUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		return new ArrowButton();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setButtonBorder() {
 	}

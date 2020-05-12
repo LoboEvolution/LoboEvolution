@@ -15,32 +15,37 @@
 package com.gargoylesoftware.css.parser;
 
 /**
-  * Interface for CSS parser error handlers.
-  * @author Ronald Brill
-  */
+ * Interface for CSS parser error handlers.
+ *
+ * @author Ronald Brill
+ * @version $Id: $Id
+ */
 public interface CSSErrorHandler {
 
     /**
      * Warning.
      *
-     * @param exception the {@link CSSParseException} that is the reason for the warning.
+     * @param exception the {@link com.gargoylesoftware.css.parser.CSSParseException} that is the reason for the warning.
      * @exception CSSException in case of error
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
      */
     void warning(CSSParseException exception) throws CSSException;
 
     /**
      * Error.
      *
-     * @param exception the {@link CSSParseException} that is the reason for the error.
+     * @param exception the {@link com.gargoylesoftware.css.parser.CSSParseException} that is the reason for the error.
      * @exception CSSException in case of error
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
      */
     void error(CSSParseException exception) throws CSSException;
 
     /**
      * Fatal error.
      *
-     * @param exception the {@link CSSParseException} that is the reason for the error.
+     * @param exception the {@link com.gargoylesoftware.css.parser.CSSParseException} that is the reason for the error.
      * @exception CSSException in case of error
+     * @throws com.gargoylesoftware.css.parser.CSSException if any.
      */
     void fatalError(CSSParseException exception) throws CSSException;
 }

@@ -26,6 +26,12 @@ import java.awt.Point;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 
+/**
+ * <p>DelayedPair class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DelayedPair {
 
 	private RenderableContainer containingBlock;
@@ -54,9 +60,15 @@ public class DelayedPair {
 
 	private boolean isFixed;
 
+	/**
+	 * <p>Constructor for DelayedPair.</p>
+	 */
 	public DelayedPair() {
 	}
 
+	/**
+	 * <p>positionPairChild.</p>
+	 */
 	public void positionPairChild() {
 		final RenderableContainer parent = this.containingBlock;
 		final BoundableRenderable child = this.child;
@@ -134,6 +146,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Getter for the field containingBlock.</p>
+	 *
 	 * @return the containingBlock
 	 */
 	public RenderableContainer getContainingBlock() {
@@ -141,6 +155,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Getter for the field child.</p>
+	 *
 	 * @return the child
 	 */
 	public BoundableRenderable getChild() {
@@ -148,6 +164,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Getter for the field immediateContainingBlock.</p>
+	 *
 	 * @return the immediateContainingBlock
 	 */
 	public RenderableContainer getImmediateContainingBlock() {
@@ -155,6 +173,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Getter for the field rs.</p>
+	 *
 	 * @return the rs
 	 */
 	public RenderState getRs() {
@@ -162,6 +182,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Getter for the field initX.</p>
+	 *
 	 * @return the initX
 	 */
 	public int getInitX() {
@@ -169,6 +191,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Getter for the field initY.</p>
+	 *
 	 * @return the initY
 	 */
 	public int getInitY() {
@@ -176,6 +200,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field width.</p>
+	 *
 	 * @param width the width to set
 	 */
 	public void setWidth(String width) {
@@ -183,6 +209,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field height.</p>
+	 *
 	 * @param height the height to set
 	 */
 	public void setHeight(String height) {
@@ -190,6 +218,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>isFixed.</p>
+	 *
 	 * @return the isFixed
 	 */
 	public boolean isFixed() {
@@ -197,6 +227,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field containingBlock.</p>
+	 *
 	 * @param containingBlock the containingBlock to set
 	 */
 	public void setContainingBlock(RenderableContainer containingBlock) {
@@ -204,6 +236,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field child.</p>
+	 *
 	 * @param child the child to set
 	 */
 	public void setChild(BoundableRenderable child) {
@@ -211,6 +245,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field immediateContainingBlock.</p>
+	 *
 	 * @param immediateContainingBlock the immediateContainingBlock to set
 	 */
 	public void setImmediateContainingBlock(RenderableContainer immediateContainingBlock) {
@@ -218,6 +254,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field rs.</p>
+	 *
 	 * @param rs the rs to set
 	 */
 	public void setRs(RenderState rs) {
@@ -225,6 +263,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field left.</p>
+	 *
 	 * @param left the left to set
 	 */
 	public void setLeft(String left) {
@@ -232,6 +272,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field top.</p>
+	 *
 	 * @param top the top to set
 	 */
 	public void setTop(String top) {
@@ -239,6 +281,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field bottom.</p>
+	 *
 	 * @param bottom the bottom to set
 	 */
 	public void setBottom(String bottom) {
@@ -246,6 +290,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field right.</p>
+	 *
 	 * @param right the right to set
 	 */
 	public void setRight(String right) {
@@ -253,6 +299,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field initX.</p>
+	 *
 	 * @param initX the initX to set
 	 */
 	public void setInitX(int initX) {
@@ -260,6 +308,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>Setter for the field initY.</p>
+	 *
 	 * @param initY the initY to set
 	 */
 	public void setInitY(int initY) {
@@ -267,6 +317,8 @@ public class DelayedPair {
 	}
 
 	/**
+	 * <p>setFixed.</p>
+	 *
 	 * @param isFixed the isFixed to set
 	 */
 	public void setFixed(boolean isFixed) {

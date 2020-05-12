@@ -45,14 +45,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>MintToggleButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintToggleButtonUI extends BaseToggleButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new MintToggleButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
@@ -147,6 +152,7 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
 			Rectangle iconRect) {

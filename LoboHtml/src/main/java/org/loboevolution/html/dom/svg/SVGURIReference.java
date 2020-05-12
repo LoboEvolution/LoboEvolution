@@ -20,6 +20,17 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGURIReference interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGURIReference {
+	/**
+	 * <p>getHref.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getHref();
 }

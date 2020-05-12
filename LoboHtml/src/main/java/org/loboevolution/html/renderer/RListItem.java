@@ -43,11 +43,22 @@ class RListItem extends BaseRListElement {
 
 	private Integer value = null;
 
+	/**
+	 * <p>Constructor for RListItem.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param listNesting a int.
+	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param parentContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 */
 	public RListItem(NodeImpl modelNode, int listNesting, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer parentContainer) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void doLayout(int availWidth, int availHeight, boolean expandWidth, boolean expandHeight,
 			FloatingBoundsSource floatBoundsSource, int defaultOverflowX, int defaultOverflowY, boolean sizeOnly) {
@@ -83,17 +94,20 @@ class RListItem extends BaseRListElement {
 		return value;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getViewportListNesting(int blockNesting) {
 		return blockNesting + 1;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidateLayoutLocal() {
 		super.invalidateLayoutLocal();
 		this.value = null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

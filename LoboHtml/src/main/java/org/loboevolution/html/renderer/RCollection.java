@@ -25,22 +25,62 @@ import java.awt.Rectangle;
 import java.util.Iterator;
 
 /**
- * A {@link Renderable} with children.
+ * A {@link org.loboevolution.html.renderer.Renderable} with children.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface RCollection extends BoundableRenderable {
+	/**
+	 * <p>blur.</p>
+	 */
 	void blur();
 
+	/**
+	 * <p>focus.</p>
+	 */
 	void focus();
 
+	/**
+	 * <p>invalidateLayoutDeep.</p>
+	 */
 	void invalidateLayoutDeep();
 
+	/**
+	 * <p>updateWidgetBounds.</p>
+	 *
+	 * @param guiX a int.
+	 * @param guiY a int.
+	 */
 	void updateWidgetBounds(int guiX, int guiY);
 	
+	/**
+	 * <p>getRenderables.</p>
+	 *
+	 * @return a {@link java.util.Iterator} object.
+	 */
 	Iterator<Renderable> getRenderables();
 	
+	/**
+	 * <p>getRenderable.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+	 */
 	BoundableRenderable getRenderable(final int x, final int y);
 	
+	/**
+	 * <p>getClipBounds.</p>
+	 *
+	 * @return a {@link java.awt.Rectangle} object.
+	 */
 	Rectangle getClipBounds();
 	
+	/**
+	 * <p>getClipBoundsWithoutInsets.</p>
+	 *
+	 * @return a {@link java.awt.Rectangle} object.
+	 */
 	Rectangle getClipBoundsWithoutInsets();
 }

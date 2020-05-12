@@ -22,20 +22,84 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGStringList interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGStringList {
+	/**
+	 * <p>getNumberOfItems.</p>
+	 *
+	 * @return a int.
+	 */
 	int getNumberOfItems();
 
+	/**
+	 * <p>clear.</p>
+	 *
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void clear() throws DOMException;
 
+	/**
+	 * <p>initialize.</p>
+	 *
+	 * @param newItem a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	String initialize(String newItem) throws DOMException, SVGException;
 
+	/**
+	 * <p>getItem.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	String getItem(int index) throws DOMException;
 
+	/**
+	 * <p>insertItemBefore.</p>
+	 *
+	 * @param newItem a {@link java.lang.String} object.
+	 * @param index a int.
+	 * @return a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	String insertItemBefore(String newItem, int index) throws DOMException, SVGException;
 
+	/**
+	 * <p>replaceItem.</p>
+	 *
+	 * @param newItem a {@link java.lang.String} object.
+	 * @param index a int.
+	 * @return a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	String replaceItem(String newItem, int index) throws DOMException, SVGException;
 
+	/**
+	 * <p>removeItem.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	String removeItem(int index) throws DOMException;
 
+	/**
+	 * <p>appendItem.</p>
+	 *
+	 * @param newItem a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	String appendItem(String newItem) throws DOMException, SVGException;
 }

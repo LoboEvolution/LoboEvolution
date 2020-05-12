@@ -29,15 +29,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseTableHeaderUI;
 
 /**
+ * <p>SmartTableHeaderUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartTableHeaderUI extends BaseTableHeaderUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new SmartTableHeaderUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean drawRolloverBar() {
 		return true;

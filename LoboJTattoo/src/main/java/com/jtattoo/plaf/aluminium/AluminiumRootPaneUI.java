@@ -30,14 +30,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseRootPaneUI;
 
 /**
+ * <p>AluminiumRootPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumRootPaneUI extends BaseRootPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AluminiumRootPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JComponent createTitlePane(JRootPane root) {
 		return new AluminiumTitlePane(root, this);

@@ -10,6 +10,12 @@ import javax.swing.table.DefaultTableModel;
 
 import org.loboevolution.info.CookieInfo;
 
+/**
+ * <p>CookieWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CookieWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -17,6 +23,8 @@ public class CookieWindow extends JFrame {
 
 	/**
 	 * Instantiates a new text viewer window.
+	 *
+	 * @param cookieList a {@link java.util.List} object.
 	 */
 	public CookieWindow(List<CookieInfo> cookieList) {
 		createAndShowGUI(cookieList);

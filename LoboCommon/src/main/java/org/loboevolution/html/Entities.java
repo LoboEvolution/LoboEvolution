@@ -4,6 +4,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>Entities class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public enum Entities {
 	
 	amp("amp"),
@@ -533,14 +539,31 @@ public enum Entities {
 		this.value = value;
 	}
 
+	/**
+	 * <p>Getter for the field value.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getValue() {
 		return value;
 	}
 
+	/**
+	 * <p>isEqual.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean isEqual(String value) {
 		return this.value.equals(value);
 	}
 
+	/**
+	 * <p>get.</p>
+	 *
+	 * @param actionName a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.Entities} object.
+	 */
 	public static Entities get(String actionName) {
 		return ENUM_MAP.get(actionName);
 	}

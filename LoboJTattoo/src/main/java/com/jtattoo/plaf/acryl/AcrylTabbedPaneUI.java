@@ -44,18 +44,24 @@ import com.jtattoo.plaf.JTattooUtilities;
 
 /**
  * author Michael Hagen
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AcrylTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color getContentBorderColor() {
 		return ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		Color SEP_COLORS[] = { ColorHelper.brighter(AbstractLookAndFeel.getControlColorLight(), 20),
@@ -66,6 +72,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 		return SEP_COLORS;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color getLoBorderColor(int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource) {
@@ -74,6 +81,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 		return super.getLoBorderColor(tabIndex);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
 		if (tabIndex >= 0 && tabIndex < tabPane.getTabCount()) {
@@ -104,6 +112,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 		return AbstractLookAndFeel.getTheme().getTabColors();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Font getTabFont(boolean isSelected) {
 		if (isSelected) {
@@ -113,12 +122,14 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();
 		tabAreaInsets.bottom = 5;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
 			Rectangle textRect, boolean isSelected) {

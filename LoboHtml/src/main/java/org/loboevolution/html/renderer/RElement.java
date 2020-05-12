@@ -27,24 +27,59 @@ import org.loboevolution.html.dom.domimpl.UINode;
 /**
  * A renderer node for elements such as blocks, lists, tables, inputs, images,
  * etc.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface RElement extends RCollection, UINode {
 
+	/**
+	 * <p>getCollapsibleMarginBottom.</p>
+	 *
+	 * @return a int.
+	 */
 	int getCollapsibleMarginBottom();
 
+	/**
+	 * <p>getCollapsibleMarginTop.</p>
+	 *
+	 * @return a int.
+	 */
 	int getCollapsibleMarginTop();
 
+	/**
+	 * <p>getMarginBottom.</p>
+	 *
+	 * @return a int.
+	 */
 	int getMarginBottom();
 
+	/**
+	 * <p>getMarginLeft.</p>
+	 *
+	 * @return a int.
+	 */
 	int getMarginLeft();
 
+	/**
+	 * <p>getMarginRight.</p>
+	 *
+	 * @return a int.
+	 */
 	int getMarginRight();
 
+	/**
+	 * <p>getMarginTop.</p>
+	 *
+	 * @return a int.
+	 */
 	int getMarginTop();
 
 	/**
 	 * Vertical alignment for elements rendered in a line. Returns one of the
 	 * constants defined in this class.
+	 *
+	 * @return a int.
 	 */
 	default int getVAlign() {
 		return AlignValues.BASELINE.getValue();
@@ -53,7 +88,7 @@ public interface RElement extends RCollection, UINode {
 	/**
 	 * Lays out the subtree below the RElement. The RElement is expected to set its
 	 * own dimensions, but not its origin.
-	 * 
+	 *
 	 * @param availWidth  The available width from the parent's canvas.
 	 * @param availHeight The available height from the parent's canvas.
 	 * @param sizeOnly    Whether the layout is for sizing determination only.

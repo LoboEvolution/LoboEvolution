@@ -22,16 +22,33 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLQuoteElement;
 
+/**
+ * <p>HTMLQuoteElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteElement {
 
+	/**
+	 * <p>Constructor for HTMLQuoteElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLQuoteElementImpl(String name) {
 		super(name);
 	}
 
+	/**
+	 * <p>getCite.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCite() {
 		return getAttribute("cite");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCite(String cite) {
 		setAttribute("cite", cite);

@@ -6,52 +6,86 @@ import java.awt.geom.Point2D;
 import org.loboevolution.html.dom.svg.SVGLength;
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGLengthImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGLengthImpl implements SVGLength {
 
 	private short unitType;
 	private float valueInSpecifiedUnits;
 
+	/**
+	 * <p>Constructor for SVGLengthImpl.</p>
+	 */
 	public SVGLengthImpl() {
 		this.unitType = SVGLength.SVG_LENGTHTYPE_UNKNOWN;
 		this.valueInSpecifiedUnits = 0.0f;
 	}
 
+	/**
+	 * <p>Constructor for SVGLengthImpl.</p>
+	 *
+	 * @param unitType a short.
+	 */
 	public SVGLengthImpl(short unitType) {
 		this.unitType = unitType;
 		this.valueInSpecifiedUnits = 0.0f;
 	}
 
+	/**
+	 * <p>Constructor for SVGLengthImpl.</p>
+	 *
+	 * @param unitType a short.
+	 * @param valueInSpecifiedUnits a float.
+	 */
 	public SVGLengthImpl(short unitType, float valueInSpecifiedUnits) {
 		this.unitType = unitType;
 		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 	}
 
+	/**
+	 * <p>Constructor for SVGLengthImpl.</p>
+	 *
+	 * @param valueAsString a {@link java.lang.String} object.
+	 */
 	public SVGLengthImpl(String valueAsString) {
 		setValueAsString(valueAsString);
 	}
 
+	/**
+	 * <p>Constructor for SVGLengthImpl.</p>
+	 *
+	 * @param valueInSpecifiedUnits a float.
+	 */
 	public SVGLengthImpl(float valueInSpecifiedUnits) {
 		this.unitType = SVGLength.SVG_LENGTHTYPE_NUMBER;
 		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getUnitType() {
 		return this.unitType;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getValue() {
 		convertToSpecifiedUnits(SVGLength.SVG_LENGTHTYPE_NUMBER);
 		return valueInSpecifiedUnits;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValue(float value) {
 		this.valueInSpecifiedUnits = value;
 		this.unitType = SVGLength.SVG_LENGTHTYPE_NUMBER;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getValueAsString() {
 		String suffix = getUnitTypeAsString(this.unitType);
@@ -65,6 +99,7 @@ public class SVGLengthImpl implements SVGLength {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValueAsString(String valueAsString) {
 
@@ -112,6 +147,7 @@ public class SVGLengthImpl implements SVGLength {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void newValueSpecifiedUnits(short unitType, float valueInSpecifiedUnits) {
 
@@ -134,6 +170,7 @@ public class SVGLengthImpl implements SVGLength {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void convertToSpecifiedUnits(short unitType) {
 
@@ -196,11 +233,13 @@ public class SVGLengthImpl implements SVGLength {
 		this.unitType = unitType;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getValueInSpecifiedUnits() {
 		return valueInSpecifiedUnits;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValueInSpecifiedUnits(float valueInSpecifiedUnits) {
 		this.valueInSpecifiedUnits = valueInSpecifiedUnits;
@@ -249,6 +288,12 @@ public class SVGLengthImpl implements SVGLength {
 	}
 	
 	
+	/**
+	 * <p>getTransformedLength.</p>
+	 *
+	 * @param transform a {@link java.awt.geom.AffineTransform} object.
+	 * @return a float.
+	 */
 	protected float getTransformedLength(AffineTransform transform) {
 
 		if (unitType == SVG_LENGTHTYPE_NUMBER || transform == null || transform != null && transform.isIdentity()) {

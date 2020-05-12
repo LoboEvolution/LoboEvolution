@@ -30,19 +30,30 @@ import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DOMStringList;
 
+/**
+ * <p>DOMConfigurationImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DOMConfigurationImpl implements DOMConfiguration {
 	private final Map<String, Object> parameters = new HashMap<String, Object>();
 
+	/**
+	 * <p>Constructor for DOMConfigurationImpl.</p>
+	 */
 	public DOMConfigurationImpl() {
 		super();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean canSetParameter(String name, Object value) {
 		// TODO
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getParameter(String name) throws DOMException {
 		synchronized (this) {
@@ -50,6 +61,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DOMStringList getParameterNames() {
 		synchronized (this) {
@@ -57,6 +69,7 @@ public class DOMConfigurationImpl implements DOMConfiguration {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setParameter(String name, Object value) throws DOMException {
 		synchronized (this) {

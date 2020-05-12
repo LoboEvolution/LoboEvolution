@@ -47,6 +47,12 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
+/**
+ * <p>BaseComboBoxUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BaseComboBoxUI extends BasicComboBoxUI {
 
 	public static class ArrowButton extends NoFocusButton {
@@ -105,6 +111,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 	}
 
 //-----------------------------------------------------------------------------    
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseComboBoxUI();
 	}
@@ -117,6 +124,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 
 	private Color orgBackgroundColor = null;
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		JButton button = new ArrowButton();
@@ -130,6 +138,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		return button;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
 		Dimension size = super.getPreferredSize(c);
@@ -144,6 +153,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		return new Dimension(size.width + 2, size.height + 2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -185,6 +195,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -198,6 +209,9 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		}
 	}
 
+	/**
+	 * <p>setButtonBorder.</p>
+	 */
 	protected void setButtonBorder() {
 		if (JTattooUtilities.isLeftToRight(comboBox)) {
 			Border border = BorderFactory.createMatteBorder(0, 1, 0, 0, AbstractLookAndFeel.getFrameColor());
@@ -208,6 +222,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		comboBox.removePropertyChangeListener(myPpropertyChangeListener);

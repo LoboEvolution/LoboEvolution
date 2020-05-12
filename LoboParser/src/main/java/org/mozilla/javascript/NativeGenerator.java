@@ -11,6 +11,7 @@ package org.mozilla.javascript;
  * http://developer.mozilla.org/en/docs/New_in_JavaScript_1.7#Generators
  *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
 public final class NativeGenerator extends IdScriptableObject {
     private static final long serialVersionUID = 1645892441041347273L;
@@ -48,6 +49,13 @@ public final class NativeGenerator extends IdScriptableObject {
      */
     private NativeGenerator() { }
 
+    /**
+     * <p>Constructor for NativeGenerator.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param function a {@link org.mozilla.javascript.NativeFunction} object.
+     * @param savedState a {@link java.lang.Object} object.
+     */
     public NativeGenerator(Scriptable scope, NativeFunction function,
                            Object savedState)
     {
@@ -63,15 +71,20 @@ public final class NativeGenerator extends IdScriptableObject {
         this.setPrototype(prototype);
     }
 
+    /** Constant GENERATOR_SEND=0 */
+    /** Constant GENERATOR_THROW=1 */
+    /** Constant GENERATOR_CLOSE=2 */
     public static final int GENERATOR_SEND  = 0,
                             GENERATOR_THROW = 1,
                             GENERATOR_CLOSE = 2;
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Generator";
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id) {
         String s;
@@ -87,6 +100,7 @@ public final class NativeGenerator extends IdScriptableObject {
         initPrototypeMethod(GENERATOR_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -180,6 +194,7 @@ public final class NativeGenerator extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id;

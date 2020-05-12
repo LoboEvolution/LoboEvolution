@@ -23,8 +23,15 @@ package org.loboevolution.html.dom.filter;
 import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Node;
 
+/**
+ * <p>CommandFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CommandFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return "command".equalsIgnoreCase(node.getNodeName());

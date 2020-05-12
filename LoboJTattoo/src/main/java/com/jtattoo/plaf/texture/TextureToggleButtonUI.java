@@ -43,14 +43,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>TextureToggleButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureToggleButtonUI extends BaseToggleButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureToggleButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
 			Rectangle iconRect) {
@@ -61,6 +66,7 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
 		AbstractButton b = (AbstractButton) c;
@@ -74,6 +80,7 @@ public class TextureToggleButtonUI extends BaseToggleButtonUI {
 		g2D.setComposite(savedComposite);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
 		Graphics2D g2D = (Graphics2D) g;

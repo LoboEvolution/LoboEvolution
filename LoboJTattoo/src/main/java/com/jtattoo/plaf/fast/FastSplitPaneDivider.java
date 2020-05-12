@@ -28,7 +28,10 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseSplitPaneDivider;
 
 /**
+ * <p>FastSplitPaneDivider class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 
@@ -37,10 +40,16 @@ public class FastSplitPaneDivider extends BaseSplitPaneDivider {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for FastSplitPaneDivider.</p>
+	 *
+	 * @param ui a {@link com.jtattoo.plaf.fast.FastSplitPaneUI} object.
+	 */
 	public FastSplitPaneDivider(FastSplitPaneUI ui) {
 		super(ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(AbstractLookAndFeel.getBackgroundColor());

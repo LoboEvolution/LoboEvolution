@@ -24,10 +24,20 @@ import java.awt.Insets;
 
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>HtmlInsets class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HtmlInsets {
+	/** Constant TYPE_AUTO=2 */
 	public static final int TYPE_AUTO = 2;
+	/** Constant TYPE_PERCENT=3 */
 	public static final int TYPE_PERCENT = 3;
+	/** Constant TYPE_PIXELS=1 */
 	public static final int TYPE_PIXELS = 1;
+	/** Constant TYPE_UNDEFINED=0 */
 	public static final int TYPE_UNDEFINED = 0;
 	
 	public int top, bottom, left, right;
@@ -35,9 +45,25 @@ public class HtmlInsets {
 	/* Types assumed to be initialized as UNDEFINED */
 	public int topType, bottomType, leftType, rightType;
 
+	/**
+	 * <p>Constructor for HtmlInsets.</p>
+	 */
 	public HtmlInsets() {
 	}
 
+	/**
+	 * <p>getAWTInsets.</p>
+	 *
+	 * @param defaultTop a int.
+	 * @param defaultLeft a int.
+	 * @param defaultBottom a int.
+	 * @param defaultRight a int.
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param autoX a int.
+	 * @param autoY a int.
+	 * @return a {@link java.awt.Insets} object.
+	 */
 	public Insets getAWTInsets(int defaultTop, int defaultLeft, int defaultBottom, int defaultRight,
 			int availWidth, int availHeight, int autoX, int autoY) {
 		final int top = getInsetPixels(this.top, this.topType, defaultTop, availHeight, autoY);
@@ -47,6 +73,13 @@ public class HtmlInsets {
 		return new Insets(top, left, bottom, right);
 	}
 	
+	/**
+	 * <p>getSimpleAWTInsets.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @return a {@link java.awt.Insets} object.
+	 */
 	public Insets getSimpleAWTInsets(int availWidth, int availHeight) {
 		final int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
 		final int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
@@ -55,6 +88,14 @@ public class HtmlInsets {
 		return new Insets(top, left, bottom, right);
 	}
 	
+	/**
+	 * <p>updateBottomInset.</p>
+	 *
+	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 * @param sizeText a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	protected static HtmlInsets updateBottomInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			return insets;
@@ -82,6 +123,14 @@ public class HtmlInsets {
 		return insets;
 	}
 
+	/**
+	 * <p>updateLeftInset.</p>
+	 *
+	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 * @param sizeText a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	protected static HtmlInsets updateLeftInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			return insets;
@@ -109,6 +158,14 @@ public class HtmlInsets {
 		return insets;
 	}
 
+	/**
+	 * <p>updateRightInset.</p>
+	 *
+	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 * @param sizeText a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	protected static HtmlInsets updateRightInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			return insets;
@@ -136,6 +193,14 @@ public class HtmlInsets {
 		return insets;
 	}
 
+	/**
+	 * <p>updateTopInset.</p>
+	 *
+	 * @param insets a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 * @param sizeText a {@link java.lang.String} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	protected static HtmlInsets updateTopInset(HtmlInsets insets, String sizeText, RenderState renderState) {
 		if (sizeText == null) {
 			return insets;
@@ -177,70 +242,151 @@ public class HtmlInsets {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field bottom.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getBottom() {
 		return this.bottom;
 	}
 
+	/**
+	 * <p>Getter for the field bottomType.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getBottomType() {
 		return this.bottomType;
 	}
 
+	/**
+	 * <p>Getter for the field left.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getLeft() {
 		return this.left;
 	}
 
+	/**
+	 * <p>Getter for the field leftType.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getLeftType() {
 		return this.leftType;
 	}
 
+	/**
+	 * <p>Getter for the field right.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getRight() {
 		return this.right;
 	}
 
+	/**
+	 * <p>Getter for the field rightType.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getRightType() {
 		return this.rightType;
 	}
 
+	/**
+	 * <p>Getter for the field top.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getTop() {
 		return this.top;
 	}
 
+	/**
+	 * <p>Getter for the field topType.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getTopType() {
 		return this.topType;
 	}
 
+	/**
+	 * <p>Setter for the field bottom.</p>
+	 *
+	 * @param bottom a int.
+	 */
 	public void setBottom(int bottom) {
 		this.bottom = bottom;
 	}
 
+	/**
+	 * <p>Setter for the field bottomType.</p>
+	 *
+	 * @param bottomType a int.
+	 */
 	public void setBottomType(int bottomType) {
 		this.bottomType = bottomType;
 	}
 
+	/**
+	 * <p>Setter for the field left.</p>
+	 *
+	 * @param left a int.
+	 */
 	public void setLeft(int left) {
 		this.left = left;
 	}
 
+	/**
+	 * <p>Setter for the field leftType.</p>
+	 *
+	 * @param leftType a int.
+	 */
 	public void setLeftType(int leftType) {
 		this.leftType = leftType;
 	}
 
+	/**
+	 * <p>Setter for the field right.</p>
+	 *
+	 * @param right a int.
+	 */
 	public void setRight(int right) {
 		this.right = right;
 	}
 
+	/**
+	 * <p>Setter for the field rightType.</p>
+	 *
+	 * @param rightType a int.
+	 */
 	public void setRightType(int rightType) {
 		this.rightType = rightType;
 	}
 
+	/**
+	 * <p>Setter for the field top.</p>
+	 *
+	 * @param top a int.
+	 */
 	public void setTop(int top) {
 		this.top = top;
 	}
 
+	/**
+	 * <p>Setter for the field topType.</p>
+	 *
+	 * @param topType a int.
+	 */
 	public void setTopType(int topType) {
 		this.topType = topType;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "[" + this.top + "," + this.left + "," + this.bottom + "," + this.right + "]";

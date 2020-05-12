@@ -22,8 +22,11 @@
 package org.loboevolution.html.dom.smil;
 
 /**
- * A <code>seq</code> container defines a sequence of elements in which elements
+ * A seq container defines a sequence of elements in which elements
  * play one after the other.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ElementSequentialTimeContainer extends ElementTimeContainer {
 }

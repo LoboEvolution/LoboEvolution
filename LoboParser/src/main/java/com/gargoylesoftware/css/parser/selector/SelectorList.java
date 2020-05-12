@@ -22,6 +22,7 @@ import java.util.List;
  * implemented.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public interface SelectorList extends List<Selector> {
 }

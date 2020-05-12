@@ -20,6 +20,12 @@ import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.SQLiteCommon;
 import org.loboevolution.util.DateUtil;
 
+/**
+ * <p>CookieManager class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CookieManager {
 
 	private static String DELETE_COOKIES = "DELETE FROM COOKIE";
@@ -27,6 +33,9 @@ public class CookieManager {
 	/** The date pattern. */
 	private static String PATTERN = "dd/MM/yyyy";
 
+	/**
+	 * <p>deleteCookies.</p>
+	 */
 	public static void deleteCookies() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
@@ -36,6 +45,12 @@ public class CookieManager {
 		}
 	}
 
+	/**
+	 * <p>getCookieList.</p>
+	 *
+	 * @param address a {@link java.lang.String} object.
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<CookieInfo> getCookieList(String address) {
 		URL url;
 		List<CookieInfo> cookies = new ArrayList<CookieInfo>();
@@ -79,6 +94,11 @@ public class CookieManager {
 		return cookies;
 	}
 
+	/**
+	 * <p>putCookies.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 */
 	public static void putCookies(String uri) {
 		try {
 			final URL url = new URL(uri);
@@ -180,6 +200,18 @@ public class CookieManager {
 		}
 	}
 
+	/**
+	 * <p>saveCookie.</p>
+	 *
+	 * @param domain a {@link java.lang.String} object.
+	 * @param path a {@link java.lang.String} object.
+	 * @param name a {@link java.lang.String} object.
+	 * @param expires a {@link java.util.Date} object.
+	 * @param value a {@link java.lang.String} object.
+	 * @param maxAge a {@link java.lang.String} object.
+	 * @param secure a boolean.
+	 * @param httponly a boolean.
+	 */
 	public static void saveCookie(String domain, String path, String name, Date expires, String value, String maxAge,
 			boolean secure, boolean httponly) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -199,6 +231,12 @@ public class CookieManager {
 		}
 	}
 
+	/**
+	 * <p>saveCookie.</p>
+	 *
+	 * @param url a {@link java.net.URL} object.
+	 * @param cookieSpec a {@link java.lang.String} object.
+	 */
 	public static void saveCookie(URL url, String cookieSpec) {
 		saveCookie(url.getHost(), cookieSpec);
 	}

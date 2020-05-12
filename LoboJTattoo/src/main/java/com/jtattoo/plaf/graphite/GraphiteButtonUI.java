@@ -39,14 +39,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseButtonUI;
 
 /**
+ * <p>GraphiteButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteButtonUI extends BaseButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (AbstractLookAndFeel.getTheme().doDrawSquareButtons()) {
@@ -68,6 +73,7 @@ public class GraphiteButtonUI extends BaseButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
 			Rectangle iconRect) {

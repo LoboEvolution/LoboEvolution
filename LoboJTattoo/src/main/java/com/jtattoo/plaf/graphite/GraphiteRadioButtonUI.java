@@ -34,12 +34,16 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseRadioButtonUI;
 
 /**
+ * <p>GraphiteRadioButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteRadioButtonUI extends BaseRadioButtonUI {
 
 	private static GraphiteRadioButtonUI radioButtonUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new GraphiteRadioButtonUI();
@@ -47,6 +51,7 @@ public class GraphiteRadioButtonUI extends BaseRadioButtonUI {
 		return radioButtonUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
 		g.setColor(AbstractLookAndFeel.getFocusColor());

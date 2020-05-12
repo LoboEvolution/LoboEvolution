@@ -19,20 +19,28 @@ class SubtleSquareBorder implements Border {
 
 	protected boolean roundc = false;
 
+	/**
+	 * <p>Constructor for SubtleSquareBorder.</p>
+	 *
+	 * @param round_corners a boolean.
+	 */
 	public SubtleSquareBorder(boolean round_corners) {
 		this.roundc = round_corners;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Insets getBorderInsets(Component c) {
 		return new Insets(this.m_h, this.m_w, this.m_h, this.m_w);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isBorderOpaque() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 		w = w - 3;

@@ -16,31 +16,52 @@ import org.mozilla.javascript.Undefined;
  * This class represents the JavaScript "DataView" interface, which allows direct manipulations of the
  * bytes in a NativeArrayBuffer. Java programmers would be best off getting the underling "byte[]" array
  * from the NativeArrayBuffer and manipulating it directly, perhaps using the "ByteIo" class as a helper.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
-
 public class NativeDataView
     extends NativeArrayBufferView
 {
     private static final long serialVersionUID = 1427967607557438968L;
 
+    /** Constant CLASS_NAME="DataView" */
     public static final String CLASS_NAME = "DataView";
 
+    /**
+     * <p>Constructor for NativeDataView.</p>
+     */
     public NativeDataView()
     {
         super();
     }
 
+    /**
+     * <p>Constructor for NativeDataView.</p>
+     *
+     * @param ab a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
+     * @param offset a int.
+     * @param length a int.
+     */
     public NativeDataView(NativeArrayBuffer ab, int offset, int length)
     {
         super(ab, offset, length);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeDataView dv = new NativeDataView();
@@ -248,6 +269,7 @@ public class NativeDataView
 
     // Function dispatcher
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -303,6 +325,7 @@ public class NativeDataView
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -333,6 +356,7 @@ public class NativeDataView
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

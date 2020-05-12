@@ -40,7 +40,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>SmartIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartIcons extends BaseIcons {
 
@@ -147,6 +150,11 @@ public class SmartIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -158,6 +166,11 @@ public class SmartIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -169,6 +182,11 @@ public class SmartIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -180,6 +198,11 @@ public class SmartIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {

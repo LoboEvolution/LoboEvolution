@@ -36,14 +36,19 @@ import com.jtattoo.plaf.BaseMenuItemUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>GraphiteMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteMenuItemUI extends BaseMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
 		JMenuItem mi = (JMenuItem) c;

@@ -28,12 +28,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>TextureCheckBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureCheckBoxUI extends TextureRadioButtonUI {
 
 	private static TextureCheckBoxUI checkBoxUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new TextureCheckBoxUI();
@@ -41,6 +45,7 @@ public class TextureCheckBoxUI extends TextureRadioButtonUI {
 		return checkBoxUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);

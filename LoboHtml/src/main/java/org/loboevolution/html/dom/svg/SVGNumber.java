@@ -22,8 +22,25 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGNumber interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGNumber {
+	/**
+	 * <p>getValue.</p>
+	 *
+	 * @return a float.
+	 */
 	float getValue();
 
+	/**
+	 * <p>setValue.</p>
+	 *
+	 * @param value a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setValue(float value) throws DOMException;
 }

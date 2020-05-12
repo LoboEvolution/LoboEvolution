@@ -26,6 +26,12 @@ import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.events.MouseEvent;
 import org.w3c.dom.views.AbstractView;
 
+/**
+ * <p>MouseEventImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	private int screenX;
@@ -50,6 +56,15 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 
 	private InputEvent ie;
 
+	/**
+	 * <p>Constructor for MouseEventImpl.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @param shiftKey a boolean.
+	 * @param ctrlKey a boolean.
+	 * @param altKey a boolean.
+	 * @param button a int.
+	 */
 	public MouseEventImpl(final String type, final boolean shiftKey, final boolean ctrlKey,
 			final boolean altKey, final int button) {
 		super(type, ("dblclick".equals(type) ? 2 :1), null);
@@ -59,6 +74,9 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 		this.button = (short)button;
 	}
 
+	/**
+	 * <p>Constructor for MouseEventImpl.</p>
+	 */
 	public MouseEventImpl() {
 		this.shiftKey = false;
 		this.ctrlKey = false;
@@ -66,46 +84,55 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 		this.button = 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getScreenX() {
 		return screenX;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getScreenY() {
 		return screenY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClientX() {
 		return clientX;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClientY() {
 		return clientY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getCtrlKey() {
 		return ctrlKey ? ie.isControlDown() : false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getShiftKey() {
 		return shiftKey ? ie.isShiftDown() : false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getAltKey() {
 		return altKey ? ie.isAltDown() : false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getMetaKey() {
 		return metaKey;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getButton() {
 		if (ie instanceof MouseEvent) {
@@ -115,19 +142,31 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public EventTarget getRelatedTarget() {
 		return this.relatedTarget;
 	}
 
+	/**
+	 * <p>Getter for the field ie.</p>
+	 *
+	 * @return a {@link java.awt.event.InputEvent} object.
+	 */
 	public InputEvent getIe() {
 		return ie;
 	}
 
+	/**
+	 * <p>Setter for the field ie.</p>
+	 *
+	 * @param ie a {@link java.awt.event.InputEvent} object.
+	 */
 	public void setIe(InputEvent ie) {
 		this.ie = ie;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void initMouseEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, AbstractView viewArg,
 			int detailArg, int screenXArg, int screenYArg, int clientXArg, int clientYArg, boolean ctrlKeyArg,

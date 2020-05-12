@@ -2,6 +2,12 @@ package org.loboevolution.info;
 
 import java.io.Serializable;
 
+/**
+ * <p>CookieInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CookieInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -27,6 +33,8 @@ public class CookieInfo implements Serializable {
 	private int version;
 
 	/**
+	 * <p>Getter for the field comment.</p>
+	 *
 	 * @return the comment
 	 */
 	public String getComment() {
@@ -34,6 +42,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field domain.</p>
+	 *
 	 * @return the domain
 	 */
 	public String getDomain() {
@@ -41,6 +51,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field expires.</p>
+	 *
 	 * @return the expires
 	 */
 	public String getExpires() {
@@ -48,6 +60,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field maxAge.</p>
+	 *
 	 * @return the maxAge
 	 */
 	public int getMaxAge() {
@@ -55,6 +69,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field name.</p>
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -62,6 +78,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field path.</p>
+	 *
 	 * @return the path
 	 */
 	public String getPath() {
@@ -69,6 +87,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field value.</p>
+	 *
 	 * @return the value
 	 */
 	public String getValue() {
@@ -76,6 +96,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field version.</p>
+	 *
 	 * @return the version
 	 */
 	public int getVersion() {
@@ -83,6 +105,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>isHttpOnly.</p>
+	 *
 	 * @return the httpOnly
 	 */
 	public boolean isHttpOnly() {
@@ -90,6 +114,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>isSecure.</p>
+	 *
 	 * @return the secure
 	 */
 	public boolean isSecure() {
@@ -97,6 +123,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field comment.</p>
+	 *
 	 * @param comment the comment to set
 	 */
 	public void setComment(String comment) {
@@ -104,6 +132,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field domain.</p>
+	 *
 	 * @param domain the domain to set
 	 */
 	public void setDomain(String domain) {
@@ -111,6 +141,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field expires.</p>
+	 *
 	 * @param expires the expires to set
 	 */
 	public void setExpires(String expires) {
@@ -118,6 +150,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field httpOnly.</p>
+	 *
 	 * @param httpOnly the httpOnly to set
 	 */
 	public void setHttpOnly(boolean httpOnly) {
@@ -125,6 +159,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field maxAge.</p>
+	 *
 	 * @param maxAge the maxAge to set
 	 */
 	public void setMaxAge(int maxAge) {
@@ -132,6 +168,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field name.</p>
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -139,6 +177,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field path.</p>
+	 *
 	 * @param path the path to set
 	 */
 	public void setPath(String path) {
@@ -146,6 +186,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field secure.</p>
+	 *
 	 * @param secure the secure to set
 	 */
 	public void setSecure(boolean secure) {
@@ -153,6 +195,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field value.</p>
+	 *
 	 * @param value the value to set
 	 */
 	public void setValue(String value) {
@@ -160,6 +204,8 @@ public class CookieInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field version.</p>
+	 *
 	 * @param version the version to set
 	 */
 	public void setVersion(int version) {

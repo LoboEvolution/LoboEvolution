@@ -30,13 +30,18 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseRootPaneUI;
 
 /**
+ * <p>AeroRootPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AeroRootPaneUI extends BaseRootPaneUI {
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AeroRootPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JComponent createTitlePane(JRootPane root) {
 		return new AeroTitlePane(root, this);

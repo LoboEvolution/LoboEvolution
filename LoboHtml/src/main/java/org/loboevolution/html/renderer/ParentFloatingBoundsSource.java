@@ -22,6 +22,12 @@ package org.loboevolution.html.renderer;
 
 import java.util.Objects;
 
+/**
+ * <p>ParentFloatingBoundsSource class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	private final int blockShiftRight;
 	private final int expectedBlockWidth;
@@ -29,6 +35,15 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 	private final int newX;
 	private final int newY;
 
+	/**
+	 * <p>Constructor for ParentFloatingBoundsSource.</p>
+	 *
+	 * @param blockShiftRight a int.
+	 * @param expectedWidth a int.
+	 * @param newX a int.
+	 * @param newY a int.
+	 * @param floatBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
+	 */
 	public ParentFloatingBoundsSource(int blockShiftRight, int expectedWidth, int newX, int newY,
 			FloatingBounds floatBounds) {
 		super();
@@ -39,6 +54,7 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 		this.floatBounds = floatBounds;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		// Important for layout caching.
@@ -52,12 +68,14 @@ public class ParentFloatingBoundsSource implements FloatingBoundsSource {
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth) {
 		final int actualRightShift = this.blockShiftRight + this.expectedBlockWidth - apparentBlockWidth;
 		return new ShiftedFloatingBounds(this.floatBounds, -this.newX, -actualRightShift, -this.newY);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		return this.newX ^ this.newY ^ this.blockShiftRight ^ this.expectedBlockWidth;

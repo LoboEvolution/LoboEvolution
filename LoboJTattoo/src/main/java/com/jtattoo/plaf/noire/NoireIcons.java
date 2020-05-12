@@ -28,22 +28,45 @@ import com.jtattoo.plaf.BaseIcons;
 import com.jtattoo.plaf.hifi.HiFiIcons;
 
 /**
+ * <p>NoireIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class NoireIcons extends HiFiIcons {
 
+	/**
+	 * <p>getDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getDownArrowIcon() {
 		return BaseIcons.getDownArrowIcon();
 	}
 
+	/**
+	 * <p>getLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getLeftArrowIcon() {
 		return BaseIcons.getLeftArrowIcon();
 	}
 
+	/**
+	 * <p>getRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRightArrowIcon() {
 		return BaseIcons.getRightArrowIcon();
 	}
 
+	/**
+	 * <p>getUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getUpArrowIcon() {
 		return BaseIcons.getUpArrowIcon();
 	}

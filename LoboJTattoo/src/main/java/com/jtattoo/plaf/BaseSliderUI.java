@@ -42,7 +42,10 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSliderUI;
 
 /**
+ * <p>BaseSliderUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseSliderUI extends BasicSliderUI {
 
@@ -83,21 +86,33 @@ public class BaseSliderUI extends BasicSliderUI {
 
 	} // end of class MyTrackListener
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseSliderUI((JSlider) c);
 	}
 
 	protected boolean isRollover = false;
 
+	/**
+	 * <p>Constructor for BaseSliderUI.</p>
+	 *
+	 * @param slider a {@link javax.swing.JSlider} object.
+	 */
 	public BaseSliderUI(JSlider slider) {
 		super(slider);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TrackListener createTrackListener(JSlider slider) {
 		return new MyTrackListener();
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public Icon getThumbHorIcon() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
 			return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbHorIcon();
@@ -105,6 +120,11 @@ public class BaseSliderUI extends BasicSliderUI {
 		return null;
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public Icon getThumbHorIconRollover() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
 			return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbHorIconRollover();
@@ -112,6 +132,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Dimension getThumbSize() {
 		Dimension size = super.getThumbSize();
@@ -127,6 +148,11 @@ public class BaseSliderUI extends BasicSliderUI {
 		return size;
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public Icon getThumbVerIcon() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
 			return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbVerIcon();
@@ -134,6 +160,11 @@ public class BaseSliderUI extends BasicSliderUI {
 		return null;
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public Icon getThumbVerIconRollover() {
 		if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
 			return ((AbstractLookAndFeel) UIManager.getLookAndFeel()).getIconFactory().getThumbVerIconRollover();
@@ -141,6 +172,11 @@ public class BaseSliderUI extends BasicSliderUI {
 		return null;
 	}
 
+	/**
+	 * <p>getTrackWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getTrackWidth() {
 		if (slider.getOrientation() == SwingConstants.HORIZONTAL) {
 			return thumbRect.height - 9;
@@ -149,11 +185,13 @@ public class BaseSliderUI extends BasicSliderUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean isDragging() {
 		return super.isDragging();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		paintBackground(g, c);
@@ -182,6 +220,12 @@ public class BaseSliderUI extends BasicSliderUI {
 		}
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link javax.swing.JComponent} object.
+	 */
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
 			if (c.getBackground() instanceof ColorUIResource) {
@@ -193,6 +237,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintThumb(Graphics g) {
 		Icon icon;
@@ -221,6 +266,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		g2D.setComposite(savedComposite);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintTicks(Graphics g) {
 		boolean leftToRight = JTattooUtilities.isLeftToRight(slider);
@@ -293,6 +339,7 @@ public class BaseSliderUI extends BasicSliderUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintTrack(Graphics g) {
 		boolean leftToRight = JTattooUtilities.isLeftToRight(slider);

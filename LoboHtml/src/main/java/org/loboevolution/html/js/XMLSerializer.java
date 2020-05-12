@@ -20,6 +20,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.html.HTMLDocument;
 
+/**
+ * <p>XMLSerializer class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class XMLSerializer extends AbstractScriptableDelegate {
 
 	/** The Constant logger. */
@@ -27,7 +33,7 @@ public class XMLSerializer extends AbstractScriptableDelegate {
 
 	/**
 	 * The subtree rooted by the specified element is serialized to a string.
-	 * 
+	 *
 	 * @param root
 	 *            the root of the subtree to be serialized (this may be any
 	 *            node, even a document)

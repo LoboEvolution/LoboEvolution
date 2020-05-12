@@ -20,8 +20,24 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAnimatedPreserveAspectRatio interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedPreserveAspectRatio {
+	/**
+	 * <p>getBaseVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPreserveAspectRatio} object.
+	 */
 	SVGPreserveAspectRatio getBaseVal();
 
+	/**
+	 * <p>getAnimVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPreserveAspectRatio} object.
+	 */
 	SVGPreserveAspectRatio getAnimVal();
 }

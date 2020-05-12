@@ -44,12 +44,15 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
+ * <p>BaseSplitPaneDivider class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 
 	/**
-	 * Used to layout a <code>BasicSplitPaneDivider</code>. Layout for the divider
+	 * Used to layout a BasicSplitPaneDivider. Layout for the divider
 	 * involves appropriately moving the left/right buttons around.
 	 */
 	protected class MyDividerLayout implements LayoutManager {
@@ -157,6 +160,11 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 
 	protected boolean flatMode = false;
 
+	/**
+	 * <p>Constructor for BaseSplitPaneDivider.</p>
+	 *
+	 * @param ui a {@link javax.swing.plaf.basic.BasicSplitPaneUI} object.
+	 */
 	public BaseSplitPaneDivider(BasicSplitPaneUI ui) {
 		super(ui);
 		if (UIManager.get("SplitPane.centerOneTouchButtons") != null) {
@@ -169,6 +177,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createLeftOneTouchButton() {
 		JButton b = new JButton() {
@@ -226,6 +235,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		return b;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createRightOneTouchButton() {
 		JButton b = new JButton() {
@@ -283,19 +293,31 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		return b;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getBorder() {
 		return null;
 	}
 
+	/**
+	 * <p>getRolloverColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	public Color getRolloverColor() {
 		return ColorHelper.darker(AbstractLookAndFeel.getTheme().getRolloverColor(), 16);
 	}
 
+	/**
+	 * <p>isFlatMode.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isFlatMode() {
 		return flatMode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		if (!isFlatMode()) {
@@ -364,6 +386,11 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 		paintComponents(g);
 	}
 
+	/**
+	 * <p>Setter for the field flatMode.</p>
+	 *
+	 * @param flatMode a boolean.
+	 */
 	public void setFlatMode(boolean flatMode) {
 		this.flatMode = flatMode;
 	}

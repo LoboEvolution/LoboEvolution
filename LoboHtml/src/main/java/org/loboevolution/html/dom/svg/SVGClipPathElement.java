@@ -20,8 +20,19 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGClipPathElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGClipPathElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGStylable, SVGTransformable, SVGUnitTypes {
 
+	/**
+	 * <p>getClipPathUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getClipPathUnits();
 }

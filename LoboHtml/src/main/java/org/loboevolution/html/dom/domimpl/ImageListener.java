@@ -20,8 +20,20 @@
 */
 package org.loboevolution.html.dom.domimpl;
 
+/**
+ * <p>ImageListener interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface ImageListener extends java.util.EventListener {
+	/** Constant EMPTY_ARRAY */
 	ImageListener[] EMPTY_ARRAY = new ImageListener[0];
 
+	/**
+	 * <p>imageLoaded.</p>
+	 *
+	 * @param event a {@link org.loboevolution.html.dom.domimpl.ImageEvent} object.
+	 */
 	void imageLoaded(ImageEvent event);
 }

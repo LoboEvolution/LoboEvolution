@@ -21,7 +21,18 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGStylable, SVGTransformable, Drawable {
+	/**
+	 * <p>getTarget.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getTarget();
 }

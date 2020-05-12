@@ -7,6 +7,12 @@ import javax.swing.JOptionPane;
 
 import org.loboevolution.store.ToolsStore;
 
+/**
+ * <p>SetAsDefaultAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SetAsDefaultAction<T> extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
@@ -14,6 +20,11 @@ public class SetAsDefaultAction<T> extends AbstractAction {
 
 	private transient ItemListControl<T> item;
 
+	/**
+	 * <p>Constructor for SetAsDefaultAction.</p>
+	 *
+	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemListControl} object.
+	 */
 	public SetAsDefaultAction(ItemListControl<T> item) {
 		this.item = item;
 	}
@@ -24,6 +35,7 @@ public class SetAsDefaultAction<T> extends AbstractAction {
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 	 * ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (JOptionPane.showConfirmDialog(this.item, "Are you sure you want set as default the selected item?",

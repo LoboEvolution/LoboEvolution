@@ -9,16 +9,28 @@ import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.ToolBar;
 import org.loboevolution.net.HttpNetwork;
 
+/**
+ * <p>SourceAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SourceAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
 	private final BrowserFrame frame;
 
+	/**
+	 * <p>Constructor for SourceAction.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public SourceAction(BrowserFrame frame) {
 		this.frame = frame;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		try {

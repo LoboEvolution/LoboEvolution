@@ -33,18 +33,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseSliderUI;
 
 /**
+ * <p>TextureSliderUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureSliderUI extends BaseSliderUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureSliderUI((JSlider) c);
 	}
 
+	/**
+	 * <p>Constructor for TextureSliderUI.</p>
+	 *
+	 * @param slider a {@link javax.swing.JSlider} object.
+	 */
 	public TextureSliderUI(JSlider slider) {
 		super(slider);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

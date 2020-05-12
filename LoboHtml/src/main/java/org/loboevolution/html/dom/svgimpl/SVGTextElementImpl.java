@@ -24,62 +24,83 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGTextElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 
+	/**
+	 * <p>Constructor for SVGTextElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGTextElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getX() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(getAttribute("x")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getY() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(getAttribute("y")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getDx() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(getAttribute("dx")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getDy() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(getAttribute("dy")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedNumberList getRotate() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getTextLength() {
 		final String text = getText();
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(text.length()));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedEnumeration getLengthAdjust() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getNumberOfChars() {
 		final String text = getText();
 		return text.toCharArray().length;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getComputedTextLength() {
 		final String text = getText();
 		return text.length();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getSubStringLength(int charnum, int nchars) throws DOMException {
 		String text = getText();
@@ -87,42 +108,49 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 		return text.length();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPoint getStartPositionOfChar(int charnum) throws DOMException {
 		// TODO Auto-generated method stub
 		return new SVGPointImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPoint getEndPositionOfChar(int charnum) throws DOMException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGRect getExtentOfChar(int charnum) throws DOMException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getRotationOfChar(int charnum) throws DOMException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getCharNumAtPosition(SVGPoint point) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void selectSubString(int charnum, int nchars) throws DOMException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
@@ -131,6 +159,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		AffineTransform inverseTransform;

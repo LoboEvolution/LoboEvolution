@@ -8,6 +8,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <p>NavigationStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NavigationStore {
 
 	private final String DELETE_HOST = "DELETE FROM HOST";
@@ -18,6 +24,12 @@ public class NavigationStore {
 
 	private final String INSERT_HOST = "INSERT INTO HOST (baseUrl, tab, dt) VALUES(?,?, strftime('%Y-%m-%d %H:%M:%S', 'now'))";
 
+	/**
+	 * <p>addAsRecent.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @param index a int.
+	 */
 	public void addAsRecent(String uri, int index) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_HOST)) {
@@ -29,6 +41,9 @@ public class NavigationStore {
 		}
 	}
 
+	/**
+	 * <p>deleteHost.</p>
+	 */
 	public void deleteHost() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
@@ -38,6 +53,12 @@ public class NavigationStore {
 		}
 	}
 	
+	/**
+	 * <p>getHostOrdered.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<String> getHostOrdered(int index) {
 		final List<String> recentHostEntries = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -54,6 +75,12 @@ public class NavigationStore {
 		return recentHostEntries;
 	}
 
+	/**
+	 * <p>getRecentHostEntries.</p>
+	 *
+	 * @param maxNumItems a int.
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<String[]> getRecentHostEntries(int maxNumItems) {
 		final List<String[]> recentHostEntries = new ArrayList<String[]>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());

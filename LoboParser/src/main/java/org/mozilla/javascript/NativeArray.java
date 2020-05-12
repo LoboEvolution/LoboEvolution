@@ -22,8 +22,10 @@ import org.mozilla.javascript.regexp.NativeRegExp;
 
 /**
  * This class implements the Array native object.
+ *
  * @author Norris Boyd
  * @author Mike McCabe
+ * @version $Id: $Id
  */
 public class NativeArray extends IdScriptableObject implements List
 {
@@ -58,6 +60,11 @@ public class NativeArray extends IdScriptableObject implements List
         NativeArray.maximumInitialCapacity = maximumInitialCapacity;
     }
 
+    /**
+     * <p>Constructor for NativeArray.</p>
+     *
+     * @param lengthArg a long.
+     */
     public NativeArray(long lengthArg)
     {
         denseOnly = lengthArg <= maximumInitialCapacity;
@@ -71,6 +78,11 @@ public class NativeArray extends IdScriptableObject implements List
         length = lengthArg;
     }
 
+    /**
+     * <p>Constructor for NativeArray.</p>
+     *
+     * @param array an array of {@link java.lang.Object} objects.
+     */
     public NativeArray(Object[] array)
     {
         denseOnly = true;
@@ -78,6 +90,7 @@ public class NativeArray extends IdScriptableObject implements List
         length = array.length;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
@@ -88,12 +101,14 @@ public class NativeArray extends IdScriptableObject implements List
         Id_length        =  1,
         MAX_INSTANCE_ID  =  1;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
         if (id == Id_length) {
@@ -101,6 +116,7 @@ public class NativeArray extends IdScriptableObject implements List
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -110,6 +126,7 @@ public class NativeArray extends IdScriptableObject implements List
         return super.findInstanceIdInfo(s);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -117,6 +134,7 @@ public class NativeArray extends IdScriptableObject implements List
         return super.getInstanceIdName(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -126,6 +144,7 @@ public class NativeArray extends IdScriptableObject implements List
         return super.getInstanceIdValue(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -135,6 +154,7 @@ public class NativeArray extends IdScriptableObject implements List
         super.setInstanceIdValue(id, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -189,6 +209,7 @@ public class NativeArray extends IdScriptableObject implements List
         super.fillConstructorProperties(ctor);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -237,6 +258,7 @@ public class NativeArray extends IdScriptableObject implements List
         initPrototypeMethod(ARRAY_TAG, id, s, fnName, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -389,6 +411,7 @@ public class NativeArray extends IdScriptableObject implements List
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start)
     {
@@ -399,6 +422,7 @@ public class NativeArray extends IdScriptableObject implements List
         return super.get(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start)
     {
@@ -446,6 +470,7 @@ public class NativeArray extends IdScriptableObject implements List
       return 0 <= index && index < Integer.MAX_VALUE ? (int) index : -1;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(String id, Scriptable start, Object value)
     {
@@ -477,6 +502,7 @@ public class NativeArray extends IdScriptableObject implements List
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value)
     {
@@ -510,6 +536,7 @@ public class NativeArray extends IdScriptableObject implements List
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void delete(int index)
     {
@@ -522,6 +549,7 @@ public class NativeArray extends IdScriptableObject implements List
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] getIds(boolean nonEnumerable, boolean getSymbols)
     {
@@ -554,6 +582,11 @@ public class NativeArray extends IdScriptableObject implements List
         return ids;
     }
 
+    /**
+     * <p>getIndexIds.</p>
+     *
+     * @return a {@link java.util.List} object.
+     */
     public List<Integer> getIndexIds() {
       Object[] ids = getIds();
       List<Integer> indices = new ArrayList<Integer>(ids.length);
@@ -566,6 +599,7 @@ public class NativeArray extends IdScriptableObject implements List
       return indices;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> hint)
     {
@@ -589,6 +623,7 @@ public class NativeArray extends IdScriptableObject implements List
       return desc;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int getAttributes(int index) {
         if (dense != null && index >= 0 && index < dense.length
@@ -598,6 +633,7 @@ public class NativeArray extends IdScriptableObject implements List
         return super.getAttributes(index);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
       if (dense != null) {
@@ -610,6 +646,7 @@ public class NativeArray extends IdScriptableObject implements List
       return super.getOwnPropertyDescriptor(cx, id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void defineOwnProperty(Context cx, Object id,
                                      ScriptableObject desc,
@@ -752,11 +789,21 @@ public class NativeArray extends IdScriptableObject implements List
         return result;
     }
 
+    /**
+     * <p>Getter for the field length.</p>
+     *
+     * @return a long.
+     */
     public long getLength() {
         return length;
     }
 
     /** @deprecated Use {@link #getLength()} instead. */
+    /**
+     * <p>jsGet_length.</p>
+     *
+     * @return a long.
+     */
     @Deprecated
     public long jsGet_length() {
         return getLength();
@@ -2021,16 +2068,19 @@ public class NativeArray extends IdScriptableObject implements List
 
     // methods to implement java.util.List
 
+    /** {@inheritDoc} */
     @Override
     public boolean contains(Object o) {
         return indexOf(o) > -1;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] toArray() {
         return toArray(ScriptRuntime.emptyArgs);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object[] toArray(Object[] a) {
         long longLen = length;
@@ -2047,6 +2097,7 @@ public class NativeArray extends IdScriptableObject implements List
         return array;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean containsAll(Collection c) {
         for (Object aC : c)
@@ -2055,6 +2106,7 @@ public class NativeArray extends IdScriptableObject implements List
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int size() {
         long longLen = length;
@@ -2064,11 +2116,18 @@ public class NativeArray extends IdScriptableObject implements List
         return (int) longLen;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
         return length == 0;
     }
 
+    /**
+     * <p>get.</p>
+     *
+     * @param index a long.
+     * @return a {@link java.lang.Object} object.
+     */
     public Object get(long index) {
         if (index < 0 || index >= length) {
             throw new IndexOutOfBoundsException();
@@ -2083,11 +2142,13 @@ public class NativeArray extends IdScriptableObject implements List
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(int index) {
         return get((long) index);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int indexOf(Object o) {
         long longLen = length;
@@ -2111,6 +2172,7 @@ public class NativeArray extends IdScriptableObject implements List
         return -1;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int lastIndexOf(Object o) {
         long longLen = length;
@@ -2134,16 +2196,19 @@ public class NativeArray extends IdScriptableObject implements List
         return -1;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Iterator iterator() {
         return listIterator(0);
     }
 
+    /** {@inheritDoc} */
     @Override
     public ListIterator listIterator() {
         return listIterator(0);
     }
 
+    /** {@inheritDoc} */
     @Override
     public ListIterator listIterator(final int start) {
         long longLen = length;
@@ -2213,61 +2278,73 @@ public class NativeArray extends IdScriptableObject implements List
         };
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean add(Object o) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean remove(Object o) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean addAll(Collection c) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean removeAll(Collection c) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean retainAll(Collection c) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void add(int index, Object element) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean addAll(int index, Collection c) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object set(int index, Object element) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object remove(int index) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public List subList(int fromIndex, int toIndex) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -2339,6 +2416,7 @@ public class NativeArray extends IdScriptableObject implements List
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -2480,22 +2558,22 @@ public class NativeArray extends IdScriptableObject implements List
     private Object[] dense;
 
     /**
-     * True if all numeric properties are stored in <code>dense</code>.
+     * True if all numeric properties are stored in dense.
      */
     private boolean denseOnly;
 
     /**
-     * The maximum size of <code>dense</code> that will be allocated initially.
+     * The maximum size of dense that will be allocated initially.
      */
     private static int maximumInitialCapacity = 10000;
 
     /**
-     * The default capacity for <code>dense</code>.
+     * The default capacity for dense.
      */
     private static final int DEFAULT_INITIAL_CAPACITY = 10;
 
     /**
-     * The factor to grow <code>dense</code> by.
+     * The factor to grow dense by.
      */
     private static final double GROW_FACTOR = 1.5;
     private static final int MAX_PRE_GROW_SIZE = (int)(Integer.MAX_VALUE / GROW_FACTOR);

@@ -24,6 +24,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>CSSValues class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public enum CSSValues {
 
 	ABSOLUTE("absolute"),
@@ -241,14 +247,31 @@ public enum CSSValues {
 		this.value = value;
 	}
 
+	/**
+	 * <p>Getter for the field value.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getValue() {
 		return value;
 	}
 
+	/**
+	 * <p>isEqual.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public boolean isEqual(String value) {
 		return this.value.equals(value);
 	}
 
+	/**
+	 * <p>get.</p>
+	 *
+	 * @param actionName a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.CSSValues} object.
+	 */
 	public static CSSValues get(String actionName) {
 		CSSValues value = ENUM_MAP.get(actionName);
 		return value == null ? CSSValues.DEFAULT : value;

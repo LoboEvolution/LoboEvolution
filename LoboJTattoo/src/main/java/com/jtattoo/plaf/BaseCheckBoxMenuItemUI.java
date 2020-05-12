@@ -28,14 +28,19 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>BaseCheckBoxMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseCheckBoxMenuItemUI extends BaseMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseCheckBoxMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();

@@ -19,8 +19,22 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.store.GeneralStore;
 
+/**
+ * <p>GradientStyle class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class GradientStyle {
 	
+	/**
+	 * <p>gradientToImg.</p>
+	 *
+	 * @param props a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param backgroundImage a {@link java.lang.String} object.
+	 * @return a {@link java.awt.image.BufferedImage} object.
+	 */
 	public BufferedImage gradientToImg(AbstractCSSProperties props, RenderState renderState, String backgroundImage) {
 		BufferedImage image = null;
 		final int idx = backgroundImage.indexOf("(");

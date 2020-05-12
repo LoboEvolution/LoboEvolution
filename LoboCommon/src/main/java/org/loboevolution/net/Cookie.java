@@ -30,6 +30,7 @@ import java.net.URLEncoder;
  * The Class Cookie.
  *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class Cookie extends NameValuePair {
 	
@@ -57,6 +58,12 @@ public class Cookie extends NameValuePair {
 	/** The version. */
 	private boolean httpOnly;
 
+	/**
+	 * <p>Constructor for Cookie.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public Cookie(String name, String value) {
 		super(name, value);
 	}
@@ -65,7 +72,7 @@ public class Cookie extends NameValuePair {
 	 * Gets the encoded name.
 	 *
 	 * @return the encoded name
-	 * @throws UnsupportedEncodingException
+	 * @throws java.io.UnsupportedEncodingException
 	 *             the unsupported encoding exception
 	 */
 	public String getEncodedName() throws UnsupportedEncodingException {
@@ -76,7 +83,7 @@ public class Cookie extends NameValuePair {
 	 * Gets the encoded value.
 	 *
 	 * @return the encoded value
-	 * @throws UnsupportedEncodingException
+	 * @throws java.io.UnsupportedEncodingException
 	 *             the unsupported encoding exception
 	 */
 	public String getEncodedValue() throws UnsupportedEncodingException {
@@ -114,6 +121,8 @@ public class Cookie extends NameValuePair {
 	}
 
 	/**
+	 * <p>Setter for the field expires.</p>
+	 *
 	 * @param expires the expires to set
 	 */
 	public void setExpires(String expires) {
@@ -227,10 +236,20 @@ public class Cookie extends NameValuePair {
 		return version;
 	}
 
+	/**
+	 * <p>isHttpOnly.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isHttpOnly() {
 		return httpOnly;
 	}
 
+	/**
+	 * <p>Setter for the field httpOnly.</p>
+	 *
+	 * @param httpOnly a boolean.
+	 */
 	public void setHttpOnly(boolean httpOnly) {
 		boolean old = isHttpOnly();
 		this.httpOnly = httpOnly;
@@ -242,6 +261,7 @@ public class Cookie extends NameValuePair {
 	 * 
 	 * @see org.loboevolution.util.NameValuePair#toString()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "Cookie [" + getName() + "=" + getValue() + ", " + "Comment=" + getComment() + ", " + "Domain="

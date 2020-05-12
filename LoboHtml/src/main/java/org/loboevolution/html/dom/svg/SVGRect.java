@@ -23,20 +23,70 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGRect interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGRect {
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX();
 
+	/**
+	 * <p>setX.</p>
+	 *
+	 * @param x a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setX(float x) throws DOMException;
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a float.
+	 */
 	float getY();
 
+	/**
+	 * <p>setY.</p>
+	 *
+	 * @param y a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setY(float y) throws DOMException;
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a float.
+	 */
 	float getWidth();
 
+	/**
+	 * <p>setWidth.</p>
+	 *
+	 * @param width a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setWidth(float width) throws DOMException;
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a float.
+	 */
 	float getHeight();
 
+	/**
+	 * <p>setHeight.</p>
+	 *
+	 * @param height a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setHeight(float height) throws DOMException;
 }

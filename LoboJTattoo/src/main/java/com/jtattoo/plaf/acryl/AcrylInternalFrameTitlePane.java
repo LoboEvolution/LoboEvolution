@@ -40,7 +40,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AcrylInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -208,25 +211,34 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for AcrylInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public AcrylInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected LayoutManager createLayout() {
 		return new BaseTitlePaneLayout();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getHorSpacing() {
 		return 1;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getVerSpacing() {
 		return 3;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {
@@ -237,6 +249,7 @@ public class AcrylInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		Color shadowColor = AbstractLookAndFeel.getWindowTitleColorDark();

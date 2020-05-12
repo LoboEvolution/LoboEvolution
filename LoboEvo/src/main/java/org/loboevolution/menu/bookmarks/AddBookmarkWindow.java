@@ -17,6 +17,12 @@ import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 
+/**
+ * <p>AddBookmarkWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class AddBookmarkWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -34,6 +40,11 @@ public class AddBookmarkWindow extends JFrame {
 	/** The url field. */
 	private transient FormField urlField = new FormField(FieldType.TEXT, "URL:");
 
+	/**
+	 * <p>Constructor for AddBookmarkWindow.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 */
 	public AddBookmarkWindow(String uri) {
 		createAndShowGUI(uri);
 	}
@@ -76,6 +87,8 @@ public class AddBookmarkWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field descriptionField.</p>
+	 *
 	 * @return the descriptionField
 	 */
 	public FormField getDescriptionField() {
@@ -83,6 +96,8 @@ public class AddBookmarkWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field tagsField.</p>
+	 *
 	 * @return the tagsField
 	 */
 	public FormField getTagsField() {
@@ -90,6 +105,8 @@ public class AddBookmarkWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field titleField.</p>
+	 *
 	 * @return the titleField
 	 */
 	public FormField getTitleField() {
@@ -97,6 +114,8 @@ public class AddBookmarkWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Getter for the field urlField.</p>
+	 *
 	 * @return the urlField
 	 */
 	public FormField getUrlField() {
@@ -104,6 +123,8 @@ public class AddBookmarkWindow extends JFrame {
 	}
 
 	/**
+	 * <p>Setter for the field urlField.</p>
+	 *
 	 * @param urlField the urlField to set
 	 */
 	public void setUrlField(FormField urlField) {

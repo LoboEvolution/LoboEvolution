@@ -43,14 +43,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		Color SEP_COLORS[] = { ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
@@ -61,6 +66,7 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
 		return SEP_COLORS;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
 			Rectangle textRect, boolean isSelected) {

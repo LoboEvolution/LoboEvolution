@@ -26,9 +26,20 @@ import java.util.WeakHashMap;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.Undefined;
 
+/**
+ * <p>JavaScript class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class JavaScript {
 	private static JavaScript instance = new JavaScript();
 
+	/**
+	 * <p>Getter for the field instance.</p>
+	 *
+	 * @return a {@link org.loboevolution.js.JavaScript} object.
+	 */
 	public static JavaScript getInstance() {
 		return instance;
 	}
@@ -48,6 +59,13 @@ public class JavaScript {
 	// Keys are java objects other than ScriptableDelegate instances.
 	private final WeakHashMap<Object, WeakReference<JavaObjectWrapper>> javaObjectToWrapper = new WeakHashMap<Object, WeakReference<JavaObjectWrapper>>();
 
+	/**
+	 * <p>getJavaObject.</p>
+	 *
+	 * @param javascriptObject a {@link java.lang.Object} object.
+	 * @param type a {@link java.lang.Class} object.
+	 * @return a {@link java.lang.Object} object.
+	 */
 	public Object getJavaObject(Object javascriptObject, Class<?> type) {
 		if (javascriptObject instanceof JavaObjectWrapper) {
 			final Object rawJavaObject = ((JavaObjectWrapper) javascriptObject).getJavaObject();
@@ -94,9 +112,10 @@ public class JavaScript {
 
 	/**
 	 * Returns an object that may be used by the Javascript engine.
-	 * 
-	 * @param raw
-	 * @return
+	 *
+	 * @param raw a {@link java.lang.Object} object.
+	 * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+	 * @return a {@link java.lang.Object} object.
 	 */
 	public Object getJavascriptObject(Object raw, Scriptable scope) {
 		if (raw instanceof String || raw instanceof Scriptable) {

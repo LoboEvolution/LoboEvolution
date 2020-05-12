@@ -37,7 +37,10 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
 import com.jtattoo.plaf.AbstractLookAndFeel;
 
 /**
+ * <p>TexturePopupMenuSeparatorUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 
@@ -45,6 +48,7 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 	private static final Color BORDER_COLORS[] = new Color[] { Color.black, new Color(164, 164, 164),
 			new Color(48, 48, 48), new Color(128, 128, 128) };
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TexturePopupMenuSeparatorUI();
 	}
@@ -60,11 +64,13 @@ public class TexturePopupMenuSeparatorUI extends BasicSeparatorUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
 		return PREF_SIZE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);

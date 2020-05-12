@@ -25,6 +25,12 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+/**
+ * <p>JavaConstructorObject class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class JavaConstructorObject extends ScriptableObject implements Function {
 
 	public static class SimpleInstantiator implements JavaInstantiator {
@@ -47,23 +53,38 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 
 	private final String name;
 
+	/**
+	 * <p>Constructor for JavaConstructorObject.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param classWrapper a {@link org.loboevolution.js.JavaClassWrapper} object.
+	 */
 	public JavaConstructorObject(String name, JavaClassWrapper classWrapper) {
 		this.name = name;
 		this.classWrapper = classWrapper;
 		this.instantiator = new SimpleInstantiator(classWrapper);
 	}
 
+	/**
+	 * <p>Constructor for JavaConstructorObject.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param classWrapper a {@link org.loboevolution.js.JavaClassWrapper} object.
+	 * @param instantiator a {@link org.loboevolution.js.JavaInstantiator} object.
+	 */
 	public JavaConstructorObject(String name, JavaClassWrapper classWrapper, JavaInstantiator instantiator) {
 		this.name = name;
 		this.classWrapper = classWrapper;
 		this.instantiator = instantiator;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
 		throw new UnsupportedOperationException();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
 		try {
@@ -76,11 +97,13 @@ public class JavaConstructorObject extends ScriptableObject implements Function 
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
 		return this.name;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public java.lang.Object getDefaultValue(java.lang.Class hint) {
 		if (String.class.equals(hint)) {

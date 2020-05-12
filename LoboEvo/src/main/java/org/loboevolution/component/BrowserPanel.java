@@ -12,6 +12,12 @@ import org.loboevolution.tab.TabbedHtml;
 import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.welcome.WelcomePanel;
 
+/**
+ * <p>BrowserPanel class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BrowserPanel extends JPanel implements IBrowserPanel {
 	private static final long serialVersionUID = 1L;
 
@@ -23,6 +29,11 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	
 	private BrowserFrame browserFrame;
 
+	/**
+	 * <p>Constructor for BrowserPanel.</p>
+	 *
+	 * @param browserFrame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public BrowserPanel(BrowserFrame browserFrame) {
 		super(new BorderLayout());
 		this.browserFrame = browserFrame;
@@ -50,6 +61,8 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	}
 
 	/**
+	 * <p>Getter for the field scroll.</p>
+	 *
 	 * @return the scroll
 	 */
 	public JScrollPane getScroll() {
@@ -57,6 +70,8 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	}
 
 	/**
+	 * <p>Getter for the field tabbedPane.</p>
+	 *
 	 * @return the tabbedPane
 	 */
 	public DnDTabbedPane getTabbedPane() {
@@ -64,6 +79,8 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	}
 
 	/**
+	 * <p>Getter for the field welcome.</p>
+	 *
 	 * @return the welcome
 	 */
 	public IWelcomePanel getWelcome() {
@@ -71,6 +88,8 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 	}
 	
 	/**
+	 * <p>Getter for the field browserFrame.</p>
+	 *
 	 * @return the browserFrame
 	 */
 	public BrowserFrame getBrowserFrame() {

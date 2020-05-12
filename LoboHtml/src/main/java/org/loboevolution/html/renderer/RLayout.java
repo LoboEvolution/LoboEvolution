@@ -30,8 +30,15 @@ import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
 
+/**
+ * <p>RLayout class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RLayout {
 	
+	/** Constant elementLayout */
 	protected static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<HTMLTag, MarkupLayout>();
 	
 	static {
@@ -391,7 +398,6 @@ public class RLayout {
 		/**
 		 * @param tryToRenderContent If the object is unknown, content is rendered as
 		 *                           HTML.
-		 * @param usesAlignAttribute
 		 */
 		public ObjectLayout(boolean tryToRenderContent) {
 			super(ADD_INLINE);

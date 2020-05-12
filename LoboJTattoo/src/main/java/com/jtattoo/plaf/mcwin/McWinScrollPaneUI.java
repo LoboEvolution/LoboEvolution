@@ -30,14 +30,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseScrollPaneUI;
 
 /**
+ * <p>McWinScrollPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinScrollPaneUI extends BaseScrollPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinScrollPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(JScrollPane p) {
 		super.installDefaults(p);

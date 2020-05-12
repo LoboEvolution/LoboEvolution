@@ -31,18 +31,43 @@ import org.loboevolution.html.dom.domimpl.ModelNode;
 
 /**
  * Represents a renderer (view) node.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface Renderable {
+	/** Constant EMPTY_ARRAY */
 	Renderable[] EMPTY_ARRAY = new Renderable[0];
 
+	/**
+	 * <p>getModelNode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 */
 	ModelNode getModelNode();
 
+	/**
+	 * <p>paint.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	void paint(Graphics g);
 
+	/**
+	 * <p>isFixed.</p>
+	 *
+	 * @return a boolean.
+	 */
 	default public boolean isFixed() {
 		return false;
 	}
 	
+	/**
+	 * <p>findHtmlRenderable.</p>
+	 *
+	 * @param root a {@link org.loboevolution.html.renderer.RCollection} object.
+	 * @return a {@link org.loboevolution.html.renderer.Renderable} object.
+	 */
 	default Renderable findHtmlRenderable(RCollection root) {
 		final Iterator<? extends Renderable> rs = root.getRenderables();
 		if (rs != null) {

@@ -10,6 +10,12 @@ import org.loboevolution.util.DateUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 
+/**
+ * <p>TimeImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TimeImpl implements Time {
 	
 	private short mTimeType;
@@ -18,6 +24,11 @@ public class TimeImpl implements Time {
 	
 	private double mResolvedOffset;
 
+	/**
+	 * <p>Constructor for TimeImpl.</p>
+	 *
+	 * @param timeValue a {@link java.lang.String} object.
+	 */
 	public TimeImpl(String timeValue) {
 		if (timeValue == null) {
 			mTimeType = SMIL_TIME_INDEFINITE;
@@ -50,81 +61,100 @@ public class TimeImpl implements Time {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getResolved() {
 		return this.mResolved;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getResolvedOffset() {
 		return this.mResolvedOffset;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getTimeType() {
 		return this.mTimeType;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public double getOffset() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setOffset(double offset) throws DOMException {
 		this.mResolvedOffset = offset;
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getBaseElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBaseElement(Element baseElement) throws DOMException {
 		// TODO Auto-generated method stub
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getBaseBegin() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBaseBegin(boolean baseBegin) throws DOMException {
 		// TODO Auto-generated method stub
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getEvent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setEvent(String event) throws DOMException {
 		// TODO Auto-generated method stub
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getMarker() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setMarker(String marker) throws DOMException {
 		// TODO Auto-generated method stub
 
 	}
 	
+	/**
+	 * <p>getClockMilliSecs.</p>
+	 *
+	 * @param clockVal a {@link java.lang.String} object.
+	 * @return a float.
+	 */
 	protected static float getClockMilliSecs(String clockVal) {
 		try {
 			if (clockVal.indexOf(':') != -1) {

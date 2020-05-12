@@ -29,12 +29,25 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 
+/**
+ * <p>BodyRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BodyRenderState extends StyleSheetRenderState {
 
+	/**
+	 * <p>Constructor for BodyRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public BodyRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.iBackgroundInfo;
@@ -63,6 +76,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public Color getColor() {
 		Color c = super.getColor();
@@ -80,6 +94,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		return c;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets insets = this.marginInsets;
@@ -140,6 +155,7 @@ public class BodyRenderState extends StyleSheetRenderState {
 		return insets;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidate() {
 		super.invalidate();

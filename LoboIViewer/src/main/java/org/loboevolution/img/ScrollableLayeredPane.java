@@ -27,21 +27,34 @@ import javax.swing.JLayeredPane;
 import javax.swing.JViewport;
 import javax.swing.Scrollable;
 
+/**
+ * <p>ScrollableLayeredPane class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	
 	private static final long serialVersionUID = 1L;
 	private transient LayeredImageView layeredImageView;
 	
 
+	/**
+	 * <p>Constructor for ScrollableLayeredPane.</p>
+	 *
+	 * @param layeredImageView a {@link org.loboevolution.img.LayeredImageView} object.
+	 */
 	public ScrollableLayeredPane(LayeredImageView layeredImageView) {
 		this.layeredImageView = layeredImageView;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
 		return 10;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
 		return 50;
@@ -52,12 +65,14 @@ public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	 * javax.swing.ScrollPaneLayout to determine whether the scroll bars should be
 	 * visible; so these need to be implemented.
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean getScrollableTracksViewportWidth() {
 		return layeredImageView.getTheImage().getResizeStrategy() == ResizeStrategy.SHRINK_TO_FIT
 				|| layeredImageView.getTheImage().getResizeStrategy() == ResizeStrategy.RESIZE_TO_FIT;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getScrollableTracksViewportHeight() {
 		return layeredImageView.getTheImage().getResizeStrategy() == ResizeStrategy.SHRINK_TO_FIT
@@ -67,6 +82,7 @@ public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 	/*
 	 * The getPreferredScrollableViewportSize does not seem to be used.
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredScrollableViewportSize() {
 		if (layeredImageView.getTheImage().getResizeStrategy() == ResizeStrategy.NO_RESIZE)

@@ -24,6 +24,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * <p>AlignValues class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public enum AlignValues {
 	
 	NONE(-1),
@@ -55,14 +61,31 @@ public enum AlignValues {
 		this.value = value;
 	}
 
+	/**
+	 * <p>Getter for the field value.</p>
+	 *
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public Integer getValue() {
 		return value;
 	}
 
+	/**
+	 * <p>isEqual.</p>
+	 *
+	 * @param value a {@link java.lang.Integer} object.
+	 * @return a boolean.
+	 */
 	public boolean isEqual(Integer value) {
 		return this.value == value;
 	}
 
+	/**
+	 * <p>get.</p>
+	 *
+	 * @param actionName a {@link java.lang.Integer} object.
+	 * @return a {@link org.loboevolution.html.AlignValues} object.
+	 */
 	public static AlignValues get(Integer actionName) {
 		AlignValues value = ENUM_MAP.get(actionName);
 		return value == null ? AlignValues.NONE : value;

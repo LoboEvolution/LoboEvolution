@@ -22,8 +22,9 @@ import org.loboevolution.common.Objects;
  * the pixel; override
  * {@link #updateLabel(java.awt.image.BufferedImage, int, int, int)} to
  * customize this information.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public class PixelInfoStatusBar extends StatusBar {
 
@@ -69,7 +70,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 *
 	 * @param newModel
 	 *            the new model
-	 * @throws NullPointerException
+	 * @throws java.lang.NullPointerException
 	 *             if {@code newModel} is {@code null}
 	 */
 	public final void setModel(PixelModel newModel) {
@@ -87,13 +88,14 @@ public class PixelInfoStatusBar extends StatusBar {
 
 	/**
 	 * Returns the model storing the pixel shown by this status bar.
-	 * 
+	 *
 	 * @return the current model; never {@code null}
 	 */
 	public PixelModel getModel() {
 		return model;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final JComponent getComponent() {
 		return statusBar;
@@ -103,7 +105,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 * Sets the pixel this status bar is to display information on. The values may
 	 * be arbitrary; you can use negative values to indicate that there is nothing
 	 * to display.
-	 * 
+	 *
 	 * @param x
 	 *            the x coordinate of the pixel
 	 * @param y
@@ -143,7 +145,7 @@ public class PixelInfoStatusBar extends StatusBar {
 	 * these conditions aren't true, the {@code update} function calls
 	 * {@link #updateLabelNoData()} instead. Override it to provide a custom
 	 * message.
-	 * 
+	 *
 	 * @param image
 	 *            the current image displayed in the viewer
 	 * @param x
@@ -185,12 +187,14 @@ public class PixelInfoStatusBar extends StatusBar {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void register(ImageViewer viewer) {
 		viewer.addPropertyChangeListener("image", propertyChangeListener);
 		update();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void unregister(ImageViewer viewer) {
 		viewer.removePropertyChangeListener("image", propertyChangeListener);

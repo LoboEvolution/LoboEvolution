@@ -14,7 +14,7 @@ import org.mozilla.javascript.Token;
 /**
  * Switch-case AST node type.  The switch case is always part of a
  * switch statement.
- * Node type is {@link Token#CASE}.
+ * Node type is {@link org.mozilla.javascript.Token#CASE}.
  *
  * <pre><i>CaseBlock</i> :
  *        { [CaseClauses] }
@@ -26,6 +26,9 @@ import org.mozilla.javascript.Token;
  *        <b>case</b> Expression : [StatementList]
  * <i>DefaultClause</i> :
  *        <b>default</b> : [StatementList]</pre>
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SwitchCase extends AstNode {
 
@@ -36,19 +39,35 @@ public class SwitchCase extends AstNode {
         type = Token.CASE;
     }
 
+    /**
+     * <p>Constructor for SwitchCase.</p>
+     */
     public SwitchCase() {
     }
 
+    /**
+     * <p>Constructor for SwitchCase.</p>
+     *
+     * @param pos a int.
+     */
     public SwitchCase(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for SwitchCase.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public SwitchCase(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns the case expression, {@code null} for default case
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getExpression() {
         return expression;
@@ -59,7 +78,9 @@ public class SwitchCase extends AstNode {
      * Note that for empty fall-through cases, they still have
      * a case expression.  In {@code case 0: case 1: break;} the
      * first case has an {@code expression} that is a
-     * {@link NumberLiteral} with value {@code 0}.
+     * {@link org.mozilla.javascript.ast.NumberLiteral} with value {@code 0}.
+     *
+     * @param expression a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public void setExpression(AstNode expression) {
         this.expression = expression;
@@ -69,6 +90,7 @@ public class SwitchCase extends AstNode {
 
     /**
      * Return true if this is a default case.
+     *
      * @return true if {@link #getExpression} would return {@code null}
      */
     public boolean isDefault() {
@@ -77,6 +99,8 @@ public class SwitchCase extends AstNode {
 
     /**
      * Returns statement list, which may be {@code null}.
+     *
+     * @return a {@link java.util.List} object.
      */
     public List<AstNode> getStatements() {
         return statements;
@@ -85,6 +109,8 @@ public class SwitchCase extends AstNode {
     /**
      * Sets statement list.  May be {@code null}.  Replaces any existing
      * statements.  Each element in the list has its parent set to this node.
+     *
+     * @param statements a {@link java.util.List} object.
      */
     public void setStatements(List<AstNode> statements) {
         if (this.statements != null) {
@@ -102,7 +128,7 @@ public class SwitchCase extends AstNode {
      * length of this node to include the new child.
      *
      * @param statement a child statement
-     * @throws IllegalArgumentException} if statement is {@code null}
+     * @throws java.lang.IllegalArgumentException} if statement is {@code null}
      */
     public void addStatement(AstNode statement) {
         assertNotNull(statement);
@@ -115,6 +141,7 @@ public class SwitchCase extends AstNode {
         statement.setParent(this);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -142,6 +169,8 @@ public class SwitchCase extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node, then the case expression if present, then
      * each statement (if any are specified).
      */

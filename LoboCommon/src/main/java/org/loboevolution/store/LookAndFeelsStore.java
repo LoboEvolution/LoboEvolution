@@ -7,6 +7,12 @@ import java.sql.PreparedStatement;
 
 import org.loboevolution.laf.LAFSettings;
 
+/**
+ * <p>LookAndFeelsStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class LookAndFeelsStore {
 
 	private final String DELETE_LAF = "DELETE FROM LOOK_AND_FEEL";
@@ -32,6 +38,9 @@ public class LookAndFeelsStore {
 		return conn;
 	}
 
+	/**
+	 * <p>deleteLAF.</p>
+	 */
 	public void deleteLAF() {
 		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_LAF)) {
@@ -44,7 +53,7 @@ public class LookAndFeelsStore {
 	/**
 	 * Insert a new row into the search selected table
 	 *
-	 * @param search
+	 * @param search a {@link org.loboevolution.store.SearchEngineStore} object.
 	 */
 	public void insertFileSelected(SearchEngineStore search) {
 		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());
@@ -62,7 +71,7 @@ public class LookAndFeelsStore {
 	/**
 	 * Insert a new row into the look_and_feel table
 	 *
-	 * @param laf
+	 * @param laf a {@link org.loboevolution.laf.LAFSettings} object.
 	 */
 	public void insertLAF(LAFSettings laf) {
 		try (Connection conn = connect(SQLiteCommon.getDatabaseDirectory());

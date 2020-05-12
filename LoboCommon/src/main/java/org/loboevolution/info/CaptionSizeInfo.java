@@ -24,6 +24,9 @@ import java.io.Serializable;
 
 /**
  * The Class CaptionSizeInfo.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class CaptionSizeInfo implements Serializable {
 

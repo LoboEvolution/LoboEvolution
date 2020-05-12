@@ -28,12 +28,13 @@ class FloatingViewportBounds implements FloatingBounds {
 	private final int y;
 
 	/**
-	 * 
-	 * @param prevBounds
-	 * @param leftFloat
-	 * @param y
+	 * <p>Constructor for FloatingViewportBounds.</p>
+	 *
+	 * @param prevBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
+	 * @param leftFloat a boolean.
+	 * @param y a int.
 	 * @param offsetFromBorder Width of floating box, including padding insets.
-	 * @param height
+	 * @param height a int.
 	 */
 	public FloatingViewportBounds(FloatingBounds prevBounds, boolean leftFloat, int y, int offsetFromBorder,
 			int height) {
@@ -44,6 +45,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		this.height = height;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object other) {
 		// Important for layout caching.
@@ -59,6 +61,7 @@ class FloatingViewportBounds implements FloatingBounds {
 				&& java.util.Objects.equals(olm.prevBounds, this.prevBounds);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClearY(int y) {
 		int cleary = Math.max(y, this.y + this.height);
@@ -72,6 +75,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		return cleary;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getFirstClearY(int y) {
 		int clearY = y;
@@ -88,6 +92,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		return clearY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLeft(int y) {
 		int left = 0;
@@ -104,6 +109,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		return left;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLeftClearY(int y) {
 		int cleary;
@@ -122,6 +128,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		return cleary;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMaxY() {
 		int maxY = this.y + this.height;
@@ -136,6 +143,8 @@ class FloatingViewportBounds implements FloatingBounds {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * The offset from the right edge, not counting padding.
 	 */
 	@Override
@@ -154,6 +163,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		return right;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getRightClearY(int y) {
 		int cleary;
@@ -172,6 +182,7 @@ class FloatingViewportBounds implements FloatingBounds {
 		return cleary;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		return (this.leftFloat ? 1 : 0) ^ this.y ^ this.height ^ this.offsetFromBorder;

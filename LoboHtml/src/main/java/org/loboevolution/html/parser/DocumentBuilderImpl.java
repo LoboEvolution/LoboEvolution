@@ -45,10 +45,11 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * The <code>DocumentBuilderImpl</code> class is an HTML DOM parser that
- * implements the standard W3C <code>DocumentBuilder</code> interface.
- * 
+ * The DocumentBuilderImpl class is an HTML DOM parser that
+ * implements the standard W3C DocumentBuilder interface.
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class DocumentBuilderImpl extends DocumentBuilder {
 	private static final Logger logger = Logger.getLogger(DocumentBuilderImpl.class.getName());
@@ -60,13 +61,10 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	private EntityResolver resolver;
 
 	/**
-	 * Constructs a <code>DocumentBuilderImpl</code>. This constructor should be
+	 * Constructs a DocumentBuilderImpl. This constructor should be
 	 * used when rendering is expected.
-	 * 
-	 * @param rcontext An instance of
-	 *                 {@link org.loboevolution.html.HtmlRendererContext}, which may
-	 *                 be an instance of
-	 *                 {@link org.loboevolution.html.test.SimpleHtmlRendererContext}.
+	 *
+	 * @param rcontext An instance of {@link org.loboevolution.http.HtmlRendererContext}
 	 */
 	public DocumentBuilderImpl(HtmlRendererContext rcontext) {
 		this.rcontext = rcontext;
@@ -74,12 +72,10 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	}
 
 	/**
-	 * Constructs a <code>DocumentBuilderImpl</code>. This constructor should be
+	 * Constructs a DocumentBuilderImpl. This constructor should be
 	 * used when only the parsing functionality (without rendering) is required.
-	 * 
-	 * @param context An instance of {@link org.loboevolution.html.UserAgentContext},
-	 *                which may be an instance of
-	 *                {@link org.loboevolution.html.test.SimpleUserAgentContext}.
+	 *
+	 * @param context An instance of {@link org.loboevolution.http.UserAgentContext}
 	 */
 	public DocumentBuilderImpl(UserAgentContext context) {
 		this.rcontext = null;
@@ -87,16 +83,14 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	}
 
 	/**
-	 * Constructs a <code>DocumentBuilderImpl</code>. This constructor should be
+	 * Constructs a DocumentBuilderImpl. This constructor should be
 	 * used when rendering is expected.
-	 * 
-	 * @param ucontext An instance of {@link org.loboevolution.html.UserAgentContext},
+	 *
+	 * @param ucontext An instance of {@link org.loboevolution.http.UserAgentContext},
 	 *                 which may be an instance of
-	 *                 {@link org.loboevolution.html.test.SimpleUserAgentContext}.
+	 *                 {@link org.loboevolution.http.UserAgentContext}.
 	 * @param rcontext An instance of
-	 *                 {@link org.loboevolution.html.HtmlRendererContext}, which may
-	 *                 be an instance of
-	 *                 {@link org.loboevolution.html.test.SimpleHtmlRendererContext}.
+	 *                 {@link  org.loboevolution.http.HtmlRendererContext}
 	 */
 	public DocumentBuilderImpl(UserAgentContext ucontext, HtmlRendererContext rcontext) {
 		this.rcontext = rcontext;
@@ -106,11 +100,14 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 	/**
 	 * Creates a document without parsing the input provided, so the document object
 	 * can be used for incremental rendering.
-	 * 
+	 *
 	 * @param is The input source, which may be an instance of
 	 *           {@link org.loboevolution.html.parser.InputSourceImpl}. The input
 	 *           source must provide either an input stream or a reader.
 	 * @see HTMLDocumentImpl#load()
+	 * @return a {@link org.w3c.dom.Document} object.
+	 * @throws org.xml.sax.SAXException if any.
+	 * @throws java.io.IOException if any.
 	 */
 	public Document createDocument(InputSource is) throws SAXException, IOException {
 		final String encoding = is.getEncoding();
@@ -148,6 +145,7 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		return document;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DOMImplementation getDOMImplementation() {
 		synchronized (this) {
@@ -158,35 +156,47 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field errorHandler.</p>
+	 *
+	 * @return a {@link org.xml.sax.ErrorHandler} object.
+	 */
 	public ErrorHandler getErrorHandler() {
 		return this.errorHandler;
 	}
 
+	/**
+	 * <p>Getter for the field resolver.</p>
+	 *
+	 * @return a {@link org.xml.sax.EntityResolver} object.
+	 */
 	public EntityResolver getResolver() {
 		return this.resolver;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isNamespaceAware() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isValidating() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document newDocument() {
 		return new HTMLDocumentImpl(this.bcontext);
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Parses an HTML document. Note that this method will read the entire input
-	 * source before returning a <code>Document</code> instance.
-	 * 
-	 * @param is The input source, which may be an instance of
-	 *           {@link org.loboevolution.html.parser.InputSourceImpl}.
+	 * source before returning a Document instance.
 	 * @see #createDocument(InputSource)
 	 */
 	@Override
@@ -196,11 +206,13 @@ public class DocumentBuilderImpl extends DocumentBuilder {
 		return document;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setEntityResolver(EntityResolver er) {
 		this.resolver = er;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setErrorHandler(ErrorHandler eh) {
 		this.errorHandler = eh;

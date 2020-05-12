@@ -24,11 +24,21 @@ package org.loboevolution.html.dom.filter;
 import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Node;
 
+/**
+ * <p>TextFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextFilter implements NodeFilter {
+	/**
+	 * <p>Constructor for TextFilter.</p>
+	 */
 	public TextFilter() {
 		super();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return node instanceof org.w3c.dom.Text;

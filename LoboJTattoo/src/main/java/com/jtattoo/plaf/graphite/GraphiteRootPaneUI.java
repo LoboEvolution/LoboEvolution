@@ -29,14 +29,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseRootPaneUI;
 
 /**
+ * <p>GraphiteRootPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteRootPaneUI extends BaseRootPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteRootPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JComponent createTitlePane(JRootPane root) {
 		return new GraphiteTitlePane(root, this);

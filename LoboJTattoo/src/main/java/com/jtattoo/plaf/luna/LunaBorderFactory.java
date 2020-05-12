@@ -28,12 +28,20 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>LunaBorderFactory class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaBorderFactory implements AbstractBorderFactory {
 
 	private static LunaBorderFactory instance = null;
 
+	/**
+	 * <p>Getter for the field instance.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.luna.LunaBorderFactory} object.
+	 */
 	public static synchronized LunaBorderFactory getInstance() {
 		if (instance == null) {
 			instance = new LunaBorderFactory();
@@ -44,96 +52,115 @@ public class LunaBorderFactory implements AbstractBorderFactory {
 	private LunaBorderFactory() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getButtonBorder() {
 		return LunaBorders.getButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getComboBoxBorder() {
 		return LunaBorders.getComboBoxBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getDesktopIconBorder() {
 		return BaseBorders.getDesktopIconBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getFocusFrameBorder() {
 		return BaseBorders.getFocusFrameBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getInternalFrameBorder() {
 		return LunaBorders.getInternalFrameBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getMenuBarBorder() {
 		return BaseBorders.getMenuBarBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getMenuItemBorder() {
 		return BaseBorders.getMenuItemBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getPaletteBorder() {
 		return BaseBorders.getPaletteBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getPopupMenuBorder() {
 		return BaseBorders.getPopupMenuBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getProgressBarBorder() {
 		return BaseBorders.getProgressBarBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getScrollPaneBorder() {
 		return LunaBorders.getScrollPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getSpinnerBorder() {
 		return BaseBorders.getSpinnerBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTabbedPaneBorder() {
 		return BaseBorders.getTabbedPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTableHeaderBorder() {
 		return LunaBorders.getTableHeaderBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTableScrollPaneBorder() {
 		return LunaBorders.getTableScrollPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTextBorder() {
 		return LunaBorders.getTextBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTextFieldBorder() {
 		return LunaBorders.getTextFieldBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getToggleButtonBorder() {
 		return LunaBorders.getToggleButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getToolBarBorder() {
 		return BaseBorders.getToolBarBorder();

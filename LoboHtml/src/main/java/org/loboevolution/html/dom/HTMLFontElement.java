@@ -39,41 +39,56 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLFontElement extends HTMLElement {
 	/**
 	 * Font color. See the color attribute definition in HTML 4.01. This attribute
 	 * is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getColor();
 
 	/**
 	 * Font face identifier. See the face attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getFace();
 
 	/**
 	 * Font size. See the size attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getSize();
 
 	/**
 	 * Font color. See the color attribute definition in HTML 4.01. This attribute
 	 * is deprecated in HTML 4.01.
+	 *
+	 * @param color a {@link java.lang.String} object.
 	 */
 	void setColor(String color);
 
 	/**
 	 * Font face identifier. See the face attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param face a {@link java.lang.String} object.
 	 */
 	void setFace(String face);
 
 	/**
 	 * Font size. See the size attribute definition in HTML 4.01. This attribute is
 	 * deprecated in HTML 4.01.
+	 *
+	 * @param size a {@link java.lang.String} object.
 	 */
 	void setSize(String size);
 

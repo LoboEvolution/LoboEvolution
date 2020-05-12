@@ -28,14 +28,19 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>BaseRadioButtonMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseRadioButtonMenuItemUI extends BaseMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		return new BaseRadioButtonMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();

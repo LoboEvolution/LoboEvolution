@@ -80,7 +80,6 @@ import javax.swing.plaf.UIResource;
  * @version 1.12 01/23/03
  * @author Terry Kellerman
  * @author Michael Hagen
- *
  * @since 1.4
  */
 public class BaseTitlePane extends JComponent implements TitlePane {
@@ -456,9 +455,13 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	/** Constant PAINT_ACTIVE="paintActive" */
 	public static final String PAINT_ACTIVE = "paintActive";
+	/** Constant ICONIFY="Iconify" */
 	public static final String ICONIFY = "Iconify";
+	/** Constant MAXIMIZE="Maximize" */
 	public static final String MAXIMIZE = "Maximize";
+	/** Constant CLOSE="Close" */
 	public static final String CLOSE = "Close";
 
 	static int getInt(Object key, int defaultValue) {
@@ -525,6 +528,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 
 	protected float alphaValue = 0.85f;
 
+	/**
+	 * <p>Constructor for BaseTitlePane.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 */
 	public BaseTitlePane(JRootPane root, BaseRootPaneUI ui) {
 		rootPane = root;
 		rootPaneUI = ui;
@@ -540,6 +549,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		setLayout(createLayout());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addNotify() {
 		super.addNotify();
@@ -556,6 +566,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>calculateMaxBounds.</p>
+	 *
+	 * @param frame a {@link java.awt.Frame} object.
+	 * @return a {@link java.awt.Rectangle} object.
+	 */
 	protected Rectangle calculateMaxBounds(Frame frame) {
 		GraphicsConfiguration gc = frame.getGraphicsConfiguration();
 		Insets screenInsets = Toolkit.getDefaultToolkit().getScreenInsets(gc);
@@ -576,10 +592,16 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		return maxBounds;
 	}
 
+	/**
+	 * <p>centerButtons.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean centerButtons() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void close() {
 		if (window != null) {
@@ -587,6 +609,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>createActions.</p>
+	 */
 	protected void createActions() {
 		closeAction = new CloseAction();
 		iconifyAction = new IconifyAction();
@@ -594,16 +619,27 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		maximizeAction = new MaximizeAction();
 	}
 
+	/**
+	 * <p>createButtons.</p>
+	 */
 	public void createButtons() {
 		iconifyButton = new BaseTitleButton(iconifyAction, ICONIFY, iconifyIcon, 1.0f);
 		maxButton = new BaseTitleButton(restoreAction, MAXIMIZE, maximizeIcon, 1.0f);
 		closeButton = new BaseTitleButton(closeAction, CLOSE, closeIcon, 1.0f);
 	}
 
+	/**
+	 * <p>createLayout.</p>
+	 *
+	 * @return a {@link java.awt.LayoutManager} object.
+	 */
 	public LayoutManager createLayout() {
 		return new TitlePaneLayout();
 	}
 
+	/**
+	 * <p>createMenuBar.</p>
+	 */
 	protected void createMenuBar() {
 		menuBar = new SystemMenuBar();
 		if (rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
@@ -638,14 +674,29 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>createWindowListener.</p>
+	 *
+	 * @return a {@link java.awt.event.WindowListener} object.
+	 */
 	protected WindowListener createWindowListener() {
 		return new WindowHandler();
 	}
 
+	/**
+	 * <p>createWindowPropertyChangeListener.</p>
+	 *
+	 * @return a {@link java.beans.PropertyChangeListener} object.
+	 */
 	protected PropertyChangeListener createWindowPropertyChangeListener() {
 		return new PropertyChangeHandler();
 	}
 
+	/**
+	 * <p>getFrame.</p>
+	 *
+	 * @return a {@link java.awt.Frame} object.
+	 */
 	protected Frame getFrame() {
 		if (window instanceof Frame) {
 			return (Frame) window;
@@ -653,6 +704,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		return null;
 	}
 
+	/**
+	 * <p>getFrameIconImage.</p>
+	 *
+	 * @return a {@link java.awt.Image} object.
+	 */
 	protected Image getFrameIconImage() {
 		// try to find icon for dialog windows
 		if (getFrame() == null) {
@@ -686,10 +742,20 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		return null;
 	}
 
+	/**
+	 * <p>getHorSpacing.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getHorSpacing() {
 		return 3;
 	}
 
+	/**
+	 * <p>getIconWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getIconWidth() {
 		Image image = getFrameIconImage();
 		if (image != null) {
@@ -706,11 +772,17 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JRootPane getRootPane() {
 		return rootPane;
 	}
 
+	/**
+	 * <p>getTitle.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	protected String getTitle() {
 		if (window instanceof Frame) {
 			return ((Frame) window).getTitle();
@@ -720,14 +792,25 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		return null;
 	}
 
+	/**
+	 * <p>getVerSpacing.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getVerSpacing() {
 		return 3;
 	}
 
+	/**
+	 * <p>Getter for the field window.</p>
+	 *
+	 * @return a {@link java.awt.Window} object.
+	 */
 	protected Window getWindow() {
 		return window;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void iconify() {
 		Frame frame = getFrame();
@@ -748,6 +831,9 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>installListeners.</p>
+	 */
 	protected void installListeners() {
 		if (window != null) {
 			windowListener = createWindowListener();
@@ -771,19 +857,35 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		add(closeButton);
 	}
 
+	/**
+	 * <p>isActive.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isActive() {
 		return window == null ? true : window.isActive();
 	}
 
+	/**
+	 * <p>isLeftToRight.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isLeftToRight() {
 		return window == null ? getRootPane().getComponentOrientation().isLeftToRight()
 				: window.getComponentOrientation().isLeftToRight();
 	}
 
+	/**
+	 * <p>isMacStyleWindowDecoration.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isMacStyleWindowDecoration() {
 		return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void maximize() {
 		Frame frame = getFrame();
@@ -801,6 +903,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	public void paintBackground(Graphics g) {
 		if (isActive()) {
 			Graphics2D g2D = (Graphics2D) g;
@@ -819,6 +926,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintComponent(Graphics g) {
 		if (getFrame() != null) {
@@ -905,6 +1013,13 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		paintText(g, x, y, frameTitle);
 	}
 
+	/**
+	 * <p>paintIcon.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param x a int.
+	 * @return a int.
+	 */
 	protected int paintIcon(Graphics g, int x) {
 		Image image = getFrameIconImage();
 		if (image != null) {
@@ -930,6 +1045,14 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		return 0;
 	}
 
+	/**
+	 * <p>paintText.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param title a {@link java.lang.String} object.
+	 */
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
@@ -939,6 +1062,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		JTattooUtilities.drawString(rootPane, g, title, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeNotify() {
 		super.removeNotify();
@@ -946,6 +1070,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		window = null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void restore() {
 		Frame frame = getFrame();
@@ -966,6 +1091,11 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>setActive.</p>
+	 *
+	 * @param flag a boolean.
+	 */
 	protected void setActive(boolean flag) {
 		if (rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
 			Boolean active = flag ? Boolean.TRUE : Boolean.FALSE;
@@ -976,14 +1106,29 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		getRootPane().repaint();
 	}
 
+	/**
+	 * <p>setAlphaTransparency.</p>
+	 *
+	 * @param alpha a float.
+	 */
 	public void setAlphaTransparency(float alpha) {
 		alphaValue = alpha;
 	}
 
+	/**
+	 * <p>Setter for the field backgroundImage.</p>
+	 *
+	 * @param bgImage a {@link java.awt.image.BufferedImage} object.
+	 */
 	public void setBackgroundImage(BufferedImage bgImage) {
 		backgroundImage = bgImage;
 	}
 
+	/**
+	 * <p>setCustomizedTitlePanel.</p>
+	 *
+	 * @param panel a {@link javax.swing.JPanel} object.
+	 */
 	public void setCustomizedTitlePanel(JPanel panel) {
 		if (customTitlePanel != null) {
 			remove(customTitlePanel);
@@ -998,10 +1143,21 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		repaint();
 	}
 
+	/**
+	 * <p>Setter for the field state.</p>
+	 *
+	 * @param state a int.
+	 */
 	protected void setState(int state) {
 		setState(state, false);
 	}
 
+	/**
+	 * <p>Setter for the field state.</p>
+	 *
+	 * @param state a int.
+	 * @param updateRegardless a boolean.
+	 */
 	protected void setState(int state, boolean updateRegardless) {
 		if (window != null && rootPane.getWindowDecorationStyle() == BaseRootPaneUI.FRAME) {
 			if (this.state == state && !updateRegardless) {
@@ -1077,9 +1233,15 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>uninstallDefaults.</p>
+	 */
 	protected void uninstallDefaults() {
 	}
 
+	/**
+	 * <p>uninstallListeners.</p>
+	 */
 	protected void uninstallListeners() {
 		if (window != null) {
 			window.removeWindowListener(windowListener);
@@ -1087,11 +1249,20 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		}
 	}
 
+	/**
+	 * <p>updateMaxButton.</p>
+	 *
+	 * @param action a {@link javax.swing.Action} object.
+	 * @param icon a {@link javax.swing.Icon} object.
+	 */
 	protected void updateMaxButton(Action action, Icon icon) {
 		maxButton.setAction(action);
 		maxButton.setIcon(icon);
 	}
 
+	/**
+	 * <p>validateMaximizedBounds.</p>
+	 */
 	protected void validateMaximizedBounds() {
 		Frame frame = getFrame();
 		if (frame != null && !wasMaximizeError) {

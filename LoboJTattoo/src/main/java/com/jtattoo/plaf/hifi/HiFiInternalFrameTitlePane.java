@@ -32,7 +32,10 @@ import com.jtattoo.plaf.BaseInternalFrameTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -41,19 +44,27 @@ public class HiFiInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for HiFiInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public HiFiInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean centerButtons() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		g.setColor(Color.black);

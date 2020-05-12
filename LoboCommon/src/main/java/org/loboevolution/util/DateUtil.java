@@ -7,17 +7,24 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * <p>DateUtil class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public final class DateUtil {
 
 	/**
 	 * Determine SimpleDateFormat pattern matching with the given date string.
 	 * Returns null if format is unknown. You can simply extend DateUtil with more
 	 * formats if needed.
-	 * 
+	 *
 	 * @param dateString The date string to determine the SimpleDateFormat pattern
 	 *                   for.
 	 * @return The matching SimpleDateFormat pattern, or null if format is unknown.
 	 * @see SimpleDateFormat
+	 * @param loc a {@link java.util.Locale} object.
 	 */
 	public Date determineDateFormat(String dateString, Locale loc) {
 

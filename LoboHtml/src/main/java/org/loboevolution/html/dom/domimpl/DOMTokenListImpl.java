@@ -2,18 +2,31 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.DOMTokenList;
 
+/**
+ * <p>DOMTokenListImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DOMTokenListImpl implements DOMTokenList {
 
 	private String itemValue;
 
 	private HTMLElementImpl element;
 
+	/**
+	 * <p>Constructor for DOMTokenListImpl.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param item a {@link java.lang.String} object.
+	 */
 	public DOMTokenListImpl(HTMLElementImpl element, String item) {
 		this.element = element;
 		this.itemValue = item;
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		if (itemValue != null) {
@@ -23,6 +36,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String item(int index) {
 		if (itemValue != null) {
@@ -37,11 +51,13 @@ public class DOMTokenListImpl implements DOMTokenList {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean contains(String token) {
 		return itemValue.contains(token);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void add(String token) {
 		if (element.getClassName() != null) {
@@ -51,6 +67,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void remove(String token) {
 
@@ -67,6 +84,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean toggle(String token) {
 
@@ -79,6 +97,7 @@ public class DOMTokenListImpl implements DOMTokenList {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean toggle(String token, boolean force) {
 

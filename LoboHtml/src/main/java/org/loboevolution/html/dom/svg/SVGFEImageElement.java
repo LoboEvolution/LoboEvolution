@@ -20,9 +20,20 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEImageElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEImageElement extends SVGElement, SVGURIReference, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGFilterPrimitiveStandardAttributes {
 
+	/**
+	 * <p>getPreserveAspectRatio.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio} object.
+	 */
 	SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
 
 }

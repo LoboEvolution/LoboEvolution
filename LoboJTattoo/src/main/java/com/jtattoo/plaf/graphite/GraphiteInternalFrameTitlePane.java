@@ -34,7 +34,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>GraphiteInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -43,25 +46,34 @@ public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for GraphiteInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public GraphiteInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean centerButtons() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getHorSpacing() {
 		return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 1 : 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getVerSpacing() {
 		return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn() ? 3 : 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {
@@ -72,6 +84,7 @@ public class GraphiteInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		Graphics2D g2D = (Graphics2D) g;

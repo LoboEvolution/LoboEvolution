@@ -20,7 +20,18 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGTransformable interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGTransformable extends SVGLocatable {
 
+	/**
+	 * <p>getTransform.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedTransformList} object.
+	 */
 	SVGAnimatedTransformList getTransform();
 }

@@ -23,22 +23,44 @@
  */
 package org.loboevolution.html.style;
 
+/**
+ * <p>HtmlLength class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public final class HtmlLength {
+	/** Constant EMPTY_ARRAY */
 	public static final HtmlLength[] EMPTY_ARRAY = new HtmlLength[0];
+	/** Constant LENGTH=2 */
 	public static final int LENGTH = 2;
+	/** Constant MULTI_LENGTH=0 */
 	public static final int MULTI_LENGTH = 0;
 
 	// Note: Preferred type has higher value
+	/** Constant PIXELS=1 */
 	public static final int PIXELS = 1;
 
 	private final int lengthType;
 	private volatile int value;
 
+	/**
+	 * <p>Constructor for HtmlLength.</p>
+	 *
+	 * @param pixels a int.
+	 */
 	public HtmlLength(int pixels) {
 		this.lengthType = PIXELS;
 		this.value = pixels;
 	}
 
+	/**
+	 * <p>Constructor for HtmlLength.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @throws java.lang.IndexOutOfBoundsException if any.
+	 * @throws java.lang.NumberFormatException if any.
+	 */
 	public HtmlLength(String spec) throws IndexOutOfBoundsException, NumberFormatException {
 		spec = spec.trim();
 		final int length = spec.length();
@@ -61,12 +83,23 @@ public final class HtmlLength {
 		this.value = Integer.parseInt(parseable);
 	}
 
+	/**
+	 * <p>divideBy.</p>
+	 *
+	 * @param denominator a int.
+	 */
 	public void divideBy(int denominator) {
 		int val = this.value;
 		val = val / denominator;
 		this.value = val;
 	}
 
+	/**
+	 * <p>getLength.</p>
+	 *
+	 * @param availLength a int.
+	 * @return a int.
+	 */
 	public int getLength(int availLength) {
 		final int lt = this.lengthType;
 		if (lt == LENGTH) {
@@ -77,6 +110,8 @@ public final class HtmlLength {
 	}
 
 	/**
+	 * <p>Getter for the field lengthType.</p>
+	 *
 	 * @return Returns the lengthType.
 	 */
 	public int getLengthType() {
@@ -84,12 +119,20 @@ public final class HtmlLength {
 	}
 
 	/**
+	 * <p>getRawValue.</p>
+	 *
 	 * @return Returns the spec.
 	 */
 	public int getRawValue() {
 		return this.value;
 	}
 
+	/**
+	 * <p>isPreferredOver.</p>
+	 *
+	 * @param otherLength a {@link org.loboevolution.html.style.HtmlLength} object.
+	 * @return a boolean.
+	 */
 	public boolean isPreferredOver(HtmlLength otherLength) {
 		if (otherLength == null) {
 			return true;

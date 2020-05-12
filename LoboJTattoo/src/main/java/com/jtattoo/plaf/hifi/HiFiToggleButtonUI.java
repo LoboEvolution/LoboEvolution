@@ -42,14 +42,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiToggleButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiToggleButtonUI extends BaseToggleButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiToggleButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
 		ButtonModel model = b.getModel();

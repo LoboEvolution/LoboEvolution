@@ -30,10 +30,16 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>BernsteinDefaultTheme class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for BernsteinDefaultTheme.</p>
+	 */
 	public BernsteinDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -44,11 +50,13 @@ public class BernsteinDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "BernsteinTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -102,6 +110,7 @@ public class BernsteinDefaultTheme extends AbstractTheme {
 		tooltipBackgroundColor = new ColorUIResource(254, 240, 80);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

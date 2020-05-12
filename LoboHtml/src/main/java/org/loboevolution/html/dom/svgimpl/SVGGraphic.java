@@ -20,33 +20,54 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGGraphic class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SVGTests, SVGExternalResourcesRequired {
 
+	/**
+	 * <p>Constructor for SVGGraphic.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGGraphic(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getXMLlang() {
 		return getAttribute("xml:lang");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setXMLlang(String xmllang) throws DOMException {
 		setAttribute("xml:lang", xmllang);
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getXMLspace() {
 		return getAttribute("xml:space");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setXMLspace(String xmlspace) throws DOMException {
 		setAttribute("xml:space", xmlspace);
 	}
 
+	/**
+	 * <p>drawable.</p>
+	 *
+	 * @param graphics a {@link java.awt.Graphics2D} object.
+	 * @param shape a {@link java.awt.Shape} object.
+	 */
 	protected void drawable(Graphics2D graphics, Shape shape) {
 		final Paint fillPaint = getFillPaint(shape);
 		final Paint strokePaint = getStrokelPaint(shape);
@@ -118,6 +139,11 @@ public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SV
 		
 	}
 
+	/**
+	 * <p>animate.</p>
+	 *
+	 * @param elem a {@link org.loboevolution.html.dom.svgimpl.SVGElementImpl} object.
+	 */
 	protected void animate(SVGElementImpl elem) {
 		NodeList childNodes = elem.getChildNodes();
 		for (Node child : Nodes.iterable(childNodes)) {

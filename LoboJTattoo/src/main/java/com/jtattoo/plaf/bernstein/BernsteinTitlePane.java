@@ -35,7 +35,10 @@ import com.jtattoo.plaf.BaseTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>BernsteinTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinTitlePane extends BaseTitlePane {
 
@@ -44,10 +47,17 @@ public class BernsteinTitlePane extends BaseTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for BernsteinTitlePane.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 * @param ui a {@link com.jtattoo.plaf.BaseRootPaneUI} object.
+	 */
 	public BernsteinTitlePane(JRootPane root, BaseRootPaneUI ui) {
 		super(root, ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g) {
 		if (backgroundImage != null) {
@@ -69,6 +79,7 @@ public class BernsteinTitlePane extends BaseTitlePane {
 		g2D.setComposite(composite);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {

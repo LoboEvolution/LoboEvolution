@@ -21,5 +21,11 @@
 package org.loboevolution.html.renderer;
 
 interface FloatingBoundsSource {
+	/**
+	 * <p>getChildBlockFloatingBounds.</p>
+	 *
+	 * @param apparentBlockWidth a int.
+	 * @return a {@link org.loboevolution.html.renderer.FloatingBounds} object.
+	 */
 	FloatingBounds getChildBlockFloatingBounds(int apparentBlockWidth);
 }

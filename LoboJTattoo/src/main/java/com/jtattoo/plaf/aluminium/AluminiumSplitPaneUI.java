@@ -29,14 +29,19 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import com.jtattoo.plaf.BaseSplitPaneUI;
 
 /**
+ * <p>AluminiumSplitPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumSplitPaneUI extends BaseSplitPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AluminiumSplitPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BasicSplitPaneDivider createDefaultDivider() {
 		return new AluminiumSplitPaneDivider(this);

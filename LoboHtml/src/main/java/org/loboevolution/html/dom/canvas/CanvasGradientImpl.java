@@ -34,6 +34,9 @@ import org.loboevolution.html.dom.CanvasGradient;
 
 /**
  * The Class CanvasGradientImpl.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class CanvasGradientImpl implements CanvasGradient {
 
@@ -61,6 +64,14 @@ public class CanvasGradientImpl implements CanvasGradient {
 	/** The r2. */
 	private Double r2;
 
+	/**
+	 * <p>Constructor for CanvasGradientImpl.</p>
+	 *
+	 * @param x0 a {@link java.lang.Object} object.
+	 * @param y0 a {@link java.lang.Object} object.
+	 * @param x1 a {@link java.lang.Object} object.
+	 * @param y1 a {@link java.lang.Object} object.
+	 */
 	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
@@ -70,6 +81,16 @@ public class CanvasGradientImpl implements CanvasGradient {
 		this.linearY1 = Double.valueOf(y1.toString());
 	}
 
+	/**
+	 * <p>Constructor for CanvasGradientImpl.</p>
+	 *
+	 * @param x0 a {@link java.lang.Object} object.
+	 * @param y0 a {@link java.lang.Object} object.
+	 * @param x1 a {@link java.lang.Object} object.
+	 * @param y1 a {@link java.lang.Object} object.
+	 * @param r1 a {@link java.lang.Object} object.
+	 * @param r2 a {@link java.lang.Object} object.
+	 */
 	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
 		fractions = new ArrayList<Float>();
 		colors = new ArrayList<Color>();
@@ -81,6 +102,7 @@ public class CanvasGradientImpl implements CanvasGradient {
 		this.r2 = Double.valueOf(r2.toString());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void addColorStop(String offset, String color) {
 		fractions.add(Float.valueOf(offset));
@@ -237,6 +259,8 @@ public class CanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * <p>Getter for the field r1.</p>
+	 *
 	 * @return the r1
 	 */
 	public Double getR1() {
@@ -244,6 +268,8 @@ public class CanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * <p>Setter for the field r1.</p>
+	 *
 	 * @param r1
 	 *            the r1 to set
 	 */
@@ -252,6 +278,8 @@ public class CanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * <p>Getter for the field r2.</p>
+	 *
 	 * @return the r2
 	 */
 	public Double getR2() {
@@ -259,6 +287,8 @@ public class CanvasGradientImpl implements CanvasGradient {
 	}
 
 	/**
+	 * <p>Setter for the field r2.</p>
+	 *
 	 * @param r2
 	 *            the r2 to set
 	 */

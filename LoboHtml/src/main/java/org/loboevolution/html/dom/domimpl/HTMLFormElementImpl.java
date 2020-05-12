@@ -37,8 +37,20 @@ import org.mozilla.javascript.Function;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * <p>HTMLFormElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFormElement {
 
+	/**
+	 * <p>isInput.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @return a boolean.
+	 */
 	public static boolean isInput(Node node) {
 		final String name = node.getNodeName().toLowerCase();
 		return name.equals("input") || name.equals("textarea") || name.equals("select");
@@ -48,24 +60,35 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 
 	private Function onsubmit;
 
+	/**
+	 * <p>Constructor for HTMLFormElementImpl.</p>
+	 */
 	public HTMLFormElementImpl() {
 		super("FORM");
 	}
 
+	/**
+	 * <p>Constructor for HTMLFormElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLFormElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAcceptCharset() {
 		return getAttribute("acceptCharset");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAction() {
 		return getAttribute("action");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getElements() {
 		HTMLCollection elements = this.elements;
@@ -76,16 +99,19 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		return elements;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getEnctype() {
 		return getAttribute("enctype");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		return getElements().getLength();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getMethod() {
 		String method = getAttribute("method");
@@ -95,20 +121,33 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		return method;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return getAttribute("name");
 	}
 
+	/**
+	 * <p>Getter for the field onsubmit.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Function} object.
+	 */
 	public Function getOnsubmit() {
 		return getEventFunction(this.onsubmit, "onsubmit");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTarget() {
 		return getAttribute("target");
 	}
 
+	/**
+	 * <p>item.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link java.lang.Object} object.
+	 */
 	public Object item(final int index) {
 		try {
 			visit(new NodeVisitor() {
@@ -130,6 +169,12 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		return null;
 	}
 
+	/**
+	 * <p>namedItem.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.lang.Object} object.
+	 */
 	public Object namedItem(final String name) {
 		try {
 			// TODO: This could use document.namedItem.
@@ -146,6 +191,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void reset() { 
 		visit(node -> {
@@ -166,40 +212,52 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		});
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAcceptCharset(String acceptCharset) {
 		setAttribute("acceptCharset", acceptCharset);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAction(String action) {
 		setAttribute("action", action);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setEnctype(String enctype) {
 		setAttribute("enctype", enctype);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setMethod(String method) {
 		setAttribute("method", method);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setName(String name) {
 		setAttribute("name", name);
 	}
 
+	/**
+	 * <p>Setter for the field onsubmit.</p>
+	 *
+	 * @param value a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void setOnsubmit(Function value) {
 		this.onsubmit = value;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTarget(String target) {
 		setAttribute("target", target);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void submit() {
 		this.submit(null);
@@ -207,7 +265,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 
 	/**
 	 * This method should be called when form submission is done by a submit button.
-	 * 
+	 *
 	 * @param extraFormInputs Any additional form inputs that need to be submitted,
 	 *                        e.g. the submit button parameter.
 	 */

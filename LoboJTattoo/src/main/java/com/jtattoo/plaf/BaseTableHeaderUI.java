@@ -52,8 +52,10 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
 /**
+ * <p>BaseTableHeaderUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
@@ -179,6 +181,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
 	} // end of class MyRenderComponent
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent h) {
 		return new BaseTableHeaderUI();
 	}
@@ -191,10 +194,20 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 
 	protected int rolloverCol = -1;
 
+	/**
+	 * <p>drawAlwaysActive.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean drawAlwaysActive() {
 		return false;
 	}
 
+	/**
+	 * <p>drawRolloverBar.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean drawRolloverBar() {
 		return false;
 	}
@@ -234,6 +247,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		return height + 2;
 	}
 
+	/** {@inheritDoc} */
 	protected Component getHeaderRenderer(int col) {
 		if (header == null) {
 			return null;
@@ -248,12 +262,12 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Return the preferred size of the header. The preferred height is the maximum
 	 * of the preferred heights of all of the components provided by the header
 	 * renderers. The preferred width is the sum of the preferred widths of each
 	 * column (plus inter-cell spacing).
-	 * 
-	 * @return the preferredSize
 	 */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
@@ -272,6 +286,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		return new Dimension((int) width, getHeaderHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installListeners() {
 		super.installListeners();
@@ -366,6 +381,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		header.addMouseMotionListener(myMouseMotionAdapter);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -378,6 +394,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		if (header == null || header.getColumnModel().getColumnCount() <= 0) {
@@ -446,6 +463,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		rendererPane.removeAll();
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param cellRect a {@link java.awt.Rectangle} object.
+	 * @param col a int.
+	 */
 	protected void paintBackground(Graphics g, Rectangle cellRect, int col) {
 		Component component = getHeaderRenderer(col);
 		int x = cellRect.x;
@@ -466,6 +490,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	protected void paintCell(Graphics g, Rectangle cellRect, int col) {
 		if (header == null) {
 			return;
@@ -478,11 +503,13 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 				true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void rolloverColumnUpdated(int oldColumn, int newColumn) {
 		// Empty to avoid multiple paints
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallListeners() {
 		header.removeMouseListener(myMouseAdapter);
@@ -490,6 +517,7 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		super.uninstallListeners();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		if (header != null) {
@@ -500,6 +528,12 @@ public class BaseTableHeaderUI extends BasicTableHeaderUI {
 		super.uninstallUI(c);
 	}
 
+	/**
+	 * <p>updateRolloverColumn.</p>
+	 *
+	 * @param oldColumn a int.
+	 * @param newColumn a int.
+	 */
 	protected void updateRolloverColumn(int oldColumn, int newColumn) {
 		if (header == null) {
 			return;

@@ -32,29 +32,37 @@ import com.jtattoo.plaf.AbstractToolBarUI;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>AluminiumToolBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumToolBarUI extends AbstractToolBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AluminiumToolBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getNonRolloverBorder() {
 		return BaseBorders.getToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getRolloverBorder() {
 		return AluminiumBorders.getRolloverToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isButtonOpaque() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		AluminiumUtils.fillComponent(g, c);

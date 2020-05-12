@@ -38,77 +38,104 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLButtonElement extends HTMLElement {
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAccessKey();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getDisabled();
 
 	/**
-	 * Returns the <code>FORM</code> element containing this control. Returns
-	 * <code>null</code> if this control is not within the context of a form.
+	 * Returns the FORM element containing this control. Returns
+	 * null if this control is not within the context of a form.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
 	 */
 	HTMLFormElement getForm();
 
 	/**
 	 * Form control or object name when submitted with a form. See the name
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getName();
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See the
 	 * tabindex attribute definition in HTML 4.01.
+	 *
+	 * @return a int.
 	 */
 	int getTabIndex();
 
 	/**
 	 * The type of button (all lower case). See the type attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getType();
 
 	/**
 	 * The current form control value. See the value attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getValue();
 
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @param accessKey a {@link java.lang.String} object.
 	 */
 	void setAccessKey(String accessKey);
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param disabled a boolean.
 	 */
 	void setDisabled(boolean disabled);
 
 	/**
 	 * Form control or object name when submitted with a form. See the name
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	void setName(String name);
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See the
 	 * tabindex attribute definition in HTML 4.01.
+	 *
+	 * @param tabIndex a int.
 	 */
 	void setTabIndex(int tabIndex);
 
 	/**
 	 * The current form control value. See the value attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param value a {@link java.lang.String} object.
 	 */
 	void setValue(String value);
 

@@ -1,5 +1,11 @@
 package org.loboevolution.info;
 
+/**
+ * <p>SizeInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SizeInfo {
 	
 	private int actualSize;
@@ -13,6 +19,8 @@ public class SizeInfo {
 	private Object htmlLength;
 
 	/**
+	 * <p>Getter for the field actualSize.</p>
+	 *
 	 * @return the actualSize
 	 */
 	public int getActualSize() {
@@ -20,6 +28,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Getter for the field layoutSize.</p>
+	 *
 	 * @return the layoutSize
 	 */
 	public int getLayoutSize() {
@@ -27,6 +37,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Getter for the field minSize.</p>
+	 *
 	 * @return the minSize
 	 */
 	public int getMinSize() {
@@ -34,6 +46,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Getter for the field offset.</p>
+	 *
 	 * @return the offset
 	 */
 	public int getOffset() {
@@ -41,6 +55,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Getter for the field htmlLength.</p>
+	 *
 	 * @return the htmlLength
 	 */
 	public Object getHtmlLength() {
@@ -48,6 +64,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Setter for the field actualSize.</p>
+	 *
 	 * @param actualSize the actualSize to set
 	 */
 	public void setActualSize(int actualSize) {
@@ -55,6 +73,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Setter for the field layoutSize.</p>
+	 *
 	 * @param layoutSize the layoutSize to set
 	 */
 	public void setLayoutSize(int layoutSize) {
@@ -62,6 +82,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Setter for the field minSize.</p>
+	 *
 	 * @param minSize the minSize to set
 	 */
 	public void setMinSize(int minSize) {
@@ -69,6 +91,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Setter for the field offset.</p>
+	 *
 	 * @param offset the offset to set
 	 */
 	public void setOffset(int offset) {
@@ -76,6 +100,8 @@ public class SizeInfo {
 	}
 
 	/**
+	 * <p>Setter for the field htmlLength.</p>
+	 *
 	 * @param htmlLength the htmlLength to set
 	 */
 	public void setHtmlLength(Object htmlLength) {

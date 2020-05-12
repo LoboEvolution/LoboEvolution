@@ -29,18 +29,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseInternalFrameUI;
 
 /**
+ * <p>McWinInternalFrameUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinInternalFrameUI extends BaseInternalFrameUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinInternalFrameUI((JInternalFrame) c);
 	}
 
+	/**
+	 * <p>Constructor for McWinInternalFrameUI.</p>
+	 *
+	 * @param b a {@link javax.swing.JInternalFrame} object.
+	 */
 	public McWinInternalFrameUI(JInternalFrame b) {
 		super(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JComponent createNorthPane(JInternalFrame w) {
 		titlePane = new McWinInternalFrameTitlePane(w);

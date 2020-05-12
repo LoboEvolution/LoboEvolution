@@ -20,21 +20,57 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEDisplacementMapElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEDisplacementMapElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Channel Selectors
+	/** Constant SVG_CHANNEL_UNKNOWN=0 */
 	static final short SVG_CHANNEL_UNKNOWN = 0;
+	/** Constant SVG_CHANNEL_R=1 */
 	static final short SVG_CHANNEL_R = 1;
+	/** Constant SVG_CHANNEL_G=2 */
 	static final short SVG_CHANNEL_G = 2;
+	/** Constant SVG_CHANNEL_B=3 */
 	static final short SVG_CHANNEL_B = 3;
+	/** Constant SVG_CHANNEL_A=4 */
 	static final short SVG_CHANNEL_A = 4;
 
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 
+	/**
+	 * <p>getIn2.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn2();
 
+	/**
+	 * <p>getScale.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getScale();
 
+	/**
+	 * <p>getXChannelSelector.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getXChannelSelector();
 
+	/**
+	 * <p>getYChannelSelector.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getYChannelSelector();
 }

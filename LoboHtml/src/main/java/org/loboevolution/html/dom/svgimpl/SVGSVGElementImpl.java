@@ -43,6 +43,12 @@ import org.w3c.dom.events.Event;
 import org.w3c.dom.stylesheets.StyleSheetList;
 import org.w3c.dom.views.DocumentView;
 
+/**
+ * <p>SVGSVGElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement, Drawable {
 	
 	private SVGRect viewport;
@@ -62,6 +68,8 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	private boolean painted;
 
 	/**
+	 * <p>isPainted.</p>
+	 *
 	 * @return the painted
 	 */
 	public boolean isPainted() {
@@ -69,12 +77,19 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	}
 
 	/**
+	 * <p>Setter for the field painted.</p>
+	 *
 	 * @param painted the painted to set
 	 */
 	public void setPainted(boolean painted) {
 		this.painted = painted;
 	}
 
+	/**
+	 * <p>Constructor for SVGSVGElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGSVGElementImpl(String name) {
 		super(name);
 		currentTranslate = new SVGPointImpl();
@@ -85,6 +100,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		viewport = new SVGRectImpl(x, y, width, height);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedRect getViewBox() {
 		if (viewBox == null) {
@@ -95,73 +111,86 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		return viewBox;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getZoomAndPan() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setZoomAndPan(short zoomAndPan) throws DOMException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Event createEvent(String eventType) throws DOMException {
 		return EventFactory.createEvent(eventType);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CSSStyleDeclaration getComputedStyle(Element elt, String pseudoElt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DocumentView getDocument() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public CSSStyleDeclaration getOverrideStyle(Element elt, String pseudoElt) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public StyleSheetList getStyleSheets() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getX() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getY() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getWidth() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("width")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getHeight() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGRect getViewport() {
 		float x = getX().getBaseVal().getValue();
@@ -171,169 +200,205 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		return new SVGRectImpl(x, y, width, height);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getPixelUnitToMillimeterX() {
 		return (float) 0.28; 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getPixelUnitToMillimeterY() {
 		return (float) 0.28; 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getScreenPixelToMillimeterX() {
 		return (float) 0.28; 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getScreenPixelToMillimeterY() {
 		return (float) 0.28; 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getUseCurrentView() {
 		return useCurrentView;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUseCurrentView(boolean useCurrentView) throws DOMException {
 		this.useCurrentView = useCurrentView;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGViewSpec getCurrentView() {
 		return currentView;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getCurrentScale() {
 		return currentScale;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCurrentScale(float currentScale) throws DOMException {
 		this.currentScale = currentScale;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPoint getCurrentTranslate() {
 		return currentTranslate;
 	}
 
+	/**
+	 * <p>Setter for the field currentTranslate.</p>
+	 *
+	 * @param currentTranslate a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setCurrentTranslate(SVGPoint currentTranslate) throws DOMException {
 		this.currentTranslate = currentTranslate;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int suspendRedraw(int max_wait_milliseconds) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void unsuspendRedraw(int suspend_handle_id) throws DOMException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void unsuspendRedrawAll() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void forceRedraw() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void pauseAnimations() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void unpauseAnimations() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean animationsPaused() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public float getCurrentTime() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCurrentTime(float seconds) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeList getIntersectionList(SVGRect rect, SVGElement referenceElement) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeList getEnclosureList(SVGRect rect, SVGElement referenceElement) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean checkIntersection(SVGElement element, SVGRect rect) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean checkEnclosure(SVGElement element, SVGRect rect) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deselectAll() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGLength createSVGLength() {
 		return new SVGLengthImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAngle createSVGAngle() {
 		return new SVGAngleImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGPoint createSVGPoint() {
 		return new SVGPointImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix createSVGMatrix() {
 		return new SVGMatrixImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGNumber createSVGNumber() {
 		return new SVGNumberImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGRect createSVGRect() {
 		float x = getX().getBaseVal().getValue();
@@ -343,11 +408,13 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		return new SVGRectImpl(x, y, width, height);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform createSVGTransform() {
 		return new SVGTransformImpl();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix) {
 		SVGTransform transform = new SVGTransformImpl();
@@ -355,12 +422,14 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		return transform;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Element getElementById(String elementId) {
 		NodeList nodeList = getNodeList(new IdFilter(elementId));
 		return nodeList != null && nodeList.getLength() > 0 ? (Element)nodeList.item(0) : null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		boolean display = getDisplay();
@@ -423,6 +492,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();

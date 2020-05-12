@@ -19,10 +19,21 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.init.GuiInit;
 import org.loboevolution.store.SQLiteCommon;
 
+/**
+ * <p>StorageManager class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class StorageManager extends SwingWorker<Void, Void> {
 
 	private final JFrame frame;
 
+	/**
+	 * <p>Constructor for StorageManager.</p>
+	 *
+	 * @param frame a {@link javax.swing.JFrame} object.
+	 */
 	public StorageManager(JFrame frame) {
 		this.frame = frame;
 	}
@@ -30,6 +41,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 	/*
 	 * Executed in background thread.
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Void doInBackground() {
 		setProgress(0);
@@ -61,6 +73,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 	/*
 	 * Executed in event dispatching thread
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void done() {
 		try {

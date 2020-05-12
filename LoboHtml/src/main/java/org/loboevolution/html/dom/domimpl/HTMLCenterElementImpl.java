@@ -23,11 +23,23 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.renderstate.AlignXRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>HTMLCenterElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLCenterElementImpl extends HTMLAbstractUIElement {
+	/**
+	 * <p>Constructor for HTMLCenterElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLCenterElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
         return new AlignXRenderState(prevRenderState, this, 50);

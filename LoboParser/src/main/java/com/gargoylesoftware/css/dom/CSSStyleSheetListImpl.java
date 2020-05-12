@@ -24,11 +24,14 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of StyleSheetList.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class CSSStyleSheetListImpl {
     private List<CSSStyleSheetImpl> cssStyleSheets_;
 
     /**
+     * <p>getCSSStyleSheets.</p>
+     *
      * @return the list of style sheets
      */
     public List<CSSStyleSheetImpl> getCSSStyleSheets() {
@@ -39,6 +42,8 @@ public class CSSStyleSheetListImpl {
     }
 
     /**
+     * <p>getLength.</p>
+     *
      * @return the number of style sheets
      */
     public int getLength() {
@@ -75,6 +80,7 @@ public class CSSStyleSheetListImpl {
         return merged;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -102,6 +108,7 @@ public class CSSStyleSheetListImpl {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;

@@ -33,18 +33,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseSliderUI;
 
 /**
+ * <p>AluminiumSliderUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumSliderUI extends BaseSliderUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AluminiumSliderUI((JSlider) c);
 	}
 
+	/**
+	 * <p>Constructor for AluminiumSliderUI.</p>
+	 *
+	 * @param slider a {@link javax.swing.JSlider} object.
+	 */
 	public AluminiumSliderUI(JSlider slider) {
 		super(slider);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

@@ -24,8 +24,21 @@ import org.loboevolution.common.Strings;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.events.Event;
 
+/**
+ * <p>EventFactory class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class EventFactory {
 
+	/**
+	 * <p>createEvent.</p>
+	 *
+	 * @param eventType a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.events.Event} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public static Event createEvent(String eventType) throws DOMException {
 		Event theEvent = null;
 		String event = Strings.isNotBlank(eventType) ? eventType.toLowerCase() : "";

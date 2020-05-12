@@ -31,21 +31,38 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.WrappedException;
 
+/**
+ * <p>JavaFunctionObject class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class JavaFunctionObject extends ScriptableObject implements Function {
 
 	private static final long serialVersionUID = 1L;
 	private final String className;
 	private final ArrayList<Method> methods = new ArrayList<Method>();
 
+	/**
+	 * <p>Constructor for JavaFunctionObject.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public JavaFunctionObject(String name) {
 		super();
 		this.className = name;
 	}
 
+	/**
+	 * <p>addMethod.</p>
+	 *
+	 * @param m a {@link java.lang.reflect.Method} object.
+	 */
 	public void addMethod(Method m) {
 		this.methods.add(m);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
 		final JavaObjectWrapper jcw = (JavaObjectWrapper) thisObj;
@@ -85,6 +102,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
 		throw new UnsupportedOperationException();
@@ -118,11 +136,13 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		return matchingMethod;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
 		return this.className;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public java.lang.Object getDefaultValue(java.lang.Class hint) {
 		if (hint == null || String.class.equals(hint)) {

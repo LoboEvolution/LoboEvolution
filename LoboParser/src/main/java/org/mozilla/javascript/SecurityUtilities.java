@@ -11,13 +11,17 @@ import java.security.PrivilegedAction;
 import java.security.ProtectionDomain;
 
 /**
+ * <p>SecurityUtilities class.</p>
+ *
  * @author Attila Szegedi
+ * @version $Id: $Id
  */
 public class SecurityUtilities
 {
     /**
      * Retrieves a system property within a privileged block. Use it only when
      * the property is used from within Rhino code and is not passed out of it.
+     *
      * @param name the name of the system property
      * @return the value of the system property
      */
@@ -34,6 +38,12 @@ public class SecurityUtilities
             });
     }
 
+    /**
+     * <p>getProtectionDomain.</p>
+     *
+     * @param clazz a {@link java.lang.Class} object.
+     * @return a {@link java.security.ProtectionDomain} object.
+     */
     public static ProtectionDomain getProtectionDomain(final Class<?> clazz)
     {
         return AccessController.doPrivileged(
@@ -50,8 +60,9 @@ public class SecurityUtilities
     /**
      * Look up the top-most element in the current stack representing a
      * script and return its protection domain. This relies on the system-wide
-     * SecurityManager being an instance of {@link RhinoSecurityManager},
-     * otherwise it returns <code>null</code>.
+     * SecurityManager being an instance of {@link org.mozilla.javascript.RhinoSecurityManager},
+     * otherwise it returns null.
+     *
      * @return The protection of the top-most script in the current stack, or null
      */
     public static ProtectionDomain getScriptProtectionDomain() {

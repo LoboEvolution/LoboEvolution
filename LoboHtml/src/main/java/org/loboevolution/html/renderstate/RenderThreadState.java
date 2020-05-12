@@ -23,10 +23,18 @@ package org.loboevolution.html.renderstate;
 /**
  * Additional state that may be set during rendering to override state
  * determined from elements.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class RenderThreadState {
 	private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<RenderThreadState>();
 
+	/**
+	 * <p>getState.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderstate.RenderThreadState} object.
+	 */
 	public static RenderThreadState getState() {
 		RenderThreadState ts = (RenderThreadState) stateTL.get();
 		if (ts == null) {

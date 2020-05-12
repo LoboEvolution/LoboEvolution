@@ -14,6 +14,9 @@ import javax.swing.SwingConstants;
 
 /**
  * The Class FormPanel.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class FormPanel extends JComponent {
 
@@ -56,6 +59,7 @@ public class FormPanel extends JComponent {
 	 * 
 	 * @see java.awt.Container#doLayout()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void doLayout() {
 		if (this.fieldsInvalid) {
@@ -69,6 +73,7 @@ public class FormPanel extends JComponent {
 	 * 
 	 * @see javax.swing.JComponent#getMaximumSize()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getMaximumSize() {
 		if (this.fieldsInvalid) {
@@ -82,6 +87,7 @@ public class FormPanel extends JComponent {
 	 * 
 	 * @see javax.swing.JComponent#getMinimumSize()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getMinimumSize() {
 		if (this.fieldsInvalid) {
@@ -104,6 +110,7 @@ public class FormPanel extends JComponent {
 	 * 
 	 * @see javax.swing.JComponent#getPreferredSize()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		if (this.fieldsInvalid) {
@@ -169,6 +176,7 @@ public class FormPanel extends JComponent {
 	 * 
 	 * @see javax.swing.JComponent#revalidate()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void revalidate() {
 		this.fieldsInvalid = true;

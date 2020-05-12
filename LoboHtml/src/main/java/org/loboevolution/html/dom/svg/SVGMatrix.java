@@ -24,53 +24,198 @@ import java.awt.geom.AffineTransform;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGMatrix interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGMatrix {
 
+	/**
+	 * <p>getA.</p>
+	 *
+	 * @return a float.
+	 */
 	float getA();
 
+	/**
+	 * <p>setA.</p>
+	 *
+	 * @param a a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setA(float a) throws DOMException;
 
+	/**
+	 * <p>getB.</p>
+	 *
+	 * @return a float.
+	 */
 	float getB();
 
+	/**
+	 * <p>setB.</p>
+	 *
+	 * @param b a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setB(float b) throws DOMException;
 
+	/**
+	 * <p>getC.</p>
+	 *
+	 * @return a float.
+	 */
 	float getC();
 
+	/**
+	 * <p>setC.</p>
+	 *
+	 * @param c a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setC(float c) throws DOMException;
 
+	/**
+	 * <p>getD.</p>
+	 *
+	 * @return a float.
+	 */
 	float getD();
 
+	/**
+	 * <p>setD.</p>
+	 *
+	 * @param d a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setD(float d) throws DOMException;
 
+	/**
+	 * <p>getE.</p>
+	 *
+	 * @return a float.
+	 */
 	float getE();
 
+	/**
+	 * <p>setE.</p>
+	 *
+	 * @param e a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setE(float e) throws DOMException;
 
+	/**
+	 * <p>getF.</p>
+	 *
+	 * @return a float.
+	 */
 	float getF();
 
+	/**
+	 * <p>setF.</p>
+	 *
+	 * @param f a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setF(float f) throws DOMException;
 
+	/**
+	 * <p>multiply.</p>
+	 *
+	 * @param secondMatrix a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix multiply(SVGMatrix secondMatrix);
 
+	/**
+	 * <p>inverse.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	SVGMatrix inverse() throws SVGException;
 
+	/**
+	 * <p>translate.</p>
+	 *
+	 * @param x a float.
+	 * @param y a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix translate(float x, float y);
 
+	/**
+	 * <p>scale.</p>
+	 *
+	 * @param scaleFactor a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix scale(float scaleFactor);
 
+	/**
+	 * <p>scaleNonUniform.</p>
+	 *
+	 * @param scaleFactorX a float.
+	 * @param scaleFactorY a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
 
+	/**
+	 * <p>rotate.</p>
+	 *
+	 * @param angle a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix rotate(float angle);
 
+	/**
+	 * <p>rotateFromVector.</p>
+	 *
+	 * @param x a float.
+	 * @param y a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	SVGMatrix rotateFromVector(float x, float y) throws SVGException;
 
+	/**
+	 * <p>flipX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix flipX();
 
+	/**
+	 * <p>flipY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix flipY();
 
+	/**
+	 * <p>skewX.</p>
+	 *
+	 * @param angle a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix skewX(float angle);
 
+	/**
+	 * <p>skewY.</p>
+	 *
+	 * @param angle a float.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 */
 	SVGMatrix skewY(float angle);
 
+	/**
+	 * <p>getAffineTransform.</p>
+	 *
+	 * @return a {@link java.awt.geom.AffineTransform} object.
+	 */
 	AffineTransform getAffineTransform();
 }

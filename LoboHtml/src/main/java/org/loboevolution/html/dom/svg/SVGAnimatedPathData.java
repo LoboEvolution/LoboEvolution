@@ -20,12 +20,38 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAnimatedPathData interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedPathData {
+	/**
+	 * <p>getPathSegList.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
+	 */
 	SVGPathSegList getPathSegList();
 
+	/**
+	 * <p>getNormalizedPathSegList.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
+	 */
 	SVGPathSegList getNormalizedPathSegList();
 
+	/**
+	 * <p>getAnimatedPathSegList.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
+	 */
 	SVGPathSegList getAnimatedPathSegList();
 
+	/**
+	 * <p>getAnimatedNormalizedPathSegList.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
+	 */
 	SVGPathSegList getAnimatedNormalizedPathSegList();
 }

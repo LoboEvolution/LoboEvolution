@@ -22,14 +22,28 @@ package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
+/**
+ * <p>AlignXRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class AlignXRenderState extends BlockRenderState {
 	private final int alignXPercent;
 
+    /**
+     * <p>Constructor for AlignXRenderState.</p>
+     *
+     * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+     * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+     * @param alignXPercent a int.
+     */
     public AlignXRenderState(final RenderState prevRenderState, HTMLElementImpl element, int alignXPercent) {
         super(prevRenderState, element);
 		this.alignXPercent = alignXPercent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getAlignXPercent() {
 		return this.alignXPercent;

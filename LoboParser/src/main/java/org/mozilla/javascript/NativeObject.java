@@ -18,7 +18,9 @@ import java.util.Set;
 /**
  * This class implements the Object native object.
  * See ECMA 15.2.
+ *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
 public class NativeObject extends IdScriptableObject implements Map
 {
@@ -32,18 +34,21 @@ public class NativeObject extends IdScriptableObject implements Map
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Object";
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {
         return ScriptRuntime.defaultObjectToString(this);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -86,6 +91,7 @@ public class NativeObject extends IdScriptableObject implements Map
         super.fillConstructorProperties(ctor);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -114,6 +120,7 @@ public class NativeObject extends IdScriptableObject implements Map
         initPrototypeMethod(OBJECT_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -593,6 +600,7 @@ public class NativeObject extends IdScriptableObject implements Map
 
     // methods implementing java.util.Map
 
+    /** {@inheritDoc} */
     @Override
     public boolean containsKey(Object key) {
         if (key instanceof String) {
@@ -603,6 +611,7 @@ public class NativeObject extends IdScriptableObject implements Map
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean containsValue(Object value) {
         for (Object obj : values()) {
@@ -614,6 +623,7 @@ public class NativeObject extends IdScriptableObject implements Map
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object remove(Object key) {
         Object value = get(key);
@@ -625,31 +635,37 @@ public class NativeObject extends IdScriptableObject implements Map
         return value;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Set<Object> keySet() {
         return new KeySet();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Collection<Object> values() {
         return new ValueCollection();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Set<Map.Entry<Object, Object>> entrySet() {
         return new EntrySet();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object put(Object key, Object value) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void putAll(Map m) {
         throw new UnsupportedOperationException();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -814,6 +830,7 @@ public class NativeObject extends IdScriptableObject implements Map
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

@@ -41,12 +41,16 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiRadioButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 
 	private static HiFiRadioButtonUI radioButtonUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new HiFiRadioButtonUI();
@@ -54,6 +58,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 		return radioButtonUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
@@ -67,6 +72,7 @@ public class HiFiRadioButtonUI extends BaseRadioButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, JComponent c, String text, Rectangle textRect) {
 		View v = (View) c.getClientProperty(BasicHTML.propertyKey);

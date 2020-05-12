@@ -35,7 +35,10 @@ import com.jtattoo.plaf.BaseComboBoxUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>SmartComboBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartComboBoxUI extends BaseComboBoxUI {
 
@@ -59,10 +62,12 @@ public class SmartComboBoxUI extends BaseComboBoxUI {
 
 	} // end of class Arrow Button
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new SmartComboBoxUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		ArrowButton button = new ArrowButton();

@@ -32,14 +32,19 @@ import javax.swing.plaf.basic.BasicMenuBarUI;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>HiFiMenuBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiMenuBarUI extends BasicMenuBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiMenuBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -48,6 +53,7 @@ public class HiFiMenuBarUI extends BasicMenuBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		HiFiUtils.fillComponent(g, c);

@@ -36,12 +36,16 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseRadioButtonUI;
 
 /**
+ * <p>TextureRadioButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureRadioButtonUI extends BaseRadioButtonUI {
 
 	private static TextureRadioButtonUI radioButtonUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new TextureRadioButtonUI();
@@ -49,6 +53,7 @@ public class TextureRadioButtonUI extends BaseRadioButtonUI {
 		return radioButtonUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
@@ -62,6 +67,7 @@ public class TextureRadioButtonUI extends BaseRadioButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
 		g.setColor(AbstractLookAndFeel.getFocusColor());

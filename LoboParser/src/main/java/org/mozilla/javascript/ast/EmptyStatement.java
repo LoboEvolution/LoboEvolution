@@ -9,8 +9,10 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * AST node for an empty statement.  Node type is {@link Token#EMPTY}.
+ * AST node for an empty statement.  Node type is {@link org.mozilla.javascript.Token#EMPTY}.
  *
+ * @author utente
+ * @version $Id: $Id
  */
 public class EmptyStatement extends AstNode {
 
@@ -18,17 +20,32 @@ public class EmptyStatement extends AstNode {
         type = Token.EMPTY;
     }
 
+    /**
+     * <p>Constructor for EmptyStatement.</p>
+     */
     public EmptyStatement() {
     }
 
+    /**
+     * <p>Constructor for EmptyStatement.</p>
+     *
+     * @param pos a int.
+     */
     public EmptyStatement(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for EmptyStatement.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public EmptyStatement(int pos, int len) {
         super(pos, len);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -37,6 +54,8 @@ public class EmptyStatement extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node.  There are no children.
      */
     @Override

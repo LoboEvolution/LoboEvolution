@@ -39,6 +39,12 @@ import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.HttpNetwork;
 
+/**
+ * <p>ImgControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ImgControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
@@ -53,6 +59,11 @@ public class ImgControl extends BaseControl {
 	
 	private boolean mouseBeingPressed;
 	
+	/**
+	 * <p>Constructor for ImgControl.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLImageElementImpl} object.
+	 */
 	public ImgControl(HTMLImageElementImpl modelNode) {
 		super(modelNode);
 		setLayout(WrapperLayout.getInstance());
@@ -80,17 +91,20 @@ public class ImgControl extends BaseControl {
 		});
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		final Dimension ps = this.preferredSize;
 		return ps == null ? new Dimension(0, 0) : ps;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVAlign() {
 		return this.valign;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -116,6 +130,7 @@ public class ImgControl extends BaseControl {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);

@@ -25,6 +25,9 @@ import java.awt.Point;
 
 /**
  * Contains a renderer node and a position in that node.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class RenderableSpot {
 	public final BoundableRenderable renderable;
@@ -32,9 +35,11 @@ public class RenderableSpot {
 	public final int y;
 
 	/**
-	 * @param renderable
-	 * @param x
-	 * @param y
+	 * <p>Constructor for RenderableSpot.</p>
+	 *
+	 * @param renderable a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+	 * @param x a int.
+	 * @param y a int.
 	 */
 	public RenderableSpot(BoundableRenderable renderable, int x, int y) {
 		super();
@@ -43,6 +48,7 @@ public class RenderableSpot {
 		this.y = y;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof RenderableSpot)) {
@@ -52,6 +58,11 @@ public class RenderableSpot {
 		return otherRp.renderable == this.renderable && otherRp.x == this.x && otherRp.y == this.y;
 	}
 
+	/**
+	 * <p>getPoint.</p>
+	 *
+	 * @return a {@link java.awt.Point} object.
+	 */
 	public Point getPoint() {
 		return new Point(this.x, this.y);
 	}

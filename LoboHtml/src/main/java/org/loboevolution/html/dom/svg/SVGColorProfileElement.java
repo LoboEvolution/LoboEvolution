@@ -22,16 +22,55 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGColorProfileElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGColorProfileElement extends SVGElement, SVGURIReference, SVGRenderingIntent {
+	/**
+	 * <p>getLocal.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getLocal();
 
+	/**
+	 * <p>setLocal.</p>
+	 *
+	 * @param local a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setLocal(String local) throws DOMException;
 
+	/**
+	 * <p>getName.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getName();
 
+	/**
+	 * <p>setName.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setName(String name) throws DOMException;
 
+	/**
+	 * <p>getRenderingIntent.</p>
+	 *
+	 * @return a short.
+	 */
 	short getRenderingIntent();
 
+	/**
+	 * <p>setRenderingIntent.</p>
+	 *
+	 * @param renderingIntent a short.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setRenderingIntent(short renderingIntent) throws DOMException;
 }

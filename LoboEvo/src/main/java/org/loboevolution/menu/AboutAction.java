@@ -5,10 +5,17 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
+/**
+ * <p>AboutAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class AboutAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final String text = "This is Lobo Evolution 1.0, a pure Java web browser.\r\n"

@@ -15,6 +15,12 @@ import org.loboevolution.store.BookmarksStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SQLiteCommon;
 
+/**
+ * <p>MozilaFirefoxData class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class MozilaFirefoxData extends BrowserData {
 
 	private static String MOZ_BOOKMARKS = "SELECT DISTINCT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
@@ -77,6 +83,9 @@ public class MozilaFirefoxData extends BrowserData {
 		return hostEntries;
 	}
 
+	/**
+	 * <p>importBookmark.</p>
+	 */
 	public static void importBookmark() {
 		final String pathToCookieInfos = getMozillaDirectory();
 		final List<String> files = getFiles(pathToCookieInfos, null, "places.sqlite");
@@ -90,6 +99,9 @@ public class MozilaFirefoxData extends BrowserData {
 		}
 	}
 
+	/**
+	 * <p>importCookie.</p>
+	 */
 	public static void importCookie() {
 		final String pathToCookieInfos = getMozillaDirectory();
 		final List<String> files = getFiles(pathToCookieInfos, null, "cookies.sqlite");
@@ -105,6 +117,9 @@ public class MozilaFirefoxData extends BrowserData {
 		}
 	}
 
+	/**
+	 * <p>importHistory.</p>
+	 */
 	public static void importHistory() {
 		try {
 			final String pathToCookieInfos = getMozillaDirectory();

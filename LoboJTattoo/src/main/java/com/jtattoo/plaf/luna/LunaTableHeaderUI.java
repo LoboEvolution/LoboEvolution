@@ -28,15 +28,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseTableHeaderUI;
 
 /**
+ * <p>LunaTableHeaderUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaTableHeaderUI extends BaseTableHeaderUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new LunaTableHeaderUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean drawRolloverBar() {
 		return true;

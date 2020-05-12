@@ -20,18 +20,49 @@
 */
 package org.loboevolution.html.style;
 
+/**
+ * <p>CSSPropertiesContext interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface CSSPropertiesContext {
+	/**
+	 * <p>getDocumentBaseURI.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getDocumentBaseURI();
 
+	/**
+	 * <p>getParentStyle.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 */
 	AbstractCSSProperties getParentStyle();
 
+	/**
+	 * <p>informInvalid.</p>
+	 */
 	void informInvalid();
 
+	/**
+	 * <p>informLayoutInvalid.</p>
+	 */
 	void informLayoutInvalid();
 
+	/**
+	 * <p>informLookInvalid.</p>
+	 */
 	void informLookInvalid();
 
+	/**
+	 * <p>informPositionInvalid.</p>
+	 */
 	void informPositionInvalid();
 
+	/**
+	 * <p>informSizeInvalid.</p>
+	 */
 	void informSizeInvalid();
 }

@@ -36,222 +36,486 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
 /**
+ * <p>Abstract AbstractLookAndFeel class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
 
+	/** Constant currentThemeName="abstractTheme" */
 	protected static String currentThemeName = "abstractTheme";
 
 	private static AbstractTheme myTheme = null;
 
+	/**
+	 * <p>getAlterBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getAlterBackgroundColor() {
 		return getTheme().getAlterBackgroundColor();
 	}
 
+	/**
+	 * <p>getBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getBackgroundColor() {
 		return getTheme().getBackgroundColor();
 	}
 
+	/**
+	 * <p>getButtonBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getButtonBackgroundColor() {
 		return getTheme().getButtonBackgroundColor();
 	}
 
+	/**
+	 * <p>getButtonColorDark.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getButtonColorDark() {
 		return getTheme().getButtonColorDark();
 	}
 
+	/**
+	 * <p>getButtonColorLight.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getButtonColorLight() {
 		return getTheme().getButtonColorLight();
 	}
 
+	/**
+	 * <p>getButtonForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getButtonForegroundColor() {
 		return getTheme().getButtonForegroundColor();
 	}
 
+	/**
+	 * <p>getControlBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getControlBackgroundColor() {
 		return getTheme().getControlBackgroundColor();
 	}
 
+	/**
+	 * <p>getControlColorDark.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getControlColorDark() {
 		return getTheme().getControlColorDark();
 	}
 
+	/**
+	 * <p>getControlColorLight.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getControlColorLight() {
 		return getTheme().getControlColorLight();
 	}
 
+	/**
+	 * <p>getControlForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getControlForegroundColor() {
 		return getTheme().getControlForegroundColor();
 	}
 
+	/**
+	 * <p>getCurrentTheme.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.metal.MetalTheme} object.
+	 */
 	public static MetalTheme getCurrentTheme() {
 		return myTheme;
 	}
 
+	/**
+	 * <p>getDesktopColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getDesktopColor() {
 		return getTheme().getDesktopColor();
 	}
 
+	/**
+	 * <p>getDisabledBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getDisabledBackgroundColor() {
 		return getTheme().getDisabledBackgroundColor();
 	}
 
+	/**
+	 * <p>getDisabledForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getDisabledForegroundColor() {
 		return getTheme().getDisabledForegroundColor();
 	}
 
+	/**
+	 * <p>getFocusCellColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getFocusCellColor() {
 		return getTheme().getFocusCellColor();
 	}
 
+	/**
+	 * <p>getFocusColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getFocusColor() {
 		return getTheme().getFocusColor();
 	}
 
+	/**
+	 * <p>getForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getForegroundColor() {
 		return getTheme().getForegroundColor();
 	}
 
+	/**
+	 * <p>getFrameColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getFrameColor() {
 		return getTheme().getFrameColor();
 	}
 
+	/**
+	 * <p>getGridColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getGridColor() {
 		return getTheme().getGridColor();
 	}
 
+	/**
+	 * <p>getInputBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getInputBackgroundColor() {
 		return getTheme().getInputBackgroundColor();
 	}
 
+	/**
+	 * <p>getInputForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getInputForegroundColor() {
 		return getTheme().getInputForegroundColor();
 	}
 
+	/**
+	 * <p>getMenuBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getMenuBackgroundColor() {
 		return getTheme().getMenuBackgroundColor();
 	}
 
+	/**
+	 * <p>getMenuColorDark.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getMenuColorDark() {
 		return getTheme().getMenuColorDark();
 	}
 
+	/**
+	 * <p>getMenuColorLight.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getMenuColorLight() {
 		return getTheme().getMenuColorLight();
 	}
 
+	/**
+	 * <p>getMenuForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getMenuForegroundColor() {
 		return getTheme().getMenuForegroundColor();
 	}
 
+	/**
+	 * <p>getMenuSelectionBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getMenuSelectionBackgroundColor() {
 		return getTheme().getMenuSelectionBackgroundColor();
 	}
 
+	/**
+	 * <p>getMenuSelectionForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getMenuSelectionForegroundColor() {
 		return getTheme().getMenuSelectionForegroundColor();
 	}
 
+	/**
+	 * <p>getSelectionBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getSelectionBackgroundColor() {
 		return getTheme().getSelectionBackgroundColor();
 	}
 
+	/**
+	 * <p>getSelectionForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getSelectionForegroundColor() {
 		return getTheme().getSelectionForegroundColor();
 	}
 
+	/**
+	 * <p>getTabAreaBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getTabAreaBackgroundColor() {
 		return getTheme().getTabAreaBackgroundColor();
 	}
 
+	/**
+	 * <p>getTabSelectionForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getTabSelectionForegroundColor() {
 		return getTheme().getTabSelectionForegroundColor();
 	}
 
+	/**
+	 * <p>getTheme.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.AbstractTheme} object.
+	 */
 	public static AbstractTheme getTheme() {
 		return myTheme;
 	}
 
+	/**
+	 * <p>getThemes.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getThemes() {
 		ArrayList<String> themes = new ArrayList<String>();
 		themes.add(getTheme().getName());
 		return themes;
 	}
 
+	/**
+	 * <p>getToolbarBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getToolbarBackgroundColor() {
 		return getTheme().getToolbarBackgroundColor();
 	}
 
+	/**
+	 * <p>getToolbarColorDark.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getToolbarColorDark() {
 		return getTheme().getToolbarColorDark();
 	}
 
+	/**
+	 * <p>getToolbarColorLight.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getToolbarColorLight() {
 		return getTheme().getToolbarColorLight();
 	}
 
+	/**
+	 * <p>getToolbarDockingColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getToolbarDockingColor() {
 		return getTheme().getFocusColor();
 	}
 
+	/**
+	 * <p>getToolbarForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getToolbarForegroundColor() {
 		return getTheme().getToolbarForegroundColor();
 	}
 
+	/**
+	 * <p>getTooltipBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getTooltipBackgroundColor() {
 		return getTheme().getTooltipBackgroundColor();
 	}
 
+	/**
+	 * <p>getTooltipForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getTooltipForegroundColor() {
 		return getTheme().getTooltipForegroundColor();
 	}
 
+	/**
+	 * <p>getWindowBorderColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowBorderColor() {
 		return getTheme().getWindowBorderColor();
 	}
 
+	/**
+	 * <p>getWindowInactiveBorderColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowInactiveBorderColor() {
 		return getTheme().getWindowInactiveBorderColor();
 	}
 
+	/**
+	 * <p>getWindowInactiveTitleBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowInactiveTitleBackgroundColor() {
 		return getTheme().getWindowInactiveTitleBackgroundColor();
 	}
 
+	/**
+	 * <p>getWindowInactiveTitleColorDark.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowInactiveTitleColorDark() {
 		return getTheme().getWindowInactiveTitleColorDark();
 	}
 
+	/**
+	 * <p>getWindowInactiveTitleColorLight.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowInactiveTitleColorLight() {
 		return getTheme().getWindowInactiveTitleColorLight();
 	}
 
+	/**
+	 * <p>getWindowInactiveTitleForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowInactiveTitleForegroundColor() {
 		return getTheme().getWindowInactiveTitleForegroundColor();
 	}
 
+	/**
+	 * <p>getWindowTitleBackgroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowTitleBackgroundColor() {
 		return getTheme().getWindowTitleBackgroundColor();
 	}
 
+	/**
+	 * <p>getWindowTitleColorDark.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowTitleColorDark() {
 		return getTheme().getWindowTitleColorDark();
 	}
 
+	/**
+	 * <p>getWindowTitleColorLight.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowTitleColorLight() {
 		return getTheme().getWindowTitleColorLight();
 	}
 
+	/**
+	 * <p>getWindowTitleForegroundColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public static ColorUIResource getWindowTitleForegroundColor() {
 		return getTheme().getWindowTitleForegroundColor();
 	}
 
+	/**
+	 * <p>isWindowDecorationOn.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isWindowDecorationOn() {
 		return getTheme().isWindowDecorationOn();
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param theme a {@link com.jtattoo.plaf.AbstractTheme} object.
+	 */
 	public static void setTheme(AbstractTheme theme) {
 		if (theme == null) {
 			return;
@@ -278,22 +542,48 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 		// Overwrite this in derived classes
 	}
 
+	/**
+	 * <p>getBorderFactory.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.AbstractBorderFactory} object.
+	 */
 	abstract public AbstractBorderFactory getBorderFactory();
 
+	/**
+	 * <p>getControlDarkShadowColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public ColorUIResource getControlDarkShadowColor() {
 		return getTheme().getControlDarkShadowColor();
 	}
 
+	/**
+	 * <p>getControlHighlightColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public ColorUIResource getControlHighlightColor() {
 		return getTheme().getControlHighlightColor();
 	}
 
+	/**
+	 * <p>getControlShadowColor.</p>
+	 *
+	 * @return a {@link javax.swing.plaf.ColorUIResource} object.
+	 */
 	public ColorUIResource getControlShadowColor() {
 		return getTheme().getControlShadowColor();
 	}
 
+	/**
+	 * <p>getIconFactory.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.AbstractIconFactory} object.
+	 */
 	abstract public AbstractIconFactory getIconFactory();
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
@@ -565,6 +855,7 @@ abstract public class AbstractLookAndFeel extends MetalLookAndFeel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initSystemColorDefaults(UIDefaults table) {
 		Object[] systemColors = { "desktop", getDesktopColor(), // Color of the desktop background

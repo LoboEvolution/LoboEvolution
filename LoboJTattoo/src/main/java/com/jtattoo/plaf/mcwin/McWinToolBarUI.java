@@ -32,29 +32,37 @@ import com.jtattoo.plaf.AbstractToolBarUI;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>McWinToolBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinToolBarUI extends AbstractToolBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinToolBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getNonRolloverBorder() {
 		return BaseBorders.getToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getRolloverBorder() {
 		return McWinBorders.getRolloverToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isButtonOpaque() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		McWinUtils.fillComponent(g, c);

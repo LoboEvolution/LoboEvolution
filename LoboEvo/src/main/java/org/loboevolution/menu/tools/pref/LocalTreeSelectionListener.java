@@ -5,10 +5,21 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 
+/**
+ * <p>LocalTreeSelectionListener class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class LocalTreeSelectionListener implements TreeSelectionListener {
 
 	private final PreferenceWindow preferenceWindow;
 
+	/**
+	 * <p>Constructor for LocalTreeSelectionListener.</p>
+	 *
+	 * @param preferenceWindow a {@link org.loboevolution.menu.tools.pref.PreferenceWindow} object.
+	 */
 	public LocalTreeSelectionListener(PreferenceWindow preferenceWindow) {
 		this.preferenceWindow = preferenceWindow;
 	}
@@ -22,6 +33,7 @@ public class LocalTreeSelectionListener implements TreeSelectionListener {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void valueChanged(TreeSelectionEvent evt) {
 		final TreePath path = evt.getPath();

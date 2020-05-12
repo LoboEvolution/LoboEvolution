@@ -8,6 +8,9 @@ import org.loboevolution.init.GuiInit;
 
 /**
  * The Class OkAction.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class OkCancelAction extends AbstractAction {
 
@@ -16,6 +19,11 @@ public class OkCancelAction extends AbstractAction {
 
 	private transient PreferenceWindow prefer;
 
+	/**
+	 * <p>Constructor for OkCancelAction.</p>
+	 *
+	 * @param prefer a {@link org.loboevolution.menu.tools.pref.PreferenceWindow} object.
+	 */
 	public OkCancelAction(PreferenceWindow prefer) {
 		this.prefer = prefer;
 	}
@@ -26,6 +34,7 @@ public class OkCancelAction extends AbstractAction {
 	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.
 	 * ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {

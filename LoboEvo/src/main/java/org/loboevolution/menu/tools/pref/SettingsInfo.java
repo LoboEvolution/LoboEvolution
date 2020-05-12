@@ -1,5 +1,11 @@
 package org.loboevolution.menu.tools.pref;
 
+/**
+ * <p>SettingsInfo interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SettingsInfo {
 
 	/**

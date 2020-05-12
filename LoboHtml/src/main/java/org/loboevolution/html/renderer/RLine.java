@@ -58,6 +58,17 @@ class RLine extends BaseRCollection {
 	 */
 	private int xoffset;
 
+	/**
+	 * <p>Constructor for RLine.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param desiredMaxWidth a int.
+	 * @param height a int.
+	 * @param initialAllowOverflow a boolean.
+	 */
 	public RLine(ModelNode modelNode, RenderableContainer container, int x, int y, int desiredMaxWidth, int height,
 			boolean initialAllowOverflow) {
 		// Note that in the case of RLine, modelNode is the context node
@@ -75,9 +86,10 @@ class RLine extends BaseRCollection {
 	/**
 	 * This method adds and positions a renderable in the line, if possible. Note
 	 * that RLine does not set sizes, but only origins.
-	 * 
-	 * @throws OverflowException Thrown if the renderable overflows the line. All
+	 *
+	 * @throws org.loboevolution.html.renderer.OverflowException Thrown if the renderable overflows the line. All
 	 *                           overflowing renderables are added to the exception.
+	 * @param renderable a {@link org.loboevolution.html.renderer.Renderable} object.
 	 */
 	public final void add(Renderable renderable) throws OverflowException {
 		if (renderable instanceof RWord) {
@@ -97,6 +109,11 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * <p>addBlank.</p>
+	 *
+	 * @param rblank a {@link org.loboevolution.html.renderer.RBlank} object.
+	 */
 	public final void addBlank(RBlank rblank) {
 		// NOTE: Blanks may be added without concern for wrapping (?)
 		final int x = this.xoffset;
@@ -158,6 +175,11 @@ class RLine extends BaseRCollection {
 	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
 	 */
 
+	/**
+	 * <p>addSpacing.</p>
+	 *
+	 * @param rblank a {@link org.loboevolution.html.renderer.RSpacing} object.
+	 */
 	public final void addSpacing(RSpacing rblank) {
 		// NOTE: Spacing may be added without concern for wrapping (?)
 		final int x = this.xoffset;
@@ -168,10 +190,21 @@ class RLine extends BaseRCollection {
 		this.width = this.xoffset = x + width;
 	}
 
+	/**
+	 * <p>addStyleChanger.</p>
+	 *
+	 * @param sc a {@link org.loboevolution.html.renderer.RStyleChanger} object.
+	 */
 	public final void addStyleChanger(RStyleChanger sc) {
 		this.renderables.add(sc);
 	}
 
+	/**
+	 * <p>addWord.</p>
+	 *
+	 * @param rword a {@link org.loboevolution.html.renderer.RWord} object.
+	 * @throws org.loboevolution.html.renderer.OverflowException if any.
+	 */
 	public final void addWord(RWord rword) throws OverflowException {
 		// Check if it fits horzizontally
 		int offset = this.xoffset;
@@ -337,12 +370,16 @@ class RLine extends BaseRCollection {
 
 	/**
 	 * This method should only be invoked when the line has no items yet.
+	 *
+	 * @param x a int.
+	 * @param desiredMaxWidth a int.
 	 */
 	public void changeLimits(int x, int desiredMaxWidth) {
 		this.x = x;
 		this.desiredMaxWidth = desiredMaxWidth;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -362,19 +399,31 @@ class RLine extends BaseRCollection {
 		return result;
 	}
 
+	/**
+	 * <p>getBaselineOffset.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getBaselineOffset() {
 		return this.baseLineOffset;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getBlockBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
 
+	/**
+	 * <p>Getter for the field lineBreak.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderer.LineBreak} object.
+	 */
 	public LineBreak getLineBreak() {
 		return this.lineBreak;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
@@ -392,11 +441,13 @@ class RLine extends BaseRCollection {
 	 * 
 	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Iterator<Renderable> getRenderables() {
 		return this.renderables.iterator();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void invalidateLayoutLocal() {
 		// Workaround for fact that RBlockViewport does not
@@ -404,19 +455,31 @@ class RLine extends BaseRCollection {
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
+	/**
+	 * <p>isAllowOverflow.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isAllowOverflow() {
 		return this.allowOverflow;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isContainedByNode() {
 		return false;
 	}
 
+	/**
+	 * <p>isEmpty.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isEmpty() {
 		return this.xoffset == 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
@@ -429,6 +492,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
@@ -441,6 +505,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
 		final BoundableRenderable target = this.mousePressTarget;
@@ -452,6 +517,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
@@ -465,6 +531,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
@@ -487,6 +554,7 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -526,6 +594,11 @@ class RLine extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * <p>Setter for the field allowOverflow.</p>
+	 *
+	 * @param flag a boolean.
+	 */
 	public void setAllowOverflow(boolean flag) {
 		if (flag != this.allowOverflow) {
 			this.allowOverflow = flag;
@@ -566,14 +639,25 @@ class RLine extends BaseRCollection {
 		relement.setY(yoffset);
 	}
 
+	/**
+	 * <p>Setter for the field lineBreak.</p>
+	 *
+	 * @param lineBreak a {@link org.loboevolution.html.renderer.LineBreak} object.
+	 */
 	public void setLineBreak(LineBreak lineBreak) {
 		this.lineBreak = lineBreak;
 	}
 
+	/**
+	 * <p>simplyAdd.</p>
+	 *
+	 * @param r a {@link org.loboevolution.html.renderer.Renderable} object.
+	 */
 	public final void simplyAdd(Renderable r) {
 		this.renderables.add(r);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Rectangle getClipBounds() {
 		// TODO Auto-generated method stub

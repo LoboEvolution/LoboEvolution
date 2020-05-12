@@ -28,20 +28,39 @@ import java.awt.Rectangle;
 /**
  * A UI node abstraction that is used to send notifications back to the UI and
  * to obtain information the DOM needs from the UI (such as image dimensions).
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface UINode {
+	/**
+	 * <p>blur.</p>
+	 */
 	void blur();
 
+	/**
+	 * <p>focus.</p>
+	 */
 	void focus();
 
+	/**
+	 * <p>getBounds.</p>
+	 *
+	 * @return a {@link java.awt.Rectangle} object.
+	 */
 	Rectangle getBounds();
 
+	/**
+	 * <p>getBoundsRelativeToBlock.</p>
+	 *
+	 * @return a {@link java.awt.Rectangle} object.
+	 */
 	Rectangle getBoundsRelativeToBlock();
 
 	/**
 	 * Called
-	 * 
-	 * @param modelNode
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
 	 */
 	void repaint(ModelNode modelNode);
 }

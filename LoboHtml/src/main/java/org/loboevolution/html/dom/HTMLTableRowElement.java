@@ -40,118 +40,146 @@ import org.w3c.dom.DOMException;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLTableRowElement extends HTMLElement {
 	/**
 	 * Delete a cell from the current row.
-	 * 
+	 *
 	 * @param index The index of the cell to delete, starting from 0. If the index
 	 *              is -1 the last cell in the row is deleted.
 	 * @exception DOMException INDEX_SIZE_ERR: Raised if the specified
-	 *                         <code>index</code> is greater than or equal to the
+	 *                         index is greater than or equal to the
 	 *                         number of cells or if the index is a negative number
 	 *                         other than -1.
 	 * @version DOM Level 2
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	void deleteCell(int index) throws DOMException;
 
 	/**
 	 * Horizontal alignment of data within cells of this row. See the align
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAlign();
 
 	/**
 	 * Background color for rows. See the bgcolor attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getBgColor();
 
 	/**
 	 * The collection of cells in this row.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getCells();
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getCh();
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getChOff();
 
 	/**
-	 * This is in logical order and not in document order. The <code>rowIndex</code>
-	 * does take into account sections ( <code>THEAD</code>, <code>TFOOT</code>, or
-	 * <code>TBODY</code>) within the table, placing <code>THEAD</code> rows first
-	 * in the index, followed by <code>TBODY</code> rows, followed by
-	 * <code>TFOOT</code> rows.
-	 * 
+	 * This is in logical order and not in document order. The rowIndex
+	 * does take into account sections ( THEAD, TFOOT, or
+	 * TBODY) within the table, placing THEAD rows first
+	 * in the index, followed by TBODY rows, followed by
+	 * TFOOT rows.
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getRowIndex();
 
 	/**
-	 * The index of this row, relative to the current section ( <code>THEAD</code>,
-	 * <code>TFOOT</code>, or <code>TBODY</code>), starting from 0.
-	 * 
+	 * The index of this row, relative to the current section ( THEAD,
+	 * TFOOT, or TBODY), starting from 0.
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getSectionRowIndex();
 
 	/**
 	 * Vertical alignment of data within cells of this row. See the valign attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getVAlign();
 
 	/**
-	 * Insert an empty <code>TD</code> cell into this row. If <code>index</code> is
+	 * Insert an empty TD cell into this row. If index is
 	 * -1 or equal to the number of cells, the new cell is appended.
-	 * 
+	 *
 	 * @param index The place to insert the cell, starting from 0.
 	 * @return The newly created cell.
 	 * @exception DOMException INDEX_SIZE_ERR: Raised if the specified
-	 *                         <code>index</code> is greater than the number of
+	 *                         index is greater than the number of
 	 *                         cells or if the index is a negative number other than
 	 *                         -1.
 	 * @version DOM Level 2
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	HTMLElement insertCell(int index) throws DOMException;
 
 	/**
 	 * Horizontal alignment of data within cells of this row. See the align
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param align a {@link java.lang.String} object.
 	 */
 	void setAlign(String align);
 
 	/**
 	 * Background color for rows. See the bgcolor attribute definition in HTML 4.01.
 	 * This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param bgColor a {@link java.lang.String} object.
 	 */
 	void setBgColor(String bgColor);
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param ch a {@link java.lang.String} object.
 	 */
 	void setCh(String ch);
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param chOff a {@link java.lang.String} object.
 	 */
 	void setChOff(String chOff);
 
 	/**
 	 * Vertical alignment of data within cells of this row. See the valign attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param vAlign a {@link java.lang.String} object.
 	 */
 	void setVAlign(String vAlign);
 

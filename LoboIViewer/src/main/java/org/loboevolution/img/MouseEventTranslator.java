@@ -32,6 +32,9 @@ import javax.swing.event.MouseInputListener;
 /**
  * Helper class that generates ImageMouseEvents by translating normal mouse
  * events onto the image.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class MouseEventTranslator implements MouseInputListener, PropertyChangeListener {
 	/** This flag is true if the mouse cursor is inside the bounds of the image. */
@@ -44,11 +47,20 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	
 	private ImageComponent ic;
 	
+	/**
+	 * <p>Constructor for MouseEventTranslator.</p>
+	 *
+	 * @param ic a {@link org.loboevolution.img.ImageComponent} object.
+	 */
 	public MouseEventTranslator(ImageComponent ic) {
 		this.ic = ic;
 	}
 
-	/** Sets up this translator. */
+	/**
+	 * Sets up this translator.
+	 *
+	 * @param ic a {@link org.loboevolution.img.ImageComponent} object.
+	 */
 	protected void register(ImageComponent ic) {
 		ic.addMouseListener(this);
 		ic.addMouseMotionListener(this);
@@ -91,6 +103,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if (ic.getImage() == null || !on)
@@ -101,6 +114,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		if (ic.getImage() != null) {
@@ -113,6 +127,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseExited(MouseEvent e) {
 		if (on) {
@@ -121,11 +136,13 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		handleMouseAt(e.getPoint(), e);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if (ic.getImage() == null)
@@ -134,6 +151,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		fireMouseDrag(p.x, p.y, e);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if ("image".equals(evt.getPropertyName()) || "resizeStrategy".equals(evt.getPropertyName())
@@ -202,10 +220,12 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mousePressed(MouseEvent e) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	}

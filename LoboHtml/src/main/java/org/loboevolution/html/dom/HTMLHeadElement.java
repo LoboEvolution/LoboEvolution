@@ -38,12 +38,17 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLHeadElement extends HTMLElement {
 	/**
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a metadata profile. See the profile attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getProfile();
 
@@ -51,6 +56,8 @@ public interface HTMLHeadElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a metadata profile. See the profile attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param profile a {@link java.lang.String} object.
 	 */
 	void setProfile(String profile);
 

@@ -57,7 +57,10 @@ import com.jtattoo.plaf.BaseToolTipUI;
 import com.jtattoo.plaf.BaseTreeUI;
 
 /**
+ * <p>BernsteinLookAndFeel class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 
@@ -105,18 +108,39 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 		themesMap.put("Giant-Font", giantFontProps);
 	}
 
+	/**
+	 * <p>getThemeProperties.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.util.Properties} object.
+	 */
 	public static Properties getThemeProperties(String name) {
 		return (Properties) themesMap.get(name);
 	}
 
+	/**
+	 * <p>getThemes.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getThemes() {
 		return themesList;
 	}
 
+	/**
+	 * <p>setCurrentTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setCurrentTheme(Properties themesProps) {
 		setTheme(themesProps);
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param themesProps a {@link java.util.Properties} object.
+	 */
 	public static void setTheme(Properties themesProps) {
 		currentThemeName = "bernsteinTheme";
 		if (myTheme == null) {
@@ -130,6 +154,11 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name) {
 		setTheme((Properties) themesMap.get(name));
 		if (myTheme != null) {
@@ -137,6 +166,13 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/**
+	 * <p>setTheme.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param licenseKey a {@link java.lang.String} object.
+	 * @param logoString a {@link java.lang.String} object.
+	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
 		Properties props = (Properties) themesMap.get(name);
 		if (props != null) {
@@ -149,6 +185,7 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createDefaultTheme() {
 		if (myTheme == null) {
@@ -157,31 +194,37 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 		setTheme(myTheme);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractBorderFactory getBorderFactory() {
 		return BernsteinBorderFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDescription() {
 		return "The Bernstein Look and Feel";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractIconFactory getIconFactory() {
 		return BernsteinIconFactory.getInstance();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getID() {
 		return "Bernstein";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return "Bernstein";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initClassDefaults(UIDefaults table) {
 		if (!"bernsteinTheme".equals(currentThemeName)) {
@@ -215,17 +258,20 @@ public class BernsteinLookAndFeel extends AbstractLookAndFeel {
 		table.put("SpinnerUI", BaseSpinnerUI.class.getName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 		table.put("SplitPane.centerOneTouchButtons", Boolean.FALSE);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isNativeLookAndFeel() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupportedLookAndFeel() {
 		return true;

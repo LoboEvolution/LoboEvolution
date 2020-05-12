@@ -26,9 +26,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class LinkFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class LinkFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return node instanceof HTMLLinkElement;

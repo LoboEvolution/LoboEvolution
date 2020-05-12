@@ -10,6 +10,9 @@ import javax.swing.JPanel;
 
 /**
  * The Class CheckBoxPanel.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class CheckBoxPanel extends JPanel {
 

@@ -36,6 +36,18 @@ final class RWord extends BaseBoundableRenderable {
 	public final FontMetrics fontMetrics;
 	final String shownWord;
 
+	/**
+	 * <p>Constructor for RWord.</p>
+	 *
+	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param word a {@link java.lang.String} object.
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param fontMetrics a {@link java.awt.FontMetrics} object.
+	 * @param descent a int.
+	 * @param ascentPlusLeading a int.
+	 * @param height a int.
+	 * @param textTransform a int.
+	 */
 	public RWord(ModelNode me, String word, RenderableContainer container, FontMetrics fontMetrics, int descent,
 			int ascentPlusLeading, int height, int textTransform) {
 		super(container, me);
@@ -51,6 +63,7 @@ final class RWord extends BaseBoundableRenderable {
 		this.width = fontMetrics.stringWidth(renderedWord);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -120,15 +133,18 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		return new RenderableSpot(this, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void invalidateLayoutLocal() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isContainedByNode() {
 		return true;
@@ -139,6 +155,7 @@ final class RWord extends BaseBoundableRenderable {
 	 * 
 	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -194,6 +211,7 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		int startX = -1;
@@ -264,6 +282,7 @@ final class RWord extends BaseBoundableRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "RWord[word=" + this.shownWord + "]";

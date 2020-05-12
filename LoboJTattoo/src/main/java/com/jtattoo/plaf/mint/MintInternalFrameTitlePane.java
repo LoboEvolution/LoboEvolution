@@ -33,7 +33,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>MintInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -42,10 +45,16 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for MintInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public MintInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g) {
 		if (JTattooUtilities.isActive(this)) {
@@ -59,6 +68,7 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		g.setColor(ColorHelper.darker(AbstractLookAndFeel.getTheme().getWindowTitleColorDark(), 10));
@@ -67,6 +77,7 @@ public class MintInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintPalette(Graphics g) {
 		if (JTattooUtilities.isFrameActive(this)) {

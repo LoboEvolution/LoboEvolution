@@ -37,14 +37,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AcrylComboBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylComboBoxUI extends BaseComboBoxUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AcrylComboBoxUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		ArrowButton button = new BaseComboBoxUI.ArrowButton();
@@ -59,6 +64,7 @@ public class AcrylComboBoxUI extends BaseComboBoxUI {
 		return button;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setButtonBorder() {
 		Color borderColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getFrameColor(), 50);

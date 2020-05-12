@@ -16,16 +16,28 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>OpenFileAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class OpenFileAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
 	private final BrowserFrame frame;
 
+	/**
+	 * <p>Constructor for OpenFileAction.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public OpenFileAction(BrowserFrame frame) {
 		this.frame = frame;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final BrowserPanel panel = this.frame.getPanel();

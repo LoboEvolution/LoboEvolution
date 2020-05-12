@@ -27,16 +27,30 @@ import java.awt.Toolkit;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
 
+/**
+ * <p>ListRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ListRenderState extends AbstractMarginRenderState {
+	/**
+	 * <p>Constructor for ListRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public ListRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getDefaultDisplay() {
 		return DISPLAY_LIST_ITEM;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();

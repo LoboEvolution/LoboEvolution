@@ -26,11 +26,12 @@ package org.loboevolution.html;
 import java.util.EventListener;
 
 /**
- * The <code>ReadyStateChangeListener</code> interface is implemented to receive
- * ReadyState change events from {@link org.loboevolution.html.HttpRequest}.
- * 
- * @see org.loboevolution.html.HttpRequest#addReadyStateChangeListener(ReadyStateChangeListener)
+ * The ReadyStateChangeListener interface is implemented to receive
+ * ReadyState change events from {@link org.loboevolution.http.HttpRequest}.
+ *
+ * @see org.loboevolution.http.HttpRequest#addReadyStateChangeListener(ReadyStateChangeListener)
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public interface ReadyStateChangeListener extends EventListener {
 	/**

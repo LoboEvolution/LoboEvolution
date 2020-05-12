@@ -28,17 +28,34 @@ import org.loboevolution.html.renderer.FrameContext;
 import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.http.UserAgentContext;
 
+/**
+ * <p>RImgControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RImgControl extends RUIControl {
+	/**
+	 * <p>Constructor for RImgControl.</p>
+	 *
+	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param widget a {@link org.loboevolution.html.control.UIControl} object.
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public RImgControl(ModelNode me, UIControl widget, RenderableContainer container, FrameContext frameContext,
 			UserAgentContext ucontext) {
 		super(me, widget, container, frameContext, ucontext);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Insets getBorderInsets() {
 		return getInsets(false, false);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
 		super.doLayout(availWidth, availHeight, sizeOnly);

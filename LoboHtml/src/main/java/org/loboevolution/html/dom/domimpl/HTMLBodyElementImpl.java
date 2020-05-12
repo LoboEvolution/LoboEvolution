@@ -30,11 +30,23 @@ import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Document;
 
+/**
+ * <p>HTMLBodyElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBodyElement {
+	/**
+	 * <p>Constructor for HTMLBodyElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLBodyElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void assignAttributeField(String normalName, String value) {
 		if ("onload".equals(normalName)) {
@@ -47,31 +59,41 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new BodyRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getALink() {
 		return getAttribute("alink");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBackground() {
 		return getAttribute("background");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBgColor() {
 		return getAttribute("bgcolor");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getLink() {
 		return getAttribute("link");
 	}
 
+	/**
+	 * <p>getOnload.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Function} object.
+	 */
 	public Function getOnload() {
 		final Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
@@ -81,36 +103,47 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getText() {
 		return getAttribute("text");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getVLink() {
 		return getAttribute("vlink");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setALink(String aLink) {
 		setAttribute("alink", aLink);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBackground(String background) {
 		setAttribute("background", background);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBgColor(String bgColor) {
 		setAttribute("bgcolor", bgColor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setLink(String link) {
 		setAttribute("link", link);
 	}
 
+	/**
+	 * <p>setOnload.</p>
+	 *
+	 * @param onload a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void setOnload(Function onload) {
 		final Object document = this.document;
 		if (document instanceof HTMLDocumentImpl) {
@@ -120,6 +153,7 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setOwnerDocument(Document value) {
 		super.setOwnerDocument(value);
@@ -136,11 +170,13 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setText(String text) {
 		setAttribute("text", text);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setVLink(String vLink) {
 		setAttribute("vlink", vLink);

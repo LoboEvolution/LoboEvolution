@@ -13,6 +13,9 @@ import org.loboevolution.store.SQLiteCommon;
 
 /**
  * The Class LAFSettings.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class LAFSettings implements Serializable {
 
@@ -90,6 +93,12 @@ public class LAFSettings implements Serializable {
 	/** The Underline . */
 	private boolean underline = false;
 	
+	/**
+	 * <p>getFonts.</p>
+	 *
+	 * @param type a {@link java.lang.String} object.
+	 * @return an array of {@link java.lang.String} objects.
+	 */
 	public static String[] getFonts(String type) {
 		final List<String> fonts = new ArrayList<String>();
 		final String query = "SELECT name FROM " + type;
@@ -106,6 +115,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field color.</p>
+	 *
 	 * @return the color
 	 */
 	public Color getColor() {
@@ -131,6 +142,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>getInstance.</p>
+	 *
 	 * @return the instance
 	 */
 	public LAFSettings getInstance() {
@@ -178,6 +191,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>isBold.</p>
+	 *
 	 * @return the bold
 	 */
 	public boolean isBold() {
@@ -212,6 +227,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>isItalic.</p>
+	 *
 	 * @return the italic
 	 */
 	public boolean isItalic() {
@@ -264,6 +281,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>isStrikethrough.</p>
+	 *
 	 * @return the strikethrough
 	 */
 	public boolean isStrikethrough() {
@@ -271,6 +290,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>isSubscript.</p>
+	 *
 	 * @return the subscript
 	 */
 	public boolean isSubscript() {
@@ -278,6 +299,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>isSuperscript.</p>
+	 *
 	 * @return the superscript
 	 */
 	public boolean isSuperscript() {
@@ -294,6 +317,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>isUnderline.</p>
+	 *
 	 * @return the underline
 	 */
 	public boolean isUnderline() {
@@ -374,6 +399,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field bold.</p>
+	 *
 	 * @param bold the bold to set
 	 */
 	public void setBold(boolean bold) {
@@ -381,6 +408,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field color.</p>
+	 *
 	 * @param color the color to set
 	 */
 	public void setColor(Color color) {
@@ -433,6 +462,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field italic.</p>
+	 *
 	 * @param italic the italic to set
 	 */
 	public void setItalic(boolean italic) {
@@ -485,6 +516,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field strikethrough.</p>
+	 *
 	 * @param strikethrough the strikethrough to set
 	 */
 	public void setStrikethrough(boolean strikethrough) {
@@ -492,6 +525,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field subscript.</p>
+	 *
 	 * @param subscript the subscript to set
 	 */
 	public void setSubscript(boolean subscript) {
@@ -499,6 +534,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field superscript.</p>
+	 *
 	 * @param superscript the superscript to set
 	 */
 	public void setSuperscript(boolean superscript) {
@@ -515,6 +552,8 @@ public class LAFSettings implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field underline.</p>
+	 *
 	 * @param underline the underline to set
 	 */
 	public void setUnderline(boolean underline) {

@@ -32,10 +32,8 @@ import org.mozilla.javascript.Undefined;
  *
  * @author Brendan Eich
  * @author Norris Boyd
+ * @version $Id: $Id
  */
-
-
-
 public class NativeRegExp extends IdScriptableObject implements Function
 {
     private static final long serialVersionUID = 4965263491464903264L;
@@ -44,13 +42,19 @@ public class NativeRegExp extends IdScriptableObject implements Function
     
     private static final Object REGEXP_TAG = new Object();
 
+    /** Constant JSREG_GLOB=0x1 */
     public static final int JSREG_GLOB = 0x1;       // 'g' flag: global
+    /** Constant JSREG_FOLD=0x2 */
     public static final int JSREG_FOLD = 0x2;       // 'i' flag: fold
+    /** Constant JSREG_MULTILINE=0x4 */
     public static final int JSREG_MULTILINE = 0x4;  // 'm' flag: multiline
 
     //type of match to perform
+    /** Constant TEST=0 */
     public static final int TEST = 0;
+    /** Constant MATCH=1 */
     public static final int MATCH = 1;
+    /** Constant PREFIX=2 */
     public static final int PREFIX = 2;
 
     private static final boolean debug = false;
@@ -113,6 +117,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
     private static final int ANCHOR_BOL = -2;
 
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
 
@@ -146,6 +157,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         ScriptRuntime.setBuiltinProtoAndParent(this, scope, TopLevel.Builtins.RegExp);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
@@ -153,9 +165,10 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Gets the value to be returned by the typeof operator called on this object.
      * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
-     * @return "object"
      */
     @Override
     public String getTypeOf()
@@ -163,6 +176,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return "object";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -170,6 +184,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return execSub(cx, scope, args, MATCH);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -197,6 +212,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return this;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -2574,12 +2590,14 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
         MAX_INSTANCE_ID = 5;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -2623,6 +2641,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return instanceIdInfo(attr, id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -2636,6 +2655,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return super.getInstanceIdName(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -2654,6 +2674,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return super.getInstanceIdValue(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -2670,6 +2691,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         super.setInstanceIdValue(id, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdAttributes(int id, int attr) {
         switch (id) {
@@ -2680,6 +2702,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         super.setInstanceIdAttributes(id, attr);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -2697,6 +2720,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
         initPrototypeMethod(REGEXP_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -2735,6 +2759,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
     }
 
 // #string_id_map#
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

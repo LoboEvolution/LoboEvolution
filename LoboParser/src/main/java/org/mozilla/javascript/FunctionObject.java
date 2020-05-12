@@ -15,6 +15,12 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+/**
+ * <p>FunctionObject class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FunctionObject extends BaseFunction
 {
     private static final long serialVersionUID = -5332312783643935019L;
@@ -22,7 +28,7 @@ public class FunctionObject extends BaseFunction
     /**
      * Create a JavaScript function object from a Java method.
      *
-     * <p>The <code>member</code> argument must be either a java.lang.reflect.Method
+     * <p>The member argument must be either a java.lang.reflect.Method
      * or a java.lang.reflect.Constructor and must match one of two forms.<p>
      *
      * The first form is a member with zero or more parameters
@@ -62,15 +68,15 @@ public class FunctionObject extends BaseFunction
      * and an Object result.<p>
      *
      * When the function varargs form is called as part of a function call,
-     * the <code>args</code> parameter contains the
-     * arguments, with <code>thisObj</code>
-     * set to the JavaScript 'this' value. <code>funObj</code>
+     * the args parameter contains the
+     * arguments, with thisObj
+     * set to the JavaScript 'this' value. funObj
      * is the function object for the invoked function.<p>
      *
      * When the constructor varargs form is called or invoked while evaluating
-     * a <code>new</code> expression, <code>args</code> contains the
-     * arguments, <code>ctorObj</code> refers to this FunctionObject, and
-     * <code>inNewExpr</code> is true if and only if  a <code>new</code>
+     * a new expression, args contains the
+     * arguments, ctorObj refers to this FunctionObject, and
+     * inNewExpr is true if and only if  a new
      * expression caused the call. This supports defining a function that
      * has different behavior when called as a constructor than when
      * invoked as a normal function call. (For example, the Boolean
@@ -157,9 +163,12 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * <p>getTypeTag.</p>
+     *
      * @return One of <tt>JAVA_*_TYPE</tt> constants to indicate desired type
      *         or {@link #JAVA_UNSUPPORTED_TYPE} if the convertion is not
      *         possible
+     * @param type a {@link java.lang.Class} object.
      */
     public static int getTypeTag(Class<?> type)
     {
@@ -182,6 +191,15 @@ public class FunctionObject extends BaseFunction
         return JAVA_UNSUPPORTED_TYPE;
     }
 
+    /**
+     * <p>convertArg.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param arg a {@link java.lang.Object} object.
+     * @param typeTag a int.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object convertArg(Context cx, Scriptable scope,
                                     Object arg, int typeTag)
     {
@@ -213,6 +231,8 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return the value defined by  the method used to construct the object
      * (number of parameters of the method, or 1 if the method is a "varargs"
      * form).
@@ -223,6 +243,8 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return the same value as {@link #getArity()}.
      */
     @Override
@@ -230,6 +252,7 @@ public class FunctionObject extends BaseFunction
         return getArity();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
@@ -238,6 +261,8 @@ public class FunctionObject extends BaseFunction
 
     /**
      * Get Java method or constructor this function represent.
+     *
+     * @return a {@link java.lang.reflect.Member} object.
      */
     public Member getMethodOrConstructor()
     {
@@ -313,7 +338,7 @@ public class FunctionObject extends BaseFunction
      * Sets up the "prototype" and "constructor" properties. Also
      * calls setParent and setPrototype with appropriate values.
      * Then adds the function object as a property of the given scope, using
-     *      <code>prototype.getClassName()</code>
+     *      prototype.getClassName()
      * as the name of the property.
      *
      * @param scope the scope in which to define the constructor (typically
@@ -345,9 +370,16 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * <p>convertArg.</p>
+     *
      * @deprecated Use {@link #getTypeTag(Class)}
      * and {@link #convertArg(Context, Scriptable, Object, int)}
      * for type conversion.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param arg a {@link java.lang.Object} object.
+     * @param desired a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public static Object convertArg(Context cx, Scriptable scope,
@@ -362,11 +394,12 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Performs conversions on argument types if needed and
      * invokes the underlying Java method or constructor.
      * <p>
      * Implements Function.call.
-     *
      * @see org.mozilla.javascript.Function#call(
      *          Context, Scriptable, Scriptable, Object[])
      */
@@ -475,6 +508,8 @@ public class FunctionObject extends BaseFunction
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Return new {@link Scriptable} instance using the default
      * constructor for the class of the underlying Java method.
      * Return null to indicate that the call method should be used to create
@@ -532,12 +567,19 @@ public class FunctionObject extends BaseFunction
 
     private static boolean sawSecurityException;
 
+    /** Constant JAVA_UNSUPPORTED_TYPE=0 */
     public static final int JAVA_UNSUPPORTED_TYPE = 0;
+    /** Constant JAVA_STRING_TYPE=1 */
     public static final int JAVA_STRING_TYPE      = 1;
+    /** Constant JAVA_INT_TYPE=2 */
     public static final int JAVA_INT_TYPE         = 2;
+    /** Constant JAVA_BOOLEAN_TYPE=3 */
     public static final int JAVA_BOOLEAN_TYPE     = 3;
+    /** Constant JAVA_DOUBLE_TYPE=4 */
     public static final int JAVA_DOUBLE_TYPE      = 4;
+    /** Constant JAVA_SCRIPTABLE_TYPE=5 */
     public static final int JAVA_SCRIPTABLE_TYPE  = 5;
+    /** Constant JAVA_OBJECT_TYPE=6 */
     public static final int JAVA_OBJECT_TYPE      = 6;
 
     MemberBox member;

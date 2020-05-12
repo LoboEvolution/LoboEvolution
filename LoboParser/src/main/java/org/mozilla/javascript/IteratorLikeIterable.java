@@ -20,6 +20,9 @@ import java.util.NoSuchElementException;
  * * If "done" is true, then the returned object should also contain a "value" property.
  * * If it has a function property called "return" then it will be called
  *   when the caller is done iterating.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class IteratorLikeIterable
     implements Iterable<Object>, Closeable
@@ -31,6 +34,13 @@ public class IteratorLikeIterable
     private final Scriptable iterator;
     private boolean closed;
 
+    /**
+     * <p>Constructor for IteratorLikeIterable.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param target a {@link java.lang.Object} object.
+     */
     public IteratorLikeIterable(Context cx, Scriptable scope, Object target) {
         this.cx = cx;
         this.scope = scope;
@@ -49,6 +59,7 @@ public class IteratorLikeIterable
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void close() {
         if (!closed) {
@@ -59,6 +70,7 @@ public class IteratorLikeIterable
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Itr iterator() {
         return new Itr();

@@ -31,24 +31,38 @@ import org.loboevolution.html.renderer.HtmlController;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>HTMLButtonElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTMLButtonElement {
 
+	/**
+	 * <p>Constructor for HTMLButtonElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLButtonElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAccessKey() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
 		final String disabled = getAttribute("disabled");
 		return disabled == null ? false : true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLFormElement getForm() {
 		Node parent = this.getParentNode();
@@ -58,58 +72,72 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		return (HTMLFormElement) parent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return getAttribute("name");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getTabIndex() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 	final String val = getAttribute("type");
 	return val == null ? "submit" : val;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
 		return getAttribute("value");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAccessKey(String accessKey) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDisabled(boolean disabled) {
 		setAttribute("disabled", String.valueOf(disabled));
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setName(String name) {
 		setAttribute("name", name);
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTabIndex(int tabIndex) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
 		setAttribute("value", value);
 		
 	}
 
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param buttonControl a {@link org.loboevolution.html.control.ButtonControl} object.
+	 */
 	public void draw(ButtonControl buttonControl) {
 		final JButton button = new JButton();
 		button.setContentAreaFilled(false);
@@ -119,6 +147,9 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		buttonControl.add(button);
 	}
 
+	/**
+	 * <p>submit.</p>
+	 */
 	public void submit() {
 		FormInput[] formInputs;
 		final String name = getName();
@@ -134,6 +165,9 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		}
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null) {
@@ -141,6 +175,9 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		}
 	}
 	
+	/**
+	 * <p>resetInput.</p>
+	 */
 	public void resetInput() {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null && form.hasChildNodes()) {

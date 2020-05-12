@@ -34,21 +34,24 @@ class LocalErrorHandler implements ErrorHandler {
 	private static final Logger logger = Logger.getLogger(LocalErrorHandler.class.getName());
 
 	/**
-	 * @param context
+	 * <p>Constructor for LocalErrorHandler.</p>
 	 */
 	public LocalErrorHandler() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void error(SAXParseException exception) throws SAXException {
 		logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void fatalError(SAXParseException exception) throws SAXException {
 		logger.log(Level.SEVERE, exception.getMessage(), exception.getCause());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void warning(SAXParseException exception) throws SAXException {
 		logger.log(Level.WARNING, exception.getMessage(), exception.getCause());

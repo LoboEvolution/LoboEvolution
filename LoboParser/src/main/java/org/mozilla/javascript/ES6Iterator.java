@@ -6,6 +6,12 @@
 
 package org.mozilla.javascript;
 
+/**
+ * <p>Abstract ES6Iterator class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class ES6Iterator extends IdScriptableObject {
 
     private static final long serialVersionUID = 2438373029140003950L;
@@ -46,6 +52,7 @@ public abstract class ES6Iterator extends IdScriptableObject {
         setPrototype(prototype);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -63,6 +70,7 @@ public abstract class ES6Iterator extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -87,6 +95,7 @@ public abstract class ES6Iterator extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k) {
         if (SymbolKey.ITERATOR.equals(k)) {
@@ -97,6 +106,7 @@ public abstract class ES6Iterator extends IdScriptableObject {
         return 0;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         if ("next".equals(s)) {
@@ -105,10 +115,31 @@ public abstract class ES6Iterator extends IdScriptableObject {
         return 0;
     }
 
+    /**
+     * <p>isDone.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a boolean.
+     */
     abstract protected boolean isDone(Context cx, Scriptable scope);
 
+    /**
+     * <p>nextValue.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
+     */
     abstract protected Object nextValue(Context cx, Scriptable scope);
 
+    /**
+     * <p>next.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link java.lang.Object} object.
+     */
     protected Object next(Context cx, Scriptable scope) {
         Object value = Undefined.instance;
         boolean done = isDone(cx, scope) || this.exhausted;
@@ -120,6 +151,11 @@ public abstract class ES6Iterator extends IdScriptableObject {
         return makeIteratorResult(cx, scope, done, value);
     }
 
+    /**
+     * <p>Getter for the field tag.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     protected String getTag() {
         return tag;
     }
@@ -138,8 +174,12 @@ public abstract class ES6Iterator extends IdScriptableObject {
         SymbolId_toStringTag = 3,
         MAX_PROTOTYPE_ID     = SymbolId_toStringTag;
 
+    /** Constant NEXT_METHOD="next" */
     public static final String NEXT_METHOD = "next";
+    /** Constant DONE_PROPERTY="done" */
     public static final String DONE_PROPERTY = "done";
+    /** Constant RETURN_PROPERTY="return" */
     public static final String RETURN_PROPERTY = "return";
+    /** Constant VALUE_PROPERTY="value" */
     public static final String VALUE_PROPERTY = "value";
 }

@@ -35,14 +35,19 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
 import com.jtattoo.plaf.AbstractLookAndFeel;
 
 /**
+ * <p>TextureSeparatorUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureSeparatorUI extends BasicSeparatorUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureSeparatorUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
 		if (((JSeparator) c).getOrientation() == SwingConstants.VERTICAL) {
@@ -52,6 +57,7 @@ public class TextureSeparatorUI extends BasicSeparatorUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		if (c != null) {

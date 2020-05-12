@@ -12,6 +12,12 @@ import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.info.TabInfo;
 import org.loboevolution.store.TabStore;
 
+/**
+ * <p>TabbedPanePopupMenu class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TabbedPanePopupMenu extends JPopupMenu {
 
 	private static final long serialVersionUID = 1L;
@@ -26,6 +32,11 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 
 	private final JMenuItem closeRight;
 
+	/**
+	 * <p>Constructor for TabbedPanePopupMenu.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 */
 	public TabbedPanePopupMenu(IBrowserPanel panel) {
 		add("New tab").addActionListener(e -> {
 			final DnDTabbedPane tabbedPane = (DnDTabbedPane) getInvoker();
@@ -80,6 +91,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 		});
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void show(Component c, int x, int y) {
 		if (c instanceof DnDTabbedPane) {

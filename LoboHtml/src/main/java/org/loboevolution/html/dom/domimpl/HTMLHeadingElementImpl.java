@@ -25,11 +25,23 @@ import org.loboevolution.html.renderstate.HeadingRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 
+/**
+ * <p>HTMLHeadingElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTMLHeadingElement {
+	/**
+	 * <p>Constructor for HTMLHeadingElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLHeadingElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		final int length = buffer.length();
@@ -56,6 +68,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 		buffer.append("\r\n\r\n");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected AbstractCSSProperties createDefaultStyleSheet() {
 		final AbstractCSSProperties css = new AbstractCSSProperties(this);
@@ -64,6 +77,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 		return css;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		getHeadingFontSize();
@@ -73,6 +87,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 		return new HeadingRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
 		return getAttribute("align");
@@ -126,6 +141,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 		return "14px";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
 		setAttribute("align", align);

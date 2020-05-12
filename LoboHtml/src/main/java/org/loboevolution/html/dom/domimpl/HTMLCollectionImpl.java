@@ -26,21 +26,39 @@ import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+/**
+ * <p>HTMLCollectionImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLCollectionImpl implements HTMLCollection {
 
 	private NodeImpl rootNode;
 	
 	private NodeListImpl rootList = null;
 	
+	/**
+	 * <p>Constructor for HTMLCollectionImpl.</p>
+	 *
+	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	public HTMLCollectionImpl(NodeImpl rootNode) {
 		this.rootNode = rootNode;
 	}
 
+	/**
+	 * <p>Constructor for HTMLCollectionImpl.</p>
+	 *
+	 * @param rootNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param nodeFilter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 */
 	public HTMLCollectionImpl(NodeImpl rootNode, NodeFilter nodeFilter) {
 		this.rootNode = rootNode;
 		rootList = (NodeListImpl) rootNode.getNodeList(nodeFilter);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		if(rootList == null ) {
@@ -50,6 +68,12 @@ public class HTMLCollectionImpl implements HTMLCollection {
 		}
 	}
 
+	/**
+	 * <p>indexOf.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @return a int.
+	 */
 	public int indexOf(Node node) {
 		if (rootList == null) {
 			return this.rootNode.getChildIndex(node);
@@ -58,6 +82,7 @@ public class HTMLCollectionImpl implements HTMLCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
 		if (rootList == null) {
@@ -67,6 +92,7 @@ public class HTMLCollectionImpl implements HTMLCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node namedItem(String name) {
 		final Document doc = this.rootNode.getOwnerDocument();

@@ -39,42 +39,42 @@ import java.util.Map;
 /**
  * A JSONArray is an ordered sequence of values. Its external text form is a
  * string wrapped in square brackets with commas separating the values. The
- * internal form is an object having <code>get</code> and <code>opt</code>
- * methods for accessing the values by index, and <code>put</code> methods for
+ * internal form is an object having get and opt
+ * methods for accessing the values by index, and put methods for
  * adding or replacing values. The values can be any of these types:
- * <code>Boolean</code>, <code>JSONArray</code>, <code>JSONObject</code>,
- * <code>Number</code>, <code>String</code>, or the
- * <code>JSONObject.NULL object</code>.
+ * Boolean, JSONArray, JSONObject,
+ * Number, String, or the
+ * JSONObject.NULL object.
  * <p>
  * The constructor can convert a JSON text into a Java object. The
- * <code>toString</code> method converts to JSON text.
+ * toString method converts to JSON text.
  * <p>
- * A <code>get</code> method returns a value if one can be found, and throws an
- * exception if one cannot be found. An <code>opt</code> method returns a
+ * A get method returns a value if one can be found, and throws an
+ * exception if one cannot be found. An opt method returns a
  * default value instead of throwing an exception, and so is useful for
  * obtaining optional values.
  * <p>
- * The generic <code>get()</code> and <code>opt()</code> methods return an
+ * The generic get() and opt() methods return an
  * object which you can cast or query for type. There are also typed
- * <code>get</code> and <code>opt</code> methods that do type checking and type
+ * get and opt methods that do type checking and type
  * coercion for you.
  * <p>
- * The texts produced by the <code>toString</code> methods strictly conform to
+ * The texts produced by the toString methods strictly conform to
  * JSON syntax rules. The constructors are more forgiving in the texts they will
  * accept:
  * <ul>
- * <li>An extra <code>,</code>&nbsp;<small>(comma)</small> may appear just
+ * <li>An extra ,&nbsp;<small>(comma)</small> may appear just
  * before the closing bracket.</li>
- * <li>The <code>null</code> value will be inserted when there is <code>,</code>
+ * <li>The null value will be inserted when there is ,
  * &nbsp;<small>(comma)</small> elision.</li>
- * <li>Strings may be quoted with <code>'</code>&nbsp;<small>(single
+ * <li>Strings may be quoted with '&nbsp;<small>(single
  * quote)</small>.</li>
  * <li>Strings do not need to be quoted at all if they do not begin with a quote
  * or single quote, and if they do not contain leading or trailing spaces, and
  * if they do not contain any of these characters:
- * <code>{ } [ ] / \ : , #</code> and if they do not look like numbers and
- * if they are not the reserved words <code>true</code>, <code>false</code>, or
- * <code>null</code>.</li>
+ * { } [ ] / \ : , # and if they do not look like numbers and
+ * if they are not the reserved words true, false, or
+ * null.</li>
  * </ul>
  *
  * @author JSON.org
@@ -99,7 +99,7 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param x
      *            A JSONTokener
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is a syntax error.
      */
     public JSONArray(JSONTokener x) throws JSONException {
@@ -151,10 +151,10 @@ public class JSONArray implements Iterable<Object> {
      * Construct a JSONArray from a source JSON text.
      *
      * @param source
-     *            A string that begins with <code>[</code>&nbsp;<small>(left
-     *            bracket)</small> and ends with <code>]</code>
+     *            A string that begins with [&nbsp;<small>(left
+     *            bracket)</small> and ends with ]
      *            &nbsp;<small>(right bracket)</small>.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is a syntax error.
      */
     public JSONArray(String source) throws JSONException {
@@ -181,8 +181,9 @@ public class JSONArray implements Iterable<Object> {
     /**
      * Construct a JSONArray from an array
      *
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If not an array.
+     * @param array a {@link java.lang.Object} object.
      */
     public JSONArray(Object array) throws JSONException {
         this();
@@ -198,6 +199,7 @@ public class JSONArray implements Iterable<Object> {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Iterator<Object> iterator() {
         return this.myArrayList.iterator();
@@ -209,7 +211,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return An object value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is no value for the index.
      */
     public Object get(int index) throws JSONException {
@@ -227,7 +229,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The truth.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is no value for the index or if the value is not
      *             convertible to boolean.
      */
@@ -251,7 +253,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the key is not found or if the value cannot be converted
      *             to a number.
      */
@@ -271,7 +273,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The numeric value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a Number
      *             object and cannot be converted to a number.
      */
@@ -292,7 +294,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The numeric value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             if the key is not found or if the value is not a Number
      *             object and cannot be converted to a number.
      */
@@ -309,17 +311,18 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
-    * Get the enum value associated with an index.
-    * 
-    * @param clazz
-    *            The type of enum to retrieve.
-    * @param index
-    *            The index must be between 0 and length() - 1.
-    * @return The enum value at the index location
-    * @throws JSONException
-    *            if the key is not found or if the value cannot be converted
-    *            to an enum.
-    */
+     * Get the enum value associated with an index.
+     *
+     * @param clazz
+     *            The type of enum to retrieve.
+     * @param index
+     *            The index must be between 0 and length() - 1.
+     * @return The enum value at the index location
+     * @throws org.json.JSONException if any.
+     *            if the key is not found or if the value cannot be converted
+     *            to an enum.
+     * @param <E> a E object.
+     */
     public <E extends Enum<E>> E getEnum(Class<E> clazz, int index) throws JSONException {
         E val = optEnum(clazz, index);
         if(val==null) {
@@ -338,7 +341,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the key is not found or if the value cannot be converted
      *             to a BigDecimal.
      */
@@ -358,7 +361,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the key is not found or if the value cannot be converted
      *             to a BigInteger.
      */
@@ -378,7 +381,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the key is not found or if the value is not a number.
      */
     public int getInt(int index) throws JSONException {
@@ -397,7 +400,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return A JSONArray value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is no value for the index. or if the value is not a
      *             JSONArray
      */
@@ -415,7 +418,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            subscript
      * @return A JSONObject value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is no value for the index or if the value is not a
      *             JSONObject
      */
@@ -433,7 +436,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the key is not found or if the value cannot be converted
      *             to a number.
      */
@@ -453,7 +456,7 @@ public class JSONArray implements Iterable<Object> {
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return A string value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If there is no string value for the index.
      */
     public String getString(int index) throws JSONException {
@@ -477,13 +480,13 @@ public class JSONArray implements Iterable<Object> {
 
     /**
      * Make a string from the contents of this JSONArray. The
-     * <code>separator</code> string is inserted between each element. Warning:
+     * separator string is inserted between each element. Warning:
      * This method assumes that the data structure is acyclical.
      *
      * @param separator
      *            A string that will be inserted between the elements.
      * @return a string.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the array contains an invalid number.
      */
     public String join(String separator) throws JSONException {
@@ -681,12 +684,13 @@ public class JSONArray implements Iterable<Object> {
 
     /**
      * Get the enum value associated with a key.
-     * 
+     *
      * @param clazz
      *            The type of enum to retrieve.
      * @param index
      *            The index must be between 0 and length() - 1.
      * @return The enum value at the index location or null if not found
+     * @param <E> a E object.
      */
     public <E extends Enum<E>> E optEnum(Class<E> clazz, int index) {
         return this.optEnum(clazz, index, null);
@@ -694,7 +698,7 @@ public class JSONArray implements Iterable<Object> {
 
     /**
      * Get the enum value associated with a key.
-     * 
+     *
      * @param clazz
      *            The type of enum to retrieve.
      * @param index
@@ -703,6 +707,7 @@ public class JSONArray implements Iterable<Object> {
      *            The default in case the value is not found
      * @return The enum value at the index location or defaultValue if
      *            the value is not found or cannot be assigned to clazz
+     * @param <E> a E object.
      */
     public <E extends Enum<E>> E optEnum(Class<E> clazz, int index, E defaultValue) {
         try {
@@ -726,8 +731,8 @@ public class JSONArray implements Iterable<Object> {
 
 
     /**
-     * Get the optional BigInteger value associated with an index. The 
-     * defaultValue is returned if there is no value for the index, or if the 
+     * Get the optional BigInteger value associated with an index. The
+     * defaultValue is returned if there is no value for the index, or if the
      * value is not a number and cannot be converted to a number.
      *
      * @param index
@@ -766,8 +771,8 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
-     * Get the optional BigDecimal value associated with an index. The 
-     * defaultValue is returned if there is no value for the index, or if the 
+     * Get the optional BigDecimal value associated with an index. The
+     * defaultValue is returned if there is no value for the index, or if the
      * value is not a number and cannot be converted to a number.
      *
      * @param index
@@ -872,9 +877,9 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
-     * Get an optional {@link Number} value associated with a key, or <code>null</code>
+     * Get an optional {@link java.lang.Number} value associated with a key, or null
      * if there is no such key or if the value is not a number. If the value is a string,
-     * an attempt will be made to evaluate it as a number ({@link BigDecimal}). This method
+     * an attempt will be made to evaluate it as a number ({@link java.math.BigDecimal}). This method
      * would be used in cases where type coercion of the number value is unwanted.
      *
      * @param index
@@ -886,9 +891,9 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
-     * Get an optional {@link Number} value associated with a key, or the default if there
+     * Get an optional {@link java.lang.Number} value associated with a key, or the default if there
      * is no such key or if the value is not a number. If the value is a string,
-     * an attempt will be made to evaluate it as a number ({@link BigDecimal}). This method
+     * an attempt will be made to evaluate it as a number ({@link java.math.BigDecimal}). This method
      * would be used in cases where type coercion of the number value is unwanted.
      *
      * @param index
@@ -975,7 +980,7 @@ public class JSONArray implements Iterable<Object> {
      *
      * @param value
      *            A double value.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             if the value is not finite.
      * @return this.
      */
@@ -1047,7 +1052,7 @@ public class JSONArray implements Iterable<Object> {
      * @param value
      *            A boolean value.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative.
      */
     public JSONArray put(int index, boolean value) throws JSONException {
@@ -1064,7 +1069,7 @@ public class JSONArray implements Iterable<Object> {
      * @param value
      *            A Collection value.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative or if the value is not finite.
      */
     public JSONArray put(int index, Collection<?> value) throws JSONException {
@@ -1082,7 +1087,7 @@ public class JSONArray implements Iterable<Object> {
      * @param value
      *            A double value.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative or if the value is not finite.
      */
     public JSONArray put(int index, double value) throws JSONException {
@@ -1100,7 +1105,7 @@ public class JSONArray implements Iterable<Object> {
      * @param value
      *            An int value.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative.
      */
     public JSONArray put(int index, int value) throws JSONException {
@@ -1118,7 +1123,7 @@ public class JSONArray implements Iterable<Object> {
      * @param value
      *            A long value.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative.
      */
     public JSONArray put(int index, long value) throws JSONException {
@@ -1135,7 +1140,7 @@ public class JSONArray implements Iterable<Object> {
      * @param value
      *            The Map value.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative or if the the value is an invalid
      *             number.
      */
@@ -1156,7 +1161,7 @@ public class JSONArray implements Iterable<Object> {
      *            Boolean, Double, Integer, JSONArray, JSONObject, Long, or
      *            String, or the JSONObject.NULL object.
      * @return this.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If the index is negative or if the the value is an invalid
      *             number.
      */
@@ -1183,7 +1188,7 @@ public class JSONArray implements Iterable<Object> {
     }
     
     /**
-     * Creates a JSONPointer using an initialization string and tries to 
+     * Creates a JSONPointer using an initialization string and tries to
      * match it to an item within this JSONArray. For example, given a
      * JSONArray initialized with this document:
      * <pre>
@@ -1191,7 +1196,7 @@ public class JSONArray implements Iterable<Object> {
      *     {"b":"c"}
      * ]
      * </pre>
-     * and this JSONPointer string: 
+     * and this JSONPointer string:
      * <pre>
      * "/0/b"
      * </pre>
@@ -1206,7 +1211,7 @@ public class JSONArray implements Iterable<Object> {
     }
     
     /**
-     * Uses a uaer initialized JSONPointer  and tries to 
+     * Uses a uaer initialized JSONPointer  and tries to
      * match it to an item whithin this JSONArray. For example, given a
      * JSONArray initialized with this document:
      * <pre>
@@ -1214,7 +1219,7 @@ public class JSONArray implements Iterable<Object> {
      *     {"b":"c"}
      * ]
      * </pre>
-     * and this JSONPointer: 
+     * and this JSONPointer:
      * <pre>
      * "/0/b"
      * </pre>
@@ -1231,10 +1236,10 @@ public class JSONArray implements Iterable<Object> {
     /**
      * Queries and returns a value from this object using {@code jsonPointer}, or
      * returns null if the query fails due to a missing key.
-     * 
+     *
      * @param jsonPointer the string representation of the JSON pointer
      * @return the queried value or {@code null}
-     * @throws IllegalArgumentException if {@code jsonPointer} has invalid syntax
+     * @throws java.lang.IllegalArgumentException if {@code jsonPointer} has invalid syntax
      */
     public Object optQuery(String jsonPointer) {
     	return optQuery(new JSONPointer(jsonPointer));
@@ -1243,10 +1248,10 @@ public class JSONArray implements Iterable<Object> {
     /**
      * Queries and returns a value from this object using {@code jsonPointer}, or
      * returns null if the query fails due to a missing key.
-     * 
+     *
      * @param jsonPointer The JSON pointer
      * @return the queried value or {@code null}
-     * @throws IllegalArgumentException if {@code jsonPointer} has invalid syntax
+     * @throws java.lang.IllegalArgumentException if {@code jsonPointer} has invalid syntax
      */
     public Object optQuery(JSONPointer jsonPointer) {
         try {
@@ -1318,7 +1323,7 @@ public class JSONArray implements Iterable<Object> {
      *            paired with the values.
      * @return A JSONObject, or null if there are no names or if this JSONArray
      *         has no values.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      *             If any of the names are null.
      */
     public JSONObject toJSONObject(JSONArray names) throws JSONException {
@@ -1333,6 +1338,8 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Make a JSON text of this JSONArray. For compactness, no unnecessary
      * whitespace is added. If it is not possible to produce a syntactically
      * correct JSON text then null will be returned instead. This could occur if
@@ -1340,9 +1347,6 @@ public class JSONArray implements Iterable<Object> {
      * <p><b>
      * Warning: This method assumes that the data structure is acyclical.
      * </b>
-     *
-     * @return a printable, displayable, transmittable representation of the
-     *         array.
      */
     @Override
     public String toString() {
@@ -1354,31 +1358,14 @@ public class JSONArray implements Iterable<Object> {
     }
 
     /**
-     * Make a pretty-printed JSON text of this JSONArray.
-     * 
-     * <p>If <code>indentFactor > 0</code> and the {@link JSONArray} has only
-     * one element, then the array will be output on a single line:
-     * <pre>{@code [1]}</pre>
-     * 
-     * <p>If an array has 2 or more elements, then it will be output across
-     * multiple lines: <pre>{@code
-     * [
-     * 1,
-     * "value 2",
-     * 3
-     * ]
-     * }</pre>
-     * <p><b>
-     * Warning: This method assumes that the data structure is acyclical.
-     * </b>
-     * 
+     * Make a pretty-printed JSON text of this JSONArray
      * @param indentFactor
      *            The number of spaces to add to each level of indentation.
      * @return a printable, displayable, transmittable representation of the
-     *         object, beginning with <code>[</code>&nbsp;<small>(left
-     *         bracket)</small> and ending with <code>]</code>
+     *         object, beginning with [&nbsp;<small>(left
+     *         bracket)</small> and ending with ]
      *         &nbsp;<small>(right bracket)</small>.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      */
     public String toString(int indentFactor) throws JSONException {
         StringWriter sw = new StringWriter();
@@ -1395,7 +1382,8 @@ public class JSONArray implements Iterable<Object> {
      *</b>
      *
      * @return The writer.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
+     * @param writer a {@link java.io.Writer} object.
      */
     public Writer write(Writer writer) throws JSONException {
         return this.write(writer, 0, 0);
@@ -1403,22 +1391,6 @@ public class JSONArray implements Iterable<Object> {
 
     /**
      * Write the contents of the JSONArray as JSON text to a writer.
-     * 
-     * <p>If <code>indentFactor > 0</code> and the {@link JSONArray} has only
-     * one element, then the array will be output on a single line:
-     * <pre>{@code [1]}</pre>
-     * 
-     * <p>If an array has 2 or more elements, then it will be output across
-     * multiple lines: <pre>{@code
-     * [
-     * 1,
-     * "value 2",
-     * 3
-     * ]
-     * }</pre>
-     * <p><b>
-     * Warning: This method assumes that the data structure is acyclical.
-     * </b>
      *
      * @param writer
      *            Writes the serialized JSON
@@ -1427,7 +1399,7 @@ public class JSONArray implements Iterable<Object> {
      * @param indent
      *            The indentation of the top level.
      * @return The writer.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      */
     public Writer write(Writer writer, int indentFactor, int indent)
             throws JSONException {

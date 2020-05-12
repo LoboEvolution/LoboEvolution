@@ -62,23 +62,23 @@ import javax.swing.plaf.basic.BasicRootPaneUI;
 
 /**
  * This source is a modified copy of javax.swing.plaf.metal.MetalRootPaneUI
- * Provides the base look and feel implementation of <code>RootPaneUI</code>.
+ * Provides the base look and feel implementation of RootPaneUI.
  * <p>
- * <code>BaseRootPaneUI</code> provides support for the
- * <code>windowDecorationStyle</code> property of <code>JRootPane</code>.
- * <code>BaseRootPaneUI</code> does this by way of installing a custom
- * <code>LayoutManager</code>, a private <code>Component</code> to render the
- * appropriate widgets, and a private <code>Border</code>. The
- * <code>LayoutManager</code> is always installed, regardless of the value of
- * the <code>windowDecorationStyle</code> property, but the <code>Border</code>
- * and <code>Component</code> are only installed/added if the
- * <code>windowDecorationStyle</code> is other than <code>JRootPane.NONE</code>.
+ * BaseRootPaneUI provides support for the
+ * windowDecorationStyle property of JRootPane.
+ * BaseRootPaneUI does this by way of installing a custom
+ * LayoutManager, a private Component to render the
+ * appropriate widgets, and a private Border. The
+ * LayoutManager is always installed, regardless of the value of
+ * the windowDecorationStyle property, but the Border
+ * and Component are only installed/added if the
+ * windowDecorationStyle is other than JRootPane.NONE.
  * <p>
  * <strong>Warning:</strong> Serialized objects of this class will not be
  * compatible with future Swing releases. The current serialization support is
  * appropriate for short term storage or RMI between applications running the
  * same version of Swing. As of 1.4, support for long term storage of all
- * JavaBeans TM has been added to the <code>java.beans</code> package. Please
+ * JavaBeans TM has been added to the java.beans package. Please
  * see {@link java.beans.XMLEncoder}.
  *
  * @version 1.20 04/27/04
@@ -307,7 +307,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		/**
-		 * Returns the corner that contains the point <code>x</code>, <code>y</code>, or
+		 * Returns the corner that contains the point x, y, or
 		 * -1 if the position doesn't match a corner.
 		 */
 		private int calculateCorner(Component c, int x, int y) {
@@ -321,8 +321,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 
 		/**
-		 * Returns an integer indicating the position of <code>spot</code> in
-		 * <code>width</code>. The return value will be: 0 if < BORDER_DRAG_THICKNESS 1
+		 * Returns an integer indicating the position of spot in
+		 * width. The return value will be: 0 if < BORDER_DRAG_THICKNESS 1
 		 * if < CORNER_DRAG_WIDTH 2 if >= CORNER_DRAG_WIDTH && < width -
 		 * BORDER_DRAG_THICKNESS 3 if >= width - CORNER_DRAG_WIDTH 4 if >= width -
 		 * BORDER_DRAG_THICKNESS 5 otherwise
@@ -686,19 +686,31 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 	} // end of class ResizingPanel
 
+	/** Constant NONE=0 */
 	public static final int NONE = 0;
+	/** Constant FRAME=1 */
 	public static final int FRAME = 1;
+	/** Constant PLAIN_DIALOG=2 */
 	public static final int PLAIN_DIALOG = 2;
+	/** Constant INFORMATION_DIALOG=3 */
 	public static final int INFORMATION_DIALOG = 3;
+	/** Constant ERROR_DIALOG=4 */
 	public static final int ERROR_DIALOG = 4;
+	/** Constant COLOR_CHOOSER_DIALOG=5 */
 	public static final int COLOR_CHOOSER_DIALOG = 5;
+	/** Constant FILE_CHOOSER_DIALOG=6 */
 	public static final int FILE_CHOOSER_DIALOG = 6;
+	/** Constant QUESTION_DIALOG=7 */
 	public static final int QUESTION_DIALOG = 7;
+	/** Constant WARNING_DIALOG=8 */
 	public static final int WARNING_DIALOG = 8;
 	// Konstanten aus java.awt.Frame damit Attribute aus Java 1.4 sich mit Java 1.3
 	// uebersetzen lassen
+	/** Constant MAXIMIZED_HORIZ=2 */
 	public static final int MAXIMIZED_HORIZ = 2;
+	/** Constant MAXIMIZED_VERT=4 */
 	public static final int MAXIMIZED_VERT = 4;
+	/** Constant MAXIMIZED_BOTH=MAXIMIZED_VERT | MAXIMIZED_HORIZ */
 	public static final int MAXIMIZED_BOTH = MAXIMIZED_VERT | MAXIMIZED_HORIZ;
 	private static final String[] borderKeys = new String[] { null, "RootPane.frameBorder",
 			"RootPane.plainDialogBorder", "RootPane.informationDialogBorder", "RootPane.errorDialogBorder",
@@ -728,67 +740,66 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 			Cursor.SE_RESIZE_CURSOR, Cursor.SE_RESIZE_CURSOR };
 
 	/**
-	 * <code>Cursor</code> used to track the cursor set by the user. This is
-	 * initially <code>Cursor.DEFAULT_CURSOR</code>.
+	 * Cursor used to track the cursor set by the user. This is
+	 * initially Cursor.DEFAULT_CURSOR.
 	 */
 	/**
-	 * Creates a UI for a <code>JRootPane</code>.
+	 * {@inheritDoc}
 	 *
-	 * @param c the JRootPane the RootPaneUI will be created for
-	 * @return the RootPaneUI implementation for the passed in JRootPane
+	 * Creates a UI for a JRootPane.
 	 */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseRootPaneUI();
 	}
 
 	/**
-	 * Window the <code>JRootPane</code> is in.
+	 * Window the JRootPane is in.
 	 */
 	private Window window;
 	/**
-	 * <code>JComponent</code> providing window decorations. This will be null if
+	 * JComponent providing window decorations. This will be null if
 	 * not providing window decorations.
 	 */
 	private JComponent titlePane;
 	/**
-	 * <code>MouseInputListener</code> that is added to the parent
-	 * <code>Window</code> the <code>JRootPane</code> is contained in.
+	 * MouseInputListener that is added to the parent
+	 * Window the JRootPane is contained in.
 	 */
 	private MouseInputListener mouseInputListener;
 
 	/**
-	 * <code>WindowListener</code> that is added to the parent <code>Window</code>
-	 * the <code>JRootPane</code> is contained in.
+	 * WindowListener that is added to the parent Window
+	 * the JRootPane is contained in.
 	 */
 	private WindowListener windowListener;
 
 	/**
-	 * <code>WindowListener</code> that is added to the parent <code>Window</code>
-	 * the <code>JRootPane</code> is contained in.
+	 * WindowListener that is added to the parent Window
+	 * the JRootPane is contained in.
 	 */
 	private PropertyChangeListener propertyChangeListener;
 
 	/**
-	 * The <code>LayoutManager</code> that is set on the <code>JRootPane</code>.
+	 * The LayoutManager that is set on the JRootPane.
 	 */
 	private LayoutManager layoutManager;
 
 	/**
-	 * <code>LayoutManager</code> of the <code>JRootPane</code> before we replaced
+	 * LayoutManager of the JRootPane before we replaced
 	 * it.
 	 */
 	private LayoutManager savedOldLayout;
 
 	/**
-	 * <code>JRootPane</code> providing the look and feel for.
+	 * JRootPane providing the look and feel for.
 	 */
 	private JRootPane root;
 
 	private Cursor savedCursor = null;
 
 	/**
-	 * Returns a <code>LayoutManager</code> that will be set on the
-	 * <code>JRootPane</code>.
+	 * Returns a LayoutManager that will be set on the
+	 * JRootPane.
 	 *
 	 * @return The layout manager
 	 */
@@ -797,7 +808,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	}
 
 	/**
-	 * Returns the <code>JComponent</code> to render the window decoration style.
+	 * Returns the JComponent to render the window decoration style.
 	 *
 	 * @param root The root pane
 	 * @return The title pane
@@ -807,8 +818,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	}
 
 	/**
-	 * Returns a <code>MouseListener</code> that will be added to the
-	 * <code>Window</code> containing the <code>JRootPane</code>.
+	 * Returns a MouseListener that will be added to the
+	 * Window containing the JRootPane.
 	 *
 	 * @param root The root pane
 	 * @return The mouse listener
@@ -817,12 +828,17 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		return new MouseInputHandler();
 	}
 
+	/**
+	 * <p>getRootPane.</p>
+	 *
+	 * @return a {@link javax.swing.JRootPane} object.
+	 */
 	public JRootPane getRootPane() {
 		return root;
 	}
 
 	/**
-	 * Returns the <code>BaseTitlePane</code> rendering the title pane. If this
+	 * Returns the BaseTitlePane rendering the title pane. If this
 	 * returns null, it implies there is no need to render window decorations.
 	 *
 	 * @return the current window title pane, or null
@@ -835,6 +851,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		return null;
 	}
 
+	/**
+	 * <p>installBorder.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 */
 	public void installBorder(JRootPane root) {
 		int style = root.getWindowDecorationStyle();
 		if (style == NONE) {
@@ -844,6 +865,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 	}
 
+	/**
+	 * <p>installClientDecorations.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 */
 	public void installClientDecorations(JRootPane root) {
 		installBorder(root);
 		if (titlePane == null) {
@@ -859,7 +885,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	}
 
 	/**
-	 * Installs the appropriate LayoutManager on the <code>JRootPane</code> to
+	 * Installs the appropriate LayoutManager on the JRootPane to
 	 * render the window decorations.
 	 *
 	 * @param root The root pane
@@ -872,6 +898,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		root.setLayout(layoutManager);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners(JRootPane root) {
 		super.installListeners(root);
@@ -905,6 +932,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -915,11 +943,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	}
 
 	/**
-	 * Installs the necessary Listeners on the parent <code>Window</code>, if there
+	 * Installs the necessary Listeners on the parent Window, if there
 	 * is one.
 	 * <p>
 	 * This takes the parent so that cleanup can be done from
-	 * <code>removeNotify</code>, at which point the parent hasn't been reset yet.
+	 * removeNotify, at which point the parent hasn't been reset yet.
 	 *
 	 * @param root   The root pane
 	 * @param parent The parent of the JRootPane
@@ -947,6 +975,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		return AbstractLookAndFeel.getTheme().isDynamicLayout();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void propertyChange(PropertyChangeEvent e) {
 		super.propertyChange(e);
@@ -978,8 +1007,8 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	 * and feel are controlled by the plaf. The plaf creates and sets this value;
 	 * the default is null, implying a native operating system window title pane.
 	 *
-	 * @param root      the <code>JRootPane</code> where to set the title pane
-	 * @param titlePane the <code>JComponent</code> to use for the window title
+	 * @param root      the JRootPane where to set the title pane
+	 * @param titlePane the JComponent to use for the window title
 	 *                  pane.
 	 */
 	public void setTitlePane(JRootPane root, JComponent titlePane) {
@@ -1008,6 +1037,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		LookAndFeel.uninstallBorder(root);
 	}
 
+	/**
+	 * <p>uninstallClientDecorations.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 */
 	public void uninstallClientDecorations(JRootPane root) {
 		uninstallBorder(root);
 		uninstallWindowListeners(root);
@@ -1026,6 +1060,11 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		window = null;
 	}
 
+	/**
+	 * <p>uninstallLayout.</p>
+	 *
+	 * @param root a {@link javax.swing.JRootPane} object.
+	 */
 	public void uninstallLayout(JRootPane root) {
 		if (savedOldLayout != null) {
 			root.setLayout(savedOldLayout);
@@ -1033,6 +1072,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners(JRootPane root) {
 		super.uninstallListeners(root);
@@ -1045,6 +1085,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		super.uninstallUI(c);
@@ -1055,7 +1096,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 	}
 
 	/**
-	 * Uninstalls the necessary Listeners on the <code>Window</code> the Listeners
+	 * Uninstalls the necessary Listeners on the Window the Listeners
 	 * were last installed on.
 	 *
 	 * @param root The root pane

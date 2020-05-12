@@ -39,27 +39,38 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLBaseElement extends HTMLElement {
 	/**
 	 * The base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>]. See the href attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getHref();
 
 	/**
 	 * The default target frame. See the target attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getTarget();
 
 	/**
 	 * The base URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>]. See the href attribute definition in HTML 4.01.
+	 *
+	 * @param href a {@link java.lang.String} object.
 	 */
 	void setHref(String href);
 
 	/**
 	 * The default target frame. See the target attribute definition in HTML 4.01.
+	 *
+	 * @param target a {@link java.lang.String} object.
 	 */
 	void setTarget(String target);
 

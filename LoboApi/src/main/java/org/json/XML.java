@@ -29,7 +29,7 @@ import java.util.Iterator;
 /**
  * This provides static methods to convert an XML text into a JSONObject, and to
  * covert a JSONObject into an XML text.
- * 
+ *
  * @author JSON.org
  * @version 2016-08-10
  */
@@ -47,10 +47,10 @@ public class XML {
     /** The Character '='. */
     public static final Character EQ = '=';
 
-    /** The Character '>'. */
+    /** The Character GT. */
     public static final Character GT = '>';
 
-    /** The Character '&lt;'. */
+    /** The Character LT. */
     public static final Character LT = '<';
 
     /** The Character '?'. */
@@ -65,9 +65,9 @@ public class XML {
     /**
      * Creates an iterator for navigating Code Points in a string instead of
      * characters. Once Java7 support is dropped, this can be replaced with
-     * <code>
+     * 
      * string.codePoints()
-     * </code>
+     * 
      * which is available in Java8 and above.
      * 
      * @see <a href=
@@ -104,15 +104,7 @@ public class XML {
 
     /**
      * Replace special characters with XML escapes:
-     * 
-     * <pre>
-     * &amp; <small>(ampersand)</small> is replaced by &amp;amp;
-     * &lt; <small>(less than)</small> is replaced by &amp;lt;
-     * &gt; <small>(greater than)</small> is replaced by &amp;gt;
-     * &quot; <small>(double quote)</small> is replaced by &amp;quot;
-     * &apos; <small>(single quote / apostrophe)</small> is replaced by &amp;apos;
-     * </pre>
-     * 
+     *
      * @param string
      *            The string to be escaped.
      * @return The escaped string.
@@ -177,7 +169,7 @@ public class XML {
 
     /**
      * Removes XML escapes from the string.
-     * 
+     *
      * @param string
      *            string to remove escapes from
      * @return string with converted entities
@@ -209,10 +201,10 @@ public class XML {
     /**
      * Throw an exception if the string contains whitespace. Whitespace is not
      * allowed in tagNames and attributes.
-     * 
+     *
      * @param string
      *            A string.
-     * @throws JSONException Thrown if the string contains whitespace or is empty.
+     * @throws org.json.JSONException Thrown if the string contains whitespace or is empty.
      */
     public static void noSpace(String string) throws JSONException {
         int i, length = string.length();
@@ -398,8 +390,8 @@ public class XML {
     }
     
     /**
-     * This method is the same as {@link JSONObject#stringToValue(String)}.
-     * 
+     * This method is the same as {@link org.json.JSONObject#stringToValue(String)}.
+     *
      * @param string String to convert
      * @return JSON value of this string or the string
      */
@@ -458,13 +450,13 @@ public class XML {
      * name/value pairs and arrays of values. JSON does not does not like to
      * distinguish between elements and attributes. Sequences of similar
      * elements are represented as JSONArrays. Content text may be placed in a
-     * "content" member. Comments, prologs, DTDs, and <code>&lt;[ [ ]]></code>
+     * "content" member. Comments, prologs, DTDs
      * are ignored.
-     * 
+     *
      * @param string
      *            The source string.
      * @return A JSONObject containing the structured data from the XML string.
-     * @throws JSONException Thrown if there is an errors while parsing the string
+     * @throws org.json.JSONException Thrown if there is an errors while parsing the string
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         return toJSONObject(string, false);
@@ -479,18 +471,18 @@ public class XML {
      * name/value pairs and arrays of values. JSON does not does not like to
      * distinguish between elements and attributes. Sequences of similar
      * elements are represented as JSONArrays. Content text may be placed in a
-     * "content" member. Comments, prologs, DTDs, and <code>&lt;[ [ ]]></code>
+     * "content" member. Comments, prologs, DTDs
      * are ignored.
-     * 
+     *
      * All values are converted as strings, for 1, 01, 29.0 will not be coerced to
      * numbers but will instead be the exact value as seen in the XML document.
-     * 
+     *
      * @param string
      *            The source string.
      * @param keepStrings If true, then values will not be coerced into boolean
      *  or numeric values and will instead be left as strings
      * @return A JSONObject containing the structured data from the XML string.
-     * @throws JSONException Thrown if there is an errors while parsing the string
+     * @throws org.json.JSONException Thrown if there is an errors while parsing the string
      */
     public static JSONObject toJSONObject(String string, boolean keepStrings) throws JSONException {
         JSONObject jo = new JSONObject();
@@ -505,11 +497,11 @@ public class XML {
     }
     /**
      * Convert a JSONObject into a well-formed, element-normal XML string.
-     * 
+     *
      * @param object
      *            A JSONObject.
      * @return A string.
-     * @throws JSONException Thrown if there is an error parsing the string
+     * @throws org.json.JSONException Thrown if there is an error parsing the string
      */
     public static String toString(Object object) throws JSONException {
         return toString(object, null);
@@ -517,13 +509,13 @@ public class XML {
 
     /**
      * Convert a JSONObject into a well-formed, element-normal XML string.
-     * 
+     *
      * @param object
      *            A JSONObject.
      * @param tagName
      *            The optional name of the enclosing tag.
      * @return A string.
-     * @throws JSONException Thrown if there is an error parsing the string
+     * @throws org.json.JSONException Thrown if there is an error parsing the string
      */
     public static String toString(final Object object, final String tagName)
             throws JSONException {

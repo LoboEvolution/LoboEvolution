@@ -25,20 +25,36 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLHtmlElement;
 
+/**
+ * <p>HTMLHtmlElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElement {
+	/**
+	 * <p>Constructor for HTMLHtmlElementImpl.</p>
+	 */
 	public HTMLHtmlElementImpl() {
 		super("HTML", true);
 	}
 
+	/**
+	 * <p>Constructor for HTMLHtmlElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLHtmlElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getVersion() {
 		return getAttribute("version");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setVersion(String version) {
 		setAttribute("version", version);

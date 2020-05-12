@@ -20,8 +20,24 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFitToViewBox interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFitToViewBox {
+	/**
+	 * <p>getViewBox.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedRect} object.
+	 */
 	SVGAnimatedRect getViewBox();
 
+	/**
+	 * <p>getPreserveAspectRatio.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedPreserveAspectRatio} object.
+	 */
 	SVGAnimatedPreserveAspectRatio getPreserveAspectRatio();
 }

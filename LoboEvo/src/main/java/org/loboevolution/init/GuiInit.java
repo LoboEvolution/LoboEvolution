@@ -24,8 +24,19 @@ import com.jtattoo.plaf.noire.NoireLookAndFeel;
 import com.jtattoo.plaf.smart.SmartLookAndFeel;
 import com.jtattoo.plaf.texture.TextureLookAndFeel;
 
+/**
+ * <p>GuiInit class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class GuiInit {
 
+	/**
+	 * <p>initLookAndFeel.</p>
+	 *
+	 * @throws java.lang.Exception if any.
+	 */
 	public static void initLookAndFeel() throws Exception {
 		final LAFSettings settings = new LAFSettings().getInstance();
 		final Properties props = new Properties();
@@ -92,6 +103,11 @@ public class GuiInit {
 		}
 	}
 
+	/**
+	 * <p>createAndShowGui.</p>
+	 *
+	 * @throws java.lang.Exception if any.
+	 */
 	public void createAndShowGui() throws Exception {
 		initLookAndFeel();
 		final BrowserFrame frame = new BrowserFrame("LoboEvo");
@@ -101,6 +117,11 @@ public class GuiInit {
 		frame.setVisible(true);
 	}
 
+	/**
+	 * <p>install.</p>
+	 *
+	 * @throws java.lang.Exception if any.
+	 */
 	public void install() throws Exception {
 		final File f = new File(SQLiteCommon.getDatabaseStore());
 		if (!f.exists()) {

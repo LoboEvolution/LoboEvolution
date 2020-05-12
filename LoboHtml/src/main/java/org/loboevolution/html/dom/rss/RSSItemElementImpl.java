@@ -7,12 +7,29 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>RSSItemElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RSSItemElementImpl extends HTMLElementImpl {
 	
+	/**
+	 * <p>Constructor for RSSItemElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public RSSItemElementImpl(String name) {
 		super(name);
 	}
 	
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param graphics a {@link java.awt.Graphics2D} object.
+	 * @param y a int.
+	 */
 	public void draw(Graphics2D graphics, int y) {
 		if (hasChildNodes()) {
 			NodeList children = getChildNodes();

@@ -29,6 +29,12 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.renderer.HtmlController;
 import org.loboevolution.store.InputStore;
 
+/**
+ * <p>InputText class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputText {
 	
 	private static final Logger logger = Logger.getLogger(InputText.class.getName());
@@ -41,6 +47,12 @@ public class InputText {
 	
 	private HTMLInputElementImpl modelNode;
 
+	/**
+	 * <p>Constructor for InputText.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputText(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
 		final boolean autocomplete = modelNode.getAutocomplete();
@@ -107,29 +119,54 @@ public class InputText {
 		ic.add(iText);
 	}
 	
+	/**
+	 * <p>selectAll.</p>
+	 */
 	public void selectAll() {
 		iText.selectAll();
 		iText.requestFocus();
 	}
 	
+	/**
+	 * <p>focus.</p>
+	 */
 	public void focus() {
 		iText.setFocusable(true);
 		iText.requestFocus();
 	}
 	
+	/**
+	 * <p>blur.</p>
+	 */
 	public void blur() {
 		iText.setFocusable(false);
 	}
 	
+	/**
+	 * <p>setSelectionRange.</p>
+	 *
+	 * @param start a int.
+	 * @param end a int.
+	 */
 	public void setSelectionRange(int start, int end){
 		iText.setSelectionStart(start);
 		iText.setSelectionEnd(end);
 	}
 	
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		iText.setText("");
 	}
 	
+	/**
+	 * <p>setRangeText.</p>
+	 *
+	 * @param start a int.
+	 * @param end a int.
+	 * @param text a {@link java.lang.String} object.
+	 */
 	public void setRangeText(int start, int end, String text) {
 		try {
 			iText.getDocument().insertString(start, text, null);
@@ -200,10 +237,20 @@ public class InputText {
 		}
 	}
 	
+	/**
+	 * <p>isTextWrittenIn.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isTextWrittenIn() {
 		return textWrittenIn;
 	}
 
+	/**
+	 * <p>Setter for the field textWrittenIn.</p>
+	 *
+	 * @param textWrittenIn a boolean.
+	 */
 	public void setTextWrittenIn(boolean textWrittenIn) {
 		this.textWrittenIn = textWrittenIn;
 	}

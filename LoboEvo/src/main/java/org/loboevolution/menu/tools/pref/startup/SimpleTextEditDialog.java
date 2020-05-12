@@ -17,6 +17,9 @@ import javax.swing.border.EmptyBorder;
 
 /**
  * The Class SimpleTextEditDialog.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SimpleTextEditDialog extends JDialog {
 
@@ -122,6 +125,12 @@ public class SimpleTextEditDialog extends JDialog {
 		this.captionLabel.setText(text);
 	}
 
+	/**
+	 * <p>Setter for the field resultingText.</p>
+	 *
+	 * @param resultingText a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String setResultingText(String resultingText) {
 		return this.resultingText = resultingText;
 	}

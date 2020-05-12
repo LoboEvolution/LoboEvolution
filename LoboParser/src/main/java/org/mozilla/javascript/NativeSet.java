@@ -8,6 +8,12 @@ package org.mozilla.javascript;
 
 import java.util.Iterator;
 
+/**
+ * <p>NativeSet class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NativeSet extends IdScriptableObject {
     private static final long serialVersionUID = -8442212766987072986L;
     private static final Object SET_TAG = "Set";
@@ -35,11 +41,13 @@ public class NativeSet extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Set";
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -199,6 +207,7 @@ public class NativeSet extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -229,6 +238,7 @@ public class NativeSet extends IdScriptableObject {
         initPrototypeMethod(SET_TAG, id, s, fnName, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -246,6 +256,7 @@ public class NativeSet extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

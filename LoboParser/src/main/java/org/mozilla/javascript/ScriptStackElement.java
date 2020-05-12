@@ -8,9 +8,11 @@ import java.io.Serializable;
 
 /**
  * This class represents an element on the script execution stack.
+ *
  * @see RhinoException#getScriptStack()
  * @author Hannes Wallnoefer
  * @since 1.7R3
+ * @version $Id: $Id
  */
 public final class ScriptStackElement implements Serializable {
 
@@ -20,12 +22,20 @@ public final class ScriptStackElement implements Serializable {
     public final String functionName;
     public final int lineNumber;
 
+    /**
+     * <p>Constructor for ScriptStackElement.</p>
+     *
+     * @param fileName a {@link java.lang.String} object.
+     * @param functionName a {@link java.lang.String} object.
+     * @param lineNumber a int.
+     */
     public ScriptStackElement(String fileName, String functionName, int lineNumber) {
         this.fileName = fileName;
         this.functionName = functionName;
         this.lineNumber = lineNumber;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -35,7 +45,7 @@ public final class ScriptStackElement implements Serializable {
 
     /**
      * Render stack element in Java-inspired style:
-     * <code>    at fileName:lineNumber (functionName)</code>
+     *     at fileName:lineNumber (functionName)
      *
      * @param sb the StringBuilder to append to
      */
@@ -51,7 +61,7 @@ public final class ScriptStackElement implements Serializable {
 
     /**
      * Render stack element in Mozilla/Firefox style:
-     * <code>functionName()@fileName:lineNumber</code>
+     * functionName()@fileName:lineNumber
      *
      * @param sb the StringBuilder to append to
      */
@@ -67,9 +77,9 @@ public final class ScriptStackElement implements Serializable {
 
     /**
      * Render stack element in V8 style:
-     * <code>    at functionName (fileName:lineNumber:columnNumber)</code>
+     *     at functionName (fileName:lineNumber:columnNumber)
      * or:
-     * <code>    at fileName:lineNumber:columnNumber</code>
+     *     at fileName:lineNumber:columnNumber
      *
      * @param sb the StringBuilder to append to
      */

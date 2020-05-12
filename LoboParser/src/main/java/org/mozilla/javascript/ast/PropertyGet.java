@@ -9,7 +9,10 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * AST node for the '.' operator.  Node type is {@link Token#GETPROP}.
+ * AST node for the '.' operator.  Node type is {@link org.mozilla.javascript.Token#GETPROP}.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class PropertyGet extends InfixExpression {
 
@@ -17,17 +20,39 @@ public class PropertyGet extends InfixExpression {
         type = Token.GETPROP;
     }
 
+    /**
+     * <p>Constructor for PropertyGet.</p>
+     */
     public PropertyGet() {
     }
 
+    /**
+     * <p>Constructor for PropertyGet.</p>
+     *
+     * @param pos a int.
+     */
     public PropertyGet(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for PropertyGet.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public PropertyGet(int pos, int len) {
         super(pos, len);
     }
 
+    /**
+     * <p>Constructor for PropertyGet.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @param property a {@link org.mozilla.javascript.ast.Name} object.
+     */
     public PropertyGet(int pos, int len, AstNode target, Name property) {
         super(pos, len, target, property);
     }
@@ -35,11 +60,21 @@ public class PropertyGet extends InfixExpression {
     /**
      * Constructor.  Updates bounds to include left ({@code target}) and
      * right ({@code property}) nodes.
+     *
+     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @param property a {@link org.mozilla.javascript.ast.Name} object.
      */
     public PropertyGet(AstNode target, Name property) {
         super(target, property);
     }
 
+    /**
+     * <p>Constructor for PropertyGet.</p>
+     *
+     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @param property a {@link org.mozilla.javascript.ast.Name} object.
+     * @param dotPosition a int.
+     */
     public PropertyGet(AstNode target, Name property, int dotPosition) {
         super(Token.GETPROP, target, property, dotPosition);
     }
@@ -47,6 +82,8 @@ public class PropertyGet extends InfixExpression {
     /**
      * Returns the object on which the property is being fetched.
      * Should never be {@code null}.
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTarget() {
         return getLeft();
@@ -54,9 +91,10 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Sets target object, and sets its parent to this node.
+     *
      * @param target expression evaluating to the object upon which
      * to do the property lookup
-     * @throws IllegalArgumentException} if {@code target} is {@code null}
+     * @throws java.lang.IllegalArgumentException} if {@code target} is {@code null}
      */
     public void setTarget(AstNode target) {
         setLeft(target);
@@ -64,6 +102,8 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Returns the property being accessed.
+     *
+     * @return a {@link org.mozilla.javascript.ast.Name} object.
      */
     public Name getProperty() {
         return (Name)getRight();
@@ -71,12 +111,15 @@ public class PropertyGet extends InfixExpression {
 
     /**
      * Sets the property being accessed, and sets its parent to this node.
-     * @throws IllegalArgumentException} if {@code property} is {@code null}
+     *
+     * @throws java.lang.IllegalArgumentException} if {@code property} is {@code null}
+     * @param property a {@link org.mozilla.javascript.ast.Name} object.
      */
     public void setProperty(Name property) {
         setRight(property);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -88,6 +131,8 @@ public class PropertyGet extends InfixExpression {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node, the target expression, and the property name.
      */
     @Override

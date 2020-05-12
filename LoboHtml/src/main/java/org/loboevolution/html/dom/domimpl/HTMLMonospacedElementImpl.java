@@ -25,12 +25,21 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * Element used for TT and CODE.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLMonospacedElementImpl extends HTMLAbstractUIElement {
+	/**
+	 * <p>Constructor for HTMLMonospacedElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLMonospacedElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
         prevRenderState = new FontNameRenderState(prevRenderState, this, "Monospaced");

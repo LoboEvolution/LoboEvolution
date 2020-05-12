@@ -21,9 +21,25 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAnimatedTransformList interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedTransformList {
 
+	/**
+	 * <p>getBaseVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransformList} object.
+	 */
 	SVGTransformList getBaseVal();
 
+	/**
+	 * <p>getAnimVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGTransformList} object.
+	 */
 	SVGTransformList getAnimVal();
 }

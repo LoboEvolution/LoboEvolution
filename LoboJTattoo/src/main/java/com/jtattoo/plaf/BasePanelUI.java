@@ -34,12 +34,16 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPanelUI;
 
 /**
+ * <p>BasePanelUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BasePanelUI extends BasicPanelUI {
 
 	private static BasePanelUI panelUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (panelUI == null) {
 			panelUI = new BasePanelUI();
@@ -47,12 +51,14 @@ public class BasePanelUI extends BasicPanelUI {
 		return panelUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults(JPanel p) {
 		super.installDefaults(p);
 		p.setFont(AbstractLookAndFeel.getTheme().getControlTextFont());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -68,6 +74,7 @@ public class BasePanelUI extends BasicPanelUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

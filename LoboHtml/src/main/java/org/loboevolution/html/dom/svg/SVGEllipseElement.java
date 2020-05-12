@@ -20,14 +20,40 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGEllipseElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGEllipseElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired,
 		SVGStylable, SVGTransformable, Drawable {
 
+	/**
+	 * <p>getCx.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getCx();
 
+	/**
+	 * <p>getCy.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getCy();
 
+	/**
+	 * <p>getRx.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getRx();
 
+	/**
+	 * <p>getRy.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getRy();
 }

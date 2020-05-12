@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+/**
+ * <p>TextEditCancelAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextEditCancelAction extends AbstractAction {
 
 	/** The Constant serialVersionUID. */
@@ -12,6 +18,11 @@ public class TextEditCancelAction extends AbstractAction {
 	/** The search. */
 	private transient SimpleTextEditDialog search;
 
+	/**
+	 * <p>Constructor for TextEditCancelAction.</p>
+	 *
+	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.SimpleTextEditDialog} object.
+	 */
 	public TextEditCancelAction(SimpleTextEditDialog search) {
 		this.search = search;
 	}
@@ -22,6 +33,7 @@ public class TextEditCancelAction extends AbstractAction {
 	 * @see
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.search.setResultingText(null);

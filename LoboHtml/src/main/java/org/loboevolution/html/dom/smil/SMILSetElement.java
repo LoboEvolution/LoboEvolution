@@ -24,14 +24,24 @@ package org.loboevolution.html.dom.smil;
 
 /**
  * This interface represents the set element.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILSetElement extends ElementTimeControl, ElementTime, ElementTargetAttributes, SMILElement {
 	/**
 	 * Specifies the value for the attribute during the duration of this
 	 * element.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getTo();
 
+	/**
+	 * <p>setTo.</p>
+	 *
+	 * @param to a {@link java.lang.String} object.
+	 */
 	public void setTo(String to);
 
 }

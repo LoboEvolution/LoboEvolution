@@ -26,6 +26,9 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * The Class TableCaptionRenderState.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class TableCaptionRenderState extends DisplayRenderState {
 	

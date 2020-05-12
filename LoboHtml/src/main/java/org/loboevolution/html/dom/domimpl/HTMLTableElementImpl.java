@@ -39,6 +39,12 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
+/**
+ * <p>HTMLTableElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLTableElement {
 
 	private HTMLTableCaptionElement caption;
@@ -47,48 +53,63 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 
 	private HTMLTableSectionElement thead;
 
+	/**
+	 * <p>Constructor for HTMLTableElementImpl.</p>
+	 */
 	public HTMLTableElementImpl() {
 		super("TABLE");
 	}
 
+	/**
+	 * <p>Constructor for HTMLTableElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLTableElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement createCaption() {
 		final Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("caption");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new TableRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement createTFoot() {
 		final Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("tfoot");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement createTHead() {
 		final Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("thead");
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public HTMLElement createTBody() {
 		Document doc = this.document;
 		return doc == null ? null : (HTMLElement) doc.createElement("tbody");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deleteCaption() {
 		removeChildren(new ElementFilter("CAPTION"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deleteRow(int index) throws DOMException {
 		int trcount = 0;
@@ -103,51 +124,61 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deleteTFoot() {
 		removeChildren(new ElementFilter("TFOOT"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void deleteTHead() {
 		removeChildren(new ElementFilter("THEAD"));
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void deleteTBody() {
 		removeChildren(new ElementFilter("TBODY"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
 		return getAttribute("align");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBgColor() {
 		return getAttribute("bgcolor");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBorder() {
 		return getAttribute("border");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLTableCaptionElement getCaption() {
 		return this.caption;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCellPadding() {
 		return getAttribute("cellpadding");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCellSpacing() {
 		return getAttribute("cellspacing");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getFrame() {
 		return getAttribute("frame");
@@ -157,6 +188,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 * (non-Javadoc)
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContext#getHeightLength()
+	 */
+	/**
+	 * <p>getHeightLength.</p>
+	 *
+	 * @param availHeight a int.
+	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
 	 */
 	public HtmlLength getHeightLength(int availHeight) {
 		try {
@@ -172,36 +209,43 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getRows() {
         return new HTMLCollectionImpl(this, new ElementFilter("TR"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getRules() {
 		return getAttribute("rules");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getSummary() {
 		return getAttribute("summary");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLCollection getTBodies() {
 		return new HTMLCollectionImpl(this, new ElementFilter("TBODY"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLTableSectionElement getTFoot() {
 		return this.tfoot;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLTableSectionElement getTHead() {
 		return this.thead;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getWidth() {
 		return getAttribute("width");
@@ -211,6 +255,12 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	 * (non-Javadoc)
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContext#getWidthLength()
+	 */
+	/**
+	 * <p>getWidthLength.</p>
+	 *
+	 * @param availWidth a int.
+	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
 	 */
 	public HtmlLength getWidthLength(int availWidth) {
 		try {
@@ -227,7 +277,9 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	}
 
 	/**
-	 * Inserts a row at the index given. If <code>index</code> is <code>-1</code>,
+	 * {@inheritDoc}
+	 *
+	 * Inserts a row at the index given. If index is -1,
 	 * the row is appended as the last row.
 	 */
 	@Override
@@ -255,61 +307,73 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 		return rowElement;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
 		setAttribute("align", align);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBgColor(String bgColor) {
 		setAttribute("bgcolor", bgColor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBorder(String border) {
 		setAttribute("border", border);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCaption(HTMLTableCaptionElement caption) throws DOMException {
 		this.caption = caption;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCellPadding(String cellPadding) {
 		setAttribute("cellpadding", cellPadding);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCellSpacing(String cellSpacing) {
 		setAttribute("cellspacing", cellSpacing);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setFrame(String frame) {
 		setAttribute("frame", frame);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setRules(String rules) {
 		setAttribute("rules", rules);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSummary(String summary) {
 		setAttribute("summary", summary);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTFoot(HTMLTableSectionElement tFoot) throws DOMException {
 		this.tfoot = tFoot;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTHead(HTMLTableSectionElement tHead) throws DOMException {
 		this.thead = tHead;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setWidth(String width) {
 		setAttribute("width", width);

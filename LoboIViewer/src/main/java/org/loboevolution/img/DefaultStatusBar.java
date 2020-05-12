@@ -23,35 +23,42 @@ package org.loboevolution.img;
 /**
  * A default status bar implementation that displays the current mouse position
  * (in pixel coordinates) and the colour of the pixel under the cursor.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public class DefaultStatusBar extends PixelInfoStatusBar implements ImageMouseMotionListener {
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseMoved(ImageMouseEvent e) {
 		setPixel(e.getX(), e.getY());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseExited(ImageMouseEvent e) {
 		setPixel(-1, -1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseEntered(ImageMouseEvent e) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void mouseDragged(ImageMouseEvent e) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void register(ImageViewer viewer) {
 		super.register(viewer);
 		viewer.addImageMouseMotionListener(this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void unregister(ImageViewer viewer) {
 		super.unregister(viewer);

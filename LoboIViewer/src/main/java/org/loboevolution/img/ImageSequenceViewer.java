@@ -15,8 +15,9 @@ import javax.swing.JPanel;
  * When the position is changed, the {@link #positionChanged()} method is
  * called. Subclasses should override this method to update the image according
  * to the new position.
- * 
+ *
  * @author Kaz Csaba
+ * @version $Id: $Id
  */
 public class ImageSequenceViewer {
 
@@ -41,10 +42,10 @@ public class ImageSequenceViewer {
 	/**
 	 * Creates a new sequence viewer that can display the specified number of
 	 * images.
-	 * 
+	 *
 	 * @param number
 	 *            the number of images
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the number is negative
 	 */
 	public ImageSequenceViewer(int number) {
@@ -54,12 +55,12 @@ public class ImageSequenceViewer {
 	/**
 	 * Creates a new sequence viewer that can display the specified number of
 	 * images.
-	 * 
+	 *
 	 * @param number
 	 *            the number of images
 	 * @param startPos
 	 *            the initial position of the viewer
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the number is negative or the starting position is not valid
 	 */
 	public ImageSequenceViewer(int number, int startPos) {
@@ -103,7 +104,7 @@ public class ImageSequenceViewer {
 
 	/**
 	 * Returns the Swing component for this sequence viewer.
-	 * 
+	 *
 	 * @return the component
 	 */
 	public JComponent getComponent() {
@@ -122,16 +123,21 @@ public class ImageSequenceViewer {
 	protected void positionChanged() {
 	}
 
+	/**
+	 * <p>Getter for the field imageViewer.</p>
+	 *
+	 * @return a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public ImageViewer getImageViewer() {
 		return imageViewer;
 	}
 
 	/**
 	 * Sets the position of the viewer.
-	 * 
+	 *
 	 * @param pos
 	 *            the new position of the viewer
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the position is not valid
 	 */
 	public void setPosition(int pos) {
@@ -147,6 +153,8 @@ public class ImageSequenceViewer {
 
 	/**
 	 * Returns the current position of this image sequence shower.
+	 *
+	 * @return a int.
 	 */
 	public int getPosition() {
 		return position;
@@ -154,8 +162,8 @@ public class ImageSequenceViewer {
 
 	/**
 	 * Creates and returns the component that displays the current position to the
-	 * user. The default implementation creates a <code>JLabel</code>.
-	 * 
+	 * user. The default implementation creates a JLabel.
+	 *
 	 * @return the location component
 	 */
 	protected JComponent createLocationDefinition() {
@@ -165,7 +173,7 @@ public class ImageSequenceViewer {
 
 	/**
 	 * Called when the current position changes to update the location component.
-	 * 
+	 *
 	 * @param pos
 	 *            the current position
 	 */

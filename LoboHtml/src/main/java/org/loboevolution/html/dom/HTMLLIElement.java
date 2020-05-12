@@ -38,29 +38,40 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLLIElement extends HTMLElement {
 	/**
 	 * List item bullet style. See the type attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getType();
 
 	/**
-	 * Reset sequence number when used in <code>OL</code>. See the value attribute
+	 * Reset sequence number when used in OL. See the value attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a int.
 	 */
 	int getValue();
 
 	/**
 	 * List item bullet style. See the type attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param type a {@link java.lang.String} object.
 	 */
 	void setType(String type);
 
 	/**
-	 * Reset sequence number when used in <code>OL</code>. See the value attribute
+	 * Reset sequence number when used in OL. See the value attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param value a int.
 	 */
 	void setValue(int value);
 

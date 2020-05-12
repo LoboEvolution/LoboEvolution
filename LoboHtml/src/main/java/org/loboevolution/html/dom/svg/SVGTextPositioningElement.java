@@ -20,15 +20,46 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGTextPositioningElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGTextPositioningElement extends SVGTextContentElement {
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY();
 
+	/**
+	 * <p>getDx.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getDx();
 
+	/**
+	 * <p>getDy.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getDy();
 
+	/**
+	 * <p>getRotate.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumberList} object.
+	 */
 	SVGAnimatedNumberList getRotate();
 }

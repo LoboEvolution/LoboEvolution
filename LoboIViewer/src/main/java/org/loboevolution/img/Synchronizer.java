@@ -87,6 +87,11 @@ class Synchronizer {
 		}
 	};
 
+	/**
+	 * <p>Constructor for Synchronizer.</p>
+	 *
+	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public Synchronizer(ImageViewer viewer) {
 		viewers.put(viewer, null);
 		viewer.getScrollPane().getHorizontalScrollBar().getModel().addChangeListener(scrollChangeListener);
@@ -106,6 +111,11 @@ class Synchronizer {
 				.setValue(reference.getScrollPane().getVerticalScrollBar().getModel().getValue());
 	}
 
+	/**
+	 * <p>add.</p>
+	 *
+	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public void add(ImageViewer viewer) {
 		if (viewer.getSynchronizer() == this)
 			return;
@@ -128,12 +138,23 @@ class Synchronizer {
 		}
 	}
 
+	/**
+	 * <p>remove.</p>
+	 *
+	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public void remove(ImageViewer viewer) {
 		viewers.remove(viewer);
 		viewer.getScrollPane().getHorizontalScrollBar().getModel().removeChangeListener(scrollChangeListener);
 		viewer.getScrollPane().getVerticalScrollBar().getModel().removeChangeListener(scrollChangeListener);
 	}
 
+	/**
+	 * <p>resizeStrategyChangedCanIRescroll.</p>
+	 *
+	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
+	 * @return a boolean.
+	 */
 	public boolean resizeStrategyChangedCanIRescroll(ImageViewer source) {
 		if (leader != null) {
 			// leader is leading an adjustment operation; wait for it to rescroll, and then
@@ -146,6 +167,12 @@ class Synchronizer {
 		return true;
 	}
 
+	/**
+	 * <p>zoomFactorChangedCanIRescroll.</p>
+	 *
+	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
+	 * @return a boolean.
+	 */
 	public boolean zoomFactorChangedCanIRescroll(ImageViewer source) {
 		if (leader != null) {
 			// leader is leading an adjustment operation; wait for it to rescroll, and then
@@ -158,6 +185,11 @@ class Synchronizer {
 		return true;
 	}
 
+	/**
+	 * <p>doneRescrolling.</p>
+	 *
+	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public void doneRescrolling(ImageViewer source) {
 		if (!Objects.equals(leader, source))
 			throw new AssertionError();
@@ -171,16 +203,31 @@ class Synchronizer {
 		leader = null;
 	}
 
+	/**
+	 * <p>interpolationTypeChanged.</p>
+	 *
+	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public void interpolationTypeChanged(ImageViewer source) {
 		for (ImageViewer viewer : viewers.keySet())
 			viewer.setInterpolationType(source.getInterpolationType());
 	}
 
+	/**
+	 * <p>statusBarVisibilityChanged.</p>
+	 *
+	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public void statusBarVisibilityChanged(ImageViewer source) {
 		for (ImageViewer viewer : viewers.keySet())
 			viewer.setStatusBarVisible(source.isStatusBarVisible());
 	}
 
+	/**
+	 * <p>pixelatedZoomChanged.</p>
+	 *
+	 * @param source a {@link org.loboevolution.img.ImageViewer} object.
+	 */
 	public void pixelatedZoomChanged(ImageViewer source) {
 		for (ImageViewer viewer : viewers.keySet())
 			viewer.setPixelatedZoom(source.isPixelatedZoom());

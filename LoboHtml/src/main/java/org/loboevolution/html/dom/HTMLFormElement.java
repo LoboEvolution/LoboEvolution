@@ -33,7 +33,7 @@
 package org.loboevolution.html.dom;
 
 /**
- * The <code>FORM</code> element encompasses behavior similar to a collection
+ * The FORM element encompasses behavior similar to a collection
  * and an element. It provides direct access to the contained form controls as
  * well as the attributes of the form element. See the FORM element definition
  * in HTML 4.01.
@@ -41,21 +41,30 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLFormElement extends HTMLElement {
 	/**
 	 * List of character sets supported by the server. See the accept-charset
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAcceptCharset();
 
 	/**
 	 * Server-side form handler. See the action attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAction();
 
 	/**
 	 * Returns a collection of all form control elements in the form.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getElements();
 
@@ -65,28 +74,38 @@ public interface HTMLFormElement extends HTMLElement {
 	 * HTML 4.01. The onsubmit even handler is not guaranteed to be triggered when
 	 * invoking this method. The behavior is inconsistent for historical reasons and
 	 * authors should not rely on a particular one.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getEnctype();
 
 	/**
 	 * The number of form controls in the form.
+	 *
+	 * @return a int.
 	 */
 	int getLength();
 
 	/**
 	 * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]
 	 * used to submit form. See the method attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getMethod();
 
 	/**
 	 * Names the form.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getName();
 
 	/**
 	 * Frame to render the resource in. See the target attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getTarget();
 
@@ -99,11 +118,15 @@ public interface HTMLFormElement extends HTMLElement {
 	/**
 	 * List of character sets supported by the server. See the accept-charset
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param acceptCharset a {@link java.lang.String} object.
 	 */
 	void setAcceptCharset(String acceptCharset);
 
 	/**
 	 * Server-side form handler. See the action attribute definition in HTML 4.01.
+	 *
+	 * @param action a {@link java.lang.String} object.
 	 */
 	void setAction(String action);
 
@@ -113,23 +136,31 @@ public interface HTMLFormElement extends HTMLElement {
 	 * HTML 4.01. The onsubmit even handler is not guaranteed to be triggered when
 	 * invoking this method. The behavior is inconsistent for historical reasons and
 	 * authors should not rely on a particular one.
+	 *
+	 * @param enctype a {@link java.lang.String} object.
 	 */
 	void setEnctype(String enctype);
 
 	/**
 	 * HTTP method [<a href='http://www.ietf.org/rfc/rfc2616.txt'>IETF RFC 2616</a>]
 	 * used to submit form. See the method attribute definition in HTML 4.01.
+	 *
+	 * @param method a {@link java.lang.String} object.
 	 */
 	void setMethod(String method);
 
 	/**
 	 * Names the form.
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	void setName(String name);
 
 	/**
 	 * Frame to render the resource in. See the target attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param target a {@link java.lang.String} object.
 	 */
 	void setTarget(String target);
 

@@ -44,7 +44,7 @@ import java.beans.VetoableChangeSupport;
  * pattern for implementing property change notification:
  *
  * <pre>
- * <code>
+ * 
  *  public class ABean extends JavaBean {
  *    private String foo;
  *
@@ -58,7 +58,7 @@ import java.beans.VetoableChangeSupport;
  *      return foo;
  *   }
  * }
- * </code>
+ * 
  * </pre>
  *
  * <p>
@@ -75,15 +75,15 @@ import java.beans.VetoableChangeSupport;
  * only occur if old is indeed different from getFoo()
  * </p>
  *
- * <code>JavaBean</code> also supports VetoablePropertyChange events. These
- * events are similar to <code>PropertyChange</code> events, except a special
+ * JavaBean also supports VetoablePropertyChange events. These
+ * events are similar to PropertyChange events, except a special
  * exception can be used to veto changing the property. For example, perhaps the
  * property is changing from "fred" to "red", but a listener deems that "red" is
  * unexceptable. In this case, the listener can fire a veto exception and the
  * property must remain "fred". For example:
  *
  * <pre>
- * <code>
+ * 
  *  public class ABean extends JavaBean {
  *    private String foo;
  *
@@ -116,12 +116,13 @@ import java.beans.VetoableChangeSupport;
  *     }
  *   }
  * }
- * </code>
+ * 
  * </pre>
  *
  * status REVIEWED
  *
  * @author rbair
+ * @version $Id: $Id
  */
 public abstract class AbstractBean {
 	/**
@@ -170,7 +171,7 @@ public abstract class AbstractBean {
 	 * Add a PropertyChangeListener to the listener list. The listener is
 	 * registered for all properties. The same listener object may be added more
 	 * than once, and will be called as many times as it is added. If
-	 * <code>listener</code> is null, no exception is thrown and no action is
+	 * listener is null, no exception is thrown and no action is
 	 * taken.
 	 *
 	 * @param listener
@@ -183,9 +184,9 @@ public abstract class AbstractBean {
 	/**
 	 * Remove a PropertyChangeListener from the listener list. This removes a
 	 * PropertyChangeListener that was registered for all properties. If
-	 * <code>listener</code> was added more than once to the same event source,
+	 * listener was added more than once to the same event source,
 	 * it will be notified one less time after being removed. If
-	 * <code>listener</code> is null, or was never added, no exception is thrown
+	 * listener is null, or was never added, no exception is thrown
 	 * and no action is taken.
 	 *
 	 * @param listener
@@ -209,7 +210,7 @@ public abstract class AbstractBean {
 	 * be invoked only when a call on firePropertyChange names that specific
 	 * property. The same listener object may be added more than once. For each
 	 * property, the listener will be invoked the number of times it was added
-	 * for that property. If <code>propertyName</code> or <code>listener</code>
+	 * for that property. If propertyName or listener
 	 * is null, no exception is thrown and no action is taken.
 	 *
 	 * @param propertyName
@@ -223,10 +224,10 @@ public abstract class AbstractBean {
 
 	/**
 	 * Remove a PropertyChangeListener for a specific property. If
-	 * <code>listener</code> was added more than once to the same event source
+	 * listener was added more than once to the same event source
 	 * for the specified property, it will be notified one less time after being
-	 * removed. If <code>propertyName</code> is null, no exception is thrown and
-	 * no action is taken. If <code>listener</code> is null, or was never added
+	 * removed. If propertyName is null, no exception is thrown and
+	 * no action is taken. If listener is null, or was never added
 	 * for the specified property, no exception is thrown and no action is
 	 * taken.
 	 *
@@ -245,9 +246,9 @@ public abstract class AbstractBean {
 	 *
 	 * @param propertyName
 	 *            The name of the property being listened to
-	 * @return all of the <code>PropertyChangeListeners</code> associated with
+	 * @return all of the PropertyChangeListeners associated with
 	 *         the named property. If no such listeners have been added, or if
-	 *         <code>propertyName</code> is null, an empty array is returned.
+	 *         propertyName is null, an empty array is returned.
 	 */
 	public PropertyChangeListener[] getPropertyChangeListeners(final String propertyName) {
 		return pcs.getPropertyChangeListeners(propertyName);
@@ -309,7 +310,7 @@ public abstract class AbstractBean {
 
 	/**
 	 * Check if there are any listeners for a specific property, including those
-	 * registered on all properties. If <code>propertyName</code> is null, only
+	 * registered on all properties. If propertyName is null, only
 	 * check for listeners registered on all properties.
 	 *
 	 * @param propertyName
@@ -322,7 +323,7 @@ public abstract class AbstractBean {
 
 	/**
 	 * Check if there are any listeners for a specific property, including those
-	 * registered on all properties. If <code>propertyName</code> is null, only
+	 * registered on all properties. If propertyName is null, only
 	 * check for listeners registered on all properties.
 	 *
 	 * @param propertyName
@@ -336,7 +337,7 @@ public abstract class AbstractBean {
 	/**
 	 * Add a VetoableListener to the listener list. The listener is registered
 	 * for all properties. The same listener object may be added more than once,
-	 * and will be called as many times as it is added. If <code>listener</code>
+	 * and will be called as many times as it is added. If listener
 	 * is null, no exception is thrown and no action is taken.
 	 *
 	 * @param listener
@@ -349,9 +350,9 @@ public abstract class AbstractBean {
 	/**
 	 * Remove a VetoableChangeListener from the listener list. This removes a
 	 * VetoableChangeListener that was registered for all properties. If
-	 * <code>listener</code> was added more than once to the same event source,
+	 * listener was added more than once to the same event source,
 	 * it will be notified one less time after being removed. If
-	 * <code>listener</code> is null, or was never added, no exception is thrown
+	 * listener is null, or was never added, no exception is thrown
 	 * and no action is taken.
 	 *
 	 * @param listener
@@ -375,7 +376,7 @@ public abstract class AbstractBean {
 	 * be invoked only when a call on fireVetoableChange names that specific
 	 * property. The same listener object may be added more than once. For each
 	 * property, the listener will be invoked the number of times it was added
-	 * for that property. If <code>propertyName</code> or <code>listener</code>
+	 * for that property. If propertyName or listener
 	 * is null, no exception is thrown and no action is taken.
 	 *
 	 * @param propertyName
@@ -389,10 +390,10 @@ public abstract class AbstractBean {
 
 	/**
 	 * Remove a VetoableChangeListener for a specific property. If
-	 * <code>listener</code> was added more than once to the same event source
+	 * listener was added more than once to the same event source
 	 * for the specified property, it will be notified one less time after being
-	 * removed. If <code>propertyName</code> is null, no exception is thrown and
-	 * no action is taken. If <code>listener</code> is null, or was never added
+	 * removed. If propertyName is null, no exception is thrown and
+	 * no action is taken. If listener is null, or was never added
 	 * for the specified property, no exception is thrown and no action is
 	 * taken.
 	 *
@@ -411,9 +412,9 @@ public abstract class AbstractBean {
 	 *
 	 * @param propertyName
 	 *            The name of the property being listened to
-	 * @return all the <code>VetoableChangeListeners</code> associated with the
+	 * @return all the VetoableChangeListeners associated with the
 	 *         named property. If no such listeners have been added, or if
-	 *         <code>propertyName</code> is null, an empty array is returned.
+	 *         propertyName is null, an empty array is returned.
 	 */
 	public VetoableChangeListener[] getVetoableChangeListeners(final String propertyName) {
 		return vcs.getVetoableChangeListeners(propertyName);
@@ -436,6 +437,7 @@ public abstract class AbstractBean {
 	 * @exception PropertyVetoException
 	 *                if the recipient wishes the property change to be rolled
 	 *                back.
+	 * @throws java.beans.PropertyVetoException if any.
 	 */
 	protected void fireVetoableChange(final String propertyName, final Object oldValue, final Object newValue)
 			throws PropertyVetoException {
@@ -454,6 +456,7 @@ public abstract class AbstractBean {
 	 * @exception PropertyVetoException
 	 *                if the recipient wishes the property change to be rolled
 	 *                back.
+	 * @throws java.beans.PropertyVetoException if any.
 	 */
 	protected void fireVetoableChange(final PropertyChangeEvent evt) throws PropertyVetoException {
 		vcs.fireVetoableChange(evt);

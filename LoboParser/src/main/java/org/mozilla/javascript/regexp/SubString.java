@@ -8,13 +8,24 @@ package org.mozilla.javascript.regexp;
 
 /**
  * A utility class for lazily instantiated substrings.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SubString {
 
+    /**
+     * <p>Constructor for SubString.</p>
+     */
     public SubString()
     {
     }
 
+    /**
+     * <p>Constructor for SubString.</p>
+     *
+     * @param str a {@link java.lang.String} object.
+     */
     public SubString(String str)
     {
         this.str = str;
@@ -22,6 +33,13 @@ public class SubString {
         length = str.length();
     }
 
+    /**
+     * <p>Constructor for SubString.</p>
+     *
+     * @param source a {@link java.lang.String} object.
+     * @param start a int.
+     * @param len a int.
+     */
     public SubString(String source, int start, int len)
     {
         str = source;
@@ -29,6 +47,7 @@ public class SubString {
         length = len;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return str == null

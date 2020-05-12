@@ -35,7 +35,10 @@ import org.loboevolution.info.WordInfo;
 import org.loboevolution.html.style.HtmlInsets;
 
 /**
+ * <p>RenderState interface.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public interface RenderState {
 	
@@ -165,87 +168,303 @@ public interface RenderState {
 	/** The overflow visible. */
 	int OVERFLOW_VISIBLE = 4;
 	
+	/**
+	 * <p>getAlignXPercent.</p>
+	 *
+	 * @return a int.
+	 */
 	int getAlignXPercent();
 
+	/**
+	 * <p>getAlignYPercent.</p>
+	 *
+	 * @return a int.
+	 */
 	int getAlignYPercent();
 
+	/**
+	 * <p>getBackgroundColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	Color getBackgroundColor();
 
+	/**
+	 * <p>getBackgroundInfo.</p>
+	 *
+	 * @return a {@link org.loboevolution.info.BackgroundInfo} object.
+	 */
 	BackgroundInfo getBackgroundInfo();
 
+	/**
+	 * <p>getBlankWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	int getBlankWidth();
 
+	/**
+	 * <p>getBorderInfo.</p>
+	 *
+	 * @return a {@link org.loboevolution.info.BorderInfo} object.
+	 */
 	BorderInfo getBorderInfo();
 
+	/**
+	 * <p>getColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	Color getColor();
 
+	/**
+	 * <p>getCount.</p>
+	 *
+	 * @param counter a {@link java.lang.String} object.
+	 * @param nesting a int.
+	 * @return a int.
+	 */
 	int getCount(String counter, int nesting);
 
+	/**
+	 * <p>getDisplay.</p>
+	 *
+	 * @return a int.
+	 */
 	int getDisplay();
 
+	/**
+	 * <p>getFloat.</p>
+	 *
+	 * @return a int.
+	 */
 	int getFloat();
 
+	/**
+	 * <p>getFont.</p>
+	 *
+	 * @return a {@link java.awt.Font} object.
+	 */
 	Font getFont();
 
+	/**
+	 * <p>getFontBase.</p>
+	 *
+	 * @return a int.
+	 */
 	int getFontBase();
 
+	/**
+	 * <p>getFontMetrics.</p>
+	 *
+	 * @return a {@link java.awt.FontMetrics} object.
+	 */
 	FontMetrics getFontMetrics();
 
+	/**
+	 * <p>getMarginInsets.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	HtmlInsets getMarginInsets();
 
+	/**
+	 * <p>getOverflowX.</p>
+	 *
+	 * @return a int.
+	 */
 	int getOverflowX();
 
+	/**
+	 * <p>getOverflowY.</p>
+	 *
+	 * @return a int.
+	 */
 	int getOverflowY();
 
+	/**
+	 * <p>getOverlayColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	Color getOverlayColor();
 
+	/**
+	 * <p>getPaddingInsets.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	HtmlInsets getPaddingInsets();
 
+	/**
+	 * <p>getPosition.</p>
+	 *
+	 * @return a int.
+	 */
 	int getPosition();
 
+	/**
+	 * <p>getPreviousRenderState.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 */
 	RenderState getPreviousRenderState();
 
+	/**
+	 * <p>getTextBackgroundColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	Color getTextBackgroundColor();
 
+	/**
+	 * <p>getTextDecorationMask.</p>
+	 *
+	 * @return a int.
+	 */
 	int getTextDecorationMask();
 
+	/**
+	 * <p>getTextIndent.</p>
+	 *
+	 * @param availWidth a int.
+	 * @return a int.
+	 */
 	int getTextIndent(int availWidth);
 
+	/**
+	 * <p>getTextIndentText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getTextIndentText();
 
+	/**
+	 * <p>getTextTransform.</p>
+	 *
+	 * @return a int.
+	 */
 	int getTextTransform();
 
+	/**
+	 * <p>getVisibility.</p>
+	 *
+	 * @return a int.
+	 */
 	int getVisibility();
 
+	/**
+	 * <p>getWhiteSpace.</p>
+	 *
+	 * @return a int.
+	 */
 	int getWhiteSpace();
 
+	/**
+	 * <p>getWordInfo.</p>
+	 *
+	 * @param word a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.info.WordInfo} object.
+	 */
 	WordInfo getWordInfo(String word);
 
+	/**
+	 * <p>incrementCount.</p>
+	 *
+	 * @param counter a {@link java.lang.String} object.
+	 * @param nesting a int.
+	 * @return a int.
+	 */
 	int incrementCount(String counter, int nesting);
 
+	/**
+	 * <p>invalidate.</p>
+	 */
 	void invalidate();
 
+	/**
+	 * <p>isHighlight.</p>
+	 *
+	 * @return a boolean.
+	 */
 	boolean isHighlight();
 
+	/**
+	 * <p>resetCount.</p>
+	 *
+	 * @param counter a {@link java.lang.String} object.
+	 * @param nesting a int.
+	 * @param value a int.
+	 */
 	void resetCount(String counter, int nesting, int value);
 
+	/**
+	 * <p>setHighlight.</p>
+	 *
+	 * @param highlight a boolean.
+	 */
 	void setHighlight(boolean highlight);
 	
+    /**
+     * <p>getClear.</p>
+     *
+     * @return a int.
+     */
     int getClear();
     
+    /**
+     * <p>getBoxSizing.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getBoxSizing();
     
+    /**
+     * <p>getLeft.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getLeft();
 
+    /**
+     * <p>getTop.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getTop();
 
+    /**
+     * <p>getRight.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getRight();
 
+    /**
+     * <p>getBottom.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getBottom();
     
+    /**
+     * <p>getVerticalAlign.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     String getVerticalAlign();
     
+    /**
+     * <p>getCursor.</p>
+     *
+     * @return a {@link java.util.Optional} object.
+     */
     Optional<Cursor> getCursor();
     
+    /**
+     * <p>setCursor.</p>
+     *
+     * @param cursor a {@link java.util.Optional} object.
+     */
     void setCursor(Optional<Cursor> cursor);
 }

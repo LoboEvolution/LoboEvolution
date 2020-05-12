@@ -23,28 +23,57 @@ package org.loboevolution.html.renderer;
 interface FloatingBounds {
 	/**
 	 * The Y at which the float clears starting at the given Y.
+	 *
+	 * @param y a int.
+	 * @return a int.
 	 */
 	int getClearY(int y);
 
 	/**
 	 * The Y at which the first float clears. It does not recurse to check other
 	 * floats.
+	 *
+	 * @param y a int.
+	 * @return a int.
 	 */
 	int getFirstClearY(int y);
 
 	/**
 	 * The offset from the left at the given Y, not counting insets.
+	 *
+	 * @param y a int.
+	 * @return a int.
 	 */
 	int getLeft(int y);
 
+	/**
+	 * <p>getLeftClearY.</p>
+	 *
+	 * @param y a int.
+	 * @return a int.
+	 */
 	int getLeftClearY(int y);
 
+	/**
+	 * <p>getMaxY.</p>
+	 *
+	 * @return a int.
+	 */
 	int getMaxY();
 
 	/**
 	 * The offset from the right at the given Y, not counting insets.
+	 *
+	 * @param y a int.
+	 * @return a int.
 	 */
 	int getRight(int y);
 
+	/**
+	 * <p>getRightClearY.</p>
+	 *
+	 * @param y a int.
+	 * @return a int.
+	 */
 	int getRightClearY(int y);
 }

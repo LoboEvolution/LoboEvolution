@@ -41,6 +41,7 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
  * Implementation of CSSStyleSheet.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class CSSStyleSheetImpl implements Serializable {
 
@@ -62,6 +63,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getDisabled.</p>
+     *
      * @return the disable state
      */
     public boolean getDisabled() {
@@ -71,6 +74,7 @@ public class CSSStyleSheetImpl implements Serializable {
     /**
      * We will need to respond more fully if a stylesheet is disabled, probably
      * by generating an event for the main application.
+     *
      * @param disabled the new disabled
      */
     public void setDisabled(final boolean disabled) {
@@ -78,6 +82,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getOwnerNode.</p>
+     *
      * @return the owner node
      */
     public Node getOwnerNode() {
@@ -85,6 +91,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getHref.</p>
+     *
      * @return the href
      */
     public String getHref() {
@@ -92,6 +100,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getTitle.</p>
+     *
      * @return the title
      */
     public String getTitle() {
@@ -99,6 +109,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getMedia.</p>
+     *
      * @return the media list
      */
     public MediaListImpl getMedia() {
@@ -106,6 +118,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getOwnerRule.</p>
+     *
      * @return the owner rule
      */
     public AbstractCSSRuleImpl getOwnerRule() {
@@ -113,6 +127,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getCssRules.</p>
+     *
      * @return the css rules
      */
     public CSSRuleListImpl getCssRules() {
@@ -127,7 +143,7 @@ public class CSSStyleSheetImpl implements Serializable {
      *
      * @param rule the rule to insert
      * @param index the insert pos
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public void insertRule(final String rule, final int index) throws DOMException {
         try {
@@ -215,7 +231,7 @@ public class CSSStyleSheetImpl implements Serializable {
      * delete the rule at the given pos.
      *
      * @param index the pos
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public void deleteRule(final int index) throws DOMException {
         try {
@@ -231,6 +247,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the owner node.
+     *
      * @param ownerNode the new node
      */
     public void setOwnerNode(final Node ownerNode) {
@@ -239,6 +256,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the href.
+     *
      * @param href the new href
      */
     public void setHref(final String href) {
@@ -247,6 +265,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the title.
+     *
      * @param title the new title
      */
     public void setTitle(final String title) {
@@ -255,6 +274,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the media text.
+     *
      * @param mediaText the new media text
      */
     public void setMediaText(final String mediaText) {
@@ -269,6 +289,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>setOwnerRule.</p>
+     *
      * @param ownerRule the new ownerRule
      */
     public void setOwnerRule(final AbstractCSSRuleImpl ownerRule) {
@@ -276,17 +298,21 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>setCssRules.</p>
+     *
      * @param rules the new rules
      */
     public void setCssRules(final CSSRuleListImpl rules) {
         cssRules_ = rules;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssRules().toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -304,6 +330,7 @@ public class CSSStyleSheetImpl implements Serializable {
         return eq;
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
@@ -339,6 +366,8 @@ public class CSSStyleSheetImpl implements Serializable {
     }
 
     /**
+     * <p>getRuleIndex.</p>
+     *
      * @return the CSSStyleSheetRuleIndex
      */
     public CSSStyleSheetRuleIndex getRuleIndex() {
@@ -347,6 +376,7 @@ public class CSSStyleSheetImpl implements Serializable {
 
     /**
      * Set the CSSStyleSheetRuleIndex.
+     *
      * @param index the new index
      */
     public void setRuleIndex(final CSSStyleSheetRuleIndex index) {

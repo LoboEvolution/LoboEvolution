@@ -25,9 +25,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class AnchorFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class AnchorFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		String nodeName = node.getNodeName();

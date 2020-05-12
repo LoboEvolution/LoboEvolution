@@ -32,12 +32,16 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseRadioButtonUI;
 
 /**
+ * <p>BernsteinRadioButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinRadioButtonUI extends BaseRadioButtonUI {
 
 	private static BernsteinRadioButtonUI radioButtonUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new BernsteinRadioButtonUI();
@@ -45,6 +49,7 @@ public class BernsteinRadioButtonUI extends BaseRadioButtonUI {
 		return radioButtonUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

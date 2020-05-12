@@ -49,20 +49,26 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>TextureTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		Color c = AbstractLookAndFeel.getTheme().getSelectionBackgroundColorDark();
 		return new Color[] { getLoBorderColor(0), c, c, c, ColorHelper.darker(c, 10) };
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color getLoBorderColor(int tabIndex) {
 		if (tabIndex == tabPane.getSelectedIndex() && tabPane.getBackgroundAt(tabIndex) instanceof ColorUIResource
@@ -72,10 +78,16 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 		return AbstractLookAndFeel.getFrameColor();
 	}
 
+	/**
+	 * <p>getSelectedTexture.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getSelectedTexture() {
 		return TextureUtils.SELECTED_TEXTURE_TYPE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Font getTabFont(boolean isSelected) {
 		if (isSelected) {
@@ -85,10 +97,21 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/**
+	 * <p>getTexture.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getTexture() {
 		return TextureUtils.BACKGROUND_TEXTURE_TYPE;
 	}
 
+	/**
+	 * <p>getUnSelectedTexture.</p>
+	 *
+	 * @param tabIndex a int.
+	 * @return a int.
+	 */
 	protected int getUnSelectedTexture(int tabIndex) {
 		if (tabIndex == rolloverIndex && tabPane.isEnabledAt(tabIndex)) {
 			return TextureUtils.ROLLOVER_TEXTURE_TYPE;
@@ -96,12 +119,14 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 		return TextureUtils.ALTER_BACKGROUND_TEXTURE_TYPE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installComponents() {
 		simpleButtonBorder = true;
 		super.installComponents();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
 		int textureType = TextureUtils.getTextureType(tabPane);
@@ -172,6 +197,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 			boolean isSelected) {
@@ -257,6 +283,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
 			Rectangle textRect, boolean isSelected) {

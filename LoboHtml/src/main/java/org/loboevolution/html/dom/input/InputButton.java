@@ -9,8 +9,20 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
 
+/**
+ * <p>InputButton class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputButton {
 
+	/**
+	 * <p>Constructor for InputButton.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputButton(HTMLInputElementImpl modelNode, InputControl ic) {
 		final JButton button = new JButton();
 		button.setContentAreaFilled(false);

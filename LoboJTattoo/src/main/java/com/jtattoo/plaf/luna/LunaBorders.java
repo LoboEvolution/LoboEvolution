@@ -43,7 +43,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>LunaBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaBorders extends BaseBorders {
 
@@ -386,6 +389,11 @@ public class LunaBorders extends BaseBorders {
 
 	} // end of class TextFieldBorder
 
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -393,6 +401,11 @@ public class LunaBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getComboBoxBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getComboBoxBorder() {
 		if (comboBoxBorder == null) {
 			comboBoxBorder = new ComboBoxBorder();
@@ -400,6 +413,11 @@ public class LunaBorders extends BaseBorders {
 		return comboBoxBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -407,6 +425,11 @@ public class LunaBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -414,6 +437,11 @@ public class LunaBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getScrollPaneBorder() {
 		if (scrollPaneBorder == null) {
 			scrollPaneBorder = new ScrollPaneBorder(false);
@@ -421,6 +449,11 @@ public class LunaBorders extends BaseBorders {
 		return scrollPaneBorder;
 	}
 
+	/**
+	 * <p>getTableHeaderBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTableHeaderBorder() {
 		if (tableHeaderBorder == null) {
 			tableHeaderBorder = new TableHeaderBorder();
@@ -428,6 +461,11 @@ public class LunaBorders extends BaseBorders {
 		return tableHeaderBorder;
 	}
 
+	/**
+	 * <p>getTableScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTableScrollPaneBorder() {
 		if (tableScrollPaneBorder == null) {
 			tableScrollPaneBorder = new ScrollPaneBorder(true);
@@ -438,6 +476,11 @@ public class LunaBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getTextBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTextBorder() {
 		if (textFieldBorder == null) {
 			textFieldBorder = new TextFieldBorder();
@@ -445,10 +488,20 @@ public class LunaBorders extends BaseBorders {
 		return textFieldBorder;
 	}
 
+	/**
+	 * <p>getTextFieldBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTextFieldBorder() {
 		return getTextBorder();
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}

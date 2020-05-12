@@ -30,10 +30,16 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>McWinDefaultTheme class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for McWinDefaultTheme.</p>
+	 */
 	public McWinDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -44,11 +50,13 @@ public class McWinDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "McWinTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -105,6 +113,7 @@ public class McWinDefaultTheme extends AbstractTheme {
 		desktopColor = new ColorUIResource(232, 232, 232);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

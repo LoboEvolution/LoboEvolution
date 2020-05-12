@@ -10,27 +10,42 @@ import org.loboevolution.html.dom.svg.SVGAnimatedLength;
 import org.loboevolution.html.dom.svg.SVGCircleElement;
 import org.loboevolution.html.dom.svg.SVGMatrix;
 
+/**
+ * <p>SVGCircleElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement {
 
+	/**
+	 * <p>Constructor for SVGCircleElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGCircleElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getCx() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("cx")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getCy() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("cy")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getR() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("r")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
@@ -39,6 +54,7 @@ public class SVGCircleElementImpl extends SVGGraphic implements SVGCircleElement
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		AffineTransform inverseTransform;

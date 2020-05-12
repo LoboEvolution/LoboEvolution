@@ -26,10 +26,21 @@ import org.loboevolution.info.MetaInfo;
 import org.loboevolution.net.HttpNetwork;
 import org.w3c.dom.Document;
 
+/**
+ * <p>InfoPageWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InfoPageWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for InfoPageWindow.</p>
+	 *
+	 * @param document a {@link org.w3c.dom.Document} object.
+	 */
 	public InfoPageWindow(Document document) {
 		super("Lobo Info");
 		createAndShowGUI(document);
@@ -155,6 +166,7 @@ public class InfoPageWindow extends JFrame {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isVisible() {
 		return true;

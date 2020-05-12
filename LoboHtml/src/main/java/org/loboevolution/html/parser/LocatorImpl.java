@@ -32,10 +32,12 @@ class LocatorImpl implements Locator {
 	private final String systemId;
 
 	/**
-	 * @param pid
-	 * @param sid
-	 * @param lnumber
-	 * @param cnumber
+	 * <p>Constructor for LocatorImpl.</p>
+	 *
+	 * @param pid a {@link java.lang.String} object.
+	 * @param sid a {@link java.lang.String} object.
+	 * @param lnumber a int.
+	 * @param cnumber a int.
 	 */
 	public LocatorImpl(String pid, String sid, int lnumber, int cnumber) {
 		super();
@@ -45,21 +47,25 @@ class LocatorImpl implements Locator {
 		this.columnNumber = cnumber;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getColumnNumber() {
 		return this.columnNumber;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLineNumber() {
 		return this.lineNumber;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPublicId() {
 		return this.publicId;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getSystemId() {
 		return this.systemId;

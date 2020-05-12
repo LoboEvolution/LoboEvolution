@@ -35,14 +35,19 @@ import com.jtattoo.plaf.BaseCheckBoxMenuItemUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>GraphiteCheckBoxMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteCheckBoxMenuItemUI extends BaseCheckBoxMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteCheckBoxMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
 		JMenuItem mi = (JMenuItem) c;

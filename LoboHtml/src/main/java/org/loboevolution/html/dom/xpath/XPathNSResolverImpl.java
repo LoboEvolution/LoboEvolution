@@ -41,30 +41,30 @@ import com.sun.org.apache.xml.internal.utils.PrefixResolverDefault;
  * </p>
  *
  * <p>
- * The <code>XPathNSResolver</code> interface permit <code>prefix</code> strings
- * in the expression to be properly bound to <code>namespaceURI</code> strings.
- * <code>XPathEvaluator</code> can construct an implementation of
- * <code>XPathNSResolver</code> from a node, or the interface may be implemented
+ * The XPathNSResolver interface permit prefix strings
+ * in the expression to be properly bound to namespaceURI strings.
+ * XPathEvaluator can construct an implementation of
+ * XPathNSResolver from a node, or the interface may be implemented
  * by any application.
  * </p>
  *
  * @see org.w3c.dom.xpath.XPathNSResolver
- * @xsl.usage internal
+ * 
+ * @author utente
+ * @version $Id: $Id
  */
 public class XPathNSResolverImpl extends PrefixResolverDefault implements XPathNSResolver {
 
 	/**
 	 * Constructor for XPathNSResolverImpl.
-	 * 
-	 * @param xpathExpressionContext
+	 *
+	 * @param xpathExpressionContext a {@link org.w3c.dom.Node} object.
 	 */
 	public XPathNSResolverImpl(Node xpathExpressionContext) {
 		super(xpathExpressionContext);
 	}
 
-	/**
-	 * @see org.w3c.dom.xpath.XPathNSResolver#lookupNamespaceURI(String)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String lookupNamespaceURI(String prefix) {
 		return super.getNamespaceForPrefix(prefix);

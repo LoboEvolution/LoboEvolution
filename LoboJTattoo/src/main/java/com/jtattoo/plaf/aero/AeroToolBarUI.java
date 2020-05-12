@@ -31,24 +31,31 @@ import com.jtattoo.plaf.AbstractToolBarUI;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>AeroToolBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AeroToolBarUI extends AbstractToolBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AeroToolBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getNonRolloverBorder() {
 		return BaseBorders.getToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getRolloverBorder() {
 		return AeroBorders.getRolloverToolButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isButtonOpaque() {
 		return false;

@@ -11,43 +11,61 @@ import org.loboevolution.html.dom.svg.SVGAnimatedString;
 import org.loboevolution.html.dom.svg.SVGImageElement;
 import org.loboevolution.net.HttpNetwork;
 
+/**
+ * <p>SVGImageElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 
+	/**
+	 * <p>Constructor for SVGImageElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGImageElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedString getHref() {
 		return new SVGAnimatedStringImpl(getAttribute("href"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getX() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getY() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getWidth() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("width")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getHeight() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedPreserveAspectRatio getPreserveAspectRatio() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		Image image = HttpNetwork.getImage(getHref().getBaseVal(), null);
@@ -63,6 +81,7 @@ public class SVGImageElementImpl extends SVGGraphic implements SVGImageElement {
 		graphics.drawImage(image, at, null);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		return null;

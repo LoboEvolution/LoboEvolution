@@ -10,11 +10,25 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
+/**
+ * <p>Urls class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Urls {
 	
 	/** The Constant PATTERN_RFC1123. */
 	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
 
+	/**
+	 * <p>createURL.</p>
+	 *
+	 * @param baseUrl a {@link java.net.URL} object.
+	 * @param relativeUrl a {@link java.lang.String} object.
+	 * @return a {@link java.net.URL} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public static URL createURL(URL baseUrl, String relativeUrl) throws Exception {
 		if (relativeUrl.contains("javascript:void")) {
 			return null;
@@ -26,14 +40,20 @@ public class Urls {
 	 * Converts the given URL into a valid URL by encoding illegal characters. Right
 	 * now it is implemented like in IE7: only spaces are replaced with "%20".
 	 * (Firefox 3 also encodes other non-ASCII and some ASCII characters).
-	 * 
-	 * @param the URL to convert
+	 *
 	 * @return the encoded URL
+	 * @param url a {@link java.lang.String} object.
 	 */
 	public static String encodeIllegalCharacters(final String url) {
 		return url.replace(" ", "%20");
 	}
 
+	/**
+	 * <p>getCharset.</p>
+	 *
+	 * @param connection a {@link java.net.URLConnection} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getCharset(URLConnection connection) {
 		final String contentType = connection.getContentType();
 		if (contentType == null) {
@@ -67,11 +87,23 @@ public class Urls {
 		}
 	}
 
+	/**
+	 * <p>hasHost.</p>
+	 *
+	 * @param url a {@link java.net.URL} object.
+	 * @return a boolean.
+	 */
 	public static boolean hasHost(URL url) {
 		final String host = url.getHost();
 		return Strings.isNotBlank(host);
 	}
 
+	/**
+	 * <p>isAbsolute.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isAbsolute(String url) {
 		boolean result = false;
 
@@ -92,17 +124,22 @@ public class Urls {
 		return result;
 	}
 
+	/**
+	 * <p>isLocalFile.</p>
+	 *
+	 * @param url a {@link java.net.URL} object.
+	 * @return a boolean.
+	 */
 	public static boolean isLocalFile(URL url) {
 		final String scheme = url.getProtocol();
 		return "file".equalsIgnoreCase(scheme) && !hasHost(url);
 	}
 
 	/**
-	 * Converts the given URL into a valid URL by removing control characters (ASCII
-	 * code < 32).
-	 * 
-	 * @param the URL to convert
+	 * Converts the given URL into a valid URL by removing control characters (ASCII code).
+	 *
 	 * @return the encoded URL
+	 * @param url a {@link java.lang.String} object.
 	 */
 	public static String removeControlCharacters(final String url) {
 		final StringBuilder sb = new StringBuilder(url.length());
@@ -115,6 +152,13 @@ public class Urls {
 		return sb.toString();
 	}
 	
+	/**
+	 * <p>getExpiration.</p>
+	 *
+	 * @param connection a {@link java.net.URLConnection} object.
+	 * @param baseTime a long.
+	 * @return a {@link java.lang.Long} object.
+	 */
 	public static Long getExpiration(URLConnection connection, long baseTime) {
 		String cacheControl = connection.getHeaderField("Cache-Control");
 		if (cacheControl != null) {

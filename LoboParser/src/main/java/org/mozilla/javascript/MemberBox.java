@@ -124,6 +124,7 @@ final class MemberBox implements Serializable
         return sb.toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString()
     {

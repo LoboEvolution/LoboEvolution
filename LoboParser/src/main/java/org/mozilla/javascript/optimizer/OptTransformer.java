@@ -29,12 +29,14 @@ class OptTransformer extends NodeTransformer {
         this.directCallTargets = directCallTargets;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void visitNew(Node node, ScriptNode tree) {
         detectDirectCall(node, tree);
         super.visitNew(node, tree);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void visitCall(Node node, ScriptNode tree) {
         detectDirectCall(node, tree);

@@ -34,7 +34,10 @@ import javax.swing.Icon;
 import javax.swing.plaf.basic.BasicArrowButton;
 
 /**
+ * <p>BaseScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseScrollButton extends BasicArrowButton {
 
@@ -44,25 +47,39 @@ public class BaseScrollButton extends BasicArrowButton {
 	private static final long serialVersionUID = 1L;
 	protected int buttonWidth = 24;
 
+	/**
+	 * <p>Constructor for BaseScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public BaseScrollButton(int direction, int width) {
 		super(direction);
 		buttonWidth = width;
 	}
 
+	/**
+	 * <p>Getter for the field buttonWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getButtonWidth() {
 		return buttonWidth;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getMaximumSize() {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getMinimumSize() {
 		return getPreferredSize();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		switch (getDirection()) {
@@ -79,6 +96,7 @@ public class BaseScrollButton extends BasicArrowButton {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		boolean isPressed = getModel().isPressed();

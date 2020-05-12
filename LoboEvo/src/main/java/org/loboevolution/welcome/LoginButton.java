@@ -23,6 +23,12 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>LoginButton class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class LoginButton extends JLabel {
 	private static final long serialVersionUID = 1L;
 
@@ -42,6 +48,12 @@ public class LoginButton extends JLabel {
 
 	private final int ROUNDNESS = 8;
 
+	/**
+	 * <p>Constructor for LoginButton.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 * @param text a {@link org.loboevolution.welcome.TextFieldUsername} object.
+	 */
 	public LoginButton(IBrowserPanel panel, TextFieldUsername text) {
 
 		setBackground(this.COLOR_BACKGROUND);
@@ -94,6 +106,7 @@ public class LoginButton extends JLabel {
 		return g2;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintComponent(Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);

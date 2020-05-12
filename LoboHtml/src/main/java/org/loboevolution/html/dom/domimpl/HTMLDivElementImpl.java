@@ -25,12 +25,24 @@ import org.loboevolution.html.dom.HTMLDivElement;
 import org.loboevolution.html.renderstate.BlockRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>HTMLDivElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDivElement {
 
+	/**
+	 * <p>Constructor for HTMLDivElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLDivElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		final int length = buffer.length();
@@ -57,16 +69,19 @@ public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDiv
 		buffer.append("\r\n");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new BlockRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
 		return getAttribute("align");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
 		setAttribute("align", align);

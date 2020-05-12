@@ -3,8 +3,11 @@ package org.loboevolution.html.dom.input;
 import java.io.File;
 
 /**
- * The <code>FormInput</code> class contains the state of an HTML form input
+ * The FormInput class contains the state of an HTML form input
  * item.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class FormInput {
 
@@ -21,7 +24,7 @@ public class FormInput {
 	private final File[] fileValue;
 
 	/**
-	 * Constructs a <code>FormInput</code> with a text value.
+	 * Constructs a FormInput with a text value.
 	 *
 	 * @param name
 	 *            The name of the input.
@@ -36,7 +39,7 @@ public class FormInput {
 	}
 
 	/**
-	 * Constructs a <code>FormInput</code> with a file value.
+	 * Constructs a FormInput with a file value.
 	 *
 	 * @param name
 	 *            The name of the input.
@@ -95,10 +98,10 @@ public class FormInput {
 	}
 
 	/**
-	 * Shows a string representation of the <code>FormInput</code> that may be
-	 * useful in debugging.
+	 * {@inheritDoc}
 	 *
-	 * @return the string
+	 * Shows a string representation of the FormInput that may be
+	 * useful in debugging.
 	 * @see #getTextValue()
 	 */
 	@Override

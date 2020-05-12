@@ -22,13 +22,29 @@ package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.dom.domimpl.ModelNode;
 
+/**
+ * <p>LineBreak class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class LineBreak {
 	
+	/** Constant LEFT=1 */
 	public static final int LEFT = 1;
+	/** Constant NONE=0 */
 	public static final int NONE = 0;
+	/** Constant RIGHT=2 */
 	public static final int RIGHT = 2;
+	/** Constant BOTH=3 */
 	public static final int BOTH = 3;
 
+	/**
+	 * <p>Getter for the field breakType.</p>
+	 *
+	 * @param clearAttr a {@link java.lang.String} object.
+	 * @return a int.
+	 */
 	public static int getBreakType(String clearAttr) {
 		if (clearAttr == null) {
 			return NONE;
@@ -50,16 +66,32 @@ public class LineBreak {
 
 	private final ModelNode newLineNode;
 
+	/**
+	 * <p>Constructor for LineBreak.</p>
+	 *
+	 * @param breakType a int.
+	 * @param newLineNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 */
 	public LineBreak(final int breakType, ModelNode newLineNode) {
 		super();
 		this.breakType = breakType;
 		this.newLineNode = newLineNode;
 	}
 
+	/**
+	 * <p>Getter for the field breakType.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getBreakType() {
 		return this.breakType;
 	}
 
+	/**
+	 * <p>getModelNode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 */
 	public ModelNode getModelNode() {
 		return this.newLineNode;
 	}

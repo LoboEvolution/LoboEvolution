@@ -22,30 +22,35 @@
 package org.loboevolution.html.dom.smil;
 
 /**
- * The <code>TimeList</code> interface provides the abstraction of an ordered
+ * The TimeList interface provides the abstraction of an ordered
  * collection of times, without defining or constraining how this collection is
  * implemented.
  * <p>
- * The items in the <code>TimeList</code> are accessible via an integral index,
+ * The items in the TimeList are accessible via an integral index,
  * starting from 0.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface TimeList {
 	/**
-	 * Returns the <code>index</code> th item in the collection. If
-	 * <code>index</code> is greater than or equal to the number of times in the
-	 * list, this returns <code>null</code> .
-	 * 
+	 * Returns the index th item in the collection. If
+	 * index is greater than or equal to the number of times in the
+	 * list, this returns null .
+	 *
 	 * @param index
 	 *            Index into the collection.
-	 * @return The time at the <code>index</code> th position in the
-	 *         <code>TimeList</code> , or <code>null</code> if that is not a
+	 * @return The time at the index th position in the
+	 *         TimeList , or null if that is not a
 	 *         valid index.
 	 */
 	public Time item(int index);
 
 	/**
 	 * The number of times in the list. The range of valid child time indices is
-	 * 0 to <code>length-1</code> inclusive.
+	 * 0 to length-1 inclusive.
+	 *
+	 * @return a int.
 	 */
 	public int getLength();
 

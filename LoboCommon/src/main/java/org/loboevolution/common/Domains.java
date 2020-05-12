@@ -29,7 +29,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
+ * <p>Domains class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class Domains {
 	private static final Collection<String> gTLDs;
@@ -54,9 +57,10 @@ public class Domains {
 	}
 
 	/**
-	 * 
+	 * <p>endsWithGTLD.</p>
+	 *
 	 * @param host A host name in lower case.
-	 * @return
+	 * @return a boolean.
 	 */
 	public static boolean endsWithGTLD(String host) {
 		for (String ending : gTLDs) {
@@ -67,6 +71,12 @@ public class Domains {
 		return false;
 	}
 
+	/**
+	 * <p>getPossibleDomains.</p>
+	 *
+	 * @param hostName a {@link java.lang.String} object.
+	 * @return a {@link java.util.Collection} object.
+	 */
 	public static Collection<String> getPossibleDomains(String hostName) {
 		final Collection<String> domains = new LinkedList<String>();
 		domains.add(hostName);
@@ -82,6 +92,12 @@ public class Domains {
 		return domains;
 	}
 
+	/**
+	 * <p>isLikelyHostName.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isLikelyHostName(String name) {
 		final String nameTL = name.toLowerCase();
 		if (nameTL.startsWith("www.")) {
@@ -98,6 +114,13 @@ public class Domains {
 		return lastDotIdx == nameTL.length() - 3;
 	}
 
+	/**
+	 * <p>isValidCookieDomain.</p>
+	 *
+	 * @param domain a {@link java.lang.String} object.
+	 * @param hostName a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isValidCookieDomain(String domain, String hostName) {
 		String plainDomain;
 		if (!domain.startsWith(".")) {

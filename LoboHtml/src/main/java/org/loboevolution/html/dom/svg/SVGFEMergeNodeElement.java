@@ -20,6 +20,17 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEMergeNodeElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEMergeNodeElement extends SVGElement {
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 }

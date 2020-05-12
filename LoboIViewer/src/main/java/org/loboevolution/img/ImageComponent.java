@@ -98,6 +98,12 @@ class ImageComponent extends JComponent {
 
 	}
 	
+	/**
+	 * <p>Constructor for ImageComponent.</p>
+	 *
+	 * @param viewer a {@link org.loboevolution.img.ImageViewer} object.
+	 * @param propertyChangeSupport a {@link java.beans.PropertyChangeSupport} object.
+	 */
 	public ImageComponent(ImageViewer viewer, PropertyChangeSupport propertyChangeSupport) {
 		this.viewer = viewer;
 		this.propertyChangeSupport = propertyChangeSupport;
@@ -122,31 +128,57 @@ class ImageComponent extends JComponent {
 		return getWidth() > 0 && getHeight() > 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getMaximumSize() {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 
+	/**
+	 * <p>addImageMouseMoveListener.</p>
+	 *
+	 * @param l a {@link org.loboevolution.img.ImageMouseMotionListener} object.
+	 */
 	public void addImageMouseMoveListener(ImageMouseMotionListener l) {
 		if (l != null)
 			getMoveListeners().add(l);
 	}
 
+	/**
+	 * <p>removeImageMouseMoveListener.</p>
+	 *
+	 * @param l a {@link org.loboevolution.img.ImageMouseMotionListener} object.
+	 */
 	public void removeImageMouseMoveListener(ImageMouseMotionListener l) {
 		if (l != null)
 			getMoveListeners().remove(l);
 	}
 
+	/**
+	 * <p>addImageMouseClickListener.</p>
+	 *
+	 * @param l a {@link org.loboevolution.img.ImageMouseClickListener} object.
+	 */
 	public void addImageMouseClickListener(ImageMouseClickListener l) {
 		if (l != null)
 			getClickListeners().add(l);
 	}
 
+	/**
+	 * <p>removeImageMouseClickListener.</p>
+	 *
+	 * @param l a {@link org.loboevolution.img.ImageMouseClickListener} object.
+	 */
 	public void removeImageMouseClickListener(ImageMouseClickListener l) {
 		if (l != null)
 			getClickListeners().remove(l);
 	}
 
+	/**
+	 * <p>Setter for the field image.</p>
+	 *
+	 * @param newImage a {@link java.awt.image.BufferedImage} object.
+	 */
 	public void setImage(BufferedImage newImage) {
 		BufferedImage oldImage = image;
 		image = newImage;
@@ -160,6 +192,11 @@ class ImageComponent extends JComponent {
 		getPropertyChangeSupport().firePropertyChange("image", oldImage, newImage);
 	}
 
+	/**
+	 * <p>Getter for the field image.</p>
+	 *
+	 * @return a {@link java.awt.image.BufferedImage} object.
+	 */
 	public BufferedImage getImage() {
 		return image;
 	}
@@ -204,6 +241,11 @@ class ImageComponent extends JComponent {
 		repaint();
 	}
 
+	/**
+	 * <p>Setter for the field resizeStrategy.</p>
+	 *
+	 * @param resizeStrategy a {@link org.loboevolution.img.ResizeStrategy} object.
+	 */
 	public void setResizeStrategy(ResizeStrategy resizeStrategy) {
 		if (resizeStrategy == this.resizeStrategy)
 			return;
@@ -220,10 +262,20 @@ class ImageComponent extends JComponent {
 		getPropertyChangeSupport().firePropertyChange("resizeStrategy", oldResizeStrategy, resizeStrategy);
 	}
 
+	/**
+	 * <p>Getter for the field resizeStrategy.</p>
+	 *
+	 * @return a {@link org.loboevolution.img.ResizeStrategy} object.
+	 */
 	public ResizeStrategy getResizeStrategy() {
 		return resizeStrategy;
 	}
 
+	/**
+	 * <p>Setter for the field interpolationType.</p>
+	 *
+	 * @param type a {@link java.lang.Object} object.
+	 */
 	public void setInterpolationType(Object type) {
 		if (Objects.equals(interpolationType, type))
 			return;
@@ -239,10 +291,20 @@ class ImageComponent extends JComponent {
 		getPropertyChangeSupport().firePropertyChange("interpolationType", old, type);
 	}
 
+	/**
+	 * <p>Getter for the field interpolationType.</p>
+	 *
+	 * @return a {@link java.lang.Object} object.
+	 */
 	public Object getInterpolationType() {
 		return interpolationType;
 	}
 
+	/**
+	 * <p>Setter for the field pixelatedZoom.</p>
+	 *
+	 * @param pixelatedZoom a boolean.
+	 */
 	public void setPixelatedZoom(boolean pixelatedZoom) {
 		if (pixelatedZoom == this.pixelatedZoom)
 			return;
@@ -253,11 +315,20 @@ class ImageComponent extends JComponent {
 		getPropertyChangeSupport().firePropertyChange("pixelatedZoom", !pixelatedZoom, pixelatedZoom);
 	}
 
+	/**
+	 * <p>isPixelatedZoom.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isPixelatedZoom() {
 		return pixelatedZoom;
 	}
 
-	/** Returns the zoom factor used when resize strategy is CUSTOM_ZOOM. */
+	/**
+	 * Returns the zoom factor used when resize strategy is CUSTOM_ZOOM.
+	 *
+	 * @return a double.
+	 */
 	public double getZoomFactor() {
 		return zoomFactor;
 	}
@@ -266,9 +337,10 @@ class ImageComponent extends JComponent {
 	 * Sets the zoom factor to use when the resize strategy is CUSTOM_ZOOM.
 	 * <p>
 	 * Note that calling this function does not change the current resize strategy.
-	 * 
-	 * @throws IllegalArgumentException
+	 *
+	 * @throws java.lang.IllegalArgumentException
 	 *             if {@code newZoomFactor} is not a positive number
+	 * @param newZoomFactor a double.
 	 */
 	public void setZoomFactor(double newZoomFactor) {
 		if (zoomFactor == newZoomFactor)
@@ -297,6 +369,7 @@ class ImageComponent extends JComponent {
 		getPropertyChangeSupport().firePropertyChange("zoomFactor", oldZoomFactor, newZoomFactor);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		if (image == null) {
@@ -310,10 +383,10 @@ class ImageComponent extends JComponent {
 
 	/**
 	 * Returns the image pixel that is under the given point.
-	 * 
+	 *
 	 * @param p
 	 *            a point in component coordinate system
-	 * @return the corresponding image pixel, or <code>null</code> if the point is
+	 * @return the corresponding image pixel, or null if the point is
 	 *         outside the image
 	 */
 	public Point pointToPixel(Point p) {
@@ -322,19 +395,19 @@ class ImageComponent extends JComponent {
 
 	/**
 	 * Returns the image pixel corresponding to the given point. If the
-	 * <code>clipToImage</code> parameter is <code>false</code>, then the function
+	 * clipToImage parameter is false, then the function
 	 * will return an appropriately positioned pixel on an infinite plane, even if
-	 * the point is outside the image bounds. If <code>clipToImage</code> is
-	 * <code>true</code> then the function will return <code>null</code> for such
+	 * the point is outside the image bounds. If clipToImage is
+	 * true then the function will return null for such
 	 * positions, and any non-null return value will be a valid image pixel.
-	 * 
+	 *
 	 * @param p
 	 *            a point in component coordinate system
 	 * @param clipToImage
-	 *            whether the function should return <code>null</code> for positions
+	 *            whether the function should return null for positions
 	 *            outside the image bounds
 	 * @return the corresponding image pixel
-	 * @throws IllegalStateException
+	 * @throws java.lang.IllegalStateException
 	 *             if there is no image set or if the size of the viewer is 0 (for
 	 *             example because it is not in a visible component)
 	 */
@@ -353,6 +426,7 @@ class ImageComponent extends JComponent {
 		return p;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintComponent(Graphics g) {
 		paintManager.paintComponent(g);
@@ -362,11 +436,11 @@ class ImageComponent extends JComponent {
 	 * Returns the transformation that is applied to the image. Most commonly the
 	 * transformation is the concatenation of a uniform scale and a translation.
 	 * <p>
-	 * The <code>AffineTransform</code> instance returned by this method should not
+	 * The AffineTransform instance returned by this method should not
 	 * be modified.
-	 * 
+	 *
 	 * @return the transformation applied to the image before painting
-	 * @throws IllegalStateException
+	 * @throws java.lang.IllegalStateException
 	 *             if there is no image set or if the size of the viewer is 0 (for
 	 *             example because it is not in a visible component)
 	 */
@@ -404,6 +478,8 @@ class ImageComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field propertyChangeSupport.</p>
+	 *
 	 * @return the propertyChangeSupport
 	 */
 	public PropertyChangeSupport getPropertyChangeSupport() {
@@ -411,6 +487,8 @@ class ImageComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field viewer.</p>
+	 *
 	 * @return the viewer
 	 */
 	public ImageViewer getViewer() {
@@ -418,6 +496,8 @@ class ImageComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field moveListeners.</p>
+	 *
 	 * @return the moveListeners
 	 */
 	public List<ImageMouseMotionListener> getMoveListeners() {
@@ -425,6 +505,8 @@ class ImageComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field clickListeners.</p>
+	 *
 	 * @return the clickListeners
 	 */
 	public List<ImageMouseClickListener> getClickListeners() {

@@ -19,6 +19,12 @@ import org.loboevolution.store.BookmarksStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SQLiteCommon;
 
+/**
+ * <p>GoogleChromeData class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class GoogleChromeData extends BrowserData {
 
 	private static String CHROME_COOKIES = "SELECT * from cookies";
@@ -91,6 +97,9 @@ public class GoogleChromeData extends BrowserData {
 		return hostEntries;
 	}
 
+	/**
+	 * <p>importBookmark.</p>
+	 */
 	public static void importBookmark() {
 		final String pathToCookieInfos = getChromeDirectory();
 		final List<String> files = getFiles(pathToCookieInfos, null, "Bookmarks");
@@ -103,6 +112,9 @@ public class GoogleChromeData extends BrowserData {
 		}
 	}
 
+	/**
+	 * <p>importCookie.</p>
+	 */
 	public static void importCookie() {
 		final String pathToCookieInfos = getChromeDirectory();
 		final List<String> files = getFiles(pathToCookieInfos, null, "CookieInfos");
@@ -118,6 +130,9 @@ public class GoogleChromeData extends BrowserData {
 		}
 	}
 
+	/**
+	 * <p>importHistory.</p>
+	 */
 	public static void importHistory() {
 		try {
 			final String pathToCookieInfos = getChromeDirectory();

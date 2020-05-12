@@ -18,6 +18,12 @@ import org.loboevolution.html.dom.HTMLOptionsCollection;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
 
+/**
+ * <p>SelectOption class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SelectOption {
 
 	private SelectControl control;
@@ -50,6 +56,7 @@ public class SelectOption {
 	 * Instantiates a new input select control.
 	 *
 	 * @param modelNode the model node
+	 * @param control a {@link org.loboevolution.html.control.SelectControl} object.
 	 */
 	public SelectOption(HTMLSelectElementImpl modelNode, SelectControl control) {
 		this.control = control;
@@ -233,14 +240,27 @@ public class SelectOption {
 		}
 	}
 
+	/**
+	 * <p>getVisibleSize.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getVisibleSize() {
 		return this.comboBox.getMaximumRowCount();
 	}
 
+	/**
+	 * <p>setVisibleSize.</p>
+	 *
+	 * @param value a int.
+	 */
 	public void setVisibleSize(int value) {
 		this.comboBox.setMaximumRowCount(value);
 	}
 
+	/**
+	 * <p>resetInput.</p>
+	 */
 	public void resetInput() {
 		this.list.setSelectedIndex(-1);
 		this.comboBox.setSelectedIndex(-1);

@@ -39,11 +39,16 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLFieldSetElement extends HTMLElement {
 	/**
-	 * Returns the <code>FORM</code> element containing this control. Returns
-	 * <code>null</code> if this control is not within the context of a form.
+	 * Returns the FORM element containing this control. Returns
+	 * null if this control is not within the context of a form.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
 	 */
 	HTMLFormElement getForm();
 

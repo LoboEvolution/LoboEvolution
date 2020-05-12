@@ -25,13 +25,16 @@ import org.w3c.dom.Element;
 
 /**
  * Defines a block of content control. See the switch element definition .
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILSwitchElement extends SMILElement {
 	/**
-	 * Returns the slected element at runtime. <code>null</code> if the selected
+	 * Returns the slected element at runtime. null if the selected
 	 * element is not yet available.
-	 * 
-	 * @return The selected <code>Element</code> for thisd <code>switch</code>
+	 *
+	 * @return The selected Element for thisd switch
 	 *         element.
 	 */
 	public Element getSelectedElement();

@@ -38,60 +38,69 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
 /**
- * An <code>HTMLDocument</code> is the root of the HTML hierarchy and holds the
+ * An HTMLDocument is the root of the HTML hierarchy and holds the
  * entire content. Besides providing access to the hierarchy, it also provides
  * some convenience methods for accessing certain sets of information from the
  * document.
  * <p>
  * The following properties have been deprecated in favor of the corresponding
- * ones for the <code>BODY</code> element:alinkColorbackground
+ * ones for the BODY element:alinkColorbackground
  * bgColorfgColorlinkColorvlinkColorIn DOM Level 2, the method
- * <code>getElementById</code> is inherited from the <code>Document</code>
+ * getElementById is inherited from the Document
  * interface where it was moved to.
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLDocument extends Document {
 	/**
-	 * Closes a document stream opened by <code>open()</code> and forces rendering.
+	 * Closes a document stream opened by open() and forces rendering.
 	 */
 	void close();
 
 	/**
-	 * A collection of all the anchor (<code>A</code>) elements in a document with a
-	 * value for the <code>name</code> attribute. For reasons of backward
+	 * A collection of all the anchor (A) elements in a document with a
+	 * value for the name attribute. For reasons of backward
 	 * compatibility, the returned set of anchors only contains those anchors
-	 * created with the <code>name</code> attribute, not those created with the
-	 * <code>id</code> attribute. Note that in
+	 * created with the name attribute, not those created with the
+	 * id attribute. Note that in
 	 * [<a href='http://www.w3.org/TR/2002/REC-xhtml1-20020801'>XHTML 1.0</a>], the
-	 * <code>name</code> attribute (see section 4.10) has no semantics and is only
-	 * present for legacy user agents: the <code>id</code> attribute is used
+	 * name attribute (see section 4.10) has no semantics and is only
+	 * present for legacy user agents: the id attribute is used
 	 * instead. Users should prefer the iterator mechanisms provided by [<a href=
 	 * 'http://www.w3.org/TR/2000/REC-DOM-Level-2-Traversal-Range-20001113'>DOM
 	 * Level 2 Traversal</a>] instead.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getAnchors();
 
 	/**
 	 * The element that contains the content for the document. In documents with
-	 * <code>BODY</code> contents, returns the <code>BODY</code> element. In
-	 * frameset documents, this returns the outermost <code>FRAMESET</code> element.
+	 * BODY contents, returns the BODY element. In
+	 * frameset documents, this returns the outermost FRAMESET element.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLElement} object.
 	 */
 	HTMLElement getBody();
 	
-    /**
-     * The element that contains the content for the document. In documents with
-     * <code>HEAD</code> contents, returns the <code>HEAD</code> element.
-     */
+	/**
+	 * The element that contains the content for the document. In documents with
+	 * HEAD contents, returns the HEAD element.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLHeadElementImpl} object.
+	 */
 	HTMLHeadElementImpl getHead();
 
 
 	/**
 	 * This mutable string attribute denotes persistent state information that (1)
 	 * is associated with the current frame or document and (2) is composed of
-	 * information described by the <code>cookies</code> non-terminal of
+	 * information described by the cookies non-terminal of
 	 * [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>], Section
 	 * 4.2.2. <br>
 	 * If no persistent state information is available for the current frame or
@@ -100,7 +109,7 @@ public interface HTMLDocument extends Document {
 	 * with each cookie's name-value pair concatenated into a list of name-value
 	 * pairs, each list item being separated by a ';' (semicolon). <br>
 	 * When this attribute is set, the value it is set to should be a string that
-	 * adheres to the <code>cookie</code> non-terminal of
+	 * adheres to the cookie non-terminal of
 	 * [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>]; that is,
 	 * it should be a single name-value pair followed by zero or more cookie
 	 * attribute values. If no domain attribute is specified, then the domain
@@ -119,48 +128,58 @@ public interface HTMLDocument extends Document {
 	 * [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>] for the
 	 * semantics of persistent state item attribute value pairs. The precise nature
 	 * of a user agent session is not defined by this specification.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getCookie();
 
 	/**
-	 * The domain name of the server that served the document, or <code>null</code>
+	 * The domain name of the server that served the document, or null
 	 * if the server cannot be identified by a domain name.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getDomain();
 
 	/**
 	 * With [<a href='http://www.w3.org/TR/1999/REC-html401-19991224'>HTML 4.01</a>]
 	 * documents, this method returns the (possibly empty) collection of elements
-	 * whose <code>name</code> value is given by <code>elementName</code>. In
+	 * whose name value is given by elementName. In
 	 * [<a href='http://www.w3.org/TR/2002/REC-xhtml1-20020801'>XHTML 1.0</a>]
 	 * documents, this methods only return the (possibly empty) collection of form
 	 * controls with matching name. This method is case sensitive.
-	 * 
-	 * @param elementName The <code>name</code> attribute value for an element.
+	 *
+	 * @param elementName The name attribute value for an element.
 	 * @return The matching elements.
 	 */
 	NodeList getElementsByName(String elementName);
 
 	/**
 	 * A collection of all the forms of a document.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getForms();
 
 	/**
-	 * A collection of all the <code>IMG</code> elements in a document. The behavior
-	 * is limited to <code>IMG</code> elements for backwards compatibility. As
+	 * A collection of all the IMG elements in a document. The behavior
+	 * is limited to IMG elements for backwards compatibility. As
 	 * suggested by [<a href='http://www.w3.org/TR/1999/REC-html401-19991224'>HTML
-	 * 4.01</a>], to include images, authors may use the <code>OBJECT</code> element
-	 * or the <code>IMG</code> element. Therefore, it is recommended not to use this
+	 * 4.01</a>], to include images, authors may use the OBJECT element
+	 * or the IMG element. Therefore, it is recommended not to use this
 	 * attribute to find the images in the document but
-	 * <code>getElementsByTagName</code> with HTML 4.01 or
-	 * <code>getElementsByTagNameNS</code> with XHTML 1.0.
+	 * getElementsByTagName with HTML 4.01 or
+	 * getElementsByTagNameNS with XHTML 1.0.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getImages();
 
 	/**
-	 * A collection of all <code>AREA</code> elements and anchor ( <code>A</code>)
-	 * elements in a document with a value for the <code>href</code> attribute.
+	 * A collection of all AREA elements and anchor ( A)
+	 * elements in a document with a value for the href attribute.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getLinks();
 	
@@ -168,17 +187,32 @@ public interface HTMLDocument extends Document {
      * The embeds attribute must return an HTMLCollection rooted at the Document
      * node, whose filter matches only embed elements.
      */
+    /**
+     * <p>getEmbeds.</p>
+     *
+     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+     */
     HTMLCollection getEmbeds();
 
     /*
      * The plugins attribute must return the same object as that returned by the
      * embeds attribute.
      */
+    /**
+     * <p>getPlugins.</p>
+     *
+     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+     */
     HTMLCollection getPlugins();
 
     /*
      * The scripts attribute must return an HTMLCollection rooted at the Document
      * node, whose filter matches only script elements.
+     */
+    /**
+     * <p>getScripts.</p>
+     *
+     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
      */
     HTMLCollection getScripts();
 
@@ -187,6 +221,11 @@ public interface HTMLDocument extends Document {
      * an HTMLCollection rooted at the Document node, whose filter matches only
      * elements that define commands and have IDs.
      */
+    /**
+     * <p>getCommands.</p>
+     *
+     * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+     */
     HTMLCollection getCommands();
 
 	/**
@@ -194,18 +233,24 @@ public interface HTMLDocument extends Document {
 	 * 2396</a>] of the page that linked to this page. The value is an empty string
 	 * if the user navigated to the page directly (not through a link, but, for
 	 * example, via a bookmark).
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getReferrer();
 
 	/**
-	 * The title of a document as specified by the <code>TITLE</code> element in the
+	 * The title of a document as specified by the TITLE element in the
 	 * head of the document.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getTitle();
 
 	/**
 	 * The absolute URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC
 	 * 2396</a>] of the document.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getURL();
 
@@ -222,15 +267,17 @@ public interface HTMLDocument extends Document {
 
 	/**
 	 * The element that contains the content for the document. In documents with
-	 * <code>BODY</code> contents, returns the <code>BODY</code> element. In
-	 * frameset documents, this returns the outermost <code>FRAMESET</code> element.
+	 * BODY contents, returns the BODY element. In
+	 * frameset documents, this returns the outermost FRAMESET element.
+	 *
+	 * @param body a {@link org.loboevolution.html.dom.HTMLElement} object.
 	 */
 	void setBody(HTMLElement body);
 
 	/**
 	 * This mutable string attribute denotes persistent state information that (1)
 	 * is associated with the current frame or document and (2) is composed of
-	 * information described by the <code>cookies</code> non-terminal of
+	 * information described by the cookies non-terminal of
 	 * [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>], Section
 	 * 4.2.2. <br>
 	 * If no persistent state information is available for the current frame or
@@ -239,7 +286,7 @@ public interface HTMLDocument extends Document {
 	 * with each cookie's name-value pair concatenated into a list of name-value
 	 * pairs, each list item being separated by a ';' (semicolon). <br>
 	 * When this attribute is set, the value it is set to should be a string that
-	 * adheres to the <code>cookie</code> non-terminal of
+	 * adheres to the cookie non-terminal of
 	 * [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>]; that is,
 	 * it should be a single name-value pair followed by zero or more cookie
 	 * attribute values. If no domain attribute is specified, then the domain
@@ -258,26 +305,30 @@ public interface HTMLDocument extends Document {
 	 * [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF RFC 2965</a>] for the
 	 * semantics of persistent state item attribute value pairs. The precise nature
 	 * of a user agent session is not defined by this specification.
-	 * 
+	 *
 	 * @exception DOMException SYNTAX_ERR: If the new value does not adhere to the
 	 *                         cookie syntax specified by
 	 *                         [<a href='http://www.ietf.org/rfc/rfc2965.txt'>IETF
 	 *                         RFC 2965</a>].
+	 * @param cookie a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	void setCookie(String cookie) throws DOMException;
 
 	/**
-	 * The title of a document as specified by the <code>TITLE</code> element in the
+	 * The title of a document as specified by the TITLE element in the
 	 * head of the document.
+	 *
+	 * @param title a {@link java.lang.String} object.
 	 */
 	void setTitle(String title);
 
 	/**
-	 * Write a string of text to a document stream opened by <code>open()</code> .
+	 * Write a string of text to a document stream opened by open() .
 	 * Note that the function will produce a document which is not necessarily
 	 * driven by a DTD and therefore might be produce an invalid result in the
 	 * context of the document.
-	 * 
+	 *
 	 * @param text The string to be parsed into some structure in the document
 	 *             structure model.
 	 */
@@ -285,10 +336,10 @@ public interface HTMLDocument extends Document {
 
 	/**
 	 * Write a string of text followed by a newline character to a document stream
-	 * opened by <code>open()</code>. Note that the function will produce a document
+	 * opened by open(). Note that the function will produce a document
 	 * which is not necessarily driven by a DTD and therefore might be produce an
 	 * invalid result in the context of the document
-	 * 
+	 *
 	 * @param text The string to be parsed into some structure in the document
 	 *             structure model.
 	 */

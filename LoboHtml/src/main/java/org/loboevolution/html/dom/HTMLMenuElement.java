@@ -39,17 +39,24 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLMenuElement extends HTMLElement {
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition in
 	 * HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getCompact();
 
 	/**
 	 * Reduce spacing between list items. See the compact attribute definition in
 	 * HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param compact a boolean.
 	 */
 	void setCompact(boolean compact);
 

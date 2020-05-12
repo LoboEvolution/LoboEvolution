@@ -44,7 +44,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AcrylBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylBorders extends BaseBorders {
 
@@ -359,6 +362,11 @@ public class AcrylBorders extends BaseBorders {
 
 	} // class TextFieldBorder
 
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -366,6 +374,11 @@ public class AcrylBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getComboBoxBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getComboBoxBorder() {
 		if (comboBoxBorder == null) {
 			comboBoxBorder = new ComboBoxBorder();
@@ -373,6 +386,11 @@ public class AcrylBorders extends BaseBorders {
 		return comboBoxBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -380,6 +398,11 @@ public class AcrylBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -387,6 +410,11 @@ public class AcrylBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getScrollPaneBorder() {
 		if (scrollPaneBorder == null) {
 			scrollPaneBorder = new ScrollPaneBorder(false);
@@ -394,6 +422,11 @@ public class AcrylBorders extends BaseBorders {
 		return scrollPaneBorder;
 	}
 
+	/**
+	 * <p>getSpinnerBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getSpinnerBorder() {
 		if (spinnerBorder == null) {
 			spinnerBorder = new SpinnerBorder();
@@ -401,6 +434,11 @@ public class AcrylBorders extends BaseBorders {
 		return spinnerBorder;
 	}
 
+	/**
+	 * <p>getTableScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTableScrollPaneBorder() {
 		if (tableScrollPaneBorder == null) {
 			tableScrollPaneBorder = new ScrollPaneBorder(true);
@@ -411,6 +449,11 @@ public class AcrylBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getTextBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTextBorder() {
 		if (textFieldBorder == null) {
 			textFieldBorder = new TextFieldBorder();
@@ -418,10 +461,20 @@ public class AcrylBorders extends BaseBorders {
 		return textFieldBorder;
 	}
 
+	/**
+	 * <p>getTextFieldBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTextFieldBorder() {
 		return getTextBorder();
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}

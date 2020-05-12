@@ -25,12 +25,28 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.FontValues;
 
 
+/**
+ * <p>HTMLSmallElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLSmallElementImpl extends HTMLAbstractUIElement {
 
+	/**
+	 * <p>Constructor for HTMLSmallElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLSmallElementImpl(String name) {
 		super(name);
 	}
 
+	/**
+	 * <p>createDefaultStyleSheet.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 */
 	protected AbstractCSSProperties createDefaultStyleSheet() {
         final String fontSize = String.valueOf(FontValues.getFontSize("SMALL", null));
 		final AbstractCSSProperties css = new AbstractCSSProperties(this);
@@ -40,6 +56,7 @@ public class HTMLSmallElementImpl extends HTMLAbstractUIElement {
 		return css;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return super.createRenderState(prevRenderState);

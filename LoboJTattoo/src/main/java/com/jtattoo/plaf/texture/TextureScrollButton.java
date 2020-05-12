@@ -25,7 +25,10 @@ package com.jtattoo.plaf.texture;
 import com.jtattoo.plaf.XPScrollButton;
 
 /**
+ * <p>TextureScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureScrollButton extends XPScrollButton {
 
@@ -34,6 +37,12 @@ public class TextureScrollButton extends XPScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for TextureScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public TextureScrollButton(int direction, int width) {
 		super(direction, width);
 	}

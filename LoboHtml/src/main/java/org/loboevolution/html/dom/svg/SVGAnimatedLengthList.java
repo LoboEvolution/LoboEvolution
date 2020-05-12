@@ -20,8 +20,24 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAnimatedLengthList interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedLengthList {
+	/**
+	 * <p>getBaseVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGLengthList} object.
+	 */
 	SVGLengthList getBaseVal();
 
+	/**
+	 * <p>getAnimVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGLengthList} object.
+	 */
 	SVGLengthList getAnimVal();
 }

@@ -13,6 +13,9 @@ import org.mozilla.javascript.ast.ScriptNode;
 /**
  * Abstraction of evaluation, which can be implemented either by an
  * interpreter or compiler.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface Evaluator {
 
@@ -57,12 +60,14 @@ public interface Evaluator {
 
     /**
      * Capture stack information from the given exception.
+     *
      * @param ex an exception thrown during execution
      */
     public void captureStackInfo(RhinoException ex);
 
     /**
      * Get the source position information by examining the stack.
+     *
      * @param cx Context
      * @param linep Array object of length &gt;= 1; getSourcePositionFromStack
      *              will assign the line number to linep[0].
@@ -73,6 +78,7 @@ public interface Evaluator {
     /**
      * Given a native stack trace, patch it with script-specific source
      * and line information
+     *
      * @param ex exception
      * @param nativeStackTrace the native stack trace
      * @return patched stack trace
@@ -82,6 +88,7 @@ public interface Evaluator {
 
     /**
      * Get the script stack for the given exception
+     *
      * @param ex exception from execution
      * @return list of strings for the stack trace
      */
@@ -90,6 +97,7 @@ public interface Evaluator {
     /**
      * Mark the given script to indicate it was created by a call to
      * eval() or to a Function constructor.
+     *
      * @param script script to mark as from eval
      */
     public void setEvalScriptFlag(Script script);

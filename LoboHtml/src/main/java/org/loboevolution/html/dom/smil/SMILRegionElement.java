@@ -26,33 +26,63 @@ import org.w3c.dom.DOMException;
 /**
  * Controls the position, size and scaling of media object elements. See the
  * region element definition .
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILRegionElement extends SMILElement, ElementLayout {
 	/**
+	 * <p>getFit.</p>
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getFit();
 
+	/**
+	 * <p>setFit.</p>
+	 *
+	 * @param fit a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setFit(String fit) throws DOMException;
 
 	/**
+	 * <p>getTop.</p>
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getTop();
 
+	/**
+	 * <p>setTop.</p>
+	 *
+	 * @param top a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setTop(String top) throws DOMException;
 
 	/**
+	 * <p>getZIndex.</p>
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a int.
 	 */
 	public int getZIndex();
 
+	/**
+	 * <p>setZIndex.</p>
+	 *
+	 * @param zIndex a int.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setZIndex(int zIndex) throws DOMException;
 
 }

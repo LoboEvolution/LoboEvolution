@@ -22,6 +22,9 @@ package org.loboevolution.html.dom.smil;
 
 /**
  * // audio, video, ...
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILRefElement extends SMILMediaElement {
 }

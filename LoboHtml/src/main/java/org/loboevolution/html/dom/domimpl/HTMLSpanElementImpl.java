@@ -25,7 +25,18 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.html.dom.HTMLElement;
 
+/**
+ * <p>HTMLSpanElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements HTMLElement {
+	/**
+	 * <p>Constructor for HTMLSpanElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLSpanElementImpl(String name) {
 		super(name);
 	}

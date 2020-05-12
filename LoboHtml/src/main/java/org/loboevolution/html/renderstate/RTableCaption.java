@@ -29,6 +29,9 @@ import org.loboevolution.http.UserAgentContext;
 
 /**
  * The Class RTableCaption.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class RTableCaption extends RBlock {
 

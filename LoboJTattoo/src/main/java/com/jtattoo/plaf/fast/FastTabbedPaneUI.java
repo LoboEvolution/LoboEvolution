@@ -37,13 +37,18 @@ import com.jtattoo.plaf.JTattooUtilities;
 
 /**
  * author Michael Hagen
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
 		Color colorArr[] = AbstractLookAndFeel.getTheme().getTabColors();
@@ -66,11 +71,13 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 		return colorArr;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean hasInnerBorder() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();
@@ -79,6 +86,7 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 		contentBorderInsets = new Insets(0, 0, 0, 0);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h,
 			boolean isSelected) {

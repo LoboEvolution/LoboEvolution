@@ -34,7 +34,10 @@ import com.jtattoo.plaf.BaseInternalFrameTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>BernsteinInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -43,10 +46,16 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for BernsteinInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public BernsteinInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g) {
 		BernsteinUtils.fillComponent(g, this);
@@ -65,10 +74,12 @@ public class BernsteinInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintPalette(Graphics g) {
 		BernsteinUtils.fillComponent(g, this);

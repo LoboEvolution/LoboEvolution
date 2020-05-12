@@ -21,80 +21,96 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
  * Empty implementation of the DocumentHandlerExt interface.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class HandlerBase implements DocumentHandler, CSSErrorHandler {
 
+    /** {@inheritDoc} */
     @Override
     public void startDocument(final InputSource source) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void endDocument(final InputSource source) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void ignorableAtRule(final String atRule, final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void importStyle(final String uri, final MediaQueryList media,
             final String defaultNamespaceURI, final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void startMedia(final MediaQueryList media, final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void endMedia(final MediaQueryList media) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void startPage(final String name, final String pseudoPage, final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void endPage(final String name, final String pseudoPage) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void startFontFace(final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void endFontFace() throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void startSelector(final SelectorList selectors, final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void endSelector(final SelectorList selectors) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void property(final String name, final LexicalUnit value, final boolean important, final Locator locator) {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void charset(final String characterEncoding, final Locator locator) throws CSSException {
         // empty default impl
     }
 
+    /** {@inheritDoc} */
     @Override
     public void warning(final CSSParseException exception) throws CSSException {
         final StringBuilder sb = new StringBuilder();
@@ -108,6 +124,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
         System.err.println(sb.toString());
     }
 
+    /** {@inheritDoc} */
     @Override
     public void error(final CSSParseException exception) throws CSSException {
         final StringBuilder sb = new StringBuilder();
@@ -121,6 +138,7 @@ public class HandlerBase implements DocumentHandler, CSSErrorHandler {
         System.err.println(sb.toString());
     }
 
+    /** {@inheritDoc} */
     @Override
     public void fatalError(final CSSParseException exception) throws CSSException {
         final StringBuilder sb = new StringBuilder();

@@ -20,6 +20,12 @@ import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
 import org.mozilla.javascript.debug.DebugFrame;
 
+/**
+ * <p>Interpreter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public final class Interpreter extends Icode implements Evaluator
 {
     // data for parsing
@@ -374,6 +380,7 @@ public final class Interpreter extends Icode implements Evaluator
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
@@ -385,6 +392,7 @@ public final class Interpreter extends Icode implements Evaluator
         return itsData;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Script createScriptObject(Object bytecode, Object staticSecurityDomain)
     {
@@ -396,11 +404,13 @@ public final class Interpreter extends Icode implements Evaluator
                                                 staticSecurityDomain);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void setEvalScriptFlag(Script script) {
         ((InterpretedFunction)script).idata.evalScriptFlag = true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Function createFunctionObject(Context cx, Scriptable scope,
             Object bytecode, Object staticSecurityDomain)
@@ -782,6 +792,7 @@ public final class Interpreter extends Icode implements Evaluator
         return presentLines.getKeys();
     }
 
+    /** {@inheritDoc} */
     @Override
     public void captureStackInfo(RhinoException ex)
     {
@@ -838,6 +849,7 @@ public final class Interpreter extends Icode implements Evaluator
         ex.interpreterLineData = linePC;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getSourcePositionFromStack(Context cx, int[] linep)
     {
@@ -851,6 +863,7 @@ public final class Interpreter extends Icode implements Evaluator
         return idata.itsSourceFile;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getPatchedStack(RhinoException ex,
                                   String nativeStackTrace)
@@ -911,6 +924,7 @@ public final class Interpreter extends Icode implements Evaluator
         return sb.toString();
     }
 
+    /** {@inheritDoc} */
     @Override
     public List<String> getScriptStack(RhinoException ex) {
         ScriptStackElement[][] stack = getScriptStackElements(ex);
@@ -928,6 +942,12 @@ public final class Interpreter extends Icode implements Evaluator
         return list;
     }
 
+    /**
+     * <p>getScriptStackElements.</p>
+     *
+     * @param ex a {@link org.mozilla.javascript.RhinoException} object.
+     * @return an array of {@link org.mozilla.javascript.ScriptStackElement} objects.
+     */
     public ScriptStackElement[][] getScriptStackElements(RhinoException ex)
     {
         if (ex.interpreterStackInfo == null) {
@@ -1019,6 +1039,16 @@ public final class Interpreter extends Icode implements Evaluator
         RuntimeException returnedException;
     }
 
+    /**
+     * <p>resumeGenerator.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param operation a int.
+     * @param savedState a {@link java.lang.Object} object.
+     * @param value a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object resumeGenerator(Context cx,
                                          Scriptable scope,
                                          int operation,
@@ -1043,6 +1073,15 @@ public final class Interpreter extends Icode implements Evaluator
       return result;
     }
 
+    /**
+     * <p>restartContinuation.</p>
+     *
+     * @param c a {@link org.mozilla.javascript.NativeContinuation} object.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param args an array of {@link java.lang.Object} objects.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object restartContinuation(NativeContinuation c, Context cx,
                                              Scriptable scope, Object[] args)
     {
@@ -3027,6 +3066,12 @@ switch (op) {
         frame.savedCallOp = 0;
     }
 
+    /**
+     * <p>captureContinuation.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @return a {@link org.mozilla.javascript.NativeContinuation} object.
+     */
     public static NativeContinuation captureContinuation(Context cx) {
         if (cx.lastInterpreterFrame == null ||
             !(cx.lastInterpreterFrame instanceof CallFrame))

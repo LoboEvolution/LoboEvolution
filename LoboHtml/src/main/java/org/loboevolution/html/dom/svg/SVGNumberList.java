@@ -22,20 +22,84 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGNumberList interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGNumberList {
+	/**
+	 * <p>getNumberOfItems.</p>
+	 *
+	 * @return a int.
+	 */
 	int getNumberOfItems();
 
+	/**
+	 * <p>clear.</p>
+	 *
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void clear() throws DOMException;
 
+	/**
+	 * <p>initialize.</p>
+	 *
+	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	SVGNumber initialize(SVGNumber newItem) throws DOMException, SVGException;
 
+	/**
+	 * <p>getItem.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	SVGNumber getItem(int index) throws DOMException;
 
+	/**
+	 * <p>insertItemBefore.</p>
+	 *
+	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	SVGNumber insertItemBefore(SVGNumber newItem, int index) throws DOMException, SVGException;
 
+	/**
+	 * <p>replaceItem.</p>
+	 *
+	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	SVGNumber replaceItem(SVGNumber newItem, int index) throws DOMException, SVGException;
 
+	/**
+	 * <p>removeItem.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	SVGNumber removeItem(int index) throws DOMException;
 
+	/**
+	 * <p>appendItem.</p>
+	 *
+	 * @param newItem a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGNumber} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	SVGNumber appendItem(SVGNumber newItem) throws DOMException, SVGException;
 }

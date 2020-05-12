@@ -32,16 +32,28 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>HrControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HrControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 
 	private int availWidth;
 
+	/**
+	 * <p>Constructor for HrControl.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HrControl(HTMLElementImpl modelNode) {
 		super(modelNode);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		final RenderState rs = this.controlElement.getRenderState();
@@ -49,6 +61,7 @@ public class HrControl extends BaseControl {
 		return new Dimension(this.availWidth, fm.getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -61,10 +74,20 @@ public class HrControl extends BaseControl {
 		g.drawRect(x, y, width, 0);
 	}
 
+	/**
+	 * <p>paintSelection.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param inSelection a boolean.
+	 * @param startPoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 * @param endPoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 * @return a boolean.
+	 */
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		return inSelection;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void reset(int availWidth, int availHeight) {
 		this.availWidth = availWidth;

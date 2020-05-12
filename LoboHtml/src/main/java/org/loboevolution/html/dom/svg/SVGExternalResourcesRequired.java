@@ -20,6 +20,17 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGExternalResourcesRequired interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGExternalResourcesRequired {
+	/**
+	 * <p>getExternalResourcesRequired.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedBoolean} object.
+	 */
 	SVGAnimatedBoolean getExternalResourcesRequired();
 }

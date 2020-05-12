@@ -20,32 +20,97 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEConvolveMatrixElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEConvolveMatrixElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Edge Mode Values
+	/** Constant SVG_EDGEMODE_UNKNOWN=0 */
 	static final short SVG_EDGEMODE_UNKNOWN = 0;
+	/** Constant SVG_EDGEMODE_DUPLICATE=1 */
 	static final short SVG_EDGEMODE_DUPLICATE = 1;
+	/** Constant SVG_EDGEMODE_WRAP=2 */
 	static final short SVG_EDGEMODE_WRAP = 2;
+	/** Constant SVG_EDGEMODE_NONE=3 */
 	static final short SVG_EDGEMODE_NONE = 3;
 
+	/**
+	 * <p>getOrderX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getOrderX();
 
+	/**
+	 * <p>getOrderY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getOrderY();
 
+	/**
+	 * <p>getKernelMatrix.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumberList} object.
+	 */
 	SVGAnimatedNumberList getKernelMatrix();
 
+	/**
+	 * <p>getDivisor.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getDivisor();
 
+	/**
+	 * <p>getBias.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getBias();
 
+	/**
+	 * <p>getTargetX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getTargetX();
 
+	/**
+	 * <p>getTargetY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedInteger} object.
+	 */
 	SVGAnimatedInteger getTargetY();
 
+	/**
+	 * <p>getEdgeMode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getEdgeMode();
 
+	/**
+	 * <p>getKernelUnitLengthX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getKernelUnitLengthX();
 
+	/**
+	 * <p>getKernelUnitLengthY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getKernelUnitLengthY();
 
+	/**
+	 * <p>getPreserveAlpha.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedBoolean} object.
+	 */
 	SVGAnimatedBoolean getPreserveAlpha();
 }

@@ -20,12 +20,33 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGCircleElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGCircleElement extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable,
 		SVGTransformable, Drawable {
 
+	/**
+	 * <p>getCx.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getCx();
 
+	/**
+	 * <p>getCy.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getCy();
 
+	/**
+	 * <p>getR.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getR();
 }

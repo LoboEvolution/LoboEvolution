@@ -32,10 +32,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>McWinUtils class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinUtils {
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 */
 	public static void fillComponent(Graphics g, Component c) {
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			int w = c.getWidth();
@@ -55,6 +64,13 @@ public class McWinUtils {
 		}
 	}
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 */
 	public static void fillComponent(Graphics g, Component c, Color[] colors) {
 		int w = c.getWidth();
 		int h = c.getHeight();

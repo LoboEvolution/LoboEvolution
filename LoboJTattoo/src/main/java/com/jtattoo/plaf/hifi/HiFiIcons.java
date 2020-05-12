@@ -48,7 +48,10 @@ import com.jtattoo.plaf.LazyImageIcon;
 import com.jtattoo.plaf.LazyMenuArrowImageIcon;
 
 /**
+ * <p>HiFiIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiIcons extends BaseIcons {
 
@@ -286,6 +289,11 @@ public class HiFiIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getCheckBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
 			checkBoxIcon = new CheckBoxIcon();
@@ -293,6 +301,11 @@ public class HiFiIcons extends BaseIcons {
 		return checkBoxIcon;
 	}
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -308,10 +321,20 @@ public class HiFiIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getComboBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getComboBoxIcon() {
 		return getDownArrowIcon();
 	}
 
+	/**
+	 * <p>getDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getDownArrowIcon() {
 		if (downArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -325,6 +348,11 @@ public class HiFiIcons extends BaseIcons {
 		return downArrowIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -340,6 +368,11 @@ public class HiFiIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getLeftArrowIcon() {
 		if (leftArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -353,6 +386,11 @@ public class HiFiIcons extends BaseIcons {
 		return leftArrowIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -368,6 +406,11 @@ public class HiFiIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMenuArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMenuArrowIcon() {
 		if (menuArrowIcon == null) {
 			menuArrowIcon = new LazyMenuArrowImageIcon("hifi/icons/medium/arrow_right_8x9.png",
@@ -376,6 +419,11 @@ public class HiFiIcons extends BaseIcons {
 		return menuArrowIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -391,6 +439,11 @@ public class HiFiIcons extends BaseIcons {
 		return minIcon;
 	}
 
+	/**
+	 * <p>getRadioButtonIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRadioButtonIcon() {
 		if (radioButtonIcon == null) {
 			radioButtonIcon = new RadioButtonIcon();
@@ -398,6 +451,11 @@ public class HiFiIcons extends BaseIcons {
 		return radioButtonIcon;
 	}
 
+	/**
+	 * <p>getRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRightArrowIcon() {
 		if (rightArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -411,6 +469,11 @@ public class HiFiIcons extends BaseIcons {
 		return rightArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterDownArrowIcon() {
 		if (splitterDownArrowIcon == null) {
 			splitterDownArrowIcon = new LazyImageIcon("hifi/icons/SplitterDownArrow.gif");
@@ -418,6 +481,11 @@ public class HiFiIcons extends BaseIcons {
 		return splitterDownArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterHorBumpIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterHorBumpIcon() {
 		if (splitterHorBumpIcon == null) {
 			splitterHorBumpIcon = new LazyImageIcon("hifi/icons/SplitterHorBumps.gif");
@@ -425,6 +493,11 @@ public class HiFiIcons extends BaseIcons {
 		return splitterHorBumpIcon;
 	}
 
+	/**
+	 * <p>getSplitterLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterLeftArrowIcon() {
 		if (splitterLeftArrowIcon == null) {
 			splitterLeftArrowIcon = new LazyImageIcon("hifi/icons/SplitterLeftArrow.gif");
@@ -432,6 +505,11 @@ public class HiFiIcons extends BaseIcons {
 		return splitterLeftArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterRightArrowIcon() {
 		if (splitterRightArrowIcon == null) {
 			splitterRightArrowIcon = new LazyImageIcon("hifi/icons/SplitterRightArrow.gif");
@@ -439,6 +517,11 @@ public class HiFiIcons extends BaseIcons {
 		return splitterRightArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterUpArrowIcon() {
 		if (splitterUpArrowIcon == null) {
 			splitterUpArrowIcon = new LazyImageIcon("hifi/icons/SplitterUpArrow.gif");
@@ -446,6 +529,11 @@ public class HiFiIcons extends BaseIcons {
 		return splitterUpArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterVerBumpIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterVerBumpIcon() {
 		if (splitterVerBumpIcon == null) {
 			splitterVerBumpIcon = new LazyImageIcon("hifi/icons/SplitterVerBumps.gif");
@@ -453,6 +541,11 @@ public class HiFiIcons extends BaseIcons {
 		return splitterVerBumpIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if (thumbHorIcon == null) {
 			thumbHorIcon = new LazyImageIcon("hifi/icons/thumb_hor.gif");
@@ -460,6 +553,11 @@ public class HiFiIcons extends BaseIcons {
 		return thumbHorIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if (thumbHorIconRollover == null) {
 			thumbHorIconRollover = new LazyImageIcon("hifi/icons/thumb_hor_rollover.gif");
@@ -467,6 +565,11 @@ public class HiFiIcons extends BaseIcons {
 		return thumbHorIconRollover;
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if (thumbVerIcon == null) {
 			thumbVerIcon = new LazyImageIcon("hifi/icons/thumb_ver.gif");
@@ -474,6 +577,11 @@ public class HiFiIcons extends BaseIcons {
 		return thumbVerIcon;
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if (thumbVerIconRollover == null) {
 			thumbVerIconRollover = new LazyImageIcon("hifi/icons/thumb_ver_rollover.gif");
@@ -481,6 +589,11 @@ public class HiFiIcons extends BaseIcons {
 		return thumbVerIconRollover;
 	}
 
+	/**
+	 * <p>getTreeCollapsedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeCollapsedIcon() {
 		if (treeCollapsedIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -494,6 +607,11 @@ public class HiFiIcons extends BaseIcons {
 		return treeCollapsedIcon;
 	}
 
+	/**
+	 * <p>getTreeExpandedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeExpandedIcon() {
 		if (treeExpandedIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -507,6 +625,11 @@ public class HiFiIcons extends BaseIcons {
 		return treeExpandedIcon;
 	}
 
+	/**
+	 * <p>getUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getUpArrowIcon() {
 		if (upArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {

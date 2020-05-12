@@ -39,7 +39,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.NoFocusButton;
 
 /**
+ * <p>McWinComboBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinComboBoxUI extends BaseComboBoxUI {
 
@@ -89,10 +92,12 @@ public class McWinComboBoxUI extends BaseComboBoxUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinComboBoxUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		ArrowButton button = new ArrowButton();

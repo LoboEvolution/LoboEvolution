@@ -20,6 +20,11 @@ class OuterFrame extends JFrame {
 
 	protected String tip;
 
+	/**
+	 * <p>Constructor for OuterFrame.</p>
+	 *
+	 * @param tabbed a {@link org.loboevolution.tab.DnDTabbedPane} object.
+	 */
 	public OuterFrame(DnDTabbedPane tabbed) {
 		super();
 		setSize(200, 300);

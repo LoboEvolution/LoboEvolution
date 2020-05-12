@@ -28,14 +28,19 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseTabbedPaneUI;
 
 /**
+ * <p>MintTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new MintTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();

@@ -9,7 +9,20 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>FontValues class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FontValues extends HtmlValues {
+	/**
+	 * <p>getFontFamily.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static final String getFontFamily(String spec, RenderState parentRenderState) {
 		final String fontFamily = spec;
 		if (fontFamily == null) {
@@ -111,6 +124,12 @@ public class FontValues extends HtmlValues {
 		}
 	}
 
+	/**
+	 * <p>getFontStrikeThrough.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean getFontStrikeThrough(String spec) {
 		final String strikethrough = spec;
 		if (CSSValues.get(strikethrough).equals(CSSValues.LINE_THROUGH)) {
@@ -123,6 +142,12 @@ public class FontValues extends HtmlValues {
 		return false;
 	}
 
+	/**
+	 * <p>getFontStyle.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static final String getFontStyle(String spec) {
 		final String fontStyle = spec;
 		if (fontStyle == null && new LAFSettings().getInstance().isItalic()) {
@@ -131,6 +156,13 @@ public class FontValues extends HtmlValues {
 		return fontStyle;
 	}
 
+	/**
+	 * <p>getFontSuperScript.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public static Integer getFontSuperScript(String spec, RenderState parentRenderState) {
 		final String verticalAlign = spec;
 		Integer superscript = null;
@@ -150,6 +182,12 @@ public class FontValues extends HtmlValues {
 		return superscript;
 	}
 
+	/**
+	 * <p>getFontUnderline.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	public static Integer getFontUnderline(String spec) {
 		final String underline = spec;
 
@@ -163,6 +201,12 @@ public class FontValues extends HtmlValues {
 		return null;
 	}
 
+	/**
+	 * <p>getFontWeight.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getFontWeight(String spec) {
 		final String fontWeight = spec;
 		if (fontWeight == null && new LAFSettings().getInstance().isBold()) {
@@ -172,10 +216,9 @@ public class FontValues extends HtmlValues {
 	}
 
 	/**
-	 * Checks if is font style.
+	 * {@inheritDoc}
 	 *
-	 * @param token the token
-	 * @return true, if is font style
+	 * Checks if is font style.
 	 */
 	public static boolean isFontStyle(String token) {
 		CSSValues tok = CSSValues.get(token);
@@ -190,10 +233,9 @@ public class FontValues extends HtmlValues {
 	}
 
 	/**
-	 * Checks if is font variant.
+	 * {@inheritDoc}
 	 *
-	 * @param token the token
-	 * @return true, if is font variant
+	 * Checks if is font variant.
 	 */
 	public static boolean isFontVariant(String token) {
 		CSSValues tok = CSSValues.get(token);
@@ -207,10 +249,9 @@ public class FontValues extends HtmlValues {
 	}
 
 	/**
-	 * Checks if is font weight.
+	 * {@inheritDoc}
 	 *
-	 * @param token the token
-	 * @return true, if is font weight
+	 * Checks if is font weight.
 	 */
 	public static boolean isFontWeight(String token) {
 		CSSValues tok = CSSValues.get(token);

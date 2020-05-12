@@ -37,14 +37,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>TextureMenuBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureMenuBarUI extends BasicMenuBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent x) {
 		return new TextureMenuBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -54,6 +59,7 @@ public class TextureMenuBarUI extends BasicMenuBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		TextureUtils.fillComponent(g, c, TextureUtils.MENUBAR_TEXTURE_TYPE);

@@ -6,6 +6,12 @@ import javax.swing.AbstractAction;
 
 import org.loboevolution.gui.CheckBoxPanel;
 
+/**
+ * <p>ClearDataAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ClearDataAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +28,14 @@ public class ClearDataAction extends AbstractAction {
 	/** The navigation panel. */
 	private final CheckBoxPanel navigationPanel;
 
+	/**
+	 * <p>Constructor for ClearDataAction.</p>
+	 *
+	 * @param cachePanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
+	 * @param cookiePanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
+	 * @param navigationPanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
+	 * @param bookmarkPanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
+	 */
 	public ClearDataAction(CheckBoxPanel cachePanel, CheckBoxPanel cookiePanel, CheckBoxPanel navigationPanel,
 			CheckBoxPanel bookmarkPanel) {
 		this.cachePanel = cachePanel;
@@ -30,6 +44,7 @@ public class ClearDataAction extends AbstractAction {
 		this.bookmarkPanel = bookmarkPanel;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

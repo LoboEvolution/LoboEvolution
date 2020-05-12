@@ -8,6 +8,9 @@ package org.mozilla.javascript.ast;
 
 /**
  * Encapsulates information for a JavaScript parse error or warning.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ParseProblem {
 
@@ -21,6 +24,12 @@ public class ParseProblem {
 
     /**
      * Constructs a new ParseProblem.
+     *
+     * @param type a {@link org.mozilla.javascript.ast.ParseProblem.Type} object.
+     * @param message a {@link java.lang.String} object.
+     * @param sourceName a {@link java.lang.String} object.
+     * @param offset a int.
+     * @param length a int.
      */
     public ParseProblem(ParseProblem.Type type, String message,
                         String sourceName, int offset, int length) {
@@ -31,46 +40,97 @@ public class ParseProblem {
         setLength(length);
     }
 
+    /**
+     * <p>Getter for the field type.</p>
+     *
+     * @return a {@link org.mozilla.javascript.ast.ParseProblem.Type} object.
+     */
     public ParseProblem.Type getType() {
         return type;
     }
 
+    /**
+     * <p>Setter for the field type.</p>
+     *
+     * @param type a {@link org.mozilla.javascript.ast.ParseProblem.Type} object.
+     */
     public void setType(ParseProblem.Type type) {
         this.type = type;
     }
 
+    /**
+     * <p>Getter for the field message.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * <p>Setter for the field message.</p>
+     *
+     * @param msg a {@link java.lang.String} object.
+     */
     public void setMessage(String msg) {
         this.message = msg;
     }
 
+    /**
+     * <p>Getter for the field sourceName.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getSourceName() {
         return sourceName;
     }
 
+    /**
+     * <p>Setter for the field sourceName.</p>
+     *
+     * @param name a {@link java.lang.String} object.
+     */
     public void setSourceName(String name) {
         this.sourceName = name;
     }
 
+    /**
+     * <p>getFileOffset.</p>
+     *
+     * @return a int.
+     */
     public int getFileOffset() {
         return offset;
     }
 
+    /**
+     * <p>setFileOffset.</p>
+     *
+     * @param offset a int.
+     */
     public void setFileOffset(int offset) {
         this.offset = offset;
     }
 
+    /**
+     * <p>Getter for the field length.</p>
+     *
+     * @return a int.
+     */
     public int getLength() {
         return length;
     }
 
+    /**
+     * <p>Setter for the field length.</p>
+     *
+     * @param length a int.
+     */
     public void setLength(int length) {
         this.length = length;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder(200);

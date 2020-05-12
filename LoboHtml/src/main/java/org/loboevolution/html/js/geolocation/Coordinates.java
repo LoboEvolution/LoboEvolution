@@ -3,13 +3,14 @@ package org.loboevolution.html.js.geolocation;
 import org.loboevolution.js.AbstractScriptableDelegate;
 
 /**
- * <p>The <code>CoordinatesImpl</code> class provides Java implementation of the 
- * "CoordinatesImpl Interface" as detailed out in the W3C Specifications (
- * <a href="http://www.w3.org/TR/geolocation-API/#coordinates_interface">
- * http://www.w3.org/TR/geolocation-API/#coordinates_interface</a>).</p>
- *  
- * <p><b>Note: This class must not have any sub-classes to ensure W3C Specifications are being 
- * strictly followed by the system or application that uses this geolocation package.</b></p>
+ * The CoordinatesImpl class provides Java implementation of the
+ * "CoordinatesImpl Interface" as detailed out in the W3C Specifications (http://www.w3.org/TR/geolocation-API/#coordinates_interface)
+ *
+ * Note: This class must not have any sub-classes to ensure W3C Specifications are being
+ * strictly followed by the system or application that uses this geolocation package.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class Coordinates extends AbstractScriptableDelegate {
 	
@@ -51,26 +52,17 @@ public class Coordinates extends AbstractScriptableDelegate {
     private Double speed;
     
     /**
-     * Constructs a <code>org.w3c.geolocation.Coordinates</code> object with the specified 
+     * Constructs a org.w3c.geolocation.Coordinates object with the specified
      * attributes.
-     * 
+     *
      * @param latitude	the latitude value.
      * @param longitude	the longitude value.
-     * @param altitude	the altitude value. It must either be <code>null</code> or a non-negative 
-     * real number.
-     * @param accuracy	the accuracy of the longitude and latitude. It should correspond to 
-     * at least 95% confidence.
-     * @param altitudeAccuracy	the accuracy of the altitude. If the implementation cannot provide 
-     * altitude information, the value of this attribute must be null. Otherwise, it must be a 
-     * non-negative real number.
-     * @param heading	where the object is heading. This attribute must be >= 0 or < 360, counting 
-     * clockwise relative to the true north. If the implementation cannot provide heading information, 
-     * the value of this attribute must be null. If the hosting device is stationary (i.e. the value 
-     * of the speed attribute is 0), then the value of this attribute must be NaN.
-     * @param speed	speed of the object. If the implementation cannot provide speed information, the 
-     * value of this attribute must be null. Otherwise, the value must be a non-negative real number.
-     * @throws java.lang.IllegalArgumentException	if any of the above provided arguments fall 
-     * outside the specified ranges as mentioned in the W3C Specifications (and also listed above).
+     * @param altitude	the altitude value.
+     * @param accuracy	the accuracy value.
+     * @param altitudeAccuracy	the altitudeAccuracy value.
+     * @param heading	the heading value.
+     * @param speed	the speed value.
+     * @throws java.lang.IllegalArgumentException if any.
      */
     public Coordinates(final double latitude, final double longitude, final Double altitude, 
     		final double accuracy, final Double altitudeAccuracy, final Double heading, final Double speed) 
@@ -137,18 +129,18 @@ public class Coordinates extends AbstractScriptableDelegate {
     	this.speed = speed;
     }
 
-    /**
-     * Returns the latitude that was passed to the constructor.
-     * 
-     * @return	the latitude.
-     */
+	/**
+	 * Returns the latitude that was passed to the constructor.
+	 *
+	 * @return	the latitude.
+	 */
 	public double getLatitude() {
 		return latitude;
 	}
 
 	/**
 	 * Returns the longitude that was passed to the constructor.
-	 * 
+	 *
 	 * @return	the longitude.
 	 */
 	public double getLongitude() {
@@ -157,7 +149,7 @@ public class Coordinates extends AbstractScriptableDelegate {
 
 	/**
 	 * Returns the altitude that was passed to the constructor.
-	 * 
+	 *
 	 * @return	the altitude.
 	 */
 	public Double getAltitude() {
@@ -166,7 +158,7 @@ public class Coordinates extends AbstractScriptableDelegate {
 
 	/**
 	 * Returns the accuracy that was passed to the constructor.
-	 * 
+	 *
 	 * @return	the accuracy.
 	 */
 	public double getAccuracy() {
@@ -175,7 +167,7 @@ public class Coordinates extends AbstractScriptableDelegate {
 
 	/**
 	 * Returns the altitude accuracy that was passed to the constructor.
-	 * 
+	 *
 	 * @return	the altitude accuracy.
 	 */
 	public Double getAltitudeAccuracy() {
@@ -184,7 +176,7 @@ public class Coordinates extends AbstractScriptableDelegate {
 
 	/**
 	 * Returns the heading that was passed to the constructor.
-	 * 
+	 *
 	 * @return the heading.
 	 */
 	public Double getHeading() {
@@ -193,7 +185,7 @@ public class Coordinates extends AbstractScriptableDelegate {
 
 	/**
 	 * Returns the speed that was passed to the constructor.
-	 * 
+	 *
 	 * @return the speed.
 	 */
 	public Double getSpeed() {

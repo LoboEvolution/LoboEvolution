@@ -30,18 +30,37 @@ import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 
+/**
+ * <p>DOMImplementationImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DOMImplementationImpl implements DOMImplementation {
 	private final UserAgentContext context;
 
+	/**
+	 * <p>Constructor for DOMImplementationImpl.</p>
+	 *
+	 * @param context a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public DOMImplementationImpl(UserAgentContext context) {
 		this.context = context;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Document createDocument(String namespaceURI, String qualifiedName, DocumentType doctype) throws DOMException {
 		return new HTMLDocumentImpl(this.context);
 	}
 	
+	/**
+	 * <p>createHTMLDocument.</p>
+	 *
+	 * @param title a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Document} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public Document createHTMLDocument(String title) throws DOMException {
 		HTMLDocumentImpl doc = new HTMLDocumentImpl(this.context);
 		final Element body = doc.createElement("BODY");
@@ -50,11 +69,13 @@ public class DOMImplementationImpl implements DOMImplementation {
 		return doc;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public DocumentType createDocumentType(String qualifiedName, String publicId, String systemId) throws DOMException {
 		return new DocumentTypeImpl(qualifiedName, publicId, systemId);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getFeature(String feature, String version) {
 		if ("HTML".equals(feature) && "2.0".compareTo(version) <= 0) {
@@ -64,6 +85,7 @@ public class DOMImplementationImpl implements DOMImplementation {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasFeature(String feature, String version) {
 		return "HTML".equals(feature) && "2.0".compareTo(version) <= 0;

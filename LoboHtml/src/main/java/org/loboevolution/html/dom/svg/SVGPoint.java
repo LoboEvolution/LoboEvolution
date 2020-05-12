@@ -22,14 +22,48 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGPoint interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPoint {
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX();
 
+	/**
+	 * <p>setX.</p>
+	 *
+	 * @param x a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setX(float x) throws DOMException;
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a float.
+	 */
 	float getY();
 
+	/**
+	 * <p>setY.</p>
+	 *
+	 * @param y a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setY(float y) throws DOMException;
 
+	/**
+	 * <p>matrixTransform.</p>
+	 *
+	 * @param matrix a {@link org.loboevolution.html.dom.svg.SVGMatrix} object.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 */
 	SVGPoint matrixTransform(SVGMatrix matrix);
 }

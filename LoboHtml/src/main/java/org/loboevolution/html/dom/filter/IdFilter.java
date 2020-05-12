@@ -24,13 +24,25 @@ import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * <p>IdFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class IdFilter implements NodeFilter {
 	private final String _id;
 
+	/**
+	 * <p>Constructor for IdFilter.</p>
+	 *
+	 * @param _id a {@link java.lang.String} object.
+	 */
 	public IdFilter(String _id) {
 		this._id = _id;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return (node instanceof Element) && this._id.equals(((Element) node).getAttribute("id"));

@@ -13,6 +13,9 @@ import javax.swing.border.TitledBorder;
 
 /**
  * The Class SwingTasks.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SwingTasks {
 

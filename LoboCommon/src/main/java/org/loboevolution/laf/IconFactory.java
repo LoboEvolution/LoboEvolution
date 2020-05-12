@@ -32,6 +32,9 @@ import org.loboevolution.common.IORoutines;
 
 /**
  * A factory for creating Icon objects.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class IconFactory {
 

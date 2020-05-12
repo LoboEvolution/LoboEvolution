@@ -9,21 +9,45 @@ import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.html.renderstate.RenderState;
 import org.w3c.dom.css.CSS3Properties;
 
+/**
+ * <p>BorderInsets class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BorderInsets {
 	
+	/** Constant BORDER_STYLE_DASHED=3 */
 	public static final int BORDER_STYLE_DASHED = 3;
+	/** Constant BORDER_STYLE_DOTTED=2 */
 	public static final int BORDER_STYLE_DOTTED = 2;
+	/** Constant BORDER_STYLE_DOUBLE=5 */
 	public static final int BORDER_STYLE_DOUBLE = 5;
 
+	/** Constant BORDER_STYLE_GROOVE=6 */
 	public static final int BORDER_STYLE_GROOVE = 6;
+	/** Constant BORDER_STYLE_HIDDEN=1 */
 	public static final int BORDER_STYLE_HIDDEN = 1;
+	/** Constant BORDER_STYLE_INSET=8 */
 	public static final int BORDER_STYLE_INSET = 8;
+	/** Constant BORDER_STYLE_NONE=0 */
 	public static final int BORDER_STYLE_NONE = 0;
+	/** Constant BORDER_STYLE_OUTSET=9 */
 	public static final int BORDER_STYLE_OUTSET = 9;
+	/** Constant BORDER_STYLE_RIDGE=7 */
 	public static final int BORDER_STYLE_RIDGE = 7;
+	/** Constant BORDER_STYLE_SOLID=4 */
 	public static final int BORDER_STYLE_SOLID = 4;
+	/** Constant DEFAULT_BORDER_WIDTH=2 */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
 	
+	/**
+	 * <p>getBorderInfo.</p>
+	 *
+	 * @param properties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.info.BorderInfo} object.
+	 */
 	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
 
@@ -42,6 +66,14 @@ public class BorderInsets {
 		return binfo;
 	}
 
+	/**
+	 * <p>getBorderInsets.</p>
+	 *
+	 * @param borderStyles a {@link java.awt.Insets} object.
+	 * @param cssProperties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
+	 */
 	public static HtmlInsets getBorderInsets(Insets borderStyles, CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 		if (borderStyles.top != BORDER_STYLE_NONE) {
@@ -63,6 +95,13 @@ public class BorderInsets {
 		return insets;
 	}
 	
+	/**
+	 * <p>populateBorderInsets.</p>
+	 *
+	 * @param binfo a {@link org.loboevolution.info.BorderInfo} object.
+	 * @param cssProperties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 */
 	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
 		HtmlInsets insets = null;
 		if (binfo.getTopStyle() != BORDER_STYLE_NONE) {

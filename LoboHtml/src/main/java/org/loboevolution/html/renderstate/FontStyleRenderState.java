@@ -31,7 +31,20 @@ import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
+/**
+ * <p>FontStyleRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FontStyleRenderState extends RenderStateDelegator {
+	/**
+	 * <p>createSuperscriptFontStyleRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param superscript a {@link java.lang.Integer} object.
+	 * @return a {@link org.loboevolution.html.renderstate.FontStyleRenderState} object.
+	 */
 	public static FontStyleRenderState createSuperscriptFontStyleRenderState(RenderState prevRenderState,
 			Integer superscript) {
 		return new FontStyleRenderState(prevRenderState, prevRenderState.getFont().getStyle(), superscript);
@@ -47,6 +60,12 @@ public class FontStyleRenderState extends RenderStateDelegator {
 
 	private final Integer superscript;
 
+	/**
+	 * <p>Constructor for FontStyleRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param style a int.
+	 */
 	public FontStyleRenderState(RenderState prevRenderState, int style) {
 		this(prevRenderState, style, null);
 	}
@@ -57,6 +76,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		this.superscript = superscript;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
 		Font f = this.iFont;
@@ -85,6 +105,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		return f;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public FontMetrics getFontMetrics() {
 		FontMetrics fm = this.iFontMetrics;
@@ -96,6 +117,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		return fm;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
@@ -120,6 +142,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 		return wi;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidate() {
 		this.delegate.invalidate();

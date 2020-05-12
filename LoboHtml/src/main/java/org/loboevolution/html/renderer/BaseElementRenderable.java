@@ -53,10 +53,18 @@ import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.common.GUITasks;
 import org.w3c.dom.css.CSS3Properties;
 
+/**
+ * <p>Abstract BaseElementRenderable class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver {
+	/** Constant INVALID_SIZE */
 	protected static final Integer INVALID_SIZE = Integer.valueOf(Integer.MIN_VALUE);
 
+	/** Constant SCROLL_BAR_THICKNESS=16 */
 	protected static final int SCROLL_BAR_THICKNESS = 16;
 
 	protected Color backgroundColor;
@@ -93,6 +101,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	
 	private BackgroundInfo binfo;
 
+	/**
+	 * <p>Constructor for BaseElementRenderable.</p>
+	 *
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public BaseElementRenderable(RenderableContainer container, ModelNode modelNode, UserAgentContext ucontext) {
 		super(container, modelNode);
 		this.userAgentContext = ucontext;
@@ -103,6 +118,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContainer#add(java.awt.Component)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Component addComponent(Component component) {
 		Collection<Component> gc = this.guiComponents;
@@ -114,6 +130,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return component;
 	}
 	
+    /**
+     * <p>Getter for the field borderInsets.</p>
+     *
+     * @return a {@link java.awt.Insets} object.
+     */
     public Insets getBorderInsets() {
         return this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
     }
@@ -123,6 +144,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContainer#add(java.awt.Component)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void addDelayedPair(DelayedPair pair) {
 		List<DelayedPair> gc = this.delayedPairs;
@@ -133,6 +155,12 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		gc.add(pair);
 	}
 
+	/**
+	 * <p>applyStyle.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 */
 	protected void applyStyle(int availWidth, int availHeight) {
 		// TODO: Can be optimized if there's no style?
 		// TODO: There's part of this that doesn't depend on availWidth
@@ -268,6 +296,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		// Check if background image needs to be loaded
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final void clearDelayedPairs() {
 		final Collection<DelayedPair> gc = this.delayedPairs;
@@ -276,6 +305,9 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/**
+	 * <p>clearGUIComponents.</p>
+	 */
 	protected final void clearGUIComponents() {
 		final Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
@@ -283,6 +315,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/**
+	 * <p>clearStyle.</p>
+	 *
+	 * @param isRootBlock a boolean.
+	 */
 	protected void clearStyle(boolean isRootBlock) {
 		this.borderInfo = null;
 		this.borderInsets = null;
@@ -300,12 +337,29 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		this.paddingInsets = null;
 	}
 
+	/**
+	 * <p>doLayout.</p>
+	 *
+	 * @param availWidth a int.
+	 * @param availHeight a int.
+	 * @param sizeOnly a boolean.
+	 */
 	protected abstract void doLayout(int availWidth, int availHeight, boolean sizeOnly);
 
+	/**
+	 * <p>getAlignmentX.</p>
+	 *
+	 * @return a float.
+	 */
 	public float getAlignmentX() {
 		return 0.0f;
 	}
 
+	/**
+	 * <p>getAlignmentY.</p>
+	 *
+	 * @return a float.
+	 */
 	public float getAlignmentY() {
 		return 0.0f;
 	}
@@ -330,6 +384,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return c == null ? Color.black : c;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Rectangle getBoundsRelativeToBlock() {
 		RCollection parent = this;
@@ -345,6 +400,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return new Rectangle(x, y, getWidth(), getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getCollapsibleMarginBottom() {
 		int cm;
@@ -372,6 +428,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return cm;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getCollapsibleMarginTop() {
 		int cm;
@@ -399,6 +456,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return cm;
 	}
 
+	/**
+	 * <p>Getter for the field declaredHeight.</p>
+	 *
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param actualAvailHeight a int.
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	protected Integer getDeclaredHeight(RenderState renderState, int actualAvailHeight) {
 		Integer dh = this.declaredHeight;
 		if (dh == INVALID_SIZE || actualAvailHeight != this.lastAvailHeightForDeclared) {
@@ -410,6 +474,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return dh;
 	}
 
+	/**
+	 * <p>getDeclaredHeightImpl.</p>
+	 *
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param availHeight a int.
+	 * @return a int.
+	 */
 	protected int getDeclaredHeightImpl(RenderState renderState, int availHeight) {
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
@@ -454,6 +525,13 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/**
+	 * <p>Getter for the field declaredWidth.</p>
+	 *
+	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param actualAvailWidth a int.
+	 * @return a {@link java.lang.Integer} object.
+	 */
 	protected Integer getDeclaredWidth(RenderState renderState, int actualAvailWidth) {
 		Integer dw = this.declaredWidth;
 		if (dw == INVALID_SIZE || actualAvailWidth != this.lastAvailWidthForDeclared) {
@@ -509,33 +587,45 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final Collection<DelayedPair> getDelayedPairs() {
 		return this.delayedPairs;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public int getInnerWidth() {
 		final Insets insets = getInsetsMarginBorder(false, false);
 		return getWidth() - (insets.left + insets.right);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public int getInnerHeight() {
 		final Insets insets = getInsetsMarginBorder(false, false);
 		return getHeight() - (insets.top + insets.bottom);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
     public Insets getInsets(final boolean hscroll, final boolean vscroll) {
         return getInsets(hscroll, vscroll, true, true, true);
     }
 
+	/** {@inheritDoc} */
 	@Override
     public Insets getInsetsMarginBorder(final boolean hscroll, final boolean vscroll) {
         return getInsets(hscroll, vscroll, true, true, false);
     }
 
+	/**
+	 * <p>getInsetsPadding.</p>
+	 *
+	 * @param hscroll a boolean.
+	 * @param vscroll a boolean.
+	 * @return a {@link java.awt.Insets} object.
+	 */
 	public Insets getInsetsPadding(final boolean hscroll, final boolean vscroll) {
 		return getInsets(hscroll, vscroll, false, false, true);
 	}	 
@@ -582,40 +672,51 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return new Insets(top, left, bottom, right);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMarginBottom() {
 		final Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.bottom;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMarginLeft() {
 		final Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.left;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMarginRight() {
 		final Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.right;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMarginTop() {
 		final Insets marginInsets = this.marginInsets;
 		return marginInsets == null ? 0 : marginInsets.top;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderableContainer getParentContainer() {
 		return this.container;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getZIndex() {
 		return this.zIndex;
 	}
 
+	/**
+	 * <p>hasDeclaredWidth.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public final boolean hasDeclaredWidth() {
 		final Integer dw = this.declaredWidth;
 		if (dw == INVALID_SIZE) {
@@ -633,6 +734,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return dw != null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean imageUpdate(Image img, int infoflags, int x, int y, int w, int h) {
 		// This is so that a loading image doesn't cause
@@ -644,6 +746,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Lays out children, and deals with "valid" state. Override doLayout method
 	 * instead of this one.
 	 */
@@ -659,6 +763,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Invalidates this Renderable and all descendents. This is only used in special
 	 * cases, such as when a new style sheet is added.
 	 */
@@ -680,6 +786,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	  public Point translateDescendentPoint(BoundableRenderable descendent, int x, int y) {
 	    final Point p = descendent.getOriginRelativeTo(this);
@@ -687,6 +794,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	    return p;
 	  }
 
+	/** {@inheritDoc} */
 	@Override
 	protected void invalidateLayoutLocal() {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -701,19 +809,27 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		this.lastAvailWidthForDeclared = -1;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isContainedByNode() {
 		return true;
 	}
 
+	/**
+	 * <p>isMarginBoundary.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isMarginBoundary() {
 		return this.overflowY != RenderState.OVERFLOW_VISIBLE && this.overflowX != RenderState.OVERFLOW_NONE
 				|| this.modelNode instanceof HTMLDocumentImpl;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {}
 
+	 /** {@inheritDoc} */
 	 @Override
 	  public Rectangle getClipBounds() {
 	    final Insets insets = this.getInsetsPadding(false, false);
@@ -727,6 +843,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	    }
 	  }
 
+	/**
+	 * <p>prePaint.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	protected void prePaint(Graphics g) {
 		final int startWidth = this.width;
 		final int startHeight = this.height;
@@ -916,6 +1037,9 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/**
+	 * <p>sendDelayedPairsToParent.</p>
+	 */
 	protected final void sendDelayedPairsToParent() {
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
@@ -930,6 +1054,9 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/**
+	 * <p>sendGUIComponentsToParent.</p>
+	 */
 	protected final void sendGUIComponentsToParent() {
 		// Ensures that parent has all the components
 		// below this renderer node. (Parent expected to have removed them).
@@ -942,6 +1069,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void updateAllWidgetBounds() {
 		this.container.updateAllWidgetBounds();

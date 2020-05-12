@@ -9,13 +9,13 @@ import java.util.List;
 /**
  * An overlay is a layer on top of an image. It can be used to add annotations,
  * arbitrary shapes to an image. Drawing is implemented in the
- * <code>paint</code> method.
+ * paint method.
  * <p>
  * The following is an implementation of a simple example overlay that draws a
  * cross over the image:
- * 
+ *
  * <pre>
- * 
+ *
  * class XPainter extends Overlay {
  * 	public void paint(Graphics2D g, BufferedImage image, AffineTransform transform) {
  * 		g.setColor(Color.RED);
@@ -26,19 +26,30 @@ import java.util.List;
  * 	}
  * }
  * </pre>
- * 
+ *
  * It can be added to a viewer by calling
- * <code>viewer.addOverlay(new XPainter(), 10)</code>.
- * 
+ * viewer.addOverlay(new XPainter(), 10).
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public abstract class Overlay {
 	private List<OverlayComponent> overlayComponents = new ArrayList<OverlayComponent>(1);
 
+	/**
+	 * <p>addOverlayComponent.</p>
+	 *
+	 * @param c a {@link org.loboevolution.img.OverlayComponent} object.
+	 */
 	public final void addOverlayComponent(OverlayComponent c) {
 		overlayComponents.add(c);
 	}
 
+	/**
+	 * <p>removeOverlayComponent.</p>
+	 *
+	 * @param c a {@link org.loboevolution.img.OverlayComponent} object.
+	 */
 	public final void removeOverlayComponent(OverlayComponent c) {
 		overlayComponents.remove(c);
 	}
@@ -56,8 +67,8 @@ public abstract class Overlay {
 	 * on is a copy for this overlay and can be freely modified.
 	 * <p>
 	 * The method receives the currently displayed image. The image is never
-	 * <code>null</code> - if there is currently no image being displayed in the
-	 * image viewer, then the <code>paint</code> method is not called.
+	 * null - if there is currently no image being displayed in the
+	 * image viewer, then the paint method is not called.
 	 * <p>
 	 * This method also receives the transformation that is applied to the image
 	 * before it is displayed. This transformation is most commonly the
@@ -65,7 +76,7 @@ public abstract class Overlay {
 	 * (0, 0) - (image.getWidth(), image.getHeight()) are mapped using this
 	 * transformation to get the final display bounds. The overlay should not rely
 	 * on whether painting outside these final bounds will be visible or not.
-	 * 
+	 *
 	 * @param g
 	 *            the graphics context to draw onto
 	 * @param image

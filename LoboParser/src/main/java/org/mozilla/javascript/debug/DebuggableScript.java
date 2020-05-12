@@ -11,19 +11,31 @@ package org.mozilla.javascript.debug;
 /**
  * This interface exposes debugging information from executable
  * code (either functions or top-level scripts).
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface DebuggableScript
 {
+    /**
+     * <p>isTopLevel.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isTopLevel();
 
     /**
      * Returns true if this is a function, false if it is a script.
+     *
+     * @return a boolean.
      */
     public boolean isFunction();
 
     /**
      * Get name of the function described by this script.
      * Return null or an empty string if this script is not a function.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getFunctionName();
 
@@ -33,6 +45,7 @@ public interface DebuggableScript
      *
      * @see #getParamAndVarCount()
      * @see #getParamOrVarName(int index)
+     * @return a int.
      */
     public int getParamCount();
 
@@ -43,6 +56,7 @@ public interface DebuggableScript
      *
      * @see #getParamCount()
      * @see #getParamOrVarName(int index)
+     * @return a int.
      */
     public int getParamAndVarCount();
 
@@ -54,12 +68,17 @@ public interface DebuggableScript
      * of variable.
      * If this script is not function, return the name of the declared
      * global variable.
+     *
+     * @param index a int.
+     * @return a {@link java.lang.String} object.
      */
     public String getParamOrVarName(int index);
 
     /**
      * Get the name of the source (usually filename or URL)
      * of the script.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public String getSourceName();
 
@@ -67,20 +86,40 @@ public interface DebuggableScript
      * Returns true if this script or function were runtime-generated
      * from JavaScript using <tt>eval</tt> function or <tt>Function</tt>
      * or <tt>Script</tt> constructors.
+     *
+     * @return a boolean.
      */
     public boolean isGeneratedScript();
 
     /**
      * Get array containing the line numbers that
-     * that can be passed to <code>DebugFrame.onLineChange()</code>.
+     * that can be passed to DebugFrame.onLineChange().
      * Note that line order in the resulting array is arbitrary
+     *
+     * @return an array of {@link int} objects.
      */
     public int[] getLineNumbers();
 
+    /**
+     * <p>getFunctionCount.</p>
+     *
+     * @return a int.
+     */
     public int getFunctionCount();
 
+    /**
+     * <p>getFunction.</p>
+     *
+     * @param index a int.
+     * @return a {@link org.mozilla.javascript.debug.DebuggableScript} object.
+     */
     public DebuggableScript getFunction(int index);
 
+    /**
+     * <p>getParent.</p>
+     *
+     * @return a {@link org.mozilla.javascript.debug.DebuggableScript} object.
+     */
     public DebuggableScript getParent();
 
 }

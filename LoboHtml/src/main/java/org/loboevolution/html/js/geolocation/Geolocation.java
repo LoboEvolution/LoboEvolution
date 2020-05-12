@@ -11,26 +11,40 @@ import org.mozilla.javascript.Function;
 
 /**
  * <p>
- * The <code>Geolocation</code> class provides Java implementation of the
+ * The Geolocation class provides Java implementation of the
  * "Geolocation Interface" as detailed out in the W3C Specifications (
  * <a href="http://www.w3.org/TR/geolocation-API/#geolocation_interface">
  * http://www.w3.org/TR/geolocation-API/#geolocation_interface</a>).
  * </p>
- * 
+ *
  * <p>
  * <b>Note: This class must not have any sub-classes to ensure W3C
  * Specifications are being strictly followed by the system or application that
  * uses this geolocation package.</b>
  * </p>
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class Geolocation extends AbstractScriptableDelegate {
 
 	private Window window;
 
+	/**
+	 * <p>Constructor for Geolocation.</p>
+	 *
+	 * @param window a {@link org.loboevolution.html.js.Window} object.
+	 */
 	public Geolocation(Window window) {
 		this.window = window;
 	}
 
+	/**
+	 * <p>getCurrentPosition.</p>
+	 *
+	 * @param success a {@link org.mozilla.javascript.Function} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public void getCurrentPosition(final Function success) throws Exception {
 		final IPAddressBasedGeoAcquirer ip = new IPAddressBasedGeoAcquirer();
 		final Position acquireLocation = ip.acquireLocation();
@@ -38,6 +52,12 @@ public class Geolocation extends AbstractScriptableDelegate {
 		Executor.executeFunction(node, success, null, new Object[] { acquireLocation });
 	}
 
+	/**
+	 * <p>getCurrentPosition.</p>
+	 *
+	 * @param success a {@link org.mozilla.javascript.Function} object.
+	 * @param error a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void getCurrentPosition(final Function success, final Function error) {
 		try {
 			getCurrentPosition(success);
@@ -46,6 +66,12 @@ public class Geolocation extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>watchPosition.</p>
+	 *
+	 * @param success a {@link org.mozilla.javascript.Function} object.
+	 * @return a long.
+	 */
 	public long watchPosition(final Function success) {
 		final long watchId = System.currentTimeMillis();
 		Thread t = new Thread(new Runnable() {
@@ -65,6 +91,13 @@ public class Geolocation extends AbstractScriptableDelegate {
 		return watchId;
 	}
 
+	/**
+	 * <p>watchPosition.</p>
+	 *
+	 * @param success a {@link org.mozilla.javascript.Function} object.
+	 * @param error a {@link org.mozilla.javascript.Function} object.
+	 * @return a long.
+	 */
 	public long watchPosition(final Function success, final Function error) {
 		final long watchId = System.currentTimeMillis();
 		Thread t = new Thread(new Runnable() {

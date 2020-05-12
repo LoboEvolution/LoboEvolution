@@ -33,13 +33,20 @@ class StopException extends Exception {
 	private final Element element;
 
 	/**
-	 * @param element
+	 * <p>Constructor for StopException.</p>
+	 *
+	 * @param element a {@link org.w3c.dom.Element} object.
 	 */
 	public StopException(Element element) {
 		super();
 		this.element = element;
 	}
 
+	/**
+	 * <p>Getter for the field element.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
 	public Element getElement() {
 		return this.element;
 	}

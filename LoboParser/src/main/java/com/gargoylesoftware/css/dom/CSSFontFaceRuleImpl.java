@@ -26,6 +26,7 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSFontFaceRule.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
 
@@ -34,6 +35,7 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Ctor.
+     *
      * @param parentStyleSheet the parent style sheet
      * @param parentRule the parent rule
      */
@@ -41,9 +43,7 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
         super(parentStyleSheet, parentRule);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
@@ -57,9 +57,7 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
         return sb.toString();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    /** {@inheritDoc} */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -91,6 +89,8 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
+     * <p>getStyle.</p>
+     *
      * @return the style
      */
     public CSSStyleDeclarationImpl getStyle() {
@@ -99,12 +99,14 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Sets the style to a new one.
+     *
      * @param style the new style
      */
     public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -118,6 +120,7 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getStyle(), cffr.getStyle());
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -125,6 +128,7 @@ public class CSSFontFaceRuleImpl extends AbstractCSSRuleImpl {
         return hash;
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();

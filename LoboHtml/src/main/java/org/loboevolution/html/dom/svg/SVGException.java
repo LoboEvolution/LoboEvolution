@@ -20,6 +20,12 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>Abstract SVGException class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class SVGException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

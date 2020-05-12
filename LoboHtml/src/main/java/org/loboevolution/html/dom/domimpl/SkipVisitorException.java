@@ -29,18 +29,37 @@ class SkipVisitorException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for SkipVisitorException.</p>
+	 */
 	public SkipVisitorException() {
 		super();
 	}
 
+	/**
+	 * <p>Constructor for SkipVisitorException.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public SkipVisitorException(String message) {
 		super(message);
 	}
 
+	/**
+	 * <p>Constructor for SkipVisitorException.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param cause a {@link java.lang.Throwable} object.
+	 */
 	public SkipVisitorException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
+	/**
+	 * <p>Constructor for SkipVisitorException.</p>
+	 *
+	 * @param cause a {@link java.lang.Throwable} object.
+	 */
 	public SkipVisitorException(Throwable cause) {
 		super(cause);
 	}

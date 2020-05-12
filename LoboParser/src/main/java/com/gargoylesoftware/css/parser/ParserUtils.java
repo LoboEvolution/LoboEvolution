@@ -18,6 +18,7 @@ package com.gargoylesoftware.css.parser;
  * Util methods used by the parser and lexer.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public final class ParserUtils {
 
@@ -40,6 +41,7 @@ public final class ParserUtils {
     /**
      * Helper that removes the leading "url(", the trailing ")"
      * and surrounding quotes from the given string builder.
+     *
      * @param s the StringBuilder
      * @return the trimmed string
      */

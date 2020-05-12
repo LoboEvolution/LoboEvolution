@@ -9,7 +9,20 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.css.CSSStyleDeclaration;
 
+/**
+ * <p>Nodes class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Nodes {
+	/**
+	 * <p>getCommonAncestor.</p>
+	 *
+	 * @param node1 a {@link org.w3c.dom.Node} object.
+	 * @param node2 a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 */
 	public static Node getCommonAncestor(Node node1, Node node2) {
 		if (node1 == null || node2 == null) {
 			return null;
@@ -24,6 +37,13 @@ public class Nodes {
 		return checkNode;
 	}
 
+	/**
+	 * <p>isSameOrAncestorOf.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @param child a {@link org.w3c.dom.Node} object.
+	 * @return a boolean.
+	 */
 	public static boolean isSameOrAncestorOf(Node node, Node child) {
 		if (child.isSameNode(node)) {
 			return true;
@@ -35,6 +55,12 @@ public class Nodes {
 		return isSameOrAncestorOf(node, parent);
 	}
 
+	/**
+	 * <p>iterable.</p>
+	 *
+	 * @param nodeList a {@link org.w3c.dom.NodeList} object.
+	 * @return a {@link java.lang.Iterable} object.
+	 */
 	public static Iterable<Node> iterable(final NodeList nodeList) {
 	    return () -> new Iterator<Node>() {
 
@@ -54,6 +80,12 @@ public class Nodes {
 	    };
 	}
 	
+	/**
+	 * <p>iterable.</p>
+	 *
+	 * @param attrList a {@link org.w3c.dom.NamedNodeMap} object.
+	 * @return a {@link java.lang.Iterable} object.
+	 */
 	public static Iterable<Attr> iterable(final NamedNodeMap attrList) {
 	    return () -> new Iterator<Attr>() {
 
@@ -73,6 +105,12 @@ public class Nodes {
 	    };
 	}
 	
+	/**
+	 * <p>iterable.</p>
+	 *
+	 * @param cssList a {@link org.w3c.dom.css.CSSStyleDeclaration} object.
+	 * @return a {@link java.lang.Iterable} object.
+	 */
 	public static Iterable<String> iterable(final CSSStyleDeclaration cssList) {
 	    return () -> new Iterator<String>() {
 

@@ -32,12 +32,16 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseRadioButtonUI;
 
 /**
+ * <p>McWinRadioButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinRadioButtonUI extends BaseRadioButtonUI {
 
 	private static McWinRadioButtonUI radioButtonUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new McWinRadioButtonUI();
@@ -45,6 +49,7 @@ public class McWinRadioButtonUI extends BaseRadioButtonUI {
 		return radioButtonUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

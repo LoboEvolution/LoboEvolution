@@ -2,6 +2,12 @@ package org.loboevolution.gui;
 
 import javax.swing.JComponent;
 
+/**
+ * <p>Abstract AbstractItemEditor class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class AbstractItemEditor<T> extends JComponent {
 
 	/** The Constant serialVersionUID. */
@@ -23,8 +29,6 @@ public abstract class AbstractItemEditor<T> extends JComponent {
 
 	/**
 	 * Validate item.
-	 *
-	 * @throws ValidationException the validation exception
 	 */
 	public abstract void validateItem();
 }

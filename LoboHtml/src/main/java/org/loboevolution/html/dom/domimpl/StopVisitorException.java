@@ -30,30 +30,59 @@ class StopVisitorException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 	private final Object tag;
 
+	/**
+	 * <p>Constructor for StopVisitorException.</p>
+	 */
 	public StopVisitorException() {
 		super();
 		this.tag = null;
 	}
 
+	/**
+	 * <p>Constructor for StopVisitorException.</p>
+	 *
+	 * @param tag a {@link java.lang.Object} object.
+	 */
 	public StopVisitorException(Object tag) {
 		this.tag = tag;
 	}
 
+	/**
+	 * <p>Constructor for StopVisitorException.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public StopVisitorException(String message) {
 		super(message);
 		this.tag = null;
 	}
 
+	/**
+	 * <p>Constructor for StopVisitorException.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param cause a {@link java.lang.Throwable} object.
+	 */
 	public StopVisitorException(String message, Throwable cause) {
 		super(message, cause);
 		this.tag = null;
 	}
 
+	/**
+	 * <p>Constructor for StopVisitorException.</p>
+	 *
+	 * @param cause a {@link java.lang.Throwable} object.
+	 */
 	public StopVisitorException(Throwable cause) {
 		super(cause);
 		this.tag = null;
 	}
 
+	/**
+	 * <p>Getter for the field tag.</p>
+	 *
+	 * @return a {@link java.lang.Object} object.
+	 */
 	public final Object getTag() {
 		return this.tag;
 	}

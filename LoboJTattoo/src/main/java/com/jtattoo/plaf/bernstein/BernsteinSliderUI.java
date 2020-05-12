@@ -33,18 +33,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseSliderUI;
 
 /**
+ * <p>BernsteinSliderUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinSliderUI extends BaseSliderUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BernsteinSliderUI((JSlider) c);
 	}
 
+	/**
+	 * <p>Constructor for BernsteinSliderUI.</p>
+	 *
+	 * @param slider a {@link javax.swing.JSlider} object.
+	 */
 	public BernsteinSliderUI(JSlider slider) {
 		super(slider);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

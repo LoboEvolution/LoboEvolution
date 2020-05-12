@@ -24,6 +24,12 @@ import java.util.Map;
 import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
 
+/**
+ * <p>JavaAdapter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public final class JavaAdapter implements IdFunctionCall
 {
     /**
@@ -78,6 +84,13 @@ public final class JavaAdapter implements IdFunctionCall
         }
     }
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         JavaAdapter obj = new JavaAdapter();
@@ -90,6 +103,7 @@ public final class JavaAdapter implements IdFunctionCall
         ctor.exportAsScopeProperty();
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -102,6 +116,13 @@ public final class JavaAdapter implements IdFunctionCall
         throw f.unknown();
     }
 
+    /**
+     * <p>convertResult.</p>
+     *
+     * @param result a {@link java.lang.Object} object.
+     * @param c a {@link java.lang.Class} object.
+     * @return a {@link java.lang.Object} object.
+     */
     public static Object convertResult(Object result, Class<?> c)
     {
         if (result == Undefined.instance &&
@@ -114,6 +135,13 @@ public final class JavaAdapter implements IdFunctionCall
         return Context.jsToJava(result, c);
     }
 
+    /**
+     * <p>createAdapterWrapper.</p>
+     *
+     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param adapter a {@link java.lang.Object} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public static Scriptable createAdapterWrapper(Scriptable obj, Object adapter)
     {
         Scriptable scope = ScriptableObject.getTopLevelScope(obj);
@@ -122,6 +150,15 @@ public final class JavaAdapter implements IdFunctionCall
         return res;
     }
 
+    /**
+     * <p>getAdapterSelf.</p>
+     *
+     * @param adapterClass a {@link java.lang.Class} object.
+     * @param adapter a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
+     * @throws java.lang.NoSuchFieldException if any.
+     * @throws java.lang.IllegalAccessException if any.
+     */
     public static Object getAdapterSelf(Class<?> adapterClass, Object adapter)
         throws NoSuchFieldException, IllegalAccessException
     {
@@ -237,6 +274,13 @@ public final class JavaAdapter implements IdFunctionCall
     }
 
     // Needed by NativeJavaObject serializer
+    /**
+     * <p>writeAdapterObject.</p>
+     *
+     * @param javaObject a {@link java.lang.Object} object.
+     * @param out a {@link java.io.ObjectOutputStream} object.
+     * @throws java.io.IOException if any.
+     */
     public static void writeAdapterObject(Object javaObject,
                                           ObjectOutputStream out)
         throws IOException
@@ -263,6 +307,15 @@ public final class JavaAdapter implements IdFunctionCall
     }
 
     // Needed by NativeJavaObject de-serializer
+    /**
+     * <p>readAdapterObject.</p>
+     *
+     * @param self a {@link org.mozilla.javascript.Scriptable} object.
+     * @param in a {@link java.io.ObjectInputStream} object.
+     * @return a {@link java.lang.Object} object.
+     * @throws java.io.IOException if any.
+     * @throws java.lang.ClassNotFoundException if any.
+     */
     public static Object readAdapterObject(Scriptable self,
                                            ObjectInputStream in)
         throws IOException, ClassNotFoundException
@@ -351,6 +404,16 @@ public final class JavaAdapter implements IdFunctionCall
         return adapterClass;
     }
 
+    /**
+     * <p>createAdapterCode.</p>
+     *
+     * @param functionNames a {@link org.mozilla.javascript.ObjToIntMap} object.
+     * @param adapterName a {@link java.lang.String} object.
+     * @param superClass a {@link java.lang.Class} object.
+     * @param interfaces an array of {@link java.lang.Class} objects.
+     * @param scriptClassName a {@link java.lang.String} object.
+     * @return an array of {@link byte} objects.
+     */
     public static byte[] createAdapterCode(ObjToIntMap functionNames,
                                            String adapterName,
                                            Class<?> superClass,
@@ -550,6 +613,13 @@ public final class JavaAdapter implements IdFunctionCall
         return result;
     }
 
+    /**
+     * <p>getFunction.</p>
+     *
+     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param functionName a {@link java.lang.String} object.
+     * @return a {@link org.mozilla.javascript.Function} object.
+     */
     public static Function getFunction(Scriptable obj, String functionName)
     {
         Object x = ScriptableObject.getProperty(obj, functionName);
@@ -570,6 +640,13 @@ public final class JavaAdapter implements IdFunctionCall
     /**
      * Utility method which dynamically binds a Context to the current thread,
      * if none already exists.
+     *
+     * @param factory a {@link org.mozilla.javascript.ContextFactory} object.
+     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
+     * @param f a {@link org.mozilla.javascript.Function} object.
+     * @param args an array of {@link java.lang.Object} objects.
+     * @param argsToWrap a long.
+     * @return a {@link java.lang.Object} object.
      */
     public static Object callMethod(ContextFactory factory,
                                     final Scriptable thisObj,
@@ -613,6 +690,12 @@ public final class JavaAdapter implements IdFunctionCall
         return f.call(cx, scope, thisObj, args);
     }
 
+    /**
+     * <p>runScript.</p>
+     *
+     * @param script a {@link org.mozilla.javascript.Script} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public static Scriptable runScript(final Script script)
     {
         return ContextFactory.getGlobal().call(cx -> {

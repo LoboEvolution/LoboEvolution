@@ -20,8 +20,24 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEDistantLightElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEDistantLightElement extends SVGElement {
+	/**
+	 * <p>getAzimuth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getAzimuth();
 
+	/**
+	 * <p>getElevation.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getElevation();
 }

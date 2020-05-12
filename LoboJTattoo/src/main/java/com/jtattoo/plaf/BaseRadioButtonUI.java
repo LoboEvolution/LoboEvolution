@@ -45,7 +45,10 @@ import javax.swing.plaf.basic.BasicRadioButtonUI;
 import javax.swing.text.View;
 
 /**
+ * <p>BaseRadioButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseRadioButtonUI extends BasicRadioButtonUI {
 
@@ -56,11 +59,16 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	 * substantially reduced the time it took paint to run. Obviously, this method
 	 * can't be re-entered.
 	 */
+	/** Constant size */
 	protected static Dimension size = new Dimension();
+	/** Constant viewRect */
 	protected static Rectangle viewRect = new Rectangle();
+	/** Constant iconRect */
 	protected static Rectangle iconRect = new Rectangle();
+	/** Constant textRect */
 	protected static Rectangle textRect = new Rectangle();
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (radioButtonUI == null) {
 			radioButtonUI = new BaseRadioButtonUI();
@@ -68,6 +76,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 		return radioButtonUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
@@ -75,6 +84,7 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 		icon = UIManager.getIcon("RadioButton.icon");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		AbstractButton b = (AbstractButton) c;
@@ -111,17 +121,25 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 		}
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link javax.swing.JComponent} object.
+	 */
 	protected void paintBackground(Graphics g, JComponent c) {
 		g.setColor(c.getBackground());
 		g.fillRect(0, 0, c.getWidth(), c.getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, Rectangle t, Dimension d) {
 		g.setColor(AbstractLookAndFeel.getFocusColor());
 		BasicGraphicsUtils.drawDashedRect(g, t.x, t.y - 1, t.width + 1, t.height + 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintIcon(Graphics g, JComponent c, Rectangle iconRect) {
 		AbstractButton b = (AbstractButton) c;
@@ -164,6 +182,14 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 		}
 	}
 
+	/**
+	 * <p>paintText.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @param text a {@link java.lang.String} object.
+	 * @param textRect a {@link java.awt.Rectangle} object.
+	 */
 	protected void paintText(Graphics g, JComponent c, String text, Rectangle textRect) {
 		View v = (View) c.getClientProperty(BasicHTML.propertyKey);
 		if (v != null) {

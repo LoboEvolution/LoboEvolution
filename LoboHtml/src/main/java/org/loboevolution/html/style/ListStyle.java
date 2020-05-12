@@ -24,6 +24,12 @@ import java.awt.Image;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * <p>ListStyle class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ListStyle {
 	
 	private Image image;
@@ -32,15 +38,31 @@ public class ListStyle {
 	
 	private int type;
 
+	/**
+	 * <p>Constructor for ListStyle.</p>
+	 */
 	public ListStyle() {
 	}
 
+	/**
+	 * <p>Constructor for ListStyle.</p>
+	 *
+	 * @param type a int.
+	 * @param image a {@link java.awt.Image} object.
+	 * @param position a int.
+	 */
 	public ListStyle(final int type, final Image image, final int position) {
 		this.type = type;
 		this.image = image;
 		this.position = position;
 	}
 
+	/**
+	 * <p>getRomanNumerals.</p>
+	 *
+	 * @param num a int.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getRomanNumerals(int num) {
 		LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
 		roman_numerals.put("M", 1000);
@@ -77,6 +99,8 @@ public class ListStyle {
 	}
 
 	/**
+	 * <p>Getter for the field image.</p>
+	 *
 	 * @return the image
 	 */
 	public Image getImage() {
@@ -84,6 +108,8 @@ public class ListStyle {
 	}
 
 	/**
+	 * <p>Getter for the field position.</p>
+	 *
 	 * @return the position
 	 */
 	public int getPosition() {
@@ -91,6 +117,8 @@ public class ListStyle {
 	}
 
 	/**
+	 * <p>Getter for the field type.</p>
+	 *
 	 * @return the type
 	 */
 	public int getType() {
@@ -98,6 +126,8 @@ public class ListStyle {
 	}
 
 	/**
+	 * <p>Setter for the field image.</p>
+	 *
 	 * @param image the image to set
 	 */
 	public void setImage(Image image) {
@@ -105,6 +135,8 @@ public class ListStyle {
 	}
 
 	/**
+	 * <p>Setter for the field position.</p>
+	 *
 	 * @param position the position to set
 	 */
 	public void setPosition(int position) {
@@ -112,6 +144,8 @@ public class ListStyle {
 	}
 
 	/**
+	 * <p>Setter for the field type.</p>
+	 *
 	 * @param type the type to set
 	 */
 	public void setType(int type) {

@@ -47,14 +47,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiButtonUI extends BaseButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
@@ -75,6 +80,7 @@ public class HiFiButtonUI extends BaseButtonUI {
 		g2D.setClip(savedClip);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
 		ButtonModel model = b.getModel();

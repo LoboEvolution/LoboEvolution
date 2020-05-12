@@ -22,14 +22,28 @@ package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
+/**
+ * <p>DisplayRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DisplayRenderState extends StyleSheetRenderState {
 	private final int defaultDisplay;
 
+	/**
+	 * <p>Constructor for DisplayRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param defaultDisplay a int.
+	 */
 	public DisplayRenderState(RenderState prevRenderState, HTMLElementImpl element, final int defaultDisplay) {
 		super(prevRenderState, element);
 		this.defaultDisplay = defaultDisplay;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getDefaultDisplay() {
 		return this.defaultDisplay;

@@ -46,7 +46,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
+ * <p>JTattooUtilities class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class JTattooUtilities {
 
@@ -63,6 +66,17 @@ public class JTattooUtilities {
 	private static Double osVersion = null;
 	private static final String ELLIPSIS = "...";
 
+	/**
+	 * <p>draw3DBorder.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c1 a {@link java.awt.Color} object.
+	 * @param c2 a {@link java.awt.Color} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void draw3DBorder(Graphics g, Color c1, Color c2, int x, int y, int w, int h) {
 		int x2 = x + w - 1;
 		int y2 = y + h - 1;
@@ -74,11 +88,32 @@ public class JTattooUtilities {
 		g.drawLine(x2, y, x2, y2);
 	}
 
+	/**
+	 * <p>drawBorder.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Color} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void drawBorder(Graphics g, Color c, int x, int y, int w, int h) {
 		g.setColor(c);
 		g.drawRect(x, y, w - 1, h - 1);
 	}
 
+	/**
+	 * <p>drawRound3DBorder.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c1 a {@link java.awt.Color} object.
+	 * @param c2 a {@link java.awt.Color} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void drawRound3DBorder(Graphics g, Color c1, Color c2, int x, int y, int w, int h) {
 		Graphics2D g2D = (Graphics2D) g;
 		int x2 = x + w;
@@ -123,6 +158,17 @@ public class JTattooUtilities {
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
 	}
 
+	/**
+	 * <p>drawRoundBorder.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Color} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 * @param r a int.
+	 */
 	public static void drawRoundBorder(Graphics g, Color c, int x, int y, int w, int h, int r) {
 		Graphics2D g2D = (Graphics2D) g;
 		Object savedRederingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
@@ -132,6 +178,15 @@ public class JTattooUtilities {
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
 	}
 
+	/**
+	 * <p>drawString.</p>
+	 *
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param text a {@link java.lang.String} object.
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public static void drawString(JComponent c, Graphics g, String text, int x, int y) {
 		Graphics2D g2D = (Graphics2D) g;
 		Object savedRenderingHint = null;
@@ -146,6 +201,16 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>drawStringUnderlineCharAt.</p>
+	 *
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param text a {@link java.lang.String} object.
+	 * @param underlinedIndex a int.
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public static void drawStringUnderlineCharAt(JComponent c, Graphics g, String text, int underlinedIndex, int x,
 			int y) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -161,6 +226,13 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 * @param texture a {@link javax.swing.Icon} object.
+	 */
 	public static void fillComponent(Graphics g, Component c, Icon texture) {
 		int x = 0;
 		int y = 0;
@@ -185,6 +257,16 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>fillHorGradient.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void fillHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
 		if (colors != null) {
 			int steps = colors.length;
@@ -207,6 +289,16 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>fillInverseHorGradient.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void fillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
 		if (colors != null) {
 			int steps = colors.length;
@@ -229,6 +321,16 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>fillInverseVerGradient.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void fillInverseVerGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
 		if (colors != null) {
 			int steps = colors.length;
@@ -247,6 +349,16 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>fillVerGradient.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void fillVerGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
 		if (colors != null) {
 			int steps = colors.length;
@@ -265,6 +377,14 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>getClippedText.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @param fm a {@link java.awt.FontMetrics} object.
+	 * @param maxWidth a int.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getClippedText(String text, FontMetrics fm, int maxWidth) {
 		if (text == null || text.length() == 0) {
 			return "";
@@ -282,6 +402,14 @@ public class JTattooUtilities {
 		return text;
 	}
 
+	/**
+	 * <p>getFontMetrics.</p>
+	 *
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param f a {@link java.awt.Font} object.
+	 * @return a {@link java.awt.FontMetrics} object.
+	 */
 	public static FontMetrics getFontMetrics(JComponent c, Graphics g, Font f) {
 		FontMetrics fm = null;
 		if (fm == null) {
@@ -307,6 +435,12 @@ public class JTattooUtilities {
 		return fm;
 	}
 
+	/**
+	 * <p>getFrameSize.</p>
+	 *
+	 * @param c a {@link java.awt.Component} object.
+	 * @return a {@link java.awt.Dimension} object.
+	 */
 	public static Dimension getFrameSize(Component c) {
 		Container parent = getRootContainer(c);
 		if (parent != null) {
@@ -315,6 +449,11 @@ public class JTattooUtilities {
 		return Toolkit.getDefaultToolkit().getScreenSize();
 	}
 
+	/**
+	 * <p>Getter for the field javaVersion.</p>
+	 *
+	 * @return a double.
+	 */
 	public static double getJavaVersion() {
 		if (javaVersion == null) {
 			try {
@@ -339,6 +478,11 @@ public class JTattooUtilities {
 		return javaVersion;
 	}
 
+	/**
+	 * <p>getOSVersion.</p>
+	 *
+	 * @return a double.
+	 */
 	public static double getOSVersion() {
 		if (osVersion == null) {
 			try {
@@ -363,6 +507,12 @@ public class JTattooUtilities {
 		return osVersion;
 	}
 
+	/**
+	 * <p>getRelLocation.</p>
+	 *
+	 * @param c a {@link java.awt.Component} object.
+	 * @return a {@link java.awt.Point} object.
+	 */
 	public static Point getRelLocation(Component c) {
 		if (c == null || !c.isShowing()) {
 			return new Point(0, 0);
@@ -378,6 +528,12 @@ public class JTattooUtilities {
 		return new Point(0, 0);
 	}
 
+	/**
+	 * <p>getRootContainer.</p>
+	 *
+	 * @param c a {@link java.awt.Component} object.
+	 * @return a {@link java.awt.Container} object.
+	 */
 	public static Container getRootContainer(Component c) {
 		if (c == null) {
 			return null;
@@ -390,6 +546,12 @@ public class JTattooUtilities {
 		return parent;
 	}
 
+	/**
+	 * <p>isActive.</p>
+	 *
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @return a boolean.
+	 */
 	public static boolean isActive(JComponent c) {
 		if (c == null) {
 			return false;
@@ -414,10 +576,21 @@ public class JTattooUtilities {
 		return active;
 	}
 
+	/**
+	 * <p>isAIX.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isAIX() {
 		return IS_AIX;
 	}
 
+	/**
+	 * <p>isFrameActive.</p>
+	 *
+	 * @param c a {@link java.awt.Component} object.
+	 * @return a boolean.
+	 */
 	public static boolean isFrameActive(Component c) {
 		if (c == null) {
 			return false;
@@ -434,18 +607,39 @@ public class JTattooUtilities {
 		return true;
 	}
 
+	/**
+	 * <p>isFreeBSD.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isFreeBSD() {
 		return IS_FREEBSD;
 	}
 
+	/**
+	 * <p>isHiresScreen.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isHiresScreen() {
 		return IS_HIRES_SCREEN;
 	}
 
+	/**
+	 * <p>isHPUX.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isHPUX() {
 		return IS_HPUX;
 	}
 
+	/**
+	 * <p>isLeftToRight.</p>
+	 *
+	 * @param c a {@link java.awt.Component} object.
+	 * @return a boolean.
+	 */
 	public static boolean isLeftToRight(Component c) {
 		if (c == null) {
 			return true;
@@ -453,28 +647,63 @@ public class JTattooUtilities {
 		return c.getComponentOrientation().isLeftToRight();
 	}
 
+	/**
+	 * <p>isLinux.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isLinux() {
 		return IS_LINUX;
 	}
 
+	/**
+	 * <p>isMac.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isMac() {
 		return IS_MAC;
 	}
 
+	/**
+	 * <p>isOS2.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isOS2() {
 		return IS_OS2;
 	}
 
 	// -------------------------------------------------------------------------------------------
 
+	/**
+	 * <p>isSunOS.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isSunOS() {
 		return IS_SUNOS;
 	}
 
+	/**
+	 * <p>isWindows.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public static boolean isWindows() {
 		return IS_WINDOWS;
 	}
 
+	/**
+	 * <p>smoothFillHorGradient.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void smoothFillHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
 		if (colors != null) {
 			Graphics2D g2D = (Graphics2D) g;
@@ -498,6 +727,16 @@ public class JTattooUtilities {
 		}
 	}
 
+	/**
+	 * <p>smoothFillInverseHorGradient.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param colors an array of {@link java.awt.Color} objects.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void smoothFillInverseHorGradient(Graphics g, Color[] colors, int x, int y, int w, int h) {
 		if (colors != null) {
 			Graphics2D g2D = (Graphics2D) g;

@@ -31,8 +31,17 @@ import javax.swing.plaf.FontUIResource;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
+/**
+ * <p>GraphiteDefaultTheme class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class GraphiteDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for GraphiteDefaultTheme.</p>
+	 */
 	public GraphiteDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -43,11 +52,13 @@ public class GraphiteDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "GraphiteTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -136,6 +147,7 @@ public class GraphiteDefaultTheme extends AbstractTheme {
 		windowTitleFont = new FontUIResource("Dialog", Font.BOLD, 13);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

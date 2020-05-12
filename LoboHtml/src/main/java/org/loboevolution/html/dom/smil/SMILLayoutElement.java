@@ -23,18 +23,24 @@ package org.loboevolution.html.dom.smil;
 
 /**
  * Declares layout type for the document. See the LAYOUT element definition .
- * 
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILLayoutElement extends SMILElement {
 	/**
 	 * The mime type of the layout langage used in this layout element.The
 	 * default value of the type attribute is "text/smil-basic-layout".
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getType();
 
 	/**
-	 * <code>true</code> if the player can understand the mime type,
-	 * <code>false</code> otherwise.
+	 * true if the player can understand the mime type,
+	 * false otherwise.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean getResolved();
 

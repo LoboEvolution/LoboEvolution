@@ -18,6 +18,9 @@ import java.util.regex.Pattern;
 
 /**
  * The class of exceptions thrown by the JavaScript engine.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public abstract class RhinoException extends RuntimeException
 {
@@ -38,6 +41,7 @@ public abstract class RhinoException extends RuntimeException
             e.captureStackInfo(this);
     }
 
+    /** {@inheritDoc} */
     @Override
     public final String getMessage()
     {
@@ -58,6 +62,11 @@ public abstract class RhinoException extends RuntimeException
         return buf.toString();
     }
 
+    /**
+     * <p>details.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String details()
     {
         return super.getMessage();
@@ -66,6 +75,8 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Get the uri of the script source containing the error, or null
      * if that information is not available.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public final String sourceName()
     {
@@ -77,8 +88,7 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param sourceName the uri of the script source responsible for the error.
      *                   It should not be <tt>null</tt>.
-     *
-     * @throws IllegalStateException if the method is called more then once.
+     * @throws java.lang.IllegalStateException if the method is called more then once.
      */
     public final void initSourceName(String sourceName)
     {
@@ -90,6 +100,8 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Returns the line number of the statement causing the error,
      * or zero if not available.
+     *
+     * @return a int.
      */
     public final int lineNumber()
     {
@@ -101,8 +113,7 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param lineNumber the line number in the script source.
      *                   It should be positive number.
-     *
-     * @throws IllegalStateException if the method is called more then once.
+     * @throws java.lang.IllegalStateException if the method is called more then once.
      */
     public final void initLineNumber(int lineNumber)
     {
@@ -113,6 +124,8 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * The column number of the location of the error, or zero if unknown.
+     *
+     * @return a int.
      */
     public final int columnNumber()
     {
@@ -124,8 +137,7 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param columnNumber the column number in the script source.
      *                     It should be positive number.
-     *
-     * @throws IllegalStateException if the method is called more then once.
+     * @throws java.lang.IllegalStateException if the method is called more then once.
      */
     public final void initColumnNumber(int columnNumber)
     {
@@ -136,6 +148,8 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * The source text of the line causing the error, or null if unknown.
+     *
+     * @return a {@link java.lang.String} object.
      */
     public final String lineSource()
     {
@@ -147,8 +161,7 @@ public abstract class RhinoException extends RuntimeException
      *
      * @param lineSource the text of the source line responsible for the error.
      *                   It should not be <tt>null</tt>.
-     *
-     * @throws IllegalStateException if the method is called more then once.
+     * @throws java.lang.IllegalStateException if the method is called more then once.
      */
     public final void initLineSource(String lineSource)
     {
@@ -196,6 +209,7 @@ public abstract class RhinoException extends RuntimeException
      * If optimization is enabled, this includes java stack elements
      * whose source and method names suggest they have been generated
      * by the Rhino script compiler.
+     *
      * @return a script stack dump
      * @since 1.6R6
      */
@@ -254,6 +268,7 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * Get a string representing the script stack of this exception.
+     *
      * @deprecated the filter argument is ignored as we are able to
      * recognize script stack elements by our own. Use
      * #getScriptStackTrace() instead.
@@ -269,10 +284,11 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * Get the script stack of this exception as an array of
-     * {@link ScriptStackElement}s.
+     * {@link org.mozilla.javascript.ScriptStackElement}s.
      * If optimization is enabled, this includes java stack elements
      * whose source and method names suggest they have been generated
      * by the Rhino script compiler.
+     *
      * @return the script stack for this exception
      * @since 1.7R3
      */
@@ -282,7 +298,7 @@ public abstract class RhinoException extends RuntimeException
 
     /**
      * Get the script stack of this exception as an array of
-     * {@link ScriptStackElement}s.
+     * {@link org.mozilla.javascript.ScriptStackElement}s.
      * If optimization is enabled, this includes java stack elements
      * whose source and method names suggest they have been generated
      * by the Rhino script compiler.
@@ -348,6 +364,7 @@ public abstract class RhinoException extends RuntimeException
     }
 
 
+    /** {@inheritDoc} */
     @Override
     public void printStackTrace(PrintWriter s)
     {
@@ -358,6 +375,7 @@ public abstract class RhinoException extends RuntimeException
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void printStackTrace(PrintStream s)
     {
@@ -369,11 +387,12 @@ public abstract class RhinoException extends RuntimeException
     }
 
     /**
-     * Returns true if subclasses of <code>RhinoException</code>
+     * Returns true if subclasses of RhinoException
      * use the Mozilla/Firefox style of rendering script stacks
-     * (<code>functionName()@fileName:lineNumber</code>)
+     * (functionName()@fileName:lineNumber)
      * instead of Rhino's own Java-inspired format
-     * (<code>    at fileName:lineNumber (functionName)</code>).
+     * (    at fileName:lineNumber (functionName)).
+     *
      * @return true if stack is rendered in Mozilla/Firefox style
      * @see ScriptStackElement
      * @since 1.7R3
@@ -383,12 +402,13 @@ public abstract class RhinoException extends RuntimeException
     }
 
     /**
-     * Tell subclasses of <code>RhinoException</code> whether to
+     * Tell subclasses of RhinoException whether to
      * use the Mozilla/Firefox style of rendering script stacks
-     * (<code>functionName()@fileName:lineNumber</code>)
+     * (functionName()@fileName:lineNumber)
      * instead of Rhino's own Java-inspired format
-     * (<code>    at fileName:lineNumber (functionName)</code>).
+     * (    at fileName:lineNumber (functionName)).
      * Use "setStackStyle" to select between more than just the "Mozilla" and "Rhino" formats.
+     *
      * @param flag whether to render stacks in Mozilla/Firefox style
      * @see ScriptStackElement
      * @since 1.7R3
@@ -400,6 +420,7 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Specify the stack style to use from between three different formats: "Rhino" (the default),
      * "Mozilla", and "V8." See StackStyle for information about each.
+     *
      * @param style the style to select -- an instance of the StackStyle class
      * @see StackStyle
      * @since 1.8.0
@@ -411,6 +432,8 @@ public abstract class RhinoException extends RuntimeException
     /**
      * Return the current stack style in use.
      * Return the current stack style in use.
+     *
+     * @return a {@link org.mozilla.javascript.StackStyle} object.
      */
     public static StackStyle getStackStyle() {
         return stackStyle;

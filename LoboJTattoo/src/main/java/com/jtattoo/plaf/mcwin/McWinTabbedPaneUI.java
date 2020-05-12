@@ -33,10 +33,14 @@ import com.jtattoo.plaf.BaseTabbedPaneUI;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>McWinTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinTabbedPaneUI();
 	}
@@ -45,6 +49,7 @@ public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 
 	private Color altSepColors[] = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		Color controlColorLight = AbstractLookAndFeel.getTheme().getControlColorLight();
@@ -86,6 +91,7 @@ public class McWinTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();

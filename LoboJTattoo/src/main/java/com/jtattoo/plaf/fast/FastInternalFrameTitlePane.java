@@ -31,7 +31,10 @@ import com.jtattoo.plaf.BaseInternalFrameTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>FastInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -40,10 +43,16 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for FastInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public FastInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBackground(Graphics g) {
 		if (isActive()) {
@@ -54,6 +63,7 @@ public class FastInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.fillRect(0, 0, getWidth(), getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintPalette(Graphics g) {
 		if (JTattooUtilities.isFrameActive(this)) {

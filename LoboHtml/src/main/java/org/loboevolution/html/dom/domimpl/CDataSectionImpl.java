@@ -26,12 +26,26 @@ package org.loboevolution.html.dom.domimpl;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Node;
 
+/**
+ * <p>CDataSectionImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CDataSectionImpl extends TextImpl implements CDATASection {
 
+	/**
+	 * <p>Constructor for CDataSectionImpl.</p>
+	 */
 	public CDataSectionImpl() {
 		super();
 	}
 
+	/**
+	 * <p>Constructor for CDataSectionImpl.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 */
 	public CDataSectionImpl(String text) {
 		super(text);
 	}
@@ -41,6 +55,7 @@ public class CDataSectionImpl extends TextImpl implements CDATASection {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeName()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return "#cdata-section";
@@ -51,6 +66,7 @@ public class CDataSectionImpl extends TextImpl implements CDATASection {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeType()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public short getNodeType() {
 		return Node.CDATA_SECTION_NODE;

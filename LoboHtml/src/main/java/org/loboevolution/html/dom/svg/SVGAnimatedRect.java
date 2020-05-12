@@ -21,9 +21,25 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGAnimatedRect interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedRect {
 
+	/**
+	 * <p>getBaseVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGRect} object.
+	 */
 	SVGRect getBaseVal();
 
+	/**
+	 * <p>getAnimVal.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGRect} object.
+	 */
 	SVGRect getAnimVal();
 }

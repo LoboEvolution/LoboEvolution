@@ -2,8 +2,9 @@ package org.loboevolution.img;
 
 /**
  * Strategy for resizing an image inside a component.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 /*
  * These constants are referenced in the following places: -

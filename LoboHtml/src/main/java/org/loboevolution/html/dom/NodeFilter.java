@@ -25,7 +25,19 @@ package org.loboevolution.html.dom;
 
 import org.w3c.dom.Node;
 
+/**
+ * <p>NodeFilter interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface NodeFilter {
 
+	/**
+	 * <p>accept.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @return a boolean.
+	 */
 	boolean accept(Node node);
 }

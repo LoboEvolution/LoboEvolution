@@ -32,10 +32,18 @@ import com.jtattoo.plaf.BaseIcons;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>AluminiumIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumIcons extends BaseIcons {
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -51,6 +59,11 @@ public class AluminiumIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -66,6 +79,11 @@ public class AluminiumIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -81,6 +99,11 @@ public class AluminiumIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -96,6 +119,11 @@ public class AluminiumIcons extends BaseIcons {
 		return minIcon;
 	}
 
+	/**
+	 * <p>getSplitterDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterDownArrowIcon() {
 		if (splitterDownArrowIcon == null) {
 			splitterDownArrowIcon = new LazyImageIcon("aluminium/icons/SplitterDownArrow.gif");
@@ -103,6 +131,11 @@ public class AluminiumIcons extends BaseIcons {
 		return splitterDownArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterLeftArrowIcon() {
 		if (splitterLeftArrowIcon == null) {
 			splitterLeftArrowIcon = new LazyImageIcon("aluminium/icons/SplitterLeftArrow.gif");
@@ -110,6 +143,11 @@ public class AluminiumIcons extends BaseIcons {
 		return splitterLeftArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterRightArrowIcon() {
 		if (splitterRightArrowIcon == null) {
 			splitterRightArrowIcon = new LazyImageIcon("aluminium/icons/SplitterRightArrow.gif");
@@ -117,6 +155,11 @@ public class AluminiumIcons extends BaseIcons {
 		return splitterRightArrowIcon;
 	}
 
+	/**
+	 * <p>getSplitterUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterUpArrowIcon() {
 		if (splitterUpArrowIcon == null) {
 			splitterUpArrowIcon = new LazyImageIcon("aluminium/icons/SplitterUpArrow.gif");
@@ -124,6 +167,11 @@ public class AluminiumIcons extends BaseIcons {
 		return splitterUpArrowIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if (thumbHorIcon == null) {
 			thumbHorIcon = new LazyImageIcon("aluminium/icons/thumb_hor.gif");
@@ -131,6 +179,11 @@ public class AluminiumIcons extends BaseIcons {
 		return thumbHorIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if (thumbHorIconRollover == null) {
 			thumbHorIconRollover = new LazyImageIcon("aluminium/icons/thumb_hor_rollover.gif");
@@ -138,6 +191,11 @@ public class AluminiumIcons extends BaseIcons {
 		return thumbHorIconRollover;
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if (thumbVerIcon == null) {
 			thumbVerIcon = new LazyImageIcon("aluminium/icons/thumb_ver.gif");
@@ -145,6 +203,11 @@ public class AluminiumIcons extends BaseIcons {
 		return thumbVerIcon;
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if (thumbVerIconRollover == null) {
 			thumbVerIconRollover = new LazyImageIcon("aluminium/icons/thumb_ver_rollover.gif");

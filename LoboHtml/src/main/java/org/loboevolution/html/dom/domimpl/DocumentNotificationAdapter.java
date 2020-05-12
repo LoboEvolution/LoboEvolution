@@ -21,38 +21,49 @@
 package org.loboevolution.html.dom.domimpl;
 
 /**
- * An abstract implementation of {@link DocumentNotificationListener} with blank
+ * An abstract implementation of {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener} with blank
  * methods, provided for convenience.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public abstract class DocumentNotificationAdapter implements DocumentNotificationListener {
+	/** {@inheritDoc} */
 	@Override
 	public void allInvalidated() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void externalScriptLoading(NodeImpl node) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidated(NodeImpl node) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void lookInvalidated(NodeImpl node) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void nodeLoaded(NodeImpl node) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void positionInvalidated(NodeImpl node) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void sizeInvalidated(NodeImpl node) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void structureInvalidated(NodeImpl node) {
 	}

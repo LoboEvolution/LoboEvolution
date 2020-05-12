@@ -24,12 +24,23 @@ package org.loboevolution.html.dom.smil;
 /**
  * Declares rendering surface for an element. See the region attribute
  * definition .
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILRegionInterface {
 	/**
+	 * <p>getRegion.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.smil.SMILRegionElement} object.
 	 */
 	public SMILRegionElement getRegion();
 
+	/**
+	 * <p>setRegion.</p>
+	 *
+	 * @param region a {@link org.loboevolution.html.dom.smil.SMILRegionElement} object.
+	 */
 	public void setRegion(SMILRegionElement region);
 
 }

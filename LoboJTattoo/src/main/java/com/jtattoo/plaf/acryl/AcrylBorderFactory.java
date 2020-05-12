@@ -29,12 +29,20 @@ import com.jtattoo.plaf.AbstractBorderFactory;
 import com.jtattoo.plaf.BaseBorders;
 
 /**
+ * <p>AcrylBorderFactory class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylBorderFactory implements AbstractBorderFactory {
 
 	private static AcrylBorderFactory instance = null;
 
+	/**
+	 * <p>Getter for the field instance.</p>
+	 *
+	 * @return a {@link com.jtattoo.plaf.acryl.AcrylBorderFactory} object.
+	 */
 	public static synchronized AcrylBorderFactory getInstance() {
 		if (instance == null) {
 			instance = new AcrylBorderFactory();
@@ -45,96 +53,115 @@ public class AcrylBorderFactory implements AbstractBorderFactory {
 	private AcrylBorderFactory() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getButtonBorder() {
 		return AcrylBorders.getButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getComboBoxBorder() {
 		return AcrylBorders.getComboBoxBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getDesktopIconBorder() {
 		return BaseBorders.getDesktopIconBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getFocusFrameBorder() {
 		return BaseBorders.getFocusFrameBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getInternalFrameBorder() {
 		return AcrylBorders.getInternalFrameBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getMenuBarBorder() {
 		return BaseBorders.getMenuBarBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getMenuItemBorder() {
 		return BaseBorders.getMenuItemBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getPaletteBorder() {
 		return BaseBorders.getPaletteBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getPopupMenuBorder() {
 		return BaseBorders.getPopupMenuBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getProgressBarBorder() {
 		return BaseBorders.getProgressBarBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getScrollPaneBorder() {
 		return AcrylBorders.getScrollPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getSpinnerBorder() {
 		return AcrylBorders.getSpinnerBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTabbedPaneBorder() {
 		return BaseBorders.getTabbedPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTableHeaderBorder() {
 		return BaseBorders.getTableHeaderBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTableScrollPaneBorder() {
 		return AcrylBorders.getTableScrollPaneBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTextBorder() {
 		return AcrylBorders.getTextBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getTextFieldBorder() {
 		return AcrylBorders.getTextFieldBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getToggleButtonBorder() {
 		return AcrylBorders.getToggleButtonBorder();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Border getToolBarBorder() {
 		return BaseBorders.getToolBarBorder();

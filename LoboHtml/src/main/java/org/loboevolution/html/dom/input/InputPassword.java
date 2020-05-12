@@ -11,12 +11,24 @@ import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
 
+/**
+ * <p>InputPassword class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputPassword {
 
 	private HTMLInputElementImpl modelNode;
 	
 	JPasswordField pwd = new JPasswordField();
 
+	/**
+	 * <p>Constructor for InputPassword.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputPassword(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
 		if (modelNode.getTitle() != null)
@@ -57,6 +69,9 @@ public class InputPassword {
 		}
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		pwd.setText("");
 	}

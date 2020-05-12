@@ -12,14 +12,26 @@ import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.info.TabInfo;
 import org.loboevolution.store.TabStore;
 
+/**
+ * <p>DropTargetListenerImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DropTargetListenerImpl extends DropTargetAdapter {
 
 	private final DnDTabbedPane tabbed;
 
+	/**
+	 * <p>Constructor for DropTargetListenerImpl.</p>
+	 *
+	 * @param tabbed a {@link org.loboevolution.tab.DnDTabbedPane} object.
+	 */
 	public DropTargetListenerImpl(DnDTabbedPane tabbed) {
 		this.tabbed = tabbed;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragOver(final DropTargetDragEvent dtde) {
 		this.tabbed.getGlass().setDragLocation(dtde.getLocation());
@@ -27,6 +39,7 @@ public class DropTargetListenerImpl extends DropTargetAdapter {
 		this.tabbed.getGlass().repaint();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void drop(DropTargetDropEvent e) {
 		final Point p = e.getLocation();

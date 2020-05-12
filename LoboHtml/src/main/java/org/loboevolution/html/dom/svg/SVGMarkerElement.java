@@ -20,32 +20,87 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGMarkerElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGMarkerElement
 		extends SVGElement, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGFitToViewBox {
 	// Marker Unit Types
+	/** Constant SVG_MARKERUNITS_UNKNOWN=0 */
 	static final short SVG_MARKERUNITS_UNKNOWN = 0;
+	/** Constant SVG_MARKERUNITS_USERSPACEONUSE=1 */
 	static final short SVG_MARKERUNITS_USERSPACEONUSE = 1;
+	/** Constant SVG_MARKERUNITS_STROKEWIDTH=2 */
 	static final short SVG_MARKERUNITS_STROKEWIDTH = 2;
 	// Marker Orientation Types
+	/** Constant SVG_MARKER_ORIENT_UNKNOWN=0 */
 	static final short SVG_MARKER_ORIENT_UNKNOWN = 0;
+	/** Constant SVG_MARKER_ORIENT_AUTO=1 */
 	static final short SVG_MARKER_ORIENT_AUTO = 1;
+	/** Constant SVG_MARKER_ORIENT_ANGLE=2 */
 	static final short SVG_MARKER_ORIENT_ANGLE = 2;
 
+	/**
+	 * <p>getRefX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getRefX();
 
+	/**
+	 * <p>getRefY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getRefY();
 
+	/**
+	 * <p>getMarkerUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getMarkerUnits();
 
+	/**
+	 * <p>getMarkerWidth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getMarkerWidth();
 
+	/**
+	 * <p>getMarkerHeight.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getMarkerHeight();
 
+	/**
+	 * <p>getOrientType.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getOrientType();
 
+	/**
+	 * <p>getOrientAngle.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedAngle} object.
+	 */
 	SVGAnimatedAngle getOrientAngle();
 
+	/**
+	 * <p>setOrientToAuto.</p>
+	 */
 	void setOrientToAuto();
 
+	/**
+	 * <p>setOrientToAngle.</p>
+	 *
+	 * @param angle a {@link org.loboevolution.html.dom.svg.SVGAngle} object.
+	 */
 	void setOrientToAngle(SVGAngle angle);
 }

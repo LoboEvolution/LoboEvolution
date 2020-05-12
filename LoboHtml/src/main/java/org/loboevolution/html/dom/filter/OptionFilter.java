@@ -24,8 +24,15 @@ import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Node;
 
+/**
+ * <p>OptionFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class OptionFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return node instanceof HTMLOptionElement;

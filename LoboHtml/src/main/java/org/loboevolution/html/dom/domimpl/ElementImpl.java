@@ -41,8 +41,21 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
+/**
+ * <p>ElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ElementImpl extends DOMFunctionImpl implements Element {
 
+	/**
+	 * <p>isTagName.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 * @param name a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	protected static boolean isTagName(Node node, String name) {
 		return node.getNodeName().equalsIgnoreCase(name);
 	}
@@ -53,10 +66,21 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 
 	private final String name;
 
+	/**
+	 * <p>Constructor for ElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public ElementImpl(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * <p>assignAttributeField.</p>
+	 *
+	 * @param normalName a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 */
 	protected void assignAttributeField(String normalName, String value) {
 		boolean isName = false;
 		if ("id".equals(normalName) || (isName = "name".equals(normalName))) {
@@ -77,12 +101,14 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Node createSimilarNode() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		return doc == null ? null : doc.createElement(getTagName());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equalAttributes(Node arg) {
 		if (arg instanceof ElementImpl) {
@@ -109,6 +135,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 
 	// private String title;
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAttribute(String name) {
 		final String normalName = normalizeAttributeName(name);
@@ -118,6 +145,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Attr getAttributeNode(String name) {
 		final String normalName = normalizeAttributeName(name);
@@ -133,6 +161,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getattributes()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public NamedNodeMap getAttributes() {
 		synchronized (this) {
@@ -145,15 +174,30 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/**
+	 * <p>getDir.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getDir() {
 		return getAttribute("dir");
 	}
 
+	/**
+	 * <p>Getter for the field id.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getId() {
 		final String id = this.id;
 		return id == null ? "" : id;
 	}
 
+	/**
+	 * <p>getLang.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getLang() {
 		return getAttribute("lang");
 	}
@@ -163,6 +207,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getLocalName()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		return getNodeName();
@@ -173,6 +218,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeName()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return this.name;
@@ -183,6 +229,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeType()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public short getNodeType() {
 		return Node.ELEMENT_NODE;
@@ -193,6 +240,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getNodeValue()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() throws DOMException {
 		return null;
@@ -201,8 +249,9 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/**
 	 * Gets inner text of the element, possibly including text in comments. This can
 	 * be used to get Javascript code out of a SCRIPT element.
-	 * 
-	 * @param includeComment
+	 *
+	 * @param includeComment a boolean.
+	 * @return a {@link java.lang.String} object.
 	 */
 	protected String getRawInnerText(boolean includeComment) {
 		StringBuilder sb = null;
@@ -240,15 +289,22 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTagName() {
 		return getNodeName();
 	}
 
+	/**
+	 * <p>getTitle.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTitle() {
 		return getAttribute("title");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttribute(String name) {
 		final String normalName = normalizeAttributeName(name);
@@ -258,6 +314,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttributes() {
 		synchronized (this) {
@@ -266,6 +323,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected String htmlEncodeChildText(String text) {
 		if (HtmlParser.isDecodeEntities(this.name)) {
@@ -275,10 +333,17 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/**
+	 * <p>normalizeAttributeName.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	protected final String normalizeAttributeName(String name) {
 		return name.toLowerCase();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void removeAttribute(String name) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
@@ -291,6 +356,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Attr removeAttributeNode(Attr oldAttr) throws DOMException {
 		final String normalName = normalizeAttributeName(oldAttr.getName());
@@ -305,6 +371,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAttribute(String name, String value) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
@@ -322,6 +389,10 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	/**
 	 * Fast method to set attributes. It is not thread safe. Calling thread should
 	 * hold a treeLock.
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public void setAttributeImpl(String name, String value) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
@@ -334,6 +405,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		attribs.put(normalName, value);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Attr setAttributeNode(Attr newAttr) throws DOMException {
 		final String normalName = normalizeAttributeName(newAttr.getName());
@@ -349,14 +421,25 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		return newAttr;
 	}
 
+	/**
+	 * <p>setDir.</p>
+	 *
+	 * @param dir a {@link java.lang.String} object.
+	 */
 	public void setDir(String dir) {
 		setAttribute("dir", dir);
 	}
 
+	/**
+	 * <p>Setter for the field id.</p>
+	 *
+	 * @param id a {@link java.lang.String} object.
+	 */
 	public void setId(String id) {
 		setAttribute("id", id);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setIdAttribute(String name, boolean isId) throws DOMException {
 		final String normalName = normalizeAttributeName(name);
@@ -365,6 +448,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setIdAttributeNode(Attr idAttr, boolean isId) throws DOMException {
 		final String normalName = normalizeAttributeName(idAttr.getName());
@@ -373,6 +457,11 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		}
 	}
 
+	/**
+	 * <p>setInnerText.</p>
+	 *
+	 * @param newText a {@link java.lang.String} object.
+	 */
 	public void setInnerText(String newText) {
 		final Document document = this.document;
 		if (document == null) {
@@ -384,6 +473,11 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		appendChild(textNode);
 	}
 
+	/**
+	 * <p>setLang.</p>
+	 *
+	 * @param lang a {@link java.lang.String} object.
+	 */
 	public void setLang(String lang) {
 		setAttribute("lang", lang);
 	}
@@ -393,15 +487,22 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#setNodeValue(java.lang.String)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
 		// nop
 	}
 
+	/**
+	 * <p>setTitle.</p>
+	 *
+	 * @param title a {@link java.lang.String} object.
+	 */
 	public void setTitle(String title) {
 		setAttribute("title", title);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		final StringBuilder sb = new StringBuilder();
@@ -422,6 +523,11 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		return sb.toString();
 	}
 	
+	/**
+	 * <p>getFirstElementChild.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
 	public Element getFirstElementChild() {
 		for (Node n : Nodes.iterable(nodeList)) {
 			if (n instanceof Element) {
@@ -431,6 +537,11 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		return null;
 	}
 
+	/**
+	 * <p>getLastElementChild.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
 	public Element getLastElementChild() {
 		final int N = this.nodeList.getLength();
 		for (int i = N - 1; i >= 0; i--) {
@@ -443,6 +554,11 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		return null;
 	}
 
+	/**
+	 * <p>getChildElementCount.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getChildElementCount() {
 		int count = 0;
 		for (Node n : Nodes.iterable(nodeList)) {

@@ -38,6 +38,9 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLOptionElement extends HTMLElement {
 	/**
@@ -45,34 +48,42 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * attribute does not change if the state of the corresponding form control, in
 	 * an interactive user agent, changes. See the selected attribute definition in
 	 * HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a boolean.
 	 */
 	boolean getDefaultSelected();
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getDisabled();
 
 	/**
-	 * Returns the <code>FORM</code> element containing this control. Returns
-	 * <code>null</code> if this control is not within the context of a form.
+	 * Returns the FORM element containing this control. Returns
+	 * null if this control is not within the context of a form.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
 	 */
 	HTMLFormElement getForm();
 
 	/**
-	 * The index of this <code>OPTION</code> in its parent <code>SELECT</code> ,
+	 * The index of this OPTION in its parent SELECT ,
 	 * starting from 0.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getIndex();
 
 	/**
 	 * Option label for use in hierarchical menus. See the label attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getLabel();
 
@@ -81,17 +92,23 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * interactive user agent. Changing this attribute changes the state of the form
 	 * control, but does not change the value of the HTML selected attribute of the
 	 * element.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getSelected();
 
 	/**
 	 * The text contained within the option element.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getText();
 
 	/**
 	 * The current form control value. See the value attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getValue();
 
@@ -100,20 +117,25 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * attribute does not change if the state of the corresponding form control, in
 	 * an interactive user agent, changes. See the selected attribute definition in
 	 * HTML 4.01.
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param defaultSelected a boolean.
 	 */
 	void setDefaultSelected(boolean defaultSelected);
 
 	/**
 	 * The control is unavailable in this context. See the disabled attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param disabled a boolean.
 	 */
 	void setDisabled(boolean disabled);
 
 	/**
 	 * Option label for use in hierarchical menus. See the label attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param label a {@link java.lang.String} object.
 	 */
 	void setLabel(String label);
 
@@ -122,12 +144,16 @@ public interface HTMLOptionElement extends HTMLElement {
 	 * interactive user agent. Changing this attribute changes the state of the form
 	 * control, but does not change the value of the HTML selected attribute of the
 	 * element.
+	 *
+	 * @param selected a boolean.
 	 */
 	void setSelected(boolean selected);
 
 	/**
 	 * The current form control value. See the value attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param value a {@link java.lang.String} object.
 	 */
 	void setValue(String value);
 

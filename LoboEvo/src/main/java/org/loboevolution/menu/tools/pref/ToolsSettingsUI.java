@@ -26,6 +26,9 @@ import org.loboevolution.store.ToolsStore;
 
 /**
  * The Class ToolsSettingsUI.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ToolsSettingsUI extends AbstractSettingsUI {
 
@@ -122,6 +125,11 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	}
 
+	/**
+	 * <p>Getter for the field bookmarkButton.</p>
+	 *
+	 * @return a {@link javax.swing.JButton} object.
+	 */
 	public JButton getBookmarkButton() {
 		return this.bookmarkButton;
 	}
@@ -143,6 +151,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field chromeBookmarkPanel.</p>
+	 *
 	 * @return the chromeBookmarkPanel
 	 */
 	public CheckBoxPanel getChromeBookmarkPanel() {
@@ -150,6 +160,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field chromeHistoryPanel.</p>
+	 *
 	 * @return the chromeHistoryPanel
 	 */
 	public CheckBoxPanel getChromeHistoryPanel() {
@@ -157,6 +169,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field chromePanel.</p>
+	 *
 	 * @return the chromePanel
 	 */
 	public CheckBoxPanel getChromePanel() {
@@ -196,6 +210,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field historyButton.</p>
+	 *
 	 * @return the historyButton
 	 */
 	public JButton getHistoryButton() {
@@ -203,6 +219,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field importButton.</p>
+	 *
 	 * @return the importButton
 	 */
 	public JButton getImportButton() {
@@ -210,6 +228,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field mozillaBookmarkPanel.</p>
+	 *
 	 * @return the mozillaBookmarkPanel
 	 */
 	public CheckBoxPanel getMozillaBookmarkPanel() {
@@ -217,6 +237,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field mozillaHistoryPanel.</p>
+	 *
 	 * @return the mozillaHistoryPanel
 	 */
 	public CheckBoxPanel getMozillaHistoryPanel() {
@@ -224,6 +246,8 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	}
 
 	/**
+	 * <p>Getter for the field mozillaPanel.</p>
+	 *
 	 * @return the mozillaPanel
 	 */
 	public CheckBoxPanel getMozillaPanel() {
@@ -255,6 +279,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void restoreDefaults() {
 		final ToolsStore settings = new ToolsStore();
@@ -262,6 +287,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		loadSettings();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void save() {
 		final ToolsStore settings = new ToolsStore();

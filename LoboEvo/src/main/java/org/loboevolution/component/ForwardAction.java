@@ -14,6 +14,12 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>ForwardAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ForwardAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -22,11 +28,18 @@ public class ForwardAction extends AbstractAction {
 
 	private final IBrowserPanel panel;
 
+	/**
+	 * <p>Constructor for ForwardAction.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 * @param addressBar a {@link javax.swing.JTextField} object.
+	 */
 	public ForwardAction(IBrowserPanel panel, JTextField addressBar) {
 		this.panel = panel;
 		this.addressBar = addressBar;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		NavigationStore nh = new NavigationStore();

@@ -13,6 +13,12 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * <p>ProgressBarUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 
 	private static final long serialVersionUID = 1L;
@@ -21,6 +27,11 @@ public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 	private final StorageManager storage;
 	private final JTextArea taskOutput;
 
+	/**
+	 * <p>Constructor for ProgressBarUI.</p>
+	 *
+	 * @param frame a {@link javax.swing.JFrame} object.
+	 */
 	public ProgressBarUI(JFrame frame) {
 		super(new BorderLayout());
 
@@ -46,6 +57,7 @@ public class ProgressBarUI extends JPanel implements PropertyChangeListener {
 		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		if ("progress" == evt.getPropertyName()) {

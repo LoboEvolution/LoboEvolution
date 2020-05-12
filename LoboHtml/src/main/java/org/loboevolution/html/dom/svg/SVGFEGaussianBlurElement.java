@@ -20,12 +20,39 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEGaussianBlurElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEGaussianBlurElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 
+	/**
+	 * <p>getStdDeviationX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getStdDeviationX();
 
+	/**
+	 * <p>getStdDeviationY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getStdDeviationY();
 
+	/**
+	 * <p>setStdDeviation.</p>
+	 *
+	 * @param stdDeviationX a float.
+	 * @param stdDeviationY a float.
+	 */
 	void setStdDeviation(float stdDeviationX, float stdDeviationY);
 }

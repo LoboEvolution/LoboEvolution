@@ -13,11 +13,10 @@ package org.mozilla.javascript;
  * in the jsref package.
  *
  * @see org.mozilla.javascript.Parser
- *
  * @author Mike McCabe
  * @author Brendan Eich
+ * @version $Id: $Id
  */
-
 public class Token
 {
     public static enum CommentType {
@@ -25,6 +24,7 @@ public class Token
     }
 
     // debug flags
+    /** Constant printTrees=false */
     public static final boolean printTrees = false;
     static final boolean printICode = false;
     static final boolean printNames = printTrees || printICode;
@@ -34,6 +34,89 @@ public class Token
      * jsscan.c.
      */
 
+    /** Constant EOF=0 */
+    /** Constant EOL=1 */
+    /** Constant FIRST_BYTECODE_TOKEN=2 */
+    /** Constant ENTERWITH=2 */
+    /** Constant LEAVEWITH=3 */
+    /** Constant RETURN=4 */
+    /** Constant GOTO=5 */
+    /** Constant IFEQ=6 */
+    /** Constant IFNE=7 */
+    /** Constant SETNAME=8 */
+    /** Constant BITOR=9 */
+    /** Constant BITXOR=10 */
+    /** Constant BITAND=11 */
+    /** Constant EQ=12 */
+    /** Constant NE=13 */
+    /** Constant LT=14 */
+    /** Constant LE=15 */
+    /** Constant GT=16 */
+    /** Constant GE=17 */
+    /** Constant LSH=18 */
+    /** Constant RSH=19 */
+    /** Constant URSH=20 */
+    /** Constant ADD=21 */
+    /** Constant SUB=22 */
+    /** Constant MUL=23 */
+    /** Constant DIV=24 */
+    /** Constant MOD=25 */
+    /** Constant NOT=26 */
+    /** Constant BITNOT=27 */
+    /** Constant POS=28 */
+    /** Constant NEG=29 */
+    /** Constant NEW=30 */
+    /** Constant DELPROP=31 */
+    /** Constant TYPEOF=32 */
+    /** Constant GETPROP=33 */
+    /** Constant GETPROPNOWARN=34 */
+    /** Constant SETPROP=35 */
+    /** Constant GETELEM=36 */
+    /** Constant SETELEM=37 */
+    /** Constant CALL=38 */
+    /** Constant NAME=39 */
+    /** Constant NUMBER=40 */
+    /** Constant STRING=41 */
+    /** Constant NULL=42 */
+    /** Constant THIS=43 */
+    /** Constant FALSE=44 */
+    /** Constant TRUE=45 */
+    /** Constant SHEQ=46 */
+    /** Constant SHNE=47 */
+    /** Constant REGEXP=48 */
+    /** Constant BINDNAME=49 */
+    /** Constant THROW=50 */
+    /** Constant RETHROW=51 */
+    /** Constant IN=52 */
+    /** Constant INSTANCEOF=53 */
+    /** Constant LOCAL_LOAD=54 */
+    /** Constant GETVAR=55 */
+    /** Constant SETVAR=56 */
+    /** Constant CATCH_SCOPE=57 */
+    /** Constant ENUM_INIT_KEYS=58 */
+    /** Constant ENUM_INIT_VALUES=59 */
+    /** Constant ENUM_INIT_ARRAY=60 */
+    /** Constant ENUM_INIT_VALUES_IN_ORDER=61 */
+    /** Constant ENUM_NEXT=62 */
+    /** Constant ENUM_ID=63 */
+    /** Constant THISFN=64 */
+    /** Constant RETURN_RESULT=65 */
+    /** Constant ARRAYLIT=66 */
+    /** Constant OBJECTLIT=67 */
+    /** Constant GET_REF=68 */
+    /** Constant SET_REF=69 */
+    /** Constant DEL_REF=70 */
+    /** Constant REF_CALL=71 */
+    /** Constant REF_SPECIAL=72 */
+    /** Constant YIELD=73 */
+    /** Constant STRICT_SETNAME=74 */
+    /** Constant DEFAULTNAMESPACE=75 */
+    /** Constant ESCXMLATTR=76 */
+    /** Constant ESCXMLTEXT=77 */
+    /** Constant REF_MEMBER=78 */
+    /** Constant REF_NS_MEMBER=79 */
+    /** Constant REF_NAME=80 */
+    /** Constant REF_NS_NAME=81 */
     public final static int
     // start enum
         ERROR          = -1, // well-known as the only code < EOF
@@ -127,6 +210,28 @@ public class Token
         REF_NS_NAME    = 81; // Reference for ns::y, @ns::y@[y] etc.
 
         // End of interpreter bytecodes
+    /** Constant LAST_BYTECODE_TOKEN=REF_NS_NAME */
+    /** Constant TRY=82 */
+    /** Constant SEMI=83 */
+    /** Constant LB=84 */
+    /** Constant RB=85 */
+    /** Constant LC=86 */
+    /** Constant RC=87 */
+    /** Constant LP=88 */
+    /** Constant RP=89 */
+    /** Constant COMMA=90 */
+    /** Constant ASSIGN=91 */
+    /** Constant ASSIGN_BITOR=92 */
+    /** Constant ASSIGN_BITXOR=93 */
+    /** Constant ASSIGN_BITAND=94 */
+    /** Constant ASSIGN_LSH=95 */
+    /** Constant ASSIGN_RSH=96 */
+    /** Constant ASSIGN_URSH=97 */
+    /** Constant ASSIGN_ADD=98 */
+    /** Constant ASSIGN_SUB=99 */
+    /** Constant ASSIGN_MUL=100 */
+    /** Constant ASSIGN_DIV=101 */
+    /** Constant ASSIGN_MOD=102 */
     public final static int
         LAST_BYTECODE_TOKEN    = REF_NS_NAME,
 
@@ -153,6 +258,72 @@ public class Token
         ASSIGN_DIV     = 101,  // /=
         ASSIGN_MOD     = 102;  // %=
 
+    /** Constant FIRST_ASSIGN=ASSIGN */
+    /** Constant LAST_ASSIGN=ASSIGN_MOD */
+    /** Constant HOOK=103 */
+    /** Constant COLON=104 */
+    /** Constant OR=105 */
+    /** Constant AND=106 */
+    /** Constant INC=107 */
+    /** Constant DEC=108 */
+    /** Constant DOT=109 */
+    /** Constant FUNCTION=110 */
+    /** Constant EXPORT=111 */
+    /** Constant IMPORT=112 */
+    /** Constant IF=113 */
+    /** Constant ELSE=114 */
+    /** Constant SWITCH=115 */
+    /** Constant CASE=116 */
+    /** Constant DEFAULT=117 */
+    /** Constant WHILE=118 */
+    /** Constant DO=119 */
+    /** Constant FOR=120 */
+    /** Constant BREAK=121 */
+    /** Constant CONTINUE=122 */
+    /** Constant VAR=123 */
+    /** Constant WITH=124 */
+    /** Constant CATCH=125 */
+    /** Constant FINALLY=126 */
+    /** Constant VOID=127 */
+    /** Constant RESERVED=128 */
+    /** Constant EMPTY=129 */
+    /** Constant BLOCK=130 */
+    /** Constant LABEL=131 */
+    /** Constant TARGET=132 */
+    /** Constant LOOP=133 */
+    /** Constant EXPR_VOID=134 */
+    /** Constant EXPR_RESULT=135 */
+    /** Constant JSR=136 */
+    /** Constant SCRIPT=137 */
+    /** Constant TYPEOFNAME=138 */
+    /** Constant USE_STACK=139 */
+    /** Constant SETPROP_OP=140 */
+    /** Constant SETELEM_OP=141 */
+    /** Constant LOCAL_BLOCK=142 */
+    /** Constant SET_REF_OP=143 */
+    /** Constant DOTDOT=144 */
+    /** Constant COLONCOLON=145 */
+    /** Constant XML=146 */
+    /** Constant DOTQUERY=147 */
+    /** Constant XMLATTR=148 */
+    /** Constant XMLEND=149 */
+    /** Constant TO_OBJECT=150 */
+    /** Constant TO_DOUBLE=151 */
+    /** Constant GET=152 */
+    /** Constant SET=153 */
+    /** Constant LET=154 */
+    /** Constant CONST=155 */
+    /** Constant SETCONST=156 */
+    /** Constant SETCONSTVAR=157 */
+    /** Constant ARRAYCOMP=158 */
+    /** Constant LETEXPR=159 */
+    /** Constant WITHEXPR=160 */
+    /** Constant DEBUGGER=161 */
+    /** Constant COMMENT=162 */
+    /** Constant GENEXPR=163 */
+    /** Constant METHOD=164 */
+    /** Constant ARROW=165 */
+    /** Constant LAST_TOKEN=166 */
     public final static int
         FIRST_ASSIGN   = ASSIGN,
         LAST_ASSIGN    = ASSIGN_MOD,
@@ -237,6 +408,9 @@ public class Token
      * Returns a name for the token.  If Rhino is compiled with certain
      * hardcoded debugging flags in this file, it calls {@code #typeToName};
      * otherwise it returns a string whose value is the token number.
+     *
+     * @param token a int.
+     * @return a {@link java.lang.String} object.
      */
     public static String name(int token)
     {
@@ -249,6 +423,7 @@ public class Token
     /**
      * Always returns a human-readable string for the token name.
      * For instance, {@link #FINALLY} has the name "FINALLY".
+     *
      * @param token the token code
      * @return the actual name for the token code
      */
@@ -427,7 +602,8 @@ public class Token
 
     /**
      * Convert a keyword token to a name string for use with the
-     * {@link Context#FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER} feature.
+     * {@link org.mozilla.javascript.Context#FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER} feature.
+     *
      * @param token A token
      * @return the corresponding name string
      */
@@ -471,6 +647,7 @@ public class Token
 
     /**
      * Return true if the passed code is a valid Token constant.
+     *
      * @param code a potential token code
      * @return true if it's a known token
      */

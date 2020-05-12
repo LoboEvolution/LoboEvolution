@@ -23,7 +23,24 @@ package org.loboevolution.common;
 import java.awt.Frame;
 import java.awt.Graphics;
 
+/**
+ * <p>GUITasks class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class GUITasks {
+	/**
+	 * <p>drawDashed.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param x1 a int.
+	 * @param y1 a int.
+	 * @param x2 a int.
+	 * @param y2 a int.
+	 * @param dashSize a int.
+	 * @param gapSize a int.
+	 */
 	public static void drawDashed(Graphics g, int x1, int y1, int x2, int y2, int dashSize, int gapSize) {
 		if (x2 < x1) {
 			final int temp = x1;
@@ -72,6 +89,11 @@ public class GUITasks {
 		}
 	}
 
+	/**
+	 * <p>getTopFrame.</p>
+	 *
+	 * @return a {@link java.awt.Frame} object.
+	 */
 	public static Frame getTopFrame() {
 		final Frame[] frames = Frame.getFrames();
 		for (final Frame frame : frames) {

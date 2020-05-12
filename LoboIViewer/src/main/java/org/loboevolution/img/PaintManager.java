@@ -28,6 +28,9 @@ import java.awt.image.BufferedImage;
 
 /**
  * Helper class that manages the actual painting.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class PaintManager {
 	private BufferedImage cachedImage = null;
@@ -35,6 +38,11 @@ public class PaintManager {
 	private AffineTransform cachedTransform;
 	private ImageComponent ic;
 	
+	/**
+	 * <p>Constructor for PaintManager.</p>
+	 *
+	 * @param ic a {@link org.loboevolution.img.ImageComponent} object.
+	 */
 	public PaintManager(ImageComponent ic) {
 		this.ic = ic; 
 	}
@@ -82,6 +90,11 @@ public class PaintManager {
 		cachedImageChanged = true;
 	}
 
+	/**
+	 * <p>paintComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	public void paintComponent(Graphics g) {
 		if (ic.getImage() == null) {
 			Graphics2D gg = (Graphics2D) g.create();

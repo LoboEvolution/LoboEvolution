@@ -37,37 +37,37 @@ import org.w3c.dom.xpath.XPathNamespace;
 /**
  *
  *
- * The <code>XPathNamespace</code> interface is returned by
- * <code>XPathResult</code> interfaces to represent the XPath namespace node
+ * The XPathNamespace interface is returned by
+ * XPathResult interfaces to represent the XPath namespace node
  * type that DOM lacks. There is no public constructor for this node type.
  * Attempts to place it into a hierarchy or a NamedNodeMap result in a
- * <code>DOMException</code> with the code <code>HIERARCHY_REQUEST_ERR</code> .
+ * DOMException with the code HIERARCHY_REQUEST_ERR .
  * This node is read only, so methods or setting of attributes that would mutate
  * the node result in a DOMException with the code
- * <code>NO_MODIFICATION_ALLOWED_ERR</code>.
+ * NO_MODIFICATION_ALLOWED_ERR.
  * <p>
- * The core specification describes attributes of the <code>Node</code>
+ * The core specification describes attributes of the Node
  * interface that are different for different node node types but does not
- * describe <code>XPATH_NAMESPACE_NODE</code>, so here is a description of those
- * attributes for this node type. All attributes of <code>Node</code> not
- * described in this section have a <code>null</code> or <code>false</code>
+ * describe XPATH_NAMESPACE_NODE, so here is a description of those
+ * attributes for this node type. All attributes of Node not
+ * described in this section have a null or false
  * value.
  * <p>
- * <code>ownerDocument</code> matches the <code>ownerDocument</code> of the
- * <code>ownerElement</code> even if the element is later adopted.
+ * ownerDocument matches the ownerDocument of the
+ * ownerElement even if the element is later adopted.
  * <p>
- * <code>prefix</code> is the prefix of the namespace represented by the node.
+ * prefix is the prefix of the namespace represented by the node.
  * <p>
- * <code>nodeName</code> is the same as <code>prefix</code>.
+ * nodeName is the same as prefix.
  * <p>
- * <code>nodeType</code> is equal to <code>XPATH_NAMESPACE_NODE</code>.
+ * nodeType is equal to XPATH_NAMESPACE_NODE.
  * <p>
- * <code>namespaceURI</code> is the namespace URI of the namespace represented
+ * namespaceURI is the namespace URI of the namespace represented
  * by the node.
  * <p>
- * <code>adoptNode</code>, <code>cloneNode</code>, and <code>importNode</code>
- * fail on this node type by raising a <code>DOMException</code> with the code
- * <code>NOT_SUPPORTED_ERR</code>.In future versions of the XPath specification,
+ * adoptNode, cloneNode, and importNode
+ * fail on this node type by raising a DOMException with the code
+ * NOT_SUPPORTED_ERR.In future versions of the XPath specification,
  * the definition of a namespace node may be changed incomatibly, in which case
  * incompatible changes to field values may be required to implement versions
  * beyond XPath 1.0.
@@ -78,10 +78,11 @@ import org.w3c.dom.xpath.XPathNamespace;
  *
  * This implementation wraps the DOM attribute node that contained the namespace
  * declaration.
+ *
  * 
- * @xsl.usage internal
+ * @author utente
+ * @version $Id: $Id
  */
-
 public class XPathNamespaceImpl implements XPathNamespace {
 
 	/** The m_attribute node. */
@@ -97,177 +98,133 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		m_attributeNode = node;
 	}
 
-	/**
-	 * @see org.apache.xalan.dom3.xpath.XPathNamespace#getOwnerElement()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Element getOwnerElement() {
 		return ((Attr) m_attributeNode).getOwnerElement();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getNodeName()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return "#namespace";
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getNodeValue()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() throws DOMException {
 		return m_attributeNode.getNodeValue();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#setNodeValue(String)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String arg0) throws DOMException {
 		// Method not implemented
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getNodeType()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public short getNodeType() {
 		return XPathNamespace.XPATH_NAMESPACE_NODE;
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getParentNode()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node getParentNode() {
 		return m_attributeNode.getParentNode();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getChildNodes()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public NodeList getChildNodes() {
 		return m_attributeNode.getChildNodes();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getFirstChild()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node getFirstChild() {
 		return m_attributeNode.getFirstChild();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getLastChild()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node getLastChild() {
 		return m_attributeNode.getLastChild();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getPreviousSibling()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node getPreviousSibling() {
 		return m_attributeNode.getPreviousSibling();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getNextSibling()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node getNextSibling() {
 		return m_attributeNode.getNextSibling();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getAttributes()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public NamedNodeMap getAttributes() {
 		return m_attributeNode.getAttributes();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getOwnerDocument()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Document getOwnerDocument() {
 		return m_attributeNode.getOwnerDocument();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#insertBefore(Node, Node)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node insertBefore(Node arg0, Node arg1) throws DOMException {
 		return null;
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#replaceChild(Node, Node)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node replaceChild(Node arg0, Node arg1) throws DOMException {
 		return null;
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#removeChild(Node)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node removeChild(Node arg0) throws DOMException {
 		return null;
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#appendChild(Node)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node appendChild(Node arg0) throws DOMException {
 		return null;
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#hasChildNodes()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasChildNodes() {
 		return false;
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#cloneNode(boolean)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode(boolean arg0) {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, null);
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#normalize()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void normalize() {
 		m_attributeNode.normalize();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#isSupported(String, String)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupported(String arg0, String arg1) {
 		return m_attributeNode.isSupported(arg0, arg1);
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getNamespaceURI()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNamespaceURI() {
 
@@ -276,94 +233,98 @@ public class XPathNamespaceImpl implements XPathNamespace {
 		return m_attributeNode.getNodeValue();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getPrefix()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getPrefix() {
 		return m_attributeNode.getPrefix();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#setPrefix(String)
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setPrefix(String arg0) throws DOMException {
 		// Method not implemented
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#getLocalName()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		// For namespace node, the local name is the same as the prefix
 		return m_attributeNode.getPrefix();
 	}
 
-	/**
-	 * @see org.w3c.dom.Node#hasAttributes()
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttributes() {
 		return m_attributeNode.hasAttributes();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short compareDocumentPosition(Node other) throws DOMException {
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTextContent() throws DOMException {
 		return textContent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) throws DOMException {
 		this.textContent = textContent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSameNode(Node other) {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String lookupPrefix(String namespaceURI) {
 		return ""; // PENDING
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isDefaultNamespace(String namespaceURI) {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String lookupNamespaceURI(String prefix) {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isEqualNode(Node arg) {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getFeature(String feature, String version) {
 		return null; // PENDING
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		return null; // PENDING
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getUserData(String key) {
 		return null;

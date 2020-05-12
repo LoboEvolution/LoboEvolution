@@ -6,12 +6,24 @@ import javax.swing.JRadioButton;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 
+/**
+ * <p>InputRadio class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputRadio {
 	
 	private ButtonGroup buttonGroup;
 	
 	final JRadioButton radio = new JRadioButton();
 
+	/**
+	 * <p>Constructor for InputRadio.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputRadio(HTMLInputElementImpl modelNode, InputControl ic) {
 		radio.setOpaque(false);
 		if(modelNode.getTitle() != null) radio.setToolTipText(modelNode.getTitle());
@@ -40,6 +52,9 @@ public class InputRadio {
 		ic.add(radio);
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		radio.setSelected(false);
 	}

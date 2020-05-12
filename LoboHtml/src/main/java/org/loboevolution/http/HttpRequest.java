@@ -48,6 +48,12 @@ import org.loboevolution.common.EventDispatch;
 import org.loboevolution.common.IORoutines;
 import org.w3c.dom.Document;
 
+/**
+ * <p>HttpRequest class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HttpRequest {
 
 	private static final Logger logger = Logger.getLogger(HttpRequest.class.getName());
@@ -68,7 +74,7 @@ public class HttpRequest {
 	public static final int STATE_LOADED = 2;
 
 	/**
-	 * The loading request state. The <code>open</code> method has been called, but
+	 * The loading request state. The open method has been called, but
 	 * a response has not been received yet.
 	 */
 	public static final int STATE_LOADING = 1;
@@ -79,7 +85,7 @@ public class HttpRequest {
 	public static final int STATE_UNINITIALIZED = 0;
 
 	/**
-	 * The <code>URLConnection</code> is assigned to this field while it is ongoing.
+	 * The URLConnection is assigned to this field while it is ongoing.
 	 */
 	protected java.net.URLConnection connection;
 	private boolean isAsync;
@@ -107,10 +113,19 @@ public class HttpRequest {
 
 	private String statusText;
 
+	/**
+	 * <p>Constructor for HttpRequest.</p>
+	 *
+	 * @param context a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param proxy a {@link java.net.Proxy} object.
+	 */
 	public HttpRequest(UserAgentContext context, Proxy proxy) {
 		this.proxy = proxy;
 	}
 
+	/**
+	 * <p>abort.</p>
+	 */
 	public void abort() {
 		URLConnection c;
 		synchronized (this) {
@@ -127,6 +142,11 @@ public class HttpRequest {
 		}
 	}
 
+	/**
+	 * <p>addReadyStateChangeListener.</p>
+	 *
+	 * @param listener a {@link org.loboevolution.html.ReadyStateChangeListener} object.
+	 */
 	public void addReadyStateChangeListener(final ReadyStateChangeListener listener) {
 		this.readyEvent.addListener(event -> listener.readyStateChanged());
 	}
@@ -141,6 +161,11 @@ public class HttpRequest {
 		this.readyEvent.fireEvent(null);
 	}
 
+	/**
+	 * <p>getAllResponseHeaders.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public synchronized String getAllResponseHeaders() {
 		return this.responseHeaders;
 	}
@@ -162,19 +187,37 @@ public class HttpRequest {
 	/**
 	 * This is the charset used to post data provided to {@link #send(String)}. It
 	 * returns "UTF-8" unless overridden.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	protected String getPostCharset() {
 		return "UTF-8";
 	}
 
+	/**
+	 * <p>Getter for the field readyState.</p>
+	 *
+	 * @return a int.
+	 */
 	public synchronized int getReadyState() {
 		return this.readyState;
 	}
 
+	/**
+	 * <p>Getter for the field responseBytes.</p>
+	 *
+	 * @return an array of {@link byte} objects.
+	 */
 	public synchronized byte[] getResponseBytes() {
 		return this.responseBytes;
 	}
 
+	/**
+	 * <p>getResponseHeader.</p>
+	 *
+	 * @param headerName a {@link java.lang.String} object.
+	 * @return a {@link java.util.List} object.
+	 */
 	public synchronized List<String> getResponseHeader(String headerName) {
 		final Map<String, List<String>> headers = this.responseHeadersMap;
 		return headers == null ? null : headers.get(headerName);
@@ -185,6 +228,11 @@ public class HttpRequest {
 	 * 
 	 * @see org.xamjwg.html.HttpRequest#getResponseImage()
 	 */
+	/**
+	 * <p>getResponseImage.</p>
+	 *
+	 * @return a {@link java.awt.Image} object.
+	 */
 	public synchronized Image getResponseImage() {
 		final byte[] bytes = this.responseBytes;
 		if (bytes == null) {
@@ -193,6 +241,11 @@ public class HttpRequest {
 		return Toolkit.getDefaultToolkit().createImage(bytes);
 	}
 
+	/**
+	 * <p>getResponseText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public synchronized String getResponseText() {
 		final byte[] bytes = this.responseBytes;
 		final java.net.URLConnection connection = this.connection;
@@ -214,6 +267,11 @@ public class HttpRequest {
 		}
 	}
 
+	/**
+	 * <p>getResponseXML.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Document} object.
+	 */
 	public synchronized Document getResponseXML() {
 		final byte[] bytes = this.responseBytes;
 		if (bytes == null) {
@@ -228,43 +286,93 @@ public class HttpRequest {
 		}
 	}
 
+	/**
+	 * <p>Getter for the field status.</p>
+	 *
+	 * @return a int.
+	 */
 	public synchronized int getStatus() {
 		return this.status;
 	}
 
+	/**
+	 * <p>Getter for the field statusText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public synchronized String getStatusText() {
 		return this.statusText;
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param method a {@link java.lang.String} object.
+	 * @param url a {@link java.net.URL} object.
+	 * @param asyncFlag a boolean.
+	 * @param userName a {@link java.lang.String} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public void open(String method, java.net.URL url, boolean asyncFlag, String userName) throws IOException {
 		this.open(method, url, asyncFlag, userName, null);
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param method a {@link java.lang.String} object.
+	 * @param url a {@link java.lang.String} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public void open(String method, String url) throws Exception {
 		this.open(method, url, true);
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param method a {@link java.lang.String} object.
+	 * @param url a {@link java.lang.String} object.
+	 * @param asyncFlag a boolean.
+	 * @throws java.lang.Exception if any.
+	 */
 	public void open(String method, String url, boolean asyncFlag) throws Exception {
 		final URL urlObj = Urls.createURL(null, url);
 		this.open(method, urlObj, asyncFlag, null);
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param method a {@link java.lang.String} object.
+	 * @param url a {@link java.net.URL} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public void open(String method, URL url) throws Exception {
 		this.open(method, url, true, null, null);
 	}
 
+	/**
+	 * <p>open.</p>
+	 *
+	 * @param method a {@link java.lang.String} object.
+	 * @param url a {@link java.net.URL} object.
+	 * @param asyncFlag a boolean.
+	 * @throws java.lang.Exception if any.
+	 */
 	public void open(String method, URL url, boolean asyncFlag) throws Exception {
 		this.open(method, url, asyncFlag, null, null);
 	}
 
 	/**
 	 * Opens the request. Call {@link #send(String)} to complete it.
-	 * 
+	 *
 	 * @param method    The request method.
 	 * @param url       The request URL.
 	 * @param asyncFlag Whether the request should be asynchronous.
 	 * @param userName  The user name of the request (not supported.)
 	 * @param password  The password of the request (not supported.)
+	 * @throws java.io.IOException if any.
 	 */
 	public void open(final String method, final URL url, boolean asyncFlag, final String userName,
 			final String password) throws IOException {
@@ -286,9 +394,9 @@ public class HttpRequest {
 	 * Sends POST content, if any, and causes the request to proceed.
 	 * <p>
 	 * In the case of asynchronous requests, a new thread is created.
-	 * 
-	 * @param content POST content or <code>null</code> if there's no such content.
-	 * @throws IOException
+	 *
+	 * @param content POST content or null if there's no such content.
+	 * @throws java.lang.Exception if any.
 	 */
 	public void send(final String content) throws Exception {
 		final java.net.URL url = this.requestURL;
@@ -315,9 +423,9 @@ public class HttpRequest {
 	/**
 	 * This is a synchronous implementation of {@link #send(String)} method
 	 * functionality. It may be overridden to change the behavior of the class.
-	 * 
-	 * @param content POST content if any. It may be <code>null</code>.
-	 * @throws Exception
+	 *
+	 * @param content POST content if any. It may be null.
+	 * @throws java.lang.Exception if any
 	 */
 	protected void sendSync(String content) throws Exception {
 		try {

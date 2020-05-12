@@ -36,8 +36,11 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 	private final Collection<Node> sourceNodeList;
 
 	/**
-	 * @param filter
-	 * @param list
+	 * <p>Constructor for FilteredNodeListImpl.</p>
+	 *
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param list a {@link java.util.Collection} object.
+	 * @param lock a {@link java.lang.Object} object.
 	 */
 	public FilteredNodeListImpl(NodeFilter filter, Collection<Node> list, Object lock) {
 		this.filter = filter;
@@ -45,6 +48,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 		this.lock = lock;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		synchronized (this.lock) {
@@ -58,6 +62,7 @@ class FilteredNodeListImpl extends AbstractScriptableDelegate implements NodeLis
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node item(int index) {
 		synchronized (this.lock) {

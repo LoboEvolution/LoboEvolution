@@ -32,10 +32,18 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseIcons;
 
 /**
+ * <p>AeroIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AeroIcons extends BaseIcons {
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -47,6 +55,11 @@ public class AeroIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -58,6 +71,11 @@ public class AeroIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -69,6 +87,11 @@ public class AeroIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {

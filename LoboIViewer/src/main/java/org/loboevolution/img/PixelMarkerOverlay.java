@@ -20,8 +20,9 @@ import java.util.Set;
  * {@link #setPoint(Point)}, {@link #setPoints(Iterable)},
  * {@link #addPoint(Point)}, and {@link #clear()} functions. All of these
  * mutator functions cause the overlay to be repainted.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public final class PixelMarkerOverlay extends Overlay {
 
@@ -32,10 +33,10 @@ public final class PixelMarkerOverlay extends Overlay {
 	/**
 	 * Sets the size of the circle. The actual width and height of the circle will
 	 * be {@code 2*newSize+1}.
-	 * 
+	 *
 	 * @param newSize
 	 *            the new size of the marker circles
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if {@code newSize} is negative
 	 */
 	public void setSize(int newSize) {
@@ -47,10 +48,10 @@ public final class PixelMarkerOverlay extends Overlay {
 
 	/**
 	 * Sets the color of the marker circles.
-	 * 
+	 *
 	 * @param color
 	 *            the new color
-	 * @throws NullPointerException
+	 * @throws java.lang.NullPointerException
 	 *             if {@code color} is {@code null}
 	 */
 	public void setColor(Color color) {
@@ -62,10 +63,10 @@ public final class PixelMarkerOverlay extends Overlay {
 
 	/**
 	 * Adds a point to the list of pixels marked by this overlay.
-	 * 
+	 *
 	 * @param p
 	 *            a new point
-	 * @throws NullPointerException
+	 * @throws java.lang.NullPointerException
 	 *             if {@code p} is {@code null}
 	 */
 	public void addPoint(Point p) {
@@ -77,7 +78,7 @@ public final class PixelMarkerOverlay extends Overlay {
 
 	/**
 	 * Sets the argument as the only point marked by this overlay.
-	 * 
+	 *
 	 * @param p
 	 *            the point to mark; if {@code null}, then no points will be
 	 *            selected
@@ -92,10 +93,10 @@ public final class PixelMarkerOverlay extends Overlay {
 
 	/**
 	 * Sets the marked pixels.
-	 * 
+	 *
 	 * @param points
 	 *            an iterable of all the pixels that should be selected
-	 * @throws NullPointerException
+	 * @throws java.lang.NullPointerException
 	 *             if {@code points} or any individual point is {@code null}
 	 */
 	public void setPoints(Iterable<Point> points) {
@@ -118,6 +119,7 @@ public final class PixelMarkerOverlay extends Overlay {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics2D g, BufferedImage image, AffineTransform transform) {
 		g.setColor(color);

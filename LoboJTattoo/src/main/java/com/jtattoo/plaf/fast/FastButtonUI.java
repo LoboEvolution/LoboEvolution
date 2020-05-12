@@ -36,14 +36,19 @@ import com.jtattoo.plaf.BaseButtonUI;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>FastButtonUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastButtonUI extends BaseButtonUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new FastButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (b.isContentAreaFilled() && !(b.getParent() instanceof JMenuBar)) {

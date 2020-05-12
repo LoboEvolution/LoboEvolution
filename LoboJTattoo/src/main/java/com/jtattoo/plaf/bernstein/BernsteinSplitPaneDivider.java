@@ -27,7 +27,10 @@ import java.awt.Graphics;
 import com.jtattoo.plaf.BaseSplitPaneDivider;
 
 /**
+ * <p>BernsteinSplitPaneDivider class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 
@@ -36,10 +39,16 @@ public class BernsteinSplitPaneDivider extends BaseSplitPaneDivider {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for BernsteinSplitPaneDivider.</p>
+	 *
+	 * @param ui a {@link com.jtattoo.plaf.bernstein.BernsteinSplitPaneUI} object.
+	 */
 	public BernsteinSplitPaneDivider(BernsteinSplitPaneUI ui) {
 		super(ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		BernsteinUtils.fillComponent(g, this);

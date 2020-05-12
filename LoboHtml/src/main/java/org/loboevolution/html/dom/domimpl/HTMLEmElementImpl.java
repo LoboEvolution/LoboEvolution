@@ -25,12 +25,21 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * Element used for I, EM and CITE.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLEmElementImpl extends HTMLAbstractUIElement {
+	/**
+	 * <p>Constructor for HTMLEmElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLEmElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.ITALIC);

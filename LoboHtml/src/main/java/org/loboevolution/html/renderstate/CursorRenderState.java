@@ -25,6 +25,9 @@ import java.util.Optional;
 
 /**
  * The Class CursorRenderState.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class CursorRenderState extends RenderStateDelegator {
 

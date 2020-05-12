@@ -33,8 +33,10 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
+ * <p>LazyImageIcon class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LazyImageIcon implements Icon {
 	
@@ -43,6 +45,11 @@ public class LazyImageIcon implements Icon {
 	private String name = null;
 	private ImageIcon icon = null;
 
+	/**
+	 * <p>Constructor for LazyImageIcon.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public LazyImageIcon(String name) {
 		this.name = name;
 	}
@@ -58,6 +65,7 @@ public class LazyImageIcon implements Icon {
 		return icon;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getIconHeight() {
 		if (getIcon() != null) {
@@ -67,6 +75,7 @@ public class LazyImageIcon implements Icon {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getIconWidth() {
 		if (getIcon() != null) {
@@ -76,6 +85,11 @@ public class LazyImageIcon implements Icon {
 		}
 	}
 
+	/**
+	 * <p>getImage.</p>
+	 *
+	 * @return a {@link java.awt.Image} object.
+	 */
 	public Image getImage() {
 		if (getIcon() != null) {
 			return icon.getImage();
@@ -83,6 +97,7 @@ public class LazyImageIcon implements Icon {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		if (getIcon() != null) {

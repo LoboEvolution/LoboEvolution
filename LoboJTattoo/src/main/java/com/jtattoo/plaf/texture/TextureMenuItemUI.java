@@ -41,14 +41,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>TextureMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureMenuItemUI extends BaseMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
 		JMenuItem mi = (JMenuItem) c;
@@ -64,6 +69,7 @@ public class TextureMenuItemUI extends BaseMenuItemUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
 		if (!AbstractLookAndFeel.getTheme().isDarkTexture()) {

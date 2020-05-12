@@ -43,7 +43,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>AluminiumUtils class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumUtils {
 
@@ -52,6 +55,12 @@ public class AluminiumUtils {
 	// LazyImageIcon("aluminium/icons/alterBackground.jpg");
 	private static Image backgroundImage = null;
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 */
 	public static void fillComponent(Graphics g, Component c) {
 		Graphics2D g2D = (Graphics2D) g;
 		int w = c.getWidth();
@@ -96,6 +105,16 @@ public class AluminiumUtils {
 		}
 	}
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 */
 	public static void fillComponent(Graphics g, Component c, int x, int y, int w, int h) {
 		Graphics2D g2D = (Graphics2D) g;
 		Shape savedClip = g2D.getClip();

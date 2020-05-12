@@ -46,7 +46,10 @@ import org.loboevolution.http.UserAgentContext;
 import java.util.Objects;
 
 /**
+ * <p>RUIControl class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class RUIControl extends BaseElementRenderable {
 	private static class LayoutKey {
@@ -109,6 +112,15 @@ public class RUIControl extends BaseElementRenderable {
 
 	public final UIControl widget;
 
+    /**
+     * <p>Constructor for RUIControl.</p>
+     *
+     * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+     * @param widget a {@link org.loboevolution.html.control.UIControl} object.
+     * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+     * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+     * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+     */
     public RUIControl(final ModelNode me, final UIControl widget, final RenderableContainer container,
             final FrameContext frameContext, final UserAgentContext ucontext) {
 		super(container, me, ucontext);
@@ -118,6 +130,7 @@ public class RUIControl extends BaseElementRenderable {
 		widget.setRUIControl(this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void doLayout(final int availWidth, final int availHeight, final boolean sizeOnly) {
 		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
@@ -191,6 +204,7 @@ public class RUIControl extends BaseElementRenderable {
 		this.height = layoutValue.height;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -198,6 +212,7 @@ public class RUIControl extends BaseElementRenderable {
 		return inSelection;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void focus() {
 		super.focus();
@@ -205,42 +220,58 @@ public class RUIControl extends BaseElementRenderable {
 		c.requestFocus();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getBlockBackgroundColor() {
 		return this.widget.getBackgroundColor();
 	}
 
+	/**
+	 * <p>getForegroundColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	public Color getForegroundColor() {
 		final RenderState rs = this.modelNode.getRenderState();
 		return rs == null ? null : rs.getColor();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		// Nothing draggable - return self
 		return new RenderableSpot(this, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getPaintedBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Iterator<Renderable> getRenderables() {
 		// No children for GUI controls
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVAlign() {
 		return this.widget.getVAlign();
 	}
 
+	/**
+	 * <p>hasBackground.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean hasBackground() {
 		return this.backgroundColor != null || this.backgroundImage != null || this.lastBackgroundImageUri != null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final void invalidateLayoutLocal() {
 		// Invalidate widget (some redundancy)
@@ -258,10 +289,14 @@ public class RUIControl extends BaseElementRenderable {
 	 * @see
 	 * org.loboevolution.html.rendered.BoundableRenderable#invalidateState(org.loboevolution.html.rendered.RenderableContext)
 	 */
+	/**
+	 * <p>invalidateRenderStyle.</p>
+	 */
 	public void invalidateRenderStyle() {
 		// NOP - No RenderStyle below this node.
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final void paint(final Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -290,6 +325,7 @@ public class RUIControl extends BaseElementRenderable {
 	 * Graphics, boolean, org.loboevolution.html.rendered.RenderablePoint,
 	 * org.loboevolution.html.rendered.RenderablePoint)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		inSelection = super.paintSelection(g, inSelection, startPoint, endPoint);
@@ -323,6 +359,7 @@ public class RUIControl extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void repaint(ModelNode modelNode) {
 		final Object widget = this.widget;
@@ -333,6 +370,7 @@ public class RUIControl extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void updateWidgetBounds(int guiX, int guiY) {
 		// Overrides

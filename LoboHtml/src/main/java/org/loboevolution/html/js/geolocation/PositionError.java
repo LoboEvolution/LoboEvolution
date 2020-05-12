@@ -1,15 +1,17 @@
 package org.loboevolution.html.js.geolocation;
 
 /**
- * <p>The <code>PositionError</code> class provides a way to provide error when the position 
- * cannot be calculated due to any reason. An object of this class is created by the 
- * <code>Geolocation</code> object and is provided to the calling application via the 
- * <code>PositionCallback</code> interface.</p>
- * 
- * <p><b>Note: This class must not have any sub-classes to ensure W3C Specifications are being 
- * strictly followed by the system or application that uses this geolocation package. These 
- * specifications are avilable at <a href="http://www.w3.org/TR/geolocation-API/#position-error">
- * http://www.w3.org/TR/geolocation-API/#position-error</a></b></p>
+ * The PositionError class provides a way to provide error when the position
+ * cannot be calculated due to any reason. An object of this class is created by the
+ * Geolocation object and is provided to the calling application via the
+ * PositionCallback interface.
+ *
+ * Note: This class must not have any sub-classes to ensure W3C Specifications are being
+ * strictly followed by the system or application that uses this geolocation package. These
+ * specifications are avilable at http://www.w3.org/TR/geolocation-API/#position-error 
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public final class PositionError {
 
@@ -39,9 +41,9 @@ public final class PositionError {
 	private String message;
 	
 	/**
-	 * Constructs an instance of <code>PositionError</code> class using only the 
-	 * error code; Sets the error message to <code>null</code>.
-	 * 
+	 * Constructs an instance of PositionError class using only the
+	 * error code; Sets the error message to null.
+	 *
 	 * @param code	the error code.
 	 */
 	public PositionError(short code) {
@@ -49,9 +51,9 @@ public final class PositionError {
 	}
 	
 	/**
-	 * Constructs an instance of <code>PositionError</code> class using the error code 
+	 * Constructs an instance of PositionError class using the error code
 	 * and error message.
-	 * 
+	 *
 	 * @param code	the error code.
 	 * @param message	the error message.
 	 */
@@ -62,7 +64,7 @@ public final class PositionError {
 
 	/**
 	 * Returns the error code.
-	 * 
+	 *
 	 * @return	the error code.
 	 */
 	public short getCode() {
@@ -71,7 +73,7 @@ public final class PositionError {
 
 	/**
 	 * Returns the error message.
-	 * 
+	 *
 	 * @return	the error message.
 	 */
 	public String getMessage() {

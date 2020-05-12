@@ -41,7 +41,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>MintIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class MintIcons extends BaseIcons {
 
@@ -150,6 +153,11 @@ public class MintIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -161,6 +169,11 @@ public class MintIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getDownArrowIcon() {
 		if (downArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -174,6 +187,11 @@ public class MintIcons extends BaseIcons {
 		return downArrowIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -185,6 +203,11 @@ public class MintIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getLeftArrowIcon() {
 		if (leftArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -198,6 +221,11 @@ public class MintIcons extends BaseIcons {
 		return leftArrowIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -209,6 +237,11 @@ public class MintIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -220,6 +253,11 @@ public class MintIcons extends BaseIcons {
 		return minIcon;
 	}
 
+	/**
+	 * <p>getRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRightArrowIcon() {
 		if (rightArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -233,6 +271,11 @@ public class MintIcons extends BaseIcons {
 		return rightArrowIcon;
 	}
 
+	/**
+	 * <p>getUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getUpArrowIcon() {
 		if (upArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {

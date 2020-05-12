@@ -22,6 +22,12 @@ package org.loboevolution.info;
 
 import java.awt.Color;
 
+/**
+ * <p>BorderInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BorderInfo {
 	
 	private Color bottomColor;
@@ -43,6 +49,8 @@ public class BorderInfo {
 	private int topStyle;
 
 	/**
+	 * <p>Getter for the field bottomColor.</p>
+	 *
 	 * @return the bottomColor
 	 */
 	public Color getBottomColor() {
@@ -50,6 +58,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field leftColor.</p>
+	 *
 	 * @return the leftColor
 	 */
 	public Color getLeftColor() {
@@ -57,6 +67,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field rightColor.</p>
+	 *
 	 * @return the rightColor
 	 */
 	public Color getRightColor() {
@@ -64,6 +76,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field topColor.</p>
+	 *
 	 * @return the topColor
 	 */
 	public Color getTopColor() {
@@ -71,6 +85,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field insets.</p>
+	 *
 	 * @return the insets
 	 */
 	public Object getInsets() {
@@ -78,6 +94,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field leftStyle.</p>
+	 *
 	 * @return the leftStyle
 	 */
 	public int getLeftStyle() {
@@ -85,6 +103,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field bottomStyle.</p>
+	 *
 	 * @return the bottomStyle
 	 */
 	public int getBottomStyle() {
@@ -92,6 +112,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field rightStyle.</p>
+	 *
 	 * @return the rightStyle
 	 */
 	public int getRightStyle() {
@@ -99,6 +121,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Getter for the field topStyle.</p>
+	 *
 	 * @return the topStyle
 	 */
 	public int getTopStyle() {
@@ -106,6 +130,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field bottomColor.</p>
+	 *
 	 * @param bottomColor the bottomColor to set
 	 */
 	public void setBottomColor(Color bottomColor) {
@@ -113,6 +139,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field leftColor.</p>
+	 *
 	 * @param leftColor the leftColor to set
 	 */
 	public void setLeftColor(Color leftColor) {
@@ -120,6 +148,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field rightColor.</p>
+	 *
 	 * @param rightColor the rightColor to set
 	 */
 	public void setRightColor(Color rightColor) {
@@ -127,6 +157,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field topColor.</p>
+	 *
 	 * @param topColor the topColor to set
 	 */
 	public void setTopColor(Color topColor) {
@@ -134,6 +166,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field insets.</p>
+	 *
 	 * @param insets the insets to set
 	 */
 	public void setInsets(Object insets) {
@@ -141,6 +175,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field leftStyle.</p>
+	 *
 	 * @param leftStyle the leftStyle to set
 	 */
 	public void setLeftStyle(int leftStyle) {
@@ -148,6 +184,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field bottomStyle.</p>
+	 *
 	 * @param bottomStyle the bottomStyle to set
 	 */
 	public void setBottomStyle(int bottomStyle) {
@@ -155,6 +193,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field rightStyle.</p>
+	 *
 	 * @param rightStyle the rightStyle to set
 	 */
 	public void setRightStyle(int rightStyle) {
@@ -162,6 +202,8 @@ public class BorderInfo {
 	}
 
 	/**
+	 * <p>Setter for the field topStyle.</p>
+	 *
 	 * @param topStyle the topStyle to set
 	 */
 	public void setTopStyle(int topStyle) {

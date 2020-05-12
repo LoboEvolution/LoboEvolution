@@ -20,24 +20,64 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGPaint interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPaint extends SVGColor {
 	// Paint Types
+	/** Constant SVG_PAINTTYPE_UNKNOWN=0 */
 	static final short SVG_PAINTTYPE_UNKNOWN = 0;
+	/** Constant SVG_PAINTTYPE_RGBCOLOR=1 */
 	static final short SVG_PAINTTYPE_RGBCOLOR = 1;
+	/** Constant SVG_PAINTTYPE_RGBCOLOR_ICCCOLOR=2 */
 	static final short SVG_PAINTTYPE_RGBCOLOR_ICCCOLOR = 2;
+	/** Constant SVG_PAINTTYPE_NONE=101 */
 	static final short SVG_PAINTTYPE_NONE = 101;
+	/** Constant SVG_PAINTTYPE_CURRENTCOLOR=102 */
 	static final short SVG_PAINTTYPE_CURRENTCOLOR = 102;
+	/** Constant SVG_PAINTTYPE_URI_NONE=103 */
 	static final short SVG_PAINTTYPE_URI_NONE = 103;
+	/** Constant SVG_PAINTTYPE_URI_CURRENTCOLOR=104 */
 	static final short SVG_PAINTTYPE_URI_CURRENTCOLOR = 104;
+	/** Constant SVG_PAINTTYPE_URI_RGBCOLOR=105 */
 	static final short SVG_PAINTTYPE_URI_RGBCOLOR = 105;
+	/** Constant SVG_PAINTTYPE_URI_RGBCOLOR_ICCCOLOR=106 */
 	static final short SVG_PAINTTYPE_URI_RGBCOLOR_ICCCOLOR = 106;
+	/** Constant SVG_PAINTTYPE_URI=107 */
 	static final short SVG_PAINTTYPE_URI = 107;
 
+	/**
+	 * <p>getPaintType.</p>
+	 *
+	 * @return a short.
+	 */
 	short getPaintType();
 
+	/**
+	 * <p>getUri.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getUri();
 
+	/**
+	 * <p>setUri.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 */
 	void setUri(String uri);
 
+	/**
+	 * <p>setPaint.</p>
+	 *
+	 * @param paintType a short.
+	 * @param uri a {@link java.lang.String} object.
+	 * @param rgbColor a {@link java.lang.String} object.
+	 * @param iccColor a {@link java.lang.String} object.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	void setPaint(short paintType, String uri, String rgbColor, String iccColor) throws SVGException;
 }

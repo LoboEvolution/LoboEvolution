@@ -31,14 +31,19 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicDesktopPaneUI;
 
 /**
+ * <p>BaseDesktopPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseDesktopPaneUI extends BasicDesktopPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseDesktopPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g, JComponent c) {
 		if (c.isOpaque()) {

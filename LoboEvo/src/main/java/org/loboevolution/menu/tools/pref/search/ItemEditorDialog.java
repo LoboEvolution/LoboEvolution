@@ -21,6 +21,8 @@ import org.loboevolution.gui.ItemEditorFactory;
  * The Class ItemEditorDialog.
  *
  * @param <T> the generic type
+ * @author utente
+ * @version $Id: $Id
  */
 public class ItemEditorDialog<T> extends JDialog {
 
@@ -47,7 +49,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	 *
 	 * @param owner   the owner
 	 * @param factory the factory
-	 * @throws HeadlessException the headless exception
+	 * @throws java.awt.HeadlessException the headless exception
 	 */
 	public ItemEditorDialog(Dialog owner, ItemEditorFactory<T> factory) throws HeadlessException {
 		super(owner);
@@ -60,7 +62,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	 *
 	 * @param owner   the owner
 	 * @param factory the factory
-	 * @throws HeadlessException the headless exception
+	 * @throws java.awt.HeadlessException the headless exception
 	 */
 	public ItemEditorDialog(Frame owner, ItemEditorFactory<T> factory) throws HeadlessException {
 		super(owner);
@@ -85,6 +87,8 @@ public class ItemEditorDialog<T> extends JDialog {
 	}
 
 	/**
+	 * <p>Getter for the field editor.</p>
+	 *
 	 * @return the editor
 	 */
 	public AbstractItemEditor<T> getEditor() {
@@ -142,6 +146,8 @@ public class ItemEditorDialog<T> extends JDialog {
 	}
 
 	/**
+	 * <p>Setter for the field resultingItem.</p>
+	 *
 	 * @param resultingItem the resultingItem to set
 	 */
 	public void setResultingItem(T resultingItem) {

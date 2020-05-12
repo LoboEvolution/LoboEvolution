@@ -63,6 +63,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
  * @author Steve Wilson
  * @author Brian Beck
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane implements ActionListener {
 
@@ -249,9 +250,13 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	/** Constant PAINT_ACTIVE="paintActive" */
 	public static final String PAINT_ACTIVE = "paintActive";
+	/** Constant ICONIFY="Iconify" */
 	public static final String ICONIFY = "Iconify";
+	/** Constant MAXIMIZE="Maximize" */
 	public static final String MAXIMIZE = "Maximize";
+	/** Constant CLOSE="Close" */
 	public static final String CLOSE = "Close";
 	protected boolean isPalette = false;
 	protected Icon paletteCloseIcon;
@@ -261,19 +266,29 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 
 	protected JPanel customTitlePanel;
 
+	/**
+	 * <p>Constructor for BaseInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public BaseInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		AbstractButton button = (AbstractButton) e.getSource();
 		button.getModel().setRollover(false);
 	}
 
+	/**
+	 * <p>activateFrame.</p>
+	 */
 	public void activateFrame() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void addSubComponents() {
 		add(iconButton);
@@ -281,18 +296,26 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		add(closeButton);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void addSystemMenuItems(JMenu systemMenu) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void assembleSystemMenu() {
 	}
 
+	/**
+	 * <p>centerButtons.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean centerButtons() {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void createButtons() {
 		iconButton = new BaseTitleButton(iconifyAction, ICONIFY, iconIcon, 1.0f);
@@ -301,29 +324,45 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		setButtonIcons();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected LayoutManager createLayout() {
 		return new BaseTitlePaneLayout();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected PropertyChangeListener createPropertyChangeListener() {
 		return new BasePropertyChangeHandler();
 	}
 
+	/**
+	 * <p>deactivateFrame.</p>
+	 */
 	public void deactivateFrame() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void enableActions() {
 		super.enableActions();
 		maximizeAction.setEnabled(frame.isMaximizable());
 	}
 
+	/**
+	 * <p>getHorSpacing.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getHorSpacing() {
 		return 3;
 	}
 
+	/**
+	 * <p>getIconWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getIconWidth() {
 		Image image = iconToImage(frame.getFrameIcon());
 		if (image != null) {
@@ -340,6 +379,11 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		return 0;
 	}
 
+	/**
+	 * <p>getVerSpacing.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getVerSpacing() {
 		return 3;
 	}
@@ -359,6 +403,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
@@ -374,18 +419,38 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		}
 	}
 
+	/**
+	 * <p>isActive.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isActive() {
 		return JTattooUtilities.isActive(this);
 	}
 
+	/**
+	 * <p>isMacStyleWindowDecoration.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isMacStyleWindowDecoration() {
 		return AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn();
 	}
 
+	/**
+	 * <p>isPalette.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isPalette() {
 		return isPalette;
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	public void paintBackground(Graphics g) {
 		if (isActive()) {
 			JTattooUtilities.fillHorGradient(g, AbstractLookAndFeel.getTheme().getWindowTitleColors(), 0, 0, getWidth(),
@@ -396,6 +461,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		Color borderColor = AbstractLookAndFeel.getWindowInactiveBorderColor();
@@ -406,6 +472,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 				0, getWidth(), getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintComponent(Graphics g) {
 		if (isPalette) {
@@ -470,6 +537,13 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		paintBorder(g);
 	}
 
+	/**
+	 * <p>paintIcon.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param x a int.
+	 * @return a int.
+	 */
 	protected int paintIcon(Graphics g, int x) {
 		Image image = iconToImage(frame.getFrameIcon());
 		if (image != null) {
@@ -495,6 +569,11 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		return 0;
 	}
 
+	/**
+	 * <p>paintPalette.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
 	public void paintPalette(Graphics g) {
 		int width = getWidth();
 		int height = getHeight();
@@ -507,6 +586,14 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		}
 	}
 
+	/**
+	 * <p>paintText.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param title a {@link java.lang.String} object.
+	 */
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {
 			g.setColor(AbstractLookAndFeel.getWindowTitleForegroundColor());
@@ -516,6 +603,7 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		JTattooUtilities.drawString(frame, g, title, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setButtonIcons() {
 		super.setButtonIcons();
@@ -524,6 +612,11 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		closeButton.setToolTipText(null);
 	}
 
+	/**
+	 * <p>setCustomizedTitlePanel.</p>
+	 *
+	 * @param panel a {@link javax.swing.JPanel} object.
+	 */
 	public void setCustomizedTitlePanel(JPanel panel) {
 		if (customTitlePanel != null) {
 			remove(customTitlePanel);
@@ -538,6 +631,11 @@ public class BaseInternalFrameTitlePane extends BasicInternalFrameTitlePane impl
 		repaint();
 	}
 
+	/**
+	 * <p>setPalette.</p>
+	 *
+	 * @param b a boolean.
+	 */
 	public void setPalette(boolean b) {
 		isPalette = b;
 		if (isPalette) {

@@ -2,6 +2,12 @@ package org.loboevolution.menu.tools.pref;
 
 import javax.swing.JPanel;
 
+/**
+ * <p>Abstract AbstractSettingsUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class AbstractSettingsUI extends JPanel {
 
 	/** The Constant serialVersionUID. */
@@ -14,8 +20,6 @@ public abstract class AbstractSettingsUI extends JPanel {
 
 	/**
 	 * Save.
-	 *
-	 * @throws ValidationException the validation exception
 	 */
 	public abstract void save();
 }

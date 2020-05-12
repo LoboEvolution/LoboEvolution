@@ -23,5 +23,11 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.events.Event;
 
+/**
+ * <p>SVGEvent interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGEvent extends Event {
 }

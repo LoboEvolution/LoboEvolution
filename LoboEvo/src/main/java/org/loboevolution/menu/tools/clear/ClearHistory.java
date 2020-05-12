@@ -8,6 +8,12 @@ import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SQLiteCommon;
 import org.loboevolution.store.ToolsStore;
 
+/**
+ * <p>ClearHistory class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ClearHistory {
 
 	/**

@@ -49,7 +49,10 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.plaf.UIResource;
 
 /**
+ * <p>BaseIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseIcons {
 
@@ -984,96 +987,172 @@ public class BaseIcons {
 
 	} // end of class RadioButtonIcon
 
+	/** Constant PEARL_RED_SMALL */
 	public static final LazyImageIcon PEARL_RED_SMALL = new LazyImageIcon("icons/small/pearl_red_24x24.png");
+	/** Constant PEARL_YELLOW_SMALL */
 	public static final LazyImageIcon PEARL_YELLOW_SMALL = new LazyImageIcon("icons/small/pearl_yellow_24x24.png");
 
+	/** Constant PEARL_GREEN_SMALL */
 	public static final LazyImageIcon PEARL_GREEN_SMALL = new LazyImageIcon("icons/small/pearl_green_24x24.png");
+	/** Constant PEARL_GREY_SMALL */
 	public static final LazyImageIcon PEARL_GREY_SMALL = new LazyImageIcon("icons/small/pearl_grey_24x24.png");
+	/** Constant PEARL_RED_MEDIUM */
 	public static final LazyImageIcon PEARL_RED_MEDIUM = new LazyImageIcon("icons/medium/pearl_red_28x28.png");
+	/** Constant PEARL_YELLOW_MEDIUM */
 	public static final LazyImageIcon PEARL_YELLOW_MEDIUM = new LazyImageIcon("icons/medium/pearl_yellow_28x28.png");
+	/** Constant PEARL_GREEN_MEDIUM */
 	public static final LazyImageIcon PEARL_GREEN_MEDIUM = new LazyImageIcon("icons/medium/pearl_green_28x28.png");
+	/** Constant PEARL_GREY_MEDIUM */
 	public static final LazyImageIcon PEARL_GREY_MEDIUM = new LazyImageIcon("icons/medium/pearl_grey_28x28.png");
+	/** Constant PEARL_RED_LARGE */
 	public static final LazyImageIcon PEARL_RED_LARGE = new LazyImageIcon("icons/large/pearl_red_32x32.png");
+	/** Constant PEARL_YELLOW_LARGE */
 	public static final LazyImageIcon PEARL_YELLOW_LARGE = new LazyImageIcon("icons/large/pearl_yellow_32x32.png");
+	/** Constant PEARL_GREEN_LARGE */
 	public static final LazyImageIcon PEARL_GREEN_LARGE = new LazyImageIcon("icons/large/pearl_green_32x32.png");
+	/** Constant PEARL_GREY_LARGE */
 	public static final LazyImageIcon PEARL_GREY_LARGE = new LazyImageIcon("icons/large/pearl_grey_32x32.png");
+	/** Constant ICONIZER_SMALL */
 	public static final LazyImageIcon ICONIZER_SMALL = new LazyImageIcon("icons/small/iconizer_10x10.png");
+	/** Constant MINIMIZER_SMALL */
 	public static final LazyImageIcon MINIMIZER_SMALL = new LazyImageIcon("icons/small/minimizer_10x10.png");
 
+	/** Constant MAXIMIZER_SMALL */
 	public static final LazyImageIcon MAXIMIZER_SMALL = new LazyImageIcon("icons/small/maximizer_10x10.png");
 
+	/** Constant CLOSER_SMALL */
 	public static final LazyImageIcon CLOSER_SMALL = new LazyImageIcon("icons/small/closer_10x10.png");
+	/** Constant ICONIZER_MEDIUM */
 	public static final LazyImageIcon ICONIZER_MEDIUM = new LazyImageIcon("icons/medium/iconizer_12x12.png");
+	/** Constant MINIMIZER_MEDIUM */
 	public static final LazyImageIcon MINIMIZER_MEDIUM = new LazyImageIcon("icons/medium/minimizer_12x12.png");
+	/** Constant MAXIMIZER_MEDIUM */
 	public static final LazyImageIcon MAXIMIZER_MEDIUM = new LazyImageIcon("icons/medium/maximizer_12x12.png");
+	/** Constant CLOSER_MEDIUM */
 	public static final LazyImageIcon CLOSER_MEDIUM = new LazyImageIcon("icons/medium/closer_12x12.png");
+	/** Constant ICONIZER_LARGE */
 	public static final LazyImageIcon ICONIZER_LARGE = new LazyImageIcon("icons/large/iconizer_12x12.png");
+	/** Constant MINIMIZER_LARGE */
 	public static final LazyImageIcon MINIMIZER_LARGE = new LazyImageIcon("icons/large/minimizer_12x12.png");
+	/** Constant MAXIMIZER_LARGE */
 	public static final LazyImageIcon MAXIMIZER_LARGE = new LazyImageIcon("icons/large/maximizer_12x12.png");
 
+	/** Constant CLOSER_LARGE */
 	public static final LazyImageIcon CLOSER_LARGE = new LazyImageIcon("icons/large/closer_12x12.png");
+	/** Constant EMPTY_8x8 */
 	public static final LazyImageIcon EMPTY_8x8 = new LazyImageIcon("icons/empty_8x8.png");
+	/** Constant checkBoxIcon */
 	protected static Icon checkBoxIcon = null;
+	/** Constant menuCheckBoxIcon */
 	protected static Icon menuCheckBoxIcon = null;
+	/** Constant radioButtonIcon */
 	protected static Icon radioButtonIcon = null;
+	/** Constant menuRadioButtonIcon */
 	protected static Icon menuRadioButtonIcon = null;
+	/** Constant optionPaneErrorIcon */
 	protected static Icon optionPaneErrorIcon = null;
+	/** Constant optionPaneWarningIcon */
 	protected static Icon optionPaneWarningIcon = null;
 
+	/** Constant optionPaneInformationIcon */
 	protected static Icon optionPaneInformationIcon = null;
+	/** Constant optionPaneQuestionIcon */
 	protected static Icon optionPaneQuestionIcon = null;
+	/** Constant fileChooserUpFolderIcon */
 	protected static Icon fileChooserUpFolderIcon = null;
+	/** Constant fileChooserHomeFolderIcon */
 	protected static Icon fileChooserHomeFolderIcon = null;
+	/** Constant fileChooserNewFolderIcon */
 	protected static Icon fileChooserNewFolderIcon = null;
 
+	/** Constant fileChooserListViewIcon */
 	protected static Icon fileChooserListViewIcon = null;
+	/** Constant fileChooserDetailViewIcon */
 	protected static Icon fileChooserDetailViewIcon = null;
 
+	/** Constant fileViewComputerIcon */
 	protected static Icon fileViewComputerIcon = null;
+	/** Constant fileViewFloppyDriveIcon */
 	protected static Icon fileViewFloppyDriveIcon = null;
+	/** Constant fileViewHardDriveIcon */
 	protected static Icon fileViewHardDriveIcon = null;
+	/** Constant treeOpenedIcon */
 	protected static Icon treeOpenedIcon = null;
 
+	/** Constant treeClosedIcon */
 	protected static Icon treeClosedIcon = null;
+	/** Constant treeLeafIcon */
 	protected static Icon treeLeafIcon = null;
+	/** Constant treeExpandedIcon */
 	protected static Icon treeExpandedIcon = null;
+	/** Constant treeCollapsedIcon */
 	protected static Icon treeCollapsedIcon = null;
+	/** Constant paletteCloseIcon */
 	protected static Icon paletteCloseIcon = null;
+	/** Constant menuIcon */
 	protected static Icon menuIcon = null;
+	/** Constant iconIcon */
 	protected static Icon iconIcon = null;
+	/** Constant maxIcon */
 	protected static Icon maxIcon = null;
+	/** Constant minIcon */
 	protected static Icon minIcon = null;
+	/** Constant closeIcon */
 	protected static Icon closeIcon = null;
+	/** Constant upArrowIcon */
 	protected static Icon upArrowIcon = null;
+	/** Constant upArrowInverseIcon */
 	protected static Icon upArrowInverseIcon = null;
+	/** Constant downArrowIcon */
 	protected static Icon downArrowIcon = null;
+	/** Constant downArrowInverseIcon */
 	protected static Icon downArrowInverseIcon = null;
+	/** Constant leftArrowIcon */
 	protected static Icon leftArrowIcon = null;
+	/** Constant leftArrowInverseIcon */
 	protected static Icon leftArrowInverseIcon = null;
+	/** Constant rightArrowIcon */
 	protected static Icon rightArrowIcon = null;
+	/** Constant rightArrowInverseIcon */
 	protected static Icon rightArrowInverseIcon = null;
+	/** Constant menuArrowIcon */
 	protected static Icon menuArrowIcon = null;
 
+	/** Constant splitterUpArrowIcon */
 	protected static Icon splitterUpArrowIcon = null;
 
+	/** Constant splitterDownArrowIcon */
 	protected static Icon splitterDownArrowIcon = null;
 
+	/** Constant splitterLeftArrowIcon */
 	protected static Icon splitterLeftArrowIcon = null;
 
+	/** Constant splitterRightArrowIcon */
 	protected static Icon splitterRightArrowIcon = null;
 
+	/** Constant splitterHorBumpIcon */
 	protected static Icon splitterHorBumpIcon = null;
 
+	/** Constant splitterVerBumpIcon */
 	protected static Icon splitterVerBumpIcon = null;
 
+	/** Constant thumbHorIcon */
 	protected static Icon thumbHorIcon = null;
 
+	/** Constant thumbVerIcon */
 	protected static Icon thumbVerIcon = null;
 
+	/** Constant thumbHorIconRollover */
 	protected static Icon thumbHorIconRollover = null;
 
+	/** Constant thumbVerIconRollover */
 	protected static Icon thumbVerIconRollover = null;
 
+	/**
+	 * <p>Getter for the field checkBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
 			checkBoxIcon = new CheckBoxIcon();
@@ -1081,6 +1160,11 @@ public class BaseIcons {
 		return checkBoxIcon;
 	}
 
+	/**
+	 * <p>Getter for the field closeIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -1095,14 +1179,29 @@ public class BaseIcons {
 	}
 
 	// ComboBox
+	/**
+	 * <p>getComboBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getComboBoxIcon() {
 		return getDownArrowIcon();
 	}
 
+	/**
+	 * <p>getComboBoxInverseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getComboBoxInverseIcon() {
 		return getDownArrowInverseIcon();
 	}
 
+	/**
+	 * <p>Getter for the field downArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getDownArrowIcon() {
 		if (downArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1116,6 +1215,11 @@ public class BaseIcons {
 		return downArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field downArrowInverseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getDownArrowInverseIcon() {
 		if (downArrowInverseIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1129,6 +1233,11 @@ public class BaseIcons {
 		return downArrowInverseIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileChooserDetailViewIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileChooserDetailViewIcon() {
 		if (fileChooserDetailViewIcon == null) {
 			fileChooserDetailViewIcon = new LazyImageIcon("icons/view_detail_22x22.png");
@@ -1136,6 +1245,11 @@ public class BaseIcons {
 		return fileChooserDetailViewIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileChooserHomeFolderIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileChooserHomeFolderIcon() {
 		if (fileChooserHomeFolderIcon == null) {
 			fileChooserHomeFolderIcon = new LazyImageIcon("icons/home_22x22.png");
@@ -1143,6 +1257,11 @@ public class BaseIcons {
 		return fileChooserHomeFolderIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileChooserListViewIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileChooserListViewIcon() {
 		if (fileChooserListViewIcon == null) {
 			fileChooserListViewIcon = new LazyImageIcon("icons/view_list_22x22.png");
@@ -1150,6 +1269,11 @@ public class BaseIcons {
 		return fileChooserListViewIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileChooserNewFolderIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileChooserNewFolderIcon() {
 		if (fileChooserNewFolderIcon == null) {
 			fileChooserNewFolderIcon = new LazyImageIcon("icons/folder_new_22x22.png");
@@ -1158,6 +1282,11 @@ public class BaseIcons {
 	}
 
 	// FileChooser
+	/**
+	 * <p>Getter for the field fileChooserUpFolderIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileChooserUpFolderIcon() {
 		if (fileChooserUpFolderIcon == null) {
 			fileChooserUpFolderIcon = new LazyImageIcon("icons/folder_up_22x22.png");
@@ -1165,6 +1294,11 @@ public class BaseIcons {
 		return fileChooserUpFolderIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileViewComputerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileViewComputerIcon() {
 		if (fileViewComputerIcon == null) {
 			fileViewComputerIcon = new LazyImageIcon("icons/computer_16x16.png");
@@ -1172,6 +1306,11 @@ public class BaseIcons {
 		return fileViewComputerIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileViewFloppyDriveIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileViewFloppyDriveIcon() {
 		if (fileViewFloppyDriveIcon == null) {
 			fileViewFloppyDriveIcon = new LazyImageIcon("icons/floppy_drive_16x16.png");
@@ -1179,6 +1318,11 @@ public class BaseIcons {
 		return fileViewFloppyDriveIcon;
 	}
 
+	/**
+	 * <p>Getter for the field fileViewHardDriveIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getFileViewHardDriveIcon() {
 		if (fileViewHardDriveIcon == null) {
 			fileViewHardDriveIcon = new LazyImageIcon("icons/hard_drive_16x16.png");
@@ -1186,6 +1330,11 @@ public class BaseIcons {
 		return fileViewHardDriveIcon;
 	}
 
+	/**
+	 * <p>Getter for the field iconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -1199,6 +1348,11 @@ public class BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>Getter for the field leftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getLeftArrowIcon() {
 		if (leftArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1212,6 +1366,11 @@ public class BaseIcons {
 		return leftArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field leftArrowInverseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getLeftArrowInverseIcon() {
 		if (leftArrowInverseIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1225,6 +1384,11 @@ public class BaseIcons {
 		return leftArrowInverseIcon;
 	}
 
+	/**
+	 * <p>Getter for the field maxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -1239,6 +1403,11 @@ public class BaseIcons {
 	}
 
 	// MenuIcons
+	/**
+	 * <p>Getter for the field menuArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMenuArrowIcon() {
 		if (menuArrowIcon == null) {
 			menuArrowIcon = new LazyMenuArrowImageIcon("icons/MenuRightArrow.gif", "icons/MenuLeftArrow.gif");
@@ -1246,6 +1415,11 @@ public class BaseIcons {
 		return menuArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field menuCheckBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMenuCheckBoxIcon() {
 		if (menuCheckBoxIcon == null) {
 			menuCheckBoxIcon = new CheckBoxIcon();
@@ -1254,6 +1428,11 @@ public class BaseIcons {
 	}
 
 	// TitlePane icons
+	/**
+	 * <p>Getter for the field menuIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMenuIcon() {
 		if (menuIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1267,6 +1446,11 @@ public class BaseIcons {
 		return menuIcon;
 	}
 
+	/**
+	 * <p>Getter for the field menuRadioButtonIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMenuRadioButtonIcon() {
 		if (menuRadioButtonIcon == null) {
 			menuRadioButtonIcon = new RadioButtonIcon();
@@ -1274,6 +1458,11 @@ public class BaseIcons {
 		return menuRadioButtonIcon;
 	}
 
+	/**
+	 * <p>Getter for the field minIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -1288,6 +1477,11 @@ public class BaseIcons {
 	}
 
 	// OptionPane
+	/**
+	 * <p>Getter for the field optionPaneErrorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getOptionPaneErrorIcon() {
 		if (optionPaneErrorIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1301,6 +1495,11 @@ public class BaseIcons {
 		return optionPaneErrorIcon;
 	}
 
+	/**
+	 * <p>Getter for the field optionPaneInformationIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getOptionPaneInformationIcon() {
 		if (optionPaneInformationIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1314,6 +1513,11 @@ public class BaseIcons {
 		return optionPaneInformationIcon;
 	}
 
+	/**
+	 * <p>Getter for the field optionPaneQuestionIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getOptionPaneQuestionIcon() {
 		if (optionPaneQuestionIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1327,6 +1531,11 @@ public class BaseIcons {
 		return optionPaneQuestionIcon;
 	}
 
+	/**
+	 * <p>Getter for the field optionPaneWarningIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getOptionPaneWarningIcon() {
 		if (optionPaneWarningIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1340,6 +1549,11 @@ public class BaseIcons {
 		return optionPaneWarningIcon;
 	}
 
+	/**
+	 * <p>Getter for the field paletteCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getPaletteCloseIcon() {
 		if (paletteCloseIcon == null) {
 			paletteCloseIcon = new CloseSymbol(Color.black, null, Color.red);
@@ -1347,6 +1561,11 @@ public class BaseIcons {
 		return paletteCloseIcon;
 	}
 
+	/**
+	 * <p>Getter for the field radioButtonIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRadioButtonIcon() {
 		if (radioButtonIcon == null) {
 			radioButtonIcon = new RadioButtonIcon();
@@ -1354,6 +1573,11 @@ public class BaseIcons {
 		return radioButtonIcon;
 	}
 
+	/**
+	 * <p>Getter for the field rightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRightArrowIcon() {
 		if (rightArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1367,6 +1591,11 @@ public class BaseIcons {
 		return rightArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field rightArrowInverseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRightArrowInverseIcon() {
 		if (rightArrowInverseIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1380,6 +1609,11 @@ public class BaseIcons {
 		return rightArrowInverseIcon;
 	}
 
+	/**
+	 * <p>Getter for the field splitterDownArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterDownArrowIcon() {
 		if (splitterDownArrowIcon == null) {
 			splitterDownArrowIcon = new LazyImageIcon("icons/SplitterDownArrow.gif");
@@ -1387,6 +1621,11 @@ public class BaseIcons {
 		return splitterDownArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field splitterHorBumpIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterHorBumpIcon() {
 		if (splitterHorBumpIcon == null) {
 			splitterHorBumpIcon = new LazyImageIcon("icons/SplitterHorBumps.gif");
@@ -1394,6 +1633,11 @@ public class BaseIcons {
 		return splitterHorBumpIcon;
 	}
 
+	/**
+	 * <p>Getter for the field splitterLeftArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterLeftArrowIcon() {
 		if (splitterLeftArrowIcon == null) {
 			splitterLeftArrowIcon = new LazyImageIcon("icons/SplitterLeftArrow.gif");
@@ -1401,6 +1645,11 @@ public class BaseIcons {
 		return splitterLeftArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field splitterRightArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterRightArrowIcon() {
 		if (splitterRightArrowIcon == null) {
 			splitterRightArrowIcon = new LazyImageIcon("icons/SplitterRightArrow.gif");
@@ -1409,6 +1658,11 @@ public class BaseIcons {
 	}
 
 	// Splitter
+	/**
+	 * <p>Getter for the field splitterUpArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterUpArrowIcon() {
 		if (splitterUpArrowIcon == null) {
 			splitterUpArrowIcon = new LazyImageIcon("icons/SplitterUpArrow.gif");
@@ -1416,6 +1670,11 @@ public class BaseIcons {
 		return splitterUpArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field splitterVerBumpIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getSplitterVerBumpIcon() {
 		if (splitterVerBumpIcon == null) {
 			splitterVerBumpIcon = new LazyImageIcon("icons/SplitterVerBumps.gif");
@@ -1424,6 +1683,11 @@ public class BaseIcons {
 	}
 
 	// Slider
+	/**
+	 * <p>Getter for the field thumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if (thumbHorIcon == null) {
 			thumbHorIcon = new LazyImageIcon("icons/thumb_hor.gif");
@@ -1431,6 +1695,11 @@ public class BaseIcons {
 		return thumbHorIcon;
 	}
 
+	/**
+	 * <p>Getter for the field thumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if (thumbHorIconRollover == null) {
 			thumbHorIconRollover = new LazyImageIcon("icons/thumb_hor_rollover.gif");
@@ -1438,6 +1707,11 @@ public class BaseIcons {
 		return thumbHorIconRollover;
 	}
 
+	/**
+	 * <p>Getter for the field thumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if (thumbVerIcon == null) {
 			thumbVerIcon = new LazyImageIcon("icons/thumb_ver.gif");
@@ -1445,6 +1719,11 @@ public class BaseIcons {
 		return thumbVerIcon;
 	}
 
+	/**
+	 * <p>Getter for the field thumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if (thumbVerIconRollover == null) {
 			thumbVerIconRollover = new LazyImageIcon("icons/thumb_ver_rollover.gif");
@@ -1452,6 +1731,11 @@ public class BaseIcons {
 		return thumbVerIconRollover;
 	}
 
+	/**
+	 * <p>Getter for the field treeClosedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeClosedIcon() {
 		if (treeClosedIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1465,6 +1749,11 @@ public class BaseIcons {
 		return treeClosedIcon;
 	}
 
+	/**
+	 * <p>Getter for the field treeCollapsedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeCollapsedIcon() {
 		if (treeCollapsedIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1478,6 +1767,11 @@ public class BaseIcons {
 		return treeCollapsedIcon;
 	}
 
+	/**
+	 * <p>Getter for the field treeExpandedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeExpandedIcon() {
 		if (treeExpandedIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1491,6 +1785,11 @@ public class BaseIcons {
 		return treeExpandedIcon;
 	}
 
+	/**
+	 * <p>Getter for the field treeLeafIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeLeafIcon() {
 		if (treeLeafIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1505,6 +1804,11 @@ public class BaseIcons {
 	}
 
 // Tree
+	/**
+	 * <p>Getter for the field treeOpenedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeOpenedIcon() {
 		if (treeOpenedIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1519,6 +1823,11 @@ public class BaseIcons {
 	}
 
 // ArrowIcons
+	/**
+	 * <p>Getter for the field upArrowIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getUpArrowIcon() {
 		if (upArrowIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1532,6 +1841,11 @@ public class BaseIcons {
 		return upArrowIcon;
 	}
 
+	/**
+	 * <p>Getter for the field upArrowInverseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getUpArrowInverseIcon() {
 		if (upArrowInverseIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isSmallFontSize()) {
@@ -1545,6 +1859,9 @@ public class BaseIcons {
 		return upArrowInverseIcon;
 	}
 
+	/**
+	 * <p>initDefaults.</p>
+	 */
 	public static void initDefaults() {
 		checkBoxIcon = null;
 		menuCheckBoxIcon = null;

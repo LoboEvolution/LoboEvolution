@@ -5,15 +5,23 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+/**
+ * <p>BrokenComponent class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BrokenComponent extends Component {
 
 	private static final long serialVersionUID = 1L;
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(10, 10);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		g.setColor(Color.RED);
@@ -23,6 +31,7 @@ public class BrokenComponent extends Component {
 		g.drawLine(size.width - 1, 0, 0, size.height - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void update(Graphics g) {
 		paint(g);

@@ -25,8 +25,15 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 import org.w3c.dom.Node;
 
+/**
+ * <p>ColumnsFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ColumnsFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public final boolean accept(Node node) {
         if (node instanceof HTMLElementImpl) {

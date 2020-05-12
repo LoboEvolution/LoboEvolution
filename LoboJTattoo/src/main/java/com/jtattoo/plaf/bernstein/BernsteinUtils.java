@@ -33,7 +33,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>BernsteinUtils class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinUtils {
 
@@ -41,6 +44,12 @@ public class BernsteinUtils {
 	private static final int IMAGE_WIDTH = BG_IMAGE.getIconWidth();
 	private static final int IMAGE_HEIGHT = BG_IMAGE.getIconHeight();
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 */
 	public static void fillComponent(Graphics g, Component c) {
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			int w = c.getWidth();

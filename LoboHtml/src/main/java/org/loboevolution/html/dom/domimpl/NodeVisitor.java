@@ -23,12 +23,18 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+/**
+ * <p>NodeVisitor interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface NodeVisitor {
 	/**
 	 * Visits a node. The call should be expected to occur in a synchronized block.
 	 * The lock will be node-dependent.
-	 * 
-	 * @param node
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
 	 */
 	void visit(org.w3c.dom.Node node);
 }

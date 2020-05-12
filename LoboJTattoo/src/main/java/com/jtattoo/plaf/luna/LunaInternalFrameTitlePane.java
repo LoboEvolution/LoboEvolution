@@ -33,7 +33,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>LunaInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
@@ -43,20 +46,28 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 	private static final long serialVersionUID = 1L;
 	private static final Color FRAME_COLOR = new Color(0, 25, 207);
 
+	/**
+	 * <p>Constructor for LunaInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public LunaInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getHorSpacing() {
 		return 2;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getVerSpacing() {
 		return 5;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (!JTattooUtilities.isActive(this)) {
@@ -67,6 +78,7 @@ public class LunaInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {

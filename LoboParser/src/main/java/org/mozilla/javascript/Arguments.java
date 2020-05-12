@@ -22,6 +22,11 @@ final class Arguments extends IdScriptableObject
 
     private static final String FTAG = "Arguments";
 
+    /**
+     * <p>Constructor for Arguments.</p>
+     *
+     * @param activation a {@link org.mozilla.javascript.NativeCall} object.
+     */
     public Arguments(NativeCall activation)
     {
         this.activation = activation;
@@ -48,6 +53,7 @@ final class Arguments extends IdScriptableObject
         defineProperty(SymbolKey.ITERATOR, iteratorMethod, ScriptableObject.DONTENUM);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
@@ -96,6 +102,7 @@ final class Arguments extends IdScriptableObject
 
     // end helpers
 
+    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start)
     {
@@ -105,6 +112,7 @@ final class Arguments extends IdScriptableObject
         return super.has(index, start);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start)
     {
@@ -142,6 +150,7 @@ final class Arguments extends IdScriptableObject
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value)
     {
@@ -152,12 +161,14 @@ final class Arguments extends IdScriptableObject
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public void put(String name, Scriptable start, Object value)
     {
         super.put(name, start, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     public void delete(int index)
     {
@@ -176,12 +187,14 @@ final class Arguments extends IdScriptableObject
 
         MAX_INSTANCE_ID     = Id_caller;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -227,6 +240,7 @@ final class Arguments extends IdScriptableObject
 
 // #/string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -238,6 +252,7 @@ final class Arguments extends IdScriptableObject
         return null;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -259,6 +274,7 @@ final class Arguments extends IdScriptableObject
         return super.getInstanceIdValue(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -272,6 +288,7 @@ final class Arguments extends IdScriptableObject
         super.setInstanceIdValue(id, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdAttributes(int id, int attr)
     {
@@ -327,6 +344,7 @@ final class Arguments extends IdScriptableObject
         return ids;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
         if (id instanceof Scriptable) {
@@ -354,6 +372,7 @@ final class Arguments extends IdScriptableObject
       return buildDataDescriptor(scope, value, EMPTY);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void defineOwnProperty(Context cx, Object id,
                                      ScriptableObject desc,

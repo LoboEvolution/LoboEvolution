@@ -12,8 +12,11 @@ import java.lang.annotation.Target;
 
 /**
  * An annotation that marks a Java method as JavaScript static function. This can
- * be used as an alternative to the <code>jsStaticFunction_</code> prefix desribed in
+ * be used as an alternative to the jsStaticFunction_ prefix desribed in
  * {@link org.mozilla.javascript.ScriptableObject#defineClass(org.mozilla.javascript.Scriptable, java.lang.Class)}.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

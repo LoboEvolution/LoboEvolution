@@ -11,11 +11,22 @@ import javax.swing.WindowConstants;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.img.ImageViewer;
 
+/**
+ * <p>ScreenShootWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ScreenShootWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for ScreenShootWindow.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public ScreenShootWindow(BrowserFrame frame) {
 		createAndShowGUI(frame);
 	}

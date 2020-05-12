@@ -46,7 +46,10 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>GraphiteBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteBorders extends BaseBorders {
 
@@ -382,6 +385,11 @@ public class GraphiteBorders extends BaseBorders {
 	// ------------------------------------------------------------------------------------
 // Lazy access methods
 //------------------------------------------------------------------------------------
+	/**
+	 * <p>getButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getButtonBorder() {
 		if (buttonBorder == null) {
 			buttonBorder = new ButtonBorder();
@@ -389,6 +397,11 @@ public class GraphiteBorders extends BaseBorders {
 		return buttonBorder;
 	}
 
+	/**
+	 * <p>getInternalFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getInternalFrameBorder() {
 		if (internalFrameBorder == null) {
 			internalFrameBorder = new InternalFrameBorder();
@@ -396,6 +409,11 @@ public class GraphiteBorders extends BaseBorders {
 		return internalFrameBorder;
 	}
 
+	/**
+	 * <p>getMenuItemBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getMenuItemBorder() {
 		if (menuItemBorder == null) {
 			menuItemBorder = new MenuItemBorder();
@@ -403,6 +421,11 @@ public class GraphiteBorders extends BaseBorders {
 		return menuItemBorder;
 	}
 
+	/**
+	 * <p>getPopupMenuBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getPopupMenuBorder() {
 		if (popupMenuBorder == null) {
 			if (AbstractLookAndFeel.getTheme().isMenuOpaque()) {
@@ -414,6 +437,11 @@ public class GraphiteBorders extends BaseBorders {
 		return popupMenuBorder;
 	}
 
+	/**
+	 * <p>getRolloverToolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getRolloverToolButtonBorder() {
 		if (rolloverToolButtonBorder == null) {
 			rolloverToolButtonBorder = new RolloverToolButtonBorder();
@@ -421,6 +449,11 @@ public class GraphiteBorders extends BaseBorders {
 		return rolloverToolButtonBorder;
 	}
 
+	/**
+	 * <p>getToggleButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToggleButtonBorder() {
 		return getButtonBorder();
 	}

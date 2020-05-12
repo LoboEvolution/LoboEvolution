@@ -27,10 +27,19 @@ import java.util.EventListener;
 import java.util.EventObject;
 
 /**
+ * <p>GenericEventListener interface.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public interface GenericEventListener extends EventListener {
+	/** Constant EMPTY_ARRAY */
 	GenericEventListener[] EMPTY_ARRAY = new GenericEventListener[0];
 
+	/**
+	 * <p>processEvent.</p>
+	 *
+	 * @param event a {@link java.util.EventObject} object.
+	 */
 	void processEvent(EventObject event);
 }

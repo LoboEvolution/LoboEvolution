@@ -30,8 +30,15 @@ import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>PositionedRenderable class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class PositionedRenderable implements Renderable {
 
+	/** Constant EMPTY_ARRAY */
 	public static final PositionedRenderable[] EMPTY_ARRAY = new PositionedRenderable[0];
 
 	private BoundableRenderable renderable;
@@ -44,9 +51,13 @@ public class PositionedRenderable implements Renderable {
 
 	private int ordinal;
 
+	/**
+	 * <p>Constructor for PositionedRenderable.</p>
+	 */
 	public PositionedRenderable() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics gIn) {
 		final RCollection originalParent = this.renderable.getOriginalParent();
@@ -130,12 +141,15 @@ public class PositionedRenderable implements Renderable {
 		return currentBounds;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public ModelNode getModelNode() {
 		return this.renderable.getModelNode();
 	}
 
 	/**
+	 * <p>Getter for the field renderable.</p>
+	 *
 	 * @return the renderable
 	 */
 	public BoundableRenderable getRenderable() {
@@ -143,6 +157,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>isVerticalAlignable.</p>
+	 *
 	 * @return the verticalAlignable
 	 */
 	public boolean isVerticalAlignable() {
@@ -150,6 +166,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>isFloat.</p>
+	 *
 	 * @return the isFloat
 	 */
 	public boolean isFloat() {
@@ -157,6 +175,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>isFixed.</p>
+	 *
 	 * @return the isFixed
 	 */
 	public boolean isFixed() {
@@ -164,6 +184,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>Getter for the field ordinal.</p>
+	 *
 	 * @return the ordinal
 	 */
 	public int getOrdinal() {
@@ -171,6 +193,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>Setter for the field renderable.</p>
+	 *
 	 * @param renderable the renderable to set
 	 */
 	public void setRenderable(BoundableRenderable renderable) {
@@ -178,6 +202,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>Setter for the field verticalAlignable.</p>
+	 *
 	 * @param verticalAlignable the verticalAlignable to set
 	 */
 	public void setVerticalAlignable(boolean verticalAlignable) {
@@ -185,6 +211,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>setFloat.</p>
+	 *
 	 * @param isFloat the isFloat to set
 	 */
 	public void setFloat(boolean isFloat) {
@@ -192,6 +220,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>setFixed.</p>
+	 *
 	 * @param isFixed the isFixed to set
 	 */
 	public void setFixed(boolean isFixed) {
@@ -199,6 +229,8 @@ public class PositionedRenderable implements Renderable {
 	}
 
 	/**
+	 * <p>Setter for the field ordinal.</p>
+	 *
 	 * @param ordinal the ordinal to set
 	 */
 	public void setOrdinal(int ordinal) {

@@ -30,6 +30,12 @@ import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
+/**
+ * <p>JavaObjectWrapper class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class JavaObjectWrapper extends ScriptableObject {
 
 	/** The Constant serialVersionUID. */
@@ -48,8 +54,8 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * Instantiates a new java object wrapper.
 	 *
 	 * @param classWrapper the class wrapper
-	 * @throws InstantiationException the instantiation exception
-	 * @throws IllegalAccessException the illegal access exception
+	 * @throws java.lang.InstantiationException the instantiation exception
+	 * @throws java.lang.IllegalAccessException the illegal access exception
 	 */
 	public JavaObjectWrapper(JavaClassWrapper classWrapper) throws InstantiationException, IllegalAccessException {
 		this.classWrapper = classWrapper;
@@ -92,6 +98,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * 
 	 * @see org.mozilla.javascript.ScriptableObject#getClassName()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getClassName() {
 		return this.classWrapper.getClassName();
@@ -103,6 +110,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * @see org.mozilla.javascript.ScriptableObject#get(int,
 	 * org.mozilla.javascript.Scriptable)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Object get(int index, Scriptable start) {
 		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
@@ -136,6 +144,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * @see org.mozilla.javascript.ScriptableObject#get(java.lang.String,
 	 * org.mozilla.javascript.Scriptable)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Object get(String name, Scriptable start) {
 		PropertyInfo pinfo = this.classWrapper.getProperty(name);
@@ -201,6 +210,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * @see org.mozilla.javascript.ScriptableObject#put(int,
 	 * org.mozilla.javascript.Scriptable, java.lang.Object)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void put(int index, Scriptable start, Object value) {
 		PropertyInfo pinfo = this.classWrapper.getIntegerIndexer();
@@ -227,6 +237,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * @see org.mozilla.javascript.ScriptableObject#put(java.lang.String,
 	 * org.mozilla.javascript.Scriptable, java.lang.Object)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void put(String name, Scriptable start, Object value) {
 		if (value instanceof org.mozilla.javascript.Undefined) {
@@ -275,7 +286,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 *
 	 * @param className    the class name
 	 * @param classWrapper the class wrapper
-	 * @param scope        the scope
 	 * @return the constructor
 	 */
 	public static Function getConstructor(String className, JavaClassWrapper classWrapper) {
@@ -287,7 +297,6 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 *
 	 * @param className    the class name
 	 * @param classWrapper the class wrapper
-	 * @param scope        the scope
 	 * @param instantiator the instantiator
 	 * @return the constructor
 	 */
@@ -301,6 +310,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * 
 	 * @see org.mozilla.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Object getDefaultValue(Class hint) {
 		if (hint == null || String.class.equals(hint)) {
@@ -328,6 +338,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 	 * 
 	 * @see java.lang.Object#toString()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		Object javaObject = this.getJavaObject();

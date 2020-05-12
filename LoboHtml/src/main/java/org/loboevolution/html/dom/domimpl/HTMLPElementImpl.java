@@ -4,11 +4,23 @@ import org.loboevolution.html.dom.HTMLParagraphElement;
 import org.loboevolution.html.renderstate.ParagraphRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 
+/**
+ * <p>HTMLPElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParagraphElement {
+	/**
+	 * <p>Constructor for HTMLPElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLPElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		final int length = buffer.length();
@@ -35,16 +47,19 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParag
 		buffer.append("\r\n\r\n");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new ParagraphRenderState(prevRenderState, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlign() {
 		return getAttribute("align");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlign(String align) {
 		setAttribute("align", align);

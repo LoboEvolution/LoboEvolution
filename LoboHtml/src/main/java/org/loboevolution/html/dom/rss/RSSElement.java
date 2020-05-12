@@ -5,13 +5,29 @@ import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>RSSElement class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RSSElement extends HTMLElementImpl {
 
+	/**
+	 * <p>Constructor for RSSElement.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public RSSElement(String name) {
 		super(name);
 
 	}
 
+	/**
+	 * <p>getText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getText() {
 		String text = "";
 		if (hasChildNodes()) {

@@ -30,15 +30,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.XPScrollBarUI;
 
 /**
+ * <p>LunaScrollBarUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaScrollBarUI extends XPScrollBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new LunaScrollBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createDecreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -48,6 +52,7 @@ public class LunaScrollBarUI extends XPScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createIncreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {

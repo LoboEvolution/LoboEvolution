@@ -22,7 +22,19 @@ package org.loboevolution.net;
 
 import java.net.InetAddress;
 
+/**
+ * <p>NetRoutines class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class NetRoutines {
+	/**
+	 * <p>isLocalAddress.</p>
+	 *
+	 * @param host a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isLocalAddress(String host) {
 		try {
 			final InetAddress address = InetAddress.getByName(host);

@@ -29,12 +29,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>AluminiumCheckBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumCheckBoxUI extends AluminiumRadioButtonUI {
 
 	private static AluminiumCheckBoxUI checkBoxUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new AluminiumCheckBoxUI();
@@ -42,6 +46,7 @@ public class AluminiumCheckBoxUI extends AluminiumRadioButtonUI {
 		return checkBoxUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);

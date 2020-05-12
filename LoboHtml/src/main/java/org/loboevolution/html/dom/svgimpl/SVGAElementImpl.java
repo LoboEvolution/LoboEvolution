@@ -20,22 +20,36 @@ import org.loboevolution.html.dom.svg.SVGUseElement;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGAElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 
+	/**
+	 * <p>Constructor for SVGAElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGAElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedString getHref() {
 		return new SVGAnimatedStringImpl(getAttribute("href"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedString getTarget() {
 		return new SVGAnimatedStringImpl(getAttribute("target"));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		final SVGMatrix ctm = getCTM();
@@ -44,6 +58,7 @@ public class SVGAElementImpl extends SVGGraphic implements SVGAElement {
 		drawable(graphics, shape);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		GeneralPath path = new GeneralPath();

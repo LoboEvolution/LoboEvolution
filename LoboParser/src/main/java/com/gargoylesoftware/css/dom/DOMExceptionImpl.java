@@ -17,9 +17,10 @@ package com.gargoylesoftware.css.dom;
 import org.w3c.dom.DOMException;
 
 /**
- * Custom {@link DOMException} extension.
+ * Custom {@link org.w3c.dom.DOMException} extension.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class DOMExceptionImpl extends DOMException {
 	
@@ -91,6 +92,7 @@ public class DOMExceptionImpl extends DOMException {
 
     /**
      * Ctor.
+     *
      * @param code the code
      * @param messageKey the message key
      */
@@ -100,6 +102,7 @@ public class DOMExceptionImpl extends DOMException {
 
     /**
      * Ctor.
+     *
      * @param code the code
      * @param messageKey the message key
      */
@@ -109,6 +112,7 @@ public class DOMExceptionImpl extends DOMException {
 
     /**
      * Ctor.
+     *
      * @param code the code
      * @param messageKey the message key
      * @param info additional info

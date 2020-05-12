@@ -28,32 +28,48 @@ import org.loboevolution.html.renderstate.DisplayRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.HtmlValues;
 
+/**
+ * <p>HTMLLIElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIElement {
+	/**
+	 * <p>Constructor for HTMLLIElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLLIElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new DisplayRenderState(prevRenderState, this, RenderState.DISPLAY_LIST_ITEM);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		return getAttribute("type");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getValue() {
 		final String valueText = getAttribute("value");
 		return HtmlValues.getPixelSize(valueText, null, 0);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValue(int value) {
 		setAttribute("value", String.valueOf(value));

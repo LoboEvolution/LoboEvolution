@@ -25,6 +25,13 @@ class LineMargin {
 	private final int clearY;
 	private final LineMargin next;
 
+	/**
+	 * <p>Constructor for LineMargin.</p>
+	 *
+	 * @param next a {@link org.loboevolution.html.renderer.LineMargin} object.
+	 * @param cleary a int.
+	 * @param totalXOffset a int.
+	 */
 	public LineMargin(LineMargin next, int cleary, int totalXOffset) {
 		super();
 		this.next = next;
@@ -32,6 +39,7 @@ class LineMargin {
 		this.clearX = totalXOffset;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object other) {
 		if (!(other instanceof LineMargin)) {
@@ -42,18 +50,40 @@ class LineMargin {
 				&& java.util.Objects.equals(olm.next, this.next);
 	}
 
+	/**
+	 * <p>Getter for the field clearY.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getClearY() {
 		return this.clearY;
 	}
 
+	/**
+	 * <p>Getter for the field next.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderer.LineMargin} object.
+	 */
 	public LineMargin getNext() {
 		return this.next;
 	}
 
+	/**
+	 * <p>getOffset.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getOffset() {
 		return this.clearX;
 	}
 
+	/**
+	 * <p>translated.</p>
+	 *
+	 * @param yoffset a int.
+	 * @param xoffset a int.
+	 * @return a {@link org.loboevolution.html.renderer.LineMargin} object.
+	 */
 	public LineMargin translated(int yoffset, int xoffset) {
 		final int newClearY = this.clearY - yoffset;
 		int newOffsetX = this.clearX - xoffset;

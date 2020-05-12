@@ -51,6 +51,12 @@ import org.loboevolution.html.dom.svgimpl.SVGSymbolElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGTextElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGUseElementImpl;
 
+/**
+ * <p>Abstract HTMLElementBuilder class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class HTMLElementBuilder {
 
 	public static class Anchor extends HTMLElementBuilder {
@@ -557,8 +563,21 @@ public abstract class HTMLElementBuilder {
 		}		
 	}
 	
+	/**
+	 * <p>build.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	protected abstract HTMLElementImpl build(String name);
 
+	/**
+	 * <p>create.</p>
+	 *
+	 * @param document a {@link org.loboevolution.html.dom.HTMLDocument} object.
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 */
 	public final HTMLElement create(HTMLDocument document, String name) {
 		final HTMLElementImpl element = build(name);
 		element.setOwnerDocument(document);

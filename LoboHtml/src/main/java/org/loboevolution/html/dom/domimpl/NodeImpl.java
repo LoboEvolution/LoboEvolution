@@ -61,10 +61,17 @@ import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.filter.TextFilter;
 
+/**
+ * <p>Abstract NodeImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class NodeImpl extends AbstractScriptableDelegate implements Node, ModelNode {
 		
 	private static final RenderState INVALID_RENDER_STATE = new StyleSheetRenderState(null);
 	
+	/** Constant logger */
 	protected static final Logger logger = Logger.getLogger(NodeImpl.class.getName());
 	
 	private HTMLCollection childrenCollection;
@@ -89,10 +96,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 
 	private Map<String, UserDataHandler> userDataHandlers;
 
+	/**
+	 * <p>Constructor for NodeImpl.</p>
+	 */
 	public NodeImpl() {
 		super();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public Node appendChild(Node newChild) throws DOMException {
 		synchronized (this.treeLock) {
@@ -118,6 +129,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>appendInnerHTMLImpl.</p>
+	 *
+	 * @param buffer a {@link java.lang.StringBuilder} object.
+	 */
 	protected void appendInnerHTMLImpl(StringBuilder buffer) {
 		for (Node child : Nodes.iterable(nodeList)) {
 			if (child instanceof HTMLElementImpl) {
@@ -134,6 +150,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>appendInnerTextImpl.</p>
+	 *
+	 * @param buffer a {@link java.lang.StringBuilder} object.
+	 */
 	protected void appendInnerTextImpl(StringBuilder buffer) {
 		for (Node child : Nodes.iterable(nodeList)) {
 			if (child instanceof ElementImpl) {
@@ -147,6 +168,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node cloneNode(boolean deep) {
 		try {
@@ -187,6 +209,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short compareDocumentPosition(Node other) throws DOMException {
 		final Node parent = getParentNode();
@@ -213,6 +236,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>createRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 */
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return prevRenderState;
 	}
@@ -220,9 +249,17 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * Should create a node with some cloned properties, like the node name, but not
 	 * attributes or children.
+	 *
+	 * @return a {@link org.w3c.dom.Node} object.
 	 */
 	protected abstract Node createSimilarNode();
 
+	/**
+	 * <p>equalAttributes.</p>
+	 *
+	 * @param arg a {@link org.w3c.dom.Node} object.
+	 * @return a boolean.
+	 */
 	public boolean equalAttributes(Node arg) {
 		return false;
 	}
@@ -252,6 +289,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * Tries to get a UINode associated with the current node. Failing that, it
 	 * tries ancestors recursively. This method will return the closest
 	 * <i>block-level</i> renderer node, if any.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.UINode} object.
 	 */
 	public UINode findUINode() {
 		// Called in GUI thread always.
@@ -263,6 +302,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return parentNode == null ? null : parentNode.findUINode();
 	}
 
+	/**
+	 * <p>forgetRenderState.</p>
+	 */
 	protected void forgetRenderState() {
 		synchronized (this.treeLock) {
 			if (this.renderState != INVALID_RENDER_STATE) {
@@ -279,6 +321,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContext#getAlignmentX()
 	 */
+	/**
+	 * <p>getAlignmentX.</p>
+	 *
+	 * @return a float.
+	 */
 	public float getAlignmentX() {
 		return 0.5f;
 	}
@@ -288,15 +335,22 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContext#getAlignmentY()
 	 */
+	/**
+	 * <p>getAlignmentY.</p>
+	 *
+	 * @return a float.
+	 */
 	public float getAlignmentY() {
 		return 0.5f;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NamedNodeMap getAttributes() {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
 		final Document document = this.document;
@@ -315,11 +369,17 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return this.nodeList.indexOf(child);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public NodeList getChildNodes() {
 		return this.nodeList;
 	}
 
+	/**
+	 * <p>getChildren.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+	 */
 	public HTMLCollection getChildren() {
 		synchronized (this) {
 			HTMLCollection collection = this.childrenCollection;
@@ -331,13 +391,22 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>getChildrenArray.</p>
+	 *
+	 * @return an array of {@link org.loboevolution.html.dom.domimpl.NodeImpl} objects.
+	 */
 	public NodeImpl[] getChildrenArray() {
 		return this.nodeList.toArray();
 	}
 
 	/**
-	 * Creates an <code>NodeList</code> of descendent nodes that the given filter
+	 * Creates an NodeList of descendent nodes that the given filter
 	 * condition.
+	 *
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @param nestIntoMatchingNodes a boolean.
+	 * @return a {@link org.w3c.dom.NodeList} object.
 	 */
 	public NodeList getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
 		final ArrayList<Node> al = new ArrayList<Node>();
@@ -353,12 +422,18 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @see
 	 * org.loboevolution.html.rendered.RenderableContext#getDocumentItem(java.lang.String)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Object getDocumentItem(String name) {
 		final org.w3c.dom.Document document = this.document;
 		return document == null ? null : document.getUserData(name);
 	}
 
+	/**
+	 * <p>getDocumentURL.</p>
+	 *
+	 * @return a {@link java.net.URL} object.
+	 */
 	public URL getDocumentURL() {
 		final Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -368,12 +443,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getFeature(String feature, String version) {
 		// TODO What should this do?
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getFirstChild() {
 		if (this.nodeList == null)
@@ -390,6 +467,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContext#getFullURL(java.lang.String)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public URL getFullURL(String spec) throws MalformedURLException {
 		final Object doc = this.document;
@@ -401,6 +479,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>getHtmlRendererContext.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public HtmlRendererContext getHtmlRendererContext() {
 		final Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -410,6 +493,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>getInnerHTML.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getInnerHTML() {
 		final StringBuilder buffer = new StringBuilder();
 		synchronized (this) {
@@ -421,6 +509,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/**
 	 * Attempts to convert the subtree starting at this point to a close text
 	 * representation. BR elements are converted to line breaks, and so forth.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getInnerText() {
 		final StringBuilder buffer = new StringBuilder();
@@ -430,6 +520,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return buffer.toString();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getLastChild() {
 		if(this.nodeList == null)
@@ -444,20 +535,28 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public abstract String getLocalName();
 
+	/** {@inheritDoc} */
 	@Override
 	public String getNamespaceURI() {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getNextSibling() {
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		return parent == null ? null : parent.getNextTo(this);
 	}
 	
+	/**
+	 * <p>getNextElementSibling.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
 	public Element getNextElementSibling() {
 		final NodeImpl parent = (NodeImpl) this.getParentNode();
 		if (parent != null) {
@@ -494,6 +593,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return parent == null ? -1 : parent.getChildIndex(this);
 	}
 
+	/**
+	 * <p>Getter for the field nodeList.</p>
+	 *
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 * @return a {@link org.w3c.dom.NodeList} object.
+	 */
 	protected NodeList getNodeList(NodeFilter filter) {
 		final List<Node> collection = new ArrayList<Node>();
 		synchronized (this.treeLock) {
@@ -502,30 +607,42 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return new NodeListImpl(collection);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public abstract String getNodeName();
 
+	/** {@inheritDoc} */
 	@Override
 	public abstract short getNodeType();
 
+	/** {@inheritDoc} */
 	@Override
 	public abstract String getNodeValue() throws DOMException;
 
+	/** {@inheritDoc} */
 	@Override
 	public Document getOwnerDocument() {
 		return this.document;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final ModelNode getParentModelNode() {
 		return (ModelNode) this.parentNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getParentNode() {
 		return this.parentNode;
 	}
 
+	/**
+	 * <p>getParentRenderState.</p>
+	 *
+	 * @param parent a {@link java.lang.Object} object.
+	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 */
 	protected final RenderState getParentRenderState(Object parent) {
 		if (parent instanceof NodeImpl) {
 			return ((NodeImpl) parent).getRenderState();
@@ -534,17 +651,24 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPrefix() {
 		return this.prefix;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node getPreviousSibling() {
 		final NodeImpl parent = (NodeImpl) getParentNode();
 		return parent == null ? null : parent.getPreviousTo(this);
 	}
 	
+	/**
+	 * <p>getPreviousElementSibling.</p>
+	 *
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
 	public Element getPreviousElementSibling() {
 		final NodeImpl parent = (NodeImpl) this.getParentNode();
 		if (parent != null) {
@@ -577,6 +701,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 	
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderState getRenderState() {
 		// Generally called from the GUI thread, except for
@@ -602,6 +727,8 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Gets the text content of this node and its descendents.
 	 */
 	@Override
@@ -625,11 +752,21 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return sb.toString();
 	}
 
+	/**
+	 * <p>getUINode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.UINode} object.
+	 */
 	public UINode getUINode() {
 		// Called in GUI thread always.
 		return this.uiNode;
 	}
 
+	/**
+	 * <p>getUserAgentContext.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public UserAgentContext getUserAgentContext() {
 		final Object doc = this.document;
 		if (doc instanceof HTMLDocumentImpl) {
@@ -639,6 +776,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object getUserData(String key) {
 		synchronized (this) {
@@ -647,20 +785,31 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasAttributes() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean hasChildNodes() {
 		return this.nodeList.getLength() > 0;
 	}
 
+	/**
+	 * <p>htmlEncodeChildText.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	protected String htmlEncodeChildText(String text) {
 		return Strings.strictHtmlEncode(text, false);
 	}
 
+	/**
+	 * <p>informDocumentInvalid.</p>
+	 */
 	public void informDocumentInvalid() {
 		// This is called when an attribute or child changes.
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -669,6 +818,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informExternalScriptLoading.</p>
+	 */
 	protected void informExternalScriptLoading() {
 		// This is called when an attribute or child changes.
 		forgetRenderState();
@@ -678,6 +830,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informInvalid.</p>
+	 */
 	public void informInvalid() {
 		// This is called when an attribute or child changes.
 		forgetRenderState();
@@ -687,6 +842,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informLayoutInvalid.</p>
+	 */
 	public void informLayoutInvalid() {
 		// This is called by the style properties object.
 		forgetRenderState();
@@ -696,6 +854,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informLookInvalid.</p>
+	 */
 	public void informLookInvalid() {
 		forgetRenderState();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -704,6 +865,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informNodeLoaded.</p>
+	 */
 	protected void informNodeLoaded() {
 		// This is called when an attribute or child changes.
 		forgetRenderState();
@@ -713,6 +877,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informPositionInvalid.</p>
+	 */
 	public void informPositionInvalid() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
@@ -720,6 +887,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informSizeInvalid.</p>
+	 */
 	public void informSizeInvalid() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
@@ -727,6 +897,9 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>informStructureInvalid.</p>
+	 */
 	public void informStructureInvalid() {
 		// This is called when an attribute or child changes.
 		forgetRenderState();
@@ -736,6 +909,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>insertAfter.</p>
+	 *
+	 * @param newChild a {@link org.w3c.dom.Node} object.
+	 * @param refChild a {@link org.w3c.dom.Node} object.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 */
 	public Node insertAfter(Node newChild, Node refChild) {
 		final int idx = this.nodeList.indexOf(refChild);
 		if (idx == -1) {
@@ -752,6 +932,14 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return newChild;
 	}
 
+	/**
+	 * <p>insertAt.</p>
+	 *
+	 * @param newChild a {@link org.w3c.dom.Node} object.
+	 * @param idx a int.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	protected Node insertAt(Node newChild, int idx) throws DOMException {
 		this.nodeList.add(idx, newChild);
 		if (newChild instanceof NodeImpl) {
@@ -764,6 +952,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return newChild;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node insertBefore(Node newChild, Node refChild) throws DOMException {
 		synchronized (this.treeLock) {
@@ -793,11 +982,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isDefaultNamespace(String namespaceURI) {
 		return namespaceURI == null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isEqualNode(Node arg) {
 		return arg instanceof NodeImpl && getNodeType() == arg.getNodeType()
@@ -813,6 +1004,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @see
 	 * org.loboevolution.html.rendered.RenderableContext#isEqualOrDescendentOf(org.loboevolution.html.rendered.RenderableContext)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public final boolean isEqualOrDescendentOf(ModelNode otherContext) {
 		if (otherContext == this) {
@@ -826,26 +1018,31 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSameNode(Node other) {
 		return this == other;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isSupported(String feature, String version) {
 		return "HTML".equals(feature) && version.compareTo("4.01") <= 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String lookupNamespaceURI(String prefix) {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String lookupPrefix(String namespaceURI) {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void normalize() {
 		final List<Node> textNodes = new LinkedList<Node>();
@@ -870,12 +1067,18 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>removeAllChildren.</p>
+	 */
 	protected void removeAllChildren() {
 		synchronized (this.treeLock) {
 			removeAllChildrenImpl();
 		}
 	}
 
+	/**
+	 * <p>removeAllChildrenImpl.</p>
+	 */
 	protected void removeAllChildrenImpl() {
 		this.nodeList.clear();
 		if (!this.notificationsSuspended) {
@@ -883,6 +1086,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node removeChild(Node oldChild) throws DOMException {
 		synchronized (this.treeLock) {
@@ -896,6 +1100,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		return oldChild;
 	}
 
+	/**
+	 * <p>removeChildAt.</p>
+	 *
+	 * @param index a int.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public Node removeChildAt(int index) throws DOMException {
 		try {
 			final Node n = this.nodeList.remove(index);
@@ -910,6 +1121,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>removeChildren.</p>
+	 *
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 */
 	protected void removeChildren(NodeFilter filter) {
 		synchronized (this.treeLock) {
 			removeChildrenImpl(filter);
@@ -919,6 +1135,11 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>removeChildrenImpl.</p>
+	 *
+	 * @param filter a {@link org.loboevolution.html.dom.NodeFilter} object.
+	 */
 	protected void removeChildrenImpl(NodeFilter filter) {
 		final int len = this.nodeList.getLength();
 		for (int i = len; --i >= 0;) {
@@ -929,6 +1150,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>replaceAdjacentTextNodes.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Text} object.
+	 * @return a {@link org.w3c.dom.Text} object.
+	 */
 	public Text replaceAdjacentTextNodes(Text node) {
 		try {
 				final int idx = nodeList.indexOf(node);
@@ -967,6 +1194,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>replaceAdjacentTextNodes.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Text} object.
+	 * @param textContent a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Text} object.
+	 */
 	public Text replaceAdjacentTextNodes(Text node, String textContent) {
 		try {
 			final int idx = this.nodeList.indexOf(node);
@@ -1003,6 +1237,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node replaceChild(Node newChild, Node oldChild) throws DOMException {
 	
@@ -1025,6 +1260,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * org.loboevolution.html.rendered.RenderableContext#setDocumentItem(java.lang.String,
 	 * java.lang.Object)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setDocumentItem(String name, Object value) {
 		final org.w3c.dom.Document document = this.document;
@@ -1034,9 +1270,15 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		document.setUserData(name, value, null);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public abstract void setNodeValue(String nodeValue) throws DOMException;
 
+	/**
+	 * <p>setOwnerDocument.</p>
+	 *
+	 * @param value a {@link org.w3c.dom.Document} object.
+	 */
 	public void setOwnerDocument(Document value) {
 		this.document = value;
 		this.treeLock = value == null ? this : (Object) value;
@@ -1058,11 +1300,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		this.parentNode = parent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setPrefix(String prefix) throws DOMException {
 		this.prefix = prefix;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) throws DOMException {
 		synchronized (this.treeLock) {
@@ -1079,11 +1323,17 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>setUINode.</p>
+	 *
+	 * @param uiNode a {@link org.loboevolution.html.dom.domimpl.UINode} object.
+	 */
 	public void setUINode(UINode uiNode) {
 		// Called in GUI thread always.
 		this.uiNode = uiNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(final String key, final Object data, final UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key)) {
@@ -1118,6 +1368,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return getNodeName();
@@ -1147,10 +1398,16 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		}
 	}
 
+	/**
+	 * <p>warn.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void warn(String message) {
 		logger.log(Level.WARNING, message);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);

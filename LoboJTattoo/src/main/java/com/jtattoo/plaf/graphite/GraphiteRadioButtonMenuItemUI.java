@@ -35,14 +35,19 @@ import com.jtattoo.plaf.BaseRadioButtonMenuItemUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>GraphiteRadioButtonMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new GraphiteRadioButtonMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
 		JMenuItem mi = (JMenuItem) c;

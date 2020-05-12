@@ -65,8 +65,9 @@ import org.w3c.dom.Node;
  * node, usually on behalf of an RBlock. It creates a renderer subtree
  * consisting of RLine's or RBlock's. RLine's in turn contain RWord's and so on.
  * This class also happens to be used as an RBlock scrollable viewport.
- * 
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class RBlockViewport extends BaseRCollection {
 	
@@ -128,11 +129,12 @@ public class RBlockViewport extends BaseRCollection {
 	
 	protected final FrameContext frameContext;
 
+	/** Constant ZERO_INSETS */
 	public static final Insets ZERO_INSETS = new Insets(0, 0, 0, 0);
 	
 	/**
 	 * Constructs an HtmlBlockLayout.
-	 * 
+	 *
 	 * @param container    This is usually going to be an RBlock.
 	 * @param listNesting  The nesting level for lists. This is zero except inside a
 	 *                     list.
@@ -140,7 +142,9 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param frameContext This is usually going to be HtmlBlock, an object where
 	 *                     text selections are contained.
 	 * @param parent       This is usually going to be the parent of
-	 *                     <code>container</code>.
+	 *                     container.
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
 	 */
 	public RBlockViewport(ModelNode modelNode, RenderableContainer container, int listNesting,
 			UserAgentContext pcontext, HtmlRendererContext rcontext, FrameContext frameContext, RCollection parent) {
@@ -290,12 +294,11 @@ public class RBlockViewport extends BaseRCollection {
 	/**
 	 * Checks for position and float attributes.
 	 * 
-	 * @param container
-	 * @param containerSize
-	 * @param insets
-	 * @param renderable
-	 * @param element
-	 * @param usesAlignAttribute
+	 * @param renderable renderable
+	 * @param element element
+	 * @param usesAlignAttribute usesAlignAttribute
+	 * @param layoutIfPositioned layoutIfPositioned
+	 * @param obeysFloats obeysFloats
 	 * @return True if it was added elsewhere.
 	 */
 	private boolean addElsewhereIfPositioned(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute,
@@ -409,6 +412,12 @@ public class RBlockViewport extends BaseRCollection {
 		this.currentLine = newLine;
 	}
 
+	/**
+	 * <p>addLineBreak.</p>
+	 *
+	 * @param startNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param breakType a int.
+	 */
 	protected void addLineBreak(ModelNode startNode, int breakType) {
 		RLine line = this.currentLine;
 		if (line == null) {
@@ -505,6 +514,10 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Checks property 'float' and in some cases attribute 'align'.
+	 *
+	 * @param renderable a {@link org.loboevolution.html.renderer.RElement} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param usesAlignAttribute a boolean.
 	 */
 	protected void addRenderableToLineCheckStyle(RElement renderable, HTMLElementImpl element, boolean usesAlignAttribute) {
 		if (addElsewhereIfPositioned(renderable, element, usesAlignAttribute, true, true)) {
@@ -551,10 +564,11 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Applies any horizonal aLignment. It may adjust height if necessary.
-	 * 
+	 *
 	 * @param canvasWidth   The new width of the viewport. It could be different to
 	 *                      the previously calculated width.
-	 * @param paddingInsets
+	 * @param paddingInsets a {@link java.awt.Insets} object.
+	 * @param alignXPercent a int.
 	 */
 	public void alignX(int alignXPercent, int canvasWidth, Insets paddingInsets) {
 		final int prevMaxY = this.maxY;
@@ -592,9 +606,10 @@ public class RBlockViewport extends BaseRCollection {
 
 	/**
 	 * Applies vertical alignment.
-	 * 
-	 * @param canvasHeight
-	 * @param paddingInsets
+	 *
+	 * @param canvasHeight a int.
+	 * @param paddingInsets a {@link java.awt.Insets} object.
+	 * @param alignYPercent a int.
 	 */
 	public void alignY(int alignYPercent, int canvasHeight, Insets paddingInsets) {
 		final int prevMaxY = this.maxY;
@@ -683,6 +698,11 @@ public class RBlockViewport extends BaseRCollection {
 		return right;
 	}
 
+	/**
+	 * <p>Getter for the field availContentWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getAvailContentWidth() {
 		return this.availContentWidth;
 	}
@@ -701,6 +721,11 @@ public class RBlockViewport extends BaseRCollection {
 		return block.getHeight() - Math.min(blockMarginBottom, parentMarginBottom);
 	}
 
+	/**
+	 * <p>getExportableFloatingInfo.</p>
+	 *
+	 * @return a {@link org.loboevolution.info.FloatingInfo} object.
+	 */
 	public FloatingInfo getExportableFloatingInfo() {
 		final ArrayList<ExportableFloat> ef = this.exportableFloats;
 		if (ef == null) {
@@ -714,6 +739,11 @@ public class RBlockViewport extends BaseRCollection {
 		return fInfo;
 	}
 
+	/**
+	 * <p>getFirstBaselineOffset.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getFirstBaselineOffset() {
 		final ArrayList<Renderable> renderables = this.seqRenderables;
 		if (renderables != null) {
@@ -738,6 +768,11 @@ public class RBlockViewport extends BaseRCollection {
 		return 0;
 	}
 
+	/**
+	 * <p>getFirstLineHeight.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getFirstLineHeight() {
 		final ArrayList<Renderable> renderables = this.seqRenderables;
 		if (renderables != null) {
@@ -757,6 +792,7 @@ public class RBlockViewport extends BaseRCollection {
 		return 1;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final BoundableRenderable br = this.getRenderable(new Point(x, y));
@@ -790,16 +826,24 @@ public class RBlockViewport extends BaseRCollection {
 		return (RBlockViewport) parent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BoundableRenderable getRenderable(int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(x, y);
 		return i == null ? null : i.hasNext() ? (BoundableRenderable) i.next() : null;
 	}
 
+	/**
+	 * <p>getRenderable.</p>
+	 *
+	 * @param point a {@link java.awt.Point} object.
+	 * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+	 */
 	public BoundableRenderable getRenderable(java.awt.Point point) {
 		return this.getRenderable(point.x, point.y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Iterator<Renderable> getRenderables() {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
@@ -813,6 +857,13 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * <p>getRenderables.</p>
+	 *
+	 * @param pointx a int.
+	 * @param pointy a int.
+	 * @return a {@link java.util.Iterator} object.
+	 */
 	public Iterator<Renderable> getRenderables(int pointx, int pointy) {
 		if (!SwingUtilities.isEventDispatchThread() && logger.isLoggable(Level.INFO)) {
 			logger.warning("getRenderable(): Invoked outside GUI dispatch thread.");
@@ -871,6 +922,12 @@ public class RBlockViewport extends BaseRCollection {
 		return result == null ? null : result.iterator();
 	}
 
+	/**
+	 * <p>getRenderables.</p>
+	 *
+	 * @param point a {@link java.awt.Point} object.
+	 * @return a {@link java.util.Iterator} object.
+	 */
 	public Iterator<Renderable> getRenderables(java.awt.Point point) {
 		return this.getRenderables(point.x, point.y);
 	}
@@ -906,6 +963,11 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * <p>getRenderablesArray.</p>
+	 *
+	 * @return an array of {@link org.loboevolution.html.renderer.Renderable} objects.
+	 */
 	public Renderable[] getRenderablesArray() {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		final int othersSize = others == null ? 0 : others.size();
@@ -966,6 +1028,7 @@ public class RBlockViewport extends BaseRCollection {
 		return parentBlock.getCollapsibleMarginTop();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidateLayoutLocal() {
 		// Workaround for fact that RBlockViewport does not
@@ -973,6 +1036,7 @@ public class RBlockViewport extends BaseRCollection {
 		this.layoutUpTreeCanBeInvalidated = true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isContainedByNode() {
 		return false;
@@ -1028,10 +1092,15 @@ public class RBlockViewport extends BaseRCollection {
 	 * Builds the layout/renderer tree from scratch. Note: Returned dimension needs
 	 * to be actual size needed for rendered content, not the available container
 	 * size. This is relied upon by table layout.
-	 * 
-	 * @param yLimit If other than -1, <code>layout</code> will throw
-	 *               <code>SizeExceededException</code> in the event that the layout
+	 *
+	 * @param yLimit If other than -1, layout will throw
+	 *               SizeExceededException in the event that the layout
 	 *               goes beyond this y-coordinate point.
+	 * @param desiredWidth a int.
+	 * @param desiredHeight a int.
+	 * @param paddingInsets a {@link java.awt.Insets} object.
+	 * @param floatBounds a {@link org.loboevolution.html.renderer.FloatingBounds} object.
+	 * @param sizeOnly a boolean.
 	 */
 	public void layout(int desiredWidth, int desiredHeight, Insets paddingInsets, int yLimit,
 			FloatingBounds floatBounds, boolean sizeOnly) {
@@ -1186,6 +1255,11 @@ public class RBlockViewport extends BaseRCollection {
 		scheduleFloat(floatInfo);
 	}
 
+	/**
+	 * <p>layoutHr.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	protected final void layoutHr(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
@@ -1195,6 +1269,11 @@ public class RBlockViewport extends BaseRCollection {
 		addAlignableAsBlock(markupElement, renderable);
 	}
 
+	/**
+	 * <p>layoutList.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	protected final void layoutList(HTMLElementImpl markupElement) {
 		RList renderable = (RList) markupElement.getUINode();
 		if (renderable == null) {
@@ -1205,6 +1284,11 @@ public class RBlockViewport extends BaseRCollection {
 		positionRBlock(markupElement, renderable);
 	}
 
+	/**
+	 * <p>layoutListItem.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	protected final void layoutListItem(HTMLElementImpl markupElement) {
 		RListItem renderable = (RListItem) markupElement.getUINode();
 		if (renderable == null) {
@@ -1215,6 +1299,11 @@ public class RBlockViewport extends BaseRCollection {
 		positionRBlock(markupElement, renderable);
 	}
 
+	/**
+	 * <p>layoutMarkup.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	protected void layoutMarkup(NodeImpl node) {
 		// This is the "inline" layout of an element.
 		// The difference with layoutChildren is that this
@@ -1274,6 +1363,11 @@ public class RBlockViewport extends BaseRCollection {
 		lineDone(this.currentLine);
 	}
 
+	/**
+	 * <p>layoutRBlock.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	protected final void layoutRBlock(HTMLElementImpl markupElement) {
 		final UINode uiNode = markupElement.getUINode();
 		RBlock renderable = null;
@@ -1289,6 +1383,11 @@ public class RBlockViewport extends BaseRCollection {
 		positionRBlock(markupElement, renderable);
 	}
 
+	/**
+	 * <p>layoutRTable.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	protected final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
@@ -1300,6 +1399,11 @@ public class RBlockViewport extends BaseRCollection {
 		positionRElement(markupElement, renderable, markupElement instanceof HTMLTableElementImpl, true, true);
 	}
 	
+	/**
+	 * <p>layoutRInlineBlock.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public void layoutRInlineBlock(final HTMLElementImpl markupElement) {
 		final UINode uINode = markupElement.getUINode();
 		RInlineBlock inlineBlock = null;
@@ -1422,6 +1526,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
@@ -1446,6 +1551,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
@@ -1470,6 +1576,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
 		final BoundableRenderable br = this.armedRenderable;
@@ -1491,6 +1598,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
@@ -1516,6 +1624,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final Iterator<Renderable> i = this.getRenderables(new Point(x, y));
@@ -1543,6 +1652,7 @@ public class RBlockViewport extends BaseRCollection {
 		return true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(final Graphics gIn) {
 		final boolean translationRequired = (x | y) != 0;
@@ -1757,6 +1867,15 @@ public class RBlockViewport extends BaseRCollection {
 		}
 	}
 
+	/**
+	 * <p>positionRElement.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param renderable a {@link org.loboevolution.html.renderer.RElement} object.
+	 * @param usesAlignAttribute a boolean.
+	 * @param obeysFloats a boolean.
+	 * @param alignCenterAttribute a boolean.
+	 */
 	protected final void positionRElement(HTMLElementImpl markupElement, RElement renderable, boolean usesAlignAttribute,
 			boolean obeysFloats, boolean alignCenterAttribute) {
 		if (!addElsewhereIfPositioned(renderable, markupElement, usesAlignAttribute, true, true)) {
@@ -1877,16 +1996,19 @@ public class RBlockViewport extends BaseRCollection {
 		return renderable;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "RBlockViewport[node=" + this.modelNode + "]";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Rectangle getClipBounds() {
 		return ((RBlock) container).getClipBounds();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVisualHeight() {
 		double maxY = getHeight();
@@ -1921,6 +2043,7 @@ public class RBlockViewport extends BaseRCollection {
 		return (int) maxY;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVisualWidth() {
 		double maxX = getWidth();

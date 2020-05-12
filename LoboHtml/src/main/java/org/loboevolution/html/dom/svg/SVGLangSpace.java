@@ -22,12 +22,40 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGLangSpace interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGLangSpace {
+	/**
+	 * <p>getXMLlang.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getXMLlang();
 
+	/**
+	 * <p>setXMLlang.</p>
+	 *
+	 * @param xmllang a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setXMLlang(String xmllang) throws DOMException;
 
+	/**
+	 * <p>getXMLspace.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getXMLspace();
 
+	/**
+	 * <p>setXMLspace.</p>
+	 *
+	 * @param xmlspace a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setXMLspace(String xmlspace) throws DOMException;
 }

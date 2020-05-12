@@ -35,12 +35,16 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiLabelUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiLabelUI extends BasicLabelUI {
 
 	private static HiFiLabelUI hifiLabelUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (hifiLabelUI == null) {
 			hifiLabelUI = new HiFiLabelUI();
@@ -48,6 +52,7 @@ public class HiFiLabelUI extends BasicLabelUI {
 		return hifiLabelUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemIndex = l.getDisplayedMnemonicIndex();
@@ -57,6 +62,7 @@ public class HiFiLabelUI extends BasicLabelUI {
 		JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemIndex = l.getDisplayedMnemonicIndex();

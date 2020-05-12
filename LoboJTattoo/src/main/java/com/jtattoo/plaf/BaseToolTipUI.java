@@ -46,10 +46,14 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalToolTipUI;
 
 /**
+ * <p>BaseToolTipUI class.</p>
+ *
  * @author Michael Hagen, Daniel Raedel
+ * @version $Id: $Id
  */
 public class BaseToolTipUI extends MetalToolTipUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseToolTipUI();
 	}
@@ -58,6 +62,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 
 	private ComponentListener popupWindowListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners(JComponent c) {
 		super.installListeners(c);
@@ -75,6 +80,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 		};
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -95,6 +101,7 @@ public class BaseToolTipUI extends MetalToolTipUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;

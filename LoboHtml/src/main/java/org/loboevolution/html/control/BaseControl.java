@@ -33,18 +33,27 @@ import javax.swing.JComponent;
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
+/**
+ * <p>Abstract BaseControl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class BaseControl extends JComponent implements UIControl {
 	private static final Logger logger = Logger.getLogger(BaseControl.class.getName());
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/** Constant ZERO_DIMENSION */
 	protected static final Dimension ZERO_DIMENSION = new Dimension(0, 0);
 	protected final HTMLElementImpl controlElement;
 	protected RUIControl ruicontrol;
 
 	/**
-	 * @param context
+	 * <p>Constructor for BaseControl.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 */
 	public BaseControl(HTMLElementImpl modelNode) {
 		this.controlElement = modelNode;
@@ -55,16 +64,19 @@ public abstract class BaseControl extends JComponent implements UIControl {
 	 * 
 	 * @see org.loboevolution.html.rendered.UIControl#getBackgroundColor()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Color getBackgroundColor() {
 		return getBackground();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Component getComponent() {
 		return this;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVAlign() {
 		return AlignValues.BASELINE.getValue();
@@ -85,15 +97,22 @@ public abstract class BaseControl extends JComponent implements UIControl {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void reset(int availWidth, int availHeight) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setRUIControl(RUIControl ruicontrol) {
 		this.ruicontrol = ruicontrol;
 	}
 	
+	/**
+	 * <p>getRUIControl.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.control.RUIControl} object.
+	 */
 	public RUIControl getRUIControl() {
 		return ruicontrol;
 	}

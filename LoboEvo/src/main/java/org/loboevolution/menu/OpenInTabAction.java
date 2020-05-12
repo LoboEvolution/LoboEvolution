@@ -16,6 +16,12 @@ import org.loboevolution.welcome.WelcomePanel;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>OpenInTabAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class OpenInTabAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -24,11 +30,18 @@ public class OpenInTabAction extends AbstractAction {
 
 	private final BrowserFrame frame;
 
+	/**
+	 * <p>Constructor for OpenInTabAction.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 * @param address a {@link java.lang.String} object.
+	 */
 	public OpenInTabAction(BrowserFrame frame, String address) {
 		this.frame = frame;
 		this.address = address;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		final BrowserPanel panel = this.frame.getPanel();

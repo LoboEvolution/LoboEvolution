@@ -30,14 +30,26 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 
 class BaseRListElement extends RBlock {
+	/** Constant DEFAULT_COUNTER_NAME="$cobra.counter" */
 	protected static final String DEFAULT_COUNTER_NAME = "$cobra.counter";
 	protected ListStyle listStyle = null;
 
+	/**
+	 * <p>Constructor for BaseRListElement.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 * @param listNesting a int.
+	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param parentContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 */
 	public BaseRListElement(NodeImpl modelNode, int listNesting, UserAgentContext pcontext,
 			HtmlRendererContext rcontext, FrameContext frameContext, RenderableContainer parentContainer) {
 		super(modelNode, listNesting, pcontext, rcontext, frameContext, parentContainer);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void applyStyle(int availWidth, int availHeight) {
 		this.listStyle = null;
@@ -82,6 +94,7 @@ class BaseRListElement extends RBlock {
 		this.listStyle = listStyle;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "BaseRListElement[node=" + this.modelNode + "]";

@@ -22,6 +22,12 @@ package org.loboevolution.html.dom.domimpl;
 
 import java.util.EventObject;
 
+/**
+ * <p>ImageEvent class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ImageEvent extends EventObject {
 	/**
 	 * 
@@ -29,6 +35,12 @@ public class ImageEvent extends EventObject {
 	private static final long serialVersionUID = 1L;
 	public final java.awt.Image image;
 
+	/**
+	 * <p>Constructor for ImageEvent.</p>
+	 *
+	 * @param source a {@link java.lang.Object} object.
+	 * @param image a {@link java.awt.Image} object.
+	 */
 	public ImageEvent(Object source, java.awt.Image image) {
 		super(source);
 		this.image = image;

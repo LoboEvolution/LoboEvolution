@@ -82,7 +82,10 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetListImpl;
 
 /**
- * Implementation of the W3C <code>HTMLDocument</code> interface.
+ * Implementation of the W3C HTMLDocument interface.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, DocumentView {
 
@@ -153,14 +156,32 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private String xmlEncoding;
 
+	/**
+	 * <p>Constructor for HTMLDocumentImpl.</p>
+	 *
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public HTMLDocumentImpl(HtmlRendererContext rcontext) {
 		this(rcontext.getUserAgentContext(), rcontext, null, null);
 	}
 
+	/**
+	 * <p>Constructor for HTMLDocumentImpl.</p>
+	 *
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 */
 	public HTMLDocumentImpl(UserAgentContext ucontext) {
 		this(ucontext, null, null, null);
 	}
 
+	/**
+	 * <p>Constructor for HTMLDocumentImpl.</p>
+	 *
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param reader a {@link org.loboevolution.html.io.WritableLineReader} object.
+	 * @param documentURI a {@link java.lang.String} object.
+	 */
 	public HTMLDocumentImpl(final UserAgentContext ucontext, final HtmlRendererContext rcontext,
 			WritableLineReader reader, String documentURI) {
 		this.rcontext = rcontext;
@@ -195,8 +216,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * Adds a document notification listener, which is informed about changes to the
 	 * document.
-	 * 
-	 * @param listener An instance of {@link DocumentNotificationListener}.
+	 *
+	 * @param listener An instance of {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener}.
 	 */
 	public void addDocumentNotificationListener(DocumentNotificationListener listener) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -231,6 +252,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>allInvalidated.</p>
+	 *
+	 * @param forgetRenderStates a boolean.
+	 */
 	public void allInvalidated(boolean forgetRenderStates) {
 		if (forgetRenderStates) {
 			synchronized (this.treeLock) {
@@ -246,6 +272,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.allInvalidated();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void close() {
 		synchronized (this.treeLock) {
@@ -263,12 +290,18 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return new StyleSheetRenderState(this);
 	}
 
 
+	/**
+	 * <p>externalScriptLoading.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	public void externalScriptLoading(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
@@ -281,12 +314,14 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getbaseURI()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getBaseURI() {
 		final String buri = this.baseURI;
 		return buri == null ? this.getDocumentURI() : buri;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getCookie() {
 		final SecurityManager sm = System.getSecurityManager();
@@ -297,10 +332,16 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>Getter for the field defaultTarget.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getDefaultTarget() {
 		return this.defaultTarget;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public AbstractView getDefaultView() {
 		return this.window;
@@ -312,30 +353,40 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return docUrl == null ? null : docUrl.getHost();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public URL getDocumentURL() {
 		return this.documentURL;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getDomain() {
 		return this.domain;
 	}
 	
+	/**
+	 * <p>getReadyState.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getReadyState() {
 		return "complete"; //TODO stub
 	}
 
 
 	/**
-	 * Gets the collection of elements whose <code>name</code> attribute is
-	 * <code>elementName</code>.
+	 * {@inheritDoc}
+	 *
+	 * Gets the collection of elements whose name attribute is
+	 * elementName.
 	 */
 	@Override
 	public NodeList getElementsByName(String elementName) {
 		return getNodeList(new ElementNameFilter(elementName));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final URL getFullURL(String uri) {
 		try {
@@ -354,6 +405,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final HtmlRendererContext getHtmlRendererContext() {
 		return this.rcontext;
@@ -364,6 +416,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * 
 	 * @see org.w3c.dom.Document#getImplementation()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public DOMImplementation getImplementation() {
 		synchronized (this) {
@@ -374,12 +427,14 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getInputEncoding() {
 		return this.inputEncoding;
 	}
 
     
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getForms() {
         synchronized (this) {
@@ -387,6 +442,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getImages() {
         synchronized (this) {
@@ -394,6 +450,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getLinks() {
         synchronized (this) {
@@ -401,6 +458,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
         }
     }
     
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getEmbeds() {
         synchronized (this) {
@@ -408,11 +466,13 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getPlugins() {
         return getEmbeds();
     }
 
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getScripts() {
         synchronized (this) {
@@ -420,6 +480,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public HTMLCollection getCommands() {
         synchronized (this) {
@@ -427,6 +488,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
         }
     }
     
+    /** {@inheritDoc} */
     @Override
 	public HTMLCollection getAnchors() {
 		synchronized (this) {
@@ -437,6 +499,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
     
+    /** {@inheritDoc} */
     @Override
 	public HTMLHeadElementImpl getHead() {
 		synchronized (this) {
@@ -449,6 +512,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
     
+    /** {@inheritDoc} */
     @Override
 	public HTMLElement getBody() {
 		synchronized (this) {
@@ -466,20 +530,33 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	/**
 	 * Gets an <i>immutable</i> set of locales previously set for this document.
+	 *
+	 * @return a {@link java.util.Set} object.
 	 */
 	public Set<Locale> getLocales() {
 		return this.locales;
 	}
 
 	
+	/**
+	 * <p>getLocation.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.Location} object.
+	 */
 	public final Location getLocation() {
 		return this.window.getLocation();
 	}
 
+	/**
+	 * <p>Getter for the field onloadHandler.</p>
+	 *
+	 * @return a {@link org.mozilla.javascript.Function} object.
+	 */
 	public Function getOnloadHandler() {
 		return this.onloadHandler;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getReferrer() {
 		return this.referrer;
@@ -501,35 +578,46 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+    /**
+     * <p>Getter for the field styleSheets.</p>
+     *
+     * @return a {@link com.gargoylesoftware.css.dom.CSSStyleSheetListImpl} object.
+     */
     public CSSStyleSheetListImpl getStyleSheets() {
 		return this.styleSheets;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTextContent() throws DOMException {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTitle() {
 		return this.title;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getURL() {
 		return this.getDocumentURI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public UserAgentContext getUserAgentContext() {
 		return this.ucontext;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getXmlEncoding() {
 		return this.xmlEncoding;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node importNode(Node importedNode, boolean deep) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "Not implemented");
@@ -538,8 +626,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * This is called when the node has changed, but it is unclear if it's a size
 	 * change or a look change. An attribute change should trigger this.
-	 * 
-	 * @param node
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void invalidated(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -550,16 +638,24 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	/**
 	 * Loads the document from the reader provided when the current instance of
-	 * <code>HTMLDocumentImpl</code> was constructed. It then closes the reader.
-	 * 
-	 * @throws IOException
-	 * @throws SAXException
-	 * @throws UnsupportedEncodingException
+	 * HTMLDocumentImpl was constructed. It then closes the reader.
+	 *
+	 * @throws java.io.IOException if any.
+	 * @throws org.xml.sax.SAXException if any.
+	 * @throws java.io.UnsupportedEncodingException if any.
 	 */
 	public void load() throws IOException, SAXException, UnsupportedEncodingException {
 		this.load(true);
 	}
 
+	/**
+	 * <p>load.</p>
+	 *
+	 * @param closeReader a boolean.
+	 * @throws java.io.IOException if any.
+	 * @throws org.xml.sax.SAXException if any.
+	 * @throws java.io.UnsupportedEncodingException if any.
+	 */
 	public void load(boolean closeReader) throws IOException, SAXException, UnsupportedEncodingException {
 		WritableLineReader reader;
 		synchronized (this.treeLock) {
@@ -595,8 +691,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * Called if something such as a color or decoration has changed. This would be
 	 * something which does not affect the rendered size, and can be revalidated
 	 * with a simple repaint.
-	 * 
-	 * @param node
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void lookInvalidated(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -605,6 +701,12 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>namedItem.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Element} object.
+	 */
 	public Element namedItem(String name) {
 		Element element;
 		synchronized (this) {
@@ -613,6 +715,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return element;
 	}
 
+	/**
+	 * <p>nodeLoaded.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	public void nodeLoaded(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
@@ -620,6 +727,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void normalizeDocument() {
 		// TODO: Normalization options from domConfig
@@ -628,6 +736,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void open() {
 		synchronized (this.treeLock) {
@@ -666,8 +775,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	/**
 	 * Changed if the position of the node in a parent has changed.
-	 * 
-	 * @param node
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void positionInParentInvalidated(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -676,6 +785,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>removeDocumentNotificationListener.</p>
+	 *
+	 * @param listener a {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener} object.
+	 */
 	public void removeDocumentNotificationListener(DocumentNotificationListener listener) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		synchronized (listenersList) {
@@ -695,15 +809,22 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Node renameNode(Node n, String namespaceURI, String qualifiedName) throws DOMException {
 		throw new DOMException(DOMException.NOT_SUPPORTED_ERR, "No renaming");
 	}
 
+	/**
+	 * <p>Setter for the field baseURI.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void setBaseURI(String value) {
 		this.baseURI = value;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setBody(HTMLElement body) {
 		synchronized (this) {
@@ -711,6 +832,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setCookie(final String cookie) throws DOMException {
 		final SecurityManager sm = System.getSecurityManager();
@@ -724,11 +846,21 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>Setter for the field defaultTarget.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void setDefaultTarget(String value) {
 		this.defaultTarget = value;
 	}
 
 
+	/**
+	 * <p>Setter for the field domain.</p>
+	 *
+	 * @param domain a {@link java.lang.String} object.
+	 */
 	public void setDomain(String domain) {
 		final String oldDomain = this.domain;
 		if (oldDomain != null && Domains.isValidCookieDomain(domain, oldDomain)) {
@@ -751,14 +883,19 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/**
 	 * Sets the locales of the document. This helps determine whether specific fonts
 	 * can display text in the languages of all the locales.
-	 * 
-	 * @param locales An <i>immutable</i> set of <code>java.util.Locale</code>
+	 *
+	 * @param locales An <i>immutable</i> set of java.util.Locale
 	 *                instances.
 	 */
 	public void setLocales(Set<Locale> locales) {
 		this.locales = locales;
 	}
 
+	/**
+	 * <p>setLocation.</p>
+	 *
+	 * @param location a {@link java.lang.String} object.
+	 */
 	public void setLocation(String location) {
 		getLocation().setHref(location);
 	}
@@ -769,24 +906,37 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/**
+	 * <p>Setter for the field onloadHandler.</p>
+	 *
+	 * @param onloadHandler a {@link org.mozilla.javascript.Function} object.
+	 */
 	public void setOnloadHandler(Function onloadHandler) {
 		this.onloadHandler = onloadHandler;
 	}
 
+	/**
+	 * <p>Setter for the field referrer.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void setReferrer(String value) {
 		this.referrer = value;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) throws DOMException {
 		// NOP, per spec
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		final Function onloadHandler = this.onloadHandler;
@@ -798,6 +948,11 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		return super.setUserData(key, data, handler);
 	}
 
+	/**
+	 * <p>sizeInvalidated.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	public void sizeInvalidated(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
@@ -807,8 +962,8 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	/**
 	 * This is called when children of the node might have changed.
-	 * 
-	 * @param node
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void structureInvalidated(NodeImpl node) {
 		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
@@ -817,6 +972,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void write(String text) {
 		synchronized (this.treeLock) {
@@ -831,6 +987,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void writeln(String text) {
 		synchronized (this.treeLock) {

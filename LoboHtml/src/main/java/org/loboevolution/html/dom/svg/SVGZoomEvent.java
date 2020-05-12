@@ -22,14 +22,45 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.events.UIEvent;
 
+/**
+ * <p>SVGZoomEvent interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGZoomEvent extends UIEvent {
+	/**
+	 * <p>getZoomRectScreen.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGRect} object.
+	 */
 	SVGRect getZoomRectScreen();
 
+	/**
+	 * <p>getPreviousScale.</p>
+	 *
+	 * @return a float.
+	 */
 	float getPreviousScale();
 
+	/**
+	 * <p>getPreviousTranslate.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 */
 	SVGPoint getPreviousTranslate();
 
+	/**
+	 * <p>getNewScale.</p>
+	 *
+	 * @return a float.
+	 */
 	float getNewScale();
 
+	/**
+	 * <p>getNewTranslate.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 */
 	SVGPoint getNewTranslate();
 }

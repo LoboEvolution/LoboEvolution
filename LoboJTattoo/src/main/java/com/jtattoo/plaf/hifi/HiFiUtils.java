@@ -30,10 +30,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>HiFiUtils class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiUtils {
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 */
 	public static void fillComponent(Graphics g, Component c) {
 		if (AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {
 			int w = c.getWidth();

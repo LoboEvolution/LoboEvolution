@@ -31,27 +31,65 @@ import org.loboevolution.html.renderstate.RenderState;
 /**
  * A generic node interface. The idea is that implementors could be W3C nodes or
  * not.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ModelNode {
 
+	/**
+	 * <p>getDocumentItem.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link java.lang.Object} object.
+	 */
 	Object getDocumentItem(String name);
 
+	/**
+	 * <p>getFullURL.</p>
+	 *
+	 * @param spec a {@link java.lang.String} object.
+	 * @return a {@link java.net.URL} object.
+	 * @throws java.net.MalformedURLException if any.
+	 */
 	URL getFullURL(String spec) throws MalformedURLException;
 
+	/**
+	 * <p>getParentModelNode.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 */
 	ModelNode getParentModelNode();
 
+	/**
+	 * <p>getRenderState.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 */
 	RenderState getRenderState();
 
+	/**
+	 * <p>isEqualOrDescendentOf.</p>
+	 *
+	 * @param otherNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @return a boolean.
+	 */
 	boolean isEqualOrDescendentOf(ModelNode otherNode);
 
 	/**
 	 * Sets a document item. A radio button, for example, can use this to set button
 	 * group state.
-	 * 
-	 * @param name
-	 * @param value
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param value a {@link java.lang.Object} object.
 	 */
 	void setDocumentItem(String name, Object value);
 
+	/**
+	 * <p>warn.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param err a {@link java.lang.Throwable} object.
+	 */
 	void warn(String message, Throwable err);
 }

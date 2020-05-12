@@ -9,16 +9,28 @@ import javax.swing.AbstractAction;
 
 import org.loboevolution.gui.SwingTasks;
 
+/**
+ * <p>EditActionStartup class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class EditActionStartup extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
 	private final StartupListControl control;
 
+	/**
+	 * <p>Constructor for EditActionStartup.</p>
+	 *
+	 * @param control a {@link org.loboevolution.menu.tools.pref.startup.StartupListControl} object.
+	 */
 	public EditActionStartup(StartupListControl control) {
 		this.control = control;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		final Frame parentFrame = SwingTasks.getFrame(this.control);

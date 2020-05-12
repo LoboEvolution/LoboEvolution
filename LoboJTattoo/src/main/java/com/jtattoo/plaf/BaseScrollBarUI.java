@@ -42,7 +42,10 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 /**
+ * <p>BaseScrollBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseScrollBarUI extends BasicScrollBarUI {
 
@@ -103,6 +106,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	} // end of class MyTrackListener
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseScrollBarUI();
 	}
@@ -115,6 +119,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 	protected boolean isRollover = false;
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createDecreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -124,6 +129,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createIncreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -133,16 +139,19 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public TrackListener createTrackListener() {
 		return new MyTrackListener();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Dimension getMinimumThumbSize() {
 		return new Dimension(scrollBarWidth, scrollBarWidth);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize(JComponent c) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -160,6 +169,11 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/**
+	 * <p>getThumbColors.</p>
+	 *
+	 * @return an array of {@link java.awt.Color} objects.
+	 */
 	protected Color[] getThumbColors() {
 		if (isRollover || isDragging) {
 			return AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -170,6 +184,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();
@@ -200,6 +215,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void layoutHScrollbar(JScrollBar sb) {
 		if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible()
@@ -269,6 +285,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void layoutVScrollbar(JScrollBar sb) {
 		if (AbstractLookAndFeel.getTheme().isLinuxStyleScrollBarOn() && incrButton.isVisible()
@@ -338,6 +355,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
@@ -414,6 +432,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 		g.translate(-thumbBounds.x, -thumbBounds.y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
 		int w = c.getWidth();

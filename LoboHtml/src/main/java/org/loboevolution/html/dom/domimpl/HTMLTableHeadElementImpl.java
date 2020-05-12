@@ -25,12 +25,21 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * Element used for TH.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
+	/**
+	 * <p>Constructor for HTMLTableHeadElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLTableHeadElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);

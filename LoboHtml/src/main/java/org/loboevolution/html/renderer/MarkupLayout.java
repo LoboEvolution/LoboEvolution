@@ -26,5 +26,11 @@ package org.loboevolution.html.renderer;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 
 interface MarkupLayout {
+	/**
+	 * <p>layoutMarkup.</p>
+	 *
+	 * @param bodyLayout a {@link org.loboevolution.html.renderer.RBlockViewport} object.
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement);
 }

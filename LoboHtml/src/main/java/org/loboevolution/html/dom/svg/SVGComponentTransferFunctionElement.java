@@ -20,26 +20,73 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGComponentTransferFunctionElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGComponentTransferFunctionElement extends SVGElement {
 	// Component Transfer Types
+	/** Constant SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN=0 */
 	static final short SVG_FECOMPONENTTRANSFER_TYPE_UNKNOWN = 0;
+	/** Constant SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY=1 */
 	static final short SVG_FECOMPONENTTRANSFER_TYPE_IDENTITY = 1;
+	/** Constant SVG_FECOMPONENTTRANSFER_TYPE_TABLE=2 */
 	static final short SVG_FECOMPONENTTRANSFER_TYPE_TABLE = 2;
+	/** Constant SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE=3 */
 	static final short SVG_FECOMPONENTTRANSFER_TYPE_DISCRETE = 3;
+	/** Constant SVG_FECOMPONENTTRANSFER_TYPE_LINEAR=4 */
 	static final short SVG_FECOMPONENTTRANSFER_TYPE_LINEAR = 4;
+	/** Constant SVG_FECOMPONENTTRANSFER_TYPE_GAMMA=5 */
 	static final short SVG_FECOMPONENTTRANSFER_TYPE_GAMMA = 5;
 
+	/**
+	 * <p>getType.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getType();
 
+	/**
+	 * <p>getTableValues.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumberList} object.
+	 */
 	SVGAnimatedNumberList getTableValues();
 
+	/**
+	 * <p>getSlope.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getSlope();
 
+	/**
+	 * <p>getIntercept.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getIntercept();
 
+	/**
+	 * <p>getAmplitude.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getAmplitude();
 
+	/**
+	 * <p>getExponent.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getExponent();
 
+	/**
+	 * <p>getOffset.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getOffset();
 }

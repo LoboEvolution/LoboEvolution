@@ -40,6 +40,12 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>ShowBookmarksWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ShowBookmarksWindow extends JFrame {
 
 	/** The Constant serialVersionUID. */
@@ -51,6 +57,12 @@ public class ShowBookmarksWindow extends JFrame {
 	/** The row sorter. */
 	private transient TableRowSorter<TableModel> rowSorter;
 
+	/**
+	 * <p>Constructor for ShowBookmarksWindow.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 * @param num a {@link java.lang.Integer} object.
+	 */
 	public ShowBookmarksWindow(BrowserFrame frame, Integer num) {
 		createAndShowGUI(frame, num);
 	}

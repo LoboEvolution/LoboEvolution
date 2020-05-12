@@ -24,13 +24,25 @@ import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * <p>TagNameFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TagNameFilter implements NodeFilter {
 	private final String name;
 
+	/**
+	 * <p>Constructor for TagNameFilter.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public TagNameFilter(String name) {
 		this.name = name;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		if (!(node instanceof Element)) {

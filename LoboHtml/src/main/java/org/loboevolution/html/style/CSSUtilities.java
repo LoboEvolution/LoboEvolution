@@ -41,8 +41,21 @@ import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 
+/**
+ * <p>CSSUtilities class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class CSSUtilities {
 
+	/**
+	 * <p>getCssInputSourceForStyleSheet.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @param scriptURI a {@link java.lang.String} object.
+	 * @return a {@link com.gargoylesoftware.css.parser.InputSource} object.
+	 */
 	public static InputSource getCssInputSourceForStyleSheet(String text, String scriptURI) {
 		final Reader reader = new StringReader(text);
 		final InputSource is = new InputSource(reader);
@@ -50,6 +63,13 @@ public class CSSUtilities {
 		return is;
 	}
 
+	/**
+	 * <p>matchesMedia.</p>
+	 *
+	 * @param mediaList a {@link org.w3c.dom.stylesheets.MediaList} object.
+	 * @param rcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @return a boolean.
+	 */
 	public static boolean matchesMedia(MediaList mediaList, UserAgentContext rcontext) {
 		if (mediaList == null) {
 			return true;
@@ -70,6 +90,13 @@ public class CSSUtilities {
 		return false;
 	}
 
+	/**
+	 * <p>matchesMedia.</p>
+	 *
+	 * @param mediaValues a {@link java.lang.String} object.
+	 * @param rcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @return a boolean.
+	 */
 	public static boolean matchesMedia(String mediaValues, UserAgentContext rcontext) {
 		if (mediaValues == null || mediaValues.length() == 0) {
 			return true;
@@ -88,6 +115,14 @@ public class CSSUtilities {
 		return false;
 	}
 	
+	/**
+	 * <p>parseCssExternal.</p>
+	 *
+	 * @param href a {@link java.lang.String} object.
+	 * @param doc a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 * @return a {@link com.gargoylesoftware.css.dom.CSSStyleSheetImpl} object.
+	 * @throws java.lang.Exception if any.
+	 */
 	public static CSSStyleSheetImpl parseCssExternal(String href, HTMLDocumentImpl doc) throws Exception {
 		CSSOMParser parser = new CSSOMParser();
 		URL baseURL = new URL(doc.getBaseURI());
@@ -99,6 +134,12 @@ public class CSSUtilities {
 
 	}
 	
+	/**
+	 * <p>getSelectorList.</p>
+	 *
+	 * @param selectors a {@link java.lang.String} object.
+	 * @return a {@link com.gargoylesoftware.css.parser.selector.SelectorList} object.
+	 */
 	public static SelectorList getSelectorList(final String selectors) {
 		final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 		SelectorList selectorList = null;
@@ -110,6 +151,12 @@ public class CSSUtilities {
 		return selectorList;
 	}
 
+	/**
+	 * <p>preProcessCss.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String preProcessCss(String text) {
 		try {
 			final BufferedReader reader = new BufferedReader(new StringReader(text));

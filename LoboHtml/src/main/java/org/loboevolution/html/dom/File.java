@@ -23,6 +23,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The Interface File.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface File extends Blob {
 

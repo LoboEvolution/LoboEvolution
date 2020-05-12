@@ -38,55 +38,68 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLImageElement extends HTMLElement {
 	/**
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAlign();
 
 	/**
 	 * Alternate text for user agents not rendering the normal content of this
 	 * element. See the alt attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAlt();
 
 	/**
 	 * Width of border around image. See the border attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01. Note that the type of this
-	 * attribute was <code>DOMString</code> in DOM Level 1 HTML
+	 * attribute was DOMString in DOM Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>] .
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getBorder();
 
 	/**
 	 * Height of the image in pixels. See the height attribute definition in HTML
-	 * 4.01. Note that the type of this attribute was <code>DOMString</code> in DOM
+	 * 4.01. Note that the type of this attribute was DOMString in DOM
 	 * Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getHeight();
 
 	/**
 	 * Horizontal space to the left and right of this image in pixels. See the
 	 * hspace attribute definition in HTML 4.01. This attribute is deprecated in
-	 * HTML 4.01. Note that the type of this attribute was <code>DOMString</code> in
+	 * HTML 4.01. Note that the type of this attribute was DOMString in
 	 * DOM Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getHspace();
 
 	/**
 	 * Use server-side image map. See the ismap attribute definition in HTML 4.01.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getIsMap();
 
@@ -94,11 +107,15 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getLongDesc();
 
 	/**
 	 * The name of the element (for backwards compatibility).
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getName();
 
@@ -106,11 +123,15 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the source of this image. See the src attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getSrc();
 
 	/**
 	 * Use client-side image map. See the usemap attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getUseMap();
 
@@ -120,19 +141,21 @@ public interface HTMLImageElement extends HTMLElement {
 	 * the type of this attribute was "DOMString" in DOM Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getVspace();
 
 	/**
 	 * The width of the image in pixels. See the width attribute definition in HTML
-	 * 4.01. Note that the type of this attribute was <code>DOMString</code> in DOM
+	 * 4.01. Note that the type of this attribute was DOMString in DOM
 	 * Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @return a int.
 	 */
 	int getWidth();
 
@@ -140,49 +163,59 @@ public interface HTMLImageElement extends HTMLElement {
 	 * Aligns this object (vertically or horizontally) with respect to its
 	 * surrounding text. See the align attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align a {@link java.lang.String} object.
 	 */
 	void setAlign(String align);
 
 	/**
 	 * Alternate text for user agents not rendering the normal content of this
 	 * element. See the alt attribute definition in HTML 4.01.
+	 *
+	 * @param alt a {@link java.lang.String} object.
 	 */
 	void setAlt(String alt);
 
 	/**
 	 * Width of border around image. See the border attribute definition in HTML
 	 * 4.01. This attribute is deprecated in HTML 4.01. Note that the type of this
-	 * attribute was <code>DOMString</code> in DOM Level 1 HTML
+	 * attribute was DOMString in DOM Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>] .
+	 *
+	 * @param border a {@link java.lang.String} object.
 	 */
 	void setBorder(String border);
 
 	/**
 	 * Height of the image in pixels. See the height attribute definition in HTML
-	 * 4.01. Note that the type of this attribute was <code>DOMString</code> in DOM
+	 * 4.01. Note that the type of this attribute was DOMString in DOM
 	 * Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param height a int.
 	 */
 	void setHeight(int height);
 
 	/**
 	 * Horizontal space to the left and right of this image in pixels. See the
 	 * hspace attribute definition in HTML 4.01. This attribute is deprecated in
-	 * HTML 4.01. Note that the type of this attribute was <code>DOMString</code> in
+	 * HTML 4.01. Note that the type of this attribute was DOMString in
 	 * DOM Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param hspace a int.
 	 */
 	void setHspace(int hspace);
 
 	/**
 	 * Use server-side image map. See the ismap attribute definition in HTML 4.01.
+	 *
+	 * @param isMap a boolean.
 	 */
 	void setIsMap(boolean isMap);
 
@@ -190,11 +223,15 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a long description of this image or frame. See the longdesc
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param longDesc a {@link java.lang.String} object.
 	 */
 	void setLongDesc(String longDesc);
 
 	/**
 	 * The name of the element (for backwards compatibility).
+	 *
+	 * @param name a {@link java.lang.String} object.
 	 */
 	void setName(String name);
 
@@ -202,11 +239,15 @@ public interface HTMLImageElement extends HTMLElement {
 	 * URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating the source of this image. See the src attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param src a {@link java.lang.String} object.
 	 */
 	void setSrc(String src);
 
 	/**
 	 * Use client-side image map. See the usemap attribute definition in HTML 4.01.
+	 *
+	 * @param useMap a {@link java.lang.String} object.
 	 */
 	void setUseMap(String useMap);
 
@@ -216,19 +257,21 @@ public interface HTMLImageElement extends HTMLElement {
 	 * the type of this attribute was "DOMString" in DOM Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param vspace a int.
 	 */
 	void setVspace(int vspace);
 
 	/**
 	 * The width of the image in pixels. See the width attribute definition in HTML
-	 * 4.01. Note that the type of this attribute was <code>DOMString</code> in DOM
+	 * 4.01. Note that the type of this attribute was DOMString in DOM
 	 * Level 1 HTML
 	 * [<a href='http://www.w3.org/TR/1998/REC-DOM-Level-1-19981001'>DOM Level
 	 * 1</a>].
-	 * 
+	 *
 	 * @version DOM Level 2
+	 * @param width a int.
 	 */
 	void setWidth(int width);
 

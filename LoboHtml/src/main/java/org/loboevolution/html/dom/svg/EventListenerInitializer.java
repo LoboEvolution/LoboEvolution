@@ -20,12 +20,18 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>EventListenerInitializer interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface EventListenerInitializer {
 
 	/**
 	 * This method is called by the SVG viewer when the scripts are loaded to
 	 * register the listener needed.
-	 * 
+	 *
 	 * @param doc The current document.
 	 */
 	void initializeEventListeners(SVGDocument doc);

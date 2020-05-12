@@ -25,7 +25,10 @@ package com.jtattoo.plaf.luna;
 import com.jtattoo.plaf.XPScrollButton;
 
 /**
+ * <p>LunaScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class LunaScrollButton extends XPScrollButton {
 
@@ -34,6 +37,12 @@ public class LunaScrollButton extends XPScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for LunaScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public LunaScrollButton(int direction, int width) {
 		super(direction, width);
 	}

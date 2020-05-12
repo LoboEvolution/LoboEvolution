@@ -22,10 +22,32 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGAnimatedBoolean interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGAnimatedBoolean {
+	/**
+	 * <p>getBaseVal.</p>
+	 *
+	 * @return a boolean.
+	 */
 	boolean getBaseVal();
 
+	/**
+	 * <p>setBaseVal.</p>
+	 *
+	 * @param baseVal a boolean.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setBaseVal(boolean baseVal) throws DOMException;
 
+	/**
+	 * <p>getAnimVal.</p>
+	 *
+	 * @return a boolean.
+	 */
 	boolean getAnimVal();
 }

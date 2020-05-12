@@ -34,10 +34,27 @@ class MarkupUtilities {
     super();
   }
 
+  /**
+   * <p>findRenderable.</p>
+   *
+   * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
+   * @param point a {@link java.awt.Point} object.
+   * @param vertical a boolean.
+   * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+   */
   public static BoundableRenderable findRenderable(final Renderable[] renderables, final Point point, final boolean vertical) {
     return findRenderable(renderables, point, 0, renderables.length, vertical);
   }
 
+  /**
+   * <p>findRenderable.</p>
+   *
+   * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
+   * @param x a int.
+   * @param y a int.
+   * @param vertical a boolean.
+   * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+   */
   public static BoundableRenderable findRenderable(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
     return findRenderable(renderables, x, y, 0, renderables.length, vertical);
   }
@@ -61,6 +78,15 @@ class MarkupUtilities {
   }
 
   // Linear scan version
+  /**
+   * <p>findRenderables.</p>
+   *
+   * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
+   * @param x a int.
+   * @param y a int.
+   * @param vertical a boolean.
+   * @return a {@link java.util.List} object.
+   */
   public static List<BoundableRenderable> findRenderables(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
     List<BoundableRenderable> found = null;
     for (int i = 0; i < renderables.length; i++) {
@@ -77,6 +103,14 @@ class MarkupUtilities {
     return found;
   }
   
+  /**
+   * <p>findRenderables.</p>
+   *
+   * @param renderables an array of {@link org.loboevolution.html.renderer.Renderable} objects.
+   * @param clipArea a {@link java.awt.Rectangle} object.
+   * @param vertical a boolean.
+   * @return a {@link org.loboevolution.html.renderer.Range} object.
+   */
   public static Range findRenderables(final Renderable[] renderables, final Rectangle clipArea, final boolean vertical) {
     return findRenderables(renderables, clipArea, 0, renderables.length, vertical);
   }

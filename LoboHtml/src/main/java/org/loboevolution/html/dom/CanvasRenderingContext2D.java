@@ -20,6 +20,9 @@ import java.awt.Font;
 
 /**
  * The public interface CanvasRenderingContext2D.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 
@@ -249,7 +252,9 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	void setTextBaseline(String arg);
 	
 
-	 /**
+	/**
+	 * <p>ellipse.</p>
+	 *
 	 * @param x             the x
 	 * @param y             the y
 	 * @param radiusX       the radiusX
@@ -260,7 +265,9 @@ public interface CanvasRenderingContext2D extends CanvasRenderingContext {
 	 */
 	void ellipse(int x, int y, int radiusX, int radiusY, int rotation, int startAngle, int endAngle);
 	
-	 /**
+	/**
+	 * <p>ellipse.</p>
+	 *
 	 * @param x             the x
 	 * @param y             the y
 	 * @param radiusX       the radiusX

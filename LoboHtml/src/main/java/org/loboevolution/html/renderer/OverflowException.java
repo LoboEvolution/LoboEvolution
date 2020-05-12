@@ -34,10 +34,20 @@ class OverflowException extends Exception {
 
 	private final Collection<Renderable> renderables;
 
+	/**
+	 * <p>Constructor for OverflowException.</p>
+	 *
+	 * @param renderables a {@link java.util.Collection} object.
+	 */
 	public OverflowException(Collection<Renderable> renderables) {
 		this.renderables = renderables;
 	}
 
+	/**
+	 * <p>Getter for the field renderables.</p>
+	 *
+	 * @return a {@link java.util.Collection} object.
+	 */
 	public Collection<Renderable> getRenderables() {
 		return this.renderables;
 	}

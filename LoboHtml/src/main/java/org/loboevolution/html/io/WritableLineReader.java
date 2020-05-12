@@ -27,13 +27,30 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.Reader;
 
+/**
+ * <p>WritableLineReader class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class WritableLineReader extends LineNumberReader {
 	private StringBuilder writeBuffer = null;
 
+	/**
+	 * <p>Constructor for WritableLineReader.</p>
+	 *
+	 * @param reader a {@link java.io.Reader} object.
+	 */
 	public WritableLineReader(Reader reader) {
 		super(reader);
 	}
 
+	/**
+	 * <p>Constructor for WritableLineReader.</p>
+	 *
+	 * @param reader a {@link java.io.Reader} object.
+	 * @param bufferSize a int.
+	 */
 	public WritableLineReader(Reader reader, int bufferSize) {
 		super(reader, bufferSize);
 	}
@@ -43,6 +60,7 @@ public class WritableLineReader extends LineNumberReader {
 	 * 
 	 * @see java.io.Reader#close()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void close() throws IOException {
 		this.writeBuffer = null;
@@ -52,6 +70,7 @@ public class WritableLineReader extends LineNumberReader {
 	/*
 	 * Note: Not implicitly thread safe.
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int read() throws IOException {
 		final StringBuilder sb = this.writeBuffer;
@@ -71,6 +90,7 @@ public class WritableLineReader extends LineNumberReader {
 	 * 
 	 * @see java.io.Reader#read(byte[], int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int read(char[] b, int off, int len) throws IOException {
 		final StringBuilder sb = this.writeBuffer;
@@ -86,6 +106,7 @@ public class WritableLineReader extends LineNumberReader {
 		return super.read(b, off, len);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean ready() throws IOException {
 		final StringBuilder sb = this.writeBuffer;
@@ -97,9 +118,9 @@ public class WritableLineReader extends LineNumberReader {
 
 	/**
 	 * Note: Not implicitly thread safe.
-	 * 
-	 * @param text
-	 * @throws IOException
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 * @throws java.io.IOException if any.
 	 */
 	public void write(String text) throws IOException {
 		// Document overrides this to know that new data is coming.

@@ -24,11 +24,23 @@ import org.loboevolution.html.parser.HtmlParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.UserDataHandler;
 
+/**
+ * <p>HTMLTitleElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLTitleElementImpl extends HTMLElementImpl {
+	/**
+	 * <p>Constructor for HTMLTitleElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLTitleElementImpl(String name) {
 		super(name, true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Object setUserData(String key, Object data, UserDataHandler handler) {
 		if (HtmlParser.MODIFYING_KEY.equals(key) && data == Boolean.FALSE) {

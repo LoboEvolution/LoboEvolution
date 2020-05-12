@@ -29,8 +29,17 @@ import javax.swing.plaf.ColorUIResource;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
+/**
+ * <p>LunaDefaultTheme class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class LunaDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for LunaDefaultTheme.</p>
+	 */
 	public LunaDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -41,11 +50,13 @@ public class LunaDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "LunaTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -103,6 +114,7 @@ public class LunaDefaultTheme extends AbstractTheme {
 		desktopColor = backgroundColor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

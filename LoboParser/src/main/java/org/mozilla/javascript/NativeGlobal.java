@@ -21,12 +21,19 @@ import org.mozilla.javascript.xml.XMLLib;
  * See ECMA 15.1.[12].
  *
  * @author Mike Shaver
+ * @version $Id: $Id
  */
-
 public class NativeGlobal implements Serializable, IdFunctionCall
 {
     static final long serialVersionUID = 6080442165748707530L;
 
+    /**
+     * <p>init.</p>
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sealed a boolean.
+     */
     public static void init(Context cx, Scriptable scope, boolean sealed) {
         NativeGlobal obj = new NativeGlobal();
 
@@ -126,6 +133,7 @@ public class NativeGlobal implements Serializable, IdFunctionCall
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -500,8 +508,15 @@ public class NativeGlobal implements Serializable, IdFunctionCall
     }
 
     /**
-     * @deprecated Use {@link ScriptRuntime#constructError(String,String)}
+     * <p>constructError.</p>
+     *
+     * @deprecated Use {@link org.mozilla.javascript.ScriptRuntime#constructError(String,String)}
      * instead.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param error a {@link java.lang.String} object.
+     * @param message a {@link java.lang.String} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.EcmaError} object.
      */
     @Deprecated
     public static EcmaError constructError(Context cx,
@@ -513,9 +528,20 @@ public class NativeGlobal implements Serializable, IdFunctionCall
     }
 
     /**
+     * <p>constructError.</p>
+     *
      * @deprecated Use
-     * {@link ScriptRuntime#constructError(String,String,String,int,String,int)}
+     * {@link org.mozilla.javascript.ScriptRuntime#constructError(String,String,String,int,String,int)}
      * instead.
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param error a {@link java.lang.String} object.
+     * @param message a {@link java.lang.String} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param sourceName a {@link java.lang.String} object.
+     * @param lineNumber a int.
+     * @param columnNumber a int.
+     * @param lineSource a {@link java.lang.String} object.
+     * @return a {@link org.mozilla.javascript.EcmaError} object.
      */
     @Deprecated
     public static EcmaError constructError(Context cx,

@@ -35,6 +35,16 @@ final class RBlank extends BaseBoundableRenderable {
 	public final int ascentPlusLeading;
 	private final FontMetrics fontMetrics;
 
+	/**
+	 * <p>Constructor for RBlank.</p>
+	 *
+	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param fm a {@link java.awt.FontMetrics} object.
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param ascentPlusLeading a int.
+	 * @param width a int.
+	 * @param height a int.
+	 */
 	public RBlank(ModelNode me, FontMetrics fm, RenderableContainer container, int ascentPlusLeading, int width,
 			int height) {
 		super(container, me);
@@ -45,6 +55,7 @@ final class RBlank extends BaseBoundableRenderable {
 		this.height = height;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -64,15 +75,18 @@ final class RBlank extends BaseBoundableRenderable {
 	 * 
 	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderable(int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		return new RenderableSpot(this, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void invalidateLayoutLocal() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isContainedByNode() {
 		return true;
@@ -83,6 +97,7 @@ final class RBlank extends BaseBoundableRenderable {
 	 * 
 	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -134,6 +149,7 @@ final class RBlank extends BaseBoundableRenderable {
 	 * Graphics, boolean, org.loboevolution.html.rendered.RenderablePoint,
 	 * org.loboevolution.html.rendered.RenderablePoint)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		if (this == startPoint.renderable || this == endPoint.renderable) {

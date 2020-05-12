@@ -39,6 +39,12 @@ import com.jtattoo.plaf.BaseIcons;
 import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.NoFocusButton;
 
+/**
+ * <p>MintComboBoxUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class MintComboBoxUI extends BaseComboBoxUI {
 
 	// ------------------------------------------------------------------------------------
@@ -83,10 +89,12 @@ public class MintComboBoxUI extends BaseComboBoxUI {
 
 	} // end of end class ArrowButton
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new MintComboBoxUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		ArrowButton button = new ArrowButton();

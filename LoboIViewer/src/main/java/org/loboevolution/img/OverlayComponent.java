@@ -27,9 +27,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 /**
- * The <code>JComponent</code> implementing an overlay.
- * 
+ * The JComponent implementing an overlay.
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public class OverlayComponent extends JComponent {
 	
@@ -37,11 +38,18 @@ public class OverlayComponent extends JComponent {
 	private transient Overlay overlay;
 	private transient ImageComponent theImage;
 
+	/**
+	 * <p>Constructor for OverlayComponent.</p>
+	 *
+	 * @param overlay a {@link org.loboevolution.img.Overlay} object.
+	 * @param image a {@link org.loboevolution.img.ImageComponent} object.
+	 */
 	public OverlayComponent(Overlay overlay, ImageComponent image) {
 		this.overlay = overlay;
 		this.theImage = image;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintComponent(Graphics g) {
 		BufferedImage image = theImage.getImage();
@@ -52,12 +60,15 @@ public class OverlayComponent extends JComponent {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getMaximumSize() {
 		return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
 	}
 
 	/**
+	 * <p>Getter for the field overlay.</p>
+	 *
 	 * @return the overlay
 	 */
 	public Overlay getOverlay() {
@@ -65,6 +76,8 @@ public class OverlayComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Setter for the field overlay.</p>
+	 *
 	 * @param overlay the overlay to set
 	 */
 	public void setOverlay(Overlay overlay) {
@@ -72,6 +85,8 @@ public class OverlayComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field theImage.</p>
+	 *
 	 * @return the theImage
 	 */
 	public ImageComponent getTheImage() {
@@ -79,6 +94,8 @@ public class OverlayComponent extends JComponent {
 	}
 
 	/**
+	 * <p>Setter for the field theImage.</p>
+	 *
 	 * @param theImage the theImage to set
 	 */
 	public void setTheImage(ImageComponent theImage) {

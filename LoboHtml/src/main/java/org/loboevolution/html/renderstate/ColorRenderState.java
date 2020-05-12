@@ -25,6 +25,9 @@ import java.awt.Color;
 
 /**
  * The Class ColorRenderState.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ColorRenderState extends RenderStateDelegator {
 
@@ -49,6 +52,7 @@ public class ColorRenderState extends RenderStateDelegator {
 	 * 
 	 * @see org.loboevolution.html.style.RenderStateDelegator#getColor()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Color getColor() {
 		return this.color;

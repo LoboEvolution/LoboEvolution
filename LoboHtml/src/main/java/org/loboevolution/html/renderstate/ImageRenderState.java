@@ -29,11 +29,24 @@ import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.MarginInsets;
 
+/**
+ * <p>ImageRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ImageRenderState extends StyleSheetRenderState {
+	/**
+	 * <p>Constructor for ImageRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public ImageRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
@@ -98,6 +111,7 @@ public class ImageRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;

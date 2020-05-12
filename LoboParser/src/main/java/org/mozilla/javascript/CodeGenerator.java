@@ -55,6 +55,15 @@ class CodeGenerator extends Icode {
     // ECF_ or Expression Context Flags constants: for now only TAIL
     private static final int ECF_TAIL = 1 << 0;
 
+    /**
+     * <p>compile.</p>
+     *
+     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
+     * @param tree a {@link org.mozilla.javascript.ast.ScriptNode} object.
+     * @param encodedSource a {@link java.lang.String} object.
+     * @param returnFunction a boolean.
+     * @return a {@link org.mozilla.javascript.InterpreterData} object.
+     */
     public InterpreterData compile(CompilerEnvirons compilerEnv,
                                    ScriptNode tree,
                                    String encodedSource,

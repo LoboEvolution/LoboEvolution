@@ -24,6 +24,12 @@ import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventTarget;
 
+/**
+ * <p>EventImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class EventImpl extends AbstractScriptableDelegate implements Event {
 	
 	private String eventType;
@@ -32,68 +38,88 @@ public class EventImpl extends AbstractScriptableDelegate implements Event {
 	
 	private boolean canBubble;
 	
+	/**
+	 * <p>Constructor for EventImpl.</p>
+	 *
+	 * @param eventTypeArg a {@link java.lang.String} object.
+	 * @param canBubbleArg a boolean.
+	 * @param cancelableArg a boolean.
+	 */
 	public EventImpl(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg) {
 		eventType = eventTypeArg;
 		canBubble = canBubbleArg;
 		cancelable = cancelableArg;
 	}
 	
+	/**
+	 * <p>Constructor for EventImpl.</p>
+	 */
 	public EventImpl() {
 		eventType = null;
 		canBubble = false;
 		cancelable = false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		return this.eventType;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public EventTarget getTarget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public EventTarget getCurrentTarget() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public short getEventPhase() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getBubbles() {
 		return this.canBubble;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getCancelable() {
 		return this.cancelable;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public long getTimeStamp() {
 		return System.currentTimeMillis();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void stopPropagation() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void preventDefault() {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void initEvent(String eventTypeArg, boolean canBubbleArg, boolean cancelableArg) {
 		eventType = eventTypeArg;

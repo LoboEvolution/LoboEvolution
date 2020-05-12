@@ -29,15 +29,26 @@ import java.util.EventListener;
 import java.util.EventObject;
 
 /**
+ * <p>Abstract EventDispatch2 class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public abstract class EventDispatch2 {
 	private static final EventListener[] EMPTY_ARRAY = new EventListener[0];
 	private Collection<EventListener> listeners;
 
+	/**
+	 * <p>Constructor for EventDispatch2.</p>
+	 */
 	public EventDispatch2() {
 	}
 
+	/**
+	 * <p>addListener.</p>
+	 *
+	 * @param listener a {@link java.util.EventListener} object.
+	 */
 	public final void addListener(EventListener listener) {
 		synchronized (this) {
 			if (this.listeners == null) {
@@ -47,12 +58,29 @@ public abstract class EventDispatch2 {
 		}
 	}
 
+	/**
+	 * <p>createListenerCollection.</p>
+	 *
+	 * @return a {@link java.util.Collection} object.
+	 */
 	public Collection<EventListener> createListenerCollection() {
 		return new ArrayList<EventListener>();
 	}
 
+	/**
+	 * <p>dispatchEvent.</p>
+	 *
+	 * @param listener a {@link java.util.EventListener} object.
+	 * @param event a {@link java.util.EventObject} object.
+	 */
 	protected abstract void dispatchEvent(EventListener listener, EventObject event);
 
+	/**
+	 * <p>fireEvent.</p>
+	 *
+	 * @param event a {@link java.util.EventObject} object.
+	 * @return a boolean.
+	 */
 	public final boolean fireEvent(EventObject event) {
 		EventListener[] larray;
 		synchronized (this) {
@@ -70,6 +98,11 @@ public abstract class EventDispatch2 {
 		return true;
 	}
 
+	/**
+	 * <p>removeListener.</p>
+	 *
+	 * @param listener a {@link java.util.EventListener} object.
+	 */
 	public final void removeListener(EventListener listener) {
 		synchronized (this) {
 			if (this.listeners != null) {

@@ -22,7 +22,10 @@
 package org.loboevolution.html.dom.smil;
 
 /**
- * This interface represents the SMIL <code>animate</code> element.
+ * This interface represents the SMIL animate element.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILAnimateElement extends SMILAnimation {
 }

@@ -1706,6 +1706,8 @@ class TokenStream
 
     /**
      * Return the current position of the scanner cursor.
+     *
+     * @return a int.
      */
     public int getCursor() {
         return cursor;
@@ -1713,6 +1715,8 @@ class TokenStream
 
     /**
      * Return the absolute source offset of the last scanned token.
+     *
+     * @return a int.
      */
     public int getTokenBeg() {
         return tokenBeg;
@@ -1720,6 +1724,8 @@ class TokenStream
 
     /**
      * Return the absolute source end-offset of the last scanned token.
+     *
+     * @return a int.
      */
     public int getTokenEnd() {
         return tokenEnd;
@@ -1727,6 +1733,8 @@ class TokenStream
 
     /**
      * Return tokenEnd - tokenBeg
+     *
+     * @return a int.
      */
     public int getTokenLength() {
         return tokenEnd - tokenBeg;
@@ -1734,6 +1742,7 @@ class TokenStream
 
     /**
      * Return the type of the last scanned comment.
+     *
      * @return type of last scanned comment, or 0 if none have been scanned.
      */
     public Token.CommentType getCommentType() {

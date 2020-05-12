@@ -19,9 +19,8 @@ import java.util.logging.Logger;
  * operations on one thread before passing the map to others
  *
  * @author Igor Bukanov
- *
+ * @version $Id: $Id
  */
-
 public class ObjToIntMap implements Serializable
 {
     private static final long serialVersionUID = -1542220580748809402L;
@@ -92,10 +91,18 @@ public class ObjToIntMap implements Serializable
         private int[] values;
     }
 
+    /**
+     * <p>Constructor for ObjToIntMap.</p>
+     */
     public ObjToIntMap() {
         this(4);
     }
 
+    /**
+     * <p>Constructor for ObjToIntMap.</p>
+     *
+     * @param keyCountHint a int.
+     */
     public ObjToIntMap(int keyCountHint) {
         if (keyCountHint < 0) Kit.codeBug();
         // Table grow when number of stored keys >= 3/4 of max capacity
@@ -106,14 +113,30 @@ public class ObjToIntMap implements Serializable
         if (check && power < 2) Kit.codeBug();
     }
 
+    /**
+     * <p>isEmpty.</p>
+     *
+     * @return a boolean.
+     */
     public boolean isEmpty() {
         return keyCount == 0;
     }
 
+    /**
+     * <p>size.</p>
+     *
+     * @return a int.
+     */
     public int size() {
         return keyCount;
     }
 
+    /**
+     * <p>has.</p>
+     *
+     * @param key a {@link java.lang.Object} object.
+     * @return a boolean.
+     */
     public boolean has(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         return 0 <= findIndex(key);
@@ -121,7 +144,10 @@ public class ObjToIntMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
      * @return key integer value or defaultValue if key is absent
+     * @param key a {@link java.lang.Object} object.
+     * @param defaultValue a int.
      */
     public int get(Object key, int defaultValue) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
@@ -134,8 +160,10 @@ public class ObjToIntMap implements Serializable
 
     /**
      * Get integer value assigned with key.
+     *
      * @return key integer value
-     * @throws RuntimeException if key does not exist
+     * @throws java.lang.RuntimeException if key does not exist
+     * @param key a {@link java.lang.Object} object.
      */
     public int getExisting(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
@@ -148,6 +176,12 @@ public class ObjToIntMap implements Serializable
         return 0;
     }
 
+    /**
+     * <p>put.</p>
+     *
+     * @param key a {@link java.lang.Object} object.
+     * @param value a int.
+     */
     public void put(Object key, int value) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         int index = ensureIndex(key);
@@ -158,6 +192,9 @@ public class ObjToIntMap implements Serializable
      * If table already contains a key that equals to keyArg, return that key
      * while setting its value to zero, otherwise add keyArg with 0 value to
      * the table and return it.
+     *
+     * @param keyArg a {@link java.lang.Object} object.
+     * @return a {@link java.lang.Object} object.
      */
     public Object intern(Object keyArg) {
         boolean nullKey = false;
@@ -170,6 +207,11 @@ public class ObjToIntMap implements Serializable
         return (nullKey) ? null : keys[index];
     }
 
+    /**
+     * <p>remove.</p>
+     *
+     * @param key a {@link java.lang.Object} object.
+     */
     public void remove(Object key) {
         if (key == null) { key = UniqueTag.NULL_VALUE; }
         int index = findIndex(key);
@@ -179,6 +221,9 @@ public class ObjToIntMap implements Serializable
         }
     }
 
+    /**
+     * <p>clear.</p>
+     */
     public void clear() {
         int i = keys.length;
         while (i != 0) {
@@ -188,6 +233,11 @@ public class ObjToIntMap implements Serializable
         occupiedCount = 0;
     }
 
+    /**
+     * <p>newIterator.</p>
+     *
+     * @return a {@link org.mozilla.javascript.ObjToIntMap.Iterator} object.
+     */
     public Iterator newIterator() {
         return new Iterator(this);
     }
@@ -199,13 +249,23 @@ public class ObjToIntMap implements Serializable
         i.init(keys, values, keyCount);
     }
 
-    /** Return array of present keys */
+    /**
+     * Return array of present keys
+     *
+     * @return an array of {@link java.lang.Object} objects.
+     */
     public Object[] getKeys() {
         Object[] array = new Object[keyCount];
         getKeys(array, 0);
         return array;
     }
 
+    /**
+     * <p>Getter for the field keys.</p>
+     *
+     * @param array an array of {@link java.lang.Object} objects.
+     * @param offset a int.
+     */
     public void getKeys(Object[] array, int offset) {
         int count = keyCount;
         for (int i = 0; count != 0; ++i) {

@@ -35,16 +35,19 @@ package org.loboevolution.html.dom;
 import org.w3c.dom.DOMException;
 
 /**
- * The <code>THEAD</code>, <code>TFOOT</code>, and <code>TBODY</code> elements.
+ * The THEAD, TFOOT, and TBODY elements.
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLTableSectionElement extends HTMLElement {
 	/**
 	 * Delete a row from this section.
-	 * 
+	 *
 	 * @param index The index of the row to be deleted, or -1 to delete the last
 	 *              row. This index starts from 0 and is relative only to the rows
 	 *              contained inside this section, not all the rows in the table.
@@ -52,44 +55,55 @@ public interface HTMLTableSectionElement extends HTMLElement {
 	 *                         greater than or equal to the number of rows or if the
 	 *                         index is a negative number other than -1.
 	 * @version DOM Level 2
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	void deleteRow(int index) throws DOMException;
 
 	/**
-	 * Horizontal alignment of data in cells. See the <code>align</code> attribute
+	 * Horizontal alignment of data in cells. See the align attribute
 	 * for HTMLTheadElement for details.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAlign();
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getCh();
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getChOff();
 
 	/**
 	 * The collection of rows in this table section.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getRows();
 
 	/**
-	 * Vertical alignment of data in cells. See the <code>valign</code> attribute
+	 * Vertical alignment of data in cells. See the valign attribute
 	 * for HTMLTheadElement for details.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getVAlign();
 
 	/**
 	 * Insert a row into this section. The new row is inserted immediately before
-	 * the current <code>index</code>th row in this section. If <code>index</code>
+	 * the current indexth row in this section. If index
 	 * is -1 or equal to the number of rows in this section, the new row is
 	 * appended.
-	 * 
+	 *
 	 * @param index The row number where to insert a new row. This index starts from
 	 *              0 and is relative only to the rows contained inside this
 	 *              section, not all the rows in the table.
@@ -98,30 +112,39 @@ public interface HTMLTableSectionElement extends HTMLElement {
 	 *                         greater than the number of rows of if the index is a
 	 *                         negative number other than -1.
 	 * @version DOM Level 2
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	HTMLElement insertRow(int index) throws DOMException;
 
 	/**
-	 * Horizontal alignment of data in cells. See the <code>align</code> attribute
+	 * Horizontal alignment of data in cells. See the align attribute
 	 * for HTMLTheadElement for details.
+	 *
+	 * @param align a {@link java.lang.String} object.
 	 */
 	void setAlign(String align);
 
 	/**
 	 * Alignment character for cells in a column. See the char attribute definition
 	 * in HTML 4.01.
+	 *
+	 * @param ch a {@link java.lang.String} object.
 	 */
 	void setCh(String ch);
 
 	/**
 	 * Offset of alignment character. See the charoff attribute definition in HTML
 	 * 4.01.
+	 *
+	 * @param chOff a {@link java.lang.String} object.
 	 */
 	void setChOff(String chOff);
 
 	/**
-	 * Vertical alignment of data in cells. See the <code>valign</code> attribute
+	 * Vertical alignment of data in cells. See the valign attribute
 	 * for HTMLTheadElement for details.
+	 *
+	 * @param vAlign a {@link java.lang.String} object.
 	 */
 	void setVAlign(String vAlign);
 

@@ -15,6 +15,8 @@ import org.loboevolution.gui.ItemEditorFactory;
  * The Class ItemListControl.
  *
  * @param <T> the generic type
+ * @author utente
+ * @version $Id: $Id
  */
 public class ItemListControl<T> extends JComponent {
 
@@ -65,6 +67,8 @@ public class ItemListControl<T> extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field comboBox.</p>
+	 *
 	 * @return the comboBox
 	 */
 	public JComboBox<T> getComboBox() {
@@ -72,6 +76,8 @@ public class ItemListControl<T> extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field editListCaption.</p>
+	 *
 	 * @return the editListCaption
 	 */
 	public String getEditListCaption() {
@@ -79,6 +85,8 @@ public class ItemListControl<T> extends JComponent {
 	}
 
 	/**
+	 * <p>Getter for the field itemEditorFactory.</p>
+	 *
 	 * @return the itemEditorFactory
 	 */
 	public ItemEditorFactory<T> getItemEditorFactory() {
@@ -100,6 +108,8 @@ public class ItemListControl<T> extends JComponent {
 	}
 
 	/**
+	 * <p>Setter for the field editListCaption.</p>
+	 *
 	 * @param editListCaption the editListCaption to set
 	 */
 	public void setEditListCaption(String editListCaption) {

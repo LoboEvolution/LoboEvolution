@@ -11,6 +11,9 @@ import java.util.List;
 
 /**
  * The Class ToolsStore.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ToolsStore implements Serializable {
 
@@ -26,6 +29,9 @@ public class ToolsStore implements Serializable {
 
 	private final String UPDATE_SEARCH2 = "UPDATE SEARCH SET selected = 1 WHERE name = ? and type = 'SEARCH_ENGINE'";
 
+	/**
+	 * <p>deleteSearchEngine.</p>
+	 */
 	public void deleteSearchEngine() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_SEARCH)) {
@@ -35,6 +41,11 @@ public class ToolsStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>getSearchEngines.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public List<SearchEngineStore> getSearchEngines() {
 		final List<SearchEngineStore> searchEngineStores = new ArrayList<SearchEngineStore>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -71,6 +82,15 @@ public class ToolsStore implements Serializable {
 		return null;
 	}
 
+	/**
+	 * <p>insertSearch.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @param description a {@link java.lang.String} object.
+	 * @param baseUrl a {@link java.lang.String} object.
+	 * @param queryParameter a {@link java.lang.String} object.
+	 * @param selected a boolean.
+	 */
 	public void insertSearch(String name, String description, String baseUrl, String queryParameter, boolean selected) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_SEARCH)) {
@@ -86,11 +106,19 @@ public class ToolsStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>restoreDefaults.</p>
+	 */
 	public void restoreDefaults() {
 		unselectedSearch();
 		selectedSearch("Google Web Search");
 	}
 
+	/**
+	 * <p>selectedSearch.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public void selectedSearch(String name) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH2)) {
@@ -101,6 +129,9 @@ public class ToolsStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>unselectedSearch.</p>
+	 */
 	public void unselectedSearch() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH)) {

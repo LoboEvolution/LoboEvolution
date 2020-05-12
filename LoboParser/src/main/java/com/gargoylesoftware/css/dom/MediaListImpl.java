@@ -33,6 +33,7 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
  * Implementation of MediaList.
  *
  * @author Ronald Brill
+ * @version $Id: $Id
  */
 public class MediaListImpl extends AbstractLocatable implements Serializable {
 
@@ -41,6 +42,7 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Creates new MediaList.
+     *
      * @param mediaList the media list
      */
     public MediaListImpl(final MediaQueryList mediaList) {
@@ -53,6 +55,8 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getMediaText.</p>
+     *
      * @return the media text
      */
     public String getMediaText() {
@@ -72,8 +76,9 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Parses the given media text.
+     *
      * @param mediaText text to be parsed
-     * @throws DOMException in case of error
+     * @throws org.w3c.dom.DOMException in case of error
      */
     public void setMediaText(final String mediaText) throws DOMException {
         try {
@@ -91,6 +96,8 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>getLength.</p>
+     *
      * @return the media query count
      */
     public int getLength() {
@@ -98,6 +105,8 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
     }
 
     /**
+     * <p>mediaQuery.</p>
+     *
      * @param index the position of the media query
      * @return the media query at the given pos
      */
@@ -108,6 +117,7 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
         return mediaQueries_.get(index);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getMediaText();
@@ -115,6 +125,7 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
 
     /**
      * Resets the list of media queries.
+     *
      * @param media the media queries string to be parsed
      */
     public void setMedia(final List<String> media) {
@@ -147,6 +158,7 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
         return true;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -159,6 +171,7 @@ public class MediaListImpl extends AbstractLocatable implements Serializable {
         return super.equals(obj) && equalsMedia(ml);
     }
 
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

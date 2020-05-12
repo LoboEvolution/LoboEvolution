@@ -100,6 +100,15 @@ class RTable extends BaseElementRenderable {
 
 	private final TableMatrix tableMatrix;
 
+	/**
+	 * <p>Constructor for RTable.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 */
 	public RTable(HTMLElementImpl modelNode, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer container) {
 		super(container, modelNode, pcontext);
@@ -127,6 +136,7 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void doLayout(int availWidth, int availHeight, boolean sizeOnly) {
 		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
@@ -198,6 +208,7 @@ class RTable extends BaseElementRenderable {
 	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderablePoint(int,
 	 * int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
@@ -224,6 +235,7 @@ class RTable extends BaseElementRenderable {
 	 * 
 	 * @see org.loboevolution.html.rendered.RenderableContainer#getBackground()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Color getPaintedBackgroundColor() {
 		return this.container.getPaintedBackgroundColor();
@@ -234,6 +246,7 @@ class RTable extends BaseElementRenderable {
 	 * 
 	 * @see org.loboevolution.html.rendered.RCollection#getRenderables()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Iterator getRenderables() {
 		final SortedSet<PositionedRenderable> prs = this.positionedRenderables;
@@ -259,6 +272,7 @@ class RTable extends BaseElementRenderable {
 	    this.addPositionedRenderable(r, false, false, pair.isFixed());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidateLayoutLocal() {
 		super.invalidateLayoutLocal();
@@ -267,6 +281,7 @@ class RTable extends BaseElementRenderable {
 		this.lastLayoutValue = null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
@@ -293,6 +308,7 @@ class RTable extends BaseElementRenderable {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseClick(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
@@ -319,6 +335,7 @@ class RTable extends BaseElementRenderable {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseDisarmed(java.awt.event.
 	 * MouseEvent)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseDisarmed(MouseEvent event) {
 		return this.tableMatrix.onMouseDisarmed(event);
@@ -331,6 +348,7 @@ class RTable extends BaseElementRenderable {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMousePressed(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
@@ -357,6 +375,7 @@ class RTable extends BaseElementRenderable {
 	 * org.loboevolution.html.rendered.BoundableRenderable#onMouseReleased(java.awt.event.
 	 * MouseEvent, int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final Collection<PositionedRenderable> prs = this.positionedRenderables;
@@ -376,6 +395,7 @@ class RTable extends BaseElementRenderable {
 		return this.tableMatrix.onMouseReleased(event, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();
@@ -402,11 +422,13 @@ class RTable extends BaseElementRenderable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void repaint(ModelNode modelNode) {
 		// NOP
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "RTable[this=" + System.identityHashCode(this) + ",node=" + this.modelNode + "]";

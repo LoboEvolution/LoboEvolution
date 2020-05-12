@@ -18,6 +18,12 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
 import org.loboevolution.net.HttpNetwork;
 
+/**
+ * <p>ExternalResourcesStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class ExternalResourcesStore {
 
 	/** The Constant logger. */
@@ -26,6 +32,13 @@ public class ExternalResourcesStore {
 	/** The date pattern. */
 	private static final String DATE_PATTERN = "yyyy-MM-dd hh:mm:ss";
 
+	/**
+	 * <p>getSourceCache.</p>
+	 *
+	 * @param baseUrl a {@link java.lang.String} object.
+	 * @param type a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getSourceCache(String baseUrl, String type) {
 		String source = "";
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());

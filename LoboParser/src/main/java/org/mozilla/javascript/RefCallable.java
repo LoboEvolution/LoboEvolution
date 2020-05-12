@@ -8,6 +8,9 @@ package org.mozilla.javascript;
 
 /**
  * Object that can allows assignments to the result of function calls.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface RefCallable extends Callable
 {
@@ -15,12 +18,13 @@ public interface RefCallable extends Callable
      * Perform function call in reference context.
      * The args array reference should not be stored in any object that is
      * can be GC-reachable after this method returns. If this is necessary,
-     * for example, to implement {@link Ref} methods, then store args.clone(),
+     * for example, to implement {@link org.mozilla.javascript.Ref} methods, then store args.clone(),
      * not args array itself.
      *
      * @param cx the current Context for this thread
-     * @param thisObj the JavaScript <code>this</code> object
+     * @param thisObj the JavaScript this object
      * @param args the array of arguments
+     * @return a {@link org.mozilla.javascript.Ref} object.
      */
     public Ref refCall(Context cx, Scriptable thisObj, Object[] args);
 }

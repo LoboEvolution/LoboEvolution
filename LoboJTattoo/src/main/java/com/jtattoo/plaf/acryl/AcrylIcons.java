@@ -47,7 +47,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>AcrylIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylIcons extends BaseIcons {
 
@@ -382,6 +385,11 @@ public class AcrylIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getCheckBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
 			checkBoxIcon = new CheckBoxIcon();
@@ -389,6 +397,11 @@ public class AcrylIcons extends BaseIcons {
 		return checkBoxIcon;
 	}
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -400,6 +413,11 @@ public class AcrylIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -411,6 +429,11 @@ public class AcrylIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -422,6 +445,11 @@ public class AcrylIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			if (AbstractLookAndFeel.getTheme().isMacStyleWindowDecorationOn()) {
@@ -433,6 +461,11 @@ public class AcrylIcons extends BaseIcons {
 		return minIcon;
 	}
 
+	/**
+	 * <p>getRadioButtonIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRadioButtonIcon() {
 		if (radioButtonIcon == null) {
 			radioButtonIcon = new RadioButtonIcon();
@@ -440,6 +473,11 @@ public class AcrylIcons extends BaseIcons {
 		return radioButtonIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
 			return BaseIcons.getThumbHorIcon();
@@ -451,6 +489,11 @@ public class AcrylIcons extends BaseIcons {
 		return thumbHorIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
 			return BaseIcons.getThumbHorIconRollover();
@@ -462,6 +505,11 @@ public class AcrylIcons extends BaseIcons {
 		return thumbHorIconRollover;
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
 			return BaseIcons.getThumbVerIcon();
@@ -473,6 +521,11 @@ public class AcrylIcons extends BaseIcons {
 		return thumbVerIcon;
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
 			return BaseIcons.getThumbVerIconRollover();
@@ -484,6 +537,11 @@ public class AcrylIcons extends BaseIcons {
 		return thumbVerIconRollover;
 	}
 
+	/**
+	 * <p>getTreeCollapsedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeCollapsedIcon() {
 		if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
 			return BaseIcons.getTreeCollapsedIcon();
@@ -501,6 +559,11 @@ public class AcrylIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getTreeExpandedIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTreeExpandedIcon() {
 		if (!AbstractLookAndFeel.getControlColorLight().equals(new ColorUIResource(96, 98, 100))) {
 			return BaseIcons.getTreeExpandedIcon();

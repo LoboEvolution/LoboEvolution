@@ -8,8 +8,21 @@ import org.loboevolution.store.TabStore;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>TabbedHtml class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TabbedHtml {
 
+	/**
+	 * <p>tab.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.BrowserPanel} object.
+	 * @param url a {@link java.lang.String} object.
+	 * @param index a int.
+	 */
 	public void tab(BrowserPanel panel, String url, int index) {
 		final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 		final HtmlPanel hpanel = NavigationManager.getHtmlPanel(url, index);

@@ -13,6 +13,7 @@ import java.util.Iterator;
  * http://developer.mozilla.org/en/docs/New_in_JavaScript_1.7#Iterators
  *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
 public final class NativeIterator extends IdScriptableObject {
     private static final long serialVersionUID = -4136968203581667681L;
@@ -54,6 +55,7 @@ public final class NativeIterator extends IdScriptableObject {
      * is stored in the top-level scope using "associateValue" so the
      * value can still be found even if a script overwrites or deletes
      * the global "StopIteration" property.
+     *
      * @param scope a scope whose parent chain reaches a top-level scope
      * @return the StopIteration object
      */
@@ -63,6 +65,7 @@ public final class NativeIterator extends IdScriptableObject {
     }
 
     private static final String STOP_ITERATION = "StopIteration";
+    /** Constant ITERATOR_PROPERTY_NAME="__iterator__" */
     public static final String ITERATOR_PROPERTY_NAME = "__iterator__";
 
     static class StopIteration extends NativeObject {
@@ -82,11 +85,13 @@ public final class NativeIterator extends IdScriptableObject {
         }
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Iterator";
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id) {
         String s;
@@ -100,6 +105,7 @@ public final class NativeIterator extends IdScriptableObject {
         initPrototypeMethod(ITERATOR_TAG, id, s, arity);
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -234,6 +240,7 @@ public final class NativeIterator extends IdScriptableObject {
 
 // #string_id_map#
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id;

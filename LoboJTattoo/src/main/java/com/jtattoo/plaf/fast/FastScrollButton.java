@@ -33,6 +33,12 @@ import com.jtattoo.plaf.BaseScrollButton;
 import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
+/**
+ * <p>FastScrollButton class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FastScrollButton extends BaseScrollButton {
 
 	/**
@@ -40,10 +46,17 @@ public class FastScrollButton extends BaseScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for FastScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public FastScrollButton(int direction, int width) {
 		super(direction, width);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		boolean isPressed = getModel().isPressed();

@@ -7,12 +7,24 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 
+/**
+ * <p>RSSDescriptionElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class RSSDescriptionElementImpl extends RSSElement implements RSSDrawable {
 
+	/**
+	 * <p>Constructor for RSSDescriptionElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public RSSDescriptionElementImpl(String name) {
 		super(name);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics, int y) {
 		String text = getText();

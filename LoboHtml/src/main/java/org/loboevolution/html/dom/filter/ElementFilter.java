@@ -28,13 +28,25 @@ import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+/**
+ * <p>ElementFilter class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public final class ElementFilter implements NodeFilter {
 	private final String elementName;
 
+	/**
+	 * <p>Constructor for ElementFilter.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public ElementFilter(String name) {
 		this.elementName = name;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return Strings.isNotBlank(elementName) ? (this.elementName.equalsIgnoreCase(node.getNodeName())) : (node instanceof Element);

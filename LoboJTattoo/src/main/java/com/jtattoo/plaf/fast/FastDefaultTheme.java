@@ -28,10 +28,16 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>FastDefaultTheme class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class FastDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for FastDefaultTheme.</p>
+	 */
 	public FastDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -42,11 +48,13 @@ public class FastDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "FastTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -77,6 +85,7 @@ public class FastDefaultTheme extends AbstractTheme {
 		desktopColor = new ColorUIResource(128, 128, 148);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

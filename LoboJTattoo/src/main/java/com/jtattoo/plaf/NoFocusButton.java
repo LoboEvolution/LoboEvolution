@@ -27,7 +27,10 @@ import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
+ * <p>NoFocusButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class NoFocusButton extends JButton {
 
@@ -36,11 +39,19 @@ public class NoFocusButton extends JButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for NoFocusButton.</p>
+	 */
 	public NoFocusButton() {
 		super();
 		init();
 	}
 
+	/**
+	 * <p>Constructor for NoFocusButton.</p>
+	 *
+	 * @param ico a {@link javax.swing.Icon} object.
+	 */
 	public NoFocusButton(Icon ico) {
 		super(ico);
 		init();
@@ -52,11 +63,13 @@ public class NoFocusButton extends JButton {
 		setFocusable(false);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isFocusTraversable() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void requestFocus() {
 	}

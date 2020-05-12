@@ -21,6 +21,12 @@
 
 package org.loboevolution.html.renderstate;
 
+/**
+ * <p>TextDecorationRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextDecorationRenderState extends RenderStateDelegator {
 
 	/** The text decoration mask. */
@@ -40,6 +46,7 @@ public class TextDecorationRenderState extends RenderStateDelegator {
 	}
 
 
+	/** {@inheritDoc} */
 	@Override
 	public int getTextDecorationMask() {
 		RenderState prs = this.delegate;

@@ -25,11 +25,29 @@ import org.loboevolution.html.dom.domimpl.NodeImpl;
 /**
  * Provides direct access to the GUI component where the document is rendered,
  * typically a browser frame of some sort.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface FrameContext {
+	/**
+	 * <p>delayedRelayout.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
 	void delayedRelayout(NodeImpl node);
 
+	/**
+	 * <p>expandSelection.</p>
+	 *
+	 * @param rpoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 */
 	void expandSelection(RenderableSpot rpoint);
 
+	/**
+	 * <p>resetSelection.</p>
+	 *
+	 * @param rpoint a {@link org.loboevolution.html.renderer.RenderableSpot} object.
+	 */
 	void resetSelection(RenderableSpot rpoint);
 }

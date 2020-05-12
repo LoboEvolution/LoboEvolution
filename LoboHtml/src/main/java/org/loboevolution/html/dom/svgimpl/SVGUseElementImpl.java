@@ -15,14 +15,26 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGUseElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 	
 	private Graphics2D graphics;
 
+	/**
+	 * <p>Constructor for SVGUseElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGUseElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedString getHref() {
 		String href = this.getAttribute("xlink:href");
@@ -32,38 +44,45 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 		return new SVGAnimatedStringImpl(href);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getX() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("x")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getY() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("y")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getWidth() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("width")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedLength getHeight() {
 		return new SVGAnimatedLengthImpl(new SVGLengthImpl(this.getAttribute("height")));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGElementInstance getInstanceRoot() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGElementInstance getAnimatedInstanceRoot() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void draw(Graphics2D graphics) {
 		this.graphics = graphics;
@@ -71,6 +90,7 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 		createShape(ctm.getAffineTransform());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Shape createShape(AffineTransform transform) {
 		String href = getHref().getBaseVal();

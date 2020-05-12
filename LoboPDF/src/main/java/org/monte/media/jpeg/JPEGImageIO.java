@@ -45,7 +45,7 @@ public class JPEGImageIO {
      * @param in An InputStream in the JPEG File Interchange Format (JFIF). 
      * @return a BufferedImage containing the decoded image converted into the
      * RGB color space.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public static BufferedImage read(InputStream in) throws IOException {
         return read(in, true);
@@ -176,7 +176,7 @@ public class JPEGImageIO {
      * File Interchange Format (JFIF).
      * @return a BufferedImage containing the decoded image converted into the
      * RGB color space.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public static BufferedImage readImageFromYUVorGray(InputStream in) throws IOException {
         BufferedImage img = (in instanceof ImageInputStream) ? ImageIO.read((ImageInputStream) in) : ImageIO.read(in);
@@ -197,7 +197,7 @@ public class JPEGImageIO {
      * to the RGB color space. If this parameter is null, a default profile is used.
      * @return a BufferedImage containing the decoded image converted into the
      * RGB color space.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public static BufferedImage readRGBImageFromCMYK(InputStream in, ICC_Profile cmykProfile) throws IOException {
         ImageInputStream inputStream = null;
@@ -223,7 +223,7 @@ public class JPEGImageIO {
      * to the RGB color space. If this parameter is null, a default profile is used.
      * @return a BufferedImage containing the decoded image converted into the
      * RGB color space.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public static BufferedImage readRGBImageFromYCCK(InputStream in, ICC_Profile cmykProfile) throws IOException {
         ImageInputStream inputStream = null;
@@ -249,7 +249,7 @@ public class JPEGImageIO {
      * to the RGB color space. If this parameter is null, a default profile is used.
      * @return a BufferedImage containing the decoded image converted into the
      * RGB color space.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public static BufferedImage readRGBImageFromInvertedYCCK(InputStream in, ICC_Profile cmykProfile) throws IOException {
         ImageInputStream inputStream = null;

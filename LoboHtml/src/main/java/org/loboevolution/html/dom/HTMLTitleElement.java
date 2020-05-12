@@ -38,15 +38,22 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLTitleElement extends HTMLElement {
 	/**
 	 * The specified title as a string.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getText();
 
 	/**
 	 * The specified title as a string.
+	 *
+	 * @param text a {@link java.lang.String} object.
 	 */
 	void setText(String text);
 

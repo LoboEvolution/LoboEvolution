@@ -34,15 +34,19 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseScrollBarUI;
 
 /**
+ * <p>SmartScrollBarUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class SmartScrollBarUI extends BaseScrollBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new SmartScrollBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createDecreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -52,6 +56,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createIncreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -61,6 +66,7 @@ public class SmartScrollBarUI extends BaseScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		super.paintThumb(g, c, thumbBounds);

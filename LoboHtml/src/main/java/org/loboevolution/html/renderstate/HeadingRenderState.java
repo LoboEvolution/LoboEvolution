@@ -25,11 +25,24 @@ import java.awt.FontMetrics;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
 
+/**
+ * <p>HeadingRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HeadingRenderState extends AbstractMarginRenderState {
+	/**
+	 * <p>Constructor for HeadingRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public HeadingRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected HtmlInsets getDefaultMarginInsets() {
 		final HtmlInsets insets = new HtmlInsets();

@@ -9,6 +9,12 @@ import java.util.List;
 
 import org.loboevolution.info.TabInfo;
 
+/**
+ * <p>TabStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TabStore {
 
 	private static String INSERT_TAB = "INSERT INTO TAB (index_tab, url, title) VALUES(?,?,?)";
@@ -23,10 +29,23 @@ public class TabStore {
 
 	private static String TABS = "SELECT index_tab, url, title FROM TAB";
 	
+	/**
+	 * <p>insertTab.</p>
+	 *
+	 * @param index a {@link java.lang.Integer} object.
+	 * @param url a {@link java.lang.String} object.
+	 */
 	public static void insertTab(Integer index, String url) {
 		insertTab(index, url, null);
 	}
 	
+	/**
+	 * <p>insertTab.</p>
+	 *
+	 * @param index a {@link java.lang.Integer} object.
+	 * @param url a {@link java.lang.String} object.
+	 * @param title a {@link java.lang.String} object.
+	 */
 	public static void insertTab(Integer index, String url, String title) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_TAB)) {
@@ -39,6 +58,11 @@ public class TabStore {
 		}
 	}
 
+	/**
+	 * <p>deleteTab.</p>
+	 *
+	 * @param index a {@link java.lang.Integer} object.
+	 */
 	public static void deleteTab(Integer index) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB)) {
@@ -49,6 +73,9 @@ public class TabStore {
 		}
 	}
 	
+	/**
+	 * <p>deleteAll.</p>
+	 */
 	public static void deleteAll() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_TAB_ALL)) {
@@ -58,6 +85,12 @@ public class TabStore {
 		}
 	}
 
+	/**
+	 * <p>getTab.</p>
+	 *
+	 * @param index a {@link java.lang.Integer} object.
+	 * @return a {@link java.lang.String} object.
+	 */
 	public static String getTab(Integer index) {
 		String url = "";
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -74,6 +107,11 @@ public class TabStore {
 		return url;
 	}
 	
+	/**
+	 * <p>getTabs.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<TabInfo> getTabs() {
 		List<TabInfo> urls = new ArrayList<TabInfo>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -93,6 +131,11 @@ public class TabStore {
 		return urls;
 	}
 	
+	/**
+	 * <p>getUrls.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getUrls() {
 		List<String> urls = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());

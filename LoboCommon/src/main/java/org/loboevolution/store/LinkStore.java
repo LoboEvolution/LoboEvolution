@@ -5,8 +5,20 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+/**
+ * <p>LinkStore class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class LinkStore {
 	
+	/**
+	 * <p>isVisited.</p>
+	 *
+	 * @param link a {@link java.lang.String} object.
+	 * @return a boolean.
+	 */
 	public static boolean isVisited(String link) {
         boolean vis = false;
     	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -23,6 +35,11 @@ public class LinkStore {
         return vis;
     }	
 
+	/**
+	 * <p>insertLinkVisited.</p>
+	 *
+	 * @param link a {@link java.lang.String} object.
+	 */
 	public static void insertLinkVisited(String link) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INSERT_LINK)) {
@@ -33,6 +50,9 @@ public class LinkStore {
 		}
 	}
 	
+	/**
+	 * <p>deleteLinks.</p>
+	 */
 	public static void deleteLinks() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LINK)) {

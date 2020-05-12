@@ -14,6 +14,9 @@ import org.loboevolution.info.BookmarkInfo;
 
 /**
  * The Class BookmarksStore.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class BookmarksStore implements Serializable {
 
@@ -25,6 +28,9 @@ public class BookmarksStore implements Serializable {
 
 	private final String INSERT_BOOKMARKS = "INSERT INTO BOOKMARKS (name, description, baseUrl, tags) VALUES(?,?,?,?)";
 
+	/**
+	 * <p>deleteBookmarks.</p>
+	 */
 	public void deleteBookmarks() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
@@ -38,6 +44,7 @@ public class BookmarksStore implements Serializable {
 	 * Gets the bookmarks
 	 *
 	 * @return bookmarks
+	 * @param num a {@link java.lang.Integer} object.
 	 */
 	public List<BookmarkInfo> getBookmarks(Integer num) {
 		synchronized (this) {
@@ -90,6 +97,11 @@ public class BookmarksStore implements Serializable {
 		return info;
 	}
 
+	/**
+	 * <p>insertBookmark.</p>
+	 *
+	 * @param info a {@link org.loboevolution.info.BookmarkInfo} object.
+	 */
 	public void insertBookmark(BookmarkInfo info) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.INSERT_BOOKMARKS)) {

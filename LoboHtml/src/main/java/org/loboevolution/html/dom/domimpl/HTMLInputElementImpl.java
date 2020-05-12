@@ -44,6 +44,12 @@ import org.loboevolution.html.js.Executor;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Node;
 
+/**
+ * <p>HTMLInputElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLInputElement {
 	
 	private InputText text;
@@ -58,37 +64,48 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	
 	private InputColorPicker color;
 
+	/**
+	 * <p>Constructor for HTMLInputElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLInputElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAccept() {
 		return getAttribute("accept");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAccessKey() {
 		return getAttribute("accessKey");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getAlt() {
 		return getAttribute("alit");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getChecked() {
 		final String checked = getAttribute("checked");
 		return checked == null ? false : true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
 		final String disabled = getAttribute("disabled");
 		return disabled == null ? false : true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HTMLFormElement getForm() {
 		Node parent = getParentNode();
@@ -98,6 +115,7 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		return (HTMLFormElement) parent;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMaxLength() {
 		try {
@@ -108,17 +126,20 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getName() {
 		return getAttribute("name");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getReadOnly() {
 		final String readonly = getAttribute("readonly");
 		return readonly == null ? false : true;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getSize() {
 		try {
@@ -129,38 +150,49 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getSrc() {
 		return this.getAttribute("src");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getType() {
 		final String type = getAttribute("type");
 		return type == null ? null : type.toLowerCase();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
 		final String val = getAttribute("value");
 		return val == null ? "" : val;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean getAutocomplete() {
 		String autocomplete = this.getAttribute("autocomplete");
 		return "on".equalsIgnoreCase(autocomplete);
 	}
 
+	/**
+	 * <p>getPlaceholder.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getPlaceholder() {
 		return this.getAttribute("placeholder");
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void select() {
 		if(text!= null) text.selectAll();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void click() {
 		Function onclick = getOnclick();		
@@ -169,91 +201,117 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void blur() {
 		if(text!= null) text.blur();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void focus() {
 		if(text!= null) text.focus();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void setSelectionRange(int start, int end) {
 		if(text!= null) text.setSelectionRange(start, end);
 	} 
 	
+	/** {@inheritDoc} */
 	@Override
 	public void setRangeText(String select, int start, int end, String preserve) {
 		text.setRangeText(start, end, select);
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public void setAccept(String accept) {
 		setAttribute("accept", accept);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAccessKey(String accessKey) {
 		setAttribute("accessKey", accessKey);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setAlt(String alt) {
 		setAttribute("alt", alt);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setChecked(boolean checked) {
 		setAttribute("checked", String.valueOf(checked));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setDisabled(boolean disabled) {
 		setAttribute("disabled", String.valueOf(disabled));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setMaxLength(int maxLength) {
 		setAttribute("maxLength", String.valueOf(maxLength));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setName(String name) {
 		setAttribute("name", name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setReadOnly(boolean readOnly) {
 		setAttribute("readonly", String.valueOf(readOnly));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSize(int size) {
 		setAttribute("size", String.valueOf(size));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setSrc(String src) {
 		this.setAttribute("src", src);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
 		setAttribute("value", value);
 	}
 	
+	/**
+	 * <p>setPlaceholder.</p>
+	 *
+	 * @param placeholder a {@link java.lang.String} object.
+	 */
 	public void setPlaceholder(String placeholder) {
 		this.setAttribute("placeholder", placeholder);
 
 	}
 
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public void draw(InputControl ic) {
 		final String type = getType();
 		
@@ -313,6 +371,9 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 	
+	/**
+	 * <p>submit.</p>
+	 */
 	public void submit() {
 		FormInput[] formInputs;
 		final String name = getName();
@@ -328,6 +389,9 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
+	/**
+	 * <p>reset.</p>
+	 */
 	public void reset() {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) getForm();
 		if (form != null) {
@@ -335,6 +399,12 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
+	/**
+	 * <p>submitImage.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void submitImage(int x, int y) {
 		final String name = getName();
 		final String prefix = name == null ? "" : name + ".";
@@ -345,6 +415,11 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
+	/**
+	 * <p>submitForm.</p>
+	 *
+	 * @param extraFormInputs an array of {@link org.loboevolution.html.dom.input.FormInput} objects.
+	 */
 	public void submitForm(final FormInput[] extraFormInputs) {
 		final HTMLFormElementImpl form = (HTMLFormElementImpl) this.getForm();
 		if (form != null) {
@@ -352,6 +427,9 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 	}
 
+	/**
+	 * <p>resetInput.</p>
+	 */
 	public void resetInput() {
 		if(text != null) text.reset();
 		if(radio != null) radio.reset();

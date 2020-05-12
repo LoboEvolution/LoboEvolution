@@ -20,12 +20,24 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGRenderingIntent interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGRenderingIntent {
 	// Rendering Intent Types
+	/** Constant RENDERING_INTENT_UNKNOWN=0 */
 	static final short RENDERING_INTENT_UNKNOWN = 0;
+	/** Constant RENDERING_INTENT_AUTO=1 */
 	static final short RENDERING_INTENT_AUTO = 1;
+	/** Constant RENDERING_INTENT_PERCEPTUAL=2 */
 	static final short RENDERING_INTENT_PERCEPTUAL = 2;
+	/** Constant RENDERING_INTENT_RELATIVE_COLORIMETRIC=3 */
 	static final short RENDERING_INTENT_RELATIVE_COLORIMETRIC = 3;
+	/** Constant RENDERING_INTENT_SATURATION=4 */
 	static final short RENDERING_INTENT_SATURATION = 4;
+	/** Constant RENDERING_INTENT_ABSOLUTE_COLORIMETRIC=5 */
 	static final short RENDERING_INTENT_ABSOLUTE_COLORIMETRIC = 5;
 }

@@ -44,6 +44,7 @@ import org.loboevolution.common.Strings;
  * A factory for creating Font objects.
  *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class FontFactory {
 	
@@ -76,8 +77,8 @@ public class FontFactory {
 	 * Script font.
 	 *
 	 * @param baseFont       the base font
-	 * @param newSuperscript the new superscript
 	 * @return the font
+	 * @param key a {@link org.loboevolution.laf.FontKey} object.
 	 */
 	public static Font scriptFont(Font baseFont, FontKey key) {
 
@@ -224,6 +225,7 @@ public class FontFactory {
 	 * Gets the font.
 	 *
 	 * @param key the key
+	 * @return a {@link java.awt.Font} object.
 	 */
 	public Font getFont(FontKey key) {
 		synchronized (this) {
@@ -243,10 +245,10 @@ public class FontFactory {
 	 *
 	 * @param fontName   The name of a font as it would appear in a font-family
 	 *                   specification.
-	 * @param fontFormat Should be {@link Font#TRUETYPE_FONT}.
+	 * @param fontFormat Should be {@link java.awt.Font#TRUETYPE_FONT}.
 	 * @param fontStream the font stream
-	 * @throws FontFormatException the font format exception
-	 * @throws IOException         Signals that an I/O exception has occurred.
+	 * @throws java.awt.FontFormatException the font format exception
+	 * @throws java.io.IOException if any.         Signals that an I/O exception has occurred.
 	 */
 	public void registerFont(String fontName, int fontFormat, InputStream fontStream)
 			throws FontFormatException, IOException {

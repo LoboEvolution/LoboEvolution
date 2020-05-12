@@ -35,30 +35,61 @@ final class RStyleChanger extends BaseRenderable {
 	
 	private final ModelNode modelNode;
 
+	/**
+	 * <p>Constructor for RStyleChanger.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 */
 	public RStyleChanger(ModelNode modelNode) {
 		this.modelNode = modelNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public ModelNode getModelNode() {
 		return this.modelNode;
 	}
 
+	/**
+	 * <p>invalidateLayoutUpTree.</p>
+	 */
 	public void invalidateLayoutUpTree() {
 	}
 
+	/**
+	 * <p>onMouseClick.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void onMouseClick(java.awt.event.MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
+	/**
+	 * <p>onMousePressed.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void onMousePressed(java.awt.event.MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
+	/**
+	 * <p>onMouseReleased.</p>
+	 *
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void onMouseReleased(java.awt.event.MouseEvent event, int x, int y) {
 		throw new UnsupportedOperationException("unexpected");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		final RenderState rs = this.modelNode.getRenderState();

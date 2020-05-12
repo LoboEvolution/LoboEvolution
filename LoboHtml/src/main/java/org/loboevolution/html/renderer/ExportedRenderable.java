@@ -34,6 +34,15 @@ class ExportedRenderable {
 	 */
 	public final int x, y;
 
+	/**
+	 * <p>Constructor for ExportedRenderable.</p>
+	 *
+	 * @param originalTarget a {@link org.loboevolution.html.renderer.RBlockViewport} object.
+	 * @param renderable a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param alignment a int.
+	 */
 	public ExportedRenderable(final RBlockViewport originalTarget, final BoundableRenderable renderable, final int x,
 			final int y, final int alignment) {
 		super();

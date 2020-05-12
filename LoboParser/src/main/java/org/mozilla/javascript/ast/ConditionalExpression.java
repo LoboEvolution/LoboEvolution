@@ -10,7 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node representing the ternary operator.  Node type is
- * {@link Token#HOOK}.
+ * {@link org.mozilla.javascript.Token#HOOK}.
  *
  * <pre><i>ConditionalExpression</i> :
  *        LogicalORExpression
@@ -21,6 +21,9 @@ import org.mozilla.javascript.Token;
  *        LogicalORExpressionNoIn
  *        LogicalORExpressionNoIn ? AssignmentExpression
  *                                : AssignmentExpressionNoIn</pre>
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ConditionalExpression extends AstNode {
 
@@ -34,19 +37,35 @@ public class ConditionalExpression extends AstNode {
         type = Token.HOOK;
     }
 
+    /**
+     * <p>Constructor for ConditionalExpression.</p>
+     */
     public ConditionalExpression() {
     }
 
+    /**
+     * <p>Constructor for ConditionalExpression.</p>
+     *
+     * @param pos a int.
+     */
     public ConditionalExpression(int pos) {
         super(pos);
     }
 
+    /**
+     * <p>Constructor for ConditionalExpression.</p>
+     *
+     * @param pos a int.
+     * @param len a int.
+     */
     public ConditionalExpression(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns test expression
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTestExpression() {
         return testExpression;
@@ -54,8 +73,9 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Sets test expression, and sets its parent.
+     *
      * @param testExpression test expression
-     * @throws IllegalArgumentException if testExpression is {@code null}
+     * @throws java.lang.IllegalArgumentException if testExpression is {@code null}
      */
     public void setTestExpression(AstNode testExpression) {
         assertNotNull(testExpression);
@@ -65,6 +85,8 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Returns expression to evaluate if test is true
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTrueExpression() {
         return trueExpression;
@@ -73,8 +95,9 @@ public class ConditionalExpression extends AstNode {
     /**
      * Sets expression to evaluate if test is true, and
      * sets its parent to this node.
+     *
      * @param trueExpression expression to evaluate if test is true
-     * @throws IllegalArgumentException if expression is {@code null}
+     * @throws java.lang.IllegalArgumentException if expression is {@code null}
      */
     public void setTrueExpression(AstNode trueExpression) {
         assertNotNull(trueExpression);
@@ -84,6 +107,8 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Returns expression to evaluate if test is false
+     *
+     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getFalseExpression() {
         return falseExpression;
@@ -92,8 +117,9 @@ public class ConditionalExpression extends AstNode {
     /**
      * Sets expression to evaluate if test is false, and sets its
      * parent to this node.
+     *
      * @param falseExpression expression to evaluate if test is false
-     * @throws IllegalArgumentException if {@code falseExpression}
+     * @throws java.lang.IllegalArgumentException if {@code falseExpression}
      * is {@code null}
      */
     public void setFalseExpression(AstNode falseExpression) {
@@ -104,6 +130,8 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Returns position of ? token
+     *
+     * @return a int.
      */
     public int getQuestionMarkPosition() {
         return questionMarkPosition;
@@ -111,6 +139,7 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Sets position of ? token
+     *
      * @param questionMarkPosition position of ? token
      */
     public void setQuestionMarkPosition(int questionMarkPosition) {
@@ -119,6 +148,8 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Returns position of : token
+     *
+     * @return a int.
      */
     public int getColonPosition() {
         return colonPosition;
@@ -126,12 +157,14 @@ public class ConditionalExpression extends AstNode {
 
     /**
      * Sets position of : token
+     *
      * @param colonPosition position of : token
      */
     public void setColonPosition(int colonPosition) {
         this.colonPosition = colonPosition;
     }
 
+    /** {@inheritDoc} */
     @Override
     public boolean hasSideEffects() {
         if (testExpression == null
@@ -141,6 +174,7 @@ public class ConditionalExpression extends AstNode {
                && falseExpression.hasSideEffects();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -154,6 +188,8 @@ public class ConditionalExpression extends AstNode {
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Visits this node, then the test-expression, the true-expression,
      * and the false-expression.
      */

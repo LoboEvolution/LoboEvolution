@@ -17,6 +17,12 @@ import org.fife.ui.rsyntaxtextarea.SyntaxConstants;
 import org.fife.ui.rtextarea.RTextScrollPane;
 import org.loboevolution.common.Strings;
 
+/**
+ * <p>SourceViewerWindow class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SourceViewerWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -104,11 +110,13 @@ public class SourceViewerWindow extends JFrame {
 		addTextArea();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Image getIconImage() {
 		return new ImageIcon(getClass().getResource("/org/lobo/image/icon.png")).getImage();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isVisible() {
 		return true;

@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * General browser settings. This is a singleton class with an instance obtained
- * by calling {@link #getInstance()}.
+ * General browser settings. 
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class GeneralStore implements Serializable {
 
@@ -41,6 +43,9 @@ public class GeneralStore implements Serializable {
 
 	private static String STARTUP = "SELECT DISTINCT baseUrl FROM STARTUP";
 
+	/**
+	 * <p>deleteBounds.</p>
+	 */
 	public static void deleteBounds() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_SIZE)) {
@@ -50,6 +55,9 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>deleteNetwork.</p>
+	 */
 	public static void deleteNetwork() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_NETWORK)) {
@@ -59,6 +67,9 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>deleteStartUpUrl.</p>
+	 */
 	public static void deleteStartUpUrl() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_STARTUP)) {
@@ -68,6 +79,9 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>deleteUserAgent.</p>
+	 */
 	public static void deleteUserAgent() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_USER_AGENT)) {
@@ -77,6 +91,11 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>getInitialWindowBounds.</p>
+	 *
+	 * @return a {@link java.awt.Rectangle} object.
+	 */
 	public static Rectangle getInitialWindowBounds() {
 		Rectangle bounds = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
 		int width = -1;
@@ -99,6 +118,11 @@ public class GeneralStore implements Serializable {
 		return bounds;
 	}
 
+	/**
+	 * <p>getNetwork.</p>
+	 *
+	 * @return a {@link org.loboevolution.store.GeneralStore} object.
+	 */
 	public static GeneralStore getNetwork() {
 		final GeneralStore setting = new GeneralStore();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -118,6 +142,11 @@ public class GeneralStore implements Serializable {
 		return setting;
 	}
 
+	/**
+	 * <p>getStartupURLs.</p>
+	 *
+	 * @return a {@link java.util.List} object.
+	 */
 	public static List<String> getStartupURLs() {
 		final List<String> urls = new ArrayList<String>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
@@ -133,6 +162,11 @@ public class GeneralStore implements Serializable {
 		return urls;
 	}
 
+	/**
+	 * <p>insertBounds.</p>
+	 *
+	 * @param rect a {@link java.awt.Rectangle} object.
+	 */
 	public static void insertBounds(Rectangle rect) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_SIZE)) {
@@ -144,6 +178,15 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>insertNetwork.</p>
+	 *
+	 * @param js a boolean.
+	 * @param css a boolean.
+	 * @param cookie a boolean.
+	 * @param cache a boolean.
+	 * @param navigation a boolean.
+	 */
 	public static void insertNetwork(boolean js, boolean css, boolean cookie, boolean cache, boolean navigation) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_NETWORK)) {
@@ -158,6 +201,11 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>insertStartupUrl.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 */
 	public static void insertStartupUrl(String url) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_STARTUP)) {
@@ -168,6 +216,11 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>insertUserAgent.</p>
+	 *
+	 * @param userAgent a {@link java.lang.String} object.
+	 */
 	public static void insertUserAgent(String userAgent) {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_USER_AGENT)) {
@@ -178,6 +231,9 @@ public class GeneralStore implements Serializable {
 		}
 	}
 
+	/**
+	 * <p>restoreDefaults.</p>
+	 */
 	public static void restoreDefaults() {
 		final String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36";
 		deleteNetwork();
@@ -208,13 +264,17 @@ public class GeneralStore implements Serializable {
 	private String userAgent;
 
 	/**
-	 * @param the userAgent
+	 * <p>Getter for the field userAgent.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getUserAgent() {
 		return this.userAgent;
 	}
 
 	/**
+	 * <p>isCache.</p>
+	 *
 	 * @return the cache
 	 */
 	public boolean isCache() {
@@ -222,6 +282,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>isCookie.</p>
+	 *
 	 * @return the cookie
 	 */
 	public boolean isCookie() {
@@ -229,6 +291,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>isCss.</p>
+	 *
 	 * @return the css
 	 */
 	public boolean isCss() {
@@ -236,6 +300,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>isJs.</p>
+	 *
 	 * @return the js
 	 */
 	public boolean isJs() {
@@ -243,6 +309,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>isNavigation.</p>
+	 *
 	 * @return the navigation
 	 */
 	public boolean isNavigation() {
@@ -250,6 +318,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field cache.</p>
+	 *
 	 * @param cache the cache to set
 	 */
 	public void setCache(boolean cache) {
@@ -257,6 +327,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field cookie.</p>
+	 *
 	 * @param cookie the cookie to set
 	 */
 	public void setCookie(boolean cookie) {
@@ -264,6 +336,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field css.</p>
+	 *
 	 * @param css the css to set
 	 */
 	public void setCss(boolean css) {
@@ -271,6 +345,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field js.</p>
+	 *
 	 * @param js the js to set
 	 */
 	public void setJs(boolean js) {
@@ -278,6 +354,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field navigation.</p>
+	 *
 	 * @param navigation the navigation to set
 	 */
 	public void setNavigation(boolean navigation) {
@@ -285,6 +363,8 @@ public class GeneralStore implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field userAgent.</p>
+	 *
 	 * @param userAgent the userAgent to set
 	 */
 	public void setUserAgent(String userAgent) {

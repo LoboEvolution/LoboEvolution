@@ -23,6 +23,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The Interface FileCallback.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface FileCallback {
 

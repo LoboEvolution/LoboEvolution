@@ -31,22 +31,28 @@ import javax.swing.plaf.ComponentUI;
 import com.jtattoo.plaf.BaseTabbedPaneUI;
 
 /**
+ * <p>BernsteinTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 
 	private static final Color SEP_COLORS[] = { new Color(229, 187, 0), new Color(254, 240, 0), new Color(251, 232, 0),
 			new Color(247, 225, 0), new Color(243, 216, 0), new Color(229, 187, 0), };
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BernsteinTabbedPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		return SEP_COLORS;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();

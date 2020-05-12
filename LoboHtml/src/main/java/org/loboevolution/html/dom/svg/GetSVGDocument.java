@@ -22,6 +22,18 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>GetSVGDocument interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface GetSVGDocument {
+	/**
+	 * <p>getSVGDocument.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGDocument} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	SVGDocument getSVGDocument() throws DOMException;
 }

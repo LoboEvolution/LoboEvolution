@@ -44,7 +44,13 @@ class RTableCell extends RBlock {
 	private VirtualCell topLeftVirtualCell;
 
 	/**
-	 * @param element
+	 * <p>Constructor for RTableCell.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl} object.
+	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
+	 * @param tableAsContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 */
 	public RTableCell(HTMLTableCellElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer tableAsContainer) {
@@ -53,8 +59,14 @@ class RTableCell extends RBlock {
 	}
 
 	/**
+	 * <p>doCellLayout.</p>
+	 *
 	 * @param width  The width available, including insets.
 	 * @param height The height available, including insets.
+	 * @param expandWidth a boolean.
+	 * @param expandHeight a boolean.
+	 * @param sizeOnly a boolean.
+	 * @return a {@link java.awt.Dimension} object.
 	 */
 	protected Dimension doCellLayout(int width, int height, boolean expandWidth, boolean expandHeight,
 			boolean sizeOnly) {
@@ -67,11 +79,17 @@ class RTableCell extends RBlock {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void finalize() throws Throwable {
 		super.finalize();
 	}
 
+	/**
+	 * <p>Getter for the field colSpan.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getColSpan() {
 		int cs = this.colSpan;
 		if (cs == -1) {
@@ -81,6 +99,11 @@ class RTableCell extends RBlock {
 		return cs;
 	}
 
+	/**
+	 * <p>getHeightText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getHeightText() {
         AbstractCSSProperties props = this.cellElement.getCurrentStyle();
         String heightText = props == null ? null : props.getHeight();
@@ -91,6 +114,11 @@ class RTableCell extends RBlock {
         }
 	}
 
+	/**
+	 * <p>Getter for the field rowSpan.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getRowSpan() {
 		int rs = this.rowSpan;
 		if (rs == -1) {
@@ -100,11 +128,18 @@ class RTableCell extends RBlock {
 		return rs;
 	}
 
+	/**
+	 * <p>Getter for the field topLeftVirtualCell.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.renderer.VirtualCell} object.
+	 */
 	public VirtualCell getTopLeftVirtualCell() {
 		return this.topLeftVirtualCell;
 	}
 
 	/**
+	 * <p>getVirtualColumn.</p>
+	 *
 	 * @return Returns the virtualColumn.
 	 */
 	public int getVirtualColumn() {
@@ -113,6 +148,8 @@ class RTableCell extends RBlock {
 	}
 
 	/**
+	 * <p>getVirtualRow.</p>
+	 *
 	 * @return Returns the virtualRow.
 	 */
 	public int getVirtualRow() {
@@ -120,6 +157,11 @@ class RTableCell extends RBlock {
 		return vc == null ? 0 : vc.getRow();
 	}
 
+	/**
+	 * <p>getWidthText.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getWidthText() {
         AbstractCSSProperties props = this.cellElement.getCurrentStyle();
         String heightText = props == null ? null : props.getHeight();
@@ -130,11 +172,21 @@ class RTableCell extends RBlock {
         }
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean isMarginBoundary() {
 		return true;
 	}
 
+	/**
+	 * <p>setCellBounds.</p>
+	 *
+	 * @param colSizes an array of {@link org.loboevolution.info.SizeInfo} objects.
+	 * @param rowSizes an array of {@link org.loboevolution.info.SizeInfo} objects.
+	 * @param hasBorder a int.
+	 * @param cellSpacingX a int.
+	 * @param cellSpacingY a int.
+	 */
 	public void setCellBounds(SizeInfo[] colSizes, SizeInfo[] rowSizes, int hasBorder,
 			int cellSpacingX, int cellSpacingY) {
 		final int vcol = getVirtualColumn();
@@ -185,10 +237,20 @@ class RTableCell extends RBlock {
     }
 
 
+	/**
+	 * <p>Setter for the field rowSpan.</p>
+	 *
+	 * @param rowSpan a int.
+	 */
 	public void setRowSpan(int rowSpan) {
 		this.rowSpan = rowSpan;
 	}
 
+	/**
+	 * <p>Setter for the field topLeftVirtualCell.</p>
+	 *
+	 * @param vc a {@link org.loboevolution.html.renderer.VirtualCell} object.
+	 */
 	public void setTopLeftVirtualCell(VirtualCell vc) {
 		this.topLeftVirtualCell = vc;
 	}

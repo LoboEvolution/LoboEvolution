@@ -89,7 +89,7 @@ public class PDFPrintPage implements Printable {
 	 *            The path of the PDF file to print.
 	 * @param setupPaper
 	 *            true to post a page setup dialog
-	 * @throws java.io.IOException
+	 * @throws java.io.IOException if any.
 	 */
 	public void printFile(String filename, boolean setupPaper) throws IOException {
 		FileInputStream fis = null;

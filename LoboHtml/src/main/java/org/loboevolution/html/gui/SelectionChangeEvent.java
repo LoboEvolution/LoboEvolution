@@ -24,7 +24,10 @@ package org.loboevolution.html.gui;
 import java.util.EventObject;
 
 /**
- * Event associated with {@link SelectionChangeListener}.
+ * Event associated with {@link org.loboevolution.html.gui.SelectionChangeListener}.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class SelectionChangeEvent extends EventObject {
 	/**
@@ -33,11 +36,22 @@ public class SelectionChangeEvent extends EventObject {
 	private static final long serialVersionUID = 1L;
 	private final boolean hasSelection;
 
+	/**
+	 * <p>Constructor for SelectionChangeEvent.</p>
+	 *
+	 * @param source a {@link java.lang.Object} object.
+	 * @param hasSelection a boolean.
+	 */
 	public SelectionChangeEvent(Object source, boolean hasSelection) {
 		super(source);
 		this.hasSelection = hasSelection;
 	}
 
+	/**
+	 * <p>isSelectionAvailable.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isSelectionAvailable() {
 		return this.hasSelection;
 	}

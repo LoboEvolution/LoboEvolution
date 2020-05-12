@@ -29,8 +29,17 @@ import javax.swing.plaf.ColorUIResource;
 import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
+/**
+ * <p>MintDefaultTheme class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class MintDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for MintDefaultTheme.</p>
+	 */
 	public MintDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -41,11 +50,13 @@ public class MintDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "MintTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -104,6 +115,7 @@ public class MintDefaultTheme extends AbstractTheme {
 		desktopColor = new ColorUIResource(220, 228, 228);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

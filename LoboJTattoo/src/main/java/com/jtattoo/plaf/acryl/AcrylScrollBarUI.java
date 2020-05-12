@@ -40,15 +40,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AcrylScrollBarUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AcrylScrollBarUI extends BaseScrollBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AcrylScrollBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		if (!c.isEnabled()) {

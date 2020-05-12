@@ -31,21 +31,31 @@ import com.jtattoo.plaf.BaseInternalFrameTitlePane;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AluminiumInternalFrameTitlePane class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for AluminiumInternalFrameTitlePane.</p>
+	 *
+	 * @param f a {@link javax.swing.JInternalFrame} object.
+	 */
 	public AluminiumInternalFrameTitlePane(JInternalFrame f) {
 		super(f);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected boolean centerButtons() {
 		return false;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintBorder(Graphics g) {
 		if (isActive()) {
@@ -56,6 +66,7 @@ public class AluminiumInternalFrameTitlePane extends BaseInternalFrameTitlePane 
 		g.drawLine(0, getHeight() - 1, getWidth(), getHeight() - 1);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintText(Graphics g, int x, int y, String title) {
 		if (isActive()) {

@@ -80,14 +80,17 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.xml.sax.InputSource;
 
 /**
- * The <code>HtmlRendererContext</code> class implements the
+ * The HtmlRendererContext class implements the
  * {@link org.loboevolution.http.HtmlRendererContext} interface. Note that this
  * class provides rudimentary implementations of most callback methods.
  * Overridding some of the methods in this class will usually be necessary in a
  * professional application.
  * <p>
- * A simple way to load a URL into the {@link HtmlPanel} of the renderer context
+ * A simple way to load a URL into the {@link org.loboevolution.html.gui.HtmlPanel} of the renderer context
  * is to invoke {@link #navigate(String)}.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HtmlRendererContext {
 	private static final Logger logger = Logger.getLogger(HtmlRendererContext.class.getName());
@@ -114,8 +117,10 @@ public class HtmlRendererContext {
 
 	/**
 	 * Constructs a HtmlRendererContext that is a child of another
-	 * <code>{@link HtmlRendererContext}</code>.
+	 * {@link org.loboevolution.http.HtmlRendererContext}.
+	 *
 	 * @param parentRcontext   The parent's renderer context.
+	 * @param htmlPanel a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
 	public HtmlRendererContext(HtmlPanel htmlPanel, HtmlRendererContext parentRcontext) {
 		this.htmlPanel = htmlPanel;
@@ -125,6 +130,9 @@ public class HtmlRendererContext {
 
 	/**
 	 * Constructs a HtmlRendererContext.
+	 *
+	 * @param htmlPanel a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
 	public HtmlRendererContext(HtmlPanel htmlPanel, UserAgentContext ucontext) {
 		this.htmlPanel = htmlPanel;
@@ -134,6 +142,8 @@ public class HtmlRendererContext {
 
 	/**
 	 * Opens a simple message dialog.
+	 *
+	 * @param message a {@link java.lang.String} object.
 	 */
 	public void alert(String message) {
 		JOptionPane.showMessageDialog(this.htmlPanel, message);
@@ -195,6 +205,9 @@ public class HtmlRendererContext {
 
 	/**
 	 * Opens a simple confirmation window.
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @return a boolean.
 	 */
 	public boolean confirm(String message) {
 		final int retValue = JOptionPane.showConfirmDialog(this.htmlPanel, message, "Confirm",
@@ -206,21 +219,33 @@ public class HtmlRendererContext {
 	 * Creates a blank document instance. This method is invoked whenever navigation
 	 * or form submission occur. It is provided so it can be overridden to create
 	 * specialized document implmentations.
-	 * 
+	 *
 	 * @param inputSource The document input source.
-	 * @throws Exception
+	 * @throws java.lang.Exception if any
+	 * @return a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
 	 */
 	protected HTMLDocumentImpl createDocument(InputSource inputSource) throws Exception {
 		final DocumentBuilderImpl builder = new DocumentBuilderImpl(getUserAgentContext(), this);
 		return (HTMLDocumentImpl) builder.createDocument(inputSource);
 	}
 
+	/**
+	 * <p>error.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void error(String message) {
 		if (logger.isLoggable(Level.SEVERE)) {
 			logger.log(Level.SEVERE, message);
 		}
 	}
 
+	/**
+	 * <p>error.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param throwable a {@link java.lang.Throwable} object.
+	 */
 	public void error(String message, Throwable throwable) {
 		if (logger.isLoggable(Level.SEVERE)) {
 			logger.log(Level.SEVERE, message, throwable);
@@ -235,6 +260,9 @@ public class HtmlRendererContext {
 		this.warn("focus(): Not overridden");
 	}
 
+	/**
+	 * <p>forward.</p>
+	 */
 	public void forward() {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
 		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
@@ -269,6 +297,11 @@ public class HtmlRendererContext {
         TabStore.insertTab(indexPanel, url, title);
 	}
 
+	/**
+	 * <p>getCurrentURL.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getCurrentURL() {
 		final Object node = this.htmlPanel.getRootNode();
 		if (node instanceof HTMLDocumentImpl) {
@@ -281,6 +314,8 @@ public class HtmlRendererContext {
 	/**
 	 * Should return true if and only if the current browser window is closed. This
 	 * implementation returns false and should be overridden.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getDefaultStatus() {
 		this.warn("getDefaultStatus(): Not overridden");
@@ -291,9 +326,10 @@ public class HtmlRendererContext {
 	 * This method is invoked by
 	 * {@link #submitForm(String, URL, String, String, FormInput[])} to determine
 	 * the charset of a document. The charset is determined by looking at the
-	 * <code>Content-Type</code> header.
-	 * 
+	 * Content-Type header.
+	 *
 	 * @param connection A URL connection.
+	 * @return a {@link java.lang.String} object.
 	 */
 	protected String getDocumentCharset(URLConnection connection) {
 		final String encoding = Urls.getCharset(connection);
@@ -301,15 +337,31 @@ public class HtmlRendererContext {
 	}
 
 
+	/**
+	 * <p>getHistoryLength.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getHistoryLength() {
 		return 0;
 	}
 
+	/**
+	 * <p>getHtmlObject.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 * @return a {@link org.loboevolution.html.HtmlObject} object.
+	 */
 	public HtmlObject getHtmlObject(HTMLElementImpl markupElement) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/**
+	 * <p>Getter for the field htmlPanel.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 */
 	public HtmlPanel getHtmlPanel() {
 		return this.htmlPanel;
 	}
@@ -318,34 +370,57 @@ public class HtmlRendererContext {
 	 * It should return the name of the browser window, if this renderer context is
 	 * for the top frame in the window. This implementation returns a blank string,
 	 * so it should be overridden.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getName() {
 		this.warn("getName(): Not overridden");
 		return "";
 	}
 
+	/**
+	 * <p>getNextURL.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getNextURL() {
 		return null;
 	}
 
+	/**
+	 * <p>Getter for the field opener.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public HtmlRendererContext getOpener() {
 		return this.opener;
 	}
 
+	/**
+	 * <p>getParent.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public HtmlRendererContext getParent() {
 		return this.parentRcontext;
 	}
 
+	/**
+	 * <p>getPreviousURL.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getPreviousURL() {
 		return null;
 	}
 
 	/**
-	 * Gets the connection proxy used in {@link #navigate(URL, String)}. This
-	 * implementation calls {@link SimpleUserAgentContext#getProxy()} if
+	 * Gets the connection proxy used in {@link #navigate(URL, String)}. If
 	 * {@link #getUserAgentContext()} returns an instance assignable to
-	 * {@link SimpleUserAgentContext}. The method may be overridden to provide a
+	 * {@link UserAgentContext}. The method may be overridden to provide a
 	 * different proxy setting.
+	 *
+	 * @return a {@link java.net.Proxy} object.
 	 */
 	protected Proxy getProxy() {
 		return Proxy.NO_PROXY;
@@ -353,16 +428,28 @@ public class HtmlRendererContext {
 
 	/**
 	 * Gets the source code of the current HTML document.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getSourceCode() {
 		return this.sourceCode;
 	}
 
+	/**
+	 * <p>getStatus.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getStatus() {
 		this.warn("getStatus(): Not overridden");
 		return "";
 	}
 
+	/**
+	 * <p>getTop.</p>
+	 *
+	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public HtmlRendererContext getTop() {
 		final HtmlRendererContext ancestor = this.parentRcontext;
 		if (ancestor == null) {
@@ -372,12 +459,14 @@ public class HtmlRendererContext {
 	}
 
 	/**
-	 * If a {@link org.loboevolution.html.UserAgentContext} instance was provided in
+	 * If a {@link org.loboevolution.http.UserAgentContext} instance was provided in
 	 * the constructor, then that instance is returned. Otherwise, an instance of
-	 * {@link SimpleUserAgentContext} is created and returned.
+	 * {@link UserAgentContext} is created and returned.
 	 * <p>
 	 * The context returned by this method is used by local request facilities and
 	 * other parts of the renderer.
+	 *
+	 * @return a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
 	public UserAgentContext getUserAgentContext() {
 		synchronized (this) {
@@ -389,6 +478,11 @@ public class HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * <p>goToHistoryURL.</p>
+	 *
+	 * @param url a {@link java.lang.String} object.
+	 */
 	public void goToHistoryURL(String url) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, "goToHistoryURL() does nothing, unless overridden.");
@@ -398,22 +492,38 @@ public class HtmlRendererContext {
 	/**
 	 * Should return true if and only if the current browser window is closed. This
 	 * implementation returns false and should be overridden.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean isClosed() {
 		this.warn("isClosed(): Not overridden");
 		return false;
 	}
 
+	/**
+	 * <p>isImageLoadingEnabled.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isImageLoadingEnabled() {
 		return true;
 	}
 
+	/**
+	 * <p>isVisitedLink.</p>
+	 *
+	 * @param link a {@link org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl} object.
+	 * @return a boolean.
+	 */
 	public boolean isVisitedLink(HTMLLinkElementImpl link) {
 		return LinkStore.isVisited(link.getHref());
 	}
 
 	/**
 	 * Implements the link click handler by invoking {@link #navigate(URL, String)}.
+	 *
+	 * @param url a {@link java.net.URL} object.
+	 * @param isNewTab a boolean.
 	 */
 	public void linkClicked(URL url, boolean isNewTab) {
 		String fullURL = url.toString();
@@ -449,6 +559,11 @@ public class HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * <p>moveInHistory.</p>
+	 *
+	 * @param offset a int.
+	 */
 	public void moveInHistory(int offset) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, "moveInHistory() does nothing, unless overridden.");
@@ -457,9 +572,9 @@ public class HtmlRendererContext {
 
 	/**
 	 * Convenience method provided to allow loading a document into the renderer.
-	 * 
+	 *
 	 * @param fullURL The absolute URL of the document.
-	 * @throws Exception
+	 * @throws java.lang.Exception if any
 	 * @see #navigate(URL, String)
 	 */
 	public void navigate(String fullURL) throws Exception {
@@ -470,7 +585,10 @@ public class HtmlRendererContext {
 	/**
 	 * Implements simple navigation with incremental rendering by invoking
 	 * {@link #submitForm(String, URL, String, String, FormInput[])} with a
-	 * <code>GET</code> request method.
+	 * GET request method.
+	 *
+	 * @param href a {@link java.net.URL} object.
+	 * @param target a {@link java.lang.String} object.
 	 */
 	public void navigate(final URL href, String target) {
 		submitForm("GET", href, target, null, null);
@@ -478,6 +596,10 @@ public class HtmlRendererContext {
 	
 	/**
 	 * This method must be overridden to implement a context menu.
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @return a boolean.
 	 */
 	public boolean onContextMenu(HTMLElement element, MouseEvent event) {
 		HTMLElementImpl elem = (HTMLElementImpl) element;
@@ -507,10 +629,24 @@ public class HtmlRendererContext {
 		}
 		return true;
 	}
+	/**
+	 * <p>onDoubleClick.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @return a boolean.
+	 */
 	public boolean onDoubleClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}
 
+	/**
+	 * <p>onMouseClick.</p>
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param event a {@link java.awt.event.MouseEvent} object.
+	 * @return a boolean.
+	 */
 	public boolean onMouseClick(HTMLElement element, MouseEvent event) {
 		return true;
 	}
@@ -518,6 +654,9 @@ public class HtmlRendererContext {
 	/**
 	 * This method can be overridden to receive notifications when the mouse leaves
 	 * an element.
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
 	public void onMouseOut(HTMLElement element, MouseEvent event) {
 	}
@@ -525,6 +664,9 @@ public class HtmlRendererContext {
 	/**
 	 * This method can be overridden to receive notifications when the mouse first
 	 * enters an element.
+	 *
+	 * @param element a {@link org.loboevolution.html.dom.HTMLElement} object.
+	 * @param event a {@link java.awt.event.MouseEvent} object.
 	 */
 	public void onMouseOver(HTMLElement element, MouseEvent event) {
 	}
@@ -532,13 +674,14 @@ public class HtmlRendererContext {
 	/**
 	 * It should open a new browser window. This implementation does nothing and
 	 * should be overridden.
-	 * 
+	 *
 	 * @param url            The requested URL.
 	 * @param windowName     A window identifier.
 	 * @param windowFeatures Window features specified in a format equivalent to
 	 *                       that of window.open() in Javascript.
 	 * @param replace        Whether an existing window with the same name should be
 	 *                       replaced.
+	 * @return a {@link org.loboevolution.http.HtmlRendererContext} object.
 	 */
 	public HtmlRendererContext open(URL url, String windowName, String windowFeatures, boolean replace) {
 		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -561,6 +704,11 @@ public class HtmlRendererContext {
 	}
 	
 
+	/**
+	 * <p>openImageViewer.</p>
+	 *
+	 * @param srcUrl a {@link java.net.URL} object.
+	 */
 	public void openImageViewer(URL srcUrl) {
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -583,6 +731,12 @@ public class HtmlRendererContext {
 		}
 	}
 	
+	/**
+	 * <p>openImageViewer.</p>
+	 *
+	 * @param fullURL a {@link java.lang.String} object.
+	 * @param stream a {@link java.io.InputStream} object.
+	 */
 	public void openImageViewer(String fullURL, InputStream stream) {
 		try {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
@@ -604,6 +758,10 @@ public class HtmlRendererContext {
 
 	/**
 	 * Shows a simple prompt dialog.
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param inputDefault a {@link java.lang.String} object.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String prompt(String message, String inputDefault) {
 		return JOptionPane.showInputDialog(this.htmlPanel, message);
@@ -625,6 +783,12 @@ public class HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * <p>resizeBy.</p>
+	 *
+	 * @param byWidth a int.
+	 * @param byHeight a int.
+	 */
 	public void resizeBy(int byWidth, int byHeight) {
 		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
@@ -632,6 +796,12 @@ public class HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * <p>resizeTo.</p>
+	 *
+	 * @param width a int.
+	 * @param height a int.
+	 */
 	public void resizeTo(int width, int height) {
 		final Window window = getWindow(this.htmlPanel);
 		if (window != null) {
@@ -645,7 +815,7 @@ public class HtmlRendererContext {
 	 * <p>
 	 * This method may be called outside of the GUI thread. The operation is
 	 * scheduled immediately in that thread as needed.
-	 * 
+	 *
 	 * @param x The new x coordinate for the origin.
 	 * @param y The new y coordinate for the origin.
 	 */
@@ -653,26 +823,57 @@ public class HtmlRendererContext {
 		this.htmlPanel.scroll(x, y);
 	}
 
+	/**
+	 * <p>scrollBy.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void scrollBy(int x, int y) {
 		this.htmlPanel.scrollBy(x, y);
 	}
 
+	/**
+	 * <p>setDefaultStatus.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void setDefaultStatus(String message) {
 		this.warn("setDefaultStatus(): Not overridden.");
 	}
 
+	/**
+	 * <p>Setter for the field htmlPanel.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 */
 	public void setHtmlPanel(HtmlPanel panel) {
 		this.htmlPanel = panel;
 	}
 
+	/**
+	 * <p>Setter for the field opener.</p>
+	 *
+	 * @param opener a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 */
 	public void setOpener(HtmlRendererContext opener) {
 		this.opener = opener;
 	}
 
+	/**
+	 * <p>setStatus.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void setStatus(String message) {
 		this.warn("setStatus(): Not overridden");
 	}
 
+    /**
+     * <p>setCursor.</p>
+     *
+     * @param cursorOpt a {@link java.util.Optional} object.
+     */
     public void setCursor(Optional<Cursor> cursorOpt) {
         Cursor cursor = cursorOpt.orElse(Cursor.getDefaultCursor());
         htmlPanel.setCursor(cursor);
@@ -693,14 +894,18 @@ public class HtmlRendererContext {
 	 * notifications.
 	 * <li>Other HTTP features are not implemented.
 	 * <li>The only form encoding type supported is
-	 * <code>application/x-www-form-urlencoded</code>.
-	 * <li>Navigation is normally asynchronous. See
-	 * {@link #isNavigationAsynchronous()}.
+	 * application/x-www-form-urlencoded.
+	 * <li>Navigation is normally asynchronous.
 	 * </ul>
-	 * 
+	 *
 	 * @see #navigate(URL, String
-	 * 
+	 *
 	 * )
+	 * @param method a {@link java.lang.String} object.
+	 * @param action a {@link java.net.URL} object.
+	 * @param target a {@link java.lang.String} object.
+	 * @param enctype a {@link java.lang.String} object.
+	 * @param formInputs an array of {@link org.loboevolution.html.dom.input.FormInput} objects.
 	 */
 	public void submitForm(final String method, final URL action, final String target, final String enctype, final FormInput[] formInputs) {
 		if (target != null) {
@@ -744,15 +949,14 @@ public class HtmlRendererContext {
 	 * Submits a form and/or navigates by making a <i>synchronous</i> request. This
 	 * method is invoked by
 	 * {@link #submitForm(String, URL, String, String, FormInput[])}.
-	 * 
+	 *
 	 * @param method     The request method.
 	 * @param action     The action URL.
 	 * @param target     The target identifier.
 	 * @param enctype    The encoding type.
 	 * @param formInputs The form inputs.
-	 * @throws IOException
-	 * @throws             org.xml.sax.SAXException
 	 * @see #submitForm(String, URL, String, String, FormInput[])
+	 * @throws java.lang.Exception if any.
 	 */
 	protected void submitFormSync(final String method, final java.net.URL action, final String target, String enctype,
 			final FormInput[] formInputs) throws Exception {
@@ -910,12 +1114,23 @@ public class HtmlRendererContext {
 		}
 	}
 
+	/**
+	 * <p>warn.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 */
 	public void warn(String message) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message);
 		}
 	}
 
+	/**
+	 * <p>warn.</p>
+	 *
+	 * @param message a {@link java.lang.String} object.
+	 * @param throwable a {@link java.lang.Throwable} object.
+	 */
 	public void warn(String message, Throwable throwable) {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message, throwable);

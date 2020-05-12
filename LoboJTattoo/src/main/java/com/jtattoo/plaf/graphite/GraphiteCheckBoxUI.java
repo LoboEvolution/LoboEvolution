@@ -28,12 +28,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 /**
+ * <p>GraphiteCheckBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class GraphiteCheckBoxUI extends GraphiteRadioButtonUI {
 
 	private static GraphiteCheckBoxUI checkBoxUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		if (checkBoxUI == null) {
 			checkBoxUI = new GraphiteCheckBoxUI();
@@ -41,6 +45,7 @@ public class GraphiteCheckBoxUI extends GraphiteRadioButtonUI {
 		return checkBoxUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);

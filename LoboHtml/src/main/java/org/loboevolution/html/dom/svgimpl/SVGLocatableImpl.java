@@ -10,30 +10,45 @@ import org.loboevolution.html.dom.svg.SVGTransformList;
 import org.loboevolution.html.dom.svg.SVGTransformable;
 import org.w3c.dom.Node;
 
+/**
+ * <p>SVGLocatableImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 
+	/**
+	 * <p>Constructor for SVGLocatableImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGLocatableImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGElement getNearestViewportElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGElement getFarthestViewportElement() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGRect getBBox() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix getCTM() {
 		SVGMatrix thisMatrix = new SVGMatrixImpl();
@@ -60,12 +75,14 @@ public class SVGLocatableImpl extends SVGStylableImpl implements SVGLocatable {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix getScreenCTM() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGMatrix getTransformToElement(SVGElement element) throws SVGException {
 		// TODO Auto-generated method stub

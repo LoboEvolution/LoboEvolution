@@ -26,12 +26,19 @@ class CombinedFloatingBounds implements FloatingBounds {
 	private final FloatingBounds floatBounds1;
 	private final FloatingBounds floatBounds2;
 
+	/**
+	 * <p>Constructor for CombinedFloatingBounds.</p>
+	 *
+	 * @param floatBounds1 a {@link org.loboevolution.html.renderer.FloatingBounds} object.
+	 * @param floatBounds2 a {@link org.loboevolution.html.renderer.FloatingBounds} object.
+	 */
 	public CombinedFloatingBounds(final FloatingBounds floatBounds1, final FloatingBounds floatBounds2) {
 		super();
 		this.floatBounds1 = floatBounds1;
 		this.floatBounds2 = floatBounds2;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean equals(Object obj) {
 		// Important for layout caching.
@@ -43,41 +50,49 @@ class CombinedFloatingBounds implements FloatingBounds {
 				&& Objects.equals(other.floatBounds2, this.floatBounds2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getClearY(int y) {
 		return Math.max(this.floatBounds1.getClearY(y), this.floatBounds2.getClearY(y));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getFirstClearY(int y) {
 		return Math.max(this.floatBounds1.getFirstClearY(y), this.floatBounds2.getFirstClearY(y));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLeft(int y) {
 		return Math.max(this.floatBounds1.getLeft(y), this.floatBounds2.getLeft(y));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLeftClearY(int y) {
 		return Math.max(this.floatBounds1.getLeftClearY(y), this.floatBounds2.getLeftClearY(y));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getMaxY() {
 		return Math.max(this.floatBounds1.getMaxY(), this.floatBounds2.getMaxY());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getRight(int y) {
 		return Math.max(this.floatBounds1.getRight(y), this.floatBounds2.getRight(y));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getRightClearY(int y) {
 		return Math.max(this.floatBounds1.getRightClearY(y), this.floatBounds2.getRightClearY(y));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int hashCode() {
 		final FloatingBounds fbounds1 = this.floatBounds1;

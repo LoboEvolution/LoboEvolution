@@ -42,15 +42,20 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AeroTabbedPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AeroTabbedPaneUI();
 	}
 
 	private Color sepColors[] = null;
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		if (sepColors == null) {
@@ -64,6 +69,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 		return sepColors;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Font getTabFont(boolean isSelected) {
 		if (isSelected) {
@@ -73,12 +79,14 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installComponents() {
 		simpleButtonBorder = true;
 		super.installComponents();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, int tabPlacement, Font font, FontMetrics metrics, int tabIndex, String title,
 			Rectangle textRect, boolean isSelected) {

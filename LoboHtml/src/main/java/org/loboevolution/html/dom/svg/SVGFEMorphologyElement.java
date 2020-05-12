@@ -20,17 +20,46 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGFEMorphologyElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGFEMorphologyElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Morphology Operators
+	/** Constant SVG_MORPHOLOGY_OPERATOR_UNKNOWN=0 */
 	static final short SVG_MORPHOLOGY_OPERATOR_UNKNOWN = 0;
+	/** Constant SVG_MORPHOLOGY_OPERATOR_ERODE=1 */
 	static final short SVG_MORPHOLOGY_OPERATOR_ERODE = 1;
+	/** Constant SVG_MORPHOLOGY_OPERATOR_DILATE=2 */
 	static final short SVG_MORPHOLOGY_OPERATOR_DILATE = 2;
 
+	/**
+	 * <p>getIn1.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedString} object.
+	 */
 	SVGAnimatedString getIn1();
 
+	/**
+	 * <p>getOperator.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getOperator();
 
+	/**
+	 * <p>getRadiusX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getRadiusX();
 
+	/**
+	 * <p>getRadiusY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedNumber} object.
+	 */
 	SVGAnimatedNumber getRadiusY();
 }

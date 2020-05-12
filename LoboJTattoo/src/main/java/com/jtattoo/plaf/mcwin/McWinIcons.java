@@ -44,7 +44,10 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>McWinIcons class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinIcons extends BaseIcons {
 
@@ -313,6 +316,11 @@ public class McWinIcons extends BaseIcons {
 		}
 	}
 
+	/**
+	 * <p>getCheckBoxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
 			checkBoxIcon = new CheckBoxIcon();
@@ -320,6 +328,11 @@ public class McWinIcons extends BaseIcons {
 		return checkBoxIcon;
 	}
 
+	/**
+	 * <p>getCloseIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getCloseIcon() {
 		if (closeIcon == null) {
 			closeIcon = new MacCloseIcon();
@@ -327,6 +340,11 @@ public class McWinIcons extends BaseIcons {
 		return closeIcon;
 	}
 
+	/**
+	 * <p>getIconIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getIconIcon() {
 		if (iconIcon == null) {
 			iconIcon = new MacIconIcon();
@@ -334,6 +352,11 @@ public class McWinIcons extends BaseIcons {
 		return iconIcon;
 	}
 
+	/**
+	 * <p>getMaxIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMaxIcon() {
 		if (maxIcon == null) {
 			maxIcon = new MacMaxIcon();
@@ -341,6 +364,11 @@ public class McWinIcons extends BaseIcons {
 		return maxIcon;
 	}
 
+	/**
+	 * <p>getMinIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getMinIcon() {
 		if (minIcon == null) {
 			minIcon = new MacMinIcon();
@@ -348,6 +376,11 @@ public class McWinIcons extends BaseIcons {
 		return minIcon;
 	}
 
+	/**
+	 * <p>getRadioButtonIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getRadioButtonIcon() {
 		if (radioButtonIcon == null) {
 			radioButtonIcon = new RadioButtonIcon();
@@ -355,6 +388,11 @@ public class McWinIcons extends BaseIcons {
 		return radioButtonIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIcon() {
 		if (thumbHorIcon == null) {
 			thumbHorIcon = new ThumbIcon(false);
@@ -362,6 +400,11 @@ public class McWinIcons extends BaseIcons {
 		return thumbHorIcon;
 	}
 
+	/**
+	 * <p>getThumbHorIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbHorIconRollover() {
 		if (thumbHorIconRollover == null) {
 			thumbHorIconRollover = new ThumbIcon(true);
@@ -369,6 +412,11 @@ public class McWinIcons extends BaseIcons {
 		return thumbHorIconRollover;
 	}
 
+	/**
+	 * <p>getThumbVerIcon.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIcon() {
 		if (thumbVerIcon == null) {
 			thumbVerIcon = new ThumbIcon(false);
@@ -376,6 +424,11 @@ public class McWinIcons extends BaseIcons {
 		return thumbVerIcon;
 	}
 
+	/**
+	 * <p>getThumbVerIconRollover.</p>
+	 *
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getThumbVerIconRollover() {
 		if (thumbVerIconRollover == null) {
 			thumbVerIconRollover = new ThumbIcon(true);

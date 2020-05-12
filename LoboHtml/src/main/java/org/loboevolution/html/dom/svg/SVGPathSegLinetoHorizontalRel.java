@@ -22,9 +22,26 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGPathSegLinetoHorizontalRel interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGPathSegLinetoHorizontalRel extends SVGPathSeg {
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a float.
+	 */
 	float getX();
 
+	/**
+	 * <p>setX.</p>
+	 *
+	 * @param x a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setX(float x) throws DOMException;
 }

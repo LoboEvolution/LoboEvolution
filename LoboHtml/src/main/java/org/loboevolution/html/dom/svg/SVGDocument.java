@@ -20,15 +20,46 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGDocument interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGDocument {
 
+	/**
+	 * <p>getTitle.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getTitle();
 
+	/**
+	 * <p>getReferrer.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getReferrer();
 
+	/**
+	 * <p>getDomain.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getDomain();
 
+	/**
+	 * <p>getURL.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getURL();
 
+	/**
+	 * <p>getRootElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGSVGElement} object.
+	 */
 	SVGSVGElement getRootElement();
 }

@@ -25,12 +25,21 @@ import org.loboevolution.html.renderstate.RenderState;
 
 /**
  * Element used for B and STRONG.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HTMLStrongElementImpl extends HTMLAbstractUIElement {
+	/**
+	 * <p>Constructor for HTMLStrongElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLStrongElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);

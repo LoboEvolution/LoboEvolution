@@ -16,18 +16,36 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGClipPathElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGClipPathElementImpl extends SVGGraphic implements SVGClipPathElement {
 	
 	
+	/**
+	 * <p>Constructor for SVGClipPathElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGClipPathElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public SVGAnimatedEnumeration getClipPathUnits() {
 		return new SVGAnimatedEnumerationImpl(SVG_UNIT_TYPE_USERSPACEONUSE);
 	}
 	
+	/**
+	 * <p>getClippingShape.</p>
+	 *
+	 * @param clippedElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
+	 * @return a {@link java.awt.Shape} object.
+	 */
 	protected Shape getClippingShape(SVGElement clippedElement) {
 		Area clipArea = null;
 		AffineTransform clipTransform = new AffineTransform();

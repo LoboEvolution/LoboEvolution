@@ -46,6 +46,12 @@ import javax.swing.border.Border;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicToolBarUI;
 
+/**
+ * <p>Abstract AbstractToolBarUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public abstract class AbstractToolBarUI extends BasicToolBarUI {
 
 	protected class MyContainerListener implements ContainerListener {
@@ -114,6 +120,9 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 
 	private final HashMap<AbstractButton, Insets> orgMargins = new HashMap<AbstractButton, Insets>();
 
+	/**
+	 * <p>changeBorders.</p>
+	 */
 	protected void changeBorders() {
 		Component[] components = toolBar.getComponents();
 		for (Component comp : components) {
@@ -123,6 +132,11 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		}
 	}
 
+	/**
+	 * <p>changeButtonBorder.</p>
+	 *
+	 * @param b a {@link javax.swing.AbstractButton} object.
+	 */
 	protected void changeButtonBorder(AbstractButton b) {
 		Object cp = b.getClientProperty("paintToolBarBorder");
 		if (cp != null && cp instanceof Boolean) {
@@ -161,10 +175,21 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		}
 	}
 
+	/**
+	 * <p>getNonRolloverBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public abstract Border getNonRolloverBorder();
 
+	/**
+	 * <p>getRolloverBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public abstract Border getRolloverBorder();
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -178,6 +203,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -188,16 +214,36 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		SwingUtilities.invokeLater(() -> changeBorders());
 	}
 
+	/**
+	 * <p>isButtonOpaque.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public abstract boolean isButtonOpaque();
 
+	/**
+	 * <p>isRolloverEnabled.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isRolloverEnabled() {
 		return rolloverEnabled;
 	}
 
+	/**
+	 * <p>isToolbarDecorated.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isToolbarDecorated() {
 		return AbstractLookAndFeel.getTheme().isToolbarDecorated();
 	}
 
+	/**
+	 * <p>isToolBarUnderMenubar.</p>
+	 *
+	 * @return a boolean.
+	 */
 	protected boolean isToolBarUnderMenubar() {
 		if (toolBar != null && toolBar.getOrientation() == SwingConstants.HORIZONTAL) {
 			JRootPane rp = SwingUtilities.getRootPane(toolBar);
@@ -215,6 +261,9 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		return false;
 	}
 
+	/**
+	 * <p>restoreBorders.</p>
+	 */
 	protected void restoreBorders() {
 		Component[] components = toolBar.getComponents();
 		for (Component comp : components) {
@@ -224,6 +273,11 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		}
 	}
 
+	/**
+	 * <p>restoreButtonBorder.</p>
+	 *
+	 * @param b a {@link javax.swing.AbstractButton} object.
+	 */
 	protected void restoreButtonBorder(AbstractButton b) {
 		Object cp = b.getClientProperty("paintToolBarBorder");
 		if (cp != null && cp instanceof Boolean) {
@@ -243,18 +297,22 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		b.setMargin((Insets) orgMargins.get(b));
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setBorderToNonRollover(Component c) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setBorderToNormal(Component c) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setBorderToRollover(Component c) {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		if (propertyChangeListener != null) {
@@ -268,12 +326,16 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		super.uninstallListeners();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		restoreBorders();
 		super.uninstallUI(c);
 	}
 
+	/**
+	 * <p>updateToolbarBorder.</p>
+	 */
 	protected void updateToolbarBorder() {
 		toolBar.revalidate();
 		toolBar.repaint();

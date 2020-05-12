@@ -56,7 +56,10 @@ import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 
 /**
+ * <p>BaseBorders class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseBorders {
 
@@ -853,39 +856,62 @@ public class BaseBorders {
 
 	} // end of class ToolButtonBorder
 
+	/** Constant buttonBorder */
 	protected static Border buttonBorder = null;
+	/** Constant focusFrameBorder */
 	protected static Border focusFrameBorder = null;
+	/** Constant textFieldBorder */
 	protected static Border textFieldBorder = null;
+	/** Constant spinnerBorder */
 	protected static Border spinnerBorder = null;
 
+	/** Constant comboBoxBorder */
 	protected static Border comboBoxBorder = null;
 
+	/** Constant progressBarBorder */
 	protected static Border progressBarBorder = null;
 
+	/** Constant tableHeaderBorder */
 	protected static Border tableHeaderBorder = null;
 
+	/** Constant popupMenuBorder */
 	protected static Border popupMenuBorder = null;
 
+	/** Constant menuItemBorder */
 	protected static Border menuItemBorder = null;
 
+	/** Constant toolBarBorder */
 	protected static Border toolBarBorder = null;
 
+	/** Constant toolButtonBorder */
 	protected static Border toolButtonBorder = null;
 
+	/** Constant rolloverToolButtonBorder */
 	protected static Border rolloverToolButtonBorder = null;
 
+	/** Constant internalFrameBorder */
 	protected static Border internalFrameBorder = null;
 
+	/** Constant paletteBorder */
 	protected static Border paletteBorder = null;
 
+	/** Constant scrollPaneBorder */
 	protected static Border scrollPaneBorder = null;
 
+	/** Constant tableScrollPaneBorder */
 	protected static Border tableScrollPaneBorder = null;
 
+	/** Constant tabbedPaneBorder */
 	protected static Border tabbedPaneBorder = null;
 
+	/** Constant desktopIconBorder */
 	protected static Border desktopIconBorder = null;
 
+	/**
+	 * <p>Getter for the field comboBoxBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getComboBoxBorder() {
 		if (comboBoxBorder == null) {
 			comboBoxBorder = new ComboBoxBorder();
@@ -893,6 +919,11 @@ public class BaseBorders {
 		return comboBoxBorder;
 	}
 
+	/**
+	 * <p>Getter for the field desktopIconBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getDesktopIconBorder() {
 		if (desktopIconBorder == null) {
 			desktopIconBorder = new BorderUIResource.CompoundBorderUIResource(
@@ -905,6 +936,11 @@ public class BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>Getter for the field focusFrameBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getFocusFrameBorder() {
 		if (focusFrameBorder == null) {
 			focusFrameBorder = new FocusFrameBorder();
@@ -912,10 +948,20 @@ public class BaseBorders {
 		return focusFrameBorder;
 	}
 
+	/**
+	 * <p>getMenuBarBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getMenuBarBorder() {
 		return BorderFactory.createEmptyBorder(1, 1, 1, 1);
 	}
 
+	/**
+	 * <p>Getter for the field menuItemBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getMenuItemBorder() {
 		if (menuItemBorder == null) {
 			menuItemBorder = new MenuItemBorder();
@@ -923,6 +969,11 @@ public class BaseBorders {
 		return menuItemBorder;
 	}
 
+	/**
+	 * <p>Getter for the field paletteBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getPaletteBorder() {
 		if (paletteBorder == null) {
 			paletteBorder = new PaletteBorder();
@@ -930,6 +981,11 @@ public class BaseBorders {
 		return paletteBorder;
 	}
 
+	/**
+	 * <p>Getter for the field popupMenuBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getPopupMenuBorder() {
 		if (popupMenuBorder == null) {
 			if (AbstractLookAndFeel.getTheme().isMenuOpaque()) {
@@ -941,6 +997,11 @@ public class BaseBorders {
 		return popupMenuBorder;
 	}
 
+	/**
+	 * <p>Getter for the field progressBarBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getProgressBarBorder() {
 		if (progressBarBorder == null) {
 			progressBarBorder = BorderFactory
@@ -949,6 +1010,11 @@ public class BaseBorders {
 		return progressBarBorder;
 	}
 
+	/**
+	 * <p>Getter for the field scrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getScrollPaneBorder() {
 		if (scrollPaneBorder == null) {
 			scrollPaneBorder = new ScrollPaneBorder(false);
@@ -956,6 +1022,11 @@ public class BaseBorders {
 		return scrollPaneBorder;
 	}
 
+	/**
+	 * <p>Getter for the field spinnerBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getSpinnerBorder() {
 		if (spinnerBorder == null) {
 			spinnerBorder = new SpinnerBorder();
@@ -963,6 +1034,11 @@ public class BaseBorders {
 		return spinnerBorder;
 	}
 
+	/**
+	 * <p>Getter for the field tabbedPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTabbedPaneBorder() {
 		if (tabbedPaneBorder == null) {
 			tabbedPaneBorder = BorderFactory.createEmptyBorder(1, 1, 1, 1);
@@ -970,6 +1046,11 @@ public class BaseBorders {
 		return tabbedPaneBorder;
 	}
 
+	/**
+	 * <p>Getter for the field tableHeaderBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTableHeaderBorder() {
 		if (tableHeaderBorder == null) {
 			tableHeaderBorder = new TableHeaderBorder();
@@ -977,6 +1058,11 @@ public class BaseBorders {
 		return tableHeaderBorder;
 	}
 
+	/**
+	 * <p>Getter for the field tableScrollPaneBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTableScrollPaneBorder() {
 		if (tableScrollPaneBorder == null) {
 			tableScrollPaneBorder = new ScrollPaneBorder(true);
@@ -987,6 +1073,11 @@ public class BaseBorders {
 	// ------------------------------------------------------------------------------------
 	// Lazy access methods
 	// ------------------------------------------------------------------------------------
+	/**
+	 * <p>getTextBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTextBorder() {
 		if (textFieldBorder == null) {
 			textFieldBorder = new TextFieldBorder();
@@ -994,10 +1085,20 @@ public class BaseBorders {
 		return textFieldBorder;
 	}
 
+	/**
+	 * <p>Getter for the field textFieldBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getTextFieldBorder() {
 		return getTextBorder();
 	}
 
+	/**
+	 * <p>Getter for the field toolBarBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToolBarBorder() {
 		if (toolBarBorder == null) {
 			toolBarBorder = new ToolBarBorder();
@@ -1005,6 +1106,11 @@ public class BaseBorders {
 		return toolBarBorder;
 	}
 
+	/**
+	 * <p>Getter for the field toolButtonBorder.</p>
+	 *
+	 * @return a {@link javax.swing.border.Border} object.
+	 */
 	public static Border getToolButtonBorder() {
 		if (toolButtonBorder == null) {
 			toolButtonBorder = new ToolButtonBorder();
@@ -1012,6 +1118,9 @@ public class BaseBorders {
 		return toolButtonBorder;
 	}
 
+	/**
+	 * <p>initDefaults.</p>
+	 */
 	public static void initDefaults() {
 		buttonBorder = null;
 		textFieldBorder = null;

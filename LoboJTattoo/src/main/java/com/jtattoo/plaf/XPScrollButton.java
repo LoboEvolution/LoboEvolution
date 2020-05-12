@@ -36,7 +36,10 @@ import javax.swing.Icon;
 import javax.swing.UIManager;
 
 /**
+ * <p>Abstract XPScrollButton class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public abstract class XPScrollButton extends BaseScrollButton {
 
@@ -45,6 +48,12 @@ public abstract class XPScrollButton extends BaseScrollButton {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for XPScrollButton.</p>
+	 *
+	 * @param direction a int.
+	 * @param width a int.
+	 */
 	public XPScrollButton(int direction, int width) {
 		super(direction, width);
 	}
@@ -57,6 +66,11 @@ public abstract class XPScrollButton extends BaseScrollButton {
 		return null;
 	}
 
+	/**
+	 * <p>getFrameColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	public Color getFrameColor() {
 		return Color.white;
 	}
@@ -69,6 +83,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Dimension getPreferredSize() {
 		switch (getDirection()) {
@@ -101,6 +116,7 @@ public abstract class XPScrollButton extends BaseScrollButton {
 		return null;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;

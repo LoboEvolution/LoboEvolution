@@ -25,17 +25,30 @@ package org.loboevolution.html.dom.domimpl;
 
 import org.w3c.dom.html.HTMLHeadElement;
 
+/**
+ * <p>HTMLHeadElementImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHeadElement {
 
+	/**
+	 * <p>Constructor for HTMLHeadElementImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public HTMLHeadElementImpl(String name) {
 		super(name);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getProfile() {
 		return this.getAttribute("profile");
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setProfile(String profile) {
 		this.setAttribute("profile", profile);

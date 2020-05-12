@@ -26,131 +26,200 @@ import org.w3c.dom.DOMException;
 /**
  * This interface define the set of animation extensions for SMIL. The
  * attributes will go in a XLink interface.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILAnimation extends SMILElement, ElementTargetAttributes, ElementTime, ElementTimeControl {
 	
 	// additiveTypes
+	/** Constant ADDITIVE_REPLACE=0 */
 	public static final short ADDITIVE_REPLACE = 0;
 
+	/** Constant ADDITIVE_SUM=1 */
 	public static final short ADDITIVE_SUM = 1;
 
 	// calcModeTypes
+	/** Constant CALCMODE_DISCRETE=0 */
 	public static final short CALCMODE_DISCRETE = 0;
 	
+	/** Constant CALCMODE_LINEAR=1 */
 	public static final short CALCMODE_LINEAR = 1;
 	
+	/** Constant CALCMODE_PACED=2 */
 	public static final short CALCMODE_PACED = 2;
 	
+	/** Constant CALCMODE_SPLINE=3 */
 	public static final short CALCMODE_SPLINE = 3;
 
 	// accumulateTypes
+	/** Constant ACCUMULATE_NONE=0 */
 	public static final short ACCUMULATE_NONE = 0;
 	
+	/** Constant ACCUMULATE_SUM=1 */
 	public static final short ACCUMULATE_SUM = 1;
 	
 	/**
 	 * A code representing the value of the additive attribute, as defined
-	 * above. Default value is <code>ADDITIVE_REPLACE</code> .
-	 * 
+	 * above. Default value is ADDITIVE_REPLACE .
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a short.
 	 */
 	default short getAdditive() {return 0;}
 
+	/**
+	 * <p>setAdditive.</p>
+	 *
+	 * @param additive a short.
+	 */
 	default void setAdditive(short additive) {}
 
 	
 
 	/**
 	 * A code representing the value of the accumulate attribute, as defined
-	 * above. Default value is <code>ACCUMULATE_NONE</code> .
-	 * 
+	 * above. Default value is ACCUMULATE_NONE .
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a short.
 	 */
 	default short getAccumulate() {return 0;}
 
+	/**
+	 * <p>setAccumulate.</p>
+	 *
+	 * @param accumulate a short.
+	 */
 	default void setAccumulate(short accumulate) {};
 
 	/**
 	 * A code representing the value of the calcMode attribute, as defined
 	 * above.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a short.
 	 */
 	default short getCalcMode() {return 0;}
 
+	/**
+	 * <p>setCalcMode.</p>
+	 *
+	 * @param calcMode a short.
+	 */
 	default void setCalcMode(short calcMode) {};
 
 	/**
-	 * A <code>DOMString</code> representing the value of the keySplines
+	 * A DOMString representing the value of the keySplines
 	 * attribute. Need an interface a point (x1,y1,x2,y2)
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	default String getKeySplines() {return "";}
 
+	/**
+	 * <p>setKeySplines.</p>
+	 *
+	 * @param keySplines a {@link java.lang.String} object.
+	 */
 	default void setKeySplines(String keySplines) {};
 
 	/**
 	 * A list of the time value of the keyTimes attribute.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link org.loboevolution.html.dom.smil.TimeList} object.
 	 */
 	default TimeList getKeyTimes() {return null;}
 
+	/**
+	 * <p>setKeyTimes.</p>
+	 *
+	 * @param keyTimes a {@link org.loboevolution.html.dom.smil.TimeList} object.
+	 */
 	default void setKeyTimes(TimeList keyTimes)  {};
 
 	/**
-	 * A <code>DOMString</code> representing the value of the values attribute.
-	 * 
+	 * A DOMString representing the value of the values attribute.
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getValues();
 
+	/**
+	 * <p>setValues.</p>
+	 *
+	 * @param values a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setValues(String values) throws DOMException;
 
 	/**
-	 * A <code>DOMString</code> representing the value of the from attribute.
-	 * 
+	 * A DOMString representing the value of the from attribute.
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getFrom();
 
+	/**
+	 * <p>setFrom.</p>
+	 *
+	 * @param from a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setFrom(String from) throws DOMException;
 
 	/**
-	 * A <code>DOMString</code> representing the value of the to attribute.
-	 * 
+	 * A DOMString representing the value of the to attribute.
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getTo();
 
+	/**
+	 * <p>setTo.</p>
+	 *
+	 * @param to a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setTo(String to) throws DOMException;
 
 	/**
-	 * A <code>DOMString</code> representing the value of the by attribute.
-	 * 
+	 * A DOMString representing the value of the by attribute.
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getBy();
 
+	/**
+	 * <p>setBy.</p>
+	 *
+	 * @param by a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setBy(String by) throws DOMException;
 
 }

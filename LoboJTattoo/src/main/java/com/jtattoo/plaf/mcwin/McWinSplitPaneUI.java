@@ -29,14 +29,19 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import com.jtattoo.plaf.BaseSplitPaneUI;
 
 /**
+ * <p>McWinSplitPaneUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class McWinSplitPaneUI extends BaseSplitPaneUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new McWinSplitPaneUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BasicSplitPaneDivider createDefaultDivider() {
 		return new McWinSplitPaneDivider(this);

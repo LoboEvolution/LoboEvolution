@@ -29,6 +29,9 @@ import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 
 /**
  * The Class CanvasControl.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class CanvasControl extends BaseControl {
 
@@ -49,6 +52,7 @@ public class CanvasControl extends BaseControl {
 		canvas = modelNode;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);

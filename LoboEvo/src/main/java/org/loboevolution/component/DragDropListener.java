@@ -17,14 +17,26 @@ import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedPanePopupMenu;
 
+/**
+ * <p>DragDropListener class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DragDropListener implements DropTargetListener {
 	
 	private IBrowserPanel bpanel;
 
+	/**
+	 * <p>Constructor for DragDropListener.</p>
+	 *
+	 * @param bpanel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 */
 	public DragDropListener(IBrowserPanel bpanel) {
 		this.bpanel = bpanel;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void drop(DropTargetDropEvent dtde) {
 		try {
@@ -68,12 +80,15 @@ public class DragDropListener implements DropTargetListener {
 		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dropActionChanged(DropTargetDragEvent dtde) {}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragEnter(DropTargetDragEvent dtde) {}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragExit(DropTargetEvent dte) {
 		IBrowserFrame browserFrame = bpanel.getBrowserFrame();
@@ -84,6 +99,7 @@ public class DragDropListener implements DropTargetListener {
 		bpanel.getScroll().getViewport().add(tabbedPane);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragOver(DropTargetDragEvent dtde) {
 		IBrowserFrame browserFrame = bpanel.getBrowserFrame();

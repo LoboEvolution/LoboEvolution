@@ -24,27 +24,31 @@ package org.loboevolution.html.dom.smil;
 import org.w3c.dom.DOMException;
 
 /**
+ * <p>ElementTimeControl interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ElementTimeControl {
 	/**
 	 * Causes this element to begin the local timeline (subject to sync
 	 * constraints).
-	 * 
-	 * @return <code>true</code> if the method call was successful and the
-	 *         element was begun. <code>false</code> if the method call failed.
+	 *
+	 * @return true if the method call was successful and the
+	 *         element was begun. false if the method call failed.
 	 *         Possible reasons for failure include: The element doesn't support
-	 *         the <code>beginElement</code> method. (the <code>begin</code>
-	 *         attribute is not set to <code>"indefinite"</code> ) The element
+	 *         the beginElement method. (the begin
+	 *         attribute is not set to "indefinite" ) The element
 	 *         is already active and can't be restart when it is active. (the
-	 *         <code>restart</code> attribute is set to
-	 *         <code>"whenNotActive"</code> ) The element is active or has been
-	 *         active and can't be restart. (the <code>restart</code> attribute
-	 *         is set to <code>"never"</code> ).
-	 * 
+	 *         restart attribute is set to
+	 *         "whenNotActive" ) The element is active or has been
+	 *         active and can't be restart. (the restart attribute
+	 *         is set to "never" ).
 	 * @exception DOMException
 	 *                SYNTAX_ERR: The element was not defined with the
-	 *                appropriate syntax to allow <code>beginElement</code>
+	 *                appropriate syntax to allow beginElement
 	 *                calls.
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public boolean beginElement() throws DOMException;
 
@@ -56,41 +60,41 @@ public interface ElementTimeControl {
 	 * semantics are equivalent to beginElement(), but the element active
 	 * duration is evaluated as though the element had begun at the passed
 	 * (negative) offset from the current time when the method is called.
-	 * 
+	 *
 	 * @param offset
 	 *            The offset in seconds at which to begin the element.
-	 * @return <code>true</code> if the method call was successful and the
-	 *         element was begun. <code>false</code> if the method call failed.
+	 * @return true if the method call was successful and the
+	 *         element was begun. false if the method call failed.
 	 *         Possible reasons for failure include: The element doesn't support
-	 *         the <code>beginElementAt</code> method. (the <code>begin</code>
-	 *         attribute is not set to <code>"indefinite"</code> ) The element
+	 *         the beginElementAt method. (the begin
+	 *         attribute is not set to "indefinite" ) The element
 	 *         is already active and can't be restart when it is active. (the
-	 *         <code>restart</code> attribute is set to
-	 *         <code>"whenNotActive"</code> ) The element is active or has been
-	 *         active and can't be restart. (the <code>restart</code> attribute
-	 *         is set to <code>"never"</code> ).
-	 * 
+	 *         restart attribute is set to
+	 *         "whenNotActive" ) The element is active or has been
+	 *         active and can't be restart. (the restart attribute
+	 *         is set to "never" ).
 	 * @exception DOMException
 	 *                SYNTAX_ERR: The element was not defined with the
-	 *                appropriate syntax to allow <code>beginElementAt</code>
+	 *                appropriate syntax to allow beginElementAt
 	 *                calls.
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public boolean beginElementAt(float offset) throws DOMException;
 
 	/**
 	 * Causes this element to end the local timeline (subject to sync
 	 * constraints).
-	 * 
-	 * @return <code>true</code> if the method call was successful and the
-	 *         element was ended. <code>false</code> if method call failed.
+	 *
+	 * @return true if the method call was successful and the
+	 *         element was ended. false if method call failed.
 	 *         Possible reasons for failure include: The element doesn't support
-	 *         the <code>endElement</code> method. (the <code>end</code>
-	 *         attribute is not set to <code>"indefinite"</code> ) The element
+	 *         the endElement method. (the end
+	 *         attribute is not set to "indefinite" ) The element
 	 *         is not active.
-	 * 
 	 * @exception DOMException
 	 *                SYNTAX_ERR: The element was not defined with the
-	 *                appropriate syntax to allow <code>endElement</code> calls.
+	 *                appropriate syntax to allow endElement calls.
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public boolean endElement() throws DOMException;
 
@@ -98,20 +102,21 @@ public interface ElementTimeControl {
 	 * Causes this element to end the local timeline (subject to sync
 	 * constraints) at the specified offset from the current time when the
 	 * method is called.
-	 * 
+	 *
 	 * @param offset
 	 *            The offset in seconds at which to end the element. Must be
 	 *            &gt;= 0.
-	 * @return <code>true</code> if the method call was successful and the
-	 *         element was ended. <code>false</code> if method call failed.
+	 * @return true if the method call was successful and the
+	 *         element was ended. false if method call failed.
 	 *         Possible reasons for failure include: The element doesn't support
-	 *         the <code>endElementAt</code> method. (the <code>end</code>
-	 *         attribute is not set to <code>"indefinite"</code> ) The element
+	 *         the endElementAt method. (the end
+	 *         attribute is not set to "indefinite" ) The element
 	 *         is not active.
 	 * @exception DOMException
 	 *                SYNTAX_ERR: The element was not defined with the
-	 *                appropriate syntax to allow <code>endElementAt</code>
+	 *                appropriate syntax to allow endElementAt
 	 *                calls.
+	 * @throws org.w3c.dom.DOMException if any.
 	 */
 	public boolean endElementAt(float offset) throws DOMException;
 

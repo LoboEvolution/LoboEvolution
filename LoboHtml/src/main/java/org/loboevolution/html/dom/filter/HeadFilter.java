@@ -26,9 +26,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class HeadFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HeadFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public final boolean accept(Node node) {
 		return node instanceof HTMLHeadElement;

@@ -45,8 +45,17 @@ package org.w3c.dom.xpath;
  * A new exception has been created for exceptions specific to these XPath
  * interfaces.
  * <p>See also the <a href='http://www.w3.org/2002/08/WD-DOM-Level-3-XPath-20020820'>Document Object Model (DOM) Level 3 XPath Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class XPathException extends RuntimeException {
+    /**
+     * <p>Constructor for XPathException.</p>
+     *
+     * @param code a short.
+     * @param message a {@link java.lang.String} object.
+     */
     public XPathException(short code, String message) {
        super(message);
        this.code = code;
@@ -56,7 +65,7 @@ public class XPathException extends RuntimeException {
     /**
      * If the expression has a syntax error or otherwise is not a legal
      * expression according to the rules of the specific
-     * <code>XPathEvaluator</code> or contains specialized extension
+     * XPathEvaluator or contains specialized extension
      * functions or variables not supported by this implementation.
      */
     public static final short INVALID_EXPRESSION_ERR    = 1;

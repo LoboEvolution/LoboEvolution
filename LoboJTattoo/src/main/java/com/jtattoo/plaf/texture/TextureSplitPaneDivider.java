@@ -35,7 +35,10 @@ import com.jtattoo.plaf.AbstractLookAndFeel;
 import com.jtattoo.plaf.BaseSplitPaneDivider;
 
 /**
+ * <p>TextureSplitPaneDivider class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
 
@@ -44,10 +47,16 @@ public class TextureSplitPaneDivider extends BaseSplitPaneDivider {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * <p>Constructor for TextureSplitPaneDivider.</p>
+	 *
+	 * @param ui a {@link com.jtattoo.plaf.texture.TextureSplitPaneUI} object.
+	 */
 	public TextureSplitPaneDivider(TextureSplitPaneUI ui) {
 		super(ui);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		if (!isFlatMode()) {

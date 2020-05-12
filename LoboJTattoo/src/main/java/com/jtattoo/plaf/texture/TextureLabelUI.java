@@ -38,12 +38,16 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>TextureLabelUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureLabelUI extends BasicLabelUI {
 
 	private static TextureLabelUI hifiLabelUI = null;
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		if (hifiLabelUI == null) {
 			hifiLabelUI = new TextureLabelUI();
@@ -51,6 +55,7 @@ public class TextureLabelUI extends BasicLabelUI {
 		return hifiLabelUI;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintDisabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemIndex = l.getDisplayedMnemonicIndex();
@@ -72,6 +77,7 @@ public class TextureLabelUI extends BasicLabelUI {
 		JTattooUtilities.drawStringUnderlineCharAt(l, g, s, mnemIndex, textX, textY);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintEnabledText(JLabel l, Graphics g, String s, int textX, int textY) {
 		int mnemIndex = l.getDisplayedMnemonicIndex();

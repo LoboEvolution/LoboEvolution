@@ -9,6 +9,12 @@ import javax.swing.AbstractAction;
 
 import org.loboevolution.component.BrowserFrame;
 
+/**
+ * <p>FullScreenAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class FullScreenAction extends AbstractAction {
 
 	private static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
@@ -23,10 +29,16 @@ public class FullScreenAction extends AbstractAction {
 
 	private final BrowserFrame frame;
 
+	/**
+	 * <p>Constructor for FullScreenAction.</p>
+	 *
+	 * @param frame a {@link org.loboevolution.component.BrowserFrame} object.
+	 */
 	public FullScreenAction(BrowserFrame frame) {
 		this.frame = frame;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (this.countFs == 0) {

@@ -23,33 +23,52 @@ package org.loboevolution.html.js.events;
 import org.w3c.dom.events.UIEvent;
 import org.w3c.dom.views.AbstractView;
 
+/**
+ * <p>UIEventImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class UIEventImpl extends EventImpl implements UIEvent {
 	
 	private AbstractView abstractView;
 	
 	private int detail;
 
+	/**
+	 * <p>Constructor for UIEventImpl.</p>
+	 *
+	 * @param eventTypeArg a {@link java.lang.String} object.
+	 * @param detailArg a int.
+	 * @param viewArg a {@link org.w3c.dom.views.AbstractView} object.
+	 */
 	public UIEventImpl(String eventTypeArg, int detailArg, AbstractView viewArg) {
 		super(eventTypeArg, false, false);
 		abstractView = viewArg;
 		detail = detailArg;
 	}
 	
+	/**
+	 * <p>Constructor for UIEventImpl.</p>
+	 */
 	public UIEventImpl() {
 		abstractView = null;
 		detail = 0;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public AbstractView getView() {
 		return abstractView;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getDetail() {
 		return detail;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void initUIEvent(String typeArg, boolean canBubbleArg, boolean cancelableArg, AbstractView viewArg, int detailArg) {
 		super.initEvent(typeArg, canBubbleArg, cancelableArg);

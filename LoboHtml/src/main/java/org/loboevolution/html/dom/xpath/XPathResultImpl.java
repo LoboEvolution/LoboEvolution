@@ -52,7 +52,7 @@ import org.w3c.dom.xpath.XPathResult;
  * </p>
  *
  * <p>
- * The <code>XPathResult</code> interface represents the result of the
+ * The XPathResult interface represents the result of the
  * evaluation of an XPath expression within the context of a particular node.
  * Since evaluation of an XPath expression can result in various result types,
  * this object makes it possible to discover and manipulate the type and value
@@ -60,12 +60,13 @@ import org.w3c.dom.xpath.XPathResult;
  * </p>
  *
  * <p>
- * This implementation wraps an <code>XObject</code>.
+ * This implementation wraps an XObject.
  *
  * @see org.apache.xpath.objects.XObject
  * @see org.w3c.dom.xpath.XPathResult
- *
- * @xsl.usage internal
+ * 
+ * @author utente
+ * @version $Id: $Id
  */
 public class XPathResultImpl implements XPathResult, EventListener {
 
@@ -219,9 +220,9 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Gets the result type.
+	 * {@inheritDoc}
 	 *
-	 * @return the result type
+	 * Gets the result type.
 	 * @see org.w3c.dom.xpath.XPathResult#getResultType()
 	 */
 	@Override
@@ -230,13 +231,13 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * The value of this number result.
+	 * {@inheritDoc}
 	 *
-	 * @return the number value
+	 * The value of this number result.
 	 * @see org.w3c.dom.xpath.XPathResult#getNumberValue()
 	 * @exception XPathException
-	 *                TYPE_ERR: raised if <code>resultType</code> is not
-	 *                <code>NUMBER_TYPE</code>.
+	 *                TYPE_ERR: raised if resultType is not
+	 *                NUMBER_TYPE.
 	 */
 	@Override
 	public double getNumberValue() throws XPathException {
@@ -259,13 +260,13 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * The value of this string result.
+	 * {@inheritDoc}
 	 *
-	 * @return the string value
+	 * The value of this string result.
 	 * @see org.w3c.dom.xpath.XPathResult#getStringValue()
 	 * @exception XPathException
-	 *                TYPE_ERR: raised if <code>resultType</code> is not
-	 *                <code>STRING_TYPE</code>.
+	 *                TYPE_ERR: raised if resultType is not
+	 *                STRING_TYPE.
 	 */
 	@Override
 	public String getStringValue() throws XPathException {
@@ -287,11 +288,9 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Gets the boolean value.
+	 * {@inheritDoc}
 	 *
-	 * @return the boolean value
-	 * @throws XPathException
-	 *             the x path exception
+	 * Gets the boolean value.
 	 * @see org.w3c.dom.xpath.XPathResult#getBooleanValue()
 	 */
 	@Override
@@ -315,14 +314,14 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * The value of this single node result, which may be <code>null</code>.
+	 * {@inheritDoc}
 	 *
-	 * @return the single node value
+	 * The value of this single node result, which may be null.
 	 * @see org.w3c.dom.xpath.XPathResult#getSingleNodeValue()
 	 * @exception XPathException
-	 *                TYPE_ERR: raised if <code>resultType</code> is not
-	 *                <code>ANY_UNORDERED_NODE_TYPE</code> or
-	 *                <code>FIRST_ORDERED_NODE_TYPE</code>.
+	 *                TYPE_ERR: raised if resultType is not
+	 *                ANY_UNORDERED_NODE_TYPE or
+	 *                FIRST_ORDERED_NODE_TYPE.
 	 */
 	@Override
 	public Node getSingleNodeValue() throws XPathException {
@@ -359,9 +358,9 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Gets the invalid iterator state.
+	 * {@inheritDoc}
 	 *
-	 * @return the invalid iterator state
+	 * Gets the invalid iterator state.
 	 * @see org.w3c.dom.xpath.XPathResult#getInvalidIteratorState()
 	 */
 	@Override
@@ -370,15 +369,15 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * The number of nodes in the result snapshot. Valid values for snapshotItem
-	 * indices are <code>0</code> to <code>snapshotLength-1</code> inclusive.
+	 * {@inheritDoc}
 	 *
-	 * @return the snapshot length
+	 * The number of nodes in the result snapshot. Valid values for snapshotItem
+	 * indices are 0 to snapshotLength-1 inclusive.
 	 * @see org.w3c.dom.xpath.XPathResult#getSnapshotLength()
 	 * @exception XPathException
-	 *                TYPE_ERR: raised if <code>resultType</code> is not
-	 *                <code>UNORDERED_NODE_SNAPSHOT_TYPE</code> or
-	 *                <code>ORDERED_NODE_SNAPSHOT_TYPE</code>.
+	 *                TYPE_ERR: raised if resultType is not
+	 *                UNORDERED_NODE_SNAPSHOT_TYPE or
+	 *                ORDERED_NODE_SNAPSHOT_TYPE.
 	 */
 	@Override
 	public int getSnapshotLength() throws XPathException {
@@ -395,15 +394,15 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Iterates and returns the next node from the node set or <code>null</code> if
-	 * there are no more nodes.
+	 * {@inheritDoc}
 	 *
-	 * @return Returns the next node.
+	 * Iterates and returns the next node from the node set or null if
+	 * there are no more nodes.
 	 * @see org.w3c.dom.xpath.XPathResult#iterateNext()
 	 * @exception XPathException
-	 *                TYPE_ERR: raised if <code>resultType</code> is not
-	 *                <code>UNORDERED_NODE_ITERATOR_TYPE</code> or
-	 *                <code>ORDERED_NODE_ITERATOR_TYPE</code>.
+	 *                TYPE_ERR: raised if resultType is not
+	 *                UNORDERED_NODE_ITERATOR_TYPE or
+	 *                ORDERED_NODE_ITERATOR_TYPE.
 	 * @exception DOMException
 	 *                INVALID_STATE_ERR: The document has been mutated since the
 	 *                result was returned.
@@ -446,22 +445,18 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Returns the <code>index</code>th item in the snapshot collection. If
-	 * <code>index</code> is greater than or equal to the number of nodes in the
-	 * list, this method returns <code>null</code>. Unlike the iterator result, the
+	 * {@inheritDoc}
+	 *
+	 * Returns the indexth item in the snapshot collection. If
+	 * index is greater than or equal to the number of nodes in the
+	 * list, this method returns null. Unlike the iterator result, the
 	 * snapshot does not become invalid, but may not correspond to the current
 	 * document if it is mutated.
-	 *
-	 * @param index
-	 *            Index into the snapshot collection.
-	 * @return The node at the <code>index</code>th position in the
-	 *         <code>NodeList</code>, or <code>null</code> if that is not a valid
-	 *         index.
 	 * @see org.w3c.dom.xpath.XPathResult#snapshotItem(int)
 	 * @exception XPathException
-	 *                TYPE_ERR: raised if <code>resultType</code> is not
-	 *                <code>UNORDERED_NODE_SNAPSHOT_TYPE</code> or
-	 *                <code>ORDERED_NODE_SNAPSHOT_TYPE</code>.
+	 *                TYPE_ERR: raised if resultType is not
+	 *                UNORDERED_NODE_SNAPSHOT_TYPE or
+	 *                ORDERED_NODE_SNAPSHOT_TYPE.
 	 */
 	@Override
 	public Node snapshotItem(int index) throws XPathException {
@@ -491,7 +486,6 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	 *
 	 * @param type
 	 *            The specified type
-	 *
 	 * @return true If the specified type is supported; otherwise, returns false.
 	 */
 	public static boolean isValidType(short type) {
@@ -513,10 +507,9 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
-	 * Handle event.
+	 * {@inheritDoc}
 	 *
-	 * @param event
-	 *            the event
+	 * Handle event.
 	 * @see org.w3c.dom.events.EventListener#handleEvent(Event)
 	 */
 	@Override
@@ -638,6 +631,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getANY_TYPE.</p>
+	 *
 	 * @return the aNY_TYPE
 	 */
 	public static short getANY_TYPE() {
@@ -645,6 +640,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getNUMBER_TYPE.</p>
+	 *
 	 * @return the nUMBER_TYPE
 	 */
 	public static short getNUMBER_TYPE() {
@@ -652,6 +649,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getSTRING_TYPE.</p>
+	 *
 	 * @return the sTRING_TYPE
 	 */
 	public static short getSTRING_TYPE() {
@@ -659,6 +658,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getBOOLEAN_TYPE.</p>
+	 *
 	 * @return the bOOLEAN_TYPE
 	 */
 	public static short getBOOLEAN_TYPE() {
@@ -666,6 +667,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getUNORDERED_NODE_ITERATOR_TYPE.</p>
+	 *
 	 * @return the uNORDERED_NODE_ITERATOR_TYPE
 	 */
 	public static short getUNORDERED_NODE_ITERATOR_TYPE() {
@@ -673,6 +676,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getORDERED_NODE_ITERATOR_TYPE.</p>
+	 *
 	 * @return the oRDERED_NODE_ITERATOR_TYPE
 	 */
 	public static short getORDERED_NODE_ITERATOR_TYPE() {
@@ -680,6 +685,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getUNORDERED_NODE_SNAPSHOT_TYPE.</p>
+	 *
 	 * @return the uNORDERED_NODE_SNAPSHOT_TYPE
 	 */
 	public static short getUNORDERED_NODE_SNAPSHOT_TYPE() {
@@ -687,6 +694,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getORDERED_NODE_SNAPSHOT_TYPE.</p>
+	 *
 	 * @return the oRDERED_NODE_SNAPSHOT_TYPE
 	 */
 	public static short getORDERED_NODE_SNAPSHOT_TYPE() {
@@ -694,6 +703,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getANY_UNORDERED_NODE_TYPE.</p>
+	 *
 	 * @return the aNY_UNORDERED_NODE_TYPE
 	 */
 	public static short getANY_UNORDERED_NODE_TYPE() {
@@ -701,6 +712,8 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	}
 
 	/**
+	 * <p>getFIRST_ORDERED_NODE_TYPE.</p>
+	 *
 	 * @return the fIRST_ORDERED_NODE_TYPE
 	 */
 	public static short getFIRST_ORDERED_NODE_TYPE() {

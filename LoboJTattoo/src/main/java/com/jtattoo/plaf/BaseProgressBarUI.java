@@ -42,7 +42,10 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
+ * <p>BaseProgressBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseProgressBarUI extends BasicProgressBarUI {
 
@@ -61,6 +64,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		}
 	} // end of class PropertyChangeHandler
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseProgressBarUI();
 	}
@@ -71,6 +75,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 	 * The "selectionBackground" is the color of the text when it is painted over an
 	 * unfilled area of the progress bar.
 	 */
+	/** {@inheritDoc} */
 	@Override
 	protected Color getSelectionBackground() {
 		Object selectionBackground = progressBar.getClientProperty("selectionBackground");
@@ -84,6 +89,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 	 * The "selectionForeground" is the color of the text when it is painted over a
 	 * filled area of the progress bar.
 	 */
+	/** {@inheritDoc} */
 	@Override
 	protected Color getSelectionForeground() {
 		Object selectionForeground = progressBar.getClientProperty("selectionForeground");
@@ -93,6 +99,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		return super.getSelectionForeground();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -101,6 +108,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		c.addPropertyChangeListener(propertyChangeListener);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		if (progressBar.isIndeterminate()) {
@@ -110,6 +118,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintDeterminate(Graphics g, JComponent c) {
 		if (!(g instanceof Graphics2D)) {
@@ -169,6 +178,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintIndeterminate(Graphics g, JComponent c) {
 		if (!(g instanceof Graphics2D)) {
@@ -229,6 +239,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintString(Graphics g, int x, int y, int width, int height, int amountFull, Insets b) {
 		boolean indeterminate = progressBar.isIndeterminate();
@@ -283,6 +294,7 @@ public class BaseProgressBarUI extends BasicProgressBarUI {
 		g2D.setClip(savedClip);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallUI(JComponent c) {
 		c.removePropertyChangeListener(propertyChangeListener);

@@ -28,15 +28,30 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
+/**
+ * <p>TextImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TextImpl extends CharacterDataImpl implements Text {
+	/**
+	 * <p>Constructor for TextImpl.</p>
+	 */
 	public TextImpl() {
 		this("");
 	}
 
+	/**
+	 * <p>Constructor for TextImpl.</p>
+	 *
+	 * @param text a {@link java.lang.String} object.
+	 */
 	public TextImpl(String text) {
 		this.text = text;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Node createSimilarNode() {
 		return new TextImpl(this.text);
@@ -47,6 +62,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getlocalName()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getLocalName() {
 		return null;
@@ -57,6 +73,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeName()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeName() {
 		return "#text";
@@ -67,6 +84,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeType()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public short getNodeType() {
 		return Node.TEXT_NODE;
@@ -77,6 +95,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#getnodeValue()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getNodeValue() throws DOMException {
 		return this.text;
@@ -87,6 +106,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.Text#getwholeText()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public String getWholeText() {
 		final NodeImpl parent = (NodeImpl) getParentNode();
@@ -101,6 +121,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.Text#isElementContentWhitespace()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean isElementContentWhitespace() {
 		final String t = this.text;
@@ -112,6 +133,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.Text#replaceWholeText(java.lang.String)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Text replaceWholeText(String content) throws DOMException {
 		final NodeImpl parent = (NodeImpl) getParentNode();
@@ -126,11 +148,13 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.domimpl.NodeImpl#setnodeValue(java.lang.String)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setNodeValue(String nodeValue) throws DOMException {
 		this.text = nodeValue;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) throws DOMException {
 		this.text = textContent;
@@ -141,6 +165,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	 * 
 	 * @see org.loboevolution.html.dom.Text#splitText(int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public Text splitText(int offset) throws DOMException {
 		final NodeImpl parent = (NodeImpl) getParentNode();
@@ -159,6 +184,7 @@ public class TextImpl extends CharacterDataImpl implements Text {
 		return (Text) parent.insertAfter(newNode, this);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		final String text = this.text;

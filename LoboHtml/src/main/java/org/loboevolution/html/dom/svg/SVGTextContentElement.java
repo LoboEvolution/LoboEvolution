@@ -22,32 +22,110 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGTextContentElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGTextContentElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable {
 	// lengthAdjust Types
+	/** Constant LENGTHADJUST_UNKNOWN=0 */
 	static final short LENGTHADJUST_UNKNOWN = 0;
+	/** Constant LENGTHADJUST_SPACING=1 */
 	static final short LENGTHADJUST_SPACING = 1;
+	/** Constant LENGTHADJUST_SPACINGANDGLYPHS=2 */
 	static final short LENGTHADJUST_SPACINGANDGLYPHS = 2;
 
+	/**
+	 * <p>getTextLength.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getTextLength();
 
+	/**
+	 * <p>getLengthAdjust.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getLengthAdjust();
 
+	/**
+	 * <p>getNumberOfChars.</p>
+	 *
+	 * @return a int.
+	 */
 	int getNumberOfChars();
 
+	/**
+	 * <p>getComputedTextLength.</p>
+	 *
+	 * @return a float.
+	 */
 	float getComputedTextLength();
 
+	/**
+	 * <p>getSubStringLength.</p>
+	 *
+	 * @param charnum a int.
+	 * @param nchars a int.
+	 * @return a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	float getSubStringLength(int charnum, int nchars) throws DOMException;
 
+	/**
+	 * <p>getStartPositionOfChar.</p>
+	 *
+	 * @param charnum a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	SVGPoint getStartPositionOfChar(int charnum) throws DOMException;
 
+	/**
+	 * <p>getEndPositionOfChar.</p>
+	 *
+	 * @param charnum a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	SVGPoint getEndPositionOfChar(int charnum) throws DOMException;
 
+	/**
+	 * <p>getExtentOfChar.</p>
+	 *
+	 * @param charnum a int.
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGRect} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	SVGRect getExtentOfChar(int charnum) throws DOMException;
 
+	/**
+	 * <p>getRotationOfChar.</p>
+	 *
+	 * @param charnum a int.
+	 * @return a float.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	float getRotationOfChar(int charnum) throws DOMException;
 
+	/**
+	 * <p>getCharNumAtPosition.</p>
+	 *
+	 * @param point a {@link org.loboevolution.html.dom.svg.SVGPoint} object.
+	 * @return a int.
+	 */
 	int getCharNumAtPosition(SVGPoint point);
 
+	/**
+	 * <p>selectSubString.</p>
+	 *
+	 * @param charnum a int.
+	 * @param nchars a int.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void selectSubString(int charnum, int nchars) throws DOMException;
 }

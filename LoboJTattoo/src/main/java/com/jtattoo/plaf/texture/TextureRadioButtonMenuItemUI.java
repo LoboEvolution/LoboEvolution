@@ -41,14 +41,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>TextureRadioButtonMenuItemUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new TextureRadioButtonMenuItemUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g, JComponent c, int x, int y, int w, int h) {
 		JMenuItem mi = (JMenuItem) c;
@@ -64,6 +69,7 @@ public class TextureRadioButtonMenuItemUI extends BaseRadioButtonMenuItemUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, JMenuItem menuItem, Rectangle textRect, String text) {
 		if (!AbstractLookAndFeel.getTheme().isDarkTexture()) {

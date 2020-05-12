@@ -62,7 +62,10 @@ import org.loboevolution.html.style.MarginInsets;
 import org.w3c.dom.css.CSS3Properties;
 
 /**
+ * <p>StyleSheetRenderState class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class StyleSheetRenderState implements RenderState {
 	
@@ -70,12 +73,16 @@ public class StyleSheetRenderState implements RenderState {
 	
 	private static final Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
 	
+	/** Constant INVALID_BACKGROUND_INFO */
 	protected static final BackgroundInfo INVALID_BACKGROUND_INFO = new BackgroundInfo();
 	
+	/** Constant INVALID_BORDER_INFO */
 	protected static final BorderInfo INVALID_BORDER_INFO = new BorderInfo();
 	
+	/** Constant INVALID_COLOR */
 	protected static final Color INVALID_COLOR = new Color(100, 0, 100);
 	
+	/** Constant INVALID_INSETS */
 	protected static final HtmlInsets INVALID_INSETS = new HtmlInsets();
 	
 	protected HtmlInsets paddingInsets = INVALID_INSETS;
@@ -138,18 +145,30 @@ public class StyleSheetRenderState implements RenderState {
 
 	Map<String, WordInfo> iWordInfoMap = null;
 
+	/**
+	 * <p>Constructor for StyleSheetRenderState.</p>
+	 *
+	 * @param document a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 */
 	public StyleSheetRenderState(HTMLDocumentImpl document) {
 		this.prevRenderState = null;
 		this.element = null;
 		this.document = document;
 	}
 
+	/**
+	 * <p>Constructor for StyleSheetRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public StyleSheetRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		this.prevRenderState = prevRenderState;
 		this.element = element;
 		this.document = (HTMLDocumentImpl) element.getOwnerDocument();
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public int getAlignXPercent() {
 		int axp = this.alignXPercent;
@@ -193,6 +212,7 @@ public class StyleSheetRenderState implements RenderState {
 		return axp;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getAlignYPercent() {
 		// This is only settable in table cells.
@@ -200,6 +220,7 @@ public class StyleSheetRenderState implements RenderState {
 		return 0;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getBackgroundColor() {
 		final Color c = this.iBackgroundColor;
@@ -223,6 +244,7 @@ public class StyleSheetRenderState implements RenderState {
 		return localColor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.iBackgroundInfo;
@@ -273,6 +295,7 @@ public class StyleSheetRenderState implements RenderState {
 		return binfo;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getBlankWidth() {
 		int bw = this.iBlankWidth;
@@ -283,6 +306,7 @@ public class StyleSheetRenderState implements RenderState {
 		return bw;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
@@ -299,6 +323,11 @@ public class StyleSheetRenderState implements RenderState {
 		return binfo;
 	}
 
+	/**
+	 * <p>getColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	public Color getColor() {
 		Color c = this.iColor;
 		if (c != null) {
@@ -336,6 +365,7 @@ public class StyleSheetRenderState implements RenderState {
 		return c;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getCount(String counter, int nesting) {
 		// Expected to be called only in GUI thread.
@@ -355,15 +385,26 @@ public class StyleSheetRenderState implements RenderState {
 		return integer == null ? 0 : integer.intValue();
 	}
 
+	/**
+	 * <p>getCssProperties.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.AbstractCSSProperties} object.
+	 */
 	protected final AbstractCSSProperties getCssProperties() {
 		final HTMLElementImpl element = this.element;
 		return element == null ? null : element.getCurrentStyle();
 	}
 
+	/**
+	 * <p>getDefaultDisplay.</p>
+	 *
+	 * @return a int.
+	 */
 	protected int getDefaultDisplay() {
 		return DISPLAY_INLINE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getDisplay() {
 		final Integer d = this.iDisplay;
@@ -415,6 +456,7 @@ public class StyleSheetRenderState implements RenderState {
 		return displayInt;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getFloat() {
 		Integer p = this.cachedFloat;
@@ -448,6 +490,7 @@ public class StyleSheetRenderState implements RenderState {
 		return floatValue;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Font getFont() {
 
@@ -484,12 +527,14 @@ public class StyleSheetRenderState implements RenderState {
 		return f;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getFontBase() {
 		final RenderState prs = this.prevRenderState;
 		return prs == null ? 3 : prs.getFontBase();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final FontMetrics getFontMetrics() {
 		FontMetrics fm = this.iFontMetrics;
@@ -501,6 +546,7 @@ public class StyleSheetRenderState implements RenderState {
 		return fm;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HtmlInsets getMarginInsets() {
 		HtmlInsets mi = this.marginInsets;
@@ -517,6 +563,7 @@ public class StyleSheetRenderState implements RenderState {
 		return mi;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getOverflowX() {
 		int overflow = this.overflowX;
@@ -567,6 +614,7 @@ public class StyleSheetRenderState implements RenderState {
 	 * 
 	 * @see org.loboevolution.html.renderstate.RenderState#getOverflowY()
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public int getOverflowY() {
 		int overflow = this.overflowY;
@@ -612,6 +660,7 @@ public class StyleSheetRenderState implements RenderState {
 		return overflow;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getOverlayColor() {
 		Color c = this.iOverlayColor;
@@ -635,6 +684,7 @@ public class StyleSheetRenderState implements RenderState {
 		return c;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public HtmlInsets getPaddingInsets() {
 		HtmlInsets mi = this.paddingInsets;
@@ -651,6 +701,7 @@ public class StyleSheetRenderState implements RenderState {
 		return mi;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getPosition() {
 		Integer p = this.cachedPosition;
@@ -686,11 +737,13 @@ public class StyleSheetRenderState implements RenderState {
 		return position;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public RenderState getPreviousRenderState() {
 		return this.prevRenderState;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getTextBackgroundColor() {
 		final Color c = this.iTextBackgroundColor;
@@ -719,6 +772,7 @@ public class StyleSheetRenderState implements RenderState {
 		return localColor;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getTextDecorationMask() {
 		int td = this.iTextDecoration;
@@ -769,6 +823,7 @@ public class StyleSheetRenderState implements RenderState {
 		return td;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getTextIndent(int availSize) {
 		// No caching for this one.
@@ -780,6 +835,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getTextIndentText() {
 		String tiText = this.iTextIndentText;
@@ -801,6 +857,7 @@ public class StyleSheetRenderState implements RenderState {
 		return tiText;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getTextTransform() {
 		int tt = this.iTextTransform;
@@ -842,6 +899,7 @@ public class StyleSheetRenderState implements RenderState {
 		return tt;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getVisibility() {
 		Integer v = this.cachedVisibility;
@@ -875,6 +933,7 @@ public class StyleSheetRenderState implements RenderState {
 		return visibility;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public int getWhiteSpace() {
 		if (RenderThreadState.getState().overrideNoWrap) {
@@ -914,6 +973,7 @@ public class StyleSheetRenderState implements RenderState {
 		return wsValue;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public final WordInfo getWordInfo(String word) {
 		// Expected to be called only in the GUI (rendering) thread.
@@ -938,6 +998,7 @@ public class StyleSheetRenderState implements RenderState {
 		return wi;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int incrementCount(String counter, int nesting) {
 		// Expected to be called only in the GUI thread.
@@ -961,6 +1022,7 @@ public class StyleSheetRenderState implements RenderState {
 		return prevValue;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidate() {
 		final Map<String, WordInfo> map = this.iWordInfoMap;
@@ -988,18 +1050,20 @@ public class StyleSheetRenderState implements RenderState {
 		// Should NOT invalidate parent render state.
 	}
 
-	/**
-	 * @return Returns the iHighlight.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean isHighlight() {
 		return this.iHighlight;
 	}
 
+	/**
+	 * <p>repaint.</p>
+	 */
 	public void repaint() {
 		// Dummy implementation
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void resetCount(String counter, int nesting, int value) {
 		// Expected to be called only in the GUI thread.
@@ -1021,19 +1085,19 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
 
-	/**
-	 * @param highlight The iHighlight to set.
-	 */
+	/** {@inheritDoc} */
 	@Override
 	public void setHighlight(boolean highlight) {
 		this.iHighlight = highlight;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return "StyleSheetRenderState[font=" + getFont() + ",textDecoration=" + getTextDecorationMask() + "]";
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public int getClear() {
 		if (cachedClear == null) {
@@ -1055,6 +1119,7 @@ public class StyleSheetRenderState implements RenderState {
 		return cachedClear;
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public String getBoxSizing() {
 		AbstractCSSProperties props = this.getCssProperties();
@@ -1073,36 +1138,42 @@ public class StyleSheetRenderState implements RenderState {
 
 	}
 
+    /** {@inheritDoc} */
     @Override
     public String getLeft() {
         final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getLeft();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getTop() {
         final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getTop();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getRight() {
         final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getRight();
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getBottom() {
         final AbstractCSSProperties props = this.getCssProperties();
         return props == null ? null : props.getBottom();
     }
     
+    /** {@inheritDoc} */
     @Override
     public void setCursor(Optional<Cursor> cursor) {
        this.cursor = cursor;
         
     }
 
+	/** {@inheritDoc} */
 	@Override
 	public Optional<Cursor> getCursor() {
 
@@ -1176,6 +1247,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 	}
    
+   /** {@inheritDoc} */
    @Override
    public String getVerticalAlign() {
 	   final AbstractCSSProperties props = this.getCssProperties();

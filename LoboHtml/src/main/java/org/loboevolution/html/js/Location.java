@@ -9,6 +9,12 @@ import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.Document;
 
+/**
+ * <p>Location class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Location extends AbstractScriptableDelegate {
 	private static final Logger logger = Logger.getLogger(Location.class.getName());
 	private String target;
@@ -19,11 +25,21 @@ public class Location extends AbstractScriptableDelegate {
 		this.window = window;
 	}
 
+	/**
+	 * <p>getHash.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getHash() {
 		final URL url = getURL();
 		return url == null ? null : url.getRef();
 	}
 
+	/**
+	 * <p>getHost.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getHost() {
 		final URL url = getURL();
 		if (url == null) {
@@ -32,6 +48,11 @@ public class Location extends AbstractScriptableDelegate {
 		return url.getHost() + (url.getPort() == -1 ? "" : ":" + url.getPort());
 	}
 
+	/**
+	 * <p>getHostname.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getHostname() {
 		final URL url = getURL();
 		if (url == null) {
@@ -40,16 +61,31 @@ public class Location extends AbstractScriptableDelegate {
 		return url.getHost();
 	}
 
+	/**
+	 * <p>getHref.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getHref() {
 		final Document document = this.window.getDocumentNode();
 		return document == null ? null : document.getDocumentURI();
 	}
 
+	/**
+	 * <p>getPathname.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getPathname() {
 		final URL url = getURL();
 		return url == null ? null : url.getPath();
 	}
 
+	/**
+	 * <p>getPort.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getPort() {
 		final URL url = getURL();
 		if (url == null) {
@@ -59,6 +95,11 @@ public class Location extends AbstractScriptableDelegate {
 		return port == -1 ? null : String.valueOf(port);
 	}
 
+	/**
+	 * <p>getProtocol.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getProtocol() {
 		final URL url = getURL();
 		if (url == null) {
@@ -67,6 +108,11 @@ public class Location extends AbstractScriptableDelegate {
 		return url.getProtocol() + ":";
 	}
 
+	/**
+	 * <p>getSearch.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getSearch() {
 		final URL url = getURL();
 		final String query = url == null ? null : url.getQuery();
@@ -74,6 +120,11 @@ public class Location extends AbstractScriptableDelegate {
 		return query == null ? "" : "?" + query;
 	}
 
+	/**
+	 * <p>Getter for the field target.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTarget() {
 		return this.target;
 	}
@@ -89,6 +140,9 @@ public class Location extends AbstractScriptableDelegate {
 		return url;
 	}
 
+	/**
+	 * <p>reload.</p>
+	 */
 	public void reload() {
 		// TODO: This is not really reload.
 		final Document document = this.window.getDocumentNode();
@@ -103,10 +157,20 @@ public class Location extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>replace.</p>
+	 *
+	 * @param href a {@link java.lang.String} object.
+	 */
 	public void replace(String href) {
 		setHref(href);
 	}
 
+	/**
+	 * <p>setHref.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 */
 	public void setHref(String uri) {
 		final HtmlRendererContext rcontext = this.window.getHtmlRendererContext();
 		if (rcontext != null) {
@@ -126,10 +190,16 @@ public class Location extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>Setter for the field target.</p>
+	 *
+	 * @param value a {@link java.lang.String} object.
+	 */
 	public void setTarget(String value) {
 		this.target = value;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		// This needs to be href. Callers

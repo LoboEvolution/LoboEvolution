@@ -25,9 +25,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class FormFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class FormFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		String nodeName = node.getNodeName();

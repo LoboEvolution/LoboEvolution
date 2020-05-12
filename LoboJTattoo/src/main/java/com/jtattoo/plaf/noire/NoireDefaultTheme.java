@@ -32,10 +32,16 @@ import com.jtattoo.plaf.AbstractTheme;
 import com.jtattoo.plaf.ColorHelper;
 
 /**
+ * <p>NoireDefaultTheme class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class NoireDefaultTheme extends AbstractTheme {
 
+	/**
+	 * <p>Constructor for NoireDefaultTheme.</p>
+	 */
 	public NoireDefaultTheme() {
 		super();
 		// Setup theme with defaults
@@ -46,11 +52,13 @@ public class NoireDefaultTheme extends AbstractTheme {
 		setUpColorArrs();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String getPropertyFileName() {
 		return "NoireTheme.properties";
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColor() {
 		super.setUpColor();
@@ -138,6 +146,7 @@ public class NoireDefaultTheme extends AbstractTheme {
 		smallFont = new FontUIResource("Dialog", Font.PLAIN, 10);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();

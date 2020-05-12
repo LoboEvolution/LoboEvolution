@@ -34,14 +34,19 @@ import com.jtattoo.plaf.BaseMenuBarUI;
 import com.jtattoo.plaf.JTattooUtilities;
 
 /**
+ * <p>AluminiumMenuBarUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class AluminiumMenuBarUI extends BaseMenuBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new AluminiumMenuBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installUI(JComponent c) {
 		super.installUI(c);
@@ -50,6 +55,7 @@ public class AluminiumMenuBarUI extends BaseMenuBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		if (JTattooUtilities.isMac() || !AbstractLookAndFeel.getTheme().isBackgroundPatternOn()) {

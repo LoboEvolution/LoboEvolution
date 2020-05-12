@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 class ZIndexComparator implements Comparator<Object> {
 
+	/** {@inheritDoc} */
 	@Override
 	public int compare(Object object1, Object object2) {
 		final PositionedRenderable element1 = (PositionedRenderable) object1;

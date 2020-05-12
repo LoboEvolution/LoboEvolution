@@ -24,25 +24,35 @@ package org.loboevolution.html.dom.smil;
 import org.w3c.dom.DOMException;
 
 /**
- * A <code>parallel</code> container defines a simple parallel time grouping in
+ * A parallel container defines a simple parallel time grouping in
  * which multiple elements can play back at the same time. It may have to
  * specify a repeat iteration. (?)
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface ElementParallelTimeContainer extends ElementTimeContainer {
 	/**
 	 * Controls the end of the container. Need to address thr id-ref value.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getEndSync();
 
+	/**
+	 * <p>setEndSync.</p>
+	 *
+	 * @param endSync a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setEndSync(String endSync) throws DOMException;
 
 	/**
 	 * This method returns the implicit duration in seconds.
-	 * 
+	 *
 	 * @return The implicit duration in seconds or -1 if the implicit is unknown
 	 *         (indefinite?).
 	 */

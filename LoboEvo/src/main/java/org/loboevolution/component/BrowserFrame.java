@@ -17,6 +17,12 @@ import org.loboevolution.menu.MenuBar;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.TabStore;
 
+/**
+ * <p>BrowserFrame class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BrowserFrame extends JFrame implements IBrowserFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +31,11 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 
 	private ToolBar toolbar;
 
+	/**
+	 * <p>Constructor for BrowserFrame.</p>
+	 *
+	 * @param title a {@link java.lang.String} object.
+	 */
 	public BrowserFrame(String title) {
 		super(title);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,6 +84,8 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	}
 
 	/**
+	 * <p>Getter for the field panel.</p>
+	 *
 	 * @return the panel
 	 */
 	public BrowserPanel getPanel() {
@@ -80,6 +93,8 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	}
 
 	/**
+	 * <p>Getter for the field toolbar.</p>
+	 *
 	 * @return the toolbar
 	 */
 	public ToolBar getToolbar() {
@@ -87,6 +102,8 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	}
 
 	/**
+	 * <p>Setter for the field panel.</p>
+	 *
 	 * @param panel the panel to set
 	 */
 	public void setPanel(BrowserPanel panel) {
@@ -94,6 +111,8 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	}
 
 	/**
+	 * <p>Setter for the field toolbar.</p>
+	 *
 	 * @param toolbar the toolbar to set
 	 */
 	public void setToolbar(ToolBar toolbar) {

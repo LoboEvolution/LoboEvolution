@@ -33,7 +33,10 @@ class VirtualCell {
 	private int row;
 
 	/**
-	 * @param cell
+	 * <p>Constructor for VirtualCell.</p>
+	 *
+	 * @param cell a {@link org.loboevolution.html.renderer.RTableCell} object.
+	 * @param isTopLeft a boolean.
 	 */
 	public VirtualCell(RTableCell cell, boolean isTopLeft) {
 		this.actualCell = cell;
@@ -41,6 +44,8 @@ class VirtualCell {
 	}
 
 	/**
+	 * <p>Getter for the field actualCell.</p>
+	 *
 	 * @return Returns the actualCell.
 	 */
 	public RTableCell getActualCell() {
@@ -48,12 +53,19 @@ class VirtualCell {
 	}
 
 	/**
+	 * <p>Getter for the field column.</p>
+	 *
 	 * @return Returns the column.
 	 */
 	public int getColumn() {
 		return this.column;
 	}
 
+	/**
+	 * <p>getHeightLength.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
+	 */
 	public HtmlLength getHeightLength() {
 		final RTableCell cell = this.actualCell;
 		final String heightText = cell.getHeightText();
@@ -65,12 +77,19 @@ class VirtualCell {
 	}
 
 	/**
+	 * <p>Getter for the field row.</p>
+	 *
 	 * @return Returns the row.
 	 */
 	public int getRow() {
 		return this.row;
 	}
 
+	/**
+	 * <p>getWidthLength.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.style.HtmlLength} object.
+	 */
 	public HtmlLength getWidthLength() {
 		final RTableCell cell = this.actualCell;
 		final String widthText = cell.getWidthText();
@@ -81,11 +100,18 @@ class VirtualCell {
 		return length;
 	}
 
+	/**
+	 * <p>isTopLeft.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean isTopLeft() {
 		return this.isTopLeft;
 	}
 
 	/**
+	 * <p>Setter for the field column.</p>
+	 *
 	 * @param column The column to set.
 	 */
 	public void setColumn(int column) {
@@ -93,6 +119,8 @@ class VirtualCell {
 	}
 
 	/**
+	 * <p>Setter for the field row.</p>
+	 *
 	 * @param row The row to set.
 	 */
 	public void setRow(int row) {

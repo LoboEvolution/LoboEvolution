@@ -39,23 +39,32 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLIsIndexElement extends HTMLElement {
 	/**
-	 * Returns the <code>FORM</code> element containing this control. Returns
-	 * <code>null</code> if this control is not within the context of a form.
+	 * Returns the FORM element containing this control. Returns
+	 * null if this control is not within the context of a form.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
 	 */
 	HTMLFormElement getForm();
 
 	/**
 	 * The prompt message. See the prompt attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getPrompt();
 
 	/**
 	 * The prompt message. See the prompt attribute definition in HTML 4.01. This
 	 * attribute is deprecated in HTML 4.01.
+	 *
+	 * @param prompt a {@link java.lang.String} object.
 	 */
 	void setPrompt(String prompt);
 

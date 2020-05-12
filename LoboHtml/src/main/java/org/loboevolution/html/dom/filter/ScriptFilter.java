@@ -25,9 +25,13 @@ import org.w3c.dom.Node;
 
 /**
  * The Class ScriptFilter.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class ScriptFilter implements NodeFilter {
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
 		return "script".equalsIgnoreCase(node.getNodeName());

@@ -21,17 +21,42 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGGradientElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGGradientElement
 		extends SVGElement, SVGURIReference, SVGExternalResourcesRequired, SVGStylable, SVGUnitTypes {
 	// Spread Method Types
+	/** Constant SVG_SPREADMETHOD_UNKNOWN=0 */
 	static final short SVG_SPREADMETHOD_UNKNOWN = 0;
+	/** Constant SVG_SPREADMETHOD_PAD=1 */
 	static final short SVG_SPREADMETHOD_PAD = 1;
+	/** Constant SVG_SPREADMETHOD_REFLECT=2 */
 	static final short SVG_SPREADMETHOD_REFLECT = 2;
+	/** Constant SVG_SPREADMETHOD_REPEAT=3 */
 	static final short SVG_SPREADMETHOD_REPEAT = 3;
 
+	/**
+	 * <p>getGradientUnits.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getGradientUnits();
 
+	/**
+	 * <p>getGradientTransform.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedTransformList} object.
+	 */
 	SVGAnimatedTransformList getGradientTransform();
 
+	/**
+	 * <p>getSpreadMethod.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedEnumeration} object.
+	 */
 	SVGAnimatedEnumeration getSpreadMethod();
 }

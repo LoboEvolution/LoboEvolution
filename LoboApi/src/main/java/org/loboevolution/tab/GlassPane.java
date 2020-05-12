@@ -24,13 +24,20 @@ class GlassPane extends JPanel {
 
 	private final DnDTabbedPane tab;
 
+	/**
+	 * <p>Constructor for GlassPane.</p>
+	 *
+	 * @param tab a {@link org.loboevolution.tab.DnDTabbedPane} object.
+	 */
 	public GlassPane(DnDTabbedPane tab) {
 		setOpaque(false);
 		this.tab = tab;
 	}
 
 	/**
-	 * @param image the image to set
+	 * <p>createImage.</p>
+	 *
+	 * @param c a {@link java.awt.Component} object.
 	 */
 	public void createImage(Component c) {
 		final Rectangle rect = this.tab.getBoundsAt(this.tab.dragTabIdx);
@@ -39,6 +46,7 @@ class GlassPane extends JPanel {
 		this.image = this.image.getSubimage(rect.x < 0 ? 0 : rect.x, rect.y < 0 ? 0 : rect.y, rect.width, rect.height);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paintComponent(Graphics g) {
 		if (this.location == null) {
@@ -66,6 +74,8 @@ class GlassPane extends JPanel {
 	}
 
 	/**
+	 * <p>setDragLocation.</p>
+	 *
 	 * @param location the location to set
 	 */
 	public void setDragLocation(Point location) {

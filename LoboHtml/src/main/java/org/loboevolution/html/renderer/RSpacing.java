@@ -31,6 +31,14 @@ import org.loboevolution.html.dom.domimpl.ModelNode;
  * This is used when there's padding or margins in inline elements.
  */
 final class RSpacing extends BaseBoundableRenderable {
+	/**
+	 * <p>Constructor for RSpacing.</p>
+	 *
+	 * @param me a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.
+	 * @param container a {@link org.loboevolution.html.renderer.RenderableContainer} object.
+	 * @param width a int.
+	 * @param height a int.
+	 */
 	public RSpacing(ModelNode me, RenderableContainer container, int width, int height) {
 		super(container, me);
 		// Dimensions set when constructed.
@@ -38,6 +46,7 @@ final class RSpacing extends BaseBoundableRenderable {
 		this.height = height;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
@@ -56,15 +65,18 @@ final class RSpacing extends BaseBoundableRenderable {
 	 * 
 	 * @see org.loboevolution.html.rendered.BoundableRenderable#getRenderable(int, int)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		return new RenderableSpot(this, x, y);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void invalidateLayoutLocal() {
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean isContainedByNode() {
 		return true;
@@ -75,6 +87,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	 * 
 	 * @see net.sourceforge.xamj.domimpl.markup.Renderable#paint(java.awt.Graphics)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g) {
 		// Nothing to paint in spacing.
@@ -87,6 +100,7 @@ final class RSpacing extends BaseBoundableRenderable {
 	 * Graphics, boolean, org.loboevolution.html.rendered.RenderablePoint,
 	 * org.loboevolution.html.rendered.RenderablePoint)
 	 */
+	/** {@inheritDoc} */
 	@Override
 	public boolean paintSelection(Graphics g, boolean inSelection, RenderableSpot startPoint, RenderableSpot endPoint) {
 		if (this == startPoint.renderable || this == endPoint.renderable) {

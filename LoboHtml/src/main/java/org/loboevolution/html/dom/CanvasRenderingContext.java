@@ -22,6 +22,9 @@ package org.loboevolution.html.dom;
 
 /**
  * The public interface CanvasRenderingContext.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface CanvasRenderingContext {
 

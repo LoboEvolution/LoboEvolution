@@ -2,6 +2,12 @@ package org.loboevolution.info;
 
 import java.io.Serializable;
 
+/**
+ * <p>MetaInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class MetaInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -14,6 +20,8 @@ public class MetaInfo implements Serializable {
 	private String property;
 
 	/**
+	 * <p>Getter for the field charset.</p>
+	 *
 	 * @return the charset
 	 */
 	public String getCharset() {
@@ -21,6 +29,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field content.</p>
+	 *
 	 * @return the content
 	 */
 	public String getContent() {
@@ -28,6 +38,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field description.</p>
+	 *
 	 * @return the description
 	 */
 	public String getDescription() {
@@ -35,6 +47,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field httpEqui.</p>
+	 *
 	 * @return the httpEqui
 	 */
 	public String getHttpEqui() {
@@ -42,6 +56,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field itemprop.</p>
+	 *
 	 * @return the itemprop
 	 */
 	public String getItemprop() {
@@ -49,6 +65,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field name.</p>
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -56,6 +74,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Getter for the field property.</p>
+	 *
 	 * @return the property
 	 */
 	public String getProperty() {
@@ -63,6 +83,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field charset.</p>
+	 *
 	 * @param charset the charset to set
 	 */
 	public void setCharset(String charset) {
@@ -70,6 +92,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field content.</p>
+	 *
 	 * @param content the content to set
 	 */
 	public void setContent(String content) {
@@ -77,6 +101,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field description.</p>
+	 *
 	 * @param description the description to set
 	 */
 	public void setDescription(String description) {
@@ -84,6 +110,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field httpEqui.</p>
+	 *
 	 * @param httpEqui the httpEqui to set
 	 */
 	public void setHttpEqui(String httpEqui) {
@@ -91,6 +119,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field itemprop.</p>
+	 *
 	 * @param itemprop the itemprop to set
 	 */
 	public void setItemprop(String itemprop) {
@@ -98,6 +128,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field name.</p>
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -105,6 +137,8 @@ public class MetaInfo implements Serializable {
 	}
 
 	/**
+	 * <p>Setter for the field property.</p>
+	 *
 	 * @param property the property to set
 	 */
 	public void setProperty(String property) {

@@ -29,25 +29,39 @@ import java.util.Set;
 
 import org.w3c.dom.DOMStringList;
 
+/**
+ * <p>DOMStringListImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DOMStringListImpl implements DOMStringList {
 	private final List<String> sourceList;
 
+	/**
+	 * <p>Constructor for DOMStringListImpl.</p>
+	 *
+	 * @param sourceList a {@link java.util.Set} object.
+	 */
 	public DOMStringListImpl(Set<String> sourceList) {
 		final List<String> list = new ArrayList<String>();
 		list.addAll(sourceList);
 		this.sourceList = list;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public boolean contains(String str) {
 		return this.sourceList.contains(str);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public int getLength() {
 		return this.sourceList.size();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String item(int index) {
         int size = this.sourceList.size();

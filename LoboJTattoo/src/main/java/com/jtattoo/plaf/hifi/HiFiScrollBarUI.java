@@ -33,15 +33,19 @@ import com.jtattoo.plaf.ColorHelper;
 import com.jtattoo.plaf.XPScrollBarUI;
 
 /**
+ * <p>HiFiScrollBarUI class.</p>
  *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiScrollBarUI extends XPScrollBarUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiScrollBarUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createDecreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -51,6 +55,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected JButton createIncreaseButton(int orientation) {
 		if (AbstractLookAndFeel.getTheme().isMacStyleScrollBarOn()) {
@@ -60,6 +65,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected Color getFrameColor() {
 		Color frameColor = ColorHelper.brighter(AbstractLookAndFeel.getTheme().getButtonBackgroundColor(), 8);
@@ -72,6 +78,7 @@ public class HiFiScrollBarUI extends XPScrollBarUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installDefaults() {
 		super.installDefaults();

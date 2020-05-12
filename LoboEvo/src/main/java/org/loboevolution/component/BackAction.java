@@ -15,6 +15,12 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
 
+/**
+ * <p>BackAction class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BackAction extends AbstractAction {
 
     private final static Logger logger = Logger.getLogger(BackAction.class.getName());
@@ -25,11 +31,18 @@ public class BackAction extends AbstractAction {
 
 	private final IBrowserPanel panel;
 
+	/**
+	 * <p>Constructor for BackAction.</p>
+	 *
+	 * @param panel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 * @param addressBar a {@link javax.swing.JTextField} object.
+	 */
 	public BackAction(IBrowserPanel panel, JTextField addressBar) {
 		this.panel = panel;
 		this.addressBar = addressBar;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		NavigationStore nh = new NavigationStore();

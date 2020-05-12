@@ -23,22 +23,68 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.css.CSSValue;
 import org.w3c.dom.css.RGBColor;
 
+/**
+ * <p>SVGColor interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGColor extends CSSValue {
 	// Color Types
+	/** Constant SVG_COLORTYPE_UNKNOWN=0 */
 	static final short SVG_COLORTYPE_UNKNOWN = 0;
+	/** Constant SVG_COLORTYPE_RGBCOLOR=1 */
 	static final short SVG_COLORTYPE_RGBCOLOR = 1;
+	/** Constant SVG_COLORTYPE_RGBCOLOR_ICCCOLOR=2 */
 	static final short SVG_COLORTYPE_RGBCOLOR_ICCCOLOR = 2;
+	/** Constant SVG_COLORTYPE_CURRENTCOLOR=3 */
 	static final short SVG_COLORTYPE_CURRENTCOLOR = 3;
 
+	/**
+	 * <p>getColorType.</p>
+	 *
+	 * @return a short.
+	 */
 	short getColorType();
 
+	/**
+	 * <p>getRGBColor.</p>
+	 *
+	 * @return a {@link org.w3c.dom.css.RGBColor} object.
+	 */
 	public RGBColor getRGBColor();
 
+	/**
+	 * <p>getICCColor.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGICCColor} object.
+	 */
 	SVGICCColor getICCColor();
 
+	/**
+	 * <p>setRGBColor.</p>
+	 *
+	 * @param rgbColor a {@link java.lang.String} object.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	void setRGBColor(String rgbColor) throws SVGException;
 
+	/**
+	 * <p>setRGBColorICCColor.</p>
+	 *
+	 * @param rgbColor a {@link java.lang.String} object.
+	 * @param iccColor a {@link java.lang.String} object.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	void setRGBColorICCColor(String rgbColor, String iccColor) throws SVGException;
 
+	/**
+	 * <p>setColor.</p>
+	 *
+	 * @param colorType a short.
+	 * @param rgbColor a {@link java.lang.String} object.
+	 * @param iccColor a {@link java.lang.String} object.
+	 * @throws org.loboevolution.html.dom.svg.SVGException if any.
+	 */
 	void setColor(short colorType, String rgbColor, String iccColor) throws SVGException;
 }

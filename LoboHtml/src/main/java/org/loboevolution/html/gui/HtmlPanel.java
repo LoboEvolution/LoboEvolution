@@ -61,13 +61,16 @@ import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 /**
- * The <code>HtmlPanel</code> class is a Swing component that can render a HTML
- * DOM. It uses either {@link HtmlBlockPanel} or {@link FrameSetPanel}
+ * The HtmlPanel class is a Swing component that can render a HTML
+ * DOM. It uses either {@link org.loboevolution.html.gui.HtmlBlockPanel}
  * internally, depending on whether the document is determined to be a FRAMESET
  * or not.
  * <p>
  * Invoke method {@link #setDocument(Document, HtmlRendererContext)} in order to
  * schedule a document for rendering.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public class HtmlPanel extends JComponent implements FrameContext {
 	private class LocalDocumentNotificationListener implements DocumentNotificationListener {
@@ -156,7 +159,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	private IBrowserPanel browserPanel;
 
 	/**
-	 * Constructs an <code>HtmlPanel</code>.
+	 * Constructs an HtmlPanel.
 	 */
 	public HtmlPanel() {
 		setLayout(WrapperLayout.getInstance());
@@ -183,8 +186,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * Adds listener of selection changes. Note that it does not have any effect on
 	 * FRAMESETs.
-	 * 
-	 * @param listener An instance of {@link SelectionChangeListener}.
+	 *
+	 * @param listener An instance of {@link org.loboevolution.html.gui.SelectionChangeListener}.
 	 */
 	public void addSelectionChangeListener(SelectionChangeListener listener) {
 		this.selectionDispatch.addListener(listener);
@@ -222,6 +225,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * Copies the current selection, if any, into the clipboard. This method has no
 	 * effect in FRAMESETs at the moment.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean copy() {
 		final HtmlBlockPanel block = this.htmlBlockPanel;
@@ -233,14 +238,20 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	/**
-	 * Method invoked internally to create a {@link HtmlBlockPanel}. It is made
+	 * Method invoked internally to create a {@link org.loboevolution.html.gui.HtmlBlockPanel}. It is made
 	 * available so it can be overridden.
+	 *
+	 * @param ucontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
+	 * @return a {@link org.loboevolution.html.gui.HtmlBlockPanel} object.
 	 */
 	protected HtmlBlockPanel createHtmlBlockPanel(UserAgentContext ucontext, HtmlRendererContext rcontext) {
 		return new HtmlBlockPanel(java.awt.Color.WHITE, true, ucontext, rcontext, this);
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Invalidates the layout of the given node and schedules it to be layed out
 	 * later. Multiple invalidations may be processed in a single document layout.
 	 */
@@ -254,6 +265,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Internal method used to expand the selection to the given point.
 	 * <p>
 	 * Note: This method should be invoked in the GUI thread.
@@ -269,8 +282,10 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 
 	/**
-	 * Gets the root <code>Renderable</code> of the HTML block. It returns
-	 * <code>null</code> for FRAMESETs.
+	 * Gets the root Renderable of the HTML block. It returns
+	 * null for FRAMESETs.
+	 *
+	 * @return a {@link org.loboevolution.html.renderer.BoundableRenderable} object.
 	 */
 	public BoundableRenderable getBlockRenderable() {
 		final HtmlBlockPanel htmlBlock = this.htmlBlockPanel;
@@ -280,6 +295,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	/**
 	 * Gets the HTML DOM node currently rendered if any.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public NodeImpl getRootNode() {
 		return this.rootNode;
@@ -291,9 +308,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * the selection end point may be just outside of the selection.
 	 * <p>
 	 * Note: This method should be invoked in the GUI thread.
-	 * 
-	 * @return A node enclosing the current selection, or <code>null</code> if there
-	 *         is no such node. It also returns <code>null</code> for FRAMESETs.
+	 *
+	 * @return A node enclosing the current selection, or null if there
+	 *         is no such node. It also returns null for FRAMESETs.
 	 */
 	public Node getSelectionNode() {
 		final HtmlBlockPanel block = this.htmlBlockPanel;
@@ -308,6 +325,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * Gets the selection text.
 	 * <p>
 	 * Note: This method should be invoked in the GUI thread.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getSelectionText() {
 		final HtmlBlockPanel block = this.htmlBlockPanel;
@@ -321,6 +340,8 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	/**
 	 * Returns true only if the current block has a selection. This method has no
 	 * effect in FRAMESETs at the moment.
+	 *
+	 * @return a boolean.
 	 */
 	public boolean hasSelection() {
 		final HtmlBlockPanel block = this.htmlBlockPanel;
@@ -353,12 +374,16 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	/**
 	 * Removes a listener of selection changes that was previously added.
+	 *
+	 * @param listener a {@link org.loboevolution.html.gui.SelectionChangeListener} object.
 	 */
 	public void removeSelectionChangeListener(SelectionChangeListener listener) {
 		this.selectionDispatch.removeListener(listener);
 	}
 
 	/**
+	 * {@inheritDoc}
+	 *
 	 * Internal method used to reset the selection so that it is empty at the given
 	 * point. This is what is called when the user clicks on a point in the
 	 * document.
@@ -381,7 +406,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * upper-left corner of the panel.
 	 * <p>
 	 * This method may be called outside of the GUI Thread.
-	 * 
+	 *
 	 * @param x The x coordinate.
 	 * @param y The y coordinate.
 	 */
@@ -393,6 +418,12 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 
+	/**
+	 * <p>scrollBy.</p>
+	 *
+	 * @param x a int.
+	 * @param y a int.
+	 */
 	public void scrollBy(final int x, final int y) {
 		if (SwingUtilities.isEventDispatchThread()) {
 			scrollByImpl(x, y);
@@ -417,7 +448,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * document.
 	 * <p>
 	 * This method should be called from the GUI thread.
-	 * 
+	 *
 	 * @param node A DOM node.
 	 */
 	public void scrollTo(org.w3c.dom.Node node) {
@@ -432,7 +463,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * to the given location.
 	 * <p>
 	 * This method should be called from the GUI thread.
-	 * 
+	 *
 	 * @param bounds    The bounds in the scrollable block area that should become
 	 *                  visible.
 	 * @param xIfNeeded If this parameter is true, scrolling will only occur if the
@@ -452,7 +483,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * <p>
 	 * If this method is invoked outside the GUI thread, the operation is scheduled
 	 * to be performed as soon as possible in the GUI thread.
-	 * 
+	 *
 	 * @param nameOrId The name or ID of the element in the document.
 	 */
 	public void scrollToElement(final String nameOrId) {
@@ -478,7 +509,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * Sets the default horizontal overflow.
 	 * <p>
 	 * This method has no effect on FRAMESETs.
-	 * 
+	 *
 	 * @param overflow See {@link org.loboevolution.html.renderstate.RenderState}.
 	 */
 	public void setDefaultOverflowX(int overflow) {
@@ -493,7 +524,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * Sets the default vertical overflow.
 	 * <p>
 	 * This method has no effect on FRAMESETs.
-	 * 
+	 *
 	 * @param overflow See {@link org.loboevolution.html.renderstate.RenderState}.
 	 */
 	public void setDefaultOverflowY(int overflow) {
@@ -512,13 +543,13 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * the document is scheduled to be set later. Note that
 	 * {@link #setPreferredWidth(int) preferred size} calculations should be done in
 	 * the GUI dispatch thread for this reason.
-	 * 
+	 *
 	 * @param node     This should normally be a Document instance obtained with
 	 *                 {@link org.loboevolution.html.parser.DocumentBuilderImpl}.
 	 *                 <p>
 	 * @param rcontext A renderer context.
 	 * @see org.loboevolution.html.parser.DocumentBuilderImpl#parse(org.xml.sax.InputSource)
-	 * @see org.loboevolution.html.test.SimpleHtmlRendererContext
+	 * 
 	 */
 	public void setDocument(final Document node, final HtmlRendererContext rcontext) {
 		if (SwingUtilities.isEventDispatchThread()) {
@@ -557,11 +588,11 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	/**
 	 * Renders HTML given as a string.
-	 * 
+	 *
 	 * @param htmlSource The HTML source code.
 	 * @param uri        A base URI used to resolve item URIs.
-	 * @param rcontext   The {@link HtmlRendererContext} instance.
-	 * @see org.loboevolution.html.test.SimpleHtmlRendererContext
+	 * @param rcontext   The {@link org.loboevolution.http.HtmlRendererContext} instance.
+	 * 
 	 * @see #setDocument(Document, HtmlRendererContext)
 	 */
 	public void setHtml(String htmlSource, String uri, HtmlRendererContext rcontext) {
@@ -583,6 +614,12 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	}
 	
 	
+	/**
+	 * <p>createHtmlPanel.</p>
+	 *
+	 * @param uri a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
+	 */
 	public static HtmlPanel createHtmlPanel(String uri) {
 		final HtmlPanel panel = new HtmlPanel();
 		try {
@@ -611,7 +648,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	/**
 	 * Sets a preferred width that serves as a hint in calculating the preferred
-	 * size of the <code>HtmlPanel</code>. Note that the preferred size can only be
+	 * size of the HtmlPanel. Note that the preferred size can only be
 	 * calculated when a document is available, and it will vary during incremental
 	 * rendering.
 	 * <p>
@@ -619,9 +656,9 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 * FRAMESET.
 	 * <p>
 	 * Note also that setting the preferred width (to a value other than
-	 * <code>-1</code>) will negatively impact performance.
-	 * 
-	 * @param width The preferred width, or <code>-1</code> to unset.
+	 * -1) will negatively impact performance.
+	 *
+	 * @param width The preferred width, or -1 to unset.
 	 */
 	public void setPreferredWidth(int width) {
 		this.preferredWidth = width;
@@ -642,10 +679,20 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.nodeRenderer = shp;
 	}
 	
+	/**
+	 * <p>Getter for the field browserPanel.</p>
+	 *
+	 * @return a {@link org.loboevolution.component.IBrowserPanel} object.
+	 */
 	public IBrowserPanel getBrowserPanel() {
 		return browserPanel;
 	}
 
+	/**
+	 * <p>Setter for the field browserPanel.</p>
+	 *
+	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
+	 */
 	public void setBrowserPanel(IBrowserPanel browserPanel) {
 		this.browserPanel = browserPanel;
 	}

@@ -9,7 +9,9 @@ package org.mozilla.javascript;
 /**
  * The base class for Function objects
  * See ECMA 15.3.
+ *
  * @author Norris Boyd
+ * @version $Id: $Id
  */
 public class BaseFunction extends IdScriptableObject implements Function
 {
@@ -26,24 +28,35 @@ public class BaseFunction extends IdScriptableObject implements Function
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
+    /**
+     * <p>Constructor for BaseFunction.</p>
+     */
     public BaseFunction()
     {
     }
 
+    /**
+     * <p>Constructor for BaseFunction.</p>
+     *
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @param prototype a {@link org.mozilla.javascript.Scriptable} object.
+     */
     public BaseFunction(Scriptable scope, Scriptable prototype)
     {
         super(scope, prototype);
     }
 
+    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Function";
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Gets the value returned by calling the typeof operator on this object.
      * @see org.mozilla.javascript.ScriptableObject#getTypeOf()
-     * @return "function" or "undefined" if {@link #avoidObjectDetection()} returns <code>true</code>
      */
     @Override
     public String getTypeOf()
@@ -52,18 +65,14 @@ public class BaseFunction extends IdScriptableObject implements Function
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Implements the instanceof operator for JavaScript Function objects.
      * <p>
-     * <code>
+     * 
      * foo = new Foo();<br>
      * foo instanceof Foo;  // true<br>
-     * </code>
-     *
-     * @param instance The value that appeared on the LHS of the instanceof
-     *              operator
-     * @return true if the "prototype" property of "this" appears in
-     *              value's prototype chain
-     *
+     * 
      */
     @Override
     public boolean hasInstance(Scriptable instance)
@@ -87,12 +96,14 @@ public class BaseFunction extends IdScriptableObject implements Function
 
         MAX_INSTANCE_ID = 5;
 
+    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {
@@ -138,6 +149,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         return instanceIdInfo(attr, id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -151,6 +163,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         return super.getInstanceIdName(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -164,6 +177,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         return super.getInstanceIdValue(id);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -193,6 +207,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         super.setInstanceIdValue(id, value);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void setInstanceIdAttributes(int id, int attr)
     {
@@ -207,6 +222,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         super.setInstanceIdAttributes(id, attr);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -217,6 +233,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         super.fillConstructorProperties(ctor);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -249,6 +266,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         return false;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -324,6 +342,8 @@ public class BaseFunction extends IdScriptableObject implements Function
     /**
      * Make value as DontEnum, DontDelete, ReadOnly
      * prototype property of this Function object
+     *
+     * @param value a {@link java.lang.Object} object.
      */
     public void setImmunePrototypeProperty(Object value)
     {
@@ -334,6 +354,11 @@ public class BaseFunction extends IdScriptableObject implements Function
         prototypePropertyAttributes = DONTENUM | PERMANENT | READONLY;
     }
 
+    /**
+     * <p>getClassPrototype.</p>
+     *
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
+     */
     protected Scriptable getClassPrototype()
     {
         Object protoVal = getPrototypeProperty();
@@ -344,6 +369,8 @@ public class BaseFunction extends IdScriptableObject implements Function
     }
 
     /**
+     * {@inheritDoc}
+     *
      * Should be overridden.
      */
     @Override
@@ -353,6 +380,7 @@ public class BaseFunction extends IdScriptableObject implements Function
         return Undefined.instance;
     }
 
+    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -397,6 +425,10 @@ public class BaseFunction extends IdScriptableObject implements Function
      * {@link #call} will create a new object itself. In this case
      * {@link #construct} will set scope and prototype on the result
      * {@link #call} unless they are already set.
+     *
+     * @param cx a {@link org.mozilla.javascript.Context} object.
+     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
+     * @return a {@link org.mozilla.javascript.Scriptable} object.
      */
     public Scriptable createObject(Context cx, Scriptable scope)
     {
@@ -432,18 +464,43 @@ public class BaseFunction extends IdScriptableObject implements Function
         return sb.toString();
     }
 
+    /**
+     * <p>getArity.</p>
+     *
+     * @return a int.
+     */
     public int getArity() { return 0; }
 
+    /**
+     * <p>getLength.</p>
+     *
+     * @return a int.
+     */
     public int getLength() { return 0; }
 
+    /**
+     * <p>getFunctionName.</p>
+     *
+     * @return a {@link java.lang.String} object.
+     */
     public String getFunctionName() {
         return "";
     }
 
+    /**
+     * <p>hasPrototypeProperty.</p>
+     *
+     * @return a boolean.
+     */
     protected boolean hasPrototypeProperty() {
         return prototypeProperty != null || this instanceof NativeFunction;
     }
 
+    /**
+     * <p>Getter for the field prototypeProperty.</p>
+     *
+     * @return a {@link java.lang.Object} object.
+     */
     protected Object getPrototypeProperty() {
         Object result = prototypeProperty;
         if (result == null) {
@@ -561,6 +618,7 @@ public class BaseFunction extends IdScriptableObject implements Function
                                   sourceURI, 1, null);
     }
 
+    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

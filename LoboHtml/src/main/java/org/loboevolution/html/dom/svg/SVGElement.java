@@ -23,15 +23,47 @@ package org.loboevolution.html.dom.svg;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 
+/**
+ * <p>SVGElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGElement extends Element {
 
+	/**
+	 * <p>getId.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	String getId();
 
+	/**
+	 * <p>setId.</p>
+	 *
+	 * @param id a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setId(String id) throws DOMException;
 
+	/**
+	 * <p>getOwnerSVGElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGSVGElement} object.
+	 */
 	SVGSVGElement getOwnerSVGElement();
 	
+	/**
+	 * <p>setOwnerSVGElement.</p>
+	 *
+	 * @param elem a {@link org.loboevolution.html.dom.svg.SVGSVGElement} object.
+	 */
 	void setOwnerSVGElement(SVGSVGElement elem);
 
+	/**
+	 * <p>getViewportElement.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElement} object.
+	 */
 	SVGElement getViewportElement();
 }

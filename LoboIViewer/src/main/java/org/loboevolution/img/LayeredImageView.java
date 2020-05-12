@@ -6,13 +6,19 @@ import javax.swing.JLayeredPane;
 
 /**
  * A component showing an image as well as an arbitrary number of overlays.
- * 
+ *
  * @author Kazo Csaba
+ * @version $Id: $Id
  */
 public class LayeredImageView {
 	private final ImageComponent theImage;
 	private final JLayeredPane layeredPane;
 
+	/**
+	 * <p>Constructor for LayeredImageView.</p>
+	 *
+	 * @param theImage a {@link org.loboevolution.img.ImageComponent} object.
+	 */
 	public LayeredImageView(ImageComponent theImage) {
 		this.theImage = theImage;
 		layeredPane = new ScrollableLayeredPane(this);
@@ -23,7 +29,7 @@ public class LayeredImageView {
 
 	/**
 	 * Returns the component for this layered view.
-	 * 
+	 *
 	 * @return the Swing component for this view
 	 */
 	public JComponent getComponent() {
@@ -32,7 +38,7 @@ public class LayeredImageView {
 
 	/**
 	 * Adds an overlay as the specified layer.
-	 * 
+	 *
 	 * @param overlay
 	 *            the overlay to add
 	 * @param layer
@@ -51,10 +57,10 @@ public class LayeredImageView {
 
 	/**
 	 * Removes an overlay from the image viewer.
-	 * 
+	 *
 	 * @param overlay
 	 *            the overlay to remove
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the overlay is not in the image viewer
 	 */
 	public void removeOverlay(Overlay overlay) {
@@ -73,6 +79,8 @@ public class LayeredImageView {
 	}
 
 	/**
+	 * <p>Getter for the field theImage.</p>
+	 *
 	 * @return the theImage
 	 */
 	public ImageComponent getTheImage() {

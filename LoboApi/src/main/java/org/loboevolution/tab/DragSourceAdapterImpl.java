@@ -11,24 +11,38 @@ import java.awt.dnd.DragSourceEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
+/**
+ * <p>DragSourceAdapterImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class DragSourceAdapterImpl extends DragSourceAdapter {
 
 	private final DnDTabbedPane tab;
 
+	/**
+	 * <p>Constructor for DragSourceAdapterImpl.</p>
+	 *
+	 * @param tab a {@link org.loboevolution.tab.DnDTabbedPane} object.
+	 */
 	public DragSourceAdapterImpl(DnDTabbedPane tab) {
 		this.tab = tab;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragDropEnd(DragSourceDropEvent e) {
 		this.tab.getGlass().setVisible(false);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragEnter(DragSourceDragEvent e) {
 		e.getDragSourceContext().setCursor(DragSource.DefaultMoveDrop);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void dragExit(DragSourceEvent e) {
 		final Point location = e.getLocation();

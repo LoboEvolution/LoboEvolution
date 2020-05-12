@@ -19,12 +19,24 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.HttpNetwork;
 
+/**
+ * <p>InputImage class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class InputImage {
 
 	private BufferedImage image;
 	
 	private HTMLInputElementImpl modelNode;
 
+	/**
+	 * <p>Constructor for InputImage.</p>
+	 *
+	 * @param modelNode a {@link org.loboevolution.html.dom.domimpl.HTMLInputElementImpl} object.
+	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
+	 */
 	public InputImage(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
 		image = toBufferedImage(HttpNetwork.getImage(modelNode.getSrc(), modelNode.getOwnerDocument().getBaseURI()));

@@ -32,13 +32,26 @@ import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 
+/**
+ * <p>TableRenderState class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class TableRenderState extends StyleSheetRenderState {
 	private BackgroundInfo backgroundInfo = INVALID_BACKGROUND_INFO;
 
+	/**
+	 * <p>Constructor for TableRenderState.</p>
+	 *
+	 * @param prevRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
 	public TableRenderState(RenderState prevRenderState, HTMLElementImpl element) {
 		super(prevRenderState, element);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
 		BackgroundInfo binfo = this.backgroundInfo;
@@ -77,6 +90,7 @@ public class TableRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public BorderInfo getBorderInfo() {
 		BorderInfo binfo = this.borderInfo;
@@ -143,16 +157,19 @@ public class TableRenderState extends StyleSheetRenderState {
 		return binfo;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected int getDefaultDisplay() {
 		return DISPLAY_TABLE;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public Color getTextBackgroundColor() {
 		return super.getTextBackgroundColor();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void invalidate() {
 		super.invalidate();

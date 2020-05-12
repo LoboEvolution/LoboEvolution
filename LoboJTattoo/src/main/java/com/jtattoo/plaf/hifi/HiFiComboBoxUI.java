@@ -39,7 +39,10 @@ import com.jtattoo.plaf.BaseComboBoxUI;
 import com.jtattoo.plaf.NoFocusButton;
 
 /**
+ * <p>HiFiComboBoxUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class HiFiComboBoxUI extends BaseComboBoxUI {
 
@@ -97,10 +100,12 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 
 	} // end of class ArrowButtonBorder
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new HiFiComboBoxUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public JButton createArrowButton() {
 		JButton button = new NoFocusButton(HiFiIcons.getComboBoxIcon());
@@ -108,6 +113,7 @@ public class HiFiComboBoxUI extends BaseComboBoxUI {
 		return button;
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void setButtonBorder() {
 	}

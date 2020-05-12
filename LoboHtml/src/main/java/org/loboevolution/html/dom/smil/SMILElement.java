@@ -25,27 +25,37 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 
 /**
- * The <code>SMILElement</code> interface is the base for all SMIL element
- * types. It follows the model of the <code>HTMLElement</code> in the HTML DOM,
- * extending the base <code>Element</code> class to denote SMIL-specific
+ * The SMILElement interface is the base for all SMIL element
+ * types. It follows the model of the HTMLElement in the HTML DOM,
+ * extending the base Element class to denote SMIL-specific
  * elements.
  * <p>
- * Note that the <code>SMILElement</code> interface overlaps with the
- * <code>HTMLElement</code> interface. In practice, an integrated document
+ * Note that the SMILElement interface overlaps with the
+ * HTMLElement interface. In practice, an integrated document
  * profile that include HTML and SMIL modules will effectively implement both
  * interfaces (see also the DOM documentation discussion of Inheritance vs
  * Flattened Views of the API ). // etc. This needs attention
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface SMILElement extends Element {
 	/**
 	 * The unique id.
-	 * 
+	 *
 	 * @exception DOMException
 	 *                NO_MODIFICATION_ALLOWED_ERR: Raised if this attribute is
 	 *                readonly.
+	 * @return a {@link java.lang.String} object.
 	 */
 	public String getId();
 
+	/**
+	 * <p>setId.</p>
+	 *
+	 * @param id a {@link java.lang.String} object.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	public void setId(String id) throws DOMException;
 
 }

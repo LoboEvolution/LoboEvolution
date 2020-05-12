@@ -46,10 +46,14 @@ import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
 
 /**
+ * <p>BaseTextAreaUI class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class BaseTextAreaUI extends BasicTextAreaUI {
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {
 		return new BaseTextAreaUI();
 	}
@@ -58,12 +62,14 @@ public class BaseTextAreaUI extends BasicTextAreaUI {
 
 	private FocusListener focusListener = null;
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults() {
 		super.installDefaults();
 		updateBackground();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installKeyboardActions() {
 		super.installKeyboardActions();
@@ -80,6 +86,7 @@ public class BaseTextAreaUI extends BasicTextAreaUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void installListeners() {
 		super.installListeners();
@@ -116,6 +123,7 @@ public class BaseTextAreaUI extends BasicTextAreaUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintBackground(Graphics g) {
 		g.setColor(getComponent().getBackground());
@@ -127,6 +135,7 @@ public class BaseTextAreaUI extends BasicTextAreaUI {
 		g.fillRect(0, 0, getComponent().getWidth(), getComponent().getHeight());
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintSafely(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -142,6 +151,7 @@ public class BaseTextAreaUI extends BasicTextAreaUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void propertyChange(PropertyChangeEvent evt) {
 		if (evt.getPropertyName().equals("editable") || evt.getPropertyName().equals("enabled")) {
@@ -150,6 +160,7 @@ public class BaseTextAreaUI extends BasicTextAreaUI {
 		super.propertyChange(evt);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void uninstallListeners() {
 		getComponent().removeFocusListener(focusListener);

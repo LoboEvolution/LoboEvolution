@@ -46,21 +46,30 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.basic.BasicToggleButtonUI;
 import javax.swing.text.View;
 
+/**
+ * <p>BaseToggleButtonUI class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BaseToggleButtonUI extends BasicToggleButtonUI {
 
 	private static final Rectangle viewRect = new Rectangle();
 	private static final Rectangle textRect = new Rectangle();
 	private static final Rectangle iconRect = new Rectangle();
 
+	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent b) {
 		return new BaseToggleButtonUI();
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected BasicButtonListener createButtonListener(AbstractButton b) {
 		return new BaseButtonListener(b);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void installDefaults(AbstractButton b) {
 		super.installDefaults(b);
@@ -68,6 +77,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		b.setRolloverEnabled(true);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		Graphics2D g2D = (Graphics2D) g;
@@ -128,6 +138,12 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		}
 	}
 
+	/**
+	 * <p>paintBackground.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param b a {@link javax.swing.AbstractButton} object.
+	 */
 	protected void paintBackground(Graphics g, AbstractButton b) {
 		if (!b.isContentAreaFilled() || b.getParent() instanceof JMenuBar) {
 			return;
@@ -177,6 +193,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		JTattooUtilities.fillHorGradient(g, colors, 1, 1, width - 2, height - 2);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintFocus(Graphics g, AbstractButton b, Rectangle viewRect, Rectangle textRect,
 			Rectangle iconRect) {
@@ -184,6 +201,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		BasicGraphicsUtils.drawDashedRect(g, 4, 3, b.getWidth() - 8, b.getHeight() - 6);
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	protected void paintText(Graphics g, AbstractButton b, Rectangle textRect, String text) {
 		ButtonModel model = b.getModel();
@@ -222,6 +240,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public void uninstallDefaults(AbstractButton b) {
 		super.uninstallDefaults(b);

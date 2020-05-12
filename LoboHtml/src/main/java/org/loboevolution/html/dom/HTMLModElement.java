@@ -39,18 +39,25 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLModElement extends HTMLElement {
 	/**
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a document that describes the reason for the change. See the cite
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getCite();
 
 	/**
 	 * The date and time of the change. See the datetime attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getDateTime();
 
@@ -58,12 +65,16 @@ public interface HTMLModElement extends HTMLElement {
 	 * A URI [<a href='http://www.ietf.org/rfc/rfc2396.txt'>IETF RFC 2396</a>]
 	 * designating a document that describes the reason for the change. See the cite
 	 * attribute definition in HTML 4.01.
+	 *
+	 * @param cite a {@link java.lang.String} object.
 	 */
 	void setCite(String cite);
 
 	/**
 	 * The date and time of the change. See the datetime attribute definition in
 	 * HTML 4.01.
+	 *
+	 * @param dateTime a {@link java.lang.String} object.
 	 */
 	void setDateTime(String dateTime);
 

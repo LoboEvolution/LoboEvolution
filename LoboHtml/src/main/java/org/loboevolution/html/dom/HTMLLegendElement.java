@@ -33,41 +33,54 @@
 package org.loboevolution.html.dom;
 
 /**
- * Provides a caption for a <code>FIELDSET</code> grouping. See the LEGEND
+ * Provides a caption for a FIELDSET grouping. See the LEGEND
  * element definition in HTML 4.01.
  * <p>
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLLegendElement extends HTMLElement {
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAccessKey();
 
 	/**
-	 * Text alignment relative to <code>FIELDSET</code>. See the align attribute
+	 * Text alignment relative to FIELDSET. See the align attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getAlign();
 
 	/**
-	 * Returns the <code>FORM</code> element containing this control. Returns
-	 * <code>null</code> if this control is not within the context of a form.
+	 * Returns the FORM element containing this control. Returns
+	 * null if this control is not within the context of a form.
+	 *
+	 * @return a {@link org.loboevolution.html.dom.HTMLFormElement} object.
 	 */
 	HTMLFormElement getForm();
 
 	/**
 	 * A single character access key to give access to the form control. See the
 	 * accesskey attribute definition in HTML 4.01.
+	 *
+	 * @param accessKey a {@link java.lang.String} object.
 	 */
 	void setAccessKey(String accessKey);
 
 	/**
-	 * Text alignment relative to <code>FIELDSET</code>. See the align attribute
+	 * Text alignment relative to FIELDSET. See the align attribute
 	 * definition in HTML 4.01. This attribute is deprecated in HTML 4.01.
+	 *
+	 * @param align a {@link java.lang.String} object.
 	 */
 	void setAlign(String align);
 

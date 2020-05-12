@@ -24,18 +24,36 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * <p>SVGStylableImpl class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	
+	/**
+	 * <p>Constructor for SVGStylableImpl.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 */
 	public SVGStylableImpl(String name) {
 		super(name);
 		this.setStyle(getAttribute("style"));
 	}
 	
+	/** {@inheritDoc} */
 	@Override
 	public AbstractCSSProperties getStyle() {
 		return super.getStyle();
 	}
 
+	/**
+	 * <p>getFillPaint.</p>
+	 *
+	 * @param shape a {@link java.awt.Shape} object.
+	 * @return a {@link java.awt.Paint} object.
+	 */
 	public Paint getFillPaint(Shape shape) {
 		AbstractCSSProperties style = getStyle();
 		Paint fillPaint = null;		
@@ -61,6 +79,12 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return fillPaint;
 	}
 
+	/**
+	 * <p>getStrokelPaint.</p>
+	 *
+	 * @param shape a {@link java.awt.Shape} object.
+	 * @return a {@link java.awt.Paint} object.
+	 */
 	public Paint getStrokelPaint(Shape shape) {
 		AbstractCSSProperties style = getStyle();
 		Paint strokePaint = null;
@@ -86,6 +110,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return strokePaint;
 	}
 	
+	/**
+	 * <p>getStrokeLineCap.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getStrokeLineCap() {
 		AbstractCSSProperties style = getStyle();
 		int intLineCap = -1;
@@ -107,6 +136,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return intLineCap;
 	}
 	
+	/**
+	 * <p>getStrokeLinejoin.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getStrokeLinejoin() {
 		AbstractCSSProperties style = getStyle();
 		int lineJoin = -1;
@@ -128,6 +162,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return lineJoin;
 	}
 	
+	/**
+	 * <p>getStrokeWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getStrokeWidth() {
 		AbstractCSSProperties style = getStyle();
 		int strokeWidth = 1;
@@ -138,6 +177,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return strokeWidth;
 	}
 	
+	/**
+	 * <p>getStrokeMiterlimit.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getStrokeMiterlimit() {
 		AbstractCSSProperties style = getStyle();
 		int miterlimit = 4;
@@ -148,6 +192,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return miterlimit;
 	}
 	
+	/**
+	 * <p>getStrokeDashArray.</p>
+	 *
+	 * @return an array of {@link float} objects.
+	 */
 	public float[] getStrokeDashArray() {
 		AbstractCSSProperties style = getStyle();
 		float[] dashArray = null;
@@ -164,18 +213,33 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return dashArray;
 	}
 
+	/**
+	 * <p>getVisibility.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean getVisibility() {
 		AbstractCSSProperties style = getStyle();
 		final String visibility = Strings.isNotBlank(style.getVisibility()) ? style.getVisibility() : getAttribute("visibility");
 		return "visible".equals(visibility);
 	}
 
+	/**
+	 * <p>getDisplay.</p>
+	 *
+	 * @return a boolean.
+	 */
 	public boolean getDisplay() {
 		AbstractCSSProperties style = getStyle();
 		final String display = Strings.isNotBlank(style.getDisplay()) ? style.getDisplay() : getAttribute("display");
 		return !"none".equals(display);
 	}
 	
+	/**
+	 * <p>getOpacity.</p>
+	 *
+	 * @return a float.
+	 */
 	public float getOpacity() {
 		AbstractCSSProperties style = getStyle();
 		final String opacityStr = Strings.isNotBlank(style.getOpacity()) ? style.getOpacity() : getAttribute("opacity");
@@ -192,6 +256,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return opacity;
 	}
 	
+	/**
+	 * <p>getClippingPath.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svgimpl.SVGClipPathElementImpl} object.
+	 */
 	public SVGClipPathElementImpl getClippingPath() {
 		AbstractCSSProperties style = getStyle();
 		String clipPathString = Strings.isNotBlank(style.getClipPath()) ? style.getClipPath() : getAttribute("clip-path");
@@ -210,6 +279,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return null;
 	}
 	
+	/**
+	 * <p>getClipRule.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getClipRule() {
 		AbstractCSSProperties style = getStyle();
 		String clipRuleVal = Strings.isNotBlank(style.getClipRule()) ? style.getClipRule() : getAttribute("clip-rule");
@@ -220,6 +294,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		}
 	}
 	
+	/**
+	 * <p>getStopColor.</p>
+	 *
+	 * @return a {@link java.awt.Color} object.
+	 */
 	public Color getStopColor() {
 		AbstractCSSProperties style = getStyle();
 		String stopcolor = Strings.isNotBlank(style.getStopColor()) ? style.getStopColor() : this.getAttribute("stop-color");
@@ -231,6 +310,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return null;
 	}
 
+	/**
+	 * <p>getStopOpacity.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getStopOpacity() {
 		AbstractCSSProperties style = getStyle();
 		String opacity = Strings.isNotBlank(style.getStopOpacity()) ? style.getStopOpacity() : this.getAttribute("stop-opacity");
@@ -241,10 +325,20 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	
+	/**
+	 * <p>getTextAnchor.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getTextAnchor() {
 		return getAttribute("text-anchor");
 	}
 	
+	/**
+	 * <p>getFont.</p>
+	 *
+	 * @return a {@link java.awt.Font} object.
+	 */
 	public Font getFont() {
 		FontKey key = new FontKey();
 		key.setFontFamily(Font.SANS_SERIF);
@@ -260,6 +354,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		return FontFactory.getInstance().getFont(key);
 	}
 	
+	/**
+	 * <p>getStroke.</p>
+	 *
+	 * @return a {@link java.awt.BasicStroke} object.
+	 */
 	public BasicStroke getStroke() {
 		final int strokeWidth = getStrokeWidth();
 		final int lineCap = getStrokeLineCap();
@@ -274,6 +373,12 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 
 
+	/**
+	 * <p>child.</p>
+	 *
+	 * @param elementId a {@link java.lang.String} object.
+	 * @return a {@link org.w3c.dom.Node} object.
+	 */
 	protected Node child(String elementId) {
 		SVGSVGElement ownerSVGElement = getOwnerSVGElement();
 		NodeList nodeList = ownerSVGElement.getChildNodes();
@@ -302,6 +407,11 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 	}
 	
 	
+	/**
+	 * <p>drawStyle.</p>
+	 *
+	 * @param node a {@link org.w3c.dom.Node} object.
+	 */
 	protected void drawStyle(Node node) {
 		AbstractCSSProperties style = getStyle();
 		SVGElement child = (SVGElement) node;

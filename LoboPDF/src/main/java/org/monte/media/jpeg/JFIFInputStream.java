@@ -203,7 +203,7 @@ public class JFIFInputStream extends FilterInputStream {
      *
      * @return The current segment. Returns null, if we encountered
      * the end of the stream.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public Segment getSegment() throws IOException {
         return segment;
@@ -214,7 +214,7 @@ public class JFIFInputStream extends FilterInputStream {
      * 
      * @return The next segment. Returns null, if we encountered
      * the end of the stream.
-     * @throws java.io.IOException
+     * @throws java.io.IOException if any.
      */
     public Segment getNextSegment() throws IOException {
         // If we are inside of a marker segment, skip the

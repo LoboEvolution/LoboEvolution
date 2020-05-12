@@ -28,6 +28,7 @@ import java.util.Locale;
 
 /**
  * Convert an HTTP header to a JSONObject and back.
+ *
  * @author JSON.org
  * @version 2015-12-09
  */
@@ -37,36 +38,11 @@ public class HTTP {
     public static final String CRLF = "\r\n";
 
     /**
-     * Convert an HTTP header string into a JSONObject. It can be a request
-     * header or a response header. A request header will contain
-     * <pre>{
-     *    Method: "POST" (for example),
-     *    "Request-URI": "/" (for example),
-     *    "HTTP-Version": "HTTP/1.1" (for example)
-     * }</pre>
-     * A response header will contain
-     * <pre>{
-     *    "HTTP-Version": "HTTP/1.1" (for example),
-     *    "Status-Code": "200" (for example),
-     *    "Reason-Phrase": "OK" (for example)
-     * }</pre>
-     * In addition, the other parameters in the header will be captured, using
-     * the HTTP field names as JSON names, so that <pre>
-     *    Date: Sun, 26 May 2002 18:06:04 GMT
-     *    Cookie: Q=q2=PPEAsg--; B=677gi6ouf29bn&b=2&f=s
-     *    Cache-Control: no-cache</pre>
-     * become
-     * <pre>{...
-     *    Date: "Sun, 26 May 2002 18:06:04 GMT",
-     *    Cookie: "Q=q2=PPEAsg--; B=677gi6ouf29bn&b=2&f=s",
-     *    "Cache-Control": "no-cache",
-     * ...}</pre>
-     * It does no further checking or conversion. It does not parse dates.
-     * It does not do '%' transforms on URLs.
+     * Convert an HTTP header string into a JSONObject.
      * @param string An HTTP header string.
      * @return A JSONObject containing the elements and attributes
      * of the XML string.
-     * @throws JSONException
+     * @throws org.json.JSONException if any.
      */
     public static JSONObject toJSONObject(String string) throws JSONException {
         JSONObject     jo = new JSONObject();
@@ -119,9 +95,10 @@ public class HTTP {
      * }</pre>
      * Any other members of the JSONObject will be output as HTTP fields.
      * The result will end with two CRLF pairs.
+     *
      * @param jo A JSONObject
      * @return An HTTP header string.
-     * @throws JSONException if the object does not contain enough
+     * @throws org.json.JSONException if any. if the object does not contain enough
      *  information.
      */
     public static String toString(JSONObject jo) throws JSONException {

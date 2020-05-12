@@ -34,11 +34,12 @@ import javax.swing.JViewport;
  * components that can be added to the viewer and are displayed below the image.
  * <p>
  * {@link #addOverlay Overlays} can also be added to the viewer; for details,
- * see the the documentation of the {@link Overlay} class.
- * 
+ * see the the documentation of the {@link org.loboevolution.img.Overlay} class.
+ *
  * @see StatusBar
  * @see Overlay
  * @author Kaz Csaba
+ * @version $Id: $Id
  */
 public final class ImageViewer {
 	private final LayeredImageView view;
@@ -61,7 +62,7 @@ public final class ImageViewer {
 	/**
 	 * Creates a new image viewer displaying the specified image. TThe viewer will
 	 * have a default popup menu.
-	 * 
+	 *
 	 * @param image
 	 *            the image to display; if {@code null} then no image is displayed
 	 */
@@ -71,9 +72,9 @@ public final class ImageViewer {
 
 	/**
 	 * Creates a new image viewer displaying the specified image.
-	 * 
+	 *
 	 * @param image
-	 *            the image to display; if <code>null</code> then no image is
+	 *            the image to display; if null then no image is
 	 *            displayed
 	 * @param defaultPopupMenu
 	 *            if {@code true}, then a default popup menu will be created and
@@ -157,12 +158,12 @@ public final class ImageViewer {
 	/**
 	 * Sets the status bar component for this image viewer. The new status bar is
 	 * made visible only if the statusBarVisible property is true. If
-	 * <code>statusBar</code> is <code>null</code> this method removes any existing
+	 * statusBar is null this method removes any existing
 	 * status bar.
-	 * 
+	 *
 	 * @param statusBar
 	 *            the new status bar component to set
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the status bar has already been added to a different image
 	 *             viewer
 	 */
@@ -190,7 +191,7 @@ public final class ImageViewer {
 
 	/**
 	 * Returns the status bar currently associated with this viewer.
-	 * 
+	 *
 	 * @return the current status bar, or {@code null} if the viewer has no status
 	 *         bar
 	 */
@@ -200,7 +201,7 @@ public final class ImageViewer {
 
 	/**
 	 * Sets whether the status bar is visible. The status bar is hidden by default.
-	 * 
+	 *
 	 * @param statusBarVisible
 	 *            true, if the status bar should be visible; false otherwise
 	 */
@@ -224,7 +225,7 @@ public final class ImageViewer {
 	/**
 	 * Returns whether the status bar is set to be visible. The status bar is hidden
 	 * by default.
-	 * 
+	 *
 	 * @return the statusBarVisible property
 	 */
 	public boolean isStatusBarVisible() {
@@ -233,7 +234,7 @@ public final class ImageViewer {
 
 	/**
 	 * Returns the image viewer component that can be displayed.
-	 * 
+	 *
 	 * @return the image viewer component
 	 */
 	public JComponent getComponent() {
@@ -245,9 +246,9 @@ public final class ImageViewer {
 	 * the image currently being displayed, then this method will trigger a refresh.
 	 * If you modify the image shown by the viewer, use this function to notify the
 	 * component and cause it to update.
-	 * 
+	 *
 	 * @param image
-	 *            the new image to display; if <code>null</code> then no image is
+	 *            the new image to display; if null then no image is
 	 *            displayed
 	 */
 	public void setImage(BufferedImage image) {
@@ -256,8 +257,8 @@ public final class ImageViewer {
 
 	/**
 	 * Returns the currently displayed image.
-	 * 
-	 * @return the current image, or <code>null</code> if no image is displayed
+	 *
+	 * @return the current image, or null if no image is displayed
 	 */
 	public BufferedImage getImage() {
 		return theImage.getImage();
@@ -265,8 +266,8 @@ public final class ImageViewer {
 
 	/**
 	 * Sets the resize strategy this viewer should use. The default is
-	 * {@link ResizeStrategy#SHRINK_TO_FIT}.
-	 * 
+	 * {@link org.loboevolution.img.ResizeStrategy#SHRINK_TO_FIT}.
+	 *
 	 * @param resizeStrategy
 	 *            the new resize strategy
 	 */
@@ -276,8 +277,8 @@ public final class ImageViewer {
 
 	/**
 	 * Returns the current resize strategy. The default is
-	 * {@link ResizeStrategy#SHRINK_TO_FIT}.
-	 * 
+	 * {@link org.loboevolution.img.ResizeStrategy#SHRINK_TO_FIT}.
+	 *
 	 * @return the current resize strategy
 	 */
 	public ResizeStrategy getResizeStrategy() {
@@ -287,7 +288,7 @@ public final class ImageViewer {
 	/**
 	 * Sets whether the image should be resized with nearest neighbor interpolation
 	 * when it is expanded. The default is {@code false}.
-	 * 
+	 *
 	 * @param pixelatedZoom
 	 *            the new value of the pixelatedZoom property
 	 */
@@ -297,7 +298,7 @@ public final class ImageViewer {
 
 	/**
 	 * Returns the current pixelated zoom setting. The default is {@code false}.
-	 * 
+	 *
 	 * @return the current pixelated zoom setting
 	 */
 	public boolean isPixelatedZoom() {
@@ -307,7 +308,7 @@ public final class ImageViewer {
 	/**
 	 * Returns the current interpolation type. The default is
 	 * {@link java.awt.RenderingHints#VALUE_INTERPOLATION_BICUBIC}.
-	 * 
+	 *
 	 * @return the interpolation type
 	 * @see #setInterpolationType(Object)
 	 */
@@ -332,10 +333,10 @@ public final class ImageViewer {
 	 * Note: when the {@code pixelatedZoom} property is set to true and the image is
 	 * enlarged, then the nearest neighbor method is used regardless of this
 	 * setting.
-	 * 
+	 *
 	 * @param type
 	 *            the interpolation type to use when resizing images
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the parameter is not one of the allowed values
 	 */
 	public void setInterpolationType(Object type) {
@@ -345,7 +346,7 @@ public final class ImageViewer {
 	/**
 	 * Returns the zoom factor used when resize strategy is CUSTOM_ZOOM. The default
 	 * value is 1.
-	 * 
+	 *
 	 * @return the custom zoom factor
 	 */
 	public double getZoomFactor() {
@@ -357,10 +358,10 @@ public final class ImageViewer {
 	 * default value is 1.
 	 * <p>
 	 * Note that calling this function does not change the current resize strategy.
-	 * 
+	 *
 	 * @param newZoomFactor
 	 *            the new zoom factor for the CUSTOM_ZOOM strategy
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if {@code newZoomFactor} is not a positive number
 	 */
 	public void setZoomFactor(double newZoomFactor) {
@@ -371,11 +372,11 @@ public final class ImageViewer {
 	 * Returns the transformation that is applied to the image. Most commonly the
 	 * transformation is the concatenation of a uniform scale and a translation.
 	 * <p>
-	 * The <code>AffineTransform</code> instance returned by this method should not
+	 * The AffineTransform instance returned by this method should not
 	 * be modified.
-	 * 
+	 *
 	 * @return the transformation applied to the image before painting
-	 * @throws IllegalStateException
+	 * @throws java.lang.IllegalStateException
 	 *             if there is no image set or if the size of the viewer is 0 (for
 	 *             example because it is not in a visible component)
 	 */
@@ -385,7 +386,7 @@ public final class ImageViewer {
 
 	/**
 	 * Adds an overlay as the specified layer.
-	 * 
+	 *
 	 * @param overlay
 	 *            the overlay to add
 	 * @param layer
@@ -398,7 +399,7 @@ public final class ImageViewer {
 
 	/**
 	 * Adds an overlay to layer 1.
-	 * 
+	 *
 	 * @param overlay
 	 *            the overlay to add
 	 */
@@ -408,10 +409,10 @@ public final class ImageViewer {
 
 	/**
 	 * Removes an overlay from the image viewer.
-	 * 
+	 *
 	 * @param overlay
 	 *            the overlay to remove
-	 * @throws IllegalArgumentException
+	 * @throws java.lang.IllegalArgumentException
 	 *             if the overlay is not in the image viewer
 	 */
 	public void removeOverlay(Overlay overlay) {
@@ -420,9 +421,9 @@ public final class ImageViewer {
 
 	/**
 	 * Adds the specified mouse listener to receive mouse events from the image
-	 * component of this image viewer. If listener <code>l</code> is
-	 * <code>null</code>, no exception is thrown and no action is performed.
-	 * 
+	 * component of this image viewer. If listener l is
+	 * null, no exception is thrown and no action is performed.
+	 *
 	 * @param l
 	 *            the mouse listener
 	 */
@@ -435,9 +436,9 @@ public final class ImageViewer {
 	 * motion events from the image component of this image viewer. This method
 	 * performs no function, nor does it throw an exception, if the listener
 	 * specified by the argument was not previously added to this component. If
-	 * listener <code>l</code> is <code>null</code>, no exception is thrown and no
+	 * listener l is null, no exception is thrown and no
 	 * action is performed.
-	 * 
+	 *
 	 * @param l
 	 *            the mouse motion listener
 	 */
@@ -447,9 +448,9 @@ public final class ImageViewer {
 
 	/**
 	 * Adds the specified mouse motion listener to receive mouse events from the
-	 * image component of this image viewer. If listener <code>l</code> is
-	 * <code>null</code>, no exception is thrown and no action is performed.
-	 * 
+	 * image component of this image viewer. If listener l is
+	 * null, no exception is thrown and no action is performed.
+	 *
 	 * @param l
 	 *            the mouse listener
 	 */
@@ -462,9 +463,9 @@ public final class ImageViewer {
 	 * mouse motion events from the image component of this image viewer. This
 	 * method performs no function, nor does it throw an exception, if the listener
 	 * specified by the argument was not previously added to this component. If
-	 * listener <code>l</code> is <code>null</code>, no exception is thrown and no
+	 * listener l is null, no exception is thrown and no
 	 * action is performed.
-	 * 
+	 *
 	 * @param l
 	 *            the mouse motion listener
 	 */
@@ -475,9 +476,9 @@ public final class ImageViewer {
 	/**
 	 * Adds the specified image mouse motion listener to this viewer. The listener
 	 * is notified as the mouse moves over pixels of the image. If listener
-	 * <code>l</code> is {@code null}, no exception is thrown and no action is
+	 * l is {@code null}, no exception is thrown and no action is
 	 * performed.
-	 * 
+	 *
 	 * @param l
 	 *            the image mouse motion listener
 	 */
@@ -490,9 +491,9 @@ public final class ImageViewer {
 	 * receives mouse motion events from the image component of this image viewer.
 	 * This method performs no function, nor does it throw an exception, if the
 	 * listener specified by the argument was not previously added to this
-	 * component. If listener <code>l</code> is {@code null}, no exception is thrown
+	 * component. If listener l is {@code null}, no exception is thrown
 	 * and no action is performed.
-	 * 
+	 *
 	 * @param l
 	 *            the mouse motion listener
 	 */
@@ -503,9 +504,9 @@ public final class ImageViewer {
 	/**
 	 * Adds the specified image mouse listener to this viewer. The listener is
 	 * notified as mouse buttons are clicked over pixels of the image. If listener
-	 * <code>l</code> is {@code null}, no exception is thrown and no action is
+	 * l is {@code null}, no exception is thrown and no action is
 	 * performed.
-	 * 
+	 *
 	 * @param l
 	 *            the image mouse motion listener
 	 */
@@ -518,9 +519,9 @@ public final class ImageViewer {
 	 * mouse click events from the image component of this image viewer. This method
 	 * performs no function, nor does it throw an exception, if the listener
 	 * specified by the argument was not previously added to this component. If the
-	 * listener <code>l</code> is {@code null}, no exception is thrown and no action
+	 * listener l is {@code null}, no exception is thrown and no action
 	 * is performed.
-	 * 
+	 *
 	 * @param l
 	 *            the mouse motion listener
 	 */
@@ -533,7 +534,7 @@ public final class ImageViewer {
 	 * object may be added more than once, and will be called as many times as it is
 	 * added. If the listener is {@code null}, no exception is thrown and no action
 	 * is taken.
-	 * 
+	 *
 	 * @param l
 	 *            the listener to be added
 	 */
@@ -547,7 +548,7 @@ public final class ImageViewer {
 	 * more than once, it will be notified one less time after being removed. If the
 	 * listener is {@code null}, or was never added, no exception is thrown and no
 	 * action is taken.
-	 * 
+	 *
 	 * @param l
 	 *            the listener to remove
 	 */
@@ -562,7 +563,7 @@ public final class ImageViewer {
 	 * property, the listener will be invoked the number of times it was added for
 	 * that property. If the property name or the listener is null, no exception is
 	 * thrown and no action is taken.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the property to listen on
 	 * @param l
@@ -578,7 +579,7 @@ public final class ImageViewer {
 	 * listener was added more than once, it will be notified one less time after
 	 * being removed. If the listener is {@code null}, or was never added, no
 	 * exception is thrown and no action is taken.
-	 * 
+	 *
 	 * @param name
 	 *            the name of the property that was listened on
 	 * @param l
@@ -590,36 +591,46 @@ public final class ImageViewer {
 
 	/**
 	 * Returns the scroll pane of the image viewer.
-	 * 
+	 *
 	 * @return the scroll pane
 	 */
 	public JScrollPane getScrollPane() {
 		return scroller;
 	}
 
+	/**
+	 * <p>Getter for the field synchronizer.</p>
+	 *
+	 * @return a {@link org.loboevolution.img.Synchronizer} object.
+	 */
 	public Synchronizer getSynchronizer() {
 		return synchronizer;
 	}
 
+	/**
+	 * <p>Setter for the field synchronizer.</p>
+	 *
+	 * @param newSync a {@link org.loboevolution.img.Synchronizer} object.
+	 */
 	public void setSynchronizer(Synchronizer newSync) {
 		synchronizer = newSync;
 	}
 
 	/**
 	 * Returns the image pixel corresponding to the given point. If the
-	 * <code>clipToImage</code> parameter is <code>false</code>, then the function
+	 * clipToImage parameter is false, then the function
 	 * will return an appropriately positioned pixel on an infinite plane, even if
-	 * the point is outside the image bounds. If <code>clipToImage</code> is
-	 * <code>true</code> then the function will return <code>null</code> for such
+	 * the point is outside the image bounds. If clipToImage is
+	 * true then the function will return null for such
 	 * positions, and any non-null return value will be a valid image pixel.
-	 * 
+	 *
 	 * @param p
 	 *            a point in component coordinate system
 	 * @param clipToImage
-	 *            whether the function should return <code>null</code> for positions
+	 *            whether the function should return null for positions
 	 *            outside the image bounds
 	 * @return the corresponding image pixel
-	 * @throws IllegalStateException
+	 * @throws java.lang.IllegalStateException
 	 *             if there is no image set or if the size of the viewer is 0 (for
 	 *             example because it is not in a visible component)
 	 */

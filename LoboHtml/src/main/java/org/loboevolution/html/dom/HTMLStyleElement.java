@@ -36,7 +36,7 @@ package org.loboevolution.html.dom;
  * Style information. See the STYLE element definition in HTML 4.01, the CSS
  * module
  * [<a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113'>DOM Level
- * 2 Style Sheets and CSS</a>] and the <code>LinkStyle</code> interface in the
+ * 2 Style Sheets and CSS</a>] and the LinkStyle interface in the
  * StyleSheets module
  * [<a href='http://www.w3.org/TR/2000/REC-DOM-Level-2-Style-20001113'>DOM Level
  * 2 Style Sheets and CSS</a>].
@@ -44,39 +44,54 @@ package org.loboevolution.html.dom;
  * See also the
  * <a href='http://www.w3.org/TR/2003/REC-DOM-Level-2-HTML-20030109'>Document
  * Object Model (DOM) Level 2 HTML Specification</a>.
+ *
+ * @author utente
+ * @version $Id: $Id
  */
 public interface HTMLStyleElement extends HTMLElement {
 	/**
 	 * Enables/disables the style sheet.
+	 *
+	 * @return a boolean.
 	 */
 	boolean getDisabled();
 
 	/**
 	 * Designed for use with one or more target media. See the media attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getMedia();
 
 	/**
 	 * The content type of the style sheet language. See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @return a {@link java.lang.String} object.
 	 */
 	String getType();
 
 	/**
 	 * Enables/disables the style sheet.
+	 *
+	 * @param disabled a boolean.
 	 */
 	void setDisabled(boolean disabled);
 
 	/**
 	 * Designed for use with one or more target media. See the media attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param media a {@link java.lang.String} object.
 	 */
 	void setMedia(String media);
 
 	/**
 	 * The content type of the style sheet language. See the type attribute
 	 * definition in HTML 4.01.
+	 *
+	 * @param type a {@link java.lang.String} object.
 	 */
 	void setType(String type);
 

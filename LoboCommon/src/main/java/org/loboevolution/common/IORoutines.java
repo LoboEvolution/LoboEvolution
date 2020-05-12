@@ -30,9 +30,20 @@ import java.net.URLConnection;
 import java.util.zip.GZIPInputStream;
 
 /**
+ * <p>IORoutines class.</p>
+ *
  * @author J. H. S.
+ * @version $Id: $Id
  */
 public class IORoutines {
+	/**
+	 * <p>load.</p>
+	 *
+	 * @param in a {@link java.io.InputStream} object.
+	 * @param initialBufferSize a int.
+	 * @return an array of {@link byte} objects.
+	 * @throws java.io.IOException if any.
+	 */
 	public static byte[] load(InputStream in, int initialBufferSize) throws IOException {
 		if (initialBufferSize == 0) {
 			initialBufferSize = 1;
@@ -62,6 +73,13 @@ public class IORoutines {
 		return buffer;
 	}
 
+	/**
+	 * <p>getInputStream.</p>
+	 *
+	 * @param connection a {@link java.net.URLConnection} object.
+	 * @return a {@link java.io.InputStream} object.
+	 * @throws java.io.IOException if any.
+	 */
 	public static InputStream getInputStream(URLConnection connection) throws IOException {
 		InputStream in;
 		if (connection instanceof HttpURLConnection) {

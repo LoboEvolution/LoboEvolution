@@ -38,27 +38,47 @@ import com.jtattoo.plaf.JTattooUtilities;
 import com.jtattoo.plaf.LazyImageIcon;
 
 /**
+ * <p>TextureUtils class.</p>
+ *
  * @author Michael Hagen
+ * @version $Id: $Id
  */
 public class TextureUtils {
 
+	/** Constant WINDOW_TEXTURE_TYPE=0 */
 	public static final int WINDOW_TEXTURE_TYPE = 0;
+	/** Constant BACKGROUND_TEXTURE_TYPE=1 */
 	public static final int BACKGROUND_TEXTURE_TYPE = 1;
+	/** Constant ALTER_BACKGROUND_TEXTURE_TYPE=2 */
 	public static final int ALTER_BACKGROUND_TEXTURE_TYPE = 2;
+	/** Constant SELECTED_TEXTURE_TYPE=3 */
 	public static final int SELECTED_TEXTURE_TYPE = 3;
+	/** Constant ROLLOVER_TEXTURE_TYPE=4 */
 	public static final int ROLLOVER_TEXTURE_TYPE = 4;
+	/** Constant PRESSED_TEXTURE_TYPE=5 */
 	public static final int PRESSED_TEXTURE_TYPE = 5;
+	/** Constant DISABLED_TEXTURE_TYPE=6 */
 	public static final int DISABLED_TEXTURE_TYPE = 6;
+	/** Constant MENUBAR_TEXTURE_TYPE=7 */
 	public static final int MENUBAR_TEXTURE_TYPE = 7;
+	/** Constant LAST_TEXTURE_TYPE=7 */
 	public static final int LAST_TEXTURE_TYPE = 7;
 
+	/** Constant WINDOW_TEXTURE_KEY="WindowTexture" */
 	public static final String WINDOW_TEXTURE_KEY = "WindowTexture";
+	/** Constant BACKGROUND_TEXTURE_KEY="BackgroundTexture" */
 	public static final String BACKGROUND_TEXTURE_KEY = "BackgroundTexture";
+	/** Constant ALTER_BACKGROUND_TEXTURE_KEY="AlterBackgroundTexture" */
 	public static final String ALTER_BACKGROUND_TEXTURE_KEY = "AlterBackgroundTexture";
+	/** Constant SELECTED_TEXTURE_KEY="SelectedTexture" */
 	public static final String SELECTED_TEXTURE_KEY = "SelectedTexture";
+	/** Constant ROLLOVER_TEXTURE_KEY="RolloverTexture" */
 	public static final String ROLLOVER_TEXTURE_KEY = "RolloverTexture";
+	/** Constant PRESSED_TEXTURE_KEY="PressedTexture" */
 	public static final String PRESSED_TEXTURE_KEY = "PressedTexture";
+	/** Constant DISABLED_TEXTURE_KEY="DisabledTexture" */
 	public static final String DISABLED_TEXTURE_KEY = "DisabledTexture";
+	/** Constant MENUBAR_TEXTURE_KEY="MenubarTexture" */
 	public static final String MENUBAR_TEXTURE_KEY = "MenubarTexture";
 
 	private static Icon windowTexture = null;
@@ -70,10 +90,28 @@ public class TextureUtils {
 	private static Icon disabledTexture = null;
 	private static Icon menubarTexture = null;
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 * @param textureType a int.
+	 */
 	public static void fillComponent(Graphics g, Component c, int textureType) {
 		JTattooUtilities.fillComponent(g, c, getTexture(textureType));
 	}
 
+	/**
+	 * <p>fillComponent.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 * @param textureType a int.
+	 */
 	public static void fillComponent(Graphics g, Component c, int x, int y, int w, int h, int textureType) {
 		Graphics2D g2D = (Graphics2D) g;
 		Shape savedClip = g2D.getClip();
@@ -103,6 +141,17 @@ public class TextureUtils {
 		g2D.setClip(savedClip);
 	}
 
+	/**
+	 * <p>fillRect.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 * @param c a {@link java.awt.Component} object.
+	 * @param x a int.
+	 * @param y a int.
+	 * @param w a int.
+	 * @param h a int.
+	 * @param textureType a int.
+	 */
 	public static void fillRect(Graphics g, Component c, int x, int y, int w, int h, int textureType) {
 		Graphics2D g2D = (Graphics2D) g;
 		Shape savedClip = g2D.getClip();
@@ -131,6 +180,12 @@ public class TextureUtils {
 		g2D.setClip(savedClip);
 	}
 
+	/**
+	 * <p>getTexture.</p>
+	 *
+	 * @param textureType a int.
+	 * @return a {@link javax.swing.Icon} object.
+	 */
 	public static Icon getTexture(int textureType) {
 		Icon texture = null;
 		switch (textureType) {
@@ -162,6 +217,12 @@ public class TextureUtils {
 		return texture;
 	}
 
+	/**
+	 * <p>getTextureType.</p>
+	 *
+	 * @param c a {@link javax.swing.JComponent} object.
+	 * @return a int.
+	 */
 	public static int getTextureType(JComponent c) {
 		int textureType = TextureUtils.BACKGROUND_TEXTURE_TYPE;
 		Object textureProperty = c.getClientProperty("textureType");
@@ -174,6 +235,9 @@ public class TextureUtils {
 		return textureType;
 	}
 
+	/**
+	 * <p>setUpTextures.</p>
+	 */
 	public static void setUpTextures() {
 		String textureSet = "Default";
 		if (AbstractLookAndFeel.getTheme() != null) {

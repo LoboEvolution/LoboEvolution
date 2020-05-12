@@ -5,6 +5,12 @@ import java.awt.GraphicsEnvironment;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
 
+/**
+ * <p>Screen class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Screen extends AbstractScriptableDelegate {
 	private final GraphicsDevice graphicsDevice;
 	private final GraphicsEnvironment graphicsEnvironment;
@@ -23,6 +29,11 @@ public class Screen extends AbstractScriptableDelegate {
 		}
 	}
 
+	/**
+	 * <p>getAvailHeight.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getAvailHeight() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
 		if (ge == null) {
@@ -31,6 +42,11 @@ public class Screen extends AbstractScriptableDelegate {
 		return ge.getMaximumWindowBounds().height;
 	}
 
+	/**
+	 * <p>getAvailWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getAvailWidth() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
 		if (ge == null) {
@@ -39,6 +55,11 @@ public class Screen extends AbstractScriptableDelegate {
 		return ge.getMaximumWindowBounds().width;
 	}
 
+	/**
+	 * <p>getColorDepth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getColorDepth() {
 		final GraphicsDevice gd = this.graphicsDevice;
 		if (gd == null) {
@@ -47,15 +68,30 @@ public class Screen extends AbstractScriptableDelegate {
 		return gd.getDisplayMode().getBitDepth();
 	}
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getHeight() {
 		final GraphicsDevice gd = this.graphicsDevice;
 		return gd == null ? 0 : gd.getDisplayMode().getHeight();
 	}
 
+	/**
+	 * <p>getPixelDepth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getPixelDepth() {
 		return getColorDepth();
 	}
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a int.
+	 */
 	public int getWidth() {
 		final GraphicsEnvironment ge = this.graphicsEnvironment;
 		if (ge == null) {

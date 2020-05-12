@@ -22,13 +22,33 @@ package org.loboevolution.html.dom.svg;
 
 import org.w3c.dom.DOMException;
 
+/**
+ * <p>SVGZoomAndPan interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGZoomAndPan {
 	// Zoom and Pan Types
+	/** Constant SVG_ZOOMANDPAN_UNKNOWN=0 */
 	static final short SVG_ZOOMANDPAN_UNKNOWN = 0;
+	/** Constant SVG_ZOOMANDPAN_DISABLE=1 */
 	static final short SVG_ZOOMANDPAN_DISABLE = 1;
+	/** Constant SVG_ZOOMANDPAN_MAGNIFY=2 */
 	static final short SVG_ZOOMANDPAN_MAGNIFY = 2;
 
+	/**
+	 * <p>getZoomAndPan.</p>
+	 *
+	 * @return a short.
+	 */
 	short getZoomAndPan();
 
+	/**
+	 * <p>setZoomAndPan.</p>
+	 *
+	 * @param zoomAndPan a short.
+	 * @throws org.w3c.dom.DOMException if any.
+	 */
 	void setZoomAndPan(short zoomAndPan) throws DOMException;
 }

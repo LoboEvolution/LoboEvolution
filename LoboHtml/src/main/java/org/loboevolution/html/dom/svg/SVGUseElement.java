@@ -20,18 +20,54 @@
  */
 package org.loboevolution.html.dom.svg;
 
+/**
+ * <p>SVGUseElement interface.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public interface SVGUseElement extends SVGElement, SVGURIReference, SVGTests, SVGLangSpace,
 		SVGExternalResourcesRequired, SVGStylable, SVGTransformable, Drawable {
 
+	/**
+	 * <p>getX.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getX();
 
+	/**
+	 * <p>getY.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getY();
 
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getWidth();
 
+	/**
+	 * <p>getHeight.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGAnimatedLength} object.
+	 */
 	SVGAnimatedLength getHeight();
 
+	/**
+	 * <p>getInstanceRoot.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getInstanceRoot();
 
+	/**
+	 * <p>getAnimatedInstanceRoot.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.dom.svg.SVGElementInstance} object.
+	 */
 	SVGElementInstance getAnimatedInstanceRoot();
 }

@@ -2,6 +2,12 @@ package org.loboevolution.info;
 
 import java.io.Serializable;
 
+/**
+ * <p>BookmarkInfo class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class BookmarkInfo implements Serializable {
 
 	/** The Constant serialVersionUID. */

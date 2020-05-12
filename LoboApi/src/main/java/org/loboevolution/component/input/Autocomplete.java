@@ -14,8 +14,20 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+/**
+ * <p>Autocomplete class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class Autocomplete {
 
+	/**
+	 * <p>setupAutoComplete.</p>
+	 *
+	 * @param txtInput a {@link javax.swing.JTextField} object.
+	 * @param items a {@link java.util.List} object.
+	 */
 	public static void setupAutoComplete(final JTextField txtInput, final List<String> items) {
 		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
 		final JComboBox<String> cbInput = new JComboBox<String>(model) {

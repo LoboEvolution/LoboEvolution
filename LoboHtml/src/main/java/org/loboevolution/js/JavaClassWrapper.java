@@ -27,6 +27,12 @@ import java.util.Map;
 import org.loboevolution.info.PropertyInfo;
 import org.mozilla.javascript.Function;
 
+/**
+ * <p>JavaClassWrapper class.</p>
+ *
+ * @author utente
+ * @version $Id: $Id
+ */
 public class JavaClassWrapper {
 	private final Map<String, JavaFunctionObject> functions = new HashMap<String, JavaFunctionObject>();
 	private PropertyInfo integerIndexer;
@@ -34,6 +40,11 @@ public class JavaClassWrapper {
 	private PropertyInfo nameIndexer;
 	private final Map<String, PropertyInfo> properties = new HashMap<String, PropertyInfo>();
 
+	/**
+	 * <p>Constructor for JavaClassWrapper.</p>
+	 *
+	 * @param class1 a {@link java.lang.Class} object.
+	 */
 	public JavaClassWrapper(Class class1) {
 		this.javaClass = class1;
 		scanMethods();
@@ -74,24 +85,51 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * <p>getClassName.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */
 	public String getClassName() {
 		final String className = this.javaClass.getName();
 		final int lastDotIdx = className.lastIndexOf('.');
 		return lastDotIdx == -1 ? className : className.substring(lastDotIdx + 1);
 	}
 
+	/**
+	 * <p>getFunction.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.mozilla.javascript.Function} object.
+	 */
 	public Function getFunction(String name) {
 		return this.functions.get(name);
 	}
 
+	/**
+	 * <p>Getter for the field integerIndexer.</p>
+	 *
+	 * @return a {@link org.loboevolution.info.PropertyInfo} object.
+	 */
 	public PropertyInfo getIntegerIndexer() {
 		return this.integerIndexer;
 	}
 
+	/**
+	 * <p>Getter for the field nameIndexer.</p>
+	 *
+	 * @return a {@link org.loboevolution.info.PropertyInfo} object.
+	 */
 	public PropertyInfo getNameIndexer() {
 		return this.nameIndexer;
 	}
 
+	/**
+	 * <p>getProperty.</p>
+	 *
+	 * @param name a {@link java.lang.String} object.
+	 * @return a {@link org.loboevolution.info.PropertyInfo} object.
+	 */
 	public PropertyInfo getProperty(String name) {
 		return this.properties.get(name);
 	}
@@ -116,6 +154,13 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/**
+	 * <p>newInstance.</p>
+	 *
+	 * @return a {@link java.lang.Object} object.
+	 * @throws java.lang.InstantiationException if any.
+	 * @throws java.lang.IllegalAccessException if any.
+	 */
 	public Object newInstance() throws InstantiationException, IllegalAccessException {
 		return this.javaClass.newInstance();
 	}
@@ -157,6 +202,7 @@ public class JavaClassWrapper {
 		}
 	}
 
+	/** {@inheritDoc} */
 	@Override
 	public String toString() {
 		return this.javaClass.getName();
