@@ -64,5 +64,14 @@ gradle default
 ### Status build
 [Build](https://github.com/oswetto/LoboEvolution/actions)
 
+### Maven Dependency(add in your pom)
+```
+<dependency>
+  <groupId>com.github.oswetto</groupId>
+  <artifactId>loboevolution</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+
 ### Pre-History
 The history of all commits that transform LoboBrowser in LoboEvoluiton is available in [a separate repository](https://github.com/oswetto/LoboEvolutionPreHistory).
