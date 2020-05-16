@@ -30,6 +30,18 @@
 	</a>
 </p>
 
+<p align="center">
+	<a href="https://github.com/oswetto/LoboEvolution/actions?query=workflow%3A%22Java+CI%22">
+		<img src="https://github.com/oswetto/LoboEvolution/workflows/Java%20CI/badge.svg" alt="CI">
+	</a>
+	<a href="https://github.com/oswetto/LoboEvolution/actions?query=workflow%3A%22Java+CI+with+Maven%22">
+		<img src="https://github.com/oswetto/LoboEvolution/workflows/Java%20CI%20with%20Maven/badge.svg" alt="Maven">
+	</a>
+	<a href="https://github.com/oswetto/LoboEvolution/actions?query=workflow%3A%22Java+CI+with+Gradle%22">
+		<img src="https://github.com/oswetto/LoboEvolution/workflows/Java%20CI%20with%20Gradle/badge.svg" alt="Gradle">
+	</a>
+</p>
+
 Lobo Evolution began as a fork of the now-defunct project called the LoboBrowser [credits](https://sourceforge.net/projects/xamj/).
 Lobo Evolution is an extensible all-Java web browser and RIA platform. It supports HTML 4, HTML 5, Javascript, CSS2/CSS3 and Java (Swing/AWT) rendering.
 
