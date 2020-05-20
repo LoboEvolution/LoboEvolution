@@ -23,6 +23,7 @@ package org.loboevolution.html.style;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -33,6 +34,8 @@ import java.util.StringTokenizer;
 import org.loboevolution.info.FontInfo;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
+import org.loboevolution.net.HttpNetwork;
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.renderstate.RenderState;
@@ -110,7 +113,7 @@ public class HtmlValues {
 				insetsArray[0] = 0;
 			}
 		}
-		
+
 		switch (size) {
 		case 1:
 			final int val = insetsArray[0];
@@ -132,23 +135,55 @@ public class HtmlValues {
 	 * @param listStyleText a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.style.ListStyle} object.
 	 */
-	public static ListStyle getListStyle(String listStyleText) {
+	public static ListStyle getListStyle(String listStyleText, String baseUri) {
 		final ListStyle listStyle = new ListStyle();
 		final String[] tokens = HtmlValues.splitCssValue(listStyleText);
 		for (final String token : tokens) {
 			final ListValues listStyleType = HtmlValues.getListStyleType(token);
-			if (listStyleType != ListValues.TYPE_UNSET) {
+			if (listStyleType != ListValues.TYPE_UNSET && listStyleType != ListValues.NONE && listStyle.getType() < 1) {
 				listStyle.setType(listStyleType.getValue());
 			} else if (HtmlValues.isUrl(token)) {
-				// TODO: listStyle.image
+				listStyle.setType(ListValues.TYPE_URL.getValue());
+				listStyle.setImage(getListStyleImage(token, baseUri));
 			} else {
 				final ListValues listStylePosition = HtmlValues.getListStylePosition(token);
-				if (listStylePosition != ListValues.POSITION_UNSET) {
+				if (listStylePosition != ListValues.POSITION_UNSET && listStylePosition != ListValues.NONE) {
 					listStyle.setPosition(listStylePosition.getValue());
 				}
 			}
 		}
 		return listStyle;
+	}
+	
+	
+	/**
+	 * <p>getListStyleImage.</p>
+	 *
+	 * @param token a {@link java.lang.String} object.
+	 * @return a {@link java.awt.Image} object.
+	 */
+	public static Image getListStyleImage(String token, String baseUri) {
+		Image image = null;
+		String start = "url(";
+		int startIdx = start.length();
+		int closingIdx = token.lastIndexOf(')');
+		String quotedUri = token.substring(startIdx, closingIdx);
+		String[] items = { "http", "https", "file" };
+		if (Strings.containsWords(quotedUri, items)) {
+			try {
+				image = HttpNetwork.getImage(quotedUri, null);
+			} catch (Exception e) {
+				image = null;
+			}
+		} else {
+			try {
+				image = HttpNetwork.getImage(quotedUri, baseUri);
+			} catch (Exception e) {
+				image = null;
+			}
+		}
+
+		return image;
 	}
 
 	/**
@@ -264,10 +299,6 @@ public class HtmlValues {
 		} catch (final Exception ex) {
 			return errorValue;
 		}
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(getPixelSize("1in", null, -1));
 	}
 	
 	/**

@@ -20,6 +20,8 @@
 */
 package org.loboevolution.html.renderer;
 
+import java.awt.Image;
+
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
@@ -66,7 +68,7 @@ class BaseRListElement extends RBlock {
 		ListStyle listStyle = null;
 		final String listStyleText = props.getListStyle();
 		if (listStyleText != null) {
-			listStyle = HtmlValues.getListStyle(listStyleText);
+			listStyle = HtmlValues.getListStyle(listStyleText, rootElement.getDocumentBaseURI());
 		}
 		final String listStyleTypeText = props.getListStyleType();
 		if (listStyleTypeText != null) {
@@ -78,6 +80,17 @@ class BaseRListElement extends RBlock {
 				listStyle.setType(listType.getValue());
 			}
 		}
+	
+		final String listStyleImage = props.getListStyleImage();
+		if (listStyleImage != null && HtmlValues.isUrl(listStyleImage)) {
+			final Image img = HtmlValues.getListStyleImage(listStyleImage, rootElement.getDocumentBaseURI());
+			if (listStyle == null) {
+				listStyle = new ListStyle();
+			}
+			listStyle.setType(ListValues.TYPE_URL.getValue());
+			listStyle.setImage(img);
+		}
+		
 		if (listStyle == null || ListValues.get(listStyle.getType()) == ListValues.TYPE_UNSET) {
 			final String typeAttributeText = rootElement.getAttribute("type");
 			if (typeAttributeText != null) {

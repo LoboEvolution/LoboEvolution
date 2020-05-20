@@ -116,6 +116,7 @@ class RListItem extends BaseRListElement {
 		final RBlockViewport layout = this.bodyLayout;
 		if (layout != null) {
 			final ListStyle listStyle = this.listStyle;
+			
 			ListValues bulletType = listStyle == null ? ListValues.TYPE_UNSET : ListValues.get(listStyle.getType());
 			if (bulletType != ListValues.TYPE_NONE) {
 				if (bulletType == ListValues.TYPE_UNSET) {
@@ -143,7 +144,7 @@ class RListItem extends BaseRListElement {
 					final int bulletLeft = bulletRight - BULLET_WIDTH;
 					final int bulletNumber = this.count;
 					String numberText = null;
-					
+										
 					switch (bulletType) {
 					case TYPE_DECIMAL:
 						numberText = bulletNumber + ".";
@@ -174,6 +175,9 @@ class RListItem extends BaseRListElement {
 						break;
 					case TYPE_UPPER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toUpperCase() + ".";
+						break;
+					case TYPE_URL:
+						g.drawImage(listStyle.getImage(), bulletLeft, bulletTop, null);
 						break;
 					default:
 						numberText = null;

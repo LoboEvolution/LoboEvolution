@@ -38,6 +38,8 @@ public enum ListValues {
 	
 	TYPE_DECIMAL_LEADING_ZERO(11),
 	
+	TYPE_URL(12),
+	
 	POSITION_INSIDE(253),
 	
 	POSITION_OUTSIDE(254),
