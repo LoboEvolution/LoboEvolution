@@ -1017,7 +1017,7 @@ public class StyleSheetRenderState implements RenderState {
 			counterArray.add(null);
 		}
 		final Integer integer = (Integer) counterArray.get(nesting);
-		final int prevValue = integer == null ? 0 : integer.intValue();
+		final int prevValue = (integer == null || integer == 0) ? 1 : integer.intValue();
 		counterArray.set(nesting, Integer.valueOf(prevValue + 1));
 		return prevValue;
 	}
