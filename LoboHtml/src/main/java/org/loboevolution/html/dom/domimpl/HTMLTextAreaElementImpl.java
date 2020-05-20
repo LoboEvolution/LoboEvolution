@@ -23,8 +23,14 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import org.loboevolution.common.Nodes;
+import org.loboevolution.common.Strings;
+import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLTextAreaElement;
+import org.loboevolution.html.dom.input.TextArea;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <p>HTMLTextAreaElementImpl class.</p>
@@ -33,6 +39,9 @@ import org.loboevolution.html.dom.HTMLTextAreaElement;
  * @version $Id: $Id
  */
 public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HTMLTextAreaElement {
+	
+	private TextArea text;
+
 	/**
 	 * <p>Constructor for HTMLTextAreaElementImpl.</p>
 	 */
@@ -52,15 +61,14 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public String getAccessKey() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("accessKey");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getCols() {
-		// TODO Auto-generated method stub
-		return 0;
+		String cols = this.getAttribute("cols");
+		return Strings.isNotBlank(cols) ? Integer.parseInt(cols) : -1;
 	}
 
 	/** {@inheritDoc} */
@@ -73,8 +81,8 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
-		// TODO Auto-generated method stub
-		return false;
+		final String disabled = getAttribute("disabled");
+		return disabled == null ? false : true;
 	}
 
 	/** {@inheritDoc} */
@@ -87,22 +95,21 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("name");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean getReadOnly() {
-		// TODO Auto-generated method stub
-		return false;
+		final String readonly = getAttribute("readonly");
+		return readonly == null ? false : true;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getRows() {
-		// TODO Auto-generated method stub
-		return 0;
+		String rows = this.getAttribute("rows");
+		return Strings.isNotBlank(rows) ? Integer.parseInt(rows) : -1;
 	}
 
 	/** {@inheritDoc} */
@@ -115,21 +122,19 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
-		return null;
+		return getAttribute("type");
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
-		// TODO Auto-generated method stub
-		return null;
+		return getText();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void select() {
-		// TODO Auto-generated method stub
+		if(text!= null) text.selectAll();
 		
 	}
 
@@ -143,7 +148,7 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public void setCols(int cols) {
-		// TODO Auto-generated method stub
+		setAttribute("cols", String.valueOf(cols));
 		
 	}
 
@@ -157,28 +162,28 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public void setDisabled(boolean disabled) {
-		// TODO Auto-generated method stub
+		setAttribute("disabled", String.valueOf(disabled));
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
+		setAttribute("name", name);
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setReadOnly(boolean readOnly) {
-		// TODO Auto-generated method stub
+		setAttribute("readonly", String.valueOf(readOnly));
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setRows(int rows) {
-		// TODO Auto-generated method stub
+		setAttribute("rows", String.valueOf(rows));
 		
 	}
 
@@ -194,5 +199,50 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	public void setValue(String value) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public int getMaxLength() {
+		try {
+			final String maxLength = getAttribute("maxlength");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return Integer.MAX_VALUE;
+		}
+	}
+
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param ic a {@link org.loboevolution.html.control.TextAreaControl} object.
+	 */
+	public void draw(TextAreaControl ic) {
+		text = new TextArea(this, ic);
+	}
+	
+	
+	private String getText() {
+		String text = "";
+		if (hasChildNodes()) {
+			NodeList children = getChildNodes();
+			for (Node child : Nodes.iterable(children)) {
+				if (child.getNodeType() == Node.TEXT_NODE) {
+					String nodeValue = child.getNodeValue();
+					String childText = "";
+					nodeValue = nodeValue.replace('\n', ' ');
+					nodeValue = nodeValue.replace('\r', ' ');
+					nodeValue = nodeValue.replace('\t', ' ');
+					childText = nodeValue;
+					text += childText + " ";
+				}
+			}
+		}
+
+		if (text.length() > 0) {
+			return text.substring(0, text.length() - 1);
+		} else {
+			return text;
+		}
 	}
 }

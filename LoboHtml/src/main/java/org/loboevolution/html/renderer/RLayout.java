@@ -15,6 +15,7 @@ import org.loboevolution.html.control.RSSControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.SVGControl;
 import org.loboevolution.html.control.SelectControl;
+import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.control.UIControl;
 import org.loboevolution.html.control.UIControlWrapper;
 import org.loboevolution.html.dom.domimpl.HTMLButtonElementImpl;
@@ -24,6 +25,7 @@ import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
 import org.loboevolution.html.dom.rss.RSSElementImpl;
 import org.loboevolution.html.dom.svgimpl.SVGSVGElementImpl;
@@ -493,7 +495,7 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			UIControl control = new InputControl((HTMLInputElementImpl) markupElement);
+			UIControl control = new TextAreaControl((HTMLTextAreaElementImpl) markupElement);
 			return new RUIControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
 					bodyLayout.userAgentContext);
 		}

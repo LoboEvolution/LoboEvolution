@@ -143,6 +143,9 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	 * @return a {@link java.lang.String} object.
 	 */
 	String getValue();
+	
+	
+	int getMaxLength();
 
 	/**
 	 * Select the contents of the TEXTAREA.
