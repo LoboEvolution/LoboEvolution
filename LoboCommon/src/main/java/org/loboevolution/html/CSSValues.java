@@ -72,7 +72,7 @@ public enum CSSValues {
 
 	DEFAULT("default"),
 
-	DISC("dis"),
+	DISC("disc"),
 
 	DOTTED("dotted"),
 
