@@ -110,16 +110,18 @@ public class HtmlValues {
 				insetsArray[0] = 0;
 			}
 		}
-		if (size == 4) {
-			return new Insets(insetsArray[0], insetsArray[3], insetsArray[2], insetsArray[1]);
-		} else if (size == 1) {
+		
+		switch (size) {
+		case 1:
 			final int val = insetsArray[0];
 			return new Insets(val, val, val, val);
-		} else if (size == 2) {
+		case 2:
 			return new Insets(insetsArray[0], insetsArray[1], insetsArray[0], insetsArray[1]);
-		} else if (size == 3) {
+		case 3:
 			return new Insets(insetsArray[0], insetsArray[1], insetsArray[2], insetsArray[1]);
-		} else {
+		case 4:
+			return new Insets(insetsArray[0], insetsArray[3], insetsArray[2], insetsArray[1]);
+		default:
 			return null;
 		}
 	}
@@ -220,8 +222,13 @@ public class HtmlValues {
 			String units = "";
 			String text = "";
 			if(isUnits(spec)) {
-				units = lcSpec.substring(lcSpec.length() - 2, lcSpec.length());
-				text = lcSpec.substring(0, lcSpec.length() - 2);
+				if(spec.endsWith("q")) {
+					units = lcSpec.substring(lcSpec.length() - 1, lcSpec.length());
+					text = lcSpec.substring(0, lcSpec.length() - 1);
+				} else {
+					units = lcSpec.substring(lcSpec.length() - 2, lcSpec.length());
+					text = lcSpec.substring(0, lcSpec.length() - 2);
+				}
 			}
 					
 			switch (units) {
@@ -244,22 +251,23 @@ public class HtmlValues {
 				return inches(2.54, dpi, text);
 			case "mm":
 				return inches(25.4, dpi, text);
+			case "q":
+				return inches(1016, dpi, text);
 			case "ex":
 				final double xHeight = renderState.getFontMetrics().getAscent() * 0.47;
 				return (int) Math.round(xHeight * Double.parseDouble(text));
 			case "in":
-				final String valText = lcSpec.substring(0, lcSpec.length() - 2);
-				try {
-					return (int) Math.round(dpi * Double.parseDouble(valText));
-				} catch (final NumberFormatException nfe) {
-					return errorValue;
-				}
+				return (int) Math.round(dpi * Double.parseDouble(text));
 			default:
 				return (int) Math.round(Double.parseDouble(lcSpec));
 			}
 		} catch (final Exception ex) {
 			return errorValue;
 		}
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(getPixelSize("1in", null, -1));
 	}
 	
 	/**
@@ -548,8 +556,15 @@ public class HtmlValues {
 	}
 	
 	private static boolean isUnits(String token) {
-		if (token.endsWith("px") || token.endsWith("pt") || token.endsWith("pc") || token.endsWith("cm")
-				|| token.endsWith("mm") || token.endsWith("ex") || token.endsWith("em")) {
+		if (token.endsWith("px") || 
+			token.endsWith("pt") ||
+			token.endsWith("pc") ||
+			token.endsWith("cm") ||
+			token.endsWith("mm") ||
+			token.endsWith("ex") ||
+			token.endsWith("em") ||
+			token.endsWith("in") ||
+			token.endsWith("q")) {
 			return true;
 		}
 		return false;
