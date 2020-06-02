@@ -40,6 +40,7 @@ import java.util.logging.Level;
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
+import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -970,12 +971,26 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					for (int i = 0; i < btop; i++) {
 						final int leftOffset = i * bleft / btop;
 						final int rightOffset = i * bright / btop;
-						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, startX + leftOffset, startY + i,
-									startX + totalWidth - rightOffset - 1, startY + i, 10 + btop, 6);
-						} else {
-							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1,
-									startY + i);
+						
+						switch (borderStyle) {
+						case BorderInsets.BORDER_STYLE_DASHED:
+							GUITasks.drawDashed(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i, 10 + btop, 6);
+							break;
+						case BorderInsets.BORDER_STYLE_DOTTED:
+							GUITasks.drawDotted(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i, btop);
+							break;
+						case BorderInsets.BORDER_STYLE_INSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));	
+							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
+							break;
+						case BorderInsets.BORDER_STYLE_OUTSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));	
+							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
+							break;	
+						case BorderInsets.BORDER_STYLE_SOLID:
+						default:
+							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
+							break;
 						}
 					}
 				}
@@ -986,12 +1001,26 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					for (int i = 0; i < bright; i++) {
 						final int topOffset = i * btop / bright;
 						final int bottomOffset = i * bbottom / bright;
-						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i,
-									startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
-						} else {
-							g.drawLine(lastX - i, startY + topOffset, lastX - i,
-									startY + totalHeight - bottomOffset - 1);
+						
+						switch (borderStyle) {
+						case BorderInsets.BORDER_STYLE_DASHED:
+							GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
+							break;
+						case BorderInsets.BORDER_STYLE_DOTTED:
+							GUITasks.drawDotted(g, lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1, bright);
+							break;
+						case BorderInsets.BORDER_STYLE_INSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderRightColor(), -0.3));	
+							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
+							break;
+						case BorderInsets.BORDER_STYLE_OUTSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderRightColor(), -0.3));	
+							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
+							break;	
+						case BorderInsets.BORDER_STYLE_SOLID:
+						default:
+							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
+							break;
 						}
 					}
 				}
@@ -1002,12 +1031,26 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					for (int i = 0; i < bbottom; i++) {
 						final int leftOffset = i * bleft / bbottom;
 						final int rightOffset = i * bright / bbottom;
-						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, startX + leftOffset, lastY - i,
-									startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
-						} else {
-							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1,
-									lastY - i);
+						
+						switch (borderStyle) {
+						case BorderInsets.BORDER_STYLE_DASHED:
+							GUITasks.drawDashed(g, startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
+							break;
+						case BorderInsets.BORDER_STYLE_DOTTED:
+							GUITasks.drawDotted(g, startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i, bbottom);
+							break;
+						case BorderInsets.BORDER_STYLE_INSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderBottomColor(), -0.3));	
+							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
+							break;
+						case BorderInsets.BORDER_STYLE_OUTSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderBottomColor(), -0.3));	
+							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
+							break;	
+						case BorderInsets.BORDER_STYLE_SOLID:
+						default:
+							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
+							break;
 						}
 					}
 				}
@@ -1017,12 +1060,26 @@ public abstract class BaseElementRenderable extends BaseRCollection
 					for (int i = 0; i < bleft; i++) {
 						final int topOffset = i * btop / bleft;
 						final int bottomOffset = i * bbottom / bleft;
-						if (borderStyle == BorderInsets.BORDER_STYLE_DASHED) {
-							GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i,
-									startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
-						} else {
-							g.drawLine(startX + i, startY + topOffset, startX + i,
-									startY + totalHeight - bottomOffset - 1);
+						
+						switch (borderStyle) {
+						case BorderInsets.BORDER_STYLE_DASHED:
+							GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
+							break;
+						case BorderInsets.BORDER_STYLE_DOTTED:
+							GUITasks.drawDotted(g, startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1, bleft);
+							break;
+						case BorderInsets.BORDER_STYLE_INSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderLeftColor(), -0.3));	
+							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
+							break;
+						case BorderInsets.BORDER_STYLE_OUTSET:
+							g.setColor(ColorFactory.getAdjustedColor(getBorderLeftColor(), -0.3));	
+							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
+							break;	
+						case BorderInsets.BORDER_STYLE_SOLID:
+						default:
+							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
+							break;
 						}
 					}
 				}

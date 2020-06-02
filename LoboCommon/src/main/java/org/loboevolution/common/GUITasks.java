@@ -20,8 +20,11 @@
 */
 package org.loboevolution.common;
 
+import java.awt.BasicStroke;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Stroke;
 
 /**
  * <p>GUITasks class.</p>
@@ -84,8 +87,23 @@ public class GUITasks {
 				}
 			}
 		} else {
-			// Not supported
 			g.drawLine(x1, y1, x2, y2);
+		}
+	}
+	
+	
+	public static void drawDotted(final Graphics g, final int x1, final int y1, final int x2, final int y2, final float width) {
+		final Graphics ng = g.create();
+		try {
+			final Graphics2D g2d = (Graphics2D) ng.create();
+			final float dot = Math.max(2f, width);
+			final float[] dotPattern = { dot };
+			final Stroke stroke = new BasicStroke(width, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 1.0f, dotPattern, 0.0f);
+			g2d.setStroke(stroke);
+			g2d.drawLine(x1, y1, x2, y2);
+			g2d.dispose();
+		} finally {
+			ng.dispose();
 		}
 	}
 

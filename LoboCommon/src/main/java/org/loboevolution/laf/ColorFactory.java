@@ -291,7 +291,11 @@ public class ColorFactory {
 		return false;
 	}
 	
-	
+	public static Color getAdjustedColor(Color c, double factor) {
+		double f = 1 - Math.min(Math.abs(factor), 1);
+		double inc = (factor > 0 ? 255 * (1 - f) : 0);
+		return new Color((int) (c.getRed() * f + inc), (int) (c.getGreen() * f + inc), (int) (c.getBlue() * f + inc));
+	}
 
 	private Map<String, Color> mapColor() {
 		final Map<String, Color> colorMap = new HashMap<String, Color>();

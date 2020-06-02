@@ -31,14 +31,18 @@ import org.loboevolution.html.renderstate.RenderState;
  * @version $Id: $Id
  */
 public class HtmlInsets {
-	/** Constant TYPE_AUTO=2 */
-	public static final int TYPE_AUTO = 2;
-	/** Constant TYPE_PERCENT=3 */
-	public static final int TYPE_PERCENT = 3;
-	/** Constant TYPE_PIXELS=1 */
-	public static final int TYPE_PIXELS = 1;
+	
 	/** Constant TYPE_UNDEFINED=0 */
 	public static final int TYPE_UNDEFINED = 0;
+	
+	/** Constant TYPE_PIXELS=1 */
+	public static final int TYPE_PIXELS = 1;
+	
+	/** Constant TYPE_AUTO=2 */
+	public static final int TYPE_AUTO = 2;
+	
+	/** Constant TYPE_PERCENT=3 */
+	public static final int TYPE_PERCENT = 3;
 	
 	public int top, bottom, left, right;
 

@@ -17,27 +17,36 @@ import org.w3c.dom.css.CSS3Properties;
  */
 public class BorderInsets {
 	
-	/** Constant BORDER_STYLE_DASHED=3 */
-	public static final int BORDER_STYLE_DASHED = 3;
+	/** Constant BORDER_STYLE_NONE=0 */
+	public static final int BORDER_STYLE_NONE = 0;
+	
+	/** Constant BORDER_STYLE_HIDDEN=1 */
+	public static final int BORDER_STYLE_HIDDEN = 1;
+	
 	/** Constant BORDER_STYLE_DOTTED=2 */
 	public static final int BORDER_STYLE_DOTTED = 2;
+	
+	/** Constant BORDER_STYLE_DASHED=3 */
+	public static final int BORDER_STYLE_DASHED = 3;
+	
+	/** Constant BORDER_STYLE_SOLID=4 */
+	public static final int BORDER_STYLE_SOLID = 4;
+			
 	/** Constant BORDER_STYLE_DOUBLE=5 */
 	public static final int BORDER_STYLE_DOUBLE = 5;
 
 	/** Constant BORDER_STYLE_GROOVE=6 */
 	public static final int BORDER_STYLE_GROOVE = 6;
-	/** Constant BORDER_STYLE_HIDDEN=1 */
-	public static final int BORDER_STYLE_HIDDEN = 1;
-	/** Constant BORDER_STYLE_INSET=8 */
-	public static final int BORDER_STYLE_INSET = 8;
-	/** Constant BORDER_STYLE_NONE=0 */
-	public static final int BORDER_STYLE_NONE = 0;
-	/** Constant BORDER_STYLE_OUTSET=9 */
-	public static final int BORDER_STYLE_OUTSET = 9;
+	
 	/** Constant BORDER_STYLE_RIDGE=7 */
 	public static final int BORDER_STYLE_RIDGE = 7;
-	/** Constant BORDER_STYLE_SOLID=4 */
-	public static final int BORDER_STYLE_SOLID = 4;
+	
+	/** Constant BORDER_STYLE_INSET=8 */
+	public static final int BORDER_STYLE_INSET = 8;
+		
+	/** Constant BORDER_STYLE_OUTSET=9 */
+	public static final int BORDER_STYLE_OUTSET = 9;
+	
 	/** Constant DEFAULT_BORDER_WIDTH=2 */
 	public static final int DEFAULT_BORDER_WIDTH = 2;
 	
@@ -50,16 +59,26 @@ public class BorderInsets {
 	 */
 	public static BorderInfo getBorderInfo(CSS3Properties properties, RenderState renderState) {
 		final BorderInfo binfo = new BorderInfo();
-
-		binfo.setTopStyle(getBorderStyle(properties.getBorderTopStyle()));
-		binfo.setRightStyle(getBorderStyle(properties.getBorderRightStyle()));
-		binfo.setBottomStyle(getBorderStyle(properties.getBorderBottomStyle()));
-		binfo.setLeftStyle(getBorderStyle(properties.getBorderLeftStyle()));
 		
-		binfo.setTopColor(getBorderColor(properties.getBorderTopColor(), renderState));
-	    binfo.setRightColor(getBorderColor(properties.getBorderRightColor(), renderState));
-	    binfo.setBottomColor(getBorderColor(properties.getBorderBottomColor(), renderState));
-	    binfo.setLeftColor(getBorderColor(properties.getBorderLeftColor(), renderState));
+		final int topStyle = getBorderStyle(properties.getBorderTopStyle());
+		final int rightStyle = getBorderStyle(properties.getBorderRightStyle());
+		final int bottomStyle = getBorderStyle(properties.getBorderBottomStyle());
+		final int leftStyle = getBorderStyle(properties.getBorderLeftStyle());
+		
+		final Color topColor = getBorderColor(properties.getBorderTopColor(), renderState);
+		final Color rightColor = getBorderColor(properties.getBorderRightColor(), renderState);
+		final Color bottomColor = getBorderColor(properties.getBorderBottomColor(), renderState);
+		final Color leftColor = getBorderColor(properties.getBorderLeftColor(), renderState);
+
+		binfo.setTopStyle(topStyle);
+		binfo.setRightStyle(rightStyle);
+		binfo.setBottomStyle(bottomStyle);
+		binfo.setLeftStyle(leftStyle);
+		
+		binfo.setTopColor(topColor);
+	    binfo.setRightColor(rightColor);
+	    binfo.setBottomColor(bottomColor);
+	    binfo.setLeftColor(leftColor);
 
 		populateBorderInsets(binfo, properties, renderState);
 
