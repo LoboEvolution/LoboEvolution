@@ -18,13 +18,9 @@
 
     Contact info: lobochief@users.sourceforge.net; ivan.difrancesco@yahoo.it
 */
-/*
- * Created on Dec 3, 2005
- */
 package org.loboevolution.html.renderer;
 
 import org.loboevolution.html.style.HtmlLength;
-import org.loboevolution.html.style.HtmlValues;
 
 class VirtualCell {
 	private final RTableCell actualCell;
@@ -69,7 +65,7 @@ class VirtualCell {
 	public HtmlLength getHeightLength() {
 		final RTableCell cell = this.actualCell;
 		final String heightText = cell.getHeightText();
-		HtmlLength length = heightText == null ? null : new HtmlLength(HtmlValues.getPixelSize(heightText, cell.getModelNode().getRenderState(), 0)); 
+		HtmlLength length = heightText == null ? null : new HtmlLength(heightText); 
 		if (length != null) {
 			length.divideBy(cell.getRowSpan());
 		}
@@ -93,7 +89,7 @@ class VirtualCell {
 	public HtmlLength getWidthLength() {
 		final RTableCell cell = this.actualCell;
 		final String widthText = cell.getWidthText();
-		HtmlLength length = widthText == null ? null : new HtmlLength(HtmlValues.getPixelSize(widthText, cell.getModelNode().getRenderState(), 0)); 
+		HtmlLength length = widthText == null ? null : new HtmlLength(widthText); 
 		if (length != null) {
 			length.divideBy(cell.getColSpan());
 		}
@@ -126,28 +122,4 @@ class VirtualCell {
 	public void setRow(int row) {
 		this.row = row;
 	}
-
-//	public Dimension layoutMinWidth() {
-//
-//		ActualCell cell = this.actualCell;
-//
-//		Dimension ad = cell.layoutMinWidth();
-//
-//		int colspan = cell.getColSpan();
-//
-//		int rowspan = cell.getRowSpan();
-//
-//		if(colspan == 1 && rowspan == 1) {
-//
-//			return ad;
-//
-//		}
-//
-//		else {
-//
-//			return new Dimension(ad.width / colspan, ad.height / rowspan);
-//
-//		}
-//
-//	}
 }

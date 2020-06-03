@@ -140,8 +140,7 @@ class TableMatrix {
 				}
 
 				if (props.getMaxWidth() != null) {
-					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0,
-							availWidth);
+					int maxWidth = HtmlValues.getPixelSize(props.getMaxWidth(), element.getRenderState(), 0, availWidth);
 
 					if (width == 0 || width > maxWidth) {
 						width = maxWidth;
@@ -149,8 +148,7 @@ class TableMatrix {
 				}
 
 				if (props.getMinWidth() != null) {
-					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0,
-							availWidth);
+					int minWidth = HtmlValues.getPixelSize(props.getMinWidth(), element.getRenderState(), 0, availWidth);
 
 					if (width == 0 || width < minWidth) {
 						width = minWidth;
@@ -197,8 +195,7 @@ class TableMatrix {
 				}
 
 				if (props.getMaxHeight() != null) {
-					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0,
-							availHeight);
+					int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), 0, availHeight);
 
 					if (height == 0 || height > maxHeight) {
 						height = maxHeight;
@@ -206,8 +203,7 @@ class TableMatrix {
 				}
 
 				if (props.getMinHeight() != null) {
-					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0,
-							availHeight);
+					int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), 0, availHeight);
 
 					if (height == 0 || height < minHeight) {
 						height = minHeight;

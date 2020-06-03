@@ -109,7 +109,9 @@ class RTableCell extends RBlock {
         String heightText = props == null ? null : props.getHeight();
         if (heightText == null) {
             return this.cellElement.getCurrentStyle().getHeight();
-        } else {
+        } else if ("inherit".equals(heightText)) {
+			return this.cellElement.getParentStyle().getWidth();
+		} else {
             return heightText;
         }
 	}
@@ -163,12 +165,14 @@ class RTableCell extends RBlock {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getWidthText() {
-        AbstractCSSProperties props = this.cellElement.getCurrentStyle();
-        String heightText = props == null ? null : props.getHeight();
-        if (heightText == null) {
+		AbstractCSSProperties props = this.cellElement.getCurrentStyle();
+		String widthText = props == null ? null : props.getWidth();
+		if (widthText == null) {
         	return this.cellElement.getCurrentStyle().getWidth();
-        } else {
-            return heightText;
+        } else if ("inherit".equals(widthText)) {
+			return this.cellElement.getParentStyle().getWidth();
+		} else {
+            return widthText;
         }
 	}
 
