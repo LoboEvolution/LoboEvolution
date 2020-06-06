@@ -24,7 +24,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringTokenizer;
+import java.util.stream.Collectors;
 
 /**
  * The Class Strings.
@@ -461,6 +464,19 @@ public class Strings {
 		}
 
 		return arrLis.toArray(new String[0]);
+	}
+	
+	/**
+	 * <p>getTokensWithCollection.</p>
+	 *
+	 * @param subject a {@link java.lang.String} object.
+	 * @param delimiters a {@link java.lang.String} object.
+	 * @return an list of {@link java.lang.String} objects.
+	 */
+	public static List<String> getTokensWithCollection(String str, String delimiters) {
+	    return Collections.list(new StringTokenizer(str, delimiters, true)).stream()
+	      .map(token -> (String) token)
+	      .collect(Collectors.toList());
 	}
 
 	/**
