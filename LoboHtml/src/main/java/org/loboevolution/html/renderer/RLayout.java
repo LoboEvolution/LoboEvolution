@@ -9,6 +9,7 @@ import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.control.CanvasControl;
 import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.control.ImgControl;
+import org.loboevolution.html.control.ImgSvgControl;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.control.RImgControl;
 import org.loboevolution.html.control.RSSControl;
@@ -328,9 +329,14 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final UIControl control = new ImgControl((HTMLImageElementImpl) markupElement);
-			return new RImgControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext,
-					bodyLayout.userAgentContext);
+			UIControl control = null;
+			HTMLImageElementImpl image = (HTMLImageElementImpl) markupElement;
+			if(image.getSrc().endsWith(".svg")) {
+				control = new ImgSvgControl(image);
+			} else {
+				control = new ImgControl(image);	
+			}
+			return new RImgControl(markupElement, control, bodyLayout.container, bodyLayout.frameContext, bodyLayout.userAgentContext);
 		}
 	}
 

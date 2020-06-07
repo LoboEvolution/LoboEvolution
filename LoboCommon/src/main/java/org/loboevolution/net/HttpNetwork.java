@@ -122,6 +122,8 @@ public class HttpNetwork {
 						byte[] decodedBytes = Base64.getDecoder().decode(base64);
 						InputStream stream = new ByteArrayInputStream(decodedBytes);
 						return ImageIO.read(stream);
+					} else if (href.endsWith(".svg")) {
+						return null //TODO SVG From URL
 					} else if (href.startsWith("https")) {
 						return Toolkit.getDefaultToolkit().createImage(ImageIO.read(in).getSource());
 					} else if (href.endsWith(".gif")) {

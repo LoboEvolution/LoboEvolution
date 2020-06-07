@@ -23,7 +23,11 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import java.awt.Dimension;
+
+import org.loboevolution.html.control.ImgSvgControl;
 import org.loboevolution.html.dom.HTMLImageElement;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.renderstate.ImageRenderState;
 import org.loboevolution.html.renderstate.RenderState;
 import org.mozilla.javascript.Function;
@@ -247,5 +251,18 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	@Override
 	public void setWidth(int width) {
 		setAttribute("width", String.valueOf(width));
+	}
+	
+	/**
+	 * <p>draw.</p>
+	 *
+	 * @param imgSvgControl a {@link org.loboevolution.html.control.ImgSvgControl} object.
+	 */
+	public void draw(ImgSvgControl imgSvgControl) {
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(getSrc());
+		if(getWidth() > 0 && getHeight() > 0) {
+			hpanel.setPreferredSize(new Dimension(getWidth(), getHeight()));
+		}
+		imgSvgControl.add(hpanel);
 	}
 }
