@@ -24,6 +24,7 @@ package org.loboevolution.html.control;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.awt.image.ImageObserver;
 import org.loboevolution.html.dom.domimpl.HTMLCanvasElementImpl;
 
@@ -58,7 +59,7 @@ public class CanvasControl extends BaseControl {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		g2d.drawImage(canvas.getImage(), 0, 0, (ImageObserver) null);
+		g2d.drawRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		g2d.drawImage(canvas.getImage(), new AffineTransform(), null);
 	}
 }
