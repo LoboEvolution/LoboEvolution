@@ -23,8 +23,6 @@ package org.loboevolution.html.dom.canvas;
 import java.awt.image.BufferedImage;
 
 import org.loboevolution.html.dom.ImageData;
-import org.mozilla.javascript.typedarrays.NativeArrayBuffer;
-import org.mozilla.javascript.typedarrays.NativeUint8ClampedArray;
 
 /**
  * <p>ImageDataImpl class.</p>
@@ -34,10 +32,6 @@ import org.mozilla.javascript.typedarrays.NativeUint8ClampedArray;
  */
 public class ImageDataImpl implements ImageData {
 
-	private int sx;
-	
-	private int sy;
-	
 	private int width;
 	
 	private int height;
@@ -48,15 +42,11 @@ public class ImageDataImpl implements ImageData {
 	 * <p>Constructor for ImageDataImpl.</p>
 	 *
 	 * @param image a {@link java.awt.image.BufferedImage} object.
-	 * @param sx a int.
-	 * @param sy a int.
 	 * @param sw a int.
 	 * @param sh a int.
 	 */
-	public ImageDataImpl(BufferedImage image, int sx, int sy, int sw, int sh) {
+	public ImageDataImpl(BufferedImage image, int sw, int sh) {
 		this.image = image;
-		this.sx = sx;
-		this.sy = sy;
 		this.width = sw;
 		this.height = sh;
 	}
@@ -64,10 +54,7 @@ public class ImageDataImpl implements ImageData {
 	/** {@inheritDoc} */
 	@Override
 	public Object getData() {
-		byte[] bytes = getBytes(width, height, sx, sy);
-		final NativeArrayBuffer arrayBuffer = new NativeArrayBuffer(bytes.length);
-        System.arraycopy(bytes, 0, arrayBuffer.getBuffer(), 0, bytes.length);
-        return new NativeUint8ClampedArray(arrayBuffer, 0, bytes.length);
+		return image;
 	}
 
 	/** {@inheritDoc} */
@@ -80,20 +67,5 @@ public class ImageDataImpl implements ImageData {
 	@Override
 	public int getWidth() {
 		return width;
-	}
-
-	private byte[] getBytes(final int width, final int height, final int sx, final int sy) {
-		final byte[] array = new byte[width * height * 4];
-		int index = 0;
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				final int color = image.getRGB(sx + x, sy + y);
-				array[index++] = (byte) ((color & 0xff0000) >> 16);
-				array[index++] = (byte) ((color & 0xff00) >> 8);
-				array[index++] = (byte) (color & 0xff);
-				array[index++] = (byte) ((color & 0xff000000) >>> 24);
-			}
-		}
-		return array;
 	}
 }

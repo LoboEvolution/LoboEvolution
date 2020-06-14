@@ -631,8 +631,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public ImageData getImageData(int sx, int sy, int sw, int sh) {
-		final ImageDataImpl imageData = new ImageDataImpl(image, sx, sy, sw, sh);
-        return imageData;
+		return new ImageDataImpl(image, sw, sh);
 	}
 
 	/** {@inheritDoc} */
@@ -669,14 +668,16 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	/** {@inheritDoc} */
 	@Override
 	public void putImageData(ImageData imagedata, int dx, int dy) {
-		// TODO Auto-generated method stub
+		putImageData(imagedata, dx, dy, 0, 0, imagedata.getWidth(), imagedata.getHeight());
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void putImageData(ImageData imagedata, int dx, int dy, int dirtyX, int dirtyY, int dirtyWidth, int dirtyHeight) {
-		// TODO Auto-generated method stub
-	}
+		Graphics2D graphics = createGraphics();
+		BufferedImage image = (BufferedImage)imagedata.getData();
+		graphics.drawImage(image, dx, dy, null);
+    }
 
 	/** {@inheritDoc} */
 	@Override
