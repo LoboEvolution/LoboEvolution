@@ -112,6 +112,7 @@ public class GenericRegionSegment extends RegionSegment {
         
         boolean typicalPredictionGenericDecodingOn = genericRegionFlags.getFlagValue(GenericRegionFlags.TPGDON) != 0;
         int length = segmentHeader.getSegmentDataLength();
+        int bytesRead = 0;
 
         if(length == -1) { 
         	/** 
@@ -136,7 +137,7 @@ public class GenericRegionSegment extends RegionSegment {
         		match2 = 172;
         	}
         	
-        	int bytesRead = 0;
+        	
     		while(true) {
     			short bite1 = decoder.readByte();
     			bytesRead++;
@@ -157,8 +158,7 @@ public class GenericRegionSegment extends RegionSegment {
         
         JBIG2Bitmap bitmap = new JBIG2Bitmap(regionBitmapWidth, regionBitmapHeight, arithmeticDecoder, huffmanDecoder, mmrDecoder);
         bitmap.clear(0);
-        bitmap.readBitmap(useMMR, template, typicalPredictionGenericDecodingOn, false, null, genericBAdaptiveTemplateX, genericBAdaptiveTemplateY, useMMR ? 0 : length - 18);
-        
+        bitmap.readBitmap(useMMR, template, typicalPredictionGenericDecodingOn, false, null, genericBAdaptiveTemplateX, genericBAdaptiveTemplateY, useMMR ? bytesRead : length - 18);
         
         
         if (inlineImage) {
