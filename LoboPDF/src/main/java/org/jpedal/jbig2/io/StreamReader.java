@@ -51,7 +51,7 @@ package org.jpedal.jbig2.io;
 
 import java.io.IOException;
 
-import org.jpedal.jbig2.examples.pdf.PDFSegment;
+import org.jpedal.jbig2.pdf.PDFSegment;
 
 public class StreamReader {
 	private byte[] data;

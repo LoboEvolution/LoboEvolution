@@ -60,7 +60,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
@@ -75,7 +74,6 @@ import org.jpedal.jbig2.image.JBIG2Bitmap;
 
 public class JBIG2ImageReader extends ImageReader {
 	
-	private static final Logger logger = Logger.getLogger(JBIG2ImageReader.class.getName());
 	private JBIG2Decoder decoder;
 	private ImageInputStream stream;
 	private boolean readFile;
@@ -219,7 +217,7 @@ public class JBIG2ImageReader extends ImageReader {
 		return null;
 	}
 
-	public Iterator getImageTypes(int imageIndex) throws IOException {
+	public Iterator<ImageTypeSpecifier> getImageTypes(int imageIndex) throws IOException {
 		readFile();
 
 		checkIndex(imageIndex);
@@ -230,7 +228,7 @@ public class JBIG2ImageReader extends ImageReader {
 		// to return an appropriate BufferedImage that contains the decoded
 		// image, and is accessed by an application.
 
-		List l = new ArrayList();
+		List<ImageTypeSpecifier> l = new ArrayList<ImageTypeSpecifier>();
 
 		// The JBIG2 reader only uses a single List entry. This entry describes
 		// a

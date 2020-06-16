@@ -63,6 +63,9 @@ import javax.swing.JToolBar;
 import org.jpedal.jbig2.JBIG2Decoder;
 
 public class NavigationToolbar extends JToolBar {
+	
+	private static final long serialVersionUID = 1L;
+
 	protected static final int FIRSTPAGE = 0;
 	protected static final int FBACKPAGE = 1;
 	protected static final int BACKPAGE = 2;

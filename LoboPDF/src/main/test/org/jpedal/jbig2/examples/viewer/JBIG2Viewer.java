@@ -94,6 +94,11 @@ import org.jpedal.jbig2.image.JBIG2Bitmap;
 
 public class JBIG2Viewer extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private JFrame mainFrame = this;
 
 	private JScrollPane jsp;
@@ -101,11 +106,11 @@ public class JBIG2Viewer extends JFrame {
 	private BufferedImage image;
 	private JLabel imageLabel = new JLabel();
 
-	private JComboBox scalingBox;
+	private JComboBox<String> scalingBox;
 	private String scalingItem = "";
 	private double scaling;
 
-	private JComboBox rotationBox;
+	private JComboBox<?> rotationBox;
 	private String rotationItem = "";
 	private int rotation;
 
@@ -159,6 +164,9 @@ public class JBIG2Viewer extends JFrame {
 		toolbar.setBorder(BorderFactory.createEtchedBorder());
 
 		JButton openButton = new JButton(new AbstractAction("Open", new ImageIcon(getClass().getResource("/org/jpedal/jbig2/examples/viewer/res/open.png"))) {
+			
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent evt) {
 				openFile();
 			}
@@ -170,6 +178,9 @@ public class JBIG2Viewer extends JFrame {
 		toolbar.add(Box.createRigidArea(new Dimension(7, 0)));
 
 		JButton saveButton = new JButton(new AbstractAction("Save", new ImageIcon(getClass().getResource("/org/jpedal/jbig2/examples/viewer/res/save.png"))) {
+			
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent evt) {
 				if (image == null) {
 					JOptionPane.showMessageDialog(mainFrame, "No image is open");
@@ -185,6 +196,9 @@ public class JBIG2Viewer extends JFrame {
 		toolbar.add(Box.createRigidArea(new Dimension(7, 0)));
 
 		JButton propertiesButton = new JButton(new AbstractAction("Properties", new ImageIcon(getClass().getResource("/org/jpedal/jbig2/examples/viewer/res/properties.png"))) {
+			
+			private static final long serialVersionUID = 1L;
+
 			public void actionPerformed(ActionEvent evt) {
 				// Perform action
 			}
@@ -204,7 +218,7 @@ public class JBIG2Viewer extends JFrame {
 			}
 		};
 
-		scalingBox = new JComboBox(new String[] { "Window", "Height", "Width", "25", "50", "75", "100", "125", "150", "200", "250", "500", "750", "1000" });
+		scalingBox = new JComboBox<String>(new String[] { "Window", "Height", "Width", "25", "50", "75", "100", "125", "150", "200", "250", "500", "750", "1000" });
 		scalingBox.setEditable(true);
 		scalingBox.setPreferredSize(new Dimension(scalingBox.getPreferredSize().width, toolbar.getHeight()));
 		scalingBox.setPrototypeDisplayValue("XXXXXXXX"); // Set a desired
@@ -216,7 +230,7 @@ public class JBIG2Viewer extends JFrame {
 		toolbar.add(new JLabel("Rotation:"));
 		toolbar.add(Box.createRigidArea(new Dimension(3, 0)));
 
-		rotationBox = new JComboBox(new String[] { "0", "90", "180", "270" });
+		rotationBox = new JComboBox<String>(new String[] { "0", "90", "180", "270" });
 		rotationBox.setEditable(true);
 		rotationBox.setPreferredSize(new Dimension(rotationBox.getPreferredSize().width, toolbar.getHeight()));
 		rotationBox.setMaximumSize(new Dimension(100, 100));

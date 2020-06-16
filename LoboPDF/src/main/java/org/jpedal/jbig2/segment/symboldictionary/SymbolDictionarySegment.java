@@ -491,19 +491,19 @@ public class SymbolDictionarySegment extends Segment {
 		this.symbolDictionaryFlags = symbolDictionaryFlags;
 	}
 
-	private ArithmeticDecoderStats getGenericRegionStats() {
+	public ArithmeticDecoderStats getGenericRegionStats() {
 		return genericRegionStats;
 	}
 
-	private void setGenericRegionStats(ArithmeticDecoderStats genericRegionStats) {
+	public void setGenericRegionStats(ArithmeticDecoderStats genericRegionStats) {
 		this.genericRegionStats = genericRegionStats;
 	}
 
-	private void setRefinementRegionStats(ArithmeticDecoderStats refinementRegionStats) {
+	public void setRefinementRegionStats(ArithmeticDecoderStats refinementRegionStats) {
 		this.refinementRegionStats = refinementRegionStats;
 	}
 
-	private ArithmeticDecoderStats getRefinementRegionStats() {
+	public ArithmeticDecoderStats getRefinementRegionStats() {
 		return refinementRegionStats;
 	}
 }

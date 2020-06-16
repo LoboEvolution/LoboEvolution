@@ -56,10 +56,10 @@ public abstract class Flags {
 
 	protected int flagsAsInt;
 
-	protected Map flags = new LinkedHashMap();
+	protected Map<String, Integer> flags = new LinkedHashMap<String, Integer>();
 
 	public int getFlagValue(String key) {
-		Integer value = (Integer) flags.get(key);
+		Integer value = flags.get(key);
 		return value.intValue();
 	}
 

@@ -50,7 +50,11 @@
 package org.jpedal.jbig2.image;
 
 public class BitmapPointer {
-	private int x, y, width, height, bits, count;
+	private int x; 
+	private int y;
+	private int width;
+	private int height;
+	private int count;
 	private boolean output;
 	private JBIG2Bitmap bitmap;
 
@@ -64,10 +68,10 @@ public class BitmapPointer {
 		this.x = x;
 		this.y = y;
 		output = true;
-		if (y < 0 || y >= height || x >= width) {
+		if (this.y < 0 || this.y >= height || this.x >= width) {
 			output = false;
 		}
-		count = y*width;
+		count = this.y * width;
 	}
 
 	public int nextPixel() {

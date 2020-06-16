@@ -47,7 +47,7 @@
 * PDFSegment.java
 * ---------------
 */
-package org.jpedal.jbig2.examples.pdf;
+package org.jpedal.jbig2.pdf;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

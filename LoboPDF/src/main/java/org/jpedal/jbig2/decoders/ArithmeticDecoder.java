@@ -70,8 +70,6 @@ public class ArithmeticDecoder {
 	
 	int counter;
 
-	private ArithmeticDecoder() {}
-
 	public ArithmeticDecoder(StreamReader reader) {
 		this.reader = reader;
 

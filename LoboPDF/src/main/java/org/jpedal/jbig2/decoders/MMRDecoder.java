@@ -63,8 +63,6 @@ public class MMRDecoder {
 
 	private long bufferLength = 0, buffer = 0, noOfBytesRead = 0;
 
-	private MMRDecoder() {}
-
 	public MMRDecoder(StreamReader reader) {
 		this.reader = reader;
 	}

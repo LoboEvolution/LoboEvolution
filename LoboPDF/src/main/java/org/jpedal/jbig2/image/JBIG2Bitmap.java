@@ -1193,7 +1193,7 @@ public final class JBIG2Bitmap {
 	 */
 	static final class FastBitSet {
 		long[] w;
-		static final int pot = (Long.SIZE == 32) ? 5 : (Long.SIZE == 16) ? 4 : (Long.SIZE == 64) ? 6 : 7;
+		static final int pot = 6;
 		static final int mask = (int) ((-1L) >>> (Long.SIZE-pot));
 		int length;
 		

@@ -61,11 +61,11 @@ public class JBIG2ImageReaderSpi extends ImageReaderSpi {
 	public JBIG2ImageReaderSpi() {
 		super("JPedal", // vendorName
 				"1.0", // version
-				new String[] { "JBIG2" }, // names
-				new String[] { "jb2", "jbig2" }, // suffixes
-				new String[] { "image/x-jbig2" }, // MIMETypes
+				new String[] { "jbig2", "JBIG2" }, // names
+				new String[] { "jb2", "jbig2", "JB2", "JBIG2" }, // suffixes
+				new String[] { "image/x-jbig2", "image/x-jb2" }, // MIMETypes
 				"org.jpedal.jbig2.jai.JBIG2ImageReader", // readerClassName
-				STANDARD_INPUT_TYPE, // inputTypes
+				new Class[] { ImageInputStream.class }, // inputTypes
 				null, // writerSpiNames
 				false, // supportsStandardStreamMetadataFormat
 				null, // nativeStreamMetadataFormatName
