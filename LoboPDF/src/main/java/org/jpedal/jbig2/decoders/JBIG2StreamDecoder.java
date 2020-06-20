@@ -219,8 +219,7 @@ public class JBIG2StreamDecoder {
 			int segmentType = segmentHeader.getSegmentType();
 			int[] referredToSegments = segmentHeader.getReferredToSegments();
 			int noOfReferredToSegments = segmentHeader.getReferredToSegmentCount();
-			
-			System.out.println(segmentType);
+
 			switch (segmentType) {
 			case Segment.SYMBOL_DICTIONARY:
 				if (JBIG2StreamDecoder.debug)

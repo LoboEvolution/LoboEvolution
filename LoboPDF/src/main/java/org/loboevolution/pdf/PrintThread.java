@@ -36,7 +36,7 @@ public class PrintThread extends Thread {
 	/** The pt pjob. */
 	private PrinterJob ptPjob;
 	
-	private PdfDialog dialog;
+	private PDFViewer dialog;
 
 	/**
 	 * Instantiates a new prints the thread.
@@ -46,7 +46,7 @@ public class PrintThread extends Thread {
 	 * @param pjob
 	 *            the pjob
 	 */
-	public PrintThread(PDFPrintPage pages, PrinterJob pjob, PdfDialog dialog) {
+	public PrintThread(PDFPrintPage pages, PrinterJob pjob, PDFViewer dialog) {
 		ptPages = pages;
 		ptPjob = pjob;
 		setName(getClass().getName());

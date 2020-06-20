@@ -23,7 +23,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import org.loboevolution.pdfview.action.PDFAction;
 
 public class OutlineNode extends DefaultMutableTreeNode {
-    // the name of this node
+
+	private static final long serialVersionUID = 1L;
 
     private String title;
 

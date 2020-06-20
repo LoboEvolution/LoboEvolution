@@ -3,7 +3,6 @@ package org.loboevolution.menu.tools.pref;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.HeadlessException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;

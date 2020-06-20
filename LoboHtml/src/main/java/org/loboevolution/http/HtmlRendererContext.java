@@ -71,7 +71,7 @@ import org.loboevolution.html.parser.DocumentBuilderImpl;
 import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.img.ImageViewer;
 import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.pdf.PdfDialog;
+import org.loboevolution.pdf.PDFViewer;
 import org.loboevolution.store.LinkStore;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.TabStore;
@@ -528,7 +528,7 @@ public class HtmlRendererContext {
 	public void linkClicked(URL url, boolean isNewTab) {
 		String fullURL = url.toString();
 		if (fullURL.endsWith(".pdf")) {
-			PdfDialog viewer = new PdfDialog(true);
+			PDFViewer viewer = new PDFViewer(true);
 			viewer.doOpen(fullURL);
 		} else {
 			final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();

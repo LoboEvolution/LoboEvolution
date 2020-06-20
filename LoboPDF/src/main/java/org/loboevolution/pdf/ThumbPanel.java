@@ -98,7 +98,6 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Automatically starts rendering thumbnails for that file.
 	 */
 	public ThumbPanel(PDFFile file) {
-		super();
 		createAndShowGUI(file);
 	}
 

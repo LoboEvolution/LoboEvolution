@@ -14,7 +14,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.component.input.Autocomplete;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.img.ImageViewer;
-import org.loboevolution.pdf.PdfDialog;
+import org.loboevolution.pdf.PDFViewer;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedPanePopupMenu;
@@ -56,7 +56,7 @@ public class GoAction extends AbstractAction {
 				goUrlImage(image, url);
 			} else {
 				if (url.endsWith(".pdf")) {
-					PdfDialog viewer = new PdfDialog(true);
+					PDFViewer viewer = new PDFViewer(true);
 					viewer.doOpen(url);
 				} else {
 					goURl(url);
@@ -64,7 +64,7 @@ public class GoAction extends AbstractAction {
 			}
 		} catch (IOException e) {
 			if (url.endsWith(".pdf")) {
-				PdfDialog viewer = new PdfDialog(true);
+				PDFViewer viewer = new PDFViewer(true);
 				viewer.doOpen(url);
 			} else {
 				goURl(url);
