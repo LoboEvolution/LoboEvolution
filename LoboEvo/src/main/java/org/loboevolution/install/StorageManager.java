@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JFrame;
 import javax.swing.SwingWorker;
@@ -26,6 +28,9 @@ import org.loboevolution.store.SQLiteCommon;
  * @version $Id: $Id
  */
 public class StorageManager extends SwingWorker<Void, Void> {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(StorageManager.class.getName());
 
 	private final JFrame frame;
 
@@ -64,7 +69,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			Thread.sleep(1000);
 
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
 		return null;
@@ -82,7 +87,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			this.frame.setVisible(false);
 			new GuiInit().createAndShowGui();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -122,7 +127,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

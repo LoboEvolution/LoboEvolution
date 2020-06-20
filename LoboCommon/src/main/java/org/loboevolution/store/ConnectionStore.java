@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.net.NetRoutines;
 
@@ -19,6 +21,9 @@ import org.loboevolution.net.NetRoutines;
  * @version $Id: $Id
  */
 public class ConnectionStore implements Serializable {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ConnectionStore.class.getName());
 
 	private static String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
 
@@ -76,7 +81,7 @@ public class ConnectionStore implements Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return setting;
 	}
@@ -89,7 +94,7 @@ public class ConnectionStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_CONNECTIONS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -182,7 +187,7 @@ public class ConnectionStore implements Serializable {
 			pstmt.setInt(7, isDisableProxyForLocalAddresses() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * General browser settings. 
@@ -17,6 +19,9 @@ import java.util.List;
  * @version $Id: $Id
  */
 public class GeneralStore implements Serializable {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(GeneralStore.class.getName());
 
 	private static String DELETE_NETWORK = "DELETE FROM NETWORK";
 
@@ -51,7 +56,7 @@ public class GeneralStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_SIZE)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -63,7 +68,7 @@ public class GeneralStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_NETWORK)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -75,7 +80,7 @@ public class GeneralStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_STARTUP)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -87,7 +92,7 @@ public class GeneralStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_USER_AGENT)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -109,7 +114,7 @@ public class GeneralStore implements Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}	
 		if (width > -1 && height > -1) {
 			bounds = new Rectangle(width, height);
@@ -137,7 +142,7 @@ public class GeneralStore implements Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return setting;
 	}
@@ -157,7 +162,7 @@ public class GeneralStore implements Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return urls;
 	}
@@ -174,7 +179,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setInt(2, rect.height);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -197,7 +202,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setInt(5, navigation ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -212,7 +217,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setString(1, url);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -227,7 +232,7 @@ public class GeneralStore implements Serializable {
 			pstmt.setString(1, userAgent);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

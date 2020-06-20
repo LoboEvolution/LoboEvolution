@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.laf.LAFSettings;
 
@@ -14,6 +16,9 @@ import org.loboevolution.laf.LAFSettings;
  * @version $Id: $Id
  */
 public class LookAndFeelsStore {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(LookAndFeelsStore.class.getName());
 
 	private final String DELETE_LAF = "DELETE FROM LOOK_AND_FEEL";
 
@@ -33,7 +38,7 @@ public class LookAndFeelsStore {
 		try {
 			conn = DriverManager.getConnection(dbPath);
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return conn;
 	}
@@ -46,7 +51,7 @@ public class LookAndFeelsStore {
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_LAF)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -64,7 +69,7 @@ public class LookAndFeelsStore {
 			pstmt.setInt(4, search.isSelected() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -103,7 +108,7 @@ public class LookAndFeelsStore {
 			pstmt.setInt(22, laf.isBold() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

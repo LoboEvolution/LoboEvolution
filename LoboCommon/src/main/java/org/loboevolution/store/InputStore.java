@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 
@@ -16,6 +18,9 @@ import org.loboevolution.common.Strings;
  * @version $Id: $Id
  */
 public class InputStore {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(InputStore.class.getName());
 	
 	/**
 	 * <p>autocomplete.</p>
@@ -34,7 +39,7 @@ public class InputStore {
 				}
 			}
         } catch (Exception e) {
-        	e.printStackTrace();
+        	logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return autoList;
     }	
@@ -63,7 +68,7 @@ public class InputStore {
 				pstmt.setString(2, value);
 				pstmt.executeUpdate();
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}
@@ -76,7 +81,7 @@ public class InputStore {
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_INPUT)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

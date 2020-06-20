@@ -1,5 +1,8 @@
 package org.loboevolution.init;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.SwingUtilities;
 
 /**
@@ -9,6 +12,9 @@ import javax.swing.SwingUtilities;
  * @version $Id: $Id
  */
 public class PlatformInit {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(PlatformInit.class.getName());
 
 	/**
 	 * <p>main.</p>
@@ -20,7 +26,7 @@ public class PlatformInit {
 			try {
 				new GuiInit().install();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		});
 	}

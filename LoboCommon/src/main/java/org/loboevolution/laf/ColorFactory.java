@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.store.SQLiteCommon;
@@ -18,6 +20,9 @@ import org.loboevolution.store.SQLiteCommon;
  * @version $Id: $Id
  */
 public class ColorFactory {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ColorFactory.class.getName());
 
 	/** The instance. */
 	private static ColorFactory instance;
@@ -309,7 +314,7 @@ public class ColorFactory {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return colorMap;
 	}

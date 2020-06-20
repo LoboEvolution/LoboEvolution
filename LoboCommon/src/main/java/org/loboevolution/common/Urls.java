@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>Urls class.</p>
@@ -17,6 +19,9 @@ import java.util.StringTokenizer;
  * @version $Id: $Id
  */
 public class Urls {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(Urls.class.getName());
 	
 	/** The Constant PATTERN_RFC1123. */
 	public static final DateFormat PATTERN_RFC1123 = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz", Locale.US);
@@ -119,7 +124,7 @@ public class Urls {
 			final URI uri = new URI(url);
 			result = uri.isAbsolute();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return result;
 	}
@@ -173,8 +178,8 @@ public class Urls {
 						String value = token.substring(eqIdx + 1).trim();
 						try {
 							return Long.valueOf(baseTime + Integer.parseInt(value));
-						} catch (NumberFormatException nfe) {
-							nfe.printStackTrace();
+						} catch (NumberFormatException e) {
+							logger.log(Level.SEVERE, e.getMessage(), e);
 						}
 					}
 				}
@@ -190,8 +195,8 @@ public class Urls {
 			} catch (ParseException pe) {
 				try {
 					return Long.valueOf(baseTime + Integer.parseInt(expires));
-				} catch (NumberFormatException nfe) {
-					nfe.printStackTrace();
+				} catch (NumberFormatException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}

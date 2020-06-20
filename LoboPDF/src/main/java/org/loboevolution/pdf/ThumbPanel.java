@@ -29,6 +29,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 import javax.swing.JViewport;
@@ -46,6 +48,9 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -6761217072379594185L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ThumbPanel.class.getName());
 
 	/** The PDFFile being displayed. */
 	private transient PDFFile file;
@@ -171,7 +176,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 				}
 				repaint();
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 
 				int size = lineheight - border;
 				images[workingon] = new BufferedImage(size, size, BufferedImage.TYPE_BYTE_BINARY);

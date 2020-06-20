@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -33,6 +35,9 @@ import org.w3c.dom.Document;
  * @version $Id: $Id
  */
 public class InfoPageWindow extends JFrame {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(InfoPageWindow.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
@@ -98,7 +103,7 @@ public class InfoPageWindow extends JFrame {
 			tablePanel.add(textArea);
 			return new JScrollPane(tablePanel);
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}
@@ -161,7 +166,7 @@ public class InfoPageWindow extends JFrame {
 			jtable.setShowGrid(false);
 			return new JScrollPane(jtable);
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}
@@ -213,7 +218,7 @@ public class InfoPageWindow extends JFrame {
 			tablePanel.add(jPanelImg);
 			return new JScrollPane(tablePanel);
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}

@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.http.CookieManager;
 import org.loboevolution.info.BookmarkInfo;
@@ -22,6 +24,9 @@ import org.loboevolution.store.SQLiteCommon;
  * @version $Id: $Id
  */
 public class MozilaFirefoxData extends BrowserData {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(MozilaFirefoxData.class.getName());
 
 	private static String MOZ_BOOKMARKS = "SELECT DISTINCT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
 
@@ -42,7 +47,7 @@ public class MozilaFirefoxData extends BrowserData {
 				bookmarks.add(bookmark);
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return bookmarks;
 	}
@@ -64,7 +69,7 @@ public class MozilaFirefoxData extends BrowserData {
 				cookies.add(cookie);
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return cookies;
 	}
@@ -78,7 +83,7 @@ public class MozilaFirefoxData extends BrowserData {
 				hostEntries.add(rs.getString(1));
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return hostEntries;
 	}
@@ -132,7 +137,7 @@ public class MozilaFirefoxData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

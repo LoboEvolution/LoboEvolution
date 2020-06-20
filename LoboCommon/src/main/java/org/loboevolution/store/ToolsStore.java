@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The Class ToolsStore.
@@ -16,6 +18,9 @@ import java.util.List;
  * @version $Id: $Id
  */
 public class ToolsStore implements Serializable {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(ToolsStore.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +42,7 @@ public class ToolsStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -62,7 +67,7 @@ public class ToolsStore implements Serializable {
 				searchEngineStores.add(se);
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return searchEngineStores;
 	}
@@ -102,7 +107,7 @@ public class ToolsStore implements Serializable {
 			pstmt.setInt(6, selected ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -125,7 +130,7 @@ public class ToolsStore implements Serializable {
 			pstmt.setString(1, name);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -137,7 +142,7 @@ public class ToolsStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(this.UPDATE_SEARCH)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

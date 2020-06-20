@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.info.BookmarkInfo;
@@ -21,6 +23,9 @@ import org.loboevolution.info.BookmarkInfo;
 public class BookmarksStore implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(BookmarksStore.class.getName());
 
 	private final String BOOKMARKS = "SELECT DISTINCT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?";
 
@@ -36,7 +41,7 @@ public class BookmarksStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -65,7 +70,7 @@ public class BookmarksStore implements Serializable {
 					values.add(info);
 				}
 			} catch (final Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 			return values;
 		}
@@ -92,7 +97,7 @@ public class BookmarksStore implements Serializable {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return info;
 	}
@@ -111,7 +116,7 @@ public class BookmarksStore implements Serializable {
 			pstmt.setString(4, info.getTagsText());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

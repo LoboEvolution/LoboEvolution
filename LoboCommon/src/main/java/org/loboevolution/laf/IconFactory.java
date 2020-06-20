@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
@@ -38,7 +39,7 @@ import org.loboevolution.common.IORoutines;
  */
 public class IconFactory {
 
-    private final static Logger LOGGER = Logger.getLogger(IconFactory.class.getName());
+    private final static Logger logger = Logger.getLogger(IconFactory.class.getName());
 
 	/** The Constant instance. */
 	private static final IconFactory instance = new IconFactory();
@@ -75,7 +76,7 @@ public class IconFactory {
 				if (icon == null) {
 					InputStream in = this.getClass().getResourceAsStream(resourcePath);
 					if (in == null) {
-						LOGGER.info("getIcon(): Resource path " + resourcePath + " not found.");
+						logger.info("getIcon(): Resource path " + resourcePath + " not found.");
 						return null;
 					}
 					try {
@@ -88,8 +89,8 @@ public class IconFactory {
 				}
 				return icon;
 			}
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 	}

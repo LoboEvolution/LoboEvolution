@@ -3,6 +3,8 @@ package org.loboevolution.pdfview.font.ttf;
 import java.io.*;
 import java.net.URL;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Build an object which provides access to all the Adobe glyph names, using
@@ -53,11 +55,16 @@ import java.util.*;
  * @author tomoke
  */
 public class AdobeGlyphList {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(AdobeGlyphList.class.getName());
 
     /** provide a translation from a glyph name to the possible unicode values. */
     static private HashMap<String, int[]> glyphToUnicodes;
+
     /** provide a translation from a unicode value to a glyph name. */
     static private HashMap<Integer, String> unicodeToGlyph;
+
     /** the loader thread we are reading through. */
     static Thread glyphLoaderThread = null;
 
@@ -117,7 +124,7 @@ public class AdobeGlyphList {
 						}
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
+					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		}, "Adobe Glyph Loader Thread");

@@ -27,6 +27,8 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
@@ -48,6 +50,9 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
  * @version $Id: $Id
  */
 public class CSSUtilities {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(CSSUtilities.class.getName());
 
 	/**
 	 * <p>getCssInputSourceForStyleSheet.</p>
@@ -146,7 +151,7 @@ public class CSSUtilities {
 		try {
 			selectorList = parser.parseSelectors(selectors);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return selectorList;
 	}

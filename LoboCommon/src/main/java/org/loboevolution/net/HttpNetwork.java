@@ -16,6 +16,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Base64;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.GZIPInputStream;
 
 import javax.imageio.ImageIO;
@@ -32,6 +34,9 @@ import org.loboevolution.store.SQLiteCommon;
  * @version $Id: $Id
  */
 public class HttpNetwork {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(HttpNetwork.class.getName());
 
 	/** Constant GZIP_ENCODING="gzip" */
 	public static String GZIP_ENCODING = "gzip";
@@ -136,7 +141,7 @@ public class HttpNetwork {
 						try {
 							return ImageIO.read(in);
 						} catch (final IOException e) {
-							e.printStackTrace();
+							logger.log(Level.SEVERE, e.getMessage(), e);
 						}
 					} else {
 						return ImageIO.read(in);
@@ -144,7 +149,7 @@ public class HttpNetwork {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}
@@ -182,7 +187,7 @@ public class HttpNetwork {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return userAgent;
 	}

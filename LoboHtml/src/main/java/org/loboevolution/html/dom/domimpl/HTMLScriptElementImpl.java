@@ -155,7 +155,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 						BufferedReader br = new BufferedReader(reader);						
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (Exception e) {
-						e.printStackTrace();
+						logger.log(Level.SEVERE, e.getMessage(), e);
 					}
 				} else {
 					String scriptURI = doc.getBaseURI();

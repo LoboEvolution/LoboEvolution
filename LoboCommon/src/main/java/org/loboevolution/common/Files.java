@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>Files class.</p>
@@ -12,6 +14,9 @@ import java.io.InputStream;
  * @version $Id: $Id
  */
 public class Files {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(Files.class.getName());
 
 	/**
 	 * <p>getResourceAsFile.</p>
@@ -38,7 +43,7 @@ public class Files {
 			}
 			return tempFile;
 		} catch (final IOException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 	}

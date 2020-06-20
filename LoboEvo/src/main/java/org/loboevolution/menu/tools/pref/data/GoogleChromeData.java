@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -26,6 +28,9 @@ import org.loboevolution.store.SQLiteCommon;
  * @version $Id: $Id
  */
 public class GoogleChromeData extends BrowserData {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(GoogleChromeData.class.getName());
 
 	private static String CHROME_COOKIES = "SELECT * from cookies";
 
@@ -55,7 +60,7 @@ public class GoogleChromeData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return listInfo;
 	}
@@ -77,7 +82,7 @@ public class GoogleChromeData extends BrowserData {
 				cookies.add(cookie);
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return cookies;
 	}
@@ -92,7 +97,7 @@ public class GoogleChromeData extends BrowserData {
 			}
 
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return hostEntries;
 	}
@@ -145,7 +150,7 @@ public class GoogleChromeData extends BrowserData {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

@@ -10,6 +10,8 @@ import java.awt.Transparency;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.PixelGrabber;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -26,6 +28,9 @@ import org.loboevolution.net.HttpNetwork;
  * @version $Id: $Id
  */
 public class InputImage {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(InputImage.class.getName());
 
 	private BufferedImage image;
 	
@@ -88,7 +93,7 @@ public class InputImage {
 		try {
 			pg.grabPixels();
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 
 		ColorModel cm = pg.getColorModel();

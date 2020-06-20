@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>NavigationStore class.</p>
@@ -15,6 +17,9 @@ import java.util.List;
  * @version $Id: $Id
  */
 public class NavigationStore {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(NavigationStore.class.getName());
 
 	private final String DELETE_HOST = "DELETE FROM HOST";
 
@@ -37,7 +42,7 @@ public class NavigationStore {
 			pstmt.setInt(2, index);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -49,7 +54,7 @@ public class NavigationStore {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 	
@@ -70,7 +75,7 @@ public class NavigationStore {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return recentHostEntries;
 	}
@@ -92,7 +97,7 @@ public class NavigationStore {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return recentHostEntries;
 	}

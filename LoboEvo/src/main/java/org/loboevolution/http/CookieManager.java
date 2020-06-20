@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
@@ -27,6 +29,9 @@ import org.loboevolution.util.DateUtil;
  * @version $Id: $Id
  */
 public class CookieManager {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(CookieManager.class.getName());
 
 	private static String DELETE_COOKIES = "DELETE FROM COOKIE";
 
@@ -41,7 +46,7 @@ public class CookieManager {
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_COOKIES)) {
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -59,7 +64,7 @@ public class CookieManager {
 			final String domain = url.getHost().replaceFirst("^www.*?\\.", "");
 			cookies = getCookies(domain, "/");
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return cookies;
 	}
@@ -87,7 +92,7 @@ public class CookieManager {
 					}
 				}
 			} catch (final Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 				return null;
 			}
 		}
@@ -115,7 +120,7 @@ public class CookieManager {
 				}
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -185,8 +190,8 @@ public class CookieManager {
 		if (maxAge != null) {
 			try {
 				expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
-			} catch (final NumberFormatException nfe) {
-				nfe.printStackTrace();
+			} catch (final NumberFormatException e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		} else if (expires != null) {
 			final DateUtil du = new DateUtil();
@@ -227,7 +232,7 @@ public class CookieManager {
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

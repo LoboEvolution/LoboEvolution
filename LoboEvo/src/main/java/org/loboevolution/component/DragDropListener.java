@@ -9,6 +9,8 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
@@ -24,6 +26,9 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
  * @version $Id: $Id
  */
 public class DragDropListener implements DropTargetListener {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(DragDropListener.class.getName());
 	
 	private IBrowserPanel bpanel;
 
@@ -55,7 +60,7 @@ public class DragDropListener implements DropTargetListener {
 			}
 			dtde.rejectDrop();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			dtde.rejectDrop();
 		}
 	}

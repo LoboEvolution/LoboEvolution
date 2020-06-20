@@ -37,6 +37,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
@@ -68,6 +70,9 @@ import org.w3c.dom.css.CSS3Properties;
  * @version $Id: $Id
  */
 public class StyleSheetRenderState implements RenderState {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(StyleSheetRenderState.class.getName());
 	
 	private static final FontFactory FONT_FACTORY = FontFactory.getInstance();
 	
@@ -1428,7 +1433,7 @@ public class StyleSheetRenderState implements RenderState {
 					binfo.setBackgroundImage(f.toURI().toURL());
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
    }  

@@ -35,6 +35,8 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
@@ -73,6 +75,10 @@ import org.xml.sax.InputSource;
  * @version $Id: $Id
  */
 public class HtmlPanel extends JComponent implements FrameContext {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(HtmlPanel.class.getName());
+
 	private class LocalDocumentNotificationListener implements DocumentNotificationListener {
 		@Override
 		public void allInvalidated() {
@@ -641,7 +647,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 			}
 
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return panel;
 	}

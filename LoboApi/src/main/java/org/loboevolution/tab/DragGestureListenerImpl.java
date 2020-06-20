@@ -9,6 +9,8 @@ import java.awt.dnd.DragSource;
 import java.awt.dnd.InvalidDnDOperationException;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
@@ -19,6 +21,9 @@ import javax.swing.SwingUtilities;
  * @version $Id: $Id
  */
 public class DragGestureListenerImpl implements DragGestureListener {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(DragGestureListenerImpl.class.getName());
 
 	private DragSourceAdapterImpl dragSourceListener = null;
 
@@ -64,7 +69,7 @@ public class DragGestureListenerImpl implements DragGestureListener {
 			dge.startDrag(DragSource.DefaultMoveDrop, this.emptyImage, this.emptyPoint, this.transferable,
 					this.dragSourceListener);
 		} catch (final InvalidDnDOperationException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

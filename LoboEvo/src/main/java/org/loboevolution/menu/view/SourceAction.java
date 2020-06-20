@@ -2,6 +2,8 @@ package org.loboevolution.menu.view;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 
@@ -18,6 +20,9 @@ import org.loboevolution.net.HttpNetwork;
 public class SourceAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(SourceAction.class.getName());
 
 	private final BrowserFrame frame;
 
@@ -41,7 +46,7 @@ public class SourceAction extends AbstractAction {
 			textViewer.setLocationByPlatform(true);
 			textViewer.setVisible(true);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }

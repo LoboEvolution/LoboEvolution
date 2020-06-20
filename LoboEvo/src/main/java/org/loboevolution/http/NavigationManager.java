@@ -6,6 +6,8 @@ import java.io.Reader;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.NavigationStore;
@@ -26,6 +28,9 @@ import org.xml.sax.InputSource;
  * @version $Id: $Id
  */
 public class NavigationManager {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(NavigationManager.class.getName());
 
 	/**
 	 * <p>getDocument.</p>
@@ -50,7 +55,7 @@ public class NavigationManager {
 				return builder.parse(is);
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
 	}

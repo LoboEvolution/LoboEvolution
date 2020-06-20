@@ -727,7 +727,7 @@ public class HtmlRendererContext {
 			LinkStore.insertLinkVisited(fullURL);
 			bpanel.getScroll().getViewport().add(tabbedPane);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 	
@@ -752,7 +752,7 @@ public class HtmlRendererContext {
 			tabbedPane.insertTab(title, null, viewer.getComponent(), title, index);
 			bpanel.getScroll().getViewport().add(tabbedPane);
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 

@@ -2,6 +2,8 @@ package org.loboevolution.html.js.geolocation;
 
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeoutException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.js.Executor;
@@ -27,6 +29,9 @@ import org.mozilla.javascript.Function;
  * @version $Id: $Id
  */
 public class Geolocation extends AbstractScriptableDelegate {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(Geolocation.class.getName());
 
 	private Window window;
 
@@ -82,7 +87,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 						getCurrentPosition(success);
 						Thread.sleep(500);
 					} catch (Exception e) {
-						e.printStackTrace();
+						logger.log(Level.SEVERE, e.getMessage(), e);
 					}
 				}
 			}

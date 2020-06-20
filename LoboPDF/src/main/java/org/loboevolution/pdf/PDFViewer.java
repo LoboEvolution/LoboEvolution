@@ -38,6 +38,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -80,6 +82,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(PDFViewer.class.getName());
 	
 	private float ZOOM_FACTOR = 1.2f;
 	
@@ -249,8 +254,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		} else {
 			try {
 				SwingUtilities.invokeAndWait(() -> setVisible(true));
-			} catch (InvocationTargetException ie) {
-				ie.printStackTrace();
+			} catch (InvocationTargetException e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			} catch (InterruptedException ie) {
 				Thread.currentThread().interrupt();
 			}
@@ -351,10 +356,10 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 				}
 				openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -699,8 +704,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 						gotoPage(pageNum);
 					}
 				}
-			} catch (IOException ioe) {
-				ioe.printStackTrace();
+			} catch (IOException eio) {
+				logger.log(Level.SEVERE, eio.getMessage(), eio);
 			}
 		}
 	}
@@ -719,7 +724,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 			url = getClass().getResource(name);
 			icon = new ImageIcon(url);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return icon;
 	}

@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.store.SQLiteCommon;
 
@@ -21,6 +23,9 @@ public class LAFSettings implements Serializable {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(LAFSettings.class.getName());
 	
 	/** The Acryl . */
 	private boolean acryl = false;
@@ -109,7 +114,7 @@ public class LAFSettings implements Serializable {
 				fonts.add(rs.getString(1));
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return fonts.toArray(new String[fonts.size()]);
 	}
@@ -356,7 +361,7 @@ public class LAFSettings implements Serializable {
 				laf.setBold(rs.getInt(22) == 1 ? true : false);
 			}
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 			return null;
 		}
 		return laf;

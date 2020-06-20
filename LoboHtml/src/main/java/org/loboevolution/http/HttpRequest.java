@@ -136,8 +136,8 @@ public class HttpRequest {
 		} else if (c != null) {
 			try {
 				c.getInputStream().close();
-			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+			} catch (final IOException e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
 	}

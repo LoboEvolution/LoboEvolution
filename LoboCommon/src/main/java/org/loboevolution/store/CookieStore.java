@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.loboevolution.common.Domains;
 import org.loboevolution.common.Strings;
@@ -23,9 +25,11 @@ import org.loboevolution.util.DateUtil;
  */
 public class CookieStore {
 	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(CookieStore.class.getName());
+	
 	/** The date pattern. */
 	private static final String PATTERN = "dd/MM/yyyy";
-
 	
 	/**
 	 * <p>saveCookie.</p>
@@ -99,8 +103,8 @@ public class CookieStore {
 		if (maxAge != null) {
 			try {
 				expiresDate = new Date(System.currentTimeMillis() + Integer.parseInt(maxAge) * 1000);
-			} catch (NumberFormatException nfe) {
-				nfe.printStackTrace();
+			} catch (NumberFormatException e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		} else if (expires != null) {
 			DateUtil du = new DateUtil();
@@ -144,7 +148,7 @@ public class CookieStore {
 			pstmt.setInt(8, httponly ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 
@@ -178,7 +182,7 @@ public class CookieStore {
 					}
 				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, e.getMessage(), e);
 				return null;
 			}
 		}

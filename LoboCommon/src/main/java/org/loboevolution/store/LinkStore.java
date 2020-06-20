@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * <p>LinkStore class.</p>
@@ -12,6 +14,9 @@ import java.sql.ResultSet;
  * @version $Id: $Id
  */
 public class LinkStore {
+	
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(LinkStore.class.getName());
 	
 	/**
 	 * <p>isVisited.</p>
@@ -30,7 +35,7 @@ public class LinkStore {
 				}
 			}
         } catch (Exception e) {
-        	e.printStackTrace();
+        	logger.log(Level.SEVERE, e.getMessage(), e);
         }
         return vis;
     }	
@@ -46,7 +51,7 @@ public class LinkStore {
 			pstmt.setString(1, link);
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 	
@@ -58,7 +63,7 @@ public class LinkStore {
 				 PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.DELETE_LINK)) {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
 }
