@@ -27,7 +27,6 @@
 			<fileset dir="LoboCommon/src/main/resources"/>
 			<fileset dir="LoboJTattoo/src/main/resources"/>
 			<fileset dir="LoboPDF/src/main/resources"/>
-			<fileset dir="LoboIViewer/src/main/resources"/>
 		</copy>
 		<unzip src="LoboLib/lib/rsyntaxtextarea.jar" dest="bin">
 			<patternset>
