@@ -297,20 +297,22 @@ public class PDFPage {
     */
     public AffineTransform getInitialTransform(int width, int height, Rectangle2D clip) {
         AffineTransform at = new AffineTransform();
-        switch (getRotation()) {
-        case 0:
-            at = new AffineTransform(1, 0, 0, -1, 0, height);
-            break;
-        case 90:
-            at = new AffineTransform(0, 1, 1, 0, 0, 0);
-            break;
-        case 180:
-            at = new AffineTransform(-1, 0, 0, 1, width, 0);
-            break;
-        case 270:
-            at = new AffineTransform(0, -1, -1, 0, width, height);
-            break;
-        }
+		switch (getRotation()) {
+		case 0:
+			at = new AffineTransform(1, 0, 0, -1, 0, height);
+			break;
+		case 90:
+			at = new AffineTransform(0, 1, 1, 0, 0, 0);
+			break;
+		case 180:
+			at = new AffineTransform(-1, 0, 0, 1, width, 0);
+			break;
+		case 270:
+			at = new AffineTransform(0, -1, -1, 0, width, height);
+			break;
+		default:
+			break;
+		}
         double clipW;
         double clipH;
         if (clip == null) {
@@ -525,23 +527,26 @@ public class PDFPage {
     * @param capstyle
     * the cap style: 0 = BUTT, 1 = ROUND, 2 = SQUARE
     */
-    public void addEndCap(int capstyle) {
-        PDFChangeStrokeCmd sc = new PDFChangeStrokeCmd();
-        int cap = BasicStroke.CAP_BUTT;
-        switch (capstyle) {
-        case 0:
-            cap = BasicStroke.CAP_BUTT;
-            break;
-        case 1:
-            cap = BasicStroke.CAP_ROUND;
-            break;
-        case 2:
-            cap = BasicStroke.CAP_SQUARE;
-            break;
-        }
-        sc.setEndCap(cap);
-        addCommand(sc);
-    }
+	public void addEndCap(int capstyle) {
+		PDFChangeStrokeCmd sc = new PDFChangeStrokeCmd();
+		int cap = -1;
+		switch (capstyle) {
+		case 0:
+			cap = BasicStroke.CAP_BUTT;
+			break;
+		case 1:
+			cap = BasicStroke.CAP_ROUND;
+			break;
+		case 2:
+			cap = BasicStroke.CAP_SQUARE;
+			break;
+		default:
+			cap = BasicStroke.CAP_BUTT;
+			break;
+		}
+		sc.setEndCap(cap);
+		addCommand(sc);
+	}
 
     /**
     * set the line join style
@@ -551,7 +556,7 @@ public class PDFPage {
     */
     public void addLineJoin(int joinstyle) {
         PDFChangeStrokeCmd sc = new PDFChangeStrokeCmd();
-        int join = BasicStroke.JOIN_MITER;
+        int join = -1;
         switch (joinstyle) {
         case 0:
             join = BasicStroke.JOIN_MITER;
@@ -562,7 +567,10 @@ public class PDFPage {
         case 2:
             join = BasicStroke.JOIN_BEVEL;
             break;
-        }
+        default:
+        	join =  BasicStroke.JOIN_MITER;
+			break;
+		}
         sc.setLineJoin(join);
         addCommand(sc);
     }

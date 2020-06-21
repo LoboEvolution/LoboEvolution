@@ -1,8 +1,14 @@
 package org.loboevolution.pdfview.font.ttf;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,10 +66,10 @@ public class AdobeGlyphList {
 	private static final Logger logger = Logger.getLogger(AdobeGlyphList.class.getName());
 
     /** provide a translation from a glyph name to the possible unicode values. */
-    static private HashMap<String, int[]> glyphToUnicodes;
+    static private Map<String, int[]> glyphToUnicodes;
 
     /** provide a translation from a unicode value to a glyph name. */
-    static private HashMap<Integer, String> unicodeToGlyph;
+    static private Map<Integer, String> unicodeToGlyph;
 
     /** the loader thread we are reading through. */
     static Thread glyphLoaderThread = null;

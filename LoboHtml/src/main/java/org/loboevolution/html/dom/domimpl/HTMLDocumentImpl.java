@@ -34,6 +34,7 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -123,7 +124,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private String defaultTarget;
 
-	private final ArrayList<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>();
+	private final List<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>();
 
 	private URL documentURL;
 
@@ -220,7 +221,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param listener An instance of {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener}.
 	 */
 	public void addDocumentNotificationListener(DocumentNotificationListener listener) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		synchronized (listenersList) {
 			listenersList.add(listener);
 		}
@@ -246,7 +247,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * Informs listeners that the whole document has been invalidated.
 	 */
 	public void allInvalidated() {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.allInvalidated();
 		}
@@ -303,7 +304,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void externalScriptLoading(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.externalScriptLoading(node);
 		}
@@ -630,7 +631,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void invalidated(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.invalidated(node);
 		}
@@ -695,7 +696,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void lookInvalidated(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.lookInvalidated(node);
 		}
@@ -721,7 +722,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void nodeLoaded(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.nodeLoaded(node);
 		}
@@ -779,7 +780,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void positionInParentInvalidated(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.positionInvalidated(node);
 		}
@@ -791,7 +792,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param listener a {@link org.loboevolution.html.dom.domimpl.DocumentNotificationListener} object.
 	 */
 	public void removeDocumentNotificationListener(DocumentNotificationListener listener) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		synchronized (listenersList) {
 			listenersList.remove(listener);
 		}
@@ -954,7 +955,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void sizeInvalidated(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.sizeInvalidated(node);
 		}
@@ -966,7 +967,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	public void structureInvalidated(NodeImpl node) {
-		final ArrayList<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
+		final List<DocumentNotificationListener> listenersList = this.documentNotificationListeners;
 		for (DocumentNotificationListener dnl : listenersList) {
 			dnl.structureInvalidated(node);
 		}

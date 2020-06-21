@@ -379,8 +379,9 @@ public class ColorFactory {
 			blue = Integer.valueOf(hex.substring(4, 6), 16);
 			alpha = Integer.valueOf(hex.substring(6, 8), 16);
 			return new Color(red, green, blue, alpha);
+		default:
+			return null;
 		}
-		return null;
 	}
 	
 	/**

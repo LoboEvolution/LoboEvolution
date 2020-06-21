@@ -22,7 +22,6 @@ import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
-import java.util.Iterator;
 import java.util.List;
 
 import org.loboevolution.pdfview.font.PDFFont;
@@ -276,8 +275,7 @@ public class PDFTextFormat implements Cloneable {
                 PDFDebugger.debug("POINT count: " + l.size());
             }
         }
-        for (Iterator<PDFGlyph> i = l.iterator(); i.hasNext();) {
-            PDFGlyph glyph = i.next();
+        for (PDFGlyph glyph : l) {
             at.setTransform(this.cur);
             at.concatenate(scale);
             if (PDFDebugger.SHOW_TEXT_REGIONS) {
@@ -307,7 +305,6 @@ public class PDFTextFormat implements Cloneable {
                 advance = glyph.addCommands(cmds, at, this.tm);
             }
             double advanceX = (advance.getX() * this.fsize) + this.tc;
-            double advanceY = advance.getY() + this.fsize;
             if (glyph.getChar() == ' ') {
                 advanceX += this.tw;
             }

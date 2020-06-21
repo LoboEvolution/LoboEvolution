@@ -7,6 +7,7 @@ import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.info.TabInfo;

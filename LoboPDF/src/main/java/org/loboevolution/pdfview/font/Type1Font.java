@@ -437,7 +437,7 @@ public class Type1Font extends OutlineFont {
      * @return a HashMap that maps string glyph names to byte arrays of
      * decoded font data.
      */
-    private HashMap<String,byte[]> readChars(byte[] d) {
+    private Map<String,byte[]> readChars(byte[] d) {
         // skip thru data until we find "/"+key
         HashMap<String,byte[]> hm = new HashMap<String,byte[]>();
         int i = findSlashName(d, "CharStrings");
@@ -749,6 +749,8 @@ public class Type1Font extends OutlineFont {
                         pt.y += y2 + y3;
                         this.sloc = 0;
                         break;
+                    default:
+            			break;
                 }
             }
         }

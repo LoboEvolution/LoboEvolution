@@ -18,8 +18,8 @@
  */
 package org.loboevolution.pdfview;
 
-import java.awt.geom.Rectangle2D;
 import java.awt.Color;
+import java.awt.geom.Rectangle2D;
 
 public class ImageInfo {
 

@@ -2,8 +2,8 @@ package org.loboevolution.pdfview.action;
 
 import java.io.IOException;
 
-import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFDestination;
+import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 
 /**

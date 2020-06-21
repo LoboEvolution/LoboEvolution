@@ -25,6 +25,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -42,7 +43,7 @@ import org.w3c.dom.Node;
  */
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
 	
-	private final ArrayList<Node> attributeList = new ArrayList<Node>();
+	private final List<Node> attributeList = new ArrayList<Node>();
 	private final Map<String, Node> attributes = new HashMap<String, Node>();
 
 	/**

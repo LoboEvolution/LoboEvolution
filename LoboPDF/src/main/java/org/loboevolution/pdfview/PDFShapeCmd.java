@@ -174,6 +174,8 @@ public class PDFShapeCmd extends PDFCmd {
                 x = mypoints[count++] = startx;
                 y = mypoints[count++] = starty;
                 break;
+            default:
+    			break;
             }
             pi.next();
         }

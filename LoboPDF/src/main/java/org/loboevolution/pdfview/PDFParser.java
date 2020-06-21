@@ -32,6 +32,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import org.loboevolution.pdfview.PDFDebugger.DebugStopException;
@@ -76,7 +77,7 @@ public class PDFParser extends BaseWatchable {
     private PDFPage cmds;
     // ---- result variables
     byte[] stream;
-    HashMap<String, PDFObject> resources;
+    Map<String, PDFObject> resources;
 
     boolean errorwritten = false;
     private boolean autoAdjustStroke = false;
@@ -92,7 +93,7 @@ public class PDFParser extends BaseWatchable {
     * never be any reason for a user to create, access, or hold
     * on to a PDFParser.
     */
-    public PDFParser(PDFPage cmds, byte[] stream, HashMap<String, PDFObject> resources) {
+    public PDFParser(PDFPage cmds, byte[] stream, Map<String, PDFObject> resources) {
         super();
         this.pageRef = new WeakReference<PDFPage>(cmds);
         this.resources = resources;
@@ -1257,7 +1258,7 @@ public class PDFParser extends BaseWatchable {
     */
     private PDFFont getFontFrom(String fontref) throws IOException {
         PDFObject obj = findResource(fontref, "Font");
-        return PDFFont.getFont(obj, this.resources);
+        return PDFFont.getFont(obj, (HashMap<String, PDFObject>) this.resources);
     }
 
     /**

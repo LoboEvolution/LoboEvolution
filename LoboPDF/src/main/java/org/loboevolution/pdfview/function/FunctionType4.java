@@ -20,7 +20,9 @@ package org.loboevolution.pdfview.function;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Stack;
 
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.function.postscript.PostScriptParser;

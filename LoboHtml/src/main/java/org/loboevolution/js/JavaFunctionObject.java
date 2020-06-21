@@ -23,6 +23,7 @@ package org.loboevolution.js;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.EvaluatorException;
@@ -41,7 +42,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 
 	private static final long serialVersionUID = 1L;
 	private final String className;
-	private final ArrayList<Method> methods = new ArrayList<Method>();
+	private final List<Method> methods = new ArrayList<Method>();
 
 	/**
 	 * <p>Constructor for JavaFunctionObject.</p>
@@ -109,7 +110,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 	}
 
 	private Method getBestMethod(Object[] args) {
-		final ArrayList<Method> methods = this.methods;
+		final List<Method> methods = this.methods;
 		final int size = methods.size();
 		int matchingNumParams = 0;
 		Method matchingMethod = null;

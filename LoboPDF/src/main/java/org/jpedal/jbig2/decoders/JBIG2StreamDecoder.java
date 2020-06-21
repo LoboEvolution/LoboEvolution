@@ -555,8 +555,9 @@ public class JBIG2StreamDecoder {
 			logger.info("retentionFlags = ");
 
 		if (JBIG2StreamDecoder.debug) {
-			for (int i = 0; i < retentionFlags.length; i++)
-				logger.info(retentionFlags[i] + " ");
+			for (short s : retentionFlags) {
+				logger.info(s + " ");
+			}
 		}
 	}
 
@@ -587,8 +588,8 @@ public class JBIG2StreamDecoder {
 
 		if (JBIG2StreamDecoder.debug) {
 			logger.info("referredToSegments = ");
-			for (int i = 0; i < referredToSegments.length; i++)
-				logger.info(referredToSegments[i] + " ");
+			for (int i : referredToSegments)
+				logger.info(i + " ");
 			logger.info("");
 		}
 	}

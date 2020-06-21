@@ -24,7 +24,6 @@
 package org.loboevolution.html.js;
 
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.loboevolution.js.AbstractScriptableDelegate;
 import org.w3c.dom.Node;

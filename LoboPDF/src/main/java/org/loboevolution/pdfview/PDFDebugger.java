@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -129,7 +129,7 @@ public class PDFDebugger {
         if (obj == null) {
             return;
         }
-        HashMap<String, PDFObject> dict = obj.getDictionary();
+        Map<String, PDFObject> dict = obj.getDictionary();
         PDFDebugger.debug("   dict = " + dict);
         for (Object key : dict.keySet()) {
             PDFDebugger.debug("key = " + key + " value = " + dict.get(key));

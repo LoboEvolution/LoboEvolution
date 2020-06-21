@@ -3,6 +3,7 @@ package org.loboevolution.html.dom.input;
 import java.awt.Dimension;
 
 import javax.swing.JSlider;
+
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.style.HtmlValues;

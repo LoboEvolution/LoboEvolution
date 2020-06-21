@@ -205,6 +205,8 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 				appendItem(newSeg);
 				break;
 			}
+			default:
+				break;
 			}
 		}
 	}

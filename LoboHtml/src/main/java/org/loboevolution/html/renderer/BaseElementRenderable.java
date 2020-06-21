@@ -37,11 +37,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 
+import org.loboevolution.common.GUITasks;
 import org.loboevolution.common.Strings;
-import org.loboevolution.info.BackgroundInfo;
-import org.loboevolution.info.BorderInfo;
-import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
@@ -51,7 +48,10 @@ import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.common.GUITasks;
+import org.loboevolution.info.BackgroundInfo;
+import org.loboevolution.info.BorderInfo;
+import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.net.HttpNetwork;
 import org.w3c.dom.css.CSS3Properties;
 
 /**

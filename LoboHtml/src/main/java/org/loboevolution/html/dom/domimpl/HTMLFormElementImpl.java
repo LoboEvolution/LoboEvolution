@@ -27,10 +27,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.filter.InputFilter;
+import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.js.Executor;
 import org.loboevolution.http.HtmlRendererContext;
 import org.mozilla.javascript.Function;

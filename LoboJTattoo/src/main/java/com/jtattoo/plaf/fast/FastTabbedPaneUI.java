@@ -122,6 +122,8 @@ public class FastTabbedPaneUI extends BaseTabbedPaneUI {
 					g.fillRect(x, y + 1, w, h - 1);
 				}
 				break;
+			default:
+				break;
 			}
 		}
 	}

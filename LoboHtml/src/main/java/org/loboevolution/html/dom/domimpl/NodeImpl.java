@@ -32,17 +32,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
+import org.loboevolution.html.dom.HTMLCollection;
+import org.loboevolution.html.dom.NodeFilter;
+import org.loboevolution.html.dom.filter.TextFilter;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
-import java.util.Objects;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
 import org.w3c.dom.DOMException;
@@ -54,12 +59,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
-
-import org.loboevolution.common.Nodes;
-import org.loboevolution.common.Urls;
-import org.loboevolution.html.dom.HTMLCollection;
-import org.loboevolution.html.dom.NodeFilter;
-import org.loboevolution.html.dom.filter.TextFilter;
 
 /**
  * <p>Abstract NodeImpl class.</p>

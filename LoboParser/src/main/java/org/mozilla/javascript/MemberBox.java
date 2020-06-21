@@ -305,13 +305,10 @@ final class MemberBox implements Serializable
      * Requires special handling because primitive types cannot be
      * found upon deserialization by the default Java implementation.
      */
-    private static void writeParameters(ObjectOutputStream out, Class<?>[] parms)
-        throws IOException
-    {
-        out.writeShort(parms.length);
-    outer:
-        for (int i=0; i < parms.length; i++) {
-            Class<?> parm = parms[i];
+	private static void writeParameters(ObjectOutputStream out, Class<?>[] parms) throws IOException {
+		out.writeShort(parms.length);
+		outer:
+    	for (Class<?> parm : parms) {
             boolean primitive = parm.isPrimitive();
             out.writeBoolean(primitive);
             if (!primitive) {
@@ -323,10 +320,9 @@ final class MemberBox implements Serializable
                     out.writeByte(j);
                     continue outer;
                 }
-            }
-            throw new IllegalArgumentException("Primitive " + parm +
-                                               " not found");
-        }
+			}
+			throw new IllegalArgumentException("Primitive " + parm + " not found");
+		}
     }
 
     /**

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.UIDefaults;
@@ -69,15 +70,12 @@ import com.jtattoo.plaf.BaseTreeUI;
  */
 public class SmartLookAndFeel extends AbstractLookAndFeel {
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 
 	private static SmartDefaultTheme myTheme = null;
 
-	private static final ArrayList<String> themesList = new ArrayList<String>();
-	private static final HashMap<String, Properties> themesMap = new HashMap<String, Properties>();
+	private static final List<String> themesList = new ArrayList<String>();
+	private static final Map<String, Properties> themesMap = new HashMap<String, Properties>();
 	private static final Properties defaultProps = new Properties();
 	private static final Properties smallFontProps = new Properties();
 	private static final Properties largeFontProps = new Properties();

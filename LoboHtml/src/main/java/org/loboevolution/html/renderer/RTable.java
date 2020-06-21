@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -43,7 +44,6 @@ import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import java.util.Objects;
 
 class RTable extends BaseElementRenderable {
 	private static class LayoutKey {

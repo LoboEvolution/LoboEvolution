@@ -5,7 +5,6 @@ import java.nio.ByteBuffer;
 
 import org.jpedal.jbig2.JBIG2Decoder;
 import org.jpedal.jbig2.JBIG2Exception;
-
 import org.loboevolution.pdfview.PDFObject;
 
 /*****************************************************************************

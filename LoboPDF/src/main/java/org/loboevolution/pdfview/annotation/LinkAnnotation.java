@@ -7,7 +7,6 @@ import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 import org.loboevolution.pdfview.action.GoToAction;
 import org.loboevolution.pdfview.action.PDFAction;
-import org.loboevolution.pdfview.annotation.PDFAnnotation.ANNOTATION_TYPE;
 
 /*****************************************************************************
  * PDF annotation describing a link to either a location within the current

@@ -9,15 +9,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.html.parser.DocumentBuilderImpl;
+import org.loboevolution.html.parser.InputSourceImpl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.NavigationStore;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.ToolsStore;
-import org.loboevolution.html.gui.HtmlPanel;
-import org.loboevolution.html.parser.DocumentBuilderImpl;
-import org.loboevolution.html.parser.InputSourceImpl;
-import org.loboevolution.http.HtmlRendererContext;
-import org.loboevolution.http.UserAgentContext;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 

@@ -282,6 +282,8 @@ public final class JBIG2Bitmap {
 				case 3:
 					ltpCX = 0x18a;
 					break;
+				default:
+					break;
 				}
 			}
 
@@ -453,6 +455,8 @@ public final class JBIG2Bitmap {
 						cx1 = ((BinaryOperation.bit32ShiftL(cx1, 1)) | cxPtr1.nextPixel()) & 0x1f;
 						cx2 = ((BinaryOperation.bit32ShiftL(cx2, 1)) | pixel) & 0x0f;
 					}
+					break;
+				default:
 					break;
 				}
 			}
@@ -766,6 +770,8 @@ public final class JBIG2Bitmap {
 						case 3: // top right
 							combine(symbolBitmap, (tt - bitmapWidth), s, combinationOperator);
 							break;
+						default:
+							break;
 						}
 						s += bitmapHeight;
 					} else {
@@ -781,6 +787,8 @@ public final class JBIG2Bitmap {
 							break;
 						case 3: // top right
 							combine(symbolBitmap, s, tt, combinationOperator);
+							break;
+						default:
 							break;
 						}
 						s += bitmapWidth;

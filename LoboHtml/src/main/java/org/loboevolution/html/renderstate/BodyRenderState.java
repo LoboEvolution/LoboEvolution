@@ -23,11 +23,11 @@ package org.loboevolution.html.renderstate;
 import java.awt.Color;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.info.BackgroundInfo;
-import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.info.BackgroundInfo;
+import org.loboevolution.laf.ColorFactory;
 
 /**
  * <p>BodyRenderState class.</p>

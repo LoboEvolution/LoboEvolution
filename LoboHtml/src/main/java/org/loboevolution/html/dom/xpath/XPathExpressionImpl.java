@@ -24,9 +24,9 @@
 
 package org.loboevolution.html.dom.xpath;
 
-import javax.xml.transform.TransformerException;
-
 import java.util.Objects;
+
+import javax.xml.transform.TransformerException;
 
 import org.apache.xpath.XPath;
 import org.apache.xpath.XPathContext;

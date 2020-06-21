@@ -126,6 +126,8 @@ public class NavigationToolbar extends JToolBar {
 				currentPageBox.setText(String.valueOf(curpage));
 			}
 			break;
+		default:
+			break;
 		}
 		currentPageBox.setText(String.valueOf(PDFViewer.curpage + 1));
 	}

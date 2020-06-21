@@ -41,11 +41,11 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.loboevolution.common.Urls;
-import org.loboevolution.net.HttpNetwork;
-import org.loboevolution.html.ReadyStateChangeListener;
 import org.loboevolution.common.EventDispatch;
 import org.loboevolution.common.IORoutines;
+import org.loboevolution.common.Urls;
+import org.loboevolution.html.ReadyStateChangeListener;
+import org.loboevolution.net.HttpNetwork;
 import org.w3c.dom.Document;
 
 /**

@@ -31,6 +31,7 @@ import java.awt.Insets;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
@@ -43,7 +44,6 @@ import org.loboevolution.html.renderer.RenderableContainer;
 import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.UserAgentContext;
-import java.util.Objects;
 
 /**
  * <p>RUIControl class.</p>

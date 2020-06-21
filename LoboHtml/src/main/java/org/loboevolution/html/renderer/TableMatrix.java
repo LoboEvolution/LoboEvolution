@@ -29,30 +29,31 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.loboevolution.common.Nodes;
-import org.loboevolution.info.CaptionSizeInfo;
-import org.loboevolution.info.SizeInfo;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.NodeFilter;
-import org.loboevolution.html.dom.filter.CaptionFilter;
-import org.loboevolution.html.dom.filter.ColumnsFilter;
-import org.loboevolution.html.renderstate.RTableCaption;
-import org.loboevolution.html.renderstate.RenderState;
-import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
+import org.loboevolution.html.dom.filter.CaptionFilter;
+import org.loboevolution.html.dom.filter.ColumnsFilter;
+import org.loboevolution.html.renderstate.RTableCaption;
+import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlLength;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.CaptionSizeInfo;
+import org.loboevolution.info.SizeInfo;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -60,9 +61,9 @@ class TableMatrix {
 
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 	
-	private final ArrayList<HTMLTableRowElement> ROW_ELEMENTS = new ArrayList<HTMLTableRowElement>();
-	private final ArrayList<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
-	private final ArrayList<RTableCell> ALL_CELLS = new ArrayList<RTableCell>();
+	private final List<HTMLTableRowElement> ROW_ELEMENTS = new ArrayList<HTMLTableRowElement>();
+	private final List<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
+	private final List<RTableCell> ALL_CELLS = new ArrayList<RTableCell>();
 	
 	private SizeInfo[] columnSizes;
 	private SizeInfo[] rowSizes;
@@ -222,10 +223,10 @@ class TableMatrix {
 	 * table cells.
 	 */
 	private void adjustForCellSpans() {
-		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
+		final List<ArrayList<VirtualCell>> rows = this.ROWS;
 		int numRows = rows.size();
 		for (int r = 0; r < numRows; r++) {
-			final ArrayList<VirtualCell> row = rows.get(r);
+			final List<VirtualCell> row = rows.get(r);
 			int numCols = row.size();
 			for (int c = 0; c < numCols; c++) {
 				final VirtualCell vc = (VirtualCell) row.get(c);
@@ -252,7 +253,7 @@ class TableMatrix {
 						if (colspan > 1 || y > 0) {
 							// Get row
 							final int nr = r + y;
-							final ArrayList<VirtualCell> newRow = (ArrayList<VirtualCell>) rows.get(nr);
+							final List<VirtualCell> newRow = (ArrayList<VirtualCell>) rows.get(nr);
 
 							// Insert missing cells in row
 							final int xstart = y == 0 ? 1 : 0;
@@ -277,7 +278,7 @@ class TableMatrix {
 
 		// Adjust row and column of virtual cells
 		for (int r = 0; r < numRows; r++) {
-			final ArrayList<VirtualCell> row = rows.get(r);
+			final List<VirtualCell> row = rows.get(r);
 			final int numCols = row.size();
 			for (int c = 0; c < numCols; c++) {
 				final VirtualCell vc = (VirtualCell) row.get(c);
@@ -354,14 +355,14 @@ class TableMatrix {
 	 * element.
 	 */
 	private void createSizeArrays() {
-		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
+		final List<ArrayList<VirtualCell>> rows = this.ROWS;
 		final int numRows = rows.size();
 		final SizeInfo[] rowSizes = new SizeInfo[numRows];
 		this.rowSizes = rowSizes;
 		int numCols = 0;
-		final ArrayList<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
+		final List<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
 		for (int i = 0; i < numRows; i++) {
-			final ArrayList<VirtualCell> row = rows.get(i);
+			final List<VirtualCell> row = rows.get(i);
 			final int rs = row.size();
 			if (rs > numCols) {
 				numCols = rs;
@@ -401,7 +402,7 @@ class TableMatrix {
 
 			// Cells with colspan==1 first.
 			for (int y = 0; y < numRows; y++) {
-				final ArrayList<VirtualCell> row = rows.get(y);
+				final List<VirtualCell> row = rows.get(y);
 				VirtualCell vc = row.size() > i ? row.get(i) : null;
 				if (vc != null) {
 					final RTableCell ac = vc.getActualCell();
@@ -416,7 +417,7 @@ class TableMatrix {
 			// Now cells with colspan>1.
 			if (bestWidthLength == null) {
 				for (int y = 0; y < numRows; y++) {
-					final ArrayList<VirtualCell> row = rows.get(y);
+					final List<VirtualCell> row = rows.get(y);
 					VirtualCell vc = row.size() > i ? row.get(i) : null;
 					if (vc != null) {
 						final RTableCell ac = vc.getActualCell();
@@ -850,7 +851,7 @@ class TableMatrix {
 
 		this.tableWidth = xoffset + cellSpacingX + insets.right;
 
-		ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		List<RTableCell> allCells = this.ALL_CELLS;
 		for (RTableCell cell : allCells) {
 			cell.setCellBounds(colSizes, rowSizes, hasBorder, cellSpacingX, cellSpacingY);
 		}
@@ -873,7 +874,7 @@ class TableMatrix {
 	private final void finalRender(int hasBorder, int cellSpacing, boolean sizeOnly) {
 		// finalRender needs to adjust actualSize of columns and rows
 		// given that things might change as we render one last time.
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final SizeInfo[] colSizes = this.columnSizes;
 		final SizeInfo[] rowSizes = this.rowSizes;
 		final int numCells = allCells.size();
@@ -938,7 +939,7 @@ class TableMatrix {
 	 * @return a {@link org.loboevolution.html.renderer.RenderableSpot} object.
 	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
@@ -1020,7 +1021,7 @@ class TableMatrix {
 	 * @return a boolean.
 	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
@@ -1051,7 +1052,7 @@ class TableMatrix {
 	 * @return a boolean.
 	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
@@ -1105,7 +1106,7 @@ class TableMatrix {
 	 * @return a boolean.
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
@@ -1137,7 +1138,7 @@ class TableMatrix {
 	 * @return a boolean.
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		boolean found = false;
 		for (int i = 0; i < numCells; i++) {
@@ -1173,7 +1174,7 @@ class TableMatrix {
 	 * @param size a {@link java.awt.Dimension} object.
 	 */
 	public final void paint(Graphics g, Dimension size) {
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		for (int i = 0; i < numCells; i++) {
 			final RTableCell cell = (RTableCell) allCells.get(i);
@@ -1212,9 +1213,9 @@ class TableMatrix {
 	 */
 	private void populateRows() {
 		final HTMLElementImpl te = this.tableElement;
-		final ArrayList<ArrayList<VirtualCell>> rows = this.ROWS;
-		final ArrayList<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<ArrayList<VirtualCell>> rows = this.ROWS;
+		final List<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>();
 		final NodeList cellList = te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
@@ -1290,7 +1291,7 @@ class TableMatrix {
 			colSizes[i].setLayoutSize(0);
 		}
 
-		final ArrayList<RTableCell> allCells = this.ALL_CELLS;
+		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		if (caption != null) {
 			caption.doLayout(0, 0, true, true, null, 0, 0, true);
@@ -1518,7 +1519,7 @@ class TableMatrix {
 	 * @return a int.
 	 */
 	public static int adjustCurrentTotal(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
-			ArrayList<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
+			List<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
 			int widthTotal, int difference, int cellSpacingX, int hasBorder, int currTotal) {
 		
 		int currentTotal = currTotal;
@@ -1567,7 +1568,7 @@ class TableMatrix {
 	 * @return a int.
 	 */
 	public static int adjustCurrentTotal2(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
-			ArrayList<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
+			List<ArrayList<VirtualCell>> ROWS, int cellSpacingY, int numCols,
 			int widthTotal, int difference, int cellSpacingX, int hasBorder, int numNoWidth, int cellAvailWidth, int currTotal) {
 		
 		int currentTotal = currTotal;
@@ -1609,16 +1610,16 @@ class TableMatrix {
 	}
 	
 	private static void layoutColumn(SizeInfo[] columnSizes, SizeInfo[] rowLenght,
-			ArrayList<ArrayList<VirtualCell>> ROWS, SizeInfo colSize, int col, int cellSpacingY, int cellSpacingX,
+			List<ArrayList<VirtualCell>> ROWS, SizeInfo colSize, int col, int cellSpacingY, int cellSpacingX,
 			int hasBorder) {
 		SizeInfo[] rowSizes = rowLenght;
-		ArrayList<ArrayList<VirtualCell>> rows = ROWS;
+		List<ArrayList<VirtualCell>> rows = ROWS;
 		int numRows = rows.size();
 		int actualSize = colSize.getActualSize();
 		colSize.setLayoutSize(0);
 		for (int row = 0; row < numRows;) {
 			// SizeInfo rowSize = rowSizes[row];
-			ArrayList<VirtualCell> columns = rows.get(row);
+			List<VirtualCell> columns = rows.get(row);
 			VirtualCell vc = null;
 			int sizeCol = columns.size();
 			if (sizeCol > col) {

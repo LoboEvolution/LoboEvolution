@@ -42,8 +42,8 @@
 package org.w3c.dom.xpath;
 
 
-import org.w3c.dom.Node;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Node;
 
 /**
  * The XPathExpression interface represents a parsed and resolved

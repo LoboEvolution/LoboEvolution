@@ -96,7 +96,7 @@ public class PDFObject {
     /** the encoded stream, if this is a STREAM object */
     private ByteBuffer stream;
     /** a cached version of the decoded stream */
-    private SoftReference decodedStream;
+    private SoftReference<ByteBuffer> decodedStream;
     /** The filter limits used to generate the cached decoded stream */
     private Set<String> decodedStreamFilterLimits = null;
     /**
@@ -109,7 +109,7 @@ public class PDFObject {
      * garbage collected at any time, after which it will
      * have to be rebuilt.
      */
-    private SoftReference cache;
+    private SoftReference<?> cache;
 
     /** @see #getObjNum() */
     private int objNum = OBJ_NUM_EMBEDDED;
@@ -490,7 +490,7 @@ public class PDFObject {
      * this object is not a DICTIONARY or a STREAM, returns an
      * Iterator over the empty list.
      */
-    public Iterator getDictKeys() throws IOException {
+    public Iterator<String> getDictKeys() throws IOException {
         if (type == INDIRECT) {
             return dereference().getDictKeys();
         } else if (type == DICTIONARY || type == STREAM) {
@@ -505,11 +505,11 @@ public class PDFObject {
      * get the dictionary as a HashMap.  If this isn't a DICTIONARY
      * or a STREAM, returns null
      */
-    public HashMap<String,PDFObject> getDictionary() throws IOException {
+    public Map<String,PDFObject> getDictionary() throws IOException {
         if (type == INDIRECT) {
             return dereference().getDictionary();
         } else if (type == DICTIONARY || type == STREAM) {
-            return (HashMap<String,PDFObject>) value;
+            return (Map<String,PDFObject>) value;
         }
 
         // wrong type

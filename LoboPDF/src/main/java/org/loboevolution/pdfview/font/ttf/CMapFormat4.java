@@ -27,8 +27,6 @@ import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import org.loboevolution.pdfview.font.ttf.CMapFormat4.Segment;
-
 /**
  *
  * @author  jkaplan
@@ -170,7 +168,7 @@ public class CMapFormat4 extends CMap {
                 char[] map = (char[]) this.segments.get(s);
                 
                 // if we have a map, we have to iterate through it
-                for (int c = 0; c < map.length; c++) {
+                for (char c : map) {
                     if (map[c] == glyphID) {
                         return (char) (s.startCode + c);
                     }
@@ -201,10 +199,6 @@ public class CMapFormat4 extends CMap {
 	public void setData(int length, ByteBuffer data) {
         // read the table size values
         short segCount = (short) (data.getShort() / 2);
-        short searchRange = data.getShort();
-        short entrySelector = data.getShort();
-        short rangeShift = data.getShort();
-    
         // create arrays to store segment info
         short[] endCodes = new short[segCount];
         short[] startCodes = new short[segCount];

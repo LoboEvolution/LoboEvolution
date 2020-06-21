@@ -19,12 +19,9 @@
 
 package org.loboevolution.pdfview.decode;
 
-import java.nio.ByteBuffer;
-
 import java.io.IOException;
-
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -77,6 +74,8 @@ public class PNGPredictor extends Predictor {
                 case 4:
                     doPaethLine(curLine, prevLine);
                     break;
+                default:
+        			break;
             }
             
             rows.add(curLine);
@@ -85,8 +84,8 @@ public class PNGPredictor extends Predictor {
         
         // turn into byte array
         ByteBuffer outBuf = ByteBuffer.allocate(rows.size() * rowSize);
-        for (Iterator i = rows.iterator(); i.hasNext();) {
-            outBuf.put((byte[]) i.next());
+        for (byte[] b : rows) {
+            outBuf.put(b);
         }
         
         // reset start pointer

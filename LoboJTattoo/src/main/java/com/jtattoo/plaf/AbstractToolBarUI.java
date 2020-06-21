@@ -33,6 +33,7 @@ import java.awt.event.ContainerListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
@@ -116,9 +117,9 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 
 	private MyContainerListener containerListener = null;
 
-	private final HashMap<AbstractButton, Border> orgBorders = new HashMap<AbstractButton, Border>();
+	private final Map<AbstractButton, Border> orgBorders = new HashMap<AbstractButton, Border>();
 
-	private final HashMap<AbstractButton, Insets> orgMargins = new HashMap<AbstractButton, Insets>();
+	private final Map<AbstractButton, Insets> orgMargins = new HashMap<AbstractButton, Insets>();
 
 	/**
 	 * <p>changeBorders.</p>

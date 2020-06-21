@@ -33,9 +33,7 @@ import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
-import org.loboevolution.pdfview.PDFRenderer;
 import org.loboevolution.pdfview.font.cid.PDFCMap;
-import org.loboevolution.pdfview.font.cid.ToUnicodeMap;
 import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 
 /**
@@ -438,10 +436,9 @@ public abstract class PDFFont {
             // use the default mapping
             char[] arry = text.toCharArray();
             outList = new ArrayList<PDFGlyph>(arry.length);
-
-            for (int i = 0; i < arry.length; i++) {
+            for (char c : arry) {
                 // only look at 2 bytes when there is no encoding
-                char src = (char) (arry[i] & 0xff);
+                char src = (char) (c & 0xff);
                 outList.add(getCachedGlyph(src, null));
             }
         }

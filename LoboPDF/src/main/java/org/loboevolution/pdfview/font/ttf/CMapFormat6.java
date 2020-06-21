@@ -20,7 +20,8 @@
 package org.loboevolution.pdfview.font.ttf;
 
 import java.nio.ByteBuffer;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -34,7 +35,7 @@ public class CMapFormat6 extends CMap {
     /** Array of glyph index values for character codes in the range. */
     private short [] glyphIndexArray;
     /** a reverse lookup from glyph id to index. */
-    private HashMap<Short,Short> glyphLookup = new HashMap<Short,Short>();
+    private Map<Short,Short> glyphLookup = new HashMap<Short,Short>();
 
     /** Creates a new instance of CMapFormat0 */
     protected CMapFormat6(short language) {
