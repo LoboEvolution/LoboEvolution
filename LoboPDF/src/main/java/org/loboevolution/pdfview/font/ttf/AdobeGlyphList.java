@@ -60,10 +60,10 @@ public class AdobeGlyphList {
 	private static final Logger logger = Logger.getLogger(AdobeGlyphList.class.getName());
 
     /** provide a translation from a glyph name to the possible unicode values. */
-    static private HashMap<String, int[]> glyphToUnicodes;
+    static private Map<String, int[]> glyphToUnicodes;
 
     /** provide a translation from a unicode value to a glyph name. */
-    static private HashMap<Integer, String> unicodeToGlyph;
+    static private Map<Integer, String> unicodeToGlyph;
 
     /** the loader thread we are reading through. */
     static Thread glyphLoaderThread = null;

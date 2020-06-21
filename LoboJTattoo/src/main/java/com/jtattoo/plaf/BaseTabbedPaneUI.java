@@ -65,6 +65,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
@@ -2212,9 +2214,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	private Component visibleComponent;
 
 	// PENDING(api): See comment for ContainerHandler
-	private ArrayList<View> htmlViews;
+	private List<View> htmlViews;
 
-	private HashMap<Integer, Integer> mnemonicToIndexMap;
+	private Map<Integer, Integer> mnemonicToIndexMap;
 
 	/**
 	 * InputMap used for mnemonics. Only non-null if the JTabbedPane has mnemonics
@@ -2540,7 +2542,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		return new FocusHandler();
 	}
 
-	private ArrayList<View> createHTMLViewList() {
+	private List<View> createHTMLViewList() {
 		ArrayList<View> viewList = new ArrayList<View>();
 		int count = tabPane.getTabCount();
 		for (int i = 0; i < count; i++) {

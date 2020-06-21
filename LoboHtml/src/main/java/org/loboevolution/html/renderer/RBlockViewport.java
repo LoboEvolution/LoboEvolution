@@ -91,7 +91,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private int desiredWidth; // includes insets
 
-	private ArrayList<ExportableFloat> exportableFloats = null;
+	private List<ExportableFloat> exportableFloats = null;
 
 	private FloatingBounds floatBounds = null;
 
@@ -115,7 +115,7 @@ public class RBlockViewport extends BaseRCollection {
 
 	private SortedSet<PositionedRenderable> positionedRenderables;
 
-	private ArrayList<Renderable> seqRenderables = null;
+	private List<Renderable> seqRenderables = null;
 
 	private boolean sizeOnly;
 	
@@ -187,7 +187,7 @@ public class RBlockViewport extends BaseRCollection {
 			boolean centerBlock) {
 		final Insets insets = this.paddingInsets;
 		final int insetsl = insets.left;
-		ArrayList<Renderable> sr = this.seqRenderables;
+		List<Renderable> sr = this.seqRenderables;
 		if (sr == null) {
 			sr = new ArrayList<Renderable>();
 			this.seqRenderables = sr;
@@ -328,7 +328,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private void addExportableFloat(final BoundableRenderable element, final boolean leftFloat, final int origX, final int origY) {
-		ArrayList<ExportableFloat> ep = this.exportableFloats;
+		List<ExportableFloat> ep = this.exportableFloats;
 		if (ep == null) {
 			ep = new ArrayList<ExportableFloat>(1);
 			this.exportableFloats = ep;
@@ -370,7 +370,7 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		rline = new RLine(startNode, this.container, newX, newLineY, newMaxWidth, 0, initialAllowOverflow);
 		rline.setParent(this);
-		ArrayList<Renderable> sr = this.seqRenderables;
+		List<Renderable> sr = this.seqRenderables;
 		if (sr == null) {
 			sr = new ArrayList<Renderable>();
 			this.seqRenderables = sr;
@@ -381,7 +381,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private void addLineAfterBlock(RBlock block, boolean informLineDone) {
-		ArrayList<Renderable> sr = this.seqRenderables;
+		List<Renderable> sr = this.seqRenderables;
 		if (sr == null) {
 			sr = new ArrayList<Renderable>(1);
 			this.seqRenderables = sr;
@@ -574,7 +574,7 @@ public class RBlockViewport extends BaseRCollection {
 		final int prevMaxY = this.maxY;
 		// Horizontal alignment
 		if (alignXPercent > 0) {
-			final ArrayList<Renderable> renderables = this.seqRenderables;
+			final List<Renderable> renderables = this.seqRenderables;
 			if (renderables != null) {
 				final Insets insets = this.paddingInsets;
 				final int numRenderables = renderables.size();
@@ -619,7 +619,7 @@ public class RBlockViewport extends BaseRCollection {
 			final int difference = availContentHeight - usedHeight;
 			if (difference > 0) {
 				final int shift = difference * alignYPercent / 100;
-				final ArrayList<Renderable> rlist = this.seqRenderables;
+				final List<Renderable> rlist = this.seqRenderables;
 				if (rlist != null) {
 					// Try sequential renderables first.
 					final Iterator<Renderable> renderables = rlist.iterator();
@@ -727,7 +727,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return a {@link org.loboevolution.info.FloatingInfo} object.
 	 */
 	public FloatingInfo getExportableFloatingInfo() {
-		final ArrayList<ExportableFloat> ef = this.exportableFloats;
+		final List<ExportableFloat> ef = this.exportableFloats;
 		if (ef == null) {
 			return null;
 		}
@@ -745,7 +745,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return a int.
 	 */
 	public int getFirstBaselineOffset() {
-		final ArrayList<Renderable> renderables = this.seqRenderables;
+		final List<Renderable> renderables = this.seqRenderables;
 		if (renderables != null) {
 			final Iterator<Renderable> i = renderables.iterator();
 			while (i.hasNext()) {
@@ -774,7 +774,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @return a int.
 	 */
 	public int getFirstLineHeight() {
-		final ArrayList<Renderable> renderables = this.seqRenderables;
+		final List<Renderable> renderables = this.seqRenderables;
 		if (renderables != null) {
 			final int size = renderables.size();
 			if (size == 0) {
@@ -848,10 +848,10 @@ public class RBlockViewport extends BaseRCollection {
 	public Iterator<Renderable> getRenderables() {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null || others.size() == 0) {
-			final ArrayList<Renderable> sr = this.seqRenderables;
+			final List<Renderable> sr = this.seqRenderables;
 			return sr == null ? null : sr.iterator();
 		} else {
-			final ArrayList<Renderable> allRenderables = new ArrayList<Renderable>();
+			final List<Renderable> allRenderables = new ArrayList<Renderable>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
 			return allRenderables.iterator();
 		}
@@ -894,7 +894,7 @@ public class RBlockViewport extends BaseRCollection {
 			}
 		}
 
-		final ArrayList<Renderable> sr = this.seqRenderables;
+		final List<Renderable> sr = this.seqRenderables;
 		if (sr != null) {
 			final Renderable[] array = sr.toArray(Renderable.EMPTY_ARRAY);
 			final List<BoundableRenderable> found = MarkupUtilities.findRenderables(array, pointx, pointy, true);
@@ -933,7 +933,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	private Iterator<Renderable> getRenderables(Rectangle clipBounds) {
-		final ArrayList<Renderable> sr = this.seqRenderables;
+		final List<Renderable> sr = this.seqRenderables;
 		Iterator<Renderable> baseIterator = null;
 		if (sr != null) {
 			final Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
@@ -956,7 +956,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (matches.size() == 0) {
 				return baseIterator;
 			} else {
-				final ArrayList<Renderable> destination = new ArrayList<>();
+				final List<Renderable> destination = new ArrayList<>();
 				populateZIndexGroups(matches, baseIterator, destination);
 				return destination.iterator();
 			}
@@ -972,10 +972,10 @@ public class RBlockViewport extends BaseRCollection {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		final int othersSize = others == null ? 0 : others.size();
 		if (othersSize == 0) {
-			final ArrayList<Renderable> sr = this.seqRenderables;
+			final List<Renderable> sr = this.seqRenderables;
 			return sr == null ? Renderable.EMPTY_ARRAY : (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
 		} else {
-			final ArrayList<Renderable> allRenderables = new ArrayList<Renderable>();
+			final List<Renderable> allRenderables = new ArrayList<Renderable>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
 			return (Renderable[]) allRenderables.toArray(Renderable.EMPTY_ARRAY);
 		}
@@ -1789,7 +1789,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param destination
 	 */
 	private void populateZIndexGroupsIterator(final Collection<PositionedRenderable> others,
-			final Collection<Renderable> seqRenderables, final ArrayList<Renderable> destination) {
+			final Collection<Renderable> seqRenderables, final List<Renderable> destination) {
 		populateZIndexGroups(others, seqRenderables == null ? null : seqRenderables.iterator(), destination);
 	}
 
@@ -1800,7 +1800,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param destination
 	 */
 	private static void populateZIndexGroups(final Collection<PositionedRenderable> others,
-			final Iterator<Renderable> seqRenderablesIterator, final ArrayList<Renderable> destination) {
+			final Iterator<Renderable> seqRenderablesIterator, final List<Renderable> destination) {
 		// First, others with z-index < 0
 		final Iterator<PositionedRenderable> i1 = others.iterator();
 		Renderable pending = null;

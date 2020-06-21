@@ -35,6 +35,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.EventObject;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,7 +153,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private final DocumentNotificationListener notificationListener;
 	
-	private final ArrayList<DocumentNotification> notifications = new ArrayList<DocumentNotification>();
+	private final List<DocumentNotification> notifications = new ArrayList<DocumentNotification>();
 
 	private final Timer notificationTimer;
 
@@ -178,7 +179,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void addNotification(DocumentNotification notification) {
 		// This can be called in a random thread.
-		final ArrayList<DocumentNotification> notifs = this.notifications;
+		final List<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(notification);
 		}
@@ -263,7 +264,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 	 */
 	@Override
 	public void delayedRelayout(NodeImpl node) {
-		final ArrayList<DocumentNotification> notifs = this.notifications;
+		final List<DocumentNotification> notifs = this.notifications;
 		synchronized (notifs) {
 			notifs.add(new DocumentNotification(DocumentNotification.SIZE, node));
 		}
@@ -360,7 +361,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private void processNotifications() {
 		// This is called in the GUI thread.
-		final ArrayList<DocumentNotification> notifs = this.notifications;
+		final List<DocumentNotification> notifs = this.notifications;
 		DocumentNotification[] notifsArray;
 		synchronized (notifs) {
 			final int size = notifs.size();

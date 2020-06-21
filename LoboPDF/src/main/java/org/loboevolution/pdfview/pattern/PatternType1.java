@@ -39,7 +39,6 @@ import java.awt.image.DataBuffer;
 import java.awt.image.Raster;
 import java.awt.image.WritableRaster;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.loboevolution.pdfview.PDFObject;
@@ -62,7 +61,7 @@ public class PatternType1 extends PDFPattern {
     public static final int TILE_FASTER = 3;
     
     /** the resources used by the image we will tile */
-    private HashMap<String,PDFObject> resources;
+    private Map<String,PDFObject> resources;
     
     /** the paint type (colored or uncolored) */
     private int paintType;
@@ -121,15 +120,7 @@ public class PatternType1 extends PDFPattern {
      */
     @Override
 	public PDFPaint getPaint(PDFPaint basePaint) {
-        // create the outline of the pattern in user space by creating
-        // a box with width xstep and height ystep.  Transform that
-        // box using the pattern's matrix to get the user space
-        // bounding box
-        Rectangle2D anchor = new Rectangle2D.Double(getBBox().getMinX(),
-                                                    getBBox().getMinY(),
-                                                    getXStep(),
-                                                    getYStep());
-        //anchor = getTransform().createTransformedShape(anchor).getBounds2D();
+      
         
         // now create a page bounded by the pattern's user space size
         final PDFPage page = new PDFPage(getBBox(), 0);
@@ -140,68 +131,42 @@ public class PatternType1 extends PDFPattern {
             page.addStrokePaint(basePaint);
         }
         
-        // undo the page's transform to user space
-        /*
-        AffineTransform xform =
-            new AffineTransform(1, 0, 0, -1, 0, getYStep());
-            //new AffineTransform(1, 0, 0, -1, 0, getBBox().getHeight());
-        page.addXform(xform);
-        */
-        
         // now parse the pattern contents
         PDFParser prc = new PDFParser(page, this.data, getResources());
         prc.go(true);
-        
-        int width = (int) getBBox().getWidth();
-        int height = (int) getBBox().getHeight();
-        
+                
         // get actual image
-        Paint paint = new Paint() {
-            @Override
-			public PaintContext createContext(ColorModel cm, 
-                                              Rectangle deviceBounds, 
-                                              Rectangle2D userBounds,
-                                              AffineTransform xform,
-                                              RenderingHints hints) 
-            {
-                ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
-                ColorModel model = new ComponentColorModel(cs, 
-                                                           true, 
-                                                           false, 
-                                                           Transparency.TRANSLUCENT,
-                                                           DataBuffer.TYPE_BYTE);
-                
-                Rectangle2D devBBox = 
-                        xform.createTransformedShape(userBounds).getBounds2D();
-                
-                double[] steps = new double[] { getXStep(), getYStep() };
-                xform.deltaTransform(steps, 0, steps, 0, 1);
-                
-                int width = (int) Math.ceil(devBBox.getWidth());
-                int height = (int) Math.ceil(devBBox.getHeight());
-                
-                BufferedImage img = (BufferedImage) page.getImage(width, height,  
-                                                                  null, null, 
-                                                                  false, true);
-                                                                  
-                return new Type1PaintContext(model, devBBox, 
-                                             (float) steps[0],
-                                             (float) steps[1],
-                                             img.getData());
-            }
-            
-            @Override
+		Paint paint = new Paint() {
+			@Override
+			public PaintContext createContext(ColorModel cm, Rectangle deviceBounds, Rectangle2D userBounds,
+					AffineTransform xform, RenderingHints hints) {
+				ColorSpace cs = ColorSpace.getInstance(ColorSpace.CS_sRGB);
+				ColorModel model = new ComponentColorModel(cs, true, false, Transparency.TRANSLUCENT,
+						DataBuffer.TYPE_BYTE);
+
+				Rectangle2D devBBox = xform.createTransformedShape(userBounds).getBounds2D();
+
+				double[] steps = new double[] { getXStep(), getYStep() };
+				xform.deltaTransform(steps, 0, steps, 0, 1);
+
+				int width = (int) Math.ceil(devBBox.getWidth());
+				int height = (int) Math.ceil(devBBox.getHeight());
+				BufferedImage img = (BufferedImage) page.getImage(width, height, null, null, false, true);
+				return new Type1PaintContext(model, devBBox, (float) steps[0], (float) steps[1], img.getData());
+			}
+
+			@Override
 			public int getTransparency() {
-                return Transparency.TRANSLUCENT;
-            }
-        };
+				return Transparency.TRANSLUCENT;
+			}
+		};
                                             
         
         return new TilingPatternPaint(paint, this);
     }
     
     /** get the associated resources */
-    public HashMap<String,PDFObject> getResources() {
+    public Map<String,PDFObject> getResources() {
         return this.resources;
     }
     

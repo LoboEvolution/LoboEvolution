@@ -32,6 +32,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.ModelNode;
@@ -50,7 +51,7 @@ class RLine extends BaseRCollection {
 	private LineBreak lineBreak;
 	private BoundableRenderable mousePressTarget;
 
-	private final ArrayList<Renderable> renderables = new ArrayList<Renderable>(8);
+	private final List<Renderable> renderables = new ArrayList<Renderable>(8);
 
 	/**
 	 * Offset where next renderable should be placed. This can be different to
@@ -215,7 +216,7 @@ class RLine extends BaseRCollection {
 			this.firstAllowOverflowWord = false;
 		}
 		if ((!allowOverflow || firstAllowOverflowWord) && offset != 0 && offset + wiwidth > this.desiredMaxWidth) {
-			final ArrayList<Renderable> renderables = this.renderables;
+			final List<Renderable> renderables = this.renderables;
 			ArrayList<Renderable> overflow = null;
 			boolean cancel = false;
 			// Check if other words need to be overflown (for example,
@@ -302,7 +303,7 @@ class RLine extends BaseRCollection {
 		// Set new line height
 		// int oldHeight = this.height;
 		this.height = newHeight;
-		final ArrayList<Renderable> renderables = this.renderables;
+		final List<Renderable> renderables = this.renderables;
 		// Find max baseline
 		final FontMetrics firstFm = this.modelNode.getRenderState().getFontMetrics();
 		int maxDescent = firstFm.getDescent();
@@ -389,7 +390,7 @@ class RLine extends BaseRCollection {
 			if (br != null) {
 				buffer.append(System.getProperty("line.separator"));
 			} else {
-				final ArrayList<Renderable> renderables = this.renderables;
+				final List<Renderable> renderables = this.renderables;
 				final int size = renderables.size();
 				if (size > 0 && !(renderables.get(size - 1) instanceof RBlank)) {
 					buffer.append(" ");

@@ -266,7 +266,6 @@ public class PDFFile {
 	        PDFXref compRef = new PDFXref(compId, 0);
 	        PDFObject compObj = dereference(compRef, decrypter);
 	        int first = compObj.getDictionary().get("First").getIntValue();
-	        int length = compObj.getDictionary().get("Length").getIntValue();
 	        int n = compObj.getDictionary().get("N").getIntValue();
 	        if (idx >= n)
 	            return PDFObject.nullObj;
@@ -276,8 +275,8 @@ public class PDFFile {
         	this.buf = strm;
 	        // skip other nums
 	        for (int i=0; i<idx; i++) {
-	        	PDFObject skip1num= readObject(-1, -1, true, IdentityDecrypter.getInstance());
-	        	PDFObject skip2num= readObject(-1, -1, true, IdentityDecrypter.getInstance());
+	        	readObject(-1, -1, true, IdentityDecrypter.getInstance());
+	        	readObject(-1, -1, true, IdentityDecrypter.getInstance());
 	        }
         	PDFObject objNumPO= readObject(-1, -1, true, IdentityDecrypter.getInstance());
         	PDFObject offsetPO= readObject(-1, -1, true, IdentityDecrypter.getInstance());
@@ -1210,16 +1209,8 @@ public class PDFFile {
      * and read new trailer
      * @param password
      */
-    private void readTrailer15(PDFPassword password)
-            throws
-            IOException,
-            PDFAuthenticationFailureException,
-            EncryptionUnsupportedByProductException,
-            EncryptionUnsupportedByPlatformException {
-    	
-        // the table of xrefs
-        // objIdx is initialized from readTrailer(), do not overwrite here data from hybrid PDFs
-//        objIdx = new PDFXref[50];
+	private void readTrailer15(PDFPassword password) throws IOException, PDFAuthenticationFailureException,
+			EncryptionUnsupportedByProductException, EncryptionUnsupportedByPlatformException {
         PDFDecrypter newDefaultDecrypter = null;
         
         while (true) {
@@ -1227,7 +1218,7 @@ public class PDFFile {
 			if (xrefObj == null) {
 				break;
 			}
-			HashMap<String, PDFObject> trailerdict = xrefObj.getDictionary();
+			Map<String, PDFObject> trailerdict = xrefObj.getDictionary();
 			if (trailerdict == null) {
 				break;
 			}
