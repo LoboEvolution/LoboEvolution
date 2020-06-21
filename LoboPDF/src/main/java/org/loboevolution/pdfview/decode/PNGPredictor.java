@@ -77,6 +77,8 @@ public class PNGPredictor extends Predictor {
                 case 4:
                     doPaethLine(curLine, prevLine);
                     break;
+                default:
+        			break;
             }
             
             rows.add(curLine);

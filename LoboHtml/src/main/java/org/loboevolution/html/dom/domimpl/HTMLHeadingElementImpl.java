@@ -110,11 +110,13 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 				return 10.0f;
 			case 6:
 				return 8.0f;
+			default:
+				return 14.0f;
 			}
 		} catch (final Exception thrown) {
 			this.warn("getHeadingFontSize(): Bad heading tag: " + getTagName(), thrown);
+			return 14.0f;
 		}
-		return 14.0f;
 	}
 
 	private final String getHeadingFontSizeText() {
@@ -134,11 +136,13 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 				return "10pt";
 			case 6:
 				return "7.55pt";
+			default:
+				return "14px";
 			}
 		} catch (final Exception thrown) {
 			this.warn("getHeadingFontSizeText(): Bad heading tag: " + getTagName(), thrown);
+			return "14px";
 		}
-		return "14px";
 	}
 
 	/** {@inheritDoc} */

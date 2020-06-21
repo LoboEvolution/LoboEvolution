@@ -100,23 +100,32 @@ public class PDFDestination {
 		// create the destination based on the type
 		PDFDestination dest = null;
 		String type = destArray[1].getStringValue();
-		if (type.equals("XYZ")) {
+		switch (type) {
+		case "XYZ":
 			dest = new PDFDestination(destArray[0], XYZ);
-		} else if (type.equals("Fit")) {
+			break;
+		case "Fit":
 			dest = new PDFDestination(destArray[0], FIT);
-		} else if (type.equals("FitH")) {
+			break;
+		case "FitH":
 			dest = new PDFDestination(destArray[0], FITH);
-		} else if (type.equals("FitV")) {
+			break;
+		case "FitV":
 			dest = new PDFDestination(destArray[0], FITV);
-		} else if (type.equals("FitR")) {
+			break;
+		case "FitR":
 			dest = new PDFDestination(destArray[0], FITR);
-		} else if (type.equals("FitB")) {
+			break;
+		case "FitB":
 			dest = new PDFDestination(destArray[0], FITB);
-		} else if (type.equals("FitBH")) {
+			break;
+		case "FitBH":
 			dest = new PDFDestination(destArray[0], FITBH);
-		} else if (type.equals("FitBV")) {
+			break;
+		case "FitBV":
 			dest = new PDFDestination(destArray[0], FITBV);
-		} else {
+			break;
+		default:
 			throw new PDFParseException("Unknown destination type: " + type);
 		}
 
@@ -160,6 +169,8 @@ public class PDFDestination {
 			} else {
 				dest.setTop(0.0F);
 			}
+			break;
+		default:
 			break;
 		}
 

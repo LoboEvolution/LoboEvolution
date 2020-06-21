@@ -193,6 +193,8 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 						getSelectedTexture());
 				break;
 			}
+			default:
+				break;
 			}
 		}
 	}

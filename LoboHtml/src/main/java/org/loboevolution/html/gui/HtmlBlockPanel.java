@@ -659,6 +659,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 					}
 				} while ((!consumed) && (innerBlock != null));
 				break;
+			default:
+				break;
 			}
 		}
 	}

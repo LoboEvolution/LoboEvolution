@@ -308,7 +308,7 @@ public class NameTable extends TrueTypeTable {
      * Get the charset name for a given platform, encoding and language
      */
     public static String getCharsetName(int platformID, int encodingID) {
-        String charset = "US-ASCII";   
+        String charset = "";   
             
         switch (platformID) {
             case PLATFORMID_UNICODE:
@@ -316,6 +316,9 @@ public class NameTable extends TrueTypeTable {
                 break;
             case PLATFORMID_MICROSOFT:
                 charset = "UTF-16";
+                break;
+            default:
+            	charset = "US-ASCII";
                 break;
         }
         

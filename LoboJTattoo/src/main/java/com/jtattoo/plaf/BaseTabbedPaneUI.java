@@ -205,6 +205,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 					j++;
 				}
 				break;
+			default:
+				break;
 			}
 			g.translate(-x, -y);
 			g.setColor(oldColor);
@@ -813,6 +815,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 					}
 					break;
 				}
+				default:
+					break;
 				}
 			}
 		}

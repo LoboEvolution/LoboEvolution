@@ -153,6 +153,8 @@ public class RBlock extends BaseElementRenderable {
 				scrollToSBValue(this.orientation, value);
 				break;
 			}
+			default:
+				break;
 			}
 		}
 	}
@@ -1213,6 +1215,8 @@ public class RBlock extends BaseElementRenderable {
 				return scrollHorizontalTo(bodyLayout.x - offset);
 			case JScrollBar.VERTICAL:
 				return scrollVerticalTo(bodyLayout.y - offset);
+			default:
+				break;
 			}
 		}
 		return false;

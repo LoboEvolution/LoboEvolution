@@ -749,6 +749,8 @@ public class Type1Font extends OutlineFont {
                         pt.y += y2 + y3;
                         this.sloc = 0;
                         break;
+                    default:
+            			break;
                 }
             }
         }

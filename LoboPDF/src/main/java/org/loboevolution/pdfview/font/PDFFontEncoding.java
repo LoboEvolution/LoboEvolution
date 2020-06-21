@@ -88,46 +88,49 @@ public class PDFFontEncoding {
         } else {
             // loook at the "Type" entry of the encoding to determine the type
             String typeStr = encoding.getDictRef("Type").getStringValue();
-
-            if (typeStr.equals("Encoding")) {
+            switch (typeStr) {
+            case "Encoding":
                 // it is an encoding
                 this.type = TYPE_ENCODING;
                 parseEncoding(encoding);
-            } else if (typeStr.equals("CMap")) {
+                break;
+            case "CMap":
                 // it is a CMap
                 this.type = TYPE_CMAP;
                 this.cmap = PDFCMap.getCMap(encoding);
                 this.mapName = encoding.getDictRef("CMapName");
-            } else {
+                break;
+            default:
                 throw new IllegalArgumentException("Uknown encoding type: " + this.type);
             }
         }
     }
 
-    /** Get the glyphs associated with a given String */
-    public List<PDFGlyph> getGlyphs(PDFFont font, String text) {
-        List<PDFGlyph> outList = new ArrayList<PDFGlyph>(text.length());
+	/** Get the glyphs associated with a given String */
+	public List<PDFGlyph> getGlyphs(PDFFont font, String text) {
+		List<PDFGlyph> outList = new ArrayList<PDFGlyph>(text.length());
 
-        // go character by character through the text
-        char[] arry = text.toCharArray();
-        for (int i = 0; i < arry.length; i++) {
-            switch (this.type) {
-                case TYPE_ENCODING:
-                    outList.add(getGlyphFromEncoding(font, arry[i]));
-                    break;
-                case TYPE_CMAP:
-                    // 2 bytes -> 1 character in a CMap
-                    char c = (char) ((arry[i] & 0xff) << 8);
-                    if (i < arry.length - 1) {
-                        c |= (char) (arry[++i] & 0xff);
-                    }
-                    outList.add(getGlyphFromCMap(font, c));
-                    break;
-            }
-        }
-
-        return outList;
-    }
+		// go character by character through the text
+		char[] arry = text.toCharArray();
+		for (int i = 0; i < arry.length; i++) {
+			switch (this.type) {
+			case TYPE_ENCODING:
+				outList.add(getGlyphFromEncoding(font, arry[i]));
+				break;
+			case TYPE_CMAP:
+				// 2 bytes -> 1 character in a CMap
+				char c = (char) ((arry[i] & 0xff) << 8);
+				if (i < arry.length - 1) {
+					c |= (char) (arry[++i] & 0xff);
+				}
+				outList.add(getGlyphFromCMap(font, c));
+				break;
+			default:
+				break;
+			}
+		}
+		return outList;
+	}
 
     /**
      * Get a glyph from an encoding, given a font and character

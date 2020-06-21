@@ -213,6 +213,8 @@ public class TextureUtils {
 		case MENUBAR_TEXTURE_TYPE:
 			texture = menubarTexture;
 			break;
+		default:
+			break;
 		}
 		return texture;
 	}

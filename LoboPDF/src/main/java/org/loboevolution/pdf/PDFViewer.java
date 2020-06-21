@@ -644,6 +644,8 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		case '-':
 			doZoom(1f / ZOOM_FACTOR);
 			return;
+		default:
+			break;
 		}
 	}
 
