@@ -485,16 +485,6 @@ public class PDFFile {
     }
 
     /**
-     * Consume all sequential whitespace from the current buffer position,
-     * leaving the buffer positioned at non-whitespace
-     * @param buf the buffer to read from
-     */
-    private void consumeWhitespace(ByteBuffer buf) {
-        nextNonWhitespaceChar(buf);
-        buf.position(buf.position() - 1);
-    }
-
-    /**
      * requires the next few characters (after whitespace) to match the
      * argument.
      * @param match the next few characters after any whitespace that
@@ -1545,11 +1535,11 @@ public class PDFFile {
                 break;
             }
             PDFObject kids[] = parent.getDictRef("Kids").getArray();
-            for (int i = 0; i < kids.length; i++) {
-                if (kids[i].equals(page)) {
+            for (PDFObject pdfObject : kids) {
+                if (pdfObject.equals(page)) {
                     break;
                 } else {
-                    PDFObject kcount = kids[i].getDictRef("Count");
+                    PDFObject kcount = pdfObject.getDictRef("Count");
                     if (kcount != null) {
                         count += kcount.getIntValue();
                     } else {
@@ -1653,24 +1643,22 @@ public class PDFFile {
 
         // first get the total length of all the streams
         int len = 0;
-        for (int i = 0; i < contents.length; i++) {
-            byte[] data = contents[i].getStream();
-            if (data == null) {
-                throw new PDFParseException("No stream on content " + i +
-                        ": " + contents[i]);
-            }
-            len += data.length;
-        }
+		for (PDFObject pdfObject : contents) {
+			byte[] data = pdfObject.getStream();
+			if (data == null) {
+				throw new PDFParseException("No stream on content " + pdfObject);
+			}
+			len += data.length;
+		}
 
         // now assemble them all into one object
         byte[] stream = new byte[len];
         len = 0;
-        for (int i = 0; i < contents.length; i++) {
-            byte data[] = contents[i].getStream();
+        for (PDFObject pdfObject : contents) {
+            byte data[] = pdfObject.getStream();
             System.arraycopy(data, 0, stream, len, data.length);
             len += data.length;
         }
-
         return stream;
     }
 
@@ -1762,18 +1750,17 @@ public class PDFFile {
         PDFObject kidsObj = pagedict.getDictRef("Kids");
         if (kidsObj != null) {
             PDFObject[] kids = kidsObj.getArray();
-            for (int i = 0; i < kids.length; i++) {
+            for (PDFObject pdfObject : kids) {
                 int count = 1;
                 // BUG: some PDFs (T1Format.pdf) don't have the Type tag.
                 // use the Count tag to indicate a Pages dictionary instead.
-                PDFObject countItem = kids[i].getDictRef("Count");
-                //                if (kids[i].getDictRef("Type").getStringValue().equals("Pages")) {
+                PDFObject countItem = pdfObject.getDictRef("Count");
                 if (countItem != null) {
                     count = countItem.getIntValue();
                 }
 
                 if (start + count >= getPage) {
-                    return findPage(kids[i], start, getPage, resources);
+                    return findPage(pdfObject, start, getPage, resources);
                 }
 
                 start += count;

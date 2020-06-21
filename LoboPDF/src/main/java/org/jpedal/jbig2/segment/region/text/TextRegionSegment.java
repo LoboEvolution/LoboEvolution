@@ -131,12 +131,11 @@ public class TextRegionSegment extends RegionSegment {
 
 		int currentSymbol = 0;
 		JBIG2Bitmap[] symbols = new JBIG2Bitmap[noOfSymbols];
-		for (Iterator<Segment> it = segmentsReferenced.iterator(); it.hasNext();) {
-			Segment seg = it.next();
+		for (Segment seg : segmentsReferenced) {
 			if (seg.getSegmentHeader().getSegmentType() == Segment.SYMBOL_DICTIONARY) {
 				JBIG2Bitmap[] bitmaps = ((SymbolDictionarySegment) seg).getBitmaps();
-				for (int j = 0; j < bitmaps.length; j++) {
-					symbols[currentSymbol] = bitmaps[j];
+				for (JBIG2Bitmap jbig2Bitmap : bitmaps) {
+					symbols[currentSymbol] = jbig2Bitmap;
 					currentSymbol++;
 				}
 			}

@@ -89,9 +89,9 @@ class MarkupUtilities {
    */
   public static List<BoundableRenderable> findRenderables(final Renderable[] renderables, final int x, final int y, final boolean vertical) {
     List<BoundableRenderable> found = null;
-    for (int i = 0; i < renderables.length; i++) {
-      if (renderables[i] instanceof BoundableRenderable) {
-        final BoundableRenderable br = (BoundableRenderable) renderables[i];
+    for (Renderable renderable : renderables) {
+      if (renderable instanceof BoundableRenderable) {
+        final BoundableRenderable br = (BoundableRenderable) renderable;
         if (br.contains(x, y)) {
           if (found == null) {
             found = new ArrayList<>();

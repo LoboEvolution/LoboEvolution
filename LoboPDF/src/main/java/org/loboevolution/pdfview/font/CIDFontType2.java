@@ -111,15 +111,15 @@ public class CIDFontType2 extends TTFFont {
              *   <startIndex> [ array of values ]
              * we use the entryIdx to differentitate between them
              */
-            for (int i = 0; i < widthArray.length; i++) {
+            for (PDFObject pdfObject : widthArray) {
                 if (entryIdx == 0) {
                     // first value in an entry.  Just store it
-                    first = widthArray[i].getIntValue();
+                    first = pdfObject.getIntValue();
                 } else if (entryIdx == 1) {
                     // second value -- is it an int or array?
-                    if (widthArray[i].getType() == PDFObject.ARRAY) {
+                    if (pdfObject.getType() == PDFObject.ARRAY) {
                         // add all the entries in the array to the width array
-                        PDFObject[] entries = widthArray[i].getArray();
+                        PDFObject[] entries = pdfObject.getArray();
                         for (int c = 0; c < entries.length; c++) {
                             Character key = Character.valueOf((char) (c + first));
 
@@ -130,11 +130,11 @@ public class CIDFontType2 extends TTFFont {
                         // all done
                         entryIdx = -1;
                     } else {
-                        last = widthArray[i].getIntValue();
+                        last = pdfObject.getIntValue();
                     }
                 } else {
                     // third value.  Set a range
-                    int value = widthArray[i].getIntValue();
+                    int value = pdfObject.getIntValue();
 
                     // set the range
                     for (int c = first; c <= last; c++) {
@@ -174,15 +174,15 @@ public class CIDFontType2 extends TTFFont {
             first = 0;
             last = 0;
 
-            for (int i = 0; i < widthArray.length; i++) {
+            for (PDFObject pdfObject : widthArray) {
                 if (entryIdx == 0) {
                     // first value in an entry.  Just store it
-                    first = widthArray[i].getIntValue();
+                    first = pdfObject.getIntValue();
                 } else if (entryIdx == 1) {
                     // second value -- is it an int or array?
-                    if (widthArray[i].getType() == PDFObject.ARRAY) {
+                    if (pdfObject.getType() == PDFObject.ARRAY) {
                         // add all the entries in the array to the width array
-                        PDFObject[] entries = widthArray[i].getArray();
+                        PDFObject[] entries = pdfObject.getArray();
                         for (int c = 0; c < entries.length; c++) {
                             Character key = Character.valueOf((char) (c + first));
 
@@ -193,11 +193,11 @@ public class CIDFontType2 extends TTFFont {
                         // all done
                         entryIdx = -1;
                     } else {
-                        last = widthArray[i].getIntValue();
+                        last = pdfObject.getIntValue();
                     }
                 } else {
                     // third value.  Set a range
-                    int value = widthArray[i].getIntValue();
+                    int value = pdfObject.getIntValue();
 
                     // set the range
                     for (int c = first; c <= last; c++) {

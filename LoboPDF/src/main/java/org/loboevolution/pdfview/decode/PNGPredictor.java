@@ -87,8 +87,8 @@ public class PNGPredictor extends Predictor {
         
         // turn into byte array
         ByteBuffer outBuf = ByteBuffer.allocate(rows.size() * rowSize);
-        for (Iterator i = rows.iterator(); i.hasNext();) {
-            outBuf.put((byte[]) i.next());
+        for (byte[] b : rows) {
+            outBuf.put(b);
         }
         
         // reset start pointer

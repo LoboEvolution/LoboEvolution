@@ -180,8 +180,8 @@ public class NativeFont extends OutlineFont {
         }
 
         // filter out control characters
-        for (int i = 0; i < controlChars.length; i++) {
-            if (controlChars[i] == src) {
+        for (char chr : controlChars) {
+            if (chr == src) {
                 src = (char) (0xf000 | src);
                 break;
             }
@@ -420,9 +420,9 @@ public class NativeFont extends OutlineFont {
         }
 
         // now that we have a type four map, remap control characters
-        for (int i = 0; i < controlChars.length; i++) {
-            short idx = (short) (0xf000 | controlChars[i]);
-            short value = (short) fourMap.map (controlChars[i]);
+        for (char chr : controlChars) {
+            short idx = (short) (0xf000 | chr);
+            short value = (short) fourMap.map (chr);
 
             fourMap.addSegment (idx, idx, (short) (value - idx));
         }

@@ -63,8 +63,9 @@ public class PDFSegment {
 	}
 
 	public void writeToHeader(short[] bites) throws IOException {
-		for (int i = 0; i < bites.length; i++)
-			header.write(bites[i]);
+		for (short bite : bites) {
+			header.write(bite);
+		}	
 	}
 
 	public void writeToData(short bite) {

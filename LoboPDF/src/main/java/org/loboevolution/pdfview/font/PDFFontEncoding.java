@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFRenderer;
 import org.loboevolution.pdfview.font.cid.PDFCMap;
@@ -184,16 +183,15 @@ public class PDFFontEncoding {
         if (diffArrayObj != null) {
             PDFObject[] diffArray = diffArrayObj.getArray();
             int curPosition = -1;
-
-            for (int i = 0; i < diffArray.length; i++) {
-                if (diffArray[i].getType() == PDFObject.NUMBER) {
-                    curPosition = diffArray[i].getIntValue();
-                } else if (diffArray[i].getType() == PDFObject.NAME) {
+            for (PDFObject pdfObject : diffArray) {
+                if (pdfObject.getType() == PDFObject.NUMBER) {
+                    curPosition = pdfObject.getIntValue();
+                } else if (pdfObject.getType() == PDFObject.NAME) {
                     Character key = Character.valueOf((char) curPosition);
-                    this.differences.put(key, diffArray[i].getStringValue());
+                    this.differences.put(key, pdfObject.getStringValue());
                     curPosition++;
                 } else {
-                    throw new IllegalArgumentException("Unexpected type in diff array: " + diffArray[i]);
+                    throw new IllegalArgumentException("Unexpected type in diff array: " + pdfObject);
                 }
             }
         }

@@ -363,7 +363,6 @@ public class FunctionType0 extends PDFFunction {
         // first calculate the distances -- the differences between
         // each encoded value and the integer below it.
         float[] dists = new float[encoded.length];
-        
         for (int i = 0; i < dists.length; i++) {
             dists[i] = (float) (encoded[i] - Math.floor(encoded[i]));
         }
