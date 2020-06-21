@@ -22,7 +22,6 @@ import java.awt.geom.Rectangle2D;
 import java.io.IOException;
 
 import org.loboevolution.pdfview.PDFObject;
-import org.loboevolution.pdfview.PDFParser;
 
 /**
  *

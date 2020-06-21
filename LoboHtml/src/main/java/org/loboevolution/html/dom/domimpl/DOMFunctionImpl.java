@@ -14,9 +14,6 @@ import org.loboevolution.html.js.Executor;
 import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.html.style.StyleSheetAggregator;
 import org.loboevolution.http.UserAgentContext;
-
-import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.mozilla.javascript.Function;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
@@ -26,6 +23,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.TypeInfo;
 import org.w3c.dom.events.Event;
+
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
  * <p>DOMFunctionImpl class.</p>

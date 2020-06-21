@@ -56,15 +56,14 @@ import javax.imageio.ImageReader;
 import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataFormatImpl;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Node;
-
 import org.loboevolution.pdfview.colorspace.AlternateColorSpace;
 import org.loboevolution.pdfview.colorspace.IndexedColor;
 import org.loboevolution.pdfview.colorspace.PDFColorSpace;
 import org.loboevolution.pdfview.colorspace.YCCKColorSpace;
 import org.loboevolution.pdfview.decode.PDFDecoder;
 import org.loboevolution.pdfview.function.FunctionType0;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Node;
 
 /**
  * Encapsulates a PDF Image

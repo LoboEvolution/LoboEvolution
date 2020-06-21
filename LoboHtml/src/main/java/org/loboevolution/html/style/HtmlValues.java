@@ -31,14 +31,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import org.loboevolution.info.FontInfo;
-import org.loboevolution.laf.FontFactory;
-import org.loboevolution.laf.FontKey;
-import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.ListValues;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.info.FontInfo;
+import org.loboevolution.laf.FontFactory;
+import org.loboevolution.laf.FontKey;
+import org.loboevolution.net.HttpNetwork;
 
 /**
  * <p>HtmlValues class.</p>

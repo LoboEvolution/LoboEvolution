@@ -49,6 +49,9 @@
 */
 package org.jpedal.jbig2.segment.region.halftone;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
@@ -58,9 +61,6 @@ import org.jpedal.jbig2.segment.pattern.PatternDictionarySegment;
 import org.jpedal.jbig2.segment.region.RegionFlags;
 import org.jpedal.jbig2.segment.region.RegionSegment;
 import org.jpedal.jbig2.util.BinaryOperation;
-
-import java.io.IOException;
-import java.util.logging.Logger;
 
 public class HalftoneRegionSegment extends RegionSegment {
 	

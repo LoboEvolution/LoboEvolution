@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.util.Base64;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.info.BackgroundInfo;
-import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLTableElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -14,6 +12,8 @@ import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
+import org.loboevolution.info.BackgroundInfo;
+import org.loboevolution.laf.ColorFactory;
 import org.w3c.dom.css.CSS3Properties;
 
 /**

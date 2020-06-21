@@ -3,10 +3,10 @@ package org.loboevolution.tab;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserPanel;
 import org.loboevolution.component.IBrowserFrame;
-import org.loboevolution.http.NavigationManager;
-import org.loboevolution.store.TabStore;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.gui.HtmlPanel;
+import org.loboevolution.http.NavigationManager;
+import org.loboevolution.store.TabStore;
 
 /**
  * <p>TabbedHtml class.</p>

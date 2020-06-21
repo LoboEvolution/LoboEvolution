@@ -31,14 +31,14 @@ import javax.swing.table.TableRowSorter;
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.http.NavigationManager;
 import org.loboevolution.info.BookmarkInfo;
 import org.loboevolution.store.BookmarksStore;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedPanePopupMenu;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.gui.HtmlPanel;
 
 /**
  * <p>ShowBookmarksWindow class.</p>

@@ -26,10 +26,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.util.Optional;
 
+import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.info.WordInfo;
-import org.loboevolution.html.style.HtmlInsets;
 
 /**
  * <p>Abstract RenderStateDelegator class.</p>

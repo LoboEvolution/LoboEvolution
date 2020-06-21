@@ -32,9 +32,9 @@ import java.util.logging.Logger;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.common.Urls;
-import org.loboevolution.store.ExternalResourcesStore;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.store.ExternalResourcesStore;
 import org.w3c.dom.stylesheets.MediaList;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;

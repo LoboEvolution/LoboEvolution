@@ -3,6 +3,7 @@ package org.loboevolution.img;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
+
 import javax.swing.JComponent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;

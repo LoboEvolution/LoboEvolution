@@ -35,9 +35,9 @@ import java.util.logging.Level;
 
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.dom.HTMLElement;
+import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;

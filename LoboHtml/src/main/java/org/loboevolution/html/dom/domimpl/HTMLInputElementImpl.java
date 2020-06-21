@@ -24,10 +24,10 @@
 package org.loboevolution.html.dom.domimpl;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.control.InputControl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLInputElement;
+import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.dom.input.InputButton;
 import org.loboevolution.html.dom.input.InputCheckbox;
 import org.loboevolution.html.dom.input.InputColorPicker;

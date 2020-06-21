@@ -62,7 +62,6 @@ import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.loboevolution.common.Nodes;
-import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
@@ -82,6 +81,7 @@ import org.loboevolution.html.renderer.RenderableSpot;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.laf.ColorFactory;
 import org.w3c.dom.Node;
 
 /**

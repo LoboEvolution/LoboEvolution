@@ -49,13 +49,13 @@
 */
 package org.jpedal.jbig2.segment.region;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.segment.Segment;
 import org.jpedal.jbig2.util.BinaryOperation;
-
-import java.io.IOException;
-import java.util.logging.Logger;
 
 public abstract class RegionSegment extends Segment {
 	

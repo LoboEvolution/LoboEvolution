@@ -49,6 +49,9 @@
 */
 package org.jpedal.jbig2.segment.region.generic;
 
+import java.io.IOException;
+import java.util.logging.Logger;
+
 import org.jpedal.jbig2.JBIG2Exception;
 import org.jpedal.jbig2.decoders.JBIG2StreamDecoder;
 import org.jpedal.jbig2.image.JBIG2Bitmap;
@@ -56,9 +59,6 @@ import org.jpedal.jbig2.segment.pageinformation.PageInformationFlags;
 import org.jpedal.jbig2.segment.pageinformation.PageInformationSegment;
 import org.jpedal.jbig2.segment.region.RegionFlags;
 import org.jpedal.jbig2.segment.region.RegionSegment;
-
-import java.io.IOException;
-import java.util.logging.Logger;
 
 public class GenericRegionSegment extends RegionSegment {
 	

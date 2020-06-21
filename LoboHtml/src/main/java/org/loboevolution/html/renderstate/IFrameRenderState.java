@@ -22,10 +22,10 @@ package org.loboevolution.html.renderstate;
 
 import java.awt.Color;
 
-import org.loboevolution.info.BorderInfo;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.HtmlInsets;
+import org.loboevolution.info.BorderInfo;
 
 /**
  * <p>IFrameRenderState class.</p>

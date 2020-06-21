@@ -22,9 +22,9 @@ package org.loboevolution.pdfview.decode;
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
 
+import org.loboevolution.pdfview.PDFFile;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
-import org.loboevolution.pdfview.PDFFile;
 
 /**
  * decode an array of hex nybbles into a byte array

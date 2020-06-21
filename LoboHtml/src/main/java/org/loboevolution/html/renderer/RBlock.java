@@ -33,11 +33,11 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import javax.swing.JScrollBar;
 
-import org.loboevolution.info.FloatingInfo;
 import org.loboevolution.html.dom.HTMLHtmlElement;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
@@ -47,7 +47,7 @@ import org.loboevolution.html.renderstate.RenderThreadState;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import java.util.Objects;
+import org.loboevolution.info.FloatingInfo;
 
 /**
  * Represents a HTML block in a rendered document, typically a DIV. The root

@@ -28,7 +28,6 @@ import java.nio.ByteBuffer;
 
 import javax.swing.ImageIcon;
 
-
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
 import org.monte.media.jpeg.JPEGImageIO;

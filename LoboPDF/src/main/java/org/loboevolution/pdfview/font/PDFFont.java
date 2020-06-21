@@ -33,9 +33,7 @@ import org.loboevolution.pdfview.BaseWatchable;
 import org.loboevolution.pdfview.PDFDebugger;
 import org.loboevolution.pdfview.PDFObject;
 import org.loboevolution.pdfview.PDFParseException;
-import org.loboevolution.pdfview.PDFRenderer;
 import org.loboevolution.pdfview.font.cid.PDFCMap;
-import org.loboevolution.pdfview.font.cid.ToUnicodeMap;
 import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 
 /**

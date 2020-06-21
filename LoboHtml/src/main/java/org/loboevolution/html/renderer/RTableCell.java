@@ -25,13 +25,13 @@ package org.loboevolution.html.renderer;
 
 import java.awt.Dimension;
 
-import org.loboevolution.info.SizeInfo;
 import org.loboevolution.html.dom.HTMLTableCellElement;
 import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.SizeInfo;
 
 class RTableCell extends RBlock {
 	

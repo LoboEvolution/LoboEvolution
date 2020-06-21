@@ -18,16 +18,19 @@
 
 package org.loboevolution.pdfview.decrypt;
 
-import org.loboevolution.pdfview.PDFDocCharsetEncoder;
-import org.loboevolution.pdfview.Identity8BitCharsetEncoder;
-import org.loboevolution.pdfview.PDFStringUtil;
-
-import java.util.*;
-import java.nio.charset.CodingErrorAction;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.CharsetEncoder;
-import java.nio.CharBuffer;
-import java.nio.ByteBuffer;
+import java.nio.charset.CodingErrorAction;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.loboevolution.pdfview.Identity8BitCharsetEncoder;
+import org.loboevolution.pdfview.PDFDocCharsetEncoder;
+import org.loboevolution.pdfview.PDFStringUtil;
 
 /**
  * <p>Identifies a PDF Password, expressible either as a string or a

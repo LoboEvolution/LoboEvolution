@@ -31,7 +31,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import org.loboevolution.common.Strings;
-import org.loboevolution.store.LinkStore;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.HTMLLinkElement;
@@ -39,9 +38,9 @@ import org.loboevolution.html.dom.HTMLSelectElement;
 import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.store.LinkStore;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
-import org.w3c.dom.css.CSSStyleSheet;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;

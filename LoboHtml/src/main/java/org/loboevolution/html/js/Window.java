@@ -38,7 +38,6 @@ import java.util.logging.Logger;
 import javax.swing.Timer;
 
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.dom.domimpl.CommentImpl;
 import org.loboevolution.html.dom.domimpl.ElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLDivElementImpl;
@@ -50,6 +49,7 @@ import org.loboevolution.html.dom.domimpl.HTMLOptionElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLScriptElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
 import org.loboevolution.html.dom.domimpl.TextImpl;
+import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.js.events.UIEventImpl;

@@ -35,10 +35,10 @@ import javax.swing.border.TitledBorder;
 
 import org.loboevolution.gui.ColorComboBox;
 import org.loboevolution.gui.FontLabel;
-import org.loboevolution.laf.LAFType;
-import org.loboevolution.store.LookAndFeelsStore;
 import org.loboevolution.laf.FontType;
 import org.loboevolution.laf.LAFSettings;
+import org.loboevolution.laf.LAFType;
+import org.loboevolution.store.LookAndFeelsStore;
 
 /**
  * The Class LookAndFeelsSettingsUI.

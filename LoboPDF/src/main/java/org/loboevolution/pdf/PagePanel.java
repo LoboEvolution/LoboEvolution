@@ -26,13 +26,12 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.ImageObserver;
 
 import javax.swing.JPanel;
 
 import org.loboevolution.pdfview.PDFPage;
-
-import java.awt.event.MouseListener;
 
 /**
  * A Swing-based panel that displays a PDF page image.  If the zoom tool

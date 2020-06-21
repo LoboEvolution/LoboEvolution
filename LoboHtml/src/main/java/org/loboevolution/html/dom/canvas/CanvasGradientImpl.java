@@ -28,8 +28,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.html.dom.CanvasGradient;
+import org.loboevolution.laf.ColorFactory;
 
 
 /**

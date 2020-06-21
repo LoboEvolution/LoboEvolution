@@ -10,8 +10,15 @@
  */
 package org.monte.media.jpeg;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedInputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FilterInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * JFIFInputStream.

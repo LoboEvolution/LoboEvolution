@@ -40,12 +40,9 @@ import javax.swing.SwingUtilities;
 
 import org.loboevolution.common.ArrayUtilities;
 import org.loboevolution.html.HTMLTag;
-import org.loboevolution.info.FloatingInfo;
 import org.loboevolution.html.control.HrControl;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.UIControl;
-import org.loboevolution.html.renderer.RLayout.MiscLayout;
-import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.domimpl.DocumentFragmentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -53,10 +50,13 @@ import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
 import org.loboevolution.html.dom.domimpl.ModelNode;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.dom.domimpl.UINode;
+import org.loboevolution.html.renderer.RLayout.MiscLayout;
+import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.info.FloatingInfo;
 import org.w3c.dom.Node;
 
 /**

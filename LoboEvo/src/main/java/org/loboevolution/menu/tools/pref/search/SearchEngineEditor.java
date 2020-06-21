@@ -1,12 +1,12 @@
 package org.loboevolution.menu.tools.pref.search;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.WrapperLayout;
 import org.loboevolution.gui.AbstractItemEditor;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 import org.loboevolution.store.SearchEngineStore;
-import org.loboevolution.common.WrapperLayout;
 
 /**
  * <p>SearchEngineEditor class.</p>

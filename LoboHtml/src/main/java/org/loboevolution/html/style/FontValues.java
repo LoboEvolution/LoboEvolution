@@ -6,8 +6,8 @@ import java.awt.Toolkit;
 import java.awt.font.TextAttribute;
 
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.html.renderstate.RenderState;
+import org.loboevolution.laf.LAFSettings;
 
 /**
  * <p>FontValues class.</p>

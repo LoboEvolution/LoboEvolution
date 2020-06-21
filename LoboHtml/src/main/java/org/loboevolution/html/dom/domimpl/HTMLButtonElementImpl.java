@@ -23,10 +23,10 @@ package org.loboevolution.html.dom.domimpl;
 import javax.swing.JButton;
 
 import org.loboevolution.common.Nodes;
-import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.control.ButtonControl;
 import org.loboevolution.html.dom.HTMLButtonElement;
 import org.loboevolution.html.dom.HTMLFormElement;
+import org.loboevolution.html.dom.input.FormInput;
 import org.loboevolution.html.renderer.HtmlController;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

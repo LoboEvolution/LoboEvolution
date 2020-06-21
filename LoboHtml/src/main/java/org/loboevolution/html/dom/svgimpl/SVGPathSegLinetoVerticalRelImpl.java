@@ -1,7 +1,6 @@
 package org.loboevolution.html.dom.svgimpl;
 
 import org.loboevolution.html.dom.svg.SVGPathSegLinetoVerticalRel;
-import org.w3c.dom.DOMException;
 
 /**
  * <p>SVGPathSegLinetoVerticalRelImpl class.</p>

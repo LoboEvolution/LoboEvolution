@@ -44,12 +44,6 @@ import javax.imageio.ImageIO;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;
-import org.loboevolution.info.BackgroundInfo;
-import org.loboevolution.info.BorderInfo;
-import org.loboevolution.info.WordInfo;
-import org.loboevolution.laf.ColorFactory;
-import org.loboevolution.laf.FontFactory;
-import org.loboevolution.laf.FontKey;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
@@ -61,6 +55,12 @@ import org.loboevolution.html.style.GradientStyle;
 import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.MarginInsets;
+import org.loboevolution.info.BackgroundInfo;
+import org.loboevolution.info.BorderInfo;
+import org.loboevolution.info.WordInfo;
+import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.laf.FontFactory;
+import org.loboevolution.laf.FontKey;
 import org.w3c.dom.css.CSS3Properties;
 
 /**
