@@ -14,20 +14,18 @@ import java.io.Serializable;
 /**
  * Base class for native object implementation that uses IdFunctionObject to
  * export its methods to script via &lt;class-name&gt;.prototype object.
- *
+ * 
  * Any descendant should implement at least the following methods:
  * findInstanceIdInfo getInstanceIdName execIdCall methodArity
- *
+ * 
  * To define non-function properties, the descendant should override
  * getInstanceIdValue setInstanceIdValue to get/set property value and provide
  * its default attributes.
- *
- *
+ * 
+ * 
  * To customize initialization of constructor and prototype objects, descendant
  * may override scopeInit or fillConstructorProperties methods.
- *
- * @author utente
- * @version $Id: $Id
+ * 
  */
 public abstract class IdScriptableObject extends ScriptableObject implements IdFunctionCall {
     private static final long serialVersionUID = -3744239272168621609L;
@@ -331,58 +329,30 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         }
     }
 
-    /**
-     * <p>Constructor for IdScriptableObject.</p>
-     */
     public IdScriptableObject()
     {
     }
 
-    /**
-     * <p>Constructor for IdScriptableObject.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param prototype a {@link org.mozilla.javascript.Scriptable} object.
-     */
     public IdScriptableObject(Scriptable scope, Scriptable prototype)
     {
         super(scope, prototype);
     }
 
-    /**
-     * <p>defaultHas.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     protected final boolean defaultHas(String name)
     {
         return super.has(name, this);
     }
 
-    /**
-     * <p>defaultGet.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a {@link java.lang.Object} object.
-     */
     protected final Object defaultGet(String name)
     {
         return super.get(name, this);
     }
 
-    /**
-     * <p>defaultPut.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param value a {@link java.lang.Object} object.
-     */
     protected final void defaultPut(String name, Object value)
     {
         super.put(name, this, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(String name, Scriptable start)
     {
@@ -405,7 +375,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
     }
 
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(Symbol key, Scriptable start)
     {
@@ -427,7 +396,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return super.has(key, start);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(String name, Scriptable start)
     {
@@ -453,7 +421,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return NOT_FOUND;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(Symbol key, Scriptable start)
     {
@@ -477,7 +444,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return NOT_FOUND;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(String name, Scriptable start, Object value)
     {
@@ -513,7 +479,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         super.put(name, start, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(Symbol key, Scriptable start, Object value)
     {
@@ -547,7 +512,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         super.put(key, start, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void delete(String name)
     {
@@ -581,7 +545,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         super.delete(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void delete(Symbol key)
     {
@@ -615,7 +578,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         super.delete(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getAttributes(String name)
     {
@@ -633,7 +595,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return super.getAttributes(name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getAttributes(Symbol key)
     {
@@ -651,7 +612,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return super.getAttributes(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setAttributes(String name, int attributes)
     {
@@ -725,21 +685,12 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
 
     /**
      * Get maximum id findInstanceIdInfo can generate.
-     *
-     * @return a int.
      */
     protected int getMaxInstanceId()
     {
         return 0;
     }
 
-    /**
-     * <p>instanceIdInfo.</p>
-     *
-     * @param attributes a int.
-     * @param id a int.
-     * @return a int.
-     */
     protected static int instanceIdInfo(int attributes, int id)
     {
         return (attributes << 16) | id;
@@ -749,9 +700,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
      * Map name to id of instance property.
      * Should return 0 if not found or the result of
      * {@link #instanceIdInfo(int, int)}.
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a int.
      */
     protected int findInstanceIdInfo(String name)
     {
@@ -762,35 +710,24 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
      * Map name to id of instance property.
      * Should return 0 if not found or the result of
      * {@link #instanceIdInfo(int, int)}.
-     *
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @return a int.
      */
     protected int findInstanceIdInfo(Symbol key)
     {
         return 0;
     }
 
-    /**
-     * Map id back to property name it defines.
-     *
-     * @param id a int.
-     * @return a {@link java.lang.String} object.
+    /** Map id back to property name it defines.
      */
     protected String getInstanceIdName(int id)
     {
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /**
-     * Get id value.
+    /** Get id value.
      ** If id value is constant, descendant can call cacheIdValue to store
      ** value in the permanent cache.
      ** Default implementation creates IdFunctionObject instance for given id
      ** and cache its value
-     *
-     * @param id a int.
-     * @return a {@link java.lang.Object} object.
      */
     protected Object getInstanceIdValue(int id)
     {
@@ -800,9 +737,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
     /**
      * Set or delete id value. If value == NOT_FOUND , the implementation
      * should make sure that the following getInstanceIdValue return NOT_FOUND.
-     *
-     * @param id a int.
-     * @param value a {@link java.lang.Object} object.
      */
     protected void setInstanceIdValue(int id, Object value)
     {
@@ -814,7 +748,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
      * want to support changing property attributes via Object.defineProperty
      * must override this method. The default implementation throws
      * InternalError.
-     *
      * @param id the instance property id
      * @param attr the new attribute bitset
      */
@@ -824,12 +757,8 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
                 + " " + getInstanceIdName(id) + " property");
     }
 
-    /**
-     * {@inheritDoc}
-     *
-     * 'thisObj' will be null if invoked as constructor, in which case
-     ** instance of Scriptable should be returned.
-     */
+    /** 'thisObj' will be null if invoked as constructor, in which case
+     ** instance of Scriptable should be returned. */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -837,14 +766,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         throw f.unknown();
     }
 
-    /**
-     * <p>exportAsJSClass.</p>
-     *
-     * @param maxPrototypeId a int.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     * @return a {@link org.mozilla.javascript.IdFunctionObject} object.
-     */
     public final IdFunctionObject exportAsJSClass(int maxPrototypeId,
                                                   Scriptable scope,
                                                   boolean sealed)
@@ -868,21 +789,11 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return ctor;
     }
 
-    /**
-     * <p>hasPrototypeMap.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean hasPrototypeMap()
     {
         return prototypeValues != null;
     }
 
-    /**
-     * <p>activatePrototypeMap.</p>
-     *
-     * @param maxPrototypeId a int.
-     */
     public final void activatePrototypeMap(int maxPrototypeId)
     {
         PrototypeValues values = new PrototypeValues(this, maxPrototypeId);
@@ -893,31 +804,12 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         }
     }
 
-    /**
-     * <p>initPrototypeMethod.</p>
-     *
-     * @param tag a {@link java.lang.Object} object.
-     * @param id a int.
-     * @param name a {@link java.lang.String} object.
-     * @param arity a int.
-     * @return a {@link org.mozilla.javascript.IdFunctionObject} object.
-     */
     public final IdFunctionObject initPrototypeMethod(Object tag, int id, String name,
                                           int arity)
     {
         return initPrototypeMethod(tag, id, name, name, arity);
     }
 
-    /**
-     * <p>initPrototypeMethod.</p>
-     *
-     * @param tag a {@link java.lang.Object} object.
-     * @param id a int.
-     * @param propertyName a {@link java.lang.String} object.
-     * @param functionName a {@link java.lang.String} object.
-     * @param arity a int.
-     * @return a {@link org.mozilla.javascript.IdFunctionObject} object.
-     */
     public final IdFunctionObject initPrototypeMethod(Object tag, int id, String propertyName, String functionName,
                                           int arity)
     {
@@ -929,16 +821,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return function;
     }
 
-    /**
-     * <p>initPrototypeMethod.</p>
-     *
-     * @param tag a {@link java.lang.Object} object.
-     * @param id a int.
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @param functionName a {@link java.lang.String} object.
-     * @param arity a int.
-     * @return a {@link org.mozilla.javascript.IdFunctionObject} object.
-     */
     public final IdFunctionObject initPrototypeMethod(Object tag, int id, Symbol key, String functionName,
                                           int arity)
     {
@@ -948,11 +830,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return function;
     }
 
-    /**
-     * <p>initPrototypeConstructor.</p>
-     *
-     * @param f a {@link org.mozilla.javascript.IdFunctionObject} object.
-     */
     public final void initPrototypeConstructor(IdFunctionObject f)
     {
         int id = prototypeValues.constructorId;
@@ -964,84 +841,37 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         prototypeValues.initValue(id, "constructor", f, DONTENUM);
     }
 
-    /**
-     * <p>initPrototypeValue.</p>
-     *
-     * @param id a int.
-     * @param name a {@link java.lang.String} object.
-     * @param value a {@link java.lang.Object} object.
-     * @param attributes a int.
-     */
     public final void initPrototypeValue(int id, String name, Object value,
                                          int attributes)
     {
         prototypeValues.initValue(id, name, value, attributes);
     }
 
-    /**
-     * <p>initPrototypeValue.</p>
-     *
-     * @param id a int.
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @param value a {@link java.lang.Object} object.
-     * @param attributes a int.
-     */
     public final void initPrototypeValue(int id, Symbol key, Object value,
                                          int attributes)
     {
         prototypeValues.initValue(id, key, value, attributes);
     }
 
-    /**
-     * <p>initPrototypeId.</p>
-     *
-     * @param id a int.
-     */
     protected void initPrototypeId(int id)
     {
         throw new IllegalStateException(String.valueOf(id));
     }
 
-    /**
-     * <p>findPrototypeId.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a int.
-     */
     protected int findPrototypeId(String name)
     {
         throw new IllegalStateException(name);
     }
 
-    /**
-     * <p>findPrototypeId.</p>
-     *
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @return a int.
-     */
     protected int findPrototypeId(Symbol key)
     {
         return 0;
     }
 
-    /**
-     * <p>fillConstructorProperties.</p>
-     *
-     * @param ctor a {@link org.mozilla.javascript.IdFunctionObject} object.
-     */
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
     }
 
-    /**
-     * <p>addIdFunctionProperty.</p>
-     *
-     * @param obj a {@link org.mozilla.javascript.Scriptable} object.
-     * @param tag a {@link java.lang.Object} object.
-     * @param id a int.
-     * @param name a {@link java.lang.String} object.
-     * @param arity a int.
-     */
     protected void addIdFunctionProperty(Scriptable obj, Object tag, int id,
                                          String name, int arity)
     {
@@ -1065,12 +895,11 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
      * </pre>
      * Note that although such function can be implemented universally via
      * java.lang.Class.isInstance(), it would be much more slower.
-     *
      * @param f function that is attempting to convert 'this'
      * object.
      * @return Scriptable object suitable for a check by the instanceof
      * operator.
-     * @throws java.lang.RuntimeException if no more instanceof target can be found
+     * @throws RuntimeException if no more instanceof target can be found
      */
     protected static EcmaError incompatibleCallError(IdFunctionObject f)
     {
@@ -1092,7 +921,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
         return function;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void defineOwnProperty(Context cx, Object key, ScriptableObject desc) {
       if (key instanceof String) {
@@ -1152,7 +980,6 @@ public abstract class IdScriptableObject extends ScriptableObject implements IdF
     }
 
 
-    /** {@inheritDoc} */
     @Override
     protected ScriptableObject getOwnPropertyDescriptor(Context cx, Object id) {
       ScriptableObject desc = super.getOwnPropertyDescriptor(cx, id);

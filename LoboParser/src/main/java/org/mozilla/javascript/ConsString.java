@@ -11,7 +11,7 @@ import java.util.ArrayDeque;
 
 /**
  * <p>This class represents a string composed of two components, each of which
- * may be a java.lang.String or another ConsString.</p>
+ * may be a <code>java.lang.String</code> or another ConsString.</p>
  *
  * <p>This string representation is optimized for concatenation using the "+"
  * operator. Instead of immediately copying both components to a new character
@@ -24,9 +24,6 @@ import java.util.ArrayDeque;
  * of Strings.</p>
  *
  * <p>Both the name and the concept are borrowed from V8.</p>
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ConsString implements CharSequence, Serializable {
 
@@ -36,12 +33,6 @@ public class ConsString implements CharSequence, Serializable {
     private final int length;
     private boolean isFlat;
 
-    /**
-     * <p>Constructor for ConsString.</p>
-     *
-     * @param str1 a {@link java.lang.CharSequence} object.
-     * @param str2 a {@link java.lang.CharSequence} object.
-     */
     public ConsString(CharSequence str1, CharSequence str2) {
         left = str1;
         right = str2;
@@ -54,7 +45,6 @@ public class ConsString implements CharSequence, Serializable {
         return this.toString();
     }
     
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return isFlat ? (String)left : flatten();
@@ -94,20 +84,17 @@ public class ConsString implements CharSequence, Serializable {
         return (String)left;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int length() {
         return length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public char charAt(int index) {
         String str = isFlat ? (String)left : flatten();
         return str.charAt(index);
     }
 
-    /** {@inheritDoc} */
     @Override
     public CharSequence subSequence(int start, int end) {
         String str = isFlat ? (String)left : flatten();

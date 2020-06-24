@@ -27,7 +27,6 @@ class ThreadSafeSlotMapContainer
     super(initialSize);
   }
 
-  /** {@inheritDoc} */
   @Override
   public int size()
   {
@@ -45,7 +44,6 @@ class ThreadSafeSlotMapContainer
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public int dirtySize()
   {
@@ -53,7 +51,6 @@ class ThreadSafeSlotMapContainer
     return map.size();
   }
 
-  /** {@inheritDoc} */
   @Override
   public boolean isEmpty()
   {
@@ -71,7 +68,6 @@ class ThreadSafeSlotMapContainer
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public Slot get(Object key, int index, SlotAccess accessType)
   {
@@ -86,7 +82,6 @@ class ThreadSafeSlotMapContainer
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public Slot query(Object key, int index)
   {
@@ -104,7 +99,6 @@ class ThreadSafeSlotMapContainer
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public void addSlot(Slot newSlot)
   {
@@ -117,7 +111,6 @@ class ThreadSafeSlotMapContainer
     }
   }
 
-  /** {@inheritDoc} */
   @Override
   public void remove(Object key, int index)
   {
@@ -130,8 +123,6 @@ class ThreadSafeSlotMapContainer
   }
 
   /**
-   * {@inheritDoc}
-   *
    * Take out a read lock on the slot map, if locking is implemented. The caller MUST call
    * this method before using the iterator, and MUST NOT call this method otherwise.
    */
@@ -142,9 +133,9 @@ class ThreadSafeSlotMapContainer
   }
 
   /**
-   * {@inheritDoc}
-   *
    * Unlock the lock taken out by readLock.
+   *
+   * @param stamp the value returned by readLock.
    */
   @Override
   public void unlockRead(long stamp)
@@ -152,7 +143,6 @@ class ThreadSafeSlotMapContainer
     lock.unlockRead(stamp);
   }
 
-  /** {@inheritDoc} */
   @Override
   public Iterator<Slot> iterator()
   {
@@ -161,8 +151,6 @@ class ThreadSafeSlotMapContainer
   }
 
   /**
-   * {@inheritDoc}
-   *
    * Before inserting a new item in the map, check and see if we need to expand from the embedded
    * map to a HashMap that is more robust against large numbers of hash collisions.
    */

@@ -16,7 +16,8 @@ import java.util.logging.Logger;
  * always in bits 0-7.
  */
 final class TypeInfo {
-
+  
+  /** The Constant logger. */
   private static final Logger logger = Logger.getLogger(TypeInfo.class.getName());
 	
   private TypeInfo() { }
@@ -238,7 +239,10 @@ final class TypeInfo {
 
   static void print(int[] locals, int localsTop, int[] stack, int stackTop,
       ConstantPool pool) {
-    logger.info("locals: "+toString(locals, localsTop, pool));
-    logger.info("stack: "+ toString(stack, stackTop, pool));
+    System.out.print("locals: ");
+    logger.info(toString(locals, localsTop, pool));
+    System.out.print("stack: ");
+    logger.info(toString(stack, stackTop, pool));
+    logger.info("");
   }
 }

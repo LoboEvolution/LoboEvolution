@@ -13,16 +13,15 @@ package org.mozilla.javascript;
  * Instances of this class are thrown by the JavaScript 'throw' keyword.
  *
  * @author Mike McCabe
- * @version $Id: $Id
  */
 public class JavaScriptException extends RhinoException
 {
     private static final long serialVersionUID = -7666130513694669293L;
 
     /**
-     * <p>Constructor for JavaScriptException.</p>
-     *
-     * @param value a {@link java.lang.Object} object.
+     * @deprecated
+     * Use {@link WrappedException#WrappedException(Throwable)} to report
+     * exceptions in Java code.
      */
     @Deprecated
     public JavaScriptException(Object value)
@@ -34,8 +33,6 @@ public class JavaScriptException extends RhinoException
      * Create a JavaScript exception wrapping the given JavaScript value
      *
      * @param value the JavaScript value thrown.
-     * @param sourceName a {@link java.lang.String} object.
-     * @param lineNumber a int.
      */
     public JavaScriptException(Object value, String sourceName, int lineNumber)
     {
@@ -57,7 +54,6 @@ public class JavaScriptException extends RhinoException
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String details()
     {
@@ -78,8 +74,6 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
-     * <p>Getter for the field value.</p>
-     *
      * @return the value wrapped by this exception
      */
     public Object getValue()
@@ -88,10 +82,7 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
-     * <p>getSourceName.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#sourceName()} from the super class.
-     * @return a {@link java.lang.String} object.
+     * @deprecated Use {@link RhinoException#sourceName()} from the super class.
      */
     @Deprecated
     public String getSourceName()
@@ -100,10 +91,7 @@ public class JavaScriptException extends RhinoException
     }
 
     /**
-     * <p>getLineNumber.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.RhinoException#lineNumber()} from the super class.
-     * @return a int.
+     * @deprecated Use {@link RhinoException#lineNumber()} from the super class.
      */
     @Deprecated
     public int getLineNumber()

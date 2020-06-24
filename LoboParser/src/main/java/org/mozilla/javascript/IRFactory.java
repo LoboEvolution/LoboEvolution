@@ -78,10 +78,11 @@ import org.mozilla.javascript.ast.Yield;
  * @see Node
  * @author Mike McCabe
  * @author Norris Boyd
- * @version $Id: $Id
  */
 public final class IRFactory extends Parser
 {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(IRFactory.class.getName());
 	
     private static final int LOOP_DO_WHILE = 0;
@@ -93,28 +94,14 @@ public final class IRFactory extends Parser
 
     private Decompiler decompiler = new Decompiler();
 
-    /**
-     * <p>Constructor for IRFactory.</p>
-     */
     public IRFactory() {
         super();
     }
 
-    /**
-     * <p>Constructor for IRFactory.</p>
-     *
-     * @param env a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     */
     public IRFactory(CompilerEnvirons env) {
         this(env, env.getErrorReporter());
     }
 
-    /**
-     * <p>Constructor for IRFactory.</p>
-     *
-     * @param env a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     * @param errorReporter a {@link org.mozilla.javascript.ErrorReporter} object.
-     */
     public IRFactory(CompilerEnvirons env, ErrorReporter errorReporter) {
         super(env, errorReporter);
     }
@@ -122,9 +109,6 @@ public final class IRFactory extends Parser
     /**
      * Transforms the tree into a lower-level IR suitable for codegen.
      * Optionally generates the encoded source.
-     *
-     * @param root a {@link org.mozilla.javascript.ast.AstRoot} object.
-     * @return a {@link org.mozilla.javascript.ast.ScriptNode} object.
      */
     public ScriptNode transformTree(AstRoot root) {
         currentScriptOrFn = root;
@@ -153,12 +137,6 @@ public final class IRFactory extends Parser
     // functions into the AstNode subclasses.  OTOH that would make
     // IR transformation part of the public AST API - desirable?
     // Another possibility:  create AstTransformer interface and adapter.
-    /**
-     * <p>transform.</p>
-     *
-     * @param node a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @return a {@link org.mozilla.javascript.Node} object.
-     */
     public Node transform(AstNode node) {
         switch (node.getType()) {
           case Token.ARRAYCOMP:
@@ -229,6 +207,7 @@ public final class IRFactory extends Parser
           case Token.WITH:
               return transformWith((WithStatement)node);
           case Token.YIELD:
+          case Token.YIELD_STAR:
               return transformYield((Yield)node);
           default:
               if (node instanceof ExpressionStatement) {
@@ -1308,11 +1287,11 @@ public final class IRFactory extends Parser
     }
 
     private Node transformYield(Yield node) {
-        decompiler.addToken(Token.YIELD);
+        decompiler.addToken(node.getType());
         Node kid = node.getValue() == null ? null : transform(node.getValue());
         if (kid != null)
-            return new Node(Token.YIELD, kid, node.getLineno());
-        return new Node(Token.YIELD, node.getLineno());
+            return new Node(node.getType(), kid, node.getLineno());
+        return new Node(node.getType(), node.getLineno());
     }
 
     private Node transformXmlLiteral(XmlLiteral node) {

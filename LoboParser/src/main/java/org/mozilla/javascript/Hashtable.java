@@ -25,9 +25,6 @@ import java.util.NoSuchElementException;
  * the collection to be modified, or even cleared completely, while iterators
  * exist, and even lets an iterator keep on iterating on a collection that was
  * empty when it was created..
- *
- * @author utente
- * @version $Id: $Id
  */
 public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
 
@@ -119,21 +116,10 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
         return d;
     }
 
-    /**
-     * <p>size.</p>
-     *
-     * @return a int.
-     */
     public int size() {
         return map.size();
     }
 
-    /**
-     * <p>put.</p>
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @param value a {@link java.lang.Object} object.
-     */
     public void put(Object key, Object value) {
         final Entry nv = new Entry(key, value);
         final Entry ev = map.putIfAbsent(nv, nv);
@@ -152,12 +138,6 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
         }
     }
 
-    /**
-     * <p>get.</p>
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public Object get(Object key) {
         final Entry e = new Entry(key, null);
         final Entry v = map.get(e);
@@ -167,23 +147,11 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
         return v.value;
     }
 
-    /**
-     * <p>has.</p>
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @return a boolean.
-     */
     public boolean has(Object key) {
         final Entry e = new Entry(key, null);
         return map.containsKey(e);
     }
 
-    /**
-     * <p>delete.</p>
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public Object delete(Object key) {
         final Entry e = new Entry(key, null);
         final Entry v = map.remove(e);
@@ -227,9 +195,6 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
         return v.clear();
     }
 
-    /**
-     * <p>clear.</p>
-     */
     public void clear() {
         // Zero out all the entries so that existing iterators will skip them all
         Iterator<Entry> it = iterator();
@@ -250,11 +215,6 @@ public class Hashtable implements Serializable, Iterable<Hashtable.Entry> {
         map.clear();
     }
 
-    /**
-     * <p>iterator.</p>
-     *
-     * @return a {@link java.util.Iterator} object.
-     */
     public Iterator<Entry> iterator() {
         return new Iter(first);
     }

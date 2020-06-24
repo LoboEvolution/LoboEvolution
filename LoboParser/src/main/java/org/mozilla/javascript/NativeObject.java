@@ -15,12 +15,12 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
+import org.mozilla.javascript.ScriptRuntime.StringIdOrIndex;
+
 /**
  * This class implements the Object native object.
  * See ECMA 15.2.
- *
  * @author Norris Boyd
- * @version $Id: $Id
  */
 public class NativeObject extends IdScriptableObject implements Map
 {
@@ -34,21 +34,18 @@ public class NativeObject extends IdScriptableObject implements Map
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Object";
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
         return ScriptRuntime.defaultObjectToString(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -91,7 +88,6 @@ public class NativeObject extends IdScriptableObject implements Map
         super.fillConstructorProperties(ctor);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -120,7 +116,6 @@ public class NativeObject extends IdScriptableObject implements Map
         initPrototypeMethod(OBJECT_TAG, id, s, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -181,12 +176,11 @@ public class NativeObject extends IdScriptableObject implements Map
               if (arg instanceof Symbol) {
                   result = ensureSymbolScriptable(thisObj).has((Symbol) arg, thisObj);
               } else {
-                  String s = ScriptRuntime.toStringIdOrIndex(cx, arg);
-                  if (s == null) {
-                      int index = ScriptRuntime.lastIndexResult(cx);
-                      result = thisObj.has(index, thisObj);
+                  StringIdOrIndex s = ScriptRuntime.toStringIdOrIndex(cx, arg);
+                  if (s.stringId == null) {
+                      result = thisObj.has(s.index, thisObj);
                   } else {
-                      result = thisObj.has(s, thisObj);
+                      result = thisObj.has(s.stringId, thisObj);
                   }
               }
               return ScriptRuntime.wrapBoolean(result);
@@ -196,7 +190,7 @@ public class NativeObject extends IdScriptableObject implements Map
               if (cx.getLanguageVersion() >= Context.VERSION_1_8 && (thisObj == null || Undefined.isUndefined(thisObj))) {
                   throw ScriptRuntime.typeError0("msg." + (thisObj == null ? "null" : "undef") + ".to.object");
               }
-              
+
             boolean result;
             Object arg = args.length < 1 ? Undefined.instance : args[0];
 
@@ -208,29 +202,28 @@ public class NativeObject extends IdScriptableObject implements Map
                     result = ((attrs & ScriptableObject.DONTENUM) == 0);
                 }
             } else {
-                String s = ScriptRuntime.toStringIdOrIndex(cx, arg);
+                StringIdOrIndex s = ScriptRuntime.toStringIdOrIndex(cx, arg);
                 // When checking if a property is enumerable, a missing property should return "false" instead of
                 // throwing an exception.  See: https://github.com/mozilla/rhino/issues/415
                 try {
-                    if (s == null) {
-                        int index = ScriptRuntime.lastIndexResult(cx);
-                        result = thisObj.has(index, thisObj);
-                        s = Integer.toString(index);
+                    if (s.stringId == null) {
+                        result = thisObj.has(s.index, thisObj);
                         if (result && thisObj instanceof ScriptableObject) {
                             ScriptableObject so = (ScriptableObject) thisObj;
-                            int attrs = so.getAttributes(index);
+                            int attrs = so.getAttributes(s.index);
                             result = ((attrs & ScriptableObject.DONTENUM) == 0);
                         }
                     } else {
-                        result = thisObj.has(s, thisObj);
+                        result = thisObj.has(s.stringId, thisObj);
                         if (result && thisObj instanceof ScriptableObject) {
                             ScriptableObject so = (ScriptableObject) thisObj;
-                            int attrs = so.getAttributes(s);
+                            int attrs = so.getAttributes(s.stringId);
                             result = ((attrs & ScriptableObject.DONTENUM) == 0);
                         }
                     }
                 } catch (EvaluatorException ee) {
-                    if (ee.getMessage().startsWith(ScriptRuntime.getMessage1("msg.prop.not.found", s))) {
+                    if (ee.getMessage().startsWith(ScriptRuntime.getMessage1("msg.prop.not.found",
+                                                        s.stringId == null ? Integer.toString(s.index) : s.stringId))) {
                         result = false;
                     } else {
                         throw ee;
@@ -241,10 +234,10 @@ public class NativeObject extends IdScriptableObject implements Map
           }
 
           case Id_isPrototypeOf: {
-              if (cx.getLanguageVersion() >= Context.VERSION_1_8 && (thisObj == null || Undefined.isUndefined(thisObj))) {
-                  throw ScriptRuntime.typeError0("msg." + (thisObj == null ? "null" : "undef") + ".to.object");
-              }
-              
+            if (cx.getLanguageVersion() >= Context.VERSION_1_8 && (thisObj == null || Undefined.isUndefined(thisObj))) {
+                throw ScriptRuntime.typeError0("msg." + (thisObj == null ? "null" : "undef") + ".to.object");
+            }
+
             boolean result = false;
             if (args.length != 0 && args[0] instanceof Scriptable) {
                 Scriptable v = (Scriptable) args[0];
@@ -277,12 +270,11 @@ public class NativeObject extends IdScriptableObject implements Map
                         String.valueOf(args[0]));
                 }
                 ScriptableObject so = (ScriptableObject)thisObj;
-                String name = ScriptRuntime.toStringIdOrIndex(cx, args[0]);
-                int index = (name != null ? 0
-                             : ScriptRuntime.lastIndexResult(cx));
+                StringIdOrIndex s = ScriptRuntime.toStringIdOrIndex(cx, args[0]);
+                int index = s.stringId != null ? 0 : s.index;
                 Callable getterOrSetter = (Callable)args[1];
                 boolean isSetter = (id == Id___defineSetter__);
-                so.setGetterOrSetter(name, index, getterOrSetter, isSetter);
+                so.setGetterOrSetter(s.stringId, index, getterOrSetter, isSetter);
                 if (so instanceof NativeArray)
                     ((NativeArray)so).setDenseOnly(false);
             }
@@ -296,13 +288,12 @@ public class NativeObject extends IdScriptableObject implements Map
                       return Undefined.instance;
 
                   ScriptableObject so = (ScriptableObject)thisObj;
-                  String name = ScriptRuntime.toStringIdOrIndex(cx, args[0]);
-                  int index = (name != null ? 0
-                               : ScriptRuntime.lastIndexResult(cx));
+                  StringIdOrIndex s = ScriptRuntime.toStringIdOrIndex(cx, args[0]);
+                  int index = s.stringId != null ? 0 : s.index;
                   boolean isSetter = (id == Id___lookupSetter__);
                   Object gs;
                   for (;;) {
-                      gs = so.getGetterOrSetter(name, index, isSetter);
+                      gs = so.getGetterOrSetter(s.stringId, index, isSetter);
                       if (gs != null)
                           break;
                       // If there is no getter or setter for the object itself,
@@ -533,12 +524,14 @@ public class NativeObject extends IdScriptableObject implements Map
 
                 ScriptableObject obj = ensureScriptableObject(arg);
 
-                for (Object name: obj.getAllIds()) {
+                for (Object name: obj.getIds(true, true)) {
                   ScriptableObject desc = obj.getOwnPropertyDescriptor(cx, name);
-                  if (isDataDescriptor(desc) && Boolean.TRUE.equals(desc.get("writable")))
+                  if (isDataDescriptor(desc) && Boolean.TRUE.equals(desc.get("writable"))) {
                     desc.put("writable", desc, Boolean.FALSE);
-                  if (Boolean.TRUE.equals(desc.get("configurable")))
+                  }
+                  if (Boolean.TRUE.equals(desc.get("configurable"))) {
                     desc.put("configurable", desc, Boolean.FALSE);
+                  }
                   obj.defineOwnProperty(cx, name, desc, false);
                 }
                 obj.preventExtensions();
@@ -600,7 +593,6 @@ public class NativeObject extends IdScriptableObject implements Map
 
     // methods implementing java.util.Map
 
-    /** {@inheritDoc} */
     @Override
     public boolean containsKey(Object key) {
         if (key instanceof String) {
@@ -611,7 +603,6 @@ public class NativeObject extends IdScriptableObject implements Map
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean containsValue(Object value) {
         for (Object obj : values()) {
@@ -623,7 +614,6 @@ public class NativeObject extends IdScriptableObject implements Map
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object remove(Object key) {
         Object value = get(key);
@@ -635,37 +625,31 @@ public class NativeObject extends IdScriptableObject implements Map
         return value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Set<Object> keySet() {
         return new KeySet();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Collection<Object> values() {
         return new ValueCollection();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Set<Map.Entry<Object, Object>> entrySet() {
         return new EntrySet();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object put(Object key, Object value) {
         throw new UnsupportedOperationException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void putAll(Map m) {
         throw new UnsupportedOperationException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void clear() {
         throw new UnsupportedOperationException();
@@ -830,7 +814,6 @@ public class NativeObject extends IdScriptableObject implements Map
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

@@ -12,12 +12,9 @@ import org.mozilla.javascript.Token;
  * AST node for E4X ".@" and ".." expressions, such as
  * {@code foo..bar}, {@code foo..@bar}, {@code @foo.@bar}, and
  * {@code foo..@ns::*}.  The right-hand node is always an
- * {@link org.mozilla.javascript.ast.XmlRef}. <p>
+ * {@link XmlRef}. <p>
  *
- * Node type is {@link org.mozilla.javascript.Token#DOT} or {@link org.mozilla.javascript.Token#DOTDOT}.
- *
- * @author utente
- * @version $Id: $Id
+ * Node type is {@link Token#DOT} or {@link Token#DOTDOT}.
  */
 public class XmlMemberGet extends InfixExpression {
 
@@ -25,39 +22,17 @@ public class XmlMemberGet extends InfixExpression {
         type = Token.DOTDOT;
     }
 
-    /**
-     * <p>Constructor for XmlMemberGet.</p>
-     */
     public XmlMemberGet() {
     }
 
-    /**
-     * <p>Constructor for XmlMemberGet.</p>
-     *
-     * @param pos a int.
-     */
     public XmlMemberGet(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for XmlMemberGet.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public XmlMemberGet(int pos, int len) {
         super(pos, len);
     }
 
-    /**
-     * <p>Constructor for XmlMemberGet.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param ref a {@link org.mozilla.javascript.ast.XmlRef} object.
-     */
     public XmlMemberGet(int pos, int len, AstNode target, XmlRef ref) {
         super(pos, len, target, ref);
     }
@@ -65,21 +40,11 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Constructs a new {@code XmlMemberGet} node.
      * Updates bounds to include {@code target} and {@code ref} nodes.
-     *
-     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param ref a {@link org.mozilla.javascript.ast.XmlRef} object.
      */
     public XmlMemberGet(AstNode target, XmlRef ref) {
         super(target, ref);
     }
 
-    /**
-     * <p>Constructor for XmlMemberGet.</p>
-     *
-     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param ref a {@link org.mozilla.javascript.ast.XmlRef} object.
-     * @param opPos a int.
-     */
     public XmlMemberGet(AstNode target, XmlRef ref, int opPos) {
         super(Token.DOTDOT, target, ref, opPos);
     }
@@ -87,8 +52,6 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Returns the object on which the XML member-ref expression
      * is being evaluated.  Should never be {@code null}.
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTarget() {
         return getLeft();
@@ -96,9 +59,7 @@ public class XmlMemberGet extends InfixExpression {
 
     /**
      * Sets target object, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code target} is {@code null}
-     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code target} is {@code null}
      */
     public void setTarget(AstNode target) {
         setLeft(target);
@@ -107,8 +68,6 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Returns the right-side XML member ref expression.
      * Should never be {@code null} unless the code is malformed.
-     *
-     * @return a {@link org.mozilla.javascript.ast.XmlRef} object.
      */
     public XmlRef getMemberRef() {
         return (XmlRef)getRight();
@@ -117,15 +76,12 @@ public class XmlMemberGet extends InfixExpression {
     /**
      * Sets the XML member-ref expression, and sets its parent
      * to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if property is {@code null}
-     * @param ref a {@link org.mozilla.javascript.ast.XmlRef} object.
+     * @throws IllegalArgumentException if property is {@code null}
      */
     public void setProperty(XmlRef ref) {
         setRight(ref);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();

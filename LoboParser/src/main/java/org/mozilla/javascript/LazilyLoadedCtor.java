@@ -15,9 +15,6 @@ import java.security.PrivilegedAction;
  * Avoid loading classes unless they are used.
  *
  * <p> This improves startup time and average memory usage.
- *
- * @author utente
- * @version $Id: $Id
  */
 public final class LazilyLoadedCtor implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -33,14 +30,6 @@ public final class LazilyLoadedCtor implements Serializable {
     private Object initializedValue;
     private int state;
 
-    /**
-     * <p>Constructor for LazilyLoadedCtor.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.ScriptableObject} object.
-     * @param propertyName a {@link java.lang.String} object.
-     * @param className a {@link java.lang.String} object.
-     * @param sealed a boolean.
-     */
     public LazilyLoadedCtor(ScriptableObject scope, String propertyName,
             String className, boolean sealed)
     {

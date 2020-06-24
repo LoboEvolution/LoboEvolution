@@ -9,18 +9,15 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * New expression. Node type is {@link org.mozilla.javascript.Token#NEW}.
+ * New expression. Node type is {@link Token#NEW}.
  *
  * <pre><i>NewExpression</i> :
  *      MemberExpression
  *      <b>new</b> NewExpression</pre>
  *
- * This node is a subtype of {@link org.mozilla.javascript.ast.FunctionCall}, mostly for internal code
+ * This node is a subtype of {@link FunctionCall}, mostly for internal code
  * sharing.  Structurally a {@code NewExpression} node is very similar to a
  * {@code FunctionCall}, so it made a certain amount of sense.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class NewExpression extends FunctionCall {
 
@@ -30,34 +27,19 @@ public class NewExpression extends FunctionCall {
         type = Token.NEW;
     }
 
-    /**
-     * <p>Constructor for NewExpression.</p>
-     */
     public NewExpression() {
     }
 
-    /**
-     * <p>Constructor for NewExpression.</p>
-     *
-     * @param pos a int.
-     */
     public NewExpression(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for NewExpression.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public NewExpression(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns initializer object, if any.
-     *
      * @return extra initializer object-literal expression, or {@code null} if
      * not specified.
      */
@@ -80,7 +62,6 @@ public class NewExpression extends FunctionCall {
           initializer.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -100,8 +81,6 @@ public class NewExpression extends FunctionCall {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the target, and each argument.  If there is
      * a trailing initializer node, visits that last.
      */

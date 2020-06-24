@@ -15,43 +15,28 @@ import java.lang.reflect.Array;
  * @see NativeJavaClass
  * @see NativeJavaObject
  * @see NativeJavaPackage
- * @version $Id: $Id
  */
+
 public class NativeJavaArray
     extends NativeJavaObject
     implements SymbolScriptable
 {
     private static final long serialVersionUID = -924022554283675333L;
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "JavaArray";
     }
 
-    /**
-     * <p>wrap.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param array a {@link java.lang.Object} object.
-     * @return a {@link org.mozilla.javascript.NativeJavaArray} object.
-     */
     public static NativeJavaArray wrap(Scriptable scope, Object array) {
         return new NativeJavaArray(scope, array);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object unwrap() {
         return array;
     }
 
-    /**
-     * <p>Constructor for NativeJavaArray.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param array a {@link java.lang.Object} object.
-     */
     public NativeJavaArray(Scriptable scope, Object array) {
         super(scope, null, ScriptRuntime.ObjectClass);
         Class<?> cl = array.getClass();
@@ -63,25 +48,21 @@ public class NativeJavaArray
         this.cls = cl.getComponentType();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(String id, Scriptable start) {
         return id.equals("length") || super.has(id, start);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start) {
         return 0 <= index && index < length;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(Symbol key, Scriptable start) {
         return SymbolKey.IS_CONCAT_SPREADABLE.equals(key);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(String id, Scriptable start) {
         if (id.equals("length"))
@@ -96,7 +77,6 @@ public class NativeJavaArray
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start) {
         if (0 <= index && index < length) {
@@ -107,7 +87,6 @@ public class NativeJavaArray
         return Undefined.instance;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(Symbol key, Scriptable start) {
         if (SymbolKey.IS_CONCAT_SPREADABLE.equals(key)) {
@@ -116,7 +95,6 @@ public class NativeJavaArray
         return Scriptable.NOT_FOUND;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(String id, Scriptable start, Object value) {
         // Ignore assignments to "length"--it's readonly.
@@ -125,7 +103,6 @@ public class NativeJavaArray
                 "msg.java.array.member.not.found", id);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value) {
         if (0 <= index && index < length) {
@@ -138,13 +115,11 @@ public class NativeJavaArray
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void delete(Symbol key) {
         // All symbols are read-only
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> hint) {
         if (hint == null || hint == ScriptRuntime.StringClass)
@@ -156,7 +131,6 @@ public class NativeJavaArray
         return this;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object[] getIds() {
         Object[] result = new Object[length];
@@ -166,7 +140,6 @@ public class NativeJavaArray
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasInstance(Scriptable value) {
         if (!(value instanceof Wrapper))
@@ -175,7 +148,6 @@ public class NativeJavaArray
         return cls.isInstance(instance);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable getPrototype() {
         if (prototype == null) {

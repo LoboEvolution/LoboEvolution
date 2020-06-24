@@ -14,7 +14,7 @@ import org.mozilla.javascript.ast.FunctionNode;
  * associated with function nodes and with the toplevel script.  When
  * saved in the constant pool of a class, this string will be UTF-8
  * encoded, and token values will occupy a single byte.
- *
+
  * Source is saved (mostly) as token numbers.  The tokens saved pretty
  * much correspond to the token stream of a 'canonical' representation
  * of the input program, as directed by the parser.  (There were a few
@@ -40,9 +40,6 @@ import org.mozilla.javascript.ast.FunctionNode;
  * save a lot of space... but would require some method of deriving
  * the final constant pool entry from information available at parse
  * time.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class Decompiler
 {
@@ -252,9 +249,11 @@ public class Decompiler
      * version is done by the parser.
      *
      * @param source encoded source tree presentation
+     *
      * @param flags flags to select output format
+     *
      * @param properties indentation properties
-     * @return a {@link java.lang.String} object.
+     *
      */
     public static String decompile(String source, int flags,
                                    UintMap properties)
@@ -729,6 +728,10 @@ public class Decompiler
 
             case Token.YIELD:
                 result.append("yield ");
+                break;
+            
+            case Token.YIELD_STAR:
+                result.append("yield *");
                 break;
 
             case Token.NOT:

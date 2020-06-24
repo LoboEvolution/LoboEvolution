@@ -14,18 +14,10 @@ import java.util.Map;
 
 /**
  * Collection of utilities
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class Kit
 {
-    /**
-     * <p>classOrNull.</p>
-     *
-     * @param className a {@link java.lang.String} object.
-     * @return a {@link java.lang.Class} object.
-     */
     public static Class<?> classOrNull(String className)
     {
         try {
@@ -43,10 +35,6 @@ public class Kit
     /**
      * Attempt to load the class of the given name. Note that the type parameter
      * isn't checked.
-     *
-     * @param loader a {@link java.lang.ClassLoader} object.
-     * @param className a {@link java.lang.String} object.
-     * @return a {@link java.lang.Class} object.
      */
     public static Class<?> classOrNull(ClassLoader loader, String className)
     {
@@ -95,10 +83,6 @@ public class Kit
      * If character <tt>c</tt> is a hexadecimal digit, return
      * <tt>accumulator</tt> * 16 plus corresponding
      * number. Otherise return -1.
-     *
-     * @param c a int.
-     * @param accumulator a int.
-     * @return a int.
      */
     public static int xDigitToInt(int c, int accumulator)
     {
@@ -332,13 +316,6 @@ public class Kit
         }
     }
 
-    /**
-     * <p>makeHashKeyFromPair.</p>
-     *
-     * @param key1 a {@link java.lang.Object} object.
-     * @param key2 a {@link java.lang.Object} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public static Object makeHashKeyFromPair(Object key1, Object key2)
     {
         if (key1 == null) throw new IllegalArgumentException();
@@ -346,13 +323,6 @@ public class Kit
         return new ComplexKey(key1, key2);
     }
 
-    /**
-     * <p>readReader.</p>
-     *
-     * @param reader a {@link java.io.Reader} object.
-     * @return a {@link java.lang.String} object.
-     * @throws java.io.IOException if any.
-     */
     public static String readReader(Reader reader) throws IOException
     {
         try (BufferedReader in = new BufferedReader(reader)) {
@@ -366,14 +336,6 @@ public class Kit
         }
     }
 
-    /**
-     * <p>readStream.</p>
-     *
-     * @param is a {@link java.io.InputStream} object.
-     * @param initialBufferCapacity a int.
-     * @return an array of {@link byte} objects.
-     * @throws java.io.IOException if any.
-     */
     public static byte[] readStream(InputStream is, int initialBufferCapacity)
         throws IOException
     {
@@ -406,9 +368,6 @@ public class Kit
      * The function never returns and its return type is RuntimeException
      * only to be able to write <tt>throw Kit.codeBug()</tt> if plain
      * <tt>Kit.codeBug()</tt> triggers unreachable code error.
-     *
-     * @return a {@link java.lang.RuntimeException} object.
-     * @throws java.lang.RuntimeException if any.
      */
     public static RuntimeException codeBug()
         throws RuntimeException
@@ -424,10 +383,6 @@ public class Kit
      * The function never returns and its return type is RuntimeException
      * only to be able to write <tt>throw Kit.codeBug()</tt> if plain
      * <tt>Kit.codeBug()</tt> triggers unreachable code error.
-     *
-     * @param msg a {@link java.lang.String} object.
-     * @return a {@link java.lang.RuntimeException} object.
-     * @throws java.lang.RuntimeException if any.
      */
     public static RuntimeException codeBug(String msg)
         throws RuntimeException

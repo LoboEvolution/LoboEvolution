@@ -17,7 +17,7 @@ import org.mozilla.javascript.Token;
  * non-{@code null}, although the list will have no elements if the Array literal
  * is empty.
  *
- * <p>Node type is {@link org.mozilla.javascript.Token#ARRAYLIT}.
+ * <p>Node type is {@link Token#ARRAYLIT}.
  *
  * <pre><i>ArrayLiteral</i> :
  *        <b>[</b> Elisionopt <b>]</b>
@@ -29,9 +29,6 @@ import org.mozilla.javascript.Token;
  * <i>Elision</i> :
  *        <b>,</b>
  *        Elision <b>,</b></pre>
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ArrayLiteral extends AstNode implements DestructuringForm {
 
@@ -47,36 +44,21 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
         type = Token.ARRAYLIT;
     }
 
-    /**
-     * <p>Constructor for ArrayLiteral.</p>
-     */
     public ArrayLiteral() {
     }
 
-    /**
-     * <p>Constructor for ArrayLiteral.</p>
-     *
-     * @param pos a int.
-     */
     public ArrayLiteral(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for ArrayLiteral.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ArrayLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns the element list
-     *
      * @return the element list.  If there are no elements, returns an immutable
-     *         empty list.  Elisions are represented as {@link org.mozilla.javascript.ast.EmptyExpression}
+     *         empty list.  Elisions are represented as {@link EmptyExpression}
      *         nodes.
      */
     public List<AstNode> getElements() {
@@ -85,7 +67,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Sets the element list, and sets each element's parent to this node.
-     *
      * @param elements the element list.  Can be {@code null}.
      */
     public void setElements(List<AstNode> elements) {
@@ -101,10 +82,9 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Adds an element to the list, and sets its parent to this node.
-     *
      * @param element the element to add
-     * @throws java.lang.IllegalArgumentException if element is {@code null}.  To indicate
-     *         an empty element, use an {@link org.mozilla.javascript.ast.EmptyExpression} node.
+     * @throws IllegalArgumentException if element is {@code null}.  To indicate
+     *         an empty element, use an {@link EmptyExpression} node.
      */
     public void addElement(AstNode element) {
         assertNotNull(element);
@@ -117,8 +97,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
     /**
      * Returns the number of elements in this {@code Array} literal,
      * including empty elements.
-     *
-     * @return a int.
      */
     public int getSize() {
         return elements == null ? 0 : elements.size();
@@ -126,10 +104,9 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Returns element at specified index.
-     *
      * @param index the index of the element to retrieve
      * @return the element
-     * @throws java.lang.IndexOutOfBoundsException if the index is invalid
+     * @throws IndexOutOfBoundsException if the index is invalid
      */
     public AstNode getElement(int index) {
         if (elements == null)
@@ -139,8 +116,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Returns destructuring length
-     *
-     * @return a int.
      */
     public int getDestructuringLength() {
       return destructuringLength;
@@ -152,8 +127,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
      * but {@code for ([a] in obj)} is not since we have both key and
      * value supplied.  The difference is only meaningful in array literals
      * used in destructuring-assignment contexts.
-     *
-     * @param destructuringLength a int.
      */
     public void setDestructuringLength(int destructuringLength) {
       this.destructuringLength = destructuringLength;
@@ -161,7 +134,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Used by code generator.
-     *
      * @return the number of empty elements
      */
     public int getSkipCount() {
@@ -170,7 +142,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
 
     /**
      * Used by code generator.
-     *
      * @param count the count of empty elements
      */
     public void setSkipCount(int count) {
@@ -178,8 +149,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Marks this node as being a destructuring form - that is, appearing
      * in a context such as {@code for ([a, b] in ...)} where it's the
      * target of a destructuring assignment.
@@ -190,8 +159,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Returns true if this node is in a destructuring position:
      * a function parameter, the target of a variable initializer, the
      * iterator of a for..in loop, etc.
@@ -201,7 +168,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
         return isDestructuring;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -215,8 +181,6 @@ public class ArrayLiteral extends AstNode implements DestructuringForm {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then visits its element expressions in order.
      * Any empty elements are represented by {@link EmptyExpression}
      * objects, so the callback will never be passed {@code null}.

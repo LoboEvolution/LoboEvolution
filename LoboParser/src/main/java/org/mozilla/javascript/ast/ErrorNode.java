@@ -10,10 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node representing a parse error or a warning.  Node type is
- * {@link org.mozilla.javascript.Token#ERROR}.
- *
- * @author utente
- * @version $Id: $Id
+ * {@link Token#ERROR}.
  */
 public class ErrorNode extends AstNode {
 
@@ -23,35 +20,19 @@ public class ErrorNode extends AstNode {
         type = Token.ERROR;
     }
 
-    /**
-     * <p>Constructor for ErrorNode.</p>
-     */
     public ErrorNode() {
     }
 
-    /**
-     * <p>Constructor for ErrorNode.</p>
-     *
-     * @param pos a int.
-     */
     public ErrorNode(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for ErrorNode.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ErrorNode(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns error message key
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getMessage() {
         return message;
@@ -59,22 +40,17 @@ public class ErrorNode extends AstNode {
 
     /**
      * Sets error message key
-     *
-     * @param message a {@link java.lang.String} object.
      */
     public void setMessage(String message) {
         this.message = message;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         return "";
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Error nodes are not visited during normal visitor traversals,
      * but comply with the {@link AstNode#visit} interface.
      */

@@ -15,10 +15,8 @@ import org.mozilla.javascript.Undefined;
 /**
  * An array view that stores 32-bit quantities and implements the JavaScript "Int32Array" interface.
  * It also implements List&lt;Integer&gt; for direct manipulation in Java.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class NativeInt32Array
     extends NativeTypedArrayView<Integer>
 {
@@ -27,70 +25,44 @@ public class NativeInt32Array
     private static final String CLASS_NAME = "Int32Array";
     private static final int BYTES_PER_ELEMENT = 4;
 
-    /**
-     * <p>Constructor for NativeInt32Array.</p>
-     */
     public NativeInt32Array()
     {
     }
 
-    /**
-     * <p>Constructor for NativeInt32Array.</p>
-     *
-     * @param ab a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
-     * @param off a int.
-     * @param len a int.
-     */
     public NativeInt32Array(NativeArrayBuffer ab, int off, int len)
     {
         super(ab, off, len, len * BYTES_PER_ELEMENT);
     }
 
-    /**
-     * <p>Constructor for NativeInt32Array.</p>
-     *
-     * @param len a int.
-     */
     public NativeInt32Array(int len)
     {
-        this(new NativeArrayBuffer(len * BYTES_PER_ELEMENT), 0, len);
+        this(new NativeArrayBuffer((double)len * BYTES_PER_ELEMENT), 0, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeInt32Array a = new NativeInt32Array();
         a.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected NativeInt32Array construct(NativeArrayBuffer ab, int off, int len)
     {
         return new NativeInt32Array(ab, off, len);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getBytesPerElement()
     {
         return BYTES_PER_ELEMENT;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected NativeInt32Array realThis(Scriptable thisObj, IdFunctionObject f)
     {
@@ -100,7 +72,6 @@ public class NativeInt32Array
         return (NativeInt32Array)thisObj;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object js_get(int index)
     {
@@ -110,7 +81,6 @@ public class NativeInt32Array
         return ByteIo.readInt32(arrayBuffer.buffer, (index * BYTES_PER_ELEMENT) + offset, useLittleEndian());
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object js_set(int index, Object c)
     {
@@ -122,7 +92,6 @@ public class NativeInt32Array
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Integer get(int i)
     {
@@ -132,7 +101,6 @@ public class NativeInt32Array
         return (Integer)js_get(i);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Integer set(int i, Integer aByte)
     {

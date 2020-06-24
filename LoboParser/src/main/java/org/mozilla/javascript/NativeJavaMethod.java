@@ -20,13 +20,14 @@ import java.util.logging.Logger;
  * @see NativeJavaArray
  * @see NativeJavaPackage
  * @see NativeJavaClass
- * @version $Id: $Id
  */
+
 public class NativeJavaMethod extends BaseFunction
 {
     private static final long serialVersionUID = -3440381785576412928L;
     
-    private static final Logger logger = Logger.getLogger(NativeJavaMethod.class.getName());
+    /** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(NativeJavaMethod.class.getName());
 
     NativeJavaMethod(MemberBox[] methods)
     {
@@ -46,18 +47,11 @@ public class NativeJavaMethod extends BaseFunction
         this.methods = new MemberBox[] { method };
     }
 
-    /**
-     * <p>Constructor for NativeJavaMethod.</p>
-     *
-     * @param method a {@link java.lang.reflect.Method} object.
-     * @param name a {@link java.lang.String} object.
-     */
     public NativeJavaMethod(Method method, String name)
     {
         this(new MemberBox(method), name);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
@@ -118,7 +112,6 @@ public class NativeJavaMethod extends BaseFunction
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -139,7 +132,6 @@ public class NativeJavaMethod extends BaseFunction
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
                        Object[] args)
@@ -560,7 +552,7 @@ public class NativeJavaMethod extends BaseFunction
 
     MemberBox[] methods;
     private String functionName;
-    private transient CopyOnWriteArrayList<ResolvedOverload> overloadCache;
+    private transient final CopyOnWriteArrayList<ResolvedOverload> overloadCache = new CopyOnWriteArrayList<>();
 }
 
 class ResolvedOverload {
@@ -586,7 +578,6 @@ class ResolvedOverload {
             Object arg = args[i];
             if (arg instanceof Wrapper)
                 arg = ((Wrapper)arg).unwrap();
-            /** {@inheritDoc} */
             if (arg == null) {
                 if (types[i] != null) return false;
             } else if (arg.getClass() != types[i]) {
@@ -596,7 +587,6 @@ class ResolvedOverload {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof ResolvedOverload)) {

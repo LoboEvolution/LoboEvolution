@@ -13,19 +13,15 @@ import java.util.Map;
  * This is an implementation of the standard "Symbol" type that implements
  * all of its weird properties. One of them is that some objects can have
  * an "internal data slot" that makes them a Symbol and others cannot.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class NativeSymbol
     extends IdScriptableObject
     implements Symbol
 {
     private static final long serialVersionUID = -589539749749830003L;
 
-    /** Constant CLASS_NAME="Symbol" */
     public static final String CLASS_NAME = "Symbol";
-    /** Constant TYPE_NAME="symbol" */
     public static final String TYPE_NAME = "symbol";
 
     private static final Object GLOBAL_TABLE_KEY = new Object();
@@ -34,13 +30,6 @@ public class NativeSymbol
     private final SymbolKey key;
     private final NativeSymbol symbolData;
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed) {
         NativeSymbol obj = new NativeSymbol("");
         ScriptableObject ctor = obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, false);
@@ -85,11 +74,6 @@ public class NativeSymbol
         this.symbolData = this;
     }
 
-    /**
-     * <p>Constructor for NativeSymbol.</p>
-     *
-     * @param s a {@link org.mozilla.javascript.NativeSymbol} object.
-     */
     public NativeSymbol(NativeSymbol s) {
         this.key = s.key;
         this.symbolData = s.symbolData;
@@ -98,11 +82,6 @@ public class NativeSymbol
     /**
      * Use this when we need to create symbols internally because of the convoluted way we have to
      * construct them.
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @return a {@link org.mozilla.javascript.NativeSymbol} object.
      */
     public static NativeSymbol construct(Context cx, Scriptable scope, Object[] args)
     {
@@ -114,13 +93,11 @@ public class NativeSymbol
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return CLASS_NAME;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor) {
         super.fillConstructorProperties(ctor);
@@ -138,7 +115,6 @@ public class NativeSymbol
 
     // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id = 0;
@@ -155,7 +131,6 @@ public class NativeSymbol
         return id;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol key) {
         if (SymbolKey.TO_STRING_TAG.equals(key)) {
@@ -179,13 +154,12 @@ public class NativeSymbol
     // #/string_id_map#
 
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
         switch (id) {
         case Id_constructor:
-            initPrototypeMethod(CLASS_NAME, id, "constructor", 1);
+            initPrototypeMethod(CLASS_NAME, id, "constructor", 0);
             break;
         case Id_toString:
             initPrototypeMethod(CLASS_NAME, id, "toString", 0);
@@ -205,7 +179,6 @@ public class NativeSymbol
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope, Scriptable thisObj, Object[] args) {
         if (!f.hasTag(CLASS_NAME)) {
@@ -300,7 +273,6 @@ public class NativeSymbol
         return Undefined.instance;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return key.toString();
@@ -313,7 +285,6 @@ public class NativeSymbol
         return (cx != null) && cx.isStrictMode();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(String name, Scriptable start, Object value)
     {
@@ -324,7 +295,6 @@ public class NativeSymbol
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value)
     {
@@ -335,7 +305,6 @@ public class NativeSymbol
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(Symbol key, Scriptable start, Object value)
     {
@@ -350,28 +319,23 @@ public class NativeSymbol
      * Object() on a Symbol constructs an object which is NOT a symbol, but which has an "internal data slot"
      * that is. Furthermore, such an object has the Symbol prototype so this particular object is still used.
      * Account for that here: an "Object" that was created from a Symbol has a different value of the slot.
-     *
-     * @return a boolean.
      */
     public boolean isSymbol()
     {
         return (symbolData == this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getTypeOf()
     {
         return (isSymbol() ? TYPE_NAME : super.getTypeOf());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return key.hashCode();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(Object x) {
         return key.equals(x);
@@ -381,6 +345,7 @@ public class NativeSymbol
         return key;
     }
 
+    @SuppressWarnings("unchecked")
     private Map<String, NativeSymbol> getGlobalMap() {
         ScriptableObject top = (ScriptableObject)getTopLevelScope(this);
         Map<String, NativeSymbol> map = (Map<String, NativeSymbol>)top.getAssociatedValue(GLOBAL_TABLE_KEY);

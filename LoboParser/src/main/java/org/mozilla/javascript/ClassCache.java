@@ -15,8 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * from JavaScript.
  *
  * @author Igor Bukanov
+ *
  * @since Rhino 1.5 Release 5
- * @version $Id: $Id
  */
 public class ClassCache implements Serializable
 {
@@ -32,13 +32,14 @@ public class ClassCache implements Serializable
     /**
      * Search for ClassCache object in the given scope.
      * The method first calls
-     * {@link org.mozilla.javascript.ScriptableObject#getTopLevelScope(Scriptable scope)}
+     * {@link ScriptableObject#getTopLevelScope(Scriptable scope)}
      * to get the top most scope and then tries to locate associated
      * ClassCache object in the prototype chain of the top scope.
      *
      * @param scope scope to search for ClassCache object.
      * @return previously associated ClassCache object or a new instance of
      *         ClassCache if no ClassCache object was found.
+     *
      * @see #associate(ScriptableObject topScope)
      */
     public static ClassCache get(Scriptable scope)
@@ -60,6 +61,7 @@ public class ClassCache implements Serializable
      * @return true if no previous ClassCache objects were embedded into
      *         the scope and this ClassCache were successfully associated
      *         or false otherwise.
+     *
      * @see #get(Scriptable scope)
      */
     public boolean associate(ScriptableObject topScope)
@@ -88,15 +90,13 @@ public class ClassCache implements Serializable
     /**
      * Check if generated Java classes and Java reflection information
      * is cached.
-     *
-     * @return a boolean.
      */
     public final boolean isCachingEnabled()
     {
         return cachingIsEnabled;
     }
 
-    /**
+     /**
      * Set whether to cache some values.
      * <p>
      * By default, the engine will cache the results of
@@ -106,11 +106,12 @@ public class ClassCache implements Serializable
      * objects past the lifetime of any real usage.
      * <p>
      * If caching is enabled and this method is called with a
-     * false argument, the caches will be emptied.
+     * <code>false</code> argument, the caches will be emptied.
      * <p>
      * Caching is enabled by default.
      *
      * @param enabled if true, caching is enabled
+     *
      * @see #clearCaches()
      */
     public synchronized void setCachingEnabled(boolean enabled)
@@ -143,10 +144,9 @@ public class ClassCache implements Serializable
     }
 
     /**
-     * <p>isInvokerOptimizationEnabled.</p>
-     *
+     * @deprecated
+     * The method always returns false.
      * @see #setInvokerOptimizationEnabled(boolean enabled)
-     * @return a boolean.
      */
     @Deprecated
     public boolean isInvokerOptimizationEnabled()
@@ -155,9 +155,13 @@ public class ClassCache implements Serializable
     }
 
     /**
-     * <p>setInvokerOptimizationEnabled.</p>
-     *
-     * @param enabled a boolean.
+     * @deprecated
+     * The method does nothing.
+     * Invoker optimization is no longer used by Rhino.
+     * On modern JDK like 1.4 or 1.5 the disadvantages of the optimization
+     * like increased memory usage or longer initialization time overweight
+     * small speed increase that can be gained using generated proxy class
+     * to replace reflection.
      */
     @Deprecated
     public synchronized void setInvokerOptimizationEnabled(boolean enabled)
@@ -167,8 +171,6 @@ public class ClassCache implements Serializable
     /**
      * Internal engine method to return serial number for generated classes
      * to ensure name uniqueness.
-     *
-     * @return a int.
      */
     public final synchronized int newClassSerialNumber()
     {

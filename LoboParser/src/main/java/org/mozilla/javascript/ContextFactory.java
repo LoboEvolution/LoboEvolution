@@ -12,12 +12,12 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 /**
- * Factory class that Rhino runtime uses to create new {@link org.mozilla.javascript.Context}
- * instances.  A ContextFactory can also notify listeners
+ * Factory class that Rhino runtime uses to create new {@link Context}
+ * instances.  A <code>ContextFactory</code> can also notify listeners
  * about context creation and release.
  * <p>
- * When the Rhino runtime needs to create new {@link org.mozilla.javascript.Context} instance during
- * execution of {@link org.mozilla.javascript.Context#enter()} or {@link org.mozilla.javascript.Context}, it will call
+ * When the Rhino runtime needs to create new {@link Context} instance during
+ * execution of {@link Context#enter()} or {@link Context}, it will call
  * {@link #makeContext()} of the current global ContextFactory.
  * See {@link #getGlobal()} and {@link #initGlobal(ContextFactory)}.
  * <p>
@@ -34,7 +34,7 @@ import java.security.PrivilegedAction;
  * class MyFactory extends ContextFactory
  * {
  *
- *     // Custom {@link org.mozilla.javascript.Context} to store execution time.
+ *     // Custom {@link Context} to store execution time.
  *     private static class MyContext extends Context
  *     {
  *         long startTime;
@@ -60,16 +60,16 @@ import java.security.PrivilegedAction;
  *     {
  *         // Turn on maximum compatibility with MSIE scripts
  *         switch (featureIndex) {
- *             case {@link org.mozilla.javascript.Context#FEATURE_NON_ECMA_GET_YEAR}:
+ *             case {@link Context#FEATURE_NON_ECMA_GET_YEAR}:
  *                 return true;
  *
- *             case {@link org.mozilla.javascript.Context#FEATURE_MEMBER_EXPR_AS_FUNCTION_NAME}:
+ *             case {@link Context#FEATURE_MEMBER_EXPR_AS_FUNCTION_NAME}:
  *                 return true;
  *
- *             case {@link org.mozilla.javascript.Context#FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER}:
+ *             case {@link Context#FEATURE_RESERVED_KEYWORD_AS_IDENTIFIER}:
  *                 return true;
  *
- *             case {@link org.mozilla.javascript.Context#FEATURE_PARENT_PROTO_PROPERTIES}:
+ *             case {@link Context#FEATURE_PARENT_PROTO_PROPERTIES}:
  *                 return false;
  *         }
  *         return super.hasFeature(cx, featureIndex);
@@ -90,8 +90,8 @@ import java.security.PrivilegedAction;
  *     }
  *
  *     // Override {@link #doTopCall(Callable,
- *                               Context, Scriptable,
- *                               Scriptable, Object[])}
+                               Context, Scriptable,
+                               Scriptable, Object[])}
  *     protected Object doTopCall(Callable callable,
  *                                Context cx, Scriptable scope,
  *                                Scriptable thisObj, Object[] args)
@@ -104,10 +104,8 @@ import java.security.PrivilegedAction;
  *
  * }
  * </pre>
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class ContextFactory
 {
     private static volatile boolean hasCustomGlobal;
@@ -127,14 +125,12 @@ public class ContextFactory
     {
         /**
          * Notify about newly created {@link Context} object.
-         * @param cx a Context to associate with the thread if possible
          */
         public void contextCreated(Context cx);
 
         /**
          * Notify that the specified {@link Context} instance is no longer
          * associated with the current thread.
-         * @param cx a Context to associate with the thread if possible
          */
         public void contextReleased(Context cx);
     }
@@ -144,7 +140,6 @@ public class ContextFactory
      *
      * @see #hasExplicitGlobal()
      * @see #initGlobal(ContextFactory)
-     * @return a {@link org.mozilla.javascript.ContextFactory} object.
      */
     public static ContextFactory getGlobal()
     {
@@ -159,7 +154,6 @@ public class ContextFactory
      *
      * @see #getGlobal()
      * @see #initGlobal(ContextFactory)
-     * @return a boolean.
      */
     public static boolean hasExplicitGlobal()
     {
@@ -172,7 +166,6 @@ public class ContextFactory
      *
      * @see #getGlobal()
      * @see #hasExplicitGlobal()
-     * @param factory a {@link org.mozilla.javascript.ContextFactory} object.
      */
     public synchronized static void initGlobal(ContextFactory factory)
     {
@@ -191,11 +184,6 @@ public class ContextFactory
         public ContextFactory getContextFactoryGlobal();
     }
 
-    /**
-     * <p>getGlobalSetter.</p>
-     *
-     * @return a {@link org.mozilla.javascript.ContextFactory.GlobalSetter} object.
-     */
     public synchronized static GlobalSetter getGlobalSetter() {
         if (hasCustomGlobal) {
             throw new IllegalStateException();
@@ -215,15 +203,13 @@ public class ContextFactory
     }
 
     /**
-     * Create new {@link org.mozilla.javascript.Context} instance to be associated with the current
+     * Create new {@link Context} instance to be associated with the current
      * thread.
-     * This is a callback method used by Rhino to create {@link org.mozilla.javascript.Context}
+     * This is a callback method used by Rhino to create {@link Context}
      * instance when it is necessary to associate one with the current
      * execution thread. <tt>makeContext()</tt> is allowed to call
-     * {@link org.mozilla.javascript.Context#seal(Object)} on the result to prevent
-     * {@link org.mozilla.javascript.Context} changes by hostile scripts or applets.
-     *
-     * @return a {@link org.mozilla.javascript.Context} object.
+     * {@link Context#seal(Object)} on the result to prevent
+     * {@link Context} changes by hostile scripts or applets.
      */
     protected Context makeContext()
     {
@@ -231,13 +217,9 @@ public class ContextFactory
     }
 
     /**
-     * Implementation of {@link org.mozilla.javascript.Context#hasFeature(int featureIndex)}.
-     * This can be used to customize {@link org.mozilla.javascript.Context} without introducing
+     * Implementation of {@link Context#hasFeature(int featureIndex)}.
+     * This can be used to customize {@link Context} without introducing
      * additional subclasses.
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param featureIndex a int.
-     * @return a boolean.
      */
     protected boolean hasFeature(Context cx, int featureIndex)
     {
@@ -340,15 +322,13 @@ public class ContextFactory
     /**
      * Provides a default
      * {@link org.mozilla.javascript.xml.XMLLib.Factory XMLLib.Factory}
-     * to be used by the Context instances produced by this
-     * factory. See {@link org.mozilla.javascript.Context#getE4xImplementationFactory} for details.
+     * to be used by the <code>Context</code> instances produced by this
+     * factory. See {@link Context#getE4xImplementationFactory} for details.
      *
      * May return null, in which case E4X functionality is not supported in
      * Rhino.
      *
      * The default implementation now prefers the DOM3 E4X implementation.
-     *
-     * @return a {@link org.mozilla.javascript.xml.XMLLib.Factory} object.
      */
     protected org.mozilla.javascript.xml.XMLLib.Factory
         getE4xImplementationFactory()
@@ -371,13 +351,10 @@ public class ContextFactory
     /**
      * Create class loader for generated classes.
      * This method creates an instance of the default implementation
-     * of {@link org.mozilla.javascript.GeneratedClassLoader}. Rhino uses this interface to load
-     * generated JVM classes when no {@link org.mozilla.javascript.SecurityController}
+     * of {@link GeneratedClassLoader}. Rhino uses this interface to load
+     * generated JVM classes when no {@link SecurityController}
      * is installed.
      * Application can override the method to provide custom class loading.
-     *
-     * @param parent a {@link java.lang.ClassLoader} object.
-     * @return a {@link org.mozilla.javascript.GeneratedClassLoader} object.
      */
     protected GeneratedClassLoader createClassLoader(final ClassLoader parent)
     {
@@ -394,8 +371,6 @@ public class ContextFactory
      * Unless it was explicitly initialized with
      * {@link #initApplicationClassLoader(ClassLoader)} the method returns
      * null to indicate that Thread.getContextClassLoader() should be used.
-     *
-     * @return a {@link java.lang.ClassLoader} object.
      */
     public final ClassLoader getApplicationClassLoader()
     {
@@ -406,7 +381,6 @@ public class ContextFactory
      * Set explicit class loader to use when searching for Java classes.
      *
      * @see #getApplicationClassLoader()
-     * @param loader a {@link java.lang.ClassLoader} object.
      */
     public final void initApplicationClassLoader(ClassLoader loader)
     {
@@ -430,13 +404,6 @@ public class ContextFactory
      * create the first stack frame with scriptable code, it calls this method
      * to perform the real call. In this way execution of any script
      * happens inside this function.
-     *
-     * @param callable a {@link org.mozilla.javascript.Callable} object.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @return a {@link java.lang.Object} object.
      */
     protected Object doTopCall(Callable callable,
                                Context cx, Scriptable scope,
@@ -448,21 +415,13 @@ public class ContextFactory
 
     /**
      * Implementation of
-     * {@link org.mozilla.javascript.Context#observeInstructionCount(int instructionCount)}.
-     * This can be used to customize {@link org.mozilla.javascript.Context} without introducing
+     * {@link Context#observeInstructionCount(int instructionCount)}.
+     * This can be used to customize {@link Context} without introducing
      * additional subclasses.
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param instructionCount a int.
      */
     protected void observeInstructionCount(Context cx, int instructionCount) {
     }
 
-    /**
-     * <p>onContextCreated.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     */
     protected void onContextCreated(Context cx)
     {
         Object listeners = this.listeners;
@@ -474,11 +433,6 @@ public class ContextFactory
         }
     }
 
-    /**
-     * <p>onContextReleased.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     */
     protected void onContextReleased(Context cx)
     {
         Object listeners = this.listeners;
@@ -490,11 +444,6 @@ public class ContextFactory
         }
     }
 
-    /**
-     * <p>addListener.</p>
-     *
-     * @param listener a {@link org.mozilla.javascript.ContextFactory.Listener} object.
-     */
     public final void addListener(Listener listener)
     {
         checkNotSealed();
@@ -506,11 +455,6 @@ public class ContextFactory
         }
     }
 
-    /**
-     * <p>removeListener.</p>
-     *
-     * @param listener a {@link org.mozilla.javascript.ContextFactory.Listener} object.
-     */
     public final void removeListener(Listener listener)
     {
         checkNotSealed();
@@ -537,9 +481,7 @@ public class ContextFactory
 
     /**
      * Checks if this is a sealed ContextFactory.
-     *
      * @see #seal()
-     * @return a boolean.
      */
     public final boolean isSealed()
     {
@@ -549,7 +491,6 @@ public class ContextFactory
     /**
      * Seal this ContextFactory so any attempt to modify it like to add or
      * remove its listeners will throw an exception.
-     *
      * @see #isSealed()
      */
     public final void seal()
@@ -558,29 +499,23 @@ public class ContextFactory
         sealed = true;
     }
 
-    /**
-     * <p>checkNotSealed.</p>
-     */
     protected final void checkNotSealed()
     {
         if (sealed) throw new IllegalStateException();
     }
 
     /**
-     * Call {@link org.mozilla.javascript.ContextAction#run(Context cx)}
-     * using the {@link org.mozilla.javascript.Context} instance associated with the current thread.
+     * Call {@link ContextAction#run(Context cx)}
+     * using the {@link Context} instance associated with the current thread.
      * If no Context is associated with the thread, then
      * {@link #makeContext()} will be called to construct
      * new Context instance. The instance will be temporary associated
-     * with the thread during call to {@link org.mozilla.javascript.ContextAction#run(Context)}.
+     * with the thread during call to {@link ContextAction#run(Context)}.
      *
      * @see ContextFactory#call(ContextAction)
      * @see Context#call(ContextFactory factory, Callable callable,
      *                   Scriptable scope, Scriptable thisObj,
      *                   Object[] args)
-     * @param action a {@link org.mozilla.javascript.ContextAction} object.
-     * @param <T> a T object.
-     * @return a T object.
      */
     public final <T> T call(ContextAction<T> action)
     {
@@ -594,11 +529,11 @@ public class ContextFactory
      * Once a thread has entered a Context, then getCurrentContext() may be
      * called to find the context that is associated with the current thread.
      * <p>
-     * Calling enterContext() will return either the Context
+     * Calling <code>enterContext()</code> will return either the Context
      * currently associated with the thread, or will create a new context and
      * associate it with the current thread. Each call to
-     * enterContext() must have a matching call to
-     * {@link org.mozilla.javascript.Context#exit()}.
+     * <code>enterContext()</code> must have a matching call to
+     * {@link Context#exit()}.
      * <pre>
      *      Context cx = contextFactory.enterContext();
      *      try {
@@ -621,7 +556,6 @@ public class ContextFactory
      *          }
      *      });
      * </pre>
-     *
      * @return a Context associated with the current thread
      * @see Context#getCurrentContext()
      * @see Context#exit()
@@ -633,8 +567,6 @@ public class ContextFactory
     }
 
     /**
-     * <p>enter.</p>
-     *
      * @deprecated use {@link #enterContext()} instead
      * @return a Context associated with the current thread
      */
@@ -645,9 +577,7 @@ public class ContextFactory
     }
 
     /**
-     * <p>exit.</p>
-     *
-     * @deprecated Use {@link org.mozilla.javascript.Context#exit()} instead.
+     * @deprecated Use {@link Context#exit()} instead.
      */
     @Deprecated
     public final void exit()
@@ -659,16 +589,15 @@ public class ContextFactory
      * Get a Context associated with the current thread, using the given
      * Context if need be.
      * <p>
-     * The same as enterContext() except that cx
+     * The same as <code>enterContext()</code> except that <code>cx</code>
      * is associated with the current thread and returned if the current thread
-     * has no associated context and cx is not associated with any
+     * has no associated context and <code>cx</code> is not associated with any
      * other thread.
-     *
      * @param cx a Context to associate with the thread if possible
      * @return a Context associated with the current thread
      * @see #enterContext()
      * @see #call(ContextAction)
-     * @throws java.lang.IllegalStateException if cx is already associated
+     * @throws IllegalStateException if <code>cx</code> is already associated
      * with a different thread
      */
     public final Context enterContext(Context cx)

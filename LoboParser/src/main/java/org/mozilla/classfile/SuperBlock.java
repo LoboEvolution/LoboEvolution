@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  */
 final class SuperBlock {
 	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(SuperBlock.class.getName());
 	
   SuperBlock(int index, int start, int end, int[] initialLocals) {
@@ -137,7 +138,6 @@ final class SuperBlock {
     return end;
   }
 
-  /** {@inheritDoc} */
   @Override
   public String toString() {
     return "sb " + index;

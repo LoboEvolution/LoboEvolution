@@ -12,63 +12,35 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- *Implementation of resizable array with focus on minimizing memory usage by storing few initial array elements in object fields. Can also be used as a stack.
- *
- * @author utente
- * @version $Id: $Id
- */
+Implementation of resizable array with focus on minimizing memory usage by storing few initial array elements in object fields. Can also be used as a stack.
+*/
+
 public class ObjArray implements Serializable
 {
     private static final long serialVersionUID = 4174889037736658296L;
 
-    /**
-     * <p>Constructor for ObjArray.</p>
-     */
     public ObjArray() { }
 
-    /**
-     * <p>isSealed.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isSealed()
     {
         return sealed;
     }
 
-    /**
-     * <p>seal.</p>
-     */
     public final void seal()
     {
         sealed = true;
     }
 
-    /**
-     * <p>isEmpty.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isEmpty()
     {
         return size == 0;
     }
 
-    /**
-     * <p>size.</p>
-     *
-     * @return a int.
-     */
     public final int size()
     {
         return size;
     }
 
-    /**
-     * <p>Setter for the field size.</p>
-     *
-     * @param newSize a int.
-     */
     public final void setSize(int newSize)
     {
         if (newSize < 0) throw new IllegalArgumentException();
@@ -86,24 +58,12 @@ public class ObjArray implements Serializable
         size = newSize;
     }
 
-    /**
-     * <p>get.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.Object} object.
-     */
     public final Object get(int index)
     {
         if (!(0 <= index && index < size)) throw onInvalidIndex(index, size);
         return getImpl(index);
     }
 
-    /**
-     * <p>set.</p>
-     *
-     * @param index a int.
-     * @param value a {@link java.lang.Object} object.
-     */
     public final void set(int index, Object value)
     {
         if (!(0 <= index && index < size)) throw onInvalidIndex(index, size);
@@ -136,12 +96,6 @@ public class ObjArray implements Serializable
 
     }
 
-    /**
-     * <p>indexOf.</p>
-     *
-     * @param obj a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public int indexOf(Object obj)
     {
         int N = size;
@@ -154,12 +108,6 @@ public class ObjArray implements Serializable
         return -1;
     }
 
-    /**
-     * <p>lastIndexOf.</p>
-     *
-     * @param obj a {@link java.lang.Object} object.
-     * @return a int.
-     */
     public int lastIndexOf(Object obj)
     {
         for (int i = size; i != 0;) {
@@ -172,11 +120,6 @@ public class ObjArray implements Serializable
         return -1;
     }
 
-    /**
-     * <p>peek.</p>
-     *
-     * @return a {@link java.lang.Object} object.
-     */
     public final Object peek()
     {
         int N = size;
@@ -184,11 +127,6 @@ public class ObjArray implements Serializable
         return getImpl(N - 1);
     }
 
-    /**
-     * <p>pop.</p>
-     *
-     * @return a {@link java.lang.Object} object.
-     */
     public final Object pop()
     {
         if (sealed) throw onSeledMutation();
@@ -210,21 +148,11 @@ public class ObjArray implements Serializable
         return top;
     }
 
-    /**
-     * <p>push.</p>
-     *
-     * @param value a {@link java.lang.Object} object.
-     */
     public final void push(Object value)
     {
         add(value);
     }
 
-    /**
-     * <p>add.</p>
-     *
-     * @param value a {@link java.lang.Object} object.
-     */
     public final void add(Object value)
     {
         if (sealed) throw onSeledMutation();
@@ -236,12 +164,6 @@ public class ObjArray implements Serializable
         setImpl(N, value);
     }
 
-    /**
-     * <p>add.</p>
-     *
-     * @param index a int.
-     * @param value a {@link java.lang.Object} object.
-     */
     public final void add(int index, Object value)
     {
         int N = size;
@@ -278,11 +200,6 @@ public class ObjArray implements Serializable
         size = N + 1;
     }
 
-    /**
-     * <p>remove.</p>
-     *
-     * @param index a int.
-     */
     public final void remove(int index)
     {
         int N = size;
@@ -318,9 +235,6 @@ public class ObjArray implements Serializable
         size = N;
     }
 
-    /**
-     * <p>clear.</p>
-     */
     public final void clear()
     {
         if (sealed) throw onSeledMutation();
@@ -331,11 +245,6 @@ public class ObjArray implements Serializable
         size = 0;
     }
 
-    /**
-     * <p>toArray.</p>
-     *
-     * @return an array of {@link java.lang.Object} objects.
-     */
     public final Object[] toArray()
     {
         Object[] array = new Object[size];
@@ -343,22 +252,11 @@ public class ObjArray implements Serializable
         return array;
     }
 
-    /**
-     * <p>toArray.</p>
-     *
-     * @param array an array of {@link java.lang.Object} objects.
-     */
     public final void toArray(Object[] array)
     {
         toArray(array, 0);
     }
 
-    /**
-     * <p>toArray.</p>
-     *
-     * @param array an array of {@link java.lang.Object} objects.
-     * @param offset a int.
-     */
     public final void toArray(Object[] array, int offset)
     {
         int N = size;

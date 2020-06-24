@@ -16,39 +16,25 @@ import org.mozilla.javascript.Undefined;
 /**
  * A NativeArrayBuffer is the backing buffer for a typed array. Used inside JavaScript code,
  * it implements the ArrayBuffer interface. Used directly from Java, it simply holds a byte array.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class NativeArrayBuffer
     extends IdScriptableObject
 {
     private static final long serialVersionUID = 3110411773054879549L;
 
-    /** Constant CLASS_NAME="ArrayBuffer" */
     public static final String CLASS_NAME = "ArrayBuffer";
 
     private static final byte[] EMPTY_BUF = new byte[0];
 
-    /** Constant EMPTY_BUFFER */
-    public static final NativeArrayBuffer EMPTY_BUFFER = new NativeArrayBuffer();
-
     final byte[] buffer;
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeArrayBuffer na = new NativeArrayBuffer();
@@ -65,21 +51,24 @@ public class NativeArrayBuffer
 
     /**
      * Create a buffer of the specified length in bytes.
-     *
-     * @param len a double.
      */
     public NativeArrayBuffer(double len)
     {
         if (len >= Integer.MAX_VALUE) {
-            throw ScriptRuntime.constructError("RangeError", "length parameter (" + len + ") is too large ");
+            throw ScriptRuntime.rangeError("length parameter (" + len + ") is too large ");
         }
         if (len == Double.NEGATIVE_INFINITY) {
-            throw ScriptRuntime.constructError("RangeError", "Negative array length " + len);
+            throw ScriptRuntime.rangeError("Negative array length " + len);
+        }
+
+        // support rounding
+        if (len <= -1) {
+            throw ScriptRuntime.rangeError("Negative array length " + len);
         }
 
         int intLen = ScriptRuntime.toInt32(len);
         if (intLen < 0) {
-            throw ScriptRuntime.constructError("RangeError", "Negative array length " + len);
+            throw ScriptRuntime.rangeError("Negative array length " + len);
         }
         if (intLen == 0) {
             buffer = EMPTY_BUF;
@@ -90,8 +79,6 @@ public class NativeArrayBuffer
 
     /**
      * Get the number of bytes in the buffer.
-     *
-     * @return a int.
      */
     public int getLength() {
         return buffer.length;
@@ -100,8 +87,6 @@ public class NativeArrayBuffer
     /**
      * Return the actual bytes that back the buffer. This is a reference to the real buffer,
      * so changes to bytes here will be reflected in the actual object and all its views.
-     *
-     * @return an array of {@link byte} objects.
      */
     public byte[] getBuffer() {
         return buffer;
@@ -118,7 +103,6 @@ public class NativeArrayBuffer
      *
      * @param s the position where the new buffer will start
      * @param e the position where it will end
-     * @return a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
      */
     public NativeArrayBuffer slice(double s, double e)
     {
@@ -135,7 +119,6 @@ public class NativeArrayBuffer
 
     // Function-calling dispatcher
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -173,7 +156,6 @@ public class NativeArrayBuffer
         return ((args.length > i) && !Undefined.instance.equals(args[i]));
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -189,7 +171,6 @@ public class NativeArrayBuffer
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {
@@ -218,7 +199,6 @@ public class NativeArrayBuffer
 
     private static final int ConstructorId_isView = -1;
 
-    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -227,14 +207,12 @@ public class NativeArrayBuffer
 
     // Properties here
 
-    /** {@inheritDoc} */
     @Override
     protected int getMaxInstanceId()
     {
         return MAX_INSTANCE_ID;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected String getInstanceIdName(int id)
     {
@@ -242,7 +220,6 @@ public class NativeArrayBuffer
         return super.getInstanceIdName(id);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object getInstanceIdValue(int id)
     {
@@ -252,7 +229,6 @@ public class NativeArrayBuffer
         return super.getInstanceIdValue(id);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int findInstanceIdInfo(String s)
     {

@@ -18,9 +18,7 @@ import org.mozilla.javascript.json.JsonParser;
 /**
  * This class implements the JSON native object.
  * See ECMA 15.12.
- *
  * @author Matthew Crumley, Raphael Speyer
- * @version $Id: $Id
  */
 public final class NativeJSON extends IdScriptableObject
 {
@@ -45,11 +43,9 @@ public final class NativeJSON extends IdScriptableObject
     {
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() { return "JSON"; }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -68,7 +64,6 @@ public final class NativeJSON extends IdScriptableObject
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -117,15 +112,6 @@ public final class NativeJSON extends IdScriptableObject
       }
     }
 
-    /**
-     * <p>parse.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param jtext a {@link java.lang.String} object.
-     * @param reviver a {@link org.mozilla.javascript.Callable} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public static Object parse(Context cx, Scriptable scope, String jtext,
                                Callable reviver)
     {
@@ -209,7 +195,6 @@ public final class NativeJSON extends IdScriptableObject
             this.gap = gap;
             this.replacer = replacer;
             this.propertyList = propertyList;
-            this.space = space;
         }
 
         Stack<Scriptable> stack = new Stack<Scriptable>();
@@ -217,22 +202,11 @@ public final class NativeJSON extends IdScriptableObject
         String gap;
         Callable replacer;
         List<Object> propertyList;
-        Object space;
 
         Context cx;
         Scriptable scope;
     }
 
-    /**
-     * <p>stringify.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param value a {@link java.lang.Object} object.
-     * @param replacer a {@link java.lang.Object} object.
-     * @param space a {@link java.lang.Object} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public static Object stringify(Context cx, Scriptable scope, Object value,
                                    Object replacer, Object space)
     {
@@ -357,7 +331,7 @@ public final class NativeJSON extends IdScriptableObject
         if (!iter.hasNext()) return "";
         StringBuilder builder = new StringBuilder(iter.next().toString());
         while (iter.hasNext()) {
-            builder.append(delimiter).append(iter.next().toString());
+            builder.append(delimiter).append(iter.next());
         }
         return builder.toString();
     }
@@ -501,7 +475,6 @@ public final class NativeJSON extends IdScriptableObject
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

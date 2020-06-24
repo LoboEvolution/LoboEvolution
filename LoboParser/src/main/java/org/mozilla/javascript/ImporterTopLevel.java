@@ -38,64 +38,35 @@ package org.mozilla.javascript;
  * </pre>
  *
  * @author Norris Boyd
- * @version $Id: $Id
  */
 public class ImporterTopLevel extends TopLevel {
     private static final long serialVersionUID = -9095380847465315412L;
 
     private static final Object IMPORTER_TAG = "Importer";
 
-    /**
-     * <p>Constructor for ImporterTopLevel.</p>
-     */
     public ImporterTopLevel() { }
 
-    /**
-     * <p>Constructor for ImporterTopLevel.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     */
     public ImporterTopLevel(Context cx) {
         this(cx, false);
     }
 
-    /**
-     * <p>Constructor for ImporterTopLevel.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param sealed a boolean.
-     */
     public ImporterTopLevel(Context cx, boolean sealed)
     {
         initStandardObjects(cx, sealed);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return (topScopeFlag) ? "global" : "JavaImporter";
     }
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         ImporterTopLevel obj = new ImporterTopLevel();
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
     }
 
-    /**
-     * <p>initStandardObjects.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param sealed a boolean.
-     */
     public void initStandardObjects(Context cx, boolean sealed)
     {
         // Assume that Context.initStandardObjects initialize JavaImporter
@@ -115,14 +86,12 @@ public class ImporterTopLevel extends TopLevel {
         delete("constructor");
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(String name, Scriptable start) {
         return super.has(name, start)
                || getPackageProperty(name, start) != NOT_FOUND;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(String name, Scriptable start) {
         Object result = super.get(name, start);
@@ -154,13 +123,7 @@ public class ImporterTopLevel extends TopLevel {
     }
 
     /**
-     * <p>importPackage.</p>
-     *
      * @deprecated Kept only for compatibility.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param thisObj a {@link org.mozilla.javascript.Scriptable} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @param funObj a {@link org.mozilla.javascript.Function} object.
      */
     @Deprecated
     public void importPackage(Context cx, Scriptable thisObj, Object[] args,
@@ -246,7 +209,6 @@ public class ImporterTopLevel extends TopLevel {
         put(n, this, cl);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -261,7 +223,6 @@ public class ImporterTopLevel extends TopLevel {
         initPrototypeMethod(IMPORTER_TAG, id, s, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -297,7 +258,6 @@ public class ImporterTopLevel extends TopLevel {
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

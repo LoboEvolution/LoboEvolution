@@ -22,6 +22,7 @@ import org.mozilla.javascript.ast.VariableInitializer;
  */
 class CodeGenerator extends Icode {
 
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CodeGenerator.class.getName());
 	
     private static final int MIN_LABEL_TABLE_SIZE = 32;
@@ -55,15 +56,6 @@ class CodeGenerator extends Icode {
     // ECF_ or Expression Context Flags constants: for now only TAIL
     private static final int ECF_TAIL = 1 << 0;
 
-    /**
-     * <p>compile.</p>
-     *
-     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     * @param tree a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     * @param encodedSource a {@link java.lang.String} object.
-     * @param returnFunction a boolean.
-     * @return a {@link org.mozilla.javascript.InterpreterData} object.
-     */
     public InterpreterData compile(CompilerEnvirons compilerEnv,
                                    ScriptNode tree,
                                    String encodedSource,
@@ -72,15 +64,15 @@ class CodeGenerator extends Icode {
         this.compilerEnv = compilerEnv;
 
         if (Token.printTrees) {
-           logger.info("before transform:");
-           logger.info(tree.toStringTree(tree));
+            logger.info("before transform:");
+            logger.info(tree.toStringTree(tree));
         }
 
         new NodeTransformer().transform(tree, compilerEnv);
 
         if (Token.printTrees) {
-           logger.info("after transform:");
-           logger.info(tree.toStringTree(tree));
+            logger.info("after transform:");
+            logger.info(tree.toStringTree(tree));
         }
 
         if (returnFunction) {
@@ -120,6 +112,9 @@ class CodeGenerator extends Icode {
         }
         if (theFunction.isInStrictMode()) {
             itsData.isStrict = true;
+        }
+        if (theFunction.isES6Generator()) {
+            itsData.isES6Generator = true;
         }
 
         itsData.declaredAsVar = (theFunction.getParent() instanceof VariableInitializer);
@@ -485,15 +480,27 @@ class CodeGenerator extends Icode {
           case Token.RETURN:
             updateLineNumber(node);
             if (node.getIntProp(Node.GENERATOR_END_PROP, 0) != 0) {
-                // We're in a generator, so change RETURN to GENERATOR_END
-                addIcode(Icode_GENERATOR_END);
-                addUint16(lineNumber & 0xFFFF);
-            } else if (child != null) {
-                visitExpression(child, ECF_TAIL);
-                addToken(Token.RETURN);
-                stackChange(-1);
+                if ((child == null) ||
+                    (compilerEnv.getLanguageVersion() < Context.VERSION_ES6)) {
+                    // End generator function with no result, or old language version
+                    // in which generators never return a result.
+                    addIcode(Icode_GENERATOR_END);
+                    addUint16(lineNumber & 0xFFFF);
+                } else {
+                    visitExpression(child, ECF_TAIL);
+                    addIcode(Icode_GENERATOR_RETURN);
+                    addUint16(lineNumber & 0xFFFF);
+                    stackChange(-1);
+                }
+                
             } else {
-                addIcode(Icode_RETUNDEF);
+                if (child == null) {
+                    addIcode(Icode_RETUNDEF);
+                } else {
+                    visitExpression(child, ECF_TAIL);
+                    addToken(Token.RETURN);
+                    stackChange(-1);
+                }
             }
             break;
 
@@ -972,13 +979,18 @@ class CodeGenerator extends Icode {
             break;
 
           case Token.YIELD:
+          case Token.YIELD_STAR:
             if (child != null) {
                 visitExpression(child, 0);
             } else {
                 addIcode(Icode_UNDEF);
                 stackChange(1);
             }
-            addToken(Token.YIELD);
+            if (type == Token.YIELD) {
+                addToken(Token.YIELD);
+            } else {
+                addIcode(Icode_YIELD_STAR);
+            }
             addUint16(node.getLineno() & 0xFFFF);
             break;
 

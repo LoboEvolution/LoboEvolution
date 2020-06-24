@@ -18,12 +18,6 @@ import java.util.NoSuchElementException;
 
 import org.mozilla.javascript.ScriptableObject.SlotAccess;
 
-/**
- * <p>EmbeddedSlotMap class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public class EmbeddedSlotMap
     implements SlotMap {
 
@@ -63,34 +57,26 @@ public class EmbeddedSlotMap
         }
     }
 
-    /**
-     * <p>Constructor for EmbeddedSlotMap.</p>
-     */
     public EmbeddedSlotMap()
     {
     }
 
-    /** {@inheritDoc} */
     @Override
     public int size() {
         return count;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isEmpty() {
         return count == 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Iterator<ScriptableObject.Slot> iterator() {
         return new Iter(firstAdded);
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Locate the slot with the given name or index.
      */
     @Override
@@ -116,10 +102,11 @@ public class EmbeddedSlotMap
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Locate the slot with given name or index. Depending on the accessType
      * parameter and the current slot status, a new slot may be allocated.
+     *
+     * @param key either a String or a Symbol object that identifies the property
+     * @param index index or 0 if slot holds property name.
      */
     @Override
     public ScriptableObject.Slot get(Object key, int index, ScriptableObject.SlotAccess accessType)
@@ -261,7 +248,6 @@ public class EmbeddedSlotMap
         return newSlot;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void addSlot(ScriptableObject.Slot newSlot) {
         if (slots == null) {
@@ -284,7 +270,6 @@ public class EmbeddedSlotMap
         addKnownAbsentSlot(slots, newSlot);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void remove(Object key, int index) {
         int indexOrHash = (key != null ? key.hashCode() : index);

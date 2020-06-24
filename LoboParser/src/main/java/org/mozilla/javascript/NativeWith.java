@@ -10,12 +10,9 @@ import java.io.Serializable;
 
 /**
  * This class implements the object lookup required for the
- * with statement.
+ * <code>with</code> statement.
  * It simply delegates every action to its prototype except
  * for operations on its parent.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall, Serializable {
     private static final long serialVersionUID = 1L;
@@ -38,31 +35,22 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
     private NativeWith() {
     }
 
-    /**
-     * <p>Constructor for NativeWith.</p>
-     *
-     * @param parent a {@link org.mozilla.javascript.Scriptable} object.
-     * @param prototype a {@link org.mozilla.javascript.Scriptable} object.
-     */
     protected NativeWith(Scriptable parent, Scriptable prototype) {
         this.parent = parent;
         this.prototype = prototype;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "With";
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(String id, Scriptable start)
     {
         return prototype.has(id, prototype);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(Symbol key, Scriptable start)
     {
@@ -72,14 +60,12 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         return false;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean has(int index, Scriptable start)
     {
         return prototype.has(index, prototype);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(String id, Scriptable start)
     {
@@ -89,7 +75,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         return prototype.get(id, start);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(Symbol key, Scriptable start)
     {
@@ -102,7 +87,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         return Scriptable.NOT_FOUND;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object get(int index, Scriptable start)
     {
@@ -112,7 +96,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         return prototype.get(index, start);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(String id, Scriptable start, Object value)
     {
@@ -121,7 +104,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         prototype.put(id, start, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(Symbol symbol, Scriptable start, Object value)
     {
@@ -133,7 +115,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void put(int index, Scriptable start, Object value)
     {
@@ -142,14 +123,12 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         prototype.put(index, start, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void delete(String id)
     {
         prototype.delete(id);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void delete(Symbol key)
     {
@@ -159,50 +138,42 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
     }
 
 
-    /** {@inheritDoc} */
     @Override
     public void delete(int index)
     {
         prototype.delete(index);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable getPrototype() {
         return prototype;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setPrototype(Scriptable prototype) {
         this.prototype = prototype;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable getParentScope() {
         return parent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setParentScope(Scriptable parent) {
         this.parent = parent;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object[] getIds() {
         return prototype.getIds();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> typeHint) {
         return prototype.getDefaultValue(typeHint);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasInstance(Scriptable value) {
         return prototype.hasInstance(value);
@@ -210,9 +181,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
 
     /**
      * Must return null to continue looping or the final collection result.
-     *
-     * @param value a boolean.
-     * @return a {@link java.lang.Object} object.
      */
     protected Object updateDotQuery(boolean value)
     {
@@ -220,7 +188,6 @@ public class NativeWith implements Scriptable, SymbolScriptable, IdFunctionCall,
         throw new IllegalStateException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)

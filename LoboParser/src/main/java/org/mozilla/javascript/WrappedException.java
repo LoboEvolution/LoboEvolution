@@ -13,21 +13,17 @@ package org.mozilla.javascript;
  * during runtime.
  *
  * @author Norris Boyd
- * @version $Id: $Id
  */
 public class WrappedException extends EvaluatorException
 {
     private static final long serialVersionUID = -1551979216966520648L;
 
     /**
-     * <p>Constructor for WrappedException.</p>
-     *
      * @see Context#throwAsScriptRuntimeEx(Throwable e)
-     * @param exception a {@link java.lang.Throwable} object.
      */
     public WrappedException(Throwable exception)
     {
-        super("Wrapped " + exception.toString());
+        super("Wrapped " + exception);
         this.exception = exception;
         this.initCause(exception);
 
@@ -54,10 +50,7 @@ public class WrappedException extends EvaluatorException
     }
 
     /**
-     * <p>unwrap.</p>
-     *
      * @deprecated Use {@link #getWrappedException()} instead.
-     * @return a {@link java.lang.Object} object.
      */
     @Deprecated
     public Object unwrap()

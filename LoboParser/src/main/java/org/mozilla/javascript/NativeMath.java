@@ -34,11 +34,9 @@ final class NativeMath extends IdScriptableObject
     {
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() { return "Math"; }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -104,8 +102,6 @@ final class NativeMath extends IdScriptableObject
         }
     }
 
-    /** {@inheritDoc} */
-    @SuppressWarnings("SelfAssignment")
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -140,7 +136,7 @@ final class NativeMath extends IdScriptableObject
                 if (!Double.isNaN(x)) {
                     return Math.log(x + Math.sqrt(x*x - 1.0));
                 }
-                return Double.NaN;
+                return ScriptRuntime.NaNobj;
 
             case Id_asinh:
                 x = ScriptRuntime.toNumber(args, 0);
@@ -150,13 +146,13 @@ final class NativeMath extends IdScriptableObject
                 if (!Double.isNaN(x)) {
                     if (x == 0) {
                         if (1 / x > 0) {
-                            return 0.0;
+                            return ScriptRuntime.zeroObj;
                         }
-                        return -0.0;
+                        return ScriptRuntime.negativeZeroObj;
                     }
                     return Math.log(x + Math.sqrt(x*x + 1.0));
                 }
-                return Double.NaN;
+                return ScriptRuntime.NaNobj;
 
             case Id_atan:
                 x = ScriptRuntime.toNumber(args, 0);
@@ -168,13 +164,13 @@ final class NativeMath extends IdScriptableObject
                 if (!Double.isNaN(x) && -1.0 <= x && x <= 1.0) {
                     if (x == 0) {
                         if (1 / x > 0) {
-                            return 0.0;
+                            return ScriptRuntime.zeroObj;
                         }
-                        return -0.0;
+                        return ScriptRuntime.negativeZeroObj;
                     }
                     return 0.5 * Math.log((x + 1.0) / (x - 1.0));
                 }
-                return Double.NaN;
+                return ScriptRuntime.NaNobj;
 
             case Id_atan2:
                 x = ScriptRuntime.toNumber(args, 0);
@@ -242,7 +238,8 @@ final class NativeMath extends IdScriptableObject
                 break;
 
             case Id_imul:
-                return js_imul(args);
+                x = js_imul(args);
+                break;
 
             case Id_log:
                 x = ScriptRuntime.toNumber(args, 0);
@@ -318,13 +315,13 @@ final class NativeMath extends IdScriptableObject
                 if (!Double.isNaN(x)) {
                     if (x == 0) {
                         if (1 / x > 0) {
-                            return 0.0;
+                            return ScriptRuntime.zeroObj;
                         }
-                        return -0.0;
+                        return ScriptRuntime.negativeZeroObj;
                     }
                     return Math.signum(x);
                 }
-                return Double.NaN;
+                return ScriptRuntime.NaNobj;
 
             case Id_sin:
                 x = ScriptRuntime.toNumber(args, 0);
@@ -467,7 +464,6 @@ final class NativeMath extends IdScriptableObject
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

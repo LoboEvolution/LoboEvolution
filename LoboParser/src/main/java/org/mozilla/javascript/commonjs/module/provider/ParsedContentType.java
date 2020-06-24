@@ -10,7 +10,6 @@ import java.util.StringTokenizer;
 /**
  * Breaks a "contentType; charset=encoding" MIME type into content type and
  * encoding parts.
- *
  * @author Attila Szegedi
  * @version $Id: ParsedContentType.java,v 1.3 2011/04/07 20:26:12 hannes%helma.at Exp $
  */
@@ -21,7 +20,6 @@ public final class ParsedContentType implements Serializable {
 
     /**
      * Creates a new parsed content type.
-     *
      * @param mimeType the full MIME type; typically the value of the
      * "Content-Type" header of some MIME-compliant message. Can be null.
      */
@@ -56,7 +54,6 @@ public final class ParsedContentType implements Serializable {
 
     /**
      * Returns the content type (without charset declaration) of the MIME type.
-     *
      * @return the content type (without charset declaration) of the MIME type.
      * Can be null if the MIME type was null.
      */
@@ -66,7 +63,6 @@ public final class ParsedContentType implements Serializable {
 
     /**
      * Returns the character encoding of the MIME type.
-     *
      * @return the character encoding of the MIME type. Can be null when it is
      * not specified.
      */

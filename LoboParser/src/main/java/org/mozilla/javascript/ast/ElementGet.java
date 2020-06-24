@@ -13,14 +13,11 @@ import org.mozilla.javascript.Token;
  * {@code foo[2]}.  This is sometimes called an "element-get" operation, hence
  * the name of the node.<p>
  *
- * Node type is {@link org.mozilla.javascript.Token#GETELEM}.<p>
+ * Node type is {@link Token#GETELEM}.<p>
  *
  * The node bounds extend from the beginning position of the target through the
  * closing right-bracket.  In the presence of a syntax error, the right bracket
  * position is -1, and the node ends at the end of the element expression.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ElementGet extends AstNode {
 
@@ -33,37 +30,17 @@ public class ElementGet extends AstNode {
         type = Token.GETELEM;
     }
 
-    /**
-     * <p>Constructor for ElementGet.</p>
-     */
     public ElementGet() {
     }
 
-    /**
-     * <p>Constructor for ElementGet.</p>
-     *
-     * @param pos a int.
-     */
     public ElementGet(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for ElementGet.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ElementGet(int pos, int len) {
         super(pos, len);
     }
 
-    /**
-     * <p>Constructor for ElementGet.</p>
-     *
-     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @param element a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public ElementGet(AstNode target, AstNode element) {
         setTarget(target);
         setElement(element);
@@ -71,8 +48,6 @@ public class ElementGet extends AstNode {
 
     /**
      * Returns the object on which the element is being fetched.
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTarget() {
         return target;
@@ -80,10 +55,9 @@ public class ElementGet extends AstNode {
 
     /**
      * Sets target object, and sets its parent to this node.
-     *
      * @param target expression evaluating to the object upon which
      * to do the element lookup
-     * @throws java.lang.IllegalArgumentException if target is {@code null}
+     * @throws IllegalArgumentException if target is {@code null}
      */
     public void setTarget(AstNode target) {
         assertNotNull(target);
@@ -93,8 +67,6 @@ public class ElementGet extends AstNode {
 
     /**
      * Returns the element being accessed
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getElement() {
         return element;
@@ -102,9 +74,7 @@ public class ElementGet extends AstNode {
 
     /**
      * Sets the element being accessed, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if element is {@code null}
-     * @param element a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if element is {@code null}
      */
     public void setElement(AstNode element) {
         assertNotNull(element);
@@ -114,8 +84,6 @@ public class ElementGet extends AstNode {
 
     /**
      * Returns left bracket position
-     *
-     * @return a int.
      */
     public int getLb() {
         return lb;
@@ -123,8 +91,6 @@ public class ElementGet extends AstNode {
 
     /**
      * Sets left bracket position
-     *
-     * @param lb a int.
      */
     public void setLb(int lb) {
         this.lb = lb;
@@ -132,8 +98,6 @@ public class ElementGet extends AstNode {
 
     /**
      * Returns right bracket position, -1 if missing
-     *
-     * @return a int.
      */
     public int getRb() {
         return rb;
@@ -141,25 +105,16 @@ public class ElementGet extends AstNode {
 
     /**
      * Sets right bracket position, -1 if not present
-     *
-     * @param rb a int.
      */
     public void setRb(int rb) {
         this.rb = rb;
     }
 
-    /**
-     * <p>setParens.</p>
-     *
-     * @param lb a int.
-     * @param rb a int.
-     */
     public void setParens(int lb, int rb) {
         this.lb = lb;
         this.rb = rb;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -172,8 +127,6 @@ public class ElementGet extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the target, and the index expression.
      */
     @Override

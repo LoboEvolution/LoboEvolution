@@ -13,51 +13,39 @@ import java.lang.reflect.Proxy;
 
 /**
  * This class implements the Undefined value in JavaScript.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class Undefined implements Serializable
 {
     private static final long serialVersionUID = 9195680630202616767L;
 
-    /** Constant instance */
     public static final Object instance = new Undefined();
 
     private Undefined()
     {
     }
 
-    /**
-     * <p>readResolve.</p>
-     *
-     * @return a {@link java.lang.Object} object.
-     */
     public Object readResolve()
     {
         return instance;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(Object obj) {
         return isUndefined(obj) || super.equals(obj);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         // All instances of Undefined are equivalent!
         return 0;
     }
 
-    /** Constant SCRIPTABLE_UNDEFINED */
     public static final Scriptable SCRIPTABLE_UNDEFINED;
 
     static {
         SCRIPTABLE_UNDEFINED = (Scriptable) Proxy.newProxyInstance(Undefined.class.getClassLoader(), new Class[]{Scriptable.class}, new InvocationHandler() {
             @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+            public Object invoke(Object proxy, Method method, Object[] args) {
                 if (method.getName().equals("toString")) return "undefined";
                 if (method.getName().equals("equals")) {
                     return args.length > 0 && isUndefined(args[0]);
@@ -67,12 +55,6 @@ public class Undefined implements Serializable
         });
     }
 
-    /**
-     * <p>isUndefined.</p>
-     *
-     * @param obj a {@link java.lang.Object} object.
-     * @return a boolean.
-     */
     public static boolean isUndefined(Object obj)
     {
         return Undefined.instance == obj || Undefined.SCRIPTABLE_UNDEFINED == obj;

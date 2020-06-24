@@ -28,7 +28,6 @@ import java.util.List;
  * ETags for cache revalidation, and follows the HTTP cache expiry calculation
  * model, and allows for fallback heuristic expiry calculation when no server
  * specified expiry is provided.
- *
  * @author Attila Szegedi
  * @version $Id: UrlModuleSourceProvider.java,v 1.4 2011/04/07 20:26:12 hannes%helma.at Exp $
  */
@@ -43,7 +42,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
      * Creates a new module script provider that loads modules against a set of
      * privileged and fallback URIs. It will use a fixed default cache expiry
      * of 60 seconds, and provide no security domain objects for the resource.
-     *
      * @param privilegedUris an iterable providing the privileged URIs. Can be
      * null if no privileged URIs are used.
      * @param fallbackUris an iterable providing the fallback URIs. Can be
@@ -60,7 +58,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
      * Creates a new module script provider that loads modules against a set of
      * privileged and fallback URIs. It will use the specified heuristic cache
      * expiry calculator and security domain provider.
-     *
      * @param privilegedUris an iterable providing the privileged URIs. Can be
      * null if no privileged URIs are used.
      * @param fallbackUris an iterable providing the fallback URIs. Can be
@@ -85,7 +82,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
             urlConnectionSecurityDomainProvider;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected ModuleSource loadFromPrivilegedLocations(
             String moduleId, Object validator)
@@ -94,7 +90,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
         return loadFromPathList(moduleId, validator, privilegedUris);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected ModuleSource loadFromFallbackLocations(
             String moduleId, Object validator)
@@ -120,7 +115,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected ModuleSource loadFromUri(URI uri, URI base, Object validator)
     throws IOException, URISyntaxException
@@ -134,15 +128,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
                source : loadFromActualUri(uri, base, validator);
     }
 
-    /**
-     * <p>loadFromActualUri.</p>
-     *
-     * @param uri a {@link java.net.URI} object.
-     * @param base a {@link java.net.URI} object.
-     * @param validator a {@link java.lang.Object} object.
-     * @return a {@link org.mozilla.javascript.commonjs.module.provider.ModuleSource} object.
-     * @throws java.io.IOException if any.
-     */
     protected ModuleSource loadFromActualUri(URI uri, URI base, Object validator)
     throws IOException
     {
@@ -228,7 +213,6 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
     /**
      * Override if you want to get notified if the URL connection fails to
      * close. Does nothing by default.
-     *
      * @param urlConnection the connection
      * @param cause the cause it failed to close.
      */
@@ -238,17 +222,15 @@ public class UrlModuleSourceProvider extends ModuleSourceProviderBase {
 
     /**
      * Can be overridden in subclasses to customize the URL connection opening
-     * process. By default, just calls {@link java.net.URL#openConnection()}.
-     *
+     * process. By default, just calls {@link URL#openConnection()}.
      * @param url the URL
      * @return a connection to the URL.
-     * @throws java.io.IOException if an I/O error occurs.
+     * @throws IOException if an I/O error occurs.
      */
     protected URLConnection openUrlConnection(URL url) throws IOException {
         return url.openConnection();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean entityNeedsRevalidation(Object validator) {
         return !(validator instanceof URLValidator)

@@ -10,15 +10,15 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for a single name:value entry in an Object literal.
- * For simple entries, the node type is {@link org.mozilla.javascript.Token#COLON}, and
- * the name (left side expression) is either a {@link org.mozilla.javascript.ast.Name}, a
- * {@link org.mozilla.javascript.ast.StringLiteral} or a {@link org.mozilla.javascript.ast.NumberLiteral}.
+ * For simple entries, the node type is {@link Token#COLON}, and
+ * the name (left side expression) is either a {@link Name}, a
+ * {@link StringLiteral} or a {@link NumberLiteral}.
  *
  * <p>This node type is also used for getter/setter properties in object
  * literals.  In this case the node bounds include the "get" or "set"
  * keyword.  The left-hand expression in this case is always a
- * {@link org.mozilla.javascript.ast.Name}, and the overall node type is {@link org.mozilla.javascript.Token#GET} or
- * {@link org.mozilla.javascript.Token#SET}, as appropriate.</p>
+ * {@link Name}, and the overall node type is {@link Token#GET} or
+ * {@link Token#SET}, as appropriate.</p>
  *
  * The {@code operatorPosition} field is meaningless if the node is
  * a getter or setter.
@@ -29,9 +29,6 @@ import org.mozilla.javascript.Token;
  *       Identifier
  *       StringLiteral
  *       NumberLiteral</pre>
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ObjectProperty extends InfixExpression {
 
@@ -41,10 +38,8 @@ public class ObjectProperty extends InfixExpression {
 
     /**
      * Sets the node type.  Must be one of
-     * {@link org.mozilla.javascript.Token#COLON}, {@link org.mozilla.javascript.Token#GET}, or {@link org.mozilla.javascript.Token#SET}.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code nodeType} is invalid
-     * @param nodeType a int.
+     * {@link Token#COLON}, {@link Token#GET}, or {@link Token#SET}.
+     * @throws IllegalArgumentException if {@code nodeType} is invalid
      */
     public void setNodeType(int nodeType) {
         if (nodeType != Token.COLON
@@ -56,27 +51,13 @@ public class ObjectProperty extends InfixExpression {
         setType(nodeType);
     }
 
-    /**
-     * <p>Constructor for ObjectProperty.</p>
-     */
     public ObjectProperty() {
     }
 
-    /**
-     * <p>Constructor for ObjectProperty.</p>
-     *
-     * @param pos a int.
-     */
     public ObjectProperty(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for ObjectProperty.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public ObjectProperty(int pos, int len) {
         super(pos, len);
     }
@@ -90,8 +71,6 @@ public class ObjectProperty extends InfixExpression {
 
     /**
      * Returns true if this is a getter function.
-     *
-     * @return a boolean.
      */
     public boolean isGetterMethod() {
         return type == Token.GET;
@@ -106,39 +85,23 @@ public class ObjectProperty extends InfixExpression {
 
     /**
      * Returns true if this is a setter function.
-     *
-     * @return a boolean.
      */
     public boolean isSetterMethod() {
         return type == Token.SET;
     }
 
-    /**
-     * <p>setIsNormalMethod.</p>
-     */
     public void setIsNormalMethod() {
         type = Token.METHOD;
     }
 
-    /**
-     * <p>isNormalMethod.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isNormalMethod() {
         return type == Token.METHOD;
     }
 
-    /**
-     * <p>isMethod.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isMethod() {
         return isGetterMethod() || isSetterMethod() || isNormalMethod();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();

@@ -10,7 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for an E4X XML {@code [expr]} property-ref expression.
- * The node type is {@link org.mozilla.javascript.Token#REF_NAME}.<br>
+ * The node type is {@link Token#REF_NAME}.<br>
  *
  * Syntax:
  *
@@ -24,9 +24,6 @@ import org.mozilla.javascript.Token;
  * at the namespace name.  The node bounds extend through the closing
  * right-bracket, or if it is missing due to a syntax error, through the
  * end of the index expression.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class XmlPropRef extends XmlRef {
 
@@ -36,35 +33,19 @@ public class XmlPropRef extends XmlRef {
         type = Token.REF_NAME;
     }
 
-    /**
-     * <p>Constructor for XmlPropRef.</p>
-     */
     public XmlPropRef() {
     }
 
-    /**
-     * <p>Constructor for XmlPropRef.</p>
-     *
-     * @param pos a int.
-     */
     public XmlPropRef(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for XmlPropRef.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public XmlPropRef(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns property name.
-     *
-     * @return a {@link org.mozilla.javascript.ast.Name} object.
      */
     public Name getPropName() {
         return propName;
@@ -72,9 +53,7 @@ public class XmlPropRef extends XmlRef {
 
     /**
      * Sets property name, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code propName} is {@code null}
-     * @param propName a {@link org.mozilla.javascript.ast.Name} object.
+     * @throws IllegalArgumentException if {@code propName} is {@code null}
      */
     public void setPropName(Name propName) {
         assertNotNull(propName);
@@ -82,7 +61,6 @@ public class XmlPropRef extends XmlRef {
         propName.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -99,8 +77,6 @@ public class XmlPropRef extends XmlRef {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then the namespace if present, then the property name.
      */
     @Override

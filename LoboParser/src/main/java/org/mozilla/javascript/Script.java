@@ -13,11 +13,10 @@ package org.mozilla.javascript;
  * <p>
  * This class encapsulates script execution relative to an
  * object scope.
- *
  * @since 1.3
  * @author Norris Boyd
- * @version $Id: $Id
  */
+
 public interface Script {
 
     /**
@@ -29,7 +28,7 @@ public interface Script {
      * uses of global top-level variables and functions will access
      * properties of the scope object. For compliant ECMA
      * programs, the scope must be an object that has been initialized
-     * as a global object using Context.initStandardObjects.
+     * as a global object using <code>Context.initStandardObjects</code>.
      * <p>
      *
      * @param cx the Context associated with the current thread

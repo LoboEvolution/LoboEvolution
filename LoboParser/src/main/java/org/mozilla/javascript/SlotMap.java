@@ -15,24 +15,18 @@ package org.mozilla.javascript;
  * This class generally has a bit of a strange interface, and its interactions with
  * ScriptableObject are complex. Many attempts to make this interface more elegant have
  * resulted in substantial performance regressions so we are doing the best that we can.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public interface SlotMap
     extends Iterable<ScriptableObject.Slot> {
 
     /**
      * Return the size of the map.
-     *
-     * @return a int.
      */
     int size();
 
     /**
      * Return whether the map is empty.
-     *
-     * @return a boolean.
      */
     boolean isEmpty();
 
@@ -40,37 +34,23 @@ public interface SlotMap
      * Return the Slot that matches EITHER "key" or "index". (It will use "key"
      * if it is not null, and otherwise "index". "accessType" is one of the
      * constants defined in ScriptableObject.
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @param index a int.
-     * @param accessType a {@link org.mozilla.javascript.ScriptableObject.SlotAccess} object.
-     * @return a {@link org.mozilla.javascript.ScriptableObject.Slot} object.
      */
     ScriptableObject.Slot get(Object key, int index, ScriptableObject.SlotAccess accessType);
 
     /**
      * This is an optimization that is the same as get with an accessType of SLOT_QUERY.
      * It should be used instead of SLOT_QUERY because it is more efficient.
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @param index a int.
-     * @return a {@link org.mozilla.javascript.ScriptableObject.Slot} object.
      */
     ScriptableObject.Slot query(Object key, int index);
 
     /**
      * Insert a new slot to the map. Both "name" and "indexOrHash" must be populated.
      * Note that ScriptableObject generally adds slots via the "get" method.
-     *
-     * @param newSlot a {@link org.mozilla.javascript.ScriptableObject.Slot} object.
      */
     void addSlot(ScriptableObject.Slot newSlot);
 
     /**
      * Remove the slot at either "key" or "index".
-     *
-     * @param key a {@link java.lang.Object} object.
-     * @param index a int.
      */
     void remove(Object key, int index);
 }

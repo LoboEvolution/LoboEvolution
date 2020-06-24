@@ -14,11 +14,8 @@ import org.mozilla.javascript.Node;
 import org.mozilla.javascript.Token;
 
 /**
- * Base type for {@link org.mozilla.javascript.ast.AstRoot} and {@link org.mozilla.javascript.ast.FunctionNode} nodes, which need to
+ * Base type for {@link AstRoot} and {@link FunctionNode} nodes, which need to
  * collect much of the same information.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ScriptNode extends Scope {
 
@@ -47,17 +44,9 @@ public class ScriptNode extends Scope {
         this.type = Token.SCRIPT;
     }
 
-    /**
-     * <p>Constructor for ScriptNode.</p>
-     */
     public ScriptNode() {
     }
 
-    /**
-     * <p>Constructor for ScriptNode.</p>
-     *
-     * @param pos a int.
-     */
     public ScriptNode(int pos) {
         super(pos);
     }
@@ -65,8 +54,6 @@ public class ScriptNode extends Scope {
     /**
      * Returns the URI, path or descriptive text indicating the origin
      * of this script's source code.
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getSourceName() {
         return sourceName;
@@ -75,8 +62,6 @@ public class ScriptNode extends Scope {
     /**
      * Sets the URI, path or descriptive text indicating the origin
      * of this script's source code.
-     *
-     * @param sourceName a {@link java.lang.String} object.
      */
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
@@ -85,8 +70,6 @@ public class ScriptNode extends Scope {
     /**
      * Returns the start offset of the encoded source.
      * Only valid if {@link #getEncodedSource} returns non-{@code null}.
-     *
-     * @return a int.
      */
     public int getEncodedSourceStart() {
         return encodedSourceStart;
@@ -94,9 +77,7 @@ public class ScriptNode extends Scope {
 
     /**
      * Used by code generator.
-     *
      * @see #getEncodedSource
-     * @param start a int.
      */
     public void setEncodedSourceStart(int start) {
         this.encodedSourceStart = start;
@@ -105,8 +86,6 @@ public class ScriptNode extends Scope {
     /**
      * Returns the end offset of the encoded source.
      * Only valid if {@link #getEncodedSource} returns non-{@code null}.
-     *
-     * @return a int.
      */
     public int getEncodedSourceEnd() {
         return encodedSourceEnd;
@@ -114,9 +93,7 @@ public class ScriptNode extends Scope {
 
     /**
      * Used by code generator.
-     *
      * @see #getEncodedSource
-     * @param end a int.
      */
     public void setEncodedSourceEnd(int end) {
         this.encodedSourceEnd = end;
@@ -124,10 +101,7 @@ public class ScriptNode extends Scope {
 
     /**
      * Used by code generator.
-     *
      * @see #getEncodedSource
-     * @param start a int.
-     * @param end a int.
      */
     public void setEncodedSourceBounds(int start, int end) {
         this.encodedSourceStart = start;
@@ -136,9 +110,7 @@ public class ScriptNode extends Scope {
 
     /**
      * Used by the code generator.
-     *
      * @see #getEncodedSource
-     * @param encodedSource a {@link java.lang.String} object.
      */
     public void setEncodedSource(String encodedSource) {
         this.encodedSource = encodedSource;
@@ -153,7 +125,7 @@ public class ScriptNode extends Scope {
      * human-readable source string.<p>
      *
      * Given a parsed AST, you can always convert it to source code using the
-     * {@link org.mozilla.javascript.ast.AstNode#toSource} method, although it's not guaranteed to produce
+     * {@link AstNode#toSource} method, although it's not guaranteed to produce
      * exactly the same results as {@code Object.toSource} with respect to
      * formatting, parenthesization and other details.
      *
@@ -163,11 +135,6 @@ public class ScriptNode extends Scope {
         return encodedSource;
     }
 
-    /**
-     * <p>getBaseLineno.</p>
-     *
-     * @return a int.
-     */
     public int getBaseLineno() {
         return lineno;
     }
@@ -176,68 +143,38 @@ public class ScriptNode extends Scope {
      * Sets base (starting) line number for this script or function.
      * This is a one-time operation, and throws an exception if the
      * line number has already been set.
-     *
-     * @param lineno a int.
      */
     public void setBaseLineno(int lineno) {
         if (lineno < 0 || this.lineno >= 0) codeBug();
         this.lineno = lineno;
     }
 
-    /**
-     * <p>Getter for the field endLineno.</p>
-     *
-     * @return a int.
-     */
     public int getEndLineno() {
         return endLineno;
     }
 
-    /**
-     * <p>Setter for the field endLineno.</p>
-     *
-     * @param lineno a int.
-     */
     public void setEndLineno(int lineno) {
         // One time action
         if (lineno < 0 || endLineno >= 0) codeBug();
         endLineno = lineno;
     }
 
-    /**
-     * <p>getFunctionCount.</p>
-     *
-     * @return a int.
-     */
     public int getFunctionCount() {
         return functions == null ? 0 : functions.size();
     }
 
-    /**
-     * <p>getFunctionNode.</p>
-     *
-     * @param i a int.
-     * @return a {@link org.mozilla.javascript.ast.FunctionNode} object.
-     */
     public FunctionNode getFunctionNode(int i) {
         return functions.get(i);
     }
 
-    /**
-     * <p>Getter for the field functions.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
     public List<FunctionNode> getFunctions() {
         return functions == null ? EMPTY_LIST : functions;
     }
 
     /**
-     * Adds a {@link org.mozilla.javascript.ast.FunctionNode} to the functions table for codegen.
+     * Adds a {@link FunctionNode} to the functions table for codegen.
      * Does not set the parent of the node.
-     *
      * @return the index of the function within its parent
-     * @param fnNode a {@link org.mozilla.javascript.ast.FunctionNode} object.
      */
     public int addFunction(FunctionNode fnNode) {
         if (fnNode == null) codeBug();
@@ -247,39 +184,20 @@ public class ScriptNode extends Scope {
         return functions.size() - 1;
     }
 
-    /**
-     * <p>getRegexpCount.</p>
-     *
-     * @return a int.
-     */
     public int getRegexpCount() {
         return regexps == null ? 0 : regexps.size();
     }
 
-    /**
-     * <p>getRegexpString.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
-     */
     public String getRegexpString(int index) {
         return regexps.get(index).getValue();
     }
 
-    /**
-     * <p>getRegexpFlags.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
-     */
     public String getRegexpFlags(int index) {
         return regexps.get(index).getFlags();
     }
 
     /**
      * Called by IRFactory to add a RegExp to the regexp table.
-     *
-     * @param re a {@link org.mozilla.javascript.ast.RegExpLiteral} object.
      */
     public void addRegExp(RegExpLiteral re) {
         if (re == null) codeBug();
@@ -289,66 +207,35 @@ public class ScriptNode extends Scope {
         re.putIntProp(REGEXP_PROP, regexps.size() - 1);
     }
 
-    /**
-     * <p>getIndexForNameNode.</p>
-     *
-     * @param nameNode a {@link org.mozilla.javascript.Node} object.
-     * @return a int.
-     */
     public int getIndexForNameNode(Node nameNode) {
         if (variableNames == null) codeBug();
         Scope node = nameNode.getScope();
-        Symbol symbol = node == null
-            ? null
-            : node.getSymbol(((Name)nameNode).getIdentifier());
+        Symbol symbol = null;
+        if (node != null && nameNode instanceof Name) {
+            symbol = node.getSymbol(((Name) nameNode).getIdentifier());
+        }
         return (symbol == null) ? -1 : symbol.getIndex();
     }
 
-    /**
-     * <p>getParamOrVarName.</p>
-     *
-     * @param index a int.
-     * @return a {@link java.lang.String} object.
-     */
     public String getParamOrVarName(int index) {
         if (variableNames == null) codeBug();
         return variableNames[index];
     }
 
-    /**
-     * <p>Getter for the field paramCount.</p>
-     *
-     * @return a int.
-     */
     public int getParamCount() {
         return paramCount;
     }
 
-    /**
-     * <p>getParamAndVarCount.</p>
-     *
-     * @return a int.
-     */
     public int getParamAndVarCount() {
         if (variableNames == null) codeBug();
         return symbols.size();
     }
 
-    /**
-     * <p>getParamAndVarNames.</p>
-     *
-     * @return an array of {@link java.lang.String} objects.
-     */
     public String[] getParamAndVarNames() {
         if (variableNames == null) codeBug();
         return variableNames;
     }
 
-    /**
-     * <p>getParamAndVarConst.</p>
-     *
-     * @return an array of {@link boolean} objects.
-     */
     public boolean[] getParamAndVarConst() {
         if (variableNames == null) codeBug();
         return isConsts;
@@ -362,20 +249,10 @@ public class ScriptNode extends Scope {
         symbols.add(symbol);
     }
 
-    /**
-     * <p>Getter for the field symbols.</p>
-     *
-     * @return a {@link java.util.List} object.
-     */
     public List<Symbol> getSymbols() {
         return symbols;
     }
 
-    /**
-     * <p>Setter for the field symbols.</p>
-     *
-     * @param symbols a {@link java.util.List} object.
-     */
     public void setSymbols(List<Symbol> symbols) {
         this.symbols = symbols;
     }
@@ -414,20 +291,10 @@ public class ScriptNode extends Scope {
         }
     }
 
-    /**
-     * <p>Getter for the field compilerData.</p>
-     *
-     * @return a {@link java.lang.Object} object.
-     */
     public Object getCompilerData() {
         return compilerData;
     }
 
-    /**
-     * <p>Setter for the field compilerData.</p>
-     *
-     * @param data a {@link java.lang.Object} object.
-     */
     public void setCompilerData(Object data) {
         assertNotNull(data);
         // Can only call once
@@ -436,34 +303,18 @@ public class ScriptNode extends Scope {
         compilerData = data;
     }
 
-    /**
-     * <p>getNextTempName.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
     public String getNextTempName() {
         return "$" + tempNumber++;
     }
 
-    /**
-     * <p>Setter for the field inStrictMode.</p>
-     *
-     * @param inStrictMode a boolean.
-     */
     public void setInStrictMode(boolean inStrictMode) {
         this.inStrictMode = inStrictMode;
     }
 
-    /**
-     * <p>isInStrictMode.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isInStrictMode() {
         return inStrictMode;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void visit(NodeVisitor v) {
         if (v.visit(this)) {

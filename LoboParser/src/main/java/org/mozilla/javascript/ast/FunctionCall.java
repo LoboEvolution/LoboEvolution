@@ -13,14 +13,10 @@ import java.util.List;
 import org.mozilla.javascript.Token;
 
 /**
- * AST node for a function call.  Node type is {@link org.mozilla.javascript.Token#CALL}.
- *
- * @author utente
- * @version $Id: $Id
+ * AST node for a function call.  Node type is {@link Token#CALL}.
  */
 public class FunctionCall extends AstNode {
 
-    /** Constant NO_ARGS */
     protected static final List<AstNode> NO_ARGS =
         Collections.unmodifiableList(new ArrayList<AstNode>());
 
@@ -33,35 +29,19 @@ public class FunctionCall extends AstNode {
         type = Token.CALL;
     }
 
-    /**
-     * <p>Constructor for FunctionCall.</p>
-     */
     public FunctionCall() {
     }
 
-    /**
-     * <p>Constructor for FunctionCall.</p>
-     *
-     * @param pos a int.
-     */
     public FunctionCall(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for FunctionCall.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public FunctionCall(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns node evaluating to the function to call
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTarget() {
         return target;
@@ -70,9 +50,8 @@ public class FunctionCall extends AstNode {
     /**
      * Sets node evaluating to the function to call, and sets
      * its parent to this node.
-     *
      * @param target node evaluating to the function to call.
-     * @throws java.lang.IllegalArgumentException} if target is {@code null}
+     * @throws IllegalArgumentException} if target is {@code null}
      */
     public void setTarget(AstNode target) {
         assertNotNull(target);
@@ -82,7 +61,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Returns function argument list
-     *
      * @return function argument list, or an empty immutable list if
      *         there are no arguments.
      */
@@ -92,7 +70,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Sets function argument list
-     *
      * @param arguments function argument list.  Can be {@code null},
      *        in which case any existing args are removed.
      */
@@ -110,9 +87,8 @@ public class FunctionCall extends AstNode {
 
     /**
      * Adds an argument to the list, and sets its parent to this node.
-     *
      * @param arg the argument node to add to the list
-     * @throws java.lang.IllegalArgumentException} if arg is {@code null}
+     * @throws IllegalArgumentException} if arg is {@code null}
      */
     public void addArgument(AstNode arg) {
         assertNotNull(arg);
@@ -125,8 +101,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Returns left paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -134,7 +108,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Sets left paren position
-     *
      * @param lp left paren position
      */
     public void setLp(int lp) {
@@ -143,8 +116,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Returns right paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -152,8 +123,6 @@ public class FunctionCall extends AstNode {
 
     /**
      * Sets right paren position
-     *
-     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -161,16 +130,12 @@ public class FunctionCall extends AstNode {
 
     /**
      * Sets both paren positions
-     *
-     * @param lp a int.
-     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -188,8 +153,6 @@ public class FunctionCall extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the target object, and the arguments.
      */
     @Override

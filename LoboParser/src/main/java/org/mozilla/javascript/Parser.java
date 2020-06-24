@@ -87,7 +87,7 @@ import org.mozilla.javascript.ast.Yield;
  * It is based on the SpiderMonkey C source files jsparse.c and jsparse.h in the
  * jsref package.<p>
  *
- * The parser generates an {@link org.mozilla.javascript.ast.AstRoot} parse tree representing the source
+ * The parser generates an {@link AstRoot} parse tree representing the source
  * code.  No tree rewriting is permitted at this stage, so that the parse tree
  * is a faithful representation of the source for frontend processing tools and
  * IDEs.<p>
@@ -96,9 +96,9 @@ import org.mozilla.javascript.ast.Yield;
  * finishes, and will throw an IllegalStateException() if invoked again.<p>
  *
  * @see TokenStream
+ *
  * @author Mike McCabe
  * @author Brendan Eich
- * @version $Id: $Id
  */
 public class Parser
 {
@@ -163,28 +163,14 @@ public class Parser
         private static final long serialVersionUID = 5882582646773765630L;
     }
 
-    /**
-     * <p>Constructor for Parser.</p>
-     */
     public Parser() {
         this(new CompilerEnvirons());
     }
 
-    /**
-     * <p>Constructor for Parser.</p>
-     *
-     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     */
     public Parser(CompilerEnvirons compilerEnv) {
         this(compilerEnv, compilerEnv.getErrorReporter());
     }
 
-    /**
-     * <p>Constructor for Parser.</p>
-     *
-     * @param compilerEnv a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     * @param errorReporter a {@link org.mozilla.javascript.ErrorReporter} object.
-     */
     public Parser(CompilerEnvirons compilerEnv, ErrorReporter errorReporter) {
         this.compilerEnv = compilerEnv;
         this.errorReporter = errorReporter;
@@ -428,11 +414,9 @@ public class Parser
                 if (compilerEnv.isRecordingComments()) {
                     String comment = ts.getAndResetCurrentComment();
                     recordComment(lineno, comment);
-                    // Comments may contain multiple lines, get the number
-                    // of EoLs and increase the lineno
-                    lineno += getNumberOfEols(comment);
                     break;
-                }tt = ts.getToken();
+                }
+                tt = ts.getToken();
             }
         }
 
@@ -514,11 +498,6 @@ public class Parser
         }
     }
 
-    /**
-     * <p>eof.</p>
-     *
-     * @return a boolean.
-     */
     public boolean eof() {
         return ts.eof();
     }
@@ -585,13 +564,10 @@ public class Parser
     /**
      * Builds a parse tree from the given source string.
      *
-     * @return an {@link org.mozilla.javascript.ast.AstRoot} object representing the parsed program.  If
+     * @return an {@link AstRoot} object representing the parsed program.  If
      * the parse fails, {@code null} will be returned.  (The parse failure will
-     * result in a call to the {@link org.mozilla.javascript.ErrorReporter} from
-     * {@link org.mozilla.javascript.CompilerEnvirons}.)
-     * @param sourceString a {@link java.lang.String} object.
-     * @param sourceURI a {@link java.lang.String} object.
-     * @param lineno a int.
+     * result in a call to the {@link ErrorReporter} from
+     * {@link CompilerEnvirons}.)
      */
     public AstRoot parse(String sourceString, String sourceURI, int lineno)
     {
@@ -613,14 +589,9 @@ public class Parser
 
     /**
      * Builds a parse tree from the given sourcereader.
-     *
      * @see #parse(String,String,int)
-     * @throws java.io.IOException if the {@link java.io.Reader} encounters an error
+     * @throws IOException if the {@link Reader} encounters an error
      * @deprecated use parse(String, String, int) instead
-     * @param sourceReader a {@link java.io.Reader} object.
-     * @param sourceURI a {@link java.lang.String} object.
-     * @param lineno a int.
-     * @return a {@link org.mozilla.javascript.ast.AstRoot} object.
      */
      @Deprecated
     public AstRoot parse(Reader sourceReader, String sourceURI, int lineno)
@@ -889,7 +860,12 @@ public class Parser
         }
     }
 
-    private FunctionNode function(int type)
+    private FunctionNode function(int type) 
+        throws IOException {
+        return function(type, false);
+    }
+
+    private FunctionNode function(int type, boolean isGenerator)
         throws IOException
     {
         int syntheticType = type;
@@ -916,6 +892,10 @@ public class Parser
             }
         } else if (matchToken(Token.LP, true)) {
             // Anonymous function:  leave name as null
+        } else if (matchToken(Token.MUL, true) &&
+                   (compilerEnv.getLanguageVersion() >= Context.VERSION_ES6)) {
+            // ES6 generator function
+            return function(type, true);
         } else {
             if (compilerEnv.isAllowMemberExprAsFunctionName()) {
                 // Note that memberExpr can not start with '(' like
@@ -939,6 +919,9 @@ public class Parser
 
         FunctionNode fnNode = new FunctionNode(functionSourceStart, name);
         fnNode.setFunctionType(type);
+        if (isGenerator) {
+            fnNode.setIsES6Generator();
+        }
         if (lpPos != -1)
             fnNode.setLp(lpPos - functionSourceStart);
 
@@ -1940,12 +1923,26 @@ public class Parser
         consumeToken();
         int lineno = ts.lineno, pos = ts.tokenBeg, end = ts.tokenEnd;
 
+        boolean yieldStar = false;
+        if ((tt == Token.YIELD) &&
+            (compilerEnv.getLanguageVersion() >= Context.VERSION_ES6) &&
+            (peekToken() == Token.MUL)) {
+          yieldStar = true;
+          consumeToken();
+        }
+
         AstNode e = null;
         // This is ugly, but we don't want to require a semicolon.
         switch (peekTokenOrEOL()) {
           case Token.SEMI: case Token.RC:  case Token.RB:    case Token.RP:
-          case Token.EOF:  case Token.EOL: case Token.ERROR: case Token.YIELD:
+          case Token.EOF:  case Token.EOL: case Token.ERROR:
             break;
+          case Token.YIELD:
+            if (compilerEnv.getLanguageVersion() < Context.VERSION_ES6) {
+                // Take extra care to preserve language compatibility
+                break;
+            }
+            // fallthrough
           default:
             e = expr();
             end = getNodeEnd(e);
@@ -1966,7 +1963,7 @@ public class Parser
             if (!insideFunction())
                 reportError("msg.bad.yield");
             endFlags |= Node.END_YIELDS;
-            ret = new Yield(pos, end - pos, e);
+            ret = new Yield(pos, end - pos, e, yieldStar);
             setRequiresActivation();
             setIsGenerator();
             if (!exprContext) {
@@ -1978,11 +1975,15 @@ public class Parser
         if (insideFunction()
             && nowAllSet(before, endFlags,
                     Node.END_YIELDS|Node.END_RETURNS_VALUE)) {
-            Name name = ((FunctionNode)currentScriptOrFn).getFunctionName();
-            if (name == null || name.length() == 0)
-                addError("msg.anon.generator.returns", "");
-            else
-                addError("msg.generator.returns", name.getIdentifier());
+            FunctionNode fn = (FunctionNode)currentScriptOrFn;
+            if (!fn.isES6Generator()) {
+                Name name = ((FunctionNode)currentScriptOrFn).getFunctionName();
+                if (name == null || name.length() == 0) {
+                    addError("msg.anon.generator.returns", "");
+                } else {
+                    addError("msg.generator.returns", name.getIdentifier());
+                }
+            }
         }
 
         ret.setLineno(lineno);
@@ -2932,18 +2933,18 @@ public class Parser
           case Token.THROW:
               // needed for generator.throw();
               saveNameTokenData(ts.tokenBeg, "throw", ts.lineno);
-              ref = propertyName(-1, "throw", memberTypeFlags);
+              ref = propertyName(-1, memberTypeFlags);
               break;
 
           case Token.NAME:
               // handles: name, ns::name, ns::*, ns::[expr]
-              ref = propertyName(-1, ts.getString(), memberTypeFlags);
+              ref = propertyName(-1, memberTypeFlags);
               break;
 
           case Token.MUL:
               // handles: *, *::name, *::*, *::[expr]
               saveNameTokenData(ts.tokenBeg, "*", ts.lineno);
-              ref = propertyName(-1, "*", memberTypeFlags);
+              ref = propertyName(-1, memberTypeFlags);
               break;
 
           case Token.XMLATTR:
@@ -2955,7 +2956,7 @@ public class Parser
           case Token.RESERVED: {
               String name = ts.getString();
               saveNameTokenData(ts.tokenBeg, name, ts.lineno);
-              ref = propertyName(-1, name, memberTypeFlags);
+              ref = propertyName(-1, memberTypeFlags);
               break;
           }
 
@@ -2965,7 +2966,7 @@ public class Parser
                   String name = Token.keywordToName(token);
                   if (name != null) {
                       saveNameTokenData(ts.tokenBeg, name, ts.lineno);
-                      ref = propertyName(-1, name, memberTypeFlags);
+                      ref = propertyName(-1, memberTypeFlags);
                       break;
                   }
               }
@@ -3002,12 +3003,12 @@ public class Parser
         switch (tt) {
           // handles: @name, @ns::name, @ns::*, @ns::[expr]
           case Token.NAME:
-              return propertyName(atPos, ts.getString(), 0);
+              return propertyName(atPos, 0);
 
           // handles: @*, @*::name, @*::*, @*::[expr]
           case Token.MUL:
               saveNameTokenData(ts.tokenBeg, "*", ts.lineno);
-              return propertyName(atPos, "*", 0);
+              return propertyName(atPos, 0);
 
           // handles @[expr]
           case Token.LB:
@@ -3034,7 +3035,7 @@ public class Parser
      * returns a Name node.  Returns an ErrorNode for malformed XML
      * expressions.  (For now - might change to return a partial XmlRef.)
      */
-    private AstNode propertyName(int atPos, String s, int memberTypeFlags)
+    private AstNode propertyName(int atPos, int memberTypeFlags)
         throws IOException
     {
         int pos = atPos != -1 ? atPos : ts.tokenBeg, lineno = ts.lineno;
@@ -3270,7 +3271,7 @@ public class Parser
         saveNameTokenData(namePos, nameString, nameLineno);
 
         if (compilerEnv.isXmlAvailable()) {
-            return propertyName(-1, nameString, 0);
+            return propertyName(-1, 0);
         }
         return createNameNode(true, Token.NAME);
     }
@@ -3804,12 +3805,6 @@ public class Parser
         return s;
     }
 
-    /**
-     * <p>checkActivationName.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @param token a int.
-     */
     protected void checkActivationName(String name, int token) {
         if (!insideFunction()) {
             return;
@@ -3835,9 +3830,6 @@ public class Parser
         }
     }
 
-    /**
-     * <p>setRequiresActivation.</p>
-     */
     protected void setRequiresActivation() {
         if (insideFunction()) {
             ((FunctionNode)currentScriptOrFn).setRequiresActivation();
@@ -3852,9 +3844,6 @@ public class Parser
             setRequiresActivation();
     }
 
-    /**
-     * <p>setIsGenerator.</p>
-     */
     protected void setIsGenerator() {
         if (insideFunction()) {
             ((FunctionNode)currentScriptOrFn).setIsGenerator();
@@ -4169,25 +4158,11 @@ public class Parser
         return empty;
     }
 
-    /**
-     * <p>createName.</p>
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a {@link org.mozilla.javascript.Node} object.
-     */
     protected Node createName(String name) {
         checkActivationName(name, Token.NAME);
         return Node.newString(Token.NAME, name);
     }
 
-    /**
-     * <p>createName.</p>
-     *
-     * @param type a int.
-     * @param name a {@link java.lang.String} object.
-     * @param child a {@link org.mozilla.javascript.Node} object.
-     * @return a {@link org.mozilla.javascript.Node} object.
-     */
     protected Node createName(int type, String name, Node child) {
         Node result = createName(name);
         result.setType(type);
@@ -4196,12 +4171,6 @@ public class Parser
         return result;
     }
 
-    /**
-     * <p>createNumber.</p>
-     *
-     * @param number a double.
-     * @return a {@link org.mozilla.javascript.Node} object.
-     */
     protected Node createNumber(double number) {
         return Node.newNumber(number);
     }
@@ -4243,13 +4212,6 @@ public class Parser
     // to the object) so that it's always the same object, regardless of
     // side effects in the RHS.
 
-    /**
-     * <p>simpleAssignment.</p>
-     *
-     * @param left a {@link org.mozilla.javascript.Node} object.
-     * @param right a {@link org.mozilla.javascript.Node} object.
-     * @return a {@link org.mozilla.javascript.Node} object.
-     */
     protected Node simpleAssignment(Node left, Node right) {
         int nodeType = left.getType();
         switch (nodeType) {
@@ -4305,11 +4267,6 @@ public class Parser
         throw codeBug();
     }
 
-    /**
-     * <p>checkMutableReference.</p>
-     *
-     * @param n a {@link org.mozilla.javascript.Node} object.
-     */
     protected void checkMutableReference(Node n) {
         int memberTypeFlags = n.getIntProp(Node.MEMBER_TYPE_PROP, 0);
         if ((memberTypeFlags & Node.DESCENDANTS_FLAG) != 0) {
@@ -4318,12 +4275,6 @@ public class Parser
     }
 
     // remove any ParenthesizedExpression wrappers
-    /**
-     * <p>removeParens.</p>
-     *
-     * @param node a {@link org.mozilla.javascript.ast.AstNode} object.
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     protected AstNode removeParens(AstNode node) {
         while (node instanceof ParenthesizedExpression) {
             node = ((ParenthesizedExpression)node).getExpression();
@@ -4348,20 +4299,10 @@ public class Parser
                           + ", currentToken=" + currentToken);
     }
 
-    /**
-     * <p>Setter for the field defaultUseStrictDirective.</p>
-     *
-     * @param useStrict a boolean.
-     */
     public void setDefaultUseStrictDirective(boolean useStrict) {
         defaultUseStrictDirective = useStrict;
     }
 
-    /**
-     * <p>inUseStrictDirective.</p>
-     *
-     * @return a boolean.
-     */
     public boolean inUseStrictDirective() {
         return inUseStrictDirective;
     }

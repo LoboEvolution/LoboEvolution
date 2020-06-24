@@ -9,15 +9,12 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * A variable declaration or initializer, part of a {@link org.mozilla.javascript.ast.VariableDeclaration}
+ * A variable declaration or initializer, part of a {@link VariableDeclaration}
  * expression.  The variable "target" can be a simple name or a destructuring
  * form.  The initializer, if present, can be any expression.<br>
  *
- * Node type is one of {@link org.mozilla.javascript.Token#VAR}, {@link org.mozilla.javascript.Token#CONST}, or
- * {@link org.mozilla.javascript.Token#LET}.
- *
- * @author utente
- * @version $Id: $Id
+ * Node type is one of {@link Token#VAR}, {@link Token#CONST}, or
+ * {@link Token#LET}.
  */
 public class VariableInitializer extends AstNode {
 
@@ -30,10 +27,8 @@ public class VariableInitializer extends AstNode {
 
     /**
      * Sets the node type.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code nodeType} is not one of
-     * {@link org.mozilla.javascript.Token#VAR}, {@link org.mozilla.javascript.Token#CONST}, or {@link org.mozilla.javascript.Token#LET}
-     * @param nodeType a int.
+     * @throws IllegalArgumentException if {@code nodeType} is not one of
+     * {@link Token#VAR}, {@link Token#CONST}, or {@link Token#LET}
      */
     public void setNodeType(int nodeType) {
         if (nodeType != Token.VAR
@@ -43,27 +38,13 @@ public class VariableInitializer extends AstNode {
         setType(nodeType);
     }
 
-    /**
-     * <p>Constructor for VariableInitializer.</p>
-     */
     public VariableInitializer() {
     }
 
-    /**
-     * <p>Constructor for VariableInitializer.</p>
-     *
-     * @param pos a int.
-     */
     public VariableInitializer(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for VariableInitializer.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public VariableInitializer(int pos, int len) {
         super(pos, len);
     }
@@ -72,9 +53,8 @@ public class VariableInitializer extends AstNode {
     /**
      * Returns true if this is a destructuring assignment.  If so, the
      * initializer must be non-{@code null}.
-     *
      * @return {@code true} if the {@code target} field is a destructuring form
-     * (an {@link org.mozilla.javascript.ast.ArrayLiteral} or {@link org.mozilla.javascript.ast.ObjectLiteral} node)
+     * (an {@link ArrayLiteral} or {@link ObjectLiteral} node)
      */
     public boolean isDestructuring() {
         return !(target instanceof Name);
@@ -82,8 +62,6 @@ public class VariableInitializer extends AstNode {
 
     /**
      * Returns the variable name or destructuring form
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getTarget() {
         return target;
@@ -92,9 +70,7 @@ public class VariableInitializer extends AstNode {
     /**
      * Sets the variable name or destructuring form, and sets
      * its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if target is {@code null}
-     * @param target a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if target is {@code null}
      */
     public void setTarget(AstNode target) {
         // Don't throw exception if target is an "invalid" node type.
@@ -107,8 +83,6 @@ public class VariableInitializer extends AstNode {
 
     /**
      * Returns the initial value, or {@code null} if not provided
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getInitializer() {
         return initializer;
@@ -116,7 +90,6 @@ public class VariableInitializer extends AstNode {
 
     /**
      * Sets the initial value expression, and sets its parent to this node.
-     *
      * @param initializer the initial value.  May be {@code null}.
      */
     public void setInitializer(AstNode initializer) {
@@ -125,7 +98,6 @@ public class VariableInitializer extends AstNode {
             initializer.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -139,8 +111,6 @@ public class VariableInitializer extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then the target expression, then the initializer
      * expression if present.
      */

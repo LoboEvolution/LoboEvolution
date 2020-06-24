@@ -9,13 +9,10 @@ package org.mozilla.javascript.ast;
 import org.mozilla.javascript.Token;
 
 /**
- * While statement.  Node type is {@link org.mozilla.javascript.Token#WHILE}.
+ * While statement.  Node type is {@link Token#WHILE}.
  *
  * <pre><i>WhileStatement</i>:
  *     <b>while</b> <b>(</b> Expression <b>)</b> Statement</pre>
- *
- * @author utente
- * @version $Id: $Id
  */
 public class WhileLoop extends Loop {
 
@@ -25,35 +22,19 @@ public class WhileLoop extends Loop {
         type = Token.WHILE;
     }
 
-    /**
-     * <p>Constructor for WhileLoop.</p>
-     */
     public WhileLoop() {
     }
 
-    /**
-     * <p>Constructor for WhileLoop.</p>
-     *
-     * @param pos a int.
-     */
     public WhileLoop(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for WhileLoop.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public WhileLoop(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns loop condition
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getCondition() {
         return condition;
@@ -61,9 +42,7 @@ public class WhileLoop extends Loop {
 
     /**
      * Sets loop condition
-     *
-     * @throws java.lang.IllegalArgumentException} if condition is {@code null}
-     * @param condition a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException} if condition is {@code null}
      */
     public void setCondition(AstNode condition) {
         assertNotNull(condition);
@@ -71,7 +50,6 @@ public class WhileLoop extends Loop {
         condition.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -95,8 +73,6 @@ public class WhileLoop extends Loop {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the condition, then the body.
      */
     @Override

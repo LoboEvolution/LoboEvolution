@@ -8,10 +8,13 @@
 
 package org.mozilla.javascript;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Embeddings that wish to provide their own custom wrappings for Java
  * objects may extend this class and call
- * {@link org.mozilla.javascript.Context#setWrapFactory(WrapFactory)}
+ * {@link Context#setWrapFactory(WrapFactory)}
  * Once an instance of this class or an extension of this class is enabled
  * for a given context (by calling setWrapFactory on that context), Rhino
  * will call the methods of this class whenever it needs to wrap a value
@@ -19,8 +22,6 @@ package org.mozilla.javascript;
  *
  * @see org.mozilla.javascript.Context#setWrapFactory(WrapFactory)
  * @since 1.5 Release 4
- * @author utente
- * @version $Id: $Id
  */
 public class WrapFactory
 {
@@ -36,12 +37,11 @@ public class WrapFactory
      * <LI>The value returned by Context.getUndefinedValue()</LI>
      * <LI>null</LI>
      * </UL>
-     *
      * @param cx the current Context for this thread
      * @param scope the scope of the executing script
      * @param obj the object to be wrapped. Note it can be null.
      * @param staticType type hint. If security restrictions prevent to wrap
-     *              object based on its class, staticType will be used instead.
+              object based on its class, staticType will be used instead.
      * @return the wrapped value.
      */
     public Object wrap(Context cx, Scriptable scope,
@@ -82,7 +82,6 @@ public class WrapFactory
 
     /**
      * Wrap an object newly created by a constructor call.
-     *
      * @param cx the current Context for this thread
      * @param scope the scope of the executing script
      * @param obj the object to be wrapped
@@ -111,17 +110,21 @@ public class WrapFactory
      * <p>
      * Subclasses can override the method to provide custom wrappers
      * for Java objects.
-     *
      * @param cx the current Context for this thread
      * @param scope the scope of the executing script
      * @param javaObject the object to be wrapped
      * @param staticType type hint. If security restrictions prevent to wrap
-     *                object based on its class, staticType will be used instead.
+                object based on its class, staticType will be used instead.
      * @return the wrapped value which shall not be null
      */
     public Scriptable wrapAsJavaObject(Context cx, Scriptable scope,
                                        Object javaObject, Class<?> staticType)
     {
+        if (List.class.isAssignableFrom(javaObject.getClass())) {
+            return new NativeJavaList(scope, javaObject);
+        } else if (Map.class.isAssignableFrom(javaObject.getClass())) {
+            return new NativeJavaMap(scope, javaObject);
+        }
         return new NativeJavaObject(scope, javaObject, staticType);
     }
 
@@ -145,17 +148,15 @@ public class WrapFactory
     }
 
     /**
-     * Return false if result of Java method, which is instance of
-     * String, Number, Boolean and
-     * Character, should be used directly as JavaScript primitive
+     * Return <code>false</code> if result of Java method, which is instance of
+     * <code>String</code>, <code>Number</code>, <code>Boolean</code> and
+     * <code>Character</code>, should be used directly as JavaScript primitive
      * type.
      * By default the method returns true to indicate that instances of
-     * String, Number, Boolean and
-     * Character should be wrapped as any other Java object and
+     * <code>String</code>, <code>Number</code>, <code>Boolean</code> and
+     * <code>Character</code> should be wrapped as any other Java object and
      * scripts can access any Java method available in these objects.
      * Use {@link #setJavaPrimitiveWrap(boolean)} to change this.
-     *
-     * @return a boolean.
      */
     public final boolean isJavaPrimitiveWrap()
     {
@@ -163,10 +164,7 @@ public class WrapFactory
     }
 
     /**
-     * <p>Setter for the field javaPrimitiveWrap.</p>
-     *
      * @see #isJavaPrimitiveWrap()
-     * @param value a boolean.
      */
     public final void setJavaPrimitiveWrap(boolean value)
     {

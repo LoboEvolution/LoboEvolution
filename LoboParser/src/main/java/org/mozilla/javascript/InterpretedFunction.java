@@ -67,7 +67,7 @@ final class InterpretedFunction extends NativeFunction implements Script
     {
         InterpretedFunction f;
         f = new InterpretedFunction(idata, staticSecurityDomain);
-        f.initScriptFunction(cx, scope);
+        f.initScriptFunction(cx, scope, f.idata.isES6Generator);
         return f;
     }
 
@@ -79,12 +79,11 @@ final class InterpretedFunction extends NativeFunction implements Script
                                               int index)
     {
         InterpretedFunction f = new InterpretedFunction(parent, index);
-        f.initScriptFunction(cx, scope);
+        f.initScriptFunction(cx, scope, f.idata.isES6Generator);
         return f;
     }
 
 
-    /** {@inheritDoc} */
     @Override
     public String getFunctionName()
     {
@@ -92,9 +91,13 @@ final class InterpretedFunction extends NativeFunction implements Script
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Calls the function.
+     * @param cx the current context
+     * @param scope the scope used for the call
+     * @param thisObj the value of "this"
+     * @param args function arguments. Must not be null. You can use
+     * {@link ScriptRuntime#emptyArgs} to pass empty arguments.
+     * @return the result of the function call.
      */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
@@ -106,7 +109,6 @@ final class InterpretedFunction extends NativeFunction implements Script
         return Interpreter.interpret(this, cx, scope, thisObj, args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object exec(Context cx, Scriptable scope)
     {
@@ -123,30 +125,22 @@ final class InterpretedFunction extends NativeFunction implements Script
             this, cx, scope, scope, ScriptRuntime.emptyArgs);
     }
 
-    /**
-     * <p>isScript.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isScript() {
         return idata.itsFunctionType == 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getEncodedSource()
     {
         return Interpreter.getEncodedSource(idata);
     }
 
-    /** {@inheritDoc} */
     @Override
     public DebuggableScript getDebuggableView()
     {
         return idata;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object resumeGenerator(Context cx, Scriptable scope, int operation,
                                   Object state, Object value)
@@ -154,35 +148,30 @@ final class InterpretedFunction extends NativeFunction implements Script
         return Interpreter.resumeGenerator(cx, scope, operation, state, value);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int getLanguageVersion()
     {
         return idata.languageVersion;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int getParamCount()
     {
         return idata.argCount;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int getParamAndVarCount()
     {
         return idata.argNames.length;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected String getParamOrVarName(int index)
     {
         return idata.argNames[index];
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean getParamOrVarConst(int index)
     {

@@ -10,10 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for a RegExp literal.
- * Node type is {@link org.mozilla.javascript.Token#REGEXP}.
- *
- * @author utente
- * @version $Id: $Id
+ * Node type is {@link Token#REGEXP}.
  */
 public class RegExpLiteral extends AstNode {
 
@@ -24,35 +21,19 @@ public class RegExpLiteral extends AstNode {
         type = Token.REGEXP;
     }
 
-    /**
-     * <p>Constructor for RegExpLiteral.</p>
-     */
     public RegExpLiteral() {
     }
 
-    /**
-     * <p>Constructor for RegExpLiteral.</p>
-     *
-     * @param pos a int.
-     */
     public RegExpLiteral(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for RegExpLiteral.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public RegExpLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns the regexp string without delimiters
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getValue() {
         return value;
@@ -60,9 +41,7 @@ public class RegExpLiteral extends AstNode {
 
     /**
      * Sets the regexp string without delimiters
-     *
-     * @throws java.lang.IllegalArgumentException} if value is {@code null}
-     * @param value a {@link java.lang.String} object.
+     * @throws IllegalArgumentException} if value is {@code null}
      */
     public void setValue(String value) {
         assertNotNull(value);
@@ -71,8 +50,6 @@ public class RegExpLiteral extends AstNode {
 
     /**
      * Returns regexp flags, {@code null} or "" if no flags specified
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getFlags() {
         return flags;
@@ -80,14 +57,11 @@ public class RegExpLiteral extends AstNode {
 
     /**
      * Sets regexp flags.  Can be {@code null} or "".
-     *
-     * @param flags a {@link java.lang.String} object.
      */
     public void setFlags(String flags) {
         this.flags = flags;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         return makeIndent(depth) + "/" + value + "/"
@@ -95,8 +69,6 @@ public class RegExpLiteral extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node.  There are no children to visit.
      */
     @Override

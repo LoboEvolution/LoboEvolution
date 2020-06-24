@@ -8,30 +8,24 @@ package org.mozilla.javascript;
 
 import java.util.Iterator;
 
-/**
- * <p>NativeMap class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public class NativeMap extends IdScriptableObject {
     private static final long serialVersionUID = 1171922614280016891L;
     private static final Object MAP_TAG = "Map";
     static final String ITERATOR_TAG = "Map Iterator";
-    
+
     private static final Object NULL_VALUE = new Object();
-    
+
     private final Hashtable entries = new Hashtable();
-    
+
     private boolean instanceOfMap = false;
 
     static void init(Context cx, Scriptable scope, boolean sealed) {
         NativeMap obj = new NativeMap();
         obj.exportAsJSClass(MAX_PROTOTYPE_ID, scope, false);
-        
+
         ScriptableObject desc = (ScriptableObject) cx.newObject(scope);
-        desc.put("enumerable", desc, false);
-        desc.put("configurable", desc, true);
+        desc.put("enumerable", desc, Boolean.FALSE);
+        desc.put("configurable", desc, Boolean.TRUE);
         desc.put("get", desc, obj.get(NativeSet.GETSIZE, obj));
         obj.defineOwnProperty(cx, "size", desc);
 
@@ -40,13 +34,11 @@ public class NativeMap extends IdScriptableObject {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Map";
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -103,7 +95,7 @@ public class NativeMap extends IdScriptableObject {
         Object key = k;
         if ((key instanceof Number) &&
             ((Number)key).doubleValue() == ScriptRuntime.negativeZero) {
-            key = 0.0;
+            key = ScriptRuntime.zeroObj;
         }
         entries.put(key, value);
         return this;
@@ -112,7 +104,7 @@ public class NativeMap extends IdScriptableObject {
     private Object js_delete(Object arg)
     {
         final Object e = entries.delete(arg);
-        return (e != null);
+        return e != null;
     }
 
     private Object js_get(Object arg)
@@ -224,7 +216,7 @@ public class NativeMap extends IdScriptableObject {
         }
     }
 
-    private NativeMap realThis(Scriptable thisObj, IdFunctionObject f)
+    private static NativeMap realThis(Scriptable thisObj, IdFunctionObject f)
     {
         if (thisObj == null) {
             throw incompatibleCallError(f);
@@ -241,7 +233,6 @@ public class NativeMap extends IdScriptableObject {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -274,7 +265,6 @@ public class NativeMap extends IdScriptableObject {
         initPrototypeMethod(MAP_TAG, id, s, fnName, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(Symbol k)
     {
@@ -295,7 +285,6 @@ public class NativeMap extends IdScriptableObject {
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

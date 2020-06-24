@@ -10,7 +10,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for let statements and expressions.
- * Node type is {@link org.mozilla.javascript.Token#LET} or {@link org.mozilla.javascript.Token#LETEXPR}.
+ * Node type is {@link Token#LET} or {@link Token#LETEXPR}.
  *
  * <pre> <i>LetStatement</i>:
  *     <b>let</b> ( VariableDeclarationList ) Block
@@ -19,11 +19,8 @@ import org.mozilla.javascript.Token;
  *
  * Note that standalone let-statements with no parens or body block,
  * such as {@code let x=6, y=7;}, are represented as a
- * {@link org.mozilla.javascript.ast.VariableDeclaration} node of type {@code Token.LET},
- * wrapped with an {@link org.mozilla.javascript.ast.ExpressionStatement}.
- *
- * @author utente
- * @version $Id: $Id
+ * {@link VariableDeclaration} node of type {@code Token.LET},
+ * wrapped with an {@link ExpressionStatement}.
  */
 public class LetNode extends Scope {
 
@@ -36,35 +33,19 @@ public class LetNode extends Scope {
         type = Token.LETEXPR;
     }
 
-    /**
-     * <p>Constructor for LetNode.</p>
-     */
     public LetNode() {
     }
 
-    /**
-     * <p>Constructor for LetNode.</p>
-     *
-     * @param pos a int.
-     */
     public LetNode(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for LetNode.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public LetNode(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns variable list
-     *
-     * @return a {@link org.mozilla.javascript.ast.VariableDeclaration} object.
      */
     public VariableDeclaration getVariables() {
         return variables;
@@ -72,9 +53,7 @@ public class LetNode extends Scope {
 
     /**
      * Sets variable list.  Sets list parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if variables is {@code null}
-     * @param variables a {@link org.mozilla.javascript.ast.VariableDeclaration} object.
+     * @throws IllegalArgumentException if variables is {@code null}
      */
     public void setVariables(VariableDeclaration variables) {
         assertNotNull(variables);
@@ -97,7 +76,6 @@ public class LetNode extends Scope {
     /**
      * Sets body statement or expression.  Also sets the body parent to this
      * node.
-     *
      * @param body the body statement or expression.  May be
      * {@code null}.
      */
@@ -109,8 +87,6 @@ public class LetNode extends Scope {
 
     /**
      * Returns left paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -118,8 +94,6 @@ public class LetNode extends Scope {
 
     /**
      * Sets left paren position
-     *
-     * @param lp a int.
      */
     public void setLp(int lp) {
         this.lp = lp;
@@ -127,8 +101,6 @@ public class LetNode extends Scope {
 
     /**
      * Returns right paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -136,8 +108,6 @@ public class LetNode extends Scope {
 
     /**
      * Sets right paren position
-     *
-     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -145,16 +115,12 @@ public class LetNode extends Scope {
 
     /**
      * Sets both paren positions
-     *
-     * @param lp a int.
-     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         String pad = makeIndent(depth);
@@ -170,8 +136,6 @@ public class LetNode extends Scope {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, the variable list, and if present, the body
      * expression or statement.
      */

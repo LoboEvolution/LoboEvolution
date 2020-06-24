@@ -23,14 +23,12 @@ import org.mozilla.javascript.ScriptableObject;
  * that while this base class strives to be as generic as possible, it does
  * have loading from an URI built into its design, for the simple reason that
  * the require.paths is defined in terms of URIs.
- *
  * @author Attila Szegedi
  * @version $Id: ModuleSourceProviderBase.java,v 1.3 2011/04/07 20:26:12 hannes%helma.at Exp $
  */
 public abstract class ModuleSourceProviderBase implements ModuleSourceProvider, Serializable {
     private static final long serialVersionUID = 1L;
 
-    /** {@inheritDoc} */
     @Override
     public ModuleSource loadSource(String moduleId, Scriptable paths,
             Object validator) throws IOException, URISyntaxException
@@ -52,7 +50,6 @@ public abstract class ModuleSourceProviderBase implements ModuleSourceProvider, 
         return loadFromFallbackLocations(moduleId, validator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ModuleSource loadSource(URI uri, URI base, Object validator)
             throws IOException, URISyntaxException {
@@ -102,7 +99,6 @@ public abstract class ModuleSourceProviderBase implements ModuleSourceProvider, 
      * level of expiry (staleness tolerance) can greatly enhance performance.
      * The default implementation always returns true so it will always require
      * revalidation.
-     *
      * @param validator the validator
      * @return returns true if the cached module needs revalidation.
      */
@@ -115,18 +111,17 @@ public abstract class ModuleSourceProviderBase implements ModuleSourceProvider, 
      * URI is absolute but does not have a file name extension such as ".js".
      * It is up to the ModuleSourceProvider implementation to add such an
      * extension.
-     *
      * @param uri the URI of the script, without file name extension.
      * @param base the base URI the uri was resolved from.
      * @param validator a validator that can be used to revalidate an existing
      * cached source at the URI. Can be null if there is no cached source
      * available.
      * @return the loaded module script, or null if it can't be found, or
-     * {@link org.mozilla.javascript.commonjs.module.provider.ModuleSourceProvider#NOT_MODIFIED} if it revalidated the existing
+     * {@link ModuleSourceProvider#NOT_MODIFIED} if it revalidated the existing
      * cached source against the URI.
-     * @throws java.io.IOException if the module script was found, but an I/O exception
+     * @throws IOException if the module script was found, but an I/O exception
      * prevented it from being loaded.
-     * @throws java.net.URISyntaxException if the final URI could not be constructed
+     * @throws URISyntaxException if the final URI could not be constructed
      */
     protected abstract ModuleSource loadFromUri(URI uri, URI base,
             Object validator) throws IOException, URISyntaxException;
@@ -135,16 +130,15 @@ public abstract class ModuleSourceProviderBase implements ModuleSourceProvider, 
      * Override to obtain a module source from privileged locations. This will
      * be called before source is attempted to be obtained from URIs specified
      * in require.paths.
-     *
      * @param moduleId the ID of the module
      * @param validator a validator that can be used to validate an existing
      * cached script. Can be null if there is no cached script available.
      * @return the loaded module script, or null if it can't be found in the
-     * privileged locations, or {@link org.mozilla.javascript.commonjs.module.provider.ModuleSourceProvider#NOT_MODIFIED} if
+     * privileged locations, or {@link ModuleSourceProvider#NOT_MODIFIED} if
      * the existing cached module script is still valid.
-     * @throws java.io.IOException if the module script was found, but an I/O exception
+     * @throws IOException if the module script was found, but an I/O exception
      * prevented it from being loaded.
-     * @throws java.net.URISyntaxException if the final URI could not be constructed.
+     * @throws URISyntaxException if the final URI could not be constructed.
      */
     protected ModuleSource loadFromPrivilegedLocations(
             String moduleId, Object validator)
@@ -157,16 +151,15 @@ public abstract class ModuleSourceProviderBase implements ModuleSourceProvider, 
      * Override to obtain a module source from fallback locations. This will
      * be called after source is attempted to be obtained from URIs specified
      * in require.paths.
-     *
      * @param moduleId the ID of the module
      * @param validator a validator that can be used to validate an existing
      * cached script. Can be null if there is no cached script available.
      * @return the loaded module script, or null if it can't be found in the
-     * privileged locations, or {@link org.mozilla.javascript.commonjs.module.provider.ModuleSourceProvider#NOT_MODIFIED} if
+     * privileged locations, or {@link ModuleSourceProvider#NOT_MODIFIED} if
      * the existing cached module script is still valid.
-     * @throws java.io.IOException if the module script was found, but an I/O exception
+     * @throws IOException if the module script was found, but an I/O exception
      * prevented it from being loaded.
-     * @throws java.net.URISyntaxException if the final URI could not be constructed.
+     * @throws URISyntaxException if the final URI could not be constructed.
      */
     protected ModuleSource loadFromFallbackLocations(
             String moduleId, Object validator)

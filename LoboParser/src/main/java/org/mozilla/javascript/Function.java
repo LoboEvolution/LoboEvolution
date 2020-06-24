@@ -14,17 +14,23 @@ package org.mozilla.javascript;
  *
  * @see org.mozilla.javascript.Scriptable
  * @author Norris Boyd
- * @version $Id: $Id
  */
+
 public interface Function extends Scriptable, Callable
 {
     /**
-     * {@inheritDoc}
-     *
      * Call the function.
      *
      * Note that the array of arguments is not guaranteed to have
      * length greater than 0.
+     *
+     * @param cx the current Context for this thread
+     * @param scope the scope to execute the function relative to. This is
+     *              set to the value returned by getParentScope() except
+     *              when the function is called from a closure.
+     * @param thisObj the JavaScript <code>this</code> object
+     * @param args the array of arguments
+     * @return the result of the call
      */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj,
@@ -34,7 +40,7 @@ public interface Function extends Scriptable, Callable
      * Call the function as a constructor.
      *
      * This method is invoked by the runtime in order to satisfy a use
-     * of the JavaScript new operator.  This method is
+     * of the JavaScript <code>new</code> operator.  This method is
      * expected to create a new object and return it.
      *
      * @param cx the current Context for this thread

@@ -30,12 +30,6 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-/**
- * <p>FastDtoa class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public class FastDtoa {
 
     // FastDtoa will produce at most kFastDtoaMaximalLength digits.
@@ -490,13 +484,6 @@ public class FastDtoa {
     }
 
 
-    /**
-     * <p>dtoa.</p>
-     *
-     * @param v a double.
-     * @param buffer a {@link org.mozilla.javascript.v8dtoa.FastDtoaBuilder} object.
-     * @return a boolean.
-     */
     public static boolean dtoa(double v, FastDtoaBuilder buffer) {
         assert(v > 0);
         assert(!Double.isNaN(v));
@@ -505,24 +492,11 @@ public class FastDtoa {
         return grisu3(v, buffer);
     }
 
-    /**
-     * <p>numberToString.</p>
-     *
-     * @param v a double.
-     * @return a {@link java.lang.String} object.
-     */
     public static String numberToString(double v) {
         FastDtoaBuilder buffer = new FastDtoaBuilder();
         return numberToString(v, buffer) ? buffer.format() : null;
     }
 
-    /**
-     * <p>numberToString.</p>
-     *
-     * @param v a double.
-     * @param buffer a {@link org.mozilla.javascript.v8dtoa.FastDtoaBuilder} object.
-     * @return a boolean.
-     */
     public static boolean numberToString(double v, FastDtoaBuilder buffer) {
         buffer.reset();
         if (v < 0) {

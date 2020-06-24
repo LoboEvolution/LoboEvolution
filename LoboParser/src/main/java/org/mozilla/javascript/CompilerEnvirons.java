@@ -10,17 +10,8 @@ import java.util.Set;
 
 import org.mozilla.javascript.ast.ErrorCollector;
 
-/**
- * <p>CompilerEnvirons class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public class CompilerEnvirons
 {
-    /**
-     * <p>Constructor for CompilerEnvirons.</p>
-     */
     public CompilerEnvirons()
     {
         errorReporter = DefaultErrorReporter.instance;
@@ -37,11 +28,6 @@ public class CompilerEnvirons
         allowSharpComments = false;
     }
 
-    /**
-     * <p>initFromContext.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     */
     public void initFromContext(Context cx)
     {
         setErrorReporter(cx.getErrorReporter());
@@ -67,83 +53,43 @@ public class CompilerEnvirons
         generateObserverCount = cx.generateObserverCount;
     }
 
-    /**
-     * <p>Getter for the field errorReporter.</p>
-     *
-     * @return a {@link org.mozilla.javascript.ErrorReporter} object.
-     */
     public final ErrorReporter getErrorReporter()
     {
         return errorReporter;
     }
 
-    /**
-     * <p>Setter for the field errorReporter.</p>
-     *
-     * @param errorReporter a {@link org.mozilla.javascript.ErrorReporter} object.
-     */
     public void setErrorReporter(ErrorReporter errorReporter)
     {
         if (errorReporter == null) throw new IllegalArgumentException();
         this.errorReporter = errorReporter;
     }
 
-    /**
-     * <p>Getter for the field languageVersion.</p>
-     *
-     * @return a int.
-     */
     public final int getLanguageVersion()
     {
         return languageVersion;
     }
 
-    /**
-     * <p>Setter for the field languageVersion.</p>
-     *
-     * @param languageVersion a int.
-     */
     public void setLanguageVersion(int languageVersion)
     {
         Context.checkLanguageVersion(languageVersion);
         this.languageVersion = languageVersion;
     }
 
-    /**
-     * <p>isGenerateDebugInfo.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isGenerateDebugInfo()
     {
         return generateDebugInfo;
     }
 
-    /**
-     * <p>Setter for the field generateDebugInfo.</p>
-     *
-     * @param flag a boolean.
-     */
     public void setGenerateDebugInfo(boolean flag)
     {
         this.generateDebugInfo = flag;
     }
 
-    /**
-     * <p>isReservedKeywordAsIdentifier.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isReservedKeywordAsIdentifier()
     {
         return reservedKeywordAsIdentifier;
     }
 
-    /**
-     * <p>Setter for the field reservedKeywordAsIdentifier.</p>
-     *
-     * @param flag a boolean.
-     */
     public void setReservedKeywordAsIdentifier(boolean flag)
     {
         reservedKeywordAsIdentifier = flag;
@@ -152,118 +98,61 @@ public class CompilerEnvirons
     /**
      * Extension to ECMA: if 'function &lt;name&gt;' is not followed
      * by '(', assume &lt;name&gt; starts a {@code memberExpr}
-     *
-     * @return a boolean.
      */
     public final boolean isAllowMemberExprAsFunctionName()
     {
         return allowMemberExprAsFunctionName;
     }
 
-    /**
-     * <p>Setter for the field allowMemberExprAsFunctionName.</p>
-     *
-     * @param flag a boolean.
-     */
     public void setAllowMemberExprAsFunctionName(boolean flag)
     {
         allowMemberExprAsFunctionName = flag;
     }
 
-    /**
-     * <p>isXmlAvailable.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isXmlAvailable()
     {
         return xmlAvailable;
     }
 
-    /**
-     * <p>Setter for the field xmlAvailable.</p>
-     *
-     * @param flag a boolean.
-     */
     public void setXmlAvailable(boolean flag)
     {
         xmlAvailable = flag;
     }
 
-    /**
-     * <p>Getter for the field optimizationLevel.</p>
-     *
-     * @return a int.
-     */
     public final int getOptimizationLevel()
     {
         return optimizationLevel;
     }
 
-    /**
-     * <p>Setter for the field optimizationLevel.</p>
-     *
-     * @param level a int.
-     */
     public void setOptimizationLevel(int level)
     {
         Context.checkOptimizationLevel(level);
         this.optimizationLevel = level;
     }
 
-    /**
-     * <p>isGeneratingSource.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isGeneratingSource()
     {
         return generatingSource;
     }
 
-    /**
-     * <p>Getter for the field warnTrailingComma.</p>
-     *
-     * @return a boolean.
-     */
     public boolean getWarnTrailingComma() {
         return warnTrailingComma;
     }
 
-    /**
-     * <p>Setter for the field warnTrailingComma.</p>
-     *
-     * @param warn a boolean.
-     */
     public void setWarnTrailingComma(boolean warn) {
         warnTrailingComma = warn;
     }
 
-    /**
-     * <p>isStrictMode.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean isStrictMode()
     {
         return strictMode;
     }
 
-    /**
-     * <p>Setter for the field strictMode.</p>
-     *
-     * @param strict a boolean.
-     */
     public void setStrictMode(boolean strict)
     {
         strictMode = strict;
     }
 
-    /**
-     * <p>reportWarningAsError.</p>
-     *
-     * @return a boolean.
-     */
     public final boolean reportWarningAsError()
     {
         return warningAsError;
@@ -277,8 +166,6 @@ public class CompilerEnvirons
      * the body of the function.
      * Note that code generated without source is not fully ECMA
      * conformant.
-     *
-     * @param generatingSource a boolean.
      */
     public void setGeneratingSource(boolean generatingSource)
     {
@@ -286,8 +173,6 @@ public class CompilerEnvirons
     }
 
     /**
-     * <p>isGenerateObserverCount.</p>
-     *
      * @return true iff code will be generated with callbacks to enable
      * instruction thresholds
      */
@@ -303,7 +188,6 @@ public class CompilerEnvirons
      * be counted toward instruction thresholds. Rhino's interpretive
      * mode does instruction counting without inserting callbacks, so
      * there is no requirement to compile code differently.
-     *
      * @param generateObserverCount if true, generated code will contain
      * calls to accumulate an estimate of the instructions executed.
      */
@@ -311,38 +195,18 @@ public class CompilerEnvirons
         this.generateObserverCount = generateObserverCount;
     }
 
-    /**
-     * <p>isRecordingComments.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isRecordingComments() {
         return recordingComments;
     }
 
-    /**
-     * <p>Setter for the field recordingComments.</p>
-     *
-     * @param record a boolean.
-     */
     public void setRecordingComments(boolean record) {
         recordingComments = record;
     }
 
-    /**
-     * <p>isRecordingLocalJsDocComments.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isRecordingLocalJsDocComments() {
         return recordingLocalJsDocComments;
     }
 
-    /**
-     * <p>Setter for the field recordingLocalJsDocComments.</p>
-     *
-     * @param record a boolean.
-     */
     public void setRecordingLocalJsDocComments(boolean record) {
         recordingLocalJsDocComments = record;
     }
@@ -351,18 +215,11 @@ public class CompilerEnvirons
      * Turn on or off full error recovery.  In this mode, parse errors do not
      * throw an exception, and the parser attempts to build a full syntax tree
      * from the input.  Useful for IDEs and other frontends.
-     *
-     * @param recover a boolean.
      */
     public void setRecoverFromErrors(boolean recover) {
         recoverFromErrors = recover;
     }
 
-    /**
-     * <p>recoverFromErrors.</p>
-     *
-     * @return a boolean.
-     */
     public boolean recoverFromErrors() {
         return recoverFromErrors;
     }
@@ -370,54 +227,30 @@ public class CompilerEnvirons
     /**
      * Puts the parser in "IDE" mode.  This enables some slightly more expensive
      * computations, such as figuring out helpful error bounds.
-     *
-     * @param ide a boolean.
      */
     public void setIdeMode(boolean ide) {
         ideMode = ide;
     }
 
-    /**
-     * <p>isIdeMode.</p>
-     *
-     * @return a boolean.
-     */
     public boolean isIdeMode() {
         return ideMode;
     }
 
-    /**
-     * <p>Getter for the field activationNames.</p>
-     *
-     * @return a {@link java.util.Set} object.
-     */
     public Set<String> getActivationNames() {
         return activationNames;
     }
 
-    /**
-     * <p>Setter for the field activationNames.</p>
-     *
-     * @param activationNames a {@link java.util.Set} object.
-     */
     public void setActivationNames(Set<String> activationNames) {
         this.activationNames = activationNames;
     }
 
     /**
      * Mozilla sources use the C preprocessor.
-     *
-     * @param allow a boolean.
      */
     public void setAllowSharpComments(boolean allow) {
         allowSharpComments = allow;
     }
 
-    /**
-     * <p>Getter for the field allowSharpComments.</p>
-     *
-     * @return a boolean.
-     */
     public boolean getAllowSharpComments() {
         return allowSharpComments;
     }
@@ -425,9 +258,7 @@ public class CompilerEnvirons
     /**
      * Returns a {@code CompilerEnvirons} suitable for using Rhino
      * in an IDE environment.  Most features are enabled by default.
-     * The {@link org.mozilla.javascript.ErrorReporter} is set to an {@link org.mozilla.javascript.ast.ErrorCollector}.
-     *
-     * @return a {@link org.mozilla.javascript.CompilerEnvirons} object.
+     * The {@link ErrorReporter} is set to an {@link ErrorCollector}.
      */
     public static CompilerEnvirons ideEnvirons() {
         CompilerEnvirons env = new CompilerEnvirons();

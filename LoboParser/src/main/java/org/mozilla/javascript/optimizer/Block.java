@@ -19,11 +19,14 @@ import org.mozilla.javascript.ast.Jump;
 
 class Block
 {
+	
+	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(Block.class.getName());
 
     private static class FatBlock
     {
-    	        private static Block[] reduceToArray(ObjToIntMap map)
+
+        private static Block[] reduceToArray(ObjToIntMap map)
         {
             Block[] result = null;
             if (!map.isEmpty()) {

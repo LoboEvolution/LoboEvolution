@@ -39,14 +39,12 @@ final class NativeDate extends IdScriptableObject
     {
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Date";
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getDefaultValue(Class<?> typeHint)
     {
@@ -60,7 +58,6 @@ final class NativeDate extends IdScriptableObject
         return date;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -73,7 +70,6 @@ final class NativeDate extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -132,7 +128,6 @@ final class NativeDate extends IdScriptableObject
         initPrototypeMethod(DATE_TAG, id, s, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -374,7 +369,7 @@ final class NativeDate extends IdScriptableObject
                 return js_toISOString(t);
             }
             String msg = ScriptRuntime.getMessage0("msg.invalid.date");
-            throw ScriptRuntime.constructError("RangeError", msg);
+            throw ScriptRuntime.rangeError(msg);
 
           default: throw new IllegalArgumentException(String.valueOf(id));
         }
@@ -779,8 +774,8 @@ final class NativeDate extends IdScriptableObject
      * 15.9.1.15 Date Time String Format<br>
      * Parse input string according to simplified ISO-8601 Extended Format:
      * <ul>
-     * <li>YYYY-MM-DD'T'HH:mm:ss.sss'Z'</li>
-     * <li>or YYYY-MM-DD'T'HH:mm:ss.sss[+-]hh:mm</li>
+     * <li><code>YYYY-MM-DD'T'HH:mm:ss.sss'Z'</code></li>
+     * <li>or <code>YYYY-MM-DD'T'HH:mm:ss.sss[+-]hh:mm</code></li>
      * </ul>
      */
     private static double parseISOString(String s) {
@@ -1579,7 +1574,6 @@ final class NativeDate extends IdScriptableObject
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

@@ -22,7 +22,7 @@ import org.mozilla.javascript.Token;
  * as IDEs or pretty-printers.  The parser must not rewrite the parse tree
  * when producing this representation. <p>
  *
- * The {@code AstNode} hierarchy sits atop the older {@link org.mozilla.javascript.Node} class,
+ * The {@code AstNode} hierarchy sits atop the older {@link Node} class,
  * which was designed for code generation.  The {@code Node} class is a
  * flexible, weakly-typed class suitable for creating and rewriting code
  * trees, but using it requires you to remember the exact ordering of the
@@ -60,9 +60,6 @@ import org.mozilla.javascript.Token;
  * This hierarchy does not have separate branches for expressions and
  * statements, as the distinction in JavaScript is not as clear-cut as in
  * Java or C++.
- *
- * @author utente
- * @version $Id: $Id
  */
 public abstract class AstNode extends Node implements Comparable<AstNode> {
 
@@ -147,16 +144,12 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
         }
     }
 
-    /**
-     * <p>Constructor for AstNode.</p>
-     */
     public AstNode() {
         super(Token.ERROR);
     }
 
     /**
      * Constructs a new AstNode
-     *
      * @param pos the start position
      */
     public AstNode(int pos) {
@@ -166,7 +159,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Constructs a new AstNode
-     *
      * @param pos the start position
      * @param len the number of characters spanned by the node in the source
      * text
@@ -179,8 +171,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Returns relative position in parent
-     *
-     * @return a int.
      */
     public int getPosition() {
         return position;
@@ -188,8 +178,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Sets relative position in parent
-     *
-     * @param position a int.
      */
     public void setPosition(int position) {
         this.position = position;
@@ -199,8 +187,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
      * Returns the absolute document position of the node.
      * Computes it by adding the node's relative position
      * to the relative positions of all its parents.
-     *
-     * @return a int.
      */
     public int getAbsolutePosition() {
         int pos = position;
@@ -214,8 +200,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Returns node length
-     *
-     * @return a int.
      */
     public int getLength() {
         return length;
@@ -223,8 +207,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Sets node length
-     *
-     * @param length a int.
      */
     public void setLength(int length) {
         this.length = length;
@@ -233,9 +215,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Sets the node start and end positions.
      * Computes the length as ({@code end} - {@code position}).
-     *
-     * @param position a int.
-     * @param end a int.
      */
     public void setBounds(int position, int end) {
         setPosition(position);
@@ -245,7 +224,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Make this node's position relative to a parent.
      * Typically only used by the parser when constructing the node.
-     *
      * @param parentPosition the absolute parent position; the
      * current node position is assumed to be absolute and is
      * decremented by parentPosition.
@@ -256,8 +234,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Returns the node parent, or {@code null} if it has none
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getParent() {
         return parent;
@@ -266,7 +242,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Sets the node parent.  This method automatically adjusts the
      * current node's start position to be relative to the new parent.
-     *
      * @param parent the new parent. Can be {@code null}.
      */
     public void setParent(AstNode parent) {
@@ -290,9 +265,8 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
      * Sets the parent of the child to this node, and fixes up
      * the start position of the child to be relative to this node.
      * Sets the length of this node to include the new child.
-     *
      * @param kid the child
-     * @throws java.lang.IllegalArgumentException if kid is {@code null}
+     * @throws IllegalArgumentException if kid is {@code null}
      */
     public void addChild(AstNode kid) {
         assertNotNull(kid);
@@ -304,8 +278,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Returns the root of the tree containing this node.
-     *
-     * @return the {@link org.mozilla.javascript.ast.AstRoot} at the root of this node's parent
+     * @return the {@link AstRoot} at the root of this node's parent
      * chain, or {@code null} if the topmost parent is not an {@code AstRoot}.
      */
     public AstRoot getAstRoot() {
@@ -329,14 +302,11 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
      *
      * @param depth the current recursion depth, typically beginning at 0
      * when called on the root node.
-     * @return a {@link java.lang.String} object.
      */
     public abstract String toSource(int depth);
 
     /**
      * Prints the source indented to depth 0.
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String toSource() {
         return this.toSource(0);
@@ -344,9 +314,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Constructs an indentation string.
-     *
      * @param indent the number of indentation steps
-     * @return a {@link java.lang.String} object.
      */
     public String makeIndent(int indent) {
         StringBuilder sb = new StringBuilder();
@@ -359,8 +327,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Returns a short, descriptive name for the node, such as
      * "ArrayComprehension".
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String shortName() {
         String classname = getClass().getName();
@@ -370,8 +336,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Returns the string name for this operator.
-     *
-     * @param op the token type, e.g. {@link org.mozilla.javascript.Token#ADD} or {@link org.mozilla.javascript.Token#TYPEOF}
+     * @param op the token type, e.g. {@link Token#ADD} or {@link Token#TYPEOF}
      * @return the source operator string, such as "+" or "typeof"
      */
     public static String operatorToString(int op) {
@@ -401,7 +366,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     public abstract void visit(NodeVisitor visitor);
 
     // subclasses with potential side effects should override this
-    /** {@inheritDoc} */
     @Override
     public boolean hasSideEffects()
     {
@@ -473,6 +437,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
           case Token.WITH:
           case Token.WITHEXPR:
           case Token.YIELD:
+          case Token.YIELD_STAR:
             return true;
 
           default:
@@ -482,9 +447,8 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
 
     /**
      * Bounces an IllegalArgumentException up if arg is {@code null}.
-     *
      * @param arg any method argument
-     * @throws java.lang.IllegalArgumentException if the argument is {@code null}
+     * @throws IllegalArgumentException if the argument is {@code null}
      */
     protected void assertNotNull(Object arg) {
         if (arg == null)
@@ -492,11 +456,9 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Prints a comma-separated item list into a {@link java.lang.StringBuilder}.
-     *
+     * Prints a comma-separated item list into a {@link StringBuilder}.
      * @param items a list to print
-     * @param sb a {@link java.lang.StringBuilder} into which to print
-     * @param <T> a T object.
+     * @param sb a {@link StringBuilder} into which to print
      */
     protected <T extends AstNode> void printList(List<T> items,
                                                  StringBuilder sb) {
@@ -513,11 +475,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * <p>codeBug.</p>
-     *
      * @see Kit#codeBug
-     * @return a {@link java.lang.RuntimeException} object.
-     * @throws java.lang.RuntimeException if any.
      */
     public static RuntimeException codeBug()
         throws RuntimeException
@@ -540,8 +498,7 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Returns the innermost enclosing function, or {@code null} if not in a
      * function.  Begins the search with this node's parent.
-     *
-     * @return the {@link org.mozilla.javascript.ast.FunctionNode} enclosing this node, else {@code null}
+     * @return the {@link FunctionNode} enclosing this node, else {@code null}
      */
     public FunctionNode getEnclosingFunction() {
         AstNode parent = this.getParent();
@@ -552,11 +509,11 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * Returns the innermost enclosing {@link org.mozilla.javascript.ast.Scope} node, or {@code null}
+     * Returns the innermost enclosing {@link Scope} node, or {@code null}
      * if we're not nested in a scope.  Begins the search with this node's parent.
-     * Note that this is not the same as the defining scope for a {@link org.mozilla.javascript.ast.Name}.
+     * Note that this is not the same as the defining scope for a {@link Name}.
      *
-     * @return the {@link org.mozilla.javascript.ast.Scope} enclosing this node, else {@code null}
+     * @return the {@link Scope} enclosing this node, else {@code null}
      */
     public Scope getEnclosingScope() {
         AstNode parent = this.getParent();
@@ -567,12 +524,15 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Permits AST nodes to be sorted based on start position and length.
      * This makes it easy to sort Comment and Error nodes into a set of
      * other AST nodes:  just put them all into a {@link java.util.SortedSet},
      * for instance.
+     * @param other another node
+     * @return -1 if this node's start position is less than {@code other}'s
+     * start position.  If tied, -1 if this node's length is less than
+     * {@code other}'s length.  If the lengths are equal, sorts abitrarily
+     * on hashcode unless the nodes are the same per {@link #equals}.
      */
     @Override
     public int compareTo(AstNode other) {
@@ -591,7 +551,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Returns the depth of this node.  The root is depth 0, its
      * children are depth 1, and so on.
-     *
      * @return the node depth in the tree
      */
     public int depth() {
@@ -608,7 +567,8 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
         public String toString() {
             return buffer.toString();
         }
-        private String makeIndent(int depth) {
+
+        private static String makeIndent(int depth) {
             StringBuilder sb = new StringBuilder(DEBUG_INDENT * depth);
             for (int i = 0; i < (DEBUG_INDENT * depth); i++) {
                 sb.append(" ");
@@ -636,10 +596,9 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Return the line number recorded for this node.
      * If no line number was recorded, searches the parent chain.
+     * @return the nearest line number, or -1 if none was found
      */
     @Override
     public int getLineno() {
@@ -653,7 +612,6 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
     /**
      * Returns a debugging representation of the parse tree
      * starting at this node.
-     *
      * @return a very verbose indented printout of the tree.
      * The format of each line is:  abs-pos  name position length [identifier]
      */
@@ -663,20 +621,10 @@ public abstract class AstNode extends Node implements Comparable<AstNode> {
         return dpv.toString();
     }
 
-    /**
-     * <p>Getter for the field inlineComment.</p>
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public AstNode getInlineComment() {
         return inlineComment;
     }
 
-    /**
-     * <p>Setter for the field inlineComment.</p>
-     *
-     * @param inlineComment a {@link org.mozilla.javascript.ast.AstNode} object.
-     */
     public void setInlineComment(AstNode inlineComment) {
         this.inlineComment = inlineComment;
     }

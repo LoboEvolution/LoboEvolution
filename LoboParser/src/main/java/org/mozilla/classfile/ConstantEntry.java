@@ -22,13 +22,11 @@ final class ConstantEntry {
     hashcode = type ^ intval + str1.hashCode() * str2.hashCode();
   }
 
-  /** {@inheritDoc} */
   @Override
   public int hashCode() {
     return hashcode;
   }
 
-  /** {@inheritDoc} */
   @Override
   public boolean equals(Object obj) {
     if (!(obj instanceof ConstantEntry)) {

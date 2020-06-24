@@ -9,9 +9,7 @@ package org.mozilla.javascript;
 /**
  * The class for results of the Function.bind operation
  * EcmaScript 5 spec, 15.3.4.5
- *
  * @author Raphael Speyer
- * @version $Id: $Id
  */
 public class BoundFunction extends BaseFunction {
 
@@ -22,15 +20,6 @@ public class BoundFunction extends BaseFunction {
   private final Object[] boundArgs;
   private final int length;
 
-  /**
-   * <p>Constructor for BoundFunction.</p>
-   *
-   * @param cx a {@link org.mozilla.javascript.Context} object.
-   * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-   * @param targetFunction a {@link org.mozilla.javascript.Callable} object.
-   * @param boundThis a {@link org.mozilla.javascript.Scriptable} object.
-   * @param boundArgs an array of {@link java.lang.Object} objects.
-   */
   public BoundFunction(Context cx, Scriptable scope, Callable targetFunction, Scriptable boundThis,
                        Object[] boundArgs)
   {
@@ -49,15 +38,14 @@ public class BoundFunction extends BaseFunction {
     NativeObject throwing = new NativeObject();
     throwing.put("get", throwing, thrower);
     throwing.put("set", throwing, thrower);
-    throwing.put("enumerable", throwing, false);
-    throwing.put("configurable", throwing, false);
+    throwing.put("enumerable", throwing, Boolean.FALSE);
+    throwing.put("configurable", throwing, Boolean.FALSE);
     throwing.preventExtensions();
 
     this.defineOwnProperty(cx, "caller", throwing, false);
     this.defineOwnProperty(cx, "arguments", throwing, false);
   }
 
-  /** {@inheritDoc} */
   @Override
   public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] extraArgs)
   {
@@ -65,7 +53,6 @@ public class BoundFunction extends BaseFunction {
     return targetFunction.call(cx, scope, callThis, concat(boundArgs, extraArgs));
   }
 
-  /** {@inheritDoc} */
   @Override
   public Scriptable construct(Context cx, Scriptable scope, Object[] extraArgs) {
     if (targetFunction instanceof Function) {
@@ -74,7 +61,6 @@ public class BoundFunction extends BaseFunction {
     throw ScriptRuntime.typeError0("msg.not.ctor");
   }
 
-  /** {@inheritDoc} */
   @Override
   public boolean hasInstance(Scriptable instance) {
     if (targetFunction instanceof Function) {
@@ -83,13 +69,12 @@ public class BoundFunction extends BaseFunction {
     throw ScriptRuntime.typeError0("msg.not.ctor");
   }
 
-  /** {@inheritDoc} */
   @Override
   public int getLength() {
     return length;
   }
 
-  private Object[] concat(Object[] first, Object[] second) {
+  private static Object[] concat(Object[] first, Object[] second) {
     Object[] args = new Object[first.length + second.length];
     System.arraycopy(first, 0, args, 0, first.length);
     System.arraycopy(second, 0, args, first.length, second.length);

@@ -9,12 +9,6 @@ package org.mozilla.javascript.typedarrays;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-/**
- * <p>NativeTypedArrayIterator class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public class NativeTypedArrayIterator<T>
     implements ListIterator<T>
 {
@@ -30,35 +24,30 @@ public class NativeTypedArrayIterator<T>
         this.position = start;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasNext()
     {
         return (position < view.length);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasPrevious()
     {
         return (position > 0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public int nextIndex()
     {
         return position;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int previousIndex()
     {
         return position - 1;
     }
 
-    /** {@inheritDoc} */
     @Override
     public T next()
     {
@@ -71,7 +60,6 @@ public class NativeTypedArrayIterator<T>
         throw new NoSuchElementException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public T previous()
     {
@@ -83,7 +71,6 @@ public class NativeTypedArrayIterator<T>
         throw new NoSuchElementException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void set(T t)
     {
@@ -93,14 +80,12 @@ public class NativeTypedArrayIterator<T>
         view.js_set(lastPosition, t);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void remove()
     {
         throw new UnsupportedOperationException();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void add(T t)
     {

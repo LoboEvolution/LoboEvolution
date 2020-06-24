@@ -20,12 +20,6 @@ import org.mozilla.javascript.ast.FunctionNode;
 import org.mozilla.javascript.ast.ScriptNode;
 import org.mozilla.javascript.debug.DebugFrame;
 
-/**
- * <p>Interpreter class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public final class Interpreter extends Icode implements Evaluator
 {
     // data for parsing
@@ -266,16 +260,16 @@ public final class Interpreter extends Icode implements Evaluator
             }
         }
 
-        private static boolean equals(CallFrame f1, CallFrame f2, EqualObjectGraphs equal) {
+        private static Boolean equals(CallFrame f1, CallFrame f2, EqualObjectGraphs equal) {
             // Iterative instead of recursive, as interpreter stack depth can
             // be larger than JVM stack depth.
             for(;;) {
                 if (f1 == f2) {
-                    return true;
+                    return Boolean.TRUE;
                 } else if (f1 == null || f2 == null) {
-                    return false;
+                    return Boolean.FALSE;
                 } else if (!f1.fieldsEqual(f2, equal)) {
-                    return false;
+                    return Boolean.FALSE;
                 } else {
                     f1 = f1.parentFrame;
                     f2 = f2.parentFrame;
@@ -380,7 +374,6 @@ public final class Interpreter extends Icode implements Evaluator
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object compile(CompilerEnvirons compilerEnv,
                           ScriptNode tree,
@@ -392,7 +385,6 @@ public final class Interpreter extends Icode implements Evaluator
         return itsData;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Script createScriptObject(Object bytecode, Object staticSecurityDomain)
     {
@@ -404,13 +396,11 @@ public final class Interpreter extends Icode implements Evaluator
                                                 staticSecurityDomain);
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setEvalScriptFlag(Script script) {
         ((InterpretedFunction)script).idata.evalScriptFlag = true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Function createFunctionObject(Context cx, Scriptable scope,
             Object bytecode, Object staticSecurityDomain)
@@ -565,8 +555,10 @@ public final class Interpreter extends Icode implements Evaluator
                 break;
               case Token.THROW :
               case Token.YIELD :
+              case Icode_YIELD_STAR :
               case Icode_GENERATOR :
               case Icode_GENERATOR_END :
+              case Icode_GENERATOR_RETURN :
               {
                 int line = getIndex(iCode, pc);
                 out.println(tname + " : " + line);
@@ -694,8 +686,10 @@ public final class Interpreter extends Icode implements Evaluator
         switch (bytecode) {
             case Token.THROW :
             case Token.YIELD:
+            case Icode_YIELD_STAR:
             case Icode_GENERATOR:
             case Icode_GENERATOR_END:
+            case Icode_GENERATOR_RETURN:
                 // source line
                 return 1 + 2;
 
@@ -792,7 +786,6 @@ public final class Interpreter extends Icode implements Evaluator
         return presentLines.getKeys();
     }
 
-    /** {@inheritDoc} */
     @Override
     public void captureStackInfo(RhinoException ex)
     {
@@ -849,7 +842,6 @@ public final class Interpreter extends Icode implements Evaluator
         ex.interpreterLineData = linePC;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getSourcePositionFromStack(Context cx, int[] linep)
     {
@@ -863,7 +855,6 @@ public final class Interpreter extends Icode implements Evaluator
         return idata.itsSourceFile;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getPatchedStack(RhinoException ex,
                                   String nativeStackTrace)
@@ -924,7 +915,6 @@ public final class Interpreter extends Icode implements Evaluator
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     public List<String> getScriptStack(RhinoException ex) {
         ScriptStackElement[][] stack = getScriptStackElements(ex);
@@ -942,12 +932,6 @@ public final class Interpreter extends Icode implements Evaluator
         return list;
     }
 
-    /**
-     * <p>getScriptStackElements.</p>
-     *
-     * @param ex a {@link org.mozilla.javascript.RhinoException} object.
-     * @return an array of {@link org.mozilla.javascript.ScriptStackElement} objects.
-     */
     public ScriptStackElement[][] getScriptStackElements(RhinoException ex)
     {
         if (ex.interpreterStackInfo == null) {
@@ -1039,16 +1023,6 @@ public final class Interpreter extends Icode implements Evaluator
         RuntimeException returnedException;
     }
 
-    /**
-     * <p>resumeGenerator.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param operation a int.
-     * @param savedState a {@link java.lang.Object} object.
-     * @param value a {@link java.lang.Object} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public static Object resumeGenerator(Context cx,
                                          Scriptable scope,
                                          int operation,
@@ -1073,15 +1047,6 @@ public final class Interpreter extends Icode implements Evaluator
       return result;
     }
 
-    /**
-     * <p>restartContinuation.</p>
-     *
-     * @param c a {@link org.mozilla.javascript.NativeContinuation} object.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param args an array of {@link java.lang.Object} objects.
-     * @return a {@link java.lang.Object} object.
-     */
     public static Object restartContinuation(NativeContinuation c, Context cx,
                                              Scriptable scope, Object[] args)
     {
@@ -1212,17 +1177,21 @@ switch (op) {
           frame.pc--; // we want to come back here when we resume
           CallFrame generatorFrame = captureFrameForGenerator(frame);
           generatorFrame.frozen = true;
-          NativeGenerator generator = new NativeGenerator(frame.scope,
-              generatorFrame.fnOrScript, generatorFrame);
-          frame.result = generator;
+          if (cx.getLanguageVersion() >= Context.VERSION_ES6) {
+            frame.result = new ES6Generator(frame.scope, generatorFrame.fnOrScript, generatorFrame);
+          } else {
+              frame.result = new NativeGenerator(frame.scope,
+                generatorFrame.fnOrScript, generatorFrame);
+          }
           break Loop;
         }
         // We are now resuming execution. Fall through to YIELD case.
     }
     // fall through...
-    case Token.YIELD: {
+    case Token.YIELD:
+    case Icode_YIELD_STAR: {
         if (!frame.frozen) {
-            return freezeGenerator(cx, frame, stackTop, generatorState);
+            return freezeGenerator(cx, frame, stackTop, generatorState, op == Icode_YIELD_STAR);
         }
         Object obj = thawGenerator(frame, stackTop, generatorState, op);
         if (obj != Scriptable.NOT_FOUND) {
@@ -1239,6 +1208,21 @@ switch (op) {
           NativeIterator.getStopIterationObject(frame.scope),
           frame.idata.itsSourceFile, sourceLine);
       break Loop;
+    }
+    case Icode_GENERATOR_RETURN: {
+        // throw StopIteration with the value of "return"
+        frame.frozen = true;
+        frame.result = stack[stackTop];
+        frame.resultDbl = sDbl[stackTop];
+        --stackTop;
+
+        NativeIterator.StopIteration si = new NativeIterator.StopIteration(
+           (frame.result == DOUBLE_MARK) ? frame.resultDbl : frame.result);
+
+        int sourceLine = getIndex(iCode, frame.pc);
+        generatorState.returnedException =
+            new JavaScriptException(si, frame.idata.itsSourceFile, sourceLine);
+        break Loop;
     }
     case Token.THROW: {
         Object value = stack[stackTop];
@@ -2856,7 +2840,8 @@ switch (op) {
 
     private static Object freezeGenerator(Context cx, CallFrame frame,
                                           int stackTop,
-                                          GeneratorState generatorState)
+                                          GeneratorState generatorState,
+                                          boolean yieldStar)
     {
           if (generatorState.operation == NativeGenerator.GENERATOR_CLOSE) {
               // Error: no yields when generator is closing
@@ -2869,9 +2854,13 @@ switch (op) {
           frame.savedStackTop = stackTop;
           frame.pc--; // we want to come back here when we resume
           ScriptRuntime.exitActivationFunction(cx);
-          return (frame.result != DOUBLE_MARK)
+          final Object result = (frame.result != DOUBLE_MARK)
               ? frame.result
               : ScriptRuntime.wrapNumber(frame.resultDbl);
+          if (yieldStar) {
+              return new ES6Generator.YieldStarResult(result);
+          }
+          return result;
     }
 
     private static Object thawGenerator(CallFrame frame, int stackTop,
@@ -2883,7 +2872,7 @@ switch (op) {
           frame.pc += 2; // skip line number data
           if (generatorState.operation == NativeGenerator.GENERATOR_THROW) {
               // processing a call to <generator>.throw(exception): must
-              // act as if exception was thrown from resumption point
+              // act as if exception was thrown from resumption point.
               return new JavaScriptException(generatorState.value,
                                                   frame.idata.itsSourceFile,
                                                   sourceLine);
@@ -2893,8 +2882,9 @@ switch (op) {
           }
           if (generatorState.operation != NativeGenerator.GENERATOR_SEND)
               throw Kit.codeBug();
-          if (op == Token.YIELD)
+          if ((op == Token.YIELD) || (op == Icode_YIELD_STAR)) {
               frame.stack[stackTop] = generatorState.value;
+          }
           return Scriptable.NOT_FOUND;
     }
 
@@ -3066,12 +3056,6 @@ switch (op) {
         frame.savedCallOp = 0;
     }
 
-    /**
-     * <p>captureContinuation.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @return a {@link org.mozilla.javascript.NativeContinuation} object.
-     */
     public static NativeContinuation captureContinuation(Context cx) {
         if (cx.lastInterpreterFrame == null ||
             !(cx.lastInterpreterFrame instanceof CallFrame))
@@ -3149,9 +3133,9 @@ switch (op) {
     private static boolean stack_boolean(CallFrame frame, int i)
     {
         Object x = frame.stack[i];
-        if (x == Boolean.TRUE) {
+        if (Boolean.TRUE.equals(x)) {
             return true;
-        } else if (x == Boolean.FALSE) {
+        } else if (Boolean.FALSE.equals(x)) {
             return false;
         } else if (x == UniqueTag.DOUBLE_MARK) {
             double d = frame.sDbl[i];
@@ -3161,8 +3145,6 @@ switch (op) {
         } else if (x instanceof Number) {
             double d = ((Number)x).doubleValue();
             return (!Double.isNaN(d) && d != 0.0);
-        } else if (x instanceof Boolean) {
-            return ((Boolean)x).booleanValue();
         } else {
             return ScriptRuntime.toBoolean(x);
         }

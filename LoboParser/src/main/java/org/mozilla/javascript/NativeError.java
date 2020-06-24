@@ -82,7 +82,6 @@ final class NativeError extends IdScriptableObject
         return obj;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void fillConstructorProperties(IdFunctionObject ctor)
     {
@@ -104,14 +103,12 @@ final class NativeError extends IdScriptableObject
         super.fillConstructorProperties(ctor);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "Error";
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -120,7 +117,6 @@ final class NativeError extends IdScriptableObject
         return toString instanceof String ? (String) toString : super.toString();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -135,7 +131,6 @@ final class NativeError extends IdScriptableObject
         initPrototypeMethod(ERROR_TAG, id, s, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -161,11 +156,6 @@ final class NativeError extends IdScriptableObject
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /**
-     * <p>Setter for the field stackProvider.</p>
-     *
-     * @param re a {@link org.mozilla.javascript.RhinoException} object.
-     */
     public void setStackProvider(RhinoException re) {
         // We go some extra miles to make sure the stack property is only
         // generated on demand, is cached after the first access, and is
@@ -179,12 +169,6 @@ final class NativeError extends IdScriptableObject
         }
     }
 
-    /**
-     * <p>getStackDelegated.</p>
-     *
-     * @param target a {@link org.mozilla.javascript.Scriptable} object.
-     * @return a {@link java.lang.Object} object.
-     */
     public Object getStackDelegated(Scriptable target) {
         if (stackProvider == null) {
             return NOT_FOUND;
@@ -219,12 +203,6 @@ final class NativeError extends IdScriptableObject
         return value;
     }
 
-    /**
-     * <p>setStackDelegated.</p>
-     *
-     * @param target a {@link org.mozilla.javascript.Scriptable} object.
-     * @param value a {@link java.lang.Object} object.
-     */
     public void setStackDelegated(Scriptable target, Object value) {
         target.delete("stack");
         stackProvider = null;
@@ -340,7 +318,6 @@ final class NativeError extends IdScriptableObject
                            ERROR_DELEGATE_GET_STACK, ERROR_DELEGATE_SET_STACK, 0);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

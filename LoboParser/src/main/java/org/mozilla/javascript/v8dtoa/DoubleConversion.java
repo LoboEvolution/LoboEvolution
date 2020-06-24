@@ -30,12 +30,6 @@
 
 package org.mozilla.javascript.v8dtoa;
 
-/**
- * <p>DoubleConversion class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public final class DoubleConversion {
     private static final long kSignMask = 0x8000000000000000L;
     private static final long kExponentMask = 0x7FF0000000000000L;
@@ -74,12 +68,6 @@ public final class DoubleConversion {
         return (d64 & kSignMask) == 0 ? 1 : -1;
     }
 
-    /**
-     * <p>doubleToInt32.</p>
-     *
-     * @param x a double.
-     * @return a int.
-     */
     public static int doubleToInt32(double x) {
         int i = (int) x;
         if ((double) i == x) {

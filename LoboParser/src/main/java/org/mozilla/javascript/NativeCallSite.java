@@ -10,10 +10,8 @@ package org.mozilla.javascript;
  * This class is used by the V8 extension "Error.prepareStackTrace." It is
  * passed to that function, which may then use it to format the stack as it sees
  * fit.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class NativeCallSite extends IdScriptableObject {
     private static final long serialVersionUID = 2688372752566593594L;
     private static final String CALLSITE_TAG = "CallSite";
@@ -43,14 +41,12 @@ public class NativeCallSite extends IdScriptableObject {
         this.element = elt;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return "CallSite";
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -77,7 +73,6 @@ public class NativeCallSite extends IdScriptableObject {
         initPrototypeMethod(CALLSITE_TAG, id, s, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -115,7 +110,6 @@ public class NativeCallSite extends IdScriptableObject {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString()
     {
@@ -180,7 +174,6 @@ public class NativeCallSite extends IdScriptableObject {
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

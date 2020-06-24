@@ -14,7 +14,6 @@ import org.mozilla.javascript.commonjs.module.ModuleScript;
  * and caches the loaded modules. It strongly references the loaded modules,
  * thus a module once loaded will not be eligible for garbage collection before
  * the module provider itself becomes eligible.
- *
  * @author Attila Szegedi
  * @version $Id: StrongCachingModuleScriptProvider.java,v 1.3 2011/04/07 20:26:12 hannes%helma.at Exp $
  */
@@ -25,7 +24,6 @@ public class StrongCachingModuleScriptProvider extends CachingModuleScriptProvid
 
     /**
      * Creates a new module provider with the specified module source provider.
-     *
      * @param moduleSourceProvider provider for modules' source code
      */
     public StrongCachingModuleScriptProvider(
@@ -34,13 +32,11 @@ public class StrongCachingModuleScriptProvider extends CachingModuleScriptProvid
         super(moduleSourceProvider);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected CachedModuleScript getLoadedModule(String moduleId) {
         return modules.get(moduleId);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void putLoadedModule(String moduleId, ModuleScript moduleScript,
             Object validator) {

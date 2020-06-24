@@ -9,32 +9,22 @@
 package org.mozilla.javascript;
 
 /**
- * <p>ContextListener interface.</p>
- *
  * @deprecated Embeddings that wish to customize newly created
- * {@link org.mozilla.javascript.Context} instances should implement
- * {@link org.mozilla.javascript.ContextFactory.Listener}.
- * @author utente
- * @version $Id: $Id
+ * {@link Context} instances should implement
+ * {@link ContextFactory.Listener}.
  */
 @Deprecated
 public interface ContextListener extends ContextFactory.Listener
 {
 
     /**
-     * <p>contextEntered.</p>
-     *
      * @deprecated Rhino runtime never calls the method.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
      */
     @Deprecated
     public void contextEntered(Context cx);
 
     /**
-     * <p>contextExited.</p>
-     *
      * @deprecated Rhino runtime never calls the method.
-     * @param cx a {@link org.mozilla.javascript.Context} object.
      */
     @Deprecated
     public void contextExited(Context cx);

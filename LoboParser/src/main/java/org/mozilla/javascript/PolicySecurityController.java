@@ -20,17 +20,15 @@ import org.mozilla.classfile.ByteCode;
 import org.mozilla.classfile.ClassFileWriter;
 
 /**
- * A security controller relying on Java {@link java.security.Policy} in effect. When you use
+ * A security controller relying on Java {@link Policy} in effect. When you use
  * this security controller, your securityDomain objects must be instances of
- * {@link java.security.CodeSource} representing the location from where you load your
+ * {@link CodeSource} representing the location from where you load your
  * scripts. Any Java policy "grant" statements matching the URL and certificate
  * in code sources will apply to the scripts. If you specify any certificates
- * within your {@link java.security.CodeSource} objects, it is your responsibility to verify
+ * within your {@link CodeSource} objects, it is your responsibility to verify
  * (or not) that the script source files are signed in whatever
  * implementation-specific way you're using.
- *
  * @author Attila Szegedi
- * @version $Id: $Id
  */
 public class PolicySecurityController extends SecurityController
 {
@@ -44,7 +42,6 @@ public class PolicySecurityController extends SecurityController
         callers =
             new WeakHashMap<CodeSource,Map<ClassLoader,SoftReference<SecureCaller>>>();
 
-    /** {@inheritDoc} */
     @Override
     public Class<?> getStaticSecurityDomainClassInternal() {
         return CodeSource.class;
@@ -74,7 +71,6 @@ public class PolicySecurityController extends SecurityController
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public GeneratedClassLoader createClassLoader(final ClassLoader parent,
             final Object securityDomain)
@@ -90,7 +86,6 @@ public class PolicySecurityController extends SecurityController
             });
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object getDynamicSecurityDomain(Object securityDomain)
     {
@@ -99,7 +94,6 @@ public class PolicySecurityController extends SecurityController
         return securityDomain;
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object callWithDomain(final Object securityDomain, final Context cx,
             Callable callable, Scriptable scope, Scriptable thisObj,

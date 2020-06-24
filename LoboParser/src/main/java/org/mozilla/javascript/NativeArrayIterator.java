@@ -6,12 +6,6 @@
 
 package org.mozilla.javascript;
 
-/**
- * <p>NativeArrayIterator class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public final class NativeArrayIterator extends ES6Iterator {
     public enum ARRAY_ITERATOR_TYPE {
             ENTRIES,
@@ -35,13 +29,6 @@ public final class NativeArrayIterator extends ES6Iterator {
         super();
     }
 
-    /**
-     * <p>Constructor for NativeArrayIterator.</p>
-     *
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param arrayLike a {@link org.mozilla.javascript.Scriptable} object.
-     * @param type a {@link org.mozilla.javascript.NativeArrayIterator.ARRAY_ITERATOR_TYPE} object.
-     */
     public NativeArrayIterator(Scriptable scope, Scriptable arrayLike, ARRAY_ITERATOR_TYPE type) {
         super(scope, ITERATOR_TAG);
         this.index = 0;
@@ -49,19 +36,16 @@ public final class NativeArrayIterator extends ES6Iterator {
         this.type = type;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Array Iterator";
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean isDone(Context cx, Scriptable scope) {
         return index >= NativeArray.getLengthProperty(cx, arrayLike, false);
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object nextValue(Context cx, Scriptable scope) {
         if (type == ARRAY_ITERATOR_TYPE.KEYS) {
@@ -81,7 +65,6 @@ public final class NativeArrayIterator extends ES6Iterator {
         return value;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected String getTag() {
         return ITERATOR_TAG;

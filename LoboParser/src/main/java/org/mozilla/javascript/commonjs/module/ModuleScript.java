@@ -10,10 +10,9 @@ import java.net.URI;
 import org.mozilla.javascript.Script;
 
 /**
- * Represents a compiled CommonJS module script. The {@link org.mozilla.javascript.commonjs.module.Require} functions
- * use them and obtain them through a {@link org.mozilla.javascript.commonjs.module.ModuleScriptProvider}. Instances
+ * Represents a compiled CommonJS module script. The {@link Require} functions
+ * use them and obtain them through a {@link ModuleScriptProvider}. Instances
  * are immutable.
- *
  * @author Attila Szegedi
  * @version $Id: ModuleScript.java,v 1.3 2011/04/07 20:26:11 hannes%helma.at Exp $
  */
@@ -25,7 +24,6 @@ public class ModuleScript implements Serializable {
 
     /**
      * Creates a new CommonJS module.
-     *
      * @param script the script representing the code of the module.
      * @param uri the URI of the module.
      * @param base the base URI, or null.
@@ -38,7 +36,6 @@ public class ModuleScript implements Serializable {
 
     /**
      * Returns the script object representing the code of the module.
-     *
      * @return the script object representing the code of the module.
      */
     public Script getScript(){
@@ -47,7 +44,6 @@ public class ModuleScript implements Serializable {
 
     /**
      * Returns the URI of the module.
-     *
      * @return the URI of the module.
      */
     public URI getUri() {
@@ -57,7 +53,6 @@ public class ModuleScript implements Serializable {
     /**
      * Returns the base URI from which this module source was loaded, or null
      * if it was loaded from an absolute URI.
-     *
      * @return the base URI, or null.
      */
     public URI getBase() {
@@ -67,7 +62,6 @@ public class ModuleScript implements Serializable {
     /**
      * Returns true if this script has a base URI and has a source URI that
      * is contained within that base URI.
-     *
      * @return true if this script is contained within its sandbox base URI.
      */
     public boolean isSandboxed() {

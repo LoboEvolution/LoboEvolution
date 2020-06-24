@@ -6,12 +6,6 @@ package org.mozilla.javascript;
 
 import java.util.Comparator;
 
-/**
- * <p>Sorting class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public final class Sorting {
     private static final int SMALLSORT = 16;
 
@@ -19,21 +13,10 @@ public final class Sorting {
 
     private Sorting() {}
 
-    /**
-     * <p>get.</p>
-     *
-     * @return a {@link org.mozilla.javascript.Sorting} object.
-     */
     public static Sorting get() {
         return sorting;
     }
 
-    /**
-     * <p>insertionSort.</p>
-     *
-     * @param a an array of {@link java.lang.Object} objects.
-     * @param cmp a {@link java.util.Comparator} object.
-     */
     public void insertionSort(Object[] a, Comparator<Object> cmp)
     {
         insertionSort(a, 0, a.length - 1, cmp);
@@ -60,12 +43,6 @@ public final class Sorting {
     recursion is too deep, and then use insertion sort for the rest.
     This is the same basic algorithm used by the GNU Standard C++ library.
     */
-    /**
-     * <p>hybridSort.</p>
-     *
-     * @param a an array of {@link java.lang.Object} objects.
-     * @param cmp a {@link java.util.Comparator} object.
-     */
     public void hybridSort(Object[] a, Comparator<Object> cmp)
     {
         hybridSort(a, 0, a.length - 1, cmp, log2(a.length) * 2);
@@ -136,15 +113,6 @@ public final class Sorting {
     Return the index of the median of three elements in the specified array range -- the
     first, the last, and the one in the middle.
     */
-    /**
-     * <p>median.</p>
-     *
-     * @param a an array of {@link java.lang.Object} objects.
-     * @param start a int.
-     * @param end a int.
-     * @param cmp a {@link java.util.Comparator} object.
-     * @return a int.
-     */
     public int median(final Object[] a, int start, int end, Comparator<Object> cmp)
     {
         final int m = start + ((end - start) / 2);

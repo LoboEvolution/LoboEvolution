@@ -11,9 +11,6 @@ import org.mozilla.javascript.Token;
 
 /**
  * Represents a symbol-table entry.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class Symbol {
 
@@ -25,18 +22,13 @@ public class Symbol {
     private Node node;
     private Scope containingTable;
 
-    /**
-     * <p>Constructor for Symbol.</p>
-     */
     public Symbol() {
     }
 
     /**
      * Constructs a new Symbol with a specific name and declaration type
-     *
-     * @param declType {@link org.mozilla.javascript.Token#FUNCTION}, {@link org.mozilla.javascript.Token#LP}
-     * (for params), {@link org.mozilla.javascript.Token#VAR}, {@link org.mozilla.javascript.Token#LET} or {@link org.mozilla.javascript.Token#CONST}
-     * @param name a {@link java.lang.String} object.
+     * @param declType {@link Token#FUNCTION}, {@link Token#LP}
+     * (for params), {@link Token#VAR}, {@link Token#LET} or {@link Token#CONST}
      */
     public Symbol(int declType, String name) {
         setName(name);
@@ -45,8 +37,6 @@ public class Symbol {
 
     /**
      * Returns symbol declaration type
-     *
-     * @return a int.
      */
     public int getDeclType() {
         return declType;
@@ -54,8 +44,6 @@ public class Symbol {
 
     /**
      * Sets symbol declaration type
-     *
-     * @param declType a int.
      */
     public void setDeclType(int declType) {
         if (!(declType == Token.FUNCTION
@@ -69,8 +57,6 @@ public class Symbol {
 
     /**
      * Returns symbol name
-     *
-     * @return a {@link java.lang.String} object.
      */
     public String getName() {
         return name;
@@ -78,8 +64,6 @@ public class Symbol {
 
     /**
      * Sets symbol name
-     *
-     * @param name a {@link java.lang.String} object.
      */
     public void setName(String name) {
         this.name = name;
@@ -87,8 +71,6 @@ public class Symbol {
 
     /**
      * Returns the node associated with this identifier
-     *
-     * @return a {@link org.mozilla.javascript.Node} object.
      */
     public Node getNode() {
         return node;
@@ -96,8 +78,6 @@ public class Symbol {
 
     /**
      * Returns symbol's index in its scope
-     *
-     * @return a int.
      */
     public int getIndex() {
         return index;
@@ -105,8 +85,6 @@ public class Symbol {
 
     /**
      * Sets symbol's index in its scope
-     *
-     * @param index a int.
      */
     public void setIndex(int index) {
         this.index = index;
@@ -114,8 +92,6 @@ public class Symbol {
 
     /**
      * Sets the node associated with this identifier
-     *
-     * @param node a {@link org.mozilla.javascript.Node} object.
      */
     public void setNode(Node node) {
         this.node = node;
@@ -123,8 +99,6 @@ public class Symbol {
 
     /**
      * Returns the Scope in which this symbol is entered
-     *
-     * @return a {@link org.mozilla.javascript.ast.Scope} object.
      */
     public Scope getContainingTable() {
         return containingTable;
@@ -132,23 +106,15 @@ public class Symbol {
 
     /**
      * Sets this symbol's Scope
-     *
-     * @param containingTable a {@link org.mozilla.javascript.ast.Scope} object.
      */
     public void setContainingTable(Scope containingTable) {
         this.containingTable = containingTable;
     }
 
-    /**
-     * <p>getDeclTypeName.</p>
-     *
-     * @return a {@link java.lang.String} object.
-     */
     public String getDeclTypeName() {
         return Token.typeToName(declType);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();

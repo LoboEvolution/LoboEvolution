@@ -20,38 +20,23 @@ import org.mozilla.javascript.ast.ScriptNode;
  *
  * @see Node
  * @author Norris Boyd
- * @version $Id: $Id
  */
+
 public class NodeTransformer
 {
-
-	private static final Logger logger = Logger.getLogger(NodeTransformer.class.getName());
 	
-    /**
-     * <p>Constructor for NodeTransformer.</p>
-     */
+	/** The Constant logger. */
+	private static final Logger logger = Logger.getLogger(NodeTransformer.class.getName());
+
     public NodeTransformer()
     {
     }
 
-    /**
-     * <p>transform.</p>
-     *
-     * @param tree a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     * @param env a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     */
     public final void transform(ScriptNode tree, CompilerEnvirons env)
     {
         transform(tree, false, env);
     }
 
-    /**
-     * <p>transform.</p>
-     *
-     * @param tree a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     * @param inStrictMode a boolean.
-     * @param env a {@link org.mozilla.javascript.CompilerEnvirons} object.
-     */
     public final void transform(ScriptNode tree, boolean inStrictMode, CompilerEnvirons env)
     {
         boolean useStrictMode = inStrictMode;
@@ -173,6 +158,7 @@ public class NodeTransformer
                 break;
 
               case Token.YIELD:
+              case Token.YIELD_STAR:
                 ((FunctionNode)tree).addResumptionPoint(node);
                 break;
 
@@ -430,33 +416,12 @@ public class NodeTransformer
         }
     }
 
-    /**
-     * <p>visitNew.</p>
-     *
-     * @param node a {@link org.mozilla.javascript.Node} object.
-     * @param tree a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     */
     protected void visitNew(Node node, ScriptNode tree) {
     }
 
-    /**
-     * <p>visitCall.</p>
-     *
-     * @param node a {@link org.mozilla.javascript.Node} object.
-     * @param tree a {@link org.mozilla.javascript.ast.ScriptNode} object.
-     */
     protected void visitCall(Node node, ScriptNode tree) {
     }
 
-    /**
-     * <p>visitLet.</p>
-     *
-     * @param createWith a boolean.
-     * @param parent a {@link org.mozilla.javascript.Node} object.
-     * @param previous a {@link org.mozilla.javascript.Node} object.
-     * @param scopeNode a {@link org.mozilla.javascript.Node} object.
-     * @return a {@link org.mozilla.javascript.Node} object.
-     */
     protected Node visitLet(boolean createWith, Node parent, Node previous,
                             Node scopeNode)
     {

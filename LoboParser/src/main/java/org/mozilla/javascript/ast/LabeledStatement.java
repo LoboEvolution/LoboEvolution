@@ -14,12 +14,9 @@ import org.mozilla.javascript.Token;
 /**
  * A labeled statement.  A statement can have more than one label.  In
  * this AST representation, all labels for a statement are collapsed into
- * the "labels" list of a single {@link org.mozilla.javascript.ast.LabeledStatement} node.
+ * the "labels" list of a single {@link LabeledStatement} node.
  *
- * <p>Node type is {@link org.mozilla.javascript.Token#EXPR_VOID}.</p>
- *
- * @author utente
- * @version $Id: $Id
+ * <p>Node type is {@link Token#EXPR_VOID}.</p>
  */
 public class LabeledStatement extends AstNode {
 
@@ -30,35 +27,19 @@ public class LabeledStatement extends AstNode {
         type = Token.EXPR_VOID;
     }
 
-    /**
-     * <p>Constructor for LabeledStatement.</p>
-     */
     public LabeledStatement() {
     }
 
-    /**
-     * <p>Constructor for LabeledStatement.</p>
-     *
-     * @param pos a int.
-     */
     public LabeledStatement(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for LabeledStatement.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public LabeledStatement(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns label list
-     *
-     * @return a {@link java.util.List} object.
      */
     public List<Label> getLabels() {
         return labels;
@@ -67,9 +48,7 @@ public class LabeledStatement extends AstNode {
     /**
      * Sets label list, setting the parent of each label
      * in the list.  Replaces any existing labels.
-     *
-     * @throws java.lang.IllegalArgumentException} if labels is {@code null}
-     * @param labels a {@link java.util.List} object.
+     * @throws IllegalArgumentException} if labels is {@code null}
      */
     public void setLabels(List<Label> labels) {
         assertNotNull(labels);
@@ -82,9 +61,7 @@ public class LabeledStatement extends AstNode {
 
     /**
      * Adds a label and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException} if label is {@code null}
-     * @param label a {@link org.mozilla.javascript.ast.Label} object.
+     * @throws IllegalArgumentException} if label is {@code null}
      */
     public void addLabel(Label label) {
         assertNotNull(label);
@@ -94,8 +71,6 @@ public class LabeledStatement extends AstNode {
 
     /**
      * Returns the labeled statement
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getStatement() {
         return statement;
@@ -105,9 +80,6 @@ public class LabeledStatement extends AstNode {
      * Returns label with specified name from the label list for
      * this labeled statement.  Returns {@code null} if there is no
      * label with that name in the list.
-     *
-     * @param name a {@link java.lang.String} object.
-     * @return a {@link org.mozilla.javascript.ast.Label} object.
      */
     public Label getLabelByName(String name) {
         for (Label label : labels) {
@@ -120,9 +92,7 @@ public class LabeledStatement extends AstNode {
 
     /**
      * Sets the labeled statement, and sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException if {@code statement} is {@code null}
-     * @param statement a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException if {@code statement} is {@code null}
      */
     public void setStatement(AstNode statement) {
         assertNotNull(statement);
@@ -130,23 +100,16 @@ public class LabeledStatement extends AstNode {
         statement.setParent(this);
     }
 
-    /**
-     * <p>getFirstLabel.</p>
-     *
-     * @return a {@link org.mozilla.javascript.ast.Label} object.
-     */
     public Label getFirstLabel() {
         return labels.get(0);
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasSideEffects() {
         // just to avoid the default case for EXPR_VOID in AstNode
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder();
@@ -158,8 +121,6 @@ public class LabeledStatement extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then each label in the label-list, and finally the
      * statement.
      */

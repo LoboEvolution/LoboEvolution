@@ -9,9 +9,6 @@ package org.mozilla.javascript;
 /**
  * The class for  Arrow Function Definitions
  * EcmaScript 6 Rev 14, March 8, 2013 Draft spec , 13.2
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ArrowFunction extends BaseFunction {
 
@@ -20,14 +17,6 @@ public class ArrowFunction extends BaseFunction {
     private final Callable targetFunction;
     private final Scriptable boundThis;
 
-    /**
-     * <p>Constructor for ArrowFunction.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param targetFunction a {@link org.mozilla.javascript.Callable} object.
-     * @param boundThis a {@link org.mozilla.javascript.Scriptable} object.
-     */
     public ArrowFunction(Context cx, Scriptable scope, Callable targetFunction, Scriptable boundThis)
     {
         this.targetFunction = targetFunction;
@@ -39,15 +28,14 @@ public class ArrowFunction extends BaseFunction {
         NativeObject throwing = new NativeObject();
         throwing.put("get", throwing, thrower);
         throwing.put("set", throwing, thrower);
-        throwing.put("enumerable", throwing, false);
-        throwing.put("configurable", throwing, false);
+        throwing.put("enumerable", throwing, Boolean.FALSE);
+        throwing.put("configurable", throwing, Boolean.FALSE);
         throwing.preventExtensions();
 
         this.defineOwnProperty(cx, "caller", throwing, false);
         this.defineOwnProperty(cx, "arguments", throwing, false);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object call(Context cx, Scriptable scope, Scriptable thisObj, Object[] args)
     {
@@ -55,13 +43,11 @@ public class ArrowFunction extends BaseFunction {
         return targetFunction.call(cx, scope, callThis, args);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Scriptable construct(Context cx, Scriptable scope, Object[] args) {
         throw ScriptRuntime.typeError1("msg.not.ctor", decompile(0, 0));
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean hasInstance(Scriptable instance) {
         if (targetFunction instanceof Function) {
@@ -70,7 +56,6 @@ public class ArrowFunction extends BaseFunction {
         throw ScriptRuntime.typeError0("msg.not.ctor");
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getLength() {
         if (targetFunction instanceof BaseFunction) {
@@ -79,7 +64,6 @@ public class ArrowFunction extends BaseFunction {
         return 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int getArity() {
         return getLength();

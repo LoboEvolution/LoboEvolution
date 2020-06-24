@@ -13,19 +13,22 @@ import java.util.Iterator;
  * http://developer.mozilla.org/en/docs/New_in_JavaScript_1.7#Iterators
  *
  * @author Norris Boyd
- * @version $Id: $Id
  */
 public final class NativeIterator extends IdScriptableObject {
     private static final long serialVersionUID = -4136968203581667681L;
     private static final Object ITERATOR_TAG = "Iterator";
 
-    static void init(ScriptableObject scope, boolean sealed) {
+    static void init(Context cx, ScriptableObject scope, boolean sealed) {
         // Iterator
         NativeIterator iterator = new NativeIterator();
         iterator.exportAsJSClass(MAX_PROTOTYPE_ID, scope, sealed);
 
         // Generator
-        NativeGenerator.init(scope, sealed);
+        if (cx.getLanguageVersion() >= Context.VERSION_ES6) {
+            ES6Generator.init(scope, sealed);
+        } else {
+            NativeGenerator.init(scope, sealed);
+        }
 
         // StopIteration
         NativeObject obj = new StopIteration();
@@ -55,7 +58,6 @@ public final class NativeIterator extends IdScriptableObject {
      * is stored in the top-level scope using "associateValue" so the
      * value can still be found even if a script overwrites or deletes
      * the global "StopIteration" property.
-     *
      * @param scope a scope whose parent chain reaches a top-level scope
      * @return the StopIteration object
      */
@@ -65,11 +67,22 @@ public final class NativeIterator extends IdScriptableObject {
     }
 
     private static final String STOP_ITERATION = "StopIteration";
-    /** Constant ITERATOR_PROPERTY_NAME="__iterator__" */
     public static final String ITERATOR_PROPERTY_NAME = "__iterator__";
 
-    static class StopIteration extends NativeObject {
+    public static class StopIteration extends NativeObject {
         private static final long serialVersionUID = 2485151085722377663L;
+
+        private Object value = Undefined.instance;
+
+        public StopIteration() {}
+
+        public StopIteration(Object val) {
+            this.value = val;
+        }
+
+        public Object getValue() {
+            return value;
+        }
 
         @Override
         public String getClassName() {
@@ -85,13 +98,11 @@ public final class NativeIterator extends IdScriptableObject {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "Iterator";
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id) {
         String s;
@@ -105,7 +116,6 @@ public final class NativeIterator extends IdScriptableObject {
         initPrototypeMethod(ITERATOR_TAG, id, s, arity);
     }
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -240,7 +250,6 @@ public final class NativeIterator extends IdScriptableObject {
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s) {
         int id;

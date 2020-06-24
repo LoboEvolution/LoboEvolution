@@ -16,52 +16,31 @@ import org.mozilla.javascript.Undefined;
  * This class represents the JavaScript "DataView" interface, which allows direct manipulations of the
  * bytes in a NativeArrayBuffer. Java programmers would be best off getting the underling "byte[]" array
  * from the NativeArrayBuffer and manipulating it directly, perhaps using the "ByteIo" class as a helper.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public class NativeDataView
     extends NativeArrayBufferView
 {
     private static final long serialVersionUID = 1427967607557438968L;
 
-    /** Constant CLASS_NAME="DataView" */
     public static final String CLASS_NAME = "DataView";
 
-    /**
-     * <p>Constructor for NativeDataView.</p>
-     */
     public NativeDataView()
     {
         super();
     }
 
-    /**
-     * <p>Constructor for NativeDataView.</p>
-     *
-     * @param ab a {@link org.mozilla.javascript.typedarrays.NativeArrayBuffer} object.
-     * @param offset a int.
-     * @param length a int.
-     */
     public NativeDataView(NativeArrayBuffer ab, int offset, int length)
     {
         super(ab, offset, length);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName()
     {
         return CLASS_NAME;
     }
 
-    /**
-     * <p>init.</p>
-     *
-     * @param cx a {@link org.mozilla.javascript.Context} object.
-     * @param scope a {@link org.mozilla.javascript.Scriptable} object.
-     * @param sealed a boolean.
-     */
     public static void init(Context cx, Scriptable scope, boolean sealed)
     {
         NativeDataView dv = new NativeDataView();
@@ -73,7 +52,7 @@ public class NativeDataView
         if (isArg(args, 0)) {
             double doublePos = ScriptRuntime.toNumber(args[0]);
             if (Double.isInfinite(doublePos)) {
-                throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                throw ScriptRuntime.rangeError("offset out of range");
             }
             return ScriptRuntime.toInt32(doublePos);
         }
@@ -83,7 +62,7 @@ public class NativeDataView
     private void rangeCheck(int pos, int len)
     {
         if ((pos < 0) || ((pos + len) > byteLength)) {
-            throw ScriptRuntime.constructError("RangeError", "offset out of range");
+            throw ScriptRuntime.rangeError("offset out of range");
         }
     }
 
@@ -106,7 +85,7 @@ public class NativeDataView
         if (isArg(args, 1)) {
             double doublePos = ScriptRuntime.toNumber(args[1]);
             if (Double.isInfinite(doublePos)) {
-                throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                throw ScriptRuntime.rangeError("offset out of range");
             }
             pos = ScriptRuntime.toInt32(doublePos);
         } else {
@@ -117,7 +96,7 @@ public class NativeDataView
         if (isArg(args, 2)) {
             double doublePos = ScriptRuntime.toNumber(args[2]);
             if (Double.isInfinite(doublePos)) {
-                throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                throw ScriptRuntime.rangeError("offset out of range");
             }
             len = ScriptRuntime.toInt32(doublePos);
         } else {
@@ -125,10 +104,10 @@ public class NativeDataView
         }
 
         if (len < 0) {
-            throw ScriptRuntime.constructError("RangeError", "length out of range");
+            throw ScriptRuntime.rangeError("length out of range");
         }
         if ((pos < 0) || ((pos + len) > ab.getLength())) {
-            throw ScriptRuntime.constructError("RangeError", "offset out of range");
+            throw ScriptRuntime.rangeError("offset out of range");
         }
         return new NativeDataView(ab, pos, len);
     }
@@ -176,7 +155,7 @@ public class NativeDataView
     {
         int pos = determinePos(args);
         if (pos < 0) {
-            throw ScriptRuntime.constructError("RangeError", "offset out of range");
+            throw ScriptRuntime.rangeError("offset out of range");
         }
 
         boolean littleEndian = isArg(args, 2) && (bytes > 1) && ScriptRuntime.toBoolean(args[2]);
@@ -191,13 +170,13 @@ public class NativeDataView
             if (signed) {
                 int value = Conversions.toInt8(val);
                 if (pos + bytes > byteLength) {
-                    throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                    throw ScriptRuntime.rangeError("offset out of range");
                 }
                 ByteIo.writeInt8(arrayBuffer.buffer, offset + pos, value);
             } else {
                 int value = Conversions.toUint8(val);
                 if (pos + bytes > byteLength) {
-                    throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                    throw ScriptRuntime.rangeError("offset out of range");
                 }
                 ByteIo.writeUint8(arrayBuffer.buffer, offset + pos, value);
             }
@@ -206,13 +185,13 @@ public class NativeDataView
             if (signed) {
                 int value = Conversions.toInt16(val);
                 if (pos + bytes > byteLength) {
-                    throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                    throw ScriptRuntime.rangeError("offset out of range");
                 }
                 ByteIo.writeInt16(arrayBuffer.buffer, offset + pos, value, littleEndian);
             } else {
                 int value = Conversions.toUint16(val);
                 if (pos + bytes > byteLength) {
-                    throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                    throw ScriptRuntime.rangeError("offset out of range");
                 }
                 ByteIo.writeUint16(arrayBuffer.buffer, offset + pos, value, littleEndian);
             }
@@ -221,13 +200,13 @@ public class NativeDataView
             if (signed) {
                 int value = Conversions.toInt32(val);
                 if (pos + bytes > byteLength) {
-                    throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                    throw ScriptRuntime.rangeError("offset out of range");
                 }
                 ByteIo.writeInt32(arrayBuffer.buffer, offset + pos, value, littleEndian);
             } else {
                 long value = Conversions.toUint32(val);
                 if (pos + bytes > byteLength) {
-                    throw ScriptRuntime.constructError("RangeError", "offset out of range");
+                    throw ScriptRuntime.rangeError("offset out of range");
                 }
                 ByteIo.writeUint32(arrayBuffer.buffer, offset + pos, value, littleEndian);
             }
@@ -241,7 +220,7 @@ public class NativeDataView
     {
         int pos = determinePos(args);
         if (pos < 0) {
-            throw ScriptRuntime.constructError("RangeError", "offset out of range");
+            throw ScriptRuntime.rangeError("offset out of range");
         }
 
         boolean littleEndian = isArg(args, 2) && (bytes > 1) && ScriptRuntime.toBoolean(args[2]);
@@ -252,7 +231,7 @@ public class NativeDataView
         }
 
         if (pos + bytes > byteLength) {
-            throw ScriptRuntime.constructError("RangeError", "offset out of range");
+            throw ScriptRuntime.rangeError("offset out of range");
         }
 
         switch (bytes) {
@@ -269,7 +248,6 @@ public class NativeDataView
 
     // Function dispatcher
 
-    /** {@inheritDoc} */
     @Override
     public Object execIdCall(IdFunctionObject f, Context cx, Scriptable scope,
                              Scriptable thisObj, Object[] args)
@@ -325,7 +303,6 @@ public class NativeDataView
         throw new IllegalArgumentException(String.valueOf(id));
     }
 
-    /** {@inheritDoc} */
     @Override
     protected void initPrototypeId(int id)
     {
@@ -356,7 +333,6 @@ public class NativeDataView
 
 // #string_id_map#
 
-    /** {@inheritDoc} */
     @Override
     protected int findPrototypeId(String s)
     {

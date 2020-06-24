@@ -6,12 +6,6 @@
 
 package org.mozilla.javascript;
 
-/**
- * <p>NativeStringIterator class.</p>
- *
- * @author utente
- * @version $Id: $Id
- */
 public final class NativeStringIterator extends ES6Iterator {
     private static final long serialVersionUID = 1L;
     private static final String ITERATOR_TAG = "StringIterator";
@@ -33,19 +27,16 @@ public final class NativeStringIterator extends ES6Iterator {
         this.string  = ScriptRuntime.toString(stringLike);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String getClassName() {
         return "String Iterator";
     }
 
-    /** {@inheritDoc} */
     @Override
     protected boolean isDone(Context cx, Scriptable scope) {
         return index >= string.length();
     }
 
-    /** {@inheritDoc} */
     @Override
     protected Object nextValue(Context cx, Scriptable scope) {
         int newIndex = string.offsetByCodePoints(index, 1);
@@ -54,7 +45,6 @@ public final class NativeStringIterator extends ES6Iterator {
         return value;
     }
 
-    /** {@inheritDoc} */
     @Override
     protected String getTag() {
         return ITERATOR_TAG;

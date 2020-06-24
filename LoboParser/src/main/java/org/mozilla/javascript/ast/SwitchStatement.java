@@ -14,7 +14,7 @@ import org.mozilla.javascript.Token;
 
 /**
  * Switch statement AST node type.
- * Node type is {@link org.mozilla.javascript.Token#SWITCH}.
+ * Node type is {@link Token#SWITCH}.
  *
  * <pre><i>SwitchStatement</i> :
  *        <b>switch</b> ( Expression ) CaseBlock
@@ -28,9 +28,6 @@ import org.mozilla.javascript.Token;
  *        <b>case</b> Expression : [StatementList]
  * <i>DefaultClause</i> :
  *        <b>default</b> : [StatementList]</pre>
- *
- * @author utente
- * @version $Id: $Id
  */
 public class SwitchStatement extends Jump {
 
@@ -46,28 +43,14 @@ public class SwitchStatement extends Jump {
         type = Token.SWITCH;
     }
 
-    /**
-     * <p>Constructor for SwitchStatement.</p>
-     */
     public SwitchStatement() {
     }
 
-    /**
-     * <p>Constructor for SwitchStatement.</p>
-     *
-     * @param pos a int.
-     */
     public SwitchStatement(int pos) {
         // can't call super (Jump) for historical reasons
         position = pos;
     }
 
-    /**
-     * <p>Constructor for SwitchStatement.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public SwitchStatement(int pos, int len) {
         position = pos;
         length = len;
@@ -75,8 +58,6 @@ public class SwitchStatement extends Jump {
 
     /**
      * Returns the switch discriminant expression
-     *
-     * @return a {@link org.mozilla.javascript.ast.AstNode} object.
      */
     public AstNode getExpression() {
         return expression;
@@ -85,9 +66,7 @@ public class SwitchStatement extends Jump {
     /**
      * Sets the switch discriminant expression, and sets its parent
      * to this node.
-     *
-     * @throws java.lang.IllegalArgumentException} if expression is {@code null}
-     * @param expression a {@link org.mozilla.javascript.ast.AstNode} object.
+     * @throws IllegalArgumentException} if expression is {@code null}
      */
     public void setExpression(AstNode expression) {
         assertNotNull(expression);
@@ -98,8 +77,6 @@ public class SwitchStatement extends Jump {
     /**
      * Returns case statement list.  If there are no cases,
      * returns an immutable empty list.
-     *
-     * @return a {@link java.util.List} object.
      */
     public List<SwitchCase> getCases() {
         return cases != null ? cases : NO_CASES;
@@ -108,7 +85,6 @@ public class SwitchStatement extends Jump {
     /**
      * Sets case statement list, and sets the parent of each child
      * case to this node.
-     *
      * @param cases list, which may be {@code null} to remove all the cases
      */
     public void setCases(List<SwitchCase> cases) {
@@ -124,9 +100,7 @@ public class SwitchStatement extends Jump {
 
     /**
      * Adds a switch case statement to the end of the list.
-     *
-     * @throws java.lang.IllegalArgumentException} if switchCase is {@code null}
-     * @param switchCase a {@link org.mozilla.javascript.ast.SwitchCase} object.
+     * @throws IllegalArgumentException} if switchCase is {@code null}
      */
     public void addCase(SwitchCase switchCase) {
         assertNotNull(switchCase);
@@ -139,8 +113,6 @@ public class SwitchStatement extends Jump {
 
     /**
      * Returns left paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getLp() {
         return lp;
@@ -148,8 +120,6 @@ public class SwitchStatement extends Jump {
 
     /**
      * Sets left paren position
-     *
-     * @param lp a int.
      */
     public void setLp(int lp) {
         this.lp = lp;
@@ -157,8 +127,6 @@ public class SwitchStatement extends Jump {
 
     /**
      * Returns right paren position, -1 if missing
-     *
-     * @return a int.
      */
     public int getRp() {
         return rp;
@@ -166,8 +134,6 @@ public class SwitchStatement extends Jump {
 
     /**
      * Sets right paren position
-     *
-     * @param rp a int.
      */
     public void setRp(int rp) {
         this.rp = rp;
@@ -175,16 +141,12 @@ public class SwitchStatement extends Jump {
 
     /**
      * Sets both paren positions
-     *
-     * @param lp a int.
-     * @param rp a int.
      */
     public void setParens(int lp, int rp) {
         this.lp = lp;
         this.rp = rp;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         String pad = makeIndent(depth);
@@ -204,8 +166,6 @@ public class SwitchStatement extends Jump {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then the switch-expression, then the cases
      * in lexical order.
      */

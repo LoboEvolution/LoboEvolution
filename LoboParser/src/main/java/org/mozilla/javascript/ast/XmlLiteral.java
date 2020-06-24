@@ -13,13 +13,10 @@ import org.mozilla.javascript.Token;
 
 /**
  * AST node for an E4X (Ecma-357) embedded XML literal.  Node type is
- * {@link org.mozilla.javascript.Token#XML}.  The parser generates a simple list of strings and
+ * {@link Token#XML}.  The parser generates a simple list of strings and
  * expressions.  In the future we may parse the XML and produce a richer set of
  * nodes, but for now it's just a set of expressions evaluated to produce a
  * string to pass to the {@code XML} constructor function.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class XmlLiteral extends AstNode {
 
@@ -29,35 +26,19 @@ public class XmlLiteral extends AstNode {
         type = Token.XML;
     }
 
-    /**
-     * <p>Constructor for XmlLiteral.</p>
-     */
     public XmlLiteral() {
     }
 
-    /**
-     * <p>Constructor for XmlLiteral.</p>
-     *
-     * @param pos a int.
-     */
     public XmlLiteral(int pos) {
         super(pos);
     }
 
-    /**
-     * <p>Constructor for XmlLiteral.</p>
-     *
-     * @param pos a int.
-     * @param len a int.
-     */
     public XmlLiteral(int pos, int len) {
         super(pos, len);
     }
 
     /**
      * Returns fragment list - a list of expression nodes.
-     *
-     * @return a {@link java.util.List} object.
      */
     public List<XmlFragment> getFragments() {
         return fragments;
@@ -66,9 +47,8 @@ public class XmlLiteral extends AstNode {
     /**
      * Sets fragment list, removing any existing fragments first.
      * Sets the parent pointer for each fragment in the list to this node.
-     *
      * @param fragments fragment list.  Replaces any existing fragments.
-     * @throws java.lang.IllegalArgumentException} if {@code fragments} is {@code null}
+     * @throws IllegalArgumentException} if {@code fragments} is {@code null}
      */
     public void setFragments(List<XmlFragment> fragments) {
         assertNotNull(fragments);
@@ -79,9 +59,7 @@ public class XmlLiteral extends AstNode {
 
     /**
      * Adds a fragment to the fragment list.  Sets its parent to this node.
-     *
-     * @throws java.lang.IllegalArgumentException} if {@code fragment} is {@code null}
-     * @param fragment a {@link org.mozilla.javascript.ast.XmlFragment} object.
+     * @throws IllegalArgumentException} if {@code fragment} is {@code null}
      */
     public void addFragment(XmlFragment fragment) {
         assertNotNull(fragment);
@@ -89,7 +67,6 @@ public class XmlLiteral extends AstNode {
         fragment.setParent(this);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toSource(int depth) {
         StringBuilder sb = new StringBuilder(250);
@@ -100,8 +77,6 @@ public class XmlLiteral extends AstNode {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Visits this node, then visits each child fragment in lexical order.
      */
     @Override

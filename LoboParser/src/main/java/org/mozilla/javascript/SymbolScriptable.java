@@ -14,43 +14,28 @@ package org.mozilla.javascript;
  * support does not break compatibility for existing code.
  *
  * @since 1.7.8
- * @author utente
- * @version $Id: $Id
  */
+
 public interface SymbolScriptable
 {
     /**
      * Return the value of the property with the specified key, or
      * NOT_FOUND.
-     *
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @param start a {@link org.mozilla.javascript.Scriptable} object.
-     * @return a {@link java.lang.Object} object.
      */
     Object get(Symbol key, Scriptable start);
 
     /**
      * Return true if the specified property exists.
-     *
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @param start a {@link org.mozilla.javascript.Scriptable} object.
-     * @return a boolean.
      */
     boolean has(Symbol key, Scriptable start);
 
     /**
      * Add a new property to to the object.
-     *
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
-     * @param start a {@link org.mozilla.javascript.Scriptable} object.
-     * @param value a {@link java.lang.Object} object.
      */
     void put(Symbol key, Scriptable start, Object value);
 
     /**
      * Delete a property with the specified key.
-     *
-     * @param key a {@link org.mozilla.javascript.Symbol} object.
      */
     void delete(Symbol key);
 }
