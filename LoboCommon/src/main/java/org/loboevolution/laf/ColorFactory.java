@@ -183,9 +183,9 @@ public class ColorFactory {
 			}
 
 			final String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
-			final int red = Integer.parseInt(strs[0].trim());
-			final int green = Integer.parseInt(strs[1].trim());
-			final int blue = Integer.parseInt(strs[2].trim());
+			final int red = (int) parseValue(strs[0].trim(), 255);
+			final int green =  (int) parseValue(strs[1].trim(), 255);
+			final int blue =  (int) parseValue(strs[2].trim(), 255);
 			color = new Color(normalize(red), normalize(green), normalize(blue));
 			this.colorMap.put(normalSpec, color);
 		} else {
@@ -214,9 +214,9 @@ public class ColorFactory {
 			}
 
 			final String[] strs = Strings.splitUsingTokenizer(commaValues, ",");
-			final int red = Integer.parseInt(strs[0].trim());
-			final int green = Integer.parseInt(strs[1].trim());
-			final int blue = Integer.parseInt(strs[2].trim());
+			final int red = (int) parseValue(strs[0].trim(), 255);
+			final int green =  (int) parseValue(strs[1].trim(), 255);
+			final int blue =  (int) parseValue(strs[2].trim(), 255);
 			final int alpha = Float.valueOf(255 * Float.parseFloat(strs[3].trim())).intValue();
 			color = new Color(normalize(red), normalize(green), normalize(blue), alpha);
 			this.colorMap.put(normalSpec, color);
