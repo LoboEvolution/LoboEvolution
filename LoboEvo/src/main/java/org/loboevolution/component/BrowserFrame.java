@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import org.loboevolution.menu.MenuBar;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.TabStore;
+import org.loboevolution.store.WebStore;
 
 /**
  * <p>BrowserFrame class.</p>
@@ -79,6 +80,7 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				TabStore.deleteAll();
+				WebStore.deleteSessionStorage();
 			}
 		});
 	}

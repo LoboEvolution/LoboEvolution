@@ -11,6 +11,7 @@ import org.loboevolution.component.IBrowserFrame;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.info.TabInfo;
 import org.loboevolution.store.TabStore;
+import org.loboevolution.store.WebStore;
 
 /**
  * <p>TabbedPanePopupMenu class.</p>
@@ -121,10 +122,12 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 		for (int i = 0; i < tabs.size(); i++) {
 			
 			if(i == index) {
+				WebStore.deleteStorage(1, index);
 				TabStore.deleteTab(index);
 			}
 			
 			if(i > index) {
+				WebStore.deleteStorage(1, index);
 				TabInfo tabInfo = tabs.get(i);
 				TabStore.deleteTab(i);
 				TabStore.insertTab(i-1, tabInfo.getUrl());
@@ -139,6 +142,7 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 	private void closeAllTab() {
 		List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
+			WebStore.deleteStorage(1, i);
 			TabStore.deleteTab(i);
 
 		}
@@ -148,8 +152,10 @@ public class TabbedPanePopupMenu extends JPopupMenu {
 		List<TabInfo> tabs = TabStore.getTabs();
 		for (int i = 0; i < tabs.size(); i++) {
 			if(i != index) {
+				WebStore.deleteStorage(1, i);
 				TabStore.deleteTab(i);
 			} else {
+				WebStore.deleteStorage(1, index);
 				TabInfo tabInfo = tabs.get(index);
 				TabStore.deleteTab(index);
 				TabStore.insertTab(0, tabInfo.getUrl());

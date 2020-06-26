@@ -53,6 +53,9 @@ import org.loboevolution.html.dom.xpath.XPathResultImpl;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.js.events.UIEventImpl;
+import org.loboevolution.html.js.storage.LocalStorage;
+import org.loboevolution.html.js.storage.SessionStorage;
+import org.loboevolution.html.js.storage.Storage;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.js.AbstractScriptableDelegate;
@@ -207,6 +210,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	
 	/** The Constant DOMPARSER_WRAPPER. */
 	private static final JavaClassWrapper DOMPARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(DOMParser.class);
+	
+	/** The Constant STORAGE_WRAPPER. */
+	private static final JavaClassWrapper STORAGE_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(Storage.class);
 	
 	/** The Constant ELEMPARSER_WRAPPER. */
 	private static final JavaClassWrapper ELEMARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(ElementImpl.class);
@@ -516,6 +522,24 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			return history;
 		}
 	}
+	
+	/**
+	 * <p>Getter for the field local storage.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.storage} object.
+	 */
+    public Storage getLocalStorage() {
+        return new LocalStorage();
+    }
+
+    /**
+	 * <p>Getter for the field session storage.</p>
+	 *
+	 * @return a {@link org.loboevolution.html.js.storage} object.
+	 */
+    public Storage getSessionStorage() {
+    	 return new SessionStorage();
+    }
 
 	/**
 	 * <p>getHtmlRendererContext.</p>
@@ -760,6 +784,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		JavaInstantiator event = () -> new EventImpl();
 		
 		JavaInstantiator jiDomParser = () -> new DOMParser();
+		
+		JavaInstantiator localParser = () -> new LocalStorage();
 
 		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);
@@ -784,6 +810,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		
 		Function elmParser = JavaObjectWrapper.getConstructor("Element", ELEMARSER_WRAPPER, jiDomParser);
 		ScriptableObject.defineProperty(ws, "Element", elmParser, ScriptableObject.READONLY);
+		
+		Function store = JavaObjectWrapper.getConstructor("Storage", STORAGE_WRAPPER, localParser);
+		ScriptableObject.defineProperty(ws, "Storage", store, ScriptableObject.READONLY);
 
 		defineElementClass(ws, doc, "Comment", "comment", CommentImpl.class);
         defineElementClass(ws, doc, "Image", "img", HTMLImageElementImpl.class);
