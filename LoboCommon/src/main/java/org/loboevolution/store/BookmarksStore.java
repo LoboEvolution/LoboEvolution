@@ -30,6 +30,8 @@ public class BookmarksStore implements Serializable {
 	private final String BOOKMARKS = "SELECT DISTINCT name, description, baseUrl, tags FROM BOOKMARKS WHERE baseUrl = ?";
 
 	private final String DELETE_BOOKMARKS = "DELETE FROM BOOKMARKS";
+	
+	private final String DELETE_BOOKMARKS_BY_URL = "DELETE FROM BOOKMARKS WHERE baseUrl = ?";
 
 	private final String INSERT_BOOKMARKS = "INSERT INTO BOOKMARKS (name, description, baseUrl, tags) VALUES(?,?,?,?)";
 
@@ -39,6 +41,19 @@ public class BookmarksStore implements Serializable {
 	public void deleteBookmarks() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS)) {
+			pstmt.executeUpdate();
+		} catch (final Exception e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		}
+	}
+	
+	/**
+	 * <p>deleteBookmarks.</p>
+	 */
+	public void deleteBookmark(String url) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(this.DELETE_BOOKMARKS_BY_URL)) {
+			pstmt.setString(1, url.trim());
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
