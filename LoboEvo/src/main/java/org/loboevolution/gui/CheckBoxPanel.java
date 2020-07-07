@@ -1,5 +1,6 @@
 package org.loboevolution.gui;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -44,6 +45,12 @@ public class CheckBoxPanel extends JPanel {
 
 	/** The sub panel. */
 	private final JComponent subPanel;
+	
+	/** The color background. */
+	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
+	
+	/** The color text. */
+	private final Color COLOR_TEXT = new Color(108, 216, 158);
 
 	/**
 	 * Instantiates a new check box panel.
@@ -58,7 +65,10 @@ public class CheckBoxPanel extends JPanel {
 		this.checkBox.setAlignmentX(0.0f);
 		this.checkBox.setAction(new CheckBoxAction());
 		this.checkBox.setText(text);
+		this.checkBox.setBackground(COLOR_BACKGROUND);
+		this.checkBox.setForeground(COLOR_TEXT);
 		final JPanel checkBoxArea = new JPanel();
+		checkBoxArea.setBackground(COLOR_BACKGROUND);
 		checkBoxArea.setLayout(new BoxLayout(checkBoxArea, BoxLayout.X_AXIS));
 		checkBoxArea.add(this.checkBox);
 		checkBoxArea.add(SwingTasks.createHorizontalFill());

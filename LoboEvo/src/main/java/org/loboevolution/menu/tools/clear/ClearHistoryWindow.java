@@ -1,13 +1,15 @@
 package org.loboevolution.menu.tools.clear;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import org.loboevolution.component.BrowserFrame;
@@ -41,6 +43,13 @@ public class ClearHistoryWindow extends JFrame {
 
 	/** The navigation panel. */
 	private CheckBoxPanel navigationPanel;
+	
+	/** The color background. */
+	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
+	
+	/** The color text. */
+	private final Color COLOR_TEXT = new Color(108, 216, 158);
+	
 
 	/**
 	 * <p>Constructor for ClearHistoryWindow.</p>
@@ -53,20 +62,43 @@ public class ClearHistoryWindow extends JFrame {
 
 	private void createAndShowGUI(BrowserFrame frame) {
 		this.historyPanel = new FormPanel();
-		this.historyPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
 		this.cachePanel = new CheckBoxPanel("Cache", this.historyPanel);
 		this.cookiePanel = new CheckBoxPanel("Cookies", this.historyPanel);
 		this.navigationPanel = new CheckBoxPanel("Navigation", this.historyPanel);
 		this.bookmarkPanel = new CheckBoxPanel("Bookmarks", this.historyPanel);
 
 		final JButton historyButton = new JButton();
-		historyButton.setAction(
-				new ClearDataAction(this.cachePanel, this.cookiePanel, this.navigationPanel, this.bookmarkPanel));
+		historyButton.setAction(new ClearDataAction(this.cachePanel, this.cookiePanel, this.navigationPanel, this.bookmarkPanel));
 		historyButton.setText("Delete Now");
 		this.historyButton = historyButton;
+		this.historyButton.setForeground(COLOR_TEXT);
+		this.historyButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+		this.historyButton.setFocusPainted(false);
+		this.historyButton.setContentAreaFilled(false);
+		this.historyButton.setBorder(new LineBorder(COLOR_TEXT));
 
 		add(getHistoryBox());
 
+	}
+	
+	/**
+	 * Gets the history box.
+	 *
+	 * @return the history box
+	 */
+	private Component getHistoryBox() {
+		final JPanel groupBox = new JPanel();
+		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
+		TitledBorder titledBorder = new TitledBorder(new EtchedBorder(), "Clear History");
+		titledBorder.setTitleColor(COLOR_TEXT);
+		groupBox.setBorder(new TitledBorder(titledBorder));
+		groupBox.setBackground(COLOR_BACKGROUND);
+		groupBox.add(getCachePanel());
+		groupBox.add(getCookiePanel());
+		groupBox.add(getNavigationPanel());
+		groupBox.add(getBookmarkPanel());
+		groupBox.add(getHistoryButton());
+		return groupBox;
 	}
 
 	/**
@@ -94,23 +126,6 @@ public class ClearHistoryWindow extends JFrame {
 	 */
 	public CheckBoxPanel getCookiePanel() {
 		return this.cookiePanel;
-	}
-
-	/**
-	 * Gets the history box.
-	 *
-	 * @return the history box
-	 */
-	private Component getHistoryBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Clear History"));
-		groupBox.add(getCachePanel());
-		groupBox.add(getCookiePanel());
-		groupBox.add(getNavigationPanel());
-		groupBox.add(getBookmarkPanel());
-		groupBox.add(getHistoryButton());
-		return groupBox;
 	}
 
 	/**
