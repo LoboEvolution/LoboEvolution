@@ -68,6 +68,7 @@ public class NavigationManager {
 	public static HtmlPanel getHtmlPanel(String uri, int index) {
 		final NavigationStore history = new NavigationStore();
 		CookieManager.putCookies(uri);
+		history.deleteHost(uri);
 		history.addAsRecent(uri,index);
 		return HtmlPanel.createHtmlPanel(uri);
 	}
