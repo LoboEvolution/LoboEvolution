@@ -5,21 +5,16 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
-
 import org.loboevolution.common.Strings;
-import org.loboevolution.gui.CheckBoxPanel;
+import org.loboevolution.gui.CheckBox;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
-import org.loboevolution.gui.SwingTasks;
+import org.loboevolution.gui.Label;
+import org.loboevolution.gui.Panel;
 import org.loboevolution.menu.tools.pref.startup.StartupListControl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.GeneralStore;
@@ -42,13 +37,13 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private static final String TOOLTIP_STARTUP = "Pages launched when you first run the browser.";
 
 	/** The cachePanel panel. */
-	private final CheckBoxPanel cachePanel;
+	private final CheckBox cachePanel;
 
 	/** The cookiePanel panel. */
-	private final CheckBoxPanel cookiePanel;
+	private final CheckBox cookiePanel;
 
 	/** The css panel. */
-	private final CheckBoxPanel cssPanel;
+	private final CheckBox cssPanel;
 
 	/** The dimension panel. */
 	private final FormPanel dimensionPanel;
@@ -57,16 +52,13 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private final transient FormField height;
 
 	/** The javscript panel. */
-	private final CheckBoxPanel javscriptPanel;
+	private final CheckBox javscriptPanel;
 
 	/** The moz panel. */
 	private final FormPanel mozPanel;
 
 	/** The navigationPanel panel. */
-	private final CheckBoxPanel navigationPanel;
-
-	/** The network panel. */
-	private final FormPanel networkPanel;
+	private final CheckBox navigationPanel;
 
 	/** The startup pages string list control. */
 	private final StartupListControl startupPages;
@@ -84,10 +76,6 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 
 		this.userAgentField = new FormField(FieldType.TEXT, "User Agent:");
 
-		final FormPanel networkPanel = new FormPanel();
-		this.networkPanel = networkPanel;
-		networkPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
-
 		final FormPanel dimensionPanel = new FormPanel();
 		this.dimensionPanel = dimensionPanel;
 		dimensionPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
@@ -98,61 +86,23 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		dimensionPanel.addField(this.width);
 		dimensionPanel.addField(this.height);
 
-		this.javscriptPanel = new CheckBoxPanel("Enable Javascript", networkPanel);
-		this.cssPanel = new CheckBoxPanel("Enable Cascading Style Sheets", networkPanel);
-		this.cookiePanel = new CheckBoxPanel("Enable Cookie", networkPanel);
-		this.cachePanel = new CheckBoxPanel("Enable Cache", networkPanel);
-		this.navigationPanel = new CheckBoxPanel("Enable Navigation", networkPanel);
+		this.javscriptPanel = new CheckBox("Enable Javascript");
+		this.cssPanel = new CheckBox("Enable Cascading Style Sheets");
+		this.cookiePanel = new CheckBox("Enable Cookie");
+		this.cachePanel = new CheckBox("Enable Cache");
+		this.navigationPanel = new CheckBox("Enable Navigation");
 
 		this.mozPanel = new FormPanel();
 		this.mozPanel.addField(this.userAgentField);
 		this.startupPages = new StartupListControl();
 		this.startupPages.setEditListCaption(EDIT_LIST_CAPTION);
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		this.add(getStartupGroupBox());
-		this.add(Box.createRigidArea(new Dimension(8, 8)));
 		this.add(getUserAgentGroupBox());
-		this.add(SwingTasks.createVerticalFill());
 		this.add(getDimensionGroupBox());
-		this.add(SwingTasks.createVerticalFill());
-		this.add(Box.createRigidArea(new Dimension(8, 8)));
 		this.add(getNetworkBox());
-		this.add(SwingTasks.createVerticalFill());
 
 		loadSettings();
-		this.javscriptPanel.updateEnabling();
-		this.cssPanel.updateEnabling();
-		this.cookiePanel.updateEnabling();
-		this.cachePanel.updateEnabling();
-		this.navigationPanel.updateEnabling();
-	}
-
-	/**
-	 * <p>Getter for the field cachePanel.</p>
-	 *
-	 * @return the cachePanel
-	 */
-	public Component getCachePanel() {
-		return this.cachePanel;
-	}
-
-	/**
-	 * <p>Getter for the field cookiePanel.</p>
-	 *
-	 * @return the cookiePanel
-	 */
-	public Component getCookiePanel() {
-		return this.cookiePanel;
-	}
-
-	/**
-	 * Gets the CSS check box panel.
-	 *
-	 * @return the CSS check box panel
-	 */
-	private Component getCSSCheckBoxPanel() {
-		return this.cssPanel;
 	}
 
 	/**
@@ -161,48 +111,11 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the dimension agent group box
 	 */
 	private Component getDimensionGroupBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(400, 100));
+		final Panel groupBox = new Panel("Dimension");
+		groupBox.setPreferredSize(new Dimension(420, 80));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Dimension"));
-		groupBox.add(getDimensionPanel());
+		groupBox.add(dimensionPanel);
 		return groupBox;
-	}
-
-	/**
-	 * <p>Getter for the field dimensionPanel.</p>
-	 *
-	 * @return the dimensionPanel
-	 */
-	public FormPanel getDimensionPanel() {
-		return this.dimensionPanel;
-	}
-
-	/**
-	 * Gets the JS check box panel.
-	 *
-	 * @return the JS check box panel
-	 */
-	private Component getJSCheckBoxPanel() {
-		return this.javscriptPanel;
-	}
-
-	/**
-	 * Gets the moz version panel.
-	 *
-	 * @return the moz version panel
-	 */
-	private Component getMozVersionPanel() {
-		return this.mozPanel;
-	}
-
-	/**
-	 * <p>Getter for the field navigationPanel.</p>
-	 *
-	 * @return the navigationPanel
-	 */
-	public Component getNavigationPanel() {
-		return this.navigationPanel;
 	}
 
 	/**
@@ -211,15 +124,13 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the network box
 	 */
 	private Component getNetworkBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(400, 100));
+		final Panel groupBox = new Panel("Network");
+		groupBox.setPreferredSize(new Dimension(420, 150));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Network"));
-		groupBox.add(getJSCheckBoxPanel());
-		groupBox.add(getCSSCheckBoxPanel());
-		groupBox.add(getCookiePanel());
-		groupBox.add(getCachePanel());
-		groupBox.add(getNavigationPanel());
+		groupBox.add(javscriptPanel);
+		groupBox.add(cssPanel);
+		groupBox.add(cookiePanel);
+		groupBox.add(navigationPanel);
 		return groupBox;
 	}
 
@@ -229,15 +140,14 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the startup group box
 	 */
 	private Component getStartupGroupBox() {
-		final Box startupGroupBox = new Box(BoxLayout.Y_AXIS);
-		startupGroupBox.setBorder(new TitledBorder(new EtchedBorder(), "Startup"));
-		final Box startupPagesBox = new Box(BoxLayout.X_AXIS);
-		final JLabel pagesLabel = new JLabel("Pages:");
+		final Panel groupBox = new Panel("Startup");
+		groupBox.setPreferredSize(new Dimension(420, 50));
+		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.X_AXIS));
+		final Label pagesLabel = new Label("Pages:");
 		pagesLabel.setToolTipText(TOOLTIP_STARTUP);
-		startupPagesBox.add(pagesLabel);
-		startupPagesBox.add(this.startupPages);
-		startupGroupBox.add(startupPagesBox);
-		return startupGroupBox;
+		groupBox.add(pagesLabel);
+		groupBox.add(this.startupPages);
+		return groupBox;
 	}
 
 	/**
@@ -246,11 +156,10 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the user agent group box
 	 */
 	private Component getUserAgentGroupBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(400, 100));
+		final Panel groupBox = new Panel("User Agent");
+		groupBox.setPreferredSize(new Dimension(420, 50));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "User Agent"));
-		groupBox.add(getMozVersionPanel());
+		groupBox.add(mozPanel);
 		return groupBox;
 	}
 
@@ -277,7 +186,6 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.cookiePanel.revalidate();
 		this.cachePanel.revalidate();
 		this.navigationPanel.revalidate();
-		this.networkPanel.revalidate();
 		this.dimensionPanel.revalidate();
 	}
 

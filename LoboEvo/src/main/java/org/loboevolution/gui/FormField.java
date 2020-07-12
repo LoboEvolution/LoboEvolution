@@ -1,7 +1,6 @@
 package org.loboevolution.gui;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
@@ -18,7 +17,7 @@ public class FormField {
 	private JComponent fieldEditor;
 
 	/** The label. */
-	private JLabel label;
+	private Label label;
 
 	/** The type. */
 	public final FieldType type;
@@ -111,12 +110,12 @@ public class FormField {
 	 *
 	 * @return the label
 	 */
-	public JLabel getLabel() {
-		JLabel label = this.label;
+	public Label getLabel() {
+		Label label = this.label;
 		if (label != null) {
 			return label;
 		}
-		label = new JLabel();
+		label = new Label("");
 		this.label = label;
 		return label;
 	}

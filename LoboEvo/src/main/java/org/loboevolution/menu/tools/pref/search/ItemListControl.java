@@ -1,6 +1,5 @@
 package org.loboevolution.menu.tools.pref.search;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -45,7 +44,6 @@ public class ItemListControl<T> extends JComponent {
 
 	private void createAndShowGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.getComboBox().setPreferredSize(new Dimension(100, 24));
 		this.getComboBox().setEditable(false);
 		final JButton setDefaultButton = new JButton();
 		setDefaultButton.setAction(new SetAsDefaultAction<T>(this));
@@ -59,7 +57,7 @@ public class ItemListControl<T> extends JComponent {
 		final JButton removeButton = new JButton();
 		removeButton.setAction(new RemoveAction<T>(this));
 		removeButton.setText("Remove");
-		this.add(this.getComboBox());
+		this.add(getComboBox());
 		this.add(setDefaultButton);
 		this.add(editButton);
 		this.add(addButton);

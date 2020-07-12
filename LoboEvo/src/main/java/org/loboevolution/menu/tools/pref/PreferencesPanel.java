@@ -1,11 +1,11 @@
 package org.loboevolution.menu.tools.pref;
 
-import javax.swing.JPanel;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import org.loboevolution.common.WrapperLayout;
+import org.loboevolution.gui.Panel;
 
 /**
  * The Class PreferencesPanel.
@@ -13,7 +13,7 @@ import org.loboevolution.common.WrapperLayout;
  * @author utente
  * @version $Id: $Id
  */
-public class PreferencesPanel extends JPanel {
+public class PreferencesPanel extends Panel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
