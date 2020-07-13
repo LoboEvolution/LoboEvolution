@@ -1,6 +1,7 @@
 package org.loboevolution.gui;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.JButton;
@@ -19,5 +20,6 @@ public class Button extends JButton {
 		setFocusPainted(false);
 		setContentAreaFilled(false);
 		setBorder(new LineBorder(COLOR_TEXT));
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 }
