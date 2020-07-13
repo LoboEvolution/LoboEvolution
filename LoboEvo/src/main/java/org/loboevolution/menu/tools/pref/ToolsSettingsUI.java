@@ -5,7 +5,8 @@ import java.awt.Dimension;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
+
+import org.loboevolution.gui.Button;
 import org.loboevolution.gui.CheckBox;
 import org.loboevolution.gui.ItemEditorFactory;
 import org.loboevolution.gui.Label;
@@ -34,7 +35,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	private static final long serialVersionUID = 1L;
 
 	/** The bookmark button. */
-	private JButton bookmarkButton;
+	private Button bookmarkButton;
 
 	/** The chrome bookmark panel. */
 	private CheckBox chromeBookmarkPanel;
@@ -46,10 +47,10 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	private CheckBox chromePanel;
 
 	/** The history button. */
-	private JButton historyButton;
+	private Button historyButton;
 
 	/** The import button. */
-	private JButton importButton;
+	private Button importButton;
 
 	/** The mozilla bookmark panel. */
 	private CheckBox mozillaBookmarkPanel;
@@ -80,7 +81,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		this.mozillaHistoryPanel = new CheckBox("Mozilla Firefox");
 		this.chromeHistoryPanel = new CheckBox("Google Chrome");
 
-		final JButton historyButton = new JButton();
+		final Button historyButton = new Button();
 		historyButton.setAction(new ImportDataAction(this.mozillaHistoryPanel, this.chromeHistoryPanel, HISTORY));
 		historyButton.setText("Import History");
 		this.historyButton = historyButton;
@@ -88,7 +89,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		this.mozillaBookmarkPanel = new CheckBox("Mozilla Firefox");
 		this.chromeBookmarkPanel = new CheckBox("Google Chrome");
 
-		final JButton bookmarkButton = new JButton();
+		final Button bookmarkButton = new Button();
 		bookmarkButton.setAction(new ImportDataAction(this.mozillaBookmarkPanel, this.chromeBookmarkPanel, BOOKMARKS));
 		bookmarkButton.setText("Import Bookmarks");
 		this.bookmarkButton = bookmarkButton;
@@ -96,7 +97,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		this.mozillaPanel = new CheckBox("Mozilla Firefox");
 		this.chromePanel = new CheckBox("Google Chrome");
 
-		final JButton importButton = new JButton();
+		final Button importButton = new Button();
 		importButton.setAction(new ImportDataAction(this.mozillaPanel, this.chromePanel, COOKIES));
 		importButton.setText("Import Cookies");
 		this.importButton = importButton;

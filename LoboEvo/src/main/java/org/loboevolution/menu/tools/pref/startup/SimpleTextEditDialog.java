@@ -8,12 +8,13 @@ import java.awt.Frame;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import org.loboevolution.gui.Button;
 
 /**
  * The Class SimpleTextEditDialog.
@@ -27,13 +28,13 @@ public class SimpleTextEditDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	/** The cancel button. */
-	private final JButton cancelButton = new JButton();
+	private final Button cancelButton = new Button();
 
 	/** The caption label. */
 	private final JLabel captionLabel = new JLabel();
 
 	/** The ok button. */
-	private final JButton okButton = new JButton();
+	private final Button okButton = new Button();
 
 	/** The resulting text. */
 	private String resultingText;

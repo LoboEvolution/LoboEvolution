@@ -6,12 +6,12 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.component.BrowserFrame;
+import org.loboevolution.gui.Button;
 import org.loboevolution.gui.Panel;
 
 /**
@@ -64,21 +64,24 @@ public class PreferenceWindow extends JFrame {
 		buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.add(Box.createHorizontalGlue());
-		final JButton okButton = new JButton();
+		final Button okButton = new Button();
 		okButton.setAction(new OkCancelAction(this));
 		okButton.setText("OK");
-		final JButton cancelButton = new JButton();
+		final Button cancelButton = new Button();
 		cancelButton.setAction(new OkCancelAction(this));
 		cancelButton.setText("Cancel");
-		final JButton applyButton = new JButton();
+		final Button applyButton = new Button();
 		applyButton.setAction(new ApplyAction(this));
 		applyButton.setText("Apply");
-		final JButton defaultsButton = new JButton();
+		final Button defaultsButton = new Button();
 		defaultsButton.setAction(new DefaultsAction(this));
 		defaultsButton.setText("Restore Defaults");
 		buttonsPanel.add(okButton);
+		buttonsPanel.add(Box.createHorizontalStrut(5));
 		buttonsPanel.add(cancelButton);
+		buttonsPanel.add(Box.createHorizontalStrut(5));
 		buttonsPanel.add(applyButton);
+		buttonsPanel.add(Box.createHorizontalStrut(5));
 		buttonsPanel.add(defaultsButton);
 		return buttonsPanel;
 	}

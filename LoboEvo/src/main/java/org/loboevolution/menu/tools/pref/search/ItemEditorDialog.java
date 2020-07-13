@@ -9,12 +9,12 @@ import java.awt.HeadlessException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.gui.AbstractItemEditor;
+import org.loboevolution.gui.Button;
 import org.loboevolution.gui.ItemEditorFactory;
 
 /**
@@ -30,7 +30,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	/** The cancel button. */
-	private final JButton cancelButton = new JButton();
+	private final Button cancelButton = new Button();
 
 	/** The caption label. */
 	private final JLabel captionLabel = new JLabel();
@@ -39,7 +39,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	private final transient AbstractItemEditor<T> editor;
 
 	/** The ok button. */
-	private final JButton okButton = new JButton();
+	private final Button okButton = new Button();
 
 	/** The resulting item. */
 	private transient T resultingItem;

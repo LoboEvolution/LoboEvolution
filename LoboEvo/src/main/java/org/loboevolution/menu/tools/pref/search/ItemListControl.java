@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
+import org.loboevolution.gui.Button;
 import org.loboevolution.gui.ItemEditorFactory;
 
 /**
@@ -45,16 +45,16 @@ public class ItemListControl<T> extends JComponent {
 	private void createAndShowGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.getComboBox().setEditable(false);
-		final JButton setDefaultButton = new JButton();
+		final Button setDefaultButton = new Button();
 		setDefaultButton.setAction(new SetAsDefaultAction<T>(this));
 		setDefaultButton.setText("Set Default");
-		final JButton editButton = new JButton();
+		final Button editButton = new Button();
 		editButton.setAction(new EditAction<T>(false, this));
 		editButton.setText("Edit");
-		final JButton addButton = new JButton();
+		final Button addButton = new Button();
 		addButton.setAction(new EditAction<T>(true, this));
 		addButton.setText("Add");
-		final JButton removeButton = new JButton();
+		final Button removeButton = new Button();
 		removeButton.setAction(new RemoveAction<T>(this));
 		removeButton.setText("Remove");
 		this.add(getComboBox());
