@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import javax.swing.JRadioButton;
 
-public class RadioButton extends JRadioButton {
+public class LoboRadioButton extends JRadioButton {
 	
 private static final long serialVersionUID = 1L;
 	
@@ -14,7 +14,7 @@ private static final long serialVersionUID = 1L;
 	/** The color text. */
 	private final Color COLOR_TEXT = new Color(108, 216, 158);
 	
-	public RadioButton(String name) {
+	public LoboRadioButton(String name) {
 		super(name);
 		setBackground(COLOR_BACKGROUND);
 		setForeground(COLOR_TEXT);

@@ -10,12 +10,12 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.border.EmptyBorder;
 
-import org.loboevolution.gui.CheckBox;
+import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
-import org.loboevolution.gui.Panel;
-import org.loboevolution.gui.RadioButton;
+import org.loboevolution.gui.LoboPanel;
+import org.loboevolution.gui.LoboRadioButton;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.store.ConnectionStore;
 
@@ -35,10 +35,10 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	private final FormPanel authenticationPanel = new FormPanel();
 	
 	/** The authenticated check box. */
-	private final CheckBox authenticatedCheckBox = new CheckBox("Authenticate with proxy server.");
+	private final LoboCheckBox authenticatedCheckBox = new LoboCheckBox("Authenticate with proxy server.");
 
 	/** The bypass local check box. */
-	private final CheckBox bypassLocalCheckBox = new CheckBox("Bypass proxy for local addresses.");
+	private final LoboCheckBox bypassLocalCheckBox = new LoboCheckBox("Bypass proxy for local addresses.");
 
 	/** The host field. */
 	private final transient FormField hostField = new FormField(FieldType.TEXT);
@@ -47,13 +47,13 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 	private final FormPanel hostPortPanel = new FormPanel();
 
 	/** The http proxy radio button. */
-	private final RadioButton httpProxyRadioButton = new RadioButton("HTTP proxy");
+	private final LoboRadioButton httpProxyRadioButton = new LoboRadioButton("HTTP proxy");
 
 	/** The no proxy radio button. */
-	private final RadioButton noProxyRadioButton = new RadioButton("Direct connection (no proxy)");
+	private final LoboRadioButton noProxyRadioButton = new LoboRadioButton("Direct connection (no proxy)");
 	
 	/** The socks proxy radio button. */
-	private final RadioButton socksProxyRadioButton = new RadioButton("SOCKS proxy");
+	private final LoboRadioButton socksProxyRadioButton = new LoboRadioButton("SOCKS proxy");
 
 	/** The password field. */
 	private final transient FormField passwordField = new FormField(FieldType.PASSWORD);
@@ -114,7 +114,7 @@ public class ConnectionSettingsUI extends AbstractSettingsUI {
 		radioBoxExpander.add(radioBox);
 		radioBoxExpander.add(Box.createGlue());
 
-		final Panel box = new Panel("Proxy");
+		final LoboPanel box = new LoboPanel("Proxy");
 		box.setLayout(new BoxLayout(box, BoxLayout.Y_AXIS));
 		box.add(radioBoxExpander);
 		box.add(getProxyHostArea());

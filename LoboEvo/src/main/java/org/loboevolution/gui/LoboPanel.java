@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Panel extends JPanel {
+public class LoboPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -17,18 +17,18 @@ public class Panel extends JPanel {
 	/** The color text. */
 	private final Color COLOR_TEXT = new Color(108, 216, 158);
 	
-	public Panel() {
+	public LoboPanel() {
 		setBackground(COLOR_BACKGROUND);
 	}
 	
-	public Panel(String title) {
+	public LoboPanel(String title) {
 		setBackground(COLOR_BACKGROUND);
 		TitledBorder border = new TitledBorder(new LineBorder(COLOR_TEXT), title);
 		border.setTitleColor(COLOR_TEXT);
 		setBorder(border);
 	}
 
-	public Panel(LayoutManager layout, String title) {
+	public LoboPanel(LayoutManager layout, String title) {
 		super(layout);
 		setBackground(COLOR_BACKGROUND);
 		TitledBorder border = new TitledBorder(new LineBorder(COLOR_TEXT), title);

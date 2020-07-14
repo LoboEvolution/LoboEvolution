@@ -16,8 +16,8 @@ public class FormField {
 	/** The field editor. */
 	private JComponent fieldEditor;
 
-	/** The label. */
-	private Label label;
+	/** The loboLabel. */
+	private LoboLabel loboLabel;
 
 	/** The type. */
 	public final FieldType type;
@@ -106,18 +106,18 @@ public class FormField {
 	}
 
 	/**
-	 * Gets the label.
+	 * Gets the loboLabel.
 	 *
-	 * @return the label
+	 * @return the loboLabel
 	 */
-	public Label getLabel() {
-		Label label = this.label;
-		if (label != null) {
-			return label;
+	public LoboLabel getLabel() {
+		LoboLabel loboLabel = this.loboLabel;
+		if (loboLabel != null) {
+			return loboLabel;
 		}
-		label = new Label("");
-		this.label = label;
-		return label;
+		loboLabel = new LoboLabel("");
+		this.loboLabel = loboLabel;
+		return loboLabel;
 	}
 
 	/**

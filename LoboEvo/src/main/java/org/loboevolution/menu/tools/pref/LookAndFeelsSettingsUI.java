@@ -29,10 +29,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.loboevolution.gui.CheckBox;
+import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.ColorComboBox;
 import org.loboevolution.gui.FontLabel;
-import org.loboevolution.gui.Panel;
+import org.loboevolution.gui.LoboPanel;
 import org.loboevolution.laf.FontType;
 import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.laf.LAFType;
@@ -50,25 +50,25 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	private static final long serialVersionUID = 1L;
 
 	/** The Acryl Box. */
-	private final CheckBox acrylCheckBox;
+	private final LoboCheckBox acrylCheckBox;
 
 	/** The Aero Box. */
-	private final CheckBox aeroCheckBox;
+	private final LoboCheckBox aeroCheckBox;
 
 	/** The Aluminium Box. */
-	private final CheckBox aluminiumCheckBox;
+	private final LoboCheckBox aluminiumCheckBox;
 
 	/** The Bernstein Box. */
-	private final CheckBox bernsteinCheckBox;
+	private final LoboCheckBox bernsteinCheckBox;
 
 	/** The Bold Box. */
-	private final CheckBox boldCheckBox;
+	private final LoboCheckBox boldCheckBox;
 
 	/** The color Combo Box. */
 	private final ColorComboBox colorComboBox;
 
 	/** The Fast Box. */
-	private final CheckBox fastCheckBox;
+	private final LoboCheckBox fastCheckBox;
 
 	/** The search engine list control. */
 	private final JComboBox<String> fontList;
@@ -77,50 +77,50 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	private final JComboBox<String> fontSizeList;
 
 	/** The Graphite Box. */
-	private final CheckBox graphiteCheckBox;
+	private final LoboCheckBox graphiteCheckBox;
 
 	/** The HiFi Box. */
-	private final CheckBox hiFiCheckBox;
+	private final LoboCheckBox hiFiCheckBox;
 
 	/** The Italic Box. */
-	private final CheckBox italicCheckBox;
+	private final LoboCheckBox italicCheckBox;
 
 	/** The settings. */
 	private final LAFSettings laf = new LAFSettings().getInstance();
 
 	/** The Luna Box. */
-	private final CheckBox lunaCheckBox;
+	private final LoboCheckBox lunaCheckBox;
 
 	/** The McWin Box. */
-	private final CheckBox mcWinCheckBox;
+	private final LoboCheckBox mcWinCheckBox;
 
 	/** The Mint Box. */
-	private final CheckBox mintCheckBox;
+	private final LoboCheckBox mintCheckBox;
 
 	/** The Noire Box. */
-	private final CheckBox noireCheckBox;
+	private final LoboCheckBox noireCheckBox;
 
 	private final String PREVIEW_TEXT = "Preview Font";
 
 	protected FontLabel previewLabel;
 
 	/** The Smart Box. */
-	private final CheckBox smartCheckBox;
+	private final LoboCheckBox smartCheckBox;
 
 	/** The Strikethrough Box. */
-	private final CheckBox strikethroughCheckBox;
+	private final LoboCheckBox strikethroughCheckBox;
 
 	/** The Subscript Box. */
-	private final CheckBox subscriptCheckBox;
+	private final LoboCheckBox subscriptCheckBox;
 
 	/** The Superscript Box. */
-	private final CheckBox superscriptCheckBox;
+	private final LoboCheckBox superscriptCheckBox;
 
 	/** The Texture Box. */
-	private final CheckBox textureCheckBox;
+	private final LoboCheckBox textureCheckBox;
 
 	/** The Underline Box. */
-	private final CheckBox underlineCheckBox;
+	private final LoboCheckBox underlineCheckBox;
 
 	/**
 	 * <p>Constructor for LookAndFeelsSettingsUI.</p>
@@ -130,26 +130,26 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		final JPanel groupBox = new JPanel();
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 
-		this.boldCheckBox = new CheckBox(LAFType.BOLD.getValue());
-		this.italicCheckBox = new CheckBox(LAFType.ITALIC.getValue());
-		this.underlineCheckBox = new CheckBox(FontType.UNDERLINE.getValue());
-		this.strikethroughCheckBox = new CheckBox(FontType.STRIKETHROUGH.getValue());
-		this.subscriptCheckBox = new CheckBox(FontType.SUBSCRIPT.getValue());
-		this.superscriptCheckBox = new CheckBox(FontType.SUPERSCRIPT.getValue());
+		this.boldCheckBox = new LoboCheckBox(LAFType.BOLD.getValue());
+		this.italicCheckBox = new LoboCheckBox(LAFType.ITALIC.getValue());
+		this.underlineCheckBox = new LoboCheckBox(FontType.UNDERLINE.getValue());
+		this.strikethroughCheckBox = new LoboCheckBox(FontType.STRIKETHROUGH.getValue());
+		this.subscriptCheckBox = new LoboCheckBox(FontType.SUBSCRIPT.getValue());
+		this.superscriptCheckBox = new LoboCheckBox(FontType.SUPERSCRIPT.getValue());
 
-		this.acrylCheckBox = new CheckBox(LAFType.ACRYL.getValue());
-		this.aeroCheckBox = new CheckBox(LAFType.AERO.getValue());
-		this.aluminiumCheckBox = new CheckBox(LAFType.ALUMINIUM.getValue());
-		this.bernsteinCheckBox = new CheckBox(LAFType.BERNSTEIN.getValue());
-		this.fastCheckBox = new CheckBox(LAFType.FAST.getValue());
-		this.graphiteCheckBox = new CheckBox(LAFType.GRAPHITE.getValue());
-		this.hiFiCheckBox = new CheckBox(LAFType.HIFI.getValue());
-		this.lunaCheckBox = new CheckBox(LAFType.LUNA.getValue());
-		this.mcWinCheckBox = new CheckBox(LAFType.MCWIN.getValue());
-		this.mintCheckBox = new CheckBox(LAFType.MINT.getValue());
-		this.noireCheckBox = new CheckBox(LAFType.NOIRE.getValue());
-		this.smartCheckBox = new CheckBox(LAFType.SMART.getValue());
-		this.textureCheckBox = new CheckBox(FontType.TEXTURE.getValue());
+		this.acrylCheckBox = new LoboCheckBox(LAFType.ACRYL.getValue());
+		this.aeroCheckBox = new LoboCheckBox(LAFType.AERO.getValue());
+		this.aluminiumCheckBox = new LoboCheckBox(LAFType.ALUMINIUM.getValue());
+		this.bernsteinCheckBox = new LoboCheckBox(LAFType.BERNSTEIN.getValue());
+		this.fastCheckBox = new LoboCheckBox(LAFType.FAST.getValue());
+		this.graphiteCheckBox = new LoboCheckBox(LAFType.GRAPHITE.getValue());
+		this.hiFiCheckBox = new LoboCheckBox(LAFType.HIFI.getValue());
+		this.lunaCheckBox = new LoboCheckBox(LAFType.LUNA.getValue());
+		this.mcWinCheckBox = new LoboCheckBox(LAFType.MCWIN.getValue());
+		this.mintCheckBox = new LoboCheckBox(LAFType.MINT.getValue());
+		this.noireCheckBox = new LoboCheckBox(LAFType.NOIRE.getValue());
+		this.smartCheckBox = new LoboCheckBox(LAFType.SMART.getValue());
+		this.textureCheckBox = new LoboCheckBox(FontType.TEXTURE.getValue());
 		this.colorComboBox = new ColorComboBox();
 		this.colorComboBox.setPreferredSize(new Dimension(400, 20));
 		this.fontList = new JComboBox<String>(LAFSettings.getFonts("FONT"));
@@ -179,7 +179,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	}
 
 	private Component effectsPanel() {
-		final Panel p = new Panel(new GridLayout(2, 3, 10, 5), "Font Effect");
+		final LoboPanel p = new LoboPanel(new GridLayout(2, 3, 10, 5), "Font Effect");
 		p.add(this.boldCheckBox);
 		p.add(this.italicCheckBox);
 		p.add(this.underlineCheckBox);
@@ -190,13 +190,13 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	}
 
 	private Component fontColorPanel() {
-		final Panel p = new Panel("Font Color");
+		final LoboPanel p = new LoboPanel("Font Color");
 		p.add(this.colorComboBox);
 		return p;
 	}
 
 	private Component fontPanel() {
-		final Panel p = new Panel(new GridLayout(1, 2, 10, 5),"Font");
+		final LoboPanel p = new LoboPanel(new GridLayout(1, 2, 10, 5),"Font");
 		p.add(this.fontList);
 		p.add(this.fontSizeList);
 		return p;
@@ -249,7 +249,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	}
 
 	private Component lookAndFeelsPanel() {
-		final Panel p = new Panel(new GridLayout(4, 3, 10, 5), "Look And Feels");
+		final LoboPanel p = new LoboPanel(new GridLayout(4, 3, 10, 5), "Look And Feels");
 		p.add(this.acrylCheckBox);
 		p.add(this.aeroCheckBox);
 		p.add(this.aluminiumCheckBox);
@@ -267,7 +267,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	}
 
 	private Component previewPanel() {
-		final Panel p = new Panel(new BorderLayout(), "Preview");
+		final LoboPanel p = new LoboPanel(new BorderLayout(), "Preview");
 		this.previewLabel = new FontLabel(this.PREVIEW_TEXT);
 		p.add(this.previewLabel, BorderLayout.CENTER);
 		return p;

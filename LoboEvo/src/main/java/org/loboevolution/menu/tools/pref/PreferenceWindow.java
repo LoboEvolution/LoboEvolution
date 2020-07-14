@@ -11,8 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.gui.Button;
-import org.loboevolution.gui.Panel;
+import org.loboevolution.gui.LoboButton;
+import org.loboevolution.gui.LoboPanel;
 
 /**
  * <p>PreferenceWindow class.</p>
@@ -60,20 +60,20 @@ public class PreferenceWindow extends JFrame {
 	 * @return the component
 	 */
 	private Component createButtonsPanel() {
-		final Panel buttonsPanel = new Panel("");
+		final LoboPanel buttonsPanel = new LoboPanel("");
 		buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.add(Box.createHorizontalGlue());
-		final Button okButton = new Button();
+		final LoboButton okButton = new LoboButton();
 		okButton.setAction(new OkCancelAction(this));
 		okButton.setText("OK");
-		final Button cancelButton = new Button();
+		final LoboButton cancelButton = new LoboButton();
 		cancelButton.setAction(new OkCancelAction(this));
 		cancelButton.setText("Cancel");
-		final Button applyButton = new Button();
+		final LoboButton applyButton = new LoboButton();
 		applyButton.setAction(new ApplyAction(this));
 		applyButton.setText("Apply");
-		final Button defaultsButton = new Button();
+		final LoboButton defaultsButton = new LoboButton();
 		defaultsButton.setAction(new DefaultsAction(this));
 		defaultsButton.setText("Restore Defaults");
 		buttonsPanel.add(okButton);
@@ -109,7 +109,7 @@ public class PreferenceWindow extends JFrame {
 	 * @return the component
 	 */
 	private Component createRightPane(Container prefsPanel) {
-		final Panel rightPanel = new Panel("");
+		final LoboPanel rightPanel = new LoboPanel("");
 		rightPanel.setPreferredSize(new Dimension(420, 280));
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		rightPanel.add(prefsPanel);

@@ -9,12 +9,12 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import org.loboevolution.common.Strings;
-import org.loboevolution.gui.CheckBox;
+import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
-import org.loboevolution.gui.Label;
-import org.loboevolution.gui.Panel;
+import org.loboevolution.gui.LoboLabel;
+import org.loboevolution.gui.LoboPanel;
 import org.loboevolution.menu.tools.pref.startup.StartupListControl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.GeneralStore;
@@ -37,13 +37,13 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private static final String TOOLTIP_STARTUP = "Pages launched when you first run the browser.";
 
 	/** The cachePanel panel. */
-	private final CheckBox cachePanel;
+	private final LoboCheckBox cachePanel;
 
 	/** The cookiePanel panel. */
-	private final CheckBox cookiePanel;
+	private final LoboCheckBox cookiePanel;
 
 	/** The css panel. */
-	private final CheckBox cssPanel;
+	private final LoboCheckBox cssPanel;
 
 	/** The dimension panel. */
 	private final FormPanel dimensionPanel;
@@ -52,13 +52,13 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	private final transient FormField height;
 
 	/** The javscript panel. */
-	private final CheckBox javscriptPanel;
+	private final LoboCheckBox javscriptPanel;
 
 	/** The moz panel. */
 	private final FormPanel mozPanel;
 
 	/** The navigationPanel panel. */
-	private final CheckBox navigationPanel;
+	private final LoboCheckBox navigationPanel;
 
 	/** The startup pages string list control. */
 	private final StartupListControl startupPages;
@@ -86,11 +86,11 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		dimensionPanel.addField(this.width);
 		dimensionPanel.addField(this.height);
 
-		this.javscriptPanel = new CheckBox("Enable Javascript");
-		this.cssPanel = new CheckBox("Enable Cascading Style Sheets");
-		this.cookiePanel = new CheckBox("Enable Cookie");
-		this.cachePanel = new CheckBox("Enable Cache");
-		this.navigationPanel = new CheckBox("Enable Navigation");
+		this.javscriptPanel = new LoboCheckBox("Enable Javascript");
+		this.cssPanel = new LoboCheckBox("Enable Cascading Style Sheets");
+		this.cookiePanel = new LoboCheckBox("Enable Cookie");
+		this.cachePanel = new LoboCheckBox("Enable Cache");
+		this.navigationPanel = new LoboCheckBox("Enable Navigation");
 
 		this.mozPanel = new FormPanel();
 		this.mozPanel.addField(this.userAgentField);
@@ -111,7 +111,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the dimension agent group box
 	 */
 	private Component getDimensionGroupBox() {
-		final Panel groupBox = new Panel("Dimension");
+		final LoboPanel groupBox = new LoboPanel("Dimension");
 		groupBox.setPreferredSize(new Dimension(420, 80));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.add(dimensionPanel);
@@ -124,7 +124,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the network box
 	 */
 	private Component getNetworkBox() {
-		final Panel groupBox = new Panel("Network");
+		final LoboPanel groupBox = new LoboPanel("Network");
 		groupBox.setPreferredSize(new Dimension(420, 150));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.add(javscriptPanel);
@@ -140,10 +140,10 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the startup group box
 	 */
 	private Component getStartupGroupBox() {
-		final Panel groupBox = new Panel("Startup");
+		final LoboPanel groupBox = new LoboPanel("Startup");
 		groupBox.setPreferredSize(new Dimension(420, 50));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.X_AXIS));
-		final Label pagesLabel = new Label("Pages:");
+		final LoboLabel pagesLabel = new LoboLabel("Pages:");
 		pagesLabel.setToolTipText(TOOLTIP_STARTUP);
 		groupBox.add(pagesLabel);
 		groupBox.add(this.startupPages);
@@ -156,7 +156,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 	 * @return the user agent group box
 	 */
 	private Component getUserAgentGroupBox() {
-		final Panel groupBox = new Panel("User Agent");
+		final LoboPanel groupBox = new LoboPanel("User Agent");
 		groupBox.setPreferredSize(new Dimension(420, 50));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.add(mozPanel);

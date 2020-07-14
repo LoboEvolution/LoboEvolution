@@ -9,8 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.gui.CheckBox;
-import org.loboevolution.gui.Panel;
+import org.loboevolution.gui.LoboCheckBox;
+import org.loboevolution.gui.LoboPanel;
 import org.loboevolution.gui.SwingTasks;
 
 /**
@@ -24,19 +24,19 @@ public class ClearHistoryWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	/** The bookmark panel. */
-	private CheckBox bookmark;
+	private LoboCheckBox bookmark;
 
 	/** The cache anel. */
-	private CheckBox cache;
+	private LoboCheckBox cache;
 
 	/** The cookie panel. */
-	private CheckBox cookie;
+	private LoboCheckBox cookie;
 
 	/** The history button. */
 	private JButton historyButton;
 
 	/** The navigation panel. */
-	private CheckBox navigation;
+	private LoboCheckBox navigation;
 		
 	/** The color text. */
 	private final Color COLOR_TEXT = new Color(108, 216, 158);
@@ -52,10 +52,10 @@ public class ClearHistoryWindow extends JFrame {
 	}
 
 	private void createAndShowGUI(BrowserFrame frame) {
-		this.cache = new CheckBox("Cache");
-		this.cookie = new CheckBox("Cookies");
-		this.navigation = new CheckBox("Navigation");
-		this.bookmark = new CheckBox("Bookmarks");
+		this.cache = new LoboCheckBox("Cache");
+		this.cookie = new LoboCheckBox("Cookies");
+		this.navigation = new LoboCheckBox("Navigation");
+		this.bookmark = new LoboCheckBox("Bookmarks");
 
 		final JButton historyButton = new JButton();
 		historyButton.setAction(new ClearDataAction(this.cache, this.cookie, this.navigation, this.bookmark));
@@ -77,7 +77,7 @@ public class ClearHistoryWindow extends JFrame {
 	 * @return the history box
 	 */
 	private Component getHistoryBox() {
-		final Panel groupBox = new Panel("Clear History");
+		final LoboPanel groupBox = new LoboPanel("Clear History");
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
 		groupBox.add(cache);
 		groupBox.add(cookie);

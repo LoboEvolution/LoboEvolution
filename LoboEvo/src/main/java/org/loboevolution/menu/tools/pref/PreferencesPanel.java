@@ -5,7 +5,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import org.loboevolution.common.WrapperLayout;
-import org.loboevolution.gui.Panel;
+import org.loboevolution.gui.LoboPanel;
 
 /**
  * The Class PreferencesPanel.
@@ -13,7 +13,7 @@ import org.loboevolution.gui.Panel;
  * @author utente
  * @version $Id: $Id
  */
-public class PreferencesPanel extends Panel {
+public class PreferencesPanel extends LoboPanel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

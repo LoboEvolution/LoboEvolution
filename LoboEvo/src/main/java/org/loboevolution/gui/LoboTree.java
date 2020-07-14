@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
 
-public class Tree extends JTree {
+public class LoboTree extends JTree {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class Tree extends JTree {
 	/** The color text. */
 	private final Color COLOR_TEXT = new Color(108, 216, 158);
 
-	public Tree() {
+	public LoboTree() {
 		setBackground(COLOR_BACKGROUND);
 		setForeground(COLOR_TEXT);
 		setCellRenderer(new TreeCellRenderer());

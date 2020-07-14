@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.gui.AbstractItemEditor;
-import org.loboevolution.gui.Button;
+import org.loboevolution.gui.LoboButton;
 import org.loboevolution.gui.ItemEditorFactory;
 
 /**
@@ -30,7 +30,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	private static final long serialVersionUID = 1L;
 
 	/** The cancel button. */
-	private final Button cancelButton = new Button();
+	private final LoboButton cancelButton = new LoboButton();
 
 	/** The caption label. */
 	private final JLabel captionLabel = new JLabel();
@@ -39,7 +39,7 @@ public class ItemEditorDialog<T> extends JDialog {
 	private final transient AbstractItemEditor<T> editor;
 
 	/** The ok button. */
-	private final Button okButton = new Button();
+	private final LoboButton okButton = new LoboButton();
 
 	/** The resulting item. */
 	private transient T resultingItem;

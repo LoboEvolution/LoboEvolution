@@ -4,7 +4,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import org.loboevolution.gui.Tree;
+import org.loboevolution.gui.LoboTree;
 
 /**
  * <p>PreferencesTree class.</p>
@@ -12,7 +12,7 @@ import org.loboevolution.gui.Tree;
  * @author utente
  * @version $Id: $Id
  */
-public class PreferencesTree extends Tree {
+public class PreferencesTree extends LoboTree {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

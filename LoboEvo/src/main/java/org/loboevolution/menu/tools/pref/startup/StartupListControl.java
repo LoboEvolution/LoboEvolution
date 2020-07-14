@@ -10,7 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
-import org.loboevolution.gui.Button;
+import org.loboevolution.gui.LoboButton;
 
 /**
  * <p>StartupListControl class.</p>
@@ -43,7 +43,7 @@ public class StartupListControl extends JComponent {
 	private void createAndShowGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.comboBox.setEditable(false);
-		final Button editButton = new Button();
+		final LoboButton editButton = new LoboButton();
 		editButton.setAction(new EditActionStartup(this));
 		editButton.setText("Edit List");
 		this.add(this.comboBox);

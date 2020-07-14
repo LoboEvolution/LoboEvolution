@@ -7,14 +7,14 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 
-public class Button extends JButton {
+public class LoboButton extends JButton {
 
 	private static final long serialVersionUID = 1L;
 
 	/** The color text. */
 	private final Color COLOR_TEXT = new Color(108, 216, 158);
 
-	public Button() {
+	public LoboButton() {
 		setForeground(COLOR_TEXT);
 		setFont(new Font("Tahoma", Font.BOLD, 14));
 		setFocusPainted(false);

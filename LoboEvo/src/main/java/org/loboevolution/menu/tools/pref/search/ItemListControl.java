@@ -7,7 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
-import org.loboevolution.gui.Button;
+import org.loboevolution.gui.LoboButton;
 import org.loboevolution.gui.ItemEditorFactory;
 
 /**
@@ -45,16 +45,16 @@ public class ItemListControl<T> extends JComponent {
 	private void createAndShowGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.getComboBox().setEditable(false);
-		final Button setDefaultButton = new Button();
+		final LoboButton setDefaultButton = new LoboButton();
 		setDefaultButton.setAction(new SetAsDefaultAction<T>(this));
 		setDefaultButton.setText("Set Default");
-		final Button editButton = new Button();
+		final LoboButton editButton = new LoboButton();
 		editButton.setAction(new EditAction<T>(false, this));
 		editButton.setText("Edit");
-		final Button addButton = new Button();
+		final LoboButton addButton = new LoboButton();
 		addButton.setAction(new EditAction<T>(true, this));
 		addButton.setText("Add");
-		final Button removeButton = new Button();
+		final LoboButton removeButton = new LoboButton();
 		removeButton.setAction(new RemoveAction<T>(this));
 		removeButton.setText("Remove");
 		this.add(getComboBox());
