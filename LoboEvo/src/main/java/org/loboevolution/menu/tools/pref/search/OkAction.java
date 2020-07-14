@@ -16,14 +16,14 @@ public class OkAction<T> extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	private transient ItemEditorDialog<T> item;
+	private transient ItemEditor<T> item;
 
 	/**
 	 * <p>Constructor for OkAction.</p>
 	 *
-	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemEditorDialog} object.
+	 * @param item a {@link org.loboevolution.menu.tools.pref.search.ItemEditor} object.
 	 */
-	public OkAction(ItemEditorDialog<T> item) {
+	public OkAction(ItemEditor<T> item) {
 		this.item = item;
 	}
 

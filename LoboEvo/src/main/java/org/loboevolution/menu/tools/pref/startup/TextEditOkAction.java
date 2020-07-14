@@ -17,7 +17,7 @@ public class TextEditOkAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The search. */
-	private transient SimpleTextEditDialog search;
+	private transient TextEdit search;
 
 	/** The text area. */
 	private final JTextArea textArea;
@@ -26,9 +26,9 @@ public class TextEditOkAction extends AbstractAction {
 	 * <p>Constructor for TextEditOkAction.</p>
 	 *
 	 * @param textArea a {@link javax.swing.JTextArea} object.
-	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.SimpleTextEditDialog} object.
+	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.TextEdit} object.
 	 */
-	public TextEditOkAction(JTextArea textArea, SimpleTextEditDialog search) {
+	public TextEditOkAction(JTextArea textArea, TextEdit search) {
 		this.textArea = textArea;
 		this.search = search;
 	}

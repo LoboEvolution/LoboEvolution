@@ -1,30 +1,32 @@
 package org.loboevolution.menu.tools.pref.startup;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.Frame;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.gui.LoboButton;
 import org.loboevolution.gui.LoboLabel;
+import org.loboevolution.gui.LoboPanel;
 /**
- * The Class SimpleTextEditDialog.
+ * The Class TextEdit.
  *
  * @author utente
  * @version $Id: $Id
  */
-public class SimpleTextEditDialog extends JDialog {
+public class TextEdit extends JFrame {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The color background. */
+	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
 
 	/** The cancel button. */
 	private final LoboButton cancelButton = new LoboButton();
@@ -43,41 +45,52 @@ public class SimpleTextEditDialog extends JDialog {
 
 	/**
 	 * Instantiates a new simple text edit dialog.
-	 *
-	 * @param parent the parent
 	 */
-	public SimpleTextEditDialog(Dialog parent) {
-		super(parent);
-		init();
+	public TextEdit() {
+		createAndShowGUI();
 	}
 
 	/**
-	 * Instantiates a new simple text edit dialog.
-	 *
-	 * @param parent the parent
+	 * Inits the.
 	 */
-	public SimpleTextEditDialog(Frame parent) {
-		super(parent);
-		init();
+	private void createAndShowGUI() {
+		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
+		this.captionLabel.setAlignmentX(0.0f);
+		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
+		this.textArea.setPreferredSize(new Dimension(1, Short.MAX_VALUE));
+		final Container contentPane = getContentPane();
+		contentPane.setBackground(COLOR_BACKGROUND);
+		contentPane.setLayout(null);
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		contentPane.add(this.captionLabel);
+		contentPane.add(new JScrollPane(this.textArea));
+		contentPane.add(createButtonPanel());
+		this.textArea.setEditable(true);
+		this.okButton.setAction(new TextEditOkAction(this.textArea, this));
+		this.okButton.setText("OK");
+		this.cancelButton.setAction(new TextEditCancelAction(this));
+		this.cancelButton.setText("Cancel");
 	}
-
+	
+	
 	/**
 	 * Creates the button panel.
 	 *
 	 * @return the component
 	 */
 	private Component createButtonPanel() {
-		final Box panel = new Box(BoxLayout.X_AXIS);
-		panel.setPreferredSize(new Dimension(Short.MAX_VALUE, 0));
+		final LoboPanel panel = new LoboPanel("");
 		panel.setBorder(new EmptyBorder(4, 4, 4, 4));
-		panel.add(Box.createGlue());
+		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+		panel.add(Box.createHorizontalStrut(5));
 		panel.add(this.okButton);
-		panel.add(Box.createRigidArea(new Dimension(4, 1)));
+		panel.add(Box.createHorizontalStrut(5));
 		panel.add(this.cancelButton);
-		panel.add(Box.createGlue());
+		panel.add(Box.createHorizontalStrut(5));
 		return panel;
 	}
-
+	
+	
 	/**
 	 * Gets the resulting text.
 	 *
@@ -94,26 +107,6 @@ public class SimpleTextEditDialog extends JDialog {
 	 */
 	public String getText() {
 		return this.textArea.getText();
-	}
-
-	/**
-	 * Inits the.
-	 */
-	private void init() {
-		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
-		this.captionLabel.setAlignmentX(0.0f);
-		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
-		this.textArea.setPreferredSize(new Dimension(1, Short.MAX_VALUE));
-		final Container contentPane = getContentPane();
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		contentPane.add(this.captionLabel);
-		contentPane.add(new JScrollPane(this.textArea));
-		contentPane.add(createButtonPanel());
-		this.textArea.setEditable(true);
-		this.okButton.setAction(new TextEditOkAction(this.textArea, this));
-		this.okButton.setText("OK");
-		this.cancelButton.setAction(new TextEditCancelAction(this));
-		this.cancelButton.setText("Cancel");
 	}
 
 	/**
