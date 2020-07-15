@@ -15,6 +15,7 @@ import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
 import org.loboevolution.gui.LoboLabel;
 import org.loboevolution.gui.LoboPanel;
+import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.menu.tools.pref.startup.StartupListControl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.GeneralStore;
@@ -101,7 +102,7 @@ public class GeneralSettingsUI extends AbstractSettingsUI {
 		this.add(getUserAgentGroupBox());
 		this.add(getDimensionGroupBox());
 		this.add(getNetworkBox());
-
+		this.add(SwingTasks.createVerticalFill());
 		loadSettings();
 	}
 

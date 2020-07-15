@@ -33,6 +33,7 @@ import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.ColorComboBox;
 import org.loboevolution.gui.FontLabel;
 import org.loboevolution.gui.LoboPanel;
+import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.laf.FontType;
 import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.laf.LAFType;
@@ -174,8 +175,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		groupBox.add(effectsPanel());
 		groupBox.add(fontColorPanel());
 		groupBox.add(previewPanel());
-
 		add(groupBox);
+		add(SwingTasks.createVerticalFill());
 	}
 
 	private Component effectsPanel() {

@@ -11,6 +11,7 @@ import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.ItemEditorFactory;
 import org.loboevolution.gui.LoboLabel;
 import org.loboevolution.gui.LoboPanel;
+import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.menu.tools.pref.data.ImportDataAction;
 import org.loboevolution.menu.tools.pref.search.ItemListControl;
 import org.loboevolution.menu.tools.pref.search.SearchEngineEditor;
@@ -106,6 +107,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		this.add(getHistoryBox());
 		this.add(getBookmarksBox());
 		this.add(getCookisBox());
+		this.add(SwingTasks.createVerticalFill());
 		loadSettings();
 
 	}
