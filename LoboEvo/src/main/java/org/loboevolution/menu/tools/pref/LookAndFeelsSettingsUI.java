@@ -124,6 +124,16 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 	/** The Underline Box. */
 	private final LoboCheckBox underlineCheckBox;
+	
+	/** The modern Box. */
+	private final LoboCheckBox modernCheckBox;
+
+	/** The blackWhite Box. */
+	private final LoboCheckBox blackWhiteCheckBox;
+
+	/** The whiteBlack Box. */
+	private final LoboCheckBox whiteBlackCheckBox;
+
 
 	/**
 	 * <p>Constructor for LookAndFeelsSettingsUI.</p>
@@ -135,11 +145,6 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 
 		this.boldCheckBox = new LoboCheckBox(LAFType.BOLD.getValue());
 		this.italicCheckBox = new LoboCheckBox(LAFType.ITALIC.getValue());
-		this.underlineCheckBox = new LoboCheckBox(FontType.UNDERLINE.getValue());
-		this.strikethroughCheckBox = new LoboCheckBox(FontType.STRIKETHROUGH.getValue());
-		this.subscriptCheckBox = new LoboCheckBox(FontType.SUBSCRIPT.getValue());
-		this.superscriptCheckBox = new LoboCheckBox(FontType.SUPERSCRIPT.getValue());
-
 		this.acrylCheckBox = new LoboCheckBox(LAFType.ACRYL.getValue());
 		this.aeroCheckBox = new LoboCheckBox(LAFType.AERO.getValue());
 		this.aluminiumCheckBox = new LoboCheckBox(LAFType.ALUMINIUM.getValue());
@@ -152,7 +157,15 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.mintCheckBox = new LoboCheckBox(LAFType.MINT.getValue());
 		this.noireCheckBox = new LoboCheckBox(LAFType.NOIRE.getValue());
 		this.smartCheckBox = new LoboCheckBox(LAFType.SMART.getValue());
+		this.modernCheckBox = new LoboCheckBox(LAFType.MODERN.getValue());
+		this.blackWhiteCheckBox = new LoboCheckBox(LAFType.BLACK_WHITE.getValue());
+		this.whiteBlackCheckBox = new LoboCheckBox(LAFType.WHITE_BLACK.getValue());
+		this.underlineCheckBox = new LoboCheckBox(FontType.UNDERLINE.getValue());
+		this.strikethroughCheckBox = new LoboCheckBox(FontType.STRIKETHROUGH.getValue());
+		this.subscriptCheckBox = new LoboCheckBox(FontType.SUBSCRIPT.getValue());
+		this.superscriptCheckBox = new LoboCheckBox(FontType.SUPERSCRIPT.getValue());
 		this.textureCheckBox = new LoboCheckBox(FontType.TEXTURE.getValue());
+		
 		this.colorComboBox = new ColorComboBox();
 		this.colorComboBox.setPreferredSize(new Dimension(400, 20));
 		this.fontList = new JComboBox<String>(LAFSettings.getFonts("FONT"));
@@ -219,6 +232,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.mintCheckBox.setSelected(laf.isMint());
 		this.noireCheckBox.setSelected(laf.isNoire());
 		this.smartCheckBox.setSelected(laf.isSmart());
+		this.modernCheckBox.setSelected(laf.isModern());
+		this.blackWhiteCheckBox.setSelected(laf.isBlackWhite());
+		this.whiteBlackCheckBox.setSelected(laf.isWhiteBlack());
 		this.textureCheckBox.setSelected(laf.isTexture());
 		this.boldCheckBox.setSelected(laf.isBold());
 		this.italicCheckBox.setSelected(laf.isItalic());
@@ -242,6 +258,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.mintCheckBox.revalidate();
 		this.noireCheckBox.revalidate();
 		this.smartCheckBox.revalidate();
+		this.modernCheckBox.revalidate();
+		this.blackWhiteCheckBox.revalidate();
+		this.whiteBlackCheckBox.revalidate();
 		this.textureCheckBox.revalidate();
 		this.boldCheckBox.revalidate();
 		this.italicCheckBox.revalidate();
@@ -265,6 +284,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		p.add(this.mintCheckBox);
 		p.add(this.noireCheckBox);
 		p.add(this.smartCheckBox);
+		p.add(this.modernCheckBox);
+		p.add(this.blackWhiteCheckBox);
+		p.add(this.whiteBlackCheckBox);
 		p.add(this.textureCheckBox);
 		return p;
 	}
@@ -291,6 +313,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.mintCheckBox.setSelected(false);
 		this.noireCheckBox.setSelected(false);
 		this.smartCheckBox.setSelected(false);
+		this.modernCheckBox.setSelected(false);
+		this.blackWhiteCheckBox.setSelected(false);
+		this.whiteBlackCheckBox.setSelected(false);
 		this.textureCheckBox.setSelected(false);
 		this.boldCheckBox.setSelected(false);
 		this.italicCheckBox.setSelected(false);
@@ -312,6 +337,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.mintCheckBox.revalidate();
 		this.noireCheckBox.revalidate();
 		this.smartCheckBox.revalidate();
+		this.modernCheckBox.revalidate();
+		this.blackWhiteCheckBox.revalidate();
+		this.whiteBlackCheckBox.revalidate();
 		this.textureCheckBox.revalidate();
 		this.boldCheckBox.revalidate();
 		this.italicCheckBox.revalidate();
@@ -356,6 +384,9 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		laf.setFont(this.fontList.getSelectedItem().toString());
 		laf.setColor((Color) this.colorComboBox.getSelectedItem());
 		laf.setBold(this.boldCheckBox.isSelected());
+		laf.setModern(modernCheckBox.isSelected());
+		laf.setBlackWhite(blackWhiteCheckBox.isSelected());
+		laf.setWhiteBlack(whiteBlackCheckBox.isSelected());
 
 		if (validate(laf)) {
 			final LookAndFeelsStore sql = new LookAndFeelsStore();
@@ -462,6 +493,18 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 			check = check + 1;
 		}
 		if (laf.isTexture()) {
+			check = check + 1;
+		}
+		
+		if (laf.isModern()) {
+			check = check + 1;
+		}
+		
+		if (laf.isBlackWhite()) {
+			check = check + 1;
+		}
+		
+		if (laf.isWhiteBlack()) {
 			check = check + 1;
 		}
 

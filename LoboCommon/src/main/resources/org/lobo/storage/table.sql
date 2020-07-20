@@ -9,7 +9,7 @@ CREATE TABLE FONT (name text);
 CREATE TABLE FONT_SIZE (name text);
 CREATE TABLE HOST (baseUrl text, tab integer, dt date);
 CREATE TABLE INPUT (name text, value text);
-CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, hiFi integer,luna integer, mcWin integer, mint integer, noire integer, smart integer, texture integer,bold integer, italic integer, underline integer, strikethrough integer, subscript integer, superscript integer, fontSize text, font text, color text);
+CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, hiFi integer,luna integer, mcWin integer, mint integer, noire integer, smart integer, texture integer,bold integer, italic integer, underline integer, strikethrough integer, subscript integer, superscript integer, modern integer, black integer, white integer, fontSize text, font text, color text);
 CREATE TABLE NETWORK (js integer, css integer, cookie integer, cache integer, navigation integer);
 CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter text, selected integer, type text);
 CREATE TABLE STARTUP (baseUrl text);
