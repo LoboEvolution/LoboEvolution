@@ -41,19 +41,10 @@ public class LAFSettings implements Serializable {
 
 	/** The Bold . */
 	private boolean bold = false;
-
-	/** The Color . */
-	private Color color = Color.BLACK;
-
+	
 	/** The Fast . */
 	private boolean fast = false;
-
-	/** The Font . */
-	private String font = FontType.TIMES_NEW_ROMAN.getValue();
-
-	/** The Font Size . */
-	private float fontSize = 14.0f;
-
+	
 	/** The Graphite . */
 	private boolean graphite = false;
 
@@ -62,6 +53,24 @@ public class LAFSettings implements Serializable {
 
 	/** The Italic . */
 	private boolean italic = false;
+	
+	/** The modern . */
+	private boolean modern = false;
+
+	/** The blackWhite . */
+	private boolean blackWhite = false;
+
+	/** The Italic . */
+	private boolean whiteBlack = true;	
+
+	/** The Color . */
+	private Color color = Color.BLACK;
+	
+	/** The Font . */
+	private String font = FontType.TIMES_NEW_ROMAN.getValue();
+
+	/** The Font Size . */
+	private float fontSize = 14.0f;
 
 	private final String LOOK_AND_FEEL = " SELECT DISTINCT acryl, aero, aluminium, bernstein, fast, graphite,"
 			+ " 	    		 hiFi,luna, mcWin, mint, noire, smart, texture,"
@@ -563,5 +572,47 @@ public class LAFSettings implements Serializable {
 	 */
 	public void setUnderline(boolean underline) {
 		this.underline = underline;
+	}
+
+	/**
+	 * @return the modern
+	 */
+	public boolean isModern() {
+		return modern;
+	}
+
+	/**
+	 * @param modern the modern to set
+	 */
+	public void setModern(boolean modern) {
+		this.modern = modern;
+	}
+
+	/**
+	 * @return the blackWhite
+	 */
+	public boolean isBlackWhite() {
+		return blackWhite;
+	}
+
+	/**
+	 * @param blackWhite the blackWhite to set
+	 */
+	public void setBlackWhite(boolean blackWhite) {
+		this.blackWhite = blackWhite;
+	}
+
+	/**
+	 * @return the whiteBlack
+	 */
+	public boolean isWhiteBlack() {
+		return whiteBlack;
+	}
+
+	/**
+	 * @param whiteBlack the whiteBlack to set
+	 */
+	public void setWhiteBlack(boolean whiteBlack) {
+		this.whiteBlack = whiteBlack;
 	}
 }
