@@ -1,6 +1,6 @@
 package org.loboevolution.menu.tools.pref;
 
-import org.loboevolution.gui.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>Abstract AbstractSettingsUI class.</p>

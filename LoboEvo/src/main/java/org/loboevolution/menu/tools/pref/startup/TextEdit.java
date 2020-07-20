@@ -11,9 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import org.loboevolution.gui.LoboButton;
-import org.loboevolution.gui.LoboLabel;
-import org.loboevolution.gui.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboPanel;
 /**
  * The Class TextEdit.
  *

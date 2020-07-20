@@ -9,9 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.LineBorder;
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.gui.LoboCheckBox;
-import org.loboevolution.gui.LoboPanel;
 import org.loboevolution.gui.SwingTasks;
+
+import com.jtattoo.plaf.lobo.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>ClearHistoryWindow class.</p>

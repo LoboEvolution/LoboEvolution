@@ -12,9 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.gui.AbstractItemEditor;
-import org.loboevolution.gui.LoboButton;
-import org.loboevolution.gui.LoboLabel;
 import org.loboevolution.gui.ItemEditorFactory;
+
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboLabel;
 
 /**
  * The Class ItemEditor.

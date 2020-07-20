@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import org.loboevolution.gui.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboCheckBox;
 
 /**
  * <p>ImportDataAction class.</p>
@@ -27,8 +27,8 @@ public class ImportDataAction extends AbstractAction {
 	/**
 	 * <p>Constructor for ImportDataAction.</p>
 	 *
-	 * @param mozillaPanel a {@link org.loboevolution.gui.LoboCheckBox} object.
-	 * @param chromePanel a {@link org.loboevolution.gui.LoboCheckBox} object.
+	 * @param mozillaPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param chromePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 * @param action a {@link java.lang.String} object.
 	 */
 	public ImportDataAction(LoboCheckBox chrome, LoboCheckBox mozilla, String action) {

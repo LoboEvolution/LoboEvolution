@@ -10,14 +10,15 @@ import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.border.EmptyBorder;
 
-import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
-import org.loboevolution.gui.LoboPanel;
-import org.loboevolution.gui.LoboRadioButton;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.store.ConnectionStore;
+
+import com.jtattoo.plaf.lobo.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboRadioButton;
 
 /**
  * <p>ConnectionSettingsUI class.</p>

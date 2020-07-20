@@ -7,8 +7,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
-import org.loboevolution.gui.LoboButton;
 import org.loboevolution.gui.ItemEditorFactory;
+
+import com.jtattoo.plaf.lobo.LoboButton;
 
 /**
  * The Class ItemListControl.

@@ -11,8 +11,9 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.gui.LoboButton;
-import org.loboevolution.gui.LoboPanel;
+
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>PreferenceWindow class.</p>

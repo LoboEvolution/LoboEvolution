@@ -10,7 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
-import org.loboevolution.gui.LoboButton;
+import com.jtattoo.plaf.lobo.LoboButton;
 
 /**
  * <p>StartupListControl class.</p>

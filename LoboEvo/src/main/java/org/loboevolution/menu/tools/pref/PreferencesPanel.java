@@ -5,7 +5,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import org.loboevolution.common.WrapperLayout;
-import org.loboevolution.gui.LoboPanel;
+
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * The Class PreferencesPanel.

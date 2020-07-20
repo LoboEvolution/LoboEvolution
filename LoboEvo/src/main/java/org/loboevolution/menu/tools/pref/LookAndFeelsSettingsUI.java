@@ -29,15 +29,17 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.loboevolution.gui.LoboCheckBox;
+
 import org.loboevolution.gui.ColorComboBox;
 import org.loboevolution.gui.FontLabel;
-import org.loboevolution.gui.LoboPanel;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.laf.FontType;
 import org.loboevolution.laf.LAFSettings;
 import org.loboevolution.laf.LAFType;
 import org.loboevolution.store.LookAndFeelsStore;
+
+import com.jtattoo.plaf.lobo.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * The Class LookAndFeelsSettingsUI.

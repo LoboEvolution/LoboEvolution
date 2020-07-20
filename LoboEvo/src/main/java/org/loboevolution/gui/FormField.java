@@ -5,6 +5,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
 
+import com.jtattoo.plaf.lobo.LoboLabel;
+
 /**
  * The Class FormField.
  *

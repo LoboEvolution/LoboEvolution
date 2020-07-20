@@ -4,7 +4,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 
-import org.loboevolution.gui.LoboTree;
+import com.jtattoo.plaf.lobo.LoboTree;
 
 /**
  * <p>PreferencesTree class.</p>

@@ -1,4 +1,4 @@
-package org.loboevolution.gui;
+package com.jtattoo.plaf.lobo;
 
 import java.awt.Color;
 

@@ -9,16 +9,17 @@ import javax.swing.BoxLayout;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import org.loboevolution.common.Strings;
-import org.loboevolution.gui.LoboCheckBox;
 import org.loboevolution.gui.FieldType;
 import org.loboevolution.gui.FormField;
 import org.loboevolution.gui.FormPanel;
-import org.loboevolution.gui.LoboLabel;
-import org.loboevolution.gui.LoboPanel;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.menu.tools.pref.startup.StartupListControl;
 import org.loboevolution.net.HttpNetwork;
 import org.loboevolution.store.GeneralStore;
+
+import com.jtattoo.plaf.lobo.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>GeneralSettingsUI class.</p>
