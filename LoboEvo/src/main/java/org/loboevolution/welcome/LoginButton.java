@@ -44,7 +44,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 
 	private final Font FONT_GENERAL_UI = new Font("Segoe UI", Font.PLAIN, 20);
 
-	private final Color[] loginButtonColors = { this.COLOR_INTERACTIVE, Color.white };
+	private final Color[] loginButtonColors = { this.COLOR_INTERACTIVE, foreground() };
 
 	private final Color OFFWHITE = new Color(229, 229, 229);
 
@@ -73,7 +73,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 			@Override
 			public void mouseExited(MouseEvent e) {
 				LoginButton.this.loginButtonColors[0] = LoginButton.this.COLOR_INTERACTIVE;
-				LoginButton.this.loginButtonColors[1] = Color.white;
+				LoginButton.this.loginButtonColors[1] = LoginButton.this.foreground();
 				repaint();
 			}
 
