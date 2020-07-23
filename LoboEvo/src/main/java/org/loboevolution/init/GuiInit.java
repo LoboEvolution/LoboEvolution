@@ -108,7 +108,7 @@ public class GuiInit {
 	 *
 	 * @throws java.lang.Exception if any.
 	 */
-	public void createAndShowGui() throws Exception {
+	public static void createAndShowGui() throws Exception {
 		initLookAndFeel();
 		final BrowserFrame frame = new BrowserFrame("LoboEvo");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
