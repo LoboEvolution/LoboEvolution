@@ -11,7 +11,6 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
-
 import javax.swing.JLabel;
 
 import org.loboevolution.common.Strings;
@@ -23,22 +22,25 @@ import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedPanePopupMenu;
 
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+
 /**
  * <p>LoginButton class.</p>
  *
  * @author utente
  * @version $Id: $Id
  */
-public class LoginButton extends JLabel {
+public class LoginButton extends JLabel implements LoboLookAndFeel {
+
 	private static final long serialVersionUID = 1L;
 
 	private final String BUTTON_TEXT_LOGIN = "Surf!";
 
-	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
+	private final Color COLOR_BACKGROUND = background();
 
-	private final Color COLOR_INTERACTIVE = new Color(108, 216, 158);
+	private final Color COLOR_INTERACTIVE = background();
 
-	private final Color COLOR_INTERACTIVE_DARKER = new Color(87, 171, 127);
+	private final Color COLOR_INTERACTIVE_DARKER = interactive();
 
 	private final Font FONT_GENERAL_UI = new Font("Segoe UI", Font.PLAIN, 20);
 
@@ -104,6 +106,14 @@ public class LoginButton extends JLabel {
 			}
 		});
 		return g2;
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	protected void paintBorder(Graphics g) {
+		final Graphics2D g2 = get2dGraphics(g);
+		g2.setColor(foreground());
+		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
 	}
 
 	/** {@inheritDoc} */

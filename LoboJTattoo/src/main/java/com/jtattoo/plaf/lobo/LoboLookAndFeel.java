@@ -47,4 +47,23 @@ public interface LoboLookAndFeel {
 		}
 		return color;
 	}
+	
+	
+	default Color interactive() {
+		final LAFSettings settings = new LAFSettings().getInstance();
+		Color color = null;
+
+		if (settings.isModern()) {
+			color = new Color(32, 32, 32);
+		}
+
+		if (settings.isBlackWhite()) {
+			color = new Color(32, 32, 32);
+		}
+
+		if (settings.isWhiteBlack()) {
+			color = new Color(32, 32, 32);
+		}
+		return color;
+	}
 }

@@ -1,11 +1,11 @@
 package org.loboevolution.welcome;
 
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IWelcomePanel;
+
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 
 /**
  * <p>WelcomePanel class.</p>
@@ -13,7 +13,7 @@ import org.loboevolution.component.IWelcomePanel;
  * @author utente
  * @version $Id: $Id
  */
-public class WelcomePanel extends JPanel implements IWelcomePanel {
+public class WelcomePanel extends JPanel implements IWelcomePanel, LoboLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +29,7 @@ public class WelcomePanel extends JPanel implements IWelcomePanel {
 	public WelcomePanel(IBrowserPanel panel) {
 		this.text = new TextFieldUsername();
 		this.button = new LoginButton(panel, this.text);
-		setBackground(new Color(37, 51, 61));
+		setBackground(background());
 		setLayout(null);
 		add(this.text);
 		add(this.button);
