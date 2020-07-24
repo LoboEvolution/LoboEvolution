@@ -4,7 +4,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.Collection;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.gui.ItemEditorFactory;
 import org.loboevolution.gui.SwingTasks;
@@ -36,9 +38,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	private static final long serialVersionUID = 1L;
 
-	/** The bookmark button. */
-	private LoboButton bookmarkButton;
-
 	/** The chrome bookmark panel. */
 	private LoboCheckBox chromeBookmarkPanel;
 
@@ -47,12 +46,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	/** The chrome panel. */
 	private LoboCheckBox chromePanel;
-
-	/** The history button. */
-	private LoboButton historyButton;
-
-	/** The import button. */
-	private LoboButton importButton;
 
 	/** The mozilla bookmark panel. */
 	private LoboCheckBox mozillaBookmarkPanel;
@@ -86,7 +79,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		final LoboButton historyButton = new LoboButton();
 		historyButton.setAction(new ImportDataAction(this.mozillaHistoryPanel, this.chromeHistoryPanel, HISTORY));
 		historyButton.setText("Import History");
-		this.historyButton = historyButton;
 
 		this.mozillaBookmarkPanel = new LoboCheckBox("Mozilla Firefox");
 		this.chromeBookmarkPanel = new LoboCheckBox("Google Chrome");
@@ -94,7 +86,6 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		final LoboButton bookmarkButton = new LoboButton();
 		bookmarkButton.setAction(new ImportDataAction(this.mozillaBookmarkPanel, this.chromeBookmarkPanel, BOOKMARKS));
 		bookmarkButton.setText("Import Bookmarks");
-		this.bookmarkButton = bookmarkButton;
 
 		this.mozillaPanel = new LoboCheckBox("Mozilla Firefox");
 		this.chromePanel = new LoboCheckBox("Google Chrome");
@@ -102,59 +93,39 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		final LoboButton importButton = new LoboButton();
 		importButton.setAction(new ImportDataAction(this.mozillaPanel, this.chromePanel, COOKIES));
 		importButton.setText("Import Cookies");
-		this.importButton = importButton;
 
 		this.add(getSearchEnginePane());
-		this.add(getHistoryBox());
-		this.add(getBookmarksBox());
-		this.add(getCookisBox());
+		this.add(getBox("Bookmark", mozillaBookmarkPanel, chromeBookmarkPanel, bookmarkButton));
+		this.add(getBox("Cookies", mozillaPanel, chromePanel, importButton));
+		this.add(getBox("History", mozillaHistoryPanel, chromeHistoryPanel, historyButton));
 		this.add(SwingTasks.createVerticalFill());
 		loadSettings();
 
 	}
 
 	/**
-	 * Gets the bookmarks box.
+	 * Gets the box.
 	 *
-	 * @return the bookmarks box
+	 * @return the box
 	 */
-	private Component getBookmarksBox() {
-		final LoboPanel groupBox = new LoboPanel("Bookmarks");
-		groupBox.setPreferredSize(new Dimension(420, 100));
+	private Component getBox(String title, LoboCheckBox mozillaPanel, LoboCheckBox chromePanel ,LoboButton button) {
+		final LoboPanel groupBox = new LoboPanel(title);
+		groupBox.setPreferredSize(new Dimension(420,75));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.add(mozillaBookmarkPanel);
-		groupBox.add(chromeBookmarkPanel);
-		groupBox.add(bookmarkButton);
-		return groupBox;
-	}
-
-	/**
-	 * Gets the cookies box.
-	 *
-	 * @return the cookies box
-	 */
-	private Component getCookisBox() {
-		final LoboPanel groupBox = new LoboPanel("Cookies");
-		groupBox.setPreferredSize(new Dimension(420, 100));
-		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.add(mozillaPanel);
-		groupBox.add(chromePanel);
-		groupBox.add(importButton);
-		return groupBox;
-	}
-
-	/**
-	 * Gets the history box.
-	 *
-	 * @return the history box
-	 */
-	private Component getHistoryBox() {
-		final LoboPanel groupBox = new LoboPanel("History");
-		groupBox.setPreferredSize(new Dimension(420, 100));
-		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.add(mozillaHistoryPanel);
-		groupBox.add(chromeHistoryPanel);
-		groupBox.add(historyButton);
+		
+		final LoboPanel browserBox = new LoboPanel();
+		browserBox.setLayout(new BoxLayout(browserBox, BoxLayout.X_AXIS));
+		browserBox.add(mozillaPanel);
+		browserBox.add(chromePanel);
+		
+		final LoboPanel buttonsPanel = new LoboPanel("");
+		buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		buttonsPanel.add(Box.createHorizontalGlue());
+		buttonsPanel.add(button);
+		
+		groupBox.add(browserBox);
+		groupBox.add(buttonsPanel);
 		return groupBox;
 	}
 
