@@ -74,6 +74,17 @@ public class ColorFactory {
 	 * @param colorSpec the color spec
 	 * @return the color
 	 */
+	public Color getColor(LAFColorType colorSpec) {
+		return getColor(colorSpec.getValue());
+
+	}
+
+	/**
+	 * Gets the color.
+	 *
+	 * @param colorSpec the color spec
+	 * @return the color
+	 */
 	public Color getColor(String colorSpec) {
 
 		if (colorSpec == null) {

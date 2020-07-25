@@ -1,21 +1,26 @@
 package org.loboevolution.menu.bookmarks;
 
 import java.awt.Container;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import javax.swing.border.MatteBorder;
 
-import org.loboevolution.gui.FieldType;
-import org.loboevolution.gui.FormField;
-import org.loboevolution.gui.FormPanel;
+import org.loboevolution.common.Strings;
+import org.loboevolution.info.BookmarkInfo;
+import org.loboevolution.store.BookmarksStore;
+
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import com.jtattoo.plaf.lobo.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboTextField;
 
 /**
  * <p>AddBookmarkWindow class.</p>
@@ -23,22 +28,22 @@ import org.loboevolution.gui.FormPanel;
  * @author utente
  * @version $Id: $Id
  */
-public class AddBookmarkWindow extends JFrame {
+public class AddBookmarkWindow extends JFrame implements LoboLookAndFeel, ActionListener{
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/** The description field. */
-	private final transient FormField descriptionField = new FormField(FieldType.TEXT, "Description:");
-
+	private LoboTextField descriptionField;
+	
+	/** The titleField field. */
+	private LoboTextField titleField;
+	
 	/** The tags field. */
-	private final transient FormField tagsField = new FormField(FieldType.TEXT, "Tags:");
-
-	/** The title field. */
-	private final transient FormField titleField = new FormField(FieldType.TEXT, "Title:");
-
+	private LoboTextField tagsField;
+	
 	/** The url field. */
-	private transient FormField urlField = new FormField(FieldType.TEXT, "URL:");
+	private LoboTextField urlField;
 
 	/**
 	 * <p>Constructor for AddBookmarkWindow.</p>
@@ -50,84 +55,173 @@ public class AddBookmarkWindow extends JFrame {
 	}
 
 	private void createAndShowGUI(String uri) {
+		final MatteBorder border = new MatteBorder(0, 0, 1, 0, foreground());
+		
+		final Container contentPane = getContentPane();
+		contentPane.setLayout(null);
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 370, 440);
 		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-		this.urlField.setEditable(false);
-		this.tagsField.setToolTip("List of keywords separated by blanks.");
-		this.urlField.setValue(uri);
-		final Container contentPane = getContentPane();
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		final FormPanel fieldsPanel = new FormPanel();
-		fieldsPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		fieldsPanel.addField(this.urlField);
-		fieldsPanel.addField(this.tagsField);
-		fieldsPanel.addField(this.descriptionField);
-		fieldsPanel.addField(this.tagsField);
+		
+		LoboPanel panel = new LoboPanel();
+		panel.setLayout(null);
+		panel.setBounds(0, 0, 350, 400);
+		contentPane.add(panel);
+		
+		LoboLabel lblEditionDeCompte = new LoboLabel("Add Bookmark");
+		lblEditionDeCompte.setHorizontalAlignment(SwingConstants.CENTER);
+		lblEditionDeCompte.setFont(new Font("Tahoma", Font.BOLD, 17));
+		lblEditionDeCompte.setBounds(0, 0, 167, 22);
+		panel.add(lblEditionDeCompte);
+		
+		LoboLabel lbldescriptionField = new LoboLabel("Description");
+		lbldescriptionField.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbldescriptionField.setBounds(12, 70, 282, 16);
+		panel.add(lbldescriptionField);
+		
+		descriptionField = new LoboTextField();
+		descriptionField.setFont(new Font("Tahoma", Font.BOLD, 12));
+		descriptionField.setColumns(10);
+		descriptionField.setBorder(border);
+		descriptionField.setBounds(12, 98, 350, 16);
+		panel.add(descriptionField);
 
-		final Dimension fpps = fieldsPanel.getPreferredSize();
-		fieldsPanel.setPreferredSize(new Dimension(400, fpps.height));
+		LoboLabel lbltitleField = new LoboLabel("Title");
+		lbltitleField.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lbltitleField.setBounds(12, 139, 282, 16);
+		panel.add(lbltitleField);
 
-		contentPane.add(fieldsPanel);
-		final JComponent buttonsPanel = new JPanel();
-		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
-		final JButton okButton = new JButton();
-		okButton.setAction(new OkCancelAddBookAction(this, true));
+		titleField = new LoboTextField();
+		titleField.setFont(new Font("Tahoma", Font.BOLD, 12));
+		titleField.setColumns(10);
+		titleField.setBorder(border);
+		titleField.setBounds(12, 167, 350, 16);
+		panel.add(titleField);
+
+		LoboLabel lblMotDePasse_1 = new LoboLabel("Tags");
+		lblMotDePasse_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblMotDePasse_1.setBounds(12, 208, 282, 16);
+		panel.add(lblMotDePasse_1);
+
+		tagsField = new LoboTextField();
+		tagsField.setFont(new Font("Tahoma", Font.BOLD, 12));
+		tagsField.setColumns(10);
+		tagsField.setBorder(border);
+		tagsField.setBounds(12, 236, 350, 16);
+		panel.add(tagsField);
+		
+		LoboLabel lblurlField_1 = new LoboLabel("Url");
+		lblurlField_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblurlField_1.setBounds(12, 277, 282, 16);
+		panel.add(lblurlField_1);
+		
+		urlField = new LoboTextField();
+		urlField.setFont(new Font("Tahoma", Font.BOLD, 12));
+		urlField.setColumns(10);
+		urlField.setBorder(border);
+		urlField.setText(uri);
+		urlField.setBounds(12, 300, 350, 16);
+		panel.add(urlField);
+		
+		LoboButton okButton = new LoboButton();
 		okButton.setText("Save");
-		final JButton cancelButton = new JButton();
-		cancelButton.setAction(new OkCancelAddBookAction(this, false));
-		cancelButton.setText("Cancel");
-		buttonsPanel.add(Box.createHorizontalGlue());
-		buttonsPanel.add(okButton);
-		buttonsPanel.add(Box.createRigidArea(new Dimension(4, 1)));
-		buttonsPanel.add(cancelButton);
-		buttonsPanel.add(Box.createHorizontalGlue());
-		contentPane.add(buttonsPanel);
-		contentPane.add(Box.createRigidArea(new Dimension(1, 4)));
+		okButton.setBounds(12, 356, 150, 40);
+		okButton.setActionCommand("save");
+		okButton.addActionListener(this);
+		panel.add(okButton);
+
+		LoboButton closeButton = new LoboButton();
+		closeButton.setText("Close");
+		closeButton.setActionCommand("close");
+		closeButton.addActionListener(this);
+		closeButton.setBounds(180, 356, 150, 40);
+		panel.add(closeButton);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String actionCommand = e.getActionCommand();		
+		switch (actionCommand) {
+		case "save":
+			final BookmarksStore book = new BookmarksStore();
+			book.insertBookmark(getinfo());
+			JOptionPane.showMessageDialog(this, "Bookmark Added!");
+			setVisible(false);
+			dispose();
+			break;
+		case "close":
+			setVisible(false);
+			dispose();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	private BookmarkInfo getinfo() {
+		final BookmarkInfo binfo = new BookmarkInfo();
+		binfo.setUrl(getUrlField().getText());
+		binfo.setTitle(getTitleField().getText());
+		binfo.setDescription(getDescriptionField().getText());
+		binfo.setTags(Strings.split(getTagsField().getText()));
+		return binfo;
 	}
 
 	/**
-	 * <p>Getter for the field descriptionField.</p>
-	 *
 	 * @return the descriptionField
 	 */
-	public FormField getDescriptionField() {
-		return this.descriptionField;
+	public LoboTextField getDescriptionField() {
+		return descriptionField;
 	}
 
 	/**
-	 * <p>Getter for the field tagsField.</p>
-	 *
-	 * @return the tagsField
+	 * @param descriptionField the descriptionField to set
 	 */
-	public FormField getTagsField() {
-		return this.tagsField;
+	public void setDescriptionField(LoboTextField descriptionField) {
+		this.descriptionField = descriptionField;
 	}
 
 	/**
-	 * <p>Getter for the field titleField.</p>
-	 *
 	 * @return the titleField
 	 */
-	public FormField getTitleField() {
-		return this.titleField;
+	public LoboTextField getTitleField() {
+		return titleField;
 	}
 
 	/**
-	 * <p>Getter for the field urlField.</p>
-	 *
+	 * @param titleField the titleField to set
+	 */
+	public void setTitleField(LoboTextField titleField) {
+		this.titleField = titleField;
+	}
+
+	/**
+	 * @return the tagsField
+	 */
+	public LoboTextField getTagsField() {
+		return tagsField;
+	}
+
+	/**
+	 * @param tagsField the tagsField to set
+	 */
+	public void setTagsField(LoboTextField tagsField) {
+		this.tagsField = tagsField;
+	}
+
+	/**
 	 * @return the urlField
 	 */
-	public FormField getUrlField() {
-		return this.urlField;
+	public LoboTextField getUrlField() {
+		return urlField;
 	}
 
 	/**
-	 * <p>Setter for the field urlField.</p>
-	 *
 	 * @param urlField the urlField to set
 	 */
-	public void setUrlField(FormField urlField) {
+	public void setUrlField(LoboTextField urlField) {
 		this.urlField = urlField;
 	}
 }

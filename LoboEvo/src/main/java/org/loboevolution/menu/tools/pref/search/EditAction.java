@@ -1,13 +1,9 @@
 package org.loboevolution.menu.tools.pref.search;
 
-import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-
-import org.loboevolution.gui.SwingTasks;
 
 /**
  * <p>EditAction class.</p>
@@ -45,15 +41,7 @@ public class EditAction<T> extends AbstractAction {
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		final Frame parentFrame = SwingTasks.getFrame(this.item);
-		ItemEditorDialog<T> dialog;
-		if (parentFrame != null) {
-			dialog = new ItemEditorDialog<T>(parentFrame, this.item.getItemEditorFactory());
-		} else {
-			final Dialog parentDialog = SwingTasks.getDialog(this.item);
-			dialog = new ItemEditorDialog<T>(parentDialog, this.item.getItemEditorFactory());
-		}
-		dialog.setModal(true);
+		ItemEditor<T> dialog = new ItemEditor<T>(this.item.getItemEditorFactory());
 		dialog.setTitle(this.add ? "Add Item" : "Edit Item");
 		dialog.setCaption(this.item.getEditListCaption());
 		dialog.pack();

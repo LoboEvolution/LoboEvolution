@@ -1,9 +1,10 @@
 package org.loboevolution.menu.tools.pref;
 
-import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
+
+import com.jtattoo.plaf.lobo.LoboTree;
 
 /**
  * <p>PreferencesTree class.</p>
@@ -11,7 +12,7 @@ import javax.swing.tree.TreeNode;
  * @author utente
  * @version $Id: $Id
  */
-public class PreferencesTree extends JTree {
+public class PreferencesTree extends LoboTree {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;

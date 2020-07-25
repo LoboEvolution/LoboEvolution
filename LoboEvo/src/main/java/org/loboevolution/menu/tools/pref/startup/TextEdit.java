@@ -2,38 +2,36 @@ package org.loboevolution.menu.tools.pref.startup;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.Frame;
-
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 /**
- * The Class SimpleTextEditDialog.
+ * The Class TextEdit.
  *
  * @author utente
  * @version $Id: $Id
  */
-public class SimpleTextEditDialog extends JDialog {
+public class TextEdit extends JFrame implements LoboLookAndFeel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-
+	
 	/** The cancel button. */
-	private final JButton cancelButton = new JButton();
+	private final LoboButton cancelButton = new LoboButton();
 
 	/** The caption label. */
-	private final JLabel captionLabel = new JLabel();
+	private final LoboLabel captionLabel = new LoboLabel("");
 
 	/** The ok button. */
-	private final JButton okButton = new JButton();
+	private final LoboButton okButton = new LoboButton();
 
 	/** The resulting text. */
 	private String resultingText;
@@ -43,24 +41,37 @@ public class SimpleTextEditDialog extends JDialog {
 
 	/**
 	 * Instantiates a new simple text edit dialog.
-	 *
-	 * @param parent the parent
 	 */
-	public SimpleTextEditDialog(Dialog parent) {
-		super(parent);
-		init();
+	public TextEdit() {
+		createAndShowGUI();
 	}
 
 	/**
-	 * Instantiates a new simple text edit dialog.
-	 *
-	 * @param parent the parent
+	 * Inits the.
 	 */
-	public SimpleTextEditDialog(Frame parent) {
-		super(parent);
-		init();
+	private void createAndShowGUI() {
+		setResizable(false);
+		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
+		this.captionLabel.setAlignmentX(0.0f);
+		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
+		this.okButton.setAction(new TextEditOkAction(this.textArea, this));
+		this.okButton.setText("OK");
+		this.cancelButton.setAction(new TextEditCancelAction(this));
+		this.cancelButton.setText("Cancel");
+		
+		final Box rootBox = new Box(BoxLayout.Y_AXIS);
+		rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
+		rootBox.add(this.captionLabel);
+		rootBox.add(new JScrollPane(this.textArea));
+		rootBox.add(this.createButtonPanel());
+		
+		final Container contentPane = getContentPane();
+		contentPane.setBackground(background());
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		contentPane.add(rootBox);
 	}
-
+	
+	
 	/**
 	 * Creates the button panel.
 	 *
@@ -68,7 +79,6 @@ public class SimpleTextEditDialog extends JDialog {
 	 */
 	private Component createButtonPanel() {
 		final Box panel = new Box(BoxLayout.X_AXIS);
-		panel.setPreferredSize(new Dimension(Short.MAX_VALUE, 0));
 		panel.setBorder(new EmptyBorder(4, 4, 4, 4));
 		panel.add(Box.createGlue());
 		panel.add(this.okButton);
@@ -77,7 +87,8 @@ public class SimpleTextEditDialog extends JDialog {
 		panel.add(Box.createGlue());
 		return panel;
 	}
-
+	
+	
 	/**
 	 * Gets the resulting text.
 	 *
@@ -94,26 +105,6 @@ public class SimpleTextEditDialog extends JDialog {
 	 */
 	public String getText() {
 		return this.textArea.getText();
-	}
-
-	/**
-	 * Inits the.
-	 */
-	private void init() {
-		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
-		this.captionLabel.setAlignmentX(0.0f);
-		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
-		this.textArea.setPreferredSize(new Dimension(1, Short.MAX_VALUE));
-		final Container contentPane = getContentPane();
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		contentPane.add(this.captionLabel);
-		contentPane.add(new JScrollPane(this.textArea));
-		contentPane.add(createButtonPanel());
-		this.textArea.setEditable(true);
-		this.okButton.setAction(new TextEditOkAction(this.textArea, this));
-		this.okButton.setText("OK");
-		this.cancelButton.setAction(new TextEditCancelAction(this));
-		this.cancelButton.setText("Cancel");
 	}
 
 	/**

@@ -38,11 +38,10 @@ public class OkCancelAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
-			GuiInit.initLookAndFeel();
 			this.prefer.dispose();
 			this.prefer.getFrame().dispose();
-			this.prefer.getFrame().setVisible(false);
-			this.prefer.getFrame().setVisible(true);
+			GuiInit.initLookAndFeel();
+			GuiInit.createAndShowGui();
 		} catch (final Exception e1) {
 			e1.printStackTrace();
 		}

@@ -1,15 +1,15 @@
 package org.loboevolution.menu.tools.pref.search;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 
 import org.loboevolution.gui.ItemEditorFactory;
+
+import com.jtattoo.plaf.lobo.LoboButton;
 
 /**
  * The Class ItemListControl.
@@ -45,21 +45,20 @@ public class ItemListControl<T> extends JComponent {
 
 	private void createAndShowGUI() {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		this.getComboBox().setPreferredSize(new Dimension(100, 24));
 		this.getComboBox().setEditable(false);
-		final JButton setDefaultButton = new JButton();
+		final LoboButton setDefaultButton = new LoboButton();
 		setDefaultButton.setAction(new SetAsDefaultAction<T>(this));
 		setDefaultButton.setText("Set Default");
-		final JButton editButton = new JButton();
+		final LoboButton editButton = new LoboButton();
 		editButton.setAction(new EditAction<T>(false, this));
 		editButton.setText("Edit");
-		final JButton addButton = new JButton();
+		final LoboButton addButton = new LoboButton();
 		addButton.setAction(new EditAction<T>(true, this));
 		addButton.setText("Add");
-		final JButton removeButton = new JButton();
+		final LoboButton removeButton = new LoboButton();
 		removeButton.setAction(new RemoveAction<T>(this));
 		removeButton.setText("Remove");
-		this.add(this.getComboBox());
+		this.add(getComboBox());
 		this.add(setDefaultButton);
 		this.add(editButton);
 		this.add(addButton);

@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import org.loboevolution.gui.CheckBoxPanel;
+import com.jtattoo.plaf.lobo.LoboCheckBox;
 
 /**
  * <p>ClearDataAction class.</p>
@@ -16,32 +16,32 @@ public class ClearDataAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	/** The bookmark panel. */
-	private final CheckBoxPanel bookmarkPanel;
+	/** The bookmark . */
+	private final LoboCheckBox bookmark;
 
-	/** The cache panel. */
-	private final CheckBoxPanel cachePanel;
+	/** The cache . */
+	private final LoboCheckBox cache;
 
-	/** The cookie panel. */
-	private final CheckBoxPanel cookiePanel;
+	/** The cookie . */
+	private final LoboCheckBox cookie;
 
-	/** The navigation panel. */
-	private final CheckBoxPanel navigationPanel;
+	/** The navigation . */
+	private final LoboCheckBox navigation;
 
 	/**
 	 * <p>Constructor for ClearDataAction.</p>
 	 *
-	 * @param cachePanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
-	 * @param cookiePanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
-	 * @param navigationPanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
-	 * @param bookmarkPanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
+	 * @param cachePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param cookiePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param navigationPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param bookmarkPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 */
-	public ClearDataAction(CheckBoxPanel cachePanel, CheckBoxPanel cookiePanel, CheckBoxPanel navigationPanel,
-			CheckBoxPanel bookmarkPanel) {
-		this.cachePanel = cachePanel;
-		this.cookiePanel = cookiePanel;
-		this.navigationPanel = navigationPanel;
-		this.bookmarkPanel = bookmarkPanel;
+	public ClearDataAction(LoboCheckBox cache, LoboCheckBox cookie, LoboCheckBox navigation,
+			LoboCheckBox bookmark) {
+		this.cache = cache;
+		this.cookie = cookie;
+		this.navigation = navigation;
+		this.bookmark = bookmark;
 	}
 
 	/** {@inheritDoc} */
@@ -50,19 +50,19 @@ public class ClearDataAction extends AbstractAction {
 
 		final ClearHistory ch = new ClearHistory();
 
-		if (this.cachePanel.isSelected()) {
+		if (this.cache.isSelected()) {
 			ch.clearCache();
 		}
 
-		if (this.cookiePanel.isSelected()) {
+		if (this.cookie.isSelected()) {
 			ch.clearCookies();
 		}
 
-		if (this.navigationPanel.isSelected()) {
+		if (this.navigation.isSelected()) {
 			ch.clearNavigation();
 		}
 
-		if (this.bookmarkPanel.isSelected()) {
+		if (this.bookmark.isSelected()) {
 			ch.clearBookmarks();
 		}
 	}

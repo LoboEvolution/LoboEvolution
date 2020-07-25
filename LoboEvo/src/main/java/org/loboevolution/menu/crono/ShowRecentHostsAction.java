@@ -1,6 +1,5 @@
 package org.loboevolution.menu.crono;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -34,7 +33,6 @@ public class ShowRecentHostsAction extends AbstractAction {
 		final ShowRecentWindow window = new ShowRecentWindow(this.frame);
 		window.setLocationByPlatform(true);
 		window.setResizable(false);
-		window.setSize(new Dimension(600, 400));
 		window.setVisible(true);
 
 	}

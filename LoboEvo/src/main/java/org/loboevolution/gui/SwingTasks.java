@@ -60,34 +60,6 @@ public class SwingTasks {
 	}
 
 	/**
-	 * Gets the dialog.
-	 *
-	 * @param component the component
-	 * @return the dialog
-	 */
-	public static Dialog getDialog(Component component) {
-		Container ancestor = component.getParent();
-		while (ancestor != null && !(ancestor instanceof Dialog)) {
-			ancestor = ancestor.getParent();
-		}
-		return (Dialog) ancestor;
-	}
-
-	/**
-	 * Gets the frame.
-	 *
-	 * @param component the component
-	 * @return the frame
-	 */
-	public static Frame getFrame(Component component) {
-		Container ancestor = component.getParent();
-		while (ancestor != null && !(ancestor instanceof Frame)) {
-			ancestor = ancestor.getParent();
-		}
-		return (Frame) ancestor;
-	}
-
-	/**
 	 * Sets the enabled recursive.
 	 *
 	 * @param component the component

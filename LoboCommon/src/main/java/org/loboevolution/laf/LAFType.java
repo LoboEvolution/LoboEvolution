@@ -58,7 +58,13 @@ public enum LAFType {
 
 	NOIRE("Noire"),
 
-	SMART("Smart");
+	SMART("Smart"),
+	
+	MODERN("Modern"),
+	
+	WHITE_BLACK("Light"),
+	
+	BLACK_WHITE("Black");
 
 	
 	private String value;

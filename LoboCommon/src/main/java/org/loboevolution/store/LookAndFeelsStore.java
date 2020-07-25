@@ -24,7 +24,7 @@ public class LookAndFeelsStore {
 
 	private final String INSERT_LAF = " INSERT INTO LOOK_AND_FEEL (acryl, aero, aluminium, bernstein, fast, graphite,"
 			+ "hiFi,luna, mcWin, mint, noire, smart, texture, subscript, superscript, underline, italic, "
-			+ "strikethrough, fontSize, font, color, bold) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "strikethrough, fontSize, font, color, bold, modern, black, white) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	private final String INSERT_SEARCH2 = "INSERT INTO SEARCH (name, description, type, selected) VALUES(?,?,?,?)";
 
@@ -106,6 +106,9 @@ public class LookAndFeelsStore {
 			final Color c = laf.getColor();
 			pstmt.setString(21, "rgb(" + c.getRed() + "," + c.getGreen() + "," + c.getBlue() + ")");
 			pstmt.setInt(22, laf.isBold() ? 1 : 0);
+			pstmt.setInt(23, laf.isModern() ? 1 : 0);
+			pstmt.setInt(24, laf.isBlackWhite() ? 1 : 0);
+			pstmt.setInt(25, laf.isWhiteBlack() ? 1 : 0);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

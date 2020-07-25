@@ -40,7 +40,6 @@ public class MenuBar extends JMenuBar {
 	 */
 	public MenuBar(BrowserFrame frame) {
 		add(getFileMenu(frame));
-		add(getEditMenu());
 		add(getViewMenu(frame));
 		add(getBookmarksMenu(frame));
 		add(getChronologyMenu(frame));
@@ -72,19 +71,6 @@ public class MenuBar extends JMenuBar {
 		final JMenu menu = new JMenu("Recent");
 		menu.add(menuItem("Hosts", new ShowRecentHostsAction(frame)));
 		menu.add(menuItem("Bookmarks", new ShowBookmarksAction(frame, 20)));
-		return menu;
-	}
-
-	/**
-	 * Gets the edits the menu.
-	 *
-	 * @return the edits the menu
-	 */
-	public JMenu getEditMenu() {
-		final JMenu menu = new JMenu("Edit");
-		// menu.setMnemonic('E');
-		// menu.add(menuItem("Copy", 'C', "ctrl C", new CopyAction(window,
-		// actionPool)));
 		return menu;
 	}
 

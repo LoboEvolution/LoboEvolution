@@ -1,6 +1,5 @@
 package org.loboevolution.menu.bookmarks;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -34,7 +33,6 @@ public class AddBookmarkAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		final ToolBar toolbar = this.frame.getToolbar();
 		final AddBookmarkWindow bookmark = new AddBookmarkWindow(toolbar.getAddressBar().getText());
-		bookmark.setSize(new Dimension(400, 150));
 		bookmark.setLocationByPlatform(true);
 		bookmark.setVisible(true);
 	}

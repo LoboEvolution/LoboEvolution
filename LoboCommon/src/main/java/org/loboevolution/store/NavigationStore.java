@@ -22,6 +22,8 @@ public class NavigationStore {
 	private static final Logger logger = Logger.getLogger(NavigationStore.class.getName());
 
 	private final String DELETE_HOST = "DELETE FROM HOST";
+	
+	private final String DELETE_HOST_BY_URL = "DELETE FROM HOST where baseUrl = ?";
 
 	private final String HOST = "SELECT DISTINCT baseUrl FROM HOST LIMIT ?";
 	
@@ -52,6 +54,19 @@ public class NavigationStore {
 	public void deleteHost() {
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST)) {
+			pstmt.executeUpdate();
+		} catch (final Exception e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		}
+	}
+	
+	/**
+	 * <p>deleteHost.</p>
+	 */
+	public void deleteHost(String host) {
+		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
+				PreparedStatement pstmt = conn.prepareStatement(DELETE_HOST_BY_URL)) {
+			pstmt.setString(1, host);
 			pstmt.executeUpdate();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);

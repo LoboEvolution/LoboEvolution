@@ -1,10 +1,11 @@
 package org.loboevolution.gui;
 
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
+
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboPasswordField;
+import com.jtattoo.plaf.lobo.LoboTextField;
 
 /**
  * The Class FormField.
@@ -17,8 +18,8 @@ public class FormField {
 	/** The field editor. */
 	private JComponent fieldEditor;
 
-	/** The label. */
-	private JLabel label;
+	/** The loboLabel. */
+	private LoboLabel loboLabel;
 
 	/** The type. */
 	public final FieldType type;
@@ -91,13 +92,10 @@ public class FormField {
 		}
 		switch (this.type) {
 		case TEXT:
-			final JTextField textField = new JTextField();
-			fe = textField;
+			fe = new LoboTextField();
 			break;
 		case PASSWORD:
-			final JPasswordField pwdField = new JPasswordField();
-			pwdField.setEchoChar('*');
-			fe = pwdField;
+			fe = new LoboPasswordField();
 			break;
 		default:
 			throw new IllegalArgumentException("type=" + this.type);
@@ -107,18 +105,18 @@ public class FormField {
 	}
 
 	/**
-	 * Gets the label.
+	 * Gets the loboLabel.
 	 *
-	 * @return the label
+	 * @return the loboLabel
 	 */
-	public JLabel getLabel() {
-		JLabel label = this.label;
-		if (label != null) {
-			return label;
+	public LoboLabel getLabel() {
+		LoboLabel loboLabel = this.loboLabel;
+		if (loboLabel != null) {
+			return loboLabel;
 		}
-		label = new JLabel();
-		this.label = label;
-		return label;
+		loboLabel = new LoboLabel("");
+		this.loboLabel = loboLabel;
+		return loboLabel;
 	}
 
 	/**

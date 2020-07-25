@@ -6,13 +6,14 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import org.loboevolution.component.BrowserFrame;
+
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * <p>PreferenceWindow class.</p>
@@ -46,6 +47,7 @@ public class PreferenceWindow extends JFrame {
 	}
 
 	private void createAndShowGUI() {
+		setResizable(false);
 		final Container contentPane = getContentPane();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		contentPane.add(createLeftPane());
@@ -59,25 +61,28 @@ public class PreferenceWindow extends JFrame {
 	 * @return the component
 	 */
 	private Component createButtonsPanel() {
-		final JPanel buttonsPanel = new JPanel();
+		final LoboPanel buttonsPanel = new LoboPanel("");
 		buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
 		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
 		buttonsPanel.add(Box.createHorizontalGlue());
-		final JButton okButton = new JButton();
+		final LoboButton okButton = new LoboButton();
 		okButton.setAction(new OkCancelAction(this));
 		okButton.setText("OK");
-		final JButton cancelButton = new JButton();
+		final LoboButton cancelButton = new LoboButton();
 		cancelButton.setAction(new OkCancelAction(this));
 		cancelButton.setText("Cancel");
-		final JButton applyButton = new JButton();
+		final LoboButton applyButton = new LoboButton();
 		applyButton.setAction(new ApplyAction(this));
 		applyButton.setText("Apply");
-		final JButton defaultsButton = new JButton();
+		final LoboButton defaultsButton = new LoboButton();
 		defaultsButton.setAction(new DefaultsAction(this));
 		defaultsButton.setText("Restore Defaults");
 		buttonsPanel.add(okButton);
+		buttonsPanel.add(Box.createHorizontalStrut(5));
 		buttonsPanel.add(cancelButton);
+		buttonsPanel.add(Box.createHorizontalStrut(5));
 		buttonsPanel.add(applyButton);
+		buttonsPanel.add(Box.createHorizontalStrut(5));
 		buttonsPanel.add(defaultsButton);
 		return buttonsPanel;
 	}
@@ -105,7 +110,8 @@ public class PreferenceWindow extends JFrame {
 	 * @return the component
 	 */
 	private Component createRightPane(Container prefsPanel) {
-		final JPanel rightPanel = new JPanel();
+		final LoboPanel rightPanel = new LoboPanel("");
+		rightPanel.setPreferredSize(new Dimension(420, 280));
 		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 		rightPanel.add(prefsPanel);
 		rightPanel.add(createButtonsPanel());

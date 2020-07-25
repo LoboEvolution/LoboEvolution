@@ -16,14 +16,14 @@ public class TextEditCancelAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The search. */
-	private transient SimpleTextEditDialog search;
+	private transient TextEdit search;
 
 	/**
 	 * <p>Constructor for TextEditCancelAction.</p>
 	 *
-	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.SimpleTextEditDialog} object.
+	 * @param search a {@link org.loboevolution.menu.tools.pref.startup.TextEdit} object.
 	 */
-	public TextEditCancelAction(SimpleTextEditDialog search) {
+	public TextEditCancelAction(TextEdit search) {
 		this.search = search;
 	}
 

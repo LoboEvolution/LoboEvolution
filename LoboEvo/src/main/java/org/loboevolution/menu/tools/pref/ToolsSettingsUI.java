@@ -6,15 +6,8 @@ import java.util.Collection;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.TitledBorder;
 
-import org.loboevolution.gui.CheckBoxPanel;
-import org.loboevolution.gui.FormPanel;
 import org.loboevolution.gui.ItemEditorFactory;
 import org.loboevolution.gui.SwingTasks;
 import org.loboevolution.menu.tools.pref.data.ImportDataAction;
@@ -23,6 +16,11 @@ import org.loboevolution.menu.tools.pref.search.SearchEngineEditor;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.SearchEngineStore;
 import org.loboevolution.store.ToolsStore;
+
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboCheckBox;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboPanel;
 
 /**
  * The Class ToolsSettingsUI.
@@ -40,35 +38,27 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	private static final long serialVersionUID = 1L;
 
-	/** The bookmark button. */
-	private JButton bookmarkButton;
-
 	/** The chrome bookmark panel. */
-	private CheckBoxPanel chromeBookmarkPanel;
+	private LoboCheckBox chromeBookmarkPanel;
 
 	/** The chrome history panel. */
-	private CheckBoxPanel chromeHistoryPanel;
+	private LoboCheckBox chromeHistoryPanel;
 
 	/** The chrome panel. */
-	private CheckBoxPanel chromePanel;
-
-	/** The history button. */
-	private JButton historyButton;
-
-	/** The import button. */
-	private JButton importButton;
+	private LoboCheckBox chromePanel;
 
 	/** The mozilla bookmark panel. */
-	private CheckBoxPanel mozillaBookmarkPanel;
+	private LoboCheckBox mozillaBookmarkPanel;
 
 	/** The mozilla history panel. */
-	private CheckBoxPanel mozillaHistoryPanel;
+	private LoboCheckBox mozillaHistoryPanel;
 
 	/** The mozilla panel. */
-	private CheckBoxPanel mozillaPanel;
+	private LoboCheckBox mozillaPanel;
 
 	/** The search engine list control. */
 	private ItemListControl<SearchEngineStore> searchEngineListControl;
+	
 
 	/**
 	 * Instantiates a new tools settings ui.
@@ -82,176 +72,61 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		final ItemEditorFactory<SearchEngineStore> factory = () -> new SearchEngineEditor();
 		this.searchEngineListControl = new ItemListControl<SearchEngineStore>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
+		
+		this.mozillaHistoryPanel = new LoboCheckBox("Mozilla Firefox");
+		this.chromeHistoryPanel = new LoboCheckBox("Google Chrome");
 
-		final FormPanel historyPanel = new FormPanel();
-		historyPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
-		this.mozillaHistoryPanel = new CheckBoxPanel("Mozilla Firefox", historyPanel);
-		this.chromeHistoryPanel = new CheckBoxPanel("Google GoogleChrome", historyPanel);
-
-		final JButton historyButton = new JButton();
+		final LoboButton historyButton = new LoboButton();
 		historyButton.setAction(new ImportDataAction(this.mozillaHistoryPanel, this.chromeHistoryPanel, HISTORY));
 		historyButton.setText("Import History");
-		this.historyButton = historyButton;
 
-		final FormPanel bookmarkPanel = new FormPanel();
-		bookmarkPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
-		this.mozillaBookmarkPanel = new CheckBoxPanel("Mozilla Firefox", bookmarkPanel);
-		this.chromeBookmarkPanel = new CheckBoxPanel("Google GoogleChrome", bookmarkPanel);
+		this.mozillaBookmarkPanel = new LoboCheckBox("Mozilla Firefox");
+		this.chromeBookmarkPanel = new LoboCheckBox("Google Chrome");
 
-		final JButton bookmarkButton = new JButton();
+		final LoboButton bookmarkButton = new LoboButton();
 		bookmarkButton.setAction(new ImportDataAction(this.mozillaBookmarkPanel, this.chromeBookmarkPanel, BOOKMARKS));
 		bookmarkButton.setText("Import Bookmarks");
-		this.bookmarkButton = bookmarkButton;
 
-		final FormPanel importPanel = new FormPanel();
-		importPanel.setBorder(new EmptyBorder(1, 8, 8, 0));
-		this.mozillaPanel = new CheckBoxPanel("Mozilla Firefox", importPanel);
-		this.chromePanel = new CheckBoxPanel("Google GoogleChrome", importPanel);
+		this.mozillaPanel = new LoboCheckBox("Mozilla Firefox");
+		this.chromePanel = new LoboCheckBox("Google Chrome");
 
-		final JButton importButton = new JButton();
+		final LoboButton importButton = new LoboButton();
 		importButton.setAction(new ImportDataAction(this.mozillaPanel, this.chromePanel, COOKIES));
 		importButton.setText("Import Cookies");
-		this.importButton = importButton;
 
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.add(getSearchEnginePane());
+		this.add(getBox("Bookmark", mozillaBookmarkPanel, chromeBookmarkPanel, bookmarkButton));
+		this.add(getBox("Cookies", mozillaPanel, chromePanel, importButton));
+		this.add(getBox("History", mozillaHistoryPanel, chromeHistoryPanel, historyButton));
 		this.add(SwingTasks.createVerticalFill());
-		this.add(getHistoryBox());
-		this.add(SwingTasks.createVerticalFill());
-		this.add(getBookmarksBox());
-		this.add(SwingTasks.createVerticalFill());
-		this.add(getCookisBox());
 		loadSettings();
 
 	}
 
 	/**
-	 * <p>Getter for the field bookmarkButton.</p>
+	 * Gets the box.
 	 *
-	 * @return a {@link javax.swing.JButton} object.
+	 * @return the box
 	 */
-	public JButton getBookmarkButton() {
-		return this.bookmarkButton;
-	}
-
-	/**
-	 * Gets the bookmarks box.
-	 *
-	 * @return the bookmarks box
-	 */
-	private Component getBookmarksBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(400, 100));
+	private Component getBox(String title, LoboCheckBox mozillaPanel, LoboCheckBox chromePanel ,LoboButton button) {
+		final LoboPanel groupBox = new LoboPanel(title);
+		groupBox.setPreferredSize(new Dimension(420,75));
 		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Bookmarks"));
-		groupBox.add(getMozillaBookmarkPanel());
-		groupBox.add(getChromeBookmarkPanel());
-		groupBox.add(getBookmarkButton());
+		
+		final LoboPanel browserBox = new LoboPanel();
+		browserBox.setLayout(new BoxLayout(browserBox, BoxLayout.X_AXIS));
+		browserBox.add(mozillaPanel);
+		browserBox.add(chromePanel);
+		
+		final LoboPanel buttonsPanel = new LoboPanel("");
+		buttonsPanel.setBorder(new EmptyBorder(4, 4, 4, 4));
+		buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.X_AXIS));
+		buttonsPanel.add(Box.createHorizontalGlue());
+		buttonsPanel.add(button);
+		
+		groupBox.add(browserBox);
+		groupBox.add(buttonsPanel);
 		return groupBox;
-	}
-
-	/**
-	 * <p>Getter for the field chromeBookmarkPanel.</p>
-	 *
-	 * @return the chromeBookmarkPanel
-	 */
-	public CheckBoxPanel getChromeBookmarkPanel() {
-		return this.chromeBookmarkPanel;
-	}
-
-	/**
-	 * <p>Getter for the field chromeHistoryPanel.</p>
-	 *
-	 * @return the chromeHistoryPanel
-	 */
-	public CheckBoxPanel getChromeHistoryPanel() {
-		return this.chromeHistoryPanel;
-	}
-
-	/**
-	 * <p>Getter for the field chromePanel.</p>
-	 *
-	 * @return the chromePanel
-	 */
-	public CheckBoxPanel getChromePanel() {
-		return this.chromePanel;
-	}
-
-	/**
-	 * Gets the cookies box.
-	 *
-	 * @return the cookies box
-	 */
-	private Component getCookisBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(400, 100));
-		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "Cookies"));
-		groupBox.add(getMozillaPanel());
-		groupBox.add(getChromePanel());
-		groupBox.add(getImportButton());
-		return groupBox;
-	}
-
-	/**
-	 * Gets the history box.
-	 *
-	 * @return the history box
-	 */
-	private Component getHistoryBox() {
-		final JPanel groupBox = new JPanel();
-		groupBox.setPreferredSize(new Dimension(400, 100));
-		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.Y_AXIS));
-		groupBox.setBorder(new TitledBorder(new EtchedBorder(), "History"));
-		groupBox.add(getMozillaHistoryPanel());
-		groupBox.add(getChromeHistoryPanel());
-		groupBox.add(getHistoryButton());
-		return groupBox;
-	}
-
-	/**
-	 * <p>Getter for the field historyButton.</p>
-	 *
-	 * @return the historyButton
-	 */
-	public JButton getHistoryButton() {
-		return this.historyButton;
-	}
-
-	/**
-	 * <p>Getter for the field importButton.</p>
-	 *
-	 * @return the importButton
-	 */
-	public JButton getImportButton() {
-		return this.importButton;
-	}
-
-	/**
-	 * <p>Getter for the field mozillaBookmarkPanel.</p>
-	 *
-	 * @return the mozillaBookmarkPanel
-	 */
-	public CheckBoxPanel getMozillaBookmarkPanel() {
-		return this.mozillaBookmarkPanel;
-	}
-
-	/**
-	 * <p>Getter for the field mozillaHistoryPanel.</p>
-	 *
-	 * @return the mozillaHistoryPanel
-	 */
-	public CheckBoxPanel getMozillaHistoryPanel() {
-		return this.mozillaHistoryPanel;
-	}
-
-	/**
-	 * <p>Getter for the field mozillaPanel.</p>
-	 *
-	 * @return the mozillaPanel
-	 */
-	public CheckBoxPanel getMozillaPanel() {
-		return this.mozillaPanel;
 	}
 
 	/**
@@ -260,11 +135,12 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	 * @return the search engine pane
 	 */
 	private Component getSearchEnginePane() {
-		final Box innerBox = new Box(BoxLayout.X_AXIS);
-		innerBox.add(new JLabel("Search Engines:"));
-		innerBox.add(this.searchEngineListControl);
-		final Box groupBox = SwingTasks.createGroupBox(BoxLayout.Y_AXIS, "Search");
-		groupBox.add(innerBox);
+		final LoboPanel groupBox = new LoboPanel("Search");
+		groupBox.setPreferredSize(new Dimension(420, 50));
+		groupBox.setLayout(new BoxLayout(groupBox, BoxLayout.X_AXIS));
+		final LoboLabel pagesLabel = new LoboLabel("Engines:");
+		groupBox.add(pagesLabel);
+		groupBox.add(this.searchEngineListControl);
 		return groupBox;
 	}
 

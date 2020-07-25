@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import org.loboevolution.gui.CheckBoxPanel;
+import com.jtattoo.plaf.lobo.LoboCheckBox;
 
 /**
  * <p>ImportDataAction class.</p>
@@ -19,21 +19,21 @@ public class ImportDataAction extends AbstractAction {
 	private final String action;
 
 	/** The chrome panel. */
-	private final CheckBoxPanel chromePanel;
+	private final LoboCheckBox chrome;
 
 	/** The mozilla panel. */
-	private final CheckBoxPanel mozillaPanel;
+	private final LoboCheckBox mozilla;
 
 	/**
 	 * <p>Constructor for ImportDataAction.</p>
 	 *
-	 * @param mozillaPanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
-	 * @param chromePanel a {@link org.loboevolution.gui.CheckBoxPanel} object.
+	 * @param mozillaPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param chromePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 * @param action a {@link java.lang.String} object.
 	 */
-	public ImportDataAction(CheckBoxPanel mozillaPanel, CheckBoxPanel chromePanel, String action) {
-		this.mozillaPanel = mozillaPanel;
-		this.chromePanel = chromePanel;
+	public ImportDataAction(LoboCheckBox chrome, LoboCheckBox mozilla, String action) {
+		this.chrome = chrome;
+		this.mozilla = mozilla;
 		this.action = action;
 	}
 
@@ -57,31 +57,31 @@ public class ImportDataAction extends AbstractAction {
 	}
 
 	private void importBookmarks() {
-		if (this.mozillaPanel.isSelected()) {
+		if (this.mozilla.isSelected()) {
 			MozilaFirefoxData.importBookmark();
 		}
 
-		if (this.chromePanel.isSelected()) {
+		if (this.chrome.isSelected()) {
 			GoogleChromeData.importBookmark();
 		}
 	}
 
 	private void importCookie() {
-		if (this.mozillaPanel.isSelected()) {
+		if (this.mozilla.isSelected()) {
 			MozilaFirefoxData.importCookie();
 		}
 
-		if (this.chromePanel.isSelected()) {
+		if (this.chrome.isSelected()) {
 			GoogleChromeData.importCookie();
 		}
 	}
 
 	private void importHistory() {
-		if (this.mozillaPanel.isSelected()) {
+		if (this.mozilla.isSelected()) {
 			MozilaFirefoxData.importHistory();
 		}
 
-		if (this.chromePanel.isSelected()) {
+		if (this.chrome.isSelected()) {
 			GoogleChromeData.importHistory();
 		}
 	}

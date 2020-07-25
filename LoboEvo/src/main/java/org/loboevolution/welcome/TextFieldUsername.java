@@ -13,24 +13,26 @@ import java.util.HashMap;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+
 /**
  * <p>TextFieldUsername class.</p>
  *
  * @author utente
  * @version $Id: $Id
  */
-public class TextFieldUsername extends JTextField {
+public class TextFieldUsername extends JTextField implements LoboLookAndFeel {
 
 	private static final long serialVersionUID = 1L;
+	
+	private final Color COLOR_BACKGROUND = background();
 
-	private Color borderColor = this.COLOR_INTERACTIVE;
+	private final Color COLOR_INTERACTIVE = foreground();
 
-	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
+	private final Color COLOR_OUTLINE = foreground();
 
-	private final Color COLOR_INTERACTIVE = new Color(108, 216, 158);
-
-	private final Color COLOR_OUTLINE = new Color(103, 112, 120);
-
+	private Color borderColor = COLOR_INTERACTIVE;
+	
 	private final Font FONT_GENERAL_UI = new Font("Segoe UI", Font.PLAIN, 20);
 
 	private final String PLACEHOLDER_TEXT_USERNAME = "Surf in the web! Surf in the web!";
@@ -38,19 +40,19 @@ public class TextFieldUsername extends JTextField {
 	private final int ROUNDNESS = 8;
 
 	/**
-	 * <p>Constructor for TextFieldUsername.</p>
+	 * <p>Constructor for TextFieldUsername.this.</p>
 	 */
 	public TextFieldUsername() {
 		setOpaque(false);
-		setBackground(this.COLOR_BACKGROUND);
-		setForeground(this.COLOR_OUTLINE);
-		setBorderColor(this.COLOR_OUTLINE);
+		setBackground(COLOR_BACKGROUND);
+		setForeground(COLOR_OUTLINE);
+		setBorderColor(COLOR_OUTLINE);
 		setCaretColor(Color.white);
 		setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 		setHorizontalAlignment(SwingConstants.CENTER);
-		setFont(this.FONT_GENERAL_UI);
+		setFont(FONT_GENERAL_UI);
 
-		setText(this.PLACEHOLDER_TEXT_USERNAME);
+		setText(PLACEHOLDER_TEXT_USERNAME);
 		addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -89,8 +91,8 @@ public class TextFieldUsername extends JTextField {
 	@Override
 	protected void paintBorder(Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
-		g2.setColor(this.borderColor);
-		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, this.ROUNDNESS, this.ROUNDNESS);
+		g2.setColor(borderColor);
+		g2.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
 	}
 
 	/** {@inheritDoc} */
@@ -98,7 +100,7 @@ public class TextFieldUsername extends JTextField {
 	protected void paintComponent(Graphics g) {
 		final Graphics2D g2 = get2dGraphics(g);
 		g2.setColor(getBackground());
-		g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, this.ROUNDNESS, this.ROUNDNESS);
+		g2.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, ROUNDNESS, ROUNDNESS);
 		super.paintComponent(g2);
 	}
 
@@ -108,7 +110,7 @@ public class TextFieldUsername extends JTextField {
 	 * @param color a {@link java.awt.Color} object.
 	 */
 	protected void setBorderColor(Color color) {
-		this.borderColor = color;
+		borderColor = color;
 		repaint();
 	}
 }
