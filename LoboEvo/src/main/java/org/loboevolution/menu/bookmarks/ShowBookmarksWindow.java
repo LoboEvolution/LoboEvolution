@@ -1,7 +1,6 @@
 package org.loboevolution.menu.bookmarks;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -14,17 +13,10 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
@@ -37,35 +29,35 @@ import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedPanePopupMenu;
 
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import com.jtattoo.plaf.lobo.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboSeparator;
+import com.jtattoo.plaf.lobo.LoboTextField;
+
 /**
  * <p>ShowBookmarksWindow class.</p>
  *
  * @author utente
  * @version $Id: $Id
  */
-public class ShowBookmarksWindow extends JFrame {
+public class ShowBookmarksWindow extends JFrame implements LoboLookAndFeel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
-	
-	/** The color background. */
-	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
-	
-	/** The color text. */
-	private final Color COLOR_TEXT = new Color(108, 216, 158);
-	
+		
 	/** The desc. */
-	private JTextField desc;
+	private LoboTextField desc;
 	
 	/** The title Edit Txt Fld. */
-	private JTextField titleEditTxtFld;
+	private LoboTextField titleEditTxtFld;
 	
 	/** The url Edit Txt Fld. */
-	private JTextField urlEditTxtFld;
+	private LoboTextField urlEditTxtFld;
 	
 	/** The tmp Url. */
 	private String tmpUrl;
-	
 
 	/**
 	 * <p>Constructor for ShowBookmarksWindow.</p>
@@ -79,124 +71,95 @@ public class ShowBookmarksWindow extends JFrame {
 	
 	private void createAndShowGUI(BrowserFrame frame, Integer num) {
 		final Container contentPane = getContentPane();
-		contentPane.setBackground(COLOR_BACKGROUND);
 		contentPane.setLayout(null);
-		setResizable(true);
+		contentPane.setBackground(background());
+		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1250, 450);
-		setBackground(COLOR_BACKGROUND);
+		setBounds(100, 100, 1100, 410);
 		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/bookmark.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
-		JLabel label_6 = new JLabel("");
+		LoboLabel label_6 = new LoboLabel("");
 		label_6.setOpaque(true);
-		label_6.setBackground(COLOR_TEXT);
 		label_6.setBounds(0, 11, 792, 8);
 		contentPane.add(label_6);
 
-		JLabel label_1 = new JLabel("");
+		LoboLabel label_1 = new LoboLabel("");
 		label_1.setOpaque(true);
-		label_1.setBackground(COLOR_TEXT);
 		label_1.setBounds(797, 11, 403, 9);
 		contentPane.add(label_1);
 		
 		listBookmarks(frame, contentPane);
-		
 		saveBookmarks(frame, contentPane);
 
 	}
 
 	private void saveBookmarks(BrowserFrame frame, Container contentPane) {
-		JPanel panel2 = new JPanel();
+		LoboPanel panel2 = new LoboPanel();
 		panel2.setLayout(null);
-		panel2.setBackground(COLOR_BACKGROUND);
-		panel2.setBounds(870, 40, 403, 436);
+		panel2.setBounds(710, 40, 403, 436);
 		contentPane.add(panel2);
 
-		JSeparator separator_2 = new JSeparator();
+		LoboSeparator separator_2 = new LoboSeparator();
 		separator_2.setBounds(0, 58, 792, 12);
 		panel2.add(separator_2);
 		
-		JLabel editBookmark = new JLabel("Edit Bookmark");
+		LoboLabel editBookmark = new LoboLabel("Edit Bookmark");
 		editBookmark.setHorizontalAlignment(SwingConstants.CENTER);
-		editBookmark.setForeground(COLOR_TEXT);
 		editBookmark.setFont(new Font("Tahoma", Font.BOLD, 17));
-		editBookmark.setBounds(56, 18, 167, 22);
+		editBookmark.setBounds(70, 18, 167, 22);
 		panel2.add(editBookmark);
 
-		JLabel lblDescription = new JLabel("Description");
-		lblDescription.setForeground(COLOR_TEXT);
+		LoboLabel lblDescription = new LoboLabel("Description");
 		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblDescription.setBounds(12, 70, 282, 16);
 		panel2.add(lblDescription);
 
-		desc = new JTextField();
-		desc.setForeground(COLOR_TEXT);
+		desc = new LoboTextField();
 		desc.setFont(new Font("Tahoma", Font.BOLD, 12));
 		desc.setColumns(10);
-		desc.setCaretColor(COLOR_TEXT);
 		desc.setBorder(null);
-		desc.setBackground(COLOR_BACKGROUND);
 		desc.setBounds(12, 98, 350, 16);
 		panel2.add(desc);
 
-		JSeparator separator_9 = new JSeparator();
-		separator_9.setForeground(COLOR_TEXT);
-		separator_9.setBackground(COLOR_BACKGROUND);
+		LoboSeparator separator_9 = new LoboSeparator();
 		separator_9.setBounds(12, 115, 350, 12);
 		panel2.add(separator_9);
 
-		JLabel titleLbl = new JLabel("Title");
-		titleLbl.setForeground(COLOR_TEXT);
+		LoboLabel titleLbl = new LoboLabel("Title");
 		titleLbl.setFont(new Font("Tahoma", Font.BOLD, 14));
 		titleLbl.setBounds(12, 139, 282, 16);
 		panel2.add(titleLbl);
 
-		titleEditTxtFld = new JTextField();
-		titleEditTxtFld.setForeground(COLOR_TEXT);
+		titleEditTxtFld = new LoboTextField();
 		titleEditTxtFld.setFont(new Font("Tahoma", Font.BOLD, 12));
 		titleEditTxtFld.setColumns(10);
-		titleEditTxtFld.setCaretColor(COLOR_TEXT);
 		titleEditTxtFld.setBorder(null);
-		titleEditTxtFld.setBackground(COLOR_BACKGROUND);
 		titleEditTxtFld.setBounds(12, 167, 350, 16);
 		panel2.add(titleEditTxtFld);
 
-		JSeparator separator_10 = new JSeparator();
-		separator_10.setForeground(COLOR_TEXT);
-		separator_10.setBackground(COLOR_BACKGROUND);
+		LoboSeparator separator_10 = new LoboSeparator();
 		separator_10.setBounds(12, 184, 350, 12);
 		panel2.add(separator_10);
 		
-		JLabel url_1 = new JLabel("Url");
-		url_1.setForeground(COLOR_TEXT);
+		LoboLabel url_1 = new LoboLabel("Url");
 		url_1.setFont(new Font("Tahoma", Font.BOLD, 14));
 		url_1.setBounds(12, 200, 282, 16);
 		panel2.add(url_1);
 
-		urlEditTxtFld = new JTextField();
-		urlEditTxtFld.setForeground(COLOR_TEXT);
+		urlEditTxtFld = new LoboTextField();
 		urlEditTxtFld.setFont(new Font("Tahoma", Font.BOLD, 12));
 		urlEditTxtFld.setColumns(10);
-		urlEditTxtFld.setCaretColor(COLOR_TEXT);
 		urlEditTxtFld.setBorder(null);
-		urlEditTxtFld.setBackground(COLOR_BACKGROUND);
 		urlEditTxtFld.setBounds(12, 230, 275, 16);
 		panel2.add(urlEditTxtFld);
 		
-		JSeparator separator_11 = new JSeparator();
-		separator_11.setForeground(COLOR_TEXT);
-		separator_11.setBackground(COLOR_BACKGROUND);
+		LoboSeparator separator_11 = new LoboSeparator();
 		separator_11.setBounds(12, 250, 350, 12);
 		panel2.add(separator_11);
 
-		JButton okButton = new JButton("Save");
-		okButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		okButton.setForeground(COLOR_TEXT);
-		okButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		okButton.setFocusPainted(false);
-		okButton.setContentAreaFilled(false);
-		okButton.setBorder(new LineBorder(COLOR_TEXT));
+		LoboButton okButton = new LoboButton();
+		okButton.setText("Save");
 		okButton.setActionCommand("okButton");
 		okButton.setBounds(12, 280, 200, 40);
 		okButton.addActionListener(new ActionListener() {
@@ -213,13 +176,8 @@ public class ShowBookmarksWindow extends JFrame {
 		});
 		panel2.add(okButton);
 
-		JButton closeButton = new JButton("Close");
-		closeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		closeButton.setForeground(COLOR_TEXT);
-		closeButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		closeButton.setFocusPainted(false);
-		closeButton.setContentAreaFilled(false);
-		closeButton.setBorder(new LineBorder(COLOR_TEXT));
+		LoboButton closeButton = new LoboButton();
+		closeButton.setText("Close");
 		closeButton.setActionCommand("closeButton");
 		closeButton.addActionListener(new ActionListener() {
 			@Override
@@ -234,46 +192,39 @@ public class ShowBookmarksWindow extends JFrame {
 	}
 
 	private void listBookmarks(BrowserFrame frame, Container contentPane) {
-		JSeparator separator_7 = new JSeparator();
-		separator_7.setBounds(0, 98, 900, 12);
+		LoboSeparator separator_7 = new LoboSeparator();
+		separator_7.setBounds(0, 98, 700, 12);
 		contentPane.add(separator_7);
 		
-		JPanel panel = new JPanel();
+		LoboPanel panel = new LoboPanel();
 		panel.setLayout(null);
-		panel.setBackground(COLOR_BACKGROUND);
 		panel.setBounds(0, 40, 800, 50);
 		contentPane.add(panel);
 		
-		JLabel description = new JLabel("Description");
+		LoboLabel description = new LoboLabel("Description");
 		description.setFont(new Font("Tahoma", Font.BOLD, 14));
-		description.setForeground(COLOR_TEXT);
 		description.setBounds(30, 18, 211, 16);
 		panel.add(description);
 
-		JLabel title = new JLabel("Title");
-		title.setForeground(COLOR_TEXT);
+		LoboLabel title = new LoboLabel("Title");
 		title.setFont(new Font("Tahoma", Font.BOLD, 14));
-		title.setBounds(280, 18, 150, 17);
+		title.setBounds(200, 18, 150, 17);
 		panel.add(title);
 
-		JLabel url = new JLabel("URL");
-		url.setForeground(COLOR_TEXT);
+		LoboLabel url = new LoboLabel("URL");
 		url.setFont(new Font("Tahoma", Font.BOLD, 14));
-		url.setBounds(570, 18, 160, 17);
+		url.setBounds(400, 18, 160, 17);
 		panel.add(url);
 		
-		JLabel action = new JLabel("Action");
-		action.setForeground(COLOR_TEXT);
+		LoboLabel action = new LoboLabel("Action");
 		action.setFont(new Font("Tahoma", Font.BOLD, 14));
-		action.setBounds(750, 18, 160, 17);
+		action.setBounds(600, 18, 160, 17);
 		panel.add(action);
 		
-		JPanel panelGeneralViewAllItems = new JPanel();
-		panelGeneralViewAllItems.setBackground(COLOR_TEXT);
-		panelGeneralViewAllItems.setBounds(10, 100, 850, 313);
+		LoboPanel panelGeneralViewAllItems = new LoboPanel();
+		panelGeneralViewAllItems.setBounds(10, 100, 700, 313);
 		JScrollPane spViewallItems = new JScrollPane();
 		spViewallItems.setBorder(null);
-		spViewallItems.setBackground(COLOR_TEXT);
 		spViewallItems.setViewportView(createItemPanel(frame));
 
 		panelGeneralViewAllItems.setLayout(new BorderLayout());
@@ -283,12 +234,11 @@ public class ShowBookmarksWindow extends JFrame {
 		
 	}
 	
-	private JPanel createItemPanel(BrowserFrame frame) {
+	private LoboPanel createItemPanel(BrowserFrame frame) {
 
-		JPanel panel_3 = new JPanel();
+		LoboPanel panel_3 = new LoboPanel();
 		panel_3.setLayout(null);
-		panel_3.setBackground(COLOR_BACKGROUND);
-		panel_3.setBounds(0, 191, 850, 70);
+		panel_3.setBounds(0, 191, 700, 70);
 
 		int debutCpDesc = 15;
 		int debutCpTitle = 15;
@@ -301,37 +251,34 @@ public class ShowBookmarksWindow extends JFrame {
 			final List<BookmarkInfo> allEntries = history.getBookmarks(100);
 			for (final BookmarkInfo binfo : allEntries) {
 
-				JTextField description = new JTextField();
+				LoboTextField description = new LoboTextField();
 				description.setText(binfo.getDescription());
-				description.setForeground(COLOR_TEXT);
+				description.setToolTipText(binfo.getDescription());
 				description.setFont(new Font("Tahoma", Font.BOLD, 12));
 				description.setEditable(false);
 				description.setColumns(10);
 				description.setBorder(null);
-				description.setBackground(COLOR_BACKGROUND);
-				description.setBounds(12, debutCpDesc, 211, 22);
+				description.setBounds(12, debutCpDesc, 180, 22);
 				panel_3.add(description);
 
-				JTextField title = new JTextField();
+				LoboTextField title = new LoboTextField();
 				title.setText(binfo.getTitle());
-				title.setForeground(COLOR_TEXT);
+				title.setToolTipText(binfo.getTitle());
 				title.setFont(new Font("Tahoma", Font.BOLD, 12));
 				title.setEditable(false);
 				title.setColumns(10);
 				title.setBorder(null);
-				title.setBackground(COLOR_BACKGROUND);
-				title.setBounds(246, debutCpTitle, 150, 22);
+				title.setBounds(190, debutCpTitle, 150, 22);
 				panel_3.add(title);
 
-				JTextField url = new JTextField();
+				LoboTextField url = new LoboTextField();
 				url.setText(binfo.getUrl());
-				url.setForeground(COLOR_TEXT);
+				url.setToolTipText(binfo.getUrl());
 				url.setFont(new Font("Tahoma", Font.BOLD, 12));
 				url.setEditable(false);
 				url.setColumns(10);
 				url.setBorder(null);
-				url.setBackground(COLOR_BACKGROUND);
-				url.setBounds(470, debutCpUrl, 220, 22);
+				url.setBounds(370, debutCpUrl, 190, 22);
 				url.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				url.addMouseListener(new MouseAdapter() {
 					@Override
@@ -351,19 +298,14 @@ public class ShowBookmarksWindow extends JFrame {
 				});
 				panel_3.add(url);
 				
-				JSeparator separatorItem = new JSeparator();
-				separatorItem.setBounds(0, debutCpSeparator, 900, 7);
+				LoboSeparator separatorItem = new LoboSeparator();
+				separatorItem.setBounds(0, debutCpSeparator, 700, 7);
 				panel_3.add(separatorItem);
 
-				JButton edit = new JButton("Edit");
-				edit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				edit.setForeground(COLOR_TEXT);
-				edit.setFont(new Font("Tahoma", Font.BOLD, 12));
-				edit.setFocusPainted(false);
-				edit.setContentAreaFilled(false);
-				edit.setBorder(new LineBorder(COLOR_TEXT));
+				LoboButton edit = new LoboButton();
+				edit.setText("Edit");
 				edit.setActionCommand("okButton");
-				edit.setBounds(720, debutCpUrl, 40, 40);
+				edit.setBounds(570, debutCpUrl, 40, 40);
 				edit.addActionListener(new ActionListener() {
 
 					@Override
@@ -378,15 +320,10 @@ public class ShowBookmarksWindow extends JFrame {
 				panel_3.add(edit);
 				
 				
-				JButton delete = new JButton("Delete");
-				delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				delete.setForeground(COLOR_TEXT);
-				delete.setFont(new Font("Tahoma", Font.BOLD, 12));
-				delete.setFocusPainted(false);
-				delete.setContentAreaFilled(false);
-				delete.setBorder(new LineBorder(COLOR_TEXT));
+				LoboButton delete = new LoboButton();
+				delete.setText("Delete");
 				delete.setActionCommand("okButton");
-				delete.setBounds(770, debutCpUrl, 50, 40);
+				delete.setBounds(610, debutCpUrl, 50, 40);
 				delete.addActionListener(new ActionListener() {
 
 					@Override
