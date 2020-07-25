@@ -1,6 +1,5 @@
 package org.loboevolution.menu.tools.pref.search;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -16,6 +15,7 @@ import org.loboevolution.gui.ItemEditorFactory;
 
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 
 /**
  * The Class ItemEditor.
@@ -24,14 +24,11 @@ import com.jtattoo.plaf.lobo.LoboLabel;
  * @author utente
  * @version $Id: $Id
  */
-public class ItemEditor<T> extends JFrame {
+public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	/** The color background. */
-	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
-
 	/** The cancel button. */
 	private final LoboButton cancelButton = new LoboButton();
 
@@ -79,7 +76,7 @@ public class ItemEditor<T> extends JFrame {
 		rootBox.add(this.createButtonPanel());
 
 		final Container contentPane = getContentPane();
-		contentPane.setBackground(COLOR_BACKGROUND);
+		contentPane.setBackground(background());
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		contentPane.add(rootBox);
 	}

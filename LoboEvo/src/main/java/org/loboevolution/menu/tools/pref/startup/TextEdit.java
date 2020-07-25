@@ -1,6 +1,5 @@
 package org.loboevolution.menu.tools.pref.startup;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -13,21 +12,18 @@ import javax.swing.border.EmptyBorder;
 
 import com.jtattoo.plaf.lobo.LoboButton;
 import com.jtattoo.plaf.lobo.LoboLabel;
-import com.jtattoo.plaf.lobo.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
 /**
  * The Class TextEdit.
  *
  * @author utente
  * @version $Id: $Id
  */
-public class TextEdit extends JFrame {
+public class TextEdit extends JFrame implements LoboLookAndFeel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	/** The color background. */
-	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
-
 	/** The cancel button. */
 	private final LoboButton cancelButton = new LoboButton();
 
@@ -54,22 +50,25 @@ public class TextEdit extends JFrame {
 	 * Inits the.
 	 */
 	private void createAndShowGUI() {
+		setResizable(false);
 		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
 		this.captionLabel.setAlignmentX(0.0f);
 		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
-		this.textArea.setPreferredSize(new Dimension(1, Short.MAX_VALUE));
-		final Container contentPane = getContentPane();
-		contentPane.setBackground(COLOR_BACKGROUND);
-		contentPane.setLayout(null);
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-		contentPane.add(this.captionLabel);
-		contentPane.add(new JScrollPane(this.textArea));
-		contentPane.add(createButtonPanel());
-		this.textArea.setEditable(true);
 		this.okButton.setAction(new TextEditOkAction(this.textArea, this));
 		this.okButton.setText("OK");
 		this.cancelButton.setAction(new TextEditCancelAction(this));
 		this.cancelButton.setText("Cancel");
+		
+		final Box rootBox = new Box(BoxLayout.Y_AXIS);
+		rootBox.setBorder(new EmptyBorder(4, 4, 4, 4));
+		rootBox.add(this.captionLabel);
+		rootBox.add(new JScrollPane(this.textArea));
+		rootBox.add(this.createButtonPanel());
+		
+		final Container contentPane = getContentPane();
+		contentPane.setBackground(background());
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+		contentPane.add(rootBox);
 	}
 	
 	
@@ -79,14 +78,13 @@ public class TextEdit extends JFrame {
 	 * @return the component
 	 */
 	private Component createButtonPanel() {
-		final LoboPanel panel = new LoboPanel("");
+		final Box panel = new Box(BoxLayout.X_AXIS);
 		panel.setBorder(new EmptyBorder(4, 4, 4, 4));
-		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-		panel.add(Box.createHorizontalStrut(5));
+		panel.add(Box.createGlue());
 		panel.add(this.okButton);
-		panel.add(Box.createHorizontalStrut(5));
+		panel.add(Box.createRigidArea(new Dimension(4, 1)));
 		panel.add(this.cancelButton);
-		panel.add(Box.createHorizontalStrut(5));
+		panel.add(Box.createGlue());
 		return panel;
 	}
 	
