@@ -313,10 +313,10 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	 * @param ic a {@link org.loboevolution.html.control.InputControl} object.
 	 */
 	public void draw(InputControl ic) {
-		final String type = getType();
+		String type = getType();
 		
 		if (Strings.isBlank(type)) {
-			text = new InputText(this, ic);
+			type = "text";
 		}
 
 		switch (type.toLowerCase()) {
