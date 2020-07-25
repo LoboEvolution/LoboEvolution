@@ -85,7 +85,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 			Toolkit.getDefaultToolkit().beep();
 			this.frame.dispose();
 			this.frame.setVisible(false);
-			new GuiInit().createAndShowGui();
+			GuiInit.createAndShowGui();
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -102,6 +102,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 		files.add("searchEngine.sql");
 		files.add("size.sql");
 		files.add("userAgent.sql");
+		files.add("lookAndFeel.sql");
 		return files;
 	}
 
