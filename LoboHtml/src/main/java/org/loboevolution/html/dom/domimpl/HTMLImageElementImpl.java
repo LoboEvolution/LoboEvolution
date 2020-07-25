@@ -24,7 +24,10 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.awt.Dimension;
+import java.net.URL;
+import java.util.logging.Level;
 
+import org.loboevolution.common.Urls;
 import org.loboevolution.html.control.ImgSvgControl;
 import org.loboevolution.html.dom.HTMLImageElement;
 import org.loboevolution.html.gui.HtmlPanel;
@@ -259,7 +262,24 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	 * @param imgSvgControl a {@link org.loboevolution.html.control.ImgSvgControl} object.
 	 */
 	public void draw(ImgSvgControl imgSvgControl) {
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(getSrc());
+		final Object document = this.document;
+		String uri = null;
+		if (document instanceof HTMLDocumentImpl) {
+			try {
+			HTMLDocumentImpl doc = (HTMLDocumentImpl)document;
+			URL baseURL = new URL(doc.getBaseURI());
+			String src = getSrc();
+			URL scriptURL = Urls.createURL(baseURL, src );
+			uri = scriptURL == null ? src : scriptURL.toExternalForm();
+			
+			} catch (Exception e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
+			}
+		} else {
+			uri = getSrc();
+		}
+		
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(uri);
 		if(getWidth() > 0 && getHeight() > 0) {
 			hpanel.setPreferredSize(new Dimension(getWidth(), getHeight()));
 		}
