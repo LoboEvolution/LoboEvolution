@@ -1,7 +1,6 @@
 package org.loboevolution.menu.crono;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -14,15 +13,11 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
+
 import org.loboevolution.common.Strings;
 import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.component.BrowserPanel;
@@ -34,25 +29,26 @@ import org.loboevolution.store.TabStore;
 import org.loboevolution.tab.DnDTabbedPane;
 import org.loboevolution.tab.TabbedPanePopupMenu;
 
+import com.jtattoo.plaf.lobo.LoboButton;
+import com.jtattoo.plaf.lobo.LoboLabel;
+import com.jtattoo.plaf.lobo.LoboLookAndFeel;
+import com.jtattoo.plaf.lobo.LoboPanel;
+import com.jtattoo.plaf.lobo.LoboSeparator;
+import com.jtattoo.plaf.lobo.LoboTextField;
+
 /**
  * <p>ShowRecentWindow class.</p>
  *
  * @author utente
  * @version $Id: $Id
  */
-public class ShowRecentWindow extends JFrame {
+public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
-	/** The color background. */
-	private final Color COLOR_BACKGROUND = new Color(37, 51, 61);
-	
-	/** The color text. */
-	private final Color COLOR_TEXT = new Color(108, 216, 158);
-
 	/** The url Edit Txt Fld. */
-	private JTextField urlEditTxtFld;
+	private LoboTextField urlEditTxtFld;
 	
 	/** The tmp Url. */
 	private String tmpUrl;
@@ -68,24 +64,21 @@ public class ShowRecentWindow extends JFrame {
 
 	private void createAndShowGUI(BrowserFrame frame) {
 		final Container contentPane = getContentPane();
-		contentPane.setBackground(COLOR_BACKGROUND);
 		contentPane.setLayout(null);
+		contentPane.setBackground(background());
 		setResizable(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 1250, 450);
-		setBackground(COLOR_BACKGROUND);
+		setBounds(100, 100, 1100, 500);
 		final ImageIcon ico = new ImageIcon(getClass().getResource("/org/lobo/image/host.png"));
 		setIconImage(ico.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
 		
-		JLabel label_6 = new JLabel("");
+		LoboLabel label_6 = new LoboLabel("");
 		label_6.setOpaque(true);
-		label_6.setBackground(COLOR_TEXT);
 		label_6.setBounds(0, 11, 792, 8);
 		contentPane.add(label_6);
 
-		JLabel label_1 = new JLabel("");
+		LoboLabel label_1 = new LoboLabel("");
 		label_1.setOpaque(true);
-		label_1.setBackground(COLOR_TEXT);
 		label_1.setBounds(797, 11, 403, 9);
 		contentPane.add(label_1);
 		
@@ -95,47 +88,41 @@ public class ShowRecentWindow extends JFrame {
 	}
 	
 	private void saveHost(BrowserFrame frame, Container contentPane) {
-		JPanel panel2 = new JPanel();
+		LoboPanel panel2 = new LoboPanel();
 		panel2.setLayout(null);
-		panel2.setBackground(COLOR_BACKGROUND);
-		panel2.setBounds(870, 40, 403, 436);
+		panel2.setBounds(750, 40, 403, 436);
 		contentPane.add(panel2);
 
-		JSeparator separator_2 = new JSeparator();
-		separator_2.setBounds(0, 58, 792, 12);
+		LoboSeparator separator_2 = new LoboSeparator();
+		separator_2.setBounds(0, 58, 350, 12);
 		panel2.add(separator_2);
 		
-		JLabel url_1 = new JLabel("Url");
-		url_1.setForeground(COLOR_TEXT);
-		url_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		url_1.setBounds(12, 70, 282, 16);
-		panel2.add(url_1);
+		LoboLabel editBookmark = new LoboLabel("Edit Host");
+		editBookmark.setHorizontalAlignment(SwingConstants.CENTER);
+		editBookmark.setFont(new Font("Tahoma", Font.BOLD, 17));
+		editBookmark.setBounds(70, 18, 167, 22);
+		panel2.add(editBookmark);
 		
-		urlEditTxtFld = new JTextField();
-		urlEditTxtFld.setForeground(COLOR_TEXT);
+		LoboLabel lblDescription = new LoboLabel("URL");
+		lblDescription.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblDescription.setBounds(25, 70, 282, 16);
+		panel2.add(lblDescription);
+		
+		urlEditTxtFld = new LoboTextField();
 		urlEditTxtFld.setFont(new Font("Tahoma", Font.BOLD, 12));
 		urlEditTxtFld.setColumns(10);
-		urlEditTxtFld.setCaretColor(COLOR_TEXT);
 		urlEditTxtFld.setBorder(null);
-		urlEditTxtFld.setBackground(COLOR_BACKGROUND);
-		urlEditTxtFld.setBounds(12, 98, 500, 16);
+		urlEditTxtFld.setBounds(25, 98, 300, 16);
 		panel2.add(urlEditTxtFld);
 		
-		JSeparator separator_11 = new JSeparator();
-		separator_11.setForeground(COLOR_TEXT);
-		separator_11.setBackground(COLOR_BACKGROUND);
-		separator_11.setBounds(12, 115, 350, 12);
-		panel2.add(separator_11);
-
-		JButton okButton = new JButton("Save");
-		okButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		okButton.setForeground(COLOR_TEXT);
-		okButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		okButton.setFocusPainted(false);
-		okButton.setContentAreaFilled(false);
-		okButton.setBorder(new LineBorder(COLOR_TEXT));
+		LoboSeparator separator_9 = new LoboSeparator();
+		separator_9.setBounds(25, 115, 300, 12);
+		panel2.add(separator_9);
+		
+		LoboButton okButton = new LoboButton();
+		okButton.setText("Save");
 		okButton.setActionCommand("okButton");
-		okButton.setBounds(12, 150, 200, 40);
+		okButton.setBounds(25, 340, 150, 40);
 		okButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -150,13 +137,8 @@ public class ShowRecentWindow extends JFrame {
 		});
 		panel2.add(okButton);
 
-		JButton closeButton = new JButton("Close");
-		closeButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		closeButton.setForeground(COLOR_TEXT);
-		closeButton.setFont(new Font("Tahoma", Font.BOLD, 14));
-		closeButton.setFocusPainted(false);
-		closeButton.setContentAreaFilled(false);
-		closeButton.setBorder(new LineBorder(COLOR_TEXT));
+		LoboButton closeButton = new LoboButton();
+		closeButton.setText("Close");
 		closeButton.setActionCommand("closeButton");
 		closeButton.addActionListener(new ActionListener() {
 			@Override
@@ -165,40 +147,34 @@ public class ShowRecentWindow extends JFrame {
 				dispose();
 			}
 		});
-		closeButton.setBounds(224, 150, 138, 40);
+		closeButton.setBounds(180, 340, 138, 40);
 		panel2.add(closeButton);
-		
 	}
 	
 	private void listHost(BrowserFrame frame, Container contentPane) {
-		JSeparator separator_7 = new JSeparator();
-		separator_7.setBounds(0, 98, 900, 12);
+		LoboSeparator separator_7 = new LoboSeparator();
+		separator_7.setBounds(0, 98, 750, 12);
 		contentPane.add(separator_7);
 		
-		JPanel panel = new JPanel();
+		LoboPanel panel = new LoboPanel();
 		panel.setLayout(null);
-		panel.setBackground(COLOR_BACKGROUND);
-		panel.setBounds(0, 40, 800, 50);
+		panel.setBounds(0, 40, 700, 50);
 		contentPane.add(panel);
 		
-		JLabel url = new JLabel("URL");
-		url.setForeground(COLOR_TEXT);
+		LoboLabel url = new LoboLabel("URL");
 		url.setFont(new Font("Tahoma", Font.BOLD, 14));
-		url.setBounds(30, 18, 211, 16);
+		url.setBounds(400, 18, 160, 17);
 		panel.add(url);
 		
-		JLabel action = new JLabel("Action");
-		action.setForeground(COLOR_TEXT);
+		LoboLabel action = new LoboLabel("Action");
 		action.setFont(new Font("Tahoma", Font.BOLD, 14));
 		action.setBounds(750, 18, 160, 17);
 		panel.add(action);
 		
-		JPanel panelGeneralViewAllItems = new JPanel();
-		panelGeneralViewAllItems.setBackground(COLOR_TEXT);
-		panelGeneralViewAllItems.setBounds(10, 100, 850, 313);
+		LoboPanel panelGeneralViewAllItems = new LoboPanel();
+		panelGeneralViewAllItems.setBounds(10, 100, 755, 313);
 		JScrollPane spViewallItems = new JScrollPane();
 		spViewallItems.setBorder(null);
-		spViewallItems.setBackground(COLOR_TEXT);
 		spViewallItems.setViewportView(createItemPanel(frame));
 
 		panelGeneralViewAllItems.setLayout(new BorderLayout());
@@ -208,12 +184,11 @@ public class ShowRecentWindow extends JFrame {
 		
 	}
 	
-	private JPanel createItemPanel(BrowserFrame frame) {
+	private LoboPanel createItemPanel(BrowserFrame frame) {
 
-		JPanel panel_3 = new JPanel();
+		LoboPanel panel_3 = new LoboPanel();
 		panel_3.setLayout(null);
-		panel_3.setBackground(COLOR_BACKGROUND);
-		panel_3.setBounds(0, 191, 850, 70);
+		panel_3.setBounds(0, 191, 600, 70);
 
 		int debutCpDesc = 15;
 		int debutCpTitle = 15;
@@ -226,15 +201,14 @@ public class ShowRecentWindow extends JFrame {
 			final List<String[]> hostEntries = history.getRecentHostEntries(1000);
 			for (final String[] hosts : hostEntries) {
 				final String host = hosts[0]; 
-				JTextField url = new JTextField();
+				LoboTextField url = new LoboTextField();
 				url.setText(host);
-				url.setForeground(COLOR_TEXT);
+				url.setToolTipText(host);
 				url.setFont(new Font("Tahoma", Font.BOLD, 12));
 				url.setEditable(false);
 				url.setColumns(10);
 				url.setBorder(null);
-				url.setBackground(COLOR_BACKGROUND);
-				url.setBounds(12, debutCpDesc, 650, 22);
+				url.setBounds(12, debutCpDesc, 600, 22);
 				url.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				url.addMouseListener(new MouseAdapter() {
 					@Override
@@ -254,19 +228,14 @@ public class ShowRecentWindow extends JFrame {
 				});
 				panel_3.add(url);
 				
-				JSeparator separatorItem = new JSeparator();
+				LoboSeparator separatorItem = new LoboSeparator();
 				separatorItem.setBounds(0, debutCpSeparator, 900, 7);
 				panel_3.add(separatorItem);
 
-				JButton edit = new JButton("Edit");
-				edit.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				edit.setForeground(COLOR_TEXT);
-				edit.setFont(new Font("Tahoma", Font.BOLD, 12));
-				edit.setFocusPainted(false);
-				edit.setContentAreaFilled(false);
-				edit.setBorder(new LineBorder(COLOR_TEXT));
+				LoboButton edit = new LoboButton();
+				edit.setText("Edit");
 				edit.setActionCommand("okButton");
-				edit.setBounds(720, debutCpUrl, 40, 40);
+				edit.setBounds(630, debutCpUrl, 40, 40);
 				edit.addActionListener(new ActionListener() {
 
 					@Override
@@ -279,15 +248,9 @@ public class ShowRecentWindow extends JFrame {
 				panel_3.add(edit);
 				
 				
-				JButton delete = new JButton("Delete");
-				delete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-				delete.setForeground(COLOR_TEXT);
-				delete.setFont(new Font("Tahoma", Font.BOLD, 12));
-				delete.setFocusPainted(false);
-				delete.setContentAreaFilled(false);
-				delete.setBorder(new LineBorder(COLOR_TEXT));
-				delete.setActionCommand("okButton");
-				delete.setBounds(770, debutCpUrl, 50, 40);
+				LoboButton delete = new LoboButton();
+				delete.setText("Delete");
+				delete.setBounds(680, debutCpUrl, 50, 40);
 				delete.addActionListener(new ActionListener() {
 
 					@Override
