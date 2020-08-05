@@ -113,12 +113,6 @@ public interface RenderState {
 	
 	/** The display table column group. */
 	int DISPLAY_TABLE_COLUMN_GROUP = 14;
-	
-	/** The display flex box. */
-	int DISPLAY_FLEX_BOX = 15;
-	
-	/** The display flex child. */
-	int DISPLAY_FLEX_CHILD = 16;
 
 	/** The ws normal. */
 	int WS_NORMAL = 0;

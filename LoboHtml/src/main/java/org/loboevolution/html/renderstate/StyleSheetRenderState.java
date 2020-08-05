@@ -449,9 +449,6 @@ public class StyleSheetRenderState implements RenderState {
 		case INLINE_TABLE:
 			displayInt = DISPLAY_INLINE_TABLE;
 			break;
-		case FLEX:
-			displayInt = DISPLAY_FLEX_BOX;
-			break;	
 		case INHERIT:
 			displayInt = this.getPreviousRenderState().getDisplay();
 			break;
