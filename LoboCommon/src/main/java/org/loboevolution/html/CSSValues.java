@@ -81,6 +81,8 @@ public enum CSSValues {
 	E_RESIZE("e-resize"),
 
 	FIXED("fixed"),
+	
+	FLEX("flex"),
 
 	GRAB("grab"),
 

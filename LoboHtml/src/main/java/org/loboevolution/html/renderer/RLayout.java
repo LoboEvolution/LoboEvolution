@@ -150,9 +150,16 @@ public class RLayout {
 		@Override
 		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			final RenderState rs = markupElement.getRenderState();
-			int display = markupElement.getHidden() ? RenderState.DISPLAY_NONE : rs == null ? this.display : rs.getDisplay();
+			final RenderState previus = rs.getPreviousRenderState();
+			final boolean isHidden = markupElement.getHidden();
+			final int defaultDispaly = rs == null ? this.display : rs.getDisplay();
+			int display = isHidden ? RenderState.DISPLAY_NONE : defaultDispaly;
 
-	        if (display == RenderState.DISPLAY_INLINE || display == RenderState.DISPLAY_INLINE_BLOCK) {
+			if (previus != null && previus.getDisplay() == RenderState.DISPLAY_FLEX_BOX) {
+				display = RenderState.DISPLAY_FLEX_CHILD;
+			}
+			
+			if (display == RenderState.DISPLAY_INLINE || display == RenderState.DISPLAY_INLINE_BLOCK) {
 	            final int position = rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
 	            if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
 	                display = RenderState.DISPLAY_BLOCK;
@@ -174,6 +181,7 @@ public class RLayout {
 	            }
 	            break;
 	        case RenderState.DISPLAY_BLOCK:
+	        case RenderState.DISPLAY_FLEX_BOX:
 	        case RenderState.DISPLAY_TABLE_ROW:
 	            bodyLayout.layoutRBlock(markupElement);
 	            break;
@@ -192,9 +200,12 @@ public class RLayout {
 	        case RenderState.DISPLAY_INLINE_BLOCK:
 	            bodyLayout.layoutRInlineBlock(markupElement);
 	            break;
+	        case RenderState.DISPLAY_FLEX_CHILD:
+	        	 bodyLayout.layoutRFlex(markupElement);
 	        case RenderState.DISPLAY_TABLE_CELL:
+	        case RenderState.DISPLAY_INLINE:
 	        default:
-	            bodyLayout.layoutMarkup(markupElement);
+	            bodyLayout.layoutInline(markupElement);
 	            break;
 	        }
 		}

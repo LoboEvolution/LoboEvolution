@@ -311,7 +311,7 @@ public class RBlockViewport extends BaseRCollection {
 			if (layoutIfPositioned) {
 				if (renderable instanceof RBlock) {
 					final RBlock block = (RBlock) renderable;
-			          block.layout(this.availContentWidth, this.availContentHeight, false, false, null, this.sizeOnly);
+			        block.layout(this.availContentWidth, this.availContentHeight, false, false, null, this.sizeOnly);
 				} else {
 					renderable.layout(this.availContentWidth, this.availContentHeight, this.sizeOnly);
 				}
@@ -320,11 +320,8 @@ public class RBlockViewport extends BaseRCollection {
 			this.scheduleAbsDelayedPair(renderable, style, rs, currentLine, absolute);
 			return true;
 		} else {
-			if (addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned)) {
-				return true;
-			}
+			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned);
 		}
-		return false;
 	}
 
 	private void addExportableFloat(final BoundableRenderable element, final boolean leftFloat, final int origX, final int origY) {
@@ -1305,9 +1302,15 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
 	 */
 	protected void layoutMarkup(NodeImpl node) {
-		// This is the "inline" layout of an element.
-		// The difference with layoutChildren is that this
-		// method checks for padding and margin insets.
+		layoutInline(node);
+	}
+	
+	/**
+	 * <p>layoutInline.</p>
+	 *
+	 * @param node a {@link org.loboevolution.html.dom.domimpl.NodeImpl} object.
+	 */
+	protected void layoutInline(NodeImpl node) {
 		final RenderState rs = node.getRenderState();
 		Insets marginInsets = null;
 		Insets paddingInsets = null;
@@ -1391,12 +1394,20 @@ public class RBlockViewport extends BaseRCollection {
 	protected final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
-			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext,
-					this.container);
+			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
 		positionRElement(markupElement, renderable, markupElement instanceof HTMLTableElementImpl, true, true);
+	}
+	
+	/**
+	 * <p>layoutRFlex.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	protected void layoutRFlex(HTMLElementImpl markupElement) {
+		layoutRInlineBlock(markupElement);
 	}
 	
 	/**
