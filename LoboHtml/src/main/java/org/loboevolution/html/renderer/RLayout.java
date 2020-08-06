@@ -175,6 +175,7 @@ public class RLayout {
 	            break;
 	        case RenderState.DISPLAY_BLOCK:
 	        case RenderState.DISPLAY_TABLE_ROW:
+	        case RenderState.DISPLAY_FLEX_BOX:
 	            bodyLayout.layoutRBlock(markupElement);
 	            break;
 	        case RenderState.DISPLAY_LIST_ITEM:
