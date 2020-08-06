@@ -39,6 +39,7 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 import org.loboevolution.common.ArrayUtilities;
+import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.control.HrControl;
 import org.loboevolution.html.control.RUIControl;
@@ -1416,6 +1417,28 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
 		addRenderableToLine(inlineBlock);
+	}
+
+	/**
+	 * <p>layoutRFlex.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	public void layoutRFlex(final HTMLElementImpl markupElement) {
+		final RenderState renderState = markupElement.getRenderState();
+		final RenderState previous = renderState.getPreviousRenderState();
+		String flexDirText = previous.getFlexDirection();
+		CSSValues flt = CSSValues.get(flexDirText);
+		switch (flt) {
+		case ROW:
+			layoutRInlineBlock(markupElement);
+			break;
+		case COLUMN:
+			layoutRBlock(markupElement);
+			break;
+		default:
+			break;
+		} 
 	}
 
 	private void layoutText(NodeImpl textNode) {

@@ -245,6 +245,13 @@ public interface RenderState {
 	 * @return a int.
 	 */
 	int getFloat();
+	
+	/**
+	 * <p>getFlexDirection.</p>
+	 *
+	 * @return a String.
+	 */
+	String getFlexDirection();
 
 	/**
 	 * <p>getFont.</p>

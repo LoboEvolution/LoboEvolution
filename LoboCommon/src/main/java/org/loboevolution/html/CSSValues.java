@@ -55,6 +55,10 @@ public enum CSSValues {
 	CENTER("center"),
 
 	CIRCLE("circle"),
+	
+	COLUMN("column"),
+	
+	COLUMN_REVERSE("column-reverse"),
 
 	COLLAPSE("collapse"),
 
@@ -173,6 +177,10 @@ public enum CSSValues {
 	RIDGE("ridge"),
 
 	RIGHT("right"),
+	
+	ROW("row"),
+	
+	ROW_REVERSE("row-reverse"),
 
 	ROWSPAN("rowspan"),
 

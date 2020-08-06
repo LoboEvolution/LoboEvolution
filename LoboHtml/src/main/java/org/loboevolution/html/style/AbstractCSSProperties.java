@@ -506,6 +506,11 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	public String getFontWeight() {
 		return this.getPropertyValueLC(FONT_WEIGHT);
 	}
+	
+	@Override
+	public String getFlexDirection() {
+		return this.getPropertyValueLC(FLEX_DIRECTION);
+	}
 
 	/** {@inheritDoc} */
 	@Override

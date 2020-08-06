@@ -109,6 +109,12 @@ public abstract class RenderStateDelegator implements RenderState {
 	public int getFloat() {
 		return this.delegate.getFloat();
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexDirection() {
+		return this.delegate.getFlexDirection();
+	}
 
 	/** {@inheritDoc} */
 	@Override

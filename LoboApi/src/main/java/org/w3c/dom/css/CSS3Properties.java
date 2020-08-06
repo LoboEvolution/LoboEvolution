@@ -35,6 +35,13 @@ public interface CSS3Properties extends CSS2Properties {
 	 * @return a {@link java.lang.String} object.
 	 */
 	String getFill();
+	
+	/**
+	 * <p>getFlexDirection.</p>
+	 *
+	 * @return a {@link java.lang.String} object.
+	 */	
+	String getFlexDirection(); 
 
 	/**
 	 * <p>setClipPath.</p>

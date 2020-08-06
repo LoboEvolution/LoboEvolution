@@ -416,11 +416,20 @@ public class StyleSheetRenderState implements RenderState {
 		if (d != null) {
 			return d.intValue();
 		}
-		final CSS3Properties props = this.getCssProperties();
-		final String displayText = props == null ? null : props.getDisplay();
-		int displayInt;
-		final String displayTextTL = Strings.isNotBlank(displayText) ? displayText : "";
-		final CSSValues display = CSSValues.get(displayTextTL);
+		CSSValues display = null;
+		int displayInt = -1;
+		final RenderState previous = this.getPreviousRenderState();
+		if (previous != null && previous.getDisplay() == DISPLAY_FLEX_BOX) {
+			displayInt = DISPLAY_FLEX_CHILD;
+			this.iDisplay = Integer.valueOf(displayInt);
+			return displayInt;
+		} else {
+			final CSS3Properties props = this.getCssProperties();
+			final String displayText = props == null ? null : props.getDisplay();
+			final String displayTextTL = Strings.isNotBlank(displayText) ? displayText : "";
+			display = CSSValues.get(displayTextTL);
+		}
+		
 		switch (display) {
 		case BLOCK:
 			displayInt = DISPLAY_BLOCK;
@@ -496,6 +505,24 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		this.cachedFloat = Integer.valueOf(floatValue);
 		return floatValue;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexDirection() {
+		AbstractCSSProperties props = this.getCssProperties();
+		String flexDir = props == null ? null : props.getFlexDirection();
+		final String flexDirText = Strings.isBlank(flexDir) ? "" : flexDir;
+		CSSValues flt = CSSValues.get(flexDirText);
+		switch (flt) {
+		case COLUMN:
+		case COLUMN_REVERSE:
+		case ROW_REVERSE:
+		case ROW:
+			return flexDirText;
+		default:
+			return CSSValues.ROW.getValue();
+		}
 	}
 
 	/** {@inheritDoc} */

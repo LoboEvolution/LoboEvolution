@@ -169,6 +169,8 @@ public interface CSSProperties {
 
 	/** The Constant FLOAT. */
 	String FLOAT = "float";
+	
+	String FLEX_DIRECTION = "flex-direction";
 
 	/** The Constant FONT. */
 	String FONT = "font";
