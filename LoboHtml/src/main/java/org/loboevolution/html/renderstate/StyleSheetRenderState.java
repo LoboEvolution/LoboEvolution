@@ -224,7 +224,21 @@ public class StyleSheetRenderState implements RenderState {
 		// TODO: Does it work with display: table-cell?
 		return 0;
 	}
-
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignItems() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getAlignItems();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignContent() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getAlignContent();
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public Color getBackgroundColor() {
@@ -523,6 +537,27 @@ public class StyleSheetRenderState implements RenderState {
 		default:
 			return CSSValues.ROW.getValue();
 		}
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexWrap() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getFlexWrap();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexFlow() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getFlexFlow();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getJustifyContent() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getJustifyContent();
 	}
 
 	/** {@inheritDoc} */

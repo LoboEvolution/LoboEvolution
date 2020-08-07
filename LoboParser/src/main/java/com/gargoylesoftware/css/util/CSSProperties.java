@@ -10,6 +10,12 @@ package com.gargoylesoftware.css.util;
  * @version $Id: $Id
  */
 public interface CSSProperties {
+	
+	/** The Constant ALIGN_ITEMS. */
+	String ALIGN_ITEMS = "align-items";
+	
+	/** The Constant ALIGN_CONTENT. */
+	String ALIGN_CONTENT = "align-content";
 
 	/** The Constant AZIMUTH. */
 	String AZIMUTH = "azimuth";
@@ -170,7 +176,14 @@ public interface CSSProperties {
 	/** The Constant FLOAT. */
 	String FLOAT = "float";
 	
+	/** The Constant FLEX_DIRECTION. */
 	String FLEX_DIRECTION = "flex-direction";
+	
+	/** The Constant FLEX_WRAP. */
+	String FLEX_WRAP = "flex-wrap";
+	
+	/** The Constant FLEX_FLOW. */
+	String FLEX_FLOW = "flex-flow";
 
 	/** The Constant FONT. */
 	String FONT = "font";
@@ -198,6 +211,9 @@ public interface CSSProperties {
 
 	/** The Constant HEIGHT. */
 	String HEIGHT = "height";
+
+	/** The Constant JUSTIFY_CONTENT. */
+	String JUSTIFY_CONTENT = "justify-content";
 
 	/** The Constant LEFT. */
 	String LEFT = "left";

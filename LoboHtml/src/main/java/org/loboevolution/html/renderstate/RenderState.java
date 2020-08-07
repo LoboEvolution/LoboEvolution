@@ -187,6 +187,20 @@ public interface RenderState {
 	 * @return a int.
 	 */
 	int getAlignYPercent();
+	
+	/**
+	 * <p>getAlignItems.</p>
+	 *
+	 * @return a String.
+	 */
+	String getAlignItems();
+	
+	/**
+	 * <p>getAlignContent.</p>
+	 *
+	 * @return a String.
+	 */
+	String getAlignContent();
 
 	/**
 	 * <p>getBackgroundColor.</p>
@@ -252,6 +266,27 @@ public interface RenderState {
 	 * @return a String.
 	 */
 	String getFlexDirection();
+	
+	/**
+	 * <p>getFlexWrap.</p>
+	 *
+	 * @return a String.
+	 */
+	String getFlexWrap();
+	
+	/**
+	 * <p>getFlexFlow.</p>
+	 *
+	 * @return a String.
+	 */
+	String getFlexFlow();
+	
+	/**
+	 * <p>getJustifyContent.</p>
+	 *
+	 * @return a String.
+	 */
+	String getJustifyContent();
 
 	/**
 	 * <p>getFont.</p>
