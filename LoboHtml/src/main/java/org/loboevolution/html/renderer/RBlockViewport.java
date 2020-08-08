@@ -39,7 +39,6 @@ import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 
 import org.loboevolution.common.ArrayUtilities;
-import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.HTMLTag;
 import org.loboevolution.html.control.HrControl;
 import org.loboevolution.html.control.RUIControl;
@@ -1418,7 +1417,7 @@ public class RBlockViewport extends BaseRCollection {
 		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
 		addRenderableToLine(inlineBlock);
 	}
-
+	
 	/**
 	 * <p>layoutRFlex.</p>
 	 *
@@ -1426,19 +1425,32 @@ public class RBlockViewport extends BaseRCollection {
 	 */
 	public void layoutRFlex(final HTMLElementImpl markupElement) {
 		final RenderState renderState = markupElement.getRenderState();
-		final RenderState previous = renderState.getPreviousRenderState();
-		String flexDirText = previous.getFlexDirection();
-		CSSValues flt = CSSValues.get(flexDirText);
-		switch (flt) {
-		case ROW:
+		RFlex flex = new RFlex(renderState);
+		if(flex.isFlexTable()) {
+			layoutRTable(markupElement);
+		} else {
+			flex.flexAlign(markupElement);
+			layoutRBlock(markupElement);	
+		}
+	}
+
+	/**
+	 * <p>layoutChildFlex.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	public void layoutChildFlex(final HTMLElementImpl markupElement) {
+		final RenderState renderState = markupElement.getRenderState();
+		RFlexChild flex = new RFlexChild(renderState);
+		
+		if(flex.isFlexContainerTable()) {
+			layoutMarkup(markupElement);
+		} else if (flex.isInlineBlock()) {
 			layoutRInlineBlock(markupElement);
-			break;
-		case COLUMN:
+		} else {
+			flex.flexAlign(markupElement);
 			layoutRBlock(markupElement);
-			break;
-		default:
-			break;
-		} 
+		}
 	}
 
 	private void layoutText(NodeImpl textNode) {

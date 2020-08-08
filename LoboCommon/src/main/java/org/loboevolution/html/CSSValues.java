@@ -87,7 +87,11 @@ public enum CSSValues {
 	FIXED("fixed"),
 	
 	FLEX("flex"),
-
+	
+	FLEX_START("flex-start"),
+	
+	FLEX_END("flex-end"),
+	
 	GRAB("grab"),
 
 	GROOVE("groove"),
@@ -201,10 +205,16 @@ public enum CSSValues {
 	SOLID("solid"),
 	
 	SQUARE("square"),
+	
+	SPACE_AROUND("space-around"),
+	
+	SPACE_BETWEEN("space-between"),
 
 	STATIC("static"),
 
 	STATUS_BAR("status-bar"),
+	
+	STRETCH("stretch"),
 
 	SW_RESIZE("sw-resize"),
 
@@ -233,6 +243,10 @@ public enum CSSValues {
 	W_RESIZE("w-resize"),
 
 	WAIT("wait"),
+	
+	WRAP("wrap"),
+	
+	WRAP_REVERSE("wrap-reverse"),
 
 	X_LARGE("x-large"),
 
