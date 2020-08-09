@@ -48,6 +48,7 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.LineBreak;
+import org.loboevolution.html.renderer.RFlex;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.FontValues;
@@ -224,7 +225,21 @@ public class StyleSheetRenderState implements RenderState {
 		// TODO: Does it work with display: table-cell?
 		return 0;
 	}
-
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignItems() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getAlignItems();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignContent() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getAlignContent();
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public Color getBackgroundColor() {
@@ -416,11 +431,21 @@ public class StyleSheetRenderState implements RenderState {
 		if (d != null) {
 			return d.intValue();
 		}
-		final CSS3Properties props = this.getCssProperties();
-		final String displayText = props == null ? null : props.getDisplay();
-		int displayInt;
-		final String displayTextTL = Strings.isNotBlank(displayText) ? displayText : "";
-		final CSSValues display = CSSValues.get(displayTextTL);
+		CSSValues display = null;
+		int displayInt = -1;
+		final RenderState previous = this.getPreviousRenderState();
+		if (previous != null && previous.getDisplay() == DISPLAY_FLEX_BOX) {
+			final RFlex flex = new RFlex(previous);
+			displayInt = flex.isFlexTable() ? DISPLAY_TABLE_CELL : DISPLAY_FLEX_CHILD;
+			this.iDisplay = Integer.valueOf(displayInt);
+			return displayInt;
+		} else {
+			final CSS3Properties props = this.getCssProperties();
+			final String displayText = props == null ? null : props.getDisplay();
+			final String displayTextTL = Strings.isNotBlank(displayText) ? displayText : "";
+			display = CSSValues.get(displayTextTL);
+		}
+		
 		switch (display) {
 		case BLOCK:
 			displayInt = DISPLAY_BLOCK;
@@ -449,6 +474,9 @@ public class StyleSheetRenderState implements RenderState {
 		case INLINE_TABLE:
 			displayInt = DISPLAY_INLINE_TABLE;
 			break;
+		case FLEX:
+			displayInt = DISPLAY_FLEX_BOX;
+			break;	
 		case INHERIT:
 			displayInt = this.getPreviousRenderState().getDisplay();
 			break;
@@ -493,6 +521,45 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		this.cachedFloat = Integer.valueOf(floatValue);
 		return floatValue;
+	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexDirection() {
+		AbstractCSSProperties props = this.getCssProperties();
+		String flexDir = props == null ? null : props.getFlexDirection();
+		final String flexDirText = Strings.isBlank(flexDir) ? "" : flexDir;
+		CSSValues flt = CSSValues.get(flexDirText);
+		switch (flt) {
+		case COLUMN:
+		case COLUMN_REVERSE:
+		case ROW_REVERSE:
+		case ROW:
+			return flexDirText;
+		default:
+			return CSSValues.ROW.getValue();
+		}
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexWrap() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getFlexWrap();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexFlow() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getFlexFlow();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getJustifyContent() {
+		AbstractCSSProperties props = this.getCssProperties();
+		return props == null ? null : props.getJustifyContent();
 	}
 
 	/** {@inheritDoc} */

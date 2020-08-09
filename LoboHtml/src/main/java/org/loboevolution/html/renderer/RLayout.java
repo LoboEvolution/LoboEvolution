@@ -149,20 +149,7 @@ public class RLayout {
 
 		@Override
 		public void layoutMarkup(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final RenderState rs = markupElement.getRenderState();
-			int display = markupElement.getHidden() ? RenderState.DISPLAY_NONE : rs == null ? this.display : rs.getDisplay();
-
-	        if (display == RenderState.DISPLAY_INLINE || display == RenderState.DISPLAY_INLINE_BLOCK) {
-	            final int position = rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
-	            if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
-	                display = RenderState.DISPLAY_BLOCK;
-	            } else {
-	                final int boxFloat = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
-	                if (boxFloat != RenderState.FLOAT_NONE) {
-	                    display = RenderState.DISPLAY_BLOCK;
-	                }
-	            }
-	        }
+			final int display = calculateLayout(markupElement);
 			
 	        switch (display) {
 	        case RenderState.DISPLAY_TABLE_COLUMN:
@@ -192,11 +179,37 @@ public class RLayout {
 	        case RenderState.DISPLAY_INLINE_BLOCK:
 	            bodyLayout.layoutRInlineBlock(markupElement);
 	            break;
-	        case RenderState.DISPLAY_TABLE_CELL:
+	      case RenderState.DISPLAY_FLEX_BOX:
+	        	 bodyLayout.layoutRFlex(markupElement);
+	        	 break;
+	      case RenderState.DISPLAY_FLEX_CHILD:
+	        	 bodyLayout.layoutChildFlex(markupElement);
+	        	 break; 
+	      case RenderState.DISPLAY_TABLE_CELL:
 	        default:
 	            bodyLayout.layoutMarkup(markupElement);
 	            break;
 	        }
+		}
+		
+		private int calculateLayout(HTMLElementImpl markupElement) {
+			final RenderState rs = markupElement.getRenderState();
+			final boolean isHidden = markupElement.getHidden();
+			final int defaultDispaly = rs == null ? this.display : rs.getDisplay();
+			int display = isHidden ? RenderState.DISPLAY_NONE : defaultDispaly;
+
+			if (display == RenderState.DISPLAY_INLINE || display == RenderState.DISPLAY_INLINE_BLOCK) {
+	            final int position = rs == null ? RenderState.POSITION_STATIC : rs.getPosition();
+	            if (position == RenderState.POSITION_ABSOLUTE || position == RenderState.POSITION_FIXED) {
+	                display = RenderState.DISPLAY_BLOCK;
+	            } else {
+	                final int boxFloat = rs == null ? RenderState.FLOAT_NONE : rs.getFloat();
+	                if (boxFloat != RenderState.FLOAT_NONE) {
+	                    display = RenderState.DISPLAY_BLOCK;
+	                }
+	            }
+	        }
+			return display;
 		}
 	}
 

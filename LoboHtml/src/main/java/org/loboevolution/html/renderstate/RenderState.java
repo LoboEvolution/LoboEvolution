@@ -114,6 +114,12 @@ public interface RenderState {
 	/** The display table column group. */
 	int DISPLAY_TABLE_COLUMN_GROUP = 14;
 
+	/** The display flex box. */
+	int DISPLAY_FLEX_BOX = 15;
+	
+	/** The display flex child. */
+	int DISPLAY_FLEX_CHILD = 16;
+
 	/** The ws normal. */
 	int WS_NORMAL = 0;
 
@@ -181,6 +187,20 @@ public interface RenderState {
 	 * @return a int.
 	 */
 	int getAlignYPercent();
+	
+	/**
+	 * <p>getAlignItems.</p>
+	 *
+	 * @return a String.
+	 */
+	String getAlignItems();
+	
+	/**
+	 * <p>getAlignContent.</p>
+	 *
+	 * @return a String.
+	 */
+	String getAlignContent();
 
 	/**
 	 * <p>getBackgroundColor.</p>
@@ -239,6 +259,34 @@ public interface RenderState {
 	 * @return a int.
 	 */
 	int getFloat();
+	
+	/**
+	 * <p>getFlexDirection.</p>
+	 *
+	 * @return a String.
+	 */
+	String getFlexDirection();
+	
+	/**
+	 * <p>getFlexWrap.</p>
+	 *
+	 * @return a String.
+	 */
+	String getFlexWrap();
+	
+	/**
+	 * <p>getFlexFlow.</p>
+	 *
+	 * @return a String.
+	 */
+	String getFlexFlow();
+	
+	/**
+	 * <p>getJustifyContent.</p>
+	 *
+	 * @return a String.
+	 */
+	String getJustifyContent();
 
 	/**
 	 * <p>getFont.</p>

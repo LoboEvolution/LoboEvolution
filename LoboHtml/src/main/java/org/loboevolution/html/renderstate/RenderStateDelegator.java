@@ -61,6 +61,18 @@ public abstract class RenderStateDelegator implements RenderState {
 	public int getAlignYPercent() {
 		return this.delegate.getAlignYPercent();
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignItems() {
+		return this.delegate.getAlignItems();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignContent() {
+		return this.delegate.getAlignContent();
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -108,6 +120,30 @@ public abstract class RenderStateDelegator implements RenderState {
 	@Override
 	public int getFloat() {
 		return this.delegate.getFloat();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexDirection() {
+		return this.delegate.getFlexDirection();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexWrap() {
+		return this.delegate.getFlexWrap();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexFlow() {
+		return this.delegate.getFlexFlow();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getJustifyContent() {
+		return this.delegate.getJustifyContent();
 	}
 
 	/** {@inheritDoc} */

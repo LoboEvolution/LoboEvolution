@@ -25,7 +25,7 @@ package org.loboevolution.html.renderer;
 
 import java.awt.Dimension;
 
-import org.loboevolution.html.dom.HTMLTableCellElement;
+import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
@@ -35,7 +35,7 @@ import org.loboevolution.info.SizeInfo;
 
 class RTableCell extends RBlock {
 	
-	private final HTMLTableCellElementImpl cellElement;
+	private final HTMLElementImpl cellElement;
 	
 	private int colSpan = -1;
 
@@ -46,13 +46,13 @@ class RTableCell extends RBlock {
 	/**
 	 * <p>Constructor for RTableCell.</p>
 	 *
-	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl} object.
+	 * @param element a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
 	 * @param pcontext a {@link org.loboevolution.http.UserAgentContext} object.
 	 * @param rcontext a {@link org.loboevolution.http.HtmlRendererContext} object.
 	 * @param frameContext a {@link org.loboevolution.html.renderer.FrameContext} object.
 	 * @param tableAsContainer a {@link org.loboevolution.html.renderer.RenderableContainer} object.
 	 */
-	public RTableCell(HTMLTableCellElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
+	public RTableCell(HTMLElementImpl element, UserAgentContext pcontext, HtmlRendererContext rcontext,
 			FrameContext frameContext, RenderableContainer tableAsContainer) {
 		super(element, 0, pcontext, rcontext, frameContext, tableAsContainer);
 		this.cellElement = element;
@@ -230,12 +230,12 @@ class RTableCell extends RBlock {
 		setBounds(x, y, width, height);
 	}
 	
-    private static int getColSpan(final HTMLTableCellElement elem) {
+    private static int getColSpan(final HTMLElementImpl elem) {
         String colSpanText = elem.getAttribute("colspan");
         return HtmlValues.getPixelSize(colSpanText, null, 1);
     }
     
-    private static int getRowSpan(final HTMLTableCellElement elem) {
+    private static int getRowSpan(final HTMLElementImpl elem) {
         String rowSpanText = elem.getAttribute("rowspan");
         return HtmlValues.getPixelSize(rowSpanText, null, 1);
     }

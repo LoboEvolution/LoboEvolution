@@ -1391,8 +1391,7 @@ public class RBlockViewport extends BaseRCollection {
 	protected final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
-			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext,
-					this.container);
+			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
@@ -1416,6 +1415,39 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		inlineBlock.doLayout(availContentWidth, availContentHeight, sizeOnly);
 		addRenderableToLine(inlineBlock);
+	}
+	
+	/**
+	 * <p>layoutRFlex.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	public void layoutRFlex(final HTMLElementImpl markupElement) {
+		final RenderState renderState = markupElement.getRenderState();
+		RFlex flex = new RFlex(renderState);
+		if(flex.isFlexTable()) {
+			layoutRTable(markupElement);
+		} else {
+			flex.flexAlign(markupElement);
+			layoutRBlock(markupElement);	
+		}
+	}
+
+	/**
+	 * <p>layoutChildFlex.</p>
+	 *
+	 * @param markupElement a {@link org.loboevolution.html.dom.domimpl.HTMLElementImpl} object.
+	 */
+	public void layoutChildFlex(final HTMLElementImpl markupElement) {
+		final RenderState renderState = markupElement.getRenderState();
+		RFlexChild flex = new RFlexChild(renderState);
+		
+		if (flex.isInlineBlock()) {
+			layoutRInlineBlock(markupElement);
+		} else {
+			flex.flexAlign(markupElement);
+			layoutRBlock(markupElement);
+		}
 	}
 
 	private void layoutText(NodeImpl textNode) {

@@ -145,23 +145,17 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		this.overlayColor = value;
 		this.context.informLookInvalid();
 	}
-
-	/**
-	 * <p>getFloat.</p>
-	 *
-	 * @return a {@link java.lang.String} object.
-	 */
-	public String getFloat() {
-		return this.getPropertyValueLC(FLOAT);
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignItems() {
+		return this.getPropertyValueLC(ALIGN_ITEMS);
 	}
-
-	/**
-	 * <p>setFloat.</p>
-	 *
-	 * @param value a {@link java.lang.String} object.
-	 */
-	public void setFloat(String value) {
-		this.setPropertyValueLC(FLOAT, value);
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getAlignContent() {
+		return this.getPropertyValueLC(ALIGN_CONTENT);
 	}
 
 	/** {@inheritDoc} */
@@ -506,7 +500,35 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	public String getFontWeight() {
 		return this.getPropertyValueLC(FONT_WEIGHT);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFloat() {
+		return this.getPropertyValueLC(FLOAT);
+	}
+	
+	@Override
+	public String getFlexDirection() {
+		return this.getPropertyValueLC(FLEX_DIRECTION);
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexWrap() {
+		return this.getPropertyValueLC(FLEX_WRAP);
+	}
 
+	/** {@inheritDoc} */
+	@Override
+	public String getFlexFlow() {
+		return this.getPropertyValueLC(FLEX_FLOW);
+	}
+	
+	@Override
+	public String getJustifyContent() {
+		return this.getPropertyValueLC(JUSTIFY_CONTENT);
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public String getHeight() {
@@ -1300,6 +1322,12 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	public void setFontWeight(String fontWeight) throws DOMException {
 		this.setPropertyValueLC(FONT_WEIGHT, fontWeight);
 		this.context.informInvalid();
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void setFloat(String value) {
+		this.setPropertyValueLC(FLOAT, value);
 	}
 
 	/** {@inheritDoc} */
