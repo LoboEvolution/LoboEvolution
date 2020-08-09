@@ -1442,9 +1442,7 @@ public class RBlockViewport extends BaseRCollection {
 		final RenderState renderState = markupElement.getRenderState();
 		RFlexChild flex = new RFlexChild(renderState);
 		
-		if(flex.isFlexContainerTable()) {
-			layoutMarkup(markupElement);
-		} else if (flex.isInlineBlock()) {
+		if (flex.isInlineBlock()) {
 			layoutRInlineBlock(markupElement);
 		} else {
 			flex.flexAlign(markupElement);

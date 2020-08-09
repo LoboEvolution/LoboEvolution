@@ -12,12 +12,6 @@ class RFlexChild {
 	protected RFlexChild(RenderState renderState) {
 		this.renderState = renderState;
 	}
-	
-	protected boolean isFlexContainerTable() {
-		final RenderState previous = renderState.getPreviousRenderState();
-		final RFlex flex = new RFlex(previous);
-		return flex.isFlexTable();
-	}
 
 	protected boolean isInlineBlock() {
 		final RenderState previous = renderState.getPreviousRenderState();

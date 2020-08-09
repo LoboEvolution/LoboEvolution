@@ -4,15 +4,15 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderstate.RenderState;
 
-class RFlex {
+public class RFlex {
 
 	private RenderState renderState;
 
-	protected RFlex(RenderState renderState) {
+	public RFlex(RenderState renderState) {
 		this.renderState = renderState;
 	}
 
-	protected boolean isFlexTable() {
+	public boolean isFlexTable() {
 		final String flexWrapText = renderState.getFlexWrap();
 		final String justText = renderState.getJustifyContent();
 		final String alignItems = renderState.getAlignItems();

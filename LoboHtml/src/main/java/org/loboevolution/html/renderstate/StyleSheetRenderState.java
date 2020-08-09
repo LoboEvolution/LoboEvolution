@@ -48,6 +48,7 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.renderer.LineBreak;
+import org.loboevolution.html.renderer.RFlex;
 import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.BorderInsets;
 import org.loboevolution.html.style.FontValues;
@@ -434,7 +435,8 @@ public class StyleSheetRenderState implements RenderState {
 		int displayInt = -1;
 		final RenderState previous = this.getPreviousRenderState();
 		if (previous != null && previous.getDisplay() == DISPLAY_FLEX_BOX) {
-			displayInt = DISPLAY_FLEX_CHILD;
+			final RFlex flex = new RFlex(previous);
+			displayInt = flex.isFlexTable() ? DISPLAY_TABLE_CELL : DISPLAY_FLEX_CHILD;
 			this.iDisplay = Integer.valueOf(displayInt);
 			return displayInt;
 		} else {
