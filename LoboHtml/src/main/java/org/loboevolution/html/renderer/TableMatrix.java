@@ -33,15 +33,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.loboevolution.common.Nodes;
-import org.loboevolution.html.dom.HTMLTableCellElement;
-import org.loboevolution.html.dom.HTMLTableRowElement;
 import org.loboevolution.html.dom.NodeFilter;
 import org.loboevolution.html.dom.domimpl.HTMLCollectionImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableCaptionElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLTableCellElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLTableElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLTableRowElementImpl;
 import org.loboevolution.html.dom.filter.CaptionFilter;
 import org.loboevolution.html.dom.filter.ColumnsFilter;
 import org.loboevolution.html.renderstate.RTableCaption;
@@ -61,7 +57,7 @@ class TableMatrix {
 
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 	
-	private final List<HTMLTableRowElement> ROW_ELEMENTS = new ArrayList<HTMLTableRowElement>();
+	private final List<HTMLElementImpl> ROW_ELEMENTS = new ArrayList<HTMLElementImpl>();
 	private final List<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
 	private final List<RTableCell> ALL_CELLS = new ArrayList<RTableCell>();
 	
@@ -360,7 +356,7 @@ class TableMatrix {
 		final SizeInfo[] rowSizes = new SizeInfo[numRows];
 		this.rowSizes = rowSizes;
 		int numCols = 0;
-		final List<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
+		final List<HTMLElementImpl> rowElements = this.ROW_ELEMENTS;
 		for (int i = 0; i < numRows; i++) {
 			final List<VirtualCell> row = rows.get(i);
 			final int rs = row.size();
@@ -369,7 +365,7 @@ class TableMatrix {
 			}
 			final SizeInfo rowSizeInfo = new SizeInfo();
 			rowSizes[i] = rowSizeInfo;
-			HTMLTableRowElementImpl rowElement = rowElements.size() > i ? (HTMLTableRowElementImpl)rowElements.get(i) : null;
+			HTMLElementImpl rowElement = rowElements.size() > i ? (HTMLElementImpl)rowElements.get(i) : null;
 			final String rowHeightText = rowElement == null ? null : rowElement.getAttribute("height");
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
@@ -972,11 +968,11 @@ class TableMatrix {
 		return this.ROWS.size();
 	}
 
-	private final HTMLTableRowElementImpl getParentRow(HTMLTableCellElementImpl cellNode) {
+	private final HTMLElementImpl getParentRow(HTMLElementImpl cellNode) {
 		org.w3c.dom.Node parentNode = cellNode.getParentNode();
 		for (;;) {
-			if (parentNode instanceof HTMLTableRowElementImpl) {
-				return (HTMLTableRowElementImpl) parentNode;
+			if (parentNode instanceof HTMLElementImpl) {				
+				return (HTMLElementImpl) parentNode;
 			}
 			if (parentNode instanceof HTMLTableElementImpl) {
 				return null;
@@ -1214,15 +1210,15 @@ class TableMatrix {
 	private void populateRows() {
 		final HTMLElementImpl te = this.tableElement;
 		final List<ArrayList<VirtualCell>> rows = this.ROWS;
-		final List<HTMLTableRowElement> rowElements = this.ROW_ELEMENTS;
+		final List<HTMLElementImpl> rowElements = this.ROW_ELEMENTS;
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final Map<HTMLTableRowElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLTableRowElementImpl, ArrayList<VirtualCell>>();
+		final Map<HTMLElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLElementImpl, ArrayList<VirtualCell>>();
 		final NodeList cellList = te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
 		for (Node node : Nodes.iterable(cellList)) {
-			if (node instanceof HTMLTableCellElement) {
-				final HTMLTableCellElementImpl columnNode = (HTMLTableCellElementImpl) node;
-				final HTMLTableRowElementImpl rowElement = getParentRow(columnNode);
+			if (node instanceof HTMLElementImpl) {
+				final HTMLElementImpl columnNode = (HTMLElementImpl) node;
+				final HTMLElementImpl rowElement = getParentRow(columnNode);
 				if (rowElement != null && rowElement.getRenderState().getDisplay() == RenderState.DISPLAY_NONE) {
 					// Skip row [ 2047122 ]
 					continue;

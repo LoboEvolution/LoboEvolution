@@ -1391,8 +1391,7 @@ public class RBlockViewport extends BaseRCollection {
 	protected final void layoutRTable(HTMLElementImpl markupElement) {
 		RElement renderable = (RElement) markupElement.getUINode();
 		if (renderable == null) {
-			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext,
-					this.container);
+			renderable = new RTable(markupElement, this.userAgentContext, this.rendererContext, this.frameContext, this.container);
 			markupElement.setUINode(renderable);
 		}
 		renderable.setOriginalParent(this);
