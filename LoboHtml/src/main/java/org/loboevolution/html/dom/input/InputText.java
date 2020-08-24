@@ -56,8 +56,6 @@ public class InputText {
 	public InputText(HTMLInputElementImpl modelNode, InputControl ic) {
 		this.modelNode = modelNode;
 		final boolean autocomplete = modelNode.getAutocomplete();
-		final String id = modelNode.getId();
-		final String name = modelNode.getName();
 		final String type = modelNode.getType();
 		
 		final Font font = iText.getFont();
@@ -69,11 +67,12 @@ public class InputText {
 		final int size = modelNode.getSize();
 		final int width = (128/15) * size;
 		iText.setPreferredSize(new Dimension(width, ps.height));
+		final String baseUrl = modelNode.getBaseURI();
 
-		if (autocomplete && !"password".equalsIgnoreCase(type)) {
-			List<String> list = suggestionList(id, name, type);
+		if (autocomplete) {
+			List<String> list = suggestionList(type, "", baseUrl);
 			if (ArrayUtilities.isNotBlank(list)) {
-				Autocomplete.setupAutoComplete((JTextField) iText, list);
+				Autocomplete.setupAutoComplete(iText, list);
 			}
 		}
 
@@ -87,8 +86,11 @@ public class InputText {
 		iText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent event) {
-				if (autocomplete && !"password".equalsIgnoreCase(type)) {
-					InputStore.insertLogin(id, name, type, iText.getText(), modelNode.getUserAgentContext().isNavigationEnabled());
+				if (autocomplete) {
+					final String text = iText.getText();
+					final boolean isNavigation = modelNode.getUserAgentContext().isNavigationEnabled();
+					InputStore.deleteInput(text, baseUrl);
+					InputStore.insertLogin(type, text, baseUrl, isNavigation);
 				}
 			}
 		});
@@ -202,14 +204,8 @@ public class InputText {
 		setTextWrittenIn(false);
 	}
 
-	private List<String> suggestionList(String id, String name, String type) {
-		List<String> list = InputStore.autocomplete(id);
-		if (ArrayUtilities.isNotBlank(list))
-			return list;
-		list = InputStore.autocomplete(name);
-		if (ArrayUtilities.isNotBlank(list))
-			return list;
-		list = InputStore.autocomplete(type);
+	private List<String> suggestionList(String type, String text, String baseUrl) {
+		List<String> list = InputStore.autocomplete(type, text, baseUrl);
 		if (ArrayUtilities.isNotBlank(list))
 			return list;
 		return new ArrayList<String>();
