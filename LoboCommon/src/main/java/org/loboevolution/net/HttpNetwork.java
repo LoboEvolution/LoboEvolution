@@ -130,6 +130,9 @@ public class HttpNetwork {
 					} else if (href.endsWith(".svg")) {
 						return null; //TODO SVG From URL
 					} else if (href.startsWith("https")) {
+						if(in == null || ImageIO.read(in) == null) {
+							return null;
+						}
 						return Toolkit.getDefaultToolkit().createImage(ImageIO.read(in).getSource());
 					} else if (href.endsWith(".gif")) {
 						try {

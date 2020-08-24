@@ -4,6 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -11,6 +15,10 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+
+import org.loboevolution.component.input.Autocomplete;
+import org.loboevolution.info.BookmarkInfo;
+import org.loboevolution.store.BookmarksStore;
 
 /**
  * <p>ToolBar class.</p>
@@ -70,6 +78,21 @@ public class ToolBar extends JToolBar implements IToolBar {
 				setBorder(new RoundedCornerBorder());
 			}
 		};
+		
+		BookmarksStore book = new BookmarksStore();
+		List<BookmarkInfo> bookmarks = book.getBookmarks(100);
+		List<String> hosts = new ArrayList<String>();
+		bookmarks.forEach(bookmark -> hosts.add(bookmark.getUrl()));
+		Autocomplete.setupAutoComplete(addressBar, hosts);
+		addressBar.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					GoAction go = new GoAction(panel, addressBar);
+					go.actionPerformed(null);
+				}	
+			}
+		});
 		
 		final ClassLoader classLoader = getClass().getClassLoader();
 
