@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.loboevolution.common.Strings;
+
 /**
  * <p>Autocomplete class.</p>
  *
@@ -43,6 +45,7 @@ public class Autocomplete {
 		}
 		cbInput.removeAll();
 		cbInput.removeAllItems();
+		
 		cbInput.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +99,7 @@ public class Autocomplete {
 				setAdjusting(cbInput, true);
 				model.removeAllElements();
 				String input = txtInput.getText();
-				if (!input.isEmpty()) {
+				if (Strings.isNotBlank(input)) {
 					for (String item : items) {
 						if (item.toLowerCase().contains(input.toLowerCase())) {
 							model.addElement(item);

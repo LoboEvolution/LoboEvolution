@@ -26,13 +26,19 @@ public class SQLiteCommon {
     public static final String INSERT_CACHE = "INSERT INTO CACHE (baseUrl, source, contenLenght, etag, lastModified, type) VALUES(?,?,?,?,?,?)";
     
     /** Constant INPUT="SELECT DISTINCT value from INPUT where "{trunked} */
-    public static final String INPUT = "SELECT DISTINCT value from INPUT where (name like ?) ";
+    public static final String INPUT = "SELECT DISTINCT value from INPUT where name = ? and value like ? and baseUrl = ?";
+    
+    /** Constant INPUT="SELECT DISTINCT value from INPUT where "{trunked} */
+    public static final String INPUT_LIMIT = "SELECT name, value, baseUrl from INPUT limit ?";
 	
 	/** Constant INSERT_INPUT="INSERT INTO INPUT (name, value) VALUES("{trunked} */
-	public static final String INSERT_INPUT= "INSERT INTO INPUT (name, value) VALUES(?,?)";
+	public static final String INSERT_INPUT= "INSERT INTO INPUT (name, value, baseUrl) VALUES(?,?,?)";
 	
 	/** Constant DELETE_INPUT="DELETE FROM INPUT" */
 	public static final String DELETE_INPUT = "DELETE FROM INPUT";
+	
+	/** Constant DELETE_INPUT="DELETE FROM INPUT" */
+	public static final String DELETE_INPUT2 = "DELETE FROM INPUT where value = ? and baseUrl = ?";
 	
     /** Constant DELETE_SOURCE_CACHE="DELETE FROM cache WHERE baseUrl = ? AND"{trunked} */
     public static final String DELETE_SOURCE_CACHE = "DELETE FROM cache WHERE baseUrl = ? AND type = ? AND strftime('%Y-%m-%d %H:%M:%S', lastModified) < strftime('%Y-%m-%d %H:%M:%S', 'now', 'localtime')";

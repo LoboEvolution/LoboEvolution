@@ -20,14 +20,16 @@
 */
 package org.loboevolution.common;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.stream.Collectors;
+
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 /**
  * The Class Strings.
@@ -36,24 +38,18 @@ import java.util.stream.Collectors;
  * @version $Id: $Id
  */
 public class Strings {
+	
+	private static final int iterations = 20*1000;
+        
+    private static final int desiredKeyLen = 256;
 
 	/** The Constant EMPTY_ARRAY. */
 	public static final String[] EMPTY_ARRAY = new String[0];
-
-	/** The Constant HEX_CHARS. */
-	private static final String HEX_CHARS = "0123456789ABCDEF";
-
-	/** The Constant MESSAGE_DIGEST. */
-	private static final MessageDigest MESSAGE_DIGEST;
-
-	static {
-		MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (final NoSuchAlgorithmException err) {
-			throw new IllegalStateException();
-		}
-		MESSAGE_DIGEST = md;
+	
+	/**
+	 * Instantiates a strings.
+	 */
+	private Strings() {
 	}
 
 	/**
@@ -185,30 +181,6 @@ public class Strings {
 	}
 
 	/**
-	 * Gets the hash32.
-	 *
-	 * @param source the source
-	 * @return the hash32
-	 * @throws java.io.UnsupportedEncodingException the unsupported encoding exception
-	 */
-	public static String getHash32(String source) throws UnsupportedEncodingException {
-		final String md5 = getMD5(source);
-		return md5.substring(0, 8);
-	}
-
-	/**
-	 * Gets the hash64.
-	 *
-	 * @param source the source
-	 * @return the hash64
-	 * @throws java.io.UnsupportedEncodingException the unsupported encoding exception
-	 */
-	public static String getHash64(String source) throws UnsupportedEncodingException {
-		final String md5 = getMD5(source);
-		return md5.substring(0, 16);
-	}
-
-	/**
 	 * Gets the java identifier.
 	 *
 	 * @param candidateID the candidate id
@@ -264,36 +236,6 @@ public class Strings {
 		}
 		buf.append('"');
 		return buf.toString();
-	}
-
-	/**
-	 * Gets the m d5.
-	 *
-	 * @param source the source
-	 * @return the m d5
-	 */
-	public static String getMD5(String source) {
-		byte[] bytes;
-		try {
-			bytes = source.getBytes("UTF-8");
-		} catch (final UnsupportedEncodingException ue) {
-			throw new IllegalStateException(ue);
-		}
-		byte[] result;
-		synchronized (MESSAGE_DIGEST) {
-			MESSAGE_DIGEST.update(bytes);
-			result = MESSAGE_DIGEST.digest();
-		}
-		final char[] resChars = new char[32];
-		final int len = result.length;
-		for (int i = 0; i < len; i++) {
-			final byte b = result[i];
-			final int lo4 = b & 0x0F;
-			final int hi4 = (b & 0xF0) >> 4;
-			resChars[i * 2] = HEX_CHARS.charAt(hi4);
-			resChars[i * 2 + 1] = HEX_CHARS.charAt(lo4);
-		}
-		return String.valueOf(resChars);
 	}
 
 	/**
@@ -568,34 +510,6 @@ public class Strings {
 	}
 
 	/**
-	 * Instantiates a strings.
-	 */
-	private Strings() {
-	}
-
-	/**
-	 * <p>substringBetween.</p>
-	 *
-	 * @param str a {@link java.lang.String} object.
-	 * @param open a {@link java.lang.String} object.
-	 * @param close a {@link java.lang.String} object.
-	 * @return a {@link java.lang.String} object.
-	 */
-	public static String substringBetween(String str, String open, String close) {
-		if (str == null || open == null || close == null) {
-			return null;
-		}
-		int start = str.indexOf(open);
-		if (start != -1) {
-			int end = str.indexOf(close, start + open.length());
-			if (end != -1) {
-				return str.substring(start + open.length(), end);
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * <p>unquoteSingle.</p>
 	 *
 	 * @param text a {@link java.lang.String} object.
@@ -627,5 +541,24 @@ public class Strings {
 			}
 		}
 		return found;
+	}
+	
+	public static String hash(String password, byte[] salt) throws Exception {
+        if (password == null || password.length() == 0)
+            throw new IllegalArgumentException("Empty passwords are not supported.");
+        SecretKeyFactory f = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        SecretKey key = f.generateSecret(new PBEKeySpec(
+            password.toCharArray(), salt, iterations, desiredKeyLen));
+        return Base64.getEncoder().encodeToString(key.getEncoded());
+    }
+    
+	public static String randomAlphaNumeric(int count) {
+		final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		StringBuilder builder = new StringBuilder();
+		while (count-- != 0) {
+			int character = (int) (Math.random() * ALPHA_NUMERIC_STRING.length());
+			builder.append(ALPHA_NUMERIC_STRING.charAt(character));
+		}
+		return builder.toString();
 	}
 }
