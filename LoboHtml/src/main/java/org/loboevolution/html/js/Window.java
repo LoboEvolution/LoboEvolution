@@ -23,7 +23,6 @@
  */
 package org.loboevolution.html.js;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -32,7 +31,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.WeakHashMap;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.Timer;
@@ -83,110 +81,6 @@ import org.w3c.dom.views.DocumentView;
  * @version $Id: $Id
  */
 public class Window extends AbstractScriptableDelegate implements AbstractView {
-	private static class ExpressionTimerTask extends WeakWindowTask {
-		private final String expression;
-		private final boolean removeTask;
-		// Implemented as a static WeakWindowTask to allow the Window
-		// to get garbage collected, especially in infinite loop
-		// scenarios.
-		private final Integer timeIDInt;
-
-		public ExpressionTimerTask(Window window, Integer timeIDInt, String expression, boolean removeTask) {
-			super(window);
-			this.timeIDInt = timeIDInt;
-			this.expression = expression;
-			this.removeTask = removeTask;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// This executes in the GUI thread and that's good.
-			try {
-				final Window window = this.getWindow();
-				if (window == null) {
-					if (logger.isLoggable(Level.INFO)) {
-						logger.info("actionPerformed(): Window is no longer available.");
-					}
-					return;
-				}
-				if (this.removeTask) {
-					window.forgetTask(this.timeIDInt, false);
-				}
-				final HTMLDocumentImpl doc = (HTMLDocumentImpl) window.getDocument();
-				if (doc == null) {
-					throw new IllegalStateException("Cannot perform operation when document is unset.");
-				}
-				window.evalInScope(this.expression);
-			} catch (final Throwable err) {
-				logger.log(Level.WARNING, "actionPerformed()", err);
-			}
-		}
-	}
-
-	private static class FunctionTimerTask extends WeakWindowTask {
-		private final WeakReference<Function> functionRef;
-		private final boolean removeTask;
-		// Implemented as a static WeakWindowTask to allow the Window
-		// to get garbage collected, especially in infinite loop
-		// scenarios.
-		private final Integer timeIDInt;
-
-		public FunctionTimerTask(Window window, Integer timeIDInt, Function function, boolean removeTask) {
-			super(window);
-			this.timeIDInt = timeIDInt;
-			this.functionRef = new WeakReference<Function>(function);
-			this.removeTask = removeTask;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// This executes in the GUI thread and that's good.
-			try {
-				final Window window = this.getWindow();
-				if (window == null) {
-					if (logger.isLoggable(Level.INFO)) {
-						logger.info("actionPerformed(): Window is no longer available.");
-					}
-					return;
-				}
-				if (this.removeTask) {
-					window.forgetTask(this.timeIDInt, false);
-				}
-				final HTMLDocumentImpl doc = (HTMLDocumentImpl) window.getDocument();
-				if (doc == null) {
-					throw new IllegalStateException("Cannot perform operation when document is unset.");
-				}
-				final Function function = (Function) this.functionRef.get();
-				if (function == null) {
-					throw new IllegalStateException("Cannot perform operation. Function is no longer available.");
-				}
-				Executor.executeFunction(window.getWindowScope(), function, doc.getDocumentURL(), window.getUserAgentContext());
-			} catch (final Throwable err) {
-				logger.log(Level.WARNING, "actionPerformed()", err);
-			}
-		}
-	}
-
-	private static class TaskWrapper {
-		public final Timer timer;
-
-		public TaskWrapper(Timer timer, Object retained) {
-			this.timer = timer;
-		}
-	}
-
-	private static abstract class WeakWindowTask implements ActionListener {
-		private final WeakReference<Window> windowRef;
-
-		public WeakWindowTask(Window window) {
-			this.windowRef = new WeakReference<Window>(window);
-		}
-
-		protected Window getWindow() {
-			final WeakReference<Window> ref = this.windowRef;
-			return ref == null ? null : (Window) ref.get();
-		}
-	}
 
 	private static final Logger logger = Logger.getLogger(Window.class.getName());
 	
@@ -397,16 +291,6 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		ScriptableObject.defineProperty(scope, jsClassName, constructorFunction, ScriptableObject.READONLY);
 	}
 	
-	private Object evalInScope(final String javascript) {
-		final Context ctx = Executor.createContext(document.getDocumentURL(), this.uaContext);
-		try {
-			final String scriptURI = "window.eval";
-			return ctx.evaluateString(getWindowScope(), javascript, scriptURI, 1, null);
-		} finally {
-			Context.exit();
-		}
-	}
-
 	/**
 	 * <p>focus.</p>
 	 */
@@ -440,7 +324,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	private void forgetTask(Integer timeoutID, boolean cancel) {
+	void forgetTask(Integer timeoutID, boolean cancel) {
 		TaskWrapper oldTimer = null;
 		synchronized (this) {
             final Map<Integer, TaskWrapper> taskMap = this.taskMap;
@@ -718,7 +602,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 * @return a {@link org.loboevolution.http.UserAgentContext} object.
 	 */
 	public UserAgentContext getUserAgentContext() {
-		return this.uaContext;
+		return this.getUaContext();
 	}
 
 	/**
@@ -774,7 +658,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				throw new IllegalStateException(
 						"Cannot perform operation with documents of type " + d.getClass().getName() + ".");
 			}
-			return new XMLHttpRequest(uaContext, hd.getDocumentURL(), ws);
+			return new XMLHttpRequest(getUaContext(), hd.getDocumentURL(), ws);
 		};
 
 		JavaInstantiator jiXMLSerializer = () -> new XMLSerializer();
@@ -1048,7 +932,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			final Function onunload = this.onunload;
 			if (onunload != null) {
                 final HTMLDocumentImpl oldDoc = (HTMLDocumentImpl) prevDocument;
-                Executor.executeFunction(this.getWindowScope(), onunload, oldDoc.getDocumentURL(), this.uaContext);
+                Executor.executeFunction(this.getWindowScope(), onunload, oldDoc.getDocumentURL(), this.getUaContext());
 				this.onunload = null;
 			}
 
@@ -1318,4 +1202,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
+	/**
+	 * @return the uaContext
+	 */
+	public UserAgentContext getUaContext() {
+		return uaContext;
+	}
 }
