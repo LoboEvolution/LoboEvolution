@@ -57,9 +57,7 @@ public class ForwardAction extends AbstractAction {
 						
 		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
-		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(text);
-		htmlPanel.setBrowserPanel(panel);
-		
+		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, text);		
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.remove(indexPanel);

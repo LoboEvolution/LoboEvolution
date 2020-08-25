@@ -620,15 +620,16 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		}
 	}
 	
-	
 	/**
 	 * <p>createHtmlPanel.</p>
 	 *
+	 * @param browserPanel a {@link org.loboevolution.component.IBrowserPanel} object.
 	 * @param uri a {@link java.lang.String} object.
 	 * @return a {@link org.loboevolution.html.gui.HtmlPanel} object.
 	 */
-	public static HtmlPanel createHtmlPanel(String uri) {
+	public static HtmlPanel createHtmlPanel(IBrowserPanel browserPanel, String uri) {
 		final HtmlPanel panel = new HtmlPanel();
+		panel.setBrowserPanel(browserPanel);
 		try {
 			final URL url = new URL(uri);
 			final URLConnection connection = url.openConnection();
@@ -638,7 +639,6 @@ public class HtmlPanel extends JComponent implements FrameContext {
 					Reader reader = new InputStreamReader(in, "utf-8");) {
 
 				final InputSource is = new InputSourceImpl(reader, uri);
-
 				final UserAgentContext ucontext = new UserAgentContext();
 				final HtmlRendererContext rendererContext = new HtmlRendererContext(panel, ucontext);
 				panel.setPreferredSize(new Dimension(800, 400));

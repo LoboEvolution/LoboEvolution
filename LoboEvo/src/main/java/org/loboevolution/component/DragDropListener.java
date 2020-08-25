@@ -70,8 +70,7 @@ public class DragDropListener implements DropTargetListener {
 		final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
 		int index = TabStore.getTabs().size();
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
-		hpanel.setBrowserPanel(bpanel);
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, fullURL);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.insertTab(title, null, hpanel, title, index+1);

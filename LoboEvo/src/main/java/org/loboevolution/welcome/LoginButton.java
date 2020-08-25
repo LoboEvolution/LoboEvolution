@@ -83,7 +83,7 @@ public class LoginButton extends JLabel implements LoboLookAndFeel {
 				panel.getTabbedPane().remove(indexPanel);
 				final DnDTabbedPane tabbedPane = panel.getTabbedPane();
 				tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));
-				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(text.getText(), indexPanel);
+				HtmlPanel hpanel = NavigationManager.getHtmlPanelSearch(panel, text.getText(), indexPanel);
 				final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 				final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	
 				tabbedPane.insertTab(title, null, hpanel, title, indexPanel);

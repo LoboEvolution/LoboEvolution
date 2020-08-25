@@ -59,7 +59,7 @@ public class GoAction extends AbstractAction {
 					PDFViewer viewer = new PDFViewer(true);
 					viewer.doOpen(url);
 				} else {
-					goURl(url);
+					goURL(url);
 				}
 			}
 		} catch (IOException e) {
@@ -67,17 +67,16 @@ public class GoAction extends AbstractAction {
 				PDFViewer viewer = new PDFViewer(true);
 				viewer.doOpen(url);
 			} else {
-				goURl(url);
+				goURL(url);
 			}
 		}
 	}
 
-	private void goURl(String text) {
+	private void goURL(String text) {
 		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
 		final int indexPanel = tabbedPane.getSelectedIndex();
-		final HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(text, indexPanel);
-		htmlPanel.setBrowserPanel(panel);
+		final HtmlPanel htmlPanel = NavigationManager.getHtmlPanel(panel, text, indexPanel);
 
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";

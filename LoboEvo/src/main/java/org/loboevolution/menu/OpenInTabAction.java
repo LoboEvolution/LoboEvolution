@@ -52,7 +52,7 @@ public class OpenInTabAction extends AbstractAction {
 		String title = "";
 		
 		if(this.address != null) {
-			comp = NavigationManager.getHtmlPanel(this.address, indexPanel);
+			comp = NavigationManager.getHtmlPanel(panel, this.address, indexPanel);
 			final HtmlPanel hpanel = (HtmlPanel)comp;
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";	

@@ -173,8 +173,7 @@ public class HtmlRendererContext {
             }
         }
 
-        final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(url);
-    	hpanel.setBrowserPanel(bpanel);
+        final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
         tabbedPane.remove(indexPanel);
@@ -283,8 +282,7 @@ public class HtmlRendererContext {
 			}
 		}
 
-        final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(url);
-    	hpanel.setBrowserPanel(bpanel);
+        final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, url);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
         tabbedPane.remove(indexPanel);
@@ -542,8 +540,7 @@ public class HtmlRendererContext {
 				index = tabbedPane.getIndex();
 			}
 
-			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
-			hpanel.setBrowserPanel(bpanel);
+			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, fullURL);
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 			if (!isNewTab) {
@@ -689,8 +686,7 @@ public class HtmlRendererContext {
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(bpanel));
 		int index = TabStore.getTabs().size();
 		String fullURL = url.toString();
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(fullURL);
-		hpanel.setBrowserPanel(bpanel);
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, fullURL);
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.insertTab(title, null, hpanel, title, index);
@@ -808,6 +804,51 @@ public class HtmlRendererContext {
 			window.setSize(width, height);
 		}
 	}
+	
+	/**
+	 * <p> getInnerHeight.</p>
+	 */
+	public int getInnerHeight() {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		if (bpanel != null) {
+			return bpanel.getHeight();
+		}
+		return -1;
+	}
+	
+	/**
+	 * <p> getInnerWidth.</p>
+	 */
+	public int getInnerWidth() {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		if (bpanel != null) {
+			return bpanel.getWidth();
+		}
+		return -1;
+	}
+	
+	/**
+	 * <p> getOuterHeight.</p>
+	 */
+	public int getOuterHeight() {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		if (bpanel != null) {
+			return bpanel.getHeight();
+		}
+		return -1;
+	}
+	
+	/**
+	 * <p> getOuterWidth.</p>
+	 */
+	public int getOuterWidth() {
+		final IBrowserPanel bpanel = htmlPanel.getBrowserPanel();
+		if (bpanel != null) {
+			return bpanel.getWidth();
+		}
+		return -1;
+	}
+
 
 	/**
 	 * Changes the origin of the HTML block's scrollable area according to the
@@ -930,8 +971,7 @@ public class HtmlRendererContext {
 			final DnDTabbedPane tabbedPane = bpanel.getTabbedPane();
 			final int indexPanel = tabbedPane.getSelectedIndex();
 			final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
-			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(action.toString());
-	    	hpanel.setBrowserPanel(bpanel);
+			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(bpanel, action.toString());
 			final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 			final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 			tabbedPane.remove(indexPanel);

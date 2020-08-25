@@ -1201,6 +1201,59 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			doc.removeEventListener(type, listener, useCapture);
 		}
 	}
+	
+	/**
+	 * <p>getInnerHeight.</p>
+	 *
+	 * @return a int.
+	 */
+	public int getInnerHeight() {
+		final HtmlRendererContext rcontext = this.rcontext;
+		if (rcontext != null) {
+			return rcontext.getInnerHeight();
+		}
+        return -1;
+    }
+	
+	/**
+	 * <p>getInnerWidth.</p>
+	 *
+	 * @return a int.
+	 */
+	public int getInnerWidth() {
+		final HtmlRendererContext rcontext = this.rcontext;
+		if (rcontext != null) {
+			return rcontext.getInnerWidth();
+		}
+        return -1;
+    }
+	
+	
+	/**
+	 * <p>getOuterHeight.</p>
+	 *
+	 * @return a int.
+	 */
+	public int getOuterHeight() {
+		final HtmlRendererContext rcontext = this.rcontext;
+		if (rcontext != null) {
+			return rcontext.getOuterHeight();
+		}
+        return -1;
+    }
+	
+	/**
+	 * <p>getOuterWidth.</p>
+	 *
+	 * @return a int.
+	 */
+	public int getOuterWidth() {
+		final HtmlRendererContext rcontext = this.rcontext;
+		if (rcontext != null) {
+			return rcontext.getOuterWidth();
+		}
+        return -1;
+    }
 
 	/**
 	 * @return the uaContext

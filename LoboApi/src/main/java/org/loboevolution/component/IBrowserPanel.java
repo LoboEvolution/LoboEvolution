@@ -39,5 +39,19 @@ public interface IBrowserPanel {
 	 * @return a {@link org.loboevolution.component.IWelcomePanel} object.
 	 */
 	IWelcomePanel getWelcome();
+	
+	/**
+	 * <p>getWidth.</p>
+	 *
+	 * @return a int object.
+	 */
+	int getWidth();
+	
+	/**
+	 * <p>getWelcome.</p>
+	 *
+	 * @return a int object.
+	 */
+	int getHeight();
 
 }

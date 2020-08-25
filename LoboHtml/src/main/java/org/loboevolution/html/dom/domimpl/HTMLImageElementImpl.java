@@ -279,7 +279,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 			uri = getSrc();
 		}
 		
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(uri);
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, uri);
 		if(getWidth() > 0 && getHeight() > 0) {
 			hpanel.setPreferredSize(new Dimension(getWidth(), getHeight()));
 		}

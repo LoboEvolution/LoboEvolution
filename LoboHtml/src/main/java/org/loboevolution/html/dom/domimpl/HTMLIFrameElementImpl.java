@@ -165,7 +165,7 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 * @param frameControl a {@link org.loboevolution.html.control.FrameControl} object.
 	 */
 	public void draw(FrameControl frameControl) {
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(getSrc());
+		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, getSrc());
 		if(Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
 			hpanel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
 		}

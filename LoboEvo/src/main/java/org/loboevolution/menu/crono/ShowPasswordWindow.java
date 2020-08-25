@@ -290,7 +290,7 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 						final BrowserPanel panel = frame.getPanel();
 						final int indexPanel = panel.getTabbedPane().getIndex() + 1;
 						final DnDTabbedPane tabbedPane = panel.getTabbedPane();
-						HtmlPanel hpanel = NavigationManager.getHtmlPanel(url.getText(), indexPanel);
+						HtmlPanel hpanel = NavigationManager.getHtmlPanel(panel, url.getText(), indexPanel);
 						final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) hpanel.getRootNode();
 						final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 						tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(panel));

@@ -2,7 +2,6 @@ package org.loboevolution.component;
 
 import java.awt.event.ActionEvent;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
@@ -22,8 +21,6 @@ import org.loboevolution.tab.TabbedPanePopupMenu;
  * @version $Id: $Id
  */
 public class BackAction extends AbstractAction {
-
-    private final static Logger logger = Logger.getLogger(BackAction.class.getName());
 
 	private static final long serialVersionUID = 1L;
 
@@ -53,7 +50,6 @@ public class BackAction extends AbstractAction {
 		
 		for (int i = 0; i < tabsById.size(); i++) {
 			String tab = tabsById.get(i);
-			logger.info(tab + " " + i);
 			if(tab.equals(url) && i > 0) {
 				text = tabsById.get(i - 1);
 			}
@@ -61,9 +57,7 @@ public class BackAction extends AbstractAction {
 						
 		final DnDTabbedPane tabbedPane = this.panel.getTabbedPane();
 		tabbedPane.setComponentPopupMenu(new TabbedPanePopupMenu(this.panel));
-		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(text);
-		htmlPanel.setBrowserPanel(panel);
-		
+		final HtmlPanel htmlPanel = HtmlPanel.createHtmlPanel(panel, text);		
 		final HTMLDocumentImpl nodeImpl = (HTMLDocumentImpl) htmlPanel.getRootNode();
 		final String title = Strings.isNotBlank(nodeImpl.getTitle()) ? nodeImpl.getTitle() : "New Tab";
 		tabbedPane.remove(indexPanel);
