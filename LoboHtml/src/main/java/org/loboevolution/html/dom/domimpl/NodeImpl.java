@@ -76,7 +76,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	private HTMLCollection childrenCollection;
 	
 	protected volatile Document document;
-	
+
 	protected NodeListImpl nodeList = new NodeListImpl();
 
 	protected volatile boolean notificationsSuspended = false;
@@ -906,6 +906,13 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 		if (doc != null) {
 			doc.structureInvalidated(this);
 		}
+	}
+	
+	/**
+	 * @return the document
+	 */
+	public Document getDocumentNode() {
+		return document;
 	}
 
 	/**

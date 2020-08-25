@@ -12,7 +12,9 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.menu.MenuBar;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.TabStore;
@@ -68,11 +70,19 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				final IWelcomePanel welcome = BrowserFrame.this.panel.getWelcome();
-				final Dimension dim = new Dimension(getWidth(), getHeight());
-				welcome.setSize(dim);
-				welcome.setPreferredSize(dim);
-				welcome.repaint();
+				BrowserPanel bpanel = BrowserFrame.this.panel;
+				final IBrowserFrame browserFrame = bpanel.getBrowserFrame();
+				JTextField addressBar = browserFrame.getToolbar().getAddressBar();
+				if (Strings.isNotBlank(addressBar.getText())) {
+					GoAction go = new GoAction(panel, browserFrame.getToolbar().getAddressBar());
+					go.actionPerformed(null);
+				} else {
+					final IWelcomePanel welcome = bpanel.getWelcome();
+					final Dimension dim = new Dimension(getWidth(), getHeight());
+					welcome.setSize(dim);
+					welcome.setPreferredSize(dim);
+					welcome.repaint();
+				}
 			}
 		});
 

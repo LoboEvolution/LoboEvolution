@@ -40,6 +40,9 @@ import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
 import org.loboevolution.net.HttpNetwork;
 
+import com.gargoylesoftware.css.dom.CSSValueImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
+
 /**
  * <p>HtmlValues class.</p>
  *
@@ -323,6 +326,33 @@ public class HtmlValues {
 			return errorValue;
 		}
 	}
+	
+	/**
+	 * <p>resolutionValue.</p>
+	 *
+	* @param cssValue a {@link com.gargoylesoftware.css.dom.CSSValueImpl} object.
+	 * @return a int.
+	 */
+	public static final int resolutionValue(final CSSValueImpl cssValue) {
+        if (cssValue == null) {
+            return -1;
+        }
+        
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
+        	String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 2, cssValue.getCssText().length());
+        	switch (units) {
+        	case "dpi":
+        		return (int)cssValue.getDoubleValue();
+        	case "dpcm":
+        		return (int)( 2.54f * cssValue.getDoubleValue());
+        	case "dppx":
+        		return (int)( 96 * cssValue.getDoubleValue());
+        	default:
+        		return (int)cssValue.getDoubleValue();
+        	}
+       }
+        return -1;
+    }
 
 	/**
 	 * <p>isBackgroundPosition.</p>

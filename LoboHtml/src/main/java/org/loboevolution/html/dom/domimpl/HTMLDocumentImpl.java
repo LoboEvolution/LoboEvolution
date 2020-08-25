@@ -925,6 +925,14 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		this.referrer = value;
 	}
 	
+	
+	/**
+	 * @return the window
+	 */
+	public Window getWindow() {
+		return window;
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public void setTextContent(String textContent) throws DOMException {

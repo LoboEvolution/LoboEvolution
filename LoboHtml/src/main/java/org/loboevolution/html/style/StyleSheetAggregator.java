@@ -36,8 +36,10 @@ import org.loboevolution.html.dom.HTMLInputElement;
 import org.loboevolution.html.dom.HTMLLinkElement;
 import org.loboevolution.html.dom.HTMLSelectElement;
 import org.loboevolution.html.dom.HTMLTextAreaElement;
+import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
+import org.loboevolution.html.js.Window;
 import org.loboevolution.store.LinkStore;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
@@ -47,7 +49,9 @@ import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
 import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -55,6 +59,7 @@ import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
@@ -152,25 +157,25 @@ public class StyleSheetAggregator {
 	}
 
 	private List<CSSStyleSheetImpl.SelectorEntry> selects(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
-			final HTMLElement element, final String pseudoElement, final boolean fromQuerySelectorAll, final String[] classes) {
+			final HTMLElement element, final String pseudoElement, final boolean fromQuerySelectorAll,
+			final String[] classes) {
 
 		final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
-
-		final String elementName = element.getNodeName().toLowerCase();
-		final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName, classes);
-
-		CSSStyleSheetImpl.SelectorEntry entry = iter.next();
-		while (null != entry) {
-			if (selects(entry.getSelector(), element, pseudoElement, fromQuerySelectorAll)) {
-				matchingRules.add(entry);
+		if (isActive(element, index.getMediaList())) {
+			final String elementName = element.getNodeName().toLowerCase();
+			final Iterator<CSSStyleSheetImpl.SelectorEntry> iter = index.getSelectorEntriesIteratorFor(elementName, classes);
+			CSSStyleSheetImpl.SelectorEntry entry = iter.next();
+			while (null != entry) {
+				if (selects(entry.getSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+					matchingRules.add(entry);
+				}
+				entry = iter.next();
 			}
-			entry = iter.next();
-		}
 
-		for (CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
-			matchingRules.addAll(selects(child, element, pseudoElement, fromQuerySelectorAll, classes));
+			for (CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
+				matchingRules.addAll(selects(child, element, pseudoElement, fromQuerySelectorAll, classes));
+			}
 		}
-
 		return matchingRules;
 	}
 
@@ -552,6 +557,151 @@ public class StyleSheetAggregator {
 		}
 	}
 
+	private static boolean isActive(HTMLElement element, final MediaListImpl mediaList) {
+        if (mediaList.getLength() == 0) {
+            return true;
+        }
+
+        for (int i = 0; i < mediaList.getLength(); i++) {
+            final MediaQuery mediaQuery = mediaList.mediaQuery(i);
+            boolean isActive = isActive(element, mediaQuery);
+            if (mediaQuery.isNot()) {
+                isActive = !isActive;
+            }
+            if (isActive) {
+                return true;
+            }
+        }
+        return false;
+    }
+	
+	private static boolean isActive(HTMLElement element, final MediaQuery mediaQuery) {
+		final String mediaType = mediaQuery.getMedia();
+		if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+			HTMLElementImpl impl = (HTMLElementImpl) element;
+			final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
+			for (final Property property : mediaQuery.getProperties()) {
+				final int val;
+				final String value;
+				switch (property.getName()) {
+				case "max-width":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val < document.getWindow().getInnerWidth()) {
+						return false;
+					}
+					break;
+
+				case "min-width":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val > document.getWindow().getInnerWidth()) {
+						return false;
+					}
+					break;
+
+				case "max-device-width":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val < document.getWindow().getScreen().getWidth()) {
+						return false;
+					}
+					break;
+
+				case "min-device-width":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val > document.getWindow().getScreen().getWidth()) {
+						return false;
+					}
+					break;
+
+				case "max-height":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val < document.getWindow().getInnerWidth()) {
+						return false;
+					}
+					break;
+
+				case "min-height":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val > document.getWindow().getInnerWidth()) {
+						return false;
+					}
+					break;
+
+				case "max-device-height":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val < document.getWindow().getScreen().getWidth()) {
+						return false;
+					}
+					break;
+
+				case "min-device-height":
+					value = String.valueOf(property.getValue().getDoubleValue());
+					val = HtmlValues.getPixelSize(value, null, -1);
+					if (val == -1 || val > document.getWindow().getScreen().getWidth()) {
+						return false;
+					}
+					break;
+
+				case "resolution":
+					final CSSValueImpl propValue = property.getValue();
+					val = HtmlValues.resolutionValue(propValue);
+					if (propValue == null) {
+						return true;
+					}
+					if (val == -1 || Math.round(val) != document.getWindow().getScreen().getPixelDepth()) {
+						return false;
+					}
+					break;
+
+				case "max-resolution":
+					val = HtmlValues.resolutionValue(property.getValue());
+					if (val == -1 || val < document.getWindow().getScreen().getPixelDepth()) {
+						return false;
+					}
+					break;
+
+				case "min-resolution":
+					val = HtmlValues.resolutionValue(property.getValue());
+					if (val == -1 || val > document.getWindow().getScreen().getPixelDepth()) {
+						return false;
+					}
+					break;
+
+				case "orientation":
+					final CSSValueImpl cssValue = property.getValue();
+					if (cssValue == null) {
+						return true;
+					}
+
+					final String orient = cssValue.getCssText();
+					final Window window = document.getWindow();
+					if ("portrait".equals(orient)) {
+						if (document.getWindow().getInnerWidth() > window.getInnerHeight()) {
+							return false;
+						}
+					} else if ("landscape".equals(orient)) {
+						if (window.getInnerWidth() < window.getInnerHeight()) {
+							return false;
+						}
+					} else {
+						return false;
+					}
+					break;
+
+				default:
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	
 	private boolean isEmpty(final HTMLElement element) {
 		for (Node n = element.getFirstChild(); n != null; n = n.getNextSibling()) {
 			if (n instanceof HTMLElement || n instanceof Text) {
