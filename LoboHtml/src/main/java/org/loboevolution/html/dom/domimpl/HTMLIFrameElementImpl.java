@@ -1,8 +1,11 @@
 package org.loboevolution.html.dom.domimpl;
 
 import java.awt.Dimension;
+import java.net.URL;
+import java.util.logging.Level;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
 import org.loboevolution.html.control.FrameControl;
 import org.loboevolution.html.dom.HTMLIFrameElement;
 import org.loboevolution.html.gui.HtmlPanel;
@@ -165,10 +168,17 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 	 * @param frameControl a {@link org.loboevolution.html.control.FrameControl} object.
 	 */
 	public void draw(FrameControl frameControl) {
-		final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, getSrc());
-		if(Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
-			hpanel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
+		try {
+			HTMLDocumentImpl doc = (HTMLDocumentImpl) getDocumentNode();
+			URL baseURL = new URL(doc.getBaseURI());
+			URL createURL = Urls.createURL(baseURL, getSrc());
+			final HtmlPanel hpanel = HtmlPanel.createHtmlPanel(null, createURL.toString());
+			if (Strings.isNotBlank(getWidth()) && Strings.isNotBlank(getHeight())) {
+				hpanel.setPreferredSize(new Dimension(Integer.parseInt(getWidth()), Integer.parseInt(getHeight())));
+			}
+			frameControl.add(hpanel);
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
-		frameControl.add(hpanel);		
 	}
 }
