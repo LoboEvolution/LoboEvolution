@@ -216,13 +216,13 @@ public final class ES6Generator extends IdScriptableObject {
     private Scriptable resumeLocal(Context cx, Scriptable scope, Object value)
     {
         if (state == State.COMPLETED) {
-            return ES6Iterator.makeIteratorResult(cx, scope, true);
+            return ES6Iterator.makeIteratorResult(cx, scope, Boolean.TRUE);
         }
         if (state == State.EXECUTING) {
             throw ScriptRuntime.typeError0("msg.generator.executing");
         }
 
-        Scriptable result = ES6Iterator.makeIteratorResult(cx, scope, false);
+        Scriptable result = ES6Iterator.makeIteratorResult(cx, scope, Boolean.FALSE);
         state = State.EXECUTING;
 
         try {
@@ -240,7 +240,7 @@ public final class ES6Generator extends IdScriptableObject {
                     return resumeAbruptLocal(cx, scope,
                         NativeGenerator.GENERATOR_THROW, re);
                 }
-                
+
                 Scriptable delResult;
                 try {
                     // Re-execute but update state in case we end up back here
@@ -296,7 +296,7 @@ public final class ES6Generator extends IdScriptableObject {
             state = State.COMPLETED;
         }
 
-        Scriptable result = ES6Iterator.makeIteratorResult(cx, scope, false);
+        Scriptable result = ES6Iterator.makeIteratorResult(cx, scope, Boolean.FALSE);
         if (state == State.COMPLETED) {
             if (op == NativeGenerator.GENERATOR_THROW) {
                 throw new JavaScriptException(value, lineSource, lineNumber);
@@ -415,7 +415,7 @@ public final class ES6Generator extends IdScriptableObject {
     private State state = State.SUSPENDED_START;
     private Object delegee;
 
-    enum State { SUSPENDED_START, SUSPENDED_YIELD, EXECUTING, COMPLETED };
+    enum State { SUSPENDED_START, SUSPENDED_YIELD, EXECUTING, COMPLETED }
 
     public static final class YieldStarResult {
         private Object result;

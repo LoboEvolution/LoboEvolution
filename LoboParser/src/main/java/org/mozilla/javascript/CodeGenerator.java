@@ -246,7 +246,7 @@ class CodeGenerator extends Icode {
         }
     }
 
-    private RuntimeException badTree(Node node)
+    private static RuntimeException badTree(Node node)
     {
         throw new RuntimeException(node.toString());
     }
@@ -492,7 +492,7 @@ class CodeGenerator extends Icode {
                     addUint16(lineNumber & 0xFFFF);
                     stackChange(-1);
                 }
-                
+
             } else {
                 if (child == null) {
                     addIcode(Icode_RETUNDEF);
@@ -1168,7 +1168,7 @@ class CodeGenerator extends Icode {
         visitExpression(expr, 0);
     }
 
-    private int getLocalBlockRef(Node node)
+    private static int getLocalBlockRef(Node node)
     {
         Node localBlock = (Node)node.getProp(Node.LOCAL_BLOCK_PROP);
         return localBlock.getExistingIntProp(Node.LOCAL_PROP);

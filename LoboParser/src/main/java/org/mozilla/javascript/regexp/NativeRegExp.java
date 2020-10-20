@@ -17,6 +17,8 @@ import org.mozilla.javascript.Kit;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
+import org.mozilla.javascript.Symbol;
+import org.mozilla.javascript.SymbolKey;
 import org.mozilla.javascript.TopLevel;
 import org.mozilla.javascript.Undefined;
 
@@ -144,7 +146,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
     NativeRegExp(Scriptable scope, RECompiled regexpCompiled)
     {
         this.re = regexpCompiled;
-        this.lastIndex = 0d;
+        setLastIndex(ScriptRuntime.zeroObj);
         ScriptRuntime.setBuiltinProtoAndParent(this, scope, TopLevel.Builtins.RegExp);
     }
 
@@ -194,7 +196,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
             }
             NativeRegExp thatObj = (NativeRegExp) args[0];
             this.re = thatObj.re;
-            this.lastIndex = thatObj.lastIndex;
+            setLastIndex(thatObj.lastIndex);
             return this;
         }
         String s = args.length == 0 || args[0] instanceof Undefined ? "" : escapeRegExp(args[0]);
@@ -202,7 +204,7 @@ public class NativeRegExp extends IdScriptableObject implements Function
             ? ScriptRuntime.toString(args[1])
             : null;
         this.re = compileRE(cx, s, global, false);
-        this.lastIndex = 0d;
+        setLastIndex(ScriptRuntime.zeroObj);
         return this;
     }
 
@@ -278,15 +280,18 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
         Object rval;
         if (d < 0 || str.length() < d) {
-            lastIndex = 0d;
+            setLastIndex(ScriptRuntime.zeroObj);
             rval = null;
         }
         else {
             int indexp[] = { (int)d };
             rval = executeRegExp(cx, scopeObj, reImpl, str, indexp, matchType);
             if ((re.flags & JSREG_GLOB) != 0) {
-                lastIndex = (rval == null || rval == Undefined.instance)
-                            ? 0d : (double)indexp[0];
+                if (rval == null || rval == Undefined.instance) {
+                    setLastIndex(ScriptRuntime.zeroObj);
+                } else {
+                    setLastIndex(Double.valueOf(indexp[0]));
+                }
             }
         }
         return rval;
@@ -638,22 +643,19 @@ public class NativeRegExp extends IdScriptableObject implements Function
                     break;
                 case 'd':
                     if (inRange) {
-                        reportError("msg.bad.range", "");
-                        return false;
+                        target.bmsize = 65536;
+                        return true;
                     }
                     localMax = '9';
                     break;
                 case 'D':
-                case 's':
-                case 'S':
                 case 'w':
                 case 'W':
-                    if (inRange) {
-                        reportError("msg.bad.range", "");
-                        return false;
-                    }
+                case 'S':
+                case 's':
                     target.bmsize = 65536;
                     return true;
+
                 case '0':
                 case '1':
                 case '2':
@@ -1663,29 +1665,34 @@ public class NativeRegExp extends IdScriptableObject implements Function
                     break;
 
                 case 'd':
+                    if (inRange) { addCharacterToCharSet(charSet, '-'); inRange = false; }
                     addCharacterRangeToCharSet(charSet, '0', '9');
                     continue;   /* don't need range processing */
                 case 'D':
+                    if (inRange) { addCharacterToCharSet(charSet, '-'); inRange = false; }
                     addCharacterRangeToCharSet(charSet, (char)0, (char)('0' - 1));
-                    addCharacterRangeToCharSet(charSet, (char)('9' + 1),
-                                                (char)(charSet.length - 1));
+                    addCharacterRangeToCharSet(charSet, (char)('9' + 1), (char)(charSet.length - 1));
                     continue;
                 case 's':
+                    if (inRange) { addCharacterToCharSet(charSet, '-'); inRange = false; }
                     for (i = (charSet.length - 1); i >= 0; i--)
                         if (isREWhiteSpace(i))
                             addCharacterToCharSet(charSet, (char)(i));
                     continue;
                 case 'S':
+                    if (inRange) { addCharacterToCharSet(charSet, '-'); inRange = false; }
                     for (i = (charSet.length - 1); i >= 0; i--)
                         if (!isREWhiteSpace(i))
                             addCharacterToCharSet(charSet, (char)(i));
                     continue;
                 case 'w':
+                    if (inRange) { addCharacterToCharSet(charSet, '-'); inRange = false; }
                     for (i = (charSet.length - 1); i >= 0; i--)
                         if (isWord((char)i))
                             addCharacterToCharSet(charSet, (char)(i));
                     continue;
                 case 'W':
+                    if (inRange) { addCharacterToCharSet(charSet, '-'); inRange = false; }
                     for (i = (charSet.length - 1); i >= 0; i--)
                         if (!isWord((char)i))
                             addCharacterToCharSet(charSet, (char)(i));
@@ -1693,7 +1700,6 @@ public class NativeRegExp extends IdScriptableObject implements Function
                 default:
                     thisCh = c;
                     break;
-
                 }
                 break;
 
@@ -2664,12 +2670,19 @@ public class NativeRegExp extends IdScriptableObject implements Function
         return super.getInstanceIdValue(id);
     }
 
+    private void setLastIndex(Object value) {
+        if ((lastIndexAttr & READONLY) != 0) {
+            throw ScriptRuntime.typeError1("msg.modify.readonly", "lastIndex");
+        }
+        lastIndex = value;
+    }
+
+
     @Override
-    protected void setInstanceIdValue(int id, Object value)
-    {
+    protected void setInstanceIdValue(int id, Object value) {
         switch (id) {
           case Id_lastIndex:
-            lastIndex = value;
+            setLastIndex(value);
             return;
           case Id_source:
           case Id_global:
@@ -2693,6 +2706,15 @@ public class NativeRegExp extends IdScriptableObject implements Function
     @Override
     protected void initPrototypeId(int id)
     {
+        if (id == SymbolId_match) {
+            initPrototypeMethod(REGEXP_TAG, id, SymbolKey.MATCH, "[Symbol.match]", 1);
+            return;
+        }
+        if (id == SymbolId_search) {
+            initPrototypeMethod(REGEXP_TAG, id, SymbolKey.SEARCH, "[Symbol.search]", 1);
+            return;
+        }
+
         String s;
         int arity;
         switch (id) {
@@ -2733,6 +2755,13 @@ public class NativeRegExp extends IdScriptableObject implements Function
 
           case Id_prefix:
             return realThis(thisObj, f).execSub(cx, scope, args, PREFIX);
+
+          case SymbolId_match:
+              return realThis(thisObj, f).execSub(cx, scope, args, MATCH);
+
+          case SymbolId_search:
+              Scriptable scriptable = (Scriptable) realThis(thisObj, f).execSub(cx, scope, args, MATCH);
+              return scriptable.get("index", scriptable);
         }
         throw new IllegalArgumentException(String.valueOf(id));
     }
@@ -2742,6 +2771,18 @@ public class NativeRegExp extends IdScriptableObject implements Function
         if (!(thisObj instanceof NativeRegExp))
             throw incompatibleCallError(f);
         return (NativeRegExp)thisObj;
+    }
+
+    @Override
+    protected int findPrototypeId(Symbol k)
+    {
+        if (SymbolKey.MATCH.equals(k)) {
+            return SymbolId_match;
+        }
+        if (SymbolKey.SEARCH.equals(k)) {
+            return SymbolId_search;
+        }
+        return 0;
     }
 
 // #string_id_map#
@@ -2777,13 +2818,15 @@ public class NativeRegExp extends IdScriptableObject implements Function
         Id_exec          = 4,
         Id_test          = 5,
         Id_prefix        = 6,
+        SymbolId_match   = 7,
+        SymbolId_search  = 8,
 
-        MAX_PROTOTYPE_ID = 6;
+        MAX_PROTOTYPE_ID = SymbolId_search;
 
 // #/string_id_map#
 
     private RECompiled re;
-    Object lastIndex = 0d;     /* index after last match, for //g iterator */
+    Object lastIndex = ScriptRuntime.zeroObj;     /* index after last match, for //g iterator */
     private int lastIndexAttr = DONTENUM | PERMANENT;
 
 }       // class NativeRegExp

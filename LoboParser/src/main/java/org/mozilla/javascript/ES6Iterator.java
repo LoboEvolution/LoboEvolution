@@ -10,7 +10,7 @@ public abstract class ES6Iterator extends IdScriptableObject {
 
     private static final long serialVersionUID = 2438373029140003950L;
 
-    static void init(ScriptableObject scope, boolean sealed, IdScriptableObject prototype, String tag) {
+    protected static void init(ScriptableObject scope, boolean sealed, IdScriptableObject prototype, String tag) {
         if (scope != null) {
             prototype.setParentScope(scope);
             prototype.setPrototype(getObjectPrototype(scope));
@@ -32,9 +32,9 @@ public abstract class ES6Iterator extends IdScriptableObject {
     protected boolean exhausted = false;
     private String tag;
 
-    ES6Iterator() {}
+    protected ES6Iterator() {}
 
-    ES6Iterator(Scriptable scope, String tag) {
+    protected ES6Iterator(Scriptable scope, String tag) {
         // Set parent and prototype properties. Since we don't have a
         // "Iterator" constructor in the top scope, we stash the
         // prototype in the top scope's associated value.
@@ -117,7 +117,7 @@ public abstract class ES6Iterator extends IdScriptableObject {
         } else {
             this.exhausted = true;
         }
-        return makeIteratorResult(cx, scope, done, value);
+        return makeIteratorResult(cx, scope, Boolean.valueOf(done), value);
     }
 
     protected String getTag() {
@@ -125,14 +125,14 @@ public abstract class ES6Iterator extends IdScriptableObject {
     }
 
     // 25.1.1.3 The IteratorResult Interface
-    static Scriptable makeIteratorResult(Context cx, Scriptable scope, boolean done) {
+    static Scriptable makeIteratorResult(Context cx, Scriptable scope, Boolean done) {
         return makeIteratorResult(cx, scope, done, Undefined.instance);
     }
 
-    static Scriptable makeIteratorResult(Context cx, Scriptable scope, boolean done, Object value) {
+    static Scriptable makeIteratorResult(Context cx, Scriptable scope, Boolean done, Object value) {
         final Scriptable iteratorResult = cx.newObject(scope);
-        ScriptableObject.putProperty(iteratorResult, DONE_PROPERTY, done);
         ScriptableObject.putProperty(iteratorResult, VALUE_PROPERTY, value);
+        ScriptableObject.putProperty(iteratorResult, DONE_PROPERTY, done);
         return iteratorResult;
     }
 

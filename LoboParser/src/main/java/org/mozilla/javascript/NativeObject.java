@@ -130,8 +130,9 @@ public class NativeObject extends IdScriptableObject implements Map
                 // BaseFunction.construct will set up parent, proto
                 return f.construct(cx, scope, args);
             }
-            if (args.length == 0 || args[0] == null
-                || args[0] == Undefined.instance)
+            if (args.length == 0
+                    || args[0] == null
+                    || Undefined.isUndefined(args[0]))
             {
                 return new NativeObject();
             }
@@ -259,8 +260,7 @@ public class NativeObject extends IdScriptableObject implements Map
           case Id___defineSetter__:
             {
                 if (args.length < 2 || !(args[1] instanceof Callable)) {
-                    Object badArg = (args.length >= 2 ? args[1]
-                                     : Undefined.instance);
+                    Object badArg = (args.length >= 2 ? args[1] : Undefined.instance);
                     throw ScriptRuntime.notFunctionError(badArg);
                 }
                 if (!(thisObj instanceof ScriptableObject)) {
@@ -327,10 +327,14 @@ public class NativeObject extends IdScriptableObject implements Map
                     throw ScriptRuntime.typeError1("msg.arg.not.object", ScriptRuntime.typeof(proto));
                 }
 
-                if ( !(args[0] instanceof ScriptableObject) ) {
-                    return args[0];
+                final Object arg0 = args[0];
+                if (cx.getLanguageVersion() >= Context.VERSION_ES6) {
+                    ScriptRuntimeES6.requireObjectCoercible(cx, arg0, f);
                 }
-                ScriptableObject obj = (ScriptableObject) args[0];
+                if ( !(arg0 instanceof ScriptableObject) ) {
+                    return arg0;
+                }
+                ScriptableObject obj = (ScriptableObject) arg0;
                 if (!obj.isExtensible()) {
                     throw ScriptRuntime.typeError0("msg.not.extensible");
                 }
@@ -444,7 +448,7 @@ public class NativeObject extends IdScriptableObject implements Map
                 newObject.setParentScope(scope);
                 newObject.setPrototype(obj);
 
-                if (args.length > 1 && args[1] != Undefined.instance) {
+                if (args.length > 1 && !Undefined.isUndefined(args[1])) {
                   Scriptable props = Context.toObject(args[1], scope);
                   newObject.defineOwnProperties(cx, ensureScriptableObject(props));
                 }
@@ -544,29 +548,29 @@ public class NativeObject extends IdScriptableObject implements Map
             if (args.length < 1) {
               throw ScriptRuntime.typeError1("msg.incompat.call", "assign");
             }
-            Scriptable t = ScriptRuntime.toObject(cx, thisObj, args[0]);
+            Scriptable targetObj = ScriptRuntime.toObject(cx, thisObj, args[0]);
             for (int i = 1; i < args.length; i++) {
-              if ((args[i] == null) || Undefined.instance.equals(args[i])) {
+              if ((args[i] == null) || Undefined.isUndefined(args[i])) {
                 continue;
               }
-              Scriptable s = ScriptRuntime.toObject(cx, thisObj, args[i]);
-              Object[] ids = s.getIds();
+              Scriptable sourceObj = ScriptRuntime.toObject(cx, thisObj, args[i]);
+              Object[] ids = sourceObj.getIds();
               for (Object key : ids) {
                 if (key instanceof String) {
-                  Object val = s.get((String) key, t);
-                  if ((val != Scriptable.NOT_FOUND) && (val != Undefined.instance)) {
-                    t.put((String) key, t, val);
+                  Object val = sourceObj.get((String) key, sourceObj);
+                  if ((val != Scriptable.NOT_FOUND) && !Undefined.isUndefined(val)) {
+                    targetObj.put((String) key, targetObj, val);
                   }
                 } else if (key instanceof Number) {
                   int ii = ScriptRuntime.toInt32(key);
-                  Object val = s.get(ii, t);
-                  if ((val != Scriptable.NOT_FOUND) && (val != Undefined.instance)) {
-                    t.put(ii, t, val);
+                  Object val = sourceObj.get(ii, sourceObj);
+                  if ((val != Scriptable.NOT_FOUND) && !Undefined.isUndefined(val)) {
+                    targetObj.put(ii, targetObj, val);
                   }
                 }
               }
             }
-            return t;
+            return targetObj;
           }
 
           case ConstructorId_is:

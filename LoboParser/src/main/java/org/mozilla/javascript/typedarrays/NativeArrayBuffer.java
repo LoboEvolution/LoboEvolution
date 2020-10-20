@@ -129,7 +129,7 @@ public class NativeArrayBuffer
         int id = f.methodId();
         switch (id) {
         case ConstructorId_isView:
-            return (isArg(args, 0) && (args[0] instanceof NativeArrayBufferView));
+            return Boolean.valueOf((isArg(args, 0) && (args[0] instanceof NativeArrayBufferView)));
 
         case Id_constructor:
             double length = isArg(args, 0) ? ScriptRuntime.toNumber(args[0]) : 0;
@@ -163,7 +163,7 @@ public class NativeArrayBuffer
         int arity;
         switch (id) {
         case Id_constructor:            arity = 1; s = "constructor"; break;
-        case Id_slice:                  arity = 1; s = "slice"; break;
+        case Id_slice:                  arity = 2; s = "slice"; break;
         default: throw new IllegalArgumentException(String.valueOf(id));
         }
         initPrototypeMethod(CLASS_NAME, id, s, arity);

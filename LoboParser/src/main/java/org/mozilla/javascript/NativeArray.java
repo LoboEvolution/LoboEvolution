@@ -286,7 +286,7 @@ public class NativeArray extends IdScriptableObject implements List
               }
 
               case ConstructorId_isArray:
-                return args.length > 0 && js_isArray(args[0]);
+                return Boolean.valueOf(args.length > 0 && js_isArray(args[0]));
 
               case ConstructorId_of: {
                   return js_of(cx, scope, thisObj, args);
@@ -560,7 +560,7 @@ public class NativeArray extends IdScriptableObject implements List
       for (Object id : ids) {
         int int32Id = ScriptRuntime.toInt32(id);
         if (int32Id >= 0 && ScriptRuntime.toString(int32Id).equals(ScriptRuntime.toString(id))) {
-          indices.add(int32Id);
+          indices.add(Integer.valueOf(int32Id));
         }
       }
       return indices;
@@ -665,7 +665,7 @@ public class NativeArray extends IdScriptableObject implements List
         if (arg instanceof Function) {
             try {
                 final Object[] args = (lengthAlways || (length > 0)) ?
-                    new Object[]{length} : ScriptRuntime.emptyArgs;
+                    new Object[] { Long.valueOf(length) } : ScriptRuntime.emptyArgs;
                 result = ((Function) arg).construct(cx, scope, args);
             } catch (EcmaError ee) {
                 if (!"TypeError".equals(ee.getName())) {
@@ -712,7 +712,7 @@ public class NativeArray extends IdScriptableObject implements List
             try (IteratorLikeIterable it = new IteratorLikeIterable(cx, scope, iterator)) {
               for (Object temp : it) {
                 if (mapping) {
-                  temp = mapFn.call(cx, scope, thisArg, new Object[]{temp, k});
+                  temp = mapFn.call(cx, scope, thisArg, new Object[] { temp, Long.valueOf(k) });
                 }
                 defineElem(cx, result, k, temp);
                 k++;
@@ -729,7 +729,7 @@ public class NativeArray extends IdScriptableObject implements List
             Object temp = getRawElem(items, k);
             if (temp != Scriptable.NOT_FOUND) {
                 if (mapping) {
-                    temp = mapFn.call(cx, scope, thisArg, new Object[] { temp, k });
+                    temp = mapFn.call(cx, scope, thisArg, new Object[] { temp, Long.valueOf(k) });
                 }
                 defineElem(cx, result, k, temp);
             }
@@ -1910,7 +1910,9 @@ public class NativeArray extends IdScriptableObject implements List
         // as a result we have to handle ConstructorId_xxx calls (negative id)
         // the same way and always us the abs value of the id for method selection
         int id = Math.abs(idFunctionObject.methodId());
-        if (Id_find == id || Id_findIndex == id) o = requireObjectCoercible(cx, o, idFunctionObject);
+        if (Id_find == id || Id_findIndex == id) {
+            requireObjectCoercible(cx, o, idFunctionObject);
+        }
 
         long length = getLengthProperty(cx, o, id == Id_map);
         Object callbackArg = args.length > 0 ? args[0] : Undefined.instance;
@@ -2027,7 +2029,7 @@ public class NativeArray extends IdScriptableObject implements List
                 // no initial value passed, use first element found as inital value
                 value = elem;
             } else {
-                Object[] innerArgs = { value, elem, index, o };
+                Object[] innerArgs = { value, elem, Long.valueOf(index), o };
                 value = f.call(cx, parent, parent, innerArgs);
             }
         }

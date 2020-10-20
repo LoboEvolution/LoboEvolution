@@ -90,6 +90,8 @@ final class NativeString extends IdScriptableObject
     {
         addIdFunctionProperty(ctor, STRING_TAG, ConstructorId_fromCharCode,
                 "fromCharCode", 1);
+        addIdFunctionProperty(ctor, STRING_TAG, ConstructorId_fromCodePoint,
+                "fromCodePoint", 1);
         addIdFunctionProperty(ctor, STRING_TAG,
                 ConstructorId_charAt, "charAt", 2);
         addIdFunctionProperty(ctor, STRING_TAG,
@@ -185,6 +187,8 @@ final class NativeString extends IdScriptableObject
           case Id_codePointAt:       arity=1; s="codePointAt";       break;
           case Id_padStart:          arity=1; s="padStart";          break;
           case Id_padEnd:            arity=1; s="padEnd";            break;
+          case Id_trimStart:         arity=0; s="trimStart";         break;
+          case Id_trimEnd:           arity=0; s="trimEnd";           break;
           default: throw new IllegalArgumentException(String.valueOf(id));
         }
         initPrototypeMethod(STRING_TAG, id, s, fnName, arity);
@@ -231,15 +235,34 @@ final class NativeString extends IdScriptableObject
                     continue again;
                 }
 
-                case ConstructorId_fromCharCode: {
-                    int N = args.length;
-                    if (N < 1)
+                case ConstructorId_fromCodePoint: {
+                    int n = args.length;
+                    if (n < 1) {
                         return "";
-                    StringBuilder sb = new StringBuilder(N);
-                    for (int i = 0; i != N; ++i) {
-                        sb.append(ScriptRuntime.toUint16(args[i]));
                     }
-                    return sb.toString();
+                    int[] codePoints = new int[n];
+                    for (int i = 0; i != n; i++) {
+                        Object arg = args[i];
+                        int codePoint = ScriptRuntime.toInt32(arg);
+                        double num = ScriptRuntime.toNumber(arg);
+                        if (!ScriptRuntime.eqNumber(num, Integer.valueOf(codePoint)) || !Character.isValidCodePoint(codePoint)) {
+                            throw rangeError("Invalid code point " + ScriptRuntime.toString(arg));
+                        }
+                        codePoints[i] = codePoint;
+                    }
+                    return new String(codePoints, 0, n);
+                }
+
+                case ConstructorId_fromCharCode: {
+                    int n = args.length;
+                    if (n < 1) {
+                        return "";
+                    }
+                    char[] chars = new char[n];
+                    for (int i = 0; i != n; ++i) {
+                        chars[i] = ScriptRuntime.toUint16(args[i]);
+                    }
+                    return new String(chars);
                 }
 
                 case Id_constructor: {
@@ -460,7 +483,8 @@ final class NativeString extends IdScriptableObject
 
                     return str.substring(start, end);
                 }
-                case Id_trimLeft: {
+                case Id_trimLeft:
+                case Id_trimStart: {
                     String str = ScriptRuntime.toString(requireObjectCoercible(cx, thisObj, f));
                     char[] chars = str.toCharArray();
 
@@ -473,6 +497,7 @@ final class NativeString extends IdScriptableObject
                     return str.substring(start, end);
                 }
                 case Id_trimRight:
+                case Id_trimEnd:
                 {
                     String str = ScriptRuntime.toString(requireObjectCoercible(cx, thisObj, f));
                     char[] chars = str.toCharArray();
@@ -515,11 +540,11 @@ final class NativeString extends IdScriptableObject
 
                     return (cnt < 0 || cnt >= str.length())
                         ? Undefined.instance
-                        : str.codePointAt((int) cnt);
+                        : Integer.valueOf(str.codePointAt((int) cnt));
                 }
 
               case SymbolId_iterator:
-                  return new NativeStringIterator(scope, thisObj);
+                  return new NativeStringIterator(scope, requireObjectCoercible(cx, thisObj, f));
 
             }
             throw new IllegalArgumentException("String.prototype has no method: " + f.getFunctionName());
@@ -654,11 +679,17 @@ final class NativeString extends IdScriptableObject
      * See ECMA 15.5.4.6.  Uses Java String.indexOf()
      * OPT to add - BMH searching from jsstr.c.
      */
-    private static int  js_indexOf(int methodId, String target, Object[] args) {
+    private static int js_indexOf(int methodId, String target, Object[] args) {
         String searchStr = ScriptRuntime.toString(args, 0);
         double position = ScriptRuntime.toInteger(args, 1);
 
-        if (position > target.length() && methodId != Id_startsWith && methodId != Id_endsWith) {
+        if (methodId != Id_startsWith && methodId != Id_endsWith
+                && searchStr.length() == 0) {
+            return position > target.length() ? target.length() : (int)position;
+        }
+
+        if (methodId != Id_startsWith && methodId != Id_endsWith
+                && position > target.length()) {
             return -1;
         }
 
@@ -918,7 +949,7 @@ final class NativeString extends IdScriptableObject
     protected int findPrototypeId(String s)
     {
         int id;
-// #generated# Last update: 2019-02-16 09:39:44 MEZ
+// #generated# Last update: 2020-06-27 11:15:47 CST
         L0: { id = 0; String X = null; int c;
             L: switch (s.length()) {
             case 3: c=s.charAt(2);
@@ -956,6 +987,7 @@ final class NativeString extends IdScriptableObject
                 case 'a': X="valueOf";id=Id_valueOf; break L;
                 case 'e': X="replace";id=Id_replace; break L;
                 case 'n': X="indexOf";id=Id_indexOf; break L;
+                case 'r': X="trimEnd";id=Id_trimEnd; break L;
                 case 't': X="italics";id=Id_italics; break L;
                 } break L;
             case 8: switch (s.charAt(6)) {
@@ -967,11 +999,12 @@ final class NativeString extends IdScriptableObject
                 case 't': X="endsWith";id=Id_endsWith; break L;
                 case 'z': X="fontsize";id=Id_fontsize; break L;
                 } break L;
-            case 9: switch (s.charAt(0)) {
-                case 'f': X="fontcolor";id=Id_fontcolor; break L;
-                case 'n': X="normalize";id=Id_normalize; break L;
-                case 's': X="substring";id=Id_substring; break L;
-                case 't': X="trimRight";id=Id_trimRight; break L;
+            case 9: switch (s.charAt(4)) {
+                case 'R': X="trimRight";id=Id_trimRight; break L;
+                case 'S': X="trimStart";id=Id_trimStart; break L;
+                case 'a': X="normalize";id=Id_normalize; break L;
+                case 'c': X="fontcolor";id=Id_fontcolor; break L;
+                case 't': X="substring";id=Id_substring; break L;
                 } break L;
             case 10: c=s.charAt(0);
                 if (c=='c') { X="charCodeAt";id=Id_charCodeAt; }
@@ -1000,6 +1033,7 @@ final class NativeString extends IdScriptableObject
 
     private static final int
         ConstructorId_fromCharCode   = -1,
+        ConstructorId_fromCodePoint   = -2,
 
         Id_constructor               = 1,
         Id_toString                  = 2,
@@ -1049,7 +1083,9 @@ final class NativeString extends IdScriptableObject
         Id_padStart                  = 46,
         Id_padEnd                    = 47,
         SymbolId_iterator            = 48,
-        MAX_PROTOTYPE_ID             = SymbolId_iterator;
+        Id_trimStart                 = 49,
+        Id_trimEnd                   = 50,
+        MAX_PROTOTYPE_ID             = Id_trimEnd;
 
 // #/string_id_map#
 

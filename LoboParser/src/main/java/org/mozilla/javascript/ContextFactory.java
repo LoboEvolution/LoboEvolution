@@ -207,7 +207,7 @@ public class ContextFactory
      * thread.
      * This is a callback method used by Rhino to create {@link Context}
      * instance when it is necessary to associate one with the current
-     * execution thread. <tt>makeContext()</tt> is allowed to call
+     * execution thread. <code>makeContext()</code> is allowed to call
      * {@link Context#seal(Object)} on the result to prevent
      * {@link Context} changes by hostile scripts or applets.
      */
@@ -306,7 +306,7 @@ public class ContextFactory
         throw new IllegalArgumentException(String.valueOf(featureIndex));
     }
 
-    private boolean isDom3Present() {
+    private static boolean isDom3Present() {
         Class<?> nodeClass = Kit.classOrNull("org.w3c.dom.Node");
         if (nodeClass == null) return false;
         // Check to see whether DOM3 is present; use a new method defined in
@@ -543,7 +543,7 @@ public class ContextFactory
      *          Context.exit();
      *      }
      * </pre>
-     * Instead of using <tt>enterContext()</tt>, <tt>exit()</tt> pair consider
+     * Instead of using <code>enterContext()</code>, <code>exit()</code> pair consider
      * using {@link #call(ContextAction)} which guarantees proper association
      * of Context instances with the current thread.
      * With this method the above example becomes:
