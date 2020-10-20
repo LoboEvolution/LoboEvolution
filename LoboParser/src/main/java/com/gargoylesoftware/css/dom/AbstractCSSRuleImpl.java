@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +19,15 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * <p>Abstract AbstractCSSRuleImpl class.</p>
- *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private CSSStyleSheetImpl parentStyleSheet_;
+    private CSSStyleSheetImpl parentStyleSheet_;
     private AbstractCSSRuleImpl parentRule_;
 
     /**
      * Ctor.
-     *
      * @param parentStyleSheet the parent style sheet
      * @param parentRule the parent rule
      */
@@ -43,22 +38,18 @@ public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements S
     }
 
     /**
-     * <p>getCssText.</p>
-     *
      * @return the current css text
      */
     public abstract String getCssText();
 
     /**
      * Sets the css text.
-     *
      * @param text the new css text
      */
     public abstract void setCssText(String text);
 
     /**
      * Sets the parent style sheet.
-     *
      * @param parentStyleSheet the new parent style sheet
      */
     public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
@@ -67,7 +58,6 @@ public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements S
 
     /**
      * Sets the parent rule.
-     *
      * @param parentRule the new parent rule
      */
     public void setParentRule(final AbstractCSSRuleImpl parentRule) {
@@ -75,8 +65,6 @@ public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements S
     }
 
     /**
-     * <p>getParentStyleSheet.</p>
-     *
      * @return the parent style sheet
      */
     public CSSStyleSheetImpl getParentStyleSheet() {
@@ -84,15 +72,12 @@ public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements S
     }
 
     /**
-     * <p>getParentRule.</p>
-     *
      * @return the parent rule
      */
     public AbstractCSSRuleImpl getParentRule() {
         return parentRule_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -106,7 +91,6 @@ public abstract class AbstractCSSRuleImpl extends AbstractLocatable implements S
         // recursive loop -> stack overflow!
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int hash = super.hashCode();

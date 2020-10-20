@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,19 +18,16 @@ package com.gargoylesoftware.css.parser;
  * Abstract base class of all locatables.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class AbstractLocatable implements Locatable {
 
     private Locator locator_;
 
-    /** {@inheritDoc} */
     @Override
     public Locator getLocator() {
         return locator_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setLocator(final Locator locator) {
         locator_ = locator;

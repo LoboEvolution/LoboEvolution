@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
  * Implementation of MediaQueryList.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class MediaQueryList extends AbstractLocatable {
 
@@ -37,8 +36,6 @@ public class MediaQueryList extends AbstractLocatable {
     }
 
     /**
-     * <p>getLength.</p>
-     *
      * @return the number of mediaQueries
      */
     public int getLength() {
@@ -46,8 +43,6 @@ public class MediaQueryList extends AbstractLocatable {
     }
 
     /**
-     * <p>getMediaQueries.</p>
-     *
      * @return the list of media queries
      */
     public List<MediaQuery> getMediaQueries() {
@@ -56,14 +51,12 @@ public class MediaQueryList extends AbstractLocatable {
 
     /**
      * Adds a new media query to the list.
-     *
      * @param mediaQuery the media query to add
      */
     public void add(final MediaQuery mediaQuery) {
         mediaQueries_.add(mediaQuery);
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

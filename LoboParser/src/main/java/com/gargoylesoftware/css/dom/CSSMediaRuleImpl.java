@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,17 +29,14 @@ import com.gargoylesoftware.css.util.ThrowCssExceptionErrorHandler;
  * Implementation of CSSMediaRule.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
-	private static final long serialVersionUID = 1L;
-	private MediaListImpl mediaList_;
+    private MediaListImpl mediaList_;
     private CSSRuleListImpl cssRules_;
 
     /**
      * Ctor.
-     *
      * @param parentStyleSheet the parent style sheet
      * @param parentRule the parent rule
      * @param media the media
@@ -52,7 +49,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         mediaList_ = media;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCssText() {
         final StringBuilder sb = new StringBuilder("@media ");
@@ -67,7 +66,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -100,8 +101,6 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getMediaList.</p>
-     *
      * @return the media list
      */
     public MediaListImpl getMediaList() {
@@ -109,8 +108,6 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getCssRules.</p>
-     *
      * @return the css rules
      */
     public CSSRuleListImpl getCssRules() {
@@ -122,10 +119,9 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Insert a new rule at the given index.
-     *
      * @param rule the rule to be inserted
      * @param index the insert pos
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public void insertRule(final String rule, final int index) throws DOMException {
         final CSSStyleSheetImpl parentStyleSheet = getParentStyleSheet();
@@ -162,9 +158,8 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Removes a rule at the given index.
-     *
      * @param index the insert pos
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public void deleteRule(final int index) throws DOMException {
         try {
@@ -180,20 +175,17 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Replaces the rule list.
-     *
      * @param rules the new rule list
      */
     public void setRuleList(final CSSRuleListImpl rules) {
         cssRules_ = rules;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -208,7 +200,6 @@ public class CSSMediaRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getCssRules(), cmr.getCssRules());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

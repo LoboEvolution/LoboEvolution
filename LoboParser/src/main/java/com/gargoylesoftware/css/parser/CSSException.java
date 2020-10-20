@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,9 @@
 package com.gargoylesoftware.css.parser;
 
 /**
- * <p>CSSException class.</p>
- *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSException extends RuntimeException {
-	
-	private static final long serialVersionUID = 1L;
 
     /** Enum for error codes. */
     protected enum ErrorCode {
@@ -45,7 +40,6 @@ public class CSSException extends RuntimeException {
 
     /**
      * Creates a new CSSException.
-     *
      * @param message the message
      */
     public CSSException(final String message) {
@@ -55,7 +49,6 @@ public class CSSException extends RuntimeException {
 
     /**
      * Creates a new CSSException with an embeded exception.
-     *
      * @param e the embeded exception.
      */
     public CSSException(final Exception e) {
@@ -65,7 +58,6 @@ public class CSSException extends RuntimeException {
 
     /**
      * Creates a new CSSException with a specific code.
-     *
      * @param code a the embeded exception.
      */
     public CSSException(final ErrorCode code) {
@@ -75,7 +67,6 @@ public class CSSException extends RuntimeException {
     /**
      * Creates a new CSSException with an embeded exception and a specified
      * message.
-     *
      * @param code the specified code
      * @param message the message
      * @param e the embeded exception
@@ -87,9 +78,10 @@ public class CSSException extends RuntimeException {
     }
 
     /**
-     * {@inheritDoc}
-     *
      * Returns the detail message of this throwable object.
+     *
+     * @return the detail message of this Throwable, or null if this Throwable
+     *         does not have a detail message.
      */
     @Override
     public String getMessage() {
@@ -114,8 +106,6 @@ public class CSSException extends RuntimeException {
     }
 
     /**
-     * <p>getCode.</p>
-     *
      * @return the error code for this exception.
      */
     public ErrorCode getCode() {

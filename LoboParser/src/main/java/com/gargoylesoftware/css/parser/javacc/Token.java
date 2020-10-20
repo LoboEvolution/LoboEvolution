@@ -4,11 +4,9 @@ package com.gargoylesoftware.css.parser.javacc;
 
 /**
  * Describes the input token stream.
- *
- * @author utente
- * @version $Id: $Id
  */
-@SuppressWarnings("all") public class Token implements java.io.Serializable {
+
+public class Token implements java.io.Serializable {
 
   /**
    * The version identifier for this Serializable class.
@@ -69,8 +67,6 @@ package com.gargoylesoftware.css.parser.javacc;
    * interpreter. This attribute value is often different from the image.
    * Any subclass of Token that actually wants to return a non-null value can
    * override this method as appropriate.
-   *
-   * @return a {@link java.lang.Object} object.
    */
   public Object getValue() {
     return null;
@@ -83,8 +79,6 @@ package com.gargoylesoftware.css.parser.javacc;
 
   /**
    * Constructs a new token for the specified Image.
-   *
-   * @param kind a int.
    */
   public Token(int kind)
   {
@@ -93,9 +87,6 @@ package com.gargoylesoftware.css.parser.javacc;
 
   /**
    * Constructs a new token for the specified Image and Kind.
-   *
-   * @param kind a int.
-   * @param image a {@link java.lang.String} object.
    */
   public Token(int kind, String image)
   {
@@ -104,8 +95,6 @@ package com.gargoylesoftware.css.parser.javacc;
   }
 
   /**
-   * {@inheritDoc}
-   *
    * Returns the image.
    */
   @Override
@@ -125,10 +114,6 @@ package com.gargoylesoftware.css.parser.javacc;
    *
    * to the following switch statement. Then you can cast matchedToken
    * variable to the appropriate type and use sit in your lexical actions.
-   *
-   * @param ofKind a int.
-   * @param image a {@link java.lang.String} object.
-   * @return a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
    */
   public static Token newToken(int ofKind, String image)
   {
@@ -138,12 +123,6 @@ package com.gargoylesoftware.css.parser.javacc;
     }
   }
 
-  /**
-   * <p>newToken.</p>
-   *
-   * @param ofKind a int.
-   * @return a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
-   */
   public static Token newToken(int ofKind)
   {
     return newToken(ofKind, null);

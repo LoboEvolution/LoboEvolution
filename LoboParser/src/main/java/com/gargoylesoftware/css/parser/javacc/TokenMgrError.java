@@ -2,13 +2,8 @@
 /* JavaCCOptions: */
 package com.gargoylesoftware.css.parser.javacc;
 
-/**
- * Token Manager Error.
- *
- * @author utente
- * @version $Id: $Id
- */
-@SuppressWarnings("all") public class TokenMgrError extends Error
+/** Token Manager Error. */
+public class TokenMgrError extends Error
 {
 
   /**
@@ -51,12 +46,9 @@ package com.gargoylesoftware.css.parser.javacc;
   /**
    * Replaces unprintable characters by their escaped (or unicode escaped)
    * equivalents in the given string
-   *
-   * @param str a {@link java.lang.String} object.
-   * @return a {@link java.lang.String} object.
    */
   protected static final String addEscapes(String str) {
-    StringBuffer retval = new StringBuffer();
+    StringBuilder retval = new StringBuilder();
     char ch;
     for (int i = 0; i < str.length(); i++) {
       switch (str.charAt(i))
@@ -109,14 +101,6 @@ package com.gargoylesoftware.css.parser.javacc;
    *    errorAfter  : prefix that was seen before this error occurred
    *    curchar     : the offending character
    * Note: You can customize the lexical error message by modifying this method.
-   *
-   * @param EOFSeen a boolean.
-   * @param lexState a int.
-   * @param errorLine a int.
-   * @param errorColumn a int.
-   * @param errorAfter a {@link java.lang.String} object.
-   * @param curChar a int.
-   * @return a {@link java.lang.String} object.
    */
   protected static String LexicalErr(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, int curChar) {
     char curChar1 = (char)curChar;
@@ -128,8 +112,6 @@ package com.gargoylesoftware.css.parser.javacc;
   }
 
   /**
-   * {@inheritDoc}
-   *
    * You can also modify the body of this method to customize your error messages.
    * For example, cases like LOOP_DETECTED and INVALID_LEXICAL_STATE are not
    * of end-users concern, so you can return something like :
@@ -147,36 +129,19 @@ package com.gargoylesoftware.css.parser.javacc;
    * Constructors of various flavors follow.
    */
 
-  /**
-   * No arg constructor.
-   */
+  /** No arg constructor. */
   public TokenMgrError() {
   }
 
-  /**
-   * Constructor with message and reason.
-   *
-   * @param message a {@link java.lang.String} object.
-   * @param reason a int.
-   */
+  /** Constructor with message and reason. */
   public TokenMgrError(String message, int reason) {
     super(message);
     errorCode = reason;
   }
 
-  /**
-   * Full Constructor.
-   *
-   * @param EOFSeen a boolean.
-   * @param lexState a int.
-   * @param errorLine a int.
-   * @param errorColumn a int.
-   * @param errorAfter a {@link java.lang.String} object.
-   * @param curChar a int.
-   * @param reason a int.
-   */
+  /** Full Constructor. */
   public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, int curChar, int reason) {
     this(LexicalErr(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
   }
 }
-/* JavaCC - OriginalChecksum=dd0074bf024dfbc061762d6057ded0bb (do not edit this line) */
+/* JavaCC - OriginalChecksum=412c14f4ab3db709654b26fb529b6728 (do not edit this line) */

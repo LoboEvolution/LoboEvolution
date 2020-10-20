@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,10 @@ package com.gargoylesoftware.css.parser;
  * Encapsulate a CSS parse error or warning.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSParseException extends CSSException {
 
-	private static final long serialVersionUID = 1L;
-	private String uri_;
+    private String uri_;
     private int lineNumber_;
     private int columnNumber_;
 
@@ -43,7 +41,7 @@ public class CSSParseException extends CSSException {
     }
 
     /**
-     *
+
      * Wrap an existing exception in a CSSParseException.
      *
      * <p>This constructor is especially useful when an application is

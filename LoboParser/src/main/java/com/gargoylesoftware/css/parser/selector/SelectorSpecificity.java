@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,14 @@ import com.gargoylesoftware.css.parser.condition.Condition;
 
 /**
  * Calculates a selector's specificity.
- *
  * @see <a href="http://www.w3.org/TR/CSS21/cascade.html#specificity">W3C CSS21</a>
+ *
  * @author Marc Guillemot
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	/**
+    /**
      * The specificity for declarations made in the style attributes of an element.
      */
     public static final SelectorSpecificity FROM_STYLE_ATTRIBUTE = new SelectorSpecificity(1, 0, 0, 0);
@@ -46,7 +43,6 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
 
     /**
      * Ctor.
-     *
      * @param selector the selector to read from
      */
     public SelectorSpecificity(final Selector selector) {
@@ -144,13 +140,17 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         }
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         return fieldA_ + "," + fieldB_ + "," + fieldC_ + "," + fieldD_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int compareTo(final SelectorSpecificity other) {
         if (fieldA_ != other.fieldA_) {
@@ -168,7 +168,6 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         return 0;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -180,7 +179,6 @@ public class SelectorSpecificity implements Comparable<SelectorSpecificity>, Ser
         return result;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {

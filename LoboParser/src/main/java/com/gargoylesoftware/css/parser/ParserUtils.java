@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.gargoylesoftware.css.parser;
  * Util methods used by the parser and lexer.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public final class ParserUtils {
 
@@ -41,7 +40,6 @@ public final class ParserUtils {
     /**
      * Helper that removes the leading "url(", the trailing ")"
      * and surrounding quotes from the given string builder.
-     *
      * @param s the StringBuilder
      * @return the trimmed string
      */

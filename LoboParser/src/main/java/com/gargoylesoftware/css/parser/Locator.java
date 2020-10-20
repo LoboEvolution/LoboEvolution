@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,18 +22,15 @@ import com.gargoylesoftware.css.util.LangUtils;
  * For associating a CSS event with a document location.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class Locator implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	private String uri_;
+
+    private String uri_;
     private int lineNumber_;
     private int columnNumber_;
 
     /**
      * Creates new LocatorImpl.
-     *
      * @param uri the uri
      * @param line the lineNumber
      * @param column the columnNumber
@@ -45,8 +42,6 @@ public class Locator implements Serializable {
     }
 
     /**
-     * <p>getUri.</p>
-     *
      * @return the uri
      */
     public String getUri() {
@@ -55,7 +50,6 @@ public class Locator implements Serializable {
 
     /**
      * Set the uri to a new value.
-     *
      * @param uri the new uri
      */
     public void setUri(final String uri) {
@@ -67,7 +61,6 @@ public class Locator implements Serializable {
      * Note that this is the column number of the first
      * character after the text associated with the document
      * event.  The first column in a line is position 1.
-     *
      * @return The column number, or -1 if none is available.
      * @see #getLineNumber
      */
@@ -77,7 +70,6 @@ public class Locator implements Serializable {
 
     /**
      * Set the columnNumber to a new value.
-     *
      * @param column the new columnNumber
      */
     public void setColumnNumber(final int column) {
@@ -88,7 +80,6 @@ public class Locator implements Serializable {
      * Return the line number where the current document event ends.
      * Note that this is the line position of the first character
      * after the text associated with the document event.
-     *
      * @return The line number, or -1 if none is available.
      * @see #getColumnNumber
      */
@@ -98,14 +89,12 @@ public class Locator implements Serializable {
 
     /**
      * Set the lineNumber to a new value.
-     *
      * @param line the new lineNumber
      */
     public void setLineNumber(final int line) {
         lineNumber_ = line;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -120,7 +109,6 @@ public class Locator implements Serializable {
             && LangUtils.equals(getUri(), l.getUri());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;
@@ -130,7 +118,6 @@ public class Locator implements Serializable {
         return hash;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return new StringBuilder().append(getUri()).append(" (")

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,13 +26,10 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSCharsetRule.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String encoding_;
+    private String encoding_;
 
     /**
      * Ctor.
@@ -49,7 +46,9 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
         encoding_ = encoding;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -81,15 +80,12 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getEncoding.</p>
-     *
      * @return the encoding
      */
     public String getEncoding() {
         return encoding_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -103,7 +99,6 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getEncoding(), ccr.getEncoding());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -111,13 +106,14 @@ public class CSSCharsetRuleImpl extends AbstractCSSRuleImpl {
         return hash;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();

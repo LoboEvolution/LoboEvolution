@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,15 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
- * <p>LangCondition class.</p>
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class LangCondition extends AbstractLocatable implements Condition, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private String lang_;
+    private String lang_;
 
     /**
      * Ctor.
-     *
      * @param lang the language
      * @param locator the locato
      */
@@ -41,25 +37,27 @@ public class LangCondition extends AbstractLocatable implements Condition, Seria
         setLocator(locator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.LANG_CONDITION;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLocalName() {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * @return the language
+     */
     @Override
     public String getValue() {
         return lang_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();

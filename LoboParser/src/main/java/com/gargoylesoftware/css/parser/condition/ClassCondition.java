@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,15 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.parser.Locator;
 
 /**
- * <p>ClassCondition class.</p>
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class ClassCondition extends AbstractLocatable implements Condition, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private final String value_;
+    private final String value_;
 
     /**
      * Ctor.
-     *
      * @param value the value
      * @param locator the locato
      */
@@ -41,25 +37,27 @@ public class ClassCondition extends AbstractLocatable implements Condition, Seri
         setLocator(locator);
     }
 
-    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.CLASS_CONDITION;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLocalName() {
         return null;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getValue() {
         return value_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

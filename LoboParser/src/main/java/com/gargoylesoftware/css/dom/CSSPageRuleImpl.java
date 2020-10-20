@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,12 +26,10 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSPageRule.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
 
-	private static final long serialVersionUID = 1L;
-	private String pseudoPage_;
+    private String pseudoPage_;
     private CSSStyleDeclarationImpl style_;
 
     /**
@@ -49,7 +47,9 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         pseudoPage_ = pseudoPage;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
@@ -70,7 +70,9 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -103,8 +105,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getSelectorText.</p>
-     *
      * @return the selector text
      */
     public String getSelectorText() {
@@ -115,8 +115,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getStyle.</p>
-     *
      * @return the style
      */
     public CSSStyleDeclarationImpl getStyle() {
@@ -125,14 +123,12 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
 
     /**
      * Changes the style.
-     *
      * @param style the new style
      */
     public void setStyle(final CSSStyleDeclarationImpl style) {
         style_ = style;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -147,7 +143,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getStyle(), cpr.getStyle());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();
@@ -156,7 +151,6 @@ public class CSSPageRuleImpl extends AbstractCSSRuleImpl {
         return hash;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();

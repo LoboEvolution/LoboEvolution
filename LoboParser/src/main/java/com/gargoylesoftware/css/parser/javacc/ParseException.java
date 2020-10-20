@@ -10,9 +10,6 @@ package com.gargoylesoftware.css.parser.javacc;
  *
  * You can modify this class to customize your error reporting
  * mechanisms so long as you retain the public fields.
- *
- * @author utente
- * @version $Id: $Id
  */
 public class ParseException extends Exception {
 
@@ -33,10 +30,6 @@ public class ParseException extends Exception {
    * in the generated parser.  Calling this constructor generates
    * a new object of this type with the fields "currentToken",
    * "expectedTokenSequences", and "tokenImage" set.
-   *
-   * @param currentTokenVal a {@link com.gargoylesoftware.css.parser.javacc.Token} object.
-   * @param expectedTokenSequencesVal an array of {@link int} objects.
-   * @param tokenImageVal an array of {@link java.lang.String} objects.
    */
   public ParseException(Token currentTokenVal,
                         int[][] expectedTokenSequencesVal,
@@ -58,15 +51,12 @@ public class ParseException extends Exception {
    * relevant information.  The JavaCC generated code does not use
    * these constructors.
    */
+
   public ParseException() {
     super();
   }
 
-  /**
-   * Constructor with message.
-   *
-   * @param message a {@link java.lang.String} object.
-   */
+  /** Constructor with message. */
   public ParseException(String message) {
     super(message);
   }
@@ -75,7 +65,7 @@ public class ParseException extends Exception {
   /**
    * This is the last token that has been consumed successfully.  If
    * this object has been created due to a parse error, the token
-   * followng this token will (therefore) be the first error token.
+   * following this token will (therefore) be the first error token.
    */
   public Token currentToken;
 
@@ -104,7 +94,7 @@ public class ParseException extends Exception {
                            int[][] expectedTokenSequences,
                            String[] tokenImage) {
 
-    StringBuffer expected = new StringBuffer();
+    StringBuilder expected = new StringBuilder();
     int maxSize = 0;
     for (int i = 0; i < expectedTokenSequences.length; i++) {
       if (maxSize < expectedTokenSequences[i].length) {
@@ -157,7 +147,7 @@ public class ParseException extends Exception {
    * string literal.
    */
   static String add_escapes(String str) {
-      StringBuffer retval = new StringBuffer();
+      StringBuilder retval = new StringBuilder();
       char ch;
       for (int i = 0; i < str.length(); i++) {
         switch (str.charAt(i))
@@ -200,4 +190,4 @@ public class ParseException extends Exception {
    }
 
 }
-/* JavaCC - OriginalChecksum=9cf6c92491c619ce5f0aa533305efae3 (do not edit this line) */
+/* JavaCC - OriginalChecksum=6f229b8d279f3052e52b3e475dc361a2 (do not edit this line) */

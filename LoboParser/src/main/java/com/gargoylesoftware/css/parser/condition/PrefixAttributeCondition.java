@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +19,15 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * <p>PrefixAttributeCondition class.</p>
- *
  * @author Ronlad Brill
- * @version $Id: $Id
  */
 public class PrefixAttributeCondition extends AbstractLocatable implements Condition, Serializable {
-	
-	private static final long serialVersionUID = 1L;
-	private final String localName_;
+
+    private final String localName_;
     private final String value_;
 
     /**
      * Ctor.
-     *
      * @param localName the loacl value
      * @param value the value
      */
@@ -41,25 +36,27 @@ public class PrefixAttributeCondition extends AbstractLocatable implements Condi
         value_ = value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.PREFIX_ATTRIBUTE_CONDITION; //for now
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLocalName() {
         return localName_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getValue() {
         return value_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

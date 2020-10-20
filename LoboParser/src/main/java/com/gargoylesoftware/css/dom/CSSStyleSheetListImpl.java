@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,11 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of StyleSheetList.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSStyleSheetListImpl {
     private List<CSSStyleSheetImpl> cssStyleSheets_;
 
     /**
-     * <p>getCSSStyleSheets.</p>
-     *
      * @return the list of style sheets
      */
     public List<CSSStyleSheetImpl> getCSSStyleSheets() {
@@ -42,8 +39,6 @@ public class CSSStyleSheetListImpl {
     }
 
     /**
-     * <p>getLength.</p>
-     *
      * @return the number of style sheets
      */
     public int getLength() {
@@ -80,7 +75,6 @@ public class CSSStyleSheetListImpl {
         return merged;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -108,7 +102,6 @@ public class CSSStyleSheetListImpl {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;

@@ -15,10 +15,8 @@ package com.gargoylesoftware.css.parser.javacc;
  * column number and the String that constitutes a token and are not used
  * by the lexer. Hence their implementation won't affect the generated lexer's
  * operation.
- *
- * @author utente
- * @version $Id: $Id
  */
+
 public
 interface CharStream {
 
@@ -26,59 +24,46 @@ interface CharStream {
    * Returns the next character from the selected input.  The method
    * of selecting the input is the responsibility of the class
    * implementing this interface.  Can throw any java.io.IOException.
-   *
-   * @return a char.
-   * @throws java.io.IOException if any.
    */
   char readChar() throws java.io.IOException;
 
   @Deprecated
   /**
    * Returns the column position of the character last read.
-   *
+   * @deprecated
    * @see #getEndColumn
-   * @return a int.
    */
   int getColumn();
 
   @Deprecated
   /**
    * Returns the line number of the character last read.
-   *
+   * @deprecated
    * @see #getEndLine
-   * @return a int.
    */
   int getLine();
 
   /**
    * Returns the column number of the last character for current token (being
    * matched after the last call to BeginTOken).
-   *
-   * @return a int.
    */
   int getEndColumn();
 
   /**
    * Returns the line number of the last character for current token (being
    * matched after the last call to BeginTOken).
-   *
-   * @return a int.
    */
   int getEndLine();
 
   /**
    * Returns the column number of the first character for current token (being
    * matched after the last call to BeginTOken).
-   *
-   * @return a int.
    */
   int getBeginColumn();
 
   /**
    * Returns the line number of the first character for current token (being
    * matched after the last call to BeginTOken).
-   *
-   * @return a int.
    */
   int getBeginLine();
 
@@ -86,9 +71,7 @@ interface CharStream {
    * Backs up the input stream by amount steps. Lexer calls this method if it
    * had already read some characters, but could not use them to match a
    * (longer) token. So, they will be used again as the prefix of the next
-   * token and it is the implemetation's responsibility to do this right.
-   *
-   * @param amount a int.
+   * token and it is the implementation's responsibility to do this right.
    */
   void backup(int amount);
 
@@ -96,9 +79,6 @@ interface CharStream {
    * Returns the next character that marks the beginning of the next token.
    * All characters must remain in the buffer between two successive calls
    * to this method to implement backup correctly.
-   *
-   * @return a char.
-   * @throws java.io.IOException if any.
    */
   char BeginToken() throws java.io.IOException;
 
@@ -107,8 +87,6 @@ interface CharStream {
    * to the current buffer position. Implementations have the choice of returning
    * anything that they want to. For example, for efficiency, one might decide
    * to just return null, which is a valid implementation.
-   *
-   * @return a {@link java.lang.String} object.
    */
   String GetImage();
 
@@ -122,9 +100,6 @@ interface CharStream {
    *      String t = GetImage();
    *      return t.substring(t.length() - len, t.length()).toCharArray();
    *   }
-   *
-   * @param len a int.
-   * @return an array of {@link char} objects.
    */
   char[] GetSuffix(int len);
 
@@ -137,29 +112,9 @@ interface CharStream {
   void Done();
 
 
-  /**
-   * <p>setTabSize.</p>
-   *
-   * @param i a int.
-   */
   void setTabSize(int i);
-  /**
-   * <p>getTabSize.</p>
-   *
-   * @return a int.
-   */
   int getTabSize();
-  /**
-   * <p>getTrackLineColumn.</p>
-   *
-   * @return a boolean.
-   */
   boolean getTrackLineColumn();
-  /**
-   * <p>setTrackLineColumn.</p>
-   *
-   * @param trackLineColumn a boolean.
-   */
   void setTrackLineColumn(boolean trackLineColumn);
 }
-/* JavaCC - OriginalChecksum=143aed4764b7567e7751962a14eca750 (do not edit this line) */
+/* JavaCC - OriginalChecksum=3301b49863a24286e18dc523abb5cd19 (do not edit this line) */

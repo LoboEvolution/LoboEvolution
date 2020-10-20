@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,16 +26,13 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSUnknownRule.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
 
-	private static final long serialVersionUID = 1L;
-	private String text_;
+    private String text_;
 
     /**
      * Ctor.
-     *
      * @param parentStyleSheet the parent style sheet
      * @param parentRule the parent rule
      * @param text the text
@@ -48,7 +45,9 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
         text_ = text;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCssText() {
         if (null == text_) {
@@ -57,7 +56,9 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
         return text_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -88,13 +89,11 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -108,7 +107,6 @@ public class CSSUnknownRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getCssText(), cur.getCssText());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

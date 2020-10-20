@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,33 +20,36 @@ import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSParseException;
 
 /**
- * Helper implementation of {@link com.gargoylesoftware.css.parser.CSSErrorHandler}, which throws CssException in case of problems.
+ * Helper implementation of {@link CSSErrorHandler}, which throws CssException in case of problems.
  *
  * @author Ronadl Brill
- * @version $Id: $Id
  */
 public class ThrowCssExceptionErrorHandler implements CSSErrorHandler, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	/**
+    /**
      * Singleton.
      */
     public static final ThrowCssExceptionErrorHandler INSTANCE = new ThrowCssExceptionErrorHandler();
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void error(final CSSParseException exception) {
         throw exception;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void fatalError(final CSSParseException exception) {
         throw exception;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void warning(final CSSParseException exception) {
         // ignore warnings

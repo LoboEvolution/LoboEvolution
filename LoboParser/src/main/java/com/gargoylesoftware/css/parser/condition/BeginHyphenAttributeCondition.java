@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,20 +19,15 @@ import java.io.Serializable;
 import com.gargoylesoftware.css.parser.AbstractLocatable;
 
 /**
- * <p>BeginHyphenAttributeCondition class.</p>
- *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class BeginHyphenAttributeCondition extends AbstractLocatable implements Condition, Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private final String localName_;
+    private final String localName_;
     private final String value_;
 
     /**
      * Ctor.
-     *
      * @param localName the local name
      * @param value the value
      */
@@ -41,25 +36,27 @@ public class BeginHyphenAttributeCondition extends AbstractLocatable implements 
         value_ = value;
     }
 
-    /** {@inheritDoc} */
     @Override
     public ConditionType getConditionType() {
         return ConditionType.BEGIN_HYPHEN_ATTRIBUTE_CONDITION;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getLocalName() {
         return localName_;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getValue() {
         return value_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final String value = getValue();

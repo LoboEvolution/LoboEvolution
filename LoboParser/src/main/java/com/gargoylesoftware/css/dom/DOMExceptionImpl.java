@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,11 @@ package com.gargoylesoftware.css.dom;
 import org.w3c.dom.DOMException;
 
 /**
- * Custom {@link org.w3c.dom.DOMException} extension.
+ * Custom {@link DOMException} extension.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class DOMExceptionImpl extends DOMException {
-	
-	private static final long serialVersionUID = 1L;
 
     /** SYNTAX_ERROR = 0. */
     public static final int SYNTAX_ERROR = 0;
@@ -92,7 +89,6 @@ public class DOMExceptionImpl extends DOMException {
 
     /**
      * Ctor.
-     *
      * @param code the code
      * @param messageKey the message key
      */
@@ -102,7 +98,6 @@ public class DOMExceptionImpl extends DOMException {
 
     /**
      * Ctor.
-     *
      * @param code the code
      * @param messageKey the message key
      */
@@ -112,7 +107,6 @@ public class DOMExceptionImpl extends DOMException {
 
     /**
      * Ctor.
-     *
      * @param code the code
      * @param messageKey the message key
      * @param info additional info

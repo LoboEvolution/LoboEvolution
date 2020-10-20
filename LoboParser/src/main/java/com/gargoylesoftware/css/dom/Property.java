@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,21 +20,16 @@ import com.gargoylesoftware.css.parser.AbstractLocatable;
 import com.gargoylesoftware.css.util.LangUtils;
 
 /**
- * <p>Property class.</p>
- *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class Property extends AbstractLocatable implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private String name_;
+    private String name_;
     private CSSValueImpl value_;
     private boolean important_;
 
     /**
      * Creates new Property.
-     *
      * @param name the name
      * @param value the value
      * @param important true if the important flag set
@@ -47,7 +42,6 @@ public class Property extends AbstractLocatable implements Serializable {
 
     /**
      * Returns the name.
-     *
      * @return the name
      */
     public String getName() {
@@ -56,7 +50,6 @@ public class Property extends AbstractLocatable implements Serializable {
 
     /**
      * Sets the name to a new value.
-     *
      * @param name the new name
      */
     public void setName(final String name) {
@@ -65,7 +58,6 @@ public class Property extends AbstractLocatable implements Serializable {
 
     /**
      * Returns the value.
-     *
      * @return the value
      */
     public CSSValueImpl getValue() {
@@ -74,7 +66,6 @@ public class Property extends AbstractLocatable implements Serializable {
 
     /**
      * Returns true if the important flag is set.
-     *
      * @return true or false
      */
     public boolean isImportant() {
@@ -83,7 +74,6 @@ public class Property extends AbstractLocatable implements Serializable {
 
     /**
      * Sets the value to a new value.
-     *
      * @param value the new CSSValue
      */
     public void setValue(final CSSValueImpl value) {
@@ -92,14 +82,15 @@ public class Property extends AbstractLocatable implements Serializable {
 
     /**
      * Sets the important flag to a new value.
-     *
      * @param important the new flag value
      */
     public void setImportant(final boolean important) {
         important_ = important;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -114,7 +105,9 @@ public class Property extends AbstractLocatable implements Serializable {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -130,7 +123,9 @@ public class Property extends AbstractLocatable implements Serializable {
             && LangUtils.equals(value_, p.value_);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

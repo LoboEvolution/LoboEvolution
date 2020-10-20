@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,21 +25,18 @@ import com.gargoylesoftware.css.parser.LexicalUnit.LexicalUnitType;
  * Implementation of Counter.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CounterImpl implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private String identifier_;
+    private String identifier_;
     private String listStyle_;
     private String separator_;
 
     /**
      * Creates new CounterImpl.
-     *
      * @param separatorSpecified true if the separator is specified
      * @param lu the lexical unit
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public CounterImpl(final boolean separatorSpecified, final LexicalUnit lu) throws DOMException {
         LexicalUnit next = lu;
@@ -77,8 +74,6 @@ public class CounterImpl implements Serializable {
     }
 
     /**
-     * <p>getIdentifier.</p>
-     *
      * @return the identifier
      */
     public String getIdentifier() {
@@ -86,8 +81,6 @@ public class CounterImpl implements Serializable {
     }
 
     /**
-     * <p>getListStyle.</p>
-     *
      * @return the list style
      */
     public String getListStyle() {
@@ -95,15 +88,12 @@ public class CounterImpl implements Serializable {
     }
 
     /**
-     * <p>getSeparator.</p>
-     *
      * @return the separator
      */
     public String getSeparator() {
         return separator_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();

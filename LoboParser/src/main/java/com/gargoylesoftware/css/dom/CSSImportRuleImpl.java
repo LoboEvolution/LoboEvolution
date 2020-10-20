@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,13 +26,10 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSImportRule.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
 
-	private static final long serialVersionUID = 1L;
-	
-	private String href_;
+    private String href_;
     private MediaListImpl media_;
 
     /**
@@ -53,7 +50,9 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
         media_ = media;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getCssText() {
         final StringBuilder sb = new StringBuilder();
@@ -72,7 +71,9 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
         return sb.toString();
     }
 
-    /** {@inheritDoc} */
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -105,8 +106,6 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getHref.</p>
-     *
      * @return the href
      */
     public String getHref() {
@@ -114,8 +113,6 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getMedia.</p>
-     *
      * @return the media lsit
      */
     public MediaListImpl getMedia() {
@@ -123,21 +120,17 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
     }
 
     /**
-     * <p>getStyleSheet.</p>
-     *
      * @return the parent style sheet
      */
     public CSSStyleSheetImpl getStyleSheet() {
         return getParentStyleSheet();
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -152,7 +145,6 @@ public class CSSImportRuleImpl extends AbstractCSSRuleImpl {
             && LangUtils.equals(getMedia(), cir.getMedia());
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = super.hashCode();

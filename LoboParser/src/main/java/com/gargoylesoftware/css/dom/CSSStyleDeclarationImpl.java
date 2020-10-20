@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,11 @@ import com.gargoylesoftware.css.util.LangUtils;
  * Implementation of CSSStyleDeclaration.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSStyleDeclarationImpl implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private static final String PRIORITY_IMPORTANT = "important";
+    private static final String PRIORITY_IMPORTANT = "important";
+
     private AbstractCSSRuleImpl parentRule_;
     private List<Property> properties_ = new ArrayList<>();
 
@@ -46,8 +45,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getProperties.</p>
-     *
      * @return the properties
      */
     public List<Property> getProperties() {
@@ -55,8 +52,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getCssText.</p>
-     *
      * @return the current css text
      */
     public String getCssText() {
@@ -76,9 +71,8 @@ public class CSSStyleDeclarationImpl implements Serializable {
 
     /**
      * Sets the css text.
-     *
      * @param cssText the new css text
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public void setCssText(final String cssText) throws DOMException {
         try {
@@ -95,8 +89,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getPropertyValue.</p>
-     *
      * @param propertyName the property name
      * @return the property value
      */
@@ -109,8 +101,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getPropertyCSSValue.</p>
-     *
      * @param propertyName the property name
      * @return the property value
      */
@@ -124,7 +114,7 @@ public class CSSStyleDeclarationImpl implements Serializable {
      *
      * @param propertyName the property name
      * @return the removed property
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public String removeProperty(final String propertyName) throws DOMException {
         if (null == propertyName) {
@@ -144,8 +134,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getPropertyPriority.</p>
-     *
      * @param propertyName the name of the property
      * @return the priority
      */
@@ -159,11 +147,10 @@ public class CSSStyleDeclarationImpl implements Serializable {
 
     /**
      * Set a property.
-     *
      * @param propertyName the name of the property
      * @param value the new value
      * @param priority the priority
-     * @throws org.w3c.dom.DOMException in case of error
+     * @throws DOMException in case of error
      */
     public void setProperty(
             final String propertyName,
@@ -195,8 +182,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getLength.</p>
-     *
      * @return the properties count
      */
     public int getLength() {
@@ -204,8 +189,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getParentRule.</p>
-     *
      * @return the parent rule
      */
     public AbstractCSSRuleImpl getParentRule() {
@@ -214,7 +197,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
 
     /**
      * Add a property.
-     *
      * @param p the property to add
      */
     public void addProperty(final Property p) {
@@ -225,8 +207,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
     }
 
     /**
-     * <p>getPropertyDeclaration.</p>
-     *
      * @param propertyName the name of the propery
      * @return the property
      */
@@ -243,13 +223,11 @@ public class CSSStyleDeclarationImpl implements Serializable {
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public String toString() {
         return getCssText();
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean equals(final Object obj) {
         if (this == obj) {
@@ -287,7 +265,6 @@ public class CSSStyleDeclarationImpl implements Serializable {
         return true;
     }
 
-    /** {@inheritDoc} */
     @Override
     public int hashCode() {
         int hash = LangUtils.HASH_SEED;

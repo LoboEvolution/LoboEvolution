@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.gargoylesoftware.css.util;
  * Some utils.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public final class LangUtils {
 
@@ -32,8 +31,6 @@ public final class LangUtils {
     }
 
     /**
-     * <p>hashCode.</p>
-     *
      * @param seed the seed to be used
      * @param hashcode the hashcode to be used as input
      * @return a hash code calculated based on a given one.
@@ -43,8 +40,6 @@ public final class LangUtils {
     }
 
     /**
-     * <p>hashCode.</p>
-     *
      * @param seed the seed to be used
      * @param b the boolean to be used as input
      * @return a hash code calculated based on a given boolean.
@@ -54,8 +49,6 @@ public final class LangUtils {
     }
 
     /**
-     * <p>hashCode.</p>
-     *
      * @param seed the seed to be used
      * @param obj the object to be used as input
      * @return a hash code calculated based on a given object.
@@ -65,8 +58,6 @@ public final class LangUtils {
     }
 
     /**
-     * <p>equals.</p>
-     *
      * @param obj1 the first object
      * @param obj2 the second object
      * @return true if the both objects are equals

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,9 @@ import com.gargoylesoftware.css.parser.media.MediaQueryList;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
- * Base implementation of {@link com.gargoylesoftware.css.parser.CSSParser}.
+ * Base implementation of {@link CSSParser}.
  *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public abstract class AbstractCSSParser implements CSSParser {
     private DocumentHandler documentHandler_;
@@ -90,8 +89,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     private static final String NUM_CHARS = "0123456789.";
 
     /**
-     * <p>getDocumentHandler.</p>
-     *
      * @return the document handler
      */
     protected DocumentHandler getDocumentHandler() {
@@ -101,15 +98,12 @@ public abstract class AbstractCSSParser implements CSSParser {
         return documentHandler_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setDocumentHandler(final DocumentHandler handler) {
         documentHandler_ = handler;
     }
 
     /**
-     * <p>getErrorHandler.</p>
-     *
      * @return the error handler
      */
     protected CSSErrorHandler getErrorHandler() {
@@ -119,36 +113,29 @@ public abstract class AbstractCSSParser implements CSSParser {
         return errorHandler_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setErrorHandler(final CSSErrorHandler eh) {
         errorHandler_ = eh;
     }
 
     /**
-     * <p>getInputSource.</p>
-     *
      * @return the input source
      */
     protected InputSource getInputSource() {
         return source_;
     }
 
-    /** {@inheritDoc} */
     @Override
     public void setIeStarHackAccepted(final boolean accepted) {
         ieStarHackAccepted_ = accepted;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean isIeStarHackAccepted() {
         return ieStarHackAccepted_;
     }
 
     /**
-     * <p>getParserMessage.</p>
-     *
      * @param key the lookup key
      * @return the parser message
      */
@@ -162,7 +149,6 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     /**
      * Returns a new locator for the given token.
-     *
      * @param t the token to generate the locator for
      * @return a new locator
      */
@@ -174,7 +160,6 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     /**
      * Escapes some chars in the given string.
-     *
      * @param str the input
      * @return a new string with the escaped values
      */
@@ -225,7 +210,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>toCSSParseException.</p>
      *
      * @param key the message lookup key
      * @param e the parse exception
@@ -275,8 +259,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>toCSSParseException.</p>
-     *
      * @param e the DOMException
      * @return a new CSSParseException
      */
@@ -287,8 +269,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>toCSSParseException.</p>
-     *
      * @param e the TokenMgrError
      * @return a new CSSParseException
      */
@@ -298,8 +278,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>toCSSParseException.</p>
-     *
      * @param messageKey the message key
      * @param msgParams the params
      * @param locator the locator
@@ -312,8 +290,6 @@ public abstract class AbstractCSSParser implements CSSParser {
     }
 
     /**
-     * <p>createSkipWarning.</p>
-     *
      * @param messageKey the message key
      * @param e a CSSParseException
      * @return a new CSSParseException
@@ -322,7 +298,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         return new CSSParseException(getParserMessage(messageKey), e.getURI(), e.getLineNumber(), e.getColumnNumber());
     }
 
-    /** {@inheritDoc} */
     @Override
     public void parseStyleSheet(final InputSource source) throws IOException {
         source_ = source;
@@ -341,7 +316,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void parseStyleDeclaration(final InputSource source) throws IOException {
         source_ = source;
@@ -360,7 +334,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public void parseRule(final InputSource source) throws IOException {
         source_ = source;
@@ -379,7 +352,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         }
     }
 
-    /** {@inheritDoc} */
     @Override
     public SelectorList parseSelectors(final InputSource source) throws IOException {
         source_ = source;
@@ -400,7 +372,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         return sl;
     }
 
-    /** {@inheritDoc} */
     @Override
     public LexicalUnit parsePropertyValue(final InputSource source) throws IOException {
         source_ = source;
@@ -421,7 +392,6 @@ public abstract class AbstractCSSParser implements CSSParser {
         return lu;
     }
 
-    /** {@inheritDoc} */
     @Override
     public boolean parsePriority(final InputSource source) throws IOException {
         source_ = source;
@@ -444,10 +414,9 @@ public abstract class AbstractCSSParser implements CSSParser {
 
     /**
      * Parse the given input source and return the media list.
-     *
      * @param source the input source
      * @return new media list
-     * @throws java.io.IOException in case of errors
+     * @throws IOException in case of errors
      */
     public MediaQueryList parseMedia(final InputSource source) throws IOException {
         source_ = source;
@@ -479,13 +448,11 @@ public abstract class AbstractCSSParser implements CSSParser {
         return null;
     }
 
-    /** {@inheritDoc} */
     @Override
     public abstract String getParserVersion();
 
     /**
      * Re intit the stream.
-     *
      * @param charStream the stream
      */
     protected abstract void ReInit(CharStream charStream);
@@ -493,22 +460,22 @@ public abstract class AbstractCSSParser implements CSSParser {
     /**
      * Process a style sheet.
      *
-     * @throws com.gargoylesoftware.css.parser.CSSParseException in case of error
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws CSSParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void styleSheet() throws CSSParseException, ParseException;
 
     /**
      * Process a style sheet declaration.
      *
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void styleDeclaration() throws ParseException;
 
     /**
      * Process a style sheet rule.
      *
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void styleSheetRuleSingle() throws ParseException;
 
@@ -516,7 +483,7 @@ public abstract class AbstractCSSParser implements CSSParser {
      * Process a selector list.
      *
      * @return the selector list
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract SelectorList parseSelectorsInternal() throws ParseException;
 
@@ -524,7 +491,7 @@ public abstract class AbstractCSSParser implements CSSParser {
      * Process an expression.
      *
      * @return the lexical unit
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract LexicalUnit expr() throws ParseException;
 
@@ -532,7 +499,7 @@ public abstract class AbstractCSSParser implements CSSParser {
      * Process a prio.
      *
      * @return true or false
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract boolean prio() throws ParseException;
 
@@ -540,7 +507,7 @@ public abstract class AbstractCSSParser implements CSSParser {
      * Process a media list.
      *
      * @param ml the media list
-     * @throws com.gargoylesoftware.css.parser.javacc.ParseException in case of error
+     * @throws ParseException in case of error
      */
     protected abstract void mediaList(MediaQueryList ml) throws ParseException;
 

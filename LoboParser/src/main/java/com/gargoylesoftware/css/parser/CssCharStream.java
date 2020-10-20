@@ -9,9 +9,6 @@ import com.gargoylesoftware.css.parser.javacc.CharStream;
  * There is no processing of escaping in this class because the escaping is
  * part of the parser. CSS has some strange rules about that, so processing
  * unicode escapes in this class is too early.
- *
- * @author utente
- * @version $Id: $Id
  */
 @SuppressWarnings("all")
 public final class CssCharStream implements CharStream
@@ -136,11 +133,7 @@ public final class CssCharStream implements CharStream
     }
   }
 
-/**
- * {@inheritDoc}
- *
- * Start.
- */
+  /** Start. */
   @Override
 public final char BeginToken() throws java.io.IOException
   {
@@ -191,11 +184,7 @@ public final char BeginToken() throws java.io.IOException
     bufcolumn[bufpos] = column;
   }
 
-/**
- * {@inheritDoc}
- *
- * Read a character.
- */
+  /** Read a character. */
   @Override
 public final char readChar() throws java.io.IOException
   {
@@ -220,63 +209,49 @@ public final char readChar() throws java.io.IOException
 
   @Override
 @Deprecated
-  /** {@inheritDoc} */
+  /**
+   * @deprecated
+   * @see #getEndColumn
+   */
   public final int getColumn() {
     return bufcolumn[bufpos];
   }
 
   @Override
 @Deprecated
-  /** {@inheritDoc} */
+  /**
+   * @deprecated
+   * @see #getEndLine
+   */
   public final int getLine() {
     return bufline[bufpos];
   }
 
-/**
- * {@inheritDoc}
- *
- * Get token end column number.
- */
+  /** Get token end column number. */
   @Override
 public final int getEndColumn() {
     return bufcolumn[bufpos];
   }
 
-/**
- * {@inheritDoc}
- *
- * Get token end line number.
- */
+  /** Get token end line number. */
   @Override
 public final int getEndLine() {
     return bufline[bufpos];
   }
 
-/**
- * {@inheritDoc}
- *
- * Get token beginning column number.
- */
+  /** Get token beginning column number. */
   @Override
 public final int getBeginColumn() {
     return bufcolumn[tokenBegin];
   }
 
-/**
- * {@inheritDoc}
- *
- * Get token beginning line number.
- */
+  /** Get token beginning line number. */
   @Override
 public final int getBeginLine() {
     return bufline[tokenBegin];
   }
 
-/**
- * {@inheritDoc}
- *
- * Backup a number of characters.
- */
+  /** Backup a number of characters. */
   @Override
 public final void backup(int amount) {
     inBuf += amount;
@@ -286,7 +261,6 @@ public final void backup(int amount) {
 
   /**
    * Constructor.
-   *
    * @param dstream the stream to read from
    * @param startline startline
    * @param startcolumn startcolumn
@@ -306,7 +280,6 @@ public final void backup(int amount) {
 
   /**
    * Constructor.
-   *
    * @param dstream the stream to read from
    * @param startline startline
    * @param startcolumn startcolumn
@@ -316,11 +289,7 @@ public final void backup(int amount) {
     this(dstream, startline, startcolumn, 4096);
   }
 
-/**
- * {@inheritDoc}
- *
- * Get token literal value.
- */
+  /** Get token literal value. */
   @Override
 public final String GetImage()
   {
@@ -329,11 +298,7 @@ public final String GetImage()
     return new String(buffer, tokenBegin, bufsize - tokenBegin) + new String(buffer, 0, bufpos + 1);
   }
 
-/**
- * {@inheritDoc}
- *
- * Get the suffix.
- */
+  /** Get the suffix. */
   @Override
 public final char[] GetSuffix(int len)
   {
@@ -350,11 +315,7 @@ public final char[] GetSuffix(int len)
     return ret;
   }
 
-/**
- * {@inheritDoc}
- *
- * Reset buffer when finished.
- */
+  /** Reset buffer when finished. */
   @Override
 public void Done()
   {
@@ -365,7 +326,6 @@ public void Done()
 
   /**
    * Method to adjust line and column numbers for the start of a token.
-   *
    * @param newLine the new line
    * @param newCol the new column
    */
@@ -413,25 +373,21 @@ public void Done()
     column = bufcolumn[j];
   }
 
-  /** {@inheritDoc} */
   @Override
 public void setTabSize(int i) {
       tabSize = i;
   }
 
-  /** {@inheritDoc} */
   @Override
 public int getTabSize() {
       return tabSize;
   }
 
-  /** {@inheritDoc} */
   @Override
 public boolean getTrackLineColumn() {
       return trackLineColumn;
   }
 
-  /** {@inheritDoc} */
   @Override
 public void setTrackLineColumn(boolean tlc) {
       trackLineColumn = tlc;

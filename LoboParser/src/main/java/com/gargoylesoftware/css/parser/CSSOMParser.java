@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 Ronald Brill.
+ * Copyright (c) 2019-2020 Ronald Brill.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,10 +39,7 @@ import com.gargoylesoftware.css.parser.media.MediaQueryList;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
- * <p>CSSOMParser class.</p>
- *
  * @author Ronald Brill
- * @version $Id: $Id
  */
 public class CSSOMParser {
 
@@ -51,7 +48,6 @@ public class CSSOMParser {
 
     /**
      * Creates new CSSOMParser.
-     *
      * @param parser the parser
      */
     public CSSOMParser(final CSSParser parser) {
@@ -66,8 +62,6 @@ public class CSSOMParser {
     }
 
     /**
-     * <p>setErrorHandler.</p>
-     *
      * @param eh the error handler to be used
      */
     public void setErrorHandler(final CSSErrorHandler eh) {
@@ -80,7 +74,7 @@ public class CSSOMParser {
      * @param source the SAC input source
      * @param href the href
      * @return the CSSOM style sheet
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSStyleSheetImpl parseStyleSheet(final InputSource source, final String href) throws IOException {
         final CSSOMHandler handler = new CSSOMHandler();
@@ -99,7 +93,7 @@ public class CSSOMParser {
      *
      * @param styleDecl the input string
      * @return the CSSOM style declaration
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSStyleDeclarationImpl parseStyleDeclaration(final String styleDecl) throws IOException {
         final CSSStyleDeclarationImpl sd = new CSSStyleDeclarationImpl(null);
@@ -112,7 +106,7 @@ public class CSSOMParser {
      *
      * @param styleDecl the input string
      * @param sd the CSSOM style declaration
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public void parseStyleDeclaration(final CSSStyleDeclarationImpl sd, final String styleDecl) throws IOException {
         try (InputSource source = new InputSource(new StringReader(styleDecl))) {
@@ -129,7 +123,7 @@ public class CSSOMParser {
      *
      * @param propertyValue the input string
      * @return the css value
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public CSSValueImpl parsePropertyValue(final String propertyValue) throws IOException {
         try (InputSource source = new InputSource(new StringReader(propertyValue))) {
@@ -148,7 +142,7 @@ public class CSSOMParser {
      *
      * @param rule the input string
      * @return the css rule
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public AbstractCSSRuleImpl parseRule(final String rule) throws IOException {
         try (InputSource source = new InputSource(new StringReader(rule))) {
@@ -164,7 +158,7 @@ public class CSSOMParser {
      *
      * @param selectors the input string
      * @return the css selector list
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public SelectorList parseSelectors(final String selectors) throws IOException {
         try (InputSource source = new InputSource(new StringReader(selectors))) {
@@ -179,7 +173,7 @@ public class CSSOMParser {
      *
      * @param media the input string
      * @return the css media query list
-     * @throws java.io.IOException if the underlying SAC parser throws an java.io.IOException
+     * @throws IOException if the underlying SAC parser throws an IOException
      */
     public MediaQueryList parseMedia(final String media) throws IOException {
         try (InputSource source = new InputSource(new StringReader(media))) {
@@ -193,8 +187,6 @@ public class CSSOMParser {
     }
 
     /**
-     * <p>setParentStyleSheet.</p>
-     *
      * @param parentStyleSheet the new parent stylesheet
      */
     public void setParentStyleSheet(final CSSStyleSheetImpl parentStyleSheet) {
@@ -202,8 +194,6 @@ public class CSSOMParser {
     }
 
     /**
-     * <p>getParentStyleSheet.</p>
-     *
      * @return the parent style sheet
      */
     protected CSSStyleSheetImpl getParentStyleSheet() {
