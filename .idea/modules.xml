@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/LoboApi/LoboApi.iml" filepath="$PROJECT_DIR$/LoboApi/LoboApi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboCommon/LoboCommon.iml" filepath="$PROJECT_DIR$/LoboCommon/LoboCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboEvo/LoboEvo.iml" filepath="$PROJECT_DIR$/LoboEvo/LoboEvo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboHtml/LoboHtml.iml" filepath="$PROJECT_DIR$/LoboHtml/LoboHtml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboIViewer/LoboIViewer.iml" filepath="$PROJECT_DIR$/LoboIViewer/LoboIViewer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboJTattoo/LoboJTattoo.iml" filepath="$PROJECT_DIR$/LoboJTattoo/LoboJTattoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboLib/LoboLib.iml" filepath="$PROJECT_DIR$/LoboLib/LoboLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboPDF/LoboPDF.iml" filepath="$PROJECT_DIR$/LoboPDF/LoboPDF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LoboParser/LoboParser.iml" filepath="$PROJECT_DIR$/LoboParser/LoboParser.iml" />
+    </modules>
+  </component>
+</project>
