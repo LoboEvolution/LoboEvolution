@@ -3,6 +3,7 @@ package org.loboevolution.html.dom.domimpl;
 import org.loboevolution.html.dom.HTMLFormElement;
 import org.loboevolution.html.dom.HTMLOptionElement;
 import org.loboevolution.html.dom.HTMLSelectElement;
+import org.w3c.dom.Node;
 
 /**
  * <p>HTMLOptionElementImpl class.</p>
@@ -37,7 +38,11 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public HTMLFormElement getForm() {
-		return getForm();
+		Node parent = getParentNode();
+		while (parent != null && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
 	}
 
 	/** {@inheritDoc} */
