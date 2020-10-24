@@ -2,6 +2,7 @@ package org.loboevolution.net;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -130,10 +131,13 @@ public class HttpNetwork {
 					} else if (href.endsWith(".svg")) {
 						return null; //TODO SVG From URL
 					} else if (href.startsWith("https")) {
-						if(in == null || ImageIO.read(in) == null) {
-							return null;
+						if (in != null) {
+							BufferedImage bi = ImageIO.read(in);
+							if (bi != null) {
+								return Toolkit.getDefaultToolkit().createImage(bi.getSource());
+							}
 						}
-						return Toolkit.getDefaultToolkit().createImage(ImageIO.read(in).getSource());
+						return null;
 					} else if (href.endsWith(".gif")) {
 						try {
 							return new ImageIcon(u).getImage();
