@@ -328,7 +328,7 @@ public abstract class PDFFont {
             } catch (SecurityException e) {
                 // I suppose we just won't use the user fonts
             }
-            return paths.toArray(new String[paths.size()]);
+            return paths.toArray(new String[0]);
         } else {
             // Feel free to insert some reasonable defaults for other
             // (UNIX, most likely) platforms here

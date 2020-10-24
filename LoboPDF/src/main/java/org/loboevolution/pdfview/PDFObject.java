@@ -613,9 +613,9 @@ public class PDFObject {
         try {
             if (type == INDIRECT) {
                 StringBuilder str = new StringBuilder ();
-                str.append("Indirect to #" + ((PDFXref) value).getID());
+                str.append("Indirect to #").append(((PDFXref) value).getID());
                 try {
-                    str.append("\n" + dereference().toString());
+                    str.append("\n").append(dereference().toString());
                 } catch (Throwable t) {
                     str.append(t.toString());
                 }
@@ -640,7 +640,7 @@ public class PDFObject {
                         obj = getDictRef("S");
                     }
                     if (obj != null) {
-                        sb.append("/" + obj.getStringValue());
+                        sb.append("/").append(obj.getStringValue());
                     }
                 } else {
                     sb.append("Untyped");
@@ -651,7 +651,7 @@ public class PDFObject {
                 Map.Entry entry;
                 while (it.hasNext()) {
                     entry = (Map.Entry) it.next();
-                    sb.append("\n   " + entry.getKey() + "  " + entry.getValue());
+                    sb.append("\n   ").append(entry.getKey()).append("  ").append(entry.getValue());
                 }
                 return sb.toString();
             } else if (type == STREAM) {

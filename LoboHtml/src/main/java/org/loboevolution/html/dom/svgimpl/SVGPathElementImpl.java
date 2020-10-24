@@ -1100,17 +1100,17 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 
 	private String trimCommas(String params) {
 		int dot = 0;
-		String tok = "";
+		StringBuilder tok = new StringBuilder();
 		final List<String> tokensWithCollection = Strings.getTokensWithCollection(params, " ,.-\n\t\r");
 		
 		for (String token : tokensWithCollection) {
 			switch (token) {
 			case ".":
 				if (dot == 1) {
-					tok = tok + " .";
+					tok.append(" .");
 					dot = 0;
 				} else {
-					tok = tok + token;
+					tok.append(token);
 				}
 				dot++;
 				break;
@@ -1120,15 +1120,15 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 					dot = 0;
 					break;
 				case "-":
-					tok = tok + " ";
+					tok.append(" ");
 					dot = 0;
 					break;
 				default:
 					break;
 				}
-				tok = tok + token;
+				tok.append(token);
 			}
 		}
-		return Strings.isNotBlank(tok) ? tok : params;
+		return Strings.isNotBlank(tok.toString()) ? tok.toString() : params;
 	}
 }

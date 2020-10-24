@@ -23,7 +23,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -325,15 +324,15 @@ public class NameTable extends TrueTypeTable {
         StringBuilder buf = new StringBuilder();
         String indent = "    ";
         
-        buf.append(indent + "Format: " + getFormat() + "\n");
-        buf.append(indent + "Count : " + getCount() + "\n");
+        buf.append(indent).append("Format: ").append(getFormat()).append("\n");
+        buf.append(indent).append("Count : ").append(getCount()).append("\n");
 
         for (NameRecord rec : this.records.keySet()) {
-            buf.append(indent + " platformID: " + rec.platformID);
-            buf.append(" platformSpecificID: " + rec.platformSpecificID);
-            buf.append(" languageID: " + rec.languageID);
-            buf.append(" nameID: " + rec.nameID + "\n");
-            buf.append(indent + "  " + this.records.get(rec) + "\n");
+            buf.append(indent).append(" platformID: ").append(rec.platformID);
+            buf.append(" platformSpecificID: ").append(rec.platformSpecificID);
+            buf.append(" languageID: ").append(rec.languageID);
+            buf.append(" nameID: ").append(rec.nameID).append("\n");
+            buf.append(indent).append("  ").append(this.records.get(rec)).append("\n");
         }
         
         return buf.toString();

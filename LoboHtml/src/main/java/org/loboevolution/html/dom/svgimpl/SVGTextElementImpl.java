@@ -199,7 +199,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 	}
 	
 	private String getText() {
-		String text = "";
+		StringBuilder text = new StringBuilder();
 		String xmlSpace = getXMLspace();
 		if (Strings.isNotBlank(xmlSpace)) {
 			xmlSpace = "default";
@@ -209,7 +209,7 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 			for (Node child : Nodes.iterable(children)) {
 				if (child.getNodeType() == Node.TEXT_NODE) {
 					String nodeValue = child.getNodeValue();
-					String childText = "";
+					StringBuilder childText = new StringBuilder();
 					if ("default".equals(xmlSpace)) {
 						int newLineIndex = nodeValue.indexOf('\n');
 						while (newLineIndex != -1) {
@@ -225,23 +225,23 @@ public class SVGTextElementImpl extends SVGGraphic implements SVGTextElement {
 						nodeValue = nodeValue.replace('\t', ' ');
 						StringTokenizer st = new StringTokenizer(nodeValue);
 						while (st.hasMoreTokens()) {
-							childText += st.nextToken() + " ";
+							childText.append(st.nextToken()).append(" ");
 						}
-						childText = childText.trim();
+						childText = new StringBuilder(childText.toString().trim());
 					} else {
 						nodeValue = nodeValue.replace('\n', ' ');
 						nodeValue = nodeValue.replace('\r', ' ');
 						nodeValue = nodeValue.replace('\t', ' ');
-						childText = nodeValue;
+						childText = new StringBuilder(nodeValue);
 					}
-					text += childText + " ";
+					text.append(childText).append(" ");
 				}
 			}
 		}
 		if (text.length() > 0) {
 			return text.substring(0, text.length() - 1);
 		} else {
-			return text;
+			return text.toString();
 		}
 	}
 }

@@ -289,7 +289,7 @@ public class Cache {
     }
 
     /** the basic information about a page or image */
-    class Record {
+    static class Record {
 
         /** the page or image itself */
         Object value;

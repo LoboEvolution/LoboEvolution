@@ -2,9 +2,7 @@ package org.loboevolution.gui;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.Frame;
 
 import javax.swing.Box;
 import javax.swing.JComponent;

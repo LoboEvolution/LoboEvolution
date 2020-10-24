@@ -22,7 +22,6 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -219,12 +218,11 @@ public class CmapTable extends TrueTypeTable {
         StringBuilder buf = new StringBuilder();
         String indent = "    ";
     
-        buf.append(indent + "Version: " + this.getVersion() + "\n");
-        buf.append(indent + "NumMaps: " + this.getNumberSubtables() + "\n");
+        buf.append(indent).append("Version: ").append(this.getVersion()).append("\n");
+        buf.append(indent).append("NumMaps: ").append(this.getNumberSubtables()).append("\n");
 
         for (CmapSubtable key : this.subtables.keySet()) {
-            buf.append(indent + "Map: platformID: " + key.platformID +
-                    " PlatformSpecificID: " + key.platformSpecificID + "\n");
+            buf.append(indent).append("Map: platformID: ").append(key.platformID).append(" PlatformSpecificID: ").append(key.platformSpecificID).append("\n");
 
             CMap map = this.subtables.get(key);
 

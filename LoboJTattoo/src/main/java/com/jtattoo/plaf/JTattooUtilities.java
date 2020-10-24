@@ -458,19 +458,19 @@ public class JTattooUtilities {
 		if (javaVersion == null) {
 			try {
 				String ver = System.getProperty("java.version");
-				String version = "";
+				StringBuilder version = new StringBuilder();
 				boolean firstPoint = true;
 				for (int i = 0; i < ver.length(); i++) {
 					if (ver.charAt(i) == '.') {
 						if (firstPoint) {
-							version += ver.charAt(i);
+							version.append(ver.charAt(i));
 						}
 						firstPoint = false;
 					} else if (Character.isDigit(ver.charAt(i))) {
-						version += ver.charAt(i);
+						version.append(ver.charAt(i));
 					}
 				}
-				javaVersion = Double.valueOf(version);
+				javaVersion = Double.valueOf(version.toString());
 			} catch (NumberFormatException ex) {
 				javaVersion = 1.3;
 			}
@@ -487,19 +487,19 @@ public class JTattooUtilities {
 		if (osVersion == null) {
 			try {
 				String ver = System.getProperties().getProperty("os.version");
-				String version = "";
+				StringBuilder version = new StringBuilder();
 				boolean firstPoint = true;
 				for (int i = 0; i < ver.length(); i++) {
 					if (ver.charAt(i) == '.') {
 						if (firstPoint) {
-							version += ver.charAt(i);
+							version.append(ver.charAt(i));
 						}
 						firstPoint = false;
 					} else if (Character.isDigit(ver.charAt(i))) {
-						version += ver.charAt(i);
+						version.append(ver.charAt(i));
 					}
 				}
-				osVersion = Double.valueOf(version);
+				osVersion = Double.valueOf(version.toString());
 			} catch (NumberFormatException ex) {
 				osVersion = 1.0;
 			}

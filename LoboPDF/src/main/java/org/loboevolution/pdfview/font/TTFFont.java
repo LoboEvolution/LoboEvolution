@@ -241,7 +241,7 @@ public class TTFFont extends OutlineFont {
         int curContour = 0;
 
         // the render state
-        RenderState rs = new RenderState ();
+        RenderState rs = new RenderState();
         rs.gp = new GeneralPath ();
 
         for (int i = 0; i < g.getNumPoints (); i++) {
@@ -334,7 +334,7 @@ public class TTFFont extends OutlineFont {
         rs.prevOff = rec;
     }
 
-    class RenderState {
+    static class RenderState {
         // the shape itself
 
         GeneralPath gp;

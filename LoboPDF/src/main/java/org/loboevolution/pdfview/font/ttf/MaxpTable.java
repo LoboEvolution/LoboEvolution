@@ -405,21 +405,21 @@ public class MaxpTable extends TrueTypeTable {
         StringBuilder buf = new StringBuilder();
         String indent = "    ";
         
-        buf.append(indent + "Version          : " + Integer.toHexString(getVersion()) + "\n");
-        buf.append(indent + "NumGlyphs        : " + getNumGlyphs() + "\n");
-        buf.append(indent + "MaxPoints        : " + getMaxPoints() + "\n");
-        buf.append(indent + "MaxContours      : " + getMaxContours() + "\n");
-        buf.append(indent + "MaxCompPoints    : " + getMaxComponentPoints() + "\n");
-        buf.append(indent + "MaxCompContours  : " + getMaxComponentContours() + "\n");
-        buf.append(indent + "MaxZones         : " + getMaxZones() + "\n");
-        buf.append(indent + "MaxTwilightPoints: " + getMaxTwilightPoints() + "\n");
-        buf.append(indent + "MaxStorage       : " + getMaxStorage() + "\n");
-        buf.append(indent + "MaxFuncDefs      : " + getMaxFunctionDefs() + "\n");
-        buf.append(indent + "MaxInstDefs      : " + getMaxInstructionDefs() + "\n");
-        buf.append(indent + "MaxStackElements : " + getMaxStackElements() + "\n");
-        buf.append(indent + "MaxSizeInst      : " + getMaxSizeOfInstructions() + "\n");
-        buf.append(indent + "MaxCompElements  : " + getMaxComponentElements() + "\n");
-        buf.append(indent + "MaxCompDepth     : " + getMaxComponentDepth() + "\n");
+        buf.append(indent).append("Version          : ").append(Integer.toHexString(getVersion())).append("\n");
+        buf.append(indent).append("NumGlyphs        : ").append(getNumGlyphs()).append("\n");
+        buf.append(indent).append("MaxPoints        : ").append(getMaxPoints()).append("\n");
+        buf.append(indent).append("MaxContours      : ").append(getMaxContours()).append("\n");
+        buf.append(indent).append("MaxCompPoints    : ").append(getMaxComponentPoints()).append("\n");
+        buf.append(indent).append("MaxCompContours  : ").append(getMaxComponentContours()).append("\n");
+        buf.append(indent).append("MaxZones         : ").append(getMaxZones()).append("\n");
+        buf.append(indent).append("MaxTwilightPoints: ").append(getMaxTwilightPoints()).append("\n");
+        buf.append(indent).append("MaxStorage       : ").append(getMaxStorage()).append("\n");
+        buf.append(indent).append("MaxFuncDefs      : ").append(getMaxFunctionDefs()).append("\n");
+        buf.append(indent).append("MaxInstDefs      : ").append(getMaxInstructionDefs()).append("\n");
+        buf.append(indent).append("MaxStackElements : ").append(getMaxStackElements()).append("\n");
+        buf.append(indent).append("MaxSizeInst      : ").append(getMaxSizeOfInstructions()).append("\n");
+        buf.append(indent).append("MaxCompElements  : ").append(getMaxComponentElements()).append("\n");
+        buf.append(indent).append("MaxCompDepth     : ").append(getMaxComponentDepth()).append("\n");
     
         return buf.toString();
     }

@@ -45,7 +45,7 @@ import com.jtattoo.plaf.JTattooUtilities;
 public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 
 	// ------------------------------------------------------------------------------
-	private class TitleButton extends BaseTitleButton {
+	private static class TitleButton extends BaseTitleButton {
 
 		private static final long serialVersionUID = 1L;
 

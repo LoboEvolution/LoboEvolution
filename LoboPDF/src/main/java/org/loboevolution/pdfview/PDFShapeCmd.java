@@ -189,8 +189,8 @@ public class PDFShapeCmd extends PDFCmd {
     public String getDetails() {
         StringBuilder sb = new StringBuilder();
         Rectangle2D b = this.gp.getBounds2D();
-        sb.append("ShapeCommand at: " + b.getX() + ", " + b.getY() + "\n");
-        sb.append("Size: " + b.getWidth() + " x " + b.getHeight() + "\n");
+        sb.append("ShapeCommand at: ").append(b.getX()).append(", ").append(b.getY()).append("\n");
+        sb.append("Size: ").append(b.getWidth()).append(" x ").append(b.getHeight()).append("\n");
         sb.append("Mode: ");
         if ((this.style & FILL) != 0) {
             sb.append("FILL ");

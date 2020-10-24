@@ -941,9 +941,7 @@ public final class JBIG2Bitmap {
 
 		else if (combOp == 4) {
 			if (x == 0 && y == 0 && srcHeight == height && srcWidth == width) {
-				for (int i=0; i < data.w.length; i++) {
-					data.w[i] = bitmap.data.w[i];
-				}
+				System.arraycopy(bitmap.data.w, 0, data.w, 0, data.w.length);
 			}
 			else {
 				for (int row = y; row < y + srcHeight; row++) {

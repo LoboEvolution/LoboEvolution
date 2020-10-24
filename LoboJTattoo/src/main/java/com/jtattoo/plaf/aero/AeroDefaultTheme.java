@@ -119,12 +119,8 @@ public class AeroDefaultTheme extends AbstractTheme {
 		super.setUpColorArrs();
 		Color color1[] = ColorHelper.createColorArr(controlColorLight, controlColorDark, 6);
 		Color color2[] = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 10), controlColorLight, 15);
-		for (int i = 0; i < 6; i++) {
-			DEFAULT_COLORS[i] = color1[i];
-		}
-		for (int i = 5; i < 20; i++) {
-			DEFAULT_COLORS[i] = color2[i - 5];
-		}
+		System.arraycopy(color1, 0, DEFAULT_COLORS, 0, 6);
+		System.arraycopy(color2, 0, DEFAULT_COLORS, 5, 15);
 		for (int i = 0; i < 20; i++) {
 			HIDEFAULT_COLORS[i] = ColorHelper.brighter(DEFAULT_COLORS[i], 60);
 		}
@@ -136,12 +132,8 @@ public class AeroDefaultTheme extends AbstractTheme {
 
 		color1 = ColorHelper.createColorArr(windowTitleColorLight, windowTitleColorDark, 6);
 		color2 = ColorHelper.createColorArr(ColorHelper.brighter(windowTitleColorDark, 10), windowTitleColorLight, 15);
-		for (int i = 0; i < 6; i++) {
-			WINDOW_TITLE_COLORS[i] = color1[i];
-		}
-		for (int i = 5; i < 20; i++) {
-			WINDOW_TITLE_COLORS[i] = color2[i - 5];
-		}
+		System.arraycopy(color1, 0, WINDOW_TITLE_COLORS, 0, 6);
+		System.arraycopy(color2, 0, WINDOW_TITLE_COLORS, 5, 15);
 
 		MENUBAR_COLORS = ColorHelper.createColorArr(menuColorLight, menuColorDark, 20);
 		TOOLBAR_COLORS = ColorHelper.createColorArr(toolbarColorLight, toolbarColorDark, 20);

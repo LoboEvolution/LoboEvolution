@@ -127,7 +127,7 @@ public class LAFSettings implements Serializable {
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
-		return fonts.toArray(new String[fonts.size()]);
+		return fonts.toArray(new String[0]);
 	}
 	
 	/**

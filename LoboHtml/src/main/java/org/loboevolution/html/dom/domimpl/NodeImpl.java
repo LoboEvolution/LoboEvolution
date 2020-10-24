@@ -138,7 +138,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			if (child instanceof HTMLElementImpl) {
 				((HTMLElementImpl) child).appendOuterHTMLImpl(buffer);
 			} else if (child instanceof Comment) {
-				buffer.append("<!--" + ((Comment) child).getTextContent() + "-->");
+				buffer.append("<!--").append(((Comment) child).getTextContent()).append("-->");
 			} else if (child instanceof Text) {
 				final String text = ((Text) child).getTextContent();
 				final String encText = htmlEncodeChildText(text);

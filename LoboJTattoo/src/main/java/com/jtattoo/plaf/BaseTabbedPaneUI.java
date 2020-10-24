@@ -916,7 +916,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
 	}
 
-	private class ScrollableTabViewport extends JViewport implements UIResource {
+	private static class ScrollableTabViewport extends JViewport implements UIResource {
 
 		/**
 		 *
@@ -1644,9 +1644,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		protected void rotateTabRuns(int tabPlacement, int selectedRun) {
 			for (int i = 0; i < selectedRun; i++) {
 				int save = tabRuns[0];
-				for (int j = 1; j < runCount; j++) {
-					tabRuns[j - 1] = tabRuns[j];
-				}
+                if (runCount - 1 >= 0) System.arraycopy(tabRuns, 1, tabRuns, 0, runCount - 1);
 				tabRuns[runCount - 1] = save;
 			}
 		}
@@ -2079,7 +2077,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * class should be treated as a &quot;protected&quot; inner class. Instantiate
 	 * it only within subclasses of BaseTabbedPaneUI.
 	 */
-	public class TabSelectionHandler implements ChangeListener {
+	public static class TabSelectionHandler implements ChangeListener {
 
 		@Override
 		public void stateChanged(ChangeEvent e) {

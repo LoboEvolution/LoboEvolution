@@ -450,23 +450,23 @@ public class HeadTable extends TrueTypeTable {
         StringBuilder buf = new StringBuilder();
         String indent = "    ";
         
-        buf.append(indent + "Version          : " + Integer.toHexString(getVersion()) + "\n");
-        buf.append(indent + "Revision         : " + Integer.toHexString(getFontRevision()) + "\n");
-        buf.append(indent + "ChecksumAdj      : " + Integer.toHexString(getChecksumAdjustment()) + "\n");
-        buf.append(indent + "MagicNumber      : " + Integer.toHexString(getMagicNumber()) + "\n");
-        buf.append(indent + "Flags            : " + Integer.toBinaryString(getFlags()) + "\n");
-        buf.append(indent + "UnitsPerEm       : " + getUnitsPerEm() + "\n");
-        buf.append(indent + "Created          : " + new Date(getCreated()) + "\n");
-        buf.append(indent + "Modified         : " + new Date(getModified()) + "\n");
-        buf.append(indent + "XMin             : " + getXMin() + "\n");
-        buf.append(indent + "XMax             : " + getXMax() + "\n");
-        buf.append(indent + "YMin             : " + getYMin() + "\n");
-        buf.append(indent + "YMax             : " + getYMax() + "\n");
-        buf.append(indent + "MacStyle         : " + Integer.toBinaryString(getMacStyle()) + "\n");
-        buf.append(indent + "LowestPPem       : " + getLowestRecPPem() + "\n");
-        buf.append(indent + "FontDirectionHint: " + getFontDirectionHint() + "\n");
-        buf.append(indent + "IndexToLocFormat : " + getIndexToLocFormat() + "\n");
-        buf.append(indent + "GlyphDataFormat  : " + getGlyphDataFormat() + "\n");
+        buf.append(indent).append("Version          : ").append(Integer.toHexString(getVersion())).append("\n");
+        buf.append(indent).append("Revision         : ").append(Integer.toHexString(getFontRevision())).append("\n");
+        buf.append(indent).append("ChecksumAdj      : ").append(Integer.toHexString(getChecksumAdjustment())).append("\n");
+        buf.append(indent).append("MagicNumber      : ").append(Integer.toHexString(getMagicNumber())).append("\n");
+        buf.append(indent).append("Flags            : ").append(Integer.toBinaryString(getFlags())).append("\n");
+        buf.append(indent).append("UnitsPerEm       : ").append(getUnitsPerEm()).append("\n");
+        buf.append(indent).append("Created          : ").append(new Date(getCreated())).append("\n");
+        buf.append(indent).append("Modified         : ").append(new Date(getModified())).append("\n");
+        buf.append(indent).append("XMin             : ").append(getXMin()).append("\n");
+        buf.append(indent).append("XMax             : ").append(getXMax()).append("\n");
+        buf.append(indent).append("YMin             : ").append(getYMin()).append("\n");
+        buf.append(indent).append("YMax             : ").append(getYMax()).append("\n");
+        buf.append(indent).append("MacStyle         : ").append(Integer.toBinaryString(getMacStyle())).append("\n");
+        buf.append(indent).append("LowestPPem       : ").append(getLowestRecPPem()).append("\n");
+        buf.append(indent).append("FontDirectionHint: ").append(getFontDirectionHint()).append("\n");
+        buf.append(indent).append("IndexToLocFormat : ").append(getIndexToLocFormat()).append("\n");
+        buf.append(indent).append("GlyphDataFormat  : ").append(getGlyphDataFormat()).append("\n");
     
         return buf.toString();
     }

@@ -29,7 +29,7 @@ public class RSSElement extends HTMLElementImpl {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getText() {
-		String text = "";
+		StringBuilder text = new StringBuilder();
 		if (hasChildNodes()) {
 			NodeList children = getChildNodes();
 			for (Node child : Nodes.iterable(children)) {
@@ -40,14 +40,14 @@ public class RSSElement extends HTMLElementImpl {
 					nodeValue = nodeValue.replace('\r', ' ');
 					nodeValue = nodeValue.replace('\t', ' ');
 					childText = nodeValue;
-					text += childText + " ";
+					text.append(childText).append(" ");
 				}
 			}
 		}
 		if (text.length() > 0) {
 			return text.substring(0, text.length() - 1);
 		} else {
-			return text;
+			return text.toString();
 		}
 	}
 

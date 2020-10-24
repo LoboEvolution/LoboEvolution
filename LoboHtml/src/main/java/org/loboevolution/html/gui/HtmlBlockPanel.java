@@ -1023,8 +1023,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			}
 		} else {
 			// Remove children not in the set.
-			final Set<Component> workingSet = new HashSet<Component>();
-			workingSet.addAll(c);
+            final Set<Component> workingSet = new HashSet<Component>(c);
 			int count = getComponentCount();
 			for (int i = 0; i < count;) {
 				final Component component = getComponent(i);

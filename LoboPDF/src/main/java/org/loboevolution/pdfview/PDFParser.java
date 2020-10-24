@@ -990,9 +990,9 @@ public class PDFParser extends BaseWatchable {
         } else {
             progress = this.loc + " of " + this.stream.length;
         }
-        String operators = "";
+        StringBuilder operators = new StringBuilder();
         for (Object operator : this.stack) {
-            operators += operator + " ";
+            operators.append(operator).append(" ");
         }
         if (PDFDebugger.DEBUG_OPERATORS) {
             PDFDebugger.debug("parser{" + hashCode() + "} " + progress + ": #" + mDebugCommandIndex + " \t" + operators + obj.name);
@@ -1595,7 +1595,7 @@ public class PDFParser extends BaseWatchable {
     * stroke and fill color spaces, as well as the text formatting
     * parameters.
     */
-    class ParserState implements Cloneable {
+    static class ParserState implements Cloneable {
         /** the fill color space */
         PDFColorSpace fillCS;
         /** the stroke color space */

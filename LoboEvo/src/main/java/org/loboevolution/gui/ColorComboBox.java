@@ -20,7 +20,7 @@ import javax.swing.border.MatteBorder;
  */
 public class ColorComboBox extends JComboBox<Object> {
 
-	class ColorComboRenderer extends JPanel implements ListCellRenderer<Object> {
+	static class ColorComboRenderer extends JPanel implements ListCellRenderer<Object> {
 		private static final long serialVersionUID = 1L;
 		protected Color m_c = Color.black;
 

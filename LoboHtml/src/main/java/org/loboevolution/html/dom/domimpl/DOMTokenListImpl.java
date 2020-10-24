@@ -72,15 +72,15 @@ public class DOMTokenListImpl implements DOMTokenList {
 	public void remove(String token) {
 
 		String[] listString = itemValue.split(" ");
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		for (String element2 : listString) {
 			String test = element2;
 			if (!test.equals(token)) {
-				result += test;
+				result.append(test);
 			}
 		}
 
-		element.setClassName(result);
+		element.setClassName(result.toString());
 
 	}
 

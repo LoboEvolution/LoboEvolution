@@ -787,7 +787,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 				}
 			}
 		}
-		Boolean hhs;
+		boolean hhs;
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
 			hhs = Boolean.FALSE;

@@ -305,7 +305,7 @@ public class PostTable extends TrueTypeTable {
     }
     
     /** An empty post map */
-    class PostMap {
+    static class PostMap {
         /** map a name to a character index */
         short getCharIndex(String charName) {
             return (short) 0;

@@ -528,7 +528,7 @@ public class HtmlValues {
 		if (currentWord != null) {
 			tokens.add(currentWord.toString());
 		}
-		return tokens.toArray(new String[tokens.size()]);
+		return tokens.toArray(new String[0]);
 	}
 
 	/**

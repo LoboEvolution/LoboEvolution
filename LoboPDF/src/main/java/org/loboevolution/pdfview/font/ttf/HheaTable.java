@@ -171,19 +171,19 @@ public class HheaTable extends TrueTypeTable {
         StringBuilder buf = new StringBuilder();
         String indent = "    ";
         
-        buf.append(indent + "Version             : " + Integer.toHexString(getVersion()) + "\n");
-        buf.append(indent + "Ascent              : " + getAscent() + "\n");
-        buf.append(indent + "Descent             : " + getDescent() + "\n");
-        buf.append(indent + "LineGap             : " + getLineGap() + "\n");
-        buf.append(indent + "AdvanceWidthMax     : " + getAdvanceWidthMax() + "\n");
-        buf.append(indent + "MinLSB              : " + getMinLeftSideBearing() + "\n");
-        buf.append(indent + "MinRSB              : " + getMinRightSideBearing() + "\n");
-        buf.append(indent + "MaxExtent           : " + getXMaxExtent() + "\n");
-        buf.append(indent + "CaretSlopeRise      : " + getCaretSlopeRise() + "\n");
-        buf.append(indent + "CaretSlopeRun       : " + getCaretSlopeRun() + "\n");
-        buf.append(indent + "CaretOffset         : " + getCaretOffset() + "\n");
-        buf.append(indent + "MetricDataFormat    : " + getMetricDataFormat() + "\n");
-        buf.append(indent + "NumOfLongHorMetrics : " + getNumOfLongHorMetrics() + "\n");
+        buf.append(indent).append("Version             : ").append(Integer.toHexString(getVersion())).append("\n");
+        buf.append(indent).append("Ascent              : ").append(getAscent()).append("\n");
+        buf.append(indent).append("Descent             : ").append(getDescent()).append("\n");
+        buf.append(indent).append("LineGap             : ").append(getLineGap()).append("\n");
+        buf.append(indent).append("AdvanceWidthMax     : ").append(getAdvanceWidthMax()).append("\n");
+        buf.append(indent).append("MinLSB              : ").append(getMinLeftSideBearing()).append("\n");
+        buf.append(indent).append("MinRSB              : ").append(getMinRightSideBearing()).append("\n");
+        buf.append(indent).append("MaxExtent           : ").append(getXMaxExtent()).append("\n");
+        buf.append(indent).append("CaretSlopeRise      : ").append(getCaretSlopeRise()).append("\n");
+        buf.append(indent).append("CaretSlopeRun       : ").append(getCaretSlopeRun()).append("\n");
+        buf.append(indent).append("CaretOffset         : ").append(getCaretOffset()).append("\n");
+        buf.append(indent).append("MetricDataFormat    : ").append(getMetricDataFormat()).append("\n");
+        buf.append(indent).append("NumOfLongHorMetrics : ").append(getNumOfLongHorMetrics()).append("\n");
         return buf.toString();
     }
     

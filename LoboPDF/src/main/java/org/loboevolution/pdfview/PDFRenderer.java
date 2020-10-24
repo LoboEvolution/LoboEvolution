@@ -976,7 +976,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         return dstImage;
     }
 
-    class GraphicsState implements Cloneable {
+    static class GraphicsState implements Cloneable {
 
         /** the clip region */
         Shape cliprgn;

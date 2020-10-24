@@ -192,7 +192,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 	}
 
 	private String getText() {
-		String text = "";
+		StringBuilder text = new StringBuilder();
 		if (hasChildNodes()) {
 			NodeList children = getChildNodes();
 			for (Node child : Nodes.iterable(children)) {
@@ -203,7 +203,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 					nodeValue = nodeValue.replace('\r', ' ');
 					nodeValue = nodeValue.replace('\t', ' ');
 					childText = nodeValue;
-					text += childText + " ";
+					text.append(childText).append(" ");
 				}
 			}
 		}
@@ -211,7 +211,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 		if (text.length() > 0) {
 			return text.substring(0, text.length() - 1);
 		} else {
-			return text;
+			return text.toString();
 		}
 	}
 }

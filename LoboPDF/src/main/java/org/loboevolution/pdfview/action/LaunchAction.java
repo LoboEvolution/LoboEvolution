@@ -179,7 +179,7 @@ public class LaunchAction extends PDFAction {
 	 * @author  xond
 	 * @since 08.07.2009
 	 ****************************************************************************/
-	public class WinLaunchParam {
+	public static class WinLaunchParam {
 		private String fileName;
 		private String directory;
 		private String operation = "open";

@@ -373,10 +373,10 @@ public class ColorFactory {
 	}
 
 	private Color HexToColor(String hex) {
-		Integer red = -1;
-		Integer green = -1;
-		Integer blue = -1;
-		Integer alpha = -1;
+		int red = -1;
+		int green = -1;
+		int blue = -1;
+		int alpha = -1;
 		hex = hex.replace("#", "");
 		switch (hex.length()) {
 		case 6:

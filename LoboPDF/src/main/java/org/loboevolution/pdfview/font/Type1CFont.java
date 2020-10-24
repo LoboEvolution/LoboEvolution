@@ -595,7 +595,7 @@ public class Type1CFont extends OutlineFont {
             if (c >= 32 && c < 128) {
                 sb.append (c);
             } else {
-                sb.append ("<" + (int) c + ">");
+                sb.append("<").append((int) c).append(">");
             }
         }
         return sb.toString ();

@@ -277,18 +277,18 @@ public class GradientStyle {
 	}
 
 	private String gradientValues(String quote) {
-		String values = "";
+		StringBuilder values = new StringBuilder();
 		String[] split = quote.split(",");
 		for (int i = 0; i < split.length; i++) {
 			String qut = split[i];
 			if (!qut.contains("to") && !qut.contains("deg")) {
 				if (i == split.length - 1) {
-					values += qut;
+					values.append(qut);
 				} else {
-					values += qut + ",";
+					values.append(qut).append(",");
 				}
 			}
 		}
-		return values.trim();
+		return values.toString().trim();
 	}
 }

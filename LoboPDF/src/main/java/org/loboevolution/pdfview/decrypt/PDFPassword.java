@@ -168,6 +168,7 @@ public class PDFPassword {
             for (int i = 0; !alreadyGenerated && i < possibilties.size(); ++i) {
                 if (Arrays.equals(possibilties.get(i), generated)) {
                     alreadyGenerated = true;
+                    break;
                 }
             }
             if (!alreadyGenerated) {

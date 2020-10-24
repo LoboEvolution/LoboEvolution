@@ -23,7 +23,6 @@ package org.loboevolution.pdfview.font.ttf;
 
 import java.nio.ByteBuffer;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -375,19 +374,19 @@ public class CMapFormat4 extends CMap {
         String indent = "        ";
         
         buf.append(super.toString());
-        buf.append(indent + "SegmentCount : " + getSegmentCount() + "\n");
-        buf.append(indent + "SearchRange  : " + getSearchRange() + "\n");
-        buf.append(indent + "EntrySelector: " + getEntrySelector() + "\n");
-        buf.append(indent + "RangeShift   : " + getRangeShift() + "\n");
+        buf.append(indent).append("SegmentCount : ").append(getSegmentCount()).append("\n");
+        buf.append(indent).append("SearchRange  : ").append(getSearchRange()).append("\n");
+        buf.append(indent).append("EntrySelector: ").append(getEntrySelector()).append("\n");
+        buf.append(indent).append("RangeShift   : ").append(getRangeShift()).append("\n");
 
         for (Segment s : this.segments.keySet()) {
             buf.append(indent);
-            buf.append("Segment: " + Integer.toHexString(s.startCode));
-            buf.append("-" + Integer.toHexString(s.endCode) + " ");
-            buf.append("hasMap: " + s.hasMap + " ");
+            buf.append("Segment: ").append(Integer.toHexString(s.startCode));
+            buf.append("-").append(Integer.toHexString(s.endCode)).append(" ");
+            buf.append("hasMap: ").append(s.hasMap).append(" ");
 
             if (!s.hasMap) {
-                buf.append("delta: " + this.segments.get(s));
+                buf.append("delta: ").append(this.segments.get(s));
             }
 
             buf.append("\n");

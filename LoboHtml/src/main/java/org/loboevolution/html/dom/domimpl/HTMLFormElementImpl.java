@@ -26,6 +26,7 @@ package org.loboevolution.html.dom.domimpl;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.loboevolution.html.dom.HTMLCollection;
 import org.loboevolution.html.dom.HTMLFormElement;
@@ -281,9 +282,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 		if (context != null) {
 			final ArrayList<FormInput> formInputs = new ArrayList<FormInput>();
 			if (extraFormInputs != null) {
-				for (final FormInput extraFormInput : extraFormInputs) {
-					formInputs.add(extraFormInput);
-				}
+				Collections.addAll(formInputs, extraFormInputs);
 			}
 			visit(node -> {
 				if (node instanceof HTMLElementImpl) {

@@ -41,11 +41,11 @@ public class GoogleChromeData extends BrowserData {
 		final File f = new File(path);
 
 		try (Scanner scan = new Scanner(f)) {
-			String str = "";
+			StringBuilder str = new StringBuilder();
 			while (scan.hasNext()) {
-				str += scan.nextLine();
+				str.append(scan.nextLine());
 			}
-			final JSONObject jsonObject = new JSONObject(str);
+			final JSONObject jsonObject = new JSONObject(str.toString());
 			final JSONObject root = jsonObject.getJSONObject("roots");
 			final JSONObject bookmarks = root.getJSONObject("bookmark_bar");
 			final JSONArray childrens = bookmarks.getJSONArray("children");

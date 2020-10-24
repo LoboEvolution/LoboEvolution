@@ -256,9 +256,7 @@ class RLine extends BaseRCollection {
 			if (cancel) {
 				// Oops. Need to undo overflow.
 				if (overflow != null) {
-					for (Renderable renderable : overflow) {
-						renderables.add(renderable);
-					}
+					renderables.addAll(overflow);
 				}
 			} else {
 				this.xoffset = newOffset;

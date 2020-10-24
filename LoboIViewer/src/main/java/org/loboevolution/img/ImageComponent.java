@@ -38,8 +38,6 @@ import java.util.List;
 
 import javax.swing.CellRendererPane;
 import javax.swing.JComponent;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import org.loboevolution.common.Objects;
 

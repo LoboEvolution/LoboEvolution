@@ -257,7 +257,7 @@ public class PatternType1 extends PDFPattern {
      * A simple paint context that uses an existing raster in device
      * space to generate pixels
      */
-    class Type1PaintContext implements PaintContext {
+    static class Type1PaintContext implements PaintContext {
         /** the color model */
         private ColorModel colorModel;
         
@@ -354,9 +354,7 @@ public class PatternType1 extends PDFPattern {
                     } 
                             
                     int base = (j * w + i) * (numComponents + 1);
-                    for (int c = 0; c < pixel.length; c++) {
-                        imgData[base + c] = pixel[c];
-                    }
+                    System.arraycopy(pixel, 0, imgData, base + 0, pixel.length);
                 }
             }
             
