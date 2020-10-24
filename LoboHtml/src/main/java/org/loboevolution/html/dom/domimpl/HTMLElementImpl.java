@@ -914,11 +914,8 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		this.nodeList.clear();
 		// Should not synchronize around parser probably.
 		try {
-			final Reader reader = new StringReader(newHtml);
-			try {
+			try (Reader reader = new StringReader(newHtml)) {
 				parser.parse(reader, this);
-			} finally {
-				reader.close();
 			}
 		} catch (final Exception thrown) {
 			this.warn("setInnerHTML(): Error setting inner HTML.", thrown);

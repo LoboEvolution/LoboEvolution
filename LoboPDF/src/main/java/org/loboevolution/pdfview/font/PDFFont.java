@@ -257,16 +257,10 @@ public abstract class PDFFont {
                         if (ttfFile.canRead()) {
                             try {
                                 byte[] fontBytes;
-                                RandomAccessFile fontRa = null;
-                                try {
-                                    fontRa = new RandomAccessFile (ttfFile, "r");
-                                    int size = (int) fontRa.length ();
+                                try (RandomAccessFile fontRa = new RandomAccessFile(ttfFile, "r")) {
+                                    int size = (int) fontRa.length();
                                     fontBytes = new byte[size];
                                     fontRa.readFully(fontBytes);
-                                } finally {
-                                    if (fontRa != null) {
-                                        fontRa.close();
-                                    }
                                 }
 
                                 TrueTypeFont ttf = TrueTypeFont.parseFont(fontBytes);

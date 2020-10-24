@@ -1127,8 +1127,7 @@ public class HtmlRendererContext {
 					return;
 				}
 			}
-			final InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-			try {
+			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection)) {
 				sourceCode = null;
 				final RecordedInputStream rin = new RecordedInputStream(in, 1000000);
 				final InputStream bin = new BufferedInputStream(rin, 8192);
@@ -1150,8 +1149,6 @@ public class HtmlRendererContext {
 				} catch (final BufferExceededException bee) {
 					sourceCode = "[TOO BIG]";
 				}
-			} finally {
-				in.close();
 			}
 		} finally {
 			this.currentConnection = null;
