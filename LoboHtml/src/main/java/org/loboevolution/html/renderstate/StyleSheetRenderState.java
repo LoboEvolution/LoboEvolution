@@ -1445,12 +1445,12 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.setBackgroundXPosition(0);
 				break;
 			case BOTTOM:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(100);
+				binfo.setBackgroundXPositionAbsolute(false);
+				binfo.setBackgroundXPosition(100);
 				break;
 			case TOP:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(0);
+				binfo.setBackgroundXPositionAbsolute(false);
+				binfo.setBackgroundXPosition(0);
 				break;
 			case INHERIT:
 				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
