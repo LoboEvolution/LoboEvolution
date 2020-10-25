@@ -27,8 +27,8 @@ public class ImportDataAction extends AbstractAction {
 	/**
 	 * <p>Constructor for ImportDataAction.</p>
 	 *
-	 * @param mozillaPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
-	 * @param chromePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param chrome a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param mozilla a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 * @param action a {@link java.lang.String} object.
 	 */
 	public ImportDataAction(LoboCheckBox chrome, LoboCheckBox mozilla, String action) {

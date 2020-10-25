@@ -18,7 +18,8 @@ public class WebStore {
 	/**
 	 * <p>getValue.</p>
 	 *
-	 * @param link a {@link java.lang.String} object.
+	 * @param key a {@link java.lang.String} object.
+	 * @param index
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getValue(String key, int index) {

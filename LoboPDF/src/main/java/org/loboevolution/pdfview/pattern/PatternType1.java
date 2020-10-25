@@ -214,8 +214,6 @@ public class PatternType1 extends PDFPattern {
          * @param state the current graphics state
          * @param g the graphics into which to draw
          * @param s the path to fill
-         * @param drawn a Rectangle2D into which the dirty area (area drawn)
-         * will be added.
          */
         @Override
 		public Rectangle2D fill(PDFRenderer state, Graphics2D g,

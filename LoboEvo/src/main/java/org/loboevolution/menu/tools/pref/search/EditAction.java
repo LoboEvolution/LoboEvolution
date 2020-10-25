@@ -69,9 +69,9 @@ public class EditAction<T> extends AbstractAction {
 	 *
 	 * @param item the item
 	 */
-	private void addItem(T itm) {
-		this.item.getComboBox().addItem(itm);
-		this.item.getComboBox().setSelectedItem(itm);
+	private void addItem(T item) {
+		this.item.getComboBox().addItem(item);
+		this.item.getComboBox().setSelectedItem(item);
 	}
 
 	/**
@@ -87,14 +87,14 @@ public class EditAction<T> extends AbstractAction {
 	/**
 	 * Replace selected item.
 	 *
-	 * @param item the item
+	 * @param item
 	 */
-	private void replaceSelectedItem(T itm) {
+	private void replaceSelectedItem(T item) {
 		final int index = this.item.getComboBox().getSelectedIndex();
 		if (index != -1) {
 			this.item.getComboBox().removeItemAt(index);
 		}
-		this.item.getComboBox().addItem(itm);
-		this.item.getComboBox().setSelectedItem(itm);
+		this.item.getComboBox().addItem(item);
+		this.item.getComboBox().setSelectedItem(item);
 	}
 }

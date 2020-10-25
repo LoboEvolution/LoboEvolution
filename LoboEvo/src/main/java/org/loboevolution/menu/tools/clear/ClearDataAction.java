@@ -31,10 +31,10 @@ public class ClearDataAction extends AbstractAction {
 	/**
 	 * <p>Constructor for ClearDataAction.</p>
 	 *
-	 * @param cachePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
-	 * @param cookiePanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
-	 * @param navigationPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
-	 * @param bookmarkPanel a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param cache a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param cookie a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param navigation a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
+	 * @param bookmark a {@link com.jtattoo.plaf.lobo.LoboCheckBox} object.
 	 */
 	public ClearDataAction(LoboCheckBox cache, LoboCheckBox cookie, LoboCheckBox navigation,
 			LoboCheckBox bookmark) {

@@ -378,10 +378,15 @@ public class RBlock extends BaseElementRenderable {
 	/**
 	 * Lays out the block without checking for prior dimensions.
 	 * 
-	 * @param declaredWidth   The declared width of the block.
-	 * @param declaredHeight  The declared height of the block.
-	 * @param tentativeWidth  Presumed width of the whole block (with margins).
-	 * @param tentativeHeight
+	 * @param renderState
+	 * @param availWidth
+	 * @param availHeight
+	 * @param expandWidth
+	 * @param expandHeight
+	 * @param blockFloatBoundsSource
+	 * @param defaultOverflowX
+	 * @param defaultOverflowY
+	 * @param sizeOnly
 	 * @return
 	 */
 	private final LayoutValue forceLayout(RenderState renderState, int availWidth, int availHeight, boolean expandWidth,

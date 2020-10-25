@@ -1503,8 +1503,6 @@ public class PDFParser extends BaseWatchable {
     * to filling an array from end to front by popping values off the
     * stack.
     *
-    * @param count
-    * the number of numbers to pop off the stack
     * @return an array of length <tt>count</tt>
     * @throws PDFParseException
     * if any of the values popped off the

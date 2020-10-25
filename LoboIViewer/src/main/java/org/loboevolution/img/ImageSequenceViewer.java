@@ -29,7 +29,7 @@ public class ImageSequenceViewer {
 		private static final long serialVersionUID = 1L;
 
 		/**
-		 * Overridden to call {@link #positionChanged()}.
+		 * Overridden to call .
 		 */
 		@Override
 		public void addNotify() {

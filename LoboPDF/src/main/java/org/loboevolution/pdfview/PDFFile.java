@@ -1012,7 +1012,6 @@ public class PDFFile {
     private void readTrailer(PDFPassword password)
             throws
             IOException,
-            PDFAuthenticationFailureException,
             EncryptionUnsupportedByProductException,
             EncryptionUnsupportedByPlatformException {
         // the table of xrefs
@@ -1198,8 +1197,8 @@ public class PDFFile {
      * and read new trailer
      * @param password
      */
-	private void readTrailer15(PDFPassword password) throws IOException, PDFAuthenticationFailureException,
-			EncryptionUnsupportedByProductException, EncryptionUnsupportedByPlatformException {
+	private void readTrailer15(PDFPassword password) throws IOException,
+            EncryptionUnsupportedByProductException, EncryptionUnsupportedByPlatformException {
         PDFDecrypter newDefaultDecrypter = null;
         
         while (true) {

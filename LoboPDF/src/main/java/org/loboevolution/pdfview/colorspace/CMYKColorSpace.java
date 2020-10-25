@@ -63,7 +63,6 @@ public class CMYKColorSpace extends ColorSpace {
 	 * this is supposed to work, which may be implemented in the future.
 	 * 
 	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
-	 * @see org.scantegrity.lib.CMYKColorSpace#toCIEXYZ
 	 */
 	@Override
 	public float[] fromCIEXYZ(float[] p_colorvalue) {

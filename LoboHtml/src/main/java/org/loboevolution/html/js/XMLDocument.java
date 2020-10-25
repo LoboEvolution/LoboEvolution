@@ -71,7 +71,7 @@ public class XMLDocument implements Document {
 	/**
 	 * Load XML file
 	 * 
-	 * @param fileName
+	 * @param fileStr
 	 *            name of in file system
 	 */
 	private synchronized void loadFile(String fileStr) {

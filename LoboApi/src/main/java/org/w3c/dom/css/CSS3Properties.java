@@ -105,7 +105,6 @@ public interface CSS3Properties extends CSS2Properties {
 	 * getJustifyContent.
 	 * </p>
 	 *
-	 * @param clip a {@link java.lang.String} object.
 	 */
 	String getJustifyContent();
 

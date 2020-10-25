@@ -47,7 +47,6 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 	/**
 	 * Instantiates a new item editor dialog.
 	 *
-	 * @param owner   the owner
 	 * @param factory the factory
 	 * @throws java.awt.HeadlessException the headless exception
 	 */

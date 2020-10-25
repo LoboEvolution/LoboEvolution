@@ -124,7 +124,7 @@ public class SelectOption {
 	/**
 	 * Reset item list.
 	 * 
-	 * @param modelNode
+	 * @param selectElement
 	 */
 	private void resetItemList(HTMLSelectElementImpl selectElement) {
 		boolean isMultiple = selectElement.getMultiple();

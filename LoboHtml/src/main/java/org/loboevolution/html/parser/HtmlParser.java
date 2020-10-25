@@ -211,8 +211,6 @@ public class HtmlParser {
 	 *
 	 * @param parent
 	 * @param reader
-	 * @param stopAtTagUC If this tag is encountered, the method throws
-	 *                    StopException.
 	 * @param stopTags    If tags in this set are encountered, the method throws
 	 *                    StopException.
 	 * @return

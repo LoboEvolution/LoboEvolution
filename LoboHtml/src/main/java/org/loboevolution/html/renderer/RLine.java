@@ -295,7 +295,8 @@ class RLine extends BaseRCollection {
 	 * All line elements are expected to have bounds preset.
 	 * 
 	 * @param newHeight
-	 * @param alignmentY
+	 * @param elementHeight
+	 * @param valign
 	 */
 	private void adjustHeight(int newHeight, int elementHeight, int valign) {
 		// Set new line height
@@ -610,7 +611,6 @@ class RLine extends BaseRCollection {
 	/**
 	 * 
 	 * @param relement
-	 * @param x
 	 * @param elementHeight The required new line height.
 	 * @param valign
 	 */

@@ -411,7 +411,7 @@ public class Strings {
 	/**
 	 * <p>getTokensWithCollection.</p>
 	 *
-	 * @param subject a {@link java.lang.String} object.
+	 * @param str a {@link java.lang.String} object.
 	 * @param delimiters a {@link java.lang.String} object.
 	 * @return an list of {@link java.lang.String} objects.
 	 */

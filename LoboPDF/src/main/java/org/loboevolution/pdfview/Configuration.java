@@ -42,7 +42,7 @@ public class Configuration {
 	 * Enables or disables the conversion of greyscale images to ARGB.
 	 * Disabling this may have a lower memory overhead with high resolution
 	 * (e.g. scanned) images. Note that this has to be called before
-	 * {@link #getImage()} is called to have an effect.
+	 *  is called to have an effect.
 	 *
 	 * Enabled by default.
 	 * @param aFlag whether greyscale images shall be converted to ARGB.
@@ -128,7 +128,7 @@ public class Configuration {
     /**
      * Print signature fields on pdf
      * 
-     * @param printSignatureField
+     * @param printSignatureFields
      */
     public void setPrintSignatureFields(boolean printSignatureFields) {
     	this.printSigantureFields = printSignatureFields;
@@ -144,7 +144,7 @@ public class Configuration {
     /**
      * Print stamp annotations on pdf
      * 
-     * @param printStampAnnotation
+     * @param printStampAnnotations
      */
     public void setPrintStampAnnotations(boolean printStampAnnotations) {
     	this.printStampAnnotations = printStampAnnotations;

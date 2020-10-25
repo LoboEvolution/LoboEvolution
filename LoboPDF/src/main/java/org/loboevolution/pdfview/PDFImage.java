@@ -675,7 +675,7 @@ public class PDFImage {
 	}
 
 	/**
-	 * Creates a new image of type {@link TYPE_BYTE_GRAY} which represents the
+	 * Creates a new image which represents the
 	 * given raster
 	 * 
 	 * @param raster
@@ -842,9 +842,7 @@ public class PDFImage {
 	/**
 	 * get a Java ColorModel consistent with the current color space, number of
 	 * bits per component and decode array
-	 * 
-	 * @param bpc
-	 *            the number of bits per component
+	 *
 	 */
 	private ColorModel getColorModel() {
 		PDFColorSpace cs = getColorSpace();
@@ -1009,8 +1007,6 @@ public class PDFImage {
 	 * get a Java ColorModel consistent with the current color space, number of
 	 * bits per component and decode array
 	 *
-	 * @param bpc
-	 *            the number of bits per component
 	 */
 	private ColorModel createColorModel() {
 		PDFColorSpace cs = getColorSpace();

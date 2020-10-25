@@ -529,7 +529,6 @@ public class Type1CFont extends OutlineFont {
 
     /**
      * parse the font data.
-     * @param encdif a dictionary describing the encoding.
      */
     private void parse () throws IOException {
         int majorVersion = readByte ();

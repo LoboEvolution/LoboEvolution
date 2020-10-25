@@ -49,7 +49,7 @@ public class InputStore {
 	/**
 	 * <p>getPassword.</p>
 	 *
-	 * @param value a {@link java.lang.String} object.
+	 * @param maxNumItems
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<BookmarkInfo> getPassword(int maxNumItems) {

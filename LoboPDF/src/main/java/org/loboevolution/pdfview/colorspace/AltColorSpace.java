@@ -28,7 +28,6 @@ public class AltColorSpace extends ColorSpace {
 	 * Converts from CIEXYZ. 
 	 * 
 	 * @see java.awt.color.ColorSpace#fromCIEXYZ(float[])
-	 * @see org.scantegrity.lib.CMYKColorSpace#toCIEXYZ
 	 */
 	@Override
 	public float[] fromCIEXYZ(float[] p_colorvalue) {

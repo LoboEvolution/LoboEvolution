@@ -16,7 +16,6 @@ public class Screen extends AbstractScriptableDelegate {
 	private final GraphicsEnvironment graphicsEnvironment;
 
 	/**
-	 * @param context
 	 */
 	Screen() {
 		super();
