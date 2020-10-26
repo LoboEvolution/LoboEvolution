@@ -8,7 +8,7 @@ CREATE TABLE CONNECTION (proxyType text, userName text, password text, authentic
 CREATE TABLE FONT (name text);
 CREATE TABLE FONT_SIZE (name text);
 CREATE TABLE HOST (baseUrl text, tab integer, dt date);
-CREATE TABLE INPUT (name text, value text, value baseUrl);
+CREATE TABLE INPUT (name text, value text, baseUrl text);
 CREATE TABLE LOOK_AND_FEEL (acryl integer, aero integer, aluminium integer, bernstein integer, fast integer, graphite integer, hiFi integer,luna integer, mcWin integer, mint integer, noire integer, smart integer, texture integer,bold integer, italic integer, underline integer, strikethrough integer, subscript integer, superscript integer, modern integer, black integer, white integer, fontSize text, font text, color text);
 CREATE TABLE NETWORK (js integer, css integer, cookie integer, cache integer, navigation integer);
 CREATE TABLE SEARCH (name text, description text, baseUrl text, queryParameter text, selected integer, type text);
@@ -18,3 +18,4 @@ CREATE TABLE USER_AGENT (description text);
 CREATE TABLE TAB (index_tab integer, url text, title text);
 CREATE TABLE LINK_VISITED(HREF text);
 CREATE TABLE WEB_STORAGE(key text, value text, session integer, tabIndex integer);
+CREATE TABLE STYLE(title text, baseUrl text, enable integer);
