@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import org.loboevolution.common.Strings;
 import org.loboevolution.menu.MenuBar;
 import org.loboevolution.store.GeneralStore;
+import org.loboevolution.store.StyleStore;
 import org.loboevolution.store.TabStore;
 import org.loboevolution.store.WebStore;
 
@@ -91,6 +92,8 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 			public void windowClosing(WindowEvent e) {
 				TabStore.deleteAll();
 				WebStore.deleteSessionStorage();
+				StyleStore style = new StyleStore();
+				style.deleteStyle();
 			}
 		});
 	}

@@ -24,6 +24,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 
 import org.loboevolution.common.Strings;
@@ -39,6 +40,7 @@ import org.loboevolution.html.style.CSSUtilities;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
 import org.loboevolution.laf.ColorFactory;
+import org.loboevolution.store.StyleStore;
 import org.w3c.dom.UserDataHandler;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
@@ -126,6 +128,82 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return null;
 	}
 
+	/**
+	 * <p>navigate.</p>
+	 */
+	public void navigate() {
+		if (this.disabled) {
+			return;
+		}
+		final HtmlRendererContext rcontext = getHtmlRendererContext();
+		if (rcontext != null) {
+			final String href = getHref();
+			if (Strings.isNotBlank(href)) {
+				try {
+					final URL url = getFullURL(href);
+					if (url == null) {
+						this.warn("Unable to resolve URI: [" + href + "].");
+					} else {
+						rcontext.linkClicked(url, false);
+					}
+				} catch (final MalformedURLException mfu) {
+					this.warn("Malformed URI: [" + href + "].", mfu);
+				}
+			}
+		}
+	}
+
+	/**
+	 * If the LINK refers to a stylesheet document, this method loads and parses it.
+	 */
+	protected void processLink() {
+		this.styleSheet = null;
+		final String rel = getAttribute("rel");
+		final String title = getAttribute("title");
+		if (rel != null) {
+			final String cleanRel = rel.trim().toLowerCase();
+			final boolean isStyleSheet = cleanRel.equals("stylesheet");
+			final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
+			HtmlRendererContext rcontext = this.getHtmlRendererContext();
+
+			StyleStore style = new StyleStore();
+			List<String> styles = style.getStyles(rcontext.getCurrentURL());
+			String styleEnabled = "";
+
+			if ((isStyleSheet || isAltStyleSheet)) {
+				if (styles.size() == 0) {
+					style.insertStyle(title, rcontext.getCurrentURL(), isStyleSheet ? 1 : 0);
+				} else {
+					styleEnabled = styles.get(0);
+				}
+
+				if (styleEnabled.equals(title) || styles.size() == 0) {
+					final UserAgentContext uacontext = getUserAgentContext();
+					if (uacontext.isExternalCSSEnabled()) {
+						final String media = getMedia();
+						if (CSSUtilities.matchesMedia(media, uacontext)) {
+							final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
+							try {
+								final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHref(), doc);
+								if (sheet != null) {
+									this.styleSheet = sheet;
+									sheet.setDisabled(this.disabled);
+									doc.addStyleSheet(sheet);
+								}
+
+							} catch (final MalformedURLException mfe) {
+								this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + doc.getBaseURI()
+										+ "] does not appear to be a valid URI.");
+							} catch (final Throwable err) {
+								this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
@@ -180,76 +258,6 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		return getAttribute("type");
 	}
 
-	/**
-	 * <p>navigate.</p>
-	 */
-	public void navigate() {
-		if (this.disabled) {
-			return;
-		}
-		final HtmlRendererContext rcontext = getHtmlRendererContext();
-		if (rcontext != null) {
-			final String href = getHref();
-			if (Strings.isNotBlank(href)) {
-				try {
-					final URL url = getFullURL(href);
-					if (url == null) {
-						this.warn("Unable to resolve URI: [" + href + "].");
-					} else {
-						rcontext.linkClicked(url, false);
-					}
-				} catch (final MalformedURLException mfu) {
-					this.warn("Malformed URI: [" + href + "].", mfu);
-				}
-			}
-		}
-	}
-
-	/**
-	 * If the LINK refers to a stylesheet document, this method loads and parses it.
-	 */
-	protected void processLink() {
-		this.styleSheet = null;
-		final String rel = getAttribute("rel");
-		if (rel != null) {
-			final String cleanRel = rel.trim().toLowerCase();
-			final boolean isStyleSheet = cleanRel.equals("stylesheet");
-			final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
-			if (isStyleSheet || isAltStyleSheet) {
-				final UserAgentContext uacontext = getUserAgentContext();
-				if (uacontext.isExternalCSSEnabled()) {
-					final String media = getMedia();
-					if (CSSUtilities.matchesMedia(media, uacontext)) {
-						final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
-						try {
-							final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHref(), doc);
-							if (sheet != null) {
-								this.styleSheet = sheet;
-								if (sheet instanceof CSSStyleSheetImpl) {
-									final CSSStyleSheetImpl sheetImpl = (CSSStyleSheetImpl) sheet;
-									sheetImpl.setDisabled(this.disabled);
-								} else {
-									if (isAltStyleSheet) {
-										sheet.setDisabled(true);
-									} else {
-										sheet.setDisabled(this.disabled);
-									}
-								}
-								doc.addStyleSheet(sheet);
-							}
-
-						} catch (final MalformedURLException mfe) {
-							this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + doc.getBaseURI()
-									+ "] does not appear to be a valid URI.");
-						} catch (final Throwable err) {
-							this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
-						}
-					}
-				}
-			}
-		}
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public void setDisabled(boolean disabled) {
@@ -260,7 +268,9 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 		}
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void setHref(String href) {
 		setAttribute("href", href);

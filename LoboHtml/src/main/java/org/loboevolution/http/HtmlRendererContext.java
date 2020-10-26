@@ -301,12 +301,12 @@ public class HtmlRendererContext {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public String getCurrentURL() {
-		final Object node = this.htmlPanel.getRootNode();
-		if (node instanceof HTMLDocumentImpl) {
-			final HTMLDocumentImpl doc = (HTMLDocumentImpl) node;
-			return doc.getDocumentURI();
-		}
-		return null;
+		HtmlPanel html = htmlPanel;
+		IBrowserPanel panel = html.getBrowserPanel();
+		IBrowserFrame frame = panel.getBrowserFrame();
+		IToolBar toolbar = frame.getToolbar();
+		JTextField jtf = toolbar.getAddressBar();
+		return jtf.getText();
 	}
 
 	/**
