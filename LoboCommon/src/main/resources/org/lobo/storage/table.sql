@@ -18,4 +18,4 @@ CREATE TABLE USER_AGENT (description text);
 CREATE TABLE TAB (index_tab integer, url text, title text);
 CREATE TABLE LINK_VISITED(HREF text);
 CREATE TABLE WEB_STORAGE(key text, value text, session integer, tabIndex integer);
-CREATE TABLE STYLE(title text, baseUrl text, enable integer);
+CREATE TABLE STYLE(title text, href text, baseUrl text, enable integer);

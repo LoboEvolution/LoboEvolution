@@ -36,7 +36,10 @@ public class StyleWindow extends JFrame {
 	}
 
 	private void createAndShowGUI(BrowserFrame frame) {
-		add(getStyleBox(frame));
+		JScrollPane spViewallItems = new JScrollPane();
+		spViewallItems.setBorder(null);
+		spViewallItems.setViewportView(getStyleBox(frame));
+		add(spViewallItems);
 	}
 
 	private Component getStyleBox(BrowserFrame frame) {

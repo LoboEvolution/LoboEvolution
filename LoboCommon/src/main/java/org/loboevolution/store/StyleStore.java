@@ -1,10 +1,10 @@
 package org.loboevolution.store;
 
-import org.loboevolution.common.Strings;
-import org.loboevolution.info.BookmarkInfo;
-
 import java.io.Serializable;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,9 +19,11 @@ public class StyleStore implements Serializable {
 
     private final String DELETE_STYLE = "DELETE FROM STYLE";
 
-    private final String INSERT_STYLE = "INSERT INTO STYLE(title, baseUrl, enable) values (?, ?, ?)";
+    private final String DELETE_STYLE_HREF = "DELETE FROM STYLE WHERE href = ? AND baseUrl = ?";
 
-    private final String STYLE = "SELECT title FROM STYLE WHERE baseUrl = ? AND enable = 1";
+    private final String INSERT_STYLE = "INSERT OR REPLACE INTO STYLE(title, href, baseUrl, enable) values (?, ?, ?, ?)";
+
+    private final String STYLE = "SELECT title FROM STYLE WHERE href = ? AND baseUrl = ? AND enable = 1";
 
     private final String STYLE_ALL = "SELECT title FROM STYLE WHERE baseUrl = ?";
 
@@ -32,11 +34,12 @@ public class StyleStore implements Serializable {
     /**
      * Gets the styles
      */
-    public List<String> getStyles(String baseUrl) {
+    public List<String> getStyles(String href, String baseUrl) {
         final List<String> values = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
              PreparedStatement pstmt = conn.prepareStatement(this.STYLE)) {
-            pstmt.setString(1, Strings.isNotBlank(baseUrl) ? baseUrl : "NONE");
+            pstmt.setString(1, href);
+            pstmt.setString(1, baseUrl);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs != null && rs.next()) {
                     values.add(rs.getString(1));
@@ -75,7 +78,7 @@ public class StyleStore implements Serializable {
         final List<String> values = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
              PreparedStatement pstmt = conn.prepareStatement(this.STYLE_ALL)) {
-            pstmt.setString(1, Strings.isNotBlank(baseUrl) ? baseUrl : "NONE");
+            pstmt.setString(1, baseUrl);
             try (ResultSet rs = pstmt.executeQuery()) {
                 while (rs != null && rs.next()) {
                     values.add(rs.getString(1));
@@ -92,13 +95,25 @@ public class StyleStore implements Serializable {
      *
      * @param title
      */
-    public void insertStyle(String title, String baseUrl, int enable) {
+    public void insertStyle(String title, String href, String baseUrl, int enable) {
+
         try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
-             PreparedStatement pstmt = conn.prepareStatement(INSERT_STYLE)) {
-            pstmt.setString(1, title);
-            pstmt.setString(2, Strings.isNotBlank(baseUrl) ? baseUrl : "NONE");
-            pstmt.setInt(3, enable);
+             PreparedStatement pstmt = conn.prepareStatement(DELETE_STYLE_HREF)) {
+            pstmt.setString(1, href);
+            pstmt.setString(2, baseUrl);
             pstmt.executeUpdate();
+
+            try (PreparedStatement pstmt2 = conn.prepareStatement(INSERT_STYLE)) {
+                pstmt2.setString(1, title);
+                pstmt2.setString(2, href);
+                pstmt2.setString(3, baseUrl);
+                pstmt2.setInt(4, enable);
+                pstmt2.executeUpdate();
+
+            } catch (final Exception e) {
+                logger.log(Level.SEVERE, e.getMessage(), e);
+            }
+
         } catch (final Exception e) {
             logger.log(Level.SEVERE, e.getMessage(), e);
         }

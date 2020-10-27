@@ -23,11 +23,14 @@ package org.loboevolution.html.dom.domimpl;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
 import org.loboevolution.html.dom.HTMLBodyElement;
 import org.loboevolution.html.dom.HTMLDocument;
 import org.loboevolution.html.dom.HTMLLinkElement;
@@ -159,47 +162,54 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	protected void processLink() {
 		this.styleSheet = null;
 		final String rel = getAttribute("rel");
-		final String title = getAttribute("title");
 		if (rel != null) {
-			final String cleanRel = rel.trim().toLowerCase();
-			final boolean isStyleSheet = cleanRel.equals("stylesheet");
-			final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
-			HtmlRendererContext rcontext = this.getHtmlRendererContext();
+			final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
+			final String baseURI = doc.getBaseURI();
 
-			StyleStore style = new StyleStore();
-			List<String> styles = style.getStyles(rcontext.getCurrentURL());
-			String styleEnabled = "";
+			try {
+				final HtmlRendererContext rcontext = this.getHtmlRendererContext();
+				final String href = getHref();
+				final String cleanRel = rel.trim().toLowerCase();
+				final boolean isStyleSheet = cleanRel.equals("stylesheet");
+				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
+				final String currentUrl = rcontext.getCurrentURL();
 
-			if ((isStyleSheet || isAltStyleSheet)) {
-				if (styles.size() == 0) {
-					style.insertStyle(title, rcontext.getCurrentURL(), isStyleSheet ? 1 : 0);
-				} else {
-					styleEnabled = styles.get(0);
-				}
+				StyleStore style = new StyleStore();
+				List<String> styles = style.getStyles(href, currentUrl);
+				String styleEnabled = "";
 
-				if (styleEnabled.equals(title) || styles.size() == 0) {
-					final UserAgentContext uacontext = getUserAgentContext();
-					if (uacontext.isExternalCSSEnabled()) {
-						final String media = getMedia();
-						if (CSSUtilities.matchesMedia(media, uacontext)) {
-							final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
-							try {
-								final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(getHref(), doc);
+				if ((isStyleSheet || isAltStyleSheet)) {
+					String title = getAttribute("title");
+					URL baseURL = new URL(baseURI);
+					URL scriptURL = Urls.createURL(baseURL, href);
+					if (Strings.isBlank(title)) title = Paths.get(scriptURL.getPath()).getFileName().toString();
+
+					if (styles.size() == 0) {
+						style.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
+					} else {
+						styleEnabled = styles.get(0);
+					}
+
+					if (styleEnabled.equals(title) || styles.size() == 0) {
+						final UserAgentContext uacontext = getUserAgentContext();
+						if (uacontext.isExternalCSSEnabled()) {
+							final String media = getMedia();
+							if (CSSUtilities.matchesMedia(media, uacontext)) {
+								final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
 								if (sheet != null) {
 									this.styleSheet = sheet;
 									sheet.setDisabled(this.disabled);
 									doc.addStyleSheet(sheet);
 								}
-
-							} catch (final MalformedURLException mfe) {
-								this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + doc.getBaseURI()
-										+ "] does not appear to be a valid URI.");
-							} catch (final Throwable err) {
-								this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
 							}
 						}
 					}
 				}
+
+			} catch (final MalformedURLException mfe) {
+				this.warn("Will not parse CSS. URI=[" + getHref() + "] with BaseURI=[" + baseURI + "] does not appear to be a valid URI.");
+			} catch (final Throwable err) {
+				this.warn("Unable to parse CSS. URI=[" + getHref() + "].", err);
 			}
 		}
 	}

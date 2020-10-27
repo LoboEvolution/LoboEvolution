@@ -21,6 +21,16 @@
 
 package org.loboevolution.html.style;
 
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
+import org.loboevolution.common.Strings;
+import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.store.ExternalResourcesStore;
+import org.w3c.dom.stylesheets.MediaList;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -29,19 +39,6 @@ import java.net.URL;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.loboevolution.common.Strings;
-import org.loboevolution.common.Urls;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.store.ExternalResourcesStore;
-import org.w3c.dom.stylesheets.MediaList;
-
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.InputSource;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
 
 /**
  * <p>CSSUtilities class.</p>
@@ -124,19 +121,17 @@ public class CSSUtilities {
 	 * <p>parseCssExternal.</p>
 	 *
 	 * @param href a {@link java.lang.String} object.
-	 * @param doc a {@link org.loboevolution.html.dom.domimpl.HTMLDocumentImpl} object.
+	 * @param scriptURL a {@link java.net.URL} object.
+	 * @param baseURI a {@link java.lang.String} object.
 	 * @return a {@link com.gargoylesoftware.css.dom.CSSStyleSheetImpl} object.
 	 * @throws java.lang.Exception if any.
 	 */
-	public static CSSStyleSheetImpl parseCssExternal(String href, HTMLDocumentImpl doc) throws Exception {
+	public static CSSStyleSheetImpl parseCssExternal(String href, URL scriptURL, String baseURI) throws Exception {
 		CSSOMParser parser = new CSSOMParser();
-		URL baseURL = new URL(doc.getBaseURI());
-		URL scriptURL = Urls.createURL(baseURL, href);
 		String scriptURI = scriptURL == null ? href : scriptURL.toExternalForm();
 		String source = ExternalResourcesStore.getSourceCache(scriptURI, "CSS");
-		InputSource is = getCssInputSourceForStyleSheet(source, doc.getBaseURI());
+		InputSource is = getCssInputSourceForStyleSheet(source, baseURI);
 		return parser.parseStyleSheet(is, null);
-
 	}
 	
 	/**
