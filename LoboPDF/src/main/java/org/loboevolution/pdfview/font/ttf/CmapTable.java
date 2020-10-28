@@ -150,20 +150,18 @@ public class CmapTable extends TrueTypeTable {
         int curOffset = 4 + (this.subtables.size() * 8);
         
         // write the subtables
-        for (Iterator i = this.subtables.keySet().iterator(); i.hasNext();) {
-            CmapSubtable cms = (CmapSubtable) i.next();
+        for (CmapSubtable cms : this.subtables.keySet()) {
             CMap map = this.subtables.get(cms);
-            
+
             buf.putShort(cms.platformID);
             buf.putShort(cms.platformSpecificID);
             buf.putInt(curOffset);
-            
+
             curOffset += map.getLength();
         }
         
         // write the tables
-        for (Iterator i = this.subtables.values().iterator(); i.hasNext();) {
-            CMap map = (CMap) i.next();
+        for (CMap map : this.subtables.values()) {
             buf.put(map.getData());
         }
         
@@ -184,9 +182,8 @@ public class CmapTable extends TrueTypeTable {
         length += this.subtables.size() * 8;
         
         // add the size of the dynamic data
-        for (Iterator i = this.subtables.values().iterator(); i.hasNext();) {     
+        for (CMap map : this.subtables.values()) {
             // add the size of the subtable data
-            CMap map = (CMap) i.next();
             length += map.getLength();
         }
     
@@ -224,15 +221,13 @@ public class CmapTable extends TrueTypeTable {
     
         buf.append(indent + "Version: " + this.getVersion() + "\n");
         buf.append(indent + "NumMaps: " + this.getNumberSubtables() + "\n");
-        
-        for (Iterator i = this.subtables.keySet().iterator(); i.hasNext();) {
-            CmapSubtable key = (CmapSubtable) i.next();
-            
+
+        for (CmapSubtable key : this.subtables.keySet()) {
             buf.append(indent + "Map: platformID: " + key.platformID +
-                       " PlatformSpecificID: " + key.platformSpecificID + "\n");
-            
+                    " PlatformSpecificID: " + key.platformSpecificID + "\n");
+
             CMap map = this.subtables.get(key);
-            
+
             buf.append(map.toString());
         }
         

@@ -728,55 +728,53 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			// of noitifications probably come one by one.
 			boolean topLayout = false;
 			List<RElement> repainters = null;
-			final int length = notifications.length;
-			for (int i = 0; i < length; i++) {
-				final DocumentNotification dn = notifications[i];
+			for (final DocumentNotification dn : notifications) {
 				final int type = dn.type;
 				switch (type) {
-				case DocumentNotification.GENERIC:
-				case DocumentNotification.SIZE: {
-					final NodeImpl node = dn.node;
-					if (node == null) {
-						this.rblock.invalidateLayoutDeep();
-					} else {
+					case DocumentNotification.GENERIC:
+					case DocumentNotification.SIZE: {
+						final NodeImpl node = dn.node;
+						if (node == null) {
+							this.rblock.invalidateLayoutDeep();
+						} else {
+							final UINode uiNode = node.findUINode();
+							if (uiNode != null) {
+								final RElement relement = (RElement) uiNode;
+								relement.invalidateLayoutUpTree();
+							}
+						}
+						topLayout = true;
+						break;
+					}
+					case DocumentNotification.POSITION: {
+						// TODO: Could be more efficient.
+						final NodeImpl node = dn.node;
+						final NodeImpl parent = (NodeImpl) node.getParentNode();
+						if (parent != null) {
+							final UINode uiNode = parent.findUINode();
+							if (uiNode != null) {
+								final RElement relement = (RElement) uiNode;
+								relement.invalidateLayoutUpTree();
+							}
+						}
+						topLayout = true;
+						break;
+					}
+					case DocumentNotification.LOOK: {
+						final NodeImpl node = dn.node;
 						final UINode uiNode = node.findUINode();
 						if (uiNode != null) {
+							if (repainters == null) {
+								repainters = new ArrayList<RElement>();
+							}
 							final RElement relement = (RElement) uiNode;
-							relement.invalidateLayoutUpTree();
-						} 
-					}
-					topLayout = true;
-					break;
-				}
-				case DocumentNotification.POSITION: {
-					// TODO: Could be more efficient.
-					final NodeImpl node = dn.node;
-					final NodeImpl parent = (NodeImpl) node.getParentNode();
-					if (parent != null) {
-						final UINode uiNode = parent.findUINode();
-						if (uiNode != null) {
-							final RElement relement = (RElement) uiNode;
-							relement.invalidateLayoutUpTree();
+							// relement.invalidateRenderStyle();
+							repainters.add(relement);
 						}
+						break;
 					}
-					topLayout = true;
-					break;
-				}
-				case DocumentNotification.LOOK: {
-					final NodeImpl node = dn.node;
-					final UINode uiNode = node.findUINode();
-					if (uiNode != null) {
-						if (repainters == null) {
-							repainters = new ArrayList<RElement>();
-						}
-						final RElement relement = (RElement) uiNode;
-						// relement.invalidateRenderStyle();
-						repainters.add(relement);
-					}
-					break;
-				}
-				default:
-					break;
+					default:
+						break;
 				}
 			}
 			if (topLayout) {
@@ -1039,9 +1037,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				}
 			}
 			// Add components in set that were not previously children.
-			final Iterator<Component> wsi = workingSet.iterator();
-			while (wsi.hasNext()) {
-				final Component component = (Component) wsi.next();
+			for (Component component : workingSet) {
 				this.add(component);
 			}
 		}

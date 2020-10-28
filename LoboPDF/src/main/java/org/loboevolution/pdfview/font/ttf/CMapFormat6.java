@@ -130,8 +130,8 @@ public class CMapFormat6 extends CMap {
         buf.putShort(this.entryCount);
 
         // write the endCodes
-        for (int i = 0; i < this.glyphIndexArray.length; i++) {
-            buf.putShort(this.glyphIndexArray[i]);
+        for (short value : this.glyphIndexArray) {
+            buf.putShort(value);
         }
         // reset the data pointer
         buf.flip();

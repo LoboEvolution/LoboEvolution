@@ -308,8 +308,7 @@ class RLine extends BaseRCollection {
 		final FontMetrics firstFm = this.modelNode.getRenderState().getFontMetrics();
 		int maxDescent = firstFm.getDescent();
 		int maxAscentPlusLeading = firstFm.getAscent() + firstFm.getLeading();
-		for (final Iterator<Renderable> i = renderables.iterator(); i.hasNext();) {
-			final Object r = i.next();
+		for (final Object r : renderables) {
 			if (r instanceof RStyleChanger) {
 				final RStyleChanger rstyleChanger = (RStyleChanger) r;
 				final FontMetrics fm = rstyleChanger.getModelNode().getRenderState().getFontMetrics();
@@ -350,8 +349,7 @@ class RLine extends BaseRCollection {
 		this.baseLineOffset = baseline;
 
 		// Change bounds of renderables accordingly
-		for (final Iterator<Renderable> i = renderables.iterator(); i.hasNext();) {
-			final Object r = i.next();
+		for (final Object r : renderables) {
 			if (r instanceof RWord) {
 				final RWord rword = (RWord) r;
 				rword.setY(baseline - rword.ascentPlusLeading);

@@ -291,9 +291,7 @@ class TableMatrix {
 	 */
 	private void adjustForRenderWidths(SizeInfo[] columnSizes, int hasBorder, int cellSpacing,
 			boolean tableWidthKnown) {
-		final int numCols = columnSizes.length;
-		for (int i = 0; i < numCols; i++) {
-			final SizeInfo si = columnSizes[i];
+		for (final SizeInfo si : columnSizes) {
 			if (si.getActualSize() < si.getLayoutSize()) {
 				si.setActualSize(si.getLayoutSize());
 			}
@@ -303,10 +301,10 @@ class TableMatrix {
 	private int adjustWidthsForExpectedMax(SizeInfo[] columnSizes, int cellAvailWidth, boolean expand, int captionWith, int widthOfExtras) {
 		final int hasBorder = this.hasOldStyleBorder;
 		final int cellSpacingX = this.cellSpacingX;
-		int currentTotal = 0;
 		final int numCols = columnSizes.length;
-		for (int i = 0; i < numCols; i++) {
-			currentTotal += columnSizes[i].getActualSize();
+		int currentTotal = 0;
+		for (SizeInfo columnSize : columnSizes) {
+			currentTotal += columnSize.getActualSize();
 		}
 		int difference = currentTotal - cellAvailWidth;
 		if (difference > 0 || difference < 0 && expand) {
@@ -379,8 +377,8 @@ class TableMatrix {
 				rowSizeInfo.setHtmlLength(rowHeightLength);
 			} else {
 				HtmlLength bestHeightLength = null;
-				for (int x = 0; x < rs; x++) {
-					final VirtualCell vc = (VirtualCell) row.get(x);
+				for (VirtualCell virtualCell : row) {
+					final VirtualCell vc = (VirtualCell) virtualCell;
 					if (vc != null) {
 						final HtmlLength vcHeightLength = vc.getHeightLength();
 						if (vcHeightLength != null && vcHeightLength.isPreferredOver(bestHeightLength)) {
@@ -397,8 +395,7 @@ class TableMatrix {
 			HtmlLength bestWidthLength = null;
 
 			// Cells with colspan==1 first.
-			for (int y = 0; y < numRows; y++) {
-				final List<VirtualCell> row = rows.get(y);
+			for (final List<VirtualCell> row : rows) {
 				VirtualCell vc = row.size() > i ? row.get(i) : null;
 				if (vc != null) {
 					final RTableCell ac = vc.getActualCell();
@@ -412,8 +409,7 @@ class TableMatrix {
 			}
 			// Now cells with colspan>1.
 			if (bestWidthLength == null) {
-				for (int y = 0; y < numRows; y++) {
-					final List<VirtualCell> row = rows.get(y);
+				for (final List<VirtualCell> row : rows) {
 					VirtualCell vc = row.size() > i ? row.get(i) : null;
 					if (vc != null) {
 						final RTableCell ac = vc.getActualCell();
@@ -454,8 +450,7 @@ class TableMatrix {
 	 * are layed out again if necessary to determine if they can really be shrunk.
 	 * </ol>
 	 * 
-	 * @param renderState
-	 * @param border
+	 * @param hasBorder
 	 * @param cellSpacingX
 	 * @param cellSpacingY
 	 * @param availWidth
@@ -509,8 +504,8 @@ class TableMatrix {
 			determineRowSizesFixedTH(hasBorder, cellSpacing, availHeight, tableHeight, sizeOnly);
 		} else {
 			tableHeight = heightsOfExtras;
-			for (int row = 0; row < numRows; row++) {
-				tableHeight += rowSizes[row].getMinSize();
+			for (SizeInfo rowSize : rowSizes) {
+				tableHeight += rowSize.getMinSize();
 			}
 			determineRowSizesFlexibleTH(hasBorder, cellSpacing, availHeight, sizeOnly);
 		}
@@ -530,9 +525,8 @@ class TableMatrix {
 
 		int heightUsedbyPercent = 0;
 		int otherMinSize = 0;
-		for (int i = 0; i < numRows; i++) {
-			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+		for (final SizeInfo rowSizeInfo : rowSizes) {
+			final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
 				int actualSizeInt = heightLength.getLength(cellAvailHeight);
 				if (actualSizeInt < rowSizeInfo.getMinSize()) {
@@ -549,9 +543,8 @@ class TableMatrix {
 
 		if (heightUsedbyPercent + otherMinSize > cellAvailHeight) {
 			final double ratio = (double) (cellAvailHeight - otherMinSize) / heightUsedbyPercent;
-			for (int i = 0; i < numRows; i++) {
-				final SizeInfo rowSizeInfo = rowSizes[i];
-				final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+			for (final SizeInfo rowSizeInfo : rowSizes) {
+				final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 				if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
 					final int actualSize = rowSizeInfo.getActualSize();
 					final int prevActualSize = actualSize;
@@ -570,9 +563,8 @@ class TableMatrix {
 		int heightUsedByAbsolute = 0;
 		int noHeightMinSize = 0;
 		int numNoHeightColumns = 0;
-		for (int i = 0; i < numRows; i++) {
-			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+		for (final SizeInfo rowSizeInfo : rowSizes) {
+			final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 			if (heightLength != null && heightLength.getLengthType() != HtmlLength.LENGTH) {
 				int actualSizeInt = heightLength.getRawValue();
 				if (actualSizeInt < rowSizeInfo.getMinSize()) {
@@ -589,9 +581,8 @@ class TableMatrix {
 		if (heightUsedByAbsolute + heightUsedbyPercent + noHeightMinSize > cellAvailHeight) {
 			final double ratio = (double) (cellAvailHeight - noHeightMinSize - heightUsedbyPercent)
 					/ heightUsedByAbsolute;
-			for (int i = 0; i < numRows; i++) {
-				final SizeInfo rowSizeInfo = rowSizes[i];
-				final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+			for (final SizeInfo rowSizeInfo : rowSizes) {
+				final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 				if (heightLength != null && heightLength.getLengthType() != HtmlLength.LENGTH) {
 					final int actualSize = rowSizeInfo.getActualSize();
 					final int prevActualSize = actualSize;
@@ -609,9 +600,8 @@ class TableMatrix {
 
 		final int remainingHeight = cellAvailHeight - heightUsedByAbsolute - heightUsedbyPercent;
 		int heightUsedByRemaining = 0;
-		for (int i = 0; i < numRows; i++) {
-			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+		for (final SizeInfo rowSizeInfo : rowSizes) {
+			final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 			if (heightLength == null) {
 				int actualSizeInt = remainingHeight / numNoHeightColumns;
 				if (actualSizeInt < rowSizeInfo.getMinSize()) {
@@ -634,8 +624,7 @@ class TableMatrix {
 		} else {
 			// Rows too short; expand them
 			final double ratio = (double) cellAvailHeight / totalUsed;
-			for (int i = 0; i < numRows; i++) {
-				final SizeInfo rowSizeInfo = rowSizes[i];
+			for (final SizeInfo rowSizeInfo : rowSizes) {
 				final int actualSize = rowSizeInfo.getActualSize();
 				rowSizeInfo.setActualSize((int) Math.round(actualSize * ratio));
 			}
@@ -653,9 +642,8 @@ class TableMatrix {
 		// Look at rows with absolute sizes
 		int heightUsedByAbsolute = 0;
 		int percentSum = 0;
-		for (int i = 0; i < numRows; i++) {
-			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+		for (final SizeInfo rowSizeInfo : rowSizes) {
+			final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.PIXELS) {
 				int actualSizeInt = heightLength.getRawValue();
 				if (actualSizeInt < rowSizeInfo.getMinSize()) {
@@ -672,9 +660,8 @@ class TableMatrix {
 		int heightUsedByNoSize = 0;
 
 		// Set sizes to in row height
-		for (int i = 0; i < numRows; i++) {
-			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength widthLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+		for (final SizeInfo rowSizeInfo : rowSizes) {
+			final HtmlLength widthLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 			if (widthLength == null) {
 				final int actualSizeInt = rowSizeInfo.getMinSize();
 				heightUsedByNoSize += actualSizeInt;
@@ -688,9 +675,8 @@ class TableMatrix {
 
 		// Set widths of columns with percentages
 		int heightUsedByPercent = 0;
-		for (int i = 0; i < numRows; i++) {
-			final SizeInfo rowSizeInfo = rowSizes[i];
-			final HtmlLength heightLength = (HtmlLength)rowSizeInfo.getHtmlLength();
+		for (final SizeInfo rowSizeInfo : rowSizes) {
+			final HtmlLength heightLength = (HtmlLength) rowSizeInfo.getHtmlLength();
 			if (heightLength != null && heightLength.getLengthType() == HtmlLength.LENGTH) {
 				int actualSizeInt = heightLength.getLength(expectedTotalCellHeight);
 				if (actualSizeInt < rowSizeInfo.getMinSize()) {
@@ -722,9 +708,8 @@ class TableMatrix {
 
 		// Look at percentages first
 		int widthUsedByPercent = 0;
-		for (int i = 0; i < numCols; i++) {
-			final SizeInfo colSizeInfo = columnSizes[i];
-			final HtmlLength widthLength = (HtmlLength)colSizeInfo.getHtmlLength();
+		for (final SizeInfo colSizeInfo : columnSizes) {
+			final HtmlLength widthLength = (HtmlLength) colSizeInfo.getHtmlLength();
 			if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
 				final int actualSizeInt = widthLength.getLength(cellAvailWidth);
 				widthUsedByPercent += actualSizeInt;
@@ -735,9 +720,8 @@ class TableMatrix {
 		// Look at columns with absolute sizes
 		int widthUsedByAbsolute = 0;
 		int numNoWidthColumns = 0;
-		for (int i = 0; i < numCols; i++) {
-			final SizeInfo colSizeInfo = columnSizes[i];
-			final HtmlLength widthLength = (HtmlLength)colSizeInfo.getHtmlLength();
+		for (final SizeInfo colSizeInfo : columnSizes) {
+			final HtmlLength widthLength = (HtmlLength) colSizeInfo.getHtmlLength();
 			if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
 				final int actualSizeInt = widthLength.getRawValue();
 				widthUsedByAbsolute += actualSizeInt;
@@ -758,9 +742,8 @@ class TableMatrix {
 						expectedAbsoluteWidthTotal = 0;
 					}
 					final double ratio = (double) expectedAbsoluteWidthTotal / widthUsedByAbsolute;
-					for (int i = 0; i < numCols; i++) {
-						final SizeInfo sizeInfo = columnSizes[i];
-						final HtmlLength widthLength = (HtmlLength)columnSizes[i].getHtmlLength();
+					for (final SizeInfo sizeInfo : columnSizes) {
+						final HtmlLength widthLength = (HtmlLength) sizeInfo.getHtmlLength();
 						if (widthLength != null && widthLength.getLengthType() != HtmlLength.LENGTH) {
 							final int oldActualSize = sizeInfo.getActualSize();
 							final int newActualSize = (int) Math.round(oldActualSize * ratio);
@@ -779,9 +762,8 @@ class TableMatrix {
 							expectedPercentWidthTotal = 0;
 						}
 						final double ratio = (double) expectedPercentWidthTotal / widthUsedByPercent;
-						for (int i = 0; i < numCols; i++) {
-							final SizeInfo sizeInfo = columnSizes[i];
-							final HtmlLength widthLength = (HtmlLength)columnSizes[i].getHtmlLength();
+						for (final SizeInfo sizeInfo : columnSizes) {
+							final HtmlLength widthLength = (HtmlLength) sizeInfo.getHtmlLength();
 							if (widthLength != null && widthLength.getLengthType() == HtmlLength.LENGTH) {
 								final int oldActualSize = sizeInfo.getActualSize();
 								final int newActualSize = (int) Math.round(oldActualSize * ratio);
@@ -814,10 +796,10 @@ class TableMatrix {
 			yoffset += this.captionSize.getHeight();
 			yoffset += hasBorder;
 		}
-		for (int i = 0; i < numRows; i++) {
+		for (SizeInfo rowSize : rowSizes) {
 			yoffset += cellSpacingY;
 			yoffset += hasBorder;
-			SizeInfo rowSizeInfo = rowSizes[i];
+			SizeInfo rowSizeInfo = rowSize;
 			rowSizeInfo.setOffset(yoffset);
 			yoffset += rowSizeInfo.getActualSize();
 			yoffset += hasBorder;
@@ -836,10 +818,10 @@ class TableMatrix {
 		int numColumns = colSizes.length;
 		int xoffset = insets.left;
 		int cellSpacingX = this.cellSpacingX;
-		for (int i = 0; i < numColumns; i++) {
+		for (SizeInfo colSize : colSizes) {
 			xoffset += cellSpacingX;
 			xoffset += hasBorder;
-			SizeInfo colSizeInfo = colSizes[i];
+			SizeInfo colSizeInfo = colSize;
 			colSizeInfo.setOffset(xoffset);
 			xoffset += colSizeInfo.getActualSize();
 			xoffset += hasBorder;
@@ -873,9 +855,7 @@ class TableMatrix {
 		final List<RTableCell> allCells = this.ALL_CELLS;
 		final SizeInfo[] colSizes = this.columnSizes;
 		final SizeInfo[] rowSizes = this.rowSizes;
-		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell cell : allCells) {
 			final int col = cell.getVirtualColumn();
 			final int colSpan = cell.getColSpan();
 			int totalCellWidth;
@@ -936,9 +916,7 @@ class TableMatrix {
 	 */
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				final RenderableSpot rp = cell.getLowestRenderableSpot(x - bounds.x, y - bounds.y);
@@ -1018,9 +996,7 @@ class TableMatrix {
 	 */
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				if (!cell.onDoubleClick(event, x - bounds.x, y - bounds.y)) {
@@ -1049,9 +1025,7 @@ class TableMatrix {
 	 */
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				if (!cell.onMouseClick(event, x - bounds.x, y - bounds.y)) {
@@ -1103,9 +1077,7 @@ class TableMatrix {
 	 */
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				if (!cell.onMousePressed(event, x - bounds.x, y - bounds.y)) {
@@ -1135,10 +1107,8 @@ class TableMatrix {
 	 */
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final int numCells = allCells.size();
 		boolean found = false;
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell cell : allCells) {
 			final Rectangle bounds = cell.getVisualBounds();
 			if (bounds.contains(x, y)) {
 				found = true;
@@ -1172,8 +1142,8 @@ class TableMatrix {
 	public final void paint(Graphics g, Dimension size) {
 		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+		for (RTableCell rTableCell : allCells) {
+			final RTableCell cell = (RTableCell) rTableCell;
 			final Graphics newG = g.create(cell.x, cell.y, cell.width, cell.height);
 			try {
 				cell.paint(newG);
@@ -1193,8 +1163,7 @@ class TableMatrix {
 
 		if (this.hasOldStyleBorder > 0) {
 			g.setColor(Color.GRAY);
-			for (int i = 0; i < numCells; i++) {
-				final RTableCell cell = (RTableCell) allCells.get(i);
+			for (RTableCell cell : allCells) {
 				final int cx = cell.getX() - 1;
 				final int cy = cell.getY() - 1;
 				final int cwidth = cell.getWidth() + 1;
@@ -1277,14 +1246,14 @@ class TableMatrix {
 
 		// Initialize minSize in rows
 		final int numRows = rowSizes.length;
-		for (int i = 0; i < numRows; i++) {
-			rowSizes[i].setMinSize(0);
+		for (SizeInfo rowSize : rowSizes) {
+			rowSize.setMinSize(0);
 		}
 
 		// Initialize layoutSize in columns
 		final int numCols = colSizes.length;
-		for (int i = 0; i < numCols; i++) {
-			colSizes[i].setLayoutSize(0);
+		for (SizeInfo sizeInfo : colSizes) {
+			sizeInfo.setLayoutSize(0);
 		}
 
 		final List<RTableCell> allCells = this.ALL_CELLS;
@@ -1294,9 +1263,8 @@ class TableMatrix {
 			captionSize.setHeight(caption.height);
 			captionSize.setWidth(caption.width);
 		}
-		
-		for (int i = 0; i < numCells; i++) {
-			final RTableCell cell = (RTableCell) allCells.get(i);
+
+		for (RTableCell cell : allCells) {
 			final int col = cell.getVirtualColumn();
 			final int colSpan = cell.getColSpan();
 			int cellsTotalWidth;
@@ -1323,7 +1291,7 @@ class TableMatrix {
 			// TODO: A tentative height could be used here: Height of
 			// table divided by number of rows.
 
-			java.awt.Dimension size;
+			Dimension size;
 			final RenderThreadState state = RenderThreadState.getState();
 			final boolean prevOverrideNoWrap = state.overrideNoWrap;
 			try {

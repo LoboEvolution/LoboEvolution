@@ -114,8 +114,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 		final int size = methods.size();
 		int matchingNumParams = 0;
 		Method matchingMethod = null;
-		for (int i = 0; i < size; i++) {
-			final Method m = methods.get(i);
+		for (final Method m : methods) {
 			final Class[] parameterTypes = m.getParameterTypes();
 			if (args == null) {
 				if (parameterTypes == null || parameterTypes.length == 0) {

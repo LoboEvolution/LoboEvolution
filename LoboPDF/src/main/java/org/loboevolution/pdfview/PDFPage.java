@@ -654,8 +654,7 @@ public class PDFPage {
     * Notify all images we know about that a command has been added
     */
     public void updateImages() {
-        for (Iterator<WeakReference<?>> i = this.renderers.values().iterator(); i.hasNext();) {
-            WeakReference<?> ref = i.next();
+        for (WeakReference<?> ref : this.renderers.values()) {
             PDFRenderer renderer = (PDFRenderer) ref.get();
             if (renderer != null) {
                 if (renderer.getStatus() == Watchable.NEEDS_DATA) {

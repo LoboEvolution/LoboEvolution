@@ -76,11 +76,10 @@ public class FunctionType4 extends PDFFunction {
     @Override
 	protected void doFunction(float[] inputs, int inputOffset, float[] outputs, int outputOffset) {
     	prepareInitialStack(inputs, inputOffset);
-    	for (Iterator<String> iterator = this.tokens.iterator(); iterator.hasNext(); ) {
-			String token = iterator.next();
-			PostScriptOperation op = OperationSet.getInstance().getOperation(token);
-			op.eval(this.stack);
-		}
+        for (String token : this.tokens) {
+            PostScriptOperation op = OperationSet.getInstance().getOperation(token);
+            op.eval(this.stack);
+        }
     	assertResultIsCorrect(outputs, outputOffset);
     	prepareResult(outputs, outputOffset);
     }

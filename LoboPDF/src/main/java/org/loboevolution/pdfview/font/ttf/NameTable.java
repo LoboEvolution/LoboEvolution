@@ -121,9 +121,7 @@ public class NameTable extends TrueTypeTable {
      * Determine if we have any records with a given platform ID
      */
     public boolean hasRecords(short platformID) {
-        for (Iterator i = this.records.keySet().iterator(); i.hasNext(); ) {
-            NameRecord rec = (NameRecord) i.next();
-            
+        for (NameRecord rec : this.records.keySet()) {
             if (rec.platformID == platformID) {
                 return true;
             }
@@ -137,10 +135,8 @@ public class NameTable extends TrueTypeTable {
      * platform-specific ID
      */
     public boolean hasRecords(short platformID, short platformSpecificID) {
-        for (Iterator i = this.records.keySet().iterator(); i.hasNext(); ) {
-            NameRecord rec = (NameRecord) i.next();
-            
-            if (rec.platformID == platformID && 
+        for (NameRecord rec : this.records.keySet()) {
+            if (rec.platformID == platformID &&
                     rec.platformSpecificID == platformSpecificID) {
                 return true;
             }
@@ -210,39 +206,38 @@ public class NameTable extends TrueTypeTable {
         short curOffset = 0;
         
         // add the size of each record
-        for (Iterator i = this.records.keySet().iterator(); i.hasNext();) {
-            NameRecord rec = (NameRecord) i.next();
+        for (NameRecord rec : this.records.keySet()) {
             String value = this.records.get(rec);
-        
+
             // choose the charset
             String charsetName = getCharsetName(rec.platformID,
-                rec.platformSpecificID);
+                    rec.platformSpecificID);
             Charset charset = Charset.forName(charsetName);
-            
+
             // encode
             ByteBuffer strBuf = charset.encode(value);
             short strLen = (short) (strBuf.remaining() & 0xFFFF);
-            
+
             // write the IDs
             buf.putShort(rec.platformID);
             buf.putShort(rec.platformSpecificID);
             buf.putShort(rec.languageID);
             buf.putShort(rec.nameID);
-            
+
             // write the size and offset
             buf.putShort(strLen);
             buf.putShort(curOffset);
-            
+
             // remember or current position
             buf.mark();
-            
+
             // move to the current offset and write the data
             buf.position(headerLength + curOffset);
             buf.put(strBuf);
-            
+
             // reset stuff
             buf.reset();
-            
+
             // increment offset
             curOffset += strLen;
         }
@@ -264,18 +259,17 @@ public class NameTable extends TrueTypeTable {
         int length = 6 + (12 * getCount());
         
         // add the size of each record
-        for (Iterator i = this.records.keySet().iterator(); i.hasNext();) {
-            NameRecord rec = (NameRecord) i.next();
+        for (NameRecord rec : this.records.keySet()) {
             String value = this.records.get(rec);
-        
+
             // choose the charset
             String charsetName = getCharsetName(rec.platformID,
-                rec.platformSpecificID);
+                    rec.platformSpecificID);
             Charset charset = Charset.forName(charsetName);
-            
+
             // encode
             ByteBuffer buf = charset.encode(value);
-                
+
             // add the size of the coded buffer
             length += buf.remaining();
         }
@@ -333,10 +327,8 @@ public class NameTable extends TrueTypeTable {
         
         buf.append(indent + "Format: " + getFormat() + "\n");
         buf.append(indent + "Count : " + getCount() + "\n");
-        
-        for (Iterator i = this.records.keySet().iterator(); i.hasNext();) {
-            NameRecord rec = (NameRecord) i.next();
-            
+
+        for (NameRecord rec : this.records.keySet()) {
             buf.append(indent + " platformID: " + rec.platformID);
             buf.append(" platformSpecificID: " + rec.platformSpecificID);
             buf.append(" languageID: " + rec.languageID);

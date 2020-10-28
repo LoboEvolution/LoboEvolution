@@ -180,9 +180,7 @@ public class JavaClassWrapper {
 
 	private void scanMethods() {
 		final Method[] methods = this.javaClass.getMethods();
-		final int len = methods.length;
-		for (int i = 0; i < len; i++) {
-			final Method method = methods[i];
+		for (final Method method : methods) {
 			final String name = method.getName();
 			if (isPropertyMethod(name, method)) {
 				ensurePropertyKnown(name, method);

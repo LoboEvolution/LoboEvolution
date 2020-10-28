@@ -346,11 +346,11 @@ public class PDFTextFormat implements Cloneable {
     * amounts.
     */
     public void doText(PDFPage cmds, Object ary[], boolean autoAdjustStroke) throws PDFParseException {
-        for (int i = 0; i < ary.length; i++) {
-            if (ary[i] instanceof String) {
-                doText(cmds, (String) ary[i], autoAdjustStroke);
-            } else if (ary[i] instanceof Double) {
-                float val = ((Double) ary[i]).floatValue() / 1000f;
+        for (Object o : ary) {
+            if (o instanceof String) {
+                doText(cmds, (String) o, autoAdjustStroke);
+            } else if (o instanceof Double) {
+                float val = ((Double) o).floatValue() / 1000f;
                 this.cur.translate(-val * this.fsize * this.th, 0);
             } else {
                 throw new PDFParseException("Bad element in TJ array");
