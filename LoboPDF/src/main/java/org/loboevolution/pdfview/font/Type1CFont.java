@@ -46,7 +46,7 @@ public class Type1CFont extends OutlineFont {
 
     byte[] subrs;
 
-    float[] stack = new float[100];
+    final float[] stack = new float[100];
 
     int stackptr = 0;
 
@@ -56,8 +56,8 @@ public class Type1CFont extends OutlineFont {
 
     int glyphnames[];
 
-    int encoding[] = new int[256];
-
+	final int[] encoding = new int[256];
+	
     String fontname;
 
     AffineTransform at = new AffineTransform (0.001f, 0, 0, 0.001f, 0, 0);
@@ -68,11 +68,11 @@ public class Type1CFont extends OutlineFont {
 
     int type;
 
-    static int CMD = 0;
+    static final int CMD = 0;
 
-    static int NUM = 1;
+    static final int NUM = 1;
 
-    static int FLT = 2;
+    static final int FLT = 2;
 
     /**
      * create a new Type1CFont based on a font data stream and a descriptor
@@ -350,7 +350,7 @@ public class Type1CFont extends OutlineFont {
     // and code encoding[i]
     int charstringtype = 2;
 
-    float temps[] = new float[32];
+    final float[] temps = new float[32];
 
     int charsetbase = 0;
 

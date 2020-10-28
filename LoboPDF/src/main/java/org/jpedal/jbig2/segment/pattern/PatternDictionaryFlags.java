@@ -57,8 +57,8 @@ import org.jpedal.jbig2.segment.Flags;
 public class PatternDictionaryFlags extends Flags {
 	
 	private static final Logger logger = Logger.getLogger(PatternDictionaryFlags.class.getName());
-	public static String HD_MMR = "HD_MMR";
-	public static String HD_TEMPLATE = "HD_TEMPLATE";
+	public static final String HD_MMR = "HD_MMR";
+	public static final String HD_TEMPLATE = "HD_TEMPLATE";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

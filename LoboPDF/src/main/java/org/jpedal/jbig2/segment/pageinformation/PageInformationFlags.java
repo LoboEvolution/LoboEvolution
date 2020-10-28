@@ -57,8 +57,8 @@ import org.jpedal.jbig2.segment.Flags;
 public class PageInformationFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(PageInformationFlags.class.getName());
-	public static String DEFAULT_PIXEL_VALUE = "DEFAULT_PIXEL_VALUE";
-	public static String DEFAULT_COMBINATION_OPERATOR = "DEFAULT_COMBINATION_OPERATOR";
+	public static final String DEFAULT_PIXEL_VALUE = "DEFAULT_PIXEL_VALUE";
+	public static final String DEFAULT_COMBINATION_OPERATOR = "DEFAULT_COMBINATION_OPERATOR";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

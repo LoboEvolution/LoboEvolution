@@ -57,7 +57,7 @@ import org.jpedal.jbig2.segment.Flags;
 public class RegionFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(RegionFlags.class.getName());
-	public static String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
+	public static final String EXTERNAL_COMBINATION_OPERATOR = "EXTERNAL_COMBINATION_OPERATOR";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

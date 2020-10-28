@@ -29,10 +29,10 @@ import org.loboevolution.pdfview.PDFObject;
  * @author Mike Wessler
  */
 public class CalGrayColor extends ColorSpace {
-    float white[]= {1f, 1f, 1f};
-    float black[]= {0, 0, 0};
+	final float[] white = {1f, 1f, 1f};
+    final float[] black = {0, 0, 0};
     float gamma= 1;
-    static ColorSpace cie= ColorSpace.getInstance(ColorSpace.CS_sRGB);
+    static final ColorSpace cie= ColorSpace.getInstance(ColorSpace.CS_sRGB);
 
     /**
      * Create a new Calibrated Gray color space object, given

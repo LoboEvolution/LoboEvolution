@@ -243,12 +243,12 @@ public class CmapTable extends TrueTypeTable {
         /**
          * The platformID for this subtable
          */
-        short platformID;
+        final short platformID;
         
         /**
          * The platform-specific id
          */
-        short platformSpecificID;
+        final short platformSpecificID;
         
         /** 
          * Create a Cmap subtable

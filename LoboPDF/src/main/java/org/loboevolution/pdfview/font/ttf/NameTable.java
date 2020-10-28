@@ -359,22 +359,22 @@ public class NameTable extends TrueTypeTable {
         /**
          * Platform ID
          */
-        short platformID;
+        final short platformID;
         
         /**
          * Platform Specific ID (Encoding)
          */
-        short platformSpecificID;
+        final short platformSpecificID;
         
         /**
          * Language ID
          */
-        short languageID;
+        final short languageID;
         
         /**
          * Name ID
          */
-        short nameID;
+        final short nameID;
         
         /**
          * Create a new record

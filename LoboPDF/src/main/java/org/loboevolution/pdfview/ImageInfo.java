@@ -23,9 +23,9 @@ import java.awt.geom.Rectangle2D;
 
 public class ImageInfo {
 
-    int width;
-    int height;
-    Rectangle2D clip;
+    final int width;
+    final int height;
+    final Rectangle2D clip;
     Color bgColor;
 
     public ImageInfo(int width, int height, Rectangle2D clip) {

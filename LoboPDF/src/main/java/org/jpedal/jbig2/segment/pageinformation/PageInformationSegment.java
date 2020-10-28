@@ -64,7 +64,7 @@ public class PageInformationSegment extends Segment {
 	private int pageBitmapHeight, pageBitmapWidth;
 	private int yResolution, xResolution;
 
-	PageInformationFlags pageInformationFlags = new PageInformationFlags();
+	final PageInformationFlags pageInformationFlags = new PageInformationFlags();
 	private int pageStriping;
 
 	private JBIG2Bitmap pageBitmap;

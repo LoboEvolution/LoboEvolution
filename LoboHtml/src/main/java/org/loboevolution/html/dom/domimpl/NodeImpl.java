@@ -77,7 +77,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	
 	protected volatile Document document;
 
-	protected NodeListImpl nodeList = new NodeListImpl();
+	protected final NodeListImpl nodeList = new NodeListImpl();
 
 	protected volatile boolean notificationsSuspended = false;
 

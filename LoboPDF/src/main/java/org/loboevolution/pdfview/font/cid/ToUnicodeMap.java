@@ -28,8 +28,8 @@ public class ToUnicodeMap extends PDFCMap {
 	 ****************************************************************************/
 
 	private static class CodeRangeMapping {
-		char srcStart;
-		char srcEnd;
+		final char srcStart;
+		final char srcEnd;
 		
 		CodeRangeMapping(char srcStart, char srcEnd) {
 			this.srcStart = srcStart;
@@ -48,9 +48,9 @@ public class ToUnicodeMap extends PDFCMap {
 	 ****************************************************************************/
 
 	private static class CharRangeMapping {
-		char srcStart;
-		char srcEnd;
-		char destStart;
+		final char srcStart;
+		final char srcEnd;
+		final char destStart;
 		
 		CharRangeMapping(char srcStart, char srcEnd, char destStart) {
 			this.srcStart = srcStart;

@@ -1200,10 +1200,10 @@ public final class JBIG2Bitmap {
 	 *
 	 */
 	static final class FastBitSet {
-		long[] w;
+		final long[] w;
 		static final int pot = 6;
 		static final int mask = (int) ((-1L) >>> (Long.SIZE-pot));
-		int length;
+		final int length;
 		
 		
 		public FastBitSet(int length) {

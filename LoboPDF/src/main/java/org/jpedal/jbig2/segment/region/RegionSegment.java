@@ -63,7 +63,7 @@ public abstract class RegionSegment extends Segment {
 	protected int regionBitmapWidth, regionBitmapHeight;
 	protected int regionBitmapXLocation, regionBitmapYLocation;
 
-	protected RegionFlags regionFlags = new RegionFlags();
+	protected final RegionFlags regionFlags = new RegionFlags();
 
 	public RegionSegment(JBIG2StreamDecoder streamDecoder) {
 		super(streamDecoder);

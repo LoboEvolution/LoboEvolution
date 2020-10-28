@@ -488,18 +488,18 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	protected JButton iconifyButton;
 	protected JButton maxButton;
 	protected JButton closeButton;
-	protected Icon iconifyIcon;
-	protected Icon maximizeIcon;
-	protected Icon minimizeIcon;
+	protected final Icon iconifyIcon;
+	protected final Icon maximizeIcon;
+	protected final Icon minimizeIcon;
 
-	protected Icon closeIcon;
+	protected final Icon closeIcon;
 	protected WindowListener windowListener;
 
 	protected Window window;
 
-	protected JRootPane rootPane;
+	protected final JRootPane rootPane;
 
-	protected BaseRootPaneUI rootPaneUI;
+	protected final BaseRootPaneUI rootPaneUI;
 
 	protected int buttonsWidth;
 

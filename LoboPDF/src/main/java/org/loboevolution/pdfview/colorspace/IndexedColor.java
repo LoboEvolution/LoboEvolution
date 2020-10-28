@@ -38,7 +38,7 @@ public class IndexedColor extends PDFColorSpace {
     /** the color table */
     Color table[];
     /** size of the color table */
-    int count;
+    final int count;
     /** number of channels in the base Color Space (unused) */
     int nchannels = 1;
 

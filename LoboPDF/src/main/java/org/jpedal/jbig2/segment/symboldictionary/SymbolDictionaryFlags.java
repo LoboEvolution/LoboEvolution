@@ -57,16 +57,16 @@ import org.jpedal.jbig2.segment.Flags;
 public class SymbolDictionaryFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(SymbolDictionaryFlags.class.getName());
-	public static String SD_HUFF = "SD_HUFF";
-	public static String SD_REF_AGG = "SD_REF_AGG";
-	public static String SD_HUFF_DH = "SD_HUFF_DH";
-	public static String SD_HUFF_DW = "SD_HUFF_DW";
-	public static String SD_HUFF_BM_SIZE = "SD_HUFF_BM_SIZE";
-	public static String SD_HUFF_AGG_INST = "SD_HUFF_AGG_INST";
-	public static String BITMAP_CC_USED = "BITMAP_CC_USED";
-	public static String BITMAP_CC_RETAINED = "BITMAP_CC_RETAINED";
-	public static String SD_TEMPLATE = "SD_TEMPLATE";
-	public static String SD_R_TEMPLATE = "SD_R_TEMPLATE";
+	public static final String SD_HUFF = "SD_HUFF";
+	public static final String SD_REF_AGG = "SD_REF_AGG";
+	public static final String SD_HUFF_DH = "SD_HUFF_DH";
+	public static final String SD_HUFF_DW = "SD_HUFF_DW";
+	public static final String SD_HUFF_BM_SIZE = "SD_HUFF_BM_SIZE";
+	public static final String SD_HUFF_AGG_INST = "SD_HUFF_AGG_INST";
+	public static final String BITMAP_CC_USED = "BITMAP_CC_USED";
+	public static final String BITMAP_CC_RETAINED = "BITMAP_CC_RETAINED";
+	public static final String SD_TEMPLATE = "SD_TEMPLATE";
+	public static final String SD_R_TEMPLATE = "SD_R_TEMPLATE";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

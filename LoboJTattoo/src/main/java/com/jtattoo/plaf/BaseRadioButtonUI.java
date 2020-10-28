@@ -62,11 +62,11 @@ public class BaseRadioButtonUI extends BasicRadioButtonUI {
 	/** Constant size */
 	protected static Dimension size = new Dimension();
 	/** Constant viewRect */
-	protected static Rectangle viewRect = new Rectangle();
+	protected static final Rectangle viewRect = new Rectangle();
 	/** Constant iconRect */
-	protected static Rectangle iconRect = new Rectangle();
+	protected static final Rectangle iconRect = new Rectangle();
 	/** Constant textRect */
-	protected static Rectangle textRect = new Rectangle();
+	protected static final Rectangle textRect = new Rectangle();
 
 	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent c) {

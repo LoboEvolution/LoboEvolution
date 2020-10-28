@@ -81,7 +81,7 @@ public abstract class PDFShader {
     public final static int             TENSOR_PRODUCTS_MESH_SHADING = 7;
 
     /** The tolerance for reevaluating the shading function again */
-    public static float TOLERANCE = 1e-4f;
+    public static final float TOLERANCE = 1e-4f;
 
     /** the type of the shading (1 through 7)*/
     private final int type;

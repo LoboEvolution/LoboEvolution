@@ -74,9 +74,9 @@ public class MaskColorSpace extends ColorSpace {
         return mask;
     }
     
-    ColorSpace cie = ColorSpace.getInstance(ColorSpace.CS_CIEXYZ);
-    float[] prev1= this.cie.fromRGB(toRGB(new float[] {1.0f}));
-    float[] prev0= this.cie.fromRGB(toRGB(new float[] {0.0f}));
+    final ColorSpace cie = ColorSpace.getInstance(ColorSpace.CS_CIEXYZ);
+    final float[] prev1= this.cie.fromRGB(toRGB(new float[] {1.0f}));
+    final float[] prev0= this.cie.fromRGB(toRGB(new float[] {0.0f}));
 
     @Override
 	public float[] toCIEXYZ(float[] colorvalue) {

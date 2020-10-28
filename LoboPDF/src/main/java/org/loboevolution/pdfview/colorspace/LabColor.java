@@ -29,10 +29,11 @@ import org.loboevolution.pdfview.PDFObject;
  * @author Mike Wessler
  */
 public class LabColor extends ColorSpace {
-    float white[]= {1f, 1f, 1f};
-    float black[]= {0, 0, 0};
-    float range[]= {-100f, 100f, -100f, 100f};
-    static ColorSpace cie= ColorSpace.getInstance(ColorSpace.CS_sRGB);
+	
+	final float[] white = {1f, 1f, 1f};
+    final float[] black = {0, 0, 0};
+    final float[] range = {-100f, 100f, -100f, 100f};
+    static final ColorSpace cie= ColorSpace.getInstance(ColorSpace.CS_sRGB);
 
     /**
      * Create a new Lab color space object, given the description in

@@ -40,7 +40,7 @@ public class HttpNetwork {
 	private static final Logger logger = Logger.getLogger(HttpNetwork.class.getName());
 
 	/** Constant GZIP_ENCODING="gzip" */
-	public static String GZIP_ENCODING = "gzip";
+	public static final String GZIP_ENCODING = "gzip";
 
 	private static String USER_AGENT = "SELECT DISTINCT description FROM USER_AGENT";
 

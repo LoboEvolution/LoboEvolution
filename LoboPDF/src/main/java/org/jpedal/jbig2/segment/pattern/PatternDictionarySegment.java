@@ -61,7 +61,7 @@ import org.jpedal.jbig2.util.BinaryOperation;
 public class PatternDictionarySegment extends Segment {
 	
 	private static final Logger logger = Logger.getLogger(PatternDictionarySegment.class.getName());
-	PatternDictionaryFlags patternDictionaryFlags = new PatternDictionaryFlags();
+	final PatternDictionaryFlags patternDictionaryFlags = new PatternDictionaryFlags();
 	private int width;
 	private int height;
 	private int grayMax;

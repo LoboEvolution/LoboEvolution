@@ -69,14 +69,15 @@ import org.loboevolution.pdfview.PDFParseException;
 public class LZWDecode {
 	
 	private static final Logger logger = Logger.getLogger(LZWDecode.class.getName());
-    ByteBuffer buf;
+    final ByteBuffer buf;
     int bytepos;
     int bitpos;
     byte[] dict[] = new byte[4096][];
+    final byte[][] dict = new byte[4096][];
     int dictlen = 0;
     int bitspercode = 9;
-    static int STOP = 257;
-    static int CLEARDICT = 256;
+    static final int STOP = 257;
+    static final int CLEARDICT = 256;
 
     /**
      * initialize this decoder with an array of encoded bytes

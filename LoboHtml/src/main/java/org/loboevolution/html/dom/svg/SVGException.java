@@ -30,7 +30,7 @@ public abstract class SVGException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	short code;
+	final short code;
 
 	// ExceptionCode
 	static final short SVG_WRONG_TYPE_ERR = 0;

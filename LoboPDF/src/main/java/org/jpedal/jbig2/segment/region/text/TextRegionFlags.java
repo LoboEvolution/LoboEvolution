@@ -57,15 +57,15 @@ import org.jpedal.jbig2.segment.Flags;
 public class TextRegionFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(TextRegionFlags.class.getName());
-	public static String SB_HUFF = "SB_HUFF";
-	public static String SB_REFINE = "SB_REFINE";
-	public static String LOG_SB_STRIPES = "LOG_SB_STRIPES";
-	public static String REF_CORNER = "REF_CORNER";
-	public static String TRANSPOSED = "TRANSPOSED";
-	public static String SB_COMB_OP = "SB_COMB_OP";
-	public static String SB_DEF_PIXEL = "SB_DEF_PIXEL";
-	public static String SB_DS_OFFSET = "SB_DS_OFFSET";
-	public static String SB_R_TEMPLATE = "SB_R_TEMPLATE";
+	public static final String SB_HUFF = "SB_HUFF";
+	public static final String SB_REFINE = "SB_REFINE";
+	public static final String LOG_SB_STRIPES = "LOG_SB_STRIPES";
+	public static final String REF_CORNER = "REF_CORNER";
+	public static final String TRANSPOSED = "TRANSPOSED";
+	public static final String SB_COMB_OP = "SB_COMB_OP";
+	public static final String SB_DEF_PIXEL = "SB_DEF_PIXEL";
+	public static final String SB_DS_OFFSET = "SB_DS_OFFSET";
+	public static final String SB_R_TEMPLATE = "SB_R_TEMPLATE";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

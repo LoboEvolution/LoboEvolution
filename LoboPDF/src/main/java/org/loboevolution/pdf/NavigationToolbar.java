@@ -32,7 +32,7 @@ public class NavigationToolbar extends JToolBar {
 	private static final int SETPAGE = 6;
 
 	/** the current page number text field. */
-	protected JTextField currentPageBox = new JTextField(4);
+	protected final JTextField currentPageBox = new JTextField(4);
 	
 	private JLabel totalNoOfPages = new JLabel();
 

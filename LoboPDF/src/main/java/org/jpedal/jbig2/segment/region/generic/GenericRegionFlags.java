@@ -57,9 +57,9 @@ import org.jpedal.jbig2.segment.Flags;
 public class GenericRegionFlags extends Flags {
 
 	private static final Logger logger = Logger.getLogger(GenericRegionFlags.class.getName());
-	public static String MMR = "MMR";
-	public static String GB_TEMPLATE = "GB_TEMPLATE";
-	public static String TPGDON = "TPGDON";
+	public static final String MMR = "MMR";
+	public static final String GB_TEMPLATE = "GB_TEMPLATE";
+	public static final String TPGDON = "TPGDON";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

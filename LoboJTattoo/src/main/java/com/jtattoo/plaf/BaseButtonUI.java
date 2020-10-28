@@ -55,11 +55,11 @@ import javax.swing.text.View;
 public class BaseButtonUI extends BasicButtonUI {
 
 	/** Constant viewRect */
-	protected static Rectangle viewRect = new Rectangle();
+	protected static final Rectangle viewRect = new Rectangle();
 	/** Constant textRect */
-	protected static Rectangle textRect = new Rectangle();
+	protected static final Rectangle textRect = new Rectangle();
 	/** Constant iconRect */
-	protected static Rectangle iconRect = new Rectangle();
+	protected static final Rectangle iconRect = new Rectangle();
 	/** Constant defaultColors */
 	protected static Color[] defaultColors = null;
 

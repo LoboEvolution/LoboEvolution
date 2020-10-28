@@ -47,11 +47,11 @@ public class Type1Font extends OutlineFont {
     Map<String,FlPoint> name2width;
     AffineTransform at;
     /** the Type1 stack of command values */
-    float stack[] = new float[100];
+    final float[] stack = new float[100];
     /** the current position in the Type1 stack */
     int sloc = 0;
     /** the stack of postscript commands (used by callothersubr) */
-    float psStack[] = new float[3];
+    final float[] psStack = new float[3];
     /** the current position in the postscript stack */
     int psLoc = 0;
 
@@ -312,7 +312,7 @@ public class Type1Font extends OutlineFont {
      */
     class PSParser {
 
-        byte[] data;
+        final byte[] data;
         int loc;
 
         /**

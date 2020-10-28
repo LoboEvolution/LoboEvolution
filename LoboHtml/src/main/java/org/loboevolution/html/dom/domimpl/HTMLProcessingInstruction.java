@@ -18,7 +18,7 @@ import org.w3c.dom.ProcessingInstruction;
  */
 public class HTMLProcessingInstruction extends NodeImpl implements ProcessingInstruction, Cloneable {
 	String data;
-	String target;
+	final String target;
 
 	/**
 	 * <p>Constructor for HTMLProcessingInstruction.</p>

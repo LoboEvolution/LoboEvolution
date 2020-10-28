@@ -41,7 +41,7 @@ public class InputText {
 
 	private static final float DEFAULT_FONT_SIZE = 14.0f;
 		
-	protected JTextField iText = new JTextField();
+	protected final JTextField iText = new JTextField();
 	
 	private boolean textWrittenIn;
 	

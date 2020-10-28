@@ -36,7 +36,7 @@ public class CMapFormat4 extends CMap {
     /**
      * The segments and associated data can be a char[] or an Integer
      */
-    public SortedMap<Segment,Object> segments;
+    public final SortedMap<Segment,Object> segments;
     
     /** Creates a new instance of CMapFormat0 */
     protected CMapFormat4(short language) {
@@ -412,13 +412,13 @@ public class CMapFormat4 extends CMap {
     
     static class Segment implements Comparable {
         /** the end code (highest code in this segment) */
-        int endCode;
+        final int endCode;
         
         /** the start code (lowest code in this segment) */
-        int startCode;
+        final int startCode;
         
         /** whether it is a map or a delta */
-        boolean hasMap;
+        final boolean hasMap;
         
         /** Create a new segment */
         public Segment(short startCode, short endCode, boolean hasMap) {

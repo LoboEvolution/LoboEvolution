@@ -84,13 +84,13 @@ public abstract class Segment {
 
 	protected SegmentHeader segmentHeader;
 
-	protected HuffmanDecoder huffmanDecoder;
+	protected final HuffmanDecoder huffmanDecoder;
 
-	protected ArithmeticDecoder arithmeticDecoder;
+	protected final ArithmeticDecoder arithmeticDecoder;
 
-	protected MMRDecoder mmrDecoder;
+	protected final MMRDecoder mmrDecoder;
 
-	protected JBIG2StreamDecoder decoder;
+	protected final JBIG2StreamDecoder decoder;
 
 	public Segment(JBIG2StreamDecoder streamDecoder) {
 		this.decoder = streamDecoder;

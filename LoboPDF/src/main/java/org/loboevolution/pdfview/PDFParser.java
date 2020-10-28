@@ -76,7 +76,7 @@ public class PDFParser extends BaseWatchable {
     */
     private PDFPage cmds;
     // ---- result variables
-    byte[] stream;
+    final byte[] stream;
     Map<String, PDFObject> resources;
 
     boolean errorwritten = false;

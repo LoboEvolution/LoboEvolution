@@ -69,7 +69,7 @@ public class RefinementRegionSegment extends RegionSegment {
 
 	private int noOfReferedToSegments;
 
-	int[] referedToSegments;
+	final int[] referedToSegments;
 
 	public RefinementRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage, int[] referedToSegments, int noOfReferedToSegments) {
 		super(streamDecoder);

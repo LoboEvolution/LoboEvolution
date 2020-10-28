@@ -42,7 +42,7 @@ import org.loboevolution.pdfview.PDFParser;
 public class Type3Font extends PDFFont {
 
     /** resources for the character definitions */
-    HashMap<String,PDFObject> rsrc;
+    final HashMap<String,PDFObject> rsrc;
     /** the character processes, mapped by name */
     Map charProcs;
     /** bounding box for the font characters */

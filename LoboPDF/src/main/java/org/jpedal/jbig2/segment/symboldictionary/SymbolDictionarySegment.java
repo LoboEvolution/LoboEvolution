@@ -67,8 +67,10 @@ public class SymbolDictionarySegment extends Segment {
 	private int noOfExportedSymbols;
 	private int noOfNewSymbols;
 
-	short[] symbolDictionaryAdaptiveTemplateX = new short[4], symbolDictionaryAdaptiveTemplateY = new short[4]; 
-	short[] symbolDictionaryRAdaptiveTemplateX = new short[2], symbolDictionaryRAdaptiveTemplateY = new short[2];
+	final short[] symbolDictionaryAdaptiveTemplateX = new short[4];
+    final short[] symbolDictionaryAdaptiveTemplateY = new short[4];
+	final short[] symbolDictionaryRAdaptiveTemplateX = new short[2];
+    final short[] symbolDictionaryRAdaptiveTemplateY = new short[2];
 
 	private JBIG2Bitmap[] bitmaps;
 

@@ -57,8 +57,8 @@ import org.jpedal.jbig2.segment.Flags;
 public class RefinementRegionFlags extends Flags {
 	
 	private static final Logger logger = Logger.getLogger(RefinementRegionFlags.class.getName());
-	public static String GR_TEMPLATE = "GR_TEMPLATE";
-	public static String TPGDON = "TPGDON";
+	public static final String GR_TEMPLATE = "GR_TEMPLATE";
+	public static final String TPGDON = "TPGDON";
 
 	public void setFlags(int flagsAsInt) {
 		this.flagsAsInt = flagsAsInt;

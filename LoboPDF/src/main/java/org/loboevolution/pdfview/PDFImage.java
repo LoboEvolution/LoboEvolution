@@ -1299,7 +1299,7 @@ public class PDFImage {
 	 */
 	static class PdfComponentColorModel extends ComponentColorModel {
 
-		int bitsPerComponent;
+		final int bitsPerComponent;
 
 		public PdfComponentColorModel(ColorSpace cs, int[] bpc) {
 			super(cs, bpc, false, false, Transparency.OPAQUE, DataBuffer.TYPE_BYTE);

@@ -301,7 +301,7 @@ public class Cache {
     class PageRecord extends Record {
 
         /** any images associated with the page */
-        Map<ImageInfo, SoftReference<Record>> images;
+        final Map<ImageInfo, SoftReference<Record>> images;
 
         /** create a new page record */
         public PageRecord() {

@@ -352,11 +352,11 @@ public class TTFFont extends OutlineFont {
     /** a point on the stack of points */
     static class PointRec {
 
-        int x;
+        final int x;
 
-        int y;
+        final int y;
 
-        boolean onCurve;
+        final boolean onCurve;
 
         public PointRec (int x, int y, boolean onCurve) {
             this.x = x;

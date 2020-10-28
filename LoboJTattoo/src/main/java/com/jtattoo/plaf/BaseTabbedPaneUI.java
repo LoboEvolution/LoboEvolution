@@ -728,11 +728,11 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 
 	private class ScrollableTabSupport implements ChangeListener {
 
-		public ScrollableTabViewport viewport;
-		public ScrollableTabPanel tabPanel;
-		public ScrollableTabButton scrollForwardButton;
-		public ScrollableTabButton scrollBackwardButton;
-		public ScrollablePopupMenuTabButton popupMenuButton;
+		public final ScrollableTabViewport viewport;
+		public final ScrollableTabPanel tabPanel;
+		public final ScrollableTabButton scrollForwardButton;
+		public final ScrollableTabButton scrollBackwardButton;
+		public final ScrollablePopupMenuTabButton popupMenuButton;
 		public int leadingTabIndex;
 		private final Point tabViewPosition = new Point(0, 0);
 
