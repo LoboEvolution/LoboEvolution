@@ -1437,22 +1437,16 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.setBackgroundXPosition(50);
 				break;
 			case RIGHT:
-				binfo.setBackgroundXPositionAbsolute(false);
+				case BOTTOM:
+					binfo.setBackgroundXPositionAbsolute(false);
 				binfo.setBackgroundXPosition(100);
 				break;
 			case LEFT:
-				binfo.setBackgroundXPositionAbsolute(false);
+				case TOP:
+					binfo.setBackgroundXPositionAbsolute(false);
 				binfo.setBackgroundXPosition(0);
 				break;
-			case BOTTOM:
-				binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(100);
-				break;
-			case TOP:
-				binfo.setBackgroundXPositionAbsolute(false);
-				binfo.setBackgroundXPosition(0);
-				break;
-			case INHERIT:
+				case INHERIT:
 				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundXPositionAbsolute(bi.isBackgroundXPositionAbsolute());

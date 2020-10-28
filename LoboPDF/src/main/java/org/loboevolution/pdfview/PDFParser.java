@@ -464,249 +464,299 @@ public class PDFParser extends BaseWatchable {
             // (if not, the token will be "pushed" onto the stack)
             String cmd = ((Tok) obj).name;
             PDFDebugger.debug("Command: " + cmd + " (stack size is " + this.stack.size() + ")", 10);
-            if (cmd.equals("q")) {
-                // push the parser state
-                this.parserStates.push((ParserState) this.state.clone());
-                // push graphics state
-                this.cmds.addPush();
-            } else if (cmd.equals("Q")) {
-                processQCmd();
-            } else if (cmd.equals("cm")) {
-                // set transform to array of values
-                float[] elts = popFloat(6);
-                AffineTransform xform = new AffineTransform(elts);
-                this.cmds.addXform(xform);
-            } else if (cmd.equals("w")) {
-                // set stroke width
-                this.cmds.addStrokeWidth(popFloat());
-            } else if (cmd.equals("J")) {
-                // set end cap style
-                this.cmds.addEndCap(popInt());
-            } else if (cmd.equals("j")) {
-                // set line join style
-                this.cmds.addLineJoin(popInt());
-            } else if (cmd.equals("M")) {
-                // set miter limit
-                this.cmds.addMiterLimit(popInt());
-            } else if (cmd.equals("d")) {
-                // set dash style and phase
-                float phase = popFloat();
-                float[] dashary = popFloatArray();
-                if (!PDFDebugger.DISABLE_PATH_STROKE) {
-                    this.cmds.addDash(dashary, phase);
-                }
-            } else if (cmd.equals("ri")) {
-                popString();
-                // TODO: do something with rendering intent (page 197)
-            } else if (cmd.equals("i")) {
-                popFloat();
-                // TODO: do something with flatness tolerance
-            } else if (cmd.equals("gs")) {
-                // set graphics state to values in a named dictionary
-                String popString = popString();
-                PDFDebugger.debug("Set GS state "+popString, 10);
-                setGSState(popString);
-            } else if (cmd.equals("m")) {
-                // path move to
-                float y = popFloat();
-                float x = popFloat();
-                this.path.moveTo(x, y);
-                PDFDebugger.logPath(path, "2 moved to " + x + ", " + y);
-            } else if (cmd.equals("l")) {
-                // path line to
-                float y = popFloat();
-                float x = popFloat();
-                this.path.lineTo(x, y);
-                PDFDebugger.logPath(path, "1 line to " + x + ", " + y);
-            } else if (cmd.equals("c")) {
-                // path curve to
-                float a[] = popFloat(6);
-                this.path.curveTo(a[0], a[1], a[2], a[3], a[4], a[5]);
-                PDFDebugger.logPath(path, "1 curve to " + Arrays.toString(a));
-            } else if (cmd.equals("v")) {
-                // path curve; first control point= start
-                float a[] = popFloat(4);
-                Point2D cp = this.path.getCurrentPoint();
-                this.path.curveTo((float) cp.getX(), (float) cp.getY(), a[0], a[1], a[2], a[3]);
-                PDFDebugger.logPath(path, "2 curve to " + Arrays.toString(a) + ", " + cp.getX() + "," + cp.getY());
-            } else if (cmd.equals("y")) {
-                // path curve; last control point= end
-                float a[] = popFloat(4);
-                this.path.curveTo(a[0], a[1], a[2], a[3], a[2], a[3]);
-                PDFDebugger.logPath(path, "3 curve to " + Arrays.toString(a));
-            } else if (cmd.equals("h")) {
-                tryClosingPath();
-                PDFDebugger.logPath(path, "closed");
-            } else if (cmd.equals("re")) {
-                // path add rectangle
-                float a[] = popFloat(4);
-                this.path.moveTo(a[0], a[1]);
-                PDFDebugger.logPath(path, "1 moved to " + a[0] + "," + a[1]);
-                this.path.lineTo(a[0] + a[2], a[1]);
-                PDFDebugger.logPath(path, "2 line to " + (a[0] + a[2]) + "," + a[1]);
-                this.path.lineTo(a[0] + a[2], a[1] + a[3]);
-                PDFDebugger.logPath(path, "3 line to " + (a[0] + a[2]) + "," + (a[1] + a[3]));
-                this.path.lineTo(a[0], a[1] + a[3]);
-                PDFDebugger.logPath(path, "4 line to " + a[0] + "," + (a[1] + a[3]));
-                tryClosingPath();
-                PDFDebugger.logPath(path, "closed");
-            } else if (cmd.equals("S")) {
-                // stroke the path
-                if (!PDFDebugger.DISABLE_PATH_STROKE || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    if(autoAdjustStroke || strokeOverprint || fillOverprint) {
-                        path.closePath();
-                        PDFDebugger.logPath(path, "closed");
+            switch (cmd) {
+                case "q":
+                    // push the parser state
+                    this.parserStates.push((ParserState) this.state.clone());
+                    // push graphics state
+                    this.cmds.addPush();
+                    break;
+                case "Q":
+                    processQCmd();
+                    break;
+                case "cm":
+                    // set transform to array of values
+                    float[] elts = popFloat(6);
+                    AffineTransform xform = new AffineTransform(elts);
+                    this.cmds.addXform(xform);
+                    break;
+                case "w":
+                    // set stroke width
+                    this.cmds.addStrokeWidth(popFloat());
+                    break;
+                case "J":
+                    // set end cap style
+                    this.cmds.addEndCap(popInt());
+                    break;
+                case "j":
+                    // set line join style
+                    this.cmds.addLineJoin(popInt());
+                    break;
+                case "M":
+                    // set miter limit
+                    this.cmds.addMiterLimit(popInt());
+                    break;
+                case "d":
+                    // set dash style and phase
+                    float phase = popFloat();
+                    float[] dashary = popFloatArray();
+                    if (!PDFDebugger.DISABLE_PATH_STROKE) {
+                        this.cmds.addDash(dashary, phase);
                     }
-                    this.cmds.addPath(this.path, PDFShapeCmd.STROKE | this.clip, this.autoAdjustStroke);
+                    break;
+                case "ri":
+                    popString();
+                    // TODO: do something with rendering intent (page 197)
+                    break;
+                case "i":
+                    popFloat();
+                    // TODO: do something with flatness tolerance
+                    break;
+                case "gs":
+                    // set graphics state to values in a named dictionary
+                    String popString = popString();
+                    PDFDebugger.debug("Set GS state " + popString, 10);
+                    setGSState(popString);
+                    break;
+                case "m": {
+                    // path move to
+                    float y = popFloat();
+                    float x = popFloat();
+                    this.path.moveTo(x, y);
+                    PDFDebugger.logPath(path, "2 moved to " + x + ", " + y);
+                    break;
                 }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("s")) {
-                tryClosingPath();
-                PDFDebugger.logPath(path, "closed");
-                if (!PDFDebugger.DISABLE_PATH_STROKE || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.STROKE | this.clip, this.autoAdjustStroke);
+                case "l": {
+                    // path line to
+                    float y = popFloat();
+                    float x = popFloat();
+                    this.path.lineTo(x, y);
+                    PDFDebugger.logPath(path, "1 line to " + x + ", " + y);
+                    break;
                 }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("f") || cmd.equals("F")) {
-                 tryClosingPath();
-                // fill the path (close/not close identical)
-                if (!PDFDebugger.DISABLE_PATH_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.FILL | this.clip, this.autoAdjustStroke);
+                case "c": {
+                    // path curve to
+                    float a[] = popFloat(6);
+                    this.path.curveTo(a[0], a[1], a[2], a[3], a[4], a[5]);
+                    PDFDebugger.logPath(path, "1 curve to " + Arrays.toString(a));
+                    break;
                 }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("f*")) {
-                // fill the path using even/odd rule
-                this.path.setWindingRule(WIND_EVEN_ODD);
-                PDFDebugger.logPath(path, "set winding rule" + WIND_EVEN_ODD);
-                if (!PDFDebugger.DISABLE_PATH_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.FILL | this.clip, this.autoAdjustStroke);
+                case "v": {
+                    // path curve; first control point= start
+                    float a[] = popFloat(4);
+                    Point2D cp = this.path.getCurrentPoint();
+                    this.path.curveTo((float) cp.getX(), (float) cp.getY(), a[0], a[1], a[2], a[3]);
+                    PDFDebugger.logPath(path, "2 curve to " + Arrays.toString(a) + ", " + cp.getX() + "," + cp.getY());
+                    break;
                 }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("B")) {
-                // fill and stroke the path
-                if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
+                case "y": {
+                    // path curve; last control point= end
+                    float a[] = popFloat(4);
+                    this.path.curveTo(a[0], a[1], a[2], a[3], a[2], a[3]);
+                    PDFDebugger.logPath(path, "3 curve to " + Arrays.toString(a));
+                    break;
                 }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("B*")) {
-                // fill path using even/odd rule and stroke it
-                this.path.setWindingRule(WIND_EVEN_ODD);
-                PDFDebugger.logPath(path, "set winding rule" + WIND_EVEN_ODD);
-                if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
-                }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("b")) {
-                tryClosingPath();
-                PDFDebugger.logPath(path, "close");
-                if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
-                }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("b*")) {
-                tryClosingPath();
-                PDFDebugger.logPath(path, "close");
-                this.path.setWindingRule(WIND_EVEN_ODD);
-                PDFDebugger.logPath(path, "set winding rule " + WIND_EVEN_ODD);
-                if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
-                    this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
-                }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("n")) {
-                if (path.getCurrentPoint() != null) {
+                case "h":
                     tryClosingPath();
                     PDFDebugger.logPath(path, "closed");
+                    break;
+                case "re": {
+                    // path add rectangle
+                    float a[] = popFloat(4);
+                    this.path.moveTo(a[0], a[1]);
+                    PDFDebugger.logPath(path, "1 moved to " + a[0] + "," + a[1]);
+                    this.path.lineTo(a[0] + a[2], a[1]);
+                    PDFDebugger.logPath(path, "2 line to " + (a[0] + a[2]) + "," + a[1]);
+                    this.path.lineTo(a[0] + a[2], a[1] + a[3]);
+                    PDFDebugger.logPath(path, "3 line to " + (a[0] + a[2]) + "," + (a[1] + a[3]));
+                    this.path.lineTo(a[0], a[1] + a[3]);
+                    PDFDebugger.logPath(path, "4 line to " + a[0] + "," + (a[1] + a[3]));
+                    tryClosingPath();
+                    PDFDebugger.logPath(path, "closed");
+                    break;
                 }
-                // clip with the path and discard it
-                if (!PDFDebugger.DISABLE_CLIP) {
-                    if (this.clip != 0) {
-                        this.cmds.addPath(this.path, this.clip, this.autoAdjustStroke);
+                case "S":
+                    // stroke the path
+                    if (!PDFDebugger.DISABLE_PATH_STROKE || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        if (autoAdjustStroke || strokeOverprint || fillOverprint) {
+                            path.closePath();
+                            PDFDebugger.logPath(path, "closed");
+                        }
+                        this.cmds.addPath(this.path, PDFShapeCmd.STROKE | this.clip, this.autoAdjustStroke);
                     }
-                }
-                this.clip = 0;
-                this.path = new GeneralPath();
-                PDFDebugger.logPath(path, "new path");
-            } else if (cmd.equals("W")) {
-                // mark this path for clipping!
-                this.clip = PDFShapeCmd.CLIP;
-            } else if (cmd.equals("W*")) {
-                // mark this path using even/odd rule for clipping
-                this.path.setWindingRule(WIND_EVEN_ODD);
-                PDFDebugger.logPath(path, "set winding rule " + WIND_EVEN_ODD);
-                this.clip = PDFShapeCmd.CLIP;
-            } else if (cmd.equals("sh")) {
-                // shade a region that is defined by the shader itself.
-                // shading the current space from a dictionary
-                // should only be used for limited-dimension shadings
-                String gdictname = popString();
-                // set up the pen to do a gradient fill according
-                // to the dictionary
-                PDFObject shobj = findResource(gdictname, "Shading");
-                if (!PDFDebugger.DISABLE_SHADER) {
-                    doShader(shobj);
-                }
-            } else if (cmd.equals("CS")) {
-                // set the stroke color space
-                this.state.strokeCS = parseColorSpace(new PDFObject(this.stack.pop()));
-            } else if (cmd.equals("cs")) {
-                // set the fill color space
-                this.state.fillCS = parseColorSpace(new PDFObject(this.stack.pop()));
-            } else if (cmd.equals("SC")) {
-                // set the stroke color
-                int n = this.state.strokeCS.getNumComponents();
-                this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
-            } else if (cmd.equals("SCN")) {
-                // set the stroke colour
-                if (this.state.strokeCS instanceof PatternSpace) {
-                    this.cmds.addFillPaint(doPattern((PatternSpace) this.state.strokeCS));
-                } else {
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "s":
+                    tryClosingPath();
+                    PDFDebugger.logPath(path, "closed");
+                    if (!PDFDebugger.DISABLE_PATH_STROKE || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.STROKE | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "f":
+                case "F":
+                    tryClosingPath();
+                    // fill the path (close/not close identical)
+                    if (!PDFDebugger.DISABLE_PATH_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.FILL | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "f*":
+                    // fill the path using even/odd rule
+                    this.path.setWindingRule(WIND_EVEN_ODD);
+                    PDFDebugger.logPath(path, "set winding rule" + WIND_EVEN_ODD);
+                    if (!PDFDebugger.DISABLE_PATH_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.FILL | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "B":
+                    // fill and stroke the path
+                    if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "B*":
+                    // fill path using even/odd rule and stroke it
+                    this.path.setWindingRule(WIND_EVEN_ODD);
+                    PDFDebugger.logPath(path, "set winding rule" + WIND_EVEN_ODD);
+                    if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "b":
+                    tryClosingPath();
+                    PDFDebugger.logPath(path, "close");
+                    if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "b*":
+                    tryClosingPath();
+                    PDFDebugger.logPath(path, "close");
+                    this.path.setWindingRule(WIND_EVEN_ODD);
+                    PDFDebugger.logPath(path, "set winding rule " + WIND_EVEN_ODD);
+                    if (!PDFDebugger.DISABLE_PATH_STROKE_FILL || (!PDFDebugger.DISABLE_CLIP && this.clip == PDFShapeCmd.CLIP)) {
+                        this.cmds.addPath(this.path, PDFShapeCmd.BOTH | this.clip, this.autoAdjustStroke);
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "n":
+                    if (path.getCurrentPoint() != null) {
+                        tryClosingPath();
+                        PDFDebugger.logPath(path, "closed");
+                    }
+                    // clip with the path and discard it
+                    if (!PDFDebugger.DISABLE_CLIP) {
+                        if (this.clip != 0) {
+                            this.cmds.addPath(this.path, this.clip, this.autoAdjustStroke);
+                        }
+                    }
+                    this.clip = 0;
+                    this.path = new GeneralPath();
+                    PDFDebugger.logPath(path, "new path");
+                    break;
+                case "W":
+                    // mark this path for clipping!
+                    this.clip = PDFShapeCmd.CLIP;
+                    break;
+                case "W*":
+                    // mark this path using even/odd rule for clipping
+                    this.path.setWindingRule(WIND_EVEN_ODD);
+                    PDFDebugger.logPath(path, "set winding rule " + WIND_EVEN_ODD);
+                    this.clip = PDFShapeCmd.CLIP;
+                    break;
+                case "sh":
+                    // shade a region that is defined by the shader itself.
+                    // shading the current space from a dictionary
+                    // should only be used for limited-dimension shadings
+                    String gdictname = popString();
+                    // set up the pen to do a gradient fill according
+                    // to the dictionary
+                    PDFObject shobj = findResource(gdictname, "Shading");
+                    if (!PDFDebugger.DISABLE_SHADER) {
+                        doShader(shobj);
+                    }
+                    break;
+                case "CS":
+                    // set the stroke color space
+                    this.state.strokeCS = parseColorSpace(new PDFObject(this.stack.pop()));
+                    break;
+                case "cs":
+                    // set the fill color space
+                    this.state.fillCS = parseColorSpace(new PDFObject(this.stack.pop()));
+                    break;
+                case "SC": {
+                    // set the stroke color
                     int n = this.state.strokeCS.getNumComponents();
                     this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
+                    break;
                 }
-            } else if (cmd.equals("sc")) {
-                // set the fill color
-                int n = this.state.fillCS.getNumComponents();
-                this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(n)));
-            } else if (cmd.equals("scn")) {
-                if (this.state.fillCS instanceof PatternSpace) {
-                    this.cmds.addFillPaint(doPattern((PatternSpace) this.state.fillCS));
-                } else {
+                case "SCN":
+                    // set the stroke colour
+                    if (this.state.strokeCS instanceof PatternSpace) {
+                        this.cmds.addFillPaint(doPattern((PatternSpace) this.state.strokeCS));
+                    } else {
+                        int n = this.state.strokeCS.getNumComponents();
+                        this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
+                    }
+                    break;
+                case "sc": {
+                    // set the fill color
                     int n = this.state.fillCS.getNumComponents();
                     this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(n)));
+                    break;
                 }
-            } else if (cmd.equals("G")) {
-                // set the stroke color to a Gray value
-                this.state.strokeCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_GRAY);
-                this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(1)));
-            } else if (cmd.equals("g")) {
-                // set the fill color to a Gray value
-                this.state.fillCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_GRAY);
-                this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(1)));
-            } else if (cmd.equals("RG")) {
-                // set the stroke color to an RGB value
-                this.state.strokeCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_RGB);
-                this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(3)));
-            } else if (cmd.equals("rg")) {
-                // set the fill color to an RGB value
-                this.state.fillCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_RGB);
-                this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(3)));
-            } else if (cmd.equals("K")) {
+                case "scn":
+                    if (this.state.fillCS instanceof PatternSpace) {
+                        this.cmds.addFillPaint(doPattern((PatternSpace) this.state.fillCS));
+                    } else {
+                        int n = this.state.fillCS.getNumComponents();
+                        this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(n)));
+                    }
+                    break;
+                case "G":
+                    // set the stroke color to a Gray value
+                    this.state.strokeCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_GRAY);
+                    this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(1)));
+                    break;
+                case "g":
+                    // set the fill color to a Gray value
+                    this.state.fillCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_GRAY);
+                    this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(1)));
+                    break;
+                case "RG":
+                    // set the stroke color to an RGB value
+                    this.state.strokeCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_RGB);
+                    this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(3)));
+                    break;
+                case "rg":
+                    // set the fill color to an RGB value
+                    this.state.fillCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_RGB);
+                    this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(3)));
+                    break;
+                case "K":
 //                if(strokeOverprint && strokeOverprintMode == 1) {
 //                    if (this.state.strokeCS instanceof PatternSpace) {
 //                        this.cmds.addFillPaint(doPattern((PatternSpace) this.state.strokeCS));
@@ -715,11 +765,12 @@ public class PDFParser extends BaseWatchable {
 //                        this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(n)));
 //                    }
 //                }else {
-                    // set the stroke color to a CMYK value                
+                    // set the stroke color to a CMYK value
                     this.state.strokeCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_CMYK);
                     this.cmds.addStrokePaint(this.state.strokeCS.getPaint(popFloat(4)));
 //                }
-            } else if (cmd.equals("k")) {
+                    break;
+                case "k":
 //                if(fillOverprint && fillOverprintMode == 1) {
 //                    // if OP = true and OPM = 1 apply the same as in "scn"
 //                    if (this.state.fillCS instanceof PatternSpace) {
@@ -733,134 +784,173 @@ public class PDFParser extends BaseWatchable {
                     this.state.fillCS = PDFColorSpace.getColorSpace(PDFColorSpace.COLORSPACE_CMYK);
                     this.cmds.addFillPaint(this.state.fillCS.getPaint(popFloat(4)));
 //                }
-            } else if (cmd.equals("Do")) {
-                // make a do call on the referenced object
-                String name = popString();
-                if (PDFDebugger.DEBUG_IMAGES) {
-                    PDFDebugger.debug("XObject reference to " + name);
+                    break;
+                case "Do":
+                    // make a do call on the referenced object
+                    String name = popString();
+                    if (PDFDebugger.DEBUG_IMAGES) {
+                        PDFDebugger.debug("XObject reference to " + name);
+                    }
+                    PDFObject xobj = findResource(name, "XObject");
+                    doXObject(xobj);
+                    break;
+                case "BT":
+                    processBTCmd();
+                    break;
+                case "ET":
+                    // end of text. noop
+                    this.state.textFormat.end();
+                    break;
+                case "Tc":
+                    // set character spacing
+                    this.state.textFormat.setCharSpacing(popFloat());
+                    break;
+                case "Tw":
+                    // set word spacing
+                    this.state.textFormat.setWordSpacing(popFloat());
+                    break;
+                case "Tz":
+                    // set horizontal scaling
+                    this.state.textFormat.setHorizontalScale(popFloat());
+                    break;
+                case "TL":
+                    // set leading
+                    this.state.textFormat.setLeading(popFloat());
+                    break;
+                case "Tf":
+                    // set text font
+                    float sz = popFloat();
+                    String fontref = popString();
+                    this.state.textFormat.setFont(getFontFrom(fontref), sz);
+                    break;
+                case "Tr":
+                    // set text rendering mode
+                    this.state.textFormat.setMode(popInt());
+                    break;
+                case "Ts":
+                    // set text rise
+                    this.state.textFormat.setRise(popFloat());
+                    break;
+                case "Td": {
+                    // set text matrix location
+                    float y = popFloat();
+                    float x = popFloat();
+                    this.state.textFormat.carriageReturn(x, y);
+                    break;
                 }
-                PDFObject xobj = findResource(name, "XObject");
-                doXObject(xobj);
-            } else if (cmd.equals("BT")) {
-                processBTCmd();
-            } else if (cmd.equals("ET")) {
-                // end of text. noop
-                this.state.textFormat.end();
-            } else if (cmd.equals("Tc")) {
-                // set character spacing
-                this.state.textFormat.setCharSpacing(popFloat());
-            } else if (cmd.equals("Tw")) {
-                // set word spacing
-                this.state.textFormat.setWordSpacing(popFloat());
-            } else if (cmd.equals("Tz")) {
-                // set horizontal scaling
-                this.state.textFormat.setHorizontalScale(popFloat());
-            } else if (cmd.equals("TL")) {
-                // set leading
-                this.state.textFormat.setLeading(popFloat());
-            } else if (cmd.equals("Tf")) {
-                // set text font
-                float sz = popFloat();
-                String fontref = popString();
-                this.state.textFormat.setFont(getFontFrom(fontref), sz);
-            } else if (cmd.equals("Tr")) {
-                // set text rendering mode
-                this.state.textFormat.setMode(popInt());
-            } else if (cmd.equals("Ts")) {
-                // set text rise
-                this.state.textFormat.setRise(popFloat());
-            } else if (cmd.equals("Td")) {
-                // set text matrix location
-                float y = popFloat();
-                float x = popFloat();
-                this.state.textFormat.carriageReturn(x, y);
-            } else if (cmd.equals("TD")) {
-                // set leading and matrix: -y TL x y Td
-                float y = popFloat();
-                float x = popFloat();
-                this.state.textFormat.setLeading(-y);
-                this.state.textFormat.carriageReturn(x, y);
-            } else if (cmd.equals("Tm")) {
-                // set text matrix
-                this.state.textFormat.setMatrix(popFloat(6));
-            } else if (cmd.equals("T*")) {
-                // go to next line
-                this.state.textFormat.carriageReturn();
-            } else if (cmd.equals("Tj")) {
-                // show text
-                this.state.textFormat.doText(this.cmds, popString(), this.autoAdjustStroke);
-            } else if (cmd.equals("\'")) {
-                // next line and show text: T* string Tj
-                this.state.textFormat.carriageReturn();
-                this.state.textFormat.doText(this.cmds, popString(), this.autoAdjustStroke);
-            } else if (cmd.equals("\"")) {
-                // draw string on new line with char & word spacing:
-                // aw Tw ac Tc string '
-                String string = popString();
-                float ac = popFloat();
-                float aw = popFloat();
-                this.state.textFormat.setWordSpacing(aw);
-                this.state.textFormat.setCharSpacing(ac);
-                this.state.textFormat.doText(this.cmds, string, this.autoAdjustStroke);
-            } else if (cmd.equals("TJ")) {
-                // show kerned string
-                this.state.textFormat.doText(this.cmds, popArray(), this.autoAdjustStroke);
-            } else if (cmd.equals("BI")) {
-                // parse inline image
-                parseInlineImage();
-            } else if (cmd.equals("BX")) {
-                this.catchexceptions = true; // ignore errors
-            } else if (cmd.equals("EX")) {
-                this.catchexceptions = false; // stop ignoring errors
-            } else if (cmd.equals("MP")) {
-                // mark point (role= mark role name)
-                popString();
-            } else if (cmd.equals("DP")) {
-                // mark point with dictionary (role, ref)
-                // result is either inline dict or name in "Properties" rsrc
-                this.stack.pop();
-                popString();
-            } else if (cmd.equals("BMC")) {
-                // begin marked content (role)
-                popString();
-            } else if (cmd.equals("BDC")) {
-                // begin marked content with dict (role, ref)
-                // result is either inline dict or name in "Properties" rsrc
-                this.stack.pop();
-                popString();
-            } else if (cmd.equals("EMC")) {
-                // end marked content
-            } else if (cmd.equals("d0")) {
-                // character width in type3 fonts
-                popFloat(2);
-            } else if (cmd.equals("d1")) {
-                // character width in type3 fonts
-                popFloat(6);
-            } else if (cmd.equals("QBT")) {// 'Q' & 'BT' mushed together!
-                processQCmd();
-                processBTCmd();
-            } else if (cmd.equals("Qq")) {// 'Q' & 'q' mushed together!
-                processQCmd();
-                // push the parser state
-                this.parserStates.push((ParserState) this.state.clone());
-                // push graphics state
-                this.cmds.addPush();
-            } else if (cmd.equals("qBT")) {// 'q' & 'BT' mushed together!
-            // push the parser state
-                this.parserStates.push((ParserState) this.state.clone());
-                // push graphics state
-                this.cmds.addPush();
-                processBTCmd();
-            } else if (cmd.equals("q1")) {
-                PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
-            } else if (cmd.equals("q0")) {
-                PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
-            } else {
-                if (this.catchexceptions) {
-                    PDFDebugger.debug("**** WARNING: Unknown command: " + cmd + " **************************", 10);
-                } else {
-                    throw new PDFParseException("Unknown command: " + cmd);
+                case "TD": {
+                    // set leading and matrix: -y TL x y Td
+                    float y = popFloat();
+                    float x = popFloat();
+                    this.state.textFormat.setLeading(-y);
+                    this.state.textFormat.carriageReturn(x, y);
+                    break;
                 }
+                case "Tm":
+                    // set text matrix
+                    this.state.textFormat.setMatrix(popFloat(6));
+                    break;
+                case "T*":
+                    // go to next line
+                    this.state.textFormat.carriageReturn();
+                    break;
+                case "Tj":
+                    // show text
+                    this.state.textFormat.doText(this.cmds, popString(), this.autoAdjustStroke);
+                    break;
+                case "\'":
+                    // next line and show text: T* string Tj
+                    this.state.textFormat.carriageReturn();
+                    this.state.textFormat.doText(this.cmds, popString(), this.autoAdjustStroke);
+                    break;
+                case "\"":
+                    // draw string on new line with char & word spacing:
+                    // aw Tw ac Tc string '
+                    String string = popString();
+                    float ac = popFloat();
+                    float aw = popFloat();
+                    this.state.textFormat.setWordSpacing(aw);
+                    this.state.textFormat.setCharSpacing(ac);
+                    this.state.textFormat.doText(this.cmds, string, this.autoAdjustStroke);
+                    break;
+                case "TJ":
+                    // show kerned string
+                    this.state.textFormat.doText(this.cmds, popArray(), this.autoAdjustStroke);
+                    break;
+                case "BI":
+                    // parse inline image
+                    parseInlineImage();
+                    break;
+                case "BX":
+                    this.catchexceptions = true; // ignore errors
+
+                    break;
+                case "EX":
+                    this.catchexceptions = false; // stop ignoring errors
+
+                    break;
+                case "MP":
+                    // mark point (role= mark role name)
+                    popString();
+                    break;
+                case "DP":
+                    // mark point with dictionary (role, ref)
+                    // result is either inline dict or name in "Properties" rsrc
+                    this.stack.pop();
+                    popString();
+                    break;
+                case "BMC":
+                    // begin marked content (role)
+                    popString();
+                    break;
+                case "BDC":
+                    // begin marked content with dict (role, ref)
+                    // result is either inline dict or name in "Properties" rsrc
+                    this.stack.pop();
+                    popString();
+                    break;
+                case "EMC":
+                    // end marked content
+                    break;
+                case "d0":
+                    // character width in type3 fonts
+                    popFloat(2);
+                    break;
+                case "d1":
+                    // character width in type3 fonts
+                    popFloat(6);
+                    break;
+                case "QBT": // 'Q' & 'BT' mushed together!
+                    processQCmd();
+                    processBTCmd();
+                    break;
+                case "Qq": // 'Q' & 'q' mushed together!
+                    processQCmd();
+                    // push the parser state
+                    this.parserStates.push((ParserState) this.state.clone());
+                    // push graphics state
+                    this.cmds.addPush();
+                    break;
+                case "qBT": // 'q' & 'BT' mushed together!
+                    // push the parser state
+                    this.parserStates.push((ParserState) this.state.clone());
+                    // push graphics state
+                    this.cmds.addPush();
+                    processBTCmd();
+                    break;
+                case "q1":
+                    PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
+                    break;
+                case "q0":
+                    PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
+                    break;
+                default:
+                    if (this.catchexceptions) {
+                        PDFDebugger.debug("**** WARNING: Unknown command: " + cmd + " **************************", 10);
+                    } else {
+                        throw new PDFParseException("Unknown command: " + cmd);
+                    }
+                    break;
             }
             if (this.stack.size() != 0) {
                 PDFDebugger.debug("**** WARNING! Stack not zero! (cmd=" + cmd + ", size=" + this.stack.size() + ") *************************", 10);
@@ -1172,24 +1262,36 @@ public class PDFParser extends BaseWatchable {
             if(PDFDebugger.DEBUG_IMAGES) {
                 PDFDebugger.debug("ParseInlineImage, token: " + name);
             }
-            if (name.equals("BPC")) {
-                name = "BitsPerComponent";
-            } else if (name.equals("CS")) {
-                name = "ColorSpace";
-            } else if (name.equals("D")) {
-                name = "Decode";
-            } else if (name.equals("DP")) {
-                name = "DecodeParms";
-            } else if (name.equals("F")) {
-                name = "Filter";
-            } else if (name.equals("H")) {
-                name = "Height";
-            } else if (name.equals("IM")) {
-                name = "ImageMask";
-            } else if (name.equals("W")) {
-                name = "Width";
-            } else if (name.equals("I")) {
-                name = "Interpolate";
+            switch (name) {
+                case "BPC":
+                    name = "BitsPerComponent";
+                    break;
+                case "CS":
+                    name = "ColorSpace";
+                    break;
+                case "D":
+                    name = "Decode";
+                    break;
+                case "DP":
+                    name = "DecodeParms";
+                    break;
+                case "F":
+                    name = "Filter";
+                    break;
+                case "H":
+                    name = "Height";
+                    break;
+                case "IM":
+                    name = "ImageMask";
+                    break;
+                case "W":
+                    name = "Width";
+                    break;
+                case "I":
+                    name = "Interpolate";
+                    break;
+                default:
+                    break;
             }
             Object vobj = parseObject();
             hm.put(name, new PDFObject(vobj));

@@ -951,18 +951,22 @@ public class HtmlRendererContext {
 	public void submitForm(final String method, final URL action, final String target, final String enctype, final FormInput[] formInputs) {
 		if (target != null) {
 			final String actualTarget = target.trim().toLowerCase();
-			if ("_top".equals(actualTarget)) {
-				getTop().navigate(action, null);
-				return;
-			} else if ("_parent".equals(actualTarget)) {
-				final HtmlRendererContext parent = getParent();
-				if (parent != null) {
-					parent.navigate(action, null);
-					return;
-				}
-			} else if ("_blank".equals(actualTarget)) {
-				open(action, "cobra.blank", "", false);
-				return;
+			switch (actualTarget) {
+				case "_top":
+					getTop().navigate(action, null);
+					break;
+				case "_parent":
+					final HtmlRendererContext parent = getParent();
+					if (parent != null) {
+						parent.navigate(action, null);
+						return;
+					}
+					break;
+				case "_blank":
+					open(action, "cobra.blank", "", false);
+					break;
+				default:
+					break;
 			}
 		}
 

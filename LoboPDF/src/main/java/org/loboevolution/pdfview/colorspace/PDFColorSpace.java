@@ -160,65 +160,72 @@ public class PDFColorSpace {
         PDFObject[] ary = csobj.getArray();
         name = ary[0].getStringValue();
 
-		if (name.equals("DeviceGray") || name.equals("G")) {
-			return getColorSpace(COLORSPACE_GRAY);
-		} else if (name.equals("DeviceRGB") || name.equals("RGB")) {
-			return getColorSpace(COLORSPACE_RGB);
-		} else if (name.equals("DeviceCMYK") || name.equals("CMYK")) {
-			return getColorSpace(COLORSPACE_CMYK);
-		} else if (name.equals("CalGray")) {
-			value = new PDFColorSpace(new CalGrayColor(ary[1]));
-		} else if (name.equals("CalRGB")) {
-            value = new PDFColorSpace(new CalRGBColor(ary[1]));
-        } else if (name.equals("Lab")) {
-            value = new PDFColorSpace(new LabColor(ary[1]));
-        } else if (name.equals("ICCBased")) {
-            try {
-                ByteArrayInputStream bais = new ByteArrayInputStream(ary[1].getStream());
-                ICC_Profile profile = ICC_Profile.getInstance(bais);
-                if (profile.getColorSpaceType() == ColorSpace.CS_GRAY || profile.getColorSpaceType() == ColorSpace.TYPE_GRAY) {
-                    return graySpace;
-                }
-                value = new PDFColorSpace(new ICC_ColorSpace(profile));
-            } catch (IllegalArgumentException e) {
+        switch (name) {
+            case "DeviceGray":
+            case "G":
+                return getColorSpace(COLORSPACE_GRAY);
+            case "DeviceRGB":
+            case "RGB":
                 return getColorSpace(COLORSPACE_RGB);
-            }
-        } else if (name.equals("Separation") || name.equals("DeviceN")) {
-            PDFColorSpace alternate = getColorSpace(ary[2], resources);
-            PDFFunction function = PDFFunction.getFunction(ary[3]);
+            case "DeviceCMYK":
+            case "CMYK":
+                return getColorSpace(COLORSPACE_CMYK);
+            case "CalGray":
+                value = new PDFColorSpace(new CalGrayColor(ary[1]));
+                break;
+            case "CalRGB":
+                value = new PDFColorSpace(new CalRGBColor(ary[1]));
+                break;
+            case "Lab":
+                value = new PDFColorSpace(new LabColor(ary[1]));
+                break;
+            case "ICCBased":
+                try {
+                    ByteArrayInputStream bais = new ByteArrayInputStream(ary[1].getStream());
+                    ICC_Profile profile = ICC_Profile.getInstance(bais);
+                    if (profile.getColorSpaceType() == ColorSpace.CS_GRAY || profile.getColorSpaceType() == ColorSpace.TYPE_GRAY) {
+                        return graySpace;
+                    }
+                    value = new PDFColorSpace(new ICC_ColorSpace(profile));
+                } catch (IllegalArgumentException e) {
+                    return getColorSpace(COLORSPACE_RGB);
+                }
+                break;
+            case "Separation":
+            case "DeviceN":
+                PDFColorSpace alternate = getColorSpace(ary[2], resources);
+                PDFFunction function = PDFFunction.getFunction(ary[3]);
+                value = new AlternateColorSpace(alternate, function);
+                break;
+            case "Indexed":
+            case "I":
+                /**
+                 * 4.5.5 [/Indexed baseColor hival lookup]
+                 */
+                PDFColorSpace refspace = getColorSpace(ary[1], resources);
 
-            value = new AlternateColorSpace(alternate, function);
-        } else if (name.equals("Indexed") || name.equals("I")) {
-            /**
-             * 4.5.5 [/Indexed baseColor hival lookup]
-             */
-            PDFColorSpace refspace = getColorSpace(ary[1], resources);
+                // number of indices= ary[2], data is in ary[3];
+                int count = ary[2].getIntValue();
+                try {
+                    value = new IndexedColor(refspace, count, ary[3]);
+                } catch (Exception e) {
+                    // there might be problems in reading the colorspace from stream,
+                    // in that case use the reference colorspace
+                    value = refspace;
+                }
 
-            // number of indices= ary[2], data is in ary[3];
-            int count = ary[2].getIntValue();
-            try {
-                value = new IndexedColor(refspace, count, ary[3]);
-            }catch(Exception e) {
-                // there might be problems in reading the colorspace from stream, 
-                // in that case use the reference colorspace
-                value = refspace;
-            }
-            
-        } else if (name.equals("Pattern")) {
-            if (ary.length == 1) {
-                return getColorSpace(COLORSPACE_PATTERN);
-            }
+                break;
+            case "Pattern":
+                if (ary.length == 1) {
+                    return getColorSpace(COLORSPACE_PATTERN);
+                }
 
-            PDFColorSpace base = getColorSpace(ary[1], resources);
+                PDFColorSpace base = getColorSpace(ary[1], resources);
 
-            return new PatternSpace(base);
-        } else if(name.equals("DeviceRGB")) {
-        	return getColorSpace(COLORSPACE_RGB);
-        } else if(name.equals("DeviceCMYK")) {
-        	return getColorSpace(COLORSPACE_CMYK);
-        } else {        	
-        	// removed access to ary[1] dur to index out of bounds exceptions
-            throw new PDFParseException("Unknown color space: " + name);
+                return new PatternSpace(base);
+            default:
+                // removed access to ary[1] dur to index out of bounds exceptions
+                throw new PDFParseException("Unknown color space: " + name);
         }
 
         csobj.setCache(value);

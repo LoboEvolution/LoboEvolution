@@ -199,18 +199,19 @@ public class PDFFontEncoding {
 
     /** Get the base encoding for a given name */
     private int[] getBaseEncoding(String encodingName) {
-        if (encodingName.equals("MacRomanEncoding")) {
-            return FontSupport.macRomanEncoding;
-        } else if (encodingName.equals("MacExpertEncoding")) {
-            return FontSupport.type1CExpertCharset;
-        } else if (encodingName.equals("WinAnsiEncoding")) {
-            return FontSupport.winAnsiEncoding;
-        } else if (encodingName.equals("StandardEncoding")) {
-        	return FontSupport.standardEncoding; 
-        } else if(encodingName.equals("SymbolSetEncoding")) {
-            return FontSupport.symbolSetEncoding;
-        } else {
-            throw new IllegalArgumentException("Unknown encoding: " + encodingName);
+        switch (encodingName) {
+            case "MacRomanEncoding":
+                return FontSupport.macRomanEncoding;
+            case "MacExpertEncoding":
+                return FontSupport.type1CExpertCharset;
+            case "WinAnsiEncoding":
+                return FontSupport.winAnsiEncoding;
+            case "StandardEncoding":
+                return FontSupport.standardEncoding;
+            case "SymbolSetEncoding":
+                return FontSupport.symbolSetEncoding;
+            default:
+                throw new IllegalArgumentException("Unknown encoding: " + encodingName);
         }
     }
     
