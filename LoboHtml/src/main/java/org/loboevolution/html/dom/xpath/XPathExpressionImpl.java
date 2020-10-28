@@ -150,7 +150,7 @@ public class XPathExpressionImpl implements XPathExpression {
 		// done with it!
 		if (!XPathResultImpl.isValidType(type)) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
-					new Object[] { Integer.valueOf(type) });
+					new Object[] {(int) type});
 			throw new XPathException(XPathException.TYPE_ERR, fmsg);
 		}
 

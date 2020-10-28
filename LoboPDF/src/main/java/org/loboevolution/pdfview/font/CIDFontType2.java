@@ -121,11 +121,11 @@ public class CIDFontType2 extends TTFFont {
                         // add all the entries in the array to the width array
                         PDFObject[] entries = pdfObject.getArray();
                         for (int c = 0; c < entries.length; c++) {
-                            Character key = Character.valueOf((char) (c + first));
+                            Character key = (char) (c + first);
 
                             // value is width / default width
                             float value = entries[c].getIntValue();
-                            this.widths.put(key, new Float(value));
+                            this.widths.put(key, value);
                         }
                         // all done
                         entryIdx = -1;
@@ -138,7 +138,7 @@ public class CIDFontType2 extends TTFFont {
 
                     // set the range
                     for (int c = first; c <= last; c++) {
-                        this.widths.put(Character.valueOf((char) c), new Float(value));
+                        this.widths.put((char) c, (float) value);
                     }
 
                     // all done
@@ -184,11 +184,11 @@ public class CIDFontType2 extends TTFFont {
                         // add all the entries in the array to the width array
                         PDFObject[] entries = pdfObject.getArray();
                         for (int c = 0; c < entries.length; c++) {
-                            Character key = Character.valueOf((char) (c + first));
+                            Character key = (char) (c + first);
 
                             // value is width / default width
                             float value = entries[c].getIntValue();
-                            this.widthsVertical.put(key, new Float(value));
+                            this.widthsVertical.put(key, value);
                         }
                         // all done
                         entryIdx = -1;
@@ -201,7 +201,7 @@ public class CIDFontType2 extends TTFFont {
 
                     // set the range
                     for (int c = first; c <= last; c++) {
-                        this.widthsVertical.put(Character.valueOf((char) c), new Float(value));
+                        this.widthsVertical.put((char) c, (float) value);
                     }
 
                     // all done
@@ -225,12 +225,12 @@ public class CIDFontType2 extends TTFFont {
         if (this.widths == null) {
             return 1f;
         }
-        Float w = this.widths.get(Character.valueOf(code));
+        Float w = this.widths.get(code);
         if (w == null) {
             return 1f;
         }
 
-        return w.floatValue() / getDefaultWidth();
+        return w / getDefaultWidth();
     }
 
     /** Get the default vertical width in text space */
@@ -243,12 +243,12 @@ public class CIDFontType2 extends TTFFont {
         if (this.widthsVertical == null) {
             return 1f;
         }
-        Float w = this.widthsVertical.get(Character.valueOf(code));
+        Float w = this.widthsVertical.get(code);
         if (w == null) {
             return 1f;
         }
 
-        return w.floatValue() / getDefaultWidthVertical();
+        return w / getDefaultWidthVertical();
     }
 
     /**

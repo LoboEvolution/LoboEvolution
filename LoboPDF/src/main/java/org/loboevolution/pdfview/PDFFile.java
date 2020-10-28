@@ -907,7 +907,7 @@ public class PDFFile {
         if (neg) {
             value = -value;
         }
-        return new PDFObject(this, PDFObject.NUMBER, Double.valueOf(value));
+        return new PDFObject(this, PDFObject.NUMBER, value);
     }
 
     /**
@@ -1568,7 +1568,7 @@ public class PDFFile {
      * @param wait if true, do not exit until the page is complete.
      */
     public PDFPage getPage(int pagenum, boolean wait) {
-        Integer key = Integer.valueOf(pagenum);
+        Integer key = pagenum;
         HashMap<String,PDFObject> resources = null;
         PDFObject pageObj = null;
 
@@ -1613,7 +1613,7 @@ public class PDFFile {
      * Stop the rendering of a particular image on this page
      */
     public void stop(int pageNum) {
-        PDFParser parser = this.cache.getPageParser(Integer.valueOf(pageNum));
+        PDFParser parser = this.cache.getPageParser(pageNum);
         if (parser != null) {
             // stop it
             parser.stop();

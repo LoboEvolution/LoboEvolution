@@ -88,7 +88,7 @@ public class CMapFormat6 extends CMap {
      */
     @Override
 	public char reverseMap(short glyphID) {
-        Short result = this.glyphLookup.get(Short.valueOf(glyphID));
+        Short result = this.glyphLookup.get(glyphID);
         if (result == null) {
             return '\000';
         }
@@ -108,8 +108,8 @@ public class CMapFormat6 extends CMap {
         this.glyphIndexArray = new short [this.entryCount];
         for (int i = 0; i < this.glyphIndexArray.length; i++) {
             this.glyphIndexArray[i] = data.getShort();
-            this.glyphLookup.put(Short.valueOf(this.glyphIndexArray[i]),
-                            Short.valueOf((short) (i + this.firstCode)));
+            this.glyphLookup.put(this.glyphIndexArray[i],
+                    (short) (i + this.firstCode));
         }
     }
 

@@ -63,7 +63,7 @@ import org.w3c.dom.css.CSS3Properties;
 public abstract class BaseElementRenderable extends BaseRCollection
 		implements RElement, RenderableContainer, ImageObserver {
 	/** Constant INVALID_SIZE */
-	protected static final Integer INVALID_SIZE = Integer.valueOf(Integer.MIN_VALUE);
+	protected static final Integer INVALID_SIZE = Integer.MIN_VALUE;
 
 	/** Constant SCROLL_BAR_THICKNESS=16 */
 	protected static final int SCROLL_BAR_THICKNESS = 16;
@@ -239,12 +239,12 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			final Integer declaredHeight = getDeclaredHeight(rs, actualAvailHeight);
 			int autoMarginX = 0, autoMarginY = 0;
 			if (declaredWidth != null) {
-				autoMarginX = (availWidth - declaredWidth.intValue()
+				autoMarginX = (availWidth - declaredWidth
 						- (borderInsets == null ? 0 : borderInsets.left - borderInsets.right)
 						- (paddingInsets == null ? 0 : paddingInsets.left - paddingInsets.right)) / 2;
 			}
 			if (declaredHeight != null) {
-				autoMarginY = (availHeight - declaredHeight.intValue()
+				autoMarginY = (availHeight - declaredHeight
 						- (borderInsets == null ? 0 : borderInsets.top - borderInsets.bottom)
 						- (paddingInsets == null ? 0 : paddingInsets.top - paddingInsets.bottom)) / 2;
 			}
@@ -469,7 +469,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (dh == INVALID_SIZE || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			final int dhInt = getDeclaredHeightImpl(renderState, actualAvailHeight);
-			dh = dhInt == -1 ? null : Integer.valueOf(dhInt);
+			dh = dhInt == -1 ? null : dhInt;
 			this.declaredHeight = dh;
 		}
 		return dh;
@@ -538,7 +538,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		if (dw == INVALID_SIZE || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			final int dwInt = getDeclaredWidthImpl(renderState, actualAvailWidth);
-			dw = dwInt == -1 ? null : Integer.valueOf(dwInt);
+			dw = dwInt == -1 ? null : dwInt;
 			this.declaredWidth = dw;
 		}
 		return dw;

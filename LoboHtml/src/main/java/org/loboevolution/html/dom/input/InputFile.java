@@ -44,7 +44,7 @@ public class InputFile {
 			this.textField.setToolTipText(modelNode.getTitle());
 		textField.setVisible(!modelNode.getHidden());
 		textField.applyComponentOrientation(ic.direction(modelNode.getDir()));
-		textField.setEditable(Boolean.valueOf(modelNode.getContentEditable()));
+		textField.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
 		textField.setEnabled(!modelNode.getDisabled());
 
 		Box buttonBar = Box.createHorizontalBox();

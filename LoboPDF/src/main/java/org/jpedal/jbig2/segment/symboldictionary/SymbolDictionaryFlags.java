@@ -72,34 +72,34 @@ public class SymbolDictionaryFlags extends Flags {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract SD_HUFF */
-		flags.put(SD_HUFF, new Integer(flagsAsInt & 1));
+		flags.put(SD_HUFF, flagsAsInt & 1);
 
 		/** extract SD_REF_AGG */
-		flags.put(SD_REF_AGG, new Integer((flagsAsInt >> 1) & 1));
+		flags.put(SD_REF_AGG, (flagsAsInt >> 1) & 1);
 
 		/** extract SD_HUFF_DH */
-		flags.put(SD_HUFF_DH, new Integer((flagsAsInt >> 2) & 3));
+		flags.put(SD_HUFF_DH, (flagsAsInt >> 2) & 3);
 
 		/** extract SD_HUFF_DW */
-		flags.put(SD_HUFF_DW, new Integer((flagsAsInt >> 4) & 3));
+		flags.put(SD_HUFF_DW, (flagsAsInt >> 4) & 3);
 
 		/** extract SD_HUFF_BM_SIZE */
-		flags.put(SD_HUFF_BM_SIZE, new Integer((flagsAsInt >> 6) & 1));
+		flags.put(SD_HUFF_BM_SIZE, (flagsAsInt >> 6) & 1);
 
 		/** extract SD_HUFF_AGG_INST */
-		flags.put(SD_HUFF_AGG_INST, new Integer((flagsAsInt >> 7) & 1));
+		flags.put(SD_HUFF_AGG_INST, (flagsAsInt >> 7) & 1);
 
 		/** extract BITMAP_CC_USED */
-		flags.put(BITMAP_CC_USED, new Integer((flagsAsInt >> 8) & 1));
+		flags.put(BITMAP_CC_USED, (flagsAsInt >> 8) & 1);
 
 		/** extract BITMAP_CC_RETAINED */
-		flags.put(BITMAP_CC_RETAINED, new Integer((flagsAsInt >> 9) & 1));
+		flags.put(BITMAP_CC_RETAINED, (flagsAsInt >> 9) & 1);
 
 		/** extract SD_TEMPLATE */
-		flags.put(SD_TEMPLATE, new Integer((flagsAsInt >> 10) & 3));
+		flags.put(SD_TEMPLATE, (flagsAsInt >> 10) & 3);
 
 		/** extract SD_R_TEMPLATE */
-		flags.put(SD_R_TEMPLATE, new Integer((flagsAsInt >> 12) & 1));
+		flags.put(SD_R_TEMPLATE, (flagsAsInt >> 12) & 1);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("flags: " + flags);

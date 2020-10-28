@@ -501,9 +501,7 @@ public class RBlockViewport extends BaseRCollection {
 			final int nextY = emptyLine ? cleary : liney + line.height;
 			addLine(renderable.getModelNode(), line, nextY);
 			final Collection<Renderable> renderables = oe.getRenderables();
-			final Iterator<Renderable> i = renderables.iterator();
-			while (i.hasNext()) {
-				final Renderable r = i.next();
+			for (Renderable r : renderables) {
 				addRenderableToLine(r);
 			}
 		}
@@ -554,9 +552,7 @@ public class RBlockViewport extends BaseRCollection {
 			final int nextY = emptyLine ? cleary : liney + line.height;
 			addLine(renderable.getModelNode(), line, nextY);
 			final Collection<Renderable> renderables = oe.getRenderables();
-			final Iterator<Renderable> i = renderables.iterator();
-			while (i.hasNext()) {
-				final Renderable r = i.next();
+			for (Renderable r : renderables) {
 				addRenderableToLine(r);
 			}
 		}
@@ -622,9 +618,7 @@ public class RBlockViewport extends BaseRCollection {
 				final List<Renderable> rlist = this.seqRenderables;
 				if (rlist != null) {
 					// Try sequential renderables first.
-					final Iterator<Renderable> renderables = rlist.iterator();
-					while (renderables.hasNext()) {
-						final Object r = renderables.next();
+					for (Object r : rlist) {
 						if (r instanceof BoundableRenderable) {
 							final BoundableRenderable line = (BoundableRenderable) r;
 							final int newY = line.getY() + shift;
@@ -1048,7 +1042,7 @@ public class RBlockViewport extends BaseRCollection {
 			fl = isFloatLimitImpl();
 			this.isFloatLimit = fl;
 		}
-		return fl.booleanValue();
+		return fl;
 	}
 
 	private Boolean isFloatLimitImpl() {

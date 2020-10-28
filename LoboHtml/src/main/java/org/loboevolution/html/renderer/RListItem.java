@@ -37,7 +37,7 @@ class RListItem extends BaseRListElement {
 	private static final int BULLET_HEIGHT = 5;
 	private static final int BULLET_RMARGIN = 5;
 	private static final int BULLET_WIDTH = 5;
-	private static final Integer UNSET = Integer.valueOf(Integer.MIN_VALUE);
+	private static final Integer UNSET = Integer.MIN_VALUE;
 
 	private int count;
 
@@ -69,7 +69,7 @@ class RListItem extends BaseRListElement {
 		if (value == UNSET) {
 			this.count = renderState.incrementCount(DEFAULT_COUNTER_NAME, this.listNesting);
 		} else {
-			final int newCount = value.intValue();
+			final int newCount = value;
 			this.count = newCount;
 			renderState.resetCount(DEFAULT_COUNTER_NAME, this.listNesting, newCount + 1);
 		}

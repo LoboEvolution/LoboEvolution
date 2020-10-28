@@ -460,12 +460,12 @@ public abstract class PDFFont {
         }
 
         // try the cache
-        PDFGlyph glyph = this.charCache.get(Character.valueOf(src));
+        PDFGlyph glyph = this.charCache.get(src);
 
         // if it's not there, add it to the cache
         if (glyph == null) {
             glyph = getGlyph(src, name);
-            this.charCache.put(Character.valueOf(src), glyph);
+            this.charCache.put(src, glyph);
         }
 
         return glyph;

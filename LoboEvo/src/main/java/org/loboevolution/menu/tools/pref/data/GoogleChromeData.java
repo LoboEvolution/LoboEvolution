@@ -128,7 +128,7 @@ public class GoogleChromeData extends BrowserData {
 			final List<CookieInfo> cookies = getCookieInfo(path);
 			for (final CookieInfo cookie : cookies) {
 				final Date expires = new Date();
-				expires.setTime(Long.valueOf(cookie.getExpires()));
+				expires.setTime(Long.parseLong(cookie.getExpires()));
 				CookieManager.saveCookie(cookie.getDomain(), cookie.getPath(), cookie.getName(), expires,
 						cookie.getValue(), null, cookie.isSecure(), cookie.isHttpOnly());
 			}

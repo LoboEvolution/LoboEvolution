@@ -167,8 +167,8 @@ public class RUIControl extends BaseElementRenderable {
 			final int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top - borderInsets.bottom - marginInsets.top - marginInsets.bottom;
 			final Integer dw = this.getDeclaredWidth(renderState, actualAvailWidth);
 			final Integer dh = this.getDeclaredHeight(renderState, actualAvailHeight);
-			final int declaredWidth = dw == null ? -1 : dw.intValue();
-			final int declaredHeight = dh == null ? -1 : dh.intValue();
+			final int declaredWidth = dw == null ? -1 : dw;
+			final int declaredHeight = dh == null ? -1 : dh;
 			this.declaredWidth = declaredWidth;
 			this.declaredHeight = declaredHeight;
 

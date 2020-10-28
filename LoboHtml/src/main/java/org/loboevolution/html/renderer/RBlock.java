@@ -439,10 +439,10 @@ public class RBlock extends BaseElementRenderable {
 		int declaredWidth = -1;
 		int declaredHeight = -1;
 		if (dw != null) {
-			declaredWidth = dw.intValue();
+			declaredWidth = dw;
 		}
 		if (dh != null) {
-			declaredHeight = dh.intValue();
+			declaredHeight = dh;
 		}
 
 		clearGUIComponents();
@@ -488,7 +488,7 @@ public class RBlock extends BaseElementRenderable {
 			insetsTotalWidth = insets.left + insets.right;
 			actualAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
 			dw = getDeclaredWidth(renderState, actualAvailWidth);
-			declaredWidth = dw == null ? -1 : dw.intValue();
+			declaredWidth = dw == null ? -1 : dw;
 			desiredViewportWidth = tentativeWidth - insetsTotalWidth;
 			if (blockFloatBounds != null) {
 				viewportFloatBounds = new ShiftedFloatingBounds(blockFloatBounds, -insets.left, -insets.right,

@@ -55,9 +55,9 @@ public class InputNumber extends InputText {
 
 					if (Strings.isNotBlank(min) && Strings.isNotBlank(max)) {
 						try {
-							int intText = Integer.valueOf(num.getText());
-							int intMin = Integer.valueOf(min);
-							int intMax = Integer.valueOf(max);
+							int intText = Integer.parseInt(num.getText());
+							int intMin = Integer.parseInt(min);
+							int intMax = Integer.parseInt(max);
 
 							if (intText < intMin || intText > intMax) {
 								numeric.setBorder(BorderFactory.createLineBorder(Color.RED));

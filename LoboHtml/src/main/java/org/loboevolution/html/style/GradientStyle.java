@@ -95,7 +95,7 @@ public class GradientStyle {
 		default:
 			if (direction.contains("deg")) {
 				Collections.reverse(Arrays.asList(colors));
-				double rotation = Double.valueOf(direction.substring(0, direction.lastIndexOf('d')));
+				double rotation = Double.parseDouble(direction.substring(0, direction.lastIndexOf('d')));
 				AffineTransform tf = AffineTransform.getTranslateInstance(-width / 2, -height / 2);
 		        tf.preConcatenate(AffineTransform.getRotateInstance(Math.toRadians(rotation)));
 		        tf.preConcatenate(AffineTransform.getTranslateInstance(width / 2, height / 2));
@@ -236,7 +236,7 @@ public class GradientStyle {
 	
 	private static void setFractions(ArrayList<Float> listFractions, char[] charArray, int index, String color) {
 		final boolean isPercent = color.contains("%");
-		final float numberOnly = isPercent ? Float.valueOf(color.replaceAll("[^0-9]", "")) /100 : 0f;
+		final float numberOnly = isPercent ? Float.parseFloat(color.replaceAll("[^0-9]", "")) /100 : 0f;
 		
 		if (listFractions.size() == 0) {
 			listFractions.add(isPercent ? numberOnly : 0F);

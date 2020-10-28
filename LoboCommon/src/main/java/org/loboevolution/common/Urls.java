@@ -171,13 +171,13 @@ public class Urls {
 			while (tok.hasMoreTokens()) {
 				String token = tok.nextToken().trim().toLowerCase();
 				if ("must-revalidate".equals(token)) {
-					return Long.valueOf(0);
+					return 0L;
 				} else if (token.startsWith("max-age")) {
 					int eqIdx = token.indexOf('=');
 					if (eqIdx != -1) {
 						String value = token.substring(eqIdx + 1).trim();
 						try {
-							return Long.valueOf(baseTime + Integer.parseInt(value));
+							return baseTime + Integer.parseInt(value);
 						} catch (NumberFormatException e) {
 							logger.log(Level.SEVERE, e.getMessage(), e);
 						}
@@ -190,11 +190,11 @@ public class Urls {
 			try {
 				synchronized (PATTERN_RFC1123) {
 					Date expDate = PATTERN_RFC1123.parse(expires);
-					return Long.valueOf(expDate.getTime());
+					return expDate.getTime();
 				}
 			} catch (ParseException pe) {
 				try {
-					return Long.valueOf(baseTime + Integer.parseInt(expires));
+					return baseTime + Integer.parseInt(expires);
 				} catch (NumberFormatException e) {
 					logger.log(Level.SEVERE, e.getMessage(), e);
 				}

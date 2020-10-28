@@ -162,7 +162,7 @@ public class XPathResultImpl implements XPathResult, EventListener {
 		// Check that the type is valid
 		if (!isValidType(type)) {
 			String fmsg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_INVALID_XPATH_TYPE,
-					new Object[] { Integer.valueOf(type) });
+					new Object[] {(int) type});
 			throw new XPathException(XPathException.TYPE_ERR, fmsg); 
 		}
 

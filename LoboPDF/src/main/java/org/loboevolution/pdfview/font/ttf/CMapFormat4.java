@@ -70,7 +70,7 @@ public class CMapFormat4 extends CMap {
         Segment s = new Segment(startCode, endCode, false);
         // make sure we remove any old entries
         this.segments.remove(s);
-        this.segments.put(s, Integer.valueOf(idDelta));
+        this.segments.put(s, (int) idDelta);
     }
     
     /**
@@ -141,7 +141,7 @@ public class CMapFormat4 extends CMap {
                     } else {
                         // return the character code + idDelta
                         Integer idDelta = (Integer) this.segments.get(s);
-                        return (char) (src + idDelta.intValue());
+                        return (char) (src + idDelta);
                     }
                 } else {
                     // undefined character
@@ -177,12 +177,12 @@ public class CMapFormat4 extends CMap {
                 Integer idDelta = (Integer) this.segments.get(s);
                 
                 // we can do the math to see if we're in range
-                int start = s.startCode + idDelta.intValue();
-                int end = s.endCode + idDelta.intValue();
-                
+                int start = s.startCode + idDelta;
+                int end = s.endCode + idDelta;
+
                 if (glyphID >= start && glyphID <= end) {
                     // we're in the range
-                    return (char) (glyphID - idDelta.intValue());
+                    return (char) (glyphID - idDelta);
                 }
             }
         }

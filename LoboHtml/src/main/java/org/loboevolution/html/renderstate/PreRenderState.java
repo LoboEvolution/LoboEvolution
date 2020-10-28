@@ -45,7 +45,7 @@ public class PreRenderState extends BlockRenderState {
 	public int getWhiteSpace() {
 		final Integer ws = this.iWhiteSpace;
 		if (ws != null) {
-			return ws.intValue();
+			return ws;
 		}
 		final AbstractCSSProperties props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
@@ -62,7 +62,7 @@ public class PreRenderState extends BlockRenderState {
 				wsValue = WS_PRE;
 			}
 		}
-		this.iWhiteSpace = Integer.valueOf(wsValue);
+		this.iWhiteSpace = wsValue;
 		return wsValue;
 	}
 }

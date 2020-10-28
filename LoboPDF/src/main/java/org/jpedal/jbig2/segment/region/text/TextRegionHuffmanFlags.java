@@ -70,28 +70,28 @@ public class TextRegionHuffmanFlags extends Flags {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract SB_HUFF_FS */
-		flags.put(SB_HUFF_FS, new Integer(flagsAsInt & 3));
+		flags.put(SB_HUFF_FS, flagsAsInt & 3);
 
 		/** extract SB_HUFF_DS */
-		flags.put(SB_HUFF_DS, new Integer((flagsAsInt >> 2) & 3));
+		flags.put(SB_HUFF_DS, (flagsAsInt >> 2) & 3);
 
 		/** extract SB_HUFF_DT */
-		flags.put(SB_HUFF_DT, new Integer((flagsAsInt >> 4) & 3));
+		flags.put(SB_HUFF_DT, (flagsAsInt >> 4) & 3);
 
 		/** extract SB_HUFF_RDW */
-		flags.put(SB_HUFF_RDW, new Integer((flagsAsInt >> 6) & 3));
+		flags.put(SB_HUFF_RDW, (flagsAsInt >> 6) & 3);
 
 		/** extract SB_HUFF_RDH */
-		flags.put(SB_HUFF_RDH, new Integer((flagsAsInt >> 8) & 3));
+		flags.put(SB_HUFF_RDH, (flagsAsInt >> 8) & 3);
 
 		/** extract SB_HUFF_RDX */
-		flags.put(SB_HUFF_RDX, new Integer((flagsAsInt >> 10) & 3));
+		flags.put(SB_HUFF_RDX, (flagsAsInt >> 10) & 3);
 
 		/** extract SB_HUFF_RDY */
-		flags.put(SB_HUFF_RDY, new Integer((flagsAsInt >> 12) & 3));
+		flags.put(SB_HUFF_RDY, (flagsAsInt >> 12) & 3);
 
 		/** extract SB_HUFF_RSIZE */
-		flags.put(SB_HUFF_RSIZE, new Integer((flagsAsInt >> 14) & 1));
+		flags.put(SB_HUFF_RSIZE, (flagsAsInt >> 14) & 1);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("flags: " + flags);

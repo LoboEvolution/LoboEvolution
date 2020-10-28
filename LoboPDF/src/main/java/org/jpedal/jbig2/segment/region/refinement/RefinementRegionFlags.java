@@ -64,10 +64,10 @@ public class RefinementRegionFlags extends Flags {
 		this.flagsAsInt = flagsAsInt;
 
 		/** extract GR_TEMPLATE */
-		flags.put(GR_TEMPLATE, new Integer(flagsAsInt & 1));
+		flags.put(GR_TEMPLATE, flagsAsInt & 1);
 
 		/** extract TPGDON */
-		flags.put(TPGDON, new Integer((flagsAsInt >> 1) & 1));
+		flags.put(TPGDON, (flagsAsInt >> 1) & 1);
 
 		if (JBIG2StreamDecoder.debug)
 			logger.info("flags: " + flags);

@@ -380,7 +380,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		laf.setUnderline(this.underlineCheckBox.isSelected());
 		laf.setItalic(this.italicCheckBox.isSelected());
 		laf.setStrikethrough(this.strikethroughCheckBox.isSelected());
-		laf.setFontSize(Float.valueOf(this.fontSizeList.getSelectedItem().toString()));
+		laf.setFontSize(Float.parseFloat(this.fontSizeList.getSelectedItem().toString()));
 		laf.setFont(this.fontList.getSelectedItem().toString());
 		laf.setColor((Color) this.colorComboBox.getSelectedItem());
 		laf.setBold(this.boldCheckBox.isSelected());
@@ -398,7 +398,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 	private void updatePreview() {
 		final StringBuilder previewText = new StringBuilder(this.PREVIEW_TEXT);
 		final String name = (String) this.fontList.getSelectedItem();
-		final int size = Integer.valueOf((String) this.fontSizeList.getSelectedItem());
+		final int size = Integer.parseInt((String) this.fontSizeList.getSelectedItem());
 
 		if (size <= 0) {
 			return;

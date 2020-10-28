@@ -237,7 +237,7 @@ public class TableCellRenderState extends DisplayRenderState {
 		}
 		final Integer ws = this.iWhiteSpace;
 		if (ws != null) {
-			return ws.intValue();
+			return ws;
 		}
 		final AbstractCSSProperties props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
@@ -280,7 +280,7 @@ public class TableCellRenderState extends DisplayRenderState {
 				}
 			}
 		}
-		this.iWhiteSpace = Integer.valueOf(wsValue);
+		this.iWhiteSpace = wsValue;
 		return wsValue;
 	}
 

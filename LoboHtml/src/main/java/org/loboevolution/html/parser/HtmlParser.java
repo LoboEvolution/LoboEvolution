@@ -1192,6 +1192,6 @@ public class HtmlParser {
 				return -1;
 			}
 		}
-		return c.charValue();
+		return c;
 	}
 }

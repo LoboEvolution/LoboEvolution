@@ -37,7 +37,7 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		int v = ((Integer) evt.getNewValue()).intValue();
+		int v = (Integer) evt.getNewValue();
 		if (v <= 1) {
 			isOpen = false;
 			putValue(ACTION_COMMAND_KEY, "Show thumbnails");

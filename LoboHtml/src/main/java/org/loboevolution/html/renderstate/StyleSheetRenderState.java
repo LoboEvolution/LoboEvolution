@@ -402,7 +402,7 @@ public class StyleSheetRenderState implements RenderState {
 			return 0;
 		}
 		final Integer integer = counterArray.get(nesting);
-		return integer == null ? 0 : integer.intValue();
+		return integer == null ? 0 : integer;
 	}
 
 	/**
@@ -429,7 +429,7 @@ public class StyleSheetRenderState implements RenderState {
 	public int getDisplay() {
 		final Integer d = this.iDisplay;
 		if (d != null) {
-			return d.intValue();
+			return d;
 		}
 		CSSValues display = null;
 		int displayInt = -1;
@@ -437,7 +437,7 @@ public class StyleSheetRenderState implements RenderState {
 		if (previous != null && previous.getDisplay() == DISPLAY_FLEX_BOX) {
 			final RFlex flex = new RFlex(previous);
 			displayInt = flex.isFlexTable() ? DISPLAY_TABLE_CELL : DISPLAY_FLEX_CHILD;
-			this.iDisplay = Integer.valueOf(displayInt);
+			this.iDisplay = displayInt;
 			return displayInt;
 		} else {
 			final CSS3Properties props = this.getCssProperties();
@@ -485,7 +485,7 @@ public class StyleSheetRenderState implements RenderState {
 			displayInt = this.getDefaultDisplay();
 			break;
 		}
-		this.iDisplay = Integer.valueOf(displayInt);
+		this.iDisplay = displayInt;
 		return displayInt;
 	}
 
@@ -494,7 +494,7 @@ public class StyleSheetRenderState implements RenderState {
 	public int getFloat() {
 		Integer p = this.cachedFloat;
 		if (p != null) {
-			return p.intValue();
+			return p;
 		}
 		AbstractCSSProperties props = this.getCssProperties();
 		int floatValue = 0;
@@ -519,7 +519,7 @@ public class StyleSheetRenderState implements RenderState {
 			floatValue = FLOAT_NONE;
 			break;
 		}
-		this.cachedFloat = Integer.valueOf(floatValue);
+		this.cachedFloat = floatValue;
 		return floatValue;
 	}
 
@@ -588,7 +588,7 @@ public class StyleSheetRenderState implements RenderState {
 		key.setFontStyle(FontValues.getFontStyle(style.getFontStyle()));
 		key.setFontVariant(style.getFontVariant());
 		key.setFontWeight(FontValues.getFontWeight(style.getFontWeight()));
-		key.setFontSize(Float.valueOf(FontValues.getFontSize(style.getFontSize(), prs)));
+		key.setFontSize(FontValues.getFontSize(style.getFontSize(), prs));
 		key.setLocales(document == null ? null : document.getLocales());
 		key.setSuperscript(FontValues.getFontSuperScript(style.getVerticalAlign(), prs));
 		key.setLetterSpacing(HtmlValues.getPixelSize(style.getLetterSpacing(), prs, 0));
@@ -778,7 +778,7 @@ public class StyleSheetRenderState implements RenderState {
 	public int getPosition() {
 		Integer p = this.cachedPosition;
 		if (p != null) {
-			return p.intValue();
+			return p;
 		}
 		AbstractCSSProperties props = this.getCssProperties();
 		int position = 0;
@@ -805,7 +805,7 @@ public class StyleSheetRenderState implements RenderState {
 			break;
 		}
 
-		this.cachedPosition = Integer.valueOf(position);
+		this.cachedPosition = position;
 		return position;
 	}
 
@@ -976,7 +976,7 @@ public class StyleSheetRenderState implements RenderState {
 	public int getVisibility() {
 		Integer v = this.cachedVisibility;
 		if (v != null) {
-			return v.intValue();
+			return v;
 		}
 		AbstractCSSProperties props = this.getCssProperties();
 		int visibility;
@@ -1001,7 +1001,7 @@ public class StyleSheetRenderState implements RenderState {
 			visibility = VISIBILITY_VISIBLE;
 			break;
 		}
-		this.cachedVisibility = Integer.valueOf(visibility);
+		this.cachedVisibility = visibility;
 		return visibility;
 	}
 	
@@ -1013,7 +1013,7 @@ public class StyleSheetRenderState implements RenderState {
 		}
 		final Integer ws = this.iWhiteSpace;
 		if (ws != null) {
-			return ws.intValue();
+			return ws;
 		}
 		final AbstractCSSProperties props = getCssProperties();
 		final String whiteSpaceText = props == null ? null : props.getWhiteSpace();
@@ -1041,7 +1041,7 @@ public class StyleSheetRenderState implements RenderState {
 			}
 			break;
 		}
-		this.iWhiteSpace = Integer.valueOf(wsValue);
+		this.iWhiteSpace = wsValue;
 		return wsValue;
 	}
 
@@ -1089,8 +1089,8 @@ public class StyleSheetRenderState implements RenderState {
 			counterArray.add(null);
 		}
 		final Integer integer = (Integer) counterArray.get(nesting);
-		final int prevValue = (integer == null || integer == 0) ? 1 : integer.intValue();
-		counterArray.set(nesting, Integer.valueOf(prevValue + 1));
+		final int prevValue = (integer == null || integer == 0) ? 1 : integer;
+		counterArray.set(nesting, prevValue + 1);
 		return prevValue;
 	}
 
@@ -1153,7 +1153,7 @@ public class StyleSheetRenderState implements RenderState {
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}
-			counterArray.set(nesting, Integer.valueOf(value));
+			counterArray.set(nesting, value);
 		}
 	}
 
@@ -1178,13 +1178,13 @@ public class StyleSheetRenderState implements RenderState {
 			CSSValues clear = CSSValues.get(clearStr);
 			switch (clear) {
 			case RIGHT:
-				cachedClear = Integer.valueOf(LineBreak.RIGHT);
+				cachedClear = LineBreak.RIGHT;
 				break;
 			case LEFT:
-				cachedClear = Integer.valueOf(LineBreak.LEFT);
+				cachedClear = LineBreak.LEFT;
 				break;
 			default:
-				cachedClear = Integer.valueOf(LineBreak.NONE);
+				cachedClear = LineBreak.NONE;
 				break;
 			}
 		}

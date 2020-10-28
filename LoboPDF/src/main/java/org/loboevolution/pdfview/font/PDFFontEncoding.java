@@ -141,8 +141,8 @@ public class PDFFontEncoding {
         src &= 0xff;
 
         // see if this character is in the differences list
-        if (this.differences.containsKey(Character.valueOf(src))) {
-            charName = this.differences.get(Character.valueOf(src));
+        if (this.differences.containsKey(src)) {
+            charName = this.differences.get(src);
         } else if (this.baseEncoding != null) {
             // get the character name from the base encoding
             int charID = this.baseEncoding[src];
@@ -187,7 +187,7 @@ public class PDFFontEncoding {
                 if (pdfObject.getType() == PDFObject.NUMBER) {
                     curPosition = pdfObject.getIntValue();
                 } else if (pdfObject.getType() == PDFObject.NAME) {
-                    Character key = Character.valueOf((char) curPosition);
+                    Character key = (char) curPosition;
                     this.differences.put(key, pdfObject.getStringValue());
                     curPosition++;
                 } else {

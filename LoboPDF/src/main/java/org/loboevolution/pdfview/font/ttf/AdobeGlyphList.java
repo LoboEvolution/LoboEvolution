@@ -120,7 +120,7 @@ public class AdobeGlyphList {
 								codes = new int[unicodes.size()];
 								for (int i = 0; i < unicodes.size(); i++) {
 									codes[i] = Integer.parseInt(unicodes.get(i), 16);
-									unicodeToGlyph.put(Integer.valueOf(codes[i]), glyphName);
+									unicodeToGlyph.put(codes[i], glyphName);
 								}
 								glyphToUnicodes.put(glyphName, codes);
 							}
@@ -171,7 +171,7 @@ public class AdobeGlyphList {
         if (unicodes == null) {
             return null;
         } else {
-            return Integer.valueOf(unicodes[0]);
+            return unicodes[0];
         }
     }
 
@@ -192,6 +192,6 @@ public class AdobeGlyphList {
                 }
             }
         }
-        return unicodeToGlyph.get(Integer.valueOf(unicode));
+        return unicodeToGlyph.get(unicode);
     }
 }

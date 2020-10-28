@@ -125,14 +125,14 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 				public void visit(Node node) {
 					if (node instanceof HTMLTableRowElementImpl) {
 						if (HTMLTableRowElementImpl.this == node) {
-							throw new StopVisitorException(Integer.valueOf(this.count));
+							throw new StopVisitorException(this.count);
 						}
 						this.count++;
 					}
 				}
 			});
 		} catch (final StopVisitorException sve) {
-			return ((Integer) sve.getTag()).intValue();
+			return (Integer) sve.getTag();
 		}
 		return -1;
 	}

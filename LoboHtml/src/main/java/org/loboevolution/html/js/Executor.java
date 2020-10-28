@@ -108,7 +108,7 @@ public class Executor {
 				if (!(result instanceof Boolean)) {
 					return true;
 				}
-				return ((Boolean) result).booleanValue();
+				return (Boolean) result;
 			} catch (final Throwable thrown) {
 				logger.log(Level.WARNING, "executeFunction(): There was an error in Javascript code.", thrown);
 				return true;
@@ -136,7 +136,7 @@ public class Executor {
 				if (!(result instanceof Boolean)) {
 					return true;
 				}
-				return ((Boolean) result).booleanValue();
+				return (Boolean) result;
 			} catch (final Throwable err) {
 				logger.log(Level.WARNING,
 						"executeFunction(): Unable to execute Javascript function " + f.getClassName() + ".", err);

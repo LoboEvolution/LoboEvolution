@@ -1111,7 +1111,7 @@ public class PDFParser extends BaseWatchable {
     private Object parseObject() throws PDFParseException, DebugStopException {
         Tok t = nextToken();
         if (t.type == Tok.NUM) {
-            return Double.valueOf(this.tok.value);
+            return this.tok.value;
         } else if (t.type == Tok.STR) {
             return this.tok.name;
         } else if (t.type == Tok.NAME) {
@@ -1204,11 +1204,11 @@ public class PDFParser extends BaseWatchable {
         if (imObj != null && imObj.getBooleanValue()) {
             // [PATCHED by michal.busta@gmail.com] - default value according to PDF spec. is [0, 1]
             // there is no need to swap array - PDF image should handle this values
-            Double[] decode = { Double.valueOf(0), Double.valueOf(1) };
+            Double[] decode = {(double) 0, 1d};
             PDFObject decodeObj = hm.get("Decode");
             if (decodeObj != null) {
-                decode[0] = Double.valueOf(decodeObj.getAt(0).getDoubleValue());
-                decode[1] = Double.valueOf(decodeObj.getAt(1).getDoubleValue());
+                decode[0] = decodeObj.getAt(0).getDoubleValue();
+                decode[1] = decodeObj.getAt(1).getDoubleValue();
             }
             hm.put("Decode", new PDFObject(decode));
         }

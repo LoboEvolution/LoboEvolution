@@ -114,7 +114,7 @@ public class SelectOption {
 		}
 		comboBox.setVisible(!modelNode.getHidden());
 		comboBox.applyComponentOrientation(direction(modelNode.getDir()));
-		comboBox.setEditable(Boolean.valueOf(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
+		comboBox.setEditable(Boolean.parseBoolean(modelNode.getContentEditable() == null ? "true" : modelNode.getContentEditable()));
 		comboBox.setEnabled(!modelNode.getDisabled());
 		this.list = list;
 		this.resetItemList(modelNode);
@@ -216,22 +216,22 @@ public class SelectOption {
 						if (selectedIndexes == null) {
 							selectedIndexes = new LinkedList<Integer>();
 						}
-						selectedIndexes.add(Integer.valueOf(index));
+						selectedIndexes.add(index);
 					}
 					if (option.getDefaultSelected()) {
 						if (defaultSelectedIndexes == null) {
 							defaultSelectedIndexes = new LinkedList<Integer>();
 						}
-						defaultSelectedIndexes.add(Integer.valueOf(index));
+						defaultSelectedIndexes.add(index);
 					}
 				}
 				if (ArrayUtilities.isNotBlank(selectedIndexes)) {
 					for (Integer si : selectedIndexes) {
-						list.addSelectionInterval(si.intValue(), si.intValue());
+						list.addSelectionInterval(si, si);
 					}
 				} else if (ArrayUtilities.isNotBlank(defaultSelectedIndexes)) {
 					for (Integer si : defaultSelectedIndexes) {
-						list.addSelectionInterval(si.intValue(), si.intValue());
+						list.addSelectionInterval(si, si);
 					}
 				}
 			}

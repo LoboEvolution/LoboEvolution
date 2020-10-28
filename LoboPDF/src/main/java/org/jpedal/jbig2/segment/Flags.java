@@ -60,7 +60,7 @@ public abstract class Flags {
 
 	public int getFlagValue(String key) {
 		Integer value = flags.get(key);
-		return value.intValue();
+		return value;
 	}
 
 	public abstract void setFlags(int flagsAsInt);

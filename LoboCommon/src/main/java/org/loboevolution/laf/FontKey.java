@@ -212,7 +212,7 @@ public class FontKey {
 			fs = "";
 		}
 		final Integer ss = this.superscript;
-		ch = ff.hashCode() ^ fw.hashCode() ^ fs.hashCode() ^ (int) this.fontSize ^ (ss == null ? 0 : ss.intValue());
+		ch = ff.hashCode() ^ fw.hashCode() ^ fs.hashCode() ^ (int) this.fontSize ^ (ss == null ? 0 : ss);
 		this.cachedHash = ch;
 		return ch;
 	}

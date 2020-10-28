@@ -84,7 +84,7 @@ public class Coordinates extends AbstractScriptableDelegate {
     	if (altitude != null && altitudeAccuracy == null) {
     		throw new IllegalArgumentException("Altitude Accuracy cannot be null.");
     	}
-    	if (altitude != null && altitudeAccuracy != null && altitudeAccuracy.doubleValue() < 0) {
+    	if (altitude != null && altitudeAccuracy != null && altitudeAccuracy < 0) {
     		throw new IllegalArgumentException("Altitude Accuracy cannot be negative.");
     	}
 
@@ -95,8 +95,8 @@ public class Coordinates extends AbstractScriptableDelegate {
     	if (accuracy/latitude > 0.05 || accuracy/longitude > 0.05) {
     		throw new IllegalArgumentException("Accuracy cannot be less than 95%.");
     	}
-    	if (altitude != null && altitudeAccuracy != null && 
-    			altitudeAccuracy.doubleValue()/altitude.doubleValue() > 0.05) {
+    	if (altitude != null && altitudeAccuracy != null &&
+                altitudeAccuracy / altitude > 0.05) {
     		throw new IllegalArgumentException("Altitude Accuracy cannot be less than 95%.");
     	}
     	
@@ -106,10 +106,10 @@ public class Coordinates extends AbstractScriptableDelegate {
     	 * device is stationary (i.e. the value of the speed attribute is 0), then the value of the 
     	 * heading attribute must be NaN.
     	 */
-    	if (heading != null && (heading.doubleValue() < 0 || heading.doubleValue() >= 360)) {
+    	if (heading != null && (heading < 0 || heading >= 360)) {
     		throw new IllegalArgumentException("If provided, heading must be >= 0 and < 360.");
     	}
-    	if (speed != null && speed.doubleValue() == 0 && heading != null && !heading.isNaN()) {
+    	if (speed != null && speed == 0 && heading != null && !heading.isNaN()) {
     		throw new IllegalArgumentException("heading must not have any numeric value because speed is zero.");
     	}
     	
@@ -117,7 +117,7 @@ public class Coordinates extends AbstractScriptableDelegate {
     	 * If the implementation cannot provide speed information, the value of this attribute must be 
     	 * null. Otherwise, the value of the speed attribute must be a non-negative real number.
     	 */
-    	if (speed != null && speed.doubleValue() < 0) {
+    	if (speed != null && speed < 0) {
     		throw new IllegalArgumentException("If provided, speed cannot be less than zero.");
     	}
     	

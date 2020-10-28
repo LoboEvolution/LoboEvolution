@@ -48,7 +48,7 @@ public class InputPassword {
 		
 		pwd.setVisible(!modelNode.getHidden());
 		pwd.applyComponentOrientation(ic.direction(modelNode.getDir()));
-		pwd.setEditable(Boolean.valueOf(modelNode.getContentEditable()));
+		pwd.setEditable(Boolean.parseBoolean(modelNode.getContentEditable()));
 		pwd.setEnabled(!modelNode.getDisabled());
 		pwd.setEditable(!modelNode.getReadOnly());
 		pwd.setDocument(new LimitedDocument());

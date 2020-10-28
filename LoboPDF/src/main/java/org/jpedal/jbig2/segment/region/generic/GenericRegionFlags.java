@@ -65,13 +65,13 @@ public class GenericRegionFlags extends Flags {
 		this.flagsAsInt = flagsAsInt;
 		
 		/** extract MMR */
-		flags.put(MMR, new Integer(flagsAsInt & 1));
+		flags.put(MMR, flagsAsInt & 1);
 		
 		/** extract GB_TEMPLATE */
-		flags.put(GB_TEMPLATE, new Integer((flagsAsInt >> 1) & 3));
+		flags.put(GB_TEMPLATE, (flagsAsInt >> 1) & 3);
 		
 		/** extract TPGDON */
-		flags.put(TPGDON, new Integer((flagsAsInt >> 3) & 1));
+		flags.put(TPGDON, (flagsAsInt >> 3) & 1);
 		
 		
 		if(JBIG2StreamDecoder.debug)

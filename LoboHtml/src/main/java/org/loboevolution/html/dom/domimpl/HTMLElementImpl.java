@@ -753,7 +753,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		synchronized (this) {
 			ihs = this.isHoverStyle;
 			if (ihs != null) {
-				return ihs.booleanValue();
+				return ihs;
 			}
 		}
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
@@ -768,12 +768,12 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (classNames != null && classNames.length() != 0) {
 				classNameArray = Strings.split(classNames);
 			}
-			ihs = Boolean.valueOf(ssa.affectedByPseudoNameInAncestor(this, this, elementName, id, classNameArray, "hover"));
+			ihs = ssa.affectedByPseudoNameInAncestor(this, this, elementName, id, classNameArray, "hover");
 		}
 		synchronized (this) {
 			this.isHoverStyle = ihs;
 		}
-		return ihs.booleanValue();
+		return ihs;
 	}
 
 	private boolean hasHoverStyle(HTMLElementImpl ancestor) {
@@ -783,7 +783,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (ihs != null) {
 				final Boolean f = (Boolean) ihs.get(ancestor);
 				if (f != null) {
-					return f.booleanValue();
+					return f;
 				}
 			}
 		}
@@ -800,7 +800,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			if (classNames != null && classNames.length() != 0) {
 				classNameArray = Strings.split(classNames);
 			}
-			hhs = Boolean.valueOf(ssa.affectedByPseudoNameInAncestor(this, ancestor, elementName, id, classNameArray, "hover"));
+			hhs = ssa.affectedByPseudoNameInAncestor(this, ancestor, elementName, id, classNameArray, "hover");
 		}
 		synchronized (this) {
 			ihs = this.hasHoverStyleByElement;
@@ -810,7 +810,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			}
 			ihs.put(ancestor, hhs);
 		}
-		return hhs.booleanValue();
+		return hhs;
 	}
 
 	/** {@inheritDoc} */
