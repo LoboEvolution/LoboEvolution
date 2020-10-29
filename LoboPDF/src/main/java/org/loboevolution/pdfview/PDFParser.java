@@ -503,6 +503,10 @@ public class PDFParser extends BaseWatchable {
                     }
                     break;
                 case "ri":
+                case "BMC":
+                case "MP":
+                    // mark point (role= mark role name)
+                    // begin marked content (role)
                     popString();
                     // TODO: do something with rendering intent (page 197)
                     break;
@@ -887,22 +891,10 @@ public class PDFParser extends BaseWatchable {
                     this.catchexceptions = false; // stop ignoring errors
 
                     break;
-                case "MP":
-                    // mark point (role= mark role name)
-                    popString();
-                    break;
                 case "DP":
-                    // mark point with dictionary (role, ref)
-                    // result is either inline dict or name in "Properties" rsrc
-                    this.stack.pop();
-                    popString();
-                    break;
-                case "BMC":
-                    // begin marked content (role)
-                    popString();
-                    break;
                 case "BDC":
                     // begin marked content with dict (role, ref)
+                    // mark point with dictionary (role, ref)
                     // result is either inline dict or name in "Properties" rsrc
                     this.stack.pop();
                     popString();
@@ -937,8 +929,6 @@ public class PDFParser extends BaseWatchable {
                     processBTCmd();
                     break;
                 case "q1":
-                    PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
-                    break;
                 case "q0":
                     PDFDebugger.debug("**** WARNING: Not handled command: " + cmd + " **************************", 10);
                     break;

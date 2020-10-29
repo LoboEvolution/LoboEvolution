@@ -54,7 +54,7 @@ public class TextureMenuBarUI extends BasicMenuBarUI {
 	public void installUI(JComponent c) {
 		super.installUI(c);
 		if (c != null && c instanceof JMenuBar) {
-			((JMenuBar) c).setBorder(BaseBorders.getMenuBarBorder());
+			c.setBorder(BaseBorders.getMenuBarBorder());
 			((JMenuBar) c).setBorderPainted(true);
 		}
 	}

@@ -227,7 +227,7 @@ class RLine extends BaseRCollection {
 			int newOffset = offset;
 			int newWidth = offset;
 			for (int i = renderables.size(); --i >= 0;) {
-				final Renderable renderable = (Renderable) renderables.get(i);
+				final Renderable renderable = renderables.get(i);
 				if (renderable instanceof RWord || !(renderable instanceof BoundableRenderable)) {
 					if (overflow == null) {
 						overflow = new ArrayList<Renderable>();
@@ -423,7 +423,7 @@ class RLine extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public RenderableSpot getLowestRenderableSpot(int x, int y) {
-		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
+		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable br = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (br != null) {
 			final Rectangle rbounds = br.getVisualBounds();
@@ -479,7 +479,7 @@ class RLine extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onDoubleClick(MouseEvent event, int x, int y) {
-		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
+		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
 			final Rectangle rbounds = r.getVisualBounds();
@@ -492,7 +492,7 @@ class RLine extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseClick(MouseEvent event, int x, int y) {
-		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
+		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
 			final Rectangle rbounds = r.getVisualBounds();
@@ -517,7 +517,7 @@ class RLine extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMousePressed(MouseEvent event, int x, int y) {
-		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
+		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
 			this.mousePressTarget = r;
@@ -531,7 +531,7 @@ class RLine extends BaseRCollection {
 	/** {@inheritDoc} */
 	@Override
 	public boolean onMouseReleased(MouseEvent event, int x, int y) {
-		final Renderable[] rarray = (Renderable[]) this.renderables.toArray(Renderable.EMPTY_ARRAY);
+		final Renderable[] rarray = this.renderables.toArray(Renderable.EMPTY_ARRAY);
 		final BoundableRenderable r = MarkupUtilities.findRenderable(rarray, x, y, false);
 		if (r != null) {
 			final Rectangle rbounds = r.getVisualBounds();

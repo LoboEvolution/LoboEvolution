@@ -125,7 +125,7 @@ public class Nodes {
 	        public String next() {
 	            if (!hasNext())
 	                throw new NoSuchElementException();
-	            return (String) cssList.item(index++); 
+	            return cssList.item(index++);
 	        }
 	    };
 	}

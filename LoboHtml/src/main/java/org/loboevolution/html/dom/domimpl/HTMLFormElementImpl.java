@@ -297,7 +297,7 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 					}
 				}
 			});
-			final FormInput[] fia = (FormInput[]) formInputs.toArray(FormInput.EMPTY_ARRAY);
+			final FormInput[] fia = formInputs.toArray(FormInput.EMPTY_ARRAY);
 			String href = getAction();
 			if (href == null) {
 				href = getBaseURI();

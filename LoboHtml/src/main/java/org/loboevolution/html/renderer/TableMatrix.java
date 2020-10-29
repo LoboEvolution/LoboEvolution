@@ -225,7 +225,7 @@ class TableMatrix {
 			final List<VirtualCell> row = rows.get(r);
 			int numCols = row.size();
 			for (int c = 0; c < numCols; c++) {
-				final VirtualCell vc = (VirtualCell) row.get(c);
+				final VirtualCell vc = row.get(c);
 				if (vc != null && vc.isTopLeft()) {
 					final RTableCell ac = vc.getActualCell();
 					int colspan = ac.getColSpan();
@@ -249,7 +249,7 @@ class TableMatrix {
 						if (colspan > 1 || y > 0) {
 							// Get row
 							final int nr = r + y;
-							final List<VirtualCell> newRow = (ArrayList<VirtualCell>) rows.get(nr);
+							final List<VirtualCell> newRow = rows.get(nr);
 
 							// Insert missing cells in row
 							final int xstart = y == 0 ? 1 : 0;
@@ -277,7 +277,7 @@ class TableMatrix {
 			final List<VirtualCell> row = rows.get(r);
 			final int numCols = row.size();
 			for (int c = 0; c < numCols; c++) {
-				final VirtualCell vc = (VirtualCell) row.get(c);
+				final VirtualCell vc = row.get(c);
 				if (vc != null) {
 					vc.setColumn(c);
 					vc.setRow(r);
@@ -363,7 +363,7 @@ class TableMatrix {
 			}
 			final SizeInfo rowSizeInfo = new SizeInfo();
 			rowSizes[i] = rowSizeInfo;
-			HTMLElementImpl rowElement = rowElements.size() > i ? (HTMLElementImpl)rowElements.get(i) : null;
+			HTMLElementImpl rowElement = rowElements.size() > i ? rowElements.get(i) : null;
 			final String rowHeightText = rowElement == null ? null : rowElement.getAttribute("height");
 			HtmlLength rowHeightLength = null;
 			if (rowHeightText != null) {
@@ -378,7 +378,7 @@ class TableMatrix {
 			} else {
 				HtmlLength bestHeightLength = null;
 				for (VirtualCell virtualCell : row) {
-					final VirtualCell vc = (VirtualCell) virtualCell;
+					final VirtualCell vc = virtualCell;
 					if (vc != null) {
 						final HtmlLength vcHeightLength = vc.getHeightLength();
 						if (vcHeightLength != null && vcHeightLength.isPreferredOver(bestHeightLength)) {
@@ -1143,7 +1143,7 @@ class TableMatrix {
 		final List<RTableCell> allCells = this.ALL_CELLS;
 		final int numCells = allCells.size();
 		for (RTableCell rTableCell : allCells) {
-			final RTableCell cell = (RTableCell) rTableCell;
+			final RTableCell cell = rTableCell;
 			final Graphics newG = g.create(cell.x, cell.y, cell.width, cell.height);
 			try {
 				cell.paint(newG);
@@ -1195,7 +1195,7 @@ class TableMatrix {
 				ArrayList<VirtualCell> row;
 				if (rowElement != null) {
 					currentNullRow = null;
-					row = (ArrayList<VirtualCell>) rowElementToRowArray.get(rowElement);
+					row = rowElementToRowArray.get(rowElement);
 					if (row == null) {
 						row = new ArrayList<VirtualCell>();
 						rowElementToRowArray.put(rowElement, row);

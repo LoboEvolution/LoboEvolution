@@ -74,7 +74,7 @@ public class SVGPointImpl implements SVGPoint {
 	/** {@inheritDoc} */
 	@Override
 	public SVGPoint matrixTransform(SVGMatrix matrix) {
-		AffineTransform transform = ((SVGMatrixImpl) matrix).getAffineTransform();
+		AffineTransform transform = matrix.getAffineTransform();
 		Point2D srcPoint = new Point2D.Double(x, y);
 		Point2D dstPoint = new Point2D.Double();
 		transform.transform(srcPoint, dstPoint);

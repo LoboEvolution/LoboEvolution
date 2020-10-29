@@ -759,36 +759,28 @@ public final class JBIG2Bitmap {
 					if (transposed) {
 						switch (referenceCorner) {
 						case 0: // bottom left
-							combine(symbolBitmap, tt, s, combinationOperator);
+							case 1: // top left
+								combine(symbolBitmap, tt, s, combinationOperator);
 							break;
-						case 1: // top left
-							combine(symbolBitmap, tt, s, combinationOperator);
+							case 2: // bottom right
+							case 3: // top right
+								combine(symbolBitmap, (tt - bitmapWidth), s, combinationOperator);
 							break;
-						case 2: // bottom right
-							combine(symbolBitmap, (tt - bitmapWidth), s, combinationOperator);
-							break;
-						case 3: // top right
-							combine(symbolBitmap, (tt - bitmapWidth), s, combinationOperator);
-							break;
-						default:
+							default:
 							break;
 						}
 						s += bitmapHeight;
 					} else {
 						switch (referenceCorner) {
 						case 0: // bottom left
-							combine(symbolBitmap, s, (tt - bitmapHeight), combinationOperator);
+							case 2: // bottom right
+								combine(symbolBitmap, s, (tt - bitmapHeight), combinationOperator);
 							break;
 						case 1: // top left
-							combine(symbolBitmap, s, tt, combinationOperator);
+							case 3: // top right
+								combine(symbolBitmap, s, tt, combinationOperator);
 							break;
-						case 2: // bottom right
-							combine(symbolBitmap, s, (tt - bitmapHeight), combinationOperator);
-							break;
-						case 3: // top right
-							combine(symbolBitmap, s, tt, combinationOperator);
-							break;
-						default:
+							default:
 							break;
 						}
 						s += bitmapWidth;

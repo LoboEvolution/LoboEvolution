@@ -299,7 +299,7 @@ public class PDFObject {
      * @return the stream, or null, if this isn't a STREAM.
      */
     public byte[] getStream() throws IOException {
-       return getStream(Collections.<String>emptySet());
+       return getStream(Collections.emptySet());
     }
 
     /**
@@ -342,7 +342,7 @@ public class PDFObject {
 
         // first try the cache
         if (decodedStream != null && filterLimits.equals(decodedStreamFilterLimits)) {
-            outStream = (ByteBuffer) decodedStream.get();
+            outStream = decodedStream.get();
         }
 
         // no luck in the cache, do the actual decoding
@@ -498,7 +498,7 @@ public class PDFObject {
         }
 
         // wrong type
-        return new ArrayList().iterator();
+        return Collections.emptyIterator();
     }
 
     /**

@@ -365,8 +365,8 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		if (uiNode == null) {
 			return null;
 		}
-		final RCollection relativeTo = relativeToScrollable ? (RCollection) block.getRBlockViewport()
-				: (RCollection) block;
+		final RCollection relativeTo = relativeToScrollable ? block.getRBlockViewport()
+				: block;
 		if (node == currentNode) {
 			final BoundableRenderable br = (BoundableRenderable) uiNode;
 			final Point guiPoint = br.getOriginRelativeTo(relativeTo);

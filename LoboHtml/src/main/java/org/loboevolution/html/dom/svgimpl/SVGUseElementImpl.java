@@ -97,7 +97,7 @@ public class SVGUseElementImpl extends SVGGraphic implements SVGUseElement {
 		if (href.toLowerCase().indexOf("#") != -1) {
 			int hashIndex = href.indexOf('#');
 			if (hashIndex != -1) {
-				String idElement = href.substring(hashIndex + 1, href.length());
+				String idElement = href.substring(hashIndex + 1);
 				Element elementById = (Element) child(idElement);
 				if (elementById instanceof SVGSymbolElementImpl) {
 					SVGSymbolElementImpl symbol = (SVGSymbolElementImpl) elementById;

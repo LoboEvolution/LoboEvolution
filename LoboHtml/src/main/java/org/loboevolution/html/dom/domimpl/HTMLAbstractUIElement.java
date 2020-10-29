@@ -82,7 +82,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 		final String normalAttributeName = normalizeAttributeName(attributeName);
 		synchronized (this) {
 			Map<String, Function> fba = this.functionByAttribute;
-			Function f = fba == null ? null : (Function) fba.get(normalAttributeName);
+			Function f = fba == null ? null : fba.get(normalAttributeName);
 			if (f != null) {
 				return f;
 			}

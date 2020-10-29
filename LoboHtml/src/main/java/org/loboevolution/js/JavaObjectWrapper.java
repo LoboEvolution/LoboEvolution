@@ -127,7 +127,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				if (javaObject == null) {
 					throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 				}
-				Object raw = getter.invoke(javaObject, new Object[] {index});
+				Object raw = getter.invoke(javaObject, index);
 				if (raw != null) {
 					return JavaScript.getInstance().getJavascriptObject(raw, this.getParentScope());
 				}
@@ -187,7 +187,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 							throw new IllegalStateException("Java object (class=" + this.classWrapper + ") is null.");
 						}
 						try {
-							Object val = getter.invoke(javaObject, new Object[] { name });
+							Object val = getter.invoke(javaObject, name);
 							if (val == null) {
 								// There might not be an indexer setter.
 								return super.get(name, start);
@@ -224,7 +224,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				}
 				Object actualValue;
 				actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
-				setter.invoke(this.getJavaObject(), new Object[] {index, actualValue });
+				setter.invoke(this.getJavaObject(), index, actualValue);
 			} catch (Exception err) {
 				logger.log(Level.SEVERE, err.getMessage(), err);
 			}
@@ -253,7 +253,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 				try {
 					Object actualValue;
 					actualValue = JavaScript.getInstance().getJavaObject(value, pinfo.getPropertyType());
-					setter.invoke(this.getJavaObject(), new Object[] { actualValue });
+					setter.invoke(this.getJavaObject(), actualValue);
 				} catch (Exception err) {
 					logger.log(Level.SEVERE, err.getMessage(), err);
 				}
@@ -265,7 +265,7 @@ public class JavaObjectWrapper extends ScriptableObject {
 						try {
 							Object actualValue;
 							actualValue = JavaScript.getInstance().getJavaObject(value, ni.getPropertyType());
-							setter.invoke(this.getJavaObject(), new Object[] { name, actualValue });
+							setter.invoke(this.getJavaObject(), name, actualValue);
 						} catch (Exception err) {
 							logger.log(Level.SEVERE, err.getMessage(), err);
 						}

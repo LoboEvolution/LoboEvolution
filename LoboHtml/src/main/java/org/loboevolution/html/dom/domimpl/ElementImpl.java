@@ -140,7 +140,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
-			return attributes == null ? null : (String) attributes.get(normalName);
+			return attributes == null ? null : attributes.get(normalName);
 		}
 	}
 
@@ -150,7 +150,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
-			final String value = attributes == null ? null : (String) attributes.get(normalName);
+			final String value = attributes == null ? null : attributes.get(normalName);
 			return value == null ? null : getAttr(normalName, value);
 		}
 	}
@@ -364,7 +364,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 			if (attributes == null) {
 				return null;
 			}
-			final String oldValue = (String) attributes.remove(normalName);
+			final String oldValue = attributes.remove(normalName);
 			// TODO: "specified" attributes
 			return oldValue == null ? null : getAttr(normalName, oldValue);
 		}

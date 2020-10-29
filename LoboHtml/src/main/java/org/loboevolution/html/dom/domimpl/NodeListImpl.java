@@ -67,7 +67,7 @@ public class NodeListImpl extends AbstractScriptableDelegate implements NodeList
 	public Node item(int index) {
 		int size = this.nodeList.size();
 		if (size > index && index > -1) {
-			return (Node) this.nodeList.get(index);
+			return this.nodeList.get(index);
 		} else {
 			return null;
 		}

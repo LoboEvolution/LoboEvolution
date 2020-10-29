@@ -58,7 +58,7 @@ public class RInlineBlock extends BaseElementRenderable {
 	 * @return a {@link java.util.Iterator} object.
 	 */
 	public Iterator<Renderable> getRenderables() {
-		return ArrayUtilities.singletonIterator((Renderable) this.child);
+		return ArrayUtilities.singletonIterator(this.child);
 	}
 
 	/** {@inheritDoc} */

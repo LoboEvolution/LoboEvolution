@@ -427,7 +427,7 @@ public class RLayout {
 
 		@Override
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
-			final HtmlObject ho = (HtmlObject) this.htmlObject.get();
+			final HtmlObject ho = this.htmlObject.get();
 			final UIControl uiControl = new UIControlWrapper(ho);
 			final RUIControl ruiControl = new RUIControl(markupElement, uiControl, bodyLayout.container,
 					bodyLayout.frameContext, bodyLayout.userAgentContext);

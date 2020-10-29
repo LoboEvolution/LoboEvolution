@@ -140,7 +140,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			} else if (child instanceof Comment) {
 				buffer.append("<!--").append(((Comment) child).getTextContent()).append("-->");
 			} else if (child instanceof Text) {
-				final String text = ((Text) child).getTextContent();
+				final String text = child.getTextContent();
 				final String encText = htmlEncodeChildText(text);
 				buffer.append(encText);
 			} else if (child instanceof ProcessingInstruction) {
@@ -162,7 +162,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 			if (child instanceof Comment) {
 				// skip
 			} else if (child instanceof Text) {
-				buffer.append(((Text) child).getTextContent());
+				buffer.append(child.getTextContent());
 			}
 		}
 	}
@@ -1176,7 +1176,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					if (child instanceof Text) {
 						firstIdx = adjIdx;
 						toDelete.add(child);
-						textBuffer.append(((Text) child).getNodeValue());
+						textBuffer.append(child.getNodeValue());
 					}
 				}
 				final int length = this.nodeList.getLength();
@@ -1184,7 +1184,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 					final Node child = this.nodeList.item(adjIdx);
 					if (child instanceof Text) {
 						toDelete.add(child);
-						textBuffer.append(((Text) child).getNodeValue());
+						textBuffer.append(child.getNodeValue());
 					}
 				}
 				this.nodeList.removeAll(toDelete);
@@ -1287,12 +1287,12 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 */
 	public void setOwnerDocument(Document value) {
 		this.document = value;
-		this.treeLock = value == null ? this : (Object) value;
+		this.treeLock = value == null ? this : value;
 	}
 
 	void setOwnerDocument(Document value, boolean deep) {
 		this.document = value;
-		this.treeLock = value == null ? this : (Object) value;
+		this.treeLock = value == null ? this : value;
 		if (deep) {
 			for (Node node : Nodes.iterable(nodeList)) {
 				final NodeImpl child = (NodeImpl) node;

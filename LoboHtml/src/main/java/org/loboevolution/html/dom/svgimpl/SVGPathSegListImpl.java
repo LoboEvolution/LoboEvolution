@@ -241,9 +241,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	@Override
 	public SVGPathSeg insertItemBefore(SVGPathSeg newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0) {
 			pointList.add(0, newItem);
@@ -259,9 +257,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	@Override
 	public SVGPathSeg replaceItem(SVGPathSeg newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0 || index > getNumberOfItems() - 1) {
 			return null;

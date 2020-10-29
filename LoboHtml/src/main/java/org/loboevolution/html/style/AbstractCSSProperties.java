@@ -2031,7 +2031,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				}
 			}
 			if (vm != null) {
-				final PropertyCSS p = (PropertyCSS) vm.get(lowerCaseName);
+				final PropertyCSS p = vm.get(lowerCaseName);
 				return p == null ? null : p.value;
 			}
 		}
@@ -2070,7 +2070,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 				this.valueMap = vm;
 			} else {
 				if (!important) {
-					final PropertyCSS oldProperty = (PropertyCSS) vm.get(lowerCaseName);
+					final PropertyCSS oldProperty = vm.get(lowerCaseName);
 					if (oldProperty != null && oldProperty.important) {
 						// Ignore setting
 						return;
@@ -2090,7 +2090,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 	 * @param important a boolean.
 	 */
 	public final void setPropertyValueProcessed(String lowerCaseName, String value, CSSStyleDeclarationImpl declaration,boolean important) {
-		final SubPropertySetter setter = (SubPropertySetter) SUB_SETTERS.get(lowerCaseName);
+		final SubPropertySetter setter = SUB_SETTERS.get(lowerCaseName);
 		if (setter != null) {
 			setter.changeValue(this, value, declaration, important);
 		} else {

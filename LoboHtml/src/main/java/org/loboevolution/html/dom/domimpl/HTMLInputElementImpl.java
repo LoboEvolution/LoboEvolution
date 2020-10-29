@@ -327,7 +327,9 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 			new InputHidden(this, ic);
 			break;
 		case "submit":
-			new InputButton(this, ic);
+			case "reset":
+			case "button":
+				new InputButton(this, ic);
 			break;
 		case "password":
 			password = new InputPassword(this, ic);
@@ -347,16 +349,10 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		case "checkbox":
 			checkbox = new InputCheckbox(this, ic);
 			break;
-		case "button":
-			new InputButton(this, ic);
-			break;
-		case "image":
+			case "image":
 			new InputImage(this, ic);
 			break;
-		case "reset":
-			new InputButton(this, ic);
-			break;
-		case "range":
+			case "range":
 			new InputRange(this, ic);
 			break;
 		case "date":

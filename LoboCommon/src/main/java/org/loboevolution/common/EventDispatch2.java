@@ -88,7 +88,7 @@ public abstract class EventDispatch2 {
 			if (listeners == null || listeners.size() == 0) {
 				return false;
 			}
-			larray = (EventListener[]) this.listeners.toArray(EMPTY_ARRAY);
+			larray = this.listeners.toArray(EMPTY_ARRAY);
 		}
 		for (EventListener eventListener : larray) {
 			dispatchEvent(eventListener, event);

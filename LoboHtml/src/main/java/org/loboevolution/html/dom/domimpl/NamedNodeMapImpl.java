@@ -72,7 +72,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node getNamedItem(String name) {
-		return (Node) this.attributes.get(name);
+		return this.attributes.get(name);
 	}
 
 	/** {@inheritDoc} */
@@ -86,7 +86,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	public Node item(int index) {
 		int size = this.attributeList.size();
         if (size > index && index > -1) {
-            return (Node) this.attributeList.get(index);
+            return this.attributeList.get(index);
         } else {
             return null;
         }
@@ -106,7 +106,7 @@ public class NamedNodeMapImpl extends AbstractScriptableDelegate implements Name
 	/** {@inheritDoc} */
 	@Override
 	public Node removeNamedItem(String name) throws DOMException {
-		return (Node) this.attributes.remove(name);
+		return this.attributes.remove(name);
 	}
 
 	/** {@inheritDoc} */

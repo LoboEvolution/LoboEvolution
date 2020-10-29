@@ -55,9 +55,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 	@Override
 	public SVGNumber insertItemBefore(SVGNumber newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0) {
 			pointList.add(0, newItem);
@@ -73,9 +71,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 	@Override
 	public SVGNumber replaceItem(SVGNumber newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0 || index > getNumberOfItems() - 1) {
 			return null;

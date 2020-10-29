@@ -980,14 +980,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 							GUITasks.drawDotted(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i, btop);
 							break;
 						case BorderInsets.BORDER_STYLE_INSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));	
+							case BorderInsets.BORDER_STYLE_OUTSET:
+								g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));
 							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
 							break;
-						case BorderInsets.BORDER_STYLE_OUTSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));	
-							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
-							break;	
-						case BorderInsets.BORDER_STYLE_SOLID:
+							case BorderInsets.BORDER_STYLE_SOLID:
 						default:
 							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
 							break;
@@ -1010,14 +1007,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 							GUITasks.drawDotted(g, lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1, bright);
 							break;
 						case BorderInsets.BORDER_STYLE_INSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderRightColor(), -0.3));	
+							case BorderInsets.BORDER_STYLE_OUTSET:
+								g.setColor(ColorFactory.getAdjustedColor(getBorderRightColor(), -0.3));
 							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
 							break;
-						case BorderInsets.BORDER_STYLE_OUTSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderRightColor(), -0.3));	
-							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
-							break;	
-						case BorderInsets.BORDER_STYLE_SOLID:
+							case BorderInsets.BORDER_STYLE_SOLID:
 						default:
 							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
 							break;
@@ -1040,14 +1034,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 							GUITasks.drawDotted(g, startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i, bbottom);
 							break;
 						case BorderInsets.BORDER_STYLE_INSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderBottomColor(), -0.3));	
+							case BorderInsets.BORDER_STYLE_OUTSET:
+								g.setColor(ColorFactory.getAdjustedColor(getBorderBottomColor(), -0.3));
 							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
 							break;
-						case BorderInsets.BORDER_STYLE_OUTSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderBottomColor(), -0.3));	
-							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
-							break;	
-						case BorderInsets.BORDER_STYLE_SOLID:
+							case BorderInsets.BORDER_STYLE_SOLID:
 						default:
 							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
 							break;
@@ -1069,14 +1060,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 							GUITasks.drawDotted(g, startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1, bleft);
 							break;
 						case BorderInsets.BORDER_STYLE_INSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderLeftColor(), -0.3));	
+							case BorderInsets.BORDER_STYLE_OUTSET:
+								g.setColor(ColorFactory.getAdjustedColor(getBorderLeftColor(), -0.3));
 							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
 							break;
-						case BorderInsets.BORDER_STYLE_OUTSET:
-							g.setColor(ColorFactory.getAdjustedColor(getBorderLeftColor(), -0.3));	
-							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
-							break;	
-						case BorderInsets.BORDER_STYLE_SOLID:
+							case BorderInsets.BORDER_STYLE_SOLID:
 						default:
 							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
 							break;

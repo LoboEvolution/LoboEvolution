@@ -135,7 +135,7 @@ public class HtmlParser {
 	 * @return a boolean.
 	 */
 	public static boolean isDecodeEntities(String elementName) {
-		final ElementInfo einfo = (ElementInfo) HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
+		final ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
 		return einfo == null || einfo.decodeEntities;
 	}
 
@@ -663,7 +663,7 @@ public class HtmlParser {
 					if (chInt == -1) {
 						cont = false;
 					} else {
-						continue LOOP;
+						continue;
 					}
 				} else if (Character.isWhitespace(ch)) {
 					final StringBuilder ltText = new StringBuilder();
@@ -690,7 +690,7 @@ public class HtmlParser {
 					if (chInt == -1) {
 						cont = false;
 					} else {
-						continue LOOP;
+						continue;
 					}
 				}
 				break LOOP;
@@ -1187,7 +1187,7 @@ public class HtmlParser {
 		Character c = (Character) HTMLEntities.ENTITIES.get(Entities.get(spec));
 		if (c == null) {
 			final String specTL = spec.toLowerCase();
-			c = (Character) HTMLEntities.ENTITIES.get(Entities.get(specTL));
+			c = HTMLEntities.ENTITIES.get(Entities.get(specTL));
 			if (c == null) {
 				return -1;
 			}

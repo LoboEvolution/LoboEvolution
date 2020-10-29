@@ -261,10 +261,10 @@ public class HtmlValues {
 			String text = "";
 			if(isUnits(spec)) {
 				if(spec.endsWith("q")) {
-					units = lcSpec.substring(lcSpec.length() - 1, lcSpec.length());
+					units = lcSpec.substring(lcSpec.length() - 1);
 					text = lcSpec.substring(0, lcSpec.length() - 1);
 				} else {
-					units = lcSpec.substring(lcSpec.length() - 2, lcSpec.length());
+					units = lcSpec.substring(lcSpec.length() - 2);
 					text = lcSpec.substring(0, lcSpec.length() - 2);
 				}
 			}
@@ -339,7 +339,7 @@ public class HtmlValues {
         }
         
         if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
-        	String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 2, cssValue.getCssText().length());
+        	String units = cssValue.getCssText().substring(cssValue.getCssText().length() - 2);
         	switch (units) {
         	case "dpi":
         		return (int)cssValue.getDoubleValue();

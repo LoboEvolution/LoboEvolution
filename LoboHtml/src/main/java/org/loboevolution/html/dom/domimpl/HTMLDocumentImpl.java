@@ -711,7 +711,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public Element namedItem(String name) {
 		Element element;
 		synchronized (this) {
-			element = (Element) this.elementsByName.get(name);
+			element = this.elementsByName.get(name);
 		}
 		return element;
 	}

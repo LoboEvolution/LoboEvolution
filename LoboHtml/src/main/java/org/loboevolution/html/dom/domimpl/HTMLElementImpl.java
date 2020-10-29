@@ -388,7 +388,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		synchronized (this) {
 			final Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs != null) {
-				final AbstractCSSProperties sds = (AbstractCSSProperties) cs.get(pseudoElement);
+				final AbstractCSSProperties sds = cs.get(pseudoElement);
 				if (sds != null) {
 					return sds;
 				}
@@ -414,7 +414,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 				cs = new HashMap<String, AbstractCSSProperties>(2);
 				this.computedStyles = cs;
 			} else {
-				final AbstractCSSProperties sds2 = (AbstractCSSProperties) cs.get(pseudoElement);
+				final AbstractCSSProperties sds2 = cs.get(pseudoElement);
 				if (sds2 != null) {
 					return sds2;
 				}
@@ -781,7 +781,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		synchronized (this) {
 			ihs = this.hasHoverStyleByElement;
 			if (ihs != null) {
-				final Boolean f = (Boolean) ihs.get(ancestor);
+				final Boolean f = ihs.get(ancestor);
 				if (f != null) {
 					return f;
 				}

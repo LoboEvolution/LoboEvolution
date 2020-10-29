@@ -54,7 +54,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 			if (opacity < 1) {
 				float currentScale = 1;
 				Shape shape = createShape(null);
-				AffineTransform screenCTM = ((SVGMatrixImpl) getScreenCTM()).getAffineTransform();
+				AffineTransform screenCTM = getScreenCTM().getAffineTransform();
 				Shape transformedShape = screenCTM.createTransformedShape(shape);
 				Rectangle2D bounds = transformedShape.getBounds2D();
 				double xInc = bounds.getWidth() / 5;
@@ -121,7 +121,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 
 				} else if (child instanceof SVGSVGElementImpl) {
 					SVGSVGElement svg = (SVGSVGElement) child;
-					AffineTransform ctm = ((SVGMatrixImpl) getCTM()).getAffineTransform();
+					AffineTransform ctm = getCTM().getAffineTransform();
 					AffineTransform inverseTransform;
 					try {
 						inverseTransform = ctm.createInverse();

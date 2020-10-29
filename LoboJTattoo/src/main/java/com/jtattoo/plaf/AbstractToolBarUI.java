@@ -285,7 +285,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 				return;
 			}
 		}
-		Border border = (Border) orgBorders.get(b);
+		Border border = orgBorders.get(b);
 		if (border != null) {
 			if (border instanceof NullBorder) {
 				b.setBorder(null);
@@ -293,7 +293,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 				b.setBorder(border);
 			}
 		}
-		b.setMargin((Insets) orgMargins.get(b));
+		b.setMargin(orgMargins.get(b));
 	}
 
 	/** {@inheritDoc} */

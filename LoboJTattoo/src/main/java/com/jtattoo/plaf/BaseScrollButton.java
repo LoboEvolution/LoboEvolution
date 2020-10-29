@@ -84,14 +84,12 @@ public class BaseScrollButton extends BasicArrowButton {
 	public Dimension getPreferredSize() {
 		switch (getDirection()) {
 		case NORTH:
-			return new Dimension(buttonWidth, buttonWidth + 1);
-		case SOUTH:
-			return new Dimension(buttonWidth, buttonWidth + 1);
-		case EAST:
-			return new Dimension(buttonWidth + 1, buttonWidth);
-		case WEST:
-			return new Dimension(buttonWidth + 1, buttonWidth);
-		default:
+            case SOUTH:
+                return new Dimension(buttonWidth, buttonWidth + 1);
+            case EAST:
+            case WEST:
+                return new Dimension(buttonWidth + 1, buttonWidth);
+            default:
 			return new Dimension(0, 0);
 		}
 	}

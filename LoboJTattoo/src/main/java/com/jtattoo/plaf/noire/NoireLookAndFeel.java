@@ -134,7 +134,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 	 * @return a {@link java.util.Properties} object.
 	 */
 	public static Properties getThemeProperties(String name) {
-		return (Properties) themesMap.get(name);
+		return themesMap.get(name);
 	}
 
 	/**
@@ -180,7 +180,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 	 */
 	public static void setTheme(String name) {
 		AbstractTheme.setInternalName(name);
-		setTheme((Properties) themesMap.get(name));
+		setTheme(themesMap.get(name));
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 	 * @param logoString a {@link java.lang.String} object.
 	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
-		Properties props = (Properties) themesMap.get(name);
+		Properties props = themesMap.get(name);
 		if (props != null) {
 			props.put("licenseKey", licenseKey);
 			props.put("logoString", logoString);

@@ -131,7 +131,7 @@ public class DOMFunctionImpl extends NodeImpl {
 			handlerList.add(listener);
 			final Map<String, List<Function>> onEventListeners = new HashMap<String, List<Function>>();
 			onEventListeners.put(type, handlerList);
-			this.onEventHandlers.put((NodeImpl) this, onEventListeners);
+			this.onEventHandlers.put(this, onEventListeners);
 		}
 	}
 	

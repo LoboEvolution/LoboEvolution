@@ -114,7 +114,9 @@ public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SV
 			AffineTransform affine = new AffineTransform();
 			switch (point.getType()) {
 			case SVGTransform.SVG_TRANSFORM_MATRIX:
-				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
+                case SVGTransform.SVG_TRANSFORM_SKEWY:
+                case SVGTransform.SVG_TRANSFORM_SKEWX:
+                    affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
 				break;
 			case SVGTransform.SVG_TRANSFORM_TRANSLATE:
 				affine.translate(mtrx.getE(), mtrx.getF());
@@ -125,13 +127,7 @@ public class SVGGraphic extends SVGTransformableImpl implements SVGLangSpace, SV
 			case SVGTransform.SVG_TRANSFORM_ROTATE:
 				affine.rotate(Math.toRadians(mtrx.getA()), mtrx.getB(), mtrx.getC());
 				break;
-			case SVGTransform.SVG_TRANSFORM_SKEWX:
-				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
-				break;
-			case SVGTransform.SVG_TRANSFORM_SKEWY:
-				affine.concatenate(new AffineTransform(mtrx.getA(), mtrx.getB(), mtrx.getC(), mtrx.getD(), mtrx.getE(), mtrx.getF()));
-				break;
-			default:
+                default:
 				break;
 			}
 			graphics.transform(affine);

@@ -543,7 +543,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 			Graphics2D graphics = createGraphics();
 			AffineTransform at = new AffineTransform();
 			at.setToTranslation(x, y);
-			graphics.drawImage(image, at, (ImageObserver) null);
+			graphics.drawImage(image, at, null);
 		}
 	}
 
@@ -555,7 +555,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 			Image image = HttpNetwork.getImage(hImage.getSrc(), null);
 			Graphics2D graphics = createGraphics();
 			AffineTransform at = new AffineTransform(width / image.getWidth(null), 0, 0, height / image.getHeight(null), x, y);
-			graphics.drawImage(image, at, (ImageObserver) null);
+			graphics.drawImage(image, at, null);
 		}
 	}
 
@@ -572,7 +572,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 			float x0 = dx - sx * scaleX;
 			float y0 = dy - sy * scaleY;
 			AffineTransform at = new AffineTransform(scaleX, 0, 0, scaleY, x0, y0);
-			graphics.drawImage(image, at, (ImageObserver) null);
+			graphics.drawImage(image, at, null);
 		}
 	}
 

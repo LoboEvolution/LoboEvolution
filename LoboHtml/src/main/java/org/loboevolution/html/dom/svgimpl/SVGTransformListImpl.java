@@ -58,9 +58,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 	@Override
 	public SVGTransform insertItemBefore(SVGTransform newItem, int index) throws DOMException, SVGException {
 
-		if (transList.contains(newItem)) {
-			transList.remove(newItem);
-		}
+        transList.remove(newItem);
 
 		if (index < 0) {
 			transList.add(0, newItem);
@@ -76,9 +74,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 	@Override
 	public SVGTransform replaceItem(SVGTransform newItem, int index) throws DOMException, SVGException {
 
-		if (transList.contains(newItem)) {
-			transList.remove(newItem);
-		}
+        transList.remove(newItem);
 
 		if (index < 0 || index > getNumberOfItems() - 1) {
 			return null;

@@ -19,7 +19,7 @@ public class FontSetter implements SubPropertySetter {
 		properties.setPropertyValueLCAlt(FONT, newValue, important);
 		if (Strings.isNotBlank(newValue)) {
 			final String fontSpecTL = newValue.toLowerCase();
-			final FontInfo fontInfo = (FontInfo) HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
+			final FontInfo fontInfo = HtmlValues.SYSTEM_FONTS.get(fontSpecTL);
 			if (fontInfo != null) {
 				if (fontInfo.getFontFamily() != null) {
 					properties.setPropertyValueLCAlt(FONT_FAMILY, fontInfo.getFontFamily(), important);

@@ -585,7 +585,9 @@ public class StyleSheetAggregator {
 				final String value;
 				switch (property.getName()) {
 				case "max-width":
-					value = String.valueOf(property.getValue().getDoubleValue());
+
+					case "max-height":
+						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
 					if (val == -1 || val < document.getWindow().getInnerWidth()) {
 						return false;
@@ -593,7 +595,9 @@ public class StyleSheetAggregator {
 					break;
 
 				case "min-width":
-					value = String.valueOf(property.getValue().getDoubleValue());
+
+					case "min-height":
+						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
 					if (val == -1 || val > document.getWindow().getInnerWidth()) {
 						return false;
@@ -601,7 +605,9 @@ public class StyleSheetAggregator {
 					break;
 
 				case "max-device-width":
-					value = String.valueOf(property.getValue().getDoubleValue());
+
+					case "max-device-height":
+						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
 					if (val == -1 || val < document.getWindow().getScreen().getWidth()) {
 						return false;
@@ -609,46 +615,16 @@ public class StyleSheetAggregator {
 					break;
 
 				case "min-device-width":
-					value = String.valueOf(property.getValue().getDoubleValue());
+
+					case "min-device-height":
+						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
 					if (val == -1 || val > document.getWindow().getScreen().getWidth()) {
 						return false;
 					}
 					break;
 
-				case "max-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val < document.getWindow().getInnerWidth()) {
-						return false;
-					}
-					break;
-
-				case "min-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val > document.getWindow().getInnerWidth()) {
-						return false;
-					}
-					break;
-
-				case "max-device-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val < document.getWindow().getScreen().getWidth()) {
-						return false;
-					}
-					break;
-
-				case "min-device-height":
-					value = String.valueOf(property.getValue().getDoubleValue());
-					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val > document.getWindow().getScreen().getWidth()) {
-						return false;
-					}
-					break;
-
-				case "resolution":
+					case "resolution":
 					final CSSValueImpl propValue = property.getValue();
 					val = HtmlValues.resolutionValue(propValue);
 					if (propValue == null) {

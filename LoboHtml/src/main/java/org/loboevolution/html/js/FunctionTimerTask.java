@@ -43,7 +43,7 @@ class FunctionTimerTask extends WeakWindowTask {
 			if (doc == null) {
 				throw new IllegalStateException("Cannot perform operation when document is unset.");
 			}
-			final Function function = (Function) this.functionRef.get();
+			final Function function = this.functionRef.get();
 			if (function == null) {
 				throw new IllegalStateException("Cannot perform operation. Function is no longer available.");
 			}

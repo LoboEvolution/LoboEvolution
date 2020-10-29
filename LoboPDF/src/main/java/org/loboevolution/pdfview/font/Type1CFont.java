@@ -719,6 +719,7 @@ public class Type1CFont extends OutlineFont {
             switch (cmd) {
                 case 1: // hstem
                 case 3: // vstem
+                case 1000: // old dotsection command.  ignore.
                     this.stackptr = 0;
                     break;
                 case 4: // vmoveto
@@ -806,6 +807,7 @@ public class Type1CFont extends OutlineFont {
                     stemhints = 0;
                     break;
                 case 18: // hstemhm
+                case 23: // vstemhm
                     stemhints += (this.stackptr) / 2;
                     this.stackptr = 0;
                     break;
@@ -839,10 +841,6 @@ public class Type1CFont extends OutlineFont {
                     }
                     gp.moveTo (pt.x, pt.y);
                     pt.open = false;
-                    this.stackptr = 0;
-                    break;
-                case 23: // vstemhm
-                    stemhints += (this.stackptr) / 2;
                     this.stackptr = 0;
                     break;
                 case 24: // rcurveline
@@ -939,9 +937,6 @@ public class Type1CFont extends OutlineFont {
                         gp.curveTo (x1, y1, x2, y2, pt.x, pt.y);
                     }
                     pt.open = true;
-                    this.stackptr = 0;
-                    break;
-                case 1000: // old dotsection command.  ignore.
                     this.stackptr = 0;
                     break;
                 case 1003: // and

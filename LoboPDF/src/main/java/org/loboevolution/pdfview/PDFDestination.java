@@ -137,40 +137,22 @@ public class PDFDestination {
 			dest.setZoom(destArray[4].getFloatValue());
 			break;
 		case FITH:
-			if (destArray.length > 2) {
+            case FITBV:
+            case FITBH:
+            case FITV:
+                if (destArray.length > 2) {
 				dest.setTop(destArray[2].getFloatValue());
 			} else {
 				dest.setTop(0.0F);
 			}
 			break;
-		case FITV:
-			if (destArray.length > 2) {
-				dest.setTop(destArray[2].getFloatValue());
-			} else {
-				dest.setTop(0.0F);
-			}
-			break;
-		case FITR:
+            case FITR:
 			dest.setLeft(destArray[2].getFloatValue());
 			dest.setBottom(destArray[3].getFloatValue());
 			dest.setRight(destArray[4].getFloatValue());
 			dest.setTop(destArray[5].getFloatValue());
 			break;
-		case FITBH:
-			if (destArray.length > 2) {
-				dest.setTop(destArray[2].getFloatValue());
-			} else {
-				dest.setTop(0.0F);
-			}
-			break;
-		case FITBV:
-			if (destArray.length > 2) {
-				dest.setTop(destArray[2].getFloatValue());
-			} else {
-				dest.setTop(0.0F);
-			}
-			break;
-		default:
+            default:
 			break;
 		}
 

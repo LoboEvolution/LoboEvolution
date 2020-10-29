@@ -229,7 +229,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 	 * @throws java.lang.Exception if any.
 	 */
 	public void send() throws Exception {
-		this.request.send((String)null);
+		this.request.send(null);
 	}
 
 	/**

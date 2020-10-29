@@ -208,7 +208,7 @@ public class PDFFile {
         if (this.info != null) {
             return this.info.getDictKeys();
         } else {
-            return Collections.<String>emptyList().iterator();
+            return Collections.emptyIterator();
         }
     }
 

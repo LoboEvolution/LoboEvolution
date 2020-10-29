@@ -718,7 +718,7 @@ public class RBlockViewport extends BaseRCollection {
 		if (ef == null) {
 			return null;
 		}
-		final ExportableFloat[] floats = (ExportableFloat[]) ef.toArray(ExportableFloat.EMPTY_ARRAY);
+		final ExportableFloat[] floats = ef.toArray(ExportableFloat.EMPTY_ARRAY);
 		final FloatingInfo fInfo = new FloatingInfo();
 		fInfo.setShiftX(0);
 		fInfo.setShiftY(0);
@@ -857,7 +857,7 @@ public class RBlockViewport extends BaseRCollection {
 		final SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		final int size = others == null ? 0 : others.size();
 		final PositionedRenderable[] otherArray = size == 0 ? null
-				: (PositionedRenderable[]) others.toArray(PositionedRenderable.EMPTY_ARRAY);
+				: others.toArray(PositionedRenderable.EMPTY_ARRAY);
 		// Try to find in other renderables with z-index >= 0 first.
 		int index = 0;
 		if (otherArray != null) {
@@ -921,7 +921,7 @@ public class RBlockViewport extends BaseRCollection {
 		final List<Renderable> sr = this.seqRenderables;
 		Iterator<Renderable> baseIterator = null;
 		if (sr != null) {
-			final Renderable[] array = (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
+			final Renderable[] array = sr.toArray(Renderable.EMPTY_ARRAY);
 			final Range range = MarkupUtilities.findRenderables(array, clipBounds, true);
 			baseIterator = ArrayUtilities.iterator(array, range.offset, range.length);
 		}
@@ -956,11 +956,11 @@ public class RBlockViewport extends BaseRCollection {
 		final int othersSize = others == null ? 0 : others.size();
 		if (othersSize == 0) {
 			final List<Renderable> sr = this.seqRenderables;
-			return sr == null ? Renderable.EMPTY_ARRAY : (Renderable[]) sr.toArray(Renderable.EMPTY_ARRAY);
+			return sr == null ? Renderable.EMPTY_ARRAY : sr.toArray(Renderable.EMPTY_ARRAY);
 		} else {
 			final List<Renderable> allRenderables = new ArrayList<Renderable>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
-			return (Renderable[]) allRenderables.toArray(Renderable.EMPTY_ARRAY);
+			return allRenderables.toArray(Renderable.EMPTY_ARRAY);
 		}
 	}
 
@@ -1192,7 +1192,7 @@ public class RBlockViewport extends BaseRCollection {
 				case Node.ELEMENT_NODE:
 					this.currentLine.addStyleChanger(new RStyleChanger(child));
 					final String nodeName = child.getNodeName().toUpperCase();
-					MarkupLayout ml = (MarkupLayout) RLayout.elementLayout.get(HTMLTag.get(nodeName));
+					MarkupLayout ml = RLayout.elementLayout.get(HTMLTag.get(nodeName));
 					if (ml == null) {
 						ml = miscLayout;
 					}

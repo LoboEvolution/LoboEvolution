@@ -1055,7 +1055,7 @@ public class StyleSheetRenderState implements RenderState {
 			map = new HashMap<String, WordInfo>(1);
 			this.iWordInfoMap = map;
 		}
-		WordInfo wi = (WordInfo) map.get(word);
+		WordInfo wi = map.get(word);
 		if (wi != null) {
 			return wi;
 		}
@@ -1088,7 +1088,7 @@ public class StyleSheetRenderState implements RenderState {
 		while (counterArray.size() <= nesting) {
 			counterArray.add(null);
 		}
-		final Integer integer = (Integer) counterArray.get(nesting);
+		final Integer integer = counterArray.get(nesting);
 		final int prevValue = (integer == null || integer == 0) ? 1 : integer;
 		counterArray.set(nesting, prevValue + 1);
 		return prevValue;
@@ -1149,7 +1149,7 @@ public class StyleSheetRenderState implements RenderState {
 				this.counters = counters;
 				counters.put(counter, new ArrayList<Integer>());
 			}
-			final ArrayList<Integer> counterArray = (ArrayList<Integer>) counters.get(counter);
+			final ArrayList<Integer> counterArray = counters.get(counter);
 			while (counterArray.size() <= nesting) {
 				counterArray.add(null);
 			}
@@ -1389,22 +1389,16 @@ public class StyleSheetRenderState implements RenderState {
 				binfo.setBackgroundYPosition(50);
 				break;
 			case RIGHT:
-				binfo.setBackgroundYPositionAbsolute(false);
+				case BOTTOM:
+					binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(100);
 				break;
 			case LEFT:
-				binfo.setBackgroundYPositionAbsolute(false);
+				case TOP:
+					binfo.setBackgroundYPositionAbsolute(false);
 				binfo.setBackgroundYPosition(0);
 				break;
-			case BOTTOM:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(100);
-				break;
-			case TOP:
-				binfo.setBackgroundYPositionAbsolute(false);
-				binfo.setBackgroundYPosition(0);
-				break;
-			case INHERIT:
+				case INHERIT:
 				BackgroundInfo bi = prevRenderState.getPreviousRenderState().getBackgroundInfo();
 				if (bi != null) {
 					binfo.setBackgroundYPositionAbsolute(bi.isBackgroundYPositionAbsolute());

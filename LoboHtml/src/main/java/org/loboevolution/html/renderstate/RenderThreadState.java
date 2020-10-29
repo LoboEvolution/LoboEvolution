@@ -36,7 +36,7 @@ public class RenderThreadState {
 	 * @return a {@link org.loboevolution.html.renderstate.RenderThreadState} object.
 	 */
 	public static RenderThreadState getState() {
-		RenderThreadState ts = (RenderThreadState) stateTL.get();
+		RenderThreadState ts = stateTL.get();
 		if (ts == null) {
 			ts = new RenderThreadState();
 			stateTL.set(ts);

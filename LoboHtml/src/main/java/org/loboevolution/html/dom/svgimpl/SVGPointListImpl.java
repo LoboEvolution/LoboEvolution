@@ -55,9 +55,7 @@ public class SVGPointListImpl implements SVGPointList {
 	@Override
 	public SVGPoint insertItemBefore(SVGPoint newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0) {
 			pointList.add(0, newItem);
@@ -73,9 +71,7 @@ public class SVGPointListImpl implements SVGPointList {
 	@Override
 	public SVGPoint replaceItem(SVGPoint newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0 || index > getNumberOfItems() - 1) {
 			return null;

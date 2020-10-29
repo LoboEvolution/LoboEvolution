@@ -40,7 +40,7 @@ public class RSSDescriptionElementImpl extends RSSElement implements RSSDrawable
 		while (graphics.getFontMetrics().stringWidth(firstPart) > 600) {
 		    firstPart = firstPart.substring(0, firstPart.length() - 1);
 		}
-		String secondPart = text.substring(firstPart.length(), text.length());
+		String secondPart = text.substring(firstPart.length());
 		
 		graphics.drawString(firstPart, 10, y);
 		graphics.drawString(secondPart, 10, y+20);

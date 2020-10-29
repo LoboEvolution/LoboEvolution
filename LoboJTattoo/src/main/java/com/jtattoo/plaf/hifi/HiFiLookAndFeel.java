@@ -117,7 +117,7 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
 	 * @return a {@link java.util.Properties} object.
 	 */
 	public static Properties getThemeProperties(String name) {
-		return (Properties) themesMap.get(name);
+		return themesMap.get(name);
 	}
 
 	/**
@@ -162,7 +162,7 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
 	 * @param name a {@link java.lang.String} object.
 	 */
 	public static void setTheme(String name) {
-		setTheme((Properties) themesMap.get(name));
+		setTheme(themesMap.get(name));
 		if (myTheme != null) {
 			AbstractTheme.setInternalName(name);
 		}
@@ -176,7 +176,7 @@ public class HiFiLookAndFeel extends AbstractLookAndFeel {
 	 * @param logoString a {@link java.lang.String} object.
 	 */
 	public static void setTheme(String name, String licenseKey, String logoString) {
-		Properties props = (Properties) themesMap.get(name);
+		Properties props = themesMap.get(name);
 		if (props != null) {
 			props.put("licenseKey", licenseKey);
 			props.put("logoString", logoString);

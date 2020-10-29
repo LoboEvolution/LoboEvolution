@@ -54,9 +54,7 @@ public class SVGStringListImpl implements SVGStringList {
 	@Override
 	public String insertItemBefore(String newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0) {
 			pointList.add(0, newItem);
@@ -72,9 +70,7 @@ public class SVGStringListImpl implements SVGStringList {
 	@Override
 	public String replaceItem(String newItem, int index) throws DOMException, SVGException {
 
-		if (pointList.contains(newItem)) {
-			pointList.remove(newItem);
-		}
+        pointList.remove(newItem);
 
 		if (index < 0 || index > getNumberOfItems() - 1) {
 			return null;

@@ -88,6 +88,6 @@ public class ScrollableLayeredPane extends JLayeredPane implements Scrollable {
 		if (layeredImageView.getTheImage().getResizeStrategy() == ResizeStrategy.NO_RESIZE)
 			return getPreferredSize();
 		else
-			return ((JViewport) javax.swing.SwingUtilities.getAncestorOfClass(JViewport.class, this)).getSize();
+			return javax.swing.SwingUtilities.getAncestorOfClass(JViewport.class, this).getSize();
 	}
 }

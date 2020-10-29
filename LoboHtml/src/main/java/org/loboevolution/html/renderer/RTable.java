@@ -146,7 +146,7 @@ class RTable extends BaseElementRenderable {
 		final LayoutKey layoutKey = new LayoutKey(availWidth, availHeight, whitespace, font);
 		LayoutValue layoutValue;
 		if (sizeOnly) {
-			layoutValue = (LayoutValue) cachedLayout.get(layoutKey);
+			layoutValue = cachedLayout.get(layoutKey);
 		} else {
 			if (Objects.equals(layoutKey, this.lastLayoutKey)) {
 				layoutValue = this.lastLayoutValue;

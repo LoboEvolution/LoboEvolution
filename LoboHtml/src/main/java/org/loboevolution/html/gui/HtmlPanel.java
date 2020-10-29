@@ -369,7 +369,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 				return;
 			}
 			notifsArray = new DocumentNotification[size];
-			notifsArray = (DocumentNotification[]) notifs.toArray(notifsArray);
+			notifsArray = notifs.toArray(notifsArray);
 			notifs.clear();
 		}
 		

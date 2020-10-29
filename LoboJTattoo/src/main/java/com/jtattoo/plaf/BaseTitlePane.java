@@ -720,12 +720,12 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 					icons = owner.getIconImages();
 					// found ? return the icon
 					if (icons != null && !icons.isEmpty()) {
-						return (Image) icons.get(0);
+						return icons.get(0);
 					}
 					owner = owner.getOwner();
 				}
 			} else {
-				return (Image) icons.get(0);
+				return icons.get(0);
 			}
 			// No icon found ? return icon of the first frame
 			if (icons == null || icons.isEmpty()) {

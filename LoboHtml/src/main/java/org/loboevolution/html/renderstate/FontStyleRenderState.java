@@ -127,7 +127,7 @@ public class FontStyleRenderState extends RenderStateDelegator {
 			map = new HashMap<String, WordInfo>();
 			this.iWordInfoMap = map;
 		}
-		WordInfo wi = (WordInfo) map.get(word);
+		WordInfo wi = map.get(word);
 		if (wi != null) {
 			return wi;
 		}

@@ -65,7 +65,7 @@ public class DOMStringListImpl implements DOMStringList {
 	public String item(int index) {
         int size = this.sourceList.size();
         if (size > index && index > -1) {
-            return (String) this.sourceList.get(index);
+            return this.sourceList.get(index);
         } else {
             return null;
         }

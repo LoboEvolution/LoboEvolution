@@ -136,7 +136,7 @@ public class ToUnicodeMap extends PDFCMap {
 			int indexOf = line.indexOf("endcodespacerange");
 			line = line.substring(0, indexOf);
 			indexOf = line.indexOf("begincodespacerange");
-			line = line.substring(indexOf+"begincodespacerange".length(), line.length());
+			line = line.substring(indexOf+"begincodespacerange".length());
 			line = line.trim();
 			
 			parseCodeRangeLine(line);
@@ -181,7 +181,7 @@ public class ToUnicodeMap extends PDFCMap {
 			String substring2 = line.substring(indexOf2, indexOf3+1);
 			
 			int indexOf4 = line.indexOf("<", indexOf3);
-			String substring3 = line.substring(indexOf4, line.length());
+			String substring3 = line.substring(indexOf4);
 			
 			if(!substring1.isEmpty() && !substring2.isEmpty() && !substring3.isEmpty()) {
 				Character srcStart = parseChar(substring1);
@@ -204,7 +204,7 @@ public class ToUnicodeMap extends PDFCMap {
 			String substring1 = line.substring(0, indexOf1+1);
 			
 			int indexOf2 = line.indexOf("<", indexOf1);
-			String substring2 = line.substring(indexOf2, line.length());
+			String substring2 = line.substring(indexOf2);
 			
 			if(!substring1.isEmpty() && !substring2.isEmpty()) {
 				Character srcStart = parseChar(substring1);
@@ -264,7 +264,7 @@ public class ToUnicodeMap extends PDFCMap {
 			int result = Integer.decode("0x" + charDef);
 			return (char) result;
 		} catch (NumberFormatException e) {
-			return (char) ' ';
+			return ' ';
 		}
 	}
 

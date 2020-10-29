@@ -512,12 +512,9 @@ public class Type1Font extends OutlineFont {
             } else {
                 switch (v) {
                     case 0:   // x
+                    case 2:
                         throw new RuntimeException("Bad command (" + v + ")");
                     case 1:   // hstem
-                        this.sloc = 0;
-                        break;
-                    case 2:   // x
-                        throw new RuntimeException("Bad command (" + v + ")");
                     case 3:   // vstem
                         this.sloc = 0;
                         break;

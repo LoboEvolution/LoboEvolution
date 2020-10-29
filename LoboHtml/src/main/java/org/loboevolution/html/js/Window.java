@@ -132,9 +132,9 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			return null;
 		}
 		synchronized (CONTEXT_WINDOWS) {
-			final Reference<Window> wref = (Reference<Window>) CONTEXT_WINDOWS.get(rcontext);
+			final Reference<Window> wref = CONTEXT_WINDOWS.get(rcontext);
 			if (wref != null) {
-				final Window window = (Window) wref.get();
+				final Window window = wref.get();
 				if (window != null) {
 					return window;
 				}
@@ -313,7 +313,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		synchronized (this) {
 			final Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap != null) {
-				oldTaskWrappers = (TaskWrapper[]) taskMap.values().toArray(new TaskWrapper[0]);
+				oldTaskWrappers = taskMap.values().toArray(new TaskWrapper[0]);
 				this.taskMap = null;
 			}
 		}
@@ -329,7 +329,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		synchronized (this) {
             final Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap != null) {
-				oldTimer = (TaskWrapper) taskMap.remove(timeoutID);
+				oldTimer = taskMap.remove(timeoutID);
 			}
 		}
 		if (oldTimer != null && cancel) {
@@ -845,7 +845,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				taskMap = new HashMap<Integer, TaskWrapper>(4);
 				this.taskMap = taskMap;
 			} else {
-				oldTaskWrapper = (TaskWrapper) taskMap.get(timeoutID);
+				oldTaskWrapper = taskMap.get(timeoutID);
 			}
 			taskMap.put(timeoutID, new TaskWrapper(timer, retained));
 		}
@@ -1139,7 +1139,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	public void addEventListener(String type, Function listener) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.getDocument();
 		if (doc != null && doc instanceof HTMLDocumentImpl) {
-			((HTMLDocumentImpl) doc).addEventListener(type, listener);
+			doc.addEventListener(type, listener);
 		}
 	}
 

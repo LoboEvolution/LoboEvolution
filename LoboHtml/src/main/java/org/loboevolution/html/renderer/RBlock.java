@@ -278,7 +278,7 @@ public class RBlock extends BaseElementRenderable {
 		final Map<LayoutKey, LayoutValue> cachedLayout = this.cachedLayout;
 		LayoutValue value;
 		if (sizeOnly) {
-			value = (LayoutValue) cachedLayout.get(key);
+			value = cachedLayout.get(key);
 		} else {
 			if (Objects.equals(key, this.lastLayoutKey)) {
 				value = this.lastLayoutValue;

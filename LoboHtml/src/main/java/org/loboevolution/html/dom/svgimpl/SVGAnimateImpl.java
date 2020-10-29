@@ -484,16 +484,12 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 			range = (cxTo - cxFrom) + (cyTo - cyFrom);
 			return Math.round(dur / range);
 		case SVGTransform.SVG_TRANSFORM_SKEWX:
-			sxFrom = Float.parseFloat(from_trans);
+            case SVGTransform.SVG_TRANSFORM_SKEWY:
+                sxFrom = Float.parseFloat(from_trans);
 			sxTo = Float.parseFloat(to_trans);
 			range = sxTo - sxFrom;
 			return Math.round(dur / range);
-		case SVGTransform.SVG_TRANSFORM_SKEWY:
-			sxFrom = Float.parseFloat(from_trans);
-			sxTo = Float.parseFloat(to_trans);
-			range = sxTo - sxFrom;
-			return Math.round(dur / range);
-		default:
+            default:
 			return 0;}
 	}
 }

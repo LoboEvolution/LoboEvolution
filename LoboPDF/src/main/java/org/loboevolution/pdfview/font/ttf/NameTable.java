@@ -305,8 +305,6 @@ public class NameTable extends TrueTypeTable {
             
         switch (platformID) {
             case PLATFORMID_UNICODE:
-                charset = "UTF-16";
-                break;
             case PLATFORMID_MICROSOFT:
                 charset = "UTF-16";
                 break;

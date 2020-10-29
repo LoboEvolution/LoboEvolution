@@ -149,7 +149,7 @@ class ElementFactory {
 	 */
 	public final HTMLElement createElement(HTMLDocumentImpl document, String name) throws DOMException {
 	    final String normalName = name.toUpperCase(Locale.ENGLISH);
-		final HTMLElementBuilder builder = (HTMLElementBuilder) this.builders.get(HTMLTag.get(normalName));
+		final HTMLElementBuilder builder = this.builders.get(HTMLTag.get(normalName));
 		if (builder == null) {
 			final HTMLElementImpl element = new HTMLElementImpl(name);
 			element.setOwnerDocument(document);

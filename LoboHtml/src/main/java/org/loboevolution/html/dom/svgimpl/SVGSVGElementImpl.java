@@ -449,7 +449,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 
 				// create buffer to draw on
 				Shape shape = createShape(null);
-				AffineTransform screenCTM = ((SVGMatrixImpl) getScreenCTM()).getAffineTransform();
+				AffineTransform screenCTM = getScreenCTM().getAffineTransform();
 				Shape transformedShape = screenCTM.createTransformedShape(shape);
 				Rectangle2D bounds = transformedShape.getBounds2D();
 				double xInc = bounds.getWidth() / 5;

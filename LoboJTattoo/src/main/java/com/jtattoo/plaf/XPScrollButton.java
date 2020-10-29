@@ -88,14 +88,11 @@ public abstract class XPScrollButton extends BaseScrollButton {
 	public Dimension getPreferredSize() {
 		switch (getDirection()) {
 		case NORTH:
-			return new Dimension(buttonWidth, buttonWidth);
-		case SOUTH:
-			return new Dimension(buttonWidth, buttonWidth);
-		case EAST:
-			return new Dimension(buttonWidth, buttonWidth);
-		case WEST:
-			return new Dimension(buttonWidth, buttonWidth);
-		default:
+            case WEST:
+            case EAST:
+            case SOUTH:
+                return new Dimension(buttonWidth, buttonWidth);
+            default:
 			return new Dimension(0, 0);
 		}
 	}
