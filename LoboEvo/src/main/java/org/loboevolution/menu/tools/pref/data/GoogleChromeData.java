@@ -77,8 +77,8 @@ public class GoogleChromeData extends BrowserData {
 				cookie.setValue(rs.getString(4));
 				cookie.setPath(rs.getString(5));
 				cookie.setExpires(rs.getString(6));
-				cookie.setSecure(rs.getInt(7) > 0 ? true : false);
-				cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
+				cookie.setSecure(rs.getInt(7) > 0);
+				cookie.setHttpOnly(rs.getInt(8) > 0);
 				cookies.add(cookie);
 			}
 		} catch (final Exception e) {

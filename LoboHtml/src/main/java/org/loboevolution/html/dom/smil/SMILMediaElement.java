@@ -38,7 +38,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getAbstractAttr();
+    String getAbstractAttr();
 
 	/**
 	 * <p>setAbstractAttr.</p>
@@ -46,7 +46,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param abstractAttr a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setAbstractAttr(String abstractAttr) throws DOMException;
+    void setAbstractAttr(String abstractAttr) throws DOMException;
 
 	/**
 	 * See the alt attribute from .
@@ -56,7 +56,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getAlt();
+    String getAlt();
 
 	/**
 	 * <p>setAlt.</p>
@@ -64,7 +64,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param alt a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setAlt(String alt) throws DOMException;
+    void setAlt(String alt) throws DOMException;
 
 	/**
 	 * See the author attribute from .
@@ -74,7 +74,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getAuthor();
+    String getAuthor();
 
 	/**
 	 * <p>setAuthor.</p>
@@ -82,7 +82,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param author a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setAuthor(String author) throws DOMException;
+    void setAuthor(String author) throws DOMException;
 
 	/**
 	 * See the clipBegin attribute from .
@@ -92,7 +92,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getClipBegin();
+    String getClipBegin();
 
 	/**
 	 * <p>setClipBegin.</p>
@@ -100,7 +100,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param clipBegin a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setClipBegin(String clipBegin) throws DOMException;
+    void setClipBegin(String clipBegin) throws DOMException;
 
 	/**
 	 * See the clipEnd attribute from .
@@ -110,7 +110,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getClipEnd();
+    String getClipEnd();
 
 	/**
 	 * <p>setClipEnd.</p>
@@ -118,7 +118,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param clipEnd a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setClipEnd(String clipEnd) throws DOMException;
+    void setClipEnd(String clipEnd) throws DOMException;
 
 	/**
 	 * See the copyright attribute from .
@@ -128,7 +128,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getCopyright();
+    String getCopyright();
 
 	/**
 	 * <p>setCopyright.</p>
@@ -136,7 +136,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param copyright a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setCopyright(String copyright) throws DOMException;
+    void setCopyright(String copyright) throws DOMException;
 
 	/**
 	 * See the longdesc attribute from .
@@ -146,7 +146,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getLongdesc();
+    String getLongdesc();
 
 	/**
 	 * <p>setLongdesc.</p>
@@ -154,7 +154,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param longdesc a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setLongdesc(String longdesc) throws DOMException;
+    void setLongdesc(String longdesc) throws DOMException;
 
 	/**
 	 * See the port attribute from .
@@ -164,7 +164,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getPort();
+    String getPort();
 
 	/**
 	 * <p>setPort.</p>
@@ -172,7 +172,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param port a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setPort(String port) throws DOMException;
+    void setPort(String port) throws DOMException;
 
 	/**
 	 * See the readIndex attribute from .
@@ -182,7 +182,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getReadIndex();
+    String getReadIndex();
 
 	/**
 	 * <p>setReadIndex.</p>
@@ -190,7 +190,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param readIndex a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setReadIndex(String readIndex) throws DOMException;
+    void setReadIndex(String readIndex) throws DOMException;
 
 	/**
 	 * See the rtpformat attribute from .
@@ -200,7 +200,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getRtpformat();
+    String getRtpformat();
 
 	/**
 	 * <p>setRtpformat.</p>
@@ -208,7 +208,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param rtpformat a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setRtpformat(String rtpformat) throws DOMException;
+    void setRtpformat(String rtpformat) throws DOMException;
 
 	/**
 	 * See the src attribute from .
@@ -218,7 +218,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getSrc();
+    String getSrc();
 
 	/**
 	 * <p>setSrc.</p>
@@ -226,7 +226,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param src a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSrc(String src) throws DOMException;
+    void setSrc(String src) throws DOMException;
 
 	/**
 	 * See the stripRepeat attribute from .
@@ -236,7 +236,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getStripRepeat();
+    String getStripRepeat();
 
 	/**
 	 * <p>setStripRepeat.</p>
@@ -244,7 +244,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param stripRepeat a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setStripRepeat(String stripRepeat) throws DOMException;
+    void setStripRepeat(String stripRepeat) throws DOMException;
 
 	/**
 	 * See the title attribute from .
@@ -254,7 +254,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getTitle();
+    String getTitle();
 
 	/**
 	 * <p>setTitle.</p>
@@ -262,7 +262,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param title a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setTitle(String title) throws DOMException;
+    void setTitle(String title) throws DOMException;
 
 	/**
 	 * See the transport attribute from .
@@ -272,7 +272,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getTransport();
+    String getTransport();
 
 	/**
 	 * <p>setTransport.</p>
@@ -280,7 +280,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param transport a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setTransport(String transport) throws DOMException;
+    void setTransport(String transport) throws DOMException;
 
 	/**
 	 * See the type attribute from .
@@ -290,7 +290,7 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getType();
+    String getType();
 
 	/**
 	 * <p>setType.</p>
@@ -298,6 +298,6 @@ public interface SMILMediaElement extends ElementTime, SMILElement {
 	 * @param type a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setType(String type) throws DOMException;
+    void setType(String type) throws DOMException;
 
 }

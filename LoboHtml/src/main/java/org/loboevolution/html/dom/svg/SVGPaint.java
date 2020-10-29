@@ -29,25 +29,25 @@ package org.loboevolution.html.dom.svg;
 public interface SVGPaint extends SVGColor {
 	// Paint Types
 	/** Constant SVG_PAINTTYPE_UNKNOWN=0 */
-	static final short SVG_PAINTTYPE_UNKNOWN = 0;
+    short SVG_PAINTTYPE_UNKNOWN = 0;
 	/** Constant SVG_PAINTTYPE_RGBCOLOR=1 */
-	static final short SVG_PAINTTYPE_RGBCOLOR = 1;
+    short SVG_PAINTTYPE_RGBCOLOR = 1;
 	/** Constant SVG_PAINTTYPE_RGBCOLOR_ICCCOLOR=2 */
-	static final short SVG_PAINTTYPE_RGBCOLOR_ICCCOLOR = 2;
+    short SVG_PAINTTYPE_RGBCOLOR_ICCCOLOR = 2;
 	/** Constant SVG_PAINTTYPE_NONE=101 */
-	static final short SVG_PAINTTYPE_NONE = 101;
+    short SVG_PAINTTYPE_NONE = 101;
 	/** Constant SVG_PAINTTYPE_CURRENTCOLOR=102 */
-	static final short SVG_PAINTTYPE_CURRENTCOLOR = 102;
+    short SVG_PAINTTYPE_CURRENTCOLOR = 102;
 	/** Constant SVG_PAINTTYPE_URI_NONE=103 */
-	static final short SVG_PAINTTYPE_URI_NONE = 103;
+    short SVG_PAINTTYPE_URI_NONE = 103;
 	/** Constant SVG_PAINTTYPE_URI_CURRENTCOLOR=104 */
-	static final short SVG_PAINTTYPE_URI_CURRENTCOLOR = 104;
+    short SVG_PAINTTYPE_URI_CURRENTCOLOR = 104;
 	/** Constant SVG_PAINTTYPE_URI_RGBCOLOR=105 */
-	static final short SVG_PAINTTYPE_URI_RGBCOLOR = 105;
+    short SVG_PAINTTYPE_URI_RGBCOLOR = 105;
 	/** Constant SVG_PAINTTYPE_URI_RGBCOLOR_ICCCOLOR=106 */
-	static final short SVG_PAINTTYPE_URI_RGBCOLOR_ICCCOLOR = 106;
+    short SVG_PAINTTYPE_URI_RGBCOLOR_ICCCOLOR = 106;
 	/** Constant SVG_PAINTTYPE_URI=107 */
-	static final short SVG_PAINTTYPE_URI = 107;
+    short SVG_PAINTTYPE_URI = 107;
 
 	/**
 	 * <p>getPaintType.</p>

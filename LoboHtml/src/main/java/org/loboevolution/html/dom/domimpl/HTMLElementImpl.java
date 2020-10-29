@@ -896,7 +896,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @return a boolean.
 	 */
 	public boolean getHidden() {
-		return this.getAttribute("hidden") == null ? false : true;
+		return this.getAttribute("hidden") != null;
 	}
 
 	/**

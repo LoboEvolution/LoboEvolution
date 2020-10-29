@@ -76,7 +76,7 @@ public class Type3Font extends PDFFont {
 
         // get the transform matrix
         PDFObject matrix = fontObj.getDictRef("FontMatrix");
-        float matrixAry[] = new float[6];
+        float[] matrixAry = new float[6];
         for (int i = 0; i < 6; i++) {
             matrixAry[i] = matrix.getAt(i).getFloatValue();
         }

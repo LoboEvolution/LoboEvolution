@@ -175,7 +175,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 		if (genSettings.isNavigation()) {
 			for (final SearchEngineStore searchEngineStore : items) {
 				settings.insertSearch(searchEngineStore.getName(), searchEngineStore.getDescription(), searchEngineStore.getBaseUrl(),
-						searchEngineStore.getQueryParameter(), i == 0 ? true : false);
+						searchEngineStore.getQueryParameter(), i == 0);
 				i++;
 			}
 		}

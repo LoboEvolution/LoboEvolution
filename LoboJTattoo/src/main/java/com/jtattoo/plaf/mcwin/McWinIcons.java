@@ -102,7 +102,7 @@ public class McWinIcons extends BaseIcons {
 			int h = getIconHeight();
 			AbstractButton button = (AbstractButton) c;
 			ButtonModel model = button.getModel();
-			Color colors[];
+			Color[] colors;
 			Color frameColor = AbstractLookAndFeel.getFrameColor();
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover()) {
@@ -201,7 +201,7 @@ public class McWinIcons extends BaseIcons {
 			Graphics2D g2D = (Graphics2D) g;
 			AbstractButton button = (AbstractButton) c;
 			ButtonModel model = button.getModel();
-			Color colors[];
+			Color[] colors;
 			if (button.isEnabled()) {
 				if (button.isRolloverEnabled() && model.isRollover() || model.isPressed() && model.isArmed()) {
 					colors = AbstractLookAndFeel.getTheme().getRolloverColors();
@@ -284,7 +284,7 @@ public class McWinIcons extends BaseIcons {
 		@Override
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			Graphics2D g2D = (Graphics2D) g;
-			Color colors[];
+			Color[] colors;
 			if (isRollover) {
 				colors = AbstractLookAndFeel.getTheme().getRolloverColors();
 			} else {

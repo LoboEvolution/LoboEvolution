@@ -30,17 +30,17 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFEBlendElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Blend Mode Types
 	/** Constant SVG_FEBLEND_MODE_UNKNOWN=0 */
-	static final short SVG_FEBLEND_MODE_UNKNOWN = 0;
+    short SVG_FEBLEND_MODE_UNKNOWN = 0;
 	/** Constant SVG_FEBLEND_MODE_NORMAL=1 */
-	static final short SVG_FEBLEND_MODE_NORMAL = 1;
+    short SVG_FEBLEND_MODE_NORMAL = 1;
 	/** Constant SVG_FEBLEND_MODE_MULTIPLY=2 */
-	static final short SVG_FEBLEND_MODE_MULTIPLY = 2;
+    short SVG_FEBLEND_MODE_MULTIPLY = 2;
 	/** Constant SVG_FEBLEND_MODE_SCREEN=3 */
-	static final short SVG_FEBLEND_MODE_SCREEN = 3;
+    short SVG_FEBLEND_MODE_SCREEN = 3;
 	/** Constant SVG_FEBLEND_MODE_DARKEN=4 */
-	static final short SVG_FEBLEND_MODE_DARKEN = 4;
+    short SVG_FEBLEND_MODE_DARKEN = 4;
 	/** Constant SVG_FEBLEND_MODE_LIGHTEN=5 */
-	static final short SVG_FEBLEND_MODE_LIGHTEN = 5;
+    short SVG_FEBLEND_MODE_LIGHTEN = 5;
 
 	/**
 	 * <p>getIn1.</p>

@@ -31,5 +31,5 @@ import org.w3c.dom.css.CSSRule;
 public interface SVGCSSRule extends CSSRule {
 	// Additional CSS RuleType to support ICC color specifications
 	/** Constant COLOR_PROFILE_RULE=7 */
-	static final short COLOR_PROFILE_RULE = 7;
+    short COLOR_PROFILE_RULE = 7;
 }

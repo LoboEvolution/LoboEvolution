@@ -91,7 +91,7 @@ public class McWinButtonUI extends BaseButtonUI {
 		Object savedRenderingHint = g2D.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+		Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		if (b.isEnabled()) {
 			Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {

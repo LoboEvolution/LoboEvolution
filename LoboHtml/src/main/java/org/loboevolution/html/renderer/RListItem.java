@@ -171,8 +171,8 @@ class RListItem extends BaseRListElement {
 						g.fillRect(bulletLeft, bulletTop, BULLET_WIDTH, BULLET_HEIGHT);
 						break;
 					case TYPE_LOWER_ROMAN:
-						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";;
-						break;
+						numberText = ListStyle.getRomanNumerals(bulletNumber).toLowerCase() + ".";
+                        break;
 					case TYPE_UPPER_ROMAN:
 						numberText = ListStyle.getRomanNumerals(bulletNumber).toUpperCase() + ".";
 						break;

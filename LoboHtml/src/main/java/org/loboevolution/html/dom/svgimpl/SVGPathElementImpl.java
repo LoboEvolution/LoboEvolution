@@ -1067,11 +1067,7 @@ public class SVGPathElementImpl extends SVGGraphic implements SVGPathElement {
 		try {
 			token = st.nextToken();
 			while (st.hasMoreTokens() && delims.indexOf(token) != -1) {
-				if (token.equals("-")) {
-					neg = true;
-				} else {
-					neg = false;
-				}
+                neg = token.equals("-");
 				token = st.nextToken();
 			}
 			if (delims.indexOf(token) != -1) {

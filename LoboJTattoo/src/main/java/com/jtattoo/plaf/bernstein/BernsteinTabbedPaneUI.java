@@ -38,7 +38,7 @@ import com.jtattoo.plaf.BaseTabbedPaneUI;
  */
 public class BernsteinTabbedPaneUI extends BaseTabbedPaneUI {
 
-	private static final Color SEP_COLORS[] = { new Color(229, 187, 0), new Color(254, 240, 0), new Color(251, 232, 0),
+	private static final Color[] SEP_COLORS = { new Color(229, 187, 0), new Color(254, 240, 0), new Color(251, 232, 0),
 			new Color(247, 225, 0), new Color(243, 216, 0), new Color(229, 187, 0), };
 
 	/** {@inheritDoc} */

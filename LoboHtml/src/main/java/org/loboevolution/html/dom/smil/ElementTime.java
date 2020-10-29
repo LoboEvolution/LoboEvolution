@@ -34,17 +34,17 @@ public interface ElementTime {
 
 	// restartTypes
 	/** Constant RESTART_ALWAYS=0 */
-	public static final short RESTART_ALWAYS = 0;
+	short RESTART_ALWAYS = 0;
 	/** Constant RESTART_NEVER=1 */
-	public static final short RESTART_NEVER = 1;
+	short RESTART_NEVER = 1;
 	/** Constant RESTART_WHEN_NOT_ACTIVE=2 */
-	public static final short RESTART_WHEN_NOT_ACTIVE = 2;
+	short RESTART_WHEN_NOT_ACTIVE = 2;
 
 	// fillTypes
 	/** Constant FILL_REMOVE=0 */
-	public static final short FILL_REMOVE = 0;
+	short FILL_REMOVE = 0;
 	/** Constant FILL_FREEZE=1 */
-	public static final short FILL_FREEZE = 1;
+	short FILL_FREEZE = 1;
 
 	/**
 	 * The desired value (as a list of times) of the begin instant of this node.
@@ -54,7 +54,7 @@ public interface ElementTime {
 	 *                readonly.
 	 * @return a {@link org.loboevolution.html.dom.smil.TimeList} object.
 	 */
-	public TimeList getBegin();
+	TimeList getBegin();
 
 	/**
 	 * <p>setBegin.</p>
@@ -71,7 +71,7 @@ public interface ElementTime {
 	 *                readonly.
 	 * @return a {@link org.loboevolution.html.dom.smil.TimeList} object.
 	 */
-	public TimeList getEnd();
+	TimeList getEnd();
 
 	/**
 	 * <p>setEnd.</p>
@@ -89,7 +89,7 @@ public interface ElementTime {
 	 *                readonly.
 	 * @return a float.
 	 */
-	public float getDur();
+	float getDur();
 
 	/**
 	 * <p>setDur.</p>
@@ -97,7 +97,7 @@ public interface ElementTime {
 	 * @param dur a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setDur(float dur) throws DOMException;
+	void setDur(float dur) throws DOMException;
 
 	/**
 	 * A code representing the value of the restart attribute, as defined above.
@@ -115,9 +115,9 @@ public interface ElementTime {
 	 *
 	 * @param restart a short.
 	 */
-	default void setRestart(short restart) {};
+	default void setRestart(short restart) {}
 
-	/**
+    /**
 	 * A code representing the value of the fill attribute, as defined above.
 	 * Default value is FILL_REMOVE .
 	 *
@@ -126,7 +126,7 @@ public interface ElementTime {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getFill();
+	String getFill();
 
 	/**
 	 * <p>setFill.</p>
@@ -134,7 +134,7 @@ public interface ElementTime {
 	 * @param fill a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setFill(String fill) throws DOMException;
+	void setFill(String fill) throws DOMException;
 
 	/**
 	 * The repeatCount attribute causes the element to play repeatedly (loop)
@@ -146,7 +146,7 @@ public interface ElementTime {
 	 *                readonly.
 	 * @return a float.
 	 */
-	public float getRepeatCount();
+	float getRepeatCount();
 
 	/**
 	 * <p>setRepeatCount.</p>
@@ -154,7 +154,7 @@ public interface ElementTime {
 	 * @param repeatCount a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setRepeatCount(float repeatCount) throws DOMException;
+	void setRepeatCount(float repeatCount) throws DOMException;
 
 	/**
 	 * The repeatDur causes the element to play repeatedly (loop) for the
@@ -165,7 +165,7 @@ public interface ElementTime {
 	 *                readonly.
 	 * @return a float.
 	 */
-	public float getRepeatDur();
+	float getRepeatDur();
 
 	/**
 	 * <p>setRepeatDur.</p>
@@ -173,7 +173,7 @@ public interface ElementTime {
 	 * @param repeatDur a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setRepeatDur(float repeatDur) throws DOMException;
+	void setRepeatDur(float repeatDur) throws DOMException;
 
 	/**
 	 * Causes this element to begin the local timeline (subject to sync
@@ -190,7 +190,7 @@ public interface ElementTime {
 	 *         active or has been active and can't be restart. (the
 	 *         restart attribute is set to "never" ).
 	 */
-	public boolean beginElement();
+	boolean beginElement();
 
 	/**
 	 * Causes this element to end the local timeline (subject to sync
@@ -203,7 +203,7 @@ public interface ElementTime {
 	 *         attribute is not set to "undefinite" ) The element
 	 *         is not active.
 	 */
-	public boolean endElement();
+	boolean endElement();
 
 	/**
 	 * Causes this element to pause the local timeline (subject to sync

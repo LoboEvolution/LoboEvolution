@@ -356,7 +356,7 @@ public class BaseRootPaneUI extends BasicRootPaneUI {
 
 		private int getMinScreenY() {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			GraphicsDevice devices[] = ge.getScreenDevices();
+			GraphicsDevice[] devices = ge.getScreenDevices();
 			GraphicsDevice gd = devices[0];
 			GraphicsConfiguration gc = gd.getDefaultConfiguration();
 			int minScreenY = gc.getBounds().y + Toolkit.getDefaultToolkit().getScreenInsets(gc).top;

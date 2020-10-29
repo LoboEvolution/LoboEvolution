@@ -89,16 +89,16 @@ public class LabColor extends ColorSpace {
      * @return the RGB values (0-1)
      */
     @Override
-	public float[] toRGB(float comp[]) {
+	public float[] toRGB(float[] comp) {
 	if (comp.length==3) {
 	    float l= (comp[0]+16)/116+comp[1]/500;
 	    float m= (comp[0]+16)/116;
 	    float n= (comp[0]+16)/116-comp[2]/200;
-	    float xyz[]= {
+	    float[] xyz = {
 		this.white[0]*stage2(l),
 		this.white[0]*stage2(m),
 		this.white[0]*stage2(n)};
-	    float rgb[]= cie.fromCIEXYZ(xyz);
+	    float[] rgb = cie.fromCIEXYZ(xyz);
 	    return rgb;
 	} else {
 	    return this.black;

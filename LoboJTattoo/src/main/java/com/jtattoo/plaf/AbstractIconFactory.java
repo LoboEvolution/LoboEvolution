@@ -38,300 +38,300 @@ public interface AbstractIconFactory {
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getCheckBoxIcon();
+    Icon getCheckBoxIcon();
 
 	/**
 	 * <p>getCloseIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getCloseIcon();
+    Icon getCloseIcon();
 
 	/**
 	 * <p>getComboBoxIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getComboBoxIcon();
+    Icon getComboBoxIcon();
 
 	/**
 	 * <p>getDownArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getDownArrowIcon();
+    Icon getDownArrowIcon();
 
 	/**
 	 * <p>getFileChooserDetailViewIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileChooserDetailViewIcon();
+    Icon getFileChooserDetailViewIcon();
 
 	/**
 	 * <p>getFileChooserHomeFolderIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileChooserHomeFolderIcon();
+    Icon getFileChooserHomeFolderIcon();
 
 	/**
 	 * <p>getFileChooserListViewIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileChooserListViewIcon();
+    Icon getFileChooserListViewIcon();
 
 	/**
 	 * <p>getFileChooserNewFolderIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileChooserNewFolderIcon();
+    Icon getFileChooserNewFolderIcon();
 
 	/**
 	 * <p>getFileChooserUpFolderIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileChooserUpFolderIcon();
+    Icon getFileChooserUpFolderIcon();
 
 	/**
 	 * <p>getFileViewComputerIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileViewComputerIcon();
+    Icon getFileViewComputerIcon();
 
 	/**
 	 * <p>getFileViewFloppyDriveIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileViewFloppyDriveIcon();
+    Icon getFileViewFloppyDriveIcon();
 
 	/**
 	 * <p>getFileViewHardDriveIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getFileViewHardDriveIcon();
+    Icon getFileViewHardDriveIcon();
 
 	/**
 	 * <p>getIconIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getIconIcon();
+    Icon getIconIcon();
 
 	/**
 	 * <p>getLeftArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getLeftArrowIcon();
+    Icon getLeftArrowIcon();
 
 	/**
 	 * <p>getMaxIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getMaxIcon();
+    Icon getMaxIcon();
 
 	/**
 	 * <p>getMenuArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getMenuArrowIcon();
+    Icon getMenuArrowIcon();
 
 	/**
 	 * <p>getMenuCheckBoxIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getMenuCheckBoxIcon();
+    Icon getMenuCheckBoxIcon();
 
 	/**
 	 * <p>getMenuIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getMenuIcon();
+    Icon getMenuIcon();
 
 	/**
 	 * <p>getMenuRadioButtonIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getMenuRadioButtonIcon();
+    Icon getMenuRadioButtonIcon();
 
 	/**
 	 * <p>getMinIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getMinIcon();
+    Icon getMinIcon();
 
 	/**
 	 * <p>getOptionPaneErrorIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getOptionPaneErrorIcon();
+    Icon getOptionPaneErrorIcon();
 
 	/**
 	 * <p>getOptionPaneInformationIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getOptionPaneInformationIcon();
+    Icon getOptionPaneInformationIcon();
 
 	/**
 	 * <p>getOptionPaneQuestionIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getOptionPaneQuestionIcon();
+    Icon getOptionPaneQuestionIcon();
 
 	/**
 	 * <p>getOptionPaneWarningIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getOptionPaneWarningIcon();
+    Icon getOptionPaneWarningIcon();
 
 	/**
 	 * <p>getPaletteCloseIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getPaletteCloseIcon();
+    Icon getPaletteCloseIcon();
 
 	/**
 	 * <p>getRadioButtonIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getRadioButtonIcon();
+    Icon getRadioButtonIcon();
 
 	/**
 	 * <p>getRightArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getRightArrowIcon();
+    Icon getRightArrowIcon();
 
 	/**
 	 * <p>getSplitterDownArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getSplitterDownArrowIcon();
+    Icon getSplitterDownArrowIcon();
 
 	/**
 	 * <p>getSplitterHorBumpIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getSplitterHorBumpIcon();
+    Icon getSplitterHorBumpIcon();
 
 	/**
 	 * <p>getSplitterLeftArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getSplitterLeftArrowIcon();
+    Icon getSplitterLeftArrowIcon();
 
 	/**
 	 * <p>getSplitterRightArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getSplitterRightArrowIcon();
+    Icon getSplitterRightArrowIcon();
 
 	/**
 	 * <p>getSplitterUpArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getSplitterUpArrowIcon();
+    Icon getSplitterUpArrowIcon();
 
 	/**
 	 * <p>getSplitterVerBumpIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getSplitterVerBumpIcon();
+    Icon getSplitterVerBumpIcon();
 
 	/**
 	 * <p>getThumbHorIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getThumbHorIcon();
+    Icon getThumbHorIcon();
 
 	/**
 	 * <p>getThumbHorIconRollover.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getThumbHorIconRollover();
+    Icon getThumbHorIconRollover();
 
 	/**
 	 * <p>getThumbVerIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getThumbVerIcon();
+    Icon getThumbVerIcon();
 
 	/**
 	 * <p>getThumbVerIconRollover.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getThumbVerIconRollover();
+    Icon getThumbVerIconRollover();
 
 	/**
 	 * <p>getTreeCloseIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getTreeCloseIcon();
+    Icon getTreeCloseIcon();
 
 	/**
 	 * <p>getTreeCollapsedIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getTreeCollapsedIcon();
+    Icon getTreeCollapsedIcon();
 
 	/**
 	 * <p>getTreeExpandedIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getTreeExpandedIcon();
+    Icon getTreeExpandedIcon();
 
 	/**
 	 * <p>getTreeLeafIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getTreeLeafIcon();
+    Icon getTreeLeafIcon();
 
 	/**
 	 * <p>getTreeOpenIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getTreeOpenIcon();
+    Icon getTreeOpenIcon();
 
 	/**
 	 * <p>getUpArrowIcon.</p>
 	 *
 	 * @return a {@link javax.swing.Icon} object.
 	 */
-	public Icon getUpArrowIcon();
+    Icon getUpArrowIcon();
 
 } // end of interface AbstractIconFactory

@@ -37,6 +37,6 @@ public interface SMILSwitchElement extends SMILElement {
 	 * @return The selected Element for thisd switch
 	 *         element.
 	 */
-	public Element getSelectedElement();
+    Element getSelectedElement();
 
 }

@@ -40,7 +40,7 @@ public interface ElementParallelTimeContainer extends ElementTimeContainer {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getEndSync();
+    String getEndSync();
 
 	/**
 	 * <p>setEndSync.</p>
@@ -48,7 +48,7 @@ public interface ElementParallelTimeContainer extends ElementTimeContainer {
 	 * @param endSync a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setEndSync(String endSync) throws DOMException;
+    void setEndSync(String endSync) throws DOMException;
 
 	/**
 	 * This method returns the implicit duration in seconds.
@@ -56,6 +56,6 @@ public interface ElementParallelTimeContainer extends ElementTimeContainer {
 	 * @return The implicit duration in seconds or -1 if the implicit is unknown
 	 *         (indefinite?).
 	 */
-	public float getImplicitDuration();
+    float getImplicitDuration();
 
 }

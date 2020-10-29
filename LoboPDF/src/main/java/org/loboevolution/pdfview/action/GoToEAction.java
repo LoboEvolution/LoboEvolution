@@ -84,7 +84,7 @@ public class GoToEAction extends PDFAction {
 			if(subTargetObj != null){
 				// call this method recursive, in case the target was not already contained in the 
 				// list (this is checked for not getting into an infinite loop)
-				if(list.contains(target) == false){
+				if(!list.contains(target)){
 					list.add(target);
 					GoToETarget subTargetDictionary = parseTargetDistionary(subTargetObj, list);
 					target.setTargetDictionary(subTargetDictionary);
@@ -252,7 +252,7 @@ public class GoToEAction extends PDFAction {
 
 		@Override
 		public boolean equals(Object obj) {
-			if((obj instanceof GoToETarget) == false){
+			if(!(obj instanceof GoToETarget)){
 				return false;
 			}
 			if(super.equals(obj)){

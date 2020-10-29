@@ -29,18 +29,18 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFETurbulenceElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Turbulence Types
 	/** Constant SVG_TURBULENCE_TYPE_UNKNOWN=0 */
-	static final short SVG_TURBULENCE_TYPE_UNKNOWN = 0;
+    short SVG_TURBULENCE_TYPE_UNKNOWN = 0;
 	/** Constant SVG_TURBULENCE_TYPE_FRACTALNOISE=1 */
-	static final short SVG_TURBULENCE_TYPE_FRACTALNOISE = 1;
+    short SVG_TURBULENCE_TYPE_FRACTALNOISE = 1;
 	/** Constant SVG_TURBULENCE_TYPE_TURBULENCE=2 */
-	static final short SVG_TURBULENCE_TYPE_TURBULENCE = 2;
+    short SVG_TURBULENCE_TYPE_TURBULENCE = 2;
 	// Stitch Options
 	/** Constant SVG_STITCHTYPE_UNKNOWN=0 */
-	static final short SVG_STITCHTYPE_UNKNOWN = 0;
+    short SVG_STITCHTYPE_UNKNOWN = 0;
 	/** Constant SVG_STITCHTYPE_STITCH=1 */
-	static final short SVG_STITCHTYPE_STITCH = 1;
+    short SVG_STITCHTYPE_STITCH = 1;
 	/** Constant SVG_STITCHTYPE_NOSTITCH=2 */
-	static final short SVG_STITCHTYPE_NOSTITCH = 2;
+    short SVG_STITCHTYPE_NOSTITCH = 2;
 
 	/**
 	 * <p>getBaseFrequencyX.</p>

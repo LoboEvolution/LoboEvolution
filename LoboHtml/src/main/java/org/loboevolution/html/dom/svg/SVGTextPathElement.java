@@ -29,18 +29,18 @@ package org.loboevolution.html.dom.svg;
 public interface SVGTextPathElement extends SVGTextContentElement, SVGURIReference {
 	// textPath Method Types
 	/** Constant TEXTPATH_METHODTYPE_UNKNOWN=0 */
-	static final short TEXTPATH_METHODTYPE_UNKNOWN = 0;
+    short TEXTPATH_METHODTYPE_UNKNOWN = 0;
 	/** Constant TEXTPATH_METHODTYPE_ALIGN=1 */
-	static final short TEXTPATH_METHODTYPE_ALIGN = 1;
+    short TEXTPATH_METHODTYPE_ALIGN = 1;
 	/** Constant TEXTPATH_METHODTYPE_STRETCH=2 */
-	static final short TEXTPATH_METHODTYPE_STRETCH = 2;
+    short TEXTPATH_METHODTYPE_STRETCH = 2;
 	// textPath Spacing Types
 	/** Constant TEXTPATH_SPACINGTYPE_UNKNOWN=0 */
-	static final short TEXTPATH_SPACINGTYPE_UNKNOWN = 0;
+    short TEXTPATH_SPACINGTYPE_UNKNOWN = 0;
 	/** Constant TEXTPATH_SPACINGTYPE_AUTO=1 */
-	static final short TEXTPATH_SPACINGTYPE_AUTO = 1;
+    short TEXTPATH_SPACINGTYPE_AUTO = 1;
 	/** Constant TEXTPATH_SPACINGTYPE_EXACT=2 */
-	static final short TEXTPATH_SPACINGTYPE_EXACT = 2;
+    short TEXTPATH_SPACINGTYPE_EXACT = 2;
 
 	/**
 	 * <p>getStartOffset.</p>

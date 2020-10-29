@@ -38,7 +38,7 @@ public interface ElementTest {
 	 *                readonly.
 	 * @return a int.
 	 */
-	public int getSystemBitrate();
+    int getSystemBitrate();
 
 	/**
 	 * <p>setSystemBitrate.</p>
@@ -46,7 +46,7 @@ public interface ElementTest {
 	 * @param systemBitrate a int.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSystemBitrate(int systemBitrate) throws DOMException;
+    void setSystemBitrate(int systemBitrate) throws DOMException;
 
 	/**
 	 * The systemCaptions value.
@@ -56,7 +56,7 @@ public interface ElementTest {
 	 *                readonly.
 	 * @return a boolean.
 	 */
-	public boolean getSystemCaptions();
+    boolean getSystemCaptions();
 
 	/**
 	 * <p>setSystemCaptions.</p>
@@ -64,7 +64,7 @@ public interface ElementTest {
 	 * @param systemCaptions a boolean.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSystemCaptions(boolean systemCaptions) throws DOMException;
+    void setSystemCaptions(boolean systemCaptions) throws DOMException;
 
 	/**
 	 * The systemLanguage value.
@@ -74,7 +74,7 @@ public interface ElementTest {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getSystemLanguage();
+    String getSystemLanguage();
 
 	/**
 	 * <p>setSystemLanguage.</p>
@@ -82,28 +82,28 @@ public interface ElementTest {
 	 * @param systemLanguage a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSystemLanguage(String systemLanguage) throws DOMException;
+    void setSystemLanguage(String systemLanguage) throws DOMException;
 
 	/**
 	 * The result of the evaluation of the systemRequired attribute.
 	 *
 	 * @return a boolean.
 	 */
-	public boolean getSystemRequired();
+    boolean getSystemRequired();
 
 	/**
 	 * The result of the evaluation of the systemScreenSize attribute.
 	 *
 	 * @return a boolean.
 	 */
-	public boolean getSystemScreenSize();
+    boolean getSystemScreenSize();
 
 	/**
 	 * The result of the evaluation of the systemScreenDepth attribute.
 	 *
 	 * @return a boolean.
 	 */
-	public boolean getSystemScreenDepth();
+    boolean getSystemScreenDepth();
 
 	/**
 	 * The value of the systemOverdubOrSubtitle attribute.
@@ -113,7 +113,7 @@ public interface ElementTest {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getSystemOverdubOrSubtitle();
+    String getSystemOverdubOrSubtitle();
 
 	/**
 	 * <p>setSystemOverdubOrSubtitle.</p>
@@ -121,7 +121,7 @@ public interface ElementTest {
 	 * @param systemOverdubOrSubtitle a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSystemOverdubOrSubtitle(String systemOverdubOrSubtitle) throws DOMException;
+    void setSystemOverdubOrSubtitle(String systemOverdubOrSubtitle) throws DOMException;
 
 	/**
 	 * The value of the systemAudioDesc attribute.
@@ -131,7 +131,7 @@ public interface ElementTest {
 	 *                readonly.
 	 * @return a boolean.
 	 */
-	public boolean getSystemAudioDesc();
+    boolean getSystemAudioDesc();
 
 	/**
 	 * <p>setSystemAudioDesc.</p>
@@ -139,6 +139,6 @@ public interface ElementTest {
 	 * @param systemAudioDesc a boolean.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSystemAudioDesc(boolean systemAudioDesc) throws DOMException;
+    void setSystemAudioDesc(boolean systemAudioDesc) throws DOMException;
 
 }

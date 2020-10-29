@@ -863,7 +863,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 	 * @return a boolean.
 	 */
 	protected boolean isActive() {
-		return window == null ? true : window.isActive();
+		return window == null || window.isActive();
 	}
 
 	/**

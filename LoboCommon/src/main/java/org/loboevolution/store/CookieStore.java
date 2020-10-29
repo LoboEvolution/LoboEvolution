@@ -176,8 +176,8 @@ public class CookieStore {
 						cookie.setPath((rs.getString(4)));
 						cookie.setExpires((rs.getString(5)));
 						cookie.setMaxAge((rs.getInt(6)));
-						cookie.setSecure(rs.getInt(7) > 0 ? true : false);
-						cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
+						cookie.setSecure(rs.getInt(7) > 0);
+						cookie.setHttpOnly(rs.getInt(8) > 0);
 						cookies.add(cookie);
 					}
 				}

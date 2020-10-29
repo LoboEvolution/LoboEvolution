@@ -67,7 +67,7 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 *
 	 * @return the width
 	 */
-	public int getWidth();
+    int getWidth();
 
 	/**
 	 * Sets the width.
@@ -75,14 +75,14 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 * @param width
 	 *            the new width
 	 */
-	public void setWidth(int width);
+    void setWidth(int width);
 
 	/**
 	 * Gets the height.
 	 *
 	 * @return the height
 	 */
-	public int getHeight();
+    int getHeight();
 
 	/**
 	 * Sets the height.
@@ -90,14 +90,14 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 * @param height
 	 *            the new height
 	 */
-	public void setHeight(int height);
+    void setHeight(int height);
 
 	/**
 	 * To data url.
 	 *
 	 * @return the string
 	 */
-	public String toDataURL();
+    String toDataURL();
 
 	/**
 	 * To data url.
@@ -108,7 +108,7 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 *            the args
 	 * @return the string
 	 */
-	public String toDataURL(String type, Object... args);
+    String toDataURL(String type, Object... args);
 
 	/**
 	 * To blob.
@@ -116,7 +116,7 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 * @param callback
 	 *            the callback
 	 */
-	public void toBlob(FileCallback callback);
+    void toBlob(FileCallback callback);
 
 	/**
 	 * To blob.
@@ -128,7 +128,7 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 * @param args
 	 *            the args
 	 */
-	public void toBlob(FileCallback callback, String type, Object... args);
+    void toBlob(FileCallback callback, String type, Object... args);
 
 	/**
 	 * Gets the context.
@@ -137,5 +137,5 @@ public interface HTMLCanvasElement extends HTMLElement {
 	 *            the context id
 	 * @return the context
 	 */
-	public CanvasRenderingContext2D getContext(String contextId);
+    CanvasRenderingContext2D getContext(String contextId);
 }

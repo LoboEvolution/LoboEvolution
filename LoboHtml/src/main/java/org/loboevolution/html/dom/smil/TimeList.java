@@ -44,7 +44,7 @@ public interface TimeList {
 	 *         TimeList , or null if that is not a
 	 *         valid index.
 	 */
-	public Time item(int index);
+    Time item(int index);
 
 	/**
 	 * The number of times in the list. The range of valid child time indices is
@@ -52,6 +52,6 @@ public interface TimeList {
 	 *
 	 * @return a int.
 	 */
-	public int getLength();
+    int getLength();
 
 }

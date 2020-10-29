@@ -37,28 +37,28 @@ public interface Time {
 
 	// TimeTypes
 	/** Constant SMIL_TIME_INDEFINITE=0 */
-	public static final short SMIL_TIME_INDEFINITE = 0;
+    short SMIL_TIME_INDEFINITE = 0;
 
 	/** Constant SMIL_TIME_OFFSET=1 */
-	public static final short SMIL_TIME_OFFSET = 1;
+    short SMIL_TIME_OFFSET = 1;
 
 	/** Constant SMIL_TIME_SYNC_BASED=2 */
-	public static final short SMIL_TIME_SYNC_BASED = 2;
+    short SMIL_TIME_SYNC_BASED = 2;
 
 	/** Constant SMIL_TIME_EVENT_BASED=3 */
-	public static final short SMIL_TIME_EVENT_BASED = 3;
+    short SMIL_TIME_EVENT_BASED = 3;
 
 	/** Constant SMIL_TIME_WALLCLOCK=4 */
-	public static final short SMIL_TIME_WALLCLOCK = 4;
+    short SMIL_TIME_WALLCLOCK = 4;
 
 	/** Constant SMIL_TIME_MEDIA_MARKER=5 */
-	public static final short SMIL_TIME_MEDIA_MARKER = 5;
+    short SMIL_TIME_MEDIA_MARKER = 5;
 
 	/** Constant SMIL_TIME_REPEAT=6 */
-	public static final short SMIL_TIME_REPEAT = 6;
+    short SMIL_TIME_REPEAT = 6;
 
 	/** Constant SMIL_TIME_ACCESSKEY=7 */
-	public static final short SMIL_TIME_ACCESSKEY = 7;
+    short SMIL_TIME_ACCESSKEY = 7;
 		
 	/**
 	 * A boolean indicating whether the current Time has been fully
@@ -77,7 +77,7 @@ public interface Time {
 	 *
 	 * @return a boolean.
 	 */
-	public boolean getResolved();
+    boolean getResolved();
 
 	/**
 	 * The clock value in seconds relative to the parent time container begin.
@@ -86,14 +86,14 @@ public interface Time {
 	 *
 	 * @return a double.
 	 */
-	public double getResolvedOffset();
+    double getResolvedOffset();
 
 	/**
 	 * A code representing the type of the underlying object, as defined above.
 	 *
 	 * @return a short.
 	 */
-	public short getTimeType();
+    short getTimeType();
 
 	/**
 	 * The clock value in seconds relative to the syncbase or eventbase. Default
@@ -104,7 +104,7 @@ public interface Time {
 	 *                this readonly attribute.
 	 * @return a double.
 	 */
-	public double getOffset();
+    double getOffset();
 
 	/**
 	 * <p>setOffset.</p>
@@ -112,7 +112,7 @@ public interface Time {
 	 * @param offset a double.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setOffset(double offset) throws DOMException;
+    void setOffset(double offset) throws DOMException;
 
 	/**
 	 * The base element for a sync-based or event-based time.
@@ -122,7 +122,7 @@ public interface Time {
 	 *                this readonly attribute.
 	 * @return a {@link org.w3c.dom.Element} object.
 	 */
-	public Element getBaseElement();
+    Element getBaseElement();
 
 	/**
 	 * <p>setBaseElement.</p>
@@ -130,7 +130,7 @@ public interface Time {
 	 * @param baseElement a {@link org.w3c.dom.Element} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setBaseElement(Element baseElement) throws DOMException;
+    void setBaseElement(Element baseElement) throws DOMException;
 
 	/**
 	 * If true , indicates that a sync-based time is relative to
@@ -142,7 +142,7 @@ public interface Time {
 	 *                this readonly attribute.
 	 * @return a boolean.
 	 */
-	public boolean getBaseBegin();
+    boolean getBaseBegin();
 
 	/**
 	 * <p>setBaseBegin.</p>
@@ -150,7 +150,7 @@ public interface Time {
 	 * @param baseBegin a boolean.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setBaseBegin(boolean baseBegin) throws DOMException;
+    void setBaseBegin(boolean baseBegin) throws DOMException;
 
 	/**
 	 * The name of the event for an event-based time. Default value is
@@ -161,7 +161,7 @@ public interface Time {
 	 *                this readonly attribute.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getEvent();
+    String getEvent();
 
 	/**
 	 * <p>setEvent.</p>
@@ -169,7 +169,7 @@ public interface Time {
 	 * @param event a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setEvent(String event) throws DOMException;
+    void setEvent(String event) throws DOMException;
 
 	/**
 	 * The name of the marker from the media element, for media marker times.
@@ -180,7 +180,7 @@ public interface Time {
 	 *                this readonly attribute.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getMarker();
+    String getMarker();
 
 	/**
 	 * <p>setMarker.</p>
@@ -188,6 +188,6 @@ public interface Time {
 	 * @param marker a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setMarker(String marker) throws DOMException;
+    void setMarker(String marker) throws DOMException;
 
 }

@@ -202,7 +202,7 @@ public class SVGStylableImpl extends SVGElementImpl implements SVGStylable {
 		float[] dashArray = null;
 		final String dasharray = Strings.isNotBlank(style.getStrokeDashArray()) ? style.getStrokeDashArray() : getAttribute("stroke-dasharray");
 		if (Strings.isNotBlank(dasharray)) {
-			String parts[] = dasharray.split("\\s*,\\s*|\\s+");
+			String[] parts = dasharray.split("\\s*,\\s*|\\s+");
 			dashArray = new float[parts.length];
 			int i = 0;
 			for (String str : parts) {

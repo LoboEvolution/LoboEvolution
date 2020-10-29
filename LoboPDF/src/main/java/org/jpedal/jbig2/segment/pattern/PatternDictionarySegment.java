@@ -114,7 +114,7 @@ public class PatternDictionarySegment extends Segment {
 		bitmap.clear(0);
 		bitmap.readBitmap(useMMR, template, false, false, null, genericBAdaptiveTemplateX, genericBAdaptiveTemplateY, segmentHeader.getSegmentDataLength() - 7);
 
-		JBIG2Bitmap bitmaps[] = new JBIG2Bitmap[size];
+		JBIG2Bitmap[] bitmaps = new JBIG2Bitmap[size];
 
 		int x = 0;
 		for (int i = 0; i < size; i++) {

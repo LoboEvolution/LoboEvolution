@@ -86,8 +86,8 @@ public class CookieManager {
 						cookie.setPath(rs.getString(4));
 						cookie.setExpires(rs.getString(5));
 						cookie.setMaxAge(rs.getInt(6));
-						cookie.setSecure(rs.getInt(7) > 0 ? true : false);
-						cookie.setHttpOnly(rs.getInt(8) > 0 ? true : false);
+						cookie.setSecure(rs.getInt(7) > 0);
+						cookie.setHttpOnly(rs.getInt(8) > 0);
 						cookies.add(cookie);
 					}
 				}
@@ -112,9 +112,9 @@ public class CookieManager {
 			for (final Map.Entry<String, List<String>> entry : headerFields.entrySet()) {
 				final String key = entry.getKey();
 				for (final String value : entry.getValue()) {
-					if (key != null && value != null
+					if (value != null
 							&& ("Set-Cookie".equalsIgnoreCase(key) || "Set-Cookie2".equalsIgnoreCase(key)
-									|| "Cookie".equalsIgnoreCase(key) || "Cookie2".equalsIgnoreCase(key))) {
+							|| "Cookie".equalsIgnoreCase(key) || "Cookie2".equalsIgnoreCase(key))) {
 						saveCookie(url.getHost(), value);
 					}
 				}

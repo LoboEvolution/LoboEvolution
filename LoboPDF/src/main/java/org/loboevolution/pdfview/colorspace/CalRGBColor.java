@@ -131,7 +131,7 @@ public class CalRGBColor extends ColorSpace {
      * @return the RGB values (0-1)
      */
     @Override
-	public float[] toRGB(float comp[]) {
+	public float[] toRGB(float[] comp) {
 	if (comp.length==3) {
             // compute r', g' and b' by raising the given values to the
             // correct gamma

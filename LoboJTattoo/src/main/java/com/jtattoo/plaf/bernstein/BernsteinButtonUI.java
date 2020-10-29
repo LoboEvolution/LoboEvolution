@@ -63,7 +63,7 @@ public class BernsteinButtonUI extends BaseButtonUI {
 		int height = b.getHeight();
 
 		ButtonModel model = b.getModel();
-		Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+		Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		if (b.isEnabled()) {
 			Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {

@@ -43,7 +43,7 @@ public interface ElementTimeManipulation {
 	 *                readonly.
 	 * @return a float.
 	 */
-	public float getSpeed();
+    float getSpeed();
 
 	/**
 	 * <p>setSpeed.</p>
@@ -51,7 +51,7 @@ public interface ElementTimeManipulation {
 	 * @param speed a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setSpeed(float speed) throws DOMException;
+    void setSpeed(float speed) throws DOMException;
 
 	/**
 	 * The percentage value of the simple acceleration of time for the element.
@@ -65,7 +65,7 @@ public interface ElementTimeManipulation {
 	 *                readonly.
 	 * @return a float.
 	 */
-	public float getAccelerate();
+    float getAccelerate();
 
 	/**
 	 * <p>setAccelerate.</p>
@@ -73,7 +73,7 @@ public interface ElementTimeManipulation {
 	 * @param accelerate a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setAccelerate(float accelerate) throws DOMException;
+    void setAccelerate(float accelerate) throws DOMException;
 
 	/**
 	 * The percentage value of the simple decelerate of time for the element.
@@ -87,7 +87,7 @@ public interface ElementTimeManipulation {
 	 *                readonly.
 	 * @return a float.
 	 */
-	public float getDecelerate();
+    float getDecelerate();
 
 	/**
 	 * <p>setDecelerate.</p>
@@ -95,7 +95,7 @@ public interface ElementTimeManipulation {
 	 * @param decelerate a float.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setDecelerate(float decelerate) throws DOMException;
+    void setDecelerate(float decelerate) throws DOMException;
 
 	/**
 	 * The autoReverse attribute controls the "play forwards then backwards"
@@ -106,7 +106,7 @@ public interface ElementTimeManipulation {
 	 *                readonly.
 	 * @return a boolean.
 	 */
-	public boolean getAutoReverse();
+    boolean getAutoReverse();
 
 	/**
 	 * <p>setAutoReverse.</p>
@@ -114,6 +114,6 @@ public interface ElementTimeManipulation {
 	 * @param autoReverse a boolean.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setAutoReverse(boolean autoReverse) throws DOMException;
+    void setAutoReverse(boolean autoReverse) throws DOMException;
 
 }

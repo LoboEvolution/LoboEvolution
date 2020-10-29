@@ -41,7 +41,7 @@ public interface ElementExclusiveTimeContainer extends ElementTimeContainer {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getEndSync();
+    String getEndSync();
 
 	/**
 	 * <p>setEndSync.</p>
@@ -49,7 +49,7 @@ public interface ElementExclusiveTimeContainer extends ElementTimeContainer {
 	 * @param endSync a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setEndSync(String endSync) throws DOMException;
+    void setEndSync(String endSync) throws DOMException;
 
 	/**
 	 * This should support another method to get the ordered collection of
@@ -57,6 +57,6 @@ public interface ElementExclusiveTimeContainer extends ElementTimeContainer {
 	 *
 	 * @return All paused elements at the current time.
 	 */
-	public NodeList getPausedElements();
+    NodeList getPausedElements();
 
 }

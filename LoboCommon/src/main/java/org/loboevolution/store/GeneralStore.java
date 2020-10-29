@@ -134,11 +134,11 @@ public class GeneralStore implements Serializable {
 				PreparedStatement pstmt = conn.prepareStatement(NETWORK)) {
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
-					setting.setJs(rs.getInt(1) == 1 ? true : false);
-					setting.setCss(rs.getInt(2) == 1 ? true : false);
-					setting.setCookie(rs.getInt(3) == 1 ? true : false);
-					setting.setCache(rs.getInt(4) == 1 ? true : false);
-					setting.setNavigation(rs.getInt(5) == 1 ? true : false);
+					setting.setJs(rs.getInt(1) == 1);
+					setting.setCss(rs.getInt(2) == 1);
+					setting.setCookie(rs.getInt(3) == 1);
+					setting.setCache(rs.getInt(4) == 1);
+					setting.setNavigation(rs.getInt(5) == 1);
 				}
 			}
 		} catch (final Exception e) {

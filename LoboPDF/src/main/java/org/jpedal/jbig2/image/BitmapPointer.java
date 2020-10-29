@@ -67,10 +67,7 @@ public class BitmapPointer {
 	public void setPointer(int x, int y) {
 		this.x = x;
 		this.y = y;
-		output = true;
-		if (this.y < 0 || this.y >= height || this.x >= width) {
-			output = false;
-		}
+		output = this.y >= 0 && this.y < height && this.x < width;
 		count = this.y * width;
 	}
 

@@ -111,7 +111,7 @@ public class MintToggleButtonUI extends BaseToggleButtonUI {
 			return;
 		}
 
-		Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+		Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		if (!model.isEnabled()) {
 			colors = AbstractLookAndFeel.getTheme().getDisabledColors();
 		} else if (b.isRolloverEnabled() && model.isRollover()) {

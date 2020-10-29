@@ -15,5 +15,5 @@ public interface ImageMouseClickListener extends EventListener {
 	 * @param e
 	 *            the event object containing attributes of the event
 	 */
-	public void mouseClicked(ImageMouseEvent e);
+    void mouseClicked(ImageMouseEvent e);
 }

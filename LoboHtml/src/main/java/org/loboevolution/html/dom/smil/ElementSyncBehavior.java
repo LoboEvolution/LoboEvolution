@@ -33,7 +33,7 @@ public interface ElementSyncBehavior {
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getSyncBehavior();
+    String getSyncBehavior();
 
 	/**
 	 * The sync tolerance for the associated element. It has an effect only if
@@ -41,7 +41,7 @@ public interface ElementSyncBehavior {
 	 *
 	 * @return a float.
 	 */
-	public float getSyncTolerance();
+    float getSyncTolerance();
 
 	/**
 	 * Defines the default value for the runtime synchronization behavior for an
@@ -49,7 +49,7 @@ public interface ElementSyncBehavior {
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getDefaultSyncBehavior();
+    String getDefaultSyncBehavior();
 
 	/**
 	 * Defines the default value for the sync tolerance for an element, and all
@@ -57,7 +57,7 @@ public interface ElementSyncBehavior {
 	 *
 	 * @return a float.
 	 */
-	public float getDefaultSyncTolerance();
+    float getDefaultSyncTolerance();
 
 	/**
 	 * If set to true, forces the time container playback to sync to this
@@ -65,6 +65,6 @@ public interface ElementSyncBehavior {
 	 *
 	 * @return a boolean.
 	 */
-	public boolean getSyncMaster();
+    boolean getSyncMaster();
 
 }

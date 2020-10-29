@@ -301,10 +301,7 @@ public class ColorFactory {
 			return true;
 		} else if (normalSpec.startsWith(this.HSLA_START)) {
 			return true;
-		} else if (normalSpec.startsWith(this.HSL_START)) {
-			return true;
-		}
-		return false;
+		} else return normalSpec.startsWith(this.HSL_START);
 	}
 	
 	public static Color getAdjustedColor(Color c, double factor) {

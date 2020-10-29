@@ -734,10 +734,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			return null;
 		}
 		final Node node = doc.getElementById(name);
-		if (node != null) {
-			return node;
-		}
-		return null;
+		return node;
 	}
 
 	/**

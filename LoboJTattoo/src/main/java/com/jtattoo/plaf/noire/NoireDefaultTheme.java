@@ -154,8 +154,8 @@ public class NoireDefaultTheme extends AbstractTheme {
 		Color topLo = buttonColorLight;
 		Color bottomHi = buttonColorDark;
 		Color bottomLo = ColorHelper.darker(buttonColorDark, 40);
-		Color topColors[] = ColorHelper.createColorArr(topHi, topLo, 10);
-		Color bottomColors[] = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
+		Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 10);
+		Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 12);
 		BUTTON_COLORS = new Color[22];
 		System.arraycopy(topColors, 0, BUTTON_COLORS, 0, 10);
 		System.arraycopy(bottomColors, 0, BUTTON_COLORS, 10, 12);

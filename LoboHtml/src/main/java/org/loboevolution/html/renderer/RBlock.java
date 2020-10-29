@@ -517,8 +517,8 @@ public class RBlock extends BaseElementRenderable {
 		int adjDeclaredHeight = -1;
 		
 		if("border-box".equals(rs.getBoxSizing())) {
-			adjDeclaredWidth = declaredWidth == -1 ? -1 : declaredWidth;
-			adjDeclaredHeight = declaredHeight == -1 ? -1 : declaredHeight;
+			adjDeclaredWidth = declaredWidth;
+			adjDeclaredHeight = declaredHeight;
 		} else {
 			adjDeclaredWidth = declaredWidth == -1 ? -1 : declaredWidth + insets.left + insets.right + paddingInsets.left + paddingInsets.right;
 			adjDeclaredHeight = declaredHeight == -1 ? -1 : declaredHeight + insets.top + insets.bottom + paddingInsets.top + paddingInsets.bottom;
@@ -948,10 +948,7 @@ public class RBlock extends BaseElementRenderable {
 				return false;
 			}
 		}
-		if (this.backgroundColor != null) {
-			return false;
-		}
-		return true;
+		return this.backgroundColor == null;
 	}
 
 	/** {@inheritDoc} */
@@ -966,10 +963,7 @@ public class RBlock extends BaseElementRenderable {
 		if (!HtmlController.getInstance().onMouseClick(this.modelNode, event, x, y)) {
 			return false;
 		}
-		if (this.backgroundColor != null) {
-			return false;
-		}
-		return true;
+		return this.backgroundColor == null;
 	}
 
 	/** {@inheritDoc} */
@@ -1015,10 +1009,7 @@ public class RBlock extends BaseElementRenderable {
 		if (!HtmlController.getInstance().onMouseDown(this.modelNode, event, x, y)) {
 			return false;
 		}
-		if (this.backgroundColor != null) {
-			return false;
-		}
-		return true;
+		return this.backgroundColor == null;
 	}
 
 	/*
@@ -1050,10 +1041,7 @@ public class RBlock extends BaseElementRenderable {
 		if (!HtmlController.getInstance().onMouseUp(this.modelNode, event, x, y)) {
 			return false;
 		}
-		if (this.backgroundColor != null) {
-			return false;
-		}
-		return true;
+		return this.backgroundColor == null;
 	}
 
 	/** {@inheritDoc} */

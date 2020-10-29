@@ -52,7 +52,7 @@ public class GraphiteTabbedPaneUI extends BaseTabbedPaneUI {
 		return new GraphiteTabbedPaneUI();
 	}
 
-	private Color sepColors[] = null;
+	private Color[] sepColors = null;
 
 	/** {@inheritDoc} */
 	@Override

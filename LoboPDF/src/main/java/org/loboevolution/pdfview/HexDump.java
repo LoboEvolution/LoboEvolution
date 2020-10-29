@@ -63,7 +63,7 @@ public class HexDump {
         }
     }
 
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         if (args.length != 1) {
             logger.info("Usage: ");
             logger.info("    HexDump <filename>");

@@ -111,19 +111,19 @@ public class MouseEventImpl extends UIEventImpl implements MouseEvent {
 	/** {@inheritDoc} */
 	@Override
 	public boolean getCtrlKey() {
-		return ctrlKey ? ie.isControlDown() : false;
+		return ctrlKey && ie.isControlDown();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean getShiftKey() {
-		return shiftKey ? ie.isShiftDown() : false;
+		return shiftKey && ie.isShiftDown();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean getAltKey() {
-		return altKey ? ie.isAltDown() : false;
+		return altKey && ie.isAltDown();
 	}
 
 	/** {@inheritDoc} */

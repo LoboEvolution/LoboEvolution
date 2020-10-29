@@ -105,7 +105,7 @@ public class HttpNetwork {
 			if (href.contains(";base64,")) {
 				final String base64 = href.split(";base64,")[1];
 				byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-				try (InputStream stream = new ByteArrayInputStream(decodedBytes);) {
+				try (InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 					return ImageIO.read(stream);
 				}
 			} else {
@@ -121,7 +121,7 @@ public class HttpNetwork {
 				final URLConnection connection = u.openConnection();
 				connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
 				try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-						Reader reader = new InputStreamReader(in, "utf-8");) {
+						Reader reader = new InputStreamReader(in, "utf-8")) {
 
 					if (href.contains(";base64,")) {
 						final String base64 = href.split(";base64,")[1];

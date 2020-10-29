@@ -64,8 +64,8 @@ public class MozilaFirefoxData extends BrowserData {
 				cookie.setValue(rs.getString(5));
 				cookie.setPath(rs.getString(7));
 				cookie.setExpires(rs.getString(8));
-				cookie.setSecure(rs.getInt(11) > 0 ? true : false);
-				cookie.setHttpOnly(rs.getInt(12) > 0 ? true : false);
+				cookie.setSecure(rs.getInt(11) > 0);
+				cookie.setHttpOnly(rs.getInt(12) > 0);
 				cookies.add(cookie);
 			}
 		} catch (final Exception e) {

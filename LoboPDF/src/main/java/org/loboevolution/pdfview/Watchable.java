@@ -24,34 +24,34 @@ package org.loboevolution.pdfview;
 public interface Watchable {
 
     /** the possible statuses */
-    public static final int UNKNOWN = 0;
-    public static final int NOT_STARTED = 1;
-    public static final int PAUSED = 2;
-    public static final int NEEDS_DATA = 3;
-    public static final int RUNNING = 4;
-    public static final int STOPPED = 5;
-    public static final int COMPLETED = 6;
-    public static final int ERROR = 7;
+    int UNKNOWN = 0;
+    int NOT_STARTED = 1;
+    int PAUSED = 2;
+    int NEEDS_DATA = 3;
+    int RUNNING = 4;
+    int STOPPED = 5;
+    int COMPLETED = 6;
+    int ERROR = 7;
 
     /**
      * Get the status of this watchable
      *
      * @return one of the well-known statuses
      */
-    public int getStatus();
+    int getStatus();
 
     /**
      * Stop this watchable.  Stop will cause all processing to cease,
      * and the watchable to be destroyed.
      */
-    public void stop();
+    void stop();
 
     /**
      * Start this watchable and run until it is finished or stopped.
      * Note the watchable may be stopped if go() with a
      * different time is called during execution.
      */
-    public void go();
+    void go();
 
     /**
      * Start this watchable and run for the given number of steps or until
@@ -59,7 +59,7 @@ public interface Watchable {
      *
      * @param steps the number of steps to run for
      */
-    public void go(int steps);
+    void go(int steps);
 
     /**
      * Start this watchable and run for the given amount of time, or until
@@ -67,5 +67,5 @@ public interface Watchable {
      *
      * @param millis the number of milliseconds to run for
      */
-    public void go(long millis);
+    void go(long millis);
 }

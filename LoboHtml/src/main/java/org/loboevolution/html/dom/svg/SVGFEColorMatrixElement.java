@@ -30,15 +30,15 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFEColorMatrixElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Color Matrix Types
 	/** Constant SVG_FECOLORMATRIX_TYPE_UNKNOWN=0 */
-	static final short SVG_FECOLORMATRIX_TYPE_UNKNOWN = 0;
+    short SVG_FECOLORMATRIX_TYPE_UNKNOWN = 0;
 	/** Constant SVG_FECOLORMATRIX_TYPE_MATRIX=1 */
-	static final short SVG_FECOLORMATRIX_TYPE_MATRIX = 1;
+    short SVG_FECOLORMATRIX_TYPE_MATRIX = 1;
 	/** Constant SVG_FECOLORMATRIX_TYPE_SATURATE=2 */
-	static final short SVG_FECOLORMATRIX_TYPE_SATURATE = 2;
+    short SVG_FECOLORMATRIX_TYPE_SATURATE = 2;
 	/** Constant SVG_FECOLORMATRIX_TYPE_HUEROTATE=3 */
-	static final short SVG_FECOLORMATRIX_TYPE_HUEROTATE = 3;
+    short SVG_FECOLORMATRIX_TYPE_HUEROTATE = 3;
 	/** Constant SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA=4 */
-	static final short SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA = 4;
+    short SVG_FECOLORMATRIX_TYPE_LUMINANCETOALPHA = 4;
 
 	/**
 	 * <p>getIn1.</p>

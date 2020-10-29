@@ -32,11 +32,11 @@ public interface SVGTextContentElement
 		extends SVGElement, SVGTests, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable {
 	// lengthAdjust Types
 	/** Constant LENGTHADJUST_UNKNOWN=0 */
-	static final short LENGTHADJUST_UNKNOWN = 0;
+    short LENGTHADJUST_UNKNOWN = 0;
 	/** Constant LENGTHADJUST_SPACING=1 */
-	static final short LENGTHADJUST_SPACING = 1;
+    short LENGTHADJUST_SPACING = 1;
 	/** Constant LENGTHADJUST_SPACINGANDGLYPHS=2 */
-	static final short LENGTHADJUST_SPACINGANDGLYPHS = 2;
+    short LENGTHADJUST_SPACINGANDGLYPHS = 2;
 
 	/**
 	 * <p>getTextLength.</p>

@@ -67,7 +67,7 @@ public abstract class PDFPattern {
         if (matrix == null) {
             xform = new AffineTransform();
         } else {
-            float elts[]= new float[6];
+            float[] elts = new float[6];
             for (int i = 0; i < elts.length; i++) {
             	elts[i] = matrix.getAt(i).getFloatValue();
             }

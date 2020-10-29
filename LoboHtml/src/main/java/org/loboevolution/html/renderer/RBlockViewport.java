@@ -320,11 +320,8 @@ public class RBlockViewport extends BaseRCollection {
 			this.scheduleAbsDelayedPair(renderable, style, rs, currentLine, absolute);
 			return true;
 		} else {
-			if (addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned)) {
-				return true;
-			}
+			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned);
 		}
-		return false;
 	}
 
 	private void addExportableFloat(final BoundableRenderable element, final boolean leftFloat, final int origX, final int origY) {
@@ -350,7 +347,7 @@ public class RBlockViewport extends BaseRCollection {
 		if (prevLine == null) {
 			// Note: Assumes that prevLine == null means it's the first line.
 			final RenderState rs = this.modelNode.getRenderState();
-			initialAllowOverflow = rs == null ? false : rs.getWhiteSpace() == RenderState.WS_NOWRAP;
+			initialAllowOverflow = rs != null && rs.getWhiteSpace() == RenderState.WS_NOWRAP;
 			// Text indentation only applies to the first line in the block.
 			final int textIndent = rs == null ? 0 : rs.getTextIndent(this.availContentWidth);
 			if (textIndent != 0) {

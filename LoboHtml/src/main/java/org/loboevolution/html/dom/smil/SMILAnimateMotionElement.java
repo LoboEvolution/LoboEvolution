@@ -39,7 +39,7 @@ public interface SMILAnimateMotionElement extends SMILAnimateElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getPath();
+    String getPath();
 
 	/**
 	 * <p>setPath.</p>
@@ -47,7 +47,7 @@ public interface SMILAnimateMotionElement extends SMILAnimateElement {
 	 * @param path a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setPath(String path) throws DOMException;
+    void setPath(String path) throws DOMException;
 
 	/**
 	 * Specifies the origin of motion for the animation.
@@ -57,7 +57,7 @@ public interface SMILAnimateMotionElement extends SMILAnimateElement {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getOrigin();
+    String getOrigin();
 
 	/**
 	 * <p>setOrigin.</p>
@@ -65,6 +65,6 @@ public interface SMILAnimateMotionElement extends SMILAnimateElement {
 	 * @param origin a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setOrigin(String origin) throws DOMException;
+    void setOrigin(String origin) throws DOMException;
 
 }

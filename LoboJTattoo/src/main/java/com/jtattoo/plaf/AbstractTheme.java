@@ -292,51 +292,51 @@ public abstract class AbstractTheme extends MetalTheme {
 	protected static boolean tooltipCastShadow = false;
 
 	/** Constant DEFAULT_COLORS */
-	protected static Color DEFAULT_COLORS[] = null;
+	protected static Color[] DEFAULT_COLORS = null;
 	/** Constant HIDEFAULT_COLORS */
-	protected static Color HIDEFAULT_COLORS[] = null;
+	protected static Color[] HIDEFAULT_COLORS = null;
 	/** Constant ACTIVE_COLORS */
-	protected static Color ACTIVE_COLORS[] = null;
+	protected static Color[] ACTIVE_COLORS = null;
 	/** Constant INACTIVE_COLORS */
-	protected static Color INACTIVE_COLORS[] = null;
+	protected static Color[] INACTIVE_COLORS = null;
 	/** Constant ROLLOVER_COLORS */
-	protected static Color ROLLOVER_COLORS[] = null;
+	protected static Color[] ROLLOVER_COLORS = null;
 	/** Constant SELECTED_COLORS */
-	protected static Color SELECTED_COLORS[] = null;
+	protected static Color[] SELECTED_COLORS = null;
 	/** Constant SELECTION_COLORS */
-	protected static Color SELECTION_COLORS[] = null;
+	protected static Color[] SELECTION_COLORS = null;
 	/** Constant FOCUS_COLORS */
-	protected static Color FOCUS_COLORS[] = null;
+	protected static Color[] FOCUS_COLORS = null;
 	/** Constant MENU_SELECTION_COLORS */
-	protected static Color MENU_SELECTION_COLORS[] = null;
+	protected static Color[] MENU_SELECTION_COLORS = null;
 	/** Constant PRESSED_COLORS */
-	protected static Color PRESSED_COLORS[] = null;
+	protected static Color[] PRESSED_COLORS = null;
 	/** Constant DISABLED_COLORS */
-	protected static Color DISABLED_COLORS[] = null;
+	protected static Color[] DISABLED_COLORS = null;
 	/** Constant WINDOW_TITLE_COLORS */
-	protected static Color WINDOW_TITLE_COLORS[] = null;
+	protected static Color[] WINDOW_TITLE_COLORS = null;
 	/** Constant WINDOW_INACTIVE_TITLE_COLORS */
-	protected static Color WINDOW_INACTIVE_TITLE_COLORS[] = null;
+	protected static Color[] WINDOW_INACTIVE_TITLE_COLORS = null;
 	/** Constant TOOLBAR_COLORS */
-	protected static Color TOOLBAR_COLORS[] = null;
+	protected static Color[] TOOLBAR_COLORS = null;
 	/** Constant MENUBAR_COLORS */
-	protected static Color MENUBAR_COLORS[] = null;
+	protected static Color[] MENUBAR_COLORS = null;
 	/** Constant BUTTON_COLORS */
-	protected static Color BUTTON_COLORS[] = null;
+	protected static Color[] BUTTON_COLORS = null;
 	/** Constant CHECKBOX_COLORS */
-	protected static Color CHECKBOX_COLORS[] = null;
+	protected static Color[] CHECKBOX_COLORS = null;
 	/** Constant TAB_COLORS */
-	protected static Color TAB_COLORS[] = null;
+	protected static Color[] TAB_COLORS = null;
 	/** Constant COL_HEADER_COLORS */
-	protected static Color COL_HEADER_COLORS[] = null;
+	protected static Color[] COL_HEADER_COLORS = null;
 	/** Constant TRACK_COLORS */
-	protected static Color TRACK_COLORS[] = null;
+	protected static Color[] TRACK_COLORS = null;
 	/** Constant THUMB_COLORS */
-	protected static Color THUMB_COLORS[] = null;
+	protected static Color[] THUMB_COLORS = null;
 	/** Constant SLIDER_COLORS */
-	protected static Color SLIDER_COLORS[] = null;
+	protected static Color[] SLIDER_COLORS = null;
 	/** Constant PROGRESSBAR_COLORS */
-	protected static Color PROGRESSBAR_COLORS[] = null;
+	protected static Color[] PROGRESSBAR_COLORS = null;
 
 	/** Constant textureSet="Default" */
 	protected static String textureSet = "Default";

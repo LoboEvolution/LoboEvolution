@@ -61,7 +61,7 @@ public class AeroTitlePane extends BaseTitlePane {
 			boolean isRollover = getModel().isRollover();
 			int width = getWidth();
 			int height = getHeight();
-			Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+			Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 			if (isRollover) {
 				colors = AbstractLookAndFeel.getTheme().getRolloverColors();
 			}

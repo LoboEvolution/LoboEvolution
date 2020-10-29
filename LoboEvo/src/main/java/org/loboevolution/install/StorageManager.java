@@ -111,7 +111,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 				Statement stmt = conn.createStatement()) {
 			String s = new String();
 			final StringBuilder sb = new StringBuilder();
-			final boolean isTable = "table.sql".equals(fl.getName()) ? true : false;
+			final boolean isTable = "table.sql".equals(fl.getName());
 			try (FileReader fr = new FileReader(fl); BufferedReader br = new BufferedReader(fr)) {
 				while ((s = br.readLine()) != null) {
 					sb.append(s);

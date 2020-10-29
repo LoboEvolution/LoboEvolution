@@ -237,7 +237,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 					TextureUtils.fillRect(g, tabPane, x, y, w, h + 4, getUnSelectedTexture(tabIndex));
 					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 					g2D.setComposite(alpha);
-					Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+					Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 					JTattooUtilities.fillHorGradient(g, colors, x, y, w, h + 4);
 					g2D.setComposite(savedComposite);
 					g2D.setClip(savedClip);
@@ -268,7 +268,7 @@ public class TextureTabbedPaneUI extends BaseTabbedPaneUI {
 					TextureUtils.fillRect(g, tabPane, x, y - 4, w, h + 4, getUnSelectedTexture(tabIndex));
 					AlphaComposite alpha = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f);
 					g2D.setComposite(alpha);
-					Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+					Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 					JTattooUtilities.fillHorGradient(g, colors, x, y - 4, w, h + 4);
 					g2D.setComposite(savedComposite);
 					g2D.setClip(savedClip);

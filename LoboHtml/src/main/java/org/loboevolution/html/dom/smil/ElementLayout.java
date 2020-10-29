@@ -38,7 +38,7 @@ public interface ElementLayout {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getTitle();
+    String getTitle();
 
 	/**
 	 * <p>setTitle.</p>
@@ -46,7 +46,7 @@ public interface ElementLayout {
 	 * @param title a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setTitle(String title) throws DOMException;
+    void setTitle(String title) throws DOMException;
 
 	/**
 	 * <p>getBackgroundColor.</p>
@@ -56,7 +56,7 @@ public interface ElementLayout {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getBackgroundColor();
+    String getBackgroundColor();
 
 	/**
 	 * <p>setBackgroundColor.</p>
@@ -64,7 +64,7 @@ public interface ElementLayout {
 	 * @param backgroundColor a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setBackgroundColor(String backgroundColor) throws DOMException;
+    void setBackgroundColor(String backgroundColor) throws DOMException;
 
 	/**
 	 * <p>getHeight.</p>
@@ -74,7 +74,7 @@ public interface ElementLayout {
 	 *                readonly.
 	 * @return a int.
 	 */
-	public int getHeight();
+    int getHeight();
 
 	/**
 	 * <p>setHeight.</p>
@@ -82,7 +82,7 @@ public interface ElementLayout {
 	 * @param height a int.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setHeight(int height) throws DOMException;
+    void setHeight(int height) throws DOMException;
 
 	/**
 	 * <p>getWidth.</p>
@@ -92,7 +92,7 @@ public interface ElementLayout {
 	 *                readonly.
 	 * @return a int.
 	 */
-	public int getWidth();
+    int getWidth();
 
 	/**
 	 * <p>setWidth.</p>
@@ -100,6 +100,6 @@ public interface ElementLayout {
 	 * @param width a int.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setWidth(int width) throws DOMException;
+    void setWidth(int width) throws DOMException;
 
 }

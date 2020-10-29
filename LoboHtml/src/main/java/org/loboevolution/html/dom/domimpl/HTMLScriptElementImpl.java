@@ -151,7 +151,7 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 					final URLConnection connection = u.openConnection();
 					connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
 					try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-							Reader reader = new InputStreamReader(in, "utf-8");) {
+							Reader reader = new InputStreamReader(in, "utf-8")) {
 						BufferedReader br = new BufferedReader(reader);						
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
 					} catch (Exception e) {

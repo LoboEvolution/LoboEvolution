@@ -21,7 +21,7 @@
 package org.loboevolution.html.renderstate;
 
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.style.HtmlInsets;;
+import org.loboevolution.html.style.HtmlInsets;
 
 /**
  * <p>Abstract AbstractMarginRenderState class.</p>

@@ -44,7 +44,7 @@ public class NavigationManager {
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
 			try (InputStream in = HttpNetwork.openConnectionCheckRedirects(connection);
-					Reader reader = new InputStreamReader(in, "utf-8");) {
+					Reader reader = new InputStreamReader(in, "utf-8")) {
 
 				final InputSource is = new InputSourceImpl(reader, uri);
 				final UserAgentContext ucontext = new UserAgentContext();

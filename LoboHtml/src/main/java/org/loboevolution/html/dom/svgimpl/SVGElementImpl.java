@@ -89,11 +89,7 @@ public class SVGElementImpl extends HTMLAbstractUIElement implements SVGElement 
 	 * @return a boolean.
 	 */
 	public boolean hasExtension(String extension) {
-		if (extension.equalsIgnoreCase("svg")) {
-			return true;
-		} else {
-			return false;
-		}
+		return extension.equalsIgnoreCase("svg");
 	}
 	
 	/**

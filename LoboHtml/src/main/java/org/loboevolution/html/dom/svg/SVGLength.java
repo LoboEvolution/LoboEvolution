@@ -31,27 +31,27 @@ import org.w3c.dom.DOMException;
 public interface SVGLength {
 	// Length Unit Types
 	/** Constant SVG_LENGTHTYPE_UNKNOWN=0 */
-	static final short SVG_LENGTHTYPE_UNKNOWN = 0;
+    short SVG_LENGTHTYPE_UNKNOWN = 0;
 	/** Constant SVG_LENGTHTYPE_NUMBER=1 */
-	static final short SVG_LENGTHTYPE_NUMBER = 1;
+    short SVG_LENGTHTYPE_NUMBER = 1;
 	/** Constant SVG_LENGTHTYPE_PERCENTAGE=2 */
-	static final short SVG_LENGTHTYPE_PERCENTAGE = 2;
+    short SVG_LENGTHTYPE_PERCENTAGE = 2;
 	/** Constant SVG_LENGTHTYPE_EMS=3 */
-	static final short SVG_LENGTHTYPE_EMS = 3;
+    short SVG_LENGTHTYPE_EMS = 3;
 	/** Constant SVG_LENGTHTYPE_EXS=4 */
-	static final short SVG_LENGTHTYPE_EXS = 4;
+    short SVG_LENGTHTYPE_EXS = 4;
 	/** Constant SVG_LENGTHTYPE_PX=5 */
-	static final short SVG_LENGTHTYPE_PX = 5;
+    short SVG_LENGTHTYPE_PX = 5;
 	/** Constant SVG_LENGTHTYPE_CM=6 */
-	static final short SVG_LENGTHTYPE_CM = 6;
+    short SVG_LENGTHTYPE_CM = 6;
 	/** Constant SVG_LENGTHTYPE_MM=7 */
-	static final short SVG_LENGTHTYPE_MM = 7;
+    short SVG_LENGTHTYPE_MM = 7;
 	/** Constant SVG_LENGTHTYPE_IN=8 */
-	static final short SVG_LENGTHTYPE_IN = 8;
+    short SVG_LENGTHTYPE_IN = 8;
 	/** Constant SVG_LENGTHTYPE_PT=9 */
-	static final short SVG_LENGTHTYPE_PT = 9;
+    short SVG_LENGTHTYPE_PT = 9;
 	/** Constant SVG_LENGTHTYPE_PC=10 */
-	static final short SVG_LENGTHTYPE_PC = 10;
+    short SVG_LENGTHTYPE_PC = 10;
 
 	/**
 	 * <p>getUnitType.</p>

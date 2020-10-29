@@ -36,5 +36,5 @@ public interface FileCallback {
 	 *            the file
 	 */
 	// FileCallback
-	public void handleEvent(File file);
+    void handleEvent(File file);
 }

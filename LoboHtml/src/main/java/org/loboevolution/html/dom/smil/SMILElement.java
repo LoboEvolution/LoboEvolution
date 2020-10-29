@@ -48,7 +48,7 @@ public interface SMILElement extends Element {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getId();
+    String getId();
 
 	/**
 	 * <p>setId.</p>
@@ -56,6 +56,6 @@ public interface SMILElement extends Element {
 	 * @param id a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setId(String id) throws DOMException;
+    void setId(String id) throws DOMException;
 
 }

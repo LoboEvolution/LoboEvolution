@@ -34,13 +34,13 @@ public interface TextMetrics {
 	 *
 	 * @return the width
 	 */
-	public double getWidth();
+    double getWidth();
 
 	/**
 	 * Gets the height.
 	 *
 	 * @return the height
 	 */
-	public double getHeight();
+    double getHeight();
 
 }

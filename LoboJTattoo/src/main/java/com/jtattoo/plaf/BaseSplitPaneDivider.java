@@ -336,7 +336,7 @@ public class BaseSplitPaneDivider extends BasicSplitPaneDivider {
 			Color color = AbstractLookAndFeel.getBackgroundColor();
 			Color cHi = ColorHelper.brighter(color, 25);
 			Color cLo = ColorHelper.darker(color, 5);
-			Color colors[] = ColorHelper.createColorArr(cHi, cLo, 10);
+			Color[] colors = ColorHelper.createColorArr(cHi, cLo, 10);
 
 			if (UIManager.getLookAndFeel() instanceof AbstractLookAndFeel) {
 				AbstractLookAndFeel laf = (AbstractLookAndFeel) UIManager.getLookAndFeel();

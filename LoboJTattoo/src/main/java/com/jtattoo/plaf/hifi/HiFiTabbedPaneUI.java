@@ -58,7 +58,7 @@ public class HiFiTabbedPaneUI extends BaseTabbedPaneUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
-		Color SEP_COLORS[] = { ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
+		Color[] SEP_COLORS = { ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),
 				ColorHelper.brighter(AbstractLookAndFeel.getBackgroundColor(), 20),
 				ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 20),
 				ColorHelper.darker(AbstractLookAndFeel.getBackgroundColor(), 40),

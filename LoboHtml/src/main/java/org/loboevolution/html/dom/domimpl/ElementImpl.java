@@ -309,7 +309,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		final String normalName = normalizeAttributeName(name);
 		synchronized (this) {
 			final Map<String, String> attributes = this.attributes;
-			return attributes == null ? false : attributes.containsKey(normalName);
+			return attributes != null && attributes.containsKey(normalName);
 		}
 	}
 
@@ -318,7 +318,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public boolean hasAttributes() {
 		synchronized (this) {
 			final Map<String, String> attrs = this.attributes;
-			return attrs == null ? false : !attrs.isEmpty();
+			return attrs != null && !attrs.isEmpty();
 		}
 	}
 

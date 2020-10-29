@@ -39,7 +39,7 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getFit();
+    String getFit();
 
 	/**
 	 * <p>setFit.</p>
@@ -47,7 +47,7 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
 	 * @param fit a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setFit(String fit) throws DOMException;
+    void setFit(String fit) throws DOMException;
 
 	/**
 	 * <p>getTop.</p>
@@ -57,7 +57,7 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
 	 *                readonly.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getTop();
+    String getTop();
 
 	/**
 	 * <p>setTop.</p>
@@ -65,7 +65,7 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
 	 * @param top a {@link java.lang.String} object.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setTop(String top) throws DOMException;
+    void setTop(String top) throws DOMException;
 
 	/**
 	 * <p>getZIndex.</p>
@@ -75,7 +75,7 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
 	 *                readonly.
 	 * @return a int.
 	 */
-	public int getZIndex();
+    int getZIndex();
 
 	/**
 	 * <p>setZIndex.</p>
@@ -83,6 +83,6 @@ public interface SMILRegionElement extends SMILElement, ElementLayout {
 	 * @param zIndex a int.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public void setZIndex(int zIndex) throws DOMException;
+    void setZIndex(int zIndex) throws DOMException;
 
 }

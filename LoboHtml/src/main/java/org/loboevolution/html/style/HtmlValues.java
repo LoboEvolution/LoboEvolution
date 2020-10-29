@@ -617,17 +617,14 @@ public class HtmlValues {
 	}
 	
 	private static boolean isUnits(String token) {
-		if (token.endsWith("px") || 
-			token.endsWith("pt") ||
-			token.endsWith("pc") ||
-			token.endsWith("cm") ||
-			token.endsWith("mm") ||
-			token.endsWith("ex") ||
-			token.endsWith("em") ||
-			token.endsWith("in") ||
-			token.endsWith("q")) {
-			return true;
-		}
-		return false;
+		return token.endsWith("px") ||
+				token.endsWith("pt") ||
+				token.endsWith("pc") ||
+				token.endsWith("cm") ||
+				token.endsWith("mm") ||
+				token.endsWith("ex") ||
+				token.endsWith("em") ||
+				token.endsWith("in") ||
+				token.endsWith("q");
 	}
 }

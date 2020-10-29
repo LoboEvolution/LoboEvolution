@@ -32,13 +32,13 @@ import org.w3c.dom.css.RGBColor;
 public interface SVGColor extends CSSValue {
 	// Color Types
 	/** Constant SVG_COLORTYPE_UNKNOWN=0 */
-	static final short SVG_COLORTYPE_UNKNOWN = 0;
+    short SVG_COLORTYPE_UNKNOWN = 0;
 	/** Constant SVG_COLORTYPE_RGBCOLOR=1 */
-	static final short SVG_COLORTYPE_RGBCOLOR = 1;
+    short SVG_COLORTYPE_RGBCOLOR = 1;
 	/** Constant SVG_COLORTYPE_RGBCOLOR_ICCCOLOR=2 */
-	static final short SVG_COLORTYPE_RGBCOLOR_ICCCOLOR = 2;
+    short SVG_COLORTYPE_RGBCOLOR_ICCCOLOR = 2;
 	/** Constant SVG_COLORTYPE_CURRENTCOLOR=3 */
-	static final short SVG_COLORTYPE_CURRENTCOLOR = 3;
+    short SVG_COLORTYPE_CURRENTCOLOR = 3;
 
 	/**
 	 * <p>getColorType.</p>
@@ -52,7 +52,7 @@ public interface SVGColor extends CSSValue {
 	 *
 	 * @return a {@link org.w3c.dom.css.RGBColor} object.
 	 */
-	public RGBColor getRGBColor();
+    RGBColor getRGBColor();
 
 	/**
 	 * <p>getICCColor.</p>

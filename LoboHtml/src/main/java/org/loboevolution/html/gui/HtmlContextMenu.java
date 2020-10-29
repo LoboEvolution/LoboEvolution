@@ -110,7 +110,7 @@ public class HtmlContextMenu {
 			if (href.contains(";base64,")) {
 				final String base64 = href.split(";base64,")[1];
 				byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-				try (InputStream stream = new ByteArrayInputStream(decodedBytes);) {
+				try (InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 					context.openImageViewer(href, stream);
 				} catch (Exception e1) {
 					e1.printStackTrace();
@@ -171,7 +171,7 @@ public class HtmlContextMenu {
 					} else {
 						final String base64 = href.split(";base64,")[1];
 						byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-						try (InputStream stream = new ByteArrayInputStream(decodedBytes);) {
+						try (InputStream stream = new ByteArrayInputStream(decodedBytes)) {
 							image = ImageIO.read(stream);
 							ImageIO.write(image, href, selectedFile);
 						}
@@ -271,11 +271,7 @@ public class HtmlContextMenu {
 		menuBack.setIcon(IconFactory.getInstance().getIcon(BACK));
 		menuBack.addActionListener(e -> context.back());
 
-		if (Strings.isNotBlank(context.getPreviousURL())) {
-			menuBack.setEnabled(true);
-		} else {
-			menuBack.setEnabled(false);
-		}
+		menuBack.setEnabled(Strings.isNotBlank(context.getPreviousURL()));
 
 		popupMenu.add(menuBack);
 
@@ -288,11 +284,7 @@ public class HtmlContextMenu {
 		menuForward.setIcon(IconFactory.getInstance().getIcon(FORWARD));
 		menuForward.addActionListener(e -> context.forward());
 
-		if (Strings.isNotBlank(context.getNextURL())) {
-			menuForward.setEnabled(true);
-		} else {
-			menuForward.setEnabled(false);
-		}
+		menuForward.setEnabled(Strings.isNotBlank(context.getNextURL()));
 		popupMenu.add(menuForward);
 
 		return popupMenu;

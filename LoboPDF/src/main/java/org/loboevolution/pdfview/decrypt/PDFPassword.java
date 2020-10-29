@@ -191,7 +191,7 @@ public class PDFPassword {
     /**
      * Converts a string password to a byte[] representation
      */
-    private static interface PasswordByteGenerator {
+    private interface PasswordByteGenerator {
         byte[] generateBytes(String password);
     }
 

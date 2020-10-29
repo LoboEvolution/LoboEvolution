@@ -34,14 +34,14 @@ public interface Blob {
 	 *
 	 * @return the size
 	 */
-	public long getSize();
+    long getSize();
 
 	/**
 	 * Gets the type.
 	 *
 	 * @return the type
 	 */
-	public String getType();
+    String getType();
 
 	/**
 	 * Slice.
@@ -52,7 +52,7 @@ public interface Blob {
 	 *            the length
 	 * @return the blob
 	 */
-	public Blob slice(long start, long length);
+    Blob slice(long start, long length);
 
 	/**
 	 * Slice.
@@ -65,5 +65,5 @@ public interface Blob {
 	 *            the content type
 	 * @return the blob
 	 */
-	public Blob slice(long start, long length, String contentType);
+    Blob slice(long start, long length, String contentType);
 }

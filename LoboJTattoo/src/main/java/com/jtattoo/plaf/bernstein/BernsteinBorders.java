@@ -87,7 +87,7 @@ public class BernsteinBorders extends BaseBorders {
 		 */
 		private static final long serialVersionUID = 1L;
 		private static final Color BORDER_COLOR = new Color(255, 244, 128);
-		private static final Color FRAME_COLORS[] = { new Color(229, 187, 0), new Color(251, 232, 0),
+		private static final Color[] FRAME_COLORS = { new Color(229, 187, 0), new Color(251, 232, 0),
 				new Color(247, 225, 0), new Color(243, 216, 0), new Color(229, 187, 0), };
 
 		@Override

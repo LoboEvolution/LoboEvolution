@@ -309,7 +309,7 @@ public class ShaderType2 extends PDFShader {
             PDFColorSpace shadeCSpace = getColorSpace();
 
 
-        	PDFFunction functions[] = getFunctions();
+        	PDFFunction[] functions = getFunctions();
         	int numComponents = cs.getNumComponents();
 
         	float x0 = (float) this.start.getX();

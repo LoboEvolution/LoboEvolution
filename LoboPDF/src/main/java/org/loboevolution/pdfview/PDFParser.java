@@ -154,8 +154,6 @@ public class PDFParser extends BaseWatchable {
                 return "EOF";
             } else if (this.type == NAME) {
                 return "NAME: " + this.name;
-            } else if (this.type == CMD) {
-                return "CMD: " + this.name;
             } else if (this.type == STR) {
                 return "STR: (" + this.name;
             } else if (this.type == ARYB) {
@@ -536,14 +534,14 @@ public class PDFParser extends BaseWatchable {
                 }
                 case "c": {
                     // path curve to
-                    float a[] = popFloat(6);
+                    float[] a = popFloat(6);
                     this.path.curveTo(a[0], a[1], a[2], a[3], a[4], a[5]);
                     PDFDebugger.logPath(path, "1 curve to " + Arrays.toString(a));
                     break;
                 }
                 case "v": {
                     // path curve; first control point= start
-                    float a[] = popFloat(4);
+                    float[] a = popFloat(4);
                     Point2D cp = this.path.getCurrentPoint();
                     this.path.curveTo((float) cp.getX(), (float) cp.getY(), a[0], a[1], a[2], a[3]);
                     PDFDebugger.logPath(path, "2 curve to " + Arrays.toString(a) + ", " + cp.getX() + "," + cp.getY());
@@ -551,7 +549,7 @@ public class PDFParser extends BaseWatchable {
                 }
                 case "y": {
                     // path curve; last control point= end
-                    float a[] = popFloat(4);
+                    float[] a = popFloat(4);
                     this.path.curveTo(a[0], a[1], a[2], a[3], a[2], a[3]);
                     PDFDebugger.logPath(path, "3 curve to " + Arrays.toString(a));
                     break;
@@ -562,7 +560,7 @@ public class PDFParser extends BaseWatchable {
                     break;
                 case "re": {
                     // path add rectangle
-                    float a[] = popFloat(4);
+                    float[] a = popFloat(4);
                     this.path.moveTo(a[0], a[1]);
                     PDFDebugger.logPath(path, "1 moved to " + a[0] + "," + a[1]);
                     this.path.lineTo(a[0] + a[2], a[1]);
@@ -1018,7 +1016,7 @@ public class PDFParser extends BaseWatchable {
         // pop graphics state ('Q')
         this.cmds.addPop();
         // pop the parser state
-        if (this.parserStates.isEmpty() == false) {
+        if (!this.parserStates.isEmpty()) {
             this.state = this.parserStates.pop();
         }
     }
@@ -1059,7 +1057,6 @@ public class PDFParser extends BaseWatchable {
             fos.close();
         } catch (IOException ioe) { /* Do nothing */
         }
-        ;
     }
 
     // ///////////////////////////////////////////////////////////////
@@ -1151,7 +1148,7 @@ public class PDFParser extends BaseWatchable {
             if (matrix == null) {
                 at = new AffineTransform();
             } else {
-                float elts[] = new float[6];
+                float[] elts = new float[6];
                 for (int i = 0; i < elts.length; i++) {
                     elts[i] = (matrix.getAt(i)).getFloatValue();
                 }
@@ -1398,8 +1395,8 @@ public class PDFParser extends BaseWatchable {
             handled = true;
         }
         if ((d = gsobj.getDictRef("D")) != null) {
-            PDFObject pdash[] = d.getAt(0).getArray();
-            float dash[] = new float[pdash.length];
+            PDFObject[] pdash = d.getAt(0).getArray();
+            float[] dash = new float[pdash.length];
             for (int i = 0; i < pdash.length; i++) {
                 dash[i] = pdash[i].getFloatValue();
             }
@@ -1464,7 +1461,7 @@ public class PDFParser extends BaseWatchable {
     * isn't a number
     */
     private float popFloat() throws PDFParseException {
-        if (this.stack.isEmpty() == false) {
+        if (!this.stack.isEmpty()) {
             Object obj = this.stack.pop();
             if (obj instanceof Double) {
                 return ((Double) obj).floatValue();

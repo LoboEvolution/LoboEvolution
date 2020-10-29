@@ -317,11 +317,7 @@ abstract class BaseRCollection extends BaseBoundableRenderable implements RColle
 	private boolean checkStartSelection(Rectangle bounds, Point selectionPoint) {
 		if (bounds.y > selectionPoint.y) {
 			return true;
-		} else if (selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
-				&& bounds.x > selectionPoint.x) {
-			return true;
-		} else {
-			return false;
-		}
+		} else return selectionPoint.y >= bounds.y && selectionPoint.y < bounds.y + bounds.height
+				&& bounds.x > selectionPoint.x;
 	}
 }

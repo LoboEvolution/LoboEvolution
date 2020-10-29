@@ -53,7 +53,7 @@ public class AeroTabbedPaneUI extends BaseTabbedPaneUI {
 		return new AeroTabbedPaneUI();
 	}
 
-	private Color sepColors[] = null;
+	private Color[] sepColors = null;
 
 	/** {@inheritDoc} */
 	@Override

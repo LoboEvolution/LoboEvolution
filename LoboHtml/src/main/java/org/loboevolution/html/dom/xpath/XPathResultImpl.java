@@ -126,9 +126,9 @@ public class XPathResultImpl implements XPathResult, EventListener {
 	/**
 	 * The iterator, if this is an iterator type.
 	 */
-	private NodeIterator m_iterator = null;;
+	private NodeIterator m_iterator = null;
 
-	/**
+    /**
 	 * The list, if this is a snapshot type.
 	 */
 	private NodeList m_list = null;

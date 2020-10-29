@@ -87,9 +87,9 @@ public class AluminiumUtils {
 				Graphics2D ig2D = (Graphics2D) backgroundImage.getGraphics();
 				Point pt1 = new Point(0, 0);
 				Point pt2 = new Point(d.width, 0);
-				float fractions[] = { 0.0f, 0.5f, 1.0f };
+				float[] fractions = { 0.0f, 0.5f, 1.0f };
 				Color c1 = new Color(220, 220, 220);
-				Color colors[] = { c1, Color.white, c1 };
+				Color[] colors = { c1, Color.white, c1 };
 				ig2D.setPaint(new LinearGradientPaint(pt1, pt2, fractions, colors));
 				ig2D.fillRect(0, 0, d.width, d.height);
 				ig2D.dispose();

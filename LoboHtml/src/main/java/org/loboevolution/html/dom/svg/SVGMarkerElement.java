@@ -30,18 +30,18 @@ public interface SVGMarkerElement
 		extends SVGElement, SVGLangSpace, SVGExternalResourcesRequired, SVGStylable, SVGFitToViewBox {
 	// Marker Unit Types
 	/** Constant SVG_MARKERUNITS_UNKNOWN=0 */
-	static final short SVG_MARKERUNITS_UNKNOWN = 0;
+    short SVG_MARKERUNITS_UNKNOWN = 0;
 	/** Constant SVG_MARKERUNITS_USERSPACEONUSE=1 */
-	static final short SVG_MARKERUNITS_USERSPACEONUSE = 1;
+    short SVG_MARKERUNITS_USERSPACEONUSE = 1;
 	/** Constant SVG_MARKERUNITS_STROKEWIDTH=2 */
-	static final short SVG_MARKERUNITS_STROKEWIDTH = 2;
+    short SVG_MARKERUNITS_STROKEWIDTH = 2;
 	// Marker Orientation Types
 	/** Constant SVG_MARKER_ORIENT_UNKNOWN=0 */
-	static final short SVG_MARKER_ORIENT_UNKNOWN = 0;
+    short SVG_MARKER_ORIENT_UNKNOWN = 0;
 	/** Constant SVG_MARKER_ORIENT_AUTO=1 */
-	static final short SVG_MARKER_ORIENT_AUTO = 1;
+    short SVG_MARKER_ORIENT_AUTO = 1;
 	/** Constant SVG_MARKER_ORIENT_ANGLE=2 */
-	static final short SVG_MARKER_ORIENT_ANGLE = 2;
+    short SVG_MARKER_ORIENT_ANGLE = 2;
 
 	/**
 	 * <p>getRefX.</p>

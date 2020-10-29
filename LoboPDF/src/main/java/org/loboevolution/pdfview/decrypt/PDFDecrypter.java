@@ -59,7 +59,7 @@ public interface PDFDecrypter {
      *  if a crypt filter is named when named crypt filters are not supported.
      *  Problems due to incorrect passwords are revealed prior to this point.
      */
-    public ByteBuffer decryptBuffer(
+    ByteBuffer decryptBuffer(
             String cryptFilterName,
             PDFObject streamObj,
             ByteBuffer streamBuf)
@@ -75,7 +75,7 @@ public interface PDFDecrypter {
      *  if a crypt filter is named when named crypt filters are not supported.
      *  Problems due to incorrect passwords are revealed prior to this point.
      */
-    public String decryptString(int objNum, int objGen, String inputBasicString)
+    String decryptString(int objNum, int objGen, String inputBasicString)
             throws PDFParseException;
 
     /**
@@ -86,14 +86,14 @@ public interface PDFDecrypter {
      * @return whether owner authentication is being used to decrypt the
      *  document
      */
-    public boolean isOwnerAuthorised();
+    boolean isOwnerAuthorised();
 
     /**
      * Determine whether this actually applies a decryption other than
      * identity decryption.
      * @return whether encryption is present
      */
-    public boolean isEncryptionPresent();
+    boolean isEncryptionPresent();
 
     /**
      * Determines whether decryption applies for a given crypt filter name

@@ -163,8 +163,8 @@ public class TextureDefaultTheme extends AbstractTheme {
 		Color topLo = buttonColorLight;
 		Color bottomHi = ColorHelper.brighter(buttonColorDark, 40);
 		Color bottomLo = buttonColorDark;
-		Color topColors[] = ColorHelper.createColorArr(topHi, topLo, 11);
-		Color bottomColors[] = ColorHelper.createColorArr(bottomHi, bottomLo, 13);
+		Color[] topColors = ColorHelper.createColorArr(topHi, topLo, 11);
+		Color[] bottomColors = ColorHelper.createColorArr(bottomHi, bottomLo, 13);
 		BUTTON_COLORS = new Color[24];
 		System.arraycopy(topColors, 0, BUTTON_COLORS, 0, 11);
 		System.arraycopy(bottomColors, 0, BUTTON_COLORS, 11, 13);

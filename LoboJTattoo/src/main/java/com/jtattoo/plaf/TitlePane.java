@@ -34,21 +34,21 @@ public interface TitlePane {
 	/**
 	 * <p>close.</p>
 	 */
-	public void close();
+    void close();
 
 	/**
 	 * <p>iconify.</p>
 	 */
-	public void iconify();
+    void iconify();
 
 	/**
 	 * <p>maximize.</p>
 	 */
-	public void maximize();
+    void maximize();
 
 	/**
 	 * <p>restore.</p>
 	 */
-	public void restore();
+    void restore();
 
 } // end of interface TitlePane

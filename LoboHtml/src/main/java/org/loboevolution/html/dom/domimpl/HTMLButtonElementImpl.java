@@ -59,7 +59,7 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 	@Override
 	public boolean getDisabled() {
 		final String disabled = getAttribute("disabled");
-		return disabled == null ? false : true;
+		return disabled != null;
 	}
 
 	/** {@inheritDoc} */

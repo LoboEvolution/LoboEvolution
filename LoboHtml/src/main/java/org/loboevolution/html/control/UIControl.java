@@ -36,7 +36,7 @@ import org.loboevolution.html.AlignValues;
  * @author utente
  * @version $Id: $Id
  */
-public abstract interface UIControl {
+public interface UIControl {
 	/**
 	 * <p>getBackgroundColor.</p>
 	 *

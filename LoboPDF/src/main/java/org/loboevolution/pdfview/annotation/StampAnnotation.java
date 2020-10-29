@@ -127,7 +127,7 @@ public class StampAnnotation extends PDFAnnotation {
             if (matrix == null) {
                 at = new AffineTransform();
             } else {
-                float elts[] = new float[6];
+                float[] elts = new float[6];
                 for (int i = 0; i < elts.length; i++) {
                     elts[i] = (matrix.getAt(i)).getFloatValue();
                 }

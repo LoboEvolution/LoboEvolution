@@ -65,7 +65,7 @@ public class BaseComboBoxUI extends BasicComboBoxUI {
 		@Override
 		public void paint(Graphics g) {
 			Dimension size = getSize();
-			Color colors[];
+			Color[] colors;
 			if (isEnabled()) {
 				if (getModel().isArmed() && getModel().isPressed()) {
 					colors = AbstractLookAndFeel.getTheme().getPressedColors();

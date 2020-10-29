@@ -206,7 +206,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * @param referenceElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
 	 * @return a {@link org.w3c.dom.NodeList} object.
 	 */
-	public NodeList getIntersectionList(SVGRect rect, SVGElement referenceElement);
+    NodeList getIntersectionList(SVGRect rect, SVGElement referenceElement);
 
 	/**
 	 * <p>getEnclosureList.</p>
@@ -215,7 +215,7 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * @param referenceElement a {@link org.loboevolution.html.dom.svg.SVGElement} object.
 	 * @return a {@link org.w3c.dom.NodeList} object.
 	 */
-	public NodeList getEnclosureList(SVGRect rect, SVGElement referenceElement);
+    NodeList getEnclosureList(SVGRect rect, SVGElement referenceElement);
 
 	/**
 	 * <p>checkIntersection.</p>
@@ -303,5 +303,5 @@ public interface SVGSVGElement extends SVGElement, SVGTests, SVGLangSpace, SVGEx
 	 * @param elementId a {@link java.lang.String} object.
 	 * @return a {@link org.w3c.dom.Element} object.
 	 */
-	public Element getElementById(String elementId);
+    Element getElementById(String elementId);
 }

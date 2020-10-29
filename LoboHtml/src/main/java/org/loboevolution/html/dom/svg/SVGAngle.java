@@ -31,15 +31,15 @@ import org.w3c.dom.DOMException;
 public interface SVGAngle {
 	// Angle Unit Types
 	/** Constant SVG_ANGLETYPE_UNKNOWN=0 */
-	static final short SVG_ANGLETYPE_UNKNOWN = 0;
+    short SVG_ANGLETYPE_UNKNOWN = 0;
 	/** Constant SVG_ANGLETYPE_UNSPECIFIED=1 */
-	static final short SVG_ANGLETYPE_UNSPECIFIED = 1;
+    short SVG_ANGLETYPE_UNSPECIFIED = 1;
 	/** Constant SVG_ANGLETYPE_DEG=2 */
-	static final short SVG_ANGLETYPE_DEG = 2;
+    short SVG_ANGLETYPE_DEG = 2;
 	/** Constant SVG_ANGLETYPE_RAD=3 */
-	static final short SVG_ANGLETYPE_RAD = 3;
+    short SVG_ANGLETYPE_RAD = 3;
 	/** Constant SVG_ANGLETYPE_GRAD=4 */
-	static final short SVG_ANGLETYPE_GRAD = 4;
+    short SVG_ANGLETYPE_GRAD = 4;
 
 	/**
 	 * <p>getUnitType.</p>

@@ -105,7 +105,7 @@ public class BaseScrollButton extends BasicArrowButton {
 		int width = getWidth();
 		int height = getHeight();
 
-		Color colors[];
+		Color[] colors;
 		if (isPressed) {
 			colors = AbstractLookAndFeel.getTheme().getPressedColors();
 		} else if (isRollover) {

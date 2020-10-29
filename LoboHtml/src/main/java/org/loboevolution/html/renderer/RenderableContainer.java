@@ -138,15 +138,15 @@ public interface RenderableContainer {
      *
      * @return a int.
      */
-    default int getInnerWidth() {return 0;};
+    default int getInnerWidth() {return 0;}
 
     /**
      * <p>getInnerHeight.</p>
      *
      * @return a int.
      */
-    default int getInnerHeight() {return 0;};
-    
+    default int getInnerHeight() {return 0;}
+
     /**
      * <p>getVisualBounds.</p>
      *

@@ -837,8 +837,8 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	    final int hInset = insets.left + insets.right;
 	    final int vInset = insets.top + insets.bottom;
 	    if (((overflowX == RenderState.OVERFLOW_NONE) || (overflowX == RenderState.OVERFLOW_VISIBLE))
-	        && ((overflowY == RenderState.OVERFLOW_NONE) || (overflowY == RenderState.OVERFLOW_VISIBLE))) {;
-	      return null;
+	        && ((overflowY == RenderState.OVERFLOW_NONE) || (overflowY == RenderState.OVERFLOW_VISIBLE))) {
+			return null;
 	    } else {
 	      return new Rectangle(insets.left, insets.top, this.width - hInset, this.height - vInset);
 	    }

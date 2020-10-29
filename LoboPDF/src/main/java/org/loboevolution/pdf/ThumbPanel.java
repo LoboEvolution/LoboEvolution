@@ -56,7 +56,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	private transient PDFFile file;
 
 	/** Array of images, one per page in the file. */
-	private transient Image images[];
+	private transient Image[] images;
 
 	/** Size of the border between images. */
 	private int border = 2;
@@ -76,7 +76,7 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	 * Array of the x locations of each of the thumbnails. Every 0 stored in
 	 * this array indicates the start of a new line of thumbnails.
 	 */
-	private int xloc[];
+	private int[] xloc;
 
 	/** Thread that renders each thumbnail in turn. */
 	private transient Thread anim;

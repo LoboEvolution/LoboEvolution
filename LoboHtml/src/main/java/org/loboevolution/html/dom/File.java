@@ -35,12 +35,12 @@ public interface File extends Blob {
 	 * @return the name
 	 */
 	// File
-	public String getName();
+    String getName();
 
 	/**
 	 * Gets the last modified date.
 	 *
 	 * @return the last modified date
 	 */
-	public long getLastModifiedDate();
+    long getLastModifiedDate();
 }

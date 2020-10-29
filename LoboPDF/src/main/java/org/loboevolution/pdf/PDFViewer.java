@@ -349,7 +349,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 		try {
 			final URLConnection connection = url.openConnection();
 			connection.setRequestProperty("User-Agent", HttpNetwork.getUserAgentValue());
-			try (InputStream istr = HttpNetwork.openConnectionCheckRedirects(connection);) {
+			try (InputStream istr = HttpNetwork.openConnectionCheckRedirects(connection)) {
 				ByteBuffer byteBuffer = ByteBuffer.allocate(istr.available());
 				while (istr.available() > 0) {
 					byteBuffer.put((byte) istr.read());
@@ -380,7 +380,7 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	 */
 	public void openFile(File file) throws IOException {
 		// first open the file for random access
-		try (RandomAccessFile raf = new RandomAccessFile(file, "r");){
+		try (RandomAccessFile raf = new RandomAccessFile(file, "r")){
 			// extract a file channel
 			FileChannel channel = raf.getChannel();
 			// now memory-map a byte-buffer

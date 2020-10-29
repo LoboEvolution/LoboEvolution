@@ -117,8 +117,8 @@ public class AeroDefaultTheme extends AbstractTheme {
 	@Override
 	public void setUpColorArrs() {
 		super.setUpColorArrs();
-		Color color1[] = ColorHelper.createColorArr(controlColorLight, controlColorDark, 6);
-		Color color2[] = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 10), controlColorLight, 15);
+		Color[] color1 = ColorHelper.createColorArr(controlColorLight, controlColorDark, 6);
+		Color[] color2 = ColorHelper.createColorArr(ColorHelper.brighter(controlColorDark, 10), controlColorLight, 15);
 		System.arraycopy(color1, 0, DEFAULT_COLORS, 0, 6);
 		System.arraycopy(color2, 0, DEFAULT_COLORS, 5, 15);
 		for (int i = 0; i < 20; i++) {

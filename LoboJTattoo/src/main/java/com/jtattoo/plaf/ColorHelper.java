@@ -86,7 +86,7 @@ public class ColorHelper {
 			return null;
 		}
 
-		Color colors[] = new Color[steps];
+		Color[] colors = new Color[steps];
 		double r = c1.getRed();
 		double g = c1.getGreen();
 		double b = c1.getBlue();

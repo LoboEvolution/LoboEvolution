@@ -307,8 +307,7 @@ public class PDFFile {
      * ISO Spec 32000-1:2008 - Table 1
      */
     public static boolean isWhiteSpace(int c) {
-        if (c == ' ' || c == NUL_CHAR || c == '\t' || c == '\n' || c == '\r' || c == FF_CHAR) return true;
-        return false;
+        return c == ' ' || c == NUL_CHAR || c == '\t' || c == '\n' || c == '\r' || c == FF_CHAR;
     	/*switch (c) { 
             case NUL_CHAR:  // Null (NULL)
             case '\t':      // Horizontal Tab (HT)
@@ -883,7 +882,7 @@ public class PDFFile {
         boolean sawdot = start == '.';
         double dotmult = sawdot ? 0.1 : 1;
         double value = (start >= '0' && start <= '9') ? start - '0' : 0;
-        while (true && this.buf.hasRemaining()) {
+        while (this.buf.hasRemaining()) {
             int c = this.buf.get();
             if (c == '.') {
                 if (sawdot) {
@@ -1076,7 +1075,7 @@ public class PDFFile {
 
                 // extend the objIdx table, if necessary
                 if (refstart + reflen >= this.objIdx.length) {
-                    PDFXref nobjIdx[] = new PDFXref[refstart + reflen];
+                    PDFXref[] nobjIdx = new PDFXref[refstart + reflen];
                     System.arraycopy(this.objIdx, 0, nobjIdx, 0, this.objIdx.length);
                     this.objIdx = nobjIdx;
                 }
@@ -1248,7 +1247,7 @@ public class PDFFile {
 				
 		        // extend the objIdx table, if necessary
 		        if (refstart + reflen >= this.objIdx.length) {
-		            PDFXref nobjIdx[] = new PDFXref[refstart + reflen];
+		            PDFXref[] nobjIdx = new PDFXref[refstart + reflen];
 		            System.arraycopy(this.objIdx, 0, nobjIdx, 0, this.objIdx.length);
 		            this.objIdx = nobjIdx;
 		        }
@@ -1534,7 +1533,7 @@ public class PDFFile {
             if (parent == null) {
                 break;
             }
-            PDFObject kids[] = parent.getDictRef("Kids").getArray();
+            PDFObject[] kids = parent.getDictRef("Kids").getArray();
             for (PDFObject pdfObject : kids) {
                 if (pdfObject.equals(page)) {
                     break;
@@ -1634,7 +1633,7 @@ public class PDFFile {
             return new byte[0];
         }
 
-        PDFObject contents[] = contentsObj.getArray();
+        PDFObject[] contents = contentsObj.getArray();
 
         // see if we have only one stream (the easy case)
         if (contents.length == 1) {
@@ -1655,7 +1654,7 @@ public class PDFFile {
         byte[] stream = new byte[len];
         len = 0;
         for (PDFObject pdfObject : contents) {
-            byte data[] = pdfObject.getStream();
+            byte[] data = pdfObject.getStream();
             System.arraycopy(data, 0, stream, len, data.length);
             len += data.length;
         }
@@ -1801,7 +1800,7 @@ public class PDFFile {
 
         if (obj != null) {
             if (obj.getType() == PDFObject.ARRAY) {
-                PDFObject bounds[] = obj.getArray();
+                PDFObject[] bounds = obj.getArray();
                 if (bounds.length == 4) {
                     final double x0 = bounds[0].getDoubleValue();
                     final double y0 = bounds[1].getDoubleValue();

@@ -34,13 +34,13 @@ public interface SMILRegionInterface {
 	 *
 	 * @return a {@link org.loboevolution.html.dom.smil.SMILRegionElement} object.
 	 */
-	public SMILRegionElement getRegion();
+    SMILRegionElement getRegion();
 
 	/**
 	 * <p>setRegion.</p>
 	 *
 	 * @param region a {@link org.loboevolution.html.dom.smil.SMILRegionElement} object.
 	 */
-	public void setRegion(SMILRegionElement region);
+    void setRegion(SMILRegionElement region);
 
 }

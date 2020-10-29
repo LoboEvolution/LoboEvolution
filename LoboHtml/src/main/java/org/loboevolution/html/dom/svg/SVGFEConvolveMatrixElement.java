@@ -29,13 +29,13 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFEConvolveMatrixElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Edge Mode Values
 	/** Constant SVG_EDGEMODE_UNKNOWN=0 */
-	static final short SVG_EDGEMODE_UNKNOWN = 0;
+    short SVG_EDGEMODE_UNKNOWN = 0;
 	/** Constant SVG_EDGEMODE_DUPLICATE=1 */
-	static final short SVG_EDGEMODE_DUPLICATE = 1;
+    short SVG_EDGEMODE_DUPLICATE = 1;
 	/** Constant SVG_EDGEMODE_WRAP=2 */
-	static final short SVG_EDGEMODE_WRAP = 2;
+    short SVG_EDGEMODE_WRAP = 2;
 	/** Constant SVG_EDGEMODE_NONE=3 */
-	static final short SVG_EDGEMODE_NONE = 3;
+    short SVG_EDGEMODE_NONE = 3;
 
 	/**
 	 * <p>getOrderX.</p>

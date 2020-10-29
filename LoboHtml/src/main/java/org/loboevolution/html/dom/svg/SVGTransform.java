@@ -29,19 +29,19 @@ package org.loboevolution.html.dom.svg;
 public interface SVGTransform {
 	// Transform Types
 	/** Constant SVG_TRANSFORM_UNKNOWN=0 */
-	static final short SVG_TRANSFORM_UNKNOWN = 0;
+    short SVG_TRANSFORM_UNKNOWN = 0;
 	/** Constant SVG_TRANSFORM_MATRIX=1 */
-	static final short SVG_TRANSFORM_MATRIX = 1;
+    short SVG_TRANSFORM_MATRIX = 1;
 	/** Constant SVG_TRANSFORM_TRANSLATE=2 */
-	static final short SVG_TRANSFORM_TRANSLATE = 2;
+    short SVG_TRANSFORM_TRANSLATE = 2;
 	/** Constant SVG_TRANSFORM_SCALE=3 */
-	static final short SVG_TRANSFORM_SCALE = 3;
+    short SVG_TRANSFORM_SCALE = 3;
 	/** Constant SVG_TRANSFORM_ROTATE=4 */
-	static final short SVG_TRANSFORM_ROTATE = 4;
+    short SVG_TRANSFORM_ROTATE = 4;
 	/** Constant SVG_TRANSFORM_SKEWX=5 */
-	static final short SVG_TRANSFORM_SKEWX = 5;
+    short SVG_TRANSFORM_SKEWX = 5;
 	/** Constant SVG_TRANSFORM_SKEWY=6 */
-	static final short SVG_TRANSFORM_SKEWY = 6;
+    short SVG_TRANSFORM_SKEWY = 6;
 
 	/**
 	 * <p>getType.</p>

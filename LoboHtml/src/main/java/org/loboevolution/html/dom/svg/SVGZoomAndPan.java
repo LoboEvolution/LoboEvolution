@@ -31,11 +31,11 @@ import org.w3c.dom.DOMException;
 public interface SVGZoomAndPan {
 	// Zoom and Pan Types
 	/** Constant SVG_ZOOMANDPAN_UNKNOWN=0 */
-	static final short SVG_ZOOMANDPAN_UNKNOWN = 0;
+    short SVG_ZOOMANDPAN_UNKNOWN = 0;
 	/** Constant SVG_ZOOMANDPAN_DISABLE=1 */
-	static final short SVG_ZOOMANDPAN_DISABLE = 1;
+    short SVG_ZOOMANDPAN_DISABLE = 1;
 	/** Constant SVG_ZOOMANDPAN_MAGNIFY=2 */
-	static final short SVG_ZOOMANDPAN_MAGNIFY = 2;
+    short SVG_ZOOMANDPAN_MAGNIFY = 2;
 
 	/**
 	 * <p>getZoomAndPan.</p>

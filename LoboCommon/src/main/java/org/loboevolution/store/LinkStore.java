@@ -31,7 +31,7 @@ public class LinkStore {
     		pstmt.setString(1, link);
 			try (ResultSet rs = pstmt.executeQuery()) {
 				while (rs != null && rs.next()) {
-					vis = rs.getInt(1) > 0 ? true : false;
+					vis = rs.getInt(1) > 0;
 				}
 			}
         } catch (Exception e) {

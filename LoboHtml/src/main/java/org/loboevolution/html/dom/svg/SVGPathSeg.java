@@ -29,64 +29,64 @@ package org.loboevolution.html.dom.svg;
 public interface SVGPathSeg {
 
 	/** Constant PATHSEG_UNKNOWN=0 */
-	static final short PATHSEG_UNKNOWN = 0;
+    short PATHSEG_UNKNOWN = 0;
 
 	/** Constant PATHSEG_CLOSEPATH=1 */
-	static final short PATHSEG_CLOSEPATH = 1;
+    short PATHSEG_CLOSEPATH = 1;
 
 	/** Constant PATHSEG_MOVETO_ABS=2 */
-	static final short PATHSEG_MOVETO_ABS = 2;
+    short PATHSEG_MOVETO_ABS = 2;
 
 	/** Constant PATHSEG_MOVETO_REL=3 */
-	static final short PATHSEG_MOVETO_REL = 3;
+    short PATHSEG_MOVETO_REL = 3;
 
 	/** Constant PATHSEG_LINETO_ABS=4 */
-	static final short PATHSEG_LINETO_ABS = 4;
+    short PATHSEG_LINETO_ABS = 4;
 
 	/** Constant PATHSEG_LINETO_REL=5 */
-	static final short PATHSEG_LINETO_REL = 5;
+    short PATHSEG_LINETO_REL = 5;
 
 	/** Constant PATHSEG_CURVETO_CUBIC_ABS=6 */
-	static final short PATHSEG_CURVETO_CUBIC_ABS = 6;
+    short PATHSEG_CURVETO_CUBIC_ABS = 6;
 
 	/** Constant PATHSEG_CURVETO_CUBIC_REL=7 */
-	static final short PATHSEG_CURVETO_CUBIC_REL = 7;
+    short PATHSEG_CURVETO_CUBIC_REL = 7;
 
 	/** Constant PATHSEG_CURVETO_QUADRATIC_ABS=8 */
-	static final short PATHSEG_CURVETO_QUADRATIC_ABS = 8;
+    short PATHSEG_CURVETO_QUADRATIC_ABS = 8;
 
 	/** Constant PATHSEG_CURVETO_QUADRATIC_REL=9 */
-	static final short PATHSEG_CURVETO_QUADRATIC_REL = 9;
+    short PATHSEG_CURVETO_QUADRATIC_REL = 9;
 
 	/** Constant PATHSEG_ARC_ABS=10 */
-	static final short PATHSEG_ARC_ABS = 10;
+    short PATHSEG_ARC_ABS = 10;
 
 	/** Constant PATHSEG_ARC_REL=11 */
-	static final short PATHSEG_ARC_REL = 11;
+    short PATHSEG_ARC_REL = 11;
 
 	/** Constant PATHSEG_LINETO_HORIZONTAL_ABS=12 */
-	static final short PATHSEG_LINETO_HORIZONTAL_ABS = 12;
+    short PATHSEG_LINETO_HORIZONTAL_ABS = 12;
 
 	/** Constant PATHSEG_LINETO_HORIZONTAL_REL=13 */
-	static final short PATHSEG_LINETO_HORIZONTAL_REL = 13;
+    short PATHSEG_LINETO_HORIZONTAL_REL = 13;
 
 	/** Constant PATHSEG_LINETO_VERTICAL_ABS=14 */
-	static final short PATHSEG_LINETO_VERTICAL_ABS = 14;
+    short PATHSEG_LINETO_VERTICAL_ABS = 14;
 
 	/** Constant PATHSEG_LINETO_VERTICAL_REL=15 */
-	static final short PATHSEG_LINETO_VERTICAL_REL = 15;
+    short PATHSEG_LINETO_VERTICAL_REL = 15;
 
 	/** Constant PATHSEG_CURVETO_CUBIC_SMOOTH_ABS=16 */
-	static final short PATHSEG_CURVETO_CUBIC_SMOOTH_ABS = 16;
+    short PATHSEG_CURVETO_CUBIC_SMOOTH_ABS = 16;
 
 	/** Constant PATHSEG_CURVETO_CUBIC_SMOOTH_REL=17 */
-	static final short PATHSEG_CURVETO_CUBIC_SMOOTH_REL = 17;
+    short PATHSEG_CURVETO_CUBIC_SMOOTH_REL = 17;
 
 	/** Constant PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS=18 */
-	static final short PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS = 18;
+    short PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS = 18;
 
 	/** Constant PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL=19 */
-	static final short PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL = 19;
+    short PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL = 19;
 
 	/**
 	 * <p>getPathSegType.</p>

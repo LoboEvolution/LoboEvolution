@@ -50,7 +50,7 @@ public interface ElementTimeControl {
 	 *                calls.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public boolean beginElement() throws DOMException;
+    boolean beginElement() throws DOMException;
 
 	/**
 	 * Causes this element to begin the local timeline (subject to sync
@@ -79,7 +79,7 @@ public interface ElementTimeControl {
 	 *                calls.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public boolean beginElementAt(float offset) throws DOMException;
+    boolean beginElementAt(float offset) throws DOMException;
 
 	/**
 	 * Causes this element to end the local timeline (subject to sync
@@ -96,7 +96,7 @@ public interface ElementTimeControl {
 	 *                appropriate syntax to allow endElement calls.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public boolean endElement() throws DOMException;
+    boolean endElement() throws DOMException;
 
 	/**
 	 * Causes this element to end the local timeline (subject to sync
@@ -118,6 +118,6 @@ public interface ElementTimeControl {
 	 *                calls.
 	 * @throws org.w3c.dom.DOMException if any.
 	 */
-	public boolean endElementAt(float offset) throws DOMException;
+    boolean endElementAt(float offset) throws DOMException;
 
 }

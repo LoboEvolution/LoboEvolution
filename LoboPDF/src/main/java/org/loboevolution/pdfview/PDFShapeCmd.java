@@ -103,8 +103,8 @@ public class PDFShapeCmd extends PDFCmd {
     */
     private GeneralPath checkOverlap(PDFRenderer state) {
         if (this.style == FILL && this.gp != null && state.getLastShape() != null) {
-            float mypoints[] = new float[16];
-            float prevpoints[] = new float[16];
+            float[] mypoints = new float[16];
+            float[] prevpoints = new float[16];
             int mycount = getPoints(this.gp, mypoints, state.getTransform());
             int prevcount = getPoints(state.getLastShape(), prevpoints, state.getLastTransform());
             // now check mypoints against prevpoints for opposite pairs:

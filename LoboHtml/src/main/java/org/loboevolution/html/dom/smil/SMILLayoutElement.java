@@ -34,7 +34,7 @@ public interface SMILLayoutElement extends SMILElement {
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getType();
+    String getType();
 
 	/**
 	 * true if the player can understand the mime type,
@@ -42,6 +42,6 @@ public interface SMILLayoutElement extends SMILElement {
 	 *
 	 * @return a boolean.
 	 */
-	public boolean getResolved();
+    boolean getResolved();
 
 }

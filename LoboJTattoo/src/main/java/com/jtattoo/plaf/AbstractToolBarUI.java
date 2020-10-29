@@ -164,15 +164,13 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 				b.setBorder(BorderFactory.createCompoundBorder(getRolloverBorder(), INNER_BORDER));
 				b.setMargin(BUTTON_MARGIN);
 				b.setRolloverEnabled(true);
-				b.setOpaque(isButtonOpaque());
-				b.setContentAreaFilled(isButtonOpaque());
 			} else {
 				b.setBorder(BorderFactory.createCompoundBorder(getNonRolloverBorder(), INNER_BORDER));
 				b.setMargin(BUTTON_MARGIN);
 				b.setRolloverEnabled(false);
-				b.setOpaque(isButtonOpaque());
-				b.setContentAreaFilled(isButtonOpaque());
 			}
+			b.setOpaque(isButtonOpaque());
+			b.setContentAreaFilled(isButtonOpaque());
 		}
 	}
 

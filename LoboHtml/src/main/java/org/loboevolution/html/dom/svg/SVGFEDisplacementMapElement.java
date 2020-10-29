@@ -29,15 +29,15 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFEDisplacementMapElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Channel Selectors
 	/** Constant SVG_CHANNEL_UNKNOWN=0 */
-	static final short SVG_CHANNEL_UNKNOWN = 0;
+    short SVG_CHANNEL_UNKNOWN = 0;
 	/** Constant SVG_CHANNEL_R=1 */
-	static final short SVG_CHANNEL_R = 1;
+    short SVG_CHANNEL_R = 1;
 	/** Constant SVG_CHANNEL_G=2 */
-	static final short SVG_CHANNEL_G = 2;
+    short SVG_CHANNEL_G = 2;
 	/** Constant SVG_CHANNEL_B=3 */
-	static final short SVG_CHANNEL_B = 3;
+    short SVG_CHANNEL_B = 3;
 	/** Constant SVG_CHANNEL_A=4 */
-	static final short SVG_CHANNEL_A = 4;
+    short SVG_CHANNEL_A = 4;
 
 	/**
 	 * <p>getIn1.</p>

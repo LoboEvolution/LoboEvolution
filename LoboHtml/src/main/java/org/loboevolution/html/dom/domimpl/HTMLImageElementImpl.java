@@ -193,7 +193,7 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 	/** {@inheritDoc} */
 	@Override
 	public void setHspace(int hspace) {
-		setAttribute("hspace", String.valueOf("hspace"));
+		setAttribute("hspace", "hspace");
 	}
 
 	/** {@inheritDoc} */

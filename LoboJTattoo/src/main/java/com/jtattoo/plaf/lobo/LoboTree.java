@@ -49,5 +49,5 @@ public class LoboTree extends JTree implements LoboLookAndFeel {
 			l.setOpaque(true);
 			return l;
 		}
-	};
+	}
 }

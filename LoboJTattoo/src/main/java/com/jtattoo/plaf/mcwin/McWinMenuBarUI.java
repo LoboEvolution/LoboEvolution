@@ -42,7 +42,7 @@ import com.jtattoo.plaf.ColorHelper;
  */
 public class McWinMenuBarUI extends BaseMenuBarUI {
 
-	private static final Color SHADOW_COLORS[] = ColorHelper.createColorArr(Color.white, new Color(240, 240, 240), 8);
+	private static final Color[] SHADOW_COLORS = ColorHelper.createColorArr(Color.white, new Color(240, 240, 240), 8);
 
 	/** {@inheritDoc} */
 	public static ComponentUI createUI(JComponent x) {

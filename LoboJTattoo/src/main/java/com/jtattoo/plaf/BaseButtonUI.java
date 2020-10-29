@@ -89,7 +89,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		InputMap im = (InputMap) UIManager.get("Button.focusInputMap");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false), "pressed");
 		im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true), "released");
-		Color cArr[] = AbstractLookAndFeel.getTheme().getButtonColors();
+		Color[] cArr = AbstractLookAndFeel.getTheme().getButtonColors();
 		defaultColors = new Color[cArr.length];
 		for (int i = 0; i < cArr.length; i++) {
 			defaultColors[i] = ColorHelper.brighter(cArr[i], 20);
@@ -175,7 +175,7 @@ public class BaseButtonUI extends BasicButtonUI {
 		int height = b.getHeight();
 
 		ButtonModel model = b.getModel();
-		Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+		Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 		if (b.isEnabled()) {
 			Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {

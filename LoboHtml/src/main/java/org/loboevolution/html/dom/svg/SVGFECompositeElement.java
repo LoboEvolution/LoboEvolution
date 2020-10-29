@@ -29,19 +29,19 @@ package org.loboevolution.html.dom.svg;
 public interface SVGFECompositeElement extends SVGElement, SVGFilterPrimitiveStandardAttributes {
 	// Composite Operators
 	/** Constant SVG_FECOMPOSITE_OPERATOR_UNKNOWN=0 */
-	static final short SVG_FECOMPOSITE_OPERATOR_UNKNOWN = 0;
+    short SVG_FECOMPOSITE_OPERATOR_UNKNOWN = 0;
 	/** Constant SVG_FECOMPOSITE_OPERATOR_OVER=1 */
-	static final short SVG_FECOMPOSITE_OPERATOR_OVER = 1;
+    short SVG_FECOMPOSITE_OPERATOR_OVER = 1;
 	/** Constant SVG_FECOMPOSITE_OPERATOR_IN=2 */
-	static final short SVG_FECOMPOSITE_OPERATOR_IN = 2;
+    short SVG_FECOMPOSITE_OPERATOR_IN = 2;
 	/** Constant SVG_FECOMPOSITE_OPERATOR_OUT=3 */
-	static final short SVG_FECOMPOSITE_OPERATOR_OUT = 3;
+    short SVG_FECOMPOSITE_OPERATOR_OUT = 3;
 	/** Constant SVG_FECOMPOSITE_OPERATOR_ATOP=4 */
-	static final short SVG_FECOMPOSITE_OPERATOR_ATOP = 4;
+    short SVG_FECOMPOSITE_OPERATOR_ATOP = 4;
 	/** Constant SVG_FECOMPOSITE_OPERATOR_XOR=5 */
-	static final short SVG_FECOMPOSITE_OPERATOR_XOR = 5;
+    short SVG_FECOMPOSITE_OPERATOR_XOR = 5;
 	/** Constant SVG_FECOMPOSITE_OPERATOR_ARITHMETIC=6 */
-	static final short SVG_FECOMPOSITE_OPERATOR_ARITHMETIC = 6;
+    short SVG_FECOMPOSITE_OPERATOR_ARITHMETIC = 6;
 
 	/**
 	 * <p>getIn1.</p>

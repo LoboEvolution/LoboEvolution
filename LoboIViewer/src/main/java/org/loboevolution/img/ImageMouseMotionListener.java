@@ -15,7 +15,7 @@ public interface ImageMouseMotionListener extends EventListener {
 	 * @param e
 	 *            the event object containing attributes of the event
 	 */
-	public void mouseMoved(ImageMouseEvent e);
+    void mouseMoved(ImageMouseEvent e);
 
 	/**
 	 * Invoked when the mouse has entered the area of an image.
@@ -23,7 +23,7 @@ public interface ImageMouseMotionListener extends EventListener {
 	 * @param e
 	 *            the event object containing attributes of the event
 	 */
-	public void mouseEntered(ImageMouseEvent e);
+    void mouseEntered(ImageMouseEvent e);
 
 	/**
 	 * Invoked when the mouse has left the area of an image.
@@ -31,7 +31,7 @@ public interface ImageMouseMotionListener extends EventListener {
 	 * @param e
 	 *            the event object containing attributes of the event
 	 */
-	public void mouseExited(ImageMouseEvent e);
+    void mouseExited(ImageMouseEvent e);
 
 	/**
 	 * Invoked when the mouse is moved while a button is down. Note that the
@@ -40,5 +40,5 @@ public interface ImageMouseMotionListener extends EventListener {
 	 * @param e
 	 *            the event object containing attributes of the event
 	 */
-	public void mouseDragged(ImageMouseEvent e);
+    void mouseDragged(ImageMouseEvent e);
 }

@@ -38,7 +38,7 @@ public interface TimeEvent extends Event {
 	 *
 	 * @return a {@link org.w3c.dom.views.AbstractView} object.
 	 */
-	public AbstractView getView();
+    AbstractView getView();
 
 	/**
 	 * Specifies some detail information about the Event ,
@@ -46,7 +46,7 @@ public interface TimeEvent extends Event {
 	 *
 	 * @return a int.
 	 */
-	public int getDetail();
+    int getDetail();
 
 	/**
 	 * The initTimeEvent method is used to initialize the value of
@@ -65,6 +65,6 @@ public interface TimeEvent extends Event {
 	 * @param detailArg
 	 *            Specifies the Event 's detail.
 	 */
-	public void initTimeEvent(String typeArg, AbstractView viewArg, int detailArg);
+    void initTimeEvent(String typeArg, AbstractView viewArg, int detailArg);
 
 }

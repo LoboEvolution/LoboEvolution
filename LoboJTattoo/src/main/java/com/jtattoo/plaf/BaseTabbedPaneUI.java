@@ -2176,13 +2176,13 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	protected Insets contentBorderInsets;
 
 	// Transient variables (recalculated each time TabbedPane is layed out)
-	protected int tabRuns[] = new int[10];
+	protected int[] tabRuns = new int[10];
 
 	protected int runCount = 0;
 
 	protected int selectedRun = -1;
 
-	protected Rectangle rects[] = new Rectangle[0];
+	protected Rectangle[] rects = new Rectangle[0];
 
 	protected int maxTabHeight;
 
@@ -2263,9 +2263,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * RIGHT, the bottom torn edge is created by subtracting xCropLen[i] from (tab.y
 	 * + tab.height) and adding yCropLen[i] to (tab.x).
 	 */
-	private final int xCropLen[] = { 1, 1, 0, 0, 1, 1, 2, 2 };
+	private final int[] xCropLen = { 1, 1, 0, 0, 1, 1, 2, 2 };
 
-	private final int yCropLen[] = { 0, 3, 3, 6, 6, 9, 9, 12 };
+	private final int[] yCropLen = { 0, 3, 3, 6, 6, 9, 9, 12 };
 
 	/**
 	 * Adds the specified mnemonic at the specified index.
@@ -2503,8 +2503,8 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			rcnt++;
 		}
 		int npts = 2 + rcnt * 8;
-		int xp[] = new int[npts];
-		int yp[] = new int[npts];
+		int[] xp = new int[npts];
+		int[] yp = new int[npts];
 		int pcnt = 0;
 
 		xp[pcnt] = ostart;
@@ -2690,7 +2690,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 */
 	protected Color[] getContentBorderColors(int tabPlacement) {
 		int sepHeight = tabAreaInsets.bottom;
-		Color selColors[] = AbstractLookAndFeel.getTheme().getSelectedColors();
+		Color[] selColors = AbstractLookAndFeel.getTheme().getSelectedColors();
 		Color loColor = selColors[selColors.length - 1];
 		Color darkLoColor = ColorHelper.darker(loColor, 20);
 		return ColorHelper.createColorArr(loColor, darkLoColor, sepHeight);
@@ -2728,7 +2728,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	protected Color getGapColor(int tabIndex) {
 		if (isTabOpaque() || tabIndex == tabPane.getSelectedIndex()) {
 			if (tabIndex >= 0 && tabIndex < tabCount) {
-				Color tabColors[] = getTabColors(tabIndex, tabIndex == tabPane.getSelectedIndex(), false);
+				Color[] tabColors = getTabColors(tabIndex, tabIndex == tabPane.getSelectedIndex(), false);
 				if (tabColors != null && tabColors.length > 0) {
 					return tabColors[tabColors.length - 1];
 				} else {
@@ -3031,7 +3031,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * @return an array of {@link java.awt.Color} objects.
 	 */
 	protected Color[] getTabColors(int tabIndex, boolean isSelected, boolean isRollover) {
-		Color colorArr[] = AbstractLookAndFeel.getTheme().getTabColors();
+		Color[] colorArr = AbstractLookAndFeel.getTheme().getTabColors();
 		if (tabIndex >= 0 && tabIndex < tabPane.getTabCount()) {
 			boolean isEnabled = tabPane.isEnabledAt(tabIndex);
 			Color backColor = tabPane.getBackgroundAt(tabIndex);
@@ -3737,7 +3737,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			if (sepHeight > 0) {
 				switch (tabPlacement) {
 				case TOP: {
-					Color colors[] = getContentBorderColors(tabPlacement);
+					Color[] colors = getContentBorderColors(tabPlacement);
 					int ys = y + tabAreaHeight - sepHeight + bi.top;
 					for (int i = 0; i < colors.length; i++) {
 						g.setColor(colors[i]);
@@ -3746,7 +3746,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 					break;
 				}
 				case LEFT: {
-					Color colors[] = getContentBorderColors(tabPlacement);
+					Color[] colors = getContentBorderColors(tabPlacement);
 					int xs = x + tabAreaWidth - sepHeight + bi.left;
 					for (int i = 0; i < colors.length; i++) {
 						g.setColor(colors[i]);
@@ -3755,7 +3755,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 					break;
 				}
 				case BOTTOM: {
-					Color colors[] = getContentBorderColors(tabPlacement);
+					Color[] colors = getContentBorderColors(tabPlacement);
 					int ys = y + h - tabAreaHeight - bi.bottom;
 					for (int i = 0; i < colors.length; i++) {
 						g.setColor(colors[i]);
@@ -3764,7 +3764,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 					break;
 				}
 				case RIGHT: {
-					Color colors[] = getContentBorderColors(tabPlacement);
+					Color[] colors = getContentBorderColors(tabPlacement);
 					int xs = x + w - tabAreaWidth - bi.right;
 					for (int i = 0; i < colors.length; i++) {
 						g.setColor(colors[i]);
@@ -3842,9 +3842,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		if (icon != null) {
 			icon.paintIcon(tabPane, g, iconRect.x, iconRect.y);
 		}
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintLeftTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -3903,9 +3903,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				g2D.setComposite(savedComposite);
 			}
 		}
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintRightTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -3956,9 +3956,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			g.setColor(loColor);
 			g.drawLine(x2, y1, x2, y1 + GAP - 1);
 		}
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintRoundedBottomTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -3984,9 +3984,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		g.drawLine(x2, y1, x2, y2 - GAP - 1);
 
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintRoundedTopTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -4019,9 +4019,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			g.drawLine(x2, y1 + GAP + 1, x2, y2 - 1);
 		}
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, savedRederingHint);
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintScrollContentBorder.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4054,9 +4054,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 		default:
 			break;
 		}
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintTab.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4136,9 +4136,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				g2D.setClip(savedClip);
 			}
 		}
-	};
+	}
 
-	/**
+    /**
 	 * Paints the tabs in the tab area. Invoked by paint(). The graphics parameter
 	 * must be a valid Graphics object. Tab placement may be either:
 	 * JTabbedPane.TOP, JTabbedPane.BOTTOM,
@@ -4185,9 +4185,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			}
 		}
 		g.setClip(savedClip);
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintTabBackground.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4208,7 +4208,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			if (savedClip != null) {
 				orgClipArea = new Area(savedClip);
 			}
-			Color colorArr[] = getTabColors(tabIndex, isSelected, tabIndex == rolloverIndex);
+			Color[] colorArr = getTabColors(tabIndex, isSelected, tabIndex == rolloverIndex);
 			int d = 2 * GAP;
 			switch (tabPlacement) {
 			case TOP:
@@ -4266,9 +4266,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				break;
 			}
 		}
-	};
+	}
 
-	/*
+    /*
 	 * this function draws the border around each tab note that this function does
 	 * now draw the background of the tab. that is done elsewhere
 	 */
@@ -4310,9 +4310,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 				paintTopTabBorder(tabIndex, g, x, y, x2, y2, isSelected);
 			}
 		}
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintText.</p>
 	 *
 	 * @param g a {@link java.awt.Graphics} object.
@@ -4372,9 +4372,9 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 						textRect.y + metrics.getAscent() - 1);
 			}
 		}
-	};
+	}
 
-	/**
+    /**
 	 * <p>paintTopTabBorder.</p>
 	 *
 	 * @param tabIndex a int.
@@ -4457,9 +4457,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 			vc.requestFocus();
 			return true;
 		} else if (vc instanceof JComponent) {
-			if (((JComponent) vc).requestDefaultFocus()) {
-				return true;
-			}
+			return ((JComponent) vc).requestDefaultFocus();
 		}
 		return false;
 	}

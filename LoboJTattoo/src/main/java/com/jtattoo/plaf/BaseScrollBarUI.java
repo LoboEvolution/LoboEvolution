@@ -368,7 +368,7 @@ public class BaseScrollBarUI extends BasicScrollBarUI {
 
 		g.translate(thumbBounds.x, thumbBounds.y);
 
-		Color colors[] = getThumbColors();
+		Color[] colors = getThumbColors();
 
 		Color frameColorHi = ColorHelper.brighter(colors[1], 20);
 		Color frameColorLo = ColorHelper.darker(colors[colors.length - 1], 10);

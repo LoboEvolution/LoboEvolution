@@ -487,11 +487,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 	public boolean hasSelection() {
 		final RenderableSpot start = this.startSelection;
 		final RenderableSpot end = this.endSelection;
-		if (start != null && end != null && !start.equals(end)) {
-			return true;
-		} else {
-			return false;
-		}
+        return start != null && end != null && !start.equals(end);
 	}
 
 	/** {@inheritDoc} */
@@ -581,11 +577,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 			final int ry = point.y;
 			block.onMousePressed(event, point.x, point.y);
 			final RenderableSpot rp = block.getLowestRenderableSpot(rx, ry);
-			if (rp != null) {
-				this.frameContext.resetSelection(rp);
-			} else {
-				this.frameContext.resetSelection(null);
-			}
+            this.frameContext.resetSelection(rp);
 		}
 	}
 

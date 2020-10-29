@@ -35,13 +35,13 @@ public interface SMILSetElement extends ElementTimeControl, ElementTime, Element
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getTo();
+    String getTo();
 
 	/**
 	 * <p>setTo.</p>
 	 *
 	 * @param to a {@link java.lang.String} object.
 	 */
-	public void setTo(String to);
+    void setTo(String to);
 
 }

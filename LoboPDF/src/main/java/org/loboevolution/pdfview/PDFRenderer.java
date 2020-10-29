@@ -195,7 +195,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
      * push() was called.
      */
     public void pop() {
-    	if(this.stack.isEmpty() == false) {
+    	if(!this.stack.isEmpty()) {
             this.state = this.stack.pop();
     	}
 
@@ -372,7 +372,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         		//First resize, otherwise we risk that we get out of heapspace
         		int newHeight = (int)Math.round(maxFactor*r.getHeight());
         		int newWidth = (int)Math.round(maxFactor*r.getWidth());
-        		if (!RESIZE) {
+        		if (false) {
         			newHeight = bi.getHeight();
         			newWidth = bi.getWidth();
         		}

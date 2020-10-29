@@ -95,14 +95,14 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	@Override
 	public boolean getChecked() {
 		final String checked = getAttribute("checked");
-		return checked == null ? false : true;
+		return checked != null;
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public boolean getDisabled() {
 		final String disabled = getAttribute("disabled");
-		return disabled == null ? false : true;
+		return disabled != null;
 	}
 
 	/** {@inheritDoc} */
@@ -136,7 +136,7 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	@Override
 	public boolean getReadOnly() {
 		final String readonly = getAttribute("readonly");
-		return readonly == null ? false : true;
+		return readonly != null;
 	}
 
 	/** {@inheritDoc} */

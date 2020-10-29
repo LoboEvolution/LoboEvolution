@@ -163,7 +163,7 @@ public class TextureBorders extends BaseBorders {
 		 */
 		private static final long serialVersionUID = 1L;
 		private static final Color FRAME_BORDER_COLOR = new Color(128, 128, 128);
-		private static final Color FRAME_COLORS[] = new Color[] { new Color(144, 144, 144), new Color(180, 180, 180),
+		private static final Color[] FRAME_COLORS = new Color[] { new Color(144, 144, 144), new Color(180, 180, 180),
 				new Color(216, 216, 216), new Color(236, 236, 236), new Color(164, 164, 164), new Color(196, 196, 196),
 				new Color(184, 184, 184), new Color(172, 172, 172) };
 
@@ -333,7 +333,7 @@ public class TextureBorders extends BaseBorders {
 		 *
 		 */
 		private static final long serialVersionUID = 1L;
-		private static final float SHOW_ALPHA[] = { 0.6f, 0.4f, 0.2f, 0.1f };
+		private static final float[] SHOW_ALPHA = { 0.6f, 0.4f, 0.2f, 0.1f };
 
 		public PopupMenuBorder() {
 			shadowSize = 4;

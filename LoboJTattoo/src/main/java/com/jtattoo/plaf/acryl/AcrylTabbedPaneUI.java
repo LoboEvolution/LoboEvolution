@@ -64,7 +64,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 	/** {@inheritDoc} */
 	@Override
 	protected Color[] getContentBorderColors(int tabPlacement) {
-		Color SEP_COLORS[] = { ColorHelper.brighter(AbstractLookAndFeel.getControlColorLight(), 20),
+		Color[] SEP_COLORS = { ColorHelper.brighter(AbstractLookAndFeel.getControlColorLight(), 20),
 				AbstractLookAndFeel.getControlColorLight(),
 				ColorHelper.brighter(AbstractLookAndFeel.getControlColorDark(), 20),
 				AbstractLookAndFeel.getControlColorDark(),
@@ -87,7 +87,7 @@ public class AcrylTabbedPaneUI extends BaseTabbedPaneUI {
 		if (tabIndex >= 0 && tabIndex < tabPane.getTabCount()) {
 			boolean isEnabled = tabPane.isEnabledAt(tabIndex);
 			Color backColor = tabPane.getBackgroundAt(tabIndex);
-			Color colorArr[];
+			Color[] colorArr;
 			if (backColor instanceof UIResource) {
 				if (isSelected) {
 					colorArr = AbstractLookAndFeel.getTheme().getDefaultColors();

@@ -29,11 +29,11 @@ package org.loboevolution.html.dom.svg;
 public interface SVGUnitTypes {
 	
 	/** Constant SVG_UNIT_TYPE_UNKNOWN=0 */
-	static final short SVG_UNIT_TYPE_UNKNOWN = 0;
+    short SVG_UNIT_TYPE_UNKNOWN = 0;
 	
 	/** Constant SVG_UNIT_TYPE_USERSPACEONUSE=1 */
-	static final short SVG_UNIT_TYPE_USERSPACEONUSE = 1;
+    short SVG_UNIT_TYPE_USERSPACEONUSE = 1;
 	
 	/** Constant SVG_UNIT_TYPE_OBJECTBOUNDINGBOX=2 */
-	static final short SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
+    short SVG_UNIT_TYPE_OBJECTBOUNDINGBOX = 2;
 }

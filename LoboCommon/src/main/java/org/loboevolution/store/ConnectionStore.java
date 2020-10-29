@@ -74,10 +74,10 @@ public class ConnectionStore implements Serializable {
 					setting.setProxyType(Proxy.Type.valueOf(rs.getString(1)));
 					setting.setUserName(rs.getString(2));
 					setting.setPassword(rs.getString(3));
-					setting.setAuthenticated(rs.getInt(4) == 1 ? true : false);
+					setting.setAuthenticated(rs.getInt(4) == 1);
 					final InetSocketAddress socketAddress = new InetSocketAddress(rs.getString(5), rs.getInt(6));
 					setting.setInetSocketAddress(socketAddress);
-					setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1 ? true : false);
+					setting.setDisableProxyForLocalAddresses(rs.getInt(7) == 1);
 				}
 			}
 		} catch (final Exception e) {

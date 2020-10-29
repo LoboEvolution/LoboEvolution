@@ -51,14 +51,9 @@ final class RSpacing extends BaseBoundableRenderable {
 	public boolean extractSelectionText(StringBuilder buffer, boolean inSelection, RenderableSpot startPoint,
 			RenderableSpot endPoint) {
 		if (this == startPoint.renderable || this == endPoint.renderable) {
-			if (inSelection) {
-				return false;
-			}
-		} else if (!inSelection) {
-			return false;
-		}
-		return true;
-	}
+            return !inSelection;
+		} else return inSelection;
+    }
 
 	/*
 	 * (non-Javadoc)

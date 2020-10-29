@@ -63,7 +63,7 @@ public class ToolsStore implements Serializable {
 				se.setBaseUrl(rs.getString(3));
 				se.setQueryParameter(rs.getString(4));
 				se.setType(rs.getString(5));
-				se.setSelected(rs.getInt(6) == 1 ? true : false);
+				se.setSelected(rs.getInt(6) == 1);
 				searchEngineStores.add(se);
 			}
 		} catch (final Exception e) {

@@ -60,7 +60,7 @@ public class AeroInternalFrameTitlePane extends BaseInternalFrameTitlePane {
 			boolean isRollover = getModel().isRollover();
 			int width = getWidth();
 			int height = getHeight();
-			Color colors[] = AbstractLookAndFeel.getTheme().getButtonColors();
+			Color[] colors = AbstractLookAndFeel.getTheme().getButtonColors();
 			if (isRollover) {
 				colors = AbstractLookAndFeel.getTheme().getRolloverColors();
 			}

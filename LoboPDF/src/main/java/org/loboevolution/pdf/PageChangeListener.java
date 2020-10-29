@@ -50,5 +50,5 @@ public interface PageChangeListener {
 	/**
 	 * Notifies the listener that it should go to a particular page number.
 	 */
-	public void gotoPage(int page);
+    void gotoPage(int page);
 }

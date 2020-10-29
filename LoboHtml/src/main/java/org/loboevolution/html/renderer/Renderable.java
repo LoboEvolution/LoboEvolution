@@ -58,7 +58,7 @@ public interface Renderable {
 	 *
 	 * @return a boolean.
 	 */
-	default public boolean isFixed() {
+	default boolean isFixed() {
 		return false;
 	}
 	

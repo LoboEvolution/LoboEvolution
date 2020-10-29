@@ -63,8 +63,8 @@ public class FontValues extends HtmlValues {
 				return new LAFSettings().getInstance().getFontSize();
 			}
 			return (int) Math.round(font.getSize() * value);
-		} else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("em") || specTL.endsWith("pc")
-				|| specTL.endsWith("em") || specTL.endsWith("mm") || specTL.endsWith("ex")) {
+		} else if (specTL.endsWith("px") || specTL.endsWith("pt") || specTL.endsWith("pc")
+				|| specTL.endsWith("mm") || specTL.endsWith("ex")) {
 			final int pixelSize = getPixelSize(spec, parentRenderState,
 					(int) new LAFSettings().getInstance().getFontSize());
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
@@ -167,8 +167,8 @@ public class FontValues extends HtmlValues {
 		final String verticalAlign = spec;
 		Integer superscript = null;
 
-		final boolean isSuper = verticalAlign != null && "super".equalsIgnoreCase(verticalAlign);
-		final boolean isSub = verticalAlign != null && "sub".equalsIgnoreCase(verticalAlign);
+		final boolean isSuper = "super".equalsIgnoreCase(verticalAlign);
+		final boolean isSub = "sub".equalsIgnoreCase(verticalAlign);
 
 		if (isSuper || new LAFSettings().getInstance().isSuperscript()) {
 			superscript = TextAttribute.SUPERSCRIPT_SUPER;

@@ -61,7 +61,7 @@ public class AcrylScrollBarUI extends BaseScrollBarUI {
 
 		g.translate(thumbBounds.x, thumbBounds.y);
 
-		Color colors[] = getThumbColors();
+		Color[] colors = getThumbColors();
 		Color frameColor = AbstractLookAndFeel.getFrameColor();
 		if (!JTattooUtilities.isActive(scrollbar)) {
 			frameColor = ColorHelper.brighter(frameColor, 80);

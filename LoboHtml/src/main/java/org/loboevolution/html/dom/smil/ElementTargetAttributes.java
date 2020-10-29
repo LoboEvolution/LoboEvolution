@@ -31,27 +31,27 @@ public interface ElementTargetAttributes {
 
 	// attributeTypes
 	/** Constant ATTRIBUTE_TYPE_AUTO=0 */
-	public static final short ATTRIBUTE_TYPE_AUTO = 0;
+    short ATTRIBUTE_TYPE_AUTO = 0;
 
 	/** Constant ATTRIBUTE_TYPE_CSS=1 */
-	public static final short ATTRIBUTE_TYPE_CSS = 1;
+    short ATTRIBUTE_TYPE_CSS = 1;
 	
 	/** Constant ATTRIBUTE_TYPE_XML=2 */
-	public static final short ATTRIBUTE_TYPE_XML = 2;
+    short ATTRIBUTE_TYPE_XML = 2;
 	
 	/**
 	 * The name of the target attribute.
 	 *
 	 * @return a {@link java.lang.String} object.
 	 */
-	public String getAttributeName();
+    String getAttributeName();
 
 	/**
 	 * <p>setAttributeName.</p>
 	 *
 	 * @param attributeName a {@link java.lang.String} object.
 	 */
-	public void setAttributeName(String attributeName);
+    void setAttributeName(String attributeName);
 
 	/**
 	 * A code representing the value of the attributeType attribute, as defined
@@ -59,13 +59,13 @@ public interface ElementTargetAttributes {
 	 *
 	 * @return a short.
 	 */
-	public short getAttributeType();
+    short getAttributeType();
 
 	/**
 	 * <p>setAttributeType.</p>
 	 *
 	 * @param attributeType a short.
 	 */
-	public void setAttributeType(short attributeType);
+    void setAttributeType(short attributeType);
 
 }

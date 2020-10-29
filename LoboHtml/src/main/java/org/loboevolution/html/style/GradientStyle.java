@@ -229,7 +229,7 @@ public class GradientStyle {
 		Color[] colorArray = new Color[colors.size()];
 		int a = 0;
 		for (Color c : colors) {
-			colorArray[a++] = c != null ? c : null;
+			colorArray[a++] = c;
 		}
 		return colorArray;
 	}

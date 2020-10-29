@@ -36,7 +36,7 @@ public class IndexedColor extends PDFColorSpace {
      * Java's IndexColorModel */
     protected byte[] finalcolors;
     /** the color table */
-    Color table[];
+    Color[] table;
     /** size of the color table */
     final int count;
     /** number of channels in the base Color Space (unused) */
@@ -62,7 +62,7 @@ public class IndexedColor extends PDFColorSpace {
         boolean offSized = (data.length / this.nchannels) < count;
         this.finalcolors = new byte[3 * count];
         this.table = new Color[count];
-        float comps[] = new float[this.nchannels];
+        float[] comps = new float[this.nchannels];
         int loc = 0;
         int finalloc = 0;
         for (int i = 0; i < count; i++) {
@@ -131,7 +131,7 @@ public class IndexedColor extends PDFColorSpace {
      * value is between 0 and the size of the color table - 1.
      */
     @Override
-    public PDFPaint getPaint(float components[]) {
+    public PDFPaint getPaint(float[] components) {
         return PDFPaint.getPaint(this.table[(int) components[0]]);
     }
 }

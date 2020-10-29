@@ -153,7 +153,7 @@ public class BaseToggleButtonUI extends BasicToggleButtonUI {
 		int height = b.getHeight();
 
 		ButtonModel model = b.getModel();
-		Color colors[];
+		Color[] colors;
 		if (b.isEnabled()) {
 			Color background = b.getBackground();
 			if (background instanceof ColorUIResource) {

@@ -336,7 +336,7 @@ public class PostTable extends TrueTypeTable {
     /** A Format 0 post map */
     class PostMapFormat0 extends PostMap {
         /** the glyph names in standard Macintosh ordering */
-        protected final String stdNames[] = {
+        protected final String[] stdNames = {
 /* 0 */     ".notdef", ".null", "nonmarkingreturn", "space", "exclam", "quotedbl", "numbersign", "dollar",
 /* 8 */     "percent", "ampersand", "quotesingle", "parenleft", "parenright", "asterisk", "plus", "comma",
 /* 16 */    "hyphen", "period", "slash", "zero", "one", "two", "three", "four",

@@ -876,7 +876,7 @@ public class BaseIcons {
 			Color cHi = Color.white;
 			Color cLo = Color.white;
 			if (!(c instanceof JRadioButtonMenuItem)) {
-				Color colors[];
+				Color[] colors;
 				if (button.isEnabled()) {
 					if (button.isRolloverEnabled() && model.isRollover() || model.isPressed() && model.isArmed()) {
 						colors = AbstractLookAndFeel.getTheme().getRolloverColors();

@@ -136,7 +136,7 @@ public class HtmlParser {
 	 */
 	public static boolean isDecodeEntities(String elementName) {
 		final ElementInfo einfo = (ElementInfo) HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(elementName.toUpperCase()));
-		return einfo == null ? true : einfo.decodeEntities;
+		return einfo == null || einfo.decodeEntities;
 	}
 
 	/**
@@ -305,7 +305,7 @@ public class HtmlParser {
 							ElementInfo einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(localName.toUpperCase()));
 							int endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED : einfo.endElementType;
 							if (endTagType != ElementInfo.END_ELEMENT_FORBIDDEN) {
-								boolean childrenOk = einfo == null ? true : einfo.childElementOk;
+								boolean childrenOk = einfo == null || einfo.childElementOk;
 								Set<HTMLTag> newStopSet = einfo == null ? null : einfo.stopTags;
 								if (newStopSet == null) {
 									if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
@@ -379,7 +379,7 @@ public class HtmlParser {
 											einfo = HTMLEntities.ELEMENT_INFOS.get(HTMLTag.get(normalTag.toUpperCase()));
 											endTagType = einfo == null ? ElementInfo.END_ELEMENT_REQUIRED
 													: einfo.endElementType;
-											childrenOk = einfo == null ? true : einfo.childElementOk;
+											childrenOk = einfo == null || einfo.childElementOk;
 											newStopSet = einfo == null ? null : einfo.stopTags;
 											if (newStopSet == null) {
 												if (endTagType == ElementInfo.END_ELEMENT_OPTIONAL) {
@@ -1083,7 +1083,7 @@ public class HtmlParser {
 			return false;
 		} else {
 			final Node parent = n.getParentNode();
-			return parent == null ? true : depthAtMost(parent, maxDepth - 1);
+			return parent == null || depthAtMost(parent, maxDepth - 1);
 		}
 	}
 
@@ -1128,7 +1128,7 @@ public class HtmlParser {
 	}
 
 	private boolean shouldDecodeEntities(final ElementInfo einfo) {
-		return (einfo == null ? true : einfo.decodeEntities);
+		return (einfo == null || einfo.decodeEntities);
 	}
 
 	private final static StringBuilder entityDecode(final StringBuilder rawText) throws org.xml.sax.SAXException {
