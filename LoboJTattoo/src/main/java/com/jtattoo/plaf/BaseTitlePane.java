@@ -446,7 +446,7 @@ public class BaseTitlePane extends JComponent implements TitlePane {
 		public void windowDeiconified(WindowEvent e) {
 			// Workarround to avoid a bug within OSX and Java 1.7
 			if (JTattooUtilities.isMac() && JTattooUtilities.getJavaVersion() >= 1.7 && wasMaximized) {
-				SwingUtilities.invokeLater(() -> maximize());
+				SwingUtilities.invokeLater(BaseTitlePane.this::maximize);
 			}
 		}
 	}

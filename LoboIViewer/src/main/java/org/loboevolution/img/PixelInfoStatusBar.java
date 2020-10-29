@@ -36,21 +36,9 @@ public class PixelInfoStatusBar extends StatusBar {
 
 	private PixelModel model;
 
-	private PropertyChangeListener propertyChangeListener = new PropertyChangeListener() {
+	private PropertyChangeListener propertyChangeListener = evt -> update();
 
-		@Override
-		public void propertyChange(PropertyChangeEvent evt) {
-			update();
-		}
-	};
-
-	private final ChangeListener modelListener = new ChangeListener() {
-
-		@Override
-		public void stateChanged(ChangeEvent e) {
-			update();
-		}
-	};
+	private final ChangeListener modelListener = e -> update();
 
 	/**
 	 * Creates a new instance.

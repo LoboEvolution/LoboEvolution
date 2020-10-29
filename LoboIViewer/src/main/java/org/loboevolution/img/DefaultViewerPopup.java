@@ -62,51 +62,21 @@ public class DefaultViewerPopup extends JPopupMenu {
 
 		final JCheckBoxMenuItem toggleStatusBarItem = new JCheckBoxMenuItem("Status bar");
 		toggleStatusBarItem.setState(viewer.isStatusBarVisible());
-		viewer.addPropertyChangeListener("statusBarVisible", new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				toggleStatusBarItem.setState(viewer.isStatusBarVisible());
-			}
-		});
-		toggleStatusBarItem.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewer.setStatusBarVisible(!viewer.isStatusBarVisible());
-			}
-		});
+		viewer.addPropertyChangeListener("statusBarVisible", evt -> toggleStatusBarItem.setState(viewer.isStatusBarVisible()));
+		toggleStatusBarItem.addActionListener(e -> viewer.setStatusBarVisible(!viewer.isStatusBarVisible()));
 
 		/** Zoom menu **/
 
 		JMenu zoomMenu = new JMenu("Zoom");
 		final JRadioButtonMenuItem zoomOriginalSize = new JRadioButtonMenuItem("Original size",
 				viewer.getResizeStrategy() == ResizeStrategy.NO_RESIZE);
-		zoomOriginalSize.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewer.setResizeStrategy(ResizeStrategy.NO_RESIZE);
-			}
-		});
+		zoomOriginalSize.addActionListener(e -> viewer.setResizeStrategy(ResizeStrategy.NO_RESIZE));
 		final JRadioButtonMenuItem zoomShrinkToFit = new JRadioButtonMenuItem("Shrink to fit",
 				viewer.getResizeStrategy() == ResizeStrategy.SHRINK_TO_FIT);
-		zoomShrinkToFit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewer.setResizeStrategy(ResizeStrategy.SHRINK_TO_FIT);
-			}
-		});
+		zoomShrinkToFit.addActionListener(e -> viewer.setResizeStrategy(ResizeStrategy.SHRINK_TO_FIT));
 		final JRadioButtonMenuItem zoomResizeToFit = new JRadioButtonMenuItem("Resize to fit",
 				viewer.getResizeStrategy() == ResizeStrategy.RESIZE_TO_FIT);
-		zoomResizeToFit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewer.setResizeStrategy(ResizeStrategy.RESIZE_TO_FIT);
-			}
-		});
+		zoomResizeToFit.addActionListener(e -> viewer.setResizeStrategy(ResizeStrategy.RESIZE_TO_FIT));
 
 		class CustomZoomEntry {
 			private double value;
@@ -116,13 +86,9 @@ public class DefaultViewerPopup extends JPopupMenu {
 				this.value = value;
 				menuItem = new JRadioButtonMenuItem(label,
 						viewer.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM && viewer.getZoomFactor() == value);
-				menuItem.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						viewer.setResizeStrategy(ResizeStrategy.CUSTOM_ZOOM);
-						viewer.setZoomFactor(CustomZoomEntry.this.value);
-					}
+				menuItem.addActionListener(e -> {
+					viewer.setResizeStrategy(ResizeStrategy.CUSTOM_ZOOM);
+					viewer.setZoomFactor(CustomZoomEntry.this.value);
 				});
 			}
 
@@ -145,45 +111,37 @@ public class DefaultViewerPopup extends JPopupMenu {
 			group.add(cze.menuItem);
 		}
 
-		viewer.addPropertyChangeListener("resizeStrategy", new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				switch ((ResizeStrategy) evt.getNewValue()) {
-				case NO_RESIZE:
-					zoomOriginalSize.setSelected(true);
-					break;
-				case RESIZE_TO_FIT:
-					zoomResizeToFit.setSelected(true);
-					break;
-				case SHRINK_TO_FIT:
-					zoomShrinkToFit.setSelected(true);
-					break;
-				case CUSTOM_ZOOM:
-					group.clearSelection();
-					for (CustomZoomEntry cze : customZoomEntries) {
-						if (cze.value == viewer.getZoomFactor()) {
-							cze.menuItem.setSelected(true);
-							break;
-						}
+		viewer.addPropertyChangeListener("resizeStrategy", evt -> {
+			switch ((ResizeStrategy) evt.getNewValue()) {
+			case NO_RESIZE:
+				zoomOriginalSize.setSelected(true);
+				break;
+			case RESIZE_TO_FIT:
+				zoomResizeToFit.setSelected(true);
+				break;
+			case SHRINK_TO_FIT:
+				zoomShrinkToFit.setSelected(true);
+				break;
+			case CUSTOM_ZOOM:
+				group.clearSelection();
+				for (CustomZoomEntry cze : customZoomEntries) {
+					if (cze.value == viewer.getZoomFactor()) {
+						cze.menuItem.setSelected(true);
+						break;
 					}
-					break;
-				default:
-					throw new AssertionError("Unknown resize strategy: " + evt.getNewValue());
 				}
+				break;
+			default:
+				throw new AssertionError("Unknown resize strategy: " + evt.getNewValue());
 			}
 		});
-		viewer.addPropertyChangeListener("zoomFactor", new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				if (viewer.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
-					group.clearSelection();
-					for (CustomZoomEntry cze : customZoomEntries) {
-						if (cze.value == viewer.getZoomFactor()) {
-							cze.menuItem.setSelected(true);
-							break;
-						}
+		viewer.addPropertyChangeListener("zoomFactor", evt -> {
+			if (viewer.getResizeStrategy() == ResizeStrategy.CUSTOM_ZOOM) {
+				group.clearSelection();
+				for (CustomZoomEntry cze : customZoomEntries) {
+					if (cze.value == viewer.getZoomFactor()) {
+						cze.menuItem.setSelected(true);
+						break;
 					}
 				}
 			}
@@ -192,30 +150,13 @@ public class DefaultViewerPopup extends JPopupMenu {
 		/** Save command **/
 
 		JMenuItem saveImageMenuItem = new JMenuItem("Save image...");
-		saveImageMenuItem.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				saveImageAction();
-			}
-		});
+		saveImageMenuItem.addActionListener(e -> saveImageAction());
 
 		/** Pixelated zoom toggle **/
 		final JCheckBoxMenuItem togglePixelatedZoomItem = new JCheckBoxMenuItem("Pixelated zoom");
 		togglePixelatedZoomItem.setState(viewer.isPixelatedZoom());
-		viewer.addPropertyChangeListener("pixelatedZoom", new PropertyChangeListener() {
-
-			@Override
-			public void propertyChange(PropertyChangeEvent evt) {
-				togglePixelatedZoomItem.setState(viewer.isPixelatedZoom());
-			}
-		});
-		togglePixelatedZoomItem.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				viewer.setPixelatedZoom(!viewer.isPixelatedZoom());
-			}
-		});
+		viewer.addPropertyChangeListener("pixelatedZoom", evt -> togglePixelatedZoomItem.setState(viewer.isPixelatedZoom()));
+		togglePixelatedZoomItem.addActionListener(e -> viewer.setPixelatedZoom(!viewer.isPixelatedZoom()));
 
 		add(toggleStatusBarItem);
 		add(zoomMenu);
@@ -232,15 +173,11 @@ public class DefaultViewerPopup extends JPopupMenu {
 			saveChooserHelpLabel.setFont(saveChooserHelpLabel.getFont().deriveFont(10f));
 			saveChooserHelpButton = new JButton("?");
 			saveChooserHelpButton.setMargin(new Insets(0, 2, 0, 2));
-			saveChooserHelpButton.addActionListener(new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					saveChooser.getAccessory().removeAll();
-					saveChooser.getAccessory().add(saveChooserHelpLabel);
-					saveChooser.revalidate();
-					saveChooser.repaint();
-				}
+			saveChooserHelpButton.addActionListener(e -> {
+				saveChooser.getAccessory().removeAll();
+				saveChooser.getAccessory().add(saveChooserHelpLabel);
+				saveChooser.revalidate();
+				saveChooser.repaint();
 			});
 			saveChooserHelpLabel.addMouseListener(new MouseAdapter() {
 

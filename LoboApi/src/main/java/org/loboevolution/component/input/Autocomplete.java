@@ -2,8 +2,6 @@ package org.loboevolution.component.input;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.List;
@@ -46,13 +44,10 @@ public class Autocomplete {
 		cbInput.removeAll();
 		cbInput.removeAllItems();
 		
-		cbInput.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (!isAdjusting(cbInput)) {
-					if (cbInput.getSelectedItem() != null) {
-						txtInput.setText(cbInput.getSelectedItem().toString());
-					}
+		cbInput.addActionListener(e -> {
+			if (!isAdjusting(cbInput)) {
+				if (cbInput.getSelectedItem() != null) {
+					txtInput.setText(cbInput.getSelectedItem().toString());
 				}
 			}
 		});

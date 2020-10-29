@@ -123,29 +123,23 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 		okButton.setText("Save");
 		okButton.setActionCommand("okButton");
 		okButton.setBounds(25, 340, 150, 40);
-		okButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				final NavigationStore nav = new NavigationStore();
-				nav.deleteHost(tmpUrl);
-				nav.addAsRecent(tmpUrl, -1);
-				JOptionPane.showMessageDialog(contentPane, "Edit Ok!");
-				setVisible(false);
-				dispose();
-				new ShowRecentWindow(frame).setVisible(true);
-			}
+		okButton.addActionListener(e -> {
+			final NavigationStore nav = new NavigationStore();
+			nav.deleteHost(tmpUrl);
+			nav.addAsRecent(tmpUrl, -1);
+			JOptionPane.showMessageDialog(contentPane, "Edit Ok!");
+			setVisible(false);
+			dispose();
+			new ShowRecentWindow(frame).setVisible(true);
 		});
 		panel2.add(okButton);
 
 		LoboButton closeButton = new LoboButton();
 		closeButton.setText("Close");
 		closeButton.setActionCommand("closeButton");
-		closeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				dispose();
-			}
+		closeButton.addActionListener(e -> {
+			setVisible(false);
+			dispose();
 		});
 		closeButton.setBounds(180, 340, 138, 40);
 		panel2.add(closeButton);
@@ -236,14 +230,10 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 				edit.setText("Edit");
 				edit.setActionCommand("okButton");
 				edit.setBounds(630, debutCpUrl, 40, 40);
-				edit.addActionListener(new ActionListener() {
+				edit.addActionListener(e -> {
+					urlEditTxtFld.setText(host);
+					tmpUrl = host;
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						urlEditTxtFld.setText(host);
-						tmpUrl = host;
-
-					}
 				});
 				panel_3.add(edit);
 				
@@ -251,18 +241,14 @@ public class ShowRecentWindow extends JFrame implements LoboLookAndFeel {
 				LoboButton delete = new LoboButton();
 				delete.setText("Delete");
 				delete.setBounds(680, debutCpUrl, 50, 40);
-				delete.addActionListener(new ActionListener() {
+				delete.addActionListener(e -> {
+					final NavigationStore nav = new NavigationStore();
+					nav.deleteHost(url.getText());
+					JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
+					setVisible(false);
+					dispose();
+					new ShowRecentWindow(frame).setVisible(true);
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						final NavigationStore nav = new NavigationStore();
-						nav.deleteHost(url.getText());
-						JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
-						setVisible(false);
-						dispose();
-						new ShowRecentWindow(frame).setVisible(true);
-
-					}
 				});
 				panel_3.add(delete);
 				

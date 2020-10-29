@@ -733,7 +733,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	public void normalizeDocument() {
 		// TODO: Normalization options from domConfig
 		synchronized (this.treeLock) {
-			visitImpl(node -> node.normalize());
+			visitImpl(Node::normalize);
 		}
 	}
 

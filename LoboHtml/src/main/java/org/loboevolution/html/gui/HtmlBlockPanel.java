@@ -192,7 +192,7 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 				onMouseMoved(arg0);
 			}
 		});
-		addMouseWheelListener(e -> onMouseWheelMoved(e));
+		addMouseWheelListener(this::onMouseWheelMoved);
 	}
 
 	/**

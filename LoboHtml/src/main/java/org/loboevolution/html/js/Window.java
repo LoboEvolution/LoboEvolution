@@ -661,15 +661,15 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 			return new XMLHttpRequest(getUaContext(), hd.getDocumentURL(), ws);
 		};
 
-		JavaInstantiator jiXMLSerializer = () -> new XMLSerializer();
+		JavaInstantiator jiXMLSerializer = XMLSerializer::new;
 		
-		JavaInstantiator text = () -> new TextImpl();
+		JavaInstantiator text = TextImpl::new;
 		
-		JavaInstantiator event = () -> new EventImpl();
+		JavaInstantiator event = EventImpl::new;
 		
-		JavaInstantiator jiDomParser = () -> new DOMParser();
+		JavaInstantiator jiDomParser = DOMParser::new;
 		
-		JavaInstantiator localParser = () -> new LocalStorage();
+		JavaInstantiator localParser = LocalStorage::new;
 
 		Function xmlHttpRequestC = JavaObjectWrapper.getConstructor("XMLHttpRequest", XMLHTTPREQUEST_WRAPPER, jiXhttp);
 		ScriptableObject.defineProperty(ws, "XMLHttpRequest", xmlHttpRequestC, ScriptableObject.READONLY);

@@ -269,9 +269,7 @@ public class HtmlContextMenu {
 
 		JMenuItem menuBack = new JMenuItem("Back");
 		menuBack.setIcon(IconFactory.getInstance().getIcon(BACK));
-		menuBack.addActionListener(e -> {
-			context.back();
-		});
+		menuBack.addActionListener(e -> context.back());
 
 		if (Strings.isNotBlank(context.getPreviousURL())) {
 			menuBack.setEnabled(true);
@@ -283,16 +281,12 @@ public class HtmlContextMenu {
 
 		JMenuItem menuReload = new JMenuItem("Reload");
 		menuReload.setIcon(IconFactory.getInstance().getIcon(RELOD));
-		menuReload.addActionListener(e -> {
-			context.reload();
-		});
+		menuReload.addActionListener(e -> context.reload());
 		popupMenu.add(menuReload);
 
 		JMenuItem menuForward = new JMenuItem("Forward");
 		menuForward.setIcon(IconFactory.getInstance().getIcon(FORWARD));
-		menuForward.addActionListener(e -> {
-			context.forward();
-		});
+		menuForward.addActionListener(e -> context.forward());
 
 		if (Strings.isNotBlank(context.getNextURL())) {
 			menuForward.setEnabled(true);

@@ -40,15 +40,12 @@ public class InputColorPicker {
 		widget.applyComponentOrientation(ic.direction(modelNode.getDir()));
 		widget.setEnabled(!modelNode.getDisabled());
 
-		widget.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				Color c = JColorChooser.showDialog(null, "Choose a Color", null);
-				String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
-				modelNode.setValue(value);
-				widget.setToolTipText(value);
-				widget.setBackground(c);
-			}
+		widget.addActionListener(event -> {
+			Color c = JColorChooser.showDialog(null, "Choose a Color", null);
+			String value = "#" + Integer.toHexString(c.getRGB()).substring(2);
+			modelNode.setValue(value);
+			widget.setToolTipText(value);
+			widget.setBackground(c);
 		});
 
 		MouseInputAdapter mouseHandler = new MouseInputAdapter() {

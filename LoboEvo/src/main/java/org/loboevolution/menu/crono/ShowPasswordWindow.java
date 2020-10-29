@@ -167,28 +167,22 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 		okButton.setText("Save");
 		okButton.setActionCommand("okButton");
 		okButton.setBounds(12, 280, 200, 40);
-		okButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				InputStore.deleteInput(tmpValue, tmpUrl);				
-				InputStore.insertLogin(type.getText(), valueEditTxtFld.getText(), urlEditTxtFld.getText(), true);
-				JOptionPane.showMessageDialog(contentPane, "Edit Ok!");
-				setVisible(false);
-				dispose();
-				new ShowPasswordWindow(frame, 100).setVisible(true);
-			}
+		okButton.addActionListener(e -> {
+			InputStore.deleteInput(tmpValue, tmpUrl);
+			InputStore.insertLogin(type.getText(), valueEditTxtFld.getText(), urlEditTxtFld.getText(), true);
+			JOptionPane.showMessageDialog(contentPane, "Edit Ok!");
+			setVisible(false);
+			dispose();
+			new ShowPasswordWindow(frame, 100).setVisible(true);
 		});
 		panel2.add(okButton);
 
 		LoboButton closeButton = new LoboButton();
 		closeButton.setText("Close");
 		closeButton.setActionCommand("closeButton");
-		closeButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-				dispose();
-			}
+		closeButton.addActionListener(e -> {
+			setVisible(false);
+			dispose();
 		});
 		closeButton.setBounds(224, 280, 138, 40);
 		panel2.add(closeButton);
@@ -310,17 +304,13 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 				edit.setText("Edit");
 				edit.setActionCommand("okButton");
 				edit.setBounds(570, debutCpUrl, 40, 40);
-				edit.addActionListener(new ActionListener() {
+				edit.addActionListener(e -> {
+					type.setText(description.getText());
+					valueEditTxtFld.setText(value.getText());
+					urlEditTxtFld.setText(url.getText());
+					tmpUrl = url.getText();
+					tmpValue = value.getText();
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						type.setText(description.getText());
-						valueEditTxtFld.setText(value.getText());
-						urlEditTxtFld.setText(url.getText());
-						tmpUrl = url.getText();
-						tmpValue = value.getText();
-
-					}
 				});
 				panel_3.add(edit);
 				
@@ -328,17 +318,13 @@ public class ShowPasswordWindow extends JFrame implements LoboLookAndFeel {
 				delete.setText("Delete");
 				delete.setActionCommand("okButton");
 				delete.setBounds(610, debutCpUrl, 50, 40);
-				delete.addActionListener(new ActionListener() {
+				delete.addActionListener(e -> {
+					InputStore.deleteInput(value.getText(), url.getText());
+					JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
+					setVisible(false);
+					dispose();
+					new ShowPasswordWindow(frame, 100).setVisible(true);
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						InputStore.deleteInput(value.getText(), url.getText());
-						JOptionPane.showMessageDialog(panel_3, "Delete Ok!");
-						setVisible(false);
-						dispose();
-						new ShowPasswordWindow(frame, 100).setVisible(true);
-
-					}
 				});
 				panel_3.add(delete);
 				

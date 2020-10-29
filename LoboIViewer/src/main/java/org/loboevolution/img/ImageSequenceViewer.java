@@ -83,23 +83,9 @@ public class ImageSequenceViewer {
 		locationPanel.add(createLocationDefinition());
 		locationPanel.add(forwardButton);
 
-		forwardButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setPosition(position + 1);
-			}
-		});
-		backwardButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				setPosition(position - 1);
-			}
-		});
-
+		forwardButton.addActionListener(e -> setPosition(position + 1));
+		backwardButton.addActionListener(e -> setPosition(position - 1));
 		panel.add(locationPanel, BorderLayout.NORTH);
-
 		setPosition(position);
 	}
 

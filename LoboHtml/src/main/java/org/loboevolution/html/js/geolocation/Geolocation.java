@@ -79,16 +79,13 @@ public class Geolocation extends AbstractScriptableDelegate {
 	 */
 	public long watchPosition(final Function success) {
 		final long watchId = System.currentTimeMillis();
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						getCurrentPosition(success);
-						Thread.sleep(500);
-					} catch (Exception e) {
-						logger.log(Level.SEVERE, e.getMessage(), e);
-					}
+		Thread t = new Thread(() -> {
+			while (true) {
+				try {
+					getCurrentPosition(success);
+					Thread.sleep(500);
+				} catch (Exception e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
 				}
 			}
 		});
@@ -105,17 +102,14 @@ public class Geolocation extends AbstractScriptableDelegate {
 	 */
 	public long watchPosition(final Function success, final Function error) {
 		final long watchId = System.currentTimeMillis();
-		Thread t = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while (true) {
-					try {
-						getCurrentPosition(success, error);
-						Thread.sleep(500);
-					} catch (Exception e) {
-						geoError(error, e);
-						break;
-					}
+		Thread t = new Thread(() -> {
+			while (true) {
+				try {
+					getCurrentPosition(success, error);
+					Thread.sleep(500);
+				} catch (Exception e) {
+					geoError(error, e);
+					break;
 				}
 			}
 		});

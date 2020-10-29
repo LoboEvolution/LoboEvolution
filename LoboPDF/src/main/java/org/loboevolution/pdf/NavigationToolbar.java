@@ -50,11 +50,7 @@ public class NavigationToolbar extends JToolBar {
 		add(new JLabel("Page"));
 		currentPageBox.setText("1");
 		currentPageBox.setMaximumSize(new Dimension(5, 50));
-		currentPageBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				executeCommand(SETPAGE);
-			}
-		});
+		currentPageBox.addActionListener(actionEvent -> executeCommand(SETPAGE));
 		add(currentPageBox);
 		add(totalNoOfPages);
 
@@ -78,11 +74,7 @@ public class NavigationToolbar extends JToolBar {
 		JButton button = new JButton();
 		button.setIcon(new ImageIcon(getClass().getResource(url)));
 		button.setToolTipText(tooltip);
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent actionEvent) {
-				executeCommand(type);
-			}
-		});
+		button.addActionListener(actionEvent -> executeCommand(type));
 
 		add(button);
 	}

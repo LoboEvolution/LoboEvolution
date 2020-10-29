@@ -42,12 +42,7 @@ import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
  */
 public abstract class PDFFont {
 
-    private static final FilenameFilter TTF_FILTER = new FilenameFilter() {
-        @Override
-		public boolean accept(File dir, String name) {
-            return name.toLowerCase().endsWith(".ttf");
-        }
-    };
+    private static final FilenameFilter TTF_FILTER = (dir, name) -> name.toLowerCase().endsWith(".ttf");
 
     private static Map<String,File> namedFontsToLocalTtfFiles = null;
 

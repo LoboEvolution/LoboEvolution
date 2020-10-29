@@ -241,7 +241,7 @@ public class XMLHttpRequest extends AbstractScriptableDelegate {
 		synchronized (this) {
 			this.onreadystatechange = value;
 			if (value != null && !this.listenerAdded) {
-				this.request.addReadyStateChangeListener(() -> executeReadyStateChange());
+				this.request.addReadyStateChangeListener(this::executeReadyStateChange);
 				this.listenerAdded = true;
 			}
 		}

@@ -212,7 +212,7 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 		if (isRollover != null) {
 			rolloverEnabled = isRollover;
 		}
-		SwingUtilities.invokeLater(() -> changeBorders());
+		SwingUtilities.invokeLater(this::changeBorders);
 	}
 
 	/**

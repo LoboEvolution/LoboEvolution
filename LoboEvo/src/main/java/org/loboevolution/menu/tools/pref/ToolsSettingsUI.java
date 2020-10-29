@@ -69,7 +69,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 
 	private void createAndShowGUI() {
 
-		final ItemEditorFactory<SearchEngineStore> factory = () -> new SearchEngineEditor();
+		final ItemEditorFactory<SearchEngineStore> factory = SearchEngineEditor::new;
 		this.searchEngineListControl = new ItemListControl<SearchEngineStore>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
 		

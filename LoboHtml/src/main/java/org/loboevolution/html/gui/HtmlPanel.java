@@ -174,7 +174,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		this.notificationTimer = new Timer(NOTIF_TIMER_DELAY, new NotificationTimerAction());
 		this.notificationTimer.setRepeats(false);
 		this.notificationListener = new LocalDocumentNotificationListener();
-		this.notificationImmediateAction = () -> processNotifications();
+		this.notificationImmediateAction = this::processNotifications;
 	}
 
 	private void addNotification(DocumentNotification notification) {
@@ -208,7 +208,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 		if (SwingUtilities.isEventDispatchThread()) {
 			clearDocumentImpl();
 		} else {
-			SwingUtilities.invokeLater(() -> HtmlPanel.this.clearDocumentImpl());
+			SwingUtilities.invokeLater(HtmlPanel.this::clearDocumentImpl);
 		}
 	}
 
