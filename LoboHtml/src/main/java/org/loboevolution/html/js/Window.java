@@ -522,7 +522,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Window getOpener() {
 		final HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
+		if (rcontext != null && rcontext.getOpener() != null) {
 			return Window.getWindow(rcontext.getOpener());
 		} else {
 			return null;
@@ -536,10 +536,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Window getParent() {
 		final HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
+		if (rcontext != null && rcontext.getParent() != null) {
 			return Window.getWindow(rcontext.getParent());
 		} else {
-			return null;
+			return this;
 		}
 	}
 
@@ -589,7 +589,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public Window getTop() {
 		final HtmlRendererContext rcontext = this.rcontext;
-		if (rcontext != null) {
+		if (rcontext != null && rcontext.getTop() != null) {
 			return Window.getWindow(rcontext.getTop());
 		} else {
 			return null;
