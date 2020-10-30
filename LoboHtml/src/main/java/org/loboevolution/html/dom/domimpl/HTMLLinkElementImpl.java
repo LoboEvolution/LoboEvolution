@@ -22,6 +22,7 @@ package org.loboevolution.html.dom.domimpl;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -182,7 +183,14 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 					String title = getAttribute("title");
 					URL baseURL = new URL(baseURI);
 					URL scriptURL = Urls.createURL(baseURL, href);
-					if (Strings.isBlank(title)) title = Paths.get(scriptURL.getPath()).getFileName().toString();
+					if (Strings.isBlank(title)) {
+						URI uri = scriptURL.toURI();
+						if(Urls.isLocalFile(scriptURL)){
+							title = Paths.get(uri).getFileName().toString();
+						} else {
+							title = new File(uri.getPath()).getName();
+						}
+					}
 
 					if (styles.size() == 0) {
 						style.insertStyle(title, href, currentUrl, isStyleSheet ? 1 : 0);
