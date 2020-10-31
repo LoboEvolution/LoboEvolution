@@ -85,8 +85,9 @@ public class CSSUtilities {
 		final StringTokenizer tok = new StringTokenizer(mediaValues, ",");
 		while (tok.hasMoreTokens()) {
 			final String token = tok.nextToken().trim();
-			final String mediaName = Strings.trimForAlphaNumDash(token);
-			if ("screen".equals(mediaName.trim())) {
+			String mediaName = Strings.trimForAlphaNumDash(token);
+			mediaName = mediaName.trim();
+			if ("screen".equals(mediaName) || "all".equals(mediaName) || "only".equals(mediaName)) {
 				try {
 					MediaQueryList media = window.matchMedia(mediaValues);
 					return media.isMatches();
