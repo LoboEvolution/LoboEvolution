@@ -23,31 +23,10 @@
  */
 package org.loboevolution.html.js;
 
-import java.awt.event.ActionListener;
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.WeakHashMap;
-import java.util.logging.Logger;
-
-import javax.swing.Timer;
-
 import org.loboevolution.html.dom.HTMLElement;
-import org.loboevolution.html.dom.domimpl.CommentImpl;
-import org.loboevolution.html.dom.domimpl.ElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLDivElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
-import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLIFrameElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLOptionElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLScriptElementImpl;
-import org.loboevolution.html.dom.domimpl.HTMLSelectElementImpl;
-import org.loboevolution.html.dom.domimpl.TextImpl;
+import org.loboevolution.html.dom.domimpl.*;
 import org.loboevolution.html.dom.xpath.XPathResultImpl;
+import org.loboevolution.html.js.css.MediaQueryList;
 import org.loboevolution.html.js.events.EventImpl;
 import org.loboevolution.html.js.events.MouseEventImpl;
 import org.loboevolution.html.js.events.UIEventImpl;
@@ -56,12 +35,7 @@ import org.loboevolution.html.js.storage.SessionStorage;
 import org.loboevolution.html.js.storage.Storage;
 import org.loboevolution.http.HtmlRendererContext;
 import org.loboevolution.http.UserAgentContext;
-import org.loboevolution.js.AbstractScriptableDelegate;
-import org.loboevolution.js.JavaClassWrapper;
-import org.loboevolution.js.JavaClassWrapperFactory;
-import org.loboevolution.js.JavaInstantiator;
-import org.loboevolution.js.JavaObjectWrapper;
-import org.loboevolution.js.JavaScript;
+import org.loboevolution.js.*;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
@@ -73,6 +47,17 @@ import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventException;
 import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
+
+import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.logging.Logger;
 
 /**
  * <p>Window class.</p>
@@ -1251,6 +1236,10 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
         return -1;
     }
+
+	public MediaQueryList matchMedia(final String mediaQueryString) {
+		return new MediaQueryList(this, mediaQueryString);
+	}
 
 	/**
 	 * @return the uaContext

@@ -22,14 +22,15 @@
 package org.loboevolution.html.style;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
 import org.loboevolution.common.Strings;
-import org.loboevolution.http.UserAgentContext;
+import org.loboevolution.html.js.Window;
+import org.loboevolution.html.js.css.MediaQueryList;
 import org.loboevolution.store.ExternalResourcesStore;
-import org.w3c.dom.stylesheets.MediaList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -65,53 +66,33 @@ public class CSSUtilities {
 		return is;
 	}
 
-	/**
-	 * <p>matchesMedia.</p>
-	 *
-	 * @param mediaList a {@link org.w3c.dom.stylesheets.MediaList} object.
-	 * @param rcontext a {@link org.loboevolution.http.UserAgentContext} object.
-	 * @return a boolean.
-	 */
-	public static boolean matchesMedia(MediaList mediaList, UserAgentContext rcontext) {
-		if (mediaList == null) {
-			return true;
-		}
-		final int length = mediaList.getLength();
-		if (length == 0) {
-			return true;
-		}
-		if (rcontext == null) {
-			return false;
-		}
-		for (int i = 0; i < length; i++) {
-			final String mediaName = mediaList.item(i);
-			if (rcontext.isMedia(mediaName)) {
-				return true;
-			}
-		}
-		return false;
+	public static MediaListImpl parseMedia(String mediaString) throws Exception {
+		final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+		return new MediaListImpl(parser.parseMedia(mediaString));
 	}
 
 	/**
 	 * <p>matchesMedia.</p>
 	 *
 	 * @param mediaValues a {@link java.lang.String} object.
-	 * @param rcontext a {@link org.loboevolution.http.UserAgentContext} object.
+	 * @param window a {@link org.loboevolution.html.js.Window} object.
 	 * @return a boolean.
 	 */
-	public static boolean matchesMedia(String mediaValues, UserAgentContext rcontext) {
-		if (mediaValues == null || mediaValues.length() == 0) {
+	public static boolean matchesMedia(String mediaValues, Window window) {
+		if (Strings.isBlank(mediaValues)) {
 			return true;
-		}
-		if (rcontext == null) {
-			return false;
 		}
 		final StringTokenizer tok = new StringTokenizer(mediaValues, ",");
 		while (tok.hasMoreTokens()) {
 			final String token = tok.nextToken().trim();
 			final String mediaName = Strings.trimForAlphaNumDash(token);
-			if (rcontext.isMedia(mediaName)) {
-				return true;
+			if ("screen".equals(mediaName.trim())) {
+				try {
+					MediaQueryList media = window.matchMedia(mediaValues);
+					return media.isMatches();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		return false;

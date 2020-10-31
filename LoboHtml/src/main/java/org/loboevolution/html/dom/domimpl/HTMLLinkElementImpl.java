@@ -202,7 +202,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 						final UserAgentContext uacontext = getUserAgentContext();
 						if (uacontext.isExternalCSSEnabled()) {
 							final String media = getMedia();
-							if (CSSUtilities.matchesMedia(media, uacontext)) {
+								if (CSSUtilities.matchesMedia(media, doc.getWindow())) {
 								final CSSStyleSheetImpl sheet = CSSUtilities.parseCssExternal(href, scriptURL, baseURI);
 								if (sheet != null) {
 									this.styleSheet = sheet;

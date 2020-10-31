@@ -557,29 +557,34 @@ public class StyleSheetAggregator {
 		}
 	}
 
-	private static boolean isActive(HTMLElement element, final MediaListImpl mediaList) {
-        if (mediaList.getLength() == 0) {
-            return true;
-        }
+	public static boolean isActive(Window window, final MediaListImpl mediaList) {
+		if (mediaList.getLength() == 0) {
+			return true;
+		}
 
-        for (int i = 0; i < mediaList.getLength(); i++) {
-            final MediaQuery mediaQuery = mediaList.mediaQuery(i);
-            boolean isActive = isActive(element, mediaQuery);
-            if (mediaQuery.isNot()) {
-                isActive = !isActive;
-            }
-            if (isActive) {
-                return true;
-            }
-        }
-        return false;
+		for (int i = 0; i < mediaList.getLength(); i++) {
+			final MediaQuery mediaQuery = mediaList.mediaQuery(i);
+			boolean isActive = isActive(window, mediaQuery);
+			if (mediaQuery.isNot()) {
+				isActive = !isActive;
+			}
+			if (isActive) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static boolean isActive(HTMLElement element, final MediaListImpl mediaList) {
+        HTMLElementImpl impl = (HTMLElementImpl) element;
+		final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
+		return isActive(document.getWindow(), mediaList);
     }
 	
-	private static boolean isActive(HTMLElement element, final MediaQuery mediaQuery) {
+	private static boolean isActive(Window window, final MediaQuery mediaQuery) {
 		final String mediaType = mediaQuery.getMedia();
 		if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
-			HTMLElementImpl impl = (HTMLElementImpl) element;
-			final HTMLDocumentImpl document = (HTMLDocumentImpl) impl.getDocumentNode();
+
 			for (final Property property : mediaQuery.getProperties()) {
 				final int val;
 				final String value;
@@ -589,7 +594,7 @@ public class StyleSheetAggregator {
 					case "max-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val < document.getWindow().getInnerWidth()) {
+					if (val == -1 || val < window.getInnerWidth()) {
 						return false;
 					}
 					break;
@@ -599,7 +604,7 @@ public class StyleSheetAggregator {
 					case "min-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val > document.getWindow().getInnerWidth()) {
+					if (val == -1 || val > window.getInnerWidth()) {
 						return false;
 					}
 					break;
@@ -609,7 +614,7 @@ public class StyleSheetAggregator {
 					case "max-device-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val < document.getWindow().getScreen().getWidth()) {
+					if (val == -1 || val < window.getScreen().getWidth()) {
 						return false;
 					}
 					break;
@@ -619,7 +624,7 @@ public class StyleSheetAggregator {
 					case "min-device-height":
 						value = String.valueOf(property.getValue().getDoubleValue());
 					val = HtmlValues.getPixelSize(value, null, -1);
-					if (val == -1 || val > document.getWindow().getScreen().getWidth()) {
+					if (val == -1 || val > window.getScreen().getWidth()) {
 						return false;
 					}
 					break;
@@ -630,21 +635,21 @@ public class StyleSheetAggregator {
 					if (propValue == null) {
 						return true;
 					}
-					if (val == -1 || Math.round(val) != document.getWindow().getScreen().getPixelDepth()) {
+					if (val == -1 || Math.round(val) != window.getScreen().getPixelDepth()) {
 						return false;
 					}
 					break;
 
 				case "max-resolution":
 					val = HtmlValues.resolutionValue(property.getValue());
-					if (val == -1 || val < document.getWindow().getScreen().getPixelDepth()) {
+					if (val == -1 || val < window.getScreen().getPixelDepth()) {
 						return false;
 					}
 					break;
 
 				case "min-resolution":
 					val = HtmlValues.resolutionValue(property.getValue());
-					if (val == -1 || val > document.getWindow().getScreen().getPixelDepth()) {
+					if (val == -1 || val > window.getScreen().getPixelDepth()) {
 						return false;
 					}
 					break;
@@ -656,9 +661,8 @@ public class StyleSheetAggregator {
 					}
 
 					final String orient = cssValue.getCssText();
-					final Window window = document.getWindow();
 					if ("portrait".equals(orient)) {
-						if (document.getWindow().getInnerWidth() > window.getInnerHeight()) {
+						if (window.getInnerWidth() > window.getInnerHeight()) {
 							return false;
 						}
 					} else if ("landscape".equals(orient)) {

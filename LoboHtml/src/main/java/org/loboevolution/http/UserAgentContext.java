@@ -1,14 +1,12 @@
 package org.loboevolution.http;
 
-import java.net.Proxy;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import org.loboevolution.net.Cookie;
 import org.loboevolution.store.CookieStore;
 import org.loboevolution.store.GeneralStore;
+
+import java.net.Proxy;
+import java.net.URL;
+import java.util.List;
 
 /**
  * <p>UserAgentContext class.</p>
@@ -83,20 +81,5 @@ public class UserAgentContext {
 	 */
 	public void setCookie(URL url, String cookieSpec) {
 		CookieStore.saveCookie(url.toString(), cookieSpec);
-	}
-	
-	/**
-	 * <p>isMedia.</p>
-	 *
-	 * @param mediaName a {@link java.lang.String} object.
-	 * @return a boolean.
-	 */
-	public boolean isMedia(String mediaName) {
-		final Set<String> mediaNames = new HashSet<String>();
-		mediaNames.add("screen");
-		mediaNames.add("tv");
-		mediaNames.add("tty");
-		mediaNames.add("all");
-		return mediaNames.contains(mediaName.toLowerCase());
 	}
 }

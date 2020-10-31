@@ -90,11 +90,11 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 	 */
 	protected void processStyle() {
 		this.styleSheet = null;
-		if (CSSUtilities.matchesMedia(getMedia(), getUserAgentContext())) {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
+		if (CSSUtilities.matchesMedia(getMedia(), doc.getWindow())) {
 			final String text = getRawInnerText(true);
 			if (Strings.isNotBlank(text)) {
 				final String processedText = CSSUtilities.preProcessCss(text);
-				final HTMLDocumentImpl doc = (HTMLDocumentImpl) getOwnerDocument();
                 final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
 				final String baseURI = doc.getBaseURI();
 				final InputSource is = CSSUtilities.getCssInputSourceForStyleSheet(processedText, baseURI);
