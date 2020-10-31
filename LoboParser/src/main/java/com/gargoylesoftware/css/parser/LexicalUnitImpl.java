@@ -231,6 +231,16 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 return "rem";
             case EX:
                 return "ex";
+            case CH:
+                return "ch";
+            case VW:
+                return "vw";
+            case VH:
+                return "vh";
+            case VMIN:
+                return "vmin";
+            case VMAX:
+                return "vmax";
             case PIXEL:
                 return "px";
             case INCH:
@@ -344,6 +354,11 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
             case EM:
             case REM:
             case EX:
+            case CH:
+            case VW:
+            case VH:
+            case VMIN:
+            case VMAX:
             case PIXEL:
             case INCH:
             case CENTIMETER:
@@ -508,6 +523,36 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
                 break;
             case EX:
                 sb.append("EX(")
+                    .append(getTrimedDoubleValue())
+                    .append(getDimensionUnitText())
+                    .append(")");
+                break;
+            case CH:
+                sb.append("CH(")
+                    .append(getTrimedDoubleValue())
+                    .append(getDimensionUnitText())
+                    .append(")");
+                break;
+            case VW:
+                sb.append("VW(")
+                    .append(getTrimedDoubleValue())
+                    .append(getDimensionUnitText())
+                    .append(")");
+                break;
+            case VH:
+                sb.append("VH(")
+                    .append(getTrimedDoubleValue())
+                    .append(getDimensionUnitText())
+                    .append(")");
+                break;
+            case VMIN:
+                sb.append("VMIN(")
+                    .append(getTrimedDoubleValue())
+                    .append(getDimensionUnitText())
+                    .append(")");
+                break;
+            case VMAX:
+                sb.append("VMAX(")
                     .append(getTrimedDoubleValue())
                     .append(getDimensionUnitText())
                     .append(")");
@@ -804,6 +849,51 @@ public class LexicalUnitImpl extends AbstractLocatable implements LexicalUnit, S
      */
     public static LexicalUnit createEx(final LexicalUnit prev, final double d) {
         return new LexicalUnitImpl(prev, LexicalUnitType.EX, d);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param d the double value
+     * @return lexical unit with type ch
+     */
+    public static LexicalUnit createCh(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.CH, d);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param d the double value
+     * @return lexical unit with type vw
+     */
+    public static LexicalUnit createVw(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.VW, d);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param d the double value
+     * @return lexical unit with type vh
+     */
+    public static LexicalUnit createVh(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.VH, d);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param d the double value
+     * @return lexical unit with type vmin
+     */
+    public static LexicalUnit createVMin(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.VMIN, d);
+    }
+
+    /**
+     * @param prev the previous LexicalUnit
+     * @param d the double value
+     * @return lexical unit with type vmax
+     */
+    public static LexicalUnit createVMax(final LexicalUnit prev, final double d) {
+        return new LexicalUnitImpl(prev, LexicalUnitType.VMAX, d);
     }
 
     /**
