@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.download.DownloadWindow;
 import org.loboevolution.menu.MenuBar;
 import org.loboevolution.store.GeneralStore;
 import org.loboevolution.store.StyleStore;
@@ -132,5 +133,10 @@ public class BrowserFrame extends JFrame implements IBrowserFrame {
 	 */
 	public void setToolbar(ToolBar toolbar) {
 		this.toolbar = toolbar;
+	}
+
+	@Override
+	public IDownload getDownload() {
+		return new DownloadWindow();
 	}
 }

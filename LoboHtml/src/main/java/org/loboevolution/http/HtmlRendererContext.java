@@ -612,11 +612,11 @@ public class HtmlRendererContext {
 		}
 		HtmlContextMenu menu = new HtmlContextMenu(element, this);
 		if (element instanceof HTMLImageElementImpl) {
-			JPopupMenu popupMenuImage = menu.popupMenuImage();
+			JPopupMenu popupMenuImage = menu.popupMenuImage(htmlPanel.getBrowserPanel());
 			popupMenuImage.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		} else if (element instanceof HTMLLinkElementImpl) {
-			JPopupMenu popupMenuLink = menu.popupMenuLink();
+			JPopupMenu popupMenuLink = menu.popupMenuLink(htmlPanel.getBrowserPanel());
 			popupMenuLink.show(event.getComponent(), event.getX(), event.getY());
 			return false;
 		} else if (element instanceof HTMLAbstractUIElement) {

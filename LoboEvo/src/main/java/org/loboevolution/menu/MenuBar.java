@@ -13,6 +13,7 @@ import org.loboevolution.component.BrowserFrame;
 import org.loboevolution.menu.bookmarks.AddBookmarkAction;
 import org.loboevolution.menu.bookmarks.ShowBookmarksAction;
 import org.loboevolution.menu.crono.ShowPasswordAction;
+import org.loboevolution.menu.crono.ShowRecentDownloadAction;
 import org.loboevolution.menu.crono.ShowRecentHostsAction;
 import org.loboevolution.menu.file.OpenFileAction;
 import org.loboevolution.menu.file.SaveFileAction;
@@ -68,6 +69,7 @@ public class MenuBar extends JMenuBar {
 	public JMenu getChronologyMenu(BrowserFrame frame) {
 		final JMenu menu = new JMenu("Recent");
 		menu.add(menuItem("Hosts", new ShowRecentHostsAction(frame)));
+		menu.add(menuItem("Download", new ShowRecentDownloadAction(frame)));
 		menu.add(menuItem("Bookmarks", new ShowBookmarksAction(frame, 20)));
 		menu.add(menuItem("Password Manager", new ShowPasswordAction(frame, 20)));
 		return menu;

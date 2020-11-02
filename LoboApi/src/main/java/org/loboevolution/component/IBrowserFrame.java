@@ -22,4 +22,11 @@ public interface IBrowserFrame {
 	 */
 	IBrowserPanel getPanel();
 
+
+	/**
+	 * <p>getDownload.</p>
+	 *
+	 * @return a {@link org.loboevolution.component.IDownload} object.
+	 */
+	IDownload getDownload();
 }
