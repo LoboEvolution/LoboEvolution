@@ -21,6 +21,7 @@
 package org.loboevolution.html.gui;
 
 import org.loboevolution.common.Strings;
+import org.loboevolution.common.Urls;
 import org.loboevolution.component.IBrowserPanel;
 import org.loboevolution.component.IDownload;
 import org.loboevolution.html.dom.HTMLElement;
@@ -143,7 +144,8 @@ public class HtmlContextMenu {
 			try {
 				IDownload d = bpanel.getBrowserFrame().getDownload();
 				if (!href.contains(";base64,")) {
-					d.downloadFile(new URL(href));
+					URL scriptURL = Urls.createURL(new URL(img.getBaseURI()), href);
+					d.downloadFile(scriptURL);
 				} else {
 					final String base64 = href.split(";base64,")[1];
 					byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
