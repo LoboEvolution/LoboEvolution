@@ -2085,4 +2085,18 @@ public class RBlockViewport extends BaseRCollection {
 		}
 		return (int) maxX;
 	}
+
+	public void positionDelayed() {
+		final Collection<DelayedPair> delayedPairs = container.getDelayedPairs();
+		if ((delayedPairs != null) && (delayedPairs.size() > 0)) {
+			// Add positioned renderables that belong here
+			final Iterator<DelayedPair> i = delayedPairs.iterator();
+			while (i.hasNext()) {
+				final DelayedPair pair = i.next();
+				if (pair.getContainingBlock() == container) {
+					this.importDelayedPair(pair);
+				}
+			}
+		}
+	}
 }

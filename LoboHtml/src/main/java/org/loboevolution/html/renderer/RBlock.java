@@ -307,6 +307,8 @@ public class RBlock extends BaseElementRenderable {
 		this.hasHScrollBar = value.hasHScrollBar;
 		this.hasVScrollBar = value.hasVScrollBar;
 
+		bodyLayout.positionDelayed();
+
 		// Even if we didn't do layout, the parent is
 		// expected to have removed its GUI components.
 		sendGUIComponentsToParent();
