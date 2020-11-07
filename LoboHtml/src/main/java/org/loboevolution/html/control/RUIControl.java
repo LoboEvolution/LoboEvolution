@@ -23,11 +23,7 @@
  */
 package org.loboevolution.html.control;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -151,20 +147,21 @@ public class RUIControl extends BaseElementRenderable {
 		if (layoutValue == null) {
 			this.applyStyle(availWidth, availHeight);
 			final RenderState renderState = this.modelNode.getRenderState();
-			Insets paddingInsets = this.paddingInsets;
-			if (paddingInsets == null) {
-				paddingInsets = RBlockViewport.ZERO_INSETS;
-			}
-			Insets borderInsets = this.borderInsets;
-			if (borderInsets == null) {
-				borderInsets = RBlockViewport.ZERO_INSETS;
-			}
-			Insets marginInsets = this.marginInsets;
-			if (marginInsets == null) {
-				marginInsets = RBlockViewport.ZERO_INSETS;
-			}
-			final int actualAvailWidth = availWidth - paddingInsets.left - paddingInsets.right - borderInsets.left - borderInsets.right - marginInsets.left - marginInsets.right;
-			final int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top - borderInsets.bottom - marginInsets.top - marginInsets.bottom;
+
+			Insets paddingInsets = this.paddingInsets == null ? RBlockViewport.ZERO_INSETS : this.paddingInsets;
+			Insets borderInsets = this.borderInsets == null ? RBlockViewport.ZERO_INSETS : this.borderInsets;
+			Insets marginInsets = this.marginInsets == null ? RBlockViewport.ZERO_INSETS : this.marginInsets;
+
+			final int paddingWidth = paddingInsets.left - paddingInsets.right;
+			final int borderWidth = borderInsets.left - borderInsets.right;
+			final int marginWidth = marginInsets.left - marginInsets.right;
+
+			final int paddingHeight = paddingInsets.top - paddingInsets.bottom;
+			final int borderHeight = borderInsets.top - borderInsets.bottom;
+			final int marginHeight = marginInsets.top - marginInsets.bottom;
+
+			final int actualAvailWidth = availWidth - paddingWidth - borderWidth - marginWidth;
+			final int actualAvailHeight = availHeight - paddingHeight - borderHeight - marginHeight;
 			final Integer dw = this.getDeclaredWidth(renderState, actualAvailWidth);
 			final Integer dh = this.getDeclaredHeight(renderState, actualAvailHeight);
 			final int declaredWidth = dw == null ? -1 : dw;
@@ -177,19 +174,19 @@ public class RUIControl extends BaseElementRenderable {
 			final Insets insets = this.getInsets(false, false);
 			int finalWidth = declaredWidth == -1 ? -1 : declaredWidth + insets.left + insets.right;
 			int finalHeight = declaredHeight == -1 ? -1 : declaredHeight + insets.top + insets.bottom;
-			if ((finalWidth == -1) || (finalHeight == -1)) {
-				final Dimension size = widget.getPreferredSize();
-				if (finalWidth == -1) {
-					finalWidth = size.width + insets.left + insets.right;
-				}
-				if (finalHeight == -1) {
-					finalHeight = size.height + insets.top + insets.bottom;
-				}
+
+			final Dimension size = widget.getPreferredSize();
+			if (finalWidth == -1) {
+				finalWidth = size.width + insets.left + insets.right;
 			}
+			if (finalHeight == -1) {
+				finalHeight = size.height + insets.top + insets.bottom;
+			}
+
 			layoutValue = new LayoutValue(finalWidth, finalHeight);
+
 			if (sizeOnly) {
 				if (cachedLayout.size() > MAX_CACHE_SIZE) {
-					// Unlikely, but we should ensure it's bounded.
 					cachedLayout.clear();
 				}
 				cachedLayout.put(layoutKey, layoutValue);
@@ -216,7 +213,7 @@ public class RUIControl extends BaseElementRenderable {
 	@Override
 	public void focus() {
 		super.focus();
-		final java.awt.Component c = this.widget.getComponent();
+		final Component c = this.widget.getComponent();
 		c.requestFocus();
 	}
 
@@ -283,19 +280,6 @@ public class RUIControl extends BaseElementRenderable {
 		this.lastLayoutValue = null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.loboevolution.html.rendered.BoundableRenderable#invalidateState(org.loboevolution.html.rendered.RenderableContext)
-	 */
-	/**
-	 * <p>invalidateRenderStyle.</p>
-	 */
-	public void invalidateRenderStyle() {
-		// NOP - No RenderStyle below this node.
-	}
-
 	/** {@inheritDoc} */
 	@Override
 	public final void paint(final Graphics g) {
@@ -331,14 +315,12 @@ public class RUIControl extends BaseElementRenderable {
 		inSelection = super.paintSelection(g, inSelection, startPoint, endPoint);
 		if (inSelection) {
 			final Color over = new Color(0, 0, 255, 50);
-			if (over != null) {
-				final Color oldColor = g.getColor();
-				try {
-					g.setColor(over);
-					g.fillRect(0, 0, this.width, this.height);
-				} finally {
-					g.setColor(oldColor);
-				}
+			final Color oldColor = g.getColor();
+			try {
+				g.setColor(over);
+				g.fillRect(0, 0, this.width, this.height);
+			} finally {
+				g.setColor(oldColor);
 			}
 		}
 		return inSelection;

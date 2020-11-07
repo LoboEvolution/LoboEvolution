@@ -124,7 +124,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	public Component addComponent(Component component) {
 		Collection<Component> gc = this.guiComponents;
 		if (gc == null) {
-			gc = new HashSet<Component>(1);
+			gc = new HashSet<>(1);
 			this.guiComponents = gc;
 		}
 		gc.add(component);
@@ -150,7 +150,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	public void addDelayedPair(DelayedPair pair) {
 		List<DelayedPair> gc = this.delayedPairs;
 		if (gc == null) {
-			gc = new LinkedList<DelayedPair>();
+			gc = new LinkedList<>();
 			this.delayedPairs = gc;
 		}
 		gc.add(pair);
@@ -163,14 +163,10 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @param availHeight a int.
 	 */
 	protected void applyStyle(int availWidth, int availHeight) {
-		// TODO: Can be optimized if there's no style?
-		// TODO: There's part of this that doesn't depend on availWidth
-		// and availHeight, so it doesn't need to be redone on
-		// every resize.
-		// Note: Overridden by tables and lists.
 		final Object rootNode = this.modelNode;
 		HTMLElementImpl rootElement;
 		boolean isRootBlock;
+
 		if (rootNode instanceof HTMLDocumentImpl) {
 			isRootBlock = true;
 			final HTMLDocumentImpl doc = (HTMLDocumentImpl) rootNode;
@@ -188,10 +184,27 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			throw new IllegalStateException(
 					"Element without render state: " + rootElement + "; parent=" + rootElement.getParentNode());
 		}
-		
-		binfo = rs.getBackgroundInfo();	
-        this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
-		final URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();		
+
+		backgroundApplyStyle(rs);
+
+		final AbstractCSSProperties props = rootElement.getCurrentStyle();
+		if (props == null) {
+			clearStyle(isRootBlock);
+		} else {
+
+			insetsApplyStyle(rs, availWidth, availHeight, isRootBlock);
+
+			zIndexApplyStyle(props);
+
+			this.overflowX = rs.getOverflowX();
+			this.overflowY = rs.getOverflowY();
+		}
+	}
+
+	private void backgroundApplyStyle(RenderState rs) {
+		binfo = rs.getBackgroundInfo();
+		this.backgroundColor = binfo == null ? null : binfo.getBackgroundColor();
+		final URL backgroundImageUri = binfo == null ? null : binfo.getBackgroundImage();
 		if (backgroundImageUri == null) {
 			this.backgroundImage = null;
 			this.lastBackgroundImageUri = null;
@@ -206,95 +219,133 @@ public abstract class BaseElementRenderable extends BaseRCollection
 				}
 			}
 		}
-		final AbstractCSSProperties props = rootElement.getCurrentStyle();
-		if (props == null) {
-			clearStyle(isRootBlock);
-		} else {
-			final BorderInfo borderInfo = rs.getBorderInfo();
-			this.borderInfo = borderInfo;
-			final HtmlInsets binsets = borderInfo == null ? null : (HtmlInsets)borderInfo.getInsets();
-			final HtmlInsets minsets = rs.getMarginInsets();
-			final HtmlInsets pinsets = rs.getPaddingInsets();
-			int dpleft = 0, dpright = 0, dptop = 0, dpbottom = 0;
-			int dmleft = 0, dmright = 0, dmtop = 0, dmbottom = 0;
+	}
 
-			Insets borderInsets = binsets == null ? null : binsets.getAWTInsets(0, 0, 0, 0, availWidth, availHeight, 0, 0);
-			if (borderInsets == null) {
-				borderInsets = RBlockViewport.ZERO_INSETS;
-			}
-			Insets paddingInsets = pinsets == null ? null : pinsets.getAWTInsets(dptop, dpleft, dpbottom, dpright, availWidth, availHeight, 0, 0);
-			
-			if (paddingInsets == null) {
-				paddingInsets = RBlockViewport.ZERO_INSETS;
-			}
-	        Insets tentativeMarginInsets = minsets == null ? null : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, 0, 0);
-			if (tentativeMarginInsets == null) {
-				tentativeMarginInsets = RBlockViewport.ZERO_INSETS;
-			}
-			final int actualAvailWidth = availWidth - paddingInsets.left - paddingInsets.right - borderInsets.left
-					- borderInsets.right - tentativeMarginInsets.left - tentativeMarginInsets.right;
-			final int actualAvailHeight = availHeight - paddingInsets.top - paddingInsets.bottom - borderInsets.top
-					- borderInsets.bottom - tentativeMarginInsets.top - tentativeMarginInsets.bottom;
-			final Integer declaredWidth = getDeclaredWidth(rs, actualAvailWidth);
-			final Integer declaredHeight = getDeclaredHeight(rs, actualAvailHeight);
-			int autoMarginX = 0, autoMarginY = 0;
-			if (declaredWidth != null) {
-				autoMarginX = (availWidth - declaredWidth
-						- (borderInsets == null ? 0 : borderInsets.left - borderInsets.right)
-						- (paddingInsets == null ? 0 : paddingInsets.left - paddingInsets.right)) / 2;
-			}
-			if (declaredHeight != null) {
-				autoMarginY = (availHeight - declaredHeight
-						- (borderInsets == null ? 0 : borderInsets.top - borderInsets.bottom)
-						- (paddingInsets == null ? 0 : paddingInsets.top - paddingInsets.bottom)) / 2;
-			}
-			this.borderInsets = borderInsets;
-			if (isRootBlock) {
-				// In the root block, the margin behaves like an extra padding.
-				Insets regularMarginInsets = autoMarginX == 0 && autoMarginY == 0 ? tentativeMarginInsets
-						: (minsets == null ? null : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY));
+	private void insetsApplyStyle(RenderState rs, int availWidth, int availHeight, boolean isRootBlock) {
 
-				if (regularMarginInsets == null) {
-					regularMarginInsets = RBlockViewport.ZERO_INSETS;
-				}
-				this.marginInsets = null;
-				this.paddingInsets = new Insets(paddingInsets.top + regularMarginInsets.top,
-						paddingInsets.left + regularMarginInsets.left,
-						paddingInsets.bottom + regularMarginInsets.bottom,
-						paddingInsets.right + regularMarginInsets.right);
-			} else {
-				this.paddingInsets = paddingInsets;
-				this.marginInsets = ((autoMarginX == 0) && (autoMarginY == 0)) ? tentativeMarginInsets : (minsets == null ? null
-			              : minsets.getAWTInsets(dmtop, dmleft, dmbottom, dmright, availWidth, availHeight, autoMarginX, autoMarginY));
-			}
-			if (borderInfo != null) {
-				this.borderTopColor = borderInfo.getTopColor();
-				this.borderLeftColor = borderInfo.getLeftColor();
-				this.borderBottomColor = borderInfo.getBottomColor();
-				this.borderRightColor = borderInfo.getRightColor();
-			} else {
-				this.borderTopColor = null;
-				this.borderLeftColor = null;
-				this.borderBottomColor = null;
-				this.borderRightColor = null;
-			}
-			final String zIndex = props.getZIndex();
-			if (zIndex != null) {
-				try {
-					this.zIndex = Integer.parseInt(zIndex);
-				} catch (final NumberFormatException err) {
-					logger.log(Level.WARNING,
-							"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
-					this.zIndex = 0;
-				}
-			} else {
-				this.zIndex = 0;
-			}
-			this.overflowX = rs.getOverflowX();
-			this.overflowY = rs.getOverflowY();
+		Insets borderInsets = borderInsets(rs,availWidth, availHeight);
+		Insets paddingInsets = paddingInsets(rs,availWidth, availHeight);
+		Insets tentativeMarginInsets = marginInsets(rs,availWidth, availHeight);
+
+		final int paddingWidth = paddingInsets.left - paddingInsets.right;
+		final int borderWidth = borderInsets.left - borderInsets.right;
+		final int marginWidth = tentativeMarginInsets.left - tentativeMarginInsets.right;
+
+		final int paddingHeight = paddingInsets.top - paddingInsets.bottom;
+		final int borderHeight = borderInsets.top - borderInsets.bottom;
+		final int marginHeight = tentativeMarginInsets.top - tentativeMarginInsets.bottom;
+
+		final int actualAvailWidth = availWidth - paddingWidth - borderWidth - marginWidth;
+		final int actualAvailHeight = availHeight - paddingHeight - borderHeight - marginHeight;
+		final Integer declaredWidth = getDeclaredWidth(rs, actualAvailWidth);
+		final Integer declaredHeight = getDeclaredHeight(rs, actualAvailHeight);
+
+		int autoMarginX = 0;
+		int autoMarginY = 0;
+
+		if (declaredWidth != null) {
+			final int borderx = borderInsets.left - borderInsets.right;
+			final int paddingx = paddingInsets.left - paddingInsets.right;
+			autoMarginX = (availWidth - declaredWidth - borderx  - paddingx) / 2;
+		}
+		if (declaredHeight != null) {
+			final int bordery = borderInsets.top - borderInsets.bottom;
+			final int paddingy = paddingInsets.top - paddingInsets.bottom;
+			autoMarginY = (availHeight - declaredHeight - bordery - paddingy) / 2;
 		}
 
-		// Check if background image needs to be loaded
+		HtmlInsets minsets = rs.getMarginInsets();
+
+		if (isRootBlock) {
+			Insets regularMarginInsets = RBlockViewport.ZERO_INSETS;
+
+			if (autoMarginX == 0 && autoMarginY == 0) {
+				regularMarginInsets = tentativeMarginInsets;
+			} else if (minsets != null) {
+				regularMarginInsets = minsets.getAWTInsets(availWidth, availHeight, autoMarginX, autoMarginY);
+			}
+
+			final int top = paddingInsets.top + regularMarginInsets.top;
+			final int left = paddingInsets.left + regularMarginInsets.left;
+			final int bottom = paddingInsets.top + regularMarginInsets.bottom;
+			final int right = paddingInsets.top + regularMarginInsets.right;
+
+			this.paddingInsets = new Insets(top, left, bottom, right);
+			this.marginInsets = null;
+		} else {
+			this.paddingInsets = paddingInsets;
+			this.marginInsets = RBlockViewport.ZERO_INSETS;
+
+			if (autoMarginX == 0 && autoMarginY == 0) {
+				this.marginInsets = tentativeMarginInsets;
+			} else if (minsets != null) {
+				this.marginInsets = minsets.getAWTInsets(availWidth, availHeight, autoMarginX, autoMarginY);
+			}
+		}
+	}
+
+	private Insets borderInsets(RenderState rs, int availWidth, int availHeight) {
+		Insets ins = null;
+		final BorderInfo borderInfo = rs.getBorderInfo();
+		this.borderInfo = borderInfo;
+
+		if (borderInfo != null) {
+			HtmlInsets html = (HtmlInsets) borderInfo.getInsets();
+			if (html == null) {
+				ins = RBlockViewport.ZERO_INSETS;
+			} else {
+				ins = html.getAWTInsets(availWidth, availHeight, 0, 0);
+			}
+
+			this.borderTopColor = borderInfo.getTopColor();
+			this.borderLeftColor = borderInfo.getLeftColor();
+			this.borderBottomColor = borderInfo.getBottomColor();
+			this.borderRightColor = borderInfo.getRightColor();
+		} else {
+			this.borderTopColor = null;
+			this.borderLeftColor = null;
+			this.borderBottomColor = null;
+			this.borderRightColor = null;
+		}
+		this.borderInsets = ins;
+		return ins;
+	}
+
+	private Insets marginInsets(RenderState rs, int availWidth, int availHeight) {
+		Insets ins;
+		HtmlInsets html = rs.getMarginInsets();
+		if (html == null) {
+			ins = RBlockViewport.ZERO_INSETS;
+		} else {
+			ins = html.getAWTInsets(availWidth, availHeight, 0, 0);
+		}
+		return ins;
+	}
+
+	private Insets paddingInsets(RenderState rs, int availWidth, int availHeight) {
+		Insets ins;
+		HtmlInsets html = rs.getPaddingInsets();
+		if (html == null) {
+			ins = RBlockViewport.ZERO_INSETS;
+		} else {
+			ins = html.getAWTInsets(availWidth, availHeight, 0, 0);
+		}
+		return ins;
+	}
+
+	private void zIndexApplyStyle(AbstractCSSProperties props) {
+		final String zIndex = props.getZIndex();
+		if (zIndex != null) {
+			try {
+				this.zIndex = Integer.parseInt(zIndex);
+			} catch (final NumberFormatException err) {
+				logger.log(Level.WARNING,
+						"Unable to parse z-index [" + zIndex + "] in element " + this.modelNode + ".", err);
+				this.zIndex = 0;
+			}
+		} else {
+			this.zIndex = 0;
+		}
 	}
 
 	/** {@inheritDoc} */
@@ -466,7 +517,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	protected Integer getDeclaredHeight(RenderState renderState, int actualAvailHeight) {
 		Integer dh = this.declaredHeight;
-		if (dh == INVALID_SIZE || actualAvailHeight != this.lastAvailHeightForDeclared) {
+		if (INVALID_SIZE.equals(dh) || actualAvailHeight != this.lastAvailHeightForDeclared) {
 			this.lastAvailHeightForDeclared = actualAvailHeight;
 			final int dhInt = getDeclaredHeightImpl(renderState, actualAvailHeight);
 			dh = dhInt == -1 ? null : dhInt;
@@ -482,7 +533,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * @param availHeight a int.
 	 * @return a int.
 	 */
-	protected int getDeclaredHeightImpl(RenderState renderState, int availHeight) {
+	private int getDeclaredHeightImpl(RenderState renderState, int availHeight) {
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
@@ -501,11 +552,11 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			int height = -1;
 
 			if (heightText != null) {
-				height = HtmlValues.getPixelSize(heightText, element.getRenderState(), -1, availHeight);
+				height = HtmlValues.getPixelSize(heightText, renderState, -1, availHeight);
 			}
 
 			if (props.getMaxHeight() != null) {
-				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), element.getRenderState(), -1, availHeight);
+				int maxHeight = HtmlValues.getPixelSize(props.getMaxHeight(), renderState, -1, availHeight);
 
 				if (height == 0 || height > maxHeight) {
 					height = maxHeight;
@@ -513,7 +564,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 
 			if (props.getMinHeight() != null) {
-				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), element.getRenderState(), -1, availHeight);
+				int minHeight = HtmlValues.getPixelSize(props.getMinHeight(), renderState, -1, availHeight);
 
 				if (height == 0 || height < minHeight) {
 					height = minHeight;
@@ -535,7 +586,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	protected Integer getDeclaredWidth(RenderState renderState, int actualAvailWidth) {
 		Integer dw = this.declaredWidth;
-		if (dw == INVALID_SIZE || actualAvailWidth != this.lastAvailWidthForDeclared) {
+		if (INVALID_SIZE.equals(dw) || actualAvailWidth != this.lastAvailWidthForDeclared) {
 			this.lastAvailWidthForDeclared = actualAvailWidth;
 			final int dwInt = getDeclaredWidthImpl(renderState, actualAvailWidth);
 			dw = dwInt == -1 ? null : dwInt;
@@ -544,7 +595,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		return dw;
 	}
 
-	private final int getDeclaredWidthImpl(RenderState renderState, int availWidth) {
+	private int getDeclaredWidthImpl(RenderState renderState, int availWidth) {
 		Object rootNode = this.modelNode;
 		if (rootNode instanceof HTMLElementImpl) {
 			HTMLElementImpl element = (HTMLElementImpl) rootNode;
@@ -720,7 +771,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 */
 	public final boolean hasDeclaredWidth() {
 		final Integer dw = this.declaredWidth;
-		if (dw == INVALID_SIZE) {
+		if (INVALID_SIZE.equals(dw)) {
 			final Object rootNode = this.modelNode;
 			if (rootNode instanceof HTMLElementImpl) {
 				final HTMLElementImpl element = (HTMLElementImpl) rootNode;
@@ -732,7 +783,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 			}
 			return false;
 		}
-		return dw != null;
+		return true;
 	}
 
 	/** {@inheritDoc} */
@@ -845,244 +896,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	  }
 
 	/**
-	 * <p>prePaint.</p>
-	 *
-	 * @param g a {@link java.awt.Graphics} object.
-	 */
-	protected void prePaint(Graphics g) {
-		final int startWidth = this.width;
-		final int startHeight = this.height;
-		int totalWidth = startWidth;
-		int totalHeight = startHeight;
-		int startX = 0;
-		int startY = 0;
-		final ModelNode node = this.modelNode;
-		
-		final RenderState rs = node.getRenderState();
-		final Insets marginInsets = this.marginInsets;
-		if (marginInsets != null) {
-			totalWidth -= marginInsets.left + marginInsets.right;
-			totalHeight -= marginInsets.top + marginInsets.bottom;
-			startX += marginInsets.left;
-			startY += marginInsets.top;
-		}
-		final Insets borderInsets = this.borderInsets;
-
-		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
-		try {
-			Rectangle bkgBounds = null;
-			if (node != null) {
-				final Color bkg = this.backgroundColor;
-				if (bkg != null && bkg.getAlpha() > 0) {
-					clientG.setColor(bkg);
-					bkgBounds = clientG.getClipBounds();
-					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
-				}
-				
-				if(binfo == null) {
-					binfo = rs == null ? null : rs.getBackgroundInfo();
-				}				
-				
-				final Image image = this.backgroundImage;
-				if (image != null) {
-					if (bkgBounds == null) {
-						bkgBounds = clientG.getClipBounds();
-					}
-					final int w = image.getWidth(this);
-					final int h = image.getHeight(this);
-					if (w != -1 && h != -1) {
-						
-			            final int imageY = getImageY(totalHeight, binfo, h);
-			            final int imageX = getImageX(totalWidth, binfo, w);
-
-			            final int baseX = (bkgBounds.x / w) * w - (w - imageX);
-			            final int baseY = (bkgBounds.y / h) * h - (h - imageY);
-			            
-			            final int topX = bkgBounds.x + bkgBounds.width;
-			            final int topY = bkgBounds.y + bkgBounds.height;
-			            
-			            switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
-						case BackgroundInfo.BR_NO_REPEAT:
-							int _imageX;
-							if (binfo.isBackgroundXPositionAbsolute()) {
-								_imageX = binfo.getBackgroundXPosition();
-							} else {
-								_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
-							}
-							int _imageY;
-							if (binfo.isBackgroundYPositionAbsolute()) {
-								_imageY = binfo.getBackgroundYPosition();
-							} else {
-								_imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
-							}
-							g.drawImage(image, _imageX, _imageY, w, h, this);
-							break;
-	
-							case BackgroundInfo.BR_REPEAT_X:
-	
-								for (int x = baseX; x < topX; x += w) {
-									clientG.drawImage(image, x, imageY, w, h, this);
-								}
-								break;
-	
-							case BackgroundInfo.BR_REPEAT_Y:
-	
-								for (int y = baseY; y < topY; y += h) {
-									clientG.drawImage(image, imageX, y, w, h, this);
-								}
-								break;
-	
-							default: {
-								for (int x = baseX; x < topX; x += w) {
-									for (int y = baseY; y < topY; y += h) {
-										clientG.drawImage(image, x, y, w, h, this);
-									}
-								}
-								break;
-							}
-						}
-					}
-				}
-			}
-		} finally {
-			clientG.dispose();
-		}
-
-		if (borderInsets != null) {
-			final int btop = borderInsets.top;
-			final int bleft = borderInsets.left;
-			final int bright = borderInsets.right;
-			final int bbottom = borderInsets.bottom;
-
-			final int newTotalWidth = totalWidth - (bleft + bright);
-			final int newTotalHeight = totalHeight - (btop + bbottom);
-			final int newStartX = startX + bleft;
-			final int newStartY = startY + btop;
-			final Rectangle clientRegion = new Rectangle(newStartX, newStartY, newTotalWidth, newTotalHeight);
-
-			// Paint borders if the clip bounds are not contained
-			// by the content area.
-			final Rectangle clipBounds = g.getClipBounds();
-			if (!clientRegion.contains(clipBounds)) {
-				final BorderInfo borderInfo = this.borderInfo;
-				if (btop > 0) {
-					g.setColor(getBorderTopColor());
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getTopStyle();
-					for (int i = 0; i < btop; i++) {
-						final int leftOffset = i * bleft / btop;
-						final int rightOffset = i * bright / btop;
-						
-						switch (borderStyle) {
-						case BorderInsets.BORDER_STYLE_DASHED:
-							GUITasks.drawDashed(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i, 10 + btop, 6);
-							break;
-						case BorderInsets.BORDER_STYLE_DOTTED:
-							GUITasks.drawDotted(g, startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i, btop);
-							break;
-						case BorderInsets.BORDER_STYLE_INSET:
-							case BorderInsets.BORDER_STYLE_OUTSET:
-								g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));
-							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
-							break;
-							case BorderInsets.BORDER_STYLE_SOLID:
-						default:
-							g.drawLine(startX + leftOffset, startY + i, startX + totalWidth - rightOffset - 1, startY + i);
-							break;
-						}
-					}
-				}
-				if (bright > 0) {
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getRightStyle();
-					g.setColor(getBorderRightColor());
-					final int lastX = startX + totalWidth - 1;
-					for (int i = 0; i < bright; i++) {
-						final int topOffset = i * btop / bright;
-						final int bottomOffset = i * bbottom / bright;
-						
-						switch (borderStyle) {
-						case BorderInsets.BORDER_STYLE_DASHED:
-							GUITasks.drawDashed(g, lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1, 10 + bright, 6);
-							break;
-						case BorderInsets.BORDER_STYLE_DOTTED:
-							GUITasks.drawDotted(g, lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1, bright);
-							break;
-						case BorderInsets.BORDER_STYLE_INSET:
-							case BorderInsets.BORDER_STYLE_OUTSET:
-								g.setColor(ColorFactory.getAdjustedColor(getBorderRightColor(), -0.3));
-							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
-							break;
-							case BorderInsets.BORDER_STYLE_SOLID:
-						default:
-							g.drawLine(lastX - i, startY + topOffset, lastX - i, startY + totalHeight - bottomOffset - 1);
-							break;
-						}
-					}
-				}
-				if (bbottom > 0) {
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getBottomStyle();
-					g.setColor(getBorderBottomColor());
-					final int lastY = startY + totalHeight - 1;
-					for (int i = 0; i < bbottom; i++) {
-						final int leftOffset = i * bleft / bbottom;
-						final int rightOffset = i * bright / bbottom;
-						
-						switch (borderStyle) {
-						case BorderInsets.BORDER_STYLE_DASHED:
-							GUITasks.drawDashed(g, startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i, 10 + bbottom, 6);
-							break;
-						case BorderInsets.BORDER_STYLE_DOTTED:
-							GUITasks.drawDotted(g, startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i, bbottom);
-							break;
-						case BorderInsets.BORDER_STYLE_INSET:
-							case BorderInsets.BORDER_STYLE_OUTSET:
-								g.setColor(ColorFactory.getAdjustedColor(getBorderBottomColor(), -0.3));
-							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
-							break;
-							case BorderInsets.BORDER_STYLE_SOLID:
-						default:
-							g.drawLine(startX + leftOffset, lastY - i, startX + totalWidth - rightOffset - 1, lastY - i);
-							break;
-						}
-					}
-				}
-				if (bleft > 0) {
-					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getLeftStyle();
-					g.setColor(getBorderLeftColor());
-					for (int i = 0; i < bleft; i++) {
-						final int topOffset = i * btop / bleft;
-						final int bottomOffset = i * bbottom / bleft;
-						
-						switch (borderStyle) {
-						case BorderInsets.BORDER_STYLE_DASHED:
-							GUITasks.drawDashed(g, startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1, 10 + bleft, 6);
-							break;
-						case BorderInsets.BORDER_STYLE_DOTTED:
-							GUITasks.drawDotted(g, startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1, bleft);
-							break;
-						case BorderInsets.BORDER_STYLE_INSET:
-							case BorderInsets.BORDER_STYLE_OUTSET:
-								g.setColor(ColorFactory.getAdjustedColor(getBorderLeftColor(), -0.3));
-							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
-							break;
-							case BorderInsets.BORDER_STYLE_SOLID:
-						default:
-							g.drawLine(startX + i, startY + topOffset, startX + i, startY + totalHeight - bottomOffset - 1);
-							break;
-						}
-					}
-				}
-			}
-
-			// Adjust client area border
-			totalWidth = newTotalWidth;
-			totalHeight = newTotalHeight;
-			startX = newStartX;
-			startY = newStartY;
-
-		}
-	}
-
-	/**
 	 * <p>sendDelayedPairsToParent.</p>
 	 */
 	protected final void sendDelayedPairsToParent() {
@@ -1103,8 +916,6 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * <p>sendGUIComponentsToParent.</p>
 	 */
 	protected final void sendGUIComponentsToParent() {
-		// Ensures that parent has all the components
-		// below this renderer node. (Parent expected to have removed them).
 		final Collection<Component> gc = this.guiComponents;
 		if (gc != null) {
 			final RenderableContainer rc = this.container;
@@ -1128,7 +939,227 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		final java.awt.Point guiPoint = getGUIPoint(0, 0);
 		this.updateWidgetBounds(guiPoint.x, guiPoint.y);
 	}
-	
+
+	/**
+	 * <p>prePaint.</p>
+	 *
+	 * @param g a {@link java.awt.Graphics} object.
+	 */
+	protected void prePaint(Graphics g) {
+		final int startWidth = this.width;
+		final int startHeight = this.height;
+		int totalWidth = startWidth;
+		int totalHeight = startHeight;
+		int startX = 0;
+		int startY = 0;
+
+		final Insets marginInsets = this.marginInsets;
+		if (marginInsets != null) {
+			totalWidth -= marginInsets.left + marginInsets.right;
+			totalHeight -= marginInsets.top + marginInsets.bottom;
+			startX += marginInsets.left;
+			startY += marginInsets.top;
+		}
+
+		prePaintBackground(g, this.modelNode, totalWidth, totalHeight, startX, startY);
+
+		prePaintBorder(g, totalWidth, totalHeight, startX, startY);
+
+	}
+
+	private void prePaintBackground(Graphics g, ModelNode node, int totalWidth, int totalHeight, int startX, int startY) {
+		final RenderState rs = node.getRenderState();
+		final Graphics clientG = g.create(startX, startY, totalWidth, totalHeight);
+		try {
+			Rectangle bkgBounds = null;
+			if (node != null) {
+				final Color bkg = this.backgroundColor;
+				if (bkg != null && bkg.getAlpha() > 0) {
+					clientG.setColor(bkg);
+					bkgBounds = clientG.getClipBounds();
+					clientG.fillRect(bkgBounds.x, bkgBounds.y, bkgBounds.width, bkgBounds.height);
+				}
+
+				if (binfo == null) {
+					binfo = rs == null ? null : rs.getBackgroundInfo();
+				}
+
+				final Image image = this.backgroundImage;
+				if (image != null) {
+					if (bkgBounds == null) {
+						bkgBounds = clientG.getClipBounds();
+					}
+					final int w = image.getWidth(this);
+					final int h = image.getHeight(this);
+					if (w != -1 && h != -1) {
+
+						final int imageY = getImageY(totalHeight, binfo, h);
+						final int imageX = getImageX(totalWidth, binfo, w);
+
+						final int baseX = (bkgBounds.x / w) * w - (w - imageX);
+						final int baseY = (bkgBounds.y / h) * h - (h - imageY);
+
+						final int topX = bkgBounds.x + bkgBounds.width;
+						final int topY = bkgBounds.y + bkgBounds.height;
+
+						switch (binfo == null ? BackgroundInfo.BR_REPEAT : binfo.getBackgroundRepeat()) {
+							case BackgroundInfo.BR_NO_REPEAT:
+								int _imageX;
+								if (binfo.isBackgroundXPositionAbsolute()) {
+									_imageX = binfo.getBackgroundXPosition();
+								} else {
+									_imageX = binfo.getBackgroundXPosition() * (totalWidth - w) / 100;
+								}
+								int _imageY;
+								if (binfo.isBackgroundYPositionAbsolute()) {
+									_imageY = binfo.getBackgroundYPosition();
+								} else {
+									_imageY = binfo.getBackgroundYPosition() * (totalHeight - h) / 100;
+								}
+								g.drawImage(image, _imageX, _imageY, w, h, this);
+								break;
+
+							case BackgroundInfo.BR_REPEAT_X:
+
+								for (int x = baseX; x < topX; x += w) {
+									clientG.drawImage(image, x, imageY, w, h, this);
+								}
+								break;
+
+							case BackgroundInfo.BR_REPEAT_Y:
+
+								for (int y = baseY; y < topY; y += h) {
+									clientG.drawImage(image, imageX, y, w, h, this);
+								}
+								break;
+
+							default: {
+								for (int x = baseX; x < topX; x += w) {
+									for (int y = baseY; y < topY; y += h) {
+										clientG.drawImage(image, x, y, w, h, this);
+									}
+								}
+								break;
+							}
+						}
+					}
+				}
+			}
+		} finally {
+			clientG.dispose();
+		}
+	}
+
+	private void prePaintBorder(Graphics g, int totalWidth, int totalHeight, int startX, int startY) {
+
+		final Insets borderInsets = this.borderInsets;
+
+		if (borderInsets != null) {
+			final int btop = borderInsets.top;
+			final int bleft = borderInsets.left;
+			final int bright = borderInsets.right;
+			final int bbottom = borderInsets.bottom;
+
+			final int newTotalWidth = totalWidth - (bleft + bright);
+			final int newTotalHeight = totalHeight - (btop + bbottom);
+			final int newStartX = startX + bleft;
+			final int newStartY = startY + btop;
+			final Rectangle clientRegion = new Rectangle(newStartX, newStartY, newTotalWidth, newTotalHeight);
+
+			// Paint borders if the clip bounds are not contained
+			// by the content area.
+			final Rectangle clipBounds = g.getClipBounds();
+			if (!clientRegion.contains(clipBounds)) {
+				final BorderInfo borderInfo = this.borderInfo;
+				int x1;
+				int y1;
+				int x2;
+				int y2;
+				int dashSize;
+
+				if (btop > 0) {
+					g.setColor(getBorderTopColor());
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getTopStyle();
+					for (int i = 0; i < btop; i++) {
+						final int leftOffset = i * bleft / btop;
+						final int rightOffset = i * bright / btop;
+						x1 = startX + leftOffset;
+						y1 = startY + i;
+						x2 = startX + totalWidth - rightOffset - 1;
+						y2 = startY + i;
+						dashSize = 10 + btop;
+						paintBorder(g, x1, y1, x2, y2, dashSize, btop, borderStyle);
+					}
+				}
+				if (bright > 0) {
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getRightStyle();
+					g.setColor(getBorderRightColor());
+					final int lastX = startX + totalWidth - 1;
+					for (int i = 0; i < bright; i++) {
+						final int topOffset = i * btop / bright;
+						final int bottomOffset = i * bbottom / bright;
+						x1 = lastX - i;
+						y1 = startY + topOffset;
+						x2 = lastX - i;
+						y2 = startY + totalHeight - bottomOffset - 1;
+						dashSize = 10 + bright;
+						paintBorder(g, x1, y1, x2, y2, dashSize, bright, borderStyle);
+					}
+				}
+				if (bbottom > 0) {
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getBottomStyle();
+					g.setColor(getBorderBottomColor());
+					final int lastY = startY + totalHeight - 1;
+					for (int i = 0; i < bbottom; i++) {
+						final int leftOffset = i * bleft / bbottom;
+						final int rightOffset = i * bright / bbottom;
+						x1 = startX + leftOffset;
+						y1 = lastY - i;
+						x2 = startX + totalWidth - rightOffset - 1;
+						y2 = lastY - i;
+						dashSize = 10 + bbottom;
+						paintBorder(g, x1, y1, x2, y2, dashSize, bbottom, borderStyle);
+					}
+				}
+				if (bleft > 0) {
+					final int borderStyle = borderInfo == null ? BorderInsets.BORDER_STYLE_SOLID : borderInfo.getLeftStyle();
+					g.setColor(getBorderLeftColor());
+					for (int i = 0; i < bleft; i++) {
+						final int topOffset = i * btop / bleft;
+						final int bottomOffset = i * bbottom / bleft;
+						x1 = startX + i;
+						y1 = startY + topOffset;
+						x2 = startX + i;
+						y2 = startY + totalHeight - bottomOffset - 1;
+						dashSize = 10 + bleft;
+						paintBorder(g, x1, y1, x2, y2, dashSize, bleft, borderStyle);
+					}
+				}
+			}
+		}
+	}
+
+	private void paintBorder(Graphics g, int x1, int y1, int x2, int y2, int dashSize, int width, int borderStyle) {
+
+		switch (borderStyle) {
+			case BorderInsets.BORDER_STYLE_DASHED:
+				GUITasks.drawDashed(g, x1, y1, x2, y2, dashSize, 6);
+				break;
+			case BorderInsets.BORDER_STYLE_DOTTED:
+				GUITasks.drawDotted(g, x1, y1, x2, y2, width);
+				break;
+			case BorderInsets.BORDER_STYLE_INSET:
+			case BorderInsets.BORDER_STYLE_OUTSET:
+				g.setColor(ColorFactory.getAdjustedColor(getBorderTopColor(), -0.3));
+				g.drawLine(x1, y1, x2, y2);
+				break;
+			case BorderInsets.BORDER_STYLE_SOLID:
+			default:
+				g.drawLine(x1, y1, x2, y2);
+				break;
+		}
+	}
+
 	private static int getImageY(final int totalHeight, final BackgroundInfo binfo, final int h) {
 		if (binfo == null) {
 			return 0;

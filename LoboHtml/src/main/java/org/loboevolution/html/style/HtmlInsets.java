@@ -58,40 +58,20 @@ public class HtmlInsets {
 	/**
 	 * <p>getAWTInsets.</p>
 	 *
-	 * @param defaultTop a int.
-	 * @param defaultLeft a int.
-	 * @param defaultBottom a int.
-	 * @param defaultRight a int.
 	 * @param availWidth a int.
 	 * @param availHeight a int.
 	 * @param autoX a int.
 	 * @param autoY a int.
 	 * @return a {@link java.awt.Insets} object.
 	 */
-	public Insets getAWTInsets(int defaultTop, int defaultLeft, int defaultBottom, int defaultRight,
-			int availWidth, int availHeight, int autoX, int autoY) {
-		final int top = getInsetPixels(this.top, this.topType, defaultTop, availHeight, autoY);
-		final int left = getInsetPixels(this.left, this.leftType, defaultLeft, availWidth, autoX);
-		final int bottom = getInsetPixels(this.bottom, this.bottomType, defaultBottom, availHeight, autoY);
-		final int right = getInsetPixels(this.right, this.rightType, defaultRight, availWidth, autoX);
+	public Insets getAWTInsets(int availWidth, int availHeight, int autoX, int autoY) {
+		final int top = getInsetPixels(this.top, this.topType, availHeight, autoY);
+		final int left = getInsetPixels(this.left, this.leftType, availWidth, autoX);
+		final int bottom = getInsetPixels(this.bottom, this.bottomType, availHeight, autoY);
+		final int right = getInsetPixels(this.right, this.rightType, availWidth, autoX);
 		return new Insets(top, left, bottom, right);
 	}
-	
-	/**
-	 * <p>getSimpleAWTInsets.</p>
-	 *
-	 * @param availWidth a int.
-	 * @param availHeight a int.
-	 * @return a {@link java.awt.Insets} object.
-	 */
-	public Insets getSimpleAWTInsets(int availWidth, int availHeight) {
-		final int top = getInsetPixels(this.top, this.topType, 0, availHeight, 0);
-		final int left = getInsetPixels(this.left, this.leftType, 0, availWidth, 0);
-		final int bottom = getInsetPixels(this.bottom, this.bottomType, 0, availHeight, 0);
-		final int right = getInsetPixels(this.right, this.rightType, 0, availWidth, 0);
-		return new Insets(top, left, bottom, right);
-	}
-	
+
 	/**
 	 * <p>updateBottomInset.</p>
 	 *
@@ -231,18 +211,19 @@ public class HtmlInsets {
 		}
 		return insets;
 	}
-	
-	private int getInsetPixels(int value, int type, int defaultValue, int availSize, int autoValue) {
-		if (type == TYPE_PIXELS) {
-			return value;
-		} else if (type == TYPE_UNDEFINED) {
-			return defaultValue;
-		} else if (type == TYPE_AUTO) {
-			return autoValue;
-		} else if (type == TYPE_PERCENT) {
-			return availSize * value / 100;
-		} else {
-			throw new IllegalStateException();
+
+	private int getInsetPixels(int value, int type, int availSize, int autoValue) {
+		switch (type) {
+			case TYPE_PIXELS:
+				return value;
+			case TYPE_UNDEFINED:
+				return 0;
+			case TYPE_AUTO:
+				return autoValue;
+			case TYPE_PERCENT:
+				return availSize * value / 100;
+			default:
+				throw new IllegalStateException();
 		}
 	}
 
