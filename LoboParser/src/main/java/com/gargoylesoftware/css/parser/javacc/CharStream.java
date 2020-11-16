@@ -71,7 +71,7 @@ interface CharStream {
    * Backs up the input stream by amount steps. Lexer calls this method if it
    * had already read some characters, but could not use them to match a
    * (longer) token. So, they will be used again as the prefix of the next
-   * token and it is the implementation's responsibility to do this right.
+   * token and it is the implemetation's responsibility to do this right.
    */
   void backup(int amount);
 
@@ -117,4 +117,4 @@ interface CharStream {
   boolean getTrackLineColumn();
   void setTrackLineColumn(boolean trackLineColumn);
 }
-/* JavaCC - OriginalChecksum=3301b49863a24286e18dc523abb5cd19 (do not edit this line) */
+/* JavaCC - OriginalChecksum=143aed4764b7567e7751962a14eca750 (do not edit this line) */
