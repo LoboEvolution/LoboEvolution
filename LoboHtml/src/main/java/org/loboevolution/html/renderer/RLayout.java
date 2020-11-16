@@ -344,7 +344,7 @@ public class RLayout {
 		protected RElement createRenderable(RBlockViewport bodyLayout, HTMLElementImpl markupElement) {
 			UIControl control = null;
 			HTMLImageElementImpl image = (HTMLImageElementImpl) markupElement;
-			if(image.getSrc().endsWith(".svg")) {
+			if(image.getSrc() != null && image.getSrc().endsWith(".svg")) {
 				control = new ImgSvgControl(image);
 			} else {
 				control = new ImgControl(image);	

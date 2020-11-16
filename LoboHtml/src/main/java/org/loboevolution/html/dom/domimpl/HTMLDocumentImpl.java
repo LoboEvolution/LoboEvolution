@@ -406,6 +406,22 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 		}
 	}
 
+	public final URL getFullURL(String uri, String baseURI) {
+		try {
+			final URL documentURL = baseURI == null ? null : new URL(baseURI);
+			return Urls.createURL(documentURL, uri);
+		} catch (Exception mfu) {
+			// Try agan, without the baseURI.
+			try {
+				return new URL(uri);
+			} catch (Exception mfu2) {
+				logger.log(Level.WARNING,
+						"Unable to create URL for URI=[" + uri + "], with base=[" + getBaseURI() + "].", mfu);
+				return null;
+			}
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public final HtmlRendererContext getHtmlRendererContext() {

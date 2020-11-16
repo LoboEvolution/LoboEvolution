@@ -47,6 +47,7 @@ import org.loboevolution.html.CSSValues;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLLinkElementImpl;
 import org.loboevolution.html.renderer.LineBreak;
 import org.loboevolution.html.renderer.RFlex;
 import org.loboevolution.html.style.AbstractCSSProperties;
@@ -267,16 +268,17 @@ public class StyleSheetRenderState implements RenderState {
 	/** {@inheritDoc} */
 	@Override
 	public BackgroundInfo getBackgroundInfo() {
+
 		BackgroundInfo binfo = this.iBackgroundInfo;
 		final AbstractCSSProperties props = getCssProperties();
 		if (binfo != INVALID_BACKGROUND_INFO) {
 			return binfo;
 		}
-		
+
 		if (element != null && !"BODY".equals(element.getNodeName())) {
 			binfo = null;
 		}
-		
+
 		if (props != null) {
 			final String backgroundColorText = props.getBackgroundColor();
 			final String backgroundImageText = props.getBackgroundImage();
@@ -289,7 +291,7 @@ public class StyleSheetRenderState implements RenderState {
 				Strings.isNotBlank(backgroundPositionText)) {
 				binfo = new BackgroundInfo();
 			}
-			
+
 			if (Strings.isNotBlank(backgroundColorText)) {
 				CSSValues bc = CSSValues.get(backgroundColorText);
 				if(bc.equals(CSSValues.INHERIT)) {
@@ -306,7 +308,7 @@ public class StyleSheetRenderState implements RenderState {
 			if (Strings.isNotBlank(backgroundPositionText)) {
 				applyBackgroundPosition(binfo, backgroundPositionText);
 			}
-			
+
 			if (Strings.isNotBlank(backgroundImageText)) {
 				applyBackgroundImage(binfo, backgroundImageText, this.document, props);
 			}
@@ -1455,29 +1457,28 @@ public class StyleSheetRenderState implements RenderState {
 			}
 		}
 	}
-	
-	private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document, AbstractCSSProperties props) {
 
-   	if (HtmlValues.isUrl(backgroundImageText)) {
-           String start = "url(";
-           int startIdx = start.length() +1;
-           int closingIdx = backgroundImageText.lastIndexOf(')') -1;
-           String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
-           String[] items = {"http", "https", "file"};            
-           if(Strings.containsWords(quotedUri, items)) {
-               try {
-                   binfo.setBackgroundImage(new URL(quotedUri));
-               } catch (Exception e) {
-                   binfo.setBackgroundImage(null);
-               }
-           } else {
-           	if (quotedUri.contains(";base64,")) {
-   				final String base64 = backgroundImageText.split(";base64,")[1];
-   				final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
-   				quotedUri = String.valueOf(decodedBytes);
-           	}
-               binfo.setBackgroundImage(document.getFullURL(quotedUri));
-           }
+	private void applyBackgroundImage(BackgroundInfo binfo, String backgroundImageText, HTMLDocumentImpl document, AbstractCSSProperties props) {
+		if (HtmlValues.isUrl(backgroundImageText)) {
+			String start = "url(";
+			int startIdx = start.length() + 1;
+			int closingIdx = backgroundImageText.lastIndexOf(')') - 1;
+			String quotedUri = backgroundImageText.substring(startIdx, closingIdx);
+			String[] items = {"http", "https", "file"};
+			if (Strings.containsWords(quotedUri, items)) {
+				try {
+					binfo.setBackgroundImage(linkUri(document, quotedUri));
+				} catch (Exception e) {
+					binfo.setBackgroundImage(null);
+				}
+			} else {
+				if (quotedUri.contains(";base64,")) {
+					final String base64 = backgroundImageText.split(";base64,")[1];
+					final byte[] decodedBytes = Base64.getDecoder().decode(Strings.linearize(base64));
+					quotedUri = String.valueOf(decodedBytes);
+				}
+				binfo.setBackgroundImage(linkUri(document, quotedUri));
+			}
 		} else if (HtmlValues.isGradient(backgroundImageText)) {
 			try {
 				GradientStyle style = new GradientStyle();
@@ -1491,5 +1492,24 @@ public class StyleSheetRenderState implements RenderState {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		}
-   }  
+	}
+
+	private URL linkUri(HTMLDocumentImpl document, String quotedUri) {
+		if (element instanceof HTMLLinkElementImpl) {
+			HTMLLinkElementImpl elm = (HTMLLinkElementImpl) element;
+			final String rel = elm.getAttribute("rel");
+			if (rel != null) {
+				final String href = elm.getHref();
+				final String cleanRel = rel.trim().toLowerCase();
+				final boolean isStyleSheet = cleanRel.equals("stylesheet");
+				final boolean isAltStyleSheet = cleanRel.equals("alternate stylesheet");
+
+				if ((isStyleSheet || isAltStyleSheet)) {
+					return document.getFullURL(quotedUri, elm.getHref());
+
+				}
+			}
+		}
+		return null;
+	}
 }
