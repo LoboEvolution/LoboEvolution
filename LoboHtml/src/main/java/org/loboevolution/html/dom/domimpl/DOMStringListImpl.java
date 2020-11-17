@@ -44,7 +44,7 @@ public class DOMStringListImpl implements DOMStringList {
 	 * @param sourceList a {@link java.util.Set} object.
 	 */
 	public DOMStringListImpl(Set<String> sourceList) {
-		final List<String> list = new ArrayList<String>(sourceList);
+		final List<String> list = new ArrayList<>(sourceList);
 		this.sourceList = list;
 	}
 

@@ -64,7 +64,7 @@ public class BrowserData {
 	 */
 	protected static List<String> getFiles(String directoryPath, List<String> cookieFilePaths, String fileName) {
 		if (cookieFilePaths == null) {
-			cookieFilePaths = new ArrayList<String>();
+			cookieFilePaths = new ArrayList<>();
 		}
 
 		try {

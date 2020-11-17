@@ -77,7 +77,7 @@ public class Type1Font extends OutlineFont {
 
     /** Read a font from it's data, start position and length */
     protected void parseFont(byte[] font, int start, int len) {
-        this.name2width = new HashMap<String,FlPoint>();
+        this.name2width = new HashMap<>();
 
         byte[] data = null;
 
@@ -111,7 +111,7 @@ public class Type1Font extends OutlineFont {
         }
 
         this.subrs = readSubrs(data);
-        this.name2outline = new TreeMap<String,Object>(readChars(data));
+        this.name2outline = new TreeMap<>(readChars(data));
     // at this point, name2outline holds name -> byte[].
     }
 
@@ -439,7 +439,7 @@ public class Type1Font extends OutlineFont {
      */
     private Map<String,byte[]> readChars(byte[] d) {
         // skip thru data until we find "/"+key
-        HashMap<String,byte[]> hm = new HashMap<String,byte[]>();
+        HashMap<String,byte[]> hm = new HashMap<>();
         int i = findSlashName(d, "CharStrings");
         if (i < 0) {
             // not found

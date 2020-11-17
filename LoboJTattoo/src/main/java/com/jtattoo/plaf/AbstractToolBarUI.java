@@ -117,9 +117,9 @@ public abstract class AbstractToolBarUI extends BasicToolBarUI {
 
 	private MyContainerListener containerListener = null;
 
-	private final Map<AbstractButton, Border> orgBorders = new HashMap<AbstractButton, Border>();
+	private final Map<AbstractButton, Border> orgBorders = new HashMap<>();
 
-	private final Map<AbstractButton, Insets> orgMargins = new HashMap<AbstractButton, Insets>();
+	private final Map<AbstractButton, Insets> orgMargins = new HashMap<>();
 
 	/**
 	 * <p>changeBorders.</p>

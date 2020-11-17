@@ -62,7 +62,7 @@ public class EventDispatch {
 	 * @return a {@link java.util.Collection} object.
 	 */
 	public Collection<GenericEventListener> createListenerCollection() {
-		return new LinkedList<GenericEventListener>();
+		return new LinkedList<>();
 	}
 
 	/**

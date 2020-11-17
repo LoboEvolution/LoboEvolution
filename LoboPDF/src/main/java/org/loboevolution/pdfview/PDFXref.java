@@ -136,7 +136,7 @@ public class PDFXref {
      * Set the object this reference refers to.
      */
     public void setObject(PDFObject obj) {
-        this.reference = new SoftReference<PDFObject>(obj);
+        this.reference = new SoftReference<>(obj);
     }
     
     @Override

@@ -22,7 +22,7 @@ public class SVGPointListImpl implements SVGPointList {
 	 * <p>Constructor for SVGPointListImpl.</p>
 	 */
 	public SVGPointListImpl() {
-		pointList = new ArrayList<SVGPoint>();
+		pointList = new ArrayList<>();
 	}
 
 	/** {@inheritDoc} */
@@ -40,7 +40,7 @@ public class SVGPointListImpl implements SVGPointList {
 	/** {@inheritDoc} */
 	@Override
 	public SVGPoint initialize(SVGPoint newItem) throws DOMException, SVGException {
-		pointList = new ArrayList<SVGPoint>();
+		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
 	}

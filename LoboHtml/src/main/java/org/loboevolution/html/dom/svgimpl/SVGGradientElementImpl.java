@@ -111,7 +111,7 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 	}
 
 	private float[] fractions(Element elem) {
-		ArrayList<Float> fractions = new ArrayList<Float>();
+		ArrayList<Float> fractions = new ArrayList<>();
 		NodeList childNodes = elem.getChildNodes();
 		for (Node n : Nodes.iterable(childNodes)) {
 			if (n instanceof SVGStopElementImpl) {
@@ -130,7 +130,7 @@ public class SVGGradientElementImpl extends SVGGraphic implements SVGGradientEle
 	}
 
 	private Color[] colors(Element elem) {
-		ArrayList<Color> colors = new ArrayList<Color>();
+		ArrayList<Color> colors = new ArrayList<>();
 		NodeList childNodes = elem.getChildNodes();
 		for (Node n : Nodes.iterable(childNodes)) {
 			if (n instanceof SVGStopElementImpl) {

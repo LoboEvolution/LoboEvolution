@@ -233,7 +233,7 @@ public class JBIG2ImageReader extends ImageReader {
 		// to return an appropriate BufferedImage that contains the decoded
 		// image, and is accessed by an application.
 
-		List<ImageTypeSpecifier> l = new ArrayList<ImageTypeSpecifier>();
+		List<ImageTypeSpecifier> l = new ArrayList<>();
 
 		// The JBIG2 reader only uses a single List entry. This entry describes
 		// a

@@ -34,11 +34,11 @@ import org.mozilla.javascript.Function;
  * @version $Id: $Id
  */
 public class JavaClassWrapper {
-	private final Map<String, JavaFunctionObject> functions = new HashMap<String, JavaFunctionObject>();
+	private final Map<String, JavaFunctionObject> functions = new HashMap<>();
 	private PropertyInfo integerIndexer;
 	private final Class javaClass;
 	private PropertyInfo nameIndexer;
-	private final Map<String, PropertyInfo> properties = new HashMap<String, PropertyInfo>();
+	private final Map<String, PropertyInfo> properties = new HashMap<>();
 
 	/**
 	 * <p>Constructor for JavaClassWrapper.</p>

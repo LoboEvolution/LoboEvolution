@@ -35,9 +35,9 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
  */
 public class DOMFunctionImpl extends NodeImpl {
 	
-	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<NodeImpl, Map<String, List<Function>>>();
+	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<>();
 	
-	private final List<NodeImpl> clicked = new ArrayList<NodeImpl>();
+	private final List<NodeImpl> clicked = new ArrayList<>();
 	
 	/**
 	 * <p>getElementsByTagName.</p>
@@ -91,7 +91,7 @@ public class DOMFunctionImpl extends NodeImpl {
      * @return a {@link org.w3c.dom.NodeList} object.
      */
     public NodeList querySelectorAll(String selectors) {
-    	final ArrayList<Node> al = new ArrayList<Node>();
+    	final ArrayList<Node> al = new ArrayList<>();
     	SelectorList selectorList = CSSUtilities.getSelectorList(selectors);
     	if (selectorList != null) {
     		NodeList childNodes = getDescendents(new ElementFilter(null), true);
@@ -127,9 +127,9 @@ public class DOMFunctionImpl extends NodeImpl {
 		if ("load".equals(type) || "DOMContentLoaded".equals(type)) {
 			onloadEvent(listener);
 		} else {
-			List<Function> handlerList = new ArrayList<Function>();
+			List<Function> handlerList = new ArrayList<>();
 			handlerList.add(listener);
-			final Map<String, List<Function>> onEventListeners = new HashMap<String, List<Function>>();
+			final Map<String, List<Function>> onEventListeners = new HashMap<>();
 			onEventListeners.put(type, handlerList);
 			this.onEventHandlers.put(this, onEventListeners);
 		}

@@ -58,7 +58,7 @@ public class CookieManager {
 	 */
 	public static List<CookieInfo> getCookieList(String address) {
 		URL url;
-		List<CookieInfo> cookies = new ArrayList<CookieInfo>();
+		List<CookieInfo> cookies = new ArrayList<>();
 		try {
 			url = new URL(address);
 			final String domain = url.getHost().replaceFirst("^www.*?\\.", "");
@@ -70,7 +70,7 @@ public class CookieManager {
 	}
 
 	private static List<CookieInfo> getCookies(String hostName, String path) {
-		final List<CookieInfo> cookies = new ArrayList<CookieInfo>();
+		final List<CookieInfo> cookies = new ArrayList<>();
 		final GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
 			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());

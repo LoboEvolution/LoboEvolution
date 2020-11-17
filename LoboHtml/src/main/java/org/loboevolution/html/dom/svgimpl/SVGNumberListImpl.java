@@ -22,7 +22,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 	 * <p>Constructor for SVGNumberListImpl.</p>
 	 */
 	public SVGNumberListImpl() {
-		pointList = new ArrayList<SVGNumber>();
+		pointList = new ArrayList<>();
 	}
 
 	/** {@inheritDoc} */
@@ -40,7 +40,7 @@ public class SVGNumberListImpl implements SVGNumberList {
 	/** {@inheritDoc} */
 	@Override
 	public SVGNumber initialize(SVGNumber newItem) throws DOMException, SVGException {
-		pointList = new ArrayList<SVGNumber>();
+		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
 	}

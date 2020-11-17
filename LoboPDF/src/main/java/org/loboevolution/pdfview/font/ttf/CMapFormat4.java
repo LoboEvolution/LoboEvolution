@@ -41,7 +41,7 @@ public class CMapFormat4 extends CMap {
     protected CMapFormat4(short language) {
         super((short) 4, language);
     
-        this.segments = Collections.synchronizedSortedMap(new TreeMap<Segment,Object>());
+        this.segments = Collections.synchronizedSortedMap(new TreeMap<>());
         
         char[] map = new char[1];
         map[0] = (char) 0;

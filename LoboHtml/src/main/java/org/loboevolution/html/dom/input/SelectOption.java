@@ -60,7 +60,7 @@ public class SelectOption {
 	 */
 	public SelectOption(HTMLSelectElementImpl modelNode, SelectControl control) {
 		this.control = control;
-		final JComboBox<OptionItem> comboBox = new JComboBox<OptionItem>();
+		final JComboBox<OptionItem> comboBox = new JComboBox<>();
 		comboBox.addItemListener(e -> {
 			OptionItem item = (OptionItem) e.getItem();
 			if (item != null) {
@@ -80,8 +80,8 @@ public class SelectOption {
 				}
 			}
 		});
-		final DefaultListModel<OptionItem> listModel = new DefaultListModel<OptionItem>();
-		final JList<OptionItem> list = new JList<OptionItem>(listModel);
+		final DefaultListModel<OptionItem> listModel = new DefaultListModel<>();
+		final JList<OptionItem> list = new JList<>(listModel);
 		this.listModel = listModel;
 		list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 		list.addListSelectionListener(e -> {
@@ -214,13 +214,13 @@ public class SelectOption {
 					}
 					if (option.getSelected()) {
 						if (selectedIndexes == null) {
-							selectedIndexes = new LinkedList<Integer>();
+							selectedIndexes = new LinkedList<>();
 						}
 						selectedIndexes.add(index);
 					}
 					if (option.getDefaultSelected()) {
 						if (defaultSelectedIndexes == null) {
-							defaultSelectedIndexes = new LinkedList<Integer>();
+							defaultSelectedIndexes = new LinkedList<>();
 						}
 						defaultSelectedIndexes.add(index);
 					}

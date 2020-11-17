@@ -166,7 +166,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		synchronized (this) {
 			Map<String, String> attrs = this.attributes;
 			if (attrs == null) {
-				attrs = new HashMap<String, String>();
+				attrs = new HashMap<>();
 				this.attributes = attrs;
 			}
 			return new NamedNodeMapImpl(this, this.attributes);
@@ -377,7 +377,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		synchronized (this) {
 			Map<String, String> attribs = this.attributes;
 			if (attribs == null) {
-				attribs = new HashMap<String, String>(2);
+				attribs = new HashMap<>(2);
 				this.attributes = attribs;
 			}
 			attribs.put(normalName, value);
@@ -397,7 +397,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		final String normalName = normalizeAttributeName(name);
 		Map<String, String> attribs = this.attributes;
 		if (attribs == null) {
-			attribs = new HashMap<String, String>(2);
+			attribs = new HashMap<>(2);
 			this.attributes = attribs;
 		}
 		assignAttributeField(normalName, value);
@@ -411,7 +411,7 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 		final String value = newAttr.getValue();
 		synchronized (this) {
 			if (this.attributes == null) {
-				this.attributes = new HashMap<String, String>();
+				this.attributes = new HashMap<>();
 			}
 			this.attributes.put(normalName, value);
 			// this.setIdAttribute(normalName, newAttr.isId());

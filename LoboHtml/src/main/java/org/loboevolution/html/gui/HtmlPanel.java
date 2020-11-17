@@ -153,7 +153,7 @@ public class HtmlPanel extends JComponent implements FrameContext {
 
 	private final DocumentNotificationListener notificationListener;
 	
-	private final List<DocumentNotification> notifications = new ArrayList<DocumentNotification>();
+	private final List<DocumentNotification> notifications = new ArrayList<>();
 
 	private final Timer notificationTimer;
 

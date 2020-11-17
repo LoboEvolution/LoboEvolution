@@ -22,7 +22,7 @@ public enum LAFColorType {
 	private static final Map<String, LAFColorType> ENUM_MAP;
 
 	static {
-		Map<String, LAFColorType> map = new HashMap<String, LAFColorType>();
+		Map<String, LAFColorType> map = new HashMap<>();
 		for (LAFColorType instance : LAFColorType.values()) {
 			map.put(instance.getValue(), instance);
 		}

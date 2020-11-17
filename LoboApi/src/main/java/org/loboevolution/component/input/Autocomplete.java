@@ -29,14 +29,14 @@ public class Autocomplete {
 	 * @param items a {@link java.util.List} object.
 	 */
 	public static void setupAutoComplete(final JTextField txtInput, final List<String> items) {
-		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>();
-		final JComboBox<String> cbInput = new JComboBox<String>(model) {
-			private static final long serialVersionUID = 1L;
+		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+		final JComboBox<String> cbInput = new JComboBox<>(model) {
+            private static final long serialVersionUID = 1L;
 
-			public Dimension getPreferredSize() {
-				return new Dimension(super.getPreferredSize().width, 0);
-			}
-		};
+            public Dimension getPreferredSize() {
+                return new Dimension(super.getPreferredSize().width, 0);
+            }
+        };
 		setAdjusting(cbInput, false);
 		for (String item : items) {
 			model.addElement(item);

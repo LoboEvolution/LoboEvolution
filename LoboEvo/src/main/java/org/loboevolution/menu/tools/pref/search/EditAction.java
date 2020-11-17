@@ -41,7 +41,7 @@ public class EditAction<T> extends AbstractAction {
 	/** {@inheritDoc} */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		ItemEditor<T> dialog = new ItemEditor<T>(this.item.getItemEditorFactory());
+		ItemEditor<T> dialog = new ItemEditor<>(this.item.getItemEditorFactory());
 		dialog.setTitle(this.add ? "Add Item" : "Edit Item");
 		dialog.setCaption(this.item.getEditListCaption());
 		dialog.pack();

@@ -24,7 +24,7 @@ public class FormPanel extends JComponent {
 	private static final long serialVersionUID = 1L;
 
 	/** The fields. */
-	private final transient Collection<FormField> fields = new ArrayList<FormField>();
+	private final transient Collection<FormField> fields = new ArrayList<>();
 
 	/** The fields invalid. */
 	private boolean fieldsInvalid = false;
@@ -125,7 +125,7 @@ public class FormPanel extends JComponent {
 	private void populateComponents() {
 		removeAll();
 		int maxWidth = this.minLabelWidth;
-		final Collection<JLabel> labels = new ArrayList<JLabel>();
+		final Collection<JLabel> labels = new ArrayList<>();
 		boolean firstTime = true;
 		for (final FormField field : this.fields) {
 			if (firstTime) {

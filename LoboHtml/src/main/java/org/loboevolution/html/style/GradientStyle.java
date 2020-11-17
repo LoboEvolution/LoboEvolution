@@ -138,7 +138,7 @@ public class GradientStyle {
 	}
 
 	private static float[] fractions(final String quote) {
-		ArrayList<Float> listFractions = new ArrayList<Float>();
+		ArrayList<Float> listFractions = new ArrayList<>();
 		String quoteTmp = quote;
 		quoteTmp = quoteTmp.replace(" ", "");
 		char[] charArray = quoteTmp.toCharArray();
@@ -188,7 +188,7 @@ public class GradientStyle {
 	}
 
 	private  Color[] colors(final String quote) {
-		ArrayList<Color> colors = new ArrayList<Color>();
+		ArrayList<Color> colors = new ArrayList<>();
 		String quoteTmp = quote;
 		quoteTmp = quote.replace(" ", "");
 		char[] charArray = quoteTmp.toCharArray();

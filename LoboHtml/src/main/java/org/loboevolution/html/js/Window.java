@@ -96,7 +96,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	/** The Constant ELEMPARSER_WRAPPER. */
 	private static final JavaClassWrapper ELEMARSER_WRAPPER = JavaClassWrapperFactory.getInstance().getClassWrapper(ElementImpl.class);
 	
-	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<HtmlRendererContext, WeakReference<Window>>();
+	private static final Map<HtmlRendererContext, WeakReference<Window>> CONTEXT_WINDOWS = new WeakHashMap<>();
 	
 	private static int timerIdCounter = 0;
 	
@@ -125,7 +125,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 				}
 			}
 			final Window window = new Window(rcontext, rcontext.getUserAgentContext());
-			CONTEXT_WINDOWS.put(rcontext, new WeakReference<Window>(window));
+			CONTEXT_WINDOWS.put(rcontext, new WeakReference<>(window));
 			return window;
 		}
 	}
@@ -827,7 +827,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		synchronized (this) {
 			Map<Integer, TaskWrapper> taskMap = this.taskMap;
 			if (taskMap == null) {
-				taskMap = new HashMap<Integer, TaskWrapper>(4);
+				taskMap = new HashMap<>(4);
 				this.taskMap = taskMap;
 			} else {
 				oldTaskWrapper = taskMap.get(timeoutID);

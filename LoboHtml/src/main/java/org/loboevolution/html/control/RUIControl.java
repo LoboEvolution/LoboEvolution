@@ -92,7 +92,7 @@ public class RUIControl extends BaseElementRenderable {
 	}
 
 	private static final int MAX_CACHE_SIZE = 10;
-	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<LayoutKey, LayoutValue>();
+	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<>();
 
 	protected int declaredHeight = -1;
 

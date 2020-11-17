@@ -50,7 +50,7 @@ public class TrueTypeFont {
         this.type = type;
 
         this.tables = Collections.synchronizedSortedMap (
-                new TreeMap<String, Object> ());
+                new TreeMap<>());
     }
 
     /**

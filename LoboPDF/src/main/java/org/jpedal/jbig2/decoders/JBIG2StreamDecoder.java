@@ -82,8 +82,8 @@ public class JBIG2StreamDecoder {
 
 	private int noOfPages = -1;
 
-	private final List<Segment> segments = new ArrayList<Segment>();
-	private final List<JBIG2Bitmap> bitmaps = new ArrayList<JBIG2Bitmap>();
+	private final List<Segment> segments = new ArrayList<>();
+	private final List<JBIG2Bitmap> bitmaps = new ArrayList<>();
 
 	private byte[] globalData;
 

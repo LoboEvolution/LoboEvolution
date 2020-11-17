@@ -50,7 +50,7 @@ public enum AlignValues {
 	private static final Map<Integer, AlignValues> ENUM_MAP;
 	
 	static {
-		Map<Integer, AlignValues> map = new HashMap<Integer, AlignValues>();
+		Map<Integer, AlignValues> map = new HashMap<>();
 		for (AlignValues instance : AlignValues.values()) {
 			map.put(instance.getValue(), instance);
 		}

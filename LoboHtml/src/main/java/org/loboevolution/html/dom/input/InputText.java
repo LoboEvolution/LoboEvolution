@@ -208,7 +208,7 @@ public class InputText {
 		List<String> list = InputStore.autocomplete(type, text, baseUrl);
 		if (ArrayUtilities.isNotBlank(list))
 			return list;
-		return new ArrayList<String>();
+		return new ArrayList<>();
 	}
 
 	private class LimitedDocument extends PlainDocument {

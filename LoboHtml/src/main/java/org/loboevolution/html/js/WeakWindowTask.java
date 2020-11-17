@@ -7,7 +7,7 @@ abstract class WeakWindowTask implements ActionListener {
 	private final WeakReference<Window> windowRef;
 
 	public WeakWindowTask(Window window) {
-		this.windowRef = new WeakReference<Window>(window);
+		this.windowRef = new WeakReference<>(window);
 	}
 
 	protected Window getWindow() {

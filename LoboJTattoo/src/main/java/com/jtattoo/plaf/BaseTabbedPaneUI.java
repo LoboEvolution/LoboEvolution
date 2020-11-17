@@ -2541,7 +2541,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	}
 
 	private List<View> createHTMLViewList() {
-		ArrayList<View> viewList = new ArrayList<View>();
+		ArrayList<View> viewList = new ArrayList<>();
 		int count = tabPane.getTabCount();
 		for (int i = 0; i < count; i++) {
 			String title = tabPane.getTitleAt(i);
@@ -3252,7 +3252,7 @@ public class BaseTabbedPaneUI extends TabbedPaneUI implements SwingConstants {
 	 * Installs the state needed for mnemonics.
 	 */
 	private void initMnemonics() {
-		mnemonicToIndexMap = new HashMap<Integer, Integer>();
+		mnemonicToIndexMap = new HashMap<>();
 //        mnemonicInputMap = new InputMapUIResource();
 //        mnemonicInputMap.setParent(SwingUtilities.getUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT));
 //        SwingUtilities.replaceUIInputMap(tabPane, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT, mnemonicInputMap);

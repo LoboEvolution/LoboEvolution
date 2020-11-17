@@ -42,7 +42,7 @@ import org.loboevolution.http.UserAgentContext;
 public class RLayout {
 	
 	/** Constant elementLayout */
-	protected static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<HTMLTag, MarkupLayout>();
+	protected static final Map<HTMLTag, MarkupLayout> elementLayout = new HashMap<>();
 	
 	static {
 		final Map<HTMLTag, MarkupLayout> el = elementLayout;
@@ -412,7 +412,7 @@ public class RLayout {
 		 * Must use this ThreadLocal because an ObjectLayout instance is shared across
 		 * renderers.
 		 */
-		private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<HtmlObject>();
+		private final ThreadLocal<HtmlObject> htmlObject = new ThreadLocal<>();
 
 		private final boolean tryToRenderContent;
 

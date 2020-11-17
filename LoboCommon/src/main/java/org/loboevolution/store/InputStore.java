@@ -29,7 +29,7 @@ public class InputStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<String> autocomplete(String type, String value, String baseUrl) {
-        List<String> autoList = new ArrayList<String>();
+        List<String> autoList = new ArrayList<>();
     	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT)) {
     		pstmt.setString(1, type);
@@ -53,7 +53,7 @@ public class InputStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<BookmarkInfo> getPassword(int maxNumItems) {
-        List<BookmarkInfo> autoList = new ArrayList<BookmarkInfo>();
+        List<BookmarkInfo> autoList = new ArrayList<>();
     	try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 			PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.INPUT_LIMIT)) {
     		pstmt.setInt(1, maxNumItems);

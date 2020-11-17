@@ -408,7 +408,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @return a {@link org.w3c.dom.NodeList} object.
 	 */
 	public NodeList getDescendents(NodeFilter filter, boolean nestIntoMatchingNodes) {
-		final ArrayList<Node> al = new ArrayList<Node>();
+		final ArrayList<Node> al = new ArrayList<>();
 		synchronized (this.treeLock) {
 			extractDescendentsArrayImpl(filter, al, nestIntoMatchingNodes);
 		}
@@ -599,7 +599,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	 * @return a {@link org.w3c.dom.NodeList} object.
 	 */
 	protected NodeList getNodeList(NodeFilter filter) {
-		final List<Node> collection = new ArrayList<Node>();
+		final List<Node> collection = new ArrayList<>();
 		synchronized (this.treeLock) {
 			appendChildrenToCollectionImpl(filter, collection);
 		}
@@ -1051,7 +1051,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 	/** {@inheritDoc} */
 	@Override
 	public void normalize() {
-		final List<Node> textNodes = new LinkedList<Node>();
+		final List<Node> textNodes = new LinkedList<>();
 		boolean prevText = false;
 		for (Node child : Nodes.iterable(nodeList)) {
 			if (child.getNodeType() == Node.TEXT_NODE) {
@@ -1170,7 +1170,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				}
 				final StringBuilder textBuffer = new StringBuilder();
 				int firstIdx = idx;
-				final List<Node> toDelete = new LinkedList<Node>();
+				final List<Node> toDelete = new LinkedList<>();
 				for (int adjIdx = idx; --adjIdx >= 0;) {
 					final Node child = this.nodeList.item(adjIdx);
 					if (child instanceof Text) {
@@ -1214,7 +1214,7 @@ public abstract class NodeImpl extends AbstractScriptableDelegate implements Nod
 				throw new DOMException(DOMException.NOT_FOUND_ERR, "Node not a child");
 			}
 			int firstIdx = idx;
-			final List<Node> toDelete = new LinkedList<Node>();
+			final List<Node> toDelete = new LinkedList<>();
 			for (int adjIdx = idx; --adjIdx >= 0;) {
 				final Node child = this.nodeList.item(adjIdx);
 				if (child instanceof Text) {

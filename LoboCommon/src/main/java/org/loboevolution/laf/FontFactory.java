@@ -53,13 +53,13 @@ public class FontFactory {
 	private String defaultFontName = new LAFSettings().getInstance().getFont();
 
 	/** The font families. */
-	private final Set<String> fontFamilies = new HashSet<String>();
+	private final Set<String> fontFamilies = new HashSet<>();
 
 	/** The font map. */
-	private final Map<FontKey, Font> fontMap = new HashMap<FontKey, Font>();
+	private final Map<FontKey, Font> fontMap = new HashMap<>();
 
 	/** The registered fonts. */
-	private final Map<String, Font> registeredFonts = new HashMap<String, Font>();
+	private final Map<String, Font> registeredFonts = new HashMap<>();
 
 	/** The Constant instance. */
 	private static final FontFactory instance = new FontFactory();
@@ -82,7 +82,7 @@ public class FontFactory {
 	 */
 	public static Font scriptFont(Font baseFont, FontKey key) {
 
-		final Map<TextAttribute, Object> additionalAttributes = new HashMap<TextAttribute, Object>();
+		final Map<TextAttribute, Object> additionalAttributes = new HashMap<>();
 
 		Integer fontSuperScript = (Integer) baseFont.getAttributes().get(TextAttribute.SUPERSCRIPT);
 		if (fontSuperScript == null) {
@@ -180,7 +180,7 @@ public class FontFactory {
 			fontStyle |= Font.BOLD;
 		}
 
-		final Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+		final Map<TextAttribute, Object> attributes = new HashMap<>();
 		attributes.put(TextAttribute.TRACKING, (double) letterSpacing / 10 / 2);
 
 		if (baseFont != null) {

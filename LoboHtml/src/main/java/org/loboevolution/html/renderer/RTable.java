@@ -91,7 +91,7 @@ class RTable extends BaseElementRenderable {
 	}
 
 	private static final int MAX_CACHE_SIZE = 10;
-	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<LayoutKey, LayoutValue>(5);
+	private final Map<LayoutKey, LayoutValue> cachedLayout = new HashMap<>(5);
 	private LayoutKey lastLayoutKey = null;
 	private LayoutValue lastLayoutValue = null;
 	private int otherOrdinal;
@@ -119,7 +119,7 @@ class RTable extends BaseElementRenderable {
                                          final boolean isFloat, final boolean isFixed) {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null) {
-			others = new TreeSet<PositionedRenderable>(new ZIndexComparator());
+			others = new TreeSet<>(new ZIndexComparator());
 			this.positionedRenderables = others;
 		}
 		

@@ -95,10 +95,10 @@ public class PDFParser extends BaseWatchable {
     */
     public PDFParser(PDFPage cmds, byte[] stream, Map<String, PDFObject> resources) {
         super();
-        this.pageRef = new WeakReference<PDFPage>(cmds);
+        this.pageRef = new WeakReference<>(cmds);
         this.resources = resources;
         if (resources == null) {
-            this.resources = new HashMap<String, PDFObject>();
+            this.resources = new HashMap<>();
         }
         this.stream = stream;
     }
@@ -412,8 +412,8 @@ public class PDFParser extends BaseWatchable {
     */
     @Override
     public void setup() {
-        this.stack = new Stack<Object>();
-        this.parserStates = new Stack<ParserState>();
+        this.stack = new Stack<>();
+        this.parserStates = new Stack<>();
         this.state = new ParserState();
         this.path = new GeneralPath();
         this.loc = 0;
@@ -1148,7 +1148,7 @@ public class PDFParser extends BaseWatchable {
             bbox = new Rectangle2D.Float(bobj.getAt(0).getFloatValue(), bobj.getAt(1).getFloatValue(), bobj.getAt(2).getFloatValue(), bobj.getAt(3).getFloatValue());
             formCmds = new PDFPage(bbox, 0);
             formCmds.addXform(at);
-            HashMap<String, PDFObject> r = new HashMap<String, PDFObject>(this.resources);
+            HashMap<String, PDFObject> r = new HashMap<>(this.resources);
             PDFObject rsrc = obj.getDictRef("Resources");
             if (rsrc != null) {
                 r.putAll(rsrc.getDictionary());
@@ -1194,7 +1194,7 @@ public class PDFParser extends BaseWatchable {
         } else if (t.type == Tok.NAME) {
             return this.tok.name;
         } else if (t.type == Tok.BRKB) {
-            HashMap<String, PDFObject> hm = new HashMap<String, PDFObject>();
+            HashMap<String, PDFObject> hm = new HashMap<>();
             String name = null;
             Object obj;
             while ((obj = parseObject()) != null) {
@@ -1211,7 +1211,7 @@ public class PDFParser extends BaseWatchable {
             return hm;
         } else if (t.type == Tok.ARYB) {
             // build an array
-            ArrayList<Object> ary = new ArrayList<Object>();
+            ArrayList<Object> ary = new ArrayList<>();
             Object obj;
             while ((obj = parseObject()) != null) {
                 ary.add(obj);
@@ -1235,7 +1235,7 @@ public class PDFParser extends BaseWatchable {
     */
     private void parseInlineImage() throws IOException, DebugStopException {
         // build dictionary until ID, then read image until EI
-        HashMap<String, PDFObject> hm = new HashMap<String, PDFObject>();
+        HashMap<String, PDFObject> hm = new HashMap<>();
         while (true) {
             Tok t = nextToken();
             if (t.type == Tok.CMD) {

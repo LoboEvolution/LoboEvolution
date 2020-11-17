@@ -260,7 +260,7 @@ public enum CSSValues {
 	private static final Map<String, CSSValues> ENUM_MAP;
 	
 	static {
-		Map<String, CSSValues> map = new HashMap<String, CSSValues>();
+		Map<String, CSSValues> map = new HashMap<>();
 		for (CSSValues instance : CSSValues.values()) {
 			map.put(instance.getValue(), instance);
 		}

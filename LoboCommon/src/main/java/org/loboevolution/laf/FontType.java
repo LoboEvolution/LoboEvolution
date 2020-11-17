@@ -48,7 +48,7 @@ public enum FontType {
 	private static final Map<String, FontType> ENUM_MAP;
 	
 	static {
-		Map<String, FontType> map = new HashMap<String, FontType>();
+		Map<String, FontType> map = new HashMap<>();
 		for (FontType instance : FontType.values()) {
 			map.put(instance.getValue(), instance);
 		}

@@ -51,7 +51,7 @@ class RLine extends BaseRCollection {
 	private LineBreak lineBreak;
 	private BoundableRenderable mousePressTarget;
 
-	private final List<Renderable> renderables = new ArrayList<Renderable>(8);
+	private final List<Renderable> renderables = new ArrayList<>(8);
 
 	/**
 	 * Offset where next renderable should be placed. This can be different to
@@ -230,7 +230,7 @@ class RLine extends BaseRCollection {
 				final Renderable renderable = renderables.get(i);
 				if (renderable instanceof RWord || !(renderable instanceof BoundableRenderable)) {
 					if (overflow == null) {
-						overflow = new ArrayList<Renderable>();
+						overflow = new ArrayList<>();
 					}
 					if (renderable != rword && renderable instanceof RWord && ((RWord) renderable).getX() == 0) {
 						// Can't overflow words starting at offset zero.

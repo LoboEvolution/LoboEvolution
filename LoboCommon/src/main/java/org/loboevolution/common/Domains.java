@@ -37,7 +37,7 @@ public class Domains {
 	private static final Collection<String> gTLDs;
 
 	static {
-		gTLDs = new HashSet<String>();
+		gTLDs = new HashSet<>();
 		gTLDs.add(".com");
 		gTLDs.add(".edu");
 		gTLDs.add(".gov");
@@ -77,7 +77,7 @@ public class Domains {
 	 * @return a {@link java.util.Collection} object.
 	 */
 	public static Collection<String> getPossibleDomains(String hostName) {
-		final Collection<String> domains = new LinkedList<String>();
+		final Collection<String> domains = new LinkedList<>();
 		domains.add(hostName);
 		final int dotIdx = hostName.indexOf('.', 1);
 		if (dotIdx == -1) {

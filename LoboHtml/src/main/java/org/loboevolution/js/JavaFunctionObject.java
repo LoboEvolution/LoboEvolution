@@ -42,7 +42,7 @@ public class JavaFunctionObject extends ScriptableObject implements Function {
 
 	private static final long serialVersionUID = 1L;
 	private final String className;
-	private final List<Method> methods = new ArrayList<Method>();
+	private final List<Method> methods = new ArrayList<>();
 
 	/**
 	 * <p>Constructor for JavaFunctionObject.</p>

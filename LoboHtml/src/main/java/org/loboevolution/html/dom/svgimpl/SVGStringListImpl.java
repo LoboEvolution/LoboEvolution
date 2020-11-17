@@ -21,7 +21,7 @@ public class SVGStringListImpl implements SVGStringList {
 	 * <p>Constructor for SVGStringListImpl.</p>
 	 */
 	public SVGStringListImpl() {
-		pointList = new ArrayList<String>();
+		pointList = new ArrayList<>();
 	}
 
 	/** {@inheritDoc} */
@@ -39,7 +39,7 @@ public class SVGStringListImpl implements SVGStringList {
 	/** {@inheritDoc} */
 	@Override
 	public String initialize(String newItem) throws DOMException, SVGException {
-		pointList = new ArrayList<String>();
+		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
 	}

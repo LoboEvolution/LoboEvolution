@@ -31,7 +31,7 @@ public class ColorFactory {
 	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
 	
 	/** The color map. */
-	private Map<String, Color> colorMap = new HashMap<String, Color>(510);
+	private Map<String, Color> colorMap = new HashMap<>(510);
 
 	private final String COLORS = "SELECT DISTINCT name, value FROM COLOR";
 
@@ -311,7 +311,7 @@ public class ColorFactory {
 	}
 
 	private Map<String, Color> mapColor() {
-		final Map<String, Color> colorMap = new HashMap<String, Color>();
+		final Map<String, Color> colorMap = new HashMap<>();
 		colorMap.put("transparent", new Color(0, 0, 0, 0));
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				Statement stmt = conn.createStatement()) {

@@ -47,7 +47,7 @@ public class DropTargetListenerImpl extends DropTargetAdapter {
 		final int idx = this.tabbed.getDropIndex(p);
 		if (idx > -1 && this.tabbed.dragTabIdx > -1 && idx != this.tabbed.dragTabIdx) {
 			List<TabInfo> tabs = TabStore.getTabs();
-			List<Component> comps = new ArrayList<Component>(); 
+			List<Component> comps = new ArrayList<>();
 			for (int i = 0; i < tabs.size(); i++) {
 				Component comp = this.tabbed.getComponentAt(i);
 				comps.add(comp);

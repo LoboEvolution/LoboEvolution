@@ -86,8 +86,8 @@ public class NoireLookAndFeel extends AbstractLookAndFeel {
 
 	private static NoireDefaultTheme myTheme = null;
 
-	private static final List<String> themesList = new ArrayList<String>();
-	private static final Map<String, Properties> themesMap = new HashMap<String, Properties>();
+	private static final List<String> themesList = new ArrayList<>();
+	private static final Map<String, Properties> themesMap = new HashMap<>();
 	private static final Properties defaultProps = new Properties();
 	private static final Properties smallFontProps = new Properties();
 	private static final Properties largeFontProps = new Properties();

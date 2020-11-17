@@ -37,7 +37,7 @@ public class GoogleChromeData extends BrowserData {
 	private static final String CHROME_HISTORY = "SELECT DISTINCT url from urls";
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
-		final List<BookmarkInfo> listInfo = new ArrayList<BookmarkInfo>();
+		final List<BookmarkInfo> listInfo = new ArrayList<>();
 		final File f = new File(path);
 
 		try (Scanner scan = new Scanner(f)) {
@@ -66,7 +66,7 @@ public class GoogleChromeData extends BrowserData {
 	}
 
 	private static List<CookieInfo> getCookieInfo(String path) {
-		final List<CookieInfo> cookies = new ArrayList<CookieInfo>();
+		final List<CookieInfo> cookies = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(CHROME_COOKIES);
 				ResultSet rs = pstmt.executeQuery()) {
@@ -88,7 +88,7 @@ public class GoogleChromeData extends BrowserData {
 	}
 
 	private static List<String> getHostEntries(String path) {
-		final List<String> hostEntries = new ArrayList<String>();
+		final List<String> hostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(CHROME_HISTORY);
 				ResultSet rs = pstmt.executeQuery()) {

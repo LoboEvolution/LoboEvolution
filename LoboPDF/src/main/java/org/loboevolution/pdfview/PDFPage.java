@@ -104,9 +104,9 @@ public class PDFPage {
         }
         this.bbox = bbox;
         // initialize the cache of images and parsers
-        this.renderers = Collections.synchronizedMap(new HashMap<ImageInfo, WeakReference<?>>());
+        this.renderers = Collections.synchronizedMap(new HashMap<>());
         // initialize the list of commands
-        this.commands = Collections.synchronizedList(new ArrayList<PDFCmd>(250));
+        this.commands = Collections.synchronizedList(new ArrayList<>(250));
         // corresponding pop in PDFParser -> setStatus
         this.addPush();
     }
@@ -215,7 +215,7 @@ public class PDFPage {
             if (this.cache != null) {
                 this.cache.addImage(this, info, image, renderer);
             }
-            this.renderers.put(info, new WeakReference<PDFRenderer>(renderer));
+            this.renderers.put(info, new WeakReference<>(renderer));
         }
         // the renderer may be null if we are getting this image from the
         // cache and rendering has completed.
@@ -680,7 +680,7 @@ public class PDFPage {
     * @return List<PDFAnnotation>
     ************************************************************************/
     public List<PDFAnnotation> getAnnots(ANNOTATION_TYPE type) {
-        List<PDFAnnotation> list = new ArrayList<PDFAnnotation>();
+        List<PDFAnnotation> list = new ArrayList<>();
         if (this.annots != null) {
             for (PDFAnnotation annot : this.annots) {
                 if (annot.getType() == type) {

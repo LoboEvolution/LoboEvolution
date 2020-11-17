@@ -116,7 +116,7 @@ public class LAFSettings implements Serializable {
 	 * @return an array of {@link java.lang.String} objects.
 	 */
 	public static String[] getFonts(String type) {
-		final List<String> fonts = new ArrayList<String>();
+		final List<String> fonts = new ArrayList<>();
 		final String query = "SELECT name FROM " + type;
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				Statement stmt = conn.createStatement();

@@ -34,7 +34,7 @@ public class Cache {
 
     /** Creates a new instance of a Cache */
     public Cache() {
-        this.pages = Collections.synchronizedMap(new HashMap<Integer, SoftReference<PageRecord>>());
+        this.pages = Collections.synchronizedMap(new HashMap<>());
     }
 
     /**
@@ -183,7 +183,7 @@ public class Cache {
         rec.value = page;
         rec.generator = parser;
 
-        this.pages.put(pageNumber, new SoftReference<PageRecord>(rec));
+        this.pages.put(pageNumber, new SoftReference<>(rec));
 
         return rec;
     }
@@ -239,7 +239,7 @@ public class Cache {
         rec.generator = renderer;
 
         // add it to the cache
-        pageRec.images.put(info, new SoftReference<Record>(rec));
+        pageRec.images.put(info, new SoftReference<>(rec));
 
         return rec;
     }
@@ -305,7 +305,7 @@ public class Cache {
 
         /** create a new page record */
         public PageRecord() {
-            this.images = Collections.synchronizedMap(new HashMap<ImageInfo, SoftReference<Record>>());
+            this.images = Collections.synchronizedMap(new HashMap<>());
         }
     }
 }

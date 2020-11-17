@@ -38,7 +38,7 @@ public class HtmlContent {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<MetaInfo> getJSList() {
-		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final NodeList nodeList = doc.getElementsByTagName("script");
 
@@ -73,7 +73,7 @@ public class HtmlContent {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<MetaInfo> getMediaList() {
-		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		NodeList nodeList = doc.getElementsByTagName("img");
 
@@ -129,7 +129,7 @@ public class HtmlContent {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<MetaInfo> getMetaList() {
-		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final NodeList nodeList = doc.getElementsByTagName("meta");
 
@@ -160,7 +160,7 @@ public class HtmlContent {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<MetaInfo> getStyleList() {
-		final List<MetaInfo> infoList = new ArrayList<MetaInfo>();
+		final List<MetaInfo> infoList = new ArrayList<>();
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		final NodeList nodeList = doc.getElementsByTagName("link");
 

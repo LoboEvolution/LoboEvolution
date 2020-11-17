@@ -59,7 +59,7 @@ public class OperationSet {
          * Chapter 8 - Operator Details
          */
         if (this.operationSet == null) {
-            this.operationSet = new HashMap<String, PostScriptOperation>();
+            this.operationSet = new HashMap<>();
            
             // Arithmetic Operators
             this.operationSet.put("abs", new Abs());

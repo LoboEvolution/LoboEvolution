@@ -22,7 +22,7 @@ public class SVGLengthListImpl implements SVGLengthList {
 	 * <p>Constructor for SVGLengthListImpl.</p>
 	 */
 	public SVGLengthListImpl() {
-		pointList = new ArrayList<SVGLength>();
+		pointList = new ArrayList<>();
 	}
 
 	/** {@inheritDoc} */
@@ -40,7 +40,7 @@ public class SVGLengthListImpl implements SVGLengthList {
 	/** {@inheritDoc} */
 	@Override
 	public SVGLength initialize(SVGLength newItem) throws DOMException, SVGException {
-		pointList = new ArrayList<SVGLength>();
+		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
 	}

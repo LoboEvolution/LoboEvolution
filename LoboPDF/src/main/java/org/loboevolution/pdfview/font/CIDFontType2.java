@@ -101,7 +101,7 @@ public class CIDFontType2 extends TTFFont {
         if (widthObj != null) {
 
             // initialize the widths array
-            this.widths = new HashMap<Character, Float>();
+            this.widths = new HashMap<>();
 
             // parse the width array
             widthArray = widthObj.getArray();
@@ -160,7 +160,7 @@ public class CIDFontType2 extends TTFFont {
         if (widthObj != null) {
 
             // initialize the widths array
-            this.widthsVertical = new HashMap<Character, Float>();
+            this.widthsVertical = new HashMap<>();
 
             // parse the width2 array
             widthArray = widthObj.getArray();

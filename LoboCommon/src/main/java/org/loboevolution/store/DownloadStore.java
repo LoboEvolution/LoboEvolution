@@ -59,7 +59,7 @@ public class DownloadStore {
 	 * @return a {@link List} object.
 	 */
 	public List<String> getDownload() {
-		final List<String> recent = new ArrayList<String>();
+		final List<String> recent = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(DOWNLOAD_ORDERED)) {
 			try (ResultSet rs = pstmt.executeQuery()) {

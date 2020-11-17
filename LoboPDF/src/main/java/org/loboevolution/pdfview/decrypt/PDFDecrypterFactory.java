@@ -167,7 +167,7 @@ public class PDFDecrypterFactory {
         // Assemble decrypters for each filter in the
         // crypt filter (CF) dictionary
         final Map<String, PDFDecrypter> cfDecrypters =
-                new HashMap<String, PDFDecrypter>();
+                new HashMap<>();
         final PDFObject cfDict = encryptDict.getDictRef("CF");
         if (cfDict == null) {
             throw new PDFParseException(

@@ -118,7 +118,7 @@ public class TabStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<TabInfo> getTabs() {
-		List<TabInfo> urls = new ArrayList<TabInfo>();
+		List<TabInfo> urls = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(TABS)) {
 			try (ResultSet rs = pstmt.executeQuery()) {
@@ -142,7 +142,7 @@ public class TabStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<String> getUrls() {
-		List<String> urls = new ArrayList<String>();
+		List<String> urls = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(TAB_URL)) {
 			try (ResultSet rs = pstmt.executeQuery()) {

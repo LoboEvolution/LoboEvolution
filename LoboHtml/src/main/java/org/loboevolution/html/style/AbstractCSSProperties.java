@@ -54,7 +54,7 @@ import com.gargoylesoftware.css.util.CSSProperties;
  */
 public class AbstractCSSProperties extends AbstractScriptableDelegate implements CSSProperties, CSS3Properties {
 	
-	private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<String, SubPropertySetter>();
+	private static final Map<String, SubPropertySetter> SUB_SETTERS = new HashMap<>();
 
 	static {
 		final Map<String, SubPropertySetter> subSetters = SUB_SETTERS;
@@ -105,7 +105,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		synchronized (this) {
 			List<CSSStyleDeclarationImpl> sd = this.styleDeclarations;
 			if (sd == null) {
-				sd = new LinkedList<CSSStyleDeclarationImpl>();
+				sd = new LinkedList<>();
 				this.styleDeclarations = sd;
 			}
 			sd.add(styleDeclaration);
@@ -2048,7 +2048,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		Map<String, PropertyCSS> vm = this.valueMap;
 		synchronized (this) {
 			if (vm == null) {
-				vm = new HashMap<String, PropertyCSS>(1);
+				vm = new HashMap<>(1);
 				this.valueMap = vm;
 			}
 			vm.put(lowerCaseName, new PropertyCSS(value, true));
@@ -2066,7 +2066,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		Map<String, PropertyCSS> vm = this.valueMap;
 		synchronized (this) {
 			if (vm == null) {
-				vm = new HashMap<String, PropertyCSS>(1);
+				vm = new HashMap<>(1);
 				this.valueMap = vm;
 			} else {
 				if (!important) {

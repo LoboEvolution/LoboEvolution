@@ -71,7 +71,7 @@ public enum LAFType {
 	private static final Map<String, LAFType> ENUM_MAP;
 	
 	static {
-		Map<String, LAFType> map = new HashMap<String, LAFType>();
+		Map<String, LAFType> map = new HashMap<>();
 		for (LAFType instance : LAFType.values()) {
 			map.put(instance.getValue(), instance);
 		}

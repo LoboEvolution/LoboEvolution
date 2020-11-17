@@ -39,7 +39,7 @@ public class ItemListControl<T> extends JComponent {
 	 */
 	public ItemListControl(ItemEditorFactory<T> ief) {
 		this.itemEditorFactory = ief;
-		this.comboBox = new JComboBox<T>();
+		this.comboBox = new JComboBox<>();
 		createAndShowGUI();
 	}
 
@@ -47,16 +47,16 @@ public class ItemListControl<T> extends JComponent {
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		this.getComboBox().setEditable(false);
 		final LoboButton setDefaultButton = new LoboButton();
-		setDefaultButton.setAction(new SetAsDefaultAction<T>(this));
+		setDefaultButton.setAction(new SetAsDefaultAction<>(this));
 		setDefaultButton.setText("Set Default");
 		final LoboButton editButton = new LoboButton();
-		editButton.setAction(new EditAction<T>(false, this));
+		editButton.setAction(new EditAction<>(false, this));
 		editButton.setText("Edit");
 		final LoboButton addButton = new LoboButton();
-		addButton.setAction(new EditAction<T>(true, this));
+		addButton.setAction(new EditAction<>(true, this));
 		addButton.setText("Add");
 		final LoboButton removeButton = new LoboButton();
-		removeButton.setAction(new RemoveAction<T>(this));
+		removeButton.setAction(new RemoveAction<>(this));
 		removeButton.setText("Remove");
 		this.add(getComboBox());
 		this.add(setDefaultButton);
@@ -98,7 +98,7 @@ public class ItemListControl<T> extends JComponent {
 	 * @return the items
 	 */
 	public Collection<T> getItems() {
-		final Collection<T> items = new ArrayList<T>();
+		final Collection<T> items = new ArrayList<>();
 		final int count = this.getComboBox().getItemCount();
 		for (int i = 0; i < count; i++) {
 			items.add(this.getComboBox().getItemAt(i));

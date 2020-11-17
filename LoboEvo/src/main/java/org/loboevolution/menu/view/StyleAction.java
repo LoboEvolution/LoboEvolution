@@ -1,14 +1,10 @@
 package org.loboevolution.menu.view;
 
 import org.loboevolution.component.BrowserFrame;
-import org.loboevolution.component.ToolBar;
-import org.loboevolution.menu.tools.clear.ClearHistoryWindow;
-import org.loboevolution.net.HttpNetwork;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**

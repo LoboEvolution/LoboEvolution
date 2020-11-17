@@ -63,9 +63,9 @@ public class ItemEditor<T> extends JFrame implements LoboLookAndFeel {
 		this.captionLabel.setPreferredSize(new Dimension(Short.MAX_VALUE, 32));
 		this.captionLabel.setAlignmentX(0.0f);
 		this.captionLabel.setBorder(new EmptyBorder(8, 0, 8, 0));
-		this.okButton.setAction(new OkAction<T>(this));
+		this.okButton.setAction(new OkAction<>(this));
 		this.okButton.setText("OK");
-		this.cancelButton.setAction(new CancelAction<T>(this));
+		this.cancelButton.setAction(new CancelAction<>(this));
 		this.cancelButton.setText("Cancel");
 
 		final Box rootBox = new Box(BoxLayout.Y_AXIS);

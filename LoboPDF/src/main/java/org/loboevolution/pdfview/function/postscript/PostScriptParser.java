@@ -28,7 +28,7 @@ public class PostScriptParser {
 	 ************************************************************************/
 	
 	public List<String> parse(String scriptContent) {
-		List<String> tokens = new LinkedList<String>();
+		List<String> tokens = new LinkedList<>();
 		StringTokenizer tok = new StringTokenizer(scriptContent, " \t\n\r"); 
 		while (tok.hasMoreTokens()) {
 			String t = tok.nextToken();

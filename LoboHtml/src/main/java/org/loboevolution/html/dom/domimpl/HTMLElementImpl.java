@@ -205,7 +205,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	protected final List<CSSStyleSheetImpl.SelectorEntry> findStyleDeclarations(String elementName, String[] classes) {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc == null) {
-			return new ArrayList<CSSStyleSheetImpl.SelectorEntry>();
+			return new ArrayList<>();
 		}
 		final StyleSheetAggregator ssa = doc.getStyleSheetAggregator();
 		return ssa.getActiveStyleDeclarations(this, elementName, classes);
@@ -411,7 +411,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			// return instance already set for consistency.
 			Map<String, AbstractCSSProperties> cs = this.computedStyles;
 			if (cs == null) {
-				cs = new HashMap<String, AbstractCSSProperties>(2);
+				cs = new HashMap<>(2);
 				this.computedStyles = cs;
 			} else {
 				final AbstractCSSProperties sds2 = cs.get(pseudoElement);
@@ -707,7 +707,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		Set<String> pnset = null;
 		if (this.isMouseOver) {
 			if (pnset == null) {
-				pnset = new HashSet<String>(1);
+				pnset = new HashSet<>(1);
 			}
 			pnset.add("hover");
 		}
@@ -805,7 +805,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		synchronized (this) {
 			ihs = this.hasHoverStyleByElement;
 			if (ihs == null) {
-				ihs = new HashMap<HTMLElementImpl, Boolean>(2);
+				ihs = new HashMap<>(2);
 				this.hasHoverStyleByElement = ihs;
 			}
 			ihs.put(ancestor, hhs);

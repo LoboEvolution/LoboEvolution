@@ -73,8 +73,8 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param y1 a {@link java.lang.Object} object.
 	 */
 	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1) {
-		fractions = new ArrayList<Float>();
-		colors = new ArrayList<Color>();
+		fractions = new ArrayList<>();
+		colors = new ArrayList<>();
 		this.linearX = Double.valueOf(x0.toString());
 		this.linearX1 = Double.valueOf(y0.toString());
 		this.linearY = Double.valueOf(x1.toString());
@@ -92,8 +92,8 @@ public class CanvasGradientImpl implements CanvasGradient {
 	 * @param r2 a {@link java.lang.Object} object.
 	 */
 	public CanvasGradientImpl(Object x0, Object y0, Object x1, Object y1, Object r1, Object r2) {
-		fractions = new ArrayList<Float>();
-		colors = new ArrayList<Color>();
+		fractions = new ArrayList<>();
+		colors = new ArrayList<>();
 		this.linearX = Double.valueOf(x0.toString());
 		this.linearX1 = Double.valueOf(y0.toString());
 		this.linearY = Double.valueOf(x1.toString());

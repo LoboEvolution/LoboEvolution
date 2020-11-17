@@ -34,7 +34,7 @@ import java.util.List;
  * @version $Id: $Id
  */
 public abstract class Overlay {
-	private final List<OverlayComponent> overlayComponents = new ArrayList<OverlayComponent>(1);
+	private final List<OverlayComponent> overlayComponents = new ArrayList<>(1);
 
 	/**
 	 * <p>addOverlayComponent.</p>

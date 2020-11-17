@@ -64,7 +64,7 @@ public abstract class EventDispatch2 {
 	 * @return a {@link java.util.Collection} object.
 	 */
 	public Collection<EventListener> createListenerCollection() {
-		return new ArrayList<EventListener>();
+		return new ArrayList<>();
 	}
 
 	/**

@@ -126,7 +126,7 @@ public class HTMLAbstractUIElement extends HTMLElementImpl {
 					}
 				}
 				if (fba == null) {
-					fba = new HashMap<String, Function>(1);
+					fba = new HashMap<>(1);
 					this.functionByAttribute = fba;
 				}
 				fba.put(normalAttributeName, f);

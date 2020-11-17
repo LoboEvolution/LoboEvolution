@@ -25,7 +25,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 	 * <p>Constructor for SVGTransformListImpl.</p>
 	 */
 	public SVGTransformListImpl() {
-		transList = new ArrayList<SVGTransform>();
+		transList = new ArrayList<>();
 	}
 
 	/** {@inheritDoc} */
@@ -43,7 +43,7 @@ public class SVGTransformListImpl implements SVGTransformList {
 	/** {@inheritDoc} */
 	@Override
 	public SVGTransform initialize(SVGTransform newItem) throws DOMException, SVGException {
-		transList = new ArrayList<SVGTransform>();
+		transList = new ArrayList<>();
 		transList.add(newItem);
 		return newItem;
 	}

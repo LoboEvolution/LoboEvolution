@@ -52,7 +52,7 @@ public enum ListValues {
 	private static final Map<Integer, ListValues> ENUM_MAP;
 	
 	static {
-		Map<Integer, ListValues> map = new HashMap<Integer, ListValues>();
+		Map<Integer, ListValues> map = new HashMap<>();
 		for (ListValues instance : ListValues.values()) {
 			map.put(instance.getValue(), instance);
 		}

@@ -56,7 +56,7 @@ public abstract class Flags {
 
 	protected int flagsAsInt;
 
-	protected final Map<String, Integer> flags = new LinkedHashMap<String, Integer>();
+	protected final Map<String, Integer> flags = new LinkedHashMap<>();
 
 	public int getFlagValue(String key) {
 		Integer value = flags.get(key);

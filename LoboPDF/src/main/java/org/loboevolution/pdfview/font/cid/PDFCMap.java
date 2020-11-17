@@ -75,7 +75,7 @@ public abstract class PDFCMap {
      * Populate the cache with well-known types
      */
     protected static void populateCache() {
-        cache = new HashMap<String, PDFCMap>();
+        cache = new HashMap<>();
     
         // add the Identity-H map
         cache.put("Identity-H", new PDFCMap() {

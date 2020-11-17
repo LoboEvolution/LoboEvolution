@@ -40,7 +40,7 @@ public class PNGPredictor extends Predictor {
 	public ByteBuffer unpredict(ByteBuffer imageData)
         throws IOException
     {
-        List<byte[]> rows = new ArrayList<byte[]>();
+        List<byte[]> rows = new ArrayList<>();
         
         byte[] curLine = null;
         byte[] prevLine = null;

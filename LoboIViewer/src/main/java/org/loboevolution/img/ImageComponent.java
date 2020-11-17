@@ -55,8 +55,8 @@ class ImageComponent extends JComponent {
 	private boolean pixelatedZoom = false;
 	private transient Object interpolationType = RenderingHints.VALUE_INTERPOLATION_BICUBIC;
 	private double zoomFactor = 1;
-	private final transient List<ImageMouseMotionListener> moveListeners = new ArrayList<ImageMouseMotionListener>(4);
-	private final transient List<ImageMouseClickListener> clickListeners = new ArrayList<ImageMouseClickListener>(4);
+	private final transient List<ImageMouseMotionListener> moveListeners = new ArrayList<>(4);
+	private final transient List<ImageMouseClickListener> clickListeners = new ArrayList<>(4);
 	private final transient MouseEventTranslator mouseEventTranslator = new MouseEventTranslator(this);
 	private final transient PaintManager paintManager = new PaintManager(this);
 	private final transient Rescroller rescroller = new Rescroller();

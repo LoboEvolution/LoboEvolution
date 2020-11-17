@@ -36,7 +36,7 @@ public class StartupListControl extends JComponent {
 	 * Instantiates a String.valueOf list control.
 	 */
 	public StartupListControl() {
-		this.comboBox = new JComboBox<String>();
+		this.comboBox = new JComboBox<>();
 		createAndShowGUI();
 	}
 
@@ -119,7 +119,7 @@ public class StartupListControl extends JComponent {
 		try {
 			final BufferedReader reader = new BufferedReader(new StringReader(text));
 			String line;
-			final ArrayList<String> stringsAL = new ArrayList<String>();
+			final ArrayList<String> stringsAL = new ArrayList<>();
 			while ((line = reader.readLine()) != null) {
 				stringsAL.add(line);
 			}

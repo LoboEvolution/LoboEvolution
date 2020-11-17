@@ -18,7 +18,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.CSSValues;

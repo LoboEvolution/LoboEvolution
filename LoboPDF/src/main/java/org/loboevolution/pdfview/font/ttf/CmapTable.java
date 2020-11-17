@@ -48,7 +48,7 @@ public class CmapTable extends TrueTypeTable {
         
         setVersion((short) 0x0);
     
-        this.subtables = Collections.synchronizedSortedMap(new TreeMap<CmapSubtable,CMap>());
+        this.subtables = Collections.synchronizedSortedMap(new TreeMap<>());
     }
     
       /**
@@ -72,7 +72,7 @@ public class CmapTable extends TrueTypeTable {
      * Get all CMaps
      */
     public CMap[] getCMaps() {
-        Collection<CMap> c = new ArrayList<CMap>();
+        Collection<CMap> c = new ArrayList<>();
         
         CMap cmap_3_1 = this.getCMap((short)3, (short)1);
         if (cmap_3_1 != null) {

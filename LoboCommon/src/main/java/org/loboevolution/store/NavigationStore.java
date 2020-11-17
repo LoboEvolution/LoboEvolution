@@ -80,7 +80,7 @@ public class NavigationStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<String> getHostOrdered(int index) {
-		final List<String> recentHostEntries = new ArrayList<String>();
+		final List<String> recentHostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(HOST_ORDERED)) {
 			pstmt.setInt(1, index);
@@ -102,7 +102,7 @@ public class NavigationStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<String[]> getRecentHostEntries(int maxNumItems) {
-		final List<String[]> recentHostEntries = new ArrayList<String[]>();
+		final List<String[]> recentHostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(HOST)) {
 			pstmt.setInt(1, maxNumItems);

@@ -54,7 +54,7 @@ public class InfoPageWindow extends JFrame {
 	private JScrollPane content(List<MetaInfo> infoList, String syntax) {
 		try {
 			final Object[] columnNames = { "" };
-			final List<String[]> values = new ArrayList<String[]>();
+			final List<String[]> values = new ArrayList<>();
 			for (final MetaInfo info : infoList) {
 				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName() });
@@ -147,7 +147,7 @@ public class InfoPageWindow extends JFrame {
 	private JScrollPane infoContent(List<MetaInfo> infoList) {
 		try {
 			final Object[] columnNames = { "", "" };
-			final List<String[]> values = new ArrayList<String[]>();
+			final List<String[]> values = new ArrayList<>();
 			for (final MetaInfo info : infoList) {
 				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName(), info.getContent() });
@@ -180,7 +180,7 @@ public class InfoPageWindow extends JFrame {
 	private Component mediaContent(List<MetaInfo> mediaList) {
 		try {
 			final Object[] columnNames = { "" };
-			final List<String[]> values = new ArrayList<String[]>();
+			final List<String[]> values = new ArrayList<>();
 			for (final MetaInfo info : mediaList) {
 				if (Strings.isNotBlank(info.getName())) {
 					values.add(new String[] { info.getName() });

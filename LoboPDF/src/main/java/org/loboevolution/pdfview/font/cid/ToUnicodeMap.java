@@ -81,9 +81,9 @@ public class ToUnicodeMap extends PDFCMap {
 	
 	public ToUnicodeMap(PDFObject map) throws IOException {
 		super();
-		this.singleCharMappings = new HashMap<Character, Character>();
-		this.charRangeMappings = new ArrayList<CharRangeMapping>();
-		this.codeRangeMappings = new ArrayList<CodeRangeMapping>();
+		this.singleCharMappings = new HashMap<>();
+		this.charRangeMappings = new ArrayList<>();
+		this.codeRangeMappings = new ArrayList<>();
 		parseMappings(map);
 	}
 	

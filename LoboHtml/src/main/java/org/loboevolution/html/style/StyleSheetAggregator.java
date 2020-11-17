@@ -89,7 +89,7 @@ public class StyleSheetAggregator {
 	 * <p>Constructor for StyleSheetAggregator.</p>
 	 */
 	public StyleSheetAggregator() {
-		styleSheets = new ArrayList<CSSStyleSheetImpl>();
+		styleSheets = new ArrayList<>();
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class StyleSheetAggregator {
 	 * @return a {@link java.util.List} object.
 	 */
 	public final List<CSSStyleSheetImpl.SelectorEntry> getActiveStyleDeclarations(HTMLElementImpl element, String elementName, final String[] classes) {
-		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<CSSStyleSheetImpl.SelectorEntry>();
+		List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
 		
 		for (CSSStyleSheetImpl sheet : styleSheets) {
 			if(matchingRules.size() == 0) {
@@ -733,7 +733,7 @@ public class StyleSheetAggregator {
 		if (index == null) {
 			index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
 		}
-		index(index, ruleList, new HashSet<String>());
+		index(index, ruleList, new HashSet<>());
 		styleSheet.setRuleIndex(index);
 		styleSheets.add(styleSheet);
 	}

@@ -21,7 +21,7 @@ class FunctionTimerTask extends WeakWindowTask {
 	public FunctionTimerTask(Window window, Integer timeIDInt, Function function, boolean removeTask) {
 		super(window);
 		this.timeIDInt = timeIDInt;
-		this.functionRef = new WeakReference<Function>(function);
+		this.functionRef = new WeakReference<>(function);
 		this.removeTask = removeTask;
 	}
 

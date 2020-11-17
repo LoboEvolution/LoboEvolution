@@ -362,7 +362,7 @@ public class Strings {
 	 * @return the string[]
 	 */
 	public static String[] split(String phrase) {
-		final ArrayList<String> wordList = new ArrayList<String>();
+		final ArrayList<String> wordList = new ArrayList<>();
 		StringBuilder word = null;
 		final char[] list = phrase.toCharArray();
 		for (final char ch : list) {
@@ -399,7 +399,7 @@ public class Strings {
 	 */
 	public static String[] splitUsingTokenizer(String subject, String delimiters) {
 		final StringTokenizer strTkn = new StringTokenizer(subject, delimiters);
-		final ArrayList<String> arrLis = new ArrayList<String>(subject.length());
+		final ArrayList<String> arrLis = new ArrayList<>(subject.length());
 
 		while (strTkn.hasMoreTokens()) {
 			arrLis.add(strTkn.nextToken());

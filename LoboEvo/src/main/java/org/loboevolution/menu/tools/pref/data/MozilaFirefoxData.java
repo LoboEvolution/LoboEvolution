@@ -35,7 +35,7 @@ public class MozilaFirefoxData extends BrowserData {
 	private static final String MOZ_HISTORY = "SELECT DISTINCT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
-		final List<BookmarkInfo> bookmarks = new ArrayList<BookmarkInfo>();
+		final List<BookmarkInfo> bookmarks = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_BOOKMARKS);
 				ResultSet rs = pstmt.executeQuery()) {
@@ -53,7 +53,7 @@ public class MozilaFirefoxData extends BrowserData {
 	}
 
 	private static List<CookieInfo> getCookieInfo(String path) {
-		final List<CookieInfo> cookies = new ArrayList<CookieInfo>();
+		final List<CookieInfo> cookies = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_COOKIES);
 				ResultSet rs = pstmt.executeQuery()) {
@@ -75,7 +75,7 @@ public class MozilaFirefoxData extends BrowserData {
 	}
 
 	private static List<String> getHostEntries(String path) {
-		final List<String> hostEntries = new ArrayList<String>();
+		final List<String> hostEntries = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.JDBC_SQLITE + path);
 				PreparedStatement pstmt = conn.prepareStatement(MOZ_HISTORY);
 				ResultSet rs = pstmt.executeQuery()) {

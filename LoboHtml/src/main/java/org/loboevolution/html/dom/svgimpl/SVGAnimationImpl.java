@@ -93,7 +93,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public TimeList getBegin() {
-		ArrayList<Time> beginTimeList = new ArrayList<Time>();
+		ArrayList<Time> beginTimeList = new ArrayList<>();
 		String begin = this.getAttribute("begin");
 
 		if (begin != null) {
@@ -116,7 +116,7 @@ public class SVGAnimationImpl extends SVGElementImpl implements SMILAnimation {
 	/** {@inheritDoc} */
 	@Override
 	public TimeList getEnd() {
-		ArrayList<Time> beginTimeList = new ArrayList<Time>();
+		ArrayList<Time> beginTimeList = new ArrayList<>();
 		String begin = this.getAttribute("end");
 
 		if (begin != null) {

@@ -81,7 +81,7 @@ public class ToolBar extends JToolBar implements IToolBar {
 		
 		BookmarksStore book = new BookmarksStore();
 		List<BookmarkInfo> bookmarks = book.getBookmarks(100);
-		List<String> hosts = new ArrayList<String>();
+		List<String> hosts = new ArrayList<>();
 		bookmarks.forEach(bookmark -> hosts.add(bookmark.getUrl()));
 		Autocomplete.setupAutoComplete(addressBar, hosts);
 		addressBar.addKeyListener(new KeyAdapter() {

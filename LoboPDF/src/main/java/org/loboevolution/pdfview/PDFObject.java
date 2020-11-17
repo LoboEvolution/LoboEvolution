@@ -21,7 +21,6 @@ package org.loboevolution.pdfview;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.nio.ByteBuffer;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -249,7 +248,7 @@ public class PDFObject {
             dereference().setCache(obj);
             return;
         } else {
-            cache = new SoftReference<Object>(obj);
+            cache = new SoftReference<>(obj);
         }
     }
 
@@ -349,7 +348,7 @@ public class PDFObject {
         if (outStream == null) {
             stream.rewind();
             outStream = PDFDecoder.decodeStream(this, stream, filterLimits);
-            decodedStreamFilterLimits = new HashSet<String>(filterLimits);
+            decodedStreamFilterLimits = new HashSet<>(filterLimits);
             decodedStream = new SoftReference(outStream);
         }
 
@@ -513,7 +512,7 @@ public class PDFObject {
         }
 
         // wrong type
-        return new HashMap<String,PDFObject>();
+        return new HashMap<>();
     }
 
     /**
@@ -701,7 +700,7 @@ public class PDFObject {
 
                 obj = owner.dereference((PDFXref)value, getDecrypter());
 
-                cache = new SoftReference<PDFObject>(obj);
+                cache = new SoftReference<>(obj);
             }
 
             return obj;

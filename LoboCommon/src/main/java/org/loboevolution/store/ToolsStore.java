@@ -52,7 +52,7 @@ public class ToolsStore implements Serializable {
 	 * @return a {@link java.util.List} object.
 	 */
 	public List<SearchEngineStore> getSearchEngines() {
-		final List<SearchEngineStore> searchEngineStores = new ArrayList<SearchEngineStore>();
+		final List<SearchEngineStore> searchEngineStores = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				Statement stmt = conn.createStatement();
 				ResultSet rs = stmt.executeQuery(this.SEARCH2)) {

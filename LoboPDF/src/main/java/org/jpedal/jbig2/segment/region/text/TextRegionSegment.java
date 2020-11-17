@@ -103,7 +103,7 @@ public class TextRegionSegment extends RegionSegment {
 		int[] referredToSegments = segmentHeader.getReferredToSegments();
 
 		//List codeTables = new ArrayList();
-		List<Segment> segmentsReferenced = new LinkedList<Segment>();
+		List<Segment> segmentsReferenced = new LinkedList<>();
 		int noOfSymbols = 0;
 
 		if (JBIG2StreamDecoder.debug)

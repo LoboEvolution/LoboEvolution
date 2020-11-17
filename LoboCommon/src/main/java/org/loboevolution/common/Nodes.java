@@ -62,22 +62,22 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<Node> iterable(final NodeList nodeList) {
-	    return () -> new Iterator<Node>() {
+	    return () -> new Iterator<>() {
 
-	        private int index = 0;
+            private int index = 0;
 
-	        @Override
-	        public boolean hasNext() {
-	            return index < nodeList.getLength();
-	        }
+            @Override
+            public boolean hasNext() {
+                return index < nodeList.getLength();
+            }
 
-	        @Override
-	        public Node next() {
-	            if (!hasNext())
-	                throw new NoSuchElementException();
-	            return nodeList.item(index++); 
-	        }
-	    };
+            @Override
+            public Node next() {
+                if (!hasNext())
+                    throw new NoSuchElementException();
+                return nodeList.item(index++);
+            }
+        };
 	}
 	
 	/**
@@ -87,22 +87,22 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<Attr> iterable(final NamedNodeMap attrList) {
-	    return () -> new Iterator<Attr>() {
+	    return () -> new Iterator<>() {
 
-	        private int index = 0;
+            private int index = 0;
 
-	        @Override
-	        public boolean hasNext() {
-	            return index < attrList.getLength();
-	        }
+            @Override
+            public boolean hasNext() {
+                return index < attrList.getLength();
+            }
 
-	        @Override
-	        public Attr next() {
-	            if (!hasNext())
-	                throw new NoSuchElementException();
-	            return (Attr) attrList.item(index++); 
-	        }
-	    };
+            @Override
+            public Attr next() {
+                if (!hasNext())
+                    throw new NoSuchElementException();
+                return (Attr) attrList.item(index++);
+            }
+        };
 	}
 	
 	/**
@@ -112,21 +112,21 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<String> iterable(final CSSStyleDeclaration cssList) {
-	    return () -> new Iterator<String>() {
+	    return () -> new Iterator<>() {
 
-	        private int index = 0;
+            private int index = 0;
 
-	        @Override
-	        public boolean hasNext() {
-	            return index < cssList.getLength();
-	        }
+            @Override
+            public boolean hasNext() {
+                return index < cssList.getLength();
+            }
 
-	        @Override
-	        public String next() {
-	            if (!hasNext())
-	                throw new NoSuchElementException();
-	            return cssList.item(index++);
-	        }
-	    };
+            @Override
+            public String next() {
+                if (!hasNext())
+                    throw new NoSuchElementException();
+                return cssList.item(index++);
+            }
+        };
 	}
 }

@@ -82,7 +82,7 @@ public class InputPassword {
 			return list;
 		}
 		
-		list = new ArrayList<String>();
+		list = new ArrayList<>();
 		list.add(generatePassword());
 		return list;
 	}	

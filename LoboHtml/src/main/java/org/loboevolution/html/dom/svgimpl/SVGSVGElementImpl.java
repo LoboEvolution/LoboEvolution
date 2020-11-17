@@ -546,7 +546,7 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 	}
 	
 	private void drawChildren(Graphics2D graphics) {
-		List<Node> drawableChildren = new ArrayList<Node>();
+		List<Node> drawableChildren = new ArrayList<>();
 		if (hasChildNodes()) {
 			NodeList children = getChildNodes();
 			for (Node child : Nodes.iterable(children)) {

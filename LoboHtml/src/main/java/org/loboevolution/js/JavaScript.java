@@ -57,7 +57,7 @@ public class JavaScript {
 	// objectMap must be a map that uses weak keys
 	// and refers to values using weak references.
 	// Keys are java objects other than ScriptableDelegate instances.
-	private final WeakHashMap<Object, WeakReference<JavaObjectWrapper>> javaObjectToWrapper = new WeakHashMap<Object, WeakReference<JavaObjectWrapper>>();
+	private final WeakHashMap<Object, WeakReference<JavaObjectWrapper>> javaObjectToWrapper = new WeakHashMap<>();
 
 	/**
 	 * <p>getJavaObject.</p>
@@ -155,7 +155,7 @@ public class JavaScript {
 					final Class<? extends Object> javaClass = raw.getClass();
 					final JavaClassWrapper wrapper = JavaClassWrapperFactory.getInstance().getClassWrapper(javaClass);
 					jow = new JavaObjectWrapper(wrapper, raw);
-					this.javaObjectToWrapper.put(raw, new WeakReference<JavaObjectWrapper>(jow));
+					this.javaObjectToWrapper.put(raw, new WeakReference<>(jow));
 				}
 				jow.setParentScope(scope);
 				return jow;

@@ -160,7 +160,7 @@ public class CookieStore {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<Cookie> getCookies(String hostName, String path) {
-		List<Cookie> cookies = new ArrayList<Cookie>();
+		List<Cookie> cookies = new ArrayList<>();
 		GeneralStore settings = GeneralStore.getNetwork();
 		if (settings.isCookie()) {
 			try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());

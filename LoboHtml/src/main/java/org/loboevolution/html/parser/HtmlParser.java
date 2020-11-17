@@ -154,7 +154,7 @@ public class HtmlParser {
 		try {
 			parent.setUserData(MODIFYING_KEY, Boolean.TRUE, null);
 			try {
-				while (this.parseToken(parent, reader, null, new LinkedList<String>()) != TOKEN_EOD) {
+				while (this.parseToken(parent, reader, null, new LinkedList<>()) != TOKEN_EOD) {
 				}
 			} catch (final StopException se) {
 				throw new SAXException("Unexpected flow exception", se);
@@ -312,7 +312,7 @@ public class HtmlParser {
 								}
 								if (stopTags != null) {
 									if (newStopSet != null) {
-										final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
+										final Set<HTMLTag> newStopSet2 = new HashSet<>();
 										newStopSet2.addAll(stopTags);
 										newStopSet2.addAll(newStopSet);
 										newStopSet = newStopSet2;
@@ -385,7 +385,7 @@ public class HtmlParser {
 												}
 											}
 											if (stopTags != null && newStopSet != null) {
-												final Set<HTMLTag> newStopSet2 = new HashSet<HTMLTag>();
+												final Set<HTMLTag> newStopSet2 = new HashSet<>();
 												newStopSet2.addAll(stopTags);
 												newStopSet2.addAll(newStopSet);
 												newStopSet = newStopSet2;

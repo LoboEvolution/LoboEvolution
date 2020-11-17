@@ -68,7 +68,7 @@ public class BookmarksStore implements Serializable {
 	 */
 	public List<BookmarkInfo> getBookmarks(Integer num) {
 		synchronized (this) {
-			final List<BookmarkInfo> values = new ArrayList<BookmarkInfo>();
+			final List<BookmarkInfo> values = new ArrayList<>();
 			String query = "SELECT name, description, baseUrl, tags FROM BOOKMARKS";
 			if (num != null) {
 				query = query + " LIMIT " + num;

@@ -64,7 +64,7 @@ public class ListStyle {
 	 * @return a {@link java.lang.String} object.
 	 */
 	public static String getRomanNumerals(int num) {
-		LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
+		LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<>();
 		roman_numerals.put("M", 1000);
 		roman_numerals.put("CM", 900);
 		roman_numerals.put("D", 500);

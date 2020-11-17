@@ -16,9 +16,9 @@ import org.loboevolution.info.ElementInfo;
 public class HTMLEntities {
 	
 	/** Constant ELEMENT_INFOS */
-	public static final Map<HTMLTag, ElementInfo> ELEMENT_INFOS = new HashMap<HTMLTag, ElementInfo>();
+	public static final Map<HTMLTag, ElementInfo> ELEMENT_INFOS = new HashMap<>();
 	/** Constant ENTITIES */
-	public static final Map<Entities, Character> ENTITIES = new HashMap<Entities, Character>();
+	public static final Map<Entities, Character> ENTITIES = new HashMap<>();
 	
 	static {
 		final Map<Entities, Character> entities = ENTITIES;
@@ -304,25 +304,25 @@ public class HTMLEntities {
 		final ElementInfo onlyText = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, false);
 		final ElementInfo onlyTextDE = new ElementInfo(false, ElementInfo.END_ELEMENT_REQUIRED, true);
 		
-		final Set<HTMLTag> tableCellStopElements = new HashSet<HTMLTag>();
+		final Set<HTMLTag> tableCellStopElements = new HashSet<>();
 		tableCellStopElements.add(HTMLTag.TH);
 		tableCellStopElements.add(HTMLTag.TD);
 		tableCellStopElements.add(HTMLTag.TR);
 		final ElementInfo tableCellElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, tableCellStopElements);
 
-		final Set<HTMLTag> headStopElements = new HashSet<HTMLTag>();
+		final Set<HTMLTag> headStopElements = new HashSet<>();
 		headStopElements.add(HTMLTag.BODY);
 		headStopElements.add(HTMLTag.DIV);
 		headStopElements.add(HTMLTag.SPAN);
 		headStopElements.add(HTMLTag.TABLE);
 		final ElementInfo headElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, headStopElements);
 
-		final Set<HTMLTag> optionStopElements = new HashSet<HTMLTag>();
+		final Set<HTMLTag> optionStopElements = new HashSet<>();
 		optionStopElements.add(HTMLTag.OPTION);
 		optionStopElements.add(HTMLTag.SELECT);
 		final ElementInfo optionElement = new ElementInfo(true, ElementInfo.END_ELEMENT_OPTIONAL, optionStopElements);
 
-		final Set<HTMLTag> paragraphStopElements = new HashSet<HTMLTag>();
+		final Set<HTMLTag> paragraphStopElements = new HashSet<>();
 		paragraphStopElements.add(HTMLTag.P);
 		paragraphStopElements.add(HTMLTag.DIV);
 		paragraphStopElements.add(HTMLTag.TABLE);

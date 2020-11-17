@@ -160,7 +160,7 @@ public class PDFPassword {
     private static List<byte[]> generatePossiblePasswordBytes(
             String passwordString) {
 
-        final List<byte[]> possibilties = new ArrayList<byte[]>();
+        final List<byte[]> possibilties = new ArrayList<>();
         for (final PasswordByteGenerator generator : PASSWORD_BYTE_GENERATORS) {
             byte[] generated = generator.generateBytes(passwordString);
             // avoid duplicates

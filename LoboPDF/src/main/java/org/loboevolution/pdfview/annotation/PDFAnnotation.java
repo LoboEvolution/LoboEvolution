@@ -218,7 +218,7 @@ public class PDFAnnotation{
 	 * @return 
 	 */
 	public List<PDFCmd> getPageCommandsForAnnotation() {
-		return new ArrayList<PDFCmd>();
+		return new ArrayList<>();
 	}
 	
 

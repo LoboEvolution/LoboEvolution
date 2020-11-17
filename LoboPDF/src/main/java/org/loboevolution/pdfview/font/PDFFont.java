@@ -238,7 +238,7 @@ public abstract class PDFFont {
 
     private synchronized static void ensureNamedTtfFontFiles() {
         if (namedFontsToLocalTtfFiles == null) {
-            namedFontsToLocalTtfFiles = new HashMap<String, File>();
+            namedFontsToLocalTtfFiles = new HashMap<>();
 
             if (Boolean.getBoolean("PDFRenderer.avoidExternalTtf")) {
                 return;
@@ -317,7 +317,7 @@ public abstract class PDFFont {
             }
             return new String[] { path };
         } else if (osName != null && osName.startsWith("mac")) {
-            List<String> paths = new ArrayList<String>(Arrays.asList(
+            List<String> paths = new ArrayList<>(Arrays.asList(
                     "/Library/Fonts",
                     "/Network/Library/Fonts",
                     "/System/Library/Fonts",
@@ -426,7 +426,7 @@ public abstract class PDFFont {
         } else {
             // use the default mapping
             char[] arry = text.toCharArray();
-            outList = new ArrayList<PDFGlyph>(arry.length);
+            outList = new ArrayList<>(arry.length);
             for (char c : arry) {
                 // only look at 2 bytes when there is no encoding
                 char src = (char) (c & 0xff);
@@ -447,7 +447,7 @@ public abstract class PDFFont {
      */
     public PDFGlyph getCachedGlyph(char src, String name) {
         if (this.charCache == null) {
-            this.charCache = new HashMap<Character,PDFGlyph>();
+            this.charCache = new HashMap<>();
         }
 
         // try the cache

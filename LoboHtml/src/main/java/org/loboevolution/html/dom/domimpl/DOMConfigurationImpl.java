@@ -37,7 +37,7 @@ import org.w3c.dom.DOMStringList;
  * @version $Id: $Id
  */
 public class DOMConfigurationImpl implements DOMConfiguration {
-	private final Map<String, Object> parameters = new HashMap<String, Object>();
+	private final Map<String, Object> parameters = new HashMap<>();
 
 	/**
 	 * <p>Constructor for DOMConfigurationImpl.</p>

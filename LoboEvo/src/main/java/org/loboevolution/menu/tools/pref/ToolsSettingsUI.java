@@ -70,7 +70,7 @@ public class ToolsSettingsUI extends AbstractSettingsUI {
 	private void createAndShowGUI() {
 
 		final ItemEditorFactory<SearchEngineStore> factory = SearchEngineEditor::new;
-		this.searchEngineListControl = new ItemListControl<SearchEngineStore>(factory);
+		this.searchEngineListControl = new ItemListControl<>(factory);
 		this.searchEngineListControl.setEditorCaption("Please enter search engine information below.");
 		
 		this.mozillaHistoryPanel = new LoboCheckBox("Mozilla Firefox");

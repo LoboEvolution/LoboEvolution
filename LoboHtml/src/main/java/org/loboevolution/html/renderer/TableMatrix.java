@@ -57,9 +57,9 @@ class TableMatrix {
 
 	private static final NodeFilter COLUMNS_FILTER = new ColumnsFilter();
 	
-	private final List<HTMLElementImpl> ROW_ELEMENTS = new ArrayList<HTMLElementImpl>();
-	private final List<ArrayList<VirtualCell>> ROWS = new ArrayList<ArrayList<VirtualCell>>();
-	private final List<RTableCell> ALL_CELLS = new ArrayList<RTableCell>();
+	private final List<HTMLElementImpl> ROW_ELEMENTS = new ArrayList<>();
+	private final List<ArrayList<VirtualCell>> ROWS = new ArrayList<>();
+	private final List<RTableCell> ALL_CELLS = new ArrayList<>();
 	
 	private SizeInfo[] columnSizes;
 	private SizeInfo[] rowSizes;
@@ -1181,7 +1181,7 @@ class TableMatrix {
 		final List<ArrayList<VirtualCell>> rows = this.ROWS;
 		final List<HTMLElementImpl> rowElements = this.ROW_ELEMENTS;
 		final List<RTableCell> allCells = this.ALL_CELLS;
-		final Map<HTMLElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<HTMLElementImpl, ArrayList<VirtualCell>>();
+		final Map<HTMLElementImpl, ArrayList<VirtualCell>> rowElementToRowArray = new HashMap<>();
 		final NodeList cellList = te.getDescendents(COLUMNS_FILTER, false);
 		ArrayList<VirtualCell> currentNullRow = null;
 		for (Node node : Nodes.iterable(cellList)) {
@@ -1197,7 +1197,7 @@ class TableMatrix {
 					currentNullRow = null;
 					row = rowElementToRowArray.get(rowElement);
 					if (row == null) {
-						row = new ArrayList<VirtualCell>();
+						row = new ArrayList<>();
 						rowElementToRowArray.put(rowElement, row);
 						rows.add(row);
 						rowElements.add(rowElement);
@@ -1208,7 +1208,7 @@ class TableMatrix {
 					if (currentNullRow != null) {
 						row = currentNullRow;
 					} else {
-						row = new ArrayList<VirtualCell>();
+						row = new ArrayList<>();
 						currentNullRow = row;
 						rows.add(row);
 						// Null TR element must be added to match.

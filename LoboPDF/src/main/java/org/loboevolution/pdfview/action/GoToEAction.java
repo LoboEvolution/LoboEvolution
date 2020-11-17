@@ -42,7 +42,7 @@ public class GoToEAction extends PDFAction {
 
 		// parse the target dictionary
 		PDFObject targetObj = obj.getDictRef("T");
-		ArrayList<GoToETarget> list = new ArrayList<GoToETarget>();
+		ArrayList<GoToETarget> list = new ArrayList<>();
 		this.target = parseTargetDistionary(targetObj, list);
 	}
 

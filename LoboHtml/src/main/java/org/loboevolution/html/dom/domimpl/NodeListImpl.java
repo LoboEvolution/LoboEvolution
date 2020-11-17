@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
  */
 public class NodeListImpl extends AbstractScriptableDelegate implements NodeList {
 
-	private final List<Node> nodeList = Collections.synchronizedList(new ArrayList<Node>());
+	private final List<Node> nodeList = Collections.synchronizedList(new ArrayList<>());
 
 	/**
 	 * <p>Constructor for NodeListImpl.</p>

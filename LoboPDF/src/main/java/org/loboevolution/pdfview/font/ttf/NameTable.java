@@ -81,7 +81,7 @@ public class NameTable extends TrueTypeTable {
     protected NameTable() {
         super (TrueTypeTable.NAME_TABLE);
         
-        this.records = Collections.synchronizedSortedMap(new TreeMap<NameRecord,String>());
+        this.records = Collections.synchronizedSortedMap(new TreeMap<>());
     }
     
     /**

@@ -92,7 +92,7 @@ public class StorageManager extends SwingWorker<Void, Void> {
 	}
 
 	private List<String> getList() {
-		final List<String> files = new ArrayList<String>();
+		final List<String> files = new ArrayList<>();
 		files.add(0, "table.sql");
 		files.add("char.sql");
 		files.add("color.sql");

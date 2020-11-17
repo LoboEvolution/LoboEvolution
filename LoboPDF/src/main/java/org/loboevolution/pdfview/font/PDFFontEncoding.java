@@ -81,7 +81,7 @@ public class PDFFontEncoding {
             } else {
                 this.type = TYPE_ENCODING;
 
-                this.differences = new HashMap<Character,String>();
+                this.differences = new HashMap<>();
                 this.baseEncoding = this.getBaseEncoding(encoding.getStringValue());
             }
         } else {
@@ -107,7 +107,7 @@ public class PDFFontEncoding {
 
 	/** Get the glyphs associated with a given String */
 	public List<PDFGlyph> getGlyphs(PDFFont font, String text) {
-		List<PDFGlyph> outList = new ArrayList<PDFGlyph>(text.length());
+		List<PDFGlyph> outList = new ArrayList<>(text.length());
 
 		// go character by character through the text
 		char[] arry = text.toCharArray();
@@ -170,7 +170,7 @@ public class PDFFontEncoding {
      * Parse a PDF encoding object for the actual encoding
      */
     public void parseEncoding(PDFObject encoding) throws IOException {
-        this.differences = new HashMap<Character,String>();
+        this.differences = new HashMap<>();
 
         // figure out the base encoding, if one exists
         PDFObject baseEncObj = encoding.getDictRef("BaseEncoding");

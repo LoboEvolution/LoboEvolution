@@ -68,7 +68,7 @@ public class Type3Font extends PDFFont {
             HashMap<String,PDFObject> resources, PDFFontDescriptor descriptor) throws IOException {
         super(baseFont, descriptor);
 
-        this.rsrc = new HashMap<String,PDFObject>();
+        this.rsrc = new HashMap<>();
 
         if (resources != null) {
             this.rsrc.putAll(resources);

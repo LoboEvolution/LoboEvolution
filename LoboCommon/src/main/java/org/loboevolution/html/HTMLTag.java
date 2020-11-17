@@ -103,7 +103,7 @@ public enum HTMLTag {
 	private static final Map<String, HTMLTag> ENUM_MAP;
 
 	static {
-		Map<String, HTMLTag> map = new HashMap<String, HTMLTag>();
+		Map<String, HTMLTag> map = new HashMap<>();
 		for (HTMLTag instance : HTMLTag.values()) {
 			map.put(instance.getValue(), instance);
 		}

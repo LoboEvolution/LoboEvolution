@@ -151,7 +151,7 @@ public class SVGGElementImpl extends SVGGraphic implements SVGGElement {
 	}
 	
 	private void drawChildren(Graphics2D graphics) {
-		List<Node> drawableChildren = new ArrayList<Node>();
+		List<Node> drawableChildren = new ArrayList<>();
 		if (hasChildNodes()) {
 			NodeList children = getChildNodes();
 			for (Node child : Nodes.iterable(children)) {

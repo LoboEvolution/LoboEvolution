@@ -22,7 +22,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	 * <p>Constructor for SVGPathSegListImpl.</p>
 	 */
 	public SVGPathSegListImpl() {
-		pointList = new ArrayList<SVGPathSeg>();
+		pointList = new ArrayList<>();
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	 * @param pathSegList a {@link org.loboevolution.html.dom.svg.SVGPathSegList} object.
 	 */
 	public SVGPathSegListImpl(SVGPathSegList pathSegList) {
-		pointList = new ArrayList<SVGPathSeg>();
+		pointList = new ArrayList<>();
 		for (SVGPathSeg seg : pointList) {
 			switch (seg.getPathSegType()) {
 			case SVGPathSeg.PATHSEG_CLOSEPATH: {
@@ -226,7 +226,7 @@ public class SVGPathSegListImpl implements SVGPathSegList {
 	/** {@inheritDoc} */
 	@Override
 	public SVGPathSeg initialize(SVGPathSeg newItem) throws DOMException, SVGException {
-		pointList = new ArrayList<SVGPathSeg>();
+		pointList = new ArrayList<>();
 		pointList.add(newItem);
 		return newItem;
 	}

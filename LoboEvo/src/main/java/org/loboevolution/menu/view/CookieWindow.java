@@ -33,7 +33,7 @@ public class CookieWindow extends JFrame {
 	private void createAndShowGUI(List<CookieInfo> cookieList) {
 		final Object[] columnNames = { "Name", "Value", "Expires" };
 
-		final List<String[]> values = new ArrayList<String[]>();
+		final List<String[]> values = new ArrayList<>();
 		for (final CookieInfo info : cookieList) {
 			values.add(new String[] { info.getName(), info.getValue(), info.getExpires() });
 		}

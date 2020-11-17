@@ -562,7 +562,7 @@ public class PDFFile {
      */
     private PDFObject readDictionary(
             int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
-        HashMap<String,PDFObject> hm = new HashMap<String,PDFObject>();
+        HashMap<String,PDFObject> hm = new HashMap<>();
         // we've already read the <<.  Now get /Name obj pairs until >>
         PDFObject name;
 	while ((name= readObject(objNum, objGen, decrypter))!=null) {
@@ -830,7 +830,7 @@ public class PDFFile {
     private PDFObject readArray(
             int objNum, int objGen, PDFDecrypter decrypter) throws IOException {
         // we've already read the [.  Now read objects until ]
-        ArrayList<PDFObject> ary = new ArrayList<PDFObject>();
+        ArrayList<PDFObject> ary = new ArrayList<>();
         PDFObject obj;
 	while((obj= readObject(objNum, objGen, decrypter))!=null) {
             ary.add(obj);
@@ -1575,7 +1575,7 @@ public class PDFFile {
         if (page == null) {
             try {
                 // hunt down the page!
-                resources = new HashMap<String,PDFObject>();
+                resources = new HashMap<>();
 
                 PDFObject topPagesObj = this.root.getDictRef("Pages");
                 pageObj = findPage(topPagesObj, 0, pagenum, resources);
@@ -1695,7 +1695,7 @@ public class PDFFile {
 
         // read annotations and add them to the PDF page
         PDFObject annots = getInheritedValue(pageObj, "Annots");
-        List<PDFAnnotation> annotationList = new ArrayList<PDFAnnotation>();
+        List<PDFAnnotation> annotationList = new ArrayList<>();
         if (annots != null) {
             if (annots.getType() != PDFObject.ARRAY) {
                 throw new PDFParseException("Can't parse annotations: " + annots.toString());

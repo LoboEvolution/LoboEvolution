@@ -62,7 +62,7 @@ public class GlyfCompound extends Glyf {
         // data.position(pos);
               
         // read the contour end points
-        List<GlyfComponent> comps = new ArrayList<GlyfComponent>();
+        List<GlyfComponent> comps = new ArrayList<>();
         GlyfComponent cur = null;
         boolean hasInstructions = false;
         

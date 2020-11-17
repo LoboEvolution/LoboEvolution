@@ -45,7 +45,7 @@ public class WebStore {
 	 * @return a {@link java.util.Map} object.
 	 */
 	public static Map<String, String> getMapStorage(int index) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(SQLiteCommon.WEBSTORAGE_MAP)) {
 			pstmt.setInt(1, index);

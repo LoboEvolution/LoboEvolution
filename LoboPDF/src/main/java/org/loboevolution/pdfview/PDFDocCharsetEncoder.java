@@ -60,7 +60,7 @@ public class PDFDocCharsetEncoder extends CharsetEncoder {
      * in the PDFDocEncoding.
      */
     final static Map<Character,Byte> EXTENDED_TO_PDF_DOC_ENCODING_MAP =
-            new HashMap<Character,Byte>();
+            new HashMap<>();
     static
     {
         for (byte i = 0; i < PDFStringUtil.PDF_DOC_ENCODING_MAP.length; ++i) {

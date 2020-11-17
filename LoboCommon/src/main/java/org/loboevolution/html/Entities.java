@@ -528,7 +528,7 @@ public enum Entities {
 	private static final Map<String, Entities> ENUM_MAP;
 
 	static {
-		Map<String, Entities> map = new HashMap<String, Entities>();
+		Map<String, Entities> map = new HashMap<>();
 		for (Entities instance : Entities.values()) {
 			map.put(instance.getValue(), instance);
 		}

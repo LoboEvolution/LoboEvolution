@@ -153,7 +153,7 @@ public class GeneralStore implements Serializable {
 	 * @return a {@link java.util.List} object.
 	 */
 	public static List<String> getStartupURLs() {
-		final List<String> urls = new ArrayList<String>();
+		final List<String> urls = new ArrayList<>();
 		try (Connection conn = DriverManager.getConnection(SQLiteCommon.getDatabaseDirectory());
 				PreparedStatement pstmt = conn.prepareStatement(STARTUP)) {
 			try (ResultSet rs = pstmt.executeQuery()) {

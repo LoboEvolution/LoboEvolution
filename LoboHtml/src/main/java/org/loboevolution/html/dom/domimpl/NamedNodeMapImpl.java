@@ -43,8 +43,8 @@ import org.w3c.dom.Node;
  */
 public class NamedNodeMapImpl extends AbstractScriptableDelegate implements NamedNodeMap {
 	
-	private final List<Node> attributeList = new ArrayList<Node>();
-	private final Map<String, Node> attributes = new HashMap<String, Node>();
+	private final List<Node> attributeList = new ArrayList<>();
+	private final Map<String, Node> attributes = new HashMap<>();
 
 	/**
 	 * <p>Constructor for NamedNodeMapImpl.</p>

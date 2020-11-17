@@ -168,8 +168,8 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		
 		this.colorComboBox = new ColorComboBox();
 		this.colorComboBox.setPreferredSize(new Dimension(400, 20));
-		this.fontList = new JComboBox<String>(LAFSettings.getFonts("FONT"));
-		this.fontSizeList = new JComboBox<String>(LAFSettings.getFonts("FONT_SIZE"));
+		this.fontList = new JComboBox<>(LAFSettings.getFonts("FONT"));
+		this.fontSizeList = new JComboBox<>(LAFSettings.getFonts("FONT_SIZE"));
 
 		final ActionListener actionListener = e -> updatePreview();
 
@@ -350,7 +350,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 		this.colorComboBox.setSelectedItem(Color.BLACK);
 
 		this.previewLabel.setText(this.PREVIEW_TEXT);
-		final Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+		final Map<TextAttribute, Object> attributes = new HashMap<>();
 		attributes.put(FAMILY, FontType.TIMES_NEW_ROMAN.getValue());
 		attributes.put(SIZE, (float) 14.0);
 		this.previewLabel.setFont(new Font(attributes));
@@ -404,7 +404,7 @@ public class LookAndFeelsSettingsUI extends AbstractSettingsUI {
 			return;
 		}
 
-		final Map<TextAttribute, Object> attributes = new HashMap<TextAttribute, Object>();
+		final Map<TextAttribute, Object> attributes = new HashMap<>();
 
 		attributes.put(FAMILY, name);
 		attributes.put(SIZE, (float) size);

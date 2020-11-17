@@ -106,10 +106,10 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
 
         this.page = page;
         this.imageinfo = imageinfo;
-        this.imageRef = new WeakReference<BufferedImage>(bi);
+        this.imageRef = new WeakReference<>(bi);
 
         // initialize the list of observers
-        this.observers = new ArrayList<ImageObserver>();
+        this.observers = new ArrayList<>();
     }
 
     /**
@@ -135,7 +135,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         g.translate(imgbounds.x, imgbounds.y);
 
         // initialize the list of observers
-        this.observers = new ArrayList<ImageObserver>();
+        this.observers = new ArrayList<>();
     }
 
     /**
@@ -172,7 +172,7 @@ public class PDFRenderer extends BaseWatchable implements Runnable {
         this.state.xform = g.getTransform();
 
         // initialize the stack
-        this.stack = new Stack<GraphicsState>();
+        this.stack = new Stack<>();
 
         // initialize the current command
         this.currentCommand = 0;

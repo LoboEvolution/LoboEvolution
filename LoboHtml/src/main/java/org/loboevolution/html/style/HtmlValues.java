@@ -52,7 +52,7 @@ import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
 public class HtmlValues {
 
 	/** Constant SYSTEM_FONTS */
-	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<String, FontInfo>();
+	public static final Map<String, FontInfo> SYSTEM_FONTS = new HashMap<>();
 
 	static {
 		final FontInfo systemFont = new FontInfo();
@@ -485,7 +485,7 @@ public class HtmlValues {
 	 * @return an array of {@link java.lang.String} objects.
 	 */
 	public static String[] splitCssValue(String cssValue) {
-		final ArrayList<String> tokens = new ArrayList<String>(4);
+		final ArrayList<String> tokens = new ArrayList<>(4);
 		final int len = cssValue.length();
 		int parenCount = 0;
 		StringBuilder currentWord = null;

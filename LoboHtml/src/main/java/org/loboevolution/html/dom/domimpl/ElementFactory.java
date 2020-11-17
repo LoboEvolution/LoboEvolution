@@ -30,7 +30,7 @@ import org.w3c.dom.DOMException;
 
 class ElementFactory {
 	
-	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<HTMLTag, HTMLElementBuilder>();
+	private final Map<HTMLTag, HTMLElementBuilder> builders = new HashMap<>();
 
 	/**
 	 * <p>Constructor for ElementFactory.</p>

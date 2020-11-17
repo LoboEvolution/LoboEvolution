@@ -87,7 +87,7 @@ public class StampAnnotation extends PDFAnnotation {
         if (type == null) {
             type = obj.getDictRef ("S").getStringValue ();
         }
-        ArrayList<PDFCmd> result = new ArrayList<PDFCmd>();
+        ArrayList<PDFCmd> result = new ArrayList<>();
         result.add(PDFPage.createPushCmd());
         result.add(PDFPage.createPushCmd());
         if (type.equals("Image")) {
@@ -95,7 +95,7 @@ public class StampAnnotation extends PDFAnnotation {
             AffineTransform rectAt = getPositionTransformation();
             result.add(PDFPage.createXFormCmd(rectAt));
             
-        	PDFImage img = PDFImage.createImage(obj, new HashMap<String, PDFObject>() , false);        	
+        	PDFImage img = PDFImage.createImage(obj, new HashMap<>() , false);
         	result.add(PDFPage.createImageCmd(img));
         } else if (type.equals("Form")) {
         	
@@ -135,7 +135,7 @@ public class StampAnnotation extends PDFAnnotation {
             }
             formCmds.addXform(at);
             
-            HashMap<String,PDFObject> r = new HashMap<String,PDFObject>(new HashMap<String, PDFObject>());
+            HashMap<String,PDFObject> r = new HashMap<>(new HashMap<>());
             PDFObject rsrc = obj.getDictRef("Resources");
             if (rsrc != null) {
                 r.putAll(rsrc.getDictionary());

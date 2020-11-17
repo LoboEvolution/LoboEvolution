@@ -189,7 +189,7 @@ public class RBlockViewport extends BaseRCollection {
 		final int insetsl = insets.left;
 		List<Renderable> sr = this.seqRenderables;
 		if (sr == null) {
-			sr = new ArrayList<Renderable>();
+			sr = new ArrayList<>();
 			this.seqRenderables = sr;
 		}
 		final RLine prevLine = this.currentLine;
@@ -324,7 +324,7 @@ public class RBlockViewport extends BaseRCollection {
 	private void addExportableFloat(final BoundableRenderable element, final boolean leftFloat, final int origX, final int origY) {
 		List<ExportableFloat> ep = this.exportableFloats;
 		if (ep == null) {
-			ep = new ArrayList<ExportableFloat>(1);
+			ep = new ArrayList<>(1);
 			this.exportableFloats = ep;
 		}
 		ExportableFloat ef = new ExportableFloat(element, leftFloat, origX, origY);
@@ -366,7 +366,7 @@ public class RBlockViewport extends BaseRCollection {
 		rline.setParent(this);
 		List<Renderable> sr = this.seqRenderables;
 		if (sr == null) {
-			sr = new ArrayList<Renderable>();
+			sr = new ArrayList<>();
 			this.seqRenderables = sr;
 		}
 		sr.add(rline);
@@ -377,7 +377,7 @@ public class RBlockViewport extends BaseRCollection {
 	private void addLineAfterBlock(RBlock block, boolean informLineDone) {
 		List<Renderable> sr = this.seqRenderables;
 		if (sr == null) {
-			sr = new ArrayList<Renderable>(1);
+			sr = new ArrayList<>(1);
 			this.seqRenderables = sr;
 		}
 		final RLine prevLine = this.currentLine;
@@ -825,7 +825,7 @@ public class RBlockViewport extends BaseRCollection {
 			final List<Renderable> sr = this.seqRenderables;
 			return sr == null ? null : sr.iterator();
 		} else {
-			final List<Renderable> allRenderables = new ArrayList<Renderable>();
+			final List<Renderable> allRenderables = new ArrayList<>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
 			return allRenderables.iterator();
 		}
@@ -859,7 +859,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 				if (br.contains(pointx, pointy)) {
 					if (result == null) {
-						result = new LinkedList<Renderable>();
+						result = new LinkedList<>();
 					}
 					result.add(br);
 				}
@@ -885,7 +885,7 @@ public class RBlockViewport extends BaseRCollection {
 				final BoundableRenderable br = pr.getRenderable();
 				if (br.contains(pointx, pointy)) {
 					if (result == null) {
-						result = new LinkedList<Renderable>();
+						result = new LinkedList<>();
 					}
 					result.add(br);
 				}
@@ -945,7 +945,7 @@ public class RBlockViewport extends BaseRCollection {
 			final List<Renderable> sr = this.seqRenderables;
 			return sr == null ? Renderable.EMPTY_ARRAY : sr.toArray(Renderable.EMPTY_ARRAY);
 		} else {
-			final List<Renderable> allRenderables = new ArrayList<Renderable>();
+			final List<Renderable> allRenderables = new ArrayList<>();
 			this.populateZIndexGroupsIterator(others, this.seqRenderables, allRenderables);
 			return allRenderables.toArray(Renderable.EMPTY_ARRAY);
 		}
@@ -1976,7 +1976,7 @@ public class RBlockViewport extends BaseRCollection {
 			// lineDone() is called.
 			Collection<RFloatInfo> c = this.pendingFloats;
 			if (c == null) {
-				c = new LinkedList<RFloatInfo>();
+				c = new LinkedList<>();
 				this.pendingFloats = c;
 			}
 			c.add(floatInfo);

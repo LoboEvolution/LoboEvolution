@@ -28,7 +28,7 @@ package org.loboevolution.html.renderstate;
  * @version $Id: $Id
  */
 public class RenderThreadState {
-	private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<RenderThreadState>();
+	private static final ThreadLocal<RenderThreadState> stateTL = new ThreadLocal<>();
 
 	/**
 	 * <p>getState.</p>

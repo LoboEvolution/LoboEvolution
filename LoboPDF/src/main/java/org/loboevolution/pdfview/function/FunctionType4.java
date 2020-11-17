@@ -101,7 +101,7 @@ public class FunctionType4 extends PDFFunction {
 	 ************************************************************************/
 	
 	private void prepareInitialStack(float[] inputs, int inputOffset) {
-		this.stack = new Stack<Object>();
+		this.stack = new Stack<>();
     	for (int i = inputOffset; i < inputs.length; i++) {
     		this.stack.push((double) inputs[i]);
 		}

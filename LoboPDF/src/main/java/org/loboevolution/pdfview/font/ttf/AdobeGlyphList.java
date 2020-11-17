@@ -86,8 +86,8 @@ public class AdobeGlyphList {
      * into the tables.</p>
      */
 	private AdobeGlyphList() {
-		glyphToUnicodes = new HashMap<String, int[]>(4500);
-		unicodeToGlyph = new HashMap<Integer, String>(4500);
+		glyphToUnicodes = new HashMap<>(4500);
+		unicodeToGlyph = new HashMap<>(4500);
 		glyphLoaderThread = new Thread(new Runnable() {
 
 			@Override
@@ -96,7 +96,7 @@ public class AdobeGlyphList {
 				StringTokenizer codeTokens;
 				String glyphName;
 				StringTokenizer tokens;
-				ArrayList<String> unicodes = new ArrayList<String>();
+				ArrayList<String> unicodes = new ArrayList<>();
 				URL resource = getClass().getResource("/org/loboevolution/pdfview/font/ttf/resource/glyphlist.txt");
 				try (InputStream istr = resource.openStream()) {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(istr));

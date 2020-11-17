@@ -72,7 +72,7 @@ public class JavaClassWrapperFactory {
 			}
 			if (jcw == null) {
 				jcw = new JavaClassWrapper(clazz);
-				this.classWrappers.put(clazz, new WeakReference<JavaClassWrapper>(jcw));
+				this.classWrappers.put(clazz, new WeakReference<>(jcw));
 			}
 			return jcw;
 		}

@@ -124,7 +124,7 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private String defaultTarget;
 
-	private final List<DocumentNotificationListener> documentNotificationListeners = new ArrayList<DocumentNotificationListener>();
+	private final List<DocumentNotificationListener> documentNotificationListeners = new ArrayList<>();
 
 	private URL documentURL;
 
@@ -132,9 +132,9 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 
 	private DOMImplementation domImplementation;
 	
-    private final Map<String, Element> elementsById = new HashMap<String, Element>();
+    private final Map<String, Element> elementsById = new HashMap<>();
 
-	private final Map<String, Element> elementsByName = new HashMap<String, Element>();
+	private final Map<String, Element> elementsByName = new HashMap<>();
 
 	private String inputEncoding;
 
