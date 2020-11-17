@@ -524,7 +524,7 @@ public enum Entities {
 	tilde("tilde");
 	
 	
-	private String value;
+	private final String value;
 	private static final Map<String, Entities> ENUM_MAP;
 
 	static {

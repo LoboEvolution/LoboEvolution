@@ -11,7 +11,7 @@ import org.loboevolution.pdfview.PDFParseException;
  */
 public class GoToAction extends PDFAction {
     /** the destination to go to */
-    private PDFDestination dest;
+    private final PDFDestination dest;
     
     /** 
      * Creates a new instance of GoToAction from an object

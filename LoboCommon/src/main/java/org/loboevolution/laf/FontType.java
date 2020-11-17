@@ -44,7 +44,7 @@ public enum FontType {
 
 	UNDERLINE("Underline");
 	
-	private String value;
+	private final String value;
 	private static final Map<String, FontType> ENUM_MAP;
 	
 	static {

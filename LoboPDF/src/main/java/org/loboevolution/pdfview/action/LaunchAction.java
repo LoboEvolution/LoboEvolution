@@ -16,12 +16,12 @@ public class LaunchAction extends PDFAction {
 	public final static String SOLIDUS = "/";
 
 	/** the file/application to be opened (optional)*/
-	private FileSpec file;
+	private final FileSpec file;
 	/** should a new window be opened (optional)*/
 	private boolean newWindow = false;
-	private PDFObject unixParam;
-	private PDFObject macParam;
-	private WinLaunchParam winParam;
+	private final PDFObject unixParam;
+	private final PDFObject macParam;
+	private final WinLaunchParam winParam;
 
 	/** 
 	 * Creates a new instance of LaunchAction from an object

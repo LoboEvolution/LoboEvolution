@@ -46,7 +46,7 @@ public enum AlignValues {
 	
 	BASELINE(5);
 	
-	private int value;
+	private final int value;
 	private static final Map<Integer, AlignValues> ENUM_MAP;
 	
 	static {

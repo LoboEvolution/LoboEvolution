@@ -16,7 +16,7 @@ import org.loboevolution.pdfview.PDFParseException;
 public class GoToEAction extends PDFAction {
 
 	/** the destination within the remote PDF file */
-	private PDFDestination destination;
+	private final PDFDestination destination;
 	/** the remote file this action refers to (optional)*/
 	private String file = null;
 	/** Should the remote file be opened in a new window? (optional)*/

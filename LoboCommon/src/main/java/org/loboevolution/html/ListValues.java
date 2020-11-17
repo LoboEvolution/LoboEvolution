@@ -48,7 +48,7 @@ public enum ListValues {
 	
 	TYPE_UNSET(256);
 
-	private int value;
+	private final int value;
 	private static final Map<Integer, ListValues> ENUM_MAP;
 	
 	static {

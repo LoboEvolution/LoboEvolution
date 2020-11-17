@@ -256,7 +256,7 @@ public enum CSSValues {
 
 	XX_SMALL("xx-small");
 	
-	private String value;
+	private final String value;
 	private static final Map<String, CSSValues> ENUM_MAP;
 	
 	static {

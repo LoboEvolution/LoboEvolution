@@ -13,7 +13,7 @@ import org.loboevolution.pdfview.PDFObject;
 public class UriAction extends PDFAction {
 
 	/** The URL this action links to */
-	private String uri;
+	private final String uri;
 	
 	/*************************************************************************
 	 * Constructor, reading the URL from the given action object

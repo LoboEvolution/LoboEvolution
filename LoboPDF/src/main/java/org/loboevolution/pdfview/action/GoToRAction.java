@@ -14,9 +14,9 @@ import org.loboevolution.pdfview.PDFObject;
 public class GoToRAction extends PDFAction {
 
 	/** the destination within the remote PDF file */
-    private PDFDestination destination;
+    private final PDFDestination destination;
     /** the remote file this action refers to*/
-    private String file;
+    private final String file;
     /** Should the remote file be opened in a new window? (optional)*/
     private boolean newWindow=false;
 	/** 

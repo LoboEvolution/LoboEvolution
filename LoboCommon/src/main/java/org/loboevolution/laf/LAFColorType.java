@@ -18,7 +18,7 @@ public enum LAFColorType {
 
 	FOREGROUND_WHITE_BLACK("rgb(0,0,0)");
 
-	private String value;
+	private final String value;
 	private static final Map<String, LAFColorType> ENUM_MAP;
 
 	static {

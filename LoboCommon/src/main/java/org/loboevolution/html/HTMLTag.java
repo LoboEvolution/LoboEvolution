@@ -99,7 +99,7 @@ public enum HTMLTag {
 	UL("UL"),
 	USE("USE");
 	
-	private String value;
+	private final String value;
 	private static final Map<String, HTMLTag> ENUM_MAP;
 
 	static {

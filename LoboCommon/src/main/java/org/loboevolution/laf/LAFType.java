@@ -67,7 +67,7 @@ public enum LAFType {
 	BLACK_WHITE("Black");
 
 	
-	private String value;
+	private final String value;
 	private static final Map<String, LAFType> ENUM_MAP;
 	
 	static {

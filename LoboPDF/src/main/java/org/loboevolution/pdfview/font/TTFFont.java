@@ -46,7 +46,7 @@ import org.loboevolution.pdfview.font.ttf.TrueTypeFont;
 public class TTFFont extends OutlineFont {
 
     /** the truetype font itself */
-    private TrueTypeFont font;
+    private final TrueTypeFont font;
 
     /** the number of units per em in the font */
     private float unitsPerEm;

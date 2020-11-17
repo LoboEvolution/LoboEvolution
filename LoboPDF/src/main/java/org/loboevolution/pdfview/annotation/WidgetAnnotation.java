@@ -24,7 +24,7 @@ public class WidgetAnnotation extends PDFAnnotation {
 	private String fieldValue;
 	private FieldType fieldType;
 	private String fieldName;
-	private PDFObject fieldValueRef;
+	private final PDFObject fieldValueRef;
 	private List<PDFCmd> cmd;
 
 	/**

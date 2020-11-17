@@ -18,7 +18,8 @@ public class Coordinates extends AbstractScriptableDelegate {
 	 * The latitude and longitude attributes are geographic coordinates specified 
 	 * in decimal degrees.
 	 */
-    private double latitude, longitude; 
+    private final double latitude;
+    private final double longitude;
     
     /*
      * The altitude attribute denotes the height of the position, specified in meters 
@@ -31,25 +32,25 @@ public class Coordinates extends AbstractScriptableDelegate {
      * coordinates. It is specified in meters and must be supported by all 
      * implementations.
      */
-    private double accuracy; 
+    private final double accuracy;
     
     /*
      * The altitudeAccuracy attribute is specified in meters.
      */
-    private Double altitudeAccuracy; 
+    private final Double altitudeAccuracy;
     
     /*
      * The heading attribute denotes the direction of travel of the hosting device and 
      * is specified in degrees, where 0 <= heading < 360, counting clockwise relative to 
      * the true north.
      */
-    private Double heading; 
+    private final Double heading;
     
     /*
      * The speed attribute denotes the magnitude of the horizontal component of the hosting 
      * device's current velocity and is specified in meters per second.
      */
-    private Double speed;
+    private final Double speed;
     
     /**
      * Constructs a org.w3c.geolocation.Coordinates object with the specified
