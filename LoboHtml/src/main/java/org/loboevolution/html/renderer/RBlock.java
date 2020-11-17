@@ -259,7 +259,7 @@ public class RBlock extends BaseElementRenderable {
 		int insetsTotalWidth = insets.left + insets.right;
 		int insetsTotalHeight = insets.top + insets.bottom;
 		int actualAvailWidth = availWidth - paddingTotalWidth - insetsTotalWidth;
-		final int actualAvailHeight = availWidth - paddingTotalHeight - insetsTotalHeight;
+		final int actualAvailHeight = availHeight - paddingTotalHeight - insetsTotalHeight;
 		final Integer dw = getDeclaredWidth(renderState, actualAvailWidth);
 		final Integer dh = getDeclaredHeight(renderState, actualAvailHeight);
 		int declaredWidth = dw != null ? dw : -1;
