@@ -53,10 +53,10 @@ public class HtmlContextMenu {
 	private static final Logger logger = Logger.getLogger(HtmlContextMenu.class.getName());
 
 	/** The element. */
-	private HTMLElement element;
+	private final HTMLElement element;
 
 	/** The context. */
-	private HtmlRendererContext context;
+	private final HtmlRendererContext context;
 
 	/** The search. */
 	private static final String SEARCH = "/org/lobo/image/search.png";

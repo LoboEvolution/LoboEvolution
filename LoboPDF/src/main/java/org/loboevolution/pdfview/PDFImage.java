@@ -70,7 +70,7 @@ import org.w3c.dom.Node;
  */
 public class PDFImage {
 
-	private static int[][] GREY_TO_ARGB = new int[8][];
+	private static final int[][] GREY_TO_ARGB = new int[8][];
 
 	/**
 	 * color key mask. Array of start/end pairs of ranges of color components to

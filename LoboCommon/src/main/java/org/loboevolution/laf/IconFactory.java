@@ -45,7 +45,7 @@ public class IconFactory {
 	private static final IconFactory instance = new IconFactory();
 	
 	/** The icon map. */
-	private Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
+	private final Map<String, ImageIcon> iconMap = new HashMap<String, ImageIcon>();
 
 	/**
 	 * Instantiates a new icon factory.

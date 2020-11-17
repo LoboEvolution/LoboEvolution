@@ -26,7 +26,7 @@ import org.loboevolution.html.renderer.HtmlController;
  */
 public class SelectOption {
 
-	private SelectControl control;
+	private final SelectControl control;
 
 	/** The combo box. */
 	private final JComboBox<OptionItem> comboBox;

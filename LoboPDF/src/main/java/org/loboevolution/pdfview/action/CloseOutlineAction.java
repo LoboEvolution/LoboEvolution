@@ -10,7 +10,7 @@ public class CloseOutlineAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
 	public CloseOutlineAction(PDFViewer dialog) {
 		super("Close Outline");

@@ -11,7 +11,7 @@ import org.loboevolution.html.dom.svg.SVGLengthList;
  */
 public class SVGAnimatedLengthListImpl implements SVGAnimatedLengthList {
 
-	private SVGLengthList lenght;
+	private final SVGLengthList lenght;
 
 	/**
 	 * <p>Constructor for SVGAnimatedLengthListImpl.</p>

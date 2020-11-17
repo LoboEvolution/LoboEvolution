@@ -203,7 +203,7 @@ public class PDFPassword {
     private static abstract class CharsetEncoderGenerator
             implements PasswordByteGenerator {
 
-        private Byte replacementByte;
+        private final Byte replacementByte;
 
         /**
          * Class constructor

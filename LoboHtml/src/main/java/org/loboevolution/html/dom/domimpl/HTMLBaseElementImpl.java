@@ -39,7 +39,7 @@ public class HTMLBaseElementImpl extends HTMLElementImpl {
 		super(name, true);
 	}
 
-	private final void processBaseTag() {
+	private void processBaseTag() {
 		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
 		if (doc != null) {
 			doc.setBaseURI(getAttribute("href"));

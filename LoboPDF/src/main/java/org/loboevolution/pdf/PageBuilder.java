@@ -18,7 +18,7 @@ class PageBuilder implements Serializable, Runnable {
 	/** The anim. */
 	private transient Thread anim;
 	
-	private PDFViewer PDFViewer;
+	private final PDFViewer PDFViewer;
 	
 	public PageBuilder(PDFViewer PDFViewer) {
 		this.PDFViewer = PDFViewer;

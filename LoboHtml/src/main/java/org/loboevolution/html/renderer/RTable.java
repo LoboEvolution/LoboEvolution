@@ -115,8 +115,8 @@ class RTable extends BaseElementRenderable {
 		this.tableMatrix = new TableMatrix(modelNode, pcontext, rcontext, frameContext, this, this);
 	}
 
-	private final void addPositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable,
-											   final boolean isFloat, final boolean isFixed) {
+	private void addPositionedRenderable(final BoundableRenderable renderable, final boolean verticalAlignable,
+                                         final boolean isFloat, final boolean isFixed) {
 		SortedSet<PositionedRenderable> others = this.positionedRenderables;
 		if (others == null) {
 			others = new TreeSet<PositionedRenderable>(new ZIndexComparator());

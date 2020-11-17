@@ -35,7 +35,7 @@ public class FontNameRenderState extends StyleSheetRenderState {
 	
 	private final String fontName;
 	
-	private RenderState delegate;
+	private final RenderState delegate;
 
 	/**
 	 * <p>Constructor for FontNameRenderState.</p>

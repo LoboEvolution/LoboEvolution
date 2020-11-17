@@ -34,7 +34,7 @@ import org.w3c.dom.Node;
  */
 public class HTMLCollectionImpl implements HTMLCollection {
 
-	private NodeImpl rootNode;
+	private final NodeImpl rootNode;
 	
 	private NodeListImpl rootList = null;
 	

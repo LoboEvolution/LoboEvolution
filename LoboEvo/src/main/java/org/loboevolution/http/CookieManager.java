@@ -33,10 +33,10 @@ public class CookieManager {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(CookieManager.class.getName());
 
-	private static String DELETE_COOKIES = "DELETE FROM COOKIE";
+	private static final String DELETE_COOKIES = "DELETE FROM COOKIE";
 
 	/** The date pattern. */
-	private static String PATTERN = "dd/MM/yyyy";
+	private static final String PATTERN = "dd/MM/yyyy";
 
 	/**
 	 * <p>deleteCookies.</p>

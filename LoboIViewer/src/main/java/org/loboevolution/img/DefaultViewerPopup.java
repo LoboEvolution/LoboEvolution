@@ -75,8 +75,8 @@ public class DefaultViewerPopup extends JPopupMenu {
 		zoomResizeToFit.addActionListener(e -> viewer.setResizeStrategy(ResizeStrategy.RESIZE_TO_FIT));
 
 		class CustomZoomEntry {
-			private double value;
-			private JRadioButtonMenuItem menuItem;
+			private final double value;
+			private final JRadioButtonMenuItem menuItem;
 
 			private CustomZoomEntry(String label, double value) {
 				this.value = value;

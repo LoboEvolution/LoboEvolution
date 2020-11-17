@@ -28,11 +28,11 @@ public class MozilaFirefoxData extends BrowserData {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(MozilaFirefoxData.class.getName());
 
-	private static String MOZ_BOOKMARKS = "SELECT DISTINCT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
+	private static final String MOZ_BOOKMARKS = "SELECT DISTINCT places.url, book.title, places.description FROM moz_bookmarks book, moz_places places WHERE book.fk = places.id AND instr(places.url, 'http') > 0";
 
-	private static String MOZ_COOKIES = "SELECT * from moz_cookies";
+	private static final String MOZ_COOKIES = "SELECT * from moz_cookies";
 
-	private static String MOZ_HISTORY = "SELECT DISTINCT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
+	private static final String MOZ_HISTORY = "SELECT DISTINCT places.url FROM moz_historyvisits vis, moz_places places WHERE vis.place_id = places.id";
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
 		final List<BookmarkInfo> bookmarks = new ArrayList<BookmarkInfo>();

@@ -60,7 +60,7 @@ public class XPathException extends RuntimeException {
        super(message);
        this.code = code;
     }
-    public short   code;
+    public final short   code;
     // XPathExceptionCode
     /**
      * If the expression has a syntax error or otherwise is not a legal

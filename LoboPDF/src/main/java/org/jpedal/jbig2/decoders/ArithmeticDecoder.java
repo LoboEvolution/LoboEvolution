@@ -56,7 +56,7 @@ import org.jpedal.jbig2.util.BinaryOperation;
 
 public class ArithmeticDecoder {
 
-	private StreamReader reader;
+	private final StreamReader reader;
 
 	public ArithmeticDecoderStats genericRegionStats, refinementRegionStats;
 

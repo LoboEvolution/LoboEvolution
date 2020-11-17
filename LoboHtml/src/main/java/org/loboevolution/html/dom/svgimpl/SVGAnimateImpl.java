@@ -77,9 +77,9 @@ public class SVGAnimateImpl extends JComponent implements ActionListener {
 	
 	private Timer timer;
 	
-	private SVGElementImpl elem;
+	private final SVGElementImpl elem;
 	
-	private SVGAnimateElementImpl animate;
+	private final SVGAnimateElementImpl animate;
 		
 	/**
 	 * <p>Constructor for SVGAnimateImpl.</p>

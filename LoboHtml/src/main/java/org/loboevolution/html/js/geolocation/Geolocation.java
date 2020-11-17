@@ -33,7 +33,7 @@ public class Geolocation extends AbstractScriptableDelegate {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(Geolocation.class.getName());
 
-	private Window window;
+	private final Window window;
 
 	/**
 	 * <p>Constructor for Geolocation.</p>

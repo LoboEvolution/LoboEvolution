@@ -35,7 +35,7 @@ import org.loboevolution.pdfview.PDFParseException;
 public abstract class PDFPattern {
  
     /** the pattern type (1 or 2) */
-    private int type;
+    private final int type;
     
     /** the matrix to transform from pattern space to PDF space */
     private AffineTransform xform;

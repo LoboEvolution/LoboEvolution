@@ -10,7 +10,7 @@ public class PrintAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
 	public PrintAction(PDFViewer dialog) {
 		super("Print...", dialog.getIcon("/org/loboevolution/images/print.png"));

@@ -54,8 +54,8 @@ import java.io.IOException;
 
 public class PDFSegment {
 
-	private ByteArrayOutputStream header = new ByteArrayOutputStream();
-	private ByteArrayOutputStream data = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream header = new ByteArrayOutputStream();
+	private final ByteArrayOutputStream data = new ByteArrayOutputStream();
 	private int segmentDataLength;
 
 	public void writeToHeader(short bite) {

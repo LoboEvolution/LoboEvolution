@@ -10,7 +10,7 @@ public class SetupAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
 	public SetupAction(PDFViewer dialog) {
 		super("Page setup...");

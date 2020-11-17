@@ -50,9 +50,9 @@ public class ImgControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 
-	private volatile Image image;
+	private final Image image;
 
-	private String alt;
+	private final String alt;
 
 	private Dimension preferredSize;
 

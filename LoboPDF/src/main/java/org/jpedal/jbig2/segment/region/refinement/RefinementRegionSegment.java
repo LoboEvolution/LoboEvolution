@@ -63,11 +63,11 @@ import org.jpedal.jbig2.segment.region.RegionSegment;
 public class RefinementRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(RefinementRegionSegment.class.getName());
-	private RefinementRegionFlags refinementRegionFlags = new RefinementRegionFlags();
+	private final RefinementRegionFlags refinementRegionFlags = new RefinementRegionFlags();
 
-	private boolean inlineImage;
+	private final boolean inlineImage;
 
-	private int noOfReferedToSegments;
+	private final int noOfReferedToSegments;
 
 	final int[] referedToSegments;
 

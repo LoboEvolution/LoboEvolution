@@ -11,7 +11,7 @@ import org.loboevolution.html.dom.svg.SVGTransformList;
  */
 public class SVGAnimatedTransformListImpl implements SVGAnimatedTransformList {
 	
-	private SVGTransformListImpl baseVal;
+	private final SVGTransformListImpl baseVal;
 	
 	/**
 	 * <p>Constructor for SVGAnimatedTransformListImpl.</p>

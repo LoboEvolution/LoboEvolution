@@ -51,8 +51,8 @@ package org.jpedal.jbig2.decoders;
 
 public class DecodeIntResult {
 
-	private int intResult;
-	private boolean booleanResult;
+	private final int intResult;
+	private final boolean booleanResult;
 
 	public DecodeIntResult(int intResult, boolean booleanResult) {
 		this.intResult = intResult;

@@ -86,11 +86,11 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(PDFViewer.class.getName());
 	
-	private float ZOOM_FACTOR = 1.2f;
+	private final float ZOOM_FACTOR = 1.2f;
 	
-	private int MIN_ZOOM_SIZE = 100;
+	private final int MIN_ZOOM_SIZE = 100;
 	
-	private int MAX_ZOOM_SIZE = 4000;
+	private final int MAX_ZOOM_SIZE = 4000;
 
 	/** The Constant TITLE. */
 	public static final String TITLE = "LoboEvolution PDF Viewer";

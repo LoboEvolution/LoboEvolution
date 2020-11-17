@@ -23,7 +23,7 @@ public class FontValues extends HtmlValues {
 	 * @param parentRenderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static final String getFontFamily(String spec, RenderState parentRenderState) {
+	public static String getFontFamily(String spec, RenderState parentRenderState) {
 		final String fontFamily = spec;
 		if (fontFamily == null) {
 			if (parentRenderState != null) {
@@ -42,7 +42,7 @@ public class FontValues extends HtmlValues {
 	 * @param parentRenderState the parent render state
 	 * @return the font size
 	 */
-	public static final float getFontSize(String spec, RenderState parentRenderState) {
+	public static float getFontSize(String spec, RenderState parentRenderState) {
 
 		if (spec == null) {
 			return new LAFSettings().getInstance().getFontSize();
@@ -148,7 +148,7 @@ public class FontValues extends HtmlValues {
 	 * @param spec a {@link java.lang.String} object.
 	 * @return a {@link java.lang.String} object.
 	 */
-	public static final String getFontStyle(String spec) {
+	public static String getFontStyle(String spec) {
 		final String fontStyle = spec;
 		if (fontStyle == null && new LAFSettings().getInstance().isItalic()) {
 			return CSSValues.ITALIC.getValue();

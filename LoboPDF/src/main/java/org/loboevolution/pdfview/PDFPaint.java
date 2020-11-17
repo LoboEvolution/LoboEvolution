@@ -32,7 +32,7 @@ import java.awt.geom.Rectangle2D;
  */
 public class PDFPaint {
 
-    private Paint mainPaint;
+    private final Paint mainPaint;
 
     /**
      * create a new PDFPaint based on a solid color

@@ -26,10 +26,10 @@ import java.nio.ByteBuffer;
  */
 public class LocaTable extends TrueTypeTable {
     /** if true, the table stores glyphs in long format */
-    private boolean isLong;
+    private final boolean isLong;
     
     /** the offsets themselves */
-    private int offsets[];
+    private final int[] offsets;
     
     /** Creates a new instance of HmtxTable */
     protected LocaTable(TrueTypeFont ttf) {

@@ -539,11 +539,11 @@ public class CCITTFaxDecoder {
 
 	private byte[] data;
 
-	private int w;
+	private final int w;
 
 	private boolean align = false;
 
-	private int fillOrder;
+	private final int fillOrder;
 
 	// Data structures needed to store changing elements for the previous
 	// and the current scanline

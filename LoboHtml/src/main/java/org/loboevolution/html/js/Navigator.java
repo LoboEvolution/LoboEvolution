@@ -33,7 +33,7 @@ import org.loboevolution.net.HttpNetwork;
  */
 public class Navigator extends AbstractScriptableDelegate {
 	
-	private Window window;
+	private final Window window;
 	
 	/**
 	 * <p>Constructor for Navigator.</p>

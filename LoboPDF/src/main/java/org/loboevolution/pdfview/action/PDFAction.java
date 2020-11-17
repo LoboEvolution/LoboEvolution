@@ -29,7 +29,7 @@ import org.loboevolution.pdfview.PDFParseException;
  */
 public class PDFAction {
     /** the type of this action */
-    private String type;
+    private final String type;
     
     /** the next action or array of actions */
     private PDFObject next;

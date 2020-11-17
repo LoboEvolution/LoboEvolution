@@ -35,7 +35,7 @@ public class TextAreaControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 	
-	private HTMLTextAreaElementImpl  modelNode;
+	private final HTMLTextAreaElementImpl  modelNode;
 	
 	/**
 	 * <p>Constructor for InputControl.</p>

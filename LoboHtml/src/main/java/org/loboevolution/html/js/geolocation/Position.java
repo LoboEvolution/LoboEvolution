@@ -17,12 +17,12 @@ public class Position extends AbstractScriptableDelegate {
 	/*
 	 * The position coordinates.
 	 */
-	private Coordinates coords;
+	private final Coordinates coords;
 	
 	/*
 	 * The time (in milliseconds since January 1, 1970 GMT) when this position was found (or calculated). 
 	 */
-	private long timestamp;
+	private final long timestamp;
 	
 	/**
 	 * Constructs a Position object.

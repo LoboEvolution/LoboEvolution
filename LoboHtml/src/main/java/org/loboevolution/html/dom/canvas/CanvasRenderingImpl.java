@@ -48,10 +48,10 @@ import org.loboevolution.net.HttpNetwork;
 public class CanvasRenderingImpl implements CanvasRenderingContext2D {
 	
 	/** The canvas. */
-	private HTMLCanvasElementImpl canvas;
+	private final HTMLCanvasElementImpl canvas;
 	
 	/** The image. */
-	private BufferedImage image;
+	private final BufferedImage image;
 	
     /** The fill style. */
     private Object fillStyle;
@@ -63,7 +63,7 @@ public class CanvasRenderingImpl implements CanvasRenderingContext2D {
     private int lineWidth;
 
     /** The global alpha. */
-    private Float globalAlpha;
+    private final Float globalAlpha;
 
     /** The translate x. */
     private int translateX;

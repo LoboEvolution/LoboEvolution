@@ -31,12 +31,12 @@ import javax.swing.JOptionPane;
 public class PrintThread extends Thread {
 
 	/** The pt pages. */
-	private PDFPrintPage ptPages;
+	private final PDFPrintPage ptPages;
 
 	/** The pt pjob. */
-	private PrinterJob ptPjob;
+	private final PrinterJob ptPjob;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 
 	/**
 	 * Instantiates a new prints the thread.

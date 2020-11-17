@@ -727,7 +727,7 @@ public class StyleSheetAggregator {
 		return n >= 0 && n % 1 == 0;
 	}
 
-	private final void addStyleSheet(CSSStyleSheetImpl styleSheet) throws Exception {
+	private void addStyleSheet(CSSStyleSheetImpl styleSheet) throws Exception {
 		CSSRuleListImpl ruleList = styleSheet.getCssRules();
 		CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
 		if (index == null) {

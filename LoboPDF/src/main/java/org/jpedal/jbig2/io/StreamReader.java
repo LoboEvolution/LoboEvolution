@@ -54,7 +54,7 @@ import java.io.IOException;
 import org.jpedal.jbig2.pdf.PDFSegment;
 
 public class StreamReader {
-	private byte[] data;
+	private final byte[] data;
 
 	private int bitPointer = 7;
 

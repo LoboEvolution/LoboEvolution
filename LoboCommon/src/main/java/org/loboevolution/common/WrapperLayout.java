@@ -35,7 +35,7 @@ import java.awt.LayoutManager;
  * @version $Id: $Id
  */
 public class WrapperLayout implements LayoutManager {
-	private static WrapperLayout instance = new WrapperLayout();
+	private static final WrapperLayout instance = new WrapperLayout();
 
 	/**
 	 * <p>Getter for the field instance.</p>

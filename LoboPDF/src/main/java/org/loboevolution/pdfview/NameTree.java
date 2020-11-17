@@ -37,7 +37,7 @@ import java.io.IOException;
 public class NameTree {
 
     /** the root object */
-    private PDFObject root;
+    private final PDFObject root;
 
     /** Creates a new instance of NameTree */
     public NameTree(PDFObject root) {

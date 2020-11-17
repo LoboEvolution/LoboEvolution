@@ -42,7 +42,7 @@ public class SVGControl extends BaseControl {
 	/** Constant logger */
 	protected static final Logger logger = Logger.getLogger(SVGControl.class.getName());
 
-	private SVGSVGElementImpl modelNode;
+	private final SVGSVGElementImpl modelNode;
 
 	/**
 	 * <p>Constructor for SVGControl.</p>

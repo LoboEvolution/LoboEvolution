@@ -32,9 +32,9 @@ public class InputImage {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(InputImage.class.getName());
 
-	private BufferedImage image;
+	private final BufferedImage image;
 	
-	private HTMLInputElementImpl modelNode;
+	private final HTMLInputElementImpl modelNode;
 
 	/**
 	 * <p>Constructor for InputImage.</p>

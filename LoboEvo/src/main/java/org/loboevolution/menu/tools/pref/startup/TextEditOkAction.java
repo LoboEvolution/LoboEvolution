@@ -17,7 +17,7 @@ public class TextEditOkAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The search. */
-	private transient TextEdit search;
+	private final transient TextEdit search;
 
 	/** The text area. */
 	private final JTextArea textArea;

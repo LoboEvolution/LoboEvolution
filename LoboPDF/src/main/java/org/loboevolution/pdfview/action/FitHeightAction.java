@@ -10,7 +10,7 @@ public class FitHeightAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
 	public FitHeightAction(PDFViewer dialog) {
 		super("Fit Height", dialog.getIcon("/org/loboevolution/images/fit-height.png"));

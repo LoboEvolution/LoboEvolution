@@ -51,7 +51,7 @@ import org.w3c.dom.views.DocumentView;
  */
 public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement, Drawable {
 	
-	private SVGRect viewport;
+	private final SVGRect viewport;
 
 	private SVGViewSpec currentView;
 	

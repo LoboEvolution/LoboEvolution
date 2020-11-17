@@ -32,9 +32,9 @@ public class GoogleChromeData extends BrowserData {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(GoogleChromeData.class.getName());
 
-	private static String CHROME_COOKIES = "SELECT * from cookies";
+	private static final String CHROME_COOKIES = "SELECT * from cookies";
 
-	private static String CHROME_HISTORY = "SELECT DISTINCT url from urls";
+	private static final String CHROME_HISTORY = "SELECT DISTINCT url from urls";
 
 	private static List<BookmarkInfo> getBookmarkInfo(String path) {
 		final List<BookmarkInfo> listInfo = new ArrayList<BookmarkInfo>();

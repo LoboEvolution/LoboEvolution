@@ -45,7 +45,7 @@ public class MouseEventTranslator implements MouseInputListener, PropertyChangeL
 	 */
 	private Point lastPosition = null;
 	
-	private ImageComponent ic;
+	private final ImageComponent ic;
 	
 	/**
 	 * <p>Constructor for MouseEventTranslator.</p>

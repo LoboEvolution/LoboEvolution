@@ -30,7 +30,7 @@ package org.loboevolution.html.renderstate;
 public class TextDecorationRenderState extends RenderStateDelegator {
 
 	/** The text decoration mask. */
-	private int textDecorationMask;
+	private final int textDecorationMask;
 
 	/**
 	 * Instantiates a new text decoration render state.

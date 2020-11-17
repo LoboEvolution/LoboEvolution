@@ -35,7 +35,7 @@ public class InputControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 	
-	private HTMLInputElementImpl  modelNode;
+	private final HTMLInputElementImpl  modelNode;
 	
 	/**
 	 * <p>Constructor for InputControl.</p>

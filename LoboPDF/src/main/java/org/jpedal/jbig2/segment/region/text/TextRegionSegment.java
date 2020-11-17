@@ -68,13 +68,14 @@ import org.jpedal.jbig2.util.BinaryOperation;
 public class TextRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(TextRegionSegment.class.getName());
-	private TextRegionFlags textRegionFlags = new TextRegionFlags();
+	private final TextRegionFlags textRegionFlags = new TextRegionFlags();
 
-	private TextRegionHuffmanFlags textRegionHuffmanFlags = new TextRegionHuffmanFlags();
+	private final TextRegionHuffmanFlags textRegionHuffmanFlags = new TextRegionHuffmanFlags();
 
-	private boolean inlineImage;
+	private final boolean inlineImage;
 
-	private short[] symbolRegionAdaptiveTemplateX = new short[2], symbolRegionAdaptiveTemplateY = new short[2];
+	private final short[] symbolRegionAdaptiveTemplateX = new short[2];
+    private final short[] symbolRegionAdaptiveTemplateY = new short[2];
 
 	public TextRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
 		super(streamDecoder);

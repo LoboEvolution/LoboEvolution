@@ -17,11 +17,11 @@ import org.loboevolution.component.BrowserFrame;
  */
 public class FullScreenAction extends AbstractAction {
 
-	private static GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
+	private static final GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
 
-	private static DisplayMode newDisplayMode = new DisplayMode(800, 600, 32, 0);
+	private static final DisplayMode newDisplayMode = new DisplayMode(800, 600, 32, 0);
 
-	private static DisplayMode oldDisplayMode = device.getDisplayMode();
+	private static final DisplayMode oldDisplayMode = device.getDisplayMode();
 
 	private static final long serialVersionUID = 1L;
 

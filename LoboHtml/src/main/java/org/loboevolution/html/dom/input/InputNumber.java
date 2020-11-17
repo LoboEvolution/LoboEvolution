@@ -20,7 +20,7 @@ import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
  */
 public class InputNumber extends InputText {
 
-	private JTextField numeric;
+	private final JTextField numeric;
 	private String min = "";
 	private String max = "";
 

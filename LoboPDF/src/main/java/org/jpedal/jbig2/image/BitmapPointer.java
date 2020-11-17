@@ -52,11 +52,11 @@ package org.jpedal.jbig2.image;
 public class BitmapPointer {
 	private int x; 
 	private int y;
-	private int width;
-	private int height;
+	private final int width;
+	private final int height;
 	private int count;
 	private boolean output;
-	private JBIG2Bitmap bitmap;
+	private final JBIG2Bitmap bitmap;
 
 	public BitmapPointer(JBIG2Bitmap bitmap) {
 		this.bitmap = bitmap;

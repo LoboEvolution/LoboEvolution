@@ -36,7 +36,7 @@ import java.awt.LayoutManager;
  */
 public class OverlayLayout implements LayoutManager {
 	
-	private transient LayeredImageView layeredImageView;
+	private final transient LayeredImageView layeredImageView;
 	
 	/**
 	 * <p>Constructor for OverlayLayout.</p>

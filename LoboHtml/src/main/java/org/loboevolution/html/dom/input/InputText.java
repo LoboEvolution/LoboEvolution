@@ -45,7 +45,7 @@ public class InputText {
 	
 	private boolean textWrittenIn;
 	
-	private HTMLInputElementImpl modelNode;
+	private final HTMLInputElementImpl modelNode;
 
 	/**
 	 * <p>Constructor for InputText.</p>

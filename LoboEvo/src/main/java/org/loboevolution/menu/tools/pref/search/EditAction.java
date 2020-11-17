@@ -19,7 +19,7 @@ public class EditAction<T> extends AbstractAction {
 	/** The add. */
 	private final boolean add;
 
-	private transient ItemListControl<T> item;
+	private final transient ItemListControl<T> item;
 
 	/**
 	 * Instantiates a new edits the action.

@@ -43,8 +43,8 @@ import java.lang.ref.SoftReference;
  */
 public class PDFXref {
 
-    private int id;
-    private int generation;
+    private final int id;
+    private final int generation;
     private final boolean compressed;
     
     // this field is only used in PDFFile.objIdx

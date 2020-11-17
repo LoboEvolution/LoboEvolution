@@ -28,12 +28,12 @@ public class GlyfTable extends TrueTypeTable {
      * the glyph data, as either a byte buffer (unparsed) or a 
      * glyph object (parsed)
      */
-    private Object[] glyphs;
+    private final Object[] glyphs;
     
     /**
      * The glyph location table
      */
-    private LocaTable loca;
+    private final LocaTable loca;
     
     /** Creates a new instance of HmtxTable */
     protected GlyfTable(TrueTypeFont ttf) {

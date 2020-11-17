@@ -44,12 +44,12 @@ import javax.swing.JViewport;
  */
 public final class ImageViewer {
 	private final LayeredImageView view;
-	private ImageComponent theImage;
+	private final ImageComponent theImage;
 	private final JScrollPane scroller;
-	private JPanel panel;
+	private final JPanel panel;
 	private StatusBar statusBar;
 	private boolean statusBarVisible = false;
-	private PropertyChangeSupport propertyChangeSupport;
+	private final PropertyChangeSupport propertyChangeSupport;
 	private Synchronizer synchronizer;
 
 	/**

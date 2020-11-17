@@ -59,7 +59,7 @@ public class HuffmanDecoder {
 	public static final int jbig2HuffmanOOB = 0xfffffffe;
 	public static final int jbig2HuffmanEOT = 0xffffffff;
 
-	private StreamReader reader;
+	private final StreamReader reader;
 
 	//private static HuffmanDecoder ref;
 

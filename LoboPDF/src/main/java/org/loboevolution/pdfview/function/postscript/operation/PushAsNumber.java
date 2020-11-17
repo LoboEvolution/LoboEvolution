@@ -6,7 +6,7 @@ import java.util.Stack;
 
 final class PushAsNumber implements PostScriptOperation {
 
-	private String token;
+	private final String token;
 	
 	/*************************************************************************
 	 * Constructor

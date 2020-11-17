@@ -25,7 +25,7 @@ public class ImageSequenceViewer {
 	private JButton forwardButton, backwardButton;
 	private JLabel locationLabel;
 
-	private JPanel panel = new JPanel(new BorderLayout()) {
+	private final JPanel panel = new JPanel(new BorderLayout()) {
 		private static final long serialVersionUID = 1L;
 
 		/**

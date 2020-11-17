@@ -10,7 +10,7 @@ public class FitAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
 	public FitAction(PDFViewer dialog) {
 		super("Fit", dialog.getIcon("/org/loboevolution/images/fit.png"));

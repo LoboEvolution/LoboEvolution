@@ -10,7 +10,7 @@ public class OutlineAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
 	public OutlineAction(PDFViewer dialog) {
 		super("Open Outline");

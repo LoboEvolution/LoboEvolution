@@ -69,7 +69,7 @@ public class FontFactory {
 	 *
 	 * @return the Constant instance
 	 */
-	public static final FontFactory getInstance() {
+	public static FontFactory getInstance() {
 		return instance;
 	}
 
@@ -124,7 +124,7 @@ public class FontFactory {
 	 * @param key the key
 	 * @return the font
 	 */
-	private final Font createFont(FontKey key) {
+	private Font createFont(FontKey key) {
 		final Font font = createFontImpl(key);
 		return scriptFont(font, key);
 	}
@@ -147,7 +147,7 @@ public class FontFactory {
 	 * @param key the key
 	 * @return the font
 	 */
-	private final Font createFontImpl(FontKey key) {
+	private Font createFontImpl(FontKey key) {
 		final String fontNames = key.getFontFamily();
 		final int letterSpacing = key.getLetterSpacing();
 		String matchingFace = null;

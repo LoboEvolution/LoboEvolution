@@ -59,13 +59,13 @@ public class ThumbPanel extends JPanel implements Runnable, Scrollable, ImageObs
 	private transient Image[] images;
 
 	/** Size of the border between images. */
-	private int border = 2;
+	private final int border = 2;
 	
 	/**
 	 * Height of each line. Thumbnails will be scaled to this height (minus the
 	 * border).
 	 */
-	private int lineheight = 96 + border;
+	private final int lineheight = 96 + border;
 	
 	/**
 	 * Guesstimate of the width of a thumbnail that hasn't been processed yet.

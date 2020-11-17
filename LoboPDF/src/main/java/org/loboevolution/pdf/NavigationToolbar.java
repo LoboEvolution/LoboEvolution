@@ -32,9 +32,9 @@ public class NavigationToolbar extends JToolBar {
 	/** the current page number text field. */
 	protected final JTextField currentPageBox = new JTextField(4);
 	
-	private JLabel totalNoOfPages = new JLabel();
+	private final JLabel totalNoOfPages = new JLabel();
 
-	private PDFViewer PDFViewer;
+	private final PDFViewer PDFViewer;
 
 	public NavigationToolbar(PDFViewer PDFViewer) {
 		this.PDFViewer = PDFViewer;

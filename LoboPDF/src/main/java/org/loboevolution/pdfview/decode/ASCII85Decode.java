@@ -31,7 +31,7 @@ import org.loboevolution.pdfview.PDFParseException;
  */
 public class ASCII85Decode {
 
-    private ByteBuffer buf;
+    private final ByteBuffer buf;
 
     /**
      * initialize the decoder with byte buffer in ASCII85 format

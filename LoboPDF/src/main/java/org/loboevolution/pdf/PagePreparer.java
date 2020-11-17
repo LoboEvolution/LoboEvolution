@@ -14,9 +14,9 @@ class PagePreparer extends Thread {
 	private int waitforPage;
 
 	/** The prep page. */
-	private int prepPage;
+	private final int prepPage;
 	
-	private PDFViewer PDFViewer;
+	private final PDFViewer PDFViewer;
 
 	/**
 	 * Creates a new PagePreparer to prepare the page after the current one.

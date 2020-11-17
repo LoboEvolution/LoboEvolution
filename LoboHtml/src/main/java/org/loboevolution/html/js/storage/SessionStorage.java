@@ -7,7 +7,7 @@ import org.loboevolution.store.WebStore;
 
 public class SessionStorage implements Storage {
 	
-	private int index;
+	private final int index;
 	
 	public SessionStorage() {
 		this.index = TabStore.getTabs().size();

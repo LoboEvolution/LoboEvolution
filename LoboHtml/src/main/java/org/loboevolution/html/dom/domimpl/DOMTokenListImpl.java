@@ -10,9 +10,9 @@ import org.loboevolution.html.dom.DOMTokenList;
  */
 public class DOMTokenListImpl implements DOMTokenList {
 
-	private String itemValue;
+	private final String itemValue;
 
-	private HTMLElementImpl element;
+	private final HTMLElementImpl element;
 
 	/**
 	 * <p>Constructor for DOMTokenListImpl.</p>

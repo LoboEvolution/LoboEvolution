@@ -23,30 +23,30 @@ public class GeneralStore implements Serializable {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(GeneralStore.class.getName());
 
-	private static String DELETE_NETWORK = "DELETE FROM NETWORK";
+	private static final String DELETE_NETWORK = "DELETE FROM NETWORK";
 
-	private static String DELETE_SIZE = "DELETE FROM SIZE";
+	private static final String DELETE_SIZE = "DELETE FROM SIZE";
 
-	private static String DELETE_STARTUP = "DELETE FROM STARTUP";
+	private static final String DELETE_STARTUP = "DELETE FROM STARTUP";
 
-	private static String DELETE_USER_AGENT = "DELETE FROM USER_AGENT";
+	private static final String DELETE_USER_AGENT = "DELETE FROM USER_AGENT";
 
-	private static String INSERT_NETWORK = "INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)";
+	private static final String INSERT_NETWORK = "INSERT INTO NETWORK (js, css, cookie, cache, navigation) VALUES(?,?,?,?,?)";
 
-	private static String INSERT_SIZE = "INSERT INTO SIZE (width, height) VALUES(?,?)";
+	private static final String INSERT_SIZE = "INSERT INTO SIZE (width, height) VALUES(?,?)";
 
-	private static String INSERT_STARTUP = "INSERT INTO STARTUP (baseUrl) VALUES(?)";
+	private static final String INSERT_STARTUP = "INSERT INTO STARTUP (baseUrl) VALUES(?)";
 
-	private static String INSERT_USER_AGENT = "INSERT INTO USER_AGENT (description) VALUES(?)";
+	private static final String INSERT_USER_AGENT = "INSERT INTO USER_AGENT (description) VALUES(?)";
 
-	private static String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation FROM NETWORK";
+	private static final String NETWORK = "SELECT DISTINCT js, css, cookie, cache, navigation FROM NETWORK";
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 22574500070000402L;
 
-	private static String SIZE = "SELECT DISTINCT width, height FROM SIZE";
+	private static final String SIZE = "SELECT DISTINCT width, height FROM SIZE";
 
-	private static String STARTUP = "SELECT DISTINCT baseUrl FROM STARTUP";
+	private static final String STARTUP = "SELECT DISTINCT baseUrl FROM STARTUP";
 
 	/**
 	 * <p>deleteBounds.</p>

@@ -11,7 +11,7 @@ import org.w3c.dom.DOMException;
  */
 public class SVGAnimatedNumberImpl implements SVGAnimatedNumber {
 
-	private SVGNumberImpl svgNumber;
+	private final SVGNumberImpl svgNumber;
 
 	/**
 	 * <p>Constructor for SVGAnimatedNumberImpl.</p>

@@ -19,7 +19,7 @@ import org.loboevolution.html.js.Executor;
  */
 public class InputColorPicker {
 	
-	private HTMLInputElementImpl modelNode;
+	private final HTMLInputElementImpl modelNode;
 	
 	final JButton widget = new JButton("Choose Color");
 

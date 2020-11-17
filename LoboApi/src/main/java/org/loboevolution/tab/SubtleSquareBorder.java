@@ -9,13 +9,13 @@ import javax.swing.border.Border;
 
 class SubtleSquareBorder implements Border {
 
-	protected Color m_bottomColor = Color.gray;
+	protected final Color m_bottomColor = Color.gray;
 
-	protected int m_h = 6;
+	protected final int m_h = 6;
 
-	protected Color m_topColor = Color.white;
+	protected final Color m_topColor = Color.white;
 
-	protected int m_w = 6;
+	protected final int m_w = 6;
 
 	protected boolean roundc = false;
 

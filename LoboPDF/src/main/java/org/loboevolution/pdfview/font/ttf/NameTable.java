@@ -74,7 +74,7 @@ public class NameTable extends TrueTypeTable {
     /**
      * The actual name records
      */
-    private SortedMap<NameRecord,String> records;
+    private final SortedMap<NameRecord,String> records;
     
     
     /** Creates a new instance of NameTable */

@@ -263,7 +263,7 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 		}
 	}
 
-	private final void defineElementClass(Scriptable scope, final Document document, final String jsClassName, final String elementName, Class<?> javaClass) {
+	private void defineElementClass(Scriptable scope, final Document document, final String jsClassName, final String elementName, Class<?> javaClass) {
 		JavaInstantiator ji = () -> {
 			Document d = document;
 			if (d == null) {

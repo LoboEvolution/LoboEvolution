@@ -200,7 +200,7 @@ public class PatternType1 extends PDFPattern {
      */
     static class TilingPatternPaint extends PDFPaint {
         /** the pattern to paint */
-        private PatternType1 pattern;
+        private final PatternType1 pattern;
         
         /** Create a tiling pattern paint */
         public TilingPatternPaint(Paint paint, PatternType1 pattern) {
@@ -263,10 +263,10 @@ public class PatternType1 extends PDFPattern {
         private Rectangle2D bbox;
         
         /** the x offset */
-        private float xstep;
+        private final float xstep;
         
         /** the y offset */
-        private float ystep;
+        private final float ystep;
         
         /** the image data, as a raster in device coordinates */
         private Raster data;

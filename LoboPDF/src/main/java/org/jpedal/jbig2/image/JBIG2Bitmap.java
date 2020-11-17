@@ -69,7 +69,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 public final class JBIG2Bitmap {
 	
 	private static final Logger logger = Logger.getLogger(JBIG2Bitmap.class.getName());
-	private int width, height, line;
+	private final int width;
+    private int height;
+    private final int line;
 	private int bitmapNumber;
 	public FastBitSet data;
 
@@ -77,9 +79,9 @@ public final class JBIG2Bitmap {
 	
 	//private static int counter = 0;
 	
-	private ArithmeticDecoder arithmeticDecoder;
-	private HuffmanDecoder huffmanDecoder;
-	private MMRDecoder mmrDecoder;
+	private final ArithmeticDecoder arithmeticDecoder;
+	private final HuffmanDecoder huffmanDecoder;
+	private final MMRDecoder mmrDecoder;
 	
 	public JBIG2Bitmap(int width, int height, ArithmeticDecoder arithmeticDecoder, HuffmanDecoder huffmanDecoder, MMRDecoder mmrDecoder) {
 		this.width = width;

@@ -40,7 +40,7 @@ public class CanvasControl extends BaseControl {
 	private static final long serialVersionUID = 1L;
 	
 	/** The canvas. */
-	private HTMLCanvasElementImpl canvas;
+	private final HTMLCanvasElementImpl canvas;
 
 	/**
 	 * Instantiates a new canvas control.

@@ -68,7 +68,7 @@ import org.jpedal.jbig2.segment.pageinformation.PageInformationSegment;
 
 public class JBIG2Decoder {
 	
-	private JBIG2StreamDecoder streamDecoder;
+	private final JBIG2StreamDecoder streamDecoder;
 
 	/**
 	 * Constructor

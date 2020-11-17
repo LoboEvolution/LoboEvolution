@@ -117,7 +117,7 @@ public class StandardDecrypter implements PDFDecrypter {
     /**
      * The encryption algorithm being employed
      */
-    private EncryptionAlgorithm encryptionAlgorithm;
+    private final EncryptionAlgorithm encryptionAlgorithm;
 
     /**
      * Class constructor

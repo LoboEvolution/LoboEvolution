@@ -16,7 +16,7 @@ public class CanvasPatternImpl implements CanvasPattern {
 	
 	private HTMLImageElement image;
 	
-	private String repetitionType;
+	private final String repetitionType;
 
 	/**
 	 * <p>Constructor for CanvasPatternImpl.</p>

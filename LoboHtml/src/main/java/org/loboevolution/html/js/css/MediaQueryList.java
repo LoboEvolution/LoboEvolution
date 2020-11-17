@@ -7,9 +7,9 @@ import org.loboevolution.html.style.StyleSheetAggregator;
 
 public class MediaQueryList {
 
-    private String media;
+    private final String media;
 
-    private Window window;
+    private final Window window;
 
     public MediaQueryList(Window window, String mediaQueryString) {
         this.window = window;

@@ -16,7 +16,7 @@ public class DefaultsAction extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	private transient PreferenceWindow prefer;
+	private final transient PreferenceWindow prefer;
 
 	/**
 	 * <p>Constructor for DefaultsAction.</p>

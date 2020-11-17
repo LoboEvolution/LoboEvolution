@@ -31,10 +31,10 @@ import org.loboevolution.pdfview.function.PDFFunction;
  */ 
 public class AlternateColorSpace extends PDFColorSpace {
     /** The alternate color space */
-    private PDFColorSpace alternate;
+    private final PDFColorSpace alternate;
     
     /** The function */
-    private PDFFunction function;
+    private final PDFFunction function;
     
     private AltColorSpace altcolorspace;
     

@@ -27,7 +27,7 @@ public class BrowserPanel extends JPanel implements IBrowserPanel {
 
 	private IWelcomePanel welcome;
 	
-	private BrowserFrame browserFrame;
+	private final BrowserFrame browserFrame;
 
 	/**
 	 * <p>Constructor for BrowserPanel.</p>

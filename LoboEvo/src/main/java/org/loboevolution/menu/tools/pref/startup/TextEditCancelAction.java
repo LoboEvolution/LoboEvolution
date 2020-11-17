@@ -16,7 +16,7 @@ public class TextEditCancelAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 
 	/** The search. */
-	private transient TextEdit search;
+	private final transient TextEdit search;
 
 	/**
 	 * <p>Constructor for TextEditCancelAction.</p>

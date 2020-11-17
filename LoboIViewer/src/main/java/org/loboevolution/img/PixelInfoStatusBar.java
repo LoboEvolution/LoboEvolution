@@ -34,7 +34,7 @@ public class PixelInfoStatusBar extends StatusBar {
 
 	private PixelModel model;
 
-	private PropertyChangeListener propertyChangeListener = evt -> update();
+	private final PropertyChangeListener propertyChangeListener = evt -> update();
 
 	private final ChangeListener modelListener = e -> update();
 

@@ -23,7 +23,7 @@ public class InputFile {
 	
 	private final JTextField textField = new JTextField();
 	
-	private InputControl control;
+	private final InputControl control;
 
 	/**
 	 * <p>Constructor for InputFile.</p>

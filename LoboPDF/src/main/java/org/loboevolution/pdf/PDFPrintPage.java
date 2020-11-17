@@ -58,7 +58,7 @@ import org.loboevolution.pdfview.PDFRenderer;
 public class PDFPrintPage implements Printable {
 
 	/** The PDFFile to be printed. */
-	private PDFFile file;
+	private final PDFFile file;
 
 	/** The PrinterJob for this print job. */
 	private PrinterJob pjob;

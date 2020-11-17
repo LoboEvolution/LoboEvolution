@@ -471,7 +471,7 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		}
 	}
 
-	private final void relayoutImpl(boolean invalidateLocal, boolean onlyIfValid) {
+	private void relayoutImpl(boolean invalidateLocal, boolean onlyIfValid) {
 		if (onlyIfValid && !this.layoutUpTreeCanBeInvalidated) {
 			return;
 		}

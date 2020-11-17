@@ -93,7 +93,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 		return getAttribute("align");
 	}
 
-	private final float getHeadingFontSize() {
+	private float getHeadingFontSize() {
 		final String tagName = getTagName();
 		try {
 			final int lastCharValue = tagName.charAt(1) - '0';
@@ -119,7 +119,7 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 		}
 	}
 
-	private final String getHeadingFontSizeText() {
+	private String getHeadingFontSizeText() {
 		final String tagName = getTagName();
 		try {
 			final int lastCharValue = tagName.charAt(1) - '0';

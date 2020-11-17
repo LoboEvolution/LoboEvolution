@@ -2019,7 +2019,7 @@ public class AbstractCSSProperties extends AbstractScriptableDelegate implements
 		return getPropertyValueLC(name.toLowerCase());
 	}
 
-	private final String getPropertyValueLC(String lowerCaseName) {
+	private String getPropertyValueLC(String lowerCaseName) {
 		final Map<String, PropertyCSS> vm = this.valueMap;
 		synchronized (this) {
 			// Local properties have precedence

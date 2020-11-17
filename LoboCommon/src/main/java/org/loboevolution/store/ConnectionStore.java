@@ -25,11 +25,11 @@ public class ConnectionStore implements Serializable {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(ConnectionStore.class.getName());
 
-	private static String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
+	private static final String CONNECTIONS = "SELECT DISTINCT proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses FROM CONNECTION";
 
-	private static String DELETE_CONNECTIONS = "DELETE FROM CONNECTION";
+	private static final String DELETE_CONNECTIONS = "DELETE FROM CONNECTION";
 
-	private static String INSERT_CONNECTIONS = "INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)";
+	private static final String INSERT_CONNECTIONS = "INSERT INTO CONNECTION (proxyType, userName, password, authenticated, host, port, disableProxyForLocalAddresses) VALUES(?,?,?,?,?,?,?)";
 
 	private static final long serialVersionUID = 1L;
 

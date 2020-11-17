@@ -10,9 +10,9 @@ import org.loboevolution.html.dom.TextMetrics;
  */
 public class CanvasTextMetricsImpl implements TextMetrics {
 	
-	private double width;
+	private final double width;
 	
-	private double height;
+	private final double height;
 	
 	/**
 	 * <p>Constructor for CanvasTextMetricsImpl.</p>

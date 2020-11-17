@@ -13,7 +13,7 @@ public class ButtonControl extends BaseControl implements UIControl {
 
 private static final long serialVersionUID = 1L;
 	
-	private HTMLButtonElementImpl  modelNode;
+	private final HTMLButtonElementImpl  modelNode;
 	
 	/**
 	 * <p>Constructor for ButtonControl.</p>

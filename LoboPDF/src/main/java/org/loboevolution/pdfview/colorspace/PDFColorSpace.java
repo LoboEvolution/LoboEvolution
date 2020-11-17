@@ -55,15 +55,15 @@ public class PDFColorSpace {
     /** the device-dependent color spaces */
     //    private static PDFColorSpace graySpace =
     //            new PDFColorSpace(ColorSpace.getInstance(ColorSpace.CS_GRAY));
-    private static PDFColorSpace rgbSpace = new PDFColorSpace(ColorSpace.getInstance(
+    private static final PDFColorSpace rgbSpace = new PDFColorSpace(ColorSpace.getInstance(
                 ColorSpace.CS_sRGB));
-    private static PDFColorSpace cmykSpace = new PDFColorSpace(new CMYKColorSpace());
+    private static final PDFColorSpace cmykSpace = new PDFColorSpace(new CMYKColorSpace());
 
     /** the pattern space */
-    private static PDFColorSpace patternSpace = new PatternSpace();
+    private static final PDFColorSpace patternSpace = new PatternSpace();
 
     /** graySpace and the gamma correction for it. */
-    private static PDFColorSpace graySpace;
+    private static final PDFColorSpace graySpace;
 
 	static {
 		boolean useSGray = true;

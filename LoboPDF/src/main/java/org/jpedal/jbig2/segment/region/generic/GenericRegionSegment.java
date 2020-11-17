@@ -63,9 +63,9 @@ import org.jpedal.jbig2.segment.region.RegionSegment;
 public class GenericRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(GenericRegionSegment.class.getName());
-    private GenericRegionFlags genericRegionFlags = new GenericRegionFlags();
+    private final GenericRegionFlags genericRegionFlags = new GenericRegionFlags();
 
-    private boolean inlineImage;
+    private final boolean inlineImage;
 
     private boolean unknownLength = false;
     

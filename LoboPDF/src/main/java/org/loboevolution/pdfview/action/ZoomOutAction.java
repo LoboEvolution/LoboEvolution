@@ -10,9 +10,9 @@ public class ZoomOutAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 	
-	private float zoomfactor;
+	private final float zoomfactor;
 
 	public ZoomOutAction(PDFViewer dialog, float factor) {
 		super("Zoom out", dialog.getIcon("/org/loboevolution/images/zoomout.png"));

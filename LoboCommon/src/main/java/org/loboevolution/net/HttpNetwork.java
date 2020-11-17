@@ -42,7 +42,7 @@ public class HttpNetwork {
 	/** Constant GZIP_ENCODING="gzip" */
 	public static final String GZIP_ENCODING = "gzip";
 
-	private static String USER_AGENT = "SELECT DISTINCT description FROM USER_AGENT";
+	private static final String USER_AGENT = "SELECT DISTINCT description FROM USER_AGENT";
 
 	private static InputStream getGzipStream(URLConnection con) throws IOException {
 		final InputStream cis = con.getInputStream();

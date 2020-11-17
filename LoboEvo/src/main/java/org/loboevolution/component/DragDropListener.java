@@ -30,7 +30,7 @@ public class DragDropListener implements DropTargetListener {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(DragDropListener.class.getName());
 	
-	private IBrowserPanel bpanel;
+	private final IBrowserPanel bpanel;
 
 	/**
 	 * <p>Constructor for DragDropListener.</p>

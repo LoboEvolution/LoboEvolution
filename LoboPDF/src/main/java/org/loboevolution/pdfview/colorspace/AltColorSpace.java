@@ -13,8 +13,8 @@ import org.loboevolution.pdfview.function.PDFFunction;
  ****************************************************************************/
 public class AltColorSpace extends ColorSpace {
 
-	private PDFFunction fkt;
-	private ColorSpace origCs;
+	private final PDFFunction fkt;
+	private final ColorSpace origCs;
 	/**
 	 * Create a new CMYKColorSpace Instance.
 	 */

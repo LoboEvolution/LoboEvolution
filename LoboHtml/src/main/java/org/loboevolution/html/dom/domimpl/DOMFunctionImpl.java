@@ -35,9 +35,9 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
  */
 public class DOMFunctionImpl extends NodeImpl {
 	
-	private Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<NodeImpl, Map<String, List<Function>>>();
+	private final Map<NodeImpl, Map<String, List<Function>>> onEventHandlers = new HashMap<NodeImpl, Map<String, List<Function>>>();
 	
-	private List<NodeImpl> clicked = new ArrayList<NodeImpl>();
+	private final List<NodeImpl> clicked = new ArrayList<NodeImpl>();
 	
 	/**
 	 * <p>getElementsByTagName.</p>

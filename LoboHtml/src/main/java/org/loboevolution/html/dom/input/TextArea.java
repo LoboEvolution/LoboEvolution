@@ -24,7 +24,7 @@ public class TextArea {
 	
 	private static final float DEFAULT_FONT_SIZE = 14.0f;
 	
-	private JTextArea  jtArea = new JTextArea();
+	private final JTextArea  jtArea = new JTextArea();
 	
 	private HTMLTextAreaElementImpl modelNode;
 	

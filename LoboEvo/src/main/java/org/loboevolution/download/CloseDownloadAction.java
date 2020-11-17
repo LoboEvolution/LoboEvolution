@@ -7,7 +7,7 @@ public class CloseDownloadAction extends AbstractAction {
 
     private static final long serialVersionUID = 1L;
 
-    private DownloadWindow action;
+    private final DownloadWindow action;
 
     CloseDownloadAction(DownloadWindow action){
         this.action = action;

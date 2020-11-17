@@ -26,9 +26,9 @@ package org.loboevolution.pdf;
 public class GotoLater implements Runnable {
 
 	/** The page. */
-	private int page;
+	private final int page;
 	
-	private ThumbPanel thumb;
+	private final ThumbPanel thumb;
 
 	public GotoLater(int pagenum,  ThumbPanel thumb) {
 		page = pagenum;

@@ -22,17 +22,17 @@ public class TabStore {
 	/** The Constant logger. */
 	private static final Logger logger = Logger.getLogger(TabStore.class.getName());
 
-	private static String INSERT_TAB = "INSERT INTO TAB (index_tab, url, title) VALUES(?,?,?)";
+	private static final String INSERT_TAB = "INSERT INTO TAB (index_tab, url, title) VALUES(?,?,?)";
 
-	private static String DELETE_TAB = "DELETE FROM TAB WHERE index_tab = ?";
+	private static final String DELETE_TAB = "DELETE FROM TAB WHERE index_tab = ?";
 	
-	private static String DELETE_TAB_ALL = "DELETE FROM TAB";
+	private static final String DELETE_TAB_ALL = "DELETE FROM TAB";
 
-	private static String TAB = "SELECT url FROM TAB WHERE index_tab = ?";
+	private static final String TAB = "SELECT url FROM TAB WHERE index_tab = ?";
 	
-	private static String TAB_URL = "SELECT DISTINCT url FROM TAB";
+	private static final String TAB_URL = "SELECT DISTINCT url FROM TAB";
 
-	private static String TABS = "SELECT index_tab, url, title FROM TAB";
+	private static final String TABS = "SELECT index_tab, url, title FROM TAB";
 	
 	/**
 	 * <p>insertTab.</p>

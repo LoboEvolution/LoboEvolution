@@ -16,7 +16,7 @@ public class CancelAction<T> extends AbstractAction {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	private transient ItemEditor<T> item;
+	private final transient ItemEditor<T> item;
 
 	/**
 	 * <p>Constructor for CancelAction.</p>

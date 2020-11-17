@@ -33,7 +33,7 @@ import org.mozilla.javascript.Undefined;
  * @version $Id: $Id
  */
 public class JavaScript {
-	private static JavaScript instance = new JavaScript();
+	private static final JavaScript instance = new JavaScript();
 
 	/**
 	 * <p>Getter for the field instance.</p>

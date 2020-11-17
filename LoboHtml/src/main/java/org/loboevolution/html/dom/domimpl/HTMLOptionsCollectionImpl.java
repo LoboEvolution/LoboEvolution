@@ -13,7 +13,7 @@ import org.w3c.dom.Node;
  */
 public class HTMLOptionsCollectionImpl implements HTMLOptionsCollection {
 
-	private NodeImpl rootNode;
+	private final NodeImpl rootNode;
 
 	private NodeListImpl rootList = null;
 

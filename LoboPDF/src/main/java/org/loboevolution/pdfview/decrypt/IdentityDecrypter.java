@@ -32,7 +32,7 @@ import org.loboevolution.pdfview.PDFParseException;
  */
 public class IdentityDecrypter implements PDFDecrypter {
 
-    private static IdentityDecrypter INSTANCE = new IdentityDecrypter();
+    private static final IdentityDecrypter INSTANCE = new IdentityDecrypter();
 
     @Override
 	public ByteBuffer decryptBuffer(String cryptFilterName,

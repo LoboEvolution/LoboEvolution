@@ -849,7 +849,7 @@ class TableMatrix {
 	 * This method renders each cell using already set actual column widths. It sets
 	 * minimum row heights based on this.
 	 */
-	private final void finalRender(int hasBorder, int cellSpacing, boolean sizeOnly) {
+	private void finalRender(int hasBorder, int cellSpacing, boolean sizeOnly) {
 		// finalRender needs to adjust actualSize of columns and rows
 		// given that things might change as we render one last time.
 		final List<RTableCell> allCells = this.ALL_CELLS;
@@ -946,7 +946,7 @@ class TableMatrix {
 		return this.ROWS.size();
 	}
 
-	private final HTMLElementImpl getParentRow(HTMLElementImpl cellNode) {
+	private HTMLElementImpl getParentRow(HTMLElementImpl cellNode) {
 		org.w3c.dom.Node parentNode = cellNode.getParentNode();
 		for (;;) {
 			if (parentNode instanceof HTMLElementImpl) {				
@@ -1236,7 +1236,7 @@ class TableMatrix {
 	 * This method renders each cell using already set actual column widths. It sets
 	 * minimum row heights based on this.
 	 */
-	private final void preLayout(int hasBorder, int cellSpacingX, int cellSpacingY, boolean tableWidthKnown) {
+	private void preLayout(int hasBorder, int cellSpacingX, int cellSpacingY, boolean tableWidthKnown) {
 		// TODO: Fix for table without width that has a subtable with width=100%.
 		// TODO: Maybe it can be addressed when NOWRAP is implemented.
 		// TODO: Maybe it's possible to eliminate this pre-layout altogether.

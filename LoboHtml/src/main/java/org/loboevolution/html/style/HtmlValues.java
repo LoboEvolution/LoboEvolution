@@ -253,7 +253,7 @@ public class HtmlValues {
 	 * @param errorValue a int.
 	 * @return a int.
 	 */
-	public static final int getPixelSize(String spec, RenderState renderState, int errorValue) {
+	public static int getPixelSize(String spec, RenderState renderState, int errorValue) {
 		try {
 			final int dpi = GraphicsEnvironment.isHeadless() ? 72 : Toolkit.getDefaultToolkit().getScreenResolution();
 			final String lcSpec = spec.toLowerCase();
@@ -313,7 +313,7 @@ public class HtmlValues {
 	 * @param availSize a int.
 	 * @return a int.
 	 */
-	public static final int getPixelSize(String spec, RenderState renderState, int errorValue, int availSize) {
+	public static int getPixelSize(String spec, RenderState renderState, int errorValue, int availSize) {
 		try {
 			if (spec.endsWith("%")) {
 				final String perText = spec.substring(0, spec.length() - 1);
@@ -333,7 +333,7 @@ public class HtmlValues {
 	* @param cssValue a {@link com.gargoylesoftware.css.dom.CSSValueImpl} object.
 	 * @return a int.
 	 */
-	public static final int resolutionValue(final CSSValueImpl cssValue) {
+	public static int resolutionValue(final CSSValueImpl cssValue) {
         if (cssValue == null) {
             return -1;
         }

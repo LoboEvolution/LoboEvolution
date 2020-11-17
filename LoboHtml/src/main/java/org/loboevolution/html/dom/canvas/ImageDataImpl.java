@@ -32,11 +32,11 @@ import org.loboevolution.html.dom.ImageData;
  */
 public class ImageDataImpl implements ImageData {
 
-	private int width;
+	private final int width;
 	
-	private int height;
+	private final int height;
 	
-	private BufferedImage image;
+	private final BufferedImage image;
 
 	/**
 	 * <p>Constructor for ImageDataImpl.</p>

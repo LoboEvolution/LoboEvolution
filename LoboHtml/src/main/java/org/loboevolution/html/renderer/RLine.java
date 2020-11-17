@@ -126,7 +126,7 @@ class RLine extends BaseRCollection {
 		this.xoffset = x + width;
 	}
 
-	private final void addElement(RElement relement) throws OverflowException {
+	private void addElement(RElement relement) throws OverflowException {
 		// Check if it fits horizontally
 		final int origXOffset = this.xoffset;
 		final int desiredMaxWidth = this.desiredMaxWidth;
@@ -614,7 +614,7 @@ class RLine extends BaseRCollection {
 	 * @param elementHeight The required new line height.
 	 * @param valign
 	 */
-	private final void setElementY(RElement relement, int elementHeight, int valign) {
+	private void setElementY(RElement relement, int elementHeight, int valign) {
 		int yoffset;
 		AlignValues key = AlignValues.get(valign);
 		switch (key) {

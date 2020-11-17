@@ -36,7 +36,7 @@ public class PaintManager {
 	private BufferedImage cachedImage = null;
 	private boolean cachedImageChanged = false;
 	private AffineTransform cachedTransform;
-	private ImageComponent ic;
+	private final ImageComponent ic;
 	
 	/**
 	 * <p>Constructor for PaintManager.</p>

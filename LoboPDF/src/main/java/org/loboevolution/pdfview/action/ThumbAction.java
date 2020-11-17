@@ -19,7 +19,7 @@ public class ThumbAction extends AbstractAction implements PropertyChangeListene
 	/** The is open. */
 	private boolean isOpen = true;
 	
-	private PDFViewer dialog;
+	private final PDFViewer dialog;
 
 	/**
 	 * Instantiates a new thumb action.

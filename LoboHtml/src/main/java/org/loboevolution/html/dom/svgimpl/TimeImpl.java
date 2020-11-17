@@ -18,7 +18,7 @@ import org.w3c.dom.Element;
  */
 public class TimeImpl implements Time {
 	
-	private short mTimeType;
+	private final short mTimeType;
 	
 	private boolean mResolved;
 	

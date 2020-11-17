@@ -59,7 +59,7 @@ public class BaseIcons {
 	// -----------------------------------------------------------------------------------------------------------
 	private static class CheckBoxIcon implements Icon {
 
-		private static int GAP = 2;
+		private static final int GAP = 2;
 		private static final Icon SMALL_CHECK_ICON = new LazyImageIcon("icons/small/check_symbol_10x10.png");
 		private static final Icon SMALL_CHECK_DISABLED_ICON = new LazyImageIcon(
 				"icons/small/check_symbol_disabled_10x10.png");
@@ -837,7 +837,7 @@ public class BaseIcons {
 
 	private static class RadioButtonIcon implements Icon {
 
-		private static int GAP = 2;
+		private static final int GAP = 2;
 
 		@Override
 		public int getIconHeight() {

@@ -5,7 +5,7 @@ import org.loboevolution.store.WebStore;
 
 public class LocalStorage implements Storage {
 	
-	private int index;
+	private final int index;
 	
 	public LocalStorage() {
 		index = -1;

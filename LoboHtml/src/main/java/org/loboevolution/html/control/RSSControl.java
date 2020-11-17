@@ -16,7 +16,7 @@ public class RSSControl extends BaseControl {
 
 	private static final long serialVersionUID = 1L;
 	
-	private RSSElementImpl modelNode;
+	private final RSSElementImpl modelNode;
 
 	/**
 	 * <p>Constructor for RSSControl.</p>

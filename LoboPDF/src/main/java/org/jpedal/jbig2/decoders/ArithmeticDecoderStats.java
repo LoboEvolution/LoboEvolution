@@ -50,8 +50,8 @@
 package org.jpedal.jbig2.decoders;
 
 public class ArithmeticDecoderStats {
-	private int contextSize;
-	private int[] codingContextTable;
+	private final int contextSize;
+	private final int[] codingContextTable;
 
 	public ArithmeticDecoderStats(int contextSize) {
 		this.contextSize = contextSize;

@@ -6,7 +6,7 @@ import org.loboevolution.html.renderstate.RenderState;
 
 public class RFlex {
 
-	private RenderState renderState;
+	private final RenderState renderState;
 
 	public RFlex(RenderState renderState) {
 		this.renderState = renderState;

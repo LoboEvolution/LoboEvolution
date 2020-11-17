@@ -26,7 +26,7 @@ public class OutlineNode extends DefaultMutableTreeNode {
 
 	private static final long serialVersionUID = 1L;
 
-    private String title;
+    private final String title;
 
     /** 
      * Create a new outline node

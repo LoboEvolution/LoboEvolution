@@ -65,9 +65,9 @@ import org.jpedal.jbig2.util.BinaryOperation;
 public class HalftoneRegionSegment extends RegionSegment {
 	
 	private static final Logger logger = Logger.getLogger(HalftoneRegionSegment.class.getName());
-	private HalftoneRegionFlags halftoneRegionFlags = new HalftoneRegionFlags();
+	private final HalftoneRegionFlags halftoneRegionFlags = new HalftoneRegionFlags();
 
-	private boolean inlineImage;
+	private final boolean inlineImage;
 
 	public HalftoneRegionSegment(JBIG2StreamDecoder streamDecoder, boolean inlineImage) {
 		super(streamDecoder);

@@ -45,7 +45,7 @@ public class CIDFontType2 extends TTFFont {
     /*
      * the default width
      */
-    private int defaultWidth = 1000;
+    private final int defaultWidth = 1000;
     /*
      * the default vertical width
      */

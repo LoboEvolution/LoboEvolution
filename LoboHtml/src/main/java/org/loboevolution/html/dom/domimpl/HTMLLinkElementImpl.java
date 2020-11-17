@@ -57,9 +57,9 @@ import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
  */
 public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLinkElement {
 	
-	private String COLOR_VISITED = "#551A8B";
+	private final String COLOR_VISITED = "#551A8B";
 	
-	private String DEFAULT_COLOR = "Blue";
+	private final String DEFAULT_COLOR = "Blue";
 	
 	private boolean disabled;
 

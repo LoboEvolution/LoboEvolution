@@ -32,7 +32,7 @@ import org.loboevolution.pdfview.PDFParseException;
  * @author Mike Wessler
  */
 public class ASCIIHexDecode {
-    private ByteBuffer buf;
+    private final ByteBuffer buf;
     
     /**
      * initialize the decoder with an array of bytes in ASCIIHex format

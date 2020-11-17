@@ -33,12 +33,12 @@ public final class PositionError {
 	/*
 	 * The error code.
 	 */
-	private short code;
+	private final short code;
 	
 	/*
 	 * A detailed error message used in conjunction with the error code.
 	 */
-	private String message;
+	private final String message;
 	
 	/**
 	 * Constructs an instance of PositionError class using only the

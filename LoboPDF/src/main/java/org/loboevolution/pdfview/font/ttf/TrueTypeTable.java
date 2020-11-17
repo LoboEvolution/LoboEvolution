@@ -40,7 +40,7 @@ public class TrueTypeTable {
     /**
      * This table's tag
      */
-    private int tag;
+    private final int tag;
     /**
      * The data in this table, in ByteBuffer form
      */

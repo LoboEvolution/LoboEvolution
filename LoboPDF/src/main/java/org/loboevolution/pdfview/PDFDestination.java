@@ -45,9 +45,9 @@ public class PDFDestination {
 	public static final int FITBH = 6;
 	public static final int FITBV = 7;
 	/** the type of this destination (from the list above) */
-	private int type;
+	private final int type;
 	/** the page we refer to */
-	private PDFObject pageObj;
+	private final PDFObject pageObj;
 	/** the left coordinate of the fit area, if applicable */
 	private float left;
 	/** the right coordinate of the fit area, if applicable */

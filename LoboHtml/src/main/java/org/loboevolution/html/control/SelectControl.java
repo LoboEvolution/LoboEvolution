@@ -13,7 +13,7 @@ public class SelectControl extends BaseControl implements UIControl {
 
 private static final long serialVersionUID = 1L;
 	
-	private HTMLSelectElementImpl  modelNode;
+	private final HTMLSelectElementImpl  modelNode;
 	
 	/**
 	 * <p>Constructor for SelectControl.</p>

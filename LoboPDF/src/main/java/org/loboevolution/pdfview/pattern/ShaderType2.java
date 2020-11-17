@@ -269,14 +269,16 @@ public class ShaderType2 extends PDFShader {
         private ColorModel colorModel;
         
         /** the start of the axis */
-        private Point2D start;
+        private final Point2D start;
         
         /** the end of the axis */
-        private Point2D end;
+        private final Point2D end;
         
         
-        private float dt1t0;
-        private double dx1x0, dy1y0, sqdx1x0psqdy1y0;
+        private final float dt1t0;
+        private final double dx1x0;
+        private final double dy1y0;
+        private final double sqdx1x0psqdy1y0;
         
         /**
          * Create a paint context

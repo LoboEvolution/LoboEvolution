@@ -29,9 +29,9 @@ import org.loboevolution.store.InputStore;
  */
 public class InputPassword {
 	
-	private HTMLInputElementImpl modelNode;
+	private final HTMLInputElementImpl modelNode;
 	
-	private JPasswordField pwd = new JPasswordField();
+	private final JPasswordField pwd = new JPasswordField();
 
 	/**
 	 * <p>Constructor for InputPassword.</p>
