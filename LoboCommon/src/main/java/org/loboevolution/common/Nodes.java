@@ -62,7 +62,7 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<Node> iterable(final NodeList nodeList) {
-	    return () -> new Iterator<>() {
+	    return () -> new Iterator<Node>() {
 
             private int index = 0;
 
@@ -87,7 +87,7 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<Attr> iterable(final NamedNodeMap attrList) {
-	    return () -> new Iterator<>() {
+	    return () -> new Iterator<Attr>() {
 
             private int index = 0;
 
@@ -112,7 +112,7 @@ public class Nodes {
 	 * @return a {@link java.lang.Iterable} object.
 	 */
 	public static Iterable<String> iterable(final CSSStyleDeclaration cssList) {
-	    return () -> new Iterator<>() {
+	    return () -> new Iterator<String>() {
 
             private int index = 0;
 

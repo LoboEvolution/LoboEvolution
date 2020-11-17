@@ -30,7 +30,7 @@ public class Autocomplete {
 	 */
 	public static void setupAutoComplete(final JTextField txtInput, final List<String> items) {
 		final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-		final JComboBox<String> cbInput = new JComboBox<>(model) {
+		final JComboBox<String> cbInput = new JComboBox<String>(model) {
             private static final long serialVersionUID = 1L;
 
             public Dimension getPreferredSize() {
