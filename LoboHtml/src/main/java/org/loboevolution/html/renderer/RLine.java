@@ -618,20 +618,18 @@ class RLine extends BaseRCollection {
 		int yoffset;
 		AlignValues key = AlignValues.get(valign);
 		switch (key) {
-		case BOTTOM:
-			yoffset = this.height - elementHeight;
-			break;
-		case MIDDLE:
-			yoffset = (this.height - elementHeight) / 2;
-			break;
-		case BASELINE:
-			yoffset = this.baseLineOffset - elementHeight;
-			break;
-		case TOP:
-			yoffset = 0;
-			break;
-		default:
-			yoffset = this.baseLineOffset - elementHeight;
+			case BOTTOM:
+				yoffset = this.height - elementHeight;
+				break;
+			case MIDDLE:
+				yoffset = (this.height - elementHeight) / 2;
+				break;
+			case TOP:
+				yoffset = 0;
+				break;
+			default:
+			case BASELINE:
+				yoffset = this.baseLineOffset - elementHeight;
 		}
 		relement.setY(yoffset);
 	}

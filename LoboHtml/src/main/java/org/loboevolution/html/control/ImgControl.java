@@ -37,6 +37,7 @@ import org.loboevolution.html.AlignValues;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
 import org.loboevolution.html.dom.domimpl.HTMLImageElementImpl;
 import org.loboevolution.html.renderer.HtmlController;
+import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.net.HttpNetwork;
 
@@ -139,34 +140,7 @@ public class ImgControl extends BaseControl {
 		final int dw = HtmlValues.getPixelSize(element.getAttribute("width"), null, -1, availWidth);
 		final int dh = HtmlValues.getPixelSize(element.getAttribute("height"), null, -1, availHeight);
 		this.preferredSize = createPreferredSize(dw, dh);
-		int valign;
-		String alignText = element.getAttribute("align");
-		alignText = Strings.isNotBlank(alignText) ? alignText.toLowerCase().trim() : "";
-
-		switch (alignText) {
-		case "middle":
-			valign = AlignValues.MIDDLE.getValue();
-			break;
-		case "absmiddle":
-			valign = AlignValues.ABSMIDDLE.getValue();
-			break;
-		case "top":
-			valign = AlignValues.TOP.getValue();
-			break;
-		case "bottom":
-			valign = AlignValues.BOTTOM.getValue();
-			break;
-		case "baseline":
-			valign = AlignValues.BASELINE.getValue();
-			break;
-		case "absbottom":
-			valign = AlignValues.ABSBOTTOM.getValue();
-			break;
-		default:
-			valign = AlignValues.BASELINE.getValue();
-			break;
-		}
-		this.valign = valign;
+		this.valign = getValign(element);
 	}
 
 	private Dimension createPreferredSize(int dw, int dh) {
@@ -208,5 +182,32 @@ public class ImgControl extends BaseControl {
 			}
 		}
 		return new Dimension(dw, dh);
+	}
+
+	private int getValign(HTMLElementImpl element){
+		String alignText = element.getAttribute("align");
+
+		if(Strings.isNotBlank(alignText)){
+			alignText = alignText.toLowerCase().trim();
+		} else{
+			AbstractCSSProperties style = element.getCurrentStyle();
+			alignText = Strings.isNotBlank(style.getVerticalAlign()) ? style.getVerticalAlign() : "";
+		}
+
+		switch (alignText) {
+			case "middle":
+				return AlignValues.MIDDLE.getValue();
+			case "absmiddle":
+				return AlignValues.ABSMIDDLE.getValue();
+			case "top":
+				return AlignValues.TOP.getValue();
+			case "bottom":
+				return AlignValues.BOTTOM.getValue();
+			case "absbottom":
+				return AlignValues.ABSBOTTOM.getValue();
+			default:
+			case "baseline":
+				return AlignValues.BASELINE.getValue();
+		}
 	}
 }
