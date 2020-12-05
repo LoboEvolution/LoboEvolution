@@ -12,6 +12,7 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,6 +20,8 @@ import java.sql.ResultSet;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.GZIPInputStream;
 
 import javax.imageio.ImageIO;
@@ -248,16 +251,20 @@ public class HttpNetwork {
 	 * @throws java.io.IOException if any.
 	 */
 	public static String toString(InputStream inputStream) throws IOException {
-		final String newLine = System.getProperty("line.separator");
-		final StringBuilder result = new StringBuilder();
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-			boolean flag = false;
-			for (String line; (line = reader.readLine()) != null;) {
-				result.append(flag ? newLine : "").append(line);
-				flag = true;
+		InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+		Stream<String> lines = new BufferedReader(inputStreamReader).lines();
+		String text = lines.collect(Collectors.joining("\n"));
+		return removeNonASCIIChar(text);
+	}
+	
+	private static String removeNonASCIIChar(String str) {
+		StringBuffer buff = new StringBuffer();
+		char chars[] = str.toCharArray();
+		for (char c : chars) {
+			if (0 < c && c < 127) {
+				buff.append(c);
 			}
 		}
-		return result.toString();
+		return buff.toString();
 	}
-
 }

@@ -38,7 +38,8 @@ public class Urls {
 		if (relativeUrl.contains("javascript:void")) {
 			return null;
 		}
-		return new URL(baseUrl, relativeUrl);
+		
+		return new URL(baseUrl, encodeIllegalCharacters(relativeUrl));
 	}
 
 	/**
