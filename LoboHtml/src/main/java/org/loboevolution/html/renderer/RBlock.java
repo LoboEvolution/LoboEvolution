@@ -270,8 +270,14 @@ public class RBlock extends BaseElementRenderable {
 		int tentativeWidth;
 		int tentativeHeight;
 
-		tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth + paddingTotalWidth;
-		tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
+		if("border-box".equals(rs.getBoxSizing())) {
+			tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth;
+			tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight;
+		} else {
+			tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth + paddingTotalWidth;
+			tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
+		}	
+
 		if (declaredWidth == -1 && !expandWidth && availWidth > insetsTotalWidth + paddingTotalWidth) {
 			final RenderThreadState state = RenderThreadState.getState();
 			final boolean prevOverrideNoWrap = state.overrideNoWrap;
