@@ -137,8 +137,9 @@ public class ImgControl extends BaseControl {
 	public void reset(int availWidth, int availHeight) {
 		super.reset(availWidth, availHeight);
 		final HTMLElementImpl element = this.controlElement;
-		final int dw = HtmlValues.getPixelSize(element.getAttribute("width"), null, -1, availWidth);
-		final int dh = HtmlValues.getPixelSize(element.getAttribute("height"), null, -1, availHeight);
+		AbstractCSSProperties currentStyle = element.getCurrentStyle();
+		final int dw = getValueSize(element.getAttribute("width"), currentStyle.getWidth(), availWidth);
+		final int dh = getValueSize(element.getAttribute("height"), currentStyle.getHeight(), availHeight);
 		this.preferredSize = createPreferredSize(dw, dh);
 		this.valign = getValign(element);
 	}
@@ -209,5 +210,16 @@ public class ImgControl extends BaseControl {
 			case "baseline":
 				return AlignValues.BASELINE.getValue();
 		}
+	}
+	
+	
+	private int getValueSize(String attribute, String styleAttribute, int availSize) {
+		String size;
+		if(Strings.isNotBlank(attribute)){
+			size = attribute.toLowerCase().trim();
+		} else{
+			size = Strings.isNotBlank(styleAttribute) ? styleAttribute : "";
+		}
+		return  HtmlValues.getPixelSize(size, null, -1, availSize);
 	}
 }
