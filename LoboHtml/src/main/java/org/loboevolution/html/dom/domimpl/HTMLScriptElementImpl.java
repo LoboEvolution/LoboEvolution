@@ -27,6 +27,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.logging.Level;
@@ -154,7 +155,9 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 							Reader reader = new InputStreamReader(in, "utf-8")) {
 						BufferedReader br = new BufferedReader(reader);						
 						ctx.evaluateReader(scope, br, scriptURI, 1, null);
-					} catch (Exception e) {
+					} catch (SocketTimeoutException e) {
+						logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+				    } catch (Exception e) {
 						logger.log(Level.SEVERE, e.getMessage(), e);
 					}
 				} else {

@@ -3,6 +3,7 @@ package org.loboevolution.http;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -52,7 +53,9 @@ public class NavigationManager {
 
 				final DocumentBuilderImpl builder = new DocumentBuilderImpl(rendererContext.getUserAgentContext(), rendererContext);
 				return builder.parse(is);
-			}
+			} catch (SocketTimeoutException e) {
+				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+		    }
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}

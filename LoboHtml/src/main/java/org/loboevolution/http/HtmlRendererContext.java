@@ -36,6 +36,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -1149,7 +1150,9 @@ public class HtmlRendererContext {
 				} catch (final BufferExceededException bee) {
 					sourceCode = "[TOO BIG]";
 				}
-			}
+			} catch (SocketTimeoutException e) {
+				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+		    }
 		} finally {
 			this.currentConnection = null;
 		}

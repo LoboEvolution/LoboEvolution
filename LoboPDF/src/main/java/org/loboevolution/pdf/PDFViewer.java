@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.InvocationTargetException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.ByteBuffer;
@@ -355,7 +356,9 @@ public class PDFViewer extends JFrame implements KeyListener, PageChangeListener
 					byteBuffer.put((byte) istr.read());
 				}
 				openPDFByteBuffer(byteBuffer, url.toString(), url.getFile());
-			} catch (Exception e) {
+			} catch (SocketTimeoutException e) {
+				logger.log(Level.SEVERE, "More than " + connection.getConnectTimeout() + " elapsed.");
+		    } catch (Exception e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
 			}
 		} catch (Exception e) {

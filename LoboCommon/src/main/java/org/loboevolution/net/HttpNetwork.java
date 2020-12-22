@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
@@ -44,6 +45,9 @@ public class HttpNetwork {
 
 	/** Constant GZIP_ENCODING="gzip" */
 	public static final String GZIP_ENCODING = "gzip";
+	
+	/** Constant TIMEOUT_VALUE="2000" */
+	public static final int TIMEOUT_VALUE = 2000;
 
 	private static final String USER_AGENT = "SELECT DISTINCT description FROM USER_AGENT";
 
@@ -156,7 +160,9 @@ public class HttpNetwork {
 					} else {
 						return ImageIO.read(in);
 					}
-				}
+				} catch (SocketTimeoutException e) {
+					logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
+			    }
 			}
 		} catch (final Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
@@ -178,8 +184,10 @@ public class HttpNetwork {
 		connection.setRequestProperty("User-Agent", getUserAgentValue());
 		try (InputStream in = openConnectionCheckRedirects(connection)) {
 			return toString(in);
-		}
-
+		} catch (SocketTimeoutException e) {
+			logger.log(Level.SEVERE, "More than " + TIMEOUT_VALUE + " elapsed.");
+	    }
+		return "";
 	}
 
 	/**
@@ -213,6 +221,8 @@ public class HttpNetwork {
 		boolean redir;
 		int redirects = 0;
 		InputStream in = null;
+		c.setConnectTimeout(TIMEOUT_VALUE);
+		c.setReadTimeout(TIMEOUT_VALUE);
 		do {
 			if (c instanceof HttpURLConnection) {
 				((HttpURLConnection) c).setInstanceFollowRedirects(false);
