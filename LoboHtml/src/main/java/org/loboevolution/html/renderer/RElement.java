@@ -94,4 +94,6 @@ public interface RElement extends RCollection, UINode {
 	 * @param sizeOnly    Whether the layout is for sizing determination only.
 	 */
 	void layout(int availWidth, int availHeight, boolean sizeOnly);
+
+	void setupRelativePosition(final RenderableContainer container);
 }

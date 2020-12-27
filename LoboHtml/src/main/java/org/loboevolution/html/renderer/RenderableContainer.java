@@ -186,4 +186,6 @@ public interface RenderableContainer {
      * @return a {@link java.awt.Point} object.
      */
     Point translateDescendentPoint(BoundableRenderable descendent, int x, int y);
+
+	public Point getOriginRelativeToAbs(RCollection bodyLayout);
 }

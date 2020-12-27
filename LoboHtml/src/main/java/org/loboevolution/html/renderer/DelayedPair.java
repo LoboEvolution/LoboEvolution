@@ -60,6 +60,8 @@ public class DelayedPair {
 
 	private boolean isFixed;
 
+	private boolean isRelative;
+
 	/**
 	 * <p>Constructor for DelayedPair.</p>
 	 */
@@ -69,47 +71,67 @@ public class DelayedPair {
 	/**
 	 * <p>positionPairChild.</p>
 	 */
-	public void positionPairChild() {
+	public BoundableRenderable positionPairChild() {
 		final RenderableContainer parent = this.containingBlock;
+		if (isRelative) {
+			final RElement rChild = (RElement) this.child;
+			rChild.setupRelativePosition(this.immediateContainingBlock);
+			TranslatedRenderable tr = new TranslatedRenderable(rChild);
+			return tr;
+		}
+
 		final BoundableRenderable child = this.child;
+		final Point tp = immediateContainingBlock.getOriginRelativeToAbs((RCollection) parent);
+		tp.translate(initX, initY);
+
+		if (this.immediateContainingBlock != parent) {
+			final Insets immediateInsets = this.immediateContainingBlock.getInsetsMarginBorder(false, false);
+			tp.translate(immediateInsets.left, immediateInsets.top);
+		}
+
 		Integer x = this.getLeft();
 		Integer y = this.getTop();
-	    Integer width = getWidth();
-	    Integer height = getHeight();
+
+		final Integer width = getWidth();
+		final Integer height = getHeight();
 		final Integer right = this.getRight();
 		final Integer bottom = this.getBottom();
 		if (right != null) {
 			if (x != null) {
-				width = parent.getInnerWidth() - (x + right);
+				child.setWidth(parent.getInnerWidth() - (x + right));
 			} else {
-		        final int childWidth = width == null? child.getWidth() : width;
-		        x = parent.getInnerWidth() - (childWidth + right);
+				if (width != null) {
+					child.setWidth(width);
+				}
+				final int childWidth = child.getWidth();
+				x = parent.getInnerWidth() - (childWidth + right);
+			}
+		} else {
+			if (width != null) {
+				child.setWidth(width);
 			}
 		}
+
 		if (bottom != null) {
 			if (y != null) {
-				height = parent.getInnerHeight() - (y + bottom);
+				child.setHeight(parent.getInnerHeight() - (y + bottom));
 			} else {
-		        final int childHeight = height == null? child.getHeight() : height;
-		        y = parent.getInnerHeight() - (childHeight + bottom);
+				if (height != null) {
+					child.setHeight(height);
+				}
+				final int childHeight = child.getHeight();
+				y = parent.getInnerHeight() - (childHeight + bottom);
+			}
+		} else {
+			if (height != null) {
+				child.setHeight(height);
 			}
 		}
 
-	    final Point tp = containingBlock.translateDescendentPoint((BoundableRenderable)(immediateContainingBlock), initX, initY);
-	    if (this.immediateContainingBlock != parent) {
-	        final Insets immediateInsets = this.immediateContainingBlock.getInsetsMarginBorder(false, false);
-	        tp.translate(immediateInsets.left, immediateInsets.top);
-	    }
+		child.setX((x == null ? tp.x : x));
+		child.setY((y == null ? tp.y : y));
 
-	    child.setX((x == null ? tp.x : x));
-	    child.setY((y == null ? tp.y : y));
-
-		if (width != null) {
-			child.setWidth(width);
-		}
-		if (height != null) {
-			child.setHeight(height);
-		}
+		return child;
 	}
 
 	private Integer getLeft() {
@@ -324,4 +346,8 @@ public class DelayedPair {
 	public void setFixed(boolean isFixed) {
 		this.isFixed = isFixed;
 	}
+
+	public boolean isRelative() { return isRelative;	}
+
+	public void setRelative(boolean relative) { isRelative = relative; }
 }

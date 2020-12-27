@@ -1068,6 +1068,11 @@ public class HtmlBlockPanel extends JComponent implements NodeRenderer, Renderab
 		return rblock.translateDescendentPoint(descendent, x, y);
 	}
 
+	@Override
+	public Point getOriginRelativeToAbs(RCollection bodyLayout) {
+		return null;
+	}
+
 	/**
 	 * <p>validateAll.</p>
 	 */

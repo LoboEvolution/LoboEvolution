@@ -228,6 +228,33 @@ abstract class BaseBoundableRenderable extends BaseRenderable implements Boundab
 		}
 	}
 
+	public Point getOriginRelativeToAbs(final RCollection ancestor) {
+		if (ancestor == this) {
+			return new Point(0, 0);
+		}
+
+		int x = this.getX();
+		int y = this.getY();
+
+		int nextX = 0;
+		int nextY = 0;
+
+		RCollection parent = this.parent;
+		for (;;) {
+			if (parent == null) {
+				return new Point(x, y);
+			}
+			if (parent == ancestor) {
+				return new Point(x, y);
+			}
+			x += nextX;
+			y += nextY;
+			nextX = parent.getX();
+			nextY = parent.getY();
+			parent = parent.getParent();
+		}
+	}
+
 	/** {@inheritDoc} */
 	@Override
 	public RCollection getParent() {

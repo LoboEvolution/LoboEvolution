@@ -60,47 +60,63 @@ import org.w3c.dom.css.CSS3Properties;
  * @author utente
  * @version $Id: $Id
  */
-public abstract class BaseElementRenderable extends BaseRCollection
-		implements RElement, RenderableContainer, ImageObserver {
+public abstract class BaseElementRenderable extends BaseRCollection implements RElement, RenderableContainer, ImageObserver {
+
 	/** Constant INVALID_SIZE */
 	protected static final Integer INVALID_SIZE = Integer.MIN_VALUE;
 
 	/** Constant SCROLL_BAR_THICKNESS=16 */
 	protected static final int SCROLL_BAR_THICKNESS = 16;
 
+	protected final UserAgentContext userAgentContext;
+
 	protected Color backgroundColor;
 
-	protected volatile Image backgroundImage;
-	protected Color borderBottomColor;
-	protected BorderInfo borderInfo;
-	protected Insets borderInsets;
 	protected Color borderLeftColor;
+
 	protected Color borderRightColor;
+
 	protected Color borderTopColor;
+
+	protected Color borderBottomColor;
+
+	protected volatile Image backgroundImage;
+
+	protected BorderInfo borderInfo;
+
+	private BackgroundInfo binfo;
+
+	protected Insets borderInsets;
+
+	protected Insets marginInsets;
+
+	protected Insets paddingInsets;
+
 	private Integer declaredHeight = INVALID_SIZE;
+
 	private Integer declaredWidth = INVALID_SIZE;
+
 	protected List<DelayedPair> delayedPairs = null;
 
 	private Collection<Component> guiComponents = null;
-	private int lastAvailHeightForDeclared = -1;
-	private int lastAvailWidthForDeclared = -1;
+
 	protected URL lastBackgroundImageUri;
 
 	protected boolean layoutDeepCanBeInvalidated = false;
-
-	protected Insets marginInsets;
 
 	protected int overflowX;
 
 	protected int overflowY;
 
-	protected Insets paddingInsets;
+	protected int relativeOffsetX = 0;
 
-	protected final UserAgentContext userAgentContext;
+	protected int relativeOffsetY = 0;
 
 	protected int zIndex;
-	
-	private BackgroundInfo binfo;
+
+	private int lastAvailHeightForDeclared = -1;
+
+	private int lastAvailWidthForDeclared = -1;
 
 	/**
 	 * <p>Constructor for BaseElementRenderable.</p>
@@ -181,8 +197,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		}
 		final RenderState rs = rootElement.getRenderState();
 		if (rs == null) {
-			throw new IllegalStateException(
-					"Element without render state: " + rootElement + "; parent=" + rootElement.getParentNode());
+			throw new IllegalStateException("Element without render state: " + rootElement + "; parent=" + rootElement.getParentNode());
 		}
 
 		backgroundApplyStyle(rs);
@@ -387,6 +402,41 @@ public abstract class BaseElementRenderable extends BaseRCollection
 		this.overflowY = RenderState.OVERFLOW_VISIBLE;
 		this.marginInsets = null;
 		this.paddingInsets = null;
+	}
+
+	public void setupRelativePosition(final RenderableContainer container) {
+		setupRelativePosition(getModelNode().getRenderState(), container.getInnerWidth(), container.getInnerHeight());
+	}
+
+	private void setupRelativePosition(final RenderState rs, final int availWidth, final int availHeight) {
+		if (rs.getPosition() == RenderState.POSITION_RELATIVE) {
+			final String leftText = rs.getLeft();
+			final String topText = rs.getTop();
+			int left = 0;
+			if (leftText != null) {
+				left = HtmlValues.getPixelSize(leftText, rs, 0, availWidth);
+			} else {
+				final String rightText = rs.getRight();
+				if (rightText != null) {
+					final int right = HtmlValues.getPixelSize(rightText, rs, 0, availWidth);
+					left = -right;
+				}
+			}
+
+			int top = 0;
+			if (topText != null) {
+				top = HtmlValues.getPixelSize(topText, rs, top, availHeight);
+			} else {
+				final String bottomText = rs.getBottom();
+				if (bottomText != null) {
+					final int bottom = HtmlValues.getPixelSize(bottomText, rs, 0, availHeight);
+					top = -bottom;
+				}
+			}
+
+			this.relativeOffsetX = left;
+			this.relativeOffsetY = top;
+		}
 	}
 
 	/**
@@ -936,7 +986,7 @@ public abstract class BaseElementRenderable extends BaseRCollection
 	 * general rendering.
 	 */
 	public void updateWidgetBounds() {
-		final java.awt.Point guiPoint = getGUIPoint(0, 0);
+		final Point guiPoint = getGUIPoint(0, 0);
 		this.updateWidgetBounds(guiPoint.x, guiPoint.y);
 	}
 

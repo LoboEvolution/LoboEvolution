@@ -66,9 +66,6 @@ public class RBlock extends BaseElementRenderable {
 	protected boolean hasVScrollBar = false;
 	protected JScrollBar hScrollBar;
 
-	private int relativeOffsetX = 0;
-	private int relativeOffsetY = 0;
-
 	protected final int listNesting;
 
 	protected final HtmlRendererContext rendererContext;
@@ -270,13 +267,13 @@ public class RBlock extends BaseElementRenderable {
 		int tentativeWidth;
 		int tentativeHeight;
 
-		if("border-box".equals(rs.getBoxSizing())) {
+		if ("border-box".equals(rs.getBoxSizing())) {
 			tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth;
 			tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight;
 		} else {
 			tentativeWidth = declaredWidth == -1 ? availWidth : declaredWidth + insetsTotalWidth + paddingTotalWidth;
 			tentativeHeight = declaredHeight == -1 ? availHeight : declaredHeight + insetsTotalHeight + paddingTotalHeight;
-		}	
+		}
 
 		if (declaredWidth == -1 && !expandWidth && availWidth > insetsTotalWidth + paddingTotalWidth) {
 			final RenderThreadState state = RenderThreadState.getState();
@@ -315,7 +312,7 @@ public class RBlock extends BaseElementRenderable {
 			declaredWidth = newdw == null ? -1 : newdw;
 			desiredViewportWidth = tentativeWidth - insetsTotalWidth;
 			if (blockFloatBounds != null) {
-				viewportFloatBounds = new ShiftedFloatingBounds(blockFloatBounds, -insets.left, -insets.right,-insets.top);
+				viewportFloatBounds = new ShiftedFloatingBounds(blockFloatBounds, -insets.left, -insets.right, -insets.top);
 			}
 			bodyLayout.layout(desiredViewportWidth, desiredViewportHeight, paddingInsets, -1, viewportFloatBounds, sizeOnly);
 		}
@@ -338,8 +335,8 @@ public class RBlock extends BaseElementRenderable {
 
 		int adjDeclaredWidth;
 		int adjDeclaredHeight;
-		
-		if("border-box".equals(rs.getBoxSizing())) {
+
+		if ("border-box".equals(rs.getBoxSizing())) {
 			adjDeclaredWidth = declaredWidth;
 			adjDeclaredHeight = declaredHeight;
 		} else {
@@ -373,7 +370,7 @@ public class RBlock extends BaseElementRenderable {
 				resultingHeight = Math.max(tentativeHeight, SCROLL_BAR_THICKNESS);
 			}
 		} else {
-		      resultingHeight = adjDeclaredHeight;
+			resultingHeight = adjDeclaredHeight;
 		}
 
 		if (!sizeOnly) {
@@ -416,40 +413,7 @@ public class RBlock extends BaseElementRenderable {
 			bodyLayout.x = insets.left;
 			bodyLayout.y = insets.top;
 		}
-
-	    setupRelativePosition(rs, availWidth);
 		return new LayoutValue(resultingWidth, resultingHeight, hscroll, vscroll);
-	}
-
-	  private void setupRelativePosition(final RenderState rs, final int availWidth) {
-		if (rs.getPosition() == RenderState.POSITION_RELATIVE) {
-			final String leftText = rs.getLeft();
-			final String topText = rs.getTop();
-			int left = 0;
-			if (leftText != null) {
-				left = HtmlValues.getPixelSize(leftText, rs, 0, availWidth);
-			} else {
-				final String rightText = rs.getRight();
-				if (rightText != null) {
-					final int right = HtmlValues.getPixelSize(rightText, rs, 0, availWidth);
-					left = -right;
-				}
-			}
-
-			int top = 0;
-			if (topText != null) {
-				top = HtmlValues.getPixelSize(topText, rs, top, this.height);
-			} else {
-				final String bottomText = rs.getBottom();
-				if (bottomText != null) {
-					final int bottom = HtmlValues.getPixelSize(bottomText, rs, 0, this.height);
-					top = -bottom;
-				}
-			}
-
-			this.relativeOffsetX = left;
-			this.relativeOffsetY = top;
-		}
 	}
 
 	/**

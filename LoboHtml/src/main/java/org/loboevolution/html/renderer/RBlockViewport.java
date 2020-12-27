@@ -314,7 +314,7 @@ public class RBlockViewport extends BaseRCollection {
 				}
 			}
 			final RenderState rs = element.getRenderState();
-			this.scheduleAbsDelayedPair(renderable, style, rs, currentLine, absolute);
+			this.scheduleAbsDelayedPair(renderable, style, rs, currentLine, absolute, fixed);
 			return true;
 		} else {
 			return addElsewhereIfFloat(renderable, element, usesAlignAttribute, style, layoutIfPositioned);
@@ -952,8 +952,7 @@ public class RBlockViewport extends BaseRCollection {
 	}
 
 	void importDelayedPair(final DelayedPair pair) {
-		pair.positionPairChild();
-		final BoundableRenderable r = pair.getChild();
+		final BoundableRenderable r = pair.positionPairChild();
 		this.addPositionedRenderable(r, false, false, pair.isFixed());
 	}
 
@@ -1898,7 +1897,7 @@ public class RBlockViewport extends BaseRCollection {
 	 * @param absolute if true, then position is absolute, else fixed
 	 */
 	private void scheduleAbsDelayedPair(final BoundableRenderable renderable, final AbstractCSSProperties style,
-			final RenderState rs, final RLine line, final boolean absolute) {
+			final RenderState rs, final RLine line, final boolean absolute, final boolean fixed) {
 		final RenderableContainer containingBlock = absolute ? getPositionedAncestor(this.container)  : getRootContainer(container);
 		final DelayedPair pair = new DelayedPair();
 		pair.setImmediateContainingBlock(container);
@@ -1913,7 +1912,8 @@ public class RBlockViewport extends BaseRCollection {
 		pair.setRs(rs);
 		pair.setInitY(currentLine.getY() + currentLine.getHeight());
 		pair.setInitX(currentLine.getX());
-		pair.setFixed(!absolute);
+		pair.setFixed(fixed);
+		pair.setRelative(!absolute);
 		this.container.addDelayedPair(pair);
 	}
 

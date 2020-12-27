@@ -118,6 +118,14 @@ public interface BoundableRenderable extends Renderable {
 	Point getOriginRelativeToNoScroll(RCollection ancestor);
 
 	/**
+	 * <p>getOriginRelativeToAbs.</p>
+	 *
+	 * @param ancestor a {@link org.loboevolution.html.renderer.RCollection} object.
+	 * @return a {@link java.awt.Point} object.
+	 */
+	public Point getOriginRelativeToAbs(RCollection ancestor);
+
+	/**
 	 * <p>getModelNode.</p>
 	 *
 	 * @return a {@link org.loboevolution.html.dom.domimpl.ModelNode} object.

@@ -267,8 +267,7 @@ class RTable extends BaseElementRenderable {
 	}
 
 	private void importDelayedPair(DelayedPair pair) {
-		pair.positionPairChild();
-	    final BoundableRenderable r = pair.getChild();
+	    final BoundableRenderable r = pair.positionPairChild();
 	    this.addPositionedRenderable(r, false, false, pair.isFixed());
 	}
 
