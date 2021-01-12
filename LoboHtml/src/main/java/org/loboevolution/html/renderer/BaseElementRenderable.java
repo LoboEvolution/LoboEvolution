@@ -657,6 +657,7 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 				return -1;
 			}
 			String widthText = props.getWidth();
+			final String textContent = element.getTextContent();
 
 			if ("inherit".equalsIgnoreCase(widthText)) {
 				widthText = element.getParentStyle().getWidth();
@@ -668,6 +669,27 @@ public abstract class BaseElementRenderable extends BaseRCollection implements R
 
 			if (widthText != null) {
 				width = HtmlValues.getPixelSize(widthText, renderState, -1, availWidth);
+			}
+
+			if(width == -1 && Strings.isNotBlank(textContent) && renderState.getDisplay() == RenderState.DISPLAY_INLINE_BLOCK) {
+				HtmlInsets paddingInsets = renderState.getPaddingInsets();
+				HtmlInsets marginInsets = renderState.getMarginInsets();
+				int right = 0;
+				int left = 0;
+
+				if(paddingInsets != null) {
+					right = right + paddingInsets.right;
+					left = left + paddingInsets.left;
+				}
+
+				if(marginInsets != null) {
+					right = right + marginInsets.right;
+					left =  left + marginInsets.left;
+				}
+
+				final int multi = (right == 0 && left == 0) ? 12 : 4;
+
+				width = (textContent.length() + right + left) * multi;
 			}
 
 			if (props.getMaxWidth() != null) {
