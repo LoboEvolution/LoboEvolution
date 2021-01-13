@@ -40,6 +40,7 @@ import org.loboevolution.html.dom.HTMLSelectElement;
 import org.loboevolution.html.dom.HTMLTextAreaElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.dom.domimpl.HTMLElementImpl;
+import org.loboevolution.html.dom.domimpl.HTMLInputElementImpl;
 import org.loboevolution.html.dom.domimpl.NodeImpl;
 import org.loboevolution.html.js.Window;
 import org.loboevolution.store.LinkStore;
@@ -395,10 +396,33 @@ public class StyleSheetAggregator {
 			return parentDOMNodeImpl != null && parentDOMNodeImpl.getNodeType() == Node.DOCUMENT_TYPE_NODE;
 
 		case "enabled":
-			return element.hasAttribute("enabled");
+			return element.hasAttribute("enabled") || (!element.hasAttribute("enabled") && !element.hasAttribute("disabled"));
 
 		case "disabled":
 			return element.hasAttribute("disabled");
+
+		case "placeholder":
+				return element.hasAttribute("placeholder");
+
+		case "read-only":
+				return element.hasAttribute("readonly");
+
+		case "read-write":
+				return !element.hasAttribute("readonly");
+
+		case "out-of-range":
+			if(element instanceof HTMLInputElement){
+				HTMLInputElementImpl input = (HTMLInputElementImpl)element;
+				if("number".equals(input.getType())){
+					String minTxt = input.getAttribute("min");
+					String maxTxt = input.getAttribute("max");
+
+					int min = minTxt == null ? 0 : Integer.parseInt(input.getAttribute("min"));
+					int max = maxTxt == null ? Integer.MAX_VALUE : Integer.parseInt(input.getAttribute("max"));
+					int valueNumber = Integer.parseInt(input.getValue());
+					return (valueNumber < min || valueNumber > max);
+				}
+			}
 
 		case "checked":
 			return (element instanceof HTMLInputElement && ((HTMLInputElement) element).getChecked());
@@ -411,7 +435,7 @@ public class StyleSheetAggregator {
 			return (element instanceof HTMLInputElement || element instanceof HTMLSelectElement
 					|| element instanceof HTMLTextAreaElement) && !element.hasAttribute("required");
 
-		case "link": 
+		case "link":
 			return (element instanceof HTMLLinkElement);
 
 		case "visited":
