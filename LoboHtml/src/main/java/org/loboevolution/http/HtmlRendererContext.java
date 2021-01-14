@@ -118,6 +118,8 @@ public class HtmlRendererContext {
 
 	private volatile String sourceCode;
 
+	private boolean test = false;
+
 	/**
 	 * Constructs a HtmlRendererContext that is a child of another
 	 * {@link org.loboevolution.http.HtmlRendererContext}.
@@ -1181,5 +1183,13 @@ public class HtmlRendererContext {
 		if (logger.isLoggable(Level.WARNING)) {
 			logger.log(Level.WARNING, message, throwable);
 		}
+	}
+
+	public boolean isTest() {
+		return test;
+	}
+
+	public void setTest(boolean test) {
+		this.test = test;
 	}
 }

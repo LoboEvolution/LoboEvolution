@@ -51,14 +51,13 @@ import org.w3c.dom.views.AbstractView;
 import org.w3c.dom.views.DocumentView;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.event.ActionListener;
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 import java.util.logging.Logger;
 
 /**
@@ -155,6 +154,8 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	private final UserAgentContext uaContext;
 	
     private Scriptable windowScope;
+
+	private List<String> msg;
     
 	/**
 	 * <p>Constructor for Window.</p>
@@ -177,7 +178,12 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public void alert(String message) {
 		if (this.rcontext != null) {
-			this.rcontext.alert(message);
+			if(this.rcontext.isTest()){
+				if(msg == null) msg = new ArrayList<>();
+				msg.add(message);
+			} else {
+				this.rcontext.alert(message);
+			}
 		}
 	}
 
@@ -1248,5 +1254,13 @@ public class Window extends AbstractScriptableDelegate implements AbstractView {
 	 */
 	public UserAgentContext getUaContext() {
 		return uaContext;
+	}
+
+	public List<String> getMsg() {
+		return msg;
+	}
+
+	public void setMsg(List<String> msg) {
+		this.msg = msg;
 	}
 }
