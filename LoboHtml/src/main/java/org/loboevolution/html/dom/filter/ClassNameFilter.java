@@ -22,6 +22,8 @@
  */
 package org.loboevolution.html.dom.filter;
 
+import java.util.regex.Pattern;
+
 import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -33,20 +35,34 @@ import org.w3c.dom.Node;
  * @version $Id: $Id
  */
 public class ClassNameFilter implements NodeFilter {
-	private final String _class;
+	
+	private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
+	 
+	private final String className;
 
 	/**
 	 * <p>Constructor for ClassNameFilter.</p>
 	 *
 	 * @param _class a {@link java.lang.String} object.
 	 */
-	public ClassNameFilter(String _class) {
-		this._class = _class;
+	public ClassNameFilter(String className) {
+		this.className = className;
 	}
 
 	/** {@inheritDoc} */
 	public boolean accept(Node node) {
-		return (node instanceof Element)
-				&& this._class.equals(((Element) node).getAttribute("class"));
+		if(node instanceof Element) {
+			String classAttribute = ((Element) node).getAttribute("class");
+			if(classAttribute != null) {
+				final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
+				for (String aClassName : classNames) {
+					if (!classAttribute.contains(aClassName)) {
+						return false;
+					}
+				}
+				return true;
+			}
+		}
+		return false; 
 	}
 }

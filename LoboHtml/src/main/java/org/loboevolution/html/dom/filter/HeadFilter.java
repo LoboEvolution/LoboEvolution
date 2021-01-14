@@ -22,7 +22,6 @@
  */
 package org.loboevolution.html.dom.filter;
 
-import org.loboevolution.html.dom.HTMLHeadElement;
 import org.loboevolution.html.dom.NodeFilter;
 import org.w3c.dom.Node;
 
@@ -37,6 +36,6 @@ public class HeadFilter implements NodeFilter {
 	/** {@inheritDoc} */
 	@Override
 	public final boolean accept(Node node) {
-		return node instanceof HTMLHeadElement;
+		return node != null && "HEAD".equalsIgnoreCase(node.getNodeName());
 	}
 }

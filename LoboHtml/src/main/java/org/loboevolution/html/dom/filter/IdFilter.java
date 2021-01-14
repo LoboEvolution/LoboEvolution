@@ -47,6 +47,7 @@ public class IdFilter implements NodeFilter {
 	/** {@inheritDoc} */
 	@Override
 	public boolean accept(Node node) {
-		return (node instanceof Element) && this._id.equals(((Element) node).getAttribute("id"));
+		return (node instanceof Element) && this._id != null && 
+				this._id.equals(((Element) node).getAttribute("id"));
 	}
 }
