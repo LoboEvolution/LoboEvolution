@@ -234,7 +234,7 @@ public class HTMLLinkElementImpl extends HTMLAbstractUIElement implements HTMLLi
 	@Override
 	public String getHref() {
 		final String href = getAttribute("href");
-		return href == null ? "" : href;
+		return href == null ? "" : href.trim();
 	}
 
 	/** {@inheritDoc} */
