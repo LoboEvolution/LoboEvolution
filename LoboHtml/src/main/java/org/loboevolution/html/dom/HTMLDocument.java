@@ -69,6 +69,12 @@ public interface HTMLDocument extends Document {
 	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
 	 */
 	HTMLCollection getAnchors();
+	
+
+	/**
+	 * @return a {@link org.loboevolution.html.dom.HTMLCollection} object.
+	 */
+	HTMLCollection getAll();
 
 	/**
 	 * The element that contains the content for the document. In documents with
@@ -335,5 +341,10 @@ public interface HTMLDocument extends Document {
 	 *             structure model.
 	 */
 	void writeln(String text);
+
+	String getCharacterSet();
+	
+	String getCharset();
+	
 
 }

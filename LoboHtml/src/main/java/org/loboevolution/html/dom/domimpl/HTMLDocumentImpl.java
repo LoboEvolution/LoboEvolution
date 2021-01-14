@@ -53,6 +53,7 @@ import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.filter.AnchorFilter;
 import org.loboevolution.html.dom.filter.BodyFilter;
 import org.loboevolution.html.dom.filter.CommandFilter;
+import org.loboevolution.html.dom.filter.ElementFilter;
 import org.loboevolution.html.dom.filter.ElementNameFilter;
 import org.loboevolution.html.dom.filter.EmbedFilter;
 import org.loboevolution.html.dom.filter.FormFilter;
@@ -138,8 +139,6 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
     private final Map<String, Element> elementsById = new HashMap<>();
 
 	private final Map<String, Element> elementsByName = new HashMap<>();
-
-	private String inputEncoding;
 
 	private Set<Locale> locales;
 
@@ -450,7 +449,19 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 	/** {@inheritDoc} */
 	@Override
 	public String getInputEncoding() {
-		return this.inputEncoding;
+		return "UTF-8";
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getCharacterSet() {
+		return "UTF-8";
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String getCharset() {
+		return "UTF-8";
 	}
 
     
@@ -517,6 +528,12 @@ public class HTMLDocumentImpl extends DocumentImpl implements HTMLDocument, Docu
 			}
 			return this.anchors;
 		}
+	}
+    
+    /** {@inheritDoc} */
+    @Override
+	public HTMLCollection getAll() {
+    	 return new HTMLCollectionImpl(this, new ElementFilter(null));
 	}
     
     /** {@inheritDoc} */
