@@ -2,15 +2,11 @@
 	<img src="https://avatars3.githubusercontent.com/u/6113075?s=460&v=4" height="130">
 </p>
 <p align="center">	
-	<a href="https://www.codacy.com/app/ivan.difrancesco/LoboEvolution?utm_source=github.com&utm_medium=referral&utm_content=oswetto/LoboEvolution&utm_campaign=badger" alt="Codacy">
-		<img src="https://api.codacy.com/project/badge/Grade/5668f2c4c7ca4e5188cb97aff090c56d" />
+	<a href="https://www.codacy.com/gh/LoboEvolution/LoboEvolution/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=LoboEvolution/LoboEvolution&amp;utm_campaign=Badge_Grade" alt="Codacy">
+		<img src="https://app.codacy.com/project/badge/Grade/899f68bba4a5463d8a7699821d840c5c" />
 	</a>
-	<a href="https://codebeat.co/projects/github-com-oswetto-loboevolution-master">
-		<img alt="codebeat badge" src="https://codebeat.co/badges/8057c847-c70f-49a7-9b5f-07f2b568de2e" />
-	</a>
-	<a href="https://codeclimate.com/github/oswetto/LoboEvolution/maintainability">
-		<img src="https://api.codeclimate.com/v1/badges/e98fd103016736dbf9f3/maintainability" alt="Maintainability">
-	</a>
+	<a href="https://codebeat.co/projects/github-com-loboevolution-loboevolution-master"><img alt="codebeat badge" src="https://codebeat.co/badges/74e4393e-77b9-44a9-ad98-0b33fb839754" /></a>
+	<a href="https://codeclimate.com/github/LoboEvolution/LoboEvolution/maintainability"><img src="https://api.codeclimate.com/v1/badges/eaeed65cfc69b72b4701/maintainability" /></a>
 	<a href="" alt="PRs">
 		<img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" />
 	</a>
