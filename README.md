@@ -46,6 +46,9 @@ Lobo Evolution began as a fork of the now-defunct project called the LoboBrowser
 Lobo Evolution is an extensible all-Java web browser and RIA platform. It supports HTML 4, HTML 5, Javascript, CSS2/CSS3 and Java (Swing/AWT) rendering.
 
 ### ATTENTION
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cdb67f8720c2419abf73948834c97b2b)](https://app.codacy.com/gh/LoboEvolution/LoboEvolution?utm_source=github.com&utm_medium=referral&utm_content=LoboEvolution/LoboEvolution&utm_campaign=Badge_Grade)
+
 LoboEvolution has been rewritten from scratch and is not compatible with [old version](https://github.com/oswetto/LoboEvolutionPreHistory)
 
 ### Building
