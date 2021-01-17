@@ -183,5 +183,11 @@ public class HTMLBodyElementImpl extends HTMLAbstractUIElement implements HTMLBo
 	public void setVLink(String vLink) {
 		setAttribute("vlink", vLink);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLBodyElement]";
+	}
 
 }

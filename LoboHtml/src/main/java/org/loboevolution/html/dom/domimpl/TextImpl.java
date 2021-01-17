@@ -189,9 +189,6 @@ public class TextImpl extends CharacterDataImpl implements Text {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		final String text = this.text;
-		final int textLength = text == null ? 0 : text.length();
-		return "#text[length=" + textLength + ",value=\"" + Strings.truncate(text, 64) + "\",renderState="
-				+ getRenderState() + "]";
+		return "[object Text]";
 	}
 }

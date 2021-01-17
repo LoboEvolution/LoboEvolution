@@ -89,4 +89,10 @@ public class HTMLOListElementImpl extends HTMLAbstractUIElement implements HTMLO
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLOListElement]";
+	}
 }

@@ -586,4 +586,9 @@ public class SVGSVGElementImpl extends SVGLocatableImpl implements SVGSVGElement
 			child.draw(graphics);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "[object SVGSVGElement]";
+	}
 }

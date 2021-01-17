@@ -85,4 +85,10 @@ public class HTMLTableCaptionElementImpl extends HTMLAbstractUIElement implement
 		RenderState tmpRenderState = prevRenderState;
 		return new TableCaptionRenderState(tmpRenderState, this);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTML TableCaptionElement]";
+	}
 }

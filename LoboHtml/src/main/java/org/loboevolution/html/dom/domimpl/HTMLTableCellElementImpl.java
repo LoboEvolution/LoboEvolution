@@ -228,4 +228,9 @@ public class HTMLTableCellElementImpl extends HTMLAbstractUIElement implements H
 	public void setWidth(String width) {
 		setAttribute("width", width);
 	}
+	
+	@Override
+	public String toString() {
+		return "[object HTMLTableCellElement]";
+	}
 }

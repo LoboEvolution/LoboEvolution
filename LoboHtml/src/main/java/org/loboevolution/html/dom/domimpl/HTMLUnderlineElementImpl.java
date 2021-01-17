@@ -47,4 +47,10 @@ public class HTMLUnderlineElementImpl extends HTMLAbstractUIElement {
         prevRenderState = new TextDecorationRenderState(prevRenderState, RenderState.MASK_TEXTDECORATION_UNDERLINE);
 		return super.createRenderState(prevRenderState);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLUnderlineElement]";
+	}
 }

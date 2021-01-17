@@ -380,4 +380,9 @@ public class HTMLTableElementImpl extends HTMLAbstractUIElement implements HTMLT
 	public void setWidth(String width) {
 		setAttribute("width", width);
 	}
+	
+	@Override
+	public String toString() {
+		return "[object HTMLTableElement]";
+	}
 }

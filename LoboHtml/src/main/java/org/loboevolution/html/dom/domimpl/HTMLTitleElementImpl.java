@@ -55,5 +55,11 @@ public class HTMLTitleElementImpl extends HTMLElementImpl {
 		}
 		return super.setUserData(key, data, handler);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLTitleElement]";
+	}
 
 }

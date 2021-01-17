@@ -121,6 +121,6 @@ public class HTMLProcessingInstruction extends NodeImpl implements ProcessingIns
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "<?" + this.target + " " + this.data + ">";
+		return "[object HTMLProcessingElement]";
 	}
 }

@@ -126,4 +126,9 @@ public class SVGRectElementImpl extends SVGGraphic implements SVGRectElement {
 		}
 		return rect;
 	}
+	
+	@Override
+	public String toString() {
+		return "[object SVGRectElement]";
+	}
 }

@@ -436,4 +436,10 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		if(number != null) number.reset();
 		if(password != null) password.reset();
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLInputElement]";
+	}
 }

@@ -121,4 +121,10 @@ public class HTMLCanvasElementImpl extends HTMLAbstractUIElement implements HTML
 	public BufferedImage getImage() {
 		return image;
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLCanvasElement]";
+	}
 }

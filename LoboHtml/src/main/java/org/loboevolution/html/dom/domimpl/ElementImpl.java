@@ -502,27 +502,6 @@ public class ElementImpl extends DOMFunctionImpl implements Element {
 	public void setTitle(String title) {
 		setAttribute("title", title);
 	}
-
-	/** {@inheritDoc} */
-	@Override
-	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append(getNodeName());
-		sb.append(" [");
-		final NamedNodeMap attribs = getAttributes();
-		final int length = attribs.getLength();
-		for (int i = 0; i < length; i++) {
-			final Attr attr = (Attr) attribs.item(i);
-			sb.append(attr.getNodeName());
-			sb.append('=');
-			sb.append(attr.getNodeValue());
-			if (i + 1 < length) {
-				sb.append(',');
-			}
-		}
-		sb.append("]");
-		return sb.toString();
-	}
 	
 	/**
 	 * <p>getFirstElementChild.</p>

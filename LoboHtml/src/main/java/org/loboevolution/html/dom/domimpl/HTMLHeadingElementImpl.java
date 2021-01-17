@@ -152,4 +152,10 @@ public class HTMLHeadingElementImpl extends HTMLAbstractUIElement implements HTM
 	public void setAlign(String align) {
 		setAttribute("align", align);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLHeadingElement]";
+	}
 }

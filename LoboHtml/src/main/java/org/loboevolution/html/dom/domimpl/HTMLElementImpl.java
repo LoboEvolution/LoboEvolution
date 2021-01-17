@@ -968,12 +968,6 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 
 	/** {@inheritDoc} */
 	@Override
-	public String toString() {
-		return super.toString() + "[currentStyle=" + getCurrentStyle() + "]";
-	}
-
-	/** {@inheritDoc} */
-	@Override
 	public void warn(String message) {
 		logger.log(Level.WARNING, message);
 	}
@@ -982,5 +976,11 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	@Override
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLElement]";
 	}
 }

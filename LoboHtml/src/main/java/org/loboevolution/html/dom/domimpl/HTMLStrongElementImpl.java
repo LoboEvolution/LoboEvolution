@@ -47,4 +47,10 @@ public class HTMLStrongElementImpl extends HTMLAbstractUIElement {
 		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);
 		return super.createRenderState(prevRenderState);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLStrongElement]";
+	}
 }

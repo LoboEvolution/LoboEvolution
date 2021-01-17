@@ -55,4 +55,10 @@ public class HTMLQuoteElementImpl extends HTMLElementImpl implements HTMLQuoteEl
 	public void setCite(String cite) {
 		setAttribute("cite", cite);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLQuoteElement]";
+	}
 }

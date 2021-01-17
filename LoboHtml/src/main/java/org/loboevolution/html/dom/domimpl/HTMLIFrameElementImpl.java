@@ -204,4 +204,10 @@ public class HTMLIFrameElementImpl extends HTMLAbstractUIElement implements HTML
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLIFrameElement]";
+	}
 }

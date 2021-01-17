@@ -227,4 +227,9 @@ public class HTMLTableRowElementImpl extends HTMLElementImpl implements HTMLTabl
 	public void setVAlign(String vAlign) {
 		setAttribute("valign", vAlign);
 	}
+	
+	@Override
+	public String toString() {
+		return "[object HTMLTableRowElement]";
+	}
 }

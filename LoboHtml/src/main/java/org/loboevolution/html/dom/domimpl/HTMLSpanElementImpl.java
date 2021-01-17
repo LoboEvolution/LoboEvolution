@@ -42,4 +42,10 @@ public class HTMLSpanElementImpl extends HTMLAbstractUIElement implements HTMLEl
 	public HTMLSpanElementImpl(String name) {
 		super(name);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLSpanElement]";
+	}
 }

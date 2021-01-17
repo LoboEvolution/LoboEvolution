@@ -64,4 +64,10 @@ public class HTMLPreElementImpl extends HTMLAbstractUIElement implements HTMLPre
 	public void setWidth(int width) {
 		setAttribute("width", String.valueOf(width));
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLPreElement]";
+	}
 }

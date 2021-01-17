@@ -222,4 +222,10 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 		}
 		return super.setUserData(key, data, handler);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLScriptElement]";
+	}
 }

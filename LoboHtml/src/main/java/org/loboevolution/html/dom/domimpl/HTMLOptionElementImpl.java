@@ -166,6 +166,6 @@ public class HTMLOptionElementImpl extends HTMLElementImpl implements HTMLOption
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return "HTMLOptionElementImpl[text=" + getText() + ",selected=" + getSelected() + "]";
+		return "[object HTMLOptionElement]";
 	}
 }

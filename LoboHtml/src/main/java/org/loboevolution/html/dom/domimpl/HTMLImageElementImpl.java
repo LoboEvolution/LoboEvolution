@@ -287,4 +287,10 @@ public class HTMLImageElementImpl extends HTMLAbstractUIElement implements HTMLI
 		}
 		imgSvgControl.add(hpanel);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLImageElement]";
+	}
 }

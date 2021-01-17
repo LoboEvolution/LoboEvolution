@@ -88,4 +88,10 @@ public class HTMLHRElementImpl extends HTMLAbstractUIElement implements HTMLHREl
 	public void setWidth(String width) {
 		setAttribute("width", width);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLHRElement]";
+	}
 }

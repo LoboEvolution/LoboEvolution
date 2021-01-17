@@ -63,5 +63,11 @@ public class HTMLSmallElementImpl extends HTMLAbstractUIElement {
 	protected RenderState createRenderState(RenderState prevRenderState) {
 		return super.createRenderState(prevRenderState);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLSmallElement]";
+	}
 
 }

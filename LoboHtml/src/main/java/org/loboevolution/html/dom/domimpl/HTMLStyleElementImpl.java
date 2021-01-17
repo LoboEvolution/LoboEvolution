@@ -144,4 +144,10 @@ public class HTMLStyleElementImpl extends HTMLElementImpl implements HTMLStyleEl
 		}
 		return super.setUserData(key, data, handler);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLStyleElement]";
+	}
 }

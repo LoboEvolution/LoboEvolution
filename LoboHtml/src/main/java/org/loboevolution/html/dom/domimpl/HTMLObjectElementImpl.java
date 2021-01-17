@@ -295,4 +295,10 @@ public class HTMLObjectElementImpl extends HTMLAbstractUIElement implements HTML
 	public void setWidth(String width) {
 		setAttribute("width", width);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLObjectElement]";
+	}
 }

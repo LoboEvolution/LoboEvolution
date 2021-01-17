@@ -47,4 +47,10 @@ public class HTMLMonospacedElementImpl extends HTMLAbstractUIElement {
         prevRenderState = new FontNameRenderState(prevRenderState, this, "Monospaced");
         return super.createRenderState(prevRenderState);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLMonospacedElement]";
+	}
 }

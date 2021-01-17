@@ -76,4 +76,10 @@ public class HTMLLIElementImpl extends HTMLAbstractUIElement implements HTMLLIEl
 	public void setValue(int value) {
 		setAttribute("value", String.valueOf(value));
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLLIElement]";
+	}
 }

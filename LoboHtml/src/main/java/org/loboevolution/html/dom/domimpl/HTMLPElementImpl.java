@@ -87,4 +87,10 @@ public class HTMLPElementImpl extends HTMLAbstractUIElement implements HTMLParag
 	public void setAlign(String align) {
 		setAttribute("align", align);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLPElement]";
+	}
 }

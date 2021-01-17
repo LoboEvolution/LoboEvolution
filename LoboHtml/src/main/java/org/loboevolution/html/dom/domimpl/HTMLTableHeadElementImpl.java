@@ -47,4 +47,10 @@ public class HTMLTableHeadElementImpl extends HTMLTableCellElementImpl {
 		prevRenderState = new FontStyleRenderState(prevRenderState, java.awt.Font.BOLD);
 		return super.createRenderState(prevRenderState);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTML TableHeadElement]";
+	}
 }

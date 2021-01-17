@@ -312,4 +312,10 @@ public class HTMLFormElementImpl extends HTMLAbstractUIElement implements HTMLFo
 			}
 		}
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLFormElement]";
+	}
 }

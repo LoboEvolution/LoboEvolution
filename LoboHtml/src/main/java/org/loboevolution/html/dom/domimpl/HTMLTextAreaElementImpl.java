@@ -247,4 +247,10 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 			return text.toString();
 		}
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLTextAreaElement]";
+	}
 }

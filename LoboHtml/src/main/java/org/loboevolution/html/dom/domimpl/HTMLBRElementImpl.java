@@ -59,4 +59,10 @@ public class HTMLBRElementImpl extends HTMLElementImpl implements HTMLBRElement 
 	public void setClear(String clear) {
 		setAttribute("clear", clear);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLBRElement]";
+	}
 }

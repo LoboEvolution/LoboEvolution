@@ -61,4 +61,10 @@ public class HTMLHtmlElementImpl extends HTMLElementImpl implements HTMLHtmlElem
 	public void setVersion(String version) {
 		setAttribute("version", version);
 	}
+
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLHtmlElement]";
+	}
 }

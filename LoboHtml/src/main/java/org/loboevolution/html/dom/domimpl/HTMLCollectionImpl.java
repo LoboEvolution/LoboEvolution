@@ -107,4 +107,9 @@ public class HTMLCollectionImpl implements HTMLCollection {
 		}
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return "[object HTMLCollection]";
+	}
 }

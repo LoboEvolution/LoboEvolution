@@ -75,4 +75,10 @@ public class HTMLUListElementImpl extends HTMLAbstractUIElement implements HTMLU
 	public void setType(String type) {
 		setAttribute("type", type);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLTableUListlement]";
+	}
 }

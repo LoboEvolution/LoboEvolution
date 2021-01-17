@@ -168,4 +168,9 @@ public class NodeListImpl extends AbstractScriptableDelegate implements NodeList
 	public void removeAll(List<Node> toDelete) {
 		this.nodeList.removeAll(toDelete);
 	}
+	
+	@Override
+	public String toString() {
+		return "[object NodeList]";
+	}
 }

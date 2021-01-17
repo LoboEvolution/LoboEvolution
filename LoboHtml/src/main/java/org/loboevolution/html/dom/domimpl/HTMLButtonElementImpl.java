@@ -216,4 +216,10 @@ public class HTMLButtonElementImpl extends HTMLAbstractUIElement implements HTML
 			return text.toString();
 		}
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLButtonElement]";
+	}
 }

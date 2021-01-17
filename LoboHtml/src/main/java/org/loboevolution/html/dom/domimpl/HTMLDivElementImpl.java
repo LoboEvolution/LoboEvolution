@@ -88,4 +88,10 @@ public class HTMLDivElementImpl extends HTMLAbstractUIElement implements HTMLDiv
 	public void setAlign(String align) {
 		setAttribute("align", align);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLDivElement]";
+	}
 }

@@ -207,4 +207,10 @@ public class HTMLSelectElementImpl extends HTMLAbstractUIElement implements HTML
 	public void resetInput() {
 		if (selectOption!= null) selectOption.resetInput();
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLSelectElement]";
+	}
 }

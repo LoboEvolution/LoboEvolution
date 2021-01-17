@@ -53,4 +53,10 @@ public class HTMLSuperscriptElementImpl extends HTMLAbstractUIElement {
                 this.superscript);
 		return super.createRenderState(prevRenderState);
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLSuperscriptElement]";
+	}
 }

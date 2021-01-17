@@ -54,7 +54,12 @@ public class HTMLHeadElementImpl extends HTMLAbstractUIElement implements HTMLHe
 	@Override
 	public void setProfile(String profile) {
 		this.setAttribute("profile", profile);
-		
 	}	
+	
+	/** {@inheritDoc} */
+	@Override
+	public String toString() {
+		return "[object HTMLHeadElement]";
+	}
 }
 
