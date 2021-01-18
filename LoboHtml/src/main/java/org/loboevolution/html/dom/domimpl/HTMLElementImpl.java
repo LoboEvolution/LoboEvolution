@@ -25,6 +25,8 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
@@ -41,6 +43,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.DOMTokenList;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.input.FormInput;
+import org.loboevolution.html.gui.HtmlPanel;
 import org.loboevolution.html.parser.HtmlParser;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.html.renderstate.StyleSheetRenderState;
@@ -48,6 +51,9 @@ import org.loboevolution.html.style.AbstractCSSProperties;
 import org.loboevolution.html.style.CSSPropertiesContext;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.html.style.StyleSheetAggregator;
+import org.loboevolution.http.HtmlRendererContext;
+import org.loboevolution.laf.FontFactory;
+import org.loboevolution.laf.FontKey;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -965,6 +971,42 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
     public void setContentEditable(String contenteditable) {
         this.setAttribute("contenteditable", contenteditable);
     }
+ 
+	public int getClientWidth() {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+		Dimension preferredSize = htmlPanel.getPreferredSize();
+		AbstractCSSProperties currentStyle = getCurrentStyle();
+		String width = currentStyle.getWidth();
+		
+		if(Strings.isBlank(width) || "auto".equalsIgnoreCase(width)) {
+			width = "100%";
+		}		
+		return HtmlValues.getPixelSize(width, null, -1, preferredSize.width);
+	}
+	
+	public int getClientHeight() {
+		final HTMLDocumentImpl doc = (HTMLDocumentImpl) this.document;
+		HtmlRendererContext htmlRendererContext = doc.getHtmlRendererContext();
+		HtmlPanel htmlPanel = htmlRendererContext.getHtmlPanel();
+		Dimension preferredSize = htmlPanel.getPreferredSize();
+		AbstractCSSProperties currentStyle = getCurrentStyle();	
+		String height = currentStyle.getHeight();
+						
+		if (Strings.isBlank(height) || "auto".equalsIgnoreCase(height)) {
+			if (this instanceof HTMLDivElementImpl && Strings.isBlank(getTextContent())) {
+				height = "0px";
+			}
+			
+			if (this instanceof HTMLDivElementImpl && Strings.isNotBlank(getTextContent())) {
+				FontFactory FONT_FACTORY = FontFactory.getInstance();
+				Font DEFAULT_FONT = FONT_FACTORY.getFont(new FontKey());
+				height = DEFAULT_FONT.getSize() + "px";
+			}
+		}
+		return HtmlValues.getPixelSize(height, null, -1, preferredSize.height);
+	}
 
 	/** {@inheritDoc} */
 	@Override
