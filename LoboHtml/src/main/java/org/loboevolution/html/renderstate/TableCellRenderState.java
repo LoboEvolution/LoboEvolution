@@ -37,7 +37,7 @@ import org.loboevolution.html.style.HtmlInsets;
 import org.loboevolution.html.style.HtmlValues;
 import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.laf.ColorFactory;
-import org.w3c.dom.css.CSS3Properties;
+import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>TableCellRenderState class.</p>

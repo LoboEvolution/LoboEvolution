@@ -55,7 +55,7 @@ import org.loboevolution.info.BackgroundInfo;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.net.HttpNetwork;
-import org.w3c.dom.css.CSS3Properties;
+import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>Abstract BaseElementRenderable class.</p>

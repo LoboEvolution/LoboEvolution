@@ -24,7 +24,7 @@
 package org.loboevolution.html.style;
 
 import org.loboevolution.html.renderstate.RenderState;
-import org.w3c.dom.css.CSS3Properties;
+import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>MarginInsets class.</p>
@@ -37,7 +37,7 @@ public class MarginInsets {
 	/**
 	 * <p>getMarginInsets.</p>
 	 *
-	 * @param cssProperties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param cssProperties a {@link CSS3Properties} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
@@ -57,7 +57,7 @@ public class MarginInsets {
 	/**
 	 * <p>getPaddingInsets.</p>
 	 *
-	 * @param cssProperties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param cssProperties a {@link CSS3Properties} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */

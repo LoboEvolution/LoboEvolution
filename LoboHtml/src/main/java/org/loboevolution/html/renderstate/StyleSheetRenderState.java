@@ -65,7 +65,7 @@ import org.loboevolution.info.WordInfo;
 import org.loboevolution.laf.ColorFactory;
 import org.loboevolution.laf.FontFactory;
 import org.loboevolution.laf.FontKey;
-import org.w3c.dom.css.CSS3Properties;
+import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>StyleSheetRenderState class.</p>

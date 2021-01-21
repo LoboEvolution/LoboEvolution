@@ -21,7 +21,10 @@
  *
  */
 
-package org.w3c.dom.css;
+package org.loboevolution.dom.css;
+
+import org.w3c.dom.css.CSS2Properties;
+
 
 /**
  * <p>

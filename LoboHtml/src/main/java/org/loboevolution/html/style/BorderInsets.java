@@ -30,7 +30,7 @@ import org.loboevolution.common.Strings;
 import org.loboevolution.html.renderstate.RenderState;
 import org.loboevolution.info.BorderInfo;
 import org.loboevolution.laf.ColorFactory;
-import org.w3c.dom.css.CSS3Properties;
+import org.loboevolution.dom.css.CSS3Properties;
 
 /**
  * <p>BorderInsets class.</p>
@@ -76,7 +76,7 @@ public class BorderInsets {
 	/**
 	 * <p>getBorderInfo.</p>
 	 *
-	 * @param properties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param properties a {@link CSS3Properties} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.info.BorderInfo} object.
 	 */
@@ -112,7 +112,7 @@ public class BorderInsets {
 	 * <p>getBorderInsets.</p>
 	 *
 	 * @param borderStyles a {@link java.awt.Insets} object.
-	 * @param cssProperties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param cssProperties a {@link CSS3Properties} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 * @return a {@link org.loboevolution.html.style.HtmlInsets} object.
 	 */
@@ -141,7 +141,7 @@ public class BorderInsets {
 	 * <p>populateBorderInsets.</p>
 	 *
 	 * @param binfo a {@link org.loboevolution.info.BorderInfo} object.
-	 * @param cssProperties a {@link org.w3c.dom.css.CSS3Properties} object.
+	 * @param cssProperties a {@link CSS3Properties} object.
 	 * @param renderState a {@link org.loboevolution.html.renderstate.RenderState} object.
 	 */
 	public static void populateBorderInsets(BorderInfo binfo, CSS3Properties cssProperties, RenderState renderState) {
