@@ -51,21 +51,16 @@ Create a local clone of the repository and you are ready to start.
 Run 
 [PlatformInit.java](https://github.com/oswetto/LoboEvolution/blob/master/LoboEvo/src/main/java/org/loboevolution/init/PlatformInit.java)
 
-### Ant Users
-
-```shell
-ant -buildfile build.xml
-```
 ### Maven Users
-
-```shell
+```
 mvn install
 ```
-### Gradle Users
 
-```shell
-gradle default
+### Maven Unit Test
 ```
+mvn test
+```
+
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)
 

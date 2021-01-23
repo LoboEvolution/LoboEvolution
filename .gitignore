@@ -6,4 +6,7 @@ target/
 build/
 
 .settings/
-.idea/copyright/
+.idea/
+*.project
+*.classpath
+*.iml
