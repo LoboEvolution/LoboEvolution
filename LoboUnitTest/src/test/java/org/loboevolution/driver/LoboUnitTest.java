@@ -23,16 +23,15 @@
 
 package org.loboevolution.driver;
 
+import org.loboevolution.dom.css.CSS3Properties;
 import org.loboevolution.html.dom.HTMLElement;
 import org.loboevolution.html.dom.domimpl.HTMLDocumentImpl;
 import org.loboevolution.html.js.Window;
-import org.loboevolution.dom.css.CSS3Properties;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class LoboUnitTest extends LoboWebDriver {
 
@@ -50,11 +49,19 @@ public class LoboUnitTest extends LoboWebDriver {
     }
 
     public void checkHtmlAlert(final String html, final String[] messages) {
-        HTMLDocumentImpl doc = loadHtml(html);
-        Window window = doc.getWindow();
-        List<String> alerts = Arrays.asList(messages);
-        if(!alerts.equals(window.getMsg())) window.getMsg().forEach(System.out::println);
-        assertTrue(alerts.equals(window.getMsg()));
+        Window window = null;
+        List<String> alerts = null;
+
+        try {
+            HTMLDocumentImpl doc = loadHtml(html);
+            window = doc.getWindow();
+            alerts = Arrays.asList(messages);
+            assertEquals(alerts, window.getMsg());
+        } catch (AssertionError e) {
+            throw new AssertionError("Result expected: " +  alerts + " Result: " + window.getMsg());
+        } catch (Exception ex) {
+            logger.severe(ex.getMessage());
+        }
     }
 
     public String mockCssLink(final String css) {

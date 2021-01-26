@@ -53,7 +53,7 @@ import java.util.logging.Logger;
 public class LoboWebDriver {
 	
 	/** The Constant logger. */
-	private static final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
+	protected static final Logger logger = Logger.getLogger(LoboWebDriver.class.getName());
 
 	protected HTMLDocumentImpl loadHtml(String html) {
 		BrowserFrame frame = new BrowserFrame("Unit Test");

@@ -47,13 +47,16 @@ Run
 
 ### Maven Users
 ```
-mvn install
+mvn install -Dmaven.test.skip=true
 ```
 
-### Maven Unit Test
+### Maven Unit Test & report
 ```
-mvn test
+mvn surefire-report:report
 ```
+
+Show report in [doc folder](https://github.com/LoboEvolution/LoboEvolution/tree/master/docs) or [current result](https://loboevolution.github.io/LoboEvolution/)
+
 
 ### How To Do
 [TODO](https://github.com/oswetto/LoboEvolution/wiki/How-TODO)

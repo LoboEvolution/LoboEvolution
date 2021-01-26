@@ -170,6 +170,8 @@ public class HTMLScriptElementImpl extends HTMLElementImpl implements HTMLScript
 			} catch (final RhinoException ecmaError) {
 				final String error = ecmaError.sourceName() + ":" + ecmaError.lineNumber() + ": " + ecmaError.getMessage();
 				logger.log(Level.WARNING, "Javascript error at " + error, ecmaError.getMessage());
+			} catch (java.util.MissingResourceException mre) {
+				logger.log(Level.WARNING, mre.getMessage());
 			} catch (final Throwable err) {
 				logger.log(Level.WARNING, "Unable to evaluate Javascript code", err);
 			} finally {

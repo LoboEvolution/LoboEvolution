@@ -111,6 +111,9 @@ public class Executor {
 					return true;
 				}
 				return (Boolean) result;
+			} catch (java.util.MissingResourceException mre) {
+				logger.log(Level.WARNING, mre.getMessage());
+				return true;
 			} catch (final Throwable thrown) {
 				logger.log(Level.WARNING, "executeFunction(): There was an error in Javascript code.", thrown);
 				return true;
