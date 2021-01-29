@@ -135,8 +135,13 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	 */
 	String getValue();
 	
-	
 	int getMaxLength();
+	
+	int getMinLength();
+	
+	int getSelectionStart();
+
+    int getSelectionEnd();	
 
 	/**
 	 * Select the contents of the TEXTAREA.
@@ -155,9 +160,9 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	 * Width of control (in characters). See the cols attribute definition in HTML
 	 * 4.01.
 	 *
-	 * @param cols a int.
+	 * @param cols a Object.
 	 */
-	void setCols(int cols);
+	void setCols(Object cols);
 
 	/**
 	 * Represents the contents of the element. The value of this attribute does not
@@ -198,7 +203,7 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	 *
 	 * @param rows a int.
 	 */
-	void setRows(int rows);
+	void setRows(Object rows);
 
 	/**
 	 * Index that represents the element's position in the tabbing order. See the
@@ -218,5 +223,15 @@ public interface HTMLTextAreaElement extends HTMLElement {
 	 * @param value a {@link java.lang.String} object.
 	 */
 	void setValue(String value);
+	
+	void setMaxLength(int value);
+	
+	void setMinLength(int value);
+	
+	void setSelectionStart(int start);
+	
+    void setSelectionEnd(int end);
+
+    void setSelectionRange(int start, int end);
 
 }

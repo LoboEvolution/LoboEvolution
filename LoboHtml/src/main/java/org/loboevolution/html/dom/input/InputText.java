@@ -34,9 +34,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -109,6 +112,17 @@ public class InputText {
 		iText.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent event) {
+				
+				String selectedText = iText.getSelectedText();
+				if(Strings.isNotBlank(selectedText)) {
+					Pattern word = Pattern.compile(selectedText);
+					Matcher match = word.matcher(modelNode.getValue());
+					
+					while (match.find()) {
+					     modelNode.setSelectionRange(match.start(), match.end()-1);
+					}
+				}
+				
 				if (autocomplete) {
 					final String text = iText.getText();
 					final boolean isNavigation = modelNode.getUserAgentContext().isNavigationEnabled();
@@ -130,7 +144,7 @@ public class InputText {
 			}
 		};
 		iText.addMouseListener(mouseHandler);
-		
+
 		RUIControl ruiControl = ic.getRUIControl();
 		final Insets borderInsets = ruiControl.getBorderInsets();
 		
@@ -140,6 +154,13 @@ public class InputText {
 		} else {
 			iText.setBorder(BorderFactory.createMatteBorder(borderInsets.top, borderInsets.left, borderInsets.bottom, borderInsets.right, Color.BLACK));
 		}
+		
+		if (modelNode.getSelectionStart() > 0 && modelNode.getSelectionEnd() > 0 && modelNode.isFocusable()) {
+			SwingUtilities.invokeLater(() -> {
+				iText.select(modelNode.getSelectionStart(), modelNode.getSelectionEnd());
+				iText.requestFocus();
+			});
+		}
 
 		ic.add(iText);
 	}
@@ -148,6 +169,7 @@ public class InputText {
 	 * <p>selectAll.</p>
 	 */
 	public void selectAll() {
+		iText.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
 		iText.selectAll();
 		iText.requestFocus();
 	}
@@ -156,6 +178,7 @@ public class InputText {
 	 * <p>focus.</p>
 	 */
 	public void focus() {
+		iText.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
 		iText.setFocusable(true);
 		iText.requestFocus();
 	}
@@ -164,6 +187,7 @@ public class InputText {
 	 * <p>blur.</p>
 	 */
 	public void blur() {
+		iText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
 		iText.setFocusable(false);
 	}
 	

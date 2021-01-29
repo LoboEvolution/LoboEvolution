@@ -28,15 +28,21 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Insets;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
+import org.loboevolution.common.Strings;
 import org.loboevolution.html.control.RUIControl;
 import org.loboevolution.html.control.TextAreaControl;
 import org.loboevolution.html.dom.domimpl.HTMLTextAreaElementImpl;
@@ -44,13 +50,11 @@ import org.loboevolution.html.js.Executor;
 
 public class TextArea {
 	
-	
 	private static final float DEFAULT_FONT_SIZE = 14.0f;
 	
 	private final JTextArea  jtArea = new JTextArea();
 	
 	private HTMLTextAreaElementImpl modelNode;
-	
 	
 	/**
 	 * <p>Constructor for InputText.</p>
@@ -71,9 +75,8 @@ public class TextArea {
 		
 		jtArea.setEnabled(!modelNode.getDisabled());
 		jtArea.setEditable(!modelNode.getReadOnly());
-
+		
 		MouseInputAdapter mouseHandler = new MouseInputAdapter() {
-
 			@Override
 			public void mouseEntered(final MouseEvent e) {
 				if (modelNode.getOnmouseover() != null) {
@@ -83,6 +86,21 @@ public class TextArea {
 		};
 		
 		jtArea.addMouseListener(mouseHandler);
+		
+		jtArea.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent event) {
+				String selectedText = jtArea.getSelectedText();
+				if(Strings.isNotBlank(selectedText)) {
+					Pattern word = Pattern.compile(selectedText);
+					Matcher match = word.matcher(modelNode.getValue());
+					
+					while (match.find()) {
+					     modelNode.setSelectionRange(match.start(), match.end()-1);
+					}
+				}
+			}
+		});
 		
 		RUIControl ruiControl = ic.getRUIControl();
 		final Insets borderInsets = ruiControl.getBorderInsets();
@@ -94,6 +112,13 @@ public class TextArea {
 		} else {
 			jtArea.setBorder(BorderFactory.createMatteBorder(borderInsets.top, borderInsets.left, borderInsets.bottom, borderInsets.right, Color.BLACK));
 		}
+		
+		if (modelNode.getSelectionStart() > 0 && modelNode.getSelectionEnd() > 0 && modelNode.isFocusable()) {
+			SwingUtilities.invokeLater(() -> {
+					jtArea.select(modelNode.getSelectionStart(), modelNode.getSelectionEnd());
+					jtArea.requestFocus();
+			});
+		}
 
 		ic.add(jtArea);
 	}
@@ -102,8 +127,26 @@ public class TextArea {
 	 * <p>selectAll.</p>
 	 */
 	public void selectAll() {
+		jtArea.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
 		jtArea.selectAll();
 		jtArea.requestFocus();
+	}
+	
+	/**
+	 * <p>focus.</p>
+	 */
+	public void focus() {
+		jtArea.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, Color.BLACK));
+		jtArea.select(modelNode.getSelectionStart(), modelNode.getSelectionEnd());
+		jtArea.requestFocus();
+	}
+	
+	/**
+	 * <p>blur.</p>
+	 */
+	public void blur() {
+		jtArea.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.BLACK));
+		jtArea.setFocusable(false);
 	}
 	
 	

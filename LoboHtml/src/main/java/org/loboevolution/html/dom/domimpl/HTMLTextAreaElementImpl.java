@@ -42,7 +42,25 @@ import org.w3c.dom.NodeList;
  */
 public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HTMLTextAreaElement {
 	
-	private TextArea text;
+	private TextArea textArea;
+	
+	private String value;
+	
+	private boolean isSet = false;
+	
+	private boolean isMaxSet = false;
+	
+	private boolean isMinSet = false;
+	
+	private int maxlength = 0;
+	
+	private int minlength = 0;
+	
+	private int selectionStart = 0;
+	
+	private int selectionEnd = 0;
+	
+	private boolean focusable = false;
 
 	/**
 	 * <p>Constructor for HTMLTextAreaElementImpl.</p>
@@ -68,9 +86,17 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public int getCols() {
+	public int getCols() {	
 		String cols = this.getAttribute("cols");
-		return Strings.isNotBlank(cols) ? Integer.parseInt(cols) : -1;
+		if(Strings.isNotBlank(cols)  && Strings.isNumeric(cols)) {
+			Float rowsInt = Float.parseFloat(cols);
+			if(rowsInt > -1) {
+				return rowsInt.intValue();
+			} else {
+				return 20;
+			}
+		}
+		return 20;
 	}
 
 	/** {@inheritDoc} */
@@ -90,8 +116,11 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public HTMLFormElement getForm() {
-		// TODO Auto-generated method stub
-		return null;
+		Node parent = this.getParentNode();
+		while ((parent != null) && !(parent instanceof HTMLFormElement)) {
+			parent = parent.getParentNode();
+		}
+		return (HTMLFormElement) parent;
 	}
 
 	/** {@inheritDoc} */
@@ -104,16 +133,24 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	@Override
 	public boolean getReadOnly() {
 		final String readonly = getAttribute("readonly");
-		return readonly != null;
+		return "true".equals(readonly) || "readonly".equals(readonly);
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public int getRows() {
 		String rows = this.getAttribute("rows");
-		return Strings.isNotBlank(rows) ? Integer.parseInt(rows) : -1;
+		if(Strings.isNotBlank(rows)  && Strings.isNumeric(rows)) {
+			Float rowsInt = Float.parseFloat(rows);
+			if(rowsInt > -1) {
+				return rowsInt.intValue();
+			} else {
+				return 2;
+			}
+		}
+		return 2;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public int getTabIndex() {
@@ -130,26 +167,25 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public String getValue() {
-		return getText();
+		return isSet ? this.value : getText();
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void select() {
-		if(text!= null) text.selectAll();
+		if(textArea!= null) textArea.selectAll();
 		
 	}
 
 	/** {@inheritDoc} */
 	@Override
 	public void setAccessKey(String accessKey) {
-		// TODO Auto-generated method stub
-		
+		setAttribute("accessKey", accessKey);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public void setCols(int cols) {
+	public void setCols(Object cols) {
 		setAttribute("cols", String.valueOf(cols));
 		
 	}
@@ -184,9 +220,8 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 
 	/** {@inheritDoc} */
 	@Override
-	public void setRows(int rows) {
+	public void setRows(Object rows) {
 		setAttribute("rows", String.valueOf(rows));
-		
 	}
 
 	/** {@inheritDoc} */
@@ -199,19 +234,104 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	/** {@inheritDoc} */
 	@Override
 	public void setValue(String value) {
-		// TODO Auto-generated method stub
-		
+		this.value = Strings.isBlank(value) ? "" : value;
+		this.isSet = true;
+		setSelectionStart(Strings.isBlank(value) ? 0 : value.length());
+        setSelectionEnd(Strings.isBlank(value) ? 0 : value.length());
 	}
 	
 	/** {@inheritDoc} */
 	@Override
-	public int getMaxLength() {
+	public int getMaxLength() {		
+		if(isMaxSet) {
+			return this.maxlength;
+		}
+		
 		try {
 			final String maxLength = getAttribute("maxlength");
 			return Integer.parseInt(maxLength.trim());
 		} catch (Exception e) {
 			return Integer.MAX_VALUE;
 		}
+	}
+	
+	/** {@inheritDoc} */
+	public void setMaxLength(int value) {
+		this.maxlength = value;
+		this.isMaxSet = true;
+	}
+	
+	
+	/** {@inheritDoc} */
+	@Override
+	public int getMinLength() {		
+		if(isMinSet) {
+			return this.minlength;
+		}
+		
+		try {
+			final String maxLength = getAttribute("minlength");
+			return Integer.parseInt(maxLength.trim());
+		} catch (Exception e) {
+			return -1;
+		}
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void setMinLength(int value) {
+		this.minlength = value;
+		this.isMinSet = true;
+	}
+
+	public int getTextLength() {
+		return getValue().length();
+	}
+	
+	
+	/** {@inheritDoc} */
+	@Override
+    public int getSelectionStart() {
+		final int textLenght = getTextLength();
+        return (selectionStart > textLenght || selectionStart < 0) ? textLenght : selectionStart;
+    }
+
+    /** {@inheritDoc} */
+	@Override
+    public void setSelectionStart(int start) {
+       this.selectionStart = start;
+    }
+	
+	/** {@inheritDoc} */
+	@Override
+    public int getSelectionEnd() {
+		final int textLenght = getTextLength();
+        return (selectionEnd > textLenght || selectionEnd < 0) ? textLenght : selectionEnd;
+    }
+
+	/** {@inheritDoc} */
+	@Override
+    public void setSelectionEnd(int end) {
+        this.selectionEnd = end;
+    }
+
+	/** {@inheritDoc} */
+	@Override
+    public void setSelectionRange(int start, int end) {
+        setSelectionStart(start);
+        setSelectionEnd(end);
+    }
+	
+	/** {@inheritDoc} */
+	@Override
+	public void blur() {
+		if(textArea!= null) {textArea.blur();} else {focusable = false;}
+	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public void focus() {
+		if(textArea!= null) {textArea.focus();} else {focusable = true;}
 	}
 
 	/**
@@ -220,7 +340,7 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 	 * @param ic a {@link org.loboevolution.html.control.TextAreaControl} object.
 	 */
 	public void draw(TextAreaControl ic) {
-		text = new TextArea(this, ic);
+		textArea = new TextArea(this, ic);
 	}
 	
 	
@@ -246,6 +366,20 @@ public class HTMLTextAreaElementImpl extends HTMLAbstractUIElement implements HT
 		} else {
 			return text.toString();
 		}
+	}
+	
+	/**
+	 * @return the focusable
+	 */
+	public boolean isFocusable() {
+		return focusable;
+	}
+
+	/**
+	 * @param focusable the focusable to set
+	 */
+	public void setFocusable(boolean focusable) {
+		this.focusable = focusable;
 	}
 	
 	/** {@inheritDoc} */

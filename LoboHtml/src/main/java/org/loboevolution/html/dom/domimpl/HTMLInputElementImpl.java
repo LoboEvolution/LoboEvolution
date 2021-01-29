@@ -65,7 +65,14 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	private InputPassword password;
 	
 	private InputColorPicker color;
+	
+	private int selectionStart = 0;
+	
+	private int selectionEnd = 0;
+	
+	private boolean focusable = false;
 
+	
 	/**
 	 * <p>Constructor for HTMLInputElementImpl.</p>
 	 *
@@ -207,20 +214,49 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	@Override
 	public void blur() {
 		if(text!= null) text.blur();
+		if(text!= null) {text.blur();} else {focusable = true;}
 	}
 	
 	/** {@inheritDoc} */
 	@Override
 	public void focus() {
-		if(text!= null) text.focus();
+		if(text!= null) {text.focus();} else {focusable = true;}
 	}
 	
 	/** {@inheritDoc} */
 	@Override
-	public void setSelectionRange(int start, int end) {
-		if(text!= null) text.setSelectionRange(start, end);
-	} 
+    public int getSelectionStart() {
+		final int textLenght = getTextLength();
+        return (selectionStart > textLenght || selectionStart < 0) ? textLenght : selectionStart;
+    }
+
+    /** {@inheritDoc} */
+	@Override
+    public void setSelectionStart(int start) {
+       this.selectionStart = start;
+    }
 	
+	/** {@inheritDoc} */
+	@Override
+    public int getSelectionEnd() {
+		final int textLenght = getTextLength();
+        return (selectionEnd > textLenght || selectionEnd < 0) ? textLenght : selectionEnd;
+    }
+
+	/** {@inheritDoc} */
+	@Override
+    public void setSelectionEnd(int end) {
+        this.selectionEnd = end;
+    }
+
+	/** {@inheritDoc} */
+	@Override
+    public void setSelectionRange(int start, int end) {
+        setSelectionStart(start);
+        setSelectionEnd(end);
+    }
+	
+		
 	/** {@inheritDoc} */
 	@Override
 	public void setRangeText(String select, int start, int end, String preserve) {
@@ -297,7 +333,14 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 	@Override
 	public void setValue(String value) {
 		setAttribute("value", value);
+		setSelectionStart(Strings.isBlank(value) ? 0 : value.length());
+        setSelectionEnd(Strings.isBlank(value) ? 0 : value.length());
 	}
+		
+	public int getTextLength() {
+		return getValue().length();
+	}
+	
 	
 	/**
 	 * <p>setPlaceholder.</p>
@@ -435,6 +478,20 @@ public class HTMLInputElementImpl extends HTMLAbstractUIElement implements HTMLI
 		if(color != null) color.reset();
 		if(number != null) number.reset();
 		if(password != null) password.reset();
+	}
+	
+	/**
+	 * @return the focusable
+	 */
+	public boolean isFocusable() {
+		return focusable;
+	}
+
+	/**
+	 * @param focusable the focusable to set
+	 */
+	public void setFocusable(boolean focusable) {
+		this.focusable = focusable;
 	}
 	
 	/** {@inheritDoc} */

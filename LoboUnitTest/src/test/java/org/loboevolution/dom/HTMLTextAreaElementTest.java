@@ -222,7 +222,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "    alert(a1.accessKey);\n"
                 + "  </script>\n"
                 + "</body></html>";
-        final String[] messages = {"", "A", "a", "A", "a8", "8Afoo", "8", "@"};
+        final String[] messages = {null, "A", "a", "A", "a8", "8Afoo", "8", "@"};
         checkHtmlAlert(html, messages);
     }
 
@@ -403,7 +403,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                         + "  </body>\n"
                         + "</html>";
 
-        final String[] messages = {null, "4", "", "0"};
+        final String[] messages = {"null", "4", "", "0"};
         checkHtmlAlert(html, messages);
     }
 
@@ -460,7 +460,7 @@ public class HTMLTextAreaElementTest extends LoboUnitTest {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final String[] messages = {"-1", null, "32", "32", "-1", "ms"};
+        final String[] messages = {"2147483647", null, "32", "32", "2147483647", "ms"};
         checkHtmlAlert(html, messages);
     }
 

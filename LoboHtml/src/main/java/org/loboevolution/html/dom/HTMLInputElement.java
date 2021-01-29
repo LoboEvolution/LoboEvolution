@@ -61,7 +61,13 @@ public interface HTMLInputElement extends HTMLElement {
 	 * @param start a int.
 	 * @param end a int.
 	 */
-	void setSelectionRange(int start, int end); 
+	void setSelectionRange(int start, int end);
+	
+	
+	void setSelectionStart(int start);
+	
+    void setSelectionEnd(int end);
+
 	
 	/**
 	 * <p>setRangeText.</p>
@@ -210,6 +216,10 @@ public interface HTMLInputElement extends HTMLElement {
 	 * or "password".
 	 */
 	void select();
+	
+	int getSelectionStart();
+
+    int getSelectionEnd();	
 
 	/**
 	 * A comma-separated list of content types that a server processing this form
