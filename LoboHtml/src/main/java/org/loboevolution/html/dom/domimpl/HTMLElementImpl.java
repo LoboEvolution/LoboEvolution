@@ -25,19 +25,10 @@
  */
 package org.loboevolution.html.dom.domimpl;
 
-import java.awt.Dimension;
-import java.awt.Font;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import org.loboevolution.common.Nodes;
 import org.loboevolution.common.Strings;
 import org.loboevolution.html.dom.DOMTokenList;
@@ -58,10 +49,12 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import java.awt.*;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.List;
+import java.util.*;
+import java.util.logging.Level;
 
 /**
  * <p>HTMLElementImpl class.</p>
@@ -75,11 +68,14 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	private volatile AbstractCSSProperties currentStyleDeclarationState;
 
 	private Map<HTMLElementImpl, Boolean> hasHoverStyleByElement = null;
+	
 	private Boolean isHoverStyle = null;
 
 	private boolean isMouseOver = false;
 
 	private volatile AbstractCSSProperties localStyleDeclarationState;
+	
+	private String outer;
 
 	/**
 	 * <p>Constructor for HTMLElementImpl.</p>
@@ -132,7 +128,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	 * @param buffer a {@link java.lang.StringBuilder} object.
 	 */
 	protected void appendOuterHTMLImpl(StringBuilder buffer) {
-		final String tagName = getTagName();
+		final String tagName = getTagName().toUpperCase();
 		buffer.append('<');
 		buffer.append(tagName);
 		final Map<String, String> attributes = this.attributes;
@@ -548,6 +544,7 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 		}
 		return buffer.toString();
 	}
+	
 
 	/**
 	 * <p>getParent.</p>
@@ -874,6 +871,32 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 			}
 		}
 	}
+	
+	/**
+	 * <p>setOuterHTML.</p>
+	 *
+	 * @param newHtml a {@link java.lang.String} object.
+	 */
+	public void setOuterHTML(String newHtml) {
+		this.outer = outerNewHtml(newHtml);
+		if (this.outer != null) {
+			final HTMLDocumentImpl document = (HTMLDocumentImpl) this.document;
+			if (document == null) {
+				this.warn("setOuterHTML(): Element " + this + " does not belong to a document.");
+				return;
+			}
+			final HtmlParser parser = new HtmlParser(document.getUserAgentContext(), document, null, false);
+			this.nodeList.clear();
+			// Should not synchronize around parser probably.
+			try {
+				try (Reader reader = new StringReader(newHtml)) {
+					parser.parse(reader, this);
+				}
+			} catch (final Exception thrown) {
+				this.warn("setOuterHTML(): Error setting inner HTML.", thrown);
+			}
+		}
+	}
 
 	/**
 	 * <p>setCharset.</p>
@@ -1018,6 +1041,28 @@ public class HTMLElementImpl extends ElementImpl implements HTMLElement, CSSProp
 	@Override
 	public void warn(String message, Throwable err) {
 		logger.log(Level.WARNING, message, err);
+	}
+
+	private String outerNewHtml(final String newHtml) {
+		if (newHtml != null) {
+			return newHtml.endsWith(">") || ! newHtml.startsWith("<") ? newHtml : newHtml + ">";
+		}
+		return "";
+	}
+
+
+	/**
+	 * @return the outer
+	 */
+	public String getOuter() {
+		return outer;
+	}
+
+	/**
+	 * @param outer the outer to set
+	 */
+	public void setOuter(String outer) {
+		this.outer = outer;
 	}
 	
 	/** {@inheritDoc} */
